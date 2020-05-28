@@ -535,9 +535,9 @@ It may require some knowledge that you may not have or do not have the time to l
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <p>There are a couple steps to reaching the answer:</p>
     <ol>
-      <li>Search for <code class="highlighter-rouge">ncbi blast+</code></li>
+      <li>Search for <code class="language-plaintext highlighter-rouge">ncbi blast+</code></li>
       <li>Press the <kbd>Enter</kbd> key to search</li>
-      <li>Click on the result named <code class="highlighter-rouge">ncbi_blast_plus</code></li>
+      <li>Click on the result named <code class="language-plaintext highlighter-rouge">ncbi_blast_plus</code></li>
       <li>At the bottom of this page there is a box labelled “Categories”</li>
     </ol>
 
@@ -568,9 +568,9 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <h1 id="create-the-directory-for-the-tutorial">Create the directory for the tutorial</h1>
 
-<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis). Each topic have the following structure:</p>
+<p>Each training material is related to a topic. All training materials (slides, tutorials, …) related to a topic are found in a dedicated directory (<em>e.g.</em> <code class="language-plaintext highlighter-rouge">transcriptomics</code> directory contains the material related to exome sequencing analysis). Each topic have the following structure:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── README.md
 ├── metadata.yaml
 ├── images
 ├── docker
@@ -590,14 +590,14 @@ It may require some knowledge that you may not have or do not have the time to l
 
 <p>Once the topic has been chosen and you set up your contribution environment, you can create the tutorial. An ideal tutorial in the <span class="notranslate">Galaxy</span> Training Network contains:</p>
 <ul>
-  <li>a tutorial file <code class="highlighter-rouge">tutorial.md</code> written in Markdown with hands-on</li>
-  <li>an optional slides file <code class="highlighter-rouge">slides.md</code> in Markdown with slides to support the tutorial</li>
-  <li>a directory <code class="highlighter-rouge">tours</code> with <span class="notranslate">Galaxy</span> Interactive Tours to reproduce the tutorial</li>
-  <li>a directory <code class="highlighter-rouge">workflows</code> with workflows extracted from the tutorial</li>
-  <li>a YAML file <code class="highlighter-rouge">data-library.yaml</code>  with the links to the input data needed for the tutorial</li>
+  <li>a tutorial file <code class="language-plaintext highlighter-rouge">tutorial.md</code> written in Markdown with hands-on</li>
+  <li>an optional slides file <code class="language-plaintext highlighter-rouge">slides.md</code> in Markdown with slides to support the tutorial</li>
+  <li>a directory <code class="language-plaintext highlighter-rouge">tours</code> with <span class="notranslate">Galaxy</span> Interactive Tours to reproduce the tutorial</li>
+  <li>a directory <code class="language-plaintext highlighter-rouge">workflows</code> with workflows extracted from the tutorial</li>
+  <li>a YAML file <code class="language-plaintext highlighter-rouge">data-library.yaml</code>  with the links to the input data needed for the tutorial</li>
 </ul>
 
-<p>The most important file is the <code class="highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.</p>
+<p>The most important file is the <code class="language-plaintext highlighter-rouge">tutorial.md</code> where the content of the tutorial is. The other files are there to support the tutorial and make it robust and usable across many environments.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-all-the-required-files-and-folders-structures-automatically"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create all the required files and folders structures automatically</h3>
@@ -606,7 +606,7 @@ It may require some knowledge that you may not have or do not have the time to l
     <li>
       <p>Run (by adapting the information between the quotes)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
          --topic_name "my-topic" \
          --tutorial_name "my-new-tutorial" \
          --tutorial_title "Title of the tutorial" \
@@ -701,7 +701,7 @@ So be careful when you start your upload that all your needed files are ready.</
     <li>Fill out any remaining information</li>
     <li>Click on <strong>Publish</strong></li>
     <li>Copy the DOI link in the new page</li>
-    <li>Paste the link in <code class="highlighter-rouge">zenodo_link</code> in the tutorial header</li>
+    <li>Paste the link in <code class="language-plaintext highlighter-rouge">zenodo_link</code> in the tutorial header</li>
   </ol>
 </blockquote>
 
@@ -713,7 +713,7 @@ So be careful when you start your upload that all your needed files are ready.</
   <h3 id="hands_on-hands-on-write-the-tutorial"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Write the tutorial</h3>
 
   <ol>
-    <li>Open the <code class="highlighter-rouge">tutorial.md</code> file with your favorite text editor</li>
+    <li>Open the <code class="language-plaintext highlighter-rouge">tutorial.md</code> file with your favorite text editor</li>
     <li>Fill out the tutorial by following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html">dedicated tutorial</a></li>
     <li>(Optional) Build the website locally and check that the tutorial is there by following the <a href="/training-material/topics/contributing/tutorials/running-jekyll/tutorial.html">Jekyll tutorial</a></li>
   </ol>
@@ -721,16 +721,16 @@ So be careful when you start your upload that all your needed files are ready.</
 
 <h1 id="add-some-technical-support-recommended">Add some technical support (recommended)</h1>
 
-<p>To able to run the tutorial, we need a <span class="notranslate">Galaxy</span> instance where the needed tools and the data are available. We need then to describe the required technical infrastructure. Tools are installed based on the workflows in the <code class="highlighter-rouge">workflows</code> directory.</p>
+<p>To able to run the tutorial, we need a <span class="notranslate">Galaxy</span> instance where the needed tools and the data are available. We need then to describe the required technical infrastructure. Tools are installed based on the workflows in the <code class="language-plaintext highlighter-rouge">workflows</code> directory.</p>
 
 <p>This description will be used to automatically set up a Docker <span class="notranslate">Galaxy</span> flavour, to set up an existing <span class="notranslate">Galaxy</span> instance and also to test if a public <span class="notranslate">Galaxy</span> instance is able to run the tool.</p>
 
 <p>The technical support are different files:</p>
 
 <ul>
-  <li><span class="notranslate">workflow</span> file(s) in the <code class="highlighter-rouge">workflows</code> directory</li>
-  <li>the <code class="highlighter-rouge">data-library.yaml</code> file with the links to the input data needed for the tutorial</li>
-  <li>interactive tour file in the directory <code class="highlighter-rouge">tours</code> directory</li>
+  <li><span class="notranslate">workflow</span> file(s) in the <code class="language-plaintext highlighter-rouge">workflows</code> directory</li>
+  <li>the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file with the links to the input data needed for the tutorial</li>
+  <li>interactive tour file in the directory <code class="language-plaintext highlighter-rouge">tours</code> directory</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -740,7 +740,7 @@ So be careful when you start your upload that all your needed files are ready.</
     <li>Add some technical support for the tutorial following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-technical/tutorial.html">tutorial</a>
       <ul>
         <li>Add the <span class="notranslate">workflow</span></li>
-        <li>(Recommended) Generate the <code class="highlighter-rouge">data-library.yaml</code></li>
+        <li>(Recommended) Generate the <code class="language-plaintext highlighter-rouge">data-library.yaml</code></li>
         <li>(Optional) Create an interactive tour</li>
       </ul>
     </li>
@@ -755,7 +755,7 @@ So be careful when you start your upload that all your needed files are ready.</
   <h3 id="hands_on-hands-on-add-slides"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add slides</h3>
 
   <ol>
-    <li>Create a slide deck in <code class="highlighter-rouge">slides.html</code> following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Slide tutorial</a></li>
+    <li>Create a slide deck in <code class="language-plaintext highlighter-rouge">slides.html</code> following the <a href="/training-material/topics/contributing/tutorials/create-new-tutorial-slides/slides.html">Slide tutorial</a></li>
   </ol>
 </blockquote>
 
@@ -785,7 +785,7 @@ So be careful when you start your upload that all your needed files are ready.</
     <li>Generate the skeleton of your tutorial
       <ul>
         <li>option 1: from a <span class="notranslate">workflow</span> located on a <span class="notranslate">Galaxy</span>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
        --topic_name "my-topic" \
        --tutorial_name "my-new-tutorial" \
        --tutorial_title "Title of the tutorial" \
@@ -796,22 +796,22 @@ So be careful when you start your upload that all your needed files are ready.</
 </code></pre></div>          </div>
         </li>
         <li>
-          <p>option 2: from a local <span class="notranslate">workflow</span> file (<code class="highlighter-rouge">.ga</code>) (use only if your <span class="notranslate">workflow</span> is composed of tools from the main <span class="notranslate">ToolShed</span>)</p>
+          <p>option 2: from a local <span class="notranslate">workflow</span> file (<code class="language-plaintext highlighter-rouge">.ga</code>) (use only if your <span class="notranslate">workflow</span> is composed of tools from the main <span class="notranslate">ToolShed</span>)</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_init \
        --topic_name "my-topic" \
        --tutorial_name "my-new-tutorial" \
        --tutorial_title "Title of the tutorial" \
        --<span class="notranslate">workflow</span> "path/to/<span class="notranslate">workflow</span>" \
        --zenodo_link "URL to the Zenodo record"
 </code></pre></div>          </div>
-          <p>You can use the example <span class="notranslate">workflow</span> file located in <code class="highlighter-rouge">topics/contributing/tutorials/create-new-tutorial/workflows/example-<span class="notranslate">workflow</span>.ga</code> if
+          <p>You can use the example <span class="notranslate">workflow</span> file located in <code class="language-plaintext highlighter-rouge">topics/contributing/tutorials/create-new-tutorial/workflows/example-<span class="notranslate">workflow</span>.ga</code> if
 you do not have a <span class="notranslate">workflow</span> of your own. This is the <span class="notranslate">workflow</span> belonging to the <em><span class="notranslate">Galaxy</span> 101</em> introduction tutorial.</p>
         </li>
       </ul>
     </li>
-    <li>Fill the remaining metadata in the <code class="highlighter-rouge">tutorial.md</code></li>
-    <li>Fill the content of the <code class="highlighter-rouge">tutorial.md</code></li>
+    <li>Fill the remaining metadata in the <code class="language-plaintext highlighter-rouge">tutorial.md</code></li>
+    <li>Fill the content of the <code class="language-plaintext highlighter-rouge">tutorial.md</code></li>
     <li>Check it using Jekyll</li>
   </ol>
 </blockquote>

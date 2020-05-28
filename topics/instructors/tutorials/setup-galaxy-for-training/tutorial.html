@@ -309,11 +309,11 @@
 
 <p>Tutorials in this repository are all supplemented with files describing the technical requirements to run them. This makes it easy to automate installation of tutorial requirements.</p>
 <ul>
-  <li><code class="highlighter-rouge">tools.yaml</code>: describes the Tool Shed tools used in the tutorial</li>
-  <li><code class="highlighter-rouge">data-library.yaml</code>: describes the input datasets</li>
-  <li><code class="highlighter-rouge">data-manager.yaml</code>: describes the reference data required by tools</li>
-  <li><code class="highlighter-rouge">workflows</code> folder: contains one or more workflows with all steps in the tutorial</li>
-  <li><code class="highlighter-rouge">tours</code> folder: contains one or more yaml files describing interactive tours</li>
+  <li><code class="language-plaintext highlighter-rouge">tools.yaml</code>: describes the Tool Shed tools used in the tutorial</li>
+  <li><code class="language-plaintext highlighter-rouge">data-library.yaml</code>: describes the input datasets</li>
+  <li><code class="language-plaintext highlighter-rouge">data-manager.yaml</code>: describes the reference data required by tools</li>
+  <li><code class="language-plaintext highlighter-rouge">workflows</code> folder: contains one or more workflows with all steps in the tutorial</li>
+  <li><code class="language-plaintext highlighter-rouge">tours</code> folder: contains one or more yaml files describing interactive tours</li>
 </ul>
 
 <blockquote class="comment">
@@ -345,11 +345,11 @@
 
 <p>If you have a <span class="notranslate">Galaxy</span> server already running somewhere and would like to support one or more training modules, <a href="https://ephemeris.readthedocs.io">ephemeris</a> can be used to easily install all the required tools, reference data, data libraries, tours and workflows.</p>
 
-<p>For the purposes of this training, we will create a <span class="notranslate">Galaxy</span> instance running on <code class="highlighter-rouge">localhost:8080</code>, but these instructions can be adapted for use with any <span class="notranslate">Galaxy</span> instance by replacing this value with the URL or IP address of your <span class="notranslate">Galaxy</span> server.</p>
+<p>For the purposes of this training, we will create a <span class="notranslate">Galaxy</span> instance running on <code class="language-plaintext highlighter-rouge">localhost:8080</code>, but these instructions can be adapted for use with any <span class="notranslate">Galaxy</span> instance by replacing this value with the URL or IP address of your <span class="notranslate">Galaxy</span> server.</p>
 
 <h2 id="start-a-local-galaxy">Start a local <span class="notranslate">Galaxy</span></h2>
 
-<p>To setup a <span class="notranslate">Galaxy</span> server locally, we will first clone the <span class="notranslate">Galaxy</span> github repository, make a few small edits to the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yaml</code> configuration file, and then start the server.</p>
+<p>To setup a <span class="notranslate">Galaxy</span> server locally, we will first clone the <span class="notranslate">Galaxy</span> github repository, make a few small edits to the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yaml</code> configuration file, and then start the server.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-setup-a-local-galaxy-instance"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup a local <span class="notranslate">Galaxy</span> instance</h3>
@@ -360,10 +360,10 @@
 <span class="nb">cd </span><span class="notranslate">galaxy</span>
 </code></pre></div>      </div>
     </li>
-    <li>Add yourself as admin user in <code class="highlighter-rouge">config/<span class="notranslate">galaxy</span>.yaml</code>
+    <li>Add yourself as admin user in <code class="language-plaintext highlighter-rouge">config/<span class="notranslate">galaxy</span>.yaml</code>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp </span>config/<span class="notranslate">galaxy</span>.yml.sample config/<span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
-      <p>open the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file with your favorite editor and edit the following line with your email address:</p>
+      <p>open the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file with your favorite editor and edit the following line with your email address:</p>
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">admin_users</span><span class="pi">:</span> <span class="s">user@example.org</span>
 </code></pre></div>      </div>
     </li>
@@ -373,14 +373,14 @@
       <p><span class="notranslate">Galaxy</span> will now install all its requirements, which may take a few minutes,
 when all is finished installing, you should see something like this in your screen:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting server in PID 9560.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Starting server in PID 9560.
 serving on http://localhost:8080
 </code></pre></div>      </div>
     </li>
     <li>Open <span class="notranslate">Galaxy</span>
       <ul>
         <li>Open a web browser</li>
-        <li>Navigate to <code class="highlighter-rouge">localhost:8080</code> to access <span class="notranslate">Galaxy</span></li>
+        <li>Navigate to <code class="language-plaintext highlighter-rouge">localhost:8080</code> to access <span class="notranslate">Galaxy</span></li>
       </ul>
     </li>
   </ol>
@@ -395,13 +395,13 @@ serving on http://localhost:8080
   <h3 id="hands_on-hands-on-obtain-galaxy-api-key"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtain <span class="notranslate">Galaxy</span> API key</h3>
 
   <ol>
-    <li>Register an account on <span class="notranslate">Galaxy</span> using the email address you added to the <code class="highlighter-rouge">config/<span class="notranslate">galaxy</span>.yml</code> file
+    <li>Register an account on <span class="notranslate">Galaxy</span> using the email address you added to the <code class="language-plaintext highlighter-rouge">config/<span class="notranslate">galaxy</span>.yml</code> file
       <ul>
-        <li>Once logged in, verify that you have a menu item named <code class="highlighter-rouge">Admin</code> in your top menu bar.</li>
+        <li>Once logged in, verify that you have a menu item named <code class="language-plaintext highlighter-rouge">Admin</code> in your top menu bar.</li>
       </ul>
     </li>
-    <li>Go to your <code class="highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="highlighter-rouge">Manage API key</code></li>
-    <li>Click on <code class="highlighter-rouge">Create a new key</code> to generate an API key
+    <li>Go to your <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate an API key
       <ul>
         <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li>
       </ul>
@@ -427,7 +427,7 @@ pip <span class="nb">install </span>ephemeris
 
 <h1 id="installing-tutorial-requirements">Installing tutorial requirements</h1>
 
-<p>We have created a small bash script to automatically install all of a tutorial’s requirements to an existing <span class="notranslate">Galaxy</span>. It’s located in this repository under: <a href="https://github.com/galaxyproject/training-material/tree/master/bin/install_tutorial_requirements.sh"><code class="highlighter-rouge">bin/install_tutorial_requirements.sh</code></a></p>
+<p>We have created a small bash script to automatically install all of a tutorial’s requirements to an existing <span class="notranslate">Galaxy</span>. It’s located in this repository under: <a href="https://github.com/galaxyproject/training-material/tree/master/bin/install_tutorial_requirements.sh"><code class="language-plaintext highlighter-rouge">bin/install_tutorial_requirements.sh</code></a></p>
 
 <p>In this example we will install the requirements for the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><em>Reference-based <span class="notranslate">RNA</span>Seq</em></a> tutorial to the <span class="notranslate">Galaxy</span> instance running on localhost.</p>
 
@@ -452,13 +452,13 @@ pip <span class="nb">install </span>ephemeris
 
 <p>Installation may take some time. This script will automatically install the tools, create a data library and populate it with the input datasets from Zenodo, install and publish the workflows, and run any data managers that might be required.</p>
 
-<p>The only thing the script cannot currently automate is the installation of the interactive tours. We will now do this manually by copying the contents of the <code class="highlighter-rouge">tours</code> folder to our <span class="notranslate">Galaxy</span> instance, in the folder <code class="highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT/config/plugins/tours</code></p>
+<p>The only thing the script cannot currently automate is the installation of the interactive tours. We will now do this manually by copying the contents of the <code class="language-plaintext highlighter-rouge">tours</code> folder to our <span class="notranslate">Galaxy</span> instance, in the folder <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT/config/plugins/tours</code></p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-install-the-interactive-tours"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install the interactive Tours</h3>
 
   <ol>
-    <li>Copy the <code class="highlighter-rouge">tour.yaml</code> file from the training materials repo to <span class="notranslate">Galaxy</span>
+    <li>Copy the <code class="language-plaintext highlighter-rouge">tour.yaml</code> file from the training materials repo to <span class="notranslate">Galaxy</span>
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cp</span> <span class="nt">-r</span> topics/transcriptomics/tutorials/ref-based/tours/ <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>/config/plugins/tours
 </code></pre></div>      </div>
     </li>
@@ -468,7 +468,7 @@ pip <span class="nb">install </span>ephemeris
 
 <h3 id="installing-an-entire-topic">Installing an entire topic</h3>
 
-<p>If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in <a href="https://github.com/galaxyproject/training-material/tree/master/bin/install_topic_requirements.sh"><code class="highlighter-rouge">bin/install_topic_requirements.sh</code></a></p>
+<p>If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in <a href="https://github.com/galaxyproject/training-material/tree/master/bin/install_topic_requirements.sh"><code class="language-plaintext highlighter-rouge">bin/install_topic_requirements.sh</code></a></p>
 
 <h3 id="installing-a-subset-of-components">Installing a subset of components</h3>
 
@@ -493,7 +493,7 @@ bin/install_topic_requirements.sh topics/&lt;yourtopic&gt; &lt;<span class="notr
 
 <p>Using ephemeris directly:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code># install tools
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># install tools
 shed-tools install -g &lt;<span class="notranslate">Galaxy</span> URL&gt; -a &lt;API key&gt; -t topics/&lt;topic&gt;/tutorials/&lt;tutorial&gt;/tools.yaml
 
 # create data library with input datasets

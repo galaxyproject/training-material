@@ -647,7 +647,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -711,19 +711,19 @@
 
 <p>Now that the list is formatted as a table in a sp<span class="notranslate">reads</span>heet, it is time to upload it into <span class="notranslate">Galaxy</span>. There is a problem though: the URLs (web addresses) in the list do not actually point to sequence files that we would need to perform alignments. Instead they point to directories. For example, this URL:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1
 </code></pre></div></div>
 
 <p>points to a directory (rather than a file) containing many files, most of which we do not need:</p>
 
 <figure id="figure-1"><img src="../../images/genbank_dir.png" alt="GenBank assembly files for an E. coli strain" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A list of files for an <i>E. coli</i> assembly. For further analyses we need datasets ending with <code>_genomic.fna.gz</code>.</figcaption></figure>
 
-<p>So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add <code class="highlighter-rouge">/GCA_000008865.1_ASM886v1</code> and <code class="highlighter-rouge">_genomic.fna.gz</code> to the end to get this:</p>
+<p>So to download sequence files we need to edit URLs by adding filenames to them. For example, in the case of the URL shown above we need to add <code class="language-plaintext highlighter-rouge">/GCA_000008865.1_ASM886v1</code> and <code class="language-plaintext highlighter-rouge">_genomic.fna.gz</code> to the end to get this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/GCA_000008865.1_ASM886v1_genomic.fna.gz
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.1_ASM886v1/GCA_000008865.1_ASM886v1_genomic.fna.gz
 </code></pre></div></div>
 
-<p>This can be done as a two step process where we first copy the end part of the existing URL (<code class="highlighter-rouge">/GCA_000008865.1_ASM886v1</code>) and then add a fixed string <code class="highlighter-rouge">_genomic.fna.gz</code> to the end of it. Doing this by hand is crazy and trying to do it in a sp<span class="notranslate">reads</span>heet is complicated. Fortunately, <span class="notranslate">Galaxy</span>’s new rule-based uploader can help, as shown in the next <strong>Hands-on</strong> section:</p>
+<p>This can be done as a two step process where we first copy the end part of the existing URL (<code class="language-plaintext highlighter-rouge">/GCA_000008865.1_ASM886v1</code>) and then add a fixed string <code class="language-plaintext highlighter-rouge">_genomic.fna.gz</code> to the end of it. Doing this by hand is crazy and trying to do it in a sp<span class="notranslate">reads</span>heet is complicated. Fortunately, <span class="notranslate">Galaxy</span>’s new rule-based uploader can help, as shown in the next <strong>Hands-on</strong> section:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -748,8 +748,8 @@
     <li><strong>Upload</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>:
       <ul>
         <li>Click <strong>Paste/Fetch data</strong> button (Bottom of the interface box)</li>
-        <li><strong>Paste</strong> <code class="highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">fasta</code></li>
+        <li><strong>Paste</strong> <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code> into the box.</li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fasta</code></li>
         <li>Click <strong>Start</strong></li>
       </ul>
     </li>
@@ -766,7 +766,7 @@
 
 <ol>
   <li>It contains two sequences: the one of <em>E. coli</em> C genome (the one we really need) and another representing phage phiX174 (a by product of Illumina sequencing where it is used as a spike-in <span class="notranslate">DNA</span>).</li>
-  <li>Sequences have unwieldy names like <code class="highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code>. We need to rename it to something more meaningful.</li>
+  <li>Sequences have unwieldy names like <code class="language-plaintext highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code>. We need to rename it to something more meaningful.</li>
 </ol>
 
 <p>Let’s fix these two problems.</p>
@@ -779,14 +779,14 @@
   <ol>
     <li><strong>Filter sequences by length</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Fasta file”</em>: the dataset you’ve just uploaded. (<code class="highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code>).</li>
-        <li><em>“Minimal length”</em>: <code class="highlighter-rouge">10000</code></li>
+        <li><em>“Fasta file”</em>: the dataset you’ve just uploaded. (<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna</code>).</li>
+        <li><em>“Minimal length”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
       </ul>
     </li>
     <li><strong>Text transformation with sed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“File to process”</em>: the output of the previous step</li>
-        <li><em>“SED program”</em>: <code class="highlighter-rouge">s/^&gt;1.*$/&gt;Ecoli_C/</code></li>
+        <li><em>“SED program”</em>: <code class="language-plaintext highlighter-rouge">s/^&gt;1.*$/&gt;Ecoli_C/</code></li>
       </ul>
     </li>
   </ol>
@@ -798,24 +798,24 @@
 
   <p>The program we just entered is a so-called <a href="https://en.wikipedia.org/wiki/Regular_expression">Regular <span class="notranslate">Expression</span></a></p>
 
-  <p>The <span class="notranslate">expression</span> <code class="highlighter-rouge">s/^&gt;1.*$/&gt;Ecoli_C/</code> contains several pieces that you need to understand. Let’s write it top-to-bottom and explain:</p>
+  <p>The <span class="notranslate">expression</span> <code class="language-plaintext highlighter-rouge">s/^&gt;1.*$/&gt;Ecoli_C/</code> contains several pieces that you need to understand. Let’s write it top-to-bottom and explain:</p>
 
   <ul>
-    <li><code class="highlighter-rouge">s</code> - tells SED to <em>Substitute</em></li>
-    <li><code class="highlighter-rouge">/</code> - opens a section of the commands telling SED <em>what</em> to substitute</li>
-    <li><code class="highlighter-rouge">^</code> - tell SED to start looking at <em>the beginning</em> of each line</li>
-    <li><code class="highlighter-rouge">&gt;</code> - is the first character we want to match. Remember that name of the sequence in FASTA files starts with <code class="highlighter-rouge">&gt;</code></li>
-    <li><code class="highlighter-rouge">1</code> - is the number present is our old name (<code class="highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code> to <code class="highlighter-rouge">&gt;Ecoli_C</code>)</li>
-    <li><code class="highlighter-rouge">.</code> - dot has a special meaning. It signifies <em>any</em> character</li>
-    <li><code class="highlighter-rouge">*</code> - is a <em>quantifier</em>. From <a href="https://en.wikipedia.org/wiki/Regular_expression">Wikipedia</a>: “The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches <code class="highlighter-rouge">ac</code>, <code class="highlighter-rouge">abc</code>, <code class="highlighter-rouge">abbc</code>, <code class="highlighter-rouge">abbbc</code>, and so on.”</li>
-    <li><code class="highlighter-rouge">$</code> - signifies <em>the end</em> of a line</li>
-    <li><code class="highlighter-rouge">/</code> - is <em>the end</em> of the <em>what to substitute</em> section. It also serves as the beginning of <em>what to substitute WITH</em> section</li>
-    <li><code class="highlighter-rouge">&gt;</code> - is the required element of the FASTA sequence name</li>
-    <li><code class="highlighter-rouge">Ecoli_C</code> is the <em>name</em> we want the sequence to have</li>
-    <li><code class="highlighter-rouge">/</code> - is the end of the SED command</li>
+    <li><code class="language-plaintext highlighter-rouge">s</code> - tells SED to <em>Substitute</em></li>
+    <li><code class="language-plaintext highlighter-rouge">/</code> - opens a section of the commands telling SED <em>what</em> to substitute</li>
+    <li><code class="language-plaintext highlighter-rouge">^</code> - tell SED to start looking at <em>the beginning</em> of each line</li>
+    <li><code class="language-plaintext highlighter-rouge">&gt;</code> - is the first character we want to match. Remember that name of the sequence in FASTA files starts with <code class="language-plaintext highlighter-rouge">&gt;</code></li>
+    <li><code class="language-plaintext highlighter-rouge">1</code> - is the number present is our old name (<code class="language-plaintext highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code> to <code class="language-plaintext highlighter-rouge">&gt;Ecoli_C</code>)</li>
+    <li><code class="language-plaintext highlighter-rouge">.</code> - dot has a special meaning. It signifies <em>any</em> character</li>
+    <li><code class="language-plaintext highlighter-rouge">*</code> - is a <em>quantifier</em>. From <a href="https://en.wikipedia.org/wiki/Regular_expression">Wikipedia</a>: “The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches <code class="language-plaintext highlighter-rouge">ac</code>, <code class="language-plaintext highlighter-rouge">abc</code>, <code class="language-plaintext highlighter-rouge">abbc</code>, <code class="language-plaintext highlighter-rouge">abbbc</code>, and so on.”</li>
+    <li><code class="language-plaintext highlighter-rouge">$</code> - signifies <em>the end</em> of a line</li>
+    <li><code class="language-plaintext highlighter-rouge">/</code> - is <em>the end</em> of the <em>what to substitute</em> section. It also serves as the beginning of <em>what to substitute WITH</em> section</li>
+    <li><code class="language-plaintext highlighter-rouge">&gt;</code> - is the required element of the FASTA sequence name</li>
+    <li><code class="language-plaintext highlighter-rouge">Ecoli_C</code> is the <em>name</em> we want the sequence to have</li>
+    <li><code class="language-plaintext highlighter-rouge">/</code> - is the end of the SED command</li>
   </ul>
 
-  <p>So in short we are replacing <code class="highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code> with <code class="highlighter-rouge">&gt;Ecoli_C</code>. The <em>Regular <span class="notranslate">expression</span></em> <code class="highlighter-rouge">^&gt;1.*$</code> is used here to represent <code class="highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code>.<br />
+  <p>So in short we are replacing <code class="language-plaintext highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code> with <code class="language-plaintext highlighter-rouge">&gt;Ecoli_C</code>. The <em>Regular <span class="notranslate">expression</span></em> <code class="language-plaintext highlighter-rouge">^&gt;1.*$</code> is used here to represent <code class="language-plaintext highlighter-rouge">&gt;1 length=4576293 depth=1.00x circular=true</code>.<br />
 Detailed description of regular <span class="notranslate">expression</span>s is outside of the scope of this tutorial, but there are other great resources. Start with <a href="http://v4.software-carpentry.org/regexp/index.html">Software Carpentry Regular <span class="notranslate">Expression</span>s tutorial</a>.</p>
 </blockquote>
 
@@ -823,7 +823,7 @@ Detailed description of regular <span class="notranslate">expression</span>s is 
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>What is the meaning of <code class="highlighter-rouge">^</code> character is SED <span class="notranslate">expression</span>?</li>
+    <li>What is the meaning of <code class="language-plaintext highlighter-rouge">^</code> character is SED <span class="notranslate">expression</span>?</li>
     <li>Where do you go to learn more about regular <span class="notranslate">expression</span>s?</li>
   </ol>
 
@@ -847,11 +847,11 @@ Detailed description of regular <span class="notranslate">expression</span>s is 
   <ol>
     <li><strong>LASTZ</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="highlighter-rouge">from your history</code></li>
+        <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
         <li><em>“Select a reference dataset”</em>: the <em>E. coli</em> genomes we uploaded earlier (collection input)</li>
         <li><em>“Select QUERY sequence(s)”</em>: our assembly which was prepared in the previous step.</li>
-        <li><em>“Perform chaining of HSPs with no penalties”</em>: <code class="highlighter-rouge">Yes</code> (in <strong>Chaining</strong> section)</li>
-        <li><em>“Specify the output format”</em>: <code class="highlighter-rouge">blastn</code> (in <strong>Output</strong> section)</li>
+        <li><em>“Perform chaining of HSPs with no penalties”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (in <strong>Chaining</strong> section)</li>
+        <li><em>“Specify the output format”</em>: <code class="language-plaintext highlighter-rouge">blastn</code> (in <strong>Output</strong> section)</li>
       </ul>
     </li>
   </ol>
@@ -868,9 +868,9 @@ Detailed description of regular <span class="notranslate">expression</span>s is 
 
 <h3 id="understanding-lastz-output">Understanding LASTZ output</h3>
 
-<p>LASTZ produced data in so-called <code class="highlighter-rouge">blastn</code> format (because we explicitly told LASTZ to output in this format, see previous step), which looks like this:</p>
+<p>LASTZ produced data in so-called <code class="language-plaintext highlighter-rouge">blastn</code> format (because we explicitly told LASTZ to output in this format, see previous step), which looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2     3   4  5 6       7       8    9   10      11    12
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2     3   4  5 6       7       8    9   10      11    12
 -------------------------------------------------------------------------
 BA000007.2 Ecoli_C 66.81 232 51 6 3668174 3668397 5936 6149 3.2e-40 162.7
 BA000007.2 Ecoli_C 57.77 206 38 8  643802  643962 5945 6146 1.6e-18  90.6
@@ -881,18 +881,18 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 <p>where columns are:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">qseqid</code> - query (e.g., gene) sequence id</li>
-  <li><code class="highlighter-rouge">sseqid</code> - subject (e.g., reference genome) sequence id</li>
-  <li><code class="highlighter-rouge">pident</code> - percentage of identical matches</li>
-  <li><code class="highlighter-rouge">length</code> - alignment length</li>
-  <li><code class="highlighter-rouge">mismatch</code> - number of mismatches</li>
-  <li><code class="highlighter-rouge">gapopen</code> - number of gap openings</li>
-  <li><code class="highlighter-rouge">qstart</code> - start of alignment in query</li>
-  <li><code class="highlighter-rouge">qend</code> - end of alignment in query</li>
-  <li><code class="highlighter-rouge">sstart</code> - start of alignment in subject</li>
-  <li><code class="highlighter-rouge">send</code> - end of alignment in subject</li>
-  <li><code class="highlighter-rouge">evalue</code> - <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&amp;PAGE_TYPE=BlastDocs&amp;DOC_TYPE=FAQ#expect">expect value</a></li>
-  <li><code class="highlighter-rouge">bitscore</code>	- <a href="https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html">bit score</a></li>
+  <li><code class="language-plaintext highlighter-rouge">qseqid</code> - query (e.g., gene) sequence id</li>
+  <li><code class="language-plaintext highlighter-rouge">sseqid</code> - subject (e.g., reference genome) sequence id</li>
+  <li><code class="language-plaintext highlighter-rouge">pident</code> - percentage of identical matches</li>
+  <li><code class="language-plaintext highlighter-rouge">length</code> - alignment length</li>
+  <li><code class="language-plaintext highlighter-rouge">mismatch</code> - number of mismatches</li>
+  <li><code class="language-plaintext highlighter-rouge">gapopen</code> - number of gap openings</li>
+  <li><code class="language-plaintext highlighter-rouge">qstart</code> - start of alignment in query</li>
+  <li><code class="language-plaintext highlighter-rouge">qend</code> - end of alignment in query</li>
+  <li><code class="language-plaintext highlighter-rouge">sstart</code> - start of alignment in subject</li>
+  <li><code class="language-plaintext highlighter-rouge">send</code> - end of alignment in subject</li>
+  <li><code class="language-plaintext highlighter-rouge">evalue</code> - <a href="https://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&amp;PAGE_TYPE=BlastDocs&amp;DOC_TYPE=FAQ#expect">expect value</a></li>
+  <li><code class="language-plaintext highlighter-rouge">bitscore</code>	- <a href="https://www.ncbi.nlm.nih.gov/BLAST/tutorial/Altschul-1.html">bit score</a></li>
 </ol>
 
 <p>The alignment information produced by LASTZ is a collection. In this collection each element contains alignment data between each of the <em>E. coli</em> genomes and our assembly:</p>
@@ -926,8 +926,8 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
   <ol>
     <li><strong>Select random lines from a file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Randomly select”</em>: <code class="highlighter-rouge">10000</code></li>
-        <li><em>“from”</em>: the output from <code class="highlighter-rouge">Collapse Collection</code></li>
+        <li><em>“Randomly select”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
+        <li><em>“from”</em>: the output from <code class="language-plaintext highlighter-rouge">Collapse Collection</code></li>
       </ul>
     </li>
   </ol>
@@ -942,8 +942,8 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
     <li>You will see “chart” button (<img src="../../images/bar-chart-o.png" alt="Chart icon" />). Click on it.</li>
     <li>In the central panel you will see a list of visualizations. Select <strong>Scatter plot (NVD3)</strong></li>
     <li>Click <strong>Select data</strong> button (<img src="../../images/disks.png" alt="Disks" />)</li>
-    <li>Set <strong>Values for x-axis</strong> to <code class="highlighter-rouge">Column: 3</code> (alignment identity)</li>
-    <li>Set <strong>Values for y-axis</strong> to <code class="highlighter-rouge">Column: 4</code> (alignment length)</li>
+    <li>Set <strong>Values for x-axis</strong> to <code class="language-plaintext highlighter-rouge">Column: 3</code> (alignment identity)</li>
+    <li>Set <strong>Values for y-axis</strong> to <code class="language-plaintext highlighter-rouge">Column: 4</code> (alignment length)</li>
     <li>You can also click on configuration button (<img src="../../images/chart_cog.png" alt="Cog" />) and specify axis labels etc.</li>
   </ol>
 </blockquote>
@@ -960,7 +960,7 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Filter”</em>: the full dataset.</li>
-        <li><em>“With following condition”</em>: <code class="highlighter-rouge">c3 &gt;= 90 and c4 &gt;= 10000</code> (here <code class="highlighter-rouge">c</code> stands for <em>column</em>).</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3 &gt;= 90 and c4 &gt;= 10000</code> (here <code class="language-plaintext highlighter-rouge">c</code> stands for <em>column</em>).</li>
       </ul>
     </li>
   </ol>
@@ -982,26 +982,26 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
   <ol>
     <li><strong>Datamash (operations on tabular data)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Input tabular dataset”</em>: output of the previous <code class="highlighter-rouge">Filter</code> step.</li>
-        <li><em>“Group by fields”</em>: <code class="highlighter-rouge">1</code>. (column 1 contains name of the <em>E. coli</em> genome we mapped against)</li>
-        <li><em>“Sort input”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Input tabular dataset”</em>: output of the previous <code class="language-plaintext highlighter-rouge">Filter</code> step.</li>
+        <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">1</code>. (column 1 contains name of the <em>E. coli</em> genome we mapped against)</li>
+        <li><em>“Sort input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Operation to perform on each group”</em>:
           <ul>
-            <li><em>“Type”</em>: <code class="highlighter-rouge">Count</code></li>
-            <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+            <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Count</code></li>
+            <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
           </ul>
         </li>
         <li>Click <strong>Insert operation to perform on each group</strong> button twice to add two more input boxes.</li>
         <li><em>“Operation to perform on each group”</em>:
           <ul>
-            <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
-            <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 3</code>.</li>
+            <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Mean</code></li>
+            <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code>.</li>
           </ul>
         </li>
         <li><em>“Operation to perform on each group”</em>:
           <ul>
-            <li><em>“Type”</em>: <code class="highlighter-rouge">Sum</code></li>
-            <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 4</code></li>
+            <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Sum</code></li>
+            <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
           </ul>
         </li>
       </ul>
@@ -1020,9 +1020,9 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
     <li>You will see “chart” button (<img src="../../images/bar-chart-o.png" alt="Chart icon" />). Click on it.</li>
     <li>In the central panel you will see a list of visualizations. Select <strong>Scatter plot (NVD3)</strong></li>
     <li>Click <strong>Select data</strong> button (<img src="../../images/disks.png" alt="Disks" />)</li>
-    <li>Set <strong>Data point labels</strong> to <code class="highlighter-rouge">Column: 1</code> (Accession number of each <em>E. coli</em> genome)</li>
-    <li>Set <strong>Values for x-axis</strong> to <code class="highlighter-rouge">Column: 2</code> (# of alignment blocks)</li>
-    <li>Set <strong>Values for y-axis</strong> to <code class="highlighter-rouge">Column: 4</code> (Total alignment length)</li>
+    <li>Set <strong>Data point labels</strong> to <code class="language-plaintext highlighter-rouge">Column: 1</code> (Accession number of each <em>E. coli</em> genome)</li>
+    <li>Set <strong>Values for x-axis</strong> to <code class="language-plaintext highlighter-rouge">Column: 2</code> (# of alignment blocks)</li>
+    <li>Set <strong>Values for y-axis</strong> to <code class="language-plaintext highlighter-rouge">Column: 4</code> (Total alignment length)</li>
     <li>You can also click on configuration button (<img src="../../images/chart_cog.png" alt="Cog" />) and specify axis labels etc.</li>
   </ol>
 </blockquote>
@@ -1031,7 +1031,7 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <figure id="figure-5"><img src="../../images/best_genomes_chart.png" alt="Identity versus length" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Number of alignment blocks versus total alignment length (bp).</figcaption></figure>
 
-<p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="highlighter-rouge">LT906474.1</code>, <code class="highlighter-rouge">CP024090.1</code>, and <code class="highlighter-rouge">CP020543.1</code>.</p>
+<p>A group of three dots in the upper left corner of this scatter plot represents genomes that are most similar to our assembly: they have a SMALL number of alignment blocks but HIGH total alignment length. Mousing over these three dots (if you set <strong>Data point labels</strong> correctly in the previous step) will reveal their accession numbers: <code class="language-plaintext highlighter-rouge">LT906474.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, and <code class="language-plaintext highlighter-rouge">CP020543.1</code>.</p>
 
 <blockquote class="warning">
   <h3 id="warning-things-change"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Things change</h3>
@@ -1045,8 +1045,8 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
   <ol>
     <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select lines from”</em>: to the output from <code class="highlighter-rouge">Datamash</code></li>
-        <li><em>“the pattern”</em>: <code class="highlighter-rouge">LT906474|CP024090|CP020543</code>. (Here <code class="highlighter-rouge">|</code> means <code class="highlighter-rouge">or</code>).</li>
+        <li><em>“Select lines from”</em>: to the output from <code class="language-plaintext highlighter-rouge">Datamash</code></li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">LT906474|CP024090|CP020543</code>. (Here <code class="language-plaintext highlighter-rouge">|</code> means <code class="language-plaintext highlighter-rouge">or</code>).</li>
       </ul>
     </li>
   </ol>
@@ -1054,12 +1054,12 @@ BA000007.2 Ecoli_C 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
 
 <p>This will generate a short table like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CP020543.1 11 99.91	4487098
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CP020543.1 11 99.91	4487098
 CP024090.1 12 99.91	4540487
 LT906474.1  8 99.94	4575223
 </code></pre></div></div>
 
-<p>From this it appears that <code class="highlighter-rouge">LT906474.1</code> is closest to our assembly because it has eight alignment blocks, the longest total alignment length (4,575,223) and highest mean identity (99.94%).</p>
+<p>From this it appears that <code class="language-plaintext highlighter-rouge">LT906474.1</code> is closest to our assembly because it has eight alignment blocks, the longest total alignment length (4,575,223) and highest mean identity (99.94%).</p>
 
 <h1 id="comparing-genome-architectures">Comparing genome architectures</h1>
 
@@ -1087,28 +1087,28 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li><strong>LASTZ</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="highlighter-rouge">from your history</code></li>
-        <li><em>“Select a reference dataset”</em>: dataset collection of the three genomes (in the video above we called it <code class="highlighter-rouge"><span class="notranslate">DNA</span></code>)</li>
-        <li><em>“Select QUERY sequence(s)”</em>: our assembly which was prepared in the beginning (<code class="highlighter-rouge">Text transformation on data...</code>)</li>
-        <li><em>“Perform chaining of HSPs with no penalties”</em>: <code class="highlighter-rouge">Yes</code> (section <strong>Chaining</strong>)</li>
-        <li><em>“Specify the output format”</em>: to <code class="highlighter-rouge">Customized general</code> (section <strong>Output</strong>)</li>
+        <li><em>“Select TARGET sequence(s) to align against”</em>: <code class="language-plaintext highlighter-rouge">from your history</code></li>
+        <li><em>“Select a reference dataset”</em>: dataset collection of the three genomes (in the video above we called it <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code>)</li>
+        <li><em>“Select QUERY sequence(s)”</em>: our assembly which was prepared in the beginning (<code class="language-plaintext highlighter-rouge">Text transformation on data...</code>)</li>
+        <li><em>“Perform chaining of HSPs with no penalties”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (section <strong>Chaining</strong>)</li>
+        <li><em>“Specify the output format”</em>: to <code class="language-plaintext highlighter-rouge">Customized general</code> (section <strong>Output</strong>)</li>
         <li><em>“Select which fields to include”</em>: select the following
           <ul>
-            <li><code class="highlighter-rouge">score</code> alignment score</li>
-            <li><code class="highlighter-rouge">name1</code> name of the <em>target</em> sequence</li>
-            <li><code class="highlighter-rouge">strand</code> strand for the <em>target</em> sequence</li>
-            <li><code class="highlighter-rouge">zstart</code> 0-based start of alignment in <em>target</em></li>
-            <li><code class="highlighter-rouge">end1</code> end of alignment in <em>target</em></li>
-            <li><code class="highlighter-rouge">length1</code> length of alignment in <em>target</em></li>
-            <li><code class="highlighter-rouge">name2</code> name of <em>query</em> sequence</li>
-            <li><code class="highlighter-rouge">strand2</code> strand for the <em>query</em> sequence</li>
-            <li><code class="highlighter-rouge">zstart2</code> 0-based start of alignment in <em>query</em></li>
-            <li><code class="highlighter-rouge">end2</code> end of alignment in <em>query</em></li>
-            <li><code class="highlighter-rouge">identity</code> alignment identity</li>
-            <li><code class="highlighter-rouge">number</code> alignment number</li>
+            <li><code class="language-plaintext highlighter-rouge">score</code> alignment score</li>
+            <li><code class="language-plaintext highlighter-rouge">name1</code> name of the <em>target</em> sequence</li>
+            <li><code class="language-plaintext highlighter-rouge">strand</code> strand for the <em>target</em> sequence</li>
+            <li><code class="language-plaintext highlighter-rouge">zstart</code> 0-based start of alignment in <em>target</em></li>
+            <li><code class="language-plaintext highlighter-rouge">end1</code> end of alignment in <em>target</em></li>
+            <li><code class="language-plaintext highlighter-rouge">length1</code> length of alignment in <em>target</em></li>
+            <li><code class="language-plaintext highlighter-rouge">name2</code> name of <em>query</em> sequence</li>
+            <li><code class="language-plaintext highlighter-rouge">strand2</code> strand for the <em>query</em> sequence</li>
+            <li><code class="language-plaintext highlighter-rouge">zstart2</code> 0-based start of alignment in <em>query</em></li>
+            <li><code class="language-plaintext highlighter-rouge">end2</code> end of alignment in <em>query</em></li>
+            <li><code class="language-plaintext highlighter-rouge">identity</code> alignment identity</li>
+            <li><code class="language-plaintext highlighter-rouge">number</code> alignment number</li>
           </ul>
         </li>
-        <li><em>“Create a dotplot representation of alignments?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Create a dotplot representation of alignments?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1139,29 +1139,29 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Collection of files to collapse”</em> the three genomes (collection) (in the video above we called it <code class="highlighter-rouge"><span class="notranslate">DNA</span></code>).</li>
+        <li><em>“Collection of files to collapse”</em> the three genomes (collection) (in the video above we called it <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span></code>).</li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
 <p>This will produce a single FASTA dataset containing the three genomes. There is one problem though. If we look at the data in this file, we will see that FASTA headers look like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;CP020543.1 Escherichia coli C, complete genome
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;CP020543.1 Escherichia coli C, complete genome
 </code></pre></div></div>
-<p>This is a problem because a browser will “think” that this particular genome is called <code class="highlighter-rouge">CP020543.1 Escherichia coli C, complete genome</code> while in the alignment files produced by LASTZ the same genome will be listed as simply <code class="highlighter-rouge">CP020543.1</code>. Because these two seemingly identical things are technically different it will not be possible to render alignment results (or any other annotation) within a browser. To solve this issue we simply need to remove <code class="highlighter-rouge">Escherichia coli C, complete genome</code> from <code class="highlighter-rouge">&gt;CP020543.1 Escherichia coli C, complete genome</code> and convert it into <code class="highlighter-rouge">&gt;CP020543.1</code>. For this we will use <strong>sed</strong> tool we already used above to <a href="#preparing-assembly">prepare assembly files</a>:</p>
+<p>This is a problem because a browser will “think” that this particular genome is called <code class="language-plaintext highlighter-rouge">CP020543.1 Escherichia coli C, complete genome</code> while in the alignment files produced by LASTZ the same genome will be listed as simply <code class="language-plaintext highlighter-rouge">CP020543.1</code>. Because these two seemingly identical things are technically different it will not be possible to render alignment results (or any other annotation) within a browser. To solve this issue we simply need to remove <code class="language-plaintext highlighter-rouge">Escherichia coli C, complete genome</code> from <code class="language-plaintext highlighter-rouge">&gt;CP020543.1 Escherichia coli C, complete genome</code> and convert it into <code class="language-plaintext highlighter-rouge">&gt;CP020543.1</code>. For this we will use <strong>sed</strong> tool we already used above to <a href="#preparing-assembly">prepare assembly files</a>:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cleaning-sequence-names"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cleaning sequence names</h3>
   <ol>
     <li><strong>Text transformation with sed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“File to process”</em>: output of <code class="highlighter-rouge">collapse collection</code></li>
-        <li><em>“SED program”</em>: <code class="highlighter-rouge">s/\ Esc.*$//</code></li>
+        <li><em>“File to process”</em>: output of <code class="language-plaintext highlighter-rouge">collapse collection</code></li>
+        <li><em>“SED program”</em>: <code class="language-plaintext highlighter-rouge">s/\ Esc.*$//</code></li>
       </ul>
     </li>
   </ol>
 
-  <p>Note: Here we are matching from space (<code class="highlighter-rouge">\ </code>) separating <code class="highlighter-rouge">CP020543.1</code> and <code class="highlighter-rouge">Escherichia coli C, complete genome</code> and substituting this with nothing.</p>
+  <p>Note: Here we are matching from space (<code class="language-plaintext highlighter-rouge">\ </code>) separating <code class="language-plaintext highlighter-rouge">CP020543.1</code> and <code class="language-plaintext highlighter-rouge">Escherichia coli C, complete genome</code> and substituting this with nothing.</p>
 </blockquote>
 
 <p>To make sure that everything completed correctly let’s grab FASTA headers from all sequences in the dataset produced by the last tool:</p>
@@ -1171,17 +1171,17 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li><strong>Search in textfiles (grep)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select lines from”</em>: output of the previous step (<code class="highlighter-rouge">Text transformation</code>)</li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">^&gt;</code></li>
+        <li><em>“Select lines from”</em>: output of the previous step (<code class="language-plaintext highlighter-rouge">Text transformation</code>)</li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">^&gt;</code></li>
       </ul>
     </li>
   </ol>
 
-  <p>Note: This tells to return all line that begin with <code class="highlighter-rouge">&gt;</code> (<code class="highlighter-rouge">^</code> signifies beginning of a line).</p>
+  <p>Note: This tells to return all line that begin with <code class="language-plaintext highlighter-rouge">&gt;</code> (<code class="language-plaintext highlighter-rouge">^</code> signifies beginning of a line).</p>
 </blockquote>
 
 <p>If everything went well we will see something like this:</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &gt;CP020543.1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> &gt;CP020543.1
  &gt;CP024090.1
  &gt;LT906474.1
 </code></pre></div></div>
@@ -1193,10 +1193,10 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li><strong>Concatenate datasets tail-to-head (cat)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Datasets to concatenate”</em>: output of <strong>sed</strong> tool we performed one step ago (<em>before</em> last step; it is called <code class="highlighter-rouge">Text transformation on...</code>)</li>
+        <li><em>“Datasets to concatenate”</em>: output of <strong>sed</strong> tool we performed one step ago (<em>before</em> last step; it is called <code class="language-plaintext highlighter-rouge">Text transformation on...</code>)</li>
         <li>Click <strong>Insert Dataset</strong> button
           <ul>
-            <li><em>“Select”</em>: our assembly (its name also begins with <code class="highlighter-rouge">Text transformation on...</code> but is located earlier in the history)</li>
+            <li><em>“Select”</em>: our assembly (its name also begins with <code class="language-plaintext highlighter-rouge">Text transformation on...</code> but is located earlier in the history)</li>
           </ul>
         </li>
       </ul>
@@ -1211,7 +1211,7 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li>Go to <a href="http://software.broadinstitute.org/software/igv/download">IGV web page</a> and launch a browser appropriate for your platform. Wait for it to start. It will display human genome, but we will change that.</li>
     <li>Go back to your <span class="notranslate">Galaxy</span> session and expand the dataset generated during the last step.</li>
-    <li>Click on <code class="highlighter-rouge">local</code> link in <strong>display with IGV local</strong></li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">local</code> link in <strong>display with IGV local</strong></li>
     <li>Wait a bit and IGV will refresh displaying “chromosomes” of our <em>hybrid</em> genome:</li>
   </ol>
 
@@ -1223,7 +1223,7 @@ LT906474.1  8 99.94	4575223
 <p><a href="#hands_on-hands-on-aligning-again">Above</a> we computed alignments using LASTZ. Because we ran LASTZ on a collection containing genomic sequences, LASTZ produced a collection as well (actually two collections: one containing alignments an the other with dot plots). To display alignments in the browser we need to do several things:</p>
 
 <ol>
-  <li>Fix unwanted <code class="highlighter-rouge">%</code> signs in LASTZ output</li>
+  <li>Fix unwanted <code class="language-plaintext highlighter-rouge">%</code> signs in LASTZ output</li>
   <li>Create names for alignment blocks</li>
   <li>Convert LASTZ output into <a href="https://genome.ucsc.edu/FAQ/FAQformat.html#format1"><span class="notranslate">BED</span></a> format</li>
   <li>Create a single <span class="notranslate">BED</span> track containing alignments against all four genomes.</li>
@@ -1231,40 +1231,40 @@ LT906474.1  8 99.94	4575223
 
 <p>To begin, let’s look at the LASTZ output:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       1          2 3      4      5      6       7 8      9     10            11    12  13
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>       1          2 3      4      5      6       7 8      9     10            11    12  13
 ------------------------------------------------------------------------------------------
 10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0%  1
     5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0%   2
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6%   3
 </code></pre></div></div>
 
-<p>One immediate problem is <code class="highlighter-rouge">%</code> character in column 12 (alignment identity). We need to remove it. For this we will use <strong>SED</strong> tool that should be familiar to us from <a href="#hands_on-hands-on-cleaning-sequence-names">previous hands-on exercises</a>:</p>
+<p>One immediate problem is <code class="language-plaintext highlighter-rouge">%</code> character in column 12 (alignment identity). We need to remove it. For this we will use <strong>SED</strong> tool that should be familiar to us from <a href="#hands_on-hands-on-cleaning-sequence-names">previous hands-on exercises</a>:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-removing--character-from-lastz-output"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing <code class="highlighter-rouge">%</code> character from LASTZ output</h3>
+  <h3 id="hands_on-hands-on-removing--character-from-lastz-output"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing <code class="language-plaintext highlighter-rouge">%</code> character from LASTZ output</h3>
 
   <ol>
     <li><strong>Text transformation with sed</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“File to process”</em>: output of LASTZ (<code class="highlighter-rouge">LASTZ on collection ...: mapped <span class="notranslate">reads</span></code>)</li>
-        <li><em>“SED program”</em>: <code class="highlighter-rouge">s/\%//</code></li>
+        <li><em>“File to process”</em>: output of LASTZ (<code class="language-plaintext highlighter-rouge">LASTZ on collection ...: mapped <span class="notranslate">reads</span></code>)</li>
+        <li><em>“SED program”</em>: <code class="language-plaintext highlighter-rouge">s/\%//</code></li>
       </ul>
     </li>
   </ol>
 
-  <p>Note: Here we are matching percent character <code class="highlighter-rouge">%</code> (it is pre-pended with <code class="highlighter-rouge">\</code> because it is a special character, but we want <code class="highlighter-rouge">sed</code> to interpret it literally, as the percentage sign) and substituting this with nothing.</p>
+  <p>Note: Here we are matching percent character <code class="language-plaintext highlighter-rouge">%</code> (it is pre-pended with <code class="language-plaintext highlighter-rouge">\</code> because it is a special character, but we want <code class="language-plaintext highlighter-rouge">sed</code> to interpret it literally, as the percentage sign) and substituting this with nothing.</p>
 </blockquote>
 
-<p>As a result LASTZ output will look like this (no <code class="highlighter-rouge">%</code> signs):</p>
+<p>As a result LASTZ output will look like this (no <code class="language-plaintext highlighter-rouge">%</code> signs):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      1          2 3      4      5      6       7 8      9     10            11    12  13
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>      1          2 3      4      5      6       7 8      9     10            11    12  13
 ------------------------------------------------------------------------------------------
 10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1
     5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3
 </code></pre></div></div>
 
-<p>One of the fields chosen by us for <a href="#hands_on-hands-on-aligning-again">LASTZ run</a> is <code class="highlighter-rouge">number</code>. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with <code class="highlighter-rouge">1</code> each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 13) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier <code class="highlighter-rouge">1</code> will become <code class="highlighter-rouge">CP020543.11</code>, <code class="highlighter-rouge">2</code> will become <code class="highlighter-rouge">CP020543.12</code> and so on. Here is how we will do that:</p>
+<p>One of the fields chosen by us for <a href="#hands_on-hands-on-aligning-again">LASTZ run</a> is <code class="language-plaintext highlighter-rouge">number</code>. This is an incrementing number given by LASTZ to every alignment block so it can be uniquely identified. The problem is that by running LASTZ on a collection of three genomes it generated a number for each output independently starting with <code class="language-plaintext highlighter-rouge">1</code> each time. So these alignments identified are unique within each individual run but are redundant for multiple runs. We can fix that by pre-pending each alignment identified (column 13) with the name of the target sequence (column 2). This would create alignments that are truly unique. For example, in the case of the LASTZ output shown above alignment identifier <code class="language-plaintext highlighter-rouge">1</code> will become <code class="language-plaintext highlighter-rouge">CP020543.11</code>, <code class="language-plaintext highlighter-rouge">2</code> will become <code class="language-plaintext highlighter-rouge">CP020543.12</code> and so on. Here is how we will do that:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-unique-alignment-identifiers"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating unique alignment identifiers</h3>
@@ -1272,9 +1272,9 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li><strong>Merge Columns together</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select data”</em>: the output of the previous step (<code class="highlighter-rouge">Text transformation of collection ...</code>)</li>
-        <li><em>“Merge column”</em>: <code class="highlighter-rouge">Column: 2</code> (this is the Target sequence name)</li>
-        <li><em>“with column”</em>: <code class="highlighter-rouge">Column: 13</code> (this is the alignment block created by LASTZ)</li>
+        <li><em>“Select data”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Text transformation of collection ...</code>)</li>
+        <li><em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code> (this is the Target sequence name)</li>
+        <li><em>“with column”</em>: <code class="language-plaintext highlighter-rouge">Column: 13</code> (this is the alignment block created by LASTZ)</li>
       </ul>
     </li>
   </ol>
@@ -1282,27 +1282,27 @@ LT906474.1  8 99.94	4575223
 
 <p>The output will look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1          2 3      4      5      6       7 8      9     10            11    12  13           14
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1          2 3      4      5      6       7 8      9     10            11    12  13           14
 -----------------------------------------------------------------------------------------------------
 10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1 CP020543.11
     5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2 CP020543.12
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
 </code></pre></div></div>
 
-<p>The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, <code class="highlighter-rouge">CP020543.1</code> and <code class="highlighter-rouge">LT906474.1</code> because they will have accessions embedded within alignment block IDs. For example, the first alignment between <code class="highlighter-rouge">CP020543.1</code> and our assembly <code class="highlighter-rouge">Ecoli_C</code> will have alignment block id <code class="highlighter-rouge">CP020543.11</code>, while the 225th alignment between <code class="highlighter-rouge">LT906474.1</code> and <code class="highlighter-rouge">Ecoli_C</code> will have ID <code class="highlighter-rouge">LT906474.1225</code>. Because of this we can collapse the entire collection of alignments into a single dataset:</p>
+<p>The tool added a new column (Column 14) containing a merge between the target name and alignment id. Now we can differentiate between alignment blocks that exist between, for example, <code class="language-plaintext highlighter-rouge">CP020543.1</code> and <code class="language-plaintext highlighter-rouge">LT906474.1</code> because they will have accessions embedded within alignment block IDs. For example, the first alignment between <code class="language-plaintext highlighter-rouge">CP020543.1</code> and our assembly <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have alignment block id <code class="language-plaintext highlighter-rouge">CP020543.11</code>, while the 225th alignment between <code class="language-plaintext highlighter-rouge">LT906474.1</code> and <code class="language-plaintext highlighter-rouge">Ecoli_C</code> will have ID <code class="language-plaintext highlighter-rouge">LT906474.1225</code>. Because of this we can collapse the entire collection of alignments into a single dataset:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-collapsing-all-alignment-info-into-a-single-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collapsing all alignment info into a single dataset</h3>
   <ol>
     <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Collection of files to collapse”</em>: the output of the previous step, <code class="highlighter-rouge">Merge Columns on collection...</code> (collection input)</li>
+        <li><em>“Collection of files to collapse”</em>: the output of the previous step, <code class="language-plaintext highlighter-rouge">Merge Columns on collection...</code> (collection input)</li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as <code class="highlighter-rouge">CP020543.13</code>.</p>
+<p>This will produce a single dataset combining all alignment info. We can tell which alignments are between which genomes because we have set identifiers such as <code class="language-plaintext highlighter-rouge">CP020543.13</code>.</p>
 
 <blockquote class="comment">
   <h3 id="comment-bed-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> <span class="notranslate">BED</span> format</h3>
@@ -1314,20 +1314,20 @@ LT906474.1  8 99.94	4575223
     <li>End</li>
     <li>Name of the feature</li>
     <li>Score (must be between 0 and 1000)</li>
-    <li>Strand (<code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, or <code class="highlighter-rouge">.</code> for no strand data).</li>
+    <li>Strand (<code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, or <code class="language-plaintext highlighter-rouge">.</code> for no strand data).</li>
   </ol>
 </blockquote>
 
 <p>Let’s look again at the data we generated in the last step:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1          2 3      4      5      6       7 8      9     10            11    12  13           14
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     1          2 3      4      5      6       7 8      9     10            11    12  13           14
 -----------------------------------------------------------------------------------------------------
 10141727 CP020543.1 +     48 106157 106109 Ecoli_C +      0 106109 106107/106109 100.0  1 CP020543.11
     5465 CP020543.1 + 121267 121367    100 Ecoli_C + 109317 109418    76/100     76.0   2 CP020543.12
     4870 CP020543.1 + 159368 159512    144 Ecoli_C + 128706 128828    95/115     82.6   3 CP020543.13
 </code></pre></div></div>
 
-<p>Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But <span class="notranslate">BED</span> only has one set of coordinates. Thus we can create two <span class="notranslate">BED</span>s: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences <code class="highlighter-rouge">CP020543.1</code>, <code class="highlighter-rouge">CP024090.1</code>, <code class="highlighter-rouge">LT906474.1</code> and the second from the standpoint of query - our own assembly <a href="#hands_on-hands-on-fixing-assembly">we called</a> <code class="highlighter-rouge">Ecoli_C</code>. In the first <span class="notranslate">BED</span>, column 1 will contain names of targets (<code class="highlighter-rouge">CP020543.1</code>, <code class="highlighter-rouge">CP024090.1</code>, and <code class="highlighter-rouge">LT906474.1</code>). In the second <span class="notranslate">BED</span>, column 1 will contain name of our assembly: <code class="highlighter-rouge">Ecoli_C</code>. To create the first <span class="notranslate">BED</span> we will cut six columns from the dataset produced at the last step. Specifically, to produce the target <span class="notranslate">BED</span> we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query <span class="notranslate">BED</span> columns 7,9,10,14,12,8 will be cut.</p>
+<p>Alignments are regions of high similarity between two sequences. Therefore each alignment block has two sets of coordinates associated with it: start/end in the first sequences (target) and start/end in the second sequence (query). But <span class="notranslate">BED</span> only has one set of coordinates. Thus we can create two <span class="notranslate">BED</span>s: one using coordinates from the target and the other one from query. The first file will depict alignment data from the standpoint of target sequences <code class="language-plaintext highlighter-rouge">CP020543.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, <code class="language-plaintext highlighter-rouge">LT906474.1</code> and the second from the standpoint of query - our own assembly <a href="#hands_on-hands-on-fixing-assembly">we called</a> <code class="language-plaintext highlighter-rouge">Ecoli_C</code>. In the first <span class="notranslate">BED</span>, column 1 will contain names of targets (<code class="language-plaintext highlighter-rouge">CP020543.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, and <code class="language-plaintext highlighter-rouge">LT906474.1</code>). In the second <span class="notranslate">BED</span>, column 1 will contain name of our assembly: <code class="language-plaintext highlighter-rouge">Ecoli_C</code>. To create the first <span class="notranslate">BED</span> we will cut six columns from the dataset produced at the last step. Specifically, to produce the target <span class="notranslate">BED</span> we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query <span class="notranslate">BED</span> columns 7,9,10,14,12,8 will be cut.</p>
 
 <blockquote class="warning">
   <h3 id="warning-there-are-multiple-cut-tools"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> There are multiple <strong>CUT</strong> tools!</h3>
@@ -1339,8 +1339,8 @@ LT906474.1  8 99.94	4575223
   <ol>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c2,c4,c5,c14,c12,c8</code> (look at the data shown above and the definition of <span class="notranslate">BED</span> to see why we make these choices.)</li>
-        <li><em>“From”</em>: the output of the previous step (<code class="highlighter-rouge">Collapse Collection on data ...</code>)</li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c4,c5,c14,c12,c8</code> (look at the data shown above and the definition of <span class="notranslate">BED</span> to see why we make these choices.)</li>
+        <li><em>“From”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Collapse Collection on data ...</code>)</li>
       </ul>
     </li>
   </ol>
@@ -1348,7 +1348,7 @@ LT906474.1  8 99.94	4575223
 
 <p>This will produce a dataset looking like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1      2      3           4     5 6
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1      2      3           4     5 6
 --------------------------------------------
 CP020543.1     48 106157 CP020543.11 100.0 +
 CP020543.1 121267 121367 CP020543.12  76.0 +
@@ -1362,8 +1362,8 @@ CP020543.1 159368 159512 CP020543.13  82.6 +
   <ol>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c7,c9,c10,c14,c12,c8</code> (look at the data shown above and the definition of <span class="notranslate">BED</span> to see why we make these choices.)</li>
-        <li><em>“From”</em>: the output of <strong>collection collapse</strong> (a step before the last step!) (<code class="highlighter-rouge">Collapse Collection on data ...</code>)</li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c7,c9,c10,c14,c12,c8</code> (look at the data shown above and the definition of <span class="notranslate">BED</span> to see why we make these choices.)</li>
+        <li><em>“From”</em>: the output of <strong>collection collapse</strong> (a step before the last step!) (<code class="language-plaintext highlighter-rouge">Collapse Collection on data ...</code>)</li>
       </ul>
     </li>
   </ol>
@@ -1373,7 +1373,7 @@ CP020543.1 159368 159512 CP020543.13  82.6 +
 
 <p>This will produce a dataset looking like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ecoli_C      0 106109 CP020543.11 100.0 +
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Ecoli_C      0 106109 CP020543.11 100.0 +
 Ecoli_C 109317 109418 CP020543.12  76.0 +
 Ecoli_C 128706 128828 CP020543.13  82.6 +
 </code></pre></div></div>
@@ -1386,10 +1386,10 @@ Ecoli_C 128706 128828 CP020543.13  82.6 +
   <ol>
     <li><strong>Concatenate datasets tail-to-head</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Concatenate Dataset”</em>: the output of the step before last (<code class="highlighter-rouge">Cut on data...</code>)</li>
+        <li><em>“Concatenate Dataset”</em>: the output of the step before last (<code class="language-plaintext highlighter-rouge">Cut on data...</code>)</li>
         <li>Click <em>“Insert Dataset”</em> button
           <ul>
-            <li><em>“1: Dataset”</em>: the output of the previous step (also <code class="highlighter-rouge">Cut on data...</code>)</li>
+            <li><em>“1: Dataset”</em>: the output of the previous step (also <code class="language-plaintext highlighter-rouge">Cut on data...</code>)</li>
           </ul>
         </li>
       </ul>
@@ -1404,9 +1404,9 @@ Ecoli_C 128706 128828 CP020543.13  82.6 +
 
   <ol>
     <li>Click the pencil (<img src="../../images/pencil.png" alt="Pencil" />) icon next to the last dataset in the history.</li>
-    <li>Once we are at it let’s also rename the dataset to <code class="highlighter-rouge">Alignments <span class="notranslate">BED</span></code> by changing the content of the <strong>Name</strong> box.</li>
+    <li>Once we are at it let’s also rename the dataset to <code class="language-plaintext highlighter-rouge">Alignments <span class="notranslate">BED</span></code> by changing the content of the <strong>Name</strong> box.</li>
     <li>Click <strong>Datatypes</strong> (<img src="../../images/disks.png" alt="Disks" />) tab</li>
-    <li>In the dropdown <strong>New Type</strong> find <code class="highlighter-rouge"><span class="notranslate">bed</span></code></li>
+    <li>In the dropdown <strong>New Type</strong> find <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code></li>
     <li>Click <strong>Change datatype</strong> button.</li>
   </ol>
 </blockquote>
@@ -1417,16 +1417,16 @@ Ecoli_C 128706 128828 CP020543.13  82.6 +
   <h3 id="hands_on-hands-on-display-alignments-in-the-browser"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Display alignments in the browser</h3>
 
   <ol>
-    <li>Expand the latest data (the one we just changed to <code class="highlighter-rouge"><span class="notranslate">bed</span></code> above)</li>
+    <li>Expand the latest data (the one we just changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code> above)</li>
     <li>You will see <strong>display with IGV local</strong>. Click this.</li>
     <li>After a few minutes you will see alignments rendered within the browser.</li>
-    <li>If you get <code class="highlighter-rouge">Could not locate genome:</code> error ignore it and click <strong>OK</strong>.</li>
+    <li>If you get <code class="language-plaintext highlighter-rouge">Could not locate genome:</code> error ignore it and click <strong>OK</strong>.</li>
   </ol>
 </blockquote>
 
 <blockquote class="comment">
   <h3 id="comment-naming-igv-tracks"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Naming IGV tracks</h3>
-  <p>At the time of writing the datasets sent by <span class="notranslate">Galaxy</span> to IGV have uninformative names such as <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_bbd44h445645h45454</code>. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the <strong>Rename Track..</strong> option.</p>
+  <p>At the time of writing the datasets sent by <span class="notranslate">Galaxy</span> to IGV have uninformative names such as <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_bbd44h445645h45454</code>. While this will soon be fixed we can deal with it by renaming the displayed track manually by right clicking on IGV sidebar and choosing the <strong>Rename Track..</strong> option.</p>
 
 </blockquote>
 
@@ -1438,9 +1438,9 @@ Ecoli_C 128706 128828 CP020543.13  82.6 +
 
 <h2 id="analyzing-the-deletion-for-gene-content">Analyzing the deletion for gene content</h2>
 
-<p>Earlier we <a href="#hands_on-hands-on-uploading-sequences-and-annotations">downloaded</a> gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for <code class="highlighter-rouge">CP020543.1</code>, <code class="highlighter-rouge">CP024090.1</code>, and <code class="highlighter-rouge">LT906474.1</code>. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called <code class="highlighter-rouge">GENES</code> if you followed <a href="#hands_on-hands-on-uploading-sequences-and-annotations">the video</a>)):</p>
+<p>Earlier we <a href="#hands_on-hands-on-uploading-sequences-and-annotations">downloaded</a> gene annotations for the three genomes most closely related to our assembly. The data was downloaded as a collection containing annotations for <code class="language-plaintext highlighter-rouge">CP020543.1</code>, <code class="language-plaintext highlighter-rouge">CP024090.1</code>, and <code class="language-plaintext highlighter-rouge">LT906474.1</code>. The annotation data contains multiple columns described by NCBI as follows (you can look at the actual data by finding the annotation collection from above (called <code class="language-plaintext highlighter-rouge">GENES</code> if you followed <a href="#hands_on-hands-on-uploading-sequences-and-annotations">the video</a>)):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tab-delimited text file reporting locations and attributes for a subset of
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Tab-delimited text file reporting locations and attributes for a subset of
 annotated features. Included feature types are: gene, CDS, <span class="notranslate">RNA</span> (all types),
 operon, C/V/N/S_region, and V/D/J_segment.
 
@@ -1505,23 +1505,23 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
        anticodon=NNN (for t<span class="notranslate">RNA</span>s), old_locus_tag=XXX
 </code></pre></div></div>
 
-<p>Our objective is to convert these data into <span class="notranslate">BED</span>. In this analysis we want to initially concentrate on protein coding regions. To do this let’s select all lines from the annotation datasets that contain the term <code class="highlighter-rouge">CDS</code>:</p>
+<p>Our objective is to convert these data into <span class="notranslate">BED</span>. In this analysis we want to initially concentrate on protein coding regions. To do this let’s select all lines from the annotation datasets that contain the term <code class="language-plaintext highlighter-rouge">CDS</code>:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-retain-cds-rows-in-annotation-datasets"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Retain CDS rows in annotation datasets</h3>
   <ol>
     <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select lines from”</em>: the collection containing annotations (called <code class="highlighter-rouge">GENES</code>)</li>
-        <li><em>“the pattern”</em>: <code class="highlighter-rouge">^CDS</code></li>
+        <li><em>“Select lines from”</em>: the collection containing annotations (called <code class="language-plaintext highlighter-rouge">GENES</code>)</li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">^CDS</code></li>
       </ul>
     </li>
   </ol>
 
-  <p>Note: This is because we want to retain all lines that begin (<code class="highlighter-rouge">^</code>) with <code class="highlighter-rouge">CDS</code>.</p>
+  <p>Note: This is because we want to retain all lines that begin (<code class="language-plaintext highlighter-rouge">^</code>) with <code class="language-plaintext highlighter-rouge">CDS</code>.</p>
 </blockquote>
 
-<p>This will produce a collection with three datasets just like the original <code class="highlighter-rouge">GENES</code> collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the <span class="notranslate">BED</span> format. There is one problem with this. We are trying to convert these data into <a href="#comment-bed-format">6 column <span class="notranslate">BED</span></a>. In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of <code class="highlighter-rouge">0</code>:</p>
+<p>This will produce a collection with three datasets just like the original <code class="language-plaintext highlighter-rouge">GENES</code> collection but containing only CDS data. Next we need to cut out only those columns that need to be included in the <span class="notranslate">BED</span> format. There is one problem with this. We are trying to convert these data into <a href="#comment-bed-format">6 column <span class="notranslate">BED</span></a>. In this format the fifth column (score) must have a value between 0 and 1000. To satisfy this requirement we will create a dummy column that will always have a value of <code class="language-plaintext highlighter-rouge">0</code>:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-a-dummy-score-column"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a dummy score column</h3>
@@ -1529,14 +1529,14 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
   <ol>
     <li><strong>Add column to an existing dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Add this value”</em>: <code class="highlighter-rouge">0</code></li>
-        <li><em>“to Dataset”</em>: the collection produced by the previous step (<code class="highlighter-rouge">Select on collection...</code>)</li>
+        <li><em>“Add this value”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+        <li><em>“to Dataset”</em>: the collection produced by the previous step (<code class="language-plaintext highlighter-rouge">Select on collection...</code>)</li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>This will create a 21st column containing <code class="highlighter-rouge">0</code> for all rows. Now we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand). <strong>Note</strong> that we do not select a column corresponding to genome name. We will add this information on the next step.</p>
+<p>This will create a 21st column containing <code class="language-plaintext highlighter-rouge">0</code> for all rows. Now we can cut necessary columns from these datasets. These columns are 8 (start), 9 (end), 15 (gene symbol), 21 (dummy column we just created), and c10 (strand). <strong>Note</strong> that we do not select a column corresponding to genome name. We will add this information on the next step.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cutting-columns-form-annotation-data"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Cutting columns form annotation data</h3>
@@ -1544,8 +1544,8 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
   <ol>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c8,c9,c15,c21,c10</code></li>
-        <li><em>“From”</em> the collection produced at the previous step (<code class="highlighter-rouge">Select on collection...</code>)</li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c9,c15,c21,c10</code></li>
+        <li><em>“From”</em> the collection produced at the previous step (<code class="language-plaintext highlighter-rouge">Select on collection...</code>)</li>
       </ul>
     </li>
   </ol>
@@ -1553,23 +1553,23 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
 
 <p>This will produce a collection with each element containing data like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1    2                                              3 4 5
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1    2                                              3 4 5
 ------------------------------------------------------------
   49 1452 chromosomal replication initiator protein <span class="notranslate">Dna</span>A 0 +
 1457 2557 <span class="notranslate">DNA</span> polymerase III subunit beta                0 +
 2557 3630 <span class="notranslate">DNA</span> replication and repair protein RecF        0 +
 </code></pre></div></div>
 
-<p>As we mentioned above these datasets lack genome IDs such as <code class="highlighter-rouge">CP020543.1</code>. However, the individual elements in the collection we’ve created already have genome IDs (if you are unsure make sure you followed the directions when <a href="#hands_on-hands-on-uploading-sequences-and-annotations">creating collection containing annotations</a>). We will leverage this when collapsing this collection into a single dataset:</p>
+<p>As we mentioned above these datasets lack genome IDs such as <code class="language-plaintext highlighter-rouge">CP020543.1</code>. However, the individual elements in the collection we’ve created already have genome IDs (if you are unsure make sure you followed the directions when <a href="#hands_on-hands-on-uploading-sequences-and-annotations">creating collection containing annotations</a>). We will leverage this when collapsing this collection into a single dataset:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Collapsing annotations into a single <span class="notranslate">BED</span> dataset</h3>
   <ol>
     <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="highlighter-rouge">Cut on collection...</code>)</li>
-        <li><em>“Append File name”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Where to add dataset name”</em>: <code class="highlighter-rouge">Same line and each line in dataset</code></li>
+        <li><em>“Collection of files to collapse”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Cut on collection...</code>)</li>
+        <li><em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Where to add dataset name”</em>: <code class="language-plaintext highlighter-rouge">Same line and each line in dataset</code></li>
       </ul>
     </li>
   </ol>
@@ -1577,7 +1577,7 @@ col20: attributes: semi-colon delimited list of a controlled set of qualifiers.
 
 <p>Resulting data looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1    2    3                                              4 5 6
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1    2    3                                              4 5 6
 -----------------------------------------------------------------------
 CP020543.1   49 1452 chromosomal replication initiator protein <span class="notranslate">Dna</span>A 0 +
 CP020543.1 1457 2557 <span class="notranslate">DNA</span> polymerase III subunit beta                0 +
@@ -1610,7 +1610,7 @@ CP020543.1 2557 3630 <span class="notranslate">DNA</span> replication and repair
 
 <p>This will generate a dataset that looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2
 ------------------
 CP020543.1 4617024
 CP024090.1 4592887
@@ -1626,10 +1626,10 @@ Ecoli_C    4576293
   <ol>
     <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Sort Dataset”</em>: the output of the previous step (<code class="highlighter-rouge">Compute sequence length on ...</code>)</li>
-        <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“with flavor”</em>: <code class="highlighter-rouge">Alphabetical sort</code></li>
-        <li><em>“everything in”</em>: <code class="highlighter-rouge">Ascending order</code></li>
+        <li><em>“Sort Dataset”</em>: the output of the previous step (<code class="language-plaintext highlighter-rouge">Compute sequence length on ...</code>)</li>
+        <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“with flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort</code></li>
+        <li><em>“everything in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
       </ul>
     </li>
   </ol>
@@ -1637,7 +1637,7 @@ Ecoli_C    4576293
 
 <p>You will get a sorted version of the above dataset:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2
 ------------------
 CP020543.1 4617024
 CP024090.1 4592887
@@ -1653,7 +1653,7 @@ LT906474.1 4625968
     <li><strong>SortBED order the intervals</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Sort the following <span class="notranslate">BED</span> file”</em>: our <a href="#hands_on-hands-on-changing-dataset-type">alignment <span class="notranslate">BED</span></a></li>
-        <li><em>“Sort by”</em> on its default setting (<code class="highlighter-rouge">chromosome, then by start position (asc)</code>)</li>
+        <li><em>“Sort by”</em> on its default setting (<code class="language-plaintext highlighter-rouge">chromosome, then by start position (asc)</code>)</li>
       </ul>
     </li>
   </ol>
@@ -1668,7 +1668,7 @@ LT906474.1 4625968
     <li><strong>ComplementBed Extract intervals not represented by an interval file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“<span class="notranslate">BED</span>/VCF/GFF file”</em>: output of the previous step</li>
-        <li><em>“Genome file”</em>: <code class="highlighter-rouge">Genome file from your history</code></li>
+        <li><em>“Genome file”</em>: <code class="language-plaintext highlighter-rouge">Genome file from your history</code></li>
         <li><em>“Genome file”</em>: sorted genome file we’ve generated <a href="#hands_on-hands-on-sorting-genome-file">two steps ago</a></li>
       </ul>
     </li>
@@ -1691,8 +1691,8 @@ LT906474.1 4625968
   <ol>
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Filter”</em>: dataset from the last step (<code class="highlighter-rouge">Complement of SortBed on ...</code>)</li>
-        <li><em>“With following condition”</em>: <code class="highlighter-rouge">c3-c2&gt;=10000</code></li>
+        <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Complement of SortBed on ...</code>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c3-c2&gt;=10000</code></li>
       </ul>
     </li>
   </ol>
@@ -1702,7 +1702,7 @@ LT906474.1 4625968
 
 <p>The resulting dataset will look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2       3
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2       3
 --------------------------
 CP020543.1 1668702 1697834
 CP020543.1 1700832 1742068
@@ -1713,7 +1713,7 @@ LT906474.1 3252785 3288031
 LT906474.1 3288166 3304009
 </code></pre></div></div>
 
-<p>You will notice that all three genomes have a region starting past 3,200,000 and only <code class="highlighter-rouge">CP020543.1</code> has another region starting at 1,668,702. However, this region reflects some unique feature of <code class="highlighter-rouge">CP020543.1</code> rather than that of our assembly. This is why we will concentrate on the <em>common</em> region which is deleted in our genome, but is present in the three closely related <em>E. coli</em> strains:</p>
+<p>You will notice that all three genomes have a region starting past 3,200,000 and only <code class="language-plaintext highlighter-rouge">CP020543.1</code> has another region starting at 1,668,702. However, this region reflects some unique feature of <code class="language-plaintext highlighter-rouge">CP020543.1</code> rather than that of our assembly. This is why we will concentrate on the <em>common</em> region which is deleted in our genome, but is present in the three closely related <em>E. coli</em> strains:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-restricting-list-of-deleted-regions-to-the-common-deletion"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Restricting list of deleted regions to the <em>common</em> deletion</h3>
@@ -1721,8 +1721,8 @@ LT906474.1 3288166 3304009
   <ol>
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Filter”</em>: dataset from the last step (<code class="highlighter-rouge">Filter on data...</code>)</li>
-        <li><em>“With following condition”</em>: <code class="highlighter-rouge">c2 &gt; 2000000</code>.</li>
+        <li><em>“Filter”</em>: dataset from the last step (<code class="language-plaintext highlighter-rouge">Filter on data...</code>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c2 &gt; 2000000</code>.</li>
       </ul>
     </li>
   </ol>
@@ -1730,7 +1730,7 @@ LT906474.1 3288166 3304009
 
 <p>The new set of regions will look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2       3
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2       3
 --------------------------
 CP020543.1 3253711 3288956
 CP020543.1 3289091 3304937
@@ -1753,7 +1753,7 @@ LT906474.1 3288166 3304009
       <ul>
         <li><em>“File A to intersect with B”</em>: output of the previous step</li>
         <li><em>“File(s) B to intersect with A”</em>: gene annotations in <a href="#hands_on-hands-on-collapsing-annotations-into-a-single-bed-dataset"><span class="notranslate">BED</span> format</a></li>
-        <li><em>“What should be written to the output file?”</em>: <code class="highlighter-rouge">Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by the fraction- and reciprocal option (-wo)</code></li>
+        <li><em>“What should be written to the output file?”</em>: <code class="language-plaintext highlighter-rouge">Write the original A and B entries plus the number of base pairs of overlap between the two features. Only A features with overlap are reported. Restricted by the fraction- and reciprocal option (-wo)</code></li>
       </ul>
     </li>
   </ol>
@@ -1761,7 +1761,7 @@ LT906474.1 3288166 3304009
 
 <p>As a result we will get a list of all genes that overlap with the positions of the deletion. Because of the parameters we have selected, the tool joins rows from the two datasets if their coordinates overlap:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2       3          4       5       6    7 8 9   10
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>         1       2       3          4       5       6    7 8 9   10
 -------------------------------------------------------------------
 LT906474.1 3252785 3288031 LT906474.1 3252764 3252961 ybdD 0 -  176
 LT906474.1 3252785 3288031 LT906474.1 3253144 3255249 cstA 0 - 2105
@@ -1790,7 +1790,7 @@ LT906474.1 3252785 3288031 LT906474.1 3255430 3255843 entH 0 -  413
 
 <p>This dataset will look like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1           2           3     4    5     6
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   1           2           3     4    5     6
 ---------------------------------------------
 thrL 0.242424242 54.62640955 FALSE TRUE FALSE
 thrA 0.149817296 32.64262069 FALSE TRUE FALSE
@@ -1805,10 +1805,10 @@ thrB 0.177920686 39.389847   FALSE TRUE FALSE
   <ol>
     <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Join”</em>: the results of the <a href="#hands_on-hands-on-finding-genes-deleted-in-our-assembly">intersect operation</a>(<code class="highlighter-rouge">Intersect intervals on data...</code>)</li>
-        <li><em>“using column”</em>: <code class="highlighter-rouge">Column: 7</code> (because it contains gene names)</li>
+        <li><em>“Join”</em>: the results of the <a href="#hands_on-hands-on-finding-genes-deleted-in-our-assembly">intersect operation</a>(<code class="language-plaintext highlighter-rouge">Intersect intervals on data...</code>)</li>
+        <li><em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 7</code> (because it contains gene names)</li>
         <li><em>“with”</em>: the newly uploaded dataset with essential gene data</li>
-        <li><em>“and column”</em>: <code class="highlighter-rouge">Column: 1</code> (as in this dataset the first column contains gene names)</li>
+        <li><em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code> (as in this dataset the first column contains gene names)</li>
       </ul>
     </li>
   </ol>
@@ -1816,7 +1816,7 @@ thrB 0.177920686 39.389847   FALSE TRUE FALSE
 
 <p>Once the tool is finished we will find that there are no essential genes deleted from our assembly. So our version of <em>E. coli</em> C is safe!</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CP020543.1	3253711	3288956	CP020543.1	3258389	3259999	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CP020543.1	3253711	3288956	CP020543.1	3258389	3259999	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE
 CP020543.1	3253711	3288956	CP020543.1	3268031	3271912	entF	0	-	3881	entF	0.121329212	25.69567228	FALSE	TRUE	FALSE
 CP020543.1	3289091	3304937	CP020543.1	3303016	3305253	nfrB	0	+	1921	nfrB	0.124218052	26.40641127	FALSE	TRUE	FALSE
 CP024090.1	3233375	3283074	CP024090.1	3238053	3239663	entE	0	-	1610	entE	0.105524519	21.77552317	FALSE	TRUE	FALSE
@@ -1896,7 +1896,7 @@ LT906474.1	3288166	3304009	LT906474.1	3288157	3289530	cusC	0	-	1364	cusC	0.23799
     title = "Making sense of a newly assembled genome (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

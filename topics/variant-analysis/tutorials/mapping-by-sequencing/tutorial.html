@@ -618,7 +618,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -732,7 +732,7 @@ in a late-flowering mutant line of <em>Arabidopsis thaliana</em>.</p>
 in the command line package <em>SHOREmap</em>.
 The data used in this tutorial represent a subsample of the
 <a href="http://bioinfo.mpipz.mpg.de/shoremap/examples.html">SHOREmap proof-of-principle data</a>
-(specifically of the <code class="highlighter-rouge">OCF2</code> and <code class="highlighter-rouge">Ler</code> datasets).</p>
+(specifically of the <code class="language-plaintext highlighter-rouge">OCF2</code> and <code class="language-plaintext highlighter-rouge">Ler</code> datasets).</p>
 </blockquote>
 
 <p>The mutant line was obtained from a mutagenesis screen on the <strong>Col</strong>umbia
@@ -790,7 +790,7 @@ and
     <li>Specify the genome that was used at the <span class="notranslate">reads</span> <span class="notranslate">mapping</span> step
       <ol>
         <li>Click on <strong>Edit attributes</strong> (the pencil icon displayed with the dataset)</li>
-        <li>As the <strong>Database/Build</strong> select <code class="highlighter-rouge">Arabidopsis thaliana TAIR10</code></li>
+        <li>As the <strong>Database/Build</strong> select <code class="language-plaintext highlighter-rouge">Arabidopsis thaliana TAIR10</code></li>
         <li><strong>Save</strong> the edited attributes</li>
       </ol>
     </li>
@@ -805,30 +805,30 @@ genome is not available as a built-in genome on your <span class="notranslate">G
 
       <ol>
         <li>Upload the reference genome using the URL:
-<code class="highlighter-rouge">https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas</code></li>
+<code class="language-plaintext highlighter-rouge">https://www.arabidopsis.org/download_files/Genes/TAIR10_genome_release/TAIR10_chromosome_files/TAIR10_chr_all.fas</code></li>
         <li>Use <strong>Replace parts of text</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to truncate the title
 lines in the fasta dataset to just the bare chromosome names. Set:
           <ul>
             <li>
-              <p>the <strong>Find pattern</strong> to <code class="highlighter-rouge">^&gt;(\w+).*</code></p>
+              <p>the <strong>Find pattern</strong> to <code class="language-plaintext highlighter-rouge">^&gt;(\w+).*</code></p>
 
               <p>This will find entire fasta title lines, or more specifically, any
-lines starting with <code class="highlighter-rouge">&gt;</code> followed by at least one letter, digit or
+lines starting with <code class="language-plaintext highlighter-rouge">&gt;</code> followed by at least one letter, digit or
 underscore.</p>
             </li>
             <li>
-              <p>the <strong>Replace with</strong> pattern to <code class="highlighter-rouge">&gt;chr$1</code></p>
+              <p>the <strong>Replace with</strong> pattern to <code class="language-plaintext highlighter-rouge">&gt;chr$1</code></p>
 
-              <p>The <code class="highlighter-rouge">$1</code> in it refers to the parenthesized part of the find pattern,
+              <p>The <code class="language-plaintext highlighter-rouge">$1</code> in it refers to the parenthesized part of the find pattern,
 <em>i.e.</em>, just the substring of letters/digits/underscores directly
-following the <code class="highlighter-rouge">&gt;</code>.</p>
+following the <code class="language-plaintext highlighter-rouge">&gt;</code>.</p>
             </li>
             <li>
-              <p><strong>Find-Pattern is a regular <span class="notranslate">expression</span></strong> to <code class="highlighter-rouge">Yes</code></p>
+              <p><strong>Find-Pattern is a regular <span class="notranslate">expression</span></strong> to <code class="language-plaintext highlighter-rouge">Yes</code></p>
             </li>
           </ul>
         </li>
-        <li>Make sure the datatype of the resulting dataset is set to <code class="highlighter-rouge">fasta</code> and
+        <li>Make sure the datatype of the resulting dataset is set to <code class="language-plaintext highlighter-rouge">fasta</code> and
 give the dataset a nice name (<em>e.g.</em>, TAIR10 reference).</li>
         <li>At this point you can delete the originally downloaded dataset.</li>
       </ol>
@@ -873,7 +873,7 @@ Otherwise, download and preprocess the reference as described under
 Data Preparation and use it as a <strong>genome from my history</strong>.</p>
         </li>
         <li>As the <strong>Aligned <span class="notranslate">reads</span> input datasets</strong> for the analysis select the two
-BAM datasets representing the two samples (use the <code class="highlighter-rouge">Control</code> key on the
+BAM datasets representing the two samples (use the <code class="language-plaintext highlighter-rouge">Control</code> key on the
 keyboard to select multiple datasets from the list.</li>
         <li><strong>Execute</strong> the job</li>
       </ul>
@@ -937,18 +937,18 @@ mutation.</p>
 
   <p>In the <strong>MiModD NacreousMap</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> interface, set</p>
   <ul>
-    <li><strong>type of <span class="notranslate">mapping</span> analysis to perform</strong> to <code class="highlighter-rouge">Variant Allele Frequency
+    <li><strong>type of <span class="notranslate">mapping</span> analysis to perform</strong> to <code class="language-plaintext highlighter-rouge">Variant Allele Frequency
   <span class="notranslate">Mapping</span></code> and</li>
-    <li><strong>data source to use</strong> to <code class="highlighter-rouge">VCF file of variants</code>.</li>
+    <li><strong>data source to use</strong> to <code class="language-plaintext highlighter-rouge">VCF file of variants</code>.</li>
     <li>As the <strong>input file with variants to analyze</strong> select your extracted
 variants VCF dataset obtained in the previous step.</li>
-    <li>As the <strong><span class="notranslate">mapping</span> sample name</strong> use <code class="highlighter-rouge">outcrossed F2</code>.</li>
+    <li>As the <strong><span class="notranslate">mapping</span> sample name</strong> use <code class="language-plaintext highlighter-rouge">outcrossed F2</code>.</li>
     <li>Leave the <strong>name of the related parent sample</strong> input field empty because
 in this two-sample there is no such sample.</li>
-    <li>As the <strong>name of the unrelated parent sample</strong> specify <code class="highlighter-rouge">Ler</code>.
+    <li>As the <strong>name of the unrelated parent sample</strong> specify <code class="language-plaintext highlighter-rouge">Ler</code>.
       <blockquote class="comment">
         <h3 id="comment-sample-roles"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Sample roles</h3>
-        <p>In <code class="highlighter-rouge">Variant Allele Frequency <span class="notranslate">Mapping</span></code> mode the tool requires:</p>
+        <p>In <code class="language-plaintext highlighter-rouge">Variant Allele Frequency <span class="notranslate">Mapping</span></code> mode the tool requires:</p>
         <ul>
           <li>a <strong><span class="notranslate">mapping</span> sample</strong>, which corresponds to the recombinant pool, from
 which allele frequencies should be calculated</li>
@@ -985,7 +985,7 @@ of the data.</p>
 which interval on which chromosome would you expect the causative
 mutation?</li>
       <li>Are the per-marker scatter plots and the histogram plots in agreement?</li>
-      <li>What about those <code class="highlighter-rouge">No markers found!</code> messages (you saw them, right?)
+      <li>What about those <code class="language-plaintext highlighter-rouge">No markers found!</code> messages (you saw them, right?)
 that the tool printed?</li>
     </ol>
 
@@ -1052,17 +1052,17 @@ extracted ones that fulfill all three criteria. In the tool interface,</p>
 history</li>
     <li>add a <strong>Sample-specific Filter</strong> and set its
       <ul>
-        <li><strong>sample</strong> to <code class="highlighter-rouge">outcrossed F2</code></li>
-        <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="highlighter-rouge">1/1</code></li>
+        <li><strong>sample</strong> to <code class="language-plaintext highlighter-rouge">outcrossed F2</code></li>
+        <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="language-plaintext highlighter-rouge">1/1</code></li>
       </ul>
 
       <p>These settings will make the filter retain only variants for which the F2
-pool has a <code class="highlighter-rouge">1/1</code>, <em>i.e.</em>, homozygous mutant genotype.</p>
+pool has a <code class="language-plaintext highlighter-rouge">1/1</code>, <em>i.e.</em>, homozygous mutant genotype.</p>
     </li>
     <li>add another <strong>Sample-specific Filter</strong> and set its
       <ul>
-        <li><strong>sample</strong> to <code class="highlighter-rouge">Ler</code></li>
-        <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="highlighter-rouge">0/0</code></li>
+        <li><strong>sample</strong> to <code class="language-plaintext highlighter-rouge">Ler</code></li>
+        <li><strong>genotype pattern(s) for the inclusion of variants</strong> to <code class="language-plaintext highlighter-rouge">0/0</code></li>
       </ul>
 
       <p>This filter will retain only variants for which the <span class="notranslate">mapping</span> strain sample
@@ -1070,7 +1070,7 @@ has a homozygous wt genotype.</p>
     </li>
     <li>add a <strong>Region Filter</strong> and set its
       <ul>
-        <li><strong>Chromosome</strong> to <code class="highlighter-rouge">chr2</code></li>
+        <li><strong>Chromosome</strong> to <code class="language-plaintext highlighter-rouge">chr2</code></li>
         <li><strong>Region Start</strong> to 18000000</li>
         <li><strong>Region End</strong> to 19000000</li>
       </ul>
@@ -1134,23 +1134,23 @@ with predicted functional effects.</p>
   <h3 id="hands_on-hands-on-variant-annotation"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Variant Annotation</h3>
 
   <p>To annotate our variants we are going to use <strong>SnpEff</strong> with the
-<code class="highlighter-rouge">athalianaTair10</code> genome database as the source of functional genomic
+<code class="language-plaintext highlighter-rouge">athalianaTair10</code> genome database as the source of functional genomic
 annotations, then generate a human-friendly variant report with the
 <strong>MiModD Report Variants</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
   <ol>
     <li>
       <p>Use <strong>SnpEff Download</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (<span class="notranslate">Galaxy</span> tool version 4.1.0) to
-download genome database <code class="highlighter-rouge">athalianaTair10</code>.</p>
+download genome database <code class="language-plaintext highlighter-rouge">athalianaTair10</code>.</p>
 
       <blockquote class="comment">
         <h3 id="comment-snpeff-versions"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> SnpEff versions</h3>
         <p>SnpEff genome databases can only be used with the specific version of
-SnpEff they were built for. Make sure you are using version <code class="highlighter-rouge">4.1.0</code> of
+SnpEff they were built for. Make sure you are using version <code class="language-plaintext highlighter-rouge">4.1.0</code> of
 <strong>SnpEff Download</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in this and of <strong>SnpEff Variant
 effect and annotation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the next step.
 If your <span class="notranslate">Galaxy</span> server offers newer versions of these tools by default,
-you may be able to request version <code class="highlighter-rouge">4.1.0</code> explicitly using the
+you may be able to request version <code class="language-plaintext highlighter-rouge">4.1.0</code> explicitly using the
 <strong>Versions</strong> button at the top right of the tool interface.</p>
       </blockquote>
     </li>
@@ -1158,10 +1158,10 @@ you may be able to request version <code class="highlighter-rouge">4.1.0</code> 
 set:
       <ul>
         <li><strong>Sequence changes (SNPs, MNPs, InDels)</strong> to your filtered VCF dataset</li>
-        <li><strong>Genome source</strong> to <code class="highlighter-rouge">Reference genome from your history</code></li>
+        <li><strong>Genome source</strong> to <code class="language-plaintext highlighter-rouge">Reference genome from your history</code></li>
         <li><strong>SnpEff4.1 Genome Data</strong> to your just downloaded genome dataset</li>
         <li>
-          <p>under <strong>Annotation options</strong> check <code class="highlighter-rouge">Use 'EFF' field compatible with
+          <p>under <strong>Annotation options</strong> check <code class="language-plaintext highlighter-rouge">Use 'EFF' field compatible with
 older versions (instead of 'ANN')</code></p>
 
           <p>This last setting is required for compatibility of the resulting dataset
@@ -1178,9 +1178,9 @@ report by</p>
       <ul>
         <li><strong>The VCF input with the variants to be reported</strong> to the annotated
 variants dataset generated by <strong>SnpEff</strong></li>
-        <li>the <strong>Format to use for the report</strong> to <code class="highlighter-rouge">HTML</code></li>
+        <li>the <strong>Format to use for the report</strong> to <code class="language-plaintext highlighter-rouge">HTML</code></li>
         <li>
-          <p><strong>Species</strong> to <code class="highlighter-rouge">A. thaliana</code>.</p>
+          <p><strong>Species</strong> to <code class="language-plaintext highlighter-rouge">A. thaliana</code>.</p>
 
           <p>The species information can be used by the tool to enrich the output
 with species-specific database and genome browser links.</p>
@@ -1194,7 +1194,7 @@ lists of candidate variants like in this example. If the input VCF
 contains &gt; 1000 variants, the relatively large size of the reports and
 slow loading in the browser may become annoying. In this case, or if you
 experience formatting problems with the generated html in your browser,
-it may be better to choose <code class="highlighter-rouge">Tab-separated plain text</code> as the report
+it may be better to choose <code class="language-plaintext highlighter-rouge">Tab-separated plain text</code> as the report
 format although the output will then lack those convenient hyperlinks.</p>
       </blockquote>
     </li>
@@ -1292,7 +1292,7 @@ samples.</p>
     title = "Mapping and molecular identification of phenotype-causing mutations (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/variant-analysis/tutorials/mapping-by-sequencing/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

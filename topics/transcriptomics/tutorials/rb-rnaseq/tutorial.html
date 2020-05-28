@@ -466,7 +466,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -715,7 +715,7 @@ Sailfish indexes input transcriptome for a fixed <em>k</em>-mer length and compa
   <p><img src="../../images/quasi_aln.png" alt="quasi-alignment" /></p>
 
   <p><strong>Quasi-alignment of <span class="notranslate">reads</span> in Sailfish</strong><br />
-In Sailfish version <a href="https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0">0.7.0</a> and up transcriptome is concatenated into a single sequence using <code class="highlighter-rouge">$</code> separators from which a <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a> and a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> are constructed. A <em>k</em>-mer from an <span class="notranslate">RNA</span>seq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">paper</a>. Image from  <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">Srivastava:2015</a></p>
+In Sailfish version <a href="https://github.com/kingsfordgroup/sailfish/releases/tag/v0.7.0">0.7.0</a> and up transcriptome is concatenated into a single sequence using <code class="language-plaintext highlighter-rouge">$</code> separators from which a <a href="https://en.wikipedia.org/wiki/Suffix_array">suffix array</a> and a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> are constructed. A <em>k</em>-mer from an <span class="notranslate">RNA</span>seq read (green) is looked up in the hash table, which immediately gives its position in the suffix array allowing to extend the march as described in the legend and the <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">paper</a>. Image from  <a href="http://biorxiv.org/content/biorxiv/early/2015/10/22/029652.full.pdf">Srivastava:2015</a></p>
 </blockquote>
 
 <p><a href="https://pachterlab.github.io/kallisto/">Kallisto</a> also utilizes <em>k</em>-mer matching but uses a different data structure. It constructs a <a href="https://en.wikipedia.org/wiki/De_Bruijn_graph">De Bruijn graph</a> from transcriptome input (pane <strong>b</strong> of the figure below). This graph is different from De Bruijn graphs used for genome assembly in that its nodes are <em>k</em>-mers and transcripts correspond to paths through the graph. To accommodate multiple transcripts that can lay along the same path (or sub-path) the paths are “colored” with each transcript given a distinct “color” (in genome assembly the graph is built from the <span class="notranslate">reads</span> and nodes usually correspond to overlaps between <em>k</em>-mers forming incoming and outgoing edges). Non-branching sections of the graph that have identical coloring are “glued” into contigs. Finally a <a href="https://en.wikipedia.org/wiki/Hash_table">hash table</a> is built that stores the position of each transcriptome <em>k</em>-mer within the graph:</p>
@@ -848,7 +848,7 @@ to test for differential gene <span class="notranslate">expression</span>.</p>
 <h4 id="loading-the-data-and-create-dataset-collections">Loading the data and create dataset collections</h4>
 
 <blockquote>
-  <p>Go to the data library (ask your instructor) and select all fastq files. Then Click <code class="highlighter-rouge">to History</code> button:</p>
+  <p>Go to the data library (ask your instructor) and select all fastq files. Then Click <code class="language-plaintext highlighter-rouge">to History</code> button:</p>
 
   <p><img src="../../images/rnaseq_library.png" alt="Data libraries" /></p>
 
@@ -868,13 +868,13 @@ to test for differential gene <span class="notranslate">expression</span>.</p>
 <h4 id="mapping-with-tophat2"><span class="notranslate">Mapping</span> with TopHat2</h4>
 
 <blockquote>
-  <p>In this case the input to TopHat is <strong>not</strong> individual datasets, but a collection instead. The <a href="https://vimeo.com/163625221">video</a> above shows how to generate collection. Since we have created two collection as was described above, we will used them as inputs (note that <strong>Is this single-end or paired-end data?</strong> is set to <code class="highlighter-rouge">Paired-end (as collection)</code>). Make sure that the top part of TopHat interface looks like in the image below. Here the following parameters are set:</p>
+  <p>In this case the input to TopHat is <strong>not</strong> individual datasets, but a collection instead. The <a href="https://vimeo.com/163625221">video</a> above shows how to generate collection. Since we have created two collection as was described above, we will used them as inputs (note that <strong>Is this single-end or paired-end data?</strong> is set to <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code>). Make sure that the top part of TopHat interface looks like in the image below. Here the following parameters are set:</p>
 
   <ul>
-    <li><strong>Mean Inner Distance between Mate Pairs</strong> = <code class="highlighter-rouge">28</code> This is because paired <span class="notranslate">reads</span> are 100 bp and mean insert size is 228 bp so that 228 - (100 + 100) = 28</li>
-    <li><strong>Use a built in reference genome or own from your history</strong> = <code class="highlighter-rouge">Use a build-in genome</code> and <code class="highlighter-rouge">dm3</code> is selected. This is because the <span class="notranslate">reads</span> are from <em>D. melanogaster</em>.</li>
-    <li><strong>TopHat settings to use</strong> = <code class="highlighter-rouge">Full parameter list</code> This is done to be able to specify the strandedness of the library.</li>
-    <li><strong>Library Type</strong> = <code class="highlighter-rouge">FR First Strand</code></li>
+    <li><strong>Mean Inner Distance between Mate Pairs</strong> = <code class="language-plaintext highlighter-rouge">28</code> This is because paired <span class="notranslate">reads</span> are 100 bp and mean insert size is 228 bp so that 228 - (100 + 100) = 28</li>
+    <li><strong>Use a built in reference genome or own from your history</strong> = <code class="language-plaintext highlighter-rouge">Use a build-in genome</code> and <code class="language-plaintext highlighter-rouge">dm3</code> is selected. This is because the <span class="notranslate">reads</span> are from <em>D. melanogaster</em>.</li>
+    <li><strong>TopHat settings to use</strong> = <code class="language-plaintext highlighter-rouge">Full parameter list</code> This is done to be able to specify the strandedness of the library.</li>
+    <li><strong>Library Type</strong> = <code class="language-plaintext highlighter-rouge">FR First Strand</code></li>
   </ul>
 
   <p><img src="../../images/tophat_interface.png" alt="TopHat interface" /></p>
@@ -895,7 +895,7 @@ to test for differential gene <span class="notranslate">expression</span>.</p>
 
   <p><img src="../../images/accepted_hits_2.png" alt="Accepted hits c2-r1x and D. melanogaster button" /></p>
 
-  <p>Finally, use <strong>D. melanogaster</strong> link (highlighted above) and follow the on-screen instructions. By focusing IGV on genomic position <code class="highlighter-rouge">chrX:11,897,111-11,920,446</code> you will be able to see spliced alignments produced by TopHat:</p>
+  <p>Finally, use <strong>D. melanogaster</strong> link (highlighted above) and follow the on-screen instructions. By focusing IGV on genomic position <code class="language-plaintext highlighter-rouge">chrX:11,897,111-11,920,446</code> you will be able to see spliced alignments produced by TopHat:</p>
 
   <p><img src="../../images/igv_tophat.png" alt="IGV TopHat" /></p>
 
@@ -910,39 +910,39 @@ to test for differential gene <span class="notranslate">expression</span>.</p>
 
 <h4 id="gene-based-read-counting-with-htseq-count">Gene-based read counting with HTseq-count</h4>
 
-<p><a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html"><code class="highlighter-rouge">HTSeq-count</code></a> is one of the most popular tools for gene quantification. <code class="highlighter-rouge">HTseq-count</code> gives you multiple choices on how to handle read <span class="notranslate">mapping</span> to multiple locations, <span class="notranslate">reads</span> overlapping introns, or <span class="notranslate">reads</span> that overlap more than one genomic feature:</p>
+<p><a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html"><code class="language-plaintext highlighter-rouge">HTSeq-count</code></a> is one of the most popular tools for gene quantification. <code class="language-plaintext highlighter-rouge">HTseq-count</code> gives you multiple choices on how to handle read <span class="notranslate">mapping</span> to multiple locations, <span class="notranslate">reads</span> overlapping introns, or <span class="notranslate">reads</span> that overlap more than one genomic feature:</p>
 
 <blockquote>
   <p><a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html"><img src="../../images/htseq_count.png" alt="HTseq-count read/feature overlap modes" /></a></p>
 
-  <p><strong><code class="highlighter-rouge">HTseq-count</code> read/feature overlap modes</strong><br />
-The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite offers three different modes to handle details of read–feature overlaps that are depicted here. The default of featureCounts is the behavior of the union option. Image is from <a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html">HTseq documentation</a>; Caption by <a href="http://chagall.med.cornell.edu/RNASEQcourse/">Dündar:2015</a></p>
+  <p><strong><code class="language-plaintext highlighter-rouge">HTseq-count</code> read/feature overlap modes</strong><br />
+The <code class="language-plaintext highlighter-rouge">htseq-count</code> script of the HTSeq suite offers three different modes to handle details of read–feature overlaps that are depicted here. The default of featureCounts is the behavior of the union option. Image is from <a href="https://www-huber.embl.de/users/anders/HTSeq/doc/count.html">HTseq documentation</a>; Caption by <a href="http://chagall.med.cornell.edu/RNASEQcourse/">Dündar:2015</a></p>
 </blockquote>
 
-<p>Before we can use <code class="highlighter-rouge">HTseq-count</code> we need to download gene annotations for version <code class="highlighter-rouge">dm3</code> of the <em>Drosophila melanogaster</em> genome. We use version <code class="highlighter-rouge">dm3</code> because it is the same genome we have mapped <span class="notranslate">reads</span> against during the TopHat step.</p>
+<p>Before we can use <code class="language-plaintext highlighter-rouge">HTseq-count</code> we need to download gene annotations for version <code class="language-plaintext highlighter-rouge">dm3</code> of the <em>Drosophila melanogaster</em> genome. We use version <code class="language-plaintext highlighter-rouge">dm3</code> because it is the same genome we have mapped <span class="notranslate">reads</span> against during the TopHat step.</p>
 
 <h4 id="getting-drosophila-malanogaster-gene-annotation-from-ucsc">Getting <em>Drosophila malanogaster</em> gene annotation from UCSC</h4>
 
 <blockquote>
-  <p>Select <strong>UCSC Main</strong> from <strong>Get Data</strong> section of the menu. Within the UCSC Genome Browser interface set parameters as shown below. In particular make sure that <strong>assembly</strong> is set ti <code class="highlighter-rouge">dm3</code> and <strong>output format</strong> is set to <code class="highlighter-rouge">GTF</code>. Click <strong>get output</strong>.
+  <p>Select <strong>UCSC Main</strong> from <strong>Get Data</strong> section of the menu. Within the UCSC Genome Browser interface set parameters as shown below. In particular make sure that <strong>assembly</strong> is set ti <code class="language-plaintext highlighter-rouge">dm3</code> and <strong>output format</strong> is set to <code class="language-plaintext highlighter-rouge">GTF</code>. Click <strong>get output</strong>.
 <a href="../../images/ucsc_dm3.png"><img src="../../images/ucsc_dm3.png" alt="UCSC table browser" /></a></p>
 
   <p>This <a href="https://www.ensembl.org/info/website/upload/gff.html">GTF</a> dataset will be used one of the input for HTseq-count.</p>
 </blockquote>
 
-<p><code class="highlighter-rouge">HTseq-count</code> takes two inputs: (1) mapped <span class="notranslate">reads</span> in BAM format and (2) a GTF dataset containing annotation of genes. Using these inputs it will compute the number of <span class="notranslate">reads</span> per gene.</p>
+<p><code class="language-plaintext highlighter-rouge">HTseq-count</code> takes two inputs: (1) mapped <span class="notranslate">reads</span> in BAM format and (2) a GTF dataset containing annotation of genes. Using these inputs it will compute the number of <span class="notranslate">reads</span> per gene.</p>
 
 <h4 id="using-htseq-count-in-galaxy">Using HTseq-count in <span class="notranslate">Galaxy</span></h4>
 
 <blockquote>
-  <p><code class="highlighter-rouge">htseq-count</code> needs strand information to proceed. The strand information is specified as <code class="highlighter-rouge">+</code>, <code class="highlighter-rouge">-</code>, or <code class="highlighter-rouge">.</code> (unknown) in a GTF dataset. <code class="highlighter-rouge">htseq-count</code> does not like <code class="highlighter-rouge">.</code> and will generate an error if such unstranded features appear in data. To prevent these errors from happening we will filter them out from GTF file using <strong>Filter</strong> tool from <strong>Filter and Sort</strong> section of tool menu. Here <code class="highlighter-rouge">c7 != "."</code> means that we need to filter all rows where strand column (column #7) contains a dot:</p>
+  <p><code class="language-plaintext highlighter-rouge">htseq-count</code> needs strand information to proceed. The strand information is specified as <code class="language-plaintext highlighter-rouge">+</code>, <code class="language-plaintext highlighter-rouge">-</code>, or <code class="language-plaintext highlighter-rouge">.</code> (unknown) in a GTF dataset. <code class="language-plaintext highlighter-rouge">htseq-count</code> does not like <code class="language-plaintext highlighter-rouge">.</code> and will generate an error if such unstranded features appear in data. To prevent these errors from happening we will filter them out from GTF file using <strong>Filter</strong> tool from <strong>Filter and Sort</strong> section of tool menu. Here <code class="language-plaintext highlighter-rouge">c7 != "."</code> means that we need to filter all rows where strand column (column #7) contains a dot:</p>
 
   <p><img src="../../images/filter_gtf.png" alt="Filter parameters" /></p>
 
   <table>
     <tbody>
       <tr>
-        <td>Select <strong>htseq-count</strong> from <strong>NGS: <span class="notranslate">RNA</span> analysis</strong> section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable <code class="highlighter-rouge">htseq-count</code> to see collections, you need to select the ‘folder’ button. In the case of this particular <span class="notranslate">Galaxy</span> history we will need to run <code class="highlighter-rouge">htseq-count</code> twice. Once on TopHat alignemnts for collection <strong>c1</strong> (dataset #37; shown below) and then on alignments for collection <strong>c2</strong> (dataset # 57).</td>
+        <td>Select <strong>htseq-count</strong> from <strong>NGS: <span class="notranslate">RNA</span> analysis</strong> section on the left side of the menu. Set parameters as shown below. The red arrow points that to enable <code class="language-plaintext highlighter-rouge">htseq-count</code> to see collections, you need to select the ‘folder’ button. In the case of this particular <span class="notranslate">Galaxy</span> history we will need to run <code class="language-plaintext highlighter-rouge">htseq-count</code> twice. Once on TopHat alignemnts for collection <strong>c1</strong> (dataset #37; shown below) and then on alignments for collection <strong>c2</strong> (dataset # 57).</td>
         <td> </td>
       </tr>
       <tr>
@@ -955,9 +955,9 @@ The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite
   <p>This will generate read counts per gene.</p>
 </blockquote>
 
-<h4 id="normalizing-read-counts-and-computing-differential-expression-with-deseq2">Normalizing read counts and computing differential <span class="notranslate">expression</span> with <code class="highlighter-rouge">DESeq2</code></h4>
+<h4 id="normalizing-read-counts-and-computing-differential-expression-with-deseq2">Normalizing read counts and computing differential <span class="notranslate">expression</span> with <code class="language-plaintext highlighter-rouge">DESeq2</code></h4>
 
-<p><code class="highlighter-rouge">DESeq2</code> takes read counts produced by <code class="highlighter-rouge">HTseq-count</code> and apply size factor normalization. Specifically, <code class="highlighter-rouge">DESeq2</code> will:</p>
+<p><code class="language-plaintext highlighter-rouge">DESeq2</code> takes read counts produced by <code class="language-plaintext highlighter-rouge">HTseq-count</code> and apply size factor normalization. Specifically, <code class="language-plaintext highlighter-rouge">DESeq2</code> will:</p>
 
 <ul>
   <li>For each gene, compute the geometric mean of read counts across all samples;</li>
@@ -971,11 +971,11 @@ The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite
 <h4 id="deseq2-in-galaxy">DESeq2 in <span class="notranslate">Galaxy</span></h4>
 
 <blockquote>
-  <p>The <code class="highlighter-rouge">DESeq2</code> <span class="notranslate">Galaxy</span>’s interface is shown below. <code class="highlighter-rouge">DESeq2</code> allows to incorporate multiple <em>factors</em> in the analysis. In our case we only have one factor, which we call <strong>Conditions</strong>. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first <strong>factor level</strong>, while condition 2 will be the second <strong>factor level</strong>. Here the input for this first factor level is set to a collection <code class="highlighter-rouge">84: htseq-count on collection 37</code> and the input for the second input is set to <code class="highlighter-rouge">92: htseq-count on collection 57</code>. Make sure that <strong>Visualising the analysis results</strong> is set to <code class="highlighter-rouge">Yes</code>:</p>
+  <p>The <code class="language-plaintext highlighter-rouge">DESeq2</code> <span class="notranslate">Galaxy</span>’s interface is shown below. <code class="language-plaintext highlighter-rouge">DESeq2</code> allows to incorporate multiple <em>factors</em> in the analysis. In our case we only have one factor, which we call <strong>Conditions</strong>. This is because we are trying to find genes that are differentially expressed between two conditions. The first condition will the first <strong>factor level</strong>, while condition 2 will be the second <strong>factor level</strong>. Here the input for this first factor level is set to a collection <code class="language-plaintext highlighter-rouge">84: htseq-count on collection 37</code> and the input for the second input is set to <code class="language-plaintext highlighter-rouge">92: htseq-count on collection 57</code>. Make sure that <strong>Visualising the analysis results</strong> is set to <code class="language-plaintext highlighter-rouge">Yes</code>:</p>
 
   <p><img src="../../images/deseq2_interface.png" alt="DESeq2 parameters" /></p>
 
-  <p>This will produce output as shown below. The columns are: (<strong>1</strong>) gene identifier, (<strong>2</strong>) mean normalised counts, averaged over all samples from both conditions, (<strong>3</strong>) logarithm (base 2) of the fold change, (<strong>4</strong>) the standard error estimate for the log2 fold change estimate, (<strong>5</strong>) <a href="https://en.wikipedia.org/wiki/Wald_test">Wald test</a> statistic, (<strong>6</strong>) p value for the statistical significance of this change, and (<strong>7</strong>) <em>p</em>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="https://en.wikipedia.org/wiki/False_discovery_rate">FDR</a>). There is only one gene with significant change in gene <span class="notranslate">expression</span> between conditions: <code class="highlighter-rouge">CG1803-RC</code> with <em>p</em>-value = 1.6x10<sup>-05</sup></p>
+  <p>This will produce output as shown below. The columns are: (<strong>1</strong>) gene identifier, (<strong>2</strong>) mean normalised counts, averaged over all samples from both conditions, (<strong>3</strong>) logarithm (base 2) of the fold change, (<strong>4</strong>) the standard error estimate for the log2 fold change estimate, (<strong>5</strong>) <a href="https://en.wikipedia.org/wiki/Wald_test">Wald test</a> statistic, (<strong>6</strong>) p value for the statistical significance of this change, and (<strong>7</strong>) <em>p</em>-value adjusted for multiple testing with the Benjamini-Hochberg procedure which controls false discovery rate (<a href="https://en.wikipedia.org/wiki/False_discovery_rate">FDR</a>). There is only one gene with significant change in gene <span class="notranslate">expression</span> between conditions: <code class="language-plaintext highlighter-rouge">CG1803-RC</code> with <em>p</em>-value = 1.6x10<sup>-05</sup></p>
 
   <p><img src="../../images/deseq2_output.png" alt="DESeq2 output" /></p>
 
@@ -1028,7 +1028,7 @@ The <code class="highlighter-rouge">htseq-count</code> script of the HTSeq suite
     title = "Reference-based RNAseq data analysis (long) (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rb-rnaseq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

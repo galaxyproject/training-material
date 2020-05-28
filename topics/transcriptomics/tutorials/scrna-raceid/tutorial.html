@@ -994,7 +994,7 @@
     <li>
       <p>Import the file from <a href="https://zenodo.org/record/1511582">Zenodo</a> or from the shared data library</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1511582/files/intestinalData.tsv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1511582/files/intestinalData.tsv
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1050,7 +1050,7 @@
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -1096,8 +1096,8 @@
     <li><strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to select”</em>: imported tabular file</li>
-        <li><em>“Operation”</em>: <code class="highlighter-rouge">Keep first lines</code></li>
-        <li><em>“Number of lines”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep first lines</code></li>
+        <li><em>“Number of lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li><strong>Transpose</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
@@ -1120,14 +1120,14 @@
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output of <strong>Transpose</strong></li>
         <li>
-          <p><em>“SED Program”</em>: <code class="highlighter-rouge">s/_[0-9]+//</code></p>
+          <p><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/_[0-9]+//</code></p>
 
-          <p>The above text is a regular <span class="notranslate">expression</span> used to match on anything that contains a <code class="highlighter-rouge">_</code> followed by a number, and removing it.</p>
+          <p>The above text is a regular <span class="notranslate">expression</span> used to match on anything that contains a <code class="language-plaintext highlighter-rouge">_</code> followed by a number, and removing it.</p>
         </li>
       </ul>
     </li>
     <li>
-      <p>Inspect the generated file and verify that we have the 5 phenotypes without <code class="highlighter-rouge">_</code> followed by a number</p>
+      <p>Inspect the generated file and verify that we have the 5 phenotypes without <code class="language-plaintext highlighter-rouge">_</code> followed by a number</p>
 
       <blockquote class="question">
         <h3 id="question-questions-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1142,18 +1142,18 @@
     <li><strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: output of <strong>Text transformation</strong></li>
-        <li><em>“Group by fields”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Input file has a header line”</em> : <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Print header line”</em>:<code class="highlighter-rouge">No</code></li>
-        <li><em>“Sort input”</em>:<code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Print all fields from input file”</em>:<code class="highlighter-rouge">No</code></li>
-        <li><em>“Ignore case when grouping”</em>:<code class="highlighter-rouge">No</code></li>
+        <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Input file has a header line”</em> : <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Print header line”</em>:<code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Sort input”</em>:<code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Print all fields from input file”</em>:<code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Ignore case when grouping”</em>:<code class="language-plaintext highlighter-rouge">No</code></li>
         <li>In <em>“Operation to perform on each group”</em>
           <ul>
             <li>In <em>“1: Operation to perform on each group”</em>
               <ul>
-                <li><em>“Type”</em>: <code class="highlighter-rouge">count</code></li>
-                <li><em>“On column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+                <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">count</code></li>
+                <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
               </ul>
             </li>
           </ul>
@@ -1199,13 +1199,13 @@
   <ol>
     <li><strong>Filtering, Normalisation, and Confounder Removal using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Matrix”</em>: <code class="highlighter-rouge">intestinal</code> (Input dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Count Matrix”</em>: <code class="language-plaintext highlighter-rouge">intestinal</code> (Input dataset)</li>
         <li>In <em>“Filtering”</em>:
           <ul>
-            <li><em>“Min Transcripts”</em>: <code class="highlighter-rouge">3000</code></li>
-            <li><em>“Min <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">5</code></li>
-            <li><em>“Min Cells”</em>: <code class="highlighter-rouge">5</code></li>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Min Transcripts”</em>: <code class="language-plaintext highlighter-rouge">3000</code></li>
+            <li><em>“Min <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+            <li><em>“Min Cells”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1400,20 +1400,20 @@ As the variables of the dataset, the more genes included, the more complex the m
   <ol>
     <li><strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Filtering, Normalisation, and Confounder Removal using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Filtering, Normalisation, and Confounder Removal using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Clustering”</em>:
           <ul>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>In <em>“Outliers”</em>:
           <ul>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>In <em>“tSNE and FR”</em>:
           <ul>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1608,7 +1608,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The <em>Genes per Cluster</em> dataset is already sorted by cluster number and then by the adjusted p-value. Scrolling down to the first gene that is in cluster 5, we see that <em>Dmbt11</em> is the most significant gene in that cluster with an adjusted p-value of <code class="highlighter-rouge">2e-30</code>.</li>
+      <li>The <em>Genes per Cluster</em> dataset is already sorted by cluster number and then by the adjusted p-value. Scrolling down to the first gene that is in cluster 5, we see that <em>Dmbt11</em> is the most significant gene in that cluster with an adjusted p-value of <code class="language-plaintext highlighter-rouge">2e-30</code>.</li>
       <li>Cluster 11 appears to have the most genes with a fold-change greater than 30.</li>
     </ol>
 
@@ -1682,8 +1682,8 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
     <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li><code class="highlighter-rouge">c13</code> and <code class="highlighter-rouge">c14</code></li>
-      <li><code class="highlighter-rouge">c13</code> appears between <code class="highlighter-rouge">c8</code> and <code class="highlighter-rouge">c1</code>, suggesting that the cells in <code class="highlighter-rouge">c13</code> share a closer similarity to the cells in these clusters, which they were most likely extracted from. The other new cluster <code class="highlighter-rouge">c14</code> is between <code class="highlighter-rouge">c11</code> and <code class="highlighter-rouge">c6</code>, suggesting similar points of extraction.</li>
+      <li><code class="language-plaintext highlighter-rouge">c13</code> and <code class="language-plaintext highlighter-rouge">c14</code></li>
+      <li><code class="language-plaintext highlighter-rouge">c13</code> appears between <code class="language-plaintext highlighter-rouge">c8</code> and <code class="language-plaintext highlighter-rouge">c1</code>, suggesting that the cells in <code class="language-plaintext highlighter-rouge">c13</code> share a closer similarity to the cells in these clusters, which they were most likely extracted from. The other new cluster <code class="language-plaintext highlighter-rouge">c14</code> is between <code class="language-plaintext highlighter-rouge">c11</code> and <code class="language-plaintext highlighter-rouge">c6</code>, suggesting similar points of extraction.</li>
     </ol>
 
   </blockquote>
@@ -1694,7 +1694,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <figure id="figure-11"><img src="/training-material/topics/transcriptomics/images/raceid_geneheatmaps.png" alt="Gene Heatmaps" /><figcaption><span class="figcaption-prefix">Figure 11:</span> RaceID Individual (final) heatmaps for the top 10 significant genes in clusters 1 to 4</figcaption></figure>
 
-<p>The top 10 defining genes from each cluster (above only <code class="highlighter-rouge">c1</code>-<code class="highlighter-rouge">c4</code> are shown) give us an idea of how unique these genes are to the cluster.</p>
+<p>The top 10 defining genes from each cluster (above only <code class="language-plaintext highlighter-rouge">c1</code>-<code class="language-plaintext highlighter-rouge">c4</code> are shown) give us an idea of how unique these genes are to the cluster.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-9"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1709,9 +1709,9 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
     <h3 id="solution-solution-9"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>(Top-Left Heatmap) <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> are highly expressed in <code class="highlighter-rouge">c1</code> and <code class="highlighter-rouge">c6</code></li>
+      <li>(Top-Left Heatmap) <em>Gstm3</em>, <em>St3gal4</em>, and <em>Gna11</em> are highly expressed in <code class="language-plaintext highlighter-rouge">c1</code> and <code class="language-plaintext highlighter-rouge">c6</code></li>
       <li><em>Eef1a1</em> is highly expressed everywhere, and so is not a very differentially expressed gene.</li>
-      <li><code class="highlighter-rouge">c4</code> appears to be a not so well-defined cluster with no genes specifically bound to it.</li>
+      <li><code class="language-plaintext highlighter-rouge">c4</code> appears to be a not so well-defined cluster with no genes specifically bound to it.</li>
     </ol>
   </blockquote>
 
@@ -1727,11 +1727,11 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <ol>
     <li><strong>Cluster Inspection using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Plot All Clusters?”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Perform Subset Analysis?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Examine Genes of Interest”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Differential Gene Testing”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Plot All Clusters?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Perform Subset Analysis?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Examine Genes of Interest”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Differential Gene Testing”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -1799,9 +1799,9 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
     <h3 id="solution-solution-10"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Two extra clusters are added in the final plots <code class="highlighter-rouge">c13</code> and <code class="highlighter-rouge">c14</code></li>
-      <li>For example, <code class="highlighter-rouge">c11</code> appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body in both projections lies <code class="highlighter-rouge">c1</code>, but seems to be in closer proximity to <code class="highlighter-rouge">c13</code> in the tSNE map than in the F-R layout. In both projections, <code class="highlighter-rouge">c2</code>, <code class="highlighter-rouge">c3</code>, and <code class="highlighter-rouge">c4</code> are large noisy clusters, but <code class="highlighter-rouge">c2</code> and <code class="highlighter-rouge">c4</code> appear to be closer to one another in the F-R layout.</li>
-      <li><code class="highlighter-rouge">c1</code> was better defined by a smaller set of genes than <code class="highlighter-rouge">c2</code>, <code class="highlighter-rouge">c3</code>, or <code class="highlighter-rouge">c4,</code> which listed less differentially expressed genes as their most significant genes.</li>
+      <li>Two extra clusters are added in the final plots <code class="language-plaintext highlighter-rouge">c13</code> and <code class="language-plaintext highlighter-rouge">c14</code></li>
+      <li>For example, <code class="language-plaintext highlighter-rouge">c11</code> appears to be an isolated well-defined cluster of cells, distinct in both projections. At the edge of the main cluster body in both projections lies <code class="language-plaintext highlighter-rouge">c1</code>, but seems to be in closer proximity to <code class="language-plaintext highlighter-rouge">c13</code> in the tSNE map than in the F-R layout. In both projections, <code class="language-plaintext highlighter-rouge">c2</code>, <code class="language-plaintext highlighter-rouge">c3</code>, and <code class="language-plaintext highlighter-rouge">c4</code> are large noisy clusters, but <code class="language-plaintext highlighter-rouge">c2</code> and <code class="language-plaintext highlighter-rouge">c4</code> appear to be closer to one another in the F-R layout.</li>
+      <li><code class="language-plaintext highlighter-rouge">c1</code> was better defined by a smaller set of genes than <code class="language-plaintext highlighter-rouge">c2</code>, <code class="language-plaintext highlighter-rouge">c3</code>, or <code class="language-plaintext highlighter-rouge">c4,</code> which listed less differentially expressed genes as their most significant genes.</li>
     </ol>
 
   </blockquote>
@@ -1865,33 +1865,33 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <ol>
     <li><strong>Cluster Inspection using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Plot All Clusters?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Perform Subset Analysis?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Examine Genes of Interest”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Differential Gene Testing”</em>: <code class="highlighter-rouge">Yes</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Plot All Clusters?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Perform Subset Analysis?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Examine Genes of Interest”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Differential Gene Testing”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
             <li>In <em>“Cells in Set A”</em>:
               <ul>
-                <li><em>“Name of Set”</em>: <code class="highlighter-rouge">Cells in 1</code></li>
-                <li><em>“Selection method”</em>: <code class="highlighter-rouge">Cluster Numbers</code>
+                <li><em>“Name of Set”</em>: <code class="language-plaintext highlighter-rouge">Cells in 1</code></li>
+                <li><em>“Selection method”</em>: <code class="language-plaintext highlighter-rouge">Cluster Numbers</code>
                   <ul>
-                    <li><em>“List of clusters”</em>: <code class="highlighter-rouge">1</code></li>
+                    <li><em>“List of clusters”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li>In <em>“Cells in Set B”</em>:
               <ul>
-                <li><em>“Name of Set”</em>: <code class="highlighter-rouge">Cells in 3</code></li>
-                <li><em>“Selection method”</em>: <code class="highlighter-rouge">Cluster Numbers</code>
+                <li><em>“Name of Set”</em>: <code class="language-plaintext highlighter-rouge">Cells in 3</code></li>
+                <li><em>“Selection method”</em>: <code class="language-plaintext highlighter-rouge">Cluster Numbers</code>
                   <ul>
-                    <li><em>“List of clusters”</em>: <code class="highlighter-rouge">3</code></li>
+                    <li><em>“List of clusters”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1941,16 +1941,16 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <ol>
     <li><strong>Cluster Inspection using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Plot All Clusters?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Perform Subset Analysis?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Examine Genes of Interest”</em>: <code class="highlighter-rouge">Yes</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RaceID RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Plot All Clusters?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Perform Subset Analysis?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Examine Genes of Interest”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Genes to Examine”</em>: <code class="highlighter-rouge">Gstm3, St3gal4, Gna11</code></li>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Genes to Examine”</em>: <code class="language-plaintext highlighter-rouge">Gstm3, St3gal4, Gna11</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
-        <li><em>“Differential Gene Testing”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Differential Gene Testing”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -1986,10 +1986,10 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <blockquote class="solution">
     <h3 id="solution-solution-12"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>They appear to overlap <code class="highlighter-rouge">c6</code> which is in close proximity to <code class="highlighter-rouge">c1</code>. There are two reasons why this might be the case:</p>
+    <p>They appear to overlap <code class="language-plaintext highlighter-rouge">c6</code> which is in close proximity to <code class="language-plaintext highlighter-rouge">c1</code>. There are two reasons why this might be the case:</p>
     <ol>
-      <li><code class="highlighter-rouge">c1</code> is a small cluster and noisy cluster surrounded by more stably defined neighbours.</li>
-      <li>The three genes are more differentially expressed in <code class="highlighter-rouge">c1</code> than in <code class="highlighter-rouge">c6</code>, but they are more highly expressed in <code class="highlighter-rouge">c6</code>. That is, their <span class="notranslate">expression</span> is more significant in <code class="highlighter-rouge">c1</code> compared to the rest of the genes in that cluster.</li>
+      <li><code class="language-plaintext highlighter-rouge">c1</code> is a small cluster and noisy cluster surrounded by more stably defined neighbours.</li>
+      <li>The three genes are more differentially expressed in <code class="language-plaintext highlighter-rouge">c1</code> than in <code class="language-plaintext highlighter-rouge">c6</code>, but they are more highly expressed in <code class="language-plaintext highlighter-rouge">c6</code>. That is, their <span class="notranslate">expression</span> is more significant in <code class="language-plaintext highlighter-rouge">c1</code> compared to the rest of the genes in that cluster.</li>
     </ol>
 
   </blockquote>
@@ -2010,20 +2010,20 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <ol>
     <li><strong>Lineage computation using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Clustering using RaceID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Compute transcriptome entropy of each cell”</em>:
           <ul>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>In <em>“Compute Cell Projections for Randomised Background Distribution”</em>:
           <ul>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>In <em>“StemID2 Lineage Graph”</em>:
           <ul>
-            <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -2113,13 +2113,13 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
     <ol>
       <li>The thick red link between clusters 2-4, 3-5, and 3-1-6 are assumed to have a high level of biological significance.</li>
       <li>
-        <p>On first glance, it appears that <code class="highlighter-rouge">c2</code> would be the progenitor, due to the number of links it has and its more central position in the cluster plot.</p>
+        <p>On first glance, it appears that <code class="language-plaintext highlighter-rouge">c2</code> would be the progenitor, due to the number of links it has and its more central position in the cluster plot.</p>
 
         <ul>
           <li>
             <p><em>Cluster Tree Diagram:</em></p>
 
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c2
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c2
   ├─ c4
   ├─ c9
   ├─ c8
@@ -2158,13 +2158,13 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <blockquote class="solution">
     <h3 id="solution-solution-14"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p><code class="highlighter-rouge">c3</code> has both the most number of links as well as the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, despite having the same number of links as <code class="highlighter-rouge">c2</code>. The more centred position of <code class="highlighter-rouge">c2</code> in the plots has no bearing on it being the initial progenitor type.</p>
+    <p><code class="language-plaintext highlighter-rouge">c3</code> has both the most number of links as well as the most entropy that one would expect a multipotent progenitor cell type to exhibit, and therefore must be the root of the lineage tree, despite having the same number of links as <code class="language-plaintext highlighter-rouge">c2</code>. The more centred position of <code class="language-plaintext highlighter-rouge">c2</code> in the plots has no bearing on it being the initial progenitor type.</p>
 
     <ul>
       <li>
         <p><em>Cluster Tree Diagram:</em></p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c3
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  c3
   ├─ c5
   ├─ c1
   │  └─ c6
@@ -2191,7 +2191,7 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <h2 id="specific-trajectory-lineage-analysis-stemid">Specific Trajectory Lineage Analysis (StemID)</h2>
 
-<p>Here we will explore one branching point of interest; <code class="highlighter-rouge">c3</code> giving rise to <code class="highlighter-rouge">c1</code> and <code class="highlighter-rouge">c5</code>. Will we be able to find an up or down regulation of genes between these two branches?</p>
+<p>Here we will explore one branching point of interest; <code class="language-plaintext highlighter-rouge">c3</code> giving rise to <code class="language-plaintext highlighter-rouge">c1</code> and <code class="language-plaintext highlighter-rouge">c5</code>. Will we be able to find an up or down regulation of genes between these two branches?</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-comparing-trajectory-paths-3-to-1-and-3-to-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Comparing trajectory paths 3 to 1, and 3 to 5</h3>
@@ -2199,21 +2199,21 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
   <ol>
     <li><strong>Lineage Branch Analysis using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Lineage computation using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Lineage computation using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“StemID Branch Link Examine”</em>:
           <ul>
-            <li><em>“Perform StemID?”</em>: <code class="highlighter-rouge">Yes</code>
+            <li><em>“Perform StemID?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
               <ul>
-                <li><em>“Cluster Number”</em>: <code class="highlighter-rouge">3</code></li>
-                <li><em>“Trajectory Path i, j, k”</em>: <code class="highlighter-rouge">1,3,5</code></li>
-                <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
+                <li><em>“Cluster Number”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+                <li><em>“Trajectory Path i, j, k”</em>: <code class="language-plaintext highlighter-rouge">1,3,5</code></li>
+                <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
               </ul>
             </li>
           </ul>
         </li>
         <li>In <em>“FateID Branch Link Examine”</em>:
           <ul>
-            <li><em>“Perform FateID?”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Perform FateID?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
@@ -2231,24 +2231,24 @@ such as <a href="https://en.wikipedia.org/wiki/Metric_(mathematics)">Euclidean d
 
 <figure id="figure-21"><img src="/training-material/topics/transcriptomics/images/raceid_stemid_cells.png" alt="Heatmap Cells" /><figcaption><span class="figcaption-prefix">Figure 21:</span> (Top) StemID Minimal spanning tree of all cells projected along the links between clusters. (Bottom) StemID Heatmap of Cluster 3 cells compared to other clusters.</figcaption></figure>
 
-<p>The vertical names along the heatmap are the cells from <code class="highlighter-rouge">c3</code> being compared to all other clusters.</p>
+<p>The vertical names along the heatmap are the cells from <code class="language-plaintext highlighter-rouge">c3</code> being compared to all other clusters.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-14"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How does the heatmap correlate to the minimum spanning tree (MST)?</li>
-    <li>How many <code class="highlighter-rouge">c3</code> cells are strongly <em>dissimilar</em> to cells in <code class="highlighter-rouge">c2</code>, <code class="highlighter-rouge">c4</code>, <code class="highlighter-rouge">c9</code>, <code class="highlighter-rouge">c8</code>, and <code class="highlighter-rouge">c11</code>. Where are they plotted on the MST?</li>
-    <li>Many <code class="highlighter-rouge">c3</code> cells appear to have stronger (red/orange) correlation to <code class="highlighter-rouge">c2</code> and <code class="highlighter-rouge">c4</code>, instead of the expected <code class="highlighter-rouge">c5</code> and <code class="highlighter-rouge">c1</code> shown in the MST, yet <code class="highlighter-rouge">c2</code> is further away than <code class="highlighter-rouge">c5</code> or <code class="highlighter-rouge">c1</code>. Why is this?</li>
+    <li>How many <code class="language-plaintext highlighter-rouge">c3</code> cells are strongly <em>dissimilar</em> to cells in <code class="language-plaintext highlighter-rouge">c2</code>, <code class="language-plaintext highlighter-rouge">c4</code>, <code class="language-plaintext highlighter-rouge">c9</code>, <code class="language-plaintext highlighter-rouge">c8</code>, and <code class="language-plaintext highlighter-rouge">c11</code>. Where are they plotted on the MST?</li>
+    <li>Many <code class="language-plaintext highlighter-rouge">c3</code> cells appear to have stronger (red/orange) correlation to <code class="language-plaintext highlighter-rouge">c2</code> and <code class="language-plaintext highlighter-rouge">c4</code>, instead of the expected <code class="language-plaintext highlighter-rouge">c5</code> and <code class="language-plaintext highlighter-rouge">c1</code> shown in the MST, yet <code class="language-plaintext highlighter-rouge">c2</code> is further away than <code class="language-plaintext highlighter-rouge">c5</code> or <code class="language-plaintext highlighter-rouge">c1</code>. Why is this?</li>
   </ol>
 
   <blockquote class="solution">
     <h3 id="solution-solution-15"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Each <code class="highlighter-rouge">c3</code> cell in the heatmap is “pulled” towards different clusters along a straight line in the MST. The degree to which it is pulled is given by the strength of the correlation of that cell to that cluster. For example cell <em>I5d_45</em> has a very strong correlation to <code class="highlighter-rouge">c12</code> and <code class="highlighter-rouge">c10</code>, and so it appears on the MST as a single (3) lying in between the <code class="highlighter-rouge">c3</code>,<code class="highlighter-rouge">c12</code>,<code class="highlighter-rouge">c10</code> triangle.</li>
-      <li>10 <code class="highlighter-rouge">c3</code> cells (III5d-53 to I5d-48) show negative (blue) correlation to these clusters, and these same cells have a strong correlation to <code class="highlighter-rouge">c5</code> or <code class="highlighter-rouge">c1</code> clusters. We can see these cells plotted along the links to these two clusters.</li>
-      <li>The <code class="highlighter-rouge">c3</code> cells strongly correlated to <code class="highlighter-rouge">c2</code> and <code class="highlighter-rouge">c4</code> are also strongly correlated to <code class="highlighter-rouge">c9</code>, <code class="highlighter-rouge">c8</code>, and <code class="highlighter-rouge">c11</code> - i.e. these cells have noisy profiles and are outliers in <code class="highlighter-rouge">c3</code>. Note that the 10 cells we identified in the previous question are not strongly correlated to other clusters except <code class="highlighter-rouge">c5</code> and <code class="highlighter-rouge">c1</code>, meaning they have very clear trajectories.</li>
+      <li>Each <code class="language-plaintext highlighter-rouge">c3</code> cell in the heatmap is “pulled” towards different clusters along a straight line in the MST. The degree to which it is pulled is given by the strength of the correlation of that cell to that cluster. For example cell <em>I5d_45</em> has a very strong correlation to <code class="language-plaintext highlighter-rouge">c12</code> and <code class="language-plaintext highlighter-rouge">c10</code>, and so it appears on the MST as a single (3) lying in between the <code class="language-plaintext highlighter-rouge">c3</code>,<code class="language-plaintext highlighter-rouge">c12</code>,<code class="language-plaintext highlighter-rouge">c10</code> triangle.</li>
+      <li>10 <code class="language-plaintext highlighter-rouge">c3</code> cells (III5d-53 to I5d-48) show negative (blue) correlation to these clusters, and these same cells have a strong correlation to <code class="language-plaintext highlighter-rouge">c5</code> or <code class="language-plaintext highlighter-rouge">c1</code> clusters. We can see these cells plotted along the links to these two clusters.</li>
+      <li>The <code class="language-plaintext highlighter-rouge">c3</code> cells strongly correlated to <code class="language-plaintext highlighter-rouge">c2</code> and <code class="language-plaintext highlighter-rouge">c4</code> are also strongly correlated to <code class="language-plaintext highlighter-rouge">c9</code>, <code class="language-plaintext highlighter-rouge">c8</code>, and <code class="language-plaintext highlighter-rouge">c11</code> - i.e. these cells have noisy profiles and are outliers in <code class="language-plaintext highlighter-rouge">c3</code>. Note that the 10 cells we identified in the previous question are not strongly correlated to other clusters except <code class="language-plaintext highlighter-rouge">c5</code> and <code class="language-plaintext highlighter-rouge">c1</code>, meaning they have very clear trajectories.</li>
     </ol>
 
   </blockquote>
@@ -2290,19 +2290,19 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
   <ol>
     <li><strong>Lineage Branch Analysis using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RDS”</em>: <code class="highlighter-rouge">outrdat</code> (output of <strong>Lineage computation using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input RDS”</em>: <code class="language-plaintext highlighter-rouge">outrdat</code> (output of <strong>Lineage computation using StemID</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“StemID Branch Link Examine”</em>:
           <ul>
-            <li><em>“Perform StemID?”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Perform StemID?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
         <li>In <em>“FateID Branch Link Examine”</em>:
           <ul>
-            <li><em>“Perform FateID?”</em>: <code class="highlighter-rouge">Yes</code>
+            <li><em>“Perform FateID?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
               <ul>
-                <li><em>“Cells from Clusters”</em>: <code class="highlighter-rouge">1,3,5</code></li>
-                <li><em>“Use Defaults?”</em>: <code class="highlighter-rouge">Yes</code></li>
-                <li><em>“Perform Additional FateID Analysis with Self-Organised Map?”</em>: <code class="highlighter-rouge">No</code></li>
+                <li><em>“Cells from Clusters”</em>: <code class="language-plaintext highlighter-rouge">1,3,5</code></li>
+                <li><em>“Use Defaults?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                <li><em>“Perform Additional FateID Analysis with Self-Organised Map?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
               </ul>
             </li>
           </ul>
@@ -2315,7 +2315,7 @@ Unsurprisingly, there is a higher score for the 3 to 1 trajectory for `c1` cells
 
 <figure id="figure-22"><img src="/training-material/topics/transcriptomics/images/raceid_fateid.png" alt="Heatmap FateID" /><figcaption><span class="figcaption-prefix">Figure 22:</span> FateID Heatmap</figcaption></figure>
 
-<p>The heatmaps generated depict the same data, but at different “heat” scales to better colourise the map. The genes here are not genes, but are gene <span class="notranslate">expression</span> modules, which can be interpreted as gene motifs that are present in both <code class="highlighter-rouge">c1</code> and <code class="highlighter-rouge">c5</code>, but at different levels of <span class="notranslate">expression</span>.</p>
+<p>The heatmaps generated depict the same data, but at different “heat” scales to better colourise the map. The genes here are not genes, but are gene <span class="notranslate">expression</span> modules, which can be interpreted as gene motifs that are present in both <code class="language-plaintext highlighter-rouge">c1</code> and <code class="language-plaintext highlighter-rouge">c5</code>, but at different levels of <span class="notranslate">expression</span>.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-15"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>

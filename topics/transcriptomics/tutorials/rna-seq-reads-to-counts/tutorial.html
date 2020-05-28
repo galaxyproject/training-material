@@ -718,11 +718,11 @@ because of stochastic processes in the algorithms.</p>
 
 <p>If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into <span class="notranslate">Galaxy</span>. If your FASTQs are provided through <span class="notranslate">Galaxy</span>’s Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, <span class="notranslate">Galaxy</span>’s Rule-based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into <span class="notranslate">Galaxy</span>.</p>
 
-<p>The raw <span class="notranslate">reads</span> used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g <code class="highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/<span class="notranslate">reads</span>/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be <span class="notranslate">mapping</span> 1000 <span class="notranslate">reads</span> from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://figshare.com/s/f5d63d8c265a05618137">Figshare</a> and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using <span class="notranslate">Galaxy</span> Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html"><span class="notranslate">Galaxy</span> Collections tutorial</a>.</p>
+<p>The raw <span class="notranslate">reads</span> used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g <code class="language-plaintext highlighter-rouge">ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/<span class="notranslate">reads</span>/ByStudy/sra/SRP%2FSRP045%2FSRP045534</code>). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be <span class="notranslate">mapping</span> 1000 <span class="notranslate">reads</span> from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in <a href="https://figshare.com/s/f5d63d8c265a05618137">Figshare</a> and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using <span class="notranslate">Galaxy</span> Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html"><span class="notranslate">Galaxy</span> Collections tutorial</a>.</p>
 
 <p>The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the <a href="/training-material/topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.html"><span class="notranslate">Galaxy</span> Rule-based Uploader tutorial</a>.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SampleID	Group	URL
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SampleID	Group	URL
 MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137
 MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137
 MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137
@@ -741,10 +741,10 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
 <ul>
   <li>Strip the <em>header</em> out of the sample information (it doesn’t contain a URL <span class="notranslate">Galaxy</span> can download).</li>
-  <li>Define the file <strong>Identifier</strong> column (<code class="highlighter-rouge">SampleID</code>).</li>
-  <li>Define the <strong>URL</strong> column (<code class="highlighter-rouge">URL</code>) (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
-  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="highlighter-rouge">fastqsanger.gz</code> files</li>
-  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="highlighter-rouge">mm10</code> files</li>
+  <li>Define the file <strong>Identifier</strong> column (<code class="language-plaintext highlighter-rouge">SampleID</code>).</li>
+  <li>Define the <strong>URL</strong> column (<code class="language-plaintext highlighter-rouge">URL</code>) (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
+  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files</li>
+  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">mm10</code> files</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -752,7 +752,7 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
 
   <ol>
     <li>
-      <p>Create a new history for this tutorial e.g. <code class="highlighter-rouge"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts</code></p>
+      <p>Create a new history for this tutorial e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts</code></p>
 
       <blockquote class="tip">
 
@@ -784,8 +784,8 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
         <li>Open the <span class="notranslate">Galaxy</span> Upload Manager</li>
         <li>Click the tab <strong>Rule-based</strong>
           <ul>
-            <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
-            <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
+            <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+            <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
           </ul>
         </li>
         <li>Paste the table from the grey box above. <em>(You should now see below)</em></li>
@@ -795,40 +795,40 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
           <figure id="figure-2"><img src="../../images/rna-seq-reads-to-counts/rule_uploader.png" alt="Rule-based Uploader" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Rule-based Uploader</figcaption></figure>
         </li>
         <li>
-          <p>In the <code class="highlighter-rouge">rules editor</code> that pops up:</p>
+          <p>In the <code class="language-plaintext highlighter-rouge">rules editor</code> that pops up:</p>
 
           <ul>
-            <li><strong>Remove the header</strong>. From the <strong>Filter</strong> menu select <code class="highlighter-rouge">First or Last N Rows</code>
+            <li><strong>Remove the header</strong>. From the <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
               <ul>
-                <li><em>“Filter which rows?”</em>: <code class="highlighter-rouge">first</code></li>
-                <li><em>“Filter how many rows?”</em>: <code class="highlighter-rouge">1</code></li>
-                <li>Click <code class="highlighter-rouge">Apply</code></li>
+                <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+                <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
               </ul>
             </li>
-            <li><strong>Define the Identifier and URL columns</strong>. From the <strong>Rules</strong> menu select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+            <li><strong>Define the Identifier and URL columns</strong>. From the <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
               <ul>
-                <li>Click <code class="highlighter-rouge">Add Definition</code> button and select List Identifier(s)
+                <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select List Identifier(s)
                   <ul>
-                    <li><em>“List Identifier(s)”</em>: <code class="highlighter-rouge">A</code></li>
+                    <li><em>“List Identifier(s)”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
                   </ul>
                 </li>
-                <li>Click <code class="highlighter-rouge">Add Definition</code> button again and select URL instead
+                <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button again and select URL instead
                   <ul>
-                    <li><em>“URL”</em>: <code class="highlighter-rouge">C</code></li>
+                    <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">C</code></li>
                   </ul>
                 </li>
-                <li>Click <code class="highlighter-rouge">Apply</code>, and you should see your new column definitions listed</li>
+                <li>Click <code class="language-plaintext highlighter-rouge">Apply</code>, and you should see your new column definitions listed</li>
               </ul>
             </li>
-            <li><strong>Specify the file type</strong>. Select <em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
-            <li><strong>Specify the genome</strong>. Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></li>
-            <li><strong>Name the collection</strong>. For <em>“Name”</em> enter: <code class="highlighter-rouge">fastqs</code> <em>(You should now see below)</em></li>
-            <li>Click <code class="highlighter-rouge">Upload</code></li>
+            <li><strong>Specify the file type</strong>. Select <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
+            <li><strong>Specify the genome</strong>. Select <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
+            <li><strong>Name the collection</strong>. For <em>“Name”</em> enter: <code class="language-plaintext highlighter-rouge">fastqs</code> <em>(You should now see below)</em></li>
+            <li>Click <code class="language-plaintext highlighter-rouge">Upload</code></li>
           </ul>
 
           <figure id="figure-3"><img src="../../images/rna-seq-reads-to-counts/rule_editor.png" alt="Rules Editor" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Rules Editor</figcaption></figure>
 
-          <p>You should see a collection (list) called <code class="highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files.</p>
+          <p>You should see a collection (list) called <code class="language-plaintext highlighter-rouge">fastqs</code> in your history containing all 12 FASTQ files.</p>
         </li>
       </ul>
     </li>
@@ -846,15 +846,15 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
     <li>Click the tab <strong>Collection</strong></li>
     <li>Click <strong>Choose Local Files</strong> and locate the files you want to upload
       <ul>
-        <li><em>“Collection Type”</em>: <code class="highlighter-rouge">List</code></li>
-        <li><em>“File Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
-        <li><em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+        <li><em>“Collection Type”</em>: <code class="language-plaintext highlighter-rouge">List</code></li>
+        <li><em>“File Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
+        <li><em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
       </ul>
     </li>
     <li>In the pop up that appears:
       <ul>
-        <li><em>“Name”</em>: <code class="highlighter-rouge">fastqs</code></li>
-        <li>Click <code class="highlighter-rouge">Create list</code></li>
+        <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">fastqs</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Create list</code></li>
       </ul>
     </li>
   </ul>
@@ -869,19 +869,19 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
     <li>In the Menu at the top go to Shared Data &gt; Data Libraries</li>
     <li>Locate your FASTQ files</li>
     <li>Tick the checkboxes to select the files</li>
-    <li>From the <strong>To History</strong> menu select <code class="highlighter-rouge">as a Collection</code></li>
+    <li>From the <strong>To History</strong> menu select <code class="language-plaintext highlighter-rouge">as a Collection</code></li>
     <li>In the pop up that appears:
       <ul>
-        <li><em>“Which datasets?”</em>: <code class="highlighter-rouge">current selection</code></li>
-        <li><em>“Collection type”</em>: <code class="highlighter-rouge">List</code></li>
-        <li><em>“Select history”</em>: <code class="highlighter-rouge">select your History</code></li>
-        <li>Click <code class="highlighter-rouge">Continue</code></li>
+        <li><em>“Which datasets?”</em>: <code class="language-plaintext highlighter-rouge">current selection</code></li>
+        <li><em>“Collection type”</em>: <code class="language-plaintext highlighter-rouge">List</code></li>
+        <li><em>“Select history”</em>: <code class="language-plaintext highlighter-rouge">select your History</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Continue</code></li>
       </ul>
     </li>
     <li>In the pop up that appears:
       <ul>
-        <li><em>“Name”</em>: <code class="highlighter-rouge">fastqs</code></li>
-        <li>Click <code class="highlighter-rouge">Create list</code></li>
+        <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">fastqs</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Create list</code></li>
       </ul>
     </li>
   </ul>
@@ -898,8 +898,8 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
   <h3 id="hands_on-hands-on-take-a-look-at-fastq-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Take a look at FASTQ format</h3>
 
   <ol>
-    <li>Click on the collection name (<code class="highlighter-rouge">fastqs</code>)</li>
-    <li>Click on the name of one of the collection elements (e.g <code class="highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="highlighter-rouge">fastqsanger.gz</code> and the database <code class="highlighter-rouge">mm10</code>.</li>
+    <li>Click on the collection name (<code class="language-plaintext highlighter-rouge">fastqs</code>)</li>
+    <li>Click on the name of one of the collection elements (e.g <code class="language-plaintext highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and the database <code class="language-plaintext highlighter-rouge">mm10</code>.</li>
     <li>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of one of the FASTQ files to have a look at what it contains</li>
   </ol>
 </blockquote>
@@ -916,10 +916,10 @@ MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_lin
   <ol>
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">fastqs</code> (Input dataset collection)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">fastqs</code> (Input dataset collection)</li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for the <code class="language-plaintext highlighter-rouge">MCL1-DL</code> sample by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon</li>
   </ol>
 </blockquote>
 
@@ -955,18 +955,18 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
       <ul>
         <li>In <em>“Results”</em>
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
             <li>In <em>“FastQC output”</em>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
-                <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on trimmed <span class="notranslate">reads</span>)</li>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on trimmed <span class="notranslate">reads</span>)</li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -997,7 +997,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
     <ul>
       <li>The <strong>base quality</strong> is high in all samples.</li>
       <li>Some Illumina <strong>adapter</strong> has been detected.</li>
-      <li>Some duplication in <span class="notranslate">RNA</span>-seq can be normal due to the presence of highly expressed genes. However, for some reason <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have higher numbers of duplicates detected than the other samples.</li>
+      <li>Some duplication in <span class="notranslate">RNA</span>-seq can be normal due to the presence of highly expressed genes. However, for some reason <code class="language-plaintext highlighter-rouge">MCL1-LE</code> and <code class="language-plaintext highlighter-rouge">MCL1-LF</code> have higher numbers of duplicates detected than the other samples.</li>
     </ul>
 
   </blockquote>
@@ -1005,7 +1005,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>We will use Cutadapt to trim the <span class="notranslate">reads</span> to remove the Illumina adapter and any low quality bases at the ends (quality score &lt; 20). We will discard any sequences that are too short (&lt; 20bp) after trimming. We will also output the Cutadapt report for summarising with MultiQC.</p>
 
-<p>The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter <code class="highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code>, as given on the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq">Cutadapt website</a>. For trimming paired-end data see the Cutadapt Help section. Other Illumina adapter sequences (e.g. Nextera) can be found at the <a href="http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">Illumina website</a>. Note that Cutadapt requires at least three bases to match between adapter and read to reduce the number of falsely trimmed bases, which can be changed in the Cutadapt options if desired.</p>
+<p>The Cutadapt tool Help section provides the sequence we can use to trim this standard Illumina adapter <code class="language-plaintext highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code>, as given on the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#illumina-truseq">Cutadapt website</a>. For trimming paired-end data see the Cutadapt Help section. Other Illumina adapter sequences (e.g. Nextera) can be found at the <a href="http://sapac.support.illumina.com/bulletins/2016/12/what-sequences-do-i-use-for-adapter-trimming.html">Illumina website</a>. Note that Cutadapt requires at least three bases to match between adapter and read to reduce the number of falsely trimmed bases, which can be changed in the Cutadapt options if desired.</p>
 
 <h2 id="trim-reads">Trim <span class="notranslate">reads</span></h2>
 
@@ -1015,9 +1015,9 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: <code class="highlighter-rouge">fastqs</code> (Input dataset collection)</li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">fastqs</code> (Input dataset collection)</li>
             <li>In <em>“Read 1 Options”</em>:
               <ul>
                 <li>In <em>“3’ (End) Adapters”</em>:
@@ -1025,10 +1025,10 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
                     <li>Click on <em>“Insert 3’ (End) Adapters”</em>:</li>
                     <li>In <em>“1: 3’ (End) Adapters”</em>:
                       <ul>
-                        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source”</em>: <code class="highlighter-rouge">Enter custom sequence</code>
+                        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom sequence</code>
                           <ul>
-                            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter name (Optional)”</em>: <code class="highlighter-rouge">Illumina</code></li>
-                            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter sequence”</em>: <code class="highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code></li>
+                            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter name (Optional)”</em>: <code class="language-plaintext highlighter-rouge">Illumina</code></li>
+                            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -1041,17 +1041,17 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </li>
         <li>In <em>“Filter Options”</em>:
           <ul>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum length”</em>: <code class="highlighter-rouge">20</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Read Modification Options”</em>:
           <ul>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Quality cutoff”</em>: <code class="highlighter-rouge">20</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>:
           <ul>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1070,25 +1070,25 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ol>
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">RawData</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">RawData</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports
       <ul>
         <li>In <em>“Results”</em>
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
             <li>In <em>“FastQC output”</em>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
-                <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">RawData</code> files (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -1106,7 +1106,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h1 id="mapping"><span class="notranslate">Mapping</span></h1>
 
-<p>Now that we have prepared our <span class="notranslate">reads</span>, we can align the <span class="notranslate">reads</span> for our 12 samples. There is an existing reference genome for mouse and we will map the <span class="notranslate">reads</span> to that. The current version of the mouse reference genome is <code class="highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> to align the <span class="notranslate">reads</span>. HISAT2 is the descendent of TopHat, one of the first widely-used aligners, but alte<span class="notranslate">rna</span>tive mappers could be used, such as STAR. See the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping"><span class="notranslate">RNA</span>-seq ref-based tutorial</a> for more information on <span class="notranslate">RNA</span>-seq mappers. There are often numerous <span class="notranslate">mapping</span> parameters that we can specify, but usually the default <span class="notranslate">mapping</span> parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when <span class="notranslate">mapping</span> and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end <span class="notranslate">reads</span> so we will specify that where necessary. HISAT2 can output a <span class="notranslate">mapping</span> summary file that tells what proportion of <span class="notranslate">reads</span> mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 <span class="notranslate">reads</span> per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
+<p>Now that we have prepared our <span class="notranslate">reads</span>, we can align the <span class="notranslate">reads</span> for our 12 samples. There is an existing reference genome for mouse and we will map the <span class="notranslate">reads</span> to that. The current version of the mouse reference genome is <code class="language-plaintext highlighter-rouge">mm10/GRCm38</code>. Here we will use <a href="https://ccb.jhu.edu/software/hisat2/index.shtml"><strong>HISAT2</strong></a> to align the <span class="notranslate">reads</span>. HISAT2 is the descendent of TopHat, one of the first widely-used aligners, but alte<span class="notranslate">rna</span>tive mappers could be used, such as STAR. See the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#mapping"><span class="notranslate">RNA</span>-seq ref-based tutorial</a> for more information on <span class="notranslate">RNA</span>-seq mappers. There are often numerous <span class="notranslate">mapping</span> parameters that we can specify, but usually the default <span class="notranslate">mapping</span> parameters are fine. However, library type (paired-end vs single-end) and library strandness (stranded vs unstranded) require some different settings when <span class="notranslate">mapping</span> and counting, so they are two important pieces of information to know about samples. The mouse data comprises unstranded, single-end <span class="notranslate">reads</span> so we will specify that where necessary. HISAT2 can output a <span class="notranslate">mapping</span> summary file that tells what proportion of <span class="notranslate">reads</span> mapped to the reference genome. Summary files for multiple samples can be summarised with MultiQC. As we’re only using a subset of 1000 <span class="notranslate">reads</span> per sample, aligning should just take a minute or so. To run the full samples from this dataset would take longer.</p>
 
 <h2 id="map-reads-to-reference-genome">Map <span class="notranslate">reads</span> to reference genome</h2>
 
@@ -1115,20 +1115,20 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
   <p><strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for the reference genome”</em>: <code class="highlighter-rouge">Use a built-in genome</code>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code>
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a reference genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
       </ul>
     </li>
-    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Is this a single or paired library?”</em>: <code class="highlighter-rouge">Single-end</code>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Is this a single or paired library?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA/Q file”</em>: <code class="highlighter-rouge">Read 1 Output</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA/Q file”</em>: <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li>In <em>“Summary Options”</em>:
       <ul>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output alignment summary in a more machine-friendly style.”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Print alignment summary to a file.”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output alignment summary in a more machine-friendly style.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Print alignment summary to a file.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ul>
@@ -1140,12 +1140,12 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ul>
     <li>If you have <strong>paired-end</strong> <span class="notranslate">reads</span>
       <ul>
-        <li>Select <em>“Is this a single or paired library”</em> <code class="highlighter-rouge">Paired-end</code> or <code class="highlighter-rouge">Paired-end Dataset Collection</code> or <code class="highlighter-rouge">Paired-end data from single interleaved dataset</code></li>
+        <li>Select <em>“Is this a single or paired library”</em> <code class="language-plaintext highlighter-rouge">Paired-end</code> or <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code> or <code class="language-plaintext highlighter-rouge">Paired-end data from single interleaved dataset</code></li>
       </ul>
     </li>
     <li>If you have <strong>stranded</strong> <span class="notranslate">reads</span>
       <ul>
-        <li>Select <em>“Specify strand information”</em>: <code class="highlighter-rouge">Forward (FR)</code> or <code class="highlighter-rouge">Reverse (RF)</code></li>
+        <li>Select <em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Forward (FR)</code> or <code class="language-plaintext highlighter-rouge">Reverse (RF)</code></li>
       </ul>
     </li>
   </ul>
@@ -1167,7 +1167,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 <p>A BAM file (or a SAM file, the non-compressed version) consists of:</p>
 
 <ul>
-  <li>A header section (the lines starting with <code class="highlighter-rouge">@</code>) containing metadata particularly the chromosome names and lengths (lines starting with the <code class="highlighter-rouge">@SQ</code> symbol)</li>
+  <li>A header section (the lines starting with <code class="language-plaintext highlighter-rouge">@</code>) containing metadata particularly the chromosome names and lengths (lines starting with the <code class="language-plaintext highlighter-rouge">@SQ</code> symbol)</li>
   <li>
     <p>An alignment section consisting of a table with 11 mandatory fields, as well as a variable number of optional fields:</p>
 
@@ -1281,13 +1281,13 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
       <ul>
         <li>In <em>“Results”</em>
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">HISAT2</code></li>
-            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="highlighter-rouge"><span class="notranslate">Mapping</span> summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">HISAT2</code></li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -1308,7 +1308,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h2 id="qc-strandness">QC: strandness</h2>
 
-<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>. This is done through comparing the “strandness of <span class="notranslate">reads</span>” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference <span class="notranslate">bed</span> file of genes (<code class="highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference <span class="notranslate">BED</span> files for model organisms. You can import the RSeQC mm10 RefSeq <span class="notranslate">BED</span> file from the link <code class="highlighter-rouge">https://sourceforge.net/projects/rseqc/files/<span class="notranslate">BED</span>/Mouse_Mus_musculus/mm10_RefSeq.<span class="notranslate">bed</span>.gz/download</code> (and rename to <code class="highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alte<span class="notranslate">rna</span>tively, you can provide your own <span class="notranslate">BED</span> file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to <span class="notranslate">BED</span>12</strong> tool can be used to convert a GTF into a <span class="notranslate">BED</span> file.</p>
+<p>As far as we know this data is unstranded, but as a sanity check you can check the strandness. You can use RSeQC Infer Experiment tool to “guess” the strandness, as explained in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>. This is done through comparing the “strandness of <span class="notranslate">reads</span>” with the “strandness of transcripts”. For this tool, and many of the other RSeQC tools, a reference <span class="notranslate">bed</span> file of genes (<code class="language-plaintext highlighter-rouge">reference genes</code>) is required. RSeQC provides some reference <span class="notranslate">BED</span> files for model organisms. You can import the RSeQC mm10 RefSeq <span class="notranslate">BED</span> file from the link <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/<span class="notranslate">BED</span>/Mouse_Mus_musculus/mm10_RefSeq.<span class="notranslate">bed</span>.gz/download</code> (and rename to <code class="language-plaintext highlighter-rouge">reference genes</code>) or import a file from Shared data if provided. Alte<span class="notranslate">rna</span>tively, you can provide your own <span class="notranslate">BED</span> file of reference genes, for example from UCSC (see the <a href="/training-material/topics/introduction/tutorials/galaxy-intro-peaks2genes/tutorial.html">Peaks to Genes tutorial</a>. Or the <strong>Convert GTF to <span class="notranslate">BED</span>12</strong> tool can be used to convert a GTF into a <span class="notranslate">BED</span> file.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-strandness-with-infer-experiment"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check strandness with <strong>Infer Experiment</strong></h3>
@@ -1316,19 +1316,19 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ol>
     <li><strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Reference <span class="notranslate">BED</span> file)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">reference genes</code> (Reference <span class="notranslate">BED</span> file)</li>
       </ul>
     </li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">infer_experiment</code>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">infer_experiment</code>
                   <ul>
-                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC infer_experiment output”</em>: <code class="highlighter-rouge">Infer Experiment output</code> (output of <strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC infer_experiment output”</em>: <code class="language-plaintext highlighter-rouge">Infer Experiment output</code> (output of <strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                   </ul>
                 </li>
               </ul>
@@ -1337,7 +1337,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -1369,18 +1369,18 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ol>
     <li><strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Select SAM/BAM dataset or dataset collection”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Picard</code>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Picard</code>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Picard output?”</em>: <code class="highlighter-rouge">Markdups</code>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Picard output?”</em>: <code class="language-plaintext highlighter-rouge">Markdups</code>
                   <ul>
-                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Picard output”</em>: <code class="highlighter-rouge">MarkDuplicate metrics</code> (output of <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Picard output”</em>: <code class="language-plaintext highlighter-rouge">MarkDuplicate metrics</code> (output of <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                   </ul>
                 </li>
               </ul>
@@ -1389,7 +1389,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -1405,7 +1405,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p><code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have the highest number of duplicates in mapped <span class="notranslate">reads</span> compared to the other samples, similar to what we saw in the raw <span class="notranslate">reads</span> with FastQC.</p>
+    <p><code class="language-plaintext highlighter-rouge">MCL1-LE</code> and <code class="language-plaintext highlighter-rouge">MCL1-LF</code> have the highest number of duplicates in mapped <span class="notranslate">reads</span> compared to the other samples, similar to what we saw in the raw <span class="notranslate">reads</span> with FastQC.</p>
 
   </blockquote>
 
@@ -1421,18 +1421,18 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ol>
     <li><strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: <code class="highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM file”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Samtools</code>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Samtools</code>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Samtools output?”</em>: <code class="highlighter-rouge">idxstats</code>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Samtools output?”</em>: <code class="language-plaintext highlighter-rouge">idxstats</code>
                   <ul>
-                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Samtools idxstats output”</em>: <code class="highlighter-rouge">IdxStats output</code> (output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Samtools idxstats output”</em>: <code class="language-plaintext highlighter-rouge">IdxStats output</code> (output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                   </ul>
                 </li>
               </ul>
@@ -1441,7 +1441,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -1480,23 +1480,23 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   <ol>
     <li><strong>Gene Body Coverage (BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Run each sample separately, or combine mutiple samples into one plot”</em>: <code class="highlighter-rouge">Run each sample separately</code>
+        <li><em>“Run each sample separately, or combine mutiple samples into one plot”</em>: <code class="language-plaintext highlighter-rouge">Run each sample separately</code>
           <ul>
-            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam file”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Input dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">reference genes</code> (Input dataset)</li>
       </ul>
     </li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">gene_body_coverage</code>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">gene_body_coverage</code>
                   <ul>
-                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC gene_body_coverage output”</em>: <code class="highlighter-rouge">Gene Body Coverage (BAM) (text)</code> (output of <strong>Gene Body Coverage (
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC gene_body_coverage output”</em>: <code class="language-plaintext highlighter-rouge">Gene Body Coverage (BAM) (text)</code> (output of <strong>Gene Body Coverage (
 BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                   </ul>
                 </li>
@@ -1506,7 +1506,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 
 </blockquote>
@@ -1542,19 +1542,19 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
   <ol>
     <li><strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam/.sam file”</em>: <code class="highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="highlighter-rouge">reference genes</code> (Input dataset)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .bam/.sam file”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference gene model”</em>: <code class="language-plaintext highlighter-rouge">reference genes</code> (Input dataset)</li>
       </ul>
     </li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li>In <em>“1: Results”</em>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">read_distribution</code>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">read_distribution</code>
                   <ul>
-                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC read_distribution output”</em>: <code class="highlighter-rouge">Read Distribution output</code> (output of <strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC read_distribution output”</em>: <code class="language-plaintext highlighter-rouge">Read Distribution output</code> (output of <strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                   </ul>
                 </li>
               </ul>
@@ -1563,7 +1563,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 
 </blockquote>
@@ -1580,7 +1580,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
   <blockquote class="solution">
     <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>It looks good, most of the <span class="notranslate">reads</span> have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to CDS exons for <code class="highlighter-rouge">MCL1-LC</code> and <code class="highlighter-rouge">MCL1-LD</code>, and <code class="highlighter-rouge">MCL1-LE</code> and <code class="highlighter-rouge">MCL1-LF</code> have more <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to CDS exons than the other samples.</p>
+    <p>It looks good, most of the <span class="notranslate">reads</span> have mapped to exons and not many to introns or intergenic regions. The samples have pretty consistent read distribution, albeit with slightly higher numbers of <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to CDS exons for <code class="language-plaintext highlighter-rouge">MCL1-LC</code> and <code class="language-plaintext highlighter-rouge">MCL1-LD</code>, and <code class="language-plaintext highlighter-rouge">MCL1-LE</code> and <code class="language-plaintext highlighter-rouge">MCL1-LF</code> have more <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to CDS exons than the other samples.</p>
 
   </blockquote>
 
@@ -1590,7 +1590,7 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
 <h1 id="counting">Counting</h1>
 
-<p>The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped <span class="notranslate">reads</span> can be counted across mouse genes by using a tool called featureCounts. featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (<code class="highlighter-rouge">mm10</code>, <code class="highlighter-rouge">mm9</code>) and human (<code class="highlighter-rouge">hg38</code>, <code class="highlighter-rouge">hg19</code>) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. <span class="notranslate">Reads</span> that map to exons of genes are added together to obtain the count for each gene, with some care taken with <span class="notranslate">reads</span> that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as <code class="highlighter-rouge">100008567</code>. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in <span class="notranslate">Galaxy</span>, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.</p>
+<p>The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped <span class="notranslate">reads</span> can be counted across mouse genes by using a tool called featureCounts. featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (<code class="language-plaintext highlighter-rouge">mm10</code>, <code class="language-plaintext highlighter-rouge">mm9</code>) and human (<code class="language-plaintext highlighter-rouge">hg38</code>, <code class="language-plaintext highlighter-rouge">hg19</code>) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. <span class="notranslate">Reads</span> that map to exons of genes are added together to obtain the count for each gene, with some care taken with <span class="notranslate">reads</span> that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as <code class="language-plaintext highlighter-rouge">100008567</code>. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in <span class="notranslate">Galaxy</span>, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -1605,10 +1605,10 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
   <p><strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment file”</em>: <code class="highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gene annotation file”</em>: <code class="highlighter-rouge">featureCounts built-in</code>
+    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Alignment file”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gene annotation file”</em>: <code class="language-plaintext highlighter-rouge">featureCounts built-in</code>
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select built-in genome”</em>: <code class="highlighter-rouge">mm10</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select built-in genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
       </ul>
     </li>
   </ul>
@@ -1622,14 +1622,14 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
       <ul>
         <li>Click <em>“Options for paired-end <span class="notranslate">reads</span>”</em>
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count fragments instead of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Enabled; fragments (or templates) will be counted instead of <span class="notranslate">reads</span></code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count fragments instead of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Enabled; fragments (or templates) will be counted instead of <span class="notranslate">reads</span></code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>If you have <strong>stranded</strong> <span class="notranslate">reads</span>
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> Select <em>“Specify strand information”</em>: <code class="highlighter-rouge">Stranded (Forward)</code> or <code class="highlighter-rouge">Stranded (Reverse)</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> Select <em>“Specify strand information”</em>: <code class="language-plaintext highlighter-rouge">Stranded (Forward)</code> or <code class="language-plaintext highlighter-rouge">Stranded (Reverse)</code></li>
       </ul>
     </li>
   </ul>
@@ -1645,14 +1645,14 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
   <ol>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">featureCounts</code>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">featureCounts</code>
           <ul>
-            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="language-plaintext highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="highlighter-rouge">Webpage</code> output from MultiQC</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">Webpage</code> output from MultiQC</li>
   </ol>
 </blockquote>
 
@@ -1685,10 +1685,10 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
 
   <p><strong>Column Join on Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: <code class="highlighter-rouge">featureCounts output</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Identifier column”</em>: <code class="highlighter-rouge">1</code></li>
-    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines in each input file”</em>: <code class="highlighter-rouge">1</code></li>
-    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Add column name to header”</em>: <code class="highlighter-rouge">No</code></li>
+    <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: <code class="language-plaintext highlighter-rouge">featureCounts output</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Identifier column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+    <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines in each input file”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Add column name to header”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
   </ul>
 
 </blockquote>
@@ -1726,9 +1726,9 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
         <ul>
           <li>In <em>“1: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Cutadapt/Trim Galore!</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt/Trim Galore!</code>
                 <ul>
-                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of Cutadapt”</em>: <code class="highlighter-rouge">Cutadapt Report</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of Cutadapt”</em>: <code class="language-plaintext highlighter-rouge">Cutadapt Report</code> (output of <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 </ul>
               </li>
             </ul>
@@ -1736,9 +1736,9 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“2: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code>
                 <ul>
-                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">FastQC RawData</code> (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">FastQC RawData</code> (output of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 </ul>
               </li>
             </ul>
@@ -1746,9 +1746,9 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“3: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">HISAT2</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">HISAT2</code>
                 <ul>
-                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="highlighter-rouge"><span class="notranslate">Mapping</span> summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of HISAT2”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> summary</code> (output of <strong>HISAT2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 </ul>
               </li>
             </ul>
@@ -1756,11 +1756,11 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“4: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
                 <ul>
-                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">infer_experiment</code>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">infer_experiment</code>
                     <ul>
-                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC infer_experiment output”</em>: <code class="highlighter-rouge">Infer Experiment output</code> (output of <strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC infer_experiment output”</em>: <code class="language-plaintext highlighter-rouge">Infer Experiment output</code> (output of <strong>Infer Experiment</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                     </ul>
                   </li>
                 </ul>
@@ -1770,11 +1770,11 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“5: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Picard</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Picard</code>
                 <ul>
-                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Picard output?”</em>: <code class="highlighter-rouge">Markdups</code>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Picard output?”</em>: <code class="language-plaintext highlighter-rouge">Markdups</code>
                     <ul>
-                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Picard output”</em>: <code class="highlighter-rouge">MarkDuplicate metrics</code> (output of <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Picard output”</em>: <code class="language-plaintext highlighter-rouge">MarkDuplicate metrics</code> (output of <strong>MarkDuplicates</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                     </ul>
                   </li>
                 </ul>
@@ -1784,11 +1784,11 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“6: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">Samtools</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">Samtools</code>
                 <ul>
-                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Samtools output?”</em>: <code class="highlighter-rouge">idxstats</code>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of Samtools output?”</em>: <code class="language-plaintext highlighter-rouge">idxstats</code>
                     <ul>
-                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Samtools idxstats output”</em>: <code class="highlighter-rouge">IdxStats output</code> (output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Samtools idxstats output”</em>: <code class="language-plaintext highlighter-rouge">IdxStats output</code> (output of <strong>IdxStats</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                     </ul>
                   </li>
                 </ul>
@@ -1798,11 +1798,11 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“7: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
                 <ul>
-                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">gene_body_coverage</code>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">gene_body_coverage</code>
                     <ul>
-                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC gene_body_coverage output”</em>: <code class="highlighter-rouge">Gene Body Coverage (BAM) (text)</code> (output of <strong>Gene Body Coverage (
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC gene_body_coverage output”</em>: <code class="language-plaintext highlighter-rouge">Gene Body Coverage (BAM) (text)</code> (output of <strong>Gene Body Coverage (
 BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                     </ul>
                   </li>
@@ -1813,11 +1813,11 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“8: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">RSeQC</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">RSeQC</code>
                 <ul>
-                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="highlighter-rouge">read_distribution</code>
+                  <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of RSeQC output?”</em>: <code class="language-plaintext highlighter-rouge">read_distribution</code>
                     <ul>
-                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC read_distribution output”</em>: <code class="highlighter-rouge">Read Distribution output</code> (output of <strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                      <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RSeQC read_distribution output”</em>: <code class="language-plaintext highlighter-rouge">Read Distribution output</code> (output of <strong>Read Distribution</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                     </ul>
                   </li>
                 </ul>
@@ -1827,9 +1827,9 @@ BAM)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visual
           <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Results”</em>:</li>
           <li>In <em>“9: Results”</em>:
             <ul>
-              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">featureCounts</code>
+              <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">featureCounts</code>
                 <ul>
-                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                  <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Output of FeatureCounts”</em>: <code class="language-plaintext highlighter-rouge">featureCounts summary</code> (output of <strong>featureCounts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 </ul>
               </li>
             </ul>

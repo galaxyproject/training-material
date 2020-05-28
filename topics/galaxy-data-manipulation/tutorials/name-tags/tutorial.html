@@ -318,7 +318,7 @@ time it takes to figure out where your datasets came from.</p>
 </ul>
 
 <p>Name tags “propagate”, they will follow your datasets throughout their analysis.
-To more clearly see this, look at the simple <span class="notranslate">workflow</span> below. If the input datasets are tagged <code class="highlighter-rouge">TB8_R1</code> and <code class="highlighter-rouge">TB8_R2</code>, these tags will propagate to the outputs of any tools run on these datasets. If a tool has multiple inputs with tags, the outputs will have all of the tags like in the bowtie2 tool.</p>
+To more clearly see this, look at the simple <span class="notranslate">workflow</span> below. If the input datasets are tagged <code class="language-plaintext highlighter-rouge">TB8_R1</code> and <code class="language-plaintext highlighter-rouge">TB8_R2</code>, these tags will propagate to the outputs of any tools run on these datasets. If a tool has multiple inputs with tags, the outputs will have all of the tags like in the bowtie2 tool.</p>
 
 <p><img src="../../images/nametag-wf.png" alt="A workflow with some tags overlaid" /></p>
 
@@ -388,10 +388,10 @@ To more clearly see this, look at the simple <span class="notranslate">workflow<
       <p>Add some name tags (hashtags) to your dataset:</p>
 
       <ul>
-        <li><code class="highlighter-rouge">#female</code></li>
-        <li><code class="highlighter-rouge">#male</code></li>
-        <li><code class="highlighter-rouge">#dmel6</code></li>
-        <li><code class="highlighter-rouge">#ecoli</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#female</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#male</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#dmel6</code></li>
+        <li><code class="language-plaintext highlighter-rouge">#ecoli</code></li>
       </ul>
 
       <blockquote class="tip">
@@ -401,9 +401,9 @@ To more clearly see this, look at the simple <span class="notranslate">workflow<
           <li>Click on the dataset</li>
           <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Check that the tag is appearing below the dataset name</li>
         </ul>
@@ -425,7 +425,7 @@ To more clearly see this, look at the simple <span class="notranslate">workflow<
 
   <p>The colours are generated from a checksum of the text of each tag. Every time the same tag is used, the same colour will be generated. Different words will usually result in different colours.</p>
 
-  <p>This allows tags with very similar lengths and word shapes (e.g. <code class="highlighter-rouge">peaks</code> and <code class="highlighter-rouge">genes</code>) which can be mistake at small font size if you aren’t careful.
+  <p>This allows tags with very similar lengths and word shapes (e.g. <code class="language-plaintext highlighter-rouge">peaks</code> and <code class="language-plaintext highlighter-rouge">genes</code>) which can be mistake at small font size if you aren’t careful.
 While current evidence (<a class="citation" href="#microsoft-word-recognition">Jacobs 2017</a>) doesn’t support the “word shape” model of word recognition, it has still been seen to be beneficial to provide more contrast between words when mistakes can be costly (<a class="citation" href="#ntrs-19930010781">Degani 1999</a>). In the context of <span class="notranslate">Galaxy</span>, mistakes are usually not incredibly costly, but can be annoying. This gives an easy additional signal on which you can mentally filter your datasets.</p>
 
   <p>You can read some of the discussion that went into implementing the tags <a href="https://github.com/galaxyproject/galaxy/pull/7072">in the pull request to <span class="notranslate">Galaxy</span></a>.</p>
@@ -449,11 +449,11 @@ While current evidence (<a class="citation" href="#microsoft-word-recognition">J
 
       <p>As you can see in this dialog, data can be selected from a history dataset or pasted in directly</p>
     </li>
-    <li>Set <strong>Upload data as:</strong> to <code class="highlighter-rouge">Datasets</code></li>
+    <li>Set <strong>Upload data as:</strong> to <code class="language-plaintext highlighter-rouge">Datasets</code></li>
     <li>
       <p>Paste the following links into the text box</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
 https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
 https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
 https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
@@ -472,7 +472,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
           <p>Select <strong>Create columns matching <span class="notranslate">expression</span> groups</strong></p>
 
           <ul>
-            <li>Paste <code class="highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular <span class="notranslate">Expression</span>”</em></li>
+            <li>Paste <code class="language-plaintext highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular <span class="notranslate">Expression</span>”</em></li>
             <li>Set <em>“Number of Groups”</em> to 3</li>
             <li>Click on <strong>Apply</strong></li>
           </ul>
@@ -502,13 +502,13 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 
 <p><img src="../../images/nametag-rulebuilder.png" alt="Automatically tagged uploads" /></p>
 
-<p>The datasets now have two types of tags: name tags and general purpose tags. General purpose tags, unlike name tags, will not propagate. They’re mainly useful for searching through your datasets (Try entering <code class="highlighter-rouge">tag=paired</code> in your History search box).</p>
+<p>The datasets now have two types of tags: name tags and general purpose tags. General purpose tags, unlike name tags, will not propagate. They’re mainly useful for searching through your datasets (Try entering <code class="language-plaintext highlighter-rouge">tag=paired</code> in your History search box).</p>
 
 <blockquote class="question">
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>How many tags does the dataset named <code class="highlighter-rouge">GSM461176</code> have? Which ones?</li>
+    <li>How many tags does the dataset named <code class="language-plaintext highlighter-rouge">GSM461176</code> have? Which ones?</li>
     <li>How many of those tags are propagating name tags?</li>
   </ol>
 
@@ -516,8 +516,8 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>3 tags. You can find all tags of a dataset by first clicking on it to expand it, and then clicking on the tags icon <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span>. The tags are <code class="highlighter-rouge">#GSM461177</code>, <code class="highlighter-rouge">paired</code>, and <code class="highlighter-rouge">untreat</code></li>
-      <li>1 propagating name tag. Only hashtags (tags starting with a <code class="highlighter-rouge">#</code> symbol) will propagate to <span class="notranslate">downstream</span> results derived from it. So in this example only <code class="highlighter-rouge">#GSM461177</code> is a propagating name tag.</li>
+      <li>3 tags. You can find all tags of a dataset by first clicking on it to expand it, and then clicking on the tags icon <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span>. The tags are <code class="language-plaintext highlighter-rouge">#GSM461177</code>, <code class="language-plaintext highlighter-rouge">paired</code>, and <code class="language-plaintext highlighter-rouge">untreat</code></li>
+      <li>1 propagating name tag. Only hashtags (tags starting with a <code class="language-plaintext highlighter-rouge">#</code> symbol) will propagate to <span class="notranslate">downstream</span> results derived from it. So in this example only <code class="language-plaintext highlighter-rouge">#GSM461177</code> is a propagating name tag.</li>
     </ol>
 
   </blockquote>
@@ -532,7 +532,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
   <ol>
     <li><strong>Select first</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> lines from a dataset (head)
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“File to select”</em>: Select everything starting with <code class="highlighter-rouge">GSM</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“File to select”</em>: Select everything starting with <code class="language-plaintext highlighter-rouge">GSM</code></li>
       </ul>
     </li>
     <li>Click <strong>Execute</strong></li>

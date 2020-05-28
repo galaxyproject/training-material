@@ -412,7 +412,7 @@ However, for this tutorial we will keep it basic.</p>
 <p>The visualization we are going to create in this tutorial, is a tool that shows the number of aligned
 <span class="notranslate">reads</span> per chromosome of a BAM file. The first thing we need to do is to come up with a name.
 Let’s call it <em>alignment_<span class="notranslate">rna</span>me_boxplot</em>. Note that the reference sequences (usually chromosomes)
-to which we align are named <code class="highlighter-rouge"><span class="notranslate">RNA</span>ME</code> in the BAM/SAM specification.</p>
+to which we align are named <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>ME</code> in the BAM/SAM specification.</p>
 
 <p>The development of a <span class="notranslate">Galaxy</span> visualization takes place within the <span class="notranslate">Galaxy</span> codebase.</p>
 
@@ -420,7 +420,7 @@ to which we align are named <code class="highlighter-rouge"><span class="notrans
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Clone an instance of <span class="notranslate">Galaxy</span> in a path, further referred to as <code class="highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT</code></li>
+    <li>Clone an instance of <span class="notranslate">Galaxy</span> in a path, further referred to as <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT</code></li>
     <li>
       <p>Explore the plugin directory as follows:</p>
 
@@ -453,7 +453,7 @@ configuration in XML format.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
-  <p>Create the file  <code class="highlighter-rouge">config/alignment_<span class="notranslate">rna</span>me_boxplot.xml</code> with the following contents:</p>
+  <p>Create the file  <code class="language-plaintext highlighter-rouge">config/alignment_<span class="notranslate">rna</span>me_boxplot.xml</code> with the following contents:</p>
 
   <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
 <span class="cp">&lt;!DOCTYPE visualization SYSTEM "../../visualization.dtd"&gt;</span>
@@ -482,8 +482,8 @@ the history menu. It also links the plugin to two file formats: BAM and SAM, whi
 for any history item of these file formats the plugin will automatically become available.</p>
 
 <p>It also includes a reference to a mako template file (HTML + Python syntax), to be found in the
-<code class="highlighter-rouge">templates</code> directory (we will create this file in the next section). The <code class="highlighter-rouge">var_name_in_template</code>
-parameter is set to the value <code class="highlighter-rouge">hda</code>, which will be the name of the variable in the mako template
+<code class="language-plaintext highlighter-rouge">templates</code> directory (we will create this file in the next section). The <code class="language-plaintext highlighter-rouge">var_name_in_template</code>
+parameter is set to the value <code class="language-plaintext highlighter-rouge">hda</code>, which will be the name of the variable in the mako template
 corresponding to the dataset to be visualized.</p>
 
 <h2 id="creating-the-visualization">Creating the visualization</h2>
@@ -521,11 +521,11 @@ below.</p>
 </span></code></pre></div></div>
 
 <ul>
-  <li><code class="highlighter-rouge">hdadict</code> is a variable that contains a file identifier that has been encoded to it’s
+  <li><code class="language-plaintext highlighter-rouge">hdadict</code> is a variable that contains a file identifier that has been encoded to it’s
  exposed uid.</li>
-  <li><code class="highlighter-rouge">root</code> indicates location of <span class="notranslate">Galaxy</span> on the webserver (e.g. <code class="highlighter-rouge">/</code>, <code class="highlighter-rouge">/<span class="notranslate">galaxy</span>/</code>, <code class="highlighter-rouge">/<span class="notranslate">galaxy</span>-pub/</code>, etc).</li>
-  <li><code class="highlighter-rouge">app_root</code> contains the exposed url of the static files for this visualization.</li>
-  <li><code class="highlighter-rouge">file_url</code> contains the exposed url of the dataset selected (by user) for visualization.</li>
+  <li><code class="language-plaintext highlighter-rouge">root</code> indicates location of <span class="notranslate">Galaxy</span> on the webserver (e.g. <code class="language-plaintext highlighter-rouge">/</code>, <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span>/</code>, <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span>-pub/</code>, etc).</li>
+  <li><code class="language-plaintext highlighter-rouge">app_root</code> contains the exposed url of the static files for this visualization.</li>
+  <li><code class="language-plaintext highlighter-rouge">file_url</code> contains the exposed url of the dataset selected (by user) for visualization.</li>
 </ul>
 
 <p>We could obtain the BAM file client-side by downloading the BAM/SAM file in its entirety via
@@ -538,16 +538,16 @@ number of entries per chromosome, in order to be able to access the data contain
 quickly. In the mako template we can access a BAM index as <em>hda.metadata.bam_index</em>.
 (Note that this is a file path on the server, not an exposed URL).</p>
 
-<p>Samtools has a command named <code class="highlighter-rouge">idxstats</code> which is able to leverage this BAM index you. However,
+<p>Samtools has a command named <code class="language-plaintext highlighter-rouge">idxstats</code> which is able to leverage this BAM index you. However,
 since visualizations do not have dependency management, it is very tricky to let the mako template
-do a system call to samtools. Fortunately, the <span class="notranslate">Galaxy</span> ecosystem ships with a built-in <code class="highlighter-rouge">pysam</code>
+do a system call to samtools. Fortunately, the <span class="notranslate">Galaxy</span> ecosystem ships with a built-in <code class="language-plaintext highlighter-rouge">pysam</code>
 dependency, a library that can do any native samtools command within python.</p>
 
-<p>The <code class="highlighter-rouge">*.metadata.bam_index</code> is a special kind of file in the <span class="notranslate">Galaxy</span> ecosystem. It is actually an
+<p>The <code class="language-plaintext highlighter-rouge">*.metadata.bam_index</code> is a special kind of file in the <span class="notranslate">Galaxy</span> ecosystem. It is actually an
 invisible file in <span class="notranslate">Galaxy</span>, linked to another history item, but does have a unique filename.
-So, for the BAM file <code class="highlighter-rouge">./database/files/000/dataset_001.dat</code>, our BAI file (index) is <strong>not</strong>
-<code class="highlighter-rouge">./database/files/000/dataset_001.dat.bai</code> but could be <code class="highlighter-rouge">./database/files/000/dataset_002.dat</code> or
-<code class="highlighter-rouge">./database/files/000/dataset_003.dat</code>. We can create a symlink to this index file to ensure the
+So, for the BAM file <code class="language-plaintext highlighter-rouge">./database/files/000/dataset_001.dat</code>, our BAI file (index) is <strong>not</strong>
+<code class="language-plaintext highlighter-rouge">./database/files/000/dataset_001.dat.bai</code> but could be <code class="language-plaintext highlighter-rouge">./database/files/000/dataset_002.dat</code> or
+<code class="language-plaintext highlighter-rouge">./database/files/000/dataset_003.dat</code>. We can create a symlink to this index file to ensure the
 bam file and its index share the same prefix, as expected by samtools and pysam.</p>
 
 <p>We can create this symlink as follows in our mako template:</p>
@@ -560,7 +560,7 @@ bam file and its index share the same prefix, as expected by samtools and pysam.
    <span class="n">os</span><span class="p">.</span><span class="n">symlink</span><span class="p">(</span><span class="n">hda</span><span class="p">.</span><span class="n">metadata</span><span class="p">.</span><span class="n">bam_index</span><span class="p">.</span><span class="n">file_name</span><span class="p">,</span> <span class="n">bai_target</span><span class="p">)</span>
 </code></pre></div></div>
 
-<p>Now the BAM file has a <code class="highlighter-rouge">.bai</code> file with the same prefix, and we can run the <code class="highlighter-rouge">idxstats</code>
+<p>Now the BAM file has a <code class="language-plaintext highlighter-rouge">.bai</code> file with the same prefix, and we can run the <code class="language-plaintext highlighter-rouge">idxstats</code>
 as follows:</p>
 
 <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Extract idxstats
@@ -582,7 +582,7 @@ To do that, we add an HTML section to the end of the mako file.</p>
 <span class="nt">&lt;/html&gt;</span>
 </code></pre></div></div>
 
-<p>Here you see <code class="highlighter-rouge">${bam_idxstats_data | h}</code>, which prints the python variable into
+<p>Here you see <code class="language-plaintext highlighter-rouge">${bam_idxstats_data | h}</code>, which prints the python variable into
 the HTML page and also does HTML escaping by providing the ` | h`-flag (for security reasons).</p>
 
 <p>Let’s put this all together.</p>
@@ -591,7 +591,7 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
   <h3 id="hands_on-hands-on-data-upload-2"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
-    <li>Create the mako file <code class="highlighter-rouge">templates/alignment_<span class="notranslate">rna</span>me_boxplot.mako</code></li>
+    <li>Create the mako file <code class="language-plaintext highlighter-rouge">templates/alignment_<span class="notranslate">rna</span>me_boxplot.mako</code></li>
     <li>
       <p>Fill it with the following code:</p>
 
@@ -657,12 +657,12 @@ the HTML page and also does HTML escaping by providing the ` | h`-flag (for secu
 
 <p>All the visualization does at the moment, is show the contents of idxstats, compiled to HTML:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>['chrA\t5386\t2\t0\n', 'chrB\t5386\t4\t0\n', 'chrC\t5386\t1\t0\n', 'chrD\t5386\t6\t1\n',
 'chrE\t5386\t3\t0\n', 'chrF\t5386\t2\t0\n', 'chrG\t5386\t1\t0\n', '*\t0\t0\t0\n']
 </code></pre></div></div>
 
-<p>It contains eight entries, one for each of our (made-up) chromosomes and one to <code class="highlighter-rouge">*</code>, which represents
-the unmapped <span class="notranslate">reads</span>. Entries are tab delimited (<code class="highlighter-rouge">\t</code>) and for the <code class="highlighter-rouge">chrA</code> entry it indicates that the
+<p>It contains eight entries, one for each of our (made-up) chromosomes and one to <code class="language-plaintext highlighter-rouge">*</code>, which represents
+the unmapped <span class="notranslate">reads</span>. Entries are tab delimited (<code class="language-plaintext highlighter-rouge">\t</code>) and for the <code class="language-plaintext highlighter-rouge">chrA</code> entry it indicates that the
 length of the <span class="notranslate">RNA</span>ME (chromosome) is 5386 bases and 2 <span class="notranslate">reads</span> are aligned to it.</p>
 
 <p>To make the data a bit more usable for Javascript , we convert it into a simple dictionary
@@ -764,7 +764,7 @@ functional changes to the mako files.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Retrigger the visualization and open the developers console of your browser: In the console, type: <code class="highlighter-rouge">bam_idxstats_data</code> and press <kbd>Enter</kbd>
+      <p>Retrigger the visualization and open the developers console of your browser: In the console, type: <code class="language-plaintext highlighter-rouge">bam_idxstats_data</code> and press <kbd>Enter</kbd>
   This should give the parsed contents as a dictionary, which can directly be used in Javascript.</p>
     </li>
   </ol>
@@ -780,8 +780,8 @@ chromosome.</p>
 
 <p><img src="../../images/vis_plugins_example.png" alt="Example visualization" /></p>
 
-<p>The full contents of this plugin are provided in the <a href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot">GitHub repository related to this material in <code class="highlighter-rouge">tree/master/topics/dev/files/hands_on-visualizations/alignment_<span class="notranslate">rna</span>me_boxplot</code></a>.
-To try out this example, simply copy this folder to the <code class="highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT/config/plugins/visualizations/</code> folder
+<p>The full contents of this plugin are provided in the <a href="https://github.com/galaxyproject/training-material/tree/master/topics/dev/files/hands_on-visualizations/alignment_rname_boxplot">GitHub repository related to this material in <code class="language-plaintext highlighter-rouge">tree/master/topics/dev/files/hands_on-visualizations/alignment_<span class="notranslate">rna</span>me_boxplot</code></a>.
+To try out this example, simply copy this folder to the <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT/config/plugins/visualizations/</code> folder
 on your (local) <span class="notranslate">Galaxy</span> and restart <span class="notranslate">Galaxy</span>.</p>
 
 <p>The contents of the mako file for this example are given below.</p>
@@ -903,7 +903,7 @@ on your (local) <span class="notranslate">Galaxy</span> and restart <span class=
 
 </code></pre></div></div>
 
-<p>In the given example, the <code class="highlighter-rouge"><span class="notranslate">RNA</span>ME</code> queries containing an underscore were removed.
+<p>In the given example, the <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>ME</code> queries containing an underscore were removed.
 This is because there are many alte<span class="notranslate">rna</span>tive chromosomes, making the list very large
 for certain reference genomes. However, for certain studies it might be desired to
 just look at those.</p>
@@ -931,9 +931,9 @@ this delay becomes. The underlying problem is that we did not obtain and parse t
 Javascript. This would be a more elaborate solution, but requires more development time as we
 need to develop a function able to parse the binary file.</p>
 
-<p>Another thing we could do is create a static <code class="highlighter-rouge">samtools idxstats</code> tool, that creates a file of
-datatype <code class="highlighter-rouge">tabular.Idxstats</code> and include that datatype into <span class="notranslate">Galaxy</span>. We then make the visualization
-specific for that datatype, just plotting the results of the <code class="highlighter-rouge">idxstats</code>.</p>
+<p>Another thing we could do is create a static <code class="language-plaintext highlighter-rouge">samtools idxstats</code> tool, that creates a file of
+datatype <code class="language-plaintext highlighter-rouge">tabular.Idxstats</code> and include that datatype into <span class="notranslate">Galaxy</span>. We then make the visualization
+specific for that datatype, just plotting the results of the <code class="language-plaintext highlighter-rouge">idxstats</code>.</p>
 
 <p>A fundamental and more complicated problem is that BAM files are simply too big to transfer for
 these kind of applications. It would be ideal to have web server integration that allows querying
@@ -948,7 +948,7 @@ care of at the server side. This is what has been done in Trackster.</p>
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>We have just created a visualization plugin in <span class="notranslate">Galaxy</span> to visualize the number of alignments
-per <code class="highlighter-rouge"><span class="notranslate">RNA</span>ME</code> (chromosome) in a BAM file.</p>
+per <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>ME</code> (chromosome) in a BAM file.</p>
 
 
                     

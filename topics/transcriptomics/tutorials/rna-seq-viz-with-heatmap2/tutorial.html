@@ -644,7 +644,7 @@
 
 <p>Heatmaps are commonly used to visualize <span class="notranslate">RNA</span>-Seq results. They are useful for visualizing the <span class="notranslate">expression</span> of genes across the samples. In this tutorial we show how the <strong>heatmap2</strong> tool in <span class="notranslate">Galaxy</span> can be used to generate heatmaps. The heatmap2 tool uses the heatmap.2 function from the R gplots package. Here we will demonstrate how to make a heatmap of the top differentially expressed (DE) genes in an <span class="notranslate">RNA</span>-Seq experiment, similar to what is shown for the fruitfly dataset in the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>. We will also show how a heatmap for a custom set of genes an be created.</p>
 
-<p>To generate a heatmap of <span class="notranslate">RNA</span>-seq results, we need a file of normalized counts. This file is provided for you here. The <span class="notranslate">expression</span> values have been normalized for differences in sequencing depth and composition bias between the samples. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a> tutorial, and run limma-voom selecting <em>“Output Normalised Counts Table?”</em>: <code class="highlighter-rouge">Yes</code>. You could also use a file of normalized counts from other <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tools, such as edgeR or DESeq2. We also need some genes to plot in the heatmap.</p>
+<p>To generate a heatmap of <span class="notranslate">RNA</span>-seq results, we need a file of normalized counts. This file is provided for you here. The <span class="notranslate">expression</span> values have been normalized for differences in sequencing depth and composition bias between the samples. To generate this file yourself, see the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes</a> tutorial, and run limma-voom selecting <em>“Output Normalised Counts Table?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>. You could also use a file of normalized counts from other <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tools, such as edgeR or DESeq2. We also need some genes to plot in the heatmap.</p>
 
 <p>The data for this tutorial comes from a Nature Cell Biology paper, <a href="https://www.ncbi.nlm.nih.gov/pubmed/25730472">EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival</a>), Fu et al. 2015. This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status.</p>
 
@@ -693,7 +693,7 @@
 
   <ol>
     <li>
-      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="highlighter-rouge"><span class="notranslate">RNA</span>-seq heatmap</code></p>
+      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq heatmap</code></p>
 
       <blockquote class="tip">
 
@@ -775,20 +775,20 @@
         <li>
           <p>You can paste the links below into the <strong>Paste/Fetch</strong> box:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529926/files/limma-voom_normalised_counts
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529926/files/limma-voom_normalised_counts
 https://zenodo.org/record/2529926/files/limma-voom_luminalpregnant-luminallactate
 https://zenodo.org/record/2529926/files/heatmap_genes
 </code></pre></div>          </div>
         </li>
         <li>
-          <p>Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></p>
+          <p>Select <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></p>
         </li>
       </ul>
     </li>
-    <li>Rename the counts dataset as <code class="highlighter-rouge">normalized counts</code>, the limma-voom_luminalpregnant-luminallactate file as <code class="highlighter-rouge">DE results</code> and the list of genes as <code class="highlighter-rouge">heatmap genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
+    <li>Rename the counts dataset as <code class="language-plaintext highlighter-rouge">normalized counts</code>, the limma-voom_luminalpregnant-luminallactate file as <code class="language-plaintext highlighter-rouge">DE results</code> and the list of genes as <code class="language-plaintext highlighter-rouge">heatmap genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
     <li>
-      <p>Check that the datatype is <code class="highlighter-rouge">tabular</code>.
-If the datatype is not <code class="highlighter-rouge">tabular</code>, please change the file type to <code class="highlighter-rouge">tabular</code>.</p>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.
+If the datatype is not <code class="language-plaintext highlighter-rouge">tabular</code>, please change the file type to <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <blockquote class="tip">
 
@@ -796,7 +796,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -805,13 +805,13 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 </blockquote>
 
-<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the the <code class="highlighter-rouge">DE results</code> file and take a look. It should look like below with 8 columns (just the first few rows are shown).</p>
+<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of the the <code class="language-plaintext highlighter-rouge">DE results</code> file and take a look. It should look like below with 8 columns (just the first few rows are shown).</p>
 
 <figure id="figure-2"><img src="../../images/rna-seq-viz-with-heatmap2/DE_results.png" alt="DE results" /><figcaption><span class="figcaption-prefix">Figure 2:</span> DE results</figcaption></figure>
 
 <h1 id="create-heatmap-of-top-de-genes">Create heatmap of top DE genes</h1>
 
-<p>First we’ll demonstrate how to create a heatmap of the top differentially expressed genes in an <span class="notranslate">RNA</span>-seq dataset. To do this we need to extract the differentially expressed genes from the <code class="highlighter-rouge">DE results</code> file. This file contains the results from comparing gene <span class="notranslate">expression</span> in the luminal cells in the pregnant versus lactating mice. It includes genes that are not significantly differentially expressed. As in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes tutorial</a>), we’ll call genes significantly differentially expressed in this dataset if they pass the thresholds of adjusted P value &lt; 0.01 and fold change of &gt; 1.5 (log2FC of 0.58).</p>
+<p>First we’ll demonstrate how to create a heatmap of the top differentially expressed genes in an <span class="notranslate">RNA</span>-seq dataset. To do this we need to extract the differentially expressed genes from the <code class="language-plaintext highlighter-rouge">DE results</code> file. This file contains the results from comparing gene <span class="notranslate">expression</span> in the luminal cells in the pregnant versus lactating mice. It includes genes that are not significantly differentially expressed. As in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-seq counts to genes tutorial</a>), we’ll call genes significantly differentially expressed in this dataset if they pass the thresholds of adjusted P value &lt; 0.01 and fold change of &gt; 1.5 (log2FC of 0.58).</p>
 
 <h2 id="extract-all-significant-genes">Extract all significant genes</h2>
 
@@ -821,19 +821,19 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <ol>
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract genes with adj P &lt; 0.01:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">DE results</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">c8&lt;0.01</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">DE results</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c8&lt;0.01</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to extract genes with absolute fold change &gt; 1.5 (log2fc of 0.58):
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of Filter <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="highlighter-rouge">abs(c4)&gt;0.58</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">abs(c4)&gt;0.58</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li>Rename file to <code class="highlighter-rouge">Significant genes</code></li>
+    <li>Rename file to <code class="language-plaintext highlighter-rouge">Significant genes</code></li>
   </ol>
 </blockquote>
 
@@ -848,17 +848,17 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
     <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to sort by P value:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: output of 2nd Filter <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on Column”</em>: <code class="highlighter-rouge">7</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in”</em>: <code class="highlighter-rouge">Ascending order</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flavor”</em>: <code class="highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on Column”</em>: <code class="language-plaintext highlighter-rouge">7</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
       </ul>
     </li>
     <li><strong>Select first lines from a dataset</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to select top genes:
       <ul>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select first”</em>: <code class="highlighter-rouge">21</code> (20 genes plus header row)</li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select first”</em>: <code class="language-plaintext highlighter-rouge">21</code> (20 genes plus header row)</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: output of Sort <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li>Rename file as <code class="highlighter-rouge">top 20 by Pvalue</code></li>
+        <li>Rename file as <code class="language-plaintext highlighter-rouge">top 20 by Pvalue</code></li>
       </ul>
     </li>
   </ol>
@@ -868,7 +868,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <p>Now we have a file that contains only the top 20 genes from the DE results. Next we need to get the normalized counts for these genes, from the file containing the normalized counts for all genes in the experiment, and then extract just the columns we need for the heatmap (the normalized counts and gene labels).</p>
 
-<p>First click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="highlighter-rouge">normalized counts</code> file that we imported. It should look like below (just the first few rows and columns are shown). Note that the normalized count values are log2. We will join our <code class="highlighter-rouge">top 20 by Pvalue</code> file to the <code class="highlighter-rouge">normalized counts</code> file, matching on the ENTREZID columns.</p>
+<p>First click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="language-plaintext highlighter-rouge">normalized counts</code> file that we imported. It should look like below (just the first few rows and columns are shown). Note that the normalized count values are log2. We will join our <code class="language-plaintext highlighter-rouge">top 20 by Pvalue</code> file to the <code class="language-plaintext highlighter-rouge">normalized counts</code> file, matching on the ENTREZID columns.</p>
 
 <figure id="figure-3"><img src="../../images/rna-seq-viz-with-heatmap2/normalized_counts.png" alt="Normalized counts" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Normalized counts</figcaption></figure>
 
@@ -877,19 +877,19 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <ol>
     <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to join on the ENTREZID column:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="highlighter-rouge">top 20 by Pvalue</code> file</li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="highlighter-rouge">normalized counts</code> file</li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="language-plaintext highlighter-rouge">top 20 by Pvalue</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="language-plaintext highlighter-rouge">normalized counts</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p>The generated file has more columns than we need for the heatmap. In addition to the columns with normalized counts (in log2), there is the \(log_{2} FC\) and other information. We need to remove the extra columns.</p>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene symbols and normalized counts
       <ul>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c2,c12-c23</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c2,c12-c23</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the joined dataset (output of <strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
@@ -911,17 +911,17 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
     <li><strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data transformation”</em>: <code class="highlighter-rouge">Plot the data as it is</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Enable data clustering”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labeling columns and rows”</em>: <code class="highlighter-rouge">Label my columns and rows</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Coloring groups”</em>: <code class="highlighter-rouge">Blue to white to red</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data scaling”</em>: <code class="highlighter-rouge">Scale my data by row</code> (scale genes)</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Plot the data as it is</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Enable data clustering”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labeling columns and rows”</em>: <code class="language-plaintext highlighter-rouge">Label my columns and rows</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Coloring groups”</em>: <code class="language-plaintext highlighter-rouge">Blue to white to red</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data scaling”</em>: <code class="language-plaintext highlighter-rouge">Scale my data by row</code> (scale genes)</li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (<code class="highlighter-rouge">MCL1.LC</code> and <code class="highlighter-rouge">MCL1.LD</code>) versus the luminal cells from the lactating mice (<code class="highlighter-rouge">MCL1.LE</code> and <code class="highlighter-rouge">MCL1.LF</code>). This heatmap enables us to see the <span class="notranslate">expression</span> of these genes in all the samples from the different groups in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).</p>
+<p>You should see a heatmap like below. Note that here we are plotting the top genes differentially expressed in the luminal cells from the pregnant mice (<code class="language-plaintext highlighter-rouge">MCL1.LC</code> and <code class="language-plaintext highlighter-rouge">MCL1.LD</code>) versus the luminal cells from the lactating mice (<code class="language-plaintext highlighter-rouge">MCL1.LE</code> and <code class="language-plaintext highlighter-rouge">MCL1.LF</code>). This heatmap enables us to see the <span class="notranslate">expression</span> of these genes in all the samples from the different groups in the experiment (basal virgin, basal pregnant, basal lactating, luminal virgin, luminal pregnant, luminal lactating).</p>
 
 <figure id="figure-5"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap2_top20.png" alt="Heatmap of top DE genes" width="150%" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Heatmap of top DE genes</figcaption></figure>
 
@@ -929,7 +929,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
   <ol>
     <li>Why do we not use clustering here?</li>
-    <li>Why do we scale the rows (genes)? Try rerunning heatmap2 changing the <em>“Data scaling”</em> parameter to <code class="highlighter-rouge">Do not scale my data</code>.</li>
+    <li>Why do we scale the rows (genes)? Try rerunning heatmap2 changing the <em>“Data scaling”</em> parameter to <code class="language-plaintext highlighter-rouge">Do not scale my data</code>.</li>
     <li>The genes are ordered by P value. Can you make the heatmap with the genes ordered by fold change? Hint: Sort by the logFC column in ascending order to have the genes downregulated in the luminal pregnant vs lactating (negative fold change) at the top and the upregulated genes (positive fold change) at the bottom.</li>
     <li>
       <p>How could we make a heatmap of the top 10 most upregulated and top 10 most downregulated significant genes?</p>
@@ -959,11 +959,11 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <figure id="figure-9"><img src="../../images/rna-seq-viz-with-heatmap2/fu_heatmap.png" alt="Fu heatmap" width="50%" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Fu et al, Nat Cell Biol 2015</figcaption></figure>
 
-<p>These 31 genes are in the file we imported called <code class="highlighter-rouge">heatmap genes</code>, shown below.</p>
+<p>These 31 genes are in the file we imported called <code class="language-plaintext highlighter-rouge">heatmap genes</code>, shown below.</p>
 
 <figure id="figure-10"><img src="../../images/rna-seq-viz-with-heatmap2/heatmap_genes.png" alt="Heatmap genes" height="30%" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Heatmap genes</figcaption></figure>
 
-<p>As in the previous example, we need to extract the normalized counts for just these 31 genes. To do that we will join the <code class="highlighter-rouge">heatmap genes</code> file with the <code class="highlighter-rouge">normalized counts</code> file, on the Gene Symbol columns this time (instead of ENTREZID), and then extract the columns we need.</p>
+<p>As in the previous example, we need to extract the normalized counts for just these 31 genes. To do that we will join the <code class="language-plaintext highlighter-rouge">heatmap genes</code> file with the <code class="language-plaintext highlighter-rouge">normalized counts</code> file, on the Gene Symbol columns this time (instead of ENTREZID), and then extract the columns we need.</p>
 
 <h2 id="extract-normalized-counts-for-custom-genes">Extract normalized counts for custom genes</h2>
 
@@ -973,17 +973,17 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <ol>
     <li><strong>Join two Datasets side by side on a specified field</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="highlighter-rouge">heatmap genes</code> file</li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="highlighter-rouge">normalized counts</code> file</li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="highlighter-rouge">Column: 2</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Join”</em>: the <code class="language-plaintext highlighter-rouge">heatmap genes</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“with”</em>: <code class="language-plaintext highlighter-rouge">normalized counts</code> file</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“and column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Keep the header lines”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract the columns with the gene ids and normalized counts
       <ul>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c5-c16</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c5-c16</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the joined dataset (output of <strong>Join two Datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
 
@@ -993,7 +993,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
       <ul>
         <li><em>“Input tabular dataset”</em>:
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the <code class="highlighter-rouge">Cut</code> dataset (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: the <code class="language-plaintext highlighter-rouge">Cut</code> dataset (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
           </ul>
         </li>
       </ul>
@@ -1014,11 +1014,11 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
     <li><strong>heatmap2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input should have column headers”</em>: the generated table (output of <strong>Transpose</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data transformation”</em>: <code class="highlighter-rouge">Plot the data as it is</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Enable data clustering”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labeling columns and rows”</em>: <code class="highlighter-rouge">Label my columns and rows</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Coloring groups”</em>: <code class="highlighter-rouge">Blue to white to red</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data scaling”</em>: <code class="highlighter-rouge">Scale my data by column</code> (scale genes)</li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data transformation”</em>: <code class="language-plaintext highlighter-rouge">Plot the data as it is</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Enable data clustering”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labeling columns and rows”</em>: <code class="language-plaintext highlighter-rouge">Label my columns and rows</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Coloring groups”</em>: <code class="language-plaintext highlighter-rouge">Blue to white to red</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Data scaling”</em>: <code class="language-plaintext highlighter-rouge">Scale my data by column</code> (scale genes)</li>
       </ul>
     </li>
   </ol>

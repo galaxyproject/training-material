@@ -396,7 +396,7 @@
 
 <figure id="figure-1"><img src="../../images/neuron.svg" alt="data" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Structure of an artificial neuron. The input x (x1, x2, ..., xn) and its corresponding weight w (w1, w2, ..., wn) are vectors. The input and its weight are transformed to produce an output y</figcaption></figure>
 
-<p>An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes input <code class="highlighter-rouge">x</code> (only <code class="highlighter-rouge">x1</code> and <code class="highlighter-rouge">x2</code> are shown for simplicity) and computes output <code class="highlighter-rouge">y</code>. The entities <code class="highlighter-rouge">w1</code>, <code class="highlighter-rouge">w2</code> are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output <code class="highlighter-rouge">y</code> (shown in Figures 2, 3 and 4).</p>
+<p>An artificial neuron is shown in Figure 1. The neuron, shown in orange, takes input <code class="language-plaintext highlighter-rouge">x</code> (only <code class="language-plaintext highlighter-rouge">x1</code> and <code class="language-plaintext highlighter-rouge">x2</code> are shown for simplicity) and computes output <code class="language-plaintext highlighter-rouge">y</code>. The entities <code class="language-plaintext highlighter-rouge">w1</code>, <code class="language-plaintext highlighter-rouge">w2</code> are the weights of the connections (between inputs and neuron). The weights and inputs are combined following the basic principles of mathematics to produce output <code class="language-plaintext highlighter-rouge">y</code> (shown in Figures 2, 3 and 4).</p>
 
 <figure id="figure-2"><img src="../../images/eq1.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Transformation of a component (x1) of the input vector (x).</figcaption></figure>
 
@@ -419,7 +419,7 @@
 <p>As discussed earlier, neurons make the building blocks of a neural network and are arranged in several layers and a usual neural network looks like as shown in Figure 7.</p>
 
 <h4 id="input-layer">Input layer</h4>
-<p>In the neural network (Figure 7), the input layer is shown in green. This layer receives input data and passes it on to the next layer. The number of neurons in this layer depends on the number of dimensions of input data. For example, if input data (matrix) is of size (500, 10), 500 rows (samples) and 10 columns (features), then the number of neurons in the input layer should be 10. Each neuron in input layer is connected to all neurons in the next layer. All these connections have a separate weight (denoted by <code class="highlighter-rouge">w</code>).</p>
+<p>In the neural network (Figure 7), the input layer is shown in green. This layer receives input data and passes it on to the next layer. The number of neurons in this layer depends on the number of dimensions of input data. For example, if input data (matrix) is of size (500, 10), 500 rows (samples) and 10 columns (features), then the number of neurons in the input layer should be 10. Each neuron in input layer is connected to all neurons in the next layer. All these connections have a separate weight (denoted by <code class="language-plaintext highlighter-rouge">w</code>).</p>
 
 <h4 id="hidden-layer">Hidden layer</h4>
 <p>The next two layers after the input layer are called hidden layers. In the first hidden layer too, all the neurons are connected to all other neurons in the adjacent (hidden) layer. The number of hidden layers determines if the resulting neural network is deep (2 or more hidden layers) or shallow. When the number of hidden layers is 2 or more, the structure or architecture of the neural network is deep and overall learning is called deep learning. More the number of hidden layers, the more complex the architecture is. A complex architecture is beneficial for learning unique patterns from big data. But, complex architecture is prone to <a href="https://en.wikipedia.org/wiki/Overfitting">overfitting</a> when a neural network starts memorising data without learning unique and general patterns.</p>
@@ -461,7 +461,7 @@
       <li>The learning happens by minimising the loss between the computed and actual output. The weights of all neuronal connections are adjusted (increased or decreased) to achieve the minimum loss. To ascertain the amount of change for weights, a technique known as backpropagation is used. Using this technique, the loss computed at the output layer is “propagated” back in the neural network (from output to input layer) and each neuronal connection is assigned a share of the total loss. In other words, how much each neuron is contributing to the total accumulated loss. For example, w1 is adjusted according to equation:</li>
     </ol>
     <figure id="figure-9"><img src="../../images/partial_derivative.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Weight w1 is updated by computing a partial derivative of loss L with respect to weight. The derivative is multiplied with learning rate n.</figcaption></figure>
-    <p>In the above equation, <code class="highlighter-rouge">L</code> is the total loss, <code class="highlighter-rouge">w1</code> is the weight of a connection between an input neuron and a hidden neuron. Similarly, all weights are adjusted and in the subsequent iteration, the updated weights are used to compute loss at the output layer. Parameter <code class="highlighter-rouge">n</code> is the learning rate which determines how small or big changes are needed in weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) as the training epochs proceed because initially a large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum. More on backpropagation can be read <a href="http://neuralnetworksanddeeplearning.com/chap2.html">here</a>.</p>
+    <p>In the above equation, <code class="language-plaintext highlighter-rouge">L</code> is the total loss, <code class="language-plaintext highlighter-rouge">w1</code> is the weight of a connection between an input neuron and a hidden neuron. Similarly, all weights are adjusted and in the subsequent iteration, the updated weights are used to compute loss at the output layer. Parameter <code class="language-plaintext highlighter-rouge">n</code> is the learning rate which determines how small or big changes are needed in weights. It can either be a fixed quantity or a variable one. In case of a variable learning rate, it usually starts with a large number (say 1.0) and subsequently decays to a small number (say 0.001) as the training epochs proceed because initially a large learning rate helps to reach close to the minimum error quickly and then it is decayed to slow down the learning so that it stabilises at the minimum. More on backpropagation can be read <a href="http://neuralnetworksanddeeplearning.com/chap2.html">here</a>.</p>
 
   </blockquote>
 
@@ -473,7 +473,7 @@
 <figure id="figure-10"><img src="../../images/dl_bioinformatics.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Different architectures of neural networks for different fields of bioinformatics.</figcaption></figure>
 
 <h2 id="get-training-and-test-datasets">Get training and test datasets</h2>
-<p>The datasets used for this tutorial contain gene <span class="notranslate">expression</span> profiles of humans suffering from two types of cancer - <a href="https://en.wikipedia.org/wiki/Acute_myeloid_leukemia">acute myeloid leukemia (AML)</a> and <a href="https://en.wikipedia.org/wiki/Acute_lymphoblastic_leukemia">acute lymphoblastic leukemia (ALL)</a>. The tutorial aims to differentiate between these two cancer types, predicting a cancer type for each patient, by learning unique patterns in gene <span class="notranslate">expression</span> profiles of patients. The data is divided into 2 parts - one for training and another for prediction. Each part contains two datasets - one has the gene <span class="notranslate">expression</span> profiles and another has labels (the types of cancer). The size of the training data (<code class="highlighter-rouge">X_train</code>) is (38, 7129) where 38 is the number of patients and 7129 is the number of genes. The label dataset (<code class="highlighter-rouge">y_train</code>) is of size (38, 1) and contains the information of the type of cancer for each patient (label encoding is 0 for ALL and 1 for AML). The test dataset (<code class="highlighter-rouge">X_test</code>) is of size (34, 7129) and contains the same genes for 34 different patients. The label dataset for test is <code class="highlighter-rouge">y_test</code> and is of size (34, 1). The neural network, which will be formulated in the remaining part of the tutorial, learns on the training data and its labels to create a trained model. The prediction ability of this model is evaluated on the test data (which is unseen during training to get an unbiased estimate of prediction ability). These datasets are uploaded to <span class="notranslate">Galaxy</span> by following the steps defined below:</p>
+<p>The datasets used for this tutorial contain gene <span class="notranslate">expression</span> profiles of humans suffering from two types of cancer - <a href="https://en.wikipedia.org/wiki/Acute_myeloid_leukemia">acute myeloid leukemia (AML)</a> and <a href="https://en.wikipedia.org/wiki/Acute_lymphoblastic_leukemia">acute lymphoblastic leukemia (ALL)</a>. The tutorial aims to differentiate between these two cancer types, predicting a cancer type for each patient, by learning unique patterns in gene <span class="notranslate">expression</span> profiles of patients. The data is divided into 2 parts - one for training and another for prediction. Each part contains two datasets - one has the gene <span class="notranslate">expression</span> profiles and another has labels (the types of cancer). The size of the training data (<code class="language-plaintext highlighter-rouge">X_train</code>) is (38, 7129) where 38 is the number of patients and 7129 is the number of genes. The label dataset (<code class="language-plaintext highlighter-rouge">y_train</code>) is of size (38, 1) and contains the information of the type of cancer for each patient (label encoding is 0 for ALL and 1 for AML). The test dataset (<code class="language-plaintext highlighter-rouge">X_test</code>) is of size (34, 7129) and contains the same genes for 34 different patients. The label dataset for test is <code class="language-plaintext highlighter-rouge">y_test</code> and is of size (34, 1). The neural network, which will be formulated in the remaining part of the tutorial, learns on the training data and its labels to create a trained model. The prediction ability of this model is evaluated on the test data (which is unseen during training to get an unbiased estimate of prediction ability). These datasets are uploaded to <span class="notranslate">Galaxy</span> by following the steps defined below:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -498,14 +498,14 @@
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/3706539#.XmjDYHVKg5k">Zenodo</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3706539/files/X_test.tsv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3706539/files/X_test.tsv
 https://zenodo.org/record/3706539/files/X_train.tsv
 https://zenodo.org/record/3706539/files/y_test.tsv
 https://zenodo.org/record/3706539/files/y_train.tsv
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Rename the datasets as <code class="highlighter-rouge">X_test</code>, <code class="highlighter-rouge">X_train</code>, <code class="highlighter-rouge">y_test</code> and <code class="highlighter-rouge">y_train</code> respectively.</p>
+      <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">X_test</code>, <code class="language-plaintext highlighter-rouge">X_train</code>, <code class="language-plaintext highlighter-rouge">y_test</code> and <code class="language-plaintext highlighter-rouge">y_train</code> respectively.</p>
 
       <blockquote class="tip">
 
@@ -541,7 +541,7 @@ https://zenodo.org/record/3706539/files/y_train.tsv
       </blockquote>
     </li>
     <li>
-      <p>Check that the datatype is <code class="highlighter-rouge">tabular</code>.</p>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <blockquote class="tip">
 
@@ -549,7 +549,7 @@ https://zenodo.org/record/3706539/files/y_train.tsv
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -559,7 +559,7 @@ https://zenodo.org/record/3706539/files/y_train.tsv
 </blockquote>
 
 <h2 id="neural-network-architecture">Neural network architecture</h2>
-<p>Defining a neural network architecture needs to ascertain the types and number of layers, the number of neurons for each layer, activation functions for all layers, type of optimiser and loss function. Choosing these parameters may require many experiments with data as there is no golden rule to choose the best combination of these parameters. The neural network used in this tutorial has an input layer, 2 hidden layers and one output layer. The input layer has a parameter <code class="highlighter-rouge">input_shape</code> which is set according to the number of dimensions of data. It is set to (7129,) which is the number of genes present in data. The hidden layers have 16 neurons (units) each and the output layer has only one because a scalar output is expected (0 or 1). This partial architecture (having input shape, types and size of layers, and activation functions) of the neural network is defined as follows:</p>
+<p>Defining a neural network architecture needs to ascertain the types and number of layers, the number of neurons for each layer, activation functions for all layers, type of optimiser and loss function. Choosing these parameters may require many experiments with data as there is no golden rule to choose the best combination of these parameters. The neural network used in this tutorial has an input layer, 2 hidden layers and one output layer. The input layer has a parameter <code class="language-plaintext highlighter-rouge">input_shape</code> which is set according to the number of dimensions of data. It is set to (7129,) which is the number of genes present in data. The hidden layers have 16 neurons (units) each and the output layer has only one because a scalar output is expected (0 or 1). This partial architecture (having input shape, types and size of layers, and activation functions) of the neural network is defined as follows:</p>
 
 <h3 id="create-architecture-choose-layers">Create architecture: Choose layers</h3>
 
@@ -569,38 +569,38 @@ https://zenodo.org/record/3706539/files/y_train.tsv
   <ol>
     <li><strong>Create a deep learning model architecture using Keras</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select keras model type”</em>: <code class="highlighter-rouge">Sequential</code></li>
+        <li><em>“Select keras model type”</em>: <code class="language-plaintext highlighter-rouge">Sequential</code></li>
         <li>
-          <p><em>“input_shape”</em>: <code class="highlighter-rouge">(7129, )</code></p>
+          <p><em>“input_shape”</em>: <code class="language-plaintext highlighter-rouge">(7129, )</code></p>
         </li>
         <li>In <em>“LAYER”</em>:
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: LAYER”</em>:
               <ul>
-                <li><em>“Choose the type of layer”</em>: <code class="highlighter-rouge">Core -- Dense</code>
+                <li><em>“Choose the type of layer”</em>: <code class="language-plaintext highlighter-rouge">Core -- Dense</code>
                   <ul>
-                    <li><em>“units”</em>: <code class="highlighter-rouge">16</code></li>
-                    <li><em>“Activation function”</em>: <code class="highlighter-rouge">elu</code></li>
+                    <li><em>“units”</em>: <code class="language-plaintext highlighter-rouge">16</code></li>
+                    <li><em>“Activation function”</em>: <code class="language-plaintext highlighter-rouge">elu</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“2: LAYER”</em>:
               <ul>
-                <li><em>“Choose the type of layer”</em>: <code class="highlighter-rouge">Core -- Dense</code>
+                <li><em>“Choose the type of layer”</em>: <code class="language-plaintext highlighter-rouge">Core -- Dense</code>
                   <ul>
-                    <li><em>“units”</em>: <code class="highlighter-rouge">16</code></li>
-                    <li><em>“Activation function”</em>: <code class="highlighter-rouge">elu</code></li>
+                    <li><em>“units”</em>: <code class="language-plaintext highlighter-rouge">16</code></li>
+                    <li><em>“Activation function”</em>: <code class="language-plaintext highlighter-rouge">elu</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“3: LAYER”</em>:
               <ul>
-                <li><em>“Choose the type of layer”</em>: <code class="highlighter-rouge">Core -- Dense</code>
+                <li><em>“Choose the type of layer”</em>: <code class="language-plaintext highlighter-rouge">Core -- Dense</code>
                   <ul>
-                    <li><em>“units”</em>: <code class="highlighter-rouge">1</code></li>
-                    <li><em>“Activation function”</em>: <code class="highlighter-rouge">sigmoid</code></li>
+                    <li><em>“units”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                    <li><em>“Activation function”</em>: <code class="language-plaintext highlighter-rouge">sigmoid</code></li>
                   </ul>
                 </li>
               </ul>
@@ -613,7 +613,7 @@ https://zenodo.org/record/3706539/files/y_train.tsv
 
 </blockquote>
 
-<p>The tool returns a JSON output file containing data about the neural network layers and their attributes like their types, number of units they have and their activation functions. This file is used as an input to the next step where the architecture of the neural network is completed by adding optimiser, loss function, and training parameters such as the number of epochs and batch size. The loss function is chosen as <code class="highlighter-rouge">binary_crossentropy</code> as the learning task is the classification of two labels (0 and 1).</p>
+<p>The tool returns a JSON output file containing data about the neural network layers and their attributes like their types, number of units they have and their activation functions. This file is used as an input to the next step where the architecture of the neural network is completed by adding optimiser, loss function, and training parameters such as the number of epochs and batch size. The loss function is chosen as <code class="language-plaintext highlighter-rouge">binary_crossentropy</code> as the learning task is the classification of two labels (0 and 1).</p>
 
 <h3 id="create-architecture-add-training-parameters">Create architecture: Add training parameters</h3>
 
@@ -623,27 +623,27 @@ https://zenodo.org/record/3706539/files/y_train.tsv
   <ol>
     <li><strong>Create deep learning model with an optimizer, loss function and fit parameters</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Choose a building mode”</em>: <code class="highlighter-rouge">Build a training model</code></li>
-        <li><em>“Select the dataset containing model configurations (JSON)”</em>: <code class="highlighter-rouge">Keras model config</code> (output of <strong>Create a deep learning model architecture using Keras</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Do classification or regression?”</em>: <code class="highlighter-rouge">KerasGClassifier</code></li>
+        <li><em>“Choose a building mode”</em>: <code class="language-plaintext highlighter-rouge">Build a training model</code></li>
+        <li><em>“Select the dataset containing model configurations (JSON)”</em>: <code class="language-plaintext highlighter-rouge">Keras model config</code> (output of <strong>Create a deep learning model architecture using Keras</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Do classification or regression?”</em>: <code class="language-plaintext highlighter-rouge">KerasGClassifier</code></li>
       </ul>
 
-      <p><code class="highlighter-rouge">KerasGClassifier</code> is chosen because the learning task is classfication i.e. assigning each patient a type of cancer.</p>
+      <p><code class="language-plaintext highlighter-rouge">KerasGClassifier</code> is chosen because the learning task is classfication i.e. assigning each patient a type of cancer.</p>
       <ul>
         <li>In <em>“Compile Parameters”</em>:
           <ul>
-            <li><em>“Select a loss function”</em>: <code class="highlighter-rouge">binary_crossentropy</code></li>
+            <li><em>“Select a loss function”</em>: <code class="language-plaintext highlighter-rouge">binary_crossentropy</code></li>
           </ul>
 
-          <p>The loss function is <code class="highlighter-rouge">binary_crossentropy</code> because the labels are discrete and binary (0 and 1).</p>
+          <p>The loss function is <code class="language-plaintext highlighter-rouge">binary_crossentropy</code> because the labels are discrete and binary (0 and 1).</p>
           <ul>
-            <li><em>“Select an optimizer”</em>: <code class="highlighter-rouge">RMSprop - RMSProp optimizer</code></li>
+            <li><em>“Select an optimizer”</em>: <code class="language-plaintext highlighter-rouge">RMSprop - RMSProp optimizer</code></li>
           </ul>
         </li>
         <li>In <em>“Fit Parameters”</em>:
           <ul>
-            <li><em>“epochs”</em>: <code class="highlighter-rouge">10</code></li>
-            <li><em>“batch_size”</em>: <code class="highlighter-rouge">4</code></li>
+            <li><em>“epochs”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+            <li><em>“batch_size”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
           </ul>
 
           <p>The training data is small (only 38 patients). Therefore the number of epochs and batch size are also small.</p>
@@ -665,19 +665,19 @@ https://zenodo.org/record/3706539/files/y_train.tsv
   <ol>
     <li><strong>Deep learning training and evaluation conduct deep training and evaluation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select a scheme”</em>: <code class="highlighter-rouge">Train and validate</code></li>
-        <li><em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">Keras model builder</code> (output of <strong>Create deep learning model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code></li>
-        <li><em>“Training samples dataset”</em>: <code class="highlighter-rouge">X_train</code>
+        <li><em>“Select a scheme”</em>: <code class="language-plaintext highlighter-rouge">Train and validate</code></li>
+        <li><em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="language-plaintext highlighter-rouge">Keras model builder</code> (output of <strong>Create deep learning model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code></li>
+        <li><em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">X_train</code>
           <ul>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns</code></li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
           </ul>
         </li>
-        <li><em>“Dataset containing class labels or target values”</em>: <code class="highlighter-rouge">y_train</code>
+        <li><em>“Dataset containing class labels or target values”</em>: <code class="language-plaintext highlighter-rouge">y_train</code>
           <ul>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns</code></li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
           </ul>
         </li>
       </ul>
@@ -697,14 +697,14 @@ https://zenodo.org/record/3706539/files/y_train.tsv
   <ol>
     <li><strong>Model Prediction predicts on new data using a preffited model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">Fitted estimator or estimator skeleton</code> (output of <strong>Deep learning training and evaluation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Choose the dataset containing weights for the estimator above”</em>: <code class="highlighter-rouge">Weights trained</code> (output of <strong>Create deep learning model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select invocation method”</em>: <code class="highlighter-rouge">predict</code></li>
-        <li><em>“Select input data type for prediction”</em>: <code class="highlighter-rouge">tabular data</code>
+        <li><em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="language-plaintext highlighter-rouge">Fitted estimator or estimator skeleton</code> (output of <strong>Deep learning training and evaluation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Choose the dataset containing weights for the estimator above”</em>: <code class="language-plaintext highlighter-rouge">Weights trained</code> (output of <strong>Create deep learning model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select invocation method”</em>: <code class="language-plaintext highlighter-rouge">predict</code></li>
+        <li><em>“Select input data type for prediction”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
           <ul>
-            <li><em>“Training samples dataset”</em>: <code class="highlighter-rouge">X_test</code></li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns</code></li>
+            <li><em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">X_test</code></li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
           </ul>
         </li>
       </ul>
@@ -724,12 +724,12 @@ https://zenodo.org/record/3706539/files/y_train.tsv
   <ol>
     <li><strong>Machine Learning Visualization Extension includes several types of plotting for machine learning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select a plotting type”</em>: <code class="highlighter-rouge">Confusion matrix for classes</code></li>
-        <li><em>“Select dataset containing true labels”</em>: <code class="highlighter-rouge">y_test</code></li>
-        <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns</code></li>
-        <li><em>“Select dataset containing predicted labels”</em>: <code class="highlighter-rouge">Model prediction</code> (output of <strong>Model Prediction predicts on new data using a preffited model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Select a plotting type”</em>: <code class="language-plaintext highlighter-rouge">Confusion matrix for classes</code></li>
+        <li><em>“Select dataset containing true labels”</em>: <code class="language-plaintext highlighter-rouge">y_test</code></li>
+        <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
+        <li><em>“Select dataset containing predicted labels”</em>: <code class="language-plaintext highlighter-rouge">Model prediction</code> (output of <strong>Model Prediction predicts on new data using a preffited model</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>

@@ -608,7 +608,7 @@ downsampled though to include only the <span class="notranslate">reads</span> fr
       <p>Import the following four files from
 <a href="https://zenodo.org/record/2582555">Zenodo</a>:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2582555/files/SLGFSK-N_231335_r1_chr5_12_17.fastq.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2582555/files/SLGFSK-N_231335_r1_chr5_12_17.fastq.gz
 https://zenodo.org/record/2582555/files/SLGFSK-N_231335_r2_chr5_12_17.fastq.gz
 https://zenodo.org/record/2582555/files/SLGFSK-T_231336_r1_chr5_12_17.fastq.gz
 https://zenodo.org/record/2582555/files/SLGFSK-T_231336_r2_chr5_12_17.fastq.gz
@@ -635,7 +635,7 @@ case you may prefer to import the data directly from there.</p>
             <p>Paste the link into the text field</p>
           </li>
           <li>
-            <p>Change <strong>Type</strong> from “Auto-detect” to <code class="highlighter-rouge">fastqsanger.gz</code></p>
+            <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></p>
           </li>
           <li>
             <p>Press <strong>Start</strong></p>
@@ -677,7 +677,7 @@ correctly, and fix any missing or wrong datatype assignment</p>
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">fastqsanger.gz</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -705,7 +705,7 @@ in parallel.</p>
 
       <p>To make it easier to keep track of which dataset represents which
 branch of an analysis in a linear history, <span class="notranslate">Galaxy</span> supports dataset
-tags. In particular, if you attach a tag starting with <code class="highlighter-rouge">#</code> to any
+tags. In particular, if you attach a tag starting with <code class="language-plaintext highlighter-rouge">#</code> to any
 dataset, that tag will automatically propagate to any new dataset
 derived from the tagged dataset.</p>
 
@@ -716,9 +716,9 @@ derived from the tagged dataset.</p>
           <li>Click on the dataset</li>
           <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Check that the tag is appearing below the dataset name</li>
         </ul>
@@ -726,26 +726,26 @@ derived from the tagged dataset.</p>
       </blockquote>
 
       <p>Before starting our analysis it is, thus, a good idea to tag the two
-fastq datasets representing the normal tissue with, <em>e.g.</em>, <code class="highlighter-rouge">#normal</code>
+fastq datasets representing the normal tissue with, <em>e.g.</em>, <code class="language-plaintext highlighter-rouge">#normal</code>
 and the two datasets representing the tumor tissue with, <em>e.g.</em>,
-<code class="highlighter-rouge">#tumor</code>.</p>
+<code class="language-plaintext highlighter-rouge">#tumor</code>.</p>
     </li>
     <li>
-      <p>Import the reference genome with the <code class="highlighter-rouge">hg19</code> version of the sequences of
+      <p>Import the reference genome with the <code class="language-plaintext highlighter-rouge">hg19</code> version of the sequences of
 human chromosomes 5, 12 and 17:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2582555/files/hg19.chr5_12_17.fa.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2582555/files/hg19.chr5_12_17.fa.gz
 </code></pre></div>      </div>
 
-      <p>Make sure you specify the datatype as <code class="highlighter-rouge">fasta</code> in the import dialog.</p>
+      <p>Make sure you specify the datatype as <code class="language-plaintext highlighter-rouge">fasta</code> in the import dialog.</p>
 
       <blockquote class="comment">
         <h3 id="comment-shortcut"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Shortcut</h3>
         <p>You can skip this step if the <span class="notranslate">Galaxy</span> server you are working on offers
-a <code class="highlighter-rouge">hg19</code> version of the human reference genome with prebuilt indexes for
+a <code class="language-plaintext highlighter-rouge">hg19</code> version of the human reference genome with prebuilt indexes for
 <em>bwa-mem</em> <strong>and</strong> <em>samtools</em> (ask your instructor, or check the tools
 <strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>VarScan Somatic</strong>
-<i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> if they list a <code class="highlighter-rouge">hg19</code> version as an option under
+<i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> if they list a <code class="language-plaintext highlighter-rouge">hg19</code> version as an option under
 <em>“(Using) reference genome”</em>).</p>
       </blockquote>
 
@@ -755,8 +755,8 @@ a <code class="highlighter-rouge">hg19</code> version of the human reference gen
       <p>Rename the reference genome</p>
 
       <p>The reference genome you have imported above came as a compressed
-file, but got unpacked by <span class="notranslate">Galaxy</span> to plain <code class="highlighter-rouge">fasta</code> format according to
-your datatype selection. You may now wish to remove the <code class="highlighter-rouge">.gz</code> suffix
+file, but got unpacked by <span class="notranslate">Galaxy</span> to plain <code class="language-plaintext highlighter-rouge">fasta</code> format according to
+your datatype selection. You may now wish to remove the <code class="language-plaintext highlighter-rouge">.gz</code> suffix
 from the dataset name.</p>
     </li>
   </ol>
@@ -815,10 +815,10 @@ dataset) will get added to your history.</p>
       <ul>
         <li>In <em>“Results”</em>
           <ul>
-            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
             <li>In <em>“FastQC output”</em>
               <ul>
-                <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
+                <li><em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
                 <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: all four <em>RawData</em>
 outputs of <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
@@ -885,7 +885,7 @@ improve things still a bit, but also to demonstrate the general concept.</p>
     <li><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to trim and filter the normal tissue <span class="notranslate">reads</span>
       <ul>
         <li>
-          <p><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Paired-end (two separate
+          <p><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (two separate
 input files)</code></p>
 
           <p>This makes the tool treat the forward and reverse <span class="notranslate">reads</span> simultaneously.</p>
@@ -897,23 +897,23 @@ forward <span class="notranslate">reads</span> (r1) dataset of the normal tissue
 reverse <span class="notranslate">reads</span> (r2) dataset of the normal tissue sample</li>
           </ul>
         </li>
-        <li><em>“Perform initial ILLUMINACLIP step?”</em>: <code class="highlighter-rouge">Yes</code>
+        <li><em>“Perform initial ILLUMINACLIP step?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Select standard adapter sequences or provide custom?”</em>: <code class="highlighter-rouge">Standard</code>
+            <li><em>“Select standard adapter sequences or provide custom?”</em>: <code class="language-plaintext highlighter-rouge">Standard</code>
               <ul>
-                <li><em>“Adapter sequences to use”</em>: <code class="highlighter-rouge">TruSeq3 (paired-ended, for MiSeq and
+                <li><em>“Adapter sequences to use”</em>: <code class="language-plaintext highlighter-rouge">TruSeq3 (paired-ended, for MiSeq and
  HiSeq)</code></li>
               </ul>
             </li>
             <li><em>“Maximum mismatch count which will still allow a full match to be
-  performed”</em>: <code class="highlighter-rouge">2</code></li>
+  performed”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
             <li><em>“How accurate the match between the two ‘adapter ligated’ <span class="notranslate">reads</span> must
-  be for PE palindrome read alignment”</em>: <code class="highlighter-rouge">30</code></li>
+  be for PE palindrome read alignment”</em>: <code class="language-plaintext highlighter-rouge">30</code></li>
             <li><em>“How accurate the match between any adapter etc. sequence must be
-  against a read”</em>: <code class="highlighter-rouge">10</code></li>
+  against a read”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
             <li><em>“Minimum length of adapter that needs to be detected (PE specific/
-  palindrome mode)”</em>: <code class="highlighter-rouge">8</code></li>
-            <li><em>“Always keep both <span class="notranslate">reads</span> (PE specific/palindrome mode)?”</em>: <code class="highlighter-rouge">Yes</code></li>
+  palindrome mode)”</em>: <code class="language-plaintext highlighter-rouge">8</code></li>
+            <li><em>“Always keep both <span class="notranslate">reads</span> (PE specific/palindrome mode)?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
 
           <p>These parameters are used to cut ILLUMINA-specific adapter sequences
@@ -923,10 +923,10 @@ reverse <span class="notranslate">reads</span> (r2) dataset of the normal tissue
           <ul>
             <li>In <em>“1: Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Cut the specified number
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Cut the specified number
  of bases from the start of the read (HEADCROP)</code>
                   <ul>
-                    <li><em>“Number of bases to remove from the start of the read”</em>: <code class="highlighter-rouge">3</code></li>
+                    <li><em>“Number of bases to remove from the start of the read”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
                   </ul>
                 </li>
               </ul>
@@ -934,10 +934,10 @@ reverse <span class="notranslate">reads</span> (r2) dataset of the normal tissue
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> “Insert Trimmomatic Operation”*</li>
             <li>In <em>“2: Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Cut bases off the end of
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Cut bases off the end of
  a read, if below a threshold quality (TRAILING)</code>
                   <ul>
-                    <li><em>“Minimum quality required to keep a base”</em>: <code class="highlighter-rouge">10</code></li>
+                    <li><em>“Minimum quality required to keep a base”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
                   </ul>
                 </li>
               </ul>
@@ -945,10 +945,10 @@ reverse <span class="notranslate">reads</span> (r2) dataset of the normal tissue
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> “Insert Trimmomatic Operation”*</li>
             <li>In <em>“3: Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Drop <span class="notranslate">reads</span> below a
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Drop <span class="notranslate">reads</span> below a
  specified length (MINLEN)</code>
                   <ul>
-                    <li><em>“Minimum quality required to keep a base”</em>: <code class="highlighter-rouge">25</code></li>
+                    <li><em>“Minimum quality required to keep a base”</em>: <code class="language-plaintext highlighter-rouge">25</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1026,26 +1026,26 @@ adapter removal is visible though.</p>
   <ol>
     <li><strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the <span class="notranslate">reads</span> from the <strong>normal tissue</strong> sample to the reference genome
       <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="highlighter-rouge">Use a built-in genome index</code>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
-            <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">Human: hg19</code> (or a similarly named option)</li>
+            <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human: hg19</code> (or a similarly named option)</li>
           </ul>
 
           <blockquote class="comment">
-            <h3 id="comment-using-the-imported-hg19-sequence"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="highlighter-rouge">hg19</code> sequence</h3>
-            <p>If you have imported the <code class="highlighter-rouge">hg19</code> sequence as a fasta dataset into your
+            <h3 id="comment-using-the-imported-hg19-sequence"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="language-plaintext highlighter-rouge">hg19</code> sequence</h3>
+            <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
               <li><em>“Will you select a reference genome from your history or use a
-built-in index?”</em>: <code class="highlighter-rouge">Use a genome from history and build index</code>
+built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code>
                 <ul>
-                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: your imported <code class="highlighter-rouge">hg19</code> fasta dataset.</li>
+                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference sequence”</em>: your imported <code class="language-plaintext highlighter-rouge">hg19</code> fasta dataset.</li>
                 </ul>
               </li>
             </ul>
           </blockquote>
         </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Paired</code>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: the trimmed 
 forward <span class="notranslate">reads</span> (r1) dataset of the <strong>normal tissue</strong> sample; output of
@@ -1055,17 +1055,17 @@ reverse <span class="notranslate">reads</span> (r2) dataset of the <strong>norma
 <strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           </ul>
         </li>
-        <li><em>“Set read groups information?”</em>: <code class="highlighter-rouge">Set read groups (SAM/BAM specification)</code>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Set read groups (SAM/BAM specification)</code>
           <ul>
-            <li><em>“Auto-assign”</em>: <code class="highlighter-rouge">No</code>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Read group identifier (ID)”</em>: <code class="highlighter-rouge">231335</code> (this value being taken
+                <li><em>“Read group identifier (ID)”</em>: <code class="language-plaintext highlighter-rouge">231335</code> (this value being taken
 from the original name of the normal tissue input files)</li>
               </ul>
             </li>
-            <li><em>“Auto-assign”</em>: <code class="highlighter-rouge">No</code>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Read group sample name (SM)”</em>: <code class="highlighter-rouge">Normal</code></li>
+                <li><em>“Read group sample name (SM)”</em>: <code class="language-plaintext highlighter-rouge">Normal</code></li>
               </ul>
             </li>
           </ul>
@@ -1082,15 +1082,15 @@ biological sample.</p>
     </li>
     <li><strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to map the <span class="notranslate">reads</span> from the <strong>tumor tissue</strong> sample,
       <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="highlighter-rouge">Use a built-in genome index</code>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code>
           <ul>
-            <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">Human: hg19</code> (or a similarly named option)</li>
+            <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human: hg19</code> (or a similarly named option)</li>
           </ul>
 
           <p>Adjust these settings as before if you are using the imported reference
 genome.</p>
         </li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Paired</code>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
             <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: the trimmed
 forward <span class="notranslate">reads</span> (r1) dataset of the <strong>tumor tissue</strong> sample; output of
@@ -1100,17 +1100,17 @@ forward <span class="notranslate">reads</span> (r1) dataset of the <strong>tumor
 <strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           </ul>
         </li>
-        <li><em>“Set read groups information?”</em>: <code class="highlighter-rouge">Set read groups (SAM/BAM specification)</code>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Set read groups (SAM/BAM specification)</code>
           <ul>
-            <li><em>“Auto-assign”</em>: <code class="highlighter-rouge">No</code>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Read group identifier (ID)”</em>: <code class="highlighter-rouge">231336</code> (this value, again, being
+                <li><em>“Read group identifier (ID)”</em>: <code class="language-plaintext highlighter-rouge">231336</code> (this value, again, being
 taken from the original name of the tumor tissue input files)</li>
               </ul>
             </li>
-            <li><em>“Auto-assign”</em>: <code class="highlighter-rouge">No</code>
+            <li><em>“Auto-assign”</em>: <code class="language-plaintext highlighter-rouge">No</code>
               <ul>
-                <li><em>“Read group sample name (SM)”</em>: <code class="highlighter-rouge">Tumor</code></li>
+                <li><em>“Read group sample name (SM)”</em>: <code class="language-plaintext highlighter-rouge">Tumor</code></li>
               </ul>
             </li>
           </ul>
@@ -1150,18 +1150,18 @@ and for which the mate read has also been mapped:</p>
               <ul>
                 <li>In <em>“1: Filter”</em>:
                   <ul>
-                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">mapQuality</code>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">mapQuality</code>
                       <ul>
-                        <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="highlighter-rouge">&gt;=1</code></li>
+                        <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="language-plaintext highlighter-rouge">&gt;=1</code></li>
                       </ul>
                     </li>
                   </ul>
                 </li>
                 <li>In <em>“2: Filter”</em>:
                   <ul>
-                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">isMapped</code>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">isMapped</code>
                       <ul>
-                        <li><em>“Selected mapped <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Yes</code></li>
+                        <li><em>“Selected mapped <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1169,9 +1169,9 @@ and for which the mate read has also been mapped:</p>
                 <li>Click on <em>“Insert Filter”</em></li>
                 <li>In <em>“3: Filter”</em>:
                   <ul>
-                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">isMateMapped</code>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">isMateMapped</code>
                       <ul>
-                        <li><em>“Select <span class="notranslate">reads</span> with mapped mate”</em>: <code class="highlighter-rouge">Yes</code></li>
+                        <li><em>“Select <span class="notranslate">reads</span> with mapped mate”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1198,7 +1198,7 @@ early step.</p>
   </ol>
 
   <ul>
-    <li><em>“Would you like to set rules?”</em>: <code class="highlighter-rouge">No</code></li>
+    <li><em>“Would you like to set rules?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
   </ul>
 
 </blockquote>
@@ -1213,8 +1213,8 @@ datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden
 
   <p>These two tools offer very similar functionality and can often be used
 interchangeably. Under the hood, <strong>Filter SAM or BAM, output SAM or BAM</strong>
-<i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> uses the <code class="highlighter-rouge">samtools view</code> command line tool, while <strong>Filter
-BAM datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> uses <code class="highlighter-rouge">bamtools
+<i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> uses the <code class="language-plaintext highlighter-rouge">samtools view</code> command line tool, while <strong>Filter
+BAM datasets on a variety of attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> uses <code class="language-plaintext highlighter-rouge">bamtools
 filter</code>. Whatever the BAM filtering task, you should be able to perform it in
 <span class="notranslate">Galaxy</span> with one of these two tools.</p>
 
@@ -1231,10 +1231,10 @@ filter</code>. Whatever the BAM filtering task, you should be able to perform it
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file”</em>: filtered <span class="notranslate">reads</span> datasets from
  the normal <em>and</em> the tumor tissue data; the outputs of
  <strong>Filter SAM or BAM</strong></li>
-        <li><em>“Is this paired-end or single end data”</em>: <code class="highlighter-rouge">BAM is paired-end</code></li>
+        <li><em>“Is this paired-end or single end data”</em>: <code class="language-plaintext highlighter-rouge">BAM is paired-end</code></li>
       </ul>
       <ul>
-        <li><em>“Treat as single-end”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Treat as single-end”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -1252,14 +1252,14 @@ tumor data.</p>
   <ol>
     <li><strong>BamLeftAlign</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Choose the source for the reference genome”</em>: <code class="highlighter-rouge">Locally cached</code>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Locally cached</code>
           <ul>
             <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM dataset to re-align”</em>: your
 filtered and deduplicated <span class="notranslate">reads</span> datasets from the normal <em>and</em> the tumor
 tissue data; the outputs of <strong>RmDup</strong></li>
-            <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">Human: hg19</code> (or a similarly
+            <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human: hg19</code> (or a similarly
 named choice)
-     - <em>“Maximum number of iterations”</em>: <code class="highlighter-rouge">5</code></li>
+     - <em>“Maximum number of iterations”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
           </ul>
         </li>
       </ul>
@@ -1267,13 +1267,13 @@ named choice)
   </ol>
 
   <blockquote class="comment">
-    <h3 id="comment-using-the-imported-hg19-sequence-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="highlighter-rouge">hg19</code> sequence</h3>
-    <p>If you have imported the <code class="highlighter-rouge">hg19</code> sequence as a fasta dataset into your
+    <h3 id="comment-using-the-imported-hg19-sequence-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="language-plaintext highlighter-rouge">hg19</code> sequence</h3>
+    <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
     <ul>
-      <li><em>“Choose the source for the reference genome”</em>: <code class="highlighter-rouge">History</code>
+      <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">History</code>
         <ul>
-          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Using reference file”</em>: your imported <code class="highlighter-rouge">hg19</code> fasta dataset</li>
+          <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Using reference file”</em>: your imported <code class="language-plaintext highlighter-rouge">hg19</code> fasta dataset</li>
         </ul>
       </li>
     </ul>
@@ -1293,26 +1293,26 @@ history instead:</p>
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“BAM file to recalculate”</em>: the left-aligned
 datasets from the normal and the tumor tissue data; the outputs of
 <strong>BamLeftAlign</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Choose the source for the reference genome”</em>: <code class="highlighter-rouge">Use a built-in genome</code>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code>
           <ul>
-            <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">Human: hg19</code> (or a similarly named choice)</li>
+            <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human: hg19</code> (or a similarly named choice)</li>
           </ul>
 
           <blockquote class="comment">
-            <h3 id="comment-using-the-imported-hg19-sequence-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="highlighter-rouge">hg19</code> sequence</h3>
-            <p>If you have imported the <code class="highlighter-rouge">hg19</code> sequence as a fasta dataset into your
+            <h3 id="comment-using-the-imported-hg19-sequence-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="language-plaintext highlighter-rouge">hg19</code> sequence</h3>
+            <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
-              <li><em>“Choose the source for the reference genome”</em>: <code class="highlighter-rouge">Use a genome from the history</code>
+              <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
                 <ul>
-                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Using reference file”</em>: your imported <code class="highlighter-rouge">hg19</code> fasta dataset.</li>
+                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Using reference file”</em>: your imported <code class="language-plaintext highlighter-rouge">hg19</code> fasta dataset.</li>
                 </ul>
               </li>
             </ul>
           </blockquote>
         </li>
         <li>
-          <p><em>“Do you also want BAQ (Base Alignment Quality) scores to be calculated?”</em>: <code class="highlighter-rouge">No</code></p>
+          <p><em>“Do you also want BAQ (Base Alignment Quality) scores to be calculated?”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
           <p>The <em>VarScan somatic</em> tool that we are going to use for calling variants at
 the next step is typically used in combination with unadjusted base quality
@@ -1332,12 +1332,12 @@ to the dataset separately.</p>
             <p>Hence, should you ever decide to use:</p>
             <ul>
               <li>
-                <p><em>“Do you also want BAQ (Base Alignment Quality) scores to be calculated?”</em>: <code class="highlighter-rouge">Yes, run BAQ calculation</code></p>
+                <p><em>“Do you also want BAQ (Base Alignment Quality) scores to be calculated?”</em>: <code class="language-plaintext highlighter-rouge">Yes, run BAQ calculation</code></p>
 
                 <p>and you want this setting to affect <span class="notranslate">downstream</span> variant calling with
 <em>VarScan somatic</em>, make sure you also set then:</p>
                 <ul>
-                  <li><em>“Use BAQ to cap read base qualities”</em>: <code class="highlighter-rouge">Yes</code></li>
+                  <li><em>“Use BAQ to cap read base qualities”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                 </ul>
               </li>
             </ul>
@@ -1347,11 +1347,11 @@ be prepared to see a substantial (up to 10x!) increase in job run time
 when enabling it.</p>
           </blockquote>
         </li>
-        <li><em>“Additional options”</em>: <code class="highlighter-rouge">Advanced options</code>
+        <li><em>“Additional options”</em>: <code class="language-plaintext highlighter-rouge">Advanced options</code>
           <ul>
-            <li><em>“Change identical bases to ‘=’“</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Change identical bases to ‘=’“</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>
-              <p><em>“Coefficient to cap <span class="notranslate">mapping</span> quality of poorly mapped <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">50</code></p>
+              <p><em>“Coefficient to cap <span class="notranslate">mapping</span> quality of poorly mapped <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">50</code></p>
 
               <p>This last setting is the real reason why we use CalMD at this point.
 It is an empirical, but well-established finding that the <span class="notranslate">mapping</span>
@@ -1396,9 +1396,9 @@ To remove such <span class="notranslate">reads</span> from the data:</p>
               <ul>
                 <li>In <em>“1: Filter”</em>:
                   <ul>
-                    <li><em>“Select BAM property to filter on”</em>: <code class="highlighter-rouge">mapQuality</code>
+                    <li><em>“Select BAM property to filter on”</em>: <code class="language-plaintext highlighter-rouge">mapQuality</code>
                       <ul>
-                        <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="highlighter-rouge">&lt;=254</code></li>
+                        <li><em>“Filter on read <span class="notranslate">mapping</span> quality (phred scale)”</em>: <code class="language-plaintext highlighter-rouge">&lt;=254</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1434,20 +1434,20 @@ those obtained from biopsies</li>
     <li><strong>VarScan somatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in
-genome?”</em>: <code class="highlighter-rouge">Use a built-in genome</code>
+genome?”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome</code>
           <ul>
-            <li><em>“reference genome”</em>: <code class="highlighter-rouge">Human: hg19</code> (or a similarly named choice)</li>
+            <li><em>“reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human: hg19</code> (or a similarly named choice)</li>
           </ul>
 
           <blockquote class="comment">
-            <h3 id="comment-using-the-imported-hg19-sequence-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="highlighter-rouge">hg19</code> sequence</h3>
-            <p>If you have imported the <code class="highlighter-rouge">hg19</code> sequence as a fasta dataset into your
+            <h3 id="comment-using-the-imported-hg19-sequence-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="language-plaintext highlighter-rouge">hg19</code> sequence</h3>
+            <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> sequence as a fasta dataset into your
 history instead:</p>
             <ul>
               <li><em>“Will you select a reference genome from your history or use a
-built-in genome?”</em>: <code class="highlighter-rouge">Use a genome from the history</code>
+built-in genome?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from the history</code>
                 <ul>
-                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference genome”</em>: your imported <code class="highlighter-rouge">hg19</code> fasta dataset.</li>
+                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference genome”</em>: your imported <code class="language-plaintext highlighter-rouge">hg19</code> fasta dataset.</li>
                 </ul>
               </li>
             </ul>
@@ -1459,13 +1459,13 @@ of <strong>CalMD</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span c
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span><em>“aligned <span class="notranslate">reads</span> from tumor sample”</em>: the mapped
 and fully post-processed tumor tissue dataset; the other output of
 <strong>CalMD</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Estimated purity (non-tumor content) of normal sample”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Estimated purity (tumor content) of tumor sample”</em>: <code class="highlighter-rouge">0.5</code></li>
-        <li><em>“Generate separate output datasets for SNP and indel calls?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Settings for Variant Calling”</em>: <code class="highlighter-rouge">Customize settings</code>
+        <li><em>“Estimated purity (non-tumor content) of normal sample”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Estimated purity (tumor content) of tumor sample”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+        <li><em>“Generate separate output datasets for SNP and indel calls?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Settings for Variant Calling”</em>: <code class="language-plaintext highlighter-rouge">Customize settings</code>
           <ul>
             <li>
-              <p><em>“Minimum base quality”</em>: <code class="highlighter-rouge">28</code></p>
+              <p><em>“Minimum base quality”</em>: <code class="language-plaintext highlighter-rouge">28</code></p>
 
               <p>We have seen, at the quality control step, that our sequencing data is of
 really good quality, and we have chosen not to downgrade base qualities at
@@ -1474,7 +1474,7 @@ quality required at any given position without throwing away too much of
 our data.</p>
             </li>
             <li>
-              <p><em>“Minimum <span class="notranslate">mapping</span> quality”</em>: <code class="highlighter-rouge">1</code></p>
+              <p><em>“Minimum <span class="notranslate">mapping</span> quality”</em>: <code class="language-plaintext highlighter-rouge">1</code></p>
 
               <p>During postprocessing, we have filtered our <span class="notranslate">reads</span> for ones with a
 <span class="notranslate">mapping</span> quality of at least one, but <strong>CalMD</strong> may have lowered some
@@ -1484,7 +1484,7 @@ our data.</p>
 
           <p>Leave all other settings in this section at their default values.</p>
         </li>
-        <li><em>“Settings for Posterior Variant Filtering”</em>: <code class="highlighter-rouge">Use default values</code></li>
+        <li><em>“Settings for Posterior Variant Filtering”</em>: <code class="language-plaintext highlighter-rouge">Use default values</code></li>
       </ul>
     </li>
   </ol>
@@ -1527,14 +1527,14 @@ license.</p>
       <p>Import the following <strong>variant annotation files</strong> from
 <a href="https://zenodo.org/record/2581873">Zenodo</a>:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581873/files/hotspots.<span class="notranslate">bed</span>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581873/files/hotspots.<span class="notranslate">bed</span>
 https://zenodo.org/record/2581873/files/cgi_variant_positions.<span class="notranslate">bed</span>
 https://zenodo.org/record/2581873/files/01-Feb-2019-CIVic.<span class="notranslate">bed</span>
 https://zenodo.org/record/2582555/files/dbsnp.b147.chr5_12_17.vcf.gz
 </code></pre></div>      </div>
 
-      <p>Make sure you select <code class="highlighter-rouge"><span class="notranslate">bed</span></code> as the datatype for the first three files and
-<code class="highlighter-rouge">vcf</code> for the last file.</p>
+      <p>Make sure you select <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code> as the datatype for the first three files and
+<code class="language-plaintext highlighter-rouge">vcf</code> for the last file.</p>
 
       <p>Alte<span class="notranslate">rna</span>tively, add the files from a shared data library on your <span class="notranslate">Galaxy</span>
 server instance.</p>
@@ -1543,12 +1543,12 @@ server instance.</p>
       <p>Import some <strong>gene-level annotation files</strong> from
 <a href="https://zenodo.org/record/2581881">Zenodo</a>:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581881/files/Uniprot_Cancer_Genes.13Feb2019.txt
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2581881/files/Uniprot_Cancer_Genes.13Feb2019.txt
 https://zenodo.org/record/2581881/files/cgi_genes.txt
 https://zenodo.org/record/2581881/files/01-Feb-2019-GeneSummaries.tsv
 </code></pre></div>      </div>
 
-      <p>and make sure you select <code class="highlighter-rouge">tabular</code> as their datatype, or add them from
+      <p>and make sure you select <code class="language-plaintext highlighter-rouge">tabular</code> as their datatype, or add them from
 the shared data library.</p>
     </li>
     <li>
@@ -1557,13 +1557,13 @@ the shared data library.</p>
       <blockquote class="comment">
         <h3 id="comment-shortcut-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Shortcut</h3>
         <p>You can skip this step if the <span class="notranslate">Galaxy</span> server you are working on offers
-<code class="highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
+<code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code> as a locally installed snpEff database. You can
 check the <strong>SnpEff eff</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool under <strong>Genome source</strong> to
 see if this is the case.</p>
       </blockquote>
 
       <p>Use <strong>SnpEff Download</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to download genome annotation
-database <code class="highlighter-rouge">hg19</code>.</p>
+database <code class="language-plaintext highlighter-rouge">hg19</code>.</p>
     </li>
     <li>
       <p>Check that the datatypes of all new datasets have been set correctly, and
@@ -1593,27 +1593,27 @@ with <em>SnpEff</em>.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequence changes (SNPs, MNPs, InDels)”</em>: the
 output of <strong>VarScan somatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Input format”</em>: <code class="highlighter-rouge">VCF</code></li>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge">VCF (only if input is VCF)</code></li>
-        <li><em>“Genome source”</em>: <code class="highlighter-rouge">Locally installed reference genome</code>
+        <li><em>“Input format”</em>: <code class="language-plaintext highlighter-rouge">VCF</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">VCF (only if input is VCF)</code></li>
+        <li><em>“Genome source”</em>: <code class="language-plaintext highlighter-rouge">Locally installed reference genome</code>
           <ul>
-            <li><em>“Genome”</em>: <code class="highlighter-rouge">Homo sapiens: hg19</code> (or a similarly named option)</li>
+            <li><em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code> (or a similarly named option)</li>
           </ul>
 
           <blockquote class="comment">
-            <h3 id="comment-using-the-imported-hg19-snpeff-genome-database"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="highlighter-rouge">hg19</code> SnpEff genome database</h3>
-            <p>If you have imported the <code class="highlighter-rouge">hg19</code> SnpEff genome database into your
+            <h3 id="comment-using-the-imported-hg19-snpeff-genome-database"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using the imported <code class="language-plaintext highlighter-rouge">hg19</code> SnpEff genome database</h3>
+            <p>If you have imported the <code class="language-plaintext highlighter-rouge">hg19</code> SnpEff genome database into your
 history instead:</p>
             <ul>
-              <li><em>“Genome source”</em>: <code class="highlighter-rouge">Downloaded snpEff database in your history</code>
+              <li><em>“Genome source”</em>: <code class="language-plaintext highlighter-rouge">Downloaded snpEff database in your history</code>
                 <ul>
-                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SnpEff4.3 Genome Data”</em>: your imported <code class="highlighter-rouge">hg19</code> SnpEff dataset.</li>
+                  <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SnpEff4.3 Genome Data”</em>: your imported <code class="language-plaintext highlighter-rouge">hg19</code> SnpEff dataset.</li>
                 </ul>
               </li>
             </ul>
           </blockquote>
         </li>
-        <li><em>“Produce Summary Stats”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Produce Summary Stats”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -1638,14 +1638,14 @@ suite for this task and for all further work with the variants.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“VCF dataset to be loaded in the GEMINI database”</em>:
 the output of <strong>SnpEff eff</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“The variants in this input are”</em>: <code class="highlighter-rouge">annotated with snpEff</code></li>
+        <li><em>“The variants in this input are”</em>: <code class="language-plaintext highlighter-rouge">annotated with snpEff</code></li>
         <li>
-          <p><em>“This input comes with genotype calls for its samples”</em>: <code class="highlighter-rouge">Yes</code></p>
+          <p><em>“This input comes with genotype calls for its samples”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></p>
 
           <p>Calling sample genotypes was part of what we used VarScan somatic for.</p>
         </li>
         <li><em>“Choose a gemini annotation source”</em>: select the latest available annotations snapshot (most likely, there will be only one)</li>
-        <li><em>“Sample and family information in PED format”</em>: <code class="highlighter-rouge">Nothing selected</code></li>
+        <li><em>“Sample and family information in PED format”</em>: <code class="language-plaintext highlighter-rouge">Nothing selected</code></li>
         <li><em>“Load the following optional content into the database”</em>
           <ul>
             <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“GERP scores”</em></li>
@@ -1700,8 +1700,8 @@ database. Specifically, we are interested in three values calculated by
   <li>
     <p><em>Somatic status (SS)</em></p>
 
-    <p>This is a simple numeric code, in which a value of <code class="highlighter-rouge">1</code> indicates a germline
-variant, <code class="highlighter-rouge">2</code> a somatic variant and <code class="highlighter-rouge">3</code> an LOH event.</p>
+    <p>This is a simple numeric code, in which a value of <code class="language-plaintext highlighter-rouge">1</code> indicates a germline
+variant, <code class="language-plaintext highlighter-rouge">2</code> a somatic variant and <code class="language-plaintext highlighter-rouge">3</code> an LOH event.</p>
   </li>
   <li>
     <p><em>Germline p-value (GPV)</em></p>
@@ -1751,7 +1751,7 @@ explicitly if they are supposed to be used for filtering and querying.</p>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: output of <strong>VarScan somatic</strong></li>
         <li>
           <p><em>“Strict variant-identity matching of database and annotation records
-(VCF format only)”</em>: <code class="highlighter-rouge">Yes</code></p>
+(VCF format only)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></p>
 
           <p>This setting does not really matter here since you have built the GEMINI
 database from the exact same list of variants that we are now retrieving
@@ -1760,18 +1760,18 @@ at single sites. Matching on variant-identity is the behavior we would
 like to see though, so we may as well be explicit about it.</p>
         </li>
         <li>
-          <p><em>“Type of information to add to the database variants”</em>: <code class="highlighter-rouge">Specific values
+          <p><em>“Type of information to add to the database variants”</em>: <code class="language-plaintext highlighter-rouge">Specific values
 extracted from matching records in the annotation source (extract)</code></p>
 
           <ul>
             <li>In <em>“1: Annotation extraction recipe”</em>:
               <ul>
-                <li><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">SS</code></li>
+                <li><em>“Elements to extract from the annotation source”</em>: <code class="language-plaintext highlighter-rouge">SS</code></li>
                 <li><em>“Database column name to use for recording annotations”</em>:
-<code class="highlighter-rouge">somatic_status</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Integer numbers</code></li>
+<code class="language-plaintext highlighter-rouge">somatic_status</code></li>
+                <li><em>“What type of data are you trying to extract?”</em>: <code class="language-plaintext highlighter-rouge">Integer numbers</code></li>
                 <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the first annotation found</code></li>
+store …“</em>: <code class="language-plaintext highlighter-rouge">the first annotation found</code></li>
               </ul>
 
               <p>This is the recipe for extracting the VarScan-generated <em>SS</em> field and
@@ -1780,13 +1780,13 @@ adding it as a new column <em>somatic_status</em> to the GEMINI database.</p>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation extraction recipe”</em></li>
             <li>In <em>“2: Annotation extraction recipe”</em>:
               <ul>
-                <li><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">GPV</code></li>
+                <li><em>“Elements to extract from the annotation source”</em>: <code class="language-plaintext highlighter-rouge">GPV</code></li>
                 <li><em>“Database column name to use for recording annotations”</em>:
- <code class="highlighter-rouge">germline_p</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Numbers with
+ <code class="language-plaintext highlighter-rouge">germline_p</code></li>
+                <li><em>“What type of data are you trying to extract?”</em>: <code class="language-plaintext highlighter-rouge">Numbers with
 decimal precision</code></li>
                 <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the first annotation found</code></li>
+store …“</em>: <code class="language-plaintext highlighter-rouge">the first annotation found</code></li>
               </ul>
 
               <p>This is the recipe for extracting the VarScan-generated <em>GPV</em> field
@@ -1795,13 +1795,13 @@ and adding it as a new column <em>germline_p</em> to the GEMINI database.</p>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Annotation extraction recipe”</em></li>
             <li>In <em>“3: Annotation extraction recipe”</em>:
               <ul>
-                <li><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">SPV</code></li>
+                <li><em>“Elements to extract from the annotation source”</em>: <code class="language-plaintext highlighter-rouge">SPV</code></li>
                 <li><em>“Database column name to use for recording annotations”</em>:
- <code class="highlighter-rouge">somatic_p</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Numbers with
+ <code class="language-plaintext highlighter-rouge">somatic_p</code></li>
+                <li><em>“What type of data are you trying to extract?”</em>: <code class="language-plaintext highlighter-rouge">Numbers with
 decimal precision</code></li>
                 <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the first annotation found</code></li>
+store …“</em>: <code class="language-plaintext highlighter-rouge">the first annotation found</code></li>
               </ul>
 
               <p>This is the recipe for extracting the VarScan-generated <em>SPV</em> field
@@ -1839,27 +1839,27 @@ Hence, we only need to extract some additional information of interest.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GEMINI database”</em>: the output of the last
 <strong>GEMINI annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="highlighter-rouge">dbsnp.b147.chr5_12_17.vcf</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="language-plaintext highlighter-rouge">dbsnp.b147.chr5_12_17.vcf</code></li>
         <li>
           <p><em>“Strict variant-identity matching of database and annotation records
-(VCF format only)”</em>: <code class="highlighter-rouge">Yes</code></p>
+(VCF format only)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></p>
 
           <p>dbSNP stores information about specific SNPs observed in human
 populations and we would like to record if any exact same SNPs are among
 our variants.</p>
         </li>
-        <li><em>“Type of information to add to the database variants”</em>: <code class="highlighter-rouge">Specific
+        <li><em>“Type of information to add to the database variants”</em>: <code class="language-plaintext highlighter-rouge">Specific
 values extracted from matching records in the annotation source
 (extract)</code>
           <ul>
             <li>In <em>“1: Annotation extraction recipe”</em>:
               <ul>
-                <li><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">SAO</code></li>
+                <li><em>“Elements to extract from the annotation source”</em>: <code class="language-plaintext highlighter-rouge">SAO</code></li>
                 <li><em>“Database column name to use for recording annotations”</em>:
-<code class="highlighter-rouge">rs_ss</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Integer numbers</code></li>
+<code class="language-plaintext highlighter-rouge">rs_ss</code></li>
+                <li><em>“What type of data are you trying to extract?”</em>: <code class="language-plaintext highlighter-rouge">Integer numbers</code></li>
                 <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the first annotation found</code></li>
+store …“</em>: <code class="language-plaintext highlighter-rouge">the first annotation found</code></li>
               </ul>
 
               <p>This recipe extracts the dbSNP <em>SAO</em> field and adds it as <em>rs_ss</em> to
@@ -1873,33 +1873,33 @@ the GEMINI database.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GEMINI database”</em>: the output of the last
 <strong>GEMINI annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="highlighter-rouge">cancerhotspots_v2.<span class="notranslate">bed</span></code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="language-plaintext highlighter-rouge">cancerhotspots_v2.<span class="notranslate">bed</span></code></li>
         <li>
           <p><em>“Strict variant-identity matching of database and annotation records
-(VCF format only)”</em>: <code class="highlighter-rouge">Yes</code> (with input in <span class="notranslate">BED</span> format this setting will
+(VCF format only)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (with input in <span class="notranslate">BED</span> format this setting will
 be ignored)</p>
 
           <p>For the cancerhotspots data, we are simply going to record the best
 q-value associated with any cancerhotspots variant overlapping one
 of our variant sites.</p>
         </li>
-        <li><em>“Type of information to add to the database variants”</em>: <code class="highlighter-rouge">Specific
+        <li><em>“Type of information to add to the database variants”</em>: <code class="language-plaintext highlighter-rouge">Specific
 values extracted from matching records in the annotation source
 (extract)</code>
           <ul>
             <li>In <em>“1: Annotation extraction recipe”</em>:
               <ul>
                 <li>
-                  <p><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">5</code></p>
+                  <p><em>“Elements to extract from the annotation source”</em>: <code class="language-plaintext highlighter-rouge">5</code></p>
 
                   <p>The q-values are stored in the fifth column of the <span class="notranslate">BED</span> dataset.</p>
                 </li>
                 <li><em>“Database column name to use for recording annotations”</em>:
-<code class="highlighter-rouge">hs_qvalue</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Numbers with
+<code class="language-plaintext highlighter-rouge">hs_qvalue</code></li>
+                <li><em>“What type of data are you trying to extract?”</em>: <code class="language-plaintext highlighter-rouge">Numbers with
  decimal precision</code></li>
                 <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">the smallest of the (numeric) values</code></li>
+store …“</em>: <code class="language-plaintext highlighter-rouge">the smallest of the (numeric) values</code></li>
               </ul>
 
               <p>This is the recipe for extracting the <em>q-values</em> of overlapping
@@ -1914,31 +1914,31 @@ database.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GEMINI database”</em>: the output of the last
 <strong>GEMINI annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="highlighter-rouge">CIViC.<span class="notranslate">bed</span></code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="language-plaintext highlighter-rouge">CIViC.<span class="notranslate">bed</span></code></li>
         <li>
           <p><em>“Strict variant-identity matching of database and annotation records
-(VCF format only)”</em>: <code class="highlighter-rouge">Yes</code> (with input in <span class="notranslate">BED</span> format this setting will
+(VCF format only)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (with input in <span class="notranslate">BED</span> format this setting will
 be ignored)</p>
 
           <p>For the CIViC data, we are going to record the hyperlink to any variant
 found in the CIViC database that overlaps one of our variant sites.</p>
         </li>
-        <li><em>“Type of information to add to the database variants”</em>: <code class="highlighter-rouge">Specific
+        <li><em>“Type of information to add to the database variants”</em>: <code class="language-plaintext highlighter-rouge">Specific
 values extracted from matching records in the annotation source
 (extract)</code>
           <ul>
             <li>In <em>“1: Annotation extraction recipe”</em>:
               <ul>
                 <li>
-                  <p><em>“Elements to extract from the annotation source”</em>: <code class="highlighter-rouge">4</code></p>
+                  <p><em>“Elements to extract from the annotation source”</em>: <code class="language-plaintext highlighter-rouge">4</code></p>
 
                   <p>The hyperlinks are stored in the fourth column of the <span class="notranslate">BED</span> dataset.</p>
                 </li>
                 <li><em>“Database column name to use for recording annotations”</em>:
-<code class="highlighter-rouge">overlapping_civic_url</code></li>
-                <li><em>“What type of data are you trying to extract?”</em>: <code class="highlighter-rouge">Text (text)</code></li>
+<code class="language-plaintext highlighter-rouge">overlapping_civic_url</code></li>
+                <li><em>“What type of data are you trying to extract?”</em>: <code class="language-plaintext highlighter-rouge">Text (text)</code></li>
                 <li><em>“If multiple annotations are found for the same variant,
-store …“</em>: <code class="highlighter-rouge">a comma-separated list of non-redundant (text) values</code></li>
+store …“</em>: <code class="language-plaintext highlighter-rouge">a comma-separated list of non-redundant (text) values</code></li>
               </ul>
 
               <p>This is the recipe for extracting the hyperlinks of overlapping CIViC
@@ -1953,20 +1953,20 @@ GEMINI database.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GEMINI database”</em>: the output of the last
 <strong>GEMINI annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="highlighter-rouge">cgi_variant_positions.<span class="notranslate">bed</span></code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset to use as the annotation source”</em>: the imported <code class="language-plaintext highlighter-rouge">cgi_variant_positions.<span class="notranslate">bed</span></code></li>
         <li>
           <p><em>“Strict variant-identity matching of database and annotation records
-(VCF format only)”</em>: <code class="highlighter-rouge">Yes</code> (with input in <span class="notranslate">BED</span> format this setting will
+(VCF format only)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (with input in <span class="notranslate">BED</span> format this setting will
 be ignored)</p>
 
           <p>For the CGI data, we are going to record if any of our variant sites
 is overlapped by a variant in the CGI biomarkers database.</p>
         </li>
-        <li><em>“Type of information to add to the database variants”</em>: <code class="highlighter-rouge">Binary
+        <li><em>“Type of information to add to the database variants”</em>: <code class="language-plaintext highlighter-rouge">Binary
 indicator (1=found, 0=not found) of whether the variant had any match in
 the annotation source (boolean)</code>
           <ul>
-            <li><em>“Database column name to use for recording annotations”</em>: <code class="highlighter-rouge">in_cgidb</code></li>
+            <li><em>“Database column name to use for recording annotations”</em>: <code class="language-plaintext highlighter-rouge">in_cgidb</code></li>
           </ul>
         </li>
       </ul>
@@ -2026,12 +2026,12 @@ tumor sample</li>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GEMINI database”</em>: the fully annotated database
 created in the last <strong>GEMINI annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> step</li>
-        <li><em>“Build GEMINI query using”</em>: <code class="highlighter-rouge">Basic variant query constructor</code>
+        <li><em>“Build GEMINI query using”</em>: <code class="language-plaintext highlighter-rouge">Basic variant query constructor</code>
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Genotype filter <span class="notranslate">expression</span>”</em>
               <ul>
                 <li><em>“Restrictions to apply to genotype values”</em>:
-<code class="highlighter-rouge">gt_alt_freqs.NORMAL &lt;= 0.05 AND gt_alt_freqs.TUMOR &gt;= 0.10</code></li>
+<code class="language-plaintext highlighter-rouge">gt_alt_freqs.NORMAL &lt;= 0.05 AND gt_alt_freqs.TUMOR &gt;= 0.10</code></li>
               </ul>
 
               <p>With this genotype-based filter, we retain only those variants that
@@ -2039,21 +2039,21 @@ are supported by less than 5% of the <span class="notranslate">reads</span> of t
 by more than 10% of the <span class="notranslate">reads</span> of the tumor sample.</p>
             </li>
             <li>
-              <p><em>“Additional constraints expressed in SQL syntax”</em>: <code class="highlighter-rouge">somatic_status = 2</code></p>
+              <p><em>“Additional constraints expressed in SQL syntax”</em>: <code class="language-plaintext highlighter-rouge">somatic_status = 2</code></p>
 
               <p>Among the info stored in the GEMINI database is the somatic status
 VarScan somatic has called for every variant (remember we
 used GEMINI annotate to add it). With the condition
-<code class="highlighter-rouge">somatic_status = 2</code> we retain only those variants passing the
+<code class="language-plaintext highlighter-rouge">somatic_status = 2</code> we retain only those variants passing the
 genotype filter above <strong>and</strong> considered somatic variants by the
 variant caller.</p>
             </li>
             <li>In <em>“Output format options”</em>
               <ul>
-                <li><em>“Type of report to generate”</em>: <code class="highlighter-rouge">tabular (GEMINI default)</code>
+                <li><em>“Type of report to generate”</em>: <code class="language-plaintext highlighter-rouge">tabular (GEMINI default)</code>
                   <ul>
-                    <li><em>“Add a header of column names to the output”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><em>“Set of columns to include in the variant report table”</em>: <code class="highlighter-rouge">Custom
+                    <li><em>“Add a header of column names to the output”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><em>“Set of columns to include in the variant report table”</em>: <code class="language-plaintext highlighter-rouge">Custom
 (report user-specified columns)</code>
                       <ul>
                         <li>In <em>“Choose columns to include in the report”</em>:
@@ -2064,7 +2064,7 @@ variant caller.</p>
                             <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“alt”</em></li>
                           </ul>
                         </li>
-                        <li><em>“Additional columns (comma-separated)”</em>: <code class="highlighter-rouge">gene, aa_change, rs_ids,
+                        <li><em>“Additional columns (comma-separated)”</em>: <code class="language-plaintext highlighter-rouge">gene, aa_change, rs_ids,
 hs_qvalue, cosmic_ids</code></li>
                       </ul>
                     </li>
@@ -2074,7 +2074,7 @@ hs_qvalue, cosmic_ids</code></li>
 
               <p>Here we specify, which columns (from the <em>variants</em> table of the
 GEMINI database) we want to have included, in the specified order, in
-a <code class="highlighter-rouge">tabular</code> variant report.</p>
+a <code class="language-plaintext highlighter-rouge">tabular</code> variant report.</p>
             </li>
           </ul>
         </li>
@@ -2101,7 +2101,7 @@ listed, you can use <strong>GEMINI database info</strong> <i class="fa fa-wrench
 
   <ul>
     <li><em>“GEMINI database”</em>: the database you want to explore</li>
-    <li><em>“Information to retrieve from the database”</em>: <code class="highlighter-rouge">Names of database tables
+    <li><em>“Information to retrieve from the database”</em>: <code class="language-plaintext highlighter-rouge">Names of database tables
 and their columns</code></li>
   </ul>
 </blockquote>
@@ -2113,7 +2113,7 @@ and their columns</code></li>
   <ol>
     <li><strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the exact same settings as before, but:
       <ul>
-        <li><em>“Additional constraints expressed in SQL syntax”</em>: <code class="highlighter-rouge">somatic_status = 2 AND somatic_p &lt;= 0.05 AND filter IS NULL</code></li>
+        <li><em>“Additional constraints expressed in SQL syntax”</em>: <code class="language-plaintext highlighter-rouge">somatic_status = 2 AND somatic_p &lt;= 0.05 AND filter IS NULL</code></li>
       </ul>
 
       <p>This translates into “variants classified as somatic with a p-value &lt;=
@@ -2127,9 +2127,9 @@ and their columns</code></li>
   <p>In the condition above, SQL keywords are given in uppercase. This is not a
 requirement, but it makes it easier to understand the syntax.</p>
 
-  <p>You can check whether any cell in a data table is empty with <code class="highlighter-rouge">IS NULL</code>, and
-whether it contains <em>any</em> value with <code class="highlighter-rouge">IS NOT NULL</code>. To combine different
-filter criteria logically, you can use <code class="highlighter-rouge">AND</code> and <code class="highlighter-rouge">OR</code>, and parentheses to
+  <p>You can check whether any cell in a data table is empty with <code class="language-plaintext highlighter-rouge">IS NULL</code>, and
+whether it contains <em>any</em> value with <code class="language-plaintext highlighter-rouge">IS NOT NULL</code>. To combine different
+filter criteria logically, you can use <code class="language-plaintext highlighter-rouge">AND</code> and <code class="language-plaintext highlighter-rouge">OR</code>, and parentheses to
 group conditions if required.</p>
 </blockquote>
 
@@ -2147,7 +2147,7 @@ last example, but:
       <ul>
         <li>In <em>“Output format options”</em>
           <ul>
-            <li><em>“Additional columns (comma-separated)”</em>: <code class="highlighter-rouge">type, gt_alt_freqs.TUMOR, gt_alt_freqs.NORMAL,
+            <li><em>“Additional columns (comma-separated)”</em>: <code class="language-plaintext highlighter-rouge">type, gt_alt_freqs.TUMOR, gt_alt_freqs.NORMAL,
 ifnull(nullif(round(max_aaf_all,2),-1.0),0) AS MAF, gene, impact_so,
 aa_change, ifnull(round(cadd_scaled,2),'.') AS cadd_scaled,
 round(gerp_bp_score,2) AS gerp_bp, ifnull(round(gerp_element_pval,2),'.')
@@ -2165,7 +2165,7 @@ in_cgidb</code></li>
 </blockquote>
 
 <p>This last query adds a lot more annotations to the report, and it also
-demonstrates the use of the <code class="highlighter-rouge">AS</code> keyword to rename columns and of some
+demonstrates the use of the <code class="language-plaintext highlighter-rouge">AS</code> keyword to rename columns and of some
 <a href="https://sqlite.org/lang_corefunc.html">SQLite functions</a> to clean up the
 output.</p>
 
@@ -2178,18 +2178,18 @@ output.</p>
   <h3 id="details-limitations-of-genotype-column-queries"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Limitations of genotype column queries</h3>
   <p>In case you are wondering why the above query does not use rounding on
 the alte<span class="notranslate">rna</span>te allele frequencies of the samples, <em>i.e.</em>, on
-<code class="highlighter-rouge">gt_alt_freqs.TUMOR</code> and <code class="highlighter-rouge">gt_alt_freqs.NORMAL</code>, or why it does not rename
+<code class="language-plaintext highlighter-rouge">gt_alt_freqs.TUMOR</code> and <code class="language-plaintext highlighter-rouge">gt_alt_freqs.NORMAL</code>, or why it does not rename
 these columns, that is because it would break the query.</p>
 
   <p>As a general rule, note that all columns in the variants table starting
-with <code class="highlighter-rouge">gt</code> (the genotype columns, calculated from the genotype fields of a
+with <code class="language-plaintext highlighter-rouge">gt</code> (the genotype columns, calculated from the genotype fields of a
 VCF dataset) cannot be used like regular SQLite columns, but are parsed by
 GEMINI separately. That is why you cannot mix them with regular SQLite
-elements like functions and alias specifications with <code class="highlighter-rouge">AS</code>.
-You may also have noticed that <code class="highlighter-rouge">gt_alt_freqs.TUMOR</code> and
-<code class="highlighter-rouge">gt_alt_freqs.NORMAL</code> do not obey the column order specification of the
+elements like functions and alias specifications with <code class="language-plaintext highlighter-rouge">AS</code>.
+You may also have noticed that <code class="language-plaintext highlighter-rouge">gt_alt_freqs.TUMOR</code> and
+<code class="language-plaintext highlighter-rouge">gt_alt_freqs.NORMAL</code> do not obey the column order specification of the
 query, but end up as the last columns of the tabular report. This is
-another artefact of GEMINI’s special treatment of <code class="highlighter-rouge">gt</code> columns.</p>
+another artefact of GEMINI’s special treatment of <code class="language-plaintext highlighter-rouge">gt</code> columns.</p>
 </blockquote>
 
 <h2 id="generating-reports-of-genes-affected-by-variants">Generating reports of genes affected by variants</h2>
@@ -2204,12 +2204,12 @@ the ClinVar phenotype, if any, associated with the gene, a hyperlink to the
 gene’s page at CIViC.org, <em>etc.</em>.</p>
 
 <p>Some of this information comes built-in into every GEMINI database, but it is
-stored in a separate table called <code class="highlighter-rouge">gene_detailed</code>, while all information we
-used and queried so far was from the <code class="highlighter-rouge">variants</code> table.</p>
+stored in a separate table called <code class="language-plaintext highlighter-rouge">gene_detailed</code>, while all information we
+used and queried so far was from the <code class="language-plaintext highlighter-rouge">variants</code> table.</p>
 
-<p>To access information from the <code class="highlighter-rouge">variants</code> and the <code class="highlighter-rouge">gene_detailed</code> table in the
+<p>To access information from the <code class="language-plaintext highlighter-rouge">variants</code> and the <code class="language-plaintext highlighter-rouge">gene_detailed</code> table in the
 same query we need to join the two tables. Such an operation is not possible
-with the <code class="highlighter-rouge">Basic query constructor</code> we have used so far, but requires an
+with the <code class="language-plaintext highlighter-rouge">Basic query constructor</code> we have used so far, but requires an
 advanced mode for composing the query.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2217,8 +2217,8 @@ advanced mode for composing the query.</p>
   <ol>
     <li><strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in advanced mode by choosing
       <ul>
-        <li><em>“Build GEMINI query using”</em>: <code class="highlighter-rouge">Advanced query constructor</code></li>
-        <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT v.gene, v.chrom,
+        <li><em>“Build GEMINI query using”</em>: <code class="language-plaintext highlighter-rouge">Advanced query constructor</code></li>
+        <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT v.gene, v.chrom,
  g.synonym, g.hgnc_id, g.entrez_id, g.rvis_pct, v.clinvar_gene_phenotype
  FROM variants v, gene_detailed g WHERE v.chrom = g.chrom AND
  v.gene = g.gene AND v.somatic_status = 2 AND v.somatic_p &lt;= 0.05 AND
@@ -2227,25 +2227,25 @@ advanced mode for composing the query.</p>
 
       <blockquote class="comment">
         <h3 id="comment-elements-of-the-sql-query"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Elements of the SQL query</h3>
-        <p>In this full SQL query, the part between <code class="highlighter-rouge">SELECT</code> and <code class="highlighter-rouge">FROM</code> states which
+        <p>In this full SQL query, the part between <code class="language-plaintext highlighter-rouge">SELECT</code> and <code class="language-plaintext highlighter-rouge">FROM</code> states which
 columns from which database tables we wish to retrieve, while the part
-between <code class="highlighter-rouge">FROM</code> and <code class="highlighter-rouge">WHERE</code> specifies the database tables that need to be
-consulted and gives them simpler aliases (<code class="highlighter-rouge">v</code> becomes an alias for
-the <code class="highlighter-rouge">variants</code> table, <code class="highlighter-rouge">g</code> for the <code class="highlighter-rouge">gene_detailed</code> table), which we can then
+between <code class="language-plaintext highlighter-rouge">FROM</code> and <code class="language-plaintext highlighter-rouge">WHERE</code> specifies the database tables that need to be
+consulted and gives them simpler aliases (<code class="language-plaintext highlighter-rouge">v</code> becomes an alias for
+the <code class="language-plaintext highlighter-rouge">variants</code> table, <code class="language-plaintext highlighter-rouge">g</code> for the <code class="language-plaintext highlighter-rouge">gene_detailed</code> table), which we can then
 use everywhere else in the query.</p>
 
-        <p>The part following <code class="highlighter-rouge">WHERE</code> are the filter criteria we want to apply. Note
+        <p>The part following <code class="language-plaintext highlighter-rouge">WHERE</code> are the filter criteria we want to apply. Note
 that these criteria are almost the same as those we have used in our
 earlier somatic variants query, but since we are working with two tables
 instead of just one, we need to state which table the filter columns come
-from through table prefixes. Thus, <code class="highlighter-rouge">somatic_status</code> becomes
-<code class="highlighter-rouge">v.somatic_status</code>, <em>etc.</em>. In addition, we want to report, of course,
+from through table prefixes. Thus, <code class="language-plaintext highlighter-rouge">somatic_status</code> becomes
+<code class="language-plaintext highlighter-rouge">v.somatic_status</code>, <em>etc.</em>. In addition, we want to report, of course,
 corresponding information from the two tables, which is ensured by the
-additional criteria <code class="highlighter-rouge">v.chrom = g.chrom</code> and <code class="highlighter-rouge">v.gene = g.gene</code> (the SQL
-terminology for this is: we want to join the <code class="highlighter-rouge">variants</code> and the
-<code class="highlighter-rouge">gene_detailed</code> tables on their <code class="highlighter-rouge">chrom</code> and <code class="highlighter-rouge">gene</code> columns).</p>
+additional criteria <code class="language-plaintext highlighter-rouge">v.chrom = g.chrom</code> and <code class="language-plaintext highlighter-rouge">v.gene = g.gene</code> (the SQL
+terminology for this is: we want to join the <code class="language-plaintext highlighter-rouge">variants</code> and the
+<code class="language-plaintext highlighter-rouge">gene_detailed</code> tables on their <code class="language-plaintext highlighter-rouge">chrom</code> and <code class="language-plaintext highlighter-rouge">gene</code> columns).</p>
 
-        <p>The <code class="highlighter-rouge">GROUP BY</code> part, finally, specifies that we want to collapse records
+        <p>The <code class="language-plaintext highlighter-rouge">GROUP BY</code> part, finally, specifies that we want to collapse records
 affecting the same gene into one.</p>
       </blockquote>
     </li>
@@ -2253,7 +2253,7 @@ affecting the same gene into one.</p>
 
   <ul>
     <li>
-      <p><em>“Genotype filter <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">gt_alt_freqs.NORMAL &lt;= 0.05 AND
+      <p><em>“Genotype filter <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">gt_alt_freqs.NORMAL &lt;= 0.05 AND
 gt_alt_freqs.TUMOR &gt;= 0.10</code></p>
 
       <p>This remains the same as in the previous somatic variants query.</p>
@@ -2265,7 +2265,7 @@ gt_alt_freqs.TUMOR &gt;= 0.10</code></p>
 
 <p>Unfortunately, <em>GEMINI annotate</em> lets you add columns only to the variants
 table of a GEMINI database, but there is no simple way to enhance the
-<code class="highlighter-rouge">gene_detailed</code> table with additional annotations. That’s why we are going to
+<code class="language-plaintext highlighter-rouge">gene_detailed</code> table with additional annotations. That’s why we are going to
 add such extra annotations now to the tabular gene-centered report using more
 general-purpose <span class="notranslate">Galaxy</span> tools.</p>
 
@@ -2283,27 +2283,27 @@ unwanted columns, while <em>rearranging</em> the remaining ones.</p>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to add <strong>UniProt cancer genes</strong> information
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: the GEMINI-generated gene report from the previous step</li>
-        <li><em>“Column to use from 1st file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span>  <em>“2nd file”</em>: the imported <code class="highlighter-rouge">Uniprot_Cancer_Genes</code> dataset</li>
-        <li><em>“Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span>  <em>“2nd file”</em>: the imported <code class="language-plaintext highlighter-rouge">Uniprot_Cancer_Genes</code> dataset</li>
+        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
         <li>
-          <p><em>“Output lines appearing in”</em>: <code class="highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable
+          <p><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable
 lines from 1st file. (-a 1)</code></p>
 
           <p>If a variant-affected gene is not listed as a Uniprot cancer gene, then,
 obviously, we still want to have it included in the final report.</p>
         </li>
-        <li><em>“First line is a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Ignore case”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Ignore case”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li>
-          <p><em>“Value to put in unpaired (empty) fields”</em>: <code class="highlighter-rouge">0</code></p>
+          <p><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">0</code></p>
 
-          <p>If you inspect the <code class="highlighter-rouge">Uniprot_Cancer_Genes</code> dataset, you will see that it
-has two annotation columns - one indicating, using <code class="highlighter-rouge">1</code> and <code class="highlighter-rouge">0</code>, whether
+          <p>If you inspect the <code class="language-plaintext highlighter-rouge">Uniprot_Cancer_Genes</code> dataset, you will see that it
+has two annotation columns - one indicating, using <code class="language-plaintext highlighter-rouge">1</code> and <code class="language-plaintext highlighter-rouge">0</code>, whether
 a given gene is a <em>proto-oncogene</em> or not, the other one indicating
 <em>tumor suppressor</em> genes the same way. For genes missing from this
 annotation dataset, we want to fill the corresponding two columns of the
-join result with <code class="highlighter-rouge">0</code> to indicate the common case that a gene affected by
+join result with <code class="language-plaintext highlighter-rouge">0</code> to indicate the common case that a gene affected by
 a variant is neither a known proto-oncogene, nor a tumor suppressor
 gene.</p>
         </li>
@@ -2312,14 +2312,14 @@ gene.</p>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to add <strong>CGI biomarkers</strong> information
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: the partially annotated dataset from the previous</li>
-        <li><em>“Column to use from 1st file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd file”</em>: the imported <code class="highlighter-rouge">cgi_genes</code> dataset</li>
-        <li><em>“Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Output lines appearing in”</em>: <code class="highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd file”</em>: the imported <code class="language-plaintext highlighter-rouge">cgi_genes</code> dataset</li>
+        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable
 lines from 1st file. (-a 1)</code></li>
-        <li><em>“First line is a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Ignore case”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="highlighter-rouge">0</code></li>
+        <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Ignore case”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
       </ul>
 
       <p>Inspect the input and the result dataset to make sure you understand what
@@ -2328,18 +2328,18 @@ happened at this step.</p>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to add gene information from <strong>CIViC</strong>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: the partially annotated dataset from step 2</li>
-        <li><em>“Column to use from 1st file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd file”</em>: the imported <code class="highlighter-rouge">GeneSummaries</code> dataset</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd file”</em>: the imported <code class="language-plaintext highlighter-rouge">GeneSummaries</code> dataset</li>
         <li>
-          <p><em>“Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column: 3</code></p>
+          <p><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></p>
 
           <p>The gene column in the CIViC gene summaries annotation dataset is <em>not</em> the first one!</p>
         </li>
-        <li><em>“Output lines appearing in”</em>: <code class="highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable
 lines from 1st file. (-a 1)</code></li>
-        <li><em>“First line is a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Ignore case”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="highlighter-rouge">.</code></li>
+        <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Ignore case”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">.</code></li>
       </ul>
 
       <p>Inspect the input and the result dataset to make sure you understand what
@@ -2368,78 +2368,78 @@ this:
           <ul>
             <li>In <em>“1: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">gene</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">gene</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“2: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">chrom</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">chrom</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“3: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">synonym</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">synonym</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“4: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">hgnc_id</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">hgnc_id</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“5: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">entrez_id</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">entrez_id</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“6: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">rvis_pct</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">rvis_pct</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“7: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">is_OG</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">is_OG</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“8: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">is_TS</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">is_TS</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“9: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">in_cgi_biomarkers</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">in_cgi_biomarkers</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“10: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">clinvar_gene_phenotype</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">clinvar_gene_phenotype</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“11: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">gene_civic_url</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">gene_civic_url</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Specify the first few columns by name”</em></li>
             <li>In <em>“12: Specify the first few columns by name”</em>
               <ul>
-                <li><em>“column”</em>: <code class="highlighter-rouge">description</code></li>
+                <li><em>“column”</em>: <code class="language-plaintext highlighter-rouge">description</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Discard unspecified columns”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Discard unspecified columns”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -2450,7 +2450,7 @@ this:
 almost certainly offer <strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>,
 which can be used as a drop-in replacement.
 Instead of column names, however, this tool expects a comma-separated list
-of column indexes, like <code class="highlighter-rouge">c1,c2</code> for the first and second column, so you
+of column indexes, like <code class="language-plaintext highlighter-rouge">c1,c2</code> for the first and second column, so you
 will have to first figure out the column numbers of your columns of
 interest.</p>
 

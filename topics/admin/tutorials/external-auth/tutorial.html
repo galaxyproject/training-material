@@ -606,10 +606,10 @@
   <ol>
     <li>Edit the <span class="notranslate">galaxy</span>.j2 template file in the templates/nginx directory and update the main location block defined for serving <span class="notranslate">galaxy</span>. Add the parameters:
       <ul>
-        <li><code class="highlighter-rouge">auth_basic <span class="notranslate">galaxy</span>;</code></li>
-        <li><code class="highlighter-rouge">auth_basic_user_file /etc/nginx/passwd;</code></li>
-        <li><code class="highlighter-rouge">uwsgi_param HTTP_REMOTE_USER $remote_user;</code></li>
-        <li><code class="highlighter-rouge">uwsgi_param HTTP_GX_SECRET SOME_SECRET_STRING;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">auth_basic <span class="notranslate">galaxy</span>;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">auth_basic_user_file /etc/nginx/passwd;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">uwsgi_param HTTP_REMOTE_USER $remote_user;</code></li>
+        <li><code class="language-plaintext highlighter-rouge">uwsgi_param HTTP_GX_SECRET SOME_SECRET_STRING;</code></li>
       </ul>
 
       <p>It should look like:</p>
@@ -627,16 +627,16 @@
      # Static files can be more efficiently served by Nginx. Why send the
 </code></pre></div>      </div>
 
-      <p><code class="highlighter-rouge">auth_basic</code> enables validation of use<span class="notranslate">rna</span>me and password using the “HTTP Basic Authentication” protocol. Its value <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> is used as a realm name to be displayed to the user when prompting for credentials.
-<code class="highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps use<span class="notranslate">rna</span>mes and passwords.
-<code class="highlighter-rouge">uwsgi_param</code> adds <code class="highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to uwsgi, with value <code class="highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
+      <p><code class="language-plaintext highlighter-rouge">auth_basic</code> enables validation of use<span class="notranslate">rna</span>me and password using the “HTTP Basic Authentication” protocol. Its value <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> is used as a realm name to be displayed to the user when prompting for credentials.
+<code class="language-plaintext highlighter-rouge">auth_basic_user_file</code> specifies the file that keeps use<span class="notranslate">rna</span>mes and passwords.
+<code class="language-plaintext highlighter-rouge">uwsgi_param</code> adds <code class="language-plaintext highlighter-rouge">HTTP_REMOTE_USER</code> to the special variables passed by nginx to uwsgi, with value <code class="language-plaintext highlighter-rouge">$remote_user</code>, which is a nginx embedded variable containing the use<span class="notranslate">rna</span>me supplied with the Basic authentication.</p>
 
-      <p><code class="highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. <code class="highlighter-rouge">GX_SECRET</code> adds additional security as it needs to match <code class="highlighter-rouge">remote_user_secret</code> in your <span class="notranslate">galaxy</span> configutation.</p>
+      <p><code class="language-plaintext highlighter-rouge">GX_SECRET</code> is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to <span class="notranslate">Galaxy</span>. NGINX and other webservers like Apache will strip any user-sent <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> headers, as that header defines the authenticated user. If you can talk directly to <span class="notranslate">Galaxy</span> (e.g. via curl) and provide the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> header, you can impersonate any other use. While having <span class="notranslate">Galaxy</span> listen on <code class="language-plaintext highlighter-rouge">127.0.0.1</code> prevents any requests from outside of the system reaching <span class="notranslate">Galaxy</span>, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting <span class="notranslate">Galaxy</span> and Nginx to connect. <code class="language-plaintext highlighter-rouge">GX_SECRET</code> adds additional security as it needs to match <code class="language-plaintext highlighter-rouge">remote_user_secret</code> in your <span class="notranslate">galaxy</span> configutation.</p>
     </li>
     <li>
-      <p>Add a pre_task using the <a href="https://docs.ansible.com/ansible/latest/modules/pip_module.html"><code class="highlighter-rouge">pip</code></a> module which installs the library <code class="highlighter-rouge">passlib</code>, which is required for <code class="highlighter-rouge">htpasswd</code>.</p>
+      <p>Add a pre_task using the <a href="https://docs.ansible.com/ansible/latest/modules/pip_module.html"><code class="language-plaintext highlighter-rouge">pip</code></a> module which installs the library <code class="language-plaintext highlighter-rouge">passlib</code>, which is required for <code class="language-plaintext highlighter-rouge">htpasswd</code>.</p>
 
-      <p>Add a pre_task using the <a href="https://docs.ansible.com/ansible/2.4/htpasswd_module.html"><code class="highlighter-rouge">htpasswd</code></a> module which sets up a password file in <code class="highlighter-rouge">/etc/nginx/passwd</code>, with owner and group set to root, and a name and password, and a mode of 0640.</p>
+      <p>Add a pre_task using the <a href="https://docs.ansible.com/ansible/2.4/htpasswd_module.html"><code class="language-plaintext highlighter-rouge">htpasswd</code></a> module which sets up a password file in <code class="language-plaintext highlighter-rouge">/etc/nginx/passwd</code>, with owner and group set to root, and a name and password, and a mode of 0640.</p>
       <blockquote class="question">
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
@@ -678,7 +678,7 @@
     <span class="na">remote_user_secret</span><span class="pi">:</span> <span class="s">SOME_SECRET_STRING</span>
 </code></pre></div>      </div>
 
-      <p>Set the <code class="highlighter-rouge">remote_user_maildomain</code> option to the appropriate domain name for your site.</p>
+      <p>Set the <code class="language-plaintext highlighter-rouge">remote_user_maildomain</code> option to the appropriate domain name for your site.</p>
     </li>
     <li>Run the playbook</li>
   </ol>
@@ -688,7 +688,7 @@
 <blockquote class="comment">
   <h3 id="comment-access-denied"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Access denied</h3>
 
-  <p>If you see this message, it is because nginx is not correctly sending the <code class="highlighter-rouge">REMOTE_USER</code> or the <code class="highlighter-rouge">GX_SECRET</code> values.</p>
+  <p>If you see this message, it is because nginx is not correctly sending the <code class="language-plaintext highlighter-rouge">REMOTE_USER</code> or the <code class="language-plaintext highlighter-rouge">GX_SECRET</code> values.</p>
 
   <p><img src="../../images/access_denied.png" alt="access denied message" /></p>
 
@@ -703,7 +703,7 @@
 
   <ol>
     <li>
-      <p>Log in using the use<span class="notranslate">rna</span>me and password you provided when creating the <code class="highlighter-rouge">passwd</code> file. If your use<span class="notranslate">rna</span>me and the value of <code class="highlighter-rouge">remote_user_maildomain</code> match an existing user, you will be logged in to that account. If not, a new account will be created for that user.</p>
+      <p>Log in using the use<span class="notranslate">rna</span>me and password you provided when creating the <code class="language-plaintext highlighter-rouge">passwd</code> file. If your use<span class="notranslate">rna</span>me and the value of <code class="language-plaintext highlighter-rouge">remote_user_maildomain</code> match an existing user, you will be logged in to that account. If not, a new account will be created for that user.</p>
     </li>
     <li>
       <p>Click on the “User” menu at the top, to see how the use<span class="notranslate">rna</span>me appears.</p>
@@ -711,7 +711,7 @@
     <li>
       <p>Note that some user features are not available when remote user support is enabled.</p>
 
-      <p>Try logging out by selecting <strong>User</strong> -&gt; <strong>Logout</strong>. You will discover that when returning to the user interface, you are still logged in. This is because <span class="notranslate">Galaxy</span> has no way of logging you out of the proxy’s authentication system. Instead, you should set <code class="highlighter-rouge">remote_user_logout_href</code> in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> to point to the URL of your authentication system’s logout page.</p>
+      <p>Try logging out by selecting <strong>User</strong> -&gt; <strong>Logout</strong>. You will discover that when returning to the user interface, you are still logged in. This is because <span class="notranslate">Galaxy</span> has no way of logging you out of the proxy’s authentication system. Instead, you should set <code class="language-plaintext highlighter-rouge">remote_user_logout_href</code> in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> to point to the URL of your authentication system’s logout page.</p>
     </li>
   </ol>
 
@@ -721,7 +721,7 @@
 
 <p>If you wish your <span class="notranslate">Galaxy</span> to be accessible to command line clients (e.g. bioblend, blend4j, parsec), you will need to add an exception for authentication on the API. <span class="notranslate">Galaxy</span> will still be secure and protected, but non-browser access will be permitted with an API key.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /api/ {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /api/ {
     satisfy any;
     allow all;
 }
@@ -740,7 +740,7 @@
 
       <ul>
         <li>the NGINX changes</li>
-        <li><code class="highlighter-rouge">use_remote_user: true</code></li>
+        <li><code class="language-plaintext highlighter-rouge">use_remote_user: true</code></li>
       </ul>
     </li>
     <li>

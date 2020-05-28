@@ -584,7 +584,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -631,7 +631,7 @@
   <ol>
     <li>Create a <strong>new history</strong> and name it something meaningful (e.g. <em>Proteogenomics DB search</em>)</li>
     <li>Import the four MGF MS/MS files and the Trimmed_ref_5000_uniprot_cRAP.FASTA sequence file from Zenodo.<a href="https://doi.org/10.5281/zenodo.1489208"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg" alt="DOI" /></a>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f4.mgf
 https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f5.mgf
 https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f8.mgf
 https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
@@ -688,7 +688,7 @@ https://zenodo.org/record/1489208/files/Mo_Tai_Trimmed_mgfs__Mo_Tai_iTRAQ_f9.mgf
 
 <h1 id="match-peptide-sequences">Match peptide sequences</h1>
 
-<p>The search database labelled <code class="highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code> is the input database that
+<p>The search database labelled <code class="language-plaintext highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code> is the input database that
 will be used to match MS/MS to peptide sequences via a sequence database search.</p>
 
 <p>For this, the sequence database-searching program called <a href="https://compomics.github.io/projects/searchgui.html">SearchGUI</a> will be used.The generated dataset collection of the three <em>MGF files</em> in the history is used as the MS/MS input. We will walk through a number of these settings in order to utilize SearchGUI on these example MGF files.</p>
@@ -701,9 +701,9 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
   <ol>
     <li><strong>SearchGUI</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein Database”</em>: <code class="highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code> (Or however you named the <code class="highlighter-rouge">FASTA</code> file)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein Database”</em>: <code class="language-plaintext highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code> (Or however you named the <code class="language-plaintext highlighter-rouge">FASTA</code> file)</li>
         <li>
-          <p><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input Peak lists (mgf)”</em>: <code class="highlighter-rouge">MGF files</code> dataset collection.</p>
+          <p><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input Peak lists (mgf)”</em>: <code class="language-plaintext highlighter-rouge">MGF files</code> dataset collection.</p>
 
           <blockquote class="tip">
             <h3 id="tip-tip-select-dataset-collections-as-input"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select dataset collections as input</h3>
@@ -721,7 +721,7 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
         <li>Section <strong>Search Engine Options</strong>:
           <ul>
             <li>
-              <p><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“DB-Search Engines”</em>: <code class="highlighter-rouge">X!Tandem</code></p>
+              <p><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“DB-Search Engines”</em>: <code class="language-plaintext highlighter-rouge">X!Tandem</code></p>
 
               <blockquote class="comment">
                 <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment:</h3>
@@ -735,28 +735,28 @@ will be used to match MS/MS to peptide sequences via a sequence database search.
         </li>
         <li>Section <strong>Protein Digestion Options</strong>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enzyme”</em>: <code class="highlighter-rouge">Trypsin</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum Missed Cleavages”</em>: <code class="highlighter-rouge">2</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Enzyme”</em>: <code class="language-plaintext highlighter-rouge">Trypsin</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum Missed Cleavages”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
           </ul>
         </li>
         <li>Section <strong>Precursor options</strong>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Precursor Ion Tolerance Units”</em>: <code class="highlighter-rouge">Parts per million (ppm)</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Precursor Ion Tolerance”</em>:<code class="highlighter-rouge"> 10</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Fragment Tolerance (Daltons)”</em>: <code class="highlighter-rouge">0.05</code> (this is high resolution MS/MS data)</li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum charge”</em>:<code class="highlighter-rouge">2</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum charge”</em>:<code class="highlighter-rouge">6</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Forward Ion”</em>: <code class="highlighter-rouge">b</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reverse Ion”</em>:<code class="highlighter-rouge"> y</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Precursor Isotope”</em> :<code class="highlighter-rouge">0</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum Precursor Isotope”</em> :<code class="highlighter-rouge">1</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Precursor Ion Tolerance Units”</em>: <code class="language-plaintext highlighter-rouge">Parts per million (ppm)</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Precursor Ion Tolerance”</em>:<code class="language-plaintext highlighter-rouge"> 10</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Fragment Tolerance (Daltons)”</em>: <code class="language-plaintext highlighter-rouge">0.05</code> (this is high resolution MS/MS data)</li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum charge”</em>:<code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum charge”</em>:<code class="language-plaintext highlighter-rouge">6</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Forward Ion”</em>: <code class="language-plaintext highlighter-rouge">b</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reverse Ion”</em>:<code class="language-plaintext highlighter-rouge"> y</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Precursor Isotope”</em> :<code class="language-plaintext highlighter-rouge">0</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum Precursor Isotope”</em> :<code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
         <li>Section <strong>Protein Modification Options</strong>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Fixed Modifications”</em>: <code class="highlighter-rouge">Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Fixed Modifications”</em>: <code class="language-plaintext highlighter-rouge">Carbamidomethylation of C, ITRAQ-4Plex of K, ITRAQ-4Plex of Ntermini</code></li>
             <li>
-              <p><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variable modifications”</em>: <code class="highlighter-rouge">Oxidation of M, ITRAQ-4Plex of Y</code></p>
+              <p><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Variable modifications”</em>: <code class="language-plaintext highlighter-rouge">Oxidation of M, ITRAQ-4Plex of Y</code></p>
 
               <blockquote class="tip">
                 <h3 id="tip-tip-search-for-options"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Search for options</h3>
@@ -768,12 +768,12 @@ available options.</p>
         </li>
         <li>Section <strong>Advanced Options</strong>:
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“X!Tandem Options”</em>: <code class="highlighter-rouge">Advanced</code>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“X!Tandem Options”</em>: <code class="language-plaintext highlighter-rouge">Advanced</code>
               <ul>
-                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“X!Tandem: Quick Acetyl”</em>: <code class="highlighter-rouge">No</code></li>
-                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“X!Tandem: Quick Pyrolidone”</em>: <code class="highlighter-rouge">No</code></li>
-                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“X!Tandem: Protein stP Bias”</em>: <code class="highlighter-rouge">No</code></li>
-                <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“X!Tandem: Maximum Valid Expectation Value”</em>: <code class="highlighter-rouge">100</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“X!Tandem: Quick Acetyl”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“X!Tandem: Quick Pyrolidone”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“X!Tandem: Protein stP Bias”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“X!Tandem: Maximum Valid Expectation Value”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
               </ul>
             </li>
           </ul>
@@ -810,7 +810,7 @@ outputs.</p>
   <h3 id="comment-comment-file-formats"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: File Formats</h3>
   <p>There are a number of choices for different data files that can be generated using
   PeptideShaker. A compressed file can be made containing all information needed to
-  view them results in the standalone PeptideShaker viewer. A <code class="highlighter-rouge">mzidentML</code> file can
+  view them results in the standalone PeptideShaker viewer. A <code class="language-plaintext highlighter-rouge">mzidentML</code> file can
   be generated that contains all peptide sequence matching information and can be
   utilized by compatible <span class="notranslate">downstream</span> software. Other outputs are focused on the inferred
   proteins identified from the PSMs, as well as phosphorylation reports, relevant if
@@ -824,10 +824,10 @@ outputs.</p>
     <li><strong>PeptideShaker</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Compressed SearchGUI results”</em>: The SearchGUI archive file</li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify Advanced PeptideShaker Processing Options”</em>: <code class="highlighter-rouge">Default Processing Options</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify Advanced Filtering Options”</em>: <code class="highlighter-rouge">Default Filtering Options</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Include the protein sequences in mzIdentML”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output options”</em>: Select the <code class="highlighter-rouge">PSM Report</code> (Peptide-Spectral Match) and the <code class="highlighter-rouge">Certificate of Analysis</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify Advanced PeptideShaker Processing Options”</em>: <code class="language-plaintext highlighter-rouge">Default Processing Options</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify Advanced Filtering Options”</em>: <code class="language-plaintext highlighter-rouge">Default Filtering Options</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Include the protein sequences in mzIdentML”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output options”</em>: Select the <code class="language-plaintext highlighter-rouge">PSM Report</code> (Peptide-Spectral Match) and the <code class="language-plaintext highlighter-rouge">Certificate of Analysis</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -865,9 +865,9 @@ new row in the tabular output.</p>
   <ol>
     <li><strong>mz to sqlite</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics identification files”</em>: <code class="highlighter-rouge">PeptideShaker_mzidentml</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics Spectrum files”</em>: <code class="highlighter-rouge">Mo_Tai_MGFs</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics Search Database Fasta”</em>: <code class="highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics identification files”</em>: <code class="language-plaintext highlighter-rouge">PeptideShaker_mzidentml</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics Spectrum files”</em>: <code class="language-plaintext highlighter-rouge">Mo_Tai_MGFs</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Proteomics Search Database Fasta”</em>: <code class="language-plaintext highlighter-rouge">Uniprot_cRAP_SAV_indel_translatedbed.FASTA</code></li>
       </ul>
 
       <p><img src="../../images/mz2sqlite.png" alt="mz2sqlite" width="20%" /></p>
@@ -892,9 +892,9 @@ new row in the tabular output.</p>
   <ol>
     <li>Run <strong>FASTA to Tabular</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data input ‘input’ (fasta)”</em>: <code class="highlighter-rouge">Trimmed_ref_500_Uniprot_cRAP.fasta</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“How many columns to divide title string into?”</em>: <code class="highlighter-rouge">2</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“How many title characters to keep?”</em>: <code class="highlighter-rouge">0</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data input ‘input’ (fasta)”</em>: <code class="language-plaintext highlighter-rouge">Trimmed_ref_500_Uniprot_cRAP.fasta</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“How many columns to divide title string into?”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“How many title characters to keep?”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
       </ul>
     </li>
   </ol>
@@ -912,44 +912,44 @@ input to the Query Tabular tool.</p>
   <ol>
     <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Cut Columns”</em>: <code class="highlighter-rouge">c1</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
       </ul>
 
       <p>Upon completion of this step you will have extracted C1 (column 1) from the input tabular file</p>
     </li>
     <li><strong>Convert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Convert all”</em>: <code class="highlighter-rouge">Whitespaces</code></li>
-        <li><em>“in Dataset”</em> : <code class="highlighter-rouge">Data input 'input' (txt)</code></li>
-        <li><em>“Strip leading and trailing whitespaces”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Condense consecutive delimiters in one TAB”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Convert all”</em>: <code class="language-plaintext highlighter-rouge">Whitespaces</code></li>
+        <li><em>“in Dataset”</em> : <code class="language-plaintext highlighter-rouge">Data input 'input' (txt)</code></li>
+        <li><em>“Strip leading and trailing whitespaces”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Condense consecutive delimiters in one TAB”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p>This step will convert all the white spaces into different tabular column.</p>
     </li>
     <li><strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Cut Columns”</em>: <code class="highlighter-rouge">c2</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Pipe</code></li>
+        <li><em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Pipe</code></li>
       </ul>
 
       <p>This step will extract information in column2 separated by Pipe</p>
     </li>
     <li><strong>Convert</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Convert all”</em>: <code class="highlighter-rouge">Dots</code></li>
-        <li><em>“in Dataset”</em> : <code class="highlighter-rouge">Data input 'input' (txt)</code></li>
-        <li><em>“Strip leading and trailing whitespaces”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Condense consecutive delimiters in one TAB”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Convert all”</em>: <code class="language-plaintext highlighter-rouge">Dots</code></li>
+        <li><em>“in Dataset”</em> : <code class="language-plaintext highlighter-rouge">Data input 'input' (txt)</code></li>
+        <li><em>“Strip leading and trailing whitespaces”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Condense consecutive delimiters in one TAB”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p>This step will convert all the dots into different tabular column.</p>
     </li>
     <li><strong>Group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select data”</em>: <code class="highlighter-rouge">input from above</code></li>
-        <li><em>“Group by column”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">input from above</code></li>
+        <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
   </ol>
@@ -973,12 +973,12 @@ input to the Query Tabular tool.</p>
         <li>Section <strong>Table Options</strong>:
           <ul>
             <li><em>“Tabular Dataset for Table”</em>: Uniprot</li>
-            <li><em>“Use first line as column names”</em> : <code class="highlighter-rouge">No</code></li>
-            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="highlighter-rouge">prot</code></li>
+            <li><em>“Use first line as column names”</em> : <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="language-plaintext highlighter-rouge">prot</code></li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>:
               <ul>
-                <li><em>“Table Index”</em>: <code class="highlighter-rouge">No</code></li>
-                <li><em>“Index on Columns”</em>: <code class="highlighter-rouge">Prot</code></li>
+                <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">Prot</code></li>
               </ul>
             </li>
           </ul>
@@ -991,22 +991,22 @@ input to the Query Tabular tool.</p>
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Filter Tabular Input Lines</strong>
               <ul>
-                <li><em>“Filter by”</em>:  <code class="highlighter-rouge">skip leading lines</code></li>
-                <li><em>“Skip lines”</em>: <code class="highlighter-rouge">1</code></li>
+                <li><em>“Filter by”</em>:  <code class="language-plaintext highlighter-rouge">skip leading lines</code></li>
+                <li><em>“Skip lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
               </ul>
             </li>
           </ul>
         </li>
         <li>Section <strong>Table Options</strong>:
           <ul>
-            <li><em>“Specify Name for Table”</em>: <code class="highlighter-rouge">psms</code></li>
-            <li><em>“Use first line as column names”</em> : <code class="highlighter-rouge">No</code></li>
-            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="highlighter-rouge">id,Proteins,Sequence</code></li>
-            <li><em>“Only load the columns you have named into database”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">psms</code></li>
+            <li><em>“Use first line as column names”</em> : <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="language-plaintext highlighter-rouge">id,Proteins,Sequence</code></li>
+            <li><em>“Only load the columns you have named into database”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Table Index</strong>
               <ul>
-                <li><em>“Table Index”</em>: <code class="highlighter-rouge">No</code></li>
-                <li><em>“Index on Columns”</em>: <code class="highlighter-rouge">id</code></li>
+                <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">id</code></li>
               </ul>
             </li>
           </ul>
@@ -1021,35 +1021,35 @@ input to the Query Tabular tool.</p>
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Filter Tabular Input Lines</strong>
               <ul>
-                <li><em>“Filter by”</em>:  <code class="highlighter-rouge">skip leading lines</code></li>
-                <li><em>“Skip lines”</em>: <code class="highlighter-rouge">1</code></li>
+                <li><em>“Filter by”</em>:  <code class="language-plaintext highlighter-rouge">skip leading lines</code></li>
+                <li><em>“Skip lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Filter Tabular Input Lines</strong>
               <ul>
-                <li><em>“Filter by”</em>:  <code class="highlighter-rouge">select columns</code></li>
-                <li><em>“Enter column numbers to keep”</em>: <code class="highlighter-rouge">1,2</code></li>
+                <li><em>“Filter by”</em>:  <code class="language-plaintext highlighter-rouge">select columns</code></li>
+                <li><em>“Enter column numbers to keep”</em>: <code class="language-plaintext highlighter-rouge">1,2</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Filter Tabular Input Lines</strong>
               <ul>
-                <li><em>“Filter by”</em>:  <code class="highlighter-rouge">normalize list columns,replicate rows for each item in the list</code></li>
-                <li><em>“Enter column numbers to normalize”</em>: <code class="highlighter-rouge">2</code></li>
-                <li><em>“List item delimiter in column”</em>: <code class="highlighter-rouge">,</code></li>
+                <li><em>“Filter by”</em>:  <code class="language-plaintext highlighter-rouge">normalize list columns,replicate rows for each item in the list</code></li>
+                <li><em>“Enter column numbers to normalize”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                <li><em>“List item delimiter in column”</em>: <code class="language-plaintext highlighter-rouge">,</code></li>
               </ul>
             </li>
           </ul>
         </li>
         <li>Section <strong>Table Options</strong>:
           <ul>
-            <li><em>“Specify Name for Table”</em>: <code class="highlighter-rouge">prots</code></li>
-            <li><em>“Use first line as column names”</em> : <code class="highlighter-rouge">No</code></li>
-            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="highlighter-rouge">id,prot</code></li>
-            <li><em>“Only load the columns you have named into database”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">prots</code></li>
+            <li><em>“Use first line as column names”</em> : <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="language-plaintext highlighter-rouge">id,prot</code></li>
+            <li><em>“Only load the columns you have named into database”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>:
               <ul>
-                <li><em>“Table Index”</em>: <code class="highlighter-rouge">No</code></li>
-                <li><em>“Index on Columns”</em>: <code class="highlighter-rouge">prot, id</code></li>
+                <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">prot, id</code></li>
               </ul>
             </li>
           </ul>
@@ -1058,24 +1058,24 @@ input to the Query Tabular tool.</p>
             <h3 id="comment-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment:</h3>
 
             <p>By default, table columns will be named: c1,c2,c3,…,cn (column names for a table must be unique).
-You can override the default names by entering a comma separated list of names, e.g. <code class="highlighter-rouge">,name1,,,name2</code>
+You can override the default names by entering a comma separated list of names, e.g. <code class="language-plaintext highlighter-rouge">,name1,,,name2</code>
 would rename the second and fifth columns.
 Check your input file to find the settings which best fits your needs.</p>
 
           </blockquote>
         </li>
         <li>
-          <p><em>“Save the sqlite database in your history”</em>: <code class="highlighter-rouge">No</code></p>
+          <p><em>“Save the sqlite database in your history”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
           <blockquote class="comment">
             <h3 id="comment-querying-an-sqlite-database"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Querying an SQLite Database</h3>
             <p><strong>Query Tabular</strong> can also use an existing SQLite database.
-Activating <code class="highlighter-rouge">Save the sqlite database in your history</code>
+Activating <code class="language-plaintext highlighter-rouge">Save the sqlite database in your history</code>
 will store the generated database in the history, allowing to reuse it directly.</p>
           </blockquote>
         </li>
         <li><em>“SQL Query to generate tabular output”</em>:
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT psms.*
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT psms.*
 FROM psms
 WHERE psms.id NOT IN
 (SELECT distinct prots.id
@@ -1083,7 +1083,7 @@ FROM prots JOIN uniprot ON prots.prot = uniprot.prot)
 ORDER BY psms.id
 </code></pre></div>          </div>
         </li>
-        <li><em>“include query result column headers”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li>Click <strong>Execute</strong> and inspect the query results file after it turned green.</li>
@@ -1103,22 +1103,22 @@ ORDER BY psms.id
       <ul>
         <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Filter Tabular Input Lines”</em>
           <ul>
-            <li><em>“Filter by”</em>:  <code class="highlighter-rouge">skip leading lines</code></li>
-            <li><em>“Skip lines”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“Filter by”</em>:  <code class="language-plaintext highlighter-rouge">skip leading lines</code></li>
+            <li><em>“Skip lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>Section <strong>Table Options</strong>:
       <ul>
-        <li><em>“Specify Name for Table”</em>: <code class="highlighter-rouge">psm</code></li>
-        <li><em>“Use first line as column names”</em> : <code class="highlighter-rouge">No</code></li>
-        <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="highlighter-rouge">id,Proteins,Sequence</code></li>
-        <li><em>“Only load the columns you have named into database”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Specify Name for Table”</em>: <code class="language-plaintext highlighter-rouge">psm</code></li>
+        <li><em>“Use first line as column names”</em> : <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="language-plaintext highlighter-rouge">id,Proteins,Sequence</code></li>
+        <li><em>“Only load the columns you have named into database”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li><em>“SQL Query to generate tabular output”</em>:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT Sequence || ' PSM=' || group_concat(id,',') || ' length='
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT Sequence || ' PSM=' || group_concat(id,',') || ' length='
 || length(Sequence) as "ID",Sequence
 FROM  psm
 WHERE length(Sequence) &gt;6
@@ -1128,7 +1128,7 @@ ORDER BY length(Sequence),Sequence
 </code></pre></div>      </div>
     </li>
     <li>
-      <p><em>“include query result column headers”</em>: <code class="highlighter-rouge">Yes</code></p>
+      <p><em>“include query result column headers”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></p>
     </li>
     <li>Click <strong>Execute</strong> and inspect the query results file after it turned green.</li>
   </ul>
@@ -1149,8 +1149,8 @@ The short BlastP uses parameters for short peptide sequences (8-30 aas). Please 
   <ol>
     <li><strong>Tabular to FASTA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:
       <ul>
-        <li><em>“Title column”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Sequence Column”</em>:<code class="highlighter-rouge">2</code></li>
+        <li><em>“Title column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Sequence Column”</em>:<code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
   </ol>
@@ -1165,31 +1165,31 @@ The short BlastP uses parameters for short peptide sequences (8-30 aas). Please 
   <ol>
     <li><strong>NCBI BLAST+ blastp</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>BLASTP</strong> with:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein query sequence(s)”</em>: <code class="highlighter-rouge">Data input 'query' (fasta)</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Subject database/sequences”</em>: <code class="highlighter-rouge">Locally installed BLAST database</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein query sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">Data input 'query' (fasta)</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Subject database/sequences”</em>: <code class="language-plaintext highlighter-rouge">Locally installed BLAST database</code>
           <ul>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Protein Blast database”</em>: Select <code class="highlighter-rouge">nr_mouse_current</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Protein Blast database”</em>: Select <code class="language-plaintext highlighter-rouge">nr_mouse_current</code></li>
           </ul>
         </li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Type of BLAST”</em>: <code class="highlighter-rouge">blastp-short - BLASTP optimized for queries shorter than 30 residues</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Set expectation value cutoff”</em>:<code class="highlighter-rouge">200000.0</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output format”</em>: <code class="highlighter-rouge">Tabular(extended 25 columns)</code></li>
-        <li><em>“Advanced Options”</em>: <code class="highlighter-rouge">Show Advanced Options</code>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Type of BLAST”</em>: <code class="language-plaintext highlighter-rouge">blastp-short - BLASTP optimized for queries shorter than 30 residues</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Set expectation value cutoff”</em>:<code class="language-plaintext highlighter-rouge">200000.0</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Tabular(extended 25 columns)</code></li>
+        <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code>
           <ul>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Filter out low complexity regions (with SEG)”</em>: <code class="highlighter-rouge">No</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Scoring matrix and gap costs”</em>: <code class="highlighter-rouge">PAM30</code>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Filter out low complexity regions (with SEG)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Scoring matrix and gap costs”</em>: <code class="language-plaintext highlighter-rouge">PAM30</code>
               <ul>
-                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gap Costs”</em>: <code class="highlighter-rouge">Existence: 9 Extension: 1</code></li>
+                <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gap Costs”</em>: <code class="language-plaintext highlighter-rouge">Existence: 9 Extension: 1</code></li>
               </ul>
             </li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum hits to show”</em>: <code class="highlighter-rouge">1</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum number of HSPs (alignments) to keep for any single query-subject pair”</em>:<code class="highlighter-rouge">1</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Word size for wordfinder algorithm”</em>: <code class="highlighter-rouge">2</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Multiple hits window size”</em>: <code class="highlighter-rouge">40</code></li>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum score to add a word to the BLAST lookup table”</em>: <code class="highlighter-rouge">11</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Composition-based statistics”</em>: <code class="highlighter-rouge">0 (No composition)</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Should the query and subject defline(s) be parsed?”</em>: <code class="highlighter-rouge">No</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Restrict search of database to a given set of ID’s”</em>:<code class="highlighter-rouge">No restriction</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum hits to show”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum number of HSPs (alignments) to keep for any single query-subject pair”</em>:<code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Word size for wordfinder algorithm”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Multiple hits window size”</em>: <code class="language-plaintext highlighter-rouge">40</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum score to add a word to the BLAST lookup table”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Composition-based statistics”</em>: <code class="language-plaintext highlighter-rouge">0 (No composition)</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Should the query and subject defline(s) be parsed?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Restrict search of database to a given set of ID’s”</em>:<code class="language-plaintext highlighter-rouge">No restriction</code></li>
           </ul>
 
           <blockquote class="comment">
@@ -1202,8 +1202,8 @@ comparing against a FASTA file.</p>
 
           </blockquote>
         </li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum query coverage per hsp (percentage, 0 to 100)”</em>: <code class="highlighter-rouge">0</code></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Compute locally optimal Smith-Waterman alignments”</em>:<code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum query coverage per hsp (percentage, 0 to 100)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Compute locally optimal Smith-Waterman alignments”</em>:<code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ol>
@@ -1263,7 +1263,7 @@ Thus, running the <span class="notranslate">workflow</span> provided with the tu
     title = "Proteogenomics 2: Database Search (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

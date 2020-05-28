@@ -292,7 +292,7 @@
 
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -344,7 +344,7 @@ testing see the <a href="/training-material/topics/transcriptomics/tutorials/ref
 <ul>
   <li>Using the rule builder / apply_rules tool</li>
   <li>Using the “Tag elements from file” tool</li>
-  <li>Manually adding dataset tags with the prefix <code class="highlighter-rouge">group:</code></li>
+  <li>Manually adding dataset tags with the prefix <code class="language-plaintext highlighter-rouge">group:</code></li>
 </ul>
 
 <p>We will use the first two methods in this tutorial.
@@ -380,11 +380,11 @@ The second method works at any step during the analysis.</p>
 
       <p>As you can see in this dialog, data can be selected from a history dataset or pasted in directly</p>
     </li>
-    <li>Set <strong>Upload data as:</strong> to <code class="highlighter-rouge">Collection(s)</code></li>
+    <li>Set <strong>Upload data as:</strong> to <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
     <li>
       <p>Paste the following links into the text box</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
 https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
 https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
 https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
@@ -398,7 +398,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
       <ul>
         <li>Click on the <strong>Columnn</strong> button and then <strong>Using a Regular <span class="notranslate">Expression</span></strong></li>
         <li>Select <strong>Create columns matching <span class="notranslate">expression</span> groups</strong></li>
-        <li>Paste <code class="highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular <span class="notranslate">Expression</span>”</em></li>
+        <li>Paste <code class="language-plaintext highlighter-rouge">.*(GSM.*)_(.*)_(.*).counts</code> in <em>“Regular <span class="notranslate">Expression</span>”</em></li>
         <li>Set <em>“Number of Groups”</em> to 3</li>
         <li>
           <p>Click on <strong>Apply</strong></p>
@@ -438,7 +438,7 @@ https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
     <li>
       <p>Import the following files</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts
 https://zenodo.org/record/1185122/files/GSM461177_untreat_paired.counts
 https://zenodo.org/record/1185122/files/GSM461178_untreat_paired.counts
 https://zenodo.org/record/1185122/files/GSM461179_treat_single.counts
@@ -496,18 +496,18 @@ We will do the latter.</p>
           <ul>
             <li>In <em>“1: Replacement”</em>
               <ul>
-                <li><em>“Find pattern”</em>: <code class="highlighter-rouge">(.*)_(.*)_(.*).counts</code></li>
-                <li><em>“Replace with”</em>: <code class="highlighter-rouge">\1_\2_\3.counts\tgroup:\2\tgroup:\3</code></li>
+                <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(.*)_(.*)_(.*).counts</code></li>
+                <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">\1_\2_\3.counts\tgroup:\2\tgroup:\3</code></li>
               </ul>
             </li>
           </ul>
         </li>
       </ul>
 
-      <p>This step add an additional columns that can be used with the <code class="highlighter-rouge">Tag elements from file</code> tool</p>
+      <p>This step add an additional columns that can be used with the <code class="language-plaintext highlighter-rouge">Tag elements from file</code> tool</p>
     </li>
     <li>
-      <p>Change the datatype to <code class="highlighter-rouge">tabular</code></p>
+      <p>Change the datatype to <code class="language-plaintext highlighter-rouge">tabular</code></p>
 
       <blockquote class="tip">
 
@@ -515,7 +515,7 @@ We will do the latter.</p>
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -548,26 +548,26 @@ our collection to specify factors.</p>
   <ol>
     <li><strong>DESeq2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“how”</em>: <code class="highlighter-rouge">Select group tags corresponding to levels</code>
+        <li><em>“how”</em>: <code class="language-plaintext highlighter-rouge">Select group tags corresponding to levels</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Count file(s) collection”</em>: Generated collection</li>
             <li>In <em>“Factor”</em>:
               <ul>
                 <li>In “1: Factor”
                   <ul>
-                    <li><em>“Specify a factor name”</em>: <code class="highlighter-rouge">Treatment</code></li>
+                    <li><em>“Specify a factor name”</em>: <code class="language-plaintext highlighter-rouge">Treatment</code></li>
                     <li>In <em>“Factor level”</em>:
                       <ul>
                         <li>In <em>“1: Factor level”</em>:
                           <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">treat</code></li>
-                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="highlighter-rouge">Tags: treat</code></li>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">treat</code></li>
+                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="language-plaintext highlighter-rouge">Tags: treat</code></li>
                           </ul>
                         </li>
                         <li>In <em>“2: Factor level”</em>:
                           <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">untreat</code></li>
-                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="highlighter-rouge">Tags: untreat</code></li>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">untreat</code></li>
+                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="language-plaintext highlighter-rouge">Tags: untreat</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -577,19 +577,19 @@ our collection to specify factors.</p>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Factor”</em> (not on “Insert Factor level”)</li>
                 <li>In “2: Factor”
                   <ul>
-                    <li>“Specify a factor name” to <code class="highlighter-rouge">Sequencing</code></li>
+                    <li>“Specify a factor name” to <code class="language-plaintext highlighter-rouge">Sequencing</code></li>
                     <li>In <em>“Factor level”</em>:
                       <ul>
                         <li>In <em>“1: Factor level”</em>:
                           <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">paired</code></li>
-                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="highlighter-rouge">Tags: paired</code></li>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">paired</code></li>
+                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="language-plaintext highlighter-rouge">Tags: paired</code></li>
                           </ul>
                         </li>
                         <li>In <em>“2: Factor level”</em>:
                           <ul>
-                            <li><em>“Specify a factor level”</em>: <code class="highlighter-rouge">single</code></li>
-                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="highlighter-rouge">Tags: single</code></li>
+                            <li><em>“Specify a factor level”</em>: <code class="language-plaintext highlighter-rouge">single</code></li>
+                            <li><em>“Select groups that correspond to this factor level”</em>: <code class="language-plaintext highlighter-rouge">Tags: single</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -600,8 +600,8 @@ our collection to specify factors.</p>
             </li>
           </ul>
         </li>
-        <li><em>“Files have header?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Output normalized counts table”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Files have header?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Output normalized counts table”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -650,7 +650,7 @@ our collection to specify factors.</p>
     title = "Group tags for complex experimental designs (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

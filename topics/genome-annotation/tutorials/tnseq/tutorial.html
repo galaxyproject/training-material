@@ -538,14 +538,14 @@
     </li>
     <li>Import from <a href="https://zenodo.org/record/2579335">Zenodo</a> or a data library (ask your instructor):
       <ul>
-        <li>FASTQ file with the Tnseq <span class="notranslate">reads</span>: <code class="highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz</code></li>
-        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different experimental conditions: <code class="highlighter-rouge">condition_barcodes.fasta</code></li>
-        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different transposon constructs: <code class="highlighter-rouge">construct_barcodes.fasta</code></li>
-        <li>Genome file for <em>Staphylococcus aureus</em>: <code class="highlighter-rouge">staph_aur.fasta</code></li>
-        <li>Annotation file for <em>Staphylococcus aureus</em>: <code class="highlighter-rouge">staph_aur.gff3</code></li>
+        <li>FASTQ file with the Tnseq <span class="notranslate">reads</span>: <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz</code></li>
+        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different experimental conditions: <code class="language-plaintext highlighter-rouge">condition_barcodes.fasta</code></li>
+        <li>Set of barcodes to separate <span class="notranslate">reads</span> from different transposon constructs: <code class="language-plaintext highlighter-rouge">construct_barcodes.fasta</code></li>
+        <li>Genome file for <em>Staphylococcus aureus</em>: <code class="language-plaintext highlighter-rouge">staph_aur.fasta</code></li>
+        <li>Annotation file for <em>Staphylococcus aureus</em>: <code class="language-plaintext highlighter-rouge">staph_aur.gff3</code></li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2579335/files/Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2579335/files/Tnseq-Tutorial-<span class="notranslate">reads</span>.fastqsanger.gz
 https://zenodo.org/record/2579335/files/condition_barcodes.fasta
 https://zenodo.org/record/2579335/files/construct_barcodes.fasta
 https://zenodo.org/record/2579335/files/staph_aur.fasta
@@ -634,14 +634,14 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <h3 id="hands_on-hands-on-inspect-condition-barcodes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect condition barcodes</h3>
 
   <ol>
-    <li>Inspect the <code class="highlighter-rouge">condition_barcodes</code> file</li>
+    <li>Inspect the <code class="language-plaintext highlighter-rouge">condition_barcodes</code> file</li>
   </ol>
 
 </blockquote>
 
 <p>This fasta file contains the barcodes for each condition:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;control
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;control
 ^CTCAGAAG
 &gt;condition
 ^GACGTCAT
@@ -652,10 +652,10 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 <blockquote class="comment">
   <h3 id="comment-comment-barcode-symbols-used-by-cutadapt"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Barcode symbols used by <strong>Cutadapt</strong></h3>
 
-  <p>The <code class="highlighter-rouge">^</code> at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by <strong>Cutadapt</strong>, you check the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types"><strong>Cutadapt</strong> manual</a>.</p>
+  <p>The <code class="language-plaintext highlighter-rouge">^</code> at the beginning of the sequence means we want to anchor the barcode at the beginning of the read. To know more about the symbols used by <strong>Cutadapt</strong>, you check the <a href="https://cutadapt.readthedocs.io/en/stable/guide.html#adapter-types"><strong>Cutadapt</strong> manual</a>.</p>
 </blockquote>
 
-<p>We would like now to split our Tnseq <span class="notranslate">reads</span> in <code class="highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code> given the barcodes.</p>
+<p>We would like now to split our Tnseq <span class="notranslate">reads</span> in <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code> given the barcodes.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-split-reads-by-condition-barcodes-using-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Split <span class="notranslate">reads</span> by condition barcodes using Cutadapt</h3>
@@ -663,18 +663,18 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">Tnseq-Tutorial-<span class="notranslate">reads</span></code></li>
             <li>In <em>“Read 1 Options”</em>
               <ul>
                 <li>In <em>“5’ (Front) Adapters”</em>
                   <ul>
                     <li>Click on <em>“Insert 5’ (Front) Adapters”</em>
                       <ul>
-                        <li><em>“Source”</em>: <code class="highlighter-rouge">File From History</code>
+                        <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">File From History</code>
                           <ul>
-                            <li><em>“Choose file containing 5’ adapters”</em>: <code class="highlighter-rouge">condition_barcodes</code> file</li>
+                            <li><em>“Choose file containing 5’ adapters”</em>: <code class="language-plaintext highlighter-rouge">condition_barcodes</code> file</li>
                           </ul>
                         </li>
                       </ul>
@@ -687,14 +687,14 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         </li>
         <li>In <em>“Adapter Options”</em>
           <ul>
-            <li><em>“Maximum error rate”</em>: <code class="highlighter-rouge">0.15</code> (to allow 1 mismatch)</li>
-            <li><em>“Match times”</em>: <code class="highlighter-rouge">3</code> (to cover cases where barcodes are attached several times)</li>
+            <li><em>“Maximum error rate”</em>: <code class="language-plaintext highlighter-rouge">0.15</code> (to allow 1 mismatch)</li>
+            <li><em>“Match times”</em>: <code class="language-plaintext highlighter-rouge">3</code> (to cover cases where barcodes are attached several times)</li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Multiple output”</em>: <code class="highlighter-rouge">Yes</code> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Multiple output”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
           </ul>
         </li>
       </ul>
@@ -718,9 +718,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>100% of the <span class="notranslate">reads</span> were trimmed (line <code class="highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code>)</li>
-      <li>2,847,018 for control (<code class="highlighter-rouge">CTCAGAAG</code> barcode) and 2,862,108 for condition (<code class="highlighter-rouge">GACGTCAT</code> barcode)</li>
-      <li>We should use the option <em>“Insert 3’ (End) Adapters”</em> and anchored them at the end of the read with the symbol <code class="highlighter-rouge">$</code> in our fasta file containing the barcodes.</li>
+      <li>100% of the <span class="notranslate">reads</span> were trimmed (line <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code>)</li>
+      <li>2,847,018 for control (<code class="language-plaintext highlighter-rouge">CTCAGAAG</code> barcode) and 2,862,108 for condition (<code class="language-plaintext highlighter-rouge">GACGTCAT</code> barcode)</li>
+      <li>We should use the option <em>“Insert 3’ (End) Adapters”</em> and anchored them at the end of the read with the symbol <code class="language-plaintext highlighter-rouge">$</code> in our fasta file containing the barcodes.</li>
     </ol>
   </blockquote>
 
@@ -728,7 +728,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="remove-adapter-sequence">Remove Adapter sequence</h2>
 
-<p>Our <span class="notranslate">reads</span> are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (<code class="highlighter-rouge">CGTTATGGCACGC</code>, here). To do so, we emove the adapter and everything <span class="notranslate">downstream</span>, using the end adapter option of <strong>Cutadapt</strong> and not anchor the sequence anywhere. To eliminate <span class="notranslate">reads</span> that might not have been trimmed because of too many mismatches or other reasons, we filter the <span class="notranslate">reads</span> by size, given the known approximate size of the remaining sequences (<strong>how is it computed??</strong>).</p>
+<p>Our <span class="notranslate">reads</span> are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (<code class="language-plaintext highlighter-rouge">CGTTATGGCACGC</code>, here). To do so, we emove the adapter and everything <span class="notranslate">downstream</span>, using the end adapter option of <strong>Cutadapt</strong> and not anchor the sequence anywhere. To eliminate <span class="notranslate">reads</span> that might not have been trimmed because of too many mismatches or other reasons, we filter the <span class="notranslate">reads</span> by size, given the known approximate size of the remaining sequences (<strong>how is it computed??</strong>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-adapter-with-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove Adapter with Cutadapt</h3>
@@ -736,7 +736,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove adapters with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -745,9 +745,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
                   <ul>
                     <li>Click on <em>“Insert 3’ (End) Adapters”</em>
                       <ul>
-                        <li><em>“Source”</em>: <code class="highlighter-rouge">Enter custom Sequence</code>
+                        <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom Sequence</code>
                           <ul>
-                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="highlighter-rouge">CGTTATGGCACGC</code></li>
+                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">CGTTATGGCACGC</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -760,12 +760,12 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         </li>
         <li>In <em>“Adapter Options”</em>
           <ul>
-            <li><em>“Match times”</em>: <code class="highlighter-rouge">3</code> (to cover cases where barcodes are attached several times)</li>
+            <li><em>“Match times”</em>: <code class="language-plaintext highlighter-rouge">3</code> (to cover cases where barcodes are attached several times)</li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -787,26 +787,26 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <p>What percentage of the <span class="notranslate">reads</span> contained the adapter?</p>
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>More than 99% of the <span class="notranslate">reads</span> contained the adapter in both conditions (line <code class="highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code> in the reports)</p>
+          <p>More than 99% of the <span class="notranslate">reads</span> contained the adapter in both conditions (line <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> with adapters</code> in the reports)</p>
         </blockquote>
       </blockquote>
     </li>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to filter <span class="notranslate">reads</span> based on length with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
           </ul>
         </li>
         <li>In <em>“Filter Options”</em>
           <ul>
-            <li><em>“Minimum length”</em> : <code class="highlighter-rouge">64</code></li>
-            <li><em>“Maximum length”</em> : <code class="highlighter-rouge">70</code></li>
+            <li><em>“Minimum length”</em> : <code class="language-plaintext highlighter-rouge">64</code></li>
+            <li><em>“Maximum length”</em> : <code class="language-plaintext highlighter-rouge">70</code></li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -819,7 +819,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <p>How many <span class="notranslate">reads</span> where discarded after filtering?</p>
         <blockquote class="solution">
           <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>Less than 2% of the <span class="notranslate">reads</span> were discarded in both conditions (lines <code class="highlighter-rouge"><span class="notranslate">Reads</span> that were too short</code> and <code class="highlighter-rouge"><span class="notranslate">Reads</span> that were too long</code> in the reports)</p>
+          <p>Less than 2% of the <span class="notranslate">reads</span> were discarded in both conditions (lines <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> that were too short</code> and <code class="language-plaintext highlighter-rouge"><span class="notranslate">Reads</span> that were too long</code> in the reports)</p>
         </blockquote>
       </blockquote>
     </li>
@@ -843,12 +843,12 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
   <ol>
     <li>
-      <p>Inspect the <code class="highlighter-rouge">construct_barcodes</code> file</p>
+      <p>Inspect the <code class="language-plaintext highlighter-rouge">construct_barcodes</code> file</p>
 
       <blockquote class="question">
         <h3 id="question-questions-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-        <p>What does the <code class="highlighter-rouge">$</code> mean in the barcode sequence file ?</p>
+        <p>What does the <code class="language-plaintext highlighter-rouge">$</code> mean in the barcode sequence file ?</p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -865,7 +865,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -874,9 +874,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
                   <ul>
                     <li>Click on <em>“Insert 3’ (End) Adapters”</em>
                       <ul>
-                        <li><em>“Source”</em> : <code class="highlighter-rouge">File From History</code>
+                        <li><em>“Source”</em> : <code class="language-plaintext highlighter-rouge">File From History</code>
                           <ul>
-                            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Choose file containing 5’ adapters”</em>: <code class="highlighter-rouge">construct_barcodes</code> file</li>
+                            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Choose file containing 5’ adapters”</em>: <code class="language-plaintext highlighter-rouge">construct_barcodes</code> file</li>
                           </ul>
                         </li>
                       </ul>
@@ -889,13 +889,13 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         </li>
         <li>In <em>“Adapter Options”</em>
           <ul>
-            <li><em>“Match times”</em>: <code class="highlighter-rouge">3</code> (to cover cases where barcodes are attached several times)</li>
+            <li><em>“Match times”</em>: <code class="language-plaintext highlighter-rouge">3</code> (to cover cases where barcodes are attached several times)</li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Multiple output”</em> : <code class="highlighter-rouge">Yes</code> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Multiple output”</em> : <code class="language-plaintext highlighter-rouge">Yes</code> (to separate the <span class="notranslate">reads</span> into one file per condition)</li>
           </ul>
         </li>
       </ul>
@@ -910,7 +910,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
         <blockquote class="solution">
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>When you look at the reports, you can see that most of the <span class="notranslate">reads</span> have been assigned to the <em>blunt</em> construct (<code class="highlighter-rouge">TAC</code> barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won’t be a problem here as the tool we use for the essentiality prediction consider the sum of <span class="notranslate">reads</span> in the replicates.</p>
+          <p>When you look at the reports, you can see that most of the <span class="notranslate">reads</span> have been assigned to the <em>blunt</em> construct (<code class="language-plaintext highlighter-rouge">TAC</code> barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won’t be a problem here as the tool we use for the essentiality prediction consider the sum of <span class="notranslate">reads</span> in the replicates.</p>
         </blockquote>
       </blockquote>
     </li>
@@ -922,7 +922,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 
 <h2 id="remove-the-remaining-transposon-sequence">Remove the remaining transposon sequence</h2>
 
-<p>The last remaining transposon sequence in the <span class="notranslate">reads</span> is the linker with the MmeI restriction site (<code class="highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code>).</p>
+<p>The last remaining transposon sequence in the <span class="notranslate">reads</span> is the linker with the MmeI restriction site (<code class="language-plaintext highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on--remove-linker-with-cutadapt"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Remove Linker with Cutadapt</h3>
@@ -930,7 +930,7 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ/A file”</em>: collection output of the previous <strong>Cutadapt</strong></li>
             <li>In <em>“Read 1 Options”</em>
@@ -939,9 +939,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
                   <ul>
                     <li>Click on <em>“Insert 3’ (End) Adapters”</em>
                       <ul>
-                        <li><em>“Source”</em>: <code class="highlighter-rouge">Enter custom Sequence</code>
+                        <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter custom Sequence</code>
                           <ul>
-                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code></li>
+                            <li><em>“Enter custom 3’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">ACAGGTTGGATGATAAGTCCCCGGTCTATATTGAGAGTAACTACATTT</code></li>
                           </ul>
                         </li>
                       </ul>
@@ -954,12 +954,12 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         </li>
         <li>In <em>“Adapter Options”</em>
           <ul>
-            <li><em>“Maximum error rate”</em>: <code class="highlighter-rouge">0.15</code></li>
+            <li><em>“Maximum error rate”</em>: <code class="language-plaintext highlighter-rouge">0.15</code></li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -987,20 +987,20 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Map with Bowtie for Illumina</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="highlighter-rouge">Use one from the history</code>
+        <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use one from the history</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="highlighter-rouge">staph_aur.fasta</code> file.</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: <code class="language-plaintext highlighter-rouge">staph_aur.fasta</code> file.</li>
           </ul>
         </li>
-        <li><em>“Is this library mate-paired?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Is this library mate-paired?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTQ file”</em>: collection output of the last <strong>Cutadapt</strong></li>
-            <li><em>“Bowtie settings to use”</em>: <code class="highlighter-rouge">Full parameters list</code></li>
-            <li><em>“Skip the first n <span class="notranslate">reads</span> (-s)”</em>: <code class="highlighter-rouge">0</code></li>
+            <li><em>“Bowtie settings to use”</em>: <code class="language-plaintext highlighter-rouge">Full parameters list</code></li>
+            <li><em>“Skip the first n <span class="notranslate">reads</span> (-s)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
             <li>
-              <p><em>“Maximum number of mismatches permitted in the seed (-n)”</em>: <code class="highlighter-rouge">0</code></p>
+              <p><em>“Maximum number of mismatches permitted in the seed (-n)”</em>: <code class="language-plaintext highlighter-rouge">0</code></p>
 
-              <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;question&lt;/span&gt; Questions
+              <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; ### &lt;i class="fa fa-question-circle" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;question&lt;/span&gt; Questions
 &gt;
 &gt; Why are we strictly enforcing no mismatch <span class="notranslate">mapping</span>?
 &gt;
@@ -1010,9 +1010,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
 {: .question}
 </code></pre></div>              </div>
             </li>
-            <li><em>“Seed length (-l)”</em>: <code class="highlighter-rouge">17</code></li>
-            <li><em>“Whether or not to try as hard as possible to find valid alignments when they exist (-y)”</em> : <code class="highlighter-rouge">Try Hard</code></li>
-            <li><em>“Whether or not to make Bowtie guarantee that reported singleton alignments are ‘best’ in terms of stratum and in terms of the quality values at the mismatched positions (–best)”</em>: <code class="highlighter-rouge">Use best</code></li>
+            <li><em>“Seed length (-l)”</em>: <code class="language-plaintext highlighter-rouge">17</code></li>
+            <li><em>“Whether or not to try as hard as possible to find valid alignments when they exist (-y)”</em> : <code class="language-plaintext highlighter-rouge">Try Hard</code></li>
+            <li><em>“Whether or not to make Bowtie guarantee that reported singleton alignments are ‘best’ in terms of stratum and in terms of the quality values at the mismatched positions (–best)”</em>: <code class="language-plaintext highlighter-rouge">Use best</code></li>
           </ul>
         </li>
       </ul>
@@ -1051,13 +1051,13 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
     <li><strong>bamCoverage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“BAM/CRAM file”</em>: collection output of the last <strong>Map with Bowtie for Illumina</strong></li>
-        <li><em>“Bin size in bases”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Scaling/Normalization method”</em>: <code class="highlighter-rouge">Do not normalize or scale</code></li>
-        <li><em>“Coverage file format”</em>: <code class="highlighter-rouge"><span class="notranslate">bed</span>graph</code></li>
-        <li><em>“Show advanced options”</em>: <code class="highlighter-rouge">yes</code>
+        <li><em>“Bin size in bases”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Scaling/Normalization method”</em>: <code class="language-plaintext highlighter-rouge">Do not normalize or scale</code></li>
+        <li><em>“Coverage file format”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span>graph</code></li>
+        <li><em>“Show advanced options”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Ignore missing data?”</em>: <code class="highlighter-rouge">Yes</code> (to get only region with read counts)</li>
-            <li><em>“Offset inside each alignment to use for the signal location”</em>: <code class="highlighter-rouge">-1</code> (to read the signal of the coverage only at the 3’ end of the read)</li>
+            <li><em>“Ignore missing data?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (to get only region with read counts)</li>
+            <li><em>“Offset inside each alignment to use for the signal location”</em>: <code class="language-plaintext highlighter-rouge">-1</code> (to read the signal of the coverage only at the 3’ end of the read)</li>
           </ul>
         </li>
       </ul>
@@ -1078,10 +1078,10 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Nucleotide subsequence search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Nucleotide sequence to be searched”</em>: <code class="highlighter-rouge">staph_aur.fasta</code></li>
-        <li><em>“Search with a”</em>: <code class="highlighter-rouge">user defined pattern</code></li>
-        <li><em>“Search pattern”</em>: <code class="highlighter-rouge">TA</code></li>
-        <li><em>“Search pattern on”</em>: <code class="highlighter-rouge">forward strand</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>Nucleotide sequence to be searched”</em>: <code class="language-plaintext highlighter-rouge">staph_aur.fasta</code></li>
+        <li><em>“Search with a”</em>: <code class="language-plaintext highlighter-rouge">user defined pattern</code></li>
+        <li><em>“Search pattern”</em>: <code class="language-plaintext highlighter-rouge">TA</code></li>
+        <li><em>“Search pattern on”</em>: <code class="language-plaintext highlighter-rouge">forward strand</code></li>
       </ul>
     </li>
     <li>Inspect the generated file</li>
@@ -1105,13 +1105,13 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li>Cut columns : <code class="highlighter-rouge">c2</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">tab</code></li>
+        <li>Cut columns : <code class="language-plaintext highlighter-rouge">c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Nucleotide subsequence search</strong></li>
       </ul>
     </li>
     <li>
-      <p>Add the <code class="highlighter-rouge">#forward</code> tag to the output</p>
+      <p>Add the <code class="language-plaintext highlighter-rouge">#forward</code> tag to the output</p>
 
       <blockquote class="tip">
 
@@ -1120,9 +1120,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
           <li>Click on the dataset</li>
           <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Check that the tag is appearing below the dataset name</li>
         </ul>
@@ -1131,26 +1131,26 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li>Cut columns : <code class="highlighter-rouge">c1,c3</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">tab</code></li>
+        <li>Cut columns : <code class="language-plaintext highlighter-rouge">c1,c3</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Nucleotide subsequence search</strong></li>
       </ul>
     </li>
     <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
       <ul>
-        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c2-1</code></li>
+        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c2-1</code></li>
         <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“as a new column to”</em>: output of <strong>cut</strong></li>
-        <li><em>“Round result?”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li>Cut columns : <code class="highlighter-rouge">c3</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">tab</code></li>
+        <li>Cut columns : <code class="language-plaintext highlighter-rouge">c3</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Compute</strong></li>
       </ul>
     </li>
-    <li>Add the <code class="highlighter-rouge">#reverse</code> tag to the output</li>
+    <li>Add the <code class="language-plaintext highlighter-rouge">#reverse</code> tag to the output</li>
   </ol>
 
 </blockquote>
@@ -1166,16 +1166,16 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
     <li><strong>Join two file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>1st file”</em>: output of <strong>bamCoverage</strong></li>
-        <li><em>“Column to use from 1st file”</em>: <code class="highlighter-rouge">Column 2</code> (to select the position of the end of the read)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: output of last <strong>cut</strong> with the <code class="highlighter-rouge">forward</code> tags</li>
-        <li><em>“Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column 1</code></li>
-        <li><em>“Output lines appearing in”</em>: <code class="highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable lines from 2st file. (-a 2)</code> (to get all TA sites)</li>
-        <li><em>“First line is a header line”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="highlighter-rouge">0</code> (to assign a count of 0 to TA sites not covered in the bamCoverage file)</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code> (to select the position of the end of the read)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd File”</em>: output of last <strong>cut</strong> with the <code class="language-plaintext highlighter-rouge">forward</code> tags</li>
+        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file, plus unpairable lines from 2st file. (-a 2)</code> (to get all TA sites)</li>
+        <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">0</code> (to assign a count of 0 to TA sites not covered in the bamCoverage file)</li>
       </ul>
     </li>
     <li>
-      <p>Add <code class="highlighter-rouge">#forward</code> tag to the output collections</p>
+      <p>Add <code class="language-plaintext highlighter-rouge">#forward</code> tag to the output collections</p>
 
       <blockquote class="tip">
 
@@ -1183,9 +1183,9 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
         <ul>
           <li>Click on the collection</li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code> in the <code class="highlighter-rouge">Add tags</code> field</p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code> in the <code class="language-plaintext highlighter-rouge">Add tags</code> field</p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Press <kbd>Enter</kbd></li>
           <li>Check that the tag is appearing below the collection name</li>
@@ -1195,12 +1195,12 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li>Cut columns : <code class="highlighter-rouge">c1,c4</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">tab</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of<strong>Join two file</strong> with the <code class="highlighter-rouge">forward</code> tag</li>
+        <li>Cut columns : <code class="language-plaintext highlighter-rouge">c1,c4</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of<strong>Join two file</strong> with the <code class="language-plaintext highlighter-rouge">forward</code> tag</li>
       </ul>
     </li>
-    <li>Repeat the same steps for <code class="highlighter-rouge">reverse</code></li>
+    <li>Repeat the same steps for <code class="language-plaintext highlighter-rouge">reverse</code></li>
   </ol>
 
 </blockquote>
@@ -1213,68 +1213,68 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
   <ol>
     <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to shift the positions of reverse strand counts with:
       <ul>
-        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c1-1</code> (to shift the position by 1)</li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: <strong>Cut</strong> output collection with the tags <code class="highlighter-rouge">reverse</code></li>
-        <li><em>“Round result?”</em> : <code class="highlighter-rouge">yes</code></li>
+        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c1-1</code> (to shift the position by 1)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: <strong>Cut</strong> output collection with the tags <code class="language-plaintext highlighter-rouge">reverse</code></li>
+        <li><em>“Round result?”</em> : <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c3,c2</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">tab</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c3,c2</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>File to cut”</em>: output of the previous <strong>Compute</strong></li>
       </ul>
     </li>
     <li><strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sort Query”</em>: the newest <code class="highlighter-rouge">reverse</code> collection</li>
-        <li><em>“Number of header lines”</em>: <code class="highlighter-rouge">0</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Sort Query”</em>: the newest <code class="language-plaintext highlighter-rouge">reverse</code> collection</li>
+        <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li>In <em>“Column selections”</em>
           <ul>
-            <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 1</code> (to sort on positions)</li>
-            <li><em>“in”</em>: <code class="highlighter-rouge">Ascending Order</code></li>
-            <li><em>“Flavor”</em>: <code class="highlighter-rouge">Fast numeric sort (-n)</code></li>
+            <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code> (to sort on positions)</li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending Order</code></li>
+            <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n)</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p>Repeat the <strong>Sort</strong> with the newest <code class="highlighter-rouge">forward</code> collection</p>
+      <p>Repeat the <strong>Sort</strong> with the newest <code class="language-plaintext highlighter-rouge">forward</code> collection</p>
     </li>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to merge the two collections and get the forward and reverse count in two different columns with:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>1st file”</em> : the <code class="highlighter-rouge">forward</code> collection from <strong>Sort</strong></li>
-        <li><em>“Column to use from 1st file”</em>: <code class="highlighter-rouge">Column 1</code> to join on positions</li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“2nd File”</em> : the <code class="highlighter-rouge">reverse</code> collection from <strong>Sort</strong></li>
-        <li><em>“Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column 1</code></li>
-        <li><em>“Output lines appearing in”</em>: <code class="highlighter-rouge">Both 1st &amp; 2nd file</code> (to get all TA sites)</li>
-        <li><em>“First line is a header line”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="highlighter-rouge">.</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>1st file”</em> : the <code class="language-plaintext highlighter-rouge">forward</code> collection from <strong>Sort</strong></li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code> to join on positions</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“2nd File”</em> : the <code class="language-plaintext highlighter-rouge">reverse</code> collection from <strong>Sort</strong></li>
+        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+        <li><em>“Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st &amp; 2nd file</code> (to get all TA sites)</li>
+        <li><em>“First line is a header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Value to put in unpaired (empty) fields”</em>: <code class="language-plaintext highlighter-rouge">.</code></li>
       </ul>
     </li>
     <li><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get the total read count with:
       <ul>
-        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c2+c3</code> to get the total count</li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: output of <strong>Join two files</strong> with the tags <code class="highlighter-rouge">reverse</code> and <code class="highlighter-rouge">forward</code></li>
-        <li><em>“Round result?”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><em>Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c2+c3</code> to get the total count</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“as a new column to”</em>: output of <strong>Join two files</strong> with the tags <code class="language-plaintext highlighter-rouge">reverse</code> and <code class="language-plaintext highlighter-rouge">forward</code></li>
+        <li><em>“Round result?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c4</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">tab</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c4</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">tab</code></li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>File to cut”</em>:output of the last <strong>Compute</strong></li>
       </ul>
     </li>
     <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>Sort Query”</em>: output of the last <strong>Cut</strong></li>
-        <li><em>“Number of header lines”</em>: <code class="highlighter-rouge">0</code></li>
+        <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li>In <em>“Column selections”</em>
           <ul>
-            <li><em>“on column”</em>: <code class="highlighter-rouge">Column: 1</code> (to sort on positions)</li>
-            <li><em>“in”</em>: <code class="highlighter-rouge">Ascending Order</code></li>
-            <li><em>“Flavor”</em>: <code class="highlighter-rouge">Fast numeric sort (-n)</code></li>
+            <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code> (to sort on positions)</li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending Order</code></li>
+            <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n)</code></li>
           </ul>
         </li>
       </ul>
@@ -1299,8 +1299,8 @@ https://zenodo.org/record/2579335/files/staph_aur.gff3
       <li>The first column contain the position of the TA site, and the second collumn the number of insertions observed.</li>
       <li>Your five first lines should look like this :
         <ul>
-          <li>One collumn with the positions : <code class="highlighter-rouge">4,10,16,42,79</code></li>
-          <li>One collumn with the number of insertions : <code class="highlighter-rouge">0,3,20,0,11</code></li>
+          <li>One collumn with the positions : <code class="language-plaintext highlighter-rouge">4,10,16,42,79</code></li>
+          <li>One collumn with the number of insertions : <code class="language-plaintext highlighter-rouge">0,3,20,0,11</code></li>
         </ul>
       </li>
     </ol>
@@ -1359,12 +1359,12 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
 
 <p>In our case, we will use the Gumbel method, because we are using Mariner data and our data look pretty sparse. Gumbel is therefore the safe choice compared to HMM which is more sensitive to sparse data.</p>
 
-<p>In order to use transit, we need to create a an annotation file in the <code class="highlighter-rouge">prot_table</code> format, specific to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.</p>
+<p>In order to use transit, we need to create a an annotation file in the <code class="language-plaintext highlighter-rouge">prot_table</code> format, specific to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on--create-annotation-file-in-prot_table-format"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on : Create annotation file in prot_table format</h3>
   <ol>
-    <li>Check that the format of <code class="highlighter-rouge">staph_aur.gff</code> file is <code class="highlighter-rouge">gff3</code> and not <code class="highlighter-rouge">gff</code></li>
+    <li>Check that the format of <code class="language-plaintext highlighter-rouge">staph_aur.gff</code> file is <code class="language-plaintext highlighter-rouge">gff3</code> and not <code class="language-plaintext highlighter-rouge">gff</code></li>
     <li>
       <p>Change the datatype if needed</p>
 
@@ -1381,7 +1381,7 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
     </li>
     <li><strong>Convert GFF3 to prot_table for TRANSIT</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>GenBank GFF file”</em>: the <code class="highlighter-rouge">staph_aur.gf</code> file</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>GenBank GFF file”</em>: the <code class="language-plaintext highlighter-rouge">staph_aur.gf</code> file</li>
       </ul>
     </li>
   </ol>
@@ -1401,15 +1401,15 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
   <ol>
     <li><strong>Gumbel</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>“Operation mode”</em>: <code class="highlighter-rouge">Replicates</code>
+        <li><em>“Operation mode”</em>: <code class="language-plaintext highlighter-rouge">Replicates</code>
           <ul>
             <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input .wig files”</em>: output of the latest <strong>Sort</strong></li>
           </ul>
         </li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input annotation”</em>: output of the latest <strong>Convert</strong></li>
-        <li><em>“Smallest read-count to consider”</em>: <code class="highlighter-rouge">2</code> (to ignore single count insertions)</li>
-        <li><em>“Ignore TAs occuring at given fraction of the N terminus.”</em>: <code class="highlighter-rouge">0.1</code> (to ignore 10% of the insertion at the N-terminus extremity of the gene)</li>
-        <li><em>“Ignore TAs occuring at given fraction of the C terminus.”</em>: <code class="highlighter-rouge">0.1</code> (to ignore 10% of the insertion at the C-terminus extremity of the gene)</li>
+        <li><em>“Smallest read-count to consider”</em>: <code class="language-plaintext highlighter-rouge">2</code> (to ignore single count insertions)</li>
+        <li><em>“Ignore TAs occuring at given fraction of the N terminus.”</em>: <code class="language-plaintext highlighter-rouge">0.1</code> (to ignore 10% of the insertion at the N-terminus extremity of the gene)</li>
+        <li><em>“Ignore TAs occuring at given fraction of the C terminus.”</em>: <code class="language-plaintext highlighter-rouge">0.1</code> (to ignore 10% of the insertion at the C-terminus extremity of the gene)</li>
       </ul>
     </li>
   </ol>
@@ -1450,7 +1450,7 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Filter”</em>: output of the last <strong>Gumbel</strong></li>
-        <li><em>With following condition”</em>: <code class="highlighter-rouge">c9=='E'</code> (to select essential genes)</li>
+        <li><em>With following condition”</em>: <code class="language-plaintext highlighter-rouge">c9=='E'</code> (to select essential genes)</li>
       </ul>
     </li>
   </ol>
@@ -1481,27 +1481,27 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
     <li><strong>Extract Dataset from a list</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract 1st file in the collection with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>Input List”</em>: output of the last <strong>Filter</strong></li>
-        <li><em>How should a dataset be selected?”</em>: <code class="highlighter-rouge">Select by index</code>
+        <li><em>How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by index</code>
           <ul>
-            <li><em>Element index:”</em>: <code class="highlighter-rouge">0</code> to select the first dataset</li>
+            <li><em>Element index:”</em>: <code class="language-plaintext highlighter-rouge">0</code> to select the first dataset</li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p>Add the <code class="highlighter-rouge">#control</code> tag</p>
+      <p>Add the <code class="language-plaintext highlighter-rouge">#control</code> tag</p>
     </li>
     <li><strong>Extract Dataset from a list</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to extract 2nd file in the collection with:
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>Input List”</em>: output of the last <strong>Filter</strong></li>
-        <li><em>How should a dataset be selected?”</em>: <code class="highlighter-rouge">Select by index</code>
+        <li><em>How should a dataset be selected?”</em>: <code class="language-plaintext highlighter-rouge">Select by index</code>
           <ul>
-            <li><em>Element index:”</em>: <code class="highlighter-rouge">1</code> to select the second dataset</li>
+            <li><em>Element index:”</em>: <code class="language-plaintext highlighter-rouge">1</code> to select the second dataset</li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Add the <code class="highlighter-rouge">#condition</code> tag</li>
+    <li>Add the <code class="language-plaintext highlighter-rouge">#condition</code> tag</li>
   </ol>
 </blockquote>
 
@@ -1513,11 +1513,11 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
   <ol>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>1st file”</em>: output of <strong>Extract Dataset</strong> with <code class="highlighter-rouge">control</code> tag</li>
-        <li><em>Column to use from 1st file”</em>: <code class="highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>2nd file”</em>: output of <strong>Extract Dataset</strong> with <code class="highlighter-rouge">condition</code> tag</li>
-        <li><em>Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
-        <li><em>Output lines appearing in”</em>: <code class="highlighter-rouge">Both 1st and 2nd files</code> (to get common essential genes)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>1st file”</em>: output of <strong>Extract Dataset</strong> with <code class="language-plaintext highlighter-rouge">control</code> tag</li>
+        <li><em>Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>2nd file”</em>: output of <strong>Extract Dataset</strong> with <code class="language-plaintext highlighter-rouge">condition</code> tag</li>
+        <li><em>Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
+        <li><em>Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">Both 1st and 2nd files</code> (to get common essential genes)</li>
       </ul>
     </li>
   </ol>
@@ -1532,11 +1532,11 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
   <ol>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>1st file”</em>: output of <strong>Extract Dataset</strong> with <code class="highlighter-rouge">control</code> tag</li>
-        <li><em>Column to use from 1st file”</em>: <code class="highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>2nd file”</em>: output of <strong>Extract Dataset</strong> with <code class="highlighter-rouge">condition</code> tag</li>
-        <li><em>Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
-        <li><em>Output lines appearing in”</em>: <code class="highlighter-rouge">1st but not 2nd</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>1st file”</em>: output of <strong>Extract Dataset</strong> with <code class="language-plaintext highlighter-rouge">control</code> tag</li>
+        <li><em>Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>2nd file”</em>: output of <strong>Extract Dataset</strong> with <code class="language-plaintext highlighter-rouge">condition</code> tag</li>
+        <li><em>Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
+        <li><em>Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">1st but not 2nd</code></li>
       </ul>
     </li>
   </ol>
@@ -1548,11 +1548,11 @@ creating libraries with lower insertion rates. The difference from the Gumbel me
   <ol>
     <li><strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
-        <li><em>1st file”</em>: output of <strong>Extract Dataset</strong> with <code class="highlighter-rouge">control</code> tag</li>
-        <li><em>Column to use from 1st file”</em>: <code class="highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
-        <li><em>2nd file”</em>: output of <strong>Extract Dataset</strong> with <code class="highlighter-rouge">condition</code> tag</li>
-        <li><em>Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
-        <li><em>Output lines appearing in”</em>: <code class="highlighter-rouge">2nd but not 1st</code></li>
+        <li><em>1st file”</em>: output of <strong>Extract Dataset</strong> with <code class="language-plaintext highlighter-rouge">control</code> tag</li>
+        <li><em>Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
+        <li><em>2nd file”</em>: output of <strong>Extract Dataset</strong> with <code class="language-plaintext highlighter-rouge">condition</code> tag</li>
+        <li><em>Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column : 1</code> (to compare on gene ID)</li>
+        <li><em>Output lines appearing in”</em>: <code class="language-plaintext highlighter-rouge">2nd but not 1st</code></li>
       </ul>
     </li>
   </ol>
@@ -1596,15 +1596,15 @@ For repetitive analyses, the steps are fewer : <span class="notranslate">mapping
     <li>Install <a href="https://software.broadinstitute.org/software/igv/download">IGV</a> (if not already installed)</li>
     <li>Launch IGV on your computer</li>
     <li>Expand the FASTA dataset with the genome in the history</li>
-    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the genome into the IGV browser</li>
-    <li>Wait until all <strong>Dataset status</strong> are <code class="highlighter-rouge">ok</code></li>
+    <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the genome into the IGV browser</li>
+    <li>Wait until all <strong>Dataset status</strong> are <code class="language-plaintext highlighter-rouge">ok</code></li>
     <li>
       <p>Close the window</p>
 
-      <p>An alert <code class="highlighter-rouge">ERROR Parameter "file" is required</code> may appear. Ignore it.</p>
+      <p>An alert <code class="language-plaintext highlighter-rouge">ERROR Parameter "file" is required</code> may appear. Ignore it.</p>
     </li>
     <li>Expand the GFF3 dataset with the annotations of the genome in the history</li>
-    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the annotation into the IGV browser</li>
+    <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the annotation into the IGV browser</li>
     <li>
       <p>Switch to the IGV instance</p>
 
@@ -1621,7 +1621,7 @@ For repetitive analyses, the steps are fewer : <span class="notranslate">mapping
     <li>Launch IGV on your computer</li>
     <li>Check if the reference genome is available on the IGV instance</li>
     <li>Expand the BAM dataset with the mapped <span class="notranslate">reads</span> in the history</li>
-    <li>Click on the <code class="highlighter-rouge">local</code> in <code class="highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
+    <li>Click on the <code class="language-plaintext highlighter-rouge">local</code> in <code class="language-plaintext highlighter-rouge">display with IGV</code> to load the <span class="notranslate">reads</span> into the IGV browser</li>
     <li>
       <p>Switch to the IGV instance</p>
 

@@ -788,7 +788,7 @@
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/3386291">Zenodo</a> or from the shared data library</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3386291/files/annotation.txt
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3386291/files/annotation.txt
 https://zenodo.org/record/3386291/files/counts.txt
 https://zenodo.org/record/3386291/files/mt_controls.txt
 </code></pre></div>      </div>
@@ -845,9 +845,9 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
 <p>Take a look at the uploaded data by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol for each dataset.</p>
 
 <ul>
-  <li>The <code class="highlighter-rouge">counts.txt</code> file is a 40-sample <span class="notranslate">expression</span> matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of <span class="notranslate">reads</span> mapped to each gene/sample.</li>
-  <li><code class="highlighter-rouge">annotation.txt</code> is a file listing experimental information about each cell. Parameters here include <code class="highlighter-rouge">Mutation_Status</code>, <code class="highlighter-rouge">Cell_Cycle</code>, and <code class="highlighter-rouge">Treatment</code>. These will be useful for looking at  batch effects later.</li>
-  <li>The <code class="highlighter-rouge">mt_controls.txt</code> file is a list of mitochondrial genes. This list will be used later to calculate the % of mitochondrial <span class="notranslate">reads</span> in each sequencing library.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">counts.txt</code> file is a 40-sample <span class="notranslate">expression</span> matrix. Each sample (Cell_001 - Cell_040) is listed as the column headers and the start of each row is a gene name. The rest of the data refers to the number of <span class="notranslate">reads</span> mapped to each gene/sample.</li>
+  <li><code class="language-plaintext highlighter-rouge">annotation.txt</code> is a file listing experimental information about each cell. Parameters here include <code class="language-plaintext highlighter-rouge">Mutation_Status</code>, <code class="language-plaintext highlighter-rouge">Cell_Cycle</code>, and <code class="language-plaintext highlighter-rouge">Treatment</code>. These will be useful for looking at  batch effects later.</li>
+  <li>The <code class="language-plaintext highlighter-rouge">mt_controls.txt</code> file is a list of mitochondrial genes. This list will be used later to calculate the % of mitochondrial <span class="notranslate">reads</span> in each sequencing library.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -856,9 +856,9 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
   <ol>
     <li><strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Expression</span> matrix in tabular format”</em>: <code class="highlighter-rouge">counts.txt</code> (Input dataset)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format dataset describing the features in tabular format”</em>: <code class="highlighter-rouge">annotation.txt</code> (Input dataset)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing the list of the mitochondrial control genes”</em>: <code class="highlighter-rouge">mt_controls.txt</code> (Input dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Expression</span> matrix in tabular format”</em>: <code class="language-plaintext highlighter-rouge">counts.txt</code> (Input dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format dataset describing the features in tabular format”</em>: <code class="language-plaintext highlighter-rouge">annotation.txt</code> (Input dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing the list of the mitochondrial control genes”</em>: <code class="language-plaintext highlighter-rouge">mt_controls.txt</code> (Input dataset)</li>
       </ul>
 
       <blockquote class="comment">
@@ -879,8 +879,8 @@ https://zenodo.org/record/3386291/files/mt_controls.txt
   <ol>
     <li><strong>Scater: plot library QC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Plot on log scale”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Plot on log scale”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
     <li>If we have a large number of cells (500+), set the ‘Plot on log scale’ option to ‘Yes’. This will make it easier to pick cut-offs when dealing with large numbers. When the tool has finished running, click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> to view the plots. If it doesn’t appear in the browser, you may have to download it and view it exte<span class="notranslate">rna</span>lly. You should be presented with plots similar to those below.
@@ -921,13 +921,13 @@ Here, we’ll use the manual filtering method.</p>
   <ol>
     <li><strong>Scater: filter SCE</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Type of filter”</em>: <code class="highlighter-rouge">manual</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Type of filter”</em>: <code class="language-plaintext highlighter-rouge">manual</code>
           <ul>
-            <li><em>“Number of <span class="notranslate">reads</span> mapped to a gene for it to be counted as expressed”</em>: <code class="highlighter-rouge">4.0</code></li>
-            <li><em>“Minimum library size (mapped <span class="notranslate">reads</span>) to filter cells on”</em>: <code class="highlighter-rouge">100000</code></li>
-            <li><em>“Minimum number of expressed genes to filter cells on”</em>: <code class="highlighter-rouge">500</code></li>
-            <li><em>“Maximum % of mitochondrial genes expressed per cell”</em>: <code class="highlighter-rouge">35.0</code></li>
+            <li><em>“Number of <span class="notranslate">reads</span> mapped to a gene for it to be counted as expressed”</em>: <code class="language-plaintext highlighter-rouge">4.0</code></li>
+            <li><em>“Minimum library size (mapped <span class="notranslate">reads</span>) to filter cells on”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
+            <li><em>“Minimum number of expressed genes to filter cells on”</em>: <code class="language-plaintext highlighter-rouge">500</code></li>
+            <li><em>“Maximum % of mitochondrial genes expressed per cell”</em>: <code class="language-plaintext highlighter-rouge">35.0</code></li>
           </ul>
         </li>
       </ul>
@@ -954,7 +954,7 @@ Here, we’ll use the manual filtering method.</p>
   <ol>
     <li><strong>Scater: plot library QC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
   </ol>
@@ -983,8 +983,8 @@ Here, we’ll use the manual filtering method.</p>
   <ol>
     <li><strong>Scater: filter SCE</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Type of filter”</em>: <code class="highlighter-rouge">automatic</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: Calculate QC metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Type of filter”</em>: <code class="language-plaintext highlighter-rouge">automatic</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -992,12 +992,12 @@ Here, we’ll use the manual filtering method.</p>
 
         <p>The data will be normalised and then PCA ran on it using the following information from the data:</p>
         <ul>
-          <li><code class="highlighter-rouge">pct_counts_top_100_features</code></li>
-          <li><code class="highlighter-rouge">total_features_by_counts</code></li>
-          <li><code class="highlighter-rouge">pct_counts_feature_control</code></li>
-          <li><code class="highlighter-rouge">total_features_feature_control</code></li>
-          <li><code class="highlighter-rouge">log10_total_counts_endogenous</code></li>
-          <li><code class="highlighter-rouge">log10_total_counts_feature_control</code></li>
+          <li><code class="language-plaintext highlighter-rouge">pct_counts_top_100_features</code></li>
+          <li><code class="language-plaintext highlighter-rouge">total_features_by_counts</code></li>
+          <li><code class="language-plaintext highlighter-rouge">pct_counts_feature_control</code></li>
+          <li><code class="language-plaintext highlighter-rouge">total_features_feature_control</code></li>
+          <li><code class="language-plaintext highlighter-rouge">log10_total_counts_endogenous</code></li>
+          <li><code class="language-plaintext highlighter-rouge">log10_total_counts_feature_control</code></li>
         </ul>
 
         <p>When using these filtering approaches, it is sometimes good to try running them in reverse - try PCA filtering first and then if that doesn’t remove enough low-quality cells then use the manual filtering. We could actually pipeline them together - use PCA filtering first and then use the output of that to do further manual filtering.</p>
@@ -1014,9 +1014,9 @@ Here, we’ll use the manual filtering method.</p>
   <ol>
     <li><strong>Scater: PCA plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Feature (from annotation file) to colour PCA plot points by”</em>: <code class="highlighter-rouge">Mutation_Status</code></li>
-        <li><em>“Feature (from annotation file) to shape PCA plot points by”</em>: <code class="highlighter-rouge">Cell_Cycle</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SingleCellLoomExperiment dataset”</em>: <code class="language-plaintext highlighter-rouge">output_loom</code> (output of <strong>Scater: filter SCE</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Feature (from annotation file) to colour PCA plot points by”</em>: <code class="language-plaintext highlighter-rouge">Mutation_Status</code></li>
+        <li><em>“Feature (from annotation file) to shape PCA plot points by”</em>: <code class="language-plaintext highlighter-rouge">Cell_Cycle</code></li>
       </ul>
     </li>
   </ol>

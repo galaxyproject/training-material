@@ -517,7 +517,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -637,16 +637,16 @@ weight observed during the first 10 dpw affected the stability microbiome compar
 <p>To speed up analysis for this tutorial, we will use only a subset of this data. We will look at a single mouse at 10 different
 time points (5 early, 5 late). In order to assess the error rate of the analysis pipeline and experimental setup, the Schloss lab
 additionally sequenced a mock community with a known composition (genomic <span class="notranslate">DNA</span> from 21 bacterial strains). The sequences used
-for this mock sample are contained in the file <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
+for this mock sample are contained in the file <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code></p>
 
 <blockquote class="comment">
   <h3 id="comment-dataset-naming-scheme"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Dataset naming scheme</h3>
   <p>For this tutorial, you are given 10 pairs of files. For example, the following pair of files:<br />
- <code class="highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code><br />
- <code class="highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
+ <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R1_001.fastq</code><br />
+ <code class="language-plaintext highlighter-rouge">F3D0_S188_L001_R2_001.fastq</code></p>
 
-  <p>The first part of the file name indicates the sample; <code class="highlighter-rouge">F3D0</code> here signifies that this sample was obtained from Female 3 on Day 0.
-The rest of the file name is identical, except for <code class="highlighter-rouge">_R1</code> and <code class="highlighter-rouge">_R2</code>, this is used to indicate the forward and reverse <span class="notranslate">reads</span>
+  <p>The first part of the file name indicates the sample; <code class="language-plaintext highlighter-rouge">F3D0</code> here signifies that this sample was obtained from Female 3 on Day 0.
+The rest of the file name is identical, except for <code class="language-plaintext highlighter-rouge">_R1</code> and <code class="language-plaintext highlighter-rouge">_R2</code>, this is used to indicate the forward and reverse <span class="notranslate">reads</span>
 respectively.</p>
 </blockquote>
 
@@ -687,7 +687,7 @@ using the URLs listed in the box below (click <i class="fa fa-plus-square-o" ari
 
       <blockquote class="solution">
         <h3 id="solution-list-of-zenodo-urls"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/F3D0_R1.fastq
 https://zenodo.org/record/800651/files/F3D0_R2.fastq
 https://zenodo.org/record/800651/files/F3D141_R1.fastq
 https://zenodo.org/record/800651/files/F3D141_R2.fastq
@@ -777,17 +777,17 @@ https://zenodo.org/record/800651/files/Mock_R2.fastq
       <ul>
         <li>Import the following reference datasets
           <ul>
-            <li><code class="highlighter-rouge">silva.v4.fasta</code></li>
-            <li><code class="highlighter-rouge">HMP_MOCK.v35.fasta</code></li>
-            <li><code class="highlighter-rouge">trainset9_032012.pds.fasta</code></li>
-            <li><code class="highlighter-rouge">trainset9_032012.pds.tax</code></li>
+            <li><code class="language-plaintext highlighter-rouge">silva.v4.fasta</code></li>
+            <li><code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code></li>
+            <li><code class="language-plaintext highlighter-rouge">trainset9_032012.pds.fasta</code></li>
+            <li><code class="language-plaintext highlighter-rouge">trainset9_032012.pds.tax</code></li>
           </ul>
         </li>
       </ul>
 
       <blockquote class="solution">
         <h3 id="solution-list-of-zenodo-urls-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> List of Zenodo URLs</h3>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/800651/files/HMP_MOCK.v35.fasta
 https://zenodo.org/record/800651/files/silva.v4.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.fasta
 https://zenodo.org/record/800651/files/trainset9_032012.pds.tax
@@ -803,7 +803,7 @@ https://zenodo.org/record/800651/files/mouse.dpw.metadata
 
 <p>Since we have <strong>paired-end</strong> data, each sample consist of two separate fastq files, one containing the
 forward <span class="notranslate">reads</span>, and one containing the reverse <span class="notranslate">reads</span>. We can recognize the pairing from the file names,
-which will differ only by <code class="highlighter-rouge">_R1</code> or <code class="highlighter-rouge">_R2</code> in the filename. We can tell <span class="notranslate">Galaxy</span> about this paired naming
+which will differ only by <code class="language-plaintext highlighter-rouge">_R1</code> or <code class="language-plaintext highlighter-rouge">_R2</code> in the filename. We can tell <span class="notranslate">Galaxy</span> about this paired naming
 convention, so that our tools will know which files belong together. We do this by building a <strong>List of Dataset Pairs</strong></p>
 
 <blockquote class="notranslate hands_on">
@@ -815,19 +815,19 @@ convention, so that our tools will know which files belong together. We do this 
     </li>
     <li>Select all the FASTQ files (40 in total)
       <ul>
-        <li><strong>Tip:</strong> type <code class="highlighter-rouge">fastq</code> in the search bar at the top of your history to filter only the FASTQ files; you can now use the <code class="highlighter-rouge">All</code> button at the top instead of having to individually select all 40 input files.</li>
+        <li><strong>Tip:</strong> type <code class="language-plaintext highlighter-rouge">fastq</code> in the search bar at the top of your history to filter only the FASTQ files; you can now use the <code class="language-plaintext highlighter-rouge">All</code> button at the top instead of having to individually select all 40 input files.</li>
         <li>Click on <strong>for all selected..</strong></li>
         <li>Select <strong>Build List of Dataset Pairs</strong> from the dropdown menu</li>
       </ul>
 
       <p>In the next dialog window you can create the list of pairs. By default <span class="notranslate">Galaxy</span> will look for pairs
-of files that differ only by a <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> part in their names. In our case however, these
-should be <code class="highlighter-rouge">_R1</code> and <code class="highlighter-rouge">_R2</code>.</p>
+of files that differ only by a <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> part in their names. In our case however, these
+should be <code class="language-plaintext highlighter-rouge">_R1</code> and <code class="language-plaintext highlighter-rouge">_R2</code>.</p>
     </li>
     <li>Change these values accordingly
       <ul>
-        <li>Change <code class="highlighter-rouge">_1</code> to <code class="highlighter-rouge">_R1</code> in the text field on the top left</li>
-        <li>Change <code class="highlighter-rouge">_2</code> to <code class="highlighter-rouge">_R2</code> om the text field on the top right</li>
+        <li>Change <code class="language-plaintext highlighter-rouge">_1</code> to <code class="language-plaintext highlighter-rouge">_R1</code> in the text field on the top left</li>
+        <li>Change <code class="language-plaintext highlighter-rouge">_2</code> to <code class="language-plaintext highlighter-rouge">_R2</code> om the text field on the top right</li>
       </ul>
 
       <p>You should now see a list of pairs suggested by <span class="notranslate">Galaxy</span>:
@@ -842,7 +842,7 @@ should be <code class="highlighter-rouge">_R1</code> and <code class="highlighte
       <ul>
         <li>The middle segment is the name for each pair.</li>
         <li>These names will be used as sample names in the <span class="notranslate">downstream</span> analysis, so always make sure they are informative!</li>
-        <li><strong>Check</strong> that the pairs are named <code class="highlighter-rouge">F3D0</code>-<code class="highlighter-rouge">F3D9</code>, <code class="highlighter-rouge">F3D141</code>-<code class="highlighter-rouge">F3D150</code> and <code class="highlighter-rouge">Mock</code>.
+        <li><strong>Check</strong> that the pairs are named <code class="language-plaintext highlighter-rouge">F3D0</code>-<code class="language-plaintext highlighter-rouge">F3D9</code>, <code class="language-plaintext highlighter-rouge">F3D141</code>-<code class="language-plaintext highlighter-rouge">F3D150</code> and <code class="language-plaintext highlighter-rouge">Mock</code>.
           <ul>
             <li>If needed, the names can be edited by clicking on them</li>
             <li><strong>Important:</strong> On older <span class="notranslate">Galaxy</span> versions, if the files were imported via URL, they may have the full URL as sample name;
@@ -887,7 +887,7 @@ the <span class="notranslate">reads</span> for all the overlapping positions.</p
   <ul>
     <li><strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Way to provide files”</em>: <code class="highlighter-rouge">Multiple pairs - Combo mode</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Way to provide files”</em>: <code class="language-plaintext highlighter-rouge">Multiple pairs - Combo mode</code></li>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Fastq pairs”</em>: the collection you just created</li>
         <li>Leave all other parameters to the default settings</li>
       </ul>
@@ -902,7 +902,7 @@ collection of 20x2 FASTQ files, to a single FASTA file. In order to retain infor
 which <span class="notranslate">reads</span> originated from which samples, the tool also output a <em>group file</em>. View that
 file now, it should look something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M00967_43_000000000-A3JHG_1_1101_10011_3881     F3D0
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M00967_43_000000000-A3JHG_1_1101_10011_3881     F3D0
 M00967_43_000000000-A3JHG_1_1101_10050_15564    F3D0
 M00967_43_000000000-A3JHG_1_1101_10051_26098    F3D0
 [..]
@@ -952,9 +952,9 @@ Since we are sequencing many of the same organisms, there will likely be many id
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 1: Quality Control</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Contigs”</em>: the <code class="highlighter-rouge">trim.contigs.fasta</code> output from <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Groups”</em>: the <code class="highlighter-rouge">group file</code> from <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Contigs”</em>: the <code class="language-plaintext highlighter-rouge">trim.contigs.fasta</code> output from <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Groups”</em>: the <code class="language-plaintext highlighter-rouge">group file</code> from <strong>Make.contigs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
       <blockquote class="tip">
@@ -989,7 +989,7 @@ Since we are sequencing many of the same organisms, there will likely be many id
         <li>
           <p>The screening removed <strong>23,488</strong> sequences.</p>
 
-          <p>This can be determined by looking at the number of lines in <code class="highlighter-rouge">bad.accnos</code> output of <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+          <p>This can be determined by looking at the number of lines in <code class="language-plaintext highlighter-rouge">bad.accnos</code> output of <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
 or by comparing the total number of sequences before and after this screening step in the output of <strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
         </li>
         <li>
@@ -1005,7 +1005,7 @@ or by comparing the total number of sequences before and after this screening st
 
 <p>Have a look at the <em>count_table</em> output from the <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, it summarizes the number of times each unique sequence was observed across each of the samples. It will look something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Representative_Sequence                      total   F3D0   F3D1  F3D141  F3D142  ...
 M00967_43_000000000-A3JHG_1_1101_14069_1827  4402    370    29    257     142
 M00967_43_000000000-A3JHG_1_1101_18044_1900  28      1      0     1       0
 M00967_43_000000000-A3JHG_1_1101_13234_1983  10522   425    281   340     205
@@ -1039,8 +1039,8 @@ step to improve the clustering of your OTUs <a class="citation" href="#Schloss20
   <ol>
     <li><strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">silva.v4.fasta</code> reference file from your history
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">silva.v4.fasta</code> reference file from your history
 <br /><br /></li>
       </ul>
 
@@ -1051,20 +1051,20 @@ step to improve the clustering of your OTUs <a class="citation" href="#Schloss20
 
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <p>At first glance, it might look like there is not much information there. We see our read names, but only period <code class="highlighter-rouge">.</code> characters below it.</p>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
+          <p>At first glance, it might look like there is not much information there. We see our read names, but only period <code class="language-plaintext highlighter-rouge">.</code> characters below it.</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
 ............................................................................
 &gt;M00967_43_000000000-A3JHG_1_1101_18044_1900
 ............................................................................
 </code></pre></div>          </div>
           <p>This is because the V4 region is located further down our reference database and nothing aligns to the start of it. If you scroll to right you will start seeing some more informative bits:</p>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.....T-------AC---GG-AG-GAT------------
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.....T-------AC---GG-AG-GAT------------
 </code></pre></div>          </div>
           <p>Here we start seeing how our sequences align to the reference database.
 There are different alignment characters in this output:</p>
           <ul>
-            <li><code class="highlighter-rouge">.</code>: terminal gap character (before the first or after the last base in our query sequence)</li>
-            <li><code class="highlighter-rouge">-</code>: gap character within the query sequence</li>
+            <li><code class="language-plaintext highlighter-rouge">.</code>: terminal gap character (before the first or after the last base in our query sequence)</li>
+            <li><code class="language-plaintext highlighter-rouge">-</code>: gap character within the query sequence</li>
           </ul>
 
           <p>We will cut out only the V4 region in a later step (<strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</p>
@@ -1073,9 +1073,9 @@ There are different alignment characters in this output:</p>
     </li>
     <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: <code class="highlighter-rouge">count_table</code> output from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: the <code class="language-plaintext highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: <code class="language-plaintext highlighter-rouge">count_table</code> output from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Output logfile?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1084,7 +1084,7 @@ There are different alignment characters in this output:</p>
 
 <p>Have a look at the summary output (log file):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            Start    End      NBases  Ambigs   Polymer  NumSeqs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>            Start    End      NBases  Ambigs   Polymer  NumSeqs
 Minimum:    1250     10693    250     0        3        1
 2.5%-tile:  1968     11550    252     0        3        3222
 25%-tile:   1968     11550    252     0        4        32219
@@ -1097,11 +1097,11 @@ Mean:       1967.99  11550    252.462 0        4.36693
 total # of seqs:    128872
 </code></pre></div></div>
 
-<p>The <code class="highlighter-rouge">Start</code> and <code class="highlighter-rouge">End</code> columns tell us that the majority of <span class="notranslate">reads</span> aligned between positions 1968 and 11550,
+<p>The <code class="language-plaintext highlighter-rouge">Start</code> and <code class="language-plaintext highlighter-rouge">End</code> columns tell us that the majority of <span class="notranslate">reads</span> aligned between positions 1968 and 11550,
 which is what we expect to find given the reference file we used. However, some <span class="notranslate">reads</span> align to very different positions,
 which could indicate insertions or deletions at the terminal ends of the alignments or other complicating factors.</p>
 
-<p>Also notice the <code class="highlighter-rouge">Polymer</code> column in the output table. This indicates the average homopolymer length. Since we know that
+<p>Also notice the <code class="language-plaintext highlighter-rouge">Polymer</code> column in the output table. This indicates the average homopolymer length. Since we know that
 our reference database does not contain any homopolymer stretches longer than 8 <span class="notranslate">reads</span>, any <span class="notranslate">reads</span> containing such
 long stretches are likely the result of PCR errors and we would be wise to remove them.</p>
 
@@ -1115,7 +1115,7 @@ homopolymer stretches.</p>
 <ol>
   <li>Remove any <span class="notranslate">reads</span> not overlapping the region V4 region  using <strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
   <li>Remove any overhang on either end of the V4 region to ensure our sequences overlap <em>only</em> the V4 region, using <strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
-  <li>Clean our alignment file by removing any columns that have a gap character (<code class="highlighter-rouge">-</code>, or <code class="highlighter-rouge">.</code> for terminal gaps) at that position in every sequence (also using <strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
+  <li>Clean our alignment file by removing any columns that have a gap character (<code class="language-plaintext highlighter-rouge">-</code>, or <code class="language-plaintext highlighter-rouge">.</code> for terminal gaps) at that position in every sequence (also using <strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>).</li>
   <li>Group near-identical sequences together with <strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Sequences that only differ by one or two bases at this point are likely to represent sequencing errors rather than true biological variation, so we will cluster such sequences together.</li>
   <li>Remove Sequencing artefacts known as <em>chimeras</em> (discussed in next section).</li>
 </ol>
@@ -1124,7 +1124,7 @@ homopolymer stretches.</p>
 
 <p>During PCR amplification, it is possible that two unrelated templates are combined to form a sort of hybrid sequence,
 also called a <em>chimera</em>. Needless to say, we do not want such sequencing artefacts confounding our results. We’ll do
-this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> algorithm <a class="citation" href="#Rognes2016">Rognes <i>et al.</i> 2016</a> that is called within mothur, using the
+this chimera removal using the <code class="language-plaintext highlighter-rouge">VSEARCH</code> algorithm <a class="citation" href="#Rognes2016">Rognes <i>et al.</i> 2016</a> that is called within mothur, using the
 <strong>Chimera.vsearch</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="comment">
@@ -1161,9 +1161,9 @@ this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> al
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 2: Data Cleaning and Chimera Removal</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Aligned Sequences”</em>: the <code class="highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Count Table”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Aligned Sequences”</em>: the <code class="language-plaintext highlighter-rouge">align</code> output from <strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Count Table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
       <blockquote class="tip">
@@ -1199,7 +1199,7 @@ this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> al
         <li>
           <p>There were <strong>3,439 representative sequences</strong> flagged as chimeric. These represent a total of <strong>10,564 total sequences</strong></p>
 
-          <p>This can be determined by looking at the number of sequences in the <code class="highlighter-rouge">vsearch.accnos</code> file (3439). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,655-118,091=10,564).</p>
+          <p>This can be determined by looking at the number of sequences in the <code class="language-plaintext highlighter-rouge">vsearch.accnos</code> file (3439). To determine how many total sequences these represent, compare the Summary.seqs log output files before and after the chimera filtering step (128,655-118,091=10,564).</p>
         </li>
         <li>
           <p>There are 2,281 remaining sequences after filtering, clustering of highly similar sequences, and chimera removal.</p>
@@ -1214,7 +1214,7 @@ this chimera removal using the <code class="highlighter-rouge">VSEARCH</code> al
 
 <p>Have a look at the FASTA output from <strong>Pre.cluster</strong>, it should looks something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_13234_1983
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;M00967_43_000000000-A3JHG_1_1101_13234_1983
 TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-CA-GGC-G-G-A-AG-A-T-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-A-GA-GG--CT-C-AA-C-C-T-C-T-T-C--GA-G-C-CGTT-GAAAC-TG-G-TTTTC-TTGA-GT-GA-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACTCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CT-C-A-ACTGACG-CTCA-TGCA-CGAAA-GTG-TGGGT-ATC-GAACAGG
 &gt;M00967_43_000000000-A3JHG_1_1101_14069_1827
 TAC--GG-AG-GAT--GCG-A-G-C-G-T-T--AT-C-CGG-AT--TT-A-T-T--GG-GT--TT-A-AA-GG-GT-GC-G-TA-GGC-G-G-C-CT-G-C-C-AA-G-T-C-A-G-C-G-G--TA-A-AA-TT-G-C-GG-GG--CT-C-AA-C-C-C-C-G-T-A--CA-G-C-CGTT-GAAAC-TG-C-CGGGC-TCGA-GT-GG-GC-GA-G-A---AG-T-A-TGCGGAATGCGTGGTGT-AGCGGT-GAAATGCATAG-AT-A-TC-AC-GC-AG-AACCCCGAT-TGCGAAGGCA------GC-ATA-CCG-G-CG-CC-C-T-ACTGACG-CTGA-GGCA-CGAAA-GTG-CGGGG-ATC-AAACAGG
@@ -1298,11 +1298,11 @@ and want to remove them from our dataset.</p>
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 3: Classification</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Cleaned sequences”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Count Table”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“3: Training set Taxonomy”</em>: <code class="highlighter-rouge">trainset9_032012.pds.tax</code> file you imported from Zenodo</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“4: Training set FASTA”</em>: <code class="highlighter-rouge">trainset9_032012.pds.fasta</code> file from Zenodo</li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Cleaned sequences”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Count Table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“3: Training set Taxonomy”</em>: <code class="language-plaintext highlighter-rouge">trainset9_032012.pds.tax</code> file you imported from Zenodo</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“4: Training set FASTA”</em>: <code class="language-plaintext highlighter-rouge">trainset9_032012.pds.fasta</code> file from Zenodo</li>
       </ul>
 
       <blockquote class="tip">
@@ -1409,10 +1409,10 @@ exactly what we would expect the analysis to produce as a result.</p>
   <ul>
     <li><strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="highlighter-rouge">Mock</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output logfile?”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“group file or count table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“groups”</em>: <code class="language-plaintext highlighter-rouge">Mock</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“fasta”</em>: <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output logfile?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ul>
@@ -1421,7 +1421,7 @@ exactly what we would expect the analysis to produce as a result.</p>
 
 <p>In the log file we see the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Selected 58 sequences from your fasta file.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Selected 58 sequences from your fasta file.
 Selected 4046 sequences from your count file
 </code></pre></div></div>
 
@@ -1435,10 +1435,10 @@ the <span class="notranslate">reads</span> from our mock sample back to their kn
   <ul>
     <li><strong>Seq.error</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pick.fasta”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output log?”</em>: <code class="highlighter-rouge">yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“pick.fasta”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“reference”</em>: <code class="language-plaintext highlighter-rouge">HMP_MOCK.v35.fasta</code> file from your history</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“output log?”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ul>
@@ -1447,7 +1447,7 @@ the <span class="notranslate">reads</span> from our mock sample back to their kn
 
 <p>In the log file we see something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Overall error rate:    6.5108e-05
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Overall error rate:    6.5108e-05
 Errors    Sequences
 0    3998
 1    3
@@ -1507,9 +1507,9 @@ separation.</p>
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 4: Mock OTU Clustering</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Mock Count Table”</em>: the <code class="highlighter-rouge">count table</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Mock Sequences”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Mock Count Table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Mock Sequences”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Get.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
       <blockquote class="tip">
@@ -1543,10 +1543,10 @@ separation.</p>
   </blockquote>
 </blockquote>
 
-<p>Open the rarefaction output (dataset named <code class="highlighter-rouge">sobs</code> inside the <code class="highlighter-rouge">rarefaction curves</code> output collection), it should look
+<p>Open the rarefaction output (dataset named <code class="language-plaintext highlighter-rouge">sobs</code> inside the <code class="language-plaintext highlighter-rouge">rarefaction curves</code> output collection), it should look
 something like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>numsampled	0.03-	lci-	hci-
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>numsampled	0.03-	lci-	hci-
 1	1.0000	1.0000	1.0000
 100	18.0240	16.0000	20.0000
 200	19.2160	17.0000	22.0000
@@ -1643,10 +1643,10 @@ separation.</p>
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 5: OTU Clustering</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Sequences”</em>: the <code class="highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Count table”</em>: the <code class="highlighter-rouge">count table</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“3: Taxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Sequences”</em>: the <code class="language-plaintext highlighter-rouge">fasta</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2: Count table”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“3: Taxonomy”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Remove.lineage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
       <blockquote class="tip">
@@ -1669,11 +1669,11 @@ separation.</p>
 
 </blockquote>
 
-<p>Examine <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="highlighter-rouge">taxonomy</code> output of <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This is a collection, and the different levels of taxonomy are shown in the names of the collection elements. In this example we only calculated one level, 0.03. This means we used a 97% similarity threshold. This threshold is commonly used to differentiate at <em>species level</em>.</p>
+<p>Examine <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the <code class="language-plaintext highlighter-rouge">taxonomy</code> output of <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This is a collection, and the different levels of taxonomy are shown in the names of the collection elements. In this example we only calculated one level, 0.03. This means we used a 97% similarity threshold. This threshold is commonly used to differentiate at <em>species level</em>.</p>
 
 <p>Opening the taxonomy output for level 0.03 (meaning 97% similarity, or <em>species</em> level) shows a file structured like the following:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU       Size    Taxonomy
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>OTU       Size    Taxonomy
 ..
 Otu0008	5260	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Rikenellaceae"(100);Alistipes(100);
 Otu0009	3613	Bacteria(100);"Bacteroidetes"(100);"Bacteroidia"(100);"Bacteroidales"(100);"Porphyromonadaceae"(100);"Porphyromonadaceae"_unclassified(100);
@@ -1694,7 +1694,7 @@ sequences (100%) were binned in the genus <em><a href="https://en.wikipedia.org/
 
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>Examine the <code class="highlighter-rouge">tax.summary</code> file output by <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+    <p>Examine the <code class="language-plaintext highlighter-rouge">tax.summary</code> file output by <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
     <p>Samples F3D141, F3D142,  F3D144, F3D145, F3D2. This answer can be found by
 examining the tax.summary output and finding the columns with nonzero
@@ -1817,8 +1817,8 @@ species rich habitat, only a small fraction has been sampled.</p>
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 6: Alpha Diversity</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Shared File”</em>: the <code class="highlighter-rouge">Shared file</code> output from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Shared File”</em>: the <code class="language-plaintext highlighter-rouge">Shared file</code> output from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
       <blockquote class="tip">
@@ -1846,7 +1846,7 @@ off so we are confident we cover a large part of our sample diversity:</p>
 
 <p><img src="../../images/rarefaction_curves.png" alt="Rarefaction curves" /></p>
 
-<p>View the <code class="highlighter-rouge">summary</code> output from <strong>Summary.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This shows several alpha diversity metrics:</p>
+<p>View the <code class="language-plaintext highlighter-rouge">summary</code> output from <strong>Summary.single</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This shows several alpha diversity metrics:</p>
 <ul>
   <li><a href="https://www.mothur.org/wiki/Sobs">sobs</a>: observed richness (number of OTUs)</li>
   <li><a href="https://mothur.org/wiki/Coverage">coverage</a>: Good’s coverage index</li>
@@ -1854,7 +1854,7 @@ off so we are confident we cover a large part of our sample diversity:</p>
   <li><a href="https://www.mothur.org/wiki/Nseqs">nseqs</a>: number of sequences</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>label   group   sobs          coverage    invsimpson   invsimpson_lci   invsimpson_hci  nseqs
 0.03    F3D0    167.000000    0.994697    25.686387    24.648040        26.816067       6223.000000
 0.03    F3D1    145.000000    0.994030    34.598470    33.062155        36.284520       4690.000000
 0.03    F3D141  154.000000    0.991060    19.571632    18.839994        20.362390       4698.000000
@@ -1890,7 +1890,7 @@ off so we are confident we cover a large part of our sample diversity:</p>
 
 <p>Beta diversity is a measure of the similarity of the membership and structure found between <em>different</em> samples.
 The default calculator in the following section is <em>thetaYC</em>, which is the <a href="http://csyue.nccu.edu.tw/2005communicationindex.pdf">Yue &amp; Clayton theta similarity
-coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a> (termed <code class="highlighter-rouge">jclass</code> in mothur).</p>
+coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wiki/Jaccard_index">Jaccard index</a> (termed <code class="language-plaintext highlighter-rouge">jclass</code> in mothur).</p>
 
 <p>In the following <span class="notranslate">workflow</span> we will:</p>
 <ul>
@@ -1928,9 +1928,9 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
     </li>
     <li>Run <strong><span class="notranslate">Workflow</span> 7: Beta Diversity</strong> <i class="fa fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Shared File”</em>: the <code class="highlighter-rouge">Shared file</code> output from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“2: Subsample shared”</em>: the <code class="highlighter-rouge">shared</code> output from <strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Shared File”</em>: the <code class="language-plaintext highlighter-rouge">Shared file</code> output from <strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“2: Subsample shared”</em>: the <code class="language-plaintext highlighter-rouge">shared</code> output from <strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
 
       <blockquote class="tip">
@@ -1956,11 +1956,11 @@ coefficient</a>. We will also calculate the <a href="https://en.wikipedia.org/wi
 <p>Look at some of the resulting heatmaps (you may have to download the SVG images first). In all of these
 heatmaps the red colors indicate communities that are more similar than those with black colors.</p>
 
-<p>For example this is the heatmap for the <code class="highlighter-rouge">thetayc</code> calculator (output <code class="highlighter-rouge">thetayc.0.03.lt.ave</code>):</p>
+<p>For example this is the heatmap for the <code class="language-plaintext highlighter-rouge">thetayc</code> calculator (output <code class="language-plaintext highlighter-rouge">thetayc.0.03.lt.ave</code>):</p>
 
 <p><img src="../../images/heatmap.sim_thetayc.png" alt="Heatmap for the thetayc calculator" /></p>
 
-<p>and the jclass calulator (output <code class="highlighter-rouge">jclass.0.03.lt.ave</code>):</p>
+<p>and the jclass calulator (output <code class="language-plaintext highlighter-rouge">jclass.0.03.lt.ave</code>):</p>
 
 <p><img src="../../images/heatmap.sim_jclass.png" alt="Heatmap for the jclass calculator" /></p>
 
@@ -1975,11 +1975,11 @@ numerically rare or just had a low incidence.</p>
 <p>Inspection of the the tree shows that the early and late communities cluster with themselves to the exclusion
 of the others.</p>
 
-<p><code class="highlighter-rouge">thetayc.0.03.lt.ave</code>:</p>
+<p><code class="language-plaintext highlighter-rouge">thetayc.0.03.lt.ave</code>:</p>
 
 <p><img src="../../images/tree.thetayc.png" alt="Thetayc tree" /></p>
 
-<p><code class="highlighter-rouge">jclass.0.03.lt.ave</code>:</p>
+<p><code class="language-plaintext highlighter-rouge">jclass.0.03.lt.ave</code>:</p>
 
 <p><img src="../../images/tree.jclass.png" alt="Jclass tree" /></p>
 
@@ -1997,13 +1997,13 @@ of the others.</p>
   <ol>
     <li><strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong></li>
       </ul>
     </li>
     <li><strong>Krona pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Type of input”</em>: <code class="highlighter-rouge">Tabular</code></li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Type of input”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
   </ol>
@@ -2017,7 +2017,7 @@ innermost ring labeled “Bacteroidetes” below:</p>
 <blockquote class="question">
   <h3 id="question-question-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <p>What percentage of your sample was labelled <code class="highlighter-rouge">Lactobacillus</code>?</p>
+  <p>What percentage of your sample was labelled <code class="language-plaintext highlighter-rouge">Lactobacillus</code>?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -2035,7 +2035,7 @@ any point in the hierarchy (here 5% of all)</p>
 cases however, you would like to be able to compare results for different samples.</p>
 
 <p>In order to save computation time, mothur pools all <span class="notranslate">reads</span> into a single file, and uses
-the <code class="highlighter-rouge">count table</code> file to keep track of which samples the <span class="notranslate">reads</span> came from. However, Krona
+the <code class="language-plaintext highlighter-rouge">count table</code> file to keep track of which samples the <span class="notranslate">reads</span> came from. However, Krona
 does not understand the mothur count table format, so we cannot use that to supply information
 about the groups. But luckily we can get <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to output per-sample
 taxonomy files. In the following exercise, we will create a Krona plot with per-sample subplots.</p>
@@ -2064,15 +2064,15 @@ is given in the solution box. <br /></p>
         <ul>
           <li>Hit the <strong>rerun</strong> button <i class="fa fa-refresh" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> to load the parameters you used before:
             <ul>
-              <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-              <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-              <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-              <li><em>“label”</em>: <code class="highlighter-rouge">0.03</code></li>
+              <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“list”</em>: the <code class="language-plaintext highlighter-rouge">list</code> output from <strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“count”</em>: the <code class="language-plaintext highlighter-rouge">count table</code> from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“taxonomy”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Remove.groups</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+              <li><em>“label”</em>: <code class="language-plaintext highlighter-rouge">0.03</code></li>
             </ul>
           </li>
           <li>Add new parameter setting:
             <ul>
-              <li><em>“persample - allows you to find a consensus taxonomy for each group”</em>: <code class="highlighter-rouge">Yes</code></li>
+              <li><em>“persample - allows you to find a consensus taxonomy for each group”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             </ul>
           </li>
         </ul>
@@ -2081,14 +2081,14 @@ is given in the solution box. <br /></p>
       </li>
       <li><strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
         <ul>
-          <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="highlighter-rouge">taxonomy</code> collection from <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Taxonomy file”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> collection from <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         </ul>
       </li>
       <li><strong>Krona pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
         <ul>
-          <li><em>“Type of input”</em>: <code class="highlighter-rouge">Tabular</code></li>
+          <li><em>“Type of input”</em>: <code class="language-plaintext highlighter-rouge">Tabular</code></li>
           <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Input file”</em>: the collection from <strong>Taxonomy-to-Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-          <li><em>“Combine data from multiple datasets?”</em>: <code class="highlighter-rouge">No</code></li>
+          <li><em>“Combine data from multiple datasets?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         </ul>
       </li>
     </ol>
@@ -2102,7 +2102,7 @@ is given in the solution box. <br /></p>
 
 <h2 id="phinch">Phinch</h2>
 
-<p>We may now wish to further visualize our results. We can convert our <em>shared</em> file to the more widely used <code class="highlighter-rouge">biom</code> format and
+<p>We may now wish to further visualize our results. We can convert our <em>shared</em> file to the more widely used <code class="language-plaintext highlighter-rouge">biom</code> format and
 view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2112,8 +2112,8 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
     <li><strong>Make.biom</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“shared”</em>: the output from <strong>Sub.sample</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“constaxonomy”</em>: the <code class="highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“metadata”</em>: the <code class="highlighter-rouge">mouse.dpw.metadata</code> file you uploaded at the start of this tutorial</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“constaxonomy”</em>: the <code class="language-plaintext highlighter-rouge">taxonomy</code> output from <strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“metadata”</em>: the <code class="language-plaintext highlighter-rouge">mouse.dpw.metadata</code> file you uploaded at the start of this tutorial</li>
       </ul>
     </li>
     <li><strong>View</strong> the file in Phinch
@@ -2139,7 +2139,7 @@ view it in a platform like <a href="http://www.phinch.org/">Phinch</a>.</p>
     <p>If this visualisation link is not present on your <span class="notranslate">Galaxy</span> dataset, you can download the generated BIOM file from <span class="notranslate">Galaxy</span>,
 and upload it directly to the Phinch server at <a href="https://usegalaxy.eu/phinch/index.html">https://use<span class="notranslate">galaxy</span>.eu/phinch/</a>. <br /><br /></p>
 
-    <p><strong>Important:</strong> After downloading, please change the file extension from <code class="highlighter-rouge">.biom1</code> to <code class="highlighter-rouge">.biom</code> before uploading to Phinch. <br /><br /></p>
+    <p><strong>Important:</strong> After downloading, please change the file extension from <code class="language-plaintext highlighter-rouge">.biom1</code> to <code class="language-plaintext highlighter-rouge">.biom</code> before uploading to Phinch. <br /><br /></p>
 
     <p><strong>Note:</strong> This link will visualize your data in Phinch version 1. Recently, Phinch have released version 2 as a desktop application.
 This file can also be visualized in Phinch2, but requires installation of Phinch to your local machine</p>
@@ -2360,7 +2360,7 @@ This file can also be visualized in Phinch2, but requires installation of Phinch
     title = "16S Microbial Analysis with mothur (short) (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/metagenomics/tutorials/mothur-miseq-sop-short/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

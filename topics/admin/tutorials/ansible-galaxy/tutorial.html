@@ -538,7 +538,7 @@
 
   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>
 
-  <p>The roles that are used in these training are currently used by <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>
+  <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>
 
   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p>
 
@@ -555,19 +555,19 @@
 <p>The important variables for this tutorial are:</p>
 
 <ul>
-  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></li>
-  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
-  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></li>
-  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code></li>
 </ul>
 
-<p>These are largely self explanatory: a directory for all of <span class="notranslate">Galaxy</span>’s code and configuration, which commit should be installed, and the <span class="notranslate">Galaxy</span> configuration. We will not explain <span class="notranslate">Galaxy</span> configuration variables in detail as they are covered sufficiently in the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> sample file or the <a href="https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options">online documentation</a>.</p>
+<p>These are largely self explanatory: a directory for all of <span class="notranslate">Galaxy</span>’s code and configuration, which commit should be installed, and the <span class="notranslate">Galaxy</span> configuration. We will not explain <span class="notranslate">Galaxy</span> configuration variables in detail as they are covered sufficiently in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> sample file or the <a href="https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options">online documentation</a>.</p>
 
-<p>The official recommendation is that you should have a variables file such as a <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> for storing all of the <span class="notranslate">Galaxy</span> configuration.</p>
+<p>The official recommendation is that you should have a variables file such as a <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> for storing all of the <span class="notranslate">Galaxy</span> configuration.</p>
 
 <h2 id="tasks">Tasks</h2>
 
-<p>As with every role, the entry point for execution is the <code class="highlighter-rouge">tasks/main.yml</code> file. For the <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml">ansible-<span class="notranslate">galaxy</span></a> file, this includes a few groups of important tasks:</p>
+<p>As with every role, the entry point for execution is the <code class="language-plaintext highlighter-rouge">tasks/main.yml</code> file. For the <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml">ansible-<span class="notranslate">galaxy</span></a> file, this includes a few groups of important tasks:</p>
 
 <ul>
   <li><a href="#cloning-galaxy">Clone (or Download) <span class="notranslate">Galaxy</span></a></li>
@@ -590,7 +590,7 @@
       <li>Pip is updated within the virtualenv.</li>
     </ol>
   </li>
-  <li>Any <code class="highlighter-rouge">.pyc</code> files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding <code class="highlighter-rouge">.py</code> file is no more present at the checked-out commit. For safety, all of these are removed.</li>
+  <li>Any <code class="language-plaintext highlighter-rouge">.pyc</code> files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding <code class="language-plaintext highlighter-rouge">.py</code> file is no more present at the checked-out commit. For safety, all of these are removed.</li>
 </ol>
 
 <p>With that <span class="notranslate">Galaxy</span> is cloned to disk and is ready to be configured by the next task.</p>
@@ -603,7 +603,7 @@
   <li>The directories for <span class="notranslate">Galaxy</span> configuration data and for the shed tools are created</li>
   <li>Any config files are copied over</li>
   <li>Any templates are copied over</li>
-  <li>The <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (or <code class="highlighter-rouge">.ini</code>) is deployed</li>
+  <li>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (or <code class="language-plaintext highlighter-rouge">.ini</code>) is deployed</li>
 </ol>
 
 <p>The setup for deploying templates and configuration files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.</p>
@@ -623,7 +623,7 @@
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config['<span class="notranslate">galaxy</span>']['blacklist_file']</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div></div>
 
-<p>The configuration here is a bit different, it references the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>, which is structured like:</p>
+<p>The configuration here is a bit different, it references the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>, which is structured like:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
@@ -631,14 +631,14 @@
     <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv">  </span><span class="s">}}/datatypes_conf.xml"</span>
 </code></pre></div></div>
 
-<p>So the references in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the blacklist file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
+<p>So the references in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the blacklist file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
 
 <h3 id="dependencies">Dependencies</h3>
 
 <p>Now that <span class="notranslate">Galaxy</span> is available on disk, Ansible is ready to start processing <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/dependencies.yml">dependencies</a> of <span class="notranslate">Galaxy</span>.</p>
 
 <ol>
-  <li>The virtualenv is updated with data from the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_requirements_file</code>, by default pointing to the requirements file in the codebase: <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_server_dir  }}/lib/<span class="notranslate">galaxy</span>/dependencies/pinned-requirements.txt</code>.</li>
+  <li>The virtualenv is updated with data from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_requirements_file</code>, by default pointing to the requirements file in the codebase: <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_server_dir  }}/lib/<span class="notranslate">galaxy</span>/dependencies/pinned-requirements.txt</code>.</li>
   <li>Any necessary conditional dependencies of <span class="notranslate">Galaxy</span> are <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/dependencies/__init__.py">collected by processing the config file</a></li>
   <li>and then installed to the virtualenv.</li>
 </ol>
@@ -681,12 +681,12 @@
 </ul>
 
 <p>It would not be difficult to write a role that does this yourself, but by using
-the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role, you know that you’re getting all of the <span class="notranslate">Galaxy</span>
+the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role, you know that you’re getting all of the <span class="notranslate">Galaxy</span>
 best practices and knowledge from previous admins codified for you.</p>
 
 <h1 id="installing-galaxy">Installing <span class="notranslate">Galaxy</span></h1>
 
-<p>With the necessary background in place, you are ready to install <span class="notranslate">Galaxy</span> with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal <span class="notranslate">Galaxy</span> playbook which only requires setting the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code> and expand from there. First, however, we need a database for <span class="notranslate">Galaxy</span> to connect to, so we will do that now.</p>
+<p>With the necessary background in place, you are ready to install <span class="notranslate">Galaxy</span> with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal <span class="notranslate">Galaxy</span> playbook which only requires setting the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code> and expand from there. First, however, we need a database for <span class="notranslate">Galaxy</span> to connect to, so we will do that now.</p>
 
 <p>To proceed from here it is expected that:</p>
 
@@ -699,30 +699,30 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will <em>not</em> do that in this training.</p>
     </blockquote>
   </li>
-  <li>Your <code class="highlighter-rouge">ansible</code> version is <code class="highlighter-rouge">&gt;=2.7</code>, you can check this by running <code class="highlighter-rouge">ansible --version</code></li>
+  <li>Your <code class="language-plaintext highlighter-rouge">ansible</code> version is <code class="language-plaintext highlighter-rouge">&gt;=2.7</code>, you can check this by running <code class="language-plaintext highlighter-rouge">ansible --version</code></li>
   <li>You have an <a href="../ansible/tutorial.html#inventory-file">inventory file</a> with the VM or host specified where you will deploy <span class="notranslate">Galaxy</span>. We will refer to this group of hosts as “<span class="notranslate">galaxy</span>servers.”</li>
   <li>Your VM has a public DNS name: this tutorial sets up SSL certificates from the start and as an integral part of the tutorial.</li>
   <li>
-    <p>Your VM has <code class="highlighter-rouge">python3</code> installed.</p>
+    <p>Your VM has <code class="language-plaintext highlighter-rouge">python3</code> installed.</p>
 
     <p>If you follow the official Ansible instructions to install Ansible on a blank machine, you will probably end up with py2 installed. You will need to install python3 in addition.</p>
   </li>
-  <li>In your inventory file, you have written the full DNS hostname that has been provided, and <strong>not</strong> <code class="highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
+  <li>In your inventory file, you have written the full DNS hostname that has been provided, and <strong>not</strong> <code class="language-plaintext highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
 </ol>
 
 <h2 id="requirements">Requirements</h2>
 
-<p>We have codified all of the dependencies you will need into a YAML file that <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code> can install.</p>
+<p>We have codified all of the dependencies you will need into a YAML file that <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code> can install.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-roles"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing roles</h3>
 
   <ol>
     <li>
-      <p>Create a new directory <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> in your home folder, and <code class="highlighter-rouge">cd</code> into that directory</p>
+      <p>Create a new directory <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> in your home folder, and <code class="language-plaintext highlighter-rouge">cd</code> into that directory</p>
     </li>
     <li>
-      <p>Create a new file in your working directory called <code class="highlighter-rouge">requirements.yml</code> and include the following contents:</p>
+      <p>Create a new file in your working directory called <code class="language-plaintext highlighter-rouge">requirements.yml</code> and include the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.9.5</span>
@@ -745,13 +745,13 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>In the same directory, run:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
 </code></pre></div>      </div>
 
-      <p>This will install all of the required modules for this training into the <code class="highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
+      <p>This will install all of the required modules for this training into the <code class="language-plaintext highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
     </li>
     <li>
-      <p>Inspect the contents of the newly created <code class="highlighter-rouge">roles</code> directory in your working directory.</p>
+      <p>Inspect the contents of the newly created <code class="language-plaintext highlighter-rouge">roles</code> directory in your working directory.</p>
     </li>
   </ol>
 </blockquote>
@@ -761,7 +761,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
   <ol>
     <li>
-      <p>Create a <code class="highlighter-rouge">ansible.cfg</code> file (next to your playbook) to <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html">configure settings</a> like the inventory file (and save ourselves some typing!), or the Python interpreter to use:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file (next to your playbook) to <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html">configure settings</a> like the inventory file (and save ourselves some typing!), or the Python interpreter to use:</p>
 
       <blockquote>
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
@@ -771,7 +771,7 @@ best practices and knowledge from previous admins codified for you.</p>
 </code></pre></div>        </div>
       </blockquote>
 
-      <p>There is an additional useful option that you might want to add to your <code class="highlighter-rouge">ansible.cfg</code> file if you are connecting over SSH:</p>
+      <p>There is an additional useful option that you might want to add to your <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file if you are connecting over SSH:</p>
 
       <blockquote>
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[ssh_connection]</span>
@@ -782,7 +782,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
     </li>
     <li>
-      <p>Create the <code class="highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. Remember, if you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="highlighter-rouge">ansible_connection=local</code>.</p>
+      <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. Remember, if you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="language-plaintext highlighter-rouge">ansible_connection=local</code>.</p>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -810,14 +810,14 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the “peer” authentication method which allows access for system users with matching PostgreSQL use<span class="notranslate">rna</span>mes (other authentication mechanisms are available, see the <a href="https://www.postgresql.org/docs/current/static/client-authentication.html">PostgreSQL Client Authentication documentation</a>.</p>
 
-<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="highlighter-rouge">createuser</code> command, and it must be run as the <code class="highlighter-rouge">postgres</code> user. In our case, we will use the <code class="highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step.</p>
+<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-postgresql"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing PostgreSQL</h3>
 
   <ol>
     <li>
-      <p>Create and edit <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and add some variables to configure PostgreSQL:</p>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and add some variables to configure PostgreSQL:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="c1"># Python 3 support</span>
@@ -834,12 +834,12 @@ best practices and knowledge from previous admins codified for you.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create and open <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> which will be our playbook. Add the following:</p>
+      <p>Create and open <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> which will be our playbook. Add the following:</p>
 
       <ul>
-        <li>Add a pre-task to install the necessary dependency, <code class="highlighter-rouge">python3-psycopg2</code></li>
-        <li>A role for <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code>. This will handle the installation of PostgreSQL.</li>
-        <li>A role for <code class="highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="highlighter-rouge">become</code>/<code class="highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
+        <li>Add a pre-task to install the necessary dependency, <code class="language-plaintext highlighter-rouge">python3-psycopg2</code></li>
+        <li>A role for <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code>. This will handle the installation of PostgreSQL.</li>
+        <li>A role for <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="language-plaintext highlighter-rouge">become</code>/<code class="language-plaintext highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
       </ul>
 
       <blockquote class="question">
@@ -871,7 +871,7 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
 
       <blockquote class="comment">
@@ -882,8 +882,8 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Inspect the changes that have been made on your <span class="notranslate">Galaxy</span> server. Places to look include:</p>
       <ul>
-        <li><code class="highlighter-rouge">/etc/postgresql</code></li>
-        <li>Databases and users in PostgreSQL. You can now login and access the database, but only as the <code class="highlighter-rouge">postgres</code> user. You will need to <code class="highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="highlighter-rouge">psql <span class="notranslate">galaxy</span></code>. The database will currently be empty as <span class="notranslate">Galaxy</span> has never connected to it yet. Once you install <span class="notranslate">Galaxy</span> in the next step, the database will be populated. Hint: try the commands <code class="highlighter-rouge">\du</code> and <code class="highlighter-rouge">\l</code>.</li>
+        <li><code class="language-plaintext highlighter-rouge">/etc/postgresql</code></li>
+        <li>Databases and users in PostgreSQL. You can now login and access the database, but only as the <code class="language-plaintext highlighter-rouge">postgres</code> user. You will need to <code class="language-plaintext highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="language-plaintext highlighter-rouge">psql <span class="notranslate">galaxy</span></code>. The database will currently be empty as <span class="notranslate">Galaxy</span> has never connected to it yet. Once you install <span class="notranslate">Galaxy</span> in the next step, the database will be populated. Hint: try the commands <code class="language-plaintext highlighter-rouge">\du</code> and <code class="language-plaintext highlighter-rouge">\l</code>.</li>
       </ul>
     </li>
   </ol>
@@ -903,7 +903,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <p>Additionally we’ll go ahead and set up the production-ready <a href="https://uwsgi-docs.readthedocs.io/en/latest/Mules.html">uWSGI Mules</a> which will handle processing <span class="notranslate">Galaxy</span> jobs. With Mules, uWSGI launches as many as you request, and then they take turns placing a lock, accepting a job, releasing that lock, and then going on to process that job.</p>
 
-<p>Finally, best admin practices are to not run <span class="notranslate">Galaxy</span> as a user with <code class="highlighter-rouge">sudo</code> access, like your login user probably has. Additionally, it is best to install the <span class="notranslate">Galaxy</span> code and configs as a separate user, for security purposes. So we will instruct the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role to create a new user account specifically to run <span class="notranslate">Galaxy</span> under.</p>
+<p>Finally, best admin practices are to not run <span class="notranslate">Galaxy</span> as a user with <code class="language-plaintext highlighter-rouge">sudo</code> access, like your login user probably has. Additionally, it is best to install the <span class="notranslate">Galaxy</span> code and configs as a separate user, for security purposes. So we will instruct the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role to create a new user account specifically to run <span class="notranslate">Galaxy</span> under.</p>
 
 <blockquote class="details">
   <h3 id="details-mules-are-not-the-only-option"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Mules are not the only option</h3>
@@ -919,11 +919,11 @@ best practices and knowledge from previous admins codified for you.</p>
 
   <ol>
     <li>
-      <p>Open <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> with your text editor and set the following:</p>
+      <p>Open <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> with your text editor and set the following:</p>
 
       <ul>
-        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="highlighter-rouge">git</code>, <code class="highlighter-rouge">make</code>, and <code class="highlighter-rouge">virtualenv</code>.</li>
-        <li>Add the roles <code class="highlighter-rouge">geerlingguy.pip</code>, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="highlighter-rouge">uchida.miniconda</code> run as the <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
+        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="language-plaintext highlighter-rouge">git</code>, <code class="language-plaintext highlighter-rouge">make</code>, and <code class="language-plaintext highlighter-rouge">virtualenv</code>.</li>
+        <li>Add the roles <code class="language-plaintext highlighter-rouge">geerlingguy.pip</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> run as the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
       </ul>
 
       <blockquote class="question">
@@ -958,7 +958,7 @@ best practices and knowledge from previous admins codified for you.</p>
       </blockquote>
     </li>
     <li>
-      <p>Edit your group variables file for your group (<code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>).</p>
+      <p>Edit your group variables file for your group (<code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>).</p>
 
       <p>We need to set the following variables at the top level:</p>
 
@@ -972,65 +972,65 @@ best practices and knowledge from previous admins codified for you.</p>
         </thead>
         <tbody>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_create_user</code></td>
-            <td><code class="highlighter-rouge">true</code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_create_user</code></td>
+            <td><code class="language-plaintext highlighter-rouge">true</code></td>
             <td>Instruct the role to create a <span class="notranslate">Galaxy</span> user</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_separate_privileges</code></td>
-            <td><code class="highlighter-rouge">true</code></td>
-            <td>Enable separation mode to install the <span class="notranslate">Galaxy</span> code as <code class="highlighter-rouge">root</code> but run the <span class="notranslate">Galaxy</span> server as <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_separate_privileges</code></td>
+            <td><code class="language-plaintext highlighter-rouge">true</code></td>
+            <td>Enable separation mode to install the <span class="notranslate">Galaxy</span> code as <code class="language-plaintext highlighter-rouge">root</code> but run the <span class="notranslate">Galaxy</span> server as <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code></td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_manage_paths</code></td>
-            <td><code class="highlighter-rouge">true</code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_manage_paths</code></td>
+            <td><code class="language-plaintext highlighter-rouge">true</code></td>
             <td>Instruct thre role to create the needed directories.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_layout</code></td>
-            <td><code class="highlighter-rouge">root-dir</code></td>
-            <td>This enables the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> <span class="notranslate">Galaxy</span> deployment layout: all of the code, configuration, and data folders will live beneath <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>.</td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_layout</code></td>
+            <td><code class="language-plaintext highlighter-rouge">root-dir</code></td>
+            <td>This enables the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> <span class="notranslate">Galaxy</span> deployment layout: all of the code, configuration, and data folders will live beneath <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></td>
-            <td><code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span></code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></td>
+            <td><code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span></code></td>
             <td>This is the root of the <span class="notranslate">Galaxy</span> deployment.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_user</code></td>
-            <td><code class="highlighter-rouge">{name: <span class="notranslate">galaxy</span>, shell: /bin/bash}</code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_user</code></td>
+            <td><code class="language-plaintext highlighter-rouge">{name: <span class="notranslate">galaxy</span>, shell: /bin/bash}</code></td>
             <td>The user that <span class="notranslate">Galaxy</span> will run as.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></td>
-            <td><code class="highlighter-rouge">release_20.01</code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></td>
+            <td><code class="language-plaintext highlighter-rouge">release_20.01</code></td>
             <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 20.01</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_style</code></td>
-            <td><code class="highlighter-rouge">yaml</code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_style</code></td>
+            <td><code class="language-plaintext highlighter-rouge">yaml</code></td>
             <td>We want to opt-in to the new style YAML configuration.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>_force_checkout</code></td>
-            <td><code class="highlighter-rouge">true</code></td>
+            <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_force_checkout</code></td>
+            <td><code class="language-plaintext highlighter-rouge">true</code></td>
             <td>If we make any modifications to the <span class="notranslate">Galaxy</span> codebase, they will be removed. This way we know we’re getting an unmodified <span class="notranslate">Galaxy</span> and no one has made any unexpected changes to the codebase.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">miniconda_prefix</code></td>
-            <td><code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code></td>
+            <td><code class="language-plaintext highlighter-rouge">miniconda_prefix</code></td>
+            <td><code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code></td>
             <td>We will manually install conda as well. Normally <span class="notranslate">Galaxy</span> will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">miniconda_version</code></td>
-            <td><code class="highlighter-rouge">4.6.14</code></td>
+            <td><code class="language-plaintext highlighter-rouge">miniconda_version</code></td>
+            <td><code class="language-plaintext highlighter-rouge">4.6.14</code></td>
             <td>Install a specific miniconda version, the latest one at the time of writing that was tested and working.</td>
           </tr>
         </tbody>
       </table>
     </li>
     <li>
-      <p>Again edit the group variables file and add a variable for <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>. It will be a hash with one key, <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code> which will also be a hash. Inside here you can place all of your <span class="notranslate">Galaxy</span> configuration.</p>
+      <p>Again edit the group variables file and add a variable for <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>. It will be a hash with one key, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> which will also be a hash. Inside here you can place all of your <span class="notranslate">Galaxy</span> configuration.</p>
 
       <p>So the structure looks like:</p>
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
@@ -1040,23 +1040,23 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <p>Now you should set:</p>
       <ol>
-        <li><code class="highlighter-rouge">admin_users</code> to the email address you will use with this <span class="notranslate">Galaxy</span>.</li>
-        <li><code class="highlighter-rouge">brand</code> to something fun!</li>
-        <li><code class="highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="highlighter-rouge">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql</code>).</li>
-        <li><code class="highlighter-rouge">file_path</code> to a place to store data, <code class="highlighter-rouge">/data</code> is fine for this lesson which sets up a single-node <span class="notranslate">Galaxy</span>. If you have separate compute machines, this will normally need to be storage shared between the <span class="notranslate">Galaxy</span> node and compute nodes.</li>
-        <li><code class="highlighter-rouge">check_migrate_tools</code> must be set to <code class="highlighter-rouge">false</code> due to a new installation of <span class="notranslate">Galaxy</span>.</li>
-        <li><code class="highlighter-rouge">tool_data_path</code> to <code class="highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
+        <li><code class="language-plaintext highlighter-rouge">admin_users</code> to the email address you will use with this <span class="notranslate">Galaxy</span>.</li>
+        <li><code class="language-plaintext highlighter-rouge">brand</code> to something fun!</li>
+        <li><code class="language-plaintext highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="language-plaintext highlighter-rouge">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql</code>).</li>
+        <li><code class="language-plaintext highlighter-rouge">file_path</code> to a place to store data, <code class="language-plaintext highlighter-rouge">/data</code> is fine for this lesson which sets up a single-node <span class="notranslate">Galaxy</span>. If you have separate compute machines, this will normally need to be storage shared between the <span class="notranslate">Galaxy</span> node and compute nodes.</li>
+        <li><code class="language-plaintext highlighter-rouge">check_migrate_tools</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> due to a new installation of <span class="notranslate">Galaxy</span>.</li>
+        <li><code class="language-plaintext highlighter-rouge">tool_data_path</code> to <code class="language-plaintext highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
       </ol>
 
       <blockquote class="comment">
         <h3 id="comment-ansible-variable-templating"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Variable Templating</h3>
-        <p>In this step we use some templated variables. These are seen in our group variables, among other places, and look like <code class="highlighter-rouge">miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir  }}/_conda"</code>.</p>
+        <p>In this step we use some templated variables. These are seen in our group variables, among other places, and look like <code class="language-plaintext highlighter-rouge">miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir  }}/_conda"</code>.</p>
 
         <p>When Ansible runs:</p>
 
         <ol>
           <li>It collects variables defined in group variables and other places</li>
-          <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
+          <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
           <li>As roles are executed:
             <ol>
               <li>Their defaults are added to the set of variables (the group variables having precedence over these variables)</li>
@@ -1070,7 +1070,7 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
     </li>
     <li>
-      <p>In order to use mule messaging, we need to edit the uWSGI configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
+      <p>In order to use mule messaging, we need to edit the uWSGI configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
@@ -1180,17 +1180,17 @@ So it is not always easy to tell what variables will be set, or what their final
     <li>
       <p>Run the playbook.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Explore what has been set up for you.</p>
       <ul>
-        <li><span class="notranslate">Galaxy</span> has been deployed to <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server</code></li>
-        <li>The configuration lives in <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</code> - be sure to look through it to see what default options have been set for you</li>
-        <li>Note the permissions of the contents of <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span></code></li>
-        <li>Some config files that <span class="notranslate">Galaxy</span> maintains itself, such as <code class="highlighter-rouge">shed_tool_conf.xml</code>, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/var/config</code></li>
-        <li>A Python virtualenv - an isolated Python environment - with all of the <span class="notranslate">Galaxy</span> framework’s dependencies has been installed in <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/venv</code></li>
+        <li><span class="notranslate">Galaxy</span> has been deployed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server</code></li>
+        <li>The configuration lives in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</code> - be sure to look through it to see what default options have been set for you</li>
+        <li>Note the permissions of the contents of <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span></code></li>
+        <li>Some config files that <span class="notranslate">Galaxy</span> maintains itself, such as <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code>, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/var/config</code></li>
+        <li>A Python virtualenv - an isolated Python environment - with all of the <span class="notranslate">Galaxy</span> framework’s dependencies has been installed in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/venv</code></li>
       </ul>
     </li>
   </ol>
@@ -1202,11 +1202,11 @@ So it is not always easy to tell what variables will be set, or what their final
 
   <ol>
     <li>SSH into your server</li>
-    <li>Switch user to <span class="notranslate">Galaxy</span> account (<code class="highlighter-rouge">sudo -iu <span class="notranslate">galaxy</span></code>)</li>
-    <li>Change directory into <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server</code></li>
-    <li>Activate virtualenv (<code class="highlighter-rouge">. ../venv/bin/activate</code>)</li>
-    <li><code class="highlighter-rouge">uwsgi --yaml ../config/<span class="notranslate">galaxy</span>.yml</code></li>
-    <li>Access at port <code class="highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
+    <li>Switch user to <span class="notranslate">Galaxy</span> account (<code class="language-plaintext highlighter-rouge">sudo -iu <span class="notranslate">galaxy</span></code>)</li>
+    <li>Change directory into <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server</code></li>
+    <li>Activate virtualenv (<code class="language-plaintext highlighter-rouge">. ../venv/bin/activate</code>)</li>
+    <li><code class="language-plaintext highlighter-rouge">uwsgi --yaml ../config/<span class="notranslate">galaxy</span>.yml</code></li>
+    <li>Access at port <code class="language-plaintext highlighter-rouge">&lt;ip address&gt;:8080</code> once the server has started</li>
   </ol>
 </blockquote>
 
@@ -1221,10 +1221,10 @@ So it is not always easy to tell what variables will be set, or what their final
 
   <ol>
     <li>
-      <p>Add the role <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
+      <p>Add the role <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
     </li>
     <li>
-      <p>Add the following to the bottom of your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
+      <p>Add the following to the bottom of your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># systemd</span>
 <span class="na"><span class="notranslate">galaxy</span>_systemd_mode</span><span class="pi">:</span> <span class="s">mule</span>
@@ -1232,10 +1232,10 @@ So it is not always easy to tell what variables will be set, or what their final
 <span class="na"><span class="notranslate">galaxy</span>_restart_handler_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Restart</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
 </code></pre></div>      </div>
 
-      <p>The last variable, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>, informs the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role that it should look for a handler with that name, and trigger it whenever changes are made to <span class="notranslate">Galaxy</span>’s configuration. Now we’ll define the handler:</p>
+      <p>The last variable, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>, informs the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role that it should look for a handler with that name, and trigger it whenever changes are made to <span class="notranslate">Galaxy</span>’s configuration. Now we’ll define the handler:</p>
     </li>
     <li>
-      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use systemd to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="highlighter-rouge">handlers:</code> section at the same level as <code class="highlighter-rouge">pre_tasks:</code> and <code class="highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/systemd_module.html">systemd Ansible module</a>. Handlers are structured just like tasks:</p>
+      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use systemd to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="language-plaintext highlighter-rouge">handlers:</code> section at the same level as <code class="language-plaintext highlighter-rouge">pre_tasks:</code> and <code class="language-plaintext highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/systemd_module.html">systemd Ansible module</a>. Handlers are structured just like tasks:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ <span class="notranslate">galaxy</span>.yml
@@ -1257,7 +1257,7 @@ So it is not always easy to tell what variables will be set, or what their final
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>Log in and check the status with <code class="highlighter-rouge">sudo systemctl status <span class="notranslate">galaxy</span></code></p>
+      <p>Log in and check the status with <code class="language-plaintext highlighter-rouge">sudo systemctl status <span class="notranslate">galaxy</span></code></p>
 
       <blockquote class="question">
         <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1269,7 +1269,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
           <p>If everything went correctly you should see something like</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ systemctl status <span class="notranslate">galaxy</span>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ systemctl status <span class="notranslate">galaxy</span>
 ● <span class="notranslate">galaxy</span>.service - <span class="notranslate">Galaxy</span>
    Loaded: loaded (/etc/systemd/system/<span class="notranslate">galaxy</span>.service; enabled; vendor preset: enabled)
    Active: active (running) since Wed 2019-11-20 17:11:11 UTC; 9s ago
@@ -1293,8 +1293,8 @@ So it is not always easy to tell what variables will be set, or what their final
 
       <ol>
         <li>Refreshing the page before <span class="notranslate">Galaxy</span> has restarted will hang until the process is ready, a nice feature of uWSGI</li>
-        <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="highlighter-rouge">systemctl restart <span class="notranslate">galaxy</span></code></li>
-        <li>You can use <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
+        <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="language-plaintext highlighter-rouge">systemctl restart <span class="notranslate">galaxy</span></code></li>
+        <li>You can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
       </ol>
     </li>
   </ol>
@@ -1308,9 +1308,9 @@ So it is not always easy to tell what variables will be set, or what their final
 
   <p>Sometimes Ansible tasks will fail. Usually due to misconfiguration, but occasionally due to other issues like your coworker restarted the server while you were doing maintenance, or network failures, or any other possible error. It happens. An unfortunate side effect can be observed in specific situations:</p>
 
-  <p>Let’s say you’re running a playbook that updates the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, which will in turn notify the handler <code class="highlighter-rouge">Restart <span class="notranslate">Galaxy</span></code>. If this change is made, and notification triggered, but a failure occurs before Ansible can reach the step where it runs the handlers. The handlers will not run during this Ansible execution.</p>
+  <p>Let’s say you’re running a playbook that updates the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, which will in turn notify the handler <code class="language-plaintext highlighter-rouge">Restart <span class="notranslate">Galaxy</span></code>. If this change is made, and notification triggered, but a failure occurs before Ansible can reach the step where it runs the handlers. The handlers will not run during this Ansible execution.</p>
 
-  <p>The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run.) And so the <code class="highlighter-rouge">Restart <span class="notranslate">Galaxy</span></code> handler will not run.</p>
+  <p>The next time you run the playbook, Ansible will not observe any configuration files changing (because they were changed in the last run.) And so the <code class="language-plaintext highlighter-rouge">Restart <span class="notranslate">Galaxy</span></code> handler will not run.</p>
 
   <p>If you encounter this situation you just have to be mindful of the fact, and remember to manually restart the handler. There is no general solution to this problem unfortunately. This applies mostly to development setups. In production you’re probably running that playbook somewhat regularly and do not expect failures as everything is quite stable.</p>
 
@@ -1325,9 +1325,9 @@ So it is not always easy to tell what variables will be set, or what their final
   <li><span class="notranslate">Galaxy</span> running (managed by systemd)</li>
 </ul>
 
-<p>When we first configured <span class="notranslate">Galaxy</span>, we used the setting <code class="highlighter-rouge">http: 0.0.0.0:8080</code>, which instructed uWSGI to handle the serving of <span class="notranslate">Galaxy</span>, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.</p>
+<p>When we first configured <span class="notranslate">Galaxy</span>, we used the setting <code class="language-plaintext highlighter-rouge">http: 0.0.0.0:8080</code>, which instructed uWSGI to handle the serving of <span class="notranslate">Galaxy</span>, and to process the HTTP requests itself. This has some overhead and is not as efficient as is desired in production. So we will set up a reverse proxy to handle the HTTP processing, and translate this into the more efficient uWSGI protocol. Additionally it can handle serving static files for us without the requests going through uWSGI, allowing it to spend more time on useful tasks like processing jobs.</p>
 
-<p>Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
+<p>Additionally, by moving to NGINX or another reverse proxy, it can automatically compress selected content, we can easily apply caching headers to specific types of content like CSS or images. It is also necessary if we want to serve multiple sites at once, e.g. with a group website at <code class="language-plaintext highlighter-rouge">/</code> and <span class="notranslate">Galaxy</span> at <code class="language-plaintext highlighter-rouge">/<span class="notranslate">galaxy</span></code>. Lastly, it can provide authentication as well, as noted in the <a href="/training-material/topics/admin/tutorials/external-auth/tutorial.html">Exte<span class="notranslate">rna</span>l Authentication</a> tutorial.</p>
 
 <p>For this, we will use NGINX. It is possible to configure <span class="notranslate">Galaxy</span> with Apache and potentially other webservers but this is not the configuration that receives the most testing. We recommend NGINX unless you have a specific need for Apache. <a href="https://developers.google.com/speed/pagespeed/insights/">Google’s PageSpeed Tools</a> can identify any compression or caching improvements you can make.</p>
 
@@ -1336,10 +1336,10 @@ So it is not always easy to tell what variables will be set, or what their final
 
   <ol>
     <li>
-      <p>Add the role <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code> to the end of your playbook and have it run as root.</p>
+      <p>Add the role <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code> to the end of your playbook and have it run as root.</p>
     </li>
     <li>
-      <p>Edit your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we will update the line that <code class="highlighter-rouge">http: 0.0.0.0:8080</code> to be <code class="highlighter-rouge">socket: 127.0.0.1:8080</code>. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.</p>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we will update the line that <code class="language-plaintext highlighter-rouge">http: 0.0.0.0:8080</code> to be <code class="language-plaintext highlighter-rouge">socket: 127.0.0.1:8080</code>. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- group_vars/<span class="notranslate">galaxy</span>servers.yml.orig
 </span><span class="gi">+++ group_vars/<span class="notranslate">galaxy</span>servers.yml
@@ -1396,14 +1396,14 @@ So it is not always easy to tell what variables will be set, or what their final
         <p>This is a lot of configuration but it is not very complex to understand. We’ll go through it step by step:</p>
 
         <ul>
-          <li><code class="highlighter-rouge">certbot_auto_renew_hour/minute</code>: Certbot certificates are short lived, they only last 90 days. As a consequence, automated renewal is a significant part of the setup and well integrated. The certbot role installs a cron job which checks if the certificate needs to be renewed (when it has &lt;30 days of lifetime left) and attempts to renew the certificate as needed. In order to reduce load on the certbot servers, we randomly set the time when the request will be made, so not all of the requests occur simultaneously. For training VMs this will likely never be reached. For real-life machines, this is more important.</li>
-          <li><code class="highlighter-rouge">certbot_auth_method</code>: <a href="https://certbot.eff.org/docs/using.html">Multiple authentication methods</a> are supported, we will use the webroot method since that integrates nicely with <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code>. This writes out a file onto the webserver’s root (that we specify in <code class="highlighter-rouge">certbot_well_known_root</code>) which certbot’s servers will check.</li>
-          <li><code class="highlighter-rouge">certbot_auto_renew</code>: Automatically attempt renewing the certificate as the <code class="highlighter-rouge">certbot_auto_renew_user</code></li>
-          <li><code class="highlighter-rouge">certbot_environment</code>: The options here are <code class="highlighter-rouge">production</code> and <code class="highlighter-rouge">staging</code>, we will set this to staging and obtain a verified but invalid certificate as browsers are intentionally not configured to trust the certbot staging certificates. The staging environment has higher <a href="https://letsencrypt.org/docs/rate-limits/">rate limits</a> and allows requesting more certificates during trainings. If you are deploying on a production machine you should set this to <code class="highlighter-rouge">production</code>.</li>
-          <li><code class="highlighter-rouge">certbot_share_key_users</code>: This variable automatically shares the certificates with any system users that might need to access them. Here just nginx needs access.</li>
-          <li><code class="highlighter-rouge">certbot_post_renewal</code>: Often services need to be notified or restarted once the certificates have been updated.</li>
-          <li><code class="highlighter-rouge">certbot_domains</code>: These are the domains that are requested for verification. Any entries you place here <strong>must</strong> all be publicly resolvable.</li>
-          <li><code class="highlighter-rouge">certbot_agree_tos</code>: We automatically agree to the certbot TOS. You can read the current one on <a href="https://letsencrypt.org/repository/">their website</a></li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_auto_renew_hour/minute</code>: Certbot certificates are short lived, they only last 90 days. As a consequence, automated renewal is a significant part of the setup and well integrated. The certbot role installs a cron job which checks if the certificate needs to be renewed (when it has &lt;30 days of lifetime left) and attempts to renew the certificate as needed. In order to reduce load on the certbot servers, we randomly set the time when the request will be made, so not all of the requests occur simultaneously. For training VMs this will likely never be reached. For real-life machines, this is more important.</li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_auth_method</code>: <a href="https://certbot.eff.org/docs/using.html">Multiple authentication methods</a> are supported, we will use the webroot method since that integrates nicely with <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code>. This writes out a file onto the webserver’s root (that we specify in <code class="language-plaintext highlighter-rouge">certbot_well_known_root</code>) which certbot’s servers will check.</li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_auto_renew</code>: Automatically attempt renewing the certificate as the <code class="language-plaintext highlighter-rouge">certbot_auto_renew_user</code></li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_environment</code>: The options here are <code class="language-plaintext highlighter-rouge">production</code> and <code class="language-plaintext highlighter-rouge">staging</code>, we will set this to staging and obtain a verified but invalid certificate as browsers are intentionally not configured to trust the certbot staging certificates. The staging environment has higher <a href="https://letsencrypt.org/docs/rate-limits/">rate limits</a> and allows requesting more certificates during trainings. If you are deploying on a production machine you should set this to <code class="language-plaintext highlighter-rouge">production</code>.</li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_share_key_users</code>: This variable automatically shares the certificates with any system users that might need to access them. Here just nginx needs access.</li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_post_renewal</code>: Often services need to be notified or restarted once the certificates have been updated.</li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_domains</code>: These are the domains that are requested for verification. Any entries you place here <strong>must</strong> all be publicly resolvable.</li>
+          <li><code class="language-plaintext highlighter-rouge">certbot_agree_tos</code>: We automatically agree to the certbot TOS. You can read the current one on <a href="https://letsencrypt.org/repository/">their website</a></li>
         </ul>
       </blockquote>
 
@@ -1412,14 +1412,14 @@ So it is not always easy to tell what variables will be set, or what their final
 
         <p>Likewise the nginx configuration has a couple of important points:</p>
         <ul>
-          <li><code class="highlighter-rouge">nginx_selinux_allow_local_connections</code>: Specific to CentOS hosts where Nginx will need to access <span class="notranslate">Galaxy</span></li>
-          <li><code class="highlighter-rouge">nginx_enable_default_server/vhost</code>: Most Nginx packages come with a default configuration for the webserver. We do not want this.</li>
-          <li><code class="highlighter-rouge">nginx_conf_http</code>: Here we can write any extra configuration we have, <code class="highlighter-rouge">client_max_body_size: 1g</code> increases the POST limit to 1Gb which makes uploads easier.</li>
+          <li><code class="language-plaintext highlighter-rouge">nginx_selinux_allow_local_connections</code>: Specific to CentOS hosts where Nginx will need to access <span class="notranslate">Galaxy</span></li>
+          <li><code class="language-plaintext highlighter-rouge">nginx_enable_default_server/vhost</code>: Most Nginx packages come with a default configuration for the webserver. We do not want this.</li>
+          <li><code class="language-plaintext highlighter-rouge">nginx_conf_http</code>: Here we can write any extra configuration we have, <code class="language-plaintext highlighter-rouge">client_max_body_size: 1g</code> increases the POST limit to 1Gb which makes uploads easier.</li>
         </ul>
 
         <p>These control the SSL configuration</p>
         <ul>
-          <li><code class="highlighter-rouge">nginx_conf_ssl_certificate/key</code>: Location of the certificate / private key.</li>
+          <li><code class="language-plaintext highlighter-rouge">nginx_conf_ssl_certificate/key</code>: Location of the certificate / private key.</li>
         </ul>
 
         <p>The configuration variables we added in our group variables file has the following variables</p>
@@ -1429,7 +1429,7 @@ So it is not always easy to tell what variables will be set, or what their final
   <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span></span>
 </code></pre></div>        </div>
 
-        <p>The <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role expects to find two files with these names in <code class="highlighter-rouge">templates/nginx/redirect-ssl.j2</code> and <code class="highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code></p>
+        <p>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role expects to find two files with these names in <code class="language-plaintext highlighter-rouge">templates/nginx/redirect-ssl.j2</code> and <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code></p>
 
       </blockquote>
 
@@ -1475,9 +1475,9 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
     </li>
     <li>
-      <p>Create the directory <code class="highlighter-rouge">templates/nginx</code>, where we will place our configuration files which should be templated out to the server.</p>
+      <p>Create the directory <code class="language-plaintext highlighter-rouge">templates/nginx</code>, where we will place our configuration files which should be templated out to the server.</p>
 
-      <p>Create the <code class="highlighter-rouge">templates/nginx/redirect-ssl.j2</code> with the following contents:</p>
+      <p>Create the <code class="language-plaintext highlighter-rouge">templates/nginx/redirect-ssl.j2</code> with the following contents:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
     <span class="kn">listen</span> <span class="mi">80</span> <span class="s">default_server</span><span class="p">;</span>
@@ -1498,7 +1498,7 @@ So it is not always easy to tell what variables will be set, or what their final
       <p>This will redirect all requests to use HTTPS.</p>
     </li>
     <li>
-      <p>Create <code class="highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> with the following contents:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
     <span class="c1"># Listen on port 443</span>
@@ -1560,7 +1560,7 @@ So it is not always easy to tell what variables will be set, or what their final
       <blockquote class="details">
         <h3 id="details-running-this-tutorial-without-ssl-1"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Running this tutorial <em>without</em> SSL</h3>
 
-        <p>In your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.j2</code> in the above step, you should change the <code class="highlighter-rouge">listen</code> parameter:</p>
+        <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.j2</code> in the above step, you should change the <code class="language-plaintext highlighter-rouge">listen</code> parameter:</p>
 
         <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Change this</span>
 <span class="k">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
@@ -1573,14 +1573,14 @@ So it is not always easy to tell what variables will be set, or what their final
     <li>
       <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
 changed: [<span class="notranslate">galaxy</span>.example.org]
 </code></pre></div>      </div>
 
       <p>If you didn’t, you might have missed the first step in this hands-on.</p>
     </li>
     <li>
-      <p>Check out the changes made to your server in <code class="highlighter-rouge">/etc/nginx/sites-enabled/</code>, particularly the directory containing the <span class="notranslate">Galaxy</span> virtualhost.</p>
+      <p>Check out the changes made to your server in <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-enabled/</code>, particularly the directory containing the <span class="notranslate">Galaxy</span> virtualhost.</p>
     </li>
   </ol>
 
@@ -1590,7 +1590,7 @@ changed: [<span class="notranslate">galaxy</span>.example.org]
   <h3 id="details-potential-security-risk--letsencrypt-staging-environment"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> “Potential Security Risk” / LetsEncrypt Staging Environment</h3>
 
   <p>LetsEncrypt has rate limits on requesting trusted certificates to prevent abuse of their service.
-In a training setting there is no need to request certificates that will be trusted by all browsers. So we will request a testing certificate to show how it works, and by changing <code class="highlighter-rouge">staging</code> to <code class="highlighter-rouge">production</code>, you can request browser trusted certificates.</p>
+In a training setting there is no need to request certificates that will be trusted by all browsers. So we will request a testing certificate to show how it works, and by changing <code class="language-plaintext highlighter-rouge">staging</code> to <code class="language-plaintext highlighter-rouge">production</code>, you can request browser trusted certificates.</p>
 
   <p>You will probably see an error like this, when trying to access your <span class="notranslate">Galaxy</span>:</p>
 
@@ -1620,31 +1620,31 @@ In a training setting there is no need to request certificates that will be trus
     </thead>
     <tbody>
       <tr>
-        <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code></td>
+        <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code></td>
         <td>None</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge">natefoo.postgresql_objects</code></td>
+        <td><code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code></td>
         <td>None</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge">geerlingguy.pip</code></td>
+        <td><code class="language-plaintext highlighter-rouge">geerlingguy.pip</code></td>
         <td>None</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code></td>
+        <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code></td>
         <td>None</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge">uchida.miniconda</code></td>
-        <td>In our group variables, we define the path to <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code>, so <span class="notranslate">Galaxy</span> needs to have set those variables</td>
+        <td><code class="language-plaintext highlighter-rouge">uchida.miniconda</code></td>
+        <td>In our group variables, we define the path to <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code>, so <span class="notranslate">Galaxy</span> needs to have set those variables</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code></td>
+        <td><code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code></td>
         <td>This requires <span class="notranslate">Galaxy</span> to be configured + functional, or it will fail to start the handler. Additionally there are a couple of <span class="notranslate">Galaxy</span> variables used in the group vars.</td>
       </tr>
       <tr>
-        <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code></td>
+        <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code></td>
         <td>This requires <span class="notranslate">Galaxy</span> variables to find the static assets.</td>
       </tr>
     </tbody>
@@ -1669,7 +1669,7 @@ In a training setting there is no need to request certificates that will be trus
 
   <ol>
     <li>Log on to your machine.</li>
-    <li><strong>Carefully</strong>, as root, <code class="highlighter-rouge">rm -rf /srv/<span class="notranslate">galaxy</span></code>, completely wipe out your <span class="notranslate">Galaxy</span> home directory.</li>
+    <li><strong>Carefully</strong>, as root, <code class="language-plaintext highlighter-rouge">rm -rf /srv/<span class="notranslate">galaxy</span></code>, completely wipe out your <span class="notranslate">Galaxy</span> home directory.</li>
   </ol>
 
 </blockquote>
@@ -1682,7 +1682,7 @@ In a training setting there is no need to request certificates that will be trus
   <h3 id="hands_on-hands-on-revert-the-apocalypse"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Revert the Apocalypse</h3>
 
   <ol>
-    <li><code class="highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code></li>
+    <li><code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code></li>
   </ol>
 
 </blockquote>
@@ -1709,7 +1709,7 @@ In a training setting there is no need to request certificates that will be trus
 
 <h2 id="keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</h2>
 
-<p>If you have set your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> group variable to a branch name like <code class="highlighter-rouge">release_19.09</code>, then all you need to do to keep <span class="notranslate">Galaxy</span> up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
+<p>If you have set your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> group variable to a branch name like <code class="language-plaintext highlighter-rouge">release_19.09</code>, then all you need to do to keep <span class="notranslate">Galaxy</span> up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="language-plaintext highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
 
 <h2 id="upgrading-galaxy-optional">Upgrading <span class="notranslate">Galaxy</span> (Optional)</h2>
 
@@ -1728,13 +1728,13 @@ index ce17525..54d0746 100644
 </span> <span class="notranslate">galaxy</span>_force_checkout: true # discard any modified files
 </code></pre></div></div>
 
-<p>This is all that is required, changing the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> and re-running the playbook. Everything else (building the client, database migrations, etc.) are taken care of for you.</p>
+<p>This is all that is required, changing the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> and re-running the playbook. Everything else (building the client, database migrations, etc.) are taken care of for you.</p>
 
 <p>It is recommend that you also do the following during an upgrade:</p>
 
 <ul>
   <li><a href="https://docs.galaxyproject.org/en/latest/releases/index.html"><strong>Read the release notes</strong></a> for the new version of <span class="notranslate">Galaxy</span></li>
-  <li>Check out the latest <a href="https://github.com/galaxyproject/galaxy/blob/master/config/galaxy.yml.sample"><code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml.sample</code></a> for the new release, and see if there are any variables you want to set for your server</li>
+  <li>Check out the latest <a href="https://github.com/galaxyproject/galaxy/blob/master/config/galaxy.yml.sample"><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml.sample</code></a> for the new release, and see if there are any variables you want to set for your server</li>
   <li>Compare the <a href="https://github.com/galaxyproject/galaxy/tree/master/config">other configuration files</a> to see if there are new features you want to take advantage of (e.g. new job runner options or metrics you wish to capture.)</li>
 </ul>
 

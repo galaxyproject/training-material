@@ -295,7 +295,7 @@
 
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -311,17 +311,17 @@
 <p><a href="https://usegalaxy.org/library/list#folders/Fab5f788f07073c11">Here</a> is a library containing a few datasets we will be practicing with (as with any <span class="notranslate">Galaxy</span> tutorial, you can upload your own data and play with it instead of the provided datasets):</p>
 
 <ul>
-  <li><code class="highlighter-rouge">M117-bl_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
-  <li><code class="highlighter-rouge">M117-bl_2</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>blood</strong></li>
-  <li><code class="highlighter-rouge">M117-ch_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>cheek</strong></li>
-  <li><code class="highlighter-rouge">M117-ch_1</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
-  <li><code class="highlighter-rouge">M117C1-bl_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
-  <li><code class="highlighter-rouge">M117C1-bl_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>blood</strong></li>
-  <li><code class="highlighter-rouge">M117C1-ch_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>cheek</strong></li>
-  <li><code class="highlighter-rouge">M117C1-ch_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-bl_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-bl_2</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-ch_1</code> - family 117, mother, 1-st (<strong>F</strong>) read from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117-ch_1</code> - family 117, mother, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-bl_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-bl_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>blood</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-ch_1</code>- family 117, child, 1-st (<strong>F</strong>) read from <strong>cheek</strong></li>
+  <li><code class="language-plaintext highlighter-rouge">M117C1-ch_2</code>- family 117, child, 2-nd (<strong>R</strong>) read from <strong>cheek</strong></li>
 </ul>
 
-<p>These datasets represent genomic <span class="notranslate">DNA</span> (enriched for mitochondria via a long range PCR) isolated from blood (<code class="highlighter-rouge">bl</code>) and cheek (buccal swab, <code class="highlighter-rouge">ch</code>) of mother (<code class="highlighter-rouge">M117</code>) and her child (<code class="highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp <span class="notranslate">reads</span>; see our <a href="http://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>).</p>
+<p>These datasets represent genomic <span class="notranslate">DNA</span> (enriched for mitochondria via a long range PCR) isolated from blood (<code class="language-plaintext highlighter-rouge">bl</code>) and cheek (buccal swab, <code class="language-plaintext highlighter-rouge">ch</code>) of mother (<code class="language-plaintext highlighter-rouge">M117</code>) and her child (<code class="language-plaintext highlighter-rouge">M117C1</code>) that was sequenced on an Illumina miSeq machine as paired-read library (250-bp <span class="notranslate">reads</span>; see our <a href="http://www.pnas.org/content/111/43/15474.abstract">2014</a> manuscript for <strong>Methods</strong>).</p>
 
 <h2 id="load-data-from-galaxy-library">Load data from <span class="notranslate">Galaxy</span> library</h2>
 
@@ -347,11 +347,11 @@
 
 <p class="img-responsive"><img src="../../images/collectionCreation.png" alt="collectionCreation" /></p>
 
-<p>In this case <span class="notranslate">Galaxy</span> automatically assigned pairs using the <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its unpaired state:</p>
+<p>In this case <span class="notranslate">Galaxy</span> automatically assigned pairs using the <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> endings of dataset names. Let’s however pretend that this did not happen. Click on <strong>Unpair all</strong> (highlighted in red in the figure above) link and then on <strong>Clear</strong> link (highlighted in blue in the figure above). The interface will change into its unpaired state:</p>
 
 <p class="img-responsive"><img src="../../images/collectionCreationClean.png" alt="collectionCreationClean" /></p>
 
-<p>These datasets contain paired-end <span class="notranslate">reads</span>. Datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="highlighter-rouge">_1</code> and <code class="highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="highlighter-rouge">_1</code> in the left <strong>Filter this list</strong> text box and <code class="highlighter-rouge">_2</code> in the right:</p>
+<p>These datasets contain paired-end <span class="notranslate">reads</span>. Datasets containing the first (forward) and the second (reverse) read are differentiated by having <code class="language-plaintext highlighter-rouge">_1</code> and <code class="language-plaintext highlighter-rouge">_2</code> in the filename. We can use this feature in dataset collection wizard to pair our datasets.  Type <code class="language-plaintext highlighter-rouge">_1</code> in the left <strong>Filter this list</strong> text box and <code class="language-plaintext highlighter-rouge">_2</code> in the right:</p>
 
 <p class="img-responsive"><img src="../../images/1and2.png" alt="1and2" /></p>
 
@@ -373,21 +373,21 @@
 
 <h2 id="using-collections">Using collections</h2>
 
-<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many <span class="notranslate">Galaxy</span> tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="highlighter-rouge">bwa-mem</code> mapper. In the Tools pane on the left, use the <code class="highlighter-rouge">search-tools</code> to find <code class="highlighter-rouge">bwa-mem</code>. Click on <code class="highlighter-rouge">Map with BWA-MEM</code> in the search list.</p>
+<p>By now we see that a collection can be used to bundle a large number of items into a single history item. This means that many <span class="notranslate">Galaxy</span> tools will be able to process all datasets in a collection transparently to you. Let’s try to map these datasets to human genome using <code class="language-plaintext highlighter-rouge">bwa-mem</code> mapper. In the Tools pane on the left, use the <code class="language-plaintext highlighter-rouge">search-tools</code> to find <code class="language-plaintext highlighter-rouge">bwa-mem</code>. Click on <code class="language-plaintext highlighter-rouge">Map with BWA-MEM</code> in the search list.</p>
 
 <p class="img-responsive"><img src="../../images/bwa_mem_collection_readGroups.png" alt="bwa_mem_collection_readGroups" /></p>
 
-<p>In the central panel, provide the following parameters for <code class="highlighter-rouge">Map with BWA-MEM</code>:</p>
+<p>In the central panel, provide the following parameters for <code class="language-plaintext highlighter-rouge">Map with BWA-MEM</code>:</p>
 
 <ul>
-  <li>set <strong>Using reference genome</strong> to <code class="highlighter-rouge">hg38</code> (red outline);</li>
-  <li>set <strong>Single or Paired-end <span class="notranslate">reads</span></strong> to <code class="highlighter-rouge">Paired collection</code> (blue outline);</li>
-  <li>select <code class="highlighter-rouge">M177-collection</code> from <strong>Select a paired collection</strong> dropdown (magenta outline);</li>
-  <li>In <strong>Set read groups information</strong> select <code class="highlighter-rouge">Automatically assign ID</code> (green outline);</li>
+  <li>set <strong>Using reference genome</strong> to <code class="language-plaintext highlighter-rouge">hg38</code> (red outline);</li>
+  <li>set <strong>Single or Paired-end <span class="notranslate">reads</span></strong> to <code class="language-plaintext highlighter-rouge">Paired collection</code> (blue outline);</li>
+  <li>select <code class="language-plaintext highlighter-rouge">M177-collection</code> from <strong>Select a paired collection</strong> dropdown (magenta outline);</li>
+  <li>In <strong>Set read groups information</strong> select <code class="language-plaintext highlighter-rouge">Automatically assign ID</code> (green outline);</li>
   <li>scroll down and click <strong>Execute</strong>.</li>
 </ul>
 
-<p>You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that <span class="notranslate">Galaxy</span> has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by <code class="highlighter-rouge">bwa-mem</code>. As a result we have four <code class="highlighter-rouge">bwa-mem</code> runs:</p>
+<p>You will see jobs being submitted and new datasets appearing in the history. IN particular below you can see that <span class="notranslate">Galaxy</span> has started four jobs (two yellow and two gray). This is because we have eight paired datasets with each pair being processed separately by <code class="language-plaintext highlighter-rouge">bwa-mem</code>. As a result we have four <code class="language-plaintext highlighter-rouge">bwa-mem</code> runs:</p>
 
 <p class="img-responsive"><img src="../../images/bwa_memCollectionRunning.png" alt="bwa_memCollectionRunning" /></p>
 
@@ -395,21 +395,21 @@
 
 <p class="img-responsive"><img src="../../images/bwa_memCollectionDone.png" alt="bwa_memCollectionDone" /></p>
 
-<p>Let’s look at this collection by clicking on it (panel <strong>A</strong> in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because <code class="highlighter-rouge">bwa-mem</code> takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a <em>list</em> of four dataset (BAM files; panels <strong>B</strong> and <strong>C</strong>).</p>
+<p>Let’s look at this collection by clicking on it (panel <strong>A</strong> in the figure below). You can see that now this collection is no longer paired (compared to the collection we created in the beginning of this tutorial). This is because <code class="language-plaintext highlighter-rouge">bwa-mem</code> takes forward and reverse data as input, but produces only a single BAM dataset as the output. So what we have in the result is a <em>list</em> of four dataset (BAM files; panels <strong>B</strong> and <strong>C</strong>).</p>
 
 <p class="img-responsive"><img src="../../images/bwa_memCollection_ABC.png" alt="bwa_memCollection_ABC" /></p>
 
 <h2 id="processing-collection-as-a-single-entity">Processing collection as a single entity</h2>
 
-<p>Now that <code class="highlighter-rouge">bwa-mem</code> has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single <span class="notranslate">Galaxy</span> ‘<em>item</em>’.</p>
+<p>Now that <code class="language-plaintext highlighter-rouge">bwa-mem</code> has finished and generated a collection of BAM datasets we can continue to analyze the entire collection as a single <span class="notranslate">Galaxy</span> ‘<em>item</em>’.</p>
 
 <h3 id="ensuring-consistency-of-bam-dataset">Ensuring consistency of BAM dataset</h3>
 
-<p>Let’s perform cleanup of our BAM files with <code class="highlighter-rouge">cleanSam</code> utility from the <strong>Picard</strong> package:</p>
+<p>Let’s perform cleanup of our BAM files with <code class="language-plaintext highlighter-rouge">cleanSam</code> utility from the <strong>Picard</strong> package:</p>
 
 <p class="img-responsive"><img src="../../images/cleanSam.png" alt="cleanSam" /></p>
 
-<p>If you look at the picture above carefully, you will see that the <strong>Select SAM/BAM dataset or dataset collection</strong> parameter is empty (it says <code class="highlighter-rouge">No sam or bam datasets available.</code>). This is because we do not have single SAM or BAM datasets in the history. Instead we have a collection. So all you need to do is to click on the <img src="../../images/folder.png" alt="folder" /> button and you will get our BAM collection selected:</p>
+<p>If you look at the picture above carefully, you will see that the <strong>Select SAM/BAM dataset or dataset collection</strong> parameter is empty (it says <code class="language-plaintext highlighter-rouge">No sam or bam datasets available.</code>). This is because we do not have single SAM or BAM datasets in the history. Instead we have a collection. So all you need to do is to click on the <img src="../../images/folder.png" alt="folder" /> button and you will get our BAM collection selected:</p>
 
 <p class="img-responsive"><img src="../../images/cleanSam_closeup.png" alt="cleanSam_closeup" /></p>
 
@@ -417,17 +417,17 @@
 
 <h3 id="retaining-proper-pairs">Retaining ‘proper pairs’</h3>
 
-<p>Now let’s clean the dataset further by only preserving truly paired <span class="notranslate">reads</span> (<span class="notranslate">reads</span> satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use <code class="highlighter-rouge">Filter SAM or BAM</code> tools from <strong>SAMTools</strong> collection:</p>
+<p>Now let’s clean the dataset further by only preserving truly paired <span class="notranslate">reads</span> (<span class="notranslate">reads</span> satisfying two requirements: (1) read is paired, and (2) it is mapped as a proper pair). For this we will use <code class="language-plaintext highlighter-rouge">Filter SAM or BAM</code> tools from <strong>SAMTools</strong> collection:</p>
 
 <p class="img-responsive"><img src="../../images/filter.png" alt="filter" /></p>
 
-<p>parameters should be set as shown below. By setting <span class="notranslate">mapping</span> quality to <code class="highlighter-rouge">20</code> we avoid <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to multiple locations and by using <strong>Filter on bitwise flag</strong> option we ensure that the resulting dataset will contain only properly paired <span class="notranslate">reads</span>. This operation will produce yet another collection containing now filtered datasets.</p>
+<p>parameters should be set as shown below. By setting <span class="notranslate">mapping</span> quality to <code class="language-plaintext highlighter-rouge">20</code> we avoid <span class="notranslate">reads</span> <span class="notranslate">mapping</span> to multiple locations and by using <strong>Filter on bitwise flag</strong> option we ensure that the resulting dataset will contain only properly paired <span class="notranslate">reads</span>. This operation will produce yet another collection containing now filtered datasets.</p>
 
 <p class="img-responsive"><img src="../../images/filter_closeup.png" alt="filter_closeup" /></p>
 
 <h3 id="merging-collection-into-a-single-dataset">Merging collection into a single dataset</h3>
 
-<p>The beauty of BAM datasets is that they can be combined in a single entity using so called <em>Read group</em>. This allows to bundle <span class="notranslate">reads</span> from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with <em>read group</em> tags. So let’s finally reduce this collection to a single BAM dataset. For this we will use <code class="highlighter-rouge">MergeSamFiles</code> tool for the <code class="highlighter-rouge">Picard</code> suite:</p>
+<p>The beauty of BAM datasets is that they can be combined in a single entity using so called <em>Read group</em>. This allows to bundle <span class="notranslate">reads</span> from multiple experiments into a single dataset where read identity is maintained by labelling every sequence with <em>read group</em> tags. So let’s finally reduce this collection to a single BAM dataset. For this we will use <code class="language-plaintext highlighter-rouge">MergeSamFiles</code> tool for the <code class="language-plaintext highlighter-rouge">Picard</code> suite:</p>
 
 <p class="img-responsive"><img src="../../images/merge.png" alt="merge" /></p>
 
@@ -435,15 +435,15 @@
 
 <p class="img-responsive"><img src="../../images/merge_closeup.png" alt="merge_closeup" /></p>
 
-<p>This operation will <strong>not</strong> generate a collection. Instead, it will generate a single BAM dataset containing mapped <span class="notranslate">reads</span> from our four samples (<code class="highlighter-rouge">M117-bl</code>, <code class="highlighter-rouge">M117-ch</code>, <code class="highlighter-rouge">M117C1-bl</code>, and <code class="highlighter-rouge">M117C1-ch</code>).</p>
+<p>This operation will <strong>not</strong> generate a collection. Instead, it will generate a single BAM dataset containing mapped <span class="notranslate">reads</span> from our four samples (<code class="language-plaintext highlighter-rouge">M117-bl</code>, <code class="language-plaintext highlighter-rouge">M117-ch</code>, <code class="language-plaintext highlighter-rouge">M117C1-bl</code>, and <code class="language-plaintext highlighter-rouge">M117C1-ch</code>).</p>
 
 <h2 id="lets-look-at-what-weve-got">Let’s look at what we’ve got!</h2>
 
-<p>So we have one BAM dataset combining everything we’ve done so far. Let’s look at the contents of this dataset using a genome browser. First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use <code class="highlighter-rouge">Downsample SAM/BAM</code> tool:</p>
+<p>So we have one BAM dataset combining everything we’ve done so far. Let’s look at the contents of this dataset using a genome browser. First, we will need to downsample the dataset to avoiding overwhelming the browser. For this we will use <code class="language-plaintext highlighter-rouge">Downsample SAM/BAM</code> tool:</p>
 
 <p class="img-responsive"><img src="../../images/downsample.png" alt="downsample" /></p>
 
-<p>Set <strong>Probability (between 0 and 1) that any given read will be kept</strong> to roughly <code class="highlighter-rouge">5%</code> (or <code class="highlighter-rouge">0.05</code>) using the slider control:</p>
+<p>Set <strong>Probability (between 0 and 1) that any given read will be kept</strong> to roughly <code class="language-plaintext highlighter-rouge">5%</code> (or <code class="language-plaintext highlighter-rouge">0.05</code>) using the slider control:</p>
 
 <p><img src="../../images/downsample_closeup.png" alt="downsample_closeup" /></p>
 
@@ -451,7 +451,7 @@
 
 <p class="img-responsive"><img src="../../images/browserLinks.png" alt="browserLinks" /></p>
 
-<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (learn more about displaying <span class="notranslate">Galaxy</span> data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot, <span class="notranslate">reads</span> are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="highlighter-rouge">M117-bl</code>.</p>
+<p>Click the <strong>Human hg38</strong> link in the <strong>display with IGV</strong> line as highlighted above (learn more about displaying <span class="notranslate">Galaxy</span> data in IGV with this <a href="https://vimeo.com/123442619#t=4m16s">movie</a>). Below is an example generated with IGV on these data. In this screenshot, <span class="notranslate">reads</span> are colored by read group (four distinct colors). A yellow inset displays additional information about a single read. One can see that this read corresponds to read group <code class="language-plaintext highlighter-rouge">M117-bl</code>.</p>
 
 <p class="img-responsive"><img src="../../images/igv.png" alt="igv" /></p>
 
@@ -479,10 +479,10 @@
                             <li><p>For example, FASTQ files can be combined into lists of dataset pairs. Each pair is made up of the forward reads dataset and the reverse reads dataset.</p>
 </li>
                             
-                            <li><p>In this tutorial, several tools were run on the list of dataset pairs, such as <code class="highlighter-rouge">bwa-mem</code>, <code class="highlighter-rouge">cleanSam</code>, <code class="highlighter-rouge">Filter SAM or BAM</code>, etc.</p>
+                            <li><p>In this tutorial, several tools were run on the list of dataset pairs, such as <code class="language-plaintext highlighter-rouge">bwa-mem</code>, <code class="language-plaintext highlighter-rouge">cleanSam</code>, <code class="language-plaintext highlighter-rouge">Filter SAM or BAM</code>, etc.</p>
 </li>
                             
-                            <li><p>When using collections, you have to click on the <code class="highlighter-rouge">batch input mode</code> button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list.</p>
+                            <li><p>When using collections, you have to click on the <code class="language-plaintext highlighter-rouge">batch input mode</code> button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list.</p>
 </li>
                             
                         </ul>
@@ -515,7 +515,7 @@
     title = "Collections: Using dataset collection (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/galaxy-data-manipulation/tutorials/collections/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

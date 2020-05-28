@@ -385,7 +385,7 @@
 
 <p>The FASTQ format looks like this:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
 CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCTGAACCAGCCAAGTAGCGTGCAG
 +
@@ -404,9 +404,9 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 <p>Each sequencing read is represented by four lines:</p>
 
 <ol>
-  <li><code class="highlighter-rouge">@</code> followed by read ID and optional information about sequencing run</li>
+  <li><code class="language-plaintext highlighter-rouge">@</code> followed by read ID and optional information about sequencing run</li>
   <li>sequenced bases</li>
-  <li><code class="highlighter-rouge">+</code> (optionally followed by the read ID and some additional info)</li>
+  <li><code class="language-plaintext highlighter-rouge">+</code> (optionally followed by the read ID and some additional info)</li>
   <li>quality scores for each base of the sequence encoded as <a href="https://en.wikipedia.org/wiki/ASCII">ASCII symbols</a></li>
 </ol>
 
@@ -439,7 +439,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <p><strong>File 1</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> @M02286:19:000000000-AA549:1:1101:12677:1273 1:N:0:23
  CCTACGGGTGGCAGCAGTGAGGAATATTGGTCAATGGACGGAAGTCT
  +
  ABC8C,:@F:CE8,B-,C,-6-9-C,CE9-CC--C-&lt;-C++,,+;CE
@@ -451,7 +451,7 @@ AAC&lt;CCF+@@&gt;CC,C9,F9C9@9-CFFFE@7@:+CC8-C@:7,@EFE,6CF:+8F7EFEEF@EGGGEEE
 
 <p><strong>File 2</strong></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@M02286:19:000000000-AA549:1:1101:12677:1273 2:N:0:23
 CACTACCCGTGTATCTAATCCTGTTTGATACCCGCACCTTCGAGCTTA
 +
 --8A,CCE+,,;,&lt;CC,,&lt;CE@,CFD,,C,CFF+@+@CCEF,,,B+C,
@@ -463,12 +463,12 @@ CACTACCGGGGTATCTAATCCTGTTCGCTCCCCACGCTTTCGTCCATC
 
 <blockquote class="comment">
   <h3 id="comment-read-order-is-important"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Read order is important</h3>
-  <p>Note that read IDs are <strong>identical</strong> in two files and they are listed in <strong>the same</strong> order. In some cases read IDs in the first and second file may be appended with <code class="highlighter-rouge">/1</code> and <code class="highlighter-rouge">/2</code> tags, respectively.</p>
+  <p>Note that read IDs are <strong>identical</strong> in two files and they are listed in <strong>the same</strong> order. In some cases read IDs in the first and second file may be appended with <code class="language-plaintext highlighter-rouge">/1</code> and <code class="language-plaintext highlighter-rouge">/2</code> tags, respectively.</p>
 </blockquote>
 
 <h4 id="interleaved-file">Interleaved file</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@1/1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@1/1
 AGGGATGTGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTAGGGTTA
 +
 EGGEGGGDFGEEEAEECGDEGGFEEGEFGBEEDDECFEFDD@CDD&lt;ED
@@ -486,7 +486,7 @@ CCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAACCCTAAC
 HHHHHHHHHHHHHGHHHHHHGHHHHHHHHHHHFHHHFHHHHHHHHHHH
 </code></pre></div></div>
 
-<p>Here the first and the second <span class="notranslate">reads</span> are identified with <code class="highlighter-rouge">/1</code> and <code class="highlighter-rouge">/2</code> tags.</p>
+<p>Here the first and the second <span class="notranslate">reads</span> are identified with <code class="language-plaintext highlighter-rouge">/1</code> and <code class="language-plaintext highlighter-rouge">/2</code> tags.</p>
 
 <blockquote class="comment">
   <h3 id="comment-fastq-format-is-a-loose-standard"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> FASTQ format is a loose standard</h3>
@@ -600,8 +600,8 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
   </tbody>
 </table>
 
-<p>For example, the image above shows indexes for <code class="highlighter-rouge">hg38</code> version of the human genome. You can see that there are actually three choices: (1) <code class="highlighter-rouge">hg38</code>, (2) <code class="highlighter-rouge">hg38 canonical</code> and (3) <code class="highlighter-rouge">hg38 canonical female</code>. The <code class="highlighter-rouge">hg38</code> contains all chromosomes as well as all unplaced contigs. The <code class="highlighter-rouge">hg38 canonical</code> does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
-<code class="highlighter-rouge">hg38 canonical female</code> contains everything from the canonical set with the exception of chromosome Y.</p>
+<p>For example, the image above shows indexes for <code class="language-plaintext highlighter-rouge">hg38</code> version of the human genome. You can see that there are actually three choices: (1) <code class="language-plaintext highlighter-rouge">hg38</code>, (2) <code class="language-plaintext highlighter-rouge">hg38 canonical</code> and (3) <code class="language-plaintext highlighter-rouge">hg38 canonical female</code>. The <code class="language-plaintext highlighter-rouge">hg38</code> contains all chromosomes as well as all unplaced contigs. The <code class="language-plaintext highlighter-rouge">hg38 canonical</code> does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
+<code class="language-plaintext highlighter-rouge">hg38 canonical female</code> contains everything from the canonical set with the exception of chromosome Y.</p>
 
 <p>The following video show <span class="notranslate">mapping</span> using BWA:</p>
 
@@ -609,11 +609,11 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <h3 id="try-it-yourself-2">Try it yourself</h3>
 
-<p>Map datasets uploaded before using BWA against <code class="highlighter-rouge">hg38</code> version of the human genome.</p>
+<p>Map datasets uploaded before using BWA against <code class="language-plaintext highlighter-rouge">hg38</code> version of the human genome.</p>
 
 <h2 id="what-if-pre-computed-index-does-not-exist">What if pre-computed index does not exist?</h2>
 
-<p>If <span class="notranslate">Galaxy</span> does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (<strong>Load reference genome</strong> is set to <code class="highlighter-rouge">History</code>).</p>
+<p>If <span class="notranslate">Galaxy</span> does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (<strong>Load reference genome</strong> is set to <code class="language-plaintext highlighter-rouge">History</code>).</p>
 
 <table>
   <thead>
@@ -663,7 +663,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The header section includes information about how the alignment was generated and stored. All lines in the header section are tab-delimited and begin with the “@” character, followed by tag:value pairs, where tag is a two-letter string that defines the content and the format of value. For example, the “@SQ” line in the header section contains the information about the names and lengths of the *reference sequences to which the <span class="notranslate">reads</span> were aligned. For a hypothetical organism with three chromosomes of length 1,000 bp, the SAM header should contain the following three lines:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SQ SN:chr1 LN:1000
 @SQ SN:chr2 LN:1000
 @SQ SN:chr3 LN:1000
 </code></pre></div></div>
@@ -672,19 +672,19 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>The optional header section is followed by the alignment section where each line corresponds to one sequenced read. For each read, there are 11 mandatory fields that always appear in the same order:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;<span class="notranslate">RNA</span>ME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;QNAME&gt; &lt;FLAG&gt; &lt;<span class="notranslate">RNA</span>ME&gt; &lt;POS&gt; &lt;MAPQ&gt; &lt;CIGAR&gt; &lt;MRNM&gt; &lt;MPOS&gt; &lt;ISIZE&gt; &lt;SEQ&gt; &lt;QUAL&gt;
 </code></pre></div></div>
 
 <p>If the corresponding information is unavailable or irrelevant, field values can be ‘0’ or ‘*’ (depending on the field, see below), but they cannot be missing! After the 11 mandatory fields, a variable number of optional fields can be present. Here’s an example of one single line of a real-life SAM file (you may need to scroll sideways):</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERR458493 .552967 16 chrI 140 255 12 M61232N37M2S * 0 0 CCACTCGTTCACCAGGGCCGGCGGGCTGATCACTTTATCGTGCATCTTGGC BB?HHJJIGHHJIGIIJJIJGIJIJJIIIGHBJJJJJJHHHHFFDDDA1+B NH:i:1 HI:i:1 AS:i:41 nM:i:2
 </code></pre></div></div>
 
-<p>The following table explains the format and content of each field. The <code class="highlighter-rouge">FLAG</code>, <code class="highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between <span class="notranslate">reads</span> within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
+<p>The following table explains the format and content of each field. The <code class="language-plaintext highlighter-rouge">FLAG</code>, <code class="language-plaintext highlighter-rouge">CIGAR</code>, and the optional fields (marked in blue) are explained in more detail below. The number of optional fields can vary widely between different SAM files and even between <span class="notranslate">reads</span> within in the same file. The field types marked in blue are explained in more detail in the main text below.</p>
 
 <p><img src="../../images/sam_fields.png" alt="SAM fields" /></p>
 
-<h3 id="flag-field"><code class="highlighter-rouge">FLAG</code> field</h3>
+<h3 id="flag-field"><code class="language-plaintext highlighter-rouge">FLAG</code> field</h3>
 
 <p>The FLAG field encodes various pieces of information about the individual read, which is particularly important for PE <span class="notranslate">reads</span>. It contains an integer that is generated from a sequence of Boolean bits (0, 1). This way, answers to multiple binary (Yes/No) questions can be compactly stored as a series of bits, where each of the single bits can be addressed and assigned separately.</p>
 
@@ -701,7 +701,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
       <td><img src="../../images/sam_flag.png" alt="SAM flag" /></td>
     </tr>
     <tr>
-      <td><small>The <code class="highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="highlighter-rouge">FLAG</code> values associated with paired <span class="notranslate">reads</span> must be uneven decimal numbers. Conversely, if the <code class="highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="highlighter-rouge">0x2</code>, <code class="highlighter-rouge">0x8</code>, <code class="highlighter-rouge">0x20</code>, <code class="highlighter-rouge">0x40</code> and <code class="highlighter-rouge">0x80</code> because they refer to paired <span class="notranslate">reads</span>. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
+      <td><small>The <code class="language-plaintext highlighter-rouge">FLAG</code> field of SAM files stores information about the respective read alignment in one single decimal number. The decimal number is the sum of all the answers to the Yes/No questions associated with each binary bit. The hexadecimal representation is used to refer to the individual bits (questions). A bit is set if the corresponding state is true. For example, if a read is paired, <code class="language-plaintext highlighter-rouge">0x1</code> will be set, returning the decimal value of 1. Therefore, all <code class="language-plaintext highlighter-rouge">FLAG</code> values associated with paired <span class="notranslate">reads</span> must be uneven decimal numbers. Conversely, if the <code class="language-plaintext highlighter-rouge">0x1</code> bit is unset (= read is not paired), no assumptions can be made about <code class="language-plaintext highlighter-rouge">0x2</code>, <code class="language-plaintext highlighter-rouge">0x8</code>, <code class="language-plaintext highlighter-rouge">0x20</code>, <code class="language-plaintext highlighter-rouge">0x40</code> and <code class="language-plaintext highlighter-rouge">0x80</code> because they refer to paired <span class="notranslate">reads</span>. From <a href="http://chagall.med.cornell.edu/RNASEQcourse/Intro2RNAseq.pdf">tutorial</a> by Friederike Dündar, Luce Skrabanek, and Paul Zumbo</small></td>
     </tr>
   </tbody>
 </table>
@@ -710,11 +710,11 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <ul>
   <li>0: This read has been mapped to the forward strand. (None of the bit-wise flags have been set.)</li>
-  <li>4: The read is unmapped (<code class="highlighter-rouge">0x4</code> is set).</li>
-  <li>16: The read is mapped to the reverse strand (<code class="highlighter-rouge">0x10</code> is set)</li>
+  <li>4: The read is unmapped (<code class="language-plaintext highlighter-rouge">0x4</code> is set).</li>
+  <li>16: The read is mapped to the reverse strand (<code class="language-plaintext highlighter-rouge">0x10</code> is set)</li>
 </ul>
 
-<p>(<code class="highlighter-rouge">0x100</code>, <code class="highlighter-rouge">0x200</code> and <code class="highlighter-rouge">0x400</code> are not used by most aligners/mappers, but could, in principle be set for single <span class="notranslate">reads</span>.) Some common <code class="highlighter-rouge">FLAG</code> values that you may see in a PE experiment include:</p>
+<p>(<code class="language-plaintext highlighter-rouge">0x100</code>, <code class="language-plaintext highlighter-rouge">0x200</code> and <code class="language-plaintext highlighter-rouge">0x400</code> are not used by most aligners/mappers, but could, in principle be set for single <span class="notranslate">reads</span>.) Some common <code class="language-plaintext highlighter-rouge">FLAG</code> values that you may see in a PE experiment include:</p>
 
 <table>
   <thead>
@@ -765,9 +765,9 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 <p>A useful website for quickly translating the FLAG integers into plain English explanations like the ones shown above is: https://broadinstitute.github.io/picard/explain-flags.html</p>
 
-<h3 id="cigar-string"><code class="highlighter-rouge">CIGAR</code> string</h3>
+<h3 id="cigar-string"><code class="language-plaintext highlighter-rouge">CIGAR</code> string</h3>
 
-<p><code class="highlighter-rouge">CIGAR</code> stands for <em>Concise Idiosyncratic Gapped Alignment Report</em>. This sixth field of a SAM file
+<p><code class="language-plaintext highlighter-rouge">CIGAR</code> stands for <em>Concise Idiosyncratic Gapped Alignment Report</em>. This sixth field of a SAM file
 contains a so-called CIGAR string indicating which operations were necessary to map the read to the reference sequence at that particular locus.</p>
 
 <p>The following operations are defined in CIGAR format (also see figure below):</p>
@@ -805,35 +805,35 @@ contains a so-called CIGAR string indicating which operations were necessary to 
 <h3 id="optional-fields">Optional fields</h3>
 
 <p>Following the eleven mandatory SAM file fields, the optional fields are presented as key-value
-pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:&lt;VALUE&gt;</code>, where <code class="highlighter-rouge">TYPE</code> is one of:</p>
+pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:&lt;VALUE&gt;</code>, where <code class="language-plaintext highlighter-rouge">TYPE</code> is one of:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">A</code> - Character</li>
-  <li><code class="highlighter-rouge">i</code> - Integer</li>
-  <li><code class="highlighter-rouge">f</code> - Float number</li>
-  <li><code class="highlighter-rouge">Z</code> - String</li>
-  <li><code class="highlighter-rouge">H</code> - Hex string</li>
+  <li><code class="language-plaintext highlighter-rouge">A</code> - Character</li>
+  <li><code class="language-plaintext highlighter-rouge">i</code> - Integer</li>
+  <li><code class="language-plaintext highlighter-rouge">f</code> - Float number</li>
+  <li><code class="language-plaintext highlighter-rouge">Z</code> - String</li>
+  <li><code class="language-plaintext highlighter-rouge">H</code> - Hex string</li>
 </ul>
 
 <p>The information stored in these optional fields will vary widely depending on the mapper and new tags can be added freely. In addition, <span class="notranslate">reads</span> within the same SAM file may have different numbers of optional fields, depending on the program that generated the SAM file. Commonly used optional tags include:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">AS:i</code> - Alignment score</li>
-  <li><code class="highlighter-rouge">BC:Z</code> - Barcode sequence</li>
-  <li><code class="highlighter-rouge">HI:i</code> - Match is i-th hit to the read</li>
-  <li><code class="highlighter-rouge">NH:i</code> - Number of reported alignments for the query sequence</li>
-  <li><code class="highlighter-rouge">NM:i</code> - Edit distance of the query to the reference</li>
-  <li><code class="highlighter-rouge">MD:Z</code> - String that contains the exact positions of mismatches (should complement the CIGAR string)</li>
-  <li><code class="highlighter-rouge">RG:Z</code> - Read group (should match the entry after ID if @RG is present in the header.</li>
+  <li><code class="language-plaintext highlighter-rouge">AS:i</code> - Alignment score</li>
+  <li><code class="language-plaintext highlighter-rouge">BC:Z</code> - Barcode sequence</li>
+  <li><code class="language-plaintext highlighter-rouge">HI:i</code> - Match is i-th hit to the read</li>
+  <li><code class="language-plaintext highlighter-rouge">NH:i</code> - Number of reported alignments for the query sequence</li>
+  <li><code class="language-plaintext highlighter-rouge">NM:i</code> - Edit distance of the query to the reference</li>
+  <li><code class="language-plaintext highlighter-rouge">MD:Z</code> - String that contains the exact positions of mismatches (should complement the CIGAR string)</li>
+  <li><code class="language-plaintext highlighter-rouge">RG:Z</code> - Read group (should match the entry after ID if @RG is present in the header.</li>
 </ul>
 
-<p>Thus, for example, we can use the NM:i:0 tag to select only those <span class="notranslate">reads</span> which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="highlighter-rouge">X</code>, <code class="highlighter-rouge">Y</code>, and <code class="highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="highlighter-rouge">XS</code>, for example, is used by TopHat (an <span class="notranslate">RNA</span>-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="highlighter-rouge">XS:i:</code> for <span class="notranslate">reads</span> with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="highlighter-rouge">XS:i:30</code>).</p>
+<p>Thus, for example, we can use the NM:i:0 tag to select only those <span class="notranslate">reads</span> which map perfectly to the reference(i.e., have no mismatches). While the optional fields listed above are fairly standardized, tags that begin with <code class="language-plaintext highlighter-rouge">X</code>, <code class="language-plaintext highlighter-rouge">Y</code>, and <code class="language-plaintext highlighter-rouge">Z</code> are reserved for particularly free usage and will never be part of the official SAM file format specifications. <code class="language-plaintext highlighter-rouge">XS</code>, for example, is used by TopHat (an <span class="notranslate">RNA</span>-seq analysis tool we will discuss later) to encode the strand information (e.g., <code class="language-plaintext highlighter-rouge">XS:A:+</code>) while Bowtie2 and BWA use <code class="language-plaintext highlighter-rouge">XS:i:</code> for <span class="notranslate">reads</span> with multiple alignments to store the alignment score for the next-best-scoring alignment (e.g., <code class="language-plaintext highlighter-rouge">XS:i:30</code>).</p>
 
 <h2 id="read-groups">Read Groups</h2>
 
 <p>One of the key features of SAM/BAM format is the ability to label individual <span class="notranslate">reads</span> with readgroup tags. This allows pooling results of multiple experiments into a single BAM dataset. This significantly simplifies <span class="notranslate">downstream</span> logistics: instead of dealing with multiple datasets one can handle just one. Many <span class="notranslate">downstream</span> analysis tools such as variant callers are designed to recognize readgroup data and output results on per-readgroup basis.</p>
 
-<p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files">GATK support site</a>. We have gratefully stolen two tables describing the most important readgroup tags - <code class="highlighter-rouge">ID</code>, <code class="highlighter-rouge">SM</code>, <code class="highlighter-rouge">LB</code>, and <code class="highlighter-rouge">PL</code> - from GATK forum and provide them here:</p>
+<p>One of the best descriptions of BAM readgroups is on <a href="https://gatkforums.broadinstitute.org/discussion/1317/collected-faqs-about-bam-files">GATK support site</a>. We have gratefully stolen two tables describing the most important readgroup tags - <code class="language-plaintext highlighter-rouge">ID</code>, <code class="language-plaintext highlighter-rouge">SM</code>, <code class="language-plaintext highlighter-rouge">LB</code>, and <code class="language-plaintext highlighter-rouge">PL</code> - from GATK forum and provide them here:</p>
 
 <p><img src="../../images/rg.png" alt="Read groups" /></p>
 
@@ -886,7 +886,7 @@ pairs in the format of <code class="highlighter-rouge">&lt;TAG&gt;:&lt;TYPE&gt;:
   </tbody>
 </table>
 
-<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate <span class="notranslate">reads</span> is the <code class="highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
+<p>Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate <span class="notranslate">reads</span> is the <code class="language-plaintext highlighter-rouge">MarkDuplicates</code> utility from <a href="https://broadinstitute.github.io/picard/command-line-overview.html">Picard</a> package. It is designed to identify both PCR and optical duplicates:</p>
 
 <div class="well well-lg">
 

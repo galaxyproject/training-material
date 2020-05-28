@@ -606,11 +606,11 @@ has been sequenced using 454 GS FLX Titanium. For the tutorial, the original fas
   <ol>
     <li>Import from <a href="https://zenodo.org/record/815875">Zenodo</a> or from the data library (in “Analyses of metagenomics data”) the files
       <ul>
-        <li><code class="highlighter-rouge">SRR531818_pampa.fasta</code></li>
-        <li><code class="highlighter-rouge">SRR651839_anguil.fasta</code></li>
+        <li><code class="language-plaintext highlighter-rouge">SRR531818_pampa.fasta</code></li>
+        <li><code class="language-plaintext highlighter-rouge">SRR651839_anguil.fasta</code></li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/SRR531818_pampa.fasta
 https://zenodo.org/record/815875/files/SRR651839_anguil.fasta
 </code></pre></div>      </div>
 
@@ -665,25 +665,25 @@ and create a <em>group file</em>, indicating which <span class="notranslate">rea
   <ol>
     <li><strong>Merge.files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Merge” to <code class="highlighter-rouge">fasta files</code></li>
+        <li>“Merge” to <code class="language-plaintext highlighter-rouge">fasta files</code></li>
         <li>“Inputs” to the two sample fasta files</li>
       </ul>
     </li>
     <li><strong>Make.group</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Method to create group file” to <code class="highlighter-rouge">Manually specify fasta files and group names</code></li>
+        <li>“Method to create group file” to <code class="language-plaintext highlighter-rouge">Manually specify fasta files and group names</code></li>
         <li>“Additional”: Add two elements to this repeat
           <ul>
             <li>First element
               <ul>
-                <li>“fasta - Fasta to group” to <code class="highlighter-rouge">SRR531818_pampa</code> file</li>
-                <li>“group - Group name” to <code class="highlighter-rouge">pampa</code></li>
+                <li>“fasta - Fasta to group” to <code class="language-plaintext highlighter-rouge">SRR531818_pampa</code> file</li>
+                <li>“group - Group name” to <code class="language-plaintext highlighter-rouge">pampa</code></li>
               </ul>
             </li>
             <li>Second element (click on “Insert Additional”)
               <ul>
-                <li>“fasta - Fasta to group” to <code class="highlighter-rouge">SRR651839_anguil</code> file</li>
-                <li>“group - Group name” to <code class="highlighter-rouge">anguil</code></li>
+                <li>“fasta - Fasta to group” to <code class="language-plaintext highlighter-rouge">SRR651839_anguil</code> file</li>
+                <li>“group - Group name” to <code class="language-plaintext highlighter-rouge">anguil</code></li>
               </ul>
             </li>
           </ul>
@@ -700,13 +700,13 @@ and create a <em>group file</em>, indicating which <span class="notranslate">rea
   <p>Because we only have a small number of samples, we used the manual specification. If you have hundreds of samples this would quickly become bothersome. The solution? use a collection! To read more about collections in <span class="notranslate">Galaxy</span>, please see <a href="">this</a> tutorial</p>
 </blockquote>
 
-<p>Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case <code class="highlighter-rouge">pampa</code> or <code class="highlighter-rouge">anguil</code>.</p>
+<p>Have a look at the group file. It is a very simple file, it contains two columns: the first contains the read names, the second contains the group (sample) name, in our case <code class="language-plaintext highlighter-rouge">pampa</code> or <code class="language-plaintext highlighter-rouge">anguil</code>.</p>
 
 <h3 id="optimization-of-files-for-computation">Optimization of files for computation</h3>
 
 <p>Because we are sequencing many of the same organisms, we anticipate that many of our sequences are
 duplicates of each other. Because it’s computationally wasteful to align the same thing a bazillion
-times, we’ll unique our sequences using the <code class="highlighter-rouge">Unique.seqs</code> command:</p>
+times, we’ll unique our sequences using the <code class="language-plaintext highlighter-rouge">Unique.seqs</code> command:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-duplicate-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove duplicate sequences</h3>
@@ -715,7 +715,7 @@ times, we’ll unique our sequences using the <code class="highlighter-rouge">Un
     <li><strong>Unique.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li>“fasta” to the merged fasta file</li>
-        <li>“output format” to <code class="highlighter-rouge">Name File</code></li>
+        <li>“output format” to <code class="language-plaintext highlighter-rouge">Name File</code></li>
       </ul>
 
       <blockquote class="question">
@@ -736,10 +736,10 @@ number of lines in the fasta file before this step.</p>
 
 </blockquote>
 
-<p>This <code class="highlighter-rouge">Unique.seqs</code> tool outputs two files: a fasta file containing only the unique sequences, and a <em>names file</em>.
+<p>This <code class="language-plaintext highlighter-rouge">Unique.seqs</code> tool outputs two files: a fasta file containing only the unique sequences, and a <em>names file</em>.
 The names file consists of two columns, the first contains the sequence names for each of the unique sequences, and the second column contains all other sequence names that are identical to the representative sequence in the first column.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name          representatives
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name          representatives
 read_name1    read_name2,read_name,read_name5,read_name11
 read_name4    read_name6,read_name,read_name10
 read_name7    read_name8
@@ -752,15 +752,15 @@ read_name7    read_name8
   <ol>
     <li><strong>Count.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“name” to the name file from <code class="highlighter-rouge">Unique.seqs</code></li>
-        <li>“Use a group file” to <code class="highlighter-rouge">yes</code></li>
-        <li>“group” to the group file from <code class="highlighter-rouge">Make.group</code></li>
+        <li>“name” to the name file from <code class="language-plaintext highlighter-rouge">Unique.seqs</code></li>
+        <li>“Use a group file” to <code class="language-plaintext highlighter-rouge">yes</code></li>
+        <li>“group” to the group file from <code class="language-plaintext highlighter-rouge">Make.group</code></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">Count.seqs</code> file keeps track of the number of sequences represented by each unique representative across multiple samples. We will pass this file to many of the following tools to be used or updated as needed.</p>
+<p>The <code class="language-plaintext highlighter-rouge">Count.seqs</code> file keeps track of the number of sequences represented by each unique representative across multiple samples. We will pass this file to many of the following tools to be used or updated as needed.</p>
 
 <h2 id="quality-control">Quality Control</h2>
 
@@ -780,19 +780,19 @@ read_name7    read_name8
   <ol>
     <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” parameter to the fasta from <code class="highlighter-rouge">Unique.seqs</code></li>
-        <li>“count” to count table from <code class="highlighter-rouge">Count.seqs</code></li>
-        <li>“output logfile?” to <code class="highlighter-rouge">yes</code></li>
+        <li>“fasta” parameter to the fasta from <code class="language-plaintext highlighter-rouge">Unique.seqs</code></li>
+        <li>“count” to count table from <code class="language-plaintext highlighter-rouge">Count.seqs</code></li>
+        <li>“output logfile?” to <code class="language-plaintext highlighter-rouge">yes</code></li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<p>The <code class="highlighter-rouge">summary</code> output files give information per read. The <code class="highlighter-rouge">logfile</code> outputs also contain some summary
+<p>The <code class="language-plaintext highlighter-rouge">summary</code> output files give information per read. The <code class="language-plaintext highlighter-rouge">logfile</code> outputs also contain some summary
 statistics:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>              Start    End        NBases     Ambigs   Polymer  NumSeqs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>              Start    End        NBases     Ambigs   Polymer  NumSeqs
 Minimum:      1        80         80         0        3        1
 2.5%-tile:    1        104        104        0        3        501
 25%-tile:     1        242        242        0        4        5001
@@ -810,9 +810,9 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <p>If you are thinking that 20,000 is an oddly round number, you are correct; we downsampled the original datasets to 10,000 <span class="notranslate">reads</span> per sample for this tutorial to reduce the amount of time the analysis steps will take.</p>
 
-<p>We can filter our dataset on length, base quality, and maximum homopolymer length using the <code class="highlighter-rouge">Screen.seqs</code> tool</p>
+<p>We can filter our dataset on length, base quality, and maximum homopolymer length using the <code class="language-plaintext highlighter-rouge">Screen.seqs</code> tool</p>
 
-<p>The following tool will remove any sequences with ambiguous bases (<code class="highlighter-rouge">maxambig</code> parameter), homopolymer stretches of 9 or more bases (<code class="highlighter-rouge">maxhomop</code> parameter) and any <span class="notranslate">reads</span> longer than 275 bp or shorter than 225 bp.</p>
+<p>The following tool will remove any sequences with ambiguous bases (<code class="language-plaintext highlighter-rouge">maxambig</code> parameter), homopolymer stretches of 9 or more bases (<code class="language-plaintext highlighter-rouge">maxhomop</code> parameter) and any <span class="notranslate">reads</span> longer than 275 bp or shorter than 225 bp.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-reads-based-on-quality-and-length"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <span class="notranslate">reads</span> based on quality and length</h3>
@@ -820,12 +820,12 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
   <ol>
     <li><strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta file from <code class="highlighter-rouge">Unique.seqs</code></li>
-        <li>“minlength” parameter to <code class="highlighter-rouge">225</code></li>
-        <li>“maxlength” parameter to <code class="highlighter-rouge">275</code></li>
-        <li>“maxambig” parameter to <code class="highlighter-rouge">0</code></li>
-        <li>“maxhomop” parameter to <code class="highlighter-rouge">8</code></li>
-        <li>“count” to the count file from <code class="highlighter-rouge">Count.seqs</code></li>
+        <li>“fasta” to the fasta file from <code class="language-plaintext highlighter-rouge">Unique.seqs</code></li>
+        <li>“minlength” parameter to <code class="language-plaintext highlighter-rouge">225</code></li>
+        <li>“maxlength” parameter to <code class="language-plaintext highlighter-rouge">275</code></li>
+        <li>“maxambig” parameter to <code class="language-plaintext highlighter-rouge">0</code></li>
+        <li>“maxhomop” parameter to <code class="language-plaintext highlighter-rouge">8</code></li>
+        <li>“count” to the count file from <code class="language-plaintext highlighter-rouge">Count.seqs</code></li>
       </ul>
     </li>
   </ol>
@@ -835,7 +835,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 <blockquote class="question">
   <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <p>How many <span class="notranslate">reads</span> were removed in this screening step? (Hint: run the <code class="highlighter-rouge">Summary.seqs</code> tool again)</p>
+  <p>How many <span class="notranslate">reads</span> were removed in this screening step? (Hint: run the <code class="language-plaintext highlighter-rouge">Summary.seqs</code> tool again)</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -854,25 +854,25 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
   <ol>
     <li>
-      <p>Import the <code class="highlighter-rouge">silva.v4.fasta</code> file in your history</p>
+      <p>Import the <code class="language-plaintext highlighter-rouge">silva.v4.fasta</code> file in your history</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/silva.v4.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/silva.v4.fasta
 </code></pre></div>      </div>
     </li>
     <li><strong>Align.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the <code class="highlighter-rouge">good.fasta</code> output from <code class="highlighter-rouge">Screen.seqs</code></li>
-        <li>“Select Reference Template from” to <code class="highlighter-rouge">Your history</code></li>
-        <li>“reference” to the <code class="highlighter-rouge">silva.v4.fasta</code> reference file</li>
-        <li>“flip” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“fasta” to the <code class="language-plaintext highlighter-rouge">good.fasta</code> output from <code class="language-plaintext highlighter-rouge">Screen.seqs</code></li>
+        <li>“Select Reference Template from” to <code class="language-plaintext highlighter-rouge">Your history</code></li>
+        <li>“reference” to the <code class="language-plaintext highlighter-rouge">silva.v4.fasta</code> reference file</li>
+        <li>“flip” to <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p>This step may take a few minutes, please be patient.</p>
     </li>
     <li><strong>Summary.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” parameter to the aligned output from <code class="highlighter-rouge">Align.seqs</code></li>
-        <li>“count” parameter to count_table output from <code class="highlighter-rouge">Screen.seqs</code></li>
+        <li>“fasta” parameter to the aligned output from <code class="language-plaintext highlighter-rouge">Align.seqs</code></li>
+        <li>“count” parameter to count_table output from <code class="language-plaintext highlighter-rouge">Screen.seqs</code></li>
       </ul>
     </li>
   </ol>
@@ -881,7 +881,7 @@ Furthermore, at least one read had a homopolymer stretch of 31 bases, this is li
 
 <p>To get an idea of the quality of the alignment, we can view the log output from the summary step:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        Start   End NBases  Ambigs  Polymer NumSeqs
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>        Start   End NBases  Ambigs  Polymer NumSeqs
 Minimum:    2391    10674   9   0   2   1
 2.5%-tile:  3080    12071   234 0   4   455
 25%-tile:   3080    13424   244 0   4   4545
@@ -906,12 +906,12 @@ total # of seqs:    18178
     <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
       <li>17,698 are aligned</li>
-      <li>From this we can see that most of our <span class="notranslate">reads</span> align nicely to positions <code class="highlighter-rouge">3080-13424</code> on this reference. This corresponds exactly to the V4 target region of the 16S gene.</li>
+      <li>From this we can see that most of our <span class="notranslate">reads</span> align nicely to positions <code class="language-plaintext highlighter-rouge">3080-13424</code> on this reference. This corresponds exactly to the V4 target region of the 16S gene.</li>
     </ol>
   </blockquote>
 </blockquote>
 
-<p>To make sure that everything overlaps the same region we’ll re-run <code class="highlighter-rouge">Screen.seqs</code> to get sequences that start at or before position 3,080 and end at or after position 13,424.</p>
+<p>To make sure that everything overlaps the same region we’ll re-run <code class="language-plaintext highlighter-rouge">Screen.seqs</code> to get sequences that start at or before position 3,080 and end at or after position 13,424.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-poorly-aligned-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove poorly aligned sequences</h3>
@@ -920,9 +920,9 @@ total # of seqs:    18178
     <li><strong>Screen.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li>“fasta” to the aligned fasta file</li>
-        <li>“start” to <code class="highlighter-rouge">3080</code></li>
-        <li>“end” to <code class="highlighter-rouge">13424</code></li>
-        <li>“count” to the group file created by the previous run of <code class="highlighter-rouge">Screen.seqs</code></li>
+        <li>“start” to <code class="language-plaintext highlighter-rouge">3080</code></li>
+        <li>“end” to <code class="language-plaintext highlighter-rouge">13424</code></li>
+        <li>“count” to the group file created by the previous run of <code class="language-plaintext highlighter-rouge">Screen.seqs</code></li>
       </ul>
     </li>
   </ol>
@@ -938,7 +938,7 @@ total # of seqs:    18178
   </blockquote>
 </blockquote>
 
-<p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap that region. So we’ll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain exte<span class="notranslate">rna</span>l gap characters (<em>i.e.</em> “.”), while columns containing only inte<span class="notranslate">rna</span>l gap characters (<em>i.e.</em>, “-“) are not considered. These can be pulled out without losing any information. We’ll do all this with <code class="highlighter-rouge">Filter.seqs</code>:</p>
+<p>Now we know our sequences overlap the same alignment coordinates, we want to make sure they <em>only</em> overlap that region. So we’ll filter the sequences to remove the overhangs at both ends. In addition, there are many columns in the alignment that only contain exte<span class="notranslate">rna</span>l gap characters (<em>i.e.</em> “.”), while columns containing only inte<span class="notranslate">rna</span>l gap characters (<em>i.e.</em>, “-“) are not considered. These can be pulled out without losing any information. We’ll do all this with <code class="language-plaintext highlighter-rouge">Filter.seqs</code>:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter sequences</h3>
@@ -946,8 +946,8 @@ total # of seqs:    18178
   <ol>
     <li><strong>Filter.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta”” to <code class="highlighter-rouge">good.fasta</code> output from <code class="highlighter-rouge">Screen.seqs</code></li>
-        <li>“trump” to <code class="highlighter-rouge">.</code></li>
+        <li>“fasta”” to <code class="language-plaintext highlighter-rouge">good.fasta</code> output from <code class="language-plaintext highlighter-rouge">Screen.seqs</code></li>
+        <li>“trump” to <code class="language-plaintext highlighter-rouge">.</code></li>
       </ul>
     </li>
   </ol>
@@ -970,7 +970,7 @@ total # of seqs:    18178
 
 </blockquote>
 
-<p>The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the <code class="highlighter-rouge">Pre.cluster</code> command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance, then go from most abundant to least and identify sequences that differ by no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
+<p>The first thing we want to do is to further de-noise our sequences from potential sequencing errors, by pre-clustering the sequences using the <code class="language-plaintext highlighter-rouge">Pre.cluster</code> command, allowing for up to 2 differences between sequences. This command will split the sequences by group and then sort them by abundance, then go from most abundant to least and identify sequences that differ by no more than 2 nucleotides from on another. If this is the case, then they get merged. We generally recommend allowing 1 difference for every 100 basepairs of sequence:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-preliminary-clustering-of-sequences-and-remove-undesired-sequences"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Perform preliminary clustering of sequences and remove undesired sequences</h3>
@@ -978,8 +978,8 @@ total # of seqs:    18178
   <ol>
     <li><strong>Pre.cluster</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“fasta” to the fasta output from the last <code class="highlighter-rouge">Filter.seqs</code> run</li>
-        <li>“name file or count table” to the count table from the last <code class="highlighter-rouge">Screen.seqs</code> step</li>
+        <li>“fasta” to the fasta output from the last <code class="language-plaintext highlighter-rouge">Filter.seqs</code> run</li>
+        <li>“name file or count table” to the count table from the last <code class="language-plaintext highlighter-rouge">Screen.seqs</code> step</li>
         <li>“diffs” to 2</li>
       </ul>
     </li>
@@ -1007,21 +1007,21 @@ total # of seqs:    18178
 
   <ol>
     <li>
-      <p>Import the <code class="highlighter-rouge">trainset16_022016.pds.fasta</code> and <code class="highlighter-rouge">trainset16_022016.pds.tax</code> in your history</p>
+      <p>Import the <code class="language-plaintext highlighter-rouge">trainset16_022016.pds.fasta</code> and <code class="language-plaintext highlighter-rouge">trainset16_022016.pds.tax</code> in your history</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/trainset16_022016.pds.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/trainset16_022016.pds.fasta
 https://zenodo.org/record/815875/files/trainset16_022016.pds.tax
 </code></pre></div>      </div>
     </li>
     <li>
       <p><strong>Classify.seqs</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
       <ul>
-        <li>“fasta” to the fasta output from <code class="highlighter-rouge">Pre.cluster</code></li>
-        <li>“Select Reference Template from” to <code class="highlighter-rouge">History</code></li>
-        <li>“reference” to <code class="highlighter-rouge">trainset16_022016.pds.fasta</code> from your history</li>
-        <li>“Select Taxonomy from” to <code class="highlighter-rouge">History</code></li>
-        <li>“taxonomy” to <code class="highlighter-rouge">trainset16_022016.pds.tax</code> from your history</li>
-        <li>“count” to the count table from <code class="highlighter-rouge">Pre.cluster</code></li>
+        <li>“fasta” to the fasta output from <code class="language-plaintext highlighter-rouge">Pre.cluster</code></li>
+        <li>“Select Reference Template from” to <code class="language-plaintext highlighter-rouge">History</code></li>
+        <li>“reference” to <code class="language-plaintext highlighter-rouge">trainset16_022016.pds.fasta</code> from your history</li>
+        <li>“Select Taxonomy from” to <code class="language-plaintext highlighter-rouge">History</code></li>
+        <li>“taxonomy” to <code class="language-plaintext highlighter-rouge">trainset16_022016.pds.tax</code> from your history</li>
+        <li>“count” to the count table from <code class="language-plaintext highlighter-rouge">Pre.cluster</code></li>
       </ul>
     </li>
   </ol>
@@ -1032,7 +1032,7 @@ https://zenodo.org/record/815875/files/trainset16_022016.pds.tax
 
 <p>Have a look at the taxonomy output.</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name    taxonomy
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>name    taxonomy
 SRR651839.9109-HXY9DLL01BSHQO-2 Bacteria(99);Verrucomicrobia(99);Spartobacteria(99);unclassified;unclassified;unclassified;
 SRR651839.11437-HXY9DLL01AMIPI-2    Bacteria(100);Verrucomicrobia(97);Spartobacteria(97);unclassified;unclassified;unclassified;
 SRR651839.15884-HXY9DLL01BDG2F-2    Bacteria(99);unclassified;unclassified;unclassified;unclassified;unclassified;
@@ -1060,12 +1060,12 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
   <ol>
     <li><strong>Cluster.split</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Split by” to <code class="highlighter-rouge">Classification using fasta</code></li>
-        <li>“fasta” to the fasta output from <code class="highlighter-rouge">Pre.cluster</code></li>
-        <li>“taxonomy” to the taxonomy output from <code class="highlighter-rouge">Classify.seqs</code></li>
-        <li>“count” to the count table output from <code class="highlighter-rouge">Pre.cluster</code></li>
-        <li>“Clustering method” to <code class="highlighter-rouge">Average Neighbour</code></li>
-        <li>“cutoff” to <code class="highlighter-rouge">0.15</code></li>
+        <li>“Split by” to <code class="language-plaintext highlighter-rouge">Classification using fasta</code></li>
+        <li>“fasta” to the fasta output from <code class="language-plaintext highlighter-rouge">Pre.cluster</code></li>
+        <li>“taxonomy” to the taxonomy output from <code class="language-plaintext highlighter-rouge">Classify.seqs</code></li>
+        <li>“count” to the count table output from <code class="language-plaintext highlighter-rouge">Pre.cluster</code></li>
+        <li>“Clustering method” to <code class="language-plaintext highlighter-rouge">Average Neighbour</code></li>
+        <li>“cutoff” to <code class="language-plaintext highlighter-rouge">0.15</code></li>
       </ul>
     </li>
   </ol>
@@ -1074,7 +1074,7 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
 
 <p>We obtain a table with the columns being the different identified OTUs, the rows the different distances and the cells the ids of the sequences identified for these OTUs for the different distances.</p>
 
-<p>Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% similarity). We can do this using the <code class="highlighter-rouge">Make.shared</code> command with the 0.03 cutoff level:</p>
+<p>Next we want to know how many sequences are in each OTU from each group with a distance of 0.03 (97% similarity). We can do this using the <code class="language-plaintext highlighter-rouge">Make.shared</code> command with the 0.03 cutoff level:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-estimate-otu-abundance"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Estimate OTU abundance</h3>
@@ -1082,17 +1082,17 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
   <ol>
     <li><strong>Make.shared</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Select input type” to <code class="highlighter-rouge">OTU list</code></li>
-        <li>“list” to list output from <code class="highlighter-rouge">Cluster.split</code></li>
-        <li>“name file or count table” to the count table from <code class="highlighter-rouge">Pre.cluster</code></li>
-        <li>“label” to <code class="highlighter-rouge">0.03</code></li>
+        <li>“Select input type” to <code class="language-plaintext highlighter-rouge">OTU list</code></li>
+        <li>“list” to list output from <code class="language-plaintext highlighter-rouge">Cluster.split</code></li>
+        <li>“name file or count table” to the count table from <code class="language-plaintext highlighter-rouge">Pre.cluster</code></li>
+        <li>“label” to <code class="language-plaintext highlighter-rouge">0.03</code></li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<p>We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the <code class="highlighter-rouge">Classify.otu</code> command:</p>
+<p>We probably also want to know the taxonomy for each of our OTUs. We can get the consensus taxonomy for each OTU using the <code class="language-plaintext highlighter-rouge">Classify.otu</code> command:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-classify-the-otus"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Classify the OTUs</h3>
@@ -1100,11 +1100,11 @@ SRR531818.61708-G88ZSJI01AVPPR-2    Bacteria(100);Acidobacteria(99);Acidobacteri
   <ol>
     <li><strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“list” to output from <code class="highlighter-rouge">Cluster.split</code></li>
-        <li>“count” to the count table from <code class="highlighter-rouge">Pre.cluster</code></li>
-        <li>“Select Taxonomy from” to <code class="highlighter-rouge">History</code></li>
-        <li>“taxonomy” to the taxonomy output from <code class="highlighter-rouge">Classify.seqs</code></li>
-        <li>“label” to <code class="highlighter-rouge">0.03</code></li>
+        <li>“list” to output from <code class="language-plaintext highlighter-rouge">Cluster.split</code></li>
+        <li>“count” to the count table from <code class="language-plaintext highlighter-rouge">Pre.cluster</code></li>
+        <li>“Select Taxonomy from” to <code class="language-plaintext highlighter-rouge">History</code></li>
+        <li>“taxonomy” to the taxonomy output from <code class="language-plaintext highlighter-rouge">Classify.seqs</code></li>
+        <li>“label” to <code class="language-plaintext highlighter-rouge">0.03</code></li>
       </ul>
     </li>
   </ol>
@@ -1145,7 +1145,7 @@ Let’s visualize our data using Krona:</p>
     </li>
     <li><strong>Krona pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“Type of input” to <code class="highlighter-rouge">Tabular</code></li>
+        <li>“Type of input” to <code class="language-plaintext highlighter-rouge">Tabular</code></li>
         <li>“Input file” to taxonomy output from Taxonomy-to-Krona (collection)</li>
       </ul>
     </li>
@@ -1167,7 +1167,7 @@ the two samples?</p>
     <li>
       <p><strong>Classify.otu</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
-      <p>Hit the rerun button on the <code class="highlighter-rouge">Classify.otu</code> job in your history and see if you can find settings that will give you per-sample taxonomy data</p>
+      <p>Hit the rerun button on the <code class="language-plaintext highlighter-rouge">Classify.otu</code> job in your history and see if you can find settings that will give you per-sample taxonomy data</p>
     </li>
     <li>
       <p><strong>Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
@@ -1200,8 +1200,8 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
   <ol>
     <li><strong>Make.biom</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li>“shared” to <code class="highlighter-rouge">Make.shared</code> output</li>
-        <li>“constaxonomy” to taxonomy output from the first run of <code class="highlighter-rouge">Classify.otu</code> (collection)</li>
+        <li>“shared” to <code class="language-plaintext highlighter-rouge">Make.shared</code> output</li>
+        <li>“constaxonomy” to taxonomy output from the first run of <code class="language-plaintext highlighter-rouge">Classify.otu</code> (collection)</li>
       </ul>
     </li>
     <li>
@@ -1238,9 +1238,9 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
   <ol>
     <li>Create a new history</li>
     <li>
-      <p>Import the <code class="highlighter-rouge">SRR606451_pampa</code> Fasta file from <a href="http://zenodo.org/record/815875">Zenodo</a> or from the data library (in “Analyses of metagenomics data”)</p>
+      <p>Import the <code class="language-plaintext highlighter-rouge">SRR606451_pampa</code> Fasta file from <a href="http://zenodo.org/record/815875">Zenodo</a> or from the data library (in “Analyses of metagenomics data”)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/SRR606451_pampa.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/SRR606451_pampa.fasta
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1271,8 +1271,8 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
     <li><strong>MetaPhlAN2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
         <li>“Input file” to the imported file</li>
-        <li>“Database with clade-specific marker genes” to <code class="highlighter-rouge">locally cached</code></li>
-        <li>“Cached database with clade-specific marker genes” to <code class="highlighter-rouge">MetaPhlAn2 clade-specific marker genes</code></li>
+        <li>“Database with clade-specific marker genes” to <code class="language-plaintext highlighter-rouge">locally cached</code></li>
+        <li>“Cached database with clade-specific marker genes” to <code class="language-plaintext highlighter-rouge">MetaPhlAn2 clade-specific marker genes</code></li>
       </ul>
     </li>
   </ol>
@@ -1286,7 +1286,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
   <li>
     <p>A tabular file with the community structure</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  #SampleID   Metaphlan2_Analysis
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  #SampleID   Metaphlan2_Analysis
   k__Bacteria 100.0
   k__Bacteria|p__Proteobacteria   86.20712
   k__Bacteria|p__Actinobacteria   13.79288
@@ -1294,7 +1294,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
   k__Bacteria|p__Actinobacteria|c__Actinobacteria 13.79288
 </code></pre></div>    </div>
 
-    <p>Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: <code class="highlighter-rouge">k__</code>) and go to more precise taxa.</p>
+    <p>Each line contains a taxa and its relative abundance found for our sample. The file starts with high level taxa (kingdom: <code class="language-plaintext highlighter-rouge">k__</code>) and go to more precise taxa.</p>
   </li>
   <li>
     <p>A BIOM file with the same information as the previous file but in BIOM format</p>
@@ -1333,13 +1333,13 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
   <ol>
     <li><strong>Format MetaPhlAn2 output for Krona</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li>“Input file” to <code class="highlighter-rouge">Community profile</code> output of <code class="highlighter-rouge">MetaPhlAn2</code></li>
+        <li>“Input file” to <code class="language-plaintext highlighter-rouge">Community profile</code> output of <code class="language-plaintext highlighter-rouge">MetaPhlAn2</code></li>
       </ul>
     </li>
     <li><strong>KRONA pie chart</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li>“What is the type of your input data” as <code class="highlighter-rouge">MetaPhlan</code></li>
-        <li>“Input file” to the output of <code class="highlighter-rouge">Format MetaPhlAn2</code></li>
+        <li>“What is the type of your input data” as <code class="language-plaintext highlighter-rouge">MetaPhlan</code></li>
+        <li>“Input file” to the output of <code class="language-plaintext highlighter-rouge">Format MetaPhlAn2</code></li>
       </ul>
     </li>
   </ol>
@@ -1359,16 +1359,16 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
     <li><strong>HUMAnN2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
         <li>“Input sequence file” to the imported sequence file</li>
-        <li>“Use of a custom taxonomic profile” to <code class="highlighter-rouge">Yes</code></li>
-        <li>“Taxonomic profile file” to <code class="highlighter-rouge">Community profile</code> output of <code class="highlighter-rouge">MetaPhlAn2</code></li>
-        <li>“Nucleotide database” to <code class="highlighter-rouge">Locally cached</code></li>
-        <li>“Nucleotide database” to <code class="highlighter-rouge">Full</code></li>
-        <li>“Protein database” to <code class="highlighter-rouge">Locally cached</code></li>
-        <li>“Protein database” to <code class="highlighter-rouge">Full UniRef50</code></li>
-        <li>“Search for uniref50 or uniref90 gene families?” to <code class="highlighter-rouge">uniref50</code></li>
-        <li>“Database to use for pathway computations” to <code class="highlighter-rouge">MetaCyc</code></li>
+        <li>“Use of a custom taxonomic profile” to <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>“Taxonomic profile file” to <code class="language-plaintext highlighter-rouge">Community profile</code> output of <code class="language-plaintext highlighter-rouge">MetaPhlAn2</code></li>
+        <li>“Nucleotide database” to <code class="language-plaintext highlighter-rouge">Locally cached</code></li>
+        <li>“Nucleotide database” to <code class="language-plaintext highlighter-rouge">Full</code></li>
+        <li>“Protein database” to <code class="language-plaintext highlighter-rouge">Locally cached</code></li>
+        <li>“Protein database” to <code class="language-plaintext highlighter-rouge">Full UniRef50</code></li>
+        <li>“Search for uniref50 or uniref90 gene families?” to <code class="language-plaintext highlighter-rouge">uniref50</code></li>
+        <li>“Database to use for pathway computations” to <code class="language-plaintext highlighter-rouge">MetaCyc</code></li>
         <li>“Advanced Options”</li>
-        <li>“Remove stratification from output” to <code class="highlighter-rouge">Yes</code></li>
+        <li>“Remove stratification from output” to <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p>This step is long so we generated the output for you!</p>
@@ -1376,7 +1376,7 @@ top right-hand corner after clicking on the label Acidobacteria. For anguil the 
     <li>
       <p>Import the 3 files whose the name is starting with “humann2”</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/humann2_gene_families_abundance.tsv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/815875/files/humann2_gene_families_abundance.tsv
 https://zenodo.org/record/815875/files/humann2_pathways_abundance.tsv
 https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
 </code></pre></div>      </div>
@@ -1423,9 +1423,9 @@ https://zenodo.org/record/815875/files/humann2_pathways_coverage.tsv
   <ol>
     <li><strong>Renormalize a HUMAnN2 generated table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
-        <li>“Gene/pathway table” to the gene family table generated with <code class="highlighter-rouge">HUMAnN2</code></li>
-        <li>“Normalization scheme” to <code class="highlighter-rouge">Relative abundance</code></li>
-        <li>“Normalization level” to <code class="highlighter-rouge">Normalization of all levels by community total</code></li>
+        <li>“Gene/pathway table” to the gene family table generated with <code class="language-plaintext highlighter-rouge">HUMAnN2</code></li>
+        <li>“Normalization scheme” to <code class="language-plaintext highlighter-rouge">Relative abundance</code></li>
+        <li>“Normalization level” to <code class="language-plaintext highlighter-rouge">Normalization of all levels by community total</code></li>
       </ul>
     </li>
   </ol>

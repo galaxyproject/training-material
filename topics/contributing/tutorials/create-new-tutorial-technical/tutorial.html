@@ -393,8 +393,8 @@
       <li><a href="#testing-the-workflow-recommended" id="markdown-toc-testing-the-workflow-recommended">Testing the <span class="notranslate">workflow</span> (recommended)</a></li>
     </ol>
   </li>
-  <li><a href="#creating-the-data-libraryyaml-recommended" id="markdown-toc-creating-the-data-libraryyaml-recommended">Creating the <code class="highlighter-rouge">data-library.yaml</code> (recommended)</a></li>
-  <li><a href="#creating-the-data-manageryaml-optional" id="markdown-toc-creating-the-data-manageryaml-optional">Creating the <code class="highlighter-rouge">data-manager.yaml</code> (optional)</a></li>
+  <li><a href="#creating-the-data-libraryyaml-recommended" id="markdown-toc-creating-the-data-libraryyaml-recommended">Creating the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> (recommended)</a></li>
+  <li><a href="#creating-the-data-manageryaml-optional" id="markdown-toc-creating-the-data-manageryaml-optional">Creating the <code class="language-plaintext highlighter-rouge">data-manager.yaml</code> (optional)</a></li>
   <li><a href="#creating-the-galaxy-interactive-tour-optional" id="markdown-toc-creating-the-galaxy-interactive-tour-optional">Creating the <span class="notranslate">Galaxy</span> Interactive Tour (optional)</a></li>
   <li><a href="#testing-the-technical-infrastructure" id="markdown-toc-testing-the-technical-infrastructure">Testing the technical infrastructure</a></li>
 </ol>
@@ -403,16 +403,16 @@
 
 <h1 id="extracting-workflows">Extracting workflows</h1>
 
-<p>Once the tutorial is ready, we need to develop a <span class="notranslate">workflow</span> that represents the steps taken in the tutorial, and then extract these <span class="notranslate">workflow</span>(s) and add them to the <code class="highlighter-rouge">workflows</code> directory in the tutorial. Additionally we will need to add some explanation about the <span class="notranslate">workflow</span>(s) in a <code class="highlighter-rouge">README.md</code> file</p>
+<p>Once the tutorial is ready, we need to develop a <span class="notranslate">workflow</span> that represents the steps taken in the tutorial, and then extract these <span class="notranslate">workflow</span>(s) and add them to the <code class="language-plaintext highlighter-rouge">workflows</code> directory in the tutorial. Additionally we will need to add some explanation about the <span class="notranslate">workflow</span>(s) in a <code class="language-plaintext highlighter-rouge">README.md</code> file</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-the-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract the <span class="notranslate">workflow</span></h3>
 
   <ol>
     <li>Download the <span class="notranslate">workflow</span> for the tutorial</li>
-    <li>Save it in the <code class="highlighter-rouge"><span class="notranslate">workflow</span></code> directory of the tutorial</li>
+    <li>Save it in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> directory of the tutorial</li>
     <li>
-      <p>Check that your <code class="highlighter-rouge"><span class="notranslate">workflow</span></code> directory has an <code class="highlighter-rouge">index.md</code> with the contents:</p>
+      <p>Check that your <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> directory has an <code class="language-plaintext highlighter-rouge">index.md</code> with the contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">layout</span><span class="pi">:</span> <span class="s"><span class="notranslate">workflow</span>-list</span>
@@ -431,14 +431,14 @@
 
 <p><span class="notranslate">Workflow</span> testing is a great way to get feedback that your tutorial can be run successfully on a given server. When you’re giving a training this can provide peace of mind, not only are the tools installed (as is indicated by the badges we provide) but they also work.</p>
 
-<p>Given the <span class="notranslate">workflow</span> you created above and have included in the tutorial folder, you’ll need to create a corresponding <code class="highlighter-rouge">-test.yml</code> file.</p>
+<p>Given the <span class="notranslate">workflow</span> you created above and have included in the tutorial folder, you’ll need to create a corresponding <code class="language-plaintext highlighter-rouge">-test.yml</code> file.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-creating-the--testyml-file-for-your-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="highlighter-rouge">-test.yml</code> file for your <span class="notranslate">workflow</span></h3>
+  <h3 id="hands_on-hands-on-creating-the--testyml-file-for-your-workflow"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="language-plaintext highlighter-rouge">-test.yml</code> file for your <span class="notranslate">workflow</span></h3>
 
   <ol>
     <li>
-      <p>Find the correct name for the file; if your <span class="notranslate">workflow</span> was <code class="highlighter-rouge">unicycler.ga</code>, then your test file should be <code class="highlighter-rouge">unicycler-test.yml</code>, they need to share the same prefix.</p>
+      <p>Find the correct name for the file; if your <span class="notranslate">workflow</span> was <code class="language-plaintext highlighter-rouge">unicycler.ga</code>, then your test file should be <code class="language-plaintext highlighter-rouge">unicycler-test.yml</code>, they need to share the same prefix.</p>
     </li>
     <li>
       <p>Create the following structure:</p>
@@ -463,17 +463,17 @@
 
 </blockquote>
 
-<p>You’ll need to edit the <code class="highlighter-rouge">job</code> and <code class="highlighter-rouge">outputs</code> sections according to your <span class="notranslate">workflow</span>’s inputs and outputs. Additionally you will need to edit the steps of your <span class="notranslate">workflow</span> <code class="highlighter-rouge">.ga</code> file appropriately.</p>
+<p>You’ll need to edit the <code class="language-plaintext highlighter-rouge">job</code> and <code class="language-plaintext highlighter-rouge">outputs</code> sections according to your <span class="notranslate">workflow</span>’s inputs and outputs. Additionally you will need to edit the steps of your <span class="notranslate">workflow</span> <code class="language-plaintext highlighter-rouge">.ga</code> file appropriately.</p>
 
 <h3 id="inputs">Inputs</h3>
 
-<p>Your <span class="notranslate">workflow</span> <strong>must</strong> use “Data Inputs” for each input dataset. For each of these input step in the <code class="highlighter-rouge">.ga</code> file, you’ll need to do the following:</p>
+<p>Your <span class="notranslate">workflow</span> <strong>must</strong> use “Data Inputs” for each input dataset. For each of these input step in the <code class="language-plaintext highlighter-rouge">.ga</code> file, you’ll need to do the following:</p>
 
 <ol>
-  <li>Edit the <code class="highlighter-rouge">label</code></li>
-  <li>Edit the <code class="highlighter-rouge">name</code></li>
-  <li>Edit the <code class="highlighter-rouge">inputs[0].name</code></li>
-  <li>Edit the <code class="highlighter-rouge">tool_state</code></li>
+  <li>Edit the <code class="language-plaintext highlighter-rouge">label</code></li>
+  <li>Edit the <code class="language-plaintext highlighter-rouge">name</code></li>
+  <li>Edit the <code class="language-plaintext highlighter-rouge">inputs[0].name</code></li>
+  <li>Edit the <code class="language-plaintext highlighter-rouge">tool_state</code></li>
 </ol>
 
 <p>In a normal <span class="notranslate">workflow</span> you have exported from <span class="notranslate">Galaxy</span>, you’ll see something like</p>
@@ -524,9 +524,9 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div></div>
 
-<p>This will allow you to specify <code class="highlighter-rouge">good_outcome</code> in your job to load a file:</p>
+<p>This will allow you to specify <code class="language-plaintext highlighter-rouge">good_outcome</code> in your job to load a file:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- doc: ...
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- doc: ...
   job:
     good_outcome:
       class: File
@@ -534,7 +534,7 @@
       filetype: ...
 </code></pre></div></div>
 
-<p>The filetype should be the <span class="notranslate">Galaxy</span> datatype of your file, for example <code class="highlighter-rouge">fastqsanger</code>, <code class="highlighter-rouge">tabular</code>, <code class="highlighter-rouge">bam</code>.</p>
+<p>The filetype should be the <span class="notranslate">Galaxy</span> datatype of your file, for example <code class="language-plaintext highlighter-rouge">fastqsanger</code>, <code class="language-plaintext highlighter-rouge">tabular</code>, <code class="language-plaintext highlighter-rouge">bam</code>.</p>
 
 <h3 id="outputs">Outputs</h3>
 
@@ -543,7 +543,7 @@
 <ol>
   <li>Identify a step, the outputs of which you would like to test</li>
   <li>
-    <p>Convert the relevant <code class="highlighter-rouge">outputs</code> to <code class="highlighter-rouge">workflow_outputs</code></p>
+    <p>Convert the relevant <code class="language-plaintext highlighter-rouge">outputs</code> to <code class="language-plaintext highlighter-rouge">workflow_outputs</code></p>
 
     <p>In a normal <span class="notranslate">workflow</span> you see</p>
 
@@ -562,7 +562,7 @@
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>    </div>
 
-    <p>If you want to test the contents of <code class="highlighter-rouge">ofile</code>, you should change it to</p>
+    <p>If you want to test the contents of <code class="language-plaintext highlighter-rouge">ofile</code>, you should change it to</p>
 
     <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
     </span><span class="nl">"outputs"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
@@ -582,7 +582,7 @@
 </span></code></pre></div>    </div>
   </li>
   <li>
-    <p>You can now use the label you chose (here <code class="highlighter-rouge">my_output</code>) in your test case:</p>
+    <p>You can now use the label you chose (here <code class="language-plaintext highlighter-rouge">my_output</code>) in your test case:</p>
 
     <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">doc</span><span class="pi">:</span>
   <span class="na">job</span><span class="pi">:</span> <span class="s">...</span>
@@ -607,13 +607,13 @@
 	<span class="notranslate">workflow</span>.ga
 </span></code></pre></div></div>
 
-<p>Planemo will autodetect that the <code class="highlighter-rouge"><span class="notranslate">workflow</span>-test.yml</code> file and load that for the testing.</p>
+<p>Planemo will autodetect that the <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span>-test.yml</code> file and load that for the testing.</p>
 
-<h1 id="creating-the-data-libraryyaml-recommended">Creating the <code class="highlighter-rouge">data-library.yaml</code> (recommended)</h1>
+<h1 id="creating-the-data-libraryyaml-recommended">Creating the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> (recommended)</h1>
 
 <p>The datasets needed for a tutorial can also be integrated in the <span class="notranslate">Galaxy</span> instance inside of data libraries. These allow the datasets to be easily shared with all users of a <span class="notranslate">Galaxy</span> instance. Additionally it lets trainees avoid each re-downloading the input data.</p>
 
-<p>These datasets are described in the <code class="highlighter-rouge">data-library.yaml</code> files:</p>
+<p>These datasets are described in the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> files:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">destination</span><span class="pi">:</span>
@@ -637,29 +637,29 @@
 </code></pre></div></div>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-creating-the-data-libraryyaml"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="highlighter-rouge">data-library.yaml</code></h3>
+  <h3 id="hands_on-hands-on-creating-the-data-libraryyaml"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the <code class="language-plaintext highlighter-rouge">data-library.yaml</code></h3>
 
   <ol>
     <li>Copy the Zenodo link</li>
     <li>
-      <p>Generate the <code class="highlighter-rouge">data-library.yaml</code> file and update the tutorial metadata with the link:</p>
+      <p>Generate the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> file and update the tutorial metadata with the link:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_fill_data_library \
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ planemo training_fill_data_library \
          --topic_name "my-topic" \
          --tutorial_name "my-new-tutorial" \
          --zenodo_link "URL to the Zenodo record"
 </code></pre></div>      </div>
     </li>
-    <li>Check that the <code class="highlighter-rouge">data-library.yaml</code> has been generated (or updated)</li>
-    <li>Check tha the Zenodo link is in the metadata at the top of the <code class="highlighter-rouge">tutorial.md</code></li>
+    <li>Check that the <code class="language-plaintext highlighter-rouge">data-library.yaml</code> has been generated (or updated)</li>
+    <li>Check tha the Zenodo link is in the metadata at the top of the <code class="language-plaintext highlighter-rouge">tutorial.md</code></li>
   </ol>
 </blockquote>
 
-<h1 id="creating-the-data-manageryaml-optional">Creating the <code class="highlighter-rouge">data-manager.yaml</code> (optional)</h1>
+<h1 id="creating-the-data-manageryaml-optional">Creating the <code class="language-plaintext highlighter-rouge">data-manager.yaml</code> (optional)</h1>
 
 <p>Some of the tools may require specific databases, specifically prepared for the tool. In this case, some <span class="notranslate">Galaxy</span> tools come with “data managers” to simplify this process.</p>
 
-<p>If you need such data managers for your training, then you should describe how to run them in the <code class="highlighter-rouge">data-manager.yaml</code> file:</p>
+<p>If you need such data managers for your training, then you should describe how to run them in the <code class="language-plaintext highlighter-rouge">data-manager.yaml</code> file:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">data_managers</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">id</span><span class="pi">:</span> <span class="s">url to data manager on <span class="notranslate">ToolShed</span></span>

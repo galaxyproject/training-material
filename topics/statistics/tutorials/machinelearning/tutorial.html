@@ -560,7 +560,7 @@
 
 <h1 id="data-upload">Data upload</h1>
 
-<p>The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="highlighter-rouge">0</code> indicates no breast cancer and <code class="highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="highlighter-rouge">target</code> column.</p>
+<p>The datasets required for this tutorial contain 9 features of breast cells which include the thickness of clump, cell-size, cell-shape and so on (<a href="https://github.com/EpistasisLab/penn-ml-benchmarks/tree/master/datasets/classification/breast-w">more information</a>). In addition to these features, the training dataset contains one more column as <code class="language-plaintext highlighter-rouge">target</code>. It has a binary value (0 or 1) for each row. <code class="language-plaintext highlighter-rouge">0</code> indicates no breast cancer and <code class="language-plaintext highlighter-rouge">1</code> indicates breast cancer. The test dataset does not contain the <code class="language-plaintext highlighter-rouge">target</code> column.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -583,9 +583,9 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the following datasets and choose the type of data as <code class="highlighter-rouge">tabular</code>.</p>
+      <p>Import the following datasets and choose the type of data as <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1401230/files/breast-w_train.tsv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1401230/files/breast-w_train.tsv
 https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </code></pre></div>      </div>
 
@@ -613,7 +613,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
       </blockquote>
     </li>
     <li>
-      <p>Rename datasets to <code class="highlighter-rouge">breast-w_train</code> and <code class="highlighter-rouge">breast-w_test</code>.</p>
+      <p>Rename datasets to <code class="language-plaintext highlighter-rouge">breast-w_train</code> and <code class="language-plaintext highlighter-rouge">breast-w_test</code>.</p>
 
       <blockquote class="tip">
 
@@ -636,25 +636,25 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <h1 id="train-a-classifier">Train a classifier</h1>
-<p>In this step, we will use the <a href="https://scikit-learn.org/stable/modules/svm.html#svm-classification">SVM (support vector machine)</a> classifier for training on the <code class="highlighter-rouge">breast-w_train</code> dataset. The classifier learns a <span class="notranslate">mapping</span> between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can thrown away. We will use the <code class="highlighter-rouge">LinearSVC</code> variant of SVM which is faster. Other variants <code class="highlighter-rouge">SVC</code> and <code class="highlighter-rouge">NuSVC</code> have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a <span class="notranslate">mapping</span> between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.</p>
+<p>In this step, we will use the <a href="https://scikit-learn.org/stable/modules/svm.html#svm-classification">SVM (support vector machine)</a> classifier for training on the <code class="language-plaintext highlighter-rouge">breast-w_train</code> dataset. The classifier learns a <span class="notranslate">mapping</span> between each row and its category. SVM is a memory efficient classifier which needs only those data points which lie on the decision boundaries among different classes to predict a class for a new sample. The rest of the data points can thrown away. We will use the <code class="language-plaintext highlighter-rouge">LinearSVC</code> variant of SVM which is faster. Other variants <code class="language-plaintext highlighter-rouge">SVC</code> and <code class="language-plaintext highlighter-rouge">NuSVC</code> have high running time for large datasets. The last column of the training dataset contains a category/class for each row. The classifier learns a <span class="notranslate">mapping</span> between data row and its category which is called a trained model. The trained model is used to predict the categories of the unseen data.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-train-a-classifier"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train a classifier</h3>
 
   <p><strong>Support vector machines (SVMs) for classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train:</p>
   <ul>
-    <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+    <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
       <ul>
-        <li><em>“Classifier type”</em>: <code class="highlighter-rouge">Linear Support Vector Classification</code></li>
-        <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">breast-w_train</code> tabular file</li>
-        <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code></li>
-        <li><em>“Type header name(s)”</em>: <code class="highlighter-rouge">target</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels or target values”</em>: <code class="highlighter-rouge">breast-w_train</code> tabular file</li>
-        <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code></li>
-        <li><em>“Type header name(s):”</em>: <code class="highlighter-rouge">target</code></li>
+        <li><em>“Classifier type”</em>: <code class="language-plaintext highlighter-rouge">Linear Support Vector Classification</code></li>
+        <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">breast-w_train</code> tabular file</li>
+        <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code></li>
+        <li><em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">target</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels or target values”</em>: <code class="language-plaintext highlighter-rouge">breast-w_train</code> tabular file</li>
+        <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code></li>
+        <li><em>“Type header name(s):”</em>: <code class="language-plaintext highlighter-rouge">target</code></li>
       </ul>
     </li>
   </ul>
@@ -662,7 +662,7 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <h1 id="predict-using-a-trained-model">Predict using a trained model</h1>
-<p>The previous step produced a trained model (<code class="highlighter-rouge">zip</code> file) which we will use to predict classes for the test data (<code class="highlighter-rouge">breast-w_test</code>).</p>
+<p>The previous step produced a trained model (<code class="language-plaintext highlighter-rouge">zip</code> file) which we will use to predict classes for the test data (<code class="language-plaintext highlighter-rouge">breast-w_test</code>).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-using-a-trained-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict using a trained model</h3>
@@ -670,12 +670,12 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
   <p><strong>Support vector machines (SVMs) for classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
 
   <ul>
-    <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+    <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">Zipped </code>file (output of <strong>Support vector machines (SVMs) for classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">breast-w_test</code> file</li>
-        <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">Zipped </code>file (output of <strong>Support vector machines (SVMs) for classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">breast-w_test</code> file</li>
+        <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
       </ul>
     </li>
   </ul>
@@ -683,13 +683,13 @@ https://zenodo.org/record/1401230/files/breast-w_test.tsv
 </blockquote>
 
 <h1 id="see-predictions">See predictions</h1>
-<p>The last column of the predicted dataset shows the category of each row. A row either gets <code class="highlighter-rouge">0</code> (no breast cancer) or <code class="highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
+<p>The last column of the predicted dataset shows the category of each row. A row either gets <code class="language-plaintext highlighter-rouge">0</code> (no breast cancer) or <code class="language-plaintext highlighter-rouge">1</code> (breast cancer) as its predicted category.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-see-the-predicted-column"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: See the predicted column</h3>
   <ol>
-    <li>Click on <code class="highlighter-rouge">view data</code> link of the dataset created after executing the previous step.</li>
-    <li>The last column of the <code class="highlighter-rouge">tabular</code> data shows the predicted category (<code class="highlighter-rouge">target</code>) for each row.</li>
+    <li>Click on <code class="language-plaintext highlighter-rouge">view data</code> link of the dataset created after executing the previous step.</li>
+    <li>The last column of the <code class="language-plaintext highlighter-rouge">tabular</code> data shows the predicted category (<code class="language-plaintext highlighter-rouge">target</code>) for each row.</li>
   </ol>
 
 </blockquote>

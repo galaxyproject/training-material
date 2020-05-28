@@ -609,7 +609,7 @@
         </ol>
       </blockquote>
     </li>
-    <li>Import the 12 <code class="highlighter-rouge">fq.gz</code> into a <code class="highlighter-rouge">List of Pairs</code> collection named <code class="highlighter-rouge">fastq_raw</code>
+    <li>Import the 12 <code class="language-plaintext highlighter-rouge">fq.gz</code> into a <code class="language-plaintext highlighter-rouge">List of Pairs</code> collection named <code class="language-plaintext highlighter-rouge">fastq_raw</code>
       <ul>
         <li>Option 1: from a shared data library (ask your instructor)</li>
         <li>
@@ -619,7 +619,7 @@
         </li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3541678/files/A1_left.fq.gz
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3541678/files/A1_left.fq.gz
 https://zenodo.org/record/3541678/files/A1_right.fq.gz
 https://zenodo.org/record/3541678/files/A2_left.fq.gz
 https://zenodo.org/record/3541678/files/A2_right.fq.gz
@@ -646,7 +646,7 @@ https://zenodo.org/record/3541678/files/B3_right.fq.gz
             <p>Click on <strong>Collection</strong> on the top</p>
           </li>
           <li>
-            <p>Click on <strong>Collection Type</strong> and select <code class="highlighter-rouge">List of Pairs</code></p>
+            <p>Click on <strong>Collection Type</strong> and select <code class="language-plaintext highlighter-rouge">List of Pairs</code></p>
           </li>
           <li>Select <strong>Paste/Fetch Data</strong></li>
           <li>
@@ -702,7 +702,7 @@ https://zenodo.org/record/3541678/files/B3_right.fq.gz
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -717,9 +717,9 @@ https://zenodo.org/record/3541678/files/B3_right.fq.gz
           <li>Click on the dataset</li>
           <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Check that the tag is appearing below the dataset name</li>
         </ul>
@@ -738,7 +738,7 @@ https://zenodo.org/record/3541678/files/B3_right.fq.gz
   <ol>
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Short read data from your current history”</em>: <code class="highlighter-rouge">fastq_raw</code> (collection)</li>
+        <li><em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">fastq_raw</code> (collection)</li>
       </ul>
     </li>
   </ol>
@@ -772,60 +772,60 @@ https://zenodo.org/record/3541678/files/B3_right.fq.gz
   <ol>
     <li><strong>Trimmomatic</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Paired-end (as collection)</code></li>
-        <li><em>“Select FASTQ dataset collection with R1/R2 pair”</em>: <code class="highlighter-rouge">fastq_raw</code></li>
-        <li><em>“Perform initial ILLUMINACLIP step?”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Adapter sequences to use”</em>: <code class="highlighter-rouge">TruSeq3 (additional seqs) (paired-ended, for MiSeq and HiSeq)</code></li>
+        <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end (as collection)</code></li>
+        <li><em>“Select FASTQ dataset collection with R1/R2 pair”</em>: <code class="language-plaintext highlighter-rouge">fastq_raw</code></li>
+        <li><em>“Perform initial ILLUMINACLIP step?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Adapter sequences to use”</em>: <code class="language-plaintext highlighter-rouge">TruSeq3 (additional seqs) (paired-ended, for MiSeq and HiSeq)</code></li>
         <li>In <em>“Trimmomatic Operation”</em>:
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Cut bases off end of a read, if below a threshold quality (TRAILING)</code></li>
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Cut bases off end of a read, if below a threshold quality (TRAILING)</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Cut bases off start of a read, if below a threshold quality (LEADING)</code></li>
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Cut bases off start of a read, if below a threshold quality (LEADING)</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Sliding window trimming (SLIDINGWINDOW)</code></li>
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Sliding window trimming (SLIDINGWINDOW)</code></li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Drop <span class="notranslate">reads</span> with average quality lower than a specific level (AVGQUAL)</code>
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Drop <span class="notranslate">reads</span> with average quality lower than a specific level (AVGQUAL)</code>
                   <ul>
-                    <li><em>“Minimum length of <span class="notranslate">reads</span> to be kept”</em>: <code class="highlighter-rouge">25</code></li>
+                    <li><em>“Minimum length of <span class="notranslate">reads</span> to be kept”</em>: <code class="language-plaintext highlighter-rouge">25</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Trimmomatic Operation”</em>
               <ul>
-                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="highlighter-rouge">Drop <span class="notranslate">reads</span> below a specified length (MINLEN)</code>
+                <li><em>“Select Trimmomatic operation to perform”</em>: <code class="language-plaintext highlighter-rouge">Drop <span class="notranslate">reads</span> below a specified length (MINLEN)</code>
                   <ul>
-                    <li><em>“Minimum length of <span class="notranslate">reads</span> to be kept”</em>: <code class="highlighter-rouge">50</code></li>
+                    <li><em>“Minimum length of <span class="notranslate">reads</span> to be kept”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Output trimmomatic log messages?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Output trimmomatic log messages?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
     <li><strong>Rename</strong> the Dataset Collection
       <ul>
-        <li><code class="highlighter-rouge">Trimmomatic on collection XX: paired</code> -&gt; <code class="highlighter-rouge">fastqc_cleaned</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Trimmomatic on collection XX: paired</code> -&gt; <code class="language-plaintext highlighter-rouge">fastqc_cleaned</code></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
         <p>You can check the Trimmomatic log files to get the number of read before and after the cleaning</p>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input Read Pairs: 10000
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Input Read Pairs: 10000
 Both Surviving: 8804 (88.04%)
 Forward Only Surviving: 491 (4.91%)
 Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
@@ -856,7 +856,7 @@ Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
   <ol>
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Short read data from your current history”</em>: <code class="highlighter-rouge">fastqc_cleaned</code> (collection)</li>
+        <li><em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">fastqc_cleaned</code> (collection)</li>
       </ul>
     </li>
   </ol>
@@ -873,26 +873,26 @@ Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
   <ol>
     <li><strong>Trinity</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Are you pooling sequence datasets?”</em>: <code class="highlighter-rouge">Yes</code>
+        <li><em>“Are you pooling sequence datasets?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Paired or Single-end data?”</em>: <code class="highlighter-rouge">Paired-end collection</code>
+            <li><em>“Paired or Single-end data?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end collection</code>
               <ul>
-                <li><em>“Strand specific data”</em>: <code class="highlighter-rouge">No</code></li>
+                <li><em>“Strand specific data”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Run in silico normalization of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Run in silico normalization of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li>In <em>“Additional Options”</em>:
           <ul>
-            <li><em>“Use the genome guided mode?”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Use the genome guided mode?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><strong>Rename</strong> the Trinity output
       <ul>
-        <li><code class="highlighter-rouge">Trinity on data 52, data 51, and others: Assembled Transcripts</code> -&gt; <code class="highlighter-rouge">transcriptome_raw.fasta</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Trinity on data 52, data 51, and others: Assembled Transcripts</code> -&gt; <code class="language-plaintext highlighter-rouge">transcriptome_raw.fasta</code></li>
       </ul>
 
       <blockquote class="tip">
@@ -919,7 +919,7 @@ Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
   <ol>
     <li><strong>Trinity Statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Trinity assembly”</em>: <code class="highlighter-rouge">transcriptome_raw.fasta</code></li>
+        <li><em>“Trinity assembly”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_raw.fasta</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -939,55 +939,55 @@ Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
   <ol>
     <li><strong>Align <span class="notranslate">reads</span> and estimate abundance</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Transcripts”</em>: <code class="highlighter-rouge">transcriptome_raw.fasta</code></li>
-        <li><em>“Paired or Single-end data?”</em>: <code class="highlighter-rouge">Paired</code>
+        <li><em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_raw.fasta</code></li>
+        <li><em>“Paired or Single-end data?”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
-            <li><em>“Left/Forward strand <span class="notranslate">reads</span>”</em> -&gt; <code class="highlighter-rouge">Multiple datasets</code>
+            <li><em>“Left/Forward strand <span class="notranslate">reads</span>”</em> -&gt; <code class="language-plaintext highlighter-rouge">Multiple datasets</code>
               <ul>
                 <li>Click on the <em>Folder</em> button at the right
                   <ul>
-                    <li><em>Type to Search</em>: <code class="highlighter-rouge">left</code></li>
-                    <li>Select the 6 <code class="highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
+                    <li><em>Type to Search</em>: <code class="language-plaintext highlighter-rouge">left</code></li>
+                    <li>Select the 6 <code class="language-plaintext highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><em>“Right/Reverse strand <span class="notranslate">reads</span>”</em> -&gt; <code class="highlighter-rouge">Multiple datasets</code>
+            <li><em>“Right/Reverse strand <span class="notranslate">reads</span>”</em> -&gt; <code class="language-plaintext highlighter-rouge">Multiple datasets</code>
               <ul>
                 <li>Click on the <em>Folder</em> button at the right
                   <ul>
-                    <li><em>Type to Search</em>: <code class="highlighter-rouge">right</code></li>
-                    <li>Select the 6 <code class="highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
+                    <li><em>Type to Search</em>: <code class="language-plaintext highlighter-rouge">right</code></li>
+                    <li>Select the 6 <code class="language-plaintext highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><em>“Strand specific data”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Strand specific data”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
-        <li><em>“Abundance estimation method”</em>: <code class="highlighter-rouge">Salmon</code></li>
+        <li><em>“Abundance estimation method”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
         <li>In <em>“Additional Options”</em>:
           <ul>
-            <li><em>“Trinity assembly?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Trinity assembly?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><strong>Rename</strong> the 6 <code class="highlighter-rouge">* isoforms counts</code> :(
+    <li><strong>Rename</strong> the 6 <code class="language-plaintext highlighter-rouge">* isoforms counts</code> :(
       <ul>
-        <li>Check in the information panel (<strong>i</strong> icon) the lineage of your file (ex: <code class="highlighter-rouge">A1_left.fq.gz</code> … )</li>
-        <li>Rename the datasets: <code class="highlighter-rouge">A1_raw</code>, <code class="highlighter-rouge">A2_raw</code>, <code class="highlighter-rouge">A3_raw</code>, <code class="highlighter-rouge">B1_raw</code>, <code class="highlighter-rouge">B2_raw</code>, <code class="highlighter-rouge">B3_raw</code>.</li>
+        <li>Check in the information panel (<strong>i</strong> icon) the lineage of your file (ex: <code class="language-plaintext highlighter-rouge">A1_left.fq.gz</code> … )</li>
+        <li>Rename the datasets: <code class="language-plaintext highlighter-rouge">A1_raw</code>, <code class="language-plaintext highlighter-rouge">A2_raw</code>, <code class="language-plaintext highlighter-rouge">A3_raw</code>, <code class="language-plaintext highlighter-rouge">B1_raw</code>, <code class="language-plaintext highlighter-rouge">B2_raw</code>, <code class="language-plaintext highlighter-rouge">B3_raw</code>.</li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-comment-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>If you check at the Standard Error messages of your outputs. You can get the <code class="highlighter-rouge"><span class="notranslate">Mapping</span> rate</code></p>
+        <p>If you check at the Standard Error messages of your outputs. You can get the <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> rate</code></p>
         <ol>
           <li>Click on one dataset</li>
           <li>Click on the little <strong>i</strong> icon</li>
           <li>Click on <em>Tool Standard Error:	stderr</em>
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2019-11-14 15:44:21.500] [jointLog] [info] <span class="notranslate">Mapping</span> rate = 44.4358%
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2019-11-14 15:44:21.500] [jointLog] [info] <span class="notranslate">Mapping</span> rate = 44.4358%
 </code></pre></div>            </div>
           </li>
         </ol>
@@ -998,8 +998,8 @@ Reverse Only Surviving: 456 (4.56%) Dropped: 249 (2.49%)
 
         <p>At this stage, you can now delete some useless datasets</p>
         <ul>
-          <li><code class="highlighter-rouge">Trimmomatic on collection XX: unpaired</code></li>
-          <li><code class="highlighter-rouge">Align <span class="notranslate">reads</span> and estimate abundance on *: genes counts</code>
+          <li><code class="language-plaintext highlighter-rouge">Trimmomatic on collection XX: unpaired</code></li>
+          <li><code class="language-plaintext highlighter-rouge">Align <span class="notranslate">reads</span> and estimate abundance on *: genes counts</code>
 Note that the dataset are just hidden. You can delete them permanently and make some room in the history options (the little wheel icon)</li>
         </ul>
       </blockquote>
@@ -1016,8 +1016,8 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Build <span class="notranslate">expression</span> matrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Abundance estimates”</em>: <code class="highlighter-rouge">A1_raw</code>, <code class="highlighter-rouge">A2_raw</code>, <code class="highlighter-rouge">A3_raw</code>, <code class="highlighter-rouge">B1_raw</code>, <code class="highlighter-rouge">B2_raw</code>, <code class="highlighter-rouge">B3_raw</code></li>
-        <li><em>“Abundance estimation method”</em>: <code class="highlighter-rouge">Salmon</code></li>
+        <li><em>“Abundance estimates”</em>: <code class="language-plaintext highlighter-rouge">A1_raw</code>, <code class="language-plaintext highlighter-rouge">A2_raw</code>, <code class="language-plaintext highlighter-rouge">A3_raw</code>, <code class="language-plaintext highlighter-rouge">B1_raw</code>, <code class="language-plaintext highlighter-rouge">B2_raw</code>, <code class="language-plaintext highlighter-rouge">B3_raw</code></li>
+        <li><em>“Abundance estimation method”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
       </ul>
     </li>
   </ol>
@@ -1033,9 +1033,9 @@ Note that the dataset are just hidden. You can delete them permanently and make 
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li><code class="highlighter-rouge">estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code>`</li>
-      <li><code class="highlighter-rouge">matrix of isoform TPM <span class="notranslate">expression</span> values (not cross-sample normalized)</code></li>
-      <li><code class="highlighter-rouge">matrix of TMM-normalized <span class="notranslate">expression</span> values</code></li>
+      <li><code class="language-plaintext highlighter-rouge">estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code>`</li>
+      <li><code class="language-plaintext highlighter-rouge">matrix of isoform TPM <span class="notranslate">expression</span> values (not cross-sample normalized)</code></li>
+      <li><code class="language-plaintext highlighter-rouge">matrix of TMM-normalized <span class="notranslate">expression</span> values</code></li>
     </ol>
 
   </blockquote>
@@ -1050,15 +1050,15 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Compute contig Ex90N50 statistic and Ex90 transcript count</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="highlighter-rouge">Build <span class="notranslate">expression</span> matrix: matrix of TMM-normalized <span class="notranslate">expression</span> values</code></li>
-        <li><em>“Transcripts”</em>: <code class="highlighter-rouge">transcriptome_raw.fasta</code></li>
+        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="language-plaintext highlighter-rouge">Build <span class="notranslate">expression</span> matrix: matrix of TMM-normalized <span class="notranslate">expression</span> values</code></li>
+        <li><em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_raw.fasta</code></li>
       </ul>
     </li>
-    <li>Click on the visulization icon on the dataset <code class="highlighter-rouge">Compute contig Ex90N50 statistic and Ex90 transcript count: ExN50 statistics</code>
+    <li>Click on the visulization icon on the dataset <code class="language-plaintext highlighter-rouge">Compute contig Ex90N50 statistic and Ex90 transcript count: ExN50 statistics</code>
       <ol>
         <li><strong>Scatterplot - Creates a 2D-scatterplot from tabular datapoints</strong></li>
-        <li><em>“X Column”</em>: select the Columns <code class="highlighter-rouge">1</code></li>
-        <li><em>“Y Column”</em>: select the Columns <code class="highlighter-rouge">2</code></li>
+        <li><em>“X Column”</em>: select the Columns <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Y Column”</em>: select the Columns <code class="language-plaintext highlighter-rouge">2</code></li>
       </ol>
     </li>
   </ol>
@@ -1080,9 +1080,9 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Busco</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Sequence to analyse”</em>: <code class="highlighter-rouge">transcriptome_raw.fasta</code></li>
-        <li><em>“Mode”</em>: <code class="highlighter-rouge">transcriptome</code></li>
-        <li><em>“Lineage”</em>: <code class="highlighter-rouge">eukaryota_odb9</code></li>
+        <li><em>“Sequence to analyse”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_raw.fasta</code></li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">transcriptome</code></li>
+        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">eukaryota_odb9</code></li>
       </ul>
     </li>
   </ol>
@@ -1099,12 +1099,12 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Filter low <span class="notranslate">expression</span> transcripts</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Trinity assembly”</em>: <code class="highlighter-rouge">transcriptome_raw.fasta</code></li>
-        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="highlighter-rouge">Build <span class="notranslate">expression</span> matrix: matrix of isoform TPM <span class="notranslate">expression</span> values (not cross-sample normalized)</code></li>
-        <li><em>“Minimum <span class="notranslate">expression</span> level required across any sample”</em>: <code class="highlighter-rouge">1.0</code></li>
-        <li><em>“Isoform filtering method”</em>: <code class="highlighter-rouge">Keep all isoforms above a minimum percent of dominant <span class="notranslate">expression</span></code>
+        <li><em>“Trinity assembly”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_raw.fasta</code></li>
+        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="language-plaintext highlighter-rouge">Build <span class="notranslate">expression</span> matrix: matrix of isoform TPM <span class="notranslate">expression</span> values (not cross-sample normalized)</code></li>
+        <li><em>“Minimum <span class="notranslate">expression</span> level required across any sample”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+        <li><em>“Isoform filtering method”</em>: <code class="language-plaintext highlighter-rouge">Keep all isoforms above a minimum percent of dominant <span class="notranslate">expression</span></code>
           <ul>
-            <li><em>“Minimum percent of dominant isoform <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“Minimum percent of dominant isoform <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
       </ul>
@@ -1112,12 +1112,12 @@ Note that the dataset are just hidden. You can delete them permanently and make 
       <blockquote class="comment">
         <h3 id="comment-comment-4"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>If you check at the Standard Error messages of your outputs. You can get the <code class="highlighter-rouge">Retained</code> rate</p>
+        <p>If you check at the Standard Error messages of your outputs. You can get the <code class="language-plaintext highlighter-rouge">Retained</code> rate</p>
         <ol>
           <li>Click on one dataset</li>
           <li>Click on the little <strong>i</strong> icon</li>
           <li>Click on <em>Tool Standard Error:	stderr</em>
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Retained 2096 / 2102 = 99.71% of total transcripts.
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> Retained 2096 / 2102 = 99.71% of total transcripts.
 </code></pre></div>            </div>
           </li>
         </ol>
@@ -1125,7 +1125,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
     </li>
     <li><strong>Rename</strong> the output
       <ul>
-        <li><code class="highlighter-rouge">Filter low <span class="notranslate">expression</span> transcripts on data 42 and data 14: filtered low <span class="notranslate">expression</span> transcripts</code> -&gt; <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Filter low <span class="notranslate">expression</span> transcripts on data 42 and data 14: filtered low <span class="notranslate">expression</span> transcripts</code> -&gt; <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
       </ul>
     </li>
   </ol>
@@ -1140,7 +1140,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Trinity Statistics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Trinity assembly”</em>: <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><em>“Trinity assembly”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
       </ul>
     </li>
   </ol>
@@ -1156,7 +1156,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Generate gene to transcript map</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Trinity assembly”</em>: <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><em>“Trinity assembly”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
       </ul>
     </li>
   </ol>
@@ -1171,10 +1171,10 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>TransDecoder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Transcripts”</em>: <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
         <li>In <em>“Training Options”</em>:
           <ul>
-            <li><em>“Select the training method”</em>: <code class="highlighter-rouge">Train with the top longest ORFs</code></li>
+            <li><em>“Select the training method”</em>: <code class="language-plaintext highlighter-rouge">Train with the top longest ORFs</code></li>
           </ul>
         </li>
       </ul>
@@ -1191,38 +1191,38 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Diamond</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“What do you want to align?”</em>: <code class="highlighter-rouge">Align amino acid query sequences (blastp)</code></li>
-        <li><em>“Input query file in FASTA or FASTQ format”</em>: <code class="highlighter-rouge">TransDecoder on data XXX: pep</code></li>
-        <li><em>“Select a reference database”</em>: <code class="highlighter-rouge">Uniprot Swissprot</code></li>
-        <li><em>“Format of output file”</em>: <code class="highlighter-rouge">BLAST Tabular</code></li>
-        <li>In <em>“Method to restrict the number of hits?”</em>: <code class="highlighter-rouge">Maximum number of target sequences</code>
+        <li><em>“What do you want to align?”</em>: <code class="language-plaintext highlighter-rouge">Align amino acid query sequences (blastp)</code></li>
+        <li><em>“Input query file in FASTA or FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">TransDecoder on data XXX: pep</code></li>
+        <li><em>“Select a reference database”</em>: <code class="language-plaintext highlighter-rouge">Uniprot Swissprot</code></li>
+        <li><em>“Format of output file”</em>: <code class="language-plaintext highlighter-rouge">BLAST Tabular</code></li>
+        <li>In <em>“Method to restrict the number of hits?”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of target sequences</code>
           <ul>
-            <li><em>“The maximum number of target sequence per query to report alignments for”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“The maximum number of target sequence per query to report alignments for”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><strong>Rename</strong> the Diamond output
       <ul>
-        <li><code class="highlighter-rouge">Diamond on data XXX</code> -&gt; <code class="highlighter-rouge">Diamond (blastp)</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Diamond on data XXX</code> -&gt; <code class="language-plaintext highlighter-rouge">Diamond (blastp)</code></li>
       </ul>
     </li>
     <li><strong>Diamond</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“What do you want to align?”</em>: <code class="highlighter-rouge">Align <span class="notranslate">DNA</span> query sequences (blastx)</code></li>
-        <li><em>“Input query file in FASTA or FASTQ format”</em>: <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
-        <li><em>“Select a reference database”</em>: <code class="highlighter-rouge">Uniprot Swissprot</code></li>
-        <li><em>“Format of output file”</em>: <code class="highlighter-rouge">BLAST Tabular</code></li>
-        <li>In <em>“Method to restrict the number of hits?”</em>: <code class="highlighter-rouge">Maximum number of target sequences</code>
+        <li><em>“What do you want to align?”</em>: <code class="language-plaintext highlighter-rouge">Align <span class="notranslate">DNA</span> query sequences (blastx)</code></li>
+        <li><em>“Input query file in FASTA or FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><em>“Select a reference database”</em>: <code class="language-plaintext highlighter-rouge">Uniprot Swissprot</code></li>
+        <li><em>“Format of output file”</em>: <code class="language-plaintext highlighter-rouge">BLAST Tabular</code></li>
+        <li>In <em>“Method to restrict the number of hits?”</em>: <code class="language-plaintext highlighter-rouge">Maximum number of target sequences</code>
           <ul>
-            <li><em>“The maximum number of target sequence per query to report alignments for”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“The maximum number of target sequence per query to report alignments for”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><strong>Rename</strong> the Diamond output
       <ul>
-        <li><code class="highlighter-rouge">Diamond on data XXX</code> -&gt; <code class="highlighter-rouge">Diamond (blastx)</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Diamond on data XXX</code> -&gt; <code class="language-plaintext highlighter-rouge">Diamond (blastx)</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -1243,7 +1243,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>SignalP 3.0</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Fasta file of protein sequences”</em>: <code class="highlighter-rouge">TransDecoder on data XXX: pep</code></li>
+        <li><em>“Fasta file of protein sequences”</em>: <code class="language-plaintext highlighter-rouge">TransDecoder on data XXX: pep</code></li>
       </ul>
     </li>
   </ol>
@@ -1258,7 +1258,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>TMHMM 2.0</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“FASTA file of protein sequences”</em>: <code class="highlighter-rouge">TransDecoder on data XXX: pep</code></li>
+        <li><em>“FASTA file of protein sequences”</em>: <code class="language-plaintext highlighter-rouge">TransDecoder on data XXX: pep</code></li>
       </ul>
     </li>
   </ol>
@@ -1273,7 +1273,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>hmmscan</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Sequence file”</em>: <code class="highlighter-rouge">TransDecoder on data XXX: pep</code></li>
+        <li><em>“Sequence file”</em>: <code class="language-plaintext highlighter-rouge">TransDecoder on data XXX: pep</code></li>
       </ul>
     </li>
   </ol>
@@ -1288,15 +1288,15 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Trinotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Transcripts”</em>: <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
-        <li><em>“Peptides”</em>: <code class="highlighter-rouge">TransDecoder on data XXX: pep</code></li>
-        <li><em>“Genes to transcripts map”</em>: <code class="highlighter-rouge">Generate gene to transcript map on data XXX: Genes to transcripts map</code></li>
-        <li><em>“BLASTP: Peptides vs Uniprot.SwissProt”</em>: <code class="highlighter-rouge">Diamond (blastp)</code></li>
-        <li><em>“BLASTX: Transcripts vs Uniprot.SwissProt”</em>: <code class="highlighter-rouge">Diamond (blastx)</code></li>
-        <li><em>“HMMER hmmscan: Peptides vs PFAM”</em>: <code class="highlighter-rouge">Table of per-domain hits from HMM matches of TransDecoder on data XXX: pep against the profile database</code></li>
-        <li><em>“TMHMM on Peptides”</em>: <code class="highlighter-rouge">TMHMM results</code></li>
-        <li><em>“SignalP on Peptides”</em>: <code class="highlighter-rouge">SignalP euk results</code></li>
-        <li><em>“Let <span class="notranslate">Galaxy</span> downloading the Trinotate Pre-generated Resource SQLite database”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><em>“Peptides”</em>: <code class="language-plaintext highlighter-rouge">TransDecoder on data XXX: pep</code></li>
+        <li><em>“Genes to transcripts map”</em>: <code class="language-plaintext highlighter-rouge">Generate gene to transcript map on data XXX: Genes to transcripts map</code></li>
+        <li><em>“BLASTP: Peptides vs Uniprot.SwissProt”</em>: <code class="language-plaintext highlighter-rouge">Diamond (blastp)</code></li>
+        <li><em>“BLASTX: Transcripts vs Uniprot.SwissProt”</em>: <code class="language-plaintext highlighter-rouge">Diamond (blastx)</code></li>
+        <li><em>“HMMER hmmscan: Peptides vs PFAM”</em>: <code class="language-plaintext highlighter-rouge">Table of per-domain hits from HMM matches of TransDecoder on data XXX: pep against the profile database</code></li>
+        <li><em>“TMHMM on Peptides”</em>: <code class="language-plaintext highlighter-rouge">TMHMM results</code></li>
+        <li><em>“SignalP on Peptides”</em>: <code class="language-plaintext highlighter-rouge">SignalP euk results</code></li>
+        <li><em>“Let <span class="notranslate">Galaxy</span> downloading the Trinotate Pre-generated Resource SQLite database”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1313,55 +1313,55 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Align <span class="notranslate">reads</span> and estimate abundance</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Transcripts”</em>: <code class="highlighter-rouge">transcriptome_filtered.fasta</code></li>
-        <li><em>“Paired or Single-end data?”</em>: <code class="highlighter-rouge">Paired</code>
+        <li><em>“Transcripts”</em>: <code class="language-plaintext highlighter-rouge">transcriptome_filtered.fasta</code></li>
+        <li><em>“Paired or Single-end data?”</em>: <code class="language-plaintext highlighter-rouge">Paired</code>
           <ul>
-            <li><em>“Left/Forward strand <span class="notranslate">reads</span>”</em> -&gt; <code class="highlighter-rouge">Multiple datasets</code>
+            <li><em>“Left/Forward strand <span class="notranslate">reads</span>”</em> -&gt; <code class="language-plaintext highlighter-rouge">Multiple datasets</code>
               <ul>
                 <li>Click on the <em>Folder</em> button at the right
                   <ul>
-                    <li><em>Type to Search</em>: <code class="highlighter-rouge">left</code></li>
-                    <li>Select the 6 <code class="highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
+                    <li><em>Type to Search</em>: <code class="language-plaintext highlighter-rouge">left</code></li>
+                    <li>Select the 6 <code class="language-plaintext highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><em>“Right/Reverse strand <span class="notranslate">reads</span>”</em> -&gt; <code class="highlighter-rouge">Multiple datasets</code>
+            <li><em>“Right/Reverse strand <span class="notranslate">reads</span>”</em> -&gt; <code class="language-plaintext highlighter-rouge">Multiple datasets</code>
               <ul>
                 <li>Click on the <em>Folder</em> button at the right
                   <ul>
-                    <li><em>Type to Search</em>: <code class="highlighter-rouge">right</code></li>
-                    <li>Select the 6 <code class="highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
+                    <li><em>Type to Search</em>: <code class="language-plaintext highlighter-rouge">right</code></li>
+                    <li>Select the 6 <code class="language-plaintext highlighter-rouge">Trimmomatic on ..._left.fq.gz</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-            <li><em>“Strand specific data”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Strand specific data”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
-        <li><em>“Abundance estimation method”</em>: <code class="highlighter-rouge">Salmon</code></li>
+        <li><em>“Abundance estimation method”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
         <li>In <em>“Additional Options”</em>:
           <ul>
-            <li><em>“Trinity assembly?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Trinity assembly?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><strong>Rename</strong> the 6 <code class="highlighter-rouge">* isoforms counts</code> :(
+    <li><strong>Rename</strong> the 6 <code class="language-plaintext highlighter-rouge">* isoforms counts</code> :(
       <ul>
-        <li>Check in the information panel (<strong>i</strong> icon) the lineage of your file (ex: <code class="highlighter-rouge">A1_left.fq.gz</code> … )</li>
-        <li>Rename the datasets: <code class="highlighter-rouge">A1</code>, <code class="highlighter-rouge">A2</code>, <code class="highlighter-rouge">A3</code>, <code class="highlighter-rouge">B1</code>, <code class="highlighter-rouge">B2</code>, <code class="highlighter-rouge">B3</code>.</li>
+        <li>Check in the information panel (<strong>i</strong> icon) the lineage of your file (ex: <code class="language-plaintext highlighter-rouge">A1_left.fq.gz</code> … )</li>
+        <li>Rename the datasets: <code class="language-plaintext highlighter-rouge">A1</code>, <code class="language-plaintext highlighter-rouge">A2</code>, <code class="language-plaintext highlighter-rouge">A3</code>, <code class="language-plaintext highlighter-rouge">B1</code>, <code class="language-plaintext highlighter-rouge">B2</code>, <code class="language-plaintext highlighter-rouge">B3</code>.</li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-comment-6"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>If you check at the Standard Error messages of your outputs. You can get the <code class="highlighter-rouge"><span class="notranslate">Mapping</span> rate</code></p>
+        <p>If you check at the Standard Error messages of your outputs. You can get the <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span> rate</code></p>
         <ol>
           <li>Click on one dataset</li>
           <li>Click on the little <strong>i</strong> icon</li>
           <li>Click on <em>Tool Standard Error:	stderr</em>
-            <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2019-11-14 15:44:21.500] [jointLog] [info] <span class="notranslate">Mapping</span> rate = 44.4358%
+            <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[2019-11-14 15:44:21.500] [jointLog] [info] <span class="notranslate">Mapping</span> rate = 44.4358%
 </code></pre></div>            </div>
           </li>
         </ol>
@@ -1372,7 +1372,7 @@ Note that the dataset are just hidden. You can delete them permanently and make 
 
         <p>At this stage, you can now delete some useless datasets</p>
         <ul>
-          <li><code class="highlighter-rouge">Align <span class="notranslate">reads</span> and estimate abundance on *: genes counts</code>
+          <li><code class="language-plaintext highlighter-rouge">Align <span class="notranslate">reads</span> and estimate abundance on *: genes counts</code>
 Note that the dataset are just hidden. You can delete them permanently and make some room in the history options (the little wheel icon)</li>
         </ul>
       </blockquote>
@@ -1389,8 +1389,8 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Build <span class="notranslate">expression</span> matrix</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Abundance estimates”</em>: <code class="highlighter-rouge">A1</code>, <code class="highlighter-rouge">A2</code>, <code class="highlighter-rouge">A3</code>, <code class="highlighter-rouge">B1</code>, <code class="highlighter-rouge">B2</code>, <code class="highlighter-rouge">B3</code></li>
-        <li><em>“Abundance estimation method”</em>: <code class="highlighter-rouge">Salmon</code></li>
+        <li><em>“Abundance estimates”</em>: <code class="language-plaintext highlighter-rouge">A1</code>, <code class="language-plaintext highlighter-rouge">A2</code>, <code class="language-plaintext highlighter-rouge">A3</code>, <code class="language-plaintext highlighter-rouge">B1</code>, <code class="language-plaintext highlighter-rouge">B2</code>, <code class="language-plaintext highlighter-rouge">B3</code></li>
+        <li><em>“Abundance estimation method”</em>: <code class="language-plaintext highlighter-rouge">Salmon</code></li>
       </ul>
     </li>
     <li><strong>Describe samples and replicates</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1399,21 +1399,21 @@ Note that the dataset are just hidden. You can delete them permanently and make 
           <ul>
             <li><em>“1: Samples”</em>:
               <ul>
-                <li><em>“Full sample name”</em>: <code class="highlighter-rouge">A1</code></li>
-                <li><em>“Condition”</em>: <code class="highlighter-rouge">A</code></li>
+                <li><em>“Full sample name”</em>: <code class="language-plaintext highlighter-rouge">A1</code></li>
+                <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
               </ul>
             </li>
             <li><em>“2: Samples”</em>:
               <ul>
-                <li><em>“Full sample name”</em>: <code class="highlighter-rouge">A2</code></li>
-                <li><em>“Condition”</em>: <code class="highlighter-rouge">A</code></li>
+                <li><em>“Full sample name”</em>: <code class="language-plaintext highlighter-rouge">A2</code></li>
+                <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
               </ul>
             </li>
             <li>…:</li>
             <li><em>“6: Samples”</em>:
               <ul>
-                <li><em>“Full sample name”</em>: <code class="highlighter-rouge">B3</code></li>
-                <li><em>“Condition”</em>: <code class="highlighter-rouge">B</code></li>
+                <li><em>“Full sample name”</em>: <code class="language-plaintext highlighter-rouge">B3</code></li>
+                <li><em>“Condition”</em>: <code class="language-plaintext highlighter-rouge">B</code></li>
               </ul>
             </li>
           </ul>
@@ -1431,8 +1431,8 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong><span class="notranslate">RNA</span>Seq samples quality check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="highlighter-rouge">Build <span class="notranslate">expression</span> matrix: estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code></li>
-        <li><em>“Samples description”</em>: <code class="highlighter-rouge">Describe samples</code></li>
+        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="language-plaintext highlighter-rouge">Build <span class="notranslate">expression</span> matrix: estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code></li>
+        <li><em>“Samples description”</em>: <code class="language-plaintext highlighter-rouge">Describe samples</code></li>
       </ul>
     </li>
   </ol>
@@ -1446,9 +1446,9 @@ Note that the dataset are just hidden. You can delete them permanently and make 
   <ol>
     <li><strong>Differential <span class="notranslate">expression</span> analysis</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="highlighter-rouge">Build <span class="notranslate">expression</span> matrix: estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code></li>
-        <li><em>“Sample description”</em>: <code class="highlighter-rouge">Describe samples</code> (the last one)</li>
-        <li><em>“Differential analysis method”</em>: <code class="highlighter-rouge">DESeq2</code></li>
+        <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="language-plaintext highlighter-rouge">Build <span class="notranslate">expression</span> matrix: estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code></li>
+        <li><em>“Sample description”</em>: <code class="language-plaintext highlighter-rouge">Describe samples</code> (the last one)</li>
+        <li><em>“Differential analysis method”</em>: <code class="language-plaintext highlighter-rouge">DESeq2</code></li>
       </ul>
     </li>
   </ol>
@@ -1465,11 +1465,11 @@ Note that the dataset are just hidden. You can delete them permanently and make 
       <ul>
         <li>In <em>“Additional Options”</em>:
           <ul>
-            <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="highlighter-rouge">Build <span class="notranslate">expression</span> matrix: estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code></li>
-            <li><em>“Sample description”</em>: <code class="highlighter-rouge">Describe samples</code></li>
-            <li><em>“Differential <span class="notranslate">expression</span> results”</em>: <code class="highlighter-rouge">Differential <span class="notranslate">expression</span> results on data XXX and data XXX</code></li>
-            <li><em>“p-value cutoff for FDR”</em>: <code class="highlighter-rouge">1</code></li>
-            <li><em>“Run GO enrichment analysis”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“<span class="notranslate">Expression</span> matrix”</em>: <code class="language-plaintext highlighter-rouge">Build <span class="notranslate">expression</span> matrix: estimated <span class="notranslate">RNA</span>-Seq fragment isoform counts (raw counts)</code></li>
+            <li><em>“Sample description”</em>: <code class="language-plaintext highlighter-rouge">Describe samples</code></li>
+            <li><em>“Differential <span class="notranslate">expression</span> results”</em>: <code class="language-plaintext highlighter-rouge">Differential <span class="notranslate">expression</span> results on data XXX and data XXX</code></li>
+            <li><em>“p-value cutoff for FDR”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><em>“Run GO enrichment analysis”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
@@ -1477,8 +1477,8 @@ Note that the dataset are just hidden. You can delete them permanently and make 
       <blockquote class="comment">
         <h3 id="comment-comment-8"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p><em>“p-value cutoff for FDR”</em>: <code class="highlighter-rouge">1</code>
-Don’t do this at home! It’s because we have a Toy Dataset. The cutoff should be around <code class="highlighter-rouge">0.001</code></p>
+        <p><em>“p-value cutoff for FDR”</em>: <code class="language-plaintext highlighter-rouge">1</code>
+Don’t do this at home! It’s because we have a Toy Dataset. The cutoff should be around <code class="language-plaintext highlighter-rouge">0.001</code></p>
       </blockquote>
     </li>
   </ol>
@@ -1493,8 +1493,8 @@ Don’t do this at home! It’s because we have a Toy Dataset. The cutoff should
   <ol>
     <li><strong>Partition genes into <span class="notranslate">expression</span> clusters</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">Extract and cluster differentially expressed transcripts: RData file</code></li>
-        <li><em>“Method for partitioning genes into clusters”</em>: <code class="highlighter-rouge">Cut tree based on x percent of max(height) of tree</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">Extract and cluster differentially expressed transcripts: RData file</code></li>
+        <li><em>“Method for partitioning genes into clusters”</em>: <code class="language-plaintext highlighter-rouge">Cut tree based on x percent of max(height) of tree</code></li>
       </ul>
     </li>
   </ol>

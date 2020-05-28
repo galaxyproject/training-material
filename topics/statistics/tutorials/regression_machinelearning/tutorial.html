@@ -597,9 +597,9 @@ It has been recognized that <span class="notranslate">DNA</span> methylation ana
 <h2 id="get-training-and-test-datasets">Get training and test datasets</h2>
 
 <p>Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. 
-The datasets from this study contain features (present as columns). The last column in the dataset refers to <code class="highlighter-rouge">Age</code>, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a <span class="notranslate">mapping</span> between these input features and targets.</p>
+The datasets from this study contain features (present as columns). The last column in the dataset refers to <code class="language-plaintext highlighter-rouge">Age</code>, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a <span class="notranslate">mapping</span> between these input features and targets.</p>
 
-<p>We proceed with the analysis by uploading new datasets and creating a new history. The training set contains <code class="highlighter-rouge">208</code> rows corresponding to individual samples and <code class="highlighter-rouge">13</code> features (age-correlated CpG sites in <span class="notranslate">DNA</span> methylation dataset). The last column is <code class="highlighter-rouge">Age</code>. The test set contains <code class="highlighter-rouge">104</code> rows and the same number of features as the training set. The <code class="highlighter-rouge">Age</code> column in the test set is predicted after training on the training set. Another dataset <code class="highlighter-rouge">test_rows_labels</code> contains the true age values of the test set which is used to compute scores between true and predicted age.</p>
+<p>We proceed with the analysis by uploading new datasets and creating a new history. The training set contains <code class="language-plaintext highlighter-rouge">208</code> rows corresponding to individual samples and <code class="language-plaintext highlighter-rouge">13</code> features (age-correlated CpG sites in <span class="notranslate">DNA</span> methylation dataset). The last column is <code class="language-plaintext highlighter-rouge">Age</code>. The test set contains <code class="language-plaintext highlighter-rouge">104</code> rows and the same number of features as the training set. The <code class="language-plaintext highlighter-rouge">Age</code> column in the test set is predicted after training on the training set. Another dataset <code class="language-plaintext highlighter-rouge">test_rows_labels</code> contains the true age values of the test set which is used to compute scores between true and predicted age.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -609,7 +609,7 @@ The datasets from this study contain features (present as columns). The last col
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/2545213#.XEWTJ9-YVa0">Zenodo</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2545213/files/train_rows.csv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2545213/files/train_rows.csv
 https://zenodo.org/record/2545213/files/test_rows_labels.csv
 https://zenodo.org/record/2545213/files/test_rows.csv
 </code></pre></div>      </div>
@@ -638,7 +638,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
       </blockquote>
     </li>
     <li>
-      <p>Rename the datasets as <code class="highlighter-rouge">train_rows</code>, <code class="highlighter-rouge">test_rows_labels</code> and <code class="highlighter-rouge">test_rows</code> respectively.</p>
+      <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">train_rows</code>, <code class="language-plaintext highlighter-rouge">test_rows_labels</code> and <code class="language-plaintext highlighter-rouge">test_rows</code> respectively.</p>
 
       <blockquote class="tip">
 
@@ -651,7 +651,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
       </blockquote>
     </li>
     <li>
-      <p>Check that the datatype of all the three datasets is <code class="highlighter-rouge">tabular</code>.</p>
+      <p>Check that the datatype of all the three datasets is <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <blockquote class="tip">
 
@@ -659,7 +659,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -668,7 +668,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 
 </blockquote>
 
-<p class="comment">The <code class="highlighter-rouge">train_rows</code> contains a column <code class="highlighter-rouge">Age</code> which is the label or target. We will evaluate our model on <code class="highlighter-rouge">test_rows</code> and compare the predicted age with the true age in <code class="highlighter-rouge">test_rows_labels</code></p>
+<p class="comment">The <code class="language-plaintext highlighter-rouge">train_rows</code> contains a column <code class="language-plaintext highlighter-rouge">Age</code> which is the label or target. We will evaluate our model on <code class="language-plaintext highlighter-rouge">test_rows</code> and compare the predicted age with the true age in <code class="language-plaintext highlighter-rouge">test_rows_labels</code></p>
 
 <blockquote class="details">
   <h3 id="details-test-train-data-splitting-data-within-galaxy"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Test-train data splitting data within <span class="notranslate">Galaxy</span></h3>
@@ -688,24 +688,24 @@ https://zenodo.org/record/2545213/files/test_rows.csv
   <ol>
     <li><strong>Generalized linear models for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Select a linear method”</em>: <code class="highlighter-rouge">Linear Regression model</code>
+            <li><em>“Select a linear method”</em>: <code class="language-plaintext highlighter-rouge">Linear Regression model</code>
               <ul>
-                <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+                <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Age</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Age</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels or target values”</em>: <code class="highlighter-rouge">train_rows</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels or target values”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Age</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Age</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -716,7 +716,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">LinearRegression_model</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">LinearRegression_model</code></li>
   </ol>
 </blockquote>
 
@@ -738,7 +738,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 
 <p>After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the model created by the learning algorithm from the training dataset is good or not. This model is used to predict a new sample and a similar accuracy is expected.</p>
 
-<p>Now, we will predict age in the test dataset using this model in order to see if the model has learned important features which can be generalized on a new dataset. The test dataset (<code class="highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="highlighter-rouge">Age</code> column; the age will instead be predicted using the trained model.</p>
+<p>Now, we will predict age in the test dataset using this model in order to see if the model has learned important features which can be generalized on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="language-plaintext highlighter-rouge">Age</code> column; the age will instead be predicted using the trained model.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-targets-using-the-model"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict targets using the model</h3>
@@ -746,23 +746,23 @@ https://zenodo.org/record/2545213/files/test_rows.csv
   <ol>
     <li><strong>Generalized linear models for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">LinearRegression_model</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">LinearRegression_model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">predicted_data_linear</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">predicted_data_linear</code></li>
   </ol>
 </blockquote>
 
 <h2 id="visualize-the-prediction">Visualize the prediction</h2>
 
-<p>We will evaluate the predictions by comparing them to the expected targets. In the previous step, we generated predictions for the test dataset (<code class="highlighter-rouge">predicted_data_linear</code>). We have one more dataset (<code class="highlighter-rouge">test_rows_labels</code>) which contains the true age values of the test set. Using the true and predicted values of age in the test set, we will verify the performance by analyzing the plots. As you can see, <code class="highlighter-rouge">predicted_data_linear</code> has no header, so first we need to remove the header from <code class="highlighter-rouge">test_rows_labels</code> to perform the comparison.</p>
+<p>We will evaluate the predictions by comparing them to the expected targets. In the previous step, we generated predictions for the test dataset (<code class="language-plaintext highlighter-rouge">predicted_data_linear</code>). We have one more dataset (<code class="language-plaintext highlighter-rouge">test_rows_labels</code>) which contains the true age values of the test set. Using the true and predicted values of age in the test set, we will verify the performance by analyzing the plots. As you can see, <code class="language-plaintext highlighter-rouge">predicted_data_linear</code> has no header, so first we need to remove the header from <code class="language-plaintext highlighter-rouge">test_rows_labels</code> to perform the comparison.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-the-header"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove the header</h3>
@@ -770,11 +770,11 @@ https://zenodo.org/record/2545213/files/test_rows.csv
   <ol>
     <li><strong>Remove beginning of a file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Remove first”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="highlighter-rouge">test_rows_labels</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code></li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">test_rows_labels_without_header</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">test_rows_labels_without_header</code></li>
   </ol>
 </blockquote>
 
@@ -785,8 +785,8 @@ https://zenodo.org/record/2545213/files/test_rows.csv
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the predictions:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="highlighter-rouge">test_rows_labels_without_header.csv</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="highlighter-rouge">predicted_data_linear</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels_without_header.csv</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">predicted_data_linear</code></li>
       </ul>
     </li>
   </ol>
@@ -801,7 +801,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
     <figure id="figure-5"><img src="images/true_pred_curves.png" alt="true_predicted" /><figcaption><span class="figcaption-prefix">Figure 5:</span> True vs predicted targets curves. </figcaption></figure>
   </li>
   <li>
-    <p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5">Scatter plot</a> for true vs. predicted targets: We can see in the scatter plot (figure <a href="#figure-6">6</a>) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (<code class="highlighter-rouge">RMSE</code>) is <code class="highlighter-rouge">4.1</code> and the R2 score is <code class="highlighter-rouge">0.93</code>.</p>
+    <p><a href="https://towardsdatascience.com/everything-you-need-to-know-about-scatter-plots-for-data-visualisation-924144c0bc5">Scatter plot</a> for true vs. predicted targets: We can see in the scatter plot (figure <a href="#figure-6">6</a>) that most of the points lie along the x=y curve. It means that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">4.1</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.93</code>.</p>
 
     <figure id="figure-6"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatter plot for true vs. predicted targets.</figcaption></figure>
   </li>
@@ -809,7 +809,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 
 <blockquote class="details">
   <h3 id="details-r2-coefficient-of-determination"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> R2 (coefficient of determination)</h3>
-  <p>In both the parts, learning on datasets is done using cross-validation and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-7">7</a> and <a href="#figure-8">8</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-7">7</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="highlighter-rouge">-0.06</code>. On the other hand, figure <a href="#figure-8">8</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="highlighter-rouge">1.0</code>. For <span class="notranslate">RNA</span>-seq dataset, we will compute the cross-validated R2 score using the training set and for <span class="notranslate">DNA</span> methylation dataset, we will compute the R2 score for the test set.</p>
+  <p>In both the parts, learning on datasets is done using cross-validation and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-7">7</a> and <a href="#figure-8">8</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-7">7</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. On the other hand, figure <a href="#figure-8">8</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For <span class="notranslate">RNA</span>-seq dataset, we will compute the cross-validated R2 score using the training set and for <span class="notranslate">DNA</span> methylation dataset, we will compute the R2 score for the test set.</p>
 
   <figure id="figure-7"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad" /><figcaption><span class="figcaption-prefix">Figure 7:</span> This shows an example of a bad model as most of the points are scattered.</figcaption></figure>
 
@@ -866,24 +866,24 @@ https://zenodo.org/record/2545213/files/test_rows.csv
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Select an ensemble method”</em>: <code class="highlighter-rouge">Gradient Boosting Regressor</code>
+            <li><em>“Select an ensemble method”</em>: <code class="language-plaintext highlighter-rouge">Gradient Boosting Regressor</code>
               <ul>
-                <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+                <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Age</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Age</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels or target values”</em>: <code class="highlighter-rouge">train_rows</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels or target values”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Age</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Age</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -894,7 +894,7 @@ https://zenodo.org/record/2545213/files/test_rows.csv
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">gradient_boosting_model</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">gradient_boosting_model</code></li>
   </ol>
 </blockquote>
 
@@ -922,17 +922,17 @@ These attributes are used to predict the target for a new sample and are stored 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">gradient_boosting_model</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">gradient_boosting_model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">predicted_data_gradient_boosting</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">predicted_data_gradient_boosting</code></li>
   </ol>
 </blockquote>
 
@@ -942,8 +942,8 @@ These attributes are used to predict the target for a new sample and are stored 
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the predictions:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="highlighter-rouge">test_rows_labels</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="highlighter-rouge">predicted_data_gradient_boosting</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">predicted_data_gradient_boosting</code></li>
       </ul>
     </li>
   </ol>
@@ -955,7 +955,7 @@ These attributes are used to predict the target for a new sample and are stored 
 
 <h2 id="create-data-processing-pipeline">Create data processing pipeline</h2>
 
-<p>In the final step, we will create a pipeline learner with the <strong>Pipeline builder</strong> tool but this time, we just specify the regressor. The <strong>Pipeline builder</strong> tool will wrap this regressor and return a zip file. By choosing <code class="highlighter-rouge">Yes</code> from the boolean option, tunable hyperparameters will be output in a separate file.</p>
+<p>In the final step, we will create a pipeline learner with the <strong>Pipeline builder</strong> tool but this time, we just specify the regressor. The <strong>Pipeline builder</strong> tool will wrap this regressor and return a zip file. By choosing <code class="language-plaintext highlighter-rouge">Yes</code> from the boolean option, tunable hyperparameters will be output in a separate file.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-pipeline"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create pipeline</h3>
@@ -965,16 +965,16 @@ These attributes are used to predict the target for a new sample and are stored 
       <ul>
         <li>In <em>“Final Estimator”</em>:
           <ul>
-            <li><em>“Choose the module that contains target estimator”</em>: <code class="highlighter-rouge">sklearn.ensemble</code>
+            <li><em>“Choose the module that contains target estimator”</em>: <code class="language-plaintext highlighter-rouge">sklearn.ensemble</code>
               <ul>
-                <li><em>“Choose estimator class”</em>: <code class="highlighter-rouge">GradientBoostingRegressor</code></li>
-                <li><em>“Type in parameter settings if different from default”</em>: <code class="highlighter-rouge">random_state=42</code></li>
+                <li><em>“Choose estimator class”</em>: <code class="language-plaintext highlighter-rouge">GradientBoostingRegressor</code></li>
+                <li><em>“Type in parameter settings if different from default”</em>: <code class="language-plaintext highlighter-rouge">random_state=42</code></li>
               </ul>
             </li>
-            <li>In <em>“Output parameters for searchCV?”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li>In <em>“Output parameters for searchCV?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
 
-          <p><code class="highlighter-rouge">random_state</code> could be set to any arbitrary integer number; its purpose is to ensure a determistic and therefore reproducible result.</p>
+          <p><code class="language-plaintext highlighter-rouge">random_state</code> could be set to any arbitrary integer number; its purpose is to ensure a determistic and therefore reproducible result.</p>
         </li>
       </ul>
     </li>
@@ -984,12 +984,12 @@ These attributes are used to predict the target for a new sample and are stored 
 
 <h3 id="search-for-the-best-values-of-hyperparameters">Search for the best values of hyperparameters</h3>
 
-<p>After the <strong>New Pipeline/Estimator</strong> dataset and its tunable hyperparameters are produced by the <strong>Pipeline builder</strong> tool, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter <code class="highlighter-rouge">n_estimators</code> of <code class="highlighter-rouge">Gradient boosting</code> regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of <code class="highlighter-rouge">n_estimators</code> for this regressor is <code class="highlighter-rouge">100</code>. However, we are not sure if this gives the best accuracy. Therefore, it is important to try setting this parameter to different values to find the optimal one. We choose some values which are less than <code class="highlighter-rouge">100</code> and a few more than <code class="highlighter-rouge">100</code>. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.</p>
+<p>After the <strong>New Pipeline/Estimator</strong> dataset and its tunable hyperparameters are produced by the <strong>Pipeline builder</strong> tool, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter <code class="language-plaintext highlighter-rouge">n_estimators</code> of <code class="language-plaintext highlighter-rouge">Gradient boosting</code> regressor for this task. This parameter specifies the number of boosting stages the learning process has to go through. The default value of <code class="language-plaintext highlighter-rouge">n_estimators</code> for this regressor is <code class="language-plaintext highlighter-rouge">100</code>. However, we are not sure if this gives the best accuracy. Therefore, it is important to try setting this parameter to different values to find the optimal one. We choose some values which are less than <code class="language-plaintext highlighter-rouge">100</code> and a few more than <code class="language-plaintext highlighter-rouge">100</code>. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to predict age in the test dataset.</p>
 
 <blockquote class="details">
   <h3 id="details-5-fold-cross-validation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> 5-fold cross-validation</h3>
 
-  <p>This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into <code class="highlighter-rouge">5</code> folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-3">3</a>. The complete dataset is divided into <code class="highlighter-rouge">5</code> equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for <code class="highlighter-rouge">5</code> folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="highlighter-rouge">5</code> folds.</p>
+  <p>This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure <a href="#figure-3">3</a>. The complete dataset is divided into <code class="language-plaintext highlighter-rouge">5</code> equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for <code class="language-plaintext highlighter-rouge">5</code> folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over <code class="language-plaintext highlighter-rouge">5</code> folds.</p>
 
   <figure id="figure-12"><img src="../../images/age-prediction-with-ml/5fold_cv.png" alt="5fold_cv" /><figcaption><span class="figcaption-prefix">Figure 12:</span> 5-fold cross validation. </figcaption></figure>
   <p>The image demonstrates how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.</p>
@@ -1002,19 +1002,19 @@ These attributes are used to predict the target for a new sample and are stored 
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select a model selection search scheme”</em>: <code class="highlighter-rouge">GridSearchCV - Exhaustive search over specified parameter values for an estimator </code>
+        <li><em>“Select a model selection search scheme”</em>: <code class="language-plaintext highlighter-rouge">GridSearchCV - Exhaustive search over specified parameter values for an estimator </code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">zipped</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><em>“Is the estimator a deep learning model?”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="language-plaintext highlighter-rouge">zipped</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Is the estimator a deep learning model?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>In <em>“Search parameters Builder”</em>:
               <ul>
-                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="highlighter-rouge">tabular</code> file (the other output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="language-plaintext highlighter-rouge">tabular</code> file (the other output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 <li>In <em>“Parameter settings for search”</em>:
                   <ul>
                     <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Parameter settings for search”</em>
                       <ul>
-                        <li><em>“Choose a parameter name (with current value)”</em>: <code class="highlighter-rouge">n_estimators: 100</code></li>
-                        <li><em>“Search list”</em>: <code class="highlighter-rouge">[25, 50, 75, 100, 200]</code></li>
+                        <li><em>“Choose a parameter name (with current value)”</em>: <code class="language-plaintext highlighter-rouge">n_estimators: 100</code></li>
+                        <li><em>“Search list”</em>: <code class="language-plaintext highlighter-rouge">[25, 50, 75, 100, 200]</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1024,54 +1024,54 @@ These attributes are used to predict the target for a new sample and are stored 
             <li>In <em>“Advanced Options for SearchCV”</em>:
               <ul>
                 <li>
-                  <p><em>“Select the primary metric (scoring)”</em>: <code class="highlighter-rouge">Regression -- 'r2'</code></p>
+                  <p><em>“Select the primary metric (scoring)”</em>: <code class="language-plaintext highlighter-rouge">Regression -- 'r2'</code></p>
 
-                  <p>A scoring metric can be set. In this tutorial, we use <code class="highlighter-rouge">Regression -- 'r2'</code></p>
+                  <p>A scoring metric can be set. In this tutorial, we use <code class="language-plaintext highlighter-rouge">Regression -- 'r2'</code></p>
                 </li>
                 <li>
-                  <p><em>“Select the cv splitter”</em>: <code class="highlighter-rouge">KFold</code></p>
+                  <p><em>“Select the cv splitter”</em>: <code class="language-plaintext highlighter-rouge">KFold</code></p>
 
-                  <p>There are different ways to split the dataset into training and validation sets. In our tutorial, we will use <code class="highlighter-rouge">KFold</code> which splits the dataset into <code class="highlighter-rouge">K</code> consecutive parts. It is used for cross-validation. It is set to <code class="highlighter-rouge">5</code> using another parameter <code class="highlighter-rouge">n_splits</code>.</p>
+                  <p>There are different ways to split the dataset into training and validation sets. In our tutorial, we will use <code class="language-plaintext highlighter-rouge">KFold</code> which splits the dataset into <code class="language-plaintext highlighter-rouge">K</code> consecutive parts. It is used for cross-validation. It is set to <code class="language-plaintext highlighter-rouge">5</code> using another parameter <code class="language-plaintext highlighter-rouge">n_splits</code>.</p>
 
                   <ul>
-                    <li><em>“n_splits”</em>: <code class="highlighter-rouge">5</code></li>
-                    <li><em>“Whether to shuffle data before splitting”</em>: <code class="highlighter-rouge">Yes</code></li>
+                    <li><em>“n_splits”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                    <li><em>“Whether to shuffle data before splitting”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                     <li>
-                      <p><em>“Random seed number”</em>: <code class="highlighter-rouge">3111696</code></p>
+                      <p><em>“Random seed number”</em>: <code class="language-plaintext highlighter-rouge">3111696</code></p>
 
-                      <p>It is set to an integer and used to retain the randomness/accuracy when <em>“Whether to shuffle data before splitting”</em> is <code class="highlighter-rouge">Yes</code> across successive experiments.</p>
+                      <p>It is set to an integer and used to retain the randomness/accuracy when <em>“Whether to shuffle data before splitting”</em> is <code class="language-plaintext highlighter-rouge">Yes</code> across successive experiments.</p>
                     </li>
                   </ul>
                 </li>
                 <li>
-                  <p><em>“Raise fit error”</em>: <code class="highlighter-rouge">No</code></p>
+                  <p><em>“Raise fit error”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
 
-                  <p>While setting different values for a parameter during hyperparameter search, it can happen that wrong values are set, which may generate an error. To avoid stopping the execution of a regressor, it is set to <code class="highlighter-rouge">No</code> which means even if a wrong parameter value is encountered, the regressor does not stop running and simply skips that value.</p>
+                  <p>While setting different values for a parameter during hyperparameter search, it can happen that wrong values are set, which may generate an error. To avoid stopping the execution of a regressor, it is set to <code class="language-plaintext highlighter-rouge">No</code> which means even if a wrong parameter value is encountered, the regressor does not stop running and simply skips that value.</p>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+        <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows</code> tabular file</li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code> tabular file</li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
               <ul>
-                <li><em>“Type header name(s)”</em>: <code class="highlighter-rouge">Age</code></li>
+                <li><em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Age</code></li>
               </ul>
             </li>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Dataset containing class labels or target values”</em>: <code class="highlighter-rouge">train_rows</code> tabular file</li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Dataset containing class labels or target values”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code> tabular file</li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
               <ul>
-                <li><em>“Type header name(s)”</em>: <code class="highlighter-rouge">Age</code></li>
+                <li><em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Age</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Whether to hold a portion of samples for test exclusively?”</em>: <code class="highlighter-rouge">Nope</code></li>
-        <li><em>“Save best estimator?”</em>: <code class="highlighter-rouge">Fitted best estimator or Detailed cv_results_ from nested CV</code></li>
+        <li><em>“Whether to hold a portion of samples for test exclusively?”</em>: <code class="language-plaintext highlighter-rouge">Nope</code></li>
+        <li><em>“Save best estimator?”</em>: <code class="language-plaintext highlighter-rouge">Fitted best estimator or Detailed cv_results_ from nested CV</code></li>
       </ul>
     </li>
   </ol>
@@ -1083,13 +1083,13 @@ These attributes are used to predict the target for a new sample and are stored 
 
   <p>What is the optimal number of estimators for the given dataset?</p>
 
-  <p>Hint: Please look at the <code class="highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
+  <p>Hint: Please look at the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>(Even though the default value of the number of estimators for the gradient boosting regressor is <code class="highlighter-rouge">100</code>, <code class="highlighter-rouge">75</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.</li>
+      <li>(Even though the default value of the number of estimators for the gradient boosting regressor is <code class="language-plaintext highlighter-rouge">100</code>, <code class="language-plaintext highlighter-rouge">75</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset). 50 estimators also give almost the same accuracy.</li>
     </ol>
 
   </blockquote>
@@ -1104,11 +1104,11 @@ These attributes are used to predict the target for a new sample and are stored 
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Models”</em>: <code class="highlighter-rouge">zipped</code> file (output of <strong>Hyperparameter search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows</code> tabular file</li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">zipped</code> file (output of <strong>Hyperparameter search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows</code> tabular file</li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1125,8 +1125,8 @@ These attributes are used to predict the target for a new sample and are stored 
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots of tabular data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select input data file”</em>: <code class="highlighter-rouge">test_rows_labels</code> tabular file</li>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select predicted data file”</em>: <code class="highlighter-rouge">tabular</code> file (output of <strong>Ensemble methods for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code> tabular file</li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">tabular</code> file (output of <strong>Ensemble methods for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
   </ol>
@@ -1147,7 +1147,7 @@ These attributes are used to predict the target for a new sample and are stored 
 
 <figure id="figure-13"><img src="../../images/age-prediction-with-ml/scatter_plot.png" alt="Scatter plot" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Scatter plot for true and predicted age for test set using hyperparameter search. </figcaption></figure>
 
-<p>We can see in the scatter plot (figure <a href="#figure-13">13</a>) that most of the points lie along the <code class="highlighter-rouge">x = y</code> curve. This tells us that the true and predicted ages are close to each other. The root mean square error (<code class="highlighter-rouge">RMSE</code>) is <code class="highlighter-rouge">3.74</code> and the R2 score is <code class="highlighter-rouge">0.94</code>.</p>
+<p>We can see in the scatter plot (figure <a href="#figure-13">13</a>) that most of the points lie along the <code class="language-plaintext highlighter-rouge">x = y</code> curve. This tells us that the true and predicted ages are close to each other. The root mean square error (<code class="language-plaintext highlighter-rouge">RMSE</code>) is <code class="language-plaintext highlighter-rouge">3.74</code> and the R2 score is <code class="language-plaintext highlighter-rouge">0.94</code>.</p>
 
 <figure id="figure-14"><img src="../../images/age-prediction-with-ml/residual_plot.png" alt="Residuals" /><figcaption><span class="figcaption-prefix">Figure 14:</span> The plot shows the residuals (predicted age - true) age against the predicted age.</figcaption></figure>
 
@@ -1156,7 +1156,7 @@ These attributes are used to predict the target for a new sample and are stored 
 <figure id="figure-15"><img src="../../images/age-prediction-with-ml/true_vs_predicted_plot.png" alt="True vs predicted age" /><figcaption><span class="figcaption-prefix">Figure 15:</span> True vs predicted age for all the samples in the test set. </figcaption></figure>
 <p>We can see that the predicted values are close to the true values.</p>
 
-<p>Figure <a href="#figure-13">13</a> shows that we achieved an R2 score of <code class="highlighter-rouge">0.94</code> and root mean square score of <code class="highlighter-rouge">3.74</code> for the test set using Gradient boosting regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> mention a similar root mean square score (<code class="highlighter-rouge">3.93</code>) using the random forest regressor. The root mean square score shows the difference between the true and predicted age of humans. The R2 score (<code class="highlighter-rouge">0.94</code>) is close to the best achievable score of <code class="highlighter-rouge">1.0</code> which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in <span class="notranslate">Galaxy</span>, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.</p>
+<p>Figure <a href="#figure-13">13</a> shows that we achieved an R2 score of <code class="language-plaintext highlighter-rouge">0.94</code> and root mean square score of <code class="language-plaintext highlighter-rouge">3.74</code> for the test set using Gradient boosting regressor. <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a> mention a similar root mean square score (<code class="language-plaintext highlighter-rouge">3.93</code>) using the random forest regressor. The root mean square score shows the difference between the true and predicted age of humans. The R2 score (<code class="language-plaintext highlighter-rouge">0.94</code>) is close to the best achievable score of <code class="language-plaintext highlighter-rouge">1.0</code> which shows that the trained model is good. Overall, the second part of the analysis also shows that using the machine learning tools in <span class="notranslate">Galaxy</span>, we can achieve state-of-the-art predictions mentioned in the recent scientific studies.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 <p>By following these steps, we learned how to perform regression and visualize the predictions using <span class="notranslate">Galaxy</span>’s machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This <span class="notranslate">mapping</span> is used to make predictions on an unseen (test) dataset. 

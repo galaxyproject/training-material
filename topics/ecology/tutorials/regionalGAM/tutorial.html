@@ -566,7 +566,7 @@
 
   <ol>
     <li>
-      <p>Create a new history for this tutorial and give it a proper name like <code class="highlighter-rouge">regionalGAM tutorial</code></p>
+      <p>Create a new history for this tutorial and give it a proper name like <code class="language-plaintext highlighter-rouge">regionalGAM tutorial</code></p>
 
       <blockquote class="tip">
 
@@ -595,7 +595,7 @@
     <li>
       <p>Import the CSV dataset file with only one species from <a href="https://zenodo.org/record/1324204#.W2BmRn7fNE4">Zenodo</a> or from the data library (ask your instructor)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324204/files/regional%20GAM%20data.csv
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -642,7 +642,7 @@
       </blockquote>
     </li>
     <li>
-      <p>Check that the file contains a header corresponding to: <code class="highlighter-rouge">"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"</code>, and that all the non numeric content are between double quotes as “x” and that separators are “,”</p>
+      <p>Check that the file contains a header corresponding to: <code class="language-plaintext highlighter-rouge">"SPECIES","SITE","YEAR","MONTH","DAY","COUNT"</code>, and that all the non numeric content are between double quotes as “x” and that separators are “,”</p>
     </li>
   </ol>
 
@@ -654,7 +654,7 @@
 
 <h2 id="prepare-the-data">Prepare the data</h2>
 
-<p>The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header <code class="highlighter-rouge">SITE</code> of the dataset you are using is really long and the <code class="highlighter-rouge">SITES</code> are classified into sub-sites (like <code class="highlighter-rouge">ESBMS.12</code>, <code class="highlighter-rouge">ESBMS.28</code>, <code class="highlighter-rouge">ESBMS.55</code>, etc).</p>
+<p>The current dataset contains a lot of data (exact site names for 5 butterfly monitoring scheme). Processing the file in this condition would require time and for the purpose of this tutorial, we will reduce the number of sites. The column with header <code class="language-plaintext highlighter-rouge">SITE</code> of the dataset you are using is really long and the <code class="language-plaintext highlighter-rouge">SITES</code> are classified into sub-sites (like <code class="language-plaintext highlighter-rouge">ESBMS.12</code>, <code class="language-plaintext highlighter-rouge">ESBMS.28</code>, <code class="language-plaintext highlighter-rouge">ESBMS.55</code>, etc).</p>
 
 <p>Here, we will only keep the sites that are in the Netherlands (NLBMS.XX). We want to create a down-sampled file, by selecting the lines where NLBMS is found.</p>
 
@@ -667,7 +667,7 @@
         <li>
           <p><em>“AWK Program”</em>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> NR == 1 { print }
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> NR == 1 { print }
  /NLBMS/ { print }
 </code></pre></div>          </div>
         </li>
@@ -715,7 +715,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
 
         <p>For example, you can upload:</p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1324204/files/gatekeeper_CM%20.RData
 </code></pre></div>        </div>
       </li>
       <li><strong>RData binary file reader</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -728,13 +728,13 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
           <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Rdata file to explore”</em>: imported RData</li>
           <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File with .Rdata content details”</em>: output of <strong>RData binary file reader</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
           <li><em>“Select which attribute(s) you want to extract”</em>: select everything but “trend”</li>
-          <li><em>“Bind variables in a single tabular when its possible”</em>: <code class="highlighter-rouge">Yes</code></li>
+          <li><em>“Bind variables in a single tabular when its possible”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         </ul>
       </li>
     </ol>
   </blockquote>
 
-  <p>If the tool <strong>RData parser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> don’t succeed to create a single tabular file, it generates separate files, each of them containing one column. The file with the <code class="highlighter-rouge">TREND</code> header can be let aside as we don’t need it for what will follow.</p>
+  <p>If the tool <strong>RData parser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> don’t succeed to create a single tabular file, it generates separate files, each of them containing one column. The file with the <code class="language-plaintext highlighter-rouge">TREND</code> header can be let aside as we don’t need it for what will follow.</p>
 
   <blockquote class="question">
     <h3 id="question-questions-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -753,10 +753,10 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
         </li>
         <li>Repeat <strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> executions as many times as there are separated files in order to create a final dataset with all the columns:
           <ol>
-            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 2 columns with the one headed by <code class="highlighter-rouge">YEAR</code></li>
-            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 3 columns with the one headed by <code class="highlighter-rouge">MONTH</code></li>
-            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 4 columns with the one headed by <code class="highlighter-rouge">DAY</code></li>
-            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 5 columns with the one headed by <code class="highlighter-rouge">COUNT</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 2 columns with the one headed by <code class="language-plaintext highlighter-rouge">YEAR</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 3 columns with the one headed by <code class="language-plaintext highlighter-rouge">MONTH</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 4 columns with the one headed by <code class="language-plaintext highlighter-rouge">DAY</code></li>
+            <li>Repeat <strong>Paste two files side by side tool</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to paste the file containing 5 columns with the one headed by <code class="language-plaintext highlighter-rouge">COUNT</code></li>
           </ol>
         </li>
       </ol>
@@ -777,9 +777,9 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
     <li><strong>Count occurrences of each record</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: output of <strong>Text reformatting with awk</strong></li>
-        <li><em>“Count occurrences of values in column(s)”</em>: <code class="highlighter-rouge">Column: 1</code>, the <code class="highlighter-rouge">SPECIES</code> column</li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
-        <li><em>“How should the results be sorted?”</em>: <code class="highlighter-rouge">With the most common values first</code></li>
+        <li><em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code>, the <code class="language-plaintext highlighter-rouge">SPECIES</code> column</li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">With the most common values first</code></li>
       </ul>
     </li>
     <li>Inspect the generated file by clicking on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon (<strong>View data</strong>)</li>
@@ -796,7 +796,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
 
   <p>To test these steps, you can use the following dataset:</p>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  https://zenodo.org/record/1324204/files/Dataset%20multispecies%20Regional%20GAM.csv
 </code></pre></div>  </div>
 
   <blockquote class="question">
@@ -827,13 +827,13 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
       <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
         <ul>
           <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of <strong>Text reformatting with awk</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-          <li><em>“With following condition”</em>: <code class="highlighter-rouge">c1=='"Aglais io"'</code> or (another species name)</li>
-          <li><em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+          <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1=='"Aglais io"'</code> or (another species name)</li>
+          <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         </ul>
 
         <p>You can repeat this set of actions as much as necessary, changing only the name of the species taken into account. By doing this, you will obtain separated dataset, each of them containing a different species.</p>
       </li>
-      <li>Repeat the last step on all the different <code class="highlighter-rouge">outputs</code> from <strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that you have, one by species</li>
+      <li>Repeat the last step on all the different <code class="language-plaintext highlighter-rouge">outputs</code> from <strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> that you have, one by species</li>
       <li>Tag your new dataset with an explicit tags as “Count” and “Aglais io” and/or rename this dataset like “Aglais io count file”.</li>
     </ol>
   </blockquote>
@@ -862,20 +862,20 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
         <li>Inspect and expand the output data from <strong>Flight curve</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>Click on the <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> (<strong>Visualize</strong>) icon</li>
         <li>Select <strong>Line chart (NVD3)</strong> as visualization type</li>
-        <li>Give it a proper name, e.g. <code class="highlighter-rouge">Pyronia tithonus phenology raw simple vizu</code></li>
+        <li>Give it a proper name, e.g. <code class="language-plaintext highlighter-rouge">Pyronia tithonus phenology raw simple vizu</code></li>
         <li>On <strong>Select data</strong> area, specify:
           <ul>
-            <li><em>“Provide a label”</em>: <code class="highlighter-rouge">Pyronia tithonus phenology from 2003 to 2012</code> for example</li>
+            <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">Pyronia tithonus phenology from 2003 to 2012</code> for example</li>
             <li><em>“Pick a series color”</em>: Choose a color for the line</li>
-            <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column 1</code></li>
-            <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column 2</code></li>
-            <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column 6</code></li>
+            <li><em>“Data point labels”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code></li>
+            <li><em>“Values for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+            <li><em>“Values for y-axis”</em>: <code class="language-plaintext highlighter-rouge">Column 6</code></li>
           </ul>
         </li>
         <li>On <strong>Change settings</strong>, specify:
           <ul>
-            <li><em>“X-Axis label”</em>: <code class="highlighter-rouge">Year</code></li>
-            <li><em>“Y-Axis label”</em>: <code class="highlighter-rouge">nm values</code></li>
+            <li><em>“X-Axis label”</em>: <code class="language-plaintext highlighter-rouge">Year</code></li>
+            <li><em>“Y-Axis label”</em>: <code class="language-plaintext highlighter-rouge">nm values</code></li>
           </ul>
         </li>
         <li>Click on <strong>Save</strong></li>
@@ -895,9 +895,9 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
     <li><strong>Count occurrences of each record</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: output from <strong>Flight curve</strong></li>
-        <li><em>“Select”</em>: <code class="highlighter-rouge">Column: 2</code> (the column with the year)</li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
-        <li><em>“How should the results be sorted?”</em>: <code class="highlighter-rouge">By the values being counted</code></li>
+        <li><em>“Select”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code> (the column with the year)</li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">By the values being counted</code></li>
       </ul>
     </li>
     <li>
@@ -917,26 +917,26 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
     <li><strong>Column Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output file from <strong>flight curve</strong>.</li>
-        <li><em>“in column”</em>: <code class="highlighter-rouge">Column 2</code> (the column with the year)</li>
+        <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code> (the column with the year)</li>
         <li>Click on <em>“Insert Check”</em></li>
-        <li><em>“Find pattern”</em>: <code class="highlighter-rouge">(20[0-9][0-9])</code></li>
-        <li><em>“Replace with”</em>: <code class="highlighter-rouge">-\1</code></li>
+        <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">(20[0-9][0-9])</code></li>
+        <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">-\1</code></li>
       </ul>
     </li>
-    <li>Inspect the file and check if all the years are now written with a <code class="highlighter-rouge">-</code> before the digits.</li>
+    <li>Inspect the file and check if all the years are now written with a <code class="language-plaintext highlighter-rouge">-</code> before the digits.</li>
     <li><strong>Merge Columns together</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select data”</em>: output from the last <strong>Column Regex Find And Replace</strong>.</li>
-        <li><em>“Merge column”</em>: <code class="highlighter-rouge">Column: 3</code> (the column with the week)</li>
-        <li><em>“with column”</em>: <code class="highlighter-rouge">Column: 2</code> (the column with the year)</li>
+        <li><em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code> (the column with the week)</li>
+        <li><em>“with column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code> (the column with the year)</li>
       </ul>
     </li>
     <li><strong>Column Regex Find And Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to recreate the original content for the year column:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: output file from <strong>Merge Columns together</strong>.</li>
-        <li><em>“in column”</em>: <code class="highlighter-rouge">Column 2</code> (the column with the year)</li>
-        <li><em>“Find pattern”</em>: <code class="highlighter-rouge">-(20[0-9][0-9])</code></li>
-        <li><em>“Replace with”</em>: <code class="highlighter-rouge">\1</code></li>
+        <li><em>“in column”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code> (the column with the year)</li>
+        <li><em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">-(20[0-9][0-9])</code></li>
+        <li><em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
       </ul>
     </li>
     <li>
@@ -947,25 +947,25 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
         <p>If your dataset contains information about more than one species, you can apply the previous steps and then run an extra-step to select one specific species and show all the data corresponding to it.</p>
       </blockquote>
     </li>
-    <li>Generate the chart using the visualization with the x-axis corresponding to your column <code class="highlighter-rouge">"week""year"</code>.
+    <li>Generate the chart using the visualization with the x-axis corresponding to your column <code class="language-plaintext highlighter-rouge">"week""year"</code>.
       <ol>
         <li>Inspect and expand the output data from <strong>Remove beginning of a file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li>Click on the <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> (<strong>Visualize</strong>) icon</li>
         <li>Select <strong>Line chart (NVD3)</strong> as visualization type</li>
-        <li>Give it a proper name, e.g. <code class="highlighter-rouge">Pyronia tithonus phenology simple vizu</code></li>
+        <li>Give it a proper name, e.g. <code class="language-plaintext highlighter-rouge">Pyronia tithonus phenology simple vizu</code></li>
         <li>On <strong>Select data</strong> area, specify:
           <ul>
-            <li><em>“Provide a label”</em>: <code class="highlighter-rouge">Pyronia tithonus phenology from 2003 to 2012</code> for example</li>
+            <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">Pyronia tithonus phenology from 2003 to 2012</code> for example</li>
             <li><em>“Pick a series color”</em>: Choose a color for the line</li>
-            <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column 6</code> (the nm column) or another one</li>
-            <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column 7</code> (the “week-year” column)</li>
-            <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column 6</code> (the nm column)</li>
+            <li><em>“Data point labels”</em>: <code class="language-plaintext highlighter-rouge">Column 6</code> (the nm column) or another one</li>
+            <li><em>“Values for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Column 7</code> (the “week-year” column)</li>
+            <li><em>“Values for y-axis”</em>: <code class="language-plaintext highlighter-rouge">Column 6</code> (the nm column)</li>
           </ul>
         </li>
         <li>On <strong>Customize</strong>, specify:
           <ul>
-            <li><em>“X-Axis label”</em>: <code class="highlighter-rouge">Week-Year</code></li>
-            <li><em>“Y-Axis label”</em>: <code class="highlighter-rouge">nm values</code></li>
+            <li><em>“X-Axis label”</em>: <code class="language-plaintext highlighter-rouge">Week-Year</code></li>
+            <li><em>“Y-Axis label”</em>: <code class="language-plaintext highlighter-rouge">nm values</code></li>
           </ul>
         </li>
         <li>Click on <strong>Save</strong></li>
@@ -985,15 +985,15 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
     <li><strong>Scatterplot w ggplot2</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: output from <strong>Flight curve</strong></li>
-        <li><em>“Column to plot on x-axis”</em>: <code class="highlighter-rouge">4</code> (the column with the year)</li>
-        <li><em>“Column to plot on y-axis”</em>: <code class="highlighter-rouge">6</code></li>
-        <li><em>“Plot title”</em>: add a meaningful title (e.g. <code class="highlighter-rouge">Pyronia tithonus phenology stacked visualization</code>)</li>
-        <li><em>“Label for x axis”</em>: add a meaningful label (e.g. <code class="highlighter-rouge">Day number</code>)</li>
-        <li><em>“Label for y axis”</em>: add a meaningful label  (e.g. <code class="highlighter-rouge">nm value</code>)</li>
-        <li><em>“Type of plot”</em>: <code class="highlighter-rouge">Line only</code></li>
-        <li><em>“Plotting multiple groups”</em>: <code class="highlighter-rouge">Plot multiple groups of data on one plot</code> to superimpose years</li>
-        <li><em>“column differentiating the different groups”</em>: <code class="highlighter-rouge">2</code> to affect one coulor by year</li>
-        <li><em>“Color schemes to differentiate your groups”</em>: <code class="highlighter-rouge">set 3</code> or any set of color with more than 10 colors as there are 10 years in our dataset.</li>
+        <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">4</code> (the column with the year)</li>
+        <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
+        <li><em>“Plot title”</em>: add a meaningful title (e.g. <code class="language-plaintext highlighter-rouge">Pyronia tithonus phenology stacked visualization</code>)</li>
+        <li><em>“Label for x axis”</em>: add a meaningful label (e.g. <code class="language-plaintext highlighter-rouge">Day number</code>)</li>
+        <li><em>“Label for y axis”</em>: add a meaningful label  (e.g. <code class="language-plaintext highlighter-rouge">nm value</code>)</li>
+        <li><em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Line only</code></li>
+        <li><em>“Plotting multiple groups”</em>: <code class="language-plaintext highlighter-rouge">Plot multiple groups of data on one plot</code> to superimpose years</li>
+        <li><em>“column differentiating the different groups”</em>: <code class="language-plaintext highlighter-rouge">2</code> to affect one coulor by year</li>
+        <li><em>“Color schemes to differentiate your groups”</em>: <code class="language-plaintext highlighter-rouge">set 3</code> or any set of color with more than 10 colors as there are 10 years in our dataset.</li>
       </ul>
     </li>
   </ol>
@@ -1014,8 +1014,8 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
     <ol>
       <li><strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
         <ul>
-          <li><em>“Paste”</em>: <code class="highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset for species 1)</li>
-          <li><em>“and”</em>: <code class="highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset for species 2)</li>
+          <li><em>“Paste”</em>: <code class="language-plaintext highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset for species 1)</li>
+          <li><em>“and”</em>: <code class="language-plaintext highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset for species 2)</li>
           <li><em>“Delimited by”</em>: tabulation</li>
         </ul>
       </li>
@@ -1028,8 +1028,8 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
       <ol>
         <li><strong>Paste two files side by side</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
           <ul>
-            <li><em>“Paste”</em>: the <code class="highlighter-rouge">output</code> from <strong>Paste two files side by side</strong> (with the dataset containing species 1 and 2)</li>
-            <li><em>“and”</em>: <code class="highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset containing species 3)</li>
+            <li><em>“Paste”</em>: the <code class="language-plaintext highlighter-rouge">output</code> from <strong>Paste two files side by side</strong> (with the dataset containing species 1 and 2)</li>
+            <li><em>“and”</em>: <code class="language-plaintext highlighter-rouge">the output</code> from <strong>Merge Columns together</strong> (with the dataset containing species 3)</li>
             <li><em>“Delimited by”</em>: tabulation</li>
           </ul>
         </li>
@@ -1045,32 +1045,32 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
     <ol>
       <li>Inspect and expand the output data from <strong>flight curve</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       <li>Click on the <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> (<strong>Visualize</strong>) icon</li>
-      <li>Select a visualization: <code class="highlighter-rouge">line chart (NVD3)</code></li>
-      <li>Give it a proper name like <code class="highlighter-rouge">Aglais io &amp; Pyronia tithonus phenology</code></li>
+      <li>Select a visualization: <code class="language-plaintext highlighter-rouge">line chart (NVD3)</code></li>
+      <li>Give it a proper name like <code class="language-plaintext highlighter-rouge">Aglais io &amp; Pyronia tithonus phenology</code></li>
       <li>Select data
         <ul>
-          <li><em>“Provide a label”</em>: The name of the first species, for example <code class="highlighter-rouge">Aglais io</code></li>
+          <li><em>“Provide a label”</em>: The name of the first species, for example <code class="language-plaintext highlighter-rouge">Aglais io</code></li>
           <li><em>“Pick a series color”</em>: Choose a color</li>
-          <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column corresponding to the name of the species 1</code></li>
-          <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column corresponding to the "week and year" of the species 1</code></li>
-          <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column corresponding to nm of the species 1</code></li>
+          <li><em>“Data point labels”</em>: <code class="language-plaintext highlighter-rouge">Column corresponding to the name of the species 1</code></li>
+          <li><em>“Values for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Column corresponding to the "week and year" of the species 1</code></li>
+          <li><em>“Values for y-axis”</em>: <code class="language-plaintext highlighter-rouge">Column corresponding to nm of the species 1</code></li>
         </ul>
       </li>
       <li>Insert data series:
         <ul>
-          <li>*“Provide a label”: he name of the second species, for example <code class="highlighter-rouge">Pyronia tithonus</code></li>
+          <li>*“Provide a label”: he name of the second species, for example <code class="language-plaintext highlighter-rouge">Pyronia tithonus</code></li>
           <li><em>“Pick a series color”</em>: Choose a different color</li>
-          <li><em>“Data point labels”</em>: <code class="highlighter-rouge">Column corresponding to the name of the species 2</code></li>
-          <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column corresponding to the "week and year" of the species 2</code></li>
-          <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column corresponding to nm of the species 2</code></li>
+          <li><em>“Data point labels”</em>: <code class="language-plaintext highlighter-rouge">Column corresponding to the name of the species 2</code></li>
+          <li><em>“Values for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Column corresponding to the "week and year" of the species 2</code></li>
+          <li><em>“Values for y-axis”</em>: <code class="language-plaintext highlighter-rouge">Column corresponding to nm of the species 2</code></li>
         </ul>
       </li>
       <li>You may repeat “Insert data series” as many times as needed depending on the number of different species you want to represent on your chart.</li>
       <li>Click on <strong>Customize</strong>
         <ul>
-          <li><em>“X-Axis label”</em>: <code class="highlighter-rouge">Week and Year</code></li>
-          <li><em>“Y-Axis label”</em>: <code class="highlighter-rouge">nm values</code></li>
-          <li><em>“Use multi-panels”</em>: click on <code class="highlighter-rouge">No</code>(or you will have separated charts, one for each species)</li>
+          <li><em>“X-Axis label”</em>: <code class="language-plaintext highlighter-rouge">Week and Year</code></li>
+          <li><em>“Y-Axis label”</em>: <code class="language-plaintext highlighter-rouge">nm values</code></li>
+          <li><em>“Use multi-panels”</em>: click on <code class="language-plaintext highlighter-rouge">No</code>(or you will have separated charts, one for each species)</li>
         </ul>
       </li>
       <li>Click on <strong>Save</strong> if you are willing to keep it</li>
@@ -1089,7 +1089,7 @@ Warning: depending on the <span class="notranslate">Galaxy</span> instance your 
   <ol>
     <li><strong>Abundance index</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Count file”</em>: output from <strong>Text reformatting with awk</strong>, that should be named <code class="highlighter-rouge">Counting file</code> and/or tagged <code class="highlighter-rouge">Count</code></li>
+        <li><em>“Count file”</em>: output from <strong>Text reformatting with awk</strong>, that should be named <code class="language-plaintext highlighter-rouge">Counting file</code> and/or tagged <code class="language-plaintext highlighter-rouge">Count</code></li>
         <li><em>“Flight curve output”</em>: output from <strong>flight curve</strong></li>
       </ul>
     </li>

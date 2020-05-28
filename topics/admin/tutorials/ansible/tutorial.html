@@ -383,7 +383,7 @@
 
   <p>These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.</p>
 
-  <p>The roles that are used in these training are currently used by <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>
+  <p>The roles that are used in these training are currently used by <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>.*</code>, and other, servers in maintaining their infrastructure. (<a href="https://github.com/galaxyproject/infrastructure-playbook/">US</a>, <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">EU</a>, both are running CentOS 7)</p>
 
   <p>If you have an issue running these trainings on your OS flavour, please report <a href="https://github.com/galaxyproject/training-material/issues/new">the issue</a> in the training material and we can see if it is possible to solve.</p>
 
@@ -399,7 +399,7 @@
   <dt>Inventory file</dt>
   <dd>An Ansible-specific file that defines the systems (“hosts”) and groups of hosts on which Ansible should operate.</dd>
   <dt>Ansible module</dt>
-  <dd>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="highlighter-rouge">command</code> module which converts parameters like <code class="highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</dd>
+  <dd>A piece of Python code that converts some parameters into an invocation. An example would be the <code class="language-plaintext highlighter-rouge">command</code> module which converts parameters like <code class="language-plaintext highlighter-rouge">command: ls</code> into a command line that is executed. There are pre-built modules for just about everything.</dd>
   <dt>task</dt>
   <dd>A call to an Ansible module that should be executed and the configuration for this module.</dd>
   <dt>role</dt>
@@ -422,7 +422,7 @@
 <span class="err">db_1.example.org</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">root</span>
 </code></pre></div></div>
 
-<p>Here we’ve defined two groups of computers, <code class="highlighter-rouge">webservers</code> and <code class="highlighter-rouge">databases</code>. <code class="highlighter-rouge">ansible_user</code> is used to specify which user to connect with.</p>
+<p>Here we’ve defined two groups of computers, <code class="language-plaintext highlighter-rouge">webservers</code> and <code class="language-plaintext highlighter-rouge">databases</code>. <code class="language-plaintext highlighter-rouge">ansible_user</code> is used to specify which user to connect with.</p>
 
 <blockquote class="details">
   <h3 id="details-ansible-inventory-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Inventory Documentation</h3>
@@ -433,7 +433,7 @@
 
 <p>We can look at the <a href="https://github.com/galaxyproject/ansible-cvmfs">ansible-cvmfs role</a> as an example for the layout of a role:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── defaults
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>├── defaults
 │   └── main.yml
 ├── files
 │   ├── cvmfs_wipecache.c
@@ -507,7 +507,7 @@
 
 <h2 id="modules-and-tasks">Modules and Tasks</h2>
 
-<p>A <code class="highlighter-rouge">tasks/main.yml</code> file calls multiple Ansible modules to accomplish its goal. A typical tasks file looks like:</p>
+<p>A <code class="language-plaintext highlighter-rouge">tasks/main.yml</code> file calls multiple Ansible modules to accomplish its goal. A typical tasks file looks like:</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install CernVM-FS client (yum)</span>
@@ -523,11 +523,11 @@
     <span class="na">state</span><span class="pi">:</span> <span class="s">started</span>
 </code></pre></div></div>
 
-<p>Here we have two tasks. Each has a <code class="highlighter-rouge">name</code> that will be shown to the person running the playbook.</p>
+<p>Here we have two tasks. Each has a <code class="language-plaintext highlighter-rouge">name</code> that will be shown to the person running the playbook.</p>
 
-<p>The first invokes the <code class="highlighter-rouge">yum</code> module with the arguments <code class="highlighter-rouge">name: cvmfs, state: ...</code>. This will use yum to install the package named <code class="highlighter-rouge">cvmfs</code>. The state parameter uses a <a href="http://jinja.pocoo.org/">Jinja2</a> template to evaluate the value of the variable <code class="highlighter-rouge">cvmfs_upgrade_client</code>. We can <a href="https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&amp;unscoped_q=cvmfs_upgrade_client">grep through</a> the repository and see that <code class="highlighter-rouge">defaults/main.yml</code> sets that to <code class="highlighter-rouge">false</code> by default. We can override this if we need, we’ll come back to that later. The first task also has a <code class="highlighter-rouge">when</code> condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic <a href="http://docs.ansible.com/ansible/latest/package_module.html"><code class="highlighter-rouge">package</code></a> module, if possible.</p>
+<p>The first invokes the <code class="language-plaintext highlighter-rouge">yum</code> module with the arguments <code class="language-plaintext highlighter-rouge">name: cvmfs, state: ...</code>. This will use yum to install the package named <code class="language-plaintext highlighter-rouge">cvmfs</code>. The state parameter uses a <a href="http://jinja.pocoo.org/">Jinja2</a> template to evaluate the value of the variable <code class="language-plaintext highlighter-rouge">cvmfs_upgrade_client</code>. We can <a href="https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&amp;unscoped_q=cvmfs_upgrade_client">grep through</a> the repository and see that <code class="language-plaintext highlighter-rouge">defaults/main.yml</code> sets that to <code class="language-plaintext highlighter-rouge">false</code> by default. We can override this if we need, we’ll come back to that later. The first task also has a <code class="language-plaintext highlighter-rouge">when</code> condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic <a href="http://docs.ansible.com/ansible/latest/package_module.html"><code class="language-plaintext highlighter-rouge">package</code></a> module, if possible.</p>
 
-<p>The second invokes the <a href="http://docs.ansible.com/ansible/latest/service_module.html"><code class="highlighter-rouge">service</code></a> module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service <code class="highlighter-rouge">name: autofs</code> will be <code class="highlighter-rouge">enabled</code> and its <code class="highlighter-rouge">state</code> should be <code class="highlighter-rouge">started</code>.</p>
+<p>The second invokes the <a href="http://docs.ansible.com/ansible/latest/service_module.html"><code class="language-plaintext highlighter-rouge">service</code></a> module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service <code class="language-plaintext highlighter-rouge">name: autofs</code> will be <code class="language-plaintext highlighter-rouge">enabled</code> and its <code class="language-plaintext highlighter-rouge">state</code> should be <code class="language-plaintext highlighter-rouge">started</code>.</p>
 
 <p><a href="https://docs.ansible.com/ansible/latest/modules/modules_by_category.html">Many modules</a> are available for you to use.</p>
 
@@ -559,7 +559,7 @@
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
 </code></pre></div></div>
 
-<p>This is a quite minimal playbook. It selects a <code class="highlighter-rouge">hosts</code> group named <code class="highlighter-rouge">webservers</code>, overrides the variable <code class="highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
+<p>This is a quite minimal playbook. It selects a <code class="language-plaintext highlighter-rouge">hosts</code> group named <code class="language-plaintext highlighter-rouge">webservers</code>, overrides the variable <code class="language-plaintext highlighter-rouge">cvmfs_numfiles</code>, and then says the following set of roles will be executed for this group of hosts. Ansible makes it easy to collect tasks that should apply to a group of hosts and run a playbook for all of those hosts. Some good uses of this are things like ensuring a certain set of users are installed on all of your managed machines, or using one of the package autoupdating roles to make sure your machines are up-to-date.</p>
 
 <blockquote class="details">
   <h3 id="details-ansible-playbook-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Playbook Documentation</h3>
@@ -597,15 +597,15 @@
 <p>There are some special places you can put variables that will be loaded automatically:</p>
 
 <ul>
-  <li><code class="highlighter-rouge">group_vars/&lt;group_name&gt;.yml</code>: if you run a playbook which has <code class="highlighter-rouge">hosts: webservers</code>, and <code class="highlighter-rouge">group_vars/webservers.yml</code> exists, it will be loaded.</li>
-  <li><code class="highlighter-rouge">host_vars/&lt;host_name&gt;.yml</code>: if you run a playbook and it affects host (e.g.) <code class="highlighter-rouge">api01</code>, and <code class="highlighter-rouge">host_vars/api01.yml</code> exists, it will be loaded automatically.</li>
+  <li><code class="language-plaintext highlighter-rouge">group_vars/&lt;group_name&gt;.yml</code>: if you run a playbook which has <code class="language-plaintext highlighter-rouge">hosts: webservers</code>, and <code class="language-plaintext highlighter-rouge">group_vars/webservers.yml</code> exists, it will be loaded.</li>
+  <li><code class="language-plaintext highlighter-rouge">host_vars/&lt;host_name&gt;.yml</code>: if you run a playbook and it affects host (e.g.) <code class="language-plaintext highlighter-rouge">api01</code>, and <code class="language-plaintext highlighter-rouge">host_vars/api01.yml</code> exists, it will be loaded automatically.</li>
 </ul>
 
-<p>For a real-life example, Use<span class="notranslate">Galaxy</span>.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="highlighter-rouge">group_vars/</code> file.</p>
+<p>For a real-life example, Use<span class="notranslate">Galaxy</span>.eu <a href="https://github.com/usegalaxy-eu/infrastructure-playbook">generally attempts</a> to put variables in an appropriately named <code class="language-plaintext highlighter-rouge">group_vars/</code> file.</p>
 
 <h2 id="vaults">Vaults</h2>
 
-<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html"><code class="highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">Use<span class="notranslate">Galaxy</span>.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
+<p><a href="https://docs.ansible.com/ansible/latest/user_guide/vault.html"><code class="language-plaintext highlighter-rouge">ansible-vault</code></a> is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml">Use<span class="notranslate">Galaxy</span>.eu</a>’s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.</p>
 
 <h1 id="your-first-playbook-and-first-role">Your First Playbook and First Role</h1>
 
@@ -618,13 +618,13 @@
 Ansible provides some flags which can help you identify changes before they’re made to production systems:</p>
 
   <dl>
-    <dt><strong><code class="highlighter-rouge">--diff</code></strong></dt>
+    <dt><strong><code class="language-plaintext highlighter-rouge">--diff</code></strong></dt>
     <dd>This will show the difference whenever a file is changed.</dd>
-    <dt><strong><code class="highlighter-rouge">--check</code></strong></dt>
+    <dt><strong><code class="language-plaintext highlighter-rouge">--check</code></strong></dt>
     <dd>Will do a dry-run of the playbook, attempting to show you which tasks will execute, which files will be updated. Not all actions can be predicted because commands are not run, if a <span class="notranslate">downstream</span> task depends on the result of a command execution task, Ansible has no way of knowing whether or not it will execute.</dd>
   </dl>
 
-  <p>In this tutorial we will write to files in <code class="highlighter-rouge">/tmp</code> as that is a <em>relatively</em> safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.</p>
+  <p>In this tutorial we will write to files in <code class="language-plaintext highlighter-rouge">/tmp</code> as that is a <em>relatively</em> safe thing to do. The training material community does not have the resources to test this tutorial across all of the platforms you might want to run it on. Additionally we do not want to be responsible if you accidentally cause permanent damage by following this tutorial.</p>
 
 </blockquote>
 
@@ -643,17 +643,17 @@ Ansible provides some flags which can help you identify changes before they’re
       <p><a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Install Ansible.</a> where you will run it</p>
     </li>
     <li>
-      <p>Create an directory named <code class="highlighter-rouge">intro</code> and <code class="highlighter-rouge">cd</code> into it</p>
+      <p>Create an directory named <code class="language-plaintext highlighter-rouge">intro</code> and <code class="language-plaintext highlighter-rouge">cd</code> into it</p>
     </li>
     <li>
-      <p>Create your inventory file (named <code class="highlighter-rouge">hosts</code>) in this folder</p>
+      <p>Create your inventory file (named <code class="language-plaintext highlighter-rouge">hosts</code>) in this folder</p>
 
       <ol>
         <li>
-          <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
+          <p>We will call our group <code class="language-plaintext highlighter-rouge">my_hosts</code></p>
         </li>
         <li>
-          <p>Create <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="highlighter-rouge">my_hosts</code> and <code class="highlighter-rouge">localhost ansible_connection=local</code>, which tells ansible to not use SSH, and just use the local connection.</p>
+          <p>Create <a href="https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells ansible to not use SSH, and just use the local connection.</p>
 
           <blockquote class="solution">
             <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -678,10 +678,10 @@ Ansible provides some flags which can help you identify changes before they’re
             <p>Make sure you can SSH into it. (Test it now)</p>
           </li>
           <li>
-            <p>We will call our group <code class="highlighter-rouge">my_hosts</code></p>
+            <p>We will call our group <code class="language-plaintext highlighter-rouge">my_hosts</code></p>
           </li>
           <li>
-            <p>Create a hosts file with the group <code class="highlighter-rouge">my_hosts</code> and your host.</p>
+            <p>Create a hosts file with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and your host.</p>
 
             <blockquote class="solution">
               <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -690,7 +690,7 @@ Ansible provides some flags which can help you identify changes before they’re
               <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
 <span class="err">your.host.fqdn.or.ip</span>
 </code></pre></div>              </div>
-              <p>Remember that if you SSH in with a use<span class="notranslate">rna</span>me different than your current local user account’s name, you will need to specify <code class="highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
+              <p>Remember that if you SSH in with a use<span class="notranslate">rna</span>me different than your current local user account’s name, you will need to specify <code class="language-plaintext highlighter-rouge">ansible_ssh_user=remote-user-name</code></p>
             </blockquote>
           </li>
         </ol>
@@ -698,13 +698,13 @@ Ansible provides some flags which can help you identify changes before they’re
       </blockquote>
     </li>
     <li>
-      <p>Create the roles directory, your role, and the tasks folder: <code class="highlighter-rouge">mkdir -p roles/my-role/tasks/</code></p>
+      <p>Create the roles directory, your role, and the tasks folder: <code class="language-plaintext highlighter-rouge">mkdir -p roles/my-role/tasks/</code></p>
     </li>
     <li>
-      <p>Create a YAML file in that directory, <code class="highlighter-rouge">roles/my-role/tasks/main.yml</code> and open it for editing</p>
+      <p>Create a YAML file in that directory, <code class="language-plaintext highlighter-rouge">roles/my-role/tasks/main.yml</code> and open it for editing</p>
     </li>
     <li>
-      <p>Define a <code class="highlighter-rouge">copy</code> task like below:</p>
+      <p>Define a <code class="language-plaintext highlighter-rouge">copy</code> task like below:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Copy a file to the remote host</span>
@@ -713,22 +713,22 @@ Ansible provides some flags which can help you identify changes before they’re
     <span class="na">dest</span><span class="pi">:</span> <span class="s">/tmp/test.txt</span>
 </code></pre></div>      </div>
 
-      <p>You can read about all of the parameters available to the <a href="http://docs.ansible.com/ansible/latest/copy_module.html"><code class="highlighter-rouge">copy</code></a> module on Ansible’s documentation.</p>
+      <p>You can read about all of the parameters available to the <a href="http://docs.ansible.com/ansible/latest/copy_module.html"><code class="language-plaintext highlighter-rouge">copy</code></a> module on Ansible’s documentation.</p>
 
       <blockquote class="details">
         <h3 id="details-ansible-module-documentation"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Module Documentation</h3>
-        <p>You can usually find a module that will represent most commands you will run at a shell. Usually by searching the internet for “ansible do-some-action” e.g. “ansible copy file to server” or “ansible restart service.” If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/latest/command_module.html"><code class="highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.</p>
+        <p>You can usually find a module that will represent most commands you will run at a shell. Usually by searching the internet for “ansible do-some-action” e.g. “ansible copy file to server” or “ansible restart service.” If you cannot find a module that does it, there is the <a href="http://docs.ansible.com/ansible/latest/command_module.html"><code class="language-plaintext highlighter-rouge">command</code></a> module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.</p>
 
       </blockquote>
     </li>
     <li>
-      <p>Create a <code class="highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="highlighter-rouge">test.txt</code>, containing the content “Hello, <span class="notranslate">Galaxy</span> 🚀”</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">roles/my-role/files</code> folder, and within it a file named <code class="language-plaintext highlighter-rouge">test.txt</code>, containing the content “Hello, <span class="notranslate">Galaxy</span> 🚀”</p>
     </li>
     <li>
-      <p>This is a complete role by itself and will copy the file <code class="highlighter-rouge">test.txt</code> from the <code class="highlighter-rouge">roles/my-role/files/</code> folder over to the target host and place it in <code class="highlighter-rouge">/tmp</code>.</p>
+      <p>This is a complete role by itself and will copy the file <code class="language-plaintext highlighter-rouge">test.txt</code> from the <code class="language-plaintext highlighter-rouge">roles/my-role/files/</code> folder over to the target host and place it in <code class="language-plaintext highlighter-rouge">/tmp</code>.</p>
     </li>
     <li>
-      <p>Open <code class="highlighter-rouge">playbook.yml</code> for editing in the root folder. Place the following content in there:</p>
+      <p>Open <code class="language-plaintext highlighter-rouge">playbook.yml</code> for editing in the root folder. Place the following content in there:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
@@ -739,12 +739,12 @@ Ansible provides some flags which can help you identify changes before they’re
       <blockquote class="question">
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <p>How does your file tree look now? Use <code class="highlighter-rouge">find</code> or <code class="highlighter-rouge">tree</code>.</p>
+        <p>How does your file tree look now? Use <code class="language-plaintext highlighter-rouge">find</code> or <code class="language-plaintext highlighter-rouge">tree</code>.</p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.
 ├── hosts
 ├── playbook.yml
 └── roles
@@ -759,7 +759,7 @@ Ansible provides some flags which can help you identify changes before they’re
       </blockquote>
     </li>
     <li>
-      <p>Run the playbook: <code class="highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></p>
+      <p>Run the playbook: <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -769,9 +769,9 @@ Ansible provides some flags which can help you identify changes before they’re
         <blockquote class="solution">
           <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>The important thing is <code class="highlighter-rouge">failed=0</code></p>
+          <p>The important thing is <code class="language-plaintext highlighter-rouge">failed=0</code></p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ansible-playbook -i hosts playbook.yml -c local
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ansible-playbook -i hosts playbook.yml -c local
 PLAY [my_hosts] ****************************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [localhost]
@@ -781,12 +781,12 @@ PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 </code></pre></div>          </div>
 
-          <p>You can re-run this and it should say <code class="highlighter-rouge">changed=0</code></p>
+          <p>You can re-run this and it should say <code class="language-plaintext highlighter-rouge">changed=0</code></p>
         </blockquote>
       </blockquote>
     </li>
     <li>
-      <p>Login to the appropriate host and <code class="highlighter-rouge">cat /tmp/test.txt</code> to see that the change was made.</p>
+      <p>Login to the appropriate host and <code class="language-plaintext highlighter-rouge">cat /tmp/test.txt</code> to see that the change was made.</p>
     </li>
   </ol>
 
@@ -801,9 +801,9 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0    s
 
 <blockquote class="comment">
   <h3 id="comment-too-many-cows"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Too Many Cows?</h3>
-  <p>If you’ve installed the <code class="highlighter-rouge">cowsay</code> tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
+  <p>If you’ve installed the <code class="language-plaintext highlighter-rouge">cowsay</code> tool, Ansible (for some reason) will take advantage of that to output a lot of the output with cowsay. To disable this you can <code class="language-plaintext highlighter-rouge">export ANSIBLE_NOCOWS=1</code> (Remember that exporting will only last as long as the current invocation of your terminal does, so consider adding this to your user profile if you wish to keep cowsay installed and still have legible output.)</p>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ________________
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> ________________
 &lt; PLAY [my_hosts] &gt;
  ----------------
         \   ^__^
@@ -824,22 +824,22 @@ localhost                  : ok=2    changed=1    unreachable=0    failed=0    s
 
 <h2 id="facts">Facts</h2>
 
-<p>In the last step of the last hands-on, you ran your playbook. The first <code class="highlighter-rouge">TASK</code> that was executed was not one that you had written, it read:</p>
+<p>In the last step of the last hands-on, you ran your playbook. The first <code class="language-plaintext highlighter-rouge">TASK</code> that was executed was not one that you had written, it read:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TASK [Gathering Facts] *********************************************************
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 </code></pre></div></div>
 
-<p>The <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="highlighter-rouge">setup</code></a> module runs by default for every host and gathers facts about the host.</p>
+<p>The <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code></a> module runs by default for every host and gathers facts about the host.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-the-setup-module"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: The Setup Module</h3>
 
   <ol>
     <li>
-      <p>Run the command <code class="highlighter-rouge">ansible -i hosts -m setup my_hosts | less</code>.</p>
+      <p>Run the command <code class="language-plaintext highlighter-rouge">ansible -i hosts -m setup my_hosts | less</code>.</p>
 
-      <p>The <code class="highlighter-rouge">my_hosts</code> at the end of the command refers to the group we defined in our <code class="highlighter-rouge">hosts</code> inventory file.</p>
+      <p>The <code class="language-plaintext highlighter-rouge">my_hosts</code> at the end of the command refers to the group we defined in our <code class="language-plaintext highlighter-rouge">hosts</code> inventory file.</p>
     </li>
     <li>
       <p>Investigate the output. See what sort of information is made available to you.</p>
@@ -857,15 +857,15 @@ ok: [localhost]
 
           <ol>
             <li>
-              <p>The OS name is stored in <code class="highlighter-rouge">ansible_distribution</code>. We saw <code class="highlighter-rouge">ansible_os_family</code> used above in the <code class="highlighter-rouge">ansible-cvmfs</code> role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
+              <p>The OS name is stored in <code class="language-plaintext highlighter-rouge">ansible_distribution</code>. We saw <code class="language-plaintext highlighter-rouge">ansible_os_family</code> used above in the <code class="language-plaintext highlighter-rouge">ansible-cvmfs</code> role. You can use these variables if you are writing a generic role but packages or commands are named different on different operating systems.</p>
             </li>
             <li>
               <p>Ansible stores network information in quite a few places, sometimes one place is more convenient or more correct to use:</p>
 
               <ul>
-                <li><code class="highlighter-rouge">ansible_all_ipv4_addresses</code></li>
-                <li><code class="highlighter-rouge">ansible_default_ipv4.address</code></li>
-                <li><code class="highlighter-rouge">ansible_&lt;interface_name&gt;.ipv4</code></li>
+                <li><code class="language-plaintext highlighter-rouge">ansible_all_ipv4_addresses</code></li>
+                <li><code class="language-plaintext highlighter-rouge">ansible_default_ipv4.address</code></li>
+                <li><code class="language-plaintext highlighter-rouge">ansible_&lt;interface_name&gt;.ipv4</code></li>
               </ul>
             </li>
           </ol>
@@ -880,11 +880,11 @@ ok: [localhost]
 
 <h2 id="templates">Templates</h2>
 
-<p>Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, <code class="highlighter-rouge">when</code> statements (like the <a href="#modules-and-tasks">ansible-cvmfs example we saw earlier</a>). Additionally all of the variables you’ve defined are available as well.</p>
+<p>Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, <code class="language-plaintext highlighter-rouge">when</code> statements (like the <a href="#modules-and-tasks">ansible-cvmfs example we saw earlier</a>). Additionally all of the variables you’ve defined are available as well.</p>
 
 <blockquote class="details">
   <h3 id="details-template-syntax"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Template Syntax</h3>
-  <p>Templates end with the <code class="highlighter-rouge">.j2</code> suffix and use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the .j2 suffix.</p>
+  <p>Templates end with the <code class="language-plaintext highlighter-rouge">.j2</code> suffix and use Jinja2 syntax. If you are not familiar with it, you should <a href="http://jinja.pocoo.org/docs/2.10/templates/">read about it</a> first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the .j2 suffix.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -892,10 +892,10 @@ ok: [localhost]
 
   <ol>
     <li>
-      <p>Create the directories: <code class="highlighter-rouge">roles/my-role/templates</code>, <code class="highlighter-rouge">roles/my-role/defaults</code></p>
+      <p>Create the directories: <code class="language-plaintext highlighter-rouge">roles/my-role/templates</code>, <code class="language-plaintext highlighter-rouge">roles/my-role/defaults</code></p>
     </li>
     <li>
-      <p>Create and edit a file for your role’s variables, <code class="highlighter-rouge">roles/my-role/defaults/main.yml</code></p>
+      <p>Create and edit a file for your role’s variables, <code class="language-plaintext highlighter-rouge">roles/my-role/defaults/main.yml</code></p>
     </li>
     <li>
       <p>Insert the following content:</p>
@@ -904,10 +904,10 @@ ok: [localhost]
 <span class="na">server_name</span><span class="pi">:</span> <span class="s">Cats!</span>
 </code></pre></div>      </div>
 
-      <p>This will define a variable <code class="highlighter-rouge">server_name</code> that can then be used in templates.</p>
+      <p>This will define a variable <code class="language-plaintext highlighter-rouge">server_name</code> that can then be used in templates.</p>
     </li>
     <li>
-      <p>Create and edit <code class="highlighter-rouge">roles/my-role/templates/test.ini.j2</code></p>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">roles/my-role/templates/test.ini.j2</code></p>
     </li>
     <li>
       <p>Insert the following content:</p>
@@ -918,7 +918,7 @@ ok: [localhost]
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Edit <code class="highlighter-rouge">roles/my-role/tasks/main.yml</code> and append a new task to the end to template this file:</p>
+      <p>Edit <code class="language-plaintext highlighter-rouge">roles/my-role/tasks/main.yml</code> and append a new task to the end to template this file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Template the configuration file</span>
   <span class="na">template</span><span class="pi">:</span>
@@ -930,7 +930,7 @@ ok: [localhost]
       <p>Run the playbook again.</p>
     </li>
     <li>
-      <p>Check the contents of <code class="highlighter-rouge">/tmp/test.ini</code></p>
+      <p>Check the contents of <code class="language-plaintext highlighter-rouge">/tmp/test.ini</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -953,14 +953,14 @@ ok: [localhost]
 
       </blockquote>
 
-      <p>Now that this has worked successfully, we will setup a <code class="highlighter-rouge">group_vars</code> folder
-to show how a person using <code class="highlighter-rouge">my-role</code> would override the <code class="highlighter-rouge">server_name</code> variable.</p>
+      <p>Now that this has worked successfully, we will setup a <code class="language-plaintext highlighter-rouge">group_vars</code> folder
+to show how a person using <code class="language-plaintext highlighter-rouge">my-role</code> would override the <code class="language-plaintext highlighter-rouge">server_name</code> variable.</p>
     </li>
     <li>
-      <p>Create the folder <code class="highlighter-rouge">group_vars/</code> (in the root of your directory)</p>
+      <p>Create the folder <code class="language-plaintext highlighter-rouge">group_vars/</code> (in the root of your directory)</p>
     </li>
     <li>
-      <p>Create and edit <code class="highlighter-rouge">group_vars/my_hosts.yml</code></p>
+      <p>Create and edit <code class="language-plaintext highlighter-rouge">group_vars/my_hosts.yml</code></p>
     </li>
     <li>
       <p>Insert the following:</p>
@@ -970,7 +970,7 @@ to show how a person using <code class="highlighter-rouge">my-role</code> would 
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
+      <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
 
       <blockquote class="question">
         <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -980,38 +980,38 @@ to show how a person using <code class="highlighter-rouge">my-role</code> would 
         <blockquote class="solution">
           <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">$</span> ansible-playbook -i hosts playbook.yml --check --diff
-<span class="p">PLAY [my_hosts] ****************************************************************
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ansible-playbook -i hosts playbook.yml --check --diff
+PLAY [my_hosts] ****************************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 TASK [my-role : Copy a file to the remote host] ********************************
 ok: [localhost]
 TASK [my-role : Template the configuration file] *******************************
-</span><span class="gd">--- before: /tmp/test.ini
-</span><span class="gi">+++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
-</span><span class="p">@@ -1,3 +1,3 @@</span>
+--- before: /tmp/test.ini
++++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
+@@ -1,3 +1,3 @@
  [example]
-<span class="gd">-server_name = Cats!
-</span><span class="gi">+server_name = Dogs!
-</span> listen = 192.168.0.25
-<span class="p">changed: [localhost]
+-server_name = Cats!
++server_name = Dogs!
+ listen = 192.168.0.25
+changed: [localhost]
 PLAY RECAP **********************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0
-</span></code></pre></div>          </div>
+</code></pre></div>          </div>
 
-          <p>Here you can see that the server_name value will be changed. Despite Ansible reporting <code class="highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
+          <p>Here you can see that the server_name value will be changed. Despite Ansible reporting <code class="language-plaintext highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
         </blockquote>
       </blockquote>
     </li>
     <li>
-      <p>Run the playbook again, without the <code class="highlighter-rouge">--check</code> flag to apply your changes.</p>
+      <p>Run the playbook again, without the <code class="language-plaintext highlighter-rouge">--check</code> flag to apply your changes.</p>
     </li>
   </ol>
 </blockquote>
 
 <blockquote class="comment">
   <h3 id="comment-ansible-variable-templating"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Variable Templating</h3>
-  <p>In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: <code class="highlighter-rouge">listen = {{ ansible_default_ipv4.address }}</code>.</p>
+  <p>In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: <code class="language-plaintext highlighter-rouge">listen = {{ ansible_default_ipv4.address }}</code>.</p>
 
   <p>It is common to see things like this in Ansible roles:</p>
 
@@ -1023,7 +1023,7 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
 
   <ol>
     <li>It collects variables defined in group variables and other places</li>
-    <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
+    <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
     <li>When multiple roles execute in a playbook:
       <ol>
         <li>Their defaults are added to the set of variables (the group variables having precedence over these variables)</li>
@@ -1046,12 +1046,12 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
 
   <ol>
     <li>
-      <p>Run the command <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles/ geerlingguy.git</code></p>
+      <p>Run the command <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles/ geerlingguy.git</code></p>
 
-      <p>This will install the new role into your <code class="highlighter-rouge">roles</code> folder, alongside your own role.</p>
+      <p>This will install the new role into your <code class="language-plaintext highlighter-rouge">roles</code> folder, alongside your own role.</p>
     </li>
     <li>
-      <p>Edit your playbook.yml and add the role <code class="highlighter-rouge">geerlingguy.git</code> at the bottom, after <code class="highlighter-rouge">my-role</code></p>
+      <p>Edit your playbook.yml and add the role <code class="language-plaintext highlighter-rouge">geerlingguy.git</code> at the bottom, after <code class="language-plaintext highlighter-rouge">my-role</code></p>
     </li>
     <li>
       <p>Run the playbook</p>
@@ -1065,22 +1065,22 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
           <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
-The solution to this is to set <code class="highlighter-rouge">become: true</code>.</p>
+The solution to this is to set <code class="language-plaintext highlighter-rouge">become: true</code>.</p>
 
           <ol>
             <li>Edit your playbook.yml
               <ul>
-                <li>add <code class="highlighter-rouge">become: true</code> just below <code class="highlighter-rouge">hosts: my_hosts</code></li>
+                <li>add <code class="language-plaintext highlighter-rouge">become: true</code> just below <code class="language-plaintext highlighter-rouge">hosts: my_hosts</code></li>
               </ul>
             </li>
             <li>Run the playbook again</li>
           </ol>
 
-          <p><code class="highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="highlighter-rouge">root</code>. If you want to become a different user, just set <code class="highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
+          <p><code class="language-plaintext highlighter-rouge">become</code> causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is <code class="language-plaintext highlighter-rouge">root</code>. If you want to become a different user, just set <code class="language-plaintext highlighter-rouge">become_user</code>. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set <code class="language-plaintext highlighter-rouge">--ask-become-pass</code>, using the privilege escalation password for that host.</p>
 
           <blockquote class="details">
             <h3 id="details-ansible-become"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Become</h3>
-            <p>See the <a href="https://docs.ansible.com/ansible/latest/user_guide/become.html">documentation</a> if you need to control this behaviour differently. <code class="highlighter-rouge">become</code> can be set either at the task level or the playbook level.</p>
+            <p>See the <a href="https://docs.ansible.com/ansible/latest/user_guide/become.html">documentation</a> if you need to control this behaviour differently. <code class="language-plaintext highlighter-rouge">become</code> can be set either at the task level or the playbook level.</p>
 
           </blockquote>
 
@@ -1096,8 +1096,8 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 <p>Picking the best role for a task from Ansible <span class="notranslate">Galaxy</span> is not always a trivial task. Sometimes there will only be a single role doing what you need. Other times you’ll have to choose between 20 different roles that all look more or less the same. Here are some tips to guide you in identifying appropriate and well-written roles:</p>
 
 <ul>
-  <li>The name should match the software you are using (I.e. ignore a role named <code class="highlighter-rouge">stackstorm</code> when you are trying to set up <code class="highlighter-rouge">rabbitmq</code>. Ansible <span class="notranslate">Galaxy</span> does not have perfect search.)</li>
-  <li><code class="highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project</code> and <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu</code> roles.</li>
+  <li>The name should match the software you are using (I.e. ignore a role named <code class="language-plaintext highlighter-rouge">stackstorm</code> when you are trying to set up <code class="language-plaintext highlighter-rouge">rabbitmq</code>. Ansible <span class="notranslate">Galaxy</span> does not have perfect search.)</li>
+  <li><code class="language-plaintext highlighter-rouge">geerlingguy</code> wrote a huge number of roles for many pieces of standard software. If there is a role from this person, this is usually a safe choice. In the same way we recommend <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project</code> and <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu</code> roles.</li>
   <li>Check the GitHub readme of each role you consider using. Look for:
     <ul>
       <li>Extensive documentation of all of the variables, their default values, and how they behave.</li>
@@ -1107,9 +1107,9 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
   <li>A large number of downloads is a good sign that other people found it useful</li>
 </ul>
 
-<p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
+<p>These are usually good proxies for quality, but do not treat them as strict rules. For an example of a role meeting many of these qualities, <a href="https://github.com/galaxyproject/ansible-cvmfs"><code class="language-plaintext highlighter-rouge">ansible-cvmfs</code></a> is good; the variables are well documented and there are example playbooks that you can (more or less) copy-and-paste and run.</p>
 
-<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
+<p>Sometimes a role will accomplish 95% of what you need to do, but not everything. Once you have installed the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install</code>, you can edit it locally to make any changes. In an ideal world you would contribute this back, but this is not always a high priority. Many projects copy roles directly into their repositories, e.g. <a href="https://github.com/galaxyproject/infrastructure-playbook/tree/master/roles"><span class="notranslate">galaxy</span>project</a> and <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/tree/master/roles">use<span class="notranslate">galaxy</span>.eu</a></p>
 
 <h1 id="optional-ansible-vault">(Optional) Ansible Vault</h1>
 
@@ -1120,15 +1120,15 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
 
   <ol>
     <li>
-      <p>Run <code class="highlighter-rouge">mkdir -p secret_group_vars</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">mkdir -p secret_group_vars</code></p>
     </li>
     <li>
-      <p>Now we’ll create a strong password: <code class="highlighter-rouge">openssl rand -base64 24 &gt; vault-password.txt</code></p>
+      <p>Now we’ll create a strong password: <code class="language-plaintext highlighter-rouge">openssl rand -base64 24 &gt; vault-password.txt</code></p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">ansible-vault create secret_group_vars/all.yml --vault-password-file=vault-password.txt</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">ansible-vault create secret_group_vars/all.yml --vault-password-file=vault-password.txt</code></p>
 
-      <p>This will open <code class="highlighter-rouge">secret_group_vars/all.yml</code> in your text editor.</p>
+      <p>This will open <code class="language-plaintext highlighter-rouge">secret_group_vars/all.yml</code> in your text editor.</p>
     </li>
     <li>
       <p>In this file, enter the following contents and save it:</p>
@@ -1139,13 +1139,13 @@ The solution to this is to set <code class="highlighter-rouge">become: true</cod
       <blockquote class="question">
         <h3 id="question-question-6"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <p>How does your file look? Is it readable? Run <code class="highlighter-rouge">cat secret_group_vars/all.yml</code></p>
+        <p>How does your file look? Is it readable? Run <code class="language-plaintext highlighter-rouge">cat secret_group_vars/all.yml</code></p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.</p>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat secret_group_vars/all.yml
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat secret_group_vars/all.yml
 $ANSIBLE_VAULT;1.1;AES256
 64373665366130333437393639343534653134346538636239393363373062393830653333323966
 3134333366363130326139323162323131643763336236320a393262303938316262643764323862
@@ -1159,10 +1159,10 @@ $ANSIBLE_VAULT;1.1;AES256
       </blockquote>
     </li>
     <li>
-      <p>Use the new variable in our <code class="highlighter-rouge">.ini</code> file from earlier. Edit <code class="highlighter-rouge">roles/my-role/templates/test.ini.j2</code> and add the line <code class="highlighter-rouge">apikey = {{ apikey }}</code></p>
+      <p>Use the new variable in our <code class="language-plaintext highlighter-rouge">.ini</code> file from earlier. Edit <code class="language-plaintext highlighter-rouge">roles/my-role/templates/test.ini.j2</code> and add the line <code class="language-plaintext highlighter-rouge">apikey = {{ apikey }}</code></p>
     </li>
     <li>
-      <p>Add encrypted variable file to <code class="highlighter-rouge">playbook.yml</code></p>
+      <p>Add encrypted variable file to <code class="language-plaintext highlighter-rouge">playbook.yml</code></p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">my_hosts</span>
   <span class="s">...</span>
@@ -1171,7 +1171,7 @@ $ANSIBLE_VAULT;1.1;AES256
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Tell ansible where to find the decryption file. Create file <code class="highlighter-rouge">ansible.cfg</code> with content</p>
+      <p>Tell ansible where to find the decryption file. Create file <code class="language-plaintext highlighter-rouge">ansible.cfg</code> with content</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">[</span><span class="nv">defaults</span><span class="pi">]</span>
 <span class="s">vault_password_file=vault-password.txt</span>
@@ -1181,7 +1181,7 @@ $ANSIBLE_VAULT;1.1;AES256
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>Check the contents of <code class="highlighter-rouge">/tmp/test.ini</code></p>
+      <p>Check the contents of <code class="language-plaintext highlighter-rouge">/tmp/test.ini</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-7"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1207,7 +1207,7 @@ $ANSIBLE_VAULT;1.1;AES256
 
 </blockquote>
 
-<p>Ansible Vault is really useful to include encrypted secrets in your playbook repository. In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your <code class="highlighter-rouge">.gitignore</code> (or VCS appropriate file.)</p>
+<p>Ansible Vault is really useful to include encrypted secrets in your playbook repository. In real life scenarios where you are sharing your playbooks publicly, be sure to encrypt all secrets from the start (or fix/remove the git history if you ever did.) If you are storing your vault password in a file, remember to add it to your <code class="language-plaintext highlighter-rouge">.gitignore</code> (or VCS appropriate file.)</p>
 
 <h1 id="other-stuff">Other Stuff</h1>
 
@@ -1215,7 +1215,7 @@ $ANSIBLE_VAULT;1.1;AES256
 
 <h2 id="with-items">With Items</h2>
 
-<p>Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides <code class="highlighter-rouge">loop</code> construct</p>
+<p>Duplicating tasks ten times to install ten packages is not efficient, so Ansible provides <code class="language-plaintext highlighter-rouge">loop</code> construct</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
   <span class="na">package</span><span class="pi">:</span>
@@ -1228,7 +1228,7 @@ $ANSIBLE_VAULT;1.1;AES256
 </code></pre></div></div>
 
 <p>This works for any task, not just package installation if you have things you’d like to repeat.
-Note that for this task one would normally list multiple packages in the <code class="highlighter-rouge">name</code> parameter of the package module</p>
+Note that for this task one would normally list multiple packages in the <code class="language-plaintext highlighter-rouge">name</code> parameter of the package module</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install stuff</span>
   <span class="na">package</span><span class="pi">:</span>
@@ -1262,9 +1262,9 @@ Note that for this task one would normally list multiple packages in the <code c
 
 <h2 id="notifying-handlers">Notifying Handlers</h2>
 
-<p>Often you want to restart a service whenever something has changed, like above. But if you need to restart the service whenever one of many different tasks has changed, there is a simpler way than writing <code class="highlighter-rouge">when: a.changed or b.changed or c.changed or ...</code></p>
+<p>Often you want to restart a service whenever something has changed, like above. But if you need to restart the service whenever one of many different tasks has changed, there is a simpler way than writing <code class="language-plaintext highlighter-rouge">when: a.changed or b.changed or c.changed or ...</code></p>
 
-<p>First, move the restarting or reloading of the service into the <code class="highlighter-rouge">handlers/main.yml</code></p>
+<p>First, move the restarting or reloading of the service into the <code class="language-plaintext highlighter-rouge">handlers/main.yml</code></p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">restart service</span>
   <span class="na">service</span><span class="pi">:</span>
@@ -1281,7 +1281,7 @@ Note that for this task one would normally list multiple packages in the <code c
 
 <p>Now you can change your task definitions:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: Copy configuration file
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- name: Copy configuration file
   copy:
     src: main.conf
     dest: "/etc/service/main.conf
@@ -1291,7 +1291,7 @@ Note that for this task one would normally list multiple packages in the <code c
   notify: 'restart service'
 </code></pre></div></div>
 
-<p>We no longer <code class="highlighter-rouge">register</code> the command, instead the <code class="highlighter-rouge">notify</code> attribute automatically marks that the appropriate handler should be called <em>at the end of the playbook run</em>. Additionally tasks from outside of this role can use the same <code class="highlighter-rouge">notify</code>. So if you use a community built role for managing apache, and then have a custom role that builds the apache configuration, you can use changes there to reload the service using their definition of the reload/restart.</p>
+<p>We no longer <code class="language-plaintext highlighter-rouge">register</code> the command, instead the <code class="language-plaintext highlighter-rouge">notify</code> attribute automatically marks that the appropriate handler should be called <em>at the end of the playbook run</em>. Additionally tasks from outside of this role can use the same <code class="language-plaintext highlighter-rouge">notify</code>. So if you use a community built role for managing apache, and then have a custom role that builds the apache configuration, you can use changes there to reload the service using their definition of the reload/restart.</p>
 
 
                     

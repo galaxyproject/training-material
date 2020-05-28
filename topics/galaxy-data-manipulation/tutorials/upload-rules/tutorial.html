@@ -475,7 +475,7 @@
 so we have to use a backup from zenodo.
 You can select all the data below and copy them to your clipboard.</p>
 
-<div id="example-1-metadata" class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+<div id="example-1-metadata" class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
 PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
 PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
 PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
@@ -494,17 +494,17 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
       <p>By default the familiar simple upload dialog should appear. This dialog has more advanced options as different tabs across the top of this dialog though.</p>
     </li>
     <li>
-      <p><strong>Click</strong> <code class="highlighter-rouge">Rule-based</code> as shown below.</p>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Rule-based</code> as shown below.</p>
 
       <p><img src="../../images/rules/rules_example_1_1_rules_landing.png" alt="screenshot" />
 As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If <span class="notranslate">Galaxy</span> is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well.</p>
     </li>
     <li><strong>Paste</strong> your tabular data right into the textbox on this page as shown below
       <ul>
-        <li><strong>Click</strong> the <code class="highlighter-rouge">Build</code> button.</li>
+        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Build</code> button.</li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
 PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
 PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
 PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
@@ -516,7 +516,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
       <p><img src="../../images/rules/rules_example_1_2_paste.png" alt="screenshot" /></p>
     </li>
     <li>
-      <p><strong>Examine</strong> the  the <code class="highlighter-rouge">rules editor</code> which now pops up.</p>
+      <p><strong>Examine</strong> the  the <code class="language-plaintext highlighter-rouge">rules editor</code> which now pops up.</p>
 
       <p><img src="../../images/rules/rules_example_1_3_initial_rules.png" alt="screenshot" /></p>
     </li>
@@ -537,37 +537,37 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 <p>In order to get these files into <span class="notranslate">Galaxy</span>, we will want to do a few things:</p>
 <ul>
   <li>Strip that header out of the data (it doesn’t contain a URL <span class="notranslate">Galaxy</span> can download).</li>
-  <li>Define column <code class="highlighter-rouge">C</code> as the dataset name.</li>
-  <li>Define column <code class="highlighter-rouge">D</code> as the dataset URL (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
-  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="highlighter-rouge">fastqsanger.gz</code> files.</li>
+  <li>Define column <code class="language-plaintext highlighter-rouge">C</code> as the dataset name.</li>
+  <li>Define column <code class="language-plaintext highlighter-rouge">D</code> as the dataset URL (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
+  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files.</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-using-tabular-inputs-to-the-rule-builder"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using Tabular Inputs to the Rule Builder</h3>
 
-  <p>We will start by stripping that header out of the table. We call rules that strip rows out the table <code class="highlighter-rouge">Filter rules</code> in this dialog.</p>
+  <p>We will start by stripping that header out of the table. We call rules that strip rows out the table <code class="language-plaintext highlighter-rouge">Filter rules</code> in this dialog.</p>
 
   <ol>
-    <li>From <strong>Filter</strong> menu select <code class="highlighter-rouge">First or Last N Rows</code>
+    <li>From <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
       <ul>
-        <li><em>“Filter which rows?”</em>: <code class="highlighter-rouge">first</code></li>
-        <li><em>“Filter how many rows?”</em>: <code class="highlighter-rouge">1</code></li>
-        <li>Click <code class="highlighter-rouge">Apply</code>
+        <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+        <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code>
 <img src="../../images/rules/rules_example_1_4_filter_header.png" alt="screenshot" /></li>
       </ul>
 
       <p>Next we will define these columns for <span class="notranslate">Galaxy</span>.</p>
     </li>
-    <li>From <strong>Rules</strong> menu select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li>Click <code class="highlighter-rouge">Add Definition</code> button and select <code class="highlighter-rouge">Name</code>
+        <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code>
           <ul>
-            <li><em>“Name”</em>: <code class="highlighter-rouge">C</code></li>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">C</code></li>
           </ul>
         </li>
-        <li>Repeat this again and select <code class="highlighter-rouge">URL</code> instead.
+        <li>Repeat this again and select <code class="language-plaintext highlighter-rouge">URL</code> instead.
           <ul>
-            <li><em>“URL”</em>: <code class="highlighter-rouge">D</code></li>
+            <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
           </ul>
         </li>
       </ul>
@@ -575,13 +575,13 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
       <p><img src="../../images/rules/rules_example_1_5_mapping_edit.png" alt="screenshot" /></p>
     </li>
     <li>
-      <p><strong>Click</strong> <code class="highlighter-rouge">Apply</code>, and you should see your new column definitions listed as in the following screenshot.
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Apply</code>, and you should see your new column definitions listed as in the following screenshot.
 <img src="../../images/rules/rules_example_1_6_mapping_set.png" alt="screenshot" /></p>
 
       <p>You are now ready to start the upload</p>
     </li>
     <li>
-      <p><strong>Click</strong> the <code class="highlighter-rouge">Upload</code> button</p>
+      <p><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Upload</code> button</p>
 
       <p>After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.</p>
     </li>
@@ -609,41 +609,41 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
 
   <ol>
     <li><strong>Upload</strong> the metadata from the <a href="#example-1-metadata">first example</a> to your <span class="notranslate">Galaxy</span></li>
-    <li><strong>Open</strong> the <code class="highlighter-rouge">Rule-based</code> upload tab again, but this time:
+    <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
       <ul>
-        <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
-        <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">a History Dataset</code></li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">a History Dataset</code></li>
         <li><em>“Select dataset to load”</em>: the dataset you just uploaded
 <img src="../../images/rules/rules_example_2_1_inputs.png" alt="screenshot" /></li>
       </ul>
     </li>
-    <li><strong>Click</strong> <code class="highlighter-rouge">Build</code> to bring up the rule builder.
+    <li><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.
 <img src="../../images/rules/rules_example_2_2_initial_rules.png" alt="screenshot" /></li>
-    <li><strong>Repeat</strong> the steps from last time, except define column <code class="highlighter-rouge">C</code> as a <code class="highlighter-rouge">List Identifier</code> instead of Name:
+    <li><strong>Repeat</strong> the steps from last time, except define column <code class="language-plaintext highlighter-rouge">C</code> as a <code class="language-plaintext highlighter-rouge">List Identifier</code> instead of Name:
       <ul>
-        <li>From <strong>Filter</strong> menu select <code class="highlighter-rouge">First or Last N Rows</code>
+        <li>From <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
           <ul>
-            <li><em>“Filter which rows?”</em>: <code class="highlighter-rouge">first</code></li>
-            <li><em>“Filter how many rows?”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+            <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
-        <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+        <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
           <ul>
-            <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">URL</code>, Select Column <code class="highlighter-rouge">D</code></li>
-            <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">C</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Select Column <code class="language-plaintext highlighter-rouge">D</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
           </ul>
         </li>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
       </ul>
 
       <p><img src="../../images/rules/rules_example_2_3_rules.png" alt="screenshot" /></p>
 
-      <p>Rather than assigning column <code class="highlighter-rouge">C</code> as <code class="highlighter-rouge">Name</code>, in this example we assigned it as a <code class="highlighter-rouge">List Identifier</code>. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..</p>
+      <p>Rather than assigning column <code class="language-plaintext highlighter-rouge">C</code> as <code class="language-plaintext highlighter-rouge">Name</code>, in this example we assigned it as a <code class="language-plaintext highlighter-rouge">List Identifier</code>. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..</p>
     </li>
-    <li><strong>Enter</strong> a name for our collection, for example the ENA study identifier as shown below, <code class="highlighter-rouge">PRJDA60709</code>.
+    <li><strong>Enter</strong> a name for our collection, for example the ENA study identifier as shown below, <code class="language-plaintext highlighter-rouge">PRJDA60709</code>.
 <img src="../../images/rules/rules_example_2_4_name.png" alt="screenshot" /></li>
     <li>
-      <p><strong>Click</strong> <code class="highlighter-rouge">Upload</code></p>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Upload</code></p>
 
       <p>This time a single new entry will appear in your history panel corresponding to all the files gathered together in a simple list named <strong>PRJDA60709</strong>.</p>
     </li>
@@ -661,14 +661,14 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
     <li>
       <p><strong>Open</strong> the Rule Builder</p>
     </li>
-    <li><strong>Open</strong> the <code class="highlighter-rouge">Rule-based</code> upload tab again, but this time:
+    <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
       <ul>
         <li><em>“Upload data as”</em>: Collection(s)</li>
-        <li><em>“Load tabular data from”</em>: a <code class="highlighter-rouge">Pasted Table</code></li>
+        <li><em>“Load tabular data from”</em>: a <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
         <li>
           <p><strong>Paste</strong> the following table</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
 PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_2.fastq.gz
 PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_2.fastq.gz
 PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_2.fastq.gz
@@ -681,96 +681,96 @@ PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36
       </ul>
     </li>
     <li>
-      <p><strong>Click</strong> <code class="highlighter-rouge">Build</code> and proceed to the rule builder.
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> and proceed to the rule builder.
 <img src="../../images/rules/rules_example_3_2_initial_rules.png" alt="screenshot" /></p>
     </li>
     <li><strong>Repeat</strong> the last example with:
       <ul>
-        <li>From <strong>Filter</strong> menu select <code class="highlighter-rouge">First or Last N Rows</code>
+        <li>From <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
           <ul>
-            <li><em>“Filter which rows?”</em>: <code class="highlighter-rouge">first</code></li>
-            <li><em>“Filter how many rows?”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+            <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
-        <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+        <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
           <ul>
-            <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">C</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
           </ul>
         </li>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">fastqsanger.gz</code></li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
       </ul>
 
-      <p>In this dataset, column <code class="highlighter-rouge">D</code> contains two URLs, separated by a semicolon <code class="highlighter-rouge">;</code>. So we cannot define that column as the URL directly, we will need to split it into two columns first.
-We will build a regular <span class="notranslate">expression</span> that captures two “groups” from this column with two URLs - one group for everything before the <code class="highlighter-rouge">;</code> and one group for everything after.</p>
+      <p>In this dataset, column <code class="language-plaintext highlighter-rouge">D</code> contains two URLs, separated by a semicolon <code class="language-plaintext highlighter-rouge">;</code>. So we cannot define that column as the URL directly, we will need to split it into two columns first.
+We will build a regular <span class="notranslate">expression</span> that captures two “groups” from this column with two URLs - one group for everything before the <code class="language-plaintext highlighter-rouge">;</code> and one group for everything after.</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
-        <li><em>“From Column”</em>: <code class="highlighter-rouge">D</code></li>
-        <li>Select <code class="highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">(.*);(.*)</code></li>
-        <li><em>“Number of Groups”</em>: <code class="highlighter-rouge">2</code>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*);(.*)</code></li>
+        <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">2</code>
 <img src="../../images/rules/rules_example_3_4_regex.png" alt="screenshot" /></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-regular-expression-explained"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
-        <p>Here <code class="highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
-The parentheses around <code class="highlighter-rouge">.*</code> means form a “group” from whatever is matched. The <code class="highlighter-rouge">;</code> will match with the actual <code class="highlighter-rouge">;</code> in the target cells.
+        <p>Here <code class="language-plaintext highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
+The parentheses around <code class="language-plaintext highlighter-rouge">.*</code> means form a “group” from whatever is matched. The <code class="language-plaintext highlighter-rouge">;</code> will match with the actual <code class="language-plaintext highlighter-rouge">;</code> in the target cells.
 In his example we have two such matching groups.</p>
       </blockquote>
     </li>
     <li>
       <p>Click <strong>Apply</strong> to apply the regular <span class="notranslate">expression</span> to the metadata table</p>
 
-      <p>Column <code class="highlighter-rouge">D</code> is no longer needed, so we can remove it:</p>
+      <p>Column <code class="language-plaintext highlighter-rouge">D</code> is no longer needed, so we can remove it:</p>
     </li>
-    <li>From <strong>Rules</strong> select <code class="highlighter-rouge">Remove Column(s)</code>
+    <li>From <strong>Rules</strong> select <code class="language-plaintext highlighter-rouge">Remove Column(s)</code>
       <ul>
-        <li><em>“From Column”</em>: <code class="highlighter-rouge">D</code>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">D</code>
 <img src="../../images/rules/rules_example_3_7_removed_column.png" alt="screenshot" /></li>
       </ul>
 
       <p>We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward <span class="notranslate">reads</span> and one for the reverse):</p>
     </li>
-    <li>From <strong>Rules</strong> select <code class="highlighter-rouge">Split Column(s)</code>
+    <li>From <strong>Rules</strong> select <code class="language-plaintext highlighter-rouge">Split Column(s)</code>
       <ul>
-        <li><em>“Odd Row Column(s)”</em>: <code class="highlighter-rouge">D</code></li>
-        <li><em>“Even Row Column(s)”</em>: <code class="highlighter-rouge">E</code></li>
-        <li>Click <code class="highlighter-rouge">Apply</code></li>
+        <li><em>“Odd Row Column(s)”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“Even Row Column(s)”</em>: <code class="language-plaintext highlighter-rouge">E</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
       </ul>
 
       <p><img src="../../images/rules/rules_example_3_9_columns_are_split.png" alt="screenshot" />
-For every row before the transformation with columns <code class="highlighter-rouge">ABCDE</code>, this will produce two rows, <code class="highlighter-rouge">ABCD</code> and <code class="highlighter-rouge">ABCE</code>. Thus you will have twice as many rows as before.
+For every row before the transformation with columns <code class="language-plaintext highlighter-rouge">ABCDE</code>, this will produce two rows, <code class="language-plaintext highlighter-rouge">ABCD</code> and <code class="language-plaintext highlighter-rouge">ABCE</code>. Thus you will have twice as many rows as before.
 <br /><br />
-Now we need to inform <span class="notranslate">Galaxy</span> which of these rows are “forward” <span class="notranslate">reads</span> and which are “reverse” <span class="notranslate">reads</span>. We will do this by adding a new column again using a regular <span class="notranslate">expression</span>. Here we will match on the <code class="highlighter-rouge">_1</code> or <code class="highlighter-rouge">_2</code> in the filename at the end of the URLs.</p>
+Now we need to inform <span class="notranslate">Galaxy</span> which of these rows are “forward” <span class="notranslate">reads</span> and which are “reverse” <span class="notranslate">reads</span>. We will do this by adding a new column again using a regular <span class="notranslate">expression</span>. Here we will match on the <code class="language-plaintext highlighter-rouge">_1</code> or <code class="language-plaintext highlighter-rouge">_2</code> in the filename at the end of the URLs.</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
-        <li><em>“Column”</em>: <code class="highlighter-rouge">D</code></li>
-        <li>Select <code class="highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">.*_(\d).fastq.gz</code>.</li>
-        <li><em>“Number of groups”</em>: <code class="highlighter-rouge">1</code>
+        <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_(\d).fastq.gz</code>.</li>
+        <li><em>“Number of groups”</em>: <code class="language-plaintext highlighter-rouge">1</code>
 <img src="../../images/rules/rules_example_3_10_regex_paired.png" alt="screenshot" /></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-regular-expression-explained-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
-        <p>Here <code class="highlighter-rouge">\d</code> means match any digit. This regular <span class="notranslate">expression</span> will use a capturing group to select only the <code class="highlighter-rouge">1</code> or <code class="highlighter-rouge">2</code> part of the URL that appears before the extension.
+        <p>Here <code class="language-plaintext highlighter-rouge">\d</code> means match any digit. This regular <span class="notranslate">expression</span> will use a capturing group to select only the <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">2</code> part of the URL that appears before the extension.
 In his example we have one matching groups ( contained in the parentheses )</p>
       </blockquote>
 
       <p>At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not necessary but it makes the screenshots more informative.</p>
     </li>
-    <li>From <strong>Rule</strong> select <code class="highlighter-rouge">Swap Columns</code>
+    <li>From <strong>Rule</strong> select <code class="language-plaintext highlighter-rouge">Swap Columns</code>
       <ul>
-        <li><em>“Swap Column”</em>: <code class="highlighter-rouge">D</code></li>
-        <li><em>“With Column”</em>: <code class="highlighter-rouge">E</code></li>
+        <li><em>“Swap Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“With Column”</em>: <code class="language-plaintext highlighter-rouge">E</code></li>
       </ul>
     </li>
-    <li><strong>Open</strong> the column definitions back up (<strong>Rules</strong> Menu, <code class="highlighter-rouge">Add / Modify Column Definitions</code>)
+    <li><strong>Open</strong> the column definitions back up (<strong>Rules</strong> Menu, <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>)
       <ul>
-        <li><em>“paired indicator”</em>: column <code class="highlighter-rouge">D</code></li>
-        <li><em>“URL”</em>: column <code class="highlighter-rouge">E</code></li>
+        <li><em>“paired indicator”</em>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“URL”</em>: column <code class="language-plaintext highlighter-rouge">E</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -787,11 +787,11 @@ In his example we have one matching groups ( contained in the parentheses )</p>
           <tbody>
             <tr>
               <td>Forward</td>
-              <td><code class="highlighter-rouge">1</code>, <code class="highlighter-rouge">R1</code>, <code class="highlighter-rouge">forward</code>, <code class="highlighter-rouge">f</code>, or <code class="highlighter-rouge">F</code></td>
+              <td><code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">R1</code>, <code class="language-plaintext highlighter-rouge">forward</code>, <code class="language-plaintext highlighter-rouge">f</code>, or <code class="language-plaintext highlighter-rouge">F</code></td>
             </tr>
             <tr>
               <td>Reverse</td>
-              <td><code class="highlighter-rouge">2</code>, <code class="highlighter-rouge">R2</code>, <code class="highlighter-rouge">reverse</code>, <code class="highlighter-rouge">r</code>, or <code class="highlighter-rouge">R</code></td>
+              <td><code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">R2</code>, <code class="language-plaintext highlighter-rouge">reverse</code>, <code class="language-plaintext highlighter-rouge">r</code>, or <code class="language-plaintext highlighter-rouge">R</code></td>
             </tr>
           </tbody>
         </table>
@@ -818,10 +818,10 @@ In his example we have one matching groups ( contained in the parentheses )</p>
 
   <ol>
     <li>Open <a href="https://www.uniprot.org/uniprot/E7C0H6">Uniprot</a></li>
-    <li><strong>Click</strong> on one of the entries in the table (e.g. <code class="highlighter-rouge">E7C0H6</code>)</li>
-    <li><strong>Select</strong> <code class="highlighter-rouge">Format</code> from the top menu</li>
+    <li><strong>Click</strong> on one of the entries in the table (e.g. <code class="language-plaintext highlighter-rouge">E7C0H6</code>)</li>
+    <li><strong>Select</strong> <code class="language-plaintext highlighter-rouge">Format</code> from the top menu</li>
     <li>
-      <p><strong>Click</strong> <code class="highlighter-rouge">FASTA (canonical)</code></p>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">FASTA (canonical)</code></p>
 
       <p><img src="../../images/rules/uniprot_fasta.png" alt="Link to access FASTA file" /></p>
     </li>
@@ -830,7 +830,7 @@ In his example we have one matching groups ( contained in the parentheses )</p>
 
       <p><img src="../../images/rules/uniprot_fasta_url.png" alt="Viewing the FASTA file" /></p>
     </li>
-    <li>We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form <code class="highlighter-rouge">https://www.uniprot.org/uniprot/{identifier}.fasta</code></li>
+    <li>We can deduce that the FASTA files for the other accession IDs will be available from URLs of the form <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/{identifier}.fasta</code></li>
   </ol>
 
 </blockquote>
@@ -843,12 +843,12 @@ In his example we have one matching groups ( contained in the parentheses )</p>
   <ol>
     <li>Open the Rule Builder
       <ul>
-        <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
-        <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
         <li>
           <p><strong>Paste</strong> the following table:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entry	Entry name	Status	Protein names	Gene names	Organism	Length
 E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
 E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
 E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
@@ -858,26 +858,26 @@ E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus cabal
 E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
 </code></pre></div>          </div>
         </li>
-        <li>Click <code class="highlighter-rouge">Build</code>
+        <li>Click <code class="language-plaintext highlighter-rouge">Build</code>
 <img src="../../images/rules/rules_example_4_2_initial_rules.png" alt="screenshot" /></li>
       </ul>
     </li>
     <li>Let’s apply some initial filtering to our data:
       <ul>
-        <li>From <strong>Filter</strong> menu, select <code class="highlighter-rouge">First or Last N Rows</code>
+        <li>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
           <ul>
             <li>Filter the first row</li>
           </ul>
         </li>
-        <li>From <strong>Rules</strong> menu, select  <code class="highlighter-rouge">Remove Columns</code>
+        <li>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Remove Columns</code>
           <ul>
             <li>Remove columns B, C, E, F, and G.</li>
           </ul>
         </li>
-        <li>From <strong>Rules</strong> menu, select  <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+        <li>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
           <ul>
             <li>
-              <p>Click <code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">Info</code>, Column <code class="highlighter-rouge">B</code></p>
+              <p>Click <code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">Info</code>, Column <code class="language-plaintext highlighter-rouge">B</code></p>
 
               <p>This is a block of text that will appear in the history panel when the dataset is expanded.
 <img src="../../images/rules/rules_example_4_3_basic_rules.png" alt="screenshot" /></p>
@@ -889,21 +889,21 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       <p>These datasets appear in a seemingly random order, it will be easier to manage things in the history panel if we sort this data first.
 <img src="../../images/rules/rules_example_4_4_sort.png" alt="screenshot" /></p>
     </li>
-    <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Sort</code>
+    <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Sort</code>
       <ul>
-        <li><em>“From Column”</em>: <code class="highlighter-rouge">A</code></li>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
       </ul>
 
       <p>Next is the key step, we will build a URL from the pattern we described above using the accession ID in column A.</p>
     </li>
-    <li>From <strong>Column</strong> menu, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
-        <li><em>“From Column”</em>: <code class="highlighter-rouge">A</code></li>
-        <li>Select <code class="highlighter-rouge">Create column from <span class="notranslate">expression</span> replacement</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">.*</code></li>
-        <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">https://www.uniprot.org/uniprot/\0.fasta</code></li>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create column from <span class="notranslate">expression</span> replacement</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*</code></li>
+        <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/\0.fasta</code></li>
         <li>
-          <p>Click <code class="highlighter-rouge">Apply</code></p>
+          <p>Click <code class="language-plaintext highlighter-rouge">Apply</code></p>
 
           <p><img src="../../images/rules/rules_example_4_5_url.png" alt="screenshot" /></p>
         </li>
@@ -911,9 +911,9 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
 
       <blockquote class="comment">
         <h3 id="comment-regular-expression-explained-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
-        <p>In this regular <span class="notranslate">expression</span>, <code class="highlighter-rouge">.*</code> will capture the entire accession ID.</p>
+        <p>In this regular <span class="notranslate">expression</span>, <code class="language-plaintext highlighter-rouge">.*</code> will capture the entire accession ID.</p>
 
-        <p>In the replacement <span class="notranslate">expression</span>, <code class="highlighter-rouge">https://www.uniprot.org/uniprot/\0.fasta</code>, the <code class="highlighter-rouge">\0</code> will be replaced by the captured
+        <p>In the replacement <span class="notranslate">expression</span>, <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/\0.fasta</code>, the <code class="language-plaintext highlighter-rouge">\0</code> will be replaced by the captured
 regular <span class="notranslate">expression</span> (the accession ID) in the resulting column values.</p>
       </blockquote>
 
@@ -922,17 +922,17 @@ regular <span class="notranslate">expression</span> (the accession ID) in the re
 
       <p>Finally, let us set our column definitions:</p>
     </li>
-    <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Select Column <code class="highlighter-rouge">A</code></li>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">URL</code>, Column <code class="highlighter-rouge">C</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Select Column <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
       </ul>
     </li>
     <li>Finalize the collection:
       <ul>
-        <li><em>“Name”</em>: for example <code class="highlighter-rouge">UP000052092</code></li>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">fasta</code></li>
-        <li>Click <code class="highlighter-rouge">Upload</code>
+        <li><em>“Name”</em>: for example <code class="language-plaintext highlighter-rouge">UP000052092</code></li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fasta</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Upload</code>
 <img src="../../images/rules/rules_example_4_7_mapping_extension_and_name.png" alt="screenshot" /></li>
       </ul>
 
@@ -945,7 +945,7 @@ regular <span class="notranslate">expression</span> (the accession ID) in the re
         <p>This could additionally be copied and pasted if you need to do the same set of operations on multiple metadata inputs that are similarly formatted.</p>
       </blockquote>
     </li>
-    <li>Click <code class="highlighter-rouge">Build</code> and wait for your list of FASTA files to appear.</li>
+    <li>Click <code class="language-plaintext highlighter-rouge">Build</code> and wait for your list of FASTA files to appear.</li>
   </ol>
 </blockquote>
 
@@ -961,10 +961,10 @@ regular <span class="notranslate">expression</span> (the accession ID) in the re
   <ol>
     <li><strong>Open</strong> the Rule Builder
       <ul>
-        <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
-        <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
         <li>Paste the table from the previous exercise:
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entry	Entry name	Status	Protein names	Gene names	Organism	Length
 E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
 E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
 E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
@@ -974,7 +974,7 @@ E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus cabal
 E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
 </code></pre></div>          </div>
         </li>
-        <li>Click <code class="highlighter-rouge">Build</code> and proceed to the rule builder.
+        <li>Click <code class="language-plaintext highlighter-rouge">Build</code> and proceed to the rule builder.
 <img src="../../images/rules/rules_example_5_1_inputs.png" alt="screenshot" /></li>
       </ul>
     </li>
@@ -984,10 +984,10 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
       <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"rules"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_filter_count"</span><span class="p">,</span><span class="nl">"count"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="nl">"which"</span><span class="p">:</span><span class="s2">"first"</span><span class="p">,</span><span class="nl">"invert"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nl">"target_columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"sort"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"numeric"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_regex"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"<span class="notranslate">expression</span>"</span><span class="p">:</span><span class="s2">".*"</span><span class="p">,</span><span class="nl">"replacement"</span><span class="p">:</span><span class="s2">"http://www.uniprot.org/uniprot/</span><span class="se">\\</span><span class="s2">0.fasta"</span><span class="p">}],</span><span class="nl">"<span class="notranslate">mapping</span>"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"info"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"list_identifiers"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="nl">"editing"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"url"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">2</span><span class="p">]}],</span><span class="nl">"extension"</span><span class="p">:</span><span class="s2">"csfasta"</span><span class="p">}</span><span class="w">
 </span></code></pre></div>      </div>
     </li>
-    <li>In the ruler builder interface, select the <strong>wrench icon</strong> next to the word <code class="highlighter-rouge">Rules</code>
+    <li>In the ruler builder interface, select the <strong>wrench icon</strong> next to the word <code class="language-plaintext highlighter-rouge">Rules</code>
       <ul>
         <li>Paste the rules into the textbox</li>
-        <li>Click <code class="highlighter-rouge">Apply</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
       </ul>
 
       <p><img src="../../images/rules/rules_example_5_2_source.png" alt="screenshot" /></p>
@@ -997,42 +997,42 @@ E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-depende
 
       <p>This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.</p>
     </li>
-    <li>From <strong>Column</strong> menu, select  <code class="highlighter-rouge">Fixed Value</code>
+    <li>From <strong>Column</strong> menu, select  <code class="language-plaintext highlighter-rouge">Fixed Value</code>
       <ul>
-        <li><em>“Value”</em>: <code class="highlighter-rouge">fasta</code></li>
-        <li>Click <code class="highlighter-rouge">Apply</code>
+        <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">fasta</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code>
 This value will eventually be used for the datatype of the file.</li>
       </ul>
     </li>
     <li><strong>Repeat</strong> this process with:
       <ul>
-        <li><em>“Value”</em>:<code class="highlighter-rouge">UP000052092 FASTA</code></li>
+        <li><em>“Value”</em>:<code class="language-plaintext highlighter-rouge">UP000052092 FASTA</code></li>
       </ul>
 
       <p>Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
-        <li><em>“From Column”</em>: <code class="highlighter-rouge">A</code></li>
-        <li>Select <code class="highlighter-rouge">Create column from <span class="notranslate">expression</span> replacement</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">.*</code></li>
-        <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">https://www.uniprot.org/uniprot/\0.gff</code>.
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create column from <span class="notranslate">expression</span> replacement</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*</code></li>
+        <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/\0.gff</code>.
  <img src="../../images/rules/rules_example_5_5_url.png" alt="screenshot" /></li>
       </ul>
 
       <p>Next we will add two more columns</p>
     </li>
-    <li>From <strong>Column</strong> menu, select  <code class="highlighter-rouge">Fixed Value</code>
+    <li>From <strong>Column</strong> menu, select  <code class="language-plaintext highlighter-rouge">Fixed Value</code>
       <ul>
-        <li><em>“Value”</em>: <code class="highlighter-rouge">gff3</code></li>
-        <li>Click <code class="highlighter-rouge">Apply</code></li>
+        <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">gff3</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
       </ul>
 
       <p>This value will eventually be used for the datatype of the file.</p>
     </li>
     <li><strong>Repeat</strong> this process with:
       <ul>
-        <li><em>“Value”</em>: <code class="highlighter-rouge">UP000052092 GFF3</code></li>
+        <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">UP000052092 GFF3</code></li>
       </ul>
 
       <p>Your very large list of rules should now look like the following screenshot.
@@ -1040,35 +1040,35 @@ This value will eventually be used for the datatype of the file.</li>
 
       <p>Notice we have two URLs, two collection names, and two datatype extensions for each accession ID we started with. Like in the example where we split the columns, here we will split these up to describe multiple collections.</p>
     </li>
-    <li>From <strong>Rules</strong> menu, select  <code class="highlighter-rouge">Split Columns</code>
+    <li>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Split Columns</code>
       <ul>
-        <li><em>“Odd Number Column(s)”</em>: <code class="highlighter-rouge">C</code>, <code class="highlighter-rouge">D</code>, and <code class="highlighter-rouge">E</code> (the fasta columns)</li>
-        <li><em>“Even Number Column(s)”</em>: <code class="highlighter-rouge">F</code>, <code class="highlighter-rouge">G</code>, and <code class="highlighter-rouge">H</code> (the gff3 columns)</li>
+        <li><em>“Odd Number Column(s)”</em>: <code class="language-plaintext highlighter-rouge">C</code>, <code class="language-plaintext highlighter-rouge">D</code>, and <code class="language-plaintext highlighter-rouge">E</code> (the fasta columns)</li>
+        <li><em>“Even Number Column(s)”</em>: <code class="language-plaintext highlighter-rouge">F</code>, <code class="language-plaintext highlighter-rouge">G</code>, and <code class="language-plaintext highlighter-rouge">H</code> (the gff3 columns)</li>
       </ul>
 
-      <p>This will take the row consisting of the columns <code class="highlighter-rouge">ABCDEFGH</code> and build two rows, one with <code class="highlighter-rouge">ABCDEF</code> and the other with <code class="highlighter-rouge">ABFGH</code>
+      <p>This will take the row consisting of the columns <code class="language-plaintext highlighter-rouge">ABCDEFGH</code> and build two rows, one with <code class="language-plaintext highlighter-rouge">ABCDEF</code> and the other with <code class="language-plaintext highlighter-rouge">ABFGH</code>
 <img src="../../images/rules/rules_example_5_7_split_columns.png" alt="screenshot" /></p>
     </li>
     <li>
-      <p>Click <code class="highlighter-rouge">Apply</code> and you should be returned the list of rules.
+      <p>Click <code class="language-plaintext highlighter-rouge">Apply</code> and you should be returned the list of rules.
 <img src="../../images/rules/rules_example_5_8_split.png" alt="screenshot" /></p>
 
       <p>Finally, we need to add some more column definitions for these new columns we just created:</p>
     </li>
-    <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier</code>, Column <code class="highlighter-rouge">A</code></li>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">Info</code>, Column <code class="highlighter-rouge">B</code></li>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">URL</code>, Column <code class="highlighter-rouge">C</code></li>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">Type</code>, Column <code class="highlighter-rouge">D</code></li>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">Collection Name</code>, Column <code class="highlighter-rouge">E</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier</code>, Column <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">Info</code>, Column <code class="language-plaintext highlighter-rouge">B</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">Type</code>, Column <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">Collection Name</code>, Column <code class="language-plaintext highlighter-rouge">E</code></li>
       </ul>
 
       <p>Notice when these values are being generated from the metadata the option to specify them manually from the <strong>type</strong> and <strong>collection name</strong> boxes from the bottom of the form disappear.
 <img src="../../images/rules/rules_example_5_9_mapping.png" alt="screenshot" /></p>
     </li>
     <li>
-      <p>Click <code class="highlighter-rouge">Upload</code></p>
+      <p>Click <code class="language-plaintext highlighter-rouge">Upload</code></p>
 
       <p><span class="notranslate">Galaxy</span> should make two collections - one containing FASTA files and one containing GFF3 files.</p>
     </li>
@@ -1080,7 +1080,7 @@ This value will eventually be used for the datatype of the file.</li>
 
 <p>In this example, we will be building a nested list using data from <a href="https://www.ncbi.nlm.nih.gov/sra">SRA</a>. This is a more sophisticated structure for organizing datasets in <span class="notranslate">Galaxy</span>. In the above examples we organized datasets into simple lists with a single “list identifier” describing the files in the collection. <span class="notranslate">Galaxy</span> allows lists to be organized into nested lists - where each level of the list has an identifier.</p>
 
-<p>If two such identifiers are present, this is a list of lists (called <code class="highlighter-rouge">list:list</code> in the <span class="notranslate">workflow</span> editor). In such a structure the outer identifiers (or first level of identifiers) may describe sample names and the inner identifiers (or second level) may describe replicates. Alte<span class="notranslate">rna</span>tive the outer identifiers may describe conditions and the inner identifiers may describe individual samples. The structure of such collections should ideally be dictated by the study design.</p>
+<p>If two such identifiers are present, this is a list of lists (called <code class="language-plaintext highlighter-rouge">list:list</code> in the <span class="notranslate">workflow</span> editor). In such a structure the outer identifiers (or first level of identifiers) may describe sample names and the inner identifiers (or second level) may describe replicates. Alte<span class="notranslate">rna</span>tive the outer identifiers may describe conditions and the inner identifiers may describe individual samples. The structure of such collections should ideally be dictated by the study design.</p>
 
 <p>If certain parts of your analysis require benefit from datasets being nested this way while other parts require feeding you data to a <span class="notranslate">Galaxy</span> tool all together without such a structure, then it is probably best to go ahead and build nested lists at the start of your analysis and then use the “Flatten Collection” tool on the resulting collection or a derivative collection to get the flat structure needed by certain tools in certain parts of your analysis.</p>
 
@@ -1094,8 +1094,8 @@ This value will eventually be used for the datatype of the file.</li>
   <ol>
     <li>Open the Rule Builder
       <ul>
-        <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
-        <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
         <li>Paste the table</li>
       </ul>
 
@@ -1104,7 +1104,7 @@ This value will eventually be used for the datatype of the file.</li>
 
         <p>Below is the table with pre-downloaded example data mentioned above:</p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Run	ReleaseDate	LoadDate	spots	bases	spots_with_mates	avgLength	size_MB	AssemblyName	download_path	Experiment	LibraryName
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Run	ReleaseDate	LoadDate	spots	bases	spots_with_mates	avgLength	size_MB	AssemblyName	download_path	Experiment	LibraryName
 SRR5363633	2017-03-21 11:40:07	2017-03-21 11:29:13	9942851	1993124486	9791175	200	809	assembly	https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>-examples/master/sra_PRJNA355367/SRR5363633	SRX2659078	wtPA14
 SRR5363634	2017-03-21 13:19:08	2017-03-21 13:17:11	1158307	232298840	1141697	200	81	assembly	https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>-examples/master/sra_PRJNA355367/SRR5363634	SRX2659079	con10
 SRR5363635	2017-03-21 13:19:08	2017-03-21 13:16:39	1270067	254490549	1249658	200	89	assembly	https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>-examples/master/sra_PRJNA355367/SRR5363635	SRX2659080	con9
@@ -1200,36 +1200,36 @@ SRR5363715	2017-03-21 11:26:06	2017-03-21 10:59:33	712060	142833136	702138	200	5
     </li>
     <li>As in the previous exercises, please:
       <ul>
-        <li>Set this <code class="highlighter-rouge">Column definition</code> for the URL target</li>
+        <li>Set this <code class="language-plaintext highlighter-rouge">Column definition</code> for the URL target</li>
         <li>
           <p>Strip the header row</p>
 
           <blockquote class="solution">
             <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-            <p>From <strong>Filter</strong> menu, select <code class="highlighter-rouge">First or Last N Rows</code></p>
+            <p>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code></p>
             <ul>
               <li>Filter first Row</li>
             </ul>
 
-            <p>From <strong>Rules</strong> menu, select  <code class="highlighter-rouge">Add / Modify Column Definitions</code></p>
+            <p>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code></p>
             <ul>
-              <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">URL</code>, Column <code class="highlighter-rouge">J</code>.
+              <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Column <code class="language-plaintext highlighter-rouge">J</code>.
   <img src="../../images/rules/rules_example_6_3_end_of_table.png" alt="screenshot" /></li>
             </ul>
           </blockquote>
         </li>
       </ul>
 
-      <p>For the analysis we wish to do, we want to group these files based on the type indicated in column <code class="highlighter-rouge">L</code> (LibraryName) shown below.
-The source data though adds numbers to the library type to to generate the <code class="highlighter-rouge">LibraryName</code>, we need to strip those out to use the type
+      <p>For the analysis we wish to do, we want to group these files based on the type indicated in column <code class="language-plaintext highlighter-rouge">L</code> (LibraryName) shown below.
+The source data though adds numbers to the library type to to generate the <code class="language-plaintext highlighter-rouge">LibraryName</code>, we need to strip those out to use the type
 as an identifier for grouping the datasets. To do this, use the regex column adder rule again.</p>
     </li>
-    <li>From <strong>Column</strong> menu, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
-        <li><em>“From Column”</em>: <code class="highlighter-rouge">L</code></li>
-        <li>Select <code class="highlighter-rouge">Create column from regular <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">([^\d]+)\d+</code>.</li>
-        <li><em>“Number of Groups”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">L</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create column from regular <span class="notranslate">expression</span> groups</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">([^\d]+)\d+</code>.</li>
+        <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
 
       <p>The result looks like:
@@ -1237,21 +1237,21 @@ as an identifier for grouping the datasets. To do this, use the regex column add
 
       <blockquote class="comment">
         <h3 id="comment-regular-expression-explained-3"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
-        <p>In this regular <span class="notranslate">expression</span>, <code class="highlighter-rouge">\d</code> means any digit, so <code class="highlighter-rouge">[^...]</code> means match anything that is not inside the brackets.
-So together <code class="highlighter-rouge">[^\d]+</code> means match one or more, non digits at the start of the column and the <code class="highlighter-rouge">()</code> around that means capture
-them into a group. We’ve add <code class="highlighter-rouge">\d+</code> at the end of the <span class="notranslate">expression</span> but it isn’t grouped so we are effectively ignoring the
+        <p>In this regular <span class="notranslate">expression</span>, <code class="language-plaintext highlighter-rouge">\d</code> means any digit, so <code class="language-plaintext highlighter-rouge">[^...]</code> means match anything that is not inside the brackets.
+So together <code class="language-plaintext highlighter-rouge">[^\d]+</code> means match one or more, non digits at the start of the column and the <code class="language-plaintext highlighter-rouge">()</code> around that means capture
+them into a group. We’ve add <code class="language-plaintext highlighter-rouge">\d+</code> at the end of the <span class="notranslate">expression</span> but it isn’t grouped so we are effectively ignoring the
 digits at the end as we had hoped.</p>
       </blockquote>
 
-      <p>Now we have two columns we need to assign list identifiers for, the new column <code class="highlighter-rouge">M</code> for the first, outer identifier and the
-first column <code class="highlighter-rouge">A</code> for the inner, second identifier.</p>
+      <p>Now we have two columns we need to assign list identifiers for, the new column <code class="language-plaintext highlighter-rouge">M</code> for the first, outer identifier and the
+first column <code class="language-plaintext highlighter-rouge">A</code> for the inner, second identifier.</p>
     </li>
-    <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">M</code></li>
-        <li>Click on <code class="highlighter-rouge">... Assign Another Column</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">M</code></li>
+        <li>Click on <code class="language-plaintext highlighter-rouge">... Assign Another Column</code></li>
         <li>
-          <p>Select column <code class="highlighter-rouge">A</code></p>
+          <p>Select column <code class="language-plaintext highlighter-rouge">A</code></p>
 
           <blockquote class="comment">
             <h3 id="comment-re-ordering-columns"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Re-ordering columns</h3>
@@ -1264,17 +1264,17 @@ first column <code class="highlighter-rouge">A</code> for the inner, second iden
 <img src="../../images/rules/rules_example_6_5_multiple_identifiers_edit.png" alt="screenshot" /></p>
     </li>
     <li>
-      <p>Click <code class="highlighter-rouge">Apply</code> to return to the rule preview screen and notice there are two column listed for the list identifier definition
+      <p>Click <code class="language-plaintext highlighter-rouge">Apply</code> to return to the rule preview screen and notice there are two column listed for the list identifier definition
   <img src="../../images/rules/rules_example_6_6_multiple_identifiers.png" alt="screenshot" /></p>
     </li>
     <li>Finalize your collection:
       <ul>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">txt</code></li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">txt</code></li>
         <li>Name your Collection</li>
-        <li>Click <code class="highlighter-rouge">Upload</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Upload</code></li>
       </ul>
 
-      <p>Note: set <em>“Type”</em> to <code class="highlighter-rouge">sra</code> if you used real data from SRA instead of the table from exercise.
+      <p>Note: set <em>“Type”</em> to <code class="language-plaintext highlighter-rouge">sra</code> if you used real data from SRA instead of the table from exercise.
   <img src="../../images/rules/rules_example_6_7_named.png" alt="screenshot" /></p>
     </li>
   </ol>
@@ -1293,12 +1293,12 @@ from the <a href="https://bioconductor.org/packages/release/data/experiment/html
   <ol>
     <li>Open the Rule Builder
       <ul>
-        <li><em>“Upload data as”</em>: <code class="highlighter-rouge">Collection(s)</code></li>
-        <li><em>“Load tabular data from”</em>: <code class="highlighter-rouge">Pasted Table</code></li>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
         <li>Paste the following table:</li>
       </ul>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>/apply_rules_tutorials/test-data/rules/treated1fb.txt treated_single_1
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>/apply_rules_tutorials/test-data/rules/treated1fb.txt treated_single_1
 https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>/apply_rules_tutorials/test-data/rules/treated2fb.txt treated_paired_2
 https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>/apply_rules_tutorials/test-data/rules/treated3fb.txt treated_paired_3
 https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</span>/apply_rules_tutorials/test-data/rules/untreated1fb.txt untreated_single_4
@@ -1309,25 +1309,25 @@ https://raw.githubusercontent.com/jmchilton/<span class="notranslate">galaxy</sp
 
       <p>Next, we set up the column types:</p>
     </li>
-    <li>From <strong>Rules</strong> menu, select  <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">URL</code>, column <code class="highlighter-rouge">A</code></li>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, column <code class="highlighter-rouge">B</code>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, column <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, column <code class="language-plaintext highlighter-rouge">B</code>
 <img src="../../images/rules/rules_apply_rules_example_4_2_input_rules.png" alt="screenshot" /></li>
       </ul>
     </li>
     <li>Finalize the collection:
       <ul>
-        <li><em>“Type”</em>: <code class="highlighter-rouge">txt</code></li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">txt</code></li>
         <li>Give the collection a name.</li>
-        <li>Click <code class="highlighter-rouge">Build</code>
+        <li>Click <code class="language-plaintext highlighter-rouge">Build</code>
 <img src="../../images/rules/rules_apply_rules_example_4_4_input_list.png" alt="screenshot" /></li>
       </ul>
 
       <p>The first thing we will do to this new collection is add some levels or depth to its structure.
 Lets assume we want to group it into “treated” and “untreated” lists and “paired” and “single”
-sublists below that. We can do this with the <code class="highlighter-rouge">Apply Rules</code> collection operation tool, which will
-likely be under the <code class="highlighter-rouge">Collection Operations</code> tool menu in your <span class="notranslate">Galaxy</span> interface.</p>
+sublists below that. We can do this with the <code class="language-plaintext highlighter-rouge">Apply Rules</code> collection operation tool, which will
+likely be under the <code class="language-plaintext highlighter-rouge">Collection Operations</code> tool menu in your <span class="notranslate">Galaxy</span> interface.</p>
     </li>
     <li>
       <p>Open the <strong>Apply Rule to Collection</strong> tool</p>
@@ -1341,42 +1341,42 @@ window to work to describe and preview manipulating the metadata of that collect
     <li><strong>Apply Rule to Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Input Collection”</em>: the collection we just uploaded</li>
-        <li>Click the <code class="highlighter-rouge">Edit</code> button
+        <li>Click the <code class="language-plaintext highlighter-rouge">Edit</code> button
 <img src="../../images/rules/rules_apply_rules_example_4_6_apply_rules_init_flat.png" alt="screenshot" /></li>
       </ul>
 
       <p>When a flat collection is used with this tool, the rule builder will initialize a default rule to pull
 the list identifier out for each item of the collection as shown above. Next we will use regular <span class="notranslate">expression</span>s
 to build two new columns, these columns will group the datasets into “treated” and “untreated” sublists and
-then “single” and “paired” sublists of that. This rule is found under the <code class="highlighter-rouge">Column</code> menu.</p>
+then “single” and “paired” sublists of that. This rule is found under the <code class="language-plaintext highlighter-rouge">Column</code> menu.</p>
 
       <p>We’ll transform column A into some more useful columns</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
       <ul>
-        <li><em>“Column”</em>: <code class="highlighter-rouge">A</code></li>
-        <li>Select <code class="highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">(.*)_(.*)_.*</code></li>
-        <li><em>“Number of Groups”</em>: <code class="highlighter-rouge">2</code></li>
+        <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*)_(.*)_.*</code></li>
+        <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-regular-expression-explained-4"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
-        <p>Here <code class="highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
- The parentheses around <code class="highlighter-rouge">.*</code> means form a “group” from whatever is matched.
- The <code class="highlighter-rouge">_</code> describes the literal <code class="highlighter-rouge">_</code> values in the identifier we are matching. The result is that
-everything before the first <code class="highlighter-rouge">_</code> will be matched as the first group and everything between the <code class="highlighter-rouge">_</code>
+        <p>Here <code class="language-plaintext highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
+ The parentheses around <code class="language-plaintext highlighter-rouge">.*</code> means form a “group” from whatever is matched.
+ The <code class="language-plaintext highlighter-rouge">_</code> describes the literal <code class="language-plaintext highlighter-rouge">_</code> values in the identifier we are matching. The result is that
+everything before the first <code class="language-plaintext highlighter-rouge">_</code> will be matched as the first group and everything between the <code class="language-plaintext highlighter-rouge">_</code>
 characters will be matched as the second group. Click to apply this rule and two new columns should be created.</p>
 
-        <p>We have defined two matching groups (the <code class="highlighter-rouge">(.*)</code> in the regex), so the number of groups is set to <code class="highlighter-rouge">2</code></p>
+        <p>We have defined two matching groups (the <code class="language-plaintext highlighter-rouge">(.*)</code> in the regex), so the number of groups is set to <code class="language-plaintext highlighter-rouge">2</code></p>
       </blockquote>
     </li>
-    <li>From  <strong>Rules</strong>, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From  <strong>Rules</strong>, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">B</code></li>
-        <li><code class="highlighter-rouge">Assign another column</code>, column <code class="highlighter-rouge">C</code></li>
-        <li><code class="highlighter-rouge">Assign another column</code>, column <code class="highlighter-rouge">A</code></li>
-        <li>Click <code class="highlighter-rouge">Save</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">B</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Assign another column</code>, column <code class="language-plaintext highlighter-rouge">C</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Assign another column</code>, column <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Save</code></li>
       </ul>
 
       <p><img src="../../images/rules/rules_apply_rules_example_4_7_apply_rules_add_depth.png" alt="screenshot" /></p>
@@ -1399,12 +1399,12 @@ if that is needed.</p>
       <p>Notice when loading a nested collection into the rule builder, there is a column for each layer of the list for each element.
 One can pretty easily invert the outer two layers of the list by simply assigning the list identifiers in a new order. So select to assign “List Identifiers” and this time assign them to columns “B”, “A”, and “C” - in that order.</p>
     </li>
-    <li>From <strong>Rules</strong>, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+    <li>From <strong>Rules</strong>, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
       <ul>
-        <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">B</code></li>
-        <li><code class="highlighter-rouge">Assign another column</code>, Column <code class="highlighter-rouge">A</code></li>
-        <li><code class="highlighter-rouge">Assign another column</code>, Column <code class="highlighter-rouge">C</code></li>
-        <li>Click <code class="highlighter-rouge">Save</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">B</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Assign another column</code>, Column <code class="language-plaintext highlighter-rouge">A</code></li>
+        <li><code class="language-plaintext highlighter-rouge">Assign another column</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Save</code></li>
       </ul>
 
       <p><img src="../../images/rules/rules_apply_rules_example_4_10_apply_rules_inverted.png" alt="screenshot" /></p>
@@ -1419,16 +1419,16 @@ filter elements out of the collection.</p>
     <li><strong>Apply Rule to Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Input Collection”</em>: the original flat list created</li>
-        <li>Click <code class="highlighter-rouge">Edit</code></li>
-        <li>From <strong>Filter</strong> menu, select <code class="highlighter-rouge">From a regular <span class="notranslate">expression</span></code>
+        <li>Click <code class="language-plaintext highlighter-rouge">Edit</code></li>
+        <li>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">From a regular <span class="notranslate">expression</span></code>
           <ul>
-            <li><em>“From Column”</em>: <code class="highlighter-rouge">A</code></li>
-            <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">.*_single_.*</code></li>
+            <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_single_.*</code></li>
           </ul>
         </li>
-        <li>From <strong>Rules</strong> menu, select <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+        <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
           <ul>
-            <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>, Column <code class="highlighter-rouge">A</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">A</code></li>
           </ul>
         </li>
       </ul>
@@ -1443,24 +1443,24 @@ filter elements out of the collection.</p>
     </li>
     <li><strong>Apply Rule to Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li>From <strong>Filter</strong> menu, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+        <li>From <strong>Filter</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
           <ul>
-            <li><em>“From Column”</em>: <code class="highlighter-rouge">A</code></li>
-            <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">.*_single_.*</code></li>
+            <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_single_.*</code></li>
           </ul>
         </li>
-        <li>From <strong>Column</strong> menu, select <code class="highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+        <li>From <strong>Column</strong> menu, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
           <ul>
-            <li><em>“From Column”</em>: <code class="highlighter-rouge">A</code></li>
-            <li>Select <code class="highlighter-rouge">Create column from regular <span class="notranslate">expression</span> groups</code></li>
-            <li><em>“Regular <span class="notranslate">Expression</span>”</em>:  <code class="highlighter-rouge">(.*)_single_.*</code></li>
-            <li><em>“Number of Groups”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
+            <li>Select <code class="language-plaintext highlighter-rouge">Create column from regular <span class="notranslate">expression</span> groups</code></li>
+            <li><em>“Regular <span class="notranslate">Expression</span>”</em>:  <code class="language-plaintext highlighter-rouge">(.*)_single_.*</code></li>
+            <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
-        <li>From <strong>Rules</strong> menu, select  <code class="highlighter-rouge">Add / Modify Column Definitions</code>
+        <li>From <strong>Rules</strong> menu, select  <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
           <ul>
-            <li><code class="highlighter-rouge">Add Definition</code>, <code class="highlighter-rouge">List Identifier(s)</code>. Column <code class="highlighter-rouge">B</code></li>
-            <li><code class="highlighter-rouge">Assign another column</code>, Column <code class="highlighter-rouge">A</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>. Column <code class="language-plaintext highlighter-rouge">B</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Assign another column</code>, Column <code class="language-plaintext highlighter-rouge">A</code></li>
           </ul>
         </li>
       </ul>

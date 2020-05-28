@@ -627,7 +627,7 @@ used worldwide by a huge community of specialists in metabolomics using mass spe
 
 <p>This software is based on different algorithms that have been published, and is provided and maintained using R software.</p>
 
-<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, prior to <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is able to read files with open format as <code class="highlighter-rouge">mzXML</code>, <code class="highlighter-rouge">mzMl</code>, <code class="highlighter-rouge">mzData</code> and <code class="highlighter-rouge">netCDF</code>, which are independent of the constructors’ formats. The <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
+<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, prior to <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is able to read files with open format as <code class="language-plaintext highlighter-rouge">mzXML</code>, <code class="language-plaintext highlighter-rouge">mzMl</code>, <code class="language-plaintext highlighter-rouge">mzData</code> and <code class="language-plaintext highlighter-rouge">netCDF</code>, which are independent of the constructors’ formats. The <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> package itself is composed of R functions able to extract, filter, align and fill gap, with the possibility to annotate isotopes,
 adducts and fragments using the R package CAMERA (<a class="citation" href="#CAMERA">Carsten Kuhl 2017</a>). This set of functions gives modularity, and thus is particularly well
 adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
 
@@ -660,14 +660,14 @@ having to launch jobs manually for each sample. You can start using the dataset 
         </ol>
       </blockquote>
     </li>
-    <li>Import the 9 <code class="highlighter-rouge">mzXML</code> files into a collection named <code class="highlighter-rouge">sacurine</code>
+    <li>Import the 9 <code class="language-plaintext highlighter-rouge">mzXML</code> files into a collection named <code class="language-plaintext highlighter-rouge">sacurine</code>
       <ul>
         <li>Option 1: from a shared data library (ask your instructor)</li>
         <li>
           <p>Option 2: from Zenodo using the URLs given below</p>
 
           <p><a href="https://doi.org/10.5281/zenodo.3244991"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg" alt="DOI" /></a></p>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
 https://zenodo.org/record/3244991/files/HU_neg_090.mzML
 https://zenodo.org/record/3244991/files/HU_neg_123.mzML
 https://zenodo.org/record/3244991/files/HU_neg_157.mzML
@@ -697,7 +697,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
             <p>Paste the link into the text field</p>
           </li>
           <li>
-            <p>Change <strong>Type</strong> from “Auto-detect” to <code class="highlighter-rouge">mzml</code></p>
+            <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>
           </li>
           <li>
             <p>Press <strong>Start</strong></p>
@@ -737,7 +737,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
         </ul>
       </blockquote>
     </li>
-    <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="highlighter-rouge">sacurine</code>
+    <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">sacurine</code>
       <ul>
         <li>If you forgot to select the collection option during import, you can create the collection now:</li>
       </ul>
@@ -761,15 +761,15 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
 
 </blockquote>
 
-<p>You should have in your history a green Dataset collection (<code class="highlighter-rouge">sacurine</code>) with 9 datasets in mzml format.</p>
+<p>You should have in your history a green Dataset collection (<code class="language-plaintext highlighter-rouge">sacurine</code>) with 9 datasets in mzml format.</p>
 
 <p>Their size can be checked by clicking on the information icon <i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> on the individual datasets</p>
 
 <h2 id="data-preparation-for-xcms-msnbase-readmsdata">Data preparation for XCMS: <em>MSnbase readMSData</em></h2>
 
-<p>This first step is only meant to read your <code class="highlighter-rouge">mzXML</code> file and generate an object usable by <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+<p>This first step is only meant to read your <code class="language-plaintext highlighter-rouge">mzXML</code> file and generate an object usable by <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
-<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="highlighter-rouge">RData</code> files for the first XCMS step.</p>
+<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="language-plaintext highlighter-rouge">RData</code> files for the first XCMS step.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-msnbase-readmsdata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MSnbase readMSData</h3>
@@ -777,7 +777,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
   <ol>
     <li><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="highlighter-rouge">sacurine</code> dataset collection</li>
+        <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="language-plaintext highlighter-rouge">sacurine</code> dataset collection</li>
       </ul>
     </li>
   </ol>
@@ -861,7 +861,7 @@ Note that you can either:</p>
     <ol>
       <li><strong>xcms get a sampleMetadata file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
         <ul>
-          <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: the <code class="highlighter-rouge">sacurine.raw.RData</code> collection output from <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+          <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“RData file”</em>: the <code class="language-plaintext highlighter-rouge">sacurine.raw.RData</code> collection output from <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         </ul>
       </li>
     </ol>
@@ -870,7 +870,7 @@ Note that you can either:</p>
 
   <p>An easy step for an easy sampleMetadata filling!</p>
 
-  <p>From this tool, you will obtain a <code class="highlighter-rouge">tabular</code> file (meaning a tab-separated text file) with a first column of identifiers and a
+  <p>From this tool, you will obtain a <code class="language-plaintext highlighter-rouge">tabular</code> file (meaning a tab-separated text file) with a first column of identifiers and a
 second column called <em>class</em> which is empty for the moment (only ‘.’ for each sample). You can now download this file by clicking on the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon.</p>
 
 </blockquote>
@@ -884,7 +884,7 @@ use a sp<span class="notranslate">reads</span>heet software such as Microsoft Ex
 <blockquote class="warning">
   <h3 id="comment-important-save-your-table-in-the-correct-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Important: Save your table in the correct format</h3>
 
-  <p>The file has to be a <code class="highlighter-rouge">.txt</code>or a <code class="highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="highlighter-rouge">.xlsx</code> nor <code class="highlighter-rouge">.odt</code> are supported.
+  <p>The file has to be a <code class="language-plaintext highlighter-rouge">.txt</code>or a <code class="language-plaintext highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="language-plaintext highlighter-rouge">.xlsx</code> nor <code class="language-plaintext highlighter-rouge">.odt</code> are supported.
 If you use a sp<span class="notranslate">reads</span>heet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
 </blockquote>
 
@@ -1137,7 +1137,7 @@ Next, we added columns with interesting or needed information, as following:</p>
     </tbody>
   </table>
 
-  <p>In particular, the <code class="highlighter-rouge">batch</code>, <code class="highlighter-rouge">sampleType</code> and <code class="highlighter-rouge">injectionOrder</code> columns are mandatory to correct the data from signal drift (see later in
+  <p>In particular, the <code class="language-plaintext highlighter-rouge">batch</code>, <code class="language-plaintext highlighter-rouge">sampleType</code> and <code class="language-plaintext highlighter-rouge">injectionOrder</code> columns are mandatory to correct the data from signal drift (see later in
 the tutorial).
 Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our <em>sampleMetadata</em> was ready to
 be uploaded into <span class="notranslate">Galaxy</span>.</p>
@@ -1150,8 +1150,8 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
   <h3 id="hands_on-hands-on-upload-the-samplemetada"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload the sampleMetada</h3>
 
   <ol>
-    <li>Import the <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> file from Zenodo or from a shared data library (ask your instructor)
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
+    <li>Import the <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> file from Zenodo or from a shared data library (ask your instructor)
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -1199,7 +1199,7 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
     </li>
     <li>Check the data type of your imported files.
       <ul>
-        <li>The datatype should be <code class="highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now</li>
+        <li>The datatype should be <code class="language-plaintext highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now</li>
       </ul>
 
       <blockquote class="tip">
@@ -1256,7 +1256,7 @@ right away if you happen to get one of these obvious issues.</p>
 (<em>e.g.</em> the person in charge of the sample preparation, the temperature…). The statistical analysis will expose the relevant parameters.</li>
       <li>Sample, QC, blank… The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
 So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don’t have any specific class
-that you want to consider in XCMS preprocessing, just fill everywhere with <code class="highlighter-rouge">sample</code> or a dot <code class="highlighter-rouge">.</code> for example.</li>
+that you want to consider in XCMS preprocessing, just fill everywhere with <code class="language-plaintext highlighter-rouge">sample</code> or a dot <code class="language-plaintext highlighter-rouge">.</code> for example.</li>
     </ol>
 
   </blockquote>
@@ -1283,8 +1283,8 @@ The tool automatically takes the second column as colour groups when a file is p
   <ol>
     <li><strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">sacurine.raw.RData</code> (collection)</li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> you uploaded previously</li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">sacurine.raw.RData</code> (collection)</li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> you uploaded previously</li>
       </ul>
 
       <blockquote class="tip">
@@ -1350,16 +1350,16 @@ pre-processing.</p>
   <ol>
     <li><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">sacurine.raw.RData</code> (collection)</li>
-        <li><em>“Extraction method for peaks detection”</em>: <code class="highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">sacurine.raw.RData</code> (collection)</li>
+        <li><em>“Extraction method for peaks detection”</em>: <code class="language-plaintext highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code></li>
       </ul>
       <ul>
-        <li><em>“Max tolerated ppm m/z deviation in consecutive scans in ppm”</em>: <code class="highlighter-rouge">3</code></li>
-        <li><em>“Min,Max peak width in seconds”</em>: <code class="highlighter-rouge">5,20</code></li>
+        <li><em>“Max tolerated ppm m/z deviation in consecutive scans in ppm”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Min,Max peak width in seconds”</em>: <code class="language-plaintext highlighter-rouge">5,20</code></li>
         <li>In <strong>Advanced Options</strong>:
           <ul>
-            <li><em>“Prefilter step for for the first analysis step (ROI detection)”</em>: <code class="highlighter-rouge">3,5000</code></li>
-            <li><em>“Noise filter”</em>: <code class="highlighter-rouge">1000</code></li>
+            <li><em>“Prefilter step for for the first analysis step (ROI detection)”</em>: <code class="language-plaintext highlighter-rouge">3,5000</code></li>
+            <li><em>“Noise filter”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
           </ul>
         </li>
       </ul>
@@ -1378,14 +1378,14 @@ ranges, or <em>Noise filter</em> (as in this hands-on) not to use low intensity 
 
 </blockquote>
 
-<p>At this step, you obtain a dataset collection containing one <code class="highlighter-rouge">RData</code> file per sample, with independent lists of ions. Although this
+<p>At this step, you obtain a dataset collection containing one <code class="language-plaintext highlighter-rouge">RData</code> file per sample, with independent lists of ions. Although this
 is already a nice result, what you may want now is to get all this files together to identify which ions are shared between samples.
 To do so, XCMS provides a function that is called <em>groupChromPeaks</em> (or group). But before proceeding to this grouping step, first you
 need to group your individual RData files into a single one.</p>
 
 <h2 id="gathering-the-different-samples-in-one-rdata-file">Gathering the different samples in one Rdata file</h2>
 
-<p>A dedicated tool exists to merge the different <code class="highlighter-rouge">RData</code> files into a single one: <strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Although you can simply take as
+<p>A dedicated tool exists to merge the different <code class="language-plaintext highlighter-rouge">RData</code> files into a single one: <strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Although you can simply take as
 input your dataset collection alone, the tool also provides de possibility to take into account a sampleMetadata file. Indeed,
 depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to the grouping step using <strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
@@ -1404,8 +1404,8 @@ the Merger tool.</p>
   <ol>
     <li><strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">sacurine.raw.xset.RData</code> (collection)</li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">Nothing selected</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">sacurine.raw.xset.RData</code> (collection)</li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Nothing selected</code></li>
       </ul>
 
       <blockquote class="tip">
@@ -1423,7 +1423,7 @@ front of the input parameter you want to supply the collection to.</li>
 
 </blockquote>
 
-<p>The tool generates a single <code class="highlighter-rouge">RData</code> file containing information from all the samples in your dataset collection input.</p>
+<p>The tool generates a single <code class="language-plaintext highlighter-rouge">RData</code> file containing information from all the samples in your dataset collection input.</p>
 
 <h2 id="second-xcms-step-determining-shared-ions-across-samples">Second XCMS step: <em>determining shared ions across samples</em></h2>
 
@@ -1448,12 +1448,12 @@ than a given number of samples. Either a percentage of the total number of sampl
   <ol>
     <li><strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.RData</code></li>
-        <li><em>“Method to use for grouping”</em>: <code class="highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.RData</code></li>
+        <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code></li>
       </ul>
       <ul>
-        <li><em>“Bandwidth”</em>: <code class="highlighter-rouge">5.0</code></li>
-        <li><em>“Width of overlapping m/z slices”</em>: <code class="highlighter-rouge">0.01</code></li>
+        <li><em>“Bandwidth”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+        <li><em>“Width of overlapping m/z slices”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
       </ul>
     </li>
   </ol>
@@ -1475,8 +1475,8 @@ dot corresponds to a sample. The plot allows to assess the quality of alignment.
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>Look at the <code class="highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
-    <li>Look at the <code class="highlighter-rouge">284.1198 - 284.1253</code> m/z slice. What do you think could have happened if you had used a smaller bandwidth value?</li>
+    <li>Look at the <code class="language-plaintext highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
+    <li>Look at the <code class="language-plaintext highlighter-rouge">284.1198 - 284.1253</code> m/z slice. What do you think could have happened if you had used a smaller bandwidth value?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1522,10 +1522,10 @@ peaks’ parameter to put them aside.</p>
   <ol>
     <li><strong>xcms adjustRtime (retcor)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.RData</code></li>
-        <li><em>“Method to use for retention time correction”</em>: <code class="highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code></li>
+        <li><em>“Method to use for retention time correction”</em>: <code class="language-plaintext highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
           <ul>
-            <li><em>“Minimum required fraction of samples in which peaks for the peak group were identified”</em>: <code class="highlighter-rouge">0.8299</code></li>
+            <li><em>“Minimum required fraction of samples in which peaks for the peak group were identified”</em>: <code class="language-plaintext highlighter-rouge">0.8299</code></li>
           </ul>
         </li>
       </ul>
@@ -1560,7 +1560,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
     <ol>
       <li><strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
         <ul>
-          <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
+          <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
         </ul>
 
         <blockquote class="comment">
@@ -1589,18 +1589,18 @@ lower a little the bandwidth parameter.</p>
   <ol>
     <li><strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
-        <li><em>“Method to use for grouping”</em>: <code class="highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
+        <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
           <ul>
-            <li><em>“Bandwidth”</em>: <code class="highlighter-rouge">5.0</code></li>
-            <li><em>“Width of overlapping m/z slices”</em>: <code class="highlighter-rouge">0.01</code></li>
+            <li><em>“Bandwidth”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+            <li><em>“Width of overlapping m/z slices”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
           </ul>
         </li>
-        <li><em>“Get the Peak List”</em>: <code class="highlighter-rouge">Yes</code>
+        <li><em>“Get the Peak List”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
-            <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
       </ul>
@@ -1610,7 +1610,7 @@ lower a little the bandwidth parameter.</p>
 
         <p>When performing this second grouping (or at the first one if you do not plan to perform retention time correction),
 you can take this opportunity to check how your peak table looks like at this point of the XCMS extraction. For this, you can
-set the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>.</p>
+set the ‘Get the Peak List’ option to <code class="language-plaintext highlighter-rouge">Yes</code>.</p>
       </blockquote>
     </li>
   </ol>
@@ -1656,7 +1656,7 @@ step.</p>
 of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
 may want to go back to some of your parameter choices in previous XCMS steps.
 To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
-with the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>. The variableMetadata file contains information about your ions: you will find information
+with the ‘Get the Peak List’ option to <code class="language-plaintext highlighter-rouge">Yes</code>. The variableMetadata file contains information about your ions: you will find information
 about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample; you can get
 an overview of it using the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module.</p>
 </blockquote>
@@ -1672,11 +1672,11 @@ chromatographic peak for this ion was identified.</p>
   <ol>
     <li><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code></li>
         <li>In <em>“Peak List”</em>:
           <ul>
-            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
           </ul>
         </li>
       </ul>
@@ -1735,17 +1735,17 @@ for a first attempt to run this function. Nevertheless, a few parameters have to
   <ol>
     <li><strong>CAMERA.annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.RData</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.RData</code></li>
         <li>In <em>“Annotate Isotopes [findIsotopes]”</em>:
           <ul>
-            <li><em>“Max. ion charge”</em>: <code class="highlighter-rouge">2</code></li>
+            <li><em>“Max. ion charge”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
           </ul>
         </li>
-        <li><em>“Mode”</em>: <code class="highlighter-rouge">Only groupFWHM and findIsotopes functions [quick]</code></li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Only groupFWHM and findIsotopes functions [quick]</code></li>
         <li>In <em>“Export options”</em>:
           <ul>
-            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
           </ul>
         </li>
       </ul>
@@ -1776,10 +1776,10 @@ corresponding information in your variableMetadata file for later use.</p>
 
 <p>Concerning the <strong>sampleMetadata</strong> file, for the next steps of the <span class="notranslate">workflow</span>, there are four columns that are mandatory to go through all the analysis:</p>
 <ul>
-  <li><code class="highlighter-rouge">injectionOrder</code>: a numerical column of injection order</li>
-  <li><code class="highlighter-rouge">sampleType</code>: specifies if a QC pool or a sample (coded <code class="highlighter-rouge">pool</code> or <code class="highlighter-rouge">sample</code>)</li>
-  <li><code class="highlighter-rouge">batch</code>: a categorical column indicating the batches of analysis (if only one, must be a constant)</li>
-  <li>your variable(s) of interest: here we will consider as an example the Body Mass Index (<code class="highlighter-rouge">bmi</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">injectionOrder</code>: a numerical column of injection order</li>
+  <li><code class="language-plaintext highlighter-rouge">sampleType</code>: specifies if a QC pool or a sample (coded <code class="language-plaintext highlighter-rouge">pool</code> or <code class="language-plaintext highlighter-rouge">sample</code>)</li>
+  <li><code class="language-plaintext highlighter-rouge">batch</code>: a categorical column indicating the batches of analysis (if only one, must be a constant)</li>
+  <li>your variable(s) of interest: here we will consider as an example the Body Mass Index (<code class="language-plaintext highlighter-rouge">bmi</code>)</li>
 </ul>
 
 <blockquote class="comment">
@@ -1815,7 +1815,7 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
             <p>Select the desired files</p>
           </li>
           <li>
-            <p>“New history name:” <code class="highlighter-rouge">Sacurine Processing</code></p>
+            <p>“New history name:” <code class="language-plaintext highlighter-rouge">Sacurine Processing</code></p>
           </li>
           <li>Click on the new history name in the green box that have just appear to switch to this history</li>
         </ol>
@@ -1823,8 +1823,8 @@ long and thus may reduce the names’ readability. Hence, we highly recommend yo
     </li>
     <li>Rename the 3 tables with shorter names:
       <ul>
-        <li><code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillpeaks.dataMatrix.tsv</code> -&gt; <strong>dataMatrix.tsv</strong></li>
-        <li><code class="highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.annotate.variableMetadata.tsv</code> -&gt; <strong>variableMetadata.tsv</strong></li>
+        <li><code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.groupChromPeaks.fillpeaks.dataMatrix.tsv</code> -&gt; <strong>dataMatrix.tsv</strong></li>
+        <li><code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.annotate.variableMetadata.tsv</code> -&gt; <strong>variableMetadata.tsv</strong></li>
       </ul>
 
       <blockquote class="tip">
@@ -1875,9 +1875,9 @@ over useful information using the <strong>Quality Metrics</strong> <i class="fa 
   <ol>
     <li><strong>Quality Metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">dataMatrix.tsv</code></li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code></li>
-        <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">variableMetadata.tsv</code></li>
+        <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">dataMatrix.tsv</code></li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code></li>
+        <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">variableMetadata.tsv</code></li>
       </ul>
     </li>
   </ol>
@@ -1952,12 +1952,12 @@ to get rid of it.</p>
   <ol>
     <li><strong>Batch_correction</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">dataMatrix.tsv</code></li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code></li>
-        <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">variableMetadata.tsv</code></li>
-        <li><em>“Type of regression model “</em>: <code class="highlighter-rouge">linear</code>
+        <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">dataMatrix.tsv</code></li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code></li>
+        <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">variableMetadata.tsv</code></li>
+        <li><em>“Type of regression model “</em>: <code class="language-plaintext highlighter-rouge">linear</code>
           <ul>
-            <li><em>“Factor of interest “</em>: <code class="highlighter-rouge">gender</code></li>
+            <li><em>“Factor of interest “</em>: <code class="language-plaintext highlighter-rouge">gender</code></li>
           </ul>
         </li>
       </ul>
@@ -2007,9 +2007,9 @@ by biological variability. Thus, we can filter the ions that do not respect this
   <ol>
     <li><strong>Quality Metrics</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">Batch_correction_linear_dataMatrix.tsv</code></li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code></li>
-        <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">Batch_correction_linear_variableMatrix.tsv</code></li>
+        <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Batch_correction_linear_dataMatrix.tsv</code></li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code></li>
+        <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Batch_correction_linear_variableMatrix.tsv</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -2032,41 +2032,41 @@ your data using the <strong>Generic_Filter</strong> <i class="fa fa-wrench" aria
   <ol>
     <li><strong>Generic_Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">Batch_correction_linear_dataMatrix.tsv</code></li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> or <code class="highlighter-rouge">Quality Metrics_sampleMetadata_completed.tsv</code></li>
-        <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
-        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="highlighter-rouge">yes</code>
+        <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Batch_correction_linear_dataMatrix.tsv</code></li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> or <code class="language-plaintext highlighter-rouge">Quality Metrics_sampleMetadata_completed.tsv</code></li>
+        <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
+        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Identify the parameter to filter “</em>
               <ul>
-                <li><em>“On file”</em>: <code class="highlighter-rouge">Variable metadata</code></li>
-                <li><em>“Name of the column to filter”</em>: <code class="highlighter-rouge">poolCV_over_sampleCV</code></li>
-                <li><em>“Interval of values to remove”</em>: <code class="highlighter-rouge">upper</code>
+                <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">poolCV_over_sampleCV</code></li>
+                <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">upper</code>
                   <ul>
-                    <li><em>“Remove all values upper than”</em>: <code class="highlighter-rouge">1.0</code></li>
+                    <li><em>“Remove all values upper than”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Identify the parameter to filter “</em>
               <ul>
-                <li><em>“On file”</em>: <code class="highlighter-rouge">Variable metadata</code></li>
-                <li><em>“Name of the column to filter”</em>: <code class="highlighter-rouge">pool_CV</code></li>
-                <li><em>“Interval of values to remove”</em>: <code class="highlighter-rouge">upper</code>
+                <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">pool_CV</code></li>
+                <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">upper</code>
                   <ul>
-                    <li><em>“Remove all values upper than”</em>: <code class="highlighter-rouge">0.3</code></li>
+                    <li><em>“Remove all values upper than”</em>: <code class="language-plaintext highlighter-rouge">0.3</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="highlighter-rouge">yes</code>
+        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Removing a level in factor”</em>
               <ul>
-                <li><em>“Name of the column to filter”</em>: <code class="highlighter-rouge">sampleType</code></li>
-                <li><em>“Remove factor when”</em>: <code class="highlighter-rouge">pool</code></li>
+                <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">sampleType</code></li>
+                <li><em>“Remove factor when”</em>: <code class="language-plaintext highlighter-rouge">pool</code></li>
               </ul>
             </li>
           </ul>
@@ -2124,7 +2124,7 @@ and multivariate analysis (such as constructing a PLS model using all your ions 
 that the choice of your statistical analysis strategy depends on both your data characteristics (such as colinearity or
 dataset size) and your study design. You should think carefully about what is appropriate for your own project.</p>
 
-<p>In this tutorial, we will take the example of univariate analysis, using the <code class="highlighter-rouge">bmi</code> column of the <strong>sampleMetadata file</strong> as
+<p>In this tutorial, we will take the example of univariate analysis, using the <code class="language-plaintext highlighter-rouge">bmi</code> column of the <strong>sampleMetadata file</strong> as
 the study’s biological factor investigated (body mass index). Since this variable is quantitative, we will chose in this example to measure
 the link between the BMI and the measured ions using a <strong>statistical correlation calculation</strong>. For more examples of
 statistical analysis performed on LC-MS data, you can take a few minutes to watch the <a href="https://usemetabo.org">usemetabo.org</a> open course video
@@ -2132,7 +2132,7 @@ statistical analysis performed on LC-MS data, you can take a few minutes to watc
 
 <h2 id="computation-of-statistical-indices">Computation of statistical indices</h2>
 
-<p>The first step is to compute the correlation coefficients used to estimate the link between the biological variable <code class="highlighter-rouge">bmi</code>
+<p>The first step is to compute the correlation coefficients used to estimate the link between the biological variable <code class="language-plaintext highlighter-rouge">bmi</code>
 and the ions that we have in our dataset. For this calculation we can use the <strong>Univariate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool.</p>
 
 <blockquote class="notranslate hands_on">
@@ -2141,12 +2141,12 @@ and the ions that we have in our dataset. For this calculation we can use the <s
   <ol>
     <li><strong>Univariate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">Generic_Filter_Batch_correction_linear_dataMatrix.tsv</code></li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv</code></li>
-        <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
-        <li><em>“Factor of interest”</em>: <code class="highlighter-rouge">bmi</code></li>
-        <li><em>“Test”</em>: <code class="highlighter-rouge">Spearman correlation rank test (quantitative)</code></li>
-        <li><em>“Method for multiple testing correction”</em>: <code class="highlighter-rouge">none</code></li>
+        <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Generic_Filter_Batch_correction_linear_dataMatrix.tsv</code></li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv</code></li>
+        <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
+        <li><em>“Factor of interest”</em>: <code class="language-plaintext highlighter-rouge">bmi</code></li>
+        <li><em>“Test”</em>: <code class="language-plaintext highlighter-rouge">Spearman correlation rank test (quantitative)</code></li>
+        <li><em>“Method for multiple testing correction”</em>: <code class="language-plaintext highlighter-rouge">none</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -2202,37 +2202,37 @@ absolute value above 0.9.</li>
   <ol>
     <li><strong>Generic_Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">Generic_Filter_Batch_correction_linear_dataMatrix.tsv</code></li>
-        <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv</code></li>
-        <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
-        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="highlighter-rouge">yes</code>
+        <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">Generic_Filter_Batch_correction_linear_dataMatrix.tsv</code></li>
+        <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">Generic_Filter_Quality Metrics_sampleMetadata_completed.tsv</code></li>
+        <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
+        <li><em>“Deleting samples and/or variables according to Numerical values”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Identify the parameter to filter “</em>
               <ul>
-                <li><em>“On file”</em>: <code class="highlighter-rouge">Variable metadata</code></li>
-                <li><em>“Name of the column to filter”</em>: <code class="highlighter-rouge">bmi_spearman_none</code></li>
-                <li><em>“Interval of values to remove”</em>: <code class="highlighter-rouge">upper</code>
+                <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">bmi_spearman_none</code></li>
+                <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">upper</code>
                   <ul>
-                    <li><em>“Remove all values upper than”</em>: <code class="highlighter-rouge">0.05</code></li>
+                    <li><em>“Remove all values upper than”</em>: <code class="language-plaintext highlighter-rouge">0.05</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Identify the parameter to filter “</em>
               <ul>
-                <li><em>“On file”</em>: <code class="highlighter-rouge">Variable metadata</code></li>
-                <li><em>“Name of the column to filter”</em>: <code class="highlighter-rouge">bmi_spearman_cor</code></li>
-                <li><em>“Interval of values to remove”</em>: <code class="highlighter-rouge">between</code>
+                <li><em>“On file”</em>: <code class="language-plaintext highlighter-rouge">Variable metadata</code></li>
+                <li><em>“Name of the column to filter”</em>: <code class="language-plaintext highlighter-rouge">bmi_spearman_cor</code></li>
+                <li><em>“Interval of values to remove”</em>: <code class="language-plaintext highlighter-rouge">between</code>
                   <ul>
-                    <li><em>“Remove all values between”</em>: <code class="highlighter-rouge">-0.9</code></li>
-                    <li><em>“And”</em>: <code class="highlighter-rouge">0.9</code></li>
+                    <li><em>“Remove all values between”</em>: <code class="language-plaintext highlighter-rouge">-0.9</code></li>
+                    <li><em>“And”</em>: <code class="language-plaintext highlighter-rouge">0.9</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="highlighter-rouge">no</code></li>
+        <li><em>“Deleting samples and/or variables according to Qualitative values”</em>: <code class="language-plaintext highlighter-rouge">no</code></li>
       </ul>
     </li>
   </ol>
@@ -2277,16 +2277,16 @@ bank HMDB (The Human Metabolome Database). Let’s try requesting directly into 
   <ol>
     <li><strong>HMDB MS search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Would you use a file “</em>: <code class="highlighter-rouge">YES</code>
+        <li><em>“Would you use a file “</em>: <code class="language-plaintext highlighter-rouge">YES</code>
           <ul>
-            <li><em>“File of masses (Variable Metadata) “</em>: <code class="highlighter-rouge">Generic_Filter_Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
-            <li><em>“Do you have a header “</em>: <code class="highlighter-rouge">YES</code></li>
-            <li><em>“Column of masses “</em>: <code class="highlighter-rouge">c3</code></li>
+            <li><em>“File of masses (Variable Metadata) “</em>: <code class="language-plaintext highlighter-rouge">Generic_Filter_Univariate_Generic_Filter_Quality Metrics_Batch_correction_linear_variableMetadata.tsv</code></li>
+            <li><em>“Do you have a header “</em>: <code class="language-plaintext highlighter-rouge">YES</code></li>
+            <li><em>“Column of masses “</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
           </ul>
         </li>
-        <li><em>“Mass-to-charge ratio “</em>: <code class="highlighter-rouge">0.005</code></li>
-        <li><em>“Number of maximum entries returned by the query “</em>: <code class="highlighter-rouge">3</code></li>
-        <li><em>“Molecular Species “</em>: <code class="highlighter-rouge">Negatif Mode</code></li>
+        <li><em>“Mass-to-charge ratio “</em>: <code class="language-plaintext highlighter-rouge">0.005</code></li>
+        <li><em>“Number of maximum entries returned by the query “</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Molecular Species “</em>: <code class="language-plaintext highlighter-rouge">Negatif Mode</code></li>
       </ul>
     </li>
   </ol>

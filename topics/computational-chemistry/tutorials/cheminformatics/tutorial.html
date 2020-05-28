@@ -421,7 +421,7 @@
 
   <ol>
     <li>Create a new history for this tutorial</li>
-    <li>Search <span class="notranslate">Galaxy</span> for the ‘Get PDB’ tool. Request the accession code <code class="highlighter-rouge">2brc</code>.</li>
+    <li>Search <span class="notranslate">Galaxy</span> for the ‘Get PDB’ tool. Request the accession code <code class="language-plaintext highlighter-rouge">2brc</code>.</li>
     <li>Rename the dataset to ‘Hsp90 structure’</li>
     <li>
       <p>Check that the datatype is correct (PDB file).</p>
@@ -432,7 +432,7 @@
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -445,7 +445,7 @@
 
 <h1 id="separating-protein-and-ligand-structures">Separating protein and ligand structures</h1>
 
-<p>You can view the contents of the downloaded PDB file by pressing the ‘View data’ icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with <code class="highlighter-rouge">ATOM</code>. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled <code class="highlighter-rouge">HETATM</code>. We will use the grep tool to separate these molecules into separate files, and then convert the ligand file into SDF/MOL format using the ‘Compound conversion’ tool, which is based on OpenBabel, an open-source library for analyzing chemical data (<a class="citation" href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a>).</p>
+<p>You can view the contents of the downloaded PDB file by pressing the ‘View data’ icon in the history pane. After the header section (about 500 lines), the atoms of the protein and their coordinates are listed. The lines begin with <code class="language-plaintext highlighter-rouge">ATOM</code>. At the end of the file, the atomic coordinates of the ligand and the solvent water molecules are also listed, labelled <code class="language-plaintext highlighter-rouge">HETATM</code>. We will use the grep tool to separate these molecules into separate files, and then convert the ligand file into SDF/MOL format using the ‘Compound conversion’ tool, which is based on OpenBabel, an open-source library for analyzing chemical data (<a class="citation" href="#OBoyle2011">O’Boyle <i>et al.</i> 2011</a>).</p>
 
 <blockquote class="details">
   <h3 id="details-what-is-grep"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What is grep?</h3>
@@ -463,19 +463,19 @@
     <li><strong>Search in textfiles (grep)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Downloaded PDB file ‘Hsp90 structure’</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="highlighter-rouge">Don't match</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">HETATM</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't match</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">HETATM</code></li>
         <li>All other parameters can be left as their defaults.</li>
         <li>Rename the dataset <strong>‘Protein (PDB)’</strong>.</li>
       </ul>
 
-      <p>The result is a file with all non-protein (<code class="highlighter-rouge">HETATM</code>) atoms removed.</p>
+      <p>The result is a file with all non-protein (<code class="language-plaintext highlighter-rouge">HETATM</code>) atoms removed.</p>
     </li>
     <li><strong>Search in textfiles (grep)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters. Here, we use grep again to produce a file with only non-protein atoms.
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: Downloaded PDB file ‘Hsp90 structure’</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="highlighter-rouge">Match</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">CT5</code> (the name of the ligand in the PDB file)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">CT5</code> (the name of the ligand in the PDB file)</li>
         <li>All other parameters can be left as their defaults.</li>
         <li>Rename the dataset <strong>‘Ligand (PDB)’</strong>.</li>
       </ul>
@@ -485,8 +485,8 @@
     <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: Ligand PDB file created in step 2.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">MDL MOL format (sdf, mol)</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Add hydrogens appropriate for pH”</em>: <code class="highlighter-rouge">7.4</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">MDL MOL format (sdf, mol)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Add hydrogens appropriate for pH”</em>: <code class="language-plaintext highlighter-rouge">7.4</code></li>
         <li>All other parameters can be left as their defaults.</li>
         <li>Change the datatype to ‘mol’ and rename the dataset <strong>‘Ligand (MOL)’</strong>.</li>
       </ul>
@@ -521,7 +521,7 @@
     <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: ‘Ligand’ PDB file</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">SMILES format (SMI)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">SMILES format (SMI)</code></li>
         <li>Leave all other options as default.</li>
       </ul>
     </li>
@@ -530,9 +530,9 @@
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SMILES input type”</em>: File</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: ‘Ligand SMILES’ file</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Search type”</em>: <code class="highlighter-rouge">Similarity</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tanimoto cutoff score”</em>: <code class="highlighter-rouge">80</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter for Lipinski’s Rule of Five”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Search type”</em>: <code class="language-plaintext highlighter-rouge">Similarity</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tanimoto cutoff score”</em>: <code class="language-plaintext highlighter-rouge">80</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter for Lipinski’s Rule of Five”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>All other parameters can be left as their defaults.</li>
       </ul>
 
@@ -558,7 +558,7 @@
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -583,11 +583,11 @@
 <blockquote class="details">
   <h3 id="details-what-are-smiles-and-sdf-formats"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What are SMILES and SDF formats?</h3>
 
-  <p>SMILES and SD-files both represent chemical structures. A SMILES file represents the 2D structure of a molecule as a chemical graph. In other words, it states only the atoms and the connectivity between them. An example of a SMILES string (taken from the ligand in the PDB file) is <code class="highlighter-rouge">c1c2OCCOc2ccc1c1c(C)[nH]nc1c1cc(CC)c(O)cc1O</code>. For more information on how the notation works, please consult the <a href="http://opensmiles.org/opensmiles.html">OpenSMILES specification</a> or the description provided by <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">Wikipedia</a>. A more comprehensive alte<span class="notranslate">rna</span>tive to the SMILES system is the Inte<span class="notranslate">rna</span>tional Chemical Identifier (InChI).</p>
+  <p>SMILES and SD-files both represent chemical structures. A SMILES file represents the 2D structure of a molecule as a chemical graph. In other words, it states only the atoms and the connectivity between them. An example of a SMILES string (taken from the ligand in the PDB file) is <code class="language-plaintext highlighter-rouge">c1c2OCCOc2ccc1c1c(C)[nH]nc1c1cc(CC)c(O)cc1O</code>. For more information on how the notation works, please consult the <a href="http://opensmiles.org/opensmiles.html">OpenSMILES specification</a> or the description provided by <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system">Wikipedia</a>. A more comprehensive alte<span class="notranslate">rna</span>tive to the SMILES system is the Inte<span class="notranslate">rna</span>tional Chemical Identifier (InChI).</p>
 
   <p>Neither SMILES nor InChI format contain the three-dimensional structure of a molecule. By contrast, the SDF (structure data file) format encodes three-dimensional atomic coordinates of a structure, similar to a PDB file.</p>
 
-  <p>In a previous step, we also generated a MOL file - this format is closely related to the SDF format. The difference is that MOL files can store only a single molecule, whereas SD-files can encode single or multiple molecules. Multiple molecules are separated by lines containing four dollar signs (<code class="highlighter-rouge">$$$$</code>).</p>
+  <p>In a previous step, we also generated a MOL file - this format is closely related to the SDF format. The difference is that MOL files can store only a single molecule, whereas SD-files can encode single or multiple molecules. Multiple molecules are separated by lines containing four dollar signs (<code class="language-plaintext highlighter-rouge">$$$$</code>).</p>
 
   <p>For docking, we need the three-dimensional coordinates of the ligand; thus, we want to convert from SMILES to SDF format.</p>
 </blockquote>
@@ -617,8 +617,8 @@
     <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: ‘Compound library’ file.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">SDF</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Generate 3D coordinates”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">SDF</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Generate 3D coordinates”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>Leave all other options unchanged.</li>
         <li>Rename to ‘Prepared ligands’</li>
       </ul>
@@ -626,10 +626,10 @@
     <li><strong>Calculate the box parameters for an AutoDock Vina job</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input ligand”</em>: ‘Ligand (MOL) file.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“x-axis buffer”</em>: <code class="highlighter-rouge">5</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“y-axis buffer”</em>: <code class="highlighter-rouge">5</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“z-axis buffer”</em>: <code class="highlighter-rouge">5</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“x-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“y-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“z-axis buffer”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>The ‘Random seed’ parameter should be left empty.</li>
         <li>Rename to ‘Docking config file’</li>
       </ul>
@@ -649,7 +649,7 @@
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Receptor”</em>: ‘Protein PDBQT’ file.</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligands”</em>: ‘Prepared ligands’ file.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="highlighter-rouge">7.4</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="language-plaintext highlighter-rouge">7.4</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify parameters”</em>: ‘Upload a config file to specify parameters’</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Box configuration”</em>: ‘Docking config file’</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exhaustiveness”</em>: leave blank (it was specified in the previous step)</li>
@@ -677,12 +677,12 @@
     <li><strong>Visualisation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: Compound library</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Embed molecule as CML”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Draw all carbon atoms”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use thicker lines”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Property to display under the molecule”</em>: <code class="highlighter-rouge">Molecule weight</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the displayed molecules by”</em>: <code class="highlighter-rouge">Molecular weight</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Format of the resultant picture”*: <code class="highlighter-rouge">SVG</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Embed molecule as CML”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Draw all carbon atoms”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use thicker lines”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Property to display under the molecule”</em>: <code class="language-plaintext highlighter-rouge">Molecule weight</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort the displayed molecules by”</em>: <code class="language-plaintext highlighter-rouge">Molecular weight</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> Format of the resultant picture”*: <code class="language-plaintext highlighter-rouge">SVG</code></li>
       </ul>
     </li>
   </ol>
@@ -697,16 +697,16 @@
 
 <p>In this step, we will group similar molecules together. A key tool in cheminformatics for measuring molecular similarity is fingerprinting, which entails extracting chemical properties of molecules and storing them as a bitstring. These bitstrings can be easily compared computationally, for example with a clustering method. The fingerprinting tools in <span class="notranslate">Galaxy</span> are based on the Chemfp tools (<a class="citation" href="#Dalke2013">Dalke 2013</a>).</p>
 
-<p>Before clustering, let’s label each compound. To do so add a second column to the SMILES compound library containing a label for each molecule. The <code class="highlighter-rouge">Ligand SMILES</code> file is also labelled something like <code class="highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code> (the exact name will vary) and we would like to give it a more useful name. When labelling is complete, we can concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.</p>
+<p>Before clustering, let’s label each compound. To do so add a second column to the SMILES compound library containing a label for each molecule. The <code class="language-plaintext highlighter-rouge">Ligand SMILES</code> file is also labelled something like <code class="language-plaintext highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code> (the exact name will vary) and we would like to give it a more useful name. When labelling is complete, we can concatenate (join together) the library file with the original SMILES file for the ligand from the PDB file.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-calculate-molecular-fingerprints"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculate molecular fingerprints</h3>
   <ol>
     <li><strong>Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="highlighter-rouge">Ligand SMILES</code>.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Find pattern”</em>: add the current label of the SMILES here. You can find it by clicking the ‘view’ button next to the <code class="highlighter-rouge">Ligand SMILES</code> dataset - it will look something like <code class="highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code>.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Replace with”</em>: <code class="highlighter-rouge">ligand</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Ligand SMILES</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Find pattern”</em>: add the current label of the SMILES here. You can find it by clicking the ‘view’ button next to the <code class="language-plaintext highlighter-rouge">Ligand SMILES</code> dataset - it will look something like <code class="language-plaintext highlighter-rouge">/data/dnb02/<span class="notranslate">galaxy</span>_db/files/010/406/dataset_10406067.dat</code>.</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Replace with”</em>: <code class="language-plaintext highlighter-rouge">ligand</code></li>
       </ul>
     </li>
     <li><strong>Concatenate datasets</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -719,7 +719,7 @@
     <li><strong>Molecules to Fingerprints</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“molecule file”</em>: ‘Labelled compound library’ file.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Type of fingerprint”</em>: <code class="highlighter-rouge">Open Babel FP2 fingerprints</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Type of fingerprint”</em>: <code class="language-plaintext highlighter-rouge">Open Babel FP2 fingerprints</code></li>
         <li>Rename to ‘Fingerprints’.</li>
       </ul>
     </li>
@@ -736,15 +736,15 @@
     <li><strong>Taylor-Butina clustering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fingerprint dataset”</em>: ‘Fingerprints’ file.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="highlighter-rouge">0.8</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
       </ul>
     </li>
     <li><strong>NxN Clustering</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Fingerprint dataset”</em>: ‘Fingerprints’ file.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="highlighter-rouge">0.0</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format of the resulting picture”</em>: <code class="highlighter-rouge">SVG</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output options”</em>: <code class="highlighter-rouge">Image</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“threshold”</em>: <code class="language-plaintext highlighter-rouge">0.0</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Format of the resulting picture”</em>: <code class="language-plaintext highlighter-rouge">SVG</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output options”</em>: <code class="language-plaintext highlighter-rouge">Image</code></li>
       </ul>
     </li>
   </ol>
@@ -779,17 +779,17 @@
     <li><strong>Extract values from an SD-file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input SD-file”</em>: Collection of SD-files generated by the docking step. (Remember to select the ‘collection’ icon!)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include the property name as header”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="highlighter-rouge">7.4</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include molecule name as column in output”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include the property name as header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify pH value for ligand protonation”</em>: <code class="language-plaintext highlighter-rouge">7.4</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Include molecule name as column in output”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>Leave all other paramters unchanged.</li>
       </ul>
     </li>
     <li><strong>Collapse Collection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of files to collapse into single dataset”</em>: Collection of tabular files generated by the previous step.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Keep one header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Append File name”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Keep one header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Append File name”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
 
       <blockquote class="tip">
@@ -806,8 +806,8 @@ front of the input parameter you want to supply the collection to.</li>
     <li><strong>Compound conversion</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Molecular input file”</em>: choose one of the SD-files from the collection generated by the docking step.</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="highlighter-rouge">Protein Data Bank format (pdb)</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Split multi-molecule files into a collection”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Protein Data Bank format (pdb)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Split multi-molecule files into a collection”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>Leave all other parameters unchanged.</li>
       </ul>
     </li>

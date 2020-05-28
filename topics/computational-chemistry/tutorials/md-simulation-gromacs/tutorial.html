@@ -582,14 +582,14 @@
     </li>
     <li>Use the <strong>Get PDB</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool to download a PDB file for simulation:
       <ul>
-        <li><em>“PDB accession code”</em>: <code class="highlighter-rouge">1AKI</code></li>
+        <li><em>“PDB accession code”</em>: <code class="language-plaintext highlighter-rouge">1AKI</code></li>
       </ul>
     </li>
     <li>Use the <strong>grep</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> text processing tool to remove all lines that refer to non-protein atoms.
       <ul>
         <li><em>“Select lines from”</em>: uploaded PDB file</li>
-        <li><em>“that”</em>: <code class="highlighter-rouge">Don't Match</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">HETATM</code></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't Match</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">HETATM</code></li>
       </ul>
     </li>
   </ol>
@@ -599,7 +599,7 @@
 <blockquote class="comment">
   <h3 id="comment-alternative-upload"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Alte<span class="notranslate">rna</span>tive upload</h3>
   <p>As an alte<span class="notranslate">rna</span>tive option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:</p>
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2598415
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   https://zenodo.org/record/2598415
 </code></pre></div>  </div>
   <blockquote class="tip">
 
@@ -666,13 +666,13 @@
 
   <p>Run <strong>GROMACS initial setup</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input file”</em>: <code class="highlighter-rouge">1AKI_clean.pdb</code> (Input dataset)</li>
-    <li><em>“Water model”</em>: <code class="highlighter-rouge">SPC/E</code></li>
-    <li><em>“Force field”</em>: <code class="highlighter-rouge">OPLS/AA</code></li>
-    <li><em>“Ignore hydrogens”</em>: <code class="highlighter-rouge">No</code></li>
-    <li><em>“Box dimensions in nanometers”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Box type”</em>: <code class="highlighter-rouge">Rectangular box with all sides equal</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input file”</em>: <code class="language-plaintext highlighter-rouge">1AKI_clean.pdb</code> (Input dataset)</li>
+    <li><em>“Water model”</em>: <code class="language-plaintext highlighter-rouge">SPC/E</code></li>
+    <li><em>“Force field”</em>: <code class="language-plaintext highlighter-rouge">OPLS/AA</code></li>
+    <li><em>“Ignore hydrogens”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+    <li><em>“Box dimensions in nanometers”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Box type”</em>: <code class="language-plaintext highlighter-rouge">Rectangular box with all sides equal</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
   </ul>
 
   <blockquote class="question">
@@ -701,8 +701,8 @@
   <ul>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by setup</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology produced by setup</li>
-    <li><em>“Water model for solvation”</em>: <code class="highlighter-rouge">SPC</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><em>“Water model for solvation”</em>: <code class="language-plaintext highlighter-rouge">SPC</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
   </ul>
 
 </blockquote>
@@ -720,17 +720,17 @@
   <ul>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by solvation tool</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-    <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
-    <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">Steepest descent algorithm</code> (most common choice for EM)</li>
-    <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
-    <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
-    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
-    <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Number of steps for the MD simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-    <li><em>“EM tolerance”</em>: <code class="highlighter-rouge">1000</code></li>
-    <li><em>“Maximum step size”</em>: <code class="highlighter-rouge">0.01</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code></li>
+    <li><em>“Choice of integrator”</em>: <code class="language-plaintext highlighter-rouge">Steepest descent algorithm</code> (most common choice for EM)</li>
+    <li><em>“Neighbor searching”</em>: <code class="language-plaintext highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+    <li><em>“Electrostatics”</em>: <code class="language-plaintext highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="language-plaintext highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+    <li><em>“Short range van der Waals cutoff”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Number of steps for the MD simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
+    <li><em>“EM tolerance”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+    <li><em>“Maximum step size”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
   </ul>
 
 </blockquote>
@@ -751,26 +751,26 @@
   <ul>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-    <li><em>“Use a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">No CPT input</code></li>
-    <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
-    <li><em>“Apply position restraints”</em>: <code class="highlighter-rouge">Apply position restraints</code></li>
+    <li><em>“Use a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">No CPT input</code></li>
+    <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Produce CPT output</code></li>
+    <li><em>“Apply position restraints”</em>: <code class="language-plaintext highlighter-rouge">Apply position restraints</code></li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by ‘Setup’ tool.</li>
-    <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isochoric ensemble (NVT).</code></li>
-    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
-    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
-    <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
-    <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
-    <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
-    <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
-    <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
-    <li><em>“Temperature”</em>: <code class="highlighter-rouge">300</code></li>
-    <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
-    <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">5000</code></li>
-    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
-    <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Number of steps for the NVT simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><em>“Ensemble”</em>: <code class="language-plaintext highlighter-rouge">Isothermal-isochoric ensemble (NVT).</code></li>
+    <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return no trajectory output</code> (we are not interested in how the system evolves to the equilibrated state, merely the final structure)</li>
+    <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
+    <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code></li>
+    <li><em>“Choice of integrator”</em>: <code class="language-plaintext highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
+    <li><em>“Bond constraints”</em>: <code class="language-plaintext highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
+    <li><em>“Neighbor searching”</em>: <code class="language-plaintext highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+    <li><em>“Electrostatics”</em>: <code class="language-plaintext highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+    <li><em>“Temperature”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
+    <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.002</code></li>
+    <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">5000</code></li>
+    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="language-plaintext highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+    <li><em>“Short range van der Waals cutoff”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Number of steps for the NVT simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
   </ul>
 </blockquote>
 
@@ -786,27 +786,27 @@
   <ul>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-    <li><em>“Use a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Continue simulation from a CPT file.</code></li>
+    <li><em>“Use a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Continue simulation from a CPT file.</code></li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Checkpoint file produced by NVT equilibration</li>
-    <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
-    <li><em>“Apply position restraints”</em>: <code class="highlighter-rouge">Apply position restraints</code></li>
+    <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Produce CPT output</code></li>
+    <li><em>“Apply position restraints”</em>: <code class="language-plaintext highlighter-rouge">Apply position restraints</code></li>
     <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Position restraint file”</em>: Position restraint file produced by ‘Setup’ tool.</li>
-    <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
-    <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return no trajectory output</code></li>
-    <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
-    <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
-    <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
-    <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
-    <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
-    <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
-    <li><em>“Temperature”</em>: <code class="highlighter-rouge">300</code></li>
-    <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
-    <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">5000</code></li>
-    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
-    <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
-    <li><em>“Number of steps for the NPT simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+    <li><em>“Ensemble”</em>: <code class="language-plaintext highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
+    <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return no trajectory output</code></li>
+    <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
+    <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code></li>
+    <li><em>“Choice of integrator”</em>: <code class="language-plaintext highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
+    <li><em>“Bond constraints”</em>: <code class="language-plaintext highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
+    <li><em>“Neighbor searching”</em>: <code class="language-plaintext highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+    <li><em>“Electrostatics”</em>: <code class="language-plaintext highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+    <li><em>“Temperature”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
+    <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.002</code></li>
+    <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">5000</code></li>
+    <li><em>“Distance for the Coulomb cut-off”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="language-plaintext highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+    <li><em>“Short range van der Waals cutoff”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+    <li><em>“Number of steps for the NPT simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
+    <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
   </ul>
 </blockquote>
 
@@ -832,26 +832,26 @@
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology</li>
-        <li><em>“Use a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Continue simulation from a CPT file.</code></li>
+        <li><em>“Use a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Continue simulation from a CPT file.</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Checkpoint (CPT) file”</em>: Checkpoint file produced by NPT equilibration</li>
-        <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">No CPT output</code></li>
-        <li><em>“Apply position restraints”</em>: <code class="highlighter-rouge">No position restraints</code></li>
-        <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
-        <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code> (this time, we save the trajectory)</li>
-        <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
-        <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code></li>
-        <li><em>“Choice of integrator”</em>: <code class="highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
-        <li><em>“Bond constraints”</em>: <code class="highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
-        <li><em>“Neighbor searching”</em>: <code class="highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
-        <li><em>“Electrostatics”</em>: <code class="highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
-        <li><em>“Temperature”</em>: <code class="highlighter-rouge">300</code></li>
-        <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
-        <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">5000</code></li>
-        <li><em>“Distance for the Coulomb cut-off”</em>: <code class="highlighter-rouge">1.0</code></li>
-        <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
-        <li><em>“Short range van der Waals cutoff”</em>: <code class="highlighter-rouge">1.0</code></li>
-        <li><em>“Number of steps for the simulation”</em>: <code class="highlighter-rouge">500000</code></li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">No CPT output</code></li>
+        <li><em>“Apply position restraints”</em>: <code class="language-plaintext highlighter-rouge">No position restraints</code></li>
+        <li><em>“Ensemble”</em>: <code class="language-plaintext highlighter-rouge">Isothermal-isobaric ensemble (NPT).</code></li>
+        <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return .xtc file (reduced precision)</code> (this time, we save the trajectory)</li>
+        <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
+        <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code></li>
+        <li><em>“Choice of integrator”</em>: <code class="language-plaintext highlighter-rouge">A leap-frog algorithm for integrating Newton’s equations of motion</code> (A basic leap-frog integrator)</li>
+        <li><em>“Bond constraints”</em>: <code class="language-plaintext highlighter-rouge">Bonds with H-atoms</code> (bonds involving H are constrained)</li>
+        <li><em>“Neighbor searching”</em>: <code class="language-plaintext highlighter-rouge">Generate a pair list with buffering</code> (the ‘<a href="https://en.wikipedia.org/wiki/Verlet_list">Verlet scheme</a>’)</li>
+        <li><em>“Electrostatics”</em>: <code class="language-plaintext highlighter-rouge">Fast smooth Particle-Mesh Ewald (SPME) electrostatics</code></li>
+        <li><em>“Temperature”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
+        <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.002</code></li>
+        <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">5000</code></li>
+        <li><em>“Distance for the Coulomb cut-off”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+        <li><em>“Cut-off distance for the short-range neighbor list”</em>: <code class="language-plaintext highlighter-rouge">1.0</code> (but irrelevant as we are using the Verlet scheme)</li>
+        <li><em>“Short range van der Waals cutoff”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+        <li><em>“Number of steps for the simulation”</em>: <code class="language-plaintext highlighter-rouge">500000</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>

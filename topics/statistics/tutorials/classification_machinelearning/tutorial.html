@@ -575,7 +575,7 @@
 
 <figure id="figure-1"><img src="images/classification.png" alt="classification" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Classification of samples belonging to different classes.</figcaption></figure>
 
-<p>In figure <a href="#figure-1">1</a>, the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary; there are different ways to learn it, which correspond to different classification algorithms. If the dataset is linearly separable, linear classifiers can produce good classification results. However, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like <code class="highlighter-rouge">support vector machine</code> or <code class="highlighter-rouge">ensemble</code> based classifiers may prove to be beneficial.</p>
+<p>In figure <a href="#figure-1">1</a>, the line is a boundary which separates a class from another class (for example from tumor to no tumor). The task of a classifier is to learn this boundary, which can be used to classify or categorize an unseen/new sample. The line is the decision boundary; there are different ways to learn it, which correspond to different classification algorithms. If the dataset is linearly separable, linear classifiers can produce good classification results. However, when the dataset is complex and requires non-linear decision boundaries, more powerful classifiers like <code class="language-plaintext highlighter-rouge">support vector machine</code> or <code class="language-plaintext highlighter-rouge">ensemble</code> based classifiers may prove to be beneficial.</p>
 
 <p>The data classification process includes two steps:</p>
 <ol>
@@ -612,7 +612,7 @@ In the following part, we will perform classification on the biodegradability da
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/3738729#.Xs1EeHUzY5k">Zenodo</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3738729/files/train_rows.csv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3738729/files/train_rows.csv
 https://zenodo.org/record/3738729/files/test_rows_labels.csv
 https://zenodo.org/record/3738729/files/test_rows.csv
 </code></pre></div>      </div>
@@ -641,7 +641,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
       </blockquote>
     </li>
     <li>
-      <p>Rename the datasets as <code class="highlighter-rouge">train_rows</code>, <code class="highlighter-rouge">test_rows_labels</code> and <code class="highlighter-rouge">test_rows</code> respectively.</p>
+      <p>Rename the datasets as <code class="language-plaintext highlighter-rouge">train_rows</code>, <code class="language-plaintext highlighter-rouge">test_rows_labels</code> and <code class="language-plaintext highlighter-rouge">test_rows</code> respectively.</p>
 
       <blockquote class="tip">
 
@@ -657,7 +657,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 </blockquote>
 
-<p class="comment">The <code class="highlighter-rouge">train_rows</code> contains a column <code class="highlighter-rouge">Class</code> which is the class label or target. We will evaluate our model on <code class="highlighter-rouge">test_rows</code> and compare the predicted class with the true class value in <code class="highlighter-rouge">test_rows_labels</code></p>
+<p class="comment">The <code class="language-plaintext highlighter-rouge">train_rows</code> contains a column <code class="language-plaintext highlighter-rouge">Class</code> which is the class label or target. We will evaluate our model on <code class="language-plaintext highlighter-rouge">test_rows</code> and compare the predicted class with the true class value in <code class="language-plaintext highlighter-rouge">test_rows_labels</code></p>
 
 <blockquote class="details">
   <h3 id="details-preparing-the-data-for-classification"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Preparing the data for classification</h3>
@@ -683,24 +683,24 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <ol>
     <li><strong>Generalized linear models</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Select a linear method”</em>: <code class="highlighter-rouge">Logistic Regression model</code>
+            <li><em>“Select a linear method”</em>: <code class="language-plaintext highlighter-rouge">Logistic Regression model</code>
               <ul>
-                <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+                <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -711,7 +711,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">LogisticRegression_model</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">LogisticRegression_model</code></li>
   </ol>
 </blockquote>
 
@@ -733,7 +733,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <p>After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the learning algorithm learned a good classifier from the training dataset or not. This classifier is used to predict a new sample and a similar accuracy is expected.</p>
 
-<p>Now, we will predict class in the test dataset using this classifier in order to see if it has learned important features which can generalize on a new dataset. The test dataset (<code class="highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="highlighter-rouge">Class</code> column. This is predicted using the trained classifier.</p>
+<p>Now, we will predict class in the test dataset using this classifier in order to see if it has learned important features which can generalize on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="language-plaintext highlighter-rouge">Class</code> column. This is predicted using the trained classifier.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-class-using-the-logistic-regression-classifier"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict class using the logistic regression classifier</h3>
@@ -741,23 +741,23 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <ol>
     <li><strong>Generalized linear models</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">LogisticRegression_model</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows.csv</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">LogisticRegression_model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows.csv</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">LogisticRegression_result</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">LogisticRegression_result</code></li>
   </ol>
 </blockquote>
 
 <h2 id="visualize-the-logistic-regression-classification-results">Visualize the logistic regression classification results</h2>
 
-<p>We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (<code class="highlighter-rouge">LogisticRegression_result</code>). We have one more dataset (<code class="highlighter-rouge">test_rows_labels</code>) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, <code class="highlighter-rouge">LogisticRegression_result</code> has no header, so first we should remove the header from <code class="highlighter-rouge">test_rows_labels</code> to compare.</p>
+<p>We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (<code class="language-plaintext highlighter-rouge">LogisticRegression_result</code>). We have one more dataset (<code class="language-plaintext highlighter-rouge">test_rows_labels</code>) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, <code class="language-plaintext highlighter-rouge">LogisticRegression_result</code> has no header, so first we should remove the header from <code class="language-plaintext highlighter-rouge">test_rows_labels</code> to compare.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-remove-the-header"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove the header</h3>
@@ -765,11 +765,11 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <ol>
     <li><strong>Remove beginning</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Remove first”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="highlighter-rouge">test_rows_labels.csv</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Remove first”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels.csv</code></li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">test_rows_labels_noheader.csv</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">test_rows_labels_noheader.csv</code></li>
   </ol>
 </blockquote>
 
@@ -780,9 +780,9 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the classification:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="highlighter-rouge">test_rows_labels_noheader.csv</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="highlighter-rouge">LogisticRegression_result</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select trained model”</em>: <code class="highlighter-rouge">LogisticRegression_model</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels_noheader.csv</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">LogisticRegression_result</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select trained model”</em>: <code class="language-plaintext highlighter-rouge">LogisticRegression_model</code></li>
       </ul>
     </li>
   </ol>
@@ -882,27 +882,27 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <ol>
     <li><strong>Nearest Neighbors Classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Classifier type”</em>: <code class="highlighter-rouge">Nearest Neighbors</code>
+            <li><em>“Classifier type”</em>: <code class="language-plaintext highlighter-rouge">Nearest Neighbors</code>
               <ul>
-                <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+                <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Neighbor selection method”</em>: <code class="highlighter-rouge">k-nearest neighbors</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Neighbor selection method”</em>: <code class="language-plaintext highlighter-rouge">k-nearest neighbors</code></li>
                   </ul>
                 </li>
               </ul>
@@ -911,7 +911,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">NearestNeighbors_model</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">NearestNeighbors_model</code></li>
   </ol>
 </blockquote>
 
@@ -935,30 +935,30 @@ https://zenodo.org/record/3738729/files/test_rows.csv
   <ol>
     <li><strong>Nearest Neighbors Classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">NearestNeighbors_model</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows.csv</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">NearestNeighbors_model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows.csv</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">NearestNeighbors_result</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">NearestNeighbors_result</code></li>
   </ol>
 </blockquote>
 
-<p>Now we visualize and analyze the classification. As you can see, <code class="highlighter-rouge">NearestNeighbors_result</code> has a header, so use <code class="highlighter-rouge">test_rows_labels</code> to compare.</p>
+<p>Now we visualize and analyze the classification. As you can see, <code class="language-plaintext highlighter-rouge">NearestNeighbors_result</code> has a header, so use <code class="language-plaintext highlighter-rouge">test_rows_labels</code> to compare.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-check-and-visualize-the-classification-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check and visualize the classification</h3>
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the classification:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="highlighter-rouge">test_rows_labels.csv</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="highlighter-rouge">NearestNeighbors_result</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select trained model”</em>: <code class="highlighter-rouge">NearestNeighbors_model</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels.csv</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">NearestNeighbors_result</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select trained model”</em>: <code class="language-plaintext highlighter-rouge">NearestNeighbors_model</code></li>
       </ul>
     </li>
   </ol>
@@ -987,24 +987,24 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Support vector machines (SVMs)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Select a linear method”</em>: <code class="highlighter-rouge">Linear Support Vector Classification</code>
+            <li><em>“Select a linear method”</em>: <code class="language-plaintext highlighter-rouge">Linear Support Vector Classification</code>
               <ul>
-                <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+                <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1015,7 +1015,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">SVM_model</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">SVM_model</code></li>
   </ol>
 </blockquote>
 
@@ -1041,17 +1041,17 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Support vector machines (SVMs)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">SVM_model</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows.csv</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">SVM_model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows.csv</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">SVM_result</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">SVM_result</code></li>
   </ol>
 </blockquote>
 
@@ -1062,9 +1062,9 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Plot confusion matrix, precision, recall and ROC and AUC curves</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the classification:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="highlighter-rouge">test_rows_labels.csv</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="highlighter-rouge">SVM_result</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select trained model”</em>: <code class="highlighter-rouge">SVM_model</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels.csv</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">SVM_result</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select trained model”</em>: <code class="language-plaintext highlighter-rouge">SVM_model</code></li>
       </ul>
     </li>
   </ol>
@@ -1086,24 +1086,24 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Ensemble methods</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to train the regressor:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Train a model</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Select an ensemble method”</em>: <code class="highlighter-rouge">Random forest classifier</code>
+            <li><em>“Select an ensemble method”</em>: <code class="language-plaintext highlighter-rouge">Random forest classifier</code>
               <ul>
-                <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+                <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
-                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="highlighter-rouge">train_rows.csv</code></li>
-                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+                    <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset containing class labels”</em>: <code class="language-plaintext highlighter-rouge">train_rows.csv</code></li>
+                    <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
                       <ul>
-                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Select target column(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1114,7 +1114,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">RandomForest_model</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">RandomForest_model</code></li>
   </ol>
 </blockquote>
 
@@ -1142,17 +1142,17 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Ensemble methods</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to predict targets of test dataset using the trained model:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="highlighter-rouge">RandomForest_model</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">train_rows_test.csv</code></li>
-            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="highlighter-rouge">Predict class labels</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">RandomForest_model</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">train_rows_test.csv</code></li>
+            <li><i class="fa fa-check-square-o" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Select the type of prediction”</em>: <code class="language-plaintext highlighter-rouge">Predict class labels</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="highlighter-rouge">RandomForest_result</code></li>
+    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">RandomForest_result</code></li>
   </ol>
 </blockquote>
 
@@ -1168,7 +1168,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <blockquote class="solution">
     <h3 id="solution-solution-6"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Figures show that we achieved an AUC score of <code class="highlighter-rouge">1.0</code>  for the test set using random forest. It means the prediction is very good, in fact it has no error at all. Unfortunately, this is not usually the case when dealing with chemical data.</p>
+    <p>Figures show that we achieved an AUC score of <code class="language-plaintext highlighter-rouge">1.0</code>  for the test set using random forest. It means the prediction is very good, in fact it has no error at all. Unfortunately, this is not usually the case when dealing with chemical data.</p>
   </blockquote>
 </blockquote>
 
@@ -1184,17 +1184,17 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
       <ul>
         <li>In <em>“Final Estimator”</em>:
           <ul>
-            <li><em>“Choose the module that contains target estimator”</em>: <code class="highlighter-rouge">sklearn.ensemble</code>
+            <li><em>“Choose the module that contains target estimator”</em>: <code class="language-plaintext highlighter-rouge">sklearn.ensemble</code>
               <ul>
-                <li><em>“Choose estimator class”</em>: <code class="highlighter-rouge">BaggingClassifier</code></li>
+                <li><em>“Choose estimator class”</em>: <code class="language-plaintext highlighter-rouge">BaggingClassifier</code></li>
               </ul>
             </li>
           </ul>
         </li>
         <li>
-          <p>In <em>“Output parameters for searchCV?”</em>: <code class="highlighter-rouge">Yes</code></p>
+          <p>In <em>“Output parameters for searchCV?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></p>
 
-          <p>We choose <code class="highlighter-rouge">Final Estimator</code> as we have only the estimator and no preprocessor and need the parameters of only the estimator.</p>
+          <p>We choose <code class="language-plaintext highlighter-rouge">Final Estimator</code> as we have only the estimator and no preprocessor and need the parameters of only the estimator.</p>
         </li>
       </ul>
     </li>
@@ -1212,8 +1212,8 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing estimator/pipeline object”</em>:  <code class="highlighter-rouge">final estimator builder</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select an attribute retrieval type”</em>: <code class="highlighter-rouge">Estimator - get_params()</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing estimator/pipeline object”</em>:  <code class="language-plaintext highlighter-rouge">final estimator builder</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select an attribute retrieval type”</em>: <code class="language-plaintext highlighter-rouge">Estimator - get_params()</code></li>
       </ul>
     </li>
   </ol>
@@ -1222,7 +1222,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 
 <h2 id="search-for-the-best-values-of-hyperparameters">Search for the best values of hyperparameters</h2>
 
-<p>After extracting the parameter names from the <strong>Pipeline builder</strong> file, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter <code class="highlighter-rouge">n_estimators</code> of <code class="highlighter-rouge">BaggingClassifier</code> for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of <code class="highlighter-rouge">n_estimators</code> for this regressor is <code class="highlighter-rouge">10</code>. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than <code class="highlighter-rouge">10</code> and a few which are more than <code class="highlighter-rouge">10</code>. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.</p>
+<p>After extracting the parameter names from the <strong>Pipeline builder</strong> file, we will use the <strong>Hyperparameter search</strong> tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter <code class="language-plaintext highlighter-rouge">n_estimators</code> of <code class="language-plaintext highlighter-rouge">BaggingClassifier</code> for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of <code class="language-plaintext highlighter-rouge">n_estimators</code> for this regressor is <code class="language-plaintext highlighter-rouge">10</code>. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than <code class="language-plaintext highlighter-rouge">10</code> and a few which are more than <code class="language-plaintext highlighter-rouge">10</code>. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-hyperparameter-search"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Hyperparameter search</h3>
@@ -1230,19 +1230,19 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Hyperparameter search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select a model selection search scheme”</em>: <code class="highlighter-rouge">GridSearchCV - Exhaustive search over specified parameter values for an estimator </code>
+        <li><em>“Select a model selection search scheme”</em>: <code class="language-plaintext highlighter-rouge">GridSearchCV - Exhaustive search over specified parameter values for an estimator </code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="highlighter-rouge">zipped</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Is the estimator a deep learning model?”</em>: <code class="highlighter-rouge">NO</code> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing pipeline/estimator object”</em>: <code class="language-plaintext highlighter-rouge">zipped</code> file (output of <strong>Pipeline builder</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Is the estimator a deep learning model?”</em>: <code class="language-plaintext highlighter-rouge">NO</code> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
             <li>In <em>“Search parameters Builder”</em>:
               <ul>
-                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="highlighter-rouge">tabular</code> file (output of <strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Choose the dataset containing parameter names”</em>: <code class="language-plaintext highlighter-rouge">tabular</code> file (output of <strong>Estimator attributes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
                 <li>In <em>“Parameter settings for search”</em>:
                   <ul>
                     <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: Parameter settings for search”</em>
                       <ul>
-                        <li><em>“Choose a parameter name (with current value)”</em>: <code class="highlighter-rouge">n_estimators: 10</code></li>
-                        <li><em>“Search list”</em>: <code class="highlighter-rouge">[5,10,20,50]</code></li>
+                        <li><em>“Choose a parameter name (with current value)”</em>: <code class="language-plaintext highlighter-rouge">n_estimators: 10</code></li>
+                        <li><em>“Search list”</em>: <code class="language-plaintext highlighter-rouge">[5,10,20,50]</code></li>
                       </ul>
                     </li>
                   </ul>
@@ -1251,26 +1251,26 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
             </li>
           </ul>
         </li>
-        <li><em>“Select input type”</em>: <code class="highlighter-rouge">tabular data</code>
+        <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Training samples dataset”</em>: <code class="highlighter-rouge">train_rows</code> tabular file</li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">All columns BUT by column header name(s)</code>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Training samples dataset”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code> tabular file</li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns BUT by column header name(s)</code>
               <ul>
-                <li><em>“Type header name(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                <li><em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
               </ul>
             </li>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Dataset containing class labels or target values”</em>: <code class="highlighter-rouge">train_rows</code> tabular file</li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Choose how to select data by column”</em>: <code class="highlighter-rouge">Select columns by column header name(s)</code>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Dataset containing class labels or target values”</em>: <code class="language-plaintext highlighter-rouge">train_rows</code> tabular file</li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">Select columns by column header name(s)</code>
               <ul>
-                <li><em>“Type header name(s)”</em>: <code class="highlighter-rouge">Class</code></li>
+                <li><em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Class</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Whether to hold a portion of samples for test exclusively?”</em>: <code class="highlighter-rouge">Nope</code></li>
-        <li><em>“Save best estimator?”</em>: <code class="highlighter-rouge">Fitted best estimator or Detailed cv_results_from nested CV</code></li>
+        <li><em>“Whether to hold a portion of samples for test exclusively?”</em>: <code class="language-plaintext highlighter-rouge">Nope</code></li>
+        <li><em>“Save best estimator?”</em>: <code class="language-plaintext highlighter-rouge">Fitted best estimator or Detailed cv_results_from nested CV</code></li>
       </ul>
     </li>
   </ol>
@@ -1282,12 +1282,12 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 
   <p>What is the optimal number of estimators for the given dataset?</p>
 
-  <p>Hint: Please look at the <code class="highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
+  <p>Hint: Please look at the <code class="language-plaintext highlighter-rouge">mean_test_score</code> column in the tabular result from the <strong>Hyperparameter search</strong> tool.</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-7"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>20 - even though the default value of the number of estimators for Bagging Classifier is <code class="highlighter-rouge">10</code>, <code class="highlighter-rouge">20</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset.</p>
+    <p>20 - even though the default value of the number of estimators for Bagging Classifier is <code class="language-plaintext highlighter-rouge">10</code>, <code class="language-plaintext highlighter-rouge">20</code> gives the best accuracy. That’s why it is important to perform hyperparameter search to tune these parameters for any dataset.</p>
 
   </blockquote>
 
@@ -1301,11 +1301,11 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
   <ol>
     <li><strong>Ensemble methods for classification and regression</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select a Classification Task”</em>: <code class="highlighter-rouge">Load a model and predict</code>
+        <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Load a model and predict</code>
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Models”</em>: <code class="highlighter-rouge">zipped</code> file (output of <strong>Hyperparameter search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Data (tabular)”</em>: <code class="highlighter-rouge">test_rows</code> tabular file</li>
-            <li><em>“Does the dataset contain header”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Models”</em>: <code class="language-plaintext highlighter-rouge">zipped</code> file (output of <strong>Hyperparameter search</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Data (tabular)”</em>: <code class="language-plaintext highlighter-rouge">test_rows</code> tabular file</li>
+            <li><em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
@@ -1322,7 +1322,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 
 <figure id="figure-12"><img src="images/roc_bagging.png" alt="roc_scores" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.</figcaption></figure>
 
-<p>Figure 13 shows that we again achieved an AUC value of <code class="highlighter-rouge">1.00</code>, which shows that our model is highly effective at predicting whether or not a molecule is biodegradable.</p>
+<p>Figure 13 shows that we again achieved an AUC value of <code class="language-plaintext highlighter-rouge">1.00</code>, which shows that our model is highly effective at predicting whether or not a molecule is biodegradable.</p>
 
 <h1 id="conclusion">Conclusion</h1>
 <p>By following these steps, we learned how to build classifiers and visualize the classification results using <span class="notranslate">Galaxy</span>’s machine learning and plotting tools. The features of the training dataset are mapped to the classes. This <span class="notranslate">mapping</span> is used to make predictions on an unseen (test) dataset. The quality of classifiers is visualized using a plotting tool.</p>

@@ -327,11 +327,11 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="overview">Overview</h1>
 
-<p>We will just briefly cover the features available in <code class="highlighter-rouge">gxadmin</code>, there are lots of queries that may or may not be useful for your <span class="notranslate">Galaxy</span> instance and you will have to read the documentation before using them.</p>
+<p>We will just briefly cover the features available in <code class="language-plaintext highlighter-rouge">gxadmin</code>, there are lots of queries that may or may not be useful for your <span class="notranslate">Galaxy</span> instance and you will have to read the documentation before using them.</p>
 
 <p>It started life as a small shell script that Helena wrote because she couldn’t remember what <a href="https://github.com/galaxyproject/gravity">Gravity</a> was called or where it could be found. Some of the functions needed for things like swapping zerglings are still included in gxadmin but are highly specific to Use<span class="notranslate">Galaxy</span>.eu and not generally useful.</p>
 
-<p>Since then it became the home for “all of the SQL queries we [<span class="notranslate">galaxy</span> admins] run regularly.” @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn’t helpful to the admin community at large, so they decided to put them all in <code class="highlighter-rouge">gxadmin</code> and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that’s missing or broken, or have a new query you want to run, just <a href="https://github.com/usegalaxy-eu/gxadmin/issues/new">let us know</a>.</p>
+<p>Since then it became the home for “all of the SQL queries we [<span class="notranslate">galaxy</span> admins] run regularly.” @hexylena and @natefoo often shared SQL queries with each other in private chats, but this wasn’t helpful to the admin community at large, so they decided to put them all in <code class="language-plaintext highlighter-rouge">gxadmin</code> and make it as easy to install as possible. We are continually trying to make this tool more generic and generally useful, if you notice something that’s missing or broken, or have a new query you want to run, just <a href="https://github.com/usegalaxy-eu/gxadmin/issues/new">let us know</a>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -341,7 +341,7 @@
   <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
   <li><a href="#overview-1" id="markdown-toc-overview-1">Overview</a></li>
   <li><a href="#admin-favourite-queries" id="markdown-toc-admin-favourite-queries">Admin Favourite Queries</a></li>
-  <li><a href="#gxadmin-for-monitoring" id="markdown-toc-gxadmin-for-monitoring"><code class="highlighter-rouge">gxadmin</code> for Monitoring</a></li>
+  <li><a href="#gxadmin-for-monitoring" id="markdown-toc-gxadmin-for-monitoring"><code class="language-plaintext highlighter-rouge">gxadmin</code> for Monitoring</a></li>
   <li><a href="#implementing-a-query" id="markdown-toc-implementing-a-query">Implementing a Query</a>    <ol>
       <li><a href="#a-basic-function" id="markdown-toc-a-basic-function">A basic function</a></li>
       <li><a href="#adding-help" id="markdown-toc-adding-help">Adding help</a></li>
@@ -360,14 +360,14 @@
 
   <ol>
     <li>
-      <p>Edit your <code class="highlighter-rouge">requirements.yml</code> and add the following:</p>
+      <p>Edit your <code class="language-plaintext highlighter-rouge">requirements.yml</code> and add the following:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.gxadmin</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.2</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Install the role with <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
+      <p>Install the role with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml</code></p>
     </li>
     <li>
       <p>Add the role to your playbook, it should run as root</p>
@@ -381,12 +381,12 @@
 
 <h2 id="configuration">Configuration</h2>
 
-<p>If <code class="highlighter-rouge">psql</code> runs without any additional arguments, and permits you to access your <span class="notranslate">galaxy</span> database then you do not need to do any more configuration for gxadmin.
+<p>If <code class="language-plaintext highlighter-rouge">psql</code> runs without any additional arguments, and permits you to access your <span class="notranslate">galaxy</span> database then you do not need to do any more configuration for gxadmin.
 Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy-eu/gxadmin#query-setup">PostgreSQL environment variables</a></p>
 
 <h2 id="overview-1">Overview</h2>
 
-<p><code class="highlighter-rouge">gxadmin</code> has several categories of commands, each with different focuses. This is not a technically meaningful separation, it is just done to make the interface easier for end users.</p>
+<p><code class="language-plaintext highlighter-rouge">gxadmin</code> has several categories of commands, each with different focuses. This is not a technically meaningful separation, it is just done to make the interface easier for end users.</p>
 
 <table>
   <thead>
@@ -399,42 +399,42 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
   <tbody>
     <tr>
       <td>Configuration</td>
-      <td><code class="highlighter-rouge">config</code></td>
+      <td><code class="language-plaintext highlighter-rouge">config</code></td>
       <td>Commands relating to <span class="notranslate">galaxy</span>’s configuration files like XML validation.</td>
     </tr>
     <tr>
       <td>Filters</td>
-      <td><code class="highlighter-rouge">filter</code></td>
+      <td><code class="language-plaintext highlighter-rouge">filter</code></td>
       <td>Transforming streams of text.</td>
     </tr>
     <tr>
       <td><span class="notranslate">Galaxy</span> Admin</td>
-      <td><code class="highlighter-rouge"><span class="notranslate">galaxy</span></code></td>
+      <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code></td>
       <td>Miscellaneous <span class="notranslate">galaxy</span> related commands like a cleanup wrapper.</td>
     </tr>
     <tr>
       <td>uWSGI</td>
-      <td><code class="highlighter-rouge">uwsgi</code></td>
+      <td><code class="language-plaintext highlighter-rouge">uwsgi</code></td>
       <td>If you’re using <a href="https://github.com/usegalaxy-eu/ansible-galaxy-systemd/">systemd for <span class="notranslate">Galaxy</span></a> and a handler/zergling setup, then this lets you manage your handlers and zerglings.</td>
     </tr>
     <tr>
       <td>DB Queries</td>
-      <td><code class="highlighter-rouge">{csv,tsv,i,}query</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{csv,tsv,i,}query</code></td>
       <td>Queries against the database which return tabular output.</td>
     </tr>
     <tr>
       <td>Report</td>
-      <td><code class="highlighter-rouge">report</code></td>
+      <td><code class="language-plaintext highlighter-rouge">report</code></td>
       <td>Queries which return more complex and structured markdown reports.</td>
     </tr>
     <tr>
       <td>Mutations</td>
-      <td><code class="highlighter-rouge">mutate</code></td>
+      <td><code class="language-plaintext highlighter-rouge">mutate</code></td>
       <td>These are like queries, except they mutate the database. All other queries are read-only.</td>
     </tr>
     <tr>
       <td>Meta</td>
-      <td><code class="highlighter-rouge">meta</code></td>
+      <td><code class="language-plaintext highlighter-rouge">meta</code></td>
       <td>More miscellaneous commands, and a built-in updating function.</td>
     </tr>
   </tbody>
@@ -442,7 +442,7 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
 
 <h2 id="admin-favourite-queries">Admin Favourite Queries</h2>
 
-<p><strong>@slugger70’s favourite</strong>: <code class="highlighter-rouge">gxadmin query old-histories</code>. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on Use<span class="notranslate">Galaxy</span>.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.</p>
+<p><strong>@slugger70’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query old-histories</code>. He contributed this function to find old histories, as their instance has a 90 day limit on histories, anything older than that might be automatically removed. This helps their group identify any histories that can be purged in order to save space. Running this on Use<span class="notranslate">Galaxy</span>.eu, we have some truly ancient histories, and maybe could benefit from a similar policy.</p>
 
 <table>
   <thead>
@@ -528,7 +528,7 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
   </tbody>
 </table>
 
-<p><strong>@natefoo’s favourite</strong>: <code class="highlighter-rouge">gxadmin query job-inputs</code>. He contributed this function which helps him debug jobs which are not running and should be. The query can</p>
+<p><strong>@natefoo’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query job-inputs</code>. He contributed this function which helps him debug jobs which are not running and should be. The query can</p>
 
 <table>
   <thead>
@@ -581,7 +581,7 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
   </tbody>
 </table>
 
-<p><strong>@bgruening’s favourite</strong>: <code class="highlighter-rouge">gxadmin query latest-users</code> let’s us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven’t registered for <a href="https://galaxyproject.eu/tiaas">training infrastructure as a service</a> which helps us coordinate infrastructure for them so they don’t have bad experiences.</p>
+<p><strong>@bgruening’s favourite</strong>: <code class="language-plaintext highlighter-rouge">gxadmin query latest-users</code> let’s us see who has recently joined our server. We sometimes notice that people are running a training on our infrastructure and they haven’t registered for <a href="https://galaxyproject.eu/tiaas">training infrastructure as a service</a> which helps us coordinate infrastructure for them so they don’t have bad experiences.</p>
 
 <table>
   <thead>
@@ -644,7 +644,7 @@ Otherwise, you may need to set some of the <a href="https://github.com/usegalaxy
   </tbody>
 </table>
 
-<p><strong>@hexylena’s favourite</strong> <code class="highlighter-rouge">gxadmin report job-info</code>. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.</p>
+<p><strong>@hexylena’s favourite</strong> <code class="language-plaintext highlighter-rouge">gxadmin report job-info</code>. This command gives more information than you probably need on the execution of a specific job, formatted as markdown for easy sharing with fellow administrators.</p>
 
 <div class="language-text highlighter-rouge"><div class="highlight"><pre class="highlight"><code># <span class="notranslate">Galaxy</span> Job 5132146
 
@@ -709,11 +709,11 @@ Canu assembler on data 41 (unassembled)       |   fasta       |   9520366   |   
 Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |               |   f             |   f            |   9018506   |   running    |   f            |   f           |
 </code></pre></div></div>
 
-<h1 id="gxadmin-for-monitoring"><code class="highlighter-rouge">gxadmin</code> for Monitoring</h1>
+<h1 id="gxadmin-for-monitoring"><code class="language-plaintext highlighter-rouge">gxadmin</code> for Monitoring</h1>
 
-<p><code class="highlighter-rouge">gxadmin</code> already supported <code class="highlighter-rouge">query</code>, <code class="highlighter-rouge">csvquery</code>, and <code class="highlighter-rouge">tsvquery</code> for requesting data from the <span class="notranslate">Galaxy</span> database in tables, CSV, or TSV formats, but we recently implemented <code class="highlighter-rouge">influx</code> queries which output data in a format that <a href="https://github.com/influxdata/telegraf">Telegraf</a> can consume.</p>
+<p><code class="language-plaintext highlighter-rouge">gxadmin</code> already supported <code class="language-plaintext highlighter-rouge">query</code>, <code class="language-plaintext highlighter-rouge">csvquery</code>, and <code class="language-plaintext highlighter-rouge">tsvquery</code> for requesting data from the <span class="notranslate">Galaxy</span> database in tables, CSV, or TSV formats, but we recently implemented <code class="language-plaintext highlighter-rouge">influx</code> queries which output data in a format that <a href="https://github.com/influxdata/telegraf">Telegraf</a> can consume.</p>
 
-<p>So running <code class="highlighter-rouge">gxadmin query queue-overview</code> normally shows something like:</p>
+<p>So running <code class="language-plaintext highlighter-rouge">gxadmin query queue-overview</code> normally shows something like:</p>
 
 <table>
   <thead>
@@ -803,9 +803,9 @@ Canu assembler on data 41 (contigs)           |   fasta       |   9520365   |   
   </tbody>
 </table>
 
-<p>The <code class="highlighter-rouge">gxadmin iquery queue-overview</code> is run by our Telegraf monitor on a regular basis, allowing us to consume the data:</p>
+<p>The <code class="language-plaintext highlighter-rouge">gxadmin iquery queue-overview</code> is run by our Telegraf monitor on a regular basis, allowing us to consume the data:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>queue-overview,tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0,tool_version=0.4.6.0,state=running,handler=handler_main_4,destination_id=12cores_180G_special,job_runner_name=condor count=1
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>queue-overview,tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0,tool_version=0.4.6.0,state=running,handler=handler_main_4,destination_id=12cores_180G_special,job_runner_name=condor count=1
 queue-overview,tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.6.0,tool_version=0.4.6.0,state=running,handler=handler_main_5,destination_id=12cores_180G_special,job_runner_name=condor count=1
 queue-overview,tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/freebayes/freebayes/1.1.0.46-0,tool_version=1.1.0.46-0,state=running,handler=handler_main_3,destination_id=12cores_12G,job_runner_name=condor count=1
 queue-overview,tool_id=<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/vcffilter/vcffilter2/1.0.0_rc1+<span class="notranslate">galaxy</span>1,tool_version=1.0.0_rc1+<span class="notranslate">galaxy</span>1,state=queued,handler=handler_main_11,destination_id=4G_memory,job_runner_name=condor count=1
@@ -826,7 +826,7 @@ queue-overview,tool_id=ebi_sra_main,tool_version=1.0.1,state=running,handler=han
     <span class="py">interval</span> <span class="p">=</span> <span class="s">"1m"</span>
 </code></pre></div></div>
 
-<p>This often requires a wrapper script, because you’ll need to pass environment variables to the <code class="highlighter-rouge">gxadmin</code> invocation, e.g.:</p>
+<p>This often requires a wrapper script, because you’ll need to pass environment variables to the <code class="language-plaintext highlighter-rouge">gxadmin</code> invocation, e.g.:</p>
 
 <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
 <span class="nb">export </span><span class="nv">PGUSER</span><span class="o">=</span><span class="notranslate">galaxy</span>
@@ -837,9 +837,9 @@ gxadmin iquery <span class="notranslate">workflow</span>-invocation-status
 
 <h1 id="implementing-a-query">Implementing a Query</h1>
 
-<p>Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. <code class="highlighter-rouge">gxadmin</code> supports ‘local’ functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to <code class="highlighter-rouge">gxadmin</code> though, you’ll never know who wants to know the same thing about their db.</p>
+<p>Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. <code class="language-plaintext highlighter-rouge">gxadmin</code> supports ‘local’ functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to <code class="language-plaintext highlighter-rouge">gxadmin</code> though, you’ll never know who wants to know the same thing about their db.</p>
 
-<p><code class="highlighter-rouge">gxadmin</code> will look for local functions in <code class="highlighter-rouge">~/.config/gxadmin-local.sh</code></p>
+<p><code class="language-plaintext highlighter-rouge">gxadmin</code> will look for local functions in <code class="language-plaintext highlighter-rouge">~/.config/gxadmin-local.sh</code></p>
 
 <h2 id="a-basic-function">A basic function</h2>
 
@@ -848,10 +848,10 @@ gxadmin iquery <span class="notranslate">workflow</span>-invocation-status
 
   <ol>
     <li>
-      <p>If <code class="highlighter-rouge">~/.config/</code> does not exist, create that directory with <code class="highlighter-rouge">mkdir -p ~/.config/</code></p>
+      <p>If <code class="language-plaintext highlighter-rouge">~/.config/</code> does not exist, create that directory with <code class="language-plaintext highlighter-rouge">mkdir -p ~/.config/</code></p>
     </li>
     <li>
-      <p>Open <code class="highlighter-rouge">~/.config/gxadmin-local.sh</code> in a text editor.</p>
+      <p>Open <code class="language-plaintext highlighter-rouge">~/.config/gxadmin-local.sh</code> in a text editor.</p>
     </li>
     <li>
       <p>Add the following to the file and save it.</p>
@@ -862,7 +862,7 @@ gxadmin iquery <span class="notranslate">workflow</span>-invocation-status
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">gxadmin local</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">gxadmin local</code></p>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -887,7 +887,7 @@ help / -h / --help : this message. Invoke '--help' on any subcommand for help sp
       </blockquote>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">gxadmin local hello</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">gxadmin local hello</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -915,10 +915,10 @@ help / -h / --help : this message. Invoke '--help' on any subcommand for help sp
 
   <ol>
     <li>
-      <p>Open <code class="highlighter-rouge">~/.config/gxadmin-local.sh</code> in a text editor.</p>
+      <p>Open <code class="language-plaintext highlighter-rouge">~/.config/gxadmin-local.sh</code> in a text editor.</p>
     </li>
     <li>
-      <p>Update your function to add the <code class="highlighter-rouge">handle_help</code> call:</p>
+      <p>Update your function to add the <code class="language-plaintext highlighter-rouge">handle_help</code> call:</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>local_hello<span class="o">()</span> <span class="o">{</span> <span class="c">## hello: Says hi</span>
 	handle_help <span class="s2">"</span><span class="nv">$@</span><span class="s2">"</span> <span class="o">&lt;&lt;-</span><span class="no">EOF</span><span class="sh">
@@ -929,7 +929,7 @@ help / -h / --help : this message. Invoke '--help' on any subcommand for help sp
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">gxadmin local hello --help</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">gxadmin local hello --help</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-2"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -971,7 +971,7 @@ Greets you
 
   <ol>
     <li>
-      <p>Open <code class="highlighter-rouge">~/.config/gxadmin-local.sh</code> in a text editor.</p>
+      <p>Open <code class="language-plaintext highlighter-rouge">~/.config/gxadmin-local.sh</code> in a text editor.</p>
     </li>
     <li>
       <p>Add a new function:</p>
@@ -996,7 +996,7 @@ Greets you
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">gxadmin local query-latest 5</code> to select</p>
+      <p>Run <code class="language-plaintext highlighter-rouge">gxadmin local query-latest 5</code> to select</p>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>

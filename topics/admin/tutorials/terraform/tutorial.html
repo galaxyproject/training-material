@@ -351,7 +351,7 @@
   </li>
   <li><a href="#managing-a-cluster-of-vms" id="markdown-toc-managing-a-cluster-of-vms">Managing a Cluster of VMs</a>    <ol>
       <li><a href="#configuration" id="markdown-toc-configuration">Configuration</a></li>
-      <li><a href="#cloud-init" id="markdown-toc-cloud-init"><code class="highlighter-rouge">cloud-init</code></a></li>
+      <li><a href="#cloud-init" id="markdown-toc-cloud-init"><code class="language-plaintext highlighter-rouge">cloud-init</code></a></li>
       <li><a href="#login--htcondor--a-test-job" id="markdown-toc-login--htcondor--a-test-job">Login / HTCondor / A Test Job</a></li>
     </ol>
   </li>
@@ -414,11 +414,11 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
 
 <h2 id="keypair">Keypair</h2>
 
-<p>Terraform <span class="notranslate">reads</span> all files with the extension <code class="highlighter-rouge">.tf</code> in your current directory. Resources can be in a single file, or organised across several different files. We had the best experience by separating out logical groups of resources:</p>
+<p>Terraform <span class="notranslate">reads</span> all files with the extension <code class="language-plaintext highlighter-rouge">.tf</code> in your current directory. Resources can be in a single file, or organised across several different files. We had the best experience by separating out logical groups of resources:</p>
 
 <ul>
   <li>DNS entries in a single file</li>
-  <li>Security groups in separate <code class="highlighter-rouge">.tf</code> files</li>
+  <li>Security groups in separate <code class="language-plaintext highlighter-rouge">.tf</code> files</li>
   <li>Keypairs in a single file</li>
   <li>Servers/Instances in individual files.</li>
 </ul>
@@ -434,7 +434,7 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
       <p>Create a new directory and go into it.</p>
     </li>
     <li>
-      <p>Create a <code class="highlighter-rouge">providers.tf</code> file with the following contents:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">providers.tf</code> file with the following contents:</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">provider</span> <span class="err">"openstack"</span> <span class="err">{}</span>
 </code></pre></div>      </div>
@@ -442,7 +442,7 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
       <p>This specifies the configuration for the OpenStack plugin. You can either specify the configuration in the plugin, or it will automatically load the values from the normal OpenStack environment variable names.</p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform init</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform init</code></p>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -454,7 +454,7 @@ Knowing that your infrastructure is exactly what you expect it to be can simplif
 
           <p>If this is not the first time you’ve run it, you will see Terraform download any missing providers:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initializing provider plugins...
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Initializing provider plugins...
 - Checking for available provider plugins on https://releases.hashicorp.com...
 - Downloading plugin for provider "openstack" (1.10.0)...
 
@@ -489,7 +489,7 @@ commands will detect it and remind you to do so if necessary.
 
 <ol>
   <li>We can load the OpenStack credentials as environment variables</li>
-  <li>We can code the OpenStack credentials in the <code class="highlighter-rouge">providers.tf</code> file</li>
+  <li>We can code the OpenStack credentials in the <code class="language-plaintext highlighter-rouge">providers.tf</code> file</li>
 </ol>
 
 <p>We recommend the first option, as often Terraform plans are <a href="https://github.com/usegalaxy-eu/infrastructure">made publicly available</a> in order to collaborate on them, and this prevents accidentally committing your credentials to the git repository where.</p>
@@ -508,18 +508,18 @@ commands will detect it and remind you to do so if necessary.
 
   <ol>
     <li>
-      <p>Find the public key you will use for connecting to the your new VM. It is usually known as <code class="highlighter-rouge">id_rsa.pub</code></p>
+      <p>Find the public key you will use for connecting to the your new VM. It is usually known as <code class="language-plaintext highlighter-rouge">id_rsa.pub</code></p>
 
       <blockquote class="comment">
         <h3 id="comment-no-public-key"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> No public key</h3>
-        <p>If you can find the private key file (possibly a <code class="highlighter-rouge">cloud.pem</code> file you downloaded earlier from OpenStack), then you can find the public key by running the command:</p>
+        <p>If you can find the private key file (possibly a <code class="language-plaintext highlighter-rouge">cloud.pem</code> file you downloaded earlier from OpenStack), then you can find the public key by running the command:</p>
 
         <div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>ssh-keygen <span class="nt">-y</span> <span class="nt">-f</span> /path/to/key.pem
 </code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
-      <p>Create a new file, <code class="highlighter-rouge">main.tf</code> with the following structure. In <code class="highlighter-rouge">public_key</code>, write the complete value of your public key that you found in the first step.</p>
+      <p>Create a new file, <code class="language-plaintext highlighter-rouge">main.tf</code> with the following structure. In <code class="language-plaintext highlighter-rouge">public_key</code>, write the complete value of your public key that you found in the first step.</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">resource</span> <span class="err">"openstack_compute_keypair_v2"</span> <span class="err">"my-cloud-key"</span> <span class="err">{</span>
   <span class="py">name</span>       <span class="p">=</span> <span class="s">"my-key"</span>
@@ -528,7 +528,7 @@ commands will detect it and remind you to do so if necessary.
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform plan</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform plan</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -540,7 +540,7 @@ commands will detect it and remind you to do so if necessary.
 
           <p>If you have not sourced your OpenStack credentials file, you will see something like the following:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Error running plan: 1 error(s) occurred:
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Error: Error running plan: 1 error(s) occurred:
 
 * provider.openstack: One of 'auth_url' or 'cloud' must be specified
 </code></pre></div>          </div>
@@ -553,9 +553,9 @@ commands will detect it and remind you to do so if necessary.
 <span class="nb">export </span><span class="nv">OS_USER_DOMAIN_NAME</span><span class="o">=</span><span class="s2">"Default"</span>
 </code></pre></div>          </div>
 
-          <p>You should run <code class="highlighter-rouge">source /path/to/file.sh</code> in your terminal, and then re-run <code class="highlighter-rouge">terraform plan</code>:</p>
+          <p>You should run <code class="language-plaintext highlighter-rouge">source /path/to/file.sh</code> in your terminal, and then re-run <code class="language-plaintext highlighter-rouge">terraform plan</code>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
   + create
 
@@ -584,7 +584,7 @@ Plan: 1 to add, 0 to change, 0 to destroy.
 
 <p>Let’s look at the output in detail:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
   + create
 
@@ -608,9 +608,9 @@ can't guarantee that exactly these actions will be performed if
 "terraform apply" is subsequently run.
 </code></pre></div></div>
 
-<p>Terraform informs us first about the different symbols used. Here it tells us that it will <code class="highlighter-rouge">+ create</code> a resource. Sometimes it will <code class="highlighter-rouge">- delete</code> or <code class="highlighter-rouge">~ update in-place</code>. Next it describes in detail what will be done and why. For creating a resource it does not give us much information, we will see more types of changes later.</p>
+<p>Terraform informs us first about the different symbols used. Here it tells us that it will <code class="language-plaintext highlighter-rouge">+ create</code> a resource. Sometimes it will <code class="language-plaintext highlighter-rouge">- delete</code> or <code class="language-plaintext highlighter-rouge">~ update in-place</code>. Next it describes in detail what will be done and why. For creating a resource it does not give us much information, we will see more types of changes later.</p>
 
-<p>Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource’s state looks like between your <code class="highlighter-rouge">terraform plan</code> and <code class="highlighter-rouge">terraform apply</code> steps. This is a more advanced feature and will not be covered today.</p>
+<p>Lastly it informs us that we did not save our plan. Terraform can maintain a concept of what the remote resource’s state looks like between your <code class="language-plaintext highlighter-rouge">terraform plan</code> and <code class="language-plaintext highlighter-rouge">terraform apply</code> steps. This is a more advanced feature and will not be covered today.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-applying-our-plan"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Applying our plan</h3>
@@ -619,9 +619,9 @@ can't guarantee that exactly these actions will be performed if
 
   <ol>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform apply</code>. Because we did not re-use our plan from the previous step, terraform will re-run the plan step first, and request your confirmation:</p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform apply</code>. Because we did not re-use our plan from the previous step, terraform will re-run the plan step first, and request your confirmation:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>An execution plan has been generated and is shown below.
 Resource actions are indicated with the following symbols:
   + create
 
@@ -648,7 +648,7 @@ Do you want to perform these actions?
     <li>
       <p>Confirm that everything looks good and enter the value ‘yes’, and hit enter.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Creating...
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Creating...
   fingerprint: "" =&gt; "&lt;computed&gt;"
   name:        "" =&gt; "my-key"
   private_key: "" =&gt; "&lt;computed&gt;"
@@ -664,10 +664,10 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
         <p>If you see an error message that says:</p>
 
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"conflictingRequest": {"message": "Key pair 'my-key' already exists.", "code": 409}}
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{"conflictingRequest": {"message": "Key pair 'my-key' already exists.", "code": 409}}
 </code></pre></div>        </div>
 
-        <p>Then you already have a keypair with this name. You should update the <code class="highlighter-rouge">name = "my-key"</code> to use a different name.</p>
+        <p>Then you already have a keypair with this name. You should update the <code class="language-plaintext highlighter-rouge">name = "my-key"</code> to use a different name.</p>
       </blockquote>
     </li>
   </ol>
@@ -695,7 +695,7 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
       <p>Identify a small image flavor that you can use for your testing.</p>
     </li>
     <li>
-      <p>Upload this <code class="highlighter-rouge">raw</code> format image available from <a href="https://usegalaxy.eu/static/vgcn/denbi-centos7-j10-2e08aa4bfa33-master.raw">Use<span class="notranslate">Galaxy</span>.eu</a> to your OpenStack</p>
+      <p>Upload this <code class="language-plaintext highlighter-rouge">raw</code> format image available from <a href="https://usegalaxy.eu/static/vgcn/denbi-centos7-j10-2e08aa4bfa33-master.raw">Use<span class="notranslate">Galaxy</span>.eu</a> to your OpenStack</p>
     </li>
   </ol>
 
@@ -709,11 +709,11 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 
   <ol>
     <li>
-      <p>Open your <code class="highlighter-rouge">main.tf</code> in your text editor and add the following.</p>
+      <p>Open your <code class="language-plaintext highlighter-rouge">main.tf</code> in your text editor and add the following.</p>
 
       <blockquote class="warning">
         <h3 id="warning-warning-correct-imageflavornetworksecurity_group-names"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: Correct image/flavor/network/security_group names</h3>
-        <p>The documentation below notes some specific values for the <code class="highlighter-rouge">image_name</code>, <code class="highlighter-rouge">flavor_name</code>, <code class="highlighter-rouge">security_groups</code>, and <code class="highlighter-rouge">network</code> properties. These <em>may not be correct</em> for your training, instead your instructor will provide these values to you.</p>
+        <p>The documentation below notes some specific values for the <code class="language-plaintext highlighter-rouge">image_name</code>, <code class="language-plaintext highlighter-rouge">flavor_name</code>, <code class="language-plaintext highlighter-rouge">security_groups</code>, and <code class="language-plaintext highlighter-rouge">network</code> properties. These <em>may not be correct</em> for your training, instead your instructor will provide these values to you.</p>
       </blockquote>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">resource</span> <span class="err">"openstack_compute_instance_v2"</span> <span class="err">"test"</span> <span class="err">{</span>
@@ -732,46 +732,46 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
       <p>There are some important things to note, we reproduce the above configuration but with comments:</p>
 
       <p>“openstack_compute_instance_v2” is the ‘type’ of a resource, ‘test’ is the name of this specific resource.</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "test" {
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "test" {
 </code></pre></div>      </div>
 
       <p>This will become the server name</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  name            = "test-vm"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  name            = "test-vm"
 </code></pre></div>      </div>
 
       <p>The image which will be launched</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
 </code></pre></div>      </div>
 
       <p>Which flavor</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  flavor_name     = "m1.tiny"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  flavor_name     = "m1.tiny"
 </code></pre></div>      </div>
 
       <p>This uses Terraform’s knowledge of the
-<code class="highlighter-rouge">openstack_compute_keypair_v2.my-cloud-key</code> resource which you
-previously described. Then it accesses the <code class="highlighter-rouge">.name</code> attribute.
+<code class="language-plaintext highlighter-rouge">openstack_compute_keypair_v2.my-cloud-key</code> resource which you
+previously described. Then it accesses the <code class="language-plaintext highlighter-rouge">.name</code> attribute.
 This allow your to update the name at any time, and still have your
 resource definitions be correct.</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  key_pair        = "${openstack_compute_keypair_v2.my-cloud-key.name}"
 </code></pre></div>      </div>
 
       <p>The security group to apply. This is a comma separated list, but
-<code class="highlighter-rouge">default</code> should work for most OpenStack clouds.</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  security_groups = ["default"]
+<code class="language-plaintext highlighter-rouge">default</code> should work for most OpenStack clouds.</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  security_groups = ["default"]
 </code></pre></div>      </div>
 
       <p>A network that is accessible to you.</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  network {
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  network {
     name = "public"
   }
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform apply</code>. Running the <code class="highlighter-rouge">plan</code> step is not necessary, it is just useful to see what changes will be applied without starting the apply process.</p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform apply</code>. Running the <code class="language-plaintext highlighter-rouge">plan</code> step is not necessary, it is just useful to see what changes will be applied without starting the apply process.</p>
 
       <p>Note that first terraform “refreshes” the state of the remote resources that it already manages, before checking what changes need to be made.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply
 openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
 
 An execution plan has been generated and is shown below.
@@ -821,7 +821,7 @@ Do you want to perform these actions?
     <li>
       <p>If everything looks good, enter ‘yes’.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.test: Creating...
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.test: Creating...
   access_ip_v4:               "" =&gt; "&lt;computed&gt;"
   access_ip_v6:               "" =&gt; "&lt;computed&gt;"
   all_metadata.%:             "" =&gt; "&lt;computed&gt;"
@@ -857,18 +857,18 @@ Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
   </ol>
 </blockquote>
 
-<p>You now have a running instance! We do not know the IP address so we cannot login yet. You can obtain that from the OpenStack dashboard, or via the <code class="highlighter-rouge">terraform show</code> command</p>
+<p>You now have a running instance! We do not know the IP address so we cannot login yet. You can obtain that from the OpenStack dashboard, or via the <code class="language-plaintext highlighter-rouge">terraform show</code> command</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-terraform-show-and-logging-in"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <code class="highlighter-rouge">terraform show</code> and logging in</h3>
+  <h3 id="hands_on-terraform-show-and-logging-in"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> <code class="language-plaintext highlighter-rouge">terraform show</code> and logging in</h3>
 
   <ol>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform show</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform show</code></p>
 
       <p>The values in the following output will not match yours.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.test:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.test:
   id = 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa
   access_ip_v4 = 192.52.32.231
   access_ip_v6 =
@@ -905,12 +905,12 @@ openstack_compute_keypair_v2.my-cloud-key:
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Here we can obtain the IP address. In the above output, it is <code class="highlighter-rouge">192.52.32.231</code></p>
+      <p>Here we can obtain the IP address. In the above output, it is <code class="language-plaintext highlighter-rouge">192.52.32.231</code></p>
     </li>
     <li>
-      <p>Login with <code class="highlighter-rouge">ssh</code>: <code class="highlighter-rouge">ssh centos@&lt;your-ip-address&gt;</code>. You should see something like the following:</p>
+      <p>Login with <code class="language-plaintext highlighter-rouge">ssh</code>: <code class="language-plaintext highlighter-rouge">ssh centos@&lt;your-ip-address&gt;</code>. You should see something like the following:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The authenticity of host '192.52.32.231 (192.52.32.231)' can't be established.
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>The authenticity of host '192.52.32.231 (192.52.32.231)' can't be established.
 ECDSA key fingerprint is SHA256:oEHgotonwT3a47K0kLdsNVd/QqctBjDK7F829J0VnwQ.
 Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added '192.52.32.231' (ECDSA) to the list of known hosts.
@@ -969,18 +969,18 @@ Uptime............: up 5 minutes
 
   <ol>
     <li>
-      <p>Update the name of the instance you already have, <code class="highlighter-rouge">test</code> to <code class="highlighter-rouge">name = "central-manager"</code>. This will be our scheduler central manager.</p>
+      <p>Update the name of the instance you already have, <code class="language-plaintext highlighter-rouge">test</code> to <code class="language-plaintext highlighter-rouge">name = "central-manager"</code>. This will be our scheduler central manager.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "test" {
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "test" {
   name            = "central-manager"
   ...
 }
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Add the NFS server. It is mostly the same configuration you’ve done before, just with a different <code class="highlighter-rouge">name</code> and resource name.</p>
+      <p>Add the NFS server. It is mostly the same configuration you’ve done before, just with a different <code class="language-plaintext highlighter-rouge">name</code> and resource name.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "nfs" {
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_instance_v2" "nfs" {
   name            = "nfs-server"
   image_name      = "denbi-centos7-j10-2e08aa4bfa33-master"
   flavor_name     = "m1.tiny"
@@ -994,7 +994,7 @@ Uptime............: up 5 minutes
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Lastly, we’ll add the execution nodes. Here we will launch two servers at once by using the <code class="highlighter-rouge">count</code> parameter. We can add <code class="highlighter-rouge">count</code> in the main portion of a Terraform resource definition and it will create that many copies of that same resource. In the case where we wish to be able to distinguish between them, we can use <code class="highlighter-rouge">${count.index}</code> in the name or another field to distinguish them.</p>
+      <p>Lastly, we’ll add the execution nodes. Here we will launch two servers at once by using the <code class="language-plaintext highlighter-rouge">count</code> parameter. We can add <code class="language-plaintext highlighter-rouge">count</code> in the main portion of a Terraform resource definition and it will create that many copies of that same resource. In the case where we wish to be able to distinguish between them, we can use <code class="language-plaintext highlighter-rouge">${count.index}</code> in the name or another field to distinguish them.</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">resource</span> <span class="err">"openstack_compute_instance_v2"</span> <span class="err">"exec"</span> <span class="err">{</span>
   <span class="py">name</span>            <span class="p">=</span> <span class="s">"exec-${count.index}"</span>
@@ -1011,11 +1011,11 @@ Uptime............: up 5 minutes
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform apply</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform apply</code></p>
 
       <p>You will see something like the following:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
 openstack_compute_instance_v2.test: Refreshing state... (ID: 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa)
 
 An execution plan has been generated and is shown below.
@@ -1046,10 +1046,10 @@ Do you want to perform these actions?
   Enter a value:
 </code></pre></div>      </div>
 
-      <p>This time, Terraform is able to modify the <code class="highlighter-rouge">openstack_compute_instance_v2.test</code> resource in place, it can just update the name of the VM. It will also create the other three requested resources.</p>
+      <p>This time, Terraform is able to modify the <code class="language-plaintext highlighter-rouge">openstack_compute_instance_v2.test</code> resource in place, it can just update the name of the VM. It will also create the other three requested resources.</p>
     </li>
     <li>
-      <p>Enter <code class="highlighter-rouge">yes</code> and terraform will make the requested changes</p>
+      <p>Enter <code class="language-plaintext highlighter-rouge">yes</code> and terraform will make the requested changes</p>
     </li>
     <li>
       <p>It should complete successfully</p>
@@ -1062,7 +1062,7 @@ Do you want to perform these actions?
         <blockquote class="solution">
           <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.nfs: Creation complete after 2m55s (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_instance_v2.nfs: Creation complete after 2m55s (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
 openstack_compute_instance_v2.exec[0]: Creation complete after 2m57s (ID: 1ae02775-a0ff-47a5-907f-513190a8548e)
 openstack_compute_instance_v2.exec[1]: Creation complete after 2m59s (ID: d339ebeb-4288-498c-9923-42fce32a3808)
 
@@ -1074,18 +1074,18 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
   </ol>
 </blockquote>
 
-<h2 id="cloud-init"><code class="highlighter-rouge">cloud-init</code></h2>
+<h2 id="cloud-init"><code class="language-plaintext highlighter-rouge">cloud-init</code></h2>
 
 <p>These VMs that we have launched currently are all absolutely identical, except for the host name. There is no specialisation. They all do nothing. We will fix that and make these machines have individual roles by booting them with metadata attached to each instance.</p>
 
-<p><a href="https://cloud-init.io/"><code class="highlighter-rouge">cloud-init</code></a> is used for this process, it allows for injecting files and executing commands as part of the boot process.</p>
+<p><a href="https://cloud-init.io/"><code class="language-plaintext highlighter-rouge">cloud-init</code></a> is used for this process, it allows for injecting files and executing commands as part of the boot process.</p>
 
 <blockquote class="details">
   <h3 id="details-other-actions"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other actions</h3>
   <p>cloud-init allows for many more actions to be executed as well, you can read about them in <a href="https://cloudinit.readthedocs.io/en/latest/">the documentation</a>.</p>
 </blockquote>
 
-<p>The <code class="highlighter-rouge">cloud-init</code> configuration is a YAML file. Here we can see an example of how it is used, we have a YAML array at the top level. Inside, a hash of <code class="highlighter-rouge">content</code>, <code class="highlighter-rouge">owner</code>, <code class="highlighter-rouge">path</code>, and <code class="highlighter-rouge">permissions</code>.</p>
+<p>The <code class="language-plaintext highlighter-rouge">cloud-init</code> configuration is a YAML file. Here we can see an example of how it is used, we have a YAML array at the top level. Inside, a hash of <code class="language-plaintext highlighter-rouge">content</code>, <code class="language-plaintext highlighter-rouge">owner</code>, <code class="language-plaintext highlighter-rouge">path</code>, and <code class="language-plaintext highlighter-rouge">permissions</code>.</p>
 
 <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#cloud-config</span>
 <span class="na">write_files</span><span class="pi">:</span>
@@ -1104,7 +1104,7 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
   <span class="na">permissions</span><span class="pi">:</span> <span class="s1">'</span><span class="s">0644'</span>
 </code></pre></div></div>
 
-<p>This will create a file with the value from <code class="highlighter-rouge">content</code>, owned by root/group root, in <code class="highlighter-rouge">/etc/condor/condor_config.local</code>. So let’s re-structure our <code class="highlighter-rouge">main.tf</code> file to have some configuration:</p>
+<p>This will create a file with the value from <code class="language-plaintext highlighter-rouge">content</code>, owned by root/group root, in <code class="language-plaintext highlighter-rouge">/etc/condor/condor_config.local</code>. So let’s re-structure our <code class="language-plaintext highlighter-rouge">main.tf</code> file to have some configuration:</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-cloud-init"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: cloud-init</h3>
@@ -1113,7 +1113,7 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
     <li>
       <p>Edit your central-manager server and add a block like the following at the end.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
   #cloud-config
   write_files:
   - content: |
@@ -1142,12 +1142,12 @@ Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
 EOF
 </code></pre></div>      </div>
 
-      <p>Near the end we see an interesting thing, <code class="highlighter-rouge">${openstack_compute_instance_v2.nfs.access_ip_v4}</code>, this will template the <code class="highlighter-rouge">user_data</code> that is passed to <code class="highlighter-rouge">cloud-init</code>, with the IP address of the NFS server.</p>
+      <p>Near the end we see an interesting thing, <code class="language-plaintext highlighter-rouge">${openstack_compute_instance_v2.nfs.access_ip_v4}</code>, this will template the <code class="language-plaintext highlighter-rouge">user_data</code> that is passed to <code class="language-plaintext highlighter-rouge">cloud-init</code>, with the IP address of the NFS server.</p>
     </li>
     <li>
       <p>Edit your NFS server and add a user data block like:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
   #cloud-config
   write_files:
   - content: |
@@ -1167,16 +1167,16 @@ EOF
       <p>This will:</p>
 
       <ol>
-        <li>Make the <code class="highlighter-rouge">/data/share</code> directory</li>
+        <li>Make the <code class="language-plaintext highlighter-rouge">/data/share</code> directory</li>
         <li>Set permissions on it</li>
         <li>Launch the NFS service</li>
-        <li>Export <code class="highlighter-rouge">/data/share</code> to the network</li>
+        <li>Export <code class="language-plaintext highlighter-rouge">/data/share</code> to the network</li>
       </ol>
     </li>
     <li>
-      <p>Edit the <code class="highlighter-rouge">exec</code> node and add a user data block like:</p>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">exec</code> node and add a user data block like:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>user_data = &lt;&lt;-EOF
   #cloud-config
   write_files:
   - content: |
@@ -1223,7 +1223,7 @@ EOF
 
       <blockquote class="solution">
         <h3 id="solution-final-configuration"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Final Configuration</h3>
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_keypair_v2" "my-cloud-key" {
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>resource "openstack_compute_keypair_v2" "my-cloud-key" {
   name       = "my-key"
   public_key = "ssh-rsa AAAAB3..."
 }
@@ -1354,11 +1354,11 @@ resource "openstack_compute_instance_v2" "exec" {
       </blockquote>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform apply</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform apply</code></p>
 
       <p>It will look slightly different this time:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ terraform apply
 openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
 openstack_compute_instance_v2.nfs: Refreshing state... (ID: 421f0899-f2c1-43c9-8bbe-9b0415c8f4f4)
 openstack_compute_instance_v2.test: Refreshing state... (ID: 7a2ed5ba-0801-49b5-bf1b-9bf9cec733fa)
@@ -1402,13 +1402,13 @@ Do you want to perform these actions?
 
   <ol>
     <li>
-      <p>Now that we have a cluster in the cloud, let’s login. Look through the output of <code class="highlighter-rouge">terraform show</code> to find your <code class="highlighter-rouge">central-manager</code> server and its IP address.</p>
+      <p>Now that we have a cluster in the cloud, let’s login. Look through the output of <code class="language-plaintext highlighter-rouge">terraform show</code> to find your <code class="language-plaintext highlighter-rouge">central-manager</code> server and its IP address.</p>
     </li>
     <li>
-      <p><code class="highlighter-rouge">ssh centos@&lt;your manager ip&gt;</code></p>
+      <p><code class="language-plaintext highlighter-rouge">ssh centos@&lt;your manager ip&gt;</code></p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">condor_status</code> which will show you the status of your cluster.</p>
+      <p>Run <code class="language-plaintext highlighter-rouge">condor_status</code> which will show you the status of your cluster.</p>
 
       <p>After your central manager VM booted, the executor nodes booted as well. Then, using the IP address of the central manager, the executors contacted that machine, and advertised their availability to run jobs.</p>
 
@@ -1419,7 +1419,7 @@ Do you want to perform these actions?
 
         <blockquote class="solution">
           <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[centos@central-manager share]$ condor_status
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[centos@central-manager share]$ condor_status
 Name                   OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
 
 slot1@exec-0.novalocal LINUX      X86_64 Unclaimed Idle      0.150  991  0+00:15:28
@@ -1435,12 +1435,12 @@ slot1@exec-1.novalocal LINUX      X86_64 Unclaimed Idle      0.000  991  0+00:15
       </blockquote>
     </li>
     <li>
-      <p>Change into the <code class="highlighter-rouge">/data/share/</code></p>
+      <p>Change into the <code class="language-plaintext highlighter-rouge">/data/share/</code></p>
     </li>
     <li>
-      <p>Create a file, <code class="highlighter-rouge">test.job</code> with the following contents:</p>
+      <p>Create a file, <code class="language-plaintext highlighter-rouge">test.job</code> with the following contents:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Universe = vanilla
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Universe = vanilla
 Executable = /data/share/test.sh
 Log = test.$(process).log
 Output = test.$(process).out
@@ -1450,24 +1450,24 @@ Queue 10
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create a file <code class="highlighter-rouge">test.sh</code> with the following:</p>
+      <p>Create a file <code class="language-plaintext highlighter-rouge">test.sh</code> with the following:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#!/bin/bash</span>
-<span class="nb">echo</span> <span class="s2">"</span><span class="si">$(</span><span class="nb">hostname</span><span class="si">)</span><span class="s2">"</span>
-<span class="nb">sleep </span>1
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#!/bin/bash
+echo "$(hostname)"
+sleep 1
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">chmod +x test.sh</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">chmod +x test.sh</code></p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">condor_submit test.job</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">condor_submit test.job</code></p>
     </li>
     <li>
-      <p>(Quickly) Run <code class="highlighter-rouge">condor_q</code> to see the queue status. You can invoke this repeatedly to watch the queue update.</p>
+      <p>(Quickly) Run <code class="language-plaintext highlighter-rouge">condor_q</code> to see the queue status. You can invoke this repeatedly to watch the queue update.</p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">cat *.out</code> and you should see the hostnames where the jobs were run</p>
+      <p>Run <code class="language-plaintext highlighter-rouge">cat *.out</code> and you should see the hostnames where the jobs were run</p>
     </li>
   </ol>
 
@@ -1484,13 +1484,13 @@ Queue 10
     <li>
       <p>Run:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform graph | dot -Tpng &gt; graph.png
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>terraform graph | dot -Tpng &gt; graph.png
 </code></pre></div>      </div>
 
-      <p>You may need the <code class="highlighter-rouge">graphviz</code> package installed in order to produce the graph</p>
+      <p>You may need the <code class="language-plaintext highlighter-rouge">graphviz</code> package installed in order to produce the graph</p>
     </li>
     <li>
-      <p>Open up <code class="highlighter-rouge">graph.png</code> in an image viewer</p>
+      <p>Open up <code class="language-plaintext highlighter-rouge">graph.png</code> in an image viewer</p>
 
       <blockquote class="question">
         <h3 id="question-question-4"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1511,7 +1511,7 @@ Queue 10
 
 <figure id="figure-2"><img src="../../images/graph.png" alt="A simple graph" /><figcaption><span class="figcaption-prefix">Figure 2:</span> A simple graph showing the structure of the infrastructure in this lesson</figcaption></figure>
 
-<p>The dependencies follow the arrows, the NFS depends on the keypair being setup. The <code class="highlighter-rouge">test</code> machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)</p>
+<p>The dependencies follow the arrows, the NFS depends on the keypair being setup. The <code class="language-plaintext highlighter-rouge">test</code> machine (central manager) depends on the NFS server being available (and having an IP), the exec nodes depend on the central manager server. This is a somewhat simplified view, there are more dependencies which are not shown for simplicity (e.g. the exec nodes depend on NFS)</p>
 
 <p>If you have variables this can produce a more complex dependency graph:</p>
 
@@ -1526,12 +1526,12 @@ Queue 10
 
   <ol>
     <li>
-      <p>Simple delete your <code class="highlighter-rouge">main.tf</code> file (or rename it without the <code class="highlighter-rouge">.tf</code> extension)</p>
+      <p>Simple delete your <code class="language-plaintext highlighter-rouge">main.tf</code> file (or rename it without the <code class="language-plaintext highlighter-rouge">.tf</code> extension)</p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">terraform apply</code>. Terraform will see that the resource is no longer part of your code and remove it.</p>
+      <p>Run <code class="language-plaintext highlighter-rouge">terraform apply</code>. Terraform will see that the resource is no longer part of your code and remove it.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>openstack_compute_keypair_v2.my-cloud-key: Refreshing state... (ID: my-key)
 openstack_compute_instance_v2.nfs: Refreshing state... (ID: 0b58d613-48f2-49c4-9d8a-3623d17f1c93)
 openstack_compute_instance_v2.test: Refreshing state... (ID: e433f772-6f17-4609-aa61-053f7602533f)
 openstack_compute_instance_v2.exec[0]: Refreshing state... (ID: 034a4206-b0ad-4d0e-9c75-27d3966f99ac)
@@ -1587,7 +1587,7 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
 
 <p>Which can be provided to your VM like:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>provisioner "remote-exec" {
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>provisioner "remote-exec" {
   when = "destroy"
 
   scripts = [
@@ -1602,7 +1602,7 @@ condor_drain <span class="si">$(</span><span class="nb">hostname</span><span cla
 }
 </code></pre></div></div>
 
-<p>Terraform will SSH in with those credentials, copy over the script in <code class="highlighter-rouge">prepare-restart.sh</code>, and execute it.</p>
+<p>Terraform will SSH in with those credentials, copy over the script in <code class="language-plaintext highlighter-rouge">prepare-restart.sh</code>, and execute it.</p>
 
 <h1 id="usegalaxyeus-terraform-usage">Use<span class="notranslate">Galaxy</span>.eu’s Terraform Usage</h1>
 

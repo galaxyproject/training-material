@@ -577,7 +577,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -667,7 +667,7 @@
       </blockquote>
     </li>
     <li>Import the files from <a href="https://zenodo.org/record/2628280">Zenodo</a>. Upload all three datasets (one by one) to <span class="notranslate">Galaxy</span> via the <strong>composite</strong> option and rename them to ‘control’, ‘treated1’ and ‘all_files’.
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2628280/files/conrol.imzml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2628280/files/conrol.imzml
 https://zenodo.org/record/2628280/files/control.ibd
 https://zenodo.org/record/2628280/files/treated1.imzml
 https://zenodo.org/record/2628280/files/treated1.ibd
@@ -676,11 +676,11 @@ https://zenodo.org/record/2628280/files/all_files.ibd
 </code></pre></div>      </div>
     </li>
     <li>Paste the link of the tabular file with the N-glycan identities into the regular upload and rename it to ‘Glycan IDs’:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2628280/files/Glycan_IDs.tabular
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2628280/files/Glycan_IDs.tabular
 </code></pre></div>      </div>
     </li>
     <li>Create a tabular file with the three glycan calibrants that were used in the study and rename it to ‘calibrants’:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M+Na+    composition
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>M+Na+    composition
 1257.4225    Man5GlcNAc2
 1542.5551    Man3GlcNAc5
 2393.8457    Man3Gal4GlcNAc6
@@ -696,9 +696,9 @@ https://zenodo.org/record/2628280/files/all_files.ibd
           <li>Click on the dataset</li>
           <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Check that the tag is appearing below the dataset name</li>
         </ul>
@@ -719,8 +719,8 @@ https://zenodo.org/record/2628280/files/all_files.ibd
   <ol>
     <li><strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“MSI data”</em>: <code class="highlighter-rouge">control</code> (uploaded dataset) and <code class="highlighter-rouge">treated1</code> (uploaded dataset)</li>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge">imzML</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">control</code> (uploaded dataset) and <code class="language-plaintext highlighter-rouge">treated1</code> (uploaded dataset)</li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">imzML</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -743,21 +743,21 @@ https://zenodo.org/record/2628280/files/all_files.ibd
   <ol>
     <li><strong>MSI Qualitycontrol</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">combined imzML</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Use pixel annotation from tabular file for QC plots”</em>: <code class="highlighter-rouge">use pixel annotation from a tabular file</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">combined imzML</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Use pixel annotation from tabular file for QC plots”</em>: <code class="language-plaintext highlighter-rouge">use pixel annotation from a tabular file</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with pixel coordinates and annotation”</em>: <code class="highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><em>“Column with x values”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-            <li><em>“Column with y values”</em>: <code class="highlighter-rouge">Column: 2</code></li>
-            <li><em>“Column with pixel annotations”</em>: <code class="highlighter-rouge">Column: 3</code></li>
-            <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with pixel coordinates and annotation”</em>: <code class="language-plaintext highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Column with x values”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Column with y values”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Column with pixel annotations”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+            <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. inte<span class="notranslate">rna</span>l Calibrants)”</em>: <code class="highlighter-rouge">calibrants</code> (uploaded dataset)</li>
-        <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">column:1</code></li>
-        <li><em>“Column with name of m/z values”</em>: <code class="highlighter-rouge">column:2</code></li>
-        <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“PCA with 2 components”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest (e.g. inte<span class="notranslate">rna</span>l Calibrants)”</em>: <code class="language-plaintext highlighter-rouge">calibrants</code> (uploaded dataset)</li>
+        <li><em>“Column with m/z values”</em>: <code class="language-plaintext highlighter-rouge">column:1</code></li>
+        <li><em>“Column with name of m/z values”</em>: <code class="language-plaintext highlighter-rouge">column:2</code></li>
+        <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“PCA with 2 components”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -815,58 +815,58 @@ Especially for MALDI datasets it is common to perform a baseline subtraction to 
   <ol>
     <li><strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">combined imzML</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">combined imzML</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Preprocessing”</em>:
           <ul>
             <li>Click on <em>“Insert Preprocessing”</em>:</li>
             <li>In <em>“1: Preprocessing”</em>:
               <ul>
-                <li><em>“Preprocessing methods”</em>: <code class="highlighter-rouge">Intensity Normalization (TIC)</code></li>
+                <li><em>“Preprocessing methods”</em>: <code class="language-plaintext highlighter-rouge">Intensity Normalization (TIC)</code></li>
               </ul>
             </li>
             <li>Click on <em>“Insert Preprocessing”</em>:</li>
             <li>In <em>“2: Preprocessing”</em>:
               <ul>
-                <li><em>“Preprocessing methods”</em>: <code class="highlighter-rouge">Peak smoothing</code>
+                <li><em>“Preprocessing methods”</em>: <code class="language-plaintext highlighter-rouge">Peak smoothing</code>
                   <ul>
-                    <li><em>“Smoothing method”</em>: <code class="highlighter-rouge">gaussian</code>
+                    <li><em>“Smoothing method”</em>: <code class="language-plaintext highlighter-rouge">gaussian</code>
                       <ul>
-                        <li><em>“The standard deviation for the Gaussian kernel (window/sd)”</em>: <code class="highlighter-rouge">1</code></li>
+                        <li><em>“The standard deviation for the Gaussian kernel (window/sd)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
                       </ul>
                     </li>
-                    <li><em>“Window size”</em>: <code class="highlighter-rouge">4.0</code></li>
+                    <li><em>“Window size”</em>: <code class="language-plaintext highlighter-rouge">4.0</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li>In <em>“3: Preprocessing”</em>:
               <ul>
-                <li><em>“Preprocessing methods”</em>: <code class="highlighter-rouge">Baseline Reduction</code></li>
+                <li><em>“Preprocessing methods”</em>: <code class="language-plaintext highlighter-rouge">Baseline Reduction</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge">imzML</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">imzML</code></li>
       </ul>
     </li>
     <li><strong>MSI plot spectra</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">processed imzML</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select if you want to plot the mass spectrum of a single pixel or the average spectrum of all pixels of a sample”</em>: <code class="highlighter-rouge">Average spectrum for each sample</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">processed imzML</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select if you want to plot the mass spectrum of a single pixel or the average spectrum of all pixels of a sample”</em>: <code class="language-plaintext highlighter-rouge">Average spectrum for each sample</code>
           <ul>
-            <li><em>“Use pixel annotation from tabular file for spectra plots”</em>: <code class="highlighter-rouge">group pixels according to annotations</code></li>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with pixel coordinates and annotation”</em>: <code class="highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><em>“Column with x values”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-            <li><em>“Column with y values”</em>: <code class="highlighter-rouge">Column: 2</code></li>
-            <li><em>“Column with pixel annotations”</em>: <code class="highlighter-rouge">Column: 3</code></li>
-            <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use pixel annotation from tabular file for spectra plots”</em>: <code class="language-plaintext highlighter-rouge">group pixels according to annotations</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file with pixel coordinates and annotation”</em>: <code class="language-plaintext highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Column with x values”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Column with y values”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Column with pixel annotations”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+            <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Zoomed in plots with m/z min and m/z max to define the plot window”</em>:
               <ul>
                 <li>Click on <em>“Insert Zoomed in plots with m/z min and m/z max to define the plot window”</em>:</li>
                 <li>In <em>“1: Zoomed in plots with m/z min and m/z max to define the plot window”</em>:
                   <ul>
-                    <li><em>“lower m/z boundary for plotting window”</em>: <code class="highlighter-rouge">1257</code></li>
-                    <li><em>“upper m/z boundary for plotting window”</em>: <code class="highlighter-rouge">1259</code></li>
+                    <li><em>“lower m/z boundary for plotting window”</em>: <code class="language-plaintext highlighter-rouge">1257</code></li>
+                    <li><em>“upper m/z boundary for plotting window”</em>: <code class="language-plaintext highlighter-rouge">1259</code></li>
                   </ul>
                 </li>
               </ul>
@@ -908,21 +908,21 @@ The average peak picking has removed all spatial information and kept only mean 
   <ol>
     <li><strong>MALDIquant preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">preprocessed imzML</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">preprocessed imzML</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Method”</em>:
           <ul>
             <li>In <em>“1: Method”</em>:
               <ul>
-                <li><em>“Select a method”</em>: <code class="highlighter-rouge">Align spectra</code>
+                <li><em>“Select a method”</em>: <code class="language-plaintext highlighter-rouge">Align spectra</code>
                   <ul>
-                    <li><em>“Tolerance”</em>: <code class="highlighter-rouge">0.0002</code></li>
-                    <li><em>“Half window size”</em>: <code class="highlighter-rouge">4</code></li>
-                    <li><em>“Signal-to-noise-ratio”</em>: <code class="highlighter-rouge">3</code></li>
-                    <li><em>“Allow no matches”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><em>“Empty no matches”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><em>“Remove empty spectra”</em>: <code class="highlighter-rouge">Yes</code></li>
-                    <li><em>“minFrequency”</em>: <code class="highlighter-rouge">0.8</code></li>
-                    <li><em>“Export processed imzML”</em>: <code class="highlighter-rouge">Yes</code></li>
+                    <li><em>“Tolerance”</em>: <code class="language-plaintext highlighter-rouge">0.0002</code></li>
+                    <li><em>“Half window size”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+                    <li><em>“Signal-to-noise-ratio”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+                    <li><em>“Allow no matches”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><em>“Empty no matches”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><em>“Remove empty spectra”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><em>“minFrequency”</em>: <code class="language-plaintext highlighter-rouge">0.8</code></li>
+                    <li><em>“Export processed imzML”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
                 </li>
               </ul>
@@ -933,25 +933,25 @@ The average peak picking has removed all spatial information and kept only mean 
     </li>
     <li><strong>MALDIquant peak detection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">MALDIquant preprocessing imzML</code> (output of <strong>MALDIquant preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Spectra annotations”</em>: <code class="highlighter-rouge">yes</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">MALDIquant preprocessing imzML</code> (output of <strong>MALDIquant preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Spectra annotations”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“Use annotations from tabular file”</em>: <code class="highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><em>“Column with x values”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-            <li><em>“Column with y values”</em>: <code class="highlighter-rouge">Column: 2</code></li>
-            <li><em>“Column with pixel annotations”</em>: <code class="highlighter-rouge">Column: 3</code></li>
-            <li><em>“File contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Use annotations from tabular file”</em>: <code class="language-plaintext highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Column with x values”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Column with y values”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Column with pixel annotations”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+            <li><em>“File contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
         <li>In <em>“Method”</em>:
           <ul>
             <li>In <em>“1: Method”</em>:
               <ul>
-                <li><em>“Select a method”</em>: <code class="highlighter-rouge">Peak detection</code>
+                <li><em>“Select a method”</em>: <code class="language-plaintext highlighter-rouge">Peak detection</code>
                   <ul>
-                    <li><em>“Half window size”</em>: <code class="highlighter-rouge">4</code></li>
-                    <li><em>“Signal to noise”</em>: <code class="highlighter-rouge">5</code></li>
-                    <li><em>“Detect peaks on average mass spectra”</em>: <code class="highlighter-rouge">Yes</code></li>
+                    <li><em>“Half window size”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+                    <li><em>“Signal to noise”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+                    <li><em>“Detect peaks on average mass spectra”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
                 </li>
               </ul>
@@ -959,11 +959,11 @@ The average peak picking has removed all spatial information and kept only mean 
             <li>Click on <em>“Insert Method”</em>:</li>
             <li>In <em>“2: Method”</em>:
               <ul>
-                <li><em>“Select a method”</em>: <code class="highlighter-rouge">Monoisotopic peaks</code>
+                <li><em>“Select a method”</em>: <code class="language-plaintext highlighter-rouge">Monoisotopic peaks</code>
                   <ul>
-                    <li><em>“Minimal correlation”</em>: <code class="highlighter-rouge">0.4</code></li>
-                    <li><em>“Tolerance”</em>: <code class="highlighter-rouge">0.0002</code></li>
-                    <li><em>“Size”</em>: <code class="highlighter-rouge">2:5</code></li>
+                    <li><em>“Minimal correlation”</em>: <code class="language-plaintext highlighter-rouge">0.4</code></li>
+                    <li><em>“Tolerance”</em>: <code class="language-plaintext highlighter-rouge">0.0002</code></li>
+                    <li><em>“Size”</em>: <code class="language-plaintext highlighter-rouge">2:5</code></li>
                   </ul>
                 </li>
               </ul>
@@ -971,9 +971,9 @@ The average peak picking has removed all spatial information and kept only mean 
             <li>Click on <em>“Insert Method”</em>:</li>
             <li>In <em>“3: Method”</em>:
               <ul>
-                <li><em>“Select a method”</em>: <code class="highlighter-rouge">Binning</code>
+                <li><em>“Select a method”</em>: <code class="language-plaintext highlighter-rouge">Binning</code>
                   <ul>
-                    <li><em>“Tolerance”</em>: <code class="highlighter-rouge">0.0002</code></li>
+                    <li><em>“Tolerance”</em>: <code class="language-plaintext highlighter-rouge">0.0002</code></li>
                   </ul>
                 </li>
               </ul>
@@ -984,24 +984,24 @@ The average peak picking has removed all spatial information and kept only mean 
     </li>
     <li><strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">preprocessed imzML from first step</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">preprocessed imzML from first step</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li>In <em>“Preprocessing”</em>:
           <ul>
             <li>Click on <em>“Insert Preprocessing”</em>:</li>
             <li>In <em>“1: Preprocessing”</em>:
               <ul>
-                <li><em>“Preprocessing methods”</em>: <code class="highlighter-rouge">Data reduction</code>
+                <li><em>“Preprocessing methods”</em>: <code class="language-plaintext highlighter-rouge">Data reduction</code>
                   <ul>
-                    <li><em>“Reduction method”</em>: <code class="highlighter-rouge">peaks</code></li>
-                    <li><em>“Tabular file with m/z features to extract from input file”</em>: <code class="highlighter-rouge">MALDIquant peak detection intensity matrix</code> (output of <strong>MALDIquant peak detection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-                    <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
+                    <li><em>“Reduction method”</em>: <code class="language-plaintext highlighter-rouge">peaks</code></li>
+                    <li><em>“Tabular file with m/z features to extract from input file”</em>: <code class="language-plaintext highlighter-rouge">MALDIquant peak detection intensity matrix</code> (output of <strong>MALDIquant peak detection</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                    <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge">imzML</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">imzML</code></li>
       </ul>
     </li>
   </ol>
@@ -1047,11 +1047,11 @@ The average peak picking has removed all spatial information and kept only mean 
   <ol>
     <li><strong>MSI segmentation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">preprocessed imzML (peaks)</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Centroided input”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Select the tool for spatial clustering”</em>: <code class="highlighter-rouge">pca</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">preprocessed imzML (peaks)</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Select the tool for spatial clustering”</em>: <code class="language-plaintext highlighter-rouge">pca</code>
           <ul>
-            <li><em>“The number of principal components to calculate”</em>: <code class="highlighter-rouge">4</code></li>
+            <li><em>“The number of principal components to calculate”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
           </ul>
         </li>
         <li>In <em>“Colours for the plots”</em>:
@@ -1059,25 +1059,25 @@ The average peak picking has removed all spatial information and kept only mean 
             <li>Click on <em>“Insert Colours for the plots”</em>:</li>
             <li>In <em>“1: Colours for the plots”</em>:
               <ul>
-                <li><em>“Colours”</em>: <code class="highlighter-rouge">dark_blue</code></li>
+                <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">dark_blue</code></li>
               </ul>
             </li>
             <li>Click on <em>“Insert Colours for the plots”</em>:</li>
             <li>In <em>“2: Colours for the plots”</em>:
               <ul>
-                <li><em>“Colours”</em>: <code class="highlighter-rouge">orange</code></li>
+                <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">orange</code></li>
               </ul>
             </li>
             <li>Click on <em>“Insert Colours for the plots”</em>:</li>
             <li>In <em>“3: Colours for the plots”</em>:
               <ul>
-                <li><em>“Colours”</em>: <code class="highlighter-rouge">green</code></li>
+                <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">green</code></li>
               </ul>
             </li>
             <li>Click on <em>“Insert Colours for the plots”</em>:</li>
             <li>In <em>“4: Colours for the plots”</em>:
               <ul>
-                <li><em>“Colours”</em>: <code class="highlighter-rouge">red</code></li>
+                <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">red</code></li>
               </ul>
             </li>
           </ul>
@@ -1122,19 +1122,19 @@ The average peak picking has removed all spatial information and kept only mean 
   <ol>
     <li><strong>MSI classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">preprocessed imzML (peaks)</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Centroided input”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Analysis step to perform”</em>: <code class="highlighter-rouge">training</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">preprocessed imzML (peaks)</code> (output of <strong>MSI preprocessing</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Centroided input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Analysis step to perform”</em>: <code class="language-plaintext highlighter-rouge">training</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Load tabular file with pixel coordinates and their classes”</em>: <code class="highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-            <li><em>“Column with x values”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-            <li><em>“Column with y values”</em>: <code class="highlighter-rouge">Column: 2</code></li>
-            <li><em>“Column with response (condition) values”</em>: <code class="highlighter-rouge">Column: 3</code></li>
-            <li><em>“Tabular files contain a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Select the method for classification”</em>: <code class="highlighter-rouge">spatial shrunken centroids</code>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Load tabular file with pixel coordinates and their classes”</em>: <code class="language-plaintext highlighter-rouge">combined annotations</code> (output of <strong>MSI combine</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Column with x values”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+            <li><em>“Column with y values”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+            <li><em>“Column with response (condition) values”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+            <li><em>“Tabular files contain a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Select the method for classification”</em>: <code class="language-plaintext highlighter-rouge">spatial shrunken centroids</code>
               <ul>
-                <li><em>“Analysis step to perform”</em>: <code class="highlighter-rouge">spatial shrunken centroids analysis</code></li>
-                <li><em>“The sparsity thresholding parameter by which to shrink the t-statistics (s)”</em>: <code class="highlighter-rouge">0</code></li>
+                <li><em>“Analysis step to perform”</em>: <code class="language-plaintext highlighter-rouge">spatial shrunken centroids analysis</code></li>
+                <li><em>“The sparsity thresholding parameter by which to shrink the t-statistics (s)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
               </ul>
             </li>
           </ul>
@@ -1159,28 +1159,28 @@ The average peak picking has removed all spatial information and kept only mean 
   <ol>
     <li><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="highlighter-rouge">classification features</code> (output of <strong>MSI classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“With following condition”</em>: <code class="highlighter-rouge">c5=="treated1" and c7&gt;0 and c9&lt;0.05</code></li>
-        <li><em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">classification features</code> (output of <strong>MSI classification</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c5=="treated1" and c7&gt;0 and c9&lt;0.05</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li><strong>Join two files on column allowing a small difference</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="highlighter-rouge">Filter data</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column to use from 1st file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd file”</em>: <code class="highlighter-rouge">Glycan IDs</code> (uploaded dataset)</li>
-        <li><em>“Column to use from 2nd file”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Does the input files contain a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Add an addional column with the calculated distance.”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Choose the mode of merging.”</em>: <code class="highlighter-rouge">All matches within the defined distance</code></li>
-        <li><em>“Choose the metrics of your distance”</em>: <code class="highlighter-rouge">Distance in ppm</code></li>
-        <li><em>“Allowed distance between the two values that will trigger a merge”</em>: <code class="highlighter-rouge">300.0</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1st file”</em>: <code class="language-plaintext highlighter-rouge">Filter data</code> (output of <strong>Filter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column to use from 1st file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“2nd file”</em>: <code class="language-plaintext highlighter-rouge">Glycan IDs</code> (uploaded dataset)</li>
+        <li><em>“Column to use from 2nd file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Does the input files contain a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Add an addional column with the calculated distance.”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Choose the mode of merging.”</em>: <code class="language-plaintext highlighter-rouge">All matches within the defined distance</code></li>
+        <li><em>“Choose the metrics of your distance”</em>: <code class="language-plaintext highlighter-rouge">Distance in ppm</code></li>
+        <li><em>“Allowed distance between the two values that will trigger a merge”</em>: <code class="language-plaintext highlighter-rouge">300.0</code></li>
       </ul>
     </li>
     <li><strong>Summary Statistics for any numerical column</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: <code class="highlighter-rouge">Join two files</code> (output of <strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column or <span class="notranslate">expression</span>”</em>: <code class="highlighter-rouge">c12</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Summary statistics on”</em>: <code class="language-plaintext highlighter-rouge">Join two files</code> (output of <strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column or <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c12</code></li>
       </ul>
     </li>
   </ol>
@@ -1221,12 +1221,12 @@ Next, we visually explore the abundance distribution for all identified N-glycan
   <ol>
     <li><strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">all_files</code> (uploaded dataset)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest”</em>: <code class="highlighter-rouge">Join two files</code> (output of <strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Column with name of m/z values”</em>: <code class="highlighter-rouge">Column: 11</code></li>
-        <li><em>“Tabular file contains a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Contrast enhancement”</em>: <code class="highlighter-rouge">suppression</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">all_files</code> (uploaded dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest”</em>: <code class="language-plaintext highlighter-rouge">Join two files</code> (output of <strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column with m/z values”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Column with name of m/z values”</em>: <code class="language-plaintext highlighter-rouge">Column: 11</code></li>
+        <li><em>“Tabular file contains a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Contrast enhancement”</em>: <code class="language-plaintext highlighter-rouge">suppression</code></li>
       </ul>
     </li>
   </ol>
@@ -1268,37 +1268,37 @@ Next, we visually explore the abundance distribution for all identified N-glycan
   <ol>
     <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="highlighter-rouge">Join two files</code> (output of <strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“the pattern”</em>: <code class="highlighter-rouge">(1663\.)|(1905\.)|(2304\.)</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">Join two files</code> (output of <strong>Join two files</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(1663\.)|(1905\.)|(2304\.)</code></li>
       </ul>
     </li>
     <li><strong>MSI mz images</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="highlighter-rouge">all_files</code> (uploaded dataset)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest”</em>: <code class="highlighter-rouge">Select on data</code> (output of <strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Column with m/z values”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Column with name of m/z values”</em>: <code class="highlighter-rouge">Column: 11</code></li>
-        <li><em>“Contrast enhancement”</em>: <code class="highlighter-rouge">suppression</code></li>
-        <li><em>“Overlay image”</em>: <code class="highlighter-rouge">yes</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSI data”</em>: <code class="language-plaintext highlighter-rouge">all_files</code> (uploaded dataset)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“m/z of interest”</em>: <code class="language-plaintext highlighter-rouge">Select on data</code> (output of <strong>Select</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Column with m/z values”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Column with name of m/z values”</em>: <code class="language-plaintext highlighter-rouge">Column: 11</code></li>
+        <li><em>“Contrast enhancement”</em>: <code class="language-plaintext highlighter-rouge">suppression</code></li>
+        <li><em>“Overlay image”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
             <li>In <em>“Colours for the plots”</em>:
               <ul>
                 <li>Click on <em>“Insert Colours for the plots”</em>:</li>
                 <li>In <em>“1: Colours for the plots”</em>:
                   <ul>
-                    <li><em>“Colours”</em>: <code class="highlighter-rouge">dark_blue</code></li>
+                    <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">dark_blue</code></li>
                   </ul>
                 </li>
                 <li>Click on <em>“Insert Colours for the plots”</em>:</li>
                 <li>In <em>“2: Colours for the plots”</em>:
                   <ul>
-                    <li><em>“Colours”</em>: <code class="highlighter-rouge">green</code></li>
+                    <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">green</code></li>
                   </ul>
                 </li>
                 <li>Click on <em>“Insert Colours for the plots”</em>:</li>
                 <li>In <em>“3: Colours for the plots”</em>:
                   <ul>
-                    <li><em>“Colours”</em>: <code class="highlighter-rouge">red</code></li>
+                    <li><em>“Colours”</em>: <code class="language-plaintext highlighter-rouge">red</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1373,7 +1373,7 @@ Next, we visually explore the abundance distribution for all identified N-glycan
     title = "Mass spectrometry imaging: Finding differential analytes (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/metabolomics/tutorials/msi-finding-nglycans/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -561,7 +561,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -852,7 +852,7 @@ How do we correct for this bias?</p>
       <li>Yes, UMIs are not specific to genes and the same UMI barcode can tag the transcripts of different genes. UMIs are not universal tags, they are just ‘added randomness’ that help reduce amplification bias.</li>
       <li>Yes, UMIs are not precise but operate probabilistically. In most cases, two transcripts of the same gene will be tagged by different UMIs. In rarer (but still prevalent) cases, the same UMI will capture different transcripts of the same gene.
         <ul>
-          <li>One helpful way to think about how quantification is performed is to observe the following hierarchy of data <code class="highlighter-rouge">Cell Barcode → Gene → UMI</code></li>
+          <li>One helpful way to think about how quantification is performed is to observe the following hierarchy of data <code class="language-plaintext highlighter-rouge">Cell Barcode → Gene → UMI</code></li>
         </ul>
       </li>
     </ol>
@@ -896,7 +896,7 @@ How do we correct for this bias?</p>
       </tbody>
     </table>
 
-    <p>If UMIs were unique to a gene, then the <code class="highlighter-rouge">TCA</code> UMI barcode would not have <span class="notranslate">reads</span> that map to both <em>Slx1</em> and <em>Gh13</em> in the same cell (<code class="highlighter-rouge">AAAT</code>).</p>
+    <p>If UMIs were unique to a gene, then the <code class="language-plaintext highlighter-rouge">TCA</code> UMI barcode would not have <span class="notranslate">reads</span> that map to both <em>Slx1</em> and <em>Gh13</em> in the same cell (<code class="language-plaintext highlighter-rouge">AAAT</code>).</p>
 
   </blockquote>
 
@@ -911,8 +911,8 @@ How do we correct for this bias?</p>
 
   <ol>
     <li>Create a new history and rename it (<em>e.g.</em> ‘Inspecting FastQ Files in sc<span class="notranslate">RNA</span> batch data’)</li>
-    <li>Import the following files from <a href="https://zenodo.org/record/2573177"><code class="highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R1.fastq.gz
+    <li>Import the following files from <a href="https://zenodo.org/record/2573177"><code class="language-plaintext highlighter-rouge">Zenodo</code></a> or from the data library (ask your instructor)
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R1.fastq.gz
 https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
 </code></pre></div>      </div>
     </li>
@@ -948,7 +948,7 @@ https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
         <li>Click the <em>Operations on multiple datasets</em> check box at the top of the history panel</li>
         <li>Check the two boxes next to the R1 and R2 sc<span class="notranslate">RNA</span> FASTQ samples</li>
         <li>Click <em>For all selected…</em> and choose <em>Build dataset pair</em></li>
-        <li>Ensure that the forward read is the <code class="highlighter-rouge">R1</code> sample, and the reverse read is the <code class="highlighter-rouge">R2</code> sample.
+        <li>Ensure that the forward read is the <code class="language-plaintext highlighter-rouge">R1</code> sample, and the reverse read is the <code class="language-plaintext highlighter-rouge">R2</code> sample.
           <ul>
             <li>Click ‘Swap’ otherwise.</li>
           </ul>
@@ -957,7 +957,7 @@ https://zenodo.org/record/2573177/files/test_barcodes_celseq2_R2.fastq.gz
       </ul>
     </li>
     <li>Generate a list of <span class="notranslate">reads</span> to filter by creating a plain tabular file containing the following read names:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>J00182:75:HTKJNBBXX:2:1114:12469:11073
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>J00182:75:HTKJNBBXX:2:1114:12469:11073
 J00182:75:HTKJNBBXX:2:2222:13301:35690
 J00182:75:HTKJNBBXX:2:1203:25022:13763
 J00182:75:HTKJNBBXX:2:1115:8501:46961
@@ -984,9 +984,9 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
                 <li>Select the FastQ collection if not already selected.</li>
               </ul>
             </li>
-            <li><strong>Filter using the ID list from</strong>:<code class="highlighter-rouge">tabular file</code>
+            <li><strong>Filter using the ID list from</strong>:<code class="language-plaintext highlighter-rouge">tabular file</code>
               <ul>
-                <li><em>Tabular file containing sequence identifiers</em>:<code class="highlighter-rouge">Pasted Entry</code></li>
+                <li><em>Tabular file containing sequence identifiers</em>:<code class="language-plaintext highlighter-rouge">Pasted Entry</code></li>
               </ul>
             </li>
             <li><strong>Column(s) containing sequence identifiers</strong>
@@ -994,12 +994,12 @@ J00182:75:HTKJNBBXX:2:1115:8501:46961
                 <li><strong>Select/Unselect all</strong>:(tick the box)</li>
               </ul>
             </li>
-            <li><strong>Output positive matches, negative matches, or both?</strong>:<code class="highlighter-rouge">Just positive matches (ID on list), as a single file</code></li>
+            <li><strong>Output positive matches, negative matches, or both?</strong>:<code class="language-plaintext highlighter-rouge">Just positive matches (ID on list), as a single file</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Change the datatypes of the output pair to <code class="highlighter-rouge">fastqsanger</code> if not already set.
+    <li>Change the datatypes of the output pair to <code class="language-plaintext highlighter-rouge">fastqsanger</code> if not already set.
       <blockquote class="tip">
 
         <h3 id="tip-tip-changing-the-datatype"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
@@ -1046,7 +1046,7 @@ These are reads that all map to ENSDARG00000019692. In [Cell, UMI] format:
 <blockquote class="details">
   <h3 id="details-forward-reads"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Forward <span class="notranslate">Reads</span>:</h3>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 1:N:0:ATCACG
 GGAAGAACCAGATTTTTTTTTTTTTTTTTT
 +
 AAFFFJJJJJJJFFFJJJJJJJJJJJJJJJ
@@ -1072,7 +1072,7 @@ AAFFFJJJJJJJFAFFJJJJJJJJF---&lt;F
 <blockquote class="details">
   <h3 id="details-reverse-reads"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Reverse <span class="notranslate">Reads</span>:</h3>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961 2:N:0:ATCACG
 GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
 +
 A&lt;&lt;A-777F&lt;AA&lt;AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
@@ -1097,9 +1097,9 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
 <p>What we observe are the standard four lines of any FASTQ file:</p>
 <ol>
-  <li>Read name starting with <code class="highlighter-rouge">@</code></li>
+  <li>Read name starting with <code class="language-plaintext highlighter-rouge">@</code></li>
   <li>Sequence of nucleotide bases</li>
-  <li>Seperator <code class="highlighter-rouge">+</code></li>
+  <li>Seperator <code class="language-plaintext highlighter-rouge">+</code></li>
   <li>Quality string of the nucleotide bases in ASCII</li>
 </ol>
 
@@ -1141,7 +1141,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   <ol>
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge">Paired FastQ</code> (the original paired set)</li>
+        <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">Paired FastQ</code> (the original paired set)</li>
       </ul>
 
       <blockquote class="comment">
@@ -1238,16 +1238,16 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
     <ol>
       <li><span class="notranslate">Reads</span>:
         <ul>
-          <li><code class="highlighter-rouge">@J00182:75:HTKJNBBXX:2:1203:25022:13763</code></li>
-          <li><code class="highlighter-rouge">@J00182:75:HTKJNBBXX:2:2222:13301:35690</code></li>
-          <li><code class="highlighter-rouge">@J00182:75:HTKJNBBXX:2:1114:12469:11073</code>
- all have the cell barcode <code class="highlighter-rouge">GGTAAC</code>.</li>
+          <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:1203:25022:13763</code></li>
+          <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:2222:13301:35690</code></li>
+          <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:1114:12469:11073</code>
+ all have the cell barcode <code class="language-plaintext highlighter-rouge">GGTAAC</code>.</li>
         </ul>
       </li>
       <li><span class="notranslate">Reads</span>:
         <ul>
-          <li><code class="highlighter-rouge">@J00182:75:HTKJNBBXX:2:1203:25022:13763</code></li>
-          <li><code class="highlighter-rouge">@J00182:75:HTKJNBBXX:2:2222:13301:35690</code>
+          <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:1203:25022:13763</code></li>
+          <li><code class="language-plaintext highlighter-rouge">@J00182:75:HTKJNBBXX:2:2222:13301:35690</code>
  appear to be PCR duplicates, since they both have the same cell barcode and same UMI.</li>
         </ul>
       </li>
@@ -1255,7 +1255,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 
     <p>However if we consider their sequences, we can see that they contain different (but overlapping) sequences.</p>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
 35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 </code></pre></div>    </div>
 
@@ -1276,25 +1276,25 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
   <ol>
     <li><strong>UMI-tools extract</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Library type”</em>: <code class="highlighter-rouge">Paired-end Dataset Collection</code>
+        <li><em>“Library type”</em>: <code class="language-plaintext highlighter-rouge">Paired-end Dataset Collection</code>
           <ul>
-            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="highlighter-rouge">output</code> (Our paired set of 4 sequences)</li>
-            <li><em>“Barcode on both <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Barcode on first read only</code></li>
+            <li><i class="fa fa-folder-o" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge">output</code> (Our paired set of 4 sequences)</li>
+            <li><em>“Barcode on both <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Barcode on first read only</code></li>
           </ul>
         </li>
-        <li><em>“Use Known Barcodes?”</em>: <code class="highlighter-rouge">No</code></li>
-        <li><em>“Barcode pattern for first read”</em>: <code class="highlighter-rouge">NNNNNNCCCCCC</code></li>
-        <li><em>“Enable quality filter?”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Use Known Barcodes?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Barcode pattern for first read”</em>: <code class="language-plaintext highlighter-rouge">NNNNNNCCCCCC</code></li>
+        <li><em>“Enable quality filter?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
 
       <blockquote class="comment">
         <h3 id="comment-comment-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
         <ul>
-          <li>Here we specify the format of our barcodes as <code class="highlighter-rouge">NNNNNNCCCCCC</code> where the <em>N</em>s represent UMI bases and the <em>C</em>s represent the cell barcodes.</li>
+          <li>Here we specify the format of our barcodes as <code class="language-plaintext highlighter-rouge">NNNNNNCCCCCC</code> where the <em>N</em>s represent UMI bases and the <em>C</em>s represent the cell barcodes.</li>
           <li>In some protocols, actual sequence data can be found in between the cell and UMI barcodes, wherein it is neccesary to represent sequence bases using <em>X</em>.</li>
           <li>e.g. A protocol that starts with a 3bp sequence, followed by a 4bp Cell barcode, followed once again by a 10bp sequence, and then finally a 5bp UMI barcode, would require the following barcode format:
-<code class="highlighter-rouge">XXXCCCCXXXXXXXXXXNNNNN</code></li>
+<code class="language-plaintext highlighter-rouge">XXXCCCCXXXXXXXXXXNNNNN</code></li>
         </ul>
 
       </blockquote>
@@ -1311,7 +1311,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
 <blockquote class="details">
   <h3 id="details-forward-reads-1"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Forward <span class="notranslate">Reads</span>:</h3>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 1:N:0:ATCACG
 TTTTTTTTTTTTTTTTTT
 +
 FFFJJJJJJJJJJJJJJJ
@@ -1337,7 +1337,7 @@ FAFFJJJJJJJJF---&lt;F&gt;
 <blockquote class="details">
   <h3 id="details-reverse-reads-1"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Reverse <span class="notranslate">Reads</span>:</h3>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@J00182:75:HTKJNBBXX:2:1115:8501:46961_ACCAGA_GGAAGA 2:N:0:ATCACG
 GACCTCTGATCTTTACGAAAGGCCAACGCGTTTTCAGTCTGGACACGGTTCAGCTCCTGTTCATTATTCA
 +
 A&lt;&lt;A-777F&lt;AA&lt;AJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
@@ -1378,14 +1378,14 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
         <ul>
           <li>Forward:
             <ul>
-              <li>Sequence: The <code class="highlighter-rouge">cell</code> and <code class="highlighter-rouge">umi</code> sections of the sequence have been removed, leaving behind only the PolyT tail.</li>
-              <li>Header: The <code class="highlighter-rouge">cell</code> and <code class="highlighter-rouge">umi</code> sections of the sequence have been added as <code class="highlighter-rouge">cell_umi</code> barcode in the header</li>
+              <li>Sequence: The <code class="language-plaintext highlighter-rouge">cell</code> and <code class="language-plaintext highlighter-rouge">umi</code> sections of the sequence have been removed, leaving behind only the PolyT tail.</li>
+              <li>Header: The <code class="language-plaintext highlighter-rouge">cell</code> and <code class="language-plaintext highlighter-rouge">umi</code> sections of the sequence have been added as <code class="language-plaintext highlighter-rouge">cell_umi</code> barcode in the header</li>
             </ul>
           </li>
           <li>Reverse:
             <ul>
               <li>Sequence: Has not changed.</li>
-              <li>Header: The <code class="highlighter-rouge">cell</code> and <code class="highlighter-rouge">umi</code> sections of the sequence from the Forward (note: <strong>NOT</strong> Reverse) <span class="notranslate">reads</span> have been added to the header.</li>
+              <li>Header: The <code class="language-plaintext highlighter-rouge">cell</code> and <code class="language-plaintext highlighter-rouge">umi</code> sections of the sequence from the Forward (note: <strong>NOT</strong> Reverse) <span class="notranslate">reads</span> have been added to the header.</li>
             </ul>
           </li>
         </ul>
@@ -1451,7 +1451,7 @@ A-77AA-7FF&lt;7FFJFFFJJJJJJJJJJJJJ-AFJJJJJJJFJJJJJJJJJJJJJJJJJJJJJJJJJJJJ
     title = "Understanding Barcodes (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-umis/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

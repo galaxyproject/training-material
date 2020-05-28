@@ -584,14 +584,14 @@
 
 <h2 id="get-data">Get data</h2>
 
-<p>As a first step, we create a new <span class="notranslate">Galaxy</span> history and then we download a crystal structure for the Hsp90 protein from the Protein Data Bank (PDB). The structure is provided under accession code <code class="highlighter-rouge">6HHR</code> (<a class="citation" href="#Schuetz2018">Schuetz <i>et al.</i> 2018</a>) and shows Hsp90 in complex with a ligand belonging to the resorcinol class.</p>
+<p>As a first step, we create a new <span class="notranslate">Galaxy</span> history and then we download a crystal structure for the Hsp90 protein from the Protein Data Bank (PDB). The structure is provided under accession code <code class="language-plaintext highlighter-rouge">6HHR</code> (<a class="citation" href="#Schuetz2018">Schuetz <i>et al.</i> 2018</a>) and shows Hsp90 in complex with a ligand belonging to the resorcinol class.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
 
   <ol>
     <li>Create a new history for this tutorial</li>
-    <li>Search <span class="notranslate">Galaxy</span> for the ‘Get PDB’ tool. Request the accession code <code class="highlighter-rouge">6hhr</code>.</li>
+    <li>Search <span class="notranslate">Galaxy</span> for the ‘Get PDB’ tool. Request the accession code <code class="language-plaintext highlighter-rouge">6hhr</code>.</li>
     <li>Rename the dataset to ‘Hsp90 structure’</li>
     <li>
       <p>Check that the datatype is correct (PDB file).</p>
@@ -602,7 +602,7 @@
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -650,16 +650,16 @@
     <li><strong>Search in textfiles</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: ‘Hsp90 structure’</li>
-        <li><em>“that”</em>: <code class="highlighter-rouge">Don't Match</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">HETATM</code></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Don't Match</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">HETATM</code></li>
       </ul>
     </li>
     <li>Rename output to ‘Protein (PDB)’</li>
     <li><strong>Search in textfiles</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Select lines from”</em>: ‘Hsp90 structure’</li>
-        <li><em>“that”</em>: <code class="highlighter-rouge">Match</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="highlighter-rouge">AG5E</code></li>
+        <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Match</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">AG5E</code></li>
       </ul>
     </li>
     <li>Rename output to ‘Ligand (PDB)’</li>
@@ -667,7 +667,7 @@
 
 </blockquote>
 
-<p>Here, we simply filter the original PDB twice: once for lines which do not match <code class="highlighter-rouge">HETATM</code>, which returns a PDB file containing only protein, not ligand and solvent; and once for lines which match the ligand’s identity code <code class="highlighter-rouge">AG5E</code>, which returns a PDB file containing only the ligand.</p>
+<p>Here, we simply filter the original PDB twice: once for lines which do not match <code class="language-plaintext highlighter-rouge">HETATM</code>, which returns a PDB file containing only protein, not ligand and solvent; and once for lines which match the ligand’s identity code <code class="language-plaintext highlighter-rouge">AG5E</code>, which returns a PDB file containing only the ligand.</p>
 
 <h3 id="set-up-protein-topology">Set up protein topology</h3>
 
@@ -680,9 +680,9 @@
     <li><strong>GROMACS initial setup</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“PDB input file”</em>: ‘Protein (PDB)’ file</li>
-        <li><em>“Force field”</em>: <code class="highlighter-rouge">AMBER99SB</code></li>
-        <li><em>“Water model”</em>: <code class="highlighter-rouge">TIP3P</code></li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Force field”</em>: <code class="language-plaintext highlighter-rouge">AMBER99SB</code></li>
+        <li><em>“Water model”</em>: <code class="language-plaintext highlighter-rouge">TIP3P</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -713,10 +713,10 @@
     <li><strong>Generate MD topologies for small molecules</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Input file”</em>: ‘Ligand (PDB)’</li>
-        <li><em>“Charge of the molecule”</em>: <code class="highlighter-rouge">0</code></li>
-        <li><em>“Multiplicity”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Force field to use for parameterization”</em>: <code class="highlighter-rouge">gaff</code></li>
-        <li><em>“Save GRO file?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Charge of the molecule”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+        <li><em>“Multiplicity”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Force field to use for parameterization”</em>: <code class="language-plaintext highlighter-rouge">gaff</code></li>
+        <li><em>“Save GRO file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -743,10 +743,10 @@ minimization step.</p>
   <ol>
     <li><strong>Merge GROMACS topologies</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein topology (TOP) file”</em>: <code class="highlighter-rouge">TOP</code> file created by the <strong>GROMACS initial setup</strong> tool</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligand topology (TOP or ITP file)”</em>: <code class="highlighter-rouge">Topology</code> created by the <strong>acpype</strong> tool</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein structure (GRO) file”</em>: <code class="highlighter-rouge">GRO</code> file created by the <strong>GROMACS initial setup</strong> tool</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligand structure (GRO) file”</em>: <code class="highlighter-rouge">Structure file (GRO format)</code> created by the <strong>acpype</strong> tool</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein topology (TOP) file”</em>: <code class="language-plaintext highlighter-rouge">TOP</code> file created by the <strong>GROMACS initial setup</strong> tool</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligand topology (TOP or ITP file)”</em>: <code class="language-plaintext highlighter-rouge">Topology</code> created by the <strong>acpype</strong> tool</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein structure (GRO) file”</em>: <code class="language-plaintext highlighter-rouge">GRO</code> file created by the <strong>GROMACS initial setup</strong> tool</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Ligand structure (GRO) file”</em>: <code class="language-plaintext highlighter-rouge">Structure file (GRO format)</code> created by the <strong>acpype</strong> tool</li>
       </ul>
     </li>
   </ol>
@@ -763,14 +763,14 @@ minimization step.</p>
   <ol>
     <li><strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input structure”</em>: <code class="highlighter-rouge">System GRO file</code> (Input dataset)</li>
-        <li><em>“Configure box?”</em>: <code class="highlighter-rouge">Yes</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input structure”</em>: <code class="language-plaintext highlighter-rouge">System GRO file</code> (Input dataset)</li>
+        <li><em>“Configure box?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><em>“Box dimensions in nanometers”</em>: <code class="highlighter-rouge">1.0</code></li>
-            <li><em>“Box type”</em>: <code class="highlighter-rouge">Triclinic</code></li>
+            <li><em>“Box dimensions in nanometers”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+            <li><em>“Box type”</em>: <code class="language-plaintext highlighter-rouge">Triclinic</code></li>
           </ul>
         </li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -793,9 +793,9 @@ minimization step.</p>
   <ol>
     <li><strong>GROMACS solvation and adding ions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“System topology”</em>: <code class="highlighter-rouge">output</code></li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“System topology”</em>: <code class="language-plaintext highlighter-rouge">output</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -832,14 +832,14 @@ minimization step.</p>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file.”</em>: GRO output of <strong>GROMACS solvation and adding ions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file.”</em>: TOP output of <strong>GROMACS solvation and adding ions</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code>
+        <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code>
           <ul>
-            <li><em>“Number of steps for the MD simulation”</em>: <code class="highlighter-rouge">50000</code></li>
-            <li><em>“EM tolerance”</em>: <code class="highlighter-rouge">1000.0</code></li>
+            <li><em>“Number of steps for the MD simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
+            <li><em>“EM tolerance”</em>: <code class="language-plaintext highlighter-rouge">1000.0</code></li>
           </ul>
         </li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li>Rename output to <code class="highlighter-rouge">Minimized GRO file</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>Rename output to <code class="language-plaintext highlighter-rouge">Minimized GRO file</code></li>
       </ul>
     </li>
   </ol>
@@ -848,7 +848,7 @@ minimization step.</p>
 
 <p>The EM tolerance here refers to the maximum force which will be allowed in a minimized system. The simulation will be terminated when the maximum force is less than this value, or when 50000 steps have elapsed.</p>
 
-<p>As an aside, we can use the <code class="highlighter-rouge">Extract energy components</code> tool to plot the convergence of the potential energy during the minimization.</p>
+<p>As an aside, we can use the <code class="language-plaintext highlighter-rouge">Extract energy components</code> tool to plot the convergence of the potential energy during the minimization.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-checking-em-convergence"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking EM convergence</h3>
@@ -857,16 +857,16 @@ minimization step.</p>
     <li><strong>Extract energy components with GROMACS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“EDR file.”</em>: EDR output of <strong>GROMACS energy minimization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Terms to calculate”</em>: <code class="highlighter-rouge">Potential</code></li>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge"><span class="notranslate">Galaxy</span> tabular</code></li>
+        <li><em>“Terms to calculate”</em>: <code class="language-plaintext highlighter-rouge">Potential</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span> tabular</code></li>
       </ul>
     </li>
     <li>On the output tabular file, click on the ‘Visualize this data’ icon. This provides a range of visualization options. Select ‘Line chart (jqPlot)’.</li>
-    <li>In the visualization window which appears, click on <code class="highlighter-rouge">Select data.</code> Enter the following parameters:
+    <li>In the visualization window which appears, click on <code class="language-plaintext highlighter-rouge">Select data.</code> Enter the following parameters:
       <ul>
-        <li><em>“Provide a label”</em>: <code class="highlighter-rouge">Energy potential</code></li>
-        <li><em>“Values for x-axis”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Values for y-axis”</em>: <code class="highlighter-rouge">Column: 2</code></li>
+        <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">Energy potential</code></li>
+        <li><em>“Values for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Values for y-axis”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
       </ul>
     </li>
   </ol>
@@ -896,7 +896,7 @@ minimization step.</p>
   <ol>
     <li><strong>GROMACS simulation</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="highlighter-rouge">Minimized GRO file</code> (from energy minimization step)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: <code class="language-plaintext highlighter-rouge">Minimized GRO file</code> (from energy minimization step)</li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: TOP file produced by solvation step.</li>
         <li>In <em>“Inputs”</em>:
           <ul>
@@ -905,33 +905,33 @@ minimization step.</p>
         </li>
         <li>In <em>“Outputs”</em>:
           <ul>
-            <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code></li>
-            <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
-            <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
-            <li><em>“Produce an energy (EDR) file”</em>: <code class="highlighter-rouge">Produce EDR output</code></li>
+            <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return .xtc file (reduced precision)</code></li>
+            <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
+            <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Produce CPT output</code></li>
+            <li><em>“Produce an energy (EDR) file”</em>: <code class="language-plaintext highlighter-rouge">Produce EDR output</code></li>
           </ul>
         </li>
         <li>In <em>“Settings”</em>:
           <ul>
-            <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code>
+            <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code>
               <ul>
-                <li><em>“Bond constraints (constraints)”</em>: <code class="highlighter-rouge">All bonds (all-bonds).</code></li>
-                <li><em>“Temperature /K”</em>: <code class="highlighter-rouge">300</code></li>
-                <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.0002</code></li>
-                <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">1000</code></li>
-                <li><em>“Number of steps for the simulation”</em>: <code class="highlighter-rouge">50000</code></li>
+                <li><em>“Bond constraints (constraints)”</em>: <code class="language-plaintext highlighter-rouge">All bonds (all-bonds).</code></li>
+                <li><em>“Temperature /K”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
+                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.0002</code></li>
+                <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+                <li><em>“Number of steps for the simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Once the NVT equilibration is complete, it is worth using the <code class="highlighter-rouge">Extract energy components</code> tool again to check whether the system temperature has converged on 300 K. This can be done as described for energy minimization, this time specifying <code class="highlighter-rouge">Temperature</code> under <code class="highlighter-rouge">Terms to calculate</code> rather than <code class="highlighter-rouge">Potential</code>. The plot should show the temperature reaching 300 K and remaining there, albeit with some fluctuation.</p>
+<p>Once the NVT equilibration is complete, it is worth using the <code class="language-plaintext highlighter-rouge">Extract energy components</code> tool again to check whether the system temperature has converged on 300 K. This can be done as described for energy minimization, this time specifying <code class="language-plaintext highlighter-rouge">Temperature</code> under <code class="language-plaintext highlighter-rouge">Terms to calculate</code> rather than <code class="language-plaintext highlighter-rouge">Potential</code>. The plot should show the temperature reaching 300 K and remaining there, albeit with some fluctuation.</p>
 
 <p>Having stabilized the temperature of the system with NVT equilibration,
 we also need to stabilize the pressure of the system. We therefore
@@ -958,34 +958,34 @@ NVT simulation.</p>
         </li>
         <li>In <em>“Outputs”</em>:
           <ul>
-            <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code></li>
-            <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
-            <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
-            <li><em>“Produce an energy (EDR) file”</em>: <code class="highlighter-rouge">Produce EDR output</code></li>
+            <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return .xtc file (reduced precision)</code></li>
+            <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
+            <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Produce CPT output</code></li>
+            <li><em>“Produce an energy (EDR) file”</em>: <code class="language-plaintext highlighter-rouge">Produce EDR output</code></li>
           </ul>
         </li>
         <li>In <em>“Settings”</em>:
           <ul>
-            <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isobaric ensemble (NPT)</code></li>
-            <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code>
+            <li><em>“Ensemble”</em>: <code class="language-plaintext highlighter-rouge">Isothermal-isobaric ensemble (NPT)</code></li>
+            <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code>
               <ul>
-                <li><em>“Bond constraints (constraints)”</em>: <code class="highlighter-rouge">All bonds (all-bonds).</code></li>
-                <li><em>“Temperature /K”</em>: <code class="highlighter-rouge">300</code></li>
-                <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.002</code></li>
-                <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">1000</code></li>
-                <li><em>“Number of steps for the simulation”</em>: <code class="highlighter-rouge">50000</code></li>
+                <li><em>“Bond constraints (constraints)”</em>: <code class="language-plaintext highlighter-rouge">All bonds (all-bonds).</code></li>
+                <li><em>“Temperature /K”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
+                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.002</code></li>
+                <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+                <li><em>“Number of steps for the simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 
 </blockquote>
 
-<p>After the NPT equilibration is complete, <strong>Extract energy components</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can be used again to view the pressure of the system. This is done as described for energy minimization, specifying <code class="highlighter-rouge">Pressure</code> under <code class="highlighter-rouge">Terms to calculate</code>. The plot should show convergence on 1 bar and remain there, although some fluctuation is expected.</p>
+<p>After the NPT equilibration is complete, <strong>Extract energy components</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can be used again to view the pressure of the system. This is done as described for energy minimization, specifying <code class="language-plaintext highlighter-rouge">Pressure</code> under <code class="language-plaintext highlighter-rouge">Terms to calculate</code>. The plot should show convergence on 1 bar and remain there, although some fluctuation is expected.</p>
 
 <h2 id="production-simulation">Production simulation</h2>
 
@@ -1006,25 +1006,25 @@ NVT simulation.</p>
         </li>
         <li>In <em>“Outputs”</em>:
           <ul>
-            <li><em>“Trajectory output”</em>: <code class="highlighter-rouge">Return .xtc file (reduced precision)</code></li>
-            <li><em>“Structure output”</em>: <code class="highlighter-rouge">Return .gro file</code></li>
-            <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="highlighter-rouge">Produce CPT output</code></li>
+            <li><em>“Trajectory output”</em>: <code class="language-plaintext highlighter-rouge">Return .xtc file (reduced precision)</code></li>
+            <li><em>“Structure output”</em>: <code class="language-plaintext highlighter-rouge">Return .gro file</code></li>
+            <li><em>“Produce a checkpoint (CPT) file”</em>: <code class="language-plaintext highlighter-rouge">Produce CPT output</code></li>
           </ul>
         </li>
         <li>In <em>“Settings”</em>:
           <ul>
-            <li><em>“Ensemble”</em>: <code class="highlighter-rouge">Isothermal-isobaric ensemble (NPT)</code></li>
-            <li><em>“Parameter input”</em>: <code class="highlighter-rouge">Use default (partially customisable) setting</code>
+            <li><em>“Ensemble”</em>: <code class="language-plaintext highlighter-rouge">Isothermal-isobaric ensemble (NPT)</code></li>
+            <li><em>“Parameter input”</em>: <code class="language-plaintext highlighter-rouge">Use default (partially customisable) setting</code>
               <ul>
-                <li><em>“Temperature /K”</em>: <code class="highlighter-rouge">300</code></li>
-                <li><em>“Step length in ps”</em>: <code class="highlighter-rouge">0.001</code></li>
-                <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="highlighter-rouge">1000</code></li>
-                <li><em>“Number of steps for the simulation”</em>: <code class="highlighter-rouge">1000000</code></li>
+                <li><em>“Temperature /K”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
+                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.001</code></li>
+                <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+                <li><em>“Number of steps for the simulation”</em>: <code class="language-plaintext highlighter-rouge">1000000</code></li>
               </ul>
             </li>
           </ul>
         </li>
-        <li><em>“Generate detailed log”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1045,8 +1045,8 @@ NVT simulation.</p>
   <ol>
     <li><strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge">PDB file</code></li>
-        <li><em>“Configure box?”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">PDB file</code></li>
+        <li><em>“Configure box?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -1069,7 +1069,7 @@ NVT simulation.</p>
   <ol>
     <li><strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Output format”</em>: <code class="highlighter-rouge">DCD file</code></li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">DCD file</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -1096,7 +1096,7 @@ is a measure of how much the protein conformation has changed between different 
   <ol>
     <li><strong>RMSD Analysis</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Select domains”</em>: <code class="highlighter-rouge">C-alpha</code></li>
+        <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">C-alpha</code></li>
       </ul>
 
       <blockquote class="comment">
@@ -1119,7 +1119,7 @@ is a measure of how much the protein conformation has changed between different 
 
 <p>Calculating the RMSD of the ligand is necessary to check if it is stable in the active site and to identify possible binding modes. If the ligand is not stable, there will be large fluctuations in the RMSD.</p>
 
-<p>For the RMSD analysis of the ligand, the <code class="highlighter-rouge">Select domains</code> parameter of the tool can for convenience be set to <code class="highlighter-rouge">Ligand</code>; however, this automatic selection sometimes fails. The other alte<span class="notranslate">rna</span>tive, which we apply here, is to specify the <code class="highlighter-rouge">Residue ID</code> in the textbox provided. In this example the ligand’s Residue ID is <code class="highlighter-rouge">G5E</code>. The output is the requested RMSD data as a time series, the RMSD plotted as a time series and as a histogram.</p>
+<p>For the RMSD analysis of the ligand, the <code class="language-plaintext highlighter-rouge">Select domains</code> parameter of the tool can for convenience be set to <code class="language-plaintext highlighter-rouge">Ligand</code>; however, this automatic selection sometimes fails. The other alte<span class="notranslate">rna</span>tive, which we apply here, is to specify the <code class="language-plaintext highlighter-rouge">Residue ID</code> in the textbox provided. In this example the ligand’s Residue ID is <code class="language-plaintext highlighter-rouge">G5E</code>. The output is the requested RMSD data as a time series, the RMSD plotted as a time series and as a histogram.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-rmsd-analysis-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: RMSD analysis</h3>
@@ -1127,11 +1127,11 @@ is a measure of how much the protein conformation has changed between different 
   <ol>
     <li><strong>RMSD Analysis</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select domains”</em>: <code class="highlighter-rouge">Residue ID</code>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">Residue ID</code>
           <ul>
-            <li><em>“Residue ID”</em>: <code class="highlighter-rouge">G5E</code></li>
+            <li><em>“Residue ID”</em>: <code class="language-plaintext highlighter-rouge">G5E</code></li>
           </ul>
         </li>
       </ul>
@@ -1148,7 +1148,7 @@ is a measure of how much the protein conformation has changed between different 
 
 <h2 id="rmsf-analysis">RMSF analysis</h2>
 
-<p>The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by <code class="highlighter-rouge">C-alpha</code>, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M"{o}ssbauer spectroscopy (<a class="citation" href="#berjanskii_nmr_2006">Berjanskii and Wishart 2006</a>, <a class="citation" href="#kuzmanic_determination_2010">Kuzmanic and Zagrovic 2010</a>). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.</p>
+<p>The Root Mean Square Fluctuation (RMSF) is valuable to consider, as it represents the deviation at a reference position over time. The fluctuation in space of particular amino acids in the protein are considered. The Cα of the protein, designated by <code class="language-plaintext highlighter-rouge">C-alpha</code>, is a good selection to understand the change in protein structure. Depending on the system these fluctuations can be correlated to experimental techniques including Nuclear Magnetic Resonance (NMR) and M"{o}ssbauer spectroscopy (<a class="citation" href="#berjanskii_nmr_2006">Berjanskii and Wishart 2006</a>, <a class="citation" href="#kuzmanic_determination_2010">Kuzmanic and Zagrovic 2010</a>). The output from the tools is the requested RMSF data and the RMSF plotted as a time series.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-rmsf-analysis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: RMSF analysis</h3>
@@ -1156,9 +1156,9 @@ is a measure of how much the protein conformation has changed between different 
   <ol>
     <li><strong>RMSF Analysis</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select domains”</em>: <code class="highlighter-rouge">C-alpha</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">C-alpha</code></li>
       </ul>
     </li>
   </ol>
@@ -1185,9 +1185,9 @@ Having discovered the principal components usually these are visualized. The PCA
   <ol>
     <li><strong>PCA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select domains”</em>: <code class="highlighter-rouge">C-alpha</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">C-alpha</code></li>
       </ul>
     </li>
   </ol>
@@ -1204,8 +1204,8 @@ Having discovered the principal components usually these are visualized. The PCA
   <ol>
     <li><strong>Cosine Content</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD/XTC trajectory input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB/GRO input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD/XTC trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB/GRO input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
   </ol>
@@ -1220,9 +1220,9 @@ Having discovered the principal components usually these are visualized. The PCA
   <ol>
     <li><strong>PCA visualization</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Select domains”</em>: <code class="highlighter-rouge">C-alpha</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select domains”</em>: <code class="language-plaintext highlighter-rouge">C-alpha</code></li>
       </ul>
     </li>
   </ol>
@@ -1241,10 +1241,10 @@ Having discovered the principal components usually these are visualized. The PCA
   <ol>
     <li><strong>Hydrogen Bond Analysis using VMD</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD/XTC trajectory input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB/GRO input”</em>: <code class="highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Selection 1”</em>: <code class="highlighter-rouge">protein</code></li>
-        <li><em>“Selection 2”</em>: <code class="highlighter-rouge">resname G5E</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“DCD/XTC trajectory input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>MDTraj file converter</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB/GRO input”</em>: <code class="language-plaintext highlighter-rouge">output</code> (output of <strong>GROMACS structure configuration</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Selection 1”</em>: <code class="language-plaintext highlighter-rouge">protein</code></li>
+        <li><em>“Selection 2”</em>: <code class="language-plaintext highlighter-rouge">resname G5E</code></li>
       </ul>
     </li>
   </ol>
@@ -1262,13 +1262,13 @@ Having discovered the principal components usually these are visualized. The PCA
   <h3 id="hands_on-hands-on-high-throughput-md"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: High-throughput MD</h3>
 
   <ol>
-    <li>Create a new history for running the high-throughput <span class="notranslate">workflow</span> and name it <code class="highlighter-rouge">Hsp90 HTMD simulation</code></li>
-    <li>Upload the SD-file containing the new ligand structures from Zenodo  and rename it <code class="highlighter-rouge">Ligands (SDF)</code></li>
+    <li>Create a new history for running the high-throughput <span class="notranslate">workflow</span> and name it <code class="language-plaintext highlighter-rouge">Hsp90 HTMD simulation</code></li>
+    <li>Upload the SD-file containing the new ligand structures from Zenodo  and rename it <code class="language-plaintext highlighter-rouge">Ligands (SDF)</code></li>
     <li>Import the simulation <span class="notranslate">workflow</span> from the European (<a class="citation" href="#eu_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | Europe | Accessible History | Protein-ligand HTMD simulation</b>”</a>) or the South African <span class="notranslate">Galaxy</span> server (<a class="citation" href="#za_htmd_simulation_workflow">“<b><span class="notranslate">Galaxy</span> | South Africa | Accessible History | Protein-ligand HTMD analysis</b>”</a>).</li>
     <li>Run the imported <span class="notranslate">workflow</span> with the following parameters:
       <ul>
-        <li><em>“Send results to a new history”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“History name results to a new history”</em>: <code class="highlighter-rouge">Hsp90 HTMD analysis</code></li>
+        <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“History name results to a new history”</em>: <code class="language-plaintext highlighter-rouge">Hsp90 HTMD analysis</code></li>
         <li><em>“GRO input”</em>: ‘Collection of GRO files produced by simulation <span class="notranslate">workflow</span>’</li>
         <li><em>“XTC input”</em>: ‘Collection of XTC files produced by simulation <span class="notranslate">workflow</span>’</li>
       </ul>
@@ -1288,7 +1288,7 @@ Having discovered the principal components usually these are visualized. The PCA
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-bioblend-script"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bioblend script</h3>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from bioblend import <span class="notranslate">galaxy</span>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>from bioblend import <span class="notranslate">galaxy</span>
 
 # Server and account details
 API_KEY = 'YOUR USE<span class="notranslate">GALAXY</span>.EU API KEY'

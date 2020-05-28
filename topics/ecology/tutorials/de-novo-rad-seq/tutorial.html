@@ -565,13 +565,13 @@
     </li>
     <li><strong>EBI SRA</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li>Select the Run from the results of the search for <code class="highlighter-rouge">SRR034310</code> (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)).</li>
+        <li>Select the Run from the results of the search for <code class="language-plaintext highlighter-rouge">SRR034310</code> (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)).</li>
         <li>Click the link in the column <strong>FASTQ files (<span class="notranslate">Galaxy</span>)</strong> of the results table</li>
         <li>This will redirect to the <span class="notranslate">Galaxy</span> website and start the download.</li>
       </ul>
     </li>
     <li>Upload remaining training data from Zenodo:
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/1134547/files/Barcode_SRR034310.txt
 https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 </code></pre></div>      </div>
 
@@ -599,7 +599,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
       </blockquote>
     </li>
     <li>
-      <p>Make sure your fasta files are of datatype <code class="highlighter-rouge">fastqsanger</code></p>
+      <p>Make sure your fasta files are of datatype <code class="language-plaintext highlighter-rouge">fastqsanger</code></p>
 
       <blockquote class="tip">
 
@@ -607,7 +607,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">fastqsanger</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">fastqsanger</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -628,13 +628,13 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
   <ol>
     <li><strong>Process Radtags</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to demultiplex the <span class="notranslate">reads</span>:
       <ul>
-        <li><em>“Single-end or paired-end <span class="notranslate">reads</span> files”</em>: <code class="highlighter-rouge">Single-end files</code></li>
-        <li><em>“singles-end <span class="notranslate">reads</span> infile(s)”</em>: <code class="highlighter-rouge">SRR034310.fastq(.gz)</code></li>
-        <li><em>“Barcode file”</em>: <code class="highlighter-rouge">Barcodes_SRR034310.tabular</code></li>
-        <li><em>“Number of enzymes”</em>: <code class="highlighter-rouge">One</code></li>
-        <li><em>“Enzyme”</em>: <code class="highlighter-rouge">sbfI</code></li>
-        <li><em>“Capture discarded <span class="notranslate">reads</span> to a file</em>”: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Output format:”</em> <code class="highlighter-rouge">fastq</code></li>
+        <li><em>“Single-end or paired-end <span class="notranslate">reads</span> files”</em>: <code class="language-plaintext highlighter-rouge">Single-end files</code></li>
+        <li><em>“singles-end <span class="notranslate">reads</span> infile(s)”</em>: <code class="language-plaintext highlighter-rouge">SRR034310.fastq(.gz)</code></li>
+        <li><em>“Barcode file”</em>: <code class="language-plaintext highlighter-rouge">Barcodes_SRR034310.tabular</code></li>
+        <li><em>“Number of enzymes”</em>: <code class="language-plaintext highlighter-rouge">One</code></li>
+        <li><em>“Enzyme”</em>: <code class="language-plaintext highlighter-rouge">sbfI</code></li>
+        <li><em>“Capture discarded <span class="notranslate">reads</span> to a file</em>”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Output format:”</em> <code class="language-plaintext highlighter-rouge">fastq</code></li>
       </ul>
 
       <blockquote class="question">
@@ -654,7 +654,7 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
           <ol>
             <li>8895289 total <span class="notranslate">reads</span></li>
             <li>8139531 retained <span class="notranslate">reads</span></li>
-            <li>There are no sequences filtered because of low quality. This is because radtags didn’t apply quality related filtering since the corresponding advanced option (Discard <span class="notranslate">reads</span> with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (<code class="highlighter-rouge">626265</code>) or an ambiguous RAD-Tag (<code class="highlighter-rouge">129493</code>). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis</li>
+            <li>There are no sequences filtered because of low quality. This is because radtags didn’t apply quality related filtering since the corresponding advanced option (Discard <span class="notranslate">reads</span> with low quality scores) has not been enabled. So here, all not retained sequences are removed because of an ambiguous barcode (<code class="language-plaintext highlighter-rouge">626265</code>) or an ambiguous RAD-Tag (<code class="language-plaintext highlighter-rouge">129493</code>). This means that some barcodes are not exactly what was specified on the barcode file and that sometimes, no SbfI restriction enzyme site was found. This can be due to some sequencing problems but here, this is also due to the addition, in the original sequencing library, of RAD-seq samples from another study. This strategy is often used to avoid having too much sequences beginning with the exact same nucleotide sequence which may cause Illumina related issues during sequencing and cluster analysis</li>
             <li>Sequencing quality is essential! Each time your sequencing quality decreases, you loose data and thus essential biological information!</li>
           </ol>
 
@@ -668,9 +668,9 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
       <ul>
         <li>Section <strong>Advanced</strong>
           <ul>
-            <li><em>“Discard <span class="notranslate">reads</span> with low quality scores”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“score limit”</em>: <code class="highlighter-rouge">20</code> (for example; play with this)</li>
-            <li><em>“Set the size of the sliding window as a fraction of the read length, between 0 and 1”</em>: <code class="highlighter-rouge">0.30</code> (for example; play with this)</li>
+            <li><em>“Discard <span class="notranslate">reads</span> with low quality scores”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“score limit”</em>: <code class="language-plaintext highlighter-rouge">20</code> (for example; play with this)</li>
+            <li><em>“Set the size of the sliding window as a fraction of the read length, between 0 and 1”</em>: <code class="language-plaintext highlighter-rouge">0.30</code> (for example; play with this)</li>
           </ul>
         </li>
       </ul>
@@ -684,30 +684,30 @@ https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
-  <p>You can use the <code class="highlighter-rouge">Charts</code> functionality through the Visualize button reachable on the <code class="highlighter-rouge">Radtags logs</code> file you just generated.</p>
+  <p>You can use the <code class="language-plaintext highlighter-rouge">Charts</code> functionality through the Visualize button reachable on the <code class="language-plaintext highlighter-rouge">Radtags logs</code> file you just generated.</p>
 
-  <p>If like me you don’t have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use a copy/paste “bidouille” or you can use <span class="notranslate">Galaxy</span> tools to manipulate the <code class="highlighter-rouge">radtags logs</code> file to generate a better graph. For example, you can use <code class="highlighter-rouge">Select lines that match an <span class="notranslate">expression</span></code> tool to select rows then use the <code class="highlighter-rouge">Concatenate datasets tail-to-head</code> tool to reorganize these lines in a new file.
+  <p>If like me you don’t have payed attention to the organization of you file for the graphical representation you obtain a non optimal bars diagram with a not intelligent X-axis ordering. There is a lot of different manner to fix this. You can use a copy/paste “bidouille” or you can use <span class="notranslate">Galaxy</span> tools to manipulate the <code class="language-plaintext highlighter-rouge">radtags logs</code> file to generate a better graph. For example, you can use <code class="language-plaintext highlighter-rouge">Select lines that match an <span class="notranslate">expression</span></code> tool to select rows then use the <code class="language-plaintext highlighter-rouge">Concatenate datasets tail-to-head</code> tool to reorganize these lines in a new file.
 Then we generate a graphical display of the changes:</p>
 
-  <p>First we cut the interesting lines of each <code class="highlighter-rouge">result.log with Stacks: process radtags</code></p>
+  <p>First we cut the interesting lines of each <code class="language-plaintext highlighter-rouge">result.log with Stacks: process radtags</code></p>
 
   <ol>
-    <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> applying <code class="highlighter-rouge">^R1.fq.gz</code> on the log files and then</li>
-    <li><strong>Replace Text in entire line</strong> on the resulting data sets finding <code class="highlighter-rouge">R1.fq.gz</code> and replacing with <code class="highlighter-rouge">NoScoreLimit</code> or <code class="highlighter-rouge">Score10</code> or <code class="highlighter-rouge">Score20</code> depending of the case</li>
-    <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> applying <code class="highlighter-rouge">File\tRetained <span class="notranslate">Reads</span></code> on one of the log file to obtain you futur header</li>
-    <li><strong>Replace Text in entire line</strong> on the resulting data set finding <code class="highlighter-rouge">File</code> and replacing with <code class="highlighter-rouge">#</code> to have a best display</li>
+    <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> applying <code class="language-plaintext highlighter-rouge">^R1.fq.gz</code> on the log files and then</li>
+    <li><strong>Replace Text in entire line</strong> on the resulting data sets finding <code class="language-plaintext highlighter-rouge">R1.fq.gz</code> and replacing with <code class="language-plaintext highlighter-rouge">NoScoreLimit</code> or <code class="language-plaintext highlighter-rouge">Score10</code> or <code class="language-plaintext highlighter-rouge">Score20</code> depending of the case</li>
+    <li><strong>Select lines that match an <span class="notranslate">expression</span></strong> applying <code class="language-plaintext highlighter-rouge">File\tRetained <span class="notranslate">Reads</span></code> on one of the log file to obtain you futur header</li>
+    <li><strong>Replace Text in entire line</strong> on the resulting data set finding <code class="language-plaintext highlighter-rouge">File</code> and replacing with <code class="language-plaintext highlighter-rouge">#</code> to have a best display</li>
     <li><strong>Concatenate datasets tail-to-head</strong> on the resulting data sets stating from the header you just created</li>
     <li>Finally <strong>Convert delimiters to TAB</strong> on the resulting data set converting all Tabs to be sure having a well formatted tabular file at the end</li>
   </ol>
 
-  <p>Alte<span class="notranslate">rna</span>tively just copy/paste these lines on the <span class="notranslate">Galaxy</span> upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and Lowquality for example… Before Starting the upload, you can select the <code class="highlighter-rouge">Convert spaces to tabs</code> option through the <code class="highlighter-rouge">Upload configuration</code> wheel. If you did not pay attention to the order you can just sort the file using the first column.</p>
+  <p>Alte<span class="notranslate">rna</span>tively just copy/paste these lines on the <span class="notranslate">Galaxy</span> upload tool using Paste/fetch data section and modifying the File header by sample and filename by Score 10 / Score 20 and Lowquality for example… Before Starting the upload, you can select the <code class="language-plaintext highlighter-rouge">Convert spaces to tabs</code> option through the <code class="language-plaintext highlighter-rouge">Upload configuration</code> wheel. If you did not pay attention to the order you can just sort the file using the first column.</p>
 </blockquote>
 
-<p>You can use the <code class="highlighter-rouge">Charts</code> functionality through the Visualize button to plot the data.</p>
+<p>You can use the <code class="language-plaintext highlighter-rouge">Charts</code> functionality through the Visualize button to plot the data.</p>
 
 <p>And you obtain a file like this one, ready to generate a beautiful and smart bar stacked!</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#		Retained <span class="notranslate">Reads</span>	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#		Retained <span class="notranslate">Reads</span>	Low Quality	Ambiguous Barcodes	Ambiguous RAD-Tag	Total
 NoScoreLimit	8139531		0		626265			129493			8895289
 Score10		7373160		766371		626265			129493			8895289
 Score20		2980543		5158988		626265			129493			8895289
@@ -715,11 +715,11 @@ Score20		2980543		5158988		626265			129493			8895289
 
 <p><img src="../../images/RAD4_Population_Genomics/Process_radtags_charts_end.PNG" alt="The chart on the sorted file" width="50%" /></p>
 
-<p>You can further test using a filter like <code class="highlighter-rouge">clean data, remove any read with an uncalled base</code> and see that here, this has only little impact on the number of retained <span class="notranslate">reads</span>.</p>
+<p>You can further test using a filter like <code class="language-plaintext highlighter-rouge">clean data, remove any read with an uncalled base</code> and see that here, this has only little impact on the number of retained <span class="notranslate">reads</span>.</p>
 
 <p>The demultiplexed sequences are raw sequences from the sequencing machine, without any pretreatments. They need to be controlled for their quality.</p>
 
-<p>We propose to continue the tutorial using the dataset collection containing the demultiplexed <span class="notranslate">reads</span> obtained with Process Radtag execution made with a quality score of 10 and with the <code class="highlighter-rouge">Discard <span class="notranslate">reads</span> with low quality scores</code> parameter set to Yes (so containing 7373160 retained <span class="notranslate">reads</span>).</p>
+<p>We propose to continue the tutorial using the dataset collection containing the demultiplexed <span class="notranslate">reads</span> obtained with Process Radtag execution made with a quality score of 10 and with the <code class="language-plaintext highlighter-rouge">Discard <span class="notranslate">reads</span> with low quality scores</code> parameter set to Yes (so containing 7373160 retained <span class="notranslate">reads</span>).</p>
 
 <h2 id="quality-control">Quality control</h2>
 
@@ -755,7 +755,7 @@ Score20		2980543		5158988		626265			129493			8895289
 
 <h1 id="snp-calling-from-radtags">SNP calling from radtags</h1>
 
-<p>Run <code class="highlighter-rouge">Stacks: De novo map</code> <span class="notranslate">Galaxy</span> tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.</p>
+<p>Run <code class="language-plaintext highlighter-rouge">Stacks: De novo map</code> <span class="notranslate">Galaxy</span> tool. This program will run ustacks, cstacks, and sstacks on the members of the population, accounting for the alignments of each read.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
@@ -770,7 +770,7 @@ Score20		2980543		5158988		626265			129493			8895289
     <li>
       <p>First we will create a population map file with the following contents:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sample_CCCC	1
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sample_CCCC	1
 sample_CCAA	1
 sample_CCTT	1
 sample_CCGG	1
@@ -803,20 +803,20 @@ sample_GGCC	2
     </li>
     <li><strong>Stacks: De novo map</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:
       <ul>
-        <li><em>“Select your usage”</em>: <code class="highlighter-rouge">Population</code></li>
-        <li><em>“Files containing an individual sample from a population”</em>: <code class="highlighter-rouge">The demultiplexed <span class="notranslate">reads</span> (collection)</code></li>
-        <li><em>“Specify a population map”</em>: <code class="highlighter-rouge">the population map you just created</code></li>
+        <li><em>“Select your usage”</em>: <code class="language-plaintext highlighter-rouge">Population</code></li>
+        <li><em>“Files containing an individual sample from a population”</em>: <code class="language-plaintext highlighter-rouge">The demultiplexed <span class="notranslate">reads</span> (collection)</code></li>
+        <li><em>“Specify a population map”</em>: <code class="language-plaintext highlighter-rouge">the population map you just created</code></li>
         <li>Section <strong>Assembly options</strong>
           <ul>
-            <li><em>“Minimum number of identical raw <span class="notranslate">reads</span> required to create a stack”</em>: <code class="highlighter-rouge">3</code></li>
-            <li><em>“Number of mismatches allowed between loci when building the catalog”</em>: <code class="highlighter-rouge">3</code></li>
-            <li><em>“Remove, or break up, highly repetitive RAD-Tags in the ustacks program”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Minimum number of identical raw <span class="notranslate">reads</span> required to create a stack”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+            <li><em>“Number of mismatches allowed between loci when building the catalog”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+            <li><em>“Remove, or break up, highly repetitive RAD-Tags in the ustacks program”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p>Once Stacks has completed running, investigate the output files: <code class="highlighter-rouge">result.log</code> and <code class="highlighter-rouge">catalog.</code> (snps, alleles and tags).</p>
+      <p>Once Stacks has completed running, investigate the output files: <code class="language-plaintext highlighter-rouge">result.log</code> and <code class="language-plaintext highlighter-rouge">catalog.</code> (snps, alleles and tags).</p>
 
       <p><img src="../../images/RAD4_Population_Genomics/denovo/denovo_out.png" alt="The output of de novo map" /></p>
     </li>
@@ -825,7 +825,7 @@ sample_GGCC	2
   <blockquote class="comment">
     <h3 id="comment-data-formatting"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Data formatting</h3>
 
-    <p>If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use <span class="notranslate">Galaxy</span> tools like <code class="highlighter-rouge">Replace Text</code> (for example to replace <code class="highlighter-rouge">Rabbit Slough</code> by a population number like <code class="highlighter-rouge">2</code>, <code class="highlighter-rouge">Add column</code> (for example to add <code class="highlighter-rouge">sample_</code>) or <code class="highlighter-rouge">Cut columns from a table</code> (to put the new <code class="highlighter-rouge">sample_</code> column af the first place) and finally <code class="highlighter-rouge">Regex replace</code> (replacing <code class="highlighter-rouge">(sample_)\t</code> by <code class="highlighter-rouge">\1</code>) to generate it…</p>
+    <p>If you are using a file presenting population information and individual name in a different manner than expected by STACKS, you can use <span class="notranslate">Galaxy</span> tools like <code class="language-plaintext highlighter-rouge">Replace Text</code> (for example to replace <code class="language-plaintext highlighter-rouge">Rabbit Slough</code> by a population number like <code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">Add column</code> (for example to add <code class="language-plaintext highlighter-rouge">sample_</code>) or <code class="language-plaintext highlighter-rouge">Cut columns from a table</code> (to put the new <code class="language-plaintext highlighter-rouge">sample_</code> column af the first place) and finally <code class="language-plaintext highlighter-rouge">Regex replace</code> (replacing <code class="language-plaintext highlighter-rouge">(sample_)\t</code> by <code class="language-plaintext highlighter-rouge">\1</code>) to generate it…</p>
   </blockquote>
 
 </blockquote>
@@ -840,21 +840,21 @@ sample_GGCC	2
       <ul>
         <li>Section <strong>Data filtering options</strong>
           <ul>
-            <li><em>“Minimum percentage of individuals in a population required to process a locus for that population”</em>: <code class="highlighter-rouge">0.75</code></li>
+            <li><em>“Minimum percentage of individuals in a population required to process a locus for that population”</em>: <code class="language-plaintext highlighter-rouge">0.75</code></li>
           </ul>
         </li>
         <li>Section <strong>Output options</strong> (VCF and Structure) and enabling SNP and haplotype-based F statistics calculation.
           <ul>
-            <li><em>“Output results in Variant Call Format (VCF)”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Output results in Structure Format”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Output results in Variant Call Format (VCF)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Output results in Structure Format”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
-        <li><em>“Enable SNP and haplotype-based F statistics”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Enable SNP and haplotype-based F statistics”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
 
       <p><img src="../../images/RAD4_Population_Genomics/denovo/populations_log.png" alt="The output of the populations tool" /></p>
     </li>
-    <li>Now look at the output in the file <code class="highlighter-rouge">batch_1.sumstats</code> nammed <code class="highlighter-rouge">SNP and Haplotype-based F statistics with Stacks: populations ...</code> on your history. There are a large number of statistics calculated at each SNP, so use <span class="notranslate">Galaxy</span> tools like filter, cut, and sort to focus on some.</li>
+    <li>Now look at the output in the file <code class="language-plaintext highlighter-rouge">batch_1.sumstats</code> nammed <code class="language-plaintext highlighter-rouge">SNP and Haplotype-based F statistics with Stacks: populations ...</code> on your history. There are a large number of statistics calculated at each SNP, so use <span class="notranslate">Galaxy</span> tools like filter, cut, and sort to focus on some.</li>
   </ol>
 
   <blockquote class="question">

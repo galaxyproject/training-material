@@ -627,9 +627,9 @@ Sequence quality control is therefore an essential first step in your analysis. 
       </blockquote>
     </li>
     <li>
-      <p>Import <code class="highlighter-rouge">GSM461178_untreat_paired_subset_1.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p>Import <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_1.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -678,7 +678,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
       <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
     </li>
     <li>
-      <p>Rename the file to <code class="highlighter-rouge"><span class="notranslate">reads</span>_1</code></p>
+      <p>Rename the file to <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code></p>
 
       <blockquote class="tip">
 
@@ -719,7 +719,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
   <tbody>
     <tr>
       <td>1</td>
-      <td>Always begins with <code class="highlighter-rouge">@</code> followed by the information about the read</td>
+      <td>Always begins with <code class="language-plaintext highlighter-rouge">@</code> followed by the information about the read</td>
     </tr>
     <tr>
       <td>2</td>
@@ -727,7 +727,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
     </tr>
     <tr>
       <td>3</td>
-      <td>Always begins with a <code class="highlighter-rouge">+</code> and contains sometimes the same info in line 1</td>
+      <td>Always begins with a <code class="language-plaintext highlighter-rouge">+</code> and contains sometimes the same info in line 1</td>
     </tr>
     <tr>
       <td>4</td>
@@ -738,13 +738,13 @@ Sequence quality control is therefore an essential first step in your analysis. 
 
 <p>So for example, the first sequence in our file is:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
 GTGGATATGGATATCCAAATTATATTTGCATAATTTG
 +SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
 IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 </code></pre></div></div>
 
-<p>It means that the fragment named <code class="highlighter-rouge">SRR031716.1</code> corresponds to the <span class="notranslate">DNA</span> sequence <code class="highlighter-rouge">GTGGATATGGATATCCAAATTATATTTGCATAATTTG</code> and this sequence has been sequenced with a quality <code class="highlighter-rouge">IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII</code>.</p>
+<p>It means that the fragment named <code class="language-plaintext highlighter-rouge">SRR031716.1</code> corresponds to the <span class="notranslate">DNA</span> sequence <code class="language-plaintext highlighter-rouge">GTGGATATGGATATCCAAATTATATTTGCATAATTTG</code> and this sequence has been sequenced with a quality <code class="language-plaintext highlighter-rouge">IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII</code>.</p>
 
 <p>But what does this quality score mean?</p>
 
@@ -808,9 +808,9 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>The worst Phred score is the smallest one, so 0. For Illumina, it corresponds to the <code class="highlighter-rouge">!</code> character.</li>
-      <li>The 3rd nucleotide of the 1st sequence has a ASCII character <code class="highlighter-rouge">I</code>, which correspond to a score of 40.</li>
-      <li>The corresponding nucleotide <code class="highlighter-rouge">G</code> has an accuracy of 99.99%</li>
+      <li>The worst Phred score is the smallest one, so 0. For Illumina, it corresponds to the <code class="language-plaintext highlighter-rouge">!</code> character.</li>
+      <li>The 3rd nucleotide of the 1st sequence has a ASCII character <code class="language-plaintext highlighter-rouge">I</code>, which correspond to a score of 40.</li>
+      <li>The corresponding nucleotide <code class="language-plaintext highlighter-rouge">G</code> has an accuracy of 99.99%</li>
     </ol>
 
   </blockquote>
@@ -821,7 +821,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   <p>The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, the tool we will use in the next step, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).</p>
 </blockquote>
 
-<p>When looking at the file in <span class="notranslate">Galaxy</span>, it looks like most the nucleotides have a high score (<code class="highlighter-rouge">I</code> corresponding to a score 40). Is it true for all sequences? And along the full sequence length?</p>
+<p>When looking at the file in <span class="notranslate">Galaxy</span>, it looks like most the nucleotides have a high score (<code class="language-plaintext highlighter-rouge">I</code> corresponding to a score 40). Is it true for all sequences? And along the full sequence length?</p>
 
 <h1 id="assess-the-read-quality">Assess the Read Quality</h1>
 
@@ -833,7 +833,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
   <ol>
     <li>Run <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="highlighter-rouge"><span class="notranslate">reads</span>_1</code></li>
+        <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code></li>
       </ul>
     </li>
     <li>Inspect the generated HTML files</li>
@@ -848,7 +848,7 @@ IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>The Phred scores are encoded using <code class="highlighter-rouge">Sanger / Illumina 1.9</code> (<code class="highlighter-rouge">Encoding</code> in the top table).</p>
+    <p>The Phred scores are encoded using <code class="language-plaintext highlighter-rouge">Sanger / Illumina 1.9</code> (<code class="language-plaintext highlighter-rouge">Encoding</code> in the top table).</p>
   </blockquote>
 </blockquote>
 
@@ -992,7 +992,7 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
 
 <p>“Per Base Sequence Content” plots the percentage of each of the four nucleotides (T, C, A, G) at each position across all <span class="notranslate">reads</span> in the input sequence file. As for the per base sequence quality, the x-axis is non-uniform.</p>
 
-<p>In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with <code class="highlighter-rouge">%A=%T</code> and <code class="highlighter-rouge">%G=%C</code>, and the lines in this plot should run parallel with each other.</p>
+<p>In a random library we would expect that there would be little to no difference between the four bases. The proportion of each of the four bases should remain relatively constant over the length of the read with <code class="language-plaintext highlighter-rouge">%A=%T</code> and <code class="language-plaintext highlighter-rouge">%G=%C</code>, and the lines in this plot should run parallel with each other.</p>
 
 <blockquote class="details">
   <h3 id="details-biases-by-library-type"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Biases by library type</h3>
@@ -1222,14 +1222,14 @@ These sections are <strong>optional</strong>, and if you would like to skip thes
   <ol>
     <li>Run <strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Single-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Single-end</code>
           <ul>
             <li>
-              <p><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="highlighter-rouge"><span class="notranslate">reads</span>_1</code> (Input dataset)</p>
+              <p><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">Reads</span> in FASTQ format”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code> (Input dataset)</p>
 
               <blockquote class="tip">
                 <h3 id="tip-tip-files-not-selectable"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Files not selectable?</h3>
-                <p>If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (<code class="highlighter-rouge">fastqsanger</code>). You can edit the data type by clicking on the pencil symbol.</p>
+                <p>If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (<code class="language-plaintext highlighter-rouge">fastqsanger</code>). You can edit the data type by clicking on the pencil symbol.</p>
               </blockquote>
             </li>
             <li>
@@ -1246,7 +1246,7 @@ If you see or know which adapter sequences were used during library preparation,
         <li>In <em>“Filter Options”</em>
           <ul>
             <li>
-              <p><em>“Minimum length”</em>: <code class="highlighter-rouge">20</code></p>
+              <p><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></p>
 
               <p>It will remove <span class="notranslate">reads</span> that are shorter than 20 bp, after trimming of adapters and bad regions.</p>
             </li>
@@ -1255,7 +1255,7 @@ If you see or know which adapter sequences were used during library preparation,
         <li>In <em>“Read Modification Options”</em>
           <ul>
             <li>
-              <p><em>“Quality cutoff”</em>: <code class="highlighter-rouge">20</code></p>
+              <p><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></p>
 
               <p>After adapter removal (if any), we choose to remove ends ( 5’ and/or 3’) with low-quality, here below 20 in quality).</p>
             </li>
@@ -1263,13 +1263,13 @@ If you see or know which adapter sequences were used during library preparation,
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p>Inspect the generated txt file (<code class="highlighter-rouge">Report</code>)</p>
+      <p>Inspect the generated txt file (<code class="language-plaintext highlighter-rouge">Report</code>)</p>
 
       <blockquote class="question">
         <h3 id="question-questions-5"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1284,7 +1284,7 @@ If you see or know which adapter sequences were used during library preparation,
           <h3 id="solution-solution-5"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
             <li>0 <span class="notranslate">reads</span> with adapters</li>
-            <li>44,164 bp (1.2%) (<code class="highlighter-rouge">Quality-trimmed:</code>)</li>
+            <li>44,164 bp (1.2%) (<code class="language-plaintext highlighter-rouge">Quality-trimmed:</code>)</li>
             <li>322 sequences</li>
           </ol>
         </blockquote>
@@ -1338,32 +1338,32 @@ If you see or know which adapter sequences were used during library preparation,
 
   <p>In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values</p>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27 8 7 11 4 2 3
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27 8 7 11 4 2 3
 </code></pre></div>  </div>
 
   <ol>
     <li>
       <p>Subtract the threshold</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 32 30 16 17 -2 -3 1 -6 -8 -7
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 32 30 16 17 -2 -3 1 -6 -8 -7
 </code></pre></div>      </div>
     </li>
     <li>
       <p>Add up the numbers, starting from the 3’ end (partial sums) and stop early if the sum is greater than zero</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
 </code></pre></div>      </div>
 
       <p>The numbers in parentheses are not computed (because 8 is greater than zero), but shown here for completeness.</p>
     </li>
     <li>
-      <p>Choose the position of the minimum (<code class="highlighter-rouge">-25</code>) as the trimming position</p>
+      <p>Choose the position of the minimum (<code class="language-plaintext highlighter-rouge">-25</code>) as the trimming position</p>
     </li>
   </ol>
 
   <p>Therefore, the read is trimmed to the first four bases, which have quality values</p>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>42 40 26 27
 </code></pre></div>  </div>
 
   <p>Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.</p>
@@ -1384,7 +1384,7 @@ If you see or know which adapter sequences were used during library preparation,
 
 <p>With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two <span class="notranslate">reads</span> per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. With this technique, we have the advantage to get more information about each <span class="notranslate">DNA</span> fragment compared to <span class="notranslate">reads</span> sequenced by only single-end sequencing:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ------&gt;                       [single-end]
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    ------&gt;                       [single-end]
 
     ----------------------------- [fragment]
 
@@ -1398,7 +1398,7 @@ If you see or know which adapter sequences were used during library preparation,
   <li>One file with the sequences corresponding to <strong>reverse</strong> orientation of all the fragments</li>
 </ul>
 
-<p>Usually we recognize these two files which belong to one sample by the name which has the same identifier for the <span class="notranslate">reads</span> but a different extension, e.g. <code class="highlighter-rouge">sampleA_R1.fastq</code> for the forward <span class="notranslate">reads</span> and <code class="highlighter-rouge">sampleA_R2.fastq</code> for the reverse <span class="notranslate">reads</span>. It can also be <code class="highlighter-rouge">_f</code> or <code class="highlighter-rouge">_1</code> for the forward <span class="notranslate">reads</span> and <code class="highlighter-rouge">_r</code> or <code class="highlighter-rouge">_2</code> for the reverse <span class="notranslate">reads</span>.</p>
+<p>Usually we recognize these two files which belong to one sample by the name which has the same identifier for the <span class="notranslate">reads</span> but a different extension, e.g. <code class="language-plaintext highlighter-rouge">sampleA_R1.fastq</code> for the forward <span class="notranslate">reads</span> and <code class="language-plaintext highlighter-rouge">sampleA_R2.fastq</code> for the reverse <span class="notranslate">reads</span>. It can also be <code class="language-plaintext highlighter-rouge">_f</code> or <code class="language-plaintext highlighter-rouge">_1</code> for the forward <span class="notranslate">reads</span> and <code class="language-plaintext highlighter-rouge">_r</code> or <code class="language-plaintext highlighter-rouge">_2</code> for the reverse <span class="notranslate">reads</span>.</p>
 
 <p>The data we analyzed in the previous step was not single-end data but the forward <span class="notranslate">reads</span> of paired-end data. We will now do the quality control on the reverse <span class="notranslate">reads</span>.</p>
 
@@ -1407,22 +1407,22 @@ If you see or know which adapter sequences were used during library preparation,
 
   <ol>
     <li>
-      <p>Import the reverse read <code class="highlighter-rouge">GSM461178_untreat_paired_subset_2.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
+      <p>Import the reverse read <code class="language-plaintext highlighter-rouge">GSM461178_untreat_paired_subset_2.fastq</code> from <a href="https://zenodo.org/record/61771">Zenodo</a> or from the data library (ask your instructor)</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
 </code></pre></div>      </div>
     </li>
-    <li>Rename the file to <code class="highlighter-rouge"><span class="notranslate">reads</span>_2</code></li>
+    <li>Rename the file to <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_2</code></li>
     <li><strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the reverse <span class="notranslate">reads</span></li>
     <li><strong>MultiQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to aggregate the FastQC reports of both forward and reverse <span class="notranslate">reads</span>
       <ul>
         <li>In <em>“Results”</em>
           <ul>
-            <li><em>“Which tool was used generate logs?”</em>: <code class="highlighter-rouge">FastQC</code></li>
+            <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">FastQC</code></li>
             <li>In <em>“FastQC output”</em>
               <ul>
-                <li><em>“Type of FastQC output?”</em>: <code class="highlighter-rouge">Raw data</code></li>
-                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: <code class="highlighter-rouge">Raw data</code> files (output of both <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code></li>
+                <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“FastQC output”</em>: <code class="language-plaintext highlighter-rouge">Raw data</code> files (output of both <strong>FastQC</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
               </ul>
             </li>
           </ul>
@@ -1481,11 +1481,11 @@ If you see or know which adapter sequences were used during library preparation,
   <ol>
     <li><strong>Cutadapt</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="highlighter-rouge">Paired-end</code>
+        <li><em>“Single-end or Paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired-end</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #1”</em>: <code class="highlighter-rouge"><span class="notranslate">reads</span>_1</code> (Input dataset)</li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #1”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_1</code> (Input dataset)</li>
             <li>
-              <p><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #2”</em>: <code class="highlighter-rouge"><span class="notranslate">reads</span>_2</code> (Input dataset)</p>
+              <p><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file #2”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">reads</span>_2</code> (Input dataset)</p>
 
               <p>The order is important here!</p>
             </li>
@@ -1498,23 +1498,23 @@ If you see or know which adapter sequences were used during library preparation,
         </li>
         <li>In <em>“Filter Options”</em>
           <ul>
-            <li><em>“Minimum length”</em>: <code class="highlighter-rouge">20</code></li>
+            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Read Modification Options”</em>
           <ul>
-            <li><em>“Quality cutoff”</em>: <code class="highlighter-rouge">20</code></li>
+            <li><em>“Quality cutoff”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
         <li>In <em>“Output Options”</em>
           <ul>
-            <li><em>“Report”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Report”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>
-      <p>Inspect the generated txt file (<code class="highlighter-rouge">Report</code>)</p>
+      <p>Inspect the generated txt file (<code class="language-plaintext highlighter-rouge">Report</code>)</p>
 
       <blockquote class="question">
         <h3 id="question-questions-8"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -1527,7 +1527,7 @@ If you see or know which adapter sequences were used during library preparation,
         <blockquote class="solution">
           <h3 id="solution-solution-8"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>44,164 bp (<code class="highlighter-rouge">Quality-trimmed:</code>) for the forward <span class="notranslate">reads</span> and 138,638 bp for the reverse <span class="notranslate">reads</span>.</li>
+            <li>44,164 bp (<code class="language-plaintext highlighter-rouge">Quality-trimmed:</code>) for the forward <span class="notranslate">reads</span> and 138,638 bp for the reverse <span class="notranslate">reads</span>.</li>
             <li>1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward <span class="notranslate">reads</span> were analyzed).</li>
           </ol>
         </blockquote>

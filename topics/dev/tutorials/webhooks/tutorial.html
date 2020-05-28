@@ -349,7 +349,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -365,16 +365,16 @@
 after you have executed a tool. As a more useful example we are going to ask <a href="http://phdcomics.com">phdcomics</a> for a random comic that we can
 display to entertain our users.</p>
 
-<p>At first let’s create a config file that defines the name and the type of your webhook. The <code class="highlighter-rouge">name</code> is <code class="highlighter-rouge">phdcomics</code> and with the type we define the entry-points
-at which we modify the <span class="notranslate">Galaxy</span> user-interface. In our case we want to display an image at the <code class="highlighter-rouge">tool</code> and <code class="highlighter-rouge"><span class="notranslate">workflow</span></code> entry-point.
-The key <code class="highlighter-rouge">activate</code> gives you control per-webhook to activate or deactivate it.</p>
+<p>At first let’s create a config file that defines the name and the type of your webhook. The <code class="language-plaintext highlighter-rouge">name</code> is <code class="language-plaintext highlighter-rouge">phdcomics</code> and with the type we define the entry-points
+at which we modify the <span class="notranslate">Galaxy</span> user-interface. In our case we want to display an image at the <code class="language-plaintext highlighter-rouge">tool</code> and <code class="language-plaintext highlighter-rouge"><span class="notranslate">workflow</span></code> entry-point.
+The key <code class="language-plaintext highlighter-rouge">activate</code> gives you control per-webhook to activate or deactivate it.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
     <li>
-      <p>Create a file named <code class="highlighter-rouge">config/phdcomics.yaml</code> with the following content:</p>
+      <p>Create a file named <code class="language-plaintext highlighter-rouge">config/phdcomics.yaml</code> with the following content:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   <span class="na">name</span><span class="pi">:</span> <span class="s">phdcomics</span>
    <span class="na">type</span><span class="pi">:</span>
@@ -387,10 +387,10 @@ The key <code class="highlighter-rouge">activate</code> gives you control per-we
 </blockquote>
 
 <p>The next step is to define HTML/JS part which will control the part of the <span class="notranslate">Galaxy</span> UI. We create a new PHDComicsAppView view extended from Backbone.
-Inside this view we define a simple <code class="highlighter-rouge">div</code>-container with a button and a placeholder for our image called <code class="highlighter-rouge">phdcomics-img</code>. You can add additional
+Inside this view we define a simple <code class="language-plaintext highlighter-rouge">div</code>-container with a button and a placeholder for our image called <code class="language-plaintext highlighter-rouge">phdcomics-img</code>. You can add additional
 functionality to your view, for example getting a new image on button click. The essential functionality however is stored getRandomComic.
 The big problem with phdcomics is that there is no nice API to retrive the comics, so we need to fallback to parse the HTML pages. We decided to do this
-in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the <code class="highlighter-rouge">url = <span class="notranslate">galaxy</span>Root + 'api/webhooks/phdcomics/get_data';</code>, which
+in Python to demonstrate webhooks abilitity to call self-defined python functions. Please note the <code class="language-plaintext highlighter-rouge">url = <span class="notranslate">galaxy</span>Root + 'api/webhooks/phdcomics/get_data';</code>, which
 calls an REST endpoint defined by use in the next step. The return value of this endpoint is retrived in JS and can be displayed or modified.</p>
 
 <blockquote class="notranslate hands_on">
@@ -398,7 +398,7 @@ calls an REST endpoint defined by use in the next step. The return value of this
 
   <ol>
     <li>
-      <p>Create a file named <code class="highlighter-rouge">static/script.js</code> with the following content:</p>
+      <p>Create a file named <code class="language-plaintext highlighter-rouge">static/script.js</code> with the following content:</p>
 
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 
@@ -462,8 +462,8 @@ calls an REST endpoint defined by use in the next step. The return value of this
 </blockquote>
 
 <p>The following hands-on will define an API endpoint that is called from the JS code of your webhook.
-Make sure you name the python function <code class="highlighter-rouge">main</code> and that all third-party requirements are installed in your <span class="notranslate">Galaxy</span> virtual environment.
-Please note that the <code class="highlighter-rouge">main()</code> can consume <code class="highlighter-rouge">params</code> from your client but also the <span class="notranslate">Galaxy</span> <code class="highlighter-rouge">trans</code> object, which will give you access to the
+Make sure you name the python function <code class="language-plaintext highlighter-rouge">main</code> and that all third-party requirements are installed in your <span class="notranslate">Galaxy</span> virtual environment.
+Please note that the <code class="language-plaintext highlighter-rouge">main()</code> can consume <code class="language-plaintext highlighter-rouge">params</code> from your client but also the <span class="notranslate">Galaxy</span> <code class="language-plaintext highlighter-rouge">trans</code> object, which will give you access to the
 entire user-object, including histories and datasets.</p>
 
 <blockquote class="notranslate hands_on">
@@ -471,7 +471,7 @@ entire user-object, including histories and datasets.</p>
 
   <ol>
     <li>
-      <p>Create a file named <code class="highlighter-rouge">helper/__init__.py</code> with the following content:</p>
+      <p>Create a file named <code class="language-plaintext highlighter-rouge">helper/__init__.py</code> with the following content:</p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">urllib</span>
 <span class="kn">import</span> <span class="nn">re</span>
@@ -533,7 +533,7 @@ entire user-object, including histories and datasets.</p>
 
   <ol>
     <li>
-      <p>Create a file named <code class="highlighter-rouge">static/styles.css</code> with the following content:</p>
+      <p>Create a file named <code class="language-plaintext highlighter-rouge">static/styles.css</code> with the following content:</p>
 
       <div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nf">#phdcomics</span> <span class="p">{</span>
         <span class="nl">border</span><span class="p">:</span> <span class="m">1px</span> <span class="nb">solid</span> <span class="m">#52697d</span><span class="p">;</span>
@@ -606,7 +606,7 @@ entire user-object, including histories and datasets.</p>
   </ol>
 </blockquote>
 
-<p>Please make sure you have activated webhooks in your <code class="highlighter-rouge">config/<span class="notranslate">galaxy</span>.yml</code> file by setting the <code class="highlighter-rouge">webhooks_dir</code> to the path in which your <code class="highlighter-rouge">phdcomics</code> folder is located.</p>
+<p>Please make sure you have activated webhooks in your <code class="language-plaintext highlighter-rouge">config/<span class="notranslate">galaxy</span>.yml</code> file by setting the <code class="language-plaintext highlighter-rouge">webhooks_dir</code> to the path in which your <code class="language-plaintext highlighter-rouge">phdcomics</code> folder is located.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-4"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -670,7 +670,7 @@ entire user-object, including histories and datasets.</p>
     title = "Galaxy Webhooks (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/dev/tutorials/webhooks/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

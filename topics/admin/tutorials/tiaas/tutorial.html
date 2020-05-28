@@ -833,7 +833,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
   <ol>
     <li>
-      <p>In your <code class="highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">requirements.yml</code> add the TIaaS ansible role:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.tiaas2</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.0.1</span>
@@ -841,11 +841,11 @@ resources, thus reducing queue times on the day of the training.</p>
 
       <p>And run the install step:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, add the following:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, add the following:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># TIaaS setup</span>
 <span class="na">tiaas_dir</span><span class="pi">:</span> <span class="s">/opt/tiaas</span>
@@ -857,7 +857,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some <span class="notranslate">Galaxy</span> tables, and we will carefully define only the ones we really need:</p>
+      <p>In the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, we also need to set the database permissions correctly for TIaaS. It needs to be able to access some <span class="notranslate">Galaxy</span> tables, and we will carefully define only the ones we really need:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gi">+++ group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span> postgresql_objects_users:
@@ -887,7 +887,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </span></code></pre></div>      </div>
     </li>
     <li>
-      <p>We need to add the <code class="highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role to the end of the playbook (<code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>)</p>
+      <p>We need to add the <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.tiaas2</code> role to the end of the playbook (<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>)</p>
     </li>
     <li>
       <p>Lastly we should add the routes for TIaaS to the NGINX template for <span class="notranslate">Galaxy</span>:</p>
@@ -912,7 +912,7 @@ resources, thus reducing queue times on the day of the training.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook (<code class="highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>)</p>
+      <p>Run the playbook (<code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>)</p>
     </li>
   </ol>
 
@@ -973,9 +973,9 @@ resources, thus reducing queue times on the day of the training.</p>
         <li>Go to https://&lt;server&gt;/tiaas/new/</li>
         <li>Here you will find the request form users will fill in to request TIaaS:
 <img src="../../images/tiaas/tiaas_request_form.png" alt="TIaaS request form" /></li>
-        <li>For <em>“Training Identifier”</em>, fill in <code class="highlighter-rouge">gryffindor</code> (or remember this value if you enter something different)
+        <li>For <em>“Training Identifier”</em>, fill in <code class="language-plaintext highlighter-rouge">gryffindor</code> (or remember this value if you enter something different)
           <ul>
-            <li>This is the <code class="highlighter-rouge">&lt;training-id&gt;</code> used in the URLs listed above used for:
+            <li>This is the <code class="language-plaintext highlighter-rouge">&lt;training-id&gt;</code> used in the URLs listed above used for:
               <ol>
                 <li>Workshop participants to join the tiaas group</li>
                 <li>Workshop instructors to monitor the progress of their participants.</li>
@@ -992,9 +992,9 @@ resources, thus reducing queue times on the day of the training.</p>
       <ul>
         <li>Next, the request will have to be approved by an admin</li>
         <li>Go to https://&lt;server&gt;/tiaas/admin</li>
-        <li><strong>Log in</strong> using the values you configured <code class="highlighter-rouge">tiaas_admin_user</code> and <code class="highlighter-rouge">tiaas_admin_pass</code> in your group variables file
+        <li><strong>Log in</strong> using the values you configured <code class="language-plaintext highlighter-rouge">tiaas_admin_user</code> and <code class="language-plaintext highlighter-rouge">tiaas_admin_pass</code> in your group variables file
           <ul>
-            <li>Default values were <code class="highlighter-rouge">admin:changeme</code></li>
+            <li>Default values were <code class="language-plaintext highlighter-rouge">admin:changeme</code></li>
           </ul>
         </li>
         <li>You should now see the admin panel:
@@ -1005,7 +1005,7 @@ resources, thus reducing queue times on the day of the training.</p>
           <ul>
             <li>Click on the training</li>
             <li>Scroll down to the bottom</li>
-            <li>Change <em>“Processed”</em> to <code class="highlighter-rouge">Approved</code> and <strong>Save</strong>
+            <li>Change <em>“Processed”</em> to <code class="language-plaintext highlighter-rouge">Approved</code> and <strong>Save</strong>
 <img src="../../images/tiaas/tiaas_request_approve.png" alt="Approve TIaaS" /></li>
           </ul>
         </li>
@@ -1068,7 +1068,7 @@ resources, thus reducing queue times on the day of the training.</p>
 
   <ol>
     <li>
-      <p>Create and open <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
+      <p>Create and open <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/dynamic_job_rules/hogwarts.py</code></p>
 
       <div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs</span> <span class="kn">import</span> <span class="n">JobDestination</span>
 <span class="kn">from</span> <span class="nn"><span class="notranslate">galaxy</span>.jobs.mapper</span> <span class="kn">import</span> <span class="n">Job<span class="notranslate">Mapping</span>Exception</span>
@@ -1091,7 +1091,7 @@ resources, thus reducing queue times on the day of the training.</p>
     <span class="k">return</span> <span class="n">app</span><span class="p">.</span><span class="n">job_config</span><span class="p">.</span><span class="n">get_destination</span><span class="p">(</span><span class="s">'slurm'</span><span class="p">)</span>
 </code></pre></div>      </div>
 
-      <p>This destination will check that the <code class="highlighter-rouge">user_email</code> is in a training group (role starting with <code class="highlighter-rouge">training-</code>).</p>
+      <p>This destination will check that the <code class="language-plaintext highlighter-rouge">user_email</code> is in a training group (role starting with <code class="language-plaintext highlighter-rouge">training-</code>).</p>
     </li>
     <li>
       <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
@@ -1108,7 +1108,7 @@ resources, thus reducing queue times on the day of the training.</p>
       </ul>
     </li>
     <li>
-      <p>We next need to configure this plugin in our job configuration (<code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>):</p>
+      <p>We next need to configure this plugin in our job configuration (<code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>):</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"sorting_hat"</span> <span class="na">runner=</span><span class="s">"dynamic"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"type"</span><span class="nt">&gt;</span>python<span class="nt">&lt;/param&gt;</span>
@@ -1116,10 +1116,10 @@ resources, thus reducing queue times on the day of the training.</p>
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
 
-      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="highlighter-rouge">job_conf.xml</code></p>
+      <p>This is a <strong>Python function dynamic destination</strong>. <span class="notranslate">Galaxy</span> will load all python files in the <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_dynamic_rule_dir }}</code>, and all functions defined in those will be available to be used in the <code class="language-plaintext highlighter-rouge">job_conf.xml</code></p>
     </li>
     <li>
-      <p>Again In <code class="highlighter-rouge">job_conf.xml</code>, update the top level <code class="highlighter-rouge">&lt;destinations&gt;</code> definition and point it to the sorting hat:</p>
+      <p>Again In <code class="language-plaintext highlighter-rouge">job_conf.xml</code>, update the top level <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> definition and point it to the sorting hat:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"sorting_hat"</span><span class="nt">&gt;</span>
 ...
@@ -1142,7 +1142,7 @@ resources, thus reducing queue times on the day of the training.</p>
       <p>Ensure your user is joined to a training</p>
     </li>
     <li>
-      <p>Run a job and observe the logs to see where it goes (<code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl -u <span class="notranslate">galaxy</span> -f</code>)</p>
+      <p>Run a job and observe the logs to see where it goes (<code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -u <span class="notranslate">galaxy</span> -f</code>)</p>
     </li>
   </ol>
 

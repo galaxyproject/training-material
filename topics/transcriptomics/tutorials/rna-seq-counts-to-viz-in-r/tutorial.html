@@ -410,7 +410,7 @@
             <strong><i class="fa fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
             <ul>
             
-            <li><p>Describe the role of data, aesthetics, geoms, and layers in <code class="highlighter-rouge">ggplot</code> functions.</p>
+            <li><p>Describe the role of data, aesthetics, geoms, and layers in <code class="language-plaintext highlighter-rouge">ggplot</code> functions.</p>
 </li>
             
             <li><p>Customize plot scales, titles, subtitles, themes, fonts, layout, and orientation.</p>
@@ -765,7 +765,7 @@
 
     <ol>
       <li>Upload the following URL to <span class="notranslate">Galaxy</span>:
-        <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular
 </code></pre></div>        </div>
       </li>
       <li>
@@ -785,7 +785,7 @@
     <h3 id="hands_on-hands-on-using-datasets-without-galaxy"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using datasets without <span class="notranslate">Galaxy</span></h3>
     <ol>
       <li>
-        <p>Read the tabular file into an object called <code class="highlighter-rouge">annotatedDEgenes</code>:</p>
+        <p>Read the tabular file into an object called <code class="language-plaintext highlighter-rouge">annotatedDEgenes</code>:</p>
 
         <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## read in a CSV file and save it as 'annotatedDEgenes'</span><span class="w">
 </span><span class="n">annotatedDEgenes</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">read.csv</span><span class="p">(</span><span class="s2">"https://zenodo.org/record/3477564/files/annotatedDEgenes.tabular"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="o">=</span><span class="s2">"\t"</span><span class="p">)</span><span class="w">
@@ -847,9 +847,9 @@
 
 <p>In <span class="notranslate">RNA</span>-seq data analysis and other omics experiments, visualization are an important step to check the data, their quality and represent the results found for publication.</p>
 
-<p><code class="highlighter-rouge">ggplot2</code> is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a more programmatic interface for specifying what variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes if the underlying data change or if we decide to change from a bar plot to a scatter plot. This helps in creating publication quality plots with minimal amounts of adjustments and tweaking.</p>
+<p><code class="language-plaintext highlighter-rouge">ggplot2</code> is a plotting package that makes it simple to create complex plots from data in a data frame. It provides a more programmatic interface for specifying what variables to plot, how they are displayed, and general visual properties. Therefore, we only need minimal changes if the underlying data change or if we decide to change from a bar plot to a scatter plot. This helps in creating publication quality plots with minimal amounts of adjustments and tweaking.</p>
 
-<p><code class="highlighter-rouge">ggplot2</code> graphics are built step by step by adding new elements, i.e. layers:</p>
+<p><code class="language-plaintext highlighter-rouge">ggplot2</code> graphics are built step by step by adding new elements, i.e. layers:</p>
 
 <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&lt;</span><span class="n">DATA</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="n"><span class="notranslate">mapping</span></span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="o">&lt;</span><span class="n"><span class="notranslate">MAPPING</span>S</span><span class="o">&gt;</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="o">&lt;</span><span class="n">GEOM_FUNCTION</span><span class="o">&gt;</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -866,7 +866,7 @@
 
   <ol>
     <li>
-      <p>Load <code class="highlighter-rouge">ggplot2</code></p>
+      <p>Load <code class="language-plaintext highlighter-rouge">ggplot2</code></p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">library</span><span class="p">(</span><span class="n">ggplot2</span><span class="p">)</span><span class="w">
 </span></code></pre></div>      </div>
@@ -888,7 +888,7 @@
       <p>A new window will open in the bottom-right panel</p>
     </li>
     <li>
-      <p>Define a <span class="notranslate">mapping</span> (using the <code class="highlighter-rouge">aes</code> aesthetic function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.</p>
+      <p>Define a <span class="notranslate">mapping</span> (using the <code class="language-plaintext highlighter-rouge">aes</code> aesthetic function), by selecting the variables to be plotted and specifying how to present them in the graph, e.g. as x/y positions or characteristics such as size, shape, color, etc.</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P.value</span><span class="p">))</span><span class="w">
 </span></code></pre></div>      </div>
@@ -898,17 +898,17 @@
       <blockquote class="comment">
         <h3 id="comment-data-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Data format</h3>
 
-        <p>Some <code class="highlighter-rouge">ggplot2</code> functions need data in the ‘long’ format:</p>
+        <p>Some <code class="language-plaintext highlighter-rouge">ggplot2</code> functions need data in the ‘long’ format:</p>
         <ul>
           <li>a column for every dimension</li>
           <li>a row for every observation</li>
         </ul>
 
-        <p>Well-structured data will save you lots of time when making figures with <code class="highlighter-rouge">ggplot2</code>.</p>
+        <p>Well-structured data will save you lots of time when making figures with <code class="language-plaintext highlighter-rouge">ggplot2</code>.</p>
       </blockquote>
     </li>
     <li>
-      <p>Add information about the graphical representations of the data in the plot (points, lines, bars) using <code class="highlighter-rouge">geoms</code> function added via the <code class="highlighter-rouge">+</code> operator</p>
+      <p>Add information about the graphical representations of the data in the plot (points, lines, bars) using <code class="language-plaintext highlighter-rouge">geoms</code> function added via the <code class="language-plaintext highlighter-rouge">+</code> operator</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">P.value</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
       </span><span class="n">geom_point</span><span class="p">()</span><span class="w">
@@ -917,11 +917,11 @@
       <blockquote class="comment">
         <h3 id="comment-graphical-representations-of-the-data-in-the-plot"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Graphical representations of the data in the plot</h3>
 
-        <p><code class="highlighter-rouge">ggplot2</code> offers many different <code class="highlighter-rouge">geoms</code>; we will use some common ones today, including:</p>
+        <p><code class="language-plaintext highlighter-rouge">ggplot2</code> offers many different <code class="language-plaintext highlighter-rouge">geoms</code>; we will use some common ones today, including:</p>
         <ul>
-          <li><code class="highlighter-rouge">geom_point()</code> for scatter plots, dot plots, etc.</li>
-          <li><code class="highlighter-rouge">geom_boxplot()</code> for, well, boxplots!</li>
-          <li><code class="highlighter-rouge">geom_line()</code> for trend lines, time series, etc.</li>
+          <li><code class="language-plaintext highlighter-rouge">geom_point()</code> for scatter plots, dot plots, etc.</li>
+          <li><code class="language-plaintext highlighter-rouge">geom_boxplot()</code> for, well, boxplots!</li>
+          <li><code class="language-plaintext highlighter-rouge">geom_line()</code> for trend lines, time series, etc.</li>
         </ul>
       </blockquote>
     </li>
@@ -934,7 +934,7 @@
 
 <p>This plot is called a volcano plot, a type of scatterplot that shows statistical significance (P value) versus magnitude of change (fold change). The most upregulated genes are towards the right, the most downregulated genes are towards the left, and the most statistically significant genes are towards the top. With this plot, we can then quickly identify genes with large fold changes that are also statistically significant, i.e. probably the most biologically significant genes.</p>
 
-<p>The current version of the plot is not really informative, mostly due to the high number of p-values close to zero. In order to resolve this, we will apply <code class="highlighter-rouge">-log10()</code> to the y-axis values.</p>
+<p>The current version of the plot is not really informative, mostly due to the high number of p-values close to zero. In order to resolve this, we will apply <code class="language-plaintext highlighter-rouge">-log10()</code> to the y-axis values.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-volcano-plot-with-log-values-on-y-axis"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Volcano plot with log values on y-axis</h3>
@@ -968,9 +968,9 @@
 </blockquote>
 
 <blockquote class="comment">
-  <h3 id="comment-the--sign"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> The <code class="highlighter-rouge">+</code> sign</h3>
+  <h3 id="comment-the--sign"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> The <code class="language-plaintext highlighter-rouge">+</code> sign</h3>
 
-  <p>The <code class="highlighter-rouge">+</code> in the <code class="highlighter-rouge">ggplot2</code> package is particularly useful because it allows you to modify existing <code class="highlighter-rouge">ggplot</code> objects. This means you can easily set up plot templates and conveniently explore different types of plots, so the above plot can also be generated with code like this:</p>
+  <p>The <code class="language-plaintext highlighter-rouge">+</code> in the <code class="language-plaintext highlighter-rouge">ggplot2</code> package is particularly useful because it allows you to modify existing <code class="language-plaintext highlighter-rouge">ggplot</code> objects. This means you can easily set up plot templates and conveniently explore different types of plots, so the above plot can also be generated with code like this:</p>
 
   <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Assign plot to a variable</span><span class="w">
 </span><span class="n">de_genes_plot</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">P.value</span><span class="p">)))</span><span class="w">
@@ -980,7 +980,7 @@
     </span><span class="n">geom_point</span><span class="p">()</span><span class="w">
 </span></code></pre></div>  </div>
 
-  <p>The <code class="highlighter-rouge">+</code> sign used to add new layers must be placed at the end of the line containing the previous layer. If, instead, the <code class="highlighter-rouge">+</code> sign is added at the beginning of the line containing the new layer, <code class="highlighter-rouge">ggplot2</code> will not add the new layer and will return an error message.</p>
+  <p>The <code class="language-plaintext highlighter-rouge">+</code> sign used to add new layers must be placed at the end of the line containing the previous layer. If, instead, the <code class="language-plaintext highlighter-rouge">+</code> sign is added at the beginning of the line containing the new layer, <code class="language-plaintext highlighter-rouge">ggplot2</code> will not add the new layer and will return an error message.</p>
 
   <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This is the correct syntax for adding layers</span><span class="w">
 </span><span class="o">&gt;</span><span class="w"> </span><span class="n">de_genes_plot</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -995,19 +995,19 @@
 <blockquote class="comment">
   <h3 id="comment-some-extra-comments"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Some extra comments</h3>
 
-  <p>Anything you put in the <code class="highlighter-rouge">ggplot()</code> function can be seen by any <code class="highlighter-rouge">geom</code> layers that you add (i.e., these are universal plot settings). This includes the <code class="highlighter-rouge">x-</code> and <code class="highlighter-rouge">y-axis</code> <span class="notranslate">mapping</span> you set up in <code class="highlighter-rouge">aes()</code>.</p>
+  <p>Anything you put in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function can be seen by any <code class="language-plaintext highlighter-rouge">geom</code> layers that you add (i.e., these are universal plot settings). This includes the <code class="language-plaintext highlighter-rouge">x-</code> and <code class="language-plaintext highlighter-rouge">y-axis</code> <span class="notranslate">mapping</span> you set up in <code class="language-plaintext highlighter-rouge">aes()</code>.</p>
 
-  <p>You can also specify <span class="notranslate">mapping</span>s for a given <code class="highlighter-rouge">geom</code> independently of the <span class="notranslate">mapping</span>s defined globally in the <code class="highlighter-rouge">ggplot()</code> function.</p>
+  <p>You can also specify <span class="notranslate">mapping</span>s for a given <code class="language-plaintext highlighter-rouge">geom</code> independently of the <span class="notranslate">mapping</span>s defined globally in the <code class="language-plaintext highlighter-rouge">ggplot()</code> function.</p>
 </blockquote>
 
-<p>Building plots with <code class="highlighter-rouge">ggplot2</code> is typically an iterative process. We start by defining the dataset we’ll use, lay out the axes, and choose a <code class="highlighter-rouge">geom</code>. We can now modify this plot to extract more information from it.</p>
+<p>Building plots with <code class="language-plaintext highlighter-rouge">ggplot2</code> is typically an iterative process. We start by defining the dataset we’ll use, lay out the axes, and choose a <code class="language-plaintext highlighter-rouge">geom</code>. We can now modify this plot to extract more information from it.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-format-plot"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Format plot</h3>
 
   <ol>
     <li>
-      <p>Add transparency (<code class="highlighter-rouge">alpha</code>) to avoid overplotting</p>
+      <p>Add transparency (<code class="language-plaintext highlighter-rouge">alpha</code>) to avoid overplotting</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">P.value</span><span class="p">)))</span><span class="w"> </span><span class="o">+</span><span class="w">
      </span><span class="n">geom_point</span><span class="p">(</span><span class="n">alpha</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="m">0.5</span><span class="p">)</span><span class="w">
@@ -1033,7 +1033,7 @@
 
       <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v3.png" alt="Volcano Plot version 3" /></p>
 
-      <p>We use a vector as an input to the argument color and <code class="highlighter-rouge">ggplot2</code> provides a different color corresponding to different values in the vector.</p>
+      <p>We use a vector as an input to the argument color and <code class="language-plaintext highlighter-rouge">ggplot2</code> provides a different color corresponding to different values in the vector.</p>
     </li>
     <li>
       <p>Add axis labels</p>
@@ -1052,14 +1052,14 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v5.png" alt="Volcano Plot version 5" /></p>
 
 <blockquote class="question">
-  <h3 id="question-standard-error-over-the--log10-of-the-adjusted-p-value"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Standard error over the <code class="highlighter-rouge">-log10</code> of the adjusted <code class="highlighter-rouge">P-value</code></h3>
+  <h3 id="question-standard-error-over-the--log10-of-the-adjusted-p-value"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code></h3>
 
-  <p>Create a scatter plot of the standard error over the <code class="highlighter-rouge">-log10</code> of the adjusted <code class="highlighter-rouge">P-value</code> with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.</p>
+  <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
   geom_point() +
      labs(x = "-log10(P.adj)",
           y = "StdErr")
@@ -1071,14 +1071,14 @@
 
 <h2 id="volcano-plot-by-chromosomes">Volcano plot by chromosomes</h2>
 
-<p><code class="highlighter-rouge">ggplot2</code> has a special technique called faceting that allows us to split one plot into multiple plots based on a factor included in the dataset. We will use it to split our volcano plot into five panels, one for each chromosome.</p>
+<p><code class="language-plaintext highlighter-rouge">ggplot2</code> has a special technique called faceting that allows us to split one plot into multiple plots based on a factor included in the dataset. We will use it to split our volcano plot into five panels, one for each chromosome.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-volcano-plot-by-chromosomes"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Volcano plot by chromosomes</h3>
 
   <ol>
     <li>
-      <p>Split volcano plot by chromosome using <code class="highlighter-rouge">facet_grid</code></p>
+      <p>Split volcano plot by chromosome using <code class="language-plaintext highlighter-rouge">facet_grid</code></p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">P.value</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Strand</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1090,7 +1090,7 @@
       <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v6.png" alt="Volcano Plot version 6" /></p>
     </li>
     <li>
-      <p>Split volcano plot by chromosome using <code class="highlighter-rouge">facet_grid</code> with plots stacked vertically</p>
+      <p>Split volcano plot by chromosome using <code class="language-plaintext highlighter-rouge">facet_grid</code> with plots stacked vertically</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">P.value</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Strand</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1101,10 +1101,10 @@
 
       <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v7.png" alt="Volcano Plot version 7" /></p>
 
-      <p>The <code class="highlighter-rouge">facet_grid</code> geometry allows to explicitly specify how we want your plots to be arranged via formula notation (<code class="highlighter-rouge">rows ~ columns</code>). The <code class="highlighter-rouge">.</code> can be used as a placeholder that indicates only one row or column).</p>
+      <p>The <code class="language-plaintext highlighter-rouge">facet_grid</code> geometry allows to explicitly specify how we want your plots to be arranged via formula notation (<code class="language-plaintext highlighter-rouge">rows ~ columns</code>). The <code class="language-plaintext highlighter-rouge">.</code> can be used as a placeholder that indicates only one row or column).</p>
     </li>
     <li>
-      <p>Add white background using <code class="highlighter-rouge">theme_bw()</code> to make the plot more readable when printed</p>
+      <p>Add white background using <code class="language-plaintext highlighter-rouge">theme_bw()</code> to make the plot more readable when printed</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">log2.FC.</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="n">log10</span><span class="p">(</span><span class="n">P.value</span><span class="p">),</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Strand</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
   </span><span class="n">geom_point</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1115,16 +1115,16 @@
 </span></code></pre></div>      </div>
 
       <blockquote class="details">
-        <h3 id="details-ggplot2-themes"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> <code class="highlighter-rouge">ggplot2</code> themes</h3>
+        <h3 id="details-ggplot2-themes"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> <code class="language-plaintext highlighter-rouge">ggplot2</code> themes</h3>
 
-        <p>In addition to <code class="highlighter-rouge">theme_bw()</code>, which changes the plot background to white, <code class="highlighter-rouge">ggplot2</code> comes with several other themes which can be useful to quickly change the look of your visualization.</p>
+        <p>In addition to <code class="language-plaintext highlighter-rouge">theme_bw()</code>, which changes the plot background to white, <code class="language-plaintext highlighter-rouge">ggplot2</code> comes with several other themes which can be useful to quickly change the look of your visualization.</p>
 
         <ul>
-          <li><code class="highlighter-rouge">theme_minimal()</code> and <code class="highlighter-rouge">theme_light() </code>are popular</li>
-          <li><code class="highlighter-rouge">theme_void()</code> can be useful as a starting point to create a new hand-crafted theme</li>
+          <li><code class="language-plaintext highlighter-rouge">theme_minimal()</code> and <code class="language-plaintext highlighter-rouge">theme_light() </code>are popular</li>
+          <li><code class="language-plaintext highlighter-rouge">theme_void()</code> can be useful as a starting point to create a new hand-crafted theme</li>
         </ul>
 
-        <p>The complete list of themes is available on the <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">ggplot2 website</a>. The <code class="highlighter-rouge">ggthemes</code> package provides a wide variety of options (including an Excel 2003 theme). The <a href="https://www.ggplot2-exts.org/"><code class="highlighter-rouge">ggplot2</code> extensions website</a> provides a list of packages that extend the capabilities of <code class="highlighter-rouge">ggplot2</code>, including additional themes.</p>
+        <p>The complete list of themes is available on the <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">ggplot2 website</a>. The <code class="language-plaintext highlighter-rouge">ggthemes</code> package provides a wide variety of options (including an Excel 2003 theme). The <a href="https://www.ggplot2-exts.org/"><code class="language-plaintext highlighter-rouge">ggplot2</code> extensions website</a> provides a list of packages that extend the capabilities of <code class="language-plaintext highlighter-rouge">ggplot2</code>, including additional themes.</p>
       </blockquote>
     </li>
     <li>
@@ -1146,14 +1146,14 @@
 <p><img src="../../images/rna-seq-counts-to-viz-in-r/volcanoPlot_v8.png" alt="Volcano Plot version 8" /></p>
 
 <blockquote class="question">
-  <h3 id="question-standard-error-over-the--log10-of-the-adjusted-p-value-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Standard error over the <code class="highlighter-rouge">-log10</code> of the adjusted <code class="highlighter-rouge">P-value</code></h3>
+  <h3 id="question-standard-error-over-the--log10-of-the-adjusted-p-value-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code></h3>
 
-  <p>Create a scatter plot of the standard error over the <code class="highlighter-rouge">-log10</code> of the adjusted <code class="highlighter-rouge">P-value</code> with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.</p>
+  <p>Create a scatter plot of the standard error over the <code class="language-plaintext highlighter-rouge">-log10</code> of the adjusted <code class="language-plaintext highlighter-rouge">P-value</code> with the chromosomes showing in different colors and one facet per strand. Make sure to give your plot relevant axis labels.</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = -log10(P.adj), y = StdErr, color = Chromosome)) +
  geom_point() +
  labs(x = "-log10(P.adj)",
       y = "StdErr") +
@@ -1174,7 +1174,7 @@
 
   <ol>
     <li>
-      <p>Create a barplot with <code class="highlighter-rouge">geom_bar</code> function of the number of DE genes for each feature with one plot per chromosome</p>
+      <p>Create a barplot with <code class="language-plaintext highlighter-rouge">geom_bar</code> function of the number of DE genes for each feature with one plot per chromosome</p>
 
       <div class="language-R highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">ggplot</span><span class="p">(</span><span class="n">data</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">annotatedDEgenes</span><span class="p">,</span><span class="w"> </span><span class="n">aes</span><span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Feature</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Chromosome</span><span class="p">))</span><span class="w"> </span><span class="o">+</span><span class="w">
 </span><span class="n">geom_bar</span><span class="p">()</span><span class="w"> </span><span class="o">+</span><span class="w">
@@ -1189,12 +1189,12 @@
 <blockquote class="question">
   <h3 id="question-remove-the-legend"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Remove the legend</h3>
 
-  <p>The chromosome is labeled on the individual plot facets so we don’t need the legend. Use the help file for <code class="highlighter-rouge">geom_bar</code> and any other online resources to remove the legend from the plot.</p>
+  <p>The chromosome is labeled on the individual plot facets so we don’t need the legend. Use the help file for <code class="language-plaintext highlighter-rouge">geom_bar</code> and any other online resources to remove the legend from the plot.</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ggplot(data = annotatedDEgenes, aes(x = Feature, fill = Chromosome)) +
  geom_bar(show.legend = F) +
  facet_grid(Chromosome ~ .)
 </code></pre></div>    </div>
@@ -1206,7 +1206,7 @@
 <blockquote class="question">
   <h3 id="question-create-a-r-script-with-plots"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Create a R script with plots</h3>
 
-  <p>Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">RStudio <code class="highlighter-rouge">ggplot2</code> cheat sheet</a> for inspiration).</p>
+  <p>Take another few minutes to either improve one of the plots generated in this exercise or create a beautiful graph of your own (using the <a href="https://github.com/rstudio/cheatsheets/raw/master/data-visualization-2.1.pdf">RStudio <code class="language-plaintext highlighter-rouge">ggplot2</code> cheat sheet</a> for inspiration).</p>
 
   <p>Here are some ideas:</p>
   <ol>
@@ -1239,7 +1239,7 @@
                         <h3><i class="fa fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li><p>When creating plots with <code class="highlighter-rouge">ggplot2</code>, think about the graphics in layers (aesthetics, geometry, statistics, scale transformation, and grouping).</p>
+                            <li><p>When creating plots with <code class="language-plaintext highlighter-rouge">ggplot2</code>, think about the graphics in layers (aesthetics, geometry, statistics, scale transformation, and grouping).</p>
 </li>
                             
                         </ul>

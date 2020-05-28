@@ -380,25 +380,25 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
   <ol>
     <li>Open a Terminal</li>
-    <li>(If not done yet) Clone the training material GitHub repository: <code class="highlighter-rouge">git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git</code></li>
-    <li>Navigate to the <code class="highlighter-rouge">training-material/</code> folder with <code class="highlighter-rouge">cd</code></li>
+    <li>(If not done yet) Clone the training material GitHub repository: <code class="language-plaintext highlighter-rouge">git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git</code></li>
+    <li>Navigate to the <code class="language-plaintext highlighter-rouge">training-material/</code> folder with <code class="language-plaintext highlighter-rouge">cd</code></li>
     <li>
       <p>Set up the conda environment</p>
 
       <p>It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.</p>
 
       <ol>
-        <li>Install conda (if not already installed): <code class="highlighter-rouge">make install-conda</code></li>
-        <li>Create the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_training_material</code> conda environment: <code class="highlighter-rouge">make create-env</code></li>
+        <li>Install conda (if not already installed): <code class="language-plaintext highlighter-rouge">make install-conda</code></li>
+        <li>Create the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_training_material</code> conda environment: <code class="language-plaintext highlighter-rouge">make create-env</code></li>
       </ol>
     </li>
-    <li>Install Jekyll and related modules into the conda environment: <code class="highlighter-rouge">make install</code></li>
+    <li>Install Jekyll and related modules into the conda environment: <code class="language-plaintext highlighter-rouge">make install</code></li>
   </ol>
 </blockquote>
 
 <blockquote class="details">
-  <h3 id="details-troubleshooting-libxml2-errors"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Troubleshooting <code class="highlighter-rouge">libxml2</code> errors</h3>
-  <p>If you encounter an error about libxml2 on Linux, please try to install <code class="highlighter-rouge">libxml2-dev</code> (executing <code class="highlighter-rouge">sudo apt install libxml2-dev</code>) if on Debian/Ubuntu or <code class="highlighter-rouge">libxml2-devel</code> (executing <code class="highlighter-rouge">sudo yum install libxml2-devel</code>) if on Fedora/RedHat/CentOS, and re-run <code class="highlighter-rouge">make install</code> .</p>
+  <h3 id="details-troubleshooting-libxml2-errors"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Troubleshooting <code class="language-plaintext highlighter-rouge">libxml2</code> errors</h3>
+  <p>If you encounter an error about libxml2 on Linux, please try to install <code class="language-plaintext highlighter-rouge">libxml2-dev</code> (executing <code class="language-plaintext highlighter-rouge">sudo apt install libxml2-dev</code>) if on Debian/Ubuntu or <code class="language-plaintext highlighter-rouge">libxml2-devel</code> (executing <code class="language-plaintext highlighter-rouge">sudo yum install libxml2-devel</code>) if on Fedora/RedHat/CentOS, and re-run <code class="language-plaintext highlighter-rouge">make install</code> .</p>
 </blockquote>
 
 <h1 id="checking-the-website-generation">Checking the website generation</h1>
@@ -409,11 +409,11 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
   <h3 id="hands_on-hands-on-checking-the-website-generation-locally"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Checking the website generation locally</h3>
 
   <ol>
-    <li>Run a local Jekyll server with <code class="highlighter-rouge">make serve</code></li>
+    <li>Run a local Jekyll server with <code class="language-plaintext highlighter-rouge">make serve</code></li>
     <li>Visualize at <a href="http://localhost:4000/training-material/">http://localhost:4000/training-material/ </a></li>
     <li>Edit one of the tutorials:
       <ul>
-        <li>For example, open <code class="highlighter-rouge">topics/introduction/tutorials/<span class="notranslate">galaxy</span>-intro-peaks2genes/tutorial.md</code> in a text editor of your choice.</li>
+        <li>For example, open <code class="language-plaintext highlighter-rouge">topics/introduction/tutorials/<span class="notranslate">galaxy</span>-intro-peaks2genes/tutorial.md</code> in a text editor of your choice.</li>
         <li>Make some changes to the <em>Introduction</em> paragraph, and save the file.</li>
         <li>Refresh the tutorial page in your browser until you can see the changes you made.
           <ul>
@@ -426,7 +426,7 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
 
 </blockquote>
 
-<p>With <code class="highlighter-rouge">make serve</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).</p>
+<p>With <code class="language-plaintext highlighter-rouge">make serve</code>, a local Jekyll server will run in background. It will check the changes and regenerate the website accordingly. You may need to reload the page to see the changes (and sometimes to wait 1-2 minutes).</p>
 
 <blockquote class="tip">
   <h3 id="tip-tips"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tips</h3>
@@ -436,16 +436,16 @@ We can use Jekyll to run a server to check if the tutorial is correctly added an
       <p>Running on a VM or remote machine?
 If you are not running this on your local machine, but e.g. on a VM, you may need to configure a webserver to serve the website.</p>
 
-      <p>Below is an example NGINX configuration (e.g. in <code class="highlighter-rouge">/etc/nginx/sites-enabled/default</code>)</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /training-material/ {
+      <p>Below is an example NGINX configuration (e.g. in <code class="language-plaintext highlighter-rouge">/etc/nginx/sites-enabled/default</code>)</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>location /training-material/ {
   root /home/ubuntu/training-material/_site/;
 }
 </code></pre></div>      </div>
-      <p>(Change the <code class="highlighter-rouge">root</code> path above to wherever you cloned the training material folder)</p>
+      <p>(Change the <code class="language-plaintext highlighter-rouge">root</code> path above to wherever you cloned the training material folder)</p>
     </li>
     <li>
       <p>Need to speed up the cloning step? You coud fetch only the latest commit of the master branch:</p>
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git --depth 1 --branch master
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/<span class="notranslate">galaxy</span>project/training-material.git --depth 1 --branch master
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -460,7 +460,7 @@ If you are not running this on your local machine, but e.g. on a VM, you may nee
 
   <ol>
     <li>Stop the server with <kbd>CTRL</kbd>-<kbd>C</kbd></li>
-    <li>Clean the repository: <code class="highlighter-rouge">make clean</code></li>
+    <li>Clean the repository: <code class="language-plaintext highlighter-rouge">make clean</code></li>
   </ol>
 
 </blockquote>

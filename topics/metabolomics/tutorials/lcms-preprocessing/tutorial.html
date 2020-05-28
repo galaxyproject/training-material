@@ -486,7 +486,7 @@ for complementary material about XCMS R package.</p>
 adducts and fragments using the R package CAMERA (<a class="citation" href="#CAMERA">Carsten Kuhl 2017</a>). This set of functions gives modularity, and thus is particularly well
 adapted to define workflows, one of the key points of <span class="notranslate">Galaxy</span>.</p>
 
-<p>The first <span class="notranslate">Galaxy</span> module, <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, is meant to read files with open format as <code class="highlighter-rouge">mzXML</code>, <code class="highlighter-rouge">mzMl</code>, <code class="highlighter-rouge">mzData</code> and <code class="highlighter-rouge">netCDF</code>,
+<p>The first <span class="notranslate">Galaxy</span> module, <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, is meant to read files with open format as <code class="language-plaintext highlighter-rouge">mzXML</code>, <code class="language-plaintext highlighter-rouge">mzMl</code>, <code class="language-plaintext highlighter-rouge">mzData</code> and <code class="language-plaintext highlighter-rouge">netCDF</code>,
 which are independent of the constructors’ formats.
 First of all, you need to upload your data (that should be in one of the cited open formats) into <span class="notranslate">Galaxy</span>.</p>
 
@@ -521,14 +521,14 @@ having to launch jobs manually for each sample. You can start using the dataset 
       </blockquote>
     </li>
     <li>
-      <p>Import the 12 <code class="highlighter-rouge">mzXML</code> files into a collection named <code class="highlighter-rouge">sacurine</code></p>
+      <p>Import the 12 <code class="language-plaintext highlighter-rouge">mzXML</code> files into a collection named <code class="language-plaintext highlighter-rouge">sacurine</code></p>
       <ul>
         <li>Option 1: from a shared data library (ask your instructor)</li>
         <li>
           <p>Option 2: from Zenodo using the URLs given below</p>
 
           <p><a href="https://doi.org/10.5281/zenodo.3244991"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.3244991.svg" alt="DOI" /></a></p>
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/HU_neg_048.mzML
 https://zenodo.org/record/3244991/files/HU_neg_090.mzML
 https://zenodo.org/record/3244991/files/HU_neg_123.mzML
 https://zenodo.org/record/3244991/files/HU_neg_157.mzML
@@ -561,7 +561,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
         <p>Paste the link into the text field</p>
       </li>
       <li>
-        <p>Change <strong>Type</strong> from “Auto-detect” to <code class="highlighter-rouge">mzml</code></p>
+        <p>Change <strong>Type</strong> from “Auto-detect” to <code class="language-plaintext highlighter-rouge">mzml</code></p>
       </li>
       <li>
         <p>Press <strong>Start</strong></p>
@@ -602,7 +602,7 @@ https://zenodo.org/record/3244991/files/QC1_014.mzML
   </blockquote>
 
   <ol>
-    <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="highlighter-rouge">mzML</code>
+    <li>Make sure your data is in a <strong>collection</strong>. Make sure it is named <code class="language-plaintext highlighter-rouge">mzML</code>
       <ul>
         <li>If you forgot to select the collection option during import, you can create the collection now:</li>
       </ul>
@@ -638,22 +638,22 @@ the dataset collection number 13.</p>
 
 </blockquote>
 
-<p>You should have in your history a green Dataset collection (<code class="highlighter-rouge">mzML</code>) with 12 datasets in mzml format.</p>
+<p>You should have in your history a green Dataset collection (<code class="language-plaintext highlighter-rouge">mzML</code>) with 12 datasets in mzml format.</p>
 
 <p>Their size can be checked by clicking on the information icon <i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-info</span> on the individual datasets</p>
 
 <h2 id="first-galaxy-module-msnbase-readmsdata">First <span class="notranslate">Galaxy</span> module: <em>MSnbase readMSData</em></h2>
 
-<p>This first step is only meant to read your <code class="highlighter-rouge">mzXML</code> file and generate an object usable by <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+<p>This first step is only meant to read your <code class="language-plaintext highlighter-rouge">mzXML</code> file and generate an object usable by <strong>XCMS</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
-<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="highlighter-rouge">RData</code> files for the first XCMS step.</p>
+<p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> takes as input your raw files and prepares <code class="language-plaintext highlighter-rouge">RData</code> files for the first XCMS step.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-msnbase-readmsdata"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MSnbase readMSData</h3>
 
   <p><strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="highlighter-rouge">mzML</code> dataset collection</li>
+    <li><em>“File(s) from your history containing your chromatograms”</em>: the <code class="language-plaintext highlighter-rouge">mzML</code> dataset collection</li>
   </ul>
 
   <blockquote class="tip">
@@ -740,7 +740,7 @@ Note that you can either:</p>
 
     <p><strong>xcms get a sampleMetadata file</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
-      <li><em>“RData file”</em>: the <code class="highlighter-rouge">mzML.raw.RData</code> collection output from <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <li><em>“RData file”</em>: the <code class="language-plaintext highlighter-rouge">mzML.raw.RData</code> collection output from <strong>MSnbase readMSData</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
         <blockquote>
 
           <h3 id="tip-tip-selecting-a-dataset-collection-as-input-1"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Selecting a dataset collection as input</h3>
@@ -768,7 +768,7 @@ the dataset number 27.</p>
 
   <p>An easy step for an easy sampleMetadata filling!</p>
 
-  <p>From this tool, you will obtain a <code class="highlighter-rouge">tabular</code> file (meaning a tab-separated text file) with a first column of identifiers and a
+  <p>From this tool, you will obtain a <code class="language-plaintext highlighter-rouge">tabular</code> file (meaning a tab-separated text file) with a first column of identifiers and a
 second column called <em>class</em> which is empty for the moment (only ‘.’ for each sample). You can now download this file by clicking on the <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon.</p>
 
 </blockquote>
@@ -782,7 +782,7 @@ use a sp<span class="notranslate">reads</span>heet software such as Microsoft Ex
 <blockquote class="warning">
   <h3 id="comment-important-save-your-table-in-the-correct-format"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Important: Save your table in the correct format</h3>
 
-  <p>The file has to be a <code class="highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="highlighter-rouge">.xlsx</code> nor <code class="highlighter-rouge">.odt</code> are supported.
+  <p>The file has to be a <code class="language-plaintext highlighter-rouge">.tsv</code> (tab-separated values). Neither <code class="language-plaintext highlighter-rouge">.xlsx</code> nor <code class="language-plaintext highlighter-rouge">.odt</code> are supported.
 If you use a sp<span class="notranslate">reads</span>heet software, be sure to change the default format to <strong>Text (Tab delimited)</strong> or equivalent.</p>
 </blockquote>
 
@@ -1085,7 +1085,7 @@ Next, we added columns with interesting or needed information, as following:</p>
     </tbody>
   </table>
 
-  <p>In particular, the <code class="highlighter-rouge">batch</code>, <code class="highlighter-rouge">sampleType</code> and <code class="highlighter-rouge">injectionOrder</code> columns are mandatory to correct the data from signal drift during later quality processing
+  <p>In particular, the <code class="language-plaintext highlighter-rouge">batch</code>, <code class="language-plaintext highlighter-rouge">sampleType</code> and <code class="language-plaintext highlighter-rouge">injectionOrder</code> columns are mandatory to correct the data from signal drift during later quality processing
 (see the <a href="../../tutorials/lcms/tutorial.html">Mass spectrometry: LC-MS analysis</a>
 <span class="notranslate">Galaxy</span> training material for more information).
 Once we completed the table filling, we saved the file, minding to stick with the original format. Then, our <em>sampleMetadata</em> was ready to
@@ -1099,8 +1099,8 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
   <h3 id="hands_on-hands-on-upload-the-samplemetada"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload the sampleMetada</h3>
 
   <ol>
-    <li>Import the <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> file from your computer, from Zenodo or from a shared data library
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
+    <li>Import the <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> file from your computer, from Zenodo or from a shared data library
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3244991/files/sampleMetadata_completed.tsv
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1152,7 +1152,7 @@ be uploaded into <span class="notranslate">Galaxy</span>.</p>
   <ol>
     <li>Check the data type of your imported files.
       <ul>
-        <li>The datatype should be <code class="highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now</li>
+        <li>The datatype should be <code class="language-plaintext highlighter-rouge">tabular</code>, if this is not the case, please change the datatype now</li>
       </ul>
 
       <blockquote class="tip">
@@ -1201,7 +1201,7 @@ the dataset number 28.</p>
 (<em>e.g.</em> the person in charge of the sample preparation, the temperature…). The statistical analysis will expose the relevant parameters.</li>
         <li>Sample, QC, blank… The class (the 2nd column) is useful for the preprocessing step with XCMS to detect the metabolite across the samples.
 So it can be important to separate very different types of samples, as biological ones and blank ones for example. If you don’t have any specific class
-that you want to consider in XCMS preprocessing, just fill everywhere with <code class="highlighter-rouge">sample</code> or a dot <code class="highlighter-rouge">.</code> for example.</li>
+that you want to consider in XCMS preprocessing, just fill everywhere with <code class="language-plaintext highlighter-rouge">sample</code> or a dot <code class="language-plaintext highlighter-rouge">.</code> for example.</li>
       </ol>
 
     </blockquote>
@@ -1228,9 +1228,9 @@ The tool automatically takes the second column as colour groups when a file is p
 
   <p><strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul class="tip">
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">mzML.raw.RData</code> (collection)</li>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzML.raw.RData</code> (collection)</li>
     <li>
-      <p><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code> you uploaded previously</p>
+      <p><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code> you uploaded previously</p>
 
       <blockquote>
 
@@ -1304,15 +1304,15 @@ pre-processing.</p>
 
   <p><strong>xcms findChromPeaks (xcmsSet)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">mzML.raw.RData</code> (collection)</li>
-    <li><em>“Extraction method for peaks detection”</em>: <code class="highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzML.raw.RData</code> (collection)</li>
+    <li><em>“Extraction method for peaks detection”</em>: <code class="language-plaintext highlighter-rouge">CentWave - chromatographic peak detection using the centWave method</code>
       <ul>
-        <li><em>“Max tolerated ppm m/z deviation in consecutive scans in ppm”</em>: <code class="highlighter-rouge">3</code></li>
-        <li><em>“Min,Max peak width in seconds”</em>: <code class="highlighter-rouge">5,20</code></li>
+        <li><em>“Max tolerated ppm m/z deviation in consecutive scans in ppm”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
+        <li><em>“Min,Max peak width in seconds”</em>: <code class="language-plaintext highlighter-rouge">5,20</code></li>
         <li>In <strong>Advanced Options</strong>:
           <ul>
-            <li><em>“Prefilter step for for the first analysis step (ROI detection)”</em>: <code class="highlighter-rouge">3,5000</code></li>
-            <li><em>“Noise filter”</em>: <code class="highlighter-rouge">1000</code></li>
+            <li><em>“Prefilter step for for the first analysis step (ROI detection)”</em>: <code class="language-plaintext highlighter-rouge">3,5000</code></li>
+            <li><em>“Noise filter”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
           </ul>
         </li>
       </ul>
@@ -1338,14 +1338,14 @@ the dataset collections number 31 and 32.</p>
 
 </blockquote>
 
-<p>At this step, you obtained a dataset collection containing one <code class="highlighter-rouge">RData</code> file per sample, with independent lists of ions. Although this
+<p>At this step, you obtained a dataset collection containing one <code class="language-plaintext highlighter-rouge">RData</code> file per sample, with independent lists of ions. Although this
 is already a nice result, what you may want now is to get all this files together to identify which are the shared ions between samples.
 To do so, XCMS provides a function that is called <em>groupChromPeaks</em> (or group). But before proceeding to this grouping step, first you
 need to group your individual RData files into a single one.</p>
 
 <h1 id="merge-the-different-samples-in-one-dataset">Merge the different samples in one dataset</h1>
 
-<p>A dedicated tool exists to merge the different <code class="highlighter-rouge">RData</code> files into a single one: <strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Although you can simply take as
+<p>A dedicated tool exists to merge the different <code class="language-plaintext highlighter-rouge">RData</code> files into a single one: <strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Although you can simply take as
 input your dataset collection alone, the tool also provides de possibility to take into account a sampleMetadata file. Indeed,
 depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to
 the grouping step <strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
@@ -1366,9 +1366,9 @@ with the second column defining theses classes.</p>
 
   <p><strong>xcms findChromPeaks Merger</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul class="tip">
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">mzML.raw.xset.RData</code> (collection)</li>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">mzML.raw.xset.RData</code> (collection)</li>
     <li>
-      <p><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata_completed.tsv</code></p>
+      <p><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata_completed.tsv</code></p>
 
       <blockquote>
 
@@ -1392,7 +1392,7 @@ the dataset number 57.</p>
 
 </blockquote>
 
-<p>The tool generates a single <code class="highlighter-rouge">RData</code> file containing information from all the samples in your dataset collection input.</p>
+<p>The tool generates a single <code class="language-plaintext highlighter-rouge">RData</code> file containing information from all the samples in your dataset collection input.</p>
 
 <h1 id="second-xcms-step-determining-shared-ions-across-samples">Second XCMS step: <em>determining shared ions across samples</em></h1>
 
@@ -1419,17 +1419,17 @@ than a given number of samples. Either a percentage of the total number of sampl
 
   <p><strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.RData</code></li>
-    <li><em>“Method to use for grouping”</em>: <code class="highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.RData</code></li>
+    <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
       <ul>
-        <li><em>“Bandwidth”</em>: <code class="highlighter-rouge">5.0</code></li>
-        <li><em>“Minimum fraction of samples”</em>: <code class="highlighter-rouge">0.9</code></li>
-        <li><em>“Width of overlapping m/z slices”</em>: <code class="highlighter-rouge">0.01</code></li>
+        <li><em>“Bandwidth”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+        <li><em>“Minimum fraction of samples”</em>: <code class="language-plaintext highlighter-rouge">0.9</code></li>
+        <li><em>“Width of overlapping m/z slices”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
       </ul>
     </li>
-    <li><em>“Get the Peak List”</em>: <code class="highlighter-rouge">Yes</code>
+    <li><em>“Get the Peak List”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
       <ul>
-        <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ul>
@@ -1473,8 +1473,8 @@ dot corresponds to a sample. The plot allows to assess the quality of alignment.
   <h3 id="question-questions"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
-    <li>Look at the <code class="highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
-    <li>Look at the <code class="highlighter-rouge">284.1198 - 284.1253</code> m/z slice. What do you think could have happened if you had used a smaller bandwidth value?</li>
+    <li>Look at the <code class="language-plaintext highlighter-rouge">283.1127 - 283.1163</code> m/z slice. How many peak groups are considered? Can you explain why some peaks are not affected to peak groups?</li>
+    <li>Look at the <code class="language-plaintext highlighter-rouge">284.1198 - 284.1253</code> m/z slice. What do you think could have happened if you had used a smaller bandwidth value?</li>
   </ol>
 
   <blockquote class="solution">
@@ -1494,7 +1494,7 @@ previous peak group, thus not assigned to any peak group due to the 0.9 minimum 
 </blockquote>
 
 <p>When performing a grouping step, you construct a peak table. Even if this step may not be the final extraction step, you can take this opportunity
-to check how your peak table looks like at this point of the XCMS extraction. For this, you need to set the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>
+to check how your peak table looks like at this point of the XCMS extraction. For this, you need to set the ‘Get the Peak List’ option to <code class="language-plaintext highlighter-rouge">Yes</code>
 as done in this tutorial hands-on. This option generates two additional tables:</p>
 <ul>
   <li>a data matrix (xset.merged.group.dataMatrix.tsv) with intensities for each ion and each sample;</li>
@@ -1503,9 +1503,9 @@ as done in this tutorial hands-on. This option generates two additional tables:<
 
 <p>The variable metadata file contains various information that can be of interest:</p>
 <ul>
-  <li>information about the m/z ratio of each ion (<code class="highlighter-rouge">mz</code>, <code class="highlighter-rouge">mzmin</code>, <code class="highlighter-rouge">mzmax</code> columns);</li>
-  <li>information about the retention time of each ion (<code class="highlighter-rouge">rt</code>, <code class="highlighter-rouge">rtmin</code>, <code class="highlighter-rouge">rtmax</code> columns);</li>
-  <li>the total number of peaks that were found for each ion (<code class="highlighter-rouge">npeaks</code> column);</li>
+  <li>information about the m/z ratio of each ion (<code class="language-plaintext highlighter-rouge">mz</code>, <code class="language-plaintext highlighter-rouge">mzmin</code>, <code class="language-plaintext highlighter-rouge">mzmax</code> columns);</li>
+  <li>information about the retention time of each ion (<code class="language-plaintext highlighter-rouge">rt</code>, <code class="language-plaintext highlighter-rouge">rtmin</code>, <code class="language-plaintext highlighter-rouge">rtmax</code> columns);</li>
+  <li>the total number of peaks that were found for each ion (<code class="language-plaintext highlighter-rouge">npeaks</code> column);</li>
   <li>the number of samples in which each ion has been found, for each class (one column per class).</li>
 </ul>
 
@@ -1517,7 +1517,7 @@ using the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="
   <h3 id="tip-optional-getting-an-overview-of-the-proportion-of-na-in-your-data"><i class="fa fa-lightbulb-o" aria-hidden="true"></i><span class="visually-hidden">tip</span> Optional: Getting an overview of the proportion of NA in your data</h3>
 
   <p>When you choose to export the peak list when using the <strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module, you can have a first level of
-information regarding the proportion of NA by looking at the columns of classes you specified (or the <code class="highlighter-rouge">.</code> column when no class where given) in
+information regarding the proportion of NA by looking at the columns of classes you specified (or the <code class="language-plaintext highlighter-rouge">.</code> column when no class where given) in
 the variable metadata file (‘variableMetadata’).
 However, since the number of ions can be of hundreds or thousands, it can be difficult to evaluate the overall proportion in the dataset.
 Thus, one way to go is to use the variableMetadata to check specific ions (ones you may have chosen a priori and/or ones you spotted due to
@@ -1528,14 +1528,14 @@ outstanding behaviour), and to use the <strong>Intensity Check</strong> <i class
 
     <p><strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
-      <li><em>“Data matrix file”</em>: <code class="highlighter-rouge">xset.merged.group.dataMatrix.tsv</code></li>
-      <li><em>“Sample metadata file”</em>: <code class="highlighter-rouge">sampleMetadata.tsv</code></li>
-      <li><em>“Variable metadata file”</em>: <code class="highlighter-rouge">xset.merged.group.variableMetadata.tsv</code></li>
-      <li><em>“Computation method”</em>: <code class="highlighter-rouge">For each class of samples</code>
+      <li><em>“Data matrix file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.group.dataMatrix.tsv</code></li>
+      <li><em>“Sample metadata file”</em>: <code class="language-plaintext highlighter-rouge">sampleMetadata.tsv</code></li>
+      <li><em>“Variable metadata file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.group.variableMetadata.tsv</code></li>
+      <li><em>“Computation method”</em>: <code class="language-plaintext highlighter-rouge">For each class of samples</code>
         <ul>
-          <li><em>“Class column”</em>: <code class="highlighter-rouge">c2: class</code></li>
-          <li><em>“Statistics”</em>: tick <code class="highlighter-rouge">Missing values</code></li>
-          <li><em>“Calculate the mean fold change”</em>: tick <code class="highlighter-rouge">No</code></li>
+          <li><em>“Class column”</em>: <code class="language-plaintext highlighter-rouge">c2: class</code></li>
+          <li><em>“Statistics”</em>: tick <code class="language-plaintext highlighter-rouge">Missing values</code></li>
+          <li><em>“Calculate the mean fold change”</em>: tick <code class="language-plaintext highlighter-rouge">No</code></li>
         </ul>
       </li>
     </ul>
@@ -1596,10 +1596,10 @@ peaks’ parameter to put them aside.</p>
 
   <p><strong>xcms adjustRtime (retcor)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.RData</code></li>
-    <li><em>“Method to use for retention time correction”</em>: <code class="highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.RData</code></li>
+    <li><em>“Method to use for retention time correction”</em>: <code class="language-plaintext highlighter-rouge">PeakGroups - retention time correction based on aligment of features (peak groups) present in most/all samples.</code>
       <ul>
-        <li><em>“Minimum required fraction of samples in which peaks for the peak group were identified”</em>: <code class="highlighter-rouge">0.8299</code></li>
+        <li><em>“Minimum required fraction of samples in which peaks for the peak group were identified”</em>: <code class="language-plaintext highlighter-rouge">0.8299</code></li>
       </ul>
     </li>
   </ul>
@@ -1637,7 +1637,7 @@ correction by comparing the chromatogram you obtained previously to a new one ge
 
     <p><strong>xcms plot chromatogram</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
     <ul>
-      <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
+      <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
     </ul>
 
     <blockquote class="comment">
@@ -1672,18 +1672,18 @@ to get an illustration of grouping before/after retention time correction.</p>
 
   <p><strong>xcms groupChromPeaks (group)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
-    <li><em>“Method to use for grouping”</em>: <code class="highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.adjustRtime.RData</code></li>
+    <li><em>“Method to use for grouping”</em>: <code class="language-plaintext highlighter-rouge">PeakDensity - peak grouping based on time dimension peak densities</code>
       <ul>
-        <li><em>“Bandwidth”</em>: <code class="highlighter-rouge">5.0</code></li>
-        <li><em>“Width of overlapping m/z slices”</em>: <code class="highlighter-rouge">0.01</code></li>
+        <li><em>“Bandwidth”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+        <li><em>“Width of overlapping m/z slices”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
       </ul>
     </li>
-    <li><em>“Get the Peak List”</em>: <code class="highlighter-rouge">Yes</code>
+    <li><em>“Get the Peak List”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
       <ul>
-        <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
-        <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="highlighter-rouge">No</code></li>
+        <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“Replace the remain NA by 0 in the dataMatrix”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
       </ul>
     </li>
   </ul>
@@ -1692,7 +1692,7 @@ to get an illustration of grouping before/after retention time correction.</p>
     <h3 id="comment-comment-5"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
     <p>When performing this second grouping, similarly to the first grouping you can take this opportunity to check how your peak table
-looks like at this point of the XCMS extraction, setting the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>. As previously explained, you can
+looks like at this point of the XCMS extraction, setting the ‘Get the Peak List’ option to <code class="language-plaintext highlighter-rouge">Yes</code>. As previously explained, you can
 look at your variableMetadata file as well as perform an NA diagnostic using the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module.</p>
   </blockquote>
 
@@ -1744,7 +1744,7 @@ step.</p>
 of NAs in your data. Indeed, this will allow you to check whether your results are consistent with your expectations; if not you
 may want to go back to some of your parameter choices in previous XCMS steps.
 To perform your NA diagnosis, you can use the variableMetadata file and dataMatrix file that you obtained with the last grouping step
-with the ‘Get the Peak List’ option to <code class="highlighter-rouge">Yes</code>. The variableMetadata file contains information about your ions: you will find information
+with the ‘Get the Peak List’ option to <code class="language-plaintext highlighter-rouge">Yes</code>. The variableMetadata file contains information about your ions: you will find information
 about the number of peaks detected for each ion. The dataMatrix files contains the intensities for each ion and each sample.
 As suggested previously (after the first groupping step), you can use the <strong>Intensity Check</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> module to get an overview
 of the proportion of NA in your dataset at this step.</p>
@@ -1771,11 +1771,11 @@ proceeding to the integration of missing peak areas.</p>
 
   <p><strong>xcms fillChromPeaks (fillPeaks)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code></li>
+    <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.RData</code></li>
     <li>In <em>“Peak List”</em>:
       <ul>
-        <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+        <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
       </ul>
     </li>
   </ul>
@@ -1839,17 +1839,17 @@ to run this function for a first attempt. Nevertheless, a few parameters have to
   <ol>
     <li><strong>CAMERA.annotate</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“RData file”</em>: <code class="highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.RData</code></li>
+        <li><em>“RData file”</em>: <code class="language-plaintext highlighter-rouge">xset.merged.groupChromPeaks.*.fillChromPeaks.RData</code></li>
         <li>In <em>“Annotate Isotopes [findIsotopes]”</em>:
           <ul>
-            <li><em>“Max. ion charge”</em>: <code class="highlighter-rouge">2</code></li>
+            <li><em>“Max. ion charge”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
           </ul>
         </li>
-        <li><em>“Mode”</em>: <code class="highlighter-rouge">Only groupFWHM and findIsotopes functions [quick]</code></li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Only groupFWHM and findIsotopes functions [quick]</code></li>
         <li>In <em>“Export options”</em>:
           <ul>
-            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="highlighter-rouge">2</code></li>
+            <li><em>“Convert retention time (seconds) into minutes”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Number of decimal places for retention time values reported in ions’ identifiers.”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
           </ul>
         </li>
       </ul>

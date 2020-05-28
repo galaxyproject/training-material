@@ -617,7 +617,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -680,7 +680,7 @@
 
 <p>Consider a set of sequencing <span class="notranslate">reads</span> derived from a diploid individual:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>REFERENCE: atcatgacggcaGtagcatat
 --------------------------------
 READ1:     atcatgacggcaGtagcatat
 READ2:         tgacggcaGtagcatat
@@ -820,7 +820,7 @@ READ5:     atcatgacggcaGtagc
   <li>HG004 - NA24143 - hu8E87A9 (mother)</li>
 </ul>
 
-<p>Yet for a quick tutorial these datasets are way too big, so we created a <a href="https://doi.org/10.5281/zenodo.60520">downsampled dataset</a>. This dataset was produced by <span class="notranslate">mapping</span> the trio <span class="notranslate">reads</span> against the <code class="highlighter-rouge">hg19</code> version of the human genome, merging the resulting bam files together (we use readgroups to label individual <span class="notranslate">reads</span> so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the <a href="https://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&amp;dopt=Graphics&amp;list_uids=5442"><em>POLRMT</em></a> gene.</p>
+<p>Yet for a quick tutorial these datasets are way too big, so we created a <a href="https://doi.org/10.5281/zenodo.60520">downsampled dataset</a>. This dataset was produced by <span class="notranslate">mapping</span> the trio <span class="notranslate">reads</span> against the <code class="language-plaintext highlighter-rouge">hg19</code> version of the human genome, merging the resulting bam files together (we use readgroups to label individual <span class="notranslate">reads</span> so they can be traced to each of the original individuals), and restricting alignments to a small portion of chromosome 19 containing the <a href="https://www.ncbi.nlm.nih.gov/gene?cmd=Retrieve&amp;dopt=Graphics&amp;list_uids=5442"><em>POLRMT</em></a> gene.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -842,11 +842,11 @@ READ5:     atcatgacggcaGtagc
         </ol>
       </blockquote>
     </li>
-    <li>Import the files named <code class="highlighter-rouge">GIAB-Ashkenazim-Trio.txt</code> (tabular format) and <code class="highlighter-rouge">GIAB-Ashkenazim-Trio-hg19</code> (BAM format) from <a href="https://doi.org/10.5281/zenodo.60520">Zenodo</a> or a data library:</li>
+    <li>Import the files named <code class="language-plaintext highlighter-rouge">GIAB-Ashkenazim-Trio.txt</code> (tabular format) and <code class="language-plaintext highlighter-rouge">GIAB-Ashkenazim-Trio-hg19</code> (BAM format) from <a href="https://doi.org/10.5281/zenodo.60520">Zenodo</a> or a data library:</li>
     <li>Specify the used genome for <span class="notranslate">mapping</span>:
       <ol>
         <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the BAM dataset to edit its attributes</li>
-        <li>Select <code class="highlighter-rouge">Human Feb 2009</code> on <strong>Database/Build</strong></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Human Feb 2009</code> on <strong>Database/Build</strong></li>
         <li>Click the <strong>Save</strong> button</li>
       </ol>
     </li>
@@ -861,12 +861,12 @@ READ5:     atcatgacggcaGtagc
   <ol>
     <li><strong>FreeBayes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Choose the source for the reference genome”</em>: <code class="highlighter-rouge">locally cached</code></li>
-        <li><em>“BAM dataset”</em>: the uploaded <code class="highlighter-rouge">GIAB-Ashkenazim-Trio-hg19</code> BAM dataset</li>
-        <li><em>“Using reference genome”</em>: <code class="highlighter-rouge">Human (Homo sapiens): hg19</code></li>
-        <li><em>“Choose parameter selection level”</em>: <code class="highlighter-rouge">5. Full list of options</code></li>
-        <li><em>“Algorithmic features”</em>: <code class="highlighter-rouge">Set algorithmic features</code></li>
-        <li><em>“Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output”</em>: <code class="highlighter-rouge">Yes</code> (This would help us evaluating the quality of genotype calls)</li>
+        <li><em>“Choose the source for the reference genome”</em>: <code class="language-plaintext highlighter-rouge">locally cached</code></li>
+        <li><em>“BAM dataset”</em>: the uploaded <code class="language-plaintext highlighter-rouge">GIAB-Ashkenazim-Trio-hg19</code> BAM dataset</li>
+        <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo sapiens): hg19</code></li>
+        <li><em>“Choose parameter selection level”</em>: <code class="language-plaintext highlighter-rouge">5. Full list of options</code></li>
+        <li><em>“Algorithmic features”</em>: <code class="language-plaintext highlighter-rouge">Set algorithmic features</code></li>
+        <li><em>“Calculate the marginal probability of genotypes and report as GQ in each sample field in the VCF output”</em>: <code class="language-plaintext highlighter-rouge">Yes</code> (This would help us evaluating the quality of genotype calls)</li>
       </ul>
     </li>
   </ol>
@@ -881,14 +881,14 @@ READ5:     atcatgacggcaGtagc
     <li><strong>VcfAllelicPrimitives</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><em>“Select VCF dataset”</em>: the VCF output of <strong>FreeBayes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Maintain site and allele-level annotations when decomposing”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Maintain genotype-level annotations when decomposing”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Maintain site and allele-level annotations when decomposing”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Maintain genotype-level annotations when decomposing”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
 </blockquote>
 
-<p><strong>VCFAllelicPrimitives</strong> generates a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (<code class="highlighter-rouge">TAGG|CAGA</code>) at position 618851 have been converted to two:</p>
+<p><strong>VCFAllelicPrimitives</strong> generates a VCF files containing 37 records (the input VCF only contained 35). This is because a multiple nucleotide polymorphism (<code class="language-plaintext highlighter-rouge">TAGG|CAGA</code>) at position 618851 have been converted to two:</p>
 
 <table>
   <thead>
@@ -899,8 +899,8 @@ READ5:     atcatgacggcaGtagc
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">chr19 618851 . TAGG CAGA 81.7546</code></td>
-      <td><code class="highlighter-rouge">chr19 618851 . T C 81.7546</code><br /><code class="highlighter-rouge">chr19 618854 . G A 81.7546</code></td>
+      <td><code class="language-plaintext highlighter-rouge">chr19 618851 . TAGG CAGA 81.7546</code></td>
+      <td><code class="language-plaintext highlighter-rouge">chr19 618851 . T C 81.7546</code><br /><code class="language-plaintext highlighter-rouge">chr19 618854 . G A 81.7546</code></td>
     </tr>
   </tbody>
 </table>
@@ -915,8 +915,8 @@ READ5:     atcatgacggcaGtagc
     <li><strong>SnpEff</strong> (Variant effect and annotation) <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><em>“Sequence changes (SNPs, MNPs, InDels)”</em>: the VCF output of <strong>VcfAllelicPrimitives</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Genome source”</em>: <code class="highlighter-rouge">Locally installed reference genome</code></li>
-        <li><em>“Genome”</em>: <code class="highlighter-rouge">Homo sapiens: hg19</code></li>
+        <li><em>“Genome source”</em>: <code class="language-plaintext highlighter-rouge">Locally installed reference genome</code></li>
+        <li><em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">Homo sapiens: hg19</code></li>
       </ul>
     </li>
   </ol>
@@ -995,7 +995,7 @@ READ5:     atcatgacggcaGtagc
     <li><strong>GEMINI load</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><em>“VCF file to be loaded in the GEMINI database”</em>: the VCF output of <strong>SnpEff</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Sample information file in PED+ format”</em>: the uploaded <code class="highlighter-rouge">GIAB-Ashkenazim-Trio.txt</code> tabular</li>
+        <li><em>“Sample information file in PED+ format”</em>: the uploaded <code class="language-plaintext highlighter-rouge">GIAB-Ashkenazim-Trio.txt</code> tabular</li>
         <li><em>“Choose a gemini annotation database”</em>: the most recent available release</li>
       </ul>
 
@@ -1028,7 +1028,7 @@ READ5:     atcatgacggcaGtagc
     <li><strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><em>“GEMINI database”</em>: the output of <strong>GEMINI load</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT count(*) FROM variants WHERE in_dbsnp == 0</code></li>
+        <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT count(*) FROM variants WHERE in_dbsnp == 0</code></li>
       </ul>
 
       <p>As we can see in the output dataset, there are 21 variants that are not annotated in dbSNP.</p>
@@ -1043,24 +1043,24 @@ READ5:     atcatgacggcaGtagc
     <li><strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
       <ul>
         <li><em>“GEMINI database”</em>: the output of <strong>GEMINI load</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'</code></li>
+        <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT rs_ids, aaf_esp_ea, impact, clinvar_disease_name, clinvar_sig FROM variants WHERE filter is NULL and gene = 'POLRMT'</code></li>
       </ul>
 
-      <p>Since the <code class="highlighter-rouge">variants</code> table has a large number of columns, in the query above we had to select only the most interesting columns. The output shows the variants found within the <em>POLRMT</em> gene.</p>
+      <p>Since the <code class="language-plaintext highlighter-rouge">variants</code> table has a large number of columns, in the query above we had to select only the most interesting columns. The output shows the variants found within the <em>POLRMT</em> gene.</p>
     </li>
   </ol>
 </blockquote>
 
 <h2 id="querying-genotypes">Querying genotypes</h2>
 
-<p>GEMINI provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (<code class="highlighter-rouge">subjectID</code>):</p>
+<p>GEMINI provides access to genotype, sequencing depth, genotype quality, and genotype likelihoods for each individual (<code class="language-plaintext highlighter-rouge">subjectID</code>):</p>
 
 <ul>
-  <li><code class="highlighter-rouge">gt_types.subjectID</code> - three types of genotype types: <code class="highlighter-rouge">HOM_REF</code>, <code class="highlighter-rouge">HET</code>, <code class="highlighter-rouge">HOM_ALT</code></li>
-  <li><code class="highlighter-rouge">gt_quals.subjectID</code> - genotype quality</li>
-  <li><code class="highlighter-rouge">gt_depths.subjectID</code> - total number of <span class="notranslate">reads</span> in this subject at position</li>
-  <li><code class="highlighter-rouge">gt_ref_depths.subjectID</code> -  number of reference allele <span class="notranslate">reads</span> in this subject at position</li>
-  <li><code class="highlighter-rouge">gt_alt_depths.subjectID</code> - number of alte<span class="notranslate">rna</span>te allele <span class="notranslate">reads</span> in this subject at position</li>
+  <li><code class="language-plaintext highlighter-rouge">gt_types.subjectID</code> - three types of genotype types: <code class="language-plaintext highlighter-rouge">HOM_REF</code>, <code class="language-plaintext highlighter-rouge">HET</code>, <code class="language-plaintext highlighter-rouge">HOM_ALT</code></li>
+  <li><code class="language-plaintext highlighter-rouge">gt_quals.subjectID</code> - genotype quality</li>
+  <li><code class="language-plaintext highlighter-rouge">gt_depths.subjectID</code> - total number of <span class="notranslate">reads</span> in this subject at position</li>
+  <li><code class="language-plaintext highlighter-rouge">gt_ref_depths.subjectID</code> -  number of reference allele <span class="notranslate">reads</span> in this subject at position</li>
+  <li><code class="language-plaintext highlighter-rouge">gt_alt_depths.subjectID</code> - number of alte<span class="notranslate">rna</span>te allele <span class="notranslate">reads</span> in this subject at position</li>
 </ul>
 
 <blockquote class="question">
@@ -1077,20 +1077,20 @@ READ5:     atcatgacggcaGtagc
     <ol>
       <li>To answer this question you can run the <strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool with:
         <ul>
-          <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT * from variants</code></li>
-          <li><em>“Restrictions to apply to genotype values”</em>: <code class="highlighter-rouge">gt_types.HG002_NA24385_son &lt;&gt; HOM_REF</code></li>
+          <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT * from variants</code></li>
+          <li><em>“Restrictions to apply to genotype values”</em>: <code class="language-plaintext highlighter-rouge">gt_types.HG002_NA24385_son &lt;&gt; HOM_REF</code></li>
         </ul>
       </li>
       <li>To answer this question you can run the <strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool with:
         <ul>
-          <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT * from variants</code></li>
-          <li><em>“Restrictions to apply to genotype values”</em>: <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code></li>
+          <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT * from variants</code></li>
+          <li><em>“Restrictions to apply to genotype values”</em>: <code class="language-plaintext highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code></li>
         </ul>
       </li>
       <li>To answer this question you can run the <strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool with:
         <ul>
-          <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants</code></li>
-          <li><em>“Restrictions to apply to genotype values”</em>: <code class="highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code></li>
+          <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT gts.HG002_NA24385_son, gts.HG003_NA24149_father from variants</code></li>
+          <li><em>“Restrictions to apply to genotype values”</em>: <code class="language-plaintext highlighter-rouge">(gt_types.HG002_NA24385_son &lt;&gt; HOM_REF AND gt_types.HG003_NA24149_father &lt;&gt; HOM_REF)</code></li>
         </ul>
       </li>
     </ol>
@@ -1101,7 +1101,7 @@ READ5:     atcatgacggcaGtagc
 
 <p>Wildcards simply writing SQL <span class="notranslate">expression</span>s when searching across multiple terms. The syntax for genotype filter wildcards is:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>(COLUMN).(SAMPLE_WILDCARD).(SAMPLE_WILDCARD_RULE).(RULE_ENFORCEMENT)
 </code></pre></div></div>
 
 <p>Let’s look at some examples.</p>
@@ -1116,11 +1116,11 @@ READ5:     atcatgacggcaGtagc
 
     <p>To answer this question you can run the <strong>GEMINI query</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool with:</p>
     <ul>
-      <li><em>“The query to be issued to the database”</em>: <code class="highlighter-rouge">SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants</code></li>
-      <li><em>“Restrictions to apply to genotype values”</em>: <code class="highlighter-rouge">(gt_types).(*).(==HET).(all)</code></li>
+      <li><em>“The query to be issued to the database”</em>: <code class="language-plaintext highlighter-rouge">SELECT chrom, start, end, ref, alt, gene, impact, (gts).(*) FROM variants</code></li>
+      <li><em>“Restrictions to apply to genotype values”</em>: <code class="language-plaintext highlighter-rouge">(gt_types).(*).(==HET).(all)</code></li>
     </ul>
 
-    <p>Here we use wildcards for the query (<code class="highlighter-rouge">(gts.(*))</code> means get genotypes for <strong>all</strong> samples) and genotype filtering (<code class="highlighter-rouge">(gt_types).(*).(==HET).(all)</code>, the <a href="https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that we want results for <strong>all</strong> affected individuals).</p>
+    <p>Here we use wildcards for the query (<code class="language-plaintext highlighter-rouge">(gts.(*))</code> means get genotypes for <strong>all</strong> samples) and genotype filtering (<code class="language-plaintext highlighter-rouge">(gt_types).(*).(==HET).(all)</code>, the <a href="https://gemini.readthedocs.org/en/latest/content/querying.html#the-all-operator">all operator</a> implies that we want results for <strong>all</strong> affected individuals).</p>
 
   </blockquote>
 </blockquote>
@@ -1247,7 +1247,7 @@ READ5:     atcatgacggcaGtagc
     title = "Calling variants in diploid systems (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/variant-analysis/tutorials/dip/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

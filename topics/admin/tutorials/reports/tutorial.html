@@ -609,7 +609,7 @@
 
   <ol>
     <li>
-      <p>First we add a basic configuration of the Reports app to the playbook templates. Create <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> folder, if it doesn’t exist, and create <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/reports.yml</code> with the following contents:</p>
+      <p>First we add a basic configuration of the Reports app to the playbook templates. Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/</code> folder, if it doesn’t exist, and create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/reports.yml</code> with the following contents:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
     <span class="na">socket</span><span class="pi">:</span> <span class="s">127.0.0.1:9001</span>
@@ -640,7 +640,7 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>In your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, tell the playbook to deploy the reports configuration file:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, tell the playbook to deploy the reports configuration file:</p>
 
       <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
 <span class="nn">...</span>
@@ -657,7 +657,7 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Then we need to tell NGINX it should serve our Reports app under <code class="highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuration, add a block for proxying the reports application. It should look like:</p>
+      <p>Then we need to tell NGINX it should serve our Reports app under <code class="language-plaintext highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuration, add a block for proxying the reports application. It should look like:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports/</span> <span class="p">{</span>
     <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
@@ -670,7 +670,7 @@
       <p>Run the playbook</p>
     </li>
     <li>
-      <p>The reports application should be available, under <code class="highlighter-rouge">&lt;server_url&gt;/reports/</code>.&gt;</p>
+      <p>The reports application should be available, under <code class="language-plaintext highlighter-rouge">&lt;server_url&gt;/reports/</code>.&gt;</p>
     </li>
   </ol>
 </blockquote>

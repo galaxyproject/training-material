@@ -703,13 +703,13 @@
 <blockquote class="comment">
   <h3 id="comment-note"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
 
-  <p>Job metrics are only visible to <span class="notranslate">Galaxy</span> <em>admin users</em>, unless you set <code class="highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like Use<span class="notranslate">Galaxy</span>.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
+  <p>Job metrics are only visible to <span class="notranslate">Galaxy</span> <em>admin users</em>, unless you set <code class="language-plaintext highlighter-rouge">expose_potentially_sensitive_job_metrics: true</code>, like Use<span class="notranslate">Galaxy</span>.eu does. EU’s intention with this is to empower users and make everything as transparent as possible.</p>
 
 </blockquote>
 
 <h2 id="setting-up-galaxy">Setting up <span class="notranslate">Galaxy</span></h2>
 
-<p>By default, <span class="notranslate">Galaxy</span> enables the <code class="highlighter-rouge">core</code> metrics:</p>
+<p>By default, <span class="notranslate">Galaxy</span> enables the <code class="language-plaintext highlighter-rouge">core</code> metrics:</p>
 
 <p><img src="../../images/job-metrics-basic.png" alt="screenshot of galaxy metrics" /></p>
 
@@ -720,7 +720,7 @@
 
   <ol>
     <li>
-      <p>Create the file <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml</code> with the following contents:</p>
+      <p>Create the file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_metrics_conf.xml</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0"?&gt;</span>
 <span class="nt">&lt;job_metrics&gt;</span>
@@ -737,15 +737,15 @@
       <p>You can see the <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/config/sample/job_metrics_conf.xml.sample">sample file</a> for further options regarding metrics.</p>
     </li>
     <li>
-      <p>Edit your playbook to install the package named <code class="highlighter-rouge">cgroup-tools</code> in a pre-task (with git/make/etc). This package is required to use <code class="highlighter-rouge">cgget</code> which is used in metrics collection.</p>
+      <p>Edit your playbook to install the package named <code class="language-plaintext highlighter-rouge">cgroup-tools</code> in a pre-task (with git/make/etc). This package is required to use <code class="language-plaintext highlighter-rouge">cgget</code> which is used in metrics collection.</p>
     </li>
     <li>
-      <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Edit the group variables file, <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
       <p>You’ll need to make two edits:</p>
       <ul>
-        <li>Setting the <code class="highlighter-rouge">job_metrics_config_file</code>, to tell <span class="notranslate">Galaxy</span> where to look for the job metrics configuration.</li>
-        <li>Adding the file to the list of <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to deploy it to the server:</li>
+        <li>Setting the <code class="language-plaintext highlighter-rouge">job_metrics_config_file</code>, to tell <span class="notranslate">Galaxy</span> where to look for the job metrics configuration.</li>
+        <li>Adding the file to the list of <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to deploy it to the server:</li>
       </ul>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>servers.yml.old
@@ -773,7 +773,7 @@
     <li>
       <p>Run the playbook</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
   </ol>

@@ -356,7 +356,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -372,18 +372,18 @@
 JavaScript-based visualization to <span class="notranslate">Galaxy</span>, and we’ll talk about what the benefits
 are. The plugin we’ve selected for this exercise is the <a href="https://biasmv.github.io/pv/"><em>PV-Javascript Protein
 Viewer</em></a>. It is an open source protein structure
-viewer for <code class="highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers
-available for the visualization of <code class="highlighter-rouge">PDB</code>-files such as e.g.
+viewer for <code class="language-plaintext highlighter-rouge">PDB</code>-files. There are many other popular protein structure viewers
+available for the visualization of <code class="language-plaintext highlighter-rouge">PDB</code>-files such as e.g.
 <a href="https://arose.github.io/ngl/">NGL</a> (also available in <span class="notranslate">Galaxy</span>) and
 <a href="https://chemapps.stolaf.edu/jmol/jsmol/jsmol.htm">JSMol</a>.</p>
 
 <blockquote class="details">
   <h3 id="details-background-what-is-the-pdb-protein-data-bank-file-format"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Background: What is the PDB (Protein Data Bank) file format?</h3>
 
-  <p>The <code class="highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank (<a href="https://www.rcsb.org">https://www.rcsb.org</a>). Proteins are usually labeled by a four-letter code.
-Here is an example of a <code class="highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
+  <p>The <code class="language-plaintext highlighter-rouge">PDB</code>-file format contains atomic coordinates of biomolecules derived through a range of experimental and computational methods. Most commonly the file contains a spatial crystallographic snapshot of a protein. There are 100s of thousands of protein structures publicly available at the Protein Data Bank (<a href="https://www.rcsb.org">https://www.rcsb.org</a>). Proteins are usually labeled by a four-letter code.
+Here is an example of a <code class="language-plaintext highlighter-rouge">PDB</code>-file for a hydrolase bond to its inhibitor (PDB: <a href="https://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a>):</p>
 
-  <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>HEADER    HYDROLASE/HYDROLASE INHIBITOR           08-NOV-91   1ACB
 TITLE     CRYSTAL AND MOLECULAR STRUCTURE OF THE BOVINE ALPHA-CHYMOTRYPSIN-EGLIN
 TITLE    2 C COMPLEX AT 2.0 ANGSTROMS RESOLUTION
 ...
@@ -471,7 +471,7 @@ directory structure for the new visualization plugin.</p>
   <h3 id="hands_on-hands-on-1"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li>Clone an instance of <em><span class="notranslate">Galaxy</span></em> in a path, further referred to as <code class="highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT</code>:
+    <li>Clone an instance of <em><span class="notranslate">Galaxy</span></em> in a path, further referred to as <code class="language-plaintext highlighter-rouge">$<span class="notranslate">GALAXY</span>_ROOT</code>:
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span>git clone https://github.com/<span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span>
 </code></pre></div>      </div>
     </li>
@@ -493,9 +493,9 @@ review the example visualization. Each visualization contains a set of <b>3</b>
 files:</p>
 
 <ul>
-  <li>Logo (<code class="highlighter-rouge">static/logo.png</code>) which will appear in <em>Chart</em>’s plugin selection interface.</li>
-  <li>Configuration (<code class="highlighter-rouge">config/example.xml</code>) describing input parameters and options.</li>
-  <li>Wrapper (<code class="highlighter-rouge">src/script.js</code>) which serves as a bridge between <em><span class="notranslate">Galaxy</span></em> and our 3rd-party plugin.</li>
+  <li>Logo (<code class="language-plaintext highlighter-rouge">static/logo.png</code>) which will appear in <em>Chart</em>’s plugin selection interface.</li>
+  <li>Configuration (<code class="language-plaintext highlighter-rouge">config/example.xml</code>) describing input parameters and options.</li>
+  <li>Wrapper (<code class="language-plaintext highlighter-rouge">src/script.js</code>) which serves as a bridge between <em><span class="notranslate">Galaxy</span></em> and our 3rd-party plugin.</li>
 </ul>
 
 <p>In the following sections we are going to discuss these files in more detail and
@@ -506,7 +506,7 @@ our visualization.</p>
 
 <p>Each visualization is represented by a logo in the <span class="notranslate">Galaxy</span> interface. This makes
 it easier for users to find and configure their visualization. The logo should
-be in the <code class="highlighter-rouge">png</code>-file format. It will appear with a width of 120 pixels.</p>
+be in the <code class="language-plaintext highlighter-rouge">png</code>-file format. It will appear with a width of 120 pixels.</p>
 
 <p>Here’s an example <a href="../../files/charts-plugins/pdb/logo.png">logo</a>:</p>
 
@@ -517,10 +517,10 @@ be in the <code class="highlighter-rouge">png</code>-file format. It will appear
 
   <ol>
     <li>
-      <p>Find an arbitrary image in <code class="highlighter-rouge">PNG</code>-file format. Possibly using <em>Google</em>’s <a href="https://images.google.com">image search</a>.</p>
+      <p>Find an arbitrary image in <code class="language-plaintext highlighter-rouge">PNG</code>-file format. Possibly using <em>Google</em>’s <a href="https://images.google.com">image search</a>.</p>
     </li>
     <li>
-      <p>Copy it to the <code class="highlighter-rouge">myviz/static</code> directory and name it <code class="highlighter-rouge">logo.png</code>.</p>
+      <p>Copy it to the <code class="language-plaintext highlighter-rouge">myviz/static</code> directory and name it <code class="language-plaintext highlighter-rouge">logo.png</code>.</p>
     </li>
   </ol>
 </blockquote>
@@ -528,7 +528,7 @@ be in the <code class="highlighter-rouge">png</code>-file format. It will appear
 <h3 id="configure-the-visualization">Configure the visualization</h3>
 
 <p>Each visualization has a configuration file. In this case it is named
-<code class="highlighter-rouge">example.xml</code>. This file has conceptual similarities with a Tool’s XML-file. It
+<code class="language-plaintext highlighter-rouge">example.xml</code>. This file has conceptual similarities with a Tool’s XML-file. It
 allows developers to specify a variety of attributes and input parameters for
 their visualization. Throughout this tutorial we are going to gradually augment
 this file but for now we keep it simple.</p>
@@ -538,10 +538,10 @@ this file but for now we keep it simple.</p>
 
   <ol>
     <li>
-      <p>Rename the file to <code class="highlighter-rouge">config/myviz.xml</code></p>
+      <p>Rename the file to <code class="language-plaintext highlighter-rouge">config/myviz.xml</code></p>
     </li>
     <li>
-      <p>Edit the file named <code class="highlighter-rouge">config/myviz.xml</code> and change the name and description.</p>
+      <p>Edit the file named <code class="language-plaintext highlighter-rouge">config/myviz.xml</code> and change the name and description.</p>
     </li>
     <li>Go to the <span class="notranslate">Galaxy</span> root directory to install dependencies, activate the virtual environment, and invoke the <span class="notranslate">Galaxy</span> client build.
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>
@@ -559,7 +559,7 @@ this file but for now we keep it simple.</p>
 </blockquote>
 
 <p>Your visualization should now be loaded.  You can verify that now by clicking
-on <code class="highlighter-rouge">Visualize &gt; Create Visualization</code> in the top menu bar of <span class="notranslate">Galaxy</span> and finding
+on <code class="language-plaintext highlighter-rouge">Visualize &gt; Create Visualization</code> in the top menu bar of <span class="notranslate">Galaxy</span> and finding
 your plugin with its new logo in the list there.</p>
 
 <h3 id="assign-a-new-datatype-to-your-visualization">Assign a new datatype to your visualization</h3>
@@ -569,30 +569,30 @@ your plugin with its new logo in the list there.</p>
 
   <ol>
     <li>
-      <p>Open the file named <code class="highlighter-rouge">config/myviz.xml</code> and find the <code class="highlighter-rouge">&lt;data_source&gt;</code> section.</p>
+      <p>Open the file named <code class="language-plaintext highlighter-rouge">config/myviz.xml</code> and find the <code class="language-plaintext highlighter-rouge">&lt;data_source&gt;</code> section.</p>
     </li>
     <li>
-      <p>Replace the existing two <code class="highlighter-rouge">&lt;test&gt;</code> sections with:</p>
+      <p>Replace the existing two <code class="language-plaintext highlighter-rouge">&lt;test&gt;</code> sections with:</p>
 
-      <p><code class="highlighter-rouge">&lt;test type="isinstance" test_attr="datatype" result_type="datatype"&gt;molecules.PDB&lt;/test&gt;</code></p>
+      <p><code class="language-plaintext highlighter-rouge">&lt;test type="isinstance" test_attr="datatype" result_type="datatype"&gt;molecules.PDB&lt;/test&gt;</code></p>
     </li>
     <li>
-      <p>Remove the <code class="highlighter-rouge">&lt;specs&gt;</code> and <code class="highlighter-rouge">&lt;groups&gt;</code> sections.</p>
+      <p>Remove the <code class="language-plaintext highlighter-rouge">&lt;specs&gt;</code> and <code class="language-plaintext highlighter-rouge">&lt;groups&gt;</code> sections.</p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>This links the plugins to the <code class="highlighter-rouge">PDB</code>-file format, which means that for any
+<p>This links the plugins to the <code class="language-plaintext highlighter-rouge">PDB</code>-file format, which means that for any
 history item of this file type the plugin will automatically be available.</p>
 
 <h3 id="modifying-the-wrapper">Modifying the wrapper</h3>
 
 <p>Now let’s take a look at the wrapper which connects our visualization with
 <span class="notranslate">Galaxy</span>. The wrapper consists of a module written in <em>JavaScript</em> and is
-available at <code class="highlighter-rouge">src/script.js</code>:</p>
+available at <code class="language-plaintext highlighter-rouge">src/script.js</code>:</p>
 
-<p>The wrapper receives an <code class="highlighter-rouge">options</code> dictionary with the following <b>four</b> components:</p>
+<p>The wrapper receives an <code class="language-plaintext highlighter-rouge">options</code> dictionary with the following <b>four</b> components:</p>
 <ul>
   <li><em>charts</em>: The model of the current visualization with attributes, settings etc.</li>
   <li><em>process</em>: A <a href="https://api.jquery.com/jquery.deferred/">jQuery.Deferred()</a> object to allow asynchronous data requests within the wrapper</li>
@@ -616,19 +616,19 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
       <p>Which of the wrapper option components represents this parameter?</p>
     </li>
     <li>
-      <p>Can you identify which <code class="highlighter-rouge">mode</code> settings are valid to render the structure with <a href="https://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs"><em>pv.Viewer.renderAs()</em></a>?</p>
+      <p>Can you identify which <code class="language-plaintext highlighter-rouge">mode</code> settings are valid to render the structure with <a href="https://pv.readthedocs.io/en/v1.8.1/viewer.html#pv.Viewer.renderAs"><em>pv.Viewer.renderAs()</em></a>?</p>
     </li>
   </ol>
 
 </blockquote>
 
-<p>Now that we have learned the basics on how the viewer plugin works, we can edit it and adjust  <code class="highlighter-rouge">script.js</code>.</p>
+<p>Now that we have learned the basics on how the viewer plugin works, we can edit it and adjust  <code class="language-plaintext highlighter-rouge">script.js</code>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-5"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li>Access your visualization’s <code class="highlighter-rouge">myviz/src</code> directory.
+    <li>Access your visualization’s <code class="language-plaintext highlighter-rouge">myviz/src</code> directory.
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nv">$ </span><span class="nb">cd</span> <span class="nv">$<span class="notranslate">GALAXY</span>_ROOT</span>/config/plugins/visualizations/myviz
 </code></pre></div>      </div>
     </li>
@@ -636,11 +636,11 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yarn add bio-pv
 </code></pre></div>      </div>
     </li>
-    <li>Modify your plugin’s entrypoint script <code class="highlighter-rouge">src/script.js</code> to import the new <code class="highlighter-rouge">bio-pv</code> library we just added, add this at the top of the file:
+    <li>Modify your plugin’s entrypoint script <code class="language-plaintext highlighter-rouge">src/script.js</code> to import the new <code class="language-plaintext highlighter-rouge">bio-pv</code> library we just added, add this at the top of the file:
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="o">*</span> <span class="k">as</span> <span class="nx">pv</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">bio-pv</span><span class="dl">'</span><span class="p">;</span>
 </code></pre></div>      </div>
     </li>
-    <li>Lastly, replace the <code class="highlighter-rouge">load</code> function contents in the same entrypoint file with the following code that will set up the protein viewer:
+    <li>Lastly, replace the <code class="language-plaintext highlighter-rouge">load</code> function contents in the same entrypoint file with the following code that will set up the protein viewer:
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code> <span class="kd">var</span> <span class="nx">viewer</span> <span class="o">=</span> <span class="nx">pv</span><span class="p">.</span><span class="nx">Viewer</span><span class="p">(</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span> <span class="nx">options</span><span class="p">.</span><span class="nx">targets</span><span class="p">[</span> <span class="mi">0</span> <span class="p">]</span> <span class="p">),</span> <span class="p">{</span>
      <span class="na">width</span>       <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
      <span class="na">height</span>      <span class="p">:</span> <span class="dl">'</span><span class="s1">auto</span><span class="dl">'</span><span class="p">,</span>
@@ -670,8 +670,8 @@ Let’s take a look at the <a href="https://pv.readthedocs.io/">documentation</a
 scripts and libraries into a single bundle that <span class="notranslate">Galaxy</span> can use.  <span class="notranslate">Galaxy</span>
 visualizations typically use <a href="https://parceljs.org"><em>Parcel</em></a> for this due to
 its simplicity, and this is how the example project is already configured.  If
-you’re interested in more details, take a look at the <code class="highlighter-rouge">package.json</code> file in
-your <code class="highlighter-rouge">myviz</code> plugin directory.</p>
+you’re interested in more details, take a look at the <code class="language-plaintext highlighter-rouge">package.json</code> file in
+your <code class="language-plaintext highlighter-rouge">myviz</code> plugin directory.</p>
 
 <p>After it has been built and staged the plugin will be accessible through
 <em><span class="notranslate">Galaxy</span></em>’s user interface. This process not require restarting your <em><span class="notranslate">Galaxy</span></em>
@@ -707,7 +707,7 @@ instance, just make sure to properly refresh your browser.</p>
 
 <h3 id="test-the-visualization">Test the visualization</h3>
 
-<p>In this section we will select a <code class="highlighter-rouge">PDB</code>-file from the Protein Data Bank and visualize it with our new plugin.</p>
+<p>In this section we will select a <code class="language-plaintext highlighter-rouge">PDB</code>-file from the Protein Data Bank and visualize it with our new plugin.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-7"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -717,7 +717,7 @@ instance, just make sure to properly refresh your browser.</p>
       <p>Visit <a href="http://www.rcsb.org">https://www.rcsb.org </a> and select a protein structure e.g. <a href="http://www.rcsb.org/pdb/explore/explore.do?structureId=1acb">1ACB</a></p>
     </li>
     <li>
-      <p>Copy the link to the raw <code class="highlighter-rouge">PDB</code>-file e.g.</p>
+      <p>Copy the link to the raw <code class="language-plaintext highlighter-rouge">PDB</code>-file e.g.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://files.rcsb.org/view/1ACB.pdb
 </code></pre></div>      </div>
@@ -761,7 +761,7 @@ latter is provided in <em>JavaScript</em> and not as XML.</p>
   <h3 id="hands_on-hands-on-8"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li>Add the following block into the <code class="highlighter-rouge">myviz.xml</code> file:
+    <li>Add the following block into the <code class="language-plaintext highlighter-rouge">myviz.xml</code> file:
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;settings&gt;</span>
    <span class="nt">&lt;input&gt;</span>
        <span class="nt">&lt;name&gt;</span>mode<span class="nt">&lt;/name&gt;</span>
@@ -788,7 +788,7 @@ latter is provided in <em>JavaScript</em> and not as XML.</p>
 <span class="nt">&lt;/settings&gt;</span>
 </code></pre></div>      </div>
     </li>
-    <li>Change the following line in <code class="highlighter-rouge">script.js</code>:
+    <li>Change the following line in <code class="language-plaintext highlighter-rouge">script.js</code>:
       <div class="language-js highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nx">viewer</span><span class="p">.</span><span class="nx">renderAs</span><span class="p">(</span> <span class="dl">'</span><span class="s1">protein</span><span class="dl">'</span><span class="p">,</span> <span class="nx">structure</span><span class="p">,</span> <span class="dl">'</span><span class="s1">cartoon</span><span class="dl">'</span><span class="p">,</span> <span class="p">{}</span> <span class="p">);</span>
 </code></pre></div>      </div>
       <p>to</p>
@@ -860,7 +860,7 @@ JavaScript visualizations to <span class="notranslate">Galaxy</span> utilizing t
     title = "Visualizations: JavaScript plugins (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/dev/tutorials/visualization-charts/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

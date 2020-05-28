@@ -730,10 +730,10 @@
 
 <p>Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.</p>
 
-<p>At the <span class="notranslate">Galaxy</span> end, it is configured within the <code class="highlighter-rouge">job_conf.xml</code> file and uses one of two special <span class="notranslate">Galaxy</span> job runners.</p>
+<p>At the <span class="notranslate">Galaxy</span> end, it is configured within the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file and uses one of two special <span class="notranslate">Galaxy</span> job runners.</p>
 <ul>
-  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> for the RESTful interface</li>
-  <li><code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner</code> for the message passing interface.</li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> for the RESTful interface</li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner</code> for the message passing interface.</li>
 </ul>
 
 <p>In this tutorial, we will:</p>
@@ -763,19 +763,19 @@
 <p>This tutorial assumes that you have:</p>
 
 <ul>
-  <li>A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is <code class="highlighter-rouge">/mnt</code></li>
+  <li>A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is <code class="language-plaintext highlighter-rouge">/mnt</code></li>
 </ul>
 
 <h1 id="installing-the-pulsar-role">Installing the Pulsar Role</h1>
 
-<p>We need to create a new ansible playbook to install Pulsar. We will be using a <em>role</em> developed by the <span class="notranslate">Galaxy</span> community - <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code></p>
+<p>We need to create a new ansible playbook to install Pulsar. We will be using a <em>role</em> developed by the <span class="notranslate">Galaxy</span> community - <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code></p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-install-the-galaxyprojectpulsar-ansible-role"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role</h3>
+  <h3 id="hands_on-hands-on-install-the-galaxyprojectpulsar-ansible-role"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Install the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role</h3>
 
   <ol>
     <li>
-      <p>From your ansible working directory, edit the <code class="highlighter-rouge">requirements.yml</code> file and add the following line:</p>
+      <p>From your ansible working directory, edit the <code class="language-plaintext highlighter-rouge">requirements.yml</code> file and add the following line:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.2</span>
@@ -793,11 +793,11 @@
 
 <h1 id="configuring-pulsar">Configuring Pulsar</h1>
 
-<p>From the <a href="https://github.com/galaxyproject/ansible-pulsar#role-variables"><code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role documentation</a>, we need to specify some variables.</p>
+<p>From the <a href="https://github.com/galaxyproject/ansible-pulsar#role-variables"><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> ansible role documentation</a>, we need to specify some variables.</p>
 
 <p>There is one required variable:</p>
 
-<p><code class="highlighter-rouge">pulsar_server_dir</code> - The location in which to install pulsar</p>
+<p><code class="language-plaintext highlighter-rouge">pulsar_server_dir</code> - The location in which to install pulsar</p>
 
 <p>Then there are a lot of optional variables. They are listed here for information. We will set some for this tutorial but not all.</p>
 
@@ -811,37 +811,37 @@
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_yaml_config</code></td>
-      <td>a YAML dictionary whose contents will be used to create Pulsar’s <code class="highlighter-rouge">app.yml</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_yaml_config</code></td>
+      <td>a YAML dictionary whose contents will be used to create Pulsar’s <code class="language-plaintext highlighter-rouge">app.yml</code></td>
       <td> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_venv_dir</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_venv_dir</code></td>
       <td>The role will create a virtualenv from which Pulsar will run</td>
-      <td><code class="highlighter-rouge">&lt;pulsar_server_dir&gt;/venv</code> if installing via pip, <code class="highlighter-rouge">&lt;pulsar_server_dir&gt;/.venv</code> if not.</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;pulsar_server_dir&gt;/venv</code> if installing via pip, <code class="language-plaintext highlighter-rouge">&lt;pulsar_server_dir&gt;/.venv</code> if not.</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_config_dir</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_config_dir</code></td>
       <td>Directory that will be used for Pulsar configuration files.</td>
-      <td><code class="highlighter-rouge">&lt;pulsar_server_dir&gt;/config</code> if installing via pip, <code class="highlighter-rouge">&lt;pulsar_server_dir&gt;</code> if not</td>
+      <td><code class="language-plaintext highlighter-rouge">&lt;pulsar_server_dir&gt;/config</code> if installing via pip, <code class="language-plaintext highlighter-rouge">&lt;pulsar_server_dir&gt;</code> if not</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_optional_dependencies</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_optional_dependencies</code></td>
       <td>List of optional dependency modules to install, depending on which features you are enabling.</td>
-      <td><code class="highlighter-rouge">None</code></td>
+      <td><code class="language-plaintext highlighter-rouge">None</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_install_environments</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_install_environments</code></td>
       <td>Installing dependencies may require setting certain environment variables to compile successfully.</td>
       <td> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_create_user</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_create_user</code></td>
       <td>Should a user be created for running pulsar?</td>
       <td> </td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_user</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_user</code></td>
       <td>Define the user details</td>
       <td> </td>
     </tr>
@@ -860,24 +860,24 @@
   </thead>
   <tbody>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_host</code></td>
-      <td>This is the interface pulsar will listen to, we will set it to <code class="highlighter-rouge">0.0.0.0</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_host</code></td>
+      <td>This is the interface pulsar will listen to, we will set it to <code class="language-plaintext highlighter-rouge">0.0.0.0</code></td>
       <td>localhost</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_port</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_port</code></td>
       <td> </td>
       <td>8913</td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_uwsgi_socket</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_uwsgi_socket</code></td>
       <td>If unset, uWSGI will be configured to listen for HTTP requests on pulsar_host port pulsar_port; If set, uWSGI will listen for uWSGI protocol connections on this socket.</td>
-      <td><code class="highlighter-rouge">unset</code></td>
+      <td><code class="language-plaintext highlighter-rouge">unset</code></td>
     </tr>
     <tr>
-      <td><code class="highlighter-rouge">pulsar_uwsgi_options</code></td>
+      <td><code class="language-plaintext highlighter-rouge">pulsar_uwsgi_options</code></td>
       <td>Hash (dictionary) of additional uWSGI options to place in the [uwsgi] section of server.ini</td>
-      <td><code class="highlighter-rouge">{}</code></td>
+      <td><code class="language-plaintext highlighter-rouge">{}</code></td>
     </tr>
   </tbody>
 </table>
@@ -885,7 +885,7 @@
 <p>Some of the other options we will be using are:</p>
 
 <ul>
-  <li>We are going to run in RESTful mode so we will need to specify a <code class="highlighter-rouge">private_token</code> variable so we can “secure” the connection. (For a given value of “secure”.)</li>
+  <li>We are going to run in RESTful mode so we will need to specify a <code class="language-plaintext highlighter-rouge">private_token</code> variable so we can “secure” the connection. (For a given value of “secure”.)</li>
   <li>We will be using the uwsgi web server to host the RESTful interface.</li>
   <li>We will set the tool dependencies to rely on <strong>conda</strong> for tool installs.</li>
 </ul>
@@ -895,7 +895,7 @@
 
   <ol>
     <li>
-      <p>Create a new file in <code class="highlighter-rouge">group_vars</code> called <code class="highlighter-rouge">pulsarservers.yml</code> and set some of the above variables as well as some others.</p>
+      <p>Create a new file in <code class="language-plaintext highlighter-rouge">group_vars</code> called <code class="language-plaintext highlighter-rouge">pulsarservers.yml</code> and set some of the above variables as well as some others.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pulsar_server_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/server</span>
 <span class="na">pulsar_venv_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/venv</span>
@@ -944,17 +944,17 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Replace <code class="highlighter-rouge">your_private_token_here</code> with a long randomish (or not) string.</p>
+      <p>Replace <code class="language-plaintext highlighter-rouge">your_private_token_here</code> with a long randomish (or not) string.</p>
     </li>
     <li>
-      <p>Add the following lines to your <code class="highlighter-rouge">hosts</code> file:</p>
+      <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">hosts</code> file:</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[pulsarservers]</span>
 <span class="err">&lt;ip_address</span> <span class="err">of</span> <span class="err">your</span> <span class="err">pulsar</span> <span class="err">server&gt;</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create the file <code class="highlighter-rouge">templates/nginx/pulsar-proxy.j2</code> with the following contents:</p>
+      <p>Create the file <code class="language-plaintext highlighter-rouge">templates/nginx/pulsar-proxy.j2</code> with the following contents:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
     <span class="c1"># Listen on 80, you should secure your server better :)</span>
@@ -983,7 +983,7 @@
 
   <ol>
     <li>
-      <p>Create a <code class="highlighter-rouge">pulsar-playbook.yml</code> file with the following contents:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">pulsar-playbook.yml</code> file with the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s">pulsarservers</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
@@ -1023,20 +1023,20 @@
 
 </blockquote>
 
-<p>We also need to create the dependency resolver file so pulsar knows how to find and install dependencies for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs similar to how <span class="notranslate">Galaxy</span> works. We need to create the file and put it where the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> role can find it.</p>
+<p>We also need to create the dependency resolver file so pulsar knows how to find and install dependencies for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs similar to how <span class="notranslate">Galaxy</span> works. We need to create the file and put it where the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.pulsar</code> role can find it.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-dependency-resolver-configuration"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating dependency resolver configuration</h3>
 
   <ol>
     <li>
-      <p>Create a <code class="highlighter-rouge">templates</code> directory in your working directory.</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">templates</code> directory in your working directory.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">mkdir </span>templates
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Create a <code class="highlighter-rouge">dependency_resolvers_conf.xml.j2</code> file inside the <code class="highlighter-rouge">templates</code> directory with the following contents:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">dependency_resolvers_conf.xml.j2</code> file inside the <code class="language-plaintext highlighter-rouge">templates</code> directory with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency_resolvers&gt;</span>
     <span class="nt">&lt;conda</span> <span class="na">auto_install=</span><span class="s">"True"</span> <span class="na">auto_init=</span><span class="s">"True"</span><span class="nt">/&gt;</span>
@@ -1059,7 +1059,7 @@
 
   <ol>
     <li>
-      <p>Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the <code class="highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="highlighter-rouge">--private-key key.pem</code> option.</p>
+      <p>Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the <code class="language-plaintext highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="language-plaintext highlighter-rouge">--private-key key.pem</code> option.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar-playbook.yml
 </code></pre></div>      </div>
@@ -1067,10 +1067,10 @@
       <p>After the script has run, pulsar will be installed on the remote machines!</p>
     </li>
     <li>
-      <p>Log in to the machines and have a look in the <code class="highlighter-rouge">/mnt/pulsar</code> directory. You will see the venv and config directories. All the config files created by Ansible can be perused.</p>
+      <p>Log in to the machines and have a look in the <code class="language-plaintext highlighter-rouge">/mnt/pulsar</code> directory. You will see the venv and config directories. All the config files created by Ansible can be perused.</p>
     </li>
     <li>
-      <p>Run <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u pulsar</code></p>
+      <p>Run <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u pulsar</code></p>
 
       <p>A log will now start scrolling, showing the startup of pulsar. You’ll notice that it will be initializing and installing conda. Once this is completed, Pulsar will be listening on the assigned port.</p>
     </li>
@@ -1082,14 +1082,14 @@
 
 <p>Now we have a Pulsar server up and running, we need to tell our <span class="notranslate">Galaxy</span> about it.</p>
 
-<p><span class="notranslate">Galaxy</span> talks to the Pulsar server via it’s <code class="highlighter-rouge">job_conf.xml</code> file. We need to let <span class="notranslate">Galaxy</span> know about Pulsar there and make sure <span class="notranslate">Galaxy</span> has loaded the requisite job runner, and has a destination set up.</p>
+<p><span class="notranslate">Galaxy</span> talks to the Pulsar server via it’s <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file. We need to let <span class="notranslate">Galaxy</span> know about Pulsar there and make sure <span class="notranslate">Galaxy</span> has loaded the requisite job runner, and has a destination set up.</p>
 
 <p>There are three things we need to do here:</p>
 
 <ul>
-  <li>We will need to create a job runner which uses the  <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> code.</li>
+  <li>We will need to create a job runner which uses the  <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner</code> code.</li>
   <li>Create job destination which references the above job runner.</li>
-  <li>Tell <span class="notranslate">Galaxy</span> which tools to send to the job destination: We will use <code class="highlighter-rouge">bwa-mem</code></li>
+  <li>Tell <span class="notranslate">Galaxy</span> which tools to send to the job destination: We will use <code class="language-plaintext highlighter-rouge">bwa-mem</code></li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -1097,14 +1097,14 @@
 
   <ol>
     <li>
-      <p>In your <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> file add the following job runner to the <code class="highlighter-rouge">&lt;plugins&gt;</code> section:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner"</span> <span class="nt">/&gt;</span>
 </code></pre></div>      </div>
 
       <p>Then add the Pulsar destination. We will need the ip address of your pulsar server and the private_token string you used when you created it.</p>
 
-      <p>Add the following to the <code class="highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="highlighter-rouge">job_conf.xml</code> file:</p>
+      <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"pulsar"</span> <span class="na">runner=</span><span class="s">"pulsar_runner"</span> <span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"url"</span><span class="nt">&gt;</span>http://your_ip_address_here:80/<span class="nt">&lt;/param&gt;</span>
@@ -1113,10 +1113,10 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Finally we need to tell <span class="notranslate">Galaxy</span> which tools to send to Pulsar. We will tell it to send bwa-mem jobs to it. We use the <code class="highlighter-rouge">&lt;tools&gt;</code> section of the <code class="highlighter-rouge">job_conf.xml</code> file.
-We need to know the full id of the tool in question, we can get this out of the <code class="highlighter-rouge">integrated_tool_panel.xml</code> file in the <code class="highlighter-rouge">mutable-config</code> directory. Then we tell <span class="notranslate">Galaxy</span> which destination to send it to (pulsar).</p>
+      <p>Finally we need to tell <span class="notranslate">Galaxy</span> which tools to send to Pulsar. We will tell it to send bwa-mem jobs to it. We use the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section of the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file.
+We need to know the full id of the tool in question, we can get this out of the <code class="language-plaintext highlighter-rouge">integrated_tool_panel.xml</code> file in the <code class="language-plaintext highlighter-rouge">mutable-config</code> directory. Then we tell <span class="notranslate">Galaxy</span> which destination to send it to (pulsar).</p>
 
-      <p>Add the following to the end of the <code class="highlighter-rouge">job_conf.xml</code> file (inside the <code class="highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
+      <p>Add the following to the end of the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file (inside the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tools&gt;</span>
     <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"bwa"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
@@ -1144,7 +1144,7 @@ We need to know the full id of the tool in question, we can get this out of the 
     <li>
       <p>Upload the following files from zenodo.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
 https://zenodo.org/record/582600/files/mutant_R2.fastq
 https://zenodo.org/record/582600/files/wildtype.fna
 </code></pre></div>      </div>
@@ -1152,21 +1152,21 @@ https://zenodo.org/record/582600/files/wildtype.fna
     <li>
       <p><strong>Map with BWA-MEM</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
       <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index”</em>: <code class="highlighter-rouge">Use a genome from history and build index</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference genome”</em>: <code class="highlighter-rouge">wildtype.fna</code></li>
-        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Paired end</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+        <li><em>“Will you select a reference genome from your history or use a built-in index”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference genome”</em>: <code class="language-plaintext highlighter-rouge">wildtype.fna</code></li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired end</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
       </ul>
 
       <p>As soon as you press <em>execute</em> <span class="notranslate">Galaxy</span> will send the job to the pulsar server. You can watch the log in <span class="notranslate">Galaxy</span> using:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -fu <span class="notranslate">galaxy</span>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -fu <span class="notranslate">galaxy</span>
 </code></pre></div>      </div>
 
       <p>You can watch the log in Pulsar by ssh’ing to it and tailing the log file with:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -fu pulsar
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -fu pulsar
 </code></pre></div>      </div>
     </li>
   </ol>

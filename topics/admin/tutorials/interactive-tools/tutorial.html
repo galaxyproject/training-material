@@ -610,11 +610,11 @@
 
   <p><br /></p>
 
-  <p>If you are using Let’s Encrypt, <a href="https://certbot.eff.org/docs/using.html#dns-plugins">a list of available DNS plugins for Certbot</a> can be found in the Certbot documentation. If you are not using Let’s Encrypt, please consult your certificate vendor’s documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the <a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">subject alte<span class="notranslate">rna</span>tive name</a>s <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code> and <code class="highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code> (where <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code> is the hostname of your <span class="notranslate">Galaxy</span> server).</p>
+  <p>If you are using Let’s Encrypt, <a href="https://certbot.eff.org/docs/using.html#dns-plugins">a list of available DNS plugins for Certbot</a> can be found in the Certbot documentation. If you are not using Let’s Encrypt, please consult your certificate vendor’s documentation for information on how to obtain a wildcard certificate. You will need a certificate with (at least) the <a href="https://en.wikipedia.org/wiki/Subject_Alternative_Name">subject alte<span class="notranslate">rna</span>tive name</a>s <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code> and <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code> (where <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code> is the hostname of your <span class="notranslate">Galaxy</span> server).</p>
 
   <p><br /></p>
 
-  <p>You will also need a wildcard DNS <code class="highlighter-rouge">CNAME</code> record for <code class="highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>. You can verify that your <span class="notranslate">Galaxy</span> server has such a record using the <code class="highlighter-rouge">host</code> or <code class="highlighter-rouge">dig</code> command line tools like so:</p>
+  <p>You will also need a wildcard DNS <code class="language-plaintext highlighter-rouge">CNAME</code> record for <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>. You can verify that your <span class="notranslate">Galaxy</span> server has such a record using the <code class="language-plaintext highlighter-rouge">host</code> or <code class="language-plaintext highlighter-rouge">dig</code> command line tools like so:</p>
 
   <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">   $</span><span class="w"> </span>host <span class="nt">-t</span> cname foo.interactivetoolentrypoint.interactivetool.live.use<span class="notranslate">galaxy</span>.eu
 <span class="go">   foo.interactivetoolentrypoint.interactivetool.live.use<span class="notranslate">galaxy</span>.eu is an alias for use<span class="notranslate">galaxy</span>.eu.
@@ -655,19 +655,19 @@
 
 <blockquote class="comment">
   <h3 id="comment-ansible-best-practices"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Best Practices</h3>
-  <p>If you’ve set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, you will have created a <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group in your inventory file, <code class="highlighter-rouge">hosts</code>, and placed your variables in <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>. Although for the purposes of this tutorial, the <span class="notranslate">Galaxy</span> server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.</p>
+  <p>If you’ve set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>. Although for the purposes of this tutorial, the <span class="notranslate">Galaxy</span> server and cluster node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group for simplicity, but in your own deployment you should consider creating an additional group for cluster nodes.</p>
 </blockquote>
 
 <h2 id="installing-ansible-roles">Installing Ansible Roles</h2>
 
-<p>We will use several Ansible roles for this tutorial. In order to avoid repetetively adding them to <code class="highlighter-rouge">requirements.yml</code> and installing them, we can simply install them all before getting started. Each role will be discussed in further detail later in the tutorial.</p>
+<p>We will use several Ansible roles for this tutorial. In order to avoid repetetively adding them to <code class="language-plaintext highlighter-rouge">requirements.yml</code> and installing them, we can simply install them all before getting started. Each role will be discussed in further detail later in the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-new-ansible-roles"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing New Ansible Roles</h3>
 
   <ol>
     <li>
-      <p>In your working directory, add the docker role to your <code class="highlighter-rouge">requirements.yml</code>:</p>
+      <p>In your working directory, add the docker role to your <code class="language-plaintext highlighter-rouge">requirements.yml</code>:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">geerlingguy.docker</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">2.6.0</span>
@@ -676,9 +676,9 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Install the requirements with <code class="highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code>:</p>
+      <p>Install the requirements with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code>:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> role install -p roles -r requirements.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> role install -p roles -r requirements.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -696,7 +696,7 @@
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>The <code class="highlighter-rouge">docker_users</code> variable (a <em>list</em>) controls which users are able to interact with the Docker daemon, which our <span class="notranslate">Galaxy</span> user will need to do. Additionally, Docker Compose is configured by default, which we do not need, so it can be disabled with <code class="highlighter-rouge">docker_install_compose: false</code>.</p>
+    <p>The <code class="language-plaintext highlighter-rouge">docker_users</code> variable (a <em>list</em>) controls which users are able to interact with the Docker daemon, which our <span class="notranslate">Galaxy</span> user will need to do. Additionally, Docker Compose is configured by default, which we do not need, so it can be disabled with <code class="language-plaintext highlighter-rouge">docker_install_compose: false</code>.</p>
 
   </blockquote>
 
@@ -707,7 +707,7 @@
 
   <ol>
     <li>
-      <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Edit the group variables file, <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
       <p>The relevant variables to set for this role are:</p>
 
@@ -721,19 +721,19 @@
         </thead>
         <tbody>
           <tr>
-            <td><code class="highlighter-rouge">docker_users</code></td>
+            <td><code class="language-plaintext highlighter-rouge">docker_users</code></td>
             <td>list of strings</td>
-            <td>List of users to be added to the <code class="highlighter-rouge">docker</code> group</td>
+            <td>List of users to be added to the <code class="language-plaintext highlighter-rouge">docker</code> group</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">docker_install_compose</code></td>
+            <td><code class="language-plaintext highlighter-rouge">docker_install_compose</code></td>
             <td>boolean</td>
             <td>Whether to install and configure Docker Compose</td>
           </tr>
         </tbody>
       </table>
 
-      <p>Add the following lines to your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
+      <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Interactive Tools</span>
 <span class="na">docker_install_compose</span><span class="pi">:</span> <span class="no">false</span>
@@ -744,7 +744,7 @@
       <blockquote class="question">
         <h3 id="question-question-1"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <p>Why is <code class="highlighter-rouge">"{{ <span class="notranslate">galaxy</span>_user.name }}"</code> specified instead of just the user <code class="highlighter-rouge"><span class="notranslate">galaxy</span></code>?</p>
+        <p>Why is <code class="language-plaintext highlighter-rouge">"{{ <span class="notranslate">galaxy</span>_user.name }}"</code> specified instead of just the user <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>?</p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -755,7 +755,7 @@
       </blockquote>
     </li>
     <li>
-      <p>Add the new role to the list of roles under the <code class="highlighter-rouge">roles</code> key in your playbook, <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
+      <p>Add the new role to the list of roles under the <code class="language-plaintext highlighter-rouge">roles</code> key in your playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
@@ -768,13 +768,13 @@
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
   </ol>
 </blockquote>
 
-<p>Congratulations, you’ve set up Docker. Verify the installation using the <code class="highlighter-rouge">docker info</code> command (but keep in mind: what users did we authorize to interact with Docker?).</p>
+<p>Congratulations, you’ve set up Docker. Verify the installation using the <code class="language-plaintext highlighter-rouge">docker info</code> command (but keep in mind: what users did we authorize to interact with Docker?).</p>
 
 <h2 id="installing-the-interactive-tools-proxy">Installing the Interactive Tools Proxy</h2>
 
@@ -802,7 +802,7 @@
 
   <ol>
     <li>
-      <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Edit the group variables file, <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
       <p>The relevant variables to set for this role are:</p>
 
@@ -816,49 +816,49 @@
         </thead>
         <tbody>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_dir</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_dir</code></td>
             <td>path (string)</td>
             <td>Path of directory into which the proxy application will be installed</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_git_version</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_git_version</code></td>
             <td>string</td>
             <td>Git reference to clone</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_setup_nodejs</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_setup_nodejs</code></td>
             <td>string</td>
-            <td>Whether to install Node.js, options are <code class="highlighter-rouge">package</code> and <code class="highlighter-rouge">nodeenv</code></td>
+            <td>Whether to install Node.js, options are <code class="language-plaintext highlighter-rouge">package</code> and <code class="language-plaintext highlighter-rouge">nodeenv</code></td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_virtulenv_command</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_virtulenv_command</code></td>
             <td>string</td>
-            <td>Command to create virtualenv when using <code class="highlighter-rouge">nodeenv</code> method</td>
+            <td>Command to create virtualenv when using <code class="language-plaintext highlighter-rouge">nodeenv</code> method</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_nodejs_version</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_nodejs_version</code></td>
             <td>string</td>
-            <td>Version of Node.js to install if using <code class="highlighter-rouge">nodeenv</code> method</td>
+            <td>Version of Node.js to install if using <code class="language-plaintext highlighter-rouge">nodeenv</code> method</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_virtualenv</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_virtualenv</code></td>
             <td>path (string)</td>
             <td>Path of virtualenv into which nodeenv/Node.js/npm will be installed</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_setup_service</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_setup_service</code></td>
             <td>string</td>
-            <td>Whether to configure the proxy as a service, only option is <code class="highlighter-rouge">systemd</code></td>
+            <td>Whether to configure the proxy as a service, only option is <code class="language-plaintext highlighter-rouge">systemd</code></td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">gie_proxy_sessions_path</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_sessions_path</code></td>
             <td>path (string)</td>
             <td>Path of Interactive Tools sessions map</td>
           </tr>
         </tbody>
       </table>
 
-      <p>Add the following lines to your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
+      <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gie_proxy_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy</span>
 <span class="na">gie_proxy_git_version</span><span class="pi">:</span> <span class="s">ie2</span>
@@ -870,12 +870,12 @@
 <span class="na">gie_proxy_sessions_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/interactivetools_map.sqlite"</span>
 </code></pre></div>      </div>
 
-      <p>Note the value of <code class="highlighter-rouge">gie_proxy_git_version</code> is <code class="highlighter-rouge">ie2</code>: this is because the default branch only works with Interactive Environments, whereas the <code class="highlighter-rouge">ie2</code> branch has been updated for Interactive Tools. As Interactive Tools mature, this will likely be merged back to the default branch.</p>
+      <p>Note the value of <code class="language-plaintext highlighter-rouge">gie_proxy_git_version</code> is <code class="language-plaintext highlighter-rouge">ie2</code>: this is because the default branch only works with Interactive Environments, whereas the <code class="language-plaintext highlighter-rouge">ie2</code> branch has been updated for Interactive Tools. As Interactive Tools mature, this will likely be merged back to the default branch.</p>
 
       <p>We have chosen to install Node.js using <a href="https://github.com/ekalinin/nodeenv">nodeenv</a> because the version in the training image’s package manager is fairly old.</p>
     </li>
     <li>
-      <p>Add the new role to <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
+      <p>Add the new role to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
@@ -888,7 +888,7 @@
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -904,11 +904,11 @@
     <h3 id="solution-solution-2"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>A new Python venv was created at <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/venv</code></li>
+      <li>A new Python venv was created at <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/venv</code></li>
       <li>Node.js version 10.13.0 was installed in to the venv</li>
-      <li>The proxy was cloned to <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy</code></li>
-      <li>The proxy’s Node dependencies were installed to <code class="highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy/node_modules</code> using the venv’s <code class="highlighter-rouge">npm</code></li>
-      <li>A systemd service unit was installed at <code class="highlighter-rouge">/etc/systemd/system/<span class="notranslate">galaxy</span>-gie-proxy.service</code></li>
+      <li>The proxy was cloned to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy</code></li>
+      <li>The proxy’s Node dependencies were installed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy/node_modules</code> using the venv’s <code class="language-plaintext highlighter-rouge">npm</code></li>
+      <li>A systemd service unit was installed at <code class="language-plaintext highlighter-rouge">/etc/systemd/system/<span class="notranslate">galaxy</span>-gie-proxy.service</code></li>
       <li>The systemd daemon was reloaded to read this new service unit</li>
       <li>The service was set to start on boot and started</li>
     </ol>
@@ -917,7 +917,7 @@
 
 </blockquote>
 
-<p>Because the proxy runs as a systemd service, you can inspect the log of the service using <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code>. The service name is <code class="highlighter-rouge"><span class="notranslate">galaxy</span>-gie-proxy</code>:</p>
+<p>Because the proxy runs as a systemd service, you can inspect the log of the service using <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl</code>. The service name is <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>-gie-proxy</code>:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span><span class="nb">sudo </span>jou<span class="notranslate">rna</span>lctl <span class="nt">-eu</span> <span class="notranslate">galaxy</span>-gie-proxy
 <span class="go">Feb 14 17:38:49 gcc-4 systemd[1]: Started <span class="notranslate">Galaxy</span> IE/IT Proxy.
@@ -940,17 +940,17 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
   <ol>
     <li>
-      <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and add a new item to the <strong>existing</strong> <code class="highlighter-rouge">nginx_ssl_servers</code> so it matches:</p>
+      <p>Edit the group variables file, <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and add a new item to the <strong>existing</strong> <code class="language-plaintext highlighter-rouge">nginx_ssl_servers</code> so it matches:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">nginx_ssl_servers</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span></span>
   <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>-gie-proxy</span>
 </code></pre></div>      </div>
 
-      <p>The nginx configuration <code class="highlighter-rouge"><span class="notranslate">galaxy</span>-gie-proxy</code> doesn’t exist yet, but we’ll create it in a moment.</p>
+      <p>The nginx configuration <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>-gie-proxy</code> doesn’t exist yet, but we’ll create it in a moment.</p>
     </li>
     <li>
-      <p>Create <code class="highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>-gie-proxy.j2</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>-gie-proxy.j2</code> with the following contents:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">server</span> <span class="p">{</span>
     <span class="c1"># Listen on port 443</span>
@@ -978,7 +978,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -987,9 +987,9 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
 <h2 id="getting-a-wildcard-ssl-certificate">Getting a Wildcard SSL Certificate</h2>
 
-<p>During the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, we acquired an SSL certificate for our <span class="notranslate">Galaxy</span> server from <a href="https://letsencrypt.org/">Let’s Encrypt</a>. This certificate was issued for the hostname of your <span class="notranslate">Galaxy</span> server (e.g. <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code>). SSL certificates are valid <em>only for the name to which they were issued</em>. This presents a problem for us due to the way that <span class="notranslate">Galaxy</span> Interactive Tools work.</p>
+<p>During the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, we acquired an SSL certificate for our <span class="notranslate">Galaxy</span> server from <a href="https://letsencrypt.org/">Let’s Encrypt</a>. This certificate was issued for the hostname of your <span class="notranslate">Galaxy</span> server (e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code>). SSL certificates are valid <em>only for the name to which they were issued</em>. This presents a problem for us due to the way that <span class="notranslate">Galaxy</span> Interactive Tools work.</p>
 
-<p>In order to ensure each Interactive Tool’s cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your <span class="notranslate">Galaxy</span> server (e.g. <code class="highlighter-rouge">&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>). Your SSL cert is not valid for this subdomain. Further, in order to support the random <code class="highlighter-rouge">&lt;unique-id&gt;</code> in the hostname, we need a <em>wildcard certificate</em> for <code class="highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>. Let’s Encrypt wildcard certificates <a href="https://letsencrypt.org/docs/faq/">can only be generated using the DNS-01 challenge method</a>, which works by issuing a <a href="https://en.wikipedia.org/wiki/Dynamic_DNS">dynamic DNS</a> update to set the requested domain’s <code class="highlighter-rouge">TXT</code> record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.</p>
+<p>In order to ensure each Interactive Tool’s cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your <span class="notranslate">Galaxy</span> server (e.g. <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>). Your SSL cert is not valid for this subdomain. Further, in order to support the random <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;</code> in the hostname, we need a <em>wildcard certificate</em> for <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>. Let’s Encrypt wildcard certificates <a href="https://letsencrypt.org/docs/faq/">can only be generated using the DNS-01 challenge method</a>, which works by issuing a <a href="https://en.wikipedia.org/wiki/Dynamic_DNS">dynamic DNS</a> update to set the requested domain’s <code class="language-plaintext highlighter-rouge">TXT</code> record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.</p>
 
 <p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, we have precreated a dynamic DNS server that you will use for this step. The <em>TSIG key</em> that allows you to perform dynamic DNS updates will be provided to you.</p>
 
@@ -998,7 +998,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
   <ol>
     <li>
-      <p>Edit the group variables file, <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+      <p>Edit the group variables file, <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
       <p>The relevant variables to set for this role are:</p>
 
@@ -1012,22 +1012,22 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
         </thead>
         <tbody>
           <tr>
-            <td><code class="highlighter-rouge">certbot_domains</code></td>
+            <td><code class="language-plaintext highlighter-rouge">certbot_domains</code></td>
             <td>list</td>
             <td>List of domains to include as subject alte<span class="notranslate">rna</span>tive names (the first will also be the certificate’s <em>common name</em>)</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">certbot_dns_provider</code></td>
+            <td><code class="language-plaintext highlighter-rouge">certbot_dns_provider</code></td>
             <td>string</td>
             <td>Name of <a href="https://certbot.eff.org/docs/using.html#dns-plugins">Certbot DNS plugin</a> to use</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">certbot_dns_credentials</code></td>
+            <td><code class="language-plaintext highlighter-rouge">certbot_dns_credentials</code></td>
             <td>dictionary</td>
             <td>Plugin-specific credentials for performing dynamic DNS updates</td>
           </tr>
           <tr>
-            <td><code class="highlighter-rouge">certbot_expand</code></td>
+            <td><code class="language-plaintext highlighter-rouge">certbot_expand</code></td>
             <td>boolean</td>
             <td>Whether to “expand” an existing certificate (add new domain names to it)</td>
           </tr>
@@ -1036,7 +1036,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
       <ul>
         <li>
-          <p>Add a new item to the <strong>existing</strong> <code class="highlighter-rouge">certbot_domains</code> list so it matches:</p>
+          <p>Add a new item to the <strong>existing</strong> <code class="language-plaintext highlighter-rouge">certbot_domains</code> list so it matches:</p>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_domains</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
@@ -1044,15 +1044,15 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 </code></pre></div>          </div>
         </li>
         <li>
-          <p>Comment out the existing <code class="highlighter-rouge">certbot_auth_method</code> like so:</p>
+          <p>Comment out the existing <code class="language-plaintext highlighter-rouge">certbot_auth_method</code> like so:</p>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#certbot_auth_method: --webroot</span>
 </code></pre></div>          </div>
 
-          <p>Although this is not explicitly required (setting <code class="highlighter-rouge">cerbot_dns_provider</code> as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the “webroot” method for Let’s Encrypt WEB-01 challenges is no longer in use for this server.</p>
+          <p>Although this is not explicitly required (setting <code class="language-plaintext highlighter-rouge">cerbot_dns_provider</code> as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the “webroot” method for Let’s Encrypt WEB-01 challenges is no longer in use for this server.</p>
         </li>
         <li>
-          <p>Add the following lines to your <code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
+          <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">certbot_dns_provider</span><span class="pi">:</span> <span class="s">rfc2136</span>
 <span class="na">certbot_dns_credentials</span><span class="pi">:</span>
@@ -1066,27 +1066,27 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
       </ul>
     </li>
     <li>
-      <p>Run the playbook <strong>with <code class="highlighter-rouge">certbot_expand</code></strong>:</p>
+      <p>Run the playbook <strong>with <code class="language-plaintext highlighter-rouge">certbot_expand</code></strong>:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml -e certbot_expand=true
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml -e certbot_expand=true
 </code></pre></div>      </div>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="fa fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-        <p>What is the <code class="highlighter-rouge">-e</code> flag to <code class="highlighter-rouge">ansible-playbook</code> and why did we use it?</p>
+        <p>What is the <code class="language-plaintext highlighter-rouge">-e</code> flag to <code class="language-plaintext highlighter-rouge">ansible-playbook</code> and why did we use it?</p>
 
         <blockquote class="solution">
           <h3 id="solution-solution-3"><i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-          <p>As per <code class="highlighter-rouge">ansible-playbook --help</code>:</p>
+          <p>As per <code class="language-plaintext highlighter-rouge">ansible-playbook --help</code>:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -e EXTRA_VARS, --extra-vars EXTRA_VARS
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -e EXTRA_VARS, --extra-vars EXTRA_VARS
                         set additional variables as key=value or YAML/JSON, if
                         filename prepend with @
 </code></pre></div>          </div>
 
-          <p>We used this flag because <code class="highlighter-rouge">certbot_expand</code> only needs to be set <em>once</em>, when we are adding a new domain to the certificate. It should not be enabled on subsequent runs of the playbook, or else we would request a new certificate on each run! Thus, it does not make sense to add it to a vars file.</p>
+          <p>We used this flag because <code class="language-plaintext highlighter-rouge">certbot_expand</code> only needs to be set <em>once</em>, when we are adding a new domain to the certificate. It should not be enabled on subsequent runs of the playbook, or else we would request a new certificate on each run! Thus, it does not make sense to add it to a vars file.</p>
 
         </blockquote>
 
@@ -1113,9 +1113,9 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>Rather than modify the default tool configuration file, we’ll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.</p>
 
-      <p>If the folder does not exist, create <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> next to your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="highlighter-rouge">mkdir -p files/<span class="notranslate">galaxy</span>/config/</code>)</p>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="language-plaintext highlighter-rouge">mkdir -p files/<span class="notranslate">galaxy</span>/config/</code>)</p>
 
-      <p>Create <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/tool_conf_interactive.xml</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;toolbox</span> <span class="na">monitor=</span><span class="s">"true"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;section</span> <span class="na">id=</span><span class="s">"interactivetools"</span> <span class="na">name=</span><span class="s">"Interactive Tools"</span><span class="nt">&gt;</span>
@@ -1125,9 +1125,9 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>We need to modify <code class="highlighter-rouge">job_conf.xml</code> to instruct <span class="notranslate">Galaxy</span> on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:</p>
+      <p>We need to modify <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to instruct <span class="notranslate">Galaxy</span> on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:</p>
 
-      <p>Create <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> with the following contents:</p>
+      <p>Create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> with the following contents:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
     <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
@@ -1141,11 +1141,11 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
       <blockquote class="comment">
         <h3 id="comment-note-1"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
-        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="highlighter-rouge">job_conf.xml</code> file, as well as defined <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> and set the <code class="highlighter-rouge">job_config_file</code> option in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
+        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file, as well as defined <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> and set the <code class="language-plaintext highlighter-rouge">job_config_file</code> option in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
       </blockquote>
     </li>
     <li>
-      <p>Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default <code class="highlighter-rouge">local</code> destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410">advanced sample job configuration</a> as a guide. Finally, use the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/tools/interactive/interactivetool_ethercalc.xml">EtherCalc GxIT’s</a> tool ID to route executions of the EtherCalc GxIT to the newly created destination:</p>
+      <p>Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default <code class="language-plaintext highlighter-rouge">local</code> destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410">advanced sample job configuration</a> as a guide. Finally, use the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/tools/interactive/interactivetool_ethercalc.xml">EtherCalc GxIT’s</a> tool ID to route executions of the EtherCalc GxIT to the newly created destination:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- job_conf.xml.old
 </span><span class="gi">+++ job_conf.xml
@@ -1171,17 +1171,17 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 </span> &lt;/job_conf&gt;
 </code></pre></div>      </div>
 
-      <p>Of considerable note is the <code class="highlighter-rouge">docker_volumes</code> param: the variable expansions are explained in the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410">advanced sample job configuration</a>.  We’ll use this volume configuration for now but it has some considerable data security problems. We’ll discuss a better solution at the end of this tutorial.</p>
+      <p>Of considerable note is the <code class="language-plaintext highlighter-rouge">docker_volumes</code> param: the variable expansions are explained in the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410">advanced sample job configuration</a>.  We’ll use this volume configuration for now but it has some considerable data security problems. We’ll discuss a better solution at the end of this tutorial.</p>
     </li>
     <li>
-      <p>Inform <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of what tool configuration files to load in your group variables (<code class="highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>):</p>
+      <p>Inform <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of what tool configuration files to load in your group variables (<code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>):</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_tool_config_files</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_dir</span><span class="nv"> </span><span class="s">}}/config/tool_conf.xml.sample"</span>
   <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/tool_conf_interactive.xml"</span>
 </code></pre></div>      </div>
 
-      <p>Next, inform <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="highlighter-rouge">job_conf.xml</code> to reside, that GxITs should be enabled, and where the GxIT map database can be found:</p>
+      <p>Next, inform <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to reside, that GxITs should be enabled, and where the GxIT map database can be found:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
 
@@ -1193,7 +1193,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <span class="na">interactivetools_map</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">gie_proxy_sessions_path</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
-      <p>And then deploy the new config files using the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var in your group vars:</p>
+      <p>And then deploy the new config files using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var in your group vars:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_files</span><span class="pi">:</span>
   <span class="c1"># ... possible existing config file definitions</span>
@@ -1206,11 +1206,11 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Follow the <span class="notranslate">Galaxy</span> logs with <code class="highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span></code></p>
+      <p>Follow the <span class="notranslate">Galaxy</span> logs with <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span></code></p>
     </li>
   </ol>
 
@@ -1228,13 +1228,13 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>We’ll need an input for our test GxIT (EtherCalc). Any tabular file can be used, such as <span class="notranslate">Galaxy</span>’s <a href="https://raw.githubusercontent.com/galaxyproject/galaxy/release_20.01/test-data/1.tabular">1.tabular</a> test data. Copy this file’s URL:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/<span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span>/release_20.01/test-data/1.tabular
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://raw.githubusercontent.com/<span class="notranslate">galaxy</span>project/<span class="notranslate">galaxy</span>/release_20.01/test-data/1.tabular
 </code></pre></div>      </div>
     </li>
     <li>Click <i class="fa fa fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Upload</strong> at the top of the tool panel (on the left side of the <span class="notranslate">Galaxy</span> UI).</li>
     <li>In the resulting modal dialog, click the <strong>Paste/Fetch data</strong> button.</li>
     <li>Paste the URL in the <strong>text field</strong> that has just appeared.</li>
-    <li>Give the new dataset a name such as <code class="highlighter-rouge">tabular</code>, if you like.</li>
+    <li>Give the new dataset a name such as <code class="language-plaintext highlighter-rouge">tabular</code>, if you like.</li>
     <li>Click <strong>Start</strong> and then <strong>Close</strong>.</li>
     <li>From the tool menu, click the <strong>Interactive Tools</strong> section, then click <strong>EtherCalc</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
     <li>Ensure that your newly uploaded tabular dataset is selected as the input <strong>Some tabular dataset</strong>, then click <strong>Execute</strong>.</li>
@@ -1254,7 +1254,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
 <h2 id="securing-interactive-tools">Securing Interactive Tools</h2>
 
-<p>Inspecting the Docker container of a running Interactive Tool shows the volume configuration expanded from <code class="highlighter-rouge">$<span class="notranslate">galaxy</span>_root</code> in the job destination’s <code class="highlighter-rouge">docker_volumes</code> param:</p>
+<p>Inspecting the Docker container of a running Interactive Tool shows the volume configuration expanded from <code class="language-plaintext highlighter-rouge">$<span class="notranslate">galaxy</span>_root</code> in the job destination’s <code class="language-plaintext highlighter-rouge">docker_volumes</code> param:</p>
 
 <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">$</span><span class="w"> </span>docker inspect <span class="si">$(</span>docker ps <span class="nt">-q</span><span class="si">)</span> | jq <span class="s1">'.[0].HostConfig.Binds'</span>
 <span class="go">[
@@ -1274,7 +1274,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 <p>Two solutions are discussed in the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410">advanced sample job configuration</a>:</p>
 
 <ol>
-  <li>Use the <code class="highlighter-rouge">outputs_to_working_directory</code> job configuration option, which allows you to mount datasets read-only: this prevents manipulation, but still allows GxIT users to read any dataset in your <span class="notranslate">Galaxy</span> server.</li>
+  <li>Use the <code class="language-plaintext highlighter-rouge">outputs_to_working_directory</code> job configuration option, which allows you to mount datasets read-only: this prevents manipulation, but still allows GxIT users to read any dataset in your <span class="notranslate">Galaxy</span> server.</li>
   <li>Use <a href="https://github.com/galaxyproject/pulsar">Pulsar</a>, <span class="notranslate">Galaxy</span>’s remote job execution engine, to provide full job isolation: this avoids all access to <span class="notranslate">Galaxy</span> data, with the performance penalty of copying input dataset(s) to the job directory.</li>
 </ol>
 
@@ -1285,11 +1285,11 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
   <ol>
     <li>
-      <p>Create a configuration file <em>template</em> for the Pulsar application at <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/pulsar_app.yml.j2</code>.</p>
+      <p>Create a configuration file <em>template</em> for the Pulsar application at <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/pulsar_app.yml.j2</code>.</p>
 
       <p><br /></p>
 
-      <p>If the folder does not exist, create <code class="highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>).</p>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="language-plaintext highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>).</p>
 
       <p><br /></p>
 
@@ -1314,11 +1314,11 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Modify the job configuration file, <code class="highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>, to configure Interactive Tools to use the embedded Pulsar runner.</p>
+      <p>Modify the job configuration file, <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code>, to configure Interactive Tools to use the embedded Pulsar runner.</p>
 
       <p><br /></p>
 
-      <p><strong>Add</strong> the embedded Pulsar runner plugin to the <code class="highlighter-rouge">&lt;plugins&gt;</code> section of the config:</p>
+      <p><strong>Add</strong> the embedded Pulsar runner plugin to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section of the config:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_embedded"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarEmbeddedJobRunner"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"pulsar_config"</span><span class="nt">&gt;</span>/srv/<span class="notranslate">galaxy</span>/config/pulsar_app.yml<span class="nt">&lt;/param&gt;</span>
@@ -1330,11 +1330,11 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
         <p>We have used a bit of bad practice here: hardcoding the Pulsar config file path in to the job config file. At this point, we should convert the job config file to a template (in the same manner as the Pulsar config template). The reason we don’t do it in this tutorial is to maintain compatibility with other tutorials, but you may do so by following the same pattern as is used for the Pulsar config template.</p>
       </blockquote>
 
-      <p>Next, <strong>modify</strong> the <code class="highlighter-rouge">interactive_local</code> destination to use the new runner and set the new parameter <code class="highlighter-rouge">container_monitor_result</code> to <code class="highlighter-rouge">callback</code> (explained in more detail in the next step):</p>
+      <p>Next, <strong>modify</strong> the <code class="language-plaintext highlighter-rouge">interactive_local</code> destination to use the new runner and set the new parameter <code class="language-plaintext highlighter-rouge">container_monitor_result</code> to <code class="language-plaintext highlighter-rouge">callback</code> (explained in more detail in the next step):</p>
 
       <blockquote class="warning">
         <h3 id="warning-warning-untrusted-ssl-certificates"><i class="fa fa-warning" aria-hidden="true"></i><span class="visually-hidden">warning</span> Warning: Untrusted SSL Certificates</h3>
-        <p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, you will also need the <code class="highlighter-rouge">&lt;env&gt;</code> setting shown below to prevent problems with the untrusted SSL certificates in use during the course. <span class="notranslate">Galaxy</span> servers with valid SSL certificates <em>do not need this option</em>.</p>
+        <p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, you will also need the <code class="language-plaintext highlighter-rouge">&lt;env&gt;</code> setting shown below to prevent problems with the untrusted SSL certificates in use during the course. <span class="notranslate">Galaxy</span> servers with valid SSL certificates <em>do not need this option</em>.</p>
       </blockquote>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- job_conf.xml.old
@@ -1357,11 +1357,11 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Open your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file and instruct <code class="highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to install the Pulsar configuration file:</p>
+      <p>Open your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file and instruct <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to install the Pulsar configuration file:</p>
 
       <blockquote class="comment">
         <h3 id="comment-note-2"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
-        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already defined <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code>. If this is the case, be sure to <strong>merge the changes in this step with your existing playbook</strong>.</p>
+        <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already defined <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code>. If this is the case, be sure to <strong>merge the changes in this step with your existing playbook</strong>.</p>
       </blockquote>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
@@ -1369,7 +1369,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/pulsar_app.yml"</span>
 </code></pre></div>      </div>
 
-      <p>Addiitionally, you will need to set the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code> config option:</p>
+      <p>Addiitionally, you will need to set the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code> config option:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
@@ -1379,13 +1379,13 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
       <blockquote class="details">
         <h3 id="details-detail-infrastructure-urlcallback"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Detail: Infrastructure URL/Callback</h3>
-        <p><span class="notranslate">Galaxy</span> must be made aware of the randomly selected port Docker has assigned after the GxIT begins operating, in order to update the proxy map. By default, this is done by writing a JSON file in the job directory. This method does not work with Pulsar since Pulsar uses a different job directory from the <span class="notranslate">Galaxy</span> job directory. As a result, Pulsar jobs use the <code class="highlighter-rouge">callback</code> method configured in the previous step to make a request to <span class="notranslate">Galaxy</span>’s API, the URL for which is set in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code>.</p>
+        <p><span class="notranslate">Galaxy</span> must be made aware of the randomly selected port Docker has assigned after the GxIT begins operating, in order to update the proxy map. By default, this is done by writing a JSON file in the job directory. This method does not work with Pulsar since Pulsar uses a different job directory from the <span class="notranslate">Galaxy</span> job directory. As a result, Pulsar jobs use the <code class="language-plaintext highlighter-rouge">callback</code> method configured in the previous step to make a request to <span class="notranslate">Galaxy</span>’s API, the URL for which is set in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code>.</p>
       </blockquote>
     </li>
     <li>
       <p>Run the playbook:</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1412,7 +1412,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 <span class="go">]
 </span></code></pre></div>    </div>
 
-    <p>Of note, the user data directory, <code class="highlighter-rouge">/data</code>, is no longer mounted in the container!</p>
+    <p>Of note, the user data directory, <code class="language-plaintext highlighter-rouge">/data</code>, is no longer mounted in the container!</p>
 
   </blockquote>
 

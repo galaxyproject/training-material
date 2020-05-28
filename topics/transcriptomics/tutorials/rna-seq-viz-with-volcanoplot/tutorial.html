@@ -677,7 +677,7 @@
 
   <ol>
     <li>
-      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="highlighter-rouge"><span class="notranslate">RNA</span>-seq volcano plot</code></p>
+      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq volcano plot</code></p>
 
       <blockquote class="tip">
 
@@ -759,19 +759,19 @@
         <li>
           <p>You can paste the links below into the <strong>Paste/Fetch</strong> box:</p>
 
-          <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
 https://zenodo.org/record/2529117/files/volcano_genes
 </code></pre></div>          </div>
         </li>
         <li>
-          <p>Select <em>“Genome”</em>: <code class="highlighter-rouge">mm10</code></p>
+          <p>Select <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></p>
         </li>
       </ul>
     </li>
-    <li>Name the limma-voom_luminalpregnant-luminallactate file <code class="highlighter-rouge">DE results</code> and the volcano genes file <code class="highlighter-rouge">volcano genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
+    <li>Name the limma-voom_luminalpregnant-luminallactate file <code class="language-plaintext highlighter-rouge">DE results</code> and the volcano genes file <code class="language-plaintext highlighter-rouge">volcano genes</code> using the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
     <li>
-      <p>Check that the datatype is <code class="highlighter-rouge">tabular</code>.
-If the datatype is not <code class="highlighter-rouge">tabular</code>, please change the file type to <code class="highlighter-rouge">tabular</code>.</p>
+      <p>Check that the datatype is <code class="language-plaintext highlighter-rouge">tabular</code>.
+If the datatype is not <code class="language-plaintext highlighter-rouge">tabular</code>, please change the file type to <code class="language-plaintext highlighter-rouge">tabular</code>.</p>
 
       <blockquote class="tip">
 
@@ -779,7 +779,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">tabular</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -788,7 +788,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 </blockquote>
 
-<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="highlighter-rouge">DE results</code> file. It should look like below, with 8 columns.</p>
+<p>Click on the <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the <code class="language-plaintext highlighter-rouge">DE results</code> file. It should look like below, with 8 columns.</p>
 
 <figure id="figure-1"><img src="../../images/rna-seq-viz-with-volcanoplot/DE_results.png" alt="DE results file" /><figcaption><span class="figcaption-prefix">Figure 1:</span> DE results</figcaption></figure>
 
@@ -802,14 +802,14 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <ol>
     <li><strong>Volcano Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to create a volcano plot
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: <code class="highlighter-rouge">DE results</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="highlighter-rouge">Column 8</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="highlighter-rouge">Column 7</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="highlighter-rouge">Column 4</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labels”</em>: <code class="highlighter-rouge">Column 2</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Significance threshold”</em>: <code class="highlighter-rouge">0.01</code></li>
-        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“LogFC threshold to colour”</em>: <code class="highlighter-rouge">0.58</code></li>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="highlighter-rouge">None</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an input file”</em>: <code class="language-plaintext highlighter-rouge">DE results</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“FDR (adjusted P value)”</em>: <code class="language-plaintext highlighter-rouge">Column 8</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“P value (raw)”</em>: <code class="language-plaintext highlighter-rouge">Column 7</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Log Fold Change”</em>: <code class="language-plaintext highlighter-rouge">Column 4</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Significance threshold”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
+        <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“LogFC threshold to colour”</em>: <code class="language-plaintext highlighter-rouge">0.58</code></li>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">None</code></li>
       </ul>
     </li>
   </ol>
@@ -841,9 +841,9 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <ol>
     <li><strong>Volcano Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> rerun with the same parameters as before except:
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="highlighter-rouge">Significant</code>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Significant</code>
           <ul>
-            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="highlighter-rouge">20</code></li>
+            <li><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Only label top most significant”</em>: <code class="language-plaintext highlighter-rouge">20</code></li>
           </ul>
         </li>
       </ul>
@@ -870,7 +870,7 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
 
 <h2 id="create-volcano-plot-labelling-genes-of-interest">Create volcano plot labelling genes of interest</h2>
 
-<p>We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">here</a> if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors’ main gene of interest, Mcl1. These genes are provided in the <code class="highlighter-rouge">volcano genes</code> file and shown below. We will label these genes in the volcano plot.</p>
+<p>We can also label one or more genes of interest in a volcano plot. This enables us to visualize where these genes are in terms of significance and in comparison to the other genes. In the original paper using this dataset, there is a heatmap of 31 genes in Figure 6b (see the tutorial <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-viz-with-heatmap2/tutorial.html">here</a> if you would like to see how to generate the heatmap). These genes are a set of 30 cytokines/growth factor identified as differentially expressed, and the authors’ main gene of interest, Mcl1. These genes are provided in the <code class="language-plaintext highlighter-rouge">volcano genes</code> file and shown below. We will label these genes in the volcano plot.</p>
 
 <figure id="figure-4"><img src="../../images/rna-seq-viz-with-volcanoplot/volcano_genes.png" alt="Volcano genes" height="30%" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Volcano genes</figcaption></figure>
 
@@ -879,9 +879,9 @@ If the datatype is not <code class="highlighter-rouge">tabular</code>, please ch
   <ol>
     <li><strong>Volcano Plot</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> rerun with the same parameters as before except:
       <ul>
-        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="highlighter-rouge">Input from file</code>
+        <li><i class="fa fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Points to label”</em>: <code class="language-plaintext highlighter-rouge">Input from file</code>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File of labels”</em>: <code class="highlighter-rouge">volcano genes</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File of labels”</em>: <code class="language-plaintext highlighter-rouge">volcano genes</code></li>
           </ul>
         </li>
       </ul>

@@ -578,7 +578,7 @@
     <li>
       <p>Import the fasta and raw files from <a href="https://zenodo.org/record/3774452">Zenodo</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3774452/files/Protein_database.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3774452/files/Protein_database.fasta
 https://zenodo.org/record/3774452/files/Sample1.raw
 https://zenodo.org/record/3774452/files/Sample2.raw
 </code></pre></div>      </div>
@@ -625,7 +625,7 @@ https://zenodo.org/record/3774452/files/Sample2.raw
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">thermo.raw</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">thermo.raw</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
@@ -646,26 +646,26 @@ https://zenodo.org/record/3774452/files/Sample2.raw
       <ul>
         <li>In <em>“Input Options”</em>:
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA files”</em>: <code class="highlighter-rouge">protein database</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA files”</em>: <code class="language-plaintext highlighter-rouge">protein database</code></li>
           </ul>
         </li>
         <li>In <em>“Search Options”</em>:
           <ul>
-            <li><em>“minimum unique peptides”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><em>“minimum unique peptides”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
         <li>In <em>“Parameter Group”</em>:
           <ul>
-            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Infiles”</em>: <code class="highlighter-rouge">sample1</code>, <code class="highlighter-rouge">sample2</code></li>
-            <li><em>“missed cleavages”</em>: <code class="highlighter-rouge">1</code></li>
+            <li><i class="fa fa-files-o" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Infiles”</em>: <code class="language-plaintext highlighter-rouge">sample1</code>, <code class="language-plaintext highlighter-rouge">sample2</code></li>
+            <li><em>“missed cleavages”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
             <li><em>“variable modifications”</em>: ` `</li>
-            <li><em>“Quantitation Methods”</em>: <code class="highlighter-rouge">label free quantification</code></li>
+            <li><em>“Quantitation Methods”</em>: <code class="language-plaintext highlighter-rouge">label free quantification</code></li>
           </ul>
         </li>
-        <li><em>“Generate PTXQC (proteomics quality control pipeline) report?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Generate PTXQC (proteomics quality control pipeline) report?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>In <em>“Output Options”</em>:
           <ul>
-            <li><em>“Select the desired outputs.”</em>: <code class="highlighter-rouge">Protein Groups</code> <code class="highlighter-rouge">Peptides</code> <code class="highlighter-rouge">mqpar.xml</code></li>
+            <li><em>“Select the desired outputs.”</em>: <code class="language-plaintext highlighter-rouge">Protein Groups</code> <code class="language-plaintext highlighter-rouge">Peptides</code> <code class="language-plaintext highlighter-rouge">mqpar.xml</code></li>
           </ul>
         </li>
       </ul>
@@ -682,25 +682,25 @@ https://zenodo.org/record/3774452/files/Sample2.raw
 
 <p>The <em>“minimum peptide length”</em> defines the minimum number of amino acids a peptide should have to be included for protein identification and quantification. Below 7 amino acids a peptide cannot be unique and is therefore not informative, thus typical values are in the range 7-9.</p>
 
-<p>Several, even longer peptides are not unique, meaning that they are shared by several proteins e.g. when they are part of a common protein domain. During protein inference the peptides are statistically assembled into the corresponding proteins and the decision should be mainly based on the unique peptides. Therefore, we set <em>“min unique peptides”</em> to <code class="highlighter-rouge">1</code> - only proteins that have at least one unique peptide are reported in the output table.</p>
+<p>Several, even longer peptides are not unique, meaning that they are shared by several proteins e.g. when they are part of a common protein domain. During protein inference the peptides are statistically assembled into the corresponding proteins and the decision should be mainly based on the unique peptides. Therefore, we set <em>“min unique peptides”</em> to <code class="language-plaintext highlighter-rouge">1</code> - only proteins that have at least one unique peptide are reported in the output table.</p>
 
-<p>In most bottom-up proteomics experiments Trypsin is used as a protease because it has many advantages such as it’s accurate cleavage specificity. Trypsin cleaves peptides c-terminal of Arginine (R) and Lysine (K), except when those are followed by Proline (P). Therefore, in MaxQuant the default <em>“enzyme”</em> is set to <code class="highlighter-rouge">Trypsin/P</code>. This trypsin specific cleavage rule is used by MaxQuant to perform an <em>in silico</em> digestion of the protein database that was provided in the fasta file.</p>
+<p>In most bottom-up proteomics experiments Trypsin is used as a protease because it has many advantages such as it’s accurate cleavage specificity. Trypsin cleaves peptides c-terminal of Arginine (R) and Lysine (K), except when those are followed by Proline (P). Therefore, in MaxQuant the default <em>“enzyme”</em> is set to <code class="language-plaintext highlighter-rouge">Trypsin/P</code>. This trypsin specific cleavage rule is used by MaxQuant to perform an <em>in silico</em> digestion of the protein database that was provided in the fasta file.</p>
 
-<p>Protease digestion is not always complete, therefore we set the <em>“number of missed cleavages”</em> to <code class="highlighter-rouge">1</code>, meaning that the <em>in silico</em> digestion also includes peptides that have an additional Arginine or Lysine in their sequence.</p>
+<p>Protease digestion is not always complete, therefore we set the <em>“number of missed cleavages”</em> to <code class="language-plaintext highlighter-rouge">1</code>, meaning that the <em>in silico</em> digestion also includes peptides that have an additional Arginine or Lysine in their sequence.</p>
 
 <figure id="figure-2"><img src="../../images/maxquant_param_missedcl.png" alt="MQ_param_missed" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Trypsin specificity and missed cleavages. With one missed cleavage all three peptides will be part of the *in silico* peptide database</figcaption></figure>
 
-<p>From the <em>in silico</em> generated peptide database the masses of the peptides are calculated and matched to the measured masses in order to identify them. A peptide’s mass will change due to peptide modifications such as chemical labelling for example applied in different quantitation strategies or biological post translational modifications. Therefore, it is important to also include possible peptide modifications in the <em>in silico</em> generated peptide mass list. <em>“Fixed modifications”</em> are modifications that occur on every occurence of the specific amino acid. Those are often artificially introduced modifications such as Carbamidomethylation of cysteins (C) to prevent re-formation of the disulfid bridges. This is a common procedure in proteomics sample preparation and therefore also the default option in MaxQuant: <code class="highlighter-rouge">Carbamidomethyl (C)</code>. <em>“Variable modifications”</em> are modifications that do not occur on every amino acid such as Oxidation of Methionine might only occur on some Methionines and not all, but only a few peptide N-termini are acetylated. Variable modifications increase the <em>in silico</em> peptide database because each peptide’s mass is calculated once with and once without the additional modification. To keep computation times as short as possible we did not use any variable modification this training, despite the MaxQuant defaults Oxidation of Methionine and Acetylation of N-termini would have been completely valid to use.</p>
+<p>From the <em>in silico</em> generated peptide database the masses of the peptides are calculated and matched to the measured masses in order to identify them. A peptide’s mass will change due to peptide modifications such as chemical labelling for example applied in different quantitation strategies or biological post translational modifications. Therefore, it is important to also include possible peptide modifications in the <em>in silico</em> generated peptide mass list. <em>“Fixed modifications”</em> are modifications that occur on every occurence of the specific amino acid. Those are often artificially introduced modifications such as Carbamidomethylation of cysteins (C) to prevent re-formation of the disulfid bridges. This is a common procedure in proteomics sample preparation and therefore also the default option in MaxQuant: <code class="language-plaintext highlighter-rouge">Carbamidomethyl (C)</code>. <em>“Variable modifications”</em> are modifications that do not occur on every amino acid such as Oxidation of Methionine might only occur on some Methionines and not all, but only a few peptide N-termini are acetylated. Variable modifications increase the <em>in silico</em> peptide database because each peptide’s mass is calculated once with and once without the additional modification. To keep computation times as short as possible we did not use any variable modification this training, despite the MaxQuant defaults Oxidation of Methionine and Acetylation of N-termini would have been completely valid to use.</p>
 
-<p>MaxQuant supports different <em>“Quantitation Methods”</em>. The three main categories are <code class="highlighter-rouge">label-free quantification</code>, <code class="highlighter-rouge">label-based quantification</code> and <code class="highlighter-rouge">reporter ion MS2</code> quantification. In this tutorial we have chosen <code class="highlighter-rouge">label-free</code> because we did not apply any specific labeling/quantitation strategy to the samples.</p>
+<p>MaxQuant supports different <em>“Quantitation Methods”</em>. The three main categories are <code class="language-plaintext highlighter-rouge">label-free quantification</code>, <code class="language-plaintext highlighter-rouge">label-based quantification</code> and <code class="language-plaintext highlighter-rouge">reporter ion MS2</code> quantification. In this tutorial we have chosen <code class="language-plaintext highlighter-rouge">label-free</code> because we did not apply any specific labeling/quantitation strategy to the samples.</p>
 
 <figure id="figure-3"><img src="../../images/maxquant_lfq_quant_methods.png" alt="MQ_quant_methods" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Overview of MaxQuant quantification methods</figcaption></figure>
 
-<p>The PTXQC software (<a class="citation" href="#Bielow2015">Bielow <i>et al.</i> 2015</a>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the <span class="notranslate">Galaxy</span> MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
+<p>The PTXQC software (<a class="citation" href="#Bielow2015">Bielow <i>et al.</i> 2015</a>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the <span class="notranslate">Galaxy</span> MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
 
 <figure id="figure-4"><img src="../../images/maxquant_ptxqc_overview.png" alt="PTXQC_overview" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Overview of PTXQC quality measures for sample1 and sample2</figcaption></figure>
 
-<p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="highlighter-rouge">mqpar.xml</code> This file can be re-used as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+<p>MaxQuant automatically generates several output files. In the <em>“Output Options”</em> all or some of the output files can be selected. The protein information can be obtained by selecting <code class="language-plaintext highlighter-rouge">Protein Groups</code>, while the peptide information is obtained by choosing <code class="language-plaintext highlighter-rouge">Peptides</code>. The applied MaxQuant parameters are stored in the <code class="language-plaintext highlighter-rouge">mqpar.xml</code> This file can be re-used as an input file in the <strong>MaxQuant (using mqpar.xml)</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="details">
   <h3 id="details-more-maxquant-parameters"><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More MaxQuant parameters</h3>
@@ -728,7 +728,7 @@ https://zenodo.org/record/3774452/files/Sample2.raw
     <li>
       <p>Import the files from <a href="https://zenodo.org/record/3774452">Zenodo</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3774452/files/PTXQC_report.pdf
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3774452/files/PTXQC_report.pdf
 https://zenodo.org/record/3774452/files/MaxQuant_Protein_Groups.tabular
 https://zenodo.org/record/3774452/files/MaxQuant_Peptides.tabular
 https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
@@ -752,7 +752,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     <ol>
       <li>271 protein (groups) were found in total.</li>
       <li>2387 peptides were found in total.</li>
-      <li>Sample1: 237, Sample2: 123 (<strong>filter data on any column</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <code class="highlighter-rouge">protein groups</code> file <em>“with following condition”</em> <code class="highlighter-rouge">c32!=0</code> or <code class="highlighter-rouge">c33!=0</code> and *“Number of header lines” <code class="highlighter-rouge">1</code>)</li>
+      <li>Sample1: 237, Sample2: 123 (<strong>filter data on any column</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <code class="language-plaintext highlighter-rouge">protein groups</code> file <em>“with following condition”</em> <code class="language-plaintext highlighter-rouge">c32!=0</code> or <code class="language-plaintext highlighter-rouge">c33!=0</code> and *“Number of header lines” <code class="language-plaintext highlighter-rouge">1</code>)</li>
     </ol>
 
   </blockquote>
@@ -796,48 +796,48 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
   <ol>
     <li><strong>Cut columns from a table</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c8,c32,c33</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="highlighter-rouge">proteinGroups</code> (output of <strong>MaxQuant</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c32,c33</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">proteinGroups</code> (output of <strong>MaxQuant</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Number of header lines”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Column selections”</em>:
           <ul>
-            <li><em>“on column”</em>: <code class="highlighter-rouge">c2</code></li>
-            <li><em>“in”</em>: <code class="highlighter-rouge">Descending order</code></li>
-            <li><em>“Flavor”</em>: <code class="highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
+            <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+            <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li><strong>Sort data in ascending or descending order</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Number of header lines”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li>In <em>“Column selections”</em>:
           <ul>
-            <li><em>“on column”</em>: <code class="highlighter-rouge">c3</code></li>
-            <li><em>“in”</em>: <code class="highlighter-rouge">Descending order</code></li>
-            <li><em>“Flavor”</em>: <code class="highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
+            <li><em>“on column”</em>: <code class="language-plaintext highlighter-rouge">c3</code></li>
+            <li><em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+            <li><em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">General numeric sort ( scientific notation -g)</code></li>
           </ul>
         </li>
       </ul>
     </li>
     <li>Click <i class="fa fa-bar-chart" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> “Visualize this data” on the last <strong>Sort</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> result.
       <ul>
-        <li>Select <code class="highlighter-rouge">Pie chart (NVD3)</code></li>
-        <li><em>“Provide a title”</em>: <code class="highlighter-rouge">Serum compositions</code></li>
-        <li>Click <code class="highlighter-rouge">Select data</code> <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span></li>
-        <li><em>“Provide a label”</em>: <code class="highlighter-rouge">sample1</code></li>
-        <li><em>“Labels”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Values”</em>: <code class="highlighter-rouge">Column: 2</code></li>
-        <li>Click <code class="highlighter-rouge">Insert data series</code></li>
-        <li><em>“Provide a label”</em>: <code class="highlighter-rouge">sample2</code></li>
-        <li><em>“Labels”</em>: <code class="highlighter-rouge">Column: 1</code></li>
-        <li><em>“Values”</em>: <code class="highlighter-rouge">Column: 3</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Pie chart (NVD3)</code></li>
+        <li><em>“Provide a title”</em>: <code class="language-plaintext highlighter-rouge">Serum compositions</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Select data</code> <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span></li>
+        <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">sample1</code></li>
+        <li><em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Values”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Insert data series</code></li>
+        <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">sample2</code></li>
+        <li><em>“Labels”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><em>“Values”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
         <li>Save   <i class="fa fa fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> (file is saved under “User” –&gt; “Visualizations”)</li>
       </ul>
     </li>

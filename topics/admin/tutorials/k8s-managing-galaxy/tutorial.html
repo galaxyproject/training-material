@@ -476,7 +476,7 @@
             </ul>
             
 
-            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 17, 2019 </p>
+            <p><strong> <i class="fa fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 18, 2019 </p>
         </blockquote>
 
         <div class="container">
@@ -541,16 +541,16 @@ a <span class="notranslate">Galaxy</span> deployment on Kubernetes, including:</
 <a href="/training-material/topics/admin/tutorials/k8s-deploying-galaxy/tutorial.html">tutorial</a>
 and we recommend following it first to setup the required environment.
 You must have some familiarity with Helm commands, know how to change values
-in a Helm Chart and how to use the <code class="highlighter-rouge">kubectl</code> command.</p>
+in a Helm Chart and how to use the <code class="language-plaintext highlighter-rouge">kubectl</code> command.</p>
 
 <h1 id="changing-the-configuration-of-a-galaxy-instance">Changing the configuration of a <span class="notranslate">Galaxy</span> instance</h1>
 <p>We will start off by looking at how to change the configuration of a <span class="notranslate">Galaxy</span>
 instance. We will first reduce the number of tools that are loaded for faster
-startup, and then change some common settings in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</p>
+startup, and then change some common settings in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</p>
 
 <h2 id="changing-tool-configuration">Changing tool configuration</h2>
 <p>We will change the <span class="notranslate">Galaxy</span> configuration to limit the initial list of tools
-that <span class="notranslate">Galaxy</span> will use by pointing to our custom <code class="highlighter-rouge">tool_conf.xml</code>. This will make
+that <span class="notranslate">Galaxy</span> will use by pointing to our custom <code class="language-plaintext highlighter-rouge">tool_conf.xml</code>. This will make
 your chart start up much faster for the remainder of this tutorial, as the
 default configuration loads the full list of tools used by
 <a href="https://usegalaxy.org/">https://use<span class="notranslate">galaxy</span>.org/</a>.</p>
@@ -561,7 +561,7 @@ default configuration loads the full list of tools used by
   <ol>
     <li>
       <p>First, let’s create a simpler list of tools by saving the following tool
-config as a file called <code class="highlighter-rouge">custom_tool_conf.xml</code>.</p>
+config as a file called <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code>.</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" ?&gt;</span>
 <span class="nt">&lt;toolbox</span> <span class="na">tool_path=</span><span class="s">"/cvmfs/main.<span class="notranslate">galaxy</span>project.org/shed_tools"</span><span class="nt">&gt;</span>
@@ -602,11 +602,11 @@ config as a file called <code class="highlighter-rouge">custom_tool_conf.xml</co
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Next, let’s create a new <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file that uses this <code class="highlighter-rouge">custom_tool_conf.xml</code>.</p>
+      <p>Next, let’s create a new <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file that uses this <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code>.</p>
 
-      <p>Note that the content below is the same as the <code class="highlighter-rouge">configs</code> section of
-<code class="highlighter-rouge">values-cvmfs.yaml</code> file from the <span class="notranslate">Galaxy</span> Helm chart with one exception:
-<code class="highlighter-rouge">tool_config_file</code> entry is pointing to our custom tool list instead of the
+      <p>Note that the content below is the same as the <code class="language-plaintext highlighter-rouge">configs</code> section of
+<code class="language-plaintext highlighter-rouge">values-cvmfs.yaml</code> file from the <span class="notranslate">Galaxy</span> Helm chart with one exception:
+<code class="language-plaintext highlighter-rouge">tool_config_file</code> entry is pointing to our custom tool list instead of the
 full list from CVMFS.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">uwsgi</span><span class="pi">:</span>
@@ -643,18 +643,18 @@ full list from CVMFS.</p>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Now, let’s upgrade the chart to use <code class="highlighter-rouge">custom_tool_conf.xml</code> and
-<code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> by running the <code class="highlighter-rouge">helm upgrade</code> command.</p>
+      <p>Now, let’s upgrade the chart to use <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code> and
+<code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> by running the <code class="language-plaintext highlighter-rouge">helm upgrade</code> command.</p>
 
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm upgrade <span class="nt">--reuse-values</span> <span class="nt">--set-file</span> <span class="s2">"configs.custom_tool_conf</span><span class="se">\.</span><span class="s2">xml"</span><span class="o">=</span>custom_tool_conf.xml <span class="nt">--set-file</span> <span class="s2">"configs.<span class="notranslate">galaxy</span></span><span class="se">\.</span><span class="s2">yml"</span><span class="o">=</span>configs/<span class="notranslate">galaxy</span>.yml <span class="notranslate">galaxy</span> <span class="notranslate">galaxy</span>/<span class="notranslate">galaxy</span>
 </code></pre></div>      </div>
 
-      <p>Note the <code class="highlighter-rouge">--reuse-values</code> flag, which instructs Helm to reuse any
-previously set values, and apply the new ones on top.  The <code class="highlighter-rouge">--set-file</code>
-option will set the value of the <code class="highlighter-rouge">configs.custom_tool_conf.xml</code>
+      <p>Note the <code class="language-plaintext highlighter-rouge">--reuse-values</code> flag, which instructs Helm to reuse any
+previously set values, and apply the new ones on top.  The <code class="language-plaintext highlighter-rouge">--set-file</code>
+option will set the value of the <code class="language-plaintext highlighter-rouge">configs.custom_tool_conf.xml</code>
 key in your values file to the contents of the specified file, as a text
-string. Each file under <code class="highlighter-rouge">configs</code> key in <code class="highlighter-rouge">values.yaml</code> is automatically
-mapped into <span class="notranslate">Galaxy</span>’s <code class="highlighter-rouge">config</code> directory within the running container.</p>
+string. Each file under <code class="language-plaintext highlighter-rouge">configs</code> key in <code class="language-plaintext highlighter-rouge">values.yaml</code> is automatically
+mapped into <span class="notranslate">Galaxy</span>’s <code class="language-plaintext highlighter-rouge">config</code> directory within the running container.</p>
     </li>
     <li>
       <p>Notice that while the chart is upgrading, the existing version continues
@@ -690,8 +690,8 @@ NAME                          READY   STATUS    RESTARTS   AGE
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kubectl <span class="nb">exec</span> <span class="nt">-it</span> <span class="notranslate">galaxy</span>-web-7568c58b94-jzkvm /bin/bash
 </code></pre></div>      </div>
 
-      <p>Now run <code class="highlighter-rouge">ls /<span class="notranslate">galaxy</span>/server/config/</code> and note that the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> contains
-the content that you’ve provided and that <code class="highlighter-rouge">custom_tool_conf.xml</code> has also been
+      <p>Now run <code class="language-plaintext highlighter-rouge">ls /<span class="notranslate">galaxy</span>/server/config/</code> and note that the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> contains
+the content that you’ve provided and that <code class="language-plaintext highlighter-rouge">custom_tool_conf.xml</code> has also been
 mapped into the config folder. In this same way, any of <span class="notranslate">Galaxy</span>’s config
 files can be overridden by simply <span class="notranslate">mapping</span> in the relevant file into the
 config folder.</p>
@@ -700,7 +700,7 @@ config folder.</p>
 </blockquote>
 
 <h2 id="setting-the-admin-user-and-changing-the-brand">Setting the admin user and changing the brand</h2>
-<p>Next, we will set the admin user and change the brand in <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>. We will
+<p>Next, we will set the admin user and change the brand in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>. We will
 rollback our change to understand how Helm manages configuration.</p>
 
 <blockquote class="notranslate hands_on">
@@ -708,10 +708,10 @@ rollback our change to understand how Helm manages configuration.</p>
 
   <ol>
     <li>
-      <p>Modify the following entries in your <code class="highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>. Make sure to add these
-keys under the <code class="highlighter-rouge"><span class="notranslate">galaxy</span>:</code> section of the file.</p>
+      <p>Modify the following entries in your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>. Make sure to add these
+keys under the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>:</code> section of the file.</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brand: "Hello World"
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>brand: "Hello World"
 admin_users: "admin@mydomain.com"
 </code></pre></div>      </div>
     </li>
@@ -742,7 +742,7 @@ cvmfs 	1       	Wed Jun 26 14:47:46 2019	DEPLOYED	<span class="notranslate">gala
       <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>helm rollback <span class="notranslate">galaxy</span> 2
 </code></pre></div>      </div>
 
-      <p>Use <code class="highlighter-rouge">helm get values</code> again to observe that the values have reverted to
+      <p>Use <code class="language-plaintext highlighter-rouge">helm get values</code> again to observe that the values have reverted to
 the previous revision. After a short while, once the new container is up
 and running, Kubernetes will automatically switch over to it and you can
 see that the previous configuration has been restored.</p>
@@ -760,7 +760,7 @@ web handler and one job handler. We will now look at how these can be scaled.</p
 
   <ol>
     <li>
-      <p>View the <code class="highlighter-rouge">values-cvmfs.yaml</code> file in the <span class="notranslate">Galaxy</span> Helm chart and note down the
+      <p>View the <code class="language-plaintext highlighter-rouge">values-cvmfs.yaml</code> file in the <span class="notranslate">Galaxy</span> Helm chart and note down the
 number of web and job handlers.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">webHandlers</span><span class="pi">:</span>
@@ -838,11 +838,11 @@ NAME                          READY   STATUS    RESTARTS   AGE
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>If we run <code class="highlighter-rouge">kubectl get pods</code>, we can notice how Kubernetes immediately
+      <p>If we run <code class="language-plaintext highlighter-rouge">kubectl get pods</code>, we can notice how Kubernetes immediately
 starts a new pod to replace the failed one, bringing the environment back to
 the desired state. Take a look at the liveness probe defined for the <span class="notranslate">galaxy</span>
 web container in the helm chart source code
-(<code class="highlighter-rouge">templates/deployment-web.yaml</code>).</p>
+(<code class="language-plaintext highlighter-rouge">templates/deployment-web.yaml</code>).</p>
     </li>
   </ol>
 
@@ -865,7 +865,7 @@ related containers.</p>
       <p>The purge flag instructs helm to permanently remove <span class="notranslate">galaxy</span> from its history.</p>
     </li>
     <li>
-      <p>Use <code class="highlighter-rouge">kubectl get pods</code> to verify that the pods have been deleted.</p>
+      <p>Use <code class="language-plaintext highlighter-rouge">kubectl get pods</code> to verify that the pods have been deleted.</p>
     </li>
   </ol>
 
@@ -927,7 +927,7 @@ on Gitter: <a href="https://gitter.im/galaxyproject/FederatedGalaxy">https://git
     title = "Managing Galaxy on Kubernetes (Galaxy Training Materials)",
     year = "2019",
     month = "09",
-    day = "17"
+    day = "18"
     url = "\url{/training-material/topics/admin/tutorials/k8s-managing-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

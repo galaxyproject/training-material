@@ -599,9 +599,9 @@
     </li>
     <li><strong>Get species occurrences data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Scientific name”</em>: <code class="highlighter-rouge">chrysemys picta</code></li>
-        <li><em>“Data source”</em>: <code class="highlighter-rouge">gbif</code></li>
-        <li><em>“Number of records to return”</em>: <code class="highlighter-rouge">10000</code></li>
+        <li><em>“Scientific name”</em>: <code class="language-plaintext highlighter-rouge">chrysemys picta</code></li>
+        <li><em>“Data source”</em>: <code class="language-plaintext highlighter-rouge">gbif</code></li>
+        <li><em>“Number of records to return”</em>: <code class="language-plaintext highlighter-rouge">10000</code></li>
       </ul>
     </li>
     <li>Inspect the generated file with the Scratchbook</li>
@@ -633,8 +633,8 @@
   <ol>
     <li><strong>Cut columns</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
-        <li><em>“Cut columns”</em>: <code class="highlighter-rouge">c1,c2,c3,c51</code></li>
-        <li><em>“Delimited by”</em>: <code class="highlighter-rouge">Tab</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c1,c2,c3,c51</code></li>
+        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: output of <strong>Get species occurrences data</strong></li>
       </ul>
     </li>
@@ -642,8 +642,8 @@
     <li><strong>Filter data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: output of <strong>Cut columns</strong></li>
-        <li><em>“With following condition”</em>: <code class="highlighter-rouge">c4=='US'</code></li>
-        <li><em>“Number of header lines to skip”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c4=='US'</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li>
@@ -663,11 +663,11 @@
     <li><strong>Tabular to CSV</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
       <ul>
         <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“tabular file”</em>: output of <strong>Filter</strong></li>
-        <li><em>“output csv Separator”</em>: <code class="highlighter-rouge">,</code></li>
-        <li><em>“Header in file”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“output csv Separator”</em>: <code class="language-plaintext highlighter-rouge">,</code></li>
+        <li><em>“Header in file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Due to an issue related to the actual tabular to csv converter application to GBIF format, each <code class="highlighter-rouge">"</code> sign is triplicated on the resulting file. You need to replace <code class="highlighter-rouge">"""</code> by <code class="highlighter-rouge">"</code> using for example the <strong>Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> parts of text tool.</li>
+    <li>Due to an issue related to the actual tabular to csv converter application to GBIF format, each <code class="language-plaintext highlighter-rouge">"</code> sign is triplicated on the resulting file. You need to replace <code class="language-plaintext highlighter-rouge">"""</code> by <code class="language-plaintext highlighter-rouge">"</code> using for example the <strong>Replace</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> parts of text tool.</li>
   </ol>
 </blockquote>
 
@@ -683,14 +683,14 @@
   <h3 id="hands_on-hands-on-launch-wallace"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch Wallace</h3>
   <ol>
     <li>Verify your current history is the history containing previous filtered occurences data, then go to https://ecology.use<span class="notranslate">galaxy</span>.eu/root?tool_id=interactive_tool_wallace and click on execute</li>
-    <li>Go to User &gt; Active InteractiveTools, then click on the active InteractiveTool named <code class="highlighter-rouge">Wallace visualisation</code></li>
+    <li>Go to User &gt; Active InteractiveTools, then click on the active InteractiveTool named <code class="language-plaintext highlighter-rouge">Wallace visualisation</code></li>
     <li>In Wallace
       <ol>
-        <li>Due to an issue related to last wallace Docker update, a manual fix is proposed waiting for a better solution. You first have to go to the <strong>5 Partition Occs</strong>, selecting <em>“Spatial Partition”</em> then for <em>“Options available”</em> selecting <code class="highlighter-rouge">Checkerboard 2 (k=4)</code> then click on the <strong>Partition</strong> button. This will fix the issue so now you have the <em>“Aggregation Factor”</em> displayed. Sorry for the inconvenience.</li>
+        <li>Due to an issue related to last wallace Docker update, a manual fix is proposed waiting for a better solution. You first have to go to the <strong>5 Partition Occs</strong>, selecting <em>“Spatial Partition”</em> then for <em>“Options available”</em> selecting <code class="language-plaintext highlighter-rouge">Checkerboard 2 (k=4)</code> then click on the <strong>Partition</strong> button. This will fix the issue so now you have the <em>“Aggregation Factor”</em> displayed. Sorry for the inconvenience.</li>
         <li>Go to <strong>1 Occ Data</strong></li>
         <li>In <strong>Obtain Occurrence Data</strong>
           <ul>
-            <li><em>“Modules Available”</em>: <code class="highlighter-rouge"><span class="notranslate">Galaxy</span> History User</code></li>
+            <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span> History User</code></li>
             <li><em>“Select from your <span class="notranslate">Galaxy</span> History User csv file”</em>: output of <strong>Tabular to CSV</strong></li>
             <li>Click on <strong>Load Occurrences</strong></li>
           </ul>
@@ -764,7 +764,7 @@
     <li>In <strong>Obtain Environmental Data</strong>
       <ul>
         <li>
-          <p><em>“Modules Available”</em>: <code class="highlighter-rouge">WorldClim Bioclims</code></p>
+          <p><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">WorldClim Bioclims</code></p>
 
           <blockquote class="comment">
             <h3 id="comment-using-your-own-raster"><i class="fa fa-commenting-o" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using your own raster</h3>
@@ -773,7 +773,7 @@
               <li>Import it into <span class="notranslate">Galaxy</span> in the GeoTIFF format</li>
               <li>In <strong>Obtain Environmental Data</strong>
                 <ul>
-                  <li><em>“Modules Available”</em>: <code class="highlighter-rouge"><span class="notranslate">Galaxy</span> History User</code></li>
+                  <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span> History User</code></li>
                   <li><em>“Select from your <span class="notranslate">Galaxy</span> History User csv file”</em>: imported GeoTIFF file</li>
                 </ul>
               </li>
@@ -781,7 +781,7 @@
           </blockquote>
         </li>
         <li>
-          <p><em>“Select WorldClim bioclimatic variable resolution”</em>: <code class="highlighter-rouge">10 arcmin</code></p>
+          <p><em>“Select WorldClim bioclimatic variable resolution”</em>: <code class="language-plaintext highlighter-rouge">10 arcmin</code></p>
 
           <p>This is the lowest resolution.</p>
         </li>
@@ -821,19 +821,19 @@
     <li>Go to <strong>4 Process Envs</strong></li>
     <li>In <strong>Process Environmental Data</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">Select Study Region</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Select Study Region</code></li>
       </ul>
     </li>
     <li>In <strong>Step 1: Choose Background Extent</strong>
       <ul>
-        <li><em>“Background Extents”</em>: <code class="highlighter-rouge">Minimum convex polygon</code></li>
-        <li><em>“Study region buffer distance (degree)”</em>: <code class="highlighter-rouge">1</code></li>
+        <li><em>“Background Extents”</em>: <code class="language-plaintext highlighter-rouge">Minimum convex polygon</code></li>
+        <li><em>“Study region buffer distance (degree)”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
     <li>Click on <strong>Select</strong></li>
     <li>In <strong>Step 2: Sample Background Points</strong>
       <ul>
-        <li><em>“No. of background points”</em>: <code class="highlighter-rouge">100000</code></li>
+        <li><em>“No. of background points”</em>: <code class="language-plaintext highlighter-rouge">100000</code></li>
       </ul>
     </li>
     <li>Click on <strong>Sample</strong></li>
@@ -852,7 +852,7 @@
   <li><strong>Non-spatial Partition</strong>: a partition used when there is no bias due to space, time or sampling method
     <ol>
       <li>Jakknife (k=n): each occurrence in the dataset is considered as equal to a bin. This is usually used when you have a small dataset with no known bias</li>
-      <li>Random k-fold: partition the data randomly in a number of bins set by the user with the option <code class="highlighter-rouge">Number of Folds</code></li>
+      <li>Random k-fold: partition the data randomly in a number of bins set by the user with the option <code class="language-plaintext highlighter-rouge">Number of Folds</code></li>
     </ol>
   </li>
   <li><strong>Spatial Partition</strong>: a partition used when there could be bias due to time, space or sampling method
@@ -876,9 +876,9 @@
     <li>Go to <strong>5 Partition Occs</strong></li>
     <li>In <strong>Partition Occurrence Data</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">Spatial Partition</code></li>
-        <li><em>“Options Available:”</em>: <code class="highlighter-rouge">Checkerboard 2 (k=4)</code></li>
-        <li><em>“Aggregation Factor”</em>: <code class="highlighter-rouge">6</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Spatial Partition</code></li>
+        <li><em>“Options Available:”</em>: <code class="language-plaintext highlighter-rouge">Checkerboard 2 (k=4)</code></li>
+        <li><em>“Aggregation Factor”</em>: <code class="language-plaintext highlighter-rouge">6</code></li>
       </ul>
     </li>
     <li>Click on <strong>Partition</strong></li>
@@ -904,7 +904,7 @@
     <li>Go to <strong>6 Model</strong></li>
     <li>In <strong>Build and Evaluate Niche Model</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">BIOCLIM</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">BIOCLIM</code></li>
       </ul>
     </li>
     <li>Click on <strong>Run</strong></li>
@@ -927,10 +927,10 @@
     <li>Go to <strong>7 Visualize</strong></li>
     <li>In <strong>Visualize Model Results</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">BIOCLIM Envelope Plots</code></li>
-        <li><em>“Axis 1”</em>: <code class="highlighter-rouge">1</code></li>
-        <li><em>“Axis 1”</em>: <code class="highlighter-rouge">12</code></li>
-        <li><em>“Set threshold”</em>: <code class="highlighter-rouge">0.75</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">BIOCLIM Envelope Plots</code></li>
+        <li><em>“Axis 1”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“Axis 1”</em>: <code class="language-plaintext highlighter-rouge">12</code></li>
+        <li><em>“Set threshold”</em>: <code class="language-plaintext highlighter-rouge">0.75</code></li>
       </ul>
     </li>
   </ol>
@@ -947,11 +947,11 @@
   <ol>
     <li>In <strong>Visualize Model Results</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">Map Prediction</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Map Prediction</code></li>
         <li>
-          <p><em>“Set threshold”</em>: <code class="highlighter-rouge">No threshold</code></p>
+          <p><em>“Set threshold”</em>: <code class="language-plaintext highlighter-rouge">No threshold</code></p>
 
-          <p>It will display a gradient of predicted presence or use. If you prefer a map with the predicted presence and predicted absence, select <code class="highlighter-rouge">minimum training presence</code>.</p>
+          <p>It will display a gradient of predicted presence or use. If you prefer a map with the predicted presence and predicted absence, select <code class="language-plaintext highlighter-rouge">minimum training presence</code>.</p>
         </li>
       </ul>
     </li>
@@ -973,7 +973,7 @@
     <li>Go to <strong>8 Project</strong></li>
     <li>In <strong>Project Model</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">Project to New Extent</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Project to New Extent</code></li>
       </ul>
     </li>
     <li>In the middle panel,
@@ -984,7 +984,7 @@
     </li>
     <li>In <strong>Project Model</strong>
       <ul>
-        <li><em>“Set threshold”</em>: <code class="highlighter-rouge">Minimum Training Presence</code></li>
+        <li><em>“Set threshold”</em>: <code class="language-plaintext highlighter-rouge">Minimum Training Presence</code></li>
       </ul>
     </li>
     <li>Click on <strong>Project</strong></li>
@@ -1000,11 +1000,11 @@
   <ol>
     <li>In <strong>Project Model</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">Project to New Time</code></li>
-        <li><em>“Select time period”</em>: <code class="highlighter-rouge">2050</code></li>
-        <li><em>“Select global circulation model”</em>: <code class="highlighter-rouge">CCSM4</code></li>
-        <li><em>“Select RCP”</em>: <code class="highlighter-rouge">2.6</code></li>
-        <li><em>“Select threshold”</em>: <code class="highlighter-rouge">Minimum Training Presence</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Project to New Time</code></li>
+        <li><em>“Select time period”</em>: <code class="language-plaintext highlighter-rouge">2050</code></li>
+        <li><em>“Select global circulation model”</em>: <code class="language-plaintext highlighter-rouge">CCSM4</code></li>
+        <li><em>“Select RCP”</em>: <code class="language-plaintext highlighter-rouge">2.6</code></li>
+        <li><em>“Select threshold”</em>: <code class="language-plaintext highlighter-rouge">Minimum Training Presence</code></li>
       </ul>
     </li>
     <li>Click on <strong>Project</strong></li>
@@ -1020,11 +1020,11 @@
   <ol>
     <li>In <strong>Project Model</strong>
       <ul>
-        <li><em>“Modules Available”</em>: <code class="highlighter-rouge">Project to New Time</code></li>
-        <li><em>“Select time period”</em>: <code class="highlighter-rouge">2050</code></li>
-        <li><em>“Select global circulation model”</em>: <code class="highlighter-rouge">CCSM4</code></li>
-        <li><em>“Select RCP”</em>: <code class="highlighter-rouge">8.5</code></li>
-        <li><em>“Select threshold”</em>: <code class="highlighter-rouge">Minimum Training Presence</code></li>
+        <li><em>“Modules Available”</em>: <code class="language-plaintext highlighter-rouge">Project to New Time</code></li>
+        <li><em>“Select time period”</em>: <code class="language-plaintext highlighter-rouge">2050</code></li>
+        <li><em>“Select global circulation model”</em>: <code class="language-plaintext highlighter-rouge">CCSM4</code></li>
+        <li><em>“Select RCP”</em>: <code class="language-plaintext highlighter-rouge">8.5</code></li>
+        <li><em>“Select threshold”</em>: <code class="language-plaintext highlighter-rouge">Minimum Training Presence</code></li>
       </ul>
     </li>
     <li>Click on <strong>Project</strong></li>

@@ -641,7 +641,7 @@
     <li>
       <p>Import the sequence read raw data (*.fastq) from <a href="https://zenodo.org/record/582600">Zenodo</a></p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
 https://zenodo.org/record/582600/files/mutant_R2.fastq
 </code></pre></div>      </div>
 
@@ -672,7 +672,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
       <p>Rename the files <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span></p>
       <ul>
         <li>The name of the files are the full URL, let’s make the names a little clearer</li>
-        <li>Change the names to just the last part, <code class="highlighter-rouge">Mutant_R1.fastq</code>, <code class="highlighter-rouge">Mutant_R2.fastq</code>  respectively</li>
+        <li>Change the names to just the last part, <code class="language-plaintext highlighter-rouge">Mutant_R1.fastq</code>, <code class="language-plaintext highlighter-rouge">Mutant_R2.fastq</code>  respectively</li>
       </ul>
 
       <blockquote class="tip">
@@ -708,12 +708,12 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
   <ol>
     <li><strong>Velvet Optimiser</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Optimise your assembly with the following parameters:
       <ul>
-        <li><em>“Start k-mer size”</em>: <code class="highlighter-rouge">45</code></li>
-        <li><em>“End k-mer size”</em>: <code class="highlighter-rouge">73</code></li>
-        <li><em>“Input file type”</em>: <code class="highlighter-rouge">Fastq</code></li>
-        <li><em>“Single or paired end <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">Paired</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+        <li><em>“Start k-mer size”</em>: <code class="language-plaintext highlighter-rouge">45</code></li>
+        <li><em>“End k-mer size”</em>: <code class="language-plaintext highlighter-rouge">73</code></li>
+        <li><em>“Input file type”</em>: <code class="language-plaintext highlighter-rouge">Fastq</code></li>
+        <li><em>“Single or paired end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
       </ul>
     </li>
   </ol>
@@ -781,7 +781,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
 
 <p>Now that we’ve assembled the genomes, let’s visualise this assembly using <a href="https://rrwick.github.io/Bandage/">Bandage</a> (<a class="citation" href="#Wick2015">Wick <i>et al.</i> 2015</a>). This tool will let us better understand how the assembly graph really looks, and can give us a feeling for if the genome was well assembled or not.</p>
 
-<p>Currently VelvetOptimiser does not include the LastGraph output, so we will manually run <code class="highlighter-rouge">velveth</code> and <code class="highlighter-rouge">velvetg</code> with the optimised parameters.</p>
+<p>Currently VelvetOptimiser does not include the LastGraph output, so we will manually run <code class="language-plaintext highlighter-rouge">velveth</code> and <code class="language-plaintext highlighter-rouge">velvetg</code> with the optimised parameters.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-manually-running-velvetgh"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Manually running velvetg/h</h3>
@@ -794,7 +794,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
       <p>Click the (i) information icon</p>
     </li>
     <li>
-      <p>Check the tool <code class="highlighter-rouge">stderr</code> in the information page for the optimised k-mer value</p>
+      <p>Check the tool <code class="language-plaintext highlighter-rouge">stderr</code> in the information page for the optimised k-mer value</p>
     </li>
   </ol>
 </blockquote>
@@ -816,14 +816,14 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
   <ol>
     <li><strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Prepare a dataset for the Velvet velvetg Assembler
       <ul>
-        <li><em>“Hash length”</em>: <code class="highlighter-rouge">55</code></li>
+        <li><em>“Hash length”</em>: <code class="language-plaintext highlighter-rouge">55</code></li>
         <li><em>“Insert Input Files”</em>:
           <ul>
             <li>1: Input Files
               <ul>
-                <li><em>“file format”</em>: <code class="highlighter-rouge">fastq</code></li>
-                <li><em>“read type”</em>: <code class="highlighter-rouge">shortPaired <span class="notranslate">reads</span></code></li>
-                <li><em>“Dataset”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
+                <li><em>“file format”</em>: <code class="language-plaintext highlighter-rouge">fastq</code></li>
+                <li><em>“read type”</em>: <code class="language-plaintext highlighter-rouge">shortPaired <span class="notranslate">reads</span></code></li>
+                <li><em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
               </ul>
             </li>
           </ul>
@@ -832,9 +832,9 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
           <ul>
             <li>2: Input Files
               <ul>
-                <li><em>“file format”</em>: <code class="highlighter-rouge">fastq</code></li>
-                <li><em>“read type”</em>: <code class="highlighter-rouge">shortPaired <span class="notranslate">reads</span></code></li>
-                <li><em>“Dataset”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
+                <li><em>“file format”</em>: <code class="language-plaintext highlighter-rouge">fastq</code></li>
+                <li><em>“read type”</em>: <code class="language-plaintext highlighter-rouge">shortPaired <span class="notranslate">reads</span></code></li>
+                <li><em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
               </ul>
             </li>
           </ul>
@@ -844,13 +844,13 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
     <li><strong>velvetg</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Velvet sequence assembler for very short <span class="notranslate">reads</span>
       <ul>
         <li><em>“Velvet dataset”</em>: output from <strong>velveth</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Generate velvet LastGraph file”</em>: <code class="highlighter-rouge">Yes</code></li>
-        <li><em>“Coverage cutoff”</em>: <code class="highlighter-rouge">Specify Cutoff Value</code>
+        <li><em>“Generate velvet LastGraph file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Coverage cutoff”</em>: <code class="language-plaintext highlighter-rouge">Specify Cutoff Value</code>
           <ul>
-            <li><em>“Remove nodes with coverage below”</em>: <code class="highlighter-rouge">1.44</code></li>
+            <li><em>“Remove nodes with coverage below”</em>: <code class="language-plaintext highlighter-rouge">1.44</code></li>
           </ul>
         </li>
-        <li><em>“Using Paired <span class="notranslate">Reads</span>”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Using Paired <span class="notranslate">Reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -866,7 +866,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
     <li><strong>Bandage Image</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: visualize de novo assembly graphs
       <ul>
         <li><em>“Graphical Fragment Assembly”</em>: The “LastGraph” output of <strong>velvetg</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-        <li><em>“Produce jpg, png or svg file?”</em>: <code class="highlighter-rouge">.svg</code></li>
+        <li><em>“Produce jpg, png or svg file?”</em>: <code class="language-plaintext highlighter-rouge">.svg</code></li>
       </ul>
     </li>
     <li>Execute</li>
@@ -945,12 +945,12 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
       <p><strong>SPAdes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Assemble the <span class="notranslate">reads</span>:</p>
 
       <ul>
-        <li><em>“Run only assembly”</em>: <code class="highlighter-rouge">yes</code></li>
-        <li><em>“K-mers to use separated by commas”</em>: <code class="highlighter-rouge">33,55,91</code> [note: no spaces!]</li>
-        <li><em>“Coverage cutoff”</em>: <code class="highlighter-rouge">auto</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Files -&gt; forward <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R1.fastq</code></li>
-        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Files -&gt; reverse <span class="notranslate">reads</span>”</em>: <code class="highlighter-rouge">mutant_R2.fastq</code></li>
-        <li><em>“Output final assembly graph with scaffolds?”</em>: <code class="highlighter-rouge">Yes</code></li>
+        <li><em>“Run only assembly”</em>: <code class="language-plaintext highlighter-rouge">yes</code></li>
+        <li><em>“K-mers to use separated by commas”</em>: <code class="language-plaintext highlighter-rouge">33,55,91</code> [note: no spaces!]</li>
+        <li><em>“Coverage cutoff”</em>: <code class="language-plaintext highlighter-rouge">auto</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Files -&gt; forward <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
+        <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Files -&gt; reverse <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
+        <li><em>“Output final assembly graph with scaffolds?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -985,7 +985,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
   <ol>
     <li><strong>Bandage</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Graphical Fragment Assembly”</em>: <code class="highlighter-rouge">assembly graph with scaffolds</code> output from <strong>SPAdes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+        <li><em>“Graphical Fragment Assembly”</em>: <code class="language-plaintext highlighter-rouge">assembly graph with scaffolds</code> output from <strong>SPAdes</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
       </ul>
     </li>
     <li>Examine the output image <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span></li>

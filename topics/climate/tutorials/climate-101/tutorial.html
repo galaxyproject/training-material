@@ -455,7 +455,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
     <li>
       <p>Import the files from <a href="">Zenodo</a> or from the shared data library</p>
 
-      <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
 https://zenodo.org/record/3776500/files/ts_cities.csv
 </code></pre></div>      </div>
 
@@ -511,13 +511,13 @@ https://zenodo.org/record/3776500/files/ts_cities.csv
         <ul>
           <li>Click on the <i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
           <li>In the central panel, click on the <i class="fa fa fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="highlighter-rouge">datatypes</code></li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
         </ul>
       </blockquote>
     </li>
     <li>
-      <p>Add a tag to the dataset corresponding to <code class="highlighter-rouge">copernicus</code></p>
+      <p>Add a tag to the dataset corresponding to <code class="language-plaintext highlighter-rouge">copernicus</code></p>
 
       <blockquote class="tip">
 
@@ -526,9 +526,9 @@ https://zenodo.org/record/3776500/files/ts_cities.csv
           <li>Click on the dataset</li>
           <li>Click on <i class="fa fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
           <li>
-            <p>Add a tag starting with <code class="highlighter-rouge">#</code></p>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
 
-            <p>Tags starting with <code class="highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
           </li>
           <li>Check that the tag is appearing below the dataset name</li>
         </ul>
@@ -568,7 +568,7 @@ the climate and gives us an indication of where both the woman and dog are likel
 
 <h1 id="what-is-the-weather-like-in-paris">What is the weather like in Paris?</h1>
 
-<p>In order to answer this question, we are going to inspect and visualize the dataset <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code> using simple <span class="notranslate">galaxy</span> tools.</p>
+<p>In order to answer this question, we are going to inspect and visualize the dataset <code class="language-plaintext highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code> using simple <span class="notranslate">galaxy</span> tools.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-daily-temperature-time-series"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Daily temperature time series</h3>
@@ -595,22 +595,22 @@ Use the <strong>tools search box</strong> at the top of the tool panel to find <
         <li>The average temperature in Paris on the 14th of July 2003 was 26.73 degrees Celcius. It can be found by using <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with parameter <strong>“the pattern”</strong> set to 2003-07-14.</li>
         <li>The minimum temperature in Paris is -11.6799995 degrees celcius and the maximum temperature in Paris is 33.579998 degrees celcius. To find out, you can use <strong>Datamash</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
-            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Print header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li>“Print all fields from input file”: <code class="highlighter-rouge">No</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
               <ul>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
                   <ul>
-                    <li><em>“Type”</em>: <code class="highlighter-rouge">minimum</code></li>
-                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                    <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">minimum</code></li>
+                    <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
                   </ul>
                 </li>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
                   <ul>
-                    <li><em>“Type”</em>: <code class="highlighter-rouge">maximum</code></li>
-                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                    <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">maximum</code></li>
+                    <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
                   </ul>
                 </li>
               </ul>
@@ -620,16 +620,16 @@ Use the <strong>tools search box</strong> at the top of the tool panel to find <
         <li>The minimum temperature (-11.6799995 degrees celcius) was observed on January 16 1985. 
  You can use different <span class="notranslate">Galaxy</span> tools to find out the solution and here we show you how to use <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
-            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Print header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
               <ul>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
                   <ul>
-                    <li><em>“Type”</em>: <code class="highlighter-rouge">minimum</code></li>
-                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                    <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">minimum</code></li>
+                    <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
                   </ul>
                 </li>
               </ul>
@@ -640,16 +640,16 @@ Use the <strong>tools search box</strong> at the top of the tool panel to find <
           <p>The maximum temperature (33.579998 degrees celcius) was observed on July 25 2019. For the <strong>maximum</strong>, repeat <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
 
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
-            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Print header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
               <ul>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
                   <ul>
-                    <li><em>“Type”</em>: <code class="highlighter-rouge">maximum</code></li>
-                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                    <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">maximum</code></li>
+                    <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
                   </ul>
                 </li>
               </ul>
@@ -691,67 +691,67 @@ Use the <strong>tools search box</strong> at the top of the tool panel to find <
           <p>Below, we show you how we found these results.
  We will first split all the dates (first column) from YYYY-MM-DD (where YYYY is the year, MM the month and DD the day) to three column to get 3 columns: one for the year, one for the month and one for the day. Use <strong>Text reformatting with awk</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with parameters:</p>
           <ul>
-            <li><strong>File to process</strong>: <code class="highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
-            <li><strong>AWK Program</strong>: <code class="highlighter-rouge">gsub(/-/,"\t",$1){$1=$1} {print}</code></li>
+            <li><strong>File to process</strong>: <code class="language-plaintext highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code></li>
+            <li><strong>AWK Program</strong>: <code class="language-plaintext highlighter-rouge">gsub(/-/,"\t",$1){$1=$1} {print}</code></li>
           </ul>
 
-          <p>Rename the resulting file to <code class="highlighter-rouge">split_dates_Paris.csv</code>.</p>
+          <p>Rename the resulting file to <code class="language-plaintext highlighter-rouge">split_dates_Paris.csv</code>.</p>
 
           <p>Then use <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">split_dates_Paris.csv</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">split_dates_Paris.csv</code></li>
             <li><em>“Group by fields”</em>: 2</li>
-            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
-            <li>“Print all fields from input file”: <code class="highlighter-rouge">No</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
               <ul>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
                   <ul>
-                    <li><em>“Type”</em>: <code class="highlighter-rouge">Mean</code></li>
-                    <li><em>“On column”</em>: <code class="highlighter-rouge">c4</code></li>
+                    <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Mean</code></li>
+                    <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
           </ul>
 
-          <p>Rename the resulting file to <code class="highlighter-rouge">climatology_Paris.csv</code>.
+          <p>Rename the resulting file to <code class="language-plaintext highlighter-rouge">climatology_Paris.csv</code>.
  Then use again <strong>Datamash</strong> to get the month where the minimum and maximum temperatures are found:</p>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">climatology_Paris.csv</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">climatology_Paris.csv</code></li>
             <li><em>“Group by fields”</em>:</li>
-            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
-            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
      - <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
-         - <em>“Type”</em>: <code class="highlighter-rouge">minimum</code>
-         - <em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+         - <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">minimum</code>
+         - <em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
           </ul>
 
           <p>Look at the resulting file and the first field will give you the month (07 e.g. July) where the maximum temperature is found.</p>
 
           <p>For the <strong>maximum</strong>, repeat <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
           <ul>
-            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">climatology_Paris.csv</code></li>
+            <li><i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">climatology_Paris.csv</code></li>
             <li><em>“Group by fields”</em>: ``</li>
-            <li><em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code></li>
-            <li><em>“Print header line”</em>: <code class="highlighter-rouge">No</code></li>
-            <li>“Print all fields from input file”: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
               <ul>
                 <li><i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
                   <ul>
-                    <li><em>“Type”</em>: <code class="highlighter-rouge">maximum</code></li>
-                    <li><em>“On column”</em>: <code class="highlighter-rouge">c2</code></li>
+                    <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">maximum</code></li>
+                    <li><em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
           </ul>
 
-          <p>The result is in the first column of the resulting file which indicates <code class="highlighter-rouge">01</code> e.g. January.</p>
+          <p>The result is in the first column of the resulting file which indicates <code class="language-plaintext highlighter-rouge">01</code> e.g. January.</p>
 
           <p>Please note that you may use other <span class="notranslate">Galaxy</span> tools to reach the same results.
 Results can be slightly different when using different source of climate information. However, you will always observe the same pattern e.g. cool month in winter and warm month on summer. We can also clearly see that Paris has a mild climate with on average no extreme temperatures.</p>
@@ -779,29 +779,29 @@ However, many data providers have pre-computed climatologies and can be directly
   <ol>
     <li>
       <p>Use <strong>Datamash</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-     - <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="highlighter-rouge">split_dates_Paris.csv</code>
+     - <i class="fa fa-file-o" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">split_dates_Paris.csv</code>
      - <em>“Group by fields”</em>: 1
-     - <em>“Input file has a header line”</em>: <code class="highlighter-rouge">Yes</code>
-     - <em>“Print header line”</em>: <code class="highlighter-rouge">No</code>
-     - “Print all fields from input file”: <code class="highlighter-rouge">No</code>
-     - <em>“Sort input”</em>: <code class="highlighter-rouge">Yes</code>
+     - <em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+     - <em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code>
+     - “Print all fields from input file”: <code class="language-plaintext highlighter-rouge">No</code>
+     - <em>“Sort input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
      - In <em>“Operation to perform on each group”</em>:
      - <i class="fa fa-plus-square-o" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
-       - <em>“Type”</em>: <code class="highlighter-rouge">Mean</code>
-       - <em>“On column”</em>: <code class="highlighter-rouge">c4</code></p>
+       - <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Mean</code>
+       - <em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></p>
     </li>
     <li>
-      <p>Rename the resulting file to <code class="highlighter-rouge">yearly_mean_Paris.csv</code>.</p>
+      <p>Rename the resulting file to <code class="language-plaintext highlighter-rouge">yearly_mean_Paris.csv</code>.</p>
     </li>
     <li>
       <p>To make a plot, you can use <strong>Scatterplot w ggplot2</strong>  <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-     - <em>“Input in tabular format”</em>: <code class="highlighter-rouge">yearly_mean_Paris.csv</code>
+     - <em>“Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">yearly_mean_Paris.csv</code>
      - <em>“Column to plot on x-axis”</em>: 1
      - <em>“Column to plot on y-axis”</em>: 2
      - <em>“Plot title”</em>: Yearly mean temperature in Paris from 1950 to 2019
      - <em>“Label for x axis”</em>: Year (YYYY)
      - <em>“Label for y axis”</em>: Temperature (degrees celcius)
-     - And finally in <code class="highlighter-rouge">Advanced Options</code> change <code class="highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</p>
+     - And finally in <code class="language-plaintext highlighter-rouge">Advanced Options</code> change <code class="language-plaintext highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</p>
     </li>
     <li>
       <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
@@ -833,12 +833,12 @@ temperature. The baseline temperature is typically computed by averaging 30 or m
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-climate-stripes-for-paris"><i class="fa fa-pencil" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Climate stripes for Paris</h3>
-  <p>Computing temperature anomalies is out of scope of this tutorial and we will therefore use pre-computed temperature anomalies <code class="highlighter-rouge">ts_cities.csv</code>.
+  <p>Computing temperature anomalies is out of scope of this tutorial and we will therefore use pre-computed temperature anomalies <code class="language-plaintext highlighter-rouge">ts_cities.csv</code>.
    A simple way to visualize anomalies and highlight cooling/warming over the years,  is to use <strong>climate stripes from timeseries</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“timeseries to plot”</em>: <code class="highlighter-rouge">ts_cities.csv</code></li>
-    <li><em>“column name to use for plotting”</em>: <code class="highlighter-rouge">tg_anomalies_paris</code></li>
-    <li><em>“plot title”</em>: <code class="highlighter-rouge">Climate stripes for Paris (1950-2019)</code></li>
+    <li><em>“timeseries to plot”</em>: <code class="language-plaintext highlighter-rouge">ts_cities.csv</code></li>
+    <li><em>“column name to use for plotting”</em>: <code class="language-plaintext highlighter-rouge">tg_anomalies_paris</code></li>
+    <li><em>“plot title”</em>: <code class="language-plaintext highlighter-rouge">Climate stripes for Paris (1950-2019)</code></li>
   </ul>
 
   <p><strong>View</strong> <i class="fa fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
@@ -893,18 +893,18 @@ regularly updated (with recent dates). For instance, in March 2020, the correspo
       <ul>
         <li><em>“Variable(s)”</em>: surface_air_relative_humidity</li>
         <li><em>“Select type of data”</em>: Monthly mean</li>
-        <li><em>“Select year(s)”</em>: <code class="highlighter-rouge">1980</code> and <code class="highlighter-rouge">2018</code></li>
-        <li><em>“Select month”</em>: <code class="highlighter-rouge">July</code>
- Rename the resulting file to <code class="highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
+        <li><em>“Select year(s)”</em>: <code class="language-plaintext highlighter-rouge">1980</code> and <code class="language-plaintext highlighter-rouge">2018</code></li>
+        <li><em>“Select month”</em>: <code class="language-plaintext highlighter-rouge">July</code>
+ Rename the resulting file to <code class="language-plaintext highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
       </ul>
     </li>
     <li><strong>map plot gridded (lat/lon) netCDF data</strong> <i class="fa fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“input with geographical coordinates (netCDF format)”</em>: <code class="highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
-        <li>*“variable name as given in the netCDF file”: <code class="highlighter-rouge">tp</code></li>
-        <li>And finally in <code class="highlighter-rouge">Advanced Options</code> change:
+        <li><em>“input with geographical coordinates (netCDF format)”</em>: <code class="language-plaintext highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
+        <li>*“variable name as given in the netCDF file”: <code class="language-plaintext highlighter-rouge">tp</code></li>
+        <li>And finally in <code class="language-plaintext highlighter-rouge">Advanced Options</code> change:
           <ul>
-            <li><em>“multiple times”</em>: <code class="highlighter-rouge">Yes</code></li>
+            <li><em>“multiple times”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“comma separated list of indexes for fields to plot”</em>: 0,1</li>
             <li><em>“number of rows for subplot grid”</em>: 2</li>
             <li><em>“subplot title (repeated on each subplot)”</em>: relative humidity in percentage</li>
