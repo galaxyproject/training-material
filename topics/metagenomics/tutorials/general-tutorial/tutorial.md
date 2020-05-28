@@ -82,7 +82,7 @@ has been sequenced using 454 GS FLX Titanium. For the tutorial, the original fas
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import from [Zenodo](https://zenodo.org/record/815875) or from the data library (in GTN-Material -> "Analyses of metagenomics data") the files
+> 1. Import the following files from [Zenodo](https://zenodo.org/record/815875), or from the shared data library (in `GTN - Material -> Metagenomics -> Analyses of metagenomics data - The global picture`):
 >    - `SRR531818_pampa.fasta`
 >    - `SRR651839_anguil.fasta`
 >
