@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: ATAC-Seq data analysis
-zenodo_link: "https://zenodo.org/record/3270536"
+zenodo_link: https://zenodo.org/record/3862793
 questions:
 - Which DNA regions are accessible in the human lymphoblastoid cell line GM12878?
 - How to analyse and visualise ATAC-Seq data?
