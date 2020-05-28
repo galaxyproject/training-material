@@ -178,15 +178,16 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 > ### {% icon hands_on %} Hands-on: Create the structure of the tutorial from a workflow
 >
 > 1. Create a small workflow with one or two steps on a running Galaxy instance
-> 2. Get the workflow id
+> 2. Add the topic name as Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
+> 3. Get the workflow id
 >    1. Go the "Share" page of the workflow
 >    2. Copy the information after `id=` in the URL of the page
-> 3. Get your API key for this Galaxy instance
+> 4. Get your API key for this Galaxy instance
 >    1. Click on **User** --> **Preferences**
 >    2. Click on **Manage API key**
 >    3. Click on **Create a new key** (if none is available)
 >    4. Copy the API key
-> 4. Generate the skeleton of the tutorial locally
+> 5. Generate the skeleton of the tutorial locally
 >
 >    ```
 >    $ planemo training_generate_from_wf \
@@ -198,7 +199,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >             --zenodo_link "URL to the Zenodo record (Optional)"
 >    ```
 >
->    > ### {% icon comment %} Using a local worklfow
+>    > ### {% icon comment %} Using a local workflow
 >    > It is also possible to download the workflow locally (with the `.ga` extension), and then run a slightly different command:
 >    >
 >    > ```
@@ -210,7 +211,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >    > ```
 >    {: .comment}
 >
-> 5. Inspect the generated `tutorial.md`
+> 6. Inspect the generated `tutorial.md`
 {: .hands_on}
 
 The generated tutorial is structured with:
