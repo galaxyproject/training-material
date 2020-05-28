@@ -62,12 +62,12 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the files from [Zenodo](https://zenodo.org/record/3270536) and [ENCODE](https://www.encodeproject.org/) or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3862792) or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/3270536/files/SRR891268_R1.fastq.gz
->    https://zenodo.org/record/3270536/files/SRR891268_R2.fastq.gz
->    https://www.encodeproject.org/files/ENCFF933NTR/@@download/ENCFF933NTR.bed.gz
+>    https://zenodo.org/record/3862793/files/ENCFF933NTR.bed.gz
+>    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R1.fastq.gz
+>    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
