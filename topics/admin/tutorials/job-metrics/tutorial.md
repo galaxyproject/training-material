@@ -82,12 +82,9 @@ These include very basic submission parameters. We want more information!
 >    ```diff
 >    --- galaxyservers.yml.old
 >    +++ galaxyservers.yml
->
->    + galaxy_job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
->
 >      galaxy_config:
 >        galaxy:
->    +     job_metrics_config_file: "{{ galaxy_job_metrics_config_file }}"
+>    +     job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
 >          brand: "My Galaxy"
 >          admin_users: admin@example.org
 >          database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
@@ -96,7 +93,7 @@ These include very basic submission parameters. We want more information!
 >
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_metrics_conf.xml.j2
->    +    dest: "{{ galaxy_job_metrics_config_file }}"
+>    +    dest: "{{ galaxy_config.galaxy.job_metrics_config_file }}"
 >       - src: templates/galaxy/config/tool_conf_interactive.xml
 >         dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
 >       - src: templates/galaxy/config/job_conf.xml
