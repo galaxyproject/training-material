@@ -78,7 +78,7 @@ Let's begin by uploading the necessary datasets.
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/....)
+> 2. Import the files from [Zenodo](https://zenodo.org/record/3738729#.Xs1EeHUzY5k)
 >
 >    ```
 >    https://zenodo.org/record/3738729/files/train_rows.csv
