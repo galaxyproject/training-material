@@ -521,6 +521,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
             UseGalaxy.eu
         </a>
@@ -528,10 +530,6 @@
     
         
     
-        
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
         
     
         
@@ -547,7 +545,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 30, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 2, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -579,6 +577,7 @@
   </li>
   <li><a href="#active-site-preparation" id="markdown-toc-active-site-preparation">Active site preparation</a>    <ol>
       <li><a href="#convert-protein-structure-to-mol2-format" id="markdown-toc-convert-protein-structure-to-mol2-format">Convert protein structure to MOL2 format</a></li>
+      <li><a href="#generate-frankenstein-ligand" id="markdown-toc-generate-frankenstein-ligand">Generate Frankenstein ligand</a></li>
       <li><a href="#generate-active-site-definition" id="markdown-toc-generate-active-site-definition">Generate active site definition</a></li>
     </ol>
   </li>
@@ -612,12 +611,11 @@
 
 <h1 id="get-data">Get data</h1>
 
-<p>We require four datasets for the simulation and analysis:</p>
+<p>We require three datasets for the simulation and analysis:</p>
 <ol>
   <li>A list of 100 ligand candidates. These are the molecules which will be docking into the protein binding site.</li>
   <li>A PDB file of the receptor MPro protein (without ligand or solvent).</li>
   <li>A list of fragment hits (17 in total) in SDF format.</li>
-  <li>A ‘Frankenstein ligand’, which combines the features of all the fragment hits. This will be used to construct a model of the active site for docking.</li>
 </ol>
 
 <blockquote class="details">
@@ -654,7 +652,6 @@
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3730474/files/candidates.smi
 https://zenodo.org/record/3730474/files/Mpro-x0195_0_apo-desolv.pdb
 https://zenodo.org/record/3730474/files/hits.sdf
-https://zenodo.org/record/3730474/files/frankenstein.sdf
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -680,9 +677,9 @@ https://zenodo.org/record/3730474/files/frankenstein.sdf
 
       </blockquote>
     </li>
-    <li>Rename the datasets <code class="language-plaintext highlighter-rouge">Candidates SMILES</code>, <code class="language-plaintext highlighter-rouge">Receptor PDB</code>, <code class="language-plaintext highlighter-rouge">Hits SDF</code>, and <code class="language-plaintext highlighter-rouge">Frankenstein SDF</code> respectively.</li>
+    <li>Rename the datasets <code class="language-plaintext highlighter-rouge">Candidates SMILES</code>, <code class="language-plaintext highlighter-rouge">Receptor PDB</code> and <code class="language-plaintext highlighter-rouge">Hits SDF</code> respectively.</li>
     <li>
-      <p>Check that the datatypes (<code class="language-plaintext highlighter-rouge">smi</code>, <code class="language-plaintext highlighter-rouge">pdb</code>, <code class="language-plaintext highlighter-rouge">sdf</code>, and <code class="language-plaintext highlighter-rouge">sdf</code> respectively) are correct. In particularly, check the <code class="language-plaintext highlighter-rouge">Candidates SMILES</code> file, as the SMILES datatype is not detected automatically by <span class="notranslate">Galaxy</span>.</p>
+      <p>Check that the datatypes (<code class="language-plaintext highlighter-rouge">smi</code>, <code class="language-plaintext highlighter-rouge">pdb</code>, and <code class="language-plaintext highlighter-rouge">sdf</code> respectively) are correct. In particularly, check the <code class="language-plaintext highlighter-rouge">Candidates SMILES</code> file, as the SMILES datatype is not detected automatically by <span class="notranslate">Galaxy</span>.</p>
 
       <blockquote class="tip">
 
@@ -843,9 +840,9 @@ https://zenodo.org/record/3730474/files/frankenstein.sdf
 
 </blockquote>
 
-<h2 id="generate-active-site-definition">Generate active site definition</h2>
+<h2 id="generate-frankenstein-ligand">Generate Frankenstein ligand</h2>
 
-<p>For docking with rDock, a file needs to be created defining the active site. This is done using the <strong>rbcavity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool, which requires the receptor in MOL2 format as input as well as a single reference ligand in Mol/SDF format. We use the ‘Frankenstein ligand’ as the reference.</p>
+<p>For docking with rDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a ‘Frankenstein ligand’ which possesses the properties of all the fragments. A very simple <span class="notranslate">Galaxy</span> tool is available for this.</p>
 
 <blockquote class="question">
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -862,6 +859,24 @@ https://zenodo.org/record/3730474/files/frankenstein.sdf
 </blockquote>
 
 <blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generate-frankenstein-ligand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate Frankenstein ligand</h3>
+
+  <ol>
+    <li><strong>Create Frankenstein ligand</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">Hits SDF</code></li>
+      </ul>
+    </li>
+    <li>Rename the file to <code class="language-plaintext highlighter-rouge">Frankstein SDF</code>.</li>
+  </ol>
+
+</blockquote>
+
+<h2 id="generate-active-site-definition">Generate active site definition</h2>
+
+<p>The active site can now be generated using the <strong>rbcavity</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool, which requires the receptor in MOL2 format as input as well as a single reference ligand in Mol/SDF format. We use the Frankenstein ligand as the reference.</p>
+
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-active-site-preparation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Active site preparation</h3>
 
   <ol>
@@ -876,7 +891,8 @@ https://zenodo.org/record/3730474/files/frankenstein.sdf
         <li><em>“Mapper grid step”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
         <li><em>“Cavity weight”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
       </ul>
-
+    </li>
+    <li>Rename the output file <code class="language-plaintext highlighter-rouge">Active site</code>.
       <blockquote class="comment">
         <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
@@ -913,7 +929,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
     <li><strong>rDock docking</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Receptor”</em>: <code class="language-plaintext highlighter-rouge">Receptor MOL2</code></li>
-        <li><em>“Active site”</em>: <code class="language-plaintext highlighter-rouge">rbcavity active site</code></li>
+        <li><em>“Active site”</em>: <code class="language-plaintext highlighter-rouge">Active site</code></li>
         <li><em>“Ligands”</em>: <code class="language-plaintext highlighter-rouge">Split file</code> collection</li>
         <li><em>“Number of dockings”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
         <li><em>“Number of best poses”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
@@ -986,6 +1002,7 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
         <li><em>“Set of clusters to score against”</em>: <code class="language-plaintext highlighter-rouge">Hits SDF</code></li>
       </ul>
     </li>
+    <li>Rename the output file to <code class="language-plaintext highlighter-rouge">Scored poses</code>.</li>
   </ol>
 </blockquote>
 
@@ -1113,8 +1130,8 @@ See <a href="https://covid19.galaxyproject.org/cheminformatics/3-Docking/">here<
     author = "Simon Bray",
     title = "Virtual screening of the SARS-CoV-2 main protease with rDock and pose scoring (Galaxy Training Materials)",
     year = "2020",
-    month = "03",
-    day = "30"
+    month = "06",
+    day = "02"
     url = "\url{/training-material/topics/computational-chemistry/tutorials/covid19-docking/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
