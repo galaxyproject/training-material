@@ -80,7 +80,7 @@ Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md
 
 class: enlarge200
 
-**User Facing Applications**
+**User-Facing Applications**
 
 ---
 
@@ -222,9 +222,7 @@ class: enlarge150
 
 ![StarForge logo](https://raw.githubusercontent.com/galaxyproject/starforge/master/docs/starforge_logo.png)
 
-Build Galaxy Tool dependencies for the ToolShed in Docker containers
-
-Largely moved to PyPI and Conda, but build Galaxy framework dependencies as Python wheels when needed.
+Build Galaxy framework dependencies as Python wheels when needed.
 
 ---
 
@@ -251,7 +249,7 @@ class: enlarge150
 
 [galaxyproject/**pulsar** ](https://github.com/galaxyproject/pulsar)
 
-![Pulsar Logo](https://camo.githubusercontent.com/a774a60ab16bbad3dcb425e51cdecc1093159981/68747470733a2f2f67616c61787970726f6a6563742e6f72672f696d616765732f67616c6178792d6c6f676f732f70756c7361725f7472616e73706172656e742e706e67)
+![Pulsar Logo](https://galaxyproject.org/images/galaxy-logos/pulsar_transparent.png)
 
 Distributed job execution engine for Galaxy.
 
@@ -269,7 +267,7 @@ class: enlarge150
 
 Library and CLI for managing Galaxy plugins - tools, index data, and workflows.
 
-Layer on top of Bioblend building useful utilities for working with the Galaxy API from an administrator perspective.
+Layer on top of BioBlend building useful utilities for working with the Galaxy API from an administrator perspective.
 
 ---
 
@@ -277,7 +275,7 @@ class: enlarge150
 
 [**usegalaxy-eu/gxadmin **](https://github.com/usegalaxy-eu/gxadmin)
 
-Handy command line utility for Galaxy administrators.
+Handy command-line utility for Galaxy administrators.
 
 ---
 
@@ -365,7 +363,7 @@ class: enlarge200
 
 ### Code of Conduct (CODE_OF_CONDUCT.md)
 
-Describes expectations, encourages diversity, and describes how report issues such as unacceptable behavior.
+Describes expectations, encourages diversity, and describes how to report issues such as unacceptable behavior.
 
 ---
 
@@ -399,9 +397,9 @@ flexibility is paramount.
 - Consistent colors, fonts, themes, etc...
 - Reusable components for presenting common widgets - from the generic (forms and grids) to the specific (tools and histories).
 - Tied to specific technologies:
-  - Implemented JavaScript (ES6)
-  - Built with Webpack
-  - VueJS for component definitions
+  - Implemented in JavaScript (ES6)
+  - Built with [webpack](https://webpack.js.org/)
+  - [Vue.js](https://vuejs.org/) for component definitions
 
 ---
 
@@ -410,11 +408,11 @@ flexibility is paramount.
 Galaxy's backend is in many ways driven by *pluggable interfaces* and
 can be adapted to many different technologies.
 
-- SQLAlchemy allows using sqlite, postgres, or MySQL (sort of) for a database.
+- SQLAlchemy allows using SQLite, PostgreSQL, or MySQL (sort of) for your database.
 - Many different cluster backends or job managers are supported.
 - Different frontend proxies (e.g. nginx) are supported as well as web
   application containers (e.g. uWSGI).
-- Different storage strategies and technologies are supported (e.g. S3, iRODs).
+- Different storage strategies and technologies are supported (e.g. S3, iRODS).
 - Tool definitions, job metrics, stat middleware, tool dependency resolution, workflow modules,
   datatype definitions are all plugin driven.
 
@@ -631,7 +629,7 @@ class: enlarge150
 
 We do build on many of the same standards, concepts, and libraries - the entire stack isn't custom code but there is a non-trivial web framework defined in "Galaxy".
 
-The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predated it and has evolved its own framework.
+The Galaxy community likes Django and uses it to build newer webapps, Galaxy simply predates it and has evolved its own framework.
 
 ---
 
@@ -664,7 +662,7 @@ class: enlarge150
 
 ### Managers
 
-High-level business logic that tie all of these components together.
+High-level business logic that ties all of these components together.
 
 Controllers should ideally be thin wrappers around actions defined in managers.
 
@@ -881,7 +879,7 @@ template: left-aligned
 
 - Source stylesheets and JavaScript (ES6) in `client/galaxy/{style|scripts}`
 - "Packed" bundles served by Galaxy stored in `static/dist`
-  - run.sh uses `git diff` to try to determine if client needs to be built before starting Galaxy
+  - `run.sh` uses `git diff` to try to determine if client needs to be built before starting Galaxy
   - webpack builds these "compiled" artifacts
 
 Upshot - to develop against the client, modify files in `client/` and rebuild with `make client` before
@@ -930,7 +928,7 @@ Packs and "transpiles" Galaxy ES6 code (.js), Galaxy Vue modules (.vue), librari
 
 Hundreds of high-level well organized files into optimized single files that can be quickly downloaded.
 
-Lots of active development and complexity around Viz plugins and dependencies for instance, but the webpack configuration file in `config/webpack.config.js` is fairly straight forward.
+Lots of active development and complexity around Viz plugins and dependencies for instance, but the webpack configuration file in `config/webpack.config.js` is fairly straightforward.
 
 ---
 
@@ -1013,9 +1011,8 @@ template: left-aligned
 
 ### Dependencies - JavaScript
 
-- Dependencies are defined `client/package.json`.
-- These are fetched from npm.
-- These are fetched and compiled into bundles as part of `make client` and related `Makefile` targets.
+- Dependencies are defined in `client/package.json`.
+- These are fetched from npm and compiled into bundles as part of `make client` and related `Makefile` targets.
 
 ---
 
