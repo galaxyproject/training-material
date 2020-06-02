@@ -61,11 +61,10 @@ The original study required almost 20 years of CPU time, not counting GPU resour
 
 # Get data
 
-We require four datasets for the simulation and analysis:
+We require three datasets for the simulation and analysis:
 1. A list of 100 ligand candidates. These are the molecules which will be docking into the protein binding site.
 2. A PDB file of the receptor MPro protein (without ligand or solvent).
 3. A list of fragment hits (17 in total) in SDF format.
-4. A 'Frankenstein ligand', which combines the features of all the fragment hits. This will be used to construct a model of the active site for docking.
 
 > ### {% icon details %} Differences with the original study
 >
@@ -99,13 +98,12 @@ We require four datasets for the simulation and analysis:
 >    https://zenodo.org/record/3730474/files/candidates.smi
 >    https://zenodo.org/record/3730474/files/Mpro-x0195_0_apo-desolv.pdb
 >    https://zenodo.org/record/3730474/files/hits.sdf
->    https://zenodo.org/record/3730474/files/frankenstein.sdf
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >
-> 3. Rename the datasets `Candidates SMILES`, `Receptor PDB`, `Hits SDF`, and `Frankenstein SDF` respectively.
-> 4. Check that the datatypes (`smi`, `pdb`, `sdf`, and `sdf` respectively) are correct. In particularly, check the `Candidates SMILES` file, as the SMILES datatype is not detected automatically by Galaxy.
+> 3. Rename the datasets `Candidates SMILES`, `Receptor PDB` and `Hits SDF` respectively.
+> 4. Check that the datatypes (`smi`, `pdb`, and `sdf` respectively) are correct. In particularly, check the `Candidates SMILES` file, as the SMILES datatype is not detected automatically by Galaxy.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 {: .hands_on}
@@ -214,9 +212,9 @@ The receptor file we are using is in PDB format, but the rDock tool we use for d
 >
 {: .hands_on}
 
-## Generate active site definition
+## Generate Frankenstein ligand
 
-For docking with rDock, a file needs to be created defining the active site. This is done using the **rbcavity** {% icon tool %} tool, which requires the receptor in MOL2 format as input as well as a single reference ligand in Mol/SDF format. We use the 'Frankenstein ligand' as the reference.
+For docking with rDock, a file needs to be created defining the active site. This requires two input files - one for the protein and one for the ligand. We want an active site generation that takes into account the features of all 17 fragments, and therefore need to generate a 'Frankenstein ligand' which possesses the properties of all the fragments. A very simple Galaxy tool is available for this.
 
 > ### {% icon question %} Questions
 >
@@ -230,6 +228,18 @@ For docking with rDock, a file needs to be created defining the active site. Thi
 >
 {: .question}
 
+> ### {% icon hands_on %} Hands-on: Generate Frankenstein ligand
+>
+> 1. **Create Frankenstein ligand** {% icon tool %} with the following parameters:
+>    - *"Input file"*: `Hits SDF`
+> 2. Rename the file to `Frankstein SDF`.
+>
+{: .hands_on}
+
+## Generate active site definition
+
+The active site can now be generated using the **rbcavity** {% icon tool %} tool, which requires the receptor in MOL2 format as input as well as a single reference ligand in Mol/SDF format. We use the Frankenstein ligand as the reference.
+
 > ### {% icon hands_on %} Hands-on: Active site preparation
 >
 > 1. **rDock cavity definition** {% icon tool %} with the following parameters:
@@ -242,6 +252,7 @@ For docking with rDock, a file needs to be created defining the active site. Thi
 >    - *"Mapper grid step"*: `0.5`
 >    - *"Cavity weight"*: `1.0`
 >
+> 2. Rename the output file `Active site`.
 >    > ### {% icon comment %} Comment
 >    >
 >    > The meanings of these parameters are too complex to go into in this tutorial. If you are interested, see the [rDock documentation](http://rdock.sourceforge.net/wp-content/uploads/2015/08/rDock_User_Guide.pdf) for more details.
@@ -269,7 +280,7 @@ Docking and scoring are now performed, using the following steps: 1) docking usi
 >
 > 1. **rDock docking** {% icon tool %} with the following parameters:
 >    - *"Receptor"*: `Receptor MOL2`
->    - *"Active site"*: `rbcavity active site`
+>    - *"Active site"*: `Active site`
 >    - *"Ligands"*: `Split file` collection
 >    - *"Number of dockings"*: `5`
 >    - *"Number of best poses"*: `5`
@@ -321,6 +332,7 @@ SuCOS scoring returns a value (saved as `<Max_SuCOS_Score>` in the SDF file) bet
 > 1. **Max SuCOS score** {% icon tool %} with the following parameters:
 >    - *"Ligands to be scored"*: Output of the TransFS step
 >    - *"Set of clusters to score against"*: `Hits SDF`
+> 2. Rename the output file to `Scored poses`.
 {: .hands_on}
 
 # Compound selection
