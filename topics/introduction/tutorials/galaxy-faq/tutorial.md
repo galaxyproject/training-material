@@ -164,3 +164,15 @@ tutorial_name: galaxy-faq
 >    >
 > {: .solution}
 {: .question}
+> ### {% icon question %} I need to know the parameters I used for an analysis, but I don't remember what I did. How can I reconstruct it?
+>    > ### {% icon solution %} Solution
+>    > **Suggested Action:**
+>    > Check the parameters for the jobs in your history where the analysis was done. Dates and parameters can be checked by clicking on a dataset title to expand its options, then checking **'View details'** and/or **'Run this job again'**. This can be done by clicking on the circled i icon and/or cycling arrows icon respectively.
+>    >
+>    > ![](../../images/galaxy-faq-screenshots/22_galaxy_icons.PNG)
+>    >
+>    > **Note:**
+>    > If you used an older published workflow from the CPT and you did not import it, email an admin for help determining what parameters or tools have been changed since then.
+>    > 
+> {: .solution}
+{: .question}
