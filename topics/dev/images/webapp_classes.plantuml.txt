@@ -1,0 +1,28 @@
+@startuml
+
+!include plantuml_options.txt
+
+class galaxy.framework.base.WebApplication {
+    handle_request()
+}
+
+class galaxy.web.framework.webapp.WebApplication {
+
+}
+
+class galaxy.webapps.galaxy.GalaxyWebApplication {
+}
+
+class galaxy.framework.base.DefaultWebTransaction {
+
+}
+
+class galaxy.web.framework.webapp.GalaxyWebTransaction {
+}
+
+galaxy.framework.base.WebApplication <|-- galaxy.web.framework.webapp.WebApplication
+galaxy.web.framework.webapp.WebApplication <|-- galaxy.webapps.galaxy.GalaxyWebApplication
+galaxy.framework.base.WebApplication *- galaxy.framework.base.DefaultWebTransaction
+galaxy.framework.base.DefaultWebTransaction <|-- galaxy.web.framework.webapp.GalaxyWebTransaction
+
+@enduml
