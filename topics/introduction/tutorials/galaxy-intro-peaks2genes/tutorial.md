@@ -21,6 +21,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
 contributors:
   - pajanne
   - blankclemens
@@ -29,7 +30,7 @@ contributors:
   - nsoranzo
   - dyusuf
   - sarah-peter
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -120,7 +121,7 @@ Let's start with a fresh history.
 >    {% include snippets/import_via_link.md format="interval" %}
 >
 >    > ### {% icon tip %} Tip: Importing data to Galaxy
->    > There are [more options]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}) for advanced users.
+>    > There are [more options]({% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}) for advanced users.
 >    {: .tip}
 >
 {: .hands_on}
@@ -299,7 +300,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
 >     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
->     - *"in column"*: `Column:1`
+>     - *"in column"*: `1`
 >     - *"Find pattern"*: `[0-9]+`
 >
 >         This will look for numerical digits
@@ -312,7 +313,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 3. **Replace Text** {% icon tool %}: Let's rerun the tool with
 >    - *"File to process"*: the output from the last run, `chr prefix added`
->    - *"in column"*: `Column:1`
+>    - *"in column"*: `1`
 >    - *"Find pattern"*: `chr20`
 >    - *"Replace with"*: `chrX`
 >
@@ -326,7 +327,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 5. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
 >    - *"File to process"*: `chrX fixed`, the output from the last run
->    - *"in column"*: `Column:1`
+>    - *"in column"*: `1`
 >    - *"Find pattern"*: `chr21`
 >    - *"Replace with"*: `chrY`
 >

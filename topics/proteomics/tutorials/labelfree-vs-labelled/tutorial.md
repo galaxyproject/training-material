@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Label-free versus Labelled - How to Choose Your Quantitation Method"
 zenodo_link: ""
+level: Introductory
 questions:
   - "What are benefits and drawbacks of different quantitation methods?"
   - "How to choose which quantitation method bests suits my need?"

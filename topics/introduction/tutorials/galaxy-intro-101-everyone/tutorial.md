@@ -21,6 +21,7 @@ key_points:
   - "Workflows enable you to repeat your analysis on different data"
   - "Galaxy can connect to external sources for data import and visualization purposes"
   - "Galaxy provides ways to share your results and methods with others"
+subtopic: core
 contributors:
   - annefou
   - nagoue
@@ -77,7 +78,7 @@ The Galaxy interface consists of three main parts:
 2. Your analysis history is recorded on the right
 3. The central panel will let you run analyses and view outputs
 
-![Galaxy ecosystem]({{ site.baseurl }}{% link shared/images/galaxy_interface.png %})
+![Galaxy ecosystem]({% link shared/images/galaxy_interface.png %})
 
 
 # Create a history
@@ -453,6 +454,8 @@ check whether we can spot any immediate patterns.
 >        - *"Plotting multiple groups"*: `Plot multiple groups of data on one plot`
 >            - *"column differentiating the different groups"*: `5`
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
+>    - In *"Output Options"*:
+>        - *Additional output format*: `PDF`
 >
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 >
@@ -547,7 +550,7 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 
 
 > ### {% icon comment %} Tip: Problems creating your workflow?
-> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({{ site.baseurl }}{% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
+> If you had problems extracting your workflow in the previous step, we provide a working copy for you [here]({% link topics/introduction/tutorials/galaxy-intro-101-everyone/workflows/main_workflow.ga %}),
 > which you can import to Galaxy and use for the next sections (see below how to import a workflow to Galaxy).
 >
 > {% include snippets/import_workflow.md %}
@@ -737,4 +740,3 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {:.no_toc}
 
 {% icon trophy %} Well done! You have just performed your first analysis in Galaxy. Additionally you can share your results and methods with others.
-

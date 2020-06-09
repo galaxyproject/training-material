@@ -12,21 +12,19 @@ objectives:
   - Understand the Role Based Access Control (RBAC) of Galaxy.
 time_estimation: "1h"
 key_points:
-  - Galaxy has a powerful user and group managment system that can be utilized for Quota managment.
+  - Galaxy has a powerful user and group managment system that can be utilized for Quota management.
 contributors:
   - natefoo
   - bgruening
 
 ---
-class: special, center, middle
-
 # Users, Groups, Quotas
 
 .footnote[\#usegalaxy / @galaxyproject]
 
 ---
-
 class: left
+
 ## Overview
 
 This section will cover handling of users, groups and quotas for Galaxy. We will look at the following in particular:
@@ -38,75 +36,118 @@ This section will cover handling of users, groups and quotas for Galaxy. We will
 * Setting permissions on Libraries and Datasets
 * Quotas
 * Introduction to alternate authentication
----
 
+???
+
+- Lots of different topics, but everything is related to users and permissions
+- As an admin you have lots of control over this
+- Most configuration in galaxy.yml file
+
+---
+## User Control
+
+option | description
+---- | ----
+`require_login` | Prevent anonymous access.
+`show_welcome_with_login` | Show welcome page next to login page.
+`allow_user_creation` | Allow user registration. When False, admins must create users; often coupled with `require_login`.
+`allow_user_dataset_purge` | Users can purge (permanently delete) their datasets.
+`api_allow_run_as` | List of email addresses of API users who can make calls on behalf of other users.
+`expose_dataset_path` | Users to see the full path of datasets via the "View Details" option in the history.
+
+.footnote[.center[options in `galaxy.yml`]]
+
+???
+
+These options let you control anonymous access, if users can register
+themselves or an admin needs to create them, and what sort of responsibility they have
+
+---
 class: left
+
 ## User Activation
 
 Require verification that a user's email is real. You must enable SMTP first.
 
-In `galaxy.yml`:
-* `user_activation_on` require users to click link in email before running jobs.
-* `activation_grace_period` time (hours) that a user can 'explore' Galaxy before activation lockout.
-* `inactivity_box_content` message provided to non-activated users.
-* Disposable domain blacklist
-  * `blacklist_file` defines domains in XXX.YYY format that will be rejected as user emails.
-
+option | description
+---- | ----
+`user_activation_on` | Require users to click link in email before running jobs.
+`activation_grace_period` | Time (hours) that a user can 'explore' Galaxy before activation lockout.
+`inactivity_box_content` | Message provided to non-activated users.
+`blacklist_file` | Defines domains in XXX.YYY format that will be rejected as user emails.
 
 Exercise:
-   - Enable User activation
-   - Register a new user (second email / email+1@domail.tld)
-   - Upload a Dataset
----
+  - Enable User activation
+  - Register a new user (second email / email+1@example.com)
+  - Upload a Dataset
 
-class: left
-## User Control
+.footnote[.center[options in `galaxy.yml`]]
 
-In `galaxy.yml`:
-* `require_login` can be enabled to prevent anonymous access.
-* `show_welcome_with_login` show welcome page next to login page
-* `allow_user_creation` allow user registration. When False, admins must create users; often coupled with `require_login`.
-* `allow_user_dataset_purge` users can purge (permanently delete) their datasets.
-* `api_allow_run_as` list of email addresses of API users who can make calls on behalf of other users.
-* `expose_dataset_path` users to see the full path of datasets via the "View Details" option in the history.
+???
+
+- Whenever a user registers, user activation settings control how this process goes
+- If you want require activation, let them explore first, or blacklist certain email domains
 
 ---
-class: left
 ## Password & Session Policies
 
-In `galaxy.yml`:
-* `password_expiration_period` days before requiring a user to change password.
-* `session_duration` minutes before invaliding a user's session, requiring re-login.
+option | description
+---- | ----
+`password_expiration_period` | Days before requiring a user to change password. ([NIST recommends not requiring password changes.](https://en.wikipedia.org/wiki/Password_policy#NIST_guidelines))
+`session_duration` | Minutes before invaliding a user's session, requiring re-login.
+
+.footnote[.center[options in `galaxy.yml`]]
+
+???
+
+- Some options are related to IT security policies
 
 ---
-
 class: left
+
 ## Admin Control
 
-In `galaxy.yml`:
-* `admin_users` comma-separated list of admin users' emails
-* `allow_user_deletion` admins can delete users
-* `allow_user_impersonation` admins can become other users. Great for debugging / user assistance.
-* `master_api_key` admin super-key allows many API admin actions without having a real admin user.
+option | description
+---- | ----
+`admin_users` | Comma-separated list of admin users' emails.
+`allow_user_deletion` | Admins can delete users.
+`allow_user_impersonation` | Admins can become other users. Great for debugging / user assistance.
+`master_api_key` | Admin super-key allows many API admin actions without having a real admin user.
 
 Exercise:
  - Enable user impersonation
  - Log in as admin and become other user
  - View existing and create Histories and Datasets.
 
----
+.footnote[.center[options in `galaxy.yml`]]
 
+???
+
+- You used `admin_users` in the basic admin training to define an admin email address
+- User impersonation is a very commonly used feature, allowing admins to debug issues in their users' histories
+- A master api key can be set but there are some caveats, as it isn't tied to a user account.
+
+---
 class: left
+
 ## User Privacy
 
-In `galaxy.yml`:
-* `expose_user_name` users can view other registered usernames
-* `expose_user_email` users can view other registered emails
-* `new_user_dataset_access_role_default_private` newly created datasets are private to the creating user
+option | description
+---- | ----
+`expose_user_name` | Users can view other registered usernames.
+`expose_user_email` | Users can view other registered emails.
+`new_user_dataset_access_role_default_private` | Newly created datasets are private to the creating user.
+
+.footnote[.center[options in `galaxy.yml`]]
+
+???
+
+- These options control if the username/email is shown as a dropdown in the history sharing dialogue.
+- The `new_user_dataset_access_role_default_private` is important, by default when users share-by-link, all datasets are public. When you set this option, datasets are private, even thoughthe history is shared via link. Users complain when it doesn't work, and have to be educated to click the appropriate buttons.
 
 ---
-
 class: left
+
 ## Roles and Groups
 
 #### Role Based Access Control (RBAC)
@@ -120,6 +161,10 @@ class: left
 * assign users to roles
 * assign permission sets to roles
 * assign permission sets to groups
+
+???
+
+- Galaxy uses RBAC for permissions in many places. Roles can be creaed, and assigned permissions. Roles and groups behave similarly, grouping users together and granting permisisons.
 
 ---
 
@@ -161,14 +206,16 @@ class: left
 * We will show how restricting access to a Dataset prevents usage or download.
 
 ---
-class: left
+class: left, reduce90
 ## Quotas
 
 Used to control user disk usage.
 
-To turn on the use of quotas: In `galaxy.yml`:
-* `enable_quotas` Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).
-* must create quotas in admin interface before any quota will be enforced, otherwise 'unlimited'
+option | description
+---- | ----
+`enable_quotas` | Enable enforcement of quotas.  Quotas can be set from the Admin interface (under Data).
+
+Must create quotas in admin interface before any quota will be enforced, otherwise 'unlimited'
 
 Amounts:
  - Examples: "10000MB", "99 gb", "0.2T", "unlimited"
@@ -181,9 +228,22 @@ Default for user class:
 
 or associated with Groups or Users
 
+.footnote[.center[options in `galaxy.yml`]]
+
+???
+
+- You can enable quotas in your galaxy.yml file
+- When the user has more data than their quotum permits, they are prevented from starting new jobs.
+- many sites setup a "quote increase request" form, to let users request increases for specific, temporary projects
+
 ---
 class: left
 ## Alternate Authentication
 
 * Galaxy-specific login using e-mail address and password
 * HTTP remote user provided by any front-end Web server
+
+???
+
+- If you use terms like CAS or SSO, then this is relevant. We will discuss in a dedicated tutorial
+- LDAP can be configured in-galaxy

@@ -4,7 +4,7 @@ logo: "GTN"
 
 title: "Scripting Galaxy using the API and BioBlend"
 questions:
-  - "What is a web API?"
+  - "What is a RESTful API?"
   - "How to interact with Galaxy in a script?"
   - "Why should I use BioBlend?"
 objectives:
@@ -41,18 +41,16 @@ contributors:
 ---
 
 name: api
-## Web API
+## Galaxy API
 
 - **Application Programming Interface (API)**: the protocol defined by a software for how it can be controlled by an external program
-- A **web API** is an API for a web app which uses:
-  - URLs for function definitions
-  - HTTP requests as function calls
-- Galaxy provides a rich API
+- Galaxy provides a rich API:
+  - Over the HTTP protocol
   - The Galaxy UI is being migrated on top of the Galaxy API
 
 ???
 
-The server providing the web API becomes the program, and the URLs become the commands - all through the medium of the HTTP protocol.
+The server providing the API becomes the program, and the URLs become the commands - all through the medium of the HTTP protocol.
 
 ---
 
@@ -72,7 +70,7 @@ The server providing the web API becomes the program, and the URLs become the co
 
 ???
 
-The web API allows you to use Galaxy's capabilities programmatically:
+The API allows you to use Galaxy's capabilities programmatically:
 - run a workflow over each file in a directory
 - run a second workflow only if the first passes some QA threshold
 - upload a FASTQ file when the sequencer finishes writing it.
@@ -119,13 +117,13 @@ Admin examples:
 - cacheable by client
 - Uniform Resource Identifiers (URIs)
 - JSON media type
-- standard HTTP request methods (GET, POST, PUT, DELETE) and status codes
+- standard HTTP request methods (GET, POST, PUT, DELETE, PATCH) and status codes
 
 ???
 
 A common way to construct an API command is to view it as a simple (imperative) sentence: `<verb> <a resource>`
 - Examples of resources for the Galaxy API are: datasets, tools, jobs, histories, libraries, users... - essentially anything in Galaxy that is recorded in the database.
-- The HTTP verbs are GET (i.e. retrieve), POST (create), PUT (update), and DELETE. There are others but they don't apply (yet). These are [HTTP request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods).
+- The HTTP verbs are GET (i.e. retrieve), POST (create), PUT (replace), DELETE, PATCH (partially modify). There are others but they don't apply (yet). These are [HTTP request methods](https://en.wikipedia.org/wiki/Hypertext_Transfer_Protocol#Request_methods).
   - GET calls should produce no side effects.
   - PUT and DELETE should be idempotent, i.e. should produce the same result no matter how many times they are repeated.
 - Often additional options and parameters must be passed to specify how the command should take place.
@@ -141,7 +139,7 @@ A common way to construct an API command is to view it as a simple (imperative) 
   - `PUT /api/histories/<id> {"published": true}` -> publish a history
   - `DELETE /api/histories/<history_id>/contents/<id>` -> delete a history dataset
 
-- URI parameters: ids in path, others in query (`?name=value&...`)
+- URI parameters: ids in path, others in the *query* (`?name=value&...`)
 - POST/PUT payload as JSON
 
 ---
@@ -177,7 +175,7 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
 - HTTP status codes:
   - 200 OK, 400 your error, 500 server error, ...<br>
     https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
-- Galaxy error codes and messages: `galaxy/lib/galaxy/exceptions/`
+- Galaxy error codes and messages: [`lib/galaxy/exceptions/`](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/exceptions)
 - Still a work in progress :(
 
 ---
@@ -200,7 +198,7 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
   - When the UI accesses the API, session auth is used
   - Other callers needs an **API key**: alphanumeric string (32 chars) identifying a registered user<br>
     Keep it secure, it’s the same as a username+password!
-- HTTPS recommended:
+- Always use HTTPS:
   - **https**://localhost?key=foo is safer due to the encryption of the transmitted data
 
 ---
@@ -251,18 +249,18 @@ name: bioblend
 ## BioBlend features
 
 - Stable procedural API
-- Python 2.7, 3.5- support
+- Supported under Python 2.7, >=3.5 (2.7 will be dropped in next release 0.14.0)
 - Wraps all main Galaxy API controllers
 - Extensive TravisCI testing:
-  - on Galaxy release_14.10 and later
-  - \>150 unit tests
+  - on Galaxy release_15.03 and later
+  - \>170 unit tests
 - Well-documented on https://bioblend.readthedocs.io
 
 ---
 
 ## BioBlend limitations
 
-- Python-only (but there are also *blend4j* and *blend4php*)
+- Python-only (but separate *blend4j* and *blend4php* exist)
 - Its methods just deserialize the JSON response
   - No isolation from changes in the Galaxy API
   - Need to extract the entity id for further processing
@@ -295,9 +293,9 @@ name: handson
 ## Before we start
 1. Get your Galaxy API key:
    1. In your browser, open your Galaxy homepage (e.g. https://usegalaxy.org/ )
-   2. Log in or create an account, if you don't have one yet
-   3. Go to your `User -> Preferences` in the top menu bar, then click on `Manage API key`
-   4. Click on `Create a new key` to generate an API key
+   2. Log in, or create an account if you don't have one yet
+   3. Go to `User -> Preferences` in the top menu bar, then click on `Manage API key`
+   4. If there is no current API key available, click on `Create a new key` to generate it
    5. Copy your API key to somewhere convenient, you will need it throughout this tutorial
 
 2. Install the tools and workflow on your Galaxy:
