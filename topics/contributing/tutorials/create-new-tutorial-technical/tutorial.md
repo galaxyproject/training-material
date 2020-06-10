@@ -50,9 +50,10 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 
 > ### {% icon hands_on %} Hands-on: Extract the workflow
 >
-> 1. Download the workflow for the tutorial
-> 2. Save it in the `workflow` directory of the tutorial
-> 3. Check that your `workflow` directory has an `index.md` with the contents:
+> 1. Add the topic name as Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
+> 2. Download the workflow for the tutorial
+> 3. Save it in the `workflow` directory of the tutorial
+> 4. Check that your `workflow` directory has an `index.md` with the contents:
 >
 >    ```yaml
 >    ---
@@ -60,8 +61,6 @@ Once the tutorial is ready, we need to develop a workflow that represents the st
 >    ---
 >    ```
 {: .hands_on}
-> 3. Edit the workflow with a text editor to add the topic name as 'tags' and to add the tutorial title as 'annotation' to the workflow.
-
 
 ## Testing the workflow (recommended)
 
@@ -282,7 +281,7 @@ items:
 >    ```
 >
 > 3. Check that the `data-library.yaml` has been generated (or updated)
-> 4. Check tha the Zenodo link is in the metadata at the top of the `tutorial.md`
+> 4. Check that the Zenodo link is in the metadata at the top of the `tutorial.md`
 {: .hands_on}
 
 # Creating the `data-manager.yaml` (optional)

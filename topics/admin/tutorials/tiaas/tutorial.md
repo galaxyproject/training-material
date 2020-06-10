@@ -174,7 +174,7 @@ Let's see it in action!
 >    - Next, the request will have to be approved by an admin
 >    - Go to https://\<server\>/tiaas/admin
 >    - **Log in** using the values you configured `tiaas_admin_user` and `tiaas_admin_pass` in your group variables file
->      - Default values were `admin:changme`
+>      - Default values were `admin:changeme`
 >    - You should now see the admin panel:
 >      ![TIaaS admin console](../../images/tiaas/tiaas_admin_console.png)
 >    - Click on **Trainings**, you should see the TIaaS request listed here:
@@ -295,7 +295,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >
 > 7. Ensure your user is joined to a training
 >
-> 8. Run a job and observe the logs to see where it goes (`journalctf -u galaxy -f`)
+> 8. Run a job and observe the logs to see where it goes (`journalctl -u galaxy -f`)
 >
 {: .hands_on}
 
