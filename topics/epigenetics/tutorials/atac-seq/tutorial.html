@@ -617,7 +617,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 28, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 11, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -638,7 +638,7 @@
 <p>In this tutorial we will use data from the study of <a class="citation" href="#Buenrostro2013">Buenrostro <i>et al.</i> 2013</a>, the first paper on the ATAC-Seq method. The data is from a human cell line of purified CD4+ T cells, called GM12878. The original dataset had 2 x 200 million <span class="notranslate">reads</span> and would be too big to process in a training session, so we downsampled the original dataset to 200,000 randomly selected <span class="notranslate">reads</span>. We also added about 200,000 <span class="notranslate">reads</span> pairs that will map to chromosome 22 to have a good profile on this chromosome, similar to what you might get with a typical ATAC-Seq sample (2 x 20 million <span class="notranslate">reads</span> in original FASTQ). Furthermore, we want to compare the predicted open chromatin regions to the known binding sites of CTCF, a <span class="notranslate">DNA</span>-binding protein implicated in 3D structure: <a href="https://en.wikipedia.org/wiki/CTCF">CTCF</a>. CTCF is known to bind to thousands of sites in the genome and thus it can be used as a positive control for assessing if the ATAC-Seq experiment is good quality. Good ATAC-Seq data would have accessible regions both within and outside of TSS, for example, at some CTCF binding sites. For that reason, we will download binding sites of CTCF identified by ChIP in the same cell line from ENCODE (ENCSR000AKB, dataset ENCFF933NTR).</p>
 
 <h3 class="no_toc" id="when-working-with-real-data">When working with real data</h3>
-<p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/heylf/w/atac-seq-gtm-with-control">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
+<p>When you use your own data we suggest you to use <a href="https://usegalaxy.eu/u/ldelisle/w/atac-seq-gtm-with-control-and-macs2">this <span class="notranslate">workflow</span></a> which includes the same steps but is compatible with replicates. If you do not have any control data you can import and edit this <span class="notranslate">workflow</span>, removing all steps with the controls. Controls for the ATAC-Seq procedure are not commonly performed, as discussed <a href="https://informatics.fas.harvard.edu/atac-seq-guidelines.html">here</a>, but could be ATAC-Seq of purified <span class="notranslate">DNA</span>.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -783,7 +783,7 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
       </blockquote>
     </li>
     <li>
-      <p>Check that the datatype of the 2 FASTQ files is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and the <span class="notranslate">BED</span> file is <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code>. If they are not then change the datatype as described below.</p>
+      <p>Check that the datatype of the 2 FASTQ files is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and the peak file (ENCFF933NTR.<span class="notranslate">bed</span>.gz) is <code class="language-plaintext highlighter-rouge">encodepeak</code>. If they are not then change the datatype as described below.</p>
 
       <blockquote class="tip">
 
@@ -806,8 +806,8 @@ https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 </blockquote>
 <blockquote class="comment">
 
-  <h3 id="comment-bed-format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <span class="notranslate">BED</span> format</h3>
-  <p>If you are not familiar with <span class="notranslate">BED</span> format, see the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html"><span class="notranslate">BED</span> Format</a></p>
+  <h3 id="comment-bed--encode-narrowpeak-format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <span class="notranslate">BED</span> / encode narrowPeak format</h3>
+  <p>If you are not familiar with <span class="notranslate">BED</span> format or encode narrowPeak format, see the <a href="https://genome.ucsc.edu/FAQ/FAQformat.html"><span class="notranslate">BED</span> Format</a></p>
 </blockquote>
 
 <p>We will visualise regions later in the analysis and obtain the gene information now. We will get information for chromosome 22 genes (names of transcripts and genomic positions) using the UCSC tool.</p>
@@ -969,7 +969,10 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
             <li>
               <p><strong>Overrepresented sequences</strong></p>
 
-              <p>Nextera adapter sequences are observable in the <strong>Adapter Content</strong> section.</p>
+              <p>One sequence is over represented: 
+you have 306 <span class="notranslate">reads</span> which are exactly the sequence of the Nextera adapter.
+They correspond to adapters amplified head-to-head.
+306 is really low (only 0.1% of <span class="notranslate">reads</span>).</p>
             </li>
           </ol>
         </li>
@@ -1106,7 +1109,7 @@ simply by the PCR itself. We will remove these duplicates later on.</p>
 
 <blockquote class="comment">
   <h3 id="comment-fastqc-results-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> FastQC Results</h3>
-  <p>If we run FastQC again we should see under <strong>Adapter Content</strong> that the Nextera adapters are no longer present.</p>
+  <p>If we run FastQC again we should see under <strong>Overrepresented sequences</strong> that there is no more overrepresented sequences and under <strong>Adapter Content</strong> that the Nextera adapters are no longer present.</p>
   <figure id="figure-5"><img src="../../images/atac-seq/Screenshot_fastqcAftercutadapt.png" alt="FastQC screenshot on the adapter content section after cutadapt" /><figcaption><span class="figcaption-prefix">Figure 5:</span> FastQC screenshot on the adapter content section after cutadapt</figcaption></figure>
 </blockquote>
 
@@ -1286,7 +1289,7 @@ The first 2 lines of the result would be (after using <strong>Sort</strong> <i c
 
   <figure id="figure-7"><img src="../../images/atac-seq/Screenshot_samtoolsIdxStatsChrM.png" alt="Samtools idxstats result" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Samtools idxstats result</figcaption></figure>
 
-  <p>There are 221 000 <span class="notranslate">reads</span> which map to chrM and 170 000 which map to chr22.</p>
+  <p>There are 220 000 <span class="notranslate">reads</span> which map to chrM and 165 000 which map to chr22.</p>
 </blockquote>
 
 <h2 id="filter-duplicate-reads">Filter Duplicate <span class="notranslate">Reads</span></h2>
@@ -1625,30 +1628,6 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
 
 </blockquote>
 
-<h3 id="convert-the-genrich-peaks-to-bed">Convert the Genrich peaks to <span class="notranslate">BED</span></h3>
-<p>At the moment, <strong>pyGenomeTracks</strong> does not deal with the datatype encodepeak which is a special <span class="notranslate">bed</span>.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-change-the-datatype"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change the datatype</h3>
-  <ol>
-    <li>
-      <p>Change the datatype of the output of <strong>Genrich</strong> from encodepeak to <span class="notranslate">bed</span>.</p>
-
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-changing-the-datatype-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
-        <ul>
-          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
-          <li>Select <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span></code></li>
-          <li>Click the <strong>Change datatype</strong> button</li>
-        </ul>
-      </blockquote>
-    </li>
-  </ol>
-
-</blockquote>
-
 <h2 id="create-heatmap-of-coverage-at-tss-with-deeptools">Create heatmap of coverage at TSS with deepTools</h2>
 
 <p>You might also be interested in specific regions. For this, you can compute a heatmap. We will use the <strong>deepTools plotHeatmap</strong>. As an example, we will here make a heatmap centered on the transcription start sites (TSS).</p>
@@ -1740,9 +1719,9 @@ The output of <strong>Genrich</strong> is a <span class="notranslate">Bed</span>
 
       <p>MACS2 coverage is very simple, each 5’ is extended 100bp (+/-50bp).
 Genrich coverage is evaluated in a more subtle way: if the fragment length is above 100 (the expension size), the coverage will be each 5’ extended 100bp (+/-50bp), but if it is less, the coverage will be between each 5’ extended 50bp (-50bp - fragment size - + 50bp):</p>
-      <figure id="figure-18"><img src="../../images/atac-seq/Screenshot_macs2vsGenrich.png" alt="macs2 vs genrich" /><figcaption><span class="figcaption-prefix">Figure 18:</span> macs2 vs genrich coverage</figcaption></figure>
+      <figure id="figure-18"><img src="../../images/atac-seq/Screenshot_macs2vsGenrich.png" alt="MACS2 vs Genrich" /><figcaption><span class="figcaption-prefix">Figure 18:</span> MACS2 vs Genrich coverage</figcaption></figure>
       <p>In this example, we see on the left a pair with a long fragment size: both algorithm behave the same.
-On the left a pair with a short fragment size: Genrich reports only one interval joining both extremities wheareas macs2 will still report 2 intervals even if they overlap.</p>
+On the left a pair with a short fragment size: Genrich reports only one interval joining both extremities wheareas MACS2 will still report 2 intervals even if they overlap.</p>
     </blockquote>
   </blockquote>
 
@@ -1766,23 +1745,22 @@ On the left a pair with a short fragment size: Genrich reports only one interval
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Coverage from Genrich (extended +/-50bp)</code></li>
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file bigwig format”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">Genrich bigwig</code>.</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
+                    <li><em>“Minimum value”</em>: 0</li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
                     <li><em>“Show visualization of data range”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                    <li><em>“Include spacer at the end of the track”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
               <ul>
-                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
+                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Peaks from Genrich (extended +/-50bp)</code></li>
-                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the output of <strong>Genrich</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (the one you converted from encodepeak to <span class="notranslate">bed</span>).</li>
+                    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the output of <strong>Genrich</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
-                    <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
-                    <li><em>“Plot labels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                    <li><em>“Include spacer at the end of the track”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+                    <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
+                    <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1791,26 +1769,25 @@ On the left a pair with a short fragment size: Genrich reports only one interval
               <ul>
                 <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Bigwig track </code>
                   <ul>
-                    <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Coverage from macs2 (extended +/-50bp)</code></li>
+                    <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Coverage from MACS2 (extended +/-50bp)</code></li>
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file bigwig format”</em>: Select the output of <strong>Wig/<span class="notranslate">Bed</span>Graph-to-bigWig</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> called <code class="language-plaintext highlighter-rouge">MACS2 bigwig</code>.</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
+                    <li><em>“Minimum value”</em>: 0</li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
                     <li><em>“Show visualization of data range”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-                    <li><em>“Include spacer at the end of the track”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
               <ul>
-                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
+                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
-                    <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Peaks from macs2 (extended +/-50bp)</code></li>
+                    <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Peaks from MACS2 (extended +/-50bp)</code></li>
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the output of <strong>MACS2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (narrow Peaks).</li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
-                    <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">3</code></li>
-                    <li><em>“Plot labels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                    <li><em>“Include spacer at the end of the track”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+                    <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
+                    <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                   </ul>
                 </li>
               </ul>
@@ -1823,29 +1800,30 @@ On the left a pair with a short fragment size: Genrich reports only one interval
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: <code class="language-plaintext highlighter-rouge">chr22 genes</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
                     <li><em>“height”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
-                    <li><em>“Include spacer at the end of the track”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+                    <li><em>“Put all labels inside the plotted region”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+                    <li><em>“Allow to put labels in the right margin”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
               <ul>
-                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">Gene track / <span class="notranslate">Bed</span> track</code>
+                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">NarrowPeak track</code>
                   <ul>
                     <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">CTCF peaks</code></li>
                     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Track file <span class="notranslate">bed</span> format”</em>: Select the dataset <code class="language-plaintext highlighter-rouge"><span class="notranslate">bed</span>tools SortBED of ENCFF933NTR.<span class="notranslate">bed</span>.gz</code></li>
                     <li><em>“Color of track”</em>: Select the color of your choice</li>
-                    <li><em>“Plot labels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                    <li><em>“Include spacer at the end of the track”</em>: <code class="language-plaintext highlighter-rouge">0.5</code></li>
+                    <li><em>“display to use”</em>: <code class="language-plaintext highlighter-rouge">box: Draw a box</code></li>
+                    <li><em>“Plot labels (name, p-val, q-val)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
                   </ul>
                 </li>
               </ul>
             </li>
-          </ul>
-        </li>
-        <li><em>“Configure x-axis”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-          <ul>
-            <li><em>“Where to place the x-axis”</em>: <code class="language-plaintext highlighter-rouge">Bottom</code></li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Include tracks in your plot”</em>
+              <ul>
+                <li><em>“Choose style of the track”</em>: <code class="language-plaintext highlighter-rouge">X-axis</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -1867,7 +1845,7 @@ On the left a pair with a short fragment size: Genrich reports only one interval
 
 <blockquote class="question">
   <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-  <p>In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich.</p>
+  <p>In the ATAC-Seq sample in this selected region we see four peaks detected by Genrich and MACS2.</p>
 
   <ol>
     <li>How many TSS are accessible in the sample in the displayed region?</li>
@@ -1894,8 +1872,14 @@ On the left a pair with a short fragment size: Genrich reports only one interval
 
 </blockquote>
 
-<p>We can see that in this region both peak calling perform the same. However, when zooming out, we see that macs2 is more sensitive:</p>
+<p>We can see that in this region both peak calling perform the same. However, when zooming out, we see that MACS2 is more sensitive:</p>
 <figure id="figure-21"><img src="../../images/atac-seq/pyGenomeTracksOutput_20M_zo.png" alt="pyGenomeTracks output for 20 million of pairs on the whole genome zoom out" /><figcaption><span class="figcaption-prefix">Figure 21:</span> pyGenomeTracks output for 20 million of pairs on the whole genome zoom out</figcaption></figure>
+<p>.</p>
+
+<p>When the number of <span class="notranslate">reads</span> increases, the number of peaks with MACS2 increases but the number of peaks with Genrich decreases:</p>
+<figure id="figure-22"><img src="../../images/atac-seq/pyGenomeTracksOutput_100M_zo.png" alt="pyGenomeTracks output for 100 million of pairs on the whole genome zoom out" /><figcaption><span class="figcaption-prefix">Figure 22:</span> pyGenomeTracks output for 100 million of pairs on the whole genome zoom out</figcaption></figure>
+<p>.</p>
+<figure id="figure-23"><img src="../../images/atac-seq/pyGenomeTracksOutput_200M_zo.png" alt="pyGenomeTracks output for 200 million of pairs on the whole genome zoom out" /><figcaption><span class="figcaption-prefix">Figure 23:</span> pyGenomeTracks output for 200 million of pairs on the whole genome zoom out</figcaption></figure>
 <p>.</p>
 
 <p>As CTCF binds so ubiquitously and by itself can displace the nucleosome creating accessible regions, a region containing a peak with no corresponding CTCF peak or TSS could be a putative enhancer. In the pyGenomeTracks plot we see a region like this located in the intron of a gene and another one between genes. However, it is impossible to guess from the position which would be the gene controlled by this region. And of course, more analyses are needed to assess if it is a real enhancer, for example, histone ChIP-seq, 3D structure, transgenic assay, etc.</p>
@@ -1909,7 +1893,7 @@ inserting adapters for sequencing. The training material gave you an insight int
 with <strong>Bowtie2</strong>, filtered our <span class="notranslate">reads</span> for properly paired, good quality and <span class="notranslate">reads</span> that do not
 map to the mitochondrial genome. We found open chromatin regions with <strong>Genrich</strong>, a tool to find regions of genomic enrichment (peaks). We investigated the read coverage around TSS with the help of <strong>computeMatrix</strong> and <strong>plotHeatmap</strong>. Last but not least, we visualised the peaks and other informative tracks, such as CTCF binding regions and hg38 genes, with the help of <strong>pyGenomeTracks</strong>. At the end, we found open chromatin regions that did not overlap with CTCF sites or TSS, which could be potential putative enhancer regions detected by the ATAC-Seq experiment.</p>
 
-<figure id="figure-22"><img src="../../images/atac-seq/ATACWF.svg" alt="ATAC workflow" /><figcaption><span class="figcaption-prefix">Figure 22:</span> ATAC <span class="notranslate">workflow</span></figcaption></figure>
+<figure id="figure-24"><img src="../../images/atac-seq/ATACWF.svg" alt="ATAC workflow" /><figcaption><span class="figcaption-prefix">Figure 24:</span> ATAC <span class="notranslate">workflow</span></figcaption></figure>
 
 
                     
@@ -2023,8 +2007,8 @@ map to the mitochondrial genome. We found open chromatin regions with <strong>Ge
     author = "Lucille Delisle and Maria Doyle and Florian Heyl",
     title = "ATAC-Seq data analysis (Galaxy Training Materials)",
     year = "2020",
-    month = "05",
-    day = "28"
+    month = "06",
+    day = "11"
     url = "\url{/training-material/topics/epigenetics/tutorials/atac-seq/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
