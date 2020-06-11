@@ -375,7 +375,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 29, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 11, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -413,6 +413,7 @@
       <li><a href="#key-points-box" id="markdown-toc-key-points-box"><strong>Key points</strong> box</a></li>
       <li><a href="#warning-box" id="markdown-toc-warning-box"><strong>Warning</strong> box</a></li>
       <li><a href="#nested-boxes" id="markdown-toc-nested-boxes">Nested boxes</a></li>
+      <li><a href="#code-box" id="markdown-toc-code-box"><strong>Code</strong> box</a></li>
     </ol>
   </li>
   <li><a href="#citations" id="markdown-toc-citations">Citations</a></li>
@@ -1138,6 +1139,91 @@ With well chosen wrong answers, MCQs can do much more than just measure how much
 {: .hands_on}
 </code></pre></div></div>
 
+<h2 id="code-box"><strong>Code</strong> box</h2>
+
+<p>We have added code in/out boxes to help you show commands, and their effects, when running command line commands.</p>
+
+<p>Normally a single column, with the boxes above one another, it will automatically split side-by-side over a given width (1200px);</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; &gt; ### {% icon code-in %} Input: Bash</span>
+<span class="gt">&gt; &gt; ```bash</span>
+<span class="gt">&gt; &gt; cat /tmp/test.ini</span>
+<span class="gt">&gt; &gt; ```</span>
+<span class="gt">&gt; {: .code-in}</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; &gt; ### {% icon code-out %} Output</span>
+<span class="gt">&gt; &gt; The file should look like:</span>
+<span class="gt">&gt; &gt;</span>
+<span class="gt">&gt; &gt; ```ini</span>
+<span class="gt">&gt; &gt; [example]</span>
+<span class="gt">&gt; &gt; server_name = Dogs!</span>
+<span class="gt">&gt; &gt; listen = 192.168.0.2</span>
+<span class="gt">&gt; &gt; apikey = super-secret-api-key-wow!</span>
+<span class="gt">&gt; &gt; ```</span>
+<span class="gt">&gt; {: .code-out}</span>
+{: .code-io}
+</code></pre></div></div>
+
+<p>Rendered (try it! resize your browser)</p>
+
+<blockquote class="code-io">
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+    <p>The file should look like:</p>
+
+    <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">Dogs!</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
+<span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>If you leave off the <code class="language-plaintext highlighter-rouge">{: .code-io}</code>, it will render as a single column always.</p>
+
+<div class="language-markdown highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gt">&gt; ### {% icon code-in %} Input: Bash</span>
+<span class="gt">&gt; ```bash</span>
+<span class="gt">&gt; cat /tmp/test.ini</span>
+<span class="gt">&gt; ```</span>
+{: .code-in}
+<span class="gt">
+&gt; ### {% icon code-out %} Output</span>
+<span class="gt">&gt; The file should look like:</span>
+<span class="gt">&gt;</span>
+<span class="gt">&gt; ```ini</span>
+<span class="gt">&gt; [example]</span>
+<span class="gt">&gt; server_name = Dogs!</span>
+<span class="gt">&gt; listen = 192.168.0.2</span>
+<span class="gt">&gt; apikey = super-secret-api-key-wow!</span>
+<span class="gt">&gt; ```</span>
+{: .code-out}
+</code></pre></div></div>
+
+<p>Rendered:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+  <p>The file should look like:</p>
+
+  <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
+<span class="py">server_name</span> <span class="p">=</span> <span class="s">Dogs!</span>
+<span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
+<span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
+</code></pre></div>  </div>
+</blockquote>
+
 <h1 id="citations">Citations</h1>
 <p>If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called <code class="language-plaintext highlighter-rouge">tutorial.bib</code> next to your <code class="language-plaintext highlighter-rouge">tutorial.md</code> file. In this file you may enter <a href="http://www.bibtex.org/Using/">bibtex</a> formatted citations. An example is given below:</p>
 
@@ -1243,8 +1329,8 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
     author = "Bérénice Batut and Björn Grüning and Saskia Hiltemann and Helena Rasche",
     title = "Creating a new tutorial - Writing content in Markdown (Galaxy Training Materials)",
     year = "2020",
-    month = "05",
-    day = "29"
+    month = "06",
+    day = "11"
     url = "\url{/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -353,7 +353,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 6, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 11, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -784,20 +784,18 @@ Ansible provides some flags which can help you identify changes before they’re
       </blockquote>
     </li>
     <li>
-      <p>Run the playbook: <code class="language-plaintext highlighter-rouge">ansible-playbook -i hosts playbook.yml</code></p>
+      <p>Run the playbook:</p>
 
-      <blockquote class="question">
-        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml
+</code></pre></div>          </div>
+        </blockquote>
 
-        <p>How does the output look?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <p>The important thing is <code class="language-plaintext highlighter-rouge">failed=0</code></p>
-
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ansible-playbook -i hosts playbook.yml -c local
-PLAY [my_hosts] ****************************************************************
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY [my_hosts] ****************************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 TASK [my-role : Copy a file to the remote host] ********************************
@@ -805,8 +803,6 @@ changed: [localhost]
 PLAY RECAP *********************************************************************
 localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 </code></pre></div>          </div>
-
-          <p>You can re-run this and it should say <code class="language-plaintext highlighter-rouge">changed=0</code></p>
         </blockquote>
       </blockquote>
     </li>
@@ -870,7 +866,7 @@ ok: [localhost]
       <p>Investigate the output. See what sort of information is made available to you.</p>
 
       <blockquote class="question">
-        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <ol>
           <li>What variable stores the OS name?</li>
@@ -878,7 +874,7 @@ ok: [localhost]
         </ol>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <ol>
             <li>
@@ -957,25 +953,23 @@ ok: [localhost]
     <li>
       <p>Check the contents of <code class="language-plaintext highlighter-rouge">/tmp/test.ini</code></p>
 
-      <blockquote class="question">
-        <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-        <p>How does it look?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <p>The file should look like:</p>
-
-          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
-<span class="py">server_name</span> <span class="p">=</span> <span class="s">Cats!</span>
-<span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
 </code></pre></div>          </div>
-
-          <p>Where the last line has the machine’s IP address.</p>
-
         </blockquote>
 
+        <blockquote class="code-out">
+          <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+
+          <p>The file should look like:</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[example]
+server_name = Cats!
+listen = 192.168.0.2
+</code></pre></div>          </div>
+          <p>Where the last line has the machine’s IP address.</p>
+        </blockquote>
       </blockquote>
 
       <p>Now that this has worked successfully, we will setup a <code class="language-plaintext highlighter-rouge">group_vars</code> folder
@@ -997,16 +991,16 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
     <li>
       <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
 
-      <blockquote class="question">
-        <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml <span class="nt">--check</span> <span class="nt">--diff</span>
+</code></pre></div>        </div>
+      </blockquote>
 
-        <p>How does the output look?</p>
+      <blockquote class="code-out">
+        <h3 id="code-out-output-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
 
-        <blockquote class="solution">
-          <h3 id="solution-solution-6"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ ansible-playbook -i hosts playbook.yml --check --diff
-PLAY [my_hosts] ****************************************************************
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>PLAY [my_hosts] ****************************************************************
 TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 TASK [my-role : Copy a file to the remote host] ********************************
@@ -1022,10 +1016,8 @@ TASK [my-role : Template the configuration file] *******************************
 changed: [localhost]
 PLAY RECAP **********************************************
 localhost                  : ok=3    changed=1    unreachable=0    failed=0
-</code></pre></div>          </div>
-
-          <p>Here you can see that the server_name value will be changed. Despite Ansible reporting <code class="language-plaintext highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
-        </blockquote>
+</code></pre></div>        </div>
+        <p>Here you can see that the server_name value will be changed. Despite Ansible reporting <code class="language-plaintext highlighter-rouge">changed=1</code>, no changes have actually been applied to the system.</p>
       </blockquote>
     </li>
     <li>
@@ -1071,9 +1063,26 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
 
   <ol>
     <li>
-      <p>Run the command <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span> install -p roles/ geerlingguy.git</code></p>
+      <p>Install the geerlingguy.git role with ansible-<span class="notranslate">galaxy</span> into your roles folder:</p>
 
-      <p>This will install the new role into your <code class="language-plaintext highlighter-rouge">roles</code> folder, alongside your own role.</p>
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> <span class="nb">install</span> <span class="se">\</span>
+    <span class="nt">-p</span> roles/ geerlingguy.git
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+          <p>This will install the new role into your <code class="language-plaintext highlighter-rouge">roles</code> folder, alongside your own role.</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- downloading role 'git', owned by geerlingguy
+- downloading role from https://github.com/geerlingguy/ansible-role-git/archive/3.0.0.tar.gz
+- extracting geerlingguy.git to /tmp/tmp.Jm681gks8d/roles/geerlingguy.git
+- geerlingguy.git (3.0.0) was installed successfully
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
     </li>
     <li>
       <p>Edit your playbook.yml and add the role <code class="language-plaintext highlighter-rouge">geerlingguy.git</code> at the bottom, after <code class="language-plaintext highlighter-rouge">my-role</code></p>
@@ -1082,12 +1091,12 @@ localhost                  : ok=3    changed=1    unreachable=0    failed=0
       <p>Run the playbook</p>
 
       <blockquote class="question">
-        <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>Did something go wrong?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>Since you have been running the playbook as a non-root user (or at least you should have been!), the step to install a package fails.
 The solution to this is to set <code class="language-plaintext highlighter-rouge">become: true</code>.</p>
@@ -1162,12 +1171,12 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
 </code></pre></div>      </div>
 
       <blockquote class="question">
-        <h3 id="question-question-6"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How does your file look? Is it readable? Run <code class="language-plaintext highlighter-rouge">cat secret_group_vars/all.yml</code></p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <p>The file will look like this, it is encrypted by Ansible Vault with AES256 encryption.</p>
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ cat secret_group_vars/all.yml
@@ -1208,14 +1217,15 @@ $ANSIBLE_VAULT;1.1;AES256
     <li>
       <p>Check the contents of <code class="language-plaintext highlighter-rouge">/tmp/test.ini</code></p>
 
-      <blockquote class="question">
-        <h3 id="question-question-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /tmp/test.ini
+</code></pre></div>          </div>
+        </blockquote>
 
-        <p>How does it look?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-9"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
+        <blockquote class="code-out">
+          <h3 id="code-out-output-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
           <p>The file should look like:</p>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[example]</span>
@@ -1223,9 +1233,7 @@ $ANSIBLE_VAULT;1.1;AES256
 <span class="py">listen</span> <span class="p">=</span> <span class="s">192.168.0.2</span>
 <span class="py">apikey</span> <span class="p">=</span> <span class="s">super-secret-api-key-wow!</span>
 </code></pre></div>          </div>
-
         </blockquote>
-
       </blockquote>
     </li>
   </ol>
@@ -1359,8 +1367,8 @@ Note that for this task one would normally list multiple packages in the <code c
     author = "Helena Rasche and Saskia Hiltemann",
     title = "Ansible (Galaxy Training Materials)",
     year = "2020",
-    month = "05",
-    day = "06"
+    month = "06",
+    day = "11"
     url = "\url{/training-material/topics/admin/tutorials/ansible/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
