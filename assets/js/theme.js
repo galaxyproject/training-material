@@ -8,13 +8,12 @@
 	}
 
 	onDocumentReady(function () {
-		function getCookie(){
-			return document.cookie.replace(/(?:(?:^|.*;\s*)training-theme\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+		function getThemePreference(){
+			return localStorage.getItem('training-theme');
 		}
 
-		function setCookie(newValue) {
-			document.cookie = "training-theme=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
-			document.cookie = "training-theme=" + newValue + ";path=/";
+		function setThemePreference(newValue) {
+			localStorage.setItem('training-theme', newValue);
 		}
 
 
@@ -30,7 +29,7 @@
 			}
 
 			$("body").attr('class', new_classes.join(' '))
-			setCookie(theme);
+			setThemePreference(theme);
 		}
 
 		$("#theme-selector").click(function(evt){
@@ -38,7 +37,7 @@
 			setTheme(theme);
 		})
 
-		training_theme_cookie = getCookie()
+		training_theme_cookie = getThemePreference()
 		if(training_theme_cookie){
 			setTheme(training_theme_cookie);
 		}
