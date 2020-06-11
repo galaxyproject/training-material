@@ -194,9 +194,9 @@ The first step is to check the quality of the reads and the presence of the Next
 > > >
 > > >    3. **Overrepresented sequences**
 > > >
-> > >       One sequence is over represented, it corresponds to the Nextera adapter.
-> > >       It means that you have 306 reads which are exactly the Nextera adapter,
-> > >       they correspond to Nextera adapters amplified head-to-head.
+> > >       One sequence is over represented: 
+> > >       you have 306 reads which are exactly the sequence of the Nextera adapter.
+> > >       They correspond to adapters amplified head-to-head.
 > > >       306 is really low (only 0.1% of reads).
 > > >
 > > {: .solution}
