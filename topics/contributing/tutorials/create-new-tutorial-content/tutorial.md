@@ -644,6 +644,96 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 ```
 {% endraw %}
 
+## **Code** box
+
+We have added code in/out boxes to help you show commands, and their effects, when running command line commands.
+
+Normally a single column, with the boxes above one another, it will automatically split side-by-side over a given width (1200px);
+
+{% raw %}
+```markdown
+> > ### {% icon code-in %} Input: Bash
+> > ```bash
+> > cat /tmp/test.ini
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > The file should look like:
+> >
+> > ```ini
+> > [example]
+> > server_name = Dogs!
+> > listen = 192.168.0.2
+> > apikey = super-secret-api-key-wow!
+> > ```
+> {: .code-out}
+{: .code-io}
+```
+{% endraw %}
+
+Rendered (try it! resize your browser)
+
+> > ### {% icon code-in %} Input: Bash
+> > ```bash
+> > cat /tmp/test.ini
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > The file should look like:
+> >
+> > ```ini
+> > [example]
+> > server_name = Dogs!
+> > listen = 192.168.0.2
+> > apikey = super-secret-api-key-wow!
+> > ```
+> {: .code-out}
+{: .code-io}
+
+If you leave off the `{: .code-io}`, it will render as a single column always.
+
+{% raw %}
+```markdown
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> cat /tmp/test.ini
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> The file should look like:
+>
+> ```ini
+> [example]
+> server_name = Dogs!
+> listen = 192.168.0.2
+> apikey = super-secret-api-key-wow!
+> ```
+{: .code-out}
+```
+{% endraw %}
+
+Rendered:
+
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> cat /tmp/test.ini
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> The file should look like:
+>
+> ```ini
+> [example]
+> server_name = Dogs!
+> listen = 192.168.0.2
+> apikey = super-secret-api-key-wow!
+> ```
+{: .code-out}
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 

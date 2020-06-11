@@ -81,7 +81,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
 >
 >    ```yaml
->    ---
 >    - src: galaxyproject.cvmfs
 >      version: 0.2.8
 >    ```

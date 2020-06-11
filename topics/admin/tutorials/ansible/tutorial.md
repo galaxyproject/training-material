@@ -342,18 +342,16 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > {: .solution }
 >     {: .question}
 >
-> 11. Run the playbook: `ansible-playbook -i hosts playbook.yml`
+> 11. Run the playbook:
 >
->     > ### {% icon question %} Question
->     >
->     > How does the output look?
->     >
->     > > ### {% icon solution %} Solution
->     > >
->     > > The important thing is `failed=0`
->     > >
+>     > > ### {% icon code-in %} Input: Bash
+>     > > ```bash
+>     > > ansible-playbook -i hosts playbook.yml
 >     > > ```
->     > > $ ansible-playbook -i hosts playbook.yml -c local
+>     > {: .code-in}
+>     >
+>     > > ### {% icon code-out %} Output: Bash
+>     > > ```
 >     > > PLAY [my_hosts] ****************************************************************
 >     > > TASK [Gathering Facts] *********************************************************
 >     > > ok: [localhost]
@@ -362,11 +360,8 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > > PLAY RECAP *********************************************************************
 >     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 >     > > ```
->     > >
->     > > You can re-run this and it should say `changed=0`
->     > {: .solution }
->     {: .question}
->
+>     > {: .code-out}
+>     {: .code-io}
 >
 > 12. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
 >
@@ -488,27 +483,26 @@ Templates give you greater control over the files you are deploying to the targe
 >
 > 7. Run the playbook again.
 >
+>
 > 8. Check the contents of `/tmp/test.ini`
 >
->    > ### {% icon question %} Question
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```bash
+>    > > cat /tmp/test.ini
+>    > > ```
+>    > {: .code-in}
 >    >
->    > How does it look?
->    >
->    > > ### {% icon solution %} Solution
+>    > > ### {% icon code-out %} Output
 >    > >
 >    > > The file should look like:
->    > >
->    > > ```ini
+>    > > ```
 >    > > [example]
 >    > > server_name = Cats!
 >    > > listen = 192.168.0.2
 >    > > ```
->    > >
 >    > > Where the last line has the machine's IP address.
->    > >
->    > {: .solution }
->    >
->    {: .question}
+>    > {: .code-out}
+>    {: .code-io}
 >
 >    Now that this has worked successfully, we will setup a `group_vars` folder
 >    to show how a person using `my-role` would override the `server_name` variable.
@@ -526,35 +520,34 @@ Templates give you greater control over the files you are deploying to the targe
 >
 > 12. Run the playbook again, but imagine you are worried about this change, and supply the `--check --diff` flag to see what changes are made before committing to make them.
 >
->     > ### {% icon question %} Question
+>     > ### {% icon code-in %} Input: Bash
+>     > ```bash
+>     > ansible-playbook -i hosts playbook.yml --check --diff
+>     > ```
+>     {: .code-in}
+>
+>     > ### {% icon code-out %} Output
 >     >
->     > How does the output look?
->     >
->     > > ### {% icon solution %} Solution
->     > >
->     > > ```
->     > > $ ansible-playbook -i hosts playbook.yml --check --diff
->     > > PLAY [my_hosts] ****************************************************************
->     > > TASK [Gathering Facts] *********************************************************
->     > > ok: [localhost]
->     > > TASK [my-role : Copy a file to the remote host] ********************************
->     > > ok: [localhost]
->     > > TASK [my-role : Template the configuration file] *******************************
->     > > --- before: /tmp/test.ini
->     > > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
->     > > @@ -1,3 +1,3 @@
->     > >  [example]
->     > > -server_name = Cats!
->     > > +server_name = Dogs!
->     > >  listen = 192.168.0.25
->     > > changed: [localhost]
->     > > PLAY RECAP **********************************************
->     > > localhost                  : ok=3    changed=1    unreachable=0    failed=0
->     > > ```
->     > >
->     > > Here you can see that the server_name value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
->     > {: .solution }
->     {: .question}
+>     > ```
+>     > PLAY [my_hosts] ****************************************************************
+>     > TASK [Gathering Facts] *********************************************************
+>     > ok: [localhost]
+>     > TASK [my-role : Copy a file to the remote host] ********************************
+>     > ok: [localhost]
+>     > TASK [my-role : Template the configuration file] *******************************
+>     > --- before: /tmp/test.ini
+>     > +++ after: /home/hxr/.ansible/tmp/ansible-local-1906887dr2u6j8n/tmptx9pdelg/test.ini.j2
+>     > @@ -1,3 +1,3 @@
+>     >  [example]
+>     > -server_name = Cats!
+>     > +server_name = Dogs!
+>     >  listen = 192.168.0.25
+>     > changed: [localhost]
+>     > PLAY RECAP **********************************************
+>     > localhost                  : ok=3    changed=1    unreachable=0    failed=0
+>     > ```
+>     > Here you can see that the server_name value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
+>     {: .code-out}
 >
 > 13. Run the playbook again, without the `--check` flag to apply your changes.
 {: .hands_on}
@@ -589,9 +582,25 @@ Now that you've built a small role, you can imagine that building real roles tha
 
 > ### {% icon hands_on %} Hands-on: Installing a module using ansible-galaxy
 >
-> 1. Run the command `ansible-galaxy install -p roles/ geerlingguy.git`
+> 1. Install the geerlingguy.git role with ansible-galaxy into your roles folder:
 >
->    This will install the new role into your `roles` folder, alongside your own role.
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```bash
+>    > > ansible-galaxy install \
+>    > >     -p roles/ geerlingguy.git
+>    > > ```
+>    > {: .code-in}
+>    >
+>    > > ### {% icon code-out %} Output
+>    > > This will install the new role into your `roles` folder, alongside your own role.
+>    > > ```
+>    > > - downloading role 'git', owned by geerlingguy
+>    > > - downloading role from https://github.com/geerlingguy/ansible-role-git/archive/3.0.0.tar.gz
+>    > > - extracting geerlingguy.git to /tmp/tmp.Jm681gks8d/roles/geerlingguy.git
+>    > > - geerlingguy.git (3.0.0) was installed successfully
+>    > > ```
+>    > {: .code-out}
+>    {: .code-io}
 >
 > 2. Edit your playbook.yml and add the role `geerlingguy.git` at the bottom, after `my-role`
 >
@@ -699,12 +708,13 @@ Now that you have a small role built up, you might start thinking about deployin
 >
 > 8. Check the contents of `/tmp/test.ini`
 >
->    > ### {% icon question %} Question
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```bash
+>    > > cat /tmp/test.ini
+>    > > ```
+>    > {: .code-in}
 >    >
->    > How does it look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
+>    > > ### {% icon code-out %} Output
 >    > > The file should look like:
 >    > >
 >    > > ```ini
@@ -713,10 +723,8 @@ Now that you have a small role built up, you might start thinking about deployin
 >    > > listen = 192.168.0.2
 >    > > apikey = super-secret-api-key-wow!
 >    > > ```
->    > >
->    > {: .solution }
->    >
->    {: .question}
+>    > {: .code-out}
+>    {: .code-io}
 >
 {: .hands_on}
 

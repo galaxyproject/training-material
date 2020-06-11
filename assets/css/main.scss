@@ -36,6 +36,8 @@ $question-color: #8A9AD0;
 $solution-color: #B8C3EA;
 $details-color: $light-gray;
 $feedback-color: #86D486;
+$code-color: #86D486;
+$code-out-color: #fb99d0;
 
 
 @mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
@@ -380,6 +382,14 @@ footer {
 
         &.question {
             @include tutorial-box($question-color, $text-color);
+        }
+
+        &.code-in {
+            @include tutorial-box($code-color, $text-color);
+        }
+
+        &.code-out {
+            @include tutorial-box($code-out-color, $text-color);
         }
 
         &.solution {
@@ -755,4 +765,19 @@ div.supporting_material{
 
 .alert-heading {
     margin-top: 1rem;
+}
+
+// Code In/Out blocks
+@media (min-width: 1200px) {
+    .code-io{
+        display: flex;
+        flex-direction: row;
+        .code-in {
+            width: 47.5%;
+        }
+        .code-out {
+            margin-left: 5%;
+            width: 47.5%;
+        }
+    }
 }
