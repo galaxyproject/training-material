@@ -8,7 +8,7 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
-{% assign language = site.other_languages | split: ", " %}
+{% assign language = site.other_languages %}
 
 {% if topic.gitter %}
 <script>
@@ -20,7 +20,7 @@ layout: base
 {% endif %}
 
 <div class="container main-content">
-    <section>
+	<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
         <h1>{{ topic.title }}</h1>
         <p>{{ topic.summary }}</p>
 
