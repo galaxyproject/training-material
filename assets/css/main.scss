@@ -98,39 +98,17 @@ body {
     position: relative;
 }
 
-@media (prefers-color-scheme: dark) {
-	body {
-		color: #eee;
-		background-color: black;
 
-		img {
-			background: #aaa;
-		}
-
-		.navbar-brand {
-			img{
-				background: none;
-			}
-		}
-
-		nav[data-toggle="toc"] .nav > li > a {
-			color: #ccc;
-		}
-		nav[data-toggle="toc"] .nav li .active {
-			color: #eee;
-		}
-
-		a {
-			color: #39f;
-		}
-
-	}
-}
+@import "assets/css/syntax_highlighting-dark.scss";
 
 body.theme-night {
-	color: #eee;
-	background-color: black;
+    color: #eee;
+    background-color: #444444;
+    @include syntax-dark;
 
+    .contributors-line{
+        color: #eee;
+    }
 	img {
 		background: #aaa;
 	}
@@ -140,6 +118,9 @@ body.theme-night {
 			background: none;
 		}
 	}
+    .navbar {
+        background-color: #424a66 !important;
+    }
 
 	nav[data-toggle="toc"] .nav > li > a {
 		color: #ccc;
@@ -148,9 +129,14 @@ body.theme-night {
 		color: #eee;
 	}
 
-	a {
+    a {
 		color: #39f;
 	}
+
+    :not(a) > code {
+        background-color: #333333;
+        color: #ffa0a0;
+    }
 
 }
 
@@ -160,7 +146,9 @@ body.theme-rainbow {
 		content: "🌈 "
 	}
 	h1::after {
-		content: " 🌈"
+		content: " 🌈 ";
+        display: inline-block;
+        transform: scale(-1, 1) translateX(-1rem);
 	}
 	header {
 		nav.navbar {
@@ -195,21 +183,29 @@ body.theme-rainbow {
 		}
 	}
 
-	table.table-striped {
-		tbody tr:nth-of-type(6n+1) { background: #e2453c }
-		tbody tr:nth-of-type(6n+2) { background: #e07e39 }
-		tbody tr:nth-of-type(6n+3) { background: #e5d667 }
-		tbody tr:nth-of-type(6n+4) { background: #51b95b }
-		tbody tr:nth-of-type(6n+5) { background: #1e72b7 }
-		tbody tr:nth-of-type(6n+6) { background: #6f5ba7 }
+	.tutorials-list:not(.admin):not(.dev) table.table-striped {
+		tbody tr td:nth-of-type(6n+2) { color: red; i{color: red} }
+		tbody tr td:nth-of-type(6n+3) { color: orange; i{color: orange} }
+		tbody tr td:nth-of-type(6n+4) { color: green; i{color: green} }
+		tbody tr td:nth-of-type(6n+5) { color: blue; i{color: blue} }
+		tbody tr td:nth-of-type(6n+6) { color: purple; i{color: purple} }
 
-		tr {
-			color: black;
-			a {
-				color: black;
-			}
-		}
+        thead th:nth-of-type(6n+2) { color: red }
+		thead th:nth-of-type(6n+3) { color: orange }
+		thead th:nth-of-type(6n+4) { color: green }
+		thead th:nth-of-type(6n+5) { color: blue }
+		thead th:nth-of-type(6n+6) { color: purple }
+
 	}
+    .admin,.dev .table-striped {
+		tbody tr:nth-of-type(5n+1) { color: red; i{color: red} }
+		tbody tr:nth-of-type(5n+2) { color: orange; i{color: orange} }
+		tbody tr:nth-of-type(5n+3) { color: green; i{color: green} }
+		tbody tr:nth-of-type(5n+4) { color: blue; i{color: blue} }
+		tbody tr:nth-of-type(5n+5) { color: purple; i{color: purple} }
+        tbody td:nth-of-type(1) {color:black;}
+	}
+
 }
 
 h1,
