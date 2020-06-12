@@ -36,6 +36,8 @@ contributors:
   - hrhotz
   - blankenberg
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 

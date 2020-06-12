@@ -33,6 +33,9 @@ tags:
 - 10x
 contributors:
 - bebatut
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 
@@ -102,7 +105,7 @@ In this matrix, the values represent the number for each feature (i.e. gene; row
 >
 > 1. How many non-zero values are in the matrix?
 > 2. How many counts are found for the 32,706th gene in the 1st cell?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > 1. There are 2,286,884 (2.6%) non-zero values for the 88,392,600 possible counts of the 32,738 genes (rows) and 2,700 cells (columns).
@@ -147,17 +150,17 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    - *"What to inspect?"*: `General information about the object`
 >
 > 2. Inspect the generated file
-> 
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > ```
->    > AnnData object with n_obs × n_vars = 2700 × 32738 
+>    > AnnData object with n_obs × n_vars = 2700 × 32738
 >    >     var: 'gene_ids'
 >    > ```
 >    >
 >    > 1. How many observations are there? What do they represent?
 >    > 2. How many variables are there? What do they represent?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1. There are 2,700 observations, representing the cells.
@@ -168,7 +171,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    {: .question}
 >
 >    > ### {% icon comment %} Comment: Faster Method for General Information
->    > 
+>    >
 >    > * The **ScanPy** toolset in Galaxy produces *AnnData* formats as
 >    >   output, where general information is provided for each dataset:
 >    >    * Click on the name of the dataset in the history to expand it.
@@ -201,7 +204,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > ```
 >    >
 >    > What is stored in the generated file?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > The file is a table with 2,700 lines (observations or cells) and 32,738 columns (variables or genes): the count matrix for each of the 32,738 genes and 2,700 cells. The 1st row contains the gene symbol as annotation of the columns and the 1st column the barcodes of the cells as annotation of the rows.
@@ -228,7 +231,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > ```
 >    >
 >    > What is stored in the generated file?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > The file is a tabular with annotations of the observations. i.e. the cells. Here there are only the barcodes as annotation, so only one column, being also the index for the count matrix.
@@ -255,7 +258,7 @@ Because the `AnnData` format is an extension of the HDF5 format, i.e. a binary f
 >    > ```
 >    >
 >    > What is stored in the generated file?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > The file is a tabular with annotations of the variables, i.e. the genes. Here the files has 2 columns: the gene symbols (also the index in the count matrix), `gene_ids` or the Ensemble gene ids.
@@ -307,7 +310,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >    > ```
 >    >
 >    > How many genes have been removed because they are expressed in less than 3 expressed cells?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > There are now 13,714 cells. So 19,024 (32,738 - 13,714) genes have been removed.
@@ -324,11 +327,11 @@ Low-quality cells may be due to a variety of sources such as cell damage during 
 > #### Formation of their own distinct cluster(s)
 >
 > Increased mitochondrial proportions or enrichment for nuclear RNAs after cell damage are the most obvious causes for this phenomenon. Low-quality cells in different cell types can, in the worst case, cluster together (because of similarities in the damage-induced expression profiles) leading to artificial intermediate states or trajectories between subpopulations that should be otherwise distinct. This phenomenon makes the results difficult to interpret.
-> 
+>
 > #### Distortion of population heterogeneity during variance estimation or principal components analysis
 >
 > With low-quality cells, the main differences captured by the first few principal components will be based on quality rather than biology, reducing then the effectiveness of dimensionality reduction. Similarly, differences between low- and high-quality cells will create genes with the largest variances. For example, in low-quality cells with very low counts, the scaling normalization increases the variance of genes that happen to have a non-zero count in those cells.
-> 
+>
 > #### Misidentification of upregulated genes
 >
 > Due to aggressive scaling to normalize for small cell sizes, low-quality cells shows genes that appear to be strongly "upregulated". For example, contaminating transcripts may be present in all cells with a low but constant levels. With the increased scaling normalization in low-quality cells, the small counts for these transcripts may become large normalized expression values, i.e. an apparent upregulation compared to other cells.
@@ -349,7 +352,7 @@ To mitigate these problems, we need to remove these low-quality cells at the sta
 
     High concentrations of mitochondrial genes is often a result of damaged cells ({% cite islam2014quantitative %}, {% cite ilicic2016classification %}) where the endogenous RNA escapes or degrades. As mitochondria has its own cell membranes, it is often the last DNA/RNA in damaged cells to degrade and hence occurs in high quantities during sequencing.
 
-We will make the key assumption that these metrics are independent of the biological state of each cell. Technical factors rather than biological processes are presumed to drive poor values (e.g., low cell sizes, high mitochondrial proportions). The subsequent removal of impacted cells do not misrepresent the biology in downstream analyses. 
+We will make the key assumption that these metrics are independent of the biological state of each cell. Technical factors rather than biological processes are presumed to drive poor values (e.g., low cell sizes, high mitochondrial proportions). The subsequent removal of impacted cells do not misrepresent the biology in downstream analyses.
 
 To identify low-quality cells, the simplest approach is to apply thresholds on the QC metrics. This strategy, while simple, is required to determine appropriate thresholds that will change given the experimental protocol and the biological system.
 
@@ -396,11 +399,11 @@ To create this table, we need to:
 >    > ### {% icon question %} Questions
 >    >
 >    > How many genes are found as mitochondrial?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > To evaluate the number of non mitochondrial, we need to extract all lines for which the 2nd column is 1. This can be done using the **Filter** {% icon tool %} tool:
->    > > 
+>    > >
 >    > >    - {% icon param-file %} *"Filter"*: output of **Text reformatting**
 >    > >    - *"With following condition"*: `c2!=0`
 >    > >    - *"Number of header lines to skip"*: `1`
@@ -458,7 +461,7 @@ To create this table, we need to:
 > 10. Rename the generated file `3k PBMC with mito annotation`
 >
 > 11. **Inspect AnnData** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation` 
+>    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation`
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 >
 > 12. Inspect the generated file and check if the mitochondrial annotation has been added
@@ -509,7 +512,7 @@ We can now compute QC metrics on the `AnnData` object.
 >    > ```
 >    >
 >    > Which QC metrics have been computed?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > The tool computed several QC metrics at both cell and gene levels. These metrics are added to the annotation tables.
@@ -519,7 +522,7 @@ We can now compute QC metrics on the `AnnData` object.
 >    > > - `mean_counts`: mean expression for a gene over all cells
 >    > > - `n_cells_by_counts`: number of cells with non-zero counts for a gene
 >    > > - `pct_dropout_by_counts`: percentage of cells this gene does not appear in
->    > > 
+>    > >
 >    > > At cell levels (stored in `obs`):
 >    > > - `total_counts`: total number of counts for a cell
 >    > > - `total_counts_mito`: total number of counts for the mitochondrial genes in a cell
@@ -561,7 +564,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    > <!-- To update... -->
 >    >
 >    > How do the distributions of the 3 QC metrics look?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > For the cell size, i.e. `total_counts`, most of the values are between 1,000 reads and 4,000 reads, with some extremely high values skewing the distribution.
@@ -589,7 +592,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    > ![QC total_counts n_genes_by_counts](../../images/scrna-scanpy-pbmc3k/qc_scatter_total_counts_n_genes_by_counts.png)
 >    >
 >    > Is there any relationship between the cell size and the number of expressed genes?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > On the plot, we can see a strong correlation between the total number of counts for a cell and the number of genes with positive counts.
@@ -615,7 +618,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    > 1. Is there any relationship between the number of expressed genes and the proportion of reads mapped to mitochondrial genes?
 >    > 2. What could be a good threshold to filter for cells with high concentrations of mitochondrial genes?
 >    > 3. What could be good thresholds to filter for cells based on the number of expressed genes?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1. Cells with a high proportion of mitochondrial genes are not also cells that have many expressed genes. There is no visible correlation.
@@ -654,7 +657,7 @@ Based on the previous plot, we would like to remove cells that have:
 >    > ```
 >    >
 >    > How many cells have been removed because they have less than 200 expressed genes?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > There are still 2,700 cells. So no cells have been removed because they have less than 200 expressed genes.
@@ -679,7 +682,7 @@ Based on the previous plot, we would like to remove cells that have:
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 2,500 expressed genes?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > There are now 2,695 cells. So 5 cells have been removed because they have more than 2,500 expressed genes.
@@ -711,7 +714,7 @@ Based on the previous plot, we would like to remove cells that have:
 >    > ```
 >    >
 >    > How many cells have been removed because they have more than 5% of reads mapped to mitochondrial genes?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > There are now 2,638 cells. So 57 cells have been removed because they have more than 5% of reads mapped to mitochondrial genes.
@@ -770,7 +773,7 @@ We will freeze the current state of the AnnData object, i.e. the logarithmized r
 
 Data from scRNA-Seq is often used in exploratory analyses to characterize heterogeneity across cells. With clustering and dimensionality reduction, cells are compared based on their gene expression profiles. The choice of genes to use may have a major impact on the behaviour of the clustering and the dimensionality reduction. We need then to remove genes with random noise while keeping genes containing useful information about the biology of the system. This reduces the data size but still highlights any interesting biological signal without the noise that obscures that structure.
 
-Selecting the most variable genes based on their expression across the cells (i.e. genes highly expressed in some cells, and lowly expressed in others) is the simplest approach for feature selection. With this approach, we assume that increased variation in some genes compared to other genes are genuine biological differences and not technical noise or a baseline level of "uninteresting" biological variation. 
+Selecting the most variable genes based on their expression across the cells (i.e. genes highly expressed in some cells, and lowly expressed in others) is the simplest approach for feature selection. With this approach, we assume that increased variation in some genes compared to other genes are genuine biological differences and not technical noise or a baseline level of "uninteresting" biological variation.
 
 To quantify the per-gene variation, the simplest approach consists of computing the variance of the log-normalized expression values for each gene across all cells in the population. With this approach, the feature selection is based on the same log-values as the ones used in clustering, ensuring then that the quantitative definition of heterogeneity is consistent throughout the entire analysis.
 
@@ -840,7 +843,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    >
 >    > 1. How many genes are in the `AnnData` object?
 >    > 2. Where is the stored the information about the genes and if they are highly variable or not?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > 1. There are now 13,714 genes, as before.
@@ -872,7 +875,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 >    > ```
 >    >
 >    > How many genes have been removed?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > Only 1,838 (over the 13,714) genes are kept.
@@ -903,13 +906,13 @@ Prior to any downstream analysis like dimensional reduction, we need to apply a 
 >      - *"Maximum value"*: `10.0`
 >
 >        It clips values exceeding a standard deviation of 10.
-> 
+>
 > 3. Rename the generated output `3k PBMC with only HVG, after scaling`
 {: .hands_on}
 
 # Dimensionality reduction
 
-We aim in scRNA-seq to compare cells based on their expressions across genes, e.g. to identify similar transcriptomic profiles. Each gene represents then a dimension of the data. 
+We aim in scRNA-seq to compare cells based on their expressions across genes, e.g. to identify similar transcriptomic profiles. Each gene represents then a dimension of the data.
 
 With a dataset of 2 genes, we could make a 2-dimensional plot where each point is a cell and each axis is the expression of one gene. For datasets with thousands of genes, the concept is the same: each cell's expression profile defines its location in the high-dimensional expression space.
 
@@ -944,9 +947,9 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 {: .hands_on}
 
 > ### {% icon details %} Storage of PCA information in `AnnData` objects
-> 
+>
 > PCA information are stored in the `AnnData` object in a quite complex way.
-> 
+>
 > > ### {% icon hands_on %} Hands-on: Inspect the PCA inside an `AnnData` object
 > >
 > > 1. Inspect the `3k PBMC with only HVG, after scaling and PCA` dataset
@@ -992,11 +995,11 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    > ```
 > >    >
 > >    > How is the PCA stored in the `AnnData` object?
-> >    > 
+> >    >
 > >    > > ### {% icon solution %} Solution
 > >    > >
 > >    > > 3 new objects (`uns`, `obsm`, `varm`) have been added to the `AnnData` object with information that seem related to PCA.
-> >    > > 
+> >    > >
 > >    > > `uns` is an unstructured annotation, `obsm` multi-dimensional annotation of the observations (i.e. genes) and `varm` multi-dimensional annotation of the variables (i.e. cells).
 > >    > {: .solution}
 > >    >
@@ -1010,7 +1013,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    > ### {% icon question %} Questions
 > >    >
 > >    > What information is stored in `uns` regarding the PCA?
-> >    > 
+> >    >
 > >    > > ### {% icon solution %} Solution
 > >    > >
 > >    > > `uns` is storing:
@@ -1029,7 +1032,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    > ### {% icon question %} Questions
 > >    >
 > >    > What are the information stored in `obsm` regarding the PCA?
-> >    > 
+> >    >
 > >    > > ### {% icon solution %} Solution
 > >    > >
 > >    > > `obsm` is storing the PCA coordinates for the cells as a table with the rows being the cells, the columns the PCs and the values the PCs coordinate for cell and PC.
@@ -1045,7 +1048,7 @@ Here we perform the PCA on the log-normalized expression values and compute the 
 > >    > ### {% icon question %} Questions
 > >    >
 > >    > What information is stored in `varm` regarding the PCA?
-> >    > 
+> >    >
 > >    > > ### {% icon solution %} Solution
 > >    > >
 > >    > > `varm` is storing the PCA coordinates for the genes as a table with the rows being the genes, the columns the PCs and the values the PCs coordinate for gene and PC.
@@ -1089,17 +1092,17 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling and PCA`
 >    - *"Method used for plotting"*: `PCA: Rank genes according to contributions to PCs, using 'pl.pca_loadings'`
 >      - *"List of comma-separated components"*: `1,2,3`
-> 
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > ![PCA loadings](../../images/scrna-scanpy-pbmc3k/pca_loadings.png)
 >    >
 >    > What are the top genes for each of the 3 first PCs? What do they represent?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PPBP for the 3rd PC.
->    > > 
+>    > >
 >    > {: .solution}
 >    {: .question}
 >
@@ -1125,13 +1128,13 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 > ### {% icon question %} Questions
 >
 > Where are the differences in expression for CST3, NKG7, and PPBP?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
-> > * For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot. 
+> > * For CST3, the differences are mostly projected on PC1 (expected as CST3 is the top gene for PC1), and not visible on the PC3 vs PC2 plot.
 > > * For NKG7, the differences in expression are seen on PC2.
 > > * For PPBP, the differences in expression are seen on PC3.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1141,7 +1144,7 @@ We performed the PCA analyses using 50 PCS. They represent a robust compression 
 
 The choice of the number of PCs is a similar question to the choice of the number of highly variable genes to keep. More PCs means more noise but also more biological signal.
 
-A simple heuristic for choosing the number of PCs generates an "Elbow plot": a ranking of the PCs based on the percentage of variance they explain.  
+A simple heuristic for choosing the number of PCs generates an "Elbow plot": a ranking of the PCs based on the percentage of variance they explain.
 
 > ### {% icon hands_on %} Hands-on: Generate an Elbow plot
 >
@@ -1159,11 +1162,11 @@ To determine the elbow point, we assume that each of the PCs should explain much
 > ### {% icon question %} Questions
 >
 > How many PCs should we keep given the previous plot?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > We choose here to keep 10 PCs.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1171,7 +1174,7 @@ We encourage users to repeat downstream analyses with different number of PCs.
 
 # Clustering of the cells
 
-In the PC projection, we saw some subpopulations of cells emerging. We would like now to empirically define these subpopulation of cells with similar expression profiles using unsupervised clustering. 
+In the PC projection, we saw some subpopulations of cells emerging. We would like now to empirically define these subpopulation of cells with similar expression profiles using unsupervised clustering.
 
 Clustering summarizes the data and allows us to describe the population heterogeneity in terms of discrete and easily understandable labels. The subpopulations can be afterwards treated as proxies for biological objects like cell types or states.
 
@@ -1208,18 +1211,18 @@ Here, to reproduce original results, we choose 10 neighbors for a KNN graph, the
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >
 > 3. Inspect the dataset
-> 
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > How is the neighborhood graph stored in the `AnnData` object?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > An extra object `neighbors` has been added to `uns` with 2 mtx objects (similar format to the original count table):
 >    > >
 >    > > - Distance between each cells
 >    > > - Weighted adjacency matrix between cells
->    > > 
+>    > >
 >    > > This information can be accessed using **Inspect AnnData** {% icon tool %} with the following parameters:
 >    > > - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > > - *"What to inspect?"*: `Unstructured annotation (uns)`
@@ -1248,11 +1251,11 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 >    > ### {% icon question %} Questions
 >    >
 >    > How is the UMAP reduction stored in the `AnnData` object?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > An extra object `X_umap` has been added to `obsm` with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.
->    > > 
+>    > >
 >    > > This information can be accessed by:
 >    > > 1. Inspect the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
@@ -1275,13 +1278,13 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 > ### {% icon question %} Questions
 >
 > Are clusters identifiable on these graphs? Might they be linked to PCs?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > There seem to be at least 3 big clusters (the 3 blobs) before looking at the expression of some representative genes.
 > >
 > > With the plot colored with NKG7 expression, we clearly see that the blob on the bottom right could be divided in 3 sub-clusters (light green, blue, purple). Given the expression of PPBP, the "arm" on the blob on the left should be a different cluster.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1291,7 +1294,7 @@ Given the first visualization, we can now cluster the cells within a neighborhoo
 
 Which community detection algorithm should we use to define the clusters? Several modularity optimization techniques such as the SLM ({% cite blondel2008fast %}), Louvain algorithm ({% cite levine2015data %}) or the Leiden algorithm ({% cite traag2019louvain %}) are available to iteratively group cells together while optimizing the standard modularity function.
 
-Currently, the Louvain graph-clustering method (community detection based on optimizing modularity) is the one recommended. We need to define a value for the resolution parameter, i.e. the 'granularity' of the downstream clustering. High values lead to a greater number of clusters. For single-cell datasets of around 3K cells, we recommend to use a value between 0.4 and 1.2. For larger datasets, the optimal resolution will be higher. 
+Currently, the Louvain graph-clustering method (community detection based on optimizing modularity) is the one recommended. We need to define a value for the resolution parameter, i.e. the 'granularity' of the downstream clustering. High values lead to a greater number of clusters. For single-cell datasets of around 3K cells, we recommend to use a value between 0.4 and 1.2. For larger datasets, the optimal resolution will be higher.
 
 > ### {% icon hands_on %} Hands-on: Cluster the neighborhood graph
 >
@@ -1306,11 +1309,11 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 >    > ### {% icon question %} Questions
 >    >
 >    > How is the UMAP reduction stored in the `AnnData` object?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > An extra column `louvain` has been added to the `obs` object with the cluster id for each cell.
->    > > 
+>    > >
 >    > > This information can be accessed using:
 >    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
@@ -1342,7 +1345,7 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 >
 > 1. How many clusters have been identified? Do they fit with the ones quickly identified with UMAP plots?
 > 2. In which clusters do you expected to have CST3, NKG7 and PPBP as representative?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > 1. 8 clusters are identified, more or less corresponding to the ones we could see on the UMAP plots.
@@ -1382,7 +1385,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >    > ### {% icon question %} Questions
 >    >
 >    > How is the marker gene information stored in the `AnnData` object?
->    > 
+>    >
 >    > > ### {% icon solution %} Solution
 >    > >
 >    > > An extra object `rank_genes_groups` has been added to the `uns` object with 5 tables for the 100 top ranked genes (rows) for each cluster (column):
@@ -1392,7 +1395,7 @@ The simplest and fastest method is the Welch *t*-test. It has good statistical p
 >    > > - Log2 Fold changes
 >    > > - P-values
 >    > > - Adjusted p-values
->    > > 
+>    > >
 >    > > This information can be accessed using:
 >    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
 >    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with t-test`
@@ -1436,13 +1439,13 @@ RPS25 | S100A9 | HLA-DRB1 | CST7 | FTH1 | GNLY | HLA-DRB1 | NRGN
 > ### {% icon question %} Questions
 >
 > Are CST3, NKG7 and PPBP in the set of marker genes? If yes, are they assigned to the clusters we guessed before?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > * CST3 is a marker gene for clusters 1, 4, 7 (not 3 as guessed previously)
 > > * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
 > > * PPBP for cluster 7, as guessed previously
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1454,7 +1457,7 @@ Another widely used method for pairwise comparisons between groups of observatio
 >
 > 1. **Inspect and manipulate** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering`
->      
+>
 >      <small>**Note:** *Please pay attention to the dataset name.*</small>
 >    - *"Method used for inspecting"*: `Rank genes for characterizing groups, using 'tl.rank_genes_groups'`
 >      - *"The key of the observations grouping to consider"*: `louvain`
@@ -1500,7 +1503,7 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > ### {% icon question %} Questions
 > 1. Are the 5 top ranked genes different than the one for the *t*-test?
 > 2. Are CST3, NKG7 and PPBP in the marker genes? If yes, are they assigned to the clusters we guessed before?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > 1. The 5 top ranked genes are slightly different, at least in their order.
@@ -1508,7 +1511,7 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 > >    * CST3 is a ranked genes for clusters 1, 4, 6 (not 3 as guessed previously)
 > >    * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
 > >    * PPBP for cluster 7, as we guessed previously.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1527,13 +1530,13 @@ CD3D | FCN1 | MS4A1 | HLA-C | FTH1 | CST7 | HLA-DQA1 | GPX1
 
 > ### {% icon question %} Questions
 > Are CST3, NKG7 and PPBP more expressed in the clusters for which they are marker genes?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > - CST3 is more expressed in clusters 1, 4, 6, the ones for which it was previously found as a marker gene, but also in cluster 7, which is unexpected.
 > > - NKG7 is more expressed in clusters 3 and 5, the ones for which it was previously found as a marker gene.
 > > - PPBP is very pronounced in cluster 7, for which it was previously found as a marker gene.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1566,15 +1569,15 @@ The assumption should be even more true for the top marker genes. The first way 
 
 > ### {% icon question %} Questions
 > Are the top marker genes only expressed in the cluster for which they are markers?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
-> > * LDHB, LYZ and CD74, even if they are top markers genes for the cluster 0, 1, 2 respectively, are also expressed in all other clusters (and also found in the top 100 marker genes for other clusters), but with higher level in the cluster for they are markers. 
-> > 
+> > * LDHB, LYZ and CD74, even if they are top markers genes for the cluster 0, 1, 2 respectively, are also expressed in all other clusters (and also found in the top 100 marker genes for other clusters), but with higher level in the cluster for they are markers.
+> >
 > > * CCL5, LST1, NKG7 and HLA-DPA1 are not expressed in all clusters but also not only in the one they are markers.
 > >
 > > * PF4 is only expressed in cluster 7.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1596,11 +1599,11 @@ Another approach consists of displaying the mean expression of the marker genes 
 
 > ### {% icon question %} Questions
 > Are the top marker genes clearly associated to their clusters?
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > For most genes, we can clearly see for which cluster they are marker genes. But for physically close clusters, the differences are not so obvious.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1608,7 +1611,7 @@ Another approach consists of displaying the mean expression of the marker genes 
 
 We would like now to have a look at the expression of the top 20 marker genes in the different cells for each cluster
 
-> ### {% icon hands_on %} Hands-on: Plot heatmap of the gene expression in cells 
+> ### {% icon hands_on %} Hands-on: Plot heatmap of the gene expression in cells
 >
 > 1. **Plot** with scanpy {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
@@ -1624,14 +1627,14 @@ We would like now to have a look at the expression of the top 20 marker genes in
 Each cells is shown in a row and in columns are the marker genes for each cluster.
 
 > ### {% icon question %} Questions
-> How are clusters close to each other in terms of expression of the top 20 marker genes? 
-> 
+> How are clusters close to each other in terms of expression of the top 20 marker genes?
+>
 > > ### {% icon solution %} Solution
 > >
 > > * Clusters 0, 3, and 5 are similar in term of expression. This was expected as they are physically close on the neighborhood graph.
 > >
 > > * Clusters 1 and 4 are together and then 2 and 6 are together after 7. These observations are less expected given the neighborhood graph: 1 and 4 are physically close, but 2 is far from 7 and 6.
-> > 
+> >
 > {: .solution}
 {: .question}
 
@@ -1668,7 +1671,7 @@ In some cases, it may also be interesting to find marker genes distinguishing on
 ![Rank genes 0 vs 1 with Wilcoxon](../../images/scrna-scanpy-pbmc3k/rank_genes_groups_wilcoxon_0_vs_1.png)
 
 > ### {% icon question %} Questions
->  
+>
 > How can we interpret this plot?
 >
 > > ### {% icon solution %} Solution
@@ -1715,7 +1718,7 @@ Megakaryocytes | PPBP
 FCGR3A+ Monocytes | FCGR3A, MS4A7
 
 > ### {% icon tip %} How to find canonical markers?
-> 
+>
 > Canonical markers are usually found in the literature and are also aggregated into dedicated database like the [PanglaoDB](https://panglaodb.se/markers.html) {% cite franzen2019panglaodb %}
 {: .tip}
 
@@ -1724,7 +1727,7 @@ FCGR3A+ Monocytes | FCGR3A, MS4A7
 > Is it possible to match the clusters to cell types using the previous table?
 >
 > *Hint*: search for the marker genes in the table in the `Ranked genes with Wilcoxon test` dataset
-> 
+>
 > > ### {% icon solution %} Solution
 > >
 > > By searching the marker genes in the the `Ranked genes with Wilcoxon test` dataset:
@@ -1747,7 +1750,7 @@ FCGR3A+ Monocytes | FCGR3A, MS4A7
 > > FCGR3A | FCGR3A+ Monocytes | 4 (5)
 > >
 > > We can then aggregate the results by clusters
-> > 
+> >
 > > Cell type | Marker genes | Cluster
 > > --- | --- | ---
 > > CD4+ T cells | IL7R, CCR7 | 0
@@ -1779,7 +1782,7 @@ Cluster | Cell type
 >
 > 1. **Manipulate AnnData** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test`
->      
+>
 >      <small>**Note**: *Take note that this is not the "0 vs 1 Wilcoxon" dataset*</small>
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >      - *"Key for observations or variables annotation"*: `louvain`
@@ -1788,7 +1791,7 @@ Cluster | Cell type
 > 2. Rename the generated output `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP, clustering, marker genes with Wilcoxon test, annotation`
 >
 >    > ### {% icon question %} Questions
->    > 
+>    >
 >    > How can we check that the cell type has been correctly added?
 >    >
 >    > > ### {% icon solution %} Solution
@@ -1814,7 +1817,7 @@ Cluster | Cell type
 ![UMAP plot with annotated clusters](../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png)
 
 > ### {% icon question %} Questions
->  
+>
 > How well are the cell types clustered in the neighborhood graph?
 >
 > > ### {% icon solution %} Solution
@@ -1884,13 +1887,13 @@ With the annotated cell types, we can also visualize the expression of their can
 ![Dotplot plot with annotated clusters](../../images/scrna-scanpy-pbmc3k/dotplot_annotated_clusters.png)
 
 > ### {% icon question %} Questions
-> 
+>
 > 1. Are the canonical marker genes only expressed in their cell type?
 > 2. Are the previous physical cluster (UMAP graph) confirmed?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Some canonical marker genes like LYZ or CST3 are not only highly expressed in their cell type but also on closely related other cell types.  
+> > 1. Some canonical marker genes like LYZ or CST3 are not only highly expressed in their cell type but also on closely related other cell types.
 > > 1. As seen on the UMAP graph, T cells (CD4+ and CD8+) are clustered together with NK cells, but NK cells and CD8+ closer to each other. Monocytes cells (CD14+ and FCGR3A+) are close to each others, but B cells are close to Dendritic and then Megakaryocytes despite B cells being physically independent on the neighborhood graph.
 > >
 > {: .solution}
