@@ -10,14 +10,20 @@ layout: base
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
 {% assign language = site.other_languages %}
 
+
+<!-- Gitter -->
 {% if topic.gitter %}
+  {% assign gitter = topic.gitter %}
+{% else %}
+  {% assign gitter = site.gitter_url %}
+{% endif %}
+
 <script>
   ((window.gitter = {}).chat = {}).options = {
-  room: '{{ topic.gitter }}'
+  room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-{% endif %}
 
 <div class="container main-content">
 	<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
