@@ -9,6 +9,12 @@
 
 	onDocumentReady(function () {
 		function getThemePreference(){
+			params = (new URL(document.location)).searchParams;
+			paramTheme = params.get('theme')
+
+			if(paramTheme){
+				setThemePreference(paramTheme);
+			}
 			return localStorage.getItem('training-theme');
 		}
 
