@@ -43,6 +43,8 @@ contributors:
   - erxleben
   - wm75
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 
