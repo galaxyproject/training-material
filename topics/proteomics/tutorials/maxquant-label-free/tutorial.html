@@ -452,10 +452,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
-        
     
         
     
@@ -524,10 +520,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
-        
     
         
     
@@ -542,7 +534,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 29, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 14, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -579,6 +571,7 @@
   </li>
   <li><a href="#quality-control-results" id="markdown-toc-quality-control-results">Quality control results</a></li>
   <li><a href="#serum-composition" id="markdown-toc-serum-composition">Serum composition</a></li>
+  <li><a href="#quantitative-assessment" id="markdown-toc-quantitative-assessment">Quantitative Assessment</a></li>
 </ol>
 
 </blockquote>
@@ -679,6 +672,8 @@ https://zenodo.org/record/3774452/files/Sample2.raw
         <li>In <em>“Input Options”</em>:
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA files”</em>: <code class="language-plaintext highlighter-rouge">protein database</code></li>
+            <li><em>“Identifier parse rule”</em>: <code class="language-plaintext highlighter-rouge">&gt;.*\|(.*)\|</code></li>
+            <li><em>“Description parse rule”</em>: <code class="language-plaintext highlighter-rouge">&gt;.*\|.*\|[^ ]+ (.*) OS</code></li>
           </ul>
         </li>
         <li>In <em>“Search Options”</em>:
@@ -690,7 +685,7 @@ https://zenodo.org/record/3774452/files/Sample2.raw
           <ul>
             <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Infiles”</em>: <code class="language-plaintext highlighter-rouge">sample1</code>, <code class="language-plaintext highlighter-rouge">sample2</code></li>
             <li><em>“missed cleavages”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-            <li><em>“variable modifications”</em>: ` `</li>
+            <li><em>“variable modifications”</em>: <code class="language-plaintext highlighter-rouge">unselect all variable modifications</code></li>
             <li><em>“Quantitation Methods”</em>: <code class="language-plaintext highlighter-rouge">label free quantification</code></li>
           </ul>
         </li>
@@ -711,6 +706,8 @@ https://zenodo.org/record/3774452/files/Sample2.raw
 </blockquote>
 
 <h2 id="more-details-on-maxquant-parameters">More details on MaxQuant Parameters</h2>
+
+<p>The <em>“parse rules”</em> in the input section are applied to the fasta sequence headers. Regular <span class="notranslate">expression</span>s can be adjusted to keep different information from the fasta file header. Examples are given in the MaxQuant help section at the bottom of the tool. The fasta file for this training comes from Uniprot, therefore the parse rules are adjusted accordingly.</p>
 
 <p>The <em>“minimum peptide length”</em> defines the minimum number of amino acids a peptide should have to be included for protein identification and quantification. Below 7 amino acids a peptide cannot be unique and is therefore not informative, thus typical values are in the range 7-9.</p>
 
@@ -737,9 +734,6 @@ https://zenodo.org/record/3774452/files/Sample2.raw
 <blockquote class="details">
   <h3 id="details-more-maxquant-parameters"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> More MaxQuant parameters</h3>
   <ul>
-    <li>
-      <p>The <em>“parse rules”</em> in the input section are applied to the fasta sequence headers. The default automatically extracts the Uniprot ID from fasta files that were downloaded from uniprot. Regular <span class="notranslate">expression</span>s can be adjusted to keep other information from the fasta file.</p>
-    </li>
     <li>
       <p>For pre-fractionated data an <em>“experimental design template”</em> has to be used. This has to be a tab-separated text file with a column for the fractions (e.g. 1-10) and a column for the experiment (sample1, sample2, sample3) and a column for post translational modifications (PTM). Examples are given in the help section of the MaxQuant tool.</p>
     </li>
@@ -783,7 +777,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
 
     <ol>
       <li>271 protein (groups) were found in total.</li>
-      <li>2387 peptides were found in total.</li>
+      <li>Depending on the tool version 2387 or 2388 peptides were found in total.</li>
       <li>Sample1: 237, Sample2: 123 (<strong>filter data on any column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <code class="language-plaintext highlighter-rouge">protein groups</code> file <em>“with following condition”</em> <code class="language-plaintext highlighter-rouge">c32!=0</code> or <code class="language-plaintext highlighter-rouge">c33!=0</code> and *“Number of header lines” <code class="language-plaintext highlighter-rouge">1</code>)</li>
     </ol>
 
@@ -820,7 +814,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
 
 <h1 id="serum-composition">Serum composition</h1>
 
-<p>To explore the proteomic composition of the two serum samples some postprocessing steps are necessary. The protein groups file has many different columns, therefore the first step is to extract only columns that are of interest for this task. This are the columns with the fasta headers (this includes the protein name as it was written in the fasta file) and the two columns with LFQ intensities for both files. To find the most abundant proteins the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
+<p>To explore the proteomic composition of the two serum samples some postprocessing steps are necessary. The protein groups file has many different columns, therefore the first step is to extract only columns that are of interest for this task. These are the column with the fasta header (this includes the protein name as it was written in the fasta file) and the two columns with LFQ intensities for both files. To find the most abundant proteins the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-exploring-serum-composition"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Exploring serum composition</h3>
@@ -891,12 +885,118 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins <a href="https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms">plasma proteins found by MS</a>.</li>
+      <li>Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins (<a href="https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms">plasma proteins found by MS</a>).</li>
       <li>Sample1 was depleted, sample2 was pure serum.</li>
       <li>In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.</li>
     </ol>
 
   </blockquote>
+
+</blockquote>
+
+<h1 id="quantitative-assessment">Quantitative Assessment</h1>
+
+<p>After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quantitative-assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quantitative Assessment</h3>
+
+  <ol>
+    <li><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> version 1.2.0 with the following parameters:
+      <ul>
+        <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">log(c2,2)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: <code class="language-plaintext highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Skip a header line”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li><em>“The new column name”</em>: <code class="language-plaintext highlighter-rouge">log2 intensity sample1</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> version 1.2.0 with the following parameters:
+      <ul>
+        <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">log(c3,2)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Skip a header line”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li><em>“The new column name”</em>: <code class="language-plaintext highlighter-rouge">log2 intensity sample2</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c4,c5</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the last <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li>Click <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> “Visualize this data” on the <strong>cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> result.
+      <ul>
+        <li>Select <code class="language-plaintext highlighter-rouge">box plot(jqPlot)</code></li>
+        <li><em>“Use multi-panels”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Select data</code> <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span></li>
+        <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">log2 sample1</code></li>
+        <li><em>“Observations”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Insert data series</code></li>
+        <li><em>“Provide a label”</em>: <code class="language-plaintext highlighter-rouge">log sample2</code></li>
+        <li><em>“Observations”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li>Confirm and save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> (file is saved under “User” –&gt; “Visualizations”)</li>
+      </ul>
+    </li>
+    <li><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> version 1.2.0 with the following parameters:
+      <ul>
+        <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c4-c5</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the last <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Skip a header line”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
+          <ul>
+            <li><em>“The new column name”</em>: <code class="language-plaintext highlighter-rouge">log2 Fold Change</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the previous <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Numerical column for x axis”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">log2 Fold Change</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Describe the distribution of the log2 intensities in the box plots.</li>
+    <li>How much is the log2 fold change of serum albumin and what does it mean?</li>
+    <li>What does the distribution of the log2 fold changes mean?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. <img src="../../images/maxquant_lfq_boxplots.png" alt="boxplots" /></li>
+      <li>The log2 fold change (depleted vs. not depleted samples) is about -2.91. This means that the abundance in the not depleted sample is about 2^2.91 = 7.52 times higher than in the depleted sample, showing again that a large proportion of serum albumin was successfully removed by the antibody columns.</li>
+      <li>Most of the log2 fold changes are larger than zero. This means that many proteins have higher intensities in the depleted sample compared to the not-depleted sample. These are the proteins that benefitted from the depletion of serum albumin and other high abundand serum proteins. There is also a maximum around zero meaning that a substantial amount of proteins had a similar abundance in both samples. The negative log2 fold changes derive from the proteins that were depleted, e.g. serum albumin. <img src="../../images/maxquant_lfq_fc_histogram.png" alt="histogram" /></li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-analyzing-your-own-data"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Analyzing your own data</h3>
+
+  <p>For this training we have chosen two small example files to keep analysis time minimal. Real proteomic projects comprise more samples leading to longer MaxQuant run times from many hours to several days (depending on input file size, number of input files and parameters). Real projects also require different follow up analysis. Here are some things to consider for your proteomic project:</p>
+  <ol>
+    <li>The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.</li>
+    <li>A necessary first step is to log2-transform the LFQ intensities.</li>
+    <li>Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.</li>
+    <li>Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as <a href="https://www.doi.org/10.1093/nar/gkv007">LIMMA</a>, <a href="https://www.doi.org/10.1073/pnas.091062498">SAM</a> and <a href="https://doi.org/10.1093/bioinformatics/btu305">MSstats</a>. Do not apply statistical methods designed for count data (e.g. <span class="notranslate">RNA</span>-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
+  </ol>
 
 </blockquote>
 
@@ -980,8 +1080,8 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     author = "Melanie Föll and Matthias Fahrner",
     title = "Label-free data analysis using MaxQuant (Galaxy Training Materials)",
     year = "2020",
-    month = "04",
-    day = "29"
+    month = "06",
+    day = "14"
     url = "\url{/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
