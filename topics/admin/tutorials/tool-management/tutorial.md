@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Ephemeris for Galaxy Tool Management"
+title: "Galaxy Tool Management with Ephemeris"
 questions:
   - How to install, update, and maintain Galaxy tools?
   - How to extract a list of tools from a workflow or Galaxy instance?
