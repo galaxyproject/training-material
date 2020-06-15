@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 title: JupyterLab in Galaxy
 zenodo_link: ""
 questions:
-- How can I manipulate data using JupyterLab in Galaxy? 
+- How can I manipulate data using JupyterLab in Galaxy?
 - How can I start a notebook in JupyterLab?
 - How can I import/export dataset from/to my history to/from the notebook?
 - How can I save my notebook to my history?
@@ -25,11 +25,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-{% include topics/galaxy-ui/tutorials/jupyterlab/tutorial_origin.md %}
+{% include topics/galaxy-interface/tutorials/jupyterlab/tutorial_origin.md %}
 
-[JupyterLab](https://jupyterlab.readthedocs.io/en/stable) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment). 
-Like most IDEs, it provides a graphical interface for R/Python, making it more user-friendly, and providing dozens of useful features. 
-We will introduce additional benefits of using JupyterLab as you cover the lessons. 
+[JupyterLab](https://jupyterlab.readthedocs.io/en/stable) is an [Integrated Development Environment (IDE)](https://en.wikipedia.org/wiki/Integrated_development_environment).
+Like most IDEs, it provides a graphical interface for R/Python, making it more user-friendly, and providing dozens of useful features.
+We will introduce additional benefits of using JupyterLab as you cover the lessons.
 
 > ### Agenda
 >
@@ -51,7 +51,7 @@ You should now be looking at a page with the JupyterLab interface:
 ![Jupyterlab default session](../../images/jupyterlab_default_session.png)
 
 As shown on the figure above, JupyterLab interface is made of 3 main areas:
-- The menu barat the top 
+- The menu barat the top
 - The left side bar with in particular the **File Browser**
 - The main work area in the central panel
 
@@ -62,7 +62,7 @@ Now that we are ready to start exploring JupyterLab, we will want to keep a reco
 > ### {% icon hands_on %} Hands-on: Start a notebook
 >
 > 1. On the left side bar, in the **File Browser**, double-click on the file called **ipython_galaxy_notebook.ipynb**. This will open the
-> default notebook in the main work area. 
+> default notebook in the main work area.
 > 2. If **ipython_galaxy_notebook.ipynb** does not exist (for instance on *Try JupyterLab*) then click on **+** (top left) to start **The launcher** and then **Python** icon in the **Notebook** section to create a new blank notebook.
 {: .hands_on}
 
@@ -86,8 +86,8 @@ The new script `ipython_galaxy_notebook.ipynb` should appear in the **File Brows
 ![jupyterlab default notebook](../../images/jupyterlab_session_default_notebook.png)
 
 > ### {% icon comment %} Note: supported programming languages
-> 
-> Depending on your JupyterLab instance, the list of supported programming languages may vary. 
+>
+> Depending on your JupyterLab instance, the list of supported programming languages may vary.
 > On [Live.useGalaxy.eu](https://live.usegalaxy.eu), the following programming languages are currently supported:
 > - Python 3
 > - Julia
@@ -155,7 +155,7 @@ If you want to save a file you generated in your notebook, use the `put("file_na
 
 Once you are done with you analysis or anytime during the editing process, you can save the notebook into your history using the `put("ipython_galaxy_notebook.ipynb")`. If you create additional notebooks with different names, make sure you save them all before you quit JupyterLab.
 
-This will create a new notebook `.pynb` file in your history every time you click on this icon. 
+This will create a new notebook `.pynb` file in your history every time you click on this icon.
 
 
 # Conclusion

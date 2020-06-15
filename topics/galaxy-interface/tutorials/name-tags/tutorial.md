@@ -97,7 +97,7 @@ If you're using a Galaxy server newer than 19.01, you will notice that the tags 
 
 In this section we will demonstrate how you can add name tags to datasets automatically using the rule-based uploader. This is especially useful when you have a large number of datasets you want to tag all at once.
 
-For more information about the rule-based uploader, please see [this dedicated tutorial]({% link topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial.md %})
+For more information about the rule-based uploader, please see [this dedicated tutorial]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %})
 
 > ### {% icon hands_on %} Hands-on: Set name tags during upload
 >

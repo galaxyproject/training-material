@@ -46,8 +46,9 @@ can be added.
 > 3. Enter the following URL into the "Archived Workflow" URL box
 >
 >    ```
->    https://raw.githubusercontent.com/galaxyproject/training-material/master/topics/galaxy-ui/tutorials/workflow-parameters/workflows/cut_n_lines.ga
+>    https://raw.githubusercontent.com/galaxyproject/training-material/master/topics/galaxy-interface/tutorials/workflow-parameters/workflows/cut_n_lines.ga
 >    ```
+>
 > 4. Click on import workflow
 {: .hands_on}
 
