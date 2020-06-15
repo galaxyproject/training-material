@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-ui/tutorials/history/tutorial
 
 title: "Histories: Understanding Galaxy history system"
 zenodo_link: ""

@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial
 
 title: "Collections: Rule Based Uploader"
 zenodo_link: ""

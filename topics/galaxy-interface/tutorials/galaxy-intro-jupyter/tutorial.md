@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-ui/tutorials/galaxy-intro-jupyter/tutorial
 
 title: "Jupyter: Use Jupyter notebooks in Galaxy"
 zenodo_link: "https://zenodo.org/record/1185122/files/GSM461176_untreat_single.counts"

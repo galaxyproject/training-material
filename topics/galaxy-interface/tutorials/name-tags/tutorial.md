@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-data-manipulation/tutorials/name-tags/tutorial
 
 title: Name tags for following complex histories
 zenodo_link: ''

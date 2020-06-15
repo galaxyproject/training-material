@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-ui/tutorials/history-to-workflow/tutorial
 
 title: "Workflows: Extracting Workflows from Histories"
 zenodo_link: ""

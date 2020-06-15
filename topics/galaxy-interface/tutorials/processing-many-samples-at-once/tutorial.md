@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial
 
 title: "Collections: Multisample Analysis"
 zenodo_link: ""

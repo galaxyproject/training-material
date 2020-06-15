@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-ui/tutorials/workflow-parameters/tutorial
 
 title: 'Workflows: Using Workflow Parameters'
 zenodo_link: ''

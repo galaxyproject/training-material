@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-ui/tutorials/rstudio/tutorial
 
 title: RStudio in Galaxy
 zenodo_link: ""

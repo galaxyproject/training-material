@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-data-manipulation/tutorials/group-tags/tutorial
 
 title: Group tags for complex experimental designs
 zenodo_link: ''

@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
 
 title: "Collections: Using dataset collection"
 zenodo_link: ""

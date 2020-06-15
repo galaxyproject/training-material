@@ -1,5 +1,7 @@
 ---
 layout: tutorial_hands_on
+redirect_from:
+  - /topics/galaxy-data-manipulation/tutorials/download-delete-data/tutorial
 
 title: 'Data: Downloading and Deleting Data in Galaxy'
 zenodo_link: ''
