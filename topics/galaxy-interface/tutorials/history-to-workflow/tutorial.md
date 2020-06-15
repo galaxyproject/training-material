@@ -3,7 +3,9 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-ui/tutorials/history-to-workflow/tutorial
 
-title: "Workflows: Extracting Workflows from Histories"
+title: "Extracting Workflows from Histories"
+tags:
+  - workflows
 zenodo_link: ""
 questions:
   - "What is a workflow?"
@@ -20,6 +22,7 @@ key_points:
   - "Workflows can be edited or created from scratch using the workflow editor"
 contributors:
   - tnabtaf
+subtopic: interface
 ---
 
 # Create a reusable workflow from a history

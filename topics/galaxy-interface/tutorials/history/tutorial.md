@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-ui/tutorials/history/tutorial
 
-title: "Histories: Understanding Galaxy history system"
+title: "Understanding Galaxy history system"
 zenodo_link: ""
 questions:
   - "How do Galaxy histories work?"
@@ -20,6 +20,7 @@ key_points:
   - "Datasets can be organized into collections within a history with search and multi-select. Jobs applied to collections use the same settings for each dataset in the collection"
 contributors:
   - nekrut
+subtopic: interface
 ---
 
 When data is uploaded from your computer or analysis is done on existing data using Galaxy, each output from those steps

@@ -3,7 +3,9 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/processing-many-samples-at-once/tutorial
 
-title: "Collections: Multisample Analysis"
+title: "Multisample Analysis"
+tags:
+  - collections
 zenodo_link: ""
 level: Advanced
 questions:
@@ -13,6 +15,7 @@ key_points:
 contributors:
   - nekrut
   - pajanne
+subtopic: manage
 ---
 
 > ### Agenda

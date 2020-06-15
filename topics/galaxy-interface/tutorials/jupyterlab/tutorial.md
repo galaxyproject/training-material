@@ -22,6 +22,7 @@ key_points:
 - How to work with JupyterLab interactively within Galaxy
 contributors:
   - annefou
+subtopic: analyse
 ---
 
 

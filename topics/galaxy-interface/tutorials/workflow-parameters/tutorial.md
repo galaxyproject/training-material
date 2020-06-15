@@ -3,7 +3,9 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-ui/tutorials/workflow-parameters/tutorial
 
-title: 'Workflows: Using Workflow Parameters'
+title: 'Using Workflow Parameters'
+tags:
+- workflows
 zenodo_link: ''
 questions:
 - What are Workflow Parameters
@@ -18,6 +20,7 @@ contributors:
 - mvdbeek
 - hexylena
 level: Intermediate
+subtopic: analyse
 ---
 
 

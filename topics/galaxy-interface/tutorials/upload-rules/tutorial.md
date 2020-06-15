@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial
 
-title: "Collections: Rule Based Uploader"
+title: "Rule Based Uploader"
 zenodo_link: ""
 level: Advanced
 questions:
@@ -12,6 +12,9 @@ objectives:
   - "Learn about the Rule Based Uploader"
 time_estimation: "30m"
 key_points:
+tags:
+  - collections
+  - tags
 requirements:
   -
     type: "internal"
@@ -21,6 +24,7 @@ requirements:
 contributors:
   - jmchilton
   - hexylena
+subtopic: upload
 ---
 
 # Introduction

@@ -3,7 +3,9 @@ layout: tutorial_hands_on
 redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/collections/tutorial
 
-title: "Collections: Using dataset collection"
+title: "Using dataset collection"
+tags:
+- collections
 zenodo_link: ""
 level: Intermediate
 questions:
@@ -18,6 +20,8 @@ key_points:
   - "When using collections, you have to click on the `batch input mode` button, to select one of the collections available in the history. Otherwise, the collections are not available in the drop-down list."
 contributors:
   - nekrut
+
+subtopic: manage
 ---
 
 Here we will show Galaxy features designed to help with the analysis of large numbers of samples. When you have just a few samples - clicking through them is easy. But once you've got hundreds - it becomes very annoying. In Galaxy we have introduced **Dataset collections** that allow you to combine numerous datasets in a single entity that can be easily manipulated.
