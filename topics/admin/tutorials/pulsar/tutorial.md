@@ -393,4 +393,14 @@ Now we will upload a small set of data to run bwa-mem with.
 
 You'll notice that the Pulsar server has received the job (all the way in Sydney!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run and the results will be returned to Galaxy!
 
+> ### {% icon tip %} error with BWA-MEM
+> Q: I got the following error the first time I ran BWA-MEM with Pulsar: `pulsar.client.exceptions.PulsarClientTransportError: Unknown transport error (transport message: Gateway Time-out)`. When I re-executed the job later, it worked without problems. Can the time-out be avoided?
+>
+> A: Yes, with AMQP Pulsar. This is the recommended setup for production. And apparently the transport_timeout option that I forgot about: `<param id="transport_timeout">` in the `<plugin>` entry (you will need to make it a container tag) for the PulsarRESTJobRunner plugin.
+{: .tip}
+
 How awesome is that? :)
+
+# Pulsar in Production
+
+If you want to make use of Pulsar on a Supercomputer, you only need access to a submit node, and you will need to run Pulsar there. We recommend that if you need to run a setup with Pulsar, that you deploy an AMQP server (e.g. RabbitMQ) alongside your Galaxy. That way, you can run Pulsar on any submit nodes, and it can connect directly to the AMQP and Galaxy. Other Pulsar deployment options require exposing ports wherever Pulsar is running, and this requires significant more coordination effort.

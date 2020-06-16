@@ -474,6 +474,18 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > Galaxy datasets cannot be separated by user or other attribute currently. Currently you can only spread data unintelligently across 1 or more storage pools.
 >    {: .tip}
 >
+>    > ### {% icon tip %} PostgreSQL Connection String
+>    > If you want to run your database on a different machine, you will need to change the connection string. In your hosts file, place the hostname of the machine you're installing on. `ansible_connection` can be left off entirely and it will connect over ssh. You may need to set `ansible_user` to the username of the admin user (who can run sudo).
+>    >
+>    > Here are some examples of connection strings:
+>    >
+>    > ```
+>    > sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE
+>    > postgres://<name>:<password>@localhost:5432/galaxy
+>    > postgresql:///galaxy?host=/var/run/postgresql
+>    > ```
+>    >
+>    {: .tip}
 >
 >    > ### {% icon comment %} Ansible Variable Templating
 >    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
@@ -528,6 +540,13 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    > ### {% icon tip %} How many mules?
 >    > Start with 1 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
+>    {: .tip}
+>
+>    > ### {% icon tip %} uWSGI Threads, Offload Threads, Mules, Etc.
+>    > 1. uWSGI threads = number of threads per uWSGI web worker (the value of processes in uWSGI config)
+>    > 2. offload threads (you only need 1 or 2) helps prevent blocking when uWSGI reads from the Galaxy app
+>    > 3. the number of mules is the number of Galaxy job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)
+>    > 4. `workers` in job_conf (covered later) is the number of threads in an internal Galaxy thread pool that are available in each job handler for preparing and finishing jobs (more threads increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).
 >    {: .tip}
 >
 >    > ### {% icon question %} Question
@@ -1080,7 +1099,7 @@ Then you can potentially use it to recover.
 >
 {: .comment}
 
-# Maintenance
+# Production & Maintenance
 
 This depends on the number of users and their specific needs, but a smallish server (<= 25 users) will typically require a day or two per month of maintenance. Large public servers like usegalaxy.org and usegalaxy.eu are largely full time jobs (although even their admins do find time to do other things).
 
@@ -1130,7 +1149,31 @@ allow_user_impersonation: true
 
 We (admins) generally ask permission or consent from the user "Hey, mind if we look at your history", and then avoid running things in their history. It can confuse users when datasets show up unexpectedly, since Galaxy is not normally a real-time collaborative activity. Additionally you can automatically send failing job error reports, even if users do not click "subimt", and maybe proactively address those issues. EU doesn't do this due to the volume of issues.
 
+## Running on a cluster
 
+If you need to run on a cluster with a shared file system, you will need to expose several directories to your cluster:
+
+- `galaxy_shed_tools_dir`
+- `galaxy_tool_dependency_dir`
+- `galaxy_file_path`
+- `galaxy_job_working_directory`
+- `galaxy_server_dir`
+- `galaxy_venv_dir`
+
+Some of these can be worked around, by running the portions of the roles that deploy these directories, on the shared filesystem. Then Galaxy and the shared filesystem can run off of two difference copies of them, if that is better for performance:
+
+- `galaxy_server_dir`
+- `galaxy_venv_dir`
+
+Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like "my uni provided it" or "we really wanted to try something shiny". But NFS in most cases is decent and well tested and can be used.
+
+## Other software
+
+But what about your other software, things that are deployed along with Galaxy? Things without an ansible role or are quite weird and require "manual tricks" to deploy?
+
+You can write roles for that! Sometimes they are really ugly roles, but it at least keeps it documented + in place. E.g. UseGalaxy.eu has a custom role for rewriting users and it’s ugly and untested and should not be used by anyone else in case it breaks their site. But it's one of these manual tricks or bits of glue code, but we can encapsulate it as ansible. You can include tarballs in your role to be deployed and so on.
+
+It may seem daunting to use ansible, but you don't have to do everything in ansible! You can just do a little bit, for managing just Galaxy, and manage the rest of your stack separately. Whatever fits best for your deployment.
 
 # Final Notes
 
