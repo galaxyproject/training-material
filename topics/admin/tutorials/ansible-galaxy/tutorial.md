@@ -203,6 +203,11 @@ To proceed from here it is expected that:
 6. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
 
 
+> ### {% icon tip %} Ubuntu or Debian, CentOS or RHEL?
+> The training tutorials are designed to work on either Ubuntu or CentOS, and the roles we use are definitely compatible with both. If any of the variable values differ between Ubuntu and CentOS, we try to note it in the tutorial. Any places we don't note it are bugs.
+{: .tip}
+
+
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
@@ -340,6 +345,18 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >
 >    {: .question}
 >
+>    > ### {% icon tip %} What is the difference between the roles with `role:` prefix and without?
+>    > The bare role name is just simplified syntax for the roles, you could equally specifiy `role: <name>` every time but it's only necessary if you want to set additional variables like `become_user`
+>    {: .tip}
+>
+>    > ### {% icon tip %} Is the YAML sensitive to True/true/False/false
+>    > By [this references](https://yaml.org/refcard.html), yaml doesn't really care:
+>    > ```
+>    > { Y, true, Yes, ON   }    : Boolean true
+>    > { n, FALSE, No, off  }    : Boolean false
+>    > ```
+>    {: .tip}
+>
 > 3. Run the playbook:
 >
 >    ```
@@ -453,6 +470,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
+>    > ### {% icon tip %} Data storage
+>    > Galaxy datasets cannot be separated by user or other attribute currently. Currently you can only spread data unintelligently across 1 or more storage pools.
+>    {: .tip}
+>
+>
 >    > ### {% icon comment %} Ansible Variable Templating
 >    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
 >    >
@@ -503,6 +525,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >        farm: job-handlers:1,2
 >    ```
 >    {% endraw %}
+>
+>    > ### {% icon tip %} How many mules?
+>    > Start with 1 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
+>    {: .tip}
 >
 >    > ### {% icon question %} Question
 >    >
@@ -583,6 +609,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    ansible-playbook galaxy.yml
 >    ```
+>
+>    > ### {% icon tip %} Slow Deployment
+>    > The deployment can be slowed down by migrations, and the client build.
+>    > The client is only re-built when there is a change to the version of Galaxy. Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
+>    {: tip}
 >
 > 6. Explore what has been set up for you.
 >     - Galaxy has been deployed to `/srv/galaxy/server`
@@ -998,6 +1029,11 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
+## Login to Galaxy
+
+Now that your production-ready Galaxy is running, try registering a new user and logging in!
+
+In order to be the administrator user, you will need to register an account with the same email address you used in the group variables under the `admin_users` setting.
 
 ## Disaster Strikes! (Optional)
 
@@ -1044,6 +1080,9 @@ Then you can potentially use it to recover.
 >
 {: .comment}
 
+# Maintenance
+
+This depends on the number of users and their specific needs, but a smallish server (<= 25 users) will typically require a day or two per month of maintenance. Large public servers like usegalaxy.org and usegalaxy.eu are largely full time jobs (although even their admins do find time to do other things).
 
 ## Keeping Galaxy Updated
 
@@ -1076,6 +1115,22 @@ It is recommend that you also do the following during an upgrade:
 - Compare the [other configuration files](https://github.com/galaxyproject/galaxy/tree/master/config) to see if there are new features you want to take advantage of (e.g. new job runner options or metrics you wish to capture.)
 
 When you've read the documentation and checked out the new features, you can then run the playbook and you're done!
+
+## User Support
+
+There are many user support resources available to you and your users online. [help.galaxyproject.org](https://help.galaxyproject.org) is the primary landing point for Galaxy users. For helping individual users, you might find it useful to impersonate users if they fail to send adequate bug reports.
+
+### Impersonating
+
+You can activate user impersonation with
+
+```
+allow_user_impersonation: true
+```
+
+We (admins) generally ask permission or consent from the user "Hey, mind if we look at your history", and then avoid running things in their history. It can confuse users when datasets show up unexpectedly, since Galaxy is not normally a real-time collaborative activity. Additionally you can automatically send failing job error reports, even if users do not click "subimt", and maybe proactively address those issues. EU doesn't do this due to the volume of issues.
+
+
 
 # Final Notes
 

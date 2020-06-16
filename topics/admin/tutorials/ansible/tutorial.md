@@ -518,6 +518,10 @@ Templates give you greater control over the files you are deploying to the targe
 >     server_name: Dogs!
 >     ```
 >
+>     > ### {% icon tip %} Variable connection
+>     > When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named `my_hosts`, it checks many different places for variables, including "group_vars/my_hosts.yml". If there are variables there, they're added to the collection of current variables. It also checks "group_vars/all.yml" (for the built-in host group `all`). There is a precedence order, but then these variables are available for roles and tasks to consume.
+>     {: .tip}
+>
 > 12. Run the playbook again, but imagine you are worried about this change, and supply the `--check --diff` flag to see what changes are made before committing to make them.
 >
 >     > ### {% icon code-in %} Input: Bash
@@ -525,6 +529,11 @@ Templates give you greater control over the files you are deploying to the targe
 >     > ansible-playbook -i hosts playbook.yml --check --diff
 >     > ```
 >     {: .code-in}
+>
+>     > ### {% icon tip %} What if you forget `--diff`?
+>     > If you forget to use `--diff`, it is not easy to see what has changed. Some modules like the `copy` and `template` modules have a `backup` option. If you set this option, then it will keep a backup copy next to the destination file.
+>     > However, most modules do not have such an option, so if you want to know what changes, always use `--diff`.
+>     {: .tip}
 >
 >     > ### {% icon code-out %} Output
 >     >
@@ -625,6 +634,11 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > > > See the [documentation](https://docs.ansible.com/ansible/latest/user_guide/become.html) if you need to control this behaviour differently. `become` can be set either at the task level or the playbook level.
 >    > > >
 >    > > {: .details}
+>    > >
+>    > > > ### {% icon tip %} Should I use sudo or directly login as root?
+>    > > > This is often site-specific policy. If your site doesn't have a dictated policy, then it's generally preferable to not allow direct login as root, and login as a separate user.
+>    > > {: .tip}
+>    > >
 >    > >
 >    > {: .solution }
 >    {: .question}

@@ -61,7 +61,9 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 
 # Extracting Tools
 
-Galaxy workflow files are complex JSON documents, and the process of mapping the tool IDs to a ToolShed repository and revision is not trivial. Workflow files contain tool IDs which look like:
+A common request you will experience as an administrator is "I want to run this workflow". Since this is such a common workflow, Galaxy has a built in way to accomplish it. We can use Ephemeris to extract a list of tools from a Galaxy workflow document, and then use Ephemeris to install these tools and specific versions into your Galaxy.
+
+However, Galaxy workflow files are complex JSON documents, and the process of mapping the tool IDs to a ToolShed repository and revision is not trivial. Workflow files contain tool IDs which look like:
 
 ```
 toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71
@@ -73,7 +75,7 @@ toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1
 toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 ```
 
-However, in order to actually install these tools, we need to convert each tool ID into a ToolShed repository name and revision. For example, FastQC version 0.71 corresponds to revision `ff9530579d1f` in the ToolShed.
+In order to actually install these tools, we need to convert each tool ID into a ToolShed repository name and revision. For example, FastQC version 0.71 corresponds to revision `ff9530579d1f` in the ToolShed.
 
 ```yaml
 - name: fastqc
@@ -188,6 +190,10 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
+> ### {% icon tip %} Can I install tools without a ToolShed? Without Restarting?
+> Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added. The galaxy_local_tools option for the `galaxyproject.galaxy` Ansible role can also be used to install local tools.
+{: .tip}
+
 
 # Tool Testing
 
@@ -235,6 +241,10 @@ Sometimes a user might ask you to install all the tools they were previously usi
 
 We will not install all the tools from the EU Galaxy server as that server likely has more tools than any other Galaxy instance, but it is useful as an example of how you can use Ephemeris to facilitate the mirroring of another Galaxy instance.
 
+> ### {% icon tip %} Non-shed tools
+> The output of `get-tool-list` only includes ToolShed tools, not local non-TS tools.
+{: .tip}
+
 # Production Best Practices
 
 The servers which are part of the `usegalaxy.*` network use Ephemeris extensively to manage their large tool sets.
@@ -245,3 +255,20 @@ Interestingly, UseGalaxy.eu and UseGalaxy.org.au have different approaches:
 - Together, `usegalaxy.*` are working on a collaborative approach at [galaxyproject/usegalaxy-tools](https://github.com/galaxyproject/usegalaxy-tools) but this is not consumption ready yet.
 
 If running ephemeris directly is not your preference, there is also an Ansible [role](https://github.com/galaxyproject/ansible-galaxy-tools) and a sample [playbook](https://github.com/afgane/galaxy-tools-playbook) that can help automate some tasks.
+
+> ### {% icon tip %} What if environments are not working
+> It sometimes happens in Galaxy, that one environment isn't working anymore. It mostly happens from the start when it does happen. You can remove the environment on disk, or use the "Manage Dependencies" interface, select the environment, and delete it. Then re-install the dependency through the same Manage Dependencies interface.
+{: .tip}
+
+> ### {% icon tip %} Can you install multiple tools simultaneously?
+> Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. But now it's conda, so you may destroy conda environments. A solution for this is like how [usegalaxy.eu]()https://github.com/usegalaxy-eu/usegalaxy-eu-tools does it, where we keep the full list of tools we want to install, and then a CI server (jenkins) installs these. Here we can enforce that only a single install process is running at any time.
+{: .tip}
+
+> ### {% icon tip %} Certificate Issues (GAT Only)
+> If a student is running `shed-tools` on the VM, then it should work without certificate issues, because we installed the Fake LE X1 CA certificate, meaning that to your VM, the certificate chain is valid.
+> We cannot (and would not recommend) setting that certificate on your local machine. That is the first way that comes to mind, that running an ephemeris command could generate that error.
+{: .tip}
+
+> ### {% icon tip %} Uninstalling tools
+> While there is a function to accomplish this in BioBlend, it has not been [included in Ephemeris yet.](https://github.com/galaxyproject/ephemeris/issues/83) If you're looking for a way to contribute to Galaxy, this would be great :)
+{: .tip}
