@@ -474,7 +474,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
 >    {: .tip}
 >
->    > ### {% icon tip %} PostgreSQL Connection String
+>    > ### {% icon tip %} PostgreSQL connection string
 >    > If you want to run your database on a different machine, you will need to change the connection string. In your hosts file, place the hostname of the machine you're installing on. `ansible_connection` can be left off entirely and it will connect over ssh. You may need to set `ansible_user` to the username of the admin user (who can run sudo).
 >    >
 >    > Here are some examples of connection strings:
@@ -539,10 +539,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {% endraw %}
 >
 >    > ### {% icon tip %} How many mules?
->    > Start with 1 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
+>    > Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
 >    {: .tip}
 >
->    > ### {% icon tip %} uWSGI Threads, Offload Threads, Mules, Etc.
+>    > ### {% icon tip %} uWSGI threads, offload threads, mules, etc.
 >    > 1. uWSGI threads = number of threads per uWSGI web worker (the value of processes in uWSGI config)
 >    > 2. offload threads (you only need 1 or 2) helps prevent blocking when uWSGI reads from the Galaxy app
 >    > 3. the number of mules is the number of Galaxy job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)
@@ -631,7 +631,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    > ### {% icon tip %} Slow Deployment
 >    > The deployment can be slowed down by migrations, and the client build.
->    > The client is only re-built when there is a change to the version of Galaxy. Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
+>    > The client is only re-built when there are changes in the files needed for the Galaxy user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
 >    {: tip}
 >
 > 6. Explore what has been set up for you.
@@ -1101,7 +1101,7 @@ Then you can potentially use it to recover.
 
 # Production & Maintenance
 
-This depends on the number of users and their specific needs, but a smallish server (<= 25 users) will typically require a day or two per month of maintenance. Large public servers like usegalaxy.org and usegalaxy.eu are largely full time jobs (although even their admins do find time to do other things).
+The time required to maintain a production Galaxy instance depends on the number of users and their specific needs, but a smallish server (<= 25 users) will typically require a day or two per month of maintenance. Large public servers like usegalaxy.org and usegalaxy.eu are largely full time jobs (although even their admins do find time to do other things).
 
 ## Keeping Galaxy Updated
 
@@ -1137,17 +1137,19 @@ When you've read the documentation and checked out the new features, you can the
 
 ## User Support
 
-There are many user support resources available to you and your users online. [help.galaxyproject.org](https://help.galaxyproject.org) is the primary landing point for Galaxy users. For helping individual users, you might find it useful to impersonate users if they fail to send adequate bug reports.
+There are many user support resources available to you and your users online. [help.galaxyproject.org](https://help.galaxyproject.org) is the primary landing point for Galaxy users. For helping individual users, you might find it useful to impersonate them if they fail to send adequate bug reports.
 
 ### Impersonating
 
-You can activate user impersonation with
+You can activate user impersonation with:
 
 ```
 allow_user_impersonation: true
 ```
 
-We (admins) generally ask permission or consent from the user "Hey, mind if we look at your history", and then avoid running things in their history. It can confuse users when datasets show up unexpectedly, since Galaxy is not normally a real-time collaborative activity. Additionally you can automatically send failing job error reports, even if users do not click "subimt", and maybe proactively address those issues. EU doesn't do this due to the volume of issues.
+It is recommended to ask permission or consent before impersonating a user: "Hey, mind if we look at your history?"
+Also, since Galaxy is not normally a real-time collaborative activity, you should avoid running jobs in their history, which can confuse users when datasets show up unexpectedly.
+Additionally you can automatically send failing job error reports, even if users do not submit one, and maybe proactively address those issues (depending on the number of your users).
 
 ## Running on a cluster
 
@@ -1160,7 +1162,7 @@ If you need to run on a cluster with a shared file system, you will need to expo
 - `galaxy_server_dir`
 - `galaxy_venv_dir`
 
-Some of these can be worked around, by running the portions of the roles that deploy these directories, on the shared filesystem. Then Galaxy and the shared filesystem can run off of two difference copies of them, if that is better for performance:
+Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two difference copies of them, if that is better for performance:
 
 - `galaxy_server_dir`
 - `galaxy_venv_dir`

@@ -59,7 +59,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 {: .comment}
 
 > ### {% icon tip %} Do you need a DRM?
-> If you have a smaller server, do you still need a DRM? Yes! You should definitely run slurm or a similar option. If you don't as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with <10 users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.
+> If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don't, as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.
 {: .tip}
 
 > ### {% icon hands_on %} Hands-on: Installing Slurm
@@ -604,7 +604,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
 >
 >    > ### {% icon tip %} Debugging dynamic destinations
->    > You can use `pdb` for more advanced debugging but it requires some configuration. `print()` statements are usually sufficient and easier.
+>    > You can use `pdb` for more advanced debugging, but it requires some configuration. `print()` statements are usually sufficient and easier.
 >    {: .tip}
 >
 > 2. As usual, we need to instruct Galaxy of where to find this file:
