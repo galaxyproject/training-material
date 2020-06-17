@@ -13,7 +13,6 @@ key_points:
 contributors:
   - slugger70
   - hexylena
-subtopic: features
 ---
 
 # Overview
@@ -179,4 +178,5 @@ Probe the connection.
 
 ## Look at the repository
 
-Now to configure Galaxy to use the CVMFS references we have just installed, see [here](#configuring-galaxy-to-use-the-cvmfs-references)
+Now to configure Galaxy to use the CVMFS references we have just installed, see [the Ansible tutorial.]({% link topics/admin/tutorials/cvmfs/tutorial.md %}#configuring-galaxy-to-use-the-cvmfs-references)
+
