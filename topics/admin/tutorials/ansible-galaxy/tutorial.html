@@ -463,6 +463,8 @@
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -508,7 +510,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> May 28, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -546,9 +548,16 @@
       <li><a href="#galaxy" id="markdown-toc-galaxy"><span class="notranslate">Galaxy</span></a></li>
       <li><a href="#systemd" id="markdown-toc-systemd">systemd</a></li>
       <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
+      <li><a href="#login-to-galaxy" id="markdown-toc-login-to-galaxy">Login to <span class="notranslate">Galaxy</span></a></li>
       <li><a href="#disaster-strikes-optional" id="markdown-toc-disaster-strikes-optional">Disaster Strikes! (Optional)</a></li>
+    </ol>
+  </li>
+  <li><a href="#production--maintenance" id="markdown-toc-production--maintenance">Production &amp; Maintenance</a>    <ol>
       <li><a href="#keeping-galaxy-updated" id="markdown-toc-keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</a></li>
       <li><a href="#upgrading-galaxy-optional" id="markdown-toc-upgrading-galaxy-optional">Upgrading <span class="notranslate">Galaxy</span> (Optional)</a></li>
+      <li><a href="#user-support" id="markdown-toc-user-support">User Support</a></li>
+      <li><a href="#running-on-a-cluster" id="markdown-toc-running-on-a-cluster">Running on a cluster</a></li>
+      <li><a href="#other-software" id="markdown-toc-other-software">Other software</a></li>
     </ol>
   </li>
   <li><a href="#final-notes" id="markdown-toc-final-notes">Final Notes</a></li>
@@ -733,6 +742,11 @@ best practices and knowledge from previous admins codified for you.</p>
   <li>In your inventory file, you have written the full DNS hostname that has been provided, and <strong>not</strong> <code class="language-plaintext highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
 </ol>
 
+<blockquote class="tip">
+  <h3 id="tip-ubuntu-or-debian-centos-or-rhel"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ubuntu or Debian, CentOS or RHEL?</h3>
+  <p>The training tutorials are designed to work on either Ubuntu or CentOS, and the roles we use are definitely compatible with both. If any of the variable values differ between Ubuntu and CentOS, we try to note it in the tutorial. Any places we don’t note it are bugs.</p>
+</blockquote>
+
 <h2 id="requirements">Requirements</h2>
 
 <p>We have codified all of the dependencies you will need into a YAML file that <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code> can install.</p>
@@ -889,6 +903,19 @@ best practices and knowledge from previous admins codified for you.</p>
 
         </blockquote>
 
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-what-is-the-difference-between-the-roles-with-role-prefix-and-without"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What is the difference between the roles with <code class="language-plaintext highlighter-rouge">role:</code> prefix and without?</h3>
+        <p>The bare role name is just simplified syntax for the roles, you could equally specifiy <code class="language-plaintext highlighter-rouge">role: &lt;name&gt;</code> every time but it’s only necessary if you want to set additional variables like <code class="language-plaintext highlighter-rouge">become_user</code></p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-is-the-yaml-sensitive-to-truetruefalsefalse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Is the YAML sensitive to True/true/False/false</h3>
+        <p>By <a href="https://yaml.org/refcard.html">this references</a>, YAML doesn’t really care:</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ Y, true, Yes, ON   }    : Boolean true
+{ n, FALSE, No, off  }    : Boolean false
+</code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
@@ -1071,6 +1098,24 @@ best practices and knowledge from previous admins codified for you.</p>
         <li><code class="language-plaintext highlighter-rouge">tool_data_path</code> to <code class="language-plaintext highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
       </ol>
 
+      <blockquote class="tip">
+        <h3 id="tip-data-storage"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Data storage</h3>
+        <p><span class="notranslate">Galaxy</span> datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-postgresql-connection-string"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> PostgreSQL connection string</h3>
+        <p>If you want to run your database on a different machine, you will need to change the connection string. In your hosts file, place the hostname of the machine you’re installing on. <code class="language-plaintext highlighter-rouge">ansible_connection</code> can be left off entirely and it will connect over ssh. You may need to set <code class="language-plaintext highlighter-rouge">ansible_user</code> to the use<span class="notranslate">rna</span>me of the admin user (who can run sudo).</p>
+
+        <p>Here are some examples of connection strings:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE
+postgres://&lt;name&gt;:&lt;password&gt;@localhost:5432/<span class="notranslate">galaxy</span>
+postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql
+</code></pre></div>        </div>
+
+      </blockquote>
+
       <blockquote class="comment">
         <h3 id="comment-ansible-variable-templating"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Variable Templating</h3>
         <p>In this step we use some templated variables. These are seen in our group variables, among other places, and look like <code class="language-plaintext highlighter-rouge">miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir  }}/_conda"</code>.</p>
@@ -1125,6 +1170,21 @@ So it is not always easy to tell what variables will be set, or what their final
       <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
     <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How many mules?</h3>
+        <p>Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-uwsgi-threads-offload-threads-mules-etc"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> uWSGI th<span class="notranslate">reads</span>, offload th<span class="notranslate">reads</span>, mules, etc.</h3>
+        <ol>
+          <li>uWSGI th<span class="notranslate">reads</span> = number of th<span class="notranslate">reads</span> per uWSGI web worker (the value of processes in uWSGI config)</li>
+          <li>offload th<span class="notranslate">reads</span> (you only need 1 or 2) helps prevent blocking when uWSGI <span class="notranslate">reads</span> from the <span class="notranslate">Galaxy</span> app</li>
+          <li>the number of mules is the number of <span class="notranslate">Galaxy</span> job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)</li>
+          <li><code class="language-plaintext highlighter-rouge">workers</code> in job_conf (covered later) is the number of th<span class="notranslate">reads</span> in an inte<span class="notranslate">rna</span>l <span class="notranslate">Galaxy</span> thread pool that are available in each job handler for preparing and finishing jobs (more th<span class="notranslate">reads</span> increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).</li>
+        </ol>
+      </blockquote>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1205,6 +1265,12 @@ So it is not always easy to tell what variables will be set, or what their final
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
 </code></pre></div>      </div>
+
+      <blockquote>
+        <h3 id="tip-slow-deployment"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Slow Deployment</h3>
+        <p>The deployment can be slowed down by migrations, and the client build.
+The client is only re-built when there are changes in the files needed for the <span class="notranslate">Galaxy</span> user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.</p>
+      </blockquote>
     </li>
     <li>
       <p>Explore what has been set up for you.</p>
@@ -1674,6 +1740,12 @@ In a training setting there is no need to request certificates that will be trus
   </table>
 </blockquote>
 
+<h2 id="login-to-galaxy">Login to <span class="notranslate">Galaxy</span></h2>
+
+<p>Now that your production-ready <span class="notranslate">Galaxy</span> is running, try registering a new user and logging in!</p>
+
+<p>In order to be the administrator user, you will need to register an account with the same email address you used in the group variables under the <code class="language-plaintext highlighter-rouge">admin_users</code> setting.</p>
+
 <h2 id="disaster-strikes-optional">Disaster Strikes! (Optional)</h2>
 
 <p>Because you’re an admin, you need to be prepared for any situation, including the worst case scenarios. So we’re going to simulate a disaster and show you how you can recover from it. It’ll be fun!</p>
@@ -1730,6 +1802,10 @@ In a training setting there is no need to request certificates that will be trus
 
 </blockquote>
 
+<h1 id="production--maintenance">Production &amp; Maintenance</h1>
+
+<p>The time required to maintain a production <span class="notranslate">Galaxy</span> instance depends on the number of users and their specific needs, but a smallish server (&lt;= 25 users) will typically require a day or two per month of maintenance. Large public servers like use<span class="notranslate">galaxy</span>.org and use<span class="notranslate">galaxy</span>.eu are largely full time jobs (although even their admins do find time to do other things).</p>
+
 <h2 id="keeping-galaxy-updated">Keeping <span class="notranslate">Galaxy</span> Updated</h2>
 
 <p>If you have set your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code> group variable to a branch name like <code class="language-plaintext highlighter-rouge">release_19.09</code>, then all you need to do to keep <span class="notranslate">Galaxy</span> up to date (e.g. for security and bug fixes) is to run the playbook regularly. The <code class="language-plaintext highlighter-rouge">git</code> module in Ansible checks if you are on the latest commit of a given branch, and will update the clone of the repository if it is not.</p>
@@ -1762,6 +1838,51 @@ index ce17525..54d0746 100644
 </ul>
 
 <p>When you’ve read the documentation and checked out the new features, you can then run the playbook and you’re done!</p>
+
+<h2 id="user-support">User Support</h2>
+
+<p>There are many user support resources available to you and your users online. <a href="https://help.galaxyproject.org">help.<span class="notranslate">galaxy</span>project.org</a> is the primary landing point for <span class="notranslate">Galaxy</span> users. For helping individual users, you might find it useful to impersonate them if they fail to send adequate bug reports.</p>
+
+<h3 id="impersonating">Impersonating</h3>
+
+<p>You can activate user impersonation with:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>allow_user_impersonation: true
+</code></pre></div></div>
+
+<p>It is recommended to ask permission or consent before impersonating a user: “Hey, mind if we look at your history?”
+Also, since <span class="notranslate">Galaxy</span> is not normally a real-time collaborative activity, you should avoid running jobs in their history, which can confuse users when datasets show up unexpectedly.
+Additionally you can automatically send failing job error reports, even if users do not submit one, and maybe proactively address those issues (depending on the number of your users).</p>
+
+<h2 id="running-on-a-cluster">Running on a cluster</h2>
+
+<p>If you need to run on a cluster with a shared file system, you will need to expose several directories to your cluster:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_shed_tools_dir</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_tool_dependency_dir</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_file_path</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_job_working_directory</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_venv_dir</code></li>
+</ul>
+
+<p>Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then <span class="notranslate">Galaxy</span> and the shared filesystem can run off of two difference copies of them, if that is better for performance:</p>
+
+<ul>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_venv_dir</code></li>
+</ul>
+
+<p>Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like “my uni provided it” or “we really wanted to try something shiny”. But NFS in most cases is decent and well tested and can be used.</p>
+
+<h2 id="other-software">Other software</h2>
+
+<p>But what about your other software, things that are deployed along with <span class="notranslate">Galaxy</span>? Things without an ansible role or are quite weird and require “manual tricks” to deploy?</p>
+
+<p>You can write roles for that! Sometimes they are really ugly roles, but it at least keeps it documented + in place. E.g. Use<span class="notranslate">Galaxy</span>.eu has a custom role for rewriting users and it’s ugly and untested and should not be used by anyone else in case it breaks their site. But it’s one of these manual tricks or bits of glue code, but we can encapsulate it as ansible. You can include tarballs in your role to be deployed and so on.</p>
+
+<p>It may seem daunting to use ansible, but you don’t have to do everything in ansible! You can just do a little bit, for managing just <span class="notranslate">Galaxy</span>, and manage the rest of your stack separately. Whatever fits best for your deployment.</p>
 
 <h1 id="final-notes">Final Notes</h1>
 
@@ -1810,8 +1931,8 @@ index ce17525..54d0746 100644
     author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
-    month = "05",
-    day = "28"
+    month = "06",
+    day = "17"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

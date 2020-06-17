@@ -338,7 +338,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 6, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 16, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -860,6 +860,19 @@ gxadmin iquery queue-overview <span class="nt">--short-tool-id</span>
 gxadmin iquery <span class="notranslate">workflow</span>-invocation-status
 </code></pre></div></div>
 
+<blockquote class="tip">
+  <h3 id="tip-which-queries-support-iquery"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Which queries support iquery?</h3>
+  <p>This data is not currently exposed, so, just try the queries. But it’s easy to add influx support when missing! <a href="https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L54">Here is an example</a>, we set the variables in a function:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fields="count=1"
+tags="tool_id=0"
+</code></pre></div>  </div>
+
+  <p>This means: column 0 is a tag named tool_id, and column 1 is a field (real value) named count.
+<a href="https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L1987">Here is an example</a> that has multiple fields that are stored.</p>
+
+</blockquote>
+
 <h1 id="implementing-a-query">Implementing a Query</h1>
 
 <p>Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. <code class="language-plaintext highlighter-rouge">gxadmin</code> supports ‘local’ functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to <code class="language-plaintext highlighter-rouge">gxadmin</code> though, you’ll never know who wants to know the same thing about their db.</p>
@@ -1096,8 +1109,8 @@ Greets you
     author = "Helena Rasche",
     title = "Galaxy Monitoring with gxadmin (Galaxy Training Materials)",
     year = "2020",
-    month = "03",
-    day = "06"
+    month = "06",
+    day = "16"
     url = "\url{/training-material/topics/admin/tutorials/gxadmin/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

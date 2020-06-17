@@ -501,6 +501,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -586,6 +588,8 @@
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -625,7 +629,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 6, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -690,6 +694,11 @@ be taken into consideration when choosing where to run jobs and what parameters 
 <blockquote class="comment">
   <h3 id="comment-ansible-best-practices"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ansible Best Practices</h3>
   <p>If you’ve set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, you will have created a <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group in your inventory file, <code class="language-plaintext highlighter-rouge">hosts</code>, and placed your variables in <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>. Although for the purposes of this tutorial, the <span class="notranslate">Galaxy</span> server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.</p>
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-do-you-need-a-drm"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Do you need a DRM?</h3>
+  <p>If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don’t, as soon as you restart <span class="notranslate">Galaxy</span> with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for <span class="notranslate">Galaxy</span>.</p>
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -973,8 +982,12 @@ sleep </span>30
 
       <blockquote class="comment">
         <h3 id="comment-note"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note</h3>
-
         <p>Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the <code class="language-plaintext highlighter-rouge">job_conf.xml.j2</code> file, as well as defined <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> and set the <code class="language-plaintext highlighter-rouge">job_config_file</code> option in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> (step 4). If this is the case, be sure to <strong>merge the changes in this section with your existing playbook</strong>.</p>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-workers4"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> workers=4</h3>
+        <p>In the local runner, <code class="language-plaintext highlighter-rouge">workers="4"</code> means “number of jobs that can be running at one time”. For every other job runner, it means the number of th<span class="notranslate">reads</span> that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four th<span class="notranslate">reads</span> that can handle these jobs at once. But additional job handlers can be more useful as well.</p>
       </blockquote>
     </li>
     <li>
@@ -1273,6 +1286,11 @@ sleep </span>30
 </code></pre></div>      </div>
 
       <p>This destination will check that the <code class="language-plaintext highlighter-rouge">user_email</code> is in the set of <code class="language-plaintext highlighter-rouge">admin_users</code> from your config file.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-debugging-dynamic-destinations"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Debugging dynamic destinations</h3>
+        <p>You can use <code class="language-plaintext highlighter-rouge">pdb</code> for more advanced debugging, but it requires some configuration. <code class="language-plaintext highlighter-rouge">print()</code> statements are usually sufficient and easier.</p>
+      </blockquote>
     </li>
     <li>
       <p>As usual, we need to instruct <span class="notranslate">Galaxy</span> of where to find this file:</p>
@@ -1686,8 +1704,8 @@ sleep </span>30
     author = "Nate Coraor and Björn Grüning and Helena Rasche",
     title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
     year = "2020",
-    month = "03",
-    day = "06"
+    month = "06",
+    day = "17"
     url = "\url{/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

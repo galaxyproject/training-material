@@ -351,7 +351,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 12, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 16, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -985,6 +985,11 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="na">server_name</span><span class="pi">:</span> <span class="s">Dogs!</span>
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-variable-connection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Variable connection</h3>
+        <p>When the playbook runs, as part of the setup, it collects any variables that are set. For a playbook affecting a group of hosts named <code class="language-plaintext highlighter-rouge">my_hosts</code>, it checks many different places for variables, including “group_vars/my_hosts.yml”. If there are variables there, they’re added to the collection of current variables. It also checks “group_vars/all.yml” (for the built-in host group <code class="language-plaintext highlighter-rouge">all</code>). There is a precedence order, but then these variables are available for roles and tasks to consume.</p>
+      </blockquote>
     </li>
     <li>
       <p>Run the playbook again, but imagine you are worried about this change, and supply the <code class="language-plaintext highlighter-rouge">--check --diff</code> flag to see what changes are made before committing to make them.</p>
@@ -993,6 +998,12 @@ to show how a person using <code class="language-plaintext highlighter-rouge">my
         <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="nt">-i</span> hosts playbook.yml <span class="nt">--check</span> <span class="nt">--diff</span>
 </code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-what-if-you-forget---diff"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> What if you forget <code class="language-plaintext highlighter-rouge">--diff</code>?</h3>
+        <p>If you forget to use <code class="language-plaintext highlighter-rouge">--diff</code>, it is not easy to see what has changed. Some modules like the <code class="language-plaintext highlighter-rouge">copy</code> and <code class="language-plaintext highlighter-rouge">template</code> modules have a <code class="language-plaintext highlighter-rouge">backup</code> option. If you set this option, then it will keep a backup copy next to the destination file.
+However, most modules do not have such an option, so if you want to know what changes, always use <code class="language-plaintext highlighter-rouge">--diff</code>.</p>
       </blockquote>
 
       <blockquote class="code-out">
@@ -1114,6 +1125,11 @@ The solution to this is to set <code class="language-plaintext highlighter-rouge
             <h3 id="details-ansible-become"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ansible Become</h3>
             <p>See the <a href="https://docs.ansible.com/ansible/latest/user_guide/become.html">documentation</a> if you need to control this behaviour differently. <code class="language-plaintext highlighter-rouge">become</code> can be set either at the task level or the playbook level.</p>
 
+          </blockquote>
+
+          <blockquote class="tip">
+            <h3 id="tip-should-i-use-sudo-or-directly-login-as-root"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Should I use sudo or directly login as root?</h3>
+            <p>This is often site-specific policy. If your site doesn’t have a dictated policy, then it’s generally preferable to not allow direct login as root, and login as a separate user.</p>
           </blockquote>
 
         </blockquote>
@@ -1366,7 +1382,7 @@ Note that for this task one would normally list multiple packages in the <code c
     title = "Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "06",
-    day = "12"
+    day = "16"
     url = "\url{/training-material/topics/admin/tutorials/ansible/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
