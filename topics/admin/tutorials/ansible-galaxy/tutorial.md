@@ -350,7 +350,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {: .tip}
 >
 >    > ### {% icon tip %} Is the YAML sensitive to True/true/False/false
->    > By [this references](https://yaml.org/refcard.html), yaml doesn't really care:
+>    > By [this references](https://yaml.org/refcard.html), YAML doesn't really care:
 >    > ```
 >    > { Y, true, Yes, ON   }    : Boolean true
 >    > { n, FALSE, No, off  }    : Boolean false
