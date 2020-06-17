@@ -265,7 +265,7 @@ If running ephemeris directly is not your preference, there is also an Ansible [
 {: .tip}
 
 > ### {% icon tip %} Can you install multiple tools simultaneously?
-> Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. But now it's conda, so you may destroy conda environments. A solution for this is like how [usegalaxy.eu]()https://github.com/usegalaxy-eu/usegalaxy-eu-tools does it, where we keep the full list of tools we want to install, and then a CI server (jenkins) installs these. Here we can enforce that only a single install process is running at any time.
+> Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. But now it's conda, so you may destroy conda environments. A solution for this is like how [UseGalaxy.eu does it](https://github.com/usegalaxy-eu/usegalaxy-eu-tools), where we keep the full list of tools we want to install, and then a CI server (Jenkins) installs them. In this way we can enforce that only a single install process is running at any time.
 {: .tip}
 
 > ### {% icon tip %} Certificate Issues (GAT Only)
