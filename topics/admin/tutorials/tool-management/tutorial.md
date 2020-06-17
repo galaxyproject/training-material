@@ -190,8 +190,12 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
-> ### {% icon tip %} Can I install tools without a ToolShed? Without Restarting?
-> Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added. The galaxy_local_tools option for the `galaxyproject.galaxy` Ansible role can also be used to install local tools.
+> ### {% icon tip %} Can I install tools without restarting?
+> Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.
+{: .tip}
+
+> ### {% icon tip %} Can I install tools without a ToolShed?
+> Yes. The galaxy_local_tools option for the `galaxyproject.galaxy` Ansible role can be used to install local tools, or you can manage them in another way that fits your workflow better. EU, for example, maintains a repository of tools that are not installed from the toolshed to aid their local developers. This is deployed to the server using the `git` module, rather than the Galaxy Ansible role.
 {: .tip}
 
 
