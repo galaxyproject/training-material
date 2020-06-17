@@ -195,7 +195,7 @@ Occasionally the tool installation may fail due to network issues; if it does, j
 {: .tip}
 
 > ### {% icon tip %} Can I install tools without a ToolShed?
-> Yes. The galaxy_local_tools option for the `galaxyproject.galaxy` Ansible role can be used to install local tools, or you can manage them in another way that fits your workflow better. EU, for example, maintains a repository of tools that are not installed from the toolshed to aid their local developers. This is deployed to the server using the `git` module, rather than the Galaxy Ansible role.
+> Yes. The `galaxy_local_tools` option for the `galaxyproject.galaxy` Ansible role can be used to install local tools, or you can manage them in another way that fits your workflow better. UseGalaxy.eu, for example, maintains a repository of tools that are not installed from the ToolShed to aid their local developers. This is deployed to the server using the `git` module, rather than the Galaxy Ansible role.
 {: .tip}
 
 
