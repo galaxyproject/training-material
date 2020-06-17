@@ -471,7 +471,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
 >    > ### {% icon tip %} Data storage
->    > Galaxy datasets cannot be separated by user or other attribute currently. Currently you can only spread data unintelligently across 1 or more storage pools.
+>    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
 >    {: .tip}
 >
 >    > ### {% icon tip %} PostgreSQL Connection String
