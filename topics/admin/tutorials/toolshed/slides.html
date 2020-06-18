@@ -171,28 +171,8 @@ Requirements of the wrapper.
 </requirements>
 ```
 
-Galaxy aims to be dependency resolution agnostic.
-
----
-## Dependency resolution
-
-* We aim to make Galaxy resolver-independent but Conda-oriented.
-* What resolver is going to be used for the tool dependency is determined at runtime
-and prioritised in the config file `dependency_resolvers_conf.xml`.
-
-```xml
-<dependency_resolvers>
-  <tool_shed_packages />
-  <galaxy_packages />
-  <conda />
-  <galaxy_packages versionless="true" />
-  <conda versionless="true" />
-<!-- other resolvers
-  <tool_shed_tap />
-  <homebrew />
--->
-</dependency_resolvers>
-```
+- Galaxy can resolve dependencies using Conda, Singularity, Docker, and other systems like Modules
+- You can read more about this in the [Galaxy Tool Management with Ephemeris slides](../tool-management/slides.html)
 
 ---
 

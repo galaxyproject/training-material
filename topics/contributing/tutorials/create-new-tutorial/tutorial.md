@@ -259,8 +259,9 @@ For the next times, you can make it quicker.
 >
 > 1. Determine the topic
 > 2. Create your workflow on a running Galaxy instance
-> 3. Create a Zenodo record with the input data
-> 4. Generate the skeleton of your tutorial
+> 3. Add the topic name as Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
+> 4. Create a Zenodo record with the input data
+> 5. Generate the skeleton of your tutorial
 >    - option 1: from a workflow located on a Galaxy
 >      ```
 >      $ planemo training_init \
@@ -285,7 +286,7 @@ For the next times, you can make it quicker.
 >      You can use the example workflow file located in `topics/contributing/tutorials/create-new-tutorial/workflows/example-workflow.ga` if
 >      you do not have a workflow of your own. This is the workflow belonging to the *Galaxy 101* introduction tutorial.
 >
-> 5. Fill the remaining metadata in the `tutorial.md`
-> 6. Fill the content of the `tutorial.md`
-> 7. Check it using Jekyll
+> 6. Fill the remaining metadata in the `tutorial.md`
+> 7. Fill the content of the `tutorial.md`
+> 8. Check it using Jekyll
 {: .hands_on}

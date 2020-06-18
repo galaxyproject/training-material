@@ -30,6 +30,7 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+      - gxadmin
 ---
 
 
@@ -166,6 +167,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >
 > 4. Edit the file `group_vars/monitoring.yml` and set the following variables:
 >
+>    {% raw %}
 >    ```yaml
 >    grafana_url: "https://{{ inventory_hostname }}/grafana/"
 >
@@ -185,6 +187,7 @@ There are some nice examples of dashboards available from the public Galaxies, w
 >       editable: false
 >       database: telegraf
 >    ```
+>    {% endraw %}
 >
 > 5. Run the playbook:
 >
@@ -318,7 +321,7 @@ Setting up Telegraf is again very simple. We just add a single role to our playb
 >    ansible-galaxy install -p roles -r requirements.yml
 >    ```
 >
-> 3. Add an entry to the end of your `galaxy.yml` playbook under `roles:`
+> 3. Add an entry to the *end* of your `galaxy.yml` playbook under `roles:`
 >
 >    ```yaml
 >    - dj-wasabi.telegraf
@@ -572,20 +575,33 @@ We will add an example alert, to make you familiar with the process. This is not
 
 Via this setup using `systemd` we collect metrics about Galaxy request times. To get statistics about other Galaxy-specific metrics such as the job queue status, we need to use `gxadmin` to query the Galaxy database and configure Telegraf to consume this data. In this section we will setup gxadmin, and to configure Telegraf to have permissions to run it.
 
+
+## Installing gxadmin
+
+It's simple to install gxadmin. Here's how you do it, if you haven't done it already:
+
 > ### {% icon hands_on %} Hands-on: Installing gxadmin and configuring Telegraf
 >
 > 1. Edit your `requirements.yml` and add the following:
 >
 >    ```yml
 >    - src: usegalaxy_eu.gxadmin
->      version: 0.0.2
+>      version: 0.0.3
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
 >
-> 3. Add the role to your `galaxy.yml` playbook, it should run as root, and it should come before `dj-wasabi.telegraf` (as we will configure telegraf to call some gxadmin commands).
+> 3. Add the role to your `galaxy.yml` playbook, it should come before the Telegraf role.
 >
-> 4. Edit the `group_vars/galaxyservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
+{: .hands_on}
+
+You can run the playbook now, or wait until you have configured Telegraf below:
+
+## Configuring Telegraf for gxadmin
+
+> ### {% icon hands_on %} Hands-on: Configuring Telegraf
+>
+> 1. Edit the `group_vars/galaxyservers.yml`, we need to add some additional permissions to permit Telegraf to run `gxadmin`:
 >
 >    ```yml
 >    # This should already exist!
@@ -602,15 +618,9 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 >        roles: telegraf
 >        privs: SELECT
 >        objs: ALL_IN_SCHEMA
->
->    # Configure locations for gxadmin that all
->    # users can access
->    gxadmin_dir: /opt/gxadmin
->    gxadmin_bin_dir: /usr/bin
 >    ```
 >
->
-> 5. Again edit the `group_vars/galaxyservers.yml`, we need to configure Telegraf to run `gxadmin`
+> 2. Again edit the `group_vars/galaxyservers.yml`, we need to configure Telegraf to run `gxadmin`
 >
 >    Under `telegraf_plugins_extra`, where we already have set a Galaxy StatsD listener, add a stanza to monitor the Galaxy queue
 >
@@ -633,7 +643,7 @@ Via this setup using `systemd` we collect metrics about Galaxy request times. To
 >    - Then it calls the gxadmin command `queue-overview`. By using `iquery` instead of `query`, the output is automatically converted to InfluxDB line protocol.
 >    - The command is run every 15 seconds, and has a timeout of 10 seconds. If the command fails to finish in 10 seconds, it will be killed.
 >
-> 5. Run the Galaxy playbook
+> 3. Run the Galaxy playbook
 >
 {: .hands_on}
 

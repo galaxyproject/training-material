@@ -457,9 +457,9 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >
 > 1. Rather than modify the default tool configuration file, we'll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.
 >
->    If the folder does not exist, create `files/galaxy/config` next to your `galaxy.yml` (`mkdir -p files/galaxy/config/`)
+>    If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` (`mkdir -p templates/galaxy/config/`)
 >
->    Create `files/galaxy/config/tool_conf_interactive.xml` with the following contents:
+>    Create `templates/galaxy/config/tool_conf_interactive.xml.j2` with the following contents:
 >
 >    ```xml
 >    <toolbox monitor="true">
@@ -471,7 +471,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >
 > 2. We need to modify `job_conf.xml` to instruct Galaxy on how run Interactive Tools (and specifically, how to run them in Docker). We will begin with a basic job conf:
 >
->    Create `files/galaxy/config/job_conf.xml` with the following contents:
+>    Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
 >
 >    ```xml
 >    <job_conf>
@@ -485,7 +485,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >    ```
 >
 >    > ### {% icon comment %} Note
->    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml` file, as well as defined `galaxy_config_files` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
+>    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml.j2` file, as well as defined `galaxy_config_templates` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
 >
 > 3. Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default `local` destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the [advanced sample job configuration][job-conf-docker] as a guide. Finally, use the [EtherCalc GxIT's][ethercalc-tool-wrapper] tool ID to route executions of the EtherCalc GxIT to the newly created destination:
@@ -537,20 +537,20 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
 >        job_config_file: "{{ galaxy_job_config_file }}"
->        interactivetools_enable: "True"
+>        interactivetools_enable: true
 >        interactivetools_map: "{{ gie_proxy_sessions_path }}"
 >    ```
 >    {% endraw %}
 >
->    And then deploy the new config files using the `galaxy_config_files` var in your group vars:
+>    And then deploy the new config templates using the `galaxy_config_templates` var in your group vars:
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_config_files:
+>    galaxy_config_templates:
 >      # ... possible existing config file definitions
->      - src: files/galaxy/config/tool_conf_interactive.xml
+>      - src: templates/galaxy/config/tool_conf_interactive.xml.j2
 >        dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
->      - src: files/galaxy/config/job_conf.xml
+>      - src: templates/galaxy/config/job_conf.xml.j2
 >        dest: "{{ galaxy_job_config_file }}"
 >    ```
 >    {% endraw %}
@@ -664,7 +664,7 @@ Because we want to maintain dataset privacy, Pulsar is the better choice here. A
 >    ```
 >    {% endraw %}
 >
-> 2. Modify the job configuration file, `files/galaxy/config/job_conf.xml`, to configure Interactive Tools to use the embedded Pulsar runner.
+> 2. Modify the job configuration file, `templates/galaxy/config/job_conf.xml.j2`, to configure Interactive Tools to use the embedded Pulsar runner.
 >
 >    <br/>
 >

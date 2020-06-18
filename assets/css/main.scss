@@ -36,6 +36,8 @@ $question-color: #8A9AD0;
 $solution-color: #B8C3EA;
 $details-color: $light-gray;
 $feedback-color: #86D486;
+$code-color: #86D486;
+$code-out-color: #fb99d0;
 
 
 @mixin tutorial-box ($bg-color, $color: rgba(255,255,255,.75)) {
@@ -96,6 +98,167 @@ body {
     font-size: $font-size;
     word-wrap: break-word;
     position: relative;
+}
+
+
+@import "assets/css/syntax_highlighting-dark.scss";
+
+div#theme-selector {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	width: 200px;
+	justify-content: flex-start;
+
+	label.btn {
+		margin: 0.1em;
+	}
+}
+
+body.theme-night {
+    color: #eee;
+    background-color: #444444;
+    @include syntax-dark;
+
+    .contributors-line{
+        color: #eee;
+    }
+	img {
+		background: #aaa;
+	}
+
+	.navbar-brand {
+		img{
+			background: none;
+		}
+	}
+    .navbar {
+        background-color: #424a66 !important;
+    }
+
+	nav[data-toggle="toc"] .nav > li > a {
+		color: #ccc;
+	}
+	nav[data-toggle="toc"] .nav li .active {
+		color: #eee;
+	}
+
+    a {
+		color: #7bf;
+	}
+
+    :not(a) > code {
+        background-color: #333333;
+        color: #ffa0a0;
+    }
+
+}
+
+body.theme-midnight {
+    color: #eee;
+    background-color: #222;
+    @include syntax-dark;
+
+    .contributors-line{
+        color: #eee;
+    }
+	img {
+		background: #aaa;
+	}
+
+	.navbar-brand {
+		img{
+			background: none;
+		}
+	}
+    .navbar {
+        background-color: #424a66 !important;
+    }
+
+	nav[data-toggle="toc"] .nav > li > a {
+		color: #ccc;
+	}
+	nav[data-toggle="toc"] .nav li .active {
+		color: #eee;
+	}
+
+    a {
+		color: #7bf;
+	}
+
+    :not(a) > code {
+        background-color: #333333;
+        color: #ffa0a0;
+    }
+
+}
+
+
+body.theme-rainbow {
+	h1::before {
+		content: "🌈 "
+	}
+	h1::after {
+		content: " 🌈 ";
+        display: inline-block;
+        transform: scale(-1, 1) translateX(-1rem);
+	}
+	header {
+		nav.navbar {
+			background: linear-gradient(to bottom,#e2453c 0,#e2453c 16%,#e07e39 16%,#e07e39 32%,#e5d667 32%,#e5d667 48%,#51b95b 48%,#51b95b 66%,#1e72b7 66%,#1e72b7 86%,#6f5ba7 86%) no-repeat !important;
+			padding: 0;
+		}
+
+		.navbar-brand {
+			background: #3337;
+			height: 100%;
+			left: 0px;
+			padding: .5rem 1rem;
+			width: 17rem;
+
+		}
+		.navbar-nav > li .nav-link {
+			color: white;
+
+		}
+		.navbar-nav > li {
+			background: #3337;
+			height: 100%;
+			left: 0px;
+			padding: .5rem 1rem;
+
+		}
+		.navbar-nav > li.active {
+			background: #333e;
+			height: 100%;
+			left: 0px;
+			padding: .5rem 1rem;
+		}
+	}
+
+	.tutorials-list:not(.topic-type-use) table.table-striped {
+		tbody tr:nth-of-type(5n+1) td:not(:first-child) { color: red; i{color: red} }
+		tbody tr:nth-of-type(5n+2) td:not(:first-child) { color: orange; i{color: orange} }
+		tbody tr:nth-of-type(5n+3) td:not(:first-child) { color: green; i{color: green} }
+		tbody tr:nth-of-type(5n+4) td:not(:first-child) { color: blue; i{color: blue} }
+		tbody tr:nth-of-type(5n+5) td:not(:first-child) { color: purple; i{color: purple} }
+	}
+
+	.tutorials-list.topic-type-use table.table-striped {
+		tbody tr td:nth-of-type(6n+2) { color: red; i{color: red} }
+		tbody tr td:nth-of-type(6n+3) { color: orange; i{color: orange} }
+		tbody tr td:nth-of-type(6n+4) { color: green; i{color: green} }
+		tbody tr td:nth-of-type(6n+5) { color: blue; i{color: blue} }
+		tbody tr td:nth-of-type(6n+6) { color: purple; i{color: purple} }
+
+        thead th:nth-of-type(6n+2) { color: red }
+		thead th:nth-of-type(6n+3) { color: orange }
+		thead th:nth-of-type(6n+4) { color: green }
+		thead th:nth-of-type(6n+5) { color: blue }
+		thead th:nth-of-type(6n+6) { color: purple }
+
+	}
+
 }
 
 h1,
@@ -219,6 +382,14 @@ footer {
 
         &.question {
             @include tutorial-box($question-color, $text-color);
+        }
+
+        &.code-in {
+            @include tutorial-box($code-color, $text-color);
+        }
+
+        &.code-out {
+            @include tutorial-box($code-out-color, $text-color);
         }
 
         &.solution {
@@ -594,4 +765,19 @@ div.supporting_material{
 
 .alert-heading {
     margin-top: 1rem;
+}
+
+// Code In/Out blocks
+@media (min-width: 1200px) {
+    .code-io{
+        display: flex;
+        flex-direction: row;
+        .code-in {
+            width: 47.5%;
+        }
+        .code-out {
+            margin-left: 5%;
+            width: 47.5%;
+        }
+    }
 }

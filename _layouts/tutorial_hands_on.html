@@ -6,7 +6,7 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
-{% assign language = site.other_languages | split: ", " %}
+{% assign language = site.other_languages  %}
 
 {% assign intro_link = false %}
 {% assign intro_target = "" %}
@@ -28,14 +28,21 @@ layout: base
     {% endif %}
 {% endfor %}
 
-{% if topic.gitter %}
+<!-- Gitter -->
+{% if page.gitter %}
+  {% assign gitter = page.gitter %}
+{% elsif topic.gitter %}
+  {% assign gitter = topic.gitter %}
+{% else %}
+  {% assign gitter = site.gitter_url %}
+{% endif %}
+
 <script>
   ((window.gitter = {}).chat = {}).options = {
-  room: '{{ topic.gitter }}'
+  room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-{% endif %}
 
 <header>
     <nav class="navbar navbar-expand-lg navbar-dark">
@@ -57,15 +64,18 @@ layout: base
                     </li>
 
                     <li class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="EN">
-                            EN
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            {% icon language %} Language
                         </a>
                         <div class="dropdown-menu">
-                            {% for lang in language %}
-                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
-                                {{ lang | upcase }}
+                            {% for lang in site.other_languages %}
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                                {{ lang[1] }}
                             </a>
                             {% endfor %}
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                                And more!
+                            </a>
                         </div>
                     </li>
 

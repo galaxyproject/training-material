@@ -36,6 +36,9 @@ contributors:
   - mtekman
   - astrovsky01
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
+
 ---
 
 <!-- TODO: Subset analysis to validate prior cell labelling -->
