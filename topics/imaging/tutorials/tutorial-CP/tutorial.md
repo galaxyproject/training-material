@@ -4,15 +4,28 @@ layout: tutorial_hands_on
 title: Nucleoli segmentation and feature extraction using CellProfiler
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How do I run an image analysis pipeline on public data using CellProfiler?
+- How do I analyse the DNA channel of fluorescence siRNA screens?
+- How do I download public image data into my history?
+- How do I segment cell nuclei?
+- How do I label segmented cell nuclei?
+- How do I segment nucleoli (as the absence of DNA)?
+- How do I combine segmentation masks?
+- How do I extract the background of an image?
+- How do I identify to which nucleus each nucleolus belongs?
+- How do I create segmentation masks?
+- How do I measure relate the nucleoli to their parent nucleus?
+- How do I measure the image quality?
+- How do I measure the image features (granularity, intensity)?
+- How do I measure the nuclei features (texture, intensity)?
+- How do I measure the size and shape nuclei and nucleoli?
+- How do I measure area occupied by nuclei and nucleoli?
+- How do I export and visualise my measurements?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- How to download images from a public repository ([IDR](http://idr.openmicroscopy.org/){_blank}).
+- How to segment cell nuclei using CellProfiler in Galaxy.
+- How to segment cell nucleoli using CellProfiler in Galaxy.
+- How to extract features for images, nuclei and nucleoli.
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -113,7 +126,8 @@ have fun!
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
 
-![Alternative text](../../images/wf "Legend of the image")
+<!--
+![Alternative text](../../images/tutorial-CP/wf "Legend of the image") -->
 
 The idea is to keep the theory description before quite simple to focus more on the practical part.
 
