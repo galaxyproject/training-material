@@ -58,7 +58,7 @@ The data classification process includes two steps:
 2. Applying the classifier to a classification task: In this step, the classifier is used for classification. Here the test data is used to estimate the accuracy of classification rules. The classification rules can be applied to the new data samples if the accuracy is considered acceptable.
 
 
-# Quantitative Structure - Activity Relationship biodegradation
+# Quantitative structure - activity relationship biodegradation
 
 The classification problem we will study in this tutorial is related to biodegradation. Chemical substances which decay slowly will accumulate over time, which poses a threat to the environment. Therefore, it is useful to be able to predict in advance whether a substance will break down quickly or not.
 
@@ -100,8 +100,8 @@ The `train_rows` contains a column `Class` which is the class label or target. W
 > ### {% icon details %} Preparing the data for classification
 >
 > Preparing the data involves these following major tasks:
-> 1. Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
-> 2. Relevance Analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
+> 1. Data cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
+> 2. Relevance analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
 > 3. Normalization: the data is transformed using normalization. Normalization involves scaling all values for q given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, neural networks or the methods involving measurements are used.
 >
 {: .details}
@@ -145,7 +145,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 
 After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the learning algorithm learned a good classifier from the training dataset or not. This classifier is used to predict a new sample and a similar accuracy is expected.
 
-Now, we will predict class in the test dataset using this classifier in order to see if it has learned important features which can generalize on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
+Now, we will predict the class in the test dataset using this classifier in order to see if it has learned important features which can be generalized on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
 
 
 > ### {% icon hands_on %} Hands-on: Predict class using the logistic regression classifier
@@ -183,7 +183,7 @@ Now we visualize and analyze the classification using the "Plot confusion matrix
 
 The visualization tool creates the following plots:
 
-1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix): The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, confusion matrix of the predictions is a heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.
+1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix): The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, the confusion matrix of the predictions is a colour-coded heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.
 
     ![confusion_matrix](images/confusion_matrix_linear.png "Confusion matrix for the logistic regression classifier. ")
 
@@ -211,7 +211,7 @@ These plots are important to visualize the quality of the classifier and the tru
 
 # K-Nearest Neighbor (KNN)
 
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.
+At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and if k is too large, the neighborhood may include points from other classes and causes errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.
 
 > ### {% icon question %} Question
 >
@@ -219,7 +219,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 >
 > > ### {% icon solution %} Solution
 > > Advantages:
-> > - It is very simple algorithm to understand and interpret.
+> > - It is a very simple algorithm to understand and interpret.
 > >
 > > - It is very useful for nonlinear data because there is no assumption of linearity in this algorithm.
 > >
@@ -308,7 +308,7 @@ The visualization tool creates diagrams for the Confusion matrix, Precision, rec
 
 [Support Vector Machines](https://en.wikipedia.org/wiki/Support-vector_machine) (SVMs) have been extensively researched in the machine learning community for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real world data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.
 
-To solve this problem SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
+To solve this problem, SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
 
 Without going into technical details, a kernel is a function that quantifies the similarity of two observations. Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
 kernel trick. In the next step, we will build a SVM classifier with our data. 
@@ -375,7 +375,7 @@ The visualization tool creates the following ROC plot:
 
 [Random forest](https://en.wikipedia.org/wiki/Random_forest) is an ensemble of decision trees, and usually trained with the “bagging” method. The [Ensemble](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and the general idea of the bagging method is that a combination of learning models increases the overall result. It uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error.
 
-One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm; one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
+One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm: one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
 
 > ### {% icon hands_on %} Hands-on: Train random forest
 >
