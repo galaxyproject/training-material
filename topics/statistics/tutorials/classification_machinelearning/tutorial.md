@@ -116,13 +116,13 @@ The second thing we need is an optimization algorithm for iteratively updating t
 >
 > 1. **Generalized linear models** {% icon tool %} with the following parameters to train the regressor:
 >    - *"Select a Classification Task"*: `Train a model`
->       - *"Select a linear method"*: `Logistic Regression model`
+>       - *"Select a linear method"*: `Logistic Regression`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -153,7 +153,7 @@ Now, we will predict class in the test dataset using this classifier in order to
 > 1. **Generalized linear models** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LogisticRegression_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `LogisticRegression_result`
@@ -167,8 +167,8 @@ We will evaluate the classification by comparing the predicted with the expected
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Remove first"*: `1`
->       - {% icon param-file %} *"from"*: `test_rows_labels.csv`
-> 2. Rename the generated file to `test_rows_labels_noheader.csv`
+>       - {% icon param-file %} *"from"*: `test_rows_labels`
+> 2. Rename the generated file to `test_rows_labels_noheader`
 {: .hands_on}
 
 
@@ -176,7 +176,7 @@ Now we visualize and analyze the classification using the "Plot confusion matrix
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader`
 >    - {% icon param-file %} *"Select predicted data file"*: `LogisticRegression_result`
 >    - {% icon param-file %} *"Select trained model"*: `LogisticRegression_model`
 {: .hands_on}
@@ -250,11 +250,11 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Nearest Neighbors`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -279,7 +279,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 > 1. **Nearest Neighbors Classification** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `NearestNeighbors_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `NearestNeighbors_result`
@@ -290,7 +290,7 @@ Now we visualize and analyze the classification. As you can see, `NearestNeighbo
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `NearestNeighbors_result`
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
 {: .hands_on}
@@ -319,11 +319,11 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Support Vector Classification`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -350,7 +350,7 @@ Now we will evaluate the performance of the SVM classifier:
 > 1. **Support vector machines (SVMs)** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `SVM_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `SVM_result`
@@ -361,7 +361,7 @@ Now let's visualize the results:
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `SVM_result`
 >    - {% icon param-file %} *"Select trained model"*: `SVM_model`
 {: .hands_on}
@@ -383,11 +383,11 @@ One big advantage of random forest is that it can be used for both classificatio
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Random forest classifier`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -414,7 +414,7 @@ After learning on the training dataset, we should evaluate the performance on th
 > 1. **Ensemble methods** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `RandomForest_model`
->       - {% icon param-file %} *"Data (tabular)"*: `train_rows_test.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `RandomForest_result`
@@ -438,7 +438,7 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file.
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -453,21 +453,9 @@ At the last step, we will create a bagging classifier by using  the **Pipeline b
 {: .hands_on}
 
 
-## Extract hyperparameters
-
-We use the **Estimator attributes** tool to get a list of different hyperparameters of the estimator. This tool creates a tabular file with a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
-
-> ### {% icon hands_on %} Hands-on: Estimator attributes
->
-> 1. **Estimator attributes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `final estimator builder` file (output of **Pipeline builder** {% icon tool %})
->    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
->
-{: .hands_on}
-
 ## Search for the best values of hyperparameters
 
-After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `10` and a few which are more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
+After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose a value which is less than `10` and a few which are more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
