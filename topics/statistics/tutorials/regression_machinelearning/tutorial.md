@@ -12,7 +12,7 @@ objectives:
 - Learn how visualizations can be used to analyze predictions
 key_points:
 - Using regression, real-valued targets are learned using the training set and predicted
-  using the test set.
+  using the test set
 - For each regression algorithm, its parameters should be optimized based on the dataset
 time_estimation: 2H
 contributors:
@@ -183,6 +183,7 @@ We will evaluate the predictions by comparing them to the expected targets. In t
 
 
 Now we visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool in Galaxy.
+Hint: Please find the above tool in "Graph/Display data" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
@@ -223,7 +224,7 @@ These plots are important to visualize the quality of regression and the true an
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures 5, 6 and 9 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved. 
+> > Figures 5, 6 and 9 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors. 
 > >
 > {: .solution}
 {: .question}
@@ -246,7 +247,7 @@ To learn the mapping between several features and the targets, in the next step,
 
 [Jana Naue et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) (another ensemble-based regressor) as the regressor and we can conclude from this study that an ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use gradient boosting to build a prediction model.
 
-Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized.
+Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. Hint: Please find the following tool in "Machine learning" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Train a model
 >
