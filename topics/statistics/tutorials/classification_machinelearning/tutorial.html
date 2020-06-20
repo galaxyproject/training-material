@@ -552,7 +552,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 19, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 20, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -577,7 +577,7 @@
 
 <ol id="markdown-toc">
   <li><a href="#classification" id="markdown-toc-classification">Classification</a></li>
-  <li><a href="#quantitative-structure---activity-relationship-biodegradation" id="markdown-toc-quantitative-structure---activity-relationship-biodegradation">Quantitative Structure - Activity Relationship biodegradation</a>    <ol>
+  <li><a href="#quantitative-structure---activity-relationship-biodegradation" id="markdown-toc-quantitative-structure---activity-relationship-biodegradation">Quantitative structure - activity relationship biodegradation</a>    <ol>
       <li><a href="#get-train-and-test-datasets" id="markdown-toc-get-train-and-test-datasets">Get train and test datasets</a></li>
     </ol>
   </li>
@@ -618,7 +618,7 @@
   </li>
 </ol>
 
-<h1 id="quantitative-structure---activity-relationship-biodegradation">Quantitative Structure - Activity Relationship biodegradation</h1>
+<h1 id="quantitative-structure---activity-relationship-biodegradation">Quantitative structure - activity relationship biodegradation</h1>
 
 <p>The classification problem we will study in this tutorial is related to biodegradation. Chemical substances which decay slowly will accumulate over time, which poses a threat to the environment. Therefore, it is useful to be able to predict in advance whether a substance will break down quickly or not.</p>
 
@@ -695,8 +695,8 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
   <p>Preparing the data involves these following major tasks:</p>
   <ol>
-    <li>Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.</li>
-    <li>Relevance Analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.</li>
+    <li>Data cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.</li>
+    <li>Relevance analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.</li>
     <li>Normalization: the data is transformed using normalization. Normalization involves scaling all values for q given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, neural networks or the methods involving measurements are used.</li>
   </ol>
 
@@ -764,7 +764,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <p>After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the learning algorithm learned a good classifier from the training dataset or not. This classifier is used to predict a new sample and a similar accuracy is expected.</p>
 
-<p>Now, we will predict class in the test dataset using this classifier in order to see if it has learned important features which can generalize on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="language-plaintext highlighter-rouge">Class</code> column. This is predicted using the trained classifier.</p>
+<p>Now, we will predict the class in the test dataset using this classifier in order to see if it has learned important features which can be generalized on a new dataset. The test dataset (<code class="language-plaintext highlighter-rouge">test_rows</code>) contains the same number of features but does not contain the <code class="language-plaintext highlighter-rouge">Class</code> column. This is predicted using the trained classifier.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-predict-class-using-the-logistic-regression-classifier"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Predict class using the logistic regression classifier</h3>
@@ -823,7 +823,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <ol>
   <li>
-    <p><a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a>: The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, confusion matrix of the predictions is a heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in <span class="notranslate">Galaxy</span> shows the true and predicted class labels and the count of samples.</p>
+    <p><a href="https://en.wikipedia.org/wiki/Confusion_matrix">Confusion matrix</a>: The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, the confusion matrix of the predictions is a colour-coded heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in <span class="notranslate">Galaxy</span> shows the true and predicted class labels and the count of samples.</p>
 
     <figure id="figure-2"><img src="images/confusion_matrix_linear.png" alt="confusion_matrix" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Confusion matrix for the logistic regression classifier. </figcaption></figure>
   </li>
@@ -856,7 +856,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <h1 id="k-nearest-neighbor-knn">K-Nearest Neighbor (KNN)</h1>
 
-<p>At the second step, we will use k-nearest neighbor classifier. In the <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-nearest neighbor</a> classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.</p>
+<p>At the second step, we will use k-nearest neighbor classifier. In the <a href="https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm">k-nearest neighbor</a> classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and if k is too large, the neighborhood may include points from other classes and causes errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.</p>
 
 <blockquote class="question">
   <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -868,7 +868,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
     <p>Advantages:</p>
     <ul>
       <li>
-        <p>It is very simple algorithm to understand and interpret.</p>
+        <p>It is a very simple algorithm to understand and interpret.</p>
       </li>
       <li>
         <p>It is very useful for nonlinear data because there is no assumption of linearity in this algorithm.</p>
@@ -1007,7 +1007,7 @@ https://zenodo.org/record/3738729/files/test_rows.csv
 
 <p><a href="https://en.wikipedia.org/wiki/Support-vector_machine">Support Vector Machines</a> (SVMs) have been extensively researched in the machine learning community for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real world data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.</p>
 
-<p>To solve this problem SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.</p>
+<p>To solve this problem, SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.</p>
 
 <p>Without going into technical details, a kernel is a function that quantifies the similarity of two observations. Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
 kernel trick. In the next step, we will build a SVM classifier with our data.</p>
@@ -1109,7 +1109,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
 
 <p><a href="https://en.wikipedia.org/wiki/Random_forest">Random forest</a> is an ensemble of decision trees, and usually trained with the “bagging” method. The <a href="https://scikit-learn.org/stable/modules/ensemble.html#ensemble">Ensemble</a> method uses multiple learning models inte<span class="notranslate">rna</span>lly for better predictions and the general idea of the bagging method is that a combination of learning models increases the overall result. It uses multiple decision tree regressors inte<span class="notranslate">rna</span>lly and predicts by taking the collective performances of the predictions by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error.</p>
 
-<p>One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm; one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.</p>
+<p>One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm: one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-train-random-forest"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train random forest</h3>
@@ -1393,7 +1393,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.</p
     title = "Classification in Machine Learning (Galaxy Training Materials)",
     year = "2020",
     month = "06",
-    day = "19"
+    day = "20"
     url = "\url{/training-material/topics/statistics/tutorials/classification_machinelearning/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
