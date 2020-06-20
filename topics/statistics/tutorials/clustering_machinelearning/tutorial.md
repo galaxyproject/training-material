@@ -154,7 +154,7 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >    {% include snippets/import_from_data_library.md %}
 >
 >
-> 2. **Rename** {% icon galaxy-pencil %} the dataset to `iris`
+> 2. **Rename** {% icon galaxy-pencil %} the datasets to `iris`, `circles` and `moon` respectively.
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -182,7 +182,8 @@ Figure 7 shows the dendrogram of these data.
 >    ![data](images/Hierarchical_iris.png "Iris data hierarchical clustering")
 
 
-We will apply hierarchical clustering to iris dataset to find clusters based on two features (of flowers) - sepal length and width.
+We will apply hierarchical clustering to iris dataset to find clusters based on two features (of flowers) - sepal length and width. 
+Hint: Please find the `Numeric Clustering` tool in `Statistics` tool section.
 
 > ### {% icon hands_on %} Hands-on: Hierarchical clustering
 >
@@ -193,14 +194,10 @@ We will apply hierarchical clustering to iris dataset to find clusters based on 
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
 >        - {% icon param-select %} *"Clustering Algorithm"*: `Hierarchical Agglomerative Clustering`
->        - In *"Advanced option"*    
+>        - In *"Advanced options"*    
 >            - {% icon param-text %} *"Number of clusters"*: `2`
 >            - {% icon param-select %} *"Affinity"*: `Euclidean`
 >            - {% icon param-select %} *"Linkage"*: `ward`
->        - In *"Output options"* 
->            - {% icon param-text %} *"width of output"*: `7.0`
->            - {% icon param-text %} *"height of output"*: `5.0`
->            - {% icon param-text %} *"dpi of output"*: `175.0`
 > 
 > 2. Rename the generated file to `Hierarchical clustering`
 {: .hands_on}
@@ -210,7 +207,7 @@ If you view the result table, you can see the last column is the label for each 
 ### Visualize hierarchical clustering
 
 The resulting candidate clustering can be visualized using the `Scatterplot with ggplot2` tool. Each sample is color-coded based on its clustering for that sample.
-Let's visualize the clustering results to see how groups have been built.
+Let's visualize the clustering results to see how groups have been built. Hint: Please find the `Scatterplot with ggplot2` tool in `Graph/Display data` tool section.
 
 > ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result
 >
@@ -267,7 +264,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
 >        - {% icon param-select %} *"Clustering Algorithm"*: `KMeans`
->        - In *"Advanced option"*    
+>        - In *"Advanced options"*    
 >            - {% icon param-text %} *"Number of clusters"*: `2`
 > 2. Rename the generated file to `k-means clustering`
 {: .hands_on}
