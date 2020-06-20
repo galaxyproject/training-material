@@ -188,7 +188,7 @@ We will apply hierarchical clustering to iris dataset to find clusters based on 
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
->        - {% icon param-file %} *"Data file with numeric values"*: `iris tabular`
+>        - {% icon param-file %} *"Data file with numeric values"*: `iris`
 >        - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
@@ -263,7 +263,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
->        - {% icon param-file %} *"Data file with numeric values"*: `iris tabular`
+>        - {% icon param-file %} *"Data file with numeric values"*: `iris`
 >        - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
@@ -295,9 +295,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >        - {% icon param-text %} *"width of output"*: `7.0`
 >        - {% icon param-select %} *"height of output"*: `5.0`
 >        - {% icon param-select %} *"dpi of output"*: `175.0`
->
-> 2. **View** {% icon galaxy-eye%} the resulting plot:
->
+> 2. **View** {% icon galaxy-eye%} the resulting plot
 > 3. Rename to `k-means scatter plot`
 
 
@@ -311,7 +309,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >
 > > ### {% icon solution %} Solution
 > >
-> > Major difficulty found with k-mean is the choice of the number of clusters. Different methods is proposed to solve this problem. 
+> > Major difficulty found with k-means is the choice of the number of clusters. Different methods is proposed to solve this problem. 
 > > Here, we provide a simple solution. The idea is to compute k-means clustering using different values of clusters k. Next, the within sum of square is drawn according to the number of clusters. The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.
 > > ![data](images/number_of_clusters.png "Optimal number of clusters")
 > > The plot above represents the variance within the clusters. It decreases as k increases, but it can be seen a bend (or “elbow”) at k = 4. This bend indicates that 
@@ -346,7 +344,7 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 >
 > 1. **Numeric Clustering** {% icon tool %} with the following clustering parameters:
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
->        - {% icon param-file %} *"Data file with numeric values"*: `iris tabular`
+>        - {% icon param-file %} *"Data file with numeric values"*: `iris`
 >        - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >            - {% icon param-text %} *"Type header name(s)"*: `Species`
@@ -376,11 +374,8 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 >        - {% icon param-text %} *"width of output"*: `7.0`
 >        - {% icon param-select %} *"height of output"*: `5.0`
 >        - {% icon param-select %} *"dpi of output"*: `175.0`
->
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
->
 > 3. Rename to `DBSCAN scatter plot`
-
 
 >    ![data](images/dbscan_scatter.png "DBSCAN clustering scatter plot")
 
@@ -394,9 +389,8 @@ You will also notice that the blue point in the plot is not contained within any
 >
 > > ### {% icon solution %} Solution
 > >
-> > Clustering is an unsupervised learning algorithm; there are no labels or ground truth to compare with the clusters. However, we can still evaluate the performance of
-the algorithm using intrinsic measures.
-> > There is a performance measure for clustering evaluation which is called the silhouette coefficient. The silhouette coefficient is a measure of the compactness and separation of the clusters. 
+> > Clustering is an unsupervised learning algorithm; there are no labels or ground truth to compare with the clusters. However, we can still evaluate the performance of the algorithm using intrinsic measures.
+> > There is a performance measure for clustering evaluation which is called the [silhouette coefficient](https://en.wikipedia.org/wiki/Silhouette_(clustering)). It is a measure of the compactness and separation of the clusters. 
 > > It increases as the quality of the clusters increase; it is large for compact clusters that are far from each other and small for large, overlapping clusters. The silhouette coefficient is calculated per instance; for a set of instances, it is calculated as the mean of the individual samples scores.
 > {: .solution}
 {: .question}
@@ -422,7 +416,6 @@ You can do the same steps on the other datasets, moon and circles. First, import
 >        - {% icon param-text %} *"width of output"*: `7.0`
 >        - {% icon param-select %} *"height of output"*: `5.0`
 >        - {% icon param-select %} *"dpi of output"*: `175.0`
->
 > 2. **View** {% icon galaxy-eye%} the resulting plots
 
 
@@ -431,7 +424,7 @@ You can do the same steps on the other datasets, moon and circles. First, import
 
 ### Find clusters
 
-Now you can find clusters in these datasets using the introduced algorithms.
+Now you can find clusters in these datasets using the aforementioned algorithms.
 
 > ### {% icon hands_on %} Hands-on: Hierarchical clustering of circles and moon datasets
 >
@@ -447,7 +440,6 @@ Now you can find clusters in these datasets using the introduced algorithms.
 >            - {% icon param-text %} *"Number of clusters"*: `2`
 >            - {% icon param-select %} *"Affinity"*: `Euclidean`
 >            - {% icon param-select %} *"Linkage"*: `ward`
->
 > 2. Rename the generated files to `circles hierarchical clustering` and `moon hierarchical clustering` respectively
 {: .hands_on}
 
@@ -476,11 +468,10 @@ Then, you can visualize the clustering results using the following steps:
 >        - {% icon param-text %} *"width of output"*: `7.0`
 >        - {% icon param-select %} *"height of output"*: `5.0`
 >        - {% icon param-select %} *"dpi of output"*: `175.0`
->
 > 2. **View** {% icon galaxy-eye%} the resulting plots:
 
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in similar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles dataset (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
+In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In k-means algorithm, `k=2` and for the DBSCAN algorithm, the parameters are not the default parameters and should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon datasets (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results in Figure 13 and 14.
 
 >    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
 
@@ -489,4 +480,4 @@ In the next steps, you can apply these three algorithms (hierarchical, k-means a
 
 # Conclusion
 
-In this tutorial, we discussed the clustering algorithms which is used to discover structures or patterns in unlabeled data. You learned about the hierarchical, k-means and DBSCAN algorithms. By following these steps, we learned how to perform clustering and visualize results using clustering and plotting tools respectively in Galaxy. There are many other clustering approaches which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. In using clustering algorithms, we need to take care of some important aspects like treating outliers in our data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.
+In this tutorial, we discussed 3 clustering algorithms which are used to discover structures or patterns in unlabeled data. You learned about the hierarchical, k-means and DBSCAN algorithms. By following steps specified for each clustering tool, we learned how to perform clustering and visualize results using clustering and plotting tools, respectively in Galaxy. There are many other clustering approaches which can be tried out on these datasets to find how they perform and how they compare to the 3 clustering algorithms explained in this tutorial. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. While using clustering algorithms, we need to take care of some important aspects like treating outliers in data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.
