@@ -26,7 +26,7 @@ contributors:
 
 The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial, we will discuss an unsupervised learning task called clustering. Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items.
 
-Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example clustering of gene expressions provides understanding gene functions, cellular processes, subtypes of cells and gene regulations. For example, clustering is often used in gene expression analysis to find groups of genes with similar expression patterns. Please refer to [ref1](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171429) and [ref2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/)
+Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example, clustering is often used in gene expression analysis to find groups of genes with similar expression patterns which provides a useful understanding of gene functions, cellular processes, subtypes of cells and gene regulations. Please refer to [ref1](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171429) and [ref2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/).
 
 We represent an observation/sample as an n-dimensional vector and many such vectors constitute a dataset. To show an example, let us assume that a dataset, shown in Figure 1, contains many samples and each sample has two dimensions each:
 
@@ -64,7 +64,7 @@ Since clustering is a subjective task, there are many algorithms for data cluste
 
  - Centroid models: These are iterative clustering algorithms in which the notion of similarity is derived by the closeness of a data point to the centroid of the clusters. [k-means](https://en.wikipedia.org/wiki/K-means_clustering) clustering is a popular algorithm that falls into this category. It runs iteratively to find a fixed number of clusters which needs to be specified before running it. Therefore, to fix this number of clusters, it is required to have some prior knowledge about the dataset.
 
- - Density models: These algorithms search the data space for areas of varied density of data points. They isolate various density regions and assign the data points within these regions in the same cluster. A popular example of density model is [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN).
+ - Density models: These algorithms search the data space for areas of varied density of data points. They isolate various density regions and assign the data points within these regions in the same cluster. A popular example of a density model is [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN).
 
  - Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in a cluster belong to the same distribution such as Gaussian. These algorithms often suffer from overfitting. A popular example is [expectation-maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) (EM) algorithm which uses multivariate normal distributions.
 
@@ -78,7 +78,7 @@ Since clustering is the grouping of similar objects, a measure that can determin
 
 Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects. A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors. Clustering requires some methods for computing the distance or (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.
 
-The choice of a distance measure is critical in clustering. It defines how the similarity of two elements `(x, y)` is calculated and it will influence the shape of the clusters. The classical distance measures are [euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances. For the most common clustering algorithms, the default distance measure is euclidean. If euclidean distance is chosen, then observations having high magnitudes of their respective features will be clustered together. The same holds for the observations having low magnitudes of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.
+The choice of a distance measure is critical in clustering. It defines how the similarity of two elements `(x, y)` is calculated and it will influence the shape of the clusters. The classical distance measures are [euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances. For the most common clustering algorithms, the default distance measure is euclidean. If the euclidean distance is chosen, then observations having high magnitudes of their respective features will be clustered together. The same holds for the observations having low magnitudes of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.
 
 ![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
@@ -325,9 +325,9 @@ The parameters that minimize the cost function are learned through an iterative 
  > >
  > > 1. Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of k-means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).
  > > 
- > > 2. In k-means clustering, since we start with random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.
+ > > 2. In k-means clustering, since we start with a random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.
  > >
- > > 3. K-means is found to work well when the shape of the clusters is hyper spherical (like circle in 2D, sphere in 3D).
+ > > 3. K-means is found to work well when the shape of the clusters is hyperspherical (like circle in 2D, sphere in 3D).
  > >
  > > 4. K-means clustering requires prior knowledge of K i.e. no. of clusters to divide the dataset into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram
  > >
