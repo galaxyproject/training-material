@@ -74,7 +74,7 @@ Since clustering is a subjective task, there are many algorithms for data cluste
 
 Now, in this tutorial, we will be taking you through three of the most popular clustering algorithms in detail: hierarchical clustering, k-means, DBSCAN, and a comparison between these methods.
 
- In the following, we will discuss these clustering algorithms and their parameters and how to apply them to categorize data from the Iris flower and some other data sets.
+In the following, we will discuss these clustering algorithms and their parameters and how to apply them to categorize data from the Iris flower and some other data sets.
 
 
 # Clustering Distance Measures
@@ -249,6 +249,7 @@ Let's visualize the clustering results to see how groups have been built.
 
 K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given data set into a set of k clusters, where k represents the number of groups pre-specified by the user.
 In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster.The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
+
 K-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a the hyperparameter of the algorithm and k-means algorithm can be summarized as follows:
 
 1. Specify the number of clusters (k) to be created (by the analyst).
