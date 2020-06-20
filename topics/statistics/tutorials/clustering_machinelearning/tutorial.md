@@ -69,7 +69,7 @@ Since clustering is a subjective task, there are many algorithms for data cluste
  - Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in a cluster belong to the same distribution such as Gaussian. These algorithms often suffer from overfitting. A popular example is [expectation-maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) (EM) algorithm which uses multivariate normal distributions.
 
 
-Now, in this tutorial, we will go through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means, DBSCAN, and a comparison between these methods. Further, we will discuss their parameters and how to apply them to find clusters in the [Iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and a few other datasets.
+Now, in this tutorial, we will go through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means, DBSCAN, and a comparison between these methods. Further, we will discuss their parameters and how to apply them to find clusters in the [iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and a few other datasets.
 
 
 # Clustering distance measures
@@ -103,11 +103,11 @@ Other dissimilarity measures exist such as correlation-based distances, which ar
 
 ## Hierarchical clustering
 
-Before seeing hierarchical clustering in action, let us first understand the theory behind the hierarchical clustering. Hierarchical clustering, as the name suggests is an algorithm that builds hierarchy of clusters. This algorithm starts with all the data points assigned to a cluster of their own. Then two nearest clusters are merged into the same cluster. In the end, this algorithm terminates when there is only a single cluster left.
+Before using hierarchical clustering, let us first understand the theory behind it. Hierarchical clustering, as the name suggests is an algorithm that builds hierarchy of clusters. It starts with all the data points assigned to a cluster of their own. Then, the two nearest clusters are merged into the same cluster. At the end, this algorithm terminates when there is only a single cluster left.
 
 Following are the steps that are performed during hierarchical clustering:
 
-1. In the beginning, every data point in the dataset is treated as a cluster which means that we have N clusters at the beginning of the algorithm.
+1. In the beginning, every data point in the dataset is treated as a cluster which means that we have `N` clusters at the beginning of the algorithm for a dataset of size `N`.
 
 2. The distance between all the points is calculated and two points closest to each other are joined together to a form a cluster. 
 
@@ -117,7 +117,7 @@ Following are the steps that are performed during hierarchical clustering:
 
 5. Finally, the big cluster is divided into K small clusters with the help of dendrograms. 
 
-Let’s now see how dendrograms help in hierarchical clustering. 
+Let’s now see how dendrograms help in hierarchical clustering.
 
 >    ![data](images/Hierarchical_clustering_1.png "Hierarchical clustering")
 
@@ -129,18 +129,16 @@ In the above example, the best choice of number of clusters will be 4 as the red
 >    ![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
 
 
-This algorithm has been implemented above using bottom up approach. It is also possible to follow top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken on the basis of closeness of these clusters. 
+This algorithm has been implemented above using bottom-up approach. It is also possible to follow top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken on the basis of closeness of these clusters.
 
-Now we will apply hierarchical clustering to Iris dataset to find clusters based on two features (of flowers) - sepal length and width.
-
-> ### {% icon comment %} Background of Iris dataset
-> The Iris flower dataset or Fisher’s Iris dataset is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
-> Each row of the table represents an Iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
+> ### {% icon comment %} Background of iris dataset
+> The iris flower dataset or Fisher’s iris dataset is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
+> Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
 {: .comment}
 
 
-At the first step, we should upload the Iris dataset and two other datasets which will be used at the end of the tutorial.
+At the first step, we should upload the iris dataset and two other datasets which will be used at the end of the tutorial.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -172,10 +170,10 @@ At the first step, we should upload the Iris dataset and two other datasets whic
 >
 {: .hands_on}
 
-Our objective is to categorize the similar flowers in different groups (Figure 6). We know that we have **3** species of Iris flowers (versicolor, virginica, setosa) with
+Our objective is to categorize the similar flowers in different groups (Figure 6). We know that we have **3** species of iris flowers (versicolor, virginica, setosa) with
 **50** samples for each. These species look very much alike as shown on the figure below.
 
-![3 species of Iris flowers](images/iris_flowers.png "3 species of Iris flowers")
+![3 species of iris flowers](images/iris_flowers.png "3 species of iris flowers")
 
 In our dataset, we have the following features measured for each flower: [petal](https://en.wikipedia.org/wiki/Petal) length, petal width, [sepal](https://en.wikipedia.org/wiki/Sepal) length, sepal width
 
@@ -183,7 +181,8 @@ Figure 7 shows the dendrogram of these data.
 
 >    ![data](images/Hierarchical_iris.png "Iris data hierarchical clustering")
 
-In the first step we use the hierachical clustering approach.
+
+We will apply hierarchical clustering to iris dataset to find clusters based on two features (of flowers) - sepal length and width.
 
 > ### {% icon hands_on %} Hands-on: Hierarchical clustering
 >
@@ -202,6 +201,7 @@ In the first step we use the hierachical clustering approach.
 >            - {% icon param-text %} *"width of output"*: `7.0`
 >            - {% icon param-select %} *"height of output"*: `5.0`
 >            - {% icon param-select %} *"dpi of output"*: `175.0`
+> 
 > 2. Rename the generated file to `Hierarchical clustering`
 {: .hands_on}
 
@@ -209,7 +209,7 @@ If you view the result table, you can see the last column is the label for each 
 
 ## Visualize hierarchical clustering
 
-The resulting candidate clustering can be visualized using the Scatterplot with ggplot2 tool. Each sample is color-coded based on its clustering for that sample.
+The resulting candidate clustering can be visualized using the `Scatterplot with ggplot2` tool. Each sample is color-coded based on its clustering for that sample.
 Let's visualize the clustering results to see how groups have been built.
 
 > ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result
@@ -218,7 +218,7 @@ Let's visualize the clustering results to see how groups have been built.
 >    - {% icon param-file %} *"Input tabular dataset"*: **Hierarchical clustering**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
->    - *"Plot title"*: `Hierarchical Clustering in Iris data`
+>    - *"Plot title"*: `Hierarchical clustering in iris data`
 >    - *"Label for x axis"*: `Sepal length`
 >    - *"Label for y axis"*: `Sepal width`
 >    - In *"Advanced Options"*:
@@ -247,17 +247,17 @@ In k-means clustering, each cluster is represented by its center or centroid whi
 
 K-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a the hyperparameter of the algorithm and k-means algorithm can be summarized as follows:
 
-1. Specify the number of clusters (k) to be created (by the analyst).
+1. Specify the number of clusters (k) to be created (to be specified by users).
 
-2. Select randomly k objects from the dataset as the initial cluster centers or means.
+2. Select k data points or observations randomly from the dataset as the initial cluster centers or means.
 
-3. Assign each observation to their closest centroid, based on the Euclidean distance between the object and the centroid.
+3. Assign each data point to their closest centroid, based on the euclidean distance between a data point and its centroid.
 
 4. For each of the k clusters update cluster centroid by calculating the new mean values of all the data points in the cluster.
 
-5. Iteratively minimize the total within sum of square: iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of iterations is reached. 
+5. Iteratively minimize the total within sum of square: iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of iterations is reached.
 
-The parameters that minimize the cost function are learned through an iterative process of assigning observations to clusters and then moving the clusters. The basic restriction for k-means algorithm is that your data should be continuous in nature. It won’t work if data is categorical in nature.
+The parameters that minimize the cost function are learned through an iterative process of assigning data points to clusters and then moving the clusters. A restriction for k-means algorithm is that the dataset should be continuous. It won’t work if data is categorical in nature.
 
 > ### {% icon hands_on %} Hands-on: K-means clustering
 >
@@ -282,7 +282,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >    - {% icon param-file %} *"Input tabular dataset"*: **k-means clustering**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
->    - *"Plot title"*: `K-means Clustering in Iris data`
+>    - *"Plot title"*: `K-means clustering in iris data`
 >    - *"Label for x axis"*: `Sepal length`
 >    - *"Label for y axis"*: `Sepal width`
 >    - In *"Advanced Options"*:
@@ -322,7 +322,7 @@ The parameters that minimize the cost function are learned through an iterative 
 
 > ### {% icon question %} Question
 >
-> What are the differences between k-means and hierarchical clustering
+> What are the differences between k-means and hierarchical clustering techniques
 >
 > > ### {% icon solution %} Solution
 > >
@@ -332,7 +332,7 @@ The parameters that minimize the cost function are learned through an iterative 
 > >
 > > K-means is found to work well when the shape of the clusters is hyper spherical (like circle in 2D, sphere in 3D).
 > >
-> > K-means clustering requires prior knowledge of K i.e. no. of clusters you want to divide your data into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram
+> > K-means clustering requires prior knowledge of K i.e. no. of clusters to divide the dataset into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram
 > >
 > {: .solution}
 {: .question}
@@ -340,9 +340,7 @@ The parameters that minimize the cost function are learned through an iterative 
 
 # DBSCAN clustering
 
-DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples, which are samples that are in areas of high density. A cluster is therefore a set of core samples, each close to each other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not themselves core samples). There are two parameters to the algorithm, maximum neighborhood distance and minimal core point density, which define formally what we mean when we say dense. There are two important parameters in DBSCAN algorithm, min_samples, is the number of samples in a neighborhood for a point to be considered as a core point and eps is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher min_samples or lower eps indicate higher density necessary to form a cluster.
-DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
-
+DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be of any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples whic are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - `min\_samples` is the number of samples in a neighborhood for a point to be considered as a core point and `eps` is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher the value of `min\_samples` or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
 
 > ### {% icon hands_on %} Hands-on: DBSCAN clustering
 >
@@ -365,7 +363,7 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
 >    - {% icon param-file %} *"Input tabular dataset"*: **DBSCAN clustering**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
->    - *"Plot title"*: `DBSCAN Clustering in Iris data`
+>    - *"Plot title"*: `DBSCAN Clustering in iris data`
 >    - *"Label for x axis"*: `Sepal length`
 >    - *"Label for y axis"*: `Sepal width`
 >    - In *"Advanced Options"*:
@@ -384,7 +382,7 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
 > 3. Rename to `DBSCAN scatter plot`
 
 
->    ![data](images/dbscan_scatter.png "DBSCAN Clustering Scatter Plot")
+>    ![data](images/dbscan_scatter.png "DBSCAN clustering scatter plot")
 
 
 You will also notice that the blue point in the plot is not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore terrific with handling outliers in the dataset. 
