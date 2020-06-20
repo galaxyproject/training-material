@@ -11,10 +11,10 @@ objectives:
 - Learn k-means clustering algorithm
 - Learn DBSCAN clustering algorithm
 - Apply clustering algorithms to different datasets
-- Learn how to visualize the results
+- Learn how to visualize clusters
 key_points:
-- Using clustering methods, category and cluster of the data are learned using hierarchical, k-means and DBSCAN
-- For each clustering algorithm, number of clusters and the algorithm parameters should be optimised based on the dataset
+- Using clustering methods, clusters inside a dataset are drawn using hierarchical, k-means and DBSCAN
+- For each clustering algorithm, the number of clusters and their respective hyperparameters should be optimised based on the dataset
 time_estimation: 2H
 contributors:
 - khanteymoori
@@ -199,8 +199,8 @@ We will apply hierarchical clustering to iris dataset to find clusters based on 
 >            - {% icon param-select %} *"Linkage"*: `ward`
 >        - In *"Output options"* 
 >            - {% icon param-text %} *"width of output"*: `7.0`
->            - {% icon param-select %} *"height of output"*: `5.0`
->            - {% icon param-select %} *"dpi of output"*: `175.0`
+>            - {% icon param-text %} *"height of output"*: `5.0`
+>            - {% icon param-text %} *"dpi of output"*: `175.0`
 > 
 > 2. Rename the generated file to `Hierarchical clustering`
 {: .hands_on}
@@ -229,13 +229,12 @@ Let's visualize the clustering results to see how groups have been built.
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
 >    - In *"Output options"*:
 >        - {% icon param-text %} *"width of output"*: `7.0`
->        - {% icon param-select %} *"height of output"*: `5.0`
->        - {% icon param-select %} *"dpi of output"*: `175.0`
->
-> 2. **View** {% icon galaxy-eye%} the resulting plot:
->
+>        - {% icon param-text %} *"height of output"*: `5.0`
+>        - {% icon param-text %} *"dpi of output"*: `175.0`
+> 
+> 2. **View** {% icon galaxy-eye%} the resulting plot
 > 3. Rename to `Hierarchical scatter plot`
-
+{: .hands_on}
 
 >    ![data](images/hierarchical_scatter.png "Hierarchical clustering scatter plot")
 
@@ -293,11 +292,11 @@ The parameters that minimize the cost function are learned through an iterative 
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
 >    - In *"Output options"*:
 >        - {% icon param-text %} *"width of output"*: `7.0`
->        - {% icon param-select %} *"height of output"*: `5.0`
->        - {% icon param-select %} *"dpi of output"*: `175.0`
+>        - {% icon param-text %} *"height of output"*: `5.0`
+>        - {% icon param-text %} *"dpi of output"*: `175.0`
 > 2. **View** {% icon galaxy-eye%} the resulting plot
 > 3. Rename to `k-means scatter plot`
-
+{: .hands_on}
 
 >    ![data](images/k_means_scatter.png "K-means clustering scatter plot")
 
@@ -372,10 +371,12 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
 >    - In *"Output options"*:
 >        - {% icon param-text %} *"width of output"*: `7.0`
->        - {% icon param-select %} *"height of output"*: `5.0`
->        - {% icon param-select %} *"dpi of output"*: `175.0`
+>        - {% icon param-text %} *"height of output"*: `5.0`
+>        - {% icon param-text %} *"dpi of output"*: `175.0`
 > 2. **View** {% icon galaxy-eye%} the resulting plot:
 > 3. Rename to `DBSCAN scatter plot`
+{: .hands_on}
+
 
 >    ![data](images/dbscan_scatter.png "DBSCAN clustering scatter plot")
 
@@ -395,11 +396,11 @@ You will also notice that the blue point in the plot is not contained within any
 > {: .solution}
 {: .question}
 
-## Applying clustering algorithms on multiple datasets
+# Applying clustering algorithms on multiple datasets
 
 You can do the same steps on the other datasets, moon and circles. First, import the data files, [moon.csv](https://zenodo.org/record/3813447/files/moon.csv) and [circles.csv](https://zenodo.org/record/3813447/files/circles.csv) from Zenodo or data library and rename them to `moon` and `circles` respectively. 
 
-### Visualise datasets
+## Visualise datasets
 
 > ### {% icon hands_on %} Hands-on: Visualize scatter plot of data
 >
@@ -414,15 +415,15 @@ You can do the same steps on the other datasets, moon and circles. First, import
 >    - *"Label for y axis"*: `Y`
 >    - In *"Output options"*:
 >        - {% icon param-text %} *"width of output"*: `7.0`
->        - {% icon param-select %} *"height of output"*: `5.0`
->        - {% icon param-select %} *"dpi of output"*: `175.0`
+>        - {% icon param-text %} *"height of output"*: `5.0`
+>        - {% icon param-text %} *"dpi of output"*: `175.0`
 > 2. **View** {% icon galaxy-eye%} the resulting plots
-
+{: .hands_on}
 
 >    ![data](images/circles_moon_scatter.png "Scatter plot of circles and moon Data")
 
 
-### Find clusters
+## Find clusters
 
 Now you can find clusters in these datasets using the aforementioned algorithms.
 
@@ -443,7 +444,7 @@ Now you can find clusters in these datasets using the aforementioned algorithms.
 > 2. Rename the generated files to `circles hierarchical clustering` and `moon hierarchical clustering` respectively
 {: .hands_on}
 
-### Visualise clusters
+## Visualise clusters
 
 Then, you can visualize the clustering results using the following steps:
 
@@ -466,10 +467,10 @@ Then, you can visualize the clustering results using the following steps:
 >            - *"Color schemes to differentiate your groups"*: `Set 2 - predefined color pallete`
 >    - In *"Output options"*:
 >        - {% icon param-text %} *"width of output"*: `7.0`
->        - {% icon param-select %} *"height of output"*: `5.0`
->        - {% icon param-select %} *"dpi of output"*: `175.0`
+>        - {% icon param-text %} *"height of output"*: `5.0`
+>        - {% icon param-text %} *"dpi of output"*: `175.0`
 > 2. **View** {% icon galaxy-eye%} the resulting plots:
-
+{: .hands_on}
 
 In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In k-means algorithm, `k=2` and for the DBSCAN algorithm, the parameters are not the default parameters and should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon datasets (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results in Figure 13 and 14.
 
