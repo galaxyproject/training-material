@@ -24,9 +24,9 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial we will discuss an unsupervised learning task called clustering. Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items.
+The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial, we will discuss an unsupervised learning task called clustering. Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items.
 
-Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example clustering of gene expressions provides understanding gene functions, cellular processes, subtypes of cells and gene regulations. Please refer to [ref1](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171429) and [ref2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/). For example, clustering is often used in gene expression analysis to find groups of genes with similar expression patterns.
+Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example clustering of gene expressions provides understanding gene functions, cellular processes, subtypes of cells and gene regulations. For example, clustering is often used in gene expression analysis to find groups of genes with similar expression patterns. Please refer to [ref1](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171429) and [ref2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/)
 
 We represent an observation/sample as an n-dimensional vector and many such vectors constitute a dataset. To show an example, let us assume that a dataset, shown in Figure 1, contains many samples and each sample has two dimensions each:
 
@@ -60,11 +60,11 @@ The goal of clustering is to determine the internal grouping in a set of unlabel
 
 Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining similarity. There are many known clustering algorithms. But, only a few of them are popular and can be categorized as follows: 
 
- - Connectivity models: As the name suggests, these algorithms are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches - in the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lacks scalability for handling big datasets. Examples are hierarchical clustering and its variants.
+ - Connectivity models: As the name suggests, these algorithms are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches - in the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lack scalability for handling big datasets. Examples are hierarchical clustering and its variants.
 
  - Centroid models: These are iterative clustering algorithms in which the notion of similarity is derived by the closeness of a data point to the centroid of the clusters. [k-means](https://en.wikipedia.org/wiki/K-means_clustering) clustering is a popular algorithm that falls into this category. It runs iteratively to find a fixed number of clusters which needs to be specified before running it. Therefore, to fix this number of clusters, it is required to have some prior knowledge about the dataset.
 
- - Density models: These algorithms search the data space for areas of varied density of data points. They isolate various different density regions and assign the data points within these regions in the same cluster. Popular example of density model is [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN).
+ - Density models: These algorithms search the data space for areas of varied density of data points. They isolate various density regions and assign the data points within these regions in the same cluster. A popular example of density model is [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN).
 
  - Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in a cluster belong to the same distribution such as Gaussian. These algorithms often suffer from overfitting. A popular example is [expectation-maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) (EM) algorithm which uses multivariate normal distributions.
 
@@ -74,11 +74,11 @@ Now, in this tutorial, we will go through three of the most popular clustering a
 
 # Clustering distance measures
 
-Since clustering is the grouping of similar objects, a measure that can determine whether two objects are similar or dissimilar is required. There are two main type of measures used to estimate this relation - distance and similarity measures. The notions of distance and similarity are related. The smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure as its usage depends on the problem.
+Since clustering is the grouping of similar objects, a measure that can determine whether two objects are similar or dissimilar is required. There are two main types of measures used to estimate this relation - distance and similarity measures. The notions of distance and similarity are related. The smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure as its usage depends on the problem.
 
 Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects. A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors. Clustering requires some methods for computing the distance or (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.
 
-The choice of a distance measure is critical in clustering. It defines how the similarity of two elements `(x, y)` is calculated and it will influence the shape of the clusters. The classical distance measures are [euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances. For the most common clustering algorithms, the default distance measure is euclidean. If euclidean distance is chosen, then observations having high magnitude of their respective features will be clustered together. The same holds true for the observations having low magnitude of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.
+The choice of a distance measure is critical in clustering. It defines how the similarity of two elements `(x, y)` is calculated and it will influence the shape of the clusters. The classical distance measures are [euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances. For the most common clustering algorithms, the default distance measure is euclidean. If euclidean distance is chosen, then observations having high magnitudes of their respective features will be clustered together. The same holds for the observations having low magnitudes of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.
 
 ![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
@@ -97,13 +97,13 @@ The choice of a distance measure is critical in clustering. It defines how the s
  >
  {: .question }
 
-Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of euclidean distance. The distance between two objects is 0 when they are perfectly correlated. [Pearson’s correlation](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) is quite sensitive to outliers. This does not matter when clustering samples, because the correlation is over thousands of genes. During clustering of genes, it is important to be aware of the possible impact of outliers. This can be mitigated by using [Spearman’s correlation](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) instead of Pearson’s correlation.
+Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of euclidean distance. The distance between the two objects is 0 when they are perfectly correlated. [Pearson’s correlation](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) is quite sensitive to outliers. This does not matter when clustering samples, because the correlation is over thousands of genes. During the clustering of genes, it is important to be aware of the possible impact of outliers. This can be mitigated by using [Spearman’s correlation](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) instead of Pearson’s correlation.
 
 # Different clustering approaches
 
 ## Hierarchical clustering
 
-Before using hierarchical clustering, let us first understand the theory behind it. Hierarchical clustering, as the name suggests is an algorithm that builds hierarchy of clusters. It starts with all the data points assigned to a cluster of their own. Then, the two nearest clusters are merged into the same cluster. At the end, this algorithm terminates when there is only a single cluster left.
+Before using hierarchical clustering, let us first understand the theory behind it. Hierarchical clustering, as the name suggests is an algorithm that builds a hierarchy of clusters. It starts with all the data points assigned to a cluster of their own. Then, the two nearest clusters are merged into the same cluster. In the end, this algorithm terminates when there is only a single cluster left.
 
 Following are the steps that are performed during hierarchical clustering:
 
@@ -125,13 +125,13 @@ At the bottom, we start with data points, each assigned to separate clusters. Tw
 
 The decision of the number of clusters that can best depict different groups can be chosen by observing the dendrogram. The best choice of the number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse the maximum distance vertically without intersecting a cluster.
 
-In the above example, the best choice of number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB.
+In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB.
 >    ![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
 
 
-This algorithm has been implemented above using bottom-up approach. It is also possible to follow top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken on the basis of closeness of these clusters.
+This algorithm has been implemented above using the bottom-up approach. It is also possible to follow the top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken based on the proximity of these clusters.
 
-> ### {% icon comment %} Background of iris dataset
+> ### {% icon comment %} Background of the iris dataset
 > The iris flower dataset or Fisher’s iris dataset is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper ({% cite Fisher1936 %}).
 > Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 > For more history of this dataset read here [Wikipedia](https://en.wikipedia.org/wiki/Iris_flower_data_set).
@@ -170,8 +170,8 @@ At the first step, we should upload the iris dataset and two other datasets whic
 >
 {: .hands_on}
 
-Our objective is to categorize the similar flowers in different groups (Figure 6). We know that we have **3** species of iris flowers (versicolor, virginica, setosa) with
-**50** samples for each. These species look very much alike as shown on the figure below.
+Our objective is to categorise similar flowers in different groups (Figure 6). We know that we have **3** species of iris flowers (versicolor, virginica, setosa) with
+**50** samples for each. These species look very much alike as shown in the figure below.
 
 ![3 species of iris flowers](images/iris_flowers.png "3 species of iris flowers")
 
@@ -207,7 +207,7 @@ We will apply hierarchical clustering to iris dataset to find clusters based on 
 
 If you view the result table, you can see the last column is the label for each cluster and as you see, all the setosa samples are grouped in one cluster and two other species (versicolor and virginica) are grouped in the second cluster. From Figure 3 it is obvious that versicolor and virginica are more similar to each other.
 
-## Visualize hierarchical clustering
+### Visualize hierarchical clustering
 
 The resulting candidate clustering can be visualized using the `Scatterplot with ggplot2` tool. Each sample is color-coded based on its clustering for that sample.
 Let's visualize the clustering results to see how groups have been built.
@@ -242,9 +242,9 @@ Let's visualize the clustering results to see how groups have been built.
 ## K-means clustering
 
 K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given dataset into a set of k clusters, where k represents the number of groups pre-specified by the user.
-In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster.The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
+In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster. The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
 
-K-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a the hyperparameter of the algorithm and k-means algorithm can be summarized as follows:
+K-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a hyperparameter of the algorithm and the k-means algorithm can be summarized as follows:
 
 1. Specify the number of clusters (k) to be created (to be specified by users).
 
@@ -254,9 +254,9 @@ K-means is popular because of its speed and scalability. There are several k-mea
 
 4. For each of the k clusters update cluster centroid by calculating the new mean values of all the data points in the cluster.
 
-5. Iteratively minimize the total within sum of square: iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of iterations is reached.
+5. Iteratively minimize the total within the sum of square: iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of iterations is reached.
 
-The parameters that minimize the cost function are learned through an iterative process of assigning data points to clusters and then moving the clusters. A restriction for k-means algorithm is that the dataset should be continuous. It won’t work if data is categorical in nature.
+The parameters that minimize the cost function are learned through an iterative process of assigning data points to clusters and then moving the clusters. A restriction for the k-means algorithm is that the dataset should be continuous. It won’t work if data is categorical.
 
 > ### {% icon hands_on %} Hands-on: K-means clustering
 >
@@ -273,7 +273,7 @@ The parameters that minimize the cost function are learned through an iterative 
 {: .hands_on}
 
 
-## Visualize k-means clustering
+### Visualize k-means clustering
 
 > ### {% icon hands_on %} Hands-on: Visualize k-means clustering result
 >
@@ -336,9 +336,9 @@ The parameters that minimize the cost function are learned through an iterative 
  {: .question }
 
 
-# DBSCAN clustering
+## DBSCAN clustering
 
-DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be of any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples whic are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - `min_samples` is the number of samples in a neighborhood for a point to be considered as a core point and `eps` is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher the value of `min_samples` or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
+DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be of any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples which are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - `min_samples` is the number of samples in a neighborhood for a point to be considered as a core point and `eps` is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher the value of `min_samples` or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
 
 > ### {% icon hands_on %} Hands-on: DBSCAN clustering
 >
@@ -353,7 +353,7 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 {: .hands_on}
 
 
-## Visualise DBSCAN clustering
+### Visualise DBSCAN clustering
 
 > ### {% icon hands_on %} Hands-on: Visualize DBSCAN clustering result
 >
@@ -473,7 +473,7 @@ Then, you can visualize the clustering results using the following steps:
 > 2. **View** {% icon galaxy-eye%} the resulting plots:
 {: .hands_on}
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In k-means algorithm, `k=2` and for the DBSCAN algorithm, the parameters are not the default parameters and should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon datasets (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results in Figure 13 and 14.
+In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In the k-means algorithm, `k=2` and for the DBSCAN algorithm, the parameters are not the default parameters and should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon datasets (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results in Figure 13 and 14.
 
 >    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
 
