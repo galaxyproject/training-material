@@ -10,7 +10,7 @@ objectives:
 - Learn hierarchical clustering algorithm
 - Learn k-means clustering algorithm
 - Learn DBSCAN clustering algorithm
-- Apply clustering algorithms to different data sets
+- Apply clustering algorithms to different datasets
 - Learn how to visualize the results
 key_points:
 - Using clustering methods, category and cluster of the data are learned using hierarchical, k-means and DBSCAN
@@ -72,7 +72,7 @@ Since clustering is a subjective task, there are many algorithms for data cluste
 Now, in this tutorial, we will go through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means, DBSCAN, and a comparison between these methods. Further, we will discuss their parameters and how to apply them to find clusters in the [Iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and a few other datasets.
 
 
-# Clustering Distance Measures
+# Clustering distance measures
 
 Since clustering is the grouping of similar objects, a measure that can determine whether two objects are similar or dissimilar is required. There are two main type of measures used to estimate this relation - distance and similarity measures. The notions of distance and similarity are related. The smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure as its usage depends on the problem.
 
@@ -97,11 +97,11 @@ The choice of a distance measure is critical in clustering. It defines how the s
  >
  {: .question }
 
-Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of Euclidean distance. The distance between two objects is 0 when they are perfectly correlated. [Pearson’s correlation](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) is quite sensitive to outliers. This does not matter
-when clustering samples, because the correlation is over thousands of genes. During clustering genes, it is important to be aware of the possible impact of outliers. This
-can be mitigated by using [Spearman’s correlation](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) instead of Pearson’s correlation.
+Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene expression data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of euclidean distance. The distance between two objects is 0 when they are perfectly correlated. [Pearson’s correlation](https://en.wikipedia.org/wiki/Pearson_correlation_coefficient) is quite sensitive to outliers. This does not matter when clustering samples, because the correlation is over thousands of genes. During clustering of genes, it is important to be aware of the possible impact of outliers. This can be mitigated by using [Spearman’s correlation](https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient) instead of Pearson’s correlation.
 
-# Hierarchical Clustering
+# Different clustering approaches
+
+## Hierarchical clustering
 
 Before seeing hierarchical clustering in action, let us first understand the theory behind the hierarchical clustering. Hierarchical clustering, as the name suggests is an algorithm that builds hierarchy of clusters. This algorithm starts with all the data points assigned to a cluster of their own. Then two nearest clusters are merged into the same cluster. In the end, this algorithm terminates when there is only a single cluster left.
 
@@ -140,7 +140,7 @@ Now we will apply hierarchical clustering to Iris dataset to find clusters based
 {: .comment}
 
 
-At the first step, we should upload the Iris data set.
+At the first step, we should upload the Iris dataset and two other datasets which will be used at the end of the tutorial.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -148,6 +148,8 @@ At the first step, we should upload the Iris data set.
 >
 >    ```
 >    https://zenodo.org/record/3813447/files/iris.csv
+>    https://zenodo.org/record/3813447/files/circles.csv
+>    https://zenodo.org/record/3813447/files/moon.csv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -205,7 +207,7 @@ In the first step we use the hierachical clustering approach.
 
 If you view the result table, you can see the last column is the label for each cluster and as you see, all the setosa samples are grouped in one cluster and two other species (versicolor and virginica) are grouped in the second cluster. From Figure 3 it is obvious that versicolor and virginica are more similar to each other.
 
-## Visualize the clustering results
+## Visualize hierarchical clustering
 
 The resulting candidate clustering can be visualized using the Scatterplot with ggplot2 tool. Each sample is color-coded based on its clustering for that sample.
 Let's visualize the clustering results to see how groups have been built.
@@ -238,16 +240,16 @@ Let's visualize the clustering results to see how groups have been built.
 >    ![data](images/hierarchical_scatter.png "Hierarchical clustering scatter plot")
 
 
-# K-means Algorithm
+## K-means clustering
 
-K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given data set into a set of k clusters, where k represents the number of groups pre-specified by the user.
+K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given dataset into a set of k clusters, where k represents the number of groups pre-specified by the user.
 In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster.The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
 
 K-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a the hyperparameter of the algorithm and k-means algorithm can be summarized as follows:
 
 1. Specify the number of clusters (k) to be created (by the analyst).
 
-2. Select randomly k objects from the data set as the initial cluster centers or means.
+2. Select randomly k objects from the dataset as the initial cluster centers or means.
 
 3. Assign each observation to their closest centroid, based on the Euclidean distance between the object and the centroid.
 
@@ -271,6 +273,8 @@ The parameters that minimize the cost function are learned through an iterative 
 > 2. Rename the generated file to `k-means clustering`
 {: .hands_on}
 
+
+## Visualize k-means clustering
 
 > ### {% icon hands_on %} Hands-on: Visualize k-means clustering result
 >
@@ -316,10 +320,9 @@ The parameters that minimize the cost function are learned through an iterative 
 {: .question}
 
 
-
 > ### {% icon question %} Question
 >
-> What are the differences between k-means and Hierarchical clustering
+> What are the differences between k-means and hierarchical clustering
 >
 > > ### {% icon solution %} Solution
 > >
@@ -335,7 +338,7 @@ The parameters that minimize the cost function are learned through an iterative 
 {: .question}
 
 
-# Clustering with the DBSCAN algorithm
+# DBSCAN clustering
 
 DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples, which are samples that are in areas of high density. A cluster is therefore a set of core samples, each close to each other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not themselves core samples). There are two parameters to the algorithm, maximum neighborhood distance and minimal core point density, which define formally what we mean when we say dense. There are two important parameters in DBSCAN algorithm, min_samples, is the number of samples in a neighborhood for a point to be considered as a core point and eps is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher min_samples or lower eps indicate higher density necessary to form a cluster.
 DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
@@ -353,6 +356,8 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
 > 2. Rename the generated file to `DBSCAN clustering`
 {: .hands_on}
 
+
+## Visualise DBSCAN clustering
 
 > ### {% icon hands_on %} Hands-on: Visualize DBSCAN clustering result
 >
@@ -398,9 +403,11 @@ the algorithm using intrinsic measures.
 > {: .solution}
 {: .question}
 
-# Applying the clustering algorithms on the other datasets
+## Applying clustering algorithms on multiple datasets
 
-You can do the same steps on the other data sets, moon and circles. First, import the data files, [moon.csv](https://zenodo.org/record/3813447/files/moon.csv) and [circles.csv](https://zenodo.org/record/3813447/files/circles.csv) from Zenodo or data library and rename them to `moon` and `circles` respectively. 
+You can do the same steps on the other datasets, moon and circles. First, import the data files, [moon.csv](https://zenodo.org/record/3813447/files/moon.csv) and [circles.csv](https://zenodo.org/record/3813447/files/circles.csv) from Zenodo or data library and rename them to `moon` and `circles` respectively. 
+
+### Visualise datasets
 
 > ### {% icon hands_on %} Hands-on: Visualize scatter plot of data
 >
@@ -423,6 +430,9 @@ You can do the same steps on the other data sets, moon and circles. First, impor
 
 >    ![data](images/circles_moon_scatter.png "Scatter plot of circles and moon Data")
 
+
+### Find clusters
+
 Now you can find clusters in these datasets using the introduced algorithms.
 
 > ### {% icon hands_on %} Hands-on: Hierarchical clustering of circles and moon datasets
@@ -443,6 +453,7 @@ Now you can find clusters in these datasets using the introduced algorithms.
 > 2. Rename the generated files to `circles hierarchical clustering` and `moon hierarchical clustering` respectively
 {: .hands_on}
 
+### Visualise clusters
 
 Then, you can visualize the clustering results using the following steps:
 
@@ -471,7 +482,7 @@ Then, you can visualize the clustering results using the following steps:
 > 2. **View** {% icon galaxy-eye%} the resulting plots:
 
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in similar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
+In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in similar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles dataset (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
 
 >    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
 
