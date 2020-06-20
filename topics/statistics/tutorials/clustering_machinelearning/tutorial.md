@@ -24,13 +24,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial we will discuss an unsupervised learning task called clustering.   
-Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items? 
-Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example clustering of gene expressions provides understanding gene functions, cellular processes, subtypes of cells and gene regulations.
+The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial we will discuss an unsupervised learning task called clustering. Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items.
 
-For example, in biology, clustering is often one of the first steps in gene expression analysis and is used to find groups of genes with similar expression patterns.
+Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, expressions, texts and images. For example clustering of gene expressions provides understanding gene functions, cellular processes, subtypes of cells and gene regulations. Please refer to [ref1](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171429) and [ref2](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/). For example, clustering is often used in gene expression analysis to find groups of genes with similar expression patterns.
 
-We represent an observation as an n-dimensional vector. For example, assume that your training data consists of the samples plotted in the following Figure 1:
+We represent an observation/sample as an n-dimensional vector and many such vectors constitute a dataset. To show an example, let us assume that a dataset, shown in Figure 1, contains many samples and each sample has two dimensions each:
 
 >    ![data](images/data_before_clustering.png "Sample data before clustering")
 
@@ -39,14 +37,13 @@ Clustering reveals the following three groups, indicated by different colors:
 >    ![data](images/data_after_clustering.png "Sample data after clustering")
 
 
-Broadly speaking, clustering can be divided into two subgroups :
+Clustering can be divided into two subgroups:
 
-- Hard Clustering: Each data point either belongs to a cluster completely or not.
+- Hard: Each data point either belongs to a cluster completely or not.
 	
-- Soft Clustering: Instead of putting each data point into a separate cluster, a probability or likelihood of that data point to be in those clusters is assigned. 
+- Soft: Instead of putting each data point into a separate cluster, a probability or likelihood of that data point to be in those clusters is assigned. 
 
 The goal of clustering is to determine the internal grouping in a set of unlabeled data. But how to decide what constitutes a good clustering? It can be shown that there is no absolute best criterion which would be independent of the final aim of the clustering approach. Consequently, the users should apply an appropriate criterion based on the problem.
-
 
 
 > ### Agenda
@@ -61,31 +58,27 @@ The goal of clustering is to determine the internal grouping in a set of unlabel
 
 # Types of clustering algorithms
 
-Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining similarity. There are many clustering algorithms known. But few of the algorithms are used popularly and we can categorized them as follows: 
+Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining similarity. There are many known clustering algorithms. But, only a few of them are popular and can be categorized as follows: 
 
- - Connectivity models: As the name suggests, these algorithms are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches: In the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lacks scalability for handling big datasets. Examples of these models are hierarchical clustering algorithms and its variants.
+ - Connectivity models: As the name suggests, these algorithms are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches - in the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lacks scalability for handling big datasets. Examples are hierarchical clustering and its variants.
 
- - Centroid models: These are iterative clustering algorithms in which the notion of similarity is derived by the closeness of a data point to the centroid of the clusters. K-means clustering algorithm is a popular algorithm that falls into this category. In these models, the number of clusters required at the end have to be mentioned beforehand, which makes it important to have prior knowledge of the dataset. These models run iteratively to find the local optima.
+ - Centroid models: These are iterative clustering algorithms in which the notion of similarity is derived by the closeness of a data point to the centroid of the clusters. [k-means](https://en.wikipedia.org/wiki/K-means_clustering) clustering is a popular algorithm that falls into this category. It runs iteratively to find a fixed number of clusters which needs to be specified before running it. Therefore, to fix this number of clusters, it is required to have some prior knowledge about the dataset.
 
- - Density Models: These algorithms search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular example of density models is [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN).
+ - Density models: These algorithms search the data space for areas of varied density of data points. They isolate various different density regions and assign the data points within these regions in the same cluster. Popular example of density model is [DBSCAN](https://en.wikipedia.org/wiki/DBSCAN).
 
  - Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in a cluster belong to the same distribution such as Gaussian. These algorithms often suffer from overfitting. A popular example is [expectation-maximization](https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm) (EM) algorithm which uses multivariate normal distributions.
 
 
-Now, in this tutorial, we will be taking you through three of the most popular clustering algorithms in detail: hierarchical clustering, k-means, DBSCAN, and a comparison between these methods.
-
-In the following, we will discuss these clustering algorithms and their parameters and how to apply them to categorize data from the Iris flower and some other data sets.
+Now, in this tutorial, we will go through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means, DBSCAN, and a comparison between these methods. Further, we will discuss their parameters and how to apply them to find clusters in the [Iris flower dataset](https://en.wikipedia.org/wiki/Iris_flower_data_set) and a few other datasets.
 
 
 # Clustering Distance Measures
 
-Since clustering is the grouping of similar objects, some sort of measure that can determine whether two objects are similar or dissimilar is required. There are two main type of measures used to estimate this relation: distance measures and similarity measures. The notions of distance and similarity are related, since the smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure, since the usage depends on the task.
+Since clustering is the grouping of similar objects, a measure that can determine whether two objects are similar or dissimilar is required. There are two main type of measures used to estimate this relation - distance and similarity measures. The notions of distance and similarity are related. The smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure as its usage depends on the problem.
 
-Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects.  A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors.
-The clustering requires some methods for computing the distance or the (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.
+Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects. A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors. Clustering requires some methods for computing the distance or (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.
 
-The choice of distance measures is a critical step in clustering. It defines how the similarity of two elements (x, y) is calculated and it will influence the shape of the
-clusters. The classical distance measures are [Euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [Manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances and for most common clustering tools, the default distance measure is Euclidean. If Euclidean distance is chosen, then observations with high values of features will be clustered together. The same holds true for observations with low values of features. In Figure 3, we are trying to group the cells using Euclidean distance and this distance matrix.
+The choice of a distance measure is critical in clustering. It defines how the similarity of two elements `(x, y)` is calculated and it will influence the shape of the clusters. The classical distance measures are [euclidean](https://en.wikipedia.org/wiki/Euclidean_distance) and [manhattan](https://en.wikipedia.org/wiki/Taxicab_geometry) distances. For the most common clustering algorithms, the default distance measure is euclidean. If euclidean distance is chosen, then observations having high magnitude of their respective features will be clustered together. The same holds true for the observations having low magnitude of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.
 
 ![Distances](images/raceid_distance.svg "Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)")
 
@@ -126,14 +119,14 @@ Following are the steps that are performed during hierarchical clustering:
 
 Let’s now see how dendrograms help in hierarchical clustering. 
 
->    ![data](images/Hierarchical_clustering_1.png "Hierarchical Clustering")
+>    ![data](images/Hierarchical_clustering_1.png "Hierarchical clustering")
 
 At the bottom, we start with data points, each assigned to separate clusters. Two closest clusters are then merged till we have just one cluster at the top. The height in the dendrogram at which two clusters are merged represents the distance between two clusters in the data space.
 
 The decision of the number of clusters that can best depict different groups can be chosen by observing the dendrogram. The best choice of the number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse the maximum distance vertically without intersecting a cluster.
 
 In the above example, the best choice of number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB.
->    ![data](images/Hierarchical_clustering_2.png "Hierarchical Clustering")
+>    ![data](images/Hierarchical_clustering_2.png "Hierarchical clustering")
 
 
 This algorithm has been implemented above using bottom up approach. It is also possible to follow top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken on the basis of closeness of these clusters. 
@@ -242,7 +235,7 @@ Let's visualize the clustering results to see how groups have been built.
 > 3. Rename to `Hierarchical scatter plot`
 
 
->    ![data](images/hierarchical_scatter.png "Hierarchical Clustering Scatter Plot")
+>    ![data](images/hierarchical_scatter.png "Hierarchical clustering scatter plot")
 
 
 # K-means Algorithm
@@ -281,7 +274,7 @@ The parameters that minimize the cost function are learned through an iterative 
 
 > ### {% icon hands_on %} Hands-on: Visualize k-means clustering result
 >
-> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+> 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **k-means clustering**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -304,7 +297,7 @@ The parameters that minimize the cost function are learned through an iterative 
 > 3. Rename to `k-means scatter plot`
 
 
->    ![data](images/k_means_scatter.png "K-means Clustering Scatter Plot")
+>    ![data](images/k_means_scatter.png "K-means clustering scatter plot")
 
 
 > ### {% icon question %} Question
@@ -330,7 +323,7 @@ The parameters that minimize the cost function are learned through an iterative 
 >
 > > ### {% icon solution %} Solution
 > >
-> > Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of K Means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).
+> > Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of k-means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).
 > >
 > > In k-means clustering, since we start with random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.
 > >
@@ -363,7 +356,7 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
 
 > ### {% icon hands_on %} Hands-on: Visualize DBSCAN clustering result
 >
-> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+> 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **DBSCAN clustering**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -414,7 +407,7 @@ You can do the same steps on the other data sets, moon and circles. First, impor
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
 >
 >    {% include snippets/select_multiple_datasets.md %}
->    - {% icon param-file %} *"Input tabular dataset"*: `circles` and `moon` as **Multiple datasets**
+>    - {% icon param-file %} *"Input tabular dataset"*: `circles` and `moon` as **multiple datasets**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
 >    - *"Plot title"*: `Scatter Plot`
@@ -428,7 +421,7 @@ You can do the same steps on the other data sets, moon and circles. First, impor
 > 2. **View** {% icon galaxy-eye%} the resulting plots
 
 
->    ![data](images/circles_moon_scatter.png "Scatter Plot of circles and moon Data")
+>    ![data](images/circles_moon_scatter.png "Scatter plot of circles and moon Data")
 
 Now you can find clusters in these datasets using the introduced algorithms.
 
@@ -438,7 +431,7 @@ Now you can find clusters in these datasets using the introduced algorithms.
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >    - *"Select the format of input data"*: `Tabular Format (tabular,txt)`
->        - {% icon param-file %} *"Data file with numeric values"*: `cirlces` and `moon` as **Multiple datasets**
+>        - {% icon param-file %} *"Data file with numeric values"*: `cirlces` and `moon` as **multiple datasets**
 >        - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >        - {% icon param-select %} *"Choose how to select data by column"*: `All`
 >        - {% icon param-select %} *"Clustering Algorithm"*: `Hierarchical Agglomerative Clustering`
@@ -456,7 +449,7 @@ Then, you can visualize the clustering results using the following steps:
 > ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result on circles and moon datasets.
 >
 > 1. **Scatterplot with ggplot2** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input tabular dataset"*: `circles hierarchical clustering` and `moon hierarchical clustering` as **Multiple datasets**
+>    - {% icon param-file %} *"Input tabular dataset"*: `circles hierarchical clustering` and `moon hierarchical clustering` as **multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >    - *"Column to plot on x-axis"*: `1`
@@ -480,9 +473,9 @@ Then, you can visualize the clustering results using the following steps:
 
 In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in similar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14. 
 
->    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles data")
+>    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
 
->    ![data](images/moon_clustering.png "Plot of clustering algorithms on moon Data")
+>    ![data](images/moon_clustering.png "Plot of clustering algorithms on moon dataset")
 
 
 # Conclusion
