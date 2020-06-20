@@ -317,27 +317,28 @@ The parameters that minimize the cost function are learned through an iterative 
 {: .question}
 
 
-> ### {% icon question %} Question
->
-> What are the differences between k-means and hierarchical clustering techniques
->
-> > ### {% icon solution %} Solution
-> >
-> > Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of k-means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).
-> >
-> > In k-means clustering, since we start with random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.
-> >
-> > K-means is found to work well when the shape of the clusters is hyper spherical (like circle in 2D, sphere in 3D).
-> >
-> > K-means clustering requires prior knowledge of K i.e. no. of clusters to divide the dataset into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram
-> >
-> {: .solution}
-{: .question}
+ > ### {% icon question %} Questions
+ >
+ > What are the differences between k-means and hierarchical clustering techniques
+ >
+ > > ### {% icon solution %} Solution
+ > >
+ > > 1. Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of k-means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).
+ > > 
+ > > 2. In k-means clustering, since we start with random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.
+ > >
+ > > 3. K-means is found to work well when the shape of the clusters is hyper spherical (like circle in 2D, sphere in 3D).
+ > >
+ > > 4. K-means clustering requires prior knowledge of K i.e. no. of clusters to divide the dataset into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram
+ > >
+ > {: .solution }
+ >
+ {: .question }
 
 
 # DBSCAN clustering
 
-DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be of any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples whic are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - `min\_samples` is the number of samples in a neighborhood for a point to be considered as a core point and `eps` is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher the value of `min\_samples` or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
+DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be of any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples whic are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - `min_samples` is the number of samples in a neighborhood for a point to be considered as a core point and `eps` is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher the value of `min_samples` or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.
 
 > ### {% icon hands_on %} Hands-on: DBSCAN clustering
 >
