@@ -241,7 +241,7 @@
   "name": "Hands-on for 'Clustering in Machine Learning' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/clustering_machinelearning/tutorial.html",
   "timeRequired": "PT2H",
-  "description": "The questions this  addresses are:\n - How to use clustering algorithms to categorized data in different clusters\n\n\\nThe objectives are:\n - Learn clustering background\n - Learn hierarchical clustering algorithm\n - Learn k-means clustering algorithm\n - Learn DBSCAN clustering algorithm\n - Apply clustering algorithms to different data sets\n - Learn how to visualize the results\n\n",
+  "description": "The questions this  addresses are:\n - How to use clustering algorithms to categorized data in different clusters\n\n\\nThe objectives are:\n - Learn clustering background\n - Learn hierarchical clustering algorithm\n - Learn k-means clustering algorithm\n - Learn DBSCAN clustering algorithm\n - Apply clustering algorithms to different datasets\n - Learn how to visualize clusters\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -332,10 +332,10 @@
             <li><p>Learn DBSCAN clustering algorithm</p>
 </li>
             
-            <li><p>Apply clustering algorithms to different data sets</p>
+            <li><p>Apply clustering algorithms to different datasets</p>
 </li>
             
-            <li><p>Learn how to visualize the results</p>
+            <li><p>Learn how to visualize clusters</p>
 </li>
             
             </ul>
@@ -406,6 +406,8 @@
             </a>
         </li>
     
+    
+        
     
         
     
@@ -548,7 +550,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 18, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 20, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -560,13 +562,11 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial we will discuss an unsupervised learning task called clustering. <br />
-Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items? 
-Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, <span class="notranslate">expression</span>s, texts and images. For example clustering of gene <span class="notranslate">expression</span>s provides understanding gene functions, cellular processes, subtypes of cells and gene regulations.</p>
+<p>The goal of unsupervised learning is to discover hidden structures or patterns in unlabeled training data. In this tutorial, we will discuss an unsupervised learning task called clustering. Clustering is the grouping of specific objects based on their characteristics and their similarities. These groups are called clusters. A cluster consists of data objects with high inter-similarity and low intra-similarity. It means members of the same cluster, are more similar to each other by a given metric than they are to the members of the other clusters. The goal of clustering is to subdivide a set of items in such a way that similar items fall into the same cluster, whereas dissimilar items fall in different clusters. This brings up two questions: first, how do we decide what is similar; and second, how do we use this information to cluster the items.</p>
 
-<p>For example, in biology, clustering is often one of the first steps in gene <span class="notranslate">expression</span> analysis and is used to find groups of genes with similar <span class="notranslate">expression</span> patterns.</p>
+<p>Clustering is central to many bioinformatics research. In particular, clustering helps at analyzing unstructured and high-dimensional data in the form of sequences, <span class="notranslate">expression</span>s, texts and images. For example, clustering is often used in gene <span class="notranslate">expression</span> analysis to find groups of genes with similar <span class="notranslate">expression</span> patterns which provides a useful understanding of gene functions, cellular processes, subtypes of cells and gene regulations. Please refer to <a href="https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0171429">ref1</a> and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5135122/">ref2</a>.</p>
 
-<p>We represent an observation as an n-dimensional vector. For example, assume that your training data consists of the samples plotted in the following Figure 1:</p>
+<p>We represent an observation/sample as an n-dimensional vector and many such vectors constitute a dataset. To show an example, let us assume that a dataset, shown in Figure 1, contains many samples and each sample has two dimensions each:</p>
 
 <blockquote>
   <figure id="figure-1"><img src="images/data_before_clustering.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Sample data before clustering</figcaption></figure>
@@ -578,14 +578,14 @@ Clustering is central to many bioinformatics research. In particular, clustering
   <figure id="figure-2"><img src="images/data_after_clustering.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sample data after clustering</figcaption></figure>
 </blockquote>
 
-<p>Broadly speaking, clustering can be divided into two subgroups :</p>
+<p>Clustering can be divided into two subgroups:</p>
 
 <ul>
   <li>
-    <p>Hard Clustering: Each data point either belongs to a cluster completely or not.</p>
+    <p>Hard: Each data point either belongs to a cluster completely or not.</p>
   </li>
   <li>
-    <p>Soft Clustering: Instead of putting each data point into a separate cluster, a probability or likelihood of that data point to be in those clusters is assigned.</p>
+    <p>Soft: Instead of putting each data point into a separate cluster, a probability or likelihood of that data point to be in those clusters is assigned.</p>
   </li>
 </ul>
 
@@ -598,14 +598,19 @@ Clustering is central to many bioinformatics research. In particular, clustering
 
 <ol id="markdown-toc">
   <li><a href="#types-of-clustering-algorithms" id="markdown-toc-types-of-clustering-algorithms">Types of clustering algorithms</a></li>
-  <li><a href="#clustering-distance-measures" id="markdown-toc-clustering-distance-measures">Clustering Distance Measures</a></li>
-  <li><a href="#hierarchical-clustering" id="markdown-toc-hierarchical-clustering">Hierarchical Clustering</a>    <ol>
-      <li><a href="#visualize-the-clustering-results" id="markdown-toc-visualize-the-clustering-results">Visualize the clustering results</a></li>
+  <li><a href="#clustering-distance-measures" id="markdown-toc-clustering-distance-measures">Clustering distance measures</a></li>
+  <li><a href="#different-clustering-approaches" id="markdown-toc-different-clustering-approaches">Different clustering approaches</a>    <ol>
+      <li><a href="#hierarchical-clustering" id="markdown-toc-hierarchical-clustering">Hierarchical clustering</a></li>
+      <li><a href="#k-means-clustering" id="markdown-toc-k-means-clustering">K-means clustering</a></li>
+      <li><a href="#dbscan-clustering" id="markdown-toc-dbscan-clustering">DBSCAN clustering</a></li>
     </ol>
   </li>
-  <li><a href="#k-means-algorithm" id="markdown-toc-k-means-algorithm">K-means Algorithm</a></li>
-  <li><a href="#clustering-with-the-dbscan-algorithm" id="markdown-toc-clustering-with-the-dbscan-algorithm">Clustering with the DBSCAN algorithm</a></li>
-  <li><a href="#applying-the-clustering-algorithms-on-the-other-datasets" id="markdown-toc-applying-the-clustering-algorithms-on-the-other-datasets">Applying the clustering algorithms on the other datasets</a></li>
+  <li><a href="#applying-clustering-algorithms-on-multiple-datasets" id="markdown-toc-applying-clustering-algorithms-on-multiple-datasets">Applying clustering algorithms on multiple datasets</a>    <ol>
+      <li><a href="#visualise-datasets" id="markdown-toc-visualise-datasets">Visualise datasets</a></li>
+      <li><a href="#find-clusters" id="markdown-toc-find-clusters">Find clusters</a></li>
+      <li><a href="#visualise-clusters" id="markdown-toc-visualise-clusters">Visualise clusters</a></li>
+    </ol>
+  </li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
@@ -613,36 +618,32 @@ Clustering is central to many bioinformatics research. In particular, clustering
 
 <h1 id="types-of-clustering-algorithms">Types of clustering algorithms</h1>
 
-<p>Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining similarity. There are many clustering algorithms known. But few of the algorithms are used popularly and we can categorized them as follows:</p>
+<p>Since clustering is a subjective task, there are many algorithms for data clustering. Every method follows a different set of rules for defining similarity. There are many known clustering algorithms. But, only a few of them are popular and can be categorized as follows:</p>
 
 <ul>
   <li>
-    <p>Connectivity models: As the name suggests, these models are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches: In the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lacks scalability for handling big datasets. Examples of these models are hierarchical clustering algorithms and its variants.</p>
+    <p>Connectivity models: As the name suggests, these algorithms are based on the notion that the data points closer in data space exhibit more similarity to each other than the data points lying farther away. These models can follow two approaches - in the first approach, they start with classifying all data points into separate clusters and then aggregating them as the distance decreases. In the second approach, all data points are classified as a single cluster and then partitioned as the distance increases. Also, the choice of distance function is subjective. These models are very easy to interpret but lack scalability for handling big datasets. Examples are hierarchical clustering and its variants.</p>
   </li>
   <li>
-    <p>Centroid models: These are iterative clustering algorithms in which the notion of similarity is derived by the closeness of a data point to the centroid of the clusters. K-means clustering algorithm is a popular algorithm that falls into this category. In these models, the number of clusters required at the end have to be mentioned beforehand, which makes it important to have prior knowledge of the dataset. These models run iteratively to find the local optima.</p>
+    <p>Centroid models: These are iterative clustering algorithms in which the notion of similarity is derived by the closeness of a data point to the centroid of the clusters. <a href="https://en.wikipedia.org/wiki/K-means_clustering">k-means</a> clustering is a popular algorithm that falls into this category. It runs iteratively to find a fixed number of clusters which needs to be specified before running it. Therefore, to fix this number of clusters, it is required to have some prior knowledge about the dataset.</p>
   </li>
   <li>
-    <p>Density Models: These models search the data space for areas of varied density of data points in the data space. It isolates various different density regions and assign the data points within these regions in the same cluster. Popular example of density models is DBSCAN.</p>
+    <p>Density models: These algorithms search the data space for areas of varied density of data points. They isolate various density regions and assign the data points within these regions in the same cluster. A popular example of a density model is <a href="https://en.wikipedia.org/wiki/DBSCAN">DBSCAN</a>.</p>
   </li>
   <li>
-    <p>Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in the cluster belong to the same distribution, for example normal, Gaussian. These models often suffer from overfitting. A popular example of these models is the expectation-maximization algorithm which uses multivariate normal distributions.</p>
+    <p>Distribution models: These clustering algorithms are based on the notion of how probable it is that all data points in a cluster belong to the same distribution such as Gaussian. These algorithms often suffer from overfitting. A popular example is <a href="https://en.wikipedia.org/wiki/Expectation%E2%80%93maximization_algorithm">expectation-maximization</a> (EM) algorithm which uses multivariate normal distributions.</p>
   </li>
 </ul>
 
-<p>Now, in this tutorial, we will be taking you through three of the most popular clustering algorithms in detail: hierarchical clustering, k-means, DBSCAN, and a comparison between these methods.</p>
+<p>Now, in this tutorial, we will go through three of the most popular clustering algorithms in detail, hierarchical clustering, k-means, DBSCAN, and a comparison between these methods. Further, we will discuss their parameters and how to apply them to find clusters in the <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">iris flower dataset</a> and a few other datasets.</p>
 
-<p>In the following, we will discuss these clustering algorithms and their parameters and how to apply them to categorize data from the Iris flower and some other data sets.</p>
+<h1 id="clustering-distance-measures">Clustering distance measures</h1>
 
-<h1 id="clustering-distance-measures">Clustering Distance Measures</h1>
+<p>Since clustering is the grouping of similar objects, a measure that can determine whether two objects are similar or dissimilar is required. There are two main types of measures used to estimate this relation - distance and similarity measures. The notions of distance and similarity are related. The smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure as its usage depends on the problem.</p>
 
-<p>Since clustering is the grouping of similar objects, some sort of measure that can determine whether two objects are similar or dissimilar is required. There are two main type of measures used to estimate this relation: distance measures and similarity measures. The notions of distance and similarity are related, since the smaller the distance between two objects, the more similar they are to each other. All measures refer to the feature values in some way, but they consider different properties of the feature vector. There is no optimal similarity measure, since the usage depends on the task.</p>
+<p>Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects. A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors. Clustering requires some methods for computing the distance or (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.</p>
 
-<p>Many clustering algorithms use distance measures to determine the similarity or dissimilarity between any pair of objects.  A valid distance measure should be symmetric and obtains its minimum value (usually zero) in case of identical vectors.
-The clustering requires some methods for computing the distance or the (dis)similarity between each pair of observations. The result of this computation is known as a dissimilarity or distance matrix.</p>
-
-<p>The choice of distance measures is a critical step in clustering. It defines how the similarity of two elements (x, y) is calculated and it will influence the shape of the
-clusters. The classical distance measures are Euclidean and Manhattan distances and for most common clustering tools, the default distance measure is Euclidean. If Euclidean distance is chosen, then observations with high values of features will be clustered together. The same holds true for observations with low values of features. In Figure 3, we are trying to group the cells using Euclidean distance and this distance matrix.</p>
+<p>The choice of a distance measure is critical in clustering. It defines how the similarity of two elements <code class="language-plaintext highlighter-rouge">(x, y)</code> is calculated and it will influence the shape of the clusters. The classical distance measures are <a href="https://en.wikipedia.org/wiki/Euclidean_distance">euclidean</a> and <a href="https://en.wikipedia.org/wiki/Taxicab_geometry">manhattan</a> distances. For the most common clustering algorithms, the default distance measure is euclidean. If the euclidean distance is chosen, then observations having high magnitudes of their respective features will be clustered together. The same holds for the observations having low magnitudes of their respective features. In Figure 3, we group the cells using euclidean distance and their distance matrix.</p>
 
 <figure id="figure-3"><img src="images/raceid_distance.svg" alt="Distances" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Euclidean distance between three points (R, P, V) across three features (G1, G2, G3)</figcaption></figure>
 
@@ -666,19 +667,19 @@ clusters. The classical distance measures are Euclidean and Manhattan distances 
 
 </blockquote>
 
-<p>Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene <span class="notranslate">expression</span> data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of Euclidean distance. The distance between two objects is 0 when they are perfectly correlated. Pearson’s correlation is quite sensitive to outliers. This does not matter
-when clustering samples, because the correlation is over thousands of genes. During clustering genes, it is important to be aware of the possible impact of outliers. This
-can be mitigated by using Spearman’s correlation instead of Pearson’s correlation.</p>
+<p>Other dissimilarity measures exist such as correlation-based distances, which are widely used for gene <span class="notranslate">expression</span> data analyses. Correlation-based distance considers two objects to be similar if their features are highly correlated, even though the observed values may be far apart in terms of euclidean distance. The distance between the two objects is 0 when they are perfectly correlated. <a href="https://en.wikipedia.org/wiki/Pearson_correlation_coefficient">Pearson’s correlation</a> is quite sensitive to outliers. This does not matter when clustering samples, because the correlation is over thousands of genes. During the clustering of genes, it is important to be aware of the possible impact of outliers. This can be mitigated by using <a href="https://en.wikipedia.org/wiki/Spearman%27s_rank_correlation_coefficient">Spearman’s correlation</a> instead of Pearson’s correlation.</p>
 
-<h1 id="hierarchical-clustering">Hierarchical Clustering</h1>
+<h1 id="different-clustering-approaches">Different clustering approaches</h1>
 
-<p>Before seeing hierarchical clustering in action, let us first understand the theory behind the hierarchical clustering. Hierarchical clustering, as the name suggests is an algorithm that builds hierarchy of clusters. This algorithm starts with all the data points assigned to a cluster of their own. Then two nearest clusters are merged into the same cluster. In the end, this algorithm terminates when there is only a single cluster left.</p>
+<h2 id="hierarchical-clustering">Hierarchical clustering</h2>
+
+<p>Before using hierarchical clustering, let us first understand the theory behind it. Hierarchical clustering, as the name suggests is an algorithm that builds a hierarchy of clusters. It starts with all the data points assigned to a cluster of their own. Then, the two nearest clusters are merged into the same cluster. In the end, this algorithm terminates when there is only a single cluster left.</p>
 
 <p>Following are the steps that are performed during hierarchical clustering:</p>
 
 <ol>
   <li>
-    <p>In the beginning, every data point in the dataset is treated as a cluster which means that we have N clusters at the beginning of the algorithm.</p>
+    <p>In the beginning, every data point in the dataset is treated as a cluster which means that we have <code class="language-plaintext highlighter-rouge">N</code> clusters at the beginning of the algorithm for a dataset of size <code class="language-plaintext highlighter-rouge">N</code>.</p>
   </li>
   <li>
     <p>The distance between all the points is calculated and two points closest to each other are joined together to a form a cluster.</p>
@@ -697,29 +698,28 @@ can be mitigated by using Spearman’s correlation instead of Pearson’s correl
 <p>Let’s now see how dendrograms help in hierarchical clustering.</p>
 
 <blockquote>
-  <figure id="figure-4"><img src="images/Hierarchical_clustering_1.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Hierarchical Clustering</figcaption></figure>
+  <figure id="figure-4"><img src="images/Hierarchical_clustering_1.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Hierarchical clustering</figcaption></figure>
 </blockquote>
 
 <p>At the bottom, we start with data points, each assigned to separate clusters. Two closest clusters are then merged till we have just one cluster at the top. The height in the dendrogram at which two clusters are merged represents the distance between two clusters in the data space.</p>
 
 <p>The decision of the number of clusters that can best depict different groups can be chosen by observing the dendrogram. The best choice of the number of clusters is the number of vertical lines in the dendrogram cut by a horizontal line that can transverse the maximum distance vertically without intersecting a cluster.</p>
 
-<p>In the above example, the best choice of number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB.</p>
+<p>In the above example, the best choice of the number of clusters will be 4 as the red horizontal line in the dendrogram below covers maximum vertical distance AB.</p>
 <blockquote>
-  <figure id="figure-5"><img src="images/Hierarchical_clustering_2.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Hierarchical Clustering</figcaption></figure>
+  <figure id="figure-5"><img src="images/Hierarchical_clustering_2.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Hierarchical clustering</figcaption></figure>
 </blockquote>
 
-<p>This algorithm has been implemented above using bottom up approach. It is also possible to follow top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster.
-The decision of merging two clusters is taken on the basis of closeness of these clusters.</p>
-
-<p>Now we will apply hierarchical clustering to Iris data set, and learn to measure its performance. At the first step, we should upload the Iris data set.</p>
+<p>This algorithm has been implemented above using the bottom-up approach. It is also possible to follow the top-down approach starting with all data points assigned in the same cluster and recursively performing splits till each data point is assigned a separate cluster. The decision of merging two clusters is taken based on the proximity of these clusters.</p>
 
 <blockquote class="comment">
-  <h3 id="comment-background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
-  <p>The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<a class="citation" href="#Fisher1936">Fisher 1936</a>).
-Each row of the table represents an Iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
+  <h3 id="comment-background-of-the-iris-dataset"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background of the iris dataset</h3>
+  <p>The iris flower dataset or Fisher’s iris dataset is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<a class="citation" href="#Fisher1936">Fisher 1936</a>).
+Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
 For more history of this dataset read here <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia</a>.</p>
 </blockquote>
+
+<p>At the first step, we should upload the iris dataset and two other datasets which will be used at the end of the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -729,6 +729,8 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
       <p><strong>Import</strong> <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> the file <code class="language-plaintext highlighter-rouge">iris.csv</code> from <a href="https://zenodo.org/record/3813447/files/iris.csv">Zenodo</a> or from the data library</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3813447/files/iris.csv
+https://zenodo.org/record/3813447/files/circles.csv
+https://zenodo.org/record/3813447/files/moon.csv
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -775,7 +777,7 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
       </blockquote>
     </li>
     <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">iris</code></p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets to <code class="language-plaintext highlighter-rouge">iris</code>, <code class="language-plaintext highlighter-rouge">circles</code> and <code class="language-plaintext highlighter-rouge">moon</code> respectively.</p>
 
       <blockquote class="tip">
 
@@ -826,12 +828,12 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
 
 </blockquote>
 
-<p>Our objective is to categorize the similar flowers in different groups (Figure 6). We know that we have <strong>3</strong> species of Iris flowers (versicolor, virginica, setosa) with
-<strong>50</strong> samples for each. These species look very much alike as shown on the figure below.</p>
+<p>Our objective is to categorise similar flowers in different groups (Figure 6). We know that we have <strong>3</strong> species of iris flowers (versicolor, virginica, setosa) with
+<strong>50</strong> samples for each. These species look very much alike as shown in the figure below.</p>
 
-<figure id="figure-6"><img src="images/iris_flowers.png" alt="3 species of Iris flowers" /><figcaption><span class="figcaption-prefix">Figure 6:</span> 3 species of Iris flowers</figcaption></figure>
+<figure id="figure-6"><img src="images/iris_flowers.png" alt="3 species of iris flowers" /><figcaption><span class="figcaption-prefix">Figure 6:</span> 3 species of iris flowers</figcaption></figure>
 
-<p>In our dataset, we have the following features measured for each sample: petal length, petal width, sepal length, sepal width</p>
+<p>In our dataset, we have the following features measured for each flower: <a href="https://en.wikipedia.org/wiki/Petal">petal</a> length, petal width, <a href="https://en.wikipedia.org/wiki/Sepal">sepal</a> length, sepal width</p>
 
 <p>Figure 7 shows the dendrogram of these data.</p>
 
@@ -839,37 +841,8 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
   <figure id="figure-7"><img src="images/Hierarchical_iris.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Iris data hierarchical clustering</figcaption></figure>
 </blockquote>
 
-<p>For the clustering purpose, the tools we will use require tab-separated files, so in the first step we will convert the file from comma-separated to tab-separated format. <span class="notranslate">Galaxy</span> has built-in format converters we can use for this.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-converting-dataset-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting dataset format</h3>
-
-  <ol>
-    <li>
-      <p><strong>Convert</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the CSV file (comma-separated values) to tabular format (tsv; tab-separated values)</p>
-
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-converting-the-file-format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
-        <ul>
-          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>
-          <li>Select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>
-          <li>Click the <strong>Convert datatype</strong> button</li>
-        </ul>
-      </blockquote>
-    </li>
-    <li>
-      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the resulting dataset to <code class="language-plaintext highlighter-rouge">iris tabular</code></p>
-    </li>
-  </ol>
-
-  <blockquote>
-
-  </blockquote>
-</blockquote>
-
-<p>At the first step we use the hierachical clustering approach.</p>
+<p>We will apply hierarchical clustering to iris dataset to find clusters based on two features (of flowers) - sepal length and width. 
+Hint: Please find the <code class="language-plaintext highlighter-rouge">Numeric Clustering</code> tool in <code class="language-plaintext highlighter-rouge">Statistics</code> tool section.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-hierarchical-clustering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Hierarchical clustering</h3>
@@ -879,15 +852,21 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
       <ul>
         <li><em>“Select the format of input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular Format (tabular,txt)</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">iris tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">iris</code></li>
             <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+              </ul>
+            </li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Clustering Algorithm”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical Agglomerative Clustering</code></li>
-            <li>In <em>“Advanced option”</em>  <br />
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of clusters”</em>: <code class="language-plaintext highlighter-rouge">2</code>
-      - <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Affinity”</em>: <code class="language-plaintext highlighter-rouge">Euclidean</code>
-      - <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Linkage”</em>: <code class="language-plaintext highlighter-rouge">ward</code></li>
+            <li>In <em>“Advanced options”</em>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of clusters”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Affinity”</em>: <code class="language-plaintext highlighter-rouge">Euclidean</code></li>
+                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Linkage”</em>: <code class="language-plaintext highlighter-rouge">ward</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -896,14 +875,14 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
   </ol>
 </blockquote>
 
-<p>If you view the result table, you can see the last column is the label for each cluster and as you see, all the setosa samples are grouped in one cluster and two other species (versicolor and virginica) are grouped in the second cluster. From Figure 3 it is obvious that versicolor and virginica are more similar to each other.</p>
+<p>If you view the result table, you can see the last column is the label for each cluster and as you see, all the setosa samples are grouped in one cluster and two other species (versicolor and virginica) are grouped in the second cluster. From Figure 3, it is obvious that versicolor and virginica are more similar to each other.</p>
 
-<h2 id="visualize-the-clustering-results">Visualize the clustering results</h2>
+<h3 id="visualize-hierarchical-clustering">Visualize hierarchical clustering</h3>
 
-<p>The resulting candidate clustering can be visualized using the Scatterplot with ggplot2 tool. Each sample is color-coded based on its clustering for that sample. 
-Let’s visualize the clustering results to see how groups have been built.</p>
+<p>The resulting candidate clustering can be visualized using the <code class="language-plaintext highlighter-rouge">Scatterplot with ggplot2</code> tool. Each sample is color-coded based on its clustering for that sample.
+Let’s visualize the clustering results to see how groups have been built. Hint: Please find the <code class="language-plaintext highlighter-rouge">Scatterplot with ggplot2</code> tool in <code class="language-plaintext highlighter-rouge">Graph/Display data</code> tool section.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualize-hierarchical-clustering-result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize hierarchical clustering result</h3>
 
   <ol>
@@ -912,7 +891,7 @@ Let’s visualize the clustering results to see how groups have been built.</p>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <strong>Hierarchical clustering</strong></li>
         <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical Clustering in Iris data</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical clustering in iris data</code></li>
         <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal length</code></li>
         <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal width</code></li>
         <li>In <em>“Advanced Options”</em>:
@@ -930,44 +909,50 @@ Let’s visualize the clustering results to see how groups have been built.</p>
             </li>
           </ul>
         </li>
+        <li>In <em>“Output options”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">7.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">175.0</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li>
-      <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
-    </li>
+    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot</li>
     <li>Rename to <code class="language-plaintext highlighter-rouge">Hierarchical scatter plot</code></li>
   </ol>
 </blockquote>
 
 <blockquote>
-  <figure id="figure-8"><img src="images/hierarchical_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Hierarchical Clustering Scatter Plot</figcaption></figure>
+  <figure id="figure-8"><img src="images/hierarchical_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Hierarchical clustering scatter plot</figcaption></figure>
 </blockquote>
 
-<h1 id="k-means-algorithm">K-means Algorithm</h1>
+<h2 id="k-means-clustering">K-means clustering</h2>
 
-<p>K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given data set into a set of k clusters, where k represents the number of groups pre-specified by the user.
-In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster.The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.
-The k-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a the hyperparameter of the algorithm and k-means algorithm can be summarized as follow:</p>
+<p>K-means clustering is the most commonly used unsupervised machine learning algorithm for partitioning a given dataset into a set of k clusters, where k represents the number of groups pre-specified by the user.
+In k-means clustering, each cluster is represented by its center or centroid which corresponds to the mean of points assigned to the cluster. The basic idea behind k-means clustering consists of defining clusters so that the total intra-cluster variation is minimized.</p>
+
+<p>K-means is popular because of its speed and scalability. There are several k-means algorithms available. The standard algorithm defines the total within-cluster variation as the sum of squared Euclidean distances between items and the corresponding centroid. K is a hyperparameter of the algorithm and the k-means algorithm can be summarized as follows:</p>
 
 <ol>
   <li>
-    <p>Specify the number of clusters (k) to be created (by the analyst)</p>
+    <p>Specify the number of clusters (k) to be created (to be specified by users).</p>
   </li>
   <li>
-    <p>Select randomly k objects from the data set as the initial cluster centers or means</p>
+    <p>Select k data points or observations randomly from the dataset as the initial cluster centers or means.</p>
   </li>
   <li>
-    <p>Assign each observation to their closest centroid, based on the Euclidean distance between the object and the centroid</p>
+    <p>Assign each data point to their closest centroid, based on the euclidean distance between a data point and its centroid.</p>
   </li>
   <li>
     <p>For each of the k clusters update cluster centroid by calculating the new mean values of all the data points in the cluster.</p>
   </li>
   <li>
-    <p>Iteratively minimize the total within sum of square: iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of iterations is reached.</p>
+    <p>Iteratively minimize the total within the sum of square: iterate steps 3 and 4 until the cluster assignments stop changing or the maximum number of iterations is reached.</p>
   </li>
 </ol>
 
-<p>The parameters that minimize the cost function are learned through an iterative process of assigning observations to clusters and then moving the clusters. The basic restriction for k-means algorithm is that your data should be continuous in nature. It won’t work if data is categorical in nature.</p>
+<p>The parameters that minimize the cost function are learned through an iterative process of assigning data points to clusters and then moving the clusters. A restriction for the k-means algorithm is that the dataset should be continuous. It won’t work if data is categorical.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-k-means-clustering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: K-means clustering</h3>
@@ -977,13 +962,19 @@ The k-means is popular because of its speed and scalability. There are several k
       <ul>
         <li><em>“Select the format of input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular Format (tabular,txt)</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">iris tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">iris</code></li>
             <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+              </ul>
+            </li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Clustering Algorithm”</em>: <code class="language-plaintext highlighter-rouge">KMeans</code></li>
-            <li>In <em>“Advanced option”</em>  <br />
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of clusters”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li>In <em>“Advanced options”</em>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of clusters”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+              </ul>
+            </li>
           </ul>
         </li>
       </ul>
@@ -992,16 +983,18 @@ The k-means is popular because of its speed and scalability. There are several k
   </ol>
 </blockquote>
 
-<blockquote>
+<h3 id="visualize-k-means-clustering">Visualize k-means clustering</h3>
+
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualize-k-means-clustering-result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize k-means clustering result</h3>
 
   <ol>
-    <li><strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Scatterplot with ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <strong>k-means clustering</strong></li>
         <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">K-means Clustering in Iris data</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">K-means clustering in iris data</code></li>
         <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal length</code></li>
         <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal width</code></li>
         <li>In <em>“Advanced Options”</em>:
@@ -1019,17 +1012,22 @@ The k-means is popular because of its speed and scalability. There are several k
             </li>
           </ul>
         </li>
+        <li>In <em>“Output options”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">7.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">175.0</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li>
-      <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
-    </li>
+    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot</li>
     <li>Rename to <code class="language-plaintext highlighter-rouge">k-means scatter plot</code></li>
   </ol>
 </blockquote>
 
 <blockquote>
-  <figure id="figure-9"><img src="images/k_means_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 9:</span> K-means Clustering Scatter Plot</figcaption></figure>
+  <figure id="figure-9"><img src="images/k_means_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 9:</span> K-means clustering scatter plot</figcaption></figure>
 </blockquote>
 
 <blockquote class="question">
@@ -1040,7 +1038,7 @@ The k-means is popular because of its speed and scalability. There are several k
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Major difficulty found with k-mean is the choice of the number of clusters. Different methods is proposed to solve this problem. 
+    <p>Major difficulty found with k-means is the choice of the number of clusters. Different methods is proposed to solve this problem. 
 Here, we provide a simple solution. The idea is to compute k-means clustering using different values of clusters k. Next, the within sum of square is drawn according to the number of clusters. The location of a bend (knee) in the plot is generally considered as an indicator of the appropriate number of clusters.</p>
     <figure id="figure-10"><img src="images/number_of_clusters.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Optimal number of clusters</figcaption></figure>
     <p>The plot above represents the variance within the clusters. It decreases as k increases, but it can be seen a bend (or “elbow”) at k = 4. This bend indicates that 
@@ -1049,28 +1047,35 @@ additional clusters beyond the fourth have little value.</p>
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>What are the differences between k-means and Hierarchical clustering</p>
+  <p>What are the differences between k-means and hierarchical clustering techniques</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of K Means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).</p>
-
-    <p>In k-means clustering, since we start with random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.</p>
-
-    <p>K-means is found to work well when the shape of the clusters is hyper spherical (like circle in 2D, sphere in 3D).</p>
-
-    <p>K-means clustering requires prior knowledge of K i.e. no. of clusters you want to divide your data into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram</p>
+    <ol>
+      <li>
+        <p>Hierarchical clustering can’t handle big data well but k-means clustering can. This is because the time complexity of k-means is linear i.e. O(n) while that of hierarchical clustering is quadratic i.e. O(n2).</p>
+      </li>
+      <li>
+        <p>In k-means clustering, since we start with a random choice of clusters, the results produced by running the algorithm multiple times might differ. While results are reproducible in Hierarchical clustering.</p>
+      </li>
+      <li>
+        <p>K-means is found to work well when the shape of the clusters is hyperspherical (like circle in 2D, sphere in 3D).</p>
+      </li>
+      <li>
+        <p>K-means clustering requires prior knowledge of K i.e. no. of clusters to divide the dataset into. But, you can stop at whatever number of clusters you find appropriate in hierarchical clustering by interpreting the dendrogram</p>
+      </li>
+    </ol>
 
   </blockquote>
+
 </blockquote>
 
-<h1 id="clustering-with-the-dbscan-algorithm">Clustering with the DBSCAN algorithm</h1>
+<h2 id="dbscan-clustering">DBSCAN clustering</h2>
 
-<p>DBSCAN (Density-Based Spatial Clustering of Applications with Noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples, which are samples that are in areas of high density. A cluster is therefore a set of core samples, each close to each other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not themselves core samples). There are two parameters to the algorithm, maximum neighborhood distance and minimal core point density, which define formally what we mean when we say dense. There are two important parameters in DBSCAN algorithm, min_samples, is the number of samples in a neighborhood for a point to be considered as a core point and eps is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher min_samples or lower eps indicate higher density necessary to form a cluster.
-DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.</p>
+<p>DBSCAN (Density-based spatial clustering of applications with noise) is a popular clustering algorithm and views clusters as areas of high density separated by areas of low density. Due to this rather generic view, clusters found by DBSCAN can be of any shape, as opposed to k-means which assumes that clusters are convex shaped. The central component to the DBSCAN is the concept of core samples which are present in the areas of high density. A cluster is, therefore, a set of core samples close to one other (measured by some distance measure) and a set of non-core samples that are close to a core sample (but are not core samples themselves). There are two important parameters in DBSCAN algorithm - <code class="language-plaintext highlighter-rouge">min_samples</code> is the number of samples in a neighborhood for a point to be considered as a core point and <code class="language-plaintext highlighter-rouge">eps</code> is the maximum distance between two samples for one to be considered as in the neighborhood of the other. Higher the value of <code class="language-plaintext highlighter-rouge">min_samples</code> or lower the value of eps indicate higher density necessary to form a cluster. DBSCAN does not require one to specify the number of clusters in the data a priori, as opposed to k-means.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-dbscan-clustering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: DBSCAN clustering</h3>
@@ -1080,10 +1085,13 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
       <ul>
         <li><em>“Select the format of input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular Format (tabular,txt)</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">iris tabular</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">iris</code></li>
             <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns EXCLUDING some by column header name(s)</code>
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Type header name(s)”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+              </ul>
+            </li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Clustering Algorithm”</em>: <code class="language-plaintext highlighter-rouge">DBSCAN</code></li>
           </ul>
         </li>
@@ -1093,16 +1101,18 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
   </ol>
 </blockquote>
 
-<blockquote>
+<h3 id="visualise-dbscan-clustering">Visualise DBSCAN clustering</h3>
+
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualize-dbscan-clustering-result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize DBSCAN clustering result</h3>
 
   <ol>
-    <li><strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Scatterplot with ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <strong>DBSCAN clustering</strong></li>
         <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">DBSCAN Clustering in Iris data</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">DBSCAN clustering in iris data</code></li>
         <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal length</code></li>
         <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal width</code></li>
         <li>In <em>“Advanced Options”</em>:
@@ -1120,48 +1130,52 @@ DBSCAN does not require one to specify the number of clusters in the data a prio
             </li>
           </ul>
         </li>
+        <li>In <em>“Output options”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">7.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">175.0</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li>
-      <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
-    </li>
+    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</li>
     <li>Rename to <code class="language-plaintext highlighter-rouge">DBSCAN scatter plot</code></li>
   </ol>
 </blockquote>
 
 <blockquote>
-  <figure id="figure-11"><img src="images/dbscan_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 11:</span> DBSCAN Clustering Scatter Plot</figcaption></figure>
+  <figure id="figure-11"><img src="images/dbscan_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 11:</span> DBSCAN clustering scatter plot</figcaption></figure>
 </blockquote>
 
 <p>You will also notice that the blue point in the plot is not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore terrific with handling outliers in the dataset.</p>
 
 <blockquote class="question">
-  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
   <p>How we can evaluate the clustering results?</p>
 
   <blockquote class="solution">
     <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>Clustering is an unsupervised learning algorithm; there are no labels or ground truth to compare with the clusters. However, we can still evaluate the performance of
-the algorithm using intrinsic measures.
-There is a performance measure for clustering evaluation which is called the silhouette coefficient. The silhouette coefficient is a measure of the compactness and separation of the clusters. 
+    <p>Clustering is an unsupervised learning algorithm; there are no labels or ground truth to compare with the clusters. However, we can still evaluate the performance of the algorithm using intrinsic measures.
+There is a performance measure for clustering evaluation which is called the <a href="https://en.wikipedia.org/wiki/Silhouette_(clustering)">silhouette coefficient</a>. It is a measure of the compactness and separation of the clusters. 
 It increases as the quality of the clusters increase; it is large for compact clusters that are far from each other and small for large, overlapping clusters. The silhouette coefficient is calculated per instance; for a set of instances, it is calculated as the mean of the individual samples scores.</p>
   </blockquote>
 </blockquote>
 
-<h1 id="applying-the-clustering-algorithms-on-the-other-datasets">Applying the clustering algorithms on the other datasets</h1>
+<h1 id="applying-clustering-algorithms-on-multiple-datasets">Applying clustering algorithms on multiple datasets</h1>
 
-<p>You can do the same steps on the other data sets, moon and circles. First, import the data files, <a href="https://zenodo.org/record/3813447/files/moon.csv">moon.csv</a> and <a href="https://zenodo.org/record/3813447/files/circles.csv">circles.csv</a> from Zenodo or data library and rename them to <code class="language-plaintext highlighter-rouge">moon</code> and <code class="language-plaintext highlighter-rouge">circles</code> respectively.</p>
+<p>We can apply the same steps on the other datasets such <code class="language-plaintext highlighter-rouge">moon</code> and <code class="language-plaintext highlighter-rouge">circles</code> datasets (already imported) which are generated using <a href="https://scikit-learn.org/stable/datasets/index.html#generated-datasets">scikit-learn</a> methods.</p>
 
-<blockquote>
+<h2 id="visualise-datasets">Visualise datasets</h2>
+
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-visualize-scatter-plot-of-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize scatter plot of data</h3>
 
   <ol>
-    <li><strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: input datasets selected with <strong>Multiple datasets</strong></li>
-      </ul>
+    <li>
+      <p><strong>Scatterplot with ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
 
       <blockquote class="tip">
 
@@ -1175,61 +1189,106 @@ It increases as the quality of the clusters increase; it is large for compact cl
       </blockquote>
 
       <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">circles</code> and <code class="language-plaintext highlighter-rouge">moon</code> as <strong>multiple datasets</strong></li>
         <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
         <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Scatter Plot</code></li>
         <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">X</code></li>
         <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Y</code></li>
-      </ul>
-    </li>
-    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plots</li>
-  </ol>
-</blockquote>
-
-<blockquote>
-  <figure id="figure-12"><img src="images/circles_moon_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Scatter Plot of Circles and Moon Data</figcaption></figure>
-</blockquote>
-
-<p>Now you can cluster these data using the introduced algorithms.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-hierarchical-clustering-of-circles-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Hierarchical clustering of circles data</h3>
-
-  <ol>
-    <li><strong>Numeric Clustering</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following clustering parameters:
-      <ul>
-        <li><em>“Select the format of input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular Format (tabular,txt)</code>
+        <li>In <em>“Output options”</em>:
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">cirlces tabular</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Clustering Algorithm”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical Agglomerative Clustering</code></li>
-            <li>In <em>“Advanced option”</em>  <br />
-      - <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of clusters”</em>: <code class="language-plaintext highlighter-rouge">2</code>
-      - <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Affinity”</em>: <code class="language-plaintext highlighter-rouge">Euclidean</code>
-      - <i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Linkage”</em>: <code class="language-plaintext highlighter-rouge">ward</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">7.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">175.0</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>Rename the generated file to <code class="language-plaintext highlighter-rouge">circles hierarchical clustering</code></li>
+    <li>
+      <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plots</p>
+    </li>
   </ol>
 </blockquote>
 
-<p>Then, you can visualize the clustering result using the following steps:</p>
-
 <blockquote>
-  <h3 id="hands_on-hands-on-visualize-hierarchical-clustering-result-on-circles-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize hierarchical clustering result on circles data</h3>
+  <figure id="figure-12"><img src="images/circles_moon_scatter.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Scatter plot of circles and moon Data</figcaption></figure>
+</blockquote>
+
+<h2 id="find-clusters">Find clusters</h2>
+
+<p>Now you can find clusters in these datasets using the aforementioned algorithms.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-hierarchical-clustering-of-circles-and-moon-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Hierarchical clustering of circles and moon datasets</h3>
 
   <ol>
-    <li><strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li>
+      <p><strong>Numeric Clustering</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following clustering parameters:</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-select-multiple-datasets-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+        <ol>
+          <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
+
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <strong>circles hierarchical clustering</strong></li>
+        <li><em>“Select the format of input data”</em>: <code class="language-plaintext highlighter-rouge">Tabular Format (tabular,txt)</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data file with numeric values”</em>: <code class="language-plaintext highlighter-rouge">cirlces</code> and <code class="language-plaintext highlighter-rouge">moon</code> as <strong>multiple datasets</strong></li>
+            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Does the dataset contain header”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose how to select data by column”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Clustering Algorithm”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical Agglomerative Clustering</code></li>
+            <li>In <em>“Advanced option”</em>
+              <ul>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of clusters”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Affinity”</em>: <code class="language-plaintext highlighter-rouge">Euclidean</code></li>
+                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Linkage”</em>: <code class="language-plaintext highlighter-rouge">ward</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename the generated files to <code class="language-plaintext highlighter-rouge">circles hierarchical clustering</code> and <code class="language-plaintext highlighter-rouge">moon hierarchical clustering</code> respectively</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="visualise-clusters">Visualise clusters</h2>
+
+<p>Then, you can visualize the clustering results using the following steps:</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualize-hierarchical-clustering-result-on-circles-and-moon-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize hierarchical clustering result on circles and moon datasets.</h3>
+
+  <ol>
+    <li>
+      <p><strong>Scatterplot with ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-select-multiple-datasets-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+        <ol>
+          <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
+
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">circles hierarchical clustering</code> and <code class="language-plaintext highlighter-rouge">moon hierarchical clustering</code> as <strong>multiple datasets</strong></li>
         <li><em>“Column to plot on x-axis”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Column to plot on y-axis”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical Clustering in Circles data</code></li>
-        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal length</code></li>
-        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Sepal width</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Hierarchical clustering</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">X</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">Y</code></li>
         <li>In <em>“Advanced Options”</em>:
           <ul>
             <li><em>“Data point options”</em>: <code class="language-plaintext highlighter-rouge">User defined point options</code>
@@ -1245,26 +1304,33 @@ It increases as the quality of the clusters increase; it is large for compact cl
             </li>
           </ul>
         </li>
+        <li>In <em>“Output options”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“width of output”</em>: <code class="language-plaintext highlighter-rouge">7.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“dpi of output”</em>: <code class="language-plaintext highlighter-rouge">175.0</code></li>
+          </ul>
+        </li>
       </ul>
     </li>
-    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</li>
+    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plots</li>
+    <li>Rename the generated files to <code class="language-plaintext highlighter-rouge">Circles scatter plot</code> and <code class="language-plaintext highlighter-rouge">Moon scatter plot</code> respectively</li>
   </ol>
 </blockquote>
 
-<p>In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) in similar steps to moon and circles datasets. In k-means algorithm, k=2 and for the DBSCAN algorithm, the parameters are not the default parameters and you should set them as follows: for the circles data set (Maximum neighborhood distance=0.2 and Minimal core point density=5) and for the moon datasets (Maximum neighborhood distance=0.3 and Minimal core point density=4). You can see the scatter plots of the clustering results in Figure 13 and Figure 14.</p>
+<p>In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In the k-means algorithm, <code class="language-plaintext highlighter-rouge">k=2</code> and for the DBSCAN algorithm, the parameters are not the default parameters and should be set as follows: for the circles dataset (<code class="language-plaintext highlighter-rouge">maximum neighborhood distance=0.2</code> and <code class="language-plaintext highlighter-rouge">minimal core point density=5</code>) and for the moon datasets (<code class="language-plaintext highlighter-rouge">maximum neighborhood distance=0.3</code> and <code class="language-plaintext highlighter-rouge">minimal core point density=4</code>). You can see the scatter plots of the clustering results in Figure 13 and 14.</p>
 
 <blockquote>
-  <figure id="figure-13"><img src="images/circles_clustering.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Plot of clustering algorithms on circles data</figcaption></figure>
+  <figure id="figure-13"><img src="images/circles_clustering.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 13:</span> Plot of clustering algorithms on circles dataset</figcaption></figure>
 </blockquote>
 
 <blockquote>
-  <figure id="figure-14"><img src="images/moon_clustering.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Plot of clustering algorithms on moon data</figcaption></figure>
+  <figure id="figure-14"><img src="images/moon_clustering.png" alt="data" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Plot of clustering algorithms on moon dataset</figcaption></figure>
 </blockquote>
 
 <h1 id="conclusion">Conclusion</h1>
 
-<p>In this tutorial, we discussed the clustering algorithms which is used to discover structures or patterns in unlabeled data. You learned about the hierarchical, k-means and DBSCAN algorithms. By following these steps, we learned how to perform clustering and visualize results using clustering and plotting tools respectively in <span class="notranslate">Galaxy</span>. There are many other clustering approaches which can be tried out on these datasets to find how they perform. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. In using clustering algorithms, we need to take care of some important aspects like treating outliers in our data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.</p>
-
+<p>In this tutorial, we discussed 3 clustering algorithms which are used to discover structures or patterns in unlabeled data. You learned about the hierarchical, k-means and DBSCAN algorithms. By following steps specified for each clustering tool, we learned how to perform clustering and visualize results using clustering and plotting tools, respectively in <span class="notranslate">Galaxy</span>. There are many other clustering approaches which can be tried out on these datasets to find how they perform and how they compare to the 3 clustering algorithms explained in this tutorial. Different datasets can also be analysed using these algorithms. The clustering algorithms have some parameters which can be altered while performing the analyses to see if they affect the clustering or not. While using clustering algorithms, we need to take care of some important aspects like treating outliers in data and making sure each cluster has sufficient population. Some data pre-processors can also be used to clean the datasets.</p>
 
 
                     
@@ -1272,10 +1338,10 @@ It increases as the quality of the clusters increase; it is large for compact cl
                         <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li><p>Using clustering methods, category and cluster of the data are learned using hierarchical, k-means and DBSCAN</p>
+                            <li><p>Using clustering methods, clusters inside a dataset are drawn using hierarchical, k-means and DBSCAN</p>
 </li>
                             
-                            <li><p>For each clustering algorithm, number of clusters and the algorithm parameters should be optimised based on the dataset</p>
+                            <li><p>For each clustering algorithm, the number of clusters and their respective hyperparameters should be optimised based on the dataset</p>
 </li>
                             
                         </ul>
@@ -1323,7 +1389,7 @@ It increases as the quality of the clusters increase; it is large for compact cl
     title = "Clustering in Machine Learning (Galaxy Training Materials)",
     year = "2020",
     month = "06",
-    day = "18"
+    day = "20"
     url = "\url{/training-material/topics/statistics/tutorials/clustering_machinelearning/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
