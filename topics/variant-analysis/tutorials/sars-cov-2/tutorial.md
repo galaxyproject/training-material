@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
+title: SARS-CoV-2 variant analysis using data from NCBI's Sequence Read Archive (SRA)
 zenodo_link: ''
 questions:
 - Which biological questions are addressed by the tutorial?
