@@ -1,8 +1,8 @@
 ---
 layout: tutorial_hands_on
 
-title: Using data from NCBI's Sequence Read Archive (SRA): A
-SARS-CoV-2 variant analysis example
+title: "Using data from NCBI's Sequence Read Archive (SRA): A
+SARS-CoV-2 variant analysis example"
 zenodo_link: ''
 questions:
 - Which biological questions are addressed by the tutorial?
@@ -33,7 +33,7 @@ At the completion of this tutorial you know
 
 * how to go from Galaxy to SRA.
 * a basic understanding of how to select data in SRA
-  * see this tutorial from the SRA team for a fuller introduction to this topic
+  * see the [Search in SRA documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/) from the SRA team for a fuller introduction to this topic
 * how to send SRA *metadata* (such as accession numbers) to Galaxy
 * how to use that SRA metadata to import *sequence* data from SRA into Galaxy.
 * how to run a simple variant analysis in Galaxy using that data
@@ -80,21 +80,61 @@ have fun!
 
 ### Search SRA
 
+[Search in SRA documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/)
+
+Search for `sars-cov-2`.  And we get back over 24,000 results (as of June 2020).  Refine that search by adding `"library layout paired"[Properties]` ([from SRA search documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/)). That reduces our result size by almost 75% and has the added advantage of having all data in the same paired end format.
+
+Wait, wait, wait.  This is viral sequence.  Does it matter if we use paired end or single end?
+
+"platform oxford_nanopore"[Properties] 
+
+Need someway to narrow the results that make sense, and makes downstream analysis simpler too.  We could narrow results here, or in run selector or both.
+
+Maybe demo syntax in Entrez, give up and say there is a simpler way in the run selector.  Pass everything there.
+
+
 ### Switch to the Run Selector
 
-Narrow your selection
+`View results as an expanded interactive table using the RunSelector. Send results to Run selector`
+
+Note the filters list box in the upper left.
+
+Good time to talk about DATASTORE filetype?
+
+Host and Host_scientific name
+
+
+
 
 ### Send to Galaxy
 
 ## It's not sequence, it's *metadata!*
 
+That section title won't work  Doesn't translate.
+
+explain how to see what we got, and then what we got, and that we still need the sequence
+
+Search for SRA in tools.  Faster looks good.
+
+Wait, it says we need just the accession number column.
+
+
 ### Get just the accession ids
+
+Two operations
+Keep column 1 only
+Remove leading lines
+
+
 
 ## Now, get the sequence data
 
+Back to Faster
+
+
 # Cool! Now what can we do with it?
 
-
+TBD
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
