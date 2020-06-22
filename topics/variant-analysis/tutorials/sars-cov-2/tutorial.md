@@ -1,22 +1,18 @@
 ---
 layout: tutorial_hands_on
 
-title: SARS-CoV-2 variant analysis using data from NCBI's Sequence Read Archive (SRA)
+title: "Using data from NCBI's Sequence Read Archive (SRA): A
+SARS-CoV-2 variant analysis example"
 zenodo_link: ''
 questions:
 - Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- Learn how to get and use data from the Sequence Read Archive in Galaxy.
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Understand how Galaxy and the Short Read Archive interact.
+- Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.
 time_estimation: ''
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Sequence data in the SRA can be directly imported into Galaxy.
 contributors:
 - mvdbeek
 - tnabtaf
@@ -29,27 +25,25 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+The aim of this tutorial is to learn how to Galaxy and NCBI's Short Read Archive interact (SRA) with each other.  This tutorial uses a COVID-19 variant calling example, but it isn't about variant calling per se.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+SRA, like many data sources is Galaxy aware.  It has support for sending information directly to Galaxy, and it tracks which Galaxy instance it was invoked from.  Getting sequence data from SRA is a multi-step process.  This tutorial explains each step in the process and then demonstrates a particular example of how to use SRA data in Galaxy.
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
+At the completion of this tutorial you know
+
+* how to go from Galaxy to SRA.
+* a basic understanding of how to select data in SRA
+  * see the [Search in SRA documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/) from the SRA team for a fuller introduction to this topic
+* how to send SRA *metadata* (such as accession numbers) to Galaxy
+* how to use that SRA metadata to import *sequence* data from SRA into Galaxy.
+* how to run a simple variant analysis in Galaxy using that data
+  * See these [variant analysis tutorials](/training-material/topics/variant-analysis) for a more in-depth explanation of variant analysis.
+
 {% raw %} `{% cite Batut2018 %}`{% endraw %}.
 This will be rendered like this: {% cite Batut2018 %}, and links to a
 [bibliography section](#bibliography) which will automatically be created at the end of the
 tutorial.
 
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
 > ### Agenda
 >
@@ -60,7 +54,7 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# The Sequence Read Archive
 
 Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
@@ -70,7 +64,8 @@ so make sure to explain all the relevant concepts.
 Section and subsection titles will be displayed in the tutorial index on the left side of
 the page, so try to make them informative and concise!
 
-# Hands-on Sections
+
+# Retrieve data from SRA
 Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
 as breaking the tutorial into sections, we encourage you to make such changes as you
@@ -81,7 +76,66 @@ depending on the specifics of your tutorial.
 
 have fun!
 
-## Get data
+## Get data: The SRA data source
+
+### Search SRA
+
+[Search in SRA documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/)
+
+Search for `sars-cov-2`.  And we get back over 24,000 results (as of June 2020).  Refine that search by adding `"library layout paired"[Properties]` ([from SRA search documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/)). That reduces our result size by almost 75% and has the added advantage of having all data in the same paired end format.
+
+Wait, wait, wait.  This is viral sequence.  Does it matter if we use paired end or single end?
+
+"platform oxford_nanopore"[Properties] 
+
+Need someway to narrow the results that make sense, and makes downstream analysis simpler too.  We could narrow results here, or in run selector or both.
+
+Maybe demo syntax in Entrez, give up and say there is a simpler way in the run selector.  Pass everything there.
+
+
+### Switch to the Run Selector
+
+`View results as an expanded interactive table using the RunSelector. Send results to Run selector`
+
+Note the filters list box in the upper left.
+
+Good time to talk about DATASTORE filetype?
+
+Host and Host_scientific name
+
+
+
+
+### Send to Galaxy
+
+## It's not sequence, it's *metadata!*
+
+That section title won't work  Doesn't translate.
+
+explain how to see what we got, and then what we got, and that we still need the sequence
+
+Search for SRA in tools.  Faster looks good.
+
+Wait, it says we need just the accession number column.
+
+
+### Get just the accession ids
+
+Two operations
+Keep column 1 only
+Remove leading lines
+
+
+
+## Now, get the sequence data
+
+Back to Faster
+
+
+# Cool! Now what can we do with it?
+
+TBD
+
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -108,6 +162,9 @@ have fun!
 >    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
+
+## 
+
 
 # Title of the section usually corresponding to a big step in the analysis
 
