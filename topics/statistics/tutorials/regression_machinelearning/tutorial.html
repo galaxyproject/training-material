@@ -450,8 +450,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
             Galaxy Test
         </a>
@@ -556,7 +554,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 19, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 21, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -568,9 +566,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>In this tutorial you will learn how to use <span class="notranslate">Galaxy</span> tools to solve <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a> problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step.</p>
-
-<p>Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.</p>
+<p>In this tutorial you will learn how to use <span class="notranslate">Galaxy</span> tools to solve <a href="https://en.wikipedia.org/wiki/Regression_analysis">regression</a> problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.</p>
 
 <p>In this tutorial we will build a regression model for chronological age prediction, based on <span class="notranslate">DNA</span> methylation. This is based on the work of <a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. 2017</a>, in which biomarkers are examined to predict the chronological age of humans by analyzing the <span class="notranslate">DNA</span> methylation patterns. Different machine learning algorithms are used in this study to make an age prediction.</p>
 
@@ -632,10 +628,7 @@ It has been recognized that <span class="notranslate">DNA</span> methylation ana
 
 <h2 id="get-training-and-test-datasets">Get training and test datasets</h2>
 
-<p>Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. 
-The datasets from this study contain features (present as columns). The last column in the dataset refers to <code class="language-plaintext highlighter-rouge">Age</code>, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a <span class="notranslate">mapping</span> between these input features and targets.</p>
-
-<p>We proceed with the analysis by uploading new datasets and creating a new history. The training set contains <code class="language-plaintext highlighter-rouge">208</code> rows corresponding to individual samples and <code class="language-plaintext highlighter-rouge">13</code> features (age-correlated CpG sites in <span class="notranslate">DNA</span> methylation dataset). The last column is <code class="language-plaintext highlighter-rouge">Age</code>. The test set contains <code class="language-plaintext highlighter-rouge">104</code> rows and the same number of features as the training set. The <code class="language-plaintext highlighter-rouge">Age</code> column in the test set is predicted after training on the training set. Another dataset <code class="language-plaintext highlighter-rouge">test_rows_labels</code> contains the true age values of the test set which is used to compute scores between true and predicted age.</p>
+<p>Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. We proceed with the analysis by uploading new datasets and creating a new history.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -704,7 +697,8 @@ https://zenodo.org/record/2545213/files/test_rows.csv
 
 </blockquote>
 
-<p class="comment">The <code class="language-plaintext highlighter-rouge">train_rows</code> contains a column <code class="language-plaintext highlighter-rouge">Age</code> which is the label or target. We will evaluate our model on <code class="language-plaintext highlighter-rouge">test_rows</code> and compare the predicted age with the true age in <code class="language-plaintext highlighter-rouge">test_rows_labels</code></p>
+<p class="comment">The datasets from this study contain features (present as columns). The last column in the dataset refers to <code class="language-plaintext highlighter-rouge">Age</code>, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a <span class="notranslate">mapping</span> between these input features and targets. The training set contains <code class="language-plaintext highlighter-rouge">208</code> rows corresponding to individual samples and <code class="language-plaintext highlighter-rouge">13</code> features (age-correlated CpG sites in <span class="notranslate">DNA</span> methylation dataset). The last column is <code class="language-plaintext highlighter-rouge">Age</code>. The test set contains <code class="language-plaintext highlighter-rouge">104</code> rows and the same number of features as the training set. The <code class="language-plaintext highlighter-rouge">Age</code> column in the test set is predicted after training on the training set. Another dataset <code class="language-plaintext highlighter-rouge">test_rows_labels</code> contains the true age values of the test set which is used to compute scores between true and predicted age.
+The <code class="language-plaintext highlighter-rouge">train_rows</code> contains a column <code class="language-plaintext highlighter-rouge">Age</code> which is the label or target. We will evaluate our model on <code class="language-plaintext highlighter-rouge">test_rows</code> and compare the predicted age with the true age in <code class="language-plaintext highlighter-rouge">test_rows_labels</code></p>
 
 <blockquote class="details">
   <h3 id="details-test-train-data-splitting-data-within-galaxy"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Test-train data splitting data within <span class="notranslate">Galaxy</span></h3>
@@ -842,27 +836,24 @@ Hint: Please find the above tool in “Graph/Display data” tool section in <sp
 
     <figure id="figure-6"><img src="images/true_vs_pred_scatter.png" alt="scatter_plot" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Scatter plot for true vs. predicted targets.</figcaption></figure>
   </li>
+  <li>
+    <p><a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">Residual plot</a> between residual (predicted - true) and predicted targets: The residual plot shown in figure <a href="#figure-9">9</a> is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</p>
+
+    <figure id="figure-7"><img src="images/residual_plot.png" alt="residual_plot" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.</figcaption></figure>
+  </li>
 </ol>
+
+<p>These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.</p>
 
 <blockquote class="details">
   <h3 id="details-r2-coefficient-of-determination"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> R2 (coefficient of determination)</h3>
   <p>In both the parts, learning on datasets is done using cross-validation and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-7">7</a> and <a href="#figure-8">8</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-7">7</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. On the other hand, figure <a href="#figure-8">8</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For <span class="notranslate">RNA</span>-seq dataset, we will compute the cross-validated R2 score using the training set and for <span class="notranslate">DNA</span> methylation dataset, we will compute the R2 score for the test set.</p>
 
-  <figure id="figure-7"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad" /><figcaption><span class="figcaption-prefix">Figure 7:</span> This shows an example of a bad model as most of the points are scattered.</figcaption></figure>
+  <figure id="figure-8"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad" /><figcaption><span class="figcaption-prefix">Figure 8:</span> This shows an example of a bad model as most of the points are scattered.</figcaption></figure>
 
-  <figure id="figure-8"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good" /><figcaption><span class="figcaption-prefix">Figure 8:</span> This shows an example of a good model as most of the points lie along the x = y line.</figcaption></figure>
+  <figure id="figure-9"><img src="../../images/age-prediction-with-ml/model_good.png" alt="model_good" /><figcaption><span class="figcaption-prefix">Figure 9:</span> This shows an example of a good model as most of the points lie along the x = y line.</figcaption></figure>
 
 </blockquote>
-
-<ol>
-  <li>
-    <p><a href="http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/">Residual plot</a> between residual (predicted - true) and predicted targets: The residual plot shown in figure <a href="#figure-9">9</a> is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.</p>
-
-    <figure id="figure-9"><img src="images/residual_plot.png" alt="residual_plot" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.</figcaption></figure>
-  </li>
-</ol>
-
-<p>These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.</p>
 
 <blockquote class="question">
   <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -1205,10 +1196,10 @@ The quality of predictions is visualized using multiple plots to ascertain the r
                         <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li><p>Using regression, real-valued targets are learned using the training set and predicted using the test set</p>
+                            <li><p>Using regression, real-valued targets are learned using the training set and predicted using the test set.</p>
 </li>
                             
-                            <li><p>For each regression algorithm, its parameters should be optimized based on the dataset</p>
+                            <li><p>For each regression algorithm, its parameters should be optimized based on the dataset.</p>
 </li>
                             
                         </ul>
@@ -1241,7 +1232,7 @@ The quality of predictions is visualized using multiple plots to ascertain the r
     title = "Regression in Machine Learning (Galaxy Training Materials)",
     year = "2020",
     month = "06",
-    day = "19"
+    day = "21"
     url = "\url{/training-material/topics/statistics/tutorials/regression_machinelearning/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
