@@ -12,8 +12,8 @@ objectives:
 - Learn how visualizations can be used to analyze predictions
 key_points:
 - Using regression, real-valued targets are learned using the training set and predicted
-  using the test set
-- For each regression algorithm, its parameters should be optimized based on the dataset
+  using the test set.
+- For each regression algorithm, its parameters should be optimized based on the dataset.
 time_estimation: 2H
 contributors:
 - khanteymoori
@@ -24,9 +24,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step.
-
-Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
+In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
 
 In this tutorial we will build a regression model for chronological age prediction, based on DNA methylation. This is based on the work of [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), in which biomarkers are examined to predict the chronological age of humans by analyzing the DNA methylation patterns. Different machine learning algorithms are used in this study to make an age prediction.
 
@@ -80,10 +78,7 @@ In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn
 
 ## Get training and test datasets
 
-Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. 
-The datasets from this study contain features (present as columns). The last column in the dataset refers to `Age`, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a mapping between these input features and targets.
-
-We proceed with the analysis by uploading new datasets and creating a new history. The training set contains `208` rows corresponding to individual samples and `13` features (age-correlated CpG sites in DNA methylation dataset). The last column is `Age`. The test set contains `104` rows and the same number of features as the training set. The `Age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute scores between true and predicted age.
+Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. We proceed with the analysis by uploading new datasets and creating a new history. 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -108,6 +103,7 @@ We proceed with the analysis by uploading new datasets and creating a new histor
 >
 {: .hands_on}
 
+The datasets from this study contain features (present as columns). The last column in the dataset refers to `Age`, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a mapping between these input features and targets. The training set contains `208` rows corresponding to individual samples and `13` features (age-correlated CpG sites in DNA methylation dataset). The last column is `Age`. The test set contains `104` rows and the same number of features as the training set. The `Age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute scores between true and predicted age.
 The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 {: .comment}
 
@@ -201,6 +197,12 @@ The visualization tool creates the following plots:
 
     ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets.")
 
+3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets: The residual plot shown in figure [9](#figure-9) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.
+
+    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
+
+These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.
+
 > ### {% icon details %} R2 (coefficient of determination)
 > In both the parts, learning on datasets is done using cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [7](#figure-7) and [8](#figure-8). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [7](#figure-7), we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is `-0.06`. On the other hand, figure [8](#figure-8) shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.
 >
@@ -209,13 +211,6 @@ The visualization tool creates the following plots:
 >![model_good](../../images/age-prediction-with-ml/model_good.png "This shows an example of a good model as most of the points lie along the x = y line.")
 >
 {: .details}
-
-
-3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets: The residual plot shown in figure [9](#figure-9) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.
-
-    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
-
-These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.
 
 
 > ### {% icon question %} Question
