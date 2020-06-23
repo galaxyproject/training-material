@@ -417,6 +417,7 @@ A big step can have several subsections or sub steps:
 >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
 >    - *"Indel calculation approach"*: `Dindel`
 >        - *"Choose the source for the reference genome"*: `History`
+>            - {% icon param-file %} *"Reference"*: `output` (Input dataset)
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -452,6 +453,7 @@ A big step can have several subsections or sub steps:
 > 1. **Call variants** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `History`
+>        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
 >    - *"Call variants across"*: `Whole reference`
 >    - *"Types of variants to call"*: `SNVs and indels`
 >    - *"Variant calling parameters"*: `Configure settings`
