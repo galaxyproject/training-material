@@ -186,42 +186,6 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **SnpEff build:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SnpEff build:** {% icon tool %} with the following parameters:
->    - *"Name for the database"*: `ncov`
->    - *"Input annotations are in"*: `GenBank`
->        - {% icon param-file %} *"Genbank dataset to build database from"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 ## Sub-step with **Faster Download and Extract Reads in FASTQ**
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -300,87 +264,11 @@ A big step can have several subsections or sub steps:
 >
 > 1. **Map with BWA-MEM** {% icon tool %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output_fasta` (output of **SnpEff build:** {% icon tool %})
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
 >        - {% icon param-file %} *"Select a paired collection"*: `output_paired_coll` (output of **fastp** {% icon tool %})
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Filter SAM or BAM, output SAM or BAM**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Filter SAM or BAM, output SAM or BAM** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"SAM or BAM file to filter"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
->    - *"Minimum MAPQ quality score"*: `20`
->    - *"Filter on bitwise flag"*: `yes`
->        - *"Only output alignments with all of these flag bits set"*: ``
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Samtools stats**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Samtools stats** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"BAM file"*: `output1` (output of **Filter SAM or BAM, output SAM or BAM** {% icon tool %})
->    - *"Set coverage distribution"*: `No`
->    - *"Output"*: `One single summary file`
->    - *"Filter by SAM flags"*: `Do not filter`
->    - *"Use a reference sequence"*: `No`
->    - *"Filter by regions"*: `No`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -414,7 +302,7 @@ A big step can have several subsections or sub steps:
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `output1` (output of **Filter SAM or BAM, output SAM or BAM** {% icon tool %})
+>    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
 >    ***TODO***: *Check parameter descriptions*
@@ -451,9 +339,206 @@ A big step can have several subsections or sub steps:
 > 1. **Realign reads** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `History`
->        - {% icon param-file %} *"Reference"*: `output_fasta` (output of **SnpEff build:** {% icon tool %})
+>        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
 >    - In *"Advanced options"*:
 >        - *"How to handle base qualities of 2?"*: `Keep unchanged`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Samtools stats**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Samtools stats** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"BAM file"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
+>    - *"Set coverage distribution"*: `No`
+>    - *"Output"*: `One single summary file`
+>    - *"Filter by SAM flags"*: `Do not filter`
+>    - *"Use a reference sequence"*: `No`
+>    - *"Filter by regions"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Insert indel qualities**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Insert indel qualities** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
+>    - *"Indel calculation approach"*: `Dindel`
+>        - *"Choose the source for the reference genome"*: `History`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **Call variants**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **Call variants** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
+>    - *"Choose the source for the reference genome"*: `History`
+>    - *"Call variants across"*: `Whole reference`
+>    - *"Types of variants to call"*: `SNVs and indels`
+>    - *"Variant calling parameters"*: `Configure settings`
+>        - In *"Coverage"*:
+>            - *"Minimal coverage"*: `50`
+>        - In *"Base-calling quality"*:
+>            - *"Minimum baseQ"*: `30`
+>            - *"Minimum baseQ for alternate bases"*: `30`
+>        - In *"Mapping quality"*:
+>            - *"Minimum mapping quality"*: `20`
+>    - *"Variant filter parameters"*: `Preset filtering on QUAL score + coverage + strand bias (lofreq call default)`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **SnpEff eff:**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **SnpEff eff:** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
+>    - *"Output format"*: `VCF (only if input is VCF)`
+>    - *"Create CSV report, useful for downstream analysis (-csvStats)"*: `Yes`
+>    - *"Annotation options"*: ``
+>    - *"Filter output"*: ``
+>    - *"Filter out specific Effects"*: `No`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
+
+## Sub-step with **SnpSift Extract Fields**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
+>    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
+>    - *"multiple field separator"*: `,`
+>    - *"empty field text"*: `.`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -503,203 +588,9 @@ A big step can have several subsections or sub steps:
 >                    - {% icon param-repeat %} *"Insert Picard output"*
 >                        - *"Type of Picard output?"*: `Markdups`
 >                        - {% icon param-file %} *"Picard output"*: `metrics_file` (output of **MarkDuplicates** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Insert indel qualities**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Insert indel qualities** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
->    - *"Indel calculation approach"*: `Dindel`
->        - *"Choose the source for the reference genome"*: `History`
->            - {% icon param-file %} *"Reference"*: `output_fasta` (output of **SnpEff build:** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Call variants**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Call variants** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
->    - *"Choose the source for the reference genome"*: `History`
->        - {% icon param-file %} *"Reference"*: `output_fasta` (output of **SnpEff build:** {% icon tool %})
->    - *"Call variants across"*: `Whole reference`
->    - *"Types of variants to call"*: `SNVs and indels`
->    - *"Variant calling parameters"*: `Configure settings`
->        - In *"Coverage"*:
->            - *"Minimal coverage"*: `50`
->        - In *"Base-calling quality"*:
->            - *"Minimum baseQ"*: `30`
->            - *"Minimum baseQ for alternate bases"*: `30`
->        - In *"Mapping quality"*:
->            - *"Minimum mapping quality"*: `20`
->    - *"Variant filter parameters"*: `Preset filtering on QUAL score + coverage + strand bias (lofreq call default)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnpEff eff:**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SnpEff eff:** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
->    - *"Output format"*: `VCF (only if input is VCF)`
->    - *"Genome source"*: `Custom snpEff database in your history`
->        - {% icon param-file %} *"SnpEff4.3 Genome Data"*: `snpeff_output` (output of **SnpEff build:** {% icon tool %})
->    - *"Upstream / Downstream length"*: `No upstream / downstream intervals (0 bases)`
->    - *"spliceRegion Settings"*: `Use Defaults`
->    - *"Annotation options"*: ``
->    - *"Filter output"*: ``
->    - *"Filter out specific Effects"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Convert VCF to VCF_BGZIP**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Convert VCF to VCF_BGZIP** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Choose Vcf file"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnpSift Extract Fields**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
->    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
->    - *"multiple field separator"*: `,`
->    - *"empty field text"*: `.`
+>        - {% icon param-repeat %} *"Insert Results"*
+>            - *"Which tool was used generate logs?"*: `SnpEff`
+>                - {% icon param-file %} *"Output of SnpEff"*: `csvFile` (output of **SnpEff eff:** {% icon tool %})
 >
 >    ***TODO***: *Check parameter descriptions*
 >
