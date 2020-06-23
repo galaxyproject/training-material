@@ -7,61 +7,53 @@ questions:
 - How do I run an image analysis pipeline on public data using CellProfiler?
 - How do I analyse the DNA channel of fluorescence siRNA screens?
 - How do I download public image data into my history?
-- How do I segment cell nuclei?
-- How do I label segmented cell nuclei?
+- How do I segment and label cell nuclei?
 - How do I segment nucleoli (as the absence of DNA)?
-- How do I combine segmentation masks?
+- How do I combine nuclei and nucleoli into one segmentation mask?
 - How do I extract the background of an image?
-- How do I identify to which nucleus each nucleolus belongs?
-- How do I create segmentation masks?
-- How do I measure relate the nucleoli to their parent nucleus?
+- How do I relate the nucleoli to their parent nucleus?
+- How do I measure the image and object features?
 - How do I measure the image quality?
-- How do I measure the image features (granularity, intensity)?
-- How do I measure the nuclei features (texture, intensity)?
-- How do I measure the size and shape nuclei and nucleoli?
-- How do I measure area occupied by nuclei and nucleoli?
-- How do I export and visualise my measurements?
 objectives:
-- How to download images from a public repository ([IDR](http://idr.openmicroscopy.org/){_blank}).
+- How to download images from a public image repository.
 - How to segment cell nuclei using CellProfiler in Galaxy.
 - How to segment cell nucleoli using CellProfiler in Galaxy.
 - How to extract features for images, nuclei and nucleoli.
-time_estimation: 3H
+time_estimation: 4H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
+- CellProfiler in Galaxy can segment and extract features of any object of interest.
+- The features and masks can be exported for further analysis.
 contributors:
 - beatrizserrano
-
 ---
 
 
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+The nucleolus is a prominent structure in the nucleus of the cell involved in the ribosome biogenesis and cell cycle regulation. In the DNA staining of gene silencing screens, the nucleolus can be identified as the absence of DNA ([Fig. 1](#nucleoli)). The loss of function phenotypes can be indicative of a particular function.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+<a name="nucleoli"></a>
+![](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen published at {% cite Heriche_2014 %}. The red arrows point at the absence of DNA, and hence, the putative nucleoli.")
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+This kind of data can be found at the [Image Data Repository (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects tissues and cell datasets.
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+[CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html) is a well-known tool to perform image analysis. The functionality of each module of the desktop version are now wrapped as a tool in Galaxy. The standalone version creates a *.cppipe* file that can be run using either the user interface or a command line.
 
+To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts: 
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+1) **StartingModules** {% icon tool %} to initialise the pipeline,
+
+2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the nucleus, the nucleolus, background and feature extraction,
+
+3) **CellProfiler** {% icon tool %} to actually run the pipeline.
+
+<a name="high_level_view"></a>
+![](../../images/tutorial-CP/wf.png "High-level view of the workflow")
+
+Here you will learn how to create a workflow to download a selection of images from the IDR; then you will be able segment the nucleoli within the nuclei using CellProfiler. You will also learn how to extract and export the features at three different levels: image, nucleus, nucleolus.
+
 
 > ### Agenda
 >
@@ -72,79 +64,104 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+# Get data
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
 
-have fun!
-
-## Get data
-
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Download images from the IDR
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 1. If you are logged in, create a new history for this tutorial.
 >
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
+>    {% include snippets/create_new_history.md %}
+> 2. **IDR Download** {% icon tool %} with the following parameters:
+>    - *"How would you like to specify the IDs of images to download?"*: `As text (comma-separated list of IDs or a valid IDR link)`
+>    -  *"Image IDs to download"*: `http://idr.openmicroscopy.org/webclient/?show=image-295900|image-295905|image-295910|image-295918|image-295928|image-295934`
+>    -  *"Name of the channel to download"*: `Cy3`
+>    -  *"z-plane of images to download"*: `0`
+>    -  *"Image frame to download"*: `0`
+>    -  *"Limit the download to a selected region of the image?"*: `No, download the entire image plane`
+>    -  *"Skip failed retrievals?"*: `Yes`
+>    -  *"Download images in a tarball?"*: `Yes`
 >
->    ***TODO***: *Remove the useless files (if added)*
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>    > ### {% icon tip %} Tip: Get the IDR link from a manual selection of images
+>    >
+>    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102){:target="_blank"} and select in the preview of a plate a few images ((figure [Fig. 3](#IDR_interface) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#IDR_interface) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#IDR_interface) - 3).
+>    > <a name="IDR_interface"></a>
+>    > ![](../../images/tutorial-CP/IDR_interface.png "IDR interface")
+>    {: .tip}
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
+>    > ### {% icon comment %} Comment
+>    >
+>    > **IMPORTANT:** When the number of images to download is high, it is recommended to enable the option *“Download images in a tarball?”* in order to improve the performance.
+>    {: .comment}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-<!--
-![Alternative text](../../images/tutorial-CP/wf "Legend of the image") -->
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon question %} Question
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. Why are we taking the `Cy3` channel in the [example data](http://idr.openmicroscopy.org/webclient/img_detail/295900/){:target="_blank"}?
+> 2. How could we download 100,000 images in one go?
 >
-{: .details}
+> > ### {% icon solution %} Solution
+> >
+> > 1. The `Cy3` dye was used in the study to stain DNA, and since we want to segment the abscence of DNA, that's the only channel that we need to download from the IDR.
+> >
+> > 2. We could upload a text file with the image ids of interest.
+> > 
+> {: .solution}
+>
+{: .question}
 
-A big step can have several subsections or sub steps:
+# Start CellProfiler pipeline
 
+The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of the standalone CellProfiler. It has to be used at the beginning of a workflow because it sets the naming and metadata handling for the rest of tools.
+> ### {% icon hands_on %} Hands-on: Specify metadata to CellProfiler
+>
+> 1. **Starting Modules** {% icon tool %} with the following parameters:
+>    - Images
+>       - *"Do you want to filter only the images? "*: `Select the images only`
+>    - Metadata
+>       - *"Do you want to extract the metadata?"*: `Yes, specify metadata`
+>           - *"Metadata extraction method"*: `Extract from file/folder names`
+>       - *"Metadata source"*: `File name`
+>       - *"Select the pattern to extract metadata from the file name"*: `field1__field2__field3__field4__field5__field6`
+>       - *"Extract metadata from"*: `All images`
+>    - NamesAndTypes
+>       - *"Process 3D"*: `No, do not process 3D data` 
+>       - *"Assign a name to"*: `Give every image the same name` 
+>       - *"Name to assign these images"*: `DNA` 
+>       - *"Select the image type"*: `Grayscale image` 
+>           - *"Set intensity range from"*: `Image metadata` 
+>    - Groups
+>       - *"Do you want to group your images?"*: `Yes, group the images` 
+>       - *"param"*: `field1` 
+>
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > The images downloaded from the IDR are named following the pattern: `plate__imageID__cropX__cropY__cropWidth__cropHeight`. These fields indicate to which plate the image belongs, what is the identifier of the image in the IDR, and the 4 cropping parameters selected. In our case, the upper-left corner (X, Y) and the width and height from there. We have a total of 6 metadata values encoded in the name of the file, separated by `__`. The pattern to extract our metadata from the file name properly is, therefore: `field1__field2__field3__field4__field5__field6`. It is important to keep in mind that, later in the analysis, our `plate` will be `field1`, `imageID` will be `field2`, `cropX` will be `field3`, etc. for CellProfiler.
+>    {: .comment}
+>
+{: .hands_on}
 
-## Sub-step with **IdentifyPrimaryObjects**
+# Object segmentation
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Segment nuclei
+
+Since we are interested in segmenting the nucleoli, you may wonder why we need to segment nuclei first. There are several reasons for that: 
+
+- Get the nuclei features. The intensity, size, shape, number of nucleoli per nucleus, etc. can be informative to study the nucleoli.
+
+- Avoid the detection of wrong spots. In a first segmentation, we detect the nuclei, while in the second pass we will segment the holes (nucleoli). The holes need to fall inside the nuclei, and hence the importance of having them segmented too.
+
+In the first step, we will identify the nuclei that are complete, meaning that they are not touching the borders of the image.
+
+> ### {% icon hands_on %} Hands-on: Segment nuclei that are complete within the boundaries of the image
 >
 > 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Starting Modules** {% icon tool %})
@@ -153,6 +170,8 @@ A big step can have several subsections or sub steps:
 >        - *"Enter the name of the primary objects to be identified"*: `Nuclei`
 >        - *"Typical minimum diameter of objects, in pixel units (Min)"*: `15`
 >        - *"Typical maximum diameter of objects, in pixel units (Max)"*: `200`
+>        - *"Discard objects outside the diameter range?"*: `Yes`
+>        - *"Discard objects touching the border of the image?"*: `Yes`
 >        - *"Threshold strategy"*: `Global`
 >            - *"Thresholding method"*: `Otsu`
 >                - *"Two-class or three-class thresholding?"*: `Two classes`
@@ -163,36 +182,46 @@ A big step can have several subsections or sub steps:
 >                - *"Automatically calculate minimum allowed distance between local maxima?"*: `Yes`
 >        - *"Handling of objects if excessive number of objects identified"*: `Continue`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > - The name entered to the input image and objects has to be consistent (case sensitive) with the names in *NamesAndTypes* and the tools to follow.
+>    > - The min and max diameter of the objects (`Typical minimum diameter of objects, in pixel units (Min)` and `Typical minimum diameter of objects, in pixel units (Max)`) will have to be adjusted to the resolution of the images.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> We are using here Otsu's method for segmentation. What other segmentation options are available? What is the difference between them?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > In the *global* methods we have `Manual`, `Measurement`, `Minimum cross entropy`, `Otsu` and `Robust background`. For the *adaptive* ones we only have `Otsu`. Check the parameters' help to get more information on each one. 
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **ConvertObjectsToImage**
+From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like:
 
-> ### {% icon hands_on %} Hands-on: Task description
+![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels")
+
+> ### {% icon question %} Questions
+>
+> Why are some nuclei not labeled in the image above?
+>
+> > ### {% icon solution %} Solution
+> >
+> > We have indicated in the tool **IdentifyPrimaryObjects** {% icon tool %} that the nuclei that are either outside the diameter range or touching the border should be discarded.
+> >
+> {: .solution}
+>
+{: .question}
+
+
+> ### {% icon hands_on %} Hands-on: Mask the nuclei detected
 >
 > 1. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
@@ -200,38 +229,7 @@ A big step can have several subsections or sub steps:
 >    - *"Enter the name of the resulting image"*: `MaskNuclei`
 >    - *"Select the color format"*: `Binary (black & white)`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **DisplayDataOnImage**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **DisplayDataOnImage** {% icon tool %} with the following parameters:
+> 2. **DisplayDataOnImage** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
 >    - *"Display object or image measurements?"*: `Object`
 >        - *"Enter the name of the input objects"*: `Nuclei`
@@ -242,38 +240,7 @@ A big step can have several subsections or sub steps:
 >        - *"Number of decimals"*: `0`
 >    - *"Name the output image that has the measurements displayed"*: `ImageDisplay`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SaveImages**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SaveImages** {% icon tool %} with the following parameters:
+> 3. **SaveImages** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **DisplayDataOnImage** {% icon tool %})
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `tiff`
@@ -284,36 +251,18 @@ A big step can have several subsections or sub steps:
 >            - *"Text to append to the image name"*: `_nucleiNumbers`
 >    - *"Overwrite existing files without warning?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The `Text color` parameter can be any of your choice, it just needs to be visible on top of the nuclei.
 >    {: .comment}
->
 {: .hands_on}
+ 
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Segment nucleoli
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+The nucleoli are lacking intensity in the DNA staining and therefore, we need to enhance the black holes before masking.
 
-## Sub-step with **EnhanceOrSuppressFeatures**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Detect and mask dark holes
 >
 > 1. **EnhanceOrSuppressFeatures** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
@@ -323,38 +272,8 @@ A big step can have several subsections or sub steps:
 >        - *"Feature type"*: `Dark holes`
 >            - *"Maximum hole size"*: `15`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MaskImage**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MaskImage** {% icon tool %} with the following parameters:
+> 2. **MaskImage** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **EnhanceOrSuppressFeatures** {% icon tool %})
 >    - *"Enter the name of the input image"*: `DNAdarkholes`
 >    - *"Enter the name of the resulting image"*: `MaskDNAdarkholes`
@@ -362,36 +281,13 @@ A big step can have several subsections or sub steps:
 >        - *"Enter the name objects to mask the input image"*: `Nuclei`
 >    - *"Invert the mask?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+Now that we have all the holes in one mask, we can segment the nucleoli as individual objects in the same way as we did with the nuclei. All the nucleoli can be then combined into one single image.
 
-## Sub-step with **IdentifyPrimaryObjects**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Segment nucleoli as individual objects
 >
 > 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MaskImage** {% icon tool %})
@@ -400,7 +296,7 @@ A big step can have several subsections or sub steps:
 >        - *"Enter the name of the primary objects to be identified"*: `Nucleoli`
 >        - *"Typical minimum diameter of objects, in pixel units (Min)"*: `2`
 >        - *"Typical maximum diameter of objects, in pixel units (Max)"*: `15`
->        - *"Discard objects touching the border of the image?"*: `No`
+>        - *"Discard objects touching the border of the image?"*: `Yes`
 >        - *"Threshold strategy"*: `Global`
 >            - *"Thresholding method"*: `Otsu`
 >                - *"Two-class or three-class thresholding?"*: `Two classes`
@@ -411,73 +307,25 @@ A big step can have several subsections or sub steps:
 >                - *"Automatically calculate minimum allowed distance between local maxima?"*: `Yes`
 >        - *"Handling of objects if excessive number of objects identified"*: `Continue`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **ConvertObjectsToImage**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
+> 2. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
 >    - *"Enter the name of the input objects you want to convert to an image"*: `Nucleoli`
 >    - *"Enter the name of the resulting image"*: `MaskNucleoli`
 >    - *"Select the color format"*: `Binary (black & white)`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## Combine segmentation masks
 
-## Sub-step with **GrayToColor**
+We have now one segmentation mask per image with all the nuclei detected, `MaskNuclei`, and another one for the nucleoli, `MaskNucleoli`. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both (using different colors) into one image. Here we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome will look like:
 
-> ### {% icon hands_on %} Hands-on: Task description
+![combined_mask_nuclei_nucleoli](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
+
+
+> ### {% icon hands_on %} Hands-on: Convert and save the nuclei and nucleoli masks
 >
 > 1. **GrayToColor** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
@@ -488,38 +336,8 @@ A big step can have several subsections or sub steps:
 >        - *"Enter the name of the image to be colored blue"*: `MaskNuclei`
 >        - *"Relative weight for the blue image"*: `0.5`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SaveImages**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **SaveImages** {% icon tool %} with the following parameters:
+> 2. **SaveImages** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **GrayToColor** {% icon tool %})
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `tiff`
@@ -530,36 +348,26 @@ A big step can have several subsections or sub steps:
 >            - *"Text to append to the image name"*: `_combinedMask`
 >    - *"Overwrite existing files without warning?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > - You can pick any other color of your choice, as long as the contrast is good enough to distinguish both objects.
+>    > - We are saving here a tiff image but any other format would work too.
 >    {: .comment}
+>
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Background extraction
 
-## Sub-step with **IdentifyPrimaryObjects**
+The background extraction is useful for quality control. For instance, in a high-exposed or low-contrast image, the nuclei won't be very different from the background and that may lead to the wrong segmentation.
 
-> ### {% icon hands_on %} Hands-on: Task description
+To extract the background, we first need to get the foreground and subtract it from the original image. We already have the nuclei mask, however, we excluded incomplete nuclei, i.e., those touching the borders or those with sizes outside of the specified range. This means that the mask is not covering all the nuclei and we need to get rid of the constraints to get the complete foreground. Now, we want to detect everything with a certain intensity (foreground) and subtract it from the complete image to get the background.
+
+## Identify the foreground
+
+> ### {% icon hands_on %} Hands-on: Segment all nuclei
 >
 > 1. **IdentifyPrimaryObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
@@ -580,75 +388,23 @@ A big step can have several subsections or sub steps:
 >                - *"Automatically calculate minimum allowed distance between local maxima?"*: `Yes`
 >        - *"Handling of objects if excessive number of objects identified"*: `Continue`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **ConvertObjectsToImage**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
+> 2. **ConvertObjectsToImage** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
 >    - *"Enter the name of the input objects you want to convert to an image"*: `NucleiIncludingTouchingBorders`
 >    - *"Enter the name of the resulting image"*: `Image_NucleiIncludingTouchingBorders`
 >    - *"Select the color format"*: `Binary (black & white)`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **ImageMath**
+## Remove the foreground from the original image
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Subtract nuclei from the original image
 >
-> 1. **ImageMath** {% icon tool %} with the following parameters:
+> **ImageMath** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
 >    - *"Enter a name for the resulting image"*: `BG`
 >    - *"Operation"*: `Subtract`
@@ -660,36 +416,40 @@ A big step can have several subsections or sub steps:
 >                - *"Enter the name of the second image"*: `Image_NucleiIncludingTouchingBorders`
 >    - *"Ignore the image masks?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
+>     
 >
->    ***TODO***: *Consider adding a comment or tip box*
+>     
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > When the operation is `Subtract`, the order of the first and second images is important.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **MeasureGranularity**
+# Feature extraction
 
-> ### {% icon hands_on %} Hands-on: Task description
+Now that we have the objects of interest segmented and the background extracted, we can start measuring parameters on them. In particular it is relevant to:
+
+- measure the granularity, texture and intensity of the nuclei and original image,
+- measure the intensity of the original image, the background and foreground,
+- measure the size and shape of nuclei and nucleoli,
+- assess the quality of the original image,
+- measure the area ocuppied by nuclei and nucleoli.
+
+A step that requires special attention is the relationship nucleolus-nucleus. This is useful to compute statistics on the number of nucleoli by nucleus.
+
+> ### {% icon comment %} Comment
+>
+> The order in which the tools are chained in this section is not relevant for the outcome.
+{: .comment}
+
+
+## Measure the granularity, texture, intensity, size and shape
+
+> ### {% icon hands_on %} Hands-on: Measure the granularity, texture, intensity, size and shape
 >
 > 1. **MeasureGranularity** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ImageMath** {% icon tool %})
@@ -697,38 +457,8 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-repeat %} *"Insert new image"*
 >            - *"Enter the name of a greyscale image to measure"*: `DNA`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MeasureTexture**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MeasureTexture** {% icon tool %} with the following parameters:
+> 2. **MeasureTexture** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureGranularity** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -738,38 +468,8 @@ A big step can have several subsections or sub steps:
 >            - {% icon param-repeat %} *"Insert new object"*
 >                - *"Enter the names of the objects to measure"*: `Nuclei`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MeasureObjectIntensity**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MeasureObjectIntensity** {% icon tool %} with the following parameters:
+> 3. **MeasureObjectIntensity** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureTexture** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -778,38 +478,8 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-repeat %} *"Insert new object"*
 >            - *"Enter the name of the objects to measure"*: `Nuclei`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MeasureObjectSizeShape**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MeasureObjectSizeShape** {% icon tool %} with the following parameters:
+> 4. **MeasureObjectSizeShape** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectIntensity** {% icon tool %})
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
@@ -817,36 +487,28 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-repeat %} *"Insert new object"*
 >            - *"Enter the name of the object to measure"*: `Nucleoli`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
+  
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> Why are we measuring the granularity, texture and intensity of the original image and the nuclei only?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > The nucleoli was not stained in the DNA channel and hence, the granularity, texture and intensity are constant values.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **RelateObjects**
 
-> ### {% icon hands_on %} Hands-on: Task description
+## Relate nucleoli to their parent nucleus
+
+It might be relevant to compute some statistics on the number of nucleoli inside each nucleus. CellProfiler has a very interesting module to relate both objects in which each one of the nucleoli is assigned an identifier and linked to the identifier of its parent nucleus.
+
+> ### {% icon hands_on %} Hands-on: Relate nucleoli to their parent nucleus
 >
 > 1. **RelateObjects** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectSizeShape** {% icon tool %})
@@ -856,36 +518,14 @@ A big step can have several subsections or sub steps:
 >        - *"Calculate distances to other parents?"*: `No`
 >    - *"Do you want to save the children with parents as a new object set?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Measure the image quality-related parameters
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+In this section, we will measure the image quality, the area occupied by the nuclei and nucleoli in the original image and the intensity of the foreground and background.
 
-## Sub-step with **MeasureImageQuality**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Measure the image quality
 >
 > 1. **MeasureImageQuality** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **RelateObjects** {% icon tool %})
@@ -897,38 +537,8 @@ A big step can have several subsections or sub steps:
 >                    - *"Select a thresholding method"*: `Otsu`
 >                        - *"Two-class or three-class thresholding?"*: `Two classes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MeasureImageAreaOccupied**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MeasureImageAreaOccupied** {% icon tool %} with the following parameters:
+> 2. **MeasureImageAreaOccupied** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageQuality** {% icon tool %})
 >    - In *"new area"*:
 >        - {% icon param-repeat %} *"Insert new area"*
@@ -938,38 +548,8 @@ A big step can have several subsections or sub steps:
 >            - *"Measure the area occupied in a binary image, or in objects?"*: `Objects`
 >                - *"Enter the name of the objects to measure"*: `Nucleoli`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MeasureImageIntensity**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **MeasureImageIntensity** {% icon tool %} with the following parameters:
+>     
+> 3. **MeasureImageIntensity** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageAreaOccupied** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -983,118 +563,64 @@ A big step can have several subsections or sub steps:
 >            - *"Enter the name of the image to measure"*: `BG`
 >            - *"Measure the intensity only from areas enclosed by objects?"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> In step 3, we are measuring the area occupied by objects for the DNA twice. Why is that?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > We want to have the global intensity of the image, so the parameter *"Measure the intensity only from areas enclosed by objects?"* has to be set to `No`. However, we also want to obtain the intensity of the foreground, so only the parts of the images that are enclosed by nuclei.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **ExportToSpreadsheet**
+## Export the features to a CSV
 
-> ### {% icon hands_on %} Hands-on: Task description
+All the parameters that we have measured related to the images and objects need to be exported to a file for each one of 6 example images analysed.
+
+> ### {% icon hands_on %} Hands-on: Export features
 >
-> 1. **ExportToSpreadsheet** {% icon tool %} with the following parameters:
+> **ExportToSpreadsheet** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureImageIntensity** {% icon tool %})
 >    - *"Select the column delimiter"*: `Tab`
 >    - *"Add a prefix to file names?"*: `Do not add prefix to the file name`
 >    - *"Create a GenePattern GCT file?"*: `No`
 >    - *"Export all measurement types?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# Run the CellProfiler pipeline
 
-## Sub-step with **CellProfiler**
+All the steps in our workflow (except for the **IDR download** {% icon tool %}) have been passing through an `output_pipeline` as a parameter. This was the way to assemble all the modules from CellProfiler, now we can run all of them together!
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+> ### {% icon hands_on %} Hands-on: Run CellProfiler pipeline
 >
-> 1. **CellProfiler** {% icon tool %} with the following parameters:
+> **CellProfiler** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `output_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
 >    - *"Are the input images packed into a tar archive?"*: `Yes`
 >        - {% icon param-file %} *"A tarball of images"*: `output_tar` (output of **IDR Download** {% icon tool %})
 >    - *"Detailed logging file?"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > This is the only time-consuming step of the workflow, as it needs to perform all the analysis in the input dataset.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial, you have downloaded images from a public image repository into your Galaxy history. After that, you have built and run a typical image analysis pipeline, composed of segmentation of several objects and feature extraction. As an outcome, you got plenty of features to analyse! And some masks to check that the segmentation algorithms worked as expected. Now you are ready to perform your biological data analysis!
