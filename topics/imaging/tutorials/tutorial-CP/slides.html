@@ -2,29 +2,122 @@
 layout: tutorial_slides
 logo: "GTN"
 
-title: Nucleoli segmentation and feature extraction using CellProfiler
+title: Nucleoli segmentation <br> & <br> feature extraction <br> using CellProfiler
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How do I run an image analysis pipeline on public data using CellProfiler?
+- How do I analyse the DNA channel of fluorescence siRNA screens?
+- How do I download public image data into my history?
+- How do I segment and label cell nuclei?
+- How do I segment nucleoli (as the absence of DNA)?
+- How do I combine nuclei and nucleoli into one segmentation mask?
+- How do I extract the background of an image?
+- How do I relate the nucleoli to their parent nucleus?
+- How do I measure the image and object features?
+- How do I measure the image quality?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- How to download images from a public image repository.
+- How to segment cell nuclei using CellProfiler in Galaxy.
+- How to segment cell nucleoli using CellProfiler in Galaxy.
+- How to extract features for images, nuclei and nucleoli.
+time_estimation: 4H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
+- CellProfiler in Galaxy can segment and extract features of any object of interest.
+- The features and masks can be exported for further analysis.
 contributors:
-- contributor1
-- contributor2
+- beatrizserrano
+---
+
+
+### What is the nucleoli?
+
+- Large structure in the nucleus
+- Membrane-less organelle
+- Functions: ribosome biogenesis and cell cycle regulation
+
+.image-60[
+  ![](../../images/tutorial-CP/img_dna_channel.png)
+]
+
 
 ---
 
-### How to fill the slide decks?
 
-Please follow our
-[tutorial to learn how to fill the slides]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-slides/slides.html)
+### Data
+
+- Bring your own images: upload DNA channel images to your Galaxy history
+- Download from the Image Data Resource ([IDR](http://idr.openmicroscopy.org/))
+
+.image-60[
+  ![](../../images/tutorial-CP/IDR_interface.png)
+]
+
+
+---
+
+
+### General Workflow
+
+![high_level_view_wf](../../images/tutorial-CP/wf.png "High-level view of the workflow")
+
+
+---
+
+
+### 1) Segment nuclei
+
+.image-80[
+  ![](../../images/tutorial-CP/subwf_nuclei.png)
+]
+
+
+---
+
+
+### Segmentation and labelling of the nuclei
+
+![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels")
+
+
+---
+
+
+### 2) Segment nucleoli
+
+.image-80[
+  ![](../../images/tutorial-CP/subwf_nucleoli.png)
+]
+
+
+---
+
+
+### Combined mask: nuclei + nucleoli
+
+![combined_mask_nuclei_nucleoli](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
+
+
+---
+
+
+### Background extraction
+
+.image-80[
+  ![](../../images/tutorial-CP/subwf_background.png)
+]
+
+
+---
+
+
+### Feature extraction
+
+.image-80[
+  ![](../../images/tutorial-CP/subwf_feature_extraction.png)
+]
+
+- **Important:** Relate nucleoli and parent nucleus
+
+
+---
