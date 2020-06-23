@@ -18,7 +18,7 @@ requirements:
       - collections
 contributors:
   - jmchilton
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -27,7 +27,7 @@ contributors:
 Through a series of examples, this tutorial aims to familiarize the reader with building Galaxy collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..
 
 > ###  {% icon comment %} Audience
-> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({{ site.baseurl }}{% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) tutorial.
+> This tutorial assumes a basic knowledge of using dataset collections in Galaxy but doesn't assume any particular knowledge of biology or bioinformatics. If you have not used collections with Galaxy previously, please check out the [using dataset collections]({% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) tutorial.
 {: .comment}
 
 > ### Agenda
@@ -66,7 +66,6 @@ This approach could be used to manipulate lists of uploads coming from many diff
 > PRJDA60709      | SAMD00016382     | DRX000480            | File 1
 >
 > Download the resulting tabular data describing the files by clicking the "TEXT" link at the top of the page. Alternatively, the resulting sample sheet can be downloaded directly [here](https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&result=read_run&fields=study_accession,sample_accession,experiment_accession,fastq_ftp&download=txt). The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - Galaxy will just need more time to download and process the files.
-
 {: .hands_on}
 
 Unfortunately the ENA ftp server is not operational at this moment,

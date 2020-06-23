@@ -24,16 +24,19 @@ requirements:
     topic_name: transcriptomics
     tutorials:
       - scrna-preprocessing
-#
-# follow_up_training:
-#   -
-#     type: "internal"
-#     topic_name: transcriptomics
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-scanpy-pbmc3k
 
 contributors:
   - mtekman
   - hrhotz
   - blankenberg
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
@@ -49,13 +52,13 @@ The cellular resolution and genome wide scope make it possible to draw new concl
 
 10x genomics has provided not only a cost-effective high-throughput solution to understanding sample heterogeneity at the individual cell level, but has defined the standards of the field that many downstream analysis packages are now scrambling to accommodate.
 
-![clusters]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_clusters_intro.png %} "From less than 1K to over 10K with 10x genomics: Analyses of two separate scRNA datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.")
+![clusters]({% link topics/transcriptomics/images/tenx_clusters_intro.png %} "From less than 1K to over 10K with 10x genomics: Analyses of two separate scRNA datasets using the (left) CelSEQ2 protocol, and the (right) 10x Chromium system.")
 
 The gain in resolution reduces the granularity and noise issues that plagued the field of scRNA-seq not long ago, where now individual clusters are much easier to decipher due to the added stability added by this gain in information.
 
 ### Library Preparation
 
-![Library Preparation]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_libprep.png %} "An overview of the library preparation")
+![Library Preparation]({% link topics/transcriptomics/images/tenx_libprep.png %} "An overview of the library preparation")
 
 The 10X barcoded gel beads consist of a pool barcodes which are used to separately index each cell's transcriptome. The individual gel barcodes are delivered to each cell via flow-cytometry, where each cell is fed single-file along a liquid tube and tagged with a 10X gel bead. The cells are then isolated from one another within thousands of nanoliter droplets, where each droplet described by a unique 10x barcode that all reads in that droplet are associated with once they undergo reverse-transcription (RT) which reconstructs the mRNA into a cDNA counterpart. The oil is then removed and all (now barcoded) cDNA reads are pooled together to be sequenced.
 
@@ -94,11 +97,11 @@ The tutorial is structured into two parts:
 >
 {: .agenda}
 
-![Overview of workflow]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_workflow.png %} "An overview of the workflow")
+![Overview of workflow]({% link topics/transcriptomics/images/tenx_workflow.png %} "An overview of the workflow")
 
 The first part of this tutorial is essentially a one-click "fire and forget" solution to demultiplexing and quantifying scRNA-seq data, where much of the complexity required in this extremely crucial stage is simplified into a single step.
 
-However, those who are more interested in learning the intricacies of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
+However, those who are more interested in learning the intricacies of how FASTQ files are transformed into a count matrix, please see the [Pre-processing of Single-Cell RNA Data]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) tutorial.
 
 10x Genomics has its own processing pipeline, [Cell Ranger](https://support.10xgenomics.com/single-cell-gene-expression/software/pipelines/latest/what-is-cell-ranger) to process the scRNA-seq outputs it produces, but this process requires much configuration to run and is significantly slower than other mappers.
 
@@ -107,7 +110,7 @@ Since STARsolo is a drop-in solution to the *Cell Ranger* pipeline, the first pa
 
 > ### {% icon details %}: Benchmark of Cell Ranger to others
 >
-> ![tenx_runtimes]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_runtimes.jpg %} "Benchmark of different mapping software.")
+> ![tenx_runtimes]({% link topics/transcriptomics/images/tenx_runtimes.jpg %} "Benchmark of different mapping software.")
 >
 > The image is from [*"Melsted et al (June, 2019)*](https://doi.org/10.1101/673285). Notice the order of magnitude speed up that STARsolo and a few others display, for a variety of different datasets in comparison to Cell Ranger.
 {: .details}
@@ -144,6 +147,8 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >
 > 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
+>    {% include snippets/import_from_data_library.md %}
+>
 >    ```
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz
@@ -167,9 +172,9 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 
 There are two main reagent kits used during the library preparation, and the choice of one will influence the size of the sequences we work with. Below we can see the layout of the primers used in both chemistries. We can ignore most of these as they are not relevant, namely: the P5 and P7 illumina primers are used in the illumina [bridge amplification](https://en.wikipedia.org/wiki/Illumina_dye_sequencing#Bridge_amplification) process; the Sample Index is an 8bp primer which is related to the Chromium system that balances nucleotide bias and ensures that there is no sample overlap during the multiplexed sequencing; and the Poly(dT) VN primer used to capture RNA sequences with poly-A tails (i.e. mRNA).
 
-![chem]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_primers.svg %} "10x Chromiumv2 and Chromiumv3 Chemistries")
+![chem]({% link topics/transcriptomics/images/tenx_primers.svg %} "10x Chromiumv2 and Chromiumv3 Chemistries")
 
-The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our reads. It is highly advised that the [Plates, Batches, and Barcodes]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) slides are revisited to refresh your mind on these concepts.
+The primers of interest to us are the Cell Barcode (CB) and the Unique Molecular Identifiers (UMI) used in the Read 1 sequencing primer, as they describe to us how to demultiplex and deduplicate our reads. It is highly advised that the [Plates, Batches, and Barcodes]({% link topics/transcriptomics/tutorials/scrna-preprocessing/tutorial.md %}) slides are revisited to refresh your mind on these concepts.
 
 
 | Chemistry | Read 2 | Read 1 (CB + UMI) | Insert (Read 2 + Read 1) |
@@ -183,7 +188,7 @@ The table above gives a summary of the primers used in the image and the number 
 >
 > Unstranded protocols do not distinguish between whether a fragments was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
 >
-> ![strandedness]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_strandedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
+> ![strandedness]({% link topics/transcriptomics/images/tenx_strandedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
 >
 > Stranded protocols overcome this by fitting different 5' and 3' primers and adaptors, meaning that the orientation of the fragment is fixed during sequencing. For the Chromium v2 and v3 chemistries, the barcode information is purely within the R1 forward strand.
 >
@@ -206,7 +211,7 @@ The table above gives a summary of the primers used in the image and the number 
 > >    * They need to be designed in such a way to minimise accidentally aligning to the reference they were prepared to be used for.
 > >    * Longer barcodes tend to be more unique, so this is a problem that is being solved as the barcodes increase in size, allowing for barcodes that can be used on more than one reference to be more common, as seen above.
 > > 1. UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random 'salt' that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two reads that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.
-> > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true.
+> > 1. $$4^{10} = 1,048,576$$ unique molecules tagged, vs. $$4^{12} = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true.
 > > 1. Forward.
 > {: .solution}
 {: .question}
@@ -240,12 +245,16 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 > ### {% icon hands_on %} Hands-on
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->    - {% icon param-repeat %} *Insert Input Pairs*
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - *"Input Type"*: `Single files`
+>        - In *"Input Pairs"*:
+>            - In *"1: Input Pairs"*:
+>                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
+>                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
+>            - Select {% icon param-repeat %} *Insert Input Pairs*
+>            - In *"2: Input Pairs"*:
+>               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
+>               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
+>                 (*pay attention to the* **L001** *and* **L002** *names*)
 >    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
@@ -274,7 +283,7 @@ At this stage **RNA STARsolo** has output 5 files, 2 mapping quality files and 3
 
 ### Mapping Quality
 
-Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) tutorial.
+Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) tutorial.
 
 
 
@@ -287,7 +296,7 @@ Let us investigate the output log. This type of quality control is essential in 
 >        - In *"STAR output"*:
 >          - In *"1:STAR output"*:
 >            - *"Type of STAR output?"*: `Log`
->            - {% icon param-file %} *"STAR log output"*: `log output of RNA STARsolo`
+>            - {% icon param-file %} *"STAR log output"*: `RNA STARsolo: log`
 {: .hands_on}
 
 
@@ -382,9 +391,9 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `3000`
@@ -408,11 +417,11 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > > ### {% icon solution %} Solution
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
-> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that 5200 barcodes were detected in total, but only 272 of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that *5200* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
 > {: .solution}
 {: .question}
 
-This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the [*Downstream Single-cell RNA analysis with RaceID*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %}) tutorial.
+This will produce a count matrix in a human readable tabular format which can be used in downstream analysis tools, such as those used in the [*Downstream Single-cell RNA analysis with RaceID*]({% link topics/transcriptomics/tutorials/scrna-raceid/tutorial.md %}) tutorial.
 
 > ### {% icon details %} File Formats in scRNA-seq
 >
@@ -422,7 +431,7 @@ This will produce a count matrix in a human readable tabular format which can be
 >
 > As expected, the format that usually wins is the one which is most common in the field. In this case, the format *also* happens to be a very good format that stores data in a concise, compressed, and extremely readable manner:
 >
-> ![anddata]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_anndata.svg %} "AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix." )
+> ![anddata]({% link topics/transcriptomics/images/tenx_anndata.svg %} "AnnData is an HDF5-based format, which stores gene and cell information in their own matrices, complementary to the main data matrix." )
 >
 > The *AnnData* format (`hda5`) is an extension of the [HDF5 format](https://en.wikipedia.org/wiki/Hierarchical_Data_Format), which supports multidimensional datasets to be stored in a consistent and space-optimised way. This is the default output of *Cell Ranger* and so is also the default output of **RNA STARsolo**. The format is also now a widely accepted format in many downstream analysis suites.
 {: .details}
@@ -441,15 +450,15 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Rank Barcodes`
 >        - *"Lower Bound"*: `100`
 >
 {: .hands_on}
 
-![knee]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_knee.png %} "Barcode Ranks: The separating thresholds of high and low quality cells")
+![knee]({% link topics/transcriptomics/images/tenx_knee.png %} "Barcode Ranks: The separating thresholds of high and low quality cells")
 
 The knee and inflection points on the curve mark the transition between two components of the total count distribution. This is assumed to represent the difference between empty droplets with little RNA and cell-containing droplets with much more RNA, and gives us a rough idea of how many cells to expect in our sample.
 
@@ -472,18 +481,18 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `EmptyDrops`
 >            - *"Lower-bound Threshold"*: `200`
->            - *"FDR Threshold"*: `0`
+>            - *"FDR Threshold"*: `0.01`
 >        - *"Format for output matrices"*: `Tabular`
 >
 {: .hands_on}
 
-![cells]({{ site.baseurl }}{% link topics/transcriptomics/images/tenx_cells.png %} "Detected Cells (red)")
+![cells]({% link topics/transcriptomics/images/tenx_cells.png %} "Detected Cells (red)")
 
 
 Here we recover 282 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean downstream clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the downstream analysis training materials.
@@ -496,4 +505,4 @@ In this workflow we have learned to quickly perform mapping and quantification o
 
 A full pipeline which produces both an AnnData and tabular file for inspection is provided [here](workflows/scrna_tenx.ga).
 
-<!-- ![Recap of workflow]({{site.baseurl}}{% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow") -->
+<!-- ![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow") -->

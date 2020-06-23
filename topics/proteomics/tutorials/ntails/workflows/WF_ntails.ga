@@ -1,1036 +1,1147 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "", 
-    "format-version": "0.1", 
-    "name": "tails triple dimethyl OpenMS2.1", 
-    "steps": {
-        "0": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "Input Dataset Collection (mzML files)"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset collection", 
-            "outputs": [], 
-            "position": {
-                "left": 199.9666748046875, 
-                "top": 435.20001220703125
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection (mzML files)\"}", 
-            "tool_version": null, 
-            "type": "data_collection_input", 
-            "uuid": "7bf13771-4620-4563-b972-efaf74887ce5", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "11ba0e33-3924-43e2-a8f9-85e0e6c12cfe"
-                }
-            ]
-        }, 
-        "1": {
-            "annotation": "", 
-            "content_id": null, 
-            "id": 1, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "UniProt database (FASTA file)"
-                }
-            ], 
-            "label": null, 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 241, 
-                "top": 603.2166748046875
-            }, 
-            "tool_errors": null, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"UniProt database (FASTA file)\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "05f5cbd8-8459-47a0-8faf-95c0821f25fc", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "output", 
-                    "uuid": "3d25e478-d053-4d4e-9c7f-92fec2d6b09c"
-                }
-            ]
-        }, 
-        "2": {
-            "annotation": "", 
-            "content_id": "FeatureFinderMultiplex", 
-            "id": 2, 
-            "input_connections": {
-                "param_in": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FeatureFinderMultiplex", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FeatureFinderMultiplex", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "consensusxml"
-                }, 
-                {
-                    "name": "param_out_features", 
-                    "type": "featurexml"
-                }, 
-                {
-                    "name": "param_out_mzq", 
-                    "type": "mzq"
-                }
-            ], 
-            "position": {
-                "left": 1228.9666748046875, 
-                "top": 1174.88330078125
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_out_mzq": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_out_mzq"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "FeatureFinderMultiplex", 
-            "tool_state": "{\"param_algorithm_averagine_similarity\": \"\\\"0.6\\\"\", \"param_algorithm_rt_min\": \"\\\"3.0\\\"\", \"__page__\": 0, \"param_algorithm_missed_cleavages\": \"\\\"2\\\"\", \"param_algorithm_peptide_similarity\": \"\\\"0.7\\\"\", \"adv_opts\": \"{\\\"param_algorithm_knock_out\\\": \\\"true\\\", \\\"param_labels_Dimethyl4\\\": \\\"32.056407\\\", \\\"param_algorithm_isotopes_per_peptide\\\": \\\"3:6\\\", \\\"param_labels_Lys4\\\": \\\"4.0251069836\\\", \\\"param_labels_Dimethyl0\\\": \\\"28.0313\\\", \\\"param_labels_Lys8\\\": \\\"8.0141988132\\\", \\\"param_labels_ICPL10\\\": \\\"115.0667\\\", \\\"param_labels_Lys6\\\": \\\"6.0201290268\\\", \\\"param_labels_Arg10\\\": \\\"10.0082686\\\", \\\"param_labels_Dimethyl8\\\": \\\"36.07567\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"param_labels_ICPL6\\\": \\\"111.041593\\\", \\\"param_force\\\": \\\"false\\\", \\\"param_labels_Dimethyl6\\\": \\\"34.063117\\\", \\\"param_labels_Arg6\\\": \\\"6.0201290268\\\", \\\"__current_case__\\\": 1, \\\"param_algorithm_averagine_type\\\": \\\"peptide\\\", \\\"param_labels_ICPL0\\\": \\\"105.021464\\\", \\\"param_labels_Leu3\\\": \\\"3.01883\\\", \\\"param_labels_ICPL4\\\": \\\"109.046571\\\", \\\"param_algorithm_averagine_similarity_scaling\\\": \\\"0.6\\\"}\", \"param_algorithm_mz_tolerance\": \"\\\"15.0\\\"\", \"param_algorithm_charge\": \"\\\"1:5\\\"\", \"param_algorithm_mz_unit\": \"\\\"ppm\\\"\", \"param_algorithm_labels\": \"\\\"[Dimethyl0][Dimethyl4][Dimethyl8]\\\"\", \"param_algorithm_intensity_cutoff\": \"\\\"10.0\\\"\", \"param_algorithm_rt_typical\": \"\\\"50.0\\\"\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "627672fc-feef-4e31-9208-182a27df2533", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "6e1e9231-52a0-4d05-9491-31f4b162d405"
-                }, 
-                {
-                    "label": null, 
-                    "output_name": "param_out_features", 
-                    "uuid": "a8b8b589-661b-49ca-9832-556069bf98bc"
-                }
-            ]
-        }, 
-        "3": {
-            "annotation": "", 
-            "content_id": "HighResPrecursorMassCorrector", 
-            "id": 3, 
-            "input_connections": {
-                "param_feature_in": {
-                    "id": 2, 
-                    "output_name": "param_out_features"
-                }, 
-                "param_in": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool HighResPrecursorMassCorrector", 
-                    "name": "param_feature_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool HighResPrecursorMassCorrector", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "HighResPrecursorMassCorrector", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "mzml"
-                }, 
-                {
-                    "name": "param_out_csv", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 484.54998779296875, 
-                "top": 151.1999969482422
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_out_csv": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_out_csv"
-                }, 
-                "RenameDatasetActionparam_out": {
-                    "action_arguments": {
-                        "newname": "HighRes_out"
-                    }, 
-                    "action_type": "RenameDatasetAction", 
-                    "output_name": "param_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "HighResPrecursorMassCorrector", 
-            "tool_state": "{\"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_feature_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_feature_rt_tolerance\": \"\\\"15.0\\\"\", \"param_nearest_peak_mz_tolerance_unit\": \"\\\"ppm\\\"\", \"param_feature_mz_tolerance_unit\": \"\\\"ppm\\\"\", \"param_feature_mz_tolerance\": \"\\\"40.0\\\"\", \"param_feature_keep_original\": \"\\\"false\\\"\", \"param_feature_assign_all_matching\": \"\\\"false\\\"\", \"param_feature_believe_charge\": \"\\\"false\\\"\", \"param_nearest_peak_mz_tolerance\": \"\\\"0.0\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "3d7f4c8b-1896-4365-b41a-77b152ec84b4", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "be0344fb-dccf-4d28-a45e-9d1aded44e41"
-                }
-            ]
-        }, 
-        "4": {
-            "annotation": "", 
-            "content_id": "MSGFPlusAdapter", 
-            "id": 4, 
-            "input_connections": {
-                "param_database": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 3, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_database"
-                }
-            ], 
-            "label": null, 
-            "name": "MSGFPlusAdapter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }, 
-                {
-                    "name": "param_mzid_out", 
-                    "type": "mzid"
-                }
-            ], 
-            "position": {
-                "left": 849.0500030517578, 
-                "top": 186.21665954589844
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_mzid_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_mzid_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "MSGFPlusAdapter", 
-            "tool_state": "{\"param_java_executable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_max_precursor_charge\": \"\\\"4\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"7\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_tryptic\": \"\\\"semi\\\"\", \"param_max_mods\": \"\\\"3\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}, {\\\"__index__\\\": 1, \\\"param_fixed_modifications\\\": \\\"Dimethyl (K)\\\"}, {\\\"__index__\\\": 2, \\\"param_fixed_modifications\\\": \\\"Dimethyl (N-term)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"20.0\\\"\", \"rep_param_variable_modifications\": \"[]\", \"param_add_features\": \"\\\"true\\\"\", \"param_enzyme\": \"\\\"ArgC\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_java_memory\": \"\\\"3500\\\"\", \"param_isotope_error_range\": \"\\\"0,0\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "cc98863a-5f1a-42ef-bd30-a7c6002f3efa", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "7066dfd9-e896-462b-8877-68580da0cc08"
-                }
-            ]
-        }, 
-        "5": {
-            "annotation": "", 
-            "content_id": "MSGFPlusAdapter", 
-            "id": 5, 
-            "input_connections": {
-                "param_database": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 3, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_database"
-                }
-            ], 
-            "label": null, 
-            "name": "MSGFPlusAdapter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }, 
-                {
-                    "name": "param_mzid_out", 
-                    "type": "mzid"
-                }
-            ], 
-            "position": {
-                "left": 887, 
-                "top": 394.20001220703125
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_mzid_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_mzid_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "MSGFPlusAdapter", 
-            "tool_state": "{\"param_java_executable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_max_precursor_charge\": \"\\\"4\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"7\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_tryptic\": \"\\\"semi\\\"\", \"param_max_mods\": \"\\\"3\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}, {\\\"__index__\\\": 1, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(4) (K)\\\"}, {\\\"__index__\\\": 2, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(4) (N-term)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"20.0\\\"\", \"rep_param_variable_modifications\": \"[]\", \"param_add_features\": \"\\\"true\\\"\", \"param_enzyme\": \"\\\"ArgC\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_java_memory\": \"\\\"3500\\\"\", \"param_isotope_error_range\": \"\\\"0,0\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "3a2ce94c-c7c0-43e8-a95a-29773f41ff83", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "7d1226d5-80ff-4f81-b2f8-1298517f98f8"
-                }
-            ]
-        }, 
-        "6": {
-            "annotation": "", 
-            "content_id": "MSGFPlusAdapter", 
-            "id": 6, 
-            "input_connections": {
-                "param_in": {
-                    "id": 3, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool MSGFPlusAdapter", 
-                    "name": "param_database"
-                }
-            ], 
-            "label": null, 
-            "name": "MSGFPlusAdapter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }, 
-                {
-                    "name": "param_mzid_out", 
-                    "type": "mzid"
-                }
-            ], 
-            "position": {
-                "left": 892.5, 
-                "top": 590
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_mzid_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_mzid_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "MSGFPlusAdapter", 
-            "tool_state": "{\"param_java_executable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_max_precursor_charge\": \"\\\"4\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"7\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_tryptic\": \"\\\"semi\\\"\", \"param_max_mods\": \"\\\"3\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}, {\\\"__index__\\\": 1, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(6)13C(2) (K)\\\"}, {\\\"__index__\\\": 2, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(6)13C(2) (N-term)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"20.0\\\"\", \"rep_param_variable_modifications\": \"[]\", \"param_add_features\": \"\\\"true\\\"\", \"param_enzyme\": \"\\\"ArgC\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_java_memory\": \"\\\"3500\\\"\", \"param_isotope_error_range\": \"\\\"0,0\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "05593ca7-2056-4201-9ce7-60b4abc82ff5", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "22b3fa5a-a162-4ce1-8c07-8c3f84fc0551"
-                }
-            ]
-        }, 
-        "7": {
-            "annotation": "", 
-            "content_id": "PeptideIndexer", 
-            "id": 7, 
-            "input_connections": {
-                "param_fasta": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 4, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_fasta"
-                }, 
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "PeptideIndexer", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1191, 
-                "top": 181.1999969482422
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "PeptideIndexer", 
-            "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"semi\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "6d75c013-51d3-49f5-8b26-876a8b1c06d5", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "92afc5d3-a20f-4f89-8b80-f6618ba430d0"
-                }
-            ]
-        }, 
-        "8": {
-            "annotation": "", 
-            "content_id": "PeptideIndexer", 
-            "id": 8, 
-            "input_connections": {
-                "param_fasta": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 5, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_fasta"
-                }, 
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "PeptideIndexer", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1155, 
-                "top": 398.2166748046875
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "PeptideIndexer", 
-            "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"semi\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "8cd335cb-9d51-4c04-99b3-38fed4f3c3b6", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "9774a600-1f91-4927-932a-b887a1b6f73a"
-                }
-            ]
-        }, 
-        "9": {
-            "annotation": "", 
-            "content_id": "PeptideIndexer", 
-            "id": 9, 
-            "input_connections": {
-                "param_fasta": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 6, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_fasta"
-                }, 
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "PeptideIndexer", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1180.5, 
-                "top": 569
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "PeptideIndexer", 
-            "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"semi\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "9361c7be-0416-4ae2-94f6-1722124be507", 
-            "workflow_outputs": []
-        }, 
-        "10": {
-            "annotation": "", 
-            "content_id": "IDMerger", 
-            "id": 10, 
-            "input_connections": {
-                "param_in": [
-                    {
-                        "id": 7, 
-                        "output_name": "param_out"
-                    }, 
-                    {
-                        "id": 8, 
-                        "output_name": "param_out"
-                    }, 
-                    {
-                        "id": 9, 
-                        "output_name": "param_out"
-                    }
-                ]
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDMerger", 
-                    "name": "param_add_to"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDMerger", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDMerger", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1441, 
-                "top": 352.20001220703125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "IDMerger", 
-            "tool_state": "{\"inputs\": \"[{\\\"__index__\\\": 0, \\\"param_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"param_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_annotate_file_origin\": \"\\\"false\\\"\", \"param_pepxml_protxml\": \"\\\"false\\\"\", \"param_add_to\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_in1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "3616471f-09c7-4c6a-8118-e92619874f09", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "f78b508e-7e25-4d72-a870-9f12371c95ea"
-                }
-            ]
-        }, 
-        "11": {
-            "annotation": "", 
-            "content_id": "ConsensusID", 
-            "id": 11, 
-            "input_connections": {
-                "param_in": {
-                    "id": 10, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool ConsensusID", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "ConsensusID", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1609, 
-                "top": 470.20001220703125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "ConsensusID", 
-            "tool_state": "{\"__page__\": 0, \"param_algorithm\": \"\\\"best\\\"\", \"param_filter_considered_hits\": \"\\\"0\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_filter_count_empty\": \"\\\"false\\\"\", \"param_PEPIons_mass_tolerance\": \"\\\"0.5\\\"\", \"param_PEPIons_min_shared\": \"\\\"2\\\"\", \"param_PEPMatrix_penalty\": \"\\\"5\\\"\", \"param_filter_min_support\": \"\\\"0.0\\\"\", \"param_rt_delta\": \"\\\"0.1\\\"\", \"param_PEPMatrix_matrix\": \"\\\"identity\\\"\", \"param_mz_delta\": \"\\\"0.1\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "a397db69-017e-4988-9f94-7ecbc119e3f3", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "b05c7e3e-e094-4366-9163-e0c1984974b9"
-                }
-            ]
-        }, 
-        "12": {
-            "annotation": "", 
-            "content_id": "PeptideIndexer", 
-            "id": 12, 
-            "input_connections": {
-                "param_fasta": {
-                    "id": 1, 
-                    "output_name": "output"
-                }, 
-                "param_in": {
-                    "id": 11, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_fasta"
-                }, 
-                {
-                    "description": "runtime parameter for tool PeptideIndexer", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "PeptideIndexer", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1003, 
-                "top": 820.2000122070312
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "PeptideIndexer", 
-            "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"none\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "868442d2-bb81-4d9a-b783-448377dce6d7", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "f026ce76-91ea-40df-99bb-00ae4bacf3f6"
-                }
-            ]
-        }, 
-        "13": {
-            "annotation": "", 
-            "content_id": "FalseDiscoveryRate", 
-            "id": 13, 
-            "input_connections": {
-                "param_in": {
-                    "id": 12, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FalseDiscoveryRate", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool FalseDiscoveryRate", 
-                    "name": "param_in_target"
-                }, 
-                {
-                    "description": "runtime parameter for tool FalseDiscoveryRate", 
-                    "name": "param_in_decoy"
-                }
-            ], 
-            "label": null, 
-            "name": "FalseDiscoveryRate", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1334.11669921875, 
-                "top": 802.61669921875
-            }, 
-            "post_job_actions": {
-                "HideDatasetActionparam_out": {
-                    "action_arguments": {}, 
-                    "action_type": "HideDatasetAction", 
-                    "output_name": "param_out"
-                }
-            }, 
-            "tool_errors": null, 
-            "tool_id": "FalseDiscoveryRate", 
-            "tool_state": "{\"__page__\": 0, \"param_algorithm_use_all_hits\": \"\\\"false\\\"\", \"param_algorithm_add_decoy_peptides\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_peptides_only\": \"\\\"false\\\"\", \"param_algorithm_split_charge_variants\": \"\\\"false\\\"\", \"param_algorithm_no_qvalues\": \"\\\"false\\\"\", \"param_proteins_only\": \"\\\"false\\\"\", \"param_in_target\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_algorithm_treat_runs_separately\": \"\\\"false\\\"\", \"param_in_decoy\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "fa96e1f0-5c85-42b4-8afc-7dbd4f0e798a", 
-            "workflow_outputs": []
-        }, 
-        "14": {
-            "annotation": "", 
-            "content_id": "IDFilter", 
-            "id": 14, 
-            "input_connections": {
-                "param_in": {
-                    "id": 13, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_whitelist_peptides"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_whitelist_proteins"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_blacklist_proteins"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDFilter", 
-                    "name": "param_blacklist_peptides"
-                }
-            ], 
-            "label": null, 
-            "name": "IDFilter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "idxml"
-                }
-            ], 
-            "position": {
-                "left": 1647.9666748046875, 
-                "top": 808.88330078125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "IDFilter", 
-            "tool_state": "{\"param_whitelist_peptides\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_length\": \"\\\":\\\"\", \"param_keep_unreferenced_protein_hits\": \"\\\"false\\\"\", \"param_unique\": \"\\\"false\\\"\", \"param_whitelist_proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_unique_per_protein\": \"\\\"false\\\"\", \"param_remove_decoys\": \"\\\"false\\\"\", \"param_score_prot\": \"\\\"0.0\\\"\", \"param_rt_p_value_1st_dim\": \"\\\"0.0\\\"\", \"param_best_n_protein_hits\": \"\\\"0\\\"\", \"param_min_length\": \"\\\"0\\\"\", \"__rerun_remap_job_id__\": null, \"param_precursor_mz\": \"\\\":\\\"\", \"param_mz_error\": \"\\\"-1.0\\\"\", \"rep_param_blacklist_modifications\": \"[]\", \"param_precursor_allow_missing\": \"\\\"false\\\"\", \"param_blacklist_proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_delete_unreferenced_peptide_hits\": \"\\\"false\\\"\", \"param_precursor_rt\": \"\\\":\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"param_charge\": \"\\\":\\\"\", \"param_var_mods\": \"\\\"false\\\"\", \"param_max_length\": \"\\\"0\\\"\", \"param_best_strict\": \"\\\"false\\\"\", \"rep_param_whitelist_protein_accessions\": \"[]\", \"rep_param_whitelist_modifications\": \"[]\", \"param_thresh_pep\": \"\\\"0.0\\\"\", \"param_mz_unit\": \"\\\"ppm\\\"\", \"param_best_n_peptide_hits\": \"\\\"0\\\"\", \"param_whitelist_by_seq_only\": \"\\\"false\\\"\", \"param_blacklist_peptides\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_score_pep\": \"\\\"0.05\\\"\", \"param_rt_p_value\": \"\\\"0.0\\\"\", \"param_min_charge\": \"\\\"1\\\"\", \"param_blacklist_ignore_modifications\": \"\\\"false\\\"\", \"rep_param_blacklist_protein_accessions\": \"[]\", \"param_whitelist_ignore_modifications\": \"\\\"false\\\"\", \"param_thresh_prot\": \"\\\"0.0\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "458f5b98-62dd-4650-86dc-f3fc3da4584e", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "ac38c879-b0a6-4260-a659-32bc6f531232"
-                }
-            ]
-        }, 
-        "15": {
-            "annotation": "", 
-            "content_id": "IDMapper", 
-            "id": 15, 
-            "input_connections": {
-                "param_id": {
-                    "id": 14, 
-                    "output_name": "param_out"
-                }, 
-                "param_in": {
-                    "id": 2, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDMapper", 
-                    "name": "param_id"
-                }, 
-                {
-                    "description": "runtime parameter for tool IDMapper", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDMapper", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 1979.9666748046875, 
-                "top": 843.88330078125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "IDMapper", 
-            "tool_state": "{\"param_mz_tolerance\": \"\\\"30.0\\\"\", \"param_ignore_charge\": \"\\\"true\\\"\", \"param_feature_use_centroid_rt\": \"\\\"false\\\"\", \"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_mz_measure\": \"\\\"ppm\\\"\", \"param_mz_reference\": \"\\\"precursor\\\"\", \"param_id\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_rt_tolerance\": \"\\\"50.0\\\"\", \"param_consensus_use_subelements\": \"\\\"true\\\"\", \"param_feature_use_centroid_mz\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "f199e8c6-c243-4fce-8dac-a62d504c9cdd", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "84923098-0cc0-4c3b-ac19-aa12ef6a5244"
-                }
-            ]
-        }, 
-        "16": {
-            "annotation": "", 
-            "content_id": "IDConflictResolver", 
-            "id": 16, 
-            "input_connections": {
-                "param_in": {
-                    "id": 15, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool IDConflictResolver", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "IDConflictResolver", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 2220.449951171875, 
-                "top": 881.88330078125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "IDConflictResolver", 
-            "tool_state": "{\"adv_opts\": \"{\\\"param_force\\\": \\\"false\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "6f4dc17d-b0fd-4b66-9487-3fda71316199", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "485d4684-835d-4ff0-9ca5-3400a0b8fa22"
-                }
-            ]
-        }, 
-        "17": {
-            "annotation": "", 
-            "content_id": "FileFilter", 
-            "id": 17, 
-            "input_connections": {
-                "param_in": {
-                    "id": 16, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FileFilter", 
-                    "name": "param_in"
-                }, 
-                {
-                    "description": "runtime parameter for tool FileFilter", 
-                    "name": "param_id_blacklist"
-                }, 
-                {
-                    "description": "runtime parameter for tool FileFilter", 
-                    "name": "param_consensus_blackorwhitelist_file"
-                }
-            ], 
-            "label": null, 
-            "name": "FileFilter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "input"
-                }
-            ], 
-            "position": {
-                "left": 2531, 
-                "top": 786.88330078125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "FileFilter", 
-            "tool_state": "{\"rep_param_id_sequences_whitelist\": \"[]\", \"param_algorithm_SignalToNoise_win_len\": \"\\\"200.0\\\"\", \"param_algorithm_SignalToNoise_bin_count\": \"\\\"30\\\"\", \"param_peak_options_sn\": \"\\\"0.0\\\"\", \"param_id_mz\": \"\\\"0.001\\\"\", \"param_spectra_select_polarity\": \"null\", \"param_spectra_remove_collision_energy\": \"\\\":\\\"\", \"param_id_blacklist_imperfect\": \"\\\"false\\\"\", \"param_mz\": \"\\\":\\\"\", \"param_int\": \"\\\":\\\"\", \"param_spectra_select_isolation_window_width\": \"\\\":\\\"\", \"param_peak_options_indexed_file\": \"\\\"false\\\"\", \"param_spectra_select_activation\": \"null\", \"param_id_remove_annotated_features\": \"\\\"false\\\"\", \"__page__\": 0, \"param_peak_options_no_chromatograms\": \"\\\"false\\\"\", \"rep_param_peak_options_pc_mz_list\": \"[]\", \"param_peak_options_numpress_masstime\": \"\\\"none\\\"\", \"param_peak_options_remove_chromatograms\": \"\\\"false\\\"\", \"rep_param_consensus_map\": \"[]\", \"param_peak_options_numpress_intensity\": \"\\\"none\\\"\", \"param_pc_mz\": \"\\\":\\\"\", \"__rerun_remap_job_id__\": null, \"param_spectra_select_mode\": \"null\", \"param_rt\": \"\\\":\\\"\", \"param_algorithm_SignalToNoise_write_log_messages\": \"\\\"true\\\"\", \"param_consensus_blackorwhitelist_use_ppm_tolerance\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_id_remove_unannotated_features\": \"\\\"true\\\"\", \"param_peak_options_sort_peaks\": \"\\\"false\\\"\", \"param_peak_options_int_precision\": \"\\\"32\\\"\", \"rep_param_id_accessions_whitelist\": \"[]\", \"param_peak_options_pc_mz_range\": \"\\\":\\\"\", \"param_out_type\": \"\\\"consensusXML\\\"\", \"param_spectra_remove_mode\": \"null\", \"param_consensus_blackorwhitelist_blacklist\": \"\\\"true\\\"\", \"rep_param_peak_options_level\": \"[{\\\"__index__\\\": 0, \\\"param_peak_options_level\\\": \\\"1 2 3\\\"}]\", \"rep_param_f_and_c_remove_meta\": \"[]\", \"param_f_and_c_size\": \"\\\":\\\"\", \"param_id_remove_unassigned_ids\": \"\\\"true\\\"\", \"param_spectra_remove_zoom\": \"\\\"false\\\"\", \"param_peak_options_mz_precision\": \"\\\"64\\\"\", \"param_sort\": \"\\\"false\\\"\", \"param_algorithm_SignalToNoise_min_required_elements\": \"\\\"10\\\"\", \"param_consensus_blackorwhitelist_rt\": \"\\\"60.0\\\"\", \"rep_param_peak_options_rm_pc_charge\": \"[]\", \"param_peak_options_numpress_intensity_error\": \"\\\"0.0001\\\"\", \"param_id_rt\": \"\\\"0.1\\\"\", \"param_id_keep_best_score_id\": \"\\\"false\\\"\", \"param_id_blacklist\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_spectra_select_collision_energy\": \"\\\":\\\"\", \"param_feature_q\": \"\\\":\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_f_and_c_charge\": \"\\\":\\\"\", \"param_consensus_map_and\": \"\\\"false\\\"\", \"param_spectra_select_zoom\": \"\\\"false\\\"\", \"param_consensus_blackorwhitelist_mz\": \"\\\"0.01\\\"\", \"param_consensus_blackorwhitelist_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"rep_param_consensus_blackorwhitelist_maps\": \"[]\", \"param_spectra_remove_activation\": \"null\", \"param_peak_options_numpress_masstime_error\": \"\\\"0.0001\\\"\", \"param_spectra_remove_isolation_window_width\": \"\\\":\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "77e6a295-f6e2-4d72-a7e3-94f682d916a7", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "55dc6d2b-f473-4496-abaf-86630ad0151b"
-                }
-            ]
-        }, 
-        "18": {
-            "annotation": "", 
-            "content_id": "FileMerger", 
-            "id": 18, 
-            "input_connections": {
-                "param_in": {
-                    "id": 17, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool FileMerger", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "FileMerger", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "featurexml"
-                }, 
-                {
-                    "name": "param_rt_concat_trafo_out", 
-                    "type": "trafoxml"
-                }
-            ], 
-            "position": {
-                "left": 2832.966552734375, 
-                "top": 1062.9000244140625
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "FileMerger", 
-            "tool_state": "{\"param_raw_user_ms_level\": \"\\\"False\\\"\", \"param_raw_rt_auto\": \"\\\"false\\\"\", \"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_raw_rt_filename\": \"\\\"false\\\"\", \"param_rt_concat_gap\": \"\\\"0.0\\\"\", \"param_annotate_file_origin\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"param_raw_ms_level\": \"\\\"2\\\"\", \"rep_param_raw_rt_custom\": \"[]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "d82505c8-6f1c-43a9-a9c7-c572ad2aa3c8", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "db9ffdb1-ef2f-4d53-9808-bef6de3d85b4"
-                }, 
-                {
-                    "label": null, 
-                    "output_name": "param_rt_concat_trafo_out", 
-                    "uuid": "47af80c0-5efb-43b3-a830-c3df9fc0528d"
-                }
-            ]
-        }, 
-        "19": {
-            "annotation": "", 
-            "content_id": "MzTabExporter", 
-            "id": 19, 
-            "input_connections": {
-                "param_in": {
-                    "id": 18, 
-                    "output_name": "param_out"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool MzTabExporter", 
-                    "name": "param_in"
-                }
-            ], 
-            "label": null, 
-            "name": "MzTabExporter", 
-            "outputs": [
-                {
-                    "name": "param_out", 
-                    "type": "tabular"
-                }
-            ], 
-            "position": {
-                "left": 3076.5, 
-                "top": 1061.88330078125
-            }, 
-            "post_job_actions": {}, 
-            "tool_errors": null, 
-            "tool_id": "MzTabExporter", 
-            "tool_state": "{\"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "3f6cb69e-8629-4fea-ab74-dec388ed0fd4", 
-            "workflow_outputs": [
-                {
-                    "label": null, 
-                    "output_name": "param_out", 
-                    "uuid": "a6361de3-6865-4c6b-9920-d7a8c6a27645"
-                }
-            ]
+  "a_galaxy_workflow": "true",
+  "annotation": "Detection and quantitation of N-termini (degradomics) via N-TAILS",
+  "format-version": "0.1",
+  "name": "Tails Triple Dimethyl OpenMS2.1",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "Input Dataset Collection (mzML files)"
         }
-    }, 
-    "uuid": "6300a4b9-cb1d-42a5-af00-a2bbc76fa200"
+      ],
+      "label": null,
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "left": 199.9666748046875,
+        "top": 435.20001220703125
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"collection_type\": \"list\", \"name\": \"Input Dataset Collection (mzML files)\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "7bf13771-4620-4563-b972-efaf74887ce5",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "11ba0e33-3924-43e2-a8f9-85e0e6c12cfe"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "UniProt database (FASTA file)"
+        }
+      ],
+      "label": null,
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 241,
+        "top": 603.2166748046875
+      },
+      "tool_errors": null,
+      "tool_id": null,
+      "tool_state": "{\"name\": \"UniProt database (FASTA file)\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "05f5cbd8-8459-47a0-8faf-95c0821f25fc",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "3d25e478-d053-4d4e-9c7f-92fec2d6b09c"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "content_id": "FeatureFinderMultiplex",
+      "id": 2,
+      "input_connections": {
+        "param_in": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FeatureFinderMultiplex",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "FeatureFinderMultiplex",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "consensusxml"
+        },
+        {
+          "name": "param_out_features",
+          "type": "featurexml"
+        },
+        {
+          "name": "param_out_mzq",
+          "type": "mzq"
+        }
+      ],
+      "position": {
+        "left": 1228.9666748046875,
+        "top": 1174.88330078125
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_out_mzq": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_out_mzq"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "FeatureFinderMultiplex",
+      "tool_state": "{\"param_algorithm_averagine_similarity\": \"\\\"0.6\\\"\", \"param_algorithm_rt_min\": \"\\\"3.0\\\"\", \"__page__\": 0, \"param_algorithm_missed_cleavages\": \"\\\"2\\\"\", \"param_algorithm_peptide_similarity\": \"\\\"0.7\\\"\", \"adv_opts\": \"{\\\"param_algorithm_knock_out\\\": \\\"true\\\", \\\"param_labels_Dimethyl4\\\": \\\"32.056407\\\", \\\"param_algorithm_isotopes_per_peptide\\\": \\\"3:6\\\", \\\"param_labels_Lys4\\\": \\\"4.0251069836\\\", \\\"param_labels_Dimethyl0\\\": \\\"28.0313\\\", \\\"param_labels_Lys8\\\": \\\"8.0141988132\\\", \\\"param_labels_ICPL10\\\": \\\"115.0667\\\", \\\"param_labels_Lys6\\\": \\\"6.0201290268\\\", \\\"param_labels_Arg10\\\": \\\"10.0082686\\\", \\\"param_labels_Dimethyl8\\\": \\\"36.07567\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"param_labels_ICPL6\\\": \\\"111.041593\\\", \\\"param_force\\\": \\\"false\\\", \\\"param_labels_Dimethyl6\\\": \\\"34.063117\\\", \\\"param_labels_Arg6\\\": \\\"6.0201290268\\\", \\\"__current_case__\\\": 1, \\\"param_algorithm_averagine_type\\\": \\\"peptide\\\", \\\"param_labels_ICPL0\\\": \\\"105.021464\\\", \\\"param_labels_Leu3\\\": \\\"3.01883\\\", \\\"param_labels_ICPL4\\\": \\\"109.046571\\\", \\\"param_algorithm_averagine_similarity_scaling\\\": \\\"0.6\\\"}\", \"param_algorithm_mz_tolerance\": \"\\\"15.0\\\"\", \"param_algorithm_charge\": \"\\\"1:5\\\"\", \"param_algorithm_mz_unit\": \"\\\"ppm\\\"\", \"param_algorithm_labels\": \"\\\"[Dimethyl0][Dimethyl4][Dimethyl8]\\\"\", \"param_algorithm_intensity_cutoff\": \"\\\"10.0\\\"\", \"param_algorithm_rt_typical\": \"\\\"50.0\\\"\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "627672fc-feef-4e31-9208-182a27df2533",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "6e1e9231-52a0-4d05-9491-31f4b162d405"
+        },
+        {
+          "label": null,
+          "output_name": "param_out_features",
+          "uuid": "a8b8b589-661b-49ca-9832-556069bf98bc"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "ca88bd28f116",
+        "name": "openms_featurefindermultiplex",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "HighResPrecursorMassCorrector",
+      "id": 3,
+      "input_connections": {
+        "param_feature_in": {
+          "id": 2,
+          "output_name": "param_out_features"
+        },
+        "param_in": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool HighResPrecursorMassCorrector",
+          "name": "param_feature_in"
+        },
+        {
+          "description": "runtime parameter for tool HighResPrecursorMassCorrector",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "HighResPrecursorMassCorrector",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "mzml"
+        },
+        {
+          "name": "param_out_csv",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 484.54998779296875,
+        "top": 151.1999969482422
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_out_csv": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_out_csv"
+        },
+        "RenameDatasetActionparam_out": {
+          "action_arguments": {
+            "newname": "HighRes_out"
+          },
+          "action_type": "RenameDatasetAction",
+          "output_name": "param_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "HighResPrecursorMassCorrector",
+      "tool_state": "{\"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_feature_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_feature_rt_tolerance\": \"\\\"15.0\\\"\", \"param_nearest_peak_mz_tolerance_unit\": \"\\\"ppm\\\"\", \"param_feature_mz_tolerance_unit\": \"\\\"ppm\\\"\", \"param_feature_mz_tolerance\": \"\\\"40.0\\\"\", \"param_feature_keep_original\": \"\\\"false\\\"\", \"param_feature_assign_all_matching\": \"\\\"false\\\"\", \"param_feature_believe_charge\": \"\\\"false\\\"\", \"param_nearest_peak_mz_tolerance\": \"\\\"0.0\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "3d7f4c8b-1896-4365-b41a-77b152ec84b4",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "be0344fb-dccf-4d28-a45e-9d1aded44e41"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "9e26f5c770f8",
+        "name": "openms_highresprecursormasscorrector",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "4": {
+      "annotation": "",
+      "content_id": "MSGFPlusAdapter",
+      "id": 4,
+      "input_connections": {
+        "param_database": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "param_in": {
+          "id": 3,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSGFPlusAdapter",
+          "name": "param_in"
+        },
+        {
+          "description": "runtime parameter for tool MSGFPlusAdapter",
+          "name": "param_database"
+        }
+      ],
+      "label": null,
+      "name": "MSGFPlusAdapter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        },
+        {
+          "name": "param_mzid_out",
+          "type": "mzid"
+        }
+      ],
+      "position": {
+        "left": 849.0500030517578,
+        "top": 186.21665954589844
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_mzid_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_mzid_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "MSGFPlusAdapter",
+      "tool_state": "{\"param_java_executable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_max_precursor_charge\": \"\\\"4\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"7\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_tryptic\": \"\\\"semi\\\"\", \"param_max_mods\": \"\\\"3\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}, {\\\"__index__\\\": 1, \\\"param_fixed_modifications\\\": \\\"Dimethyl (K)\\\"}, {\\\"__index__\\\": 2, \\\"param_fixed_modifications\\\": \\\"Dimethyl (N-term)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"20.0\\\"\", \"rep_param_variable_modifications\": \"[]\", \"param_add_features\": \"\\\"true\\\"\", \"param_enzyme\": \"\\\"ArgC\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_java_memory\": \"\\\"3500\\\"\", \"param_isotope_error_range\": \"\\\"0,0\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "cc98863a-5f1a-42ef-bd30-a7c6002f3efa",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "7066dfd9-e896-462b-8877-68580da0cc08"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "2b2a7551a857",
+        "name": "openms_msgfplusadapter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "5": {
+      "annotation": "",
+      "content_id": "MSGFPlusAdapter",
+      "id": 5,
+      "input_connections": {
+        "param_database": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "param_in": {
+          "id": 3,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSGFPlusAdapter",
+          "name": "param_in"
+        },
+        {
+          "description": "runtime parameter for tool MSGFPlusAdapter",
+          "name": "param_database"
+        }
+      ],
+      "label": null,
+      "name": "MSGFPlusAdapter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        },
+        {
+          "name": "param_mzid_out",
+          "type": "mzid"
+        }
+      ],
+      "position": {
+        "left": 887,
+        "top": 394.20001220703125
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_mzid_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_mzid_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "MSGFPlusAdapter",
+      "tool_state": "{\"param_java_executable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_max_precursor_charge\": \"\\\"4\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"7\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_tryptic\": \"\\\"semi\\\"\", \"param_max_mods\": \"\\\"3\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}, {\\\"__index__\\\": 1, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(4) (K)\\\"}, {\\\"__index__\\\": 2, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(4) (N-term)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"20.0\\\"\", \"rep_param_variable_modifications\": \"[]\", \"param_add_features\": \"\\\"true\\\"\", \"param_enzyme\": \"\\\"ArgC\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_java_memory\": \"\\\"3500\\\"\", \"param_isotope_error_range\": \"\\\"0,0\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "3a2ce94c-c7c0-43e8-a95a-29773f41ff83",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "7d1226d5-80ff-4f81-b2f8-1298517f98f8"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "2b2a7551a857",
+        "name": "openms_msgfplusadapter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "MSGFPlusAdapter",
+      "id": 6,
+      "input_connections": {
+        "param_in": {
+          "id": 3,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MSGFPlusAdapter",
+          "name": "param_in"
+        },
+        {
+          "description": "runtime parameter for tool MSGFPlusAdapter",
+          "name": "param_database"
+        }
+      ],
+      "label": null,
+      "name": "MSGFPlusAdapter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        },
+        {
+          "name": "param_mzid_out",
+          "type": "mzid"
+        }
+      ],
+      "position": {
+        "left": 892.5,
+        "top": 590
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_mzid_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_mzid_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "MSGFPlusAdapter",
+      "tool_state": "{\"param_java_executable\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_max_precursor_charge\": \"\\\"4\\\"\", \"param_min_precursor_charge\": \"\\\"2\\\"\", \"param_min_peptide_length\": \"\\\"7\\\"\", \"param_precursor_error_units\": \"\\\"ppm\\\"\", \"param_protocol\": \"\\\"none\\\"\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_tryptic\": \"\\\"semi\\\"\", \"param_max_mods\": \"\\\"3\\\"\", \"rep_param_fixed_modifications\": \"[{\\\"__index__\\\": 0, \\\"param_fixed_modifications\\\": \\\"Carbamidomethyl (C)\\\"}, {\\\"__index__\\\": 1, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(6)13C(2) (K)\\\"}, {\\\"__index__\\\": 2, \\\"param_fixed_modifications\\\": \\\"Dimethyl:2H(6)13C(2) (N-term)\\\"}]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_add_decoys\": \"\\\"false\\\"\", \"param_matches_per_spec\": \"\\\"1\\\"\", \"param_max_peptide_length\": \"\\\"40\\\"\", \"param_instrument\": \"\\\"Q_Exactive\\\"\", \"param_precursor_mass_tolerance\": \"\\\"20.0\\\"\", \"rep_param_variable_modifications\": \"[]\", \"param_add_features\": \"\\\"true\\\"\", \"param_enzyme\": \"\\\"ArgC\\\"\", \"param_database\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_fragment_method\": \"\\\"from_spectrum\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_java_memory\": \"\\\"3500\\\"\", \"param_isotope_error_range\": \"\\\"0,0\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "05593ca7-2056-4201-9ce7-60b4abc82ff5",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "22b3fa5a-a162-4ce1-8c07-8c3f84fc0551"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "2b2a7551a857",
+        "name": "openms_msgfplusadapter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "PeptideIndexer",
+      "id": 7,
+      "input_connections": {
+        "param_fasta": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "param_in": {
+          "id": 4,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_fasta"
+        },
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "PeptideIndexer",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1191,
+        "top": 181.1999969482422
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "PeptideIndexer",
+      "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"semi\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "6d75c013-51d3-49f5-8b26-876a8b1c06d5",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "92afc5d3-a20f-4f89-8b80-f6618ba430d0"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "539a3a4dcc9e",
+        "name": "openms_peptideindexer",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "PeptideIndexer",
+      "id": 8,
+      "input_connections": {
+        "param_fasta": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "param_in": {
+          "id": 5,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_fasta"
+        },
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "PeptideIndexer",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1155,
+        "top": 398.2166748046875
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "PeptideIndexer",
+      "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"semi\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "8cd335cb-9d51-4c04-99b3-38fed4f3c3b6",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "9774a600-1f91-4927-932a-b887a1b6f73a"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "539a3a4dcc9e",
+        "name": "openms_peptideindexer",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "PeptideIndexer",
+      "id": 9,
+      "input_connections": {
+        "param_fasta": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "param_in": {
+          "id": 6,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_fasta"
+        },
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "PeptideIndexer",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1180.5,
+        "top": 569
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "PeptideIndexer",
+      "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"semi\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "9361c7be-0416-4ae2-94f6-1722124be507",
+      "workflow_outputs": [],
+      "tool_shed_repository": {
+        "changeset_revision": "539a3a4dcc9e",
+        "name": "openms_peptideindexer",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "IDMerger",
+      "id": 10,
+      "input_connections": {
+        "param_in": [
+          {
+            "id": 7,
+            "output_name": "param_out"
+          },
+          {
+            "id": 8,
+            "output_name": "param_out"
+          },
+          {
+            "id": 9,
+            "output_name": "param_out"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool IDMerger",
+          "name": "param_add_to"
+        },
+        {
+          "description": "runtime parameter for tool IDMerger",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "IDMerger",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1441,
+        "top": 352.20001220703125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "IDMerger",
+      "tool_state": "{\"inputs\": \"[{\\\"__index__\\\": 0, \\\"param_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"param_in\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_annotate_file_origin\": \"\\\"false\\\"\", \"param_pepxml_protxml\": \"\\\"false\\\"\", \"param_add_to\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_in1\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "3616471f-09c7-4c6a-8118-e92619874f09",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "f78b508e-7e25-4d72-a870-9f12371c95ea"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "18f93351f8b6",
+        "name": "openms_idmerger",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "ConsensusID",
+      "id": 11,
+      "input_connections": {
+        "param_in": {
+          "id": 10,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool ConsensusID",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "ConsensusID",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1609,
+        "top": 470.20001220703125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "ConsensusID",
+      "tool_state": "{\"__page__\": 0, \"param_algorithm\": \"\\\"best\\\"\", \"param_filter_considered_hits\": \"\\\"0\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_filter_count_empty\": \"\\\"false\\\"\", \"param_PEPIons_mass_tolerance\": \"\\\"0.5\\\"\", \"param_PEPIons_min_shared\": \"\\\"2\\\"\", \"param_PEPMatrix_penalty\": \"\\\"5\\\"\", \"param_filter_min_support\": \"\\\"0.0\\\"\", \"param_rt_delta\": \"\\\"0.1\\\"\", \"param_PEPMatrix_matrix\": \"\\\"identity\\\"\", \"param_mz_delta\": \"\\\"0.1\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "a397db69-017e-4988-9f94-7ecbc119e3f3",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "b05c7e3e-e094-4366-9163-e0c1984974b9"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "8960fb791701",
+        "name": "openms_consensusid",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "PeptideIndexer",
+      "id": 12,
+      "input_connections": {
+        "param_fasta": {
+          "id": 1,
+          "output_name": "output"
+        },
+        "param_in": {
+          "id": 11,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_fasta"
+        },
+        {
+          "description": "runtime parameter for tool PeptideIndexer",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "PeptideIndexer",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1003,
+        "top": 820.2000122070312
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "PeptideIndexer",
+      "tool_state": "{\"param_write_protein_sequence\": \"\\\"true\\\"\", \"param_missing_decoy_action\": \"\\\"error\\\"\", \"param_filter_aaa_proteins\": \"\\\"false\\\"\", \"param_prefix\": \"\\\"true\\\"\", \"param_keep_unreferenced_proteins\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"param_allow_unmatched\": \"\\\"true\\\"\", \"param_decoy_string_position\": \"\\\"prefix\\\"\", \"param_mismatches_max\": \"\\\"0\\\"\", \"param_enzyme_name\": \"\\\"Trypsin/P\\\"\", \"param_enzyme_specificity\": \"\\\"none\\\"\", \"param_decoy_string\": \"\\\"dec_\\\"\", \"__rerun_remap_job_id__\": null, \"param_write_protein_description\": \"\\\"true\\\"\", \"param_full_tolerant_search\": \"\\\"false\\\"\", \"param_fasta\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_aaa_max\": \"\\\"4\\\"\", \"param_annotate_proteins\": \"\\\"True\\\"\", \"param_IL_equivalent\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "868442d2-bb81-4d9a-b783-448377dce6d7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "f026ce76-91ea-40df-99bb-00ae4bacf3f6"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "539a3a4dcc9e",
+        "name": "openms_peptideindexer",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "FalseDiscoveryRate",
+      "id": 13,
+      "input_connections": {
+        "param_in": {
+          "id": 12,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FalseDiscoveryRate",
+          "name": "param_in"
+        },
+        {
+          "description": "runtime parameter for tool FalseDiscoveryRate",
+          "name": "param_in_target"
+        },
+        {
+          "description": "runtime parameter for tool FalseDiscoveryRate",
+          "name": "param_in_decoy"
+        }
+      ],
+      "label": null,
+      "name": "FalseDiscoveryRate",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1334.11669921875,
+        "top": 802.61669921875
+      },
+      "post_job_actions": {
+        "HideDatasetActionparam_out": {
+          "action_arguments": {},
+          "action_type": "HideDatasetAction",
+          "output_name": "param_out"
+        }
+      },
+      "tool_errors": null,
+      "tool_id": "FalseDiscoveryRate",
+      "tool_state": "{\"__page__\": 0, \"param_algorithm_use_all_hits\": \"\\\"false\\\"\", \"param_algorithm_add_decoy_peptides\": \"\\\"false\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_peptides_only\": \"\\\"false\\\"\", \"param_algorithm_split_charge_variants\": \"\\\"false\\\"\", \"param_algorithm_no_qvalues\": \"\\\"false\\\"\", \"param_proteins_only\": \"\\\"false\\\"\", \"param_in_target\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_algorithm_treat_runs_separately\": \"\\\"false\\\"\", \"param_in_decoy\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "fa96e1f0-5c85-42b4-8afc-7dbd4f0e798a",
+      "workflow_outputs": [],
+      "tool_shed_repository": {
+        "changeset_revision": "518b1730cf2a",
+        "name": "openms_falsediscoveryrate",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "IDFilter",
+      "id": 14,
+      "input_connections": {
+        "param_in": {
+          "id": 13,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool IDFilter",
+          "name": "param_whitelist_peptides"
+        },
+        {
+          "description": "runtime parameter for tool IDFilter",
+          "name": "param_whitelist_proteins"
+        },
+        {
+          "description": "runtime parameter for tool IDFilter",
+          "name": "param_blacklist_proteins"
+        },
+        {
+          "description": "runtime parameter for tool IDFilter",
+          "name": "param_in"
+        },
+        {
+          "description": "runtime parameter for tool IDFilter",
+          "name": "param_blacklist_peptides"
+        }
+      ],
+      "label": null,
+      "name": "IDFilter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "idxml"
+        }
+      ],
+      "position": {
+        "left": 1647.9666748046875,
+        "top": 808.88330078125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "IDFilter",
+      "tool_state": "{\"param_whitelist_peptides\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_length\": \"\\\":\\\"\", \"param_keep_unreferenced_protein_hits\": \"\\\"false\\\"\", \"param_unique\": \"\\\"false\\\"\", \"param_whitelist_proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_unique_per_protein\": \"\\\"false\\\"\", \"param_remove_decoys\": \"\\\"false\\\"\", \"param_score_prot\": \"\\\"0.0\\\"\", \"param_rt_p_value_1st_dim\": \"\\\"0.0\\\"\", \"param_best_n_protein_hits\": \"\\\"0\\\"\", \"param_min_length\": \"\\\"0\\\"\", \"__rerun_remap_job_id__\": null, \"param_precursor_mz\": \"\\\":\\\"\", \"param_mz_error\": \"\\\"-1.0\\\"\", \"rep_param_blacklist_modifications\": \"[]\", \"param_precursor_allow_missing\": \"\\\"false\\\"\", \"param_blacklist_proteins\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_delete_unreferenced_peptide_hits\": \"\\\"false\\\"\", \"param_precursor_rt\": \"\\\":\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__page__\": 0, \"param_charge\": \"\\\":\\\"\", \"param_var_mods\": \"\\\"false\\\"\", \"param_max_length\": \"\\\"0\\\"\", \"param_best_strict\": \"\\\"false\\\"\", \"rep_param_whitelist_protein_accessions\": \"[]\", \"rep_param_whitelist_modifications\": \"[]\", \"param_thresh_pep\": \"\\\"0.0\\\"\", \"param_mz_unit\": \"\\\"ppm\\\"\", \"param_best_n_peptide_hits\": \"\\\"0\\\"\", \"param_whitelist_by_seq_only\": \"\\\"false\\\"\", \"param_blacklist_peptides\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_score_pep\": \"\\\"0.05\\\"\", \"param_rt_p_value\": \"\\\"0.0\\\"\", \"param_min_charge\": \"\\\"1\\\"\", \"param_blacklist_ignore_modifications\": \"\\\"false\\\"\", \"rep_param_blacklist_protein_accessions\": \"[]\", \"param_whitelist_ignore_modifications\": \"\\\"false\\\"\", \"param_thresh_prot\": \"\\\"0.0\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "458f5b98-62dd-4650-86dc-f3fc3da4584e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "ac38c879-b0a6-4260-a659-32bc6f531232"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "c427a8628cbe",
+        "name": "openms_idfilter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "IDMapper",
+      "id": 15,
+      "input_connections": {
+        "param_id": {
+          "id": 14,
+          "output_name": "param_out"
+        },
+        "param_in": {
+          "id": 2,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool IDMapper",
+          "name": "param_id"
+        },
+        {
+          "description": "runtime parameter for tool IDMapper",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "IDMapper",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 1979.9666748046875,
+        "top": 843.88330078125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "IDMapper",
+      "tool_state": "{\"param_mz_tolerance\": \"\\\"30.0\\\"\", \"param_ignore_charge\": \"\\\"true\\\"\", \"param_feature_use_centroid_rt\": \"\\\"false\\\"\", \"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__rerun_remap_job_id__\": null, \"param_mz_measure\": \"\\\"ppm\\\"\", \"param_mz_reference\": \"\\\"precursor\\\"\", \"param_id\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_rt_tolerance\": \"\\\"50.0\\\"\", \"param_consensus_use_subelements\": \"\\\"true\\\"\", \"param_feature_use_centroid_mz\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "f199e8c6-c243-4fce-8dac-a62d504c9cdd",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "84923098-0cc0-4c3b-ac19-aa12ef6a5244"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "b5d0905419da",
+        "name": "openms_idmapper",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "IDConflictResolver",
+      "id": 16,
+      "input_connections": {
+        "param_in": {
+          "id": 15,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool IDConflictResolver",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "IDConflictResolver",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 2220.449951171875,
+        "top": 881.88330078125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "IDConflictResolver",
+      "tool_state": "{\"adv_opts\": \"{\\\"param_force\\\": \\\"false\\\", \\\"adv_opts_selector\\\": \\\"advanced\\\", \\\"__current_case__\\\": 1}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "6f4dc17d-b0fd-4b66-9487-3fda71316199",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "485d4684-835d-4ff0-9ca5-3400a0b8fa22"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "8a04ed1c1d1b",
+        "name": "openms_idconflictresolver",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "17": {
+      "annotation": "",
+      "content_id": "FileFilter",
+      "id": 17,
+      "input_connections": {
+        "param_in": {
+          "id": 16,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FileFilter",
+          "name": "param_in"
+        },
+        {
+          "description": "runtime parameter for tool FileFilter",
+          "name": "param_id_blacklist"
+        },
+        {
+          "description": "runtime parameter for tool FileFilter",
+          "name": "param_consensus_blackorwhitelist_file"
+        }
+      ],
+      "label": null,
+      "name": "FileFilter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "left": 2531,
+        "top": 786.88330078125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "FileFilter",
+      "tool_state": "{\"rep_param_id_sequences_whitelist\": \"[]\", \"param_algorithm_SignalToNoise_win_len\": \"\\\"200.0\\\"\", \"param_algorithm_SignalToNoise_bin_count\": \"\\\"30\\\"\", \"param_peak_options_sn\": \"\\\"0.0\\\"\", \"param_id_mz\": \"\\\"0.001\\\"\", \"param_spectra_select_polarity\": \"null\", \"param_spectra_remove_collision_energy\": \"\\\":\\\"\", \"param_id_blacklist_imperfect\": \"\\\"false\\\"\", \"param_mz\": \"\\\":\\\"\", \"param_int\": \"\\\":\\\"\", \"param_spectra_select_isolation_window_width\": \"\\\":\\\"\", \"param_peak_options_indexed_file\": \"\\\"false\\\"\", \"param_spectra_select_activation\": \"null\", \"param_id_remove_annotated_features\": \"\\\"false\\\"\", \"__page__\": 0, \"param_peak_options_no_chromatograms\": \"\\\"false\\\"\", \"rep_param_peak_options_pc_mz_list\": \"[]\", \"param_peak_options_numpress_masstime\": \"\\\"none\\\"\", \"param_peak_options_remove_chromatograms\": \"\\\"false\\\"\", \"rep_param_consensus_map\": \"[]\", \"param_peak_options_numpress_intensity\": \"\\\"none\\\"\", \"param_pc_mz\": \"\\\":\\\"\", \"__rerun_remap_job_id__\": null, \"param_spectra_select_mode\": \"null\", \"param_rt\": \"\\\":\\\"\", \"param_algorithm_SignalToNoise_write_log_messages\": \"\\\"true\\\"\", \"param_consensus_blackorwhitelist_use_ppm_tolerance\": \"\\\"false\\\"\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_id_remove_unannotated_features\": \"\\\"true\\\"\", \"param_peak_options_sort_peaks\": \"\\\"false\\\"\", \"param_peak_options_int_precision\": \"\\\"32\\\"\", \"rep_param_id_accessions_whitelist\": \"[]\", \"param_peak_options_pc_mz_range\": \"\\\":\\\"\", \"param_out_type\": \"\\\"consensusXML\\\"\", \"param_spectra_remove_mode\": \"null\", \"param_consensus_blackorwhitelist_blacklist\": \"\\\"true\\\"\", \"rep_param_peak_options_level\": \"[{\\\"__index__\\\": 0, \\\"param_peak_options_level\\\": \\\"1 2 3\\\"}]\", \"rep_param_f_and_c_remove_meta\": \"[]\", \"param_f_and_c_size\": \"\\\":\\\"\", \"param_id_remove_unassigned_ids\": \"\\\"true\\\"\", \"param_spectra_remove_zoom\": \"\\\"false\\\"\", \"param_peak_options_mz_precision\": \"\\\"64\\\"\", \"param_sort\": \"\\\"false\\\"\", \"param_algorithm_SignalToNoise_min_required_elements\": \"\\\"10\\\"\", \"param_consensus_blackorwhitelist_rt\": \"\\\"60.0\\\"\", \"rep_param_peak_options_rm_pc_charge\": \"[]\", \"param_peak_options_numpress_intensity_error\": \"\\\"0.0001\\\"\", \"param_id_rt\": \"\\\"0.1\\\"\", \"param_id_keep_best_score_id\": \"\\\"false\\\"\", \"param_id_blacklist\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"param_spectra_select_collision_energy\": \"\\\":\\\"\", \"param_feature_q\": \"\\\":\\\"\", \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_f_and_c_charge\": \"\\\":\\\"\", \"param_consensus_map_and\": \"\\\"false\\\"\", \"param_spectra_select_zoom\": \"\\\"false\\\"\", \"param_consensus_blackorwhitelist_mz\": \"\\\"0.01\\\"\", \"param_consensus_blackorwhitelist_file\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"rep_param_consensus_blackorwhitelist_maps\": \"[]\", \"param_spectra_remove_activation\": \"null\", \"param_peak_options_numpress_masstime_error\": \"\\\"0.0001\\\"\", \"param_spectra_remove_isolation_window_width\": \"\\\":\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "77e6a295-f6e2-4d72-a7e3-94f682d916a7",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "55dc6d2b-f473-4496-abaf-86630ad0151b"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "d6878d27f051",
+        "name": "openms_filefilter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "18": {
+      "annotation": "",
+      "content_id": "FileMerger",
+      "id": 18,
+      "input_connections": {
+        "param_in": {
+          "id": 17,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool FileMerger",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "FileMerger",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "featurexml"
+        },
+        {
+          "name": "param_rt_concat_trafo_out",
+          "type": "trafoxml"
+        }
+      ],
+      "position": {
+        "left": 2832.966552734375,
+        "top": 1062.9000244140625
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "FileMerger",
+      "tool_state": "{\"param_raw_user_ms_level\": \"\\\"False\\\"\", \"param_raw_rt_auto\": \"\\\"false\\\"\", \"__page__\": 0, \"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"param_raw_rt_filename\": \"\\\"false\\\"\", \"param_rt_concat_gap\": \"\\\"0.0\\\"\", \"param_annotate_file_origin\": \"\\\"false\\\"\", \"__rerun_remap_job_id__\": null, \"param_raw_ms_level\": \"\\\"2\\\"\", \"rep_param_raw_rt_custom\": \"[]\", \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "d82505c8-6f1c-43a9-a9c7-c572ad2aa3c8",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "db9ffdb1-ef2f-4d53-9808-bef6de3d85b4"
+        },
+        {
+          "label": null,
+          "output_name": "param_rt_concat_trafo_out",
+          "uuid": "47af80c0-5efb-43b3-a830-c3df9fc0528d"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "39e8fde08881",
+        "name": "openms_filemerger",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    },
+    "19": {
+      "annotation": "",
+      "content_id": "MzTabExporter",
+      "id": 19,
+      "input_connections": {
+        "param_in": {
+          "id": 18,
+          "output_name": "param_out"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool MzTabExporter",
+          "name": "param_in"
+        }
+      ],
+      "label": null,
+      "name": "MzTabExporter",
+      "outputs": [
+        {
+          "name": "param_out",
+          "type": "tabular"
+        }
+      ],
+      "position": {
+        "left": 3076.5,
+        "top": 1061.88330078125
+      },
+      "post_job_actions": {},
+      "tool_errors": null,
+      "tool_id": "MzTabExporter",
+      "tool_state": "{\"adv_opts\": \"{\\\"adv_opts_selector\\\": \\\"basic\\\", \\\"__current_case__\\\": 0}\", \"__page__\": 0, \"__rerun_remap_job_id__\": null, \"param_in\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "3f6cb69e-8629-4fea-ab74-dec388ed0fd4",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "param_out",
+          "uuid": "a6361de3-6865-4c6b-9920-d7a8c6a27645"
+        }
+      ],
+      "tool_shed_repository": {
+        "changeset_revision": "bf32e0bcf554",
+        "name": "openms_mztabexporter",
+        "owner": "galaxyp",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      }
+    }
+  },
+  "uuid": "6300a4b9-cb1d-42a5-af00-a2bbc76fa200",
+  "tags": [
+    "proteomics"
+  ]
 }
