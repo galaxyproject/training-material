@@ -183,7 +183,7 @@ Hint: Please find the above tool in "Graph/Display data" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_without_header.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_without_header`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_linear`
 {: .hands_on}
 
@@ -204,7 +204,7 @@ The visualization tool creates the following plots:
 These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.
 
 > ### {% icon details %} R2 (coefficient of determination)
-> In both the parts, learning on datasets is done using cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [7](#figure-7) and [8](#figure-8). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [7](#figure-7), we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is `-0.06`. On the other hand, figure [8](#figure-8) shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.
+> In both the parts, learning on datasets is done using cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [8](#figure-8) and [9](#figure-9). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [8](#figure-8), we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is `-0.06`. On the other hand, figure [9](#figure-9) shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.
 >
 > ![model_bad](../../images/age-prediction-with-ml/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
 >
@@ -242,13 +242,13 @@ To learn the mapping between several features and the targets, in the next step,
 
 [Jana Naue et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) (another ensemble-based regressor) as the regressor and we can conclude from this study that an ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use gradient boosting to build a prediction model.
 
-Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. Hint: Please find the following tool in "Machine learning" tool section in Galaxy.
+Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. *Hint:* Please find the following tool in "Machine learning" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Train a model
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to train the regressor:
 >    - *"Select a Classification Task"*: `Train a model`
->       - *"Select an ensemble method"*: `Gradient Boosting Regressor`
+>       - *"Select an ensemble method"*: `Gradient Boosting Regressor` (*Note:* choose `Gradient Boosting Regressor` not `Gradient Boosting Classifier`)
 >          - *"Select input type"*: `tabular data`
 >             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
@@ -269,7 +269,7 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 > >
 > > **Gradient boosting** regressor learns multiple attributes like **feature_importances_** (weight for each feature/column),
 > > **oob_improvement_** (which stores incremental improvements in learning), **estimators_** (collection of weak learners) and a few more.
-> > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by reading this file.
+> > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by using the **Estimator attributes** tool on the `gradient_boosting_model` dataset.
 > > 
 > {: .solution}
 >
@@ -291,7 +291,7 @@ After learning on the training dataset, we should evaluate the performance on th
 Now we can visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool.
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels` (*Note:* use the `test_rows_labels` dataset, not the `test_rows_labels_without_header` one)
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_gradient_boosting`
 {: .hands_on}
 
