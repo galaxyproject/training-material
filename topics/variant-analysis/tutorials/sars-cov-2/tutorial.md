@@ -6,7 +6,7 @@ zenodo_link: 'http://zenodo.org/record/3906454'
 questions:
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
 objectives:
-- Understand how Galaxy and the Short Read Archive interact.
+- Understand how Galaxy and the Sequence Read Archive interact.
 - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.
 time_estimation: '45m'
 key_points:
@@ -22,7 +22,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The aim of this tutorial is to learn how to Galaxy and NCBI's Short Read Archive interact (SRA) with each other.  This tutorial uses a COVID-19 variant calling example, but it isn't about variant calling per se.
+The aim of this tutorial is to learn how to Galaxy and NCBI's Sequence Read Archive interact (SRA) with each other.  This tutorial uses a COVID-19 variant calling example, but it isn't about variant calling per se.
 
 SRA, like many data sources is Galaxy aware.  It has support for sending information directly to Galaxy, and it tracks which Galaxy instance it was invoked from.  Getting sequence data from SRA is a multi-step process.  This tutorial explains each step in the process and then demonstrates a particular example of how to use SRA data in Galaxy.
 
@@ -236,6 +236,20 @@ If you ran this tutorial, but retrieved datasets that you were interested in, th
 
 However, if you retrieved the datasets used in this tutorial's examples above, then you are ready to run the SARS-CoV-2 variant analysis below.
 
+
+# Variation Analysis of SARS-Cov-2 sequencing data
+
+In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling and finally look at the geographic distribution of some of the found variants.
+
+> ### {% icon comment %} The usegalaxy.* COVID-19 analysis project
+> This tutorial uses a subset of the data and runs through the
+> [Variation Analysis](https://covid19.galaxyproject.org/genomics/4-variation/)
+> section of [covid19.galaxyproject.org](https://covid19.galaxyproject.org/).
+> The data for [covid19.galaxyproject.org](https://covid19.galaxyproject.org/) is
+> being updated continuously as new datasets are made public.
+{: .comment}
+
+
 # Get the reference genome data
 
 The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
@@ -254,10 +268,10 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >
 {: .hands_on}
 
-# Variant Analysis of SARS-Cov-2 sequencing data
-
 
 ## Adapter trimming with **fastp**
+
+Removing sequencing adapters improves alignments and variant calling. **fastp** {% icon tool %} can automatically detect widely used sequencing adapters.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -268,7 +282,10 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >        - *"Output JSON report"*: `Yes`
 {: .hands_on}
 
+
 ## Alignment with  **Map with BWA-MEM**
+
+**BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
 > ### {% icon hands_on %} Hands-on: Align sequencing reads to reference genome
 >
@@ -282,7 +299,11 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >
 {: .hands_on}
 
+
+
 ## Remove duplicates with **MarkDuplicates**
+
+**MarkDuplicates** {% icon tool %} removes duplicate sequences originating from library preparation artifacts and sequencing artifacts. It is important to remove these artefactual sequences to avoid artificial overrepresentation of single molecule.
 
 > ### {% icon hands_on %} Hands-on: Remove PCR duplicates
 >
@@ -292,19 +313,9 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >
 {: .hands_on}
 
-##  **Realign reads**
-
-> ### {% icon hands_on %} Hands-on: Realign reads around indels
->
-> 1. **Realign reads** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
->    - *"Choose the source for the reference genome"*: `History`
->        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
->    - In *"Advanced options"*:
->        - *"How to handle base qualities of 2?"*: `Keep unchanged`
-{: .hands_on}
-
 ## Generate alignment statistics with **Samtools stats**
+
+After the duplicate marking step above we can generate statistic about the alignment we have generated.
 
 > ### {% icon hands_on %} Hands-on: Generate alignment statistics
 >
@@ -317,11 +328,25 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >    - *"Filter by regions"*: `No`
 {: .hands_on}
 
-## Add indel qualities with **Insert indel qualities**
+## **Realign reads** with lofreq viterbi
+
+**Realign reads** {% icon tool %} corrects misalignments around insertions and deletions. This is required in order to accurately detect variants.
+
+> ### {% icon hands_on %} Hands-on: Realign reads around indels
+>
+> 1. **Realign reads** with lofreq {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
+>    - *"Choose the source for the reference genome"*: `History`
+>        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
+>    - In *"Advanced options"*:
+>        - *"How to handle base qualities of 2?"*: `Keep unchanged`
+{: .hands_on}
+
+## Add indel qualities with lofreq **Insert indel qualities**
 
 > ### {% icon hands_on %} Hands-on: Add indel qualities
 >
-> 1. **Insert indel qualities** {% icon tool %} with the following parameters:
+> 1. **Insert indel qualities** with lofreq {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
 >    - *"Indel calculation approach"*: `Dindel`
 >        - *"Choose the source for the reference genome"*: `History`
@@ -329,11 +354,11 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 >
 {: .hands_on}
 
-## Call Variants using **Call variants**
+## Call Variants using lofreq **Call variants**
 
 > ### {% icon hands_on %} Hands-on: Call variants
 >
-> 1. **Call variants** {% icon tool %} with the following parameters:
+> 1. **Call variants** with lofreq  {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `History`
 >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
