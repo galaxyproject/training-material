@@ -75,7 +75,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 > 1. If your history is not already empty, than start a new history (see here for more on Galaxy histories)
 > 1. **Click** `Get Data` at the top of the tool panel.
 > 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
->    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra).  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
+>    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
 >
 >    This returns a list of *SRA Experiments* that match your search string.  SRA Experiments, also know as *SRX entries*, contain sequence data from a particular experiment, as well as an explanation of the experiment itself and any other related data. You can explore the returned experiments by clicking on their name.  See [Understanding SRA Search Results](https://www.ncbi.nlm.nih.gov/books/NBK56913/) in the [SRA Knowledge Base](https://www.ncbi.nlm.nih.gov/books/n/helpsrakb/) for more.
 >
@@ -91,25 +91,30 @@ SRA can be reached either directly through it's website, or through the tool pan
 >
 > 1. If you aren't already there, **navigate** back to the [Sequence Read Archive search page](https://www.ncbi.nlm.nih.gov/sra)
 > 1. **Clear** any search text from the search box.
-> 1. ***TODO***:**Type** `our excellent first search` in the search box and **click** `Search`.
+> 1. **Type** `sars-cov-2` in the search box and **click** `Search`.
 >
 >    This returns a longish list of SRA experiments that match our search, and that list is far too long to use in a tutorial exercise.  At this point we could use the advanced Entrez query builder we learned about above.
 >
 >    But we won't.  Instead lets send the *too long for a tutorial* list results we have to the SRA Run Selector, and use its friendlier interface to narrow our results.
+>
+> ![sra entrez](../../images/sra_entrez.png)
 {: .hands_on}
 
 
 > ### {% icon hands_on %} Hands-on: Go from Entrez to SRA Run Selector
 >
-> This text appears in a box at the top of the search results
+> View results as an expanded interactive table using the RunSelector.
 >
-> ***TODO*** View results as an expanded interactive table using the RunSelector.  <u>Send results to Run selector</u>
+> 1. Click <u>Send results to Run selector</u>, which appears in a box at the top of the search results.
+>
+> ![sra entrez result](../../images/sra_entrez_result.png)
 >
 > > ### {% icon tip %} What if you don't see the Run Selector Link?
 > >
 > > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
 > >
 > > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button.
+> ![sra entrez send to](../../images/sra_entrez_send_to.png)
 > {: .tip}
 >
 >
@@ -140,7 +145,7 @@ The Run Selector window is divided into several panels:
 * **`Filters List`**: In the upper left hand corner.  This is where we will refine our search.
 * **`Select`**: A summary of what was initially passed to Run Selector, and how much of that we have selected so far.  (And so far, we haven't selected any of it.)  Also note the tantalizing, but still grayed out, `Galaxy` button.
 * **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
-
+>![sra run selector](../../images/sra_run_selector.png)
 
 > ### {% icon comment %} Why did the number of found items *go up?*
 >
