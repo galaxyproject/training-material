@@ -164,7 +164,7 @@ The `Filters List` in the upper left shows columns in our results that have eith
 >
 > 1. If you have any filters turned on, **unselect** them.
 >     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
-> 1. **Copy and paste** this search string into the `Found Items` search box.
+> 2. **Copy and paste** this search string into the `Found Items` search box.
 >     ```
 >      SRR11772204 OR SRR11597145 OR SRR11667145
 >     ```
