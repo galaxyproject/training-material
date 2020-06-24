@@ -197,7 +197,7 @@ The visualization tool creates the following plots:
 
     ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets.")
 
-3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets: The residual plot shown in figure [9](#figure-9) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.
+3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets: The residual plot shown in figure [7](#figure-7) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.
 
     ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
 
@@ -219,7 +219,7 @@ These plots are important to visualize the quality of regression and the true an
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures 5, 6 and 9 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors. 
+> > Figures 5, 6 and 7 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors. 
 > >
 > {: .solution}
 {: .question}
@@ -325,7 +325,7 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 
 > ### {% icon details %} 5-fold cross-validation
 >
-> This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
+> This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [12](#figure-12). The complete dataset is divided into `5` equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
 >
 > ![5fold_cv](../../images/age-prediction-with-ml/5fold_cv.png "5-fold cross validation. ")
 >The image demonstrates how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.
