@@ -1,8 +1,16 @@
 ---
+title: "Nucleoli segmentation and feature extraction using CellProfiler"
+key_points:
+- Galaxy workflows can download images from the IDR, selecting specific channels,
+  time points, z-stack positions and crop the image in different ways.
+- CellProfiler in Galaxy can segment and extract features of any object of interest.
+- The features and masks can be exported for further analysis.
 layout: tutorial_hands_on
-
-title: Nucleoli segmentation and feature extraction using CellProfiler
-zenodo_link: ''
+objectives:
+- How to download images from a public image repository.
+- How to segment cell nuclei using CellProfiler in Galaxy.
+- How to segment cell nucleoli using CellProfiler in Galaxy.
+- How to extract features for images, nuclei and nucleoli.
 questions:
 - How do I run an image analysis pipeline on public data using CellProfiler?
 - How do I analyse the DNA channel of fluorescence siRNA screens?
@@ -14,45 +22,40 @@ questions:
 - How do I relate the nucleoli to their parent nucleus?
 - How do I measure the image and object features?
 - How do I measure the image quality?
-objectives:
-- How to download images from a public image repository.
-- How to segment cell nuclei using CellProfiler in Galaxy.
-- How to segment cell nucleoli using CellProfiler in Galaxy.
-- How to extract features for images, nuclei and nucleoli.
 time_estimation: 4H
-key_points:
-- Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
-- CellProfiler in Galaxy can segment and extract features of any object of interest.
-- The features and masks can be exported for further analysis.
-contributors:
-- beatrizserrano
+contributors: beatrizserrano
+zenodo_link: ''
 ---
 
 
 # Introduction
 {:.no_toc}
 
-The nucleolus is a prominent structure in the nucleus of the cell involved in the ribosome biogenesis and cell cycle regulation. In the DNA staining of gene silencing screens, the nucleolus can be identified as the absence of DNA ([Fig. 1](#nucleoli)). The loss of function phenotypes can be indicative of a particular function.
+The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is involved in ribosome biogenesis and cell cycle regulation. In DNA staining of cells, nucleoli can be identified as the absence of DNA in nuclei ([Fig. 1](#nucleoli)).  
+Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.  
+In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.  
 
 <a name="nucleoli"></a>
-![](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen published at {% cite Heriche_2014 %}. The red arrows point at the absence of DNA, and hence, the putative nucleoli.")
+![](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli.")
 
-This kind of data can be found at the [Image Data Repository (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects tissues and cell datasets.
+In this project, we will analyze DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
+The images and associated metadata will be retrieved from the [Image Data Resource (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects image datasets of tissues and cells.
 
-[CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html) is a well-known tool to perform image analysis. The functionality of each module of the desktop version are now wrapped as a tool in Galaxy. The standalone version creates a *.cppipe* file that can be run using either the user interface or a command line.
+
+To process and analyze the images, we will use [CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. These modules are now also available as tools in Galaxy.
 
 To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts: 
 
 1) **StartingModules** {% icon tool %} to initialise the pipeline,
 
-2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the nucleus, the nucleolus, background and feature extraction,
+2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the background, nuclei and nucleoli, and feature extraction,
 
 3) **CellProfiler** {% icon tool %} to actually run the pipeline.
 
 <a name="high_level_view"></a>
 ![](../../images/tutorial-CP/wf.png "High-level view of the workflow")
 
-Here you will learn how to create a workflow to download a selection of images from the IDR; then you will be able segment the nucleoli within the nuclei using CellProfiler. You will also learn how to extract and export the features at three different levels: image, nucleus, nucleolus.
+Here you will learn how to create a workflow to download a selection of images from the IDR, segment nuclei and then the nucleoli within the nuclei using CellProfiler. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
 
 
 > ### Agenda
