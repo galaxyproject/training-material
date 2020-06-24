@@ -10,7 +10,9 @@ objectives:
 - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.
 time_estimation: '45m'
 key_points:
-- Sequence data in the SRA can be directly imported into Galaxy.
+- Sequence data in the SRA can be directly imported into Galaxy
+tags:
+  - covid19
 contributors:
 - mvdbeek
 - tnabtaf
