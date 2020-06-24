@@ -91,10 +91,8 @@ SRA can be reached either directly through it's website, or through the tool pan
 >
 > 1. If you aren't already there, **navigate** back to the [Sequence Read Archive search page](https://www.ncbi.nlm.nih.gov/sra)
 > 1. **Clear** any search text from the search box.
-> 1. ***TODO***:**Type** `our excellent first search` in the search box and **click** `Search`.
->
->    This returns a longish list of SRA experiments that match our search, and that list is far too long to use in a tutorial exercise.  At this point we could use the advanced Entrez query builder we learned about above.
->
+> 1. **Type** `sars-cov-2` in the search box and **click** `Search`.
+>    This returns a list of tens of thousands of SRA experiments that match our search. That list is far too long to use in a tutorial exercise.  At this point we could use the advanced Entrez query builder we learned about above.
 >    But we won't.  Instead lets send the *too long for a tutorial* list results we have to the SRA Run Selector, and use its friendlier interface to narrow our results.
 {: .hands_on}
 
@@ -103,7 +101,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 >
 > This text appears in a box at the top of the search results
 >
-> ***TODO*** View results as an expanded interactive table using the RunSelector.  <u>Send results to Run selector</u>
+> View results as an expanded interactive table using the RunSelector.  <u>Send results to Run selector</u>
 >
 > > ### {% icon tip %} What if you don't see the Run Selector Link?
 > >
@@ -161,13 +159,14 @@ The `Filters List` in the upper left shows columns in our results that have eith
 >
 > 1. If you have any filters turned on, **unselect** them.
 >     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
-> 1. **Select** the ***`TODO`*** filter in the `Filters List`
-> 1. In the *values* box that appears below, **select** the ***`TODO`*** and ***`TODO`*** values.
-> 1. **Select** the ***`TODO`*** filter in the `Filters List`
-> 1. In the *values* box that appears below, **select** the ***`TODO`*** and ***`TODO`*** values.
+> 1. **Copy and paste** this search string into the `Found Items` search box.
+>     ```
+>      SRR11607207 OR SRR11772204 OR SRR11597145 OR SRR11667145
+>     ```
+>     This hand-picked set of runs limits our results to 4 runs from with a wide geographic distribution.
 {: .hands_on}
 
-This reduces your `Found Items` list from thousands of runs to ~10 runs (a manageable number for a tutorial!). But we aren't quite done with Run Selector yet. Note that the `Galaxy` button is still grayed out.  We have narrowed our options, but we haven't actually selected anything to send to Galaxy yet.
+This reduces your `Found Items` list from tens of thousands of runs to 4 runs (a manageable number for a tutorial!). But we aren't quite done with Run Selector yet. Note that the `Galaxy` button is still grayed out.  We have narrowed our options, but we haven't actually selected anything to send to Galaxy yet.
 
 It's possible to select every remaining run by **clicking** the checkmark at the top of the first column.  You can unselect everything by **clicking** the `X`.
 
