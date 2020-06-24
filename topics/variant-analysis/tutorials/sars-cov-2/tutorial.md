@@ -166,12 +166,12 @@ The `Filters List` in the upper left shows columns in our results that have eith
 >     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
 > 1. **Copy and paste** this search string into the `Found Items` search box.
 >     ```
->      SRR11607207 OR SRR11772204 OR SRR11597145 OR SRR11667145
+>      SRR11772204 OR SRR11597145 OR SRR11667145
 >     ```
->     This hand-picked set of runs limits our results to 4 runs from with a wide geographic distribution.
+>     This hand-picked set of runs limits our results to 3 runs from different geographic distribution.
 {: .hands_on}
 
-This reduces your `Found Items` list from tens of thousands of runs to 4 runs (a manageable number for a tutorial!). But we aren't quite done with Run Selector yet. Note that the `Galaxy` button is still grayed out.  We have narrowed our options, but we haven't actually selected anything to send to Galaxy yet.
+This reduces your `Found Items` list from tens of thousands of runs to 3 runs (a manageable number for a tutorial!). But we aren't quite done with Run Selector yet. Note that the `Galaxy` button is still grayed out.  We have narrowed our options, but we haven't actually selected anything to send to Galaxy yet.
 
 It's possible to select every remaining run by **clicking** the checkmark at the top of the first column.  You can unselect everything by **clicking** the `X`.
 
