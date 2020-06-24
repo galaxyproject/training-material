@@ -26,6 +26,7 @@ key_points:
 - The features and masks can be exported for further analysis.
 contributors:
 - beatrizserrano
+- jkh1
 zenodo_link: ''
 ---
 
