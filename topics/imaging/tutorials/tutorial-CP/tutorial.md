@@ -41,17 +41,17 @@ In particular, regardless of the targeted biological process, many screens inclu
 <a name="nucleoli"></a>
 ![](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli.")
 
-In this project, we will analyze DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
+In this project, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the [Image Data Resource (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects image datasets of tissues and cells.
 
 
-To process and analyze the images, we will use [CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. These modules are now also available as tools in Galaxy.
+To process and analyse the images, we will use [CellProfiler](http://cellprofiler-manual.s3.amazonaws.com/CellProfiler-3.1.9/index.html) ({% cite McQuin_2018 %}), a popular image analysis software. CellProfiler normally comes as a desktop application in which users can compose image analysis workflows from a series of modules. Many of these modules are now also available as tools in Galaxy.
 
 To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each image analysis workflow needs to have three parts: 
 
 1) **StartingModules** {% icon tool %} to initialise the pipeline,
 
-2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the background, nuclei and nucleoli, and feature extraction,
+2) tools performing the analysis ([Fig. 2](#high_level_view)): identification of the nuclei, nucleoli and background, together with the feature extraction,
 
 3) **CellProfiler** {% icon tool %} to actually run the pipeline.
 
@@ -212,7 +212,7 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 
 From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like:
 
-![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels")
+![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels.")
 
 > ### {% icon question %} Questions
 >
