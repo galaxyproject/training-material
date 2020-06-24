@@ -1,16 +1,14 @@
 ---
 layout: tutorial_hands_on
 
-title: "Using data from NCBI's Sequence Read Archive (SRA): A
-SARS-CoV-2 variant analysis example"
+title: "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis"
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
 objectives:
 - Understand how Galaxy and the Short Read Archive interact.
 - Be able to go from Galaxy to the Short Reach Archive, query SRA, use the SRA Run Selector to send selected metadata to Galaxy, and then import sequence data from SRA into Galaxy.
-time_estimation: ''
+time_estimation: '45m'
 key_points:
 - Sequence data in the SRA can be directly imported into Galaxy.
 contributors:
@@ -23,8 +21,6 @@ contributors:
 
 # Introduction
 {:.no_toc}
-
-<!-- This is a comment. -->
 
 The aim of this tutorial is to learn how to Galaxy and NCBI's Short Read Archive interact (SRA) with each other.  This tutorial uses a COVID-19 variant calling example, but it isn't about variant calling per se.
 
@@ -39,11 +35,6 @@ At the completion of this tutorial you know
 * how to use that SRA metadata to import *sequence* data from SRA into Galaxy.
 * how to run a simple variant analysis in Galaxy using that data
   * See these [variant analysis tutorials](/training-material/topics/variant-analysis) for a more in-depth explanation of variant analysis.
-
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
 
 
 > ### Agenda
@@ -70,7 +61,7 @@ This tutorial covers how to get sequence data from SRA into Galaxy using a direc
 
 ## Accessing SRA
 
-SRA can be reached either directly through it's website, or through the tool panel on Galaxy. 
+SRA can be reached either directly through it's website, or through the tool panel on Galaxy.
 
 > ### {% icon comment %} Comment
 >
@@ -95,7 +86,7 @@ SRA can be reached either directly through it's website, or through the tool pan
 
 
 > ### {% icon hands_on %} Hands-on: Generate list of matching experiments using Entrez
-> 
+>
 > Now that you have a basic familiarity with SRA Entrez, let's find the sequences used in this tutorial.
 >
 > 1. If you aren't already there, **navigate** back to the [Sequence Read Archive search page](https://www.ncbi.nlm.nih.gov/sra)
@@ -111,14 +102,14 @@ SRA can be reached either directly through it's website, or through the tool pan
 > ### {% icon hands_on %} Hands-on: Go from Entrez to SRA Run Selector
 >
 > This text appears in a box at the top of the search results
-> 
+>
 > ***TODO*** View results as an expanded interactive table using the RunSelector.  <u>Send results to Run selector</u>
 >
 > > ### {% icon tip %} What if you don't see the Run Selector Link?
 > >
 > > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
 > >
-> > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button. 
+> > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button.
 > {: .tip}
 >
 >
@@ -137,10 +128,10 @@ We are using Entrez and the Run Selector how they are designed to be used:
     1. More easily understand the data we have
     1. Narrow those results using that knowledge.
 
- 
+
 > ### {% icon comment %} Run Selector is both more and less than Entrez
 >
-> Run Selector can do most, but not all of what Entrez search syntax can do.  Run selector uses *faceted search* technology which is easy to use, and powerful, but which has inherent limits.  Specifically, Entrez will work better when searching on attributes that have tens, hundreds, or thousands of different values.  Run Selector will work better searching attributes with fewer than 20 different values.  Fortunately, that describes most searches. 
+> Run Selector can do most, but not all of what Entrez search syntax can do.  Run selector uses *faceted search* technology which is easy to use, and powerful, but which has inherent limits.  Specifically, Entrez will work better when searching on attributes that have tens, hundreds, or thousands of different values.  Run Selector will work better searching attributes with fewer than 20 different values.  Fortunately, that describes most searches.
 {: .comment}
 
 
@@ -162,7 +153,7 @@ The `Filters List` in the upper left shows columns in our results that have eith
 > >
 > > Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
 > > First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
-> > Second, you can explore how different columns relate to each other.  Is there a relationship between `sirs_outcome` values and `disease_stage` values? 
+> > Second, you can explore how different columns relate to each other.  Is there a relationship between `sirs_outcome` values and `disease_stage` values?
 > {: .tip}
 
 
@@ -182,7 +173,7 @@ It's possible to select every remaining run by **clicking** the checkmark at the
 
 > ### {% icon hands_on %} Hands-on: Select runs and send to Galaxy
 >
-> 1. Select all runs by **clicking** the `X`. 
+> 1. Select all runs by **clicking** the `X`.
 >    And now, the `Galaxy` button is live.
 > 1. **Click** the `Galaxy` button in the `Select` section at the top of the page.
 {: .hands_on}
@@ -205,31 +196,30 @@ The `SRA` dataset is not sequence data, but rather *metadata* that we will use t
 Lets now use that metadata to fetch the sequence data from SRA.  SRA provides tools for extracting all sorts of information, including the sequence data itself.  The Galaxy Tool `Faster Download and Extract Reads in FASTQ` is based on the SRA [`fasterq-dump`](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump) utility, and does just that.
 
 
-> ### {% icon hands_on %} Hands-on: Retrieve sequence data from SRA
+## Download sequencing data with **Faster Download and Extract Reads in FASTQ**
+
+> ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Type** `sra` in the tool panel search box.
-> 1. **Scan** down the matching tool list looking for a tool that sounds like it might retrieve the sequence data from SRA.
->    There are several promising candidates, three of them with `Download and Extract Reads ... from NCBI SRA` in the tool name.  Any of these will work, but some (as we would discover) require a few pre-processing steps.
-> 1. **Click** **`Faster Download and Extract Reads in FASTQ`** `format from NCBI SRA`
-> 1. **Select** `List of SRA accession, one per line` under `select input type`.
->     After making this selection, Galaxy automatically displays any *tabular* files in your history (you probably only have one), and display in the `sra accession list` field.
-> 1. If `SRA` is not shown in the `sra accession list` field then **click** on it and **select** `SRA`
-> 1. **Click** the `Execute` button.
->    This sends a request to SRA to retrieve the sequence read datasets for the runs that were listed in the `SRA` dataset.
+> 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
+>    - *"select input type"*: `List of SRA accession, one per line`
+>        - {% icon param-file %} *"sra accession list"*: `SRA` (The SRA dataset that we retrieved in the previous step
+>    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset.
+>
+>
+>    > ### {% icon tip %} Tip: Finding tools
+>    > Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name, in this case `Faster Download and Extract Reads in FASTQ`, in the tool panel search box to find the tool.
+>    {: .tip}
+> 2. Several entries are created in your history panel when you submit this job:
+>    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
+>    - **`Single-end data (fasterq-dump)`** Contains Single-end datasets (if available)
+>    - **`Other data (fasterq-dump)`** Contains Unpaired datasets (if available)
+>    - **`fasterq-dump log`** Contains Information about the tool execution
 {: .hands_on}
 
-Several entries are created in your history panel when you submit this job:
-
-* **`Pair-end data (fasterq-deump)`**
-* **`Single-end data (fasterq-deump)`**
-* **`Other data (fasterq-dump)`**
-* **`fasterq-dump log`**
-
-The first three datasets are actually *collections* of datasets.  *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and *other*.  It also produces a log describing the run.
+The first three items are actually *collections* of datasets.  *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and *other*.
+See the Collections tutorials for more.
 
 Explore the collections by first **clicking** on the collection name in the history panel.  This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
-
-See the Collections tutorials for more.
 
 Once `fasterq` finishes transferring data (all boxes are green / done), we are ready to analyze it.
 
@@ -243,91 +233,10 @@ If you ran this tutorial, but retrieved datasets that you were interested in, th
 However, if you retrieved the datasets used in this tutorial's examples above, then you are ready to run the SARS-CoV-2 variant analysis below.
 
 
-> ### {% icon hands_on %} Hands-on: Data upload
->
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
->
->    ```
->    
->    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
->
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
-{: .hands_on}
-
-## 
+# Variant Analysis of SARS-Cov-2 sequencing data
 
 
-# Title of the section usually corresponding to a big step in the analysis
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Faster Download and Extract Reads in FASTQ**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
->    - *"select input type"*: `List of SRA accession, one per line`
->        - {% icon param-file %} *"sra accession list"*: `output` (Input dataset)
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **fastp**
+## Adapter trimming with **fastp**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -336,37 +245,11 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Select paired collection(s)"*: `list_paired` (output of **Faster Download and Extract Reads in FASTQ** {% icon tool %})
 >    - In *"Output Options"*:
 >        - *"Output JSON report"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Alignment with  **Map with BWA-MEM**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Map with BWA-MEM**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Align sequencing reads to reference genome
 >
 > 1. **Map with BWA-MEM** {% icon tool %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -376,71 +259,21 @@ A big step can have several subsections or sub steps:
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `1.Simple Illumina mode`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Remove duplicates with **MarkDuplicates**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MarkDuplicates**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Remove PCR duplicates
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+##  **Realign reads**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Realign reads**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Realign reads around indels
 >
 > 1. **Realign reads** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
@@ -448,37 +281,11 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
 >    - In *"Advanced options"*:
 >        - *"How to handle base qualities of 2?"*: `Keep unchanged`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Generate alignment statistics with **Samtools stats**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Samtools stats**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Generate alignment statistics
 >
 > 1. **Samtools stats** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"BAM file"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
@@ -487,37 +294,11 @@ A big step can have several subsections or sub steps:
 >    - *"Filter by SAM flags"*: `Do not filter`
 >    - *"Use a reference sequence"*: `No`
 >    - *"Filter by regions"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Add indel qualities with **Insert indel qualities**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Insert indel qualities**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Add indel qualities
 >
 > 1. **Insert indel qualities** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
@@ -525,36 +306,11 @@ A big step can have several subsections or sub steps:
 >        - *"Choose the source for the reference genome"*: `History`
 >            - {% icon param-file %} *"Reference"*: `output` (Input dataset)
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Call Variants using **Call variants**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Call variants**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Call variants
 >
 > 1. **Call variants** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
@@ -571,37 +327,11 @@ A big step can have several subsections or sub steps:
 >        - In *"Mapping quality"*:
 >            - *"Minimum mapping quality"*: `20`
 >    - *"Variant filter parameters"*: `Preset filtering on QUAL score + coverage + strand bias (lofreq call default)`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Annotate variant effects with **SnpEff eff:**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnpEff eff:**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Annotate variant effects
 >
 > 1. **SnpEff eff:** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
@@ -611,36 +341,11 @@ A big step can have several subsections or sub steps:
 >    - *"Filter output"*: ``
 >    - *"Filter out specific Effects"*: `No`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Create table of variants using **SnpSift Extract Fields**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **SnpSift Extract Fields**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Create table of variants
 >
 > 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
@@ -648,36 +353,11 @@ A big step can have several subsections or sub steps:
 >    - *"multiple field separator"*: `,`
 >    - *"empty field text"*: `.`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## Summarize data with **MultiQC**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **MultiQC**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Summarize data
 >
 > 1. **MultiQC** {% icon tool %} with the following parameters:
 >    - In *"Results"*:
@@ -699,44 +379,9 @@ A big step can have several subsections or sub steps:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `SnpEff`
 >                - {% icon param-file %} *"Output of SnpEff"*: `csvFile` (output of **SnpEff eff:** {% icon tool %})
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.
