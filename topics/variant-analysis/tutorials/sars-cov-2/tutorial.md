@@ -346,6 +346,8 @@ After the duplicate marking step above we can generate statistic about the align
 
 ## Add indel qualities with lofreq **Insert indel qualities**
 
+This step adds indel qualities into our alignment file. This is necessary in order to call variants using **Call variants** with lofreq {% icon tool %}
+
 > ### {% icon hands_on %} Hands-on: Add indel qualities
 >
 > 1. **Insert indel qualities** with lofreq {% icon tool %} with the following parameters:
@@ -358,9 +360,11 @@ After the duplicate marking step above we can generate statistic about the align
 
 ## Call Variants using lofreq **Call variants**
 
+We are now ready to call variants.
+
 > ### {% icon hands_on %} Hands-on: Call variants
 >
-> 1. **Call variants** with lofreq  {% icon tool %} with the following parameters:
+> 1. **Call variants** with lofreq {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `History`
 >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
@@ -377,7 +381,11 @@ After the duplicate marking step above we can generate statistic about the align
 >    - *"Variant filter parameters"*: `Preset filtering on QUAL score + coverage + strand bias (lofreq call default)`
 {: .hands_on}
 
+The output of this step is a collection of VCF files that can be visualized in a genome browser.
+
 ## Annotate variant effects with **SnpEff eff:**
+
+We will now annotate the variants we called in the previous step with the effect they have on the SARS-CoV-2 genome.
 
 > ### {% icon hands_on %} Hands-on: Annotate variant effects
 >
@@ -391,7 +399,11 @@ After the duplicate marking step above we can generate statistic about the align
 >
 {: .hands_on}
 
+The output of this step is a VCF file with added variant effects.
+
 ## Create table of variants using **SnpSift Extract Fields**
+
+We will now select various effects from the VCF and create a tabular file that is easier to understand for humans.
 
 > ### {% icon hands_on %} Hands-on: Create table of variants
 >
@@ -403,7 +415,14 @@ After the duplicate marking step above we can generate statistic about the align
 >
 {: .hands_on}
 
+We can inspect the output files and see check if Variants in this file are also described in [an observable notebook that shows the geographic distribution of SARS-CoV-2 variant sequences](https://observablehq.com/@spond/distribution-of-sars-cov-2-sequences-that-have-a-particular)
+
+Interesting variants include the C to T variant at position 14408 (14408C/T) in SRR11772204, 28144T/C in SRR11597145 and 25563G/T in SRR11667145.
+
+
 ## Summarize data with **MultiQC**
+
+We will now summarize our analysis with MultiQC, which generates a beautiful report for our data.
 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
@@ -428,6 +447,7 @@ After the duplicate marking step above we can generate statistic about the align
 >            - *"Which tool was used generate logs?"*: `SnpEff`
 >                - {% icon param-file %} *"Output of SnpEff"*: `csvFile` (output of **SnpEff eff:** {% icon tool %})
 {: .hands_on}
+
 
 # Conclusion
 {:.no_toc}
