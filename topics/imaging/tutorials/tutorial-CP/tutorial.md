@@ -24,7 +24,8 @@ key_points:
   time points, z-stack positions and crop the image in different ways.
 - CellProfiler in Galaxy can segment and extract features of any object of interest.
 - The features and masks can be exported for further analysis.
-contributors: beatrizserrano
+contributors:
+- beatrizserrano
 zenodo_link: ''
 ---
 
@@ -54,7 +55,7 @@ To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each im
 3) **CellProfiler** {% icon tool %} to actually run the pipeline.
 
 <a name="high_level_view"></a>
-![](../../images/tutorial-CP/wf.png "High-level view of the workflow")
+![](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
 
 Here you will learn how to create a workflow to download a selection of images from the IDR, segment nuclei and then the nucleoli within the nuclei using CellProfiler. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
 
@@ -95,7 +96,7 @@ Here you will learn how to create a workflow to download a selection of images f
 >    >
 >    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102){:target="_blank"} and select in the preview of a plate a few images ((figure [Fig. 3](#IDR_interface) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#IDR_interface) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#IDR_interface) - 3).
 >    > <a name="IDR_interface"></a>
->    > ![](../../images/tutorial-CP/IDR_interface.png "IDR interface")
+>    > ![](../../images/tutorial-CP/IDR_interface.jpg "IDR interface")
 >    {: .tip}
 >
 >    > ### {% icon comment %} Comment
