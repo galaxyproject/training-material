@@ -188,33 +188,59 @@ It's possible to select every remaining run by **clicking** the checkmark at the
 {: .hands_on}
 
 
-## It's not sequence, it's *metadata!*
+## Back in Galaxy
 
-That section title won't work  Doesn't translate.
+When we click `Galaxy` in Run Selector several things happen.  First, it launches a new browser tab or window which opens in Galaxy.  You will see the *big green box* indicating that the handshake between SRA and Galaxy was successful and you will then see a new `SRA` job in your history panel.  This box may start out as gray / pending, indicating that the transfer has not yet started, or it may go straight to yellow / running or to green / done.
 
-explain how to see what we got, and then what we got, and that we still need the sequence
-
-Search for SRA in tools.  Faster looks good.
-
-Wait, it says we need just the accession number column.
-
-
-### Get just the accession ids
-
-Two operations
-Keep column 1 only
-Remove leading lines
+> ### {% icon hands_on %} Hands-on: Examine the new SRA Dataset
+>
+> 1. Once the `SRA` transfer is complete, **click** on the dataset's {% icon galaxy-eye %} (eye) icon.
+>
+>    This displays the dataset in Galaxy's center panel.
+{: .hands_on}
 
 
+The `SRA` dataset is not sequence data, but rather *metadata* that we will use to get sequence data from SRA.  This metadata mirrors the information we saw in the Run Selector's `Found Items` section.  The metadata is not the end data that we are seeking from SRA, but having all that metadata is often useful in subsequent analysis steps.
 
-## Now, get the sequence data
-
-Back to Faster
+Lets now use that metadata to fetch the sequence data from SRA.  SRA provides tools for extracting all sorts of information, including the sequence data itself.  The Galaxy Tool `Faster Download and Extract Reads in FASTQ` is based on the SRA [`fasterq-dump`](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump) utility, and does just that.
 
 
-# Cool! Now what can we do with it?
+> ### {% icon hands_on %} Hands-on: Retrieve sequence data from SRA
+>
+> 1. **Type** `sra` in the tool panel search box.
+> 1. **Scan** down the matching tool list looking for a tool that sounds like it might retrieve the sequence data from SRA.
+>    There are several promising candidates, three of them with `Download and Extract Reads ... from NCBI SRA` in the tool name.  Any of these will work, but some (as we would discover) require a few pre-processing steps.
+> 1. **Click** **`Faster Download and Extract Reads in FASTQ`** `format from NCBI SRA`
+> 1. **Select** `List of SRA accession, one per line` under `select input type`.
+>     After making this selection, Galaxy automatically displays any *tabular* files in your history (you probably only have one), and display in the `sra accession list` field.
+> 1. If `SRA` is not shown in the `sra accession list` field then **click** on it and **select** `SRA`
+> 1. **Click** the `Execute` button.
+>    This sends a request to SRA to retrieve the sequence read datasets for the runs that were listed in the `SRA` dataset.
+{: .hands_on}
 
-TBD
+Several entries are created in your history panel when you submit this job:
+
+* **`Pair-end data (fasterq-deump)`**
+* **`Single-end data (fasterq-deump)`**
+* **`Other data (fasterq-dump)`**
+* **`fasterq-dump log`**
+
+The first three datasets are actually *collections* of datasets.  *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and *other*.  It also produces a log describing the run.
+
+Explore the collections by first **clicking** on the collection name in the history panel.  This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
+
+See the Collections tutorials for more.
+
+Once `fasterq` finishes transferring data (all boxes are green / done), we are ready to analyze it.
+
+
+# Now what?
+
+You can now analyze the retrieved data using any sequence analysis tools and workflows in Galaxy.  SRA holds backing data for every imaginable type of *-seq experiment.
+
+If you ran this tutorial, but retrieved datasets that you were interested in, then see the rest of the GTN library for ideas on how to analyze in Galaxy.
+
+However, if you retrieved the datasets used in this tutorial's examples above, then you are ready to run the SARS-CoV-2 variant analysis below.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
