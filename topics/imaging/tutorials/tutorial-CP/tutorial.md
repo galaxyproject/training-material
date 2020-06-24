@@ -38,8 +38,9 @@ The nucleolus is a prominent structure of the nucleus of eukaryotic cells and is
 Phenotypes caused by reduced gene function are widely used to elucidate gene function and image-based RNA interference (RNAi) screens are routinely used to find and characterize genes involved in a particular biological process. While screens typically focus on one biological process of interest, the molecular markers used can also inform on other processes. Re-using published screens image data can then be a cost-effective alternative to performing new experiments.  
 In particular, regardless of the targeted biological process, many screens include a DNA label and therefore can also reveal the effect of gene knock-downs on nucleoli.  
 
+
 <a name="nucleoli"></a>
-![](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli.")
+![DNA channel](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli."){: width="50%"}
 
 In this project, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the [Image Data Resource (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects image datasets of tissues and cells.
@@ -56,7 +57,7 @@ To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each im
 3) **CellProfiler** {% icon tool %} to actually run the pipeline.
 
 <a name="high_level_view"></a>
-![](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
+![High-level view of the workflow](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
 
 Here you will learn how to create a workflow to download a selection of images from the IDR, segment nuclei and then the nucleoli within the nuclei using CellProfiler. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
 
@@ -97,7 +98,7 @@ Here you will learn how to create a workflow to download a selection of images f
 >    >
 >    > To get the valid IDR link, go to the [dataset of interest in the IDR](http://idr.openmicroscopy.org/webclient/?show=screen-102){:target="_blank"} and select in the preview of a plate a few images ((figure [Fig. 3](#IDR_interface) - 1)). Once you see them at the bottom of the page (figure [Fig. 3](#IDR_interface) - 2), select them again and click the link button in the top-right corner of the right panel (figure [Fig. 3](#IDR_interface) - 3).
 >    > <a name="IDR_interface"></a>
->    > ![](../../images/tutorial-CP/IDR_interface.jpg "IDR interface")
+>    > ![IDR interface](../../images/tutorial-CP/IDR_interface.jpg "IDR interface")
 >    {: .tip}
 >
 >    > ### {% icon comment %} Comment
@@ -212,7 +213,7 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 
 From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like:
 
-![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels.")
+![Identified nuclei with labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels.")
 
 > ### {% icon question %} Questions
 >
@@ -328,7 +329,7 @@ Now that we have all the holes in one mask, we can segment the nucleoli as indiv
 
 We have now one segmentation mask per image with all the nuclei detected, `MaskNuclei`, and another one for the nucleoli, `MaskNucleoli`. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both (using different colors) into one image. Here we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome will look like:
 
-![combined_mask_nuclei_nucleoli](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
+![Combined mask for nuclei and nucleoli](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
 
 
 > ### {% icon hands_on %} Hands-on: Convert and save the nuclei and nucleoli masks
