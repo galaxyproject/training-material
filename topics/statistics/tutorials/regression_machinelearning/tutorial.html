@@ -554,7 +554,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 21, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 23, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -816,7 +816,7 @@ Hint: Please find the above tool in “Graph/Display data” tool section in <sp
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the predictions:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels_without_header.csv</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels_without_header</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">predicted_data_linear</code></li>
       </ul>
     </li>
@@ -847,7 +847,7 @@ Hint: Please find the above tool in “Graph/Display data” tool section in <sp
 
 <blockquote class="details">
   <h3 id="details-r2-coefficient-of-determination"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> R2 (coefficient of determination)</h3>
-  <p>In both the parts, learning on datasets is done using cross-validation and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-7">7</a> and <a href="#figure-8">8</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-7">7</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. On the other hand, figure <a href="#figure-8">8</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For <span class="notranslate">RNA</span>-seq dataset, we will compute the cross-validated R2 score using the training set and for <span class="notranslate">DNA</span> methylation dataset, we will compute the R2 score for the test set.</p>
+  <p>In both the parts, learning on datasets is done using cross-validation and <a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html">R2</a> scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures <a href="#figure-8">8</a> and <a href="#figure-9">9</a>. In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the <code class="language-plaintext highlighter-rouge">x = y</code> line as the true and predicted targets are close to each other. In figure <a href="#figure-8">8</a>, we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is <code class="language-plaintext highlighter-rouge">-0.06</code>. On the other hand, figure <a href="#figure-9">9</a> shows a better pattern as most of the points lie along the line and the R2 score is almost <code class="language-plaintext highlighter-rouge">1.0</code>. For <span class="notranslate">RNA</span>-seq dataset, we will compute the cross-validated R2 score using the training set and for <span class="notranslate">DNA</span> methylation dataset, we will compute the R2 score for the test set.</p>
 
   <figure id="figure-8"><img src="../../images/age-prediction-with-ml/model_bad.png" alt="model_bad" /><figcaption><span class="figcaption-prefix">Figure 8:</span> This shows an example of a bad model as most of the points are scattered.</figcaption></figure>
 
@@ -886,7 +886,7 @@ Hint: Please find the above tool in “Graph/Display data” tool section in <sp
 
 <p><a href="https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub">Jana Naue et al. (2017)</a> used <a href="https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor">Random Forest</a> (another ensemble-based regressor) as the regressor and we can conclude from this study that an ensemble-based regressor works well on this <span class="notranslate">DNA</span> methylation dataset. Therefore, we will use gradient boosting to build a prediction model.</p>
 
-<p>Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors inte<span class="notranslate">rna</span>lly and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. Hint: Please find the following tool in “Machine learning” tool section in <span class="notranslate">Galaxy</span>.</p>
+<p>Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors inte<span class="notranslate">rna</span>lly and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. <em>Hint:</em> Please find the following tool in “Machine learning” tool section in <span class="notranslate">Galaxy</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-train-a-model-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train a model</h3>
@@ -896,7 +896,7 @@ Hint: Please find the above tool in “Graph/Display data” tool section in <sp
       <ul>
         <li><em>“Select a Classification Task”</em>: <code class="language-plaintext highlighter-rouge">Train a model</code>
           <ul>
-            <li><em>“Select an ensemble method”</em>: <code class="language-plaintext highlighter-rouge">Gradient Boosting Regressor</code>
+            <li><em>“Select an ensemble method”</em>: <code class="language-plaintext highlighter-rouge">Gradient Boosting Regressor</code> (<em>Note:</em> choose <code class="language-plaintext highlighter-rouge">Gradient Boosting Regressor</code> not <code class="language-plaintext highlighter-rouge">Gradient Boosting Classifier</code>)
               <ul>
                 <li><em>“Select input type”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
                   <ul>
@@ -936,7 +936,7 @@ Hint: Please find the above tool in “Graph/Display data” tool section in <sp
 
     <p><strong>Gradient boosting</strong> regressor learns multiple attributes like <strong>feature_importances_</strong> (weight for each feature/column),
 <strong>oob_improvement_</strong> (which stores incremental improvements in learning), <strong>estimators_</strong> (collection of weak learners) and a few more.
-These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by reading this file.</p>
+These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by using the <strong>Estimator attributes</strong> tool on the <code class="language-plaintext highlighter-rouge">gradient_boosting_model</code> dataset.</p>
 
   </blockquote>
 
@@ -970,7 +970,7 @@ These attributes are used to predict the target for a new sample and are stored 
   <ol>
     <li><strong>Plot actual vs predicted curves and residual plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters to visualize the predictions:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select input data file”</em>: <code class="language-plaintext highlighter-rouge">test_rows_labels</code> (<em>Note:</em> use the <code class="language-plaintext highlighter-rouge">test_rows_labels</code> dataset, not the <code class="language-plaintext highlighter-rouge">test_rows_labels_without_header</code> one)</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select predicted data file”</em>: <code class="language-plaintext highlighter-rouge">predicted_data_gradient_boosting</code></li>
       </ul>
     </li>
@@ -1232,7 +1232,7 @@ The quality of predictions is visualized using multiple plots to ascertain the r
     title = "Regression in Machine Learning (Galaxy Training Materials)",
     year = "2020",
     month = "06",
-    day = "21"
+    day = "23"
     url = "\url{/training-material/topics/statistics/tutorials/regression_machinelearning/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
