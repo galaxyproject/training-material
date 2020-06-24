@@ -1,16 +1,7 @@
 ---
-title: "Nucleoli segmentation and feature extraction using CellProfiler"
-key_points:
-- Galaxy workflows can download images from the IDR, selecting specific channels,
-  time points, z-stack positions and crop the image in different ways.
-- CellProfiler in Galaxy can segment and extract features of any object of interest.
-- The features and masks can be exported for further analysis.
 layout: tutorial_hands_on
-objectives:
-- How to download images from a public image repository.
-- How to segment cell nuclei using CellProfiler in Galaxy.
-- How to segment cell nucleoli using CellProfiler in Galaxy.
-- How to extract features for images, nuclei and nucleoli.
+
+title: "Nucleoli segmentation and feature extraction using CellProfiler"
 questions:
 - How do I run an image analysis pipeline on public data using CellProfiler?
 - How do I analyse the DNA channel of fluorescence siRNA screens?
@@ -22,7 +13,17 @@ questions:
 - How do I relate the nucleoli to their parent nucleus?
 - How do I measure the image and object features?
 - How do I measure the image quality?
+objectives:
+- How to download images from a public image repository.
+- How to segment cell nuclei using CellProfiler in Galaxy.
+- How to segment cell nucleoli using CellProfiler in Galaxy.
+- How to extract features for images, nuclei and nucleoli.
 time_estimation: 4H
+key_points:
+- Galaxy workflows can download images from the IDR, selecting specific channels,
+  time points, z-stack positions and crop the image in different ways.
+- CellProfiler in Galaxy can segment and extract features of any object of interest.
+- The features and masks can be exported for further analysis.
 contributors: beatrizserrano
 zenodo_link: ''
 ---
