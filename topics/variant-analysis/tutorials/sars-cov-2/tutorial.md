@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis"
-zenodo_link: ''
+zenodo_link: 'http://zenodo.org/record/3906454'
 questions:
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
 objectives:
@@ -232,6 +232,23 @@ If you ran this tutorial, but retrieved datasets that you were interested in, th
 
 However, if you retrieved the datasets used in this tutorial's examples above, then you are ready to run the SARS-CoV-2 variant analysis below.
 
+# Get the reference genome data
+
+The reference genome data for today is for SARS-CoV-2, "Severe acute respiratory syndrome coronavirus 2 isolate Wuhan-Hu-1, complete genome", having the accession ID of NC_045512.2.
+
+This data is available from Zenodo using the following [link](https://doi.org/10.5281/zenodo.3906454).
+
+> ### {% icon hands_on %} Hands-on: Get the reference genome data
+>
+> 1.  Import the following file into your history:
+>
+>     ```
+>     https://zenodo.org/record/3906454/files/NC_045512.2.fasta
+>     ```
+>
+>    {% include snippets/import_via_link.md %}
+>
+{: .hands_on}
 
 # Variant Analysis of SARS-Cov-2 sequencing data
 
