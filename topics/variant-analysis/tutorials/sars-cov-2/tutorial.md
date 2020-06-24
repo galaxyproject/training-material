@@ -16,6 +16,7 @@ key_points:
 contributors:
 - mvdbeek
 - tnabtaf
+- blankenberg
 
 ---
 
@@ -56,85 +57,190 @@ tutorial.
 
 # The Sequence Read Archive
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  for the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies.
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+This tutorial covers how to get sequence data from SRA into Galaxy using a direct connection between the two.
 
-
-# Retrieve data from SRA
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data: The SRA data source
-
-### Search SRA
-
-[Search in SRA documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/)
-
-Search for `sars-cov-2`.  And we get back over 24,000 results (as of June 2020).  Refine that search by adding `"library layout paired"[Properties]` ([from SRA search documentation](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/)). That reduces our result size by almost 75% and has the added advantage of having all data in the same paired end format.
-
-Wait, wait, wait.  This is viral sequence.  Does it matter if we use paired end or single end?
-
-"platform oxford_nanopore"[Properties] 
-
-Need someway to narrow the results that make sense, and makes downstream analysis simpler too.  We could narrow results here, or in run selector or both.
-
-Maybe demo syntax in Entrez, give up and say there is a simpler way in the run selector.  Pass everything there.
+> ### {% icon comment %} Comment
+>
+> You will also hear SRA referred to as the *Short Read Archive*, its original name.
+>
+{: .comment}
 
 
-### Switch to the Run Selector
+## Accessing SRA
 
-`View results as an expanded interactive table using the RunSelector. Send results to Run selector`
+SRA can be reached either directly through it's website, or through the tool panel on Galaxy. 
 
-Note the filters list box in the upper left.
-
-Good time to talk about DATASTORE filetype?
-
-Host and Host_scientific name
-
+> ### {% icon comment %} Comment
+>
+> Initially the tool panel option exists only on the [usegalaxy.org server](https://usegalaxy.org/).  Support for the direct connection to SRA will be included in the 20.05 release of Galaxy
+{: .comment}
 
 
-
-### Send to Galaxy
-
-## It's not sequence, it's *metadata!*
-
-That section title won't work  Doesn't translate.
-
-explain how to see what we got, and then what we got, and that we still need the sequence
-
-Search for SRA in tools.  Faster looks good.
-
-Wait, it says we need just the accession number column.
-
-
-### Get just the accession ids
-
-Two operations
-Keep column 1 only
-Remove leading lines
+> ### {% icon hands_on %} Hands-on: Explore SRA Entrez
+>
+> 1. Go to [usegalaxy.org](https://usegalaxy.org/)
+> 1. If your history is not already empty, than start a new history (see here for more on Galaxy histories)
+> 1. **Click** `Get Data` at the top of the tool panel.
+> 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
+>    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra).  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
+>
+>    This returns a list of *SRA Experiments* that match your search string.  SRA Experiments, also know as *SRX entries*, contain sequence data from a particular experiment, as well as an explanation of the experiment itself and any other related data. You can explore the returned experiments by clicking on their name.  See [Understanding SRA Search Results](https://www.ncbi.nlm.nih.gov/books/NBK56913/) in the [SRA Knowledge Base](https://www.ncbi.nlm.nih.gov/books/n/helpsrakb/) for more.
+>
+>    When you enter text in the SRA search box, you are using [SRA's Entrez search interface](https://www.ncbi.nlm.nih.gov/sra/docs/srasearch/).  Entrez supports both simple text searches, and very precise searches that check specific metadata and use arbitrarily complex logical expressions.  Entrez allows you to scale up your searches from basic to advanced as you narrow your searches.  The syntax of advanced searches can seem daunting, but SRA provides a graphical [Advanced Search Builder](https://www.ncbi.nlm.nih.gov/sra/advanced/) to generate the specific syntax.  And, as we shall see below, the SRA Run Selector provides an even friendlier user interface for narrowing our selected data.
+>
+>    Play around with the SRA Entrez interface, including the advanced query builder, to see if you can identify a set of SRA experiments that are relevant to one of your research areas.
+{: .hands_on}
 
 
+> ### {% icon hands_on %} Hands-on: Generate list of matching experiments using Entrez
+> 
+> Now that you have a basic familiarity with SRA Entrez, let's find the sequences used in this tutorial.
+>
+> 1. If you aren't already there, **navigate** back to the [Sequence Read Archive search page](https://www.ncbi.nlm.nih.gov/sra)
+> 1. **Clear** any search text from the search box.
+> 1. ***TODO***:**Type** `our excellent first search` in the search box and **click** `Search`.
+>
+>    This returns a longish list of SRA experiments that match our search, and that list is far too long to use in a tutorial exercise.  At this point we could use the advanced Entrez query builder we learned about above.
+>
+>    But we won't.  Instead lets send the *too long for a tutorial* list results we have to the SRA Run Selector, and use its friendlier interface to narrow our results.
+{: .hands_on}
 
-## Now, get the sequence data
 
-Back to Faster
+> ### {% icon hands_on %} Hands-on: Go from Entrez to SRA Run Selector
+>
+> This text appears in a box at the top of the search results
+> 
+> ***TODO*** View results as an expanded interactive table using the RunSelector.  <u>Send results to Run selector</u>
+>
+> > ### {% icon tip %} What if you don't see the Run Selector Link?
+> >
+> > You may have noticed this text earlier when you were exploring Entrez search.  This text only appears some of the time, when the number of search results falls within a fairly broad window.  You won't see it if you only have a few results, and you won't see it if you have more results than the Run Selector can accept.
+> >
+> > *You need to get to Run Selector to send your results to Galaxy.* What if you don't have enough results to trigger this link being shown?  In that case you call get to the Run Selector by **clicking** on the `Send to` pulldown menu at the top right of the results panel.  To get to Run Selector, **select** `Run Selector` and then **click** the `Go` button. 
+> {: .tip}
+>
+>
+> 1. **Click** `Send results to Run selector` at the top of the search results panel. (If you don't see this link, then see the comment directly above.)
+{: .hands_on}
+
+## SRA Run Selector
+
+We learned earlier how to narrow our search results by using Entrez's advanced syntax.  However, we didn't take advantage of that power when we were in Entrez.  Instead we used a simple search and then sent all the results to the Run Selector.  We don't yet have the (short) list of results we want to run analysis on. *What are we doing?*
+
+We are using Entrez and the Run Selector how they are designed to be used:
+
+ * Use the Entrez interface to narrow your results down to a size that the Run Selector can consume.
+ * Send those Entrez results to the SRA Run Selector
+ * Use the Run Selector's much friendlier interface to
+    1. More easily understand the data we have
+    1. Narrow those results using that knowledge.
+
+ 
+> ### {% icon comment %} Run Selector is both more and less than Entrez
+>
+> Run Selector can do most, but not all of what Entrez search syntax can do.  Run selector uses *faceted search* technology which is easy to use, and powerful, but which has inherent limits.  Specifically, Entrez will work better when searching on attributes that have tens, hundreds, or thousands of different values.  Run Selector will work better searching attributes with fewer than 20 different values.  Fortunately, that describes most searches. 
+{: .comment}
 
 
-# Cool! Now what can we do with it?
+The Run Selector window is divided into several panels:
 
-TBD
+* **`Filters List`**: In the upper left hand corner.  This is where we will refine our search.
+* **`Select`**: A summary of what was initially passed to Run Selector, and how much of that we have selected so far.  (And so far, we haven't selected any of it.)  Also note the tantalizing, but still grayed out, `Galaxy` button.
+* **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
+
+
+> ### {% icon comment %} Why did the number of found items *go up?*
+>
+> Recall that the Entrez interface lists SRA experiments (SRX entries).  Run Selector lists *runs* &mdash; sequencing datasets &mdash; and there are *one or more* runs per experiment. We have the same data as before, we are now just seeing it in finer detail.
+{: .comment}
+
+The `Filters List` in the upper left shows columns in our results that have either continuous numerical values, or 10 or less (you can change this number) distinct values in them.  **Scroll** down through the list select a few of the filters.  When a filter is selected, a *values* box appears below, listing options for this filter, and the number of runs with each option.  These values / options are pulled from the dataset metadata.  Try **selecting** a few interesting sounding filters and then **select** one or more options for each filter. Try **unselecting** options and filters. As you do this, the number of found results will decrease or increase.
+
+> > ### {% icon tip %} Tip: Use Filters to better understand the data
+> >
+> > Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
+> > First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
+> > Second, you can explore how different columns relate to each other.  Is there a relationship between `sirs_outcome` values and `disease_stage` values? 
+> {: .tip}
+
+
+> ### {% icon hands_on %} Hands-on: Narrow your results using Run Selector
+>
+> 1. If you have any filters turned on, **unselect** them.
+>     Once you have done this, there won't be any *values* boxes appearing below the `Filters List`.
+> 1. **Select** the ***`TODO`*** filter in the `Filters List`
+> 1. In the *values* box that appears below, **select** the ***`TODO`*** and ***`TODO`*** values.
+> 1. **Select** the ***`TODO`*** filter in the `Filters List`
+> 1. In the *values* box that appears below, **select** the ***`TODO`*** and ***`TODO`*** values.
+{: .hands_on}
+
+This reduces your `Found Items` list from thousands of runs to ~10 runs (a manageable number for a tutorial!). But we aren't quite done with Run Selector yet. Note that the `Galaxy` button is still grayed out.  We have narrowed our options, but we haven't actually selected anything to send to Galaxy yet.
+
+It's possible to select every remaining run by **clicking** the checkmark at the top of the first column.  You can unselect everything by **clicking** the `X`.
+
+> ### {% icon hands_on %} Hands-on: Select runs and send to Galaxy
+>
+> 1. Select all runs by **clicking** the `X`. 
+>    And now, the `Galaxy` button is live.
+> 1. **Click** the `Galaxy` button in the `Select` section at the top of the page.
+{: .hands_on}
+
+
+## Back in Galaxy
+
+When we click `Galaxy` in Run Selector several things happen.  First, it launches a new browser tab or window which opens in Galaxy.  You will see the *big green box* indicating that the handshake between SRA and Galaxy was successful and you will then see a new `SRA` job in your history panel.  This box may start out as gray / pending, indicating that the transfer has not yet started, or it may go straight to yellow / running or to green / done.
+
+> ### {% icon hands_on %} Hands-on: Examine the new SRA Dataset
+>
+> 1. Once the `SRA` transfer is complete, **click** on the dataset's {% icon galaxy-eye %} (eye) icon.
+>
+>    This displays the dataset in Galaxy's center panel.
+{: .hands_on}
+
+
+The `SRA` dataset is not sequence data, but rather *metadata* that we will use to get sequence data from SRA.  This metadata mirrors the information we saw in the Run Selector's `Found Items` section.  The metadata is not the end data that we are seeking from SRA, but having all that metadata is often useful in subsequent analysis steps.
+
+Lets now use that metadata to fetch the sequence data from SRA.  SRA provides tools for extracting all sorts of information, including the sequence data itself.  The Galaxy Tool `Faster Download and Extract Reads in FASTQ` is based on the SRA [`fasterq-dump`](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump) utility, and does just that.
+
+
+> ### {% icon hands_on %} Hands-on: Retrieve sequence data from SRA
+>
+> 1. **Type** `sra` in the tool panel search box.
+> 1. **Scan** down the matching tool list looking for a tool that sounds like it might retrieve the sequence data from SRA.
+>    There are several promising candidates, three of them with `Download and Extract Reads ... from NCBI SRA` in the tool name.  Any of these will work, but some (as we would discover) require a few pre-processing steps.
+> 1. **Click** **`Faster Download and Extract Reads in FASTQ`** `format from NCBI SRA`
+> 1. **Select** `List of SRA accession, one per line` under `select input type`.
+>     After making this selection, Galaxy automatically displays any *tabular* files in your history (you probably only have one), and display in the `sra accession list` field.
+> 1. If `SRA` is not shown in the `sra accession list` field then **click** on it and **select** `SRA`
+> 1. **Click** the `Execute` button.
+>    This sends a request to SRA to retrieve the sequence read datasets for the runs that were listed in the `SRA` dataset.
+{: .hands_on}
+
+Several entries are created in your history panel when you submit this job:
+
+* **`Pair-end data (fasterq-deump)`**
+* **`Single-end data (fasterq-deump)`**
+* **`Other data (fasterq-dump)`**
+* **`fasterq-dump log`**
+
+The first three datasets are actually *collections* of datasets.  *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and *other*.  It also produces a log describing the run.
+
+Explore the collections by first **clicking** on the collection name in the history panel.  This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
+
+See the Collections tutorials for more.
+
+Once `fasterq` finishes transferring data (all boxes are green / done), we are ready to analyze it.
+
+
+# Now what?
+
+You can now analyze the retrieved data using any sequence analysis tools and workflows in Galaxy.  SRA holds backing data for every imaginable type of *-seq experiment.
+
+If you ran this tutorial, but retrieved datasets that you were interested in, then see the rest of the GTN library for ideas on how to analyze in Galaxy.
+
+However, if you retrieved the datasets used in this tutorial's examples above, then you are ready to run the SARS-CoV-2 variant analysis below.
 
 
 > ### {% icon hands_on %} Hands-on: Data upload
