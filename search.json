@@ -1,0 +1,43 @@
+---
+layout: null
+---
+[ {% for topic in site.data %}
+    {% unless topic[0] == 'contributors' %}
+      {% assign topic_material = site.pages | topic_filter:topic[0] %}
+      {% assign topic_title = topic[1].title %}
+      {% for tutorial in topic_material %}
+
+           {% capture result_entry %}
+            <tr>
+              <td>{{ topic_title }}</td>
+              <td class='tutorial_title'><a href='{{ site.baseurl }}{{ tutorial.url }}'>{{ tutorial.title | escape}}</a>
+              <div class=''>
+              {% if tutorial.tags %}
+              {% for tag in tutorial.tags %}
+              <span class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show only tutorials with this tag'>{{ tag  }}</span>
+            {% endfor %}
+          {% endif %}
+              </td>
+              <td> {{ tutorial.description }}
+              </td>
+            </tr>
+           {% endcapture %}
+      {
+        "topic"    : "{{ topic_title }}",
+        "title"    : "{{ tutorial.title | escape }}",
+        "description": "{{ tutorial.description }}",
+        "question" : "{{ tutoral.questions | join: ', '}}",
+        "objectives"  : "{{ tutorial.objectives | join: ', ' }}",
+        "tags"     : "{{ tutorial.tags | join: ', ' }}",
+        "level"     : "{{ tutorial.level }}",
+        "time_estimation": "{{ tutorial.time_estimation }}",
+        "url"      : "{{ site.baseurl }}{{ tutorial.url }}",
+        "level"     : "{{ tutorial.level}}",
+        "contributors": "{{ tutorial.contributors | join: ', '}}",
+        "entry"      : "{{ result_entry | strip_newlines }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    {% unless forloop.last %},{% endunless %}
+    {% endunless %}
+  {% endfor %}
+]
