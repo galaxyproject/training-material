@@ -17,7 +17,7 @@ module Jekyll
         page_parts = page.url.split('/')
         # Skip anything outside of topics.
         if not page.url.include?('/topics/') then next end
-
+        page.data['url'] = page.url
         # If the path is long enough and it is under the topic name
         if page_parts.length > 3 and page_parts[2] == topic_name
           # Automate the tutorial-name thing. This writes back to the shared
