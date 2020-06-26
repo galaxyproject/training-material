@@ -177,7 +177,7 @@ Figure 7 shows the dendrogram of these data.
 
 
 We will apply hierarchical clustering to the iris dataset to find clusters based on two features (of flowers) - sepal length and width. 
-Hint: Please find the `Numeric Clustering` tool in the `Statistics` tool section.
+**Hint**: Please find the `Numeric Clustering` tool in the `Statistics` tool section.
 
 > ### {% icon hands_on %} Hands-on: Hierarchical clustering
 >
@@ -196,12 +196,12 @@ Hint: Please find the `Numeric Clustering` tool in the `Statistics` tool section
 > 2. Rename the generated file to `Hierarchical clustering`
 {: .hands_on}
 
-If you view the result table, you can see the last column is the label for each cluster and as you see, all the setosa samples are grouped in one cluster and two other species (versicolor and virginica) are grouped in the second cluster. From Figure 3, it is obvious that versicolor and virginica are more similar to each other.
+If you view the result table, you can see the last column is the label for each cluster and as you see, all the setosa samples are grouped in one cluster and two other species (versicolor and virginica) are grouped in the second cluster. From Figure 6, it is obvious that versicolor and virginica are more similar to each other.
 
 ### Visualize hierarchical clustering
 
 The resulting candidate clustering can be visualized using the `Scatterplot with ggplot2` tool. Each sample is color-coded based on its clustering for that sample.
-Let's visualize the clustering results to see how groups have been built. Hint: Please find the `Scatterplot with ggplot2` tool in the `Graph/Display data` tool section.
+Let's visualize the clustering results to see how groups have been built. **Hint**: Please find the `Scatterplot with ggplot2` tool in the `Graph/Display data` tool section.
 
 > ### {% icon hands_on %} Hands-on: Visualize hierarchical clustering result
 >
@@ -370,7 +370,7 @@ DBSCAN (Density-based spatial clustering of applications with noise) is a popula
 >    ![data](images/dbscan_scatter.png "DBSCAN clustering scatter plot")
 
 
-You will also notice that the blue point in the plot is not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore terrific with handling outliers in the dataset. 
+You will also notice that the green points (factor = -1) in the plot are not contained within any cluster. DBSCAN does not necessarily categorize every data point, and is therefore works very well with handling outliers in a dataset.
 
 > ### {% icon question %} Question
 >
@@ -409,7 +409,7 @@ We can apply the same steps on the other datasets such `moon` and `circles` data
 > 2. **View** {% icon galaxy-eye%} the resulting plots
 {: .hands_on}
 
->    ![data](images/circles_moon_scatter.png "Scatter plot of circles and moon Data")
+>    ![data](images/circles_moon_scatter.png "Scatter plot of circles and moon datasets")
 
 
 ## Find clusters
@@ -462,7 +462,7 @@ Then, you can visualize the clustering results using the following steps:
 > 3. Rename the generated files to `Circles scatter plot` and `Moon scatter plot` respectively
 {: .hands_on}
 
-In the next steps, you can apply these three algorithms (hierarchical, k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In the k-means algorithm, `k=2` and for the DBSCAN algorithm, the parameters are not the default parameters and should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon datasets (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results in Figure 13 and 14.
+You can apply the other two algorithms (k-means and DBSCAN) to moon and circles datasets in the same way as explained above. In the k-means algorithm, please use `k=2` and for the DBSCAN algorithm, the parameters should not be the default ones as used earlier. They should be set as follows: for the circles dataset (`maximum neighborhood distance=0.2` and `minimal core point density=5`) and for the moon dataset (`maximum neighborhood distance=0.3` and `minimal core point density=4`). You can see the scatter plots of the clustering results for all three clustering algorithms in Figure 13 and 14.
 
 >    ![data](images/circles_clustering.png "Plot of clustering algorithms on circles dataset")
 
