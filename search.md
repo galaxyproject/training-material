@@ -40,9 +40,11 @@ var data= [ {% for topic in site.data %}
           <h6 class='card-subtitle text-muted'>{{ topic_title}}</h6>
           <p class='card-text'> {{tutorial.description}}</p>
           {% if tutorial.tags %}
+            <p>
             {% for tag in tutorial.tags %}
-              <p><span class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show only tutorials with this tag'>{{ tag  }}</span></p>
+              <span class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show only tutorials with this tag'>{{ tag  }}</span>
             {% endfor %}
+            </p>
           {% endif %}
           <p>{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}</p>
           <a class='btn btn-primary' href='{{ site.baseurl }}{{ tutorial.url }}'>View Tutorial</a>
