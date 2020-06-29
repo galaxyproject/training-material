@@ -6,21 +6,16 @@ layout: base
 
 <div class="container main-content">
 <section>
-<h2> Search Tutorials </h2>
+  <h2> Search Tutorials </h2>
 
-<!-- Html Elements for Search -->
-
-
-<div id="search-container">
- <input type="text" id="search-input" placeholder="search..." class="nicer">{% icon search %}
- <div class="search-results row" id="results-container">
-
- </div>
-</div>
+  <div id="search-container">
+    <input type="text" id="search-input" placeholder=" search..." class="nicer">{% icon search %}
+    <div class="search-results row" id="results-container"></div>
+  </div>
 </section>
 </div>
 
-<!-- Script pointing to search-script.js -->
+<!-- Simple-Jekyll-Search script -->
 <script src="assets/js/search-script.js" type="text/javascript"></script>
 
 <!-- Configuration -->
@@ -76,14 +71,13 @@ var sjs = SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
   json: data,
-  limit: '50',
+  limit: '25',
   noResultsText: ("No result found!"),
   success: function(){},
   searchResultTemplate: '{entry}'
 });
 
 window.addEventListener('DOMContentLoaded', (event) => {
-    console.log('DOM fully loaded and parsed');
     params = (new URL(document.location)).searchParams;
     paramQuery = params.get('query');
     if(paramQuery){
