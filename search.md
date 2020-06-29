@@ -4,27 +4,20 @@ layout: base
 
 {% include _includes/default-header.html %}
 
+<div class="container main-content">
+<section>
 <h2> Search Tutorials </h2>
 
 <!-- Html Elements for Search -->
 
-<div id="tutorial_list">
 
 <div id="search-container">
-<input type="text" id="search-input" placeholder="search...">
-<table class="table table-responsive table-striped" >
-  <thead>
-    <tr>
-      <th>Topic</th>
-      <th>Lesson</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody class="list" id="results-container">
-</tbody>
-</table>
-</div>
+ <input type="text" id="search-input" placeholder="search...">{% icon search %}
+ <div class="search-results row" id="results-container">
 
+ </div>
+</div>
+</section>
 </div>
 
 <!-- Script pointing to search-script.js -->
@@ -32,14 +25,71 @@ layout: base
 
 <!-- Configuration -->
 <script>
-SimpleJekyllSearch({
+
+var data= [ {% for topic in site.data %}
+    {% unless topic[0] == 'contributors' %}
+      {% assign topic_material = site.pages | topic_filter:topic[0] %}
+      {% assign topic_title = topic[1].title %}
+      {% for tutorial in topic_material %}
+
+       {% capture result_entry %}
+        <div class='col-sm-6'>
+        <div class='card'>
+        <div class='card-body'>
+          <h5 class='card-title'>{{ tutorial.title | escape }}</h5>
+          <h6 class='card-subtitle text-muted'>{{ topic_title}}</h6>
+          <p class='card-text'> {{tutorial.description}}</p>
+          {% if tutorial.tags %}
+            {% for tag in tutorial.tags %}
+              <p><span class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show only tutorials with this tag'>{{ tag  }}</span></p>
+            {% endfor %}
+          {% endif %}
+          <p>{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}</p>
+          <a class='btn btn-primary' href='{{ site.baseurl }}{{ tutorial.url }}'>View Tutorial</a>
+          </div>
+          </div>
+          </div>
+          {% endcapture %}
+      {
+        "topic"    : "{{ topic_title }}",
+        "title"    : "{{ tutorial.title | escape }}",
+        "description": "{{ tutorial.description }}",
+        "question" : "{{ tutoral.questions | join: ', '}}",
+        "objectives"  : "{{ tutorial.objectives | join: ', ' }}",
+        "tags"     : "{{ tutorial.tags | join: ', ' }}",
+        "level"     : "{{ tutorial.level }}",
+        "time_estimation": "{{ tutorial.time_estimation }}",
+        "url"      : "{{ site.baseurl }}{{ tutorial.url }}",
+        "level"     : "{{ tutorial.level}}",
+        "contributors": "{{ tutorial.contributors | join: ', '}}",
+        "entry"      : "{{ result_entry | strip_newlines | replace: '"',"'" }}"
+      }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    {% unless forloop.last %},{% endunless %}
+    {% endunless %}
+  {% endfor %}
+]
+
+var sjs = SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
-  json: 'search.json',
+  json: data,
+  limit: '50',
   noResultsText: ("No result found!"),
+  success: function(){},
   searchResultTemplate: '{entry}'
+});
 
-})
+window.addEventListener('DOMContentLoaded', (event) => {
+    console.log('DOM fully loaded and parsed');
+    params = (new URL(document.location)).searchParams;
+    paramQuery = params.get('query');
+    if(paramQuery){
+      document.getElementById('search-input').value = paramQuery;
+      sjs.search(paramQuery);
+    }
+});
+
 
 </script>
 
