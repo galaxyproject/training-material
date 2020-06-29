@@ -42,7 +42,7 @@ var data= [ {% for topic in site.data %}
           {% if tutorial.tags %}
             <p>
             {% for tag in tutorial.tags %}
-              <span class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show only tutorials with this tag'>{{ tag  }}</span>
+              <form method="GET" action="{{site.baseurl}}/search" style="display:inline"><input type="hidden" name="query" value="{{tag}}"><button class='label label-default tutorial_tag' id='{{ tag }}' style='{{ tag | colour_tag }}' title='Click to show all tutorials with this tag'>{{ tag  }}</button></form>
             {% endfor %}
             </p>
           {% endif %}
