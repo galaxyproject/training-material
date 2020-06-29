@@ -12,7 +12,7 @@ layout: base
 
 
 <div id="search-container">
- <input type="text" id="search-input" placeholder="search...">{% icon search %}
+ <input type="text" id="search-input" placeholder="Search..." style="margin-right:1em;">{% icon search %}
  <div class="search-results row" id="results-container">
 
  </div>
