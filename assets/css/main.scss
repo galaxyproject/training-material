@@ -115,6 +115,27 @@ div#theme-selector {
 	}
 }
 
+
+@mixin input-nicer($color, $active-color) {
+	background: transparent;
+	color: $color;
+	border: none;
+	border-bottom: 2px solid $color;
+	border-radius: 0px;
+	padding: 0.4em 0 0 0;
+
+	&::placeholder {
+		color: $color;
+	}
+
+	&:focus,
+	&:active {
+		background: #fff2;
+		color: $active-color;
+		border-bottom: 2px solid $active-color;
+	}
+}
+
 body.theme-night {
     color: #eee;
     background-color: #444444;
@@ -155,6 +176,10 @@ body.theme-night {
 	.card {
 		background-color: transparent;
 		border: 1px solid rgba(255, 255, 255, .125);
+	}
+
+	#search-container input.nicer {
+		@include input-nicer(#ccc, #eee);
 	}
 
 }
@@ -199,6 +224,10 @@ body.theme-midnight {
 	.card {
 		background-color: transparent;
 		border: 1px solid rgba(255, 255, 255, .125);
+	}
+
+	#search-container input.nicer {
+		@include input-nicer(#ccc, #eee);
 	}
 
 }
@@ -330,22 +359,12 @@ footer {
 }
 
 
-input.nicer {
-	background: transparent;
-	color: white;
-	border: none;
-	border-bottom: 2px solid white;
-	border-radius: 0px;
-	padding: 0.2em;
+nav input.nicer {
+	@include input-nicer(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75));
+}
 
-	&::placeholder {
-		color: white;
-	}
-
-	&:focus,
-	&:active {
-		background: #fff2;
-	}
+#search-container input.nicer {
+	@include input-nicer(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
 }
 
 #search-input {
