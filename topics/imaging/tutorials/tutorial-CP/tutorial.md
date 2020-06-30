@@ -42,7 +42,7 @@ In particular, regardless of the targeted biological process, many screens inclu
 <a name="nucleoli"></a>
 ![DNA channel](../../images/tutorial-CP/img_dna_channel.png "DNA channel from the screen described in {% cite Heriche_2014 %}. The red arrows point at nucleoli."){: width="50%"}
 
-In this project, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
+In this tutorial, we will analyse DNA channel images of publicly available RNAi screens to extract numerical descriptors (i.e. features) of nucleoli.
 The images and associated metadata will be retrieved from the [Image Data Resource (IDR)](http://idr.openmicroscopy.org/){:target="_blank"}, a repository that collects image datasets of tissues and cells.
 
 
@@ -59,7 +59,7 @@ To fully emulate the behaviour of the standalone CellProfiler in Galaxy, each im
 <a name="high_level_view"></a>
 ![High-level view of the workflow](../../images/tutorial-CP/wf.jpg "High-level view of the workflow")
 
-Here you will learn how to create a workflow to download a selection of images from the IDR, segment nuclei and then the nucleoli within the nuclei using CellProfiler. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
+In this tutorial, you will learn how to create a workflow that downloads a selection of images from the IDR, and uses CellProfiler to segment the nuclei and nucleoli. You will also learn how to extract and export features at three different levels: image, nucleus, nucleolus.
 
 
 > ### Agenda
@@ -103,7 +103,7 @@ Here you will learn how to create a workflow to download a selection of images f
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > **IMPORTANT:** When the number of images to download is high, it is recommended to enable the option *“Download images in a tarball?”* in order to improve the performance.
+>    > **IMPORTANT:** When the number of images to download is high, it is strongly recommended to enable the option *“Download images in a tarball?”* in order to improve the performance.
 >    {: .comment}
 >
 {: .hands_on}
@@ -115,7 +115,7 @@ Here you will learn how to create a workflow to download a selection of images f
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The `Cy3` dye was used in the study to stain DNA, and since we want to segment the abscence of DNA, that's the only channel that we need to download from the IDR.
+> > 1. The `Cy3` dye was used in the study to stain DNA. Since we want to segment the abscence of DNA, `Cy3` is the only channel that we need to download from the IDR.
 > >
 > > 2. We could upload a text file with the image ids of interest.
 > > 
@@ -125,7 +125,8 @@ Here you will learn how to create a workflow to download a selection of images f
 
 # Start CellProfiler pipeline
 
-The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of the standalone CellProfiler. It has to be used at the beginning of a workflow because it sets the naming and metadata handling for the rest of tools.
+The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of the standalone CellProfiler. It needs to be the first tool of a workflow because it sets the naming and metadata handling for the rest of tools.
+
 > ### {% icon hands_on %} Hands-on: Specify metadata to CellProfiler
 >
 > 1. **Starting Modules** {% icon tool %} with the following parameters:
@@ -151,7 +152,7 @@ The tool **Starting Modules** {% icon tool %} comprises the first 4 modules of t
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The images downloaded from the IDR are named following the pattern: `plate__imageID__cropX__cropY__cropWidth__cropHeight`. These fields indicate to which plate the image belongs, what is the identifier of the image in the IDR, and the 4 cropping parameters selected. In our case, the upper-left corner (X, Y) and the width and height from there. We have a total of 6 metadata values encoded in the name of the file, separated by `__`. The pattern to extract our metadata from the file name properly is, therefore: `field1__field2__field3__field4__field5__field6`. It is important to keep in mind that, later in the analysis, our `plate` will be `field1`, `imageID` will be `field2`, `cropX` will be `field3`, etc. for CellProfiler.
+>    > The images downloaded from the IDR are named following the pattern: `plateName__imageID__cropX__cropY__cropWidth__cropHeight`. These fields indicate to which plate the image belongs, what is the identifier of the image in the IDR, and the 4 cropping parameters selected. In our case, the upper-left corner (X, Y) and the width and height from there. We have a total of 6 metadata values encoded in the name of the file, separated by `__`. The pattern to extract our metadata from the file name properly is, therefore: `field1__field2__field3__field4__field5__field6`. It is important to keep in mind that, for CellProfiler, our `plateName` will be called `field1`, `imageID` will be `field2`, `cropX` will be `field3`, etc. These matches are relevant for a meaningful interpretation of the features.
 >    {: .comment}
 >
 {: .hands_on}
@@ -193,15 +194,16 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > - The name entered to the input image and objects has to be consistent (case sensitive) with the names in *NamesAndTypes* and the tools to follow.
+>    > - The names entered to the input image and objects have to be consistent (case sensitive) with the ones in *NamesAndTypes* and the tools to follow.
 >    > - The min and max diameter of the objects (`Typical minimum diameter of objects, in pixel units (Min)` and `Typical minimum diameter of objects, in pixel units (Max)`) will have to be adjusted to the resolution of the images.
+>    > - The `Threshold correction factor` is used to adjust the threshold in Otsu's method. The value depends on the images and it might be useful to test several values and pick the one that works best for a particular kind of image.
 >    {: .comment}
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> We are using here Otsu's method for segmentation. What other segmentation options are available? What is the difference between them?
+> We are using here Otsu's thresholding method for segmentation. What other segmentation options are available? What is the difference between them?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -211,7 +213,7 @@ In the first step, we will identify the nuclei that are complete, meaning that t
 >
 {: .question}
 
-From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like:
+From the previous tool, we got a group of objects (nuclei). Now, we want to export the segmentation masks as a single image to check how well the segmentation algorithm is performing. We also want to label the nuclei with their identifiers for future visual inspection of the results. The output of this step will look like (you will only get this image after running the whole workflow):
 
 ![Identified nuclei with labels](../../images/tutorial-CP/img_nuclei_labels.png "Identified nuclei with labels.")
 
@@ -221,7 +223,7 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 >
 > > ### {% icon solution %} Solution
 > >
-> > We have indicated in the tool **IdentifyPrimaryObjects** {% icon tool %} that the nuclei that are either outside the diameter range or touching the border should be discarded.
+> > We have indicated to the tool **IdentifyPrimaryObjects** {% icon tool %} that the nuclei that are either outside the diameter range or touching the border should be discarded.
 > >
 > {: .solution}
 >
@@ -260,7 +262,7 @@ From the previous tool, we got a group of objects (nuclei). Now, we want to expo
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > The `Text color` parameter can be any of your choice, it just needs to be visible on top of the nuclei.
+>    > The `Text color` parameter can be any of your choice, the hexa code is not really relevant. The only consideration is that it needs to be visible on top of the nuclei. 
 >    {: .comment}
 {: .hands_on}
  
@@ -327,9 +329,9 @@ Now that we have all the holes in one mask, we can segment the nucleoli as indiv
 
 ## Combine segmentation masks
 
-We have now one segmentation mask per image with all the nuclei detected, `MaskNuclei`, and another one for the nucleoli, `MaskNucleoli`. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both (using different colors) into one image. Here we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome will look like:
+We have now one segmentation mask per image with all the nuclei detected, `MaskNuclei`, and another one for the nucleoli, `MaskNucleoli`. These are binary masks in which the background is black and the objects detected are white. We would like to check whether both segmentation steps went well. That could be achieved by combining both of them (using different colors) into one image. Here, we are converting the nucleus mask to blue and the nucleoli to magenta. The outcome that you will obtain after the execution of the workflow will look like:
 
-![Combined mask for nuclei and nucleoli](../../images/tutorial-CP/img_combined_masks.png "Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.")
+![Combined mask for nuclei and nucleoli](../../images/tutorial-CP/img_combined_masks.png "Combined segmentation masks for nuclei (blue) and nucleoli (magenta).")
 
 
 > ### {% icon hands_on %} Hands-on: Convert and save the nuclei and nucleoli masks
@@ -359,7 +361,7 @@ We have now one segmentation mask per image with all the nuclei detected, `MaskN
 >    > ### {% icon comment %} Comment
 >    >
 >    > - You can pick any other color of your choice, as long as the contrast is good enough to distinguish both objects.
->    > - We are saving here a tiff image but any other format would work too.
+>    > - We are saving here a tiff image but any other format of your choice would work too.
 >    {: .comment}
 >
 >
@@ -368,9 +370,9 @@ We have now one segmentation mask per image with all the nuclei detected, `MaskN
 
 # Background extraction
 
-The background extraction is useful for quality control. For instance, in a high-exposed or low-contrast image, the nuclei won't be very different from the background and that may lead to the wrong segmentation.
+The background extraction is useful for quality control. For instance, in a high-exposed or low-contrast image, the nuclei will not be very different from the background and that may lead to the wrong segmentation.
 
-To extract the background, we first need to get the foreground and subtract it from the original image. We already have the nuclei mask, however, we excluded incomplete nuclei, i.e., those touching the borders or those with sizes outside of the specified range. This means that the mask is not covering all the nuclei and we need to get rid of the constraints to get the complete foreground. Now, we want to detect everything with a certain intensity (foreground) and subtract it from the complete image to get the background.
+To extract the background, we first need to get the foreground and subtract it from the original image. We already have the nuclei mask, however, we excluded incomplete nuclei, i.e., those touching the borders or those which sizes are outside the specified range. This means that the mask is not covering all the nuclei and we need to get rid of the constraints to get the complete foreground. At this stage, we want to detect everything with a certain intensity (foreground) and subtract it from the complete image to get the background.
 
 ## Identify the foreground
 
@@ -409,7 +411,7 @@ To extract the background, we first need to get the foreground and subtract it f
 
 ## Remove the foreground from the original image
 
-> ### {% icon hands_on %} Hands-on: Subtract nuclei from the original image
+> ### {% icon hands_on %} Hands-on: Subtract the foreground from the original image
 >
 > **ImageMath** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ConvertObjectsToImage** {% icon tool %})
@@ -423,14 +425,6 @@ To extract the background, we first need to get the foreground and subtract it f
 >                - *"Enter the name of the second image"*: `Image_NucleiIncludingTouchingBorders`
 >    - *"Ignore the image masks?"*: `No`
 >
->     
->
->     
->
->    > ### {% icon comment %} Comment
->    >
->    > When the operation is `Subtract`, the order of the first and second images is important.
->    {: .comment}
 >
 {: .hands_on}
 
@@ -450,7 +444,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 
 > ### {% icon comment %} Comment
 >
-> The order in which the tools are chained in this section is not relevant for the outcome.
+> The order in which the tools in this section are chained is not relevant for the outcome.
 {: .comment}
 
 
@@ -513,7 +507,7 @@ A step that requires special attention is the relationship nucleolus-nucleus. Th
 
 ## Relate nucleoli to their parent nucleus
 
-It might be relevant to compute some statistics on the number of nucleoli inside each nucleus. CellProfiler has a very interesting module to relate both objects in which each one of the nucleoli is assigned an identifier and linked to the identifier of its parent nucleus.
+It might be relevant to compute some statistics on the number of nucleoli inside each nucleus. CellProfiler has a very interesting module to relate both objects, in which each one of the nucleoli is assigned an identifier and linked to the identifier of its parent nucleus.
 
 > ### {% icon hands_on %} Hands-on: Relate nucleoli to their parent nucleus
 >
@@ -621,7 +615,7 @@ All the steps in our workflow (except for the **IDR download** {% icon tool %}) 
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > This is the only time-consuming step of the workflow, as it needs to perform all the analysis in the input dataset.
+>    > This is the only time-consuming step of the workflow, as it needs to perform the whole analysis in the input dataset.
 >    {: .comment}
 >
 {: .hands_on}
