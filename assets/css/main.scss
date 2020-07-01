@@ -115,6 +115,27 @@ div#theme-selector {
 	}
 }
 
+
+@mixin input-nicer($color, $active-color) {
+	background: transparent;
+	color: $color;
+	border: none;
+	border-bottom: 2px solid $color;
+	border-radius: 0px;
+	padding: 0.4em 0 0 0;
+
+	&::placeholder {
+		color: $color;
+	}
+
+	&:focus,
+	&:active {
+		background: #fff2;
+		color: $active-color;
+		border-bottom: 2px solid $active-color;
+	}
+}
+
 body.theme-night {
     color: #eee;
     background-color: #444444;
@@ -151,6 +172,15 @@ body.theme-night {
         background-color: #333333;
         color: #ffa0a0;
     }
+
+	.card {
+		background-color: transparent;
+		border: 1px solid rgba(255, 255, 255, .125);
+	}
+
+	#search-container input.nicer {
+		@include input-nicer(#ccc, #eee);
+	}
 
 }
 
@@ -191,6 +221,15 @@ body.theme-midnight {
         color: #ffa0a0;
     }
 
+	.card {
+		background-color: transparent;
+		border: 1px solid rgba(255, 255, 255, .125);
+	}
+
+	#search-container input.nicer {
+		@include input-nicer(#ccc, #eee);
+	}
+
 }
 
 
@@ -213,7 +252,7 @@ body.theme-rainbow {
 			background: #3337;
 			height: 100%;
 			left: 0px;
-			padding: .5rem 1rem;
+			padding: .5rem 0rem;
 			width: 17rem;
 
 		}
@@ -225,14 +264,8 @@ body.theme-rainbow {
 			background: #3337;
 			height: 100%;
 			left: 0px;
-			padding: .5rem 1rem;
+			padding: .5rem 0rem;
 
-		}
-		.navbar-nav > li.active {
-			background: #333e;
-			height: 100%;
-			left: 0px;
-			padding: .5rem 1rem;
 		}
 	}
 
@@ -316,6 +349,20 @@ footer {
         align-items: flex-end;
         min-width: 0;
     }
+
+}
+
+
+nav input.nicer {
+	@include input-nicer(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.75));
+}
+
+#search-container input.nicer {
+	@include input-nicer(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.75));
+}
+
+#search-input {
+	margin-right:1em;
 }
 
 .main-content {
@@ -780,4 +827,8 @@ div.supporting_material{
             width: 47.5%;
         }
     }
+}
+
+.card {
+  margin-top: 1em;
 }
