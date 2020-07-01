@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Nucleoli Segmentation  &  Feature Extraction  using CellProfiler</title>
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Image analysis using Galaxy" />
+    <meta property="og:title" content="Galaxy Training: Nucleoli Segmentation <br> & <br> Feature Extraction <br>..." />
+    <meta property="og:description" content="Image analysis using Galaxy" />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Nucleoli Segmentation <br> & <br> Feature Extraction <br> using CellProfiler",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Imaging",
+    "description": "Image analysis using Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/imaging/"
+  },
+  "courseCode": "imaging / tutorial-CP / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Nucleoli Segmentation <br> & <br> Feature Extraction <br> using CellProfiler' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/imaging/tutorials/tutorial-CP/slides.html",
+  "timeRequired": "PT4H",
+  "description": "The questions this  addresses are:\n - How do I run an image analysis pipeline on public data using CellProfiler?\n - How do I analyse the DNA channel of fluorescence siRNA screens?\n - How do I download public image data into my history?\n - How do I segment and label cell nuclei?\n - How do I segment nucleoli (as the absence of DNA)?\n - How do I combine nuclei and nucleoli into one segmentation mask?\n - How do I extract the background of an image?\n - How do I relate the nucleoli to their parent nucleus?\n - How do I measure the image and object features?\n - How do I measure the image quality?\n\n\\nThe objectives are:\n - How to download images from a public image repository.\n - How to segment cell nuclei using CellProfiler in Galaxy.\n - How to segment cell nucleoli using CellProfiler in Galaxy.\n - How to extract features for images, nuclei and nucleoli.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Beatriz Serrano-Solano"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Beatriz Serrano-Solano"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Imaging",
+      "description": "Image analysis using Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/imaging/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/imaging" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/imaging/tutorials/tutorial-CP/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Nucleoli Segmentation <br> & <br> Feature Extraction <br> using CellProfiler
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How do I run an image analysis pipeline on public data using CellProfiler?
+
+- How do I analyse the DNA channel of fluorescence siRNA screens?
+
+- How do I download public image data into my history?
+
+- How do I segment and label cell nuclei?
+
+- How do I segment nucleoli (as the absence of DNA)?
+
+- How do I combine nuclei and nucleoli into one segmentation mask?
+
+- How do I extract the background of an image?
+
+- How do I relate the nucleoli to their parent nucleus?
+
+- How do I measure the image and object features?
+
+- How do I measure the image quality?
+
+
+---
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- How to download images from a public image repository.
+
+- How to segment cell nuclei using CellProfiler in Galaxy.
+
+- How to segment cell nucleoli using CellProfiler in Galaxy.
+
+- How to extract features for images, nuclei and nucleoli.
+
+
+---
+
+
+### What is the nucleoli?
+
+- Membrane-less organelle in the nucleus of the cell
+- Functions: ribosome biogenesis and cell cycle regulation
+
+.image-55[
+  ![](../../images/tutorial-CP/img_dna_channel.png)
+]
+
+???
+In the DNA channel, the nucleoli is shown as the absence of DNA (red arrows). 
+---
+
+
+### Data
+
+- The data can be downloaded from the Image Data Resource ([IDR](http://idr.openmicroscopy.org/))
+
+.image-65[
+  ![](../../images/tutorial-CP/IDR_interface.jpg)
+]
+
+???
+In the IDR the images can be selected in the user interface (1). The images will then show up at the bottom (2) where they need to be selected once again and then copy the URL from the link icon on the top left (3). That URL contains the image ids that will be downloaded.
+You can also bring your images by uploading the DNA channel of your images to your Galaxy history.
+---
+
+
+### General Workflow
+
+- The workflow contains 4 basic parts:
+  - Segmentation of the nuclei
+  - Segmentation of the nucleoli that fall inside the nuclei
+  - Background detection
+  - Feature extraction of the images and objects
+
+![high_level_view_wf](../../images/tutorial-CP/wf.jpg &quot;High-level view of the workflow&quot;)
+
+???
+- Segmentation of the nucleoli: since there is no staining for the nucleoli, the holes need to be detected and segmented.
+- Feature extraction: the order of the tools does not affect the outcome.
+- Background detection: Detection of the foreground and subtraction from the image.
+---
+
+
+### 1) Segment nuclei
+
+  ![](../../images/tutorial-CP/subwf_nuclei.jpg)
+
+???
+Every CellProfiler pipeline needs to start by processing the metadata with the tool &quot;Starting modules&quot;.
+
+- Segment complete nuclei: this tool identifies the nuclei within a certain size and excludes those cells that are touching the borders of the image.
+- Segmentation mask complete nuclei: gathers all the nuclei identified in the previous step in one mask.
+- Label and save labelled nuclei: adds the id of each nucleus on top of it. This can be useful later for a proper interpretation of the data analysis.---
+
+
+### Segmentation and labelling of the nuclei
+
+![identified_nuclei_with_labels](../../images/tutorial-CP/img_nuclei_labels.png &quot;Identified nuclei with labels&quot;)
+
+???
+Resulting image after the first logical step of the workflow in which the nuclei were segmented and labelled.
+---
+
+
+### 2) Segment nucleoli
+
+![](../../images/tutorial-CP/subwf_nucleoli.jpg)
+
+
+???
+To identify the nucleoli the first step is to enhance the dark holes so that they can be segmented. 
+The segmentation of the dark holes will take place only when the dark holes fall inside a nucleus. This is to avoid the detection of wrong objects outside the cell.
+At this step, the segmentation of the nucleoli can be performed.
+It will be useful for visual exploration that the masks of the nuclei and nucleoli are saved together into one segmentation mask.
+---
+
+
+### Combined mask: nuclei + nucleoli
+
+![combined_mask_nuclei_nucleoli](../../images/tutorial-CP/img_combined_masks.png &quot;Nuclei and nucleoli masks combined in which the nuclei are in blue and nucleoli in magenta.&quot;)
+
+???
+The combination of both masks gives an image with the nuclei in blue and the nucleoli in magenta.
+---
+
+
+### Background extraction
+
+![](../../images/tutorial-CP/subwf_background.jpg)
+
+???
+The extraction of the background can be useful to measure features that indicate that the images are artefacts.
+To get the background we first select the foreground and subtract it from the original image.
+We have partially detected the foreground in the nuclei segmentation in previous steps. However, that mask only included just those objects within a max and a min pixel size. We also discarded the images touching the borders. Here, we get rid of the constraints and segment all the nuclei.
+---
+
+
+### Feature extraction
+
+![](../../images/tutorial-CP/subwf_feature_extraction.jpg)
+
+- **Important:** Relate nucleoli and parent nucleus
+
+???
+The features can be extracted from the images and the objects. Depending on which type of object and the interest of the study, different parameters can be measured.
+The module that relates the objects is useful to export a table with the ids of the nucleoli in relation with their parent nuclei. That's useful for a meaningful interpretation of the data.
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Galaxy workflows can download images from the IDR, selecting specific channels, time points, z-stack positions and crop the image in different ways.
+
+- CellProfiler in Galaxy can segment and extract features of any object of interest.
+
+- The features and masks can be exported for further analysis.
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+<a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano">Beatriz Serrano-Solano</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+  </body>
+</html>
