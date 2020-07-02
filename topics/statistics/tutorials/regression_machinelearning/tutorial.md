@@ -48,11 +48,11 @@ Regression analysis attempts to determine the relationship between one target va
 
 ![regression](images/regression.png "Regression fit through data points.")
 
-Linear regression is a technique used to analyze a linear relationship between input variables (independent variables) and a single target variable. A linear relationship means that the data points tend to follow a straight line. Simple linear regression involves only a single input variable. Figure 2 shows a data set with a linear relationship.
+Linear regression is a technique used to analyze a linear relationship between input variables (independent variables) and a single target variable. A linear relationship means that the data points tend to follow a straight line. Simple linear regression involves only a single input variable. Figure 2 shows a dataset with a linear relationship.
 
 ![regression](images/linear_regression_generated_data.png "Data points with a linear relationship.")
 
-In linear regression, our goal is to find the line that best models the path of the data points. Figure 3 shows the data set we used in Figure 2 with a line of best fit through it. The position of the line is determined by certain fitting coefficients (in this simple case, the gradient and intercept) and linear regression helps us pick appropriate values for these coefficients. In this example we have only one input variable and the problem is therefore simple linear regression. Note that in real problems we have more than one input variable. In this case, we call it multiple linear regression. Adding extra input variables just means that we’ll need to find more weights.
+In linear regression, our goal is to find the line that best models the path of the data points. Figure 3 shows the dataset we used in Figure 2 with a line of best fit through it. The position of the line is determined by certain fitting coefficients (in this simple case, the gradient and intercept) and linear regression helps us pick appropriate values for these coefficients. In this example we have only one input variable and the problem is therefore simple linear regression. Note that in real problems we have more than one input variable. In this case, we call it multiple linear regression. Adding extra input variables just means that we’ll need to find more weights.
 
 ![regression](images/linear_regression_regressor.png "Regression fit through data points.")
 
@@ -69,10 +69,10 @@ We know an error above the actual value and an error below the actual value shou
 
 # Analyze DNA methylation dataset
 
-As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. 
-It has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information beside the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
+As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict the chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. 
+It has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information besides the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
 
-Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. This knowledge is used to select useful biomarkers from the DNA methylation dataset. The CpG sites with the highest correlation to age are selected as the biomarkers (features). In this study, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
+Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. This knowledge is used to select useful biomarkers from the DNA methylation dataset. The CpG sites with the highest correlation to age are selected as biomarkers (features). In this study, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
 
 In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to DNA methylation datasets to predict the chronological age of humans.
 
@@ -225,11 +225,11 @@ These plots are important to visualize the quality of regression and the true an
 {: .question}
 
 
-## Using Ensemble Methods for Regression
+## Using ensemble methods for regression
 
 Linear regression is a useful technique but isn’t always the right choice for our real problems. Linear regression is a good choice when there is a linear relationship between your independent and dependent variables and you are trying to predict continuous values.
 
-It is not a good choice when the relationship between independent and dependent variables is more complicated. For example, Figure 10 shows a data set that does not have a linear relationship so linear regression would not be a good choice.
+It is not a good choice when the relationship between independent and dependent variables is more complicated. For example, Figure 10 shows a dataset that does not have a linear relationship so linear regression would not be a good choice.
 
 ![regression](images/nonlinear_regression_generated_data.png "Data points with nonlinear relationship. ")
 
@@ -240,9 +240,9 @@ To learn the mapping between several features and the targets, in the next step,
 > An [*ensemble*](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and boosting is a method of converting weak learners into strong learners.
 {: .comment}
 
-[Jana Naue et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) (another ensemble-based regressor) as the regressor and we can conclude from this study that an ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use gradient boosting to build a prediction model.
+[Jana Naue et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) (another ensemble-based regressor) as regressor and we can conclude from this study that an ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use gradient boosting to build a prediction model.
 
-Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. *Hint:* Please find the following tool in "Machine learning" tool section in Galaxy.
+Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes errors. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. *Hint:* Please find the following tool in "Machine learning" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Train a model
 >
