@@ -203,6 +203,11 @@ To proceed from here it is expected that:
 6. In your inventory file, you have written the full DNS hostname that has been provided, and **not** `localhost`, as we will be requesting SSL certificates.
 
 
+> ### {% icon tip %} Ubuntu or Debian, CentOS or RHEL?
+> The training tutorials are designed to work on either Ubuntu or CentOS, and the roles we use are definitely compatible with both. If any of the variable values differ between Ubuntu and CentOS, we try to note it in the tutorial. Any places we don't note it are bugs.
+{: .tip}
+
+
 ## Requirements
 
 We have codified all of the dependencies you will need into a YAML file that `ansible-galaxy` can install.
@@ -340,6 +345,18 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >
 >    {: .question}
 >
+>    > ### {% icon tip %} What is the difference between the roles with `role:` prefix and without?
+>    > The bare role name is just simplified syntax for the roles, you could equally specifiy `role: <name>` every time but it's only necessary if you want to set additional variables like `become_user`
+>    {: .tip}
+>
+>    > ### {% icon tip %} Is the YAML sensitive to True/true/False/false
+>    > By [this references](https://yaml.org/refcard.html), YAML doesn't really care:
+>    > ```
+>    > { Y, true, Yes, ON   }    : Boolean true
+>    > { n, FALSE, No, off  }    : Boolean false
+>    > ```
+>    {: .tip}
+>
 > 3. Run the playbook:
 >
 >    ```
@@ -453,6 +470,23 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
+>    > ### {% icon tip %} Data storage
+>    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
+>    {: .tip}
+>
+>    > ### {% icon tip %} PostgreSQL connection string
+>    > If you want to run your database on a different machine, you will need to change the connection string. In your hosts file, place the hostname of the machine you're installing on. `ansible_connection` can be left off entirely and it will connect over ssh. You may need to set `ansible_user` to the username of the admin user (who can run sudo).
+>    >
+>    > Here are some examples of connection strings:
+>    >
+>    > ```
+>    > sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE
+>    > postgres://<name>:<password>@localhost:5432/galaxy
+>    > postgresql:///galaxy?host=/var/run/postgresql
+>    > ```
+>    >
+>    {: .tip}
+>
 >    > ### {% icon comment %} Ansible Variable Templating
 >    > In this step we use some templated variables. These are seen in our group variables, among other places, and look like {% raw %}`miniconda_prefix: "{{ galaxy_tool_dependency_dir  }}/_conda"`{% endraw %}.
 >    >
@@ -503,6 +537,17 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >        farm: job-handlers:1,2
 >    ```
 >    {% endraw %}
+>
+>    > ### {% icon tip %} How many mules?
+>    > Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
+>    {: .tip}
+>
+>    > ### {% icon tip %} uWSGI threads, offload threads, mules, etc.
+>    > 1. uWSGI threads = number of threads per uWSGI web worker (the value of processes in uWSGI config)
+>    > 2. offload threads (you only need 1 or 2) helps prevent blocking when uWSGI reads from the Galaxy app
+>    > 3. the number of mules is the number of Galaxy job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)
+>    > 4. `workers` in job_conf (covered later) is the number of threads in an internal Galaxy thread pool that are available in each job handler for preparing and finishing jobs (more threads increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).
+>    {: .tip}
 >
 >    > ### {% icon question %} Question
 >    >
@@ -583,6 +628,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    ansible-playbook galaxy.yml
 >    ```
+>
+>    > ### {% icon tip %} Slow Deployment
+>    > The deployment can be slowed down by migrations, and the client build.
+>    > The client is only re-built when there are changes in the files needed for the Galaxy user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
+>    {: tip}
 >
 > 6. Explore what has been set up for you.
 >     - Galaxy has been deployed to `/srv/galaxy/server`
@@ -998,6 +1048,11 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
+## Login to Galaxy
+
+Now that your production-ready Galaxy is running, try registering a new user and logging in!
+
+In order to be the administrator user, you will need to register an account with the same email address you used in the group variables under the `admin_users` setting.
 
 ## Disaster Strikes! (Optional)
 
@@ -1044,6 +1099,9 @@ Then you can potentially use it to recover.
 >
 {: .comment}
 
+# Production & Maintenance
+
+The time required to maintain a production Galaxy instance depends on the number of users and their specific needs, but a smallish server (<= 25 users) will typically require a day or two per month of maintenance. Large public servers like usegalaxy.org and usegalaxy.eu are largely full time jobs (although even their admins do find time to do other things).
 
 ## Keeping Galaxy Updated
 
@@ -1076,6 +1134,48 @@ It is recommend that you also do the following during an upgrade:
 - Compare the [other configuration files](https://github.com/galaxyproject/galaxy/tree/master/config) to see if there are new features you want to take advantage of (e.g. new job runner options or metrics you wish to capture.)
 
 When you've read the documentation and checked out the new features, you can then run the playbook and you're done!
+
+## User Support
+
+There are many user support resources available to you and your users online. [help.galaxyproject.org](https://help.galaxyproject.org) is the primary landing point for Galaxy users. For helping individual users, you might find it useful to impersonate them if they fail to send adequate bug reports.
+
+### Impersonating
+
+You can activate user impersonation with:
+
+```
+allow_user_impersonation: true
+```
+
+It is recommended to ask permission or consent before impersonating a user: "Hey, mind if we look at your history?"
+Also, since Galaxy is not normally a real-time collaborative activity, you should avoid running jobs in their history, which can confuse users when datasets show up unexpectedly.
+Additionally you can automatically send failing job error reports, even if users do not submit one, and maybe proactively address those issues (depending on the number of your users).
+
+## Running on a cluster
+
+If you need to run on a cluster with a shared file system, you will need to expose several directories to your cluster:
+
+- `galaxy_shed_tools_dir`
+- `galaxy_tool_dependency_dir`
+- `galaxy_file_path`
+- `galaxy_job_working_directory`
+- `galaxy_server_dir`
+- `galaxy_venv_dir`
+
+Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two difference copies of them, if that is better for performance:
+
+- `galaxy_server_dir`
+- `galaxy_venv_dir`
+
+Most of us use NFS, those who are using something more exotic (ceph, gluster, etc) have some reason for that like "my uni provided it" or "we really wanted to try something shiny". But NFS in most cases is decent and well tested and can be used.
+
+## Other software
+
+But what about your other software, things that are deployed along with Galaxy? Things without an ansible role or are quite weird and require "manual tricks" to deploy?
+
+You can write roles for that! Sometimes they are really ugly roles, but it at least keeps it documented + in place. E.g. UseGalaxy.eu has a custom role for rewriting users and it’s ugly and untested and should not be used by anyone else in case it breaks their site. But it's one of these manual tricks or bits of glue code, but we can encapsulate it as ansible. You can include tarballs in your role to be deployed and so on.
+
+It may seem daunting to use ansible, but you don't have to do everything in ansible! You can just do a little bit, for managing just Galaxy, and manage the rest of your stack separately. Whatever fits best for your deployment.
 
 # Final Notes
 

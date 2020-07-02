@@ -26,6 +26,8 @@ contributors:
 - ethering
 - nsoranzo
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 # Introduction
