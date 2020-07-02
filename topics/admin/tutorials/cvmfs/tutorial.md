@@ -253,4 +253,4 @@ The client talks directly to the stratum 1 (or to a proxy), and manages the data
 
 ## Plant Data
 
-If you are working with plants, you can find separate reference data here: (frederikcoppens/galaxy_data_management)[https://github.com/frederikcoppens/galaxy_data_management]
+If you are working with plants, you can find separate reference data here: [frederikcoppens/galaxy_data_management](https://github.com/frederikcoppens/galaxy_data_management)

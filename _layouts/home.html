@@ -155,23 +155,25 @@ layout: base
                 <div class="container-fluid contributors">
                     <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
                         <div class="carousel-inner" role="listbox">
+                            {% assign counter = 0 %}
                             {% for contributor in contributors %}
-                                {% capture modulo %}{{ forloop.index0 | modulo:4 }}{% endcapture %}
+                              {% unless contributor[1].halloffame == "no" %}
+                                {% capture modulo %}{{ counter | modulo:4 }}{% endcapture %}
+                                  {% if modulo == '0' or counter == 0 %}
+                                  {% if counter != 0 %}</div>{% endif %}
 
-                                {% if modulo == '0' or forloop.first %}
-                                {% if forloop.first == false %}</div>{% endif %}
-                                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                  <div class="carousel-item {% if counter == 0 %}active{% endif %}">
                                 {% endif %}
-
-                                {% assign username = contributor[0] %}
-                                {% assign fullname = contributor[1].name %}
-                                <div class="hall-of-fame-hero">
-                                    <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame#{{ username }}">
+                                  {% assign username = contributor[0] %}
+                                  {% assign fullname = contributor[1].name %}
+                                  <div class="hall-of-fame-hero">
+                                      <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame/{{ username }}/">
                                         <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
-                                    </a>
+                                      </a>
                                     <p class="name">{{ username }}</p>
-                                </div>
-
+                                  </div>
+                                {% assign counter = counter | plus:1 %}
+                                {% endunless%}
                                 {% if forloop.last %}
                                 </div>
                                 {% endif %}

@@ -19,15 +19,15 @@ layout: base
                 <p class="lead">
                     We all teach in different ways, share your training philosophy and help other instructors find the way that is best for them!
                 </p>
-        
+
                 <p>Some instructors have contributed their ideas. You can read their stories below</p>
-        
+
                 {% for p in stories %}
                 {% assign username = p.username %}
                 <div id="{{ username }}">
                     <h2>{{ contributors[username].name | default: username }}</h2>
                     <div class="hall-of-fame-hero">
-                        <a href="{{ site.baseurl }}/hall-of-fame#{{ username }}" class="thumbnail">
+                        <a href="{{ site.baseurl }}/hall-of-fame/{{ username }}/" class="thumbnail">
                             <img src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}'s avatar">
                         </a>
                         <div class="contact-items">
