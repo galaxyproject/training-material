@@ -1,0 +1,1022 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Rule Based Uploader</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Rule Based Uploader" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> User Interface and Data Manipulation
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fupload-rules%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fupload-rules%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fupload-rules%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fupload-rules%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fupload-rules%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fupload-rules%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/galaxy-interface/tutorials/upload-rules/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Rule Based Uploader",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "User Interface and Data Manipulation",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "courseCode": "galaxy-interface / upload-rules / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Rule Based Uploader' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html",
+  "timeRequired": "PT20M",
+  "keywords": "collections, tags",
+  "description": "The questions this  addresses are:\n - How to use the rule based uploader to create complex collections\n\n\\nThe objectives are:\n - Learn about the Rule Based Uploader\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/collections/tutorial.html",
+      "name": "Using dataset collection",
+      "description": "Hands-on for 'Using dataset collection' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "John Chilton"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "John Chilton"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "User Interface and Data Manipulation",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Rule Based Uploader</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/jmchilton/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jmchilton" alt="John Chilton">John Chilton</a>, <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to use the rule based uploader to create complex collections</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn about the Rule Based Uploader</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">User Interface and Data Manipulation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Using dataset collection:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 20 minutes</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 15, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Through a series of examples, this tutorial aims to familiarize the reader with building <span class="notranslate">Galaxy</span> collections from tabular data containing URLs, sample sheets, list of accessions or identifiers, etc..</p>
+
+<blockquote class="comment">
+  <h3 id="comment-audience"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Audience</h3>
+  <p>This tutorial assumes a basic knowledge of using dataset collections in <span class="notranslate">Galaxy</span> but doesn’t assume any particular knowledge of biology or bioinformatics. If you have not used collections with <span class="notranslate">Galaxy</span> previously, please check out the <a href="/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html">using dataset collections</a> tutorial.</p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#uploading-datasets-with-rules" id="markdown-toc-uploading-datasets-with-rules">Uploading Datasets with Rules</a></li>
+  <li><a href="#creating-a-simple-dataset-list" id="markdown-toc-creating-a-simple-dataset-list">Creating a Simple Dataset List</a></li>
+  <li><a href="#creating-a-list-of-dataset-pairs" id="markdown-toc-creating-a-list-of-dataset-pairs">Creating a List of Dataset Pairs</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="uploading-datasets-with-rules">Uploading Datasets with Rules</h1>
+
+<p>This approach could be used to manipulate lists of uploads coming from many different formats, but we will start with a tabular description of files for a study from the <a href="https://www.ebi.ac.uk/ena">European Nucleotide Archive</a>. We will be using the data from a study of <a href="https://www.ebi.ac.uk/ena/data/view/PRJDA60709">16s ribosomal <span class="notranslate">RNA</span></a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-downloading-data-from-ena"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Downloading Data from ENA</h3>
+  <p>To start, navigate to the above study and click the option to “Select columns”. Here we will narrow the set of columns we consider to just a few relevant to uploading these files to <span class="notranslate">Galaxy</span>.</p>
+
+  <p>Select only:</p>
+
+  <ul>
+    <li>Study accession</li>
+    <li>Experiment accession</li>
+    <li>FASTQ files (FTP)</li>
+    <li>Sample accession</li>
+  </ul>
+
+  <p>The table should look like:</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Study accession</th>
+        <th>Sample accession</th>
+        <th>Experiment accession</th>
+        <th>FASTQ files (FTP)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016379</td>
+        <td>DRX000475</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016383</td>
+        <td>DRX000476</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016380</td>
+        <td>DRX000477</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016378</td>
+        <td>DRX000478</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016381</td>
+        <td>DRX000479</td>
+        <td>File 1</td>
+      </tr>
+      <tr>
+        <td>PRJDA60709</td>
+        <td>SAMD00016382</td>
+        <td>DRX000480</td>
+        <td>File 1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Download the resulting tabular data describing the files by clicking the “TEXT” link at the top of the page. Alte<span class="notranslate">rna</span>tively, the resulting sample sheet can be downloaded directly <a href="https://www.ebi.ac.uk/ena/data/warehouse/filereport?accession=PRJDA60709&amp;result=read_run&amp;fields=study_accession,sample_accession,experiment_accession,fastq_ftp&amp;download=txt">here</a>. The number and size of the files for this example are relatively small for sequencing data but larger files and larger numbers of files should work as well - <span class="notranslate">Galaxy</span> will just need more time to download and process the files.</p>
+</blockquote>
+
+<p>Unfortunately the ENA ftp server is not operational at this moment,
+so we have to use a backup from zenodo.
+You can select all the data below and copy them to your clipboard.</p>
+
+<div id="example-1-metadata" class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+</code></pre></div></div>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-accessing-the-rule-based-uploader"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Accessing the Rule Based Uploader</h3>
+
+  <ol>
+    <li>
+      <p><strong>Click</strong> the upload icon toward the top left corner.</p>
+
+      <p>By default the familiar simple upload dialog should appear. This dialog has more advanced options as different tabs across the top of this dialog though.</p>
+    </li>
+    <li>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Rule-based</code> as shown below.</p>
+
+      <p><img src="../../images/rules/rules_example_1_1_rules_landing.png" alt="screenshot" />
+As you can see in this dialog, data can be selected from a history dataset or pasted in directly. If <span class="notranslate">Galaxy</span> is configured to allow FTP uploads, the contents of your FTP directory may be loaded directly as well.</p>
+    </li>
+    <li><strong>Paste</strong> your tabular data right into the textbox on this page as shown below
+      <ul>
+        <li><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Build</code> button.</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+</code></pre></div>      </div>
+
+      <p><img src="../../images/rules/rules_example_1_2_paste.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p><strong>Examine</strong> the  the <code class="language-plaintext highlighter-rouge">rules editor</code> which now pops up.</p>
+
+      <p><img src="../../images/rules/rules_example_1_3_initial_rules.png" alt="screenshot" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>At first glance, this may be feel like Excel or another sp<span class="notranslate">reads</span>heet program and you may feel the urge to start editing cells but we strongly encourage defining rules for manipulating the data instead. There are a few reasons for this:</p>
+
+<ul>
+  <li><strong>Manually modifying this metadata is not reproducible</strong> - we will not belabor the point here but check out <a href="/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html#why-not-use-excel-for-this">Why not use excel for this?</a> for more context. Building up rules for modifying this metadata will allow <span class="notranslate">Galaxy</span> to track and report your manipulations (providing tracibility) and apply them to new sets of files (providing reproducibility).</li>
+  <li><strong>Manually modifying this metadata is error prone</strong> - we believe defining rules and treating the metadata in a systematic way minimizes the possibility to manual errors. These errors can be very hard to detect for large sets of data.</li>
+  <li><strong>Manually modifying data is not scalable</strong> - this rule-based technique potentially scales to importing tens of thousands of datasets.</li>
+</ul>
+
+<p>So rather than modifying the data, we will define rules for manipulating it and setting up “column definitions” that tell <span class="notranslate">Galaxy</span> how to use the metadata during upload or collection creation.</p>
+
+<p>In order to get these files into <span class="notranslate">Galaxy</span>, we will want to do a few things:</p>
+<ul>
+  <li>Strip that header out of the data (it doesn’t contain a URL <span class="notranslate">Galaxy</span> can download).</li>
+  <li>Define column <code class="language-plaintext highlighter-rouge">C</code> as the dataset name.</li>
+  <li>Define column <code class="language-plaintext highlighter-rouge">D</code> as the dataset URL (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
+  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-using-tabular-inputs-to-the-rule-builder"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Using Tabular Inputs to the Rule Builder</h3>
+
+  <p>We will start by stripping that header out of the table. We call rules that strip rows out the table <code class="language-plaintext highlighter-rouge">Filter rules</code> in this dialog.</p>
+
+  <ol>
+    <li>From <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
+      <ul>
+        <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+        <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code>
+<img src="../../images/rules/rules_example_1_4_filter_header.png" alt="screenshot" /></li>
+      </ul>
+
+      <p>Next we will define these columns for <span class="notranslate">Galaxy</span>.</p>
+    </li>
+    <li>From <strong>Rules</strong> menu select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+      <ul>
+        <li>Click <code class="language-plaintext highlighter-rouge">Add Definition</code> button and select <code class="language-plaintext highlighter-rouge">Name</code>
+          <ul>
+            <li><em>“Name”</em>: <code class="language-plaintext highlighter-rouge">C</code></li>
+          </ul>
+        </li>
+        <li>Repeat this again and select <code class="language-plaintext highlighter-rouge">URL</code> instead.
+          <ul>
+            <li><em>“URL”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p><img src="../../images/rules/rules_example_1_5_mapping_edit.png" alt="screenshot" /></p>
+    </li>
+    <li>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Apply</code>, and you should see your new column definitions listed as in the following screenshot.
+<img src="../../images/rules/rules_example_1_6_mapping_set.png" alt="screenshot" /></p>
+
+      <p>You are now ready to start the upload</p>
+    </li>
+    <li>
+      <p><strong>Click</strong> the <code class="language-plaintext highlighter-rouge">Upload</code> button</p>
+
+      <p>After some time, the result in this case will be six datasets in your history. The next example will show to use the rule builder to create a collection.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="creating-a-simple-dataset-list">Creating a Simple Dataset List</h1>
+
+<p>This example will demonstrate using such history datasets as the source for collection uploads - this can be handy when you’d like to apply existing <span class="notranslate">Galaxy</span> tabular manipulation tools to the metadata before processing for instance.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-a-simple-dataset-list"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a Simple Dataset List</h3>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-create-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create a new history</h3>
+    <p>Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.</p>
+  </blockquote>
+
+  <p>For our second example, we will use the same initial metadata.</p>
+
+  <blockquote class="comment">
+    <h3 id="comment-loading-metadata-from-a-history-element"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Loading Metadata from a History Element</h3>
+    <p>In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your <span class="notranslate">Galaxy</span> History, or from a file in your FTP directory if the admin has enabled FTP upload</p>
+  </blockquote>
+
+  <ol>
+    <li><strong>Upload</strong> the metadata from the <a href="#example-1-metadata">first example</a> to your <span class="notranslate">Galaxy</span></li>
+    <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
+      <ul>
+        <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
+        <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">a History Dataset</code></li>
+        <li><em>“Select dataset to load”</em>: the dataset you just uploaded
+<img src="../../images/rules/rules_example_2_1_inputs.png" alt="screenshot" /></li>
+      </ul>
+    </li>
+    <li><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.
+<img src="../../images/rules/rules_example_2_2_initial_rules.png" alt="screenshot" /></li>
+    <li><strong>Repeat</strong> the steps from last time, except define column <code class="language-plaintext highlighter-rouge">C</code> as a <code class="language-plaintext highlighter-rouge">List Identifier</code> instead of Name:
+      <ul>
+        <li>From <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
+          <ul>
+            <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+            <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">URL</code>, Select Column <code class="language-plaintext highlighter-rouge">D</code></li>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
+          </ul>
+        </li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
+      </ul>
+
+      <p><img src="../../images/rules/rules_example_2_3_rules.png" alt="screenshot" /></p>
+
+      <p>Rather than assigning column <code class="language-plaintext highlighter-rouge">C</code> as <code class="language-plaintext highlighter-rouge">Name</code>, in this example we assigned it as a <code class="language-plaintext highlighter-rouge">List Identifier</code>. This is the description of the element in the resulting dataset collection. This identifier is preserved in mapped outputs as you map tools over collections and is useful for tracking sample names, replicate numbers, conditions, etc..</p>
+    </li>
+    <li><strong>Enter</strong> a name for our collection, for example the ENA study identifier as shown below, <code class="language-plaintext highlighter-rouge">PRJDA60709</code>.
+<img src="../../images/rules/rules_example_2_4_name.png" alt="screenshot" /></li>
+    <li>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Upload</code></p>
+
+      <p>This time a single new entry will appear in your history panel corresponding to all the files gathered together in a simple list named <strong>PRJDA60709</strong>.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="creating-a-list-of-dataset-pairs">Creating a List of Dataset Pairs</h1>
+
+<p>For this next example we will again use ENA data, this time corresponding to the study <a href="https://www.ebi.ac.uk/ena/data/view/PRJDB3920">PRJDB3920</a> instead.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-a-list-of-dataset-pairs"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a List of Dataset Pairs</h3>
+
+  <ol>
+    <li>
+      <p><strong>Open</strong> the Rule Builder</p>
+    </li>
+    <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
+      <ul>
+        <li><em>“Upload data as”</em>: Collection(s)</li>
+        <li><em>“Load tabular data from”</em>: a <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
+        <li>
+          <p><strong>Paste</strong> the following table</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+PRJDB3920	SAMD00034150	DRX036147	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036147_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036148	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036148_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036149	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036149_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036150	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036150_2.fastq.gz
+PRJDB3920	SAMD00034150	DRX036151	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036151_2.fastq.gz
+PRJDB3920	SAMD00034153	DRX036152	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036152_2.fastq.gz
+PRJDB3920	SAMD00034152	DRX036164	https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_1.fastq.gz;https://zenodo.org/api/files/0c8d6a74-23dd-4d36-a32d-950eb038dacc/DRX036164_2.fastq.gz
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> and proceed to the rule builder.
+<img src="../../images/rules/rules_example_3_2_initial_rules.png" alt="screenshot" /></p>
+    </li>
+    <li><strong>Repeat</strong> the last example with:
+      <ul>
+        <li>From <strong>Filter</strong> menu select <code class="language-plaintext highlighter-rouge">First or Last N Rows</code>
+          <ul>
+            <li><em>“Filter which rows?”</em>: <code class="language-plaintext highlighter-rouge">first</code></li>
+            <li><em>“Filter how many rows?”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+          </ul>
+        </li>
+        <li>From <strong>Rules</strong> menu, select <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">Add Definition</code>, <code class="language-plaintext highlighter-rouge">List Identifier(s)</code>, Column <code class="language-plaintext highlighter-rouge">C</code></li>
+          </ul>
+        </li>
+        <li><em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
+      </ul>
+
+      <p>In this dataset, column <code class="language-plaintext highlighter-rouge">D</code> contains two URLs, separated by a semicolon <code class="language-plaintext highlighter-rouge">;</code>. So we cannot define that column as the URL directly, we will need to split it into two columns first.
+We will build a regular <span class="notranslate">expression</span> that captures two “groups” from this column with two URLs - one group for everything before the <code class="language-plaintext highlighter-rouge">;</code> and one group for everything after.</p>
+    </li>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+      <ul>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">(.*);(.*)</code></li>
+        <li><em>“Number of Groups”</em>: <code class="language-plaintext highlighter-rouge">2</code>
+<img src="../../images/rules/rules_example_3_4_regex.png" alt="screenshot" /></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-regular-expression-explained"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
+        <p>Here <code class="language-plaintext highlighter-rouge">.*</code> means match any number of any character - so basically match anything.
+The parentheses around <code class="language-plaintext highlighter-rouge">.*</code> means form a “group” from whatever is matched. The <code class="language-plaintext highlighter-rouge">;</code> will match with the actual <code class="language-plaintext highlighter-rouge">;</code> in the target cells.
+In his example we have two such matching groups.</p>
+      </blockquote>
+    </li>
+    <li>
+      <p>Click <strong>Apply</strong> to apply the regular <span class="notranslate">expression</span> to the metadata table</p>
+
+      <p>Column <code class="language-plaintext highlighter-rouge">D</code> is no longer needed, so we can remove it:</p>
+    </li>
+    <li>From <strong>Rules</strong> select <code class="language-plaintext highlighter-rouge">Remove Column(s)</code>
+      <ul>
+        <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">D</code>
+<img src="../../images/rules/rules_example_3_7_removed_column.png" alt="screenshot" /></li>
+      </ul>
+
+      <p>We now have two columns containing URLs - but we can only have one URL per row. So we will split each row into two (one for the forward <span class="notranslate">reads</span> and one for the reverse):</p>
+    </li>
+    <li>From <strong>Rules</strong> select <code class="language-plaintext highlighter-rouge">Split Column(s)</code>
+      <ul>
+        <li><em>“Odd Row Column(s)”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“Even Row Column(s)”</em>: <code class="language-plaintext highlighter-rouge">E</code></li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
+      </ul>
+
+      <p><img src="../../images/rules/rules_example_3_9_columns_are_split.png" alt="screenshot" />
+For every row before the transformation with columns <code class="language-plaintext highlighter-rouge">ABCDE</code>, this will produce two rows, <code class="language-plaintext highlighter-rouge">ABCD</code> and <code class="language-plaintext highlighter-rouge">ABCE</code>. Thus you will have twice as many rows as before.
+<br /><br />
+Now we need to inform <span class="notranslate">Galaxy</span> which of these rows are “forward” <span class="notranslate">reads</span> and which are “reverse” <span class="notranslate">reads</span>. We will do this by adding a new column again using a regular <span class="notranslate">expression</span>. Here we will match on the <code class="language-plaintext highlighter-rouge">_1</code> or <code class="language-plaintext highlighter-rouge">_2</code> in the filename at the end of the URLs.</p>
+    </li>
+    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+      <ul>
+        <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_(\d).fastq.gz</code>.</li>
+        <li><em>“Number of groups”</em>: <code class="language-plaintext highlighter-rouge">1</code>
+<img src="../../images/rules/rules_example_3_10_regex_paired.png" alt="screenshot" /></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-regular-expression-explained-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Regular <span class="notranslate">expression</span> explained</h3>
+        <p>Here <code class="language-plaintext highlighter-rouge">\d</code> means match any digit. This regular <span class="notranslate">expression</span> will use a capturing group to select only the <code class="language-plaintext highlighter-rouge">1</code> or <code class="language-plaintext highlighter-rouge">2</code> part of the URL that appears before the extension.
+In his example we have one matching groups ( contained in the parentheses )</p>
+      </blockquote>
+
+      <p>At this point, you can swap the last two columns to bring this new paired indicator column toward the beginning of the table. This is not necessary but it makes the screenshots more informative.</p>
+    </li>
+    <li>From <strong>Rule</strong> select <code class="language-plaintext highlighter-rouge">Swap Columns</code>
+      <ul>
+        <li><em>“Swap Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“With Column”</em>: <code class="language-plaintext highlighter-rouge">E</code></li>
+      </ul>
+    </li>
+    <li><strong>Open</strong> the column definitions back up (<strong>Rules</strong> Menu, <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>)
+      <ul>
+        <li><em>“paired indicator”</em>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“URL”</em>: column <code class="language-plaintext highlighter-rouge">E</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-paired-indicator-column-definition"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Paired Indicator Column Definition</h3>
+        <p>The column selector for paired indicator is a bit less obvious and a bit more picky than the other ones we have used. The row value of the paired indicator column must be one of the following to indicate “forward” or “reverse” <span class="notranslate">reads</span>.</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Column</th>
+              <th>Acceptable Indicators</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Forward</td>
+              <td><code class="language-plaintext highlighter-rouge">1</code>, <code class="language-plaintext highlighter-rouge">R1</code>, <code class="language-plaintext highlighter-rouge">forward</code>, <code class="language-plaintext highlighter-rouge">f</code>, or <code class="language-plaintext highlighter-rouge">F</code></td>
+            </tr>
+            <tr>
+              <td>Reverse</td>
+              <td><code class="language-plaintext highlighter-rouge">2</code>, <code class="language-plaintext highlighter-rouge">R2</code>, <code class="language-plaintext highlighter-rouge">reverse</code>, <code class="language-plaintext highlighter-rouge">r</code>, or <code class="language-plaintext highlighter-rouge">R</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+    </li>
+    <li><strong>Supply</strong> a name for your collection and click <strong>Upload</strong>
+<img src="../../images/rules/rules_example_3_14_paired_identifier_set.png" alt="screenshot" /></li>
+  </ol>
+
+</blockquote>
+
+
+                    
+
+                    
+
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">John Chilton, Helena Rasche, 2020 <b>Rule Based Uploader (Galaxy Training Materials)</b>. <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html">/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{galaxy-interface-upload-rules,
+    author = "John Chilton and Helena Rasche",
+    title = "Rule Based Uploader (Galaxy Training Materials)",
+    year = "2020",
+    month = "06",
+    day = "15"
+    url = "\url{/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">User Interface and Data Manipulation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Rule Based Uploader: Advanced:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Rule Based Uploader (User Interface and Data Manipulation)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=Rule Based Uploader (User Interface and Data Manipulation)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (John Chilton, Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/galaxy-interface/tutorials/upload-rules/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
