@@ -103,12 +103,12 @@ Parameterization needs to be done separately for the ligand and protein. Therefo
 > ### {% icon hands_on %} Hands-on: Separate protein and ligand coordinates
 >
 > 1. **Search in textfiles** {% icon tool %} with the following parameters:
->    - *"Select lines from"*: 'Hsp90 structure'   
+>    - *"Select lines from"*: 'Hsp90 structure'
 >    - *"that"*: `Don't Match`
 >    - *"Regular Expression"*: `HETATM`
 > 2. Rename output to 'Protein (PDB)'
 > 3. **Search in textfiles** {% icon tool %} with the following parameters:
->    - *"Select lines from"*: 'Hsp90 structure'   
+>    - *"Select lines from"*: 'Hsp90 structure'
 >    - *"that"*: `Match`
 >    - *"Regular Expression"*: `AG5E`
 > 4. Rename output to 'Ligand (PDB)'
@@ -130,7 +130,7 @@ Firstly, we need to calculate the topology for the protein file. We will use the
 >    - *"Generate detailed log"*: `Yes`
 >
 >    > ### {% icon comment %} Comment
->    > A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OpenFF (for a recent, accessible overview see ({% cite Lemkul2020 %}). 
+>    > A force field is essentially a function to calculate the potential energy of a system, based on various empirical parameters (for the atoms, bonds, charges, dihedral angles and so on). There are a number of families of forcefields; some of the most commonly used include CHARMM, AMBER, GROMOS and OpenFF (for a recent, accessible overview see ({% cite Lemkul2020 %}).
 >    >
 >    >
 >    > A wide range of models exist for modeling water. Here we are using the common TIP3P model, which is an example of a 'three-site model' - so-called because the molecule is modeled using three points, corresponding to the three atoms of water. (Four- and five-site models include additional 'dummy atoms' representing the negative charges of the lone pairs of the oxygen atom).
@@ -282,7 +282,7 @@ We now carry out equilibration in two stages: NVT and NPT. This is discussed at 
 > ### {% icon comment %} More detail about equilibration
 >
 > At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT (or isothermal-isochoric) ensemble, followed by an NPT (or isothermal-isobaric) ensemble. Use of the NVT ensemble entails maintaining constant number of particles, volume and temperature, while the NPT ensemble maintains constant number of particles, pressure and temperature.
-> 
+>
 > For equilibration, the protein must be held in place while the solvent is allowed to move freely around it. This is achieved using the position restraint file (ITP) we created in system setup. When we specify this restraint, protein movement is not forbidden, but is energetically penalized.
 >
 {: .comment}
@@ -579,12 +579,12 @@ We will demonstrate the high-throughput capabilities of Galaxy by running the wo
 {: .hands_on}
 
 
-This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's [collection feature]({% link topics/galaxy-data-manipulation/tutorials/collections/tutorial.md %}) to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
+This process runs the entire simulation and analysis procedure described so far on the new set of ligands. It uses Galaxy's [collection feature]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) to organize the data; each item in the history is a collection (essentially a directory containing multiple individual datasets) containing one file corresponding to each of the input ligands.
 
 Note that the SD-file needs to contain ligands with the correct 3D coordinates for MD simulation. The easiest way to obtain these is using a molecular docking tool such as Autodock Vina ({% cite Trott2009 %}) or rDock ({% cite Ruiz2014 %}); tutorials and workflows are available for both of these from the Galaxy Training Network. As an example, the history in which the SD-file used in the HTMD workflow is generated (using AutoDock Vina) is provided ({% cite eu_6hhr %}).
 
 
-Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting [histories to workflows]({% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}), using [multiple histories]({% link topics/galaxy-ui/tutorials/history/tutorial.md %}), and the [Galaxy Application Programming Interface (API)]({% link topics/dev/tutorials/bioblend-api/slides.html %}). For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
+Apart from manual setups or collections, there are several other alternatives which are helpful in scaling up workflows. Galaxy supports and provides training material for converting [histories to workflows]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}), using [multiple histories]({% link topics/galaxy-interface/tutorials/history/tutorial.md %}), and the [Galaxy Application Programming Interface (API)]({% link topics/dev/tutorials/bioblend-api/slides.html %}). For beginners and users who prefer a visual interface, automation can be done using multiple histories and collections with the standard Galaxy user interface.
 
 If you are able to write small scripts, you can automate everything you have learned here with the Galaxy API. This allows you to interact with the server to automate repetitive tasks and create more complex workflows (which may have repetition or branching). The simplest way to access the API is through the Python library BioBlend ({% cite sloggett_bioblend %}). An example Python script, which uses BioBlend to run the GROMACS simulation workflow for each of a list of ligands, is given in the hands-on box below.
 
