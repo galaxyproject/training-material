@@ -26,8 +26,6 @@ layout: base
 {% endfor %}
 
 
-
-
 <!-- use chart.js for graphs -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
 <!-- plugin for adding data labels to charts -->
@@ -104,8 +102,6 @@ layout: base
 </div>
 
 
-
-
 <!-- make the charts -->
 <script type="text/javascript">
 Chart.plugins.unregister(ChartDataLabels);
@@ -120,7 +116,6 @@ function genColors(size) {
 
 
 // Charts displaying number of tutorials per topic
-
 // Scientific Topics
 var tutoBar = document.getElementById('tutorialsBar');
 
@@ -201,8 +196,6 @@ var data_contributors = [{%for c in contributors_over_time %}{x:"{{contributors_
 
 var labels_contributors = [{%for l in contributors_over_time_labels %}"{{l}}"{%unless forloop.last%},{%endunless%}{%endfor%}];
 
-
-
 var tutorialsBar = new Chart(contributorsGraph, {
   type: 'line',
   data: {
@@ -239,7 +232,5 @@ var tutorialsBar = new Chart(contributorsGraph, {
 });
 
 </script>
-
-
 
 {% include _includes/default-footer.html %}
