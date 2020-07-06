@@ -127,7 +127,7 @@ We will use four files for this analysis:
 
 Click on the {% icon galaxy-eye %} (eye) icon and take a look at the uploaded files.
 
-To step are necessary to get our data converted into RDF triples. The first step is to upload the Galaxy datasets into the AskOmics server. The second step is to integrate the uploaded data into the RDF triplestore.
+Two step are necessary to get our data converted into RDF triples. The first step is to upload the Galaxy datasets into the AskOmics server. The second step is to integrate the uploaded data into the RDF triplestore.
 
 # Upload inputs into AskOmics
 
@@ -325,6 +325,7 @@ To constraint on relation, we have to click on suggested nodes, linked to our en
 > 2. Instantiate `Gene Symbol` by clicking on the suggested node, and hide his `Label` using the eye icon
 > 3. Instantiate `gene` by clicking on the `gene` node
 > 2. **Run & preview**
+> ![preview results](images/preview_results.png "Results preview")
 {: .hands_on}
 
 Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the `gene` entity containing on the GFF file. for example, we can filter on chromosome and display chromosome and strand to get information about gene location.
@@ -333,7 +334,6 @@ Results now show the Ensembl id of our over-expressed genes. We have now access 
 > 1. Show `reference` and `strand` using the eye icon
 > 2. Filter `reference` by selecting `X` and `Y` chromosomes (use `ctrl`+`click` to multiple selection)
 > 2. **Run & preview**
-> ![preview results](images/preview_results.png "Results preview")
 {: .hands_on}
 
 
@@ -350,7 +350,7 @@ On the query builder interface, FALDO entities are represented with a green circ
 
 > ### {% icon hands_on %} Hands-on: Filter `gene`
 > 1. First, remove the reference filter (unselect `X` and `Y` using `ctrl`+`click`)
-> 2. Hide `strand` using the eye
+> 2. Hide `reference` `strand` using the eye
 > 3. Instantiate `QTL`
 > 4. Click on the link between `gene` and `QTL` to edit the relation
 > 5. check that the relation is `gene` `included in` `QTL` `on the same reference` with `strict` ticked
@@ -387,26 +387,26 @@ Since we added the neXtProt abstraction into our AskOmics instance, we can link 
 > 3. Instantiate `Homolog Group`, hide his label and filter his `Common Organism Name` with `human`
 > ![Organism name filter](images/filter_organism_name.png "Organism name filter")
 > 4. Instantiate another `Gene Symbol` and hide his `Label`
-> 5. Finally, follow the `to neXtProt Gene` and instantiate `Gene`
+> 5. Finally, follow the `to neXtProt Gene` link and instantiate `Gene`
 > 5. **Run & preview**
 {: .hands_on}
 
 The query we've just built asks for the human homologs of our over-expressed genes. We use the `Gene Symbol` to get information from the neXtProt database. AskOmics convert the query into small SPARQL subquery and send them into the local data and the neXtProt endpoint.
 
-Now we are linked to the gene present in neXtProt, we can obtain information about the proteins encoded by these genes, as well as their location in the cell.
+Now we are linked to the neXtProt database, we can obtain information about the proteins encoded by these genes, as well as their location in the cell.
 
 > ### {% icon hands_on %} Hands-on: Get the protein and their location
 > 1. Instantiate `Entry`
 > 2. Instantiate `Isoform` and hide the `Label`
-> 3. Many nodes are connected to `Isoform`. Use the *Filter links* field to get only node thar are linked with a link named `location`
+> 3. Many nodes are connected to `Isoform`. Use the *Filter links* field to get only node that are linked with a link named `location`
 > ![Filter links](images/filter_links.png "Filter links")
 > 4. Instantiate the `Subcellular Location` node and hide `Label`
 > 5. Use the *Filter node* field to filter nodes that a named `Location`
-> 6. Instantiate `Uniprot subcellular Location CV`
+> 6. Instantiate `Uniprot subcellular Location CV` (you can use the node filter)
 > 7. **Run & preview**
 {: .hands_on}
 
-The query we just build is "All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the protein coded by this genes". This our last query. We will save it.
+Finally, our query is "All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the protein coded by this genes". We will save it to the results.
 
 > ### {% icon hands_on %} Hands-on: Save a result
 > 1. **Run & save**
