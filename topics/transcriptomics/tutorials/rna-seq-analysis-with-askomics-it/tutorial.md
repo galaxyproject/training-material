@@ -3,10 +3,16 @@ layout: tutorial_hands_on
 
 title: RNA-Seq analysis with AskOmics Interactive Tool
 zenodo_link: 'https://zenodo.org/record/3925863'
+requirements:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - rna-seq-counts-to-genes
 questions:
 - How to integrate RNA-Seq results with other datasets using AskOmics?
-- How to query this datasets to answer a biological question ?
-- How to exploit distant SPARQL endpoint to ...
+- How to query this datasets to answer a biological question?
+- How to exploit distant SPARQL endpoint to retrieve information?
 objectives:
 - Launch an AskOmics Interactive Tool
 - Integrate RNA-Seq and reference datasets into AskOmics
