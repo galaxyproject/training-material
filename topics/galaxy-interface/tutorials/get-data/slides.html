@@ -6,7 +6,9 @@ redirect_from:
 
 title: "Getting data into Galaxy"
 zenodo_link: ""
-questions:
+questions: 
+  - "How do I get my data into Galaxy?"
+  - "How do I get public data into Galaxy?"
 objectives:
 time_estimation:
 key_points:
@@ -25,22 +27,31 @@ subtopic: upload
 
 ---
 
-# Many ways to get data into your workspace
+## Many ways to get data into your workspace
 
-- Import from your computer
-- Import from a URL
-- Directly enter text
-- Import using FTP
-- Import from *defined* data sources
-- Import from *undefined* data sources
-- Import from a Galaxy Data Library
+1. Import using **Get Data** sources e.g. UCSC, SRA
+2. Import from a Galaxy **Data Library**
+3. Import using **Upload File** 
+  - Import from your computer
+  - Directly enter text
+  - Import from a URL
+  - Import using FTP
+  - Import directly into Collection
+  - Import using Rule Builder
 
 ???
 
 - To do analysis in Galaxy you first need data to work on.
 - There are many ways and sources for getting data into your history.
-  - Which method you use depends on where your data is, and how big it is
 - This tutorial will cover all of the techniques listed here.
+
+---
+
+### Best method depends on where the data is, and how big it is
+
+![](../../images/get_data_upload_logic.png)
+
+.footnote[[Source: Galaxy Community Hub](https://galaxyproject.org/tutorials/upload/)]
 
 ---
 
@@ -56,13 +67,46 @@ subtopic: upload
 
 # The Get Data toolbox section
 
-- Expands to show data sources that have been *defined* on your server
+- Expands to show data sources
   - The specific data sources available on your Galaxy instance are determine by the server's administrator
 - All of these data sources can bring datasets (files) into your Galaxy workspace
 
 ???
 
 This shows the list of data sources that were available on usegalaxy.org in mid 2017.
+
+---
+# 1. Get Data
+
+Two large data sources you can access through Galaxy are UCSC and SRA
+
+.pull-right[![](../../images/get_data_ucsc.png)]
+.pull-left[![](../../images/get_data_sra.png)]
+
+---
+
+# 2. Import from Galaxy Data Library
+
+---
+
+# Import from Galaxy Data Library
+
+Data can be imported from the Galaxy Data Libraries if the Galaxy administrator has provided it. 
+
+![](../../images/get_data_data_libraries.png)
+
+---
+
+# Import from Galaxy Data Library
+
+You can select the files you want and send to History as datasets or collection
+
+![](../../images/get_data_import_library.png)
+
+---
+
+
+# Upload from your computer
 
 ---
 
@@ -79,7 +123,7 @@ or
 Two ways to launch the upload file form.
 ---
 
-# Upload files from your computer
+# Upload from your computer
 
 ![Upload file form](../../images/upload_file_form_empty.png)
 
@@ -87,15 +131,15 @@ Two ways to launch the upload file form.
 
 - The **Upload File** data source can import data:
   - from your computer
-  - using a URL
   - by directly entering text
+  - using a URL
   - and via FTP
 
 This is probably the most commonly used tool for bringing data into Galaxy, and it is installed on almost every Galaxy server.
 
 ---
 
-# Upload files from your computer
+# Upload  
 
 ![Options for importing files from your laptop](../../images/upload_file_form_empty_local_choices.png)
 
@@ -171,6 +215,10 @@ and are ready to use when green.
 
 ## Directly enter text
 
+---
+
+## Directly enter text
+
 Sometimes it's useful to enter values directly.  This only works if your dataset is tiny.
 
 ![Select Paste/Fetch data](../../images/upload_file_form_empty_paste.png)
@@ -188,7 +236,11 @@ You can also set the datatype and build.
 
 ---
 
-## Server-to-Server transfer
+## Import using URL
+
+---
+
+## Import using URL
 
 The data might already be available on a web server somewhere. To avoid downloading data
 to your computer and uploading to Galaxy in two steps, you can instruct Galaxy to
@@ -198,7 +250,7 @@ directly fetch the data from a given URL.
 
 ---
 
-## Server-to-Server transfer
+## Import using URL
 
 Enter the URLs (one per line) into the input box:
 
@@ -279,4 +331,60 @@ FTP Transfer in progress...
 
 ... and transfer complete.
 
-Now what?
+---
+
+# Import directly into Collection
+
+---
+
+# Import directly into Collection
+
+![Direct collection Start](../../images/get_data_direct_collection1.png)
+
+Select Collection tab and files into with drag and drop or *Choose Local Files*
+---
+
+# Import directly into Collection
+
+![Direct collection Build](../../images/get_data_direct_collection2.png)
+
+Build collection
+
+---
+
+# Import directly into Collection
+
+![Direct collection Name](../../images/get_data_direct_collection3.png)
+
+Name collection
+
+---
+
+# Import directly into Collection
+
+![Direct collection History](../../images/get_data_direct_collection4.png)
+
+Collection build complete and in History
+
+---
+
+# Import using Rule Based uploader
+
+---
+
+# Why use Rule Based uploader
+
+- If you want to import many files from URLs directly into collection(s)
+
+---
+
+# Import using Rule Based uploader
+
+![Rule Uploader](../../images/get_data_rule_uploader.png)
+
+---
+# Import using Rule Based uploader
+
+Learn how to use it in the [Rule Based Uploader tutorial](
+https://galaxyproject.github.io//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html)
+
