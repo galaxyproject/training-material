@@ -521,7 +521,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >        threads: 4
 >        offload-threads: 2
 >        static-map:
->          - /static/style={{ galaxy_server_dir }}/static/style/blue
 >          - /static={{ galaxy_server_dir }}/static
 >          - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
 >        static-safe: client/galaxy/images
@@ -602,7 +601,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >     threads: 4
 >    > >     offload-threads: 2
 >    > >     static-map:
->    > >       - /static/style={{ galaxy_server_dir }}/static/style/blue
 >    > >       - /static={{ galaxy_server_dir }}/static
 >    > >       - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
 >    > >     static-safe: client/galaxy/images
@@ -956,12 +954,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >        # things like serving Galaxy!
 >        location /static {
 >            alias {{ galaxy_server_dir }}/static;
->            expires 24h;
->        }
->
->        # The style directory is in a slightly different location
->        location /static/style {
->            alias {{ galaxy_server_dir }}/static/style/blue;
 >            expires 24h;
 >        }
 >
