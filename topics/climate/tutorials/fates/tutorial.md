@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) Modelling with Galaxy Climate JupyterLab
+title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab
 zenodo_link: ''
 requirements:
   -
@@ -16,6 +16,9 @@ requirements:
 questions:
 - What is the Community Terrestrial System Model (CTSM)?
 - What is FATES?
+- Why do we need a "host" Land Surface Model for running FATES?
+- Why running single point CLM-FATES simulations?
+- Which configurations of CLM-FATES can I use?
 - What type of data is available to compare the model outputs with observations?
 objectives:
 - Understanding ecological, biogeochemical, biogeophysical, and hydrologic theory underpinning the CTSM.
@@ -39,7 +42,7 @@ contributors:
 {:.no_toc}
 
 
-The practical aims at familiarzing you with FATES. 
+The practical aims at familiarzing you with CLM-FATES. 
 
 > ### Agenda
 >
@@ -57,6 +60,8 @@ The practical aims at familiarzing you with FATES.
 > ##### Earth System Modelling (ESM)
 >
 > ##### The Community Terrestrial Systems Model
+>
+> ##### The Community Land Model
 >
 > ##### Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
 >
