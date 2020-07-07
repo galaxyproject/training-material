@@ -452,6 +452,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `miniconda_version`          | `4.6.14`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
 >    {% endraw %}
 >
+>    > ### {% icon tip %} Different Galaxy Release
+>    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
+>    > If you wish to use a different version of Galaxy than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.
+>    > Please ensure you consult the [releases documentation](https://docs.galaxyproject.org/en/master/releases/index.html)
+>    {: .tip}
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
