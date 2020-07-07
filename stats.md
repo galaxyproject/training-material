@@ -87,13 +87,32 @@ layout: base
  </div>
 
  <!-- tutorials per topic (technical topics) -->
-<div class="card" style="width: 75%;margin:1em">
+<div class="card" style="width: 60%; margin:1em" >
   <div class="card-body">
    <h5 class="card-title">{{ topics_technical | size }} Technical Topics</h5>
    <canvas id="tutorialsBarTechnical" width="400"></canvas>
    </div>
  </div>
+
+ <!-- list the 5 newest contributors -->
+ <div class="card" style="margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">New Contributors</h5>
+   <p class="card-text">Welcome to our newest members!</p>
+
+    {% assign new_members = site.data['contributors'] | most_recent_contributors: 10 %}
+    <ul>
+    {% for m in new_members %}
+        {% assign i = m[0] %}{% assign n = m[1].name %}
+        <li>{% include _includes/contributor-badge.html id=i name=n %}</li>
+    {% endfor %}
+    </ul>
+    <p class="card-text">Thanks a lot for your contributions!</p>
+
+   </div>
+ </div>
  <!-- end stats cards -->
+
 
 </div>
 </div>

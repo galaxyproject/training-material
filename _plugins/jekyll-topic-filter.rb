@@ -1,5 +1,14 @@
 module Jekyll
   module TopicFilter
+
+    def most_recent_contributors(contributors, count)
+        w = contributors.keys.sort{ |x, y|
+          contributors[y].fetch('joined', '2016-01') <=> contributors[x].fetch('joined', '2016-01')
+        }
+
+         Hash[w.slice(0, count).collect{|k| [k, contributors[k]]}]
+    end
+
     def topic_count(resources)
       # Count lines in the table except introduction slides
       resources.select{ |a| a['type'] != 'introduction' }.length
