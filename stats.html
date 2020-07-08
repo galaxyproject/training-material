@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Galaxy Training!</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:title" content="Galaxy Training" />
+        <meta property="og:description" content="Collection of tutorials developed and maintained by the w..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        <header>
+    <nav class="navbar navbar-expand-md navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo" />
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                         <a class="nav-link" href="/training-material/hall-of-fame" title="Hall of Fame">
+                            <i class="fas fa-users" aria-hidden="true"></i><span class="visually-hidden">hall-of-fame</span> Contributors
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material" title="View on GitHub">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> View on GitHub
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */" />
+            <input type="hidden" value="Galaxy Training" name="content_provider" />
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="" />
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off" /> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off" /> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off" /> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off" /> Rainbow
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="/training-material/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search" />
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- tutorial stats -->
+
+<!-- topic stats -->
+
+<!-- contributors stats -->
+
+<!-- use chart.js for graphs -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js"></script>
+
+<!-- plugin for adding data labels to charts -->
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@0.7.0"></script>
+
+<style type="text/css" media="all">
+.card-title {
+	font-size: 2rem;
+}
+</style>
+
+<div class="container main-content">
+<section>
+<h1>GTN Statistics</h1>
+
+<div class="stats">
+<div class="row">
+
+ <!-- stats cards -->
+
+ <!-- number of topics -->
+ <div class="card" style="width: 30%;margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">21 Topics</h5>
+   </div>
+ </div>
+
+ <!-- number of tutorials -->
+ <div class="card" style="width: 30%;margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">160 Tutorials</h5>
+   <!--<p class="card-text">amazing!.</p>-->
+  </div>
+ </div>
+
+<!-- number of contributors -->
+ <div class="card" style="width: 30%;margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">151 Contributors</h5>
+  </div>
+ </div>
+
+<!-- tutorials per topic -->
+<div class="card" style="width: 47%;margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">16 Scientific Topics</h5>
+   <canvas id="tutorialsBar" width="400" height="400"></canvas>
+   </div>
+ </div>
+
+ <!-- conttributors over time  -->
+ <div class="card" style="width: 47%;margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">Growing Community</h5>
+   <canvas id="contributorsGraph" width="400" height="400"></canvas>
+   </div>
+ </div>
+
+ <!-- tutorials per topic (technical topics) -->
+<div class="card" style="width: 60%; margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">5 Technical Topics</h5>
+   <canvas id="tutorialsBarTechnical" width="400"></canvas>
+   </div>
+ </div>
+
+ <!-- list the 5 newest contributors -->
+ <div class="card" style="margin:1em">
+  <div class="card-body">
+   <h5 class="card-title">New Contributors</h5>
+   <p class="card-text">Welcome to our newest members!</p>
+
+    
+    <ul>
+    
+        
+        <li><a href="/training-material/hall-of-fame/beatrizserrano/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/beatrizserrano" alt="Beatriz Serrano-Solano" />Beatriz Serrano-Solano</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/jkh1/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jkh1" alt="Jean-Karim Hériché" />Jean-Karim Hériché</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nomadscientist" alt="Wendi Bacon" />Wendi Bacon</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/bedroesb/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/bedroesb" alt="Bert Droesbeke" />Bert Droesbeke</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/xiliu/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xiliu" alt="Xi Liu" />Xi Liu</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/ethering/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/ethering" alt="Graham Etherington" />Graham Etherington</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/lldelisle/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/lldelisle" alt="Lucille Delisle" />Lucille Delisle</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/thomaswollmann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/thomaswollmann" alt="Thomas Wollmann" />Thomas Wollmann</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux" />Anne Fouilloux</a></li>
+    
+        
+        <li><a href="/training-material/hall-of-fame/emmaleith/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/emmaleith" alt="Emma Leith" />Emma Leith</a></li>
+    
+    </ul>
+    <p class="card-text">Thanks a lot for your contributions!</p>
+
+   </div>
+ </div>
+ <!-- end stats cards -->
+
+
+</div>
+</div>
+
+</section>
+</div>
+
+<!-- make the charts -->
+<script type="text/javascript">
+Chart.plugins.unregister(ChartDataLabels);
+
+function genColors(size) {
+	var o = [];
+	for(i = 0; i < size; i++){
+		o.push(`hsl(${ i * 360 / size }, 100%, 50%)`)
+	}
+	return o;
+}
+
+
+// Charts displaying number of tutorials per topic
+// Scientific Topics
+var tutoBar = document.getElementById('tutorialsBar');
+
+var data_tutos = [5,2,6,5,7,4,3,11,4,7,15,2,8,23,8,3];
+var labels_topics = ["Assembly","Climate","Computational chemistry","Ecology","Epigenetics","Genome Annotation","Imaging","Introduction to Galaxy Analyses","Metabolomics","Metagenomics","Proteomics","Sequence analysis","Statistics and machine learning","Transcriptomics","Variant Analysis","Visualisation"];
+
+var tutorialsBar = new Chart(tutoBar, {
+  type: 'horizontalBar',
+
+  data: {
+    labels: labels_topics,
+    datasets: [{
+      backgroundColor: genColors(data_tutos.length),
+      data: data_tutos
+    }]
+  },
+  plugins: [ChartDataLabels],
+
+  options: {
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Tutorials per Topic'
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
+    }
+  }
+});
+
+// Technical Topics
+// Chart displaying number of tutorials per topic
+var tutoBarTechnical = document.getElementById('tutorialsBarTechnical');
+
+var data_tutos = [14,11,14,36,5];
+var labels_topics = ["Development in Galaxy","Contributing to the Galaxy Training Material","User Interface and Data Manipulation","Galaxy Server administration","Teaching and Hosting Galaxy training"];
+
+var tutorialsBar = new Chart(tutoBarTechnical, {
+  type: 'horizontalBar',
+
+  data: {
+    labels: labels_topics,
+    datasets: [{
+      backgroundColor: genColors(data_tutos.length),
+      data: data_tutos
+    }]
+  },
+  plugins: [ChartDataLabels],
+
+  options: {
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Tutorials per Topic'
+    },
+    plugins: {
+      datalabels: {
+        anchor: 'end',
+        align: 'end'
+      }
+    }
+  }
+});
+
+
+
+// Contributors chart
+var contributorsGraph = document.getElementById('contributorsGraph');
+
+var data_contributors = [{x:"2017-10" , y: 60 } ,{x:"2017-12" , y: 62 } ,{x:"2018-02" , y: 63 } ,{x:"2018-06" , y: 65 } ,{x:"2018-07" , y: 81 } ,{x:"2018-08" , y: 87 } ,{x:"2018-09" , y: 93 } ,{x:"2018-10" , y: 104 } ,{x:"2018-11" , y: 105 } ,{x:"2018-12" , y: 108 } ,{x:"2019-01" , y: 109 } ,{x:"2019-02" , y: 110 } ,{x:"2019-03" , y: 111 } ,{x:"2019-04" , y: 117 } ,{x:"2019-05" , y: 124 } ,{x:"2019-06" , y: 127 } ,{x:"2019-07" , y: 136 } ,{x:"2019-08" , y: 143 } ,{x:"2019-10" , y: 145 } ,{x:"2019-11" , y: 146 } ,{x:"2019-12" , y: 147 } ,{x:"2020-03" , y: 148 } ,{x:"2020-07" , y: 149 } ,{x:"" , y: 151 } ];
+
+var labels_contributors = ["2017-09","2017-10","2017-12","2018-02","2018-06","2018-07","2018-08","2018-09","2018-10","2018-11","2018-12","2019-01","2019-02","2019-03","2019-04","2019-05","2019-06","2019-07","2019-08","2019-10","2019-11","2019-12","2020-03","2020-07"];
+
+var tutorialsBar = new Chart(contributorsGraph, {
+  type: 'line',
+  data: {
+    datasets: [{
+      data: data_contributors,
+    }]
+  },
+
+  options: {
+    scales: {
+      yAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+      xAxes: [{
+        type: 'time',
+        time: {
+          displayFormats:{month:'YYYY-MM'},
+          min:'2017-10',
+          unit: 'month',
+          distribution: 'linear'
+        }
+      }]
+    },
+    legend: {
+	  display: false
+	},
+    title: {
+      display: true,
+      text: 'Contributors over time'
+    }
+  }
+});
+
+</script>
+
+<footer>
+    <div class="container">
+        <p>
+            The <a href="https://galaxyproject.org/teach/gtn/">Galaxy Training Network</a>
+            provides researchers with online training materials, connects them with local trainers, and helps promoting open data analysis practices worldwide.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
