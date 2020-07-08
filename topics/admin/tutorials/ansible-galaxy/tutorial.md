@@ -668,10 +668,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    {: .question}
 >
->    > ### {% icon tip %} Miniconda, run as galaxy
+>    > ### {% icon tip %} Miniconda fails to work
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
->    > The execution of uchida.miniconda with become: true and become_user: galaxy will fail, because this role requires sudo. I tried to install the dependencies tar and bzip2 in my playbook beforehand, but the role still requires sudo to check if the packages are installed. When i install the package with a root-user, it is possible to execute the /tmp/Miniconda...sh file with the galaxy user. Not sure if other stuff works in miniconda too. Why does this role need to be executed as galaxy user? This is somewhat unclear and leads to an installation-error.
->     >
+>    >
+>    > The miniconda role, attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules which both attempt to install conda. So, remove the role from your playbook, and carry on, if you have issues.
 >     {: .tip}
 >
 > 2. Edit your group variables file for your group (`group_vars/galaxyservers.yml`).
