@@ -224,7 +224,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    ```yaml
 >    - src: galaxyproject.galaxy
->      version: 0.9.5
+>      version: 0.9.6
 >    - src: galaxyproject.nginx
 >      version: 0.6.4
 >    - src: galaxyproject.postgresql
@@ -651,7 +651,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > >   pre_tasks:
 >    > >     - name: Install Dependencies
 >    > >       package:
->    > >         name: ['git', 'make', 'python3-psycopg2', 'virtualenv']
+>    > >         name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
 >    > >   roles:
 >    > >     - galaxyproject.postgresql
 >    > >     - role: natefoo.postgresql_objects
