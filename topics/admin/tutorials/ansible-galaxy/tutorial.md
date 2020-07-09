@@ -208,7 +208,7 @@ To proceed from here it is expected that:
 >
 > There are known issues with CentOS7 and python3, which is used in this tutorial. If you use this setup, you should have python2 and python3 coexisting, and use python2 for Ansible (i.e. do not set `interpreter_python` in your `ansible.cfg`) and python3 for Galaxy. This setup requires numerous changes that you will need to discover, which are not covered in this tutorial.
 >
-> Both python-psycopg2 and python3-psycopg2 need to be installed.
+> Both `python-psycopg2` and `python3-psycopg2` need to be installed.
 >
 > CentOS8 (and RHEL in general) have significantly different package names for some modules, beware!
 {: .comment}
