@@ -126,6 +126,43 @@ layout: base
    </div>
  </div>
 </div>
+
+
+<!-- Latest modified Tutorials -->
+<div class="col-md-12">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Recently Updated Tutorials</h5>
+   {% assign latest_tutorials = tutorials | filter_recent_modified: 10 %}
+   <table class="table table-striped">
+    <thead>
+      <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
+    </thead>
+    <tbody>
+    {% for tuto in latest_tutorials %}
+            {% assign topic_id = tuto | get_topic %}
+            {% assign topic = site.data[topic_id] %}
+      <tr>
+        <td>{{ tuto.last_modified_at | date: "%b %-d, %Y"  }}</td>
+        <td style="text-align:right">
+            <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+                {{ topic.title }}
+            </a>
+</td>
+        <td><a href="{{ site.baseurl }}/{{ tuto.url }}">
+            {{ tuto.title }}
+            </a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+    <p class="card-text">Thanks a lot for your contributions!</p>
+
+   </div>
+ </div>
+</div>
+
+
  <!-- end stats cards -->
 
 

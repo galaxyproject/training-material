@@ -9,6 +9,16 @@ module Jekyll
          Hash[w.slice(0, count).collect{|k| [k, contributors[k]]}]
     end
 
+    def filter_recent_modified(tutorials, count)
+      latest = tutorials.sort{ |x, y|
+        x.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+        y.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+
+        y.data['last_modified_at'].to_s <=> x.data['last_modified_at'].to_s
+      }
+      latest.slice(0, count)
+    end
+
     def topic_count(resources)
       # Count lines in the table except introduction slides
       resources.select{ |a| a['type'] != 'introduction' }.length
