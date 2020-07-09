@@ -205,6 +205,13 @@ var tutorialsBar = new Chart(tutoBarTechnical, {
   plugins: [ChartDataLabels],
 
   options: {
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+    },
     legend: {
 	  display: false
 	},
