@@ -1,0 +1,1358 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>RNA-Seq analysis with AskOmics Interactive Tool</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:title" content="Galaxy Training: RNA-Seq analysis with AskOmics Interactive Tool" />
+        <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/transcriptomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Transcriptomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Ftranscriptomics%2Ftutorials%2Frna-seq-analysis-with-askomics-it%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "RNA-Seq analysis with AskOmics Interactive Tool",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / rna-seq-analysis-with-askomics-it / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'RNA-Seq analysis with AskOmics Interactive Tool' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - How to integrate RNA-Seq results with other datasets using AskOmics?\n - How to query these datasets to answer a biological question?\n - How to exploit distant SPARQL endpoint to retrieve information?\n\n\\nThe objectives are:\n - Launch an AskOmics Interactive Tool\n - Integrate RNA-Seq and reference datasets into AskOmics\n - Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL\n - Complete the query to get the human homologs and their location using neXtProt database\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html",
+      "name": "RNA-seq counts to genes",
+      "description": "Hands-on for 'RNA-seq counts to genes' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xavier Garnier"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Xavier Garnier"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>RNA-Seq analysis with AskOmics Interactive Tool</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/xgaia/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xgaia" alt="Xavier Garnier">Xavier Garnier</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to integrate RNA-Seq results with other datasets using AskOmics?</p>
+</li>
+            
+            <li><p>How to query these datasets to answer a biological question?</p>
+</li>
+            
+            <li><p>How to exploit distant SPARQL endpoint to retrieve information?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Launch an AskOmics Interactive Tool</p>
+</li>
+            
+            <li><p>Integrate RNA-Seq and reference datasets into AskOmics</p>
+</li>
+            
+            <li><p>Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL</p>
+</li>
+            
+            <li><p>Complete the query to get the human homologs and their location using neXtProt database</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+                    
+                        
+                            
+                            <li> Mapping:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/mapping/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> RNA-seq counts to genes:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/transcriptomics/slides/introduction.html" title="Introduction slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/3925863">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<!-- AskOmics intro -->
+<p>AskOmics is a web application for data integration and query using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and <span class="notranslate">BED</span> annotation) into RDF triples, and perform complex queries using a user-friendly interface.
+During the integration step, AskOmics builds an RDF description of the data: the <strong>abstraction</strong>. This abstraction is used to explore the data and build the query.
+AskOmics can also integrate <strong>abstraction</strong> of distant endpoint. Abstraction are obtained using <a href="https://github.com/askomics/abstractor">abstractor</a>, a pyhton package to generatre RDF abstraction from distant endpoint.
+The query builder interface is used to create a path through the <strong>abstraction</strong> of each ressources. The path is converted to a SPARQL query that is sent to the multiple SPARQL endpoint.</p>
+
+<!-- AskOmics for RNA-Seq -->
+<p>AskOmics comes useful for cross-referencing results datasets with various reference data. For example, in <span class="notranslate">RNA</span>-Seq studies, we often need to filter the results on the fold change and the p-value, to get the most significant differentially expressed genes. If you are studying a particular phenotype and already know the position of some QTL associated to this phenotype, you would then want to cross this gene list with the reference annotation of the corresponding genome to get the genes locations. You would also determine which gene is located within a QTL related to the phenotype. Finaly, you would know if these genes have human homologs, and use the neXtProt database to get the location of the proteins coded by the homologs. The whole process involves several tools to parse and manipulate the different data format, and to map datasets on other. AskOmics offer a solution to 1) automatically convert the multiple formats to RDF, 2) use a user-friendly interface to perform complex SPARQL queries on the RDF datasets to find the genes you are interested in, and 3) connect exte<span class="notranslate">rna</span>l SPARQL databases and link exte<span class="notranslate">rna</span>l data with your own.</p>
+
+<!-- The data -->
+<p>In this tutorial, we will use results from a differential <span class="notranslate">expression</span> analysis. This file is provided for you below. You could also generate the file yourself, by following the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-Seq counts to gene tutorial</a>. The file used here was generated from limma-voom but you could use a file from any <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tool, such as edgeR or DESeq2, as long as it has the required columns (see below).</p>
+
+<p>The differentially expressed results will be linked to the mouse genome annotation, in general feature format (GFF). The file provided is a subset of the mouse annotation (GRCm38.p6) obtained from <a href="http://www.ensembl.org/Mus_musculus/Info/Index">Ensembl</a>.</p>
+
+<p>We will use a file containing quantitative trait loci (QTL) information, to find if our differentially expressed genes are located inside a known QTL. This file is a subset of a query performed on <a href="http://www.informatics.jax.org">Mouse Genome Informatics</a>.</p>
+
+<p>A file from containing all homologies between mouse and human will be used to get the human homolog genes. This file is provided by <a href="http://www.informatics.jax.org/downloads/reports/index.html#homology">MGI</a>.</p>
+
+<p>To link the human gene with neXtProt database, we will use the RDF abstraction of neXtProt. This file was obtained using <a href="https://github.com/askomics/abstractor">abstractor</a> tool.</p>
+
+<p>In the differentially expressed file, and the homologs file, gene are described by a symbol. However, in the annotation file and neXtProt database, gene are represented by Ensembl id. To link the 2 datasets, we will need a file to map the gene symbol with Ensembl id. This file provided for you was previously generated with an AskOmics query on the mouse annotation file and the homolog file.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#preparing-the-inputs" id="markdown-toc-preparing-the-inputs">Preparing the inputs</a>    <ol>
+      <li><a href="#import-data" id="markdown-toc-import-data">Import data</a></li>
+    </ol>
+  </li>
+  <li><a href="#upload-inputs-into-askomics" id="markdown-toc-upload-inputs-into-askomics">Upload inputs into AskOmics</a>    <ol>
+      <li><a href="#launch-askomics-interactive-tool" id="markdown-toc-launch-askomics-interactive-tool">Launch AskOmics Interactive Tool</a></li>
+    </ol>
+  </li>
+  <li><a href="#integrate-input-files-to-askomics" id="markdown-toc-integrate-input-files-to-askomics">Integrate input files to AskOmics</a>    <ol>
+      <li><a href="#integrate-gff-files" id="markdown-toc-integrate-gff-files">Integrate GFF files</a></li>
+      <li><a href="#integration-of-tabular-tsv-files" id="markdown-toc-integration-of-tabular-tsv-files">Integration of tabular (TSV) files</a></li>
+      <li><a href="#integration-of-rdf-files" id="markdown-toc-integration-of-rdf-files">Integration of RDF files</a></li>
+      <li><a href="#monitor-integration" id="markdown-toc-monitor-integration">Monitor integration</a></li>
+    </ol>
+  </li>
+  <li><a href="#query" id="markdown-toc-query">Query</a>    <ol>
+      <li><a href="#query-builder-overview" id="markdown-toc-query-builder-overview">Query builder overview</a></li>
+      <li><a href="#results-management" id="markdown-toc-results-management">Results management</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="preparing-the-inputs">Preparing the inputs</h1>
+
+<p>We will use four files for this analysis:</p>
+
+<ul>
+  <li><strong>Differentially expressed results file</strong> (genes in rows, and 4 required columns: identifier (ENTREZID), gene symbol (SYMBOL), log fold change (logFC) and adjusted P values (adj.P.Val))</li>
+  <li><strong>Reference genome annotation file</strong> (in GFF format)</li>
+  <li><strong>QTL file</strong> (QTL in row, with 5 required columns: identifier, chromosome, start, end and name)</li>
+  <li><strong>Homolog file</strong> (TSV of 13 columns including homolog id, organism name and gene symbol)</li>
+  <li><strong>neXtProt abstraction</strong> (RDF data description of neXtProt database in turtle format)</li>
+  <li><strong>Correspondence file between gene symbol and Ensembl id</strong> (TSV of 3 columns: symbol, the corresponding Ensembl id (mouse and human)</li>
+</ul>
+
+<h2 id="import-data">Import data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this <span class="notranslate">RNA</span>-seq exercise e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span>-seq AskOmics</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the files.</p>
+
+      <p>To import the files, there are two options:</p>
+      <ul>
+        <li>Option 1: From a shared data library if available (ask your instructor)</li>
+        <li>Option 2: From <a href="https://zenodo.org/record/3925863">Zenodo</a></li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+
+      <ul>
+        <li>
+          <p>You can paste the links below into the <strong>Paste/Fetch</strong> box:</p>
+
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
+https://zenodo.org/record/3925863/files/Mus_musculus.GRCm38.98.subset.gff3
+https://zenodo.org/record/3925863/files/Symbol.tsv
+https://zenodo.org/record/3925863/files/MGIBatchReport_Qtl_Subset.txt
+https://zenodo.org/record/3925863/files/HOM_MouseHumanSequence.rpt
+https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+    <li>Rename the files using the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.
+      <ul>
+        <li>limma-voom_luminalpregnant-luminallactate to <code class="language-plaintext highlighter-rouge">DE results</code></li>
+        <li>Mus_musculus.GRCm38.98.subset.gff3 to <code class="language-plaintext highlighter-rouge">Mus musculus annotation</code></li>
+        <li>Symbol.tsv to <code class="language-plaintext highlighter-rouge">Gene Symbols</code></li>
+        <li>MGIBatchReport_Qtl_Subset.txt to <code class="language-plaintext highlighter-rouge">QTL</code></li>
+        <li>HOM_MouseHumanSequence.rpt to <code class="language-plaintext highlighter-rouge">Homolog groups</code></li>
+        <li>nextprot_asbtraction.ttl to <code class="language-plaintext highlighter-rouge">neXtProt abstraction</code></li>
+      </ul>
+    </li>
+    <li>Check every datatype.
+      <ul>
+        <li>DE results: <code class="language-plaintext highlighter-rouge">tabular</code></li>
+        <li>Mus musculus annotation: <code class="language-plaintext highlighter-rouge">gff</code></li>
+        <li>Gene Symbol: <code class="language-plaintext highlighter-rouge">tabular</code></li>
+        <li>QTL: <code class="language-plaintext highlighter-rouge">tabular</code></li>
+        <li>Homolog groups: <code class="language-plaintext highlighter-rouge">tabular</code></li>
+        <li>neXtprot abstraction: <code class="language-plaintext highlighter-rouge">ttl</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>If the datatypes are wrong, please change it.</p>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+    <ul>
+      <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+      <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+      <li>Select ``</li>
+      <li>Click the <strong>Change datatype</strong> button</li>
+    </ul>
+  </blockquote>
+
+</blockquote>
+
+<p>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon and take a look at the uploaded files.</p>
+
+<p>Two step are necessary to get our data converted into RDF triples. The first step is to upload the <span class="notranslate">Galaxy</span> datasets into the AskOmics server. The second step is to integrate the uploaded data into the RDF triplestore.</p>
+
+<h1 id="upload-inputs-into-askomics">Upload inputs into AskOmics</h1>
+
+<p>We will first launch an AskOmics interactive tool, and upload the data into it.</p>
+
+<h2 id="launch-askomics-interactive-tool">Launch AskOmics Interactive Tool</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-launch-askomics-it"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch AskOmics IT</h3>
+  <ol>
+    <li><strong>AskOmics</strong> a visual SPARQL query builder <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to launch the Interactive Tool
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Datasets to load into AskOmics”</em>: <code class="language-plaintext highlighter-rouge">DE results</code>, <code class="language-plaintext highlighter-rouge">Mus musculus annotation</code>, <code class="language-plaintext highlighter-rouge">Gene Symbols</code>, <code class="language-plaintext highlighter-rouge">QTL</code>, <code class="language-plaintext highlighter-rouge">Homolog groups</code> and <code class="language-plaintext highlighter-rouge">neXtProt abstraction</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Wait for AskOmics to be ready to use: click on the <strong>view</strong> link when it appears.</p>
+
+<figure id="figure-1"><img src="images/home.png" alt="home page" /><figcaption><span class="figcaption-prefix">Figure 1:</span> AskOmics home page</figcaption></figure>
+
+<p>Once the Interactive Tool is launched, AskOmics display the start page. You can see that there is no data available yet. It’s because data needs to be integrated. It the next step.</p>
+
+<h1 id="integrate-input-files-to-askomics">Integrate input files to AskOmics</h1>
+
+<p>AskOmics conversion into RDF is called <em>integration</em>.
+<!-- TODO what is integration? choose which data to load from each dataset, and how they are connected to other datasets --></p>
+
+<p>On the <strong>Files</strong> page, you will see the uploaded files. We will integrate all the file.</p>
+
+<figure id="figure-2"><img src="images/files.png" alt="files page" /><figcaption><span class="figcaption-prefix">Figure 2:</span> AskOmics files page</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate data</h3>
+  <ol>
+    <li><strong>Files</strong> page, select all the input files</li>
+    <li><strong>Integrate</strong></li>
+  </ol>
+</blockquote>
+
+<p>The <strong>Integrate</strong> page shows a preview of the data present in the file depending of the data type.</p>
+
+<h2 id="integrate-gff-files">Integrate GFF files</h2>
+
+<!-- TODO what is an entity in a gff file? how do we choose? -->
+<p>The GFF preview shows the entities that the file contain. We can select the entities we want to be integrated.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-mus-musculus-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">Mus musculus annotation</code></h3>
+  <ol>
+    <li>Search for <code class="language-plaintext highlighter-rouge">Mus musculus annotation (preview)</code></li>
+    <li>Select <code class="language-plaintext highlighter-rouge">gene</code> and <code class="language-plaintext highlighter-rouge">m<span class="notranslate">RNA</span></code></li>
+    <li><strong>Integrate (private dataset)</strong></li>
+  </ol>
+  <figure id="figure-3"><img src="images/mus_musculus_annotation_preview.png" alt="mus musculus annotation preview" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Mus musculus annotation preview</figcaption></figure>
+</blockquote>
+
+<h2 id="integration-of-tabular-tsv-files">Integration of tabular (TSV) files</h2>
+
+<p>The TSV preview show an HTML table representing the TSV file. During integration, AskOmics will convert the file using the header.</p>
+
+<!-- First col: entity, then, attribute -->
+<p>The first column of a TSV file will be the <em>entity</em> name. Other columns of the file will be <em>attributes</em> of the <em>entity</em>. <em>Labels</em> of the <em>entity</em> and <em>attributes</em> will be set by the header. This <em>labels</em> can be edited by clicking on it.</p>
+
+<!-- Attribute types -->
+<p>Entity and attributes can have special types. The types are defined with the select below the header. An <em>entity</em> can be a <em>start entity</em> or an <em>entity</em>. A <em>start entity</em> mean that the entity may be used to start a query.</p>
+
+<p>Attributes can take the following types:</p>
+<ul>
+  <li>Numeric: if all the values are numeric</li>
+  <li>Text: if all the values are strings</li>
+  <li>Category: if there is a limited number of repeated values</li>
+</ul>
+
+<p>If the entity describe a locatable element on a genome:</p>
+<ul>
+  <li>Reference: chromosome</li>
+  <li>Strand: strand</li>
+  <li>Start: start position</li>
+  <li>End: end position</li>
+</ul>
+
+<!-- Relation -->
+<p>A columns can also be a relation between the <em>entity</em> to another. In this case, the header have to be <code class="language-plaintext highlighter-rouge">relationName@TargetedEntity</code> and the type <em>Directed</em> or <em>Symmetric</em> relation. a <em>Directed</em> relation is a relation from this entity to the targeted one. A <em>Symetric relation</em> is a relation on both directions.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-de-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">DE results</code></h3>
+  <ol>
+    <li>Search for <code class="language-plaintext highlighter-rouge">DE results (preview)</code></li>
+    <li>Edit attribute names and types:
+      <ul>
+        <li>change <code class="language-plaintext highlighter-rouge">ENTREZ ID</code> to <code class="language-plaintext highlighter-rouge">Differential <span class="notranslate">Expression</span></code> and set type to <em>start entity</em></li>
+        <li>change <code class="language-plaintext highlighter-rouge">SYMBOL</code> to <code class="language-plaintext highlighter-rouge">linkedTo@Gene Symbol</code> and set type to <em>Symmetric relation</em></li>
+        <li>change <code class="language-plaintext highlighter-rouge">GENENAME</code> to <code class="language-plaintext highlighter-rouge">name</code> and set type to <em>text</em></li>
+        <li>Keep the other column names and set their types to <em>numeric</em></li>
+      </ul>
+    </li>
+    <li><strong>Integrate (private dataset)</strong></li>
+  </ol>
+  <figure id="figure-4"><img src="images/de_results_preview.png" alt="De results preview" /><figcaption><span class="figcaption-prefix">Figure 4:</span> DE results preview</figcaption></figure>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-gene-symbols"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">Gene symbols</code></h3>
+  <ol>
+    <li>Search for <code class="language-plaintext highlighter-rouge">Gene symbols (preview)</code></li>
+    <li>Edit attribute names and types:
+      <ul>
+        <li>change <code class="language-plaintext highlighter-rouge">symbol</code> to <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and set type to <em>entity</em></li>
+        <li>change <code class="language-plaintext highlighter-rouge">ensembl</code> to <code class="language-plaintext highlighter-rouge">linkedTo@gene</code> and set type to <em>Symmetric relation</em></li>
+      </ul>
+    </li>
+    <li><strong>Integrate (private dataset)</strong></li>
+  </ol>
+  <figure id="figure-5"><img src="images/symbol_to_ensembl_preview.png" alt="Gene symbols preview" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Symbol to Ensembl preview</figcaption></figure>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-qtl"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">QTL</code></h3>
+  <ol>
+    <li>Search for <code class="language-plaintext highlighter-rouge">QTL (preview)</code></li>
+    <li>Edit attribute names and types:
+      <ul>
+        <li>change <code class="language-plaintext highlighter-rouge">Input</code> to <code class="language-plaintext highlighter-rouge">QTL</code> and set type to <em>start entity</em></li>
+        <li>set <code class="language-plaintext highlighter-rouge">Chr</code> type to <em>Reference</em></li>
+        <li>set <code class="language-plaintext highlighter-rouge">Start</code> type to <em>Start</em></li>
+        <li>set <code class="language-plaintext highlighter-rouge">End</code> type to <em>End</em></li>
+      </ul>
+    </li>
+    <li><strong>Integrate (private dataset)</strong></li>
+  </ol>
+  <figure id="figure-6"><img src="images/qtl_preview.png" alt="QTL preview" /><figcaption><span class="figcaption-prefix">Figure 6:</span> QTL preview</figcaption></figure>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-homolog-groups"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">Homolog groups</code></h3>
+  <ol>
+    <li>Search for <code class="language-plaintext highlighter-rouge">Homolog groups (preview)</code></li>
+    <li>Edit attribute names and types:
+      <ul>
+        <li>change <code class="language-plaintext highlighter-rouge">HomoloGene ID</code> to <code class="language-plaintext highlighter-rouge">Homolog Group</code> and set type to <em>start entity</em></li>
+        <li>set <code class="language-plaintext highlighter-rouge">Common Organism Name</code>  type to <em>category</em></li>
+        <li>set <code class="language-plaintext highlighter-rouge">Chr</code> type to <em>Reference</em></li>
+        <li>change <code class="language-plaintext highlighter-rouge">Symbol</code> to <code class="language-plaintext highlighter-rouge">linkedTo@Gene Symbol</code> and set type to <em>Directed relation</em></li>
+        <li>Keep the other column names and set their types to <em>text</em></li>
+      </ul>
+    </li>
+    <li><strong>Integrate (private dataset)</strong></li>
+  </ol>
+  <figure id="figure-7"><img src="images/homolog_groups.png" alt="Homolog groups preview" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Homolog groups preview</figcaption></figure>
+</blockquote>
+
+<h2 id="integration-of-rdf-files">Integration of RDF files</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-integrate-nextprot-abstraction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">neXtProt abstraction</code></h3>
+  <ol>
+    <li>Search for <code class="language-plaintext highlighter-rouge">neXtProt abstraction (preview)</code></li>
+    <li>Check that Distant endpoint is <code class="language-plaintext highlighter-rouge">https://sparql.nextprot.org/sparql</code> in advanced options</li>
+    <li><strong>Integrate (private dataset)</strong></li>
+  </ol>
+  <figure id="figure-8"><img src="images/nextprot_abstraction_preview.png" alt="neXtProt abstraction preview" /><figcaption><span class="figcaption-prefix">Figure 8:</span> neXtProt abstraction preview</figcaption></figure>
+</blockquote>
+
+<h2 id="monitor-integration">Monitor integration</h2>
+
+<p>Integration can take some times depending on the file size. The <strong>Datasets</strong> page show the progress.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-track-integration-progress"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: track integration progress</h3>
+  <ol>
+    <li>Go to <strong>Dataset</strong> page</li>
+    <li>Wait for all datasets to be <em>success</em></li>
+  </ol>
+  <figure id="figure-9"><img src="images/datasets.png" alt="dataset" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Datasets table</figcaption></figure>
+</blockquote>
+
+<h1 id="query">Query</h1>
+
+<p>Once all the data of interest is integrated (converted to RDF graphs), its time to query them. Querying RDF data is done by using the SPARQL language. Fortunately, AskOmics provides a user-friendly interface to build SPARQL queries without having to learn the SPARQL language.</p>
+
+<h2 id="query-builder-overview">Query builder overview</h2>
+
+<h3 id="simple-query">Simple query</h3>
+
+<p>The first step to build a query is to choose a start point for the query.</p>
+
+<figure id="figure-10"><img src="images/ask.png" alt="ask" /><figcaption><span class="figcaption-prefix">Figure 10:</span> ask page</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-start-a-query"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Start a query</h3>
+  <ol>
+    <li>Go to <strong>Ask!</strong> page</li>
+    <li>Select the <em>Differential <span class="notranslate">Expression</span></em> entity</li>
+    <li><strong>Start!</strong></li>
+  </ol>
+</blockquote>
+
+<p>Once the start entity is chosen, the query builder is displayed.</p>
+
+<p>The query builder is composed of a graph. Nodes represents <em>entities</em> and links represents <em>relations</em> between entities. The selected entity is surrounded by a red circle. links and other entities are dotted and lighter because there are not instantiated.</p>
+
+<figure id="figure-11"><img src="images/query_builder.png" alt="query builder" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Query builder, Differential <span class="notranslate">Expression</span> is the selected entity, Gene Symbol is a suggested entity</figcaption></figure>
+
+<p>On the right, attributes of the selected entity are displayed as attribute boxes. Each boxes have an eye icon. Open eye mean the attribute will be displayed on the results.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-ask-for-all-differential-expression-and-display-some-attributes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Ask for all Differential <span class="notranslate">Expression</span> and display some attributes</h3>
+  <ol>
+    <li>Display <code class="language-plaintext highlighter-rouge">logFC</code> and <code class="language-plaintext highlighter-rouge">adj.P.val</code> by clicking on the eye icon</li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+</blockquote>
+
+<p><strong>Run &amp; preview</strong> launch the query with a limit of 30 rows returned. We use this button to get an idea of the results returned.</p>
+
+<h3 id="filter-on-attributes">Filter on attributes</h3>
+
+<p>Next query will search for all over-expressed genes. Genes are considered over-expressed if the log fold change is &gt; 2. We are oly interested by  significant results (Adj P value ≤ 0.05)</p>
+
+<p>Back to the query builder,</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-attributes-to-get-significant-over-expressed-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter attributes to get significant over-expressed genes</h3>
+  <ol>
+    <li>Filter <code class="language-plaintext highlighter-rouge">logFC</code> with <code class="language-plaintext highlighter-rouge">&gt; 2</code></li>
+    <li>Filter <code class="language-plaintext highlighter-rouge">adj.P.val</code> with <code class="language-plaintext highlighter-rouge">≤ 0.05</code></li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+</blockquote>
+
+<p>The preview show only significantly over-expressed genes.</p>
+
+<h3 id="filter-on-relations">Filter on relations</h3>
+
+<p>now that we have our genes if interest, we will link these genes to the reference genome to get information about location.</p>
+
+<p>To constraint on relation, we have to click on suggested nodes, linked to our entity of interest.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-link-de-results-to-gene-using-gene-symbol"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Link <code class="language-plaintext highlighter-rouge">De results</code> to <code class="language-plaintext highlighter-rouge">gene</code> using <code class="language-plaintext highlighter-rouge">Gene Symbol</code></h3>
+  <ol>
+    <li>First, hide <code class="language-plaintext highlighter-rouge">Label</code>, <code class="language-plaintext highlighter-rouge">logFC</code> and <code class="language-plaintext highlighter-rouge">adj.P.val</code> of <code class="language-plaintext highlighter-rouge">Differential <span class="notranslate">Expression</span></code> using the eye icon</li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">Gene Symbol</code> by clicking on the suggested node, and hide his <code class="language-plaintext highlighter-rouge">Label</code> using the eye icon</li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">gene</code> by clicking on the <code class="language-plaintext highlighter-rouge">gene</code> node</li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+  <figure id="figure-12"><img src="images/preview_results.png" alt="preview results" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Results preview</figcaption></figure>
+</blockquote>
+
+<p>Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the <code class="language-plaintext highlighter-rouge">gene</code> entity containing on the GFF file. for example, we can filter on chromosome and display chromosome and strand to get information about gene location.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <code class="language-plaintext highlighter-rouge">gene</code></h3>
+  <ol>
+    <li>Show <code class="language-plaintext highlighter-rouge">reference</code> and <code class="language-plaintext highlighter-rouge">strand</code> using the eye icon</li>
+    <li>Filter <code class="language-plaintext highlighter-rouge">reference</code> by selecting <code class="language-plaintext highlighter-rouge">X</code> and <code class="language-plaintext highlighter-rouge">Y</code> chromosomes (use <code class="language-plaintext highlighter-rouge">ctrl</code>+<code class="language-plaintext highlighter-rouge">click</code> to multiple selection)</li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+</blockquote>
+
+<h3 id="use-faldo-ontology-to-query-on-the-position-of-elements-on-the-genome">Use FALDO ontology to query on the position of elements on the genome.</h3>
+
+<p>The <a href="https://bioportal.bioontology.org/ontologies/FALDO">FALDO</a> ontology describe sequence feature positions and regions. AskOmics use FALDO ontology to represent entity positions. GFF are using FALDO, as well as TSV entities with chromosome, strand, start and end.</p>
+
+<p>The FALDO ontology are used in AskOmics to perform special queries between 2 FALDO entities. These queries are:</p>
+
+<ul>
+  <li>Entity included in another entity</li>
+  <li>Entity overlapping another one</li>
+</ul>
+
+<p>On the query builder interface, FALDO entities are represented with a green circle and FALDO relations have a green arrow.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-gene-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <code class="language-plaintext highlighter-rouge">gene</code></h3>
+  <ol>
+    <li>First, remove the reference filter (unselect <code class="language-plaintext highlighter-rouge">X</code> and <code class="language-plaintext highlighter-rouge">Y</code> using <code class="language-plaintext highlighter-rouge">ctrl</code>+<code class="language-plaintext highlighter-rouge">click</code>)</li>
+    <li>Hide <code class="language-plaintext highlighter-rouge">reference</code> <code class="language-plaintext highlighter-rouge">strand</code> using the eye</li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">QTL</code></li>
+    <li>Click on the link between <code class="language-plaintext highlighter-rouge">gene</code> and <code class="language-plaintext highlighter-rouge">QTL</code> to edit the relation</li>
+    <li>check that the relation is <code class="language-plaintext highlighter-rouge">gene</code> <code class="language-plaintext highlighter-rouge">included in</code> <code class="language-plaintext highlighter-rouge">QTL</code> <code class="language-plaintext highlighter-rouge">on the same reference</code> with <code class="language-plaintext highlighter-rouge">strict</code> ticked</li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+  <figure id="figure-13"><img src="images/query_builder_position.png" alt="FALDO query" /><figcaption><span class="figcaption-prefix">Figure 13:</span> FALDO query</figcaption></figure>
+</blockquote>
+
+<p>To go further, we can filter on <code class="language-plaintext highlighter-rouge">QTL</code> to refine the results.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filter-gene-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <code class="language-plaintext highlighter-rouge">gene</code></h3>
+  <ol>
+    <li>go back to the <code class="language-plaintext highlighter-rouge">QTL</code> node</li>
+    <li>Show the <code class="language-plaintext highlighter-rouge">Name</code> attribute using the eye icon</li>
+    <li>Filter the name with a <code class="language-plaintext highlighter-rouge">regexp</code> with <code class="language-plaintext highlighter-rouge">growth</code></li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+</blockquote>
+
+<p>From now, our query is “All Genes that are over-expressed (logFC &gt; 2 and FDR ≤ 0.05) and located on a QTL that is related to growth” We can save this results with the <em>Run &amp; save</em> button.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-save-a-result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Save a result</h3>
+  <ol>
+    <li><strong>Run &amp; save</strong></li>
+  </ol>
+</blockquote>
+
+<h3 id="use-nextprot-distant-data-to-refine-results">Use neXtProt distant data to refine results</h3>
+
+<p><a href="https://nextprot.org">neXtProt</a> is a comprehensive human-centric discovery platform, offering its users a seamless integration of and navigation through protein-related data. It offer a <a href="https://sparql.nextprot.org/sparql">SPARQL endpoint</a> that can be interrogated with AskOmics.</p>
+
+<p>Since we added the neXtProt abstraction into our AskOmics instance, we can link our data to neXtProt.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-find-human-homolog-genes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Find human homolog genes</h3>
+  <ol>
+    <li>Go back to the <code class="language-plaintext highlighter-rouge">gene</code> node</li>
+    <li>instantiate <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and hide his <code class="language-plaintext highlighter-rouge">Label</code></li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">Homolog Group</code>, hide his label and filter his <code class="language-plaintext highlighter-rouge">Common Organism Name</code> with <code class="language-plaintext highlighter-rouge">human</code></li>
+  </ol>
+  <figure id="figure-14"><img src="images/filter_organism_name.png" alt="Organism name filter" /><figcaption><span class="figcaption-prefix">Figure 14:</span> Organism name filter</figcaption></figure>
+  <ol>
+    <li>Instantiate another <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and hide his <code class="language-plaintext highlighter-rouge">Label</code></li>
+    <li>Finally, follow the <code class="language-plaintext highlighter-rouge">to neXtProt Gene</code> link and instantiate <code class="language-plaintext highlighter-rouge">Gene</code></li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+</blockquote>
+
+<p>The query we’ve just built asks for the human homologs of our over-expressed genes. We use the <code class="language-plaintext highlighter-rouge">Gene Symbol</code> to get information from the neXtProt database. AskOmics convert the query into small SPARQL subquery and send them into the local data and the neXtProt endpoint.</p>
+
+<p>Now we are linked to the neXtProt database, we can obtain information about the proteins encoded by these genes, as well as their location in the cell.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-get-the-protein-and-their-location"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the protein and their location</h3>
+  <ol>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">Entry</code></li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">Isoform</code> and hide the <code class="language-plaintext highlighter-rouge">Label</code></li>
+    <li>Many nodes are connected to <code class="language-plaintext highlighter-rouge">Isoform</code>. Use the <em>Filter links</em> field to get only node that are linked with a link named <code class="language-plaintext highlighter-rouge">location</code></li>
+  </ol>
+  <figure id="figure-15"><img src="images/filter_links.png" alt="Filter links" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Filter links</figcaption></figure>
+  <ol>
+    <li>Instantiate the <code class="language-plaintext highlighter-rouge">Subcellular Location</code> node and hide <code class="language-plaintext highlighter-rouge">Label</code></li>
+    <li>Use the <em>Filter node</em> field to filter nodes that a named <code class="language-plaintext highlighter-rouge">Location</code></li>
+    <li>Instantiate <code class="language-plaintext highlighter-rouge">Uniprot subcellular Location CV</code> (you can use the node filter)</li>
+    <li><strong>Run &amp; preview</strong></li>
+  </ol>
+</blockquote>
+
+<p>Finally, our query is “All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the protein coded by this genes”. We will save it to the results.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-save-a-result-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Save a result</h3>
+  <ol>
+    <li><strong>Run &amp; save</strong></li>
+  </ol>
+</blockquote>
+
+<h2 id="results-management">Results management</h2>
+
+<p>The results page display the saved queries. Queries are sorted by the most recently. At the end of the table, action button can be used to preview the result, download or send it to <span class="notranslate">Galaxy</span> history.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-edit-query-name"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Edit query name</h3>
+  <ol>
+    <li>Go to the <em>Results</em> page</li>
+    <li>Use the <em>Preview</em> button to check the result</li>
+    <li>Click on the name to rename the two query with <code class="language-plaintext highlighter-rouge">Over-expressed genes on a growth QTL</code> and <code class="language-plaintext highlighter-rouge">Over-expressed genes on a growth QTL, their human homologs and protein location</code> (press enter key to validate)</li>
+  </ol>
+</blockquote>
+
+<figure id="figure-16"><img src="images/results_table.png" alt="preview table" /><figcaption><span class="figcaption-prefix">Figure 16:</span> Results table</figcaption></figure>
+
+<p>The <strong>Action</strong> column contain button to perform certain action:</p>
+
+<ul>
+  <li>Preview: show a results preview on the bottom of the table</li>
+  <li>Download: Download the results (TSV file)</li>
+  <li>Edit: Edit the query with the query builder</li>
+  <li>SPARQL: edit the query with a SPARQL editor for advanced users</li>
+  <li>Send results to <span class="notranslate">Galaxy</span>: send the results (TSV file) to the most recently used <span class="notranslate">Galaxy</span> history</li>
+  <li>Send query to <span class="notranslate">Galaxy</span>: send the query representation (json file) to the most recently used <span class="notranslate">Galaxy</span> history</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-send-results-to-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Send results to <span class="notranslate">Galaxy</span></h3>
+  <ol>
+    <li>Click on <strong>Send results to <span class="notranslate">Galaxy</span></strong> on each query to send them to the last used <span class="notranslate">Galaxy</span> history</li>
+    <li>Get back to <span class="notranslate">galaxy</span> and wait for the dataset (reload if needed)</li>
+  </ol>
+</blockquote>
+
+<figure id="figure-17"><img src="images/galaxy_history_results.png" alt="history results" /><figcaption><span class="figcaption-prefix">Figure 17:</span> <span class="notranslate">Galaxy</span> history with the two results</figcaption></figure>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial we have seen how to use AskOmics Interactive Tool. We launch the tools with a set of input files, then we have integrated this file into RDF and finally, we build complex queries over this local datasets and neXtProt to answer a biological question.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>AskOmics helps to integrate multiple data sources into an RDF database without prior knowledge in the Semantic Web</p>
+</li>
+                            
+                            <li><p>It can also be connected to external SPARQL endpoit, such as <a href="https://nextprot.org">neXtProt</a></p>
+</li>
+                            
+                            <li><p>AskOmics helps to perform complex SPARQL queries without knowing SPARQL using a user-friendly interface</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/transcriptomics#references">here</a>.</p>
+                    
+
+                    
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Xavier Garnier, 2020 <b>RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html">/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{transcriptomics-rna-seq-analysis-with-askomics-it,
+    author = "Xavier Garnier",
+    title = "RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)",
+    year = "2020",
+    month = "07",
+    day = "09"
+    url = "\url{/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+
+        <hr>
+        <br>
+
+        <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=RNA-Seq analysis with AskOmics Interactive Tool (Transcriptomics)">Loading...
+        </iframe>
+
+        <blockquote class="feedback">
+            <h3><i class="far fa-comments" aria-hidden="true"></i><span class="visually-hidden">feedback</span> Give us even more feedback on this content!</h3>
+            <p>To give us more detailed feedback about these materials, please take a moment to fill in the extended <a href="https://docs.google.com/forms/d/e/1FAIpQLSc_GLZRpxZGAL9tN6DA1bE6WkNhmQdXT7B16TpOb-X4YwKUsQ/viewform?entry.1548889262=RNA-Seq analysis with AskOmics Interactive Tool (Transcriptomics)">Feedback Form</a>.</p>
+        </blockquote>
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Xavier Garnier)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
