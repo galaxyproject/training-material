@@ -333,12 +333,20 @@
     {
       "@type": "Person",
       "name": "Xavier Garnier"
+    },
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Xavier Garnier"
+    },
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
     }
   ],
   "about": [
@@ -365,7 +373,7 @@
 
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame/xgaia/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xgaia" alt="Xavier Garnier">Xavier Garnier</a>
+<a href="/training-material/hall-of-fame/xgaia/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xgaia" alt="Xavier Garnier">Xavier Garnier</a>, <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/abretaud" alt="Anthony Bretaudeau">Anthony Bretaudeau</a>
 
 </div>
 
@@ -612,26 +620,30 @@
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <!-- AskOmics intro -->
-<p>AskOmics is a web application for data integration and query using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and <span class="notranslate">BED</span> annotation) into RDF triples, and perform complex queries using a user-friendly interface.
-During the integration step, AskOmics builds an RDF description of the data: the <strong>abstraction</strong>. This abstraction is used to explore the data and build the query.
-AskOmics can also integrate <strong>abstraction</strong> of distant endpoint. Abstraction are obtained using <a href="https://github.com/askomics/abstractor">abstractor</a>, a pyhton package to generatre RDF abstraction from distant endpoint.
-The query builder interface is used to create a path through the <strong>abstraction</strong> of each ressources. The path is converted to a SPARQL query that is sent to the multiple SPARQL endpoint.</p>
+<p>AskOmics is a web application for data integration and querying using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and <span class="notranslate">BED</span> annotation) into “RDF triples” and store them in a specific kind of database: an “RDF triplestore”. Under this form, data can then be queried using a specific language: “SPARQL”. AskOmics hides the complexty of these technologies and and allows to perform complex queries using a user-friendly interface.</p>
 
 <!-- AskOmics for RNA-Seq -->
-<p>AskOmics comes useful for cross-referencing results datasets with various reference data. For example, in <span class="notranslate">RNA</span>-Seq studies, we often need to filter the results on the fold change and the p-value, to get the most significant differentially expressed genes. If you are studying a particular phenotype and already know the position of some QTL associated to this phenotype, you would then want to cross this gene list with the reference annotation of the corresponding genome to get the genes locations. You would also determine which gene is located within a QTL related to the phenotype. Finaly, you would know if these genes have human homologs, and use the neXtProt database to get the location of the proteins coded by the homologs. The whole process involves several tools to parse and manipulate the different data format, and to map datasets on other. AskOmics offer a solution to 1) automatically convert the multiple formats to RDF, 2) use a user-friendly interface to perform complex SPARQL queries on the RDF datasets to find the genes you are interested in, and 3) connect exte<span class="notranslate">rna</span>l SPARQL databases and link exte<span class="notranslate">rna</span>l data with your own.</p>
+<p>AskOmics comes useful for cross-referencing results datasets with various reference data. For example, in <span class="notranslate">RNA</span>-Seq studies, we often need to filter the results on the fold change and the p-value, to get the most significant differentially expressed genes. If you are studying a particular phenotype and already know the position of some QTL associated to this phenotype, you would then want to find the positions of the differentially expressed genes and determine which gene is located within one of those QTL. Finally, you would want to know if these genes have human homologs, and use the neXtProt database to get the location of the proteins coded by the homologs. The whole process involves several tools to parse and manipulate the different data format, and to map datasets on each other. AskOmics offer a solution to 1) automatically convert the multiple formats to RDF, 2) use a user-friendly interface to perform complex SPARQL queries on the RDF datasets to find the genes you are interested in, and 3) connect exte<span class="notranslate">rna</span>l SPARQL databases and link exte<span class="notranslate">rna</span>l data with your own.</p>
 
 <!-- The data -->
-<p>In this tutorial, we will use results from a differential <span class="notranslate">expression</span> analysis. This file is provided for you below. You could also generate the file yourself, by following the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-Seq counts to gene tutorial</a>. The file used here was generated from limma-voom but you could use a file from any <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tool, such as edgeR or DESeq2, as long as it has the required columns (see below).</p>
+<p>In this tutorial, we will use results from a differential <span class="notranslate">expression</span> analysis. This file is provided for you below. You could also generate the file yourself, by following the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html"><span class="notranslate">RNA</span>-Seq counts to gene tutorial</a>. The file used here was generated from limma-voom but you could use a file from any <span class="notranslate">RNA</span>-seq differential <span class="notranslate">expression</span> tool, such as edgeR or DESeq2, as long as it contains the required columns (see below).</p>
 
-<p>The differentially expressed results will be linked to the mouse genome annotation, in general feature format (GFF). The file provided is a subset of the mouse annotation (GRCm38.p6) obtained from <a href="http://www.ensembl.org/Mus_musculus/Info/Index">Ensembl</a>.</p>
+<p>The differentially expressed results will be linked to the official mouse genome annotation, in general feature format (GFF). The file provided is a subset of the mouse annotation (GRCm38.p6) obtained from <a href="http://www.ensembl.org/Mus_musculus/Info/Index">Ensembl</a>.</p>
 
 <p>We will use a file containing quantitative trait loci (QTL) information, to find if our differentially expressed genes are located inside a known QTL. This file is a subset of a query performed on <a href="http://www.informatics.jax.org">Mouse Genome Informatics</a>.</p>
 
-<p>A file from containing all homologies between mouse and human will be used to get the human homolog genes. This file is provided by <a href="http://www.informatics.jax.org/downloads/reports/index.html#homology">MGI</a>.</p>
+<p>A file containing all homologies between mouse and human will be used to get the human homolog genes. This file is provided by <a href="http://www.informatics.jax.org/downloads/reports/index.html#homology">MGI</a>.</p>
 
-<p>To link the human gene with neXtProt database, we will use the RDF abstraction of neXtProt. This file was obtained using <a href="https://github.com/askomics/abstractor">abstractor</a> tool.</p>
+<p>In the differentially expressed file, and the homologs file, gene are described by a symbol (e.g. Pwgrq10). However, in the annotation file and neXtProt database, gene are represented by Ensembl id (e.g. ENSMUSG00000025969). To link the 2 datasets, we will need a file to map the gene symbol with Ensembl id. This file provided for you was previously generated with an AskOmics query on the mouse annotation file and the homolog file.</p>
 
-<p>In the differentially expressed file, and the homologs file, gene are described by a symbol. However, in the annotation file and neXtProt database, gene are represented by Ensembl id. To link the 2 datasets, we will need a file to map the gene symbol with Ensembl id. This file provided for you was previously generated with an AskOmics query on the mouse annotation file and the homolog file.</p>
+<p>To link the human gene with neXtProt database, we will use the RDF abstraction of neXtProt. This file was obtained using the <a href="https://github.com/askomics/abstractor">Abstractor</a> tool.</p>
+
+<blockquote class="details">
+  <h3 id="details-abstraction"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Abstraction</h3>
+  <p>During the integration step, AskOmics builds an RDF description of the data: the <strong>abstraction</strong>. This abstraction is used to explore the data and build the query.
+AskOmics can also integrate <strong>abstraction</strong> of distant endpoint. Abstraction are obtained using <a href="https://github.com/askomics/abstractor">abstractor</a>, a python package to generate RDF abstractions from distant endpoints.
+The query builder interface is used to create a path through the <strong>abstraction</strong> of each ressources. The path is converted to a SPARQL query that is sent to the multiple SPARQL endpoint.</p>
+</blockquote>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -647,7 +659,7 @@ The query builder interface is used to create a path through the <strong>abstrac
       <li><a href="#launch-askomics-interactive-tool" id="markdown-toc-launch-askomics-interactive-tool">Launch AskOmics Interactive Tool</a></li>
     </ol>
   </li>
-  <li><a href="#integrate-input-files-to-askomics" id="markdown-toc-integrate-input-files-to-askomics">Integrate input files to AskOmics</a>    <ol>
+  <li><a href="#integrate-input-files-into-askomics" id="markdown-toc-integrate-input-files-into-askomics">Integrate input files into AskOmics</a>    <ol>
       <li><a href="#integrate-gff-files" id="markdown-toc-integrate-gff-files">Integrate GFF files</a></li>
       <li><a href="#integration-of-tabular-tsv-files" id="markdown-toc-integration-of-tabular-tsv-files">Integration of tabular (TSV) files</a></li>
       <li><a href="#integration-of-rdf-files" id="markdown-toc-integration-of-rdf-files">Integration of RDF files</a></li>
@@ -670,10 +682,10 @@ The query builder interface is used to create a path through the <strong>abstrac
 <ul>
   <li><strong>Differentially expressed results file</strong> (genes in rows, and 4 required columns: identifier (ENTREZID), gene symbol (SYMBOL), log fold change (logFC) and adjusted P values (adj.P.Val))</li>
   <li><strong>Reference genome annotation file</strong> (in GFF format)</li>
-  <li><strong>QTL file</strong> (QTL in row, with 5 required columns: identifier, chromosome, start, end and name)</li>
+  <li><strong>QTL file</strong> (QTL in rows, with 5 required columns: identifier, chromosome, start, end and name)</li>
   <li><strong>Homolog file</strong> (TSV of 13 columns including homolog id, organism name and gene symbol)</li>
-  <li><strong>neXtProt abstraction</strong> (RDF data description of neXtProt database in turtle format)</li>
   <li><strong>Correspondence file between gene symbol and Ensembl id</strong> (TSV of 3 columns: symbol, the corresponding Ensembl id (mouse and human)</li>
+  <li><strong>neXtProt abstraction</strong> (RDF data description of neXtProt database in turtle format)</li>
 </ul>
 
 <h2 id="import-data">Import data</h2>
@@ -837,60 +849,61 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 
 <figure id="figure-1"><img src="images/home.png" alt="home page" /><figcaption><span class="figcaption-prefix">Figure 1:</span> AskOmics home page</figcaption></figure>
 
-<p>Once the Interactive Tool is launched, AskOmics display the start page. You can see that there is no data available yet. It’s because data needs to be integrated. It the next step.</p>
+<p>Once the Interactive Tool is launched, AskOmics displays the start page. You can see that there is no data available yet. It’s because data needs to be integrated: it is the next step.</p>
 
-<h1 id="integrate-input-files-to-askomics">Integrate input files to AskOmics</h1>
+<h1 id="integrate-input-files-into-askomics">Integrate input files into AskOmics</h1>
 
-<p>AskOmics conversion into RDF is called <em>integration</em>.
-<!-- TODO what is integration? choose which data to load from each dataset, and how they are connected to other datasets --></p>
+<p>AskOmics conversion into RDF is called <em>integration</em>.</p>
 
-<p>On the <strong>Files</strong> page, you will see the uploaded files. We will integrate all the file.</p>
-
-<figure id="figure-2"><img src="images/files.png" alt="files page" /><figcaption><span class="figcaption-prefix">Figure 2:</span> AskOmics files page</figcaption></figure>
+<p>On the <strong>Files</strong> page (link at the top of the page), you will see the files you uploaded from <span class="notranslate">Galaxy</span>. We will now integrate all these files.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-integrate-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate data</h3>
   <ol>
-    <li><strong>Files</strong> page, select all the input files</li>
-    <li><strong>Integrate</strong></li>
+    <li>Got to the <strong>Files</strong> page</li>
+    <li>Select all the input files</li>
+    <li>Click on the <strong>Integrate</strong> button</li>
   </ol>
 </blockquote>
 
-<p>The <strong>Integrate</strong> page shows a preview of the data present in the file depending of the data type.</p>
+<figure id="figure-2"><img src="images/files.png" alt="files page" /><figcaption><span class="figcaption-prefix">Figure 2:</span> AskOmics files page</figcaption></figure>
+
+<p>You will land on the <strong>Integrate</strong> page that shows a preview of the data present in each selected file, depending of its data type.</p>
 
 <h2 id="integrate-gff-files">Integrate GFF files</h2>
 
-<!-- TODO what is an entity in a gff file? how do we choose? -->
-<p>The GFF preview shows the entities that the file contain. We can select the entities we want to be integrated.</p>
+<p>The GFF preview shows the entities that the file contains. We need to select the entities we want to be integrated.</p>
+
+<p>The <code class="language-plaintext highlighter-rouge">Mus musculus annotation</code> file we’re using contains gene and m<span class="notranslate">RNA</span> entities, and we will need both in the rest of the tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-integrate-mus-musculus-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">Mus musculus annotation</code></h3>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">Mus musculus annotation (preview)</code></li>
     <li>Select <code class="language-plaintext highlighter-rouge">gene</code> and <code class="language-plaintext highlighter-rouge">m<span class="notranslate">RNA</span></code></li>
-    <li><strong>Integrate (private dataset)</strong></li>
+    <li>Click on the <strong>Integrate (private dataset)</strong> button</li>
   </ol>
   <figure id="figure-3"><img src="images/mus_musculus_annotation_preview.png" alt="mus musculus annotation preview" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Mus musculus annotation preview</figcaption></figure>
 </blockquote>
 
 <h2 id="integration-of-tabular-tsv-files">Integration of tabular (TSV) files</h2>
 
-<p>The TSV preview show an HTML table representing the TSV file. During integration, AskOmics will convert the file using the header.</p>
+<p>The TSV preview shows an HTML table representing the first lines of the TSV file. During integration, AskOmics will convert the file using the header.</p>
 
 <!-- First col: entity, then, attribute -->
-<p>The first column of a TSV file will be the <em>entity</em> name. Other columns of the file will be <em>attributes</em> of the <em>entity</em>. <em>Labels</em> of the <em>entity</em> and <em>attributes</em> will be set by the header. This <em>labels</em> can be edited by clicking on it.</p>
+<p>The first column of a TSV file will be the <em>entity</em> name. Other columns of the file will be <em>attributes</em> of the <em>entity</em>. <em>Labels</em> of the <em>entity</em> and <em>attributes</em> will be set by the header. Each <em>label</em> can be edited by clicking on it.</p>
 
 <!-- Attribute types -->
-<p>Entity and attributes can have special types. The types are defined with the select below the header. An <em>entity</em> can be a <em>start entity</em> or an <em>entity</em>. A <em>start entity</em> mean that the entity may be used to start a query.</p>
+<p>Entity and attributes can have special types. The types are defined with the select box below the header. An <em>entity</em> can be a <em>start entity</em> or an <em>entity</em>. A <em>start entity</em> means that the entity may be used to start a query on the AskOmics homepage.</p>
 
 <p>Attributes can take the following types:</p>
 <ul>
-  <li>Numeric: if all the values are numeric</li>
+  <li>Numeric: if all the values of the column are numeric</li>
   <li>Text: if all the values are strings</li>
-  <li>Category: if there is a limited number of repeated values</li>
+  <li>Category: if there is a limited number of repeated values (e.g. ‘green’, ‘yellow’ and ‘red’, each one found in multiple lines)</li>
 </ul>
 
-<p>If the entity describe a locatable element on a genome:</p>
+<p>If the entity describes a locatable element on a genome:</p>
 <ul>
   <li>Reference: chromosome</li>
   <li>Strand: strand</li>
@@ -899,7 +912,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 </ul>
 
 <!-- Relation -->
-<p>A columns can also be a relation between the <em>entity</em> to another. In this case, the header have to be <code class="language-plaintext highlighter-rouge">relationName@TargetedEntity</code> and the type <em>Directed</em> or <em>Symmetric</em> relation. a <em>Directed</em> relation is a relation from this entity to the targeted one. A <em>Symetric relation</em> is a relation on both directions.</p>
+<p>A column can also represent a relation between the <em>entity</em> to another. In this case, the header have to be named <code class="language-plaintext highlighter-rouge">relationName@TargetedEntity</code> and the type <em>Directed</em> or <em>Symetric</em> relation. A <em>Directed</em> relation is a relation from this entity to the targeted one (e.g. A is B’s father, but B is not A’s father). A <em>Symetric relation</em> is a relation that works in both directions (e.g. A loves B, and B loves A).</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-integrate-de-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">DE results</code></h3>
@@ -908,7 +921,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
     <li>Edit attribute names and types:
       <ul>
         <li>change <code class="language-plaintext highlighter-rouge">ENTREZ ID</code> to <code class="language-plaintext highlighter-rouge">Differential <span class="notranslate">Expression</span></code> and set type to <em>start entity</em></li>
-        <li>change <code class="language-plaintext highlighter-rouge">SYMBOL</code> to <code class="language-plaintext highlighter-rouge">linkedTo@Gene Symbol</code> and set type to <em>Symmetric relation</em></li>
+        <li>change <code class="language-plaintext highlighter-rouge">SYMBOL</code> to <code class="language-plaintext highlighter-rouge">linkedTo@Gene Symbol</code> and set type to <em>Symetric relation</em></li>
         <li>change <code class="language-plaintext highlighter-rouge">GENENAME</code> to <code class="language-plaintext highlighter-rouge">name</code> and set type to <em>text</em></li>
         <li>Keep the other column names and set their types to <em>numeric</em></li>
       </ul>
@@ -925,10 +938,10 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
     <li>Edit attribute names and types:
       <ul>
         <li>change <code class="language-plaintext highlighter-rouge">symbol</code> to <code class="language-plaintext highlighter-rouge">Gene Symbol</code> and set type to <em>entity</em></li>
-        <li>change <code class="language-plaintext highlighter-rouge">ensembl</code> to <code class="language-plaintext highlighter-rouge">linkedTo@gene</code> and set type to <em>Symmetric relation</em></li>
+        <li>change <code class="language-plaintext highlighter-rouge">ensembl</code> to <code class="language-plaintext highlighter-rouge">linkedTo@gene</code> and set type to <em>Symetric relation</em></li>
       </ul>
     </li>
-    <li><strong>Integrate (private dataset)</strong></li>
+    <li>Click on the <strong>Integrate (private dataset)</strong> button</li>
   </ol>
   <figure id="figure-5"><img src="images/symbol_to_ensembl_preview.png" alt="Gene symbols preview" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Symbol to Ensembl preview</figcaption></figure>
 </blockquote>
@@ -945,7 +958,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
         <li>set <code class="language-plaintext highlighter-rouge">End</code> type to <em>End</em></li>
       </ul>
     </li>
-    <li><strong>Integrate (private dataset)</strong></li>
+    <li>Click on the <strong>Integrate (private dataset)</strong> button</li>
   </ol>
   <figure id="figure-6"><img src="images/qtl_preview.png" alt="QTL preview" /><figcaption><span class="figcaption-prefix">Figure 6:</span> QTL preview</figcaption></figure>
 </blockquote>
@@ -957,45 +970,47 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
     <li>Edit attribute names and types:
       <ul>
         <li>change <code class="language-plaintext highlighter-rouge">HomoloGene ID</code> to <code class="language-plaintext highlighter-rouge">Homolog Group</code> and set type to <em>start entity</em></li>
-        <li>set <code class="language-plaintext highlighter-rouge">Common Organism Name</code>  type to <em>category</em></li>
+        <li>set <code class="language-plaintext highlighter-rouge">Common Organism Name</code> type to <em>category</em></li>
         <li>set <code class="language-plaintext highlighter-rouge">Chr</code> type to <em>Reference</em></li>
         <li>change <code class="language-plaintext highlighter-rouge">Symbol</code> to <code class="language-plaintext highlighter-rouge">linkedTo@Gene Symbol</code> and set type to <em>Directed relation</em></li>
         <li>Keep the other column names and set their types to <em>text</em></li>
       </ul>
     </li>
-    <li><strong>Integrate (private dataset)</strong></li>
+    <li>Click on the <strong>Integrate (private dataset)</strong> button</li>
   </ol>
   <figure id="figure-7"><img src="images/homolog_groups.png" alt="Homolog groups preview" /><figcaption><span class="figcaption-prefix">Figure 7:</span> Homolog groups preview</figcaption></figure>
 </blockquote>
 
 <h2 id="integration-of-rdf-files">Integration of RDF files</h2>
 
+<p>The last dataset we want to integrate is the neXtProt abstraction. This file contains some RDF data that instructs AskOmics how to communicate with a remote RDF database containing <a href="https://www.nextprot.org/">neXtProt</a> data.</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-integrate-nextprot-abstraction"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Integrate <code class="language-plaintext highlighter-rouge">neXtProt abstraction</code></h3>
   <ol>
     <li>Search for <code class="language-plaintext highlighter-rouge">neXtProt abstraction (preview)</code></li>
-    <li>Check that Distant endpoint is <code class="language-plaintext highlighter-rouge">https://sparql.nextprot.org/sparql</code> in advanced options</li>
-    <li><strong>Integrate (private dataset)</strong></li>
+    <li>Check that <strong>Distant endpoint</strong> is set to <code class="language-plaintext highlighter-rouge">https://sparql.nextprot.org/sparql</code> in <strong>advanced options</strong></li>
+    <li>Click on the <strong>Integrate (private dataset)</strong> button</li>
   </ol>
   <figure id="figure-8"><img src="images/nextprot_abstraction_preview.png" alt="neXtProt abstraction preview" /><figcaption><span class="figcaption-prefix">Figure 8:</span> neXtProt abstraction preview</figcaption></figure>
 </blockquote>
 
 <h2 id="monitor-integration">Monitor integration</h2>
 
-<p>Integration can take some times depending on the file size. The <strong>Datasets</strong> page show the progress.</p>
+<p>Integration can take some time depending on the file size. The <strong>Datasets</strong> page shows the progress.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-track-integration-progress"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: track integration progress</h3>
   <ol>
-    <li>Go to <strong>Dataset</strong> page</li>
-    <li>Wait for all datasets to be <em>success</em></li>
+    <li>Go to the <strong>Dataset</strong> page</li>
+    <li>Wait for all datasets to be in <em>success</em> state</li>
   </ol>
   <figure id="figure-9"><img src="images/datasets.png" alt="dataset" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Datasets table</figcaption></figure>
 </blockquote>
 
 <h1 id="query">Query</h1>
 
-<p>Once all the data of interest is integrated (converted to RDF graphs), its time to query them. Querying RDF data is done by using the SPARQL language. Fortunately, AskOmics provides a user-friendly interface to build SPARQL queries without having to learn the SPARQL language.</p>
+<p>Once all the data of interest is integrated (converted to RDF), its time to query them. Querying RDF data is done by using the SPARQL language. Fortunately, AskOmics provides a user-friendly interface to build SPARQL queries without having to learn the SPARQL language.</p>
 
 <h2 id="query-builder-overview">Query builder overview</h2>
 
@@ -1008,7 +1023,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-start-a-query"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Start a query</h3>
   <ol>
-    <li>Go to <strong>Ask!</strong> page</li>
+    <li>Go to the <strong>Ask!</strong> page</li>
     <li>Select the <em>Differential <span class="notranslate">Expression</span></em> entity</li>
     <li><strong>Start!</strong></li>
   </ol>
@@ -1016,11 +1031,11 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 
 <p>Once the start entity is chosen, the query builder is displayed.</p>
 
-<p>The query builder is composed of a graph. Nodes represents <em>entities</em> and links represents <em>relations</em> between entities. The selected entity is surrounded by a red circle. links and other entities are dotted and lighter because there are not instantiated.</p>
+<p>The query builder is composed of a graph. Nodes represents <em>entities</em> and links represents <em>relations</em> between entities. The selected entity is surrounded by a red circle. Links and other entities are dotted and lighter because there are not instantiated.</p>
 
 <figure id="figure-11"><img src="images/query_builder.png" alt="query builder" /><figcaption><span class="figcaption-prefix">Figure 11:</span> Query builder, Differential <span class="notranslate">Expression</span> is the selected entity, Gene Symbol is a suggested entity</figcaption></figure>
 
-<p>On the right, attributes of the selected entity are displayed as attribute boxes. Each boxes have an eye icon. Open eye mean the attribute will be displayed on the results.</p>
+<p>On the right, attributes of the selected entity are displayed as attribute boxes. Each box has an eye icon: an opened eye means the attribute will be displayed on the results.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-ask-for-all-differential-expression-and-display-some-attributes"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Ask for all Differential <span class="notranslate">Expression</span> and display some attributes</h3>
@@ -1034,7 +1049,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 
 <h3 id="filter-on-attributes">Filter on attributes</h3>
 
-<p>Next query will search for all over-expressed genes. Genes are considered over-expressed if the log fold change is &gt; 2. We are oly interested by  significant results (Adj P value ≤ 0.05)</p>
+<p>Next query will search for all over-expressed genes. Genes are considered over-expressed if the log fold change is &gt; 2. We are only interested by significant results (Adj P value ≤ 0.05)</p>
 
 <p>Back to the query builder,</p>
 
@@ -1047,11 +1062,11 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
   </ol>
 </blockquote>
 
-<p>The preview show only significantly over-expressed genes.</p>
+<p>The preview shows only significantly over-expressed genes.</p>
 
 <h3 id="filter-on-relations">Filter on relations</h3>
 
-<p>now that we have our genes if interest, we will link these genes to the reference genome to get information about location.</p>
+<p>Now that we have found our genes of interest, we will link these genes to the reference genome to get information about their location.</p>
 
 <p>To constraint on relation, we have to click on suggested nodes, linked to our entity of interest.</p>
 
@@ -1066,7 +1081,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
   <figure id="figure-12"><img src="images/preview_results.png" alt="preview results" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Results preview</figcaption></figure>
 </blockquote>
 
-<p>Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the <code class="language-plaintext highlighter-rouge">gene</code> entity containing on the GFF file. for example, we can filter on chromosome and display chromosome and strand to get information about gene location.</p>
+<p>Results now show the Ensembl id of our over-expressed genes. We have now access to all the information about the <code class="language-plaintext highlighter-rouge">gene</code> entity contained in the GFF file. For example, we can filter on chromosome and display chromosome and strand to get information about gene location.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-gene"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <code class="language-plaintext highlighter-rouge">gene</code></h3>
@@ -1077,18 +1092,21 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
   </ol>
 </blockquote>
 
-<h3 id="use-faldo-ontology-to-query-on-the-position-of-elements-on-the-genome">Use FALDO ontology to query on the position of elements on the genome.</h3>
+<h3 id="query-on-the-position-of-elements-on-the-genome">Query on the position of elements on the genome.</h3>
 
-<p>The <a href="https://bioportal.bioontology.org/ontologies/FALDO">FALDO</a> ontology describe sequence feature positions and regions. AskOmics use FALDO ontology to represent entity positions. GFF are using FALDO, as well as TSV entities with chromosome, strand, start and end.</p>
-
-<p>The FALDO ontology are used in AskOmics to perform special queries between 2 FALDO entities. These queries are:</p>
+<p>AskOmics is able to perform special queries between entities that are locatable. These queries are:</p>
 
 <ul>
-  <li>Entity included in another entity</li>
-  <li>Entity overlapping another one</li>
+  <li>Entities overlapping another one</li>
+  <li>Entities included in another entity</li>
 </ul>
 
-<p>On the query builder interface, FALDO entities are represented with a green circle and FALDO relations have a green arrow.</p>
+<blockquote class="details">
+  <h3 id="details-faldo-ontology"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> FALDO ontology</h3>
+  <p>The <a href="https://bioportal.bioontology.org/ontologies/FALDO">FALDO</a> ontology describes sequence feature positions and regions. AskOmics uses FALDO ontology to represent entity positions. GFF are using FALDO, as well as TSV entities with chromosome, strand, start and end.</p>
+</blockquote>
+
+<p>On the query builder interface, locatable entities are represented with a green circle and relations based on location are represented as green arrow.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-gene-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <code class="language-plaintext highlighter-rouge">gene</code></h3>
@@ -1097,7 +1115,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
     <li>Hide <code class="language-plaintext highlighter-rouge">reference</code> <code class="language-plaintext highlighter-rouge">strand</code> using the eye</li>
     <li>Instantiate <code class="language-plaintext highlighter-rouge">QTL</code></li>
     <li>Click on the link between <code class="language-plaintext highlighter-rouge">gene</code> and <code class="language-plaintext highlighter-rouge">QTL</code> to edit the relation</li>
-    <li>check that the relation is <code class="language-plaintext highlighter-rouge">gene</code> <code class="language-plaintext highlighter-rouge">included in</code> <code class="language-plaintext highlighter-rouge">QTL</code> <code class="language-plaintext highlighter-rouge">on the same reference</code> with <code class="language-plaintext highlighter-rouge">strict</code> ticked</li>
+    <li>Check that the relation is <code class="language-plaintext highlighter-rouge">gene</code> <code class="language-plaintext highlighter-rouge">included in</code> <code class="language-plaintext highlighter-rouge">QTL</code> <code class="language-plaintext highlighter-rouge">on the same reference</code> with <code class="language-plaintext highlighter-rouge">strict</code> ticked</li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
   <figure id="figure-13"><img src="images/query_builder_position.png" alt="FALDO query" /><figcaption><span class="figcaption-prefix">Figure 13:</span> FALDO query</figcaption></figure>
@@ -1108,14 +1126,14 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-filter-gene-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filter <code class="language-plaintext highlighter-rouge">gene</code></h3>
   <ol>
-    <li>go back to the <code class="language-plaintext highlighter-rouge">QTL</code> node</li>
+    <li>Go back to the <code class="language-plaintext highlighter-rouge">QTL</code> node</li>
     <li>Show the <code class="language-plaintext highlighter-rouge">Name</code> attribute using the eye icon</li>
     <li>Filter the name with a <code class="language-plaintext highlighter-rouge">regexp</code> with <code class="language-plaintext highlighter-rouge">growth</code></li>
     <li><strong>Run &amp; preview</strong></li>
   </ol>
 </blockquote>
 
-<p>From now, our query is “All Genes that are over-expressed (logFC &gt; 2 and FDR ≤ 0.05) and located on a QTL that is related to growth” We can save this results with the <em>Run &amp; save</em> button.</p>
+<p>From now, our query is “All Genes that are over-expressed (logFC &gt; 2 and FDR ≤ 0.05) and located on a QTL that is related to growth”. We can save this results with the <em>Run &amp; save</em> button.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-save-a-result"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Save a result</h3>
@@ -1145,7 +1163,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
   </ol>
 </blockquote>
 
-<p>The query we’ve just built asks for the human homologs of our over-expressed genes. We use the <code class="language-plaintext highlighter-rouge">Gene Symbol</code> to get information from the neXtProt database. AskOmics convert the query into small SPARQL subquery and send them into the local data and the neXtProt endpoint.</p>
+<p>The query we’ve just built asks for the human homologs of our over-expressed genes. We use the <code class="language-plaintext highlighter-rouge">Gene Symbol</code> to get information from the neXtProt database. AskOmics converts the query into small SPARQL subqueries and send them to the local database and to the remote neXtProt endpoint.</p>
 
 <p>Now we are linked to the neXtProt database, we can obtain information about the proteins encoded by these genes, as well as their location in the cell.</p>
 
@@ -1165,7 +1183,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
   </ol>
 </blockquote>
 
-<p>Finally, our query is “All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the protein coded by this genes”. We will save it to the results.</p>
+<p>Finally, our query is “All genes that are over-expressed and located on a QTL that is related to growth, their human homologs and the location of the proteins coded by this genes”. We will save it to the results.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-save-a-result-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Save a result</h3>
@@ -1176,7 +1194,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 
 <h2 id="results-management">Results management</h2>
 
-<p>The results page display the saved queries. Queries are sorted by the most recently. At the end of the table, action button can be used to preview the result, download or send it to <span class="notranslate">Galaxy</span> history.</p>
+<p>The results page displays the saved queries. Queries are sorted by creation date. At the end of the table, action buttons can be used to preview the result, download or send it to <span class="notranslate">Galaxy</span> history.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-edit-query-name"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Edit query name</h3>
@@ -1210,9 +1228,11 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 
 <figure id="figure-17"><img src="images/galaxy_history_results.png" alt="history results" /><figcaption><span class="figcaption-prefix">Figure 17:</span> <span class="notranslate">Galaxy</span> history with the two results</figcaption></figure>
 
+<p>Now that you have used AskOmics to generate this final tabular file, you can continue analysing it with other <span class="notranslate">Galaxy</span> tools.</p>
+
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
-<p>In this tutorial we have seen how to use AskOmics Interactive Tool. We launch the tools with a set of input files, then we have integrated this file into RDF and finally, we build complex queries over this local datasets and neXtProt to answer a biological question.</p>
+<p>In this tutorial we have seen how to use AskOmics Interactive Tool. We launch the tools with a set of input files, then we have integrated these files into RDF and finally, we built complex queries over this local datasets and neXtProt to answer a biological question.</p>
 
 
                     
@@ -1223,10 +1243,10 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
                             <li><p>AskOmics helps to integrate multiple data sources into an RDF database without prior knowledge in the Semantic Web</p>
 </li>
                             
-                            <li><p>It can also be connected to external SPARQL endpoit, such as <a href="https://nextprot.org">neXtProt</a></p>
+                            <li><p>It can also be connected to external SPARQL endpoints, such as <a href="https://nextprot.org">neXtProt</a></p>
 </li>
                             
-                            <li><p>AskOmics helps to perform complex SPARQL queries without knowing SPARQL using a user-friendly interface</p>
+                            <li><p>AskOmics helps to perform complex SPARQL queries without knowing SPARQL, using a user-friendly interface</p>
 </li>
                             
                         </ul>
@@ -1276,7 +1296,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Xavier Garnier, 2020 <b>RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html">/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Xavier Garnier, Anthony Bretaudeau, 2020 <b>RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html">/training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1291,7 +1311,7 @@ https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-rna-seq-analysis-with-askomics-it,
-    author = "Xavier Garnier",
+    author = "Xavier Garnier and Anthony Bretaudeau",
     title = "RNA-Seq analysis with AskOmics Interactive Tool (Galaxy Training Materials)",
     year = "2020",
     month = "07",
@@ -1342,7 +1362,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Xavier Garnier)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Xavier Garnier, Anthony Bretaudeau)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
