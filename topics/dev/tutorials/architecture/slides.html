@@ -689,7 +689,22 @@ class: enlarge150
 
 ---
 
-## Application Components
+## Application Components - Models and Managers
+
+---
+
+The are many of ways to describe and visualize the Galaxy server architecture,
+one is to imagine the Galaxy database as the ultimate source for Galaxy stuff
+and the API controllers as the ultimate sink.
+
+In this architecture imagining of Galaxy, managers are the layer meant to
+mitigate all controller interactions (and isolate the backend from the web
+framework) while the model layer is meant to mitigate all database interactions
+(and isolate the backend from database internals).
+
+---
+
+![Models and Managers](../../images/core_models_managers.plantuml.svg)
 
 ---
 
@@ -699,7 +714,7 @@ High-level business logic that ties all of these components together.
 
 Controllers should ideally be thin wrappers around actions defined in managers.
 
-Whenever model require more than just the database, the operation should be defined
+Whenever a model requires more than just the database, the operation should be defined
 in a manager instead of in the model.
 
 ---
@@ -747,15 +762,13 @@ https://galaxyproject.org/admin/internals/data-model/
 
 ---
 
-### Metadata
+### Dataset Metadata
 
 - Typed key-value pairs attached to HDA.
 - Keys and types defined at the datatype level.
 - Can be used by tools to dynamically control the tool form.
 
 ???
-
-Slides for datatypes, example of meta data definitions...
 
 ---
 
@@ -783,34 +796,42 @@ Slides for datatypes, example of meta data definitions...
 
 ---
 
-### Job Components
-
-- Job is placed into the database and picked up by the job handler.
-- Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
-- Job mapper (`JobRunnerMapper`) decides the "destination" for a job.
-- Job runner (e.g. `DrammaJobRunner`) actual runs the job and provides an interface for checking status.
+## Application Components - Plugins
 
 ---
 
-### Object Store
-
-.strike[```python
->>> fh = open( dataset.file_path, 'w' )
->>> fh.write( ‘foo’ )
->>> fh.close()
->>> fh = open( dataset.file_path, ‘r’ )
->>> fh.read()
-```]
-
-```python
->>> update_from_file( dataset, file_name=‘foo.txt’ )
->>> get_data( dataset )
->>> get_data( dataset, start=42, count=4096 )
-```
+![Models and Managers](../../images/core_models_managers.plantuml.svg)
 
 ---
 
-![Object Store](../../images/objectstore.plantuml.svg)
+### Plugins All the Way Down
+
+![Plugins](../../images/core_plugins_overview.plantuml.svg)
+
+---
+
+### Custom Plugins
+
+---
+
+#### Datatypes
+
+![Datatype Files](../../images/core_files_datatypes.plantuml.svg)
+
+---
+
+#### Tools
+
+![ToolBox Classes](../../images/core_toolbox_classes.plantuml.svg)
+
+Three major classes can be summarized as - the `ToolBox` contains `Tool` objects
+that execute a `ToolAction`.
+
+---
+
+#### Subclasses of Tool
+
+![Tool Classes](../../images/core_tool_classes.plantuml.svg)
 
 ---
 
@@ -899,6 +920,153 @@ All in `config/plugins/interactive_environments`:
 - `rstudio`
 - `phinch`
 - `bam_iobio`
+
+---
+
+### Inheritance Plugins
+
+---
+
+### Object Store
+
+.strike[```python
+>>> fh = open( dataset.file_path, 'w' )
+>>> fh.write( ‘foo’ )
+>>> fh.close()
+>>> fh = open( dataset.file_path, ‘r’ )
+>>> fh.read()
+```]
+
+```python
+>>> update_from_file( dataset, file_name=‘foo.txt’ )
+>>> get_data( dataset )
+>>> get_data( dataset, start=42, count=4096 )
+```
+
+---
+
+![Object Store](../../images/objectstore.plantuml.svg)
+
+---
+
+#### Workflow Modules
+
+![Workflow Modules](../../images/core_workflow_modules.plantuml.svg)
+
+All these modules are found in `lib/galaxy/workflow/modules.py`.
+
+---
+
+#### `lib/galaxy/util/plugin_config.py`
+
+Standardized way to load both a set of possible plugin class implementations
+from a directory of Python files and to parse either an XML or YAML/JSON
+description of configured plugins.
+
+---
+
+#### `lib/galaxy/util/plugin_config.py` Example Files
+
+![Workflow Modules](../../images/core_files_plugin_example.plantuml.svg)
+
+---
+
+#### `lib/galaxy/util/plugin_config.py` Plugin Implementations
+
+```python
+def plugins_dict(module, plugin_type_identifier):
+    plugin_dict = {}
+
+    for plugin_module in import_submodules(module, ordered=True):
+        for clazz in __plugin_classes_in_module(plugin_module):
+            plugin_type = getattr(clazz, plugin_type_identifier, None)
+            if plugin_type:
+                plugin_dict[plugin_type] = clazz
+
+    return plugin_dict
+```
+
+---
+
+#### Pieces of `lib/galaxy/tool_util/deps/containers.py`
+
+```python
+class ContainerRegistry(object):
+
+    def __init__(self, app_info, mulled_resolution_cache=None):
+        self.resolver_classes = self.__resolvers_dict()
+        self.app_info = app_info
+        self.container_resolvers = self.__build_container_resolvers(app_info)
+        # ... other stuff here
+
+    def __build_container_resolvers(self, app_info):
+        conf_file = getattr(app_info, 'containers_resolvers_config_file', None)
+        plugin_source = plugin_config.plugin_source_from_path(conf_file)
+        return self._parse_resolver_conf(plugin_source)
+
+    def _parse_resolver_conf(self, plugin_source):
+        extra_kwds = {
+            'app_info': self.app_info
+        }
+        return plugin_config.load_plugins(
+            self.resolver_classes, plugin_source, extra_kwds
+        )
+
+    def __resolvers_dict(self):
+        import galaxy.tool_util.deps.container_resolvers
+        return plugin_config.plugins_dict(
+            galaxy.tool_util.deps.container_resolvers,
+            'resolver_type'
+        )
+```
+
+---
+
+#### Pieces of `lib/galaxy/tool_util/deps/container_resolvers/mulled.py`
+
+
+```python
+class CachedMulledDockerContainerResolver(ContainerResolver):
+
+resolver_type = "cached_mulled"
+
+    def __init__(self, app_info=None, namespace="biocontainers", hash_func="v2", **kwds):
+        super(CachedMulledDockerContainerResolver, self).__init__(app_info)
+        self.namespace = namespace
+        self.hash_func = hash_func
+
+    def resolve(self, enabled_container_types, tool_info, **kwds):
+        # ... do the magic with configured plugin
+```
+
+---
+
+`container_resolvers_conf.xml`
+
+```xml
+<container_resolvers>
+  <cached_mulled />
+  <cached_mulled namespace="mycustom" />
+</container_resolvers>
+```
+
+`container_resolvers_conf.yml`
+
+```yaml
+- resolver_type: cached_mulled
+- resolver_type: cached_mulled
+  namespace: mycustom
+```
+
+
+---
+
+### Job Components
+
+- Job is placed into the database and picked up by the job handler.
+- Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
+- Job mapper (`JobRunnerMapper`) decides the "destination" for a job.
+- Job runner (e.g. `DrammaJobRunner`) actual runs the job and provides an interface for checking status.
 
 ---
 
