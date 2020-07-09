@@ -229,8 +229,6 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 {: .hands_on}
 
-You've now finished the tutorial, and you can [jump to the end](#feedback-google) or read on to learn about configuring CVMFS without Ansible.
-
 # Other Aspects
 
 ## Development
