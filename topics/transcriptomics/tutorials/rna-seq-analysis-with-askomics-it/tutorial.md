@@ -11,18 +11,18 @@ requirements:
         - rna-seq-counts-to-genes
 questions:
 - How to integrate RNA-Seq results with other datasets using AskOmics?
-- How to query this datasets to answer a biological question?
+- How to query these datasets to answer a biological question?
 - How to exploit distant SPARQL endpoint to retrieve information?
 objectives:
 - Launch an AskOmics Interactive Tool
 - Integrate RNA-Seq and reference datasets into AskOmics
-- Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL.
+- Create a complex query to get over-expressed genes, their location on the reference genome, and check if they are included in a known QTL
 - Complete the query to get the human homologs and their location using neXtProt database
 time_estimation: 2H
 key_points:
-- AskOmics helps to integrate multiple data sources into an RDF database without knowing the Semantic Web
+- AskOmics helps to integrate multiple data sources into an RDF database without prior knowledge in the Semantic Web
 - It can also be connected to external SPARQL endpoit, such as [neXtProt](https://nextprot.org)
-- AskOmics help to perform complex SPARQL queries without knowing SPARQL using a user-friendly interface
+- AskOmics helps to perform complex SPARQL queries without knowing SPARQL using a user-friendly interface
 contributors:
 - xgaia
 
@@ -33,8 +33,8 @@ contributors:
 {:.no_toc}
 
 <!-- AskOmics intro -->
-AskOmics is a web software for data integration and query using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into RDF triples, and perform complex queries using a user-friendly interface.
-During the step of integration, AskOmics build an RDF desription of the data: the **abstraction**. This abstraction is used to explore the data and build the query.
+AskOmics is a web application for data integration and query using the Semantic Web technologies. It helps users to convert multiple data sources (CSV/TSV files, GFF and BED annotation) into RDF triples, and perform complex queries using a user-friendly interface.
+During the integration step, AskOmics builds an RDF description of the data: the **abstraction**. This abstraction is used to explore the data and build the query.
 AskOmics can also integrate **abstraction** of distant endpoint. Abstraction are obtained using [abstractor](https://github.com/askomics/abstractor), a pyhton package to generatre RDF abstraction from distant endpoint.
 The query builder interface is used to create a path through the **abstraction** of each ressources. The path is converted to a SPARQL query that is sent to the multiple SPARQL endpoint.
 
@@ -42,7 +42,7 @@ The query builder interface is used to create a path through the **abstraction**
 AskOmics comes useful for cross-referencing results datasets with various reference data. For example, in RNA-Seq studies, we often need to filter the results on the fold change and the p-value, to get the most significant differentially expressed genes. If you are studying a particular phenotype and already know the position of some QTL associated to this phenotype, you would then want to cross this gene list with the reference annotation of the corresponding genome to get the genes locations. You would also determine which gene is located within a QTL related to the phenotype. Finaly, you would know if these genes have human homologs, and use the neXtProt database to get the location of the proteins coded by the homologs. The whole process involves several tools to parse and manipulate the different data format, and to map datasets on other. AskOmics offer a solution to 1) automatically convert the multiple formats to RDF, 2) use a user-friendly interface to perform complex SPARQL queries on the RDF datasets to find the genes you are interested in, and 3) connect external SPARQL databases and link external data with your own.
 
 <!-- The data -->
-In this tutorial, we will use results from a differential expression analysis. This file is provided for you below. You could also generate the file yourself, by following the [RNA-Seq counts to gene tutorial]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}). The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
+In this tutorial, we will use results from a differential expression analysis. This file is provided for you below. You could also generate the file yourself, by following the [RNA-Seq counts to gene tutorial]({% link topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.md %}). The file used here was generated from limma-voom but you could use a file from any RNA-seq differential expression tool, such as edgeR or DESeq2, as long as it has the required columns (see below).
 
 The differentially expressed results will be linked to the mouse genome annotation, in general feature format (GFF). The file provided is a subset of the mouse annotation (GRCm38.p6) obtained from [Ensembl](http://www.ensembl.org/Mus_musculus/Info/Index).
 
