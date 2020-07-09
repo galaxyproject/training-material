@@ -264,8 +264,8 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > ```
 >
 >    > ### {% icon tip %} CentOS7
->    > There are known issues with CentOS7 and python3, which is used in this tutorial. If you use this setup, you should have python2 and python3 coexisting, and use python2 for Ansible (i.e. do not set the interpreter above) and python3 for Galaxy. This setup requires numerous changes that you will need to discover, which are not covered in this tutorial.
->    {: .comment}
+>    > As mentioned in the "Ubuntu or Debian, CentOS or RHEL?" comment above, if you are using CentOS7 do not set `interpreter_python` in `ansible.cfg` .
+>    {: .tip}
 >
 >    There is an additional useful option that you might want to add to your `ansible.cfg` file if you are connecting over SSH:
 >
@@ -359,7 +359,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 >    > ### {% icon question %} Question
 >    >
->    > What all do we expect to see in our folder?
+>    > What should we expect to see in our folder?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
@@ -671,7 +671,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ### {% icon tip %} Miniconda fails to work
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
 >    >
->    > The miniconda role, attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules which both attempt to install conda. So, remove the role from your playbook, and carry on, if you have issues.
+>    > The miniconda role attempts to install tar and bzip2, even when the user doesn't have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do *not* need to run this role, Galaxy will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules if both attempt to install conda at the same time. So, remove the role from your playbook, and carry on, if you have issues.
 >     {: .tip}
 >
 > 2. Edit your group variables file for your group (`group_vars/galaxyservers.yml`).
@@ -1316,7 +1316,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > admins who use them. While we recommend this, choosing to use Ansible
 >    > and the official playbooks means you are opting in to receive all of this
 >    > knowledge applied automatically to your systems. You are welcome to use
->    > a different CM system which works for your infrastructure, but it might
+>    > a different Configuration Management system which works for your infrastructure, but it might
 >    > mean re-creating a large amount of existing work that is maintained by a
 >    > large community of admins.
 >    {: .comment}
@@ -1329,7 +1329,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 6. Explore what has been set up for you.
 >
 >    - Galaxy has been deployed to `/srv/galaxy/server`
->    - The configuration lives in `/srv/galaxy/config/galaxy.yml` - be sure to look through it to see what default options have been set for you
+>    - The configuration lives in `/srv/galaxy/config/galaxy.yml` - be sure to look through it to see what options have been set for you
 >    - Note the permissions of the contents of `/srv/galaxy`
 >    - Some config files that Galaxy maintains itself, such as `shed_tool_conf.xml`, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in `/srv/galaxy/var/config`
 >    - A Python virtualenv - an isolated Python environment - with all of the Galaxy framework's dependencies has been installed in `/srv/galaxy/venv`
@@ -1340,9 +1340,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > ```
 >    > > - `config` holds all static Galaxy config files
 >    > > - `jobs` is where all job files will go (e.g. temporary working dirs, job scripts, etc.)
->    > > - `local_tools` is a directory for custom, non-ToolsHed tools managed by the Ansible playbook
+>    > > - `local_tools` is a directory for custom, non-ToolShed tools managed by the Ansible playbook
 >    > > - `server` contains all of the Galaxy server code
->    > > - `var` is a directory for all Galaxy created files. Whenever tools are installed from the ToolShed, for the Galaxy managed cache, and the integrated tool panel file. All of these go in the `var` directory.
+>    > > - `var` is a directory for all files created by Galaxy, e.g. whenever tools are installed from the ToolShed, the Galaxy-managed cache, and the integrated tool panel file.
 >    > > - `venv` contains the Galaxy virtual environment and all dependencies, like uwsgi.
 >    > {: .code-in}
 >    >
@@ -1369,7 +1369,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
->    > You'll notice that the file is significantly different than the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.
+>    > You'll notice that the file is significantly different from the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.
 >    > ```ini
 >    > ---
 >    > ##
