@@ -52,10 +52,11 @@ install: clean create-env ## install dependencies
 .PHONY: install
 
 serve-full: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --incremental --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
+		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-full
 
 serve: ## serve with some plugins disabled for speed
