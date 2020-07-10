@@ -61,7 +61,6 @@ serve-full: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to s
 
 serve: ## serve with some plugins disabled for speed
 	@echo "This will build the website with citations disabled. To run the full preview (slower), use make serve-full" && echo "" && \
-
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
