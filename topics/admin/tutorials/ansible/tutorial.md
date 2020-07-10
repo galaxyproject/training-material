@@ -361,7 +361,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > > localhost                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 >     > > ```
 >     > {: .code-out}
->     {: .code-io}
+>     {: .code-2col}
 >
 > 12. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
 >
@@ -502,7 +502,7 @@ Templates give you greater control over the files you are deploying to the targe
 >    > > ```
 >    > > Where the last line has the machine's IP address.
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 >    Now that this has worked successfully, we will setup a `group_vars` folder
 >    to show how a person using `my-role` would override the `server_name` variable.
@@ -609,7 +609,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > > - geerlingguy.git (3.0.0) was installed successfully
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 > 2. Edit your playbook.yml and add the role `geerlingguy.git` at the bottom, after `my-role`
 >
@@ -738,7 +738,7 @@ Now that you have a small role built up, you might start thinking about deployin
 >    > > apikey = super-secret-api-key-wow!
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 {: .hands_on}
 
