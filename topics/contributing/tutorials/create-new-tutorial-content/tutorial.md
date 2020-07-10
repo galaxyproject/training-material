@@ -668,7 +668,7 @@ Normally a single column, with the boxes above one another, it will automaticall
 > > apikey = super-secret-api-key-wow!
 > > ```
 > {: .code-out}
-{: .code-io}
+{: .code-2col}
 ```
 {% endraw %}
 
@@ -690,9 +690,9 @@ Rendered (try it! resize your browser)
 > > apikey = super-secret-api-key-wow!
 > > ```
 > {: .code-out}
-{: .code-io}
+{: .code-2col}
 
-If you leave off the `{: .code-io}`, it will render as a single column always.
+If you leave off the `{: .code-2col}`, it will render as a single column always.
 
 {% raw %}
 ```markdown

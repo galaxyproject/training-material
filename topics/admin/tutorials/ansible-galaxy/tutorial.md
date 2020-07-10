@@ -295,7 +295,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > gat-88.training.galaxyproject.eu ansible_connection=local
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 {: .hands_on}
 
@@ -357,7 +357,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > >       become_user: postgres
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 >    > ### {% icon question %} Question
 >    >
@@ -559,7 +559,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > (4 rows)
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > Access postgres and list some users
@@ -607,7 +607,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > start.conf
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 {: .hands_on}
 
 
@@ -1362,7 +1362,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > 6 directories, 0 files
 >    > > ```
 >    > {: .code-out}
->    {: .code-io}
+>    {: .code-2col}
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
