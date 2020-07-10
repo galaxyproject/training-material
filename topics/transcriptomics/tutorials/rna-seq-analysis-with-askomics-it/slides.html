@@ -1,0 +1,150 @@
+---
+layout: tutorial_slides
+title: Integrate and interrogate local datasets and distant RDF data with AskOmics using semantic web
+objectives:
+- Understand the basics of RDF and SPARQL
+- Learn how input data have to be structured to be integrated with AskOmics
+- Learn how to connect distant SPARQL endpoint to local data with AskOmics
+key_points:
+- RDF and SPARQL are semantic web technologies that comes useful for data integration and querying
+- AskOmics is a web platform for data integration and query using semantic web in a user-friendly way
+contributors:
+- xgaia
+---
+
+# AskOmics overview
+
+AskOmics is a web software for **data integration** and **query** using semantic web. The main functionalities are:
+
+- Conversion of **multiple data format** into RDF triples and store them in a local triplestore
+- The generation of **complex SPARQL queries** using a user-friendly interface
+- SPARQL endpoint support to **cross-reference integrated data with remote data**
+
+AskOmics can be used as a standalone software, or **with Galaxy**
+
+---
+
+# What is the semantic web?
+
+---
+
+The semantic web is a set of recommendations to integrate data, to integrate domain knowledge and to perform query and reasoning.
+
+- Resource Description Framework (RDF): annotate data
+- RDFS + OWL: represent knowledge (data description)
+- SPARQL Protocol and RDF Query Language (SPARQL): query data
+
+---
+
+## RDF
+
+- RDF is for describing **resources** (the R in RDF)
+  - resources are identified by URIs (`nextprot:P01137`, `taxon:9606`)
+
+- **describing** (D in RDF) a resource is representing it explicitly
+  - its characteristics (`nextprot:P01137 :hasSequence "MPPSGLRLLL..."`)
+  - its relations to other entities (`nextprot:P01137 :hasTaxon taxon:9606`)
+  - its descriptions (aka classes) (`nextprot:P01137 :is nextprot:Protein`)
+
+---
+
+- RDF is represented by triples (subject, predicate, object)
+  - **Subject**: the resource being described
+  - **Predicate**: the relation (from subject to object)
+  - **Object**: a value of the predicate for the subject
+
+.image-01[ ![](images/rdf_schema_1.png)]
+
+---
+
+- RDF dataset is a labeled directed graph
+
+.image-02[ ![](images/rdf_schema_2.png)]
+
+---
+
+## SPARQL
+
+The SPARQL language is a set of triple patterns with variables (`?variable_name`) .
+
+```sparql
+SELECT ?gene
+WHERE {
+    ?gene rdf:type :Gene .
+    ?gene :hasTaxon taxon:9606 .
+}
+```
+
+This query joins together all of the triples with a matching subject, where predicate is `rdf:type` and the object is `:Gene` (and which are related to taxon:9606). In other words, the query returns all the human genes.
+
+---
+
+.pull-left[
+- Using the same identifier for the same entity (**entity matching**) across multiple datasets allow federated queries
+
+- Federated SPARQL provide unified querying capabilities over multiple datasets as if they were a single virtual graph
+
+]
+
+.pull-right[
+.image-03[ ![](images/rdf_schema_3.png)]
+]
+
+
+
+---
+
+
+# Data integration with AskOmics
+
+---
+
+## Local data
+
+- RDF and SPARQL are good infrastructures to describe and query biological datasets, but most of them are still stored on flat files like CSV/TSV and GFF.
+
+- AskOmics converts multiple structured data formats into RDF triples
+  * CSV/TSV
+  * GFF
+  * BED
+
+
+---
+
+
+AskOmics uses the file structure (*e.g.* header of TSV files) to generate the graph of data description: **the abstraction**
+
+.image-04[ ![](images/csv2rdf_abstraction.png)]
+
+
+The rest of the files is converted to RDF triples that correspond to the data.
+
+---
+
+
+## Distant RDF data
+
+- To connect AskOmics with an external SPARQL endpoint, it need the RDF description (the abstraction).
+- The abstraction can be obtained with [abstractor](https://github.com/askomics/abstractor)
+
+```bash
+pip3 install abstractor
+abstractor -s https://sparql.nextprot.org/sparql -o nextprot_abstraction.ttl -f turtle
+```
+
+- Obtained abstraction can by uploaded into AskOmics as a standard file.
+
+
+---
+
+# Query multiple data sources with AskOmics
+
+---
+
+- User navigate through the abstraction of local and distant data and create a path that represent a query
+- The query is converted to SPARQL code that are executed on the local and distant RDF data
+- Results are returned and can be downloaded
+
+.image-05[ ![](images/askomics_query.png)]
+
+---
