@@ -510,7 +510,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 9, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -588,9 +588,9 @@
 
 <ul>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></li>
-  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code></li>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></li>
   <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code></li>
+  <li><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code> (automatically set based on <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>)</li>
 </ul>
 
 <p>These are largely self explanatory: a directory for all of <span class="notranslate">Galaxy</span>’s code and configuration, which commit should be installed, and the <span class="notranslate">Galaxy</span> configuration. We will not explain <span class="notranslate">Galaxy</span> configuration variables in detail as they are covered sufficiently in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> sample file or the <a href="https://docs.galaxyproject.org/en/master/admin/config.html#configuration-options">online documentation</a>.</p>
@@ -728,7 +728,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
     <blockquote class="comment">
       <h3 id="comment-comment-running-ansible-on-remote-machine"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Running Ansible on remote machine</h3>
-      <p>It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will <em>not</em> do that in this training.</p>
+      <p>It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will <strong>not</strong> do that in this training.</p>
     </blockquote>
   </li>
   <li>Your <code class="language-plaintext highlighter-rouge">ansible</code> version is <code class="language-plaintext highlighter-rouge">&gt;=2.7</code>, you can check this by running <code class="language-plaintext highlighter-rouge">ansible --version</code></li>
@@ -742,9 +742,15 @@ best practices and knowledge from previous admins codified for you.</p>
   <li>In your inventory file, you have written the full DNS hostname that has been provided, and <strong>not</strong> <code class="language-plaintext highlighter-rouge">localhost</code>, as we will be requesting SSL certificates.</li>
 </ol>
 
-<blockquote class="tip">
-  <h3 id="tip-ubuntu-or-debian-centos-or-rhel"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Ubuntu or Debian, CentOS or RHEL?</h3>
-  <p>The training tutorials are designed to work on either Ubuntu or CentOS, and the roles we use are definitely compatible with both. If any of the variable values differ between Ubuntu and CentOS, we try to note it in the tutorial. Any places we don’t note it are bugs.</p>
+<blockquote class="comment">
+  <h3 id="comment-ubuntu-or-debian-centos-or-rhel"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Ubuntu or Debian, CentOS or RHEL?</h3>
+  <p>The training tutorial is only tested on Ubuntu, as that is the training platform most often used. The training <em>should</em> work on RHEL/CentOS, and the roles we use are definitely compatible with both. If any of the variable values differ between Ubuntu and CentOS, we try to note it in the tutorial. Any places we don’t note it are bugs.</p>
+
+  <p>There are known issues with CentOS7 and python3, which is used in this tutorial. If you use this setup, you should have python2 and python3 coexisting, and use python2 for Ansible (i.e. do not set <code class="language-plaintext highlighter-rouge">interpreter_python</code> in your <code class="language-plaintext highlighter-rouge">ansible.cfg</code>) and python3 for <span class="notranslate">Galaxy</span>. This setup requires numerous changes that you will need to discover, which are not covered in this tutorial.</p>
+
+  <p>Both <code class="language-plaintext highlighter-rouge">python-psycopg2</code> and <code class="language-plaintext highlighter-rouge">python3-psycopg2</code> need to be installed.</p>
+
+  <p>CentOS8 (and RHEL in general) have significantly different package names for some modules, beware!</p>
 </blockquote>
 
 <h2 id="requirements">Requirements</h2>
@@ -762,7 +768,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Create a new file in your working directory called <code class="language-plaintext highlighter-rouge">requirements.yml</code> and include the following contents:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.9.5</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.9.6</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.nginx</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.6.4</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
@@ -808,6 +814,11 @@ best practices and knowledge from previous admins codified for you.</p>
 </code></pre></div>        </div>
       </blockquote>
 
+      <blockquote class="tip">
+        <h3 id="tip-centos7"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> CentOS7</h3>
+        <p>As mentioned in the “Ubuntu or Debian, CentOS or RHEL?” comment above, if you are using CentOS7 do not set <code class="language-plaintext highlighter-rouge">interpreter_python</code> in <code class="language-plaintext highlighter-rouge">ansible.cfg</code> .</p>
+      </blockquote>
+
       <p>There is an additional useful option that you might want to add to your <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file if you are connecting over SSH:</p>
 
       <blockquote>
@@ -821,24 +832,26 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. Remember, if you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="language-plaintext highlighter-rouge">ansible_connection=local</code>.</p>
 
-      <blockquote class="question">
-        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>hosts
+</code></pre></div>          </div>
+        </blockquote>
 
-        <p>How does your hosts file look?</p>
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
-        <blockquote class="solution">
-          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <p>Your hostname is probably different</p>
+          <p>Your hostname is probably different:</p>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[<span class="notranslate">galaxy</span>servers]</span>
-<span class="err">training-0.example.org</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+<span class="err">gat-88.training.<span class="notranslate">galaxy</span>project.eu</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
 </code></pre></div>          </div>
-
         </blockquote>
       </blockquote>
     </li>
   </ol>
+
 </blockquote>
 
 <h2 id="postgresql">PostgreSQL</h2>
@@ -879,15 +892,19 @@ best practices and knowledge from previous admins codified for you.</p>
         <li>A role for <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="language-plaintext highlighter-rouge">become</code>/<code class="language-plaintext highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
       </ul>
 
-      <blockquote class="question">
-        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span><span class="notranslate">galaxy</span>.yml
+</code></pre></div>          </div>
+        </blockquote>
 
-        <p>How does your current playbook look?</p>
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
-        <blockquote class="solution">
-          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>Your directory should look approximately like this:</p>
 
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
@@ -900,6 +917,57 @@ best practices and knowledge from previous admins codified for you.</p>
       <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
       <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
 </code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <p>What should we expect to see in our folder?</p>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ul>
+            <li>a playbook</li>
+            <li>a hosts file</li>
+            <li>a requirements file</li>
+            <li>Some group variables</li>
+            <li>all of our roles</li>
+          </ul>
+
+          <blockquote class="code-in">
+            <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+            <p>Let’s investigate our directory.</p>
+            <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tree <span class="nt">-L</span> 2
+</code></pre></div>            </div>
+          </blockquote>
+
+          <blockquote class="code-out">
+            <h3 id="code-out-output-bash-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+            <p>Your directory should look approximately like this:</p>
+
+            <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">.</span>
+<span class="err">├──</span> <span class="err">ansible.cfg</span>
+<span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>.yml</span>
+<span class="err">├──</span> <span class="err">group_vars</span>
+<span class="err">│  </span> <span class="err">└──</span> <span class="err"><span class="notranslate">galaxy</span>servers.yml</span>
+<span class="err">├──</span> <span class="err">hosts</span>
+<span class="err">├──</span> <span class="err">requirements.yml</span>
+<span class="err">└──</span> <span class="err">roles</span>
+    <span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
+    <span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>project.nginx</span>
+    <span class="err">├──</span> <span class="err"><span class="notranslate">galaxy</span>project.postgresql</span>
+    <span class="err">├──</span> <span class="err">geerlingguy.pip</span>
+    <span class="err">├──</span> <span class="err">natefoo.postgresql_objects</span>
+    <span class="err">├──</span> <span class="err">uchida.miniconda</span>
+    <span class="err">├──</span> <span class="err">use<span class="notranslate">galaxy</span>_eu.certbot</span>
+    <span class="err">└──</span> <span class="err">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</span>
+
+<span class="err">10</span> <span class="err">directories,</span> <span class="err">5</span> <span class="err">files</span>
+</code></pre></div>            </div>
+          </blockquote>
 
         </blockquote>
 
@@ -921,8 +989,111 @@ best practices and knowledge from previous admins codified for you.</p>
     <li>
       <p>Run the playbook:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output-bash-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PLAY</span> <span class="nn">[<span class="notranslate">galaxy</span>servers]</span> <span class="err">************************************************************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[Gathering Facts]</span> <span class="err">**********************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[Install Dependencies]</span> <span class="err">*****************************************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : include_tasks]</span> <span class="err">*********************************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.postgresql/tasks/debian.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install pgdg package signing key (Debian/pgdg)]</span> <span class="err">************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install pgdg repository (Debian/pgdg)]</span> <span class="err">*********************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install PostgreSQL (Debian)]</span> <span class="err">*******************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Get installed version]</span> <span class="err">*************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set version fact]</span> <span class="err">******************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set version fact]</span> <span class="err">******************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set OS-specific variables]</span> <span class="err">*********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set pgdata fact]</span> <span class="err">*******************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set conf dir fact]</span> <span class="err">*****************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : include_tasks]</span> <span class="err">*********************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Create conf.d]</span> <span class="err">*********************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Check for conf.d include in postgresql.conf]</span> <span class="err">***************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set conf.d include in postgresql.conf]</span> <span class="err">*********************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Include 25ansible_postgresql.conf in postgresql.conf]</span> <span class="err">******************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set config options]</span> <span class="err">****************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install pg_hba.conf]</span> <span class="err">***************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : include_tasks]</span> <span class="err">*********************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Ensure PostgreSQL is running]</span> <span class="err">******************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Revoke extra privileges]</span> <span class="err">*********************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop databases]</span> <span class="err">******************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create and drop users]</span> <span class="err">***********************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
+<span class="nn">[WARNING]</span><span class="err">:</span> <span class="err">Module</span> <span class="err">did</span> <span class="err">not</span> <span class="err">set</span> <span class="err">no_log</span> <span class="err">for</span> <span class="err">no_password_changes</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create groups]</span> <span class="err">*******************************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Add or remove users from groups]</span> <span class="err">*************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop groups]</span> <span class="err">*********************************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create databases]</span> <span class="err">****************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant user database privileges]</span> <span class="err">**************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant extra privileges]</span> <span class="err">**********************************************</span>
+
+<span class="err">RUNNING</span> <span class="err">HANDLER</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Reload PostgreSQL]</span> <span class="err">******************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">PLAY</span> <span class="err">RECAP</span> <span class="err">**********************************************************************************************</span>
+<span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span> <span class="err">:</span> <span class="py">ok</span><span class="p">=</span><span class="s">17   changed=7    unreachable=0    failed=0    skipped=14   rescued=0    ignored=0</span>
+
+</code></pre></div>        </div>
+      </blockquote>
 
       <blockquote class="comment">
         <h3 id="comment-comment-when-running-ansible"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: When running Ansible</h3>
@@ -931,10 +1102,85 @@ best practices and knowledge from previous admins codified for you.</p>
     </li>
     <li>
       <p>Inspect the changes that have been made on your <span class="notranslate">Galaxy</span> server. Places to look include:</p>
+
       <ul>
         <li><code class="language-plaintext highlighter-rouge">/etc/postgresql</code></li>
-        <li>Databases and users in PostgreSQL. You can now login and access the database, but only as the <code class="language-plaintext highlighter-rouge">postgres</code> user. You will need to <code class="language-plaintext highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="language-plaintext highlighter-rouge">psql <span class="notranslate">galaxy</span></code>. The database will currently be empty as <span class="notranslate">Galaxy</span> has never connected to it yet. Once you install <span class="notranslate">Galaxy</span> in the next step, the database will be populated. Hint: try the commands <code class="language-plaintext highlighter-rouge">\du</code> and <code class="language-plaintext highlighter-rouge">\l</code>.</li>
+        <li>Databases and users in PostgreSQL.</li>
       </ul>
+
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <p>List available databases.  You can now login and access the database, but only as the <code class="language-plaintext highlighter-rouge">postgres</code> user. You will need to <code class="language-plaintext highlighter-rouge">sudo -iu postgres</code> first, and then you can run <code class="language-plaintext highlighter-rouge">psql <span class="notranslate">galaxy</span></code>.</p>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-iu</span> postgres psql <span class="nt">-l</span>
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                              <span class="err">List</span> <span class="err">of</span> <span class="err">databases</span>
+   <span class="err">Name</span>    <span class="err">|</span>  <span class="err">Owner</span>   <span class="err">|</span> <span class="err">Encoding</span> <span class="err">|</span> <span class="err">Collate</span> <span class="err">|</span>  <span class="err">Ctype</span>  <span class="err">|</span>   <span class="err">Access</span> <span class="err">privileges</span>
+<span class="err">-----------+----------+----------+---------+---------+-----------------------</span>
+ <span class="err"><span class="notranslate">galaxy</span></span>    <span class="err">|</span> <span class="err"><span class="notranslate">galaxy</span></span>   <span class="err">|</span> <span class="err">UTF8</span>     <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span>
+ <span class="err">postgres</span>  <span class="err">|</span> <span class="err">postgres</span> <span class="err">|</span> <span class="err">UTF8</span>     <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span>
+ <span class="err">template0</span> <span class="err">|</span> <span class="err">postgres</span> <span class="err">|</span> <span class="err">UTF8</span>     <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span> <span class="err">=c/postgres</span>          <span class="err">+</span>
+           <span class="err">|</span>          <span class="err">|</span>          <span class="err">|</span>         <span class="err">|</span>         <span class="err">|</span> <span class="py">postgres</span><span class="p">=</span><span class="s">CTc/postgres</span>
+ <span class="err">template1</span> <span class="err">|</span> <span class="err">postgres</span> <span class="err">|</span> <span class="err">UTF8</span>     <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span> <span class="err">C.UTF-8</span> <span class="err">|</span> <span class="err">=c/postgres</span>          <span class="err">+</span>
+           <span class="err">|</span>          <span class="err">|</span>          <span class="err">|</span>         <span class="err">|</span>         <span class="err">|</span> <span class="py">postgres</span><span class="p">=</span><span class="s">CTc/postgres</span>
+<span class="err">(4</span> <span class="err">rows)</span>
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <p>Access postgres and list some users</p>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">sudo</span> <span class="nt">-iu</span> postgres psql
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-bash-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <p>The database will currently be empty as <span class="notranslate">Galaxy</span> has not yet connected to it. Once you install <span class="notranslate">Galaxy</span> in the next step, the database will be populated.</p>
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">psql</span> <span class="err">(10.12</span> <span class="err">(Ubuntu</span> <span class="err">10.12-0ubuntu0.18.04.1))</span>
+<span class="err">Type</span> <span class="err">"help"</span> <span class="err">for</span> <span class="err">help.</span>
+
+<span class="py">postgres</span><span class="p">=</span><span class="c"># \d
+</span><span class="s">Did not find any relations.</span>
+<span class="py">postgres</span><span class="p">=</span><span class="c"># \dg
+</span>                                   <span class="s">List of roles</span>
+ <span class="err">Role</span> <span class="err">name</span> <span class="err">|</span>                         <span class="err">Attributes</span>                         <span class="err">|</span> <span class="err">Member</span> <span class="err">of</span>
+<span class="err">-----------+------------------------------------------------------------+-----------</span>
+ <span class="err"><span class="notranslate">galaxy</span></span>    <span class="err">|</span>                                                            <span class="err">|</span> <span class="err">{}</span>
+ <span class="err">postgres</span>  <span class="err">|</span> <span class="err">Superuser,</span> <span class="err">Create</span> <span class="err">role,</span> <span class="err">Create</span> <span class="err">DB,</span> <span class="err">Replication,</span> <span class="err">Bypass</span> <span class="err">RLS</span> <span class="err">|</span> <span class="err">{}</span>
+
+<span class="py">postgres</span><span class="p">=</span><span class="c">#
+</span></code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-6"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <p>Inspect the postgres directory</p>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> /etc/postgresql/<span class="k">*</span>/main/
+</code></pre></div>          </div>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash-6"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">conf.d</span>
+<span class="err">environment</span>
+<span class="err">pg_ctl.conf</span>
+<span class="err">pg_hba.conf</span>
+<span class="err">pg_hba.conf.3350.2020-07-08@11:51:47~</span>
+<span class="err">pg_ident.conf</span>
+<span class="err">postgresql.conf</span>
+<span class="err">start.conf</span>
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
     </li>
   </ol>
 </blockquote>
@@ -972,17 +1218,17 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Open <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> with your text editor and set the following:</p>
 
       <ul>
-        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="language-plaintext highlighter-rouge">git</code>, <code class="language-plaintext highlighter-rouge">make</code>, and <code class="language-plaintext highlighter-rouge">virtualenv</code>.</li>
+        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="language-plaintext highlighter-rouge">git</code>, <code class="language-plaintext highlighter-rouge">make</code>, <code class="language-plaintext highlighter-rouge">virtualenv</code>, <code class="language-plaintext highlighter-rouge">tar</code>, and <code class="language-plaintext highlighter-rouge">bzip2</code>.</li>
         <li>Add the roles <code class="language-plaintext highlighter-rouge">geerlingguy.pip</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> run as the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
       </ul>
 
       <blockquote class="question">
-        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How does the updated playbook look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
@@ -990,7 +1236,7 @@ best practices and knowledge from previous admins codified for you.</p>
   <span class="na">pre_tasks</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
       <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python3-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">virtualenv'</span><span class="pi">]</span>
+        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python3-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">tar'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">bzip2'</span><span class="pi">]</span>
   <span class="na">roles</span><span class="pi">:</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
@@ -1005,6 +1251,13 @@ best practices and knowledge from previous admins codified for you.</p>
 
         </blockquote>
 
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-miniconda-fails-to-work"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Miniconda fails to work</h3>
+        <p>The <span class="notranslate">Galaxy</span> user is created to separate privileges. Then we add <code class="language-plaintext highlighter-rouge">uchida.miniconda</code>, which is run as the <span class="notranslate">Galaxy</span> user.</p>
+
+        <p>The miniconda role attempts to install tar and bzip2, even when the user doesn’t have permissions to do this. This issue has been addressed in the codebase, but, the role has not seen a release which would address this. You do <em>not</em> need to run this role, <span class="notranslate">Galaxy</span> will attempt to install conda when it is missing. We added it to prevent a possible race condition between the two mules if both attempt to install conda at the same time. So, remove the role from your playbook, and carry on, if you have issues.</p>
       </blockquote>
     </li>
     <li>
@@ -1053,8 +1306,8 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></td>
-            <td><code class="language-plaintext highlighter-rouge">release_20.01</code></td>
-            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 20.01</td>
+            <td><code class="language-plaintext highlighter-rouge">release_20.05</code></td>
+            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 20.05</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_style</code></td>
@@ -1078,6 +1331,15 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
         </tbody>
       </table>
+
+      <blockquote class="tip">
+        <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
+        <p>In the time between this tutorial was last updated (2020-07-09), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+
+        <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
+
+        <p>Please ensure you consult the <a href="https://docs.galaxyproject.org/en/master/releases/index.html">releases documentation</a></p>
+      </blockquote>
     </li>
     <li>
       <p>Again edit the group variables file and add a variable for <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>. It will be a hash with one key, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> which will also be a hash. Inside here you can place all of your <span class="notranslate">Galaxy</span> configuration.</p>
@@ -1091,7 +1353,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Now you should set:</p>
       <ol>
         <li><code class="language-plaintext highlighter-rouge">admin_users</code> to the email address you will use with this <span class="notranslate">Galaxy</span>.</li>
-        <li><code class="language-plaintext highlighter-rouge">brand</code> to something fun!</li>
+        <li><code class="language-plaintext highlighter-rouge">brand</code> to something fun! (E.g. 🧬🔬🚀)</li>
         <li><code class="language-plaintext highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="language-plaintext highlighter-rouge">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql</code>).</li>
         <li><code class="language-plaintext highlighter-rouge">file_path</code> to a place to store data, <code class="language-plaintext highlighter-rouge">/data</code> is fine for this lesson which sets up a single-node <span class="notranslate">Galaxy</span>. If you have separate compute machines, this will normally need to be storage shared between the <span class="notranslate">Galaxy</span> node and compute nodes.</li>
         <li><code class="language-plaintext highlighter-rouge">check_migrate_tools</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> due to a new installation of <span class="notranslate">Galaxy</span>.</li>
@@ -1150,7 +1412,6 @@ So it is not always easy to tell what variables will be set, or what their final
     <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
     <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
     <span class="na">static-map</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">/static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue</span>
       <span class="pi">-</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
       <span class="pi">-</span> <span class="s">/favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico</span>
     <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
@@ -1187,12 +1448,12 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
 
       <blockquote class="question">
-        <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
         <p>How does your current group variables file look?</p>
 
         <blockquote class="solution">
-          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
           <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="c1"># python3 support</span>
@@ -1214,7 +1475,7 @@ So it is not always easy to tell what variables will be set, or what their final
 <span class="na"><span class="notranslate">galaxy</span>_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
 <span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span></span>
 <span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
-<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.01</span>
+<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.05</span>
 <span class="na"><span class="notranslate">galaxy</span>_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
 <span class="na"><span class="notranslate">galaxy</span>_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">miniconda_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_tool_dependency_dir</span><span class="nv"> </span><span class="s">}}/_conda"</span>
@@ -1222,7 +1483,7 @@ So it is not always easy to tell what variables will be set, or what their final
 
 <span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">brand</span><span class="pi">:</span> <span class="s2">"</span><span class="s">My</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
+    <span class="na">brand</span><span class="pi">:</span> <span class="s2">"</span><span class="s">🧬🔬🚀"</span>
     <span class="na">admin_users</span><span class="pi">:</span> <span class="s">admin@example.org</span>
     <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
     <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
@@ -1235,7 +1496,6 @@ So it is not always easy to tell what variables will be set, or what their final
     <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
     <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
     <span class="na">static-map</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">/static/style={{ <span class="notranslate">galaxy</span>_server_dir }}/static/style/blue</span>
       <span class="pi">-</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
       <span class="pi">-</span> <span class="s">/favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico</span>
     <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
@@ -1263,24 +1523,578 @@ So it is not always easy to tell what variables will be set, or what their final
     <li>
       <p>Run the playbook.</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-7"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
 
-      <blockquote>
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output-bash-7"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PLAY</span> <span class="nn">[<span class="notranslate">galaxy</span>servers]</span> <span class="err">***************************************************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[Gathering Facts]</span> <span class="err">*************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[Install Dependencies]</span> <span class="err">********************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : include_tasks]</span> <span class="err">************************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.postgresql/tasks/debian.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install pgdg package signing key (Debian/pgdg)]</span> <span class="err">***************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install pgdg repository (Debian/pgdg)]</span> <span class="err">************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install PostgreSQL (Debian)]</span> <span class="err">**********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Get installed version]</span> <span class="err">****************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set version fact]</span> <span class="err">*********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set version fact]</span> <span class="err">*********************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set OS-specific variables]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set pgdata fact]</span> <span class="err">**********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set conf dir fact]</span> <span class="err">********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : include_tasks]</span> <span class="err">************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Create conf.d]</span> <span class="err">************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Check for conf.d include in postgresql.conf]</span> <span class="err">******************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set conf.d include in postgresql.conf]</span> <span class="err">************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Include 25ansible_postgresql.conf in postgresql.conf]</span> <span class="err">*********</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Set config options]</span> <span class="err">*******************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Install pg_hba.conf]</span> <span class="err">******************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : include_tasks]</span> <span class="err">************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.postgresql : Ensure PostgreSQL is running]</span> <span class="err">*********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Revoke extra privileges]</span> <span class="err">************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop databases]</span> <span class="err">*********************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create and drop users]</span> <span class="err">**************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
+<span class="nn">[WARNING]</span><span class="err">:</span> <span class="err">Module</span> <span class="err">did</span> <span class="err">not</span> <span class="err">set</span> <span class="err">no_log</span> <span class="err">for</span> <span class="err">no_password_changes</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create groups]</span> <span class="err">**********************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Add or remove users from groups]</span> <span class="err">****************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Drop groups]</span> <span class="err">************************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Create databases]</span> <span class="err">*******************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>', 'owner': '<span class="notranslate">galaxy</span>'})</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant user database privileges]</span> <span class="err">*****************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'name': '<span class="notranslate">galaxy</span>'})</span>
+
+<span class="err">TASK</span> <span class="nn">[natefoo.postgresql_objects : Grant extra privileges]</span> <span class="err">*************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[geerlingguy.pip : Ensure Pip is installed.]</span> <span class="err">**********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[geerlingguy.pip : Ensure pip_install_packages are installed.]</span> <span class="err">****************************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure that mutually exclusive options are not set]</span> <span class="err">***************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">{</span>
+    <span class="err">"changed":</span> <span class="err">false,</span>
+    <span class="err">"msg":</span> <span class="err">"All</span> <span class="err">assertions</span> <span class="err">passed"</span>
+<span class="err">}</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set privilege separation default variables]</span> <span class="err">***********************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include layout vars]</span> <span class="err">**********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set any unset variables from layout defaults]</span> <span class="err">*********************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_venv_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_server_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_config_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_mutable_config_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_shed_tools_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_cache_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>_local_tools_dir)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Check that any explicitly set <span class="notranslate">Galaxy</span> config options match the values of explicitly set variables]</span> <span class="err">***</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">tool_dependency_dir)</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">file_path)</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">job_working_directory)</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">shed_tool_config_file)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set any unset variables corresponding to <span class="notranslate">Galaxy</span> config options from <span class="notranslate">galaxy</span>_config or layout defaults]</span> <span class="err">***</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">tool_dependency_dir)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">file_path)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">job_working_directory)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include user creation tasks]</span> <span class="err">**************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/user.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">Galaxy</span> group]</span> <span class="err">**********************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">Galaxy</span> user]</span> <span class="err">***********************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">Galaxy</span> privilege separation user]</span> <span class="err">**************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include path management tasks]</span> <span class="err">************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/paths.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get group IDs for <span class="notranslate">Galaxy</span> users]</span> <span class="err">***********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">root)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get group names for <span class="notranslate">Galaxy</span> users]</span> <span class="err">*********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s"><span class="notranslate">galaxy</span>)</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">root)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set <span class="notranslate">Galaxy</span> user facts]</span> <span class="err">********************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Determine whether to restrict to group permissions]</span> <span class="err">***************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">galaxy</span>_root]</span> <span class="err">***********************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create additional privilege separated directories]</span> <span class="err">****************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/venv)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/server)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/config)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/local_tools)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create additional directories]</span> <span class="err">************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/var)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/var/config)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/var/cache)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/var/shed_tools)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/var/dependencies)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/data)</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/jobs)</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include clone tasks]</span> <span class="err">**********************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/clone.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Update <span class="notranslate">Galaxy</span> to specified ref]</span> <span class="err">***********************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Report <span class="notranslate">Galaxy</span> version change]</span> <span class="err">*************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">{</span>
+    <span class="err">"msg":</span> <span class="err">"<span class="notranslate">Galaxy</span></span> <span class="err">version</span> <span class="err">changed</span> <span class="err">from</span> <span class="err">''</span> <span class="err">to</span> <span class="err">'e75a792fc631ff216de6664d399f6bbe371086cd'"</span>
+<span class="err">}</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">Galaxy</span> virtualenv]</span> <span class="err">*****************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure pip is the latest release]</span> <span class="err">*********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Remove orphaned .pyc files and compile bytecode]</span> <span class="err">******************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include download tasks]</span> <span class="err">*******************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include static config setup tasks]</span> <span class="err">********************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/static_setup.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure <span class="notranslate">Galaxy</span> version is set]</span> <span class="err">*************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/_inc_<span class="notranslate">galaxy</span>_version.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Collect <span class="notranslate">Galaxy</span> version file]</span> <span class="err">**************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Determine <span class="notranslate">Galaxy</span> version]</span> <span class="err">*****************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install additional <span class="notranslate">Galaxy</span> config files (static)]</span> <span class="err">******************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install additional <span class="notranslate">Galaxy</span> config files (template)]</span> <span class="err">****************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install local tools]</span> <span class="err">**********************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install local_tool_conf.xml]</span> <span class="err">**************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Append local_tool_conf.xml to tool_config_file <span class="notranslate">Galaxy</span> config option]</span> <span class="err">***</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Append shed_tool_conf.xml to tool_config_file <span class="notranslate">Galaxy</span> config option]</span> <span class="err">***</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure dynamic job rules paths exists]</span> <span class="err">****************************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install dynamic job rules]</span> <span class="err">****************************************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure dynamic rule __init__.py's exist]</span> <span class="err">**************************</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">Galaxy</span> configuration file]</span> <span class="err">*********************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include dependency setup tasks]</span> <span class="err">***********************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/dependencies.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Create <span class="notranslate">Galaxy</span> virtualenv]</span> <span class="err">*****************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure pip is the latest release]</span> <span class="err">*********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install <span class="notranslate">Galaxy</span> base dependencies]</span> <span class="err">*********************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Collect <span class="notranslate">Galaxy</span> conditional dependency requirement strings]</span> <span class="err">********</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install <span class="notranslate">Galaxy</span> conditional dependencies]</span> <span class="err">**************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include mutable config setup tasks]</span> <span class="err">*******************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/mutable_setup.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure <span class="notranslate">Galaxy</span> version is set]</span> <span class="err">*************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Instantiate mutable configuration files]</span> <span class="err">**************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_data_manager_conf.xml', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/shed_data_manager_conf.xml'})</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_tool_data_table_conf.xml', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_data_table_conf.xml'})</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Instantiate mutable configuration templates]</span> <span class="err">**********************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/migrated_tools_conf.xml'})</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_conf.xml'})</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include database management tasks]</span> <span class="err">********************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/database.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get current <span class="notranslate">Galaxy</span> DB version]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get maximum <span class="notranslate">Galaxy</span> DB version]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Report current and max <span class="notranslate">Galaxy</span> database]</span> <span class="err">***************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Upgrade <span class="notranslate">Galaxy</span> DB]</span> <span class="err">************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include client build tasks]</span> <span class="err">***************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/client.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure client_build_hash.txt exists]</span> <span class="err">******************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get current client commit id]</span> <span class="err">*************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install <span class="notranslate">Galaxy</span> base dependencies]</span> <span class="err">*********************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Collect <span class="notranslate">Galaxy</span> conditional dependency requirement strings]</span> <span class="err">********</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install <span class="notranslate">Galaxy</span> conditional dependencies]</span> <span class="err">**************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include mutable config setup tasks]</span> <span class="err">*******************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/mutable_setup.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure <span class="notranslate">Galaxy</span> version is set]</span> <span class="err">*************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Instantiate mutable configuration files]</span> <span class="err">**************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_data_manager_conf.xml', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/shed_data_manager_conf.xml'})</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_tool_data_table_conf.xml', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_data_table_conf.xml'})</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Instantiate mutable configuration templates]</span> <span class="err">**********************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/migrated_tools_conf.xml'})</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">(</span><span class="py">item</span><span class="p">=</span><span class="s">{'src': 'shed_tool_conf.xml.j2', 'dest': '/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_conf.xml'})</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include database management tasks]</span> <span class="err">********************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/database.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get current <span class="notranslate">Galaxy</span> DB version]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get maximum <span class="notranslate">Galaxy</span> DB version]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Report current and max <span class="notranslate">Galaxy</span> database]</span> <span class="err">***************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Upgrade <span class="notranslate">Galaxy</span> DB]</span> <span class="err">************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include client build tasks]</span> <span class="err">***************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/client.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure client_build_hash.txt exists]</span> <span class="err">******************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Get current client commit id]</span> <span class="err">*************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set client build version fact]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set client build version fact]</span> <span class="err">************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Report client version mismatch]</span> <span class="err">***********************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">{</span>
+    <span class="err">"msg":</span> <span class="err">"<span class="notranslate">Galaxy</span></span> <span class="err">client</span> <span class="err">is</span> <span class="err">out</span> <span class="err">of</span> <span class="err">date:</span> <span class="err">new-unbuilt</span> <span class="err">!=</span> <span class="err">e75a792fc631ff216de6664d399f6bbe371086cd"</span>
+
+<span class="err">}</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure <span class="notranslate">galaxy</span>_node_version is set]</span> <span class="err">********************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/_inc_node_version.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Collect <span class="notranslate">Galaxy</span> Node.js version file]</span> <span class="err">******************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set <span class="notranslate">Galaxy</span> Node.js version fact]</span> <span class="err">**********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Report preferred Node.js version]</span> <span class="err">*********************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">{</span>
+    <span class="err">"<span class="notranslate">galaxy</span>_node_version":</span> <span class="err">"10.15.3"</span>
+
+<span class="err">}</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install node]</span> <span class="err">*****************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Install yarn]</span> <span class="err">*****************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include client build process]</span> <span class="err">*************************************</span>
+<span class="err">included:</span> <span class="err">/home/ubuntu/<span class="notranslate">galaxy</span>/roles/<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>/tasks/_inc_client_build_make.yml</span> <span class="err">for</span> <span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Build client]</span> <span class="err">****************************************************************************************************************************************************************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Fetch client version]</span> <span class="err">********************************************************************************************************************************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Set client build version fact]</span> <span class="err">***********************************************************************************************************************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Ensure that client update succeeded]</span> <span class="err">*****************************************************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : Include error document setup tasks]</span> <span class="err">******************************************************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : miniconda installer is downloaded]</span> <span class="err">***********************************************************************************************************************************************************************************</span>
+<span class="nn">[WARNING]</span><span class="err">:</span> <span class="err">Module</span> <span class="err">remote_tmp</span> <span class="err">/home/<span class="notranslate">galaxy</span>/.ansible/tmp</span> <span class="err">did</span> <span class="err">not</span> <span class="err">exist</span> <span class="err">and</span> <span class="err">was</span> <span class="err">created</span> <span class="err">with</span> <span class="err">a</span> <span class="err">mode</span> <span class="err">of</span> <span class="err">0700,</span> <span class="err">this</span> <span class="err">may</span> <span class="err">cause</span> <span class="err">issues</span> <span class="err">when</span> <span class="err">running</span> <span class="err">as</span> <span class="err">another</span> <span class="err">user.</span> <span class="err">To</span> <span class="err">avoid</span> <span class="err">this,</span> <span class="err">create</span> <span class="err">the</span> <span class="err">remote_tmp</span> <span class="err">dir</span> <span class="err">with</span> <span class="err">the</span> <span class="err">correct</span> <span class="err">permissions</span> <span class="err">manually</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : directory /srv/<span class="notranslate">galaxy</span>/var/dependencies exists]</span> <span class="err">***********************************************************************************************************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : tar is installed]</span> <span class="err">****************************************************************************************************************************************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : bzip2 is installed]</span> <span class="err">**************************************************************************************************************************************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : miniconda is installed]</span> <span class="err">**********************************************************************************************************************************************************************************************</span>
+<span class="err">changed:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : miniconda is up-to-date]</span> <span class="err">*********************************************************************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : conda environment file /tmp/-environment.yml is created]</span> <span class="err">*************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : conda environment  is created]</span> <span class="err">***************************************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">TASK</span> <span class="nn">[uchida.miniconda : conda environment  is up-to-date]</span> <span class="err">************************************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">RUNNING</span> <span class="err">HANDLER</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : default restart <span class="notranslate">galaxy</span> handler]</span> <span class="err">***********************************************************************************************************************************************************************</span>
+<span class="err">ok:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span> <span class="err">=&gt;</span> <span class="err">{</span>
+    <span class="err">"msg":</span> <span class="err">"RESTARTER</span> <span class="err">NOT</span> <span class="err">IMPLEMENTED</span> <span class="err">-</span> <span class="err">Please</span> <span class="err">restart</span> <span class="err"><span class="notranslate">Galaxy</span></span> <span class="err">manually.</span> <span class="err">You</span> <span class="err">can</span> <span class="err">define</span> <span class="err">your</span> <span class="err">own</span> <span class="err">handler</span> <span class="err">and</span> <span class="err">enable</span> <span class="err">it</span> <span class="err">with</span> <span class="err">`<span class="notranslate">galaxy</span>_restart_handler_name`"</span>
+<span class="err">}</span>
+
+<span class="err">RUNNING</span> <span class="err">HANDLER</span> <span class="nn">[<span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> : email administrator with commit id]</span> <span class="err">*******************************************************************************************************************************************************************</span>
+<span class="err">skipping:</span> <span class="nn">[gat-0.training.<span class="notranslate">galaxy</span>project.eu]</span>
+
+<span class="err">PLAY</span> <span class="err">RECAP</span> <span class="err">************************************************************************************************************************************************************************************************************************************</span>
+<span class="err">gat-0.training.<span class="notranslate">galaxy</span>project.eu</span> <span class="err">:</span> <span class="py">ok</span><span class="p">=</span><span class="s">79   changed=20   unreachable=0    failed=0    skipped=38   rescued=0    ignored=0</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-huge-wealth-of-knowledge"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Huge wealth of knowledge</h3>
+        <p>You will notice the huge volume of output from this playbook! There are
+many, many steps for deploying a production <span class="notranslate">Galaxy</span>, and there is a vast
+amount of knowledge encoded into these playbooks by the developers and
+admins who use them. While we recommend this, choosing to use Ansible
+and the official playbooks means you are opting in to receive all of this
+knowledge applied automatically to your systems. You are welcome to use
+a different Configuration Management system which works for your infrastructure, but it might
+mean re-creating a large amount of existing work that is maintained by a
+large community of admins.</p>
+      </blockquote>
+
+      <blockquote class="tip">
         <h3 id="tip-slow-deployment"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Slow Deployment</h3>
-        <p>The deployment can be slowed down by migrations, and the client build.
+        <p>The deployment can be slowed down by the client build.
 The client is only re-built when there are changes in the files needed for the <span class="notranslate">Galaxy</span> user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.</p>
       </blockquote>
     </li>
     <li>
       <p>Explore what has been set up for you.</p>
+
       <ul>
         <li><span class="notranslate">Galaxy</span> has been deployed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server</code></li>
-        <li>The configuration lives in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</code> - be sure to look through it to see what default options have been set for you</li>
+        <li>The configuration lives in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</code> - be sure to look through it to see what options have been set for you</li>
         <li>Note the permissions of the contents of <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span></code></li>
         <li>Some config files that <span class="notranslate">Galaxy</span> maintains itself, such as <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code>, which controls what tools that you have installed from the Tool Shed will be loaded, have been instantiated in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/var/config</code></li>
         <li>A Python virtualenv - an isolated Python environment - with all of the <span class="notranslate">Galaxy</span> framework’s dependencies has been installed in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/venv</code></li>
       </ul>
+
+      <blockquote class="code-io">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-8"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tree <span class="nt">-L</span> 1 /srv/<span class="notranslate">galaxy</span>/
+</code></pre></div>          </div>
+          <ul>
+            <li><code class="language-plaintext highlighter-rouge">config</code> holds all static <span class="notranslate">Galaxy</span> config files</li>
+            <li><code class="language-plaintext highlighter-rouge">jobs</code> is where all job files will go (e.g. temporary working dirs, job scripts, etc.)</li>
+            <li><code class="language-plaintext highlighter-rouge">local_tools</code> is a directory for custom, non-<span class="notranslate">ToolShed</span> tools managed by the Ansible playbook</li>
+            <li><code class="language-plaintext highlighter-rouge">server</code> contains all of the <span class="notranslate">Galaxy</span> server code</li>
+            <li><code class="language-plaintext highlighter-rouge">var</code> is a directory for all files created by <span class="notranslate">Galaxy</span>, e.g. whenever tools are installed from the <span class="notranslate">ToolShed</span>, the <span class="notranslate">Galaxy</span>-managed cache, and the integrated tool panel file.</li>
+            <li><code class="language-plaintext highlighter-rouge">venv</code> contains the <span class="notranslate">Galaxy</span> virtual environment and all dependencies, like uwsgi.</li>
+          </ul>
+        </blockquote>
+
+        <blockquote class="code-out">
+          <h3 id="code-out-output-bash-8"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+          <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">/srv/<span class="notranslate">galaxy</span>/</span>
+<span class="err">├──</span> <span class="err">config</span>
+<span class="err">├──</span> <span class="err">jobs</span>
+<span class="err">├──</span> <span class="err">local_tools</span>
+<span class="err">├──</span> <span class="err">server</span>
+<span class="err">├──</span> <span class="err">var</span>
+<span class="err">└──</span> <span class="err">venv</span>
+
+<span class="err">6</span> <span class="err">directories,</span> <span class="err">0</span> <span class="err">files</span>
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-9"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output-bash-9"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <p>You’ll notice that the file is significantly different from the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.</p>
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">---</span>
+<span class="c">##
+## This file is managed by Ansible.  ALL CHANGES WILL BE OVERWRITTEN.
+##
+</span>
+<span class="err">uwsgi:</span>
+    <span class="err">buffer-size:</span> <span class="err">16384</span>
+    <span class="err">die-on-term:</span> <span class="err">true</span>
+    <span class="err">enable-th<span class="notranslate">reads</span>:</span> <span class="err">true</span>
+    <span class="err">farm:</span> <span class="err">job-handlers:1,2</span>
+    <span class="err">hook-master-start:</span> <span class="err">unix_signal:2</span> <span class="err">gracefully_kill_them_all</span>
+    <span class="err">hook-master-start:</span> <span class="err">unix_signal:15</span> <span class="err">gracefully_kill_them_all</span>
+    <span class="err">http:</span> <span class="err">0.0.0.0:8080</span>
+    <span class="err">master:</span> <span class="err">true</span>
+    <span class="err">module:</span> <span class="err"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()</span>
+    <span class="err">mule:</span> <span class="err">lib/<span class="notranslate">galaxy</span>/main.py</span>
+    <span class="err">mule:</span> <span class="err">lib/<span class="notranslate">galaxy</span>/main.py</span>
+    <span class="err">offload-th<span class="notranslate">reads</span>:</span> <span class="err">2</span>
+    <span class="err">processes:</span> <span class="err">1</span>
+    <span class="err">py-call-osafterfork:</span> <span class="err">true</span>
+    <span class="err">pythonpath:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/lib</span>
+    <span class="err">static-map:</span> <span class="err">/</span><span class="py">static</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/server/static</span>
+    <span class="err">static-map:</span> <span class="err">/</span><span class="py">favicon.ico</span><span class="p">=</span><span class="s">/srv/<span class="notranslate">galaxy</span>/server/static/favicon.ico</span>
+    <span class="err">static-safe:</span> <span class="err">client/<span class="notranslate">galaxy</span>/images</span>
+    <span class="err">th<span class="notranslate">reads</span>:</span> <span class="err">4</span>
+    <span class="err">thunder-lock:</span> <span class="err">true</span>
+    <span class="err">virtualenv:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv</span>
+
+<span class="err"><span class="notranslate">galaxy</span>:</span>
+    <span class="err">admin_users:</span> <span class="err">admin@example.org</span>
+    <span class="err">brand:</span> <span class="err">🧬🔬🚀</span>
+    <span class="err">builds_file_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/builds.txt.sample</span>
+    <span class="err">check_migrate_tools:</span> <span class="err">false</span>
+    <span class="err">citation_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/data</span>
+    <span class="err">citation_cache_lock_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/citations/locks</span>
+    <span class="err">data_manager_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/data_manager_conf.xml.sample</span>
+    <span class="err">database_connection:</span> <span class="err">postgresql:///<span class="notranslate">galaxy</span>?</span><span class="py">host</span><span class="p">=</span><span class="s">/var/run/postgresql</span>
+    <span class="err">datatypes_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/datatypes_conf.xml.sample</span>
+    <span class="err">exte<span class="notranslate">rna</span>l_service_type_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/exte<span class="notranslate">rna</span>l_service_types_conf.xml.sample</span>
+    <span class="err">file_path:</span> <span class="err">/data</span>
+    <span class="err">integrated_tool_panel_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/integrated_tool_panel.xml</span>
+    <span class="err">job_working_directory:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/jobs</span>
+    <span class="err">migrated_tools_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/migrated_tools_conf.xml</span>
+    <span class="err">mulled_resolution_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/mulled/data</span>
+    <span class="err">mulled_resolution_cache_lock_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/mulled/lock</span>
+    <span class="err">new_file_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/tmp</span>
+    <span class="err">object_store_cache_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/object_store_cache</span>
+    <span class="err">openid_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/openid_conf.xml.sample</span>
+    <span class="err">openid_consumer_cache_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/openid_consumer_cache</span>
+    <span class="err">shed_data_manager_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/shed_data_manager_conf.xml</span>
+    <span class="err">shed_tool_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_conf.xml</span>
+    <span class="err">shed_tool_data_table_config:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/config/shed_tool_data_table_conf.xml</span>
+    <span class="err">template_cache_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/template_cache</span>
+    <span class="err">tool_cache_data_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/tool_cache</span>
+    <span class="err">tool_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/tool_conf.xml.sample</span>
+    <span class="err">tool_data_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/tool-data</span>
+    <span class="err">tool_data_table_config_path:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/tool_data_table_conf.xml.sample</span>
+    <span class="err">tool_dependency_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/dependencies</span>
+    <span class="err">tool_search_index_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/tool_search_index</span>
+    <span class="err">tool_sheds_config_file:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/config/tool_sheds_conf.xml.sample</span>
+    <span class="err">ucsc_build_sites:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/server/tool-data/shared/ucsc/ucsc_build_sites.txt.sample</span>
+    <span class="err">visualization_plugins_directory:</span> <span class="err">config/plugins/visualizations</span>
+    <span class="err">whoosh_index_dir:</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/var/cache/whoosh_cache</span>
+</code></pre></div>        </div>
+      </blockquote>
     </li>
   </ol>
 
@@ -1348,33 +2162,40 @@ The client is only re-built when there are changes in the files needed for the <
     <li>
       <p>Log in and check the status with <code class="language-plaintext highlighter-rouge">sudo systemctl status <span class="notranslate">galaxy</span></code></p>
 
-      <blockquote class="question">
-        <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status <span class="notranslate">galaxy</span>
+</code></pre></div>        </div>
+      </blockquote>
 
-        <p>How does the output look?</p>
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output-bash-10"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
-        <blockquote class="solution">
-          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">●</span> <span class="err"><span class="notranslate">galaxy</span>.service</span> <span class="err">-</span> <span class="err"><span class="notranslate">Galaxy</span></span>
+   <span class="err">Loaded:</span> <span class="err">loaded</span> <span class="err">(/etc/systemd/system/<span class="notranslate">galaxy</span>.service</span><span class="c">; enabled; vendor preset: enabled)
+</span>   <span class="err">Active:</span> <span class="err">active</span> <span class="err">(running)</span> <span class="err">since</span> <span class="err">Wed</span> <span class="err">2020-07-08</span> <span class="err">12:55:02</span> <span class="err">UTC</span><span class="c">; 1min 25s ago
+</span> <span class="err">Main</span> <span class="err">PID:</span> <span class="err">30426</span> <span class="err">(uwsgi)</span>
+    <span class="err">Tasks:</span> <span class="err">33</span> <span class="err">(limit:</span> <span class="err">4915)</span>
+   <span class="err">Memory:</span> <span class="err">502.3M</span> <span class="err">(limit:</span> <span class="err">32.0G)</span>
+      <span class="err">CPU:</span> <span class="err">22.122s</span>
+   <span class="err">CGroup:</span> <span class="err">/system.slice/<span class="notranslate">galaxy</span>.service</span>
+           <span class="err">├─30426</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
+           <span class="err">├─30735</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
+           <span class="err">├─30740</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
+           <span class="err">├─30741</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
+           <span class="err">└─30742</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/python3</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi</span> <span class="err">--yaml</span> <span class="err">/srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml</span> <span class="err">--stats</span> <span class="err">127.0.0.1:4010</span>
 
-          <p>If everything went correctly you should see something like</p>
-
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ systemctl status <span class="notranslate">galaxy</span>
-● <span class="notranslate">galaxy</span>.service - <span class="notranslate">Galaxy</span>
-   Loaded: loaded (/etc/systemd/system/<span class="notranslate">galaxy</span>.service; enabled; vendor preset: enabled)
-   Active: active (running) since Wed 2019-11-20 17:11:11 UTC; 9s ago
- Main PID: 20862 (uwsgi)
-    Tasks: 13 (limit: 4915)
-   Memory: 271.5M (limit: 32.0G)
-      CPU: 9.939s
-   CGroup: /system.slice/<span class="notranslate">galaxy</span>.service
-           ├─20862 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
-           ├─20897 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
-           ├─20903 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
-           └─20907 /srv/<span class="notranslate">galaxy</span>/venv/bin/uwsgi --yaml /srv/<span class="notranslate">galaxy</span>/config/<span class="notranslate">galaxy</span>.yml --stats 127.0.0.1:4010
-</code></pre></div>          </div>
-
-        </blockquote>
-
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.text:Paf</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">paf.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.text:Gfa1</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">gfa1.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.interval:Gtf</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">gtf.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.data:GenericAsn1</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">asn1.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,681</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Binary</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err"><span class="notranslate">toolshed</span>.gz.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:H5</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">h5.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:GenericAsn1Binary</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">asn1-bi</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Loom</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">loom.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.sequence:Axt</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">axt.</span>
+<span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Anndata</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">h5ad.</span>
+</code></pre></div>        </div>
       </blockquote>
     </li>
     <li>
@@ -1383,7 +2204,7 @@ The client is only re-built when there are changes in the files needed for the <
       <ol>
         <li>Refreshing the page before <span class="notranslate">Galaxy</span> has restarted will hang until the process is ready, a nice feature of uWSGI</li>
         <li>Although the playbook will restart <span class="notranslate">Galaxy</span> upon config changes, you will sometimes need to restart it by hand, which can be done with <code class="language-plaintext highlighter-rouge">systemctl restart <span class="notranslate">galaxy</span></code></li>
-        <li>You can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -f -u <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
+        <li>You can use <code class="language-plaintext highlighter-rouge">jou<span class="notranslate">rna</span>lctl -fu <span class="notranslate">galaxy</span></code> to see the logs of <span class="notranslate">Galaxy</span></li>
       </ol>
     </li>
   </ol>
@@ -1615,12 +2436,6 @@ The client is only re-built when there are changes in the files needed for the <
         <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="c1"># The style directory is in a slightly different location</span>
-    <span class="kn">location</span> <span class="n">/static/style</span> <span class="p">{</span>
-        <span class="kn">alias</span> <span class="p">{</span><span class="err">{</span> <span class="kn"><span class="notranslate">galaxy</span>_server_dir</span> <span class="err">}}</span><span class="n">/static/style/blue</span><span class="p">;</span>
-        <span class="kn">expires</span> <span class="s">24h</span><span class="p">;</span>
-    <span class="p">}</span>
-
     <span class="c1"># In <span class="notranslate">Galaxy</span> instances started with run.sh, many config files are</span>
     <span class="c1"># automatically copied around. The welcome page is one of them. In</span>
     <span class="c1"># production, this step is skipped, so we will manually alias that.</span>
@@ -1769,7 +2584,9 @@ In a training setting there is no need to request certificates that will be trus
 
 </blockquote>
 
-<p>Your entire <span class="notranslate">Galaxy</span> server is gone. You were a responsible admin and had your user data and database stored on a separate system (and backed up), so at least those survived. Nevertheless, this is when most of us start feeling really bad; bosses start yelling, we start crying or reaching for bad coping habits.</p>
+<p>Your entire <span class="notranslate">Galaxy</span> server is gone! 😱</p>
+
+<p>You were a responsible admin and had your user data and database stored on a separate system (and backed up), so at least those survived. Nevertheless, this is when most of us start feeling really bad; bosses start yelling, we start crying or reaching for bad coping habits.</p>
 
 <p>But not you! You spent the day writing this Ansible playbook that describes your environment completely; all of the software that was installed, all of the configuration changes you have made. It leverages many community maintained roles and can be used to completely rebuild the server! With minimal effort on your part.</p>
 
@@ -1964,8 +2781,8 @@ Additionally you can automatically send failing job error reports, even if users
     author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
-    month = "06",
-    day = "17"
+    month = "07",
+    day = "09"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
