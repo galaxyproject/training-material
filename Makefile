@@ -51,12 +51,20 @@ install: clean create-env ## install dependencies
 		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
-serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
-	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
+serve-full: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
+		${JEKYLL} serve --incremental --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
+.PHONY: serve-full
+
+serve: ## serve with some plugins disabled for speed
+	@echo "This will build the website with citations disabled. To run the full preview (slower), use make serve-full" && echo "" && \
+
+	$(ACTIVATE_ENV) && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
+		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
 
 detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
