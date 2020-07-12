@@ -68,13 +68,28 @@ and projects for Galaxy administrators.
 
 ---
 
-class: enlarge150
+# Lots of Gitter actually
 
-### Contributing
+![galaxyproject gitter landing](../../images/gitter_galaxyproject.png)
 
-All Galaxy development happens on GitHub
+https://gitter.im/galaxyproject 
 
-Contribution guidelines: https://bit.ly/gx-CONTRIBUTING-md
+---
+
+More links we'll mention as we go through the slides:
+
+- https://gitter.im/galaxyproject/Lobby
+- https://gitter.im/galaxyproject/dev
+- https://gitter.im/galaxyproject/admins
+- https://gitter.im/galaxyproject/FederatedGalaxy
+- https://gitter.im/galaxyproject/bioblend
+- https://gitter.im/galaxyproject/ephemeris
+- https://gitter.im/usegalaxy-eu/Lobby
+- https://gitter.im/galaxy-iuc/iuc
+- https://gitter.im/bgruening/docker-galaxy-stable
+- https://gitter.im/Galaxy-Training-Network/Lobby
+- https://gitter.im/biocontainers/Lobby
+- https://gitter.im/bioconda/Lobby
 
 ---
 
@@ -116,6 +131,16 @@ Galaxy training material for scientists, developers, and admins. Powers *https:/
 
 class: enlarge150
 
+[galaxyproject/**hub** ](https://github.com/galaxyproject/galaxy-hub)
+
+The Galaxy Hub is the community and documentation hub for the Galaxy Project. It is maintained by the community through this GitHub repository. It is a static website built using the metalsmith static site generator.
+
+Powers *https://galaxyproject.org/*.
+
+---
+
+class: enlarge150
+
 [galaxyproject/**bioblend** ](https://github.com/galaxyproject/bioblend)
 
 Official Python client for the Galaxy, ToolShed, and CloudMan APIs.
@@ -127,7 +152,7 @@ Best documented path to scripting the Galaxy API.
 class: enlarge150
 
 - [galaxyproject/**blend4php**](https://github.com/galaxyproject/blend4php)
-- [**jmchilton/blend4j**](https://github.com/jmchilton/blend4j)
+- [galaxyproject/**blend4j**](https://github.com/galaxyproject/blend4j)
 - [**chapmanb/clj-blend**](https://github.com/chapmanb/clj-blend)
 
 Galaxy API bindings for other languages, less actively maintained.
@@ -287,6 +312,17 @@ Ephemeris generally talks to the Galaxy API and is a pure Python project, gxadmi
 
 ---
 
+### Some (out of many) friends of the project
+
+![Bioconda](../../../../shared/images/conda_logo.png)
+
+![Biocontainers](../../images/biocontainers.png)
+
+Check out dev training materials "Tool Dependencies and Conda" and "Tool Dependencies and Containers"
+for more context.
+
+---
+
 ## Putting it all together
 
 ![](../../images/galaxy_main_scheme.png)
@@ -337,6 +373,8 @@ In brief, to responsibly report security issues e-mail
 
 [`galaxy-committers@lists.galaxyproject.org`](mailto:galaxy-committers@lists.galaxyproject.org)
 
+Check out the full policy in [SECURITY_POLICY.md](https://github.com/galaxyproject/galaxy/blob/dev/SECURITY_POLICY.md).
+
 ---
 
 ### Branches
@@ -364,6 +402,39 @@ class: enlarge200
 ### Code of Conduct (CODE_OF_CONDUCT.md)
 
 Describes expectations, encourages diversity, and describes how to report issues such as unacceptable behavior.
+
+Check out the full policy in [CODE_OF_CONDUCT.md](https://github.com/galaxyproject/galaxy/blob/dev/CODE_OF_CONDUCT.md).
+
+---
+
+class: enlarge150
+
+### Release Process
+
+New large releases are issued roughly every 4 months. The process is guided by an auto-created
+self documenting release issue.
+
+Check out the [20.05 release issue](https://github.com/galaxyproject/galaxy/issues/9636) as an example.
+
+---
+
+class: enlarge150
+
+### Organizing Issues and Pull Requests
+
+Extensive use of Github tags are used to try to organize the numerous issues and
+pull requests of the Galaxy repository.
+
+The tags are described in detail in [issues.rst](https://github.com/galaxyproject/galaxy/blob/dev/doc/source/project/issues.rst).
+
+---
+
+### docs.galaxyproject.org
+
+![docs.galaxyproject.org](../../images/core_docs.png)
+
+All these documents as well as versions code and deployment documentation and release notes
+can be found at docs.galaxyproject.org.
 
 ---
 
@@ -604,7 +675,7 @@ template: left-aligned
 
 ### Routes
 
-Setup on `webapp` in `galaxy.web.webapps.galaxy.buildapp.py`.
+Setup on `webapp` in `galaxy.webapps.galaxy.buildapp.py`.
 
 ```python
 webapp.add_route(
@@ -685,21 +756,27 @@ class: enlarge150
 - `lib/galaxy/webapps/galaxy/controllers/`
 - Return arbitrary content - JSON, HTML, etc...
 - Render HTML components using [mako](http://www.makotemplates.org/) templates (see `templates/`)
-- The usage of these should decrease over time.
+- The usage of these should continue to decrease over time.
 
 ---
 
 ## Application Components - Models and Managers
 
+*The architecture surrounding Galaxy components.*
+
+---
+
+![This section will talk about that manager layer and what lies below](../../images/wsgi_app.plantuml.svg)
+
 ---
 
 The are many of ways to describe and visualize the Galaxy server architecture,
-one is to imagine the Galaxy database as the ultimate source for Galaxy stuff
+one is to imagine the Galaxy database as the ultimate source for Galaxy "stuff"
 and the API controllers as the ultimate sink.
 
 In this architecture imagining of Galaxy, managers are the layer meant to
-mitigate all controller interactions (and isolate the backend from the web
-framework) while the model layer is meant to mitigate all database interactions
+mediate all controller interactions (and isolate the backend from the web
+framework) while the model layer is meant to mediate all database interactions
 (and isolate the backend from database internals).
 
 ---
@@ -716,6 +793,18 @@ Controllers should ideally be thin wrappers around actions defined in managers.
 
 Whenever a model requires more than just the database, the operation should be defined
 in a manager instead of in the model.
+
+---
+
+### Managers - Some Key Files
+
+![Key Managers](../../images/core_files_managers.plantuml.svg)
+
+---
+
+### Managers - Some Helpers
+
+![Manager Helpers](../../images/core_files_managers_helpers.plantuml.svg)
 
 ---
 
@@ -792,11 +881,9 @@ https://galaxyproject.org/admin/internals/data-model/
 
 ---
 
-![Data Managers](../../images/data_managers.svg)
-
----
-
 ## Application Components - Plugins
+
+*The architecture of pluggable Galaxy components.*
 
 ---
 
@@ -807,10 +894,6 @@ https://galaxyproject.org/admin/internals/data-model/
 ### Plugins All the Way Down
 
 ![Plugins](../../images/core_plugins_overview.plantuml.svg)
-
----
-
-### Custom Plugins
 
 ---
 
@@ -834,6 +917,34 @@ that execute a `ToolAction`.
 ![Tool Classes](../../images/core_tool_classes.plantuml.svg)
 
 ---
+
+![Running Tools](../../images/core_tool_sequence.plantuml.svg)
+
+---
+
+### A Little About Jobs
+
+- Job is placed into the database and picked up by the job handler.
+- Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
+- Job mapper (`JobRunnerMapper`) decides the "destination" for a job.
+- Job runner (e.g. `DrammaJobRunner`) actual runs the job and provides an interface for checking status.
+
+---
+
+### Job Runners
+
+![Job Runners](../../images/core_runner_classes.plantuml.svg)
+
+---
+
+![Handling Jobs](../../images/core_jobs_sequence.plantuml.svg)
+
+---
+
+![Data Managers](../../images/data_managers.svg)
+
+---
+
 
 ### Visualization Plugins
 
@@ -920,10 +1031,6 @@ All in `config/plugins/interactive_environments`:
 - `rstudio`
 - `phinch`
 - `bam_iobio`
-
----
-
-### Inheritance Plugins
 
 ---
 
@@ -1058,19 +1165,11 @@ resolver_type = "cached_mulled"
   namespace: mycustom
 ```
 
-
----
-
-### Job Components
-
-- Job is placed into the database and picked up by the job handler.
-- Job handler (`JobHandler`) watches the job and transitions job's state - common startup and finishing.
-- Job mapper (`JobRunnerMapper`) decides the "destination" for a job.
-- Job runner (e.g. `DrammaJobRunner`) actual runs the job and provides an interface for checking status.
-
 ---
 
 ## Client Architecture
+
+*The architecture of Galaxy's web user interface.*
 
 ---
 
@@ -1096,7 +1195,7 @@ class: normal
 client: node-deps ## Rebuild all client-side artifacts (for local dev)
   cd client && yarn run build
 
-client-production: node-deps ## Build optimized artifacts with sourcemaps.
+client-production-maps: node-deps ## Build optimized artifacts with sourcemaps.
   cd client && yarn run build-production-maps
 
 client-watch: node-deps ## Rebuild client on each change.
@@ -1145,6 +1244,18 @@ class: white
 - `sass` is leveraged by webpack to convert these styles to native CSS at client build time
 - Rebuild style with `make style`
 - Galaxy's SCSS files can be found in `client/galaxy/style/scss/`
+
+---
+
+### Package and Build Files
+
+![Client Build Files](../../images/core_files_client_build.plantuml.svg)
+
+---
+
+### Source Files
+
+![Client Build Files](../../images/core_files_client_sources.plantuml.svg)
 
 ---
 

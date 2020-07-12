@@ -16,25 +16,31 @@ def main():
             "' DO NOT EDIT: auto-generated from %s" % os.path.basename(arg_name),
         ]
 
-        def append_lines(mindmap_dict, indent=1):
-            line = "*" * indent + ""
+        def append_lines(mindmap_dict, indent=1, reverse=False):
             if isinstance(mindmap_dict, dict):
                 label = mindmap_dict["label"]
                 doc = mindmap_dict.get("doc")
                 items = mindmap_dict.get("items", [])
+                reverse = reverse or mindmap_dict.get("reverse", False)
             else:
                 label = mindmap_dict
                 doc = None
                 items = []
 
+            indent_with = "-" if reverse else "*"
+            line = indent_with * indent + ""
+
             if doc:
                 line += ":<b><i>" + label + "</i></b>\n " + doc + ";"
             else:
-                line += " <b><i>" + label + "</i></b>"
+                if label.startswith("_"):                    
+                    line += "_ <b><i>" + label[1:] + "</i></b>"
+                else:
+                    line += " <b><i>" + label + "</i></b>"
 
             lines.append(line)
             for item in items:
-                append_lines(item, indent + 1)
+                append_lines(item, indent + 1, reverse=reverse)
         
         append_lines(mindmap)
         lines.append("@endmindmap")
