@@ -66,7 +66,7 @@ Though there are approximately 3 million 10x gel barcodes used, the amount actua
 
 > ### {% icon details %} Whitelist Barcodes
 >
-> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with 3,000,0000 barcodes.
+> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with ~3,7 million barcodes.
 >
 > Both are provided in the Zenodo link, but we will only work with the 3 million barcodes because this is what is provided with the chemistry version.
 >
@@ -134,7 +134,7 @@ The *Cell Ranger* pipeline requires all three files to perform the demultiplexin
 
 ### Data upload and organization
 
-For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (737,000) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
+For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (~3,7 million) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
 
 The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
 
