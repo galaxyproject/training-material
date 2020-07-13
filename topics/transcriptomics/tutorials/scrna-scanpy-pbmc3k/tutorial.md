@@ -549,7 +549,7 @@ We would like to visualize 3 of the more informative QC metrics:
 >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with mito annotation and qc metrics`
 >    - *"Method used for plotting"*: `Generic: Violin plot, using 'pl.violin'`
 >      - *"Keys for accessing variables"*: `Subset of variables in 'adata.var_names' or fields of '.obs'`
->        - *"Keys for accessing variables"*: `total_counts, n_genes_by_counts, pct_counts_mito`
+>        - *"Keys for accessing variables"*: `n_genes_by_counts, total_counts, pct_counts_mito`
 >      - In *"Violin plot attributes"*:
 >        - *"Add a stripplot on top of the violin plot"*: `Yes`
 >          - *"Add a jitter to the stripplot"*: `Yes`
@@ -766,7 +766,7 @@ We will freeze the current state of the AnnData object, i.e. the logarithmized r
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Inspect and manipulate** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Freeze the current state into the 'raw' attribute`
 >
-> 2. Rename the generated output `3k PBMC after QC filtering and normalization/scaling`
+> 2. Rename the generated output `3k PBMC after QC filtering and normalization`
 {: .hands_on}
 
 ## Selection of features
@@ -1101,7 +1101,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PPBP for the 3rd PC.
+>    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PPBP for the 3rd PC (for consistency with the published [scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html) and [Seurat](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) documentation, we will use PPBP).
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -1308,7 +1308,7 @@ Currently, the Louvain graph-clustering method (community detection based on opt
 >
 >    > ### {% icon question %} Questions
 >    >
->    > How is the UMAP reduction stored in the `AnnData` object?
+>    > How is the clustering information stored in the `AnnData` object?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
