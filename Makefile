@@ -52,7 +52,7 @@ install: clean create-env ## install dependencies
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
-	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'." && echo "" && \
+	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
 	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
