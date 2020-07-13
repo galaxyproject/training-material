@@ -51,7 +51,8 @@ install: clean create-env ## install dependencies
 		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
 .PHONY: install
 
-serve-full: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'." && echo "" && \
 	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
@@ -59,8 +60,8 @@ serve-full: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to s
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-full
 
-serve: ## serve with some plugins disabled for speed
-	@echo "This will build the website with citations disabled. To run the full preview (slower), use make serve-full" && echo "" && \
+serve-quick: ## run a local server (faster, some plugins disabled for speed)
+	@echo "This will build the website with citations and other content disabled, and incremental on by default. To run the full preview (slower), use make serve-full" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
