@@ -35,6 +35,7 @@ layout: base
 <style type="text/css" media="all">
 .card-title {
 	font-size: 2rem;
+	text-align: center;
 }
 </style>
 
@@ -49,53 +50,66 @@ layout: base
  <!-- stats cards -->
 
  <!-- number of topics -->
- <div class="card" style="width: 30%;margin:1em">
+<div class="col-md-4">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">{{ topics | size }} Topics</h5>
    </div>
  </div>
+</div>
 
  <!-- number of tutorials -->
- <div class="card" style="width: 30%;margin:1em">
+<div class="col-md-4">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">{{ tutorials | size }} Tutorials</h5>
    <!--<p class="card-text">amazing!.</p>-->
   </div>
  </div>
+</div>
 
 <!-- number of contributors -->
- <div class="card" style="width: 30%;margin:1em">
+<div class="col-md-4">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">{{ contributors | size }} Contributors</h5>
   </div>
  </div>
+</div>
 
 <!-- tutorials per topic -->
-<div class="card" style="width: 47%;margin:1em">
+<div class="col-md-6">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">{{ topics_science | size }} Scientific Topics</h5>
    <canvas id="tutorialsBar" width="400" height="400"></canvas>
    </div>
  </div>
+</div>
 
  <!-- conttributors over time  -->
- <div class="card" style="width: 47%;margin:1em">
+<div class="col-md-6">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">Growing Community</h5>
    <canvas id="contributorsGraph" width="400" height="400"></canvas>
    </div>
  </div>
+</div>
 
  <!-- tutorials per topic (technical topics) -->
-<div class="card" style="width: 60%; margin:1em" >
+<div class="col-md-8">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">{{ topics_technical | size }} Technical Topics</h5>
    <canvas id="tutorialsBarTechnical" width="400"></canvas>
    </div>
  </div>
+</div>
 
  <!-- list the 5 newest contributors -->
- <div class="card" style="margin:1em">
+<div class="col-md-4">
+ <div class="card">
   <div class="card-body">
    <h5 class="card-title">New Contributors</h5>
    <p class="card-text">Welcome to our newest members!</p>
@@ -111,6 +125,44 @@ layout: base
 
    </div>
  </div>
+</div>
+
+
+<!-- Latest modified Tutorials -->
+<div class="col-md-12">
+ <div class="card">
+  <div class="card-body">
+   <h5 class="card-title">Recently Updated Tutorials</h5>
+   {% assign latest_tutorials = tutorials | filter_recent_modified: 10 %}
+   <table class="table table-striped">
+    <thead>
+      <tr><th>Date</th><th>Topic</th><th>Title</th></tr>
+    </thead>
+    <tbody>
+    {% for tuto in latest_tutorials %}
+            {% assign topic_id = tuto | get_topic %}
+            {% assign topic = site.data[topic_id] %}
+      <tr>
+        <td>{{ tuto.last_modified_at | date: "%b %-d, %Y"  }}</td>
+        <td style="text-align:right">
+            <a href="{{ site.baseurl }}/topics/{{ topic_id }}">
+                {{ topic.title }}
+            </a>
+</td>
+        <td><a href="{{ site.baseurl }}/{{ tuto.url }}">
+            {{ tuto.title }}
+            </a></td>
+      </tr>
+    {% endfor %}
+    </tbody>
+   </table>
+    <p class="card-text">Thanks a lot for your contributions!</p>
+
+   </div>
+ </div>
+</div>
+
+
  <!-- end stats cards -->
 
 
@@ -190,6 +242,13 @@ var tutorialsBar = new Chart(tutoBarTechnical, {
   plugins: [ChartDataLabels],
 
   options: {
+    scales: {
+      xAxes: [{
+        ticks: {
+          beginAtZero: true
+        }
+      }],
+    },
     legend: {
 	  display: false
 	},

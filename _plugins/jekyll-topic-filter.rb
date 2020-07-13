@@ -2,11 +2,25 @@ module Jekyll
   module TopicFilter
 
     def most_recent_contributors(contributors, count)
-        w = contributors.keys.sort{ |x, y|
-          contributors[y].fetch('joined', '2016-01') <=> contributors[x].fetch('joined', '2016-01')
-        }
+      # Remove non-hof
+      hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
+      # Get keys + sort by joined date
+      hof_k = hof.keys.sort{ |x, y|
+        hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
+      }
 
-         Hash[w.slice(0, count).collect{|k| [k, contributors[k]]}]
+      # Transform back into hash
+      Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
+    end
+
+    def filter_recent_modified(tutorials, count)
+      latest = tutorials.sort{ |x, y|
+        x.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+        y.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+
+        y.data['last_modified_at'].to_s <=> x.data['last_modified_at'].to_s
+      }
+      latest.slice(0, count)
     end
 
     def topic_count(resources)
