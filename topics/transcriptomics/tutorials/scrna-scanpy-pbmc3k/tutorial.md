@@ -1101,7 +1101,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PPBP for the 3rd PC.
+>    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PPBP for the 3rd PC (for consistency with the published [scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html) and [Seurat](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) documentation, we will use PPBP).
 >    > >
 >    > {: .solution}
 >    {: .question}
