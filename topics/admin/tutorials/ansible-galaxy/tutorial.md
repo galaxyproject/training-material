@@ -340,7 +340,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >
 >    > > ### {% icon code-out %} Output: Bash
 >    > >
->    > > Your directory should look approximately like this:
+>    > > Your galaxy playbook yml file should look approximately like this:
 >    > >
 >    > > ```yml
 >    > > ---
