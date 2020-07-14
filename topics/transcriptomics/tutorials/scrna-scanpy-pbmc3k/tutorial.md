@@ -804,7 +804,7 @@ Both highly variable genes and other genes are still in the `AnnData` object. We
 
 > ### {% icon hands_on %} Hands-on: Keep the highly variable genes
 >
-> 1. Inspect the output of the last **Filter** {% icon tool %})
+> 1. Inspect the output of the last **Filter** {% icon tool %}
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -1256,12 +1256,14 @@ Here, we will reduce the neighborhood to 2 UMAP components and then we will chec
 >    > >
 >    > > An extra object `X_umap` has been added to `obsm` with the 2 UMAP coordinates for each cell, as a table of 2 columns and 2,638 lines.
 >    > >
->    > > This information can be accessed by:
->    > > 1. Inspect the dataset `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > > This information can be accessed using:
+>    > > 1. **Inspect AnnData** {% icon tool %} with the following parameters:
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA, KNN graph, UMAP`
+>    > >    - *"What to inspect?"*: `Generalinformation about the object`
 >    > > 2. **Inspect AnnData** {% icon tool %} with the following parameters:
->    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph`
+>    > >    - {% icon param-file %} *"Annotated data matrix"*: `3k PBMC with only HVG, after scaling, PCA and KNN graph, UMAP`
 >    > >    - *"What to inspect?"*: `Multi-dimensional observations annotation (obsm)`
->    > >      - *"What to inspect in for the observations?"*: `UMAP coordinates (X_umap)`
+>    > >    - *"What to inspect in for the observations?"*: `UMAP coordinates (X_umap)`
 >    > {: .solution}
 >    >
 >    {: .question}
@@ -1350,7 +1352,7 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 > >
 > > 1. 8 clusters are identified, more or less corresponding to the ones we could see on the UMAP plots.
 > > 2. We expect that:
-> >    * CST3 should be representative of clusters 1, 3, 4, 7
+> >    * CST3 should be representative of clusters 1, 3, 4, 6
 > >    * NKG7 for clusters 0, 3 and 5
 > >    * PPBP for cluster 7
 > {: .solution}
