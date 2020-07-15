@@ -89,7 +89,7 @@ The second method works at any step during the analysis.
 >
 > 6. Click **Build**
 > 7. We will add a regex that creates 3 new columns with accession, treatment and library type:
->    - Click on the **Columnn** button and then **Using a Regular Expression**
+>    - Click on the **Column** button and then **Using a Regular Expression**
 >    - Select **Create columns matching expression groups**
 >    - Paste `.*(GSM.*)_(.*)_(.*).counts` in *"Regular Expression"*
 >    - Set *"Number of Groups"* to 3
