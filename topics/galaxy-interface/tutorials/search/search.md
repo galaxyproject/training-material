@@ -40,6 +40,7 @@ Query                                              | Results
 `tag=experiment1 tag=to_publish`                   | for searching on (a partial) dataset tag. You can repeat to search for more tags.
 `hid=25`                                           | A specific history item ID (based on the ordering in the history)
 `state=error`                                      | To show only datasets in a given state. Other options include `ok`, `running`, `paused`, and `new`.
+`history_content_type=collection`                  | Filter for collections
 
 
 > ### {% icon comment %} Combining Searches
