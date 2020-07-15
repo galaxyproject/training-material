@@ -112,7 +112,7 @@
   "learningResourceType": "slides",
   "name": "Slides for 'Getting data into Galaxy' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/get-data/slides.html",
-  "description": "",
+  "description": "The questions this  addresses are:\n - How do I get my data into Galaxy?\n - How do I get public data into Galaxy?\n\n",
   "hasPart": [
 
   ],
@@ -124,6 +124,14 @@
     {
       "@type": "Person",
       "name": "Dave Clements"
+    },
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
     }
   ],
   "contributor": [
@@ -134,6 +142,14 @@
     {
       "@type": "Person",
       "name": "Dave Clements"
+    },
+    {
+      "@type": "Person",
+      "name": "Maria Doyle"
+    },
+    {
+      "@type": "Person",
+      "name": "Saskia Hiltemann"
     }
   ],
   "about": [
@@ -194,6 +210,10 @@ slide to change on the other. Useful when presenting.
 ### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
 
 
+- How do I get my data into Galaxy?
+
+- How do I get public data into Galaxy?
+
 
 ---
 
@@ -207,40 +227,52 @@ slide to change on the other. Useful when presenting.
 
 ---
 
-# Many ways to get data into your workspace
+## Many ways to get data into your workspace
 
-- Import from your computer
-- Import from a URL
-- Directly enter text
-- Import using FTP
-- Import from *defined* data sources
-- Import from *undefined* data sources
-- Import from a Galaxy Data Library
+1. Import using **Get Data** sources e.g. UCSC, SRA
+2. Import from a Galaxy **Data Library**
+3. Import using **Upload File**
+  - Import from your computer
+  - Directly enter text
+  - Import from a URL
+  - Import using FTP
+  - Import directly into Collection
+  - Import using Rule Builder
 
 ???
 
 - To do analysis in Galaxy you first need data to work on.
 - There are many ways and sources for getting data into your history.
-  - Which method you use depends on where your data is, and how big it is
 - This tutorial will cover all of the techniques listed here.
 
 ---
 
-# The Get Data toolbox section
+### Best method depends on where the data is, and how big it is
 
-.pull-right[![Click on Get Data to expand it](../../images/get_data_boxed.png)]
+![](../../images/get_data_upload_logic.png)
 
-- *Click* on the **Get Data** toolbox in the toolbox (the left panel)
+.footnote[[Source: Galaxy Community Hub](https://galaxyproject.org/tutorials/upload/)]
 
 ---
 
-.pull-right[![A typical list of data sources](../../images/get_data_expanded.png)]
+# 1. The ***Get Data*** toolbox section
 
-# The Get Data toolbox section
+---
 
-- Expands to show data sources that have been *defined* on your server
+
+- *Click* on the **Get Data** toolbox in the toolbox (the left panel)
+
+![Click on Get Data to expand it](../../images/get_data_boxed.png)
+
+---
+
+.pull-right[.image-75[![A typical list of data sources](../../images/get_data_expanded.png)]]
+
+- Expands to show data sources
+  - E.g. UCSC, NCBI, Uniprot, ..
   - The specific data sources available on your Galaxy instance are determine by the server's administrator
-- All of these data sources can bring datasets (files) into your Galaxy workspace
+
+- All of these data sources can bring datasets (files) into your Galaxy workspace (history)
 
 ???
 
@@ -248,20 +280,44 @@ This shows the list of data sources that were available on usegalaxy.org in mid 
 
 ---
 
-### **Upload File** data source
+Two large data sources you can access through Galaxy are UCSC and SRA
 
-![Click on Upload File to show the import data form](../../images/upload_file_toolbox_entry.png)
+.pull-right[![](../../images/get_data_ucsc.png)]
+.pull-left[![](../../images/get_data_sra.png)]
 
-or
-
-.image-25[![click on upload button](../../images/upload_button.png)]
-
-???
-
-Two ways to launch the upload file form.
 ---
 
-# Upload files from your computer
+# 2. Import from Shared Data Library
+
+---
+
+.pull-left[
+
+- Top menu bar -&gt; Shared Data -&gt; Data Libraries
+
+- Configured by a Galaxy Administator
+
+- Can be imported directly into your history
+
+- Example: all GTN tutorial data]
+
+
+.pull-right[![](../../images/get_data_data_libraries.png)]
+
+---
+
+You can select the files you want and send to History as datasets or collection
+
+.image-75[![](../../images/get_data_import_library.png)]
+
+---
+
+
+# 3. Upload from your computer
+
+---
+
+.image-50[![click on upload button](../../images/upload_button.png)]
 
 ![Upload file form](../../images/upload_file_form_empty.png)
 
@@ -269,15 +325,16 @@ Two ways to launch the upload file form.
 
 - The **Upload File** data source can import data:
   - from your computer
-  - using a URL
   - by directly entering text
+  - using a URL
   - and via FTP
 
 This is probably the most commonly used tool for bringing data into Galaxy, and it is installed on almost every Galaxy server.
 
 ---
 
-# Upload files from your computer
+# Choose files
+
 
 ![Options for importing files from your laptop](../../images/upload_file_form_empty_local_choices.png)
 
@@ -288,11 +345,14 @@ This is probably the most commonly used tool for bringing data into Galaxy, and 
 
 ---
 
-After dragging and dropping / choosing* local files:
+# Set Metadata
+
+- **Datatype** (e.g. FastQ, VCF, BAM, tabular, ..)
+  - Galaxy will autodetect by default (sometimes guesses wrong)
+- **Genome Build** (e.g. hg19, mm9, ..)
+  - must be set manually (can be done later as well)
 
 ![](../../images/upload_file_file_list.png)
-
-( * but before importing )
 
 ???
 
@@ -306,19 +366,15 @@ After dragging and dropping / choosing* local files:
 
 ---
 
-Could rely on Galaxy to set datatypes for imported datasets, but sometimes it guesses wrong.
-
-Galaxy can't guess the build (genome assembly), so this needs to be manually set
+- Can be set for all files at once:
 
 ![Set datatype for all imported datasets](../../images/upload_file_set_all_datatype.png)
 
 ---
 
-But now we need to fix the datatype of the first imported dataset, because it has a different datatype:
+- Or per file:
 
 ![Manually set datatype for one dataset](../../images/upload_file_set_individual_file_type.png)
-
-Can also set the build (genome assembly) for individual files.
 
 ???
 
@@ -326,7 +382,9 @@ Can also set the build (genome assembly) for individual files.
 
 ---
 
-Once you have set everything, start the upload process:
+# Start upload process:
+
+- Once everything is ready, click the **Start** button
 
 ![Ready to upload files. Click on start](../../images/upload_file_ready.png)
 
@@ -353,13 +411,15 @@ and are ready to use when green.
 
 ## Directly enter text
 
-Sometimes it's useful to enter values directly.  This only works if your dataset is tiny.
+---
+
+- Sometimes it's useful to file content directly.
+  - only works if your dataset is tiny
+  - choose **Paste/Fetch data**
 
 ![Select Paste/Fetch data](../../images/upload_file_form_empty_paste.png)
 
 ---
-
-## Directly enter text
 
 Enter the data by typing (or pasting) it in the input box:
 
@@ -370,17 +430,21 @@ You can also set the datatype and build.
 
 ---
 
-## Server-to-Server transfer
+## Import using URL
+
+---
 
 The data might already be available on a web server somewhere. To avoid downloading data
 to your computer and uploading to Galaxy in two steps, you can instruct Galaxy to
 directly fetch the data from a given URL.
 
+
 ![Select Paste/Fetch data](../../images/upload_file_form_empty_paste.png)
 
----
+ Select **Paste/Fetch data**
 
-## Server-to-Server transfer
+
+---
 
 Enter the URLs (one per line) into the input box:
 
@@ -394,31 +458,19 @@ Enter the URLs (one per line) into the input box:
 
 ---
 
-### Why use FTP?
+- Why use FTP?
+  - Older Galaxies did not support uploading files larger than 2GB in size
+  - Many people are very comfortable using FTP to upload large datasets and you can sometimes resume interrupted uploads.
 
-- Older Galaxies did not support uploading files larger than 2GB in size
-- Many people are very comfortable using FTP to upload large datasets and you can sometimes resume interrupted uploads.
-
----
-
-### How to use FTP
-
-- The Galaxy server's administrator must have [enabled FTP](https://galaxyproject.org/admin/config/upload-via-ftp/) on the server
-- You will need to create an account on that Galaxy Server
-- You will need to install FTP software, or to run FTP from the shell
-
-See https://galaxyproject.org/ftp-upload/
+- How to use FTP
+  - The Galaxy server's administrator must have [enabled FTP](https://galaxyproject.org/admin/config/upload-via-ftp/) on the server
+  - You will need to create an account on that Galaxy Server
+  - You will need to install FTP software, or to run FTP from the shell
+  - See https://galaxyproject.org/ftp-upload/
 
 ---
 
-## Step 1: Create an account on the Galaxy server
-
-- To use FTP, you'll need to have an account on the Galaxy server you are using
-- See the *Creating an account on Galaxy* tutorial
-
----
-
-## Step 2: Make sure you have FTP software: FileZilla
+## Make sure you have an FTP client installed
 
 .pull-right[.image-25[![FileZilla](../../images/FileZilla_logo.png)]]
 
@@ -428,12 +480,11 @@ See https://galaxyproject.org/ftp-upload/
 
 ---
 
-## Step 3: Establish FTP connection to your Galaxy server
+## Establish FTP connection to your Galaxy server
 
-- Run your FTP client (FileZilla in these slides) and establish a connection to the Galaxy server you are using (usegalaxy.org in this example)
 - Provide
-  - the instance's FTP server name (e.g. usegalaxy.org)
-  - your full username (usually an email address) and password
+  - the instance's FTP server name (e.g. usegalaxy.org, ftp.usegalaxy.eu)
+  - your full **username** (usually an email address) and **password**
 
 ![FTP Connection Params](../../images/ftp_client_connect.png)
 
@@ -461,7 +512,77 @@ FTP Transfer in progress...
 
 ... and transfer complete.
 
-Now what?
+---
+
+# Where did my files go?
+
+- File Upload menu -&gt; **Choose FTP files**
+
+![choose FTP files](../../images/upload_ftp_import.png)
+
+---
+
+- Select files to import into your history
+- Click **Start**
+
+![choose FTP files](../../images/upload_ftp_import2.png)
+
+???
+
+As you can see, this dialog gives connection settings too
+
+---
+
+# Import directly into Collection
+
+---
+
+- Select **Collection** tab at top of upload menu
+- Add files as before (upload from computer, paste/fetch, FTP)
+
+![Direct collection Start](../../images/get_data_direct_collection1.png)
+
+---
+
+- Choose collection type (at bottom)
+- Set metadata (file type, genome build)
+- Click &quot;Build&quot;
+
+![Direct collection Build](../../images/get_data_direct_collection2.png)
+
+---
+
+- Name your collection
+- Click **Create** button
+
+![Direct collection Name](../../images/get_data_direct_collection3.png)
+
+---
+
+- Collection is now imported in your history
+- Click on it to expand it and view all files in collection
+
+![Direct collection History](../../images/get_data_direct_collection4.png)
+
+---
+
+# Import using Rule Based uploader
+
+---
+
+- When you want to import many files from URLs or Accession IDs directly into collection(s)
+- Supports advanced &quot;rules&quot; for creating collections from sample sheets
+- Click **Rule-based** tab at top of file upload window
+
+![Rule Uploader](../../images/get_data_rule_uploader.png)
+
+---
+
+# Import using Rule Based uploader
+
+Learn how to use it in the dedicated [Rule Based Uploader tutorial](
+https://galaxyproject.github.io//training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html)
+
 
 
 
@@ -481,7 +602,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 <div class="contributors-line">
 
 
-<a href="/training-material/hall-of-fame/pajanne/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pajanne" alt="Anne Pajon">Anne Pajon</a>, <a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Dave Clements">Dave Clements</a>
+<a href="/training-material/hall-of-fame/pajanne/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pajanne" alt="Anne Pajon">Anne Pajon</a>, <a href="/training-material/hall-of-fame/tnabtaf/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/tnabtaf" alt="Dave Clements">Dave Clements</a>, <a href="/training-material/hall-of-fame/mblue9/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mblue9" alt="Maria Doyle">Maria Doyle</a>, <a href="/training-material/hall-of-fame/shiltemann/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/shiltemann" alt="Saskia Hiltemann">Saskia Hiltemann</a>
 
 
 </div>

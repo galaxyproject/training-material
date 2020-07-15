@@ -484,6 +484,10 @@
         
     
         
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
     
         
     
@@ -584,7 +588,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 12, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -617,7 +621,7 @@ because of stochastic processes in the algorithms.</p>
 <ol id="markdown-toc">
   <li><a href="#what-does-galaxy-look-like" id="markdown-toc-what-does-galaxy-look-like">What does <span class="notranslate">Galaxy</span> look like?</a></li>
   <li><a href="#create-a-history" id="markdown-toc-create-a-history">Create a history</a>    <ol>
-      <li><a href="#upload-iris-dataset" id="markdown-toc-upload-iris-dataset">Upload Iris dataset</a></li>
+      <li><a href="#upload-the-iris-dataset" id="markdown-toc-upload-the-iris-dataset">Upload the Iris dataset</a></li>
     </ol>
   </li>
   <li><a href="#pre-processing" id="markdown-toc-pre-processing">Pre-processing</a>    <ol>
@@ -631,8 +635,8 @@ because of stochastic processes in the algorithms.</p>
     </ol>
   </li>
   <li><a href="#analysis-how-to-differentiate-the-different-iris-species" id="markdown-toc-analysis-how-to-differentiate-the-different-iris-species">Analysis: How to differentiate the different Iris species?</a>    <ol>
-      <li><a href="#summary-and-descriptive-statistics-with-datamash" id="markdown-toc-summary-and-descriptive-statistics-with-datamash">Summary and descriptive statistics with <strong>Datamash</strong></a></li>
-      <li><a href="#visualize-iris-dataset-with-scatterplot-w-ggplot2" id="markdown-toc-visualize-iris-dataset-with-scatterplot-w-ggplot2">Visualize Iris dataset with <strong>Scatterplot w ggplot2</strong></a></li>
+      <li><a href="#generate-summary-and-descriptive-statistics-with" id="markdown-toc-generate-summary-and-descriptive-statistics-with">Generate summary and descriptive statistics with</a></li>
+      <li><a href="#visualize-iris-dataset-features-with-two-dimensional-scatterplots" id="markdown-toc-visualize-iris-dataset-features-with-two-dimensional-scatterplots">Visualize Iris dataset features with two-dimensional scatterplots</a></li>
     </ol>
   </li>
   <li><a href="#galaxy-management" id="markdown-toc-galaxy-management"><span class="notranslate">Galaxy</span> management</a>    <ol>
@@ -648,25 +652,31 @@ because of stochastic processes in the algorithms.</p>
 
 <blockquote class="comment">
   <h3 id="comment-background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
-  <p>The Iris flower data set or Fisher’s Iris data set is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<a class="citation" href="#Fisher1936">Fisher 1936</a>).
-Each row of the table represents an iris flower, including its species and dimensions of its botanical parts, sepal and petal, in centimeters.
-For more history of this dataset read here <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia</a>.</p>
+  <p>The Iris flower data set, also known as Fisher’s or Anderson’s Iris data set, is a multivariate dataset introduced by the British statistician and biologist Ronald Fisher in his 1936 paper (<a class="citation" href="#Fisher1936">Fisher 1936</a>).
+Each row of the table represents an iris flower sample, describing its species and the dimensions in centimeters of its botanical parts, the sepals and petals.
+You can find more detailed information about this dataset on its dedicated <a href="https://en.wikipedia.org/wiki/Iris_flower_data_set">Wikipedia page</a>.</p>
 </blockquote>
 
 <h2 id="what-does-galaxy-look-like">What does <span class="notranslate">Galaxy</span> look like?</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-log-in-or-register"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Log in or register</h3>
-  <p>Browse to your <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> and log in or register.</p>
   <ol>
-    <li>Open your favorite browser (Chrome, Safari or Firefox as your browser, not Internet Explorer!)</li>
-    <li>Browse to your <span class="notranslate">Galaxy</span> instance</li>
-    <li>Log in or register</li>
+    <li>Open your favorite browser (Chrome/Chromium, Safari or Firefox, but not Internet Explorer/Edge!)</li>
+    <li>Browse to a <a href="https://galaxyproject.org/use/"><span class="notranslate">Galaxy</span> instance</a> of your choice</li>
+    <li>Choose <em>Login or Register</em> from the navigation bar at the top of the page</li>
+    <li>
+      <p>If you have previously registered an account with this particular instance of <span class="notranslate">Galaxy</span> (user accounts are <em>not</em> shared between public servers!), proceed by logging in with your registered <em>public name</em>, or email address, and your password.</p>
+
+      <p>If you need to create a new account, click on <em>Register here</em> instead.</p>
+    </li>
   </ol>
 
   <blockquote class="comment">
     <h3 id="comment-different-galaxy-servers"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Different <span class="notranslate">Galaxy</span> servers</h3>
-    <p>The particular <span class="notranslate">Galaxy</span> server that you are using may look slightly different than the one shown in this training. Don’t worry!</p>
+    <p>The particular <span class="notranslate">Galaxy</span> server that you are using may look slightly different than the one shown in this training.
+<span class="notranslate">Galaxy</span> instance administrators can choose the exact version of <span class="notranslate">Galaxy</span> they would like to offer and can customize its look and feel to some extent.
+The basic functionaity will be rather similar across instances, so don’t worry!</p>
   </blockquote>
 
 </blockquote>
@@ -683,12 +693,12 @@ For more history of this dataset read here <a href="https://en.wikipedia.org/wik
 
 <h1 id="create-a-history">Create a history</h1>
 
-<p><span class="notranslate">Galaxy</span> allows you to create analysis histories. A <strong>history</strong> can be thought of as an electronic experimental lab book; it keeps tracks of all the tools and parameters you used in your analysis. From such a history, a <strong><span class="notranslate">workflow</span></strong> can be extracted; this <span class="notranslate">workflow</span> can be used to easily repeat the analysis on different data.</p>
+<p><span class="notranslate">Galaxy</span> allows you to create analysis histories. A <strong>history</strong> can be thought of as an electronic experimental lab book; it keeps track of all the tools and parameters you used in your analysis. From such a history, a <strong><span class="notranslate">workflow</span></strong> can be extracted; this <span class="notranslate">workflow</span> can be used to easily repeat the analysis on different data.</p>
 
 <p>Think of a <span class="notranslate">workflow</span> as a cooking recipe with a list of ingredients (datasets) and a set of instructions
 (pipeline of operations) that describes how to prepare or make something (such as a plot, or a new dataset).
 The order of operations is important as very often the next operation takes as input the result of the previous operations. For instance, when baking
-a cake, you would first sift flour and then mix it with eggs as it would be impossible to sift flour afterwards.
+a cake, you would first sift the flour and then mix it with eggs as it would be impossible to sift the flour afterwards.
 That is what we call a pipeline. To make a full meal, we may need to combine multiple recipes (pipelines) together.</p>
 
 <p>The finalized pipelines can be generalized as a <span class="notranslate">workflow</span>. If we use cooking as an analogy, a <span class="notranslate">workflow</span> could represent an entire menu with all the recipes for each meal.
@@ -731,7 +741,7 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
 
 </blockquote>
 
-<h2 id="upload-iris-dataset">Upload Iris dataset</h2>
+<h2 id="upload-the-iris-dataset">Upload the Iris dataset</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -833,11 +843,8 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
         </ul>
       </blockquote>
     </li>
-    <li>Add a tag <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> called <code class="language-plaintext highlighter-rouge">iris</code> to the dataset
-      <ul>
-        <li>Make sure the tag start with a hashtag symbol (<code class="language-plaintext highlighter-rouge">#iris</code>)</li>
-        <li>This tag will stay with your dataset any any results derived from it, and will help you make sense of your history</li>
-      </ul>
+    <li>
+      <p>Add an <code class="language-plaintext highlighter-rouge">#iris</code> tag <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> to the dataset</p>
 
       <blockquote class="tip">
 
@@ -854,6 +861,9 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
         </ul>
 
       </blockquote>
+
+      <p>Make sure the tag starts with a hash symbol (<code class="language-plaintext highlighter-rouge">#</code>), which will make the tag stick not only to this dataset, but also to any results derived from it.
+This will help you make sense of your history.</p>
     </li>
   </ol>
 
@@ -861,9 +871,9 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
 
 <h1 id="pre-processing">Pre-processing</h1>
 
-<p>One or more pre-processing step may be required to proceed with analysis. In our case, the tools we will use require tab-separated files, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to do some pre-processing of the files to make them ready for analysis.</p>
+<p>Often, one or more data pre-processing step(s) may be required to proceed with an analysis.
+In our case, the tools we will use require tab-separated input data, and assume there is no header line. Since our data is comma-separated and has a header line, we will have to perform the following pre-processing steps to prepare it for the actual analysis:</p>
 
-<p>In the next steps we will perform two pre-processng steps:</p>
 <ul>
   <li>Format conversion</li>
   <li>Header removal</li>
@@ -932,7 +942,7 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
 
   <p>Different <span class="notranslate">Galaxy</span> servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
 
-  <p>Additionally different servers may have multiple, similarly named tools which accomplish similar functions. For these tutorials, you should select precisely the one that is described. However, in your real analyses, you’ll need to search among the various options to find the one that works for you.</p>
+  <p>Additionally different servers may have multiple, similarly named tools which accomplish similar functions. When following tutorials, you should use precisely the tools that they describe. For real analyses, however, you will need to search among the various options to find the one that works for you.</p>
 
 </blockquote>
 
@@ -1011,10 +1021,10 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
 <p>In order to answer this question, we will have to look at column 5 of our file, and count how many different values (species) appear there. There are several ways we could do this in <span class="notranslate">Galaxy</span>. One approach might be to first extract this column from the file, and then count how many unique lines the file contains. Let’s do it!</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-filtering-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering dataset</h3>
+  <h3 id="hands_on-hands-on-extract-species"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract species</h3>
 
   <ol>
-    <li><strong>Cut</strong> - columns from a table <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Cut</strong> columns from a table <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c5</code></li>
         <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
@@ -1037,7 +1047,7 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
     <li>
       <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting file</p>
     </li>
-    <li><strong>Unique</strong> - occurrences of each record <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>Unique</strong> occurrences of each record <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to scan for unique values”</em>: <code class="language-plaintext highlighter-rouge">iris species column</code> (the output from <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
@@ -1198,7 +1208,7 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
 
 <h1 id="analysis-how-to-differentiate-the-different-iris-species">Analysis: How to differentiate the different Iris species?</h1>
 
-<p>Our objective is to find what differentiate the different Iris species (Figure 1). We know that we have <strong>3</strong> species of iris flowers, with
+<p>Our objective is to find what distinguishes the different Iris species (Figure 1). We know that we have <strong>3</strong> species of iris flowers, with
 <strong>50</strong> samples for each:</p>
 <ul>
   <li>setosa</li>
@@ -1226,7 +1236,7 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
   <figure id="figure-2"><img src="../../images/iris_sepal_petal.png" alt="Sepal and petal" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Sepal and petal of Iris flowers</figcaption></figure>
 </blockquote>
 
-<h2 id="summary-and-descriptive-statistics-with-datamash">Summary and descriptive statistics with <strong>Datamash</strong></h2>
+<h2 id="generate-summary-and-descriptive-statistics-with">Generate summary and descriptive statistics with</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-get-the-mean-and-sample-standard-deviation-of-iris-flower-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the mean and sample standard deviation of Iris flower features</h3>
@@ -1237,7 +1247,7 @@ In other words, using a <span class="notranslate">workflow</span> makes it possi
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">iris tabular</code></li>
         <li><em>“Group by fields”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
         <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Sort input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Ignore case when grouping”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1334,13 +1344,13 @@ we cannot easily differentiate <em>Iris Versicolor</em> from <em>Iris Virginica<
 
 </blockquote>
 
-<h2 id="visualize-iris-dataset-with-scatterplot-w-ggplot2">Visualize Iris dataset with <strong>Scatterplot w ggplot2</strong></h2>
+<h2 id="visualize-iris-dataset-features-with-two-dimensional-scatterplots">Visualize Iris dataset features with two-dimensional scatterplots</h2>
 
 <p>Let’s visualize the Iris dataset to see how the features depend on each other, and
 check whether we can spot any immediate patterns.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-plot-iris-feature-pairs-in-two-dimensions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plot iris feature pairs in two dimensions</h3>
 
   <ol>
     <li><strong>Scatterplot w ggplot2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1605,7 +1615,7 @@ which you can import to <span class="notranslate">Galaxy</span> and use for the 
           <li>Scroll down to the <strong>Configure Output</strong> section of your desired parameter, and click it to expand it.
             <ul>
               <li>
-                <p>Under <strong>Rename dataset</strong>, give it meaningful name</p>
+                <p>Under <strong>Rename dataset</strong>, give it a meaningful name</p>
 
                 <p><img src="/training-material/shared/images/workflow_rename_datasets.png" alt="Rename output datasets" /></p>
               </li>
@@ -1631,7 +1641,7 @@ which you can import to <span class="notranslate">Galaxy</span> and use for the 
 
 <h2 id="run-workflow-on-different-data">Run <span class="notranslate">workflow</span> on different data</h2>
 
-<p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it on some different data. For example, let’s describing <code class="language-plaintext highlighter-rouge">diamonds</code> R dataset.</p>
+<p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it on some different data. For example, let us explore the <code class="language-plaintext highlighter-rouge">diamonds</code> R dataset with it.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-a-new-history-and-upload-a-new-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a new history and upload a new data</h3>
@@ -1738,7 +1748,7 @@ which you can import to <span class="notranslate">Galaxy</span> and use for the 
 
 </blockquote>
 
-<p>The <code class="language-plaintext highlighter-rouge">diamonds</code> data set comes from the well-known ggplot2 package developed by Hadley and initially collected from Diamond Search Engine in 2008.
+<p>The <code class="language-plaintext highlighter-rouge">diamonds</code> data set comes from the well-known ggplot2 package developed by Hadley and was initially collected from the Diamond Search Engine in 2008.
 For this training, we have created a simpler dataset by selecting a subset of columns.
 The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, cut, color and clarity):</p>
 <ul>
@@ -1897,6 +1907,7 @@ The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, 
 <p><i class="fas fa-trophy" aria-hidden="true"></i><span class="visually-hidden">trophy</span> Well done! You have just performed your first analysis in <span class="notranslate">Galaxy</span>. Additionally you can share your results and methods with others.</p>
 
 
+
                     
                     <blockquote class="key_points">
                         <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
@@ -1994,8 +2005,8 @@ The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, 
     author = "Anne Fouilloux and Nadia Goué and Christopher Barnett and Michele Maroni and Olha Nahorna and Dave Clements and Saskia Hiltemann",
     title = "Galaxy 101 for everyone (Galaxy Training Materials)",
     year = "2020",
-    month = "02",
-    day = "13"
+    month = "07",
+    day = "12"
     url = "\url{/training-material/topics/introduction/tutorials/galaxy-intro-101-everyone/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
