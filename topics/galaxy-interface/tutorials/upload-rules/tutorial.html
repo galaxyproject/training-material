@@ -402,7 +402,7 @@
 
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 15, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 15, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -634,7 +634,7 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
     <p>Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.</p>
   </blockquote>
 
-  <p>For our second example, we will use the same initial metadata.</p>
+  <p>For our second example, we will use the same initial metadata, but instead uploaded as a file to <span class="notranslate">Galaxy</span>. This is a relatively common use case wherein you, through some filtering and querying in <span class="notranslate">Galaxy</span>, build a list of accession numbers or other sample identifiers, and then want to fetch the associated datasets to begin working with them.</p>
 
   <blockquote class="comment">
     <h3 id="comment-loading-metadata-from-a-history-element"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Loading Metadata from a History Element</h3>
@@ -642,14 +642,31 @@ PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8
   </blockquote>
 
   <ol>
-    <li><strong>Upload</strong> the metadata from the <a href="#example-1-metadata">first example</a> to your <span class="notranslate">Galaxy</span></li>
+    <li>
+      <p><strong>Upload</strong> the metadata from the <a href="#example-1-metadata">first example</a> to your <span class="notranslate">Galaxy</span>, as a normal paste upload:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>study_accession	sample_accession	experiment_accession	fastq_ftp
+PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+</code></pre></div>      </div>
+    </li>
     <li><strong>Open</strong> the <code class="language-plaintext highlighter-rouge">Rule-based</code> upload tab again, but this time:
       <ul>
         <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
         <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">a History Dataset</code></li>
-        <li><em>“Select dataset to load”</em>: the dataset you just uploaded
-<img src="../../images/rules/rules_example_2_1_inputs.png" alt="screenshot" /></li>
+        <li><em>“Select dataset to load”</em>: the dataset you just uploaded</li>
       </ul>
+
+      <p><img src="../../images/rules/rules_example_2_1_inputs.png" alt="screenshot" /></p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-dont-see-your-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Don’t see your dataset?</h3>
+        <p>If you don’t see your dataset, refresh your page and try again.</p>
+      </blockquote>
     </li>
     <li><strong>Click</strong> <code class="language-plaintext highlighter-rouge">Build</code> to bring up the rule builder.
 <img src="../../images/rules/rules_example_2_2_initial_rules.png" alt="screenshot" /></li>
@@ -782,7 +799,7 @@ Now we need to inform <span class="notranslate">Galaxy</span> which of these row
       <ul>
         <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">D</code></li>
         <li>Select <code class="language-plaintext highlighter-rouge">Create columns matching <span class="notranslate">expression</span> groups</code></li>
-        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_(\d).fastq.gz</code>.</li>
+        <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*_(\d).fastq.gz</code></li>
         <li><em>“Number of groups”</em>: <code class="language-plaintext highlighter-rouge">1</code>
 <img src="../../images/rules/rules_example_3_10_regex_paired.png" alt="screenshot" /></li>
       </ul>
@@ -803,7 +820,7 @@ In his example we have one matching groups ( contained in the parentheses )</p>
     </li>
     <li><strong>Open</strong> the column definitions back up (<strong>Rules</strong> Menu, <code class="language-plaintext highlighter-rouge">Add / Modify Column Definitions</code>)
       <ul>
-        <li><em>“paired indicator”</em>: column <code class="language-plaintext highlighter-rouge">D</code></li>
+        <li><em>“paired-end indicator”</em>: column <code class="language-plaintext highlighter-rouge">D</code></li>
         <li><em>“URL”</em>: column <code class="language-plaintext highlighter-rouge">E</code></li>
       </ul>
 
@@ -898,7 +915,7 @@ In his example we have one matching groups ( contained in the parentheses )</p>
     author = "John Chilton and Helena Rasche",
     title = "Rule Based Uploader (Galaxy Training Materials)",
     year = "2020",
-    month = "06",
+    month = "07",
     day = "15"
     url = "\url{/training-material/topics/galaxy-interface/tutorials/upload-rules/tutorial.html}",
     note = "[Online; accessed TODAY]"
