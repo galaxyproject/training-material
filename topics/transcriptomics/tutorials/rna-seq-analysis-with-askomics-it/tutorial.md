@@ -26,6 +26,8 @@ key_points:
 contributors:
 - xgaia
 - abretaud
+- annesiegel
+- odameron
 
 ---
 
