@@ -1101,7 +1101,7 @@ On these plots we see the different cells projected onto the first 3 PCs. We can
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PPBP for the 3rd PC (for consistency with the published [scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html) and [Seurat](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) documentation, we will use PPBP).
+>    > > CST3 is the gene the most associated with the 1st PC, NKG7 the one for the 2nd PC, and PF4 and PPBP for the 3rd PC (for consistency with the published [scanpy](https://scanpy-tutorials.readthedocs.io/en/latest/pbmc3k.html) and [Seurat](https://satijalab.org/seurat/v3.1/pbmc3k_tutorial.html) documentation, we will use PPBP).
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -1444,7 +1444,7 @@ RPS25 | S100A9 | HLA-DRB1 | CST7 | FTH1 | GNLY | HLA-DRB1 | NRGN
 >
 > > ### {% icon solution %} Solution
 > >
-> > * CST3 is a marker gene for clusters 1, 4, 7 (not 3 as guessed previously)
+> > * CST3 is a marker gene for clusters 1, 4, 6 (not 3 as guessed previously)
 > > * NKG7 for clusters 3 and 5 (not 0 as guessed previously)
 > > * PPBP for cluster 7, as guessed previously
 > >
