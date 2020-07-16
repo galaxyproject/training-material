@@ -177,22 +177,39 @@ This example will demonstrate using such history datasets as the source for coll
 
 > ### {% icon hands_on %} Hands-on: Creating a Simple Dataset List
 >
->    > ### {% icon tip %} Tip: Create a new history
->    > Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.
->    {: .tip}
+> > ### {% icon tip %} Tip: Create a new history
+> > Before we start uploading, it may be a good idea to create a new history for this example to keep things simple and match the following screenshots.
+> {: .tip}
 >
-> For our second example, we will use the same initial metadata.
+> For our second example, we will use the same initial metadata, but instead uploaded as a file to Galaxy. This is a relatively common use case wherein you, through some filtering and querying in Galaxy, build a list of accession numbers or other sample identifiers, and then want to fetch the associated datasets to begin working with them.
 >
->    > ### {% icon comment %} Loading Metadata from a History Element
->    > In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload
->    {: .comment}
+> > ### {% icon comment %} Loading Metadata from a History Element
+> > In addition to directly pasting data into the Rule Based Uploader, you can also load the metadata from a dataset in your Galaxy History, or from a file in your FTP directory if the admin has enabled FTP upload
+> {: .comment}
 >
-> 1. **Upload** the metadata from the [first example](#example-1-metadata) to your Galaxy
+> 1. **Upload** the metadata from the [first example](#example-1-metadata) to your Galaxy, as a normal paste upload:
+>
+>    ```
+>    study_accession	sample_accession	experiment_accession	fastq_ftp
+>    PRJDA60709	SAMD00016379	DRX000475	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000770.fastqsanger.gz
+>    PRJDA60709	SAMD00016383	DRX000476	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000771.fastqsanger.gz
+>    PRJDA60709	SAMD00016380	DRX000477	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000772.fastqsanger.gz
+>    PRJDA60709	SAMD00016378	DRX000478	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000773.fastqsanger.gz
+>    PRJDA60709	SAMD00016381	DRX000479	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000774.fastqsanger.gz
+>    PRJDA60709	SAMD00016382	DRX000480	https://zenodo.org/api/files/c07c0fbd-c578-4c8c-989d-5181f8824773/DRR000775.fastqsanger.gz
+>    ```
+>
 > 2. **Open** the `Rule-based` upload tab again, but this time:
 >    - *"Upload data as"*: `Collection(s)`
 >    - *"Load tabular data from"*: `a History Dataset`
 >    - *"Select dataset to load"*: the dataset you just uploaded
+>
 >    ![screenshot](../../images/rules/rules_example_2_1_inputs.png)
+>
+>    > ### {% icon tip %} Tip: Don't see your dataset?
+>    > If you don't see your dataset, refresh your page and try again.
+>    {: .tip}
+>
 > 3. **Click** `Build` to bring up the rule builder.
 >    ![screenshot](../../images/rules/rules_example_2_2_initial_rules.png)
 > 4. **Repeat** the steps from last time, except define column `C` as a `List Identifier` instead of Name:
@@ -287,7 +304,7 @@ For this next example we will again use ENA data, this time corresponding to the
 > 9. From **Column**, select `Using a Regular Expression`
 >     - *"Column"*: `D`
 >     - Select `Create columns matching expression groups`
->     - *"Regular Expression"*: `.*_(\d).fastq.gz`.
+>     - *"Regular Expression"*: `.*_(\d).fastq.gz`
 >     - *"Number of groups"*: `1`
 >    ![screenshot](../../images/rules/rules_example_3_10_regex_paired.png)
 >
@@ -302,7 +319,7 @@ For this next example we will again use ENA data, this time corresponding to the
 >     - *"With Column"*: `E`
 >
 > 1. **Open** the column definitions back up (**Rules** Menu, `Add / Modify Column Definitions`)
->    - *"paired indicator"*: column `D`
+>    - *"paired-end indicator"*: column `D`
 >    - *"URL"*: column `E`
 >
 >    > ### {% icon comment %} Paired Indicator Column Definition
