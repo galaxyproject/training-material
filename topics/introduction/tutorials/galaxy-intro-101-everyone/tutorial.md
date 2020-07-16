@@ -362,7 +362,7 @@ Our objective is to find what distinguishes the different Iris species (Figure 1
 
 These species look very much alike as shown on the figure below.
 
-![3 species of Iris flowers](../../images/iris_flowers.png "3 species of Iris flowers")
+![Three species of Iris flowers](../../images/iris_flowers.png "Three species of Iris flowers (Image attributions: versicolor by Danielle Langlois licensed under CC BY-SA 3.0, retrieved from <a href="https://commons.wikimedia.org/wiki/File:Iris_versicolor_3.jpg">WikiMedia</a>; virginica by Christer Johansson licensed under CC BY-SA 3.0, retrieved from <a href="https://commons.wikimedia.org/wiki/File:IMG_7911-Iris_virginica.jpg">WikiMedia</a>; setosa by and used with permission of Sonja Keohane, retrieved from <a href="http://www.twofrog.com/irissetosa.html">www.twofrog.com</a>)")
 
 And our objective is to find out whether the features we have been given for each species can help us to highlight the differences between the 3 species.
 
