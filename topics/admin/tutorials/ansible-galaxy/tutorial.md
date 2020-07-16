@@ -569,7 +569,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
->    > The database will currently be empty as Galaxy has not yet connected to it. Once you install Galaxy in the next step, the database will be populated.
+>    > The database will currently be empty (check relations with \d and list of roles with \dg) as Galaxy has not yet connected to it. Once you install Galaxy in the next step, the database will be populated. (Quit database with \q)
 >    > ```ini
 >    > psql (10.12 (Ubuntu 10.12-0ubuntu0.18.04.1))
 >    > Type "help" for help.
@@ -583,7 +583,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    >  galaxy    |                                                            | {}
 >    >  postgres  | Superuser, Create role, Create DB, Replication, Bypass RLS | {}
 >    >
->    > postgres=#
+>    > postgres=# \q
 >    > ```
 >    {: .code-out}
 >
