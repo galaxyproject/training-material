@@ -1451,7 +1451,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 6. Access at port `<ip address>:8080` once the server has started
 {: .hands_on}
 
-Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!
+Galaxy is now configured with an admin user, a database, and a place to store data. Additionally we've immediately configured the mules for production Galaxy serving. So we're ready to set up systemd which will manage the Galaxy processes!. Get back to your user with which you have ran ansible-playbook. First by deactivating virtual environment with `deactivate` and then with `exit` leave galaxy user. 
 
 ## systemd
 
@@ -1705,7 +1705,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
-> 4. Create the directory `templates/nginx`, where we will place our configuration files which should be templated out to the server.
+> 4. Create the directory `templates/nginx` (staying in galaxy directory, after which groups_vars, roles will be siblings of templates), where we will place our configuration files which should be templated out to the server.
 >
 >    Create the `templates/nginx/redirect-ssl.j2` with the following contents:
 >
