@@ -113,7 +113,7 @@
   "name": "Slides for 'Scripting Galaxy using the API and BioBlend' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/dev/tutorials/bioblend-api/slides.html",
   "timeRequired": "PT2H",
-  "description": "The questions this  addresses are:\n - What is a RESTful API?\n - How to interact with Galaxy in a script?\n - Why should I use BioBlend?\n\n\\nThe objectives are:\n - Get familiar with BioBlend using IPython\n - Launch a Galaxy job / Visualize your actions with Galaxy\n - Launch a Galaxy workflow / Visualize your actions with Galaxy\n\n",
+  "description": "The questions this  addresses are:\n - What is a RESTful API?\n - How to interact with Galaxy in a script?\n - Why and when should I use BioBlend?\n\n\\nThe objectives are:\n - Describe the principles of RESTful APIs\n - Select the most efficient way to work with Galaxy\n - Use the API and BioBlend to interact with Galaxy\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -239,7 +239,7 @@ slide to change on the other. Useful when presenting.
 
 - How to interact with Galaxy in a script?
 
-- Why should I use BioBlend?
+- Why and when should I use BioBlend?
 
 
 ---
@@ -248,28 +248,16 @@ slide to change on the other. Useful when presenting.
 ### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
 
 
-- Get familiar with BioBlend using IPython
+- Describe the principles of RESTful APIs
 
-- Launch a Galaxy job / Visualize your actions with Galaxy
+- Select the most efficient way to work with Galaxy
 
-- Launch a Galaxy workflow / Visualize your actions with Galaxy
+- Use the API and BioBlend to interact with Galaxy
 
 
 ---
 
 
-## Outline
-
-* [Galaxy API](#api)
-* [BioBlend](#bioblend)
-* [Hands on basics](#handson)
-* [Get familiar with BioBlend](#familiar)
-* [Launch a Galaxy job](#launch)
-* [Launch a Galaxy workflow](#workflow)
-
----
-
-name: api
 ## Galaxy API
 
 - **Application Programming Interface (API)**: the protocol defined by a software for how it can be controlled by an external program
@@ -405,19 +393,23 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
   - 200 OK, 400 your error, 500 server error, ...&lt;br&gt;
     https://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
 - Galaxy error codes and messages: [`lib/galaxy/exceptions/`](https://github.com/galaxyproject/galaxy/tree/dev/lib/galaxy/exceptions)
-- Still a work in progress :(
+  - Still a work in progress
 
 ---
 
 ## How to access a REST API
 
 .left[With anything that can communicate over HTTP:]
-- Browsers: only GET
-  - All methods by using add-ons, e.g. RESTClient for Firefox, Postman for Chrome
-- `wget`: only GET from command line
-- `curl`: all methods from command line
-- General HTTP programming libraries (e.g. *requests* for Python)
-- Service-specific libraries (e.g. *BioBlend* to access Galaxy using Python)
+- Command line:
+  - `wget`: only GET
+  - `curl`: all methods
+- GUI:
+  - Browsers: only GET
+  - [RESTClient](https://addons.mozilla.org/firefox/addon/restclient/) add-on for Firefox
+  - [Advanced REST Client](https://advancedrestclient.com/)
+- Software libraries:
+  - General HTTP libraries (e.g. *requests* for Python)
+  - Service-specific libraries (e.g. *BioBlend* to access Galaxy using Python)
 
 ---
 
@@ -465,7 +457,6 @@ Data returned from (and in some cases passed to) the Galaxy API is often describ
 
 ---
 
-name: bioblend
 ## BioBlend
 
 - BioBlend is a **Python library** that wraps the functionality of Galaxy and CloudMan APIs
@@ -478,12 +469,29 @@ name: bioblend
 ## BioBlend features
 
 - Stable procedural API
-- Supported under Python 2.7, &gt;=3.5 (2.7 will be dropped in next release 0.14.0)
+- Supported under Python &gt;=3.5
 - Wraps all main Galaxy API controllers
 - Extensive TravisCI testing:
-  - on Galaxy release_15.03 and later
-  - \&gt;170 unit tests
+  - on Galaxy release_17.09 and later
+  - \&gt;180 unit tests
 - Well-documented on https://bioblend.readthedocs.io
+
+---
+
+## Tutorials - part 1
+
+Now it's a good time to try BioBlend! We have prepared
+[some tutorials](https://github.com/nsoranzo/bioblend-tutorial/) as Jupyter
+notebooks, which can be executed online with Binder at
+https://mybinder.org/v2/gh/nsoranzo/bioblend-tutorial/master
+
+Walk-throughs:
+- `galaxy_api_histories.ipynb`: interact with histories using the **Galaxy API**
+- `bioblend_histories.ipynb`: interact with histories using **BioBlend**
+
+Exercises:
+- `ex1_galaxy_api.ipynb`: launch a workflow using the **Galaxy API**
+- `ex1_bioblend.ipynb`: launch a workflow using **BioBlend**
 
 ---
 
@@ -508,6 +516,16 @@ name: bioblend
 
 ---
 
+## Tutorials - part 2
+
+Walk-throughs:
+- `bioblend.objects_histories.ipynb`: interact with histories using **BioBlend.objects**
+
+Exercises:
+- `ex1_bioblend.objects.ipynb`: launch a workflow using **BioBlend.objects**
+
+---
+
 ## References
 
 - https://docs.galaxyproject.org/
@@ -518,7 +536,6 @@ name: bioblend
 
 ---
 
-name: handson
 ## Before we start
 1. Get your Galaxy API key:
    1. In your browser, open your Galaxy homepage (e.g. https://usegalaxy.org/ )
@@ -532,16 +549,10 @@ name: handson
 		* In the Tools and Tool Shed category, click on the line **Search Tool Shed**
 		* Select the **&quot;Galaxy Main Tool Shed&quot;**, and the **&quot;Browse valid repositories&quot;** line
 		* Search and install *bam_to_sam* from devteam and *samtools_sort* from IUC owner
-	2. The workflow:
-		* Get the workflow file (.ga) from
-      https://github.com/fmareuil/formationbioblend
-		* Import the workflow in galaxy:
-		Click on Workflow tab and &quot;Upload or import workflow&quot; button
-	3. Launch IPython on a terminal
+	2. Launch IPython on a terminal
 
 ---
 
-name: familiar
 ## Connect with Galaxy using IPython:
 
 * Import the GalaxyInstance object from BioBlend module:
@@ -563,8 +574,7 @@ name: familiar
 
 ---
 
-name: launch
-## Launching a Galaxy job
+## Access BioBlend documentation
 
 * Let's look at the help for the **run_tool** method:
   ```python
@@ -578,86 +588,8 @@ name: launch
 ---
 
 class: top
-## Histories Object
-
-* Get your histories list with BioBlend
-
-  ```python
-  list_histories = gi.histories.get_histories()
-  ```
-
---
-
-* Create a new history (*It will be our work history for this tutorial*)
-
-  ```python
-  new_history = gi.histories.create_history(name='my_history')
-  ```
-
---
-
-* Now that your history is created, you will need to upload some data to it.
-
-  ```python
-  help(gi.histories.upload_dataset_from_library)
-  ```
-
----
-
-class: top
-name: library
-
-## Libraries Object
-
-* Check if there is a method to upload a data from your filesystem
-
-  ```python
-  help(gi.libraries.upload_file_from_local_path)
-  ```
-
---
-
-* Create a library and set the rights to this library
-  - you will need your role *id*, look for the methods of the Class *gi.roles*
-
-  ```python
-  role_id = gi.roles.get_roles()[0]['id']
-  new_lib = gi.libraries.create_library('my_library')
-  gi.libraries.set_library_permissions(new_lib['id'], access_in=[role_id],
-        modify_in=[role_id], add_in=[role_id], manage_in=[role_id])
-  ```
-
---
-
-* Import a BAM file in your library
-
-  ```python
-  list_data = gi.libraries.upload_file_from_local_path(new_lib['id'], local_path)
-  ```
-
---
-
-* Transfer the BAM file from your library in your new history
-
-  ```python
-  data_history = gi.histories.upload_dataset_from_library(new_history['id'],
-        list_data[0]['id'])
-  ```
-
----
-
-class: top
-name: tool
 
 ## Tools Object (1/4)
-
-* To run a tool, its 'id' is needed:
-
-  ```python
-  help(gi.tools.run_tool)
-  ```
-
---
 
 * Get the samtools sort tool id
 
@@ -689,8 +621,8 @@ name: tool
 * Here is an example:
 
   ```python
-  myinputs = inputs().set_param(&quot;param1&quot;,'value')
-        .set_dataset_param(&quot;data1&quot;,'dataset_id',src=&quot;hda&quot;)
+  myinputs = inputs().set_param(&quot;param1&quot;, 'value')
+        .set_dataset_param(&quot;data1&quot;, 'dataset_id', src=&quot;hda&quot;)
   ```
 
 **To run the tool samtools sort, we need more information on the tool itself**
@@ -748,53 +680,6 @@ class: top
   gi.tools.run_tool(new_history['id'], detail_tool['id'], myinputs)
   ```
 
----
-
-class: top
-name: workflow
-## Workflows Object (1/2)
-
-* We are going to use the same process now to launch a workflow
-* To know what are the inputs needed:
-
-  ```python
-  help(gi.workflows.run_workflow)
-  ```
-
---
-
-* Get the workflows list using the `get_workflows` method from the class `Workflow`
-* Get the workflow details using `show_workflow`
-
-  ```python
-  my_workflow = gi.workflows.get_workflows(name=&quot;wf_formation (imported from uploaded file)&quot;)
-  detailworkflow = gi.workflows.show_workflow(my_workflow[0]['id'])
-  ```
-
----
-
-class: top
-## Workflows Object (2/2)
-
-* Build the `dataset_map` (*key = &quot;input workflow id key&quot; value = {id : 'dataset id', src : 'location of the data'}*)
-
-  ```python
-  dataset_map = {}
-  dataset_map[detailworkflow['inputs'].keys()[0]] = {'id' : data_history['id'],
-                                                  'src' : 'hda'}
-  ```
-
---
-
-* Launch the workflow
-
-  ```python
-  gi.workflows.run_workflow(detailworkflow['id'], dataset_map=dataset_map,
-                      history_id=new_history['id'])
-  ```
-
-**Now you can try to test Bioblend with other tools and workflows.**
-
 
 
 
@@ -802,13 +687,11 @@ class: top
 ### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
 
 
-- Play with IPython
+- The API allows you to use Galaxy's capabilities programmatically
 
-- Understand the job launching in Galaxy with BioBlend
+- BioBlend wraps the functionality of Galaxy and CloudMan APIs
 
-- Understand the workflow launching in Galaxy with BioBlend
-
-- Be able to adapt this knowledge to personal workflows
+- BioBlend.objects is an object-oriented interface for interacting with Galaxy
 
 
 
