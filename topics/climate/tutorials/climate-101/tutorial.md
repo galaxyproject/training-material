@@ -377,7 +377,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >        Rename the resulting file to `rh_mean_july_1980_2018.nc`
 >    2. **map plot gridded (lat/lon) netCDF data** {% icon tool %} with the following parameters:
 >        - *"input with geographical coordinates (netCDF format)"*: `rh_mean_july_1980_2018.nc`
->        - *"variable name as given in the netCDF file": `tp`
+>        - *"variable name as given in the netCDF file"*: `R`
 >        - And finally in `Advanced Options` change:
 >            - *"multiple times"*: `Yes`
 >            - *"comma separated list of indexes for fields to plot"*: 0,1
