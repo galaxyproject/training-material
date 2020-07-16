@@ -2,7 +2,7 @@
 layout: introduction_slides
 logo: "GTN"
 
-title: "Galaxy from an administrator point of view"
+title: "Galaxy from an administrator's point of view"
 type: "introduction"
 zenodo_link: ""
 questions:
@@ -15,7 +15,7 @@ objectives:
 time_estimation: "20m"
 key_points:
   - Galaxy is scalable from personal computers to huge HPC and cloud-instances.
-  - Amount of expected users and storage capabilities does have a big impact on the deployment.
+  - Amount of expected users, types of common tasks, and storage capabilities have a big impact on the deployment.
 contributors:
   - valentinmarcon
   - natefoo
@@ -35,10 +35,10 @@ subtopic: core
 # Where can Galaxy run?
 
 * Cloud (SaaS)
-  - [usegalaxy.org](https://usegalaxy.org)
+  - A usegalaxy.* site [Main](https://usegalaxy.org) [Europe](https://usegalaxy.eu) [Australia](https://usegalaxy.org.au/)
   - [Public Galaxy Servers](https://galaxyproject.org/use)
-  - [Amazon EC2](https://galaxyproject.org/cloudman)
-  - Semi-private cloud (e.g.: [Genomics Virtual Lab](https://www.gvl.org.au/), [Jetstream](http://jetstream-cloud.org/))
+  - [Amazon EC2 or MS Azure](https://launch.usegalaxy.org/)
+  - Semi-private cloud (e.g.: [NeCTAR](https://nectar.org.au/), [Jetstream](http://jetstream-cloud.org/))
 * Private cloud (build your own Galaxy SaaS)
 * Cloud (IaaS)
   - Any cloud
@@ -124,7 +124,7 @@ template: left-aligned
 
 # Storage Requirements
 
-An "average" NGS analysis (by Anton Nekrutenko): **66 GB**
+An "average" 2018 NGS analysis (by Anton Nekrutenko): **66 GB**
 
 10 users, 10 histories: **> 6 TB**
 
@@ -137,6 +137,7 @@ Solutions:
 - Users can configure their workflows to delete intermediate tool outputs
 - Data libraries for common data
 - Public servers: require email verification (and watch for duplicates)
+- Plug in more/heterogeneous storage using Object Store configuration
 
 ---
 
@@ -193,7 +194,6 @@ Future:
 **Use configuration management** but if you don't, *record every change you make somehow.*
 - Large, complex deployments grow organically
 - If you don't know what you did you can't do it again
-- "My context switching penalty is high and my process isolation is not what it used to be." - Elon Musk
 
 ---
 
@@ -201,15 +201,11 @@ template: left-aligned
 
 # System Administration Best Practices
 
-Take security seriously
-- OS security best practices (not covered yet)
+- Take security seriously
 - **Update Galaxy when security updates are released**
-  - We put a lot of effort into these!
-
-Privilege separate if you can
-- Separate code and job/data ownership
-
-Write protect Galaxy and data if you can
+- Follow OS security best practices
+- Privilege separate code/job/data ownership
+- Write protect Galaxy and data if you can
 - Read-only cluster mounts
 
 Back up everything (except that which is managed by configuration management)
