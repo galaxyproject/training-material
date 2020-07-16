@@ -1,6 +1,6 @@
 ---
 layout: tutorial_hands_on
-title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) Modelling with Galaxy Climate JupyterLab
+title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab
 zenodo_link: ''
 requirements:
   -
@@ -62,6 +62,8 @@ The practical aims at familiarzing you with running CLM-FATES within Galaxy Clim
 > ##### Earth System Modelling (ESM)
 >
 > ##### The Community Terrestrial Systems Model
+>
+> ##### The Community Land Model
 >
 > ##### Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
 >
