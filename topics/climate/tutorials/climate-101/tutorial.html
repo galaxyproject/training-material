@@ -388,7 +388,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Apr 30, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 16, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -533,7 +533,7 @@ https://zenodo.org/record/3776500/files/ts_cities.csv
       </blockquote>
     </li>
     <li>
-      <p>Check that the datatype is <strong>csv</strong></p>
+      <p>Check that the datatype is <strong>tabular</strong></p>
 
       <blockquote class="tip">
 
@@ -543,6 +543,35 @@ https://zenodo.org/record/3776500/files/ts_cities.csv
           <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
           <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
           <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <p>If it is not <code class="language-plaintext highlighter-rouge">tabular</code> make sure to convert it using the <span class="notranslate">Galaxy</span> built-in format converters.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-converting-the-file-format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>
+          <li>Click the <strong>Convert datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename Datasets</p>
+
+      <p>As “<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code>” is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull.
+For example by removing <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/3776500/files/</code> to obtain <code class="language-plaintext highlighter-rouge">tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv</code> and <code class="language-plaintext highlighter-rouge">ts_cities.csv</code>, respectively.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
         </ul>
       </blockquote>
     </li>
@@ -733,6 +762,7 @@ Use the <strong>tools search box</strong> at the top of the tool panel to find <
             <li><em>“Group by fields”</em>: 2</li>
             <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li>“Sort input”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
               <ul>
@@ -751,7 +781,7 @@ Use the <strong>tools search box</strong> at the top of the tool panel to find <
           <ul>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">climatology_Paris.csv</code></li>
             <li><em>“Group by fields”</em>:</li>
-            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li>“Print all fields from input file”: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li>In <em>“Operation to perform on each group”</em>:
@@ -807,35 +837,35 @@ However, many data providers have pre-computed climatologies and can be directly
   <p>To answer to this question, we will compute yearly mean of the temperature in Paris and visualize it.</p>
 
   <ol>
-    <li>
-      <p>Use <strong>Datamash</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-     - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">split_dates_Paris.csv</code>
-     - <em>“Group by fields”</em>: 1
-     - <em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-     - <em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code>
-     - “Print all fields from input file”: <code class="language-plaintext highlighter-rouge">No</code>
-     - <em>“Sort input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
-     - In <em>“Operation to perform on each group”</em>:
-     - <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
-       - <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Mean</code>
-       - <em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></p>
+    <li>Use <strong>Datamash</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input tabular dataset”</em>: <code class="language-plaintext highlighter-rouge">split_dates_Paris.csv</code></li>
+        <li><em>“Group by fields”</em>: 1</li>
+        <li><em>“Input file has a header line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Print header line”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Print all fields from input file”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Sort input”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Operation to perform on each group”</em>:</li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Operation to perform on each group”</em>
+    - <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">Mean</code>
+    - <em>“On column”</em>: <code class="language-plaintext highlighter-rouge">c4</code></li>
+      </ul>
     </li>
     <li>
       <p>Rename the resulting file to <code class="language-plaintext highlighter-rouge">yearly_mean_Paris.csv</code>.</p>
     </li>
-    <li>
-      <p>To make a plot, you can use <strong>Scatterplot w ggplot2</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-     - <em>“Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">yearly_mean_Paris.csv</code>
-     - <em>“Column to plot on x-axis”</em>: 1
-     - <em>“Column to plot on y-axis”</em>: 2
-     - <em>“Plot title”</em>: Yearly mean temperature in Paris from 1950 to 2019
-     - <em>“Label for x axis”</em>: Year (YYYY)
-     - <em>“Label for y axis”</em>: Temperature (degrees celcius)
-     - And finally in <code class="language-plaintext highlighter-rouge">Advanced Options</code> change <code class="language-plaintext highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</p>
+    <li>To make a plot, you can use <strong>Scatterplot w ggplot2</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">yearly_mean_Paris.csv</code></li>
+        <li><em>“Column to plot on x-axis”</em>: 1</li>
+        <li><em>“Column to plot on y-axis”</em>: 2</li>
+        <li><em>“Plot title”</em>: Yearly mean temperature in Paris from 1950 to 2019</li>
+        <li><em>“Label for x axis”</em>: Year (YYYY)</li>
+        <li><em>“Label for y axis”</em>: Temperature (degrees celcius)</li>
+        <li>And finally in <code class="language-plaintext highlighter-rouge">Advanced Options</code> change <code class="language-plaintext highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</li>
+      </ul>
     </li>
-    <li>
-      <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
-    </li>
+    <li><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</li>
   </ol>
 
   <p><img src="../../images/yearly_mean_temperature_Paris.png" alt="Yearly mean temperature in Paris" /></p>
@@ -931,7 +961,7 @@ regularly updated (with recent dates). For instance, in March 2020, the correspo
     <li><strong>map plot gridded (lat/lon) netCDF data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><em>“input with geographical coordinates (netCDF format)”</em>: <code class="language-plaintext highlighter-rouge">rh_mean_july_1980_2018.nc</code></li>
-        <li>*“variable name as given in the netCDF file”: <code class="language-plaintext highlighter-rouge">tp</code></li>
+        <li><em>“variable name as given in the netCDF file”</em>: <code class="language-plaintext highlighter-rouge">R</code></li>
         <li>And finally in <code class="language-plaintext highlighter-rouge">Advanced Options</code> change:
           <ul>
             <li><em>“multiple times”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1061,8 +1091,8 @@ various source of climate data.</p>
     author = "Anne Fouilloux",
     title = "Getting your hands-on climate data (Galaxy Training Materials)",
     year = "2020",
-    month = "04",
-    day = "30"
+    month = "07",
+    day = "16"
     url = "\url{/training-material/topics/climate/tutorials/climate-101/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
