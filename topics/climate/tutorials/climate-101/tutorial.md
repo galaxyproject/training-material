@@ -278,7 +278,7 @@ To get some information about the (past and current) climate in Paris, we will f
 >        - *"Group by fields"*: 1
 >        - *"Input file has a header line"*: `Yes`
 >        - *"Print header line"*: `No`
->        - "Print all fields from input file": `No`
+>        - *"Print all fields from input file"*: `No`
 >        - *"Sort input"*: `Yes`
 >        - In *"Operation to perform on each group"*:
 >        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
