@@ -11,7 +11,7 @@
 
   <head>
     <meta charset="utf-8">
-    <title>Galaxy from an administrator point of view</title>
+    <title>Galaxy from an administrator's point of view</title>
     
         <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -32,7 +32,7 @@
     
     
     <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
-    <meta property="og:title" content="Galaxy Training: Galaxy from an administrator point of view" />
+    <meta property="og:title" content="Galaxy Training: Galaxy from an administrator's point of view" />
     <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
     <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
     <script type="application/ld+json">
@@ -75,7 +75,7 @@
     "url": "https://galaxyproject.org/teach/gtn/"
   },
   "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
-  "headline": "Galaxy from an administrator point of view",
+  "headline": "Galaxy from an administrator's point of view",
   "inLanguage": {
     "@type": "Language",
     "name": "English",
@@ -185,7 +185,7 @@ class: center, middle, inverse
 
 ---
 
-# Galaxy from an administrator point of view
+# Galaxy from an administrator's point of view
 
 
 
@@ -210,10 +210,10 @@ slide to change on the other. Useful when presenting.
 # Where can Galaxy run?
 
 * Cloud (SaaS)
-  - [usegalaxy.org](https://usegalaxy.org)
+  - A usegalaxy.* site [Main](https://usegalaxy.org) [Europe](https://usegalaxy.eu) [Australia](https://usegalaxy.org.au/)
   - [Public Galaxy Servers](https://galaxyproject.org/use)
-  - [Amazon EC2](https://galaxyproject.org/cloudman)
-  - Semi-private cloud (e.g.: [Genomics Virtual Lab](https://www.gvl.org.au/), [Jetstream](http://jetstream-cloud.org/))
+  - [Amazon EC2 or MS Azure](https://launch.usegalaxy.org/)
+  - Semi-private cloud (e.g.: [NeCTAR](https://nectar.org.au/), [Jetstream](http://jetstream-cloud.org/))
 * Private cloud (build your own Galaxy SaaS)
 * Cloud (IaaS)
   - Any cloud
@@ -299,7 +299,7 @@ template: left-aligned
 
 # Storage Requirements
 
-An &quot;average&quot; NGS analysis (by Anton Nekrutenko): **66 GB**
+An &quot;average&quot; 2018 NGS analysis (by Anton Nekrutenko): **66 GB**
 
 10 users, 10 histories: **&gt; 6 TB**
 
@@ -312,6 +312,7 @@ Solutions:
 - Users can configure their workflows to delete intermediate tool outputs
 - Data libraries for common data
 - Public servers: require email verification (and watch for duplicates)
+- Plug in more/heterogeneous storage using Object Store configuration
 
 ---
 
@@ -368,7 +369,6 @@ Future:
 **Use configuration management** but if you don't, *record every change you make somehow.*
 - Large, complex deployments grow organically
 - If you don't know what you did you can't do it again
-- &quot;My context switching penalty is high and my process isolation is not what it used to be.&quot; - Elon Musk
 
 ---
 
@@ -376,15 +376,11 @@ template: left-aligned
 
 # System Administration Best Practices
 
-Take security seriously
-- OS security best practices (not covered yet)
+- Take security seriously
 - **Update Galaxy when security updates are released**
-  - We put a lot of effort into these!
-
-Privilege separate if you can
-- Separate code and job/data ownership
-
-Write protect Galaxy and data if you can
+- Follow OS security best practices
+- Privilege separate code/job/data ownership
+- Write protect Galaxy and data if you can
 - Read-only cluster mounts
 
 Back up everything (except that which is managed by configuration management)
