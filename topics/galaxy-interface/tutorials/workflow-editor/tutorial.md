@@ -2,6 +2,8 @@
 layout: tutorial_hands_on
 
 title: Creating, Editing and Importing Galaxy Workflows
+tags:
+- workflows
 zenodo_link: ''
 questions:
 - How can you construct Galaxy workflows from scratch?
