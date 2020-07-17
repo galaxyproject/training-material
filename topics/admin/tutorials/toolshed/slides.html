@@ -6,6 +6,7 @@ title: "The Galaxy Tool Shed"
 contributors:
   - martenson
   - mvdbeek
+  - nsoranzo
 
 ---
 
@@ -15,31 +16,32 @@ contributors:
 
 - It is a free service that hosts repositories containing Galaxy tools.
 
-- Installing from the Tool Shed takes care of
-  - dependencies
-  - reference data tables
-  - configuration files
+- The Tool Shed is a hosting (not a development) platform.
+  - Each repository should link to its development repository.
 
 ---
 
 ## Which Tool Shed?
 
-The Main Tool Shed ( https://toolshed.g2.bx.psu.edu ) serves all Galaxies worldwide.
-- Everybody can create a repository.
-- Repositories are public, including their whole history.
-
-Local sheds can be run e.g. for private or custom-licensed tools.
+- The Main Tool Shed ( https://toolshed.g2.bx.psu.edu ) serves all Galaxies worldwide.
+  - Everybody can create a repository.
+  - Repositories are public, including their whole history.
+- The Test Tool Shed ( https://testtoolshed.g2.bx.psu.edu ) can be used for repositories not yet production-ready.
+- Local sheds can be run e.g. for private or custom-licensed tools.
 
 ???
+
+Repositories on the TTS are also public.
+
 We discourage running local TS.
 
 ---
 
 ## Vocabulary
 
-* `wrapper` or `tool definition file` - The XML file that describes to Galaxy how the underlying software works, allowing Galaxy to render UI and execute the software in the right way.
+* `tool` or `wrapper` - XML file that describes to Galaxy how the underlying software works, allowing Galaxy to render UI and execute the software in the right way.
 
-* `repository` - A versioned code archive with tool(s) in Tool Shed.
+* `repository` - Versioned code archive in the Tool Shed containing Galaxy tool(s).
 
 * `revision` and `installable revision` - Every TS repo update generates a new revision but only certain (reproducibility-affecting) changes generate a new revision installable to Galaxy as a new version.
 
@@ -47,11 +49,12 @@ We discourage running local TS.
 Every TS repo update can be propagated to the Galaxy though.
 
 ---
-## Overview
+## Installing a TS repo into Galaxy
 
-* The Tool Shed is a hosting (not a development) platform.
-
-* Each TS repository should link to its development repository.
+- Installing from the Tool Shed takes care of
+  - dependencies
+  - reference data tables
+  - configuration files
 
 * Tool Shed allows administrators to pick any installable revision.
 
@@ -62,7 +65,7 @@ Every TS repo update can be propagated to the Galaxy though.
 
 ---
 class: normal
-## Galaxy's Configuration
+## Galaxy's configuration
 
 The list of available sheds is defined in `tool_sheds_conf.xml`:
 ```xml
@@ -77,38 +80,25 @@ The list of available sheds is defined in `tool_sheds_conf.xml`:
 
 ---
 class: normal
-## Simple TS repository (remove_beginning)
+## Simple TS repository (`remove_beginning`)
 
-```shell
+```
 .
-├── .shed.yml
-├── remove_beginning.pl
-├── remove_beginning.xml
-└── test-data
-    ├── 1.bed
-    └── eq-removebeginning.dat
+├── remove_beginning.pl          # optional accompanying script
+├── remove_beginning.xml         # tool wrapper
+├── .shed.yml                    # metadata file
+└── test-data                    # subdirectory for test data
+    ├── 1.bed                    # test input file
+    └── eq-removebeginning.dat   # test output file
 ```
 
 ---
 class: normal
-## Simple TS repository (remove_beginning)
+## `.shed.yml` file
 
-```shell
-.
-├── .shed.yml # metadata file
-├── remove_beginning.pl # script that performs the requested
-├── remove_beginning.xml # tool wrapper
-└── test-data # this one is descriptive
-    ├── 1.bed # test input file
-    └── eq-removebeginning.dat # test output file
-```
+Contains repository's metadata.
 
----
-class: normal
-### .shed.yml file
-
-Contains tool's metadata.
-```yml
+```yaml
 categories:
 - Text Manipulation
 description: Remove lines from the beginning of a file.
@@ -123,46 +113,29 @@ type: unrestricted
 
 ---
 class: normal
-## Complex TS Repository
+## Complex TS Repository (`varscan`)
 
-```shell
+```
 .
+├── macros.xml                         # defines XML macros usable in other XML files
 ├── .shed.yml
-├── macros.xml
-├── seqtk_comp.xml
-├── seqtk_sample.xml
-├── seqtk_seq.xml
-├── seqtk_trimfq.xml
 ├── test-data
-│   ├── seqtk_trimfq.fq
+│   ├── control_chrM.bam
+│   ├── fasta_indexes.loc              # Loc file for tests
 ...
-│   ├── seqtk_trimfq_be.fq
-│   └── seqtk_trimfq_default.fq
-└── tool_dependencies.xml
+│   └── varscan_mpileup_result1.vcf
+├── tool-data
+│   └── fasta_indexes.loc.sample       # Sample loc file
+├── tool_data_table_conf.xml.sample    # Sample data table
+├── tool_data_table_conf.xml.test      # Data table for tests
+├── varscan_copynumber.xml             # wrapper for tool #1
+├── varscan_mpileup.xml                # wrapper for tool #2
+├── varscan.py
+└── varscan_somatic.xml                # wrapper for tool #3
 ```
 
 ---
-class: normal
-## Complex TS Repository
-
-```shell
-.
-├── .shed.yml
-├── macros.xml # defines xml macros usable in other xml files
-├── seqtk_comp.xml # wrapper for a tool
-├── seqtk_sample.xml # wrapper for tool #2
-├── seqtk_seq.xml # wrapper for tool #3
-├── seqtk_trimfq.xml # wrapper for tool #4
-├── test-data
-│   ├── seqtk_trimfq.fq # bunch of test data
-...
-│   ├── seqtk_trimfq_be.fq
-│   └── seqtk_trimfq_default.fq
-└── tool_dependencies.xml # file that describes Galaxy how to get TS-supplied dependencies to fulfill the <requirements> in tool wrappers
-```
-
----
-### Tool requirements
+## Tool requirements
 
 Requirements of the wrapper.
 ```xml
@@ -176,8 +149,18 @@ Requirements of the wrapper.
 
 ---
 
+## Data tables and loc files
+
+- Several tools need to access **reference data**, e.g. genome sequences or indexes for aligner
+- A *loc file* is a tab-separated file containing metadata and paths for a set of reference data
+- A *data table* describes the columns of a loc file used by a tool
+- You can read more about this in the [Reference Genomes in Galaxy slides](../reference-genomes/slides.html)
+
+---
+
 ## Suite repositories
 
-* To install multiple repositories some authors offer suites.
-* Suite is a single repository that 'depends' on many others.
-* If you install the suite, all 'dependency repositories' will be installed too.
+- Suites can be used to split up a set of tools into multiple repositories
+  - A suite is a single repository that 'depends' on many others
+  - When you install the suite, all 'dependency repositories' will be installed too
+- With a tweak to `.shed.yml`, [Planemo](https://planemo.readthedocs.io) can upload a directory of tools to the TS as a suite of separate tools
