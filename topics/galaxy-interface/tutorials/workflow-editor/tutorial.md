@@ -70,7 +70,9 @@ appear in the center panel. On the right you see the attributes of the
 workflow, such as name, version, annotation and tags. Depending on the context
 the contents of the right panel will change, but you can always return to these
 attributes by clicking on the **Edit Attributes** button (the Pencil icon on
-the upper right).
+the upper right). If there is no Pencil icon you can find the **Edit Attributes**
+button under the the Workflow options button (a wheel icon) on the top right of
+the editor.
 
 We will start by creating a very simple workflow with just 2 tools, and then
 add more advanced features.
