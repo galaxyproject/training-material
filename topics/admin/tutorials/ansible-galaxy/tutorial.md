@@ -103,7 +103,7 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 3. Any templates are copied over
 4. The `galaxy.yml` (or `.ini`) is deployed
 
-The setup for deploying extra Galaxy configuration templates and files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
+The setup for deploying extra Galaxy configuration templates and files is a little bit non-standard by Ansible best practices. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
 Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578) configuration as an example, we have something like:
 
@@ -138,7 +138,7 @@ galaxy_config:
 So the references in `galaxy_config_files` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
 
 > ### {% icon tip %} Define once, reference many times
-> Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition!
+> Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
 {: .tip}
 
 ### Dependencies
@@ -151,7 +151,7 @@ Now that Galaxy is available on disk, Ansible is ready to start processing [depe
 
 ### Mutable Setup
 
-[This task](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml) creates a directory and iniitializes "mutable" (written/managed by Galaxy itself) configuration files. It also deploys any hand-managed mutable config files, but it is unlikely that you want to manage these directly, as Galaxy does a sufficient job. Any changes you make to Galaxy like (for example) installing tools would result in the tools being "forgotten about", if you re-ran the playbook and overwrote the `shed_tool_conf.xml` mutable config file with a hand-managed one.
+[This task](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml) creates a directory and initializes "mutable" (written/managed by Galaxy itself) configuration files. It also deploys any hand-managed mutable config files, but it is unlikely that you want to manage these directly, as Galaxy does a sufficient job. Any changes you make to Galaxy, for example installing some tools, would result in the tools being "forgotten about", if you re-ran the playbook and overwrote the `shed_tool_conf.xml` mutable config file with a hand-managed one.
 
 ### Managing the Database
 
