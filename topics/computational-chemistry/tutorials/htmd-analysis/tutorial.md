@@ -157,7 +157,7 @@ Inspecting the contents of the `Ligand (PDB)` file shows that it contains no hyd
 >    - *"Output format"*: `Protein Data Bank format (pdb)`
 >    - *"Add hydrogens appropriate for pH"*: `7.0`
 > 2. Rename the output file to `Hydrated ligand (PDB)`.
-> 2. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
+> 3. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
 >    - *"Input file"*: 'Hydrated ligand (PDB)'
 >    - *"Charge of the molecule"*: `0`
 >    - *"Multiplicity"*: `1`
