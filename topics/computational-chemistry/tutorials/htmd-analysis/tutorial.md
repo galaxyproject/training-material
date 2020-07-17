@@ -158,7 +158,7 @@ Inspecting the contents of the `Ligand (PDB)` file shows that it contains no hyd
 >    - *"Add hydrogens appropriate for pH"*: `7.0`
 > 2. Rename the output file to `Hydrated ligand (PDB)`.
 > 2. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
->    - *"Input file"*: 'Ligand (PDB)'
+>    - *"Input file"*: 'Hydrated ligand (PDB)'
 >    - *"Charge of the molecule"*: `0`
 >    - *"Multiplicity"*: `1`
 >    - *"Force field to use for parameterization"*: `gaff`
@@ -192,7 +192,7 @@ While we have separate topology and structure files for both protein and ligand,
 {: .hands_on}
 
 
-## Create the simulation box with **GROMACS structure configuration**
+## Create the simulation box
 
 The next step, once combined coordinate (GRO) and topology (TOP) files have been created, is to create a simulation box in which the system is situated.
 
@@ -286,6 +286,8 @@ The resulting plot should resemble the figure below. The system first drops rapi
 
 We now carry out equilibration in two stages: NVT and NPT. This is discussed at greater length in the basic GROMACS tutorial. Equilibration requires restraining the protein structure - we use the ITP file produced by the initial setup tool for this.
 
+Simulation under the NVT ensemble allows the solvent to be brought to the desired temperature, while simulation under the NPT ensemble bring the solvent to the correct pressure.
+
 > ### {% icon comment %} More detail about equilibration
 >
 > At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT (or isothermal-isochoric) ensemble, followed by an NPT (or isothermal-isobaric) ensemble. Use of the NVT ensemble entails maintaining constant number of particles, volume and temperature, while the NPT ensemble maintains constant number of particles, pressure and temperature.
@@ -311,7 +313,7 @@ We now carry out equilibration in two stages: NVT and NPT. This is discussed at 
 >        - *"Parameter input"*: `Use default (partially customisable) setting`
 >            - *"Bond constraints (constraints)"*: `All bonds (all-bonds).`
 >            - *"Temperature /K"*: `300`
->            - *"Step length in ps"*: `0.0002`
+>            - *"Step length in ps"*: `0.001`
 >            - *"Number of steps that elapse between saving data points (velocities, forces, energies)"*: `1000`
 >            - *"Number of steps for the simulation"*: `50000`
 >    - *"Generate detailed log"*: `Yes`
@@ -348,7 +350,7 @@ NVT simulation.
 >        - *"Parameter input"*: `Use default (partially customisable) setting`
 >            - *"Bond constraints (constraints)"*: `All bonds (all-bonds).`
 >            - *"Temperature /K"*: `300`
->            - *"Step length in ps"*: `0.002`
+>            - *"Step length in ps"*: `0.001`
 >            - *"Number of steps that elapse between saving data points (velocities, forces, energies)"*: `1000`
 >            - *"Number of steps for the simulation"*: `50000`
 >    - *"Generate detailed log"*: `Yes`
