@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies</title>
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Training material for all kinds of transcriptomics analysis." />
+    <meta property="og:title" content="Galaxy Training: Integrate and query local datasets and distant RDF data w..." />
+    <meta property="og:description" content="Training material for all kinds of transcriptomics analysis." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Transcriptomics",
+    "description": "Training material for all kinds of transcriptomics analysis.",
+    "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+  },
+  "courseCode": "transcriptomics / rna-seq-analysis-with-askomics-it / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides.html",
+  "description": "The questions this  addresses are:\n - What is the Semantic Web and  how can it help to integrate and query data?\n - How can AskOmics help to benefit from Semantic Web technologies without having the pain to write RDF or SPARQL code?\n\n\\nThe objectives are:\n - Understand the basics of RDF and SPARQL\n - Learn how input data must be structured to be integrated with AskOmics\n - Learn how to connect distant SPARQL endpoints to local data with AskOmics\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/slides.html",
+      "name": "Mapping",
+      "description": "Slides for 'Mapping' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html",
+      "name": "Mapping",
+      "description": "Hands-on for 'Mapping' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Xavier Garnier"
+    },
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Anne Siegel"
+    },
+    {
+      "@type": "Person",
+      "name": "Olivier Dameron"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Xavier Garnier"
+    },
+    {
+      "@type": "Person",
+      "name": "Anthony Bretaudeau"
+    },
+    {
+      "@type": "Person",
+      "name": "Anne Siegel"
+    },
+    {
+      "@type": "Person",
+      "name": "Olivier Dameron"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Transcriptomics",
+      "description": "Training material for all kinds of transcriptomics analysis.",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_3308",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_3308",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_3308"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/transcriptomics" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/transcriptomics/tutorials/rna-seq-analysis-with-askomics-it/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Integrate and query local datasets and distant RDF data with AskOmics using Semantic Web technologies
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    - Mapping: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/mapping/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/mapping/tutorial.html)
+    
+
+
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- What is the Semantic Web and  how can it help to integrate and query data?
+
+- How can AskOmics help to benefit from Semantic Web technologies without having the pain to write RDF or SPARQL code?
+
+
+---
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Understand the basics of RDF and SPARQL
+
+- Learn how input data must be structured to be integrated with AskOmics
+
+- Learn how to connect distant SPARQL endpoints to local data with AskOmics
+
+
+---
+
+
+# How to explore data
+
+---
+## Requirements
+
+Study of biological mechanisms requires to:
+
+- **integrate** multiple data sources (differential expression results, genome annotation, remote protein database)
+- **query** them to answer a biological question (which genes are over-expressed in a condition, and what are the protein coded by these genes)
+
+.image-00[ ![](images/from_data_to_result.png)]
+
+---
+
+# What is the Semantic Web?
+
+---
+
+## Semantic Web
+
+Set of recommendations to **integrate data**, to **integrate domain knowledge** and to **perform query** and reasoning.
+
+- Resource Description Framework (RDF): annotate data
+- RDFS + OWL: represent knowledge (data description)
+- SPARQL Protocol and RDF Query Language (SPARQL): query data
+
+---
+
+## RDF
+
+- RDF is for describing **resources** (the R in RDF)
+  - resources are identified by URIs (`nextprot:P01137`, `taxon:9606`)
+
+- **describing** (D in RDF) a resource is representing it explicitly
+  - its attributes (`nextprot:P01137 :hasSequence &quot;MPPSGLRLLL...&quot;`)
+  - its relations to other entities (`nextprot:P01137 :hasTaxon taxon:9606`)
+  - its descriptions (aka classes) (`nextprot:P01137 :is nextprot:Protein`)
+
+---
+
+## RDF: Set of triples
+
+- RDF is represented by triples (subject, predicate, object)
+  - **Subject**: the resource being described
+  - **Predicate**: the relation (from subject to object)
+  - **Object**: a value of the predicate for the subject
+
+.image-01[ ![](images/rdf_schema_1.png)]
+
+```turtle
+nextprot:P01137 :hasTaxon taxon:9606 .
+nextprot:P01137 :hasSequence &quot;MPPSGLRLLL&quot; .
+```
+
+---
+
+## RDF: triples form a labeled directed graph
+
+
+```turtle
+# Description
+nextprot:P01137 rdf:type nextprot:Protein .
+taxon:9606 rdf:type nextprot:Organism .
+# Data
+nextprot:P01137 :hasTaxon taxon:9606 .
+nextprot:P01137 :hasSequence &quot;MPPSGLRLLL&quot; .
+```
+
+.image-02[ ![](images/rdf_schema_2.png)]
+
+---
+
+## SPARQL
+
+- The SPARQL language is a set of triple patterns with variables (`?variable_name`)
+
+```
+SELECT ?gene
+WHERE {
+    ?gene rdf:type :Gene .
+    ?gene :hasTaxon taxon:9606 .
+}
+```
+
+- All `?gene` with `rdf:type` `:Gene` **and** all `?gene` with `:hasTaxon` `taxon:9606`
+- In other words, the query returns all the human genes
+
+
+---
+
+## SPARQL: entity matching allow federated queries
+
+.pull-left[
+- Using the same identifier for the same entity (**entity matching**) across multiple datasets allows federated queries
+
+- Federated SPARQL queries provide unified querying capabilities over multiple datasets as if they were a single virtual graph
+
+]
+
+.pull-right[
+.image-03[ ![](images/rdf_schema_3.png)]
+]
+
+
+
+---
+
+
+# What is AskOmics?
+
+---
+
+## AskOmics
+
+Web software for **data integration** and **query** using Semantic Web. The main functionalities are:
+
+- Convert of **multiple data format** into RDF triples and store them in a local triplestore
+- Generate **complex SPARQL queries** using a user-friendly interface
+- Support external SPARQL endpoint to **cross-reference integrated data with remote data**
+
+AskOmics can be used as a standalone software, or **with Galaxy**
+
+---
+
+
+# Data integration with AskOmics
+
+---
+
+## Local data integration
+
+- RDF and SPARQL are good infrastructures to describe and query biological datasets, but most of them are still stored on flat files like CSV/TSV and GFF.
+
+- AskOmics converts multiple structured data formats into RDF triples
+  * CSV/TSV
+  * GFF
+  * BED
+
+
+---
+
+## AskOmics generates the graph of data and the abstraction
+
+AskOmics uses the file structure (*e.g.* header of TSV files) to generate the graph of data description: **the abstraction**
+
+.image-04[ ![](images/askomics_convertion.png)]
+
+
+The rest of the files is converted to RDF triples that correspond to the data.
+
+---
+
+
+## Distant RDF data integration
+
+- Some public databases (*e.g.* [neXtProt](https://sparql.nextprot.org)) provide RDF data through a SPARQL endpoint (public access for RDF data)
+
+
+- To connect with a remote SPARQL endpoint, AskOmics needs its RDF abstraction
+- The abstraction can be generated with [abstractor](https://github.com/askomics/abstractor)
+
+```bash
+pip3 install abstractor
+abstractor -s https://sparql.nextprot.org/sparql -o nextprot_abstraction.ttl -f turtle
+```
+
+- This abstraction can then be uploaded into AskOmics as a standard file
+
+
+---
+
+# Query multiple data sources with AskOmics
+
+---
+
+## Query composition
+
+- Users navigate through the abstraction of local and remote data and create a path that represents a query
+
+.image-06[ ![](images/askomics_query_builder.png)]
+
+- The query is converted to SPARQL code that is executed on the local and remote RDF data
+- Results are returned and can be downloaded
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- RDF and SPARQL are Semantic Web technologies that come useful for data integration and querying but the technical aspects may deter end-users
+
+- AskOmics is a web platform for data integration and query using Semantic Web in a user-friendly way
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+<a href="/training-material/hall-of-fame/xgaia/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/xgaia" alt="Xavier Garnier">Xavier Garnier</a>, <a href="/training-material/hall-of-fame/abretaud/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/abretaud" alt="Anthony Bretaudeau">Anthony Bretaudeau</a>, <a href="/training-material/hall-of-fame/annesiegel/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annesiegel" alt="Anne Siegel">Anne Siegel</a>, <a href="/training-material/hall-of-fame/odameron/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/odameron" alt="Olivier Dameron">Olivier Dameron</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+  </body>
+</html>
