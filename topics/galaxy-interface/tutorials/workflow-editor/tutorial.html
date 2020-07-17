@@ -1,0 +1,1109 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Creating, Editing and Importing Galaxy Workflows</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:title" content="Galaxy Training: Creating, Editing and Importing Galaxy Workflows" />
+        <meta property="og:description" content="A collection of microtutorials explaining various feature..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/galaxy-interface" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> User Interface and Data Manipulation
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-editor%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-editor%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-editor%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-editor%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-editor%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgalaxy-interface%2Ftutorials%2Fworkflow-editor%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/galaxy-interface/tutorials/workflow-editor/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Creating, Editing and Importing Galaxy Workflows",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "User Interface and Data Manipulation",
+    "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+  },
+  "courseCode": "galaxy-interface / workflow-editor / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Creating, Editing and Importing Galaxy Workflows' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "workflows",
+  "description": "The questions this  addresses are:\n - How can you construct Galaxy workflows from scratch?\n - How can you label outputs?\n - How can you include workflows in workflows?\n - How can you tag workflows?\n - How can you manage tool versions?\n - How can you manage workflow versions?\n\n\\nThe objectives are:\n - Understand key aspects of workflows\n - Create clean, non-repetitive workflows\n\n",
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "User Interface and Data Manipulation",
+      "description": "A collection of microtutorials explaining various features of the Galaxy user interface and manipulating data within Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Creating, Editing and Importing Galaxy Workflows</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek">Marius van den Beek</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can you construct Galaxy workflows from scratch?</p>
+</li>
+            
+            <li><p>How can you label outputs?</p>
+</li>
+            
+            <li><p>How can you include workflows in workflows?</p>
+</li>
+            
+            <li><p>How can you tag workflows?</p>
+</li>
+            
+            <li><p>How can you manage tool versions?</p>
+</li>
+            
+            <li><p>How can you manage workflow versions?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Understand key aspects of workflows</p>
+</li>
+            
+            <li><p>Create clean, non-repetitive workflows</p>
+</li>
+            
+            </ul>
+
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/workflows/" title="Workflows" alt="Creating, Editing and Importing Galaxy Workflows workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://cheminformatics.usegalaxy.eu/" title="ChemicalToolbox">
+            ChemicalToolbox
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
+            Climate Science Workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
+            HiCExplorer
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
+            Human Cell Atlas
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.hunter.cuny.edu:8080/" title="Hunter College Galaxy">
+            Hunter College Galaxy
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
+            NanoGalaxy
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="http://www.proteore.org/" title="ProteoRE">
+            ProteoRE
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
+            Single Cell Omics workbench
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.fr/" title="UseGalaxy.fr">
+            UseGalaxy.fr
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 17, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Workflows are a powerful feature in <span class="notranslate">Galaxy</span> that allow you to link multiple steps of complex analysis.
+In this tutorial we will demonstrate how to use the <span class="notranslate">Workflow</span> Editor to construct multiple variants of a simple <span class="notranslate">workflow</span>. Note that these workflows are meant to illustrate different concepts. Not all workflows require using all of the features described below, but we hope this tutorial will inspire you to make your analysis tasks more efficient.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-create-workflows-from-existing-histories"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create workflows from existing histories</h3>
+  <p>Workflows can be extracted from existing histories. You can find a tutorial for this <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html">here</a></p>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#workflow-steps" id="markdown-toc-workflow-steps"><span class="notranslate">Workflow</span> steps</a></li>
+  <li><a href="#creating-a-new-workflow" id="markdown-toc-creating-a-new-workflow">Creating a new <span class="notranslate">workflow</span></a></li>
+  <li><a href="#editing-our-simple-workflow" id="markdown-toc-editing-our-simple-workflow">Editing our simple <span class="notranslate">workflow</span></a></li>
+  <li><a href="#embedding-a-workflow-within-a-workflow" id="markdown-toc-embedding-a-workflow-within-a-workflow">Embedding a <span class="notranslate">workflow</span> within a <span class="notranslate">workflow</span></a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="workflow-steps"><span class="notranslate">Workflow</span> steps</h2>
+
+<p>Workflows logically connect a collection of steps. Possible step types are
+currently <span class="notranslate">workflow</span> inputs, tools, and workflows.</p>
+
+<h2 id="creating-a-new-workflow">Creating a new <span class="notranslate">workflow</span></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-a-new-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create a new <span class="notranslate">workflow</span></h3>
+
+  <ul>
+    <li>Click on <strong><span class="notranslate">Workflow</span></strong> in the top panel of the <span class="notranslate">Galaxy</span> page</li>
+    <li>On the top right you will see 2 buttons: <strong>Create</strong> and <strong>Import</strong></li>
+    <li>To create a new <span class="notranslate">workflow</span> click on <strong>Create</strong></li>
+    <li>Enter a Name and Annotation for your <span class="notranslate">workflow</span> and click <strong>Save</strong></li>
+    <li>The <span class="notranslate">Workflow</span> Editor will open with a new, empty <span class="notranslate">workflow</span> loaded</li>
+  </ul>
+  <figure id="figure-1"><img src="../../images/workflow_editor_new_workflow.png" alt="A new empty workflow" /><figcaption><span class="figcaption-prefix">Figure 1:</span> A new empty <span class="notranslate">workflow</span></figcaption></figure>
+</blockquote>
+
+<p>On the left hand side of the Editor you see the available tools in the tool
+panel. The center panel (or “canvas”) holds the <span class="notranslate">workflow</span> layout. Steps will
+appear in the center panel. On the right you see the attributes of the
+<span class="notranslate">workflow</span>, such as name, version, annotation and tags. Depending on the context
+the contents of the right panel will change, but you can always return to these
+attributes by clicking on the <strong>Edit Attributes</strong> button (the Pencil icon on
+the upper right). If there is no Pencil icon you can find the <strong>Edit Attributes</strong>
+button under the the <span class="notranslate">Workflow</span> options button (a wheel icon) on the top right of
+the editor.</p>
+
+<p>We will start by creating a very simple <span class="notranslate">workflow</span> with just 2 tools, and then
+add more advanced features.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-insert-a-dataset-input"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Insert a dataset input</h3>
+
+  <ol>
+    <li>Expand the “Inputs” section in the tool panel and click on “Input dataset” to create a new dataset input</li>
+    <li>Click on the new input dataset in the center panel. Set the following parameter on the right side:
+      <ul>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">A simple text input dataset</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="comment">
+    <h3 id="comment-optional-input-datasets--formats"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Optional Input Datasets &amp; Formats</h3>
+    <p>Tools may have optional dataset inputs. If your <span class="notranslate">workflow</span> should use
+optional datasets, you can set <strong>Optional</strong> to <code class="language-plaintext highlighter-rouge">Yes</code>. Doing this allows you
+to connect such an input only to Tool inputs that are optional. You can
+also restrict the format of an input dataset or input dataset collection.
+This serves as documentation and prevents selection of incompatible datasets.</p>
+  </blockquote>
+
+</blockquote>
+<blockquote class="comment">
+  <h3 id="comment-comment-input-modules"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Input modules</h3>
+  <p>There are 3 input types, “Input dataset”, “Input dataset
+collection” and “Simple inputs used for <span class="notranslate">workflow</span> logic”. Insert an input
+dataset or dataset collection for each possible input to your <span class="notranslate">workflow</span>.
+“Simple inputs used for <span class="notranslate">workflow</span> logic” allow the definition of parameters that
+users can or should change when running your <span class="notranslate">workflow</span>. Please check out the
+<a href="/training-material/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html">Using <span class="notranslate">Workflow</span> Parameters tutorial</a>
+for a detailed description of how to use these.</p>
+</blockquote>
+
+<p>We’re now ready to add a first tool and connect it to our input dataset.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-tac-reverse-a-file-reverse-cat-tool-to-your-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add <strong>tac reverse a file (reverse cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to your <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Find <strong>tac reverse a file (reverse cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> in the tool panel and click on it</li>
+    <li>A new box labeled <strong>tac</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> will appear in the center panel</li>
+    <li>Click on <strong>tac</strong> in the center panel and see the tool parameters on the right side</li>
+    <li>We will keep the default tool settings and only give the step a label
+      <ul>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">Reverse dataset</code></li>
+      </ul>
+    </li>
+    <li>Click on the round blue symbol of the input dataset and drag the connection to the highlighted round green tool input</li>
+  </ol>
+  <figure id="figure-2"><img src="../../images/workflow_editor_connect_inputs.png" alt="Connecting an input" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Connecting outputs and inputs</figcaption></figure>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-tip-workflow-connections"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: <span class="notranslate">Workflow</span> connections</h3>
+  <p>Connections can be made by clicking on an output terminal and dragging the
+cursor to an input terminal. Input terminals that are compatible with the
+current output are highlighted in green, while input terminals that can’t
+be connected are highlighted in Orange. When dragging an incompatible output
+over an input a small textbox appears mentioning the reason why a connection
+cannot be made. A valid connection can be made if the format of an output is
+allowed as input. A simple text file output for instance cannot be used when
+the input requires a binary format. If a dataset collection is required as
+input but the output of a node is a single dataset you will see the message
+“Cannot attach a data output to a collection input”. If an output of a step
+is connected to another input one cannot change the input dataset to a
+dataset collection. In order to connect inputs in such a case, all outputs of
+the step must be disconnected. Connections can be removed by hovering over an
+input terminal and clicking.</p>
+</blockquote>
+<blockquote class="comment">
+  <h3 id="comment-comment-steps-can-be-labeled"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Steps can be labeled</h3>
+  <p>The default label is the tool name, but it is often useful to label a step with
+what it does, especially if a tool is used multiple times in a <span class="notranslate">workflow</span>. A
+click on a step will open the step’s settings on the right side. Any label
+will immediately appear in the center panel as well.</p>
+</blockquote>
+
+<p>This is great, but while a single tool in a <span class="notranslate">workflow</span> might be handy (for
+instance if there are many parameters to be set), let’s add another tool that
+works on the output of <strong>tac reverse a file (reverse cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> for
+an authentic <span class="notranslate">workflow</span> experience. From now on we’ll contract steps 1 to 4 and
+just mention the tool and parameters to insert, since the procedure is always
+the same.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-add-select-first-lines-from-a-dataset-tool-to-your-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Add <strong>Select first lines from a dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to your <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li><strong>Select first lines from a dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">Select first lines</code></li>
+        <li><em>Select first</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li>Connect the output of the <strong>Reverse dataset</strong> step to the input</li>
+    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span> using the save button on the top right</li>
+  </ol>
+</blockquote>
+
+<p>We now have a very simple <span class="notranslate">workflow</span> that will reverse the contents of a file and
+then output the first line of the resulting dataset. Now we’re ready to upload
+a test dataset and run our <span class="notranslate">workflow</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-the-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Return to the analysis are by clicking <em>Analyze Data</em> on the top</li>
+    <li>
+      <p>Upload a dataset using “Paste/Fetch data” with the contents</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>A
+B
+C
+D
+E
+F
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run your <span class="notranslate">workflow</span></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a <span class="notranslate">workflow</span></h3>
+        <ul>
+          <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>
+          <li>Click on the dropdown menu <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-dropdown</span> next to your <span class="notranslate">workflow</span>
+            <ul>
+              <li>Select <strong>Run</strong> from the list</li>
+            </ul>
+          </li>
+          <li>Configure the <span class="notranslate">workflow</span> as needed</li>
+          <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>The outputs of the <span class="notranslate">workflow</span> will now appear in your history.
+In addition to our input file we will see 2 new datasets: <code class="language-plaintext highlighter-rouge">2: tac on data 1</code>
+which contains the reversed dataset and <code class="language-plaintext highlighter-rouge">3: Select first on data 2</code> which just
+contains the line <code class="language-plaintext highlighter-rouge">F</code>.</p>
+
+<p>This is fine, but if we want to process many datasets at once the naming of
+input datasets in the history will be difficult to follow.  Luckily we can use
+dataset collections as inputs, which will maintain element identifiers across
+all steps of an analysis. We can also add colorful tags that can help us identify
+groups of datasets and we can label and rename outputs.</p>
+
+<h2 id="editing-our-simple-workflow">Editing our simple <span class="notranslate">workflow</span></h2>
+
+<p>We will now add tags to step outputs and label one of the 2 output datasets.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-configuring-outputs"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Configuring Outputs</h3>
+  <p>Open a step and scroll to the “Configure Output:” section on the right side of
+the editor. Here you can set a Label. Outputs with a label can be used as
+outputs in a sub<span class="notranslate">workflow</span>. You will also be able to set an output name for the
+dataset and to add or remove tags. You can also force a datatype. Note that
+setting a datatype does not change the content, so use this only if the
+file content fits the datatype you are going to select. This can be used
+to change a text output to tabular or gff/<span class="notranslate">bed</span> for instance.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-editing-our-simple-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Editing our simple <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Open our simple <span class="notranslate">workflow</span> in the <span class="notranslate">Workflow</span> Editor</li>
+    <li>Remove the input dataset called <code class="language-plaintext highlighter-rouge">A simple text input dataset</code> using the <code class="language-plaintext highlighter-rouge">x</code> icon</li>
+    <li>Add an input dataset collection and label it
+      <ul>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">A text dataset collection</code></li>
+      </ul>
+    </li>
+    <li>Disconnect the exisiting connections and reconnect</li>
+    <li>Select the <code class="language-plaintext highlighter-rouge">Reverse dataset</code> step and under <code class="language-plaintext highlighter-rouge">Configure Output: outfile</code> set
+      <ul>
+        <li><em>Add Tags</em>: <code class="language-plaintext highlighter-rouge">name:reverse</code></li>
+      </ul>
+    </li>
+    <li>Select the <code class="language-plaintext highlighter-rouge">Select first lines</code> step and under <code class="language-plaintext highlighter-rouge">Configure Output: outfile</code> set
+      <ul>
+        <li><em>Add Tags</em>: <code class="language-plaintext highlighter-rouge">name:first</code></li>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">Last lines</code></li>
+        <li><em>Rename dataset</em>: <code class="language-plaintext highlighter-rouge">Renamed datasets</code></li>
+      </ul>
+    </li>
+    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span> using the save button on the top right</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-running-the-workflow-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running the <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Return to the analysis page by clicking <em>Analyze Data</em> on the top</li>
+    <li>Create a dataset collection from the first 2 files in your history
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-create-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Create a dataset collection</h3>
+
+        <ol>
+          <li>Click on <i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-selector</span> icon (<strong>Operation on multiple datasets</strong>) on the top of the history</li>
+          <li>Select all the datasets for the collection</li>
+          <li>Expand <strong>For all selected</strong> menu</li>
+          <li>Select <strong>Build dataset list</strong></li>
+          <li>Enter a name for the collection</li>
+          <li>Tick <strong>Hide original elements?</strong></li>
+          <li>Click on <strong>Create list</strong> (and wait a bit)</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Run your <span class="notranslate">workflow</span> using the newly created collection input</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a <span class="notranslate">workflow</span></h3>
+        <ul>
+          <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>
+          <li>Click on the dropdown menu <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-dropdown</span> next to your <span class="notranslate">workflow</span>
+            <ul>
+              <li>Select <strong>Run</strong> from the list</li>
+            </ul>
+          </li>
+          <li>Configure the <span class="notranslate">workflow</span> as needed</li>
+          <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>You will now see only 1 new dataset collection, <code class="language-plaintext highlighter-rouge">Renamed datasets</code>, in your
+history.  This is because we have labeled only the last step in the <span class="notranslate">workflow</span>.
+This collection has 2 name tags, <code class="language-plaintext highlighter-rouge">reverse</code> and <code class="language-plaintext highlighter-rouge">first</code>. The other output collection
+is hidden in the history but can be seen by clicking on <code class="language-plaintext highlighter-rouge">hidden</code> in your history.</p>
+
+<p>We will now use this <span class="notranslate">workflow</span> and embed it in a new <span class="notranslate">workflow</span>.</p>
+
+<h2 id="embedding-a-workflow-within-a-workflow">Embedding a <span class="notranslate">workflow</span> within a <span class="notranslate">workflow</span></h2>
+
+<p>Another step type is the <code class="language-plaintext highlighter-rouge">sub<span class="notranslate">workflow</span></code>. We can use this to include a section of
+a <span class="notranslate">workflow</span> that is repeated within a <span class="notranslate">workflow</span> or a <span class="notranslate">workflow</span> that contains steps
+that are useful in more than one <span class="notranslate">workflow</span>, so that we don’t have to maintain
+and update closely related workflows.</p>
+
+<p>Here we will include our <span class="notranslate">workflow</span> twice within a new <span class="notranslate">workflow</span> and then paste the contents
+of each <span class="notranslate">workflow</span> together.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-embedding-a-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Embedding a <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Create a new, empty <span class="notranslate">workflow</span></li>
+    <li>Insert a dataset collection input</li>
+    <li>On the left side scroll down until you see the <code class="language-plaintext highlighter-rouge">Workflows</code> section</li>
+    <li>Insert the previously created <span class="notranslate">workflow</span> by clicking on the <span class="notranslate">workflow</span> name</li>
+    <li>Label the new <span class="notranslate">workflow</span> step:
+      <ul>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">First <span class="notranslate">workflow</span></code></li>
+      </ul>
+    </li>
+    <li>Repeat steps 4 and 5, but change the Label
+      <ul>
+        <li><em>Label</em>: <code class="language-plaintext highlighter-rouge">Second <span class="notranslate">workflow</span></code></li>
+      </ul>
+    </li>
+    <li>Insert <strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
+    <li>Connect the 2 <span class="notranslate">workflow</span> outputs to the <strong>Paste two files side by side</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> input</li>
+    <li>Save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> your <span class="notranslate">workflow</span> using the save button on the top right
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a <span class="notranslate">workflow</span></h3>
+        <ul>
+          <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>
+          <li>Click on the dropdown menu <i class="fas fa-caret-down" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-dropdown</span> next to your <span class="notranslate">workflow</span>
+            <ul>
+              <li>Select <strong>Run</strong> from the list</li>
+            </ul>
+          </li>
+          <li>Configure the <span class="notranslate">workflow</span> as needed</li>
+          <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>This is a very contrived example, but this technique can be used to separate
+re-useable steps in real world scenarios.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-workflow-versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: <span class="notranslate">Workflow</span> versions</h3>
+  <p>Every time a <span class="notranslate">workflow</span> is saved a new version is created, so that you can go
+back and forth between new and old versions of a <span class="notranslate">workflow</span>. Click on the pencil
+symbol to bring up the <span class="notranslate">workflow</span> attributes. You can freely select different
+versions. You can change an old version of a <span class="notranslate">workflow</span>, and when you save it it
+will become the newest version.</p>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-importing-workflows"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Importing workflows</h3>
+
+  <p>Workflows can be imported via URL, through <code class="language-plaintext highlighter-rouge">Shared Data -&gt; Workflows</code> or
+from a local file on your computer.</p>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-comment-managing-tool-versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Managing tool versions</h3>
+
+  <p>Versions of a tool in a <span class="notranslate">workflow</span> can be changed by clicking on a tool step in
+the center panel and on the right side clicking on <code class="language-plaintext highlighter-rouge">Select another tool
+version</code>.</p>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>You now know the ins and outs of Workflows in <span class="notranslate">Galaxy</span> and should be able to
+make your analyses more efficient and less manual!</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Creating powerful workflows is easy in the Workflow Editor</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Creating, Editing and Importing Galaxy Workflows (User Interface and Data Manipulation)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Marius van den Beek, 2020 <b>Creating, Editing and Importing Galaxy Workflows (Galaxy Training Materials)</b>. <a href="/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html">/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{galaxy-interface-workflow-editor,
+    author = "Marius van den Beek",
+    title = "Creating, Editing and Importing Galaxy Workflows (Galaxy Training Materials)",
+    year = "2020",
+    month = "07",
+    day = "17"
+    url = "\url{/training-material/topics/galaxy-interface/tutorials/workflow-editor/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Marius van den Beek)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/galaxy-interface/tutorials/workflow-editor/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+</html>
