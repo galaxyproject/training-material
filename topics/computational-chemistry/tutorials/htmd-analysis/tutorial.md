@@ -29,7 +29,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to N-terminus of Hsp90 (heat shock protein 90).
+This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to the N-terminal domain of Hsp90 (heat shock protein 90).
 
 
 > ### Agenda
@@ -44,11 +44,11 @@ This tutorial provides an introduction to using high-throughput molecular dynami
 # Background
 
 ## What is high-throughput molecular dynamics?
-Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g.~potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput workflow for screening multiple small molecules, using the open-source GROMACS tools provided through the Galaxy platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.
+Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g. potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput workflow for screening multiple small molecules, using the open-source GROMACS tools provided through the Galaxy platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.
 
 
 ## Why is Hsp90 interesting to study?
-The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases({% cite Pearl2006 %}). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle({% cite Schopf2017 %}).
+The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases ({% cite Pearl2006 %}). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle ({% cite Schopf2017 %}).
 
 Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site of the NTD could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents ({% cite Stebbins1997 %}, {% cite Hermane2019 %}).
 
@@ -148,10 +148,17 @@ Please note all GROMACS tools output a log. Generally, you only need to look at 
 
 To generate a topology for the ligand, we will use the **acpype** {% icon tool %} tool ({% cite SousadaSilva2012 %}). This provides a convenient interface to the AmberTools suite and allows us to easily create the ligand topology in the format required by GROMACS.
 
+Inspecting the contents of the `Ligand (PDB)` file shows that it contains no hydrogen atoms. These need to be added before the topology can be calculated. The **Compound conversion** {% icon tool %} (which is based on OpenBabel) can be used to achieve this.
+
 > ### {% icon hands_on %} Hands-on: Generate ligand topology
 >
-> 1. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
->    - *"Input file"*: 'Ligand (PDB)'
+> 1. **Compound conversion** {% icon tool %} with the following parameters:
+>    - *"Molecular input file"*: 'Ligand (PDB)'
+>    - *"Output format"*: `Protein Data Bank format (pdb)`
+>    - *"Add hydrogens appropriate for pH"*: `7.0`
+> 2. Rename the output file to `Hydrated ligand (PDB)`.
+> 3. **Generate MD topologies for small molecules** {% icon tool %} with the following parameters:
+>    - *"Input file"*: 'Hydrated ligand (PDB)'
 >    - *"Charge of the molecule"*: `0`
 >    - *"Multiplicity"*: `1`
 >    - *"Force field to use for parameterization"*: `gaff`
@@ -185,7 +192,7 @@ While we have separate topology and structure files for both protein and ligand,
 {: .hands_on}
 
 
-## Create the simulation box with **GROMACS structure configuration**
+## Create the simulation box
 
 The next step, once combined coordinate (GRO) and topology (TOP) files have been created, is to create a simulation box in which the system is situated.
 
@@ -279,6 +286,8 @@ The resulting plot should resemble the figure below. The system first drops rapi
 
 We now carry out equilibration in two stages: NVT and NPT. This is discussed at greater length in the basic GROMACS tutorial. Equilibration requires restraining the protein structure - we use the ITP file produced by the initial setup tool for this.
 
+Simulation under the NVT ensemble allows the solvent to be brought to the desired temperature, while simulation under the NPT ensemble bring the solvent to the correct pressure.
+
 > ### {% icon comment %} More detail about equilibration
 >
 > At this point equilibration of the solvent around the solute (i.e. the protein) is necessary. This is performed in two stages: equilibration under an NVT (or isothermal-isochoric) ensemble, followed by an NPT (or isothermal-isobaric) ensemble. Use of the NVT ensemble entails maintaining constant number of particles, volume and temperature, while the NPT ensemble maintains constant number of particles, pressure and temperature.
@@ -304,7 +313,7 @@ We now carry out equilibration in two stages: NVT and NPT. This is discussed at 
 >        - *"Parameter input"*: `Use default (partially customisable) setting`
 >            - *"Bond constraints (constraints)"*: `All bonds (all-bonds).`
 >            - *"Temperature /K"*: `300`
->            - *"Step length in ps"*: `0.0002`
+>            - *"Step length in ps"*: `0.001`
 >            - *"Number of steps that elapse between saving data points (velocities, forces, energies)"*: `1000`
 >            - *"Number of steps for the simulation"*: `50000`
 >    - *"Generate detailed log"*: `Yes`
@@ -341,7 +350,7 @@ NVT simulation.
 >        - *"Parameter input"*: `Use default (partially customisable) setting`
 >            - *"Bond constraints (constraints)"*: `All bonds (all-bonds).`
 >            - *"Temperature /K"*: `300`
->            - *"Step length in ps"*: `0.002`
+>            - *"Step length in ps"*: `0.001`
 >            - *"Number of steps that elapse between saving data points (velocities, forces, energies)"*: `1000`
 >            - *"Number of steps for the simulation"*: `50000`
 >    - *"Generate detailed log"*: `Yes`
