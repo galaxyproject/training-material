@@ -510,7 +510,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 16, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 17, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -580,7 +580,7 @@
 
 <h2 id="configuration">Configuration</h2>
 
-<p>We’ll be using the <a href="https://github.com/galaxyproject/ansible-galaxy">official <span class="notranslate">Galaxy</span> role</a> to install and manage <span class="notranslate">Galaxy</span>. This role is found in <a href="https://galaxy.ansible.com/">Ansible <span class="notranslate">Galaxy</span></a> (no relation - it is Ansible’s ) as <a href="https://galaxy.ansible.com/galaxyproject/galaxy"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></a>.</p>
+<p>We’ll be using the <a href="https://github.com/galaxyproject/ansible-galaxy">official <span class="notranslate">Galaxy</span> role</a> to install and manage <span class="notranslate">Galaxy</span>. This role is found in <a href="https://galaxy.ansible.com/">Ansible <span class="notranslate">Galaxy</span></a> (no relation - it is Ansible’s system for sharing reusable Ansible roles) as <a href="https://galaxy.ansible.com/galaxyproject/galaxy"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></a>.</p>
 
 <p>The official role is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The <a href="https://github.com/galaxyproject/ansible-galaxy#role-variables">role documentation</a> is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.</p>
 
@@ -599,7 +599,7 @@
 
 <h2 id="tasks">Tasks</h2>
 
-<p>As with every role, the entry point for execution is the <code class="language-plaintext highlighter-rouge">tasks/main.yml</code> file. For the <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml">ansible-<span class="notranslate">galaxy</span></a> file, this includes a few groups of important tasks:</p>
+<p>As with every role, the entry point for execution is the <code class="language-plaintext highlighter-rouge">tasks/main.yml</code> file. <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml">In the case of the <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span> role</a>, this includes a few groups of important tasks:</p>
 
 <ul>
   <li><a href="#cloning-galaxy">Clone (or Download) <span class="notranslate">Galaxy</span></a></li>
@@ -609,12 +609,14 @@
   <li><a href="#managing-the-database">Managing the Database</a></li>
 </ul>
 
+<p>The actions each set of tasks performs are described below.</p>
+
 <h3 id="cloning-galaxy">Cloning <span class="notranslate">Galaxy</span></h3>
 
-<p>The <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml">clone</a> task is the one which is primarily interesting to us, it downloads <span class="notranslate">Galaxy</span>, using git, to a specific commit.</p>
+<p>The <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml">clone</a> task is the one which is primarily interesting to us, it downloads <span class="notranslate">Galaxy</span>, using git, at a specific commit (or more generally, any <a href="https://git-scm.com/book/en/v2/Git-Internals-Git-References">git reference</a>).</p>
 
 <ol>
-  <li>Ansible tries to update <span class="notranslate">Galaxy</span>, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of that branch.)</li>
+  <li>Ansible tries to update <span class="notranslate">Galaxy</span>, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of the given branch).</li>
   <li>Any change is reported.</li>
   <li>The virtualenv is set up:
     <ol>
@@ -622,7 +624,7 @@
       <li>Pip is updated within the virtualenv.</li>
     </ol>
   </li>
-  <li>Any <code class="language-plaintext highlighter-rouge">.pyc</code> files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding <code class="language-plaintext highlighter-rouge">.py</code> file is no more present at the checked-out commit. For safety, all of these are removed.</li>
+  <li>Any <code class="language-plaintext highlighter-rouge">.pyc</code> files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding <code class="language-plaintext highlighter-rouge">.py</code> file is no longer present at the checked-out commit. For safety, all of these are removed.</li>
 </ol>
 
 <p>With that <span class="notranslate">Galaxy</span> is cloned to disk and is ready to be configured by the next task.</p>
@@ -638,7 +640,7 @@
   <li>The <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (or <code class="language-plaintext highlighter-rouge">.ini</code>) is deployed</li>
 </ol>
 
-<p>The setup for deploying templates and configuration files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.</p>
+<p>The setup for deploying extra <span class="notranslate">Galaxy</span> configuration templates and files is a little bit non-standard by Ansible best practices. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.</p>
 
 <p>Using the <a href="https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578">Use<span class="notranslate">Galaxy</span>.eu</a> configuration as an example, we have something like:</p>
 
@@ -651,8 +653,8 @@
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.datatypes_config_file</span><span class="nv"> </span><span class="s">}}"</span>
   <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml</span>
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.dependency_resolvers_config_file</span><span class="nv"> </span><span class="s">}}"</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/disposable_email_blacklist.conf</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.blacklist_file</span><span class="nv"> </span><span class="s">}}"</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">files/<span class="notranslate">galaxy</span>/config/disposable_email_blocklist.conf</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.blocklist_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div></div>
 
 <p>The configuration here is a bit different, it references the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>, which is structured like:</p>
@@ -663,21 +665,26 @@
     <span class="na">datatypes_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv">  </span><span class="s">}}/datatypes_conf.xml"</span>
 </code></pre></div></div>
 
-<p>So the references in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the blacklist file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
+<p>So the references in <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> to <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> are done to ensure that the setting for e.g. “location of the datatypes config file” is the same between where we have configured <span class="notranslate">Galaxy</span> to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-define-once-reference-many-times"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Define once, reference many times</h3>
+  <p>Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as <span class="notranslate">Galaxy</span> is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.</p>
+</blockquote>
 
 <h3 id="dependencies">Dependencies</h3>
 
 <p>Now that <span class="notranslate">Galaxy</span> is available on disk, Ansible is ready to start processing <a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/dependencies.yml">dependencies</a> of <span class="notranslate">Galaxy</span>.</p>
 
 <ol>
-  <li>The virtualenv is updated with data from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_requirements_file</code>, by default pointing to the requirements file in the codebase: <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_server_dir  }}/lib/<span class="notranslate">galaxy</span>/dependencies/pinned-requirements.txt</code>.</li>
+  <li>The virtualenv is updated with data from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_requirements_file</code>, by default pointing to the requirements file in the codebase: <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_server_dir }}/lib/<span class="notranslate">galaxy</span>/dependencies/pinned-requirements.txt</code>.</li>
   <li>Any necessary conditional dependencies of <span class="notranslate">Galaxy</span> are <a href="https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/dependencies/__init__.py">collected by processing the config file</a></li>
   <li>and then installed to the virtualenv.</li>
 </ol>
 
 <h3 id="mutable-setup">Mutable Setup</h3>
 
-<p><a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml">This task</a> creates a directory and deploys any hand-managed mutable configuration files. It is unlikely that you want to manage these, as <span class="notranslate">Galaxy</span> does a sufficient job. Any changes you make to <span class="notranslate">Galaxy</span> like installing tools would result in the tools being “forgotten about”, if you re-ran the playbook and overwrote that file.</p>
+<p><a href="https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml">This task</a> creates a directory and initializes “mutable” (written/managed by <span class="notranslate">Galaxy</span> itself) configuration files. It also deploys any hand-managed mutable config files, but it is unlikely that you want to manage these directly, as <span class="notranslate">Galaxy</span> does a sufficient job. Any changes you make to <span class="notranslate">Galaxy</span>, for example installing some tools, would result in the tools being “forgotten about”, if you re-ran the playbook and overwrote the <code class="language-plaintext highlighter-rouge">shed_tool_conf.xml</code> mutable config file with a hand-managed one.</p>
 
 <h3 id="managing-the-database">Managing the Database</h3>
 
@@ -718,7 +725,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <h1 id="installing-galaxy">Installing <span class="notranslate">Galaxy</span></h1>
 
-<p>With the necessary background in place, you are ready to install <span class="notranslate">Galaxy</span> with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal <span class="notranslate">Galaxy</span> playbook which only requires setting the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_server_dir</code> and expand from there. First, however, we need a database for <span class="notranslate">Galaxy</span> to connect to, so we will do that now.</p>
+<p>With the necessary background in place, you are ready to install <span class="notranslate">Galaxy</span> with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal <span class="notranslate">Galaxy</span> playbook which only requires setting the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> and expand from there. First, however, we need a database for <span class="notranslate">Galaxy</span> to connect to, so we will do that now.</p>
 
 <p>To proceed from here it is expected that:</p>
 
@@ -830,7 +837,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
     </li>
     <li>
-      <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. Remember, if you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="language-plaintext highlighter-rouge">ansible_connection=local</code>.</p>
+      <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. If you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="language-plaintext highlighter-rouge">ansible_connection=local</code>.</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
@@ -980,7 +987,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <blockquote class="tip">
         <h3 id="tip-is-the-yaml-sensitive-to-truetruefalsefalse"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Is the YAML sensitive to True/true/False/false</h3>
-        <p>By <a href="https://yaml.org/refcard.html">this references</a>, YAML doesn’t really care:</p>
+        <p>By <a href="https://yaml.org/refcard.html">this reference</a>, YAML doesn’t really care:</p>
         <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{ Y, true, Yes, ON   }    : Boolean true
 { n, FALSE, No, off  }    : Boolean false
 </code></pre></div>        </div>
@@ -1334,7 +1341,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2020-07-16), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2020-07-17), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -2782,7 +2789,7 @@ Additionally you can automatically send failing job error reports, even if users
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "07",
-    day = "16"
+    day = "17"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
