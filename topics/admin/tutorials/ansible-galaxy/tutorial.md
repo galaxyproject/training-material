@@ -54,7 +54,7 @@ We want to give you a comprehensive understanding of how the Galaxy installation
 
 ## Configuration
 
-We'll be using the [official Galaxy role](https://github.com/galaxyproject/ansible-galaxy) to install and manage Galaxy. This role is found in [Ansible Galaxy](https://galaxy.ansible.com/) (no relation - it is Ansible's ) as [galaxyproject.galaxy](https://galaxy.ansible.com/galaxyproject/galaxy).
+We'll be using the [official Galaxy role](https://github.com/galaxyproject/ansible-galaxy) to install and manage Galaxy. This role is found in [Ansible Galaxy](https://galaxy.ansible.com/) (no relation - it is Ansible's system for sharing reusable Ansible roles) as [galaxyproject.galaxy](https://galaxy.ansible.com/galaxyproject/galaxy).
 
 The official role is extremely configurable, everything that you want to change is exposed as a variable, and then tasks will change behaviour based on that. The [role documentation](https://github.com/galaxyproject/ansible-galaxy#role-variables) is the most up-to-date source of documentation for the variables. You should take a minute and read over the variables listed there.
 
@@ -71,7 +71,7 @@ The official recommendation is that you should have a variables file such as a `
 
 ## Tasks
 
-As with every role, the entry point for execution is the `tasks/main.yml` file. For the [ansible-galaxy](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml) file, this includes a few groups of important tasks:
+As with every role, the entry point for execution is the `tasks/main.yml` file. [In the case of the galaxyproject.galaxy role](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/main.yml), this includes a few groups of important tasks:
 
 - [Clone (or Download) Galaxy](#cloning-galaxy)
 - [Managing Configuration](#managing-configuration)
@@ -79,16 +79,18 @@ As with every role, the entry point for execution is the `tasks/main.yml` file. 
 - [Managing Mutable Setup](#mutable-setup)
 - [Managing the Database](#managing-the-database)
 
+The actions each set of tasks performs are described below.
+
 ### Cloning Galaxy
 
-The [clone](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml) task is the one which is primarily interesting to us, it downloads Galaxy, using git, to a specific commit.
+The [clone](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/clone.yml) task is the one which is primarily interesting to us, it downloads Galaxy, using git, at a specific commit (or more generally, any [git reference](https://git-scm.com/book/en/v2/Git-Internals-Git-References)).
 
-1. Ansible tries to update Galaxy, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of that branch.)
+1. Ansible tries to update Galaxy, cloning it if it is missing, or otherwise attempting to update to the correct commit (or latest commit of the given branch).
 2. Any change is reported.
 3. The virtualenv is set up:
     1. An empty virtualenv is created.
     2. Pip is updated within the virtualenv.
-4. Any `.pyc` files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding `.py` file is no more present at the checked-out commit. For safety, all of these are removed.
+4. Any `.pyc` files are removed, as this can occasionally result in Python loading the cached code, even if the corresponding `.py` file is no longer present at the checked-out commit. For safety, all of these are removed.
 
 With that Galaxy is cloned to disk and is ready to be configured by the next task.
 
@@ -101,7 +103,7 @@ The [static configuration setup](https://github.com/galaxyproject/ansible-galaxy
 3. Any templates are copied over
 4. The `galaxy.yml` (or `.ini`) is deployed
 
-The setup for deploying templates and configuration files is a little bit non-standard by Ansible standards. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
+The setup for deploying extra Galaxy configuration templates and files is a little bit non-standard by Ansible best practices. Here you are expected to provide your own templates and static config files, and then describe them as a list of files and where they should be deployed to.
 
 Using the [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/02ca578211bfee45044facf36635d28208e5dbb3/group_vars/galaxy.yml#L578) configuration as an example, we have something like:
 
@@ -117,8 +119,8 @@ galaxy_config_files:
     dest: "{{ galaxy_config.galaxy.datatypes_config_file }}"
   - src: files/galaxy/config/dependency_resolvers_conf.xml
     dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
-  - src: files/galaxy/config/disposable_email_blacklist.conf
-    dest: "{{ galaxy_config.galaxy.blacklist_file }}"
+  - src: files/galaxy/config/disposable_email_blocklist.conf
+    dest: "{{ galaxy_config.galaxy.blocklist_file }}"
 ```
 {% endraw %}
 
@@ -133,20 +135,23 @@ galaxy_config:
 ```
 {% endraw %}
 
-So the references in `galaxy_config_files` to `galaxy_config` are done to ensure that the setting for e.g. "location of the blacklist file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
+So the references in `galaxy_config_files` to `galaxy_config` are done to ensure that the setting for e.g. "location of the datatypes config file" is the same between where we have configured Galaxy to looking for it, and where the file has been deployed, without requiring us to make variables changes in numerous places.
+
+> ### {% icon tip %} Define once, reference many times
+> Using practices like those shown above helps to avoid problems caused when paths are defined differently in multiple places. The datatypes config file will be copied to the same path as Galaxy is configured to find it in, because that path is only defined in one place. Everything else is a reference to the original definition! If you ever need to update that definition, everything else will be updated accordingly.
+{: .tip}
 
 ### Dependencies
 
 Now that Galaxy is available on disk, Ansible is ready to start processing [dependencies](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/dependencies.yml) of Galaxy.
 
-1. The virtualenv is updated with data from the `galaxy_requirements_file`, by default pointing to the requirements file in the codebase: {% raw %}`{{ galaxy_server_dir  }}/lib/galaxy/dependencies/pinned-requirements.txt`.{% endraw %}
+1. The virtualenv is updated with data from the `galaxy_requirements_file`, by default pointing to the requirements file in the codebase: {% raw %}`{{ galaxy_server_dir }}/lib/galaxy/dependencies/pinned-requirements.txt`.{% endraw %}
 2. Any necessary conditional dependencies of Galaxy are [collected by processing the config file](https://github.com/galaxyproject/galaxy/blob/dev/lib/galaxy/dependencies/__init__.py)
-2. and then installed to the virtualenv.
+3. and then installed to the virtualenv.
 
 ### Mutable Setup
 
-[This task](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml) creates a directory and deploys any hand-managed mutable configuration files. It is unlikely that you want to manage these, as Galaxy does a sufficient job. Any changes you make to Galaxy like installing tools would result in the tools being "forgotten about", if you re-ran the playbook and overwrote that file.
-
+[This task](https://github.com/galaxyproject/ansible-galaxy/blob/master/tasks/mutable_setup.yml) creates a directory and initializes "mutable" (written/managed by Galaxy itself) configuration files. It also deploys any hand-managed mutable config files, but it is unlikely that you want to manage these directly, as Galaxy does a sufficient job. Any changes you make to Galaxy, for example installing some tools, would result in the tools being "forgotten about", if you re-ran the playbook and overwrote the `shed_tool_conf.xml` mutable config file with a hand-managed one.
 
 ### Managing the Database
 
@@ -183,7 +188,7 @@ best practices and knowledge from previous admins codified for you.
 
 # Installing Galaxy
 
-With the necessary background in place, you are ready to install Galaxy with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal Galaxy playbook which only requires setting the `galaxy_server_dir` and expand from there. First, however, we need a database for Galaxy to connect to, so we will do that now.
+With the necessary background in place, you are ready to install Galaxy with Ansible. The playbooks will start simple, and grow over time. We will start with the minimal Galaxy playbook which only requires setting the `galaxy_root` and expand from there. First, however, we need a database for Galaxy to connect to, so we will do that now.
 
 To proceed from here it is expected that:
 
@@ -278,7 +283,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >
-> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. Remember, if you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
+> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. If you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```bash
@@ -413,7 +418,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {: .tip}
 >
 >    > ### {% icon tip %} Is the YAML sensitive to True/true/False/false
->    > By [this references](https://yaml.org/refcard.html), YAML doesn't really care:
+>    > By [this reference](https://yaml.org/refcard.html), YAML doesn't really care:
 >    > ```
 >    > { Y, true, Yes, ON   }    : Boolean true
 >    > { n, FALSE, No, off  }    : Boolean false
