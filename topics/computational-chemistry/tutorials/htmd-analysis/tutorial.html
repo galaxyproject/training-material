@@ -475,12 +475,6 @@
         
     
         
-        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
-            Galaxy@GenOuest
-        </a>
-        
-    
-        
     
         
     
@@ -561,7 +555,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 15, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 17, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -573,7 +567,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to N-terminus of Hsp90 (heat shock protein 90).</p>
+<p>This tutorial provides an introduction to using high-throughput molecular dynamics to study protein-ligand interaction, as applied to the N-terminal domain of Hsp90 (heat shock protein 90).</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -590,7 +584,7 @@
   <li><a href="#simulation" id="markdown-toc-simulation">Simulation</a>    <ol>
       <li><a href="#topology-generation" id="markdown-toc-topology-generation">Topology generation</a></li>
       <li><a href="#combine-topology-and-gro-files" id="markdown-toc-combine-topology-and-gro-files">Combine topology and GRO files</a></li>
-      <li><a href="#create-the-simulation-box-with-gromacs-structure-configuration" id="markdown-toc-create-the-simulation-box-with-gromacs-structure-configuration">Create the simulation box with <strong>GROMACS structure configuration</strong></a></li>
+      <li><a href="#create-the-simulation-box" id="markdown-toc-create-the-simulation-box">Create the simulation box</a></li>
       <li><a href="#solvation" id="markdown-toc-solvation">Solvation</a></li>
       <li><a href="#energy-minimization" id="markdown-toc-energy-minimization">Energy minimization</a></li>
       <li><a href="#equilibration" id="markdown-toc-equilibration">Equilibration</a></li>
@@ -615,10 +609,10 @@
 <h1 id="background">Background</h1>
 
 <h2 id="what-is-high-throughput-molecular-dynamics">What is high-throughput molecular dynamics?</h2>
-<p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g.~potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput <span class="notranslate">workflow</span> for screening multiple small molecules, using the open-source GROMACS tools provided through the <span class="notranslate">Galaxy</span> platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.</p>
+<p>Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton’s laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids. A common application is to assess the interaction between these macromolecules and a number of small molecules (e.g. potential drug candidates). This tutorial provides a guide to setting up and running a high-throughput <span class="notranslate">workflow</span> for screening multiple small molecules, using the open-source GROMACS tools provided through the <span class="notranslate">Galaxy</span> platform. Following simulation, the trajectory data is analyzed using a range of tools to investigate structural properties and correlations over time.</p>
 
 <h2 id="why-is-hsp90-interesting-to-study">Why is Hsp90 interesting to study?</h2>
-<p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases(<a class="citation" href="#Pearl2006">Pearl and Prodromou 2006</a>). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle(<a class="citation" href="#Schopf2017">Schopf <i>et al.</i> 2017</a>).</p>
+<p>The 90 kDa heat shock protein (Hsp90) is a chaperone protein responsible for catalyzing the conversion of a wide variety of proteins to a functional form; examples of the Hsp90 clientele, which totals several hundred proteins, include nuclear steroid hormone receptors and protein kinases (<a class="citation" href="#Pearl2006">Pearl and Prodromou 2006</a>). The mechanism by which Hsp90 acts varies between clients, as does the client binding site; the process is dependent on post-translational modifications of Hsp90 and the identity of co-chaperones which bind and regulate the conformational cycle (<a class="citation" href="#Schopf2017">Schopf <i>et al.</i> 2017</a>).</p>
 
 <p>Due to its vital biochemical role as a chaperone protein involved in facilitating the folding of many client proteins, Hsp90 is an attractive pharmaceutical target. In particular, as protein folding is a potential bottleneck to cellular reproduction and growth, blocking Hsp90 function using inhibitors which bind tightly to the ATP binding site of the NTD could assist in treating cancer; for example, the antibiotic geldanamycin and its analogs are under investigation as possible anti-tumor agents (<a class="citation" href="#Stebbins1997">Stebbins <i>et al.</i> 1997</a>, <a class="citation" href="#Hermane2019">Hermane <i>et al.</i> 2019</a>).</p>
 
@@ -750,13 +744,23 @@
 
 <p>To generate a topology for the ligand, we will use the <strong>acpype</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool (<a class="citation" href="#SousadaSilva2012">da Silva and Vranken 2012</a>). This provides a convenient interface to the AmberTools suite and allows us to easily create the ligand topology in the format required by GROMACS.</p>
 
+<p>Inspecting the contents of the <code class="language-plaintext highlighter-rouge">Ligand (PDB)</code> file shows that it contains no hydrogen atoms. These need to be added before the topology can be calculated. The <strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> (which is based on OpenBabel) can be used to achieve this.</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-generate-ligand-topology"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generate ligand topology</h3>
 
   <ol>
+    <li><strong>Compound conversion</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Molecular input file”</em>: ‘Ligand (PDB)’</li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Protein Data Bank format (pdb)</code></li>
+        <li><em>“Add hydrogens appropriate for pH”</em>: <code class="language-plaintext highlighter-rouge">7.0</code></li>
+      </ul>
+    </li>
+    <li>Rename the output file to <code class="language-plaintext highlighter-rouge">Hydrated ligand (PDB)</code>.</li>
     <li><strong>Generate MD topologies for small molecules</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“Input file”</em>: ‘Ligand (PDB)’</li>
+        <li><em>“Input file”</em>: ‘Hydrated ligand (PDB)’</li>
         <li><em>“Charge of the molecule”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
         <li><em>“Multiplicity”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Force field to use for parameterization”</em>: <code class="language-plaintext highlighter-rouge">gaff</code></li>
@@ -797,7 +801,7 @@ minimization step.</p>
 
 </blockquote>
 
-<h2 id="create-the-simulation-box-with-gromacs-structure-configuration">Create the simulation box with <strong>GROMACS structure configuration</strong></h2>
+<h2 id="create-the-simulation-box">Create the simulation box</h2>
 
 <p>The next step, once combined coordinate (GRO) and topology (TOP) files have been created, is to create a simulation box in which the system is situated.</p>
 
@@ -925,6 +929,8 @@ minimization step.</p>
 
 <p>We now carry out equilibration in two stages: NVT and NPT. This is discussed at greater length in the basic GROMACS tutorial. Equilibration requires restraining the protein structure - we use the ITP file produced by the initial setup tool for this.</p>
 
+<p>Simulation under the NVT ensemble allows the solvent to be brought to the desired temperature, while simulation under the NPT ensemble bring the solvent to the correct pressure.</p>
+
 <blockquote class="comment">
   <h3 id="comment-more-detail-about-equilibration"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> More detail about equilibration</h3>
 
@@ -961,7 +967,7 @@ minimization step.</p>
               <ul>
                 <li><em>“Bond constraints (constraints)”</em>: <code class="language-plaintext highlighter-rouge">All bonds (all-bonds).</code></li>
                 <li><em>“Temperature /K”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
-                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.0002</code></li>
+                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.001</code></li>
                 <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
                 <li><em>“Number of steps for the simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
               </ul>
@@ -1015,7 +1021,7 @@ NVT simulation.</p>
               <ul>
                 <li><em>“Bond constraints (constraints)”</em>: <code class="language-plaintext highlighter-rouge">All bonds (all-bonds).</code></li>
                 <li><em>“Temperature /K”</em>: <code class="language-plaintext highlighter-rouge">300</code></li>
-                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.002</code></li>
+                <li><em>“Step length in ps”</em>: <code class="language-plaintext highlighter-rouge">0.001</code></li>
                 <li><em>“Number of steps that elapse between saving data points (velocities, forces, energies)”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
                 <li><em>“Number of steps for the simulation”</em>: <code class="language-plaintext highlighter-rouge">50000</code></li>
               </ul>
@@ -1696,8 +1702,8 @@ Publisher: Nature Publishing Group.
     author = "Simon Bray and Tharindu Senapathi and Christopher Barnett and Björn Grüning",
     title = "High Throughput Molecular Dynamics and Analysis (Galaxy Training Materials)",
     year = "2020",
-    month = "06",
-    day = "15"
+    month = "07",
+    day = "17"
     url = "\url{/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
