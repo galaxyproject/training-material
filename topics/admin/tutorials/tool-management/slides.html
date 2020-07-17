@@ -53,7 +53,7 @@ You can add tools to Galaxy either
   - Make a copy `$ cp tool_conf.xml.sample tool_conf.xml`.
   - Add your tool entry to the `tool_conf.xml`.
 - To add local tools with the [galaxyproject.galaxy Ansible role][galaxy-role]:
-  - Set `galaxy_local_tools`
+  - Set `galaxy_local_tools` to the local tool paths
   - Run the playbook
 - Tool dependencies need to be installed separately, unless
   `conda_auto_install: true` is set in `galaxy.yml` (not recommended for
@@ -102,7 +102,7 @@ workflow-install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	[--publish_workflows]
 ```
 
-(use `workflow-to-tools` to extract list of tools from a workflow)
+(use `workflow-to-tools` to extract the list of tools used in a workflow)
 
 ---
 ## Get installed tool list for a Galaxy instance
@@ -148,8 +148,7 @@ shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	[-y TOOL_YAML]
 	[--name NAME]
 	[--owner OWNER]
-	[--revisions
-	[REVISIONS [REVISIONS ...]]]
+	[--revisions [REVISIONS [REVISIONS ...]]]
 	[--toolshed TOOL_SHED_URL]
 	[--install_tool_dependencies]
 	[--skip_install_resolver_dependencies]
@@ -258,9 +257,7 @@ Galaxy Version: 17.05
 ---
 class: left
 
-## Example config entry
-
-One entry in `shed_tool_conf.xml`:
+## Example `shed_tool_conf.xml` entry
 
 ```xml
 <section id="filter" name="Filter and Sort" version="">
