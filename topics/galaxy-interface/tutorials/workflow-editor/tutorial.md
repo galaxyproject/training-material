@@ -18,7 +18,8 @@ key_points:
 - Creating powerful workflows is easy in the workflow editor.
 contributors:
 - mvdbeek
-
+level: Intermediate
+subtopic: analyse
 ---
 
 
@@ -63,7 +64,93 @@ the contents of the right panel will change, but you can always return to these
 attributes by clicking on the **Edit Attributes** button (the Pencil icon on
 the upper right).
 
-# Workflow Steps
+We will start by creating a very simple workflow with just 2 tools, and then
+add more advanced features.
+
+# A simple 2 step workflow
+
+> ### {% icon hands_on %} Hands-on: Insert a dataset input
+>
+> 1. Expand the "Inputs" section in the tool panel and click on "Input dataset" to create a new dataset input.
+> 2. Click on the new input dataset in the center panel. Set the folling parameter on the right side:
+>    - *Label*: `A simple text input dataset`
+>
+> > ### {% icon comment %} Optional Input Datasets & Formats
+> > Tools may have optional dataset inputs. If your workflow should use
+> > optional datasets, you can set **Optional** to `Yes`. Doing this allows you
+> > to connect such an input only to Tool inputs that are optional. You can
+> > also restrict the format of an input dataset or input dataset collection.
+> > This serves as documentation and prevents selection of incompatible datasets.
+> {: .comment}
+>
+{: .hands_on}
+
+We're now ready to add a first tool and connect it to our input dataset.
+
+> ### {% icon hands_on %} Hands-on: Add **tac reverse a file (reverse cat)** {% icon tool %} to your workflow
+>
+> 1. Find **tac reverse a file (reverse cat)** {% icon tool %} in the tool panel and click on it
+> 2. A new box labelled **tac** {% icon tool %} will appear in the center panel.
+> 3. Click on **tac** in the center panel and see the tool parameters on the right side.
+> 4. We will keep the default tool settings and only give the step a label.
+>    - *Label*: `Reverse dataset`
+> 5. Click on the round blue symbol of the input dataset and drag the connection to the highlighted round green tool input.
+> ![Connecting an input](../../images/workflow_editor_connect_inputs.png "Connecting outputs and inputs")
+{: .hands_on}
+
+This is great, but while a single tool in a workflow might be handy (for
+instance if there are many parameters to be set), let's add another tool that
+works on the output of **tac reverse a file (reverse cat)** {% icon tool %} for
+an authentic workflow experience. From now on we'll contract steps 1 to 4 and
+just mention the tool and parameters to insert, since the procedure is always
+the same.
+
+> ### {% icon hands_on %} Hands-on: Add **Select first lines from a dataset** {% icon tool %} to your workflow
+>
+> 1. **Select first lines from a dataset** {% icon tool %}
+>    - *Label*: `Select first lines`
+>    - *Select first*: `1`
+> 2. Connect the output of the **Reverse dataset** step to the input
+> 3. Save {% icon galaxy-save %} your workflow using the save button on the top right.
+{: .hands_on}
+
+We now have a very simple workflow that will reverse the contents of a file and
+then output the first line of the resulting dataset.
+Now we're ready to upload a test dataset and run our workflow.
+
+> ### {% icon hands_on %} Hands-on: Running the workflow
+>
+> 1. Return to the analysis are by clicking *Analyze Data* on the top
+> 2. Upload a dataset using "Paste/Fetch data" with the contents
+>
+>    ```
+>    A
+>    B
+>    C
+>    D
+>    E
+>    F
+>    ```
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Insert a dataset input
+>
+> 1. Expand the "Inputs" section in the tool panel and click on "Input dataset" to create a new dataset input.
+> 2. Click on the new input dataset in the center panel. Set the folling parameter on the right side:
+>    - *Label*: `A simple text input dataset`
+>
+> > ### {% icon comment %} Optional Input Datasets & Formats
+> > Tools may have optional dataset inputs. If your workflow should use
+> > optional datasets, you can set **Optional** to `Yes`. Doing this allows you
+> > to connect such an input only to Tool inputs that are optional. You can
+> > also restrict the format of an input dataset or input dataset collection.
+> > This serves as documentation and prevents selection of incompatible datasets.
+> {: .comment}
+>
+{: .hands_on}
+
+## Workflow Steps
 
 Workflows logically connect a collection of steps. Possible step types are
 currently workflow inputs, tools, and workflows.
@@ -80,6 +167,10 @@ users can or should change when running your workflow. Please check out the
 }}/topics/galaxy-interface/tutorials/workflow-parameters/tutorial.html) for a
 detailed description of how to use these.
 
+
+## Inserting Tools
+
+Now that we have an input dataset we can add a tool.
 
 > ### {% icon hands_on %} Hands-on: Insert a dataset input and a dataset collection input
 >
@@ -99,12 +190,6 @@ detailed description of how to use these.
 > {: .comment}
 >
 {: .hands_on}
-
-## Inserting Tools
-
-We're going to paste one text file side by side with each element of the input collection
-wit Paste1.
-We're then going to collapse the output back to a single dataset, and then split it out again.
 
 
 ## Connections
