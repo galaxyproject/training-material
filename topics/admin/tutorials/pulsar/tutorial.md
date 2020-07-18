@@ -30,6 +30,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - cvmfs
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
 ---
@@ -71,6 +72,7 @@ In this tutorial, we will:
 This tutorial assumes that you have:
 
 - A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
+- That you have completed the "Galaxy Installation with Ansible" and CVMFS tutorials (Job configuration tutorial is optional.)
 
 # Installing the Pulsar Role
 
@@ -249,6 +251,8 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >            mode: 0755
 >          become: yes
 >      roles:
+>        - role: galaxyproject.cvmfs
+>          become: yes
 >        - role: galaxyproject.nginx
 >          become: yes
 >        - galaxyproject.pulsar
@@ -429,12 +433,11 @@ Now we will upload a small set of data to run bwa-mem with.
 >    ```
 >    https://zenodo.org/record/582600/files/mutant_R1.fastq
 >    https://zenodo.org/record/582600/files/mutant_R2.fastq
->    https://zenodo.org/record/582600/files/wildtype.fna
 >    ```
 >
 > 2. **Map with BWA-MEM** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a genome from history and build index`
->    - {% icon param-file %} *"Use the following dataset as the reference genome"*: `wildtype.fna`
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a built-in genome index`
+>    - *"Using reference genome"*: `Escherichia coli (str. K-12 substr MG1655): eschColi_K12`
 >    - *"Single or Paired-end reads"*: `Paired end`
 >    - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
 >    - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
@@ -453,7 +456,7 @@ Now we will upload a small set of data to run bwa-mem with.
 >
 {: .hands_on}
 
-You'll notice that the Pulsar server has received the job (all the way in Sydney!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run and the results will be returned to Galaxy!
+You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
 > ### {% icon tip %} PulsarClientTransportError with BWA-MEM
 > Q: I got the following error the first time I ran BWA-MEM with Pulsar: `pulsar.client.exceptions.PulsarClientTransportError: Unknown transport error (transport message: Gateway Time-out)`. When I re-executed the job later, it worked without problems. Can the time-out be avoided?
@@ -461,7 +464,7 @@ You'll notice that the Pulsar server has received the job (all the way in Sydney
 > A: Yes, with AMQP Pulsar. This is the recommended setup for production. And apparently the transport_timeout option that I forgot about: `<param id="transport_timeout">` in the `<plugin>` entry (you will need to make it a container tag) for the PulsarRESTJobRunner plugin.
 {: .tip}
 
-How awesome is that? :)
+How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
 
 # Pulsar in Production
 

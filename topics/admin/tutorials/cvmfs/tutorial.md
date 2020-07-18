@@ -107,7 +107,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    <br/>
 >
->    Add the following lines to your `group_vars/galaxyservers.yml` file:
+>    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
 >    ```yaml
 >    # CVMFS vars
@@ -115,6 +115,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    galaxy_cvmfs_repos_enabled: config-repo
 >    cvmfs_quota_limit: 500
 >    ```
+>
+>    > ### {% icon tip %} Why all.yml?
+>    > We've integrated the cvmfs and pulsar tutorials better, such that CVMFS will be used for Pulsar as well, this configuration will be needed on all of our machines. This mirrors real life where you want CVMFS on every node that does computation.
+>    {: .tip}
 >
 > 4. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
