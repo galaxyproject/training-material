@@ -344,12 +344,10 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
->
 >    galaxy_config:
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
->        job_config_file: "{{ galaxy_job_config_file }}"
+>        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >    ```
 >    {% endraw %}
 >
@@ -360,7 +358,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    galaxy_config_templates:
 >      # ... possible existing config file definitions
 >      - src: templates/galaxy/config/job_conf.xml.j2
->        dest: "{{ galaxy_job_config_file }}"
+>        dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    ```
 >    {% endraw %}
 >

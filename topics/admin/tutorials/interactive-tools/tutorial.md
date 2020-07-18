@@ -531,12 +531,10 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
->
 >    galaxy_config:
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
->        job_config_file: "{{ galaxy_job_config_file }}"
+>        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >        interactivetools_enable: true
 >        interactivetools_map: "{{ gie_proxy_sessions_path }}"
 >    ```
@@ -551,7 +549,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 >      - src: templates/galaxy/config/tool_conf_interactive.xml.j2
 >        dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
 >      - src: templates/galaxy/config/job_conf.xml.j2
->        dest: "{{ galaxy_job_config_file }}"
+>        dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    ```
 >    {% endraw %}
 >
