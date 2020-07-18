@@ -93,7 +93,7 @@ We will use four files for this analysis:
 >
 >    To import the files, there are two options:
 >    - Option 1: From a shared data library if available (ask your instructor)
->    - Option 2: From [Zenodo](https://zenodo.org/record/3925863)
+>    - Option 2: From [Zenodo](https://zenodo.org/record/3950862)
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -102,11 +102,11 @@ We will use four files for this analysis:
 >
 >      ```
 >      https://zenodo.org/record/2529117/files/limma-voom_luminalpregnant-luminallactate
->      https://zenodo.org/record/3925863/files/Mus_musculus.GRCm38.98.subset.gff3
->      https://zenodo.org/record/3925863/files/Symbol.tsv
->      https://zenodo.org/record/3925863/files/MGIBatchReport_Qtl_Subset.txt
->      https://zenodo.org/record/3925863/files/HOM_MouseHumanSequence.rpt
->      https://zenodo.org/record/3925863/files/nextprot_abstraction.ttl
+>      https://zenodo.org/record/3950862/files/Mus_musculus.GRCm38.98.subset.gff3
+>      https://zenodo.org/record/3950862/files/Symbol.tsv
+>      https://zenodo.org/record/3950862/files/MGIBatchReport_Qtl_Subset.txt
+>      https://zenodo.org/record/3950862/files/HOM_MouseHumanSequence.rpt
+>      https://zenodo.org/record/3950862/files/nextprot_abstraction.ttl
 >      ```
 >
 > 2. Rename the files using the {% icon galaxy-pencil %} (pencil) icon.
@@ -340,8 +340,9 @@ Results now show the Ensembl id of our over-expressed genes. We have now access 
 
 > ### {% icon hands_on %} Hands-on: Filter `gene`
 > 1. Show `reference` and `strand` using the eye icon
-> 2. Filter `reference` by selecting `X` and `Y` chromosomes (use `ctrl`+`click` to multiple selection)
-> 2. **Run & preview**
+> 2. Filter `reference` by selecting `X` chromosome
+> 3. Filter `strand` by selecting `+` strand
+> 4. **Run & preview**
 {: .hands_on}
 
 
@@ -359,7 +360,8 @@ AskOmics is able to perform special queries between entities that are locatable.
 On the query builder interface, locatable entities are represented with a green circle and relations based on location are represented as green arrow.
 
 > ### {% icon hands_on %} Hands-on: Filter `gene`
-> 1. First, remove the reference filter (unselect `X` and `Y` using `ctrl`+`click`)
+> 1. First, remove the reference filter (unselect `X` using `ctrl`+`click`)
+> 1. Remove the strand filter (unselect `+` using `ctrl`+`click`)
 > 2. Hide `reference` `strand` using the eye
 > 3. Instantiate `QTL`
 > 4. Click on the link between `gene` and `QTL` to edit the relation
