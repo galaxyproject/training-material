@@ -328,6 +328,34 @@
         "url": "https://galaxyproject.org/teach/gtn/"
       }
     },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/cvmfs/slides.html",
+      "name": "Reference Data with CVMFS",
+      "description": "Slides for 'Reference Data with CVMFS' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/cvmfs/tutorial.html",
+      "name": "Reference Data with CVMFS",
+      "description": "Hands-on for 'Reference Data with CVMFS' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
     "A server/VM on which to deploy Pulsar"
   ],
   "hasPart": [
@@ -691,6 +719,93 @@
                         
                     
                 
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Reference Data with CVMFS:
+                            
+                                <a href="/training-material/topics/admin/tutorials/cvmfs/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
             </ul>
         
     
@@ -735,7 +850,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 18, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -794,6 +909,7 @@
 
 <ul>
   <li>A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is <code class="language-plaintext highlighter-rouge">/mnt</code></li>
+  <li>That you have completed the “<span class="notranslate">Galaxy</span> Installation with Ansible” and CVMFS tutorials (Job configuration tutorial is optional.)</li>
 </ul>
 
 <h1 id="installing-the-pulsar-role">Installing the Pulsar Role</h1>
@@ -925,6 +1041,16 @@
 
   <ol>
     <li>
+      <p>Create or edit the file <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> and set your private token:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">private_token</span><span class="pi">:</span> <span class="s">your_private_token_here</span>
+</code></pre></div>      </div>
+
+      <p>This is going in a special file because all (two) of our services need it. Both <span class="notranslate">Galaxy</span> in the job configuration, and Pulsar in its configuration. The <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> is included for every playbook run, no matter which group a machine belong to.</p>
+
+      <p>Replace <code class="language-plaintext highlighter-rouge">your_private_token_here</code> with a long randomish (or not) string.</p>
+    </li>
+    <li>
       <p>Create a new file in <code class="language-plaintext highlighter-rouge">group_vars</code> called <code class="language-plaintext highlighter-rouge">pulsarservers.yml</code> and set some of the above variables as well as some others.</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">pulsar_server_dir</span><span class="pi">:</span> <span class="s">/mnt/pulsar/server</span>
@@ -935,8 +1061,6 @@
 
 <span class="na">pulsar_host</span><span class="pi">:</span> <span class="s">0.0.0.0</span>
 <span class="na">pulsar_port</span><span class="pi">:</span> <span class="m">8913</span>
-
-<span class="na">private_token</span><span class="pi">:</span> <span class="s">your_private_token_here</span>
 
 <span class="na">pulsar_create_user</span><span class="pi">:</span> <span class="no">true</span>
 <span class="na">pulsar_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv">pulsar</span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
@@ -972,9 +1096,6 @@
 <span class="na">nginx_conf_http</span><span class="pi">:</span>
   <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">5g</span>
 </code></pre></div>      </div>
-    </li>
-    <li>
-      <p>Replace <code class="language-plaintext highlighter-rouge">your_private_token_here</code> with a long randomish (or not) string.</p>
     </li>
     <li>
       <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">hosts</code> file:</p>
@@ -1037,6 +1158,8 @@
         <span class="na">mode</span><span class="pi">:</span> <span class="m">0755</span>
       <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
   <span class="na">roles</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.cvmfs</span>
+      <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.nginx</span>
       <span class="na">become</span><span class="pi">:</span> <span class="s">yes</span>
     <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.pulsar</span>
@@ -1122,23 +1245,79 @@
   <li>Tell <span class="notranslate">Galaxy</span> which tools to send to the job destination: We will use <code class="language-plaintext highlighter-rouge">bwa-mem</code></li>
 </ul>
 
+<blockquote class="tip">
+  <h3 id="tip-missing-job-conf-one-day-admin-training"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Missing Job Conf? One-day admin training?</h3>
+
+  <p>For some of our training events we do just a subset of the trainings, often Ansible, Ansible-<span class="notranslate">Galaxy</span>, and then one of these topics. For Pulsar, we need some basic job configuration file though, in order to proceed to the next steps. Follow these steps to get caught up:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-get-caught-up"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get caught up</h3>
+
+    <ol>
+      <li>
+        <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook (<code class="language-plaintext highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>).</p>
+      </li>
+      <li>
+        <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> with the following contents:</p>
+
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
+    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"local"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/destinations&gt;</span>
+    <span class="nt">&lt;tools&gt;</span>
+    <span class="nt">&lt;/tools&gt;</span>
+<span class="nt">&lt;/job_conf&gt;</span>
+</code></pre></div>        </div>
+      </li>
+      <li>
+        <p>Install bwa from the admin installation interface if it is missing.</p>
+      </li>
+      <li>
+        <p>Inform <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to reside in your group variables:</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
+    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
+</code></pre></div>        </div>
+
+        <p>And then deploy the new config file using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> var in your group vars:</p>
+
+        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
+  <span class="c1"># ... possible existing config file definitions</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div>        </div>
+      </li>
+    </ol>
+
+    <p>If you want to get caught up properly and understand what the above configuration <em>means</em>, we recommend following the <a href="/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html">job configuration tutorial</a>.</p>
+
+  </blockquote>
+
+  <p>We hope that got you caught up!</p>
+</blockquote>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-configure-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure <span class="notranslate">Galaxy</span></h3>
 
   <ol>
     <li>
-      <p>In your <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
+      <p>In your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarRESTJobRunner"</span> <span class="nt">/&gt;</span>
 </code></pre></div>      </div>
 
-      <p>Then add the Pulsar destination. We will need the ip address of your pulsar server and the private_token string you used when you created it.</p>
+      <p>Then add the Pulsar destination. We will need the ip address of your pulsar server and the <code class="language-plaintext highlighter-rouge">private_token</code> string you used when you created it.</p>
 
       <p>Add the following to the <code class="language-plaintext highlighter-rouge">&lt;destinations&gt;</code> section of your <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"pulsar"</span> <span class="na">runner=</span><span class="s">"pulsar_runner"</span> <span class="nt">&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"url"</span><span class="nt">&gt;</span>http://your_ip_address_here:80/<span class="nt">&lt;/param&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"private_token"</span><span class="nt">&gt;</span>your_private_token_here<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"private_token"</span><span class="nt">&gt;</span>{{ private_token }}<span class="nt">&lt;/param&gt;</span>
 <span class="nt">&lt;/destination&gt;</span>
 </code></pre></div>      </div>
     </li>
@@ -1176,14 +1355,13 @@ We need to know the full id of the tool in question, we can get this out of the 
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/582600/files/mutant_R1.fastq
 https://zenodo.org/record/582600/files/mutant_R2.fastq
-https://zenodo.org/record/582600/files/wildtype.fna
 </code></pre></div>      </div>
     </li>
     <li>
       <p><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
       <ul>
-        <li><em>“Will you select a reference genome from your history or use a built-in index”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Use the following dataset as the reference genome”</em>: <code class="language-plaintext highlighter-rouge">wildtype.fna</code></li>
+        <li><em>“Will you select a reference genome from your history or use a built-in index”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code></li>
+        <li><em>“Using reference genome”</em>: <code class="language-plaintext highlighter-rouge">Escherichia coli (str. K-12 substr MG1655): eschColi_K12</code></li>
         <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired end</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select first set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R1.fastq</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select second set of <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">mutant_R2.fastq</code></li>
@@ -1203,7 +1381,7 @@ https://zenodo.org/record/582600/files/wildtype.fna
 
 </blockquote>
 
-<p>You’ll notice that the Pulsar server has received the job (all the way in Sydney!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run and the results will be returned to <span class="notranslate">Galaxy</span>!</p>
+<p>You’ll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the <em>E. coli</em> genome from CVMFS and fetch that, and then results will be returned to <span class="notranslate">Galaxy</span>!</p>
 
 <blockquote class="tip">
   <h3 id="tip-pulsarclienttransporterror-with-bwa-mem"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> PulsarClientTransportError with BWA-MEM</h3>
@@ -1212,7 +1390,7 @@ https://zenodo.org/record/582600/files/wildtype.fna
   <p>A: Yes, with AMQP Pulsar. This is the recommended setup for production. And apparently the transport_timeout option that I forgot about: <code class="language-plaintext highlighter-rouge">&lt;param id="transport_timeout"&gt;</code> in the <code class="language-plaintext highlighter-rouge">&lt;plugin&gt;</code> entry (you will need to make it a container tag) for the PulsarRESTJobRunner plugin.</p>
 </blockquote>
 
-<p>How awesome is that? :)</p>
+<p>How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)</p>
 
 <h1 id="pulsar-in-production">Pulsar in Production</h1>
 
@@ -1292,8 +1470,8 @@ https://zenodo.org/record/582600/files/wildtype.fna
     author = "Nate Coraor and Simon Gladman and Marius van den Beek and Helena Rasche",
     title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
     year = "2020",
-    month = "06",
-    day = "17"
+    month = "07",
+    day = "18"
     url = "\url{/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

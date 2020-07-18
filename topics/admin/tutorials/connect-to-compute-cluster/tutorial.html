@@ -629,7 +629,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jun 17, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 18, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1012,12 +1012,10 @@ sleep </span>30
     <li>
       <p>Inform <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to reside in your group variables:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
-
-<span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
     <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
-    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
 </code></pre></div>      </div>
 
       <p>And then deploy the new config file using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> var in your group vars:</p>
@@ -1025,7 +1023,7 @@ sleep </span>30
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
   <span class="c1"># ... possible existing config file definitions</span>
   <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
 </code></pre></div>      </div>
 
       <p>The variable <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> is an array of hashes, each with <code class="language-plaintext highlighter-rouge">src</code> and <code class="language-plaintext highlighter-rouge">dest</code>, the files from src will be copied to dest on the server. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> exist to template files out. We use templates by default, because in some of the later tutorials there will be variables we want to use in the templates.</p>
@@ -1737,8 +1735,8 @@ sleep </span>30
     author = "Nate Coraor and Björn Grüning and Helena Rasche",
     title = "Connecting Galaxy to a compute cluster (Galaxy Training Materials)",
     year = "2020",
-    month = "06",
-    day = "17"
+    month = "07",
+    day = "18"
     url = "\url{/training-material/topics/admin/tutorials/connect-to-compute-cluster/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

@@ -593,7 +593,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 8, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 18, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -769,13 +769,18 @@
 
       <p><br /></p>
 
-      <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
+      <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/all.yml</code> file, creating it if it doesn’t exist:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># CVMFS vars</span>
 <span class="na">cvmfs_role</span><span class="pi">:</span> <span class="s">client</span>
 <span class="na"><span class="notranslate">galaxy</span>_cvmfs_repos_enabled</span><span class="pi">:</span> <span class="s">config-repo</span>
 <span class="na">cvmfs_quota_limit</span><span class="pi">:</span> <span class="m">500</span>
 </code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-why-allyml"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why all.yml?</h3>
+        <p>We’ve integrated the cvmfs and pulsar tutorials better, such that CVMFS will be used for Pulsar as well, this configuration will be needed on all of our machines. This mirrors real life where you want CVMFS on every node that does computation.</p>
+      </blockquote>
     </li>
     <li>
       <p>Add the new role to the list of roles under the <code class="language-plaintext highlighter-rouge">roles</code> key in your playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>:</p>
@@ -1014,7 +1019,7 @@
     title = "Reference Data with CVMFS (Galaxy Training Materials)",
     year = "2020",
     month = "07",
-    day = "08"
+    day = "18"
     url = "\url{/training-material/topics/admin/tutorials/cvmfs/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
