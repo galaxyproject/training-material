@@ -383,7 +383,7 @@ There are three things we need to do here:
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
-> 1. In your `templates/galaxy/config/job_conf.xml` file add the following job runner to the `<plugins>` section:
+> 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
 >
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
