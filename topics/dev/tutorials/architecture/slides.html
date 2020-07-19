@@ -58,7 +58,7 @@ class: enlarge200
 
 ## The **/galaxyproject** projects
 
-*The social architecture of the ecosystem.*
+*The architecture of the ecosystem.*
 
 ???
 
@@ -426,6 +426,24 @@ Extensive use of Github tags are used to try to organize the numerous issues and
 pull requests of the Galaxy repository.
 
 The tags are described in detail in [issues.rst](https://github.com/galaxyproject/galaxy/blob/dev/doc/source/project/issues.rst).
+
+---
+
+### Continuous Integration (CI)
+
+![Galaxy CI](../../images/core_ci.png)
+
+If you get Red Xs - take a second to ponder whether they make sense and don't be afraid to ask, it is a complex system with a lot of noise!
+
+---
+
+class: enlarge200
+
+### Development Environments
+
+Galaxy developers use a wide range of IDEs and we don't offer any formal recommendation of one over another.
+
+However, Marius has assembled some documentation on debugging the [Galaxy server](https://docs.galaxyproject.org/en/master/dev/debugging_galaxy.html) and [tests](https://docs.galaxyproject.org/en/master/dev/debugging_tests.html) using VS Code.
 
 ---
 
@@ -901,6 +919,8 @@ https://galaxyproject.org/admin/internals/data-model/
 
 ![Datatype Files](../../images/core_files_datatypes.plantuml.svg)
 
+Developer docs on adding new datatypes can be found at https://docs.galaxyproject.org/en/latest/dev/data_types.html.
+
 ---
 
 #### Tools
@@ -964,19 +984,19 @@ class: reduce70
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE visualization SYSTEM "../../visualization.dtd">
-<visualization name="Charts">
+<visualization name="ChiRAViz">
+    <description>ChiRAViz</description>
     <data_sources>
         <data_source>
-            <model_class>HistoryDatasetAssociation</model_class>
-            <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.Tabular</test>
-            <test type="isinstance" test_attr="datatype" result_type="datatype">tabular.CSV</test>
+           <model_class>HistoryDatasetAssociation</model_class>
+           <test type="isinstance" test_attr="datatype" result_type="datatype">binary.ChiraSQLite</test>
             <to_param param_attr="id">dataset_id</to_param>
         </data_source>
     </data_sources>
     <params>
         <param type="dataset" var_name_in_template="hda" required="true">dataset_id</param>
     </params>
-    <entry_point entry_point_type="mako">charts.mako</entry_point>
+    <template>chiraviz.mako</template>
 </visualization>
 ```
 
@@ -988,6 +1008,7 @@ template: left-aligned
 
 All in `config/plugins/visualizations`:
 
+- `chiraviz` - Latest addition mid-2020, demonstrates current state of the art building and packing. [#9562](https://github.com/galaxyproject/galaxy/pull/9562)
 - `csg` - Chemical structure viewer
 - `graphviz` - Visualize graph data using [cytoscape.js](http://www.cytoscape.org/)
 - `charts` - Classic charts as well as some integrated BioJS visualizations
@@ -1037,22 +1058,24 @@ All in `config/plugins/interactive_environments`:
 ### Object Store
 
 .strike[```python
->>> fh = open( dataset.file_path, 'w' )
->>> fh.write( ‘foo’ )
+>>> fh = open(dataset.file_path, 'w')
+>>> fh.write(‘foo’)
 >>> fh.close()
->>> fh = open( dataset.file_path, ‘r’ )
+>>> fh = open(dataset.file_path, ‘r’)
 >>> fh.read()
 ```]
 
 ```python
->>> update_from_file( dataset, file_name=‘foo.txt’ )
->>> get_data( dataset )
->>> get_data( dataset, start=42, count=4096 )
+>>> app.objectstore.update_from_file(dataset, file_name=‘foo.txt’)
+>>> app.objectstore.get_data(dataset)
+>>> app.objectstore.get_data(dataset, start=42, count=4096)
 ```
 
 ---
 
 ![Object Store](../../images/objectstore.plantuml.svg)
+
+These implementation are found below `lib/galaxy/objectstore/`.
 
 ---
 
