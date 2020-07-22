@@ -74,7 +74,23 @@ script:
       elif [ "$CHECK" == "site-build" ]
       then
         make check-framework
+
+        # Adjust environment to point to PR
+        sed -i s"|^title: .*|title: 'GTN Pull Request ${TRAVIS_PULL_REQUEST}'|g" _config.yml
+        sed -i s"|^baseurl: .*|baseurl: '/archive/pr-${TRAVIS_PULL_REQUEST}'|g" _config.yml
+        sed -i s"|^github_repository_branch: .*|github_repository_branch: '${TRAVIS_BRANCH}'|g" _config.yml
+
+        # Build
         make build
+
+        # If we're building for a PR, then deploy it.
+        if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+            aws s3 sync _site/training-material/ s3://galaxy-training/archive/pr-${TRAVIS_PULL_REQUEST}/
+
+            curl -X POST -H "Authorization: token $GH_TOKEN_RELEASES" \
+                -d "{\"state\": \"success\",\"target_url\": \"https://training.galaxyproject.org/archive/pr-${TRAVIS_PULL_REQUEST}\",\"description\": \"Deploy to archive\",\"context\": \"continuous-integration/gtn\"}" \
+                https://api.github.com/repos/galaxyproject/training-materials/statuses/${TRAVIS_PULL_REQUEST_SHA}
+        fi
       elif [ "$CHECK" == "pdf-generation" ]
       then
         make pdf
