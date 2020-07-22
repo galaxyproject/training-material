@@ -85,6 +85,7 @@ script:
 
         # If we're building for a PR, then deploy it.
         if [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+            aws configure list
             aws s3 sync _site/training-material/ s3://galaxy-training/archive/pr-${TRAVIS_PULL_REQUEST}/
 
             curl -X POST -H "Authorization: token $GH_TOKEN_RELEASES" \
