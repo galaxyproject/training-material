@@ -18,9 +18,8 @@ module Jekyll
           "No tool defined for: '#{@parts}'. "
         )
       elsif parts.length == 2
-          %Q(<span class="tool" data-tool="#{parts[1]}"><strong>#{parts[0]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{parts[0]}</span></span> )
-      elsif parts.length == 3
-          %Q(<span class="tool" data-tool="#{parts[1]}" data-version="#{parts[2]}"><strong>#{parts[0]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{parts[0]}</span></span> )
+        %Q(<span class="tool" data-tool="#{parts[1]}" title="Tested with #{parts[1]}"><strong>#{parts[0]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{parts[0]}</span></span> )elsif parts.length == 3
+        %Q(<span class="tool" data-tool="#{parts[1]}" title="Tested with #{parts[1]} version #{parts[2]}" data-version="#{parts[2]}"><strong>#{parts[0]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i></span>)
       end
 
     end
