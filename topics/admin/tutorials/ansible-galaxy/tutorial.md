@@ -8,7 +8,7 @@ questions:
 objectives:
 - Have an understanding of how Galaxy's Ansible roles are structured and interact with one another
 - Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes
-time_estimation: "2h"
+time_estimation: "2hr 30min"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
 - Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
@@ -1946,7 +1946,28 @@ There are a lot of other plugins available for Galaxy for using other resources 
 >    RUNNING HANDLER [restart galaxy] ****************************************
 >    changed: [galaxy.example.org]
 >    ```
-> 5. Checkout the new job_conf.xml file in `/srv/galaxy/config`.
+> 5. Checkout the new job_conf.xml file.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > cat /srv/galaxy/config/job_conf.xml
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output: Bash
+>    > ```ini
+>    >    <job_conf>
+>    >        <plugins workers="4">
+>    >            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>    >        </plugins>
+>    >        <destinations default="local">
+>    >            <destination id="local" runner="local"/>
+>    >        </destinations>
+>    >        <tools>
+>    >        </tools>
+>    >    </job_conf>
+>    > ```
+>    {: .code-out}
 >
 {: .hands_on}
 
