@@ -1918,7 +1918,7 @@ There are a lot of other plugins available for Galaxy for using other resources 
 >    </job_conf>
 >    ```
 >
-> 3. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside in your group variables:
+> 3. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
 >    ```yaml
