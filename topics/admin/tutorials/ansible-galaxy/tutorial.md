@@ -8,7 +8,7 @@ questions:
 objectives:
 - Have an understanding of how Galaxy's Ansible roles are structured and interact with one another
 - Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes
-time_estimation: "2h:30m"
+time_estimation: "2h30m"
 key_points:
 - Basic deployment with Ansible is surprisingly easy
 - Complexity can grow over time as your organisation does, no need to start with playbooks like UseGalaxy.org
