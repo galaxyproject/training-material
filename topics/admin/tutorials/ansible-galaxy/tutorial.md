@@ -1859,7 +1859,7 @@ Now that your production-ready Galaxy is running, try registering a new user and
 
 In order to be the administrator user, you will need to register an account with the same email address you used in the group variables under the `admin_users` setting.
 
-## Job Configuration (Optional)
+## Job Configuration
 
 One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none have been specified in the `galaxy.yml` file, it will use a default configuration. The default configuration is the `job_conf.xml.sample_basic` file. This file is located at: `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic`, though there is a symlink to the file in `/srv/galaxy/server/config`.
 
