@@ -21,6 +21,7 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
+      - htmd-analysis
 contributors:
   - simonbray
 
@@ -125,13 +126,11 @@ In summary, this tool will:
 
 > ### {% icon hands_on %} Hands-on: perform initial processing
 >
-> Run **GROMACS initial setup** {% icon tool %} with the following parameters:
+> 1. Run **GROMACS initial setup** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
 >    - *"Water model"*: `SPC/E`
 >    - *"Force field"*: `OPLS/AA`
 >    - *"Ignore hydrogens"*: `No`
->    - *"Box dimensions in nanometers"*: `1.0`
->    - *"Box type"*: `Rectangular box with all sides equal`
 >    - *"Generate detailed log"*: `Yes`
 >
 > > ### {% icon question %} Question
@@ -143,6 +142,13 @@ In summary, this tool will:
 > > {: .solution}
 > {: .question}
 >
+> 2. Run **GROMACS structure configuration** {% icon tool %} with the following parameters:
+>    - *"Input structure"*: GRO output from initial setup tool
+>    - *"Output format"*: `GRO file`
+>    - *"Configure box?"*: `Yes`
+>    - *"Box dimensions in nanometers"*: `1.0`
+>    - *"Box type"*: `Rectangular box with all sides equal`
+>    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
 
