@@ -58,6 +58,10 @@ be taken into consideration when choosing where to run jobs and what parameters 
 > If you've set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, you will have created a `galaxyservers` group in your inventory file, `hosts`, and placed your variables in `group_vars/galaxyservers.yml`. Although for the purposes of this tutorial, the Galaxy server and Slurm controller/node are one and the same, in a real world deployment they are very likely to be different hosts. We will continue to use the `galaxyservers` group for simplicity, but in your own deployment you should consider creating some additional groups for Slurm controller(s), Slurm nodes, and Slurm clients.
 {: .comment}
 
+> ### {% icon tip %} Do you need a DRM?
+> If you have a smaller server, do you still need a DRM? Yes! You should definitely run Slurm or a similar option. If you don't, as soon as you restart Galaxy with local runners, any running jobs will be killed. Even with a handful of users, it is a good idea to keep 1-2 CPU cores/4GB RAM reserved for Galaxy.
+{: .tip}
+
 > ### {% icon hands_on %} Hands-on: Installing Slurm
 >
 > 1. Edit your `requirements.yml` and include the following contents:
@@ -310,9 +314,12 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```
 >
 >    > ### {% icon comment %} Note
->    >
 >    > Depending on the order in which you are completing this tutorial in relation to other tutorials, you may have already created the `job_conf.xml.j2` file, as well as defined `galaxy_config_templates` and set the `job_config_file` option in `galaxy_config` (step 4). If this is the case, be sure to **merge the changes in this section with your existing playbook**.
 >    {: .comment}
+>
+>    > ### {% icon tip %} workers=4
+>    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    {: .tip}
 >
 > 3. Next, we need to configure the Slurm job runner. First, we instruct Galaxy's job handlers to load the Slurm job runner plugin, and set the Slurm job submission parameters. A job runner plugin definition must have the `id`, `type`, and `load` attributes. Then we add a basic destination with no parameters, Galaxy will do the equivalent of submitting a job as `sbatch /path/to/job_script.sh`. Note that we also need to set a default destination now that more than one destination is defined. In a `<destination>` tag, the `id` attribute is a unique identifier for that destination and the `runner` attribute must match the `id` of a defined plugin:
 >
@@ -337,12 +344,10 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
->
 >    galaxy_config:
 >      galaxy:
 >        # ... existing configuration options in the `galaxy` section ...
->        job_config_file: "{{ galaxy_job_config_file }}"
+>        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >    ```
 >    {% endraw %}
 >
@@ -353,7 +358,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    galaxy_config_templates:
 >      # ... possible existing config file definitions
 >      - src: templates/galaxy/config/job_conf.xml.j2
->        dest: "{{ galaxy_job_config_file }}"
+>        dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    ```
 >    {% endraw %}
 >
@@ -595,6 +600,10 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    ```
 >
 >    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
+>
+>    > ### {% icon tip %} Debugging dynamic destinations
+>    > You can use `pdb` for more advanced debugging, but it requires some configuration. `print()` statements are usually sufficient and easier.
+>    {: .tip}
 >
 > 2. As usual, we need to instruct Galaxy of where to find this file:
 >

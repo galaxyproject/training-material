@@ -85,12 +85,14 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 > 1. **MaxQuant** {% icon tool %} with the following parameters:
 >    - In *"Input Options"*:
 >        - {% icon param-file %} *"FASTA files"*: `protein database`
+>        - *"Identifier parse rule"*: `>.*\|(.*)\|`
+>        - *"Description parse rule"*: `>.*\|.*\|[^ ]+ (.*) OS`
 >    - In *"Search Options"*:
 >        - *"minimum unique peptides"*: `1`
 >    - In *"Parameter Group"*:
 >        - {% icon param-files %} *"Infiles"*: `sample1`, `sample2`
 >        - *"missed cleavages"*: `1`
->        - *"variable modifications"*: ` `
+>        - *"variable modifications"*: `unselect all variable modifications`
 >        - *"Quantitation Methods"*: `label free quantification`
 >    - *"Generate PTXQC (proteomics quality control pipeline) report?"*: `Yes`
 >    - In *"Output Options"*:
@@ -101,7 +103,9 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 >    {: .comment}
 {: .hands_on}
 
-## More details on MaxQuant Parameters 
+## More details on MaxQuant Parameters
+
+The *"parse rules"* in the input section are applied to the fasta sequence headers. Regular expressions can be adjusted to keep different information from the fasta file header. Examples are given in the MaxQuant help section at the bottom of the tool. The fasta file for this training comes from Uniprot, therefore the parse rules are adjusted accordingly. 
 
 The *"minimum peptide length"* defines the minimum number of amino acids a peptide should have to be included for protein identification and quantification. Below 7 amino acids a peptide cannot be unique and is therefore not informative, thus typical values are in the range 7-9.
 
@@ -128,8 +132,6 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 
 
 > ### {% icon details %} More MaxQuant parameters
-> - The *"parse rules"* in the input section are applied to the fasta sequence headers. The default automatically extracts the Uniprot ID from fasta files that were downloaded from uniprot. Regular expressions can be adjusted to keep other information from the fasta file.
->
 > - For pre-fractionated data an *"experimental design template"* has to be used. This has to be a tab-separated text file with a column for the fractions (e.g. 1-10) and a column for the experiment (sample1, sample2, sample3) and a column for post translational modifications (PTM). Examples are given in the help section of the MaxQuant tool. 
 >
 > - *"Match between run"* allows to transfer identifications (peptide sequences) from one run to another. If the MS1 (full length peptide) signal is present in both runs, but was only selected for fragmentation in one of them, MaxQuant can transfer the resulting peptide sequence to the run where the MS1 peptide was not fragmented. The Information if a peptides was identified via fragmentation (MS/MS) or match between run (matching) can be found in the evidence output.
@@ -160,7 +162,7 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 > > ### {% icon solution %} Solution
 > >
 > > 1. 271 protein (groups) were found in total.
-> > 2. 2387 peptides were found in total. 
+> > 2. Depending on the tool version 2387 or 2388 peptides were found in total. 
 > > 3. Sample1: 237, Sample2: 123 (**filter data on any column** {% icon tool %} on the `protein groups` file *"with following condition"* `c32!=0` or `c33!=0` and *"Number of header lines" `1`)
 > >
 > {: .solution}
@@ -192,7 +194,7 @@ To get a first overview of the MaxQuant results, the PTXQC report is helpful. Cl
 
 # Serum composition 
 
-To explore the proteomic composition of the two serum samples some postprocessing steps are necessary. The protein groups file has many different columns, therefore the first step is to extract only columns that are of interest for this task. This are the columns with the fasta headers (this includes the protein name as it was written in the fasta file) and the two columns with LFQ intensities for both files. To find the most abundant proteins the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram. 
+To explore the proteomic composition of the two serum samples some postprocessing steps are necessary. The protein groups file has many different columns, therefore the first step is to extract only columns that are of interest for this task. These are the column with the fasta header (this includes the protein name as it was written in the fasta file) and the two columns with LFQ intensities for both files. To find the most abundant proteins the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram. 
 
 > ### {% icon hands_on %} Hands-on: Exploring serum composition
 >
@@ -241,12 +243,82 @@ To explore the proteomic composition of the two serum samples some postprocessin
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins [plasma proteins found by MS](https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms). 
+> > 1. Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins ([plasma proteins found by MS](https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms)). 
 > > 2. Sample1 was depleted, sample2 was pure serum. 
 > > 3. In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.
 > >
 > {: .solution}
 >
 {: .question}
+
+
+# Quantitative Assessment
+
+After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples. 
+
+> ### {% icon hands_on %} Hands-on: Quantitative Assessment
+>
+> 1. **Compute** {% icon tool %} version 1.2.0 with the following parameters:
+>    - *"Add expression"*: `log(c2,2)`
+>    - {% icon param-file %} *"as a new column to"*: `cut_file` (output of **Cut** {% icon tool %})
+>    - *"Skip a header line"*: `yes`
+>        - *"The new column name"*: `log2 intensity sample1`
+> 2. **Compute** {% icon tool %} version 1.2.0 with the following parameters:
+>    - *"Add expression"*: `log(c3,2)`
+>    - {% icon param-file %} *"as a new column to"*: `compute_file` (output of **Compute** {% icon tool %})
+>    - *"Skip a header line"*: `yes`
+>        - *"The new column name"*: `log2 intensity sample2`
+> 3. **Cut columns from a table** {% icon tool %} with the following parameters:
+>    - *"Cut columns"*: `c4,c5`
+>    - {% icon param-file %} *"From"*: `compute_file` (output of the last **MaxQuant** {% icon tool %})
+> 4. Click {% icon galaxy-barchart %} “Visualize this data” on the **cut** {% icon tool %} result. 
+>   - Select `box plot(jqPlot)`
+>   - *"Use multi-panels"*: `No`
+>   - Click `Select data` {% icon galaxy-chart-select-data %}
+>   - *"Provide a label"*: `log2 sample1`
+>   - *"Observations"*: `Column: 1`
+>   - Click `Insert data series`
+>   - *"Provide a label"*: `log sample2`
+>   - *"Observations"*: `Column: 2`
+>   - Confirm and save {% icon galaxy-save %} (file is saved under "User" --> "Visualizations")
+> 5. **Compute** {% icon tool %} version 1.2.0 with the following parameters:
+>    - *"Add expression"*: `c4-c5`
+>    - {% icon param-file %} *"as a new column to"*: `compute_file` (output of the last **Compute** {% icon tool %})
+>    - *"Skip a header line"*: `yes`
+>        - *"The new column name"*: `log2 Fold Change`
+> 6. **Histogram** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Dataset"*: `compute_file` (output of the previous **Compute** {% icon tool %})
+>    - *"Numerical column for x axis"*: `c6`
+>    - *"Label for x axis"*: `log2 Fold Change`
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Questions
+>
+> 1. Describe the distribution of the log2 intensities in the box plots. 
+> 2. How much is the log2 fold change of serum albumin and what does it mean? 
+> 3. What does the distribution of the log2 fold changes mean?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. The log2 transformation leads to a close to normal intensity distribution for both samples. Intensities in the depleted sample are shifted towards higher values compared to the non-depleted samples. The big difference comes from artificially depleting (changing) protein intensities. ![boxplots](../../images/maxquant_lfq_boxplots.png)
+> > 2. The log2 fold change (depleted vs. not depleted samples) is about -2.91. This means that the abundance in the not depleted sample is about 2^2.91 = 7.52 times higher than in the depleted sample, showing again that a large proportion of serum albumin was successfully removed by the antibody columns. 
+> > 3. Most of the log2 fold changes are larger than zero. This means that many proteins have higher intensities in the depleted sample compared to the not-depleted sample. These are the proteins that benefitted from the depletion of serum albumin and other high abundand serum proteins. There is also a maximum around zero meaning that a substantial amount of proteins had a similar abundance in both samples. The negative log2 fold changes derive from the proteins that were depleted, e.g. serum albumin. ![histogram](../../images/maxquant_lfq_fc_histogram.png)
+> >
+> {: .solution}
+>
+{: .question}
+
+
+> ### {% icon tip %} Tip: Analyzing your own data
+>
+> For this training we have chosen two small example files to keep analysis time minimal. Real proteomic projects comprise more samples leading to longer MaxQuant run times from many hours to several days (depending on input file size, number of input files and parameters). Real projects also require different follow up analysis. Here are some things to consider for your proteomic project: 
+> 1. The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file. 
+> 2. A necessary first step is to log2-transform the LFQ intensities. 
+> 3. Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.
+> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as [LIMMA](https://www.doi.org/10.1093/nar/gkv007), [SAM](https://www.doi.org/10.1073/pnas.091062498) and [MSstats](https://doi.org/10.1093/bioinformatics/btu305). Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data. 
+>
+{: .tip}
 
 

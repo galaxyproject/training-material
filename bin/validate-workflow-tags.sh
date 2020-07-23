@@ -1,63 +1,33 @@
 #!/bin/bash
 exit_with=0
 
-#python script to iterate over the steps in the workflow.
-function tester { 
-    python3 - <<END
-import sys 
-import json 
+for wf in $(find topics -path '*/workflows/*' -and -name '*.ga'); do
+	topic=$(echo "$wf" | cut -d/ -f 2)
 
-problems = 0
-output = ["-----------------------ERROR-----------------------------"]
-with open("$1") as json_file:
-    data = json.load(json_file)
-    # Checking for 'tags' in workflow if topic is known
-    if 'tags' not in data or not data['tags'] or "$2" not in data['tags']:
-        problems += 1
-        output.append(
-            "{}. The 'tags' attribute is missing. Please add:".format(str(problems), data['name']))
-        output.append('"tags": [' + "\n\t" + '"' + "$2" + '"' + "\n]")
+	echo "Linting $wf"
 
-    # Checking for 'annotation' in workflow
-    if 'annotation' not in data or not data['annotation']:
-        problems += 1
-        output.append(
-            "{}. The 'annotation' attribute is missing. Please add:".format(str(problems)))
-        output.append('"annotation": "<title of tutorial>"')
+	jq '.tags[]' -r < "$wf" | grep -q "$topic"
+	ec=$?
 
-    # Checking if there are tools used from the testtoolshed
-    for stepnr, step in data['steps'].items():
-        if step['tool_id'] and step['type'] == 'tool' and 'testtoolshed.g2.bx.psu.edu' in step['tool_id']:
-            problems += 1
-            output.append("{}. Step {} has a tool from the testtoolshed.".format(str(problems), str(stepnr)))
+	if (( ec > 0 )); then
+		echo "	The tags attribute is missing. Please add:"
+		echo '	"tags": ["'"$topic"'"]'
+		exit_with=1
+	fi
 
-    if problems:
-        output.insert(1, "Workflow '{}' has {} problem(s) because:".format(data['name'], str(problems)))
-        output.append("---------------------------------------------------------\n")
-        sys.stderr.write("\n".join(output))
-        sys.exit(False)
-    sys.exit(True)
-END
-}
+	annotation=$(jq '.annotation' -r < "$wf")
+	if [[ "$annotation" == "null" ]] || [[ "$annotation" == "" ]]; then
+		echo "	The 'annotation' attribute is missing or incorrect. Please add: \"annotation\": \"<title of tutorial>\""
+		exit_with=1
+	fi
 
-for topicdir in ./topics/*
-do
-    topic=$(basename $topicdir)
-    for tutdir in $topicdir/tutorials/*
-    do
-        if [ -d $tutdir/workflows/ ];
-        then
-            for w in $tutdir/workflows/*.ga
-            do
-                echo "Checking $w"
+	tts_tools=$(jq '.steps[].tool_id' -r < "$wf" | grep -c testtoolshed.g2.bx.psu.edu)
+	if (( tts_tools > 0 )); then
+		echo "	Some steps have tools from the testtoolshed. These are not permitted in GTN tutorials."
+		jq '.steps[].tool_id' -r < "$wf" | grep -c testtoolshed.g2.bx.psu.edu
+		exit_with=1
+	fi
 
-                if tester $w $topic;
-                then
-		            exit_with=1
-                fi
-            done
-        fi
-    done
 done
 
 exit $exit_with

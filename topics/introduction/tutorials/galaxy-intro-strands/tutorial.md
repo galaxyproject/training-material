@@ -118,7 +118,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 ## Get data into Galaxy
 
-There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
+There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
@@ -128,7 +128,7 @@ There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-d
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
@@ -518,7 +518,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history]({% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 

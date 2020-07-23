@@ -84,6 +84,10 @@ Your "History" is in the panel at the right.
 > 3. Type in a new name, for example, "My-Analysis"
 > 4. Press <kbd>Enter</kbd> on your keyboard to save it
 >
+> > ### {% icon comment %} Renaming not an option?
+> > If renaming does not work, it is possible you aren't logged in, so try logging in to Galaxy first. Anonymous users are only permitted to have one history, and they cannot rename it.
+> {: .comment}
+>
 {: .hands_on}
 
 ## Upload a file

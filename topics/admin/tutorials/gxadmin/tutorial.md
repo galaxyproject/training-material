@@ -228,6 +228,20 @@ gxadmin iquery queue-overview --short-tool-id
 gxadmin iquery workflow-invocation-status
 ```
 
+
+> ### {% icon tip %} Which queries support iquery?
+> This data is not currently exposed, so, just try the queries. But it's easy to add influx support when missing! [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L54), we set the variables in a function:
+>
+> ```
+> fields="count=1"
+> tags="tool_id=0"
+> ```
+>
+> This means: column 0 is a tag named tool_id, and column 1 is a field (real value) named count.
+> [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L1987) that has multiple fields that are stored.
+>
+{: .tip}
+
 # Implementing a Query
 
 Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. `gxadmin` supports 'local' functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to `gxadmin` though, you'll never know who wants to know the same thing about their db.

@@ -7,7 +7,7 @@ zenodo_link: ""
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-ui
+    topic_name: galaxy-interface
     tutorials:
         - rstudio
   -
