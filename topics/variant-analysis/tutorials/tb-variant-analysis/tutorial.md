@@ -6,54 +6,52 @@ zenodo_link: https://doi.org/10.5281/zenodo.3496437
 tags:
   - prokaryote
 questions:
-  - "How do we detect differences between a set of reads from *M. tuberculosis* and a TB reference genome"
+  - "How do we detect differences between a set of reads from *M. tuberculosis* (Mtb) and the Mtb reference genome"
 objectives:
   - "How should we filter those variants"
   - "How can we predict drug resistance from those variants"
   - "How do we annotate those variants"
-time_estimation: "45m"
+time_estimation: "2h"
+level: Intermediate
 key_points:
-  - snippy is a good tool for variant calling in bacteria
+  - variants in *M. tuberculosis* sequencing data can be discovered using common microbial bioinformatics tools
   - it is not enough to just call variants, variant calling involves multiple quality control steps
-  - choice of reference genome and other parameters of variant calling are species specific
+  - the choice of reference genome and some quality control procedures are species specific, and require knowledge of the organism in question
 contributors:
   - pvanheus
   - slugger70
   - thobalose
-  - tralynca
 ---
 # Introduction
 {:.no_toc}
 
-Tuberculosis (TB) is a infectious disease caused by the bacterium *Mycobacterium tuberculosis*. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of *M. tuberculosis H37Rv* in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available
+Tuberculosis (TB) is an infectious disease caused by the bacterium *Mycobacterium tuberculosis*. According to the [WHO](https://www.who.int/tb/publications/global_report/en/), in 2018 there were 10.0 million new cases of TB worldwide and 1.4 million deaths due to the disease, making TB the world's most deadly infectious disease. The [publication](https://www.ncbi.nlm.nih.gov/pubmed/9634230) of the genome of *M. tuberculosis H37Rv* in 1998 gave researchers a powerful new tool in understanding this pathogen. This genome has been revised since then, with the latest version being available
 as RefSeq entry [NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/). The genome comprises a single circular chromosome of some 4.4 megabases. The H37Rv strain that the genome was sequenced from is a long-preserved laboratory strain, originally [isolated](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2132400) from a patient in 1905 and [named](https://journals.sagepub.com/doi/abs/10.3181/00379727-33-8330P) as H37Rv in 1935. It is notably different in some genomic [regions](https://www.sciencedirect.com/science/article/pii/S0888754317300617?via%3Dihub) from some modern clinical strains but remains the standard reference sequence for *M. tuberculosis* (Mtb). In a larger context *M. tuberculosis* is a prominent member of the Mycobacterium Tuberculosis Complex (MTBC).
 
 This group of related species comprises of the [8](https://www.nature.com/articles/s41467-020-16626-6) [lineages](https://www.ncbi.nlm.nih.gov/pubmed/29456241) of human-infecting *M. tuberculosis* as well as predominantly animal-infecting species such as *M. bovis* and *M. pinnipedii*. Two other close relatives of Mtb, *M. leprae* and *M. lepromatosis* circulate between humans, causing the disease leprosy. Finally amongst the Mycobacteria there are several other species that live in the environment and can cause human disease. These are the [Nontuberculous Mycobacteria](https://www.ncbi.nlm.nih.gov/pubmed/28345639).
 
 Variation in the genome of *M. tuberculosis* (Mtb) is associated with changes in phenotype, for example [drug resistance](https://genomemedicine.biomedcentral.com/articles/10.1186/s13073-019-0660-8) and virulence. It is also useful for [outbreak investigation](https://www.frontiersin.org/articles/10.3389/fpubh.2019.00087/full) as the single nucleotide polymorphisms (SNPs) in a sample can be used to build a phylogeny.
 
-This tutorial will focus on identifying genomic variation in Mtb and using that do explore drug resistance and other aspects of the bacteria.
+This tutorial will focus on identifying genomic variation in Mtb and using that to explore drug resistance and other aspects of the bacteria.
 
 # Get your data
 
-The data for today is a sample of *M. tuberculosis* [collected](https://www.ebi.ac.uk/ena/data/view/PRJEB6945) from a German [outbreak](https://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001387) of tuberculosis. In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the inferred most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
-
-This data is available at Zenodo using the following [link](http://doi.org/10.5281/zenodo.3531703).
+The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi.nlm.nih.gov/bioproject/PRJEB18529) from a [southern African patient](https://bmcmedicine.biomedcentral.com/articles/10.1186/s12916-017-0834-4). In addition to the bacterial sequence sample we will work with a Genbank format version of the genome of the [inferred](https://www.nature.com/articles/ng.590) most recent common [ancestor](https://zenodo.org/record/3497110) of the M. tuberculosis complex which is combined with the annotation of the H37Rv reference sequence. This ancestral genome only differs from the H37Rv version 3 genome ([NC_000962.3](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3)) by the insertion of SNPs to try and model the ancestor of all lineages of Mtb.
 
 > ### {% icon hands_on %} Hands-on: Get the data
 >
-> 1. Import the following five files into a new history
->   - [ERR550641_1.fastq.gz](https://zenodo.org/record/3531703/files/ERR550641_1.fastq.gz)
->   - [ERR550641_2.fastq.gz](https://zenodo.org/record/3531703/files/ERR550641_2.fastq.gz)
->   - [Mycobacterium_tuberculosis_ancestral_reference.gbk](https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_ancestral_reference.gbk)
->   - [Mycobacterium_tuberculosis_ancestral_reference.gff3](https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3)
->   - [MTB_Ancestor_reference.fasta](https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta)
+> 1. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.3960260) or from the shared data library
+>```
+>https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
+>https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
+>https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
+>https://zenodo.org/record/3960260/files/MTB_ancestor_reference.fasta
+>https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
+>```
 >
 >    {% include snippets/import_via_link.md %}
+>    {% include snippets/import_from_data_library.md %}
 >
-{: .hands_on}
-
-If you are using usegalaxy.eu for this tutorial, you can start by importing this [history](https://usegalaxy.eu/u/pvanheus/h/m-tuberculosis-variant-analysis-tutorial). Use the '+' button in the top right hand corner and select a meaningful name for the imported history before clicking 'Import'.
 
 # Quality control
 
@@ -72,6 +70,7 @@ tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on both of your fastq datasets
+>
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
 >    {% include snippets/select_multiple_datasets.md %}
@@ -102,7 +101,7 @@ tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis
 >    > >    slightly towards the 3' ends) or to filter out the small fraction
 >    > >    of reads with a mean base quality < 5.
 >    > >    We will run **Trimmomatic** {% icon tool %} on the
->    > >    fastq datasets in the next step.
+>    > >    fastq datasets in the next step
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -125,7 +124,7 @@ tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction.
+>    > > 1. There are 4 output files: Forwards paired and single reads and reverse paired and single reads. The single reads come about when one read in a pair of reads has failed the quality checks and so is deleted. The other half of the pair may still be good and so it is put into the single reads file for the appropriate direction. While un-paired reads might sometimes be useful, paired reads are more useful because they both the sequence and the gap between reads ("insert size") can be used for further analysis. In a typical analysis, only paired reads are used.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -139,8 +138,9 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >
 > 1. **Kraken2** {% icon tool %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
->       - *"Forward Strand"*: `Trimmomatic on https://zenodo.org/record/3531703/files/ERR550641_1.fastq.gz (R1 paired)`
->       - *"Reverse Strand"*: `Trimmomatic on https://zenodo.org/record/3531703/files/ERR550641_2.fastq.gz (R2 paired)`
+>       - *"Forward Strand"*: `Trimmomatic on X (R1 paired)`
+>       - *"Reverse Strand"*: `Trimmomatic on X (R2 paired)`
+>
 >   - *"Print scientific names instead of just taxids"*: `Yes`
 >   - *"Enable quick operation"*: `Yes`
 >   - Under *"Create reports"*:
@@ -155,7 +155,7 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. 95.5% of the reads here have been positively identified as *Mycobacterium*. The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
+>    > > 1. 91.18% of the reads here have been positively identified as *Mycobacterium*. The others found were bacteria from the same kingdom. There were no contaminating human or viral sequences detected.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -167,7 +167,7 @@ We will now run the Snippy tool on our reads, comparing it to the reference.
 
 Snippy is a tool for rapid bacterial SNP calling and core genome alignments. Snippy finds SNPs between a haploid reference genome and your NGS sequence reads. It will find both substitutions (snps) and insertions/deletions (indels).
 
-If we give Snippy an annotated reference, it will silently run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
+If we give Snippy an annotated reference in Genbank format, it will run a tool called SnpEff which will figure out the effect of any changes on the genes and other features. If we just give Snippy the reference sequence alone without the annotations, it will not run SnpEff.
 
 We have an annotated reference built from the inferred *M. tuberculosis* [ancestral reference genome](https://zenodo.org/record/3497110) and the
 gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3) so will use it in this case.
@@ -178,12 +178,14 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >   - *"Single or Paired-end reads"*: `Paired`
->       - *"Select first set of reads"*: `Trimmomatic on https://zenodo.org/record/3531703/files/ERR550641_1.fastq.gz (R1 paired)`
->       - *"Select second set of reads"*: `Trimmomatic on https://zenodo.org/record/3531703/files/ERR550641_2.fastq.gz (R2 paired)`
+>       - *"Select first set of reads"*: `Trimmomatic on X (R1 paired)`
+>       - *"Select second set of reads"*: `Trimmomatic on X (R1 paired)`
+>
 >   - Under *"Advanced parameters"*
 >       - *"Minimum proportion for variant evidence"*: `0.1` (This is so we can see possible rare variants in our sample)
 >   - Under *"Output selection"* select the following:
 >       - *"The final annotated variants in VCF format"*
+>       - *"A simple tab-separated summary of all the variants"*
 >       - *"The alignments in BAM format"*
 >       - Deselect any others.
 >
@@ -194,13 +196,16 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > 1. What type of variant is the first one in the list?
 >    >
 >    > 2. What was the effect of this variant on the coding region it was found in?
+>    > 
+>    > 3. How many variants were found?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Substitution of a `C` to a `T`
+>    > > 1. Substitution of a `C` to a `T`. This variant is supported by 134 reads.
 >    > >
->    > > 2. According to SnpEff, it's a Synonymous change.
+>    > > 2. According to SnpEff, it's a Synonymous change in Rv0002.
 >    > >
+>    > > 3. 1086 variants are found. To count variants, look at how many non-comment lines are in the snippy VCF output or hw many lines (excluding the header) there are in This is quite typical for *M. tuberculosis*
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
@@ -210,7 +215,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 1. Sequencing errors: these were addressed by the quality trimming step
 2. Sample contamination: we used `kraken2` to assess the extent of this problem in our sample
 3. Appropriate choice of a reference genome: we used a genome that is inferred to be ancestral to all *M. tuberculosis* for our analysis and the diversity within Mtb is limited enough for us to rely on a single reference genome for the entire species.
-4. Quality filtering in the mapping and variant calling stage: Tools like `bwa-mem` and `freebayes` judge the quality of their predictions, and `snippy` performs some filtering on variant calling predictions.
+4. Quality filtering in the mapping and variant calling stage: Internally `snippy` uses tools like `bwa-mem` and `freebayes` that judge the quality of their predictions. `snippy` then uses this information to perform some filtering on variant calling predictions.
 
 # Further variant filtering and TB-profiling
 
@@ -229,7 +234,7 @@ We still cannot entirely trust the proposed variants. In particular, there are r
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. `197` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
+>    > > 1. `218` (The difference in the number of lines between the snippy vcf file and the filtered vcf file.)
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -264,7 +269,7 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >    > >
 >    > > 1. `4`
 >    > >
->    > > 2. No there were not.
+>    > > 2. Yes, resistance to isoniazid, rifampicin, ethambutol, pyrazinamide and streptomycin is predicted from mutations in the katG, rpoB, embB, pncA and rpsL genes respectively.
 >    > >
 >    > {: .solution}
 >    {: .question}
@@ -317,5 +322,41 @@ We could go through all of the variants in the VCF files and read them out of a 
 A new dataset will be created in your history, containing the JBrowse interactive visualisation. We will now view its contents and play with it by clicking the {% icon galaxy-eye %} (eye) icon of the `JBrowse on data XX and data XX - Complete` dataset. The JBrowse window will appear in the centre Galaxy panel.
 
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
+
+# A different sample with a different story
+
+In [Zenodo](https://doi.org/10.5281/zenodo.3960260) we have included sample *18-1* from the same study (aka. [ERR1750907](https://www.ebi.ac.uk/ena/browser/view/ERR1750907)). This is also a southern African
+*M. tuberculosis* sample, but in some ways quite different from the sample we have analysed in the tutorial thus
+far.
+
+> ### {% icon hands_on %} Hands-on: Take a closer look at sample 18-1
+>
+> 1. Fetch the data from Zenodo
+>```
+>https://zenodo.org/record/3960260/files/018-1_1.fastq.gz
+>https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
+>```
+>
+> 2. Examine the sequence quality with FastQC {% icon tool %}.
+>
+> 3. Examine the sample composition with kraken2 {% icon tool %}.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What problems were discovered with sequence quality?
+>    >
+>    > 2. What did the kraken2 report show? How does this impact your assessment of variants discovered from this sample?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. The quality of the sequence drops sharply towards the end of the sequences. Even more concerning, the sequence content changes across the length of the sample, which is not what we would expect at all. Finally, the sample seems to contain sequencing adapters, an artefact of the sequencing process that should be trimmed out before any sequence analysis.
+>    > >
+>    > > 2. Only 55% of the sequence reads are associated with the genus *Mycobacterium*. Perhaps the quality problems in the sequence reads contribute to this poor classification? They certainly will make variant calling less reliable.
+>    > >
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants.
 
 We hope you enjoyed this tutorial!
