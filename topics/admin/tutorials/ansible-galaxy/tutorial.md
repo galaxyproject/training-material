@@ -1890,6 +1890,7 @@ The basic `job_conf.xml` file looks like this:
     </tools>
 </job_conf>
 ```
+{% endraw %}
 
 The above `job_conf.xml` file defines a *plugin* and *destination* to allow Galaxy to run user jobs on the local computer (i.e. The computer that Galaxy is running on.)
 
@@ -1897,21 +1898,20 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 
 There are a lot of other plugins available for Galaxy for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the Galaxy documentation on [job configuration](https://docs.galaxyproject.org/en/master/admin/jobs.html) for more details on these plugins and their configuration. There is also an advanced sample job conf file located at: `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_advanced`
 
-{% endraw %}
 
 > ### {% icon hands_on %} Hands-on: Job Conf
 >
 > 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p templates/galaxy/config/`).
 >
-> 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
+> 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
 >
 >    ```xml
 >    <job_conf>
 >        <plugins workers="4">
->            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>            <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >        </plugins>
->        <destinations default="local">
->            <destination id="local" runner="local"/>
+>        <destinations default="local_destination">
+>            <destination id="local_destination" runner="local_plugin"/>
 >        </destinations>
 >        <tools>
 >        </tools>
@@ -1958,10 +1958,10 @@ There are a lot of other plugins available for Galaxy for using other resources 
 >    > ```xml
 >    >    <job_conf>
 >    >        <plugins workers="4">
->    >            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>    >            <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >    >        </plugins>
->    >        <destinations default="local">
->    >            <destination id="local" runner="local"/>
+>    >        <destinations default="local_destination">
+>    >            <destination id="local_destination" runner="local_plugin"/>
 >    >        </destinations>
 >    >        <tools>
 >    >        </tools>
