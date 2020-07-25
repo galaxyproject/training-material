@@ -1955,7 +1955,7 @@ There are a lot of other plugins available for Galaxy for using other resources 
 >    {: .code-in}
 >
 >    > ### {% icon code-out %} Output: Bash
->    > ```ini
+>    > ```xml
 >    >    <job_conf>
 >    >        <plugins workers="4">
 >    >            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
