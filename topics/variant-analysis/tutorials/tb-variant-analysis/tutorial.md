@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "M. tuberculosis Variant Analysis"
 zenodo_link: https://doi.org/10.5281/zenodo.3496437
-enabled: false
+enable: false
 tags:
   - prokaryote
 questions:
@@ -67,7 +67,7 @@ of time spent on analyzing low-quality data that is not worth the effort.
 Here, we will perform a standard quality check on our input data and only point
 out a few interesting aspects about that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
-tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
+tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on both of your fastq datasets
