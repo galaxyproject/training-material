@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "M. tuberculosis Variant Analysis"
 zenodo_link: https://doi.org/10.5281/zenodo.3496437
-enabled: false
+enable: false
 tags:
   - prokaryote
 questions:
