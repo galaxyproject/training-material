@@ -1,0 +1,11 @@
+- doc: Test for debruijn-graph.ga
+  job: debruijn-graph-job1.yml
+  outputs:
+    fasta_stats_spades:
+      asserts:
+        has_text_matching:
+          expression: 'len_N50\s*132559'
+    fasta_stats_velvet:
+      asserts:
+        has_text_matching:
+          expression: 'GC_content\s*33.6'
