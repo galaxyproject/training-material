@@ -27,7 +27,7 @@ requirements:
     tutorials:
       - ansible
   - type: "none"
-    title: "A VM with at least 2 vCPUs and 4 GB RAM with Ubuntu 18.04 - 20.04 for preference."
+    title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
 ---
 
 # Overview
