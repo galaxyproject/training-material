@@ -1870,7 +1870,7 @@ The job configuration file allows Galaxy to run jobs in multiple locations using
 
 ### The job conf file - basics
 
-The `job_conf.xml` has three basic sections:
+The `job_conf.xml` file has three basic sections:
 * **Plugins** - This section lists the types of resources that this Galaxy server is configured to use and tells Galaxy to load the drivers for each type.
 * **Destinations** - This section lists the different locations or queues etc that Galaxy can send jobs to. Each one has a name and uses a *plugin* to communicate with that location. They can specify things like the number of cpu's, amount of RAM to be allocated etc for DRMAA locations. Usually one of the destinations is set to be the default.
 * **Tools** - This section lists the various tools that Galaxy would like to send to the non-default *destination*. Each line in this section pairs up a tool in Galaxy with a particular job *destination*. Then everytime Galaxy gets a job for that particular tool, it is always sent to that *destination*.
