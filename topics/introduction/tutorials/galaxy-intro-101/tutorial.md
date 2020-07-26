@@ -521,7 +521,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    ![Settings for running the workflow](../../images/101_38.png)
 >
 >    > ### {% icon comment %} Potential workflow issues
->    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input. If you see an "Invalid column choice" error you will need to specify which column you want to use.
 >    {: .comment}
 >
 > 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
