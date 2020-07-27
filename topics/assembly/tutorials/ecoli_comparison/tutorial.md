@@ -27,7 +27,7 @@ key_points:
 contributors:
   - nekrut
   - delphine-l
-  - erasche
+  - hexylena
 ---
 
 In this tutorial we begin with a new genome assembly just produced in the [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html). This is an assembly of *E. coli* C, which we will be comparing to assemblies of all other complete genes of this species.
