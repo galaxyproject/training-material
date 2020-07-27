@@ -380,7 +380,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 10, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 27, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -411,6 +411,7 @@
       <li><a href="#overview-box" id="markdown-toc-overview-box"><strong>Overview</strong> box</a></li>
       <li><a href="#agenda-box" id="markdown-toc-agenda-box"><strong>Agenda</strong> box</a></li>
       <li><a href="#hands-on-box" id="markdown-toc-hands-on-box"><strong>Hands-on</strong> box</a></li>
+      <li><a href="#tool-links" id="markdown-toc-tool-links">Tool Links</a></li>
       <li><a href="#questions-and-solution-boxes" id="markdown-toc-questions-and-solution-boxes"><strong>Questions</strong> and <strong>solution</strong> boxes</a></li>
       <li><a href="#tips-box" id="markdown-toc-tips-box"><strong>Tips</strong> box</a></li>
       <li><a href="#comments-boxes" id="markdown-toc-comments-boxes"><strong>Comments</strong> boxes</a></li>
@@ -902,7 +903,7 @@ This can be avoided by using the <code class="language-plaintext highlighter-rou
 <span class="gt">&gt;</span>
 <span class="gt">&gt;        This parameter should be length of <span class="notranslate">reads</span> - 1</span>
 <span class="gt">&gt;</span>
-<span class="gt">&gt; 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with</span>
+<span class="gt">&gt; 2. {% tool [MultiQC](<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>0) %}: Aggregate the STAR logs with</span>
 <span class="gt">&gt;      - *"Which tool was used generate logs?"*: `STAR`</span>
 <span class="gt">&gt;      - *"Type of FastQC output?"*: `Log`</span>
 <span class="gt">&gt;      - *"STAR log output"*: the generated `log` files (multiple datasets)</span>
@@ -940,7 +941,7 @@ This can be avoided by using the <code class="language-plaintext highlighter-rou
         </li>
       </ul>
     </li>
-    <li><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Aggregate the STAR logs with
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>0</span></span> : Aggregate the STAR logs with
       <ul>
         <li><em>“Which tool was used generate logs?”</em>: <code class="language-plaintext highlighter-rouge">STAR</code></li>
         <li><em>“Type of FastQC output?”</em>: <code class="language-plaintext highlighter-rouge">Log</code></li>
@@ -990,6 +991,31 @@ but may be helpful in some cases (for example to distinguish between single file
     </li>
   </ol>
 </blockquote>
+
+<h2 id="tool-links">Tool Links</h2>
+
+<p>With the new <a href="https://github.com/galaxyproject/galaxy/pull/10024">GTN in <span class="notranslate">Galaxy</span> Webhook</a>, trainees can view training directly within <span class="notranslate">Galaxy</span>. As part of this, we enable those trainees to click on tools, and have those tools directly activated in <span class="notranslate">Galaxy</span>, enabling for a seamless training experience for trainees.</p>
+
+<figure id="figure-2"><img src="../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif" alt="GIF of a user using the GTN in Galaxy webhook." /><figcaption><span class="figcaption-prefix">Figure 2:</span> A gif showing how the GTN in <span class="notranslate">Galaxy</span> webhook works. A student clicks the learning hat icon in the masthead of a <span class="notranslate">Galaxy</span> server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in <span class="notranslate">Galaxy</span>, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.</figcaption></figure>
+
+<p>To enable these in your tutorial you can use the following syntax:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- {% tool MultiQC %}
+- {% tool [MultiQC](<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>0) %}
+- {% tool [Import some data](upload1) %}
+</code></pre></div></div>
+
+<p>Which will be rendered as:</p>
+
+<ul>
+  <li><span><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span></li>
+  <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>0</span></span></li>
+  <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span></li>
+</ul>
+
+<p>When viewed through <span class="notranslate">Galaxy</span>, students will see:</p>
+
+<p><span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span></p>
 
 <h2 id="questions-and-solution-boxes"><strong>Questions</strong> and <strong>solution</strong> boxes</h2>
 
@@ -1368,7 +1394,7 @@ and the corresponding website {% cite <span class="notranslate">galaxy</span>-tr
     title = "Creating a new tutorial - Writing content in Markdown (Galaxy Training Materials)",
     year = "2020",
     month = "07",
-    day = "10"
+    day = "27"
     url = "\url{/training-material/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
