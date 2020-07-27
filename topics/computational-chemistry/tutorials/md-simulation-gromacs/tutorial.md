@@ -113,11 +113,7 @@ The protein we will look at in this tutorial is hen egg white [lysozyme](https:/
 
 The **GROMACS initial setup** {% icon tool %} tool uses the PDB input to create three files which will be required for MD simulation.
 
-Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model.
-
-Secondly, a GRO structure file is created, storing the structure of the protein.
-
-Finally, a 'position restraint file' is created which will be used for NVT/NPT equilibration. We will return to this later.
+Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model. Secondly, a GRO structure file is created, storing the structure of the protein. Finally, a 'position restraint file' is created which will be used for NVT/NPT equilibration. We will return to this later.
 
 In summary, the initial setup tool will:
 - create a 'topology' file
