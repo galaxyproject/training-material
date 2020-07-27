@@ -19,9 +19,9 @@ module Jekyll
       m = @text.match(format)
 
       if m
-        %Q(<span class="tool" data-tool="#{m[2]}" title="Tested with #{m[2]}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{m[2]}</span></span> )
+        %Q(<span class="tool" data-tool="#{m[2]}" title="Tested with #{m[2]}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: #{m[2]}</span></span> )
       else
-        %Q(<span class="tool"><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
+        %Q(<span><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
       end
 
     end

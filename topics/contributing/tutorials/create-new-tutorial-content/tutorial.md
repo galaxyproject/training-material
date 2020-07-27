@@ -496,6 +496,7 @@ To enable these in your tutorial you can use the following syntax:
 ```
 - {% tool MultiQC %}
 - {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
 ```
 {% endraw %}
 
@@ -503,6 +504,7 @@ Which will be rendered as:
 
 - {% tool MultiQC %}
 - {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
 
 ## **Questions** and **solution** boxes
 
