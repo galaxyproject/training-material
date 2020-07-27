@@ -512,10 +512,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
-            UseGalaxy.org.au
-        </a>
-        
     
         
     
@@ -530,7 +526,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 27, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -684,32 +680,31 @@
 
 <p>The <strong>GROMACS initial setup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool uses the PDB input to create three files which will be required for MD simulation.</p>
 
-<p>Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model.</p>
+<p>Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model. Secondly, a GRO structure file is created, storing the structure of the protein. Finally, a ‘position restraint file’ is created which will be used for NVT/NPT equilibration. We will return to this later.</p>
 
-<p>Secondly, a GRO structure file is created, storing the structure of the protein. It also defines the unit cell ‘box’, centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.</p>
-
-<p>Finally, a ‘position restraint file’ is created which will be used for NVT/NPT equilibration. We will return to this later.</p>
-
-<p>In summary, this tool will:</p>
+<p>In summary, the initial setup tool will:</p>
 <ul>
   <li>create a ‘topology’ file</li>
   <li>convert a PDB protein structure into a GRO file, with the structure centered in a simulation box (unit cell)</li>
   <li>create a position restraint file</li>
 </ul>
 
+<p>After these files have been generated, a further step is required to define a simulation box (unit cell) in which the simulation can take place. This can be done with the <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tool. It also defines the unit cell ‘box’, centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.</p>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-perform-initial-processing"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: perform initial processing</h3>
 
-  <p>Run <strong>GROMACS initial setup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
-  <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input file”</em>: <code class="language-plaintext highlighter-rouge">1AKI_clean.pdb</code> (Input dataset)</li>
-    <li><em>“Water model”</em>: <code class="language-plaintext highlighter-rouge">SPC/E</code></li>
-    <li><em>“Force field”</em>: <code class="language-plaintext highlighter-rouge">OPLS/AA</code></li>
-    <li><em>“Ignore hydrogens”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-    <li><em>“Box dimensions in nanometers”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
-    <li><em>“Box type”</em>: <code class="language-plaintext highlighter-rouge">Rectangular box with all sides equal</code></li>
-    <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-  </ul>
+  <ol>
+    <li>Run <strong>GROMACS initial setup</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“PDB input file”</em>: <code class="language-plaintext highlighter-rouge">1AKI_clean.pdb</code> (Input dataset)</li>
+        <li><em>“Water model”</em>: <code class="language-plaintext highlighter-rouge">SPC/E</code></li>
+        <li><em>“Force field”</em>: <code class="language-plaintext highlighter-rouge">OPLS/AA</code></li>
+        <li><em>“Ignore hydrogens”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
 
   <blockquote class="question">
     <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -722,6 +717,18 @@
     </blockquote>
   </blockquote>
 
+  <ol>
+    <li>Run <strong>GROMACS structure configuration</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+      <ul>
+        <li><em>“Input structure”</em>: GRO output from initial setup tool</li>
+        <li><em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">GRO file</code></li>
+        <li><em>“Configure box?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Box dimensions in nanometers”</em>: <code class="language-plaintext highlighter-rouge">1.0</code></li>
+        <li><em>“Box type”</em>: <code class="language-plaintext highlighter-rouge">Rectangular box with all sides equal</code></li>
+        <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+  </ol>
 </blockquote>
 
 <h1 id="solvation">Solvation</h1>
@@ -735,7 +742,7 @@
 
   <p><strong>GROMACS solvation and adding ions</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by setup</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GRO structure file”</em>: GRO structure file produced by the structure configuration tool</li>
     <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Topology (TOP) file”</em>: Topology produced by setup</li>
     <li><em>“Water model for solvation”</em>: <code class="language-plaintext highlighter-rouge">SPC</code></li>
     <li><em>“Generate detailed log”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -998,8 +1005,8 @@
     author = "Simon Bray",
     title = "Running molecular dynamics simulations using GROMACS (Galaxy Training Materials)",
     year = "2020",
-    month = "03",
-    day = "04"
+    month = "07",
+    day = "27"
     url = "\url{/training-material/topics/computational-chemistry/tutorials/md-simulation-gromacs/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1062,6 +1069,30 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
                             </li>
                         
                     
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> High Throughput Molecular Dynamics and Analysis:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/computational-chemistry/tutorials/htmd-analysis/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
                         
                     
                         
