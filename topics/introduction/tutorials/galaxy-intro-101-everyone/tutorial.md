@@ -112,7 +112,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv
@@ -624,7 +624,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Import** {% icon galaxy-upload %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
+> 2. {% tool [Import](upload1) %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/3540705/files/diamonds.csv
