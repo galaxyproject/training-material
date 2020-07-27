@@ -240,7 +240,7 @@
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
-  "timeRequired": "PT2H",
+  "timeRequired": "PT2H30M",
   "keywords": "deploying",
   "description": "The questions this  addresses are:\n - How does the Galaxy Ansible module work internally?\n - How can I install a Galaxy server with Ansible\n\n\\nThe objectives are:\n - Have an understanding of how Galaxy's Ansible roles are structured and interact with one another\n - Be able to use an Ansible playbook to install different flavors of Galaxy for different purposes\n\n",
   "coursePrerequisites": [
@@ -272,7 +272,7 @@
         "url": "https://galaxyproject.org/teach/gtn/"
       }
     },
-    "A VM with at least 2 vCPUs and 4 GB RAM"
+    "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
   ],
   "hasPart": [
 
@@ -473,7 +473,7 @@
 
     <li>
     
-        A VM with at least 2 vCPUs and 4 GB RAM
+        A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04.
     
     </li>
 
@@ -481,7 +481,7 @@
             
 
             
-            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours 30 minutes</p>
             
 
             
@@ -510,7 +510,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 17, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 27, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -549,6 +549,7 @@
       <li><a href="#systemd" id="markdown-toc-systemd">systemd</a></li>
       <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
       <li><a href="#login-to-galaxy" id="markdown-toc-login-to-galaxy">Login to <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#job-configuration" id="markdown-toc-job-configuration">Job Configuration</a></li>
       <li><a href="#disaster-strikes-optional" id="markdown-toc-disaster-strikes-optional">Disaster Strikes! (Optional)</a></li>
     </ol>
   </li>
@@ -1341,7 +1342,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2020-07-17), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2020-07-27), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -2568,6 +2569,125 @@ In a training setting there is no need to request certificates that will be trus
 
 <p>In order to be the administrator user, you will need to register an account with the same email address you used in the group variables under the <code class="language-plaintext highlighter-rouge">admin_users</code> setting.</p>
 
+<h2 id="job-configuration">Job Configuration</h2>
+
+<p>One of the most important configuration files for a large <span class="notranslate">Galaxy</span> server is the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file. This file tells <span class="notranslate">Galaxy</span> where to run all of the jobs that users execute. If <span class="notranslate">Galaxy</span> can’t find a job conf file or none has been specified in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file, it will use a default configuration, <code class="language-plaintext highlighter-rouge">job_conf.xml.sample_basic</code> file. This file is deployed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/lib/<span class="notranslate">galaxy</span>/config/sample/job_conf.xml.sample_basic</code> (or see it <a href="https://github.com/galaxyproject/galaxy/blob/release_20.05/lib/galaxy/config/sample/job_conf.xml.sample_basic">in the codebase</a>), though there is a symlink to the file in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/config</code>.</p>
+
+<p>The job configuration file allows <span class="notranslate">Galaxy</span> to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:</p>
+
+<ul>
+  <li>Local - <span class="notranslate">Galaxy</span> runs jobs on the same computer that <span class="notranslate">Galaxy</span> itself is running on.</li>
+  <li>DRMAA - <span class="notranslate">Galaxy</span> can connect to a cluster and submit jobs via a distributed resource manager such as Slurm, Condor, PBS Torque or Sun Grid Engine.</li>
+  <li>Pulsar - <span class="notranslate">Galaxy</span> can also send jobs to remote compute hosts over the internet using Pulsar.</li>
+</ul>
+
+<h3 id="the-job-conf-file---basics">The job conf file - basics</h3>
+
+<p>The <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file has three basic sections:</p>
+
+<ul>
+  <li><strong>Plugins</strong> - This section lists the types of job management systems that this <span class="notranslate">Galaxy</span> server is configured to use, and tells <span class="notranslate">Galaxy</span> to load the drivers for each type.</li>
+  <li><strong>Destinations</strong> - This section lists the different locations, queues, etc. that <span class="notranslate">Galaxy</span> can send jobs to. Each one has a name and uses a <em>plugin</em> to communicate with that location. They can specify things like the number of CPUs, amount of RAM to be allocated, etc. for DRMAA locations. Usually, one of the destinations is set to be the default.</li>
+  <li><strong>Tools</strong> - This section lists the various tools that you would like to send to a non-default <em>destination</em>. Each line in this section pairs up a tool in <span class="notranslate">Galaxy</span> with a particular job <em>destination</em>. Every time <span class="notranslate">Galaxy</span> gets a job for that particular tool, it is always sent to that <em>destination</em>.</li>
+</ul>
+
+<p>The basic <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file looks like this:</p>
+
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
+    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;destinations&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local"</span> <span class="na">runner=</span><span class="s">"local"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/destinations&gt;</span>
+    <span class="nt">&lt;tools&gt;</span>
+    <span class="nt">&lt;/tools&gt;</span>
+<span class="nt">&lt;/job_conf&gt;</span>
+</code></pre></div></div>
+
+<p>The above <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file defines a <em>plugin</em> and <em>destination</em> to allow <span class="notranslate">Galaxy</span> to run user jobs on the local computer (i.e. The computer that <span class="notranslate">Galaxy</span> is running on.)</p>
+
+<p>Firstly, the plugins section contains a plugin called “local” which is of type “runner” and then loads the python code module for supporting local jobs. Next the destinations section contains a destination called “local” using the runner “local”. As this is the only destination specified, it is also the default. So now everytime a user clicks “Execute” on a tool form, <span class="notranslate">Galaxy</span> will run the corresponding job locally using the python code specified.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-want-to-use-something-else"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Want to use something else?</h3>
+  <p>There are a lot of other plugins available for <span class="notranslate">Galaxy</span> for using other resources such as docker containers, kubernetes hosts, Pulsar destinations and HPC clusters to name a few. See the <span class="notranslate">Galaxy</span> documentation on <a href="https://docs.galaxyproject.org/en/master/admin/jobs.html">job configuration</a> for more details on these plugins and their configuration. There is also an advanced sample job conf file located at: <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/lib/<span class="notranslate">galaxy</span>/config/sample/job_conf.xml.sample_advanced</code></p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-job-conf"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Job Conf</h3>
+
+  <ol>
+    <li>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook (<code class="language-plaintext highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>).</p>
+    </li>
+    <li>
+      <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
+    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local_plugin"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"local_destination"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local_destination"</span> <span class="na">runner=</span><span class="s">"local_plugin"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/destinations&gt;</span>
+    <span class="nt">&lt;tools&gt;</span>
+    <span class="nt">&lt;/tools&gt;</span>
+<span class="nt">&lt;/job_conf&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Inform <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
+    <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
+    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
+</code></pre></div>      </div>
+
+      <p>And then deploy the new config file using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> var in your group vars:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
+  <span class="c1"># ... possible existing config file definitions</span>
+  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</span>
+    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook: <code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
+changed: [<span class="notranslate">galaxy</span>.example.org]
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Checkout the new job_conf.xml file.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_conf.xml
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-bash-11"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
+    <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local_plugin"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/plugins&gt;</span>
+    <span class="nt">&lt;destinations</span> <span class="na">default=</span><span class="s">"local_destination"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;destination</span> <span class="na">id=</span><span class="s">"local_destination"</span> <span class="na">runner=</span><span class="s">"local_plugin"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/destinations&gt;</span>
+    <span class="nt">&lt;tools&gt;</span>
+    <span class="nt">&lt;/tools&gt;</span>
+<span class="nt">&lt;/job_conf&gt;</span>
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
 <h2 id="disaster-strikes-optional">Disaster Strikes! (Optional)</h2>
 
 <p>Because you’re an admin, you need to be prepared for any situation, including the worst case scenarios. So we’re going to simulate a disaster and show you how you can recover from it. It’ll be fun!</p>
@@ -2789,7 +2909,7 @@ Additionally you can automatically send failing job error reports, even if users
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
     month = "07",
-    day = "17"
+    day = "27"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
