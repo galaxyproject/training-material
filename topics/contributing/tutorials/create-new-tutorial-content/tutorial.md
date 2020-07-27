@@ -506,6 +506,10 @@ Which will be rendered as:
 - {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
 - {% tool [Import some data](upload1) %}
 
+When viewed through Galaxy, students will see:
+
+<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
+
 ## **Questions** and **solution** boxes
 
 Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
