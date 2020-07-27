@@ -7,20 +7,21 @@ module Jekyll
     end
 
     def render(context)
-      parts = @text.split('|')
-      # The first part should be any text, the last should be the tool_id/tool_version
-      # {% tool Group on Column %} → INVALID
-      # {% tool Group on Column|Grouping1 %}
-      # {% tool Group on Column|Grouping1/1.0.0 %}
-      # {% tool Group on Column|toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1 %}
+      FORMAT = /\[(.*)\]\((.*)\)/
 
-      if parts.length == 1
-        raise SyntaxError.new(
-          "No tool defined for: '#{@parts}'. "
-        )
-      elsif parts.length == 2
-        %Q(<span class="tool" data-tool="#{parts[1]}" title="Tested with #{parts[1]}"><strong>#{parts[0]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{parts[0]}</span></span> )elsif parts.length == 3
-        %Q(<span class="tool" data-tool="#{parts[1]}" title="Tested with #{parts[1]} version #{parts[2]}" data-version="#{parts[2]}"><strong>#{parts[0]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i></span>)
+      # The first part should be any text, the last should be the tool_id/tool_version
+      # {% tool Group on Column %}
+      # {% tool [Group on Column]() %}
+      # {% tool [Group on Column](Grouping1) %}
+      # {% tool [Group on Column](Grouping1/1.0.0) %}
+      # {% tool [Group on Column](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %}
+
+      m = @text.match(FORMAT)
+
+      if m
+        %Q(<span class="tool" data-tool="#{m[2]}" title="Tested with #{m[2]}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{m[2]}</span></span> )
+      else
+        %Q(<span class="tool"><strong>#{@text}</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> )
       end
 
     end
