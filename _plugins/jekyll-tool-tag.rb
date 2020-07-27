@@ -7,7 +7,7 @@ module Jekyll
     end
 
     def render(context)
-      FORMAT = /\[(.*)\]\((.*)\)/
+      format = /\[(.*)\]\((.*)\)/
 
       # The first part should be any text, the last should be the tool_id/tool_version
       # {% tool Group on Column %}
@@ -16,7 +16,7 @@ module Jekyll
       # {% tool [Group on Column](Grouping1/1.0.0) %}
       # {% tool [Group on Column](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %}
 
-      m = @text.match(FORMAT)
+      m = @text.match(format)
 
       if m
         %Q(<span class="tool" data-tool="#{m[2]}" title="Tested with #{m[2]}"><strong>#{m[1]}</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">Tool: #{m[2]}</span></span> )
