@@ -250,7 +250,7 @@ In this section we will reproduce this Circos plot step by step.
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Import Data.**
+> 2. {% tool [Import Data](upload1) %}
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
@@ -278,7 +278,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
-> 1. **Circos** visualizes data in a ciruclar layout {% icon tool %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a ciruclar layout with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.tsv`
@@ -422,7 +422,7 @@ So in order to convert this to Circos format, we need to
 
 > ### {% icon hands_on %} Hands-on: Prepare input data
 >
-> 1. **Select** lines that match an expression {% icon tool %} with the following parameters:
+> 1. {% tool [Select](Grep1) %} lines that match an expression with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `VCaP highConfidenceJunctions.tsv`
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `^[#><]`
@@ -607,15 +607,15 @@ This is pretty close to the format expected by Circos for 2D data tracks (`chr -
 
 > ### {% icon hands_on %} Hands-on: Prepare CNV input file
 >
-> 1. **Remove beginning** of a file {% icon tool %} with the following parameters:
+> 1. {% tool [Remove beginning](Remove+beginning1) %} of a file with the following parameters:
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"from"*: `VCaP copy number.tsv`
 >
-> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
+> 2. {% tool [Cut](Cut1) %} columns from a table  with the following parameters:
 >    - *"Cut columns"*: `c1,c2,c3,c4`
 >    - {% icon param-file %} *"From"*: output of **Remove beginning** {% icon tool %}
 >
-> 3. **Select random lines** {% icon tool %} with the following parameters:
+> 3. {% tool [Select random lines](random_lines1) %} with the following parameters:
 >    - *"Randomly select"*: `25000`
 >    - {% icon param-file %} *"from"*: output of **Cut** {% icon tool %}
 >
@@ -788,11 +788,11 @@ We will make another scatterplot, so our data should be in the same format as th
 
 > ### {% icon hands_on %} Hands-on: Prepare the B-allele frequency table
 >
-> 1. **Remove beginning** of a file {% icon tool %} with the following parameters:
+> 1. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
 >    - {% icon param-file %} *"from"*: `B-allele frequence.tsv`
 >
-> 2. **Select random lines** {% icon tool %} with the following parameters:
+> 2. {% tool [Select random lines](random_lines1) %} with the following parameters:
 >    - *"Randomly select"*: `25000`
 >    - {% icon param-file %} *"from"*: output of **Select** {% icon tool %}
 >    - *"Set a random seed"*: `Don't set seed`
@@ -1022,7 +1022,7 @@ Let's start by creating the ideogram for our plot:
 
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
-> 1. **Circos** {% icon tool %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
@@ -1208,7 +1208,7 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 
 > ### {% icon hands_on %} Hands-on: Circos
 >
-> 1. **Circos** {% icon tool %} with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome"*: `Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`

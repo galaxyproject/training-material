@@ -411,7 +411,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 >
 >        This parameter should be length of reads - 1
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}: Aggregate the STAR logs with
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
@@ -443,7 +443,7 @@ This will be rendered like:
 >
 >        This parameter should be length of reads - 1
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}: Aggregate the STAR logs with
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
@@ -484,6 +484,31 @@ which, when rendered, look like:
 >      - *"param1"*: `42`
 {: .hands_on}
 
+## Tool Links
+
+With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
+
+![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
+
+To enable these in your tutorial you can use the following syntax:
+
+{% raw %}
+```
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+```
+{% endraw %}
+
+Which will be rendered as:
+
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+
+When viewed through Galaxy, students will see:
+
+<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
 
 ## **Questions** and **solution** boxes
 

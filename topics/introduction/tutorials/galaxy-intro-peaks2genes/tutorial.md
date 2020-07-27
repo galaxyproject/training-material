@@ -298,7 +298,7 @@ In order to convert the chromosome names we have therefore two things to do:
 
 > ### {% icon hands_on %} Hands-on: Adjust chromosome names
 >
-> 1. **Replace Text** {% icon tool %}: Run **Replace Text in a specific column** with the following settings:
+> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} in a specific column with the following settings:
 >     - *"File to process"*: our peak file `GSE37268_mof3.out.hpeak.txt.gz`
 >     - *"in column"*: `1`
 >     - *"Find pattern"*: `[0-9]+`
@@ -311,7 +311,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 2. Rename your output file `chr prefix added`.
 >
-> 3. **Replace Text** {% icon tool %}: Let's rerun the tool with
+> 3. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Let's rerun the tool with
 >    - *"File to process"*: the output from the last run, `chr prefix added`
 >    - *"in column"*: `1`
 >    - *"Find pattern"*: `chr20`
@@ -325,7 +325,7 @@ In order to convert the chromosome names we have therefore two things to do:
 >
 > 4. Rename your output file `chrX fixed`
 >
-> 5. **Replace Text** {% icon tool %}: Rerun this tool to do the same for chromosome Y
+> 5. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %}  : Rerun this tool to do the same for chromosome Y
 >    - *"File to process"*: `chrX fixed`, the output from the last run
 >    - *"in column"*: `1`
 >    - *"Find pattern"*: `chr21`
@@ -359,7 +359,7 @@ you want to include transcriptions factors in ChIP-seq experiments. There is no 
 
 > ### {% icon hands_on %} Hands-on: Add promoter region to gene records
 >
-> 1. **Get Flanks** {% icon tool %}: Run **Get flanks returns flanking region/s for every gene** with the following settings:
+> 1. {% tool [Get Flanks](toolshed.g2.bx.psu.edu/repos/devteam/get_flanks/get_flanks1/1.0.0) %} returns flanking region/s for every gene, with the following settings:
 >     - *"Select data"*: `Genes` file from UCSC
 >     - *"Region"*: `Around Start`
 >     - *"Location of the flanking region/s"*: `Upstream`
@@ -403,7 +403,7 @@ It's time to find the overlapping intervals (finally!). To do that, we want to e
 
 > ### {% icon hands_on %} Hands-on: Find Overlaps
 >
-> 1. **Intersect** {% icon tool %}: Run **Intersect the intervals of two datasets** with the following settings:
+> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} the intervals of two datasets, with the following settings:
 >     - *"Return"*: `Overlapping Intervals`
 >     - *"of"*: the UCSC file with promoter regions (`Promoter regions`)
 >     - *"that intersect"*: our peak region file from **Replace** (`Peak regions BED`)
@@ -422,7 +422,7 @@ We will group the table by chromosome and count the number of genes with peaks o
 
 > ### {% icon hands_on %} Hands-on: Count genes on different chromosomes
 >
-> 1. **Group** {% icon tool %}: Run **Group data by a column and perform aggregate operation on other columns** with the following settings:
+> 1. {% tool [Group](Grouping1) %}  data by a column and perform aggregate operation on other columns with the following settings:
 >     - *"Select data"* to the result of the intersection
 >     - *"Group by column"*:`Column 1`
 >     - Press **Insert Operation** and choose:
@@ -557,7 +557,7 @@ We need to generate a new BED file from the original peak file that contains the
 
 > ### {% icon hands_on %} Hands-on: Create peak summit file
 >
-> 1. **Compute an expression on every row** {% icon tool %} with the following parameters:
+> 1. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
 >   - *"Add expression"*: `c2+c5`
 >   - *"as a new column to"*: our peak file `Peak regions` (the interval format file)
 >   - *"Round result?"*: `YES`
@@ -566,7 +566,7 @@ We need to generate a new BED file from the original peak file that contains the
 >
 > 2. Rename the output `Peak regions new column`
 >
-> 3. **Compute an expression on every row** {% icon tool %}: rerun this tool on the last result with:
+> 3. {% tool [Compute an expression on every row](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} rerun this tool on the last result with:
 >   - *"Add expression"*: `c8+1`
 >   - *"as a new column to"*: the `Peak regions new column` file we just created
 >   - *"Round result?"*: `YES`
@@ -577,7 +577,7 @@ We need to generate a new BED file from the original peak file that contains the
 Now we cut out just the chromosome plus the start and end of the summit:
 
 > ### {% icon hands_on %} Hands-on: Cut out columns
-> 1. **Cut** {% icon tool %}: Run **Cut columns from a table** with the following settings:
+> 1. {% tool [Cut](cut1) %} columns from a table with the following settings:
 >   - *"Cut columns"*: `c1,c8,c9`
 >   - *"Delimited by Tab"*: `Tab`
 >   - *"From"*: `Peak summit regions`
@@ -603,7 +603,7 @@ The RefSeq genes we downloaded from UCSC did only contain the RefSeq identifiers
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. From [Zenodo](https://zenodo.org/record/1025586) or from the data library, import the file `mm9.RefSeq_genes_from_UCSC.bed`
+> 1. {% tool [Import](upload1) %} `mm9.RefSeq_genes_from_UCSC.bed` from [Zenodo](https://zenodo.org/record/1025586) or from the data library:
 >
 >    ```
 >    https://zenodo.org/record/1025586/files/mm9.RefSeq_genes_from_UCSC.bed
