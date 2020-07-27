@@ -11,7 +11,6 @@ module Jekyll
 
       # The first part should be any text, the last should be the tool_id/tool_version
       # {% tool Group on Column %}
-      # {% tool [Group on Column]() %}
       # {% tool [Group on Column](Grouping1) %}
       # {% tool [Group on Column](Grouping1/1.0.0) %}
       # {% tool [Group on Column](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %}
