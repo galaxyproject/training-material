@@ -53,6 +53,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
+{: hands_on}
 
 # Quality control
 
@@ -70,17 +71,30 @@ of NGS data quality control, you may want to have a look at the dedicated
 tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
-> 1. Run **FastQC** {% icon tool %} on both of your fastq datasets
+>
+> 1. Execute **FastQC** {% icon tool %} on both of your fastq datasets
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
+>    The **FastQC** {% icon tool %} input form looks like this. You only need to pay attention to the top part
+>    where *Short read data from your current history* is selected. Leave all the other parameters at their default
+>    values and click *Execute*.
+>
+>    ![FastQC input and dependencies](../../images/mt_qc.png)
+>
 >    When you start this job, four new datasets (one with the calculated raw
 >    data, another one with an html report of the findings for each input
 >    dataset) will get added to your history.
 >
-> 2. Use **MultiQC** {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
+{: hands_on}
+
+While one could examine the quality control report for each set of reads (forward and reverse) independently but it is quite useful to example them side by side using the **MultiQC** tool.
+
+> ### {% icon hands_on %} Hands-on: Combining QC results
+>
+> 1. Use **MultiQC** {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -88,7 +102,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >           - {% icon param-files %} *"FastQC output"*: both *RawData*
 >             outputs of **FastQC** {% icon tool %})
 >
-> 3. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
+> 2. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -107,17 +121,22 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >    > {: .solution}
 >    {: .question}
 >
-> 4. Use **Trimmomatic** {% icon tool %} to clean up the reads and remove the poor quality sections.
+{: hands_on}
+
+As these reads look like they need a bit of trimming, we can turn to the **Trimmomatic** tool to clean up our data.
+
+> ### {% icon hands_on %} Hands-on: Quality trimming
+> 1. Use **Trimmomatic** {% icon tool %} to clean up the reads and remove the poor quality sections.
 >       - *"Single-end or paired-end reads?"*: `Paired End (two separate input files)`
->       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `ERR550641_1.fastq.gz`
->       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `ERR550641_2.fastq.gz`
+>       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `004-2_1.fastq.gz`
+>       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `004-2_2.fastq.gz`
 >       - *Select Trimmomatic operation to perform*
 >           - Keep the default value of **Sliding window trimming** and adjust the average quality required to 30
 >       - *"+Insert Trimmomatic Operation"*
 >           - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
 >           - *"Minimum length of reads to be kept"*: `20`
 >
-> 5. Inspect the output produced by Trimmomatic
+> 2. Inspect the output produced by Trimmomatic
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -130,6 +149,8 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >    > {: .solution}
 >    {: .question}
 {: .hands_on}
+
+*Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.
 
 # Look for contamination with Kraken2
 
