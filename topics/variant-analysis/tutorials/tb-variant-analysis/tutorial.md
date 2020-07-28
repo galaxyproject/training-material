@@ -158,7 +158,7 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 
 > ### {% icon hands_on %} Hands-on: Run Kraken2
 >
-> 1. Execute {% tool [Kraken2](tool_id=toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} {% icon tool %} with the following parameters
+> 1. Execute {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} {% icon tool %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
 >       - *"Forward Strand"*: `Trimmomatic on X (R1 paired)`
 >       - *"Reverse Strand"*: `Trimmomatic on X (R2 paired)`
