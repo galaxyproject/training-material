@@ -41,7 +41,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 
 > ### {% icon hands_on %} Hands-on: Get the data
 >
-> 1. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.3960260) or from the shared data library
+> 1. {% tool [Import](upload1) %} the following files from [Zenodo](https://doi.org/10.5281/zenodo.3960260) or from the shared data library
 >```
 >https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
 >https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
@@ -72,7 +72,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 >
-> 1. Execute **FastQC** {% icon tool %} on both of your fastq datasets
+> 1. Execute {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} {% icon tool %} on both of your fastq datasets
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
@@ -94,7 +94,7 @@ While one could examine the quality control report for each set of reads (forwar
 
 > ### {% icon hands_on %} Hands-on: Combining QC results
 >
-> 1. Use **MultiQC** {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
+> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -126,7 +126,7 @@ While one could examine the quality control report for each set of reads (forwar
 As these reads look like they need a bit of trimming, we can turn to the **Trimmomatic** tool to clean up our data.
 
 > ### {% icon hands_on %} Hands-on: Quality trimming
-> 1. Use **Trimmomatic** {% icon tool %} to clean up the reads and remove the poor quality sections.
+> 1. Use {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5) %} {% icon tool %} to clean up the reads and remove the poor quality sections.
 >       - *"Single-end or paired-end reads?"*: `Paired End (two separate input files)`
 >       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `004-2_1.fastq.gz`
 >       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `004-2_2.fastq.gz`
@@ -158,7 +158,7 @@ We should also look for contamination in our reads. Sometimes, other sources of 
 
 > ### {% icon hands_on %} Hands-on: Run Kraken2
 >
-> 1. **Kraken2** {% icon tool %} with the following parameters
+> 1. Execute {% tool [Kraken2](tool_id=toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} {% icon tool %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
 >       - *"Forward Strand"*: `Trimmomatic on X (R1 paired)`
 >       - *"Reverse Strand"*: `Trimmomatic on X (R2 paired)`
@@ -379,6 +379,6 @@ far.
 >    {: .question}
 {: .hands_on}
 
-As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants.
+As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the Kraken2 output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
 
 We hope you enjoyed this tutorial!
