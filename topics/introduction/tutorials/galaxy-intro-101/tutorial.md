@@ -191,7 +191,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
 >
-> 1. **Join** {% icon tool %} the intervals of two datasets side-by-side:
+> 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0) %}   the intervals of two datasets side-by-side:
 >
 >    Enter the word `join` in the search bar of the tool panel, and select the
 >    tool named `Join - the intervals of two datasets side-by-side`
@@ -248,7 +248,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
-> 1. **Group** {% icon tool %} data by a column and perform aggregate operation on other columns:
+> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns:
 >
 >    - *"Select data"*: select the output dataset from **Join** {% icon tool %}
 >    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
@@ -280,7 +280,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
-> 1. **Sort** {% icon tool %} data in ascending or descending order:
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order:
 >
 >    - *"Sort Query"*: Output from **Group** {% icon tool %}
 >    - *"Column Selections"*:
@@ -314,7 +314,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. **Select first** {% icon tool %} lines from a dataset:
+> 1. {% tool [Select first](Show+beginning1) %} lines from a dataset:
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
@@ -332,7 +332,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 
 > ### {% icon hands_on %} Hands-on: Compare two Datasets
 >
-> 1. **Compare two Datasets** {% icon tool %} to find common or distinct rows:
+> 1. {% tool [Compare two Datasets](comp1) %} to find common or distinct rows:
 >
 >    - *"Compare"*: `Exons`
 >    - *"Using column"*: `Column: 4`

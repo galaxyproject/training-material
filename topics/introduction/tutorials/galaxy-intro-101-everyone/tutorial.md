@@ -112,7 +112,7 @@ In other words, using a workflow makes it possible to apply the same procedure t
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. **Import** {% icon galaxy-upload %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
+> 1. {% tool [Import](upload1) %} the file `iris.csv` from [Zenodo](https://zenodo.org/record/1319069/files/iris.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/1319069/files/iris.csv
@@ -198,7 +198,7 @@ Now it is time to run your first tool! We saw in the previous step that our file
 
 > ### {% icon hands_on %} Hands-on: Removing header
 >
-> 1. **Remove beginning** {% icon tool %} with the following parameters:
+> 1. {% tool [Remove Beginning](Remove+beginning1) %} with the following parameters:
 >    - *Remove first*: `1` (to remove the first line only)
 >    - {% icon param-file %} *"from"*: select the **iris tabular** file from your history
 >    - Click **Execute**
@@ -246,7 +246,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 
 > ### {% icon hands_on %} Hands-on: Extract species
 >
-> 1. **Cut** columns from a table {% icon tool %} with the following parameters:
+> 1. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >      - *"Cut columns"*: `c5`
 >      - *"Delimited by"*: `Tab`
 >      - {% icon param-file %} *"From"*: `iris clean` dataset
@@ -257,7 +257,7 @@ In order to answer this question, we will have to look at column 5 of our file, 
 >
 > 3. **View** {% icon galaxy-eye %} the resulting file
 >
-> 4. **Unique** occurrences of each record {% icon tool %} with the following parameters:
+> 4. {% tool [Unique](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sorted_uniq/1.1.0) %} occurrences of each record  with the following parameters:
 >      - {% icon param-file %} *"File to scan for unique values"*: `iris species column` (the output from **Cut** {% icon tool %})
 >
 > 5. **Rename** {% icon galaxy-pencil %} the dataset to `iris species`
@@ -296,7 +296,7 @@ Like we mentioned before, there are often multiple ways to reach your answer in 
 > 3. **Rename** {% icon galaxy-pencil %} the dataset to `iris species group`
 >
 > > ### {% icon solution %} Solution
-> > 1. **Group** {% icon tool %} with the following parameters:
+> > 1. {% tool [Group](Grouping1) %}   with the following parameters:
 > >   - *"Select data"* select `iris clean` dataset
 > >   - *"Group by column"*: `Column: 5`
 > >
@@ -381,7 +381,7 @@ In our dataset, we have the following features measured for each sample:
 
 > ### {% icon hands_on %} Hands-on: Get the mean and sample standard deviation of Iris flower features
 >
-> 1. **Datamash** {% icon tool %} with the following parameters:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: `iris tabular`
 >    - *"Group by fields"*: `5`
 >    - *"Input file has a header line"*: `Yes`
@@ -446,7 +446,7 @@ check whether we can spot any immediate patterns.
 
 > ### {% icon hands_on %} Hands-on: Plot iris feature pairs in two dimensions
 >
-> 1. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+> 1. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1) %}   with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: **iris clean**
 >    - *"Column to plot on x-axis"*: `1`
 >    - *"Column to plot on y-axis"*: `2`
@@ -489,7 +489,7 @@ check whether we can spot any immediate patterns.
 >  > > 1. We get similar results than with Summary and statistics: *Iris setosa* can clearly be distinguished from *Iris versicolor* and
 >  > > *Iris virginica*. We can also see that sepal width and length are not sufficient features to differentiate *Iris versicolor* from *Iris
 >    > > virginica*.
->  > > 2. **Scatterplot w ggplot2** {% icon tool %} with the following parameters:
+>  > > 2. {% tool [Scatterplot w ggplot2](toolshed.g2.bx.psu.edu/repos/iuc/ggplot2_point/ggplot2_point/2.2.1+galaxy1) %} with the following parameters:
 >  > >     - {% icon param-file %} *"Input tabular dataset"*: `iris clean`
 >  > >     - *"Column to plot on x-axis"*: `3`
 >  > >     - *"Column to plot on y-axis"*: `4`
@@ -624,7 +624,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. **Import** {% icon galaxy-upload %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
+> 2. {% tool [Import](upload1) %} the file `diamonds.csv` from [Zenodo](https://zenodo.org/record/3540705/files/diamonds.csv) or from the data library (ask your instructor)
 >
 >    ```
 >    https://zenodo.org/record/3540705/files/diamonds.csv
