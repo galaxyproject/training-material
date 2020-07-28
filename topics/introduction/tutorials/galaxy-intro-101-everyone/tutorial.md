@@ -668,7 +668,7 @@ The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, 
 >    - Change `Label for x axis` to **weight of the diamond (carat)**
 >    - Change `Label for y axis` to **Price (US dollars)**
 >
->    > > ![Customize scatter plot](../../images/customize_diamond_plot.png)
+>    ![Customize scatter plot](../../images/customize_diamond_plot.png)
 >
 > 5. Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
 >    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor**

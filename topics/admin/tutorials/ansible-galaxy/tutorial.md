@@ -263,12 +263,12 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/latest/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
->    > ```ini
->    > [defaults]
->    > interpreter_python = /usr/bin/python3
->    > inventory = hosts
->    > retry_files_enabled = false
->    > ```
+>    ```ini
+>    [defaults]
+>    interpreter_python = /usr/bin/python3
+>    inventory = hosts
+>    retry_files_enabled = false
+>    ```
 >
 >    > ### {% icon tip %} CentOS7
 >    > As mentioned in the "Ubuntu or Debian, CentOS or RHEL?" comment above, if you are using CentOS7 do not set `interpreter_python` in `ansible.cfg` .
@@ -276,10 +276,10 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    There is an additional useful option that you might want to add to your `ansible.cfg` file if you are connecting over SSH:
 >
->    > ```ini
->    > [ssh_connection]
->    > pipelining = true
->    > ```
+>    ```ini
+>    [ssh_connection]
+>    pipelining = true
+>    ```
 >
 >    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >

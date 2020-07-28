@@ -53,6 +53,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
+{: .hands_on}
 
 # Quality control
 
@@ -197,7 +198,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >    > 1. What type of variant is the first one in the list?
 >    >
 >    > 2. What was the effect of this variant on the coding region it was found in?
->    > 
+>    >
 >    > 3. How many variants were found?
 >    >
 >    > > ### {% icon solution %} Solution
