@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "M. tuberculosis Variant Analysis"
 zenodo_link: https://doi.org/10.5281/zenodo.3496437
-enable: false
 tags:
   - prokaryote
 questions:
@@ -41,7 +40,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 
 > ### {% icon hands_on %} Hands-on: Get the data
 >
-> 1. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.3960260) or from the shared data library
+> 1. {% tool [Import](upload1) %} the following files from [Zenodo](https://doi.org/10.5281/zenodo.3960260) or from the shared data library
 >```
 >https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
 >https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
@@ -71,17 +70,30 @@ of NGS data quality control, you may want to have a look at the dedicated
 tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
-> 1. Run **FastQC** {% icon tool %} on both of your fastq datasets
+>
+> 1. Execute {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} {% icon tool %} on both of your fastq datasets
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
+>    The **FastQC** {% icon tool %} input form looks like this. You only need to pay attention to the top part
+>    where *Short read data from your current history* is selected. Leave all the other parameters at their default
+>    values and click *Execute*.
+>
+>    ![FastQC input and dependencies](../../images/mt_qc.png)
+>
 >    When you start this job, four new datasets (one with the calculated raw
 >    data, another one with an html report of the findings for each input
 >    dataset) will get added to your history.
 >
-> 2. Use **MultiQC** {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
+{: .hands_on}
+
+While one could examine the quality control report for each set of reads (forward and reverse) independently but it is quite useful to example them side by side using the **MultiQC** tool.
+
+> ### {% icon hands_on %} Hands-on: Combining QC results
+>
+> 1. Use {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} {% icon tool %} to aggregate the raw **FastQC** data of all input datasets into one report
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
 >        - In *"FastQC output"*
@@ -89,7 +101,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >           - {% icon param-files %} *"FastQC output"*: both *RawData*
 >             outputs of **FastQC** {% icon tool %})
 >
-> 3. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
+> 2. Using the {% icon galaxy-eye %} button, inspect the *Webpage* output produced by the tool
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -108,17 +120,22 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >    > {: .solution}
 >    {: .question}
 >
-> 4. Use **Trimmomatic** {% icon tool %} to clean up the reads and remove the poor quality sections.
+{: .hands_on}
+
+As these reads look like they need a bit of trimming, we can turn to the **Trimmomatic** tool to clean up our data.
+
+> ### {% icon hands_on %} Hands-on: Quality trimming
+> 1. Use {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5) %} {% icon tool %} to clean up the reads and remove the poor quality sections.
 >       - *"Single-end or paired-end reads?"*: `Paired End (two separate input files)`
->       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `ERR550641_1.fastq.gz`
->       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `ERR550641_2.fastq.gz`
+>       - {% icon param-files %} *"Input FASTQ file (R1/first of pair)"*: `004-2_1.fastq.gz`
+>       - {% icon param-files %} *"Input FASTQ file (R2/second of pair)"*: `004-2_2.fastq.gz`
 >       - *Select Trimmomatic operation to perform*
 >           - Keep the default value of **Sliding window trimming** and adjust the average quality required to 30
 >       - *"+Insert Trimmomatic Operation"*
 >           - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
 >           - *"Minimum length of reads to be kept"*: `20`
 >
-> 5. Inspect the output produced by Trimmomatic
+> 2. Inspect the output produced by Trimmomatic
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -132,13 +149,15 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >    {: .question}
 {: .hands_on}
 
+*Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.
+
 # Look for contamination with Kraken2
 
 We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our snp analysis. **Kraken 2** is an effective way of looking and which species is represented in our reads and so we can easily spot possible contamination of our sample.
 
 > ### {% icon hands_on %} Hands-on: Run Kraken2
 >
-> 1. **Kraken2** {% icon tool %} with the following parameters
+> 1. Execute {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} {% icon tool %} with the following parameters
 >   - *"Single or paired reads"*: `Paired`
 >       - *"Forward Strand"*: `Trimmomatic on X (R1 paired)`
 >       - *"Reverse Strand"*: `Trimmomatic on X (R2 paired)`
@@ -176,7 +195,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
-> 1. **Snippy** {% icon tool %} with the following parameters
+> 1. {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0) %} {% icon tool %} with the following parameters
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >   - *"Single or Paired-end reads"*: `Paired`
@@ -224,7 +243,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
-> 1. **TB Variant Filter**: {% icon tool %} with the following parameters
+> 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0) %}: {% icon tool %} with the following parameters
 >   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
 >   - *"Filters to apply"*: Select `Filter variants by region`, `Filter variants close to indels` and `Filter sites by read alignment depth`.
 >
@@ -247,7 +266,7 @@ Now that we have a collection of *high quality variants* we can search them agai
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > ### {% icon hands_on %} Hands-on: Run TB Profiler
-> 1. **TB-Profiler profile**: {% icon tool %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1) %}: {% icon tool %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
 >
@@ -283,7 +302,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 
 > ### {% icon hands_on %} Hands-on: Run JBrowse
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1) %} {% icon tool %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
 >       - *"Select the reference genome"*: `https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta`
 >
@@ -359,6 +378,6 @@ far.
 >    {: .question}
 {: .hands_on}
 
-As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants.
+As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the Kraken2 output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
 
 We hope you enjoyed this tutorial!
