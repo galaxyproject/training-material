@@ -53,7 +53,7 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-{: hands_on}
+{: .hands_on}
 
 # Quality control
 
@@ -88,7 +88,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >    data, another one with an html report of the findings for each input
 >    dataset) will get added to your history.
 >
-{: hands_on}
+{: .hands_on}
 
 While one could examine the quality control report for each set of reads (forward and reverse) independently but it is quite useful to example them side by side using the **MultiQC** tool.
 
@@ -121,7 +121,7 @@ While one could examine the quality control report for each set of reads (forwar
 >    > {: .solution}
 >    {: .question}
 >
-{: hands_on}
+{: .hands_on}
 
 As these reads look like they need a bit of trimming, we can turn to the **Trimmomatic** tool to clean up our data.
 
