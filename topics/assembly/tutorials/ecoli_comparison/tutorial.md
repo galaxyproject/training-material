@@ -767,7 +767,7 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >    1457 | 2557 | DNA polymerase III subunit beta                | 0 | +
 >    2557 | 3630 | DNA replication and repair protein RecF        | 0 | +
 >
-> As we mentioned above these datasets lack genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genome IDs. We will leverage this when collapsing this collection into a single dataset:
+>    As we mentioned above these datasets lack genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genome IDs. We will leverage this when collapsing this collection into a single dataset:
 >
 > 4. **Collapse Collection** {% icon tool %} with the following parameters:
 >   - *"Collection of files to collapse"*: the output of the previous step (`Cut on collection...`)
