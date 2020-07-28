@@ -196,7 +196,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
 >
-> 1. **Snippy** {% icon tool %} with the following parameters
+> 1. {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0) %} {% icon tool %} with the following parameters
 >   - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >   - *"Single or Paired-end reads"*: `Paired`
@@ -244,7 +244,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 We still cannot entirely trust the proposed variants. In particular, there are regions of the *M. tuberculosis* genome that are difficult to effectively map reads to. These include the PE/PPE/PGRS genes, which are highly repetitive, and the IS (insertion sequence sites). Secondly, when an insertion or deletion (indel) occurs in our sample relative to the reference it can cause apparent, but false, single nucleotide variants to appear near the indel. Finally where few reads map to a region of the reference genome, either because of a sequence deletion or because of a high GC content in the genomic region, we cannot be confident about the quality of variant calling in the region. The `TB Variant Filter` can help filter out variants based on a variety of criteria, including those listed above.
 
 > ### {% icon hands_on %} Hands-on: Run Snippy
-> 1. **TB Variant Filter**: {% icon tool %} with the following parameters
+> 1. {% tool [TB Variant Filter](toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0) %}: {% icon tool %} with the following parameters
 >   - *"VCF file to be filter"*: `snippy on data XX, data XX, and data XX mapped reads vcf file`
 >   - *"Filters to apply"*: Select `Filter variants by region`, `Filter variants close to indels` and `Filter sites by read alignment depth`.
 >
@@ -267,7 +267,7 @@ Now that we have a collection of *high quality variants* we can search them agai
 Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.ac.za) [database](https://academic.oup.com/bioinformatics/advance-article/doi/10.1093/bioinformatics/btz658/5554700) of *M. tuberculosis* genome annotation to annotate variants in Mtb. It also takes the output of *TB Profiler* and produces a neat report that is easy to browse and search.
 
 > ### {% icon hands_on %} Hands-on: Run TB Profiler
-> 1. **TB-Profiler profile**: {% icon tool %} with the following parameters
+> 1. {% tool [TB-Profiler profile](toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1) %}: {% icon tool %} with the following parameters
 >   - *"Input File Type"*: `BAM`
 >       - *"Bam"*: `snippy on data XX, data XX, and data X mapped reads (bam)`
 >
@@ -303,7 +303,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 
 > ### {% icon hands_on %} Hands-on: Run JBrowse
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1) %} {% icon tool %} with the following parameters
 >    - *"Reference genome to display"*: `Use a genome from history`
 >       - *"Select the reference genome"*: `https://zenodo.org/record/3497110/files/MTB_ancestor_reference.fasta`
 >
