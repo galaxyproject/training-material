@@ -154,7 +154,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > > In the [GTN_LCMSpreprocessing](https://galaxy.workflow4metabolomics.org/u/mpetera/h/gtnlcmspreprocessing), this step corresponds to
 the dataset collection number 13.
 > {: .tip}
->   
+>
 {: .hands_on}
 
 You should have in your history a green Dataset collection (`mzML`) with 12 datasets in mzml format.
@@ -231,8 +231,7 @@ Note that you can either:
 > > ### {% icon hands_on %} Hands-on: xcms get a sampleMetadata file
 > >
 > > **xcms get a sampleMetadata file** {% icon tool %} with the following parameters:
-> >    - *"RData file"*: the `mzML.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
-> >      {% include snippets/select_collection.md %}
+> >    - {% icon param-collection %} *"RData file"*: the `mzML.raw.RData` collection output from **MSnbase readMSData** {% icon tool %}
 > >
 > > > ### {% icon tip %} Comment to W4M users
 > > >
@@ -403,8 +402,6 @@ Note that you can also check the chromatograms at any moment during the workflow
 >   - *"RData file"*: `mzML.raw.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv` you uploaded previously
 >
->     {% include snippets/select_collection.md %}
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > If you use this tool at a later step of XCMS workflow and provided in the Merger step a sampleMetadata with a second column containing groups
@@ -513,8 +510,6 @@ with the second column defining theses classes.
 > **xcms findChromPeaks Merger** {% icon tool %} with the following parameters:
 >   - *"RData file"*: `mzML.raw.xset.RData` (collection)
 >   - *"Sample metadata file"*: `sampleMetadata_completed.tsv`
->
->     {% include snippets/select_collection.md %}
 >
 > > ### {% icon tip %} Comment to W4M users
 > >

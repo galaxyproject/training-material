@@ -145,7 +145,7 @@ The Run Selector window is divided into several panels:
 * **`Filters List`**: In the upper left hand corner.  This is where we will refine our search.
 * **`Select`**: A summary of what was initially passed to Run Selector, and how much of that we have selected so far.  (And so far, we haven't selected any of it.)  Also note the tantalizing, but still grayed out, `Galaxy` button.
 * **`Found x Items`** Initially, this is the list of items sent to Run Selector from Entrez.  This list will shrink as we apply filters to it.
->![sra run selector](../../images/sra_run_selector.png)
+![sra run selector](../../images/sra_run_selector.png)
 
 > ### {% icon comment %} Why did the number of found items *go up?*
 >
@@ -154,12 +154,12 @@ The Run Selector window is divided into several panels:
 
 The `Filters List` in the upper left shows columns in our results that have either continuous numerical values, or 10 or less (you can change this number) distinct values in them.  **Scroll** down through the list select a few of the filters.  When a filter is selected, a *values* box appears below, listing options for this filter, and the number of runs with each option.  These values / options are pulled from the dataset metadata.  Try **selecting** a few interesting sounding filters and then **select** one or more options for each filter. Try **unselecting** options and filters. As you do this, the number of found results will decrease or increase.
 
-> > ### {% icon tip %} Tip: Use Filters to better understand the data
-> >
-> > Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
-> > First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
-> > Second, you can explore how different columns relate to each other.  Is there a relationship between `sirs_outcome` values and `disease_stage` values?
-> {: .tip}
+> ### {% icon tip %} Tip: Use Filters to better understand the data
+>
+> Filters are how you narrow the datasets under consideration for sending to Galaxy, but they are also an excellent way to understand your data:
+> First, selecting a filter is an easy way to see the range of values in a column.  You may not be able to [find documentation on what the `sirs_outcome` column means](https://www.google.com/search?q=sra+sirs_outcome), but you can possibly figure it out by seeing what values are in it.
+> Second, you can explore how different columns relate to each other.  Is there a relationship between `sirs_outcome` values and `disease_stage` values?
+{: .tip}
 
 
 > ### {% icon hands_on %} Hands-on: Narrow your results using Run Selector

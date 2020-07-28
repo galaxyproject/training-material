@@ -163,7 +163,7 @@ location /api/ {
 
 > ### {% icon tip %} Notification of Registration
 > There is no built-in way to be notified if users are registered, with external authentication or built-in. However, you could automate this easily. There is a [gxadmin](https://github.com/usegalaxy-eu/gxadmin) command we use called `gxadmin query latest-users` which Björn uses often. Other sites have other methods, e.g. Nicola's [cron script](https://gist.github.com/nsoranzo/f023e26aa60024ef6a7e3a3fe5fb2e4f) which runs daily on his server, to add new users to a group according to their email domain name.
-{: tip}
+{: .tip}
 
 # Reverting
 
