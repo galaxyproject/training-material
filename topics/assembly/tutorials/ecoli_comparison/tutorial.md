@@ -964,14 +964,17 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 
 We have embedded a copy of the resulting JBrowse here, if something went wrong during one of the steps you can always just check this output:
 
-<iframe id="embedded_jbrowse" src="jbrowse/index.html?tracklist=0" border="0" width="100%" height="500px"></iframe>
+{% capture jbrowse %}{{ site.baseurl }}/assets/jbrowse/index.html{% endcapture %}
+{% capture jbrowsedatadir %}{{ site.baseurl }}{{ page.url | remove: "tutorial.html" }}data{% endcapture %}
+
+<iframe id="embedded_jbrowse" src="{{ jbrowse }}?tracklist=0&data={{ jbrowsedatadir }}" border="0" width="100%" height="500px"></iframe>
 
 Let's start by looking at the gaps in our alignments. The deletion from our assembly is easy to see. It looks like a gap in alignments because target genomes are longer than our assembly by the amount equal to the length of the deletion. Clicking on the following links to jump to the right locations in the genome browser above:
 
 <ul>
-  <li><a href="#embedded_jbrowse" onclick="document.getElementById('embedded_jbrowse').src='jbrowse/index.html?tracklist=0&loc=LT906474.1%3A3238836..3318993&tracks=DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0'">LT906474.1:3238836..3318993</a></li>
-  <li><a href="#embedded_jbrowse" onclick="document.getElementById('embedded_jbrowse').src='jbrowse/index.html?tracklist=0&loc=CP020543.1%3A3246920..3310052&tracks=DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0'">CP020543.1:3246920..3310052</a></li>
-  <li><a href="#embedded_jbrowse" onclick="document.getElementById('embedded_jbrowse').src='jbrowse/index.html?tracklist=0&loc=CP024090.1%3A3221116..3295268&tracks=DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0'">CP024090.1:3221116..3295268</a></li>
+  <li><a href="#embedded_jbrowse" onclick="document.getElementById('embedded_jbrowse').src='{{ jbrowse }}?tracklist=0&data={{ jbrowsedatadir }}&loc=LT906474.1%3A3238836..3318993&tracks=DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0'">LT906474.1:3238836..3318993</a></li>
+  <li><a href="#embedded_jbrowse" onclick="document.getElementById('embedded_jbrowse').src='{{ jbrowse }}?tracklist=0&data={{ jbrowsedatadir }}&loc=CP020543.1%3A3246920..3310052&tracks=DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0'">CP020543.1:3246920..3310052</a></li>
+  <li><a href="#embedded_jbrowse" onclick="document.getElementById('embedded_jbrowse').src='{{ jbrowse }}?tracklist=0&data={{ jbrowsedatadir }}&loc=CP024090.1%3A3221116..3295268&tracks=DNA%2C45ccd03761795e5db829b6ab104c6a5a_0%2C0b4cc6e1931ece5bd0f487148c40ba37_0%2C36c31c84288257f526dbf55dc63fac9e_0'">CP024090.1:3221116..3295268</a></li>
 </ul>
 
 Close ups of deleted region (this region is deleted from our assembly and looks like a gap when our assembly is aligned to genomic sequences shown here). In CP0205543 and LT906474 the continuity of the region is interrupted by a small aligned region that has relatively low identity (~72%). This is a spurious alignment and can be ignored.
