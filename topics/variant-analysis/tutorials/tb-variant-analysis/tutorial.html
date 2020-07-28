@@ -366,12 +366,6 @@
     <section class="tutorial">
         <h1 data-toc-skip>M. tuberculosis Variant Analysis</h1>
         
-        <div class="alert alert-warning" role="alert">
-            <h4 class="alert-heading">Under Development!</h4>
-            <p>This tutorial is not in its final state. The content may change a lot in the next months.
-            Because of this status, it is also not listed in the topic pages.</p>
-        </div>
-        
 
         <div class="contributors-line">By: 
 
@@ -499,7 +493,21 @@
                 
 
                 
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.3496437">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
 
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/workflows/" title="Workflows" alt="M. tuberculosis Variant Analysis workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
                 
 
                 
@@ -518,6 +526,140 @@
             </a>
         </li>
     
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org" title="UseGalaxy.org (Main)">
+            UseGalaxy.org (Main)
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
     
     </ul>
 
@@ -557,7 +699,7 @@ as RefSeq entry <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962.3/">NC_0
   <h3 id="hands_on-hands-on-get-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get the data</h3>
 
   <ol>
-    <li>Import the following files from <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> or from the shared data library
+    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the following files from <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> or from the shared data library
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3960260/files/004-2_1.fastq.gz
 https://zenodo.org/record/3960260/files/004-2_2.fastq.gz
 https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_ancestral_reference.gbk
@@ -629,9 +771,10 @@ tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quali
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quality-control-of-the-input-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality control of the input datasets</h3>
+
   <ol>
     <li>
-      <p>Run <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on both of your fastq datasets</p>
+      <p>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on both of your fastq datasets</p>
 
       <ul>
         <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Short read data from your current history”</em>: select both FASTQ datasets.</li>
@@ -648,11 +791,27 @@ tutorial on <a href="/training-material/topics/sequence-analysis/tutorials/quali
         </ol>
       </blockquote>
 
+      <p>The <strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> input form looks like this. You only need to pay attention to the top part
+where <em>Short read data from your current history</em> is selected. Leave all the other parameters at their default
+values and click <em>Execute</em>.</p>
+
+      <p><img src="../../images/mt_qc.png" alt="FastQC input and dependencies" /></p>
+
       <p>When you start this job, four new datasets (one with the calculated raw
 data, another one with an html report of the findings for each input
 dataset) will get added to your history.</p>
     </li>
-    <li>Use <strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
+  </ol>
+
+</blockquote>
+
+<p>While one could examine the quality control report for each set of <span class="notranslate">reads</span> (forward and reverse) independently but it is quite useful to example them side by side using the <strong>MultiQC</strong> tool.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-combining-qc-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Combining QC results</h3>
+
+  <ol>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0"><strong>MultiQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+<span class="notranslate">galaxy</span>0</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to aggregate the raw <strong>FastQC</strong> data of all input datasets into one report
       <ul>
         <li>In <em>“Results”</em>
           <ul>
@@ -694,11 +853,20 @@ fastq datasets in the next step</li>
         </blockquote>
       </blockquote>
     </li>
-    <li>Use <strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to clean up the <span class="notranslate">reads</span> and remove the poor quality sections.
+  </ol>
+
+</blockquote>
+
+<p>As these <span class="notranslate">reads</span> look like they need a bit of trimming, we can turn to the <strong>Trimmomatic</strong> tool to clean up our data.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-quality-trimming"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quality trimming</h3>
+  <ol>
+    <li>Use <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5" title="Tested with toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to clean up the <span class="notranslate">reads</span> and remove the poor quality sections.
       <ul>
         <li><em>“Single-end or paired-end <span class="notranslate">reads</span>?”</em>: <code class="language-plaintext highlighter-rouge">Paired End (two separate input files)</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">ERR550641_1.fastq.gz</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="language-plaintext highlighter-rouge">ERR550641_2.fastq.gz</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R1/first of pair)”</em>: <code class="language-plaintext highlighter-rouge">004-2_1.fastq.gz</code></li>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTQ file (R2/second of pair)”</em>: <code class="language-plaintext highlighter-rouge">004-2_2.fastq.gz</code></li>
         <li><em>Select Trimmomatic operation to perform</em>
           <ul>
             <li>Keep the default value of <strong>Sliding window trimming</strong> and adjust the average quality required to 30</li>
@@ -735,6 +903,8 @@ fastq datasets in the next step</li>
   </ol>
 </blockquote>
 
+<p><em>Note:</em> We would normally examine our trimmed <span class="notranslate">reads</span> with <strong>FastQC</strong> and <strong>MultiQC</strong> again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.</p>
+
 <h1 id="look-for-contamination-with-kraken2">Look for contamination with Kraken2</h1>
 
 <p>We should also look for contamination in our <span class="notranslate">reads</span>. Sometimes, other sources of <span class="notranslate">DNA</span> accidentally or inadvertantly get mixed in with our sample. Any <span class="notranslate">reads</span> from non-sample sources will confound our snp analysis. <strong>Kraken 2</strong> is an effective way of looking and which species is represented in our <span class="notranslate">reads</span> and so we can easily spot possible contamination of our sample.</p>
@@ -743,7 +913,7 @@ fastq datasets in the next step</li>
   <h3 id="hands_on-hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run Kraken2</h3>
 
   <ol>
-    <li><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li>Execute <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0"><strong>Kraken2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+<span class="notranslate">galaxy</span>0</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Single or paired <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Paired</code></li>
       </ul>
@@ -804,7 +974,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
   <h3 id="hands_on-hands-on-run-snippy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run Snippy</h3>
 
   <ol>
-    <li><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0"><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Will you select a reference genome from your history or use a built-in index?”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history and build index</code></li>
         <li><em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">Mycobacterium_tuberculosis_ancestral_reference.gbk</code></li>
@@ -888,7 +1058,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-snippy-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run Snippy</h3>
   <ol>
-    <li><strong>TB Variant Filter</strong>: <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+galaxy0"><strong>TB Variant Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/tb_variant_filter/tb_variant_filter/0.1.3+<span class="notranslate">galaxy</span>0</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“VCF file to be filter”</em>: <code class="language-plaintext highlighter-rouge">snippy on data XX, data XX, and data XX mapped <span class="notranslate">reads</span> vcf file</code></li>
         <li><em>“Filters to apply”</em>: Select <code class="language-plaintext highlighter-rouge">Filter variants by region</code>, <code class="language-plaintext highlighter-rouge">Filter variants close to indels</code> and <code class="language-plaintext highlighter-rouge">Filter sites by read alignment depth</code>.</li>
@@ -924,7 +1094,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-tb-profiler"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run TB Profiler</h3>
   <ol>
-    <li><strong>TB-Profiler profile</strong>: <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+galaxy1"><strong>TB-Profiler profile</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/tbprofiler/tb_profiler_profile/2.8.4+<span class="notranslate">galaxy</span>1</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Input File Type”</em>: <code class="language-plaintext highlighter-rouge">BAM</code></li>
       </ul>
@@ -981,7 +1151,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
   <h3 id="hands_on-hands-on-run-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run JBrowse</h3>
 
   <ol>
-    <li><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+galaxy1"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.8+<span class="notranslate">galaxy</span>1</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
@@ -1102,7 +1272,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
   </ol>
 </blockquote>
 
-<p>As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants.</p>
+<p>As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using <strong>Trimmomatic</strong>, <strong>fastp</strong> or <strong>cutadapt</strong>) and perhaps use the Kraken2 output to decide which <span class="notranslate">reads</span> to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.</p>
 
 <p>We hope you enjoyed this tutorial!</p>
 
