@@ -67,18 +67,54 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >
 > 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
 >
-> 2. Select only the "Complete" genomes with the filter at the top
+> 2. Click on "Filters" at the top right:
+>
+>    ![Filter menu button](../../images/ecoli-list-filter.png)
+>
+> 3. Select only the "Complete" genomes with the filter at the top
 >
 >    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
 >
-> 3. At the top right, click "Download Table" as a `Tab-delimited (.txt)`
+> 3. At the top right, click "Download"
 >
 > 4. Upload this table to Galaxy
 >
-> 5. **Cut** {% icon tool %} columns from a table:
+> 4. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
 >
->    - *"Cut columns"*: `c11,c20`
->    - *"From"*: the genome_proks.txt file you uploaded
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 5. {% tool [Cut](Cut1) %}   columns from a table:
+>
+>    - *"Cut columns"*: `c6,c15`
+>    - *"From"*: the tabular version of the file.
+>
+> > ### {% icon question %} Questions
+> >
+> > How does your data look?
+> >
+> > > ### {% icon solution %} Solution
+> > >
+> > > It should look like this:
+> > > 1               | 2
+> > > --              | --
+> > > GCA_000005845.2 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/005/845/GCA_000005845.2_ASM584v2
+> > > GCA_000008865.2 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/008/865/GCA_000008865.2_ASM886v2
+> > > GCA_003697165.2 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/697/165/GCA_003697165.2_ASM369716v2
+> > > GCA_003018455.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/455/GCA_003018455.1_ASM301845v1
+> > > GCA_001650295.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/650/295/GCA_001650295.1_ASM165029v1
+> > > GCA_003018035.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/035/GCA_003018035.1_ASM301803v1
+> > > GCA_003112225.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/112/225/GCA_003112225.1_ASM311222v1
+> > > GCA_001695515.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/695/515/GCA_001695515.1_ASM169551v1
+> > > GCA_001721125.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/001/721/125/GCA_001721125.1_ASM172112v1
+> > > GCA_000091005.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/000/091/005/GCA_000091005.1_ASM9100v1
+> > > GCA_005037725.2 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/005/037/725/GCA_005037725.2_ASM503772v2
+> > > GCA_005037815.2 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/005/037/815/GCA_005037815.2_ASM503781v2
+> > > GCA_004358405.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/004/358/405/GCA_004358405.1_ASM435840v1
+> > > GCA_003018575.1 | ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/003/018/575/GCA_003018575.1_ASM301857v1
+> > >
+> > {: .solution}
+> {: .question}
+>
 >
 {: .hands_on}
 
@@ -122,22 +158,16 @@ This can be done as a two step process where we first copy the end part of the e
 >    - *"From Column"*: `B`
 >    - *"From Column"*: `C`
 >    - Click `Apply`
-> 5. From **Rules**, select `Remove Columns(s)`
->    - *"From Column"*: `B`, `C`
->    - Click `Apply`
 > 6. From **Column**, select `Fixed Value`
 >    - *"Value"*: `_genomic.fna.gz`
 >    - Click `Apply`
 > 7. From **Column**, select `Concatenate Columns`
->    - *"From Column"*: `B`
->    - *"From Column"*: `C`
->    - Click `Apply`
-> 8. From **Rules**, select `Remove Columns(s)`
->    - *"From Column"*: `B`, `C`
+>    - *"From Column"*: `D`
+>    - *"From Column"*: `E`
 >    - Click `Apply`
 > 9. From **Rules** menu, select `Add / Modify Column Definitions`
 >    - `Add Definition`, `List Identifier(s)`, Select Column `A`
->    - `Add Definition`, `URL`, Column `B`
+>    - `Add Definition`, `URL`, Column `F`
 >    - Click `Apply`
 > 10. Set the **Type** in the bottom left to `fasta.gz`
 > 11. Give the upload a name like `Complete genomes`
