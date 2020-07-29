@@ -510,6 +510,20 @@ When viewed through Galaxy, students will see:
 
 <span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
 
+### How to find these IDs?
+
+The first and easiest way is to simply use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
+
+The alternative is to figure out the ID for the tool you want to use:
+
+1. Find your tool in galaxy, and click to access the tool form.
+2. Click on Options at the top right
+3. Click on Share
+4. The URL has the tool ID. e.g. `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+
+![Finding the tool ID](../../images/tool-id.png)
+
 ## **Questions** and **solution** boxes
 
 Questions can be added to force trainees to think about what they are currently doing, and to put things in perspective.
