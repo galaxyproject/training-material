@@ -512,15 +512,15 @@ When viewed through Galaxy, students will see:
 
 ### How to find these IDs?
 
-The first and easiest way is to simply use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
+The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
 
 The alternative is to figure out the ID for the tool you want to use:
 
-1. Find your tool in galaxy, and click to access the tool form.
+1. Find your tool in Galaxy, and click to access the tool form.
 2. Click on Options at the top right
 3. Click on Share
-4. The URL has the tool ID. e.g. `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
-5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
 
 ![Finding the tool ID](../../images/tool-id.png)
 
