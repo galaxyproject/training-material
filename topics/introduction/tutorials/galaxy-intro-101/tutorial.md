@@ -519,10 +519,12 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 5. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
->
->    > ### {% icon comment %} Potential workflow issues
->    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input. If you see an "Invalid column choice" error you will need to specify which column you want to use.
->    {: .comment}
+
+> > ### {% icon comment %} Potential workflow issues
+> >
+> >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input. 
+> >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
+> {: .comment}
 >
 > 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
