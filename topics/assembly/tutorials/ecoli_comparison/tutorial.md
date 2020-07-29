@@ -208,37 +208,32 @@ Because phiX173 is around 5,000bp, we can remove those sequences by setting a mi
 
 > ### {% icon hands_on %} Hands-on: Fixing assembly
 >
-> 1. **Filter sequences by length** {% icon tool %} with the following parameters:
+> 1. {% tool [Filter sequences by length](toolshed.g2.bx.psu.edu/repos/devteam/fasta_filter_by_length/fasta_filter_by_length/1.2) %} with the following parameters:
 >   - *"Fasta file"*: the dataset you've just uploaded. (`https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna`).
 >   - *"Minimal length"*: `10000`
 >
 >
-> 2. **Text transformation** {% icon tool %} with sed:
+> 2. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} in entire line:
 >   - *"File to process"*: the output of the Filter sequences by length {% icon tool %}
->   - *"SED program"*: `s/^>1.*$/>Ecoli_C/`
+>   - *"1: Replacement"*
+>     - *"Find Pattern"*: `^>1.*`
+>     - *"Replace with"*: `>Ecoli_C`
 >
 >   {% include snippets/rename_dataset.md name="E. coli C" %}
 >
->   > ### {% icon tip %} SED and Regular Expressions
+>   > ### {% icon tip %} Regular Expressions
 >   >
 >   > The program we just entered is a so-called [Regular Expression](https://en.wikipedia.org/wiki/Regular_expression)
 >   >
->   > The expression `s/^>1.*$/>Ecoli_C/` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
+>   > The expression `^>1.*` contains several pieces that you need to understand. Let's write it top-to-bottom and explain:
 >   >
->   > - `s` - tells SED to *Substitute*
->   > - `/` - opens a section of the commands telling SED *what* to substitute
->   > - `^` - tell SED to start looking at *the beginning* of each line
+>   > - `^` - says start looking at *the beginning* of each line
 >   > - `>` - is the first character we want to match. Remember that name of the sequence in FASTA files starts with `>`
 >   > - `1` - is the number present is our old name (`>1 length=4576293 depth=1.00x circular=true` to `>Ecoli_C`)
 >   > - `.` - dot has a special meaning. It signifies *any* character
 >   > - `*` - is a *quantifier*. From [Wikipedia](https://en.wikipedia.org/wiki/Regular_expression): "The asterisk indicates zero or more occurrences of the preceding element. For example, ab*c matches `ac`, `abc`, `abbc`, `abbbc`, and so on."
->   > - `$` - signifies *the end* of a line
->   > - `/` - is *the end* of the *what to substitute* section. It also serves as the beginning of *what to substitute WITH* section
->   > - `>` - is the required element of the FASTA sequence name
->   > - `Ecoli_C` is the *name* we want the sequence to have
->   > - `/` - is the end of the SED command
 >   >
->   >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*$` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
+>   >So in short we are replacing `>1 length=4576293 depth=1.00x circular=true` with `>Ecoli_C`. The *Regular expression* `^>1.*` is used here to represent `>1 length=4576293 depth=1.00x circular=true`.<br>
 >   >Detailed description of regular expressions is outside of the scope of this tutorial, but there are other great resources. Start with [Software Carpentry Regular Expressions tutorial](http://v4.software-carpentry.org/regexp/index.html).
 >   {: .tip}
 >
