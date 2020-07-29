@@ -183,26 +183,26 @@ Now we have all complete *E. coli* genomes in Galaxy's history. It is time to do
 
 Before starting any analyses we need to upload the assembly produced in [Unicycler tutorial]({{site.baseurl}}/topics/assembly/tutorials/unicycler-assembly/tutorial.html) from Zenodo:
 
- > ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
- >
- > 1. **Upload** {% icon tool %}:
- >   - Click **Paste/Fetch data** button (Bottom of the interface box)
- >   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
- >   - *"Type"*: `fasta`
- >   - Click **Start**
+> ### {% icon hands_on %} Uploading *E. coli* assembly into Galaxy
+>
+> 1. {% tool [Upload](upload1) %}  :
+>   - Click **Paste/Fetch data** button (Bottom of the interface box)
+>   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
+>   - *"Type"*: `fasta`
+>   - Click **Start**
 {: .hands_on}
 
- > ### {% icon tip %} Tip: Finding tools mentioned in this tutorial
- >Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
- >![Tool search](../../images/tool_search.png "Use search box to find tools!")
- {: .tip}
+> ### {% icon tip %} Tip: Finding tools mentioned in this tutorial
+>Galaxy instances contain hundreds of tools. As a result, it can be hard to find tools mentioned in tutorials such as this one. To help with this challenge, Galaxy has a search box at the top of the left panel. Use this box to find the tools mentioned here.
+>![Tool search](../../images/tool_search.png "Use search box to find tools!")
+{: .tip}
 
 The assembly we just uploaded has two issues that need to be addressed before proceeding with our analysis:
 
- 1. It contains two sequences: the one of *E. coli* C genome (the one we really need) and another representing phage phiX174 (a by product of Illumina sequencing where it is used as a spike-in DNA).
- 2. Sequences have unwieldy names like `>1 length=4576293 depth=1.00x circular=true`. We need to rename it to something more meaningful.
+1. It contains two sequences: the one of *E. coli* C genome (the one we really need) and another representing phage phiX174 (a by product of Illumina sequencing where it is used as a spike-in DNA).
+2. Sequences have unwieldy names like `>1 length=4576293 depth=1.00x circular=true`. We need to rename it to something more meaningful.
 
- Let's fix these two problems.
+Let's fix these two problems.
 
 Because phiX173 is around 5,000bp, we can remove those sequences by setting a minimum length of 10,000:
 
