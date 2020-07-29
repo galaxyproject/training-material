@@ -76,8 +76,8 @@ This software is based on different algorithms that have been published, and is 
 Since sometimes a couple of pictures is worth a thousand words, you will find in the following slides some material to help
 you understand how XCMS works:
 [link to slides](../../tutorials/lcms-preprocessing/slides.html).
-This document is refered to as "Check slides from X to X" in the present training material.
-As an example, [check slides 3 and 4](../../tutorials/lcms-preprocessing/slides.html#3)
+This document is refered to as "Check the next X slides" in the present training material.
+As an example, [check the next 2 slides](../../tutorials/lcms-preprocessing/slides.html#raw-to-matrix)
 for complementary material about XCMS R package.
 
 
@@ -440,7 +440,7 @@ data in centroid mode. In this tutorial, you will practice using the centWave al
 
 > ### {% icon comment %} How the centWave algorithm works
 >
-> [Check slides from 5 to 11](../../tutorials/lcms-preprocessing/slides.html#5)
+> [Check the next 7 slides](../../tutorials/lcms-preprocessing/slides.html#findchrompeaks)
 > to help you understand how the centWave algorithm works.
 > Remember that these steps are performed for each of your data files independently.
 >  - Firstly, the algorithm detects series of scans with close values of m/z. They are called 'region of interest' (ROI).
@@ -535,7 +535,7 @@ To obtain such a table, we need to determine, among the individual ion lists, wh
 Various methods are available to proceed to the grouping step. In this tutorial, we will focus on the 'PeakDensity' method 
 that performs peak grouping based on time dimension peak densities.
 
-[Check slides from 12 to 19](../../tutorials/lcms-preprocessing/slides.html#12),
+[Check the next 8 slides](../../tutorials/lcms-preprocessing/slides.html#groupchrompeaks),
 you will find additional material to help you understand the grouping algorithm.
 
 The group function aligns ions extracted with close retention time and close m/z values in the different samples. In order to define this
@@ -699,7 +699,7 @@ Sometimes with LC-MS techniques, a deviation in retention time occurs from a sam
 inject large sequences of samples.
 
 This optional step aims at correcting retention time drift for each peak among samples. The XCMS package provides two algorithms to do so. 
-[Check slides from 20 to 22](../../tutorials/lcms-preprocessing/slides.html#20),
+[Check the next 4 slides](../../tutorials/lcms-preprocessing/slides.html#adjustrtime),
 you will find additional material to help you understand the retention time correction algorithms.
 In this training material we will focus on the "PeakGroups" method. 
 
@@ -780,7 +780,7 @@ Parameters for this second group step are expected to be similar to the first gr
 since retention times are supposed to be less variable inside a same peak group now, in some cases it can be relevant to
 lower a little the bandwidth parameter.
 
-[Check slide 23](../../tutorials/lcms-preprocessing/slides.html#23)
+[Check the next slide](../../tutorials/lcms-preprocessing/slides.html#beforeafterrt)
 to get an illustration of grouping before/after retention time correction.
 
 > ### {% icon hands_on %} Hands-on: second 'xcms groupChromPeaks (group)'
@@ -855,7 +855,7 @@ of the proportion of NA in your dataset at this step.
 The idea of this XCMS step is to integrate signal in the mz-rt area of an ion (chromatographic peak group) for samples in which no
 chromatographic peak for this ion was identified.
 To do so, you can use the *xcms fillChromPeaks (fillPeaks)* tool
-([check slide 24](../../tutorials/lcms-preprocessing/slides.html#24)).
+([check the next slide](../../tutorials/lcms-preprocessing/slides.html#fillchrompeaks)).
 
 However, before any automatic filling of missing values, you may be interested in an overview of the NA distribution in your data.
 Indeed, depending on you extraction parameters, you may have an unexpectedly high proportion of NAs in your data. If that is the case,
