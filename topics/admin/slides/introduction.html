@@ -91,7 +91,13 @@ This depends:
 
 If possible, run the Galaxy server **separate** from Galaxy jobs
 
-**Storage** will be the biggest concern
+**Storage** will usually be the biggest concern
+
+???
+
+- Depends on your available infrastructure
+- If you are storage limited, can be addressed by policy of deleting old/unused histories
+- If you are compute limited, can be addressed with queue limits
 
 ---
 # Server Hardware Requirements
@@ -183,11 +189,8 @@ In future:
 # Deployment Best Practices
 
 - **Use configuration management**
-  - [Ansible](http://docs.ansible.com) ([tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html))
-  - [Chef](https://www.chef.io/)
-  - [Puppet](https://puppet.com)
-  - [SaltStack](https://saltstack.com)
-  - [CFEngine](https://cfengine.com)
+  - [Ansible](http://docs.ansible.com) for which Galaxy Project maintains roles ([tutorial](https://training.galaxyproject.org/training-material/topics/admin/tutorials/ansible/slides.html))
+  - Other systems are possible (Chef, Puppet, SaltStack, CFEngine) but do not have project-maintained roles.
 
 - Whether you use configuration management or not, *record every change you make on a version control system* (e.g. git):
   - Large, complex deployments grow organically
