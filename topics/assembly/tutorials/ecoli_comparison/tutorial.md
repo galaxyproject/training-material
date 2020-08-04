@@ -258,10 +258,13 @@ Now everything is loaded and ready to go. We will now align our assembly against
 > ### {% icon hands_on %} Hands-on: Running LASTZ
 > 1. {% tool [LASTZ](toolshed.g2.bx.psu.edu/repos/devteam/lastz/lastz_wrapper_2/1.3.2) %} with the following parameters:
 >   - *"Select TARGET sequence(s) to align against"*: `from your history`
->   - {% icon param-collection %} *"Select a reference dataset"*: the *E. coli* genomes we uploaded earlier (collection input)
->   - {% icon param-file %} *"Select QUERY sequence(s)"*: our assembly which was prepared in the previous step.
->   - *"Perform chaining of HSPs with no penalties"*: `Yes` (in **Chaining** section)
->   - *"Specify the output format"*: `blastn` (in **Output** section)
+>   - {% icon param-collection %} *"Select a reference dataset"*: the "Complete genomes" collection we uploaded earlier
+>   - {% icon param-file %} *"Select QUERY sequence(s)"*: our *E. coli* assembly which was prepared in the previous step.
+>   - **Chaining**
+>        - *"Perform chaining of HSPs with no penalties"*: `Yes`
+>   - **Output**
+>        - *"Specify the output format"*: `blastn`
+>
 {: .hands_on}
 
 Note that because we started LASTZ on *a collection* of *E. coli* genomes, it will output alignment information as *a collection* as well. A collection is simply a way to represent large sets of similar data in a compact way within Galaxy's interface.
