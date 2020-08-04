@@ -704,9 +704,9 @@ The 12th column of the fields chosen by us for [LASTZ run](#hands_on-hands-on-al
 >    - *"From"*: the output of **collection collapse** (a step before the last step!) (`Collapse Collection on data ...`)
 >
 > 6. {% tool [Concatenate datasets tail-to-head](cat1) %}
->    - *"Concatenate Dataset"*: `Target Alignments`
+>    - *"Concatenate Dataset"*: `Query Alignments`
 >    - Click "Insert Dataset" button
->    - *"1: Dataset"*: `Query Alignments`
+>    - *"1: Dataset"*: `Target Alignments`
 >
 > 7. Change the datatype of the output to BED and rename the output "Target & Query Alignments"
 >
