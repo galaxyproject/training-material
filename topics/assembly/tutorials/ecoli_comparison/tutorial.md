@@ -794,9 +794,9 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
 >
 >    As we mentioned above these datasets lack genome IDs such as `CP020543.1`. However, the individual elements in the collection we've created already have genome IDs. We will leverage this when collapsing this collection into a single dataset:
 >
-> 4. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %}   with the following parameters:
+> 4. {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.2) %}   with the following parameters:
 >   - *"Collection of files to collapse"*: the output of the previous step (`Cut on collection...`)
->   - *"Append File name"*: `Yes`
+>   - *"Prepend File name"*: `Yes`
 >   - *"Where to add dataset name"*: `Same line and each line in dataset`
 >
 > 5. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} in a specific column
