@@ -682,7 +682,7 @@ The 12th column of the fields chosen by us for [LASTZ run](#hands_on-hands-on-al
 >    > In the first BED, column 1 will contain names of targets (`CP020543.1`, `CP024090.1`, and `LT906474.1`).
 >    > In the second BED, column 1 will contain name of our assembly: `Ecoli_C`.
 >    >
->    > To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 13, 11, and 8. To produce the query BED columns 7, 9, 10, 13, 11, 8 will be cut.
+>    > To create the first BED we will cut six columns from the dataset produced at the last step. Specifically, to produce the target BED we will cut columns 2, 4, 5, 14, 12, and 8. To produce the query BED columns 7, 9, 10, 14, 12, 8 will be cut.
 >    {: .details}
 >
 >    > ### {% icon warning %} There are multiple **CUT** tools!
