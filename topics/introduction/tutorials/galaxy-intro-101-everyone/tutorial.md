@@ -642,39 +642,53 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    {% include snippets/add_tag.md %}
 {: .hands_on}
 
-The `diamonds` data set comes from the well-known ggplot2 package developed by Hadley and was initially collected from the Diamond Search Engine in 2008.
-For this training, we have created a simpler dataset by selecting a subset of columns.
-The dataset contains 53940 observations and 5 variables within the 4 Cs (carat, cut, color and clarity):
-  - **Carat** refers to the weight of the diamond when measured on a scale
-  - **Cut** applies to the quality of the cut (Fair, Good, Very Good, Premium, Ideal)
-  - **Color**, is a qualitative data graded on a letter scale from D to Z (D being the best, known as colorless), color describes the overall tint, or lack thereof, of the diamond, from colorless/white to yellow. In our dataset, the color column is encoded as an integer with 1 for D and 23 for Z.
-  - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds, a measurement of how clear the diamond is: 1 (Flawless), 2 (Internally Flawless), 3 (VVS1), 4 (VVS2), 5 (VS1), 6 (VS2), 7 (SI1), 8 (SI2), 9 (I1), 10 (I2) and 11 (I3). In term of quality, the "ideal" diamond would be Flawless (1) while the worst would be I3 (11).
+The `diamonds` dataset comes from the well-known [ggplot2](https://ggplot2.tidyverse.org/reference/diamonds.html) package developed by Hadley Wickham and was initially collected from the Diamond Search Engine in 2008.
+The original dataset consists of 53940 specimen of diamonds, for which it lists the prices and various properties.
+For this training, we have created a simpler dataset from the original, in which only the five columns relating to the price and the so-called 4 Cs (carat, cut, color and clarity) of diamond characteristics have been retained.
 
-![4 Cs](../../images/4cs-of-diamond-buying.jpg "The 4 Cs of diamond of diamonds.")
+> ### {% icon comment %} The 4 Cs of diamond grading
+> According to the [GIA's (Gemological Institute of America) diamond grading system](https://4cs.gia.edu/wp-content/uploads/2013/03/All-Scales.jpg)
+> - **Carat** refers to the weight of the diamond when measured on a scale
+> - **Cut** refers to the quality of the cut and can take the grades *Fair*, *Good*, *Very Good*, *Premium* and *Ideal*
+> - **Color** describes the overall tint, or lack thereof, of the diamond from colorless/white to yellow and is given on a letter scale ranging from D to Z (D being the best, known as colorless).
+> - **Clarity** describes the amount and location of naturally occuring "inclusions" found in nearly all diamonds on a scale of eleven grades ranging from *Flawless* (the ideal situation) to *I3* (Included level 3, the worst quality).
+{:.comment}
+
+As a further simplification, our training dataset has the qualities in the *color* and *clarity* columns re-encoded as integer values (1-23 for color qualities D-Z, and 1-11 for the clarity levels from *Flawless* to *I3*).
+With this adjustment, we can reuse our workflow on the data, and analyze and visualize it following the same steps as we took for the Iris dataset.
 
 > ### {% icon hands_on %} Hands-on: Run workflow
 >
-> 1. We wish to analyze diamonds by their 4 Cs by recycling our workflow.
+> To analyze the diamonds price/4 Cs dataset by reusing our workflow:
 >
-> 2. Open the **workflow menu** (top menu bar).
+> 1. Open the **workflow menu** (top menu bar).
 >    - Find the workflow you made in the previous section,
 >    - Select the option `Run`.
 >    - The central panel will change to allow you to configure and launch the workflow.
 >
-> 3. Select the appropriate dataset for the input.
+> 2. Select the `diamonds` dataset as the input dataset.
 >
-> 4. Customize the first scatter plot:
->    - Change `Plot title` to **Diamond price as a function of carat**
->    - Change `Label for x axis` to **weight of the diamond (carat)**
->    - Change `Label for y axis` to **Price (US dollars)**
+> 3. Customize the first scatter plot:
+>
+>    This step is preconfigured to plot column 1 along the x and column 2 along the y axis, while grouping by column 5.
+>    This is fine and will result in *price* getting plotted against *carat* with grouping by *cut*, but you would want to adjust the plot title and axis labels accordingly:
+>
+>    - Change *"Plot title"* to `Diamond price as a function of carat with cut as a factor`
+>    - Change *"Label for x axis"* to `Weight of the diamond (carat)`
+>    - Change *"Label for y axis"* to `Price (US dollars)`
 >
 >    ![Customize scatter plot](../../images/customize_diamond_plot.png)
 >
-> 5. Customize the second scatter plot. Instead of plotting color as a function of clarity, we would rather plot the price according to carat with clarity as factor.
->    - Change `Plot title` to **Diamond price as a function of carat with clarity as a factor**
->    - Change `Label for x axis` to **weight of the diamond (carat)**
->    - Change `Label for y axis` to **Price (US dollars)**
->    - And finally in `Advanced Options` change `column differentiating the different groups` to **4** (Clarity).
+> 4. Customize the second scatter plot.
+>
+>    This one is preconfigured to plot column 3 along the x and column 4 along the y axis, which, for our new data, would plot *color* as a function of *clarity*. However, we would rather want to stick to plotting *price* against weight in *carat* as in the first plot, but group by *clarity* instead of by *cut* this time, so:
+>
+>    - Change *"Column to plot on x-axis"* to `1`
+>    - Change *"Column to plot on y-axis"* to `2`
+>    - Change *"Plot title"* to `Diamond price as a function of carat with clarity as a factor`
+>    - Change *"Label for x axis"* to `Weight of the diamond (carat)`
+>    - Change *"Label for y axis"* to `Price (US dollars)`
+>    - And finally in *"Advanced Options"* change *"column differentiating the different groups"* to `4` (clarity).
 >
 > 6. Click `Run workflow`.
 >
