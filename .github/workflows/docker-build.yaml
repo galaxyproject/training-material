@@ -1,0 +1,19 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: 
+      - docker-ci
+jobs:
+  admin-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -t quay.io/galaxy/admin-training -f topics/admin/docker/Dockerfile .
+  assembly-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -t quay.io/galaxy/assembly-training -f topics/assembly/docker/Dockerfile .
