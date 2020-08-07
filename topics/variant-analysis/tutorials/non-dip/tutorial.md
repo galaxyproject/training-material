@@ -51,10 +51,8 @@ Zenodo contains [datasets representing a child and a mother](https://doi.org/10.
 For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
 
 > ### {% icon hands_on %} Hands-on: Getting the data
-
-> ### Option 1: Data upload from a Galaxy Library
 >
->
+> Option 1: Data upload from a Galaxy Library
 >
 >  * Create and name a new history for this tutorial.
 >
@@ -69,11 +67,7 @@ For this tutorial we have prepared a subset of data previously [published](http:
 >    https://zenodo.org/record/1251112/files/raw_mother-ds-2.fq
 >    ```
 >
-{: .hands_on}
-
-> ### Option 2: Data upload from a Galaxy Library
->
->
+> Option 2: Data upload from a Galaxy Library
 >
 > ![Data upload from a Galaxy Library](../../images/mt_lib.png)
 >

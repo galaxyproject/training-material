@@ -157,7 +157,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 	./bin/check-broken-boxes
 .PHONY: check-broken-boxes
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
+check: check-yaml check-frontmatter check-html-internal check-html check-broken-boxes check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
 
 lint: ## run all linting checks
