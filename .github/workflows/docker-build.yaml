@@ -15,6 +15,45 @@ jobs:
         username: ${{ secrets.docker_registry_username }}
         password: ${{ secrets.docker_registry_password }}
         registry: quay.io
-        repository: galaxy/galaxy/assembly-training
+        repository: galaxy/admin-training
+        tags: 20.05
+        dockerfile: topics/admin/docker/Dockerfile
+  assembly-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/assembly-training
         tags: 20.05
         dockerfile: topics/assembly/docker/Dockerfile
+  climate-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/climate-training
+        tags: 20.05
+        dockerfile: topics/climate/docker/Dockerfile
+  computational-chemestry-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/computational-chemestry-training
+        tags: 20.05
+        dockerfile: topics/computational-chemestry/docker/Dockerfile
