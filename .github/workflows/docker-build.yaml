@@ -44,7 +44,7 @@ jobs:
         repository: galaxy/climate-training
         tags: 20.05
         dockerfile: topics/climate/docker/Dockerfile
-  computational-chemestry-docker:
+  computational-chemistry-docker:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -54,6 +54,123 @@ jobs:
         username: ${{ secrets.docker_registry_username }}
         password: ${{ secrets.docker_registry_password }}
         registry: quay.io
-        repository: galaxy/computational-chemestry-training
+        repository: galaxy/computational-chemistry-training
         tags: 20.05
-        dockerfile: topics/computational-chemestry/docker/Dockerfile
+        dockerfile: topics/computational-chemistry/docker/Dockerfile
+  contributing-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/contributing-training
+        tags: 20.05
+        dockerfile: topics/contributing/docker/Dockerfile
+  dev-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/dev-training
+        tags: 20.05
+        dockerfile: topics/dev/docker/Dockerfile
+  ecology-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/ecology-training
+        tags: 20.05
+        dockerfile: topics/ecology/docker/Dockerfile
+  epigenetics-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/epigenetics-training
+        tags: 20.05
+        dockerfile: topics/epigenetics/docker/Dockerfile
+  genome-annotation-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/genome-annotation-training
+        tags: 20.05
+        dockerfile: topics/genome-annotation/docker/Dockerfile
+  imaging-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/imaging-training
+        tags: 20.05
+        dockerfile: topics/imaging/docker/Dockerfile
+  introduction-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/introduction-training
+        tags: 20.05
+        dockerfile: topics/introduction/docker/Dockerfile
+  metabolomics-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/metabolomics-training
+        tags: 20.05
+        dockerfile: topics/metabolomics/docker/Dockerfile
+  metagenomics-docker:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build and push to Docker Hub
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.docker_registry_username }}
+        password: ${{ secrets.docker_registry_password }}
+        registry: quay.io
+        repository: galaxy/metagenomics-training
+        tags: 20.05
+        dockerfile: topics/metagenomics/docker/Dockerfile

@@ -73,7 +73,7 @@ do
             n=0
             until [ $n -ge 3 ]
             do
-                shed-tools install -t $tutdir/workflows/wftools.yaml -a $API_KEY && break
+                shed-tools install -t $tutdir/workflows/wftools.yaml -g "http://localhost:$PORT" -a $API_KEY && break
                 n=$[$n+1]
                 sleep 5
                 echo " - Retrying shed-tools install "
@@ -81,7 +81,7 @@ do
             rm $tutdir/workflows/wftools.yaml          
         done
         echo " - Installing workflows"
-        workflow-install --publish_workflows --workflow_path $tutdir/workflows/ -g $galaxy_instance -a $API_KEY
+        workflow-install --publish_workflows --workflow_path $tutdir/workflows/ -g "http://localhost:$PORT" -a $API_KEY
     else
         echo " - No workflows to install (no directory named workflows present)"
     fi
