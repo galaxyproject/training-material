@@ -8,12 +8,9 @@ questions:
   - What are the quality parameters to check for a dataset?
   - How to improve the quality of a dataset?
 objectives:
-  - Manipulate FASTQ files
-  - Assess quality from a FASTQ file
-  - Use FastQC tool
-  - Understand FastQC output
-  - Use tools for quality correction
-  - Use a tool to aggregate FastQC output
+  - Assess FASTQ quality using FASTQE 🧬😎 
+  - Perform quality correction with Cutadapt
+  - Evaluate additional quality metrics with FASTQC and MultiQC
   - Process single-end and paired-end data
 follow_up_training:
   -
@@ -24,12 +21,14 @@ follow_up_training:
 time_estimation: "1H30M"
 level: Introductory
 key_points:
-  - Run quality control on every dataset before running any other bioinformatics analysis
-  - Take care of the parameters used to improve the sequence quality
-  - Re-run FastQC to check the impact of the quality control
+  - Perform quality control on every dataset before running any other bioinformatics analysis
+  - Assess the quality metrics and improve quality if necessary
+  - Check the impact of the quality control
+  - Different tools are available to provide additional quality metrics
   - For paired-end reads analyze the forward and reverse reads together
 contributors:
   - bebatut
+  - mblue9
 ---
 
 # Introduction
@@ -51,7 +50,9 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 {: .agenda}
 
-# Inspect a raw sequence file
+# Understanding basic QC
+
+## Inspect a raw sequence file
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -60,10 +61,10 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `GSM461178_untreat_paired_subset_1.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
+> 2. Import `female_oral2.fastq-4143.gz` from [Zenodo](https://zenodo.org/record/3977236) or from the data library (ask your instructor)
 >
 >    ```
->    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+>    https://zenodo.org/record/3977236/files/female_oral2.fastq-4143.gz
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -71,7 +72,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 4. Rename the file to `reads_1`
+> 4. Rename the file to `reads`
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -99,13 +100,13 @@ Line  | Description
 So for example, the first sequence in our file is:
 
 ```
-@SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-GTGGATATGGATATCCAAATTATATTTGCATAATTTG
-+SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
+@M00970:337:000000000-BR5KF:1:1102:17745:1557 1:N:0:CGCAGAAC+ACAGAGTT
+GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA
++
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(
 ```
 
-It means that the fragment named `SRR031716.1` corresponds to the DNA sequence `GTGGATATGGATATCCAAATTATATTTGCATAATTTG` and this sequence has been sequenced with a quality `IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII`.
+It means that the fragment named `@M00970` corresponds to the DNA sequence `GTGCCAGCCGCCGCGGTAGTCCGACGTGGCTGTCTCTTATACACATCTCCGAGCCCACGAGACCGAAGAACATCTCGTATGCCGTCTTCTGCTTGAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAGAAGCAAATGACGATTCAAGAAAGAAAAAAACACAGAATACTAACAATAAGTCATAAACATCATCAACATAAAAAAGGAAATACACTTACAACACATATCAATATCTAAAATAAATGATCAGCACACAACATGACGATTACCACACATGTGTACTACAAGTCAACTA` and this sequence has been sequenced with a quality `GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGFGGGFGGGGGGAFFGGFGGGGGGGGFGGGGGGGGGGGGGGFGGG+38+35*311*6,,31=******441+++0+0++0+*1*2++2++0*+*2*02*/***1*+++0+0++38++00++++++++++0+0+2++*+*+*+*+*****+0**+0**+***+)*.***1**//*)***)/)*)))*)))*),)0(((-((((-.(4(,,))).,(())))))).)))))))-))-(`.
 
 But what does this quality score mean?
 
@@ -139,19 +140,184 @@ Phred Quality Score | Probability of incorrect base call | Base call accuracy
 {: .question}
 
 > ### {% icon comment %} Comment
-> The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. **FastQC** {% icon tool %}, the tool we will use in the next step, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).
+> The current lllumina (1.8+) uses Sanger format (Phred+33). If you are working with older datasets you may encounter the older scoring schemes. **FastQC** {% icon tool %}, a tool we will use later in this tutorial, can be used to try to determine what type of quality encoding is used (through assessing the range of Phred values seen in the FASTQ).
 {: .comment}
 
 When looking at the file in Galaxy, it looks like most the nucleotides have a high score (`I` corresponding to a score 40). Is it true for all sequences? And along the full sequence length?
 
-# Assess the Read Quality
+## Assess quality with FASTQE 🧬😎
 
-To estimate sequence quality along all sequences, we now use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). It is an open-source tool that provides a simple way to quality control raw sequence data. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
+To estimate sequence quality along all sequences, we now use [FASTQE](https://fastqe.com/). It is an open-source tool that provides a simple way to quality control raw sequence data and print them as emoji. You can use it to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis.
+
+> ### {% icon hands_on %} Hands-on: Quality check
+>
+> 1. Run **FASTQE** {% icon tool %} with the following parameters
+>    - {% icon param-files %} *"FastQ data"*: `reads`
+>
+> 2. Inspect the generated HTML file
+>
+{: .hands_on}
+
+Rather than looking at quality scores for each individual read, FASTQE looks at quality collectively across all reads within a sample and calculates the mean, maximum and minimum for each nucleotide position along the length of the reads. Below shows the mean values for this dataset.
+
+![FASTQE before](../../images/quality-control/fastqe_before.png "FASTQE mean scores")
+
+You can see the score for each emoji [here](https://github.com/fastqe/fastqe#scale).
+
+> ### {% icon question %} Questions
+>
+> What is the lowest mean score in this dataset? 
+>
+> > ### {% icon solution %} Solution
+> > The lowest score in this dataset is 😿 13.
+> {: .solution }
+{: .question}
+
+
+## Improve quality with Cutadapt
+
+The quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. In general, quality treatments include:
+
+1. Cutting/Trimming/masking sequences
+    - from low quality score regions
+    - beginning/end of sequence
+    - removing adapters
+2. Filtering of sequences
+    - with low mean quality score
+    - too short
+    - with too many ambiguous (N) bases
+
+To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html), a tool that enhances sequence quality by automating adapter trimming as well as quality control.
+
+> ### {% icon hands_on %} Hands-on: Improvement of sequence quality
+>
+> 1. Run **Cutadapt** {% icon tool %} with the following parameters
+>    - *"Single-end or Paired-end reads?"*: `Single-end`
+>       - {% icon param-file %} *"Reads in FASTQ format"*: `reads` (Input dataset)
+>
+>          > ### {% icon tip %} Tip: Files not selectable?
+>          > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the pencil symbol.
+>          {: .tip}
+>
+>       - In *Read 1 Options*
+>
+>          > ### {% icon comment %} Known adapters
+>          > We will see known adapters are detected in the dataset in the FastQC report below.
+>          > If you see or know which adapter sequences were used during library preparation, provide their sequences to Cutadapt.
+>          {: .comment}
+>
+>    - In *"Filter Options"*
+>       - *"Minimum length"*: `20`
+>
+>           It will remove reads that are shorter than 20 bp, after trimming of adapters and bad regions.
+>
+>    - In *"Read Modification Options"*
+>       - *"Quality cutoff"*: `20`
+>
+>           After adapter removal (if any), we choose to remove ends ( 5' and/or 3') with low-quality, here below 20 in quality).
+>
+>    - In *"Output Options"*
+>       - *"Report"*: `Yes`
+>
+> 2. Inspect the generated txt file (`Report`)
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many reads have been found with adapters?
+>    > 2. How many basepairs have been removed from the reads because of bad quality?
+>    > 3. How many reads have been removed because they were too short?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. 0 reads with adapters
+>    > > 2. 84,277 bp (35.1%) (`Quality-trimmed:`)
+>    > > 3. 0 sequences
+>    > {: .solution }
+>    {: .question}
+>
+> 2. **FASTQE** {% icon tool %}: Re-run **FASTQE** on the quality-controlled data, and inspect the new FASTQE report
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. How many sequences have been removed?
+>    > 2. Has sequence quality been improved?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. Before Cutadapt, the dataset comprised 812 sequences. After Cutadapt, there are 812 sequences
+>    > > 2. The quality score emojis look better (happier) now.
+>    > >
+>    > {: .solution }
+>    {: .question}
+{: .hands_on}
+
+We improved the quality of the dataset with trimming and filtering step (in a reasonable way to not lose too much information). Compare the FASTQE output to the previous one before trimming above.
+
+![FASTQE before](../../images/quality-control/fastqe_after.png "FASTQE mean scores after trimming")
+
+> ### {% icon comment %} Bad quality sequences
+> If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).
+>
+> You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you loose them.
+{: .comment}
+
+> ### {% icon details %} Trimming with Cutadapt
+>
+> One of the biggest advantage of Cutadapt compared to other trimming tools (e.g. TrimGalore!) is that it has a good [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
+>
+> Cutadapt quality trimming algorithm consists of three simple steps:
+>
+> 1. Subtract the chosen threshold value from the quality value of each position
+> 2. Compute a partial sum of these differences from the end of the sequence to each position
+>    (as long as the partial sum is negative)
+> 3. Cut at the minimum value of the partial sum
+>
+> In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values
+>
+> ```
+> 42 40 26 27 8 7 11 4 2 3
+> ```
+>
+> 1. Subtract the threshold
+>
+>     ```
+>     32 30 16 17 -2 -3 1 -6 -8 -7
+>     ```
+>
+> 2. Add up the numbers, starting from the 3' end (partial sums) and stop early if the sum is greater than zero
+>
+>     ```
+>     (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
+>     ```
+>
+>     The numbers in parentheses are not computed (because 8 is greater than zero), but shown here for completeness.
+>
+> 3. Choose the position of the minimum (`-25`) as the trimming position
+>
+> Therefore, the read is trimmed to the first four bases, which have quality values
+>
+> ```
+> 42 40 26 27
+> ```
+>
+> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
+>
+>
+> Alternatives to this procedure would be:
+>
+> * Cut after the first position with a quality smaller than the threshold
+> * Sliding window approach
+>
+>     The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the window (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
+{: .details}
+
+
+# Obtaining more QC metrics with FastQC
+
+To get more metrics on quality for the sequences, we could use [FastQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/). It is an open-source tool that provides a simple way to quality control raw sequence data. It provides a modular set of analyses which you can use to give a quick impression of whether your data has any problems of which you should be aware before doing any further analysis. We can use it, for example, to assess whether there are known adapters present in the data. We'll run it on the original untrimmed fastq file.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
 > 1. Run **FastQC** {% icon tool %} with the following parameters
->    - {% icon param-files %} *"Short read data from your current history"*: `reads_1`
+>    - {% icon param-files %} *"Short read data from your current history"*: `reads`
 >
 > 2. Inspect the generated HTML files
 >
@@ -172,7 +338,7 @@ Rather than looking at quality scores for each individual read, FastQC looks at 
 
 ![Per base sequence quality](../../images/quality-control/per_base_sequence_quality.png "Per base sequence quality")
 
-On the x-axis are the base position in the read. In this example, the sample contains reads that are 37 bp long.
+On the x-axis are the base position in the read. In this example, the sample contains reads that are 296 bp long.
 
 > ### {% icon details %} Non uniform x-axis
 >
@@ -459,139 +625,9 @@ We tried to explain here there different FastQC reports and some use cases. More
 >
 {: .details}
 
-# Filter and Trim
+# Processing multiple datasets
 
-The quality of the sequences drops at the end of the sequences. This could cause bias in downstream analyses with these potentially incorrectly called nucleotides. Sequences must be treated to reduce bias in downstream analysis. In general, quality treatments include:
-
-1. Cutting/Trimming/masking sequences
-    - from low quality score regions
-    - beginning/end of sequence
-    - removing adapters
-2. Filtering of sequences
-    - with low mean quality score
-    - too short
-    - with too many ambiguous (N) bases
-
-To accomplish this task we will use [Cutadapt](https://cutadapt.readthedocs.io/en/stable/guide.html), a tool that enhances sequence quality by automating adapter trimming as well as quality control.
-
-> ### {% icon hands_on %} Hands-on: Improvement of sequence quality
->
-> 1. Run **Cutadapt** {% icon tool %} with the following parameters
->    - *"Single-end or Paired-end reads?"*: `Single-end`
->       - {% icon param-file %} *"Reads in FASTQ format"*: `reads_1` (Input dataset)
->
->          > ### {% icon tip %} Tip: Files not selectable?
->          > If your FASTQ files cannot be selected, you might check whether their format is FASTQ with Sanger-scaled quality values (`fastqsanger`). You can edit the data type by clicking on the pencil symbol.
->          {: .tip}
->
->       - In *Read 1 Options*
->
->          > ### {% icon comment %} Know adapters
->          > In this dataset, no adapters were found as we saw in FastQC report. They were already removed.
->          > If you see or know which adapter sequences were used during library preparation, provide their sequences there.
->          {: .comment}
->
->    - In *"Filter Options"*
->       - *"Minimum length"*: `20`
->
->           It will remove reads that are shorter than 20 bp, after trimming of adapters and bad regions.
->
->    - In *"Read Modification Options"*
->       - *"Quality cutoff"*: `20`
->
->           After adapter removal (if any), we choose to remove ends ( 5' and/or 3') with low-quality, here below 20 in quality).
->
->    - In *"Output Options"*
->       - *"Report"*: `Yes`
->
-> 2. Inspect the generated txt file (`Report`)
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many reads have been found with adapters?
->    > 2. How many basepairs have been removed from the reads because of bad quality?
->    > 3. How many sequence pairs have been removed because they were too short?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. 0 reads with adapters
->    > > 2. 44,164 bp (1.2%) (`Quality-trimmed:`)
->    > > 3. 322 sequences
->    > {: .solution }
->    {: .question}
->
-> 2. (Optional) **FastQC** {% icon tool %}: Re-run **FastQC** on the quality-controlled data, and inspect the new FastQC report
->
->    > ### {% icon question %} Questions
->    >
->    > 1. How many sequences have been removed?
->    > 2. Has sequence quality been improved?
->    >
->    > > ### {% icon solution %} Solution
->    > > 1. Before Cutadapt, the dataset comprised 100,000 sequences. After Cutadapt, there are 99,678 sequences
->    > > 2. The per-base quality score looks better, but other indicators show bad values now. The sequence length distribution is not clear anymore because sequences have different size after the trimming operation
->    > {: .solution }
->    {: .question}
-{: .hands_on}
-
-The quality of the previous dataset was pretty good from the beginning and we improved it with with trimming and filtering step (in a reasonable way to not lose too much information)
-
-> ### {% icon comment %} Bad quality sequences
-> If the quality of the reads is not good, we should always first check what is wrong and think about it: it may come from the type of sequencing or what we sequenced (high quantity of overrepresented sequences in transcriptomics data, biased percentage of bases in HiC data).
->
-> You can also ask the sequencing facility about it, especially if the quality is really bad: the quality treatments can not solve everything. If too many bad quality bases are cut away, the corresponding reads then will be filtered out and you loose them.
-{: .comment}
-
-> ### {% icon details %} Trimming with Cutadapt
->
-> One of the biggest advantage of Cutadapt compared to other trimming tools (e.g. TrimGalore!) is that it has a good [documentation](https://cutadapt.readthedocs.io) explaining how the tool works in detail.
->
-> Cutadapt quality trimming algorithm consists of three simple steps:
->
-> 1. Subtract the chosen threshold value from the quality value of each position
-> 2. Compute a partial sum of these differences from the end of the sequence to each position
->    (as long as the partial sum is negative)
-> 3. Cut at the minimum value of the partial sum
->
-> In the following example, we assume that the 3’ end is to be quality-trimmed with a threshold of 10 and we have the following quality values
->
-> ```
-> 42 40 26 27 8 7 11 4 2 3
-> ```
->
-> 1. Subtract the threshold
->
->     ```
->     32 30 16 17 -2 -3 1 -6 -8 -7
->     ```
->
-> 2. Add up the numbers, starting from the 3' end (partial sums) and stop early if the sum is greater than zero
->
->     ```
->     (70) (38) 8 -8 -25 -23 -20, -21 -15 -7
->     ```
->
->     The numbers in parentheses are not computed (because 8 is greater than zero), but shown here for completeness.
->
-> 3. Choose the position of the minimum (`-25`) as the trimming position
->
-> Therefore, the read is trimmed to the first four bases, which have quality values
->
-> ```
-> 42 40 26 27
-> ```
->
-> Note that thereby also positions with a quality value larger than the chosen threshold are removed if they are embedded in regions with lower quality (the partial sum is decreasing if the quality values are smaller than the threshold). The advantage of this procedure is that it is robust against a small number of positions with a quality higher than the threshold.
->
->
-> Alternatives to this procedure would be:
->
-> * Cut after the first position with a quality smaller than the threshold
-> * Sliding window approach
->
->     The sliding window approach checks that the average quality of each sequence window of specified length is larger than the threshold. Note that in contrast to cutadapt's approach, this approach has one more parameter and the robustness depends of the length of the window (in combination with the quality threshold). Both approaches are implemented in Trimmomatic.
-{: .details}
-
-# Process paired-end data
+## Process paired-end data
 
 With paired-end sequencing, the fragments are sequenced from both sides. This approach results in two reads per fragment, with the first read in forward orientation and the second read in reverse-complement orientation. With this technique, we have the advantage to get more information about each DNA fragment compared to reads sequenced by only single-end sequencing:
 
@@ -610,18 +646,45 @@ Paired-end sequencing generates 2 FASTQ files:
 
 Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_f` or `_1` for the forward reads and `_r` or `_2` for the reverse reads.
 
-The data we analyzed in the previous step was not single-end data but the forward reads of paired-end data. We will now do the quality control on the reverse reads.
+The data we analyzed in the previous step was single-end data so we will import a paired-end dataset to use.
 
 > ### {% icon hands_on %} Hands-on: Assessing the quality of paired-end reads
 >
-> 1. Import the reverse read `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
+> 1. Import the paired-end reads `GSM461178_untreat_paired_subset_1.fastq` and `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
 >
 >    ```
+>    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
 >    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
 >    ```
 >
-> 2. Rename the file to `reads_2`
-> 3. **FastQC** {% icon tool %} with the reverse reads
+> 2. Rename the files to `reads_1` and `reads_2`
+> 3. **FastQC** {% icon tool %} with both datasets
+> 4. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports of both forward and reverse reads
+>      - In *"Results"*
+>        - *"Which tool was used generate logs?"*: `FastQC`
+>        - In *"FastQC output"*
+>           - *"Type of FastQC output?"*: `Raw data`
+>           - {% icon param-files %} *"FastQC output"*: `Raw data` files (output of both **FastQC** {% icon tool %})
+>
+>    {% include snippets/select_multiple_datasets.md %}
+>
+> 5. Inspect the webpage output from MultiQC
+>
+{: .hands_on}
+
+## Summarise QC metrics with MultiQC
+
+> ### {% icon hands_on %} Hands-on: Aggregating QC outputs with MultiQC
+>
+> 1. Import the paired-end reads `GSM461178_untreat_paired_subset_1.fastq` and `GSM461178_untreat_paired_subset_2.fastq` from [Zenodo](https://zenodo.org/record/61771) or from the data library (ask your instructor)
+>
+>    ```
+>    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_1.fastq
+>    https://zenodo.org/record/61771/files/GSM461178_untreat_paired_subset_2.fastq
+>    ```
+>
+> 2. Rename the files to `reads_1` and `reads_2`
+> 3. **FastQC** {% icon tool %} with both datasets
 > 4. **MultiQC** {% icon tool %} with the following parameters to aggregate the FastQC reports of both forward and reverse reads
 >      - In *"Results"*
 >        - *"Which tool was used generate logs?"*: `FastQC`
