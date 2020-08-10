@@ -1,11 +1,10 @@
 #!/bin/bash
 
 # set API key
-
 API_KEY=${GALAXY_DEFAULT_ADMIN_KEY:-fakekey}
 
 # Enable Test Tool Shed
-echo "Enable installation from the Test Tool Shed."
+echo ".. Setting up conda"
 export GALAXY_CONFIG_TOOL_SHEDS_CONFIG_FILE=$GALAXY_HOME/tool_sheds_conf.xml
 
 . /tool_deps/_conda/etc/profile.d/conda.sh
@@ -13,7 +12,7 @@ conda activate base
 
 if pgrep "supervisord" > /dev/null
 then
-    echo "System is up and running. Starting with the installation."
+    echo ".. System is up and running. Starting with the installation."
     export PORT=80
 else
     # start Galaxy
@@ -25,12 +24,12 @@ else
     STATUS=$(psql 2>&1)
     while [[ ${STATUS} =~ "starting up" ]]
     do
-      echo "waiting for database: $STATUS"
+      echo ".. Waiting for database: $STATUS"
       STATUS=$(psql 2>&1)
       sleep 1
     done
 
-    echo "starting Galaxy"
+    echo ".. Starting Galaxy"
     # Unset SUDO_* vars otherwise conda run chown based on that
     sudo -E -u galaxy -- bash -c "unset SUDO_UID; \
         unset SUDO_GID; \
@@ -40,6 +39,7 @@ else
 
     galaxy_install_pid=`cat galaxy_install.pid`
     galaxy-wait -g http://localhost:$PORT -v --timeout 120
+    echo ".. Galaxy is running"
 fi
 
 # Create the admin user if not already done
@@ -50,13 +50,14 @@ if [[ ! -z $GALAXY_DEFAULT_ADMIN_USER ]]
         (
         cd $GALAXY_ROOT
         . $GALAXY_VIRTUAL_ENV/bin/activate
-        echo "Creating admin user $GALAXY_DEFAULT_ADMIN_USER with key $GALAXY_DEFAULT_ADMIN_KEY and password $GALAXY_DEFAULT_ADMIN_PASSWORD if not existing"
+        echo ".. Creating admin user $GALAXY_DEFAULT_ADMIN_USER with key $GALAXY_DEFAULT_ADMIN_KEY and password $GALAXY_DEFAULT_ADMIN_PASSWORD if not existing"
         python /usr/local/bin/create_galaxy_user.py --user "$GALAXY_DEFAULT_ADMIN_EMAIL" --password "$GALAXY_DEFAULT_ADMIN_PASSWORD" \
         -c "$GALAXY_CONFIG_FILE" --username "$GALAXY_DEFAULT_ADMIN_USER" --key "$GALAXY_DEFAULT_ADMIN_KEY"
         )
 fi
 
 # install tutorial materials
+echo ".. Starting installation of the tutorials."
 for tutdir in $topicdir/tutorials/*
 do
     echo "-------------------------------------------------------------"
@@ -111,11 +112,11 @@ do
         echo " - No tours to install (no directory named tours present)"
     fi
 
-    echo "Finished installation of $tut tutorial \n"
+    echo "Finished installation of $tut tutorial"
 done
 
-docker volume rm $(docker volume ls -qf dangling=true)
-
+echo "-------------------------------------------------------------"
+echo ".. Generating data-library_all.yaml file"
 cd /tutorials/
 python /mergeyaml.py > ./data-library_all.yaml
 
@@ -123,7 +124,7 @@ exit_code=$?
 
 if [ $exit_code != 0 ] ; then
     if [ "$2" == "-v" ] ; then
-        echo "Installation failed, Galaxy server log:"
+        echo ".. Installation failed, Galaxy server log:"
         cat $install_log
     fi
     exit $exit_code
@@ -131,8 +132,11 @@ fi
 
 if ! pgrep "supervisord" > /dev/null
 then
+    echo ".. Shutting down Galaxy and postgresql"
     # stop everything
-    sudo -E -u galaxy ./run.sh --stop --pidfile galaxy_install.pid
-    rm $install_log
+    sudo -E -u galaxy ../run.sh --stop --pidfile galaxy_install.pid
+    rm ../$install_log
     service postgresql stop
 fi
+
+echo ".. Installation is finnished"
