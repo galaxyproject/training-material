@@ -6,6 +6,9 @@ set -e
 API_KEY=${GALAXY_DEFAULT_ADMIN_KEY:-fakekey}
 galaxy_instance="http://localhost:8080"
 
+# setting up conda 
+GALAXY_CONDA_PREFIX=/tool_deps/_conda export PATH=$GALAXY_CONDA_PREFIX/bin/:$PATH
+
 if [ "$1" = '-d' ];
 then
     if [ "$(head -n 1 /tutorials/data-library_all.yaml)" != "{}" ];
