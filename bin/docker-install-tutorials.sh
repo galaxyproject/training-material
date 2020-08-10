@@ -15,7 +15,8 @@ then
     echo ".. System is up and running. Starting with the installation."
     export PORT=80
 else
-    # start Galaxy
+    # start Database
+    echo ".. Starting database"
     export PORT=8080
     service postgresql start
     install_log='galaxy_install.log'
@@ -28,7 +29,7 @@ else
       STATUS=$(psql 2>&1)
       sleep 1
     done
-
+    # start Galaxy
     echo ".. Starting Galaxy"
     # Unset SUDO_* vars otherwise conda run chown based on that
     sudo -E -u galaxy -- bash -c "unset SUDO_UID; \
@@ -112,7 +113,7 @@ do
         echo " - No tours to install (no directory named tours present)"
     fi
 
-    echo "Finished installation of $tut tutorial"
+    echo " - Finished installation of $tut tutorial"
 done
 
 echo "-------------------------------------------------------------"
@@ -134,8 +135,8 @@ if ! pgrep "supervisord" > /dev/null
 then
     echo ".. Shutting down Galaxy and postgresql"
     # stop everything
-    sudo -E -u galaxy ../run.sh --stop --pidfile galaxy_install.pid
-    rm ../$install_log
+    sudo -E -u galaxy /galaxy-central/run.sh --stop --pidfile /galaxy-central/galaxy_install.pid
+    rm /galaxy-central/$install_log
     service postgresql stop
 fi
 
