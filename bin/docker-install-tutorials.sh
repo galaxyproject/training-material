@@ -114,7 +114,7 @@ do
     echo "Finished installation of $tut tutorial \n"
 done
 
-docker rmi $(docker images -q --filter "dangling=true")
+docker volume rm $(docker volume ls -qf dangling=true)
 
 cd /tutorials/
 python /mergeyaml.py > ./data-library_all.yaml
