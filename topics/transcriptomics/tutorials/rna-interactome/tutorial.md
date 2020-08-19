@@ -130,16 +130,16 @@ standard Illumina adapters, we need to provide them manually.
 We use `cutadapt` to trim the adapter content
 >
 > 1. **cutadapt** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"FASTQ/A file"*: `SRR2413302.fastq` (Input dataset)
+>    - {% icon param-file %} *"FASTQ/A file"*: `SRR2413302.fastq.gz` (Input dataset)
 >    - In *"Read 1 Options"*
 >       - *"3' (End) Adapters"* -> *"Insert 3' (End) Adapters"*
 >           - *"Source"*: `Enter Custom sequence`
 >           - *"Enter custom 3' adapter sequence"*: `GTGTCAGTCACTTCCAGCGG`
 >       - *"5' (Front) Adapters"* -> *"Insert 5' (Front) Adapters"*
 >           - *"Source"*: `Enter Custom sequence`
->           - *"Enter custom 5' adapter sequence"*: `NNNNAGGGAGGACGATGCGG`
+>           - *"Enter custom 5' adapter sequence"*: `GCATAGGGAGGACGATGCGG`
 >    - In *"Filter Options"*
->        - *"Minimum length"*: `10`
+>        - *"Minimum length"*: `16`
 >
 {: .hands_on}
 
@@ -161,7 +161,7 @@ It is interesting to see whether our manually entered adapters were trimmed
 > > 1. Normally yes, but in this case not. Always look at this plot in combination with "Sequence Length Distribution"
 plot. It looks like there is huge difference in base composition after 55th base. But the number of
 sequences that constitute this is very important. From the sequence length distribution, most of the sequences are
- between 53 and 57 bases long. Hence the abnormality in the per base sequence content is just because it is from
+ between 53 and 57 bases long. We see the abnormality in the per base sequence content because it is from
  very few sequences.
 > ![FastQC sequence length distribution](../../images/rna-interactome/chira_fastqc_seq_length.png)
 > >
@@ -206,8 +206,8 @@ miRNA and target references.
 > 1. **ChiRA map** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input FASTA file"*: `fasta file` (output of **ChiRA collapse** {% icon tool %})
 >    - *"Single or split reference?"*: `Split reference`
->        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa` (Input dataset)
->        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa` (Input dataset)
+>        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa.gz` (Input dataset)
+>        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa.gz` (Input dataset)
 >    - *"aligner"*: `BWA-MEM`
 >
 {: .hands_on}
@@ -226,6 +226,9 @@ of read.
 >    - {% icon param-file %} *"Input BED file of alignments"*: `ChiRA aligned BED` (output of **ChiRA map** {% icon tool %})
 >    - *"Do you have an annotation in GTF format?"*: `Yes`
 >        - {% icon param-file %} *"Annotations in GTF format"*: `whole_transcriptome.gff.gz` (Input dataset)
+>    - *"Did you use single or split reference for alignment?"*: `Split reference`
+>        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa.gz` (Input dataset)
+>        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa.gz` (Input dataset)
 >
 >    > ### {% icon tip %} Tip: Parameters for samples with high coverage.
 >    >
@@ -271,9 +274,10 @@ genomic fasta file the tool can hybridize the interacting loci sequences using `
 >        - *"Choose the source for the FASTA file"*: `History`
 >            - {% icon param-file %} *"FASTA file"*: `Mus_musculus.GRCm38.dna.fa.gz` (Input dataset)
 >    - *"Did you use single or split reference for alignment?"*: `Split reference`
->        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa` (Input dataset)
->        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.da` (Input dataset)
->    - *"Hybridize"*: `Yes`
+>        - {% icon param-file %} *"Reference FASTA file"*: `miRNA_mature.fa.gz` (Input dataset)
+>        - {% icon param-file %} *"Second reference FASTA file"*: `transcriptome.fa.gz` (Input dataset)
+>    - *"Hybridize chimeric loci?"*: `Yes`
+>    - *"Summarize interactions at loci level?"*: `Yes`
 >
 {: .hands_on}
 
@@ -323,7 +327,7 @@ and then filter the interactions we are interested in next page. To get all inte
 hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter
 the interactions that `mmu-miR-190a` involved in and consider those which have an `IntaRNA` predicted hybrid.
 >    - To search, type `mir-190a` in the search field and click on search icon or hit enter. Search is case insensitive
-and can search for sub-phrases. This results in 27 records.
+and can search for sub-phrases too. This results in 27 records.
 >    - We now further filter the records that contain `IntaRNA` hybrid. If there is no hybrid predicted by `IntaRNA`,
 then the hybrid filed contains an `NA` value.
 >       - From **"--filter--"** dropdown choose `Hybrid`
@@ -337,7 +341,7 @@ This filters out 10 more records and results in 17 records.
 
 > ### {% icon question %} Questions
 >
-> 1. Whis strand of `mmu-miR-190a` is the most expressed?
+> 1. Which strand of `mmu-miR-190a` is the most expressed?
 >
 > > ### {% icon solution %} Solution
 > >
