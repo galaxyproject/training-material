@@ -535,15 +535,11 @@
         
     
         
-        <a class="dropdown-item" href="https://cheminformatics.usegalaxy.eu/" title="ChemicalToolbox">
-            ChemicalToolbox
-        </a>
+    
         
     
         
-        <a class="dropdown-item" href="https://climate.usegalaxy.eu/" title="Climate Science Workbench">
-            Climate Science Workbench
-        </a>
+    
         
     
         
@@ -561,10 +557,6 @@
         
     
         
-        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
-            Galaxy for Ecology
-        </a>
-        
     
         
     
@@ -576,12 +568,6 @@
     
         
     
-        
-    
-        
-        <a class="dropdown-item" href="https://hicexplorer.usegalaxy.eu" title="HiCExplorer">
-            HiCExplorer
-        </a>
         
     
         
@@ -616,10 +602,6 @@
     
         
     
-        
-        <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
-            NanoGalaxy
-        </a>
         
     
         
@@ -665,7 +647,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 21, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Aug 19, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -698,7 +680,7 @@ to match the read lengths and there needs to be a lot of post-processing to be d
 there is also an alignment tool called <code class="language-plaintext highlighter-rouge">CLAN</code> published to specifically map the chimeric <span class="notranslate">reads</span> from CLASH experiments.</p>
 
 <p>In this tutorial, we will learn the analysis of a CLEAR-CLIP data set using a tool suite called <code class="language-plaintext highlighter-rouge">ChiRA</code>. The data used
-is a random subsampling (100k <span class="notranslate">reads</span>) of a mouse cortex sample
+is from mouse cortex sample
 (<a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSM1881541">GSM1881541</a>) prepared using CLEAR-CLIP protocol. It is
 a complete analysis framework that can be used starting from raw sequencing <span class="notranslate">reads</span> to analysis and visualization of
 results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <code class="language-plaintext highlighter-rouge">BWA-MEM</code> or <code class="language-plaintext highlighter-rouge">CLAN</code> to map the <span class="notranslate">reads</span>. Subsequently, it also merges the overlappig alignments and
@@ -729,6 +711,7 @@ results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <c
     </ol>
   </li>
   <li><a href="#visualization" id="markdown-toc-visualization">Visualization</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
 
 </blockquote>
@@ -745,7 +728,7 @@ results. <code class="language-plaintext highlighter-rouge">ChiRA</code> uses <c
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3709188/files/mi<span class="notranslate">RNA</span>_mature.fa.gz
 https://zenodo.org/record/3709188/files/Mus_musculus.GRCm38.<span class="notranslate">dna</span>.fa.gz
-https://zenodo.org/record/3709188/files/SRR2413302.100k.fastq.gz
+https://zenodo.org/record/3709188/files/SRR2413302.fastq.gz
 https://zenodo.org/record/3709188/files/transcriptome.fa.gz
 https://zenodo.org/record/3709188/files/whole_transcriptome.gff.gz
 </code></pre></div>      </div>
@@ -845,7 +828,7 @@ adapters.</p>
   <ol>
     <li><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">SRR2413302.100k.fastq.gz</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Short read data from your current history”</em>: <code class="language-plaintext highlighter-rouge">SRR2413302.fastq.gz</code> (Input dataset)</li>
       </ul>
     </li>
   </ol>
@@ -884,7 +867,7 @@ standard Illumina adapters, we need to provide them manually.</p>
   <ol>
     <li><strong>cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">SRR2413302.fastq</code> (Input dataset)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTQ/A file”</em>: <code class="language-plaintext highlighter-rouge">SRR2413302.fastq.gz</code> (Input dataset)</li>
         <li>In <em>“Read 1 Options”</em>
           <ul>
             <li><em>“3’ (End) Adapters”</em> -&gt; <em>“Insert 3’ (End) Adapters”</em>
@@ -896,14 +879,14 @@ standard Illumina adapters, we need to provide them manually.</p>
             <li><em>“5’ (Front) Adapters”</em> -&gt; <em>“Insert 5’ (Front) Adapters”</em>
               <ul>
                 <li><em>“Source”</em>: <code class="language-plaintext highlighter-rouge">Enter Custom sequence</code></li>
-                <li><em>“Enter custom 5’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">NNNNAGGGAGGACGATGCGG</code></li>
+                <li><em>“Enter custom 5’ adapter sequence”</em>: <code class="language-plaintext highlighter-rouge">GCATAGGGAGGACGATGCGG</code></li>
               </ul>
             </li>
           </ul>
         </li>
         <li>In <em>“Filter Options”</em>
           <ul>
-            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+            <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">16</code></li>
           </ul>
         </li>
       </ul>
@@ -938,10 +921,11 @@ standard Illumina adapters, we need to provide them manually.</p>
 
     <ol>
       <li>Normally yes, but in this case not. Always look at this plot in combination with “Sequence Length Distribution”
-plot. It looks like there is huge difference in base composition between 56th and 57th bases. But the number of
-sequences that constitute this is very important. From the sequence length distribution, almost all the sequences are of
- length of 55 bases. Hence the abnormality in the per base sequence content is just because it is from
- very few (if not only 1) sequence.</li>
+plot. It looks like there is huge difference in base composition after 55th base. But the number of
+sequences that constitute this is very important. From the sequence length distribution, most of the sequences are
+ between 53 and 57 bases long. We see the abnormality in the per base sequence content because it is from
+ very few sequences.
+<img src="../../images/rna-interactome/chira_fastqc_seq_length.png" alt="FastQC sequence length distribution" /></li>
     </ol>
 
   </blockquote>
@@ -956,7 +940,8 @@ partners.</p>
 <h2 id="remove-duplicate-sequences">Remove duplicate sequences</h2>
 
 <p>First, we eliminate the duplicate sequences from the library to reduce the computational effort. This will also have an
-impact on the quantification of the loci because often these identical sequences might be PCR duplicates.</p>
+impact on the quantification of the loci because often these identical sequences might be PCR duplicates. There is also
+a 5’ degenerate linker of length 5 nucleotides present in the <span class="notranslate">reads</span>. Hence we have to strip that too.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
@@ -965,6 +950,7 @@ impact on the quantification of the loci because often these identical sequences
     <li><strong>ChiRA collapse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTQ file”</em>: <code class="language-plaintext highlighter-rouge">Read 1 Output</code> (output of <strong>cutadapt</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Length of the UMI if present at the 5’ end of your <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
       </ul>
 
       <blockquote class="tip">
@@ -995,8 +981,8 @@ mi<span class="notranslate">RNA</span> and target references.</p>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA file”</em>: <code class="language-plaintext highlighter-rouge">fasta file</code> (output of <strong>ChiRA collapse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Single or split reference?”</em>: <code class="language-plaintext highlighter-rouge">Split reference</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa</code> (Input dataset)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa.gz</code> (Input dataset)</li>
           </ul>
         </li>
         <li><em>“aligner”</em>: <code class="language-plaintext highlighter-rouge">BWA-MEM</code></li>
@@ -1025,16 +1011,28 @@ of read.</p>
             <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotations in GTF format”</em>: <code class="language-plaintext highlighter-rouge">whole_transcriptome.gff.gz</code> (Input dataset)</li>
           </ul>
         </li>
+        <li><em>“Did you use single or split reference for alignment?”</em>: <code class="language-plaintext highlighter-rouge">Split reference</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa.gz</code> (Input dataset)</li>
+          </ul>
+        </li>
       </ul>
 
       <blockquote class="tip">
-        <h3 id="tip-tip-parameters-for-interactomestructurome-data-like-splash-paris"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Parameters for interactome/structurome data like SPLASH, PARIS</h3>
+        <h3 id="tip-tip-parameters-for-samples-with-high-coverage"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Parameters for samples with high coverage.</h3>
 
         <ul>
-          <li>If you have data that contains large interaction regions, the default <code class="language-plaintext highlighter-rouge">Overlap based</code> merging may not capture whole interaction regions.</li>
-          <li>In that case use <code class="language-plaintext highlighter-rouge">blockbuster</code> merging mode and adjust the paramertes accordingly.
+          <li>In samples with a very high coverage, the likelihood of having overlapping alignments increases. Hence the
+default <code class="language-plaintext highlighter-rouge">Overlap based</code> merging may results in very long loci merged by some random alignments.</li>
+          <li>Therefore, use the <code class="language-plaintext highlighter-rouge">blockbuster</code> merging mode and adjust the paramertes accordingly.
             <ul>
               <li>From <em>“Select the mode of merging”</em>: <code class="language-plaintext highlighter-rouge">Gaussian based (blockbuster)</code></li>
+            </ul>
+          </li>
+          <li>Working with only the chimeric <span class="notranslate">reads</span> further reduces the computation time fr subsequent steps.
+            <ul>
+              <li><em>“chimeric_only”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             </ul>
           </li>
         </ul>
@@ -1092,11 +1090,12 @@ genomic fasta file the tool can hybridize the interacting loci sequences using <
         </li>
         <li><em>“Did you use single or split reference for alignment?”</em>: <code class="language-plaintext highlighter-rouge">Split reference</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa</code> (Input dataset)</li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.da</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span>_mature.fa.gz</code> (Input dataset)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second reference FASTA file”</em>: <code class="language-plaintext highlighter-rouge">transcriptome.fa.gz</code> (Input dataset)</li>
           </ul>
         </li>
-        <li><em>“Hybridize”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Hybridize chimeric loci?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Summarize interactions at loci level?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
   </ol>
@@ -1155,7 +1154,7 @@ sqlite database from the <code class="language-plaintext highlighter-rouge">ChiR
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-visualize-and-chimeras"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize and chimeras</h3>
+  <h3 id="hands_on-hands-on-visualize-interactions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize interactions</h3>
 
   <ol>
     <li>Please click on <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> <em>“Visualize this data”</em>. Then click on the <code class="language-plaintext highlighter-rouge">ChiRAViz</code> visualization.
@@ -1166,32 +1165,30 @@ This loads the data into the visualization framework and shows some basic plots 
 <img src="../../images/rna-interactome/chiraviz_home.png" alt="ChiRAViz home page" /></li>
       </ul>
     </li>
-    <li>Then choose the kind of interactions information you want to see. For example, choose the most abundant <code class="language-plaintext highlighter-rouge">mi<span class="notranslate">RNA</span></code> and <code class="language-plaintext highlighter-rouge">3_prime_UTR</code> and click on <strong>“Get interactions”</strong>.</li>
+    <li>Now choose the bio types of interactions that you want to work with. Here we first get all available interactions,
+and then filter the interactions we are interested in next page. To get all interactions, choose <code class="language-plaintext highlighter-rouge">all</code> in both dropdowns
+ on the top and then click on <strong>“Get interactions”</strong>.</li>
   </ol>
 
   <p><img src="../../images/rna-interactome/chiraviz_choose.png" alt="ChiRAViz selector" /></p>
 
-  <ul>
-    <li><strong>“Chimera”</strong> panel in the middle depicts the <span class="notranslate">mapping</span> positions on the read with read length.</li>
-    <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are <span class="notranslate">mapping</span> to with their alignment positions on the transcripts.</li>
-    <li><strong>“Alignment Information”</strong> panel shows the alignment if present with a possibility to download the alignment.
-<img src="../../images/rna-interactome/chiraviz_single.png" alt="ChiRAViz single interaction" /></li>
-  </ul>
-
 </blockquote>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on--filter-interactions-and-export-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Filter interactions and export results</h3>
-  <p><code class="language-plaintext highlighter-rouge">ChiRAViz</code> provides filters to search for keywords like gene symbols, sort interactions by score, filter by score or hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter the interactions with most abundant mi<span class="notranslate">RNA</span> and consider those which have an <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code> predicted hybrid.</p>
+  <h3 id="hands_on-hands-on--filter-and-summarize-interactions-and-export-the-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Filter and summarize interactions and export the results</h3>
+  <p><code class="language-plaintext highlighter-rouge">ChiRAViz</code> provides filters to search for keywords like gene symbols, sort interactions by score, filter by score or
+hybridization energy. Then the filtered interactions can be summarized or exported to a file. In this step, we filter
+the interactions that <code class="language-plaintext highlighter-rouge">mmu-miR-190a</code> involved in and consider those which have an <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code> predicted hybrid.</p>
   <ul>
-    <li>Go to the home page by clicking <strong>Home</strong> on the top.</li>
-    <li>Go to the bottom of the home page to the plot showing top 50 symbols based on their <span class="notranslate">expression</span>.</li>
-    <li>Click on the most abundant mi<span class="notranslate">RNA</span> <code class="language-plaintext highlighter-rouge">mmu-miR-466i-5p</code>. This will populate the left panel with all the interactions containing <code class="language-plaintext highlighter-rouge">mmu-miR-466i-5p</code>.</li>
-    <li>Filter the entries that contain <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code> hybrid. If there is no hybrid predicted the value in that filed is <code class="language-plaintext highlighter-rouge">NA</code>
+    <li>To search, type <code class="language-plaintext highlighter-rouge">mir-190a</code> in the search field and click on search icon or hit enter. Search is case insensitive
+and can search for sub-phrases too. This results in 27 records.</li>
+    <li>We now further filter the records that contain <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code> hybrid. If there is no hybrid predicted by <code class="language-plaintext highlighter-rouge">Inta<span class="notranslate">RNA</span></code>,
+then the hybrid filed contains an <code class="language-plaintext highlighter-rouge">NA</code> value.
       <ul>
-        <li>From <strong>“Filter by…“</strong> choose <code class="language-plaintext highlighter-rouge">Hybrid</code></li>
-        <li>From <strong>“Choose operator…“</strong> choose <code class="language-plaintext highlighter-rouge">&lt;&gt;</code></li>
-        <li>Enter <code class="language-plaintext highlighter-rouge">NA</code> in the value field and hit the enter key.</li>
+        <li>From <strong>”–filter–“</strong> dropdown choose <code class="language-plaintext highlighter-rouge">Hybrid</code></li>
+        <li>From <strong>”–operator–“</strong> choose <code class="language-plaintext highlighter-rouge">&lt;&gt;</code></li>
+        <li>Enter <code class="language-plaintext highlighter-rouge">NA</code> in the value field and hit the enter key.
+This filters out 10 more records and results in 17 records.</li>
       </ul>
     </li>
     <li>At this point, you can click on <strong>Summary</strong> to view the summary plots for this subset of interactions.</li>
@@ -1200,7 +1197,44 @@ This loads the data into the visualization framework and shows some basic plots 
   </ul>
 </blockquote>
 
-<h1 class="no_toc" id="conclusion">Conclusion</h1>
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Which strand of <code class="language-plaintext highlighter-rouge">mmu-miR-190a</code> is the most expressed?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>Both strands of <code class="language-plaintext highlighter-rouge">mmu-miR-190a</code> participated in the interactions, but <code class="language-plaintext highlighter-rouge">mmu-miR-190a-5p</code> is the most abundant strand between the two.</p>
+
+  </blockquote>
+
+</blockquote>
+<blockquote class="notranslate hands_on">
+
+</blockquote>
+<blockquote class="notranslate hands_on">
+
+  <h3 id="hands_on-hands-on--viewing-individual-interaction-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on:  Viewing individual interaction information</h3>
+  <ul>
+    <li>From the list of interactions in the left panel expand the interaction <code class="language-plaintext highlighter-rouge">mmu-miR-190a-5p:Myo5a</code>. There are 4 sub-records
+corresponds to 4 different transcripts of the target gene <code class="language-plaintext highlighter-rouge">Myo5a</code>.</li>
+    <li>Click on one of the records to view followin information.
+      <ul>
+        <li><strong>“Chimera”</strong> panel in the middle depicts the <span class="notranslate">mapping</span> positions on the read with read length.</li>
+        <li><strong>“Interacting partners”</strong> panel shows the information on which transcripts the left and right arm are <span class="notranslate">mapping</span> to with their alignment positions on the transcripts.</li>
+        <li><strong>“Alignment Information”</strong> panel shows the alignment if present with a possibility to download the alignment.
+<img src="../../images/rna-interactome/chiraviz_single.png" alt="ChiRAViz single interaction" /></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+<blockquote class="no_toc">
+
+  <h1 id="conclusion">Conclusion</h1>
+</blockquote>
 
 <p>Though chimeric <span class="notranslate">reads</span> look normal when inspected in a FASTQ file, the origin of each read is from two different <span class="notranslate">RNA</span> fragments. Limitations of the current sequencing protocols limit the length of each sequenced interacting <span class="notranslate">RNA</span> fragment. These smaller <span class="notranslate">RNA</span> fragments are often harder to map considering that the boundaries of each <span class="notranslate">RNA</span> fragment in the read are unknown. In this tutorial, we have seen how to map these <span class="notranslate">reads</span> and infer the true origins of them by quantifying the mapped loci. The visualization framework gives flexibility in filtering and searching output files, visualize the summaries of filtered data as well as exporting them.</p>
 
@@ -1268,8 +1302,8 @@ This loads the data into the visualization framework and shows some basic plots 
     author = "Pavankumar Videm",
     title = "RNA-RNA interactome data analysis (Galaxy Training Materials)",
     year = "2020",
-    month = "03",
-    day = "21"
+    month = "08",
+    day = "19"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rna-interactome/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
