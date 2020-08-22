@@ -186,7 +186,7 @@ The table above gives a summary of the primers used in the image and the number 
 
 > ### {% icon details %} Details: Strandedness
 >
-> Unstranded protocols do not distinguish between whether a fragments was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
+> Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
 >
 > ![strandedness]({% link topics/transcriptomics/images/tenx_strandedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
 >
@@ -243,18 +243,13 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 
 > ### {% icon hands_on %} Hands-on
+> 
+> **Build a Paired Collection** 
+> {% include snippets/build_paired_list_collection.md %}
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - *"Input Type"*: `Single files`
->        - In *"Input Pairs"*:
->            - In *"1: Input Pairs"*:
->                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->            - Select {% icon param-repeat %} *Insert Input Pairs*
->            - In *"2: Input Pairs"*:
->               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->                 (*pay attention to the* **L001** *and* **L002** *names*)
+>    - *"Input Type"*: `Paired collection of barcode and cDNA reads`
+>        - {% icon param-file %} *"Collection of Pairs"*: `the name of your paired collection`
 >    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
