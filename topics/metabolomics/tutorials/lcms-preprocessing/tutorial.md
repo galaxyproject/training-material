@@ -1,8 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: 'Mass spectrometry: LC-MS preprocessing - advanced'
+title: 'Mass spectrometry: LC-MS preprocessing with XCMS'
 zenodo_link: 'https://zenodo.org/record/3757956'
+level: Intermediate
 questions:
 - What are the main steps of untargeted LC-MS data preprocessing for metabolomic analyses?
 - How to conduct metabolomic data preprocessing using Galaxy?
@@ -398,7 +399,8 @@ You can use the *sampleMedata* file we previously uploaded to add some group col
 The tool automatically takes the second column as colour groups when a file is provided.
 
 Note that you can also check the chromatograms at any moment during the workflow, in particular at the following steps:
- - After **MSnbase readMSData** {% icon tool %} to help you to define retention time ranges that you may want to discard from the very beginning (*"Specta Filters"* in **findChromPeaks** {% icon tool %})
+ - After **MSnbase readMSData** {% icon tool %} to help you to define retention time ranges that you may want to discard from the very beginning 
+(*"Spectra Filters"* section in **xcms findChromPeaks (xcmsSet)** {% icon tool %} parameters)
  - After **adjustRtime** {% icon tool %} to check the result of the correction (and potentially rerun *adjustRtime* with other settings)
 
 > ### {% icon hands_on %} Hands-on: xcms plot chromatogram
@@ -425,6 +427,13 @@ This tool generates Base Peak Intensity Chromatograms (BPIs) and Total Ion Chrom
 one with colours based on provided groups, one with one colour per sample.
 
 ![Base Peak Intensity Chromatograms](../../images/lcmspreproc_BPC12samp.png)
+
+How BPIs and TICs look like is dependant of the kind of data you have: LC-MS technology used, study design, type of samples, events that may have occured during the analysis...
+It can vary a lot from one experiment to another due to these characteristics. 
+Sometimes you can see (un)expected effects on these plots as retention time variations accros samples, overall sample intensity differences due to analytical or biological
+matters, specific peak areas... Generally, it is recommended to first focus on QC pooled samples if you have some, since they are not supposed to be affected by
+biological variabilities: it helps you to focus on aspects uncorrelated to individual sample effects. Evaluation of blank samples (if any) can also be a good start:
+"Are all blanks globally less intense than real samples?" is a question that can generally be raised. 
 
 # First XCMS step: *peak picking*
 
@@ -494,7 +503,7 @@ need to group your individual RData files into a single one.
 # Gathering the different samples in one Rdata file
 
 A dedicated tool exists to merge the different `RData` files into a single one: **xcms findChromPeaks Merger** {% icon tool %}. Although you can simply take as
-input your dataset collection alone, the tool also provides de possibility to take into account a sampleMetadata file. Indeed,
+input your dataset collection alone, the tool also provides the possibility to take into account a sampleMetadata file. Indeed,
 depending of your analytical sequence, you may want to treat part of your samples a different way when proceeding to
 the grouping step using **xcms groupChromPeaks (group)** {% icon tool %}.
 
@@ -818,12 +827,12 @@ last adjustRtime step and thus your last grouping step, you will obtain your fin
 >
 > 1. How many ions did you obtained with the final grouping step?
 > 2. Open the dataMatrix file you obtained with the final grouping. This table corresponds to intensities for each ion and each
-sample. What do you notice when looking at the intensity of the forth ion regarding the first sample?
+sample. What do you notice when looking at the intensity of the fourth ion regarding the first sample?
 >
 > > ### {% icon solution %} Solution
 > >
 > > 1. The final grouping step led to 5100 ions.
-> > 2. The first ion (M74T317) has a 'NA' value for the first sample (QC1_014). This is also the case for several other ions
+> > 2. The fourth ion (M74T317) has a 'NA' value for the first sample (QC1_014). This is also the case for several other ions
 and samples.
 > >
 > {: .solution}
