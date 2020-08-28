@@ -966,7 +966,7 @@ With only one single HTML file generated, you have access to all this informatio
 > ### {% icon hands_on %} Hands-on: xcms process history
 >
 > 1. **xcms process history** {% icon tool %} with the following parameters:
->    - *"xset RData file"*: `xset.merged.[...].fillChromPeaks.RData` or `xset.merged.[...].annotate.quick.RData`
+>    - *"xset RData file"*: `xset.merged.[...].fillChromPeaks.RData`
 >
 >    > ### {% icon comment %} Comment
 >    >
