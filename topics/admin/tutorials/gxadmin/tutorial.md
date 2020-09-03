@@ -61,7 +61,7 @@ It's simple to install gxadmin. Here's how you do it, if you haven't done it alr
 ## Configuration
 
 If `psql` runs without any additional arguments, and permits you to access your galaxy database then you do not need to do any more configuration for gxadmin.
-Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#query-setup)
+Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#postgres)
 
 ## Overview
 
