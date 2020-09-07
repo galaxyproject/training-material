@@ -1125,11 +1125,14 @@ Above we've been able to look at genes that appear to be deleted in our assembly
 
 As a result we will get a list of all genes that overlap with the positions of the deletion. Because of the parameters we have selected, the tool joins rows from the two datasets if their coordinates overlap:
 
-1          | 2       | 3       | 4          | 5       | 6       | 7                              | 8 | 9 | 10
----        | ---     | ---     | ---        | ---     | ---     | ---                            | - | - | ---
-CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3253690 | 3253887 | hypothetical_protein           | 0 | - | 176
-CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3254070 | 3256175 | carbon_starvation_protein_A    | 0 | - | 2105
-CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3256356 | 3256769 | proofreading_thioesterase_EntH | 0 | - | 413
+1          | 2       | 3       | 4          | 5       | 6       | 7    | 8 | 9 | 10
+---        | ---     | ---     | ---        | ---     | ---     | ---  | - | - | ---
+CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3253690 | 3253887 |      | 0 | - | 176
+CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3254070 | 3256175 |      | 0 | - | 2105
+CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3256356 | 3256769 |      | 0 | - | 413
+CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3256772 | 3257518 |      | 0 | - | 746
+CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3257518 | 3258375 |      | 0 | - | 857
+CP020543.1 | 3253711 | 3288956 | CP020543.1 | 3258389 | 3259999 | entE | 0 | - | 1610
 
 ## Are any of these genes essential?
 
@@ -1161,7 +1164,7 @@ The two truly important columns here are 1 (gene name) and 4 (is gene essential?
 >
 > 1. {% tool [Join two Datasets](join1) %} side by side on a specified field:
 >   - *"Join"*: the results of the [intersect operation](#hands_on-hands-on-finding-genes-deleted-in-our-assembly)(`Intersect intervals on data...`)
->   - *"using column"*: `Column: 7` (because it contains gene names)
+>   - *"using column"*: `Column: 7` (because it contains gene names. If it is not a drop down enter `7`.)
 >   - *"with"*: the newly uploaded dataset with essential gene data
 >   - *"and column"*: `Column: 1` (as in this dataset the first column contains gene names)
 {: .hands_on}
