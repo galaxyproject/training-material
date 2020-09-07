@@ -33,6 +33,8 @@ tags:
 - 10x
 contributors:
 - bebatut
+- hrhotz
+- mtekman
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
