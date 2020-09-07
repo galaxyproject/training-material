@@ -140,4 +140,4 @@ then
     service postgresql stop
 fi
 
-echo ".. Installation is finnished"
+echo ".. Installation is finished"
