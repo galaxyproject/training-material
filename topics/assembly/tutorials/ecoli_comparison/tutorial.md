@@ -83,6 +83,10 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >
 >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
 >
+> 5. Rename this file to `genomes.tsv`
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
 > 5. {% tool [Cut](Cut1) %}   columns from a table:
 >
 >    - *"Cut columns"*: `c6,c15`
@@ -418,11 +422,10 @@ Let's find table entries corresponding to these:
 
 This will generate a short table like this:
 
-```
-CP020543.1 11 99.91	4487098
-CP024090.1 12 99.91	4540487
-LT906474.1  8 99.94	4575223
-```
+
+CP020543.1 | 11 | 99.926363636364 | 4486976
+CP024090.1 | 12 | 99.911666666667 | 4540487
+LT906474.1 | 8  | 99.94           | 4575200
 
 From this it appears that `LT906474.1` is closest to our assembly because it has eight alignment blocks, the longest total alignment length (4,575,223) and highest mean identity (99.94%).
 
@@ -436,12 +439,12 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 > Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.
 >
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
->   - *"Select lines from"*: the `genome_proks.txt` you uploaded earlier
+>   - *"Select lines from"*: the `genomes.tsv` you uploaded earlier
 >   - *"the pattern"*: `LT906474|CP024090|CP020543`
 >
 > 2. {% tool [Cut](Cut1) %} columns from a table:
 >
->    - *"Cut columns"*: `c11,c20`
+>    - *"Cut columns"*: `c6,c15`
 >    - *"From"*: the output of the **select lines** {% icon tool %}
 >
 > 1. Again **Upload** {% icon tool %} data
