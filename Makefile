@@ -139,7 +139,7 @@ check-slides: build  ## check the markdown-formatted links in slides
 
 check-yaml: ## lint yaml files
 	$(ACTIVATE_ENV) && \
-		+ find . -name "*.yaml" | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+		find . -name "*.yaml" | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 		ruby bin/check-contributors.rb
 .PHONY: check-yaml
