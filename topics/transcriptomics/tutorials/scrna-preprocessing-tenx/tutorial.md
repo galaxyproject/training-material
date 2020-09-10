@@ -36,6 +36,8 @@ contributors:
   - hrhotz
   - blankenberg
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 
@@ -64,7 +66,7 @@ Though there are approximately 3 million 10x gel barcodes used, the amount actua
 
 > ### {% icon details %} Whitelist Barcodes
 >
-> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with 3,000,0000 barcodes.
+> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with ~3,7 million barcodes.
 >
 > Both are provided in the Zenodo link, but we will only work with the 3 million barcodes because this is what is provided with the chemistry version.
 >
@@ -132,7 +134,7 @@ The *Cell Ranger* pipeline requires all three files to perform the demultiplexin
 
 ### Data upload and organization
 
-For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (737,000) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
+For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (~3,7 million) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
 
 The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
 
@@ -184,7 +186,7 @@ The table above gives a summary of the primers used in the image and the number 
 
 > ### {% icon details %} Details: Strandedness
 >
-> Unstranded protocols do not distinguish between whether a fragments was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
+> Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
 >
 > ![strandedness]({% link topics/transcriptomics/images/tenx_strandedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
 >
@@ -241,18 +243,13 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 
 > ### {% icon hands_on %} Hands-on
+> 
+> **Build a Paired Collection** 
+> {% include snippets/build_paired_list_collection.md %}
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - *"Input Type"*: `Single files`
->        - In *"Input Pairs"*:
->            - In *"1: Input Pairs"*:
->                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->                - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->            - Select {% icon param-repeat %} *Insert Input Pairs*
->            - In *"2: Input Pairs"*:
->               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->               - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->                 (*pay attention to the* **L001** *and* **L002** *names*)
+>    - *"Input Type"*: `Paired collection of barcode and cDNA reads`
+>        - {% icon param-file %} *"Collection of Pairs"*: `the name of your paired collection`
 >    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`

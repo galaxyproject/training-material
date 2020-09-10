@@ -34,6 +34,8 @@ follow_up_training:
 contributors:
   - mtekman
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 

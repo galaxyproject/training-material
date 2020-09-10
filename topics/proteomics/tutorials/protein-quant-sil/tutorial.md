@@ -262,7 +262,7 @@ Basic TOPPView tutorials are available as [videos](https://www.openms.de/getting
 
 For the optimization of tool parameters, it is recommended not to work with a complete LC-MS/MS run. Instead, we will use **FileFilter** to extract a small *RT-slice* of our input dataset, i.e. a fraction of the original dataset that was measured during a short period of time. Reducing the test data reduces the time needed for analysis and facilitates visual examination of the data.
 
-Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}).
+Using Galaxy Workflows enables us to quickly re-run a full analysis with changed parameters. To learn about Galaxy Workflows, consult this [tutorial]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}).
 
 **Cave:** Be aware that only very small parts of your dataset can be checked by visual examination. To minimize biases, try to look at the same areas / features of each result file.
 

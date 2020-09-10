@@ -13,7 +13,7 @@ objectives:
 key_points:
 - Using regression, real-valued targets are learned using the training set and predicted
   using the test set.
-- For each regression algorithm, its parameters should be optimized based on the dataset
+- For each regression algorithm, its parameters should be optimized based on the dataset.
 time_estimation: 2H
 contributors:
 - khanteymoori
@@ -24,9 +24,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step.
-
-Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
+In this tutorial you will learn how to use Galaxy tools to solve [regression](https://en.wikipedia.org/wiki/Regression_analysis) problems. First, we will introduce the concept of regression briefly, and then examine linear regression, which models the relationship between a target variable and some explanatory variables (also known as independent variables). Next, we will discuss gradient boosting regression, an more advanced regressor model which can model nonlinear relationships between variables. Then, we will show how to visualize the results in each step. Finally, we will discuss how to train our models by finding the values of their parameters that minimize a cost function. We will work through a real problem to learn how the models and learning algorithms work.
 
 In this tutorial we will build a regression model for chronological age prediction, based on DNA methylation. This is based on the work of [Jana Naue et al. 2017](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub), in which biomarkers are examined to predict the chronological age of humans by analyzing the DNA methylation patterns. Different machine learning algorithms are used in this study to make an age prediction.
 
@@ -50,11 +48,11 @@ Regression analysis attempts to determine the relationship between one target va
 
 ![regression](images/regression.png "Regression fit through data points.")
 
-Linear regression is a technique used to analyze a linear relationship between input variables (independent variables) and a single target variable. A linear relationship means that the data points tend to follow a straight line. Simple linear regression involves only a single input variable. Figure 2 shows a data set with a linear relationship.
+Linear regression is a technique used to analyze a linear relationship between input variables (independent variables) and a single target variable. A linear relationship means that the data points tend to follow a straight line. Simple linear regression involves only a single input variable. Figure 2 shows a dataset with a linear relationship.
 
 ![regression](images/linear_regression_generated_data.png "Data points with a linear relationship.")
 
-In linear regression, our goal is to find the line that best models the path of the data points. Figure 3 shows the data set we used in Figure 2 with a line of best fit through it. The position of the line is determined by certain fitting coefficients (in this simple case, the gradient and intercept) and linear regression helps us pick appropriate values for these coefficients. In this example we have only one input variable and the problem is therefore simple linear regression. Note that in real problems we have more than one input variable. In this case, we call it multiple linear regression. Adding extra input variables just means that we’ll need to find more weights.
+In linear regression, our goal is to find the line that best models the path of the data points. Figure 3 shows the dataset we used in Figure 2 with a line of best fit through it. The position of the line is determined by certain fitting coefficients (in this simple case, the gradient and intercept) and linear regression helps us pick appropriate values for these coefficients. In this example we have only one input variable and the problem is therefore simple linear regression. Note that in real problems we have more than one input variable. In this case, we call it multiple linear regression. Adding extra input variables just means that we’ll need to find more weights.
 
 ![regression](images/linear_regression_regressor.png "Regression fit through data points.")
 
@@ -71,19 +69,16 @@ We know an error above the actual value and an error below the actual value shou
 
 # Analyze DNA methylation dataset
 
-As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. 
-It has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information beside the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
+As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict the chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. 
+It has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information besides the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
 
-Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. This knowledge is used to select useful biomarkers from the DNA methylation dataset. The CpG sites with the highest correlation to age are selected as the biomarkers (features). In this study, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
+Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. This knowledge is used to select useful biomarkers from the DNA methylation dataset. The CpG sites with the highest correlation to age are selected as biomarkers (features). In this study, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
 
 In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn.org/stable/)) machine learning tools to DNA methylation datasets to predict the chronological age of humans.
 
 ## Get training and test datasets
 
-Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. 
-The datasets from this study contain features (present as columns). The last column in the dataset refers to `Age`, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a mapping between these input features and targets.
-
-We proceed with the analysis by uploading new datasets and creating a new history. The training set contains `208` rows corresponding to individual samples and `13` features (age-correlated CpG sites in DNA methylation dataset). The last column is `Age`. The test set contains `104` rows and the same number of features as the training set. The `Age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute scores between true and predicted age.
+Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. We proceed with the analysis by uploading new datasets and creating a new history. 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -108,6 +103,7 @@ We proceed with the analysis by uploading new datasets and creating a new histor
 >
 {: .hands_on}
 
+The datasets from this study contain features (present as columns). The last column in the dataset refers to `Age`, which is used as labels/targets. Since the targets are real numbers, the machine learning task becomes a regression problem. Using these features and targets, a model is built which learns a mapping between these input features and targets. The training set contains `208` rows corresponding to individual samples and `13` features (age-correlated CpG sites in DNA methylation dataset). The last column is `Age`. The test set contains `104` rows and the same number of features as the training set. The `Age` column in the test set is predicted after training on the training set. Another dataset `test_rows_labels` contains the true age values of the test set which is used to compute scores between true and predicted age.
 The `train_rows` contains a column `Age` which is the label or target. We will evaluate our model on `test_rows` and compare the predicted age with the true age in `test_rows_labels`
 {: .comment}
 
@@ -183,10 +179,11 @@ We will evaluate the predictions by comparing them to the expected targets. In t
 
 
 Now we visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool in Galaxy.
+Hint: Please find the above tool in "Graph/Display data" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_without_header.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_without_header`
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_linear`
 {: .hands_on}
 
@@ -200,8 +197,14 @@ The visualization tool creates the following plots:
 
     ![scatter_plot](images/true_vs_pred_scatter.png "Scatter plot for true vs. predicted targets.")
 
+3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets: The residual plot shown in figure [7](#figure-7) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.
+
+    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
+
+These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.
+
 > ### {% icon details %} R2 (coefficient of determination)
-> In both the parts, learning on datasets is done using cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [7](#figure-7) and [8](#figure-8). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [7](#figure-7), we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is `-0.06`. On the other hand, figure [8](#figure-8) shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.
+> In both the parts, learning on datasets is done using cross-validation and [R2](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.r2_score.html) scoring metric is used to evaluate the performance of the trained model. The closer it is to 1.0, the better it is. If it is negative, then the trained model is not good. To infer how its values exhibit model performance, we can compare the figures [8](#figure-8) and [9](#figure-9). In both the plots, the true and predicted targets are plotted in a scatter plot. For a good model, most of the points should lie along the `x = y` line as the true and predicted targets are close to each other. In figure [8](#figure-8), we can see that the points are scattered and do not show any pattern. Therefore, the R2 score is `-0.06`. On the other hand, figure [9](#figure-9) shows a better pattern as most of the points lie along the line and the R2 score is almost `1.0`. For RNA-seq dataset, we will compute the cross-validated R2 score using the training set and for DNA methylation dataset, we will compute the R2 score for the test set.
 >
 > ![model_bad](../../images/age-prediction-with-ml/model_bad.png "This shows an example of a bad model as most of the points are scattered.")
 >
@@ -210,30 +213,23 @@ The visualization tool creates the following plots:
 {: .details}
 
 
-3. [Residual plot](http://docs.statwing.com/interpreting-residual-plots-to-improve-your-regression/) between residual (predicted - true) and predicted targets: The residual plot shown in figure [9](#figure-9) is generated to see if there is any visible pattern between residual (predicted age - true age) and predicted age. For a good regression performance, this plot should exhibit a random pattern and the points should be symmetrically distributed along the y=0 line.
-
-    ![residual_plot](images/residual_plot.png "Residual plot between residual (predicted - true) and predicted targets. The plot shows a random pattern of points.")
-
-These plots are important to visualize the quality of regression and the true and predicted targets - how close or far they are from each other. The closer they are, the better the prediction.
-
-
 > ### {% icon question %} Question
 >
 > Inspect the plots. What can you say about the predictions?
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures 5, 6 and 9 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved. 
+> > Figures 5, 6 and 7 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors. 
 > >
 > {: .solution}
 {: .question}
 
 
-## Using Ensemble Methods for Regression
+## Using ensemble methods for regression
 
 Linear regression is a useful technique but isn’t always the right choice for our real problems. Linear regression is a good choice when there is a linear relationship between your independent and dependent variables and you are trying to predict continuous values.
 
-It is not a good choice when the relationship between independent and dependent variables is more complicated. For example, Figure 10 shows a data set that does not have a linear relationship so linear regression would not be a good choice.
+It is not a good choice when the relationship between independent and dependent variables is more complicated. For example, Figure 10 shows a dataset that does not have a linear relationship so linear regression would not be a good choice.
 
 ![regression](images/nonlinear_regression_generated_data.png "Data points with nonlinear relationship. ")
 
@@ -244,15 +240,15 @@ To learn the mapping between several features and the targets, in the next step,
 > An [*ensemble*](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and boosting is a method of converting weak learners into strong learners.
 {: .comment}
 
-[Jana Naue et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) (another ensemble-based regressor) as the regressor and we can conclude from this study that an ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use gradient boosting to build a prediction model.
+[Jana Naue et al. (2017)](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) used [Random Forest](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html#sklearn.ensemble.RandomForestRegressor) (another ensemble-based regressor) as regressor and we can conclude from this study that an ensemble-based regressor works well on this DNA methylation dataset. Therefore, we will use gradient boosting to build a prediction model.
 
-Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized.
+Like the random forest method, gradient boosting is an ensemble-based regressor, because it uses multiple decision tree regressors internally and makes predictions by taking the collective performances of predictions made by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes errors. One disadvantage, which comes from its basic principle of boosting, is that it cannot be parallelized. *Hint:* Please find the following tool in "Machine learning" tool section in Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Train a model
 >
 > 1. **Ensemble methods for classification and regression** {% icon tool %} with the following parameters to train the regressor:
 >    - *"Select a Classification Task"*: `Train a model`
->       - *"Select an ensemble method"*: `Gradient Boosting Regressor`
+>       - *"Select an ensemble method"*: `Gradient Boosting Regressor` (*Note:* choose `Gradient Boosting Regressor` not `Gradient Boosting Classifier`)
 >          - *"Select input type"*: `tabular data`
 >             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
@@ -273,7 +269,7 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 > >
 > > **Gradient boosting** regressor learns multiple attributes like **feature_importances_** (weight for each feature/column),
 > > **oob_improvement_** (which stores incremental improvements in learning), **estimators_** (collection of weak learners) and a few more.
-> > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by reading this file.
+> > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by using the **Estimator attributes** tool on the `gradient_boosting_model` dataset.
 > > 
 > {: .solution}
 >
@@ -295,7 +291,7 @@ After learning on the training dataset, we should evaluate the performance on th
 Now we can visualize and analyze the predictions using the **Plot actual vs predicted curves and residual plots** tool.
 > ### {% icon hands_on %} Hands-on: Check and visualize the predictions
 > 1. **Plot actual vs predicted curves and residual plots** {% icon tool %} with the following parameters to visualize the predictions:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels` (*Note:* use the `test_rows_labels` dataset, not the `test_rows_labels_without_header` one)
 >    - {% icon param-file %} *"Select predicted data file"*: `predicted_data_gradient_boosting`
 {: .hands_on}
 
@@ -329,7 +325,7 @@ After the **New Pipeline/Estimator** dataset and its tunable hyperparameters are
 
 > ### {% icon details %} 5-fold cross-validation
 >
-> This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [3](#figure-3). The complete dataset is divided into `5` equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
+> This is a model validation technique which estimates the performance of a predictive model on an unseen dataset. A dataset is divided into `5` folds and these folds are categorized into training and validation sets. The idea of cross-validation is shown in figure [12](#figure-12). The complete dataset is divided into `5` equal parts. 4 out of the 5 parts are used for training and the remaining 1 part is used for validating the performance of training. This is done for `5` folds/iterations; each time the validation set (1/5 of the dataset) is different. In all five folds, the complete dataset is used for training and validation. The final validation performance is averaged over `5` folds.
 >
 > ![5fold_cv](../../images/age-prediction-with-ml/5fold_cv.png "5-fold cross validation. ")
 >The image demonstrates how the 5-fold cross-validation works. The complete dataset is divided into 5 equal parts/folds. 4 parts (80%) of the data (training set shown in yellow) are used for training the model and the remaining one part is used for evaluating (validation set shown in blue) the trained model. This is repeated for 5 times till every part/fold is used as the validation set. The accuracies computed for different validation folds are averaged to give 5-fold cross-validation accuracy.

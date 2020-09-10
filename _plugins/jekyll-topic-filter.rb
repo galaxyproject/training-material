@@ -1,5 +1,28 @@
 module Jekyll
   module TopicFilter
+
+    def most_recent_contributors(contributors, count)
+      # Remove non-hof
+      hof = contributors.select{ |k, v| v.fetch("halloffame", "yes") != "no" }
+      # Get keys + sort by joined date
+      hof_k = hof.keys.sort{ |x, y|
+        hof[y].fetch('joined', '2016-01') <=> hof[x].fetch('joined', '2016-01')
+      }
+
+      # Transform back into hash
+      Hash[hof_k.slice(0, count).collect{|k| [k, hof[k]]}]
+    end
+
+    def filter_recent_modified(tutorials, count)
+      latest = tutorials.sort{ |x, y|
+        x.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+        y.data['last_modified_at'].format = '%s' # Originally %d-%b-%y
+
+        y.data['last_modified_at'].to_s <=> x.data['last_modified_at'].to_s
+      }
+      latest.slice(0, count)
+    end
+
     def topic_count(resources)
       # Count lines in the table except introduction slides
       resources.select{ |a| a['type'] != 'introduction' }.length
@@ -17,7 +40,7 @@ module Jekyll
         page_parts = page.url.split('/')
         # Skip anything outside of topics.
         if not page.url.include?('/topics/') then next end
-
+        page.data['url'] = page.url
         # If the path is long enough and it is under the topic name
         if page_parts.length > 3 and page_parts[2] == topic_name
           # Automate the tutorial-name thing. This writes back to the shared

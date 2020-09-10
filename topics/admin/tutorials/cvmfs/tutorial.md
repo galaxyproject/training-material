@@ -44,10 +44,6 @@ From the Cern website:
 
 A slideshow presentation on this subject can be found [here](slides.html). More details on the usegalaxy.org (Galaxy Main's) reference data setup and CVMFS system can be found [here](https://galaxyproject.org/admin/reference-data-repo/#usegalaxyorg-reference-data)
 
-There are two sections to this exercise. The first shows you how to use Ansible to setup and configure CVMFS for Galaxy. The second shows you how to do everything manually. It is recommended that you use the Ansible method. The manual method is included here mainly for a more in depth understanding of what is happening.
-
-If you really want to perform all these tasks manually, go [here](#cvmfs-and-galaxy-without-ansible), otherwise just follow along.
-
 > ### Agenda
 >
 > 1. TOC
@@ -81,7 +77,6 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
 >
 >    ```yaml
->    ---
 >    - src: galaxyproject.cvmfs
 >      version: 0.2.8
 >    ```
@@ -112,7 +107,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    <br/>
 >
->    Add the following lines to your `group_vars/galaxyservers.yml` file:
+>    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
 >    ```yaml
 >    # CVMFS vars
@@ -120,6 +115,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    galaxy_cvmfs_repos_enabled: config-repo
 >    cvmfs_quota_limit: 500
 >    ```
+>
+>    > ### {% icon tip %} Why all.yml?
+>    > We've integrated the cvmfs and pulsar tutorials better, such that CVMFS will be used for Pulsar as well, this configuration will be needed on all of our machines. This mirrors real life where you want CVMFS on every node that does computation.
+>    {: .tip}
 >
 > 4. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
@@ -234,131 +233,26 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 {: .hands_on}
 
-You've now finished the tutorial, and you can [jump to the end](#feedback-google) or read on to learn about configuring CVMFS without Ansible.
+# Other Aspects
 
-# CVMFS and Galaxy without Ansible
+## Development
 
-> ### {% icon comment %} Manual version of Ansible Commands
-> If you wish to perform the same thing that we've just done, but by building the ansible script manually, follow these instructions. Otherwise, you have already done everything below and do not need to re-do it.
-{: .comment}
+If you are developing a new tool, and want to add a reference genome, we recommend you [talk to us on Gitter](https://gitter.im/galaxy-iuc/iuc). You can also look at one of the tools that uses reference data, and try and copy from that. If you’re developing the location files completely new, you need to write the data manager.
 
-We are going to setup a CVMFS mount to the Galaxy reference data repository on our machines. To do this we have to install and configure the CVMFS client and then mount the appropriate CVMFS repository using the publicly available keys.
+## Automation
 
-> ### {% icon hands_on %} Hands-on: Installing the CVMFS Client
->
-> 1. On your remote machine, we need to first install the Cern software apt repo and then the CVMFS client and config utility:
->
->    ```bash
->    sudo apt install lsb-release
->    wget https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest_all.deb
->    sudo dpkg -i cvmfs-release-latest_all.deb
->    rm -f cvmfs-release-latest_all.deb
->    sudo apt-get update
->
->    sudo apt install cvmfs cvmfs-config
->    ```
->
-> 2. Now we need to run the CVMFS setup script.
->
->    ```bash
->    sudo cvmfs_config setup
->    ```
->
-{: .hands_on}
+You can automate the process of installing and setting up data managers and data with ephemeris. We're working in the [IDC](https://github.com/galaxyproject/idc) to democratise this CVMFS repository, and make this a community-controlled resource. You can also look here for ideas on automating your data management.
 
+## Access Control
 
-## Configuring CVMFS
+It is not easily possible to filter access to reference data depending on the user's role or group.
 
-The configuration is not complex for CVMFS:
+You could set up a tool per user/group, [secure access to running this tool](https://galaxyproject.org/admin/config/access-control/), and then allow this private tool to access a private tool data table. But you will not get tool updates, you will have to copy and edit this tool every time it gets updated. Or write more advanced job control rules to reject specific jobs which use specific datasets.
 
-> ### {% icon hands_on %} Hands-on: Configuring CVMFS
->
-> 1. Create a `/etc/cvmfs/default.local` file with the following contents:
->
->    ```
->    CVMFS_REPOSITORIES="data.galaxyproject.org"
->    CVMFS_HTTP_PROXY="DIRECT"
->    CVMFS_QUOTA_LIMIT="500"
->    CVMFS_CACHE_BASE="/srv/cvmfs/cache"
->    CVMFS_USE_GEOAPI=yes
->    ```
->
->    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to.
->
-> 2. Create a `/etc/cvmfs/domain.d/galaxyproject.org.conf` file with the following contents:
->
->    ```
->    CVMFS_SERVER_URL="http://cvmfs1-tacc0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-iu0.galaxyproject.org/cvmfs/@fqrn@;http://cvmfs1-psu0.galaxyproject.org/cvmfs/@fqrn@;http://galaxy.jrc.ec.europa.eu:8008/cvmfs/@fqrn@;http://cvmfs1-mel0.gvl.org.au/cvmfs/@fqrn@;http://cvmfs1-ufr0.galaxyproject.eu/cvmfs/@fqrn@"
->    ```
->
->    This is a list of the available stratum 1 servers that have this repo.
->
-> 3. Create a `/etc/cvmfs/keys/data.galaxyproject.org.pub` file with the following contents:
->
->    ```
->    -----BEGIN PUBLIC KEY-----
->    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5LHQuKWzcX5iBbCGsXGt
->    6CRi9+a9cKZG4UlX/lJukEJ+3dSxVDWJs88PSdLk+E25494oU56hB8YeVq+W8AQE
->    3LWx2K2ruRjEAI2o8sRgs/IbafjZ7cBuERzqj3Tn5qUIBFoKUMWMSIiWTQe2Sfnj
->    GzfDoswr5TTk7aH/FIXUjLnLGGCOzPtUC244IhHARzu86bWYxQJUw0/kZl5wVGcH
->    maSgr39h1xPst0Vx1keJ95AH0wqxPbCcyBGtF1L6HQlLidmoIDqcCQpLsGJJEoOs
->    NVNhhcb66OJHah5ppI1N3cZehdaKyr1XcF9eedwLFTvuiwTn6qMmttT/tHX7rcxT
->    owIDAQAB
->    -----END PUBLIC KEY-----
->    ```
->
-> 4. Make a directory for the cache files
->
->    ```
->    sudo mkdir /srv/cvmfs
->    ```
-{: .hands_on}
+## Proxying Recap
 
+The client talks directly to the stratum 1 (or to a proxy), and manages the data, and exposes it to the user. The proxy stores an opaque cache, that can't really be used, except as a proxy to a stratum 1.
 
-## Testing it out
+## Plant Data
 
-Probe the connection.
-
-> ### {% icon hands_on %} Hands-on: Testing it out
->
-> 1. Run `sudo cvmfs_config probe data.galaxyproject.org`
->
->    > ### {% icon question %} Question
->    >
->    > What does it output?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```
->    > > OK
->    > > ```
->    > >
->    > > If this doesn't return `OK` then you may need to restart autofs: `sudo systemctl restart autofs`
->    > >
->    > {: .solution }
->    >
->    {: .question}
->
-> 2. Change directory into `/cvmfs/` and list the files in that folder
->
->    > ### {% icon question %} Question
->    >
->    > What do you see?
->    >
->    > > ### {% icon solution %} Solution
->    > > You should see nothing, as CVMFS uses `autofs` in order to mount paths only upon request. Once you `cd` into the directory, autofs will automatically mount the repository and files will be listed.
->    > >
->    > {: .solution }
->    >
->    {: .question}
->
->
-> 3. Change directory into `/cvmfs/data.galaxyproject.org/`. Have a browse through the contents. You'll see `.loc` files, genomes and indices.
->
->    And just like that we all have access to all the reference genomes and associated tool indices thanks to the Galaxy Project's and mostly Nate's hard work!
->
-{: .hands_on}
-
-#### Step 4: Look at the repository
-
-Now to configure Galaxy to use the CVMFS references we have just installed, see [here](#configuring-galaxy-to-use-the-cvmfs-references)
+If you are working with plants, you can find separate reference data here: [frederikcoppens/galaxy_data_management](https://github.com/frederikcoppens/galaxy_data_management)

@@ -84,6 +84,10 @@ Your "History" is in the panel at the right.
 > 3. Type in a new name, for example, "My-Analysis"
 > 4. Press <kbd>Enter</kbd> on your keyboard to save it
 >
+> > ### {% icon comment %} Renaming not an option?
+> > If renaming does not work, it is possible you aren't logged in, so try logging in to Galaxy first. Anonymous users are only permitted to have one history, and they cannot rename it.
+> {: .comment}
+>
 {: .hands_on}
 
 ## Upload a file
@@ -140,7 +144,7 @@ Let's look at the quality of the reads in this file.
 
 > ### {% icon hands_on %} Hands-on: Use a tool
 > 1. Type **FastQC** in the tools panel search box (top)
-> 2. Click on the **FastQC** {% icon tool %} tool
+> 2. Click on the {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72) %} tool
 >
 >    The tool will be displayed in the central Galaxy panel.
 >
@@ -193,7 +197,7 @@ Let's run a tool to filter out lower-quality reads from our FASTQ file.
 
 > ### {% icon hands_on %} Hands-on: Run another tool
 > 1. Type **Filter by quality** in the tools panel search box (top)
-> 2. Click on the tool **Filter by quality** {% icon tool %}
+> 2. Click on the tool {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1) %}
 > 3. Set the following parameters:
 >    - {% icon param-file %} *"Input FASTQ file"*: the input FASTQ file
 >    - *"Quality cut-off value"*: 35

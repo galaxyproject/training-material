@@ -30,6 +30,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - cvmfs
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
 ---
@@ -71,6 +72,7 @@ In this tutorial, we will:
 This tutorial assumes that you have:
 
 - A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
+- That you have completed the "Galaxy Installation with Ansible" and CVMFS tutorials (Job configuration tutorial is optional.)
 
 # Installing the Pulsar Role
 
@@ -132,7 +134,17 @@ Some of the other options we will be using are:
 
 > ### {% icon hands_on %} Hands-on: Configure pulsar group variables
 >
-> 1. Create a new file in `group_vars` called `pulsarservers.yml` and set some of the above variables as well as some others.
+> 1. Create or edit the file `group_vars/all.yml` and set your private token:
+>
+>    ```yaml
+>    private_token: your_private_token_here
+>    ```
+>
+>    This is going in a special file because all (two) of our services need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
+>
+>    Replace `your_private_token_here` with a long randomish (or not) string.
+>
+> 2. Create a new file in `group_vars` called `pulsarservers.yml` and set some of the above variables as well as some others.
 >
 >    {% raw %}
 >    ```yaml
@@ -144,8 +156,6 @@ Some of the other options we will be using are:
 >
 >    pulsar_host: 0.0.0.0
 >    pulsar_port: 8913
->
->    private_token: your_private_token_here
 >
 >    pulsar_create_user: true
 >    pulsar_user: {name: pulsar, shell: /bin/bash}
@@ -182,8 +192,6 @@ Some of the other options we will be using are:
 >      client_max_body_size: 5g
 >    ```
 >    {% endraw %}
->
-> 2. Replace `your_private_token_here` with a long randomish (or not) string.
 >
 > 3. Add the following lines to your `hosts` file:
 >
@@ -243,6 +251,8 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >            mode: 0755
 >          become: yes
 >      roles:
+>        - role: galaxyproject.cvmfs
+>          become: yes
 >        - role: galaxyproject.nginx
 >          become: yes
 >        - galaxyproject.pulsar
@@ -317,24 +327,80 @@ There are three things we need to do here:
 * Create job destination which references the above job runner.
 * Tell Galaxy which tools to send to the job destination: We will use `bwa-mem`
 
+> ### {% icon tip %} Missing Job Conf? One-day admin training?
+>
+> For some of our training events we do just a subset of the trainings, often Ansible, Ansible-Galaxy, and then one of these topics. For Pulsar, we need some basic job configuration file though, in order to proceed to the next steps. Follow these steps to get caught up:
+>
+> > ### {% icon hands_on %} Hands-on: Get caught up
+> >
+> > 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p templates/galaxy/config/`).
+> >
+> > 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
+> >
+> >    ```xml
+> >    <job_conf>
+> >        <plugins workers="4">
+> >            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+> >        </plugins>
+> >        <destinations default="local">
+> >            <destination id="local" runner="local"/>
+> >        </destinations>
+> >        <tools>
+> >        </tools>
+> >    </job_conf>
+> >    ```
+> >
+> > 3. Install bwa from the admin installation interface if it is missing.
+> >
+> > 4. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside in your group variables:
+> >
+> >    {% raw %}
+> >    ```yaml
+> >    galaxy_config:
+> >      galaxy:
+> >        # ... existing configuration options in the `galaxy` section ...
+> >        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+> >    ```
+> >    {% endraw %}
+> >
+> >    And then deploy the new config file using the `galaxy_config_templates` var in your group vars:
+> >
+> >    {% raw %}
+> >    ```yaml
+> >    galaxy_config_templates:
+> >      # ... possible existing config file definitions
+> >      - src: templates/galaxy/config/job_conf.xml.j2
+> >        dest: "{{ galaxy_config.galaxy.job_config_file }}"
+> >    ```
+> >    {% endraw %}
+> >
+> > If you want to get caught up properly and understand what the above configuration *means*, we recommend following the [job configuration tutorial]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}).
+> >
+> {: .hands_on}
+>
+> We hope that got you caught up!
+{: .tip}
+
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
-> 1. In your `files/galaxy/config/job_conf.xml` file add the following job runner to the `<plugins>` section:
+> 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
 >
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
 >    ```
 >
->    Then add the Pulsar destination. We will need the ip address of your pulsar server and the private_token string you used when you created it.
+>    Then add the Pulsar destination. We will need the ip address of your pulsar server and the `private_token` string you used when you created it.
 >
 >    Add the following to the `<destinations>` section of your `job_conf.xml` file:
 >
+>    {% raw %}
 >    ```xml
 >    <destination id="pulsar" runner="pulsar_runner" >
 >        <param id="url">http://your_ip_address_here:80/</param>
->        <param id="private_token">your_private_token_here</param>
+>        <param id="private_token">{{ private_token }}</param>
 >    </destination>
 >    ```
+>    {% endraw %}
 >
 > 2. Finally we need to tell Galaxy which tools to send to Pulsar. We will tell it to send bwa-mem jobs to it. We use the `<tools>` section of the `job_conf.xml` file.
 >    We need to know the full id of the tool in question, we can get this out of the `integrated_tool_panel.xml` file in the `mutable-config` directory. Then we tell Galaxy which destination to send it to (pulsar).
@@ -367,12 +433,11 @@ Now we will upload a small set of data to run bwa-mem with.
 >    ```
 >    https://zenodo.org/record/582600/files/mutant_R1.fastq
 >    https://zenodo.org/record/582600/files/mutant_R2.fastq
->    https://zenodo.org/record/582600/files/wildtype.fna
 >    ```
 >
 > 2. **Map with BWA-MEM** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a genome from history and build index`
->    - {% icon param-file %} *"Use the following dataset as the reference genome"*: `wildtype.fna`
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a built-in genome index`
+>    - *"Using reference genome"*: `Escherichia coli (str. K-12 substr MG1655): eschColi_K12`
 >    - *"Single or Paired-end reads"*: `Paired end`
 >    - {% icon param-file %} *"Select first set of reads"*: `mutant_R1.fastq`
 >    - {% icon param-file %} *"Select second set of reads"*: `mutant_R2.fastq`
@@ -391,6 +456,16 @@ Now we will upload a small set of data to run bwa-mem with.
 >
 {: .hands_on}
 
-You'll notice that the Pulsar server has received the job (all the way in Sydney!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run and the results will be returned to Galaxy!
+You'll notice that the Pulsar server has received the job (all the way in Australia!) and now should be installing bwa-mem via conda. Once this is complete (which may take a while - first time only) the job will run. When it starts running it will realise it needs the *E. coli* genome from CVMFS and fetch that, and then results will be returned to Galaxy!
 
-How awesome is that? :)
+> ### {% icon tip %} PulsarClientTransportError with BWA-MEM
+> Q: I got the following error the first time I ran BWA-MEM with Pulsar: `pulsar.client.exceptions.PulsarClientTransportError: Unknown transport error (transport message: Gateway Time-out)`. When I re-executed the job later, it worked without problems. Can the time-out be avoided?
+>
+> A: Yes, with AMQP Pulsar. This is the recommended setup for production. And apparently the transport_timeout option that I forgot about: `<param id="transport_timeout">` in the `<plugin>` entry (you will need to make it a container tag) for the PulsarRESTJobRunner plugin.
+{: .tip}
+
+How awesome is that? Pulsar in another continent with reference data automatically from CVMFS :)
+
+# Pulsar in Production
+
+If you want to make use of Pulsar on a Supercomputer, you only need access to a submit node, and you will need to run Pulsar there. We recommend that if you need to run a setup with Pulsar, that you deploy an AMQP server (e.g. RabbitMQ) alongside your Galaxy. That way, you can run Pulsar on any submit nodes, and it can connect directly to the AMQP and Galaxy. Other Pulsar deployment options require exposing ports wherever Pulsar is running, and this requires significant more coordination effort.

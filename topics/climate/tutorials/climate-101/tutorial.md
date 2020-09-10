@@ -78,11 +78,22 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Check that the datatype is **csv**
+> 3. Check that the datatype is **tabular**
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 4. Add a tag to the dataset corresponding to `copernicus`
+>    If it is not `tabular` make sure to convert it using the Galaxy built-in format converters.
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 4. Rename Datasets
+>
+>    As "`https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv`" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull.
+>    For example by removing `https://zenodo.org/record/3776500/files/` to obtain `tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv` and `ts_cities.csv`, respectively.
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 5. Add a tag to the dataset corresponding to `copernicus`
 >
 >    {% include snippets/add_tag.md %}
 >
@@ -208,6 +219,7 @@ To get some information about the (past and current) climate in Paris, we will f
 >    > >      - *"Group by fields"*: 2
 >    > >      - *"Input file has a header line"*: `Yes`
 >    > >      - *"Print header line"*: `No`
+>    > >      - "Sort input": `Yes`
 >    > >      - "Print all fields from input file": `No`
 >    > >      - In *"Operation to perform on each group"*:
 >    > >          - {% icon param-repeat %} *"Insert Operation to perform on each group"*
@@ -218,7 +230,7 @@ To get some information about the (past and current) climate in Paris, we will f
 >    > >     Then use again **Datamash** to get the month where the minimum and maximum temperatures are found:
 >    > >      - {% icon param-file %} *"Input tabular dataset"*: `climatology_Paris.csv`
 >    > >      - *"Group by fields"*: 
->    > >      - *"Input file has a header line"*: `Yes`
+>    > >      - *"Input file has a header line"*: `No`
 >    > >      - *"Print header line"*: `No`
 >    > >      - "Print all fields from input file": `Yes`
 >    > >      - In *"Operation to perform on each group"*:
@@ -262,27 +274,27 @@ To get some information about the (past and current) climate in Paris, we will f
 >  To answer to this question, we will compute yearly mean of the temperature in Paris and visualize it.
 >
 >    1. Use **Datamash**  {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"Input tabular dataset"*: `split_dates_Paris.csv`
->      - *"Group by fields"*: 1
->      - *"Input file has a header line"*: `Yes`
->      - *"Print header line"*: `No`
->      - "Print all fields from input file": `No`
->      - *"Sort input"*: `Yes`
->      - In *"Operation to perform on each group"*:
->      - {% icon param-repeat %} *"Insert Operation to perform on each group"*
+>        - {% icon param-file %} *"Input tabular dataset"*: `split_dates_Paris.csv`
+>        - *"Group by fields"*: 1
+>        - *"Input file has a header line"*: `Yes`
+>        - *"Print header line"*: `No`
+>        - *"Print all fields from input file"*: `No`
+>        - *"Sort input"*: `Yes`
+>        - In *"Operation to perform on each group"*:
+>        - {% icon param-repeat %} *"Insert Operation to perform on each group"*
 >              - *"Type"*: `Mean`
 >              - *"On column"*: `c4`
 >
 >    2. Rename the resulting file to `yearly_mean_Paris.csv`.
 > 
 >    3. To make a plot, you can use **Scatterplot w ggplot2**  {% icon tool %} with the following parameters:
->      - *"Input in tabular format"*: `yearly_mean_Paris.csv`
->      - *"Column to plot on x-axis"*: 1
->      - *"Column to plot on y-axis"*: 2
->      - *"Plot title"*: Yearly mean temperature in Paris from 1950 to 2019
->      - *"Label for x axis"*: Year (YYYY)
->      - *"Label for y axis"*: Temperature (degrees celcius)
->      - And finally in `Advanced Options` change `Type of plot` to **Points and Lines**.
+>        - *"Input in tabular format"*: `yearly_mean_Paris.csv`
+>        - *"Column to plot on x-axis"*: 1
+>        - *"Column to plot on y-axis"*: 2
+>        - *"Plot title"*: Yearly mean temperature in Paris from 1950 to 2019
+>        - *"Label for x axis"*: Year (YYYY)
+>        - *"Label for y axis"*: Temperature (degrees celcius)
+>        - And finally in `Advanced Options` change `Type of plot` to **Points and Lines**.
 > 
 >    4. **View** {% icon galaxy-eye%} the resulting plot:
 >
@@ -365,7 +377,7 @@ At the moment, there are [54 ECVs](https://gcos.wmo.int/en/essential-climate-var
 >        Rename the resulting file to `rh_mean_july_1980_2018.nc`
 >    2. **map plot gridded (lat/lon) netCDF data** {% icon tool %} with the following parameters:
 >        - *"input with geographical coordinates (netCDF format)"*: `rh_mean_july_1980_2018.nc`
->        - *"variable name as given in the netCDF file": `tp`
+>        - *"variable name as given in the netCDF file"*: `R`
 >        - And finally in `Advanced Options` change:
 >            - *"multiple times"*: `Yes`
 >            - *"comma separated list of indexes for fields to plot"*: 0,1

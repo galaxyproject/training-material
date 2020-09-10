@@ -5,67 +5,74 @@ redirect_from:
 - /topics/admin/tutorials/tool-install/slides
 
 
-title: "Ephemeris for Galaxy Tool Management"
+title: "Galaxy Tool Management with Ephemeris"
 questions:
   - How to install, update, and maintain Galaxy tools?
   - How to extract a list of tools from a workflow or Galaxy instance?
+  - How are tool dependencies resolved by Galaxy?
 objectives:
-  - Learn about Ephemeris
   - Extract a list of tools from a workflow
   - Install these tools into a given Galaxy
+  - Understand the tool dependency resolution process
 key_points:
   - Ephemeris and automation help with the tool management on Galaxy
   - There are tool management best practices you can learn from
-  - Do not manage your Galaxy's tools manually
+  - Dependency resolvers have different priorites
 contributors:
   - mvdbeek
   - martenson
   - slugger70
   - hexylena
+  - nsoranzo
 ---
 
-# Galaxy Vocabulary
+## Galaxy Vocabulary
 
 * `tool` or `tool wrapper` - XML file that describes to Galaxy how the underlying software works.
 * `repository` - Versioned code archive in Tool Shed containing Galaxy tool(s).
+* `requirement` or `dependency` - the underlying software needed to execute the tool command
 
 ---
+class: left
 
 # Ways to add tools
 
 You can add tools to Galaxy either
 
-* Manually - Trivial for trivial tools and useful for tool development.
-* Using Tool Shed
-  * Through admin UI in Galaxy
+* Manually - useful for tool development.
+* From the Tool Shed
+  * Through the admin UI in Galaxy
   * Using **ephemeris** (recommended)
 
 ---
 
-# How to add tools manually
+## How to add tools manually
 
 - By default Galaxy loads all tools in `tool_conf.xml.sample` into tool panel.
-- To add local tools by hand:
+- To add a local tool by hand:
   - Make a copy `$ cp tool_conf.xml.sample tool_conf.xml`.
-  - Add your tool entries to the `tool_conf.xml`.
-  - Refresh the site
+  - Add your tool entry to the `tool_conf.xml`.
 - To add local tools with the [galaxyproject.galaxy Ansible role][galaxy-role]:
-  - Set `galaxy_local_tools`
+  - Set `galaxy_local_tools` to the local tool paths
   - Run the playbook
+- Tool dependencies need to be installed separately, unless
+  `conda_auto_install: true` is set in `galaxy.yml` (not recommended for
+  production)
+
 
 [galaxy-role]: https://galaxy.ansible.com/galaxyproject/galaxy
 
 ---
 
-# How to install from the Tool Shed
+## How to install tools from the Tool Shed
 
-* Find the repository you want to install.
-* From Galaxy's admin UI find the repo in the connected TS.
-* Install the repo into Galaxy.
+- From the Galaxy admin UI, select "Tool Management > Install and Uninstall"
+- Find the repository with the tool(s) you want to install
+- Install the tool repository into Galaxy
 
 ---
 
-# How to install with Ephemeris
+## How to install with Ephemeris
 
 * Find the repository you want to install.
 * Run `shed-tools install` with the repository name
@@ -76,7 +83,7 @@ You can add tools to Galaxy either
 
 Small Python library for Galaxy Management
 
-* Install:
+* Can install:
 	- Tools
 	- Reference data
 	- Workflows
@@ -95,10 +102,10 @@ workflow-install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	[--publish_workflows]
 ```
 
-(use `workflow-to-tools` to extract list of tools from a workflow)
+(use `workflow-to-tools` to extract the list of tools used in a workflow)
 
 ---
-## Get Galaxy's tool list
+## Get installed tool list for a Galaxy instance
 
 ```console
 get-tool-list [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
@@ -141,8 +148,7 @@ shed-tools install [-h] [-v] [-g GALAXY] [-u USER] [-p PASSWORD] [-a API_KEY]
 	[-y TOOL_YAML]
 	[--name NAME]
 	[--owner OWNER]
-	[--revisions
-	[REVISIONS [REVISIONS ...]]]
+	[--revisions [REVISIONS [REVISIONS ...]]]
 	[--toolshed TOOL_SHED_URL]
 	[--install_tool_dependencies]
 	[--skip_install_resolver_dependencies]
@@ -233,10 +239,9 @@ Galaxy Version: 17.05
 
 # More on Tool Management:
 
-- tool installation
-- configuration
-- suites
-- dependencies
+- Tool installation
+- Configuration
+- Dependencies
 
 ---
 
@@ -250,9 +255,9 @@ Galaxy Version: 17.05
 [conda]: https://conda.io/
 
 ---
+class: left
 
-## Example config entry
- one entry in `shed_tool_conf.xml`
+## Example `shed_tool_conf.xml` entry
 
 ```xml
 <section id="filter" name="Filter and Sort" version="">
@@ -281,3 +286,136 @@ Galaxy Version: 17.05
     <tool id="testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1" />
 </section>
 ```
+
+---
+
+## Tool dependency resolution
+
+* We aim to make Galaxy resolver-independent but Conda-oriented.
+* What resolver is going to be used for the tool dependencies is determined at runtime
+according to the order specified in `dependency_resolvers_conf.xml`.
+
+```xml
+<dependency_resolvers>
+  <tool_shed_packages />
+  <galaxy_packages />
+  <conda />
+  <galaxy_packages versionless="true" />
+  <conda versionless="true" />
+<!-- other resolvers
+  <lmod />
+  <lmod versionless="true" />
+  <modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" />
+  <modules modulecmd="/opt/Modules/3.2.9/bin/modulecmd" versionless="true" default_indicator="default" />
+  <tool_shed_tap />
+  <homebrew />
+-->
+</dependency_resolvers>
+```
+
+[Full documentation](https://docs.galaxyproject.org/en/master/admin/dependency_resolvers.html)
+
+---
+class: left
+
+## Dependency resolution example
+
+Tool XML contains:
+
+```xml
+<tool id="foo">
+    <requirements>
+        <requirement type="package" version="4.2">bar</requirement>
+    </requirements>
+</tool>
+```
+
+---
+class: left
+
+## `<tool_shed_packages />`
+
+Did tool `foo` depend on a Tool Shed package providing `bar` 4.2 when installed?
+- Yes: Query install DB for `repo_owner`, `repo_name`, `changeset_id`, then source:
+  - `<tool_dependencies_dir>/bar/4.2/<repo_owner>/<repo_name>/<changeset_id>/env.sh`
+- No: continue
+
+---
+class: left
+
+## `<galaxy_packages />`
+
+Does `<tool_dependency_dir>/bar/4.2/env.sh` exist?:
+- Yes: source it
+- No: Does `<tool_dependency_dir>/bar/4.2/bin/` exist?:
+  - Yes: prepend it to `$PATH`
+  - No: continue
+
+Good for dependencies manually installed by an administrator
+
+---
+class: left
+
+## `<conda />`
+
+Does `bar==4.2` exist in Conda?:
+- Yes: use `conda create` to create a Conda env in `<conda_prefix>/envs/` (if it doesn't exist already), then activate it
+- No: continue
+
+[Conda for tool dependencies FAQ](https://docs.galaxyproject.org/en/master/admin/conda_faq.html)
+
+---
+class: left
+
+## `<galaxy_packages versionless="true" />`
+
+Does `<tool_dependency_dir>/bar/default/` exist and is it a symlink?:
+
+- Yes: Does `<tool_dependency_dir>/bar/default/env.sh` exist?:
+  - Yes: source it
+  - No: Does `<tool_dependency_dir>/bar/default/bin/` exist?:
+      - Yes: prepend it to `$PATH`
+      - No: continue
+- No: continue
+
+---
+class: left
+
+## `<conda versionless="true" />`
+
+Does `bar` (any version) exist in Conda?:
+- Yes: use `conda create` to create env in job working directory
+- No: continue
+
+---
+class: left
+
+## `<modules modulecmd="..." />`
+
+Is `bar/4.2` a registered module?:
+- Yes: Load module `bar/4.2`
+- No: continue
+
+See: [Environment Modules](http://modules.sourceforge.net/)
+
+---
+class: left
+
+## `<modules modulecmd="..." versionless="true" />`
+
+Is `bar/default` a registered module?:
+- Yes: Load module `bar/default`
+- No: continue
+
+---
+
+## If dependency is not resolved
+
+Submit the job anyway, maybe it's available on `$PATH`
+
+---
+
+## Using containers for Tool Dependencies
+
+- Galaxy can also use **Docker** or **Singularity** containers to resolve dependencies
+- You can read more about this in the [Tool Dependencies and Containers slides](../../../dev/tutorials/containers/slides.html)

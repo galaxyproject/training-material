@@ -21,6 +21,7 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
+      - htmd-analysis
 contributors:
   - simonbray
 
@@ -112,26 +113,22 @@ The protein we will look at in this tutorial is hen egg white [lysozyme](https:/
 
 The **GROMACS initial setup** {% icon tool %} tool uses the PDB input to create three files which will be required for MD simulation.
 
-Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model.
+Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model. Secondly, a GRO structure file is created, storing the structure of the protein. Finally, a 'position restraint file' is created which will be used for NVT/NPT equilibration. We will return to this later.
 
-Secondly, a GRO structure file is created, storing the structure of the protein. It also defines the unit cell 'box', centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.
-
-Finally, a 'position restraint file' is created which will be used for NVT/NPT equilibration. We will return to this later.
-
-In summary, this tool will:
+In summary, the initial setup tool will:
 - create a 'topology' file
 - convert a PDB protein structure into a GRO file, with the structure centered in a simulation box (unit cell)
 - create a position restraint file
 
+After these files have been generated, a further step is required to define a simulation box (unit cell) in which the simulation can take place. This can be done with the **GROMACS structure configuration** {% icon tool %} tool. It also defines the unit cell 'box', centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.
+
 > ### {% icon hands_on %} Hands-on: perform initial processing
 >
-> Run **GROMACS initial setup** {% icon tool %} with the following parameters:
+> 1. Run **GROMACS initial setup** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
 >    - *"Water model"*: `SPC/E`
 >    - *"Force field"*: `OPLS/AA`
 >    - *"Ignore hydrogens"*: `No`
->    - *"Box dimensions in nanometers"*: `1.0`
->    - *"Box type"*: `Rectangular box with all sides equal`
 >    - *"Generate detailed log"*: `Yes`
 >
 > > ### {% icon question %} Question
@@ -143,6 +140,13 @@ In summary, this tool will:
 > > {: .solution}
 > {: .question}
 >
+> 2. Run **GROMACS structure configuration** {% icon tool %} with the following parameters:
+>    - *"Input structure"*: GRO output from initial setup tool
+>    - *"Output format"*: `GRO file`
+>    - *"Configure box?"*: `Yes`
+>    - *"Box dimensions in nanometers"*: `1.0`
+>    - *"Box type"*: `Rectangular box with all sides equal`
+>    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
 
@@ -155,7 +159,7 @@ The next stage is protein solvation, performed using **GROMACS solvation and add
 > ### {% icon hands_on %} Hands-on: solvation
 >
 > **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by setup
+>    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by the structure configuration tool
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology produced by setup
 >    - *"Water model for solvation"*: `SPC`
 >    - *"Generate detailed log"*: `Yes`

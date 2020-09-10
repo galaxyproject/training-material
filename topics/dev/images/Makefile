@@ -1,9 +1,11 @@
+MINDMAPS := $(wildcard *.mindmap.yml)
 INPUTS := $(wildcard *.plantuml.txt)
 OUTPUTS := $(INPUTS:.txt=.svg)
 
-all: plantuml.jar plantuml_options.txt $(OUTPUTS)
+all: plantuml.jar $(MINDMAPS) $(OUTPUTS)
 
-$(OUTPUTS): $(INPUTS)
+$(OUTPUTS): $(INPUTS) $(MINDMAPS)
+	python mindmap_yaml_to_plantuml.py $(MINDMAPS)
 	java -jar plantuml.jar -c plantuml_options.txt -tsvg $(INPUTS)
 
 plantuml.jar:

@@ -1152,7 +1152,7 @@ Here, treatment is the primary factor that we are interested in. The sequencing 
 >    > If you have a large number of samples, or a complex experimental design, manually selecting files for each factor level
 >    > may be a lot of work. In these situations, **group tags** can make your life a lot easier.
 >    >
->    > For more information about setting and using group tags, please see [this tutorial]({% link topics/galaxy-data-manipulation/tutorials/group-tags/tutorial.md %})
+>    > For more information about setting and using group tags, please see [this tutorial]({% link topics/galaxy-interface/tutorials/group-tags/tutorial.md %})
 >    {: .comment}
 >
 {: .hands_on}

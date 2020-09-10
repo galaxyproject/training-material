@@ -52,12 +52,21 @@ install: clean create-env ## install dependencies
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
+	@echo "Tip: Want faster builds? Use 'serve-quick' in place of 'serve'."
 	@echo "Tip: to serve in incremental mode (faster rebuilds), use the command: make serve FLAGS=--incremental" && echo "" && \
 	$(ACTIVATE_ENV) && \
 		mv Gemfile Gemfile.backup || true && \
 		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve
+
+serve-quick: ## run a local server (faster, some plugins disabled for speed)
+	@echo "This will build the website with citations and other content disabled, and incremental on by default. To run the full preview (slower), use make serve" && echo "" && \
+	$(ACTIVATE_ENV) && \
+		mv Gemfile Gemfile.backup || true && \
+		mv Gemfile.lock Gemfile.lock.backup || true && \
+		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
+.PHONY: serve-quick
 
 detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
@@ -91,7 +100,7 @@ check-html: build ## validate HTML
 	      	./_site
 .PHONY: check-html
 
-check-workflows: build ## validate Workflows
+check-workflows: ## validate Workflows
 	$(ACTIVATE_ENV) && \
 		bash bin/validate-json.sh && \
 		bash bin/validate-workflow-tags.sh
@@ -107,7 +116,7 @@ check-html-internal: build ## validate HTML (internal links only)
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/" \
 	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
 	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      	--disable-external \
@@ -130,8 +139,9 @@ check-slides: build  ## check the markdown-formatted links in slides
 
 check-yaml: ## lint yaml files
 	$(ACTIVATE_ENV) && \
-		find . -name "*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
-		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}"
+		find . -name "*.yaml" | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+		ruby bin/check-contributors.rb
 .PHONY: check-yaml
 
 check-snippets: ## lint snippets
@@ -147,7 +157,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 	./bin/check-broken-boxes
 .PHONY: check-broken-boxes
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
+check: check-yaml check-frontmatter check-html-internal check-html check-broken-boxes check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
 
 lint: ## run all linting checks

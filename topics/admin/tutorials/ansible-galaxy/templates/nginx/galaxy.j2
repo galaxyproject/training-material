@@ -24,12 +24,6 @@ server {
         expires 24h;
     }
 
-    # The style directory is in a slightly different location
-    location /static/style {
-        alias {{ galaxy_server_dir }}/static/style/blue;
-        expires 24h;
-    }
-
     # In Galaxy instances started with run.sh, many config files are
     # automatically copied around. The welcome page is one of them. In
     # production, this step is skipped, so we will manually alias that.

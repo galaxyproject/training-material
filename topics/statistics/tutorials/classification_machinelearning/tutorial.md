@@ -58,7 +58,7 @@ The data classification process includes two steps:
 2. Applying the classifier to a classification task: In this step, the classifier is used for classification. Here the test data is used to estimate the accuracy of classification rules. The classification rules can be applied to the new data samples if the accuracy is considered acceptable.
 
 
-# Quantitative Structure - Activity Relationship biodegradation
+# Quantitative structure - activity relationship biodegradation
 
 The classification problem we will study in this tutorial is related to biodegradation. Chemical substances which decay slowly will accumulate over time, which poses a threat to the environment. Therefore, it is useful to be able to predict in advance whether a substance will break down quickly or not.
 
@@ -100,8 +100,8 @@ The `train_rows` contains a column `Class` which is the class label or target. W
 > ### {% icon details %} Preparing the data for classification
 >
 > Preparing the data involves these following major tasks:
-> 1. Data Cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
-> 2. Relevance Analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
+> 1. Data cleaning: involves removing noise and treatment of missing values. The noise is removed by applying noise filtering techniques and the problem of missing values is solved by replacing a missing value with different techniques, for example substitution, mean imputation and regression imputation.
+> 2. Relevance analysis: the database may also have attributes which are irrelevant for classification. Correlation analysis is used to know whether any two given attributes are related - e.g. one of the features and the target variable.
 > 3. Normalization: the data is transformed using normalization. Normalization involves scaling all values for q given attribute in order to make them fall within a small specified range. Normalization is used when in the learning step, neural networks or the methods involving measurements are used.
 >
 {: .details}
@@ -116,13 +116,13 @@ The second thing we need is an optimization algorithm for iteratively updating t
 >
 > 1. **Generalized linear models** {% icon tool %} with the following parameters to train the regressor:
 >    - *"Select a Classification Task"*: `Train a model`
->       - *"Select a linear method"*: `Logistic Regression model`
+>       - *"Select a linear method"*: `Logistic Regression`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -145,7 +145,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 
 After learning on the training dataset, we should evaluate the performance on the test dataset to know whether the learning algorithm learned a good classifier from the training dataset or not. This classifier is used to predict a new sample and a similar accuracy is expected.
 
-Now, we will predict class in the test dataset using this classifier in order to see if it has learned important features which can generalize on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
+Now, we will predict the class in the test dataset using this classifier in order to see if it has learned important features which can be generalized on a new dataset. The test dataset (`test_rows`) contains the same number of features but does not contain the `Class` column. This is predicted using the trained classifier.
 
 
 > ### {% icon hands_on %} Hands-on: Predict class using the logistic regression classifier
@@ -153,7 +153,7 @@ Now, we will predict class in the test dataset using this classifier in order to
 > 1. **Generalized linear models** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `LogisticRegression_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `LogisticRegression_result`
@@ -167,8 +167,8 @@ We will evaluate the classification by comparing the predicted with the expected
 >
 > 1. **Remove beginning** {% icon tool %} with the following parameters:
 >       - {% icon param-file %} *"Remove first"*: `1`
->       - {% icon param-file %} *"from"*: `test_rows_labels.csv`
-> 2. Rename the generated file to `test_rows_labels_noheader.csv`
+>       - {% icon param-file %} *"from"*: `test_rows_labels`
+> 2. Rename the generated file to `test_rows_labels_noheader`
 {: .hands_on}
 
 
@@ -176,14 +176,14 @@ Now we visualize and analyze the classification using the "Plot confusion matrix
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels_noheader`
 >    - {% icon param-file %} *"Select predicted data file"*: `LogisticRegression_result`
 >    - {% icon param-file %} *"Select trained model"*: `LogisticRegression_model`
 {: .hands_on}
 
 The visualization tool creates the following plots:
 
-1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix): The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, confusion matrix of the predictions is a heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.
+1. [Confusion matrix](https://en.wikipedia.org/wiki/Confusion_matrix): The confusion matrix summarizes the classification performance of a classifier with respect to the test data. It is a two-dimensional matrix; the horizontal axis (x-axis) shows the predicted labels and the vertical axis (y-axis) shows the true labels. Each rectangular box shows a count of samples falling into the four output combinations (true class, predicted class) - (1, 0), (1, 1), (0, 1) and (0, 0). In Figure 2, the confusion matrix of the predictions is a colour-coded heatmap. For a good prediction, the diagonal running from top-left to bottom-right should contain a smaller number of samples, because it shows the counts of incorrectly predicted samples. Hovering over each box in Galaxy shows the true and predicted class labels and the count of samples.
 
     ![confusion_matrix](images/confusion_matrix_linear.png "Confusion matrix for the logistic regression classifier. ")
 
@@ -211,7 +211,7 @@ These plots are important to visualize the quality of the classifier and the tru
 
 # K-Nearest Neighbor (KNN)
 
-At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and If k is too large, the neighborhood may include points from other classes and cause errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.
+At the second step, we will use k-nearest neighbor classifier. In the [k-nearest neighbor](https://en.wikipedia.org/wiki/K-nearest_neighbors_algorithm) classifier, a sample is classified by a majority vote of its neighbors.  The sample is assigned to the class which is most common among its k nearest neighbors.  k is a positive integer and typically it is small. For example, if k = 1, then the sample is simply assigned to the class of that single nearest neighbor. Surprisingly, when the number of data points is large, this classifier is not that bad. Choosing the best value of k is very important. If k is too small, the classifier will be sensitive to noise points and if k is too large, the neighborhood may include points from other classes and causes errors. To select the k that is right for your data, we recommend running the KNN algorithm several times with different values of k and choosing the k that reduces the number of errors the most.
 
 > ### {% icon question %} Question
 >
@@ -219,7 +219,7 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 >
 > > ### {% icon solution %} Solution
 > > Advantages:
-> > - It is very simple algorithm to understand and interpret.
+> > - It is a very simple algorithm to understand and interpret.
 > >
 > > - It is very useful for nonlinear data because there is no assumption of linearity in this algorithm.
 > >
@@ -250,11 +250,11 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Classifier type"*: `Nearest Neighbors`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -279,7 +279,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 > 1. **Nearest Neighbors Classification** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `NearestNeighbors_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `NearestNeighbors_result`
@@ -290,7 +290,7 @@ Now we visualize and analyze the classification. As you can see, `NearestNeighbo
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `NearestNeighbors_result`
 >    - {% icon param-file %} *"Select trained model"*: `NearestNeighbors_model`
 {: .hands_on}
@@ -308,7 +308,7 @@ The visualization tool creates diagrams for the Confusion matrix, Precision, rec
 
 [Support Vector Machines](https://en.wikipedia.org/wiki/Support-vector_machine) (SVMs) have been extensively researched in the machine learning community for the last decade and actively applied to applications in various domains such as bioinformatics. SVM is a generalization of a classifier called maximal margin classifier and is introduced as a binary classifier intended to separate two classes when obtaining the optimal hyperplane and decision boundary. SVMs are based on the assumption that the input data can be linearly separable in a geometric space. The maximal margin classifier is simple, but it cannot be applied to the majority of datasets, since the classes must be separated by a linear boundary and this is often not the case when working with real world data. That is why the support vector classifier was introduced as an extension of the maximal margin classifier, which can be applied in a broader range of cases.
 
-To solve this problem SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
+To solve this problem, SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
 
 Without going into technical details, a kernel is a function that quantifies the similarity of two observations. Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
 kernel trick. In the next step, we will build a SVM classifier with our data. 
@@ -319,11 +319,11 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select a linear method"*: `Linear Support Vector Classification`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -350,7 +350,7 @@ Now we will evaluate the performance of the SVM classifier:
 > 1. **Support vector machines (SVMs)** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `SVM_model`
->       - {% icon param-file %} *"Data (tabular)"*: `test_rows.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `SVM_result`
@@ -361,7 +361,7 @@ Now let's visualize the results:
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
->    - {% icon param-file %} *"Select input data file"*: `test_rows_labels.csv`
+>    - {% icon param-file %} *"Select input data file"*: `test_rows_labels`
 >    - {% icon param-file %} *"Select predicted data file"*: `SVM_result`
 >    - {% icon param-file %} *"Select trained model"*: `SVM_model`
 {: .hands_on}
@@ -375,7 +375,7 @@ The visualization tool creates the following ROC plot:
 
 [Random forest](https://en.wikipedia.org/wiki/Random_forest) is an ensemble of decision trees, and usually trained with the “bagging” method. The [Ensemble](https://scikit-learn.org/stable/modules/ensemble.html#ensemble) method uses multiple learning models internally for better predictions and the general idea of the bagging method is that a combination of learning models increases the overall result. It uses multiple decision tree regressors internally and predicts by taking the collective performances of the predictions by multiple decision trees. It has a good predictive power and is robust to outliers. It creates an ensemble of weak learners (decision trees) and iteratively minimizes error.
 
-One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm; one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
+One big advantage of random forest is that it can be used for both classification and regression problems. The main idea behind the random forest is adding additional randomness to the model, while growing the trees and instead of searching for the most important feature while splitting a node, it searches for the best feature among a random subset of features. This results in a better model because of wide diversity. Generally, the more trees in the forest, the more robust the model. Therefore, when using the random forest classifier, a larger number of trees in the forest gives higher accuracy results. Similarly there are two stages in the random forest algorithm: one is random forest creation, the other is to make a prediction from the random forest classifier created in the first stage.
 
 > ### {% icon hands_on %} Hands-on: Train random forest
 >
@@ -383,11 +383,11 @@ One big advantage of random forest is that it can be used for both classificatio
 >    - *"Select a Classification Task"*: `Train a model`
 >       - *"Select an ensemble method"*: `Random forest classifier`
 >          - *"Select input type"*: `tabular data`
->             - {% icon param-file %} *"Training samples dataset"*: `train_rows.csv`
+>             - {% icon param-file %} *"Training samples dataset"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `All columns EXCLUDING some by column header name(s)`
 >                - {% icon param-text %} *"Type header name(s)"*: `Class`
->             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows.csv`
+>             - {% icon param-file %} *"Dataset containing class labels"*: `train_rows`
 >             - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >             - {% icon param-select %} *"Choose how to select data by column"*: `Select columns by column header name(s)`
 >                - {% icon param-text %} *"Select target column(s)"*: `Class`
@@ -414,7 +414,7 @@ After learning on the training dataset, we should evaluate the performance on th
 > 1. **Ensemble methods** {% icon tool %} with the following parameters to predict targets of test dataset using the trained model:
 >    - *"Select a Classification Task"*: `Load a model and predict`
 >       - {% icon param-file %} *"Models"*: `RandomForest_model`
->       - {% icon param-file %} *"Data (tabular)"*: `train_rows_test.csv`
+>       - {% icon param-file %} *"Data (tabular)"*: `test_rows`
 >       - {% icon param-check %} *"Does the dataset contain header"*: `Yes`
 >       - {% icon param-select %} *"Select the type of prediction"*: `Predict class labels`
 > 2. Rename the generated file to `RandomForest_result`
@@ -438,7 +438,7 @@ The visualization tool creates the following ROC plot:
 
 # Create data processing pipeline
 
-At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file.
+At the last step, we will create a bagging classifier by using  the **Pipeline builder** tool. Bagging or Bootstrap Aggregating is a widely used ensemble learning algorithm in machine learning. The bagging algorithm creates multiple models from randomly taken subsets of the training dataset and then aggregates learners to build overall stronger classifiers that combine the predictions to produce a final prediction. The **Pipeline builder** tool builds the classifier and returns a zipped file. This tool creates another file which is tabular and contains a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
 
 > ### {% icon hands_on %} Hands-on: Create pipeline
 >
@@ -453,21 +453,9 @@ At the last step, we will create a bagging classifier by using  the **Pipeline b
 {: .hands_on}
 
 
-## Extract hyperparameters
-
-We use the **Estimator attributes** tool to get a list of different hyperparameters of the estimator. This tool creates a tabular file with a list of all the different hyperparameters of the preprocessors and estimators. This tabular file will be used in the **Hyperparameter search** tool to populate the list of hyperparameters with their respective (default) values.
-
-> ### {% icon hands_on %} Hands-on: Estimator attributes
->
-> 1. **Estimator attributes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Choose the dataset containing estimator/pipeline object"*:  `final estimator builder` file (output of **Pipeline builder** {% icon tool %})
->    - *"Select an attribute retrieval type"*: `Estimator - get_params()`
->
-{: .hands_on}
-
 ## Search for the best values of hyperparameters
 
-After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose some values which are less than `10` and a few which are more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
+After extracting the parameter names from the **Pipeline builder** file, we will use the **Hyperparameter search** tool to find the best values for each hyperparameter. These values will lead us to create the best model based on the search space chosen for each hyperparameter. We use only one parameter `n_estimators` of `BaggingClassifier` for this task. This parameter specifies the number of bagging stages the learning process has to go through. The default value of `n_estimators` for this regressor is `10`. However, we are not sure if this gives the best accuracy. Therefore, it is important to set this parameter to different values to find the optimal one. We choose a value which is less than `10` and a few which are more than `10`. The hyperparameter search will look for the optimal number of estimators and gives the best-trained model as one of the outputs. This model is used in the next step to classify the test dataset.
 
 > ### {% icon hands_on %} Hands-on: Hyperparameter search
 >
