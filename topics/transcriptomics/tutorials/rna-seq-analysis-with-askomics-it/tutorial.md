@@ -145,12 +145,17 @@ We will first launch an AskOmics interactive tool, and upload the data into it.
 >    - {% icon param-file %} *"Datasets to load into AskOmics"*: `DE results`, `Mus musculus annotation`, `Gene Symbols`, `QTL`, `Homolog groups` and `neXtProt abstraction`
 {: .hands_on}
 
-Wait for AskOmics to be ready to use: click on the **view** link when it appears.
+Wait a few seconds (or minutes if computing resources are busy) for AskOmics to be ready to use. A **view** link should appear in the confirmation box just after clicking on the **Execute** button.
 
+AskOmics is an *Interactive tool*. It means that when you launch it, it will stay in running state (yellow background) in your History. As long as it stays in this running state, you can access it by looking in the "User" > "Active Interactive Tools" menu (click on its name to view it). When you no longer need it, you can stop it by deleting it from your history, or using the "Stop" button in the "User" > "Active Interactive Tools" page.
+
+Keep in mind that as long as this tool runs, it uses computing resources, so don't forget to stop it when you no longer have use for it.
+
+Once the AskOmics Interactive Tool is ready, you should see a start page looking like this:
 
 ![home page](images/home.png "AskOmics home page")
 
-Once the Interactive Tool is launched, AskOmics displays the start page. You can see that there is no data available yet. It's because data needs to be integrated: it is the next step.
+ You can see that there is no data available yet. It's because data needs to be integrated: it is the next step.
 
 # Integrate input files into AskOmics
 
