@@ -204,20 +204,12 @@ _site/%/slides.pdf: _site/%/slides.html
 			- $@; \
 	fi
 
-
+AWS_UPLOAD?=""
 VIDEOS := $(shell find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
-
 video: $(VIDEOS:topics/%.html=_site/training-material/topics/%.mp4) ## Build videos where possible
 
-_site/%/slides.script: _site/%/slides.html
-	./bin/generate-script.sh $< $@
-
-_site/%/slides.001.png: _site/%/slides.pdf
-	convert -density 300 $< $(<:%.pdf=%).%03d.png
-
-_site/%/slides.mp4: _site/%/slides.script _site/%/slides.001.png
-	echo ./scripts/run_ari_spin.R $@ $< $(ACC_KEY) $(SECRET_KEY) $(sort $(wildcard $(<:%.script=%)*.png))
-
+_site/training-material/%/slides.mp4: _site/training-material/%/slides.pdf %/slides.html
+	./bin/ari.sh $^ $@ $(AWS_UPLOAD)
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
