@@ -205,6 +205,20 @@ _site/%/slides.pdf: _site/%/slides.html
 	fi
 
 
+VIDEOS := $(shell find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
+
+video: $(VIDEOS:topics/%.html=_site/training-material/topics/%.mp4) ## Build videos where possible
+
+_site/%/slides.script: _site/%/slides.html
+	./bin/generate-script.sh $< $@
+
+_site/%/slides.001.png: _site/%/slides.pdf
+	convert -density 300 $< $(<:%.pdf=%).%03d.png
+
+_site/%/slides.mp4: _site/%/slides.script _site/%/slides.001.png
+	echo ./scripts/run_ari_spin.R $@ $< $(ACC_KEY) $(SECRET_KEY) $(sort $(wildcard $(<:%.script=%)*.png))
+
+
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
 	bash bin/workflow_to_tool_yaml.sh && \
