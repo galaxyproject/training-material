@@ -2,24 +2,24 @@
 layout: tutorial_hands_on
 
 title: Title of the tutorial
-zenodo_link: ''
+zenodo_link: '[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4037137.svg)](https://doi.org/10.5281/zenodo.4037137)'
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+ - "How do I perform functional and taxonomy analysis on metaproteomics data?"
+ - "How can I perform quantitation on metaproteomics data?"
+ - "How do I create inputs that can be used in metaquantome to examine differentially expressed proteins?"
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+  - "A taxonomy, functional and quantitational analysis of metaproteomic mass spectrometry data."
+time_estimation: "1 hr"
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+  - "Use dataset collections"
+  - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
+  - "Learning the basics of SQL queries can pay off"
 contributors:
-- contributor1
-- contributor2
+  - subinamehta
+  - timothygriffin
+  - pratikdjagtap 
+  - emmaleith
+  - mariecrane
 
 ---
 
@@ -27,29 +27,28 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+Metaproteomics involves the identification and analysis of microbial proteins at community level. The data
+is used to determine taxonomic and functional state of the microbiome.Currently, metaproteomics related
+research and bioinformatics softwares have several limitations, such as, supporting only spectral counts or 
+its inability to co-relate functional and taxonomy interaction. The Galaxy-P team published a [metaQuantome tool](https://www.mcponline.org/content/18/8_suppl_1/S82), 
+a multifarious package suite that leverages the taxonomic, functional and peptide level quantitative information 
+to analyze the microbial community in different conditions. [Microbiome](../../images/microbiome.png)
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+ 
+Across multiple experimental conditions, metaQuantome offers differential abundance analysis, principal 
+components analysis, and clustered heat map visualizations. metaQuantome is an open source tool and 
+available on the command line and in Galaxy making it accessible, flexible and reproducible. However, 
+creating the data that is compatible with the metaQuantome suite is also not trivial. Hence, we developed 
+a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the [metaQuantome workflow](../../images/metaquantomeworkflow.png)
 
 
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+To demonstrate the use of the data creation workflow, the metaproteomics data set came from a thermophilic 
+biogas reactor which digests municipal food waste and manure (Fig1). After one round in the reactor, the 
+microbial community was simplified and enriched via serial dilution to extinction. This inoculum was then 
+transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate mRNA samples 
+were taken in a time series from 0 to 43 hours after inoculation. For this training, we chose two time points
+- 13 hour and 38 hour. 
+
 
 > ### Agenda
 >
@@ -60,80 +59,60 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Pretreatments
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
+The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
 
 ## Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
+> 2. Import the files ( 6 MZML files, a Protein FASTA file and Experimental Design file) from [Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.4037137.svg)](https://doi.org/10.5281/zenodo.4037137) or from
+>    the shared data library (`GTN - Material` -> `Proteomics` ->`MetaQuantome Datacreation`
 >     -> `{{ page.title }}`):
 >
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
+>    [Experimental Design](https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv?download=1)
+>    [Protein Database](https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta?download=1)
+>    [T2_A1 MZML File](https://zenodo.org/record/4037137/files/T2_A1.mzml?download=1)
+>    [T2_B1 MZML File](https://zenodo.org/record/4037137/files/T2_B1.mzml?download=1)
+>    [T7A_1 MZML File](https://zenodo.org/record/4037137/files/T7A_1.mzml?download=1)
+>    [T7B_1 MZML File](https://zenodo.org/record/4037137/files/T7B_1.mzml?download=1)
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>
+> 3. Build a **Dataset list** for the four mzml files.
+>    - Click the **Operations on multiple datasets** check box at the top of the history panel
+>       ![Operations on multiple datasets button](../../images/operations_icon.png)
+>    - Check the four boxes next to the mzml files.
+>    - Click **For all selected...** and choose **Build dataset list**
+>
+> 4. Rename the datasets (IF needed)
+> 5. Check that the datatype ( Make sure they are in the correct formats).
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
+> 6. Add to each database a tag corresponding to the name of the input data (optional).
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Analysis
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+## Match peptide sequences
 
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
+The created dataset collection of the four *MZML files* in the history has to be first converted to MGF to be used as the MS/MS input. 
 
 
-## Sub-step with **msconvert**
+## Convert mzml to MGF with **msconvert**
+msconvert is used in order to convert the input file type, a mzml data collection, to a mgf file type. 
+The mgf file type can then be used as the Input Peak Lists when running SearchGUI. 
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: mzml to MGF
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
@@ -152,39 +131,35 @@ A big step can have several subsections or sub steps:
 >        - *"Sum adjacent scans"*: `Yes`
 >        - *"Output multiple runs per file"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    >This is a critical step for running this workflow. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why do we need to convert the files to MGF?
+> 2. Can we use any other input format?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The files have to be converted to MGF for this workflow because we use SearchGUI as the searching tool and it can only read MGF files
+> > 2. Yes, we can also use RAW files as input and just convert RAW files to MGF.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Search GUI**
+## **Search GUI**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+
+SearchGUI is a tool that searches sequence databases on any number of MGF files. In this case, the previously made collection of three MGF files (entitles MGF files) will be used as the MS/MS input. This tool will produce an output file, called a SearchGUI archive file. This file will serve as in input for the next tool used, PeptideShaker.
 >
 > 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
->    - {% icon param-file %} *"Protein Database"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Protein Database"*: `output` (Input dataset collection)
 >    - {% icon param-file %} *"Input Peak Lists (mgf)"*: `output` (output of **msconvert** {% icon tool %})
 >    - In *"Search Engine Options"*:
 >        - *"DB-Search Engines"*: ``
@@ -218,7 +193,10 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > > Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341).
+>
+> To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on [Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
+>
 >    {: .comment}
 >
 {: .hands_on}
@@ -227,21 +205,22 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. How many Search Engines can be used?
+> 2. Can the parameters be manipulated?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. There are 8 database search algorithms, you can use as many as you want. Ideally, 4 database algorithms gives the best results.
+> > 2. Yes, The parameters can be manipulated according to the experimental design of the datasets.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Peptide Shaker**
+## **Peptide Shaker**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+[PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results. 
 >
 > 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >    - {% icon param-file %} *"Compressed SearchGUI results"*: `searchgui_results` (output of **Search GUI** {% icon tool %})
@@ -255,36 +234,25 @@ A big step can have several subsections or sub steps:
 >        - *"Compress results into a single zip file"*: `Yes`
 >        - *"Reports to be generated"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    >  There are a number of choices for different data files that can be generated using
+> PeptideShaker. A compressed file can be made containing all information needed to view the
+> results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
+> all peptide sequence matching information and can be utilized by compatible downstream
+> software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
+> as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
+> More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+##  **Select**
 
-## Sub-step with **Select**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+> This Select tool is used to remove all the contaminants from the Peptide Spectral Match (PSM) search results.
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_psm` (output of **Peptide Shaker** {% icon tool %})
@@ -302,68 +270,42 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is removing contaminants important?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Ideally, we would like to remove known contaminants from our samples just to maintain discovering novel proteoforms in our sample.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Select**
+## **Select**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+> This Select tool is used to remove all the contaminants from the Peptide report(PSM) obtained from Peptide Shaker.
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_peptides` (output of **Peptide Shaker** {% icon tool %})
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## **Replace Text**
 
-## Sub-step with **Replace Text**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"in column"*: `c10`
->            - *"Find pattern"*: `.raw.mgf`
+>            - *"Find pattern"*: `.mgf`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -371,65 +313,28 @@ A big step can have several subsections or sub steps:
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Replace Text searches given columns and finds and replaces patterns provided by the user. 
+This tool is removing the extensions (.raw,.mzml,.mgf) provided by the PeptideShaker tool. This step is critical for FlashLFQ to work.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## **Cut**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **Cut**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+This step cuts the peptide lest from the PSM report with no contaminants.
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c6`
 >    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+## **FlashLFQ**
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **FlashLFQ**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.  
 >
 > 1. {% tool [FlashLFQ](toolshed.g2.bx.psu.edu/repos/galaxyp/flashlfq/flashlfq/1.0.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"identification file"*: `outfile` (output of **Replace Text** {% icon tool %})
@@ -440,68 +345,43 @@ A big step can have several subsections or sub steps:
 >        - *"Perform Bayesian protein fold-change analysis"*: `Yes`
 >            - *"control condition for Bayesian protein fold-change analysis"*: ``
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats. 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can it be used with fractionated data?
+> 2. Does it perform peptide and protein level quantification?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Yes, this tool can be used with fractionated datasets and multiple conditions
+> > 2. It performed both peptide level and protein level quantification, For protein level it used Bayesian Fold change analysis.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **Filter**
+## **Filter**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: 
+> This is a data manipulation tool. Here, we select those peptides with less than 50 amino acids in length.
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Cut** {% icon tool %})
 >    - *"With following condition"*: `len(c1)<=50`
 >    - *"Number of header lines to skip"*: `1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Unipept fails with peptides more than 50 amino acids in length, thus we decided to work with peptides that are less than 50 amino acids.
+>    > 
 >    {: .comment}
 >
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## Sub-step with **Regex Find And Replace**
 
