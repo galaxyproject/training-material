@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Title of the tutorial
-zenodo_link: '[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.4037137.svg)](https://doi.org/10.5281/zenodo.4037137)'
+zenodo_link: '(https://zenodo.org/badge/DOI/10.5281/zenodo.4037137.svg)](https://doi.org/10.5281/zenodo.4037137)'
 questions:
  - "How do I perform functional and taxonomy analysis on metaproteomics data?"
  - "How can I perform quantitation on metaproteomics data?"
