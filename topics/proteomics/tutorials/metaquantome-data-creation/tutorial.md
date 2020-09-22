@@ -46,7 +46,7 @@ creating the data that is compatible with the metaQuantome suite is also not tri
 a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the metaQuantome workflow.
 
 <p align="center">
-  <img width="850" height="500" src="./../images/metaquantomeworkflow.PNG">
+  <img width="850" height="500" src="./../images/metaquantomeworkflow.png">
 </p>
 
 To demonstrate the use of the data creation workflow, the metaproteomics data set came from a thermophilic 
@@ -56,7 +56,7 @@ transferred to a solution of cellulose from Norwegian Spruce and incubated at 65
 were taken in a time series from 0 to 43 hours after inoculation. For this training, we chose two time points-8 hour and 33 hour. 
 
 <p align="center">
-  <img width="850" height="500" src="./../images/biogasdataset.PNG">
+  <img width="850" height="500" src="./../images/biogasdataset.png">
 </p>
 
 
