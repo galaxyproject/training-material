@@ -33,9 +33,13 @@ research and bioinformatics softwares have several limitations, such as, support
 its inability to co-relate functional and taxonomy interaction. The Galaxy-P team published a [metaQuantome tool](https://www.mcponline.org/content/18/8_suppl_1/S82), 
 a multifarious package suite that leverages the taxonomic, functional and peptide level quantitative information 
 to analyze the microbial community in different conditions. 
-<div style="text-align:center"><img src="../../images/microbiome.png" /></div>
 
-![Microbiome](../../images/microbiome.png)
+
+![Microbiome](../../images/microbiome.png?style=centerme)
+
+<p align="center">
+  <img width="600" height="200" src="../../images/microbiome.png">
+</p>
 
  
 Across multiple experimental conditions, metaQuantome offers differential abundance analysis, principal 
