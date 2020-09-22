@@ -196,6 +196,8 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >        - *"Novor Options"*: `Default`
 >
 >
+>
+>
 >    > ### {% icon comment %} Comment
 >    >
 >    > > Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341).
@@ -240,6 +242,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >        - *"Reports to be generated"*: ``
 >
 >
+>
 >    > ### {% icon comment %} Comment
 >    >
 >    >  There are a number of choices for different data files that can be generated using
@@ -263,6 +266,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - {% icon param-file %} *"Select lines from"*: `output_psm` (output of **Peptide Shaker** {% icon tool %})
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
+>
 >
 >
 >    > ### {% icon comment %} Comment
@@ -311,6 +315,7 @@ This is a data manipulation step to make the data compatible with other downstre
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"in column"*: `c10`
 >            - *"Find pattern"*: `.mgf`
+>
 >
 >
 >    > ### {% icon comment %} Comment
@@ -432,7 +437,6 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 >    {: .comment}
 >
 The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
-
 >
 >
 {: .hands_on}
@@ -453,6 +457,8 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 >        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `out_file1` (output of **Filter** {% icon tool %})
 >        - *"Select column with peptides"*: `c1`
 >    - *"Choose outputs"*: ``
+>
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
