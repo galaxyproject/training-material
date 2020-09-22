@@ -39,7 +39,8 @@ Across multiple experimental conditions, metaQuantome offers differential abunda
 components analysis, and clustered heat map visualizations. metaQuantome is an open source tool and 
 available on the command line and in Galaxy making it accessible, flexible and reproducible. However, 
 creating the data that is compatible with the metaQuantome suite is also not trivial. Hence, we developed 
-a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the ![metaQuantome workflow](../../images/metaquantomeworkflow.png)
+a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the metaquantome workflow
+> ![metaQuantome workflow](../../images/metaquantomeworkflow.png)
 
 
 To demonstrate the use of the data creation workflow, the metaproteomics data set came from a thermophilic 
