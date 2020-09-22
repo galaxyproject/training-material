@@ -50,7 +50,7 @@ a metaQuantome data creation workflow, wherein we create the inputs that are com
 </p>
 
 To demonstrate the use of the data creation workflow, the metaproteomics data set came from a thermophilic 
-biogas reactor which digests municipal food waste and manure (Fig1). After one round in the reactor, the 
+biogas reactor which digests municipal food waste and manure. After one round in the reactor, the 
 microbial community was simplified and enriched via serial dilution to extinction. This inoculum was then 
 transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate mRNA samples 
 were taken in a time series from 0 to 43 hours after inoculation. For this training, we chose two time points-13 hour and 38 hour. 
