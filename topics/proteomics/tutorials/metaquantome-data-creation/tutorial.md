@@ -34,11 +34,8 @@ its inability to co-relate functional and taxonomy interaction. The Galaxy-P tea
 a multifarious package suite that leverages the taxonomic, functional and peptide level quantitative information 
 to analyze the microbial community in different conditions. 
 
-
-![Microbiome](../../images/microbiome.png?style=centerme)
-
 <p align="center">
-  <img width="600" height="800" src="../../images/microbiome.png">
+  <img width="850" height="500" src="../../images/microbiome.png">
 </p>
 
  
@@ -47,8 +44,10 @@ components analysis, and clustered heat map visualizations. metaQuantome is an o
 available on the command line and in Galaxy making it accessible, flexible and reproducible. However, 
 creating the data that is compatible with the metaQuantome suite is also not trivial. Hence, we developed 
 a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the metaquantome workflow.
-![metaQuantome workflow](../../images/metaquantomeworkflow.png)
 
+<p align="center">
+  <img width="850" height="500" src="./../images/metaquantomeworkflow.png">
+</p>
 
 To demonstrate the use of the data creation workflow, the metaproteomics data set came from a thermophilic 
 biogas reactor which digests municipal food waste and manure (Fig1). After one round in the reactor, the 
