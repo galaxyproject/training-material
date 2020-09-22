@@ -38,7 +38,7 @@ to analyze the microbial community in different conditions.
 ![Microbiome](../../images/microbiome.png?style=centerme)
 
 <p align="center">
-  <img width="600" height="200" src="../../images/microbiome.png">
+  <img width="600" height="800" src="../../images/microbiome.png">
 </p>
 
  
