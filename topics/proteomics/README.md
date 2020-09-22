@@ -8,6 +8,7 @@ topic | features
 [Protein Quantitation by Stable Isotope Labelling (SIL)](tutorials/protein-quant-sil/tutorial.md) | [:book:](tutorials/protein-quant-sil/tutorial.md)
 [Label-free versus Labelled - How to Choose Your Quantitation Method](tutorials/labelfree-vs-labelled/tutorial.md)| [:book:](tutorials/labelfree-vs-labelled/tutorial.md)
 [Metaproteomics](tutorials/metaproteomics/tutorial.md)| [:book:](tutorials/metaproteomics/tutorial.md)
+[metaQuantome Data creation](tutorials/metaquantome-data-creation/tutorial.md)| [:book:](tutorials/metaquantome-data-creation/tutorial.md)
 [RNA-seq Database creation](tutorials/proteogenomics-dbcreation/tutorial.md)| [:book:](tutorials/proteogenomics-dbcreation/tutorial.md)
 [Proteogenomics Database searching](tutorials/proteogenomics-dbsearch/tutorial.md)| [:book:](tutorials/proteogenomics-dbsearch/tutorial.md)
 [Proteogenomics Novel Peptide Analysis](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)| [:book:](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)
