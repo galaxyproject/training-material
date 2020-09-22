@@ -195,9 +195,6 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >        - *"DirectTag Options"*: `Default`
 >        - *"Novor Options"*: `Default`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -209,7 +206,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > ### {% icon question %} Questions
 >
@@ -267,9 +264,6 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -466,6 +460,9 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 >    {: .comment}
 >
 {: .hands_on}
+<p align="center">
+  <img width="350" height="100" src="../../images/taxa.png">
+</p>
 
 > ### {% icon question %} Questions
 >
@@ -578,7 +575,7 @@ The filter tool allows restriction of the dataset using simple conditional state
 >
 {: .hands_on}
 <p align="center">
-  <img width="1000" height="700" src="../../images/biologicalprocess.png">
+  <img width="800" height="500" src="../../images/biologicalprocess.png">
 </p>
 
 
@@ -596,7 +593,7 @@ This step is used to filter out the GO terms with cellular components and the co
 {: .hands_on}
 
 <p align="center">
-  <img width="1000" height="700" src="../../images/cellularcomponent.png">
+  <img width="800" height="500" src="../../images/cellularcomponent.png">
 </p>
 
 ## Sub-step with **Filter**
@@ -611,11 +608,11 @@ This step is used to filter out the GO terms with molecular function and the cor
 >
 {: .hands_on}
 <p align="center">
-  <img width="1000" height="700" src="../../images/molecularfunction.png">
+  <img width="800" height="500" src="../../images/molecularfunction.png">
 </p>
 
 
 # Conclusion
 {:.no_toc}
 
-This metaQuantome data create tutorial is a guide to have compatible dataset that are metaQuantome ready. We have incorporated two conditions in this workflow but users can use as many as they want. 
+This metaQuantome data create tutorial is a guide to have datasets that are metaQuantome ready/compatible. We have incorporated only two conditions in this workflow but users can use as many as they want. 
