@@ -440,7 +440,7 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 
 
 
-## Sub-step with **Unipept**
+## **Unipept**
 
 > ### {% icon hands_on %} Hands-on: 
 Unipept is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide. 
@@ -616,3 +616,17 @@ This step is used to filter out the GO terms with molecular function and the cor
 {:.no_toc}
 
 This metaQuantome data create tutorial is a guide to have datasets that are metaQuantome ready/compatible. We have incorporated only two conditions in this workflow but users can use as many as they want. 
+
+> ### {% icon comment %} References
+>
+>
+> - [Galaxy workflows for metaproteomics](https://www.ncbi.nlm.nih.gov/pubmed/26058579)
+>
+> - [Metaproteomics community effort](https://z.umn.edu/gcc2017mporal)
+>
+> - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
+>
+> - [Galaxy-P Metaproteomics instance](https://proteomics.usegalaxy.eu/)
+>
+> - [Metaproteomics video](http://z.umn.edu/mpvideo2018)
+{: .comment}
