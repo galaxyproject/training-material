@@ -43,7 +43,7 @@ Across multiple experimental conditions, metaQuantome offers differential abunda
 components analysis, and clustered heat map visualizations. metaQuantome is an open source tool and 
 available on the command line and in Galaxy making it accessible, flexible and reproducible. However, 
 creating the data that is compatible with the metaQuantome suite is also not trivial. Hence, we developed 
-a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the metaquantome workflow.
+a metaQuantome data creation workflow, wherein we create the inputs that are compatible with the metaQuantome workflow.
 
 <p align="center">
   <img width="850" height="500" src="./../images/metaquantomeworkflow.png">
@@ -54,6 +54,10 @@ biogas reactor which digests municipal food waste and manure. After one round in
 microbial community was simplified and enriched via serial dilution to extinction. This inoculum was then 
 transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate mRNA samples 
 were taken in a time series from 0 to 43 hours after inoculation. For this training, we chose two time points-13 hour and 38 hour. 
+
+<p align="center">
+  <img width="850" height="500" src="./../images/biogasdataset.png">
+</p>
 
 
 > ### Agenda
