@@ -347,7 +347,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >    - {% icon param-file %} *"identification file"*: `outfile` (output of **Replace Text** {% icon tool %})
 >    - {% icon param-file %} *"spectrum files"*: `output` (output of **msconvert** {% icon tool %})
 >    - *"match between runs"*: `Yes`
->    - *"Use experimnetal design for normalization or protein fold-change analysis"*: `Yes`
+>    - *"Use experimental design for normalization or protein fold-change analysis"*: `Yes`
 >        - {% icon param-file %} *"ExperimentalDesign.tsv"*: `output` (Input dataset)
 >        - *"Perform Bayesian protein fold-change analysis"*: `Yes`
 >            - *"control condition for Bayesian protein fold-change analysis"*: ``
@@ -467,7 +467,7 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 >
 {: .hands_on}
 <p align="center">
-  <img width="350" height="100" src="../../images/taxa.png">
+  <img width="800" height="500" src="../../images/taxa.png">
 </p>
 
 > ### {% icon question %} Questions
@@ -484,13 +484,13 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 
 The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
 <p align="center">
-  <img width="350" height="100" src="../../images/UnipeptJSON.png">
+  <img width="250" height="300" src="../../images/UnipeptJSON.png">
 </p>
 <p align="center">
-  <img width="350" height="300" src="../../images/unipept_taxonomy_viewer.png">
+  <img width="250" height="125" src="../../images/unipept_taxonomy_viewer.png">
 </p>
 <p align="center">
-  <img width="1000" height="700" src="../../images/UnipeptJSONoutput.png">
+  <img width="700" height="800" src="../../images/UnipeptJSONoutput.png">
 </p>
 
 
