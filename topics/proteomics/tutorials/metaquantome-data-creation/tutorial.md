@@ -625,7 +625,6 @@ This completes the walkthrough of the metaQuantome data creation workflow .This 
 Please look at the following tutorials in this Metaproteomics series:
 
 [Metaproteomics]({% link topics/proteomics/tutorials/metaproteomics/tutorial.md %})
-[MetaQuantome-2]({% link topics/proteomics/tutorials/metaquantome-2/tutorial.md %})
 This workflow is also available at [proteomics.usegalaxy.eu](https://proteomics.usegalaxy.eu/)
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at galaxyp.org
