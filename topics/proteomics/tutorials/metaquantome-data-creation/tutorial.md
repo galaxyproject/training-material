@@ -68,11 +68,11 @@ spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For t
 >
 {: .agenda}
 
-# Pretreatments
+# **Pretreatments**
 
 The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
 
-## Get data
+## *Get data*
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -107,15 +107,15 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 6. Add to each database a tag corresponding to the name of the input data (optional).
 {: .hands_on}
 
-# Analysis
 
-## Match peptide sequences
+# **Match peptide sequences**
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
 The created dataset collection of the four *MZML files* in the history has to be first converted to MGF to be used as the MS/MS input. 
 
 
-## Convert mzml to MGF with **msconvert**
+### *Convert mzml to MGF with msconvert*
+
 msconvert is used in order to convert the input file type, a mzml data collection, to a mgf file type. 
 The mgf file type can then be used as the Input Peak Lists when running SearchGUI. 
 
@@ -150,20 +150,19 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 > 1. Why do we need to convert the files to MGF?
 > 2. Can we use any other input format?
 >
-> > ### {% icon solution %} Solution
+> > #### {% icon solution %} Solution
 > >
-> > 1. The files have to be converted to MGF for this workflow because we use SearchGUI as the searching tool and it can only read MGF files
+> > 1. The files have to be converted to MGF for this workflow because we use SearchGUI as the searching tool and it can only read MGF files.
 > > 2. Yes, we can also use RAW files as input and just convert RAW files to MGF.
 > >
 > {: .solution}
 >
 {: .question}
 
-## **Search GUI**
-
-> ### {% icon hands_on %} Hands-on: 
-
+## *Search GUI*
 SearchGUI is a tool that searches sequence databases on any number of MGF files. In this case, the previously made collection of three MGF files (entitles MGF files) will be used as the MS/MS input. This tool will produce an output file, called a SearchGUI archive file. This file will serve as in input for the next tool used, PeptideShaker.
+
+> ### {% icon hands_on %} Hands-on: Search GUI
 >
 > 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `output` (Input dataset collection)
@@ -199,14 +198,13 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > > Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341).
+>    >  Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341).
 >
 > To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on [Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
 >
 >    {: .comment}
 >
 {: .hands_on}
-
 
 
 > ### {% icon question %} Questions
@@ -223,10 +221,11 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 {: .question}
 
-## **Peptide Shaker**
+## *Peptide Shaker*
+
+[PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results. 
 
 > ### {% icon hands_on %} Hands-on: 
-[PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results. 
 >
 > 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >    - {% icon param-file %} *"Compressed SearchGUI results"*: `searchgui_results` (output of **Search GUI** {% icon tool %})
@@ -256,7 +255,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 {: .hands_on}
 
 
-##  **Select**
+##  *Select*
 
 > ### {% icon hands_on %} Hands-on: 
 > This Select tool is used to remove all the contaminants from the Peptide Spectral Match (PSM) search results.
@@ -290,7 +289,7 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 >
 {: .question}
 
-## **Select**
+## *Select*
 
 > ### {% icon hands_on %} Hands-on: 
 > This Select tool is used to remove all the contaminants from the Peptide report obtained from Peptide Shaker.
@@ -303,7 +302,7 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 {: .hands_on}
 
 
-## **Replace Text**
+## *Replace Text*
 
 > ### {% icon hands_on %} Hands-on: 
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
@@ -325,7 +324,7 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
 >
 {: .hands_on}
 
-## **Cut**
+## *Cut*
 
 > ### {% icon hands_on %} Hands-on: 
 This step selects the peptide column from the Select output ( where we have removed the contaminants)
@@ -337,10 +336,14 @@ This step selects the peptide column from the Select output ( where we have remo
 >
 {: .hands_on}
 
-## **FlashLFQ**
+# **Peptide Quantification**
 
-> ### {% icon hands_on %} Hands-on: 
+In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, For eg: moFF and MaxQuant are available in Galaxy. 
+
+### *FlashLFQ*
 FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.  
+>
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. {% tool [FlashLFQ](toolshed.g2.bx.psu.edu/repos/galaxyp/flashlfq/flashlfq/1.0.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"identification file"*: `outfile` (output of **Replace Text** {% icon tool %})
@@ -373,7 +376,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >
 {: .question}
 
-## **Filter**
+## *Filter*
 
 > ### {% icon hands_on %} Hands-on: 
 > This is a data manipulation tool. Here, we select those peptides with less than 50 amino acids in length.
@@ -388,8 +391,10 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >    > 
 >    {: .comment}
 >
+{: .hands_on}
 
-## Sub-step with **Regex Find And Replace**
+
+## *Regex Find And Replace*
 
 > ### {% icon hands_on %} Hands-on: 
 > Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome alongwith completely removing the N-terminus and C-terminus tag in the peptide sequences.
@@ -411,42 +416,14 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >
 {: .hands_on}
 
-
-## **Unipept**
-
-> ### {% icon hands_on %} Hands-on: 
-Unipept is used to match tryptic peptides and find the taxonomy and Functional annotation of the peptides. Unipept is used to match sample tryptic peptides to proteins using a fast-matching algorithm. Although Unipept can be accessed and used through the web page, the use of Unipept on galaxy allows the production of output datasets including the peptide information to be used in sequential steps. Unipept requires a list containing the peptide sequences which was generated by Query Tabular.
-
->
-> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
->    - *"Unipept application"*: `peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy`
->        - *"Equate isoleucine and leucine"*: `Yes`
->        - *"retrieve extra information"*: `Yes`
->        - *"group responses by GO namespace (biological process, molecular function, cellular component)"*: `Yes`
->        - *"allfields"*: `Yes`
->    - *"Peptides input format"*: `tabular`
->        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `out_file1` (output of **Filter** {% icon tool %})
->        - *"Select column with peptides"*: `c1`
->    - *"Choose outputs"*: ``
->
->
->    > ### {% icon comment %} Comment
->    >
->    > There are two Unipept in this workflow, One for taxonomy and other for function. Please select all the output options from Unipept.
->    {: .comment}
->
-The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
->
->
-{: .hands_on}
+# **Functional and Taxonomy annotation**
 
 
+## *Unipept* for taxonomy annotation
 
-
-## **Unipept**
-
-> ### {% icon hands_on %} Hands-on: 
 Unipept is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide. 
+
+> ### {% icon hands_on %} Hands-on: 
 >
 > 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.0.0) %} with the following parameters:
 >    - *"Unipept application"*: `pept2lca: lowest common ancestor`
@@ -465,8 +442,9 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 >    {: .comment}
 >
 {: .hands_on}
+
 <p align="center">
-  <img width="800" height="500" src="../../images/taxa.png">
+  <img width="800" height="400" src="../../images/taxa.png">
 </p>
 
 > ### {% icon question %} Questions
@@ -492,8 +470,35 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
   <img width="700" height="800" src="../../images/UnipeptJSONoutput.png">
 </p>
 
+## *Unipept* for Functional annotation
 
-## Sub-step with **Cut**
+Unipept is used to match tryptic peptides and find the taxonomy and Functional annotation of the peptides. Unipept is used to match sample tryptic peptides to proteins using a fast-matching algorithm. Although Unipept can be accessed and used through the web page, the use of Unipept on galaxy allows the production of output datasets including the peptide information to be used in sequential steps. Unipept requires a list containing the peptide sequences which was generated by Query Tabular.
+
+> ### {% icon hands_on %} Hands-on: 
+>
+> 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
+>    - *"Unipept application"*: `peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy`
+>        - *"Equate isoleucine and leucine"*: `Yes`
+>        - *"retrieve extra information"*: `Yes`
+>        - *"group responses by GO namespace (biological process, molecular function, cellular component)"*: `Yes`
+>        - *"allfields"*: `Yes`
+>    - *"Peptides input format"*: `tabular`
+>        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `out_file1` (output of **Filter** {% icon tool %})
+>        - *"Select column with peptides"*: `c1`
+>    - *"Choose outputs"*: ``
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > There are two Unipept in this workflow, One for taxonomy and other for function. Please select all the output options from Unipept.
+>    {: .comment}
+>
+The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
+>
+>
+{: .hands_on}
+
+## *Cut*
 
 > ### {% icon hands_on %} Hands-on: 
 The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convinience.
@@ -505,10 +510,11 @@ The cut tool cuts out specific columns from the dataset. In this case, the cut t
 {: .hands_on}
 
 
-## **Query Tabular**
+## *Query Tabular*
+
+Query Tabular is a tool that can load tabular data into a SQLite database. This step precedes UniPept, as a list containing the peptide sequences must be generated. In this step a list of gene ontology (GO) terms is being generated.
 
 > ### {% icon hands_on %} Hands-on: 
-Query Tabular is a tool that can load tabular data into a SQLite database. This step precedes UniPept, as a list containing the peptide sequences must be generated. In this step a list of gene ontology (GO) terms is being generated.
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -522,7 +528,6 @@ Query Tabular is a tool that can load tabular data into a SQLite database. This 
 FROM Goterm 
 WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 ```
-
 >    - *"include query result column headers"*: `Yes`
 >
 >
@@ -534,10 +539,11 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 {: .hands_on}
 
 
-## Sub-step with **Replace Text**
+## *Replace Text*
 
-> ### {% icon hands_on %} Hands-on: This step is to remove the hashtag from the Peptide header in the Unipept output.
->
+This step is to remove the hashtag from the Peptide header in the Unipept output.
+
+> ### {% icon hands_on %} Hands-on: >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `output_tsv` (output of **Unipept** {% icon tool %})
 >    - In *"Replacement"*:
@@ -549,10 +555,11 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 {: .hands_on}
 
 
-## **Query Tabular**
+## *Query Tabular*
+
+We are using this Query tabular ot rename the output that we obtained from the Cut column tool.
 
 > ### {% icon hands_on %} Hands-on: 
-We are using this Query tabular ot rename the output that we obtained from the Cut column tool.
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -568,10 +575,12 @@ FROM ec`
 {: .hands_on}
 
 
-## Sub-step with **Filter**
+## *Filter*
+
+The filter tool allows restriction of the dataset using simple conditional statements. This step is used to filter out the GO terms with biological processes and the corresponding number of peptides associated with these terms.
+
 
 > ### {% icon hands_on %} Hands-on: 
-The filter tool allows restriction of the dataset using simple conditional statements. This step is used to filter out the GO terms with biological processes and the corresponding number of peptides associated with these terms.
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `output` (output of **Query Tabular** {% icon tool %})
@@ -579,16 +588,18 @@ The filter tool allows restriction of the dataset using simple conditional state
 >    - *"Number of header lines to skip"*: `1`
 >
 {: .hands_on}
+
 <p align="center">
-  <img width="800" height="500" src="../../images/biologicalprocess.png">
+  <img width="800" height="600" src="../../images/biologicalprocess.png">
 </p>
 
 
 
-## Sub-step with **Filter**
+## *Filter*
+
+This step is used to filter out the GO terms with cellular components and the corresponding number of peptides associated with these terms.
 
 > ### {% icon hands_on %} Hands-on: 
-This step is used to filter out the GO terms with cellular components and the corresponding number of peptides associated with these terms.
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `output` (output of **Query Tabular** {% icon tool %})
@@ -601,10 +612,11 @@ This step is used to filter out the GO terms with cellular components and the co
   <img width="800" height="500" src="../../images/cellularcomponent.png">
 </p>
 
-## Sub-step with **Filter**
+## *Filter*
+
+This step is used to filter out the GO terms with molecular function and the corresponding number of peptides associated with these terms.
 
 > ### {% icon hands_on %} Hands-on: 
-This step is used to filter out the GO terms with molecular function and the corresponding number of peptides associated with these terms.
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `output` (output of **Query Tabular** {% icon tool %})
@@ -612,12 +624,13 @@ This step is used to filter out the GO terms with molecular function and the cor
 >    - *"Number of header lines to skip"*: `1`
 >
 {: .hands_on}
+
 <p align="center">
   <img width="800" height="500" src="../../images/molecularfunction.png">
 </p>
 
 
-# Conclusion
+# **Conclusion**
 {:.no_toc}
 
 This completes the walkthrough of the metaQuantome data creation workflow .This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please make sure the tool parameters and the workflow will be needed to be modified accordingly.
