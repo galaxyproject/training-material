@@ -150,7 +150,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 > 1. Why do we need to convert the files to MGF?
 > 2. Can we use any other input format?
 >
-> > #### {% icon solution %} Solution
+> > ### {% icon solution %} Solution
 > >
 > > 1. The files have to be converted to MGF for this workflow because we use SearchGUI as the searching tool and it can only read MGF files.
 > > 2. Yes, we can also use RAW files as input and just convert RAW files to MGF.
