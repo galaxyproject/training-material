@@ -145,6 +145,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 >
 {: .hands_on}
 
+
 > ### {% icon question %} Questions
 >
 > 1. Why do we need to convert the files to MGF?
@@ -159,11 +160,10 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 >
 {: .question}
 
-## *Search GUI*
+##  *Search GUI*
 SearchGUI is a tool that searches sequence databases on any number of MGF files. In this case, the previously made collection of three MGF files (entitles MGF files) will be used as the MS/MS input. This tool will produce an output file, called a SearchGUI archive file. This file will serve as in input for the next tool used, PeptideShaker.
-
-> ### {% icon hands_on %} Hands-on: Search GUI
 >
+> ### {% icon hands_on %} Hands-on: 
 > 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `output` (Input dataset collection)
 >    - {% icon param-file %} *"Input Peak Lists (mgf)"*: `output` (output of **msconvert** {% icon tool %})
@@ -195,13 +195,9 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 >
 >
->
 >    > ### {% icon comment %} Comment
 >    >
->    >  Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341).
->
-> To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on [Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
->
+>    >  Note that sequence databases used for metaproteomics are usually much larger than the excerpt used in this tutorial. When using large databases, the peptide identification step can take much more time for computation. In metaproteomics, choosing the optimal database is a crucial step of your workflow, for further reading see [Timmins-Schiffman et al (2017)](https://www.ncbi.nlm.nih.gov/pubmed/27824341). To learn more about database construction in general, like integrating contaminant databases or using a decoy strategy for FDR searching, please consult our tutorial on [Database Handling]({{site.baseurl}}/topics/proteomics/tutorials/database-handling/tutorial.html).
 >    {: .comment}
 >
 {: .hands_on}
@@ -221,12 +217,11 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 {: .question}
 
-## *Peptide Shaker*
+##  *Peptide Shaker*
 
 [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results. 
-
-> ### {% icon hands_on %} Hands-on: 
 >
+> ### {% icon hands_on %} Hands-on: 
 > 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >    - {% icon param-file %} *"Compressed SearchGUI results"*: `searchgui_results` (output of **Search GUI** {% icon tool %})
 >    - *"Specify Advanced PeptideShaker Processing Options"*: `Advanced Processing Options`
@@ -244,12 +239,13 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    > ### {% icon comment %} Comment
 >    >
 >    >  There are a number of choices for different data files that can be generated using
-> PeptideShaker. A compressed file can be made containing all information needed to view the
-> results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
-> all peptide sequence matching information and can be utilized by compatible downstream
-> software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
-> as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
-> More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
+ PeptideShaker. A compressed file can be made containing all information needed to view the
+results in the standalone PeptideShaker viewer. A `mzidentML` file can be created that contains
+all peptide sequence matching information and can be utilized by compatible downstream
+software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
+as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
+More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in 
+our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 >    {: .comment}
 >
 {: .hands_on}
@@ -291,8 +287,10 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 ## *Select*
 
+This Select tool is used to remove all the contaminants from the Peptide report obtained from Peptide Shaker.
+
 > ### {% icon hands_on %} Hands-on: 
-> This Select tool is used to remove all the contaminants from the Peptide report obtained from Peptide Shaker.
+> 
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_peptides` (output of **Peptide Shaker** {% icon tool %})
@@ -303,9 +301,10 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 
 ## *Replace Text*
-
-> ### {% icon hands_on %} Hands-on: 
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
+>
+> ### {% icon hands_on %} Hands-on: 
+>
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Select** {% icon tool %})
@@ -575,7 +574,7 @@ FROM ec`
 {: .hands_on}
 
 
-## *Filter*
+## *Filter* - Biological Functions
 
 The filter tool allows restriction of the dataset using simple conditional statements. This step is used to filter out the GO terms with biological processes and the corresponding number of peptides associated with these terms.
 
@@ -595,7 +594,7 @@ The filter tool allows restriction of the dataset using simple conditional state
 
 
 
-## *Filter*
+## *Filter* - Cellular components
 
 This step is used to filter out the GO terms with cellular components and the corresponding number of peptides associated with these terms.
 
@@ -612,7 +611,7 @@ This step is used to filter out the GO terms with cellular components and the co
   <img width="800" height="500" src="../../images/cellularcomponent.png">
 </p>
 
-## *Filter*
+## *Filter* - Molecular Function
 
 This step is used to filter out the GO terms with molecular function and the corresponding number of peptides associated with these terms.
 
