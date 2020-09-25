@@ -38,7 +38,7 @@ layout: base
 							src="https://galaxy-training.s3.amazonaws.com/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.mp4"
 							type="video/mp4">
 						<track label="English" kind="captions" srclang="en"
-							src="https://galaxy-training.s3.amazonaws.com/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.en.vtt" default>
+							src="https://training.galaxyproject.org/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.en.vtt" default>
 					</video>
 
 				{% endif %}
