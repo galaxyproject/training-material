@@ -141,8 +141,8 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 > ### {% icon hands_on %} Hands-on: Trimming and clipping reads
 >
 > 1. **Trimmomatic** {% icon tool %} to trim low-quality reads:
->    - *"Paired end data?"*: `No`
->    - {% icon param-files %} *"Input FASTQ file"*: all of the FASTQ files
+>    - *"Single-end or paired-end reads?"*: `Single-end`
+>    - {% icon param-files %} *"Input FASTQ file"*: select all of the FASTQ files
 >    - *"Perform initial ILLUMINACLIP?"*: `No`
 >    - *"Select Trimmomatic operation to perform"*: `Sliding window trimming (SLIDINGWINDOW)`
 >    - *"Number of bases to average across"*: `4`
