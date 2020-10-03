@@ -329,42 +329,48 @@ It is critical to visualize NGS data on a genome browser after alignment to eval
 
 ## Step 7.1: Inspection of peaks and aligned data with Trackster
 
-First, we will reformat the peak file before we send it to Trackster, and then we will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.
+We will import a gene annotation file so we can visualize aligned reads and TAL1 peaks relative to gene features and positions.
 
 > ### {% icon hands_on %} Hands-on: Inspection of peaks and aligned data with Trackster
 >
-> 1. **Cut** {% icon tool %} with the following parameters:
->    - *"Cut columns"*: `c1,c2,c3,c4`
->    - {% icon param-file %} *"From"*: the peak file
+> 1. **Import** the gene annotations file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
 >
->    Afterwards, **rename** this file to reflect the origin and contents.
+> 2. **Click** "Visualize" on the page header and select "Create Visualization"
 >
-> 2. Import the gene annotations file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.197100.svg)](https://doi.org/10.5281/zenodo.197100)
+>    ![vizbutton](../../images/tal1/create-visualization.png "Trackster can be accessed from the Visualize button at the top of the screen.")
 >
-> 3. Click "Visualizations" on the page header and select "New Track Browser".
+> 3. **Set up** Trackster
+>    - Select Trackster
+>    - *"Select a dataset to visualize"*: select the imported gene annotation file (Hint: If this file doesn't appear as an option, go back to the history and edit the attribute Database/Build to be `mm10`)
+>    - Click "Create Visualization"
 >
->    ![vizbutton](../../images/Highlighting_viz_button.png "Trackster can be accessed from the Visualizations button at the top of the screen.")
+> 4. **Configure** the visualization
+>    - Select "View in new visualization"
+>    - *"Browser name"*: Enter a name for your visualization
+>    - *"Reference genome build (dbkey):"*: `mm10`
+>    - Click "Create" 
 >
-> 4. **Configure** the new visualization:
->    - *"Browswer name"*: something descriptive
->    - *"Reference genome build (dbkey)"*: `mm10`
+>    ![tracksterdb](../../images/tal1/configure-visualization.png "Assign session name and reference genome.")
 >
->    ![tracksterdb](../../images/Trackster_session_and_db.png "Session name and assigning reference genome.")
+> 5. **Add** tracks to Trackster
+>    - Click the "Add tracks" (plus sign) button at the top right
+>    - Using the search bar, search for and add the following tracks from MACS2 callpeak output to your view
+>       - G1E Treatment Bedgraph
+>       - G1E Control Bedgraph
+>       - G1E narrow peaks 
+>       - Megakaryocytes Treatment Bedgraph
+>       - Megakaryocytes Control Bedgraph
+>       - Megakaryocytes narrow peaks
+>    - Rename the tracks, if desired
+>    - Play around with the track configurations, for example the color or the display mode
 >
-> 5. **Click** `Add Datasets to visualization`
->    - Select the history containing the data from this analysis.
->    - Select the BEDgraph files and the peak files that you renamed.
+>    ![tracksterselect](../../images/tal1/add-tracks.png "Select data from your history to view in Trackster.")
 >
->    ![tracksteradd](../../images/Trackster_add_datasets.png "Load your data into Trackster with the Add Datasets to visualization feature.")
->
->    ![tracksterselect](../../images/Trackster_selecting_datasets.png "Select data from your histories to view in Trackster.")
->
-> 6. Navigate to the `Runx1` locus (`chr16:92501466-92926074`) to inspect the aligned reads and `TAL1` peaks.
+> 6. **Navigate** to the `Runx1` locus (`chr16:92501466-92926074`) to inspect the aligned reads and `TAL1` peaks.
 >
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What do you see at the Runx1 locus in Trackster?
->    > 2. What gene(s) other than Runx1 could be regulated by TAL1?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. Directly upstream of the shorter Runx1 gene models is a cluster of 3 TAL1 peaks that only appear in the G1E cell type, but not in Megakaryocytes. Further upstream, there are some shared TAL1 peaks in both cell types.
