@@ -396,34 +396,33 @@ We have processed ChIP-seq data from two stages of hematopoiesis and have lists 
 
 > ### {% icon hands_on %} Hands-on: Identifying unique and common TAL1 peaks between states
 >
-> 1. **Intersect intervals** {% icon tool %} to find peaks that exist both in G1E and megakaryocytes:
->    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E peaks`
->    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega peaks`
+> 1. **bedtools Intersect intervals** {% icon tool %} to find peaks that exist both in G1E and megakaryocytes:
+>    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E narrow peaks`
+>    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega narrow peaks`
+>    - Running this tool with the default settings will return overlapping peaks of both files.
 >
->    Running this tool with the default settings will return overlapping peaks of both files.
->
-> 2. **Intersect intervals** {% icon tool %} to find peaks that exist only in G1E:
->    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E peaks`
->    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega peaks`
+> 2. **bedtools Intersect intervals** {% icon tool %} to find peaks that exist only in G1E:
+>    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 G1E narrow peaks`
+>    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 Mega narrow peaks`
 >    - *"Report only those alignments that \*\*do not\*\* overlap the BED file"*: `Yes`
 >
-> 3. **Intersect intervals** {% icon tool %} to find peaks that exist only in megakaryocytes:
->    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 Mega peaks`
->    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 G1E peaks`
+> 3. **bedtools Intersect intervals** {% icon tool %} to find peaks that exist only in megakaryocytes:
+>    - {% icon param-file %} *"File A to intersect with B"*: `TAL1 Mega narrow peaks`
+>    - {% icon param-file %} *"File B to intersect with A"*: `TAL1 G1E narrow peaks`
 >    - *"Report only those alignments that \*\*do not\*\* overlap the BED file"*: `Yes`
 >
 > 4. **Rename** the three files we generated to reflect their contents.
 >
 >    > ### {% icon question %} Questions
 >    >
->    > 1. How many TAL1 binding sites are common to both G1E cells and megakaryocytes?
+>    > 1. How many TAL1 peaks are common to both G1E cells and megakaryocytes?
 >    > 2. How many are unique to G1E cells?
 >    > 3. How many are unique to megakaryocytes?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. 1 region
->    > > 2. 407 regions
->    > > 3. 139 regions
+>    > > 1. 1 peak (answer may vary depending on references and tool versions used)
+>    > > 2. 407 peaks (answer may vary depending on references and tool versions used)
+>    > > 3. 139 peaks (answer may vary depending on references and tool versions used)
 >    > {: .solution }
 >    {: .question}
 {: .hands_on}
