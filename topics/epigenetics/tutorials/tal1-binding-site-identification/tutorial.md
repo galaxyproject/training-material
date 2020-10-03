@@ -180,7 +180,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    - *"Will you select a reference genome..."*: `Use a built-in genome index`
 >    - *"Using reference genome"*: `Mouse (mus musculus) mm10`
 >    - *"Select input type"*: `Single fastq`
->    - {% icon param-file %} *"Select fastq dataset"*: to the generated `trimmed reads`
+>    - {% icon param-files %} *"Select fastq dataset"*: select all of the generated `trimmed reads`
 >
 > 2. **Rename** your files after BWA finishes to reflect the origin and contents
 > 3. **Inspect** a file produced by running BWA
@@ -196,7 +196,7 @@ Nowadays, there are many read alignment programs for sequenced DNA, `BWA` being 
 >    > {: .solution }
 >    {: .question}
 >
-> 3. **IdxStats** {% icon tool %} with the following parameters:
+> 4. **IdxStats** {% icon tool %} with the following parameters:
 >     - {% icon param-files %} *"BAM file"*: all the mapped files
 >    Examine the output (poke it in the eye!)
 >
