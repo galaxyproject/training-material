@@ -308,14 +308,17 @@ More information about **MACS2** can be found [here](https://genomebiology.biome
 > ### {% icon hands_on %} Hands-on: Determining TAL1 binding sites
 >
 > 1. **MACS2 callpeak** {% icon tool %}: Run the tool **MACS2 callpeak** with the aligned read files from the previous step as Treatment (TAL1) and Control (input).
+>    - *"Are you pooling Treatment Files?"*: `Yes`
 >    - {% icon param-files %} *"ChIP-Seq Treatment File"*: Select replicate ChIP-Seq Treatment Files for one cell type
->    - *"Do you have a Control File?"*: to 'Yes'
->       - {% icon param-files %} *"ChIP-Seq Control File"*: Select replicate ChIP-Seq Control Files for one cell type
->    - *"Format of Input Files"*: `Paired-end BAM`
->    - *"Effective genome size"*: `M.musculus`
+>    - *"Do you have a Control File?"*: `Yes`
+>    - *"Are you pooling Control Files?"*: `Yes`
+>    - {% icon param-files %} *"ChIP-Seq Control File"*: Select replicate ChIP-Seq Control Files for one cell type
+>    - *"Format of Input Files"*: `Single-end BAM`
+>    - *"Effective genome size"*: `M. musculus`
 >    - *"Additional Outputs"*: Select `Peaks as tabular file (compatible wih MultiQC)`, `Peak summits`, `Scores in bedGraph files (--bdg)`
 >
 > 2. Rename your files after **MACS2 callpeak** finishes to reflect the origin and contents.
+> 3. Repeat steps for the other cell type.
 {: .hands_on}
 
 # Step 7: Inspection of peaks and aligned data
