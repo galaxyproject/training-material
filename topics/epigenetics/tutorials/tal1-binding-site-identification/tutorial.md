@@ -251,7 +251,7 @@ We expect that the replicate samples will cluster more closely to each other tha
 >     > > ### {% icon solution %} Solution
 >     > > 1. Large areas of zeros would lead to a correlation of these areas. The information we would get out of this computation would be meaningless.
 >     > > 2. The clusters are different, e.g. Megakaryocyte_input_R2 and G1E_input_R2 are clustered together. [ More information about Pearson and Spearman correlation. ](http://support.minitab.com/en-us/minitab-express/1/help-and-how-to/modeling-statistics/regression/supporting-topics/basics/a-comparison-of-the-pearson-and-spearman-correlation-methods/)
->     > > 3. No solution for you, just compare the different outputs.
+>     > > 3. Try making a Scatterplot to see for yourself! 
 >     > {: .solution }
 >     {: .question}
 >
