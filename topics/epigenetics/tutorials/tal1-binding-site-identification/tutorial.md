@@ -158,11 +158,9 @@ It is often necessary to trim a sequenced read to remove bases sequenced with hi
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. How did the range of read lengths change after trimming/clipping?
->    > 2. What do you think could account for the enriched k-mers ("Kmer Content" heading in FastQC output) observed in the Megakaryocytes TAL1 R2 ChIP-seq experiment?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. Before trimming, all the reads were the same length, which reflected the number of rounds of nucleotide incorporation in the sequencing experiment. After trimming, read lengths span a range of values reflecting different lengths of the actual DNA fragments captured during the ChIP experiement.
->    > > 2. Many transcription factors recognize and bind to specific sequence motifs. Since a ChIP-seq experiment enriches for DNA fragments bound by the protein being immunopurified, we might expect that protein's recognition motif to be slightly enriched in the resulting sequenced reads.
 >    > {: .solution }
 >    {: .question}
 >
