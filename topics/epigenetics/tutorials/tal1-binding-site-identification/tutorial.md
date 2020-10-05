@@ -461,8 +461,8 @@ Optionally, you can use plotProfile to create a profile plot using to computeMat
 > ### {% icon hands_on %} Hands-on: Calculating signal matrix on MACS2 output
 >
 > 1. **computeMatrix** {% icon tool %}: Run computeMatrix to prepare data for plotting a heatmap of TAL1 peaks.
->    - {% icon param-file %} *Select Regions* > *"Regions to plot"*: Select the MACS2 output (narrow peaks) for G1E cells (TAL1 over Input)
->    - {% icon param-file %} *"Score file"*: Select the bigWigs (log2 ratios from bamCompare)
+>    - {% icon param-file %} *Select Regions* > *"Regions to plot"*: Select the MACS2 narrow peaks files for G1E cells (TAL1 over Input)
+>    - {% icon param-file %} *"Score file"*: Select the bigWig files for the G1E cells (log2 ratios from bamCompare)
 >    - *"computeMatrix has two main output options"*: `reference-point`
 >    - *"The Reference point for plotting"*: `center of region`
 >    - *"Distance upstream of the start site of the regions defined in the region file"*: `5000`
@@ -476,16 +476,16 @@ Optionally, you can use plotProfile to create a profile plot using to computeMat
 
 > ### {% icon hands_on %} Hands-on: Plotting a heatmap of TAL1 peaks
 >
-> 1. **plotHeatmap** {% icon tool %}: Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions.
->    - *"Matrix file from the computeMatrix tool"*: Select the computeMatrix output for G1E
+> 1. **plotHeatmap** {% icon tool %}: Run plotHeatmap to create a heatmap for score distributions across TAL1 peak genomic regions in each cell type.
+>    - *"Matrix file from the computeMatrix tool"*: Select the computeMatrix output for G1E cells
 >    - *"Show advanced options"*: `Yes`
 >    - *"Labels for the samples (each bigwig) plotted"*: Enter sample labels in the order you added them in computeMatrix, separated by spaces.
 >
-> 2. Repeat for Megakaryoctes.
+> 2. Repeat for Megakaryocytes.
 >
-> The outputs should look like this:
+> The outputs should look similar to this:
 >
-> ![hm](../../images/tal1/hm.png)
+> ![hm](../../images/tal1/TAL1-plotheatmap.png)
 {: .hands_on}
 
 # Additional optional analyses
