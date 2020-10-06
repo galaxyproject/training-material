@@ -38,9 +38,15 @@
       location: https://zenodo.org/record/197100/files/RefSeq_gene_annotations_mm10.bed
       filetype: bed
   outputs:
-    ffn:
+    output_overlapping_peaks:
       asserts:
-        has_text:
-          text: ">A"
-        has_text:
-          text: ">B"
+        has_text_matching:
+          expression: '"chr16"\t"92801577"\t"92801928"\t'
+    output_g1e_peaks:
+      asserts:
+        has_text_matching:
+          expression: '"chr16"\t"92715404"\t"92716369"\t'
+    output_megakaryocyte_peaks:
+      asserts:
+        has_text_matching:
+          expression: '"chr16"\t"92807876"\t"92808079"\t'
