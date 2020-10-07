@@ -180,6 +180,7 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 
 TUTORIAL_PDFS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/html$$/pdf/g')
 SLIDE_PDFS=$(shell find _site/training-material -name 'slides.html' | sed 's/html$$/pdf/g')
+SLIDE_PDFS+=$(shell find _site/training-material/*/*/slides/* | sed 's/html$$/pdf/g')
 
 pdf: $(SLIDE_PDFS) $(TUTORIAL_PDFS) ## generate the PDF of the tutorials and slides
 .PHONY: pdf
@@ -194,7 +195,7 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
-_site/%/slides.pdf: _site/%/slides.html
+_site/%.pdf: _site/%.html
 	if ! grep 'http-equiv="refresh"' $< --quiet; then \
 		$(ACTIVATE_ENV) && \
 		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
