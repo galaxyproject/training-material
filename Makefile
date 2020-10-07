@@ -201,7 +201,8 @@ _site/%.pdf: _site/%.html
 		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
 		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
 		wkhtmltopdf \
-		    --enable-javascript --javascript-delay 1000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+			--user-style-sheet bin/slides-fix.css \
 			- $@; \
 	fi
 
