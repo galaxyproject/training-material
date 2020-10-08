@@ -5,9 +5,6 @@ HOST?=0.0.0.0
 FLAGS?=""
 ENV?="development"
 CHROME=google-chrome-stable
-TUTORIALS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/_site\/training-material\///')
-SLIDES=$(shell find _site/training-material -name 'slides.html' | sed 's/_site\/training-material\///')
-SLIDES+=$(shell find _site/training-material/*/*/slides/* | sed 's/_site\/training-material\///')
 PDF_HOST?=127.0.0.1
 SITE_URL=http://${PDF_HOST}:${PORT}/training-material
 PDF_DIR=_pdf
@@ -67,13 +64,6 @@ serve-quick: ## run a local server (faster, some plugins disabled for speed)
 		mv Gemfile.lock Gemfile.lock.backup || true && \
 		${JEKYLL} serve --strict_front_matter -d _site/training-material --incremental --config _config.yml,_config-dev.yml -P ${PORT} -H ${HOST} ${FLAGS}
 .PHONY: serve-quick
-
-detached-serve: ## run a local server in detached mode (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags to Jekyll)
-	$(ACTIVATE_ENV) && \
-		mv Gemfile Gemfile.backup || true && \
-		mv Gemfile.lock Gemfile.lock.backup || true && \
-		${JEKYLL} serve --strict_front_matter --detach -d _site/training-material -P ${PORT} -H ${HOST} ${FLAGS}
-.PHONY: detached-serve
 
 build: clean ## build files but do not run a server (You can specify FLAGS= to pass additional flags to Jekyll)
 	$(ACTIVATE_ENV) && \
@@ -188,32 +178,40 @@ check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
 				-f {}"
 .PHONY: check-links-gh-pages
 
+TUTORIAL_PDFS=$(shell find _site/training-material -name 'tutorial.html' | sed 's/html$$/pdf/g')
+SLIDE_PDFS=$(shell find _site/training-material -name 'slides.html' | sed 's/html$$/pdf/g')
+SLIDE_PDFS+=$(shell find _site/training-material/*/*/slides/* | sed 's/html$$/pdf/g')
 
-pdf: detached-serve ## generate the PDF of the tutorials and slides
-	npm install decktape
-	mkdir -p _pdf
-	@for t in $(TUTORIALS); do \
-		name="$(PDF_DIR)/$$(echo $$t | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
-		${CHROME} \
-            --headless \
-            --disable-gpu \
-            --print-to-pdf="$$name" \
-            "$(SITE_URL)/$$t?with-answers" \
-            2> /dev/null ; \
-	done
-	@for s in $(SLIDES); do \
-		name="$(PDF_DIR)/$$(echo $$s | tr '/' '-' | sed -e 's/html/pdf/' -e 's/topics-//' -e 's/tutorials-//')"; \
-		$(ACTIVATE_ENV) ; \
-		echo $$name; \
-		echo "$(SITE_URL)/$$s"; \
-		echo `which npm`; \
-		`npm bin`/decktape \
-			automatic \
-			"$(SITE_URL)/$$s" \
-			"$$name" ; \
-	done
-	pkill -f jekyll
+pdf: $(SLIDE_PDFS) $(TUTORIAL_PDFS) ## generate the PDF of the tutorials and slides
 .PHONY: pdf
+
+_site/%/tutorial.pdf: _site/%/tutorial.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 1000 \
+			- $@; \
+	fi
+
+_site/%.pdf: _site/%.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+			--user-style-sheet bin/slides-fix.css \
+			- $@; \
+	fi
+
+AWS_UPLOAD?=""
+VIDEOS := $(shell find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
+video: $(VIDEOS:topics/%.html=_site/training-material/topics/%.mp4) ## Build videos where possible
+
+_site/training-material/%/slides.mp4: _site/training-material/%/slides.pdf %/slides.html
+	./bin/ari.sh $^ $@ $(AWS_UPLOAD)
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
