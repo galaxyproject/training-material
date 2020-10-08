@@ -68,7 +68,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >
 >    ```yaml
 >    - src: galaxyproject.repos
->      version: 0.0.1
+>      version: 0.0.2
 >    - src: galaxyproject.slurm
 >      version: 0.1.2
 >    ```

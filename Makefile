@@ -116,7 +116,7 @@ check-html-internal: build ## validate HTML (internal links only)
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/" \
 	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
 	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      	--disable-external \
@@ -139,7 +139,7 @@ check-slides: build  ## check the markdown-formatted links in slides
 
 check-yaml: ## lint yaml files
 	$(ACTIVATE_ENV) && \
-		find . -name "*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+		find . -name "*.yaml" | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 		ruby bin/check-contributors.rb
 .PHONY: check-yaml
@@ -157,7 +157,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 	./bin/check-broken-boxes
 .PHONY: check-broken-boxes
 
-check: check-yaml check-frontmatter check-html-internal check-html check-slides check-workflows check-references check-snippets ## run all checks
+check: check-yaml check-frontmatter check-html-internal check-html check-broken-boxes check-slides check-workflows check-references check-snippets ## run all checks
 .PHONY: check
 
 lint: ## run all linting checks

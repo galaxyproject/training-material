@@ -144,7 +144,7 @@ Let's look at the quality of the reads in this file.
 
 > ### {% icon hands_on %} Hands-on: Use a tool
 > 1. Type **FastQC** in the tools panel search box (top)
-> 2. Click on the **FastQC** {% icon tool %} tool
+> 2. Click on the {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72) %} tool
 >
 >    The tool will be displayed in the central Galaxy panel.
 >
@@ -197,7 +197,7 @@ Let's run a tool to filter out lower-quality reads from our FASTQ file.
 
 > ### {% icon hands_on %} Hands-on: Run another tool
 > 1. Type **Filter by quality** in the tools panel search box (top)
-> 2. Click on the tool **Filter by quality** {% icon tool %}
+> 2. Click on the tool {% tool [Filter by quality](toolshed.g2.bx.psu.edu/repos/devteam/fastq_quality_filter/cshl_fastq_quality_filter/1.0.1) %}
 > 3. Set the following parameters:
 >    - {% icon param-file %} *"Input FASTQ file"*: the input FASTQ file
 >    - *"Quality cut-off value"*: 35
