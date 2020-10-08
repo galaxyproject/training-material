@@ -7,15 +7,11 @@
 # to run image:
 #    docker run -p "8080:80" -t climate
 
-FROM bgruening/galaxy-stable
+FROM quay.io/bgruening/galaxy:20.05
 
 MAINTAINER Galaxy Training Material
 
 ENV GALAXY_CONFIG_BRAND "GTN: Climate"
-
-# prerequisites
-RUN pip install ephemeris -U
-ADD bin/galaxy-sleep.py /galaxy-sleep.py
 
 # copy the tutorials directory for your topic
 ADD topics/climate/tutorials/ /tutorials/
@@ -23,4 +19,7 @@ ADD topics/climate/tutorials/ /tutorials/
 # install everything for tutorials
 ADD bin/docker-install-tutorials.sh /setup-tutorials.sh
 ADD bin/mergeyaml.py /mergeyaml.py
+ADD bin/data_libarary_download.sh /data_libarary_download.sh
 RUN /setup-tutorials.sh
+
+ENTRYPOINT ["/data_libarary_download.sh"]

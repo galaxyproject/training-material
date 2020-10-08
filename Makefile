@@ -116,7 +116,7 @@ check-html-internal: build ## validate HTML (internal links only)
 		htmlproofer \
 	      	--assume-extension \
 	      	--http-status-ignore 405,503,999 \
-	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+	      	--url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/","/.*slides.html#/" \
 	      	--url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
 	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      	--disable-external \
@@ -139,7 +139,7 @@ check-slides: build  ## check the markdown-formatted links in slides
 
 check-yaml: ## lint yaml files
 	$(ACTIVATE_ENV) && \
-		find . -name "*.yaml" | xargs -L 1 -I '{}' sh -c "yamllint {}" \
+		find . -name "*.yaml" | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
 		ruby bin/check-contributors.rb
 .PHONY: check-yaml

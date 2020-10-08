@@ -96,7 +96,7 @@ The configuration is not complex for CVMFS:
 >    CVMFS_USE_GEOAPI=yes
 >    ```
 >
->    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to. You an use the `cvmfs_quota_limit` role variable to control this setting.
+>    This tells CVMFS to mount the Galaxy reference data repository and use a specific location for the cache which is limited to 500MB in size and to use the instance's geo-location to choose the best CVMFS repo server to connect to. You can use the `cvmfs_quota_limit` role variable to control this setting.
 >
 > 2. Create a `/etc/cvmfs/domain.d/galaxyproject.org.conf` file with the following contents:
 >
