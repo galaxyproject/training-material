@@ -115,8 +115,10 @@ module Jekyll
 
         # We'll handle slides first and have hands-on override.
         page = false
+        slide_has_video = false
         if slides_page_keys.length == 1 then
           page = interesting[slides_page_keys[0]]
+          slide_has_video = page.data.has_key?('video') and page['video']
         end
 
         if tutorial_page_keys.length == 1 then
@@ -152,6 +154,7 @@ module Jekyll
         # Similar as above.
         page_obj['workflows'] = resources.include?('workflows')
         page_obj['tours'] = resources.include?('tours')
+        page_obj['video'] = slide_has_video
         # I feel less certain about this override, but it works well enough in
         # practice, and I did not find any examples of `type: <anything other
         # than tutorial>` in topics/*/tutorials/*/tutorial.md but that doesn't
