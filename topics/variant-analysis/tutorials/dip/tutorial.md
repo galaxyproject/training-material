@@ -338,10 +338,10 @@ This short tutorial should give you an overall idea on how generate variant data
 
 | Tutorial | PDF | Galaxy library | Galaxy history |
 |:---------|:---:|:--------------:|:--------------:|
-| Introduction | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F0283ca691a41c352) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-introduction) |
-| Identifying *de novo* mutations underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F775008f45cbbf010) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations) |
-| Identifying autosomal recessive variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F35b262f5ac8aa63a) | [{% icon galaxy-history %}](https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive) |
-| Identifying autosomal dominant variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/list#folders/F1c4722ad56892a31) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant ) |
+| Introduction | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F0283ca691a41c352) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-introduction) |
+| Identifying *de novo* mutations underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F775008f45cbbf010) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-de-novo-mutations) |
+| Identifying autosomal recessive variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F35b262f5ac8aa63a) | [{% icon galaxy-history %}](https://usegalaxy.org/u/aun1/h/gemini-autosomal-recessive) |
+| Identifying autosomal dominant variants underlying Mendelian disease | [{% icon references %}](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf) | [{% icon galaxy-library %}](https://usegalaxy.org/library/folders/F1c4722ad56892a31) | [{% icon galaxy-history %}]( https://usegalaxy.org/u/aun1/h/gemini-autosomal-dominant ) |
 
 ### How to use these tutorials?
 
