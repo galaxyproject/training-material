@@ -503,7 +503,7 @@ tumor data.
 >        tissue data; the outputs of **RmDup**
 >      - *"Using reference genome"*: `Human: hg19` (or a similarly
 >        named choice)
->   - *"Maximum number of iterations"*: `5`
+>    - *"Maximum number of iterations"*: `5`
 >
 > > ### {% icon comment %} Using the imported `hg19` sequence
 > > If you have imported the `hg19` sequence as a fasta dataset into your
