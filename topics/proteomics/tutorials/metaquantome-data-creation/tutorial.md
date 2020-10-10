@@ -2,14 +2,14 @@
 layout: tutorial_hands_on
 
 title: metaQuantome Data creation tutorial
-zenodo_link: '(https://doi.org/10.5281/zenodo.4037137)'
+zenodo_link: "https://doi.org/10.5281/zenodo.4037137"
 questions:
  - "How do I perform functional and taxonomy analysis on metaproteomics data?"
  - "How can I perform quantitation on metaproteomics data?"
  - "How do I create inputs that can be used in metaquantome to examine differentially expressed proteins?"
 objectives:
   - "A taxonomy, functional and quantitational analysis of metaproteomic mass spectrometry data."
-time_estimation: "1 hr"
+time_estimation: "1h"
 key_points:
   - "Use dataset collections"
   - "With SearchGUI and PeptideShaker you can gain access to multiple search engines"
