@@ -48,7 +48,7 @@ Zenodo contains [datasets representing a child and a mother](https://doi.org/10.
 
 # Importing example datasets
 
-For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
+For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
 
 > ### {% icon hands_on %} Hands-on: Getting the data
 >
@@ -71,7 +71,7 @@ For this tutorial we have prepared a subset of data previously [published](http:
 >
 > ![Data upload from a Galaxy Library](../../images/mt_lib.png)
 >
->  * Go to this [this Galaxy library](https://usegalaxy.org/library/list#folders/Fe4842bd0c37b03a7)
+>  * Go to this [this Galaxy library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7)
 >  * You will see screen like the one shown above
 >  * Click **to History** button.
 >  * Galaxy will prompt you to ask whether you want to import these data into already existing or new history.
