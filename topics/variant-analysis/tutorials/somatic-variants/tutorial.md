@@ -629,10 +629,10 @@ somatic variant calling that:
 >
 >    - {% icon param-file %} *"aligned reads from normal sample"*: the mapped
 >      and fully post-processed normal tissue dataset; one of the two outputs
->      of **CalMD** {% icon tool %}
+>      of filtering the **CalMD** {% icon tool %} outputs
 >    - {% icon param-file %}*"aligned reads from tumor sample"*: the mapped
 >      and fully post-processed tumor tissue dataset; the other output of
->      **CalMD** {% icon tool %}
+>      filtering the **CalMD** {% icon tool %} outputs
 >    - *"Estimated purity (non-tumor content) of normal sample"*: `1`
 >    - *"Estimated purity (tumor content) of tumor sample"*: `0.5`
 >    - *"Generate separate output datasets for SNP and indel calls?"*: `No`
