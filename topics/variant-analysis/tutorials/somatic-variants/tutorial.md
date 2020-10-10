@@ -21,7 +21,7 @@ objectives:
 time_estimation: 7h
 key_points:
 - Follow best practices for read mapping, quality control and mapped reads postprocessing
-  to minimze false-positive variant calls.
+  to minimize false-positive variant calls.
 - Use a dedicated somatic variant caller to call variants and to classify them into
   somatic, germline and LOH event variants on statistical grounds.
 - Annotations and queries based on variant properties add relevance to variant and
