@@ -863,7 +863,7 @@ dataset and we are going to extract them from there and add them to the
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Making variant call statistics accessible
-> 1. **GEMINI annotate** {% icon tool %}:
+> 1. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %}:
 >    - {% icon param-file %} *"GEMINI database"*: output of **GEMINI load**
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: output of **VarScan somatic**
 >    - *"Strict variant-identity matching of database and annotation records
@@ -932,7 +932,7 @@ want to add:
 - information from the **Cancer Genome Interpreter (CGI)**
 
 > ### {% icon hands_on %} Hands-on: Adding further annotations
-> 1. **GEMINI annotate** {% icon tool %} to add further annotations from **dbSNP**
+> 1. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add further annotations from **dbSNP**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `dbsnp.b147.chr5_12_17.vcf`
@@ -957,7 +957,7 @@ want to add:
 >        This recipe extracts the dbSNP *SAO* field and adds it as *rs_ss* to
 >        the GEMINI database.
 >
-> 2. **GEMINI annotate** {% icon tool %} to add further annotations from **cancerhotspots**
+> 2. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add further annotations from **cancerhotspots**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `cancerhotspots_v2.bed`
@@ -988,7 +988,7 @@ want to add:
 >        cancerhotspots sites and adding them as *hs_qvalue* to the GEMINI
 >        database.
 >
-> 3. **GEMINI annotate** {% icon tool %} to add links to **CIViC**
+> 3. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add links to **CIViC**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `CIViC.bed`
@@ -1017,7 +1017,7 @@ want to add:
 >        sites and adding them as a list of *overlapping_civic_urls* to the
 >        GEMINI database.
 >
-> 3. **GEMINI annotate** {% icon tool %} to add information from the **Cancer Genome Interpreter (CGI)**
+> 3. Run {% tool [GEMINI annotate](toolshed.g2.bx.psu.edu/repos/iuc/gemini_annotate/gemini_annotate/0.20.1+galaxy2) %} to add information from the **Cancer Genome Interpreter (CGI)**
 >    - {% icon param-file %} *"GEMINI database"*: the output of the last
 >      **GEMINI annotate** {% icon tool %} run
 >    - {% icon param-file %} *"Dataset to use as the annotation source"*: the imported `cgi_variant_positions.bed`
@@ -1075,7 +1075,7 @@ somatic variants. Our strategy for retrieving them is to:
    tumor sample
 
 > ### {% icon hands_on %} Hands-on: Querying the GEMINI database for somatic variants
-> 1. **GEMINI query** {% icon tool %} with:
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} with:
 >    - {% icon param-file %} *"GEMINI database"*: the fully annotated database
 >      created in the last **GEMINI annotate** {% icon tool %} step
 >    - *"Build GEMINI query using"*: `Basic variant query constructor`
@@ -1137,7 +1137,7 @@ somatic variants. Our strategy for retrieving them is to:
 What about more sophisticated filtering?
 
 > ### {% icon hands_on %} Hands-on: More complex filter criteria
-> 1. **GEMINI query** {% icon tool %} with the exact same settings as before, but:
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} with the exact same settings as before, but:
 >    - *"Additional constraints expressed in SQL syntax"*: `somatic_status = 2 AND somatic_p <= 0.05 AND filter IS NULL`
 >
 >     This translates into "variants classified as somatic with a p-value <=
@@ -1161,7 +1161,7 @@ Before we focus on the content of the report, however, we could enhance the
 report format a bit more.
 
 > ### {% icon hands_on %} Hands-on: SQL-based output formatting
-> 1. **GEMINI query** {% icon tool %} with the exact same settings as in the
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} with the exact same settings as in the
 > last example, but:
 >    - In *"Output format options"*
 >      - *"Additional columns (comma-separated)"*: `type, gt_alt_freqs.TUMOR, gt_alt_freqs.NORMAL,
@@ -1223,7 +1223,7 @@ with the `Basic query constructor` we have used so far, but requires an
 advanced mode for composing the query.
 
 > ### {% icon hands_on %} Hands-on: Turning query results into gene-centered reports
-> 1. **GEMINI query** {% icon tool %} in advanced mode by choosing
+> 1. Run {% tool [GEMINI query](toolshed.g2.bx.psu.edu/repos/iuc/gemini_query/gemini_query/0.20.1+galaxy1) %} in advanced mode by choosing
 >   - *"Build GEMINI query using"*: `Advanced query constructor`
 >   - *"The query to be issued to the database"*: `SELECT v.gene, v.chrom,
 >     g.synonym, g.hgnc_id, g.entrez_id, g.rvis_pct, v.clinvar_gene_phenotype
@@ -1277,7 +1277,7 @@ unwanted columns, while *rearranging* the remaining ones.
 
 > ### {% icon hands_on %} Hands-on: Join 
 > 
-> 1. Use **Join two files** {% icon tool %} to add **UniProt cancer genes** information
+> 1. Use {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1) %} to add **UniProt cancer genes** information
 >    - {% icon param-file %} *"1st file"*: the GEMINI-generated gene report from the previous step
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %}  *"2nd file"*: the imported `Uniprot_Cancer_Genes` dataset 
@@ -1301,7 +1301,7 @@ unwanted columns, while *rearranging* the remaining ones.
 >      a variant is neither a known proto-oncogene, nor a tumor suppressor
 >      gene.
 >
-> 2. Use **Join two files** {% icon tool %} to add **CGI biomarkers** information
+> 2. Use {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1) %} to add **CGI biomarkers** information
 >    - {% icon param-file %} *"1st file"*: the partially annotated dataset from the previous
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd file"*: the imported `cgi_genes` dataset
@@ -1315,7 +1315,7 @@ unwanted columns, while *rearranging* the remaining ones.
 >    Inspect the input and the result dataset to make sure you understand what
 >    happened at this step.
 >
-> 3. Use **Join two files** {% icon tool %} to add gene information from **CIViC**
+> 3. Use {% tool [Join two files](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.1) %} to add gene information from **CIViC**
 >    - {% icon param-file %} *"1st file"*: the partially annotated dataset from step 2
 >    - *"Column to use from 1st file"*: `Column: 1`
 >    - {% icon param-file %} *"2nd file"*: the imported `GeneSummaries` dataset
