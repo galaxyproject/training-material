@@ -1344,7 +1344,7 @@ issues and rearrange to get a fully annotated gene report.
 
 
 > ### {% icon hands_on %} Hands-on: Rearrange to get a fully annotated gene report 
-> 4. Run **Column arrange by header name** {% icon tool %} configured like
+> 4. Run {% tool [Column arrange by header name](toolshed.g2.bx.psu.edu/repos/bgruening/column_arrange_by_header/bg_column_arrange_by_header/0.2) %} configured like
 >    this:
 >    - {% icon param-file %} *"file to rearrange"*: the final **Join** result dataset from step 3
 >    - In *"Specify the first few columns by name"*
