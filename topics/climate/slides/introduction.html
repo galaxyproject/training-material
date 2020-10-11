@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Introduction to climate data</title>
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Learn to analyze climate data through Galaxy." />
+    <meta property="og:title" content="Galaxy Training: Introduction to climate data" />
+    <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to climate data",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+  },
+  "courseCode": "climate / introduction / introduction.html",
+  "learningResourceType": "slides",
+  "name": "Introduction to 'Climate'",
+  "url": "https://training.galaxyproject.org//training-material/topics/climate/slides/introduction.html",
+  "description": "Slides for Climate",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    },
+    {
+      "@type": "Person",
+      "name": "Jean Iaquinta"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    },
+    {
+      "@type": "Person",
+      "name": "Jean Iaquinta"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/climate" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/climate/slides/introduction.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Introduction to climate data
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+# What do we mean by &quot;Climate&quot;?
+
+*[Wikipedia](https://en.wikipedia.org/wiki/Climate)*: 
+Climate is defined as the **average state** of everyday’s weather condition **over a period of 30 years**.
+It is measured by assessing the patterns of variation in terms of temperature, humidity, atmospheric pressure, wind, precipitation, atmospheric particle count and other meteorological variables in a given region over long periods of time.
+
+![Climate word cloud](../images/word_cloud.png &quot;Word cloud of climate words and phrases&quot;)
+
+---
+
+# Weather versus climate
+
+*Climate differs from weather, in that weather only describes the short-term conditions of these variables in a given region.*
+
+![Weather versus Climate](../images/weather_versus_climate.png &quot;Differences between weather and climate&quot;)
+
+Watch [this Video](https://youtu.be/e0vj-0imOLw) to get an illustration of the difference between climate and weather.
+
+*Source*: [Animated short on statistics](https://youtu.be/e0vj-0imOLw) from Norwegian infotainment program Siffer. Produced by TeddyTV for NRK. Animation by Ole Christoffer Haga
+
+???
+There is often a confusion among the general public between the notions of &quot;weather&quot; and &quot;climate&quot;. 
+It is therefore important to clarify the differences (short-term vs. long-term, local/regional vs. global scales) and
+also provide indications about what can be expected regarding weather (i.e., is it going to rain tomorrow in a particular region?) 
+or climate (e.g., what is the global temperature trend, etc.).
+
+---
+
+# Types of climate data resources
+
+- **Observations**: usually the most reliable, but there are little actual observations at the scale of climate and covering a large area;
+- **Re-analyses**: these combine observations with numerical models to produce &quot;best estimates&quot; of climate variables; 
+- **Climate models**: climate variables produced by numerical simulations only.
+
+???
+We briefly introduce in this slide the 3 different types of climate data resources available to scientists, and in the following slides we will explain 
+what can be used depending on the time period of interest and application.
+
+---
+
+## What is available for the period of time you are interested in?
+
+![Climate data types](../images/climate_data_types.png &quot;Different climate data type and their main characteristics&quot;)
+
+???
+The first thing to consider when looking for climate data is time.
+That can be past climate or present days (in which case information can be available from several sources), 
+or future climate (for which only numerical climate models can be of any use, since there has not yet been any actual observation made
+in the future or any re-analysis using these).
+
+---
+
+## Direct observations &amp;nbsp;&amp;nbsp;&amp;nbsp; ![Observations](../images/observation_type.png &quot;Show observations are always in the past&quot;)
+
+- Measurements (from ground stations, buoys, satellites, etc.) of one or more physical variables (temperature, humidity, wind, etc.) at one or more particular times and places. 
+
+![WMO global observing system](../images/WMO_global_observing_system.png &quot;The World Meteorological Organisation Global Observing System&quot;)
+
+*Source*: https://uls.climate.copernicus.eu
+
+???
+These direct observations correspond to the most common type of physical variables (temperature, wind, rainfall, etc.) 
+which can be collected using measuring instruments.
+Notice that this category also includes remotely sensed data (like satellite imagery or radar) although these can be subject to 
+complex data processing before they can be of any use.
+
+---
+
+## Indirect observations &amp;nbsp;&amp;nbsp;&amp;nbsp; ![Observations](../images/observation_type.png &quot;Show observations are always in the past&quot;)
+
+They are derived from other observations, including:
+- ice cores
+- lake sediments
+- tree rings
+
+These indirect observations are sometimes referred to as &quot;climate proxies&quot;.
+
+![Tree rings](../images/frost_rings_375.jpg &quot;Show two distorted rings from a Siberian pine&quot;)
+
+*Source*: https://www.earth.columbia.edu
+
+???
+As opposed to the direct observations mentioned in the previous slide, 
+&quot;proxies&quot; are somehow related to climate but in a rather intricate manner, and they can also be influenced by other factors.
+For example the growth of trees depends on the amount of heat and nutrients/water available (although the exact relationship is not straightforward), 
+but also for example on the location/exposition, on possible insects/animals attacks or diseases, which are even less predictable.
+
+On this picture two rings from a Siberian pine in Mongolia are clearly distorted, 
+and that was linked to a particularly cold winter after a volcanic eruption which 
+caused a drastic cooling in the northern hemisphere that froze sap in the cells during the growing season (dated around 536 Common Era).
+
+---
+
+# Reanalysis &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; ![Re-analysis](../images/reanalysis_type.png &quot;Show re-analysis data are always in the past&quot;)
+
+- A climate re-analysis is produced by combining numerical models with observations so it can only provide information about the past climate. 
+It contains estimates of the air temperature, wind at different altitudes, rainfall, soil moisture content, etc.
+- The estimates are produced for all locations on Earth, and they span a long time period that can extend back decades or more.
+
+&lt;div class=&quot;embed-responsive embed-responsive-16by9&quot;&gt;&lt;iframe src=&quot;https://www.youtube.com/embed/FAGobvUGl24&quot; webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;&lt;/div&gt;
+
+???
+As opposed to observations which are not available for every location on the planet or at any given time, 
+re-analyses &quot;fill these gaps&quot; by using complex numerical forecast models and data assimilation schemes.
+
+It is a bit like re-making a weather forecast for last Monday,
+then &quot;re-adjusting&quot; the model outputs knowing what the weather was actually like that particular day (based on observations),
+and using the combined observation-model information to infer the weather for the following day (last Tuesday), and so on and so forth.
+
+One could argue that there is not much point in &quot;predicting&quot; last week's weather, since it already happened and everybody knows about it now.
+
+Although knowing what the weather was like last week or last year cannot be of any help to make any decision a posteriori, 
+it is extremely relevant for those who try to understand past events, 
+for scientists (to improve the models and for instance include features which were not adequately represented), for policy makers, etc.
+
+Re-analysis provide continuous and consistent data, with a fine temporal and spatial resolution, 
+and is generally the best choice when a high degree of confidence is expected.
+
+---
+
+# What is a model?
+
+Numerical models are a mathematical representation of the climate developed by scientists to understand and predict the climate system. 
+
+![Atmospheric Model Schematic](../images/AtmosphericModelSchematic.png &quot;Illustrate the notion of numerical climate model&quot;)
+
+*Source*: [https://www.climate.gov/maps-data/primer/climate-models](https://www.climate.gov/maps-data/primer/climate-models)
+
+???
+Climate models exploit numerical algorithms and high performance computers to solve mathematical equations that describe the physics of the 
+atmosphere, hydrosphere, cryosphere, land surfaces and biosphere
+to help scientists better understand how the Earth system &quot;works&quot; and how climate changes, or assess the impact of human activities and
+events (like volcanic eruptions), but also quantify the effectiveness of mitigation measures, for example.
+
+---
+
+# Climate Models &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp; ![Climate model type](../images/model_type.png &quot;climate models cover both past and future&quot;)
+
+Various types of models are used for different aspects of the climate. 
+All have different ways to represent the real world, depending on how researchers prioritize and perform these simplifications (in terms of parameterizations, etc.) in the numerical climate model.
+
+## How good are climate models?
+
+Climate models are continuously improving but they still have biases and weaknesses, also some models perform &quot;better&quot; in the atmosphere, 
+others in the hydrosphere, etc.
+As a result, a single climate simulation cannot be considered as providing the &quot;truth&quot;.
+Usually a good overview can be obtained when considering several model &quot;families&quot; rather than any single model, or several model run in slightly 
+different conditions (also called &quot;ensemble runs&quot;).
+
+???
+The physics equations for each model component (atmosphere, hydrosphere, cryosphere, etc.) are solved for each grid cell and appropriate time steps.
+
+Simplifications, called &quot;parameterizations&quot;, are also made to include processes which are too complex to &quot;put into equations&quot; 
+or would require too much computational resources to be explicitly resolved, or involve scales much smaller than the model grid.
+
+---
+
+# Climate prediction *vs.* projection
+
+## Climate prediction
+
+A **climate prediction** (or climate forecast) is an attempt to produce an estimate of the actual evolution of the natural climate in the future, for example, at seasonal, inter-annual or long-term time scales. 
+
+## Climate projections
+
+**Climate projections** are distinct from climate predictions in that projections depend upon emission/concentration/radiative forcing **scenarios**, which are based on assumptions concerning, for example, future socio-economic and technological developments that may or may not be realized and are therefore subject to substantial uncertainty.
+
+Within the Coupled Model Intercomparison Project (CMIP), now in its 6th phase, project simulations of the 
+research community provide model output that will fuel climate research and climate impact studies for the 
+next 5 to 10 years, while its careful analysis will form the basis for future climate assessments.
+
+---
+
+# Shared Socio-economic Pathway (SSP) ![Climate model type](../images/climate_type_ssp.png &quot;climate models cover both past and future&quot;)
+
+**= societal development pathway**
+
+The SSPs were developed as a joint community effort and describe global developments that
+together would lead to different challenges for mitigation and adaptation to climate change.
+SSPs comprise **five alternative** narratives that describe the main characteristics of the
+pathways in qualitative terms as well as quantitative descriptions for key elements including
+population, economic growth and urbanization.
+
+Different pathways are defined by the magnitude of the challenges a future society
+would face in adapting to or mitigating climate change if that socioeconomic pathway was pursued.
+
+---
+
+## SSPs and Shared Policy Assumptions (SPAs)
+
+- &lt;a href=&quot;https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP1:_Sustainability_(Taking_the_Green_Road)&quot;&gt;SSP1 Sustainability&lt;/a&gt;: Taking the Green Road e.g. low challenges to mitigation and adaptation
+
+- &lt;a href=&quot;https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP2:_Middle_of_the_road)&quot;&gt;SSP2 Middle of the Road&lt;/a&gt;:  Medium challenges to mitigation and adaptation
+
+- &lt;a href=&quot;https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP3:_Regional_rivalry_(A_Rocky_Road)&quot;&gt;SSP3 Regional Rivalry&lt;/a&gt;: A Rocky Road e.g high challenges to mitigation and adaptation
+
+- &lt;a href=&quot;https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP4:_Inequality_(A_Road_Divided)&quot;&gt;SSP4 Inequality&lt;/a&gt;: A Road Divided e.g. low challenges to mitigation, high challenges to adaptation
+
+- &lt;a href=&quot;https://en.wikipedia.org/wiki/Shared_Socioeconomic_Pathways#SSP5:_Fossil-Fueled_Development_(Taking_the_Highway)&quot;&gt;SSP5 Fossil-fueled Development&lt;/a&gt;: Taking the Highway e.g. high challenges to mitigation, low challenges to adaptation
+
+---
+
+## SSPs and Shared Policy Assumptions (SPAs)
+
+![Shared Socio-economic Pathway and Shared POLicy Assumptions](../images/SSP_scenarios.png &quot;Scenarios with different SSPs and SPAs&quot;)
+
+Source: https://www.becc.lu.se/sites/becc.lu.se/files/climate_modelling_ralf_doscher.pdf
+
+---
+
+# Where to start to get climate data?
+
+*There is a wealth of data and information available on the **web** about the past, current and future climate.*
+
+**Not all of it is up-to-date and trustworthy**
+
+- Check the provenance and data provider credentials
+
+**Not all the variables/parameters are necessarily relevant for your study**
+
+- Prioritize the use of [Essential Climate Variables](https://gcos.wmo.int/en/essential-climate-variables/about) (as we know they critically contribute to the characterization of Earth’s climate).
+
+**Not all the variables are reliable**
+
+- For instance, temperature is usually reliable but precipitation is more difficult to estimate
+- Prioritize observations and re-analyses for past climate
+
+**Prefer authoritative data providers**
+
+
+---
+
+
+
+
+## Related tutorials
+
+
+    
+
+    
+        
+    
+
+    
+        
+    
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>, <a href="/training-material/hall-of-fame/j34ni/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/j34ni" alt="Jean Iaquinta">Jean Iaquinta</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+  </body>
+</html>
