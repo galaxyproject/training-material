@@ -73,12 +73,12 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
->    Experimental Design - https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv?download=1
->    Protein Database - https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta?download=1
->    T2_A1 MZML File - https://zenodo.org/record/4037137/files/T2_A1.mzml?download=1
->    T2_B1 MZML File - https://zenodo.org/record/4037137/files/T2_B1.mzml?download=1
->    T7A_1 MZML File - https://zenodo.org/record/4037137/files/T7A_1.mzml?download=1
->    T7B_1 MZML File - https://zenodo.org/record/4037137/files/T7B_1.mzml?download=1
+>    https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv
+>    https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta
+>    https://zenodo.org/record/4037137/files/T2_A1.mzml
+>    https://zenodo.org/record/4037137/files/T2_B1.mzml
+>    https://zenodo.org/record/4037137/files/T7A_1.mzml
+>    https://zenodo.org/record/4037137/files/T7B_1.mzml
 >    ```
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
