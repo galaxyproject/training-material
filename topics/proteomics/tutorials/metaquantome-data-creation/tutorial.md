@@ -29,9 +29,8 @@ contributors:
 
 Metaproteomics involves characterization of community level expression of microbial proteins from an environmental 
 or clinical sample. Metaproteomics data is primarily used to determine the functional status of the microbiome under 
-study along with its taxonomic composition. The Galaxy-P team published a software suite named [metaQuantome](https://www.mcponline.org/content/18/8_suppl_1/S82) to enable quantitative and statistical analysis and visualization of functional, taxonomic expression as well as functional and 
-taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional 
-expression within the microbial community in different conditions.
+study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) team published a software suite named [metaQuantome](https://www.mcponline.org/content/18/8_suppl_1/S82) to enable quantitative and statistical analysis and visualization of functional, 
+taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
 
 ![Microbiome](../../images/microbiome.png){: width="75%"}
  
@@ -39,7 +38,7 @@ metaQuantome offers differential abundance analysis, principal components analys
 across multiple experimental conditions. metaQuantome, an open source tool, is available via command line and also 
 accessible via Galaxy platform for reproducible analysis. As a first step for metaQuantome analysis, metaproteomics 
 data needs to be made compatible for subsequent analysis. With this in mind, we have developed a metaQuantome data 
-generation workflow tutorial that ill help users generate inputs for metaQuantome analysis.
+generation workflow tutorial that will help users generate inputs for metaQuantome analysis.
 
 ![Workflow](../../images/metaquantomeworkflow.png){: width="75%"}
 
@@ -68,7 +67,11 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
+>  1. Create a new history for this tutorial and give it a meaningful name
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
 > 2. Import the files ( 6 MZML files, a Protein FASTA file and Experimental Design file) from [Zenodo]({{ page.zenodo_link }}) 
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
@@ -89,8 +92,9 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >       ![Operations on multiple datasets button](../../images/operations_icon.png)
 >    - Check the four boxes next to the mzml files.
 >    - Click **For all selected...** and choose **Build dataset list**
+>    - Enter a name for the new collection
 >
-> 4. Rename the datasets (IF needed)
+> 4. Rename the datasets (If needed)
 > 5. Check that the datatype ( Make sure they are in the correct formats).
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
