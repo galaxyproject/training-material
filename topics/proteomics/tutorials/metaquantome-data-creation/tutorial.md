@@ -242,7 +242,7 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 {: .hands_on}
 
 
-##  *Select*
+##  *Removing Contaminants*
 
 > ### {% icon hands_on %} Hands-on: 
 > This Select tool is used to remove all the contaminants from the Peptide Spectral Match (PSM) search results.
@@ -291,7 +291,7 @@ This Select tool is used to remove all the contaminants from the Peptide report 
 {: .hands_on}
 
 
-## *Replace Text*
+## *Removing file extensions for Quantification*
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
 >
 > ### {% icon hands_on %} Hands-on: 
@@ -302,7 +302,7 @@ This is a data manipulation step to make the data compatible with other downstre
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"in column"*: `c10`
->            - *"Find pattern"*: `.mgf`
+>            - *"Find pattern"*: `.mzml.mgf`
 >
 >
 >
@@ -314,7 +314,7 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
 >
 {: .hands_on}
 
-## *Cut*
+## *Extracting Peptide list*
 
 > ### {% icon hands_on %} Hands-on: 
 This step selects the peptide column from the Select output ( where we have removed the contaminants)
@@ -366,7 +366,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >
 {: .question}
 
-## *Filter*
+## *Filtering peptides that are less than 50 amino acids*
 
 > ### {% icon hands_on %} Hands-on: 
 > This is a data manipulation tool. Here, we select those peptides with less than 50 amino acids in length.
@@ -384,7 +384,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 {: .hands_on}
 
 
-## *Regex Find And Replace*
+## *Manipulating text for metaQuantome*
 
 > ### {% icon hands_on %} Hands-on: 
 > Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome alongwith completely removing the N-terminus and C-terminus tag in the peptide sequences.
@@ -485,7 +485,7 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 >
 {: .hands_on}
 
-## *Cut*
+## *Extracting EC values*
 
 > ### {% icon hands_on %} Hands-on: 
 The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convinience.
@@ -497,7 +497,7 @@ The cut tool cuts out specific columns from the dataset. In this case, the cut t
 {: .hands_on}
 
 
-## *Query Tabular*
+## *Filtering confident peptides*
 
 Query Tabular is a tool that can load tabular data into a SQLite database. This step precedes UniPept, as a list containing the peptide sequences must be generated. In this step a list of gene ontology (GO) terms is being generated.
 
@@ -526,7 +526,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 {: .hands_on}
 
 
-## *Replace Text*
+## *Removing Hashtag from output*
 
 This step is to remove the hashtag from the Peptide header in the Unipept output.
 
@@ -542,7 +542,7 @@ This step is to remove the hashtag from the Peptide header in the Unipept output
 {: .hands_on}
 
 
-## *Query Tabular*
+## *Filter* - EC values
 
 We are using this Query tabular ot rename the output that we obtained from the Cut column tool.
 
