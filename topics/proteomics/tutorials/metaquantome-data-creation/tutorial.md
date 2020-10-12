@@ -118,21 +118,21 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 > ### {% icon hands_on %} Hands-on: mzml to MGF
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.0) %} with the following parameters:
->    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
+>    - {% icon param-collection %} *"Input unrefined MS data"*: `Input dataset collection`
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mgf`
 >    - In *"Data Processing Filters"*:
 >        - *"Apply peak picking?"*: `Yes`
->        - *"Apply m/z refinement with identification data?"*: `Yes`
->        - *"(Re-)calculate charge states?"*: `no`
->        - *"Filter m/z Window"*: `Yes`
->        - *"Filter out ETD precursor peaks?"*: `Yes`
->        - *"De-noise MS2 with moving window filter"*: `Yes`
+>        - *"Apply m/z refinement with identification data?"*: `No`
+>        - *"(Re-)calculate charge states?"*: `No`
+>        - *"Filter m/z Window"*: `No`
+>        - *"Filter out ETD precursor peaks?"*: `No`
+>        - *"De-noise MS2 with moving window filter"*: `No`
 >    - In *"Scan Inclusion/Exclusion Filters"*:
->        - *"Filter MS Levels"*: `Yes`
+>        - *"Filter MS Levels"*: `No`
 >    - In *"General Options"*:
->        - *"Sum adjacent scans"*: `Yes`
->        - *"Output multiple runs per file"*: `Yes`
+>        - *"Sum adjacent scans"*: `No`
+>        - *"Output multiple runs per file"*: `YNo`
 >
 >
 >    > ### {% icon comment %} Comment
@@ -161,7 +161,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >
 > ### {% icon hands_on %} Hands-on: Search sequence databases
 > 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
->    - {% icon param-file %} *"Protein Database"*: `output` (Input dataset collection)
+>    - {% icon param-file %} *"Protein Database"*: `ProteinDB_cRAP.fasta`
 >    - {% icon param-file %} *"Input Peak Lists (mgf)"*: `output` (output of **msconvert** {% icon tool %})
 >    - In *"Search Engine Options"*:
 >        - *"DB-Search Engines"*: ``
@@ -176,8 +176,8 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - In *"Andvanced Options"*:
 >        - *"SearchGUI Options"*: `Default`
 >        - *"X!Tandem Options"*: `Advanced`
->            - *"X!Tandem: Quick Acetyl"*: `Yes`
->            - *"X!Tandem: Quick Pyrolidone"*: `Yes`
+>            - *"X!Tandem: Quick Acetyl"*: `No`
+>            - *"X!Tandem: Quick Pyrolidone"*: `No`
 >            - *"X!Tandem: Maximum Valid Expectation Value"*: `100.0`
 >            - *"X!Tandem peptide model refinement"*: `Don't refine`
 >        - *"OMSSA Options"*: `Default`
@@ -217,7 +217,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 
 [PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results. 
 >
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Interpretation of SearchGUI
 > 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
 >    - {% icon param-file %} *"Compressed SearchGUI results"*: `searchgui_results` (output of **Search GUI** {% icon tool %})
 >    - *"Specify Advanced PeptideShaker Processing Options"*: `Advanced Processing Options`
@@ -249,11 +249,11 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 
 ##  *Removing Contaminants*
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Remove contaminants from PSM report
 > This Select tool is used to remove all the contaminants from the Peptide Spectral Match (PSM) search results.
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `output_psm` (output of **Peptide Shaker** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: `output_psm` (PSM report output of **Peptide Shaker** {% icon tool %})
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
@@ -285,29 +285,31 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 This Select tool is used to remove all the contaminants from the Peptide report obtained from Peptide Shaker.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
 > 
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `output_peptides` (output of **Peptide Shaker** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: `output_peptides` (Peptide Report output of **Peptide Shaker** {% icon tool %})
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
+> 2. Rename Peptide_Report_no_contaminants
 {: .hands_on}
 
 
 ## *Removing file extensions for Quantification*
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
 >
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Removing file extentions
 >
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `out_file1` (output of **Select** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: `Peptide_Report_no_contaminants` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"in column"*: `c10`
 >            - *"Find pattern"*: `.mzml.mgf`
+> 2. Rename Input_for_FlashLFQ.
 >
 >
 >
@@ -321,14 +323,14 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
 
 ## *Extracting Peptide list*
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Selecting peptide list
 This step selects the peptide column from the Select output ( where we have removed the contaminants)
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c6`
->    - {% icon param-file %} *"From"*: `out_file1` (output of **Select** {% icon tool %})
+>    - {% icon param-file %} *"From"*: `Peptide_Report_no_contaminants` (output of **Select** {% icon tool %})
 >
->
+>2. Rename file as peptide_list.
 {: .hands_on}
 
 # **Peptide Quantification**
@@ -338,14 +340,14 @@ In this tutorial, we are using FlashLFQ as the quantitation tool. The user can c
 ### *FlashLFQ*
 FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.  
 >
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Quantification
 >
 > 1. {% tool [FlashLFQ](toolshed.g2.bx.psu.edu/repos/galaxyp/flashlfq/flashlfq/1.0.3.0) %} with the following parameters:
->    - {% icon param-file %} *"identification file"*: `outfile` (output of **Replace Text** {% icon tool %})
->    - {% icon param-file %} *"spectrum files"*: `output` (output of **msconvert** {% icon tool %})
+>    - {% icon param-file %} *"identification file"*: `Input_for_FlashLFQ` (output of **Replace Text** {% icon tool %})
+>    - {% icon param-file %} *"spectrum files"*: `MZML dataset collection`
 >    - *"match between runs"*: `Yes`
 >    - *"Use experimental design for normalization or protein fold-change analysis"*: `Yes`
->        - {% icon param-file %} *"ExperimentalDesign.tsv"*: `output` (Input dataset)
+>        - {% icon param-file %} *"ExperimentalDesign.tsv"*: `Input dataset`
 >        - *"Perform Bayesian protein fold-change analysis"*: `Yes`
 >            - *"control condition for Bayesian protein fold-change analysis"*: ``
 >
@@ -359,13 +361,15 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 
 > ### {% icon question %} Questions
 >
-> 1. Can it be used with fractionated data?
-> 2. Does it perform peptide and protein level quantification?
+> 1. Can FlashLFQ be used with fractionated data?
+>
+> 2. Does FlashLFQ perform peptide and protein level quantification?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Yes, this tool can be used with fractionated datasets and multiple conditions
-> > 2. It performed both peptide level and protein level quantification, For protein level it used Bayesian Fold change analysis.
+> > 1. Yes, FlashLFQ can be used with fractionated datasets and multiple conditions
+> >
+> > 2. FlashLFQ performed both peptide level and protein level quantification. For protein level, FlashLFQ used Bayesian Fold change analysis.
 > >
 > {: .solution}
 >
@@ -373,13 +377,15 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 
 ## *Filtering peptides that are less than 50 amino acids*
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Extracting peptides<50 amino acids
 > This is a data manipulation tool. Here, we select those peptides with less than 50 amino acids in length.
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `out_file1` (output of **Cut** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `peptide_list` (output of **Cut** {% icon tool %})
 >    - *"With following condition"*: `len(c1)<=50`
 >    - *"Number of header lines to skip"*: `1`
+>
+> 2. Rename as Unipept_peptide_list.
 >
 >    > ### {% icon comment %} Comment
 >    > Unipept fails with peptides more than 50 amino acids in length, thus we decided to work with peptides that are less than 50 amino acids.
@@ -391,7 +397,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 
 ## *Manipulating text for metaQuantome*
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Text manipulation for metaQuantome intensity file
 > Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome alongwith completely removing the N-terminus and C-terminus tag in the peptide sequences.
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0) %} with the following parameters:
@@ -420,14 +426,14 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 
 Unipept is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide. 
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Taxonomy annotation
 >
 > 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.0.0) %} with the following parameters:
 >    - *"Unipept application"*: `pept2lca: lowest common ancestor`
 >        - *"Equate isoleucine and leucine"*: `Yes`
 >        - *"allfields"*: `Yes`
 >    - *"Peptides input format"*: `tabular`
->        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `out_file1` (output of **Filter** {% icon tool %})
+>        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `Unipept_peptide_list` (output of **Filter** {% icon tool %})
 >        - *"Select column with peptides"*: `c1`
 >    - *"Choose outputs"*: ``
 >
@@ -466,9 +472,9 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 
 ## *Unipept* for Functional annotation
 
-Unipept is used to match tryptic peptides and find the taxonomy and Functional annotation of the peptides. Unipept is used to match sample tryptic peptides to proteins using a fast-matching algorithm. Although Unipept can be accessed and used through the web page, the use of Unipept on galaxy allows the production of output datasets including the peptide information to be used in sequential steps. Unipept requires a list containing the peptide sequences which was generated by Query Tabular.
+Unipept is used to match tryptic peptides and find the taxonomy and Functional annotation of the peptides. Unipept is used to match sample tryptic peptides to proteins using a fast-matching algorithm. Although Unipept can be accessed and used through the web page, the use of Unipept on Galaxy allows the production of output datasets including the peptide information to be used in sequential steps. Unipept requires a list containing the peptide sequences which was generated by Query Tabular.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Functional annotation
 >
 > 1. {% tool [Unipept](toolshed.g2.bx.psu.edu/repos/galaxyp/unipept/unipept/4.3.0) %} with the following parameters:
 >    - *"Unipept application"*: `peptinfo: Tryptic peptides and associated EC and GO terms and lowest common ancestor taxonomy`
@@ -477,7 +483,7 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 >        - *"group responses by GO namespace (biological process, molecular function, cellular component)"*: `Yes`
 >        - *"allfields"*: `Yes`
 >    - *"Peptides input format"*: `tabular`
->        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `out_file1` (output of **Filter** {% icon tool %})
+>        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `Unipept_peptide_list` (output of **Filter** {% icon tool %})
 >        - *"Select column with peptides"*: `c1`
 >    - *"Choose outputs"*: ``
 >
@@ -494,13 +500,13 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 
 ## *Extracting EC values*
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Extract EC numbers
 The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convinience.
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c3`
 >    - {% icon param-file %} *"From"*: `output_ec_tsv` (output of **Unipept** {% icon tool %})
->
+> 2. Rename EC_table.
 {: .hands_on}
 
 
@@ -508,7 +514,7 @@ The cut tool cuts out specific columns from the dataset. In this case, the cut t
 
 Query Tabular is a tool that can load tabular data into a SQLite database. This step precedes UniPept, as a list containing the peptide sequences must be generated. In this step a list of gene ontology (GO) terms is being generated.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Filtering confident peptides
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - In *"Database Table"*:
@@ -517,13 +523,15 @@ Query Tabular is a tool that can load tabular data into a SQLite database. This 
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `Goterm`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,total_protein_count,go_term,protein_count,go_name,go_funct`
->    - *"SQL Query to generate tabular output"*: `SELECT Goterm.*
+>    - *"SQL Query to generate tabular output"*: 
 ```
+SELECT Goterm.*
 FROM Goterm 
 WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 ```
 >    - *"include query result column headers"*: `Yes`
 >
+> 2. Rename as Unipept_Function.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -537,15 +545,15 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 
 This step is to remove the hashtag from the Peptide header in the Unipept output.
 
-> ### {% icon hands_on %} Hands-on: >
+> ### {% icon hands_on %} Hands-on: Remove # from peptide header
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_line/1.1.2) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `output_tsv` (output of **Unipept** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: `Unipept_Function` (output of **Unipept** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"Find pattern"*: `#peptide`
 >            - *"Replace with:"*: `peptide`
 >
->
+> 2. Rename file as All_functions
 {: .hands_on}
 
 
@@ -553,12 +561,12 @@ This step is to remove the hashtag from the Peptide header in the Unipept output
 
 We are using this Query tabular ot rename the output that we obtained from the Cut column tool.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Extracting EC for metaQuantome
 >
 > 1. {% tool [Query Tabular](toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0) %} with the following parameters:
 >    - In *"Database Table"*:
 >        - {% icon param-repeat %} *"Insert Database Table"*
->            - {% icon param-file %} *"Tabular Dataset for Table"*: `out_file1` (output of **Cut** {% icon tool %})
+>            - {% icon param-file %} *"Tabular Dataset for Table"*: `EC_table` (output of **Cut** {% icon tool %})
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `ec`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,go_ec`
@@ -566,6 +574,7 @@ We are using this Query tabular ot rename the output that we obtained from the C
 FROM ec`
 >    - *"include query result column headers"*: `Yes`
 >
+> 2. Rename file as go_ec
 {: .hands_on}
 
 
@@ -574,13 +583,14 @@ FROM ec`
 The filter tool allows restriction of the dataset using simple conditional statements. This step is used to filter out the GO terms with biological processes and the corresponding number of peptides associated with these terms.
 
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Extracting biological processes for metaQuantome
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `output` (output of **Query Tabular** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `Unipept_Function` (output of **Query Tabular** {% icon tool %})
 >    - *"With following condition"*: `c5=='biological process'`
 >    - *"Number of header lines to skip"*: `1`
 >
+> 2. Rename file as go_bp
 {: .hands_on}
 
 
@@ -590,13 +600,14 @@ The filter tool allows restriction of the dataset using simple conditional state
 
 This step is used to filter out the GO terms with cellular components and the corresponding number of peptides associated with these terms.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Extracting cellular component for metaQuantome
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `output` (output of **Query Tabular** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `Unipept_Function` (output of **Query Tabular** {% icon tool %})
 >    - *"With following condition"*: `c5=='cellular component'`
 >    - *"Number of header lines to skip"*: `1`
 >
+> 2. Rename file as go_cc
 {: .hands_on}
 
 
@@ -606,13 +617,13 @@ This step is used to filter out the GO terms with cellular components and the co
 
 This step is used to filter out the GO terms with molecular function and the corresponding number of peptides associated with these terms.
 
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Extracting molecular function for metaQuantome
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
->    - {% icon param-file %} *"Filter"*: `output` (output of **Query Tabular** {% icon tool %})
+>    - {% icon param-file %} *"Filter"*: `Unipept_Function` (output of **Query Tabular** {% icon tool %})
 >    - *"With following condition"*: `c5=='molecular function'`
 >    - *"Number of header lines to skip"*: `1`
->
+> 2. Rename file as go_mf
 {: .hands_on}
 
 
