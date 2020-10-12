@@ -159,7 +159,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 ##  *Search GUI*
 SearchGUI is a tool that searches sequence databases on any number of MGF files. In this case, the previously made collection of three MGF files (entitles MGF files) will be used as the MS/MS input. This tool will produce an output file, called a SearchGUI archive file. This file will serve as in input for the next tool used, PeptideShaker.
 >
-> ### {% icon hands_on %} Hands-on: 
+> ### {% icon hands_on %} Hands-on: Search sequence databases
 > 1. {% tool [Search GUI](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/search_gui/3.3.10.1) %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `output` (Input dataset collection)
 >    - {% icon param-file %} *"Input Peak Lists (mgf)"*: `output` (output of **msconvert** {% icon tool %})
