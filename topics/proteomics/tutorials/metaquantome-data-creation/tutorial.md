@@ -93,7 +93,6 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
->
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >       ![Operations on multiple datasets button](../../images/operations_icon.png)
