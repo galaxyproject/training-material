@@ -404,6 +404,8 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >            - *”Find Regex”*: `-COOH`
 >            - *”Replacement”*: ``
 >
+> 2. Rename the file as `Intensity`
+>
 {: .hands_on}
 
 # **Functional and Taxonomy annotation**
