@@ -34,7 +34,7 @@ taxonomy interaction. metaQuantome leverages peptide level quantitative informat
 expression within the microbial community in different conditions.
 
 <p align="center">
-  <img width="850" height="500" src="../../images/microbiome.png">
+  <img width="850" height="500" src="../../images/microbiome.png" alt="Microbiome" title="Microbiome" />
 </p>
 
  
@@ -45,7 +45,7 @@ data needs to be made compatible for subsequent analysis. With this in mind, we 
 generation workflow tutorial that ill help users generate inputs for metaQuantome analysis.
 
 <p align="center">
-  <img width="850" height="500" src="../../images/metaquantomeworkflow.png">
+  <img width="850" height="500" src="../../images/metaquantomeworkflow.png" alt="Workflow" title="Workflow">
 </p>
 
 To demonstrate the use of the data creation workflow, we have used a thermophilic biogas reactor dataset wherein municipal 
@@ -55,7 +55,7 @@ Spruce and incubated at 65°C. Triplicate samples were taken in a time series fr
 spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen two time points-8 hour and 33 hour.
 
 <p align="center">
-  <img width="800" height="300" src="../../images/biogasdataset.png">
+  <img width="800" height="300" src="../../images/biogasdataset.png" alt="Dataset" title="Dataset">
 </p>
 
 
@@ -443,7 +443,7 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 {: .hands_on}
 
 <p align="center">
-  <img width="800" height="400" src="../../images/taxa.png">
+  <img width="800" height="400" src="../../images/taxa.png" alt="Taxa" title="Taxonomy">
 </p>
 
 > ### {% icon question %} Questions
@@ -460,13 +460,13 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 
 The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
 <p align="center">
-  <img width="250" height="300" src="../../images/UnipeptJSON.png">
+  <img width="250" height="300" src="../../images/UnipeptJSON.png" alt="Unipept-JSON" title="Unipept-JSON">
 </p>
 <p align="center">
-  <img width="250" height="125" src="../../images/unipept_taxonomy_viewer.png">
+  <img width="250" height="125" src="../../images/unipept_taxonomy_viewer.png" alt="Taxa-viewer" title="Taxa-viewer">
 </p>
 <p align="center">
-  <img width="700" height="800" src="../../images/UnipeptJSONoutput.png">
+  <img width="700" height="800" src="../../images/UnipeptJSONoutput.png" alt="Output" title="Taxa-output">
 </p>
 
 ## *Unipept* for Functional annotation
@@ -589,7 +589,7 @@ The filter tool allows restriction of the dataset using simple conditional state
 {: .hands_on}
 
 <p align="center">
-  <img width="800" height="600" src="../../images/biologicalprocess.png">
+  <img width="800" height="600" src="../../images/biologicalprocess.png" alt="Biological-Processes" title="Biological-Processes">
 </p>
 
 
@@ -608,7 +608,7 @@ This step is used to filter out the GO terms with cellular components and the co
 {: .hands_on}
 
 <p align="center">
-  <img width="800" height="500" src="../../images/cellularcomponent.png">
+  <img width="800" height="500" src="../../images/cellularcomponent.png" alt="Cellular-Component" title="Cellular-Component">
 </p>
 
 ## *Filter* - Molecular Function
@@ -625,7 +625,7 @@ This step is used to filter out the GO terms with molecular function and the cor
 {: .hands_on}
 
 <p align="center">
-  <img width="800" height="500" src="../../images/molecularfunction.png">
+  <img width="800" height="500" src="../../images/molecularfunction.png" alt="Molecular-Function" title="Molecular-Function">
 </p>
 
 
