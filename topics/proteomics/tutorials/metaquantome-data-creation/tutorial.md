@@ -87,19 +87,21 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/import_from_data_library.md %}
 >
 >
-> 3. Build a **Dataset list** for the four mzml files.
+> 3. Rename the datasets (If needed)
+> 4. Check that the datatype ( Make sure they are in the correct formats).
+>
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
+>
+> 5. Add to each database a tag corresponding to the name of the input data (optional).
+>
+> 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >       ![Operations on multiple datasets button](../../images/operations_icon.png)
 >    - Check the four boxes next to the mzml files.
 >    - Click **For all selected...** and choose **Build dataset list**
 >    - Enter a name for the new collection
 >
-> 4. Rename the datasets (If needed)
-> 5. Check that the datatype ( Make sure they are in the correct formats).
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 6. Add to each database a tag corresponding to the name of the input data (optional).
 {: .hands_on}
 
 
