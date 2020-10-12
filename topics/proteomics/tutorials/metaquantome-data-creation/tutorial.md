@@ -33,10 +33,7 @@ study along with its taxonomic composition. The Galaxy-P team published a softwa
 taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional 
 expression within the microbial community in different conditions.
 
-<p align="center">
-  <img width="850" height="500" src="../../images/microbiome.png" alt="Microbiome" title="Microbiome" />
-</p>
-
+![Microbiome](../../images/microbiome.png){: width="75%"}
  
 metaQuantome offers differential abundance analysis, principal components analysis, and clustered heat map visualizations, 
 across multiple experimental conditions. metaQuantome, an open source tool, is available via command line and also 
@@ -44,9 +41,7 @@ accessible via Galaxy platform for reproducible analysis. As a first step for me
 data needs to be made compatible for subsequent analysis. With this in mind, we have developed a metaQuantome data 
 generation workflow tutorial that ill help users generate inputs for metaQuantome analysis.
 
-<p align="center">
-  <img width="850" height="500" src="../../images/metaquantomeworkflow.png" alt="Workflow" title="Workflow">
-</p>
+![Workflow](../../images/metaquantomeworkflow.png){: width="75%"}
 
 To demonstrate the use of the data creation workflow, we have used a thermophilic biogas reactor dataset wherein municipal 
 food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was 
@@ -54,11 +49,7 @@ simplified and enriched via serial dilution. This inoculum was then transferred 
 Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass 
 spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen two time points-8 hour and 33 hour.
 
-<p align="center">
-  <img width="800" height="300" src="../../images/biogasdataset.png" alt="Dataset" title="Dataset">
-</p>
-
-
+![Dataset](../../images/biogasdataset.png){: width="75%"}
 
 > ### Agenda
 >
@@ -78,17 +69,16 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files ( 6 MZML files, a Protein FASTA file and Experimental Design file) from [Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.4037137.svg)](https://doi.org/10.5281/zenodo.4037137) or from
->    the shared data library (`GTN - Material` -> `Proteomics` ->`MetaQuantome Datacreation`
->     -> `{{ page.title }}`):
+> 2. Import the files ( 6 MZML files, a Protein FASTA file and Experimental Design file) from [Zenodo]({{ page.zenodo_link }}) 
+>    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
->    [Experimental Design](https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv?download=1)
->    [Protein Database](https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta?download=1)
->    [T2_A1 MZML File](https://zenodo.org/record/4037137/files/T2_A1.mzml?download=1)
->    [T2_B1 MZML File](https://zenodo.org/record/4037137/files/T2_B1.mzml?download=1)
->    [T7A_1 MZML File](https://zenodo.org/record/4037137/files/T7A_1.mzml?download=1)
->    [T7B_1 MZML File](https://zenodo.org/record/4037137/files/T7B_1.mzml?download=1)
+>    Experimental Design - https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv?download=1
+>    Protein Database - https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta?download=1
+>    T2_A1 MZML File - https://zenodo.org/record/4037137/files/T2_A1.mzml?download=1
+>    T2_B1 MZML File - https://zenodo.org/record/4037137/files/T2_B1.mzml?download=1
+>    T7A_1 MZML File - https://zenodo.org/record/4037137/files/T7A_1.mzml?download=1
+>    T7B_1 MZML File - https://zenodo.org/record/4037137/files/T7B_1.mzml?download=1
 >    ```
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -443,9 +433,8 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 >
 {: .hands_on}
 
-<p align="center">
-  <img width="800" height="400" src="../../images/taxa.png" alt="Taxa" title="Taxonomy">
-</p>
+
+![Taxa](../../images/taxa.png){: width="75%"}
 
 > ### {% icon question %} Questions
 >
@@ -460,15 +449,13 @@ Unipept is used again to match tryptic peptides and find the taxonomy and lowest
 {: .question}
 
 The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
-<p align="center">
-  <img width="250" height="300" src="../../images/UnipeptJSON.png" alt="Unipept-JSON" title="Unipept-JSON">
-</p>
-<p align="center">
-  <img width="250" height="125" src="../../images/unipept_taxonomy_viewer.png" alt="Taxa-viewer" title="Taxa-viewer">
-</p>
-<p align="center">
-  <img width="700" height="800" src="../../images/UnipeptJSONoutput.png" alt="Output" title="Taxa-output">
-</p>
+
+![Unipept-JSON](../../images/UnipeptJSON.png){: width="30%"}
+
+![Taxa-viewer](../../images/unipept_taxonomy_viewer.png){: width="30%"}
+
+![Output](../../images/UnipeptJSONoutput.png){: width="75%"}
+
 
 ## *Unipept* for Functional annotation
 
@@ -589,11 +576,8 @@ The filter tool allows restriction of the dataset using simple conditional state
 >
 {: .hands_on}
 
-<p align="center">
-  <img width="800" height="600" src="../../images/biologicalprocess.png" alt="Biological-Processes" title="Biological-Processes">
-</p>
 
-
+![Biological Processes](../../images/biologicalprocess.png){: width="60%"}
 
 ## *Filter* - Cellular components
 
@@ -608,9 +592,8 @@ This step is used to filter out the GO terms with cellular components and the co
 >
 {: .hands_on}
 
-<p align="center">
-  <img width="800" height="500" src="../../images/cellularcomponent.png" alt="Cellular-Component" title="Cellular-Component">
-</p>
+
+![Cellular-Component](../../images/cellularcomponent.png){: width="60%"}
 
 ## *Filter* - Molecular Function
 
@@ -625,10 +608,8 @@ This step is used to filter out the GO terms with molecular function and the cor
 >
 {: .hands_on}
 
-<p align="center">
-  <img width="800" height="500" src="../../images/molecularfunction.png" alt="Molecular-Function" title="Molecular-Function">
-</p>
 
+![Molecular-Function](../../images/molecularfunction.png){: width="60%"}
 
 # **Conclusion**
 {:.no_toc}
