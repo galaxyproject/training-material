@@ -72,7 +72,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files ( 6 MZML files, a Protein FASTA file and Experimental Design file) from [Zenodo]({{ page.zenodo_link }}) 
+> 2. Import the files: 6 MZML files (format=`mzml`, a Protein FASTA file (format=`fasta`), and an Experimental Design file (format=`tabular`) from [Zenodo]({{ page.zenodo_link }}) 
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
