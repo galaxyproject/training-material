@@ -639,16 +639,16 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 > ### {% icon comment %} References
 >
-> - {% Batut2018 %}
+> - {% cite Batut2018 %}
 >
-> - {% Jagtap2015 %}
+> - {% cite Jagtap2015 %}
 >
-> - {% Metaproteomics community effort %}
+> - {% cite Metaproteomics community effort %}
 >
-> - {% Mesuere2018 %}
+> - {% cite Mesuere2018 %}
 >
-> - {% Galaxy-P Metaproteomics %}
+> - {% cite Galaxy-P Metaproteomics %}
 >
-> - {% Metaproteomics video %}
+> - {% cite Metaproteomics video %}
 
 {: .comment}
