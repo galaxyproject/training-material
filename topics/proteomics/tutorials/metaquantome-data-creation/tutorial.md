@@ -67,7 +67,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
->  1. Create a new history for this tutorial and give it a meaningful name
+> 1. Create a new history for this tutorial and give it a meaningful name
 >
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
@@ -98,7 +98,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >      
 >
->   {% include snippets/create_dataset_collection.md datatype="collection" %}
+>  {% include snippets/create_dataset_collection.md datatype="collection" %}
 >
 {: .hands_on}
 
