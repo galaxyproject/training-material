@@ -62,7 +62,7 @@ Forking a repository is a simple two-step process:
 
 > ### {% icon hands_on %} Hands-on: Fork the repository
 >
-> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github.repository }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 > 2. Click on **Fork** (top-right corner of the page)
 >
 >    ![Fork](../../images/PR_fork.jpg)
