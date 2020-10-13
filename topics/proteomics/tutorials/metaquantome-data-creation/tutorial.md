@@ -72,7 +72,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files: 6 MZML files (format=`mzml`, a Protein FASTA file (format=`fasta`), and an Experimental Design file (format=`tabular`) from [Zenodo]({{ page.zenodo_link }}) 
+> 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }}) 
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
@@ -89,17 +89,16 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 > 3. Rename the datasets (If needed)
 > 4. Check that the datatype ( Make sure they are in the correct formats).
+> 6 MZML files (format=`mzml`, a Protein FASTA file (format=`fasta`), and an Experimental Design file (format=`tabular`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
->       ![Operations on multiple datasets button](../../images/operations_icon.png)
->    - Check the four boxes next to the mzml files.
->    - Click **For all selected...** and choose **Build dataset list**
->    - Enter a name for the new collection
+>      
 >
+>   {% include snippets/create_dataset_collection.md datatype="collection" %}
 >
 {: .hands_on}
 
@@ -257,7 +256,19 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
+> 2. Rename PSM_Report_no_contaminants
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
+> 
 >
+> 1. {% tool [Select](Grep1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `output_peptides` (Peptide Report output of **Peptide Shaker** {% icon tool %})
+>    - *"that"*: `NOT Matching`
+>    - *"the pattern"*: `con_`
+>
+> 2. Rename Peptide_Report_no_contaminants
+{: .hands_on}
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -267,7 +278,7 @@ contaminants is critical to enable their removal before data analysis, mainly, t
 drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data. 
 >    {: .comment}
 >
-{: .hands_on}
+
 
 > ### {% icon question %} Questions
 >
@@ -281,21 +292,6 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 >
 {: .question}
 
-## *Select*
-
-This Select tool is used to remove all the contaminants from the Peptide report obtained from Peptide Shaker.
-
-> ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
-> 
->
-> 1. {% tool [Select](Grep1) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `output_peptides` (Peptide Report output of **Peptide Shaker** {% icon tool %})
->    - *"that"*: `NOT Matching`
->    - *"the pattern"*: `con_`
->
-> 2. Rename Peptide_Report_no_contaminants
-{: .hands_on}
-
 
 ## *Removing file extensions for Quantification*
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
@@ -304,7 +300,7 @@ This is a data manipulation step to make the data compatible with other downstre
 >
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Peptide_Report_no_contaminants` (output of **Select** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: `PSM_Report_no_contaminants` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
 >            - *"in column"*: `c10`
@@ -643,14 +639,16 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 > ### {% icon comment %} References
 >
+> - {% Batut2018 %}
 >
-> - [Galaxy workflows for metaproteomics](https://www.ncbi.nlm.nih.gov/pubmed/26058579)
+> - {% Jagtap2015 %}
 >
-> - [Metaproteomics community effort](https://z.umn.edu/gcc2017mporal)
+> - {% Metaproteomics community effort %}
 >
-> - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
+> - {% Mesuere2018 %}
 >
-> - [Galaxy-P Metaproteomics instance](https://proteomics.usegalaxy.eu/)
+> - {% Galaxy-P Metaproteomics %}
 >
-> - [Metaproteomics video](http://z.umn.edu/mpvideo2018)
+> - {% Metaproteomics video %}
+
 {: .comment}
