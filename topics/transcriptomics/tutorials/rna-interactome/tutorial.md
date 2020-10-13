@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: RNA-RNA interactome data analysis
-zenodo_link: https://zenodo.org/record/3696889
+zenodo_link: https://zenodo.org/record/3709188
 questions:
 - What are the difficulties in mapping chimeric reads from RNA interactome data?
 - How multi mapping is a big problem in these datasets?
@@ -13,6 +13,8 @@ objectives:
 - Quantification of the mapped loci
 - Visualization and filtering of results
 time_estimation: 2H
+key_points:
+- The CLEAR-CLIP protocol can be used to analyze chimeric reads
 contributors:
 - pavanvidem
 
