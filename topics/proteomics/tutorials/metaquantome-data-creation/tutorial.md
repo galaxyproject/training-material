@@ -636,7 +636,5 @@ This workflow is also available at [proteomics.usegalaxy.eu](https://proteomics.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at galaxyp.org
 
-> ### {% icon comment %} References
-
 
 {: .comment}
