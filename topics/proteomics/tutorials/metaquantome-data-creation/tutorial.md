@@ -164,13 +164,14 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - In *"Search Engine Options"*:
 >        - *"DB-Search Engines"*: ``
 >    - In *"Protein Digestion Options"*:
->        - *"Digestion"*: `Select Enzymes`
+>        - *"Digestion"*: `Trypsin`
+>        - *"Maximum Missed Cleavages"*: `2`
 >    - In *"Precursor Options"*:
 >        - *"Fragment Tolerance"*: `0.2`
 >        - *"Maximum Charge"*: `6`
 >    - In *"Protein Modification Options"*:
->        - *"Fixed Modifications"*: ``
->        - *"Variable Modifications"*: ``
+>        - *"Fixed Modifications"*: `Carbamidomethylation of C`
+>        - *"Variable Modifications"*: `Oxidation of M, Acetylation of Protein N-term`
 >    - In *"Andvanced Options"*:
 >        - *"SearchGUI Options"*: `Default`
 >        - *"X!Tandem Options"*: `Advanced`
@@ -342,9 +343,9 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >    - {% icon param-file %} *"spectrum files"*: `MZML dataset collection`
 >    - *"match between runs"*: `Yes`
 >    - *"Use experimental design for normalization or protein fold-change analysis"*: `Yes`
->        - {% icon param-file %} *"ExperimentalDesign.tsv"*: `Input dataset`
+>        - {% icon param-file %} *"ExperimentalDesign.tsv"*: `ExperimentalDesign.tsv`
 >        - *"Perform Bayesian protein fold-change analysis"*: `Yes`
->            - *"control condition for Bayesian protein fold-change analysis"*: ``
+>            - *"control condition for Bayesian protein fold-change analysis"*: `S1`
 >
 >
 >    > ### {% icon comment %} Comment
@@ -430,7 +431,7 @@ Unipept {% cite Mesuere2018 %} is used again to match tryptic peptides and find 
 >    - *"Peptides input format"*: `tabular`
 >        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `Unipept_peptide_list` (output of **Filter** {% icon tool %})
 >        - *"Select column with peptides"*: `c1`
->    - *"Choose outputs"*: ``
+>    - *"Choose outputs"*: `Select all`
 >
 >
 >
@@ -480,7 +481,7 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 >    - *"Peptides input format"*: `tabular`
 >        - {% icon param-file %} *"Tabular Input Containing Peptide column"*: `Unipept_peptide_list` (output of **Filter** {% icon tool %})
 >        - *"Select column with peptides"*: `c1`
->    - *"Choose outputs"*: ``
+>    - *"Choose outputs"*: `Select all`
 >
 >
 >    > ### {% icon comment %} Comment
