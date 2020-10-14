@@ -28,7 +28,7 @@ contributors:
 {:.no_toc}
 
 Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental 
-or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named [metaQuantome](https://www.mcponline.org/content/18/8_suppl_1/S82) to enable quantitative and statistical analysis and visualization of functional, 
+or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional, 
 taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
 
 ![Microbiome](../../images/microbiome.png){: width="75%"}
@@ -637,17 +637,6 @@ This workflow is also available at [proteomics.usegalaxy.eu](https://proteomics.
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at galaxyp.org
 
 > ### {% icon comment %} References
->
-> - {% cite Batut2018 %}
->
-> - {% cite Jagtap2015 %}
->
-> - {% cite Metaproteomics_community_effort %}
->
-> - {% cite Mesuere2018 %}
->
-> - {% cite Galaxy-P_Metaproteomics %}
->
-> - {% cite Metaproteomics_video %}
+
 
 {: .comment}
