@@ -386,7 +386,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 > ### {% icon hands_on %} Hands-on: Extracting peptides<50 amino acids
 > This is a data manipulation tool. Here, we select those peptides with less than 50 amino acids in length.
 >
-> 1. {% tool [Filter](Filter1) %} with the following parameters:
+> 1. {% tool [Filter data on any column using simple expressions ](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `peptide_list` (output of **Cut** {% icon tool %})
 >    - *"With following condition"*: `len(c1)<=50`
 >    - *"Number of header lines to skip"*: `1`
@@ -407,7 +407,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 > Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome along with completely removing the N-terminus and C-terminus tag in the peptide sequences.
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0) %} with the following parameters:
->    - {% icon param-file %} *"Select lines from"*: `quantifiedPeptides` (output of **FlashLFQ** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: `QuantifiedPeptides` (output of **FlashLFQ** {% icon tool %})
 >    - In *"Check"*:
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `Base Sequence`
