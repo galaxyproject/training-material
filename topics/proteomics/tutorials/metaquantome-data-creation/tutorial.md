@@ -162,7 +162,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - {% icon param-file %} *"Protein Database"*: `ProteinDB_cRAP.fasta`
 >    - {% icon param-file %} *"Input Peak Lists (mgf)"*: `output` (output of **msconvert** {% icon tool %})
 >    - In *"Search Engine Options"*:
->        - *"DB-Search Engines"*: ``
+>        - *"DB-Search Engines"*: `Xtandem`
 >    - In *"Protein Digestion Options"*:
 >        - *"Digestion"*: `Trypsin`
 >        - *"Maximum Missed Cleavages"*: `2`
@@ -227,7 +227,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - In *"Exporting options"*:
 >        - *"Creates a mzIdentML file"*: `Yes`
 >        - *"Compress results into a single zip file"*: `Yes`
->        - *"Reports to be generated"*: ``
+>        - *"Reports to be generated"*: `All`
 >
 >
 >
@@ -406,10 +406,10 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >            - *"Find Regex"*: `Intensity_`
 >        - {% icon param-repeat %} *"Insert Check"*  
 >            - *”Find Regex”*: `NH2-`
->            - *”Replacement”*: ``
+>            - *”Replacement”*: `leave it blank`
 >        - {% icon param-repeat %} *"Insert Check"*  
 >            - *”Find Regex”*: `-COOH`
->            - *”Replacement”*: ``
+>            - *”Replacement”*: `leave it blank`
 >
 > 2. Rename the file as `Intensity`
 >
@@ -566,7 +566,8 @@ We are using this Query tabular ot rename the output that we obtained from the C
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `ec`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,go_ec`
->    - *"SQL Query to generate tabular output"*: `SELECT *
+>    - *"SQL Query to generate tabular output"*: 
+`SELECT *
 FROM ec`
 >    - *"include query result column headers"*: `Yes`
 >
@@ -586,7 +587,7 @@ The filter tool allows restriction of the dataset using simple conditional state
 >    - *"With following condition"*: `c5=='biological process'`
 >    - *"Number of header lines to skip"*: `1`
 >
-> 2. Rename file as go_bp
+> 2. Rename file as `go_bp`
 {: .hands_on}
 
 
@@ -603,7 +604,7 @@ This step is used to filter out the GO terms with cellular components and the co
 >    - *"With following condition"*: `c5=='cellular component'`
 >    - *"Number of header lines to skip"*: `1`
 >
-> 2. Rename file as go_cc
+> 2. Rename file as `go_cc`
 {: .hands_on}
 
 
@@ -619,7 +620,7 @@ This step is used to filter out the GO terms with molecular function and the cor
 >    - {% icon param-file %} *"Filter"*: `Unipept_Function` (output of **Query Tabular** {% icon tool %})
 >    - *"With following condition"*: `c5=='molecular function'`
 >    - *"Number of header lines to skip"*: `1`
-> 2. Rename file as go_mf
+> 2. Rename file as `go_mf`
 {: .hands_on}
 
 
