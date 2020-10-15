@@ -199,27 +199,26 @@ We will follow up on the average mass spectra plots from the quality control rep
 >    - *"Processed imzML file"*: `yes`
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.1`
 >        - *"Unit of the mass accuracy"*: `mz`
->    - *"Select if you want to plot the mass spectrum of a single pixel or the average spectrum of all pixels of a sample"*: `Average spectrum for each sample`
->        - *"Use pixel annotation from tabular file for spectra plots"*: `pixels belong into one group only`
->        - In *"Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"1: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>    - *"Choose spectra (pixel)"*: `All spectra`
+>        - In *"zoomed in m/z range"*: `Manual input`
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"1: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `10`
 >                - *"upper m/z boundary for plotting window"*: `200`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"2: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"2: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `200`
 >                - *"upper m/z boundary for plotting window"*: `500`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"3: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"3: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `500`
 >                - *"upper m/z boundary for plotting window"*: `1000`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"4: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"4: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `1000`
 >                - *"upper m/z boundary for plotting window"*: `1500`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"5: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"5: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `1500`
 >                - *"upper m/z boundary for plotting window"*: `2000`
 >
@@ -266,8 +265,8 @@ x     y     compartment
 >    {: .tip}
 >
 > 2. Press the rerun button of the **MSI plot spectra** {% icon tool %} result, changing only the following:
->    - *"Use pixel annotation from tabular file for spectra plots"*: `group pixels according to annotations`
->        - {% icon param-file %} *"Tabular file with pixel coordinates and annotation"*: `annotations` (Input dataset)
+>    - *"Choose spectra (pixel) and/or add spectra annotations"*: `Single spectra`
+>        - {% icon param-file %} *"Load tabular file with pixel coordinates"*: `annotations` (Input dataset)
 >        - *"Column with x values"*: `column:1`
 >        - *"Column with y values"*: `column:2`
 >        - *"Column with pixel annotations"*: `column:3`
@@ -277,15 +276,13 @@ x     y     compartment
 
 > ### {% icon question %} Questions
 >
-> 1. What does the NA annotation stand for? 
-> 2. Which compartment does the highest intensity peak belong to? 
-> 3. Which compartment does the third-highest intensity peak belong to?
+> 1. Which compartment does the highest intensity peak belong to? 
+> 2. Which compartment does the third-highest intensity peak belong to?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. All spectra without annotation in the tabular file are considered as NA, which means that NA represents the average spectrum of the dataset except for the 3 annotated pixels.
-> > 2. The highest intensity peak at around 80 Th belongs to the spectrum that is located in the pericarp of the chilli. 
-> > 3. The peak at around 60 Th belongs to the spectrum that is located in the seeds.
+> > 1. The highest intensity peak at around 80 Th belongs to the spectrum that is located in the pericarp of the chilli. 
+> > 2. The peak at around 60 Th belongs to the spectrum that is located in the seeds.
 > {: .solution}
 >
 {: .question}
@@ -307,7 +304,6 @@ The single spectra that derive from different chilli compartments show some majo
 >    - *"Select m/z feature filtering option"*: `m/z range (manually)`
 >        - *"Minimum value for m/z"*: `15.0`
 >        - *"Maximum value for m/z"*: `1000.0`
->    - *"Output format"*: `imzML`
 >
 {: .hands_on}
 
