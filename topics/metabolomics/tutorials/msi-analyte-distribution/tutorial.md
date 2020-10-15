@@ -21,6 +21,7 @@ key_points:
 - The MSI m/z image tools allow overlaying the distribution images for several analytes.
 contributors:
 - foellmelanie
+- MarenStillger
 
 ---
 
@@ -388,9 +389,9 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 > 1. Create a tabular file with the m/z of interest and rename it to 'mz features':
 >
 >    ```
->    306.6
 >    62.2
 >    84.2
+>    306.6
 >    ```
 >
 >    > ### {% icon tip %} Tip: Creating a new file
