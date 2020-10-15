@@ -17,10 +17,10 @@ key_points:
 contributors:
   - subinamehta
   - timothygriffin
-  - pratikdjagtap 
+  - pratikdjagtap
   - emmaleith
   - mariecrane
-  
+
 follow_up_training:
 
     -
@@ -28,7 +28,7 @@ follow_up_training:
         topic_name: proteomics
         tutorials:
             - metaproteomics
-            
+
 
 ---
 
@@ -36,24 +36,24 @@ follow_up_training:
 # Introduction
 {:.no_toc}
 
-Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental 
-or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional, 
+Metaproteomics {% cite Metaproteomics_video %} involves characterization of community level expression of microbial proteins from an environmental
+or clinical sample. Metaproteomics data {% cite Metaproteomics_community_effort %} {% cite Jagtap2015 %} is primarily used to determine the functional status of the microbiome under study along with its taxonomic composition. The [Galaxy-P](http://galaxyp.org/) {% cite Galaxy-P_Metaproteomics %} team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional,
 taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
 
 ![Microbiome](../../images/microbiome.png){: width="75%"}
- 
-metaQuantome offers differential abundance analysis, principal components analysis, and clustered heat map visualizations, 
-across multiple experimental conditions. metaQuantome, an open source tool, is available via command line and also 
-accessible via Galaxy platform for reproducible analysis. As a first step for metaQuantome analysis, metaproteomics 
-data needs to be made compatible for subsequent analysis. With this in mind, we have developed a metaQuantome data 
+
+metaQuantome offers differential abundance analysis, principal components analysis, and clustered heat map visualizations,
+across multiple experimental conditions. metaQuantome, an open source tool, is available via command line and also
+accessible via Galaxy platform for reproducible analysis. As a first step for metaQuantome analysis, metaproteomics
+data needs to be made compatible for subsequent analysis. With this in mind, we have developed a metaQuantome data
 generation workflow tutorial that will help users generate inputs for metaQuantome analysis.
 
 ![Workflow](../../images/metaquantomeworkflow.png){: width="75%"}
 
-To demonstrate the use of the data creation workflow, we have used a thermophilic biogas reactor dataset wherein municipal 
-food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was 
-simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian 
-Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass 
+To demonstrate the use of the data creation workflow, we have used a thermophilic biogas reactor dataset wherein municipal
+food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was
+simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian
+Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass
 spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen two time points-8 hour and 33 hour.
 
 ![Dataset](../../images/biogasdataset.png){: width="75%"}
@@ -80,7 +80,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }}) 
+> 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }})
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
@@ -104,9 +104,9 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
->      
 >
->  {% include snippets/create_dataset_collection.md datatype="collection" %}
+>
+>  {% include snippets/build_list_collection.md %}
 >
 {: .hands_on}
 
@@ -114,13 +114,13 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 # **Match peptide sequences**
 
 For this, the sequence database-searching program called [SearchGUI](https://compomics.github.io/projects/searchgui.html) will be used.
-The created dataset collection of the four *MZML files* in the history has to be first converted to MGF to be used as the MS/MS input. 
+The created dataset collection of the four *MZML files* in the history has to be first converted to MGF to be used as the MS/MS input.
 
 
 ### *Convert mzml to MGF with msconvert*
 
-msconvert is used in order to convert the input file type, a mzml data collection, to a mgf file type. 
-The mgf file type can then be used as the Input Peak Lists when running SearchGUI. 
+msconvert is used in order to convert the input file type, a mzml data collection, to a mgf file type.
+The mgf file type can then be used as the Input Peak Lists when running SearchGUI.
 
 > ### {% icon hands_on %} Hands-on: mzml to MGF
 >
@@ -143,7 +143,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 >
 >
 >    > ### {% icon comment %} Comment
->    >This is a critical step for running this workflow. 
+>    >This is a critical step for running this workflow.
 >    {: .comment}
 >
 {: .hands_on}
@@ -223,7 +223,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 
 ##  *Peptide Shaker*
 
-[PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results. 
+[PeptideShaker](https://compomics.github.io/projects/peptide-shaker.html) is a post-processing software tool that processes data from the SearchGUI software tool. PeptideShaker is a search engine for interpretation of proteomics identification results from multiple search engines, currently supporting X!Tandem, MS-GF+, MS Amanda, OMSSA, MyriMatch, Comet, Tide, Mascot, Andromeda and mzIdentML. More specifically, PeptideShaker processes data from  the SearchGUI tool through the organization of Peptide-Spectral Matches (PSMs) generated. In addition to organization, it provides an assessment of confidence of the data and generates outputs that can be visualized by users to interpret the results.
 >
 > ### {% icon hands_on %} Hands-on: Interpretation of SearchGUI
 > 1. {% tool [Peptide Shaker](toolshed.g2.bx.psu.edu/repos/galaxyp/peptideshaker/peptide_shaker/1.16.36.3) %} with the following parameters:
@@ -248,7 +248,7 @@ results in the standalone PeptideShaker viewer. A `mzidentML` file can be create
 all peptide sequence matching information and can be utilized by compatible downstream
 software. Other outputs are focused on the inferred proteins identified from the PSMs, as well
 as phosphorylation reports, relevant if a phosphoproteomics experiment has been undertaken.
-More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in 
+More detailed information on peptide inference using SearchGUI and PeptideShaker can be found in
 our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tutorials/protein-id-sg-ps/tutorial.html).
 >    {: .comment}
 >
@@ -269,7 +269,7 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
-> 
+>
 >
 > 1. {% tool [Select](Grep1) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `output_peptides` (Peptide Report output of **Peptide Shaker** {% icon tool %})
@@ -281,10 +281,10 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In Proteomics, contamination is generally detected as peaks in spectra that did not originate 
-from the samples and can be introduced in the sample from a variety of environmental sources or human error. Identification of these 
-contaminants is critical to enable their removal before data analysis, mainly, to maintain the validity of conclusions 
-drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data. 
+>    > In Proteomics, contamination is generally detected as peaks in spectra that did not originate
+from the samples and can be introduced in the sample from a variety of environmental sources or human error. Identification of these
+contaminants is critical to enable their removal before data analysis, mainly, to maintain the validity of conclusions
+drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data.
 >    {: .comment}
 >
 
@@ -320,7 +320,7 @@ This is a data manipulation step to make the data compatible with other downstre
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Replace Text searches given columns and finds and replaces patterns provided by the user. 
+>    > Replace Text searches given columns and finds and replaces patterns provided by the user.
 This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file column provided by the PeptideShaker tool. This step is critical for FlashLFQ to work.
 >    {: .comment}
 >
@@ -340,10 +340,10 @@ This step selects the peptide column from the Select output ( where we have remo
 
 # **Peptide Quantification**
 
-In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, For eg: moFF and MaxQuant are available in Galaxy. 
+In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, For eg: moFF and MaxQuant are available in Galaxy.
 
 ### *FlashLFQ*
-FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.  
+FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
 >
 > ### {% icon hands_on %} Hands-on: Quantification
 >
@@ -359,7 +359,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats. 
+>    > [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats.
 >    {: .comment}
 >
 {: .hands_on}
@@ -394,7 +394,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >
 >    > ### {% icon comment %} Comment
 >    > Unipept fails with peptides more than 50 amino acids in length, thus we decided to work with peptides that are less than 50 amino acids.
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -413,10 +413,10 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >            - *"Replacement"*: `peptide`
 >        - {% icon param-repeat %} *"Insert Check"*
 >            - *"Find Regex"*: `Intensity_`
->        - {% icon param-repeat %} *"Insert Check"*  
+>        - {% icon param-repeat %} *"Insert Check"*
 >            - *”Find Regex”*: `NH2-`
 >            - *”Replacement”*: `leave it blank`
->        - {% icon param-repeat %} *"Insert Check"*  
+>        - {% icon param-repeat %} *"Insert Check"*
 >            - *”Find Regex”*: `-COOH`
 >            - *”Replacement”*: `leave it blank`
 >
@@ -429,7 +429,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 
 ## *Unipept* for taxonomy annotation
 
-Unipept {% cite Mesuere2018 %} is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide. 
+Unipept {% cite Mesuere2018 %} is used again to match tryptic peptides and find the taxonomy and lowest common ancestor of each peptide.
 
 > ### {% icon hands_on %} Hands-on: Taxonomy annotation
 >
@@ -466,7 +466,7 @@ Unipept {% cite Mesuere2018 %} is used again to match tryptic peptides and find 
 >
 {: .question}
 
-The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
+The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer.
 
 ![Unipept-JSON](../../images/UnipeptJSON.png){: width="30%"}
 
@@ -498,7 +498,7 @@ Unipept is used to match tryptic peptides and find the taxonomy and Functional a
 >    > There are two Unipept in this workflow, One for taxonomy and other for function. Please select all the output options from Unipept.
 >    {: .comment}
 >
-The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer. 
+The JSON output from the Taxonomy can be visualized using the visualize option and Select the Unipept Taxonomyviewer.
 >
 >
 {: .hands_on}
@@ -528,10 +528,10 @@ Query Tabular is a tool that can load tabular data into a SQLite database. This 
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `Goterm`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,total_protein_count,go_term,protein_count,go_name,go_funct`
->    - *"SQL Query to generate tabular output"*: 
+>    - *"SQL Query to generate tabular output"*:
 ```
 SELECT Goterm.*
-FROM Goterm 
+FROM Goterm
 WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 ```
 >    - *"include query result column headers"*: `Yes`
@@ -540,7 +540,7 @@ WHERE ((1.0*Goterm.protein_count)/(1.0*Goterm.total_protein_count)) >= 0.05
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In the Unipept API output, the threshold is set to 0.5% of the overall number of peptides unambiguously assigned to a taxon at a particular taxonomic rank level. Here in the Galaxy platform, we are using Query tabular to perform this filtering. 
+>    > In the Unipept API output, the threshold is set to 0.5% of the overall number of peptides unambiguously assigned to a taxon at a particular taxonomic rank level. Here in the Galaxy platform, we are using Query tabular to perform this filtering.
 >    {: .comment}
 >
 {: .hands_on}
@@ -575,7 +575,7 @@ We are using this Query tabular ot rename the output that we obtained from the C
 >            - In *"Table Options"*:
 >                - *"Specify Name for Table"*: `ec`
 >                - *"Specify Column Names (comma-separated list)"*: `peptide,go_ec`
->    - *"SQL Query to generate tabular output"*: 
+>    - *"SQL Query to generate tabular output"*:
 `SELECT *
 FROM ec`
 >    - *"include query result column headers"*: `Yes`
