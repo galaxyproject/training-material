@@ -631,10 +631,15 @@ This step is used to filter out the GO terms with molecular function and the cor
 
 This completes the walkthrough of the metaQuantome data creation workflow .This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please make sure the tool parameters and the workflow will be needed to be modified accordingly.
 
-Please look at the following tutorials in this Metaproteomics series:
 
-[Metaproteomics]({% link topics/proteomics/tutorials/metaproteomics/tutorial.md %})
-This workflow is also available at [proteomics.usegalaxy.eu](https://proteomics.usegalaxy.eu/)
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: metaproteomics
+        tutorials:
+            - metaproteomics
+            
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at galaxyp.org
 
