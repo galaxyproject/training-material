@@ -71,7 +71,7 @@ https://zenodo.org/record/826906/files/Symp_RNAi_sRNA-seq_rep3_downsampled.fastq
 >
 > 2. Build a dataset list for both sets (`Blank` and `Symp`) of replicate FASTQ files
 >
->    {% include snippets/build_dataset_list.md %}
+>    {% include snippets/build_list_collection.md %}
 >
 >    ![History section with all the loaded datasets](../../images/sRNA/Fig3_dataset_lists_made.png)
 > 

@@ -145,7 +145,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > 3. Make sure your data is in a **collection**. Make sure it is named `mzML`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
->    {% include snippets/create_dataset_collection.md %}
+>    {% include snippets/build_list_collection.md %}
 >
 > > ### {% icon tip %} Comment to W4M users
 > >
