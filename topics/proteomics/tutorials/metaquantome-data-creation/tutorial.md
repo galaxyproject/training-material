@@ -107,6 +107,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 >
 >  {% include snippets/build_list_collection.md %}
+> 7. Rename the dataset collection as `MZML dataset collection`.
 >
 {: .hands_on}
 
@@ -125,7 +126,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 > ### {% icon hands_on %} Hands-on: mzml to MGF
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.0) %} with the following parameters:
->    - {% icon param-collection %} *"Input unrefined MS data"*: `Input dataset collection`
+>    - {% icon param-collection %} *"Input unrefined MS data"*: `MZML dataset collection`
 >    - *"Do you agree to the vendor licenses?"*: `Yes`
 >    - *"Output Type"*: `mgf`
 >    - In *"Data Processing Filters"*:
@@ -308,11 +309,11 @@ This is a data manipulation step to make the data compatible with other downstre
 > ### {% icon hands_on %} Hands-on: Removing file extensions
 >
 >
-> 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: `PSM_Report_no_contaminants` (output of **Select** {% icon tool %})
 >    - In *"Replacement"*:
 >        - {% icon param-repeat %} *"Insert Replacement"*
->            - *"in column"*: `c10`
+>            - *"in column"*: `Column: 10`
 >            - *"Find pattern"*: `.mzml.mgf`
 > 2. Rename Input_for_FlashLFQ.
 >
@@ -349,7 +350,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >
 > 1. {% tool [FlashLFQ](toolshed.g2.bx.psu.edu/repos/galaxyp/flashlfq/flashlfq/1.0.3.0) %} with the following parameters:
 >    - {% icon param-file %} *"identification file"*: `Input_for_FlashLFQ` (output of **Replace Text** {% icon tool %})
->    - {% icon param-file %} *"spectrum files"*: `MZML dataset collection`
+>    - {% icon param-collection %} *"spectrum files"*: `MZML dataset collection`
 >    - *"match between runs"*: `Yes`
 >    - *"Use experimental design for normalization or protein fold-change analysis"*: `Yes`
 >        - {% icon param-file %} *"ExperimentalDesign.tsv"*: `ExperimentalDesign.tsv`
