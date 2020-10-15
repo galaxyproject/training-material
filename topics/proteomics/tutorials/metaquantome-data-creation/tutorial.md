@@ -564,7 +564,7 @@ This step is to remove the hashtag from the Peptide header in the Unipept output
 
 ## *Filter* - EC values
 
-We are using this Query tabular ot rename the output that we obtained from the Cut column tool.
+We are using this Query tabular to rename the output that we obtained from the Cut column tool.
 
 > ### {% icon hands_on %} Hands-on: Extracting EC for metaQuantome
 >
@@ -638,7 +638,7 @@ This step is used to filter out the GO terms with molecular function and the cor
 # **Conclusion**
 {:.no_toc}
 
-This completes the walkthrough of the metaQuantome data creation workflow. This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please not that the tool parameters and the workflow will be needed to be modified accordingly.
+This completes the walkthrough of the metaQuantome data creation workflow. This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
 
