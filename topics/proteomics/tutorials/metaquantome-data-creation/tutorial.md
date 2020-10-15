@@ -20,6 +20,15 @@ contributors:
   - pratikdjagtap 
   - emmaleith
   - mariecrane
+  
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: metaproteomics
+        tutorials:
+            - metaproteomics
+            
 
 ---
 
