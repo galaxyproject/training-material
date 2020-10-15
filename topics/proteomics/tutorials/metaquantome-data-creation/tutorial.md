@@ -303,9 +303,9 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 
 ## *Removing file extensions for Quantification*
-This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extention from the PSM report so that it can be used as an input for FlashLFQ.
+This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extension from the PSM report so that it can be used as an input for FlashLFQ.
 >
-> ### {% icon hands_on %} Hands-on: Removing file extentions
+> ### {% icon hands_on %} Hands-on: Removing file extensions
 >
 >
 > 1. {% tool [Replace Text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
@@ -340,7 +340,7 @@ This step selects the peptide column from the Select output ( where we have remo
 
 # **Peptide Quantification**
 
-In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, For eg: moFF and MaxQuant are available in Galaxy.
+In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, e.g. moFF and MaxQuant are available in Galaxy.
 
 ### *FlashLFQ*
 FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
@@ -403,7 +403,7 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 ## *Manipulating text for metaQuantome*
 
 > ### {% icon hands_on %} Hands-on: Text manipulation for metaQuantome intensity file
-> Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome alongwith completely removing the N-terminus and C-terminus tag in the peptide sequences.
+> Regex Find And Replace goes line by line through the input file and will remove any patterns specified by the user and replace them with expressions also specified by the user. In this case, Regex Find And Replace is being used on a FlashLFQ output file and manipulating the header to make it compatible with metaQuantome along with completely removing the N-terminus and C-terminus tag in the peptide sequences.
 >
 > 1. {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0) %} with the following parameters:
 >    - {% icon param-file %} *"Select lines from"*: `quantifiedPeptides` (output of **FlashLFQ** {% icon tool %})
@@ -460,7 +460,7 @@ Unipept {% cite Mesuere2018 %} is used again to match tryptic peptides and find 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Yes, any tool can be used for taxonomy and functional output. Please make sure the output has the information that incluldes peptide,taxon_name, taxon_id, genus, species etc.
+> > 1. Yes, any tool can be used for taxonomy and functional output. Please make sure the output has the information that includes peptide,taxon_name, taxon_id, genus, species etc.
 > >
 > {: .solution}
 >
@@ -506,7 +506,7 @@ The JSON output from the Taxonomy can be visualized using the visualize option a
 ## *Extracting EC values*
 
 > ### {% icon hands_on %} Hands-on: Extract EC numbers
-The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convinience.
+The cut tool cuts out specific columns from the dataset. In this case, the cut tool is being used to extract columns 1 (peptide) and 3 (EC number) from the dataset peptinfo EC.tsv output. This is a manipulation tool for metaQuantome's convenience.
 >
 > 1. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c3`
@@ -638,9 +638,9 @@ This step is used to filter out the GO terms with molecular function and the cor
 # **Conclusion**
 {:.no_toc}
 
-This completes the walkthrough of the metaQuantome data creation workflow .This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please make sure the tool parameters and the workflow will be needed to be modified accordingly.
+This completes the walkthrough of the metaQuantome data creation workflow. This tutorial is a guide to have datasets that are metaQuantome ready/compatible and can be used for metaproteomics research. We have incorporated only two conditions in this workflow but users can use as many as they want. Researchers can use this workflow with their data also, please make sure the tool parameters and the workflow will be needed to be modified accordingly.
 
-This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at galaxyp.org
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
 
 
 {: .comment}
