@@ -171,7 +171,7 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - {% icon param-file %} *"Protein Database"*: `ProteinDB_cRAP.fasta`
 >    - {% icon param-file %} *"Input Peak Lists (mgf)"*: `output` (output of **msconvert** {% icon tool %})
 >    - In *"Search Engine Options"*:
->        - *"DB-Search Engines"*: `Xtandem`
+>        - *"DB-Search Engines"*: `X!tandem`
 >    - In *"Protein Digestion Options"*:
 >        - *"Digestion"*: `Trypsin`
 >        - *"Maximum Missed Cleavages"*: `2`
