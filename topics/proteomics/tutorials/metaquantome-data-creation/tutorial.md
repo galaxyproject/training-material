@@ -235,8 +235,8 @@ SearchGUI is a tool that searches sequence databases on any number of MGF files.
 >    - *"Specify Contact Information for mzIdendML"*: `GalaxyP Project contact (Not suitable for PRIDE submission)`
 >    - In *"Exporting options"*:
 >        - *"Creates a mzIdentML file"*: `Yes`
->        - *"Compress results into a single zip file"*: `Yes`
->        - *"Reports to be generated"*: `All`
+>        - *"Compress results into a single zip file"*: `No`
+>        - *"Reports to be generated"*: `PSM Report, Peptide Report, Protein Report, Certificate of Analysis,`
 >
 >
 >
