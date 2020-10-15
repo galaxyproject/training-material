@@ -122,8 +122,7 @@ The imzML composite file consists of two files. The first file contains the meta
 Before starting any analysis it is important to check the characteristics and quality of the MSI data. The MSI quality control tool creates a comprehensive PDF report that contains multiple descriptive visualizations of different data attributes. Here we will use the MSI quality control to get an idea about the m/z range and the shape of the chilli section. More details about the MSI quality control tool can be found in the tutorial [Mass spectrometry imaging 1: Loading and exploring MSI data]({{site.baseurl}}/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html).
 
 > ### {% icon hands_on %} Hands-on: Quality control 
->
-> 1. **MSI Qualitycontrol** {% icon tool %} with the following parameters:
+>1. {% tool [MSI_Qualitycontrol](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
@@ -193,7 +192,7 @@ We will follow up on the average mass spectra plots from the quality control rep
 
 > ### {% icon hands_on %} Hands-on: Average mass spectra
 >
-> 1. **MSI plot spectra** {% icon tool %} with the following parameters:
+> 1. {% tool [MSI plot spectra](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
@@ -264,7 +263,8 @@ x     y     compartment
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
-> 2. Press the rerun button of the **MSI plot spectra** {% icon tool %} result, changing only the following:
+> 2. {% tool [MSI plot spectra](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0) %}
+>    - Press the rerun button, changing only the following:
 >    - *"Choose spectra (pixel) and/or add spectra annotations"*: `Single spectra`
 >        - {% icon param-file %} *"Load tabular file with pixel coordinates"*: `annotations` (Input dataset)
 >        - *"Column with x values"*: `column:1`
@@ -295,7 +295,7 @@ The single spectra that derive from different chilli compartments show some majo
 
 > ### {% icon hands_on %} Hands-on: filtering for a m/z range
 >
-> 1. **MSI filtering** {% icon tool %} (Version 1.12) with the following parameters:
+> 1. {% tool [MSI filtering](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
@@ -332,18 +332,17 @@ The main question for the chilli dataset is which m/z features have a localized 
 This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 Th (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 Th has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.
 
 > ### {% icon hands_on %} Hands-on: Generation of multiple analyte images
->
-> 1. **MSI data exporter** {% icon tool %} with the following parameters:
+> 1. {% tool [MSI data exporter](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - *"Multiple output files can be selected"*: `mz feature output`
 >
-> 2. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
+> 2. {% tool [Filter data on any column using simple expressions](https://usegalaxy.eu/root?tool_id=Filter1) %}
 >    - {% icon param-file %} *"Filter"*: `MSI data exporter on data 6: features` (output of **MSI data exporter** {% icon tool %})
 >    - *"With following condition"*: `c2>=55 and c2<=65 or c2>=75 and c2<=85`
 >    - *"Number of header lines to skip"*: `1`
 >
-> 3. **MSI mz images** {% icon tool %} with the following parameters:
+> 3. {% tool [MSI mz images](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data` (output of **Filter** {% icon tool %})
@@ -403,8 +402,7 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
->
-> 2. **MSI mz images** {% icon tool %} with the following parameters:
+> 2. {% tool [MSI mz images](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `mz features` (Input dataset)
