@@ -126,7 +126,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 > 3. Make sure your data is in a **collection**. Make sure it is named `sacurine`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
->    {% include snippets/create_dataset_collection.md %}
+>    {% include snippets/build_list_collection.md %}
 {: .hands_on}
 
 You should have in your history a green Dataset collection (`sacurine`) with 9 datasets in mzml format.
