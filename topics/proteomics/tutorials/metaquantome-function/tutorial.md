@@ -1,25 +1,40 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
-zenodo_link: ''
+title: metaQuantome-Function
+zenodo_link: ""
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+ - "How do I look at differentially expressed proteins?"
+ - "How do I get top 5 or 10 function present in the sample?"
+ - "How can I visualize my results?"
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+  - "A functional and quantitational analysis of metaproteomic mass spectrometry data."
+time_estimation: "1h"
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+  - "With function and Quantitation input perform statistical analysis"
 contributors:
-- contributor1
-- contributor2
+  - subinamehta
+  - timothygriffin
+  - pratikdjagtap
+  - emmaleith
+  - mariecrane
+  - pravs3683
+
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - metaproteomics
+            
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - metaquantome-data-creation
+            
+            
+
 
 ---
 
@@ -27,29 +42,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
-
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+In this tutorial we will learn about metaQuantome workflow which leverages peptide level quantitative information to analyze the functional expression within the microbial community in multiple conditions.
 
 > ### Agenda
 >
@@ -60,80 +53,57 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+# **Pretreatments**
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+## *Get data*
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 1. Create a new history for this tutorial and give it a meaningful name
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
+> 2. Import the files: a Functional File, an Intensity file from [Zenodo]({{ page.zenodo_link }})
+>    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
->    
+>    https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv
+>    https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta
+>    https://zenodo.org/record/4037137/files/T2_A1.mzml
+>    https://zenodo.org/record/4037137/files/T2_B1.mzml
+>    https://zenodo.org/record/4037137/files/T7A_1.mzml
+>    https://zenodo.org/record/4037137/files/T7B_1.mzml
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>
+> 3. Rename the datasets (If needed)
+> 4. Check that the datatype ( Make sure they are in the correct formats).
+>  Functional File (format=`tabular`), a Intensity file (format=`tabular`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
+> 5. Add to each database a tag corresponding to the name of the input data (optional).
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# **Download metaQuantome Databases**
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
+# **Create metaQuantome sample file**
 
 
-## Sub-step with **metaQuantome: expand**
+# **Run metaQuantome**
 
-> ### {% icon hands_on %} Hands-on: Task description
+
+## **metaQuantome: expand**
+
+> ### {% icon hands_on %} Hands-on: Run metaQuantome expand
 >
 > 1. {% tool [metaQuantome: expand](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0) %} with the following parameters:
 >    - {% icon param-file %} *"Database Archive File"*: `outfile` (output of **metaQuantome: database** {% icon tool %})
@@ -171,7 +141,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: filter**
+##  **metaQuantome: filter**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -213,7 +183,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: stat**
+##  **metaQuantome: stat**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -253,7 +223,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: visualize**
+## **metaQuantome: visualize**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -293,7 +263,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: visualize**
+##  **metaQuantome: visualize**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -333,7 +303,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: visualize**
+## **metaQuantome: visualize**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -373,7 +343,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: visualize**
+## **metaQuantome: visualize**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -413,7 +383,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **metaQuantome: visualize**
+## **metaQuantome: visualize**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
