@@ -385,8 +385,8 @@ To identify the location of each TA site to the count them, the first step is to
 >            {: .question}
 >
 >      - *"Seed length (-l)"*: `17`
->      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
 >      - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"*: `Use best`
+>      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
 >
 > 2. Rename your collection for better clarity
 >
