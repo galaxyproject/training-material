@@ -374,16 +374,6 @@ To identify the location of each TA site to the count them, the first step is to
 >      - *"Bowtie settings to use"*: `Full parameters list`
 >      - *"Skip the first n reads (-s)"*: `0`
 >      - *"Maximum number of mismatches permitted in the seed (-n)"*: `0`
->
->            > ### {% icon question %} Questions
->            >
->            > Why are we strictly enforcing no mismatch mapping?
->            >
->            > > ### {% icon solution %} Solution
->            > > Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
->            > {: .solution }
->            {: .question}
->
 >      - *"Seed length (-l)"*: `17`
 >      - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"*: `Use best`
 >      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
@@ -393,6 +383,15 @@ To identify the location of each TA site to the count them, the first step is to
 >    {% include snippets/rename_collection.md %}
 >
 {: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> Why are we strictly enforcing no mismatch mapping?
+>
+> > ### {% icon solution %} Solution
+> > Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
+> {: .solution }
+{: .question}
 
 ## Compute coverage of the genome
 
