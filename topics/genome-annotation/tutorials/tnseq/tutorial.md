@@ -459,7 +459,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >
 > 3. **Compute an expression on every row** {% icon tool %} to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
 >    - *Add expression"*: `c2-1`
->    - {% icon param-files %} *"as a new column to"*: output of **cut**
+>    - {% icon param-file %} *"as a new column to"*: output of **cut**
 >    - *"Round result?"*: `yes`
 >
 >
@@ -479,7 +479,7 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 
 > ### {% icon hands_on %} Hands-on:  Get coverage of TA sites
 >
-> 1. **Join two file** {% icon tool %} with:
+> 1. **Join two files** {% icon tool %} with:
 >    - {% icon param-collection %} *1st file"*: output of **bamCoverage**
 >    - *"Column to use from 1st file"*: `Column 2` (to select the position of the end of the read)
 >    - {% icon param-file %} *"2nd File"*: output of last **cut** with the `forward` tags
@@ -495,7 +495,7 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 > 3. **Cut columns from a table** {% icon tool %} with:
 >    - Cut columns : `c1,c4`
 >    - *"Delimited by"*: `tab`
->    - {% icon param-file %} *"From"*: output of**Join two file** with the `forward` tag
+>    - {% icon param-file %} *"From"*: output of**Join two files** with the `forward` tag
 >
 >
 > 5. Repeat the same steps for `reverse`
@@ -624,13 +624,13 @@ In our case, we will use the Gumbel method, because we are using Mariner data an
 In order to use transit, we need to create a an annotation file in the `prot_table` format, specific to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.
 
 > ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
-> 1. Check that the format of `staph_aur.gff` file is `gff3` and not `gff`
+> 1. Check that the format of `staph_aur.gff3` file is `gff3` and not `gff`
 > 2. Change the datatype if needed
 >
->    {% include snippets/change_datatype.md %}
+>    {% include snippets/change_datatype.md datatype="gff3" %}
 >
 > 3. **Convert GFF3 to prot_table for TRANSIT** {% icon tool %} with:
->    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gf` file
+>    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gff3` file
 >
 {: .hands_on}
 
