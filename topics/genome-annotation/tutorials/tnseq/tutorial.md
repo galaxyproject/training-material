@@ -705,14 +705,14 @@ Now let's compare the results between out two conditions.
 >    - *How should a dataset be selected?"*: `Select by index`
 >      - *Element index:"*: `0` to select the first dataset
 >
-> 2. Add the `#control` tag
+> 2. Add the `#condition` tag
 >
 > 3. **Extract Dataset from a list** {% icon tool %} to extract 2nd file in the collection with:
 >    - {% icon param-collection %} *Input List"*: output of the last **Filter**
 >    - *How should a dataset be selected?"*: `Select by index`
 >      - *Element index:"*: `1` to select the second dataset
 >
-> 4. Add the `#condition` tag
+> 4. Add the `#control` tag
 {: .hands_on}
 
 We would like now to get the list of essential gene in both conditions
