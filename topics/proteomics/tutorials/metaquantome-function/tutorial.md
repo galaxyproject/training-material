@@ -158,7 +158,7 @@ The create samples file module is used to generate the samples file input file f
 >     
 > 2. Execute
 
-![MetaQuantome:Create-Sample](../../images/mq-sample.png){: width="55%"}
+![MetaQuantome:Create-Sample](../../images/mQ-sample.png){: width="55%"}
 
 # **Run metaQuantome**
 
