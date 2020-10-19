@@ -183,7 +183,12 @@ In function mode, the following information is required apart from metaQuantome 
 >        - *"Functional column name"*: `go_term`
 >    - {% icon param-file %} *"Intensity file"*: `Intensity File` (Input dataset)
 >        - *"Intensity file: peptide column name"*: `peptide`
-> 2.Execute
+> 2. Execute
+>
+> 3. Rename as "metaQuantome expand".
+>
+>
+>
 >
 >    > ### {% icon comment %} Comment
 >    >The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
@@ -199,41 +204,41 @@ In function mode, the following information is required apart from metaQuantome 
 
 ##  **metaQuantome: filter**
 
-> ### {% icon hands_on %} Hands-on: Task description
+The filter module is the second step in the metaQuantome workflow. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.
+
+> ### {% icon hands_on %} Hands-on:
 >
 > 1. {% tool [metaQuantome: filter](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0) %} with the following parameters:
 >    - *"Mode"*: `Functional analysis`
 >        - *"Ontology"*: `Gene Ontology (GO terms)`
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
->    - {% icon param-file %} *"metaquantome expand file"*: `outfile` (output of **metaQuantome: expand** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"metaquantome expand file"*: `metaQuantome:expand` (output of **metaQuantome: expand** {% icon tool %})
 >    - *"min_peptides"*: `1`
 >    - *"min_pep_nsamp"*: `1`
 >    - *"min_children_non_leaf"*: `2`
 >    - *"min_child_nsamp"*: `1`
 >    - *"qthreshold"*: `2`
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Execute.
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 3. Rename as "metaQuantome:Filter".
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > To learn more about the filter module please read the metaQuantome paper published by Galaxy-P { % cite Easterly2019 %}.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we change the filter parameters?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The parameters can be changed according to the experimental design or depending on the data.
 > >
 > {: .solution}
 >
@@ -244,76 +249,63 @@ In function mode, the following information is required apart from metaQuantome 
 > ### {% icon hands_on %} Hands-on: Task description
 >
 > 1. {% tool [metaQuantome: stat](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
->    - {% icon param-file %} *"metaquantome expanded or filtered file"*: `outfile` (output of **metaQuantome: filter** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"metaquantome expanded or filtered file"*: `metaQuantome:Filter` (output of **metaQuantome: filter** {% icon tool %})
 >    - *"Mode"*: `Functional analysis`
 >        - *"Ontology"*: `Gene Ontology (GO terms)`
 >    - *"Name of the control sample group of control (used as denominator for fold change evaluation)."*: `T2`
 >    - *"Statistical test to perform"*: `standard t-test (parametric)`
 >    - *"Perform paired tests"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Execute.
+>
+> 3. Rename as "metaQuantome:stat".
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > In this tutorial, we have used the sample T2 as the control group for fold change evaluation. The users have the ability to choose their own control sample group. The initial version of the metaQuantome stat module could only process 2 conditions at a time. However, the new update of metaQuantome has the ability to perform statistical analysis across multiple conditions.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
 ## **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions. 
+Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
+There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
+
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T2 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: stat** {% icon tool %})
 >    - *"Mode"*: `Functional analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
 >            - *"Mean intensity column name"*: `T2_mean`
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The user has a choice to run Bar plot for T2, T4 and T7 to know the top 5 or 10 most differently expressed functions. Here we have restricted the GO category to Molecular Function but the user can choose Biological Processes or Cellular component as their category.
+>    > 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![T2_MF](../../images/T2-mf.png){: width="55%"}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we select any color for the bar chart?
+> 2. Can we increase the number of terms to display?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Yes, the available colors are blue, orange, yellow, violet, black and red.
+> > 2. Yes, the user can choose their own number, however, the larger the display numbers are the dimensions of the image has to be adjusted accordingly.
 > >
 > {: .solution}
 >
@@ -321,119 +313,70 @@ In function mode, the following information is required apart from metaQuantome 
 
 ##  **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T4 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Functional analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
 >            - *"Mean intensity column name"*: `T4_mean`
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Execute.
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![T4_MF](../../images/T4-mf.png){: width="55%"}
 
 ## **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T4 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Functional analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
 >            - *"Mean intensity column name"*: `T7_mean`
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Execute.
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+![T7_MF](../../images/T7-mf.png){: width="55%"}
 
 ## **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T7 and T2.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Functional analysis`
 >        - *"Plot type"*: `Volcano Plot (volcano)`
 >            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T7_over_T2`
 >            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T7_over_T2`
 >            - *"Name of the annotation column"*: `id`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>        - {% icon param-select %} *"Flip the fold change (i.e., multiply log fold change by -1)"*: `No`
+>        - {% icon param-select %} *"Make one plot for each of BiologicalProcess, CellularComponent, and MolecularFunction GO term categories"*: `Yes`
+> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Here, we show metaQuantome's Functional differential abundance volcano plot. The user may select the significance threshold (0.05 by default), and terms with statistically significant fold changes are colored green and labeled. However, we can currently only compare two conditions at a time. Here we have compared T7 and T2 time points. 
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![T2-T7-volcano](../../images/T2-T7-volcano.png){: width="55%"}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we choose to Flip the fold change?
+> 2. Could we create a single volcano plot for all the functions than splitting into different categories?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Certainly, the user has the ability to flip the fold changes.
+> > 2. Yes, the Go term that passes the threshold value will be represented in green. The user can then find out from the tabular output which category the GO term belonged to.
 > >
 > {: .solution}
 >
@@ -441,54 +384,27 @@ In function mode, the following information is required apart from metaQuantome 
 
 ## **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T4 and T2.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Functional analysis`
 >        - *"Plot type"*: `Volcano Plot (volcano)`
 >            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T4_over_T2`
 >            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T4_over_T2`
 >            - *"Name of the annotation column"*: `id`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+>        - {% icon param-select %} *"Flip the fold change (i.e., multiply log fold change by -1)"*: `No`
+>        - {% icon param-select %} *"Make one plot for each of BiologicalProcess, CellularComponent, and MolecularFunction GO term categories"*: `Yes`
+> 2. Execute.
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+![T2-T4-volcano](../../images/T2-T4-volcano.png){: width="55%"}
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This completes the walkthrough of the metaQuantome function workflow. This tutorial is a guide to run the metaQuantome modules and can be used for metaproteomics research. Here, we have incorporated only two visualization modules in this workflow but we will make the heatmap and PCA plot also available. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly. Also, refer to the metaQuantome data creation workflow to understand how to make files metaQuantome compatible.
+
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
+
+{: .comment}
