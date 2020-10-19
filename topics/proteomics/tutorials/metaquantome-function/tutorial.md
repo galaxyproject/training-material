@@ -72,12 +72,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
->    https://zenodo.org/record/4037137/files/ExperimentalDesign.tsv
->    https://zenodo.org/record/4037137/files/ProteinDB_cRAP.fasta
->    https://zenodo.org/record/4037137/files/T2_A1.mzml
->    https://zenodo.org/record/4037137/files/T2_B1.mzml
->    https://zenodo.org/record/4037137/files/T7A_1.mzml
->    https://zenodo.org/record/4037137/files/T7B_1.mzml
+>
 >    ```
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -94,6 +89,47 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 {: .hands_on}
 
 # **Download metaQuantome Databases**
+
+> ### {% icon hands_on %} Hands-on: Run metaQuantome databases
+>
+> 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
+>    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > metaQuantome uses freely available bioinformatic databases to expand your set of direct annotations. 
+>    > For most cases, all 3 databases can be downloaded (the default).
+
+The databases are:
+
+1. NCBI taxonomy database. This contains a list of all currently identified taxa and the relationships between them.
+
+2. Gene Ontology (GO) term database. metaQuantome uses the OBO format of the database. Specifically, two files are used: the go-basic.obo file, which is a simplified version of the GO database that is guaranteed to be acyclic, and the metagenomics slim GO, which is a subset of the full GO that is useful for microbiome research. More details are available at http://geneontology.org/docs/download-ontology/
+
+3. ENZYME database with Enzyme Classification (EC) numbers. This database classifies enzymes and organizes the relationships between them.
+
+This module downloads the most recent releases of the specified databases and stores them in a single file, which can then be accessed by the rest of the metaQuantome modules. For reference, the taxonomy database is the largest (~500 Mb), while the GO and EC databases are smaller: ~34 Mb and ~10Mb, respectively.
+
+Also, note that the databases will be stored in the history so that the date of download can be referenced later. Thus, the databases will not be modified, except for the NCBI database, which is updated every time metaQuantome: expand is run (this is a limitation of the Python package ete3, used within metaQuantome).
+>    {: .comment}
+>
+{: .hands_on}
+
+
+> ### {% icon question %} Questions
+>
+> 1. What is metaQuanome databases necessary?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question}
 
 # **Create metaQuantome sample file**
 
