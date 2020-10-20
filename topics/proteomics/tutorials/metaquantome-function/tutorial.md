@@ -42,11 +42,11 @@ follow_up_training:
 # Introduction
 {:.no_toc}
 
-The Galaxy-P {% cite Galaxy-P %} team published a software suite named metaQuantome { % cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional, taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions
+The {% cite Galaxy-P %} team published a software suite named metaQuantome {% cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional, taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions
 
 In this tutorial, we will learn specifically about the metaQuantome Function workflow. To demonstrate the use of the metaQuantome Function workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points-8 hour, 18 hour and 33 hour. 
 
-![MetaQuantome-function-workflow](../../images/mQ-function-workflow.jpg){: width="55%"}
+![MetaQuantome-function-workflow](../../images/mQ-function-workflow.jpg){: width="100%"}
 
 
 > ### Agenda
@@ -83,9 +83,9 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/import_from_data_library.md %}
 >
 >
-> 3. Rename the datasets (If needed)
+> 3. Rename the datasets (If needed).
 > 4. Check that the datatype ( Make sure they are in the correct formats).
->  Functional File (format=`tabular`), a Intensity file (format=`tabular`)
+>  Functional File (format=`tabular`), an Intensity file (format=`tabular`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -100,7 +100,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
 >    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
 >
-> 2. Execute
+> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -121,7 +121,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 {: .hands_on}
 
 
-![MetaQuantome:databases](../../images/mq-db.png){: width="55%"}
+![MetaQuantome:databases](../../images/mq-db.png){: width="100%"}
 
 > ### {% icon question %} Questions
 >
@@ -156,20 +156,22 @@ The create samples file module is used to generate the samples file input file f
 >            - *"Group Name"*: `T7`
 >               - *"Column"*: `T7A_1,T7B_1`
 >     
-> 2. Execute
+> 2. Execute.
+>
+{: .hands_on}
 
-![MetaQuantome:Create-Sample](../../images/mQ-sample.png){: width="55%"}
+![MetaQuantome:Create-Sample](../../images/mQ-sample.png){: width="100%"}
 
 # **Run metaQuantome**
 
 
-## **metaQuantome: expand**
+## *metaQuantome: expand*
 
 The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed functions in the samples.
 In function mode, the following information is required apart from metaQuantome databases and samples file:
-- the name of the peptide column in the functional annotation file (# peptide)
-- the name of the functional annotation column in the functional annotation file.(# go_term)
-- the name of the peptide column in the Intensity file (# peptide)
+- The name of the peptide column in the functional annotation file (` peptide`)
+- The name of the functional annotation column in the functional annotation file.(`go_term`)
+- The name of the peptide column in the Intensity file (`peptide`)
 
 > ### {% icon hands_on %} Hands-on: Run metaQuantome expand
 >
@@ -183,7 +185,7 @@ In function mode, the following information is required apart from metaQuantome 
 >        - *"Functional column name"*: `go_term`
 >    - {% icon param-file %} *"Intensity file"*: `Intensity File` (Input dataset)
 >        - *"Intensity file: peptide column name"*: `peptide`
-> 2. Execute
+> 2. Execute.
 >
 > 3. Rename as "metaQuantome expand".
 >
@@ -202,7 +204,7 @@ In function mode, the following information is required apart from metaQuantome 
 {: .hands_on}
 
 
-##  **metaQuantome: filter**
+##  *metaQuantome: filter*
 
 The filter module is the second step in the metaQuantome workflow. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.
 
@@ -244,7 +246,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >
 {: .question}
 
-##  **metaQuantome: stat**
+##  *metaQuantome: stat*
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -269,12 +271,13 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >
 {: .hands_on}
 
-
-## **metaQuantome: visualize**
+# **Visualize your Data**
 
 The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions. 
 Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
 There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
+
+## *metaQuantome: visualize* : Bar Chart
 
 > ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T2 sample.
 >
@@ -295,7 +298,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 {: .hands_on}
 
-![T2_MF](../../images/T2-mf.png){: width="55%"}
+![T2_MF](../../images/T2-mf.png){: width="85%"}
 
 > ### {% icon question %} Questions
 >
@@ -311,7 +314,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 {: .question}
 
-##  **metaQuantome: visualize**
+
 
 > ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T4 sample.
 >
@@ -325,9 +328,9 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Color for the bar fill"*: `Orange`
 > 2. Execute.
 {: .hands_on}
-![T4_MF](../../images/T4-mf.png){: width="55%"}
+![T4_MF](../../images/T4-mf.png){: width="85%"}
 
-## **metaQuantome: visualize**
+
 
 > ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T4 sample.
 >
@@ -342,9 +345,9 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 > 2. Execute.
 {: .hands_on}
-![T7_MF](../../images/T7-mf.png){: width="55%"}
+![T7_MF](../../images/T7-mf.png){: width="85%"}
 
-## **metaQuantome: visualize**
+## *metaQuantome: visualize* for Volcano Plots
 
 > ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T7 and T2.
 >
@@ -366,7 +369,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    {: .comment}
 >
 {: .hands_on}
-![T2-T7-volcano](../../images/T2-T7-volcano.png){: width="55%"}
+![T2-T7-volcano](../../images/T2-T7-volcano.png){: width="100%"}
 
 > ### {% icon question %} Questions
 >
@@ -382,7 +385,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 {: .question}
 
-## **metaQuantome: visualize**
+
 
 > ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T4 and T2.
 >
@@ -398,7 +401,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >        - {% icon param-select %} *"Make one plot for each of BiologicalProcess, CellularComponent, and MolecularFunction GO term categories"*: `Yes`
 > 2. Execute.
 {: .hands_on}
-![T2-T4-volcano](../../images/T2-T4-volcano.png){: width="55%"}
+![T2-T4-volcano](../../images/T2-T4-volcano.png){: width="100%"}
 
 # Conclusion
 {:.no_toc}
