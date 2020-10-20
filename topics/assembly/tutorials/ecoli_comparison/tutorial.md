@@ -65,31 +65,44 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 
 > ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
 >
-> 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
+> 1. Import the genome list from Zenodo:
 >
-> 2. Click on "Filters" at the top right:
+>    ```
+>    https://zenodo.org/record/3382053/files/genomes_proks.txt
+>    ```
 >
->    ![Filter menu button](../../images/ecoli-list-filter.png)
+>    > ### {% icon question %} Why not use data directly from NCBI?
+>    > Because they change their format too often, resulting in us having to re-update this tutorial constantly.
+>    >
+>    > If you want to try it with their data, you can follow these instructions, at the risk that some steps will need to be modified to check that you are getting the correct columns.
+>    >
+>    > 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
+>    >
+>    > 2. Click on "Filters" at the top right:
+>    >
+>    >    ![Filter menu button](../../images/ecoli-list-filter.png)
+>    >
+>    > 3. Select only the "Complete" genomes with the filter at the top
+>    >
+>    >    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
+>    >
+>    > 3. At the top right, click "Download"
+>    >
+>    > 4. Upload this table to Galaxy
+>    >
+>    > 4. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
+>    >
+>    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    >
+>    > 5. Rename this file to `genomes.tsv`
+>    >
+>    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>    >
+>    {: .question}
 >
-> 3. Select only the "Complete" genomes with the filter at the top
+> 2. {% tool [Cut](Cut1) %}   columns from a table:
 >
->    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
->
-> 3. At the top right, click "Download"
->
-> 4. Upload this table to Galaxy
->
-> 4. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
->
->    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->
-> 5. Rename this file to `genomes.tsv`
->
->    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->
-> 5. {% tool [Cut](Cut1) %}   columns from a table:
->
->    - *"Cut columns"*: `c6,c15`
+>    - *"Cut columns"*: `c8,c20`
 >    - *"From"*: the tabular version of the file.
 >
 > > ### {% icon question %} Questions
@@ -444,15 +457,15 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >
 > 2. {% tool [Cut](Cut1) %} columns from a table:
 >
->    - *"Cut columns"*: `c10,c15`
+>    - *"Cut columns"*: `c8,c20`
 >    - *"From"*: the output of the **select lines** {% icon tool %}
 >
 >      It should look like:
 >
 >      ```
->      chromosome 1:NZ_LT906474.1/LT906474.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_900186905.1_49923_G01
->      chromosome:NZ_CP020543.1/CP020543.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/079/225/GCA_002079225.1_ASM207922v1
->      chromosome:NZ_CP024090.1/CP024090.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/761/835/GCA_002761835.1_ASM276183v1
+>      GCA_002079225.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/079/225/GCA_002079225.1_ASM207922v1
+>      GCA_002761835.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/761/835/GCA_002761835.1_ASM276183v1
+>      GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_900186905.1_49923_G01
 >      ```
 >
 > 1. Again **Upload** {% icon tool %} data
