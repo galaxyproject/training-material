@@ -1,25 +1,42 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
-zenodo_link: ''
+title: metaQuantome-taxonomy
+zenodo_link: ""
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+ - "How do I look at differentially expressed taxa ?"
+ - "Can we get top 5 or 10 taxa present in the sample?"
+ - "How can I visualize my results?"
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+  - "A taxonomy and quantitational analysis of metaproteomic mass spectrometry data."
+time_estimation: "1h"
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+  - "With Taxonomy and Quantitation inputs perform statistical analysis"
 contributors:
-- contributor1
-- contributor2
+  - subinamehta
+  - timothygriffin
+  - pratikdjagtap
+  - emmaleith
+  - mariecrane
+  - pravs3683
+
+follow_up_training:
+
+    -
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - metaproteomics
+            
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - metaquantome-data-creation
+        
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - metaquantome-function
 
 ---
 
@@ -27,29 +44,11 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
+The {% cite Galaxy-P %} team published a software suite named metaQuantome {% cite Easterly2019 %} to enable quantitative and statistical analysis and visualization of functional, taxonomic expression as well as functional and taxonomy interaction. metaQuantome leverages peptide level quantitative information to analyze the taxonomic, functional expression within the microbial community in different conditions.
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+In this tutorial, we will learn specifically about the metaQuantome Taxonomy workflow. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points-8 hour, 18 hour and 33 hour. 
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+![MetaQuantome-taxonomy-workflow](../../images/mQ-taxonomy-workflow.jpg){: width="100%"}
 
 > ### Agenda
 >
@@ -60,398 +59,334 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+# **Pretreatments**
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+## *Get data*
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 1. Create a new history for this tutorial and give it a meaningful name
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
+> 2. Import the files: a Taxonomy File, an Intensity file from [Zenodo]({{ page.zenodo_link }})
+>    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
->    
+>
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>
+> 3. Rename the datasets (If needed).
+> 4. Check that the datatype ( Make sure they are in the correct formats).
+>  Taxonomy File (format=`tabular`), an Intensity file (format=`tabular`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
+> 5. Add to each database a tag corresponding to the name of the input data (optional).
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# **Download metaQuantome Databases**
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Run metaQuantome databases
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
+>    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
 >
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **metaQuantome: expand**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [metaQuantome: expand](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
->    - *"Mode"*: `Taxonomic analysis`
->        - *"Taxonomy column name"*: `taxon_id`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > metaQuantome uses freely available bioinformatic databases to expand your set of direct annotations. 
+>    > 
+>    > 
+>    > The databases are:
+>    > 
+>    > 1. NCBI taxonomy database. consists of a list of all currently identified taxa and the relationships between them.
+>    > 
+>    > 2. Gene Ontology (GO) term database. metaQuantome uses the go-basic.obo file and the metagenomics slim GO (subset of the full GO). More details are 
+>    > available at http://geneontology.org/docs/download-ontology/
+>    > 
+>    > 3. ENZYME database with Enzyme Classification (EC) numbers. This database classifies enzymes and organizes the relationships between them.
+>    > 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+![MetaQuantome:databases](../../images/mq-db.png){: width="100%"}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Why is it necessary to download metaQuanome databases?
+> 2. Can these databases be downloaded from other sources?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. metaQuantome databases help the metaQuantome:expand tool to co-relate information your have provided in your input files according to the GO term, taxa or EC databases and its relationship .
+> > 2. For metaQuantome, we use freely available databases. This module downloads the most recent releases of the specified databases and stores them in a single file, which can then be accessed by the rest of the metaQuantome modules. For reference, the taxonomy database is the largest (~500 Mb), while the GO and EC databases are smaller: ~34 Mb and ~10Mb, respectively. Also, note that the databases will be stored in the history so that the date of download can be referenced later. Thus, the databases will not be modified, except for the NCBI database.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **metaQuantome: filter**
+# **Create metaQuantome sample file**
 
-> ### {% icon hands_on %} Hands-on: Task description
+The create samples file module is used to generate the samples file input file for the metaQuantome workflow. This input file is used to specify the column names used for each experimental group. These column names are referenced when handling the input data and performing statistical analysis. 
+
+> ### {% icon hands_on %} Hands-on: Create an experimental Design file for sorting samples
+>
+> 1. {% tool [metaQuantome: create samples file](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_sample/49a957fb353a) %} with the following parameters:
+>    - {% icon param-select %} *"Sample file creation method"*: `Manually specify experimental conditions and samples`
+>    - In *"Insert Samples"*:
+>        - *"1.Samples"*: 
+>            - *"Group Name"*: `T2`
+>               - *"Column"*: `T2_A1,T2_B1`
+>        - *"2.Samples"*: 
+>            - *"Group Name"*: `T4`
+>               - *"Column"*: `T4A_1,T4B_1`
+>        - *"3.Samples"*: 
+>            - *"Group Name"*: `T7`
+>               - *"Column"*: `T7A_1,T7B_1`
+>     
+> 2. Execute.
+>
+{: .hands_on}
+
+![MetaQuantome:Create-Sample](../../images/mQ-sample.png){: width="100%"}
+
+# **Run metaQuantome**
+
+
+
+
+## *metaQuantome: expand*
+
+The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed Taxa in the samples.
+In taxonomy mode, the following information is required apart from metaQuantome databases and samples file: a tab-separated taxonomy annotation file, with a peptide column and a taxonomy annotation column. The taxonomic annotations should be the lowest common ancestor (LCA) for each peptide, preferably given as NCBI taxonomy IDs.
+
+- The name of the peptide column in the taxonomic annotation file (`peptide`).
+- The name of the taxonomy annotation column in the taxonomy annotation file (`taxon_id`).
+- The name of the peptide column in the Intensity file (`peptide`)
+
+> ### {% icon hands_on %} Hands-on: Run metaQuantome expand
+>
+> 1. {% tool [metaQuantome: expand](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0) %} with the following parameters:
+>    - {% icon param-file %} *"Database Archive File"*: `metaQuantome databases` (output of **metaQuantome: database** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome: create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - *"Mode"*: `Taxonomic analysis`
+>        - {% icon param-file %} *"Taxonomy file"*: `Taxonomy File` (Input dataset)
+>        - *"Taxonomy file: peptide column name"*: `peptide`
+>        - *"Taxonomy column name"*: `taxon_id`
+>    - {% icon param-file %} *"Intensity file"*: `Intensity File` (Input dataset)
+>        - *"Intensity file: peptide column name"*: `peptide`
+> 2. Execute.
+>
+> 3. Rename as "metaQuantome expand".
+>
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    >The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
+>    > 
+| term id | info about term. (one or more columns) | mean term intensity (by sample group)            | term intensity (by sample)                                                      | number of unique peptides (by sample) | number of sample children in each sample |
+|---------|----------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------|------------------------------------------|
+| term1   | name, rank, etc.                       | note that this is the log2 of the mean intensity | this is the log2 of term intensity in each sample. Missing data is coded as NA. | integer. 0 is coded as NA             | integer. 0 is coded as NA                |
+|         |                                        |                                                  |                                                                                 |                                       |                                          |
+>    {: .comment}
+>
+>    {: .comment}
+>
+{: .hands_on}
+
+
+## *metaQuantome: filter*
+
+The filter module is the second step in the metaQuantome workflow. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.
+
+> ### {% icon hands_on %} Hands-on: Filtering the expanded data
 >
 > 1. {% tool [metaQuantome: filter](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0) %} with the following parameters:
 >    - *"Mode"*: `Taxonomic analysis`
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
->    - {% icon param-file %} *"metaquantome expand file"*: `outfile` (output of **metaQuantome: expand** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"metaquantome expand file"*: `metaQuantome:expand` (output of **metaQuantome: expand** {% icon tool %})
 >    - *"min_peptides"*: `1`
 >    - *"min_pep_nsamp"*: `1`
 >    - *"min_children_non_leaf"*: `2`
 >    - *"min_child_nsamp"*: `1`
 >    - *"qthreshold"*: `2`
+> 2. Execute.
 >
->    ***TODO***: *Check parameter descriptions*
+> 3. Rename as "metaQuantome:Filter".
 >
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > To learn more about the filter module please read the metaQuantome paper published by Galaxy-P { % cite Easterly2019 %}.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we change the filter parameters?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. The parameters can be changed according to the experimental design or depending on the data.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **metaQuantome: stat**
+## *metaQuantome: stat*
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Statistical analysis of the filtered data on multiple conditions.
 >
 > 1. {% tool [metaQuantome: stat](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
->    - {% icon param-file %} *"metaquantome expanded or filtered file"*: `outfile` (output of **metaQuantome: filter** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"metaquantome expanded or filtered file"*: `metaQuantome:Filter` (output of **metaQuantome: filter** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >    - *"Name of the control sample group of control (used as denominator for fold change evaluation)."*: `T2`
 >    - *"Statistical test to perform"*: `standard t-test (parametric)`
 >    - *"Perform paired tests"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Execute.
+>
+> 3. Rename as "metaQuantome:stat".
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > In this tutorial, we have used the sample T2 as the control group for fold change evaluation. The users have the ability to choose their own control sample group. The initial version of the metaQuantome stat module could only process 2 conditions at a time. However, the new update of metaQuantome has the ability to perform statistical analysis across multiple conditions.
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+# **Visualize your Data**
 
-## Sub-step with **metaQuantome: visualize**
+The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions. 
+Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
+There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
 
-> ### {% icon hands_on %} Hands-on: Task description
+## *metaQuantome: visualize*
+
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Taxonomy in T2 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
 >            - *"Taxonomic rank to restrict to in the plot"*: ``
 >            - *"Mean intensity column name"*: `T2_mean`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > The user has a choice to run Bar plot for T2, T4 and T7 to know the top 5 or 10 most differently expressed taxonomy.
+>    > 
 >    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![T2_taxa](../../images/T2-taxa.png){: width="85%"}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we select any color for the bar chart?
+> 2. Can we increase the number of terms to display?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Yes, the available colors are blue, orange, yellow, violet, black and red.
+> > 2. Yes, the user can choose their own number, however, the larger the display numbers are the dimensions of the image has to be adjusted accordingly.
 > >
 > {: .solution}
 >
 {: .question}
 
-## Sub-step with **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Taxonomy in T7 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >        - *"Plot type"*: `Volcano Plot (volcano)`
 >            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T7_over_T2`
 >            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T7_over_T2`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Execute.
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![T7_taxa](../../images/T7-taxa.png){: width="85%"}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
 
-## Sub-step with **metaQuantome: visualize**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Taxonomy in T4 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
 >            - *"Taxonomic rank to restrict to in the plot"*: ``
 >            - *"Mean intensity column name"*: `T4_mean`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 2. Execute.
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![T4_taxa](../../images/T4-taxa.png){: width="85%"}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+## *metaQuantome: visualize* for Volcano Plots
 
-## Sub-step with **metaQuantome: visualize**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T4 and T2.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
->    - *"Mode"*: `Taxonomic analysis`
->        - *"Plot type"*: `Bar Chart (bar)`
->            - *"Taxonomic rank to restrict to in the plot"*: ``
->            - *"Mean intensity column name"*: `T7_mean`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Sub-step with **metaQuantome: visualize**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
->    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `outfile` (output of **metaQuantome: stat** {% icon tool %})
->    - {% icon param-file %} *"Samples file"*: `samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >        - *"Plot type"*: `Volcano Plot (volcano)`
 >            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T4_over_T2`
 >            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T4_over_T2`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
+>        - {% icon param-select %} *"Flip the fold change (i.e., multiply log fold change by -1)"*: `No`
+> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Here, we show metaQuantome's Taxonomy differential abundance volcano plot. The user may select the significance threshold (0.05 by default), and terms with statistically significant fold changes are colored green and labeled. However, we can currently only compare two conditions at a time. Here we have compared T4 and T2 time points. The user can also perform comparison of T7 and T2.
 >    {: .comment}
 >
 {: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+![T2-T4-taxa-volcano](../../images/T2-T4-taxa-volcano.png){: width="100%"}
+>
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Can we choose to Flip the fold change?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. Certainly, the user has the ability to flip the fold changes.
 > >
 > {: .solution}
 >
 {: .question}
 
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
-
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This completes the walkthrough of the metaQuantome taxonomy workflow. This tutorial is a guide to run the metaQuantome modules and can be used for metaproteomics research. Here, we have incorporated only two visualization modules in this workflow but we will make the heatmap and PCA plot also available. Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly. Also, refer to the metaQuantome data creation workflow to understand how to make files metaQuantome compatible.
+
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
+
+{: .comment}
