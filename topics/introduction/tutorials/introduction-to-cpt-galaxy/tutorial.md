@@ -208,7 +208,7 @@ There are four icons in the top right-hand corner of the History panel. The two-
 On the left is the current history, and all histories on the right are other histories. The **switch to** button will set that history as the current history. At the top left-hand corner is a **done** button, which will exit this view when complete. Any analyses run will be saved in that history.
 
 > ### {% icon tip %} Pro tip …
-> In the histories view, it is possible to copy datasets between histories.
+> In the histories view, it is possible to copy datasets between histories. Simply set the history you want to drag the datasets into as the current history, and drag the dataset from another history to the top of the current history.
 {: .tip}
 
 > ### {% icon comment %} Further Reading
