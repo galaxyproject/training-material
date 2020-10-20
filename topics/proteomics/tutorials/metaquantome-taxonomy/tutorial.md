@@ -81,7 +81,6 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    https://zenodo.org/record/4110725/files/Intensity-File.tabular
 >    https://zenodo.org/record/4110725/files/Taxonomy-File.tabular
 >
->
 >    ```
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
