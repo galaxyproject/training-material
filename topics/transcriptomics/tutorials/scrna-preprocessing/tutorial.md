@@ -599,7 +599,7 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
 > 1. **Create a Dataset List**
->    {% include snippets/build_dataset_list.md %}
+>    {% include snippets/build_list_collection.md %}
 >
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
 >   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)
