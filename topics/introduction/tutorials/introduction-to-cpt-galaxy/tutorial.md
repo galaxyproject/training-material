@@ -256,15 +256,16 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/15_comments_icon.png)  allows the user to comment on a dataset; this could be a reminder of why it was executed, or perhaps to annotate interesting results found in the output. Also a searchable field.
 
 > ### {% icon comment %} Failed Datasets
-> Sometimes tools fail and the output dataset turns red. A red dataset means that the tool has terminated with an error of some kind. If it was part of a **Workflow** (see below) and downstream steps were waiting on the failed dataset, the workflow will not continue, and you may see one or more of the queued datasets remain in the paused (light blue) state.
+> * Sometimes tools fail and the output dataset turns red. A red dataset means that the tool has terminated with an error of some kind. If it was part of a **Workflow** (see below) and downstream steps were waiting on the failed dataset, the workflow will not continue, and you may see one or more of the queued datasets remain in the paused (light blue) state.
 > 
-> Tools may return errors for a number of reasons, some of which the user can correct. Clicking on the name of the failed dataset will open details about the job.
+> * Tools may return errors for a number of reasons, some of which the user can correct. Clicking on the name of the failed dataset will open details about the job.
 > 
 > ![](../../images/introduction-to-cpt-galaxy-screenshots/9_report_bug.png)
 > 
-> A common reason that tools fail is that the user specified an incorrect input dataset or tool parameters. Click on the circular arrow "re-run" button to bring up the tool's original run paramters. Double-check that you selected the correct dataset(s) as input, and that you set any other parameters approriately, and try executing the tool again.
+> * A common reason that tools fail is that the user specified an incorrect input dataset or tool parameters. Click on the circular arrow "re-run" button to bring up the tool's original run paramters. Double-check that you selected the correct dataset(s) as input, and that you set any other parameters approriately, and try executing the tool again.
 > 
-> If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to CPT IT staff. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
+> * If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to CPT IT staff. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
+> 
 {: .comment}
 
 ## Managing Datasets Individually
