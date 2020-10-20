@@ -79,15 +79,15 @@ When all of the files desired to be uploaded have been selected, click **Start**
 ![](../../images/introduction-to-cpt-galaxy-screenshots/6_file_ready.png)
 
 > ### {% icon tip %} Getting data from other places in Galaxy
-
->Sometimes, the data you want to use has already been uploaded to Galaxy by another user or by one of the administrators. In this case, you can move data directly into your active histroy from within Galaxy, rather than downloading it to your own computer and then re-uploading it to Galaxy.
-
->**Data libraries** are stored files that are accessible to users of a Galaxy instance. These are usually set up as "one-way" data storage: users can download data to their computer or import data into a Galaxy history, but cannot upload data to a data library without administrator permission. These are useful for storing and sharing data that many users may want to access, such as raw sequencing data or assembled genomes.
-
->Data libraries are accessible under the *Shared Data* menu on the Galaxy top menu bar. Data libraries are arranged as directories (folders) that contain subdirectories (subfolders) and/or files. Entire folders or individual files may be imported by checking the box(es) to the left of the desired file(s) and clicking on the *To History* or *Download* buttons at the top of the screen.
-
->**Published histories** are regular Galaxy histories that a user has decided to share with other Galaxy users. Published histories are accessible under the *Shared Data* menu on the Galaxy top menu bar, and are presented as simply a flat list of all published histores and the user that created them. Clicking on a history will allow the user to view it. To actually use the datasets in the published history, click on *Import history* at the top right of the screen. Importing the history creates a *copy* of the history under your own account; any changes you make will not be visible to other users (unless you decide to publish them), and you will not be able to see any changes the original publisher makes to the history (unless you re-import it).
-
+> 
+> Sometimes, the data you want to use has already been uploaded to Galaxy by another user or by one of the administrators. In this case, you can move data directly into your active histroy from within Galaxy, rather than downloading it to your own computer and then re-uploading it to Galaxy.
+> 
+> **Data libraries** are stored files that are accessible to users of a Galaxy instance. These are usually set up as "one-way" data storage: users can download data to their computer or import data into a Galaxy history, but cannot upload data to a data library without administrator permission. These are useful for storing and sharing data that many users may want to access, such as raw sequencing data or assembled genomes.
+> 
+> Data libraries are accessible under the *Shared Data* menu on the Galaxy top menu bar. Data libraries are arranged as directories (folders) that contain subdirectories (subfolders) and/or files. Entire folders or individual files may be imported by checking the box(es) to the left of the desired file(s) and clicking on the *To History* or *Download* buttons at the top of the screen.
+> 
+> **Published histories** are regular Galaxy histories that a user has decided to share with other Galaxy users. Published histories are accessible under the *Shared Data* menu on the Galaxy top menu bar, and are presented as simply a flat list of all published histores and the user that created them. Clicking on a history will allow the user to view it. To actually use the datasets in the published history, click on *Import history* at the top right of the screen. Importing the history creates a *copy* of the history under your own account; any changes you make will not be visible to other users (unless you decide to publish them), and you will not be able to see any changes the original publisher makes to the history (unless you re-import it).
+> 
 {: .tip}
 
 ## Choosing and Executing a Tool
