@@ -152,6 +152,7 @@ We will be using a JupyterLab Terminal for most of this tutorial.
 > git clone -b release-emerald2.0.0 https://github.com/NordicESMhub/ctsm.git
 > cd ctsm
 > ./manage_externals/checkout_externals
+> ```
 >
 {: .hands_on}
 
@@ -162,6 +163,7 @@ We will be using a JupyterLab Terminal for most of this tutorial.
 > ```
 > source activate cesm
 >
+> cd cime/scripts
 > ./create_newcase --case ../../../ctsm_cases/fates_alp1 --compset 2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV --res 1x1_ALP1 --machine espresso --run-unsupported
 > ```
 >
