@@ -81,6 +81,8 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
+>    https://zenodo.org/record/4110725/files/Function-File.tabular
+>    https://zenodo.org/record/4110725/files/Intensity-File.tabular
 >
 >    ```
 >    {% include snippets/import_via_link.md %}
