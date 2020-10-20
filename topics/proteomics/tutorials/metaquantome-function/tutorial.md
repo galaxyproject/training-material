@@ -11,7 +11,7 @@ objectives:
   - "A functional and quantitational analysis of metaproteomic mass spectrometry data."
 time_estimation: "1h"
 key_points:
-  - "With function and Quantitation input perform statistical analysis"
+  - "With function and Quantitation inputs perform statistical analysis"
 contributors:
   - subinamehta
   - timothygriffin
@@ -32,7 +32,11 @@ follow_up_training:
         topic_name: proteomics
         tutorials:
             - metaquantome-data-creation
-            
+        
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+            - metaquantome-taxonomy
             
 
 
@@ -208,7 +212,7 @@ In function mode, the following information is required apart from metaQuantome 
 
 The filter module is the second step in the metaQuantome workflow. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.
 
-> ### {% icon hands_on %} Hands-on:
+> ### {% icon hands_on %} Hands-on: Filtering the expanded data
 >
 > 1. {% tool [metaQuantome: filter](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0) %} with the following parameters:
 >    - *"Mode"*: `Functional analysis`
@@ -248,7 +252,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 
 ##  *metaQuantome: stat*
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Statistical analysis of the filtered data on multiple conditions.
 >
 > 1. {% tool [metaQuantome: stat](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0) %} with the following parameters:
 >    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
