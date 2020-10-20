@@ -250,7 +250,7 @@ The spectra data output can be filtered for certain spectra to obtain some spect
 >    - *"Flavor"*: `general numeric sort`
 >
 > 3. Run **Select lines that match an expression** {% icon tool %} from the 'filter and sort' category with the following parameters:
->    - {% icon param-file %} *"Sort Query"*: `Data exporter spectra` (output of **MSI data exporter** {% icon tool %})
+>    - {% icon param-file %} *"Select lines from"*: `Data exporter spectra` (output of **MSI data exporter** {% icon tool %})
 >    - *"the pattern"*: `(xy_40_40)|(xy_23_70)|(xy_20_73)`
 >
 {: .hands_on}

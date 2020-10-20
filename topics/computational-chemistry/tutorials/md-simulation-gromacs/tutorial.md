@@ -89,7 +89,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 > ### {% icon comment %} Alternative upload
 > As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
 >    ```
->    https://zenodo.org/record/2598415
+>    https://zenodo.org/record/2598415/files/1AKI_clean.pdb
 >    ```
 >    {% include snippets/import_via_link.md %}
 {: .comment}
