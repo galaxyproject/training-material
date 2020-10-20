@@ -47,6 +47,8 @@ tutorial_name: galaxy-faq
 > ### {% icon question %} Functional workflow failed at FASTA translate and TMHMM steps, or at steps involving GFF3 as input files.
 >    > ### {% icon solution %} Solution
 >    > The common cause for this problem is that the user picked the incorrect FASTA file or the GFF3 file as the input for the workflow.  The newly updated functional workflow (version v2020.07 and up) takes the "Annotation and Sequence" file (the GFF3 annotation combined with the DNA FASTA file) directly retrieved from Apollo as the input file. The workflow has a built-in step to split the combined file into two separate files, "GFF3 annotation from Apollo" and "FASTA sequence from Apollo", for downstream analysis steps.  If your functional workflow does not start with the "Annotation and Sequence" file directly retrieved from Apollo, or you are re-running certain step and you manually select the wrong GFF3 (or FASTA) file as input, your analysis will fail.  
+> {: .solution}
+{: .question}
 
 > ### {% icon question %} Converting GFF3 of a genome with frameshifted genes into Genbank format files.
 >    > ### {% icon solution %} Solution
