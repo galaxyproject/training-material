@@ -6,14 +6,14 @@ tutorial_name: introduction-to-cpt-galaxy
 
 # Galaxy at the Center for Phage Technology
 
-Galaxy is a platform for doing reproducible bioinformatics research. It provides a friendly interface to a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Long-running jobs can be launched while a scientist returns to their lab work; meanwhile, Galaxy keeps track of the progress of the analysis and automatically saves the work done up until that point.
+Galaxy is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/1_galaxy_interface.png)
 
-The Galaxy interface consists of three panels; on the left (boxed in blue) is a column containing all available tools. In the center (boxed in purple) is where analysis will occur and results displayed. On the right (boxed in red) is where the current history resides.
+The Galaxy user interface consists of three panels; on the left (boxed in blue) is a column containing all available tools. In the center (boxed in purple) is where analysis will occur and results displayed. On the right (boxed in red) is where the current history resides.
 
 > ### {% icon tip %} Note that…
-> If the user is lost within the browser interface, clicking **Analyze Data** in the blue bar at the top will return the user to the Galaxy home page. Refreshing the page will also return one to the home page without losing any work done up until that point. Galaxy automatically saves all progress.
+> If the user is lost within the browser interface, clicking **Analyze Data** in the blue bar at the top will return the user to the Galaxy home page. Refreshing the page will also return to the home page without losing any work done up until that point. Galaxy automatically saves all progress.
 {: .tip}
 
 > ### Agenda
@@ -47,7 +47,7 @@ The Galaxy interface consists of three panels; on the left (boxed in blue) is a 
 
 ### Uploading data from external sources
 
-Nearly all Galaxy tools process input files and produce output files. To upload data from the user’s local device, click on the upload symbol in the top right-hand corner of the Tools column on the left side of the screen.
+Galaxy tools process input files and produce output files. To upload data from the user’s local device, click on the upload symbol in the top right-hand corner of the Tools column on the left side of the screen.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/2_upload_symbol.png)
 
@@ -66,10 +66,11 @@ Once the file has been detected by Galaxy, it will appear in the upload window.
 ![](../../images/introduction-to-cpt-galaxy-screenshots/4_file_selected.png)
 
 > ### {% icon tip %} File Format Issues?
-> If Galaxy does not detect the file type properly, the user can set the file type. Although it is a rare occurrence, be sure to double check the file is formatted properly before overriding Galaxy.
+> If Galaxy does not detect the file type properly, the user can set the file type. As this is a rare occurrence, be sure to double check the file is formatted properly before overriding Galaxy.
 {: .tip}
 
 When all of the files desired to be uploaded have been selected, click **Start** in the bottom right of the upload menu. The dataset will indicate to you that it is uploaded in the upload window by yielding a 100% status; at this time, the window can be closed. In the history column, the freshly uploaded dataset will be grey with a clock symbol…
+>     >*note that the file(s) must be completely finished uploading before you can navigate away from this page. Failure to wait until all files are uploaded will result in a loss of these files.*
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/5_file_waiting.png)
 
@@ -78,13 +79,13 @@ When all of the files desired to be uploaded have been selected, click **Start**
 ![](../../images/introduction-to-cpt-galaxy-screenshots/6_file_ready.png)
 
 > ### {% icon tip %} Getting data from other places in Galaxy
-
+>
 >Sometimes, the data you want to use has already been uploaded to Galaxy by another user or by one of the administrators. In this case, you can move data directly into your active histroy from within Galaxy, rather than downloading it to your own computer and then re-uploading it to Galaxy.
-
+>
 >**Data libraries** are stored files that are accessible to users of a Galaxy instance. These are usually set up as "one-way" data storage: users can download data to their computer or import data into a Galaxy history, but cannot upload data to a data library without administrator permission. These are useful for storing and sharing data that many users may want to access, such as raw sequencing data or assembled genomes.
-
+>
 >Data libraries are accessible under the *Shared Data* menu on the Galaxy top menu bar. Data libraries are arranged as directories (folders) that contain subdirectories (subfolders) and/or files. Entire folders or individual files may be imported by checking the box(es) to the left of the desired file(s) and clicking on the *To History* or *Download* buttons at the top of the screen.
-
+>
 >**Published histories** are regular Galaxy histories that a user has decided to share with other Galaxy users. Published histories are accessible under the *Shared Data* menu on the Galaxy top menu bar, and are presented as simply a flat list of all published histores and the user that created them. Clicking on a history will allow the user to view it. To actually use the datasets in the published history, click on *Import history* at the top right of the screen. Importing the history creates a *copy* of the history under your own account; any changes you make will not be visible to other users (unless you decide to publish them), and you will not be able to see any changes the original publisher makes to the history (unless you re-import it).
 {: .tip}
 
