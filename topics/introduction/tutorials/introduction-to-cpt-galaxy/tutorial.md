@@ -70,7 +70,7 @@ Once the file has been detected by Galaxy, it will appear in the upload window.
 {: .tip}
 
 When all of the files desired to be uploaded have been selected, click **Start** in the bottom right of the upload menu. The dataset will indicate to you that it is uploaded in the upload window by yielding a 100% status; at this time, the window can be closed. In the history column, the freshly uploaded dataset will be grey with a clock symbol…
->     >*note that the file(s) must be completely finished uploading before you can navigate away from this page. Failure to wait until all files are uploaded will result in a loss of these files.*
+> _note that the file(s) must be completely finished uploading before you can navigate away from this page. Failure to wait until all files are uploaded will result in a loss of these files._
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/5_file_waiting.png)
 
@@ -79,23 +79,23 @@ When all of the files desired to be uploaded have been selected, click **Start**
 ![](../../images/introduction-to-cpt-galaxy-screenshots/6_file_ready.png)
 
 > ### {% icon tip %} Getting data from other places in Galaxy
->
+> 
 >Sometimes, the data you want to use has already been uploaded to Galaxy by another user or by one of the administrators. In this case, you can move data directly into your active histroy from within Galaxy, rather than downloading it to your own computer and then re-uploading it to Galaxy.
->
+> 
 >**Data libraries** are stored files that are accessible to users of a Galaxy instance. These are usually set up as "one-way" data storage: users can download data to their computer or import data into a Galaxy history, but cannot upload data to a data library without administrator permission. These are useful for storing and sharing data that many users may want to access, such as raw sequencing data or assembled genomes.
->
+> 
 >Data libraries are accessible under the *Shared Data* menu on the Galaxy top menu bar. Data libraries are arranged as directories (folders) that contain subdirectories (subfolders) and/or files. Entire folders or individual files may be imported by checking the box(es) to the left of the desired file(s) and clicking on the *To History* or *Download* buttons at the top of the screen.
->
+> 
 >**Published histories** are regular Galaxy histories that a user has decided to share with other Galaxy users. Published histories are accessible under the *Shared Data* menu on the Galaxy top menu bar, and are presented as simply a flat list of all published histores and the user that created them. Clicking on a history will allow the user to view it. To actually use the datasets in the published history, click on *Import history* at the top right of the screen. Importing the history creates a *copy* of the history under your own account; any changes you make will not be visible to other users (unless you decide to publish them), and you will not be able to see any changes the original publisher makes to the history (unless you re-import it).
 {: .tip}
 
 ## Choosing and Executing a Tool
 
-There is now data in Galaxy that is ready to be processed by one of many available tools! At the top of the tool panel is a search bar. Alternatively, clicking one of the bold, underlined selections will reveal multiple tools of a certain type which the user can choose from. When selecting the tool, be sure to read the *What it does* text at the bottom of the tool interface page that appears; it will give the user important information regarding running the tool and its output format.
+Now that there is data in Galaxy, it is ready to be processed by one of the many available tools! At the top of the tool panel is a search bar. Alternatively, clicking one of the bold, underlined selections will reveal multiple tools from which the user can choose. When selecting the tool, be sure to read the __*What it does*__ text at the bottom of the tool interface page that appears; it will give the user important information regarding running the tool and its output format.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/7_workflow_example.png)
 
-Review the options in the tool interface. Keep in mind that many options are set to default values. Uploaded files or other datasets in the current history can be used as inputs. When configuration of the tool is complete, **execute it**, and it will appear as a set of output files in the history on the right.
+Review the options in the tool interface. Keep in mind that many options are set to default values. Uploaded files or other datasets in the current history can be used as inputs. When configuration of the tool is complete, click the **execute**, and it will appear as a set of output files in the history on the right.
 
 # Histories
 
@@ -105,29 +105,31 @@ generates a dataset. These datasets (and the output datasets from later analysis
 
 ## The Current History
 
-All users have one 'current' history, which can be thought of as **a workspace or a current working directory** in
+All users have one 'current' history, which can be thought of as **a workspace or a current working directory,** in
 bioinformatics terms. Your current history is displayed on the right hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
-The history panel displays output datasets in the order in which they were created with the oldest/first shown on the
+The history panel displays output datasets in the order in which they were created with the oldest/first dataset shown on the
 bottom. As new analyses are done and new output datasets are generated, the newest datasets are added to the top of the
-the history panel. In this way, the history panel displays the history of your **analysis over time**.
+the history panel. In this way, the history panel displays the history of your analysis over time.
 
-**Users that have registered an account and logged in can have many histories** and the history panel allows switching
+**Users that have registered an account and logged in can have multiple histories.** The history panel allows switching
 between them and creating new ones. This can be useful to organize different analyses.
 
-### Current history controls
+### History controls
 
-![Current history buttons](../../images/introduction-to-cpt-galaxy-screenshots/current-history-buttons.png)
+![Current history buttons](../../images/introduction-to-cpt-galaxy-screenshots/current-history-buttons_2.png)
 
-Above the current history panel are three buttons: the refresh, history options, and 'view all histories' button.
+Above the current history panel are four buttons: the refresh, create new hitory, 'view all histories, and hitory options.
 
-> * The refresh button ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) will entirely reload the history being viewed. This can be helpful if you believe the history
-interface needs to be updated or isn't updating properly.
+> 1. The **refresh** button ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) will entirely reload the history being viewed. This can be helpful if you believe the history interface needs to be updated or isn't updating properly.
 
-> * The history options button ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) opens the history options menu which allows you to perform history-related tasks.
+> 2. The **create new history** button ![](../../images/introduction-to-cpt-galaxy-screenshots/create_new_history.png) will create a new history to begin working in. History use will be detailed later in this tutorial.
 
-> * The 'view all histories' button sends you to the interface for managing multiple histories
+> 3. The **'view all histories' button** ![](../../images/introduction-to-cpt-galaxy-screenshots/view_all_histories.png) sends you to the interface for managing multiple histories
+
+> 4. The **history options button** ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) opens the history options menu which allows you to perform history-related tasks.
+
 
 ## History Information
 
@@ -160,6 +162,10 @@ To tag a history:
 
 ![Using tags](../../images/introduction-to-cpt-galaxy-screenshots/tags.png)
 
+> ### {% icon comment %} Advanced Users…
+> * Datasets can also be **tagged** to allow for fast sorting. Look for the same icon used on histories, but within the dataset.
+{: .comment}
+
 ### Annotating a history
 
 Sometimes tags and names are not enough to describe the work done within a history. Galaxy allows you to create history
@@ -185,6 +191,28 @@ for all the datasets in a history is displayed underneath the history name. For 
 of dataset data on Galaxy's filesystem, '200 MB' will be displayed underneath the name.
 
 The CPT Galaxy does not currently set a maximum quota size for users.
+
+### Switching Histories
+
+There are four icons in the top right-hand corner of the History panel. The two-panel icon allow you to view and switch between different histories. Clicking on this reveals the different histories.
+
+![](../../images/introduction-to-cpt-galaxy-screenshots/21_view_histories.png)
+
+> ### {% icon tip %} Note that…
+> Newly created or edited histories are sometimes not displayed in the all histories page after clicking on the two-panel icon. In this case, it is still possible to find them and switch to them by clicking the ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) icon and selecting Saved Histories. This will display a list of all the user's saved histories.
+{: .tip}
+
+![](../../images/introduction-to-cpt-galaxy-screenshots/22_all_histories.png)
+
+On the left is the current history, and all histories on the right are other histories. The **switch to** button will set that history as the current history. At the top left-hand corner is a **done** button, which will exit this view when complete. Any analyses run will be saved in that history.
+
+> ### {% icon tip %} Pro tip …
+> In the histories view, it is possible to copy datasets between histories.
+{: .tip}
+
+> ### {% icon comment %} Further Reading
+> To learn more about what a user can do with histories and datasets in Galaxy, please reference [this tutorial.](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/history/tutorial.html)
+{: .comment}
 
 ## Datasets
 
@@ -218,7 +246,7 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 
 > * {% icon solution %} views the dataset in the main window
 > * {% icon hands_on %} modifies the metadata
-> * **X** deletes a dataset (these can be recovered! See below.)
+> * **X** deletes a dataset (these can be recovered! _See below._)
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/11_save_icon.png) downloads the dataset to the local device; note that Galaxy will always have a digital copy.
 > * {% icon details %} views details about the tool that was run, and how the job was configured.
 > * ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) is commonly used, as it re-runs the tool with the same parameters configured. Additionally, these parameters may be tweaked before re-running.
@@ -228,14 +256,14 @@ Near the top, the format is listed as *tabular*. At the bottom of the expanded d
 
 > ### {% icon comment %} Failed Datasets
 > Sometimes tools fail and the output dataset turns red. A red dataset means that the tool has terminated with an error of some kind. If it was part of a **Workflow** (see below) and downstream steps were waiting on the failed dataset, the workflow will not continue, and you may see one or more of the queued datasets remain in the paused (light blue) state.
-
+> 
 > Tools may return errors for a number of reasons, some of which the user can correct. Clicking on the name of the failed dataset will open details about the job.
->
+> 
 > ![](../../images/introduction-to-cpt-galaxy-screenshots/9_report_bug.png)
->
+> 
 > A common reason that tools fail is that the user specified an incorrect input dataset or tool parameters. Click on the circular arrow "re-run" button to bring up the tool's original run paramters. Double-check that you selected the correct dataset(s) as input, and that you set any other parameters approriately, and try executing the tool again.
->
-> If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to CPT IT. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
+> 
+> If your inputs are all correct and the tool still fails, there may be a bug in the tool. Selecting the bug icon in the bottom left-hand corner will bring up a page in the main Galaxy interface that provides the error text and a form for reporting the error as a bug. There, a message can be typed and a report submitted to CPT IT staff. It is always recommended to submit bug reports when jobs fail because it improves the system for all users.
 {: .comment}
 
 ## Managing Datasets Individually
@@ -264,42 +292,21 @@ make them not shown again.
 
 ### Re-naming Datasets
 
-Click on the {% icon hands_on %} symbol in a dataset. This will bring up some editable fields in the main Galaxy interface.
+Click on the {% icon hands_on %} symbol in a dataset. This will bring up editable fields in the main Galaxy interface.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/19_edit_dataset_attributes.png)
 
-There, the name of the dataset can be changed, and this new name will appear on the dataset in the history window. It is not recommended to rename every dataset; reserve this attention for key datasets that you will want to return to repeatedly. Additional notes may also be added here. Make sure to click *Save* at the bottom of the window to keep your changes.
-
-## Switching Histories
-
-There are three icons in the top right-hand corner of the History panel. The ![](../../images/introduction-to-cpt-galaxy-screenshots/12_rerun_icon.png) will refresh the current history. The ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) shows advanced history options. The two-panel icon allow you to view and switch between different histories. Clicking on this reveals the different histories.
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/21_view_histories.png)
-
-> ### {% icon tip %} Note that…
-> Newly created or edited histories are sometimes not displayed in the all histories page after clicking on the two-panel icon. In this case, it is still possible to find them and switch to them by clicking the ![](../../images/introduction-to-cpt-galaxy-screenshots/20_settings_icon.png) icon and selecting Saved Histories. This will display a list of all the user's saved histories.
-{: .tip}
-
-![](../../images/introduction-to-cpt-galaxy-screenshots/22_all_histories.png)
-
-On the left is the current history, and all histories on the right are other histories. The **switch to** button will set that history as the current history. At the top left-hand corner is a **done** button, which will exit this view when complete. Any analyses run will be saved in that history.
-
-> ### {% icon tip %} Pro tip …
-> In the histories view, it is possible to copy datasets between histories.
-{: .tip}
-
-> ### {% icon comment %} Further Reading
-> To learn more about what a user can do with histories and datasets in Galaxy, please reference [this tutorial.](https://galaxyproject.github.io/training-material/topics/galaxy-ui/tutorials/history/tutorial.html)
-{: .comment}
+There, the name of the dataset can be changed, and this new name will appear on the dataset in the history window. It is recommended to rename key datasets and those that have ambiguous titles, such as when multiple attempts of the same tools are tried with different parameters. Additional notes may also be added here. Make sure to click *Save* at the bottom of the window to keep your changes.
 
 # Workflows
 
 > ### {% icon question %} What is a Workflow?
 >    > ### {% icon solution %} Workflows are…
->    > … merely collections of jobs, where some jobs depend on the outputs of *other* jobs. Workflows solve numerous problems, such as:
->    > * **Running tools immediately.** The next step can begin as soon as data is available; a human does not have to manually start it.
->    > * **Discarding useless data.** In the example below, most likely only the output BLASTp results are desired, and not the storing of intermediate files forever.
+>    > … a collections of jobs, where some jobs depend on the outputs of *other* jobs. Workflows solve numerous problems, such as:
+>    > * **Running tools in series.** The next step can begin as soon as data is available; a human does not have to manually start it.
+>    > * **Discarding useless data.** In the example below, most likely only the output BLASTp results are desired, and not the numerous intermediate files.
 >    > * **Simplification of interfaces.** Workflows hide the complexity of many Galaxy tools. The users are often less interested in the extraction of features from a GFF3 file, than they are in the translation of those to protein sequences.
+>    > * **Repeatability.** Workflows make it possible to run data in a repeatable manner that allows for consistent reproduction of results and eliminates human error due to incorrectly entering parameters. 
 >    {: .solution}
 {: .question}
 
