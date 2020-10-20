@@ -48,7 +48,7 @@ The {% cite Galaxy-P %} team published a software suite named metaQuantome {% ci
 
 In this tutorial, we will learn specifically about the metaQuantome Taxonomy workflow. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points-8 hour, 18 hour and 33 hour. 
 
-![MetaQuantome-taxonomy-workflow](../../images/mQ-taxonomy-workflow.jpg){: width="100%"}
+![MetaQuantome-taxonomy-workflow](../../images/mQ-taxa-workflow.jpg){: width="100%"}
 
 > ### Agenda
 >
@@ -298,7 +298,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 {: .hands_on}
 
-![T2_taxa](../../images/T2-taxa.png){: width="85%"}
+![T2_taxa](../../images/T2_taxa.png){: width="85%"}
 
 > ### {% icon question %} Questions
 >
@@ -327,7 +327,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 > 2. Execute.
 {: .hands_on}
 
-![T7_taxa](../../images/T7-taxa.png){: width="85%"}
+![T7_taxa](../../images/T7_taxa.png){: width="85%"}
 
 
 
@@ -344,7 +344,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 > 2. Execute.
 {: .hands_on}
 
-![T4_taxa](../../images/T4-taxa.png){: width="85%"}
+![T4_taxa](../../images/T4_taxa.png){: width="85%"}
 
 ## *metaQuantome: visualize* for Volcano Plots
 
