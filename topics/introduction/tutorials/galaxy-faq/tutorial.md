@@ -44,6 +44,10 @@ tutorial_name: galaxy-faq
 > {: .solution}
 {: .question}
 
+> ### {% icon question %} Functional workflow failed at FASTA translate and TMHMM steps, or at steps involving GFF3 as input files.
+>    > ### {% icon solution %} Solution
+>    > The common cause for this problem is that the user picked the incorrect FASTA file or the GFF3 file as the input for the workflow.  The newly updated functional workflow (version v2020.07 and up) takes the "Annotation and Sequence" file (the GFF3 annotation combined with the DNA FASTA file) directly retrieved from Apollo as the input file. The workflow has a built-in step to split the combined file into two separate files, "GFF3 annotation from Apollo" and "FASTA sequence from Apollo", for downstream analysis steps.  If your functional workflow does not start with the "Annotation and Sequence" file directly retrieved from Apollo, or you are re-running certain step and you manually select the wrong GFF3 (or FASTA) file as input, your analysis will fail.  
+
 > ### {% icon question %} Converting GFF3 of a genome with frameshifted genes into Genbank format files.
 >    > ### {% icon solution %} Solution
 >    > This usually fails when the genes (particularly the tape measure chaperones) in Apollo were not annotated with the correct attributes [put in link to frameshift tutorial]. It can be corrected by adding the attribute tag 'frameshift' and value 'a' to both the genes, then retrieving the data again and re-running the GFF33 to Genbank tool. The error will appear like this in the Galaxy history:
@@ -100,7 +104,7 @@ tutorial_name: galaxy-faq
 {: .question}
 > ### {% icon question %} Why won't my workflow run?
 >    > ### {% icon solution %} Solution
->    > Sometimes when a worflow will not run, it is because tools in the Workflow may have new versions. Workflow must be opened and saved. If the tool has had new parameters added, those must be manually set (even if they have a preset default value) the first time it is viewed in the workflow edit view. Alternatively, for published workflows, they can be re-imported.
+>    > Sometimes when a worflow will not run, it is because tools in the Workflow may have new versions. **It is always a good practice to check "Workflows" section under "Shared Data" tab on the main page to get the newest version number and the last updated date info for public workflow, and re-import the newest workflow for your analysis**. If you run a workflow with tools that have had new parameters added, those must be manually set (even if they have a preset default value) the first time it is viewed in the workflow edit view. The workflow needs to be re-saved. Alternatively, for published workflows, they can be re-imported. 
 >    >
 >    > Here are some useful examples of warnings Galaxy will give in this case:
 >    >
