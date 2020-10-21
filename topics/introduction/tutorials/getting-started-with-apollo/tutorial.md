@@ -110,12 +110,18 @@ As seen above, Apollo presents a two-pane display, surrounded by the Galaxy Tool
 {: .tip}
 
 ### Genome Selector
-In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to the account in use.
+In the Apollo panel on the right, there is a drop-down menu called the Genome Selector, and it will list all organisms available to user account for use.
 
 ![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo-screenshots/21_genome_selector_options.png)
 
+As more organisms are added to Apollo from Galaxy via the JiG tool this list will populate with them.
+
 ### User Created Annotations Track
 The pale yellow track that is visible across the screen below the navigation controls is the *User Created Annotations* track. The called genes and other features exist here, so this is where you will be spending much of your time. This track (and the entire annotator panel) is a linear representation of the organism reference sequence, starting with the first base on the left and the last base on the right. Since gene features will be added to this track and edited, this track will *always* be visible. When you export data from Apollo back into Galaxy, only the features and data in this track will be retrieved. All changes you make to this track are automatically and immediately saved in Apollo.
+
+> ### {% icon alert %} Saving errors
+> * **Note:** occasionally, Apollo will fail to automatically save annotations. It is important to double-check...
+{: .alert}
 
 ### Track Selector
 On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
