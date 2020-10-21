@@ -57,7 +57,7 @@ Name the history according to the analysis that has been or will be performed th
 > ### {% icon hands_on %} Tagging in Saved Histories%
 > Clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
 >
-> ![](../../images/cpt-galaxy-best-practices-screenshots/user_history.png)
+> ![](../../images/cpt-galaxy-best-practices-screenshots/user_history.png =200x600)
 >
 > All of the user’s histories appear as condensed lines in the main Galaxy interface.
 >
