@@ -135,14 +135,8 @@ Zooming in below, fine comparison of the evidence tracks is possible. Both the *
 {: .tip}
 
 > ### {% icon tip %} Enhance Viewing Experience
-> The menu bar at the top has useful options, some that aren’t available in “standard” JBrowse. **View** offers helpful adjustments to observing the genome within Apollo
+> The menu bar at the top has useful options, some of which aren’t available in “standard” JBrowse. **View** offers helpful adjustments to observing the genome within Apollo
 > * “Color by CDS frame” is a popular option during annotation. It colors each coding sequence based on which reading frame it is in.
 > * “Show Track label” facilitates annotation by removing the track’s labeling at the far left of the embedded JBrowse window. This allows for annotation of small features near the end of the genome, which would otherwise be hidden by the track label (e.g. “User-created annotations).
 > * Once you have created an organism in Apollo, you do not need to go through Galaxy every time you want to view it. Navigate to the main Galaxy page by clicking *Analyze Data* on the top menu par and then click the *Apollo* logo in the top right. This will take you to an all-Apollo window outside of Galaxy. 
 {: .tip}
-
-{{box op="start" cssClass="boxed warningBox"}}
-**Warning!**
-
-This is an important warning.
-{{box op="end"}}
