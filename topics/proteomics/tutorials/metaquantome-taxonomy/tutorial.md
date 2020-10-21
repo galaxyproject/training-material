@@ -45,7 +45,9 @@ follow_up_training:
 {:.no_toc}
 
 metaQuantome {% cite Easterly2019 %} software suite was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
+
 In this tutorial, we will learn specifically about the metaQuantome Taxonomy workflow. In particular, we will learn about how peptide-level quantitation and associated taxonomic information can be used to generate bar plots (for taxonomic composition), volcano plots (to detect differentially expressed taxa) and heatmap cluster analysis. 
+
 To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas (% cite Kunath2018 %)). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
 ![MetaQuantome-taxonomy-workflow](../../images/mQ-taxa-workflow.jpg){: width="100%"}
