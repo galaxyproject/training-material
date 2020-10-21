@@ -586,6 +586,14 @@
         
     
         
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
     
         
     
@@ -688,7 +696,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Sep 7, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 21, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -783,57 +791,84 @@
 
   <ol>
     <li>
-      <p>Open <a href="https://www.ncbi.nlm.nih.gov/genome/genomes/167">the NCBI list of of <em>E. coli</em> genomes</a> in a new window</p>
-    </li>
-    <li>
-      <p>Click on “Filters” at the top right:</p>
+      <p>Import the genome list from Zenodo:</p>
 
-      <p><img src="../../images/ecoli-list-filter.png" alt="Filter menu button" /></p>
-    </li>
-    <li>
-      <p>Select only the “Complete” genomes with the filter at the top</p>
-
-      <p><img src="../../images/ecoli-list.png" alt="Filter settings, only &quot;complete&quot; is checked" /></p>
-    </li>
-    <li>
-      <p>At the top right, click “Download”</p>
-    </li>
-    <li>
-      <p>Upload this table to <span class="notranslate">Galaxy</span></p>
-    </li>
-    <li>
-      <p>As this file is a CSV file, we need to convert it to TSV before <span class="notranslate">Galaxy</span> can use it.</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3382053/files/genomes_proks.txt
+</code></pre></div>      </div>
 
       <blockquote class="tip">
+        <h3 id="question-getting-the-data-directly-from-ncbi"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Getting the data directly from NCBI</h3>
 
-        <h3 id="tip-tip-converting-the-file-format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
-        <ul>
-          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>
-          <li>Select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>
-          <li>Click the <strong>Convert datatype</strong> button</li>
-        </ul>
+        <p>For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
+Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
+to be altered (e.g. column numbers) when using data directly from NCBI.</p>
+
+        <p>Below we describe how you could obtain this data from NCBI.</p>
+
+        <ol>
+          <li>
+            <p>Open <a href="https://www.ncbi.nlm.nih.gov/genome/genomes/167">the NCBI list of of <em>E. coli</em> genomes</a> in a new window</p>
+          </li>
+          <li>
+            <p>Click on “Filters” at the top right:</p>
+
+            <p><img src="../../images/ecoli-list-filter.png" alt="Filter menu button" /></p>
+          </li>
+          <li>
+            <p>Select only the “Complete” genomes with the filter at the top</p>
+
+            <p><img src="../../images/ecoli-list.png" alt="Filter settings, only &quot;complete&quot; is checked" /></p>
+          </li>
+          <li>
+            <p>At the top right, click “Download”</p>
+          </li>
+          <li>
+            <p>Upload this table to <span class="notranslate">Galaxy</span></p>
+          </li>
+          <li>
+            <p>As this file is a CSV file, we need to convert it to TSV before <span class="notranslate">Galaxy</span> can use it.</p>
+
+            <blockquote>
+
+              <h3 id="tip-tip-converting-the-file-format"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
+              <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   * Click on the &lt;i class="fas fa-pencil-alt" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;<span class="notranslate">galaxy</span>-pencil&lt;/span&gt; **pencil icon** for the dataset to edit its attributes
+   * In the central panel, click on the &lt;i class="fas fa-cog" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;<span class="notranslate">galaxy</span>-gear&lt;/span&gt; **Convert** tab on the top
+   * Select `Convert CSV to Tabular`
+   * Click the **Convert datatype** button
+</code></pre></div>              </div>
+            </blockquote>
+          </li>
+        </ol>
       </blockquote>
-    </li>
-    <li>
-      <p>Rename this file to <code class="language-plaintext highlighter-rouge">genomes.tsv</code></p>
 
       <blockquote class="tip">
 
-        <h3 id="tip-tip-converting-the-file-format-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
-        <ul>
-          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> <strong>Convert</strong> tab on the top</li>
-          <li>Select <code class="language-plaintext highlighter-rouge">Convert CSV to Tabular</code></li>
-          <li>Click the <strong>Convert datatype</strong> button</li>
-        </ul>
+        <ol>
+          <li>
+            <p>Rename this file to <code class="language-plaintext highlighter-rouge">genomes.tsv</code></p>
+
+            <blockquote>
+
+              <h3 id="tip-tip-converting-the-file-format-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Converting the file format</h3>
+              <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>   * Click on the &lt;i class="fas fa-pencil-alt" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;<span class="notranslate">galaxy</span>-pencil&lt;/span&gt; **pencil icon** for the dataset to edit its attributes
+   * In the central panel, click on the &lt;i class="fas fa-cog" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="visually-hidden"&gt;<span class="notranslate">galaxy</span>-gear&lt;/span&gt; **Convert** tab on the top
+   * Select `Convert CSV to Tabular`
+   * Click the **Convert datatype** button
+</code></pre></div>              </div>
+            </blockquote>
+          </li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="question">
+
       </blockquote>
     </li>
     <li>
       <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>    columns from a table:</p>
 
       <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c6,c15</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
         <li><em>“From”</em>: the tabular version of the file.</li>
       </ul>
     </li>
@@ -1338,15 +1373,15 @@ Ecoli_C BA000007.2 63.06 157 33 3 1874604 1874735 5991 6147 5.8e-26 115.3
       <p><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  columns from a table:</p>
 
       <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c10,c15</code></li>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c20</code></li>
         <li>
           <p><em>“From”</em>: the output of the <strong>select lines</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
 
           <p>It should look like:</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>chromosome 1:NZ_LT906474.1/LT906474.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_900186905.1_49923_G01
-chromosome:NZ_CP020543.1/CP020543.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/079/225/GCA_002079225.1_ASM207922v1
-chromosome:NZ_CP024090.1/CP024090.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/761/835/GCA_002761835.1_ASM276183v1
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>GCA_002079225.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/079/225/GCA_002079225.1_ASM207922v1
+GCA_002761835.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/002/761/835/GCA_002761835.1_ASM276183v1
+GCA_900186905.1	ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA/900/186/905/GCA_900186905.1_49923_G01
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -3656,8 +3691,8 @@ Finally we can cut necessary columns from these datasets. These columns are 8 (s
     author = "Anton Nekrutenko and Delphine Lariviere and Helena Rasche",
     title = "Making sense of a newly assembled genome (Galaxy Training Materials)",
     year = "2020",
-    month = "09",
-    day = "07"
+    month = "10",
+    day = "21"
     url = "\url{/training-material/topics/assembly/tutorials/ecoli_comparison/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -3738,4 +3773,17 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
     }});
     </script>
     
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
 </html>
