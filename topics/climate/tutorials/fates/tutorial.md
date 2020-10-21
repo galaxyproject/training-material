@@ -14,8 +14,9 @@ requirements:
     link: "https://swcarpentry.github.io/python-novice-inflammation/"
 
 questions:
+- Why and when using Galaxy Climate JupyterLab for CLM-FATES?
 - How to start Galaxy Climate JupyterLab in Galaxy?
-- How to upload input data for running CLM-FATES for Nordic sites?
+- How to upload input data for running CLM-FATES?
 - How to create CLM-FATES case in Galaxy Climate JupyterLab?
 - How to customize your runs?
 - How to analyze your model outputs?
@@ -23,17 +24,17 @@ questions:
 - How to save your model results into a Galaxy history?
 - How to share your results?
 objectives:
-- Learn to use Galaxy Climate JupyterLab for setting up CLM-FATES
+- Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.
+- Setting up CLM-FATES case with Galaxy Climate JupyterLab.
 - Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.
-- Analyzing CLM-FATES output and comparing it with observations.
-- Sharing results from the simulations along with corresponding in-situ data.
-- Composing, executing and publishing the corresponding Galaxy workflow. 
+- Analyzing CLM-FATES results.
+- Sharing CLM-FATES simulations.
+- Composing, executing and publishing the corresponding Jupyter notebook.
 time_estimation: 12H
 key_points:
 - Galaxy Climate JupyterLab
 - CLM-FATES
 - Model analysis
-- Comparison with observations.
 contributors:
 - annefou
 
@@ -133,12 +134,13 @@ We will be using a JupyterLab Terminal for most of this tutorial.
 >
 > Import the FATES input dataset from your history:
 > ```
-> get -i fates_emerald_inputdata.tar -t name
+> get -i inputdata_version2.0.0_ALP1.tar -t name
 > ```
 >
 > Then untar this file:
 > ```
-> tar xf /import/fates_emerald_inputdata.tar --directory $HOME/
+> mkdir $HOME/inputdata
+> tar xf /import/inputdata_version2.0.0_ALP1.tar --directory $HOME/inputdata
 > ```
 {: .hands_on}
 
@@ -221,6 +223,8 @@ xr.set_options(display_style="html")
 %matplotlib inline
 
 dset = xr.open_dataset("x.nc")
+```
+
 ## Comparisons with observations
 
 > ### {% icon hands_on %} Hands-on: Import observations into your JupyterLab session
