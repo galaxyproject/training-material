@@ -124,13 +124,12 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 ### Assists the User in Finding Their Data
 ------
 
-> * It is impossible to remember everything that you as a user have ever done in Galaxy. Allowing Galaxy to store that record with some additional input from the user makes recovery of old data _much easier_. Additionally, it makes the work reviewable and reproducible by later other users who may browse and try to publish data from past histories.
+> It is impossible to remember everything that you as a user have ever done in Galaxy. Allowing Galaxy to store that record with some additional input from the user makes recovery of old data _much easier_. Additionally, it makes the work reviewable and reproducible by later other users who may browse and try to publish data from past histories.
 
 > * In the saved histories view, the user can view/sort through histories based on the tags the histories have been given.
-
 > * In the view all histories view, the user can **search** the annotation notes that have been put onto both histories **and** datasets.
 
-### Assists Collaborators to Use This Data
+### Assist Collaborators Using Your Data
 ------
 
 > * When the creator has moved on to a different lab, lab members will be able to continue using this data for research and publication. **Clear documentation is essential for future publication**.
