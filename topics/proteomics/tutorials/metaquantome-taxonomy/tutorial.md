@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: metaQuantome-taxonomy
+title: "metaQuantome 3: Taxonomy"
 zenodo_link: "https://doi.org/10.5281/zenodo.4110725"
 questions:
  - "How do I look at differentially expressed taxa ?"
