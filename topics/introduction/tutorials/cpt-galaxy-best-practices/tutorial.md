@@ -55,17 +55,18 @@ Name the history according to the analysis that has been or will be performed th
 ![](../../images/cpt-galaxy-best-practices-screenshots/7_tagged_annotated_p22.png)
 
 > ### {% icon hands_on %} Tagging in Saved Histories
-> Clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
-<p></p>
-> <img src="../../images/cpt-galaxy-best-practices-screenshots/user_history.png" width="200" height="250" /> 
-<p></p>
-> All of the user’s histories appear as condensed lines in the main Galaxy interface.
-<p></p>
-> ![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
-<p></p>
->From here, tags can be added by simply clicking on the tab space in the "tags" column.
-<p></p>
-> Use the search bar to search by history name or by tag name.
+>    > ### {% icon solution %} Clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
+>    > <p></p>
+>    > <img src="../../images/cpt-galaxy-best-practices-screenshots/user_history.png" width="200" height="250" /> 
+>    > <p></p>
+>    > All of the user’s histories appear as condensed lines in the main Galaxy interface.
+>    > <p></p>
+>    > ![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
+>    > <p></p>
+>    > From here, tags can be added by simply clicking on the tab space in the "tags" column.
+>    > <p></p>
+>    > Use the search bar to search by history name or by tag name.
+>    {: .solution}
 {: .hands_on}
 
 > ### {% icon comment %} Edit in  the *View all Histories* View
