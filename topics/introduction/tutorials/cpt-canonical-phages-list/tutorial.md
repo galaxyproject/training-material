@@ -4,7 +4,7 @@ topic_name: introduction
 tutorial_name: cpt-canonical-phages-list
 ---
 
-# CPT Canonical Phage Genomes List
+# Canonical Phage List
 
 A general reference on virus groups is available by searching at [ViralZone](https://viralzone.expasy.org). 
 Additional information on currently accepted phage taxonomy is put forth by the ICTV [International Committee on the Taxonomy of Viruses](https://talk.ictvonline.org/taxonomy/) and also searchable in the [NCBI Taxonomy Browser](https://www.ncbi.nlm.nih.gov/taxonomy/). While the taxonimical classification system used by these groups is not completely accurate, it can provide a useful way to find the closest related type phage for comparison purposes.
