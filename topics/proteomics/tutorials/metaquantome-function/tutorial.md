@@ -28,15 +28,20 @@ follow_up_training:
         tutorials:
             - metaproteomics
             
-        type: "internal"
-        topic_name: proteomics
-        tutorials:
-            - metaquantome-data-creation
         
         type: "internal"
         topic_name: proteomics
         tutorials:
             - metaquantome-taxonomy
+            
+requirements:
+
+   -
+   
+        type: "internal"
+        topic_name: proteomics
+        tutorials:
+           - metaquantome-data-creation:
             
 
 
