@@ -17,11 +17,11 @@ tutorial_name: cpt-galaxy-best-practices
 
 # Rationale -  Reproducible Records
 
-An important tenet of science is to maintain reproducible and traceable records using a standard. This philosophy is applicable to both lab notebooks *and* Galaxy histories. It is tempting to think that, because of the presence of a ‘history’ in Galaxy, the program has adequately maintained the user’s records and no further steps are needed to document research activities/analyses performed within the Galaxy suite. This is **incorrect.** Here, strongly recommended practices are shown to make data in Galaxy more accessible to both the current user and futures users.
+An important tenet of science is to maintain reproducible and traceable records using a standard. This philosophy is applicable to both lab notebooks *and* Galaxy histories. It is tempting to think that, because of the presence of a ‘history’ in Galaxy, the program adequately maintains the user’s records and no further steps are needed to document research activities/analyses performed within the Galaxy suite. This is **incorrect.** Here, best practices are shown to make data in Galaxy more accessible and reproducible to both the current user and futures users.
 
 # Minimum Essential Practices
 
-Galaxy enables the editing of *both* histories and individual datasets, as well as the ability to add tags and/or annotation notes.
+Galaxy enables the editing of *both* histories and individual datasets, as well as the ability to add tags and annotation notes.
 
 ![](../../images/cpt-galaxy-best-practices-screenshots/1_history_dataset_overview.png)
 
@@ -50,23 +50,22 @@ and annotation notes ![](../../images/cpt-galaxy-best-practices-screenshots/5_hi
 > * **Annotation**: Instead of using keywords, provide a summary of what was performed/completed in that history. Include numbers for key datasets someone else might look for when accessing this history (e.g. final node FASTA extraction, BLASTdb made, etc.).
 {: .tip}
 
-Name the history according to the analysis that has been or will be performed there. Add tags and an annotation summary when the history is created. Update those fields as needed. After initially filling them in, they can be collapsed out of view of maximize space in the history panel.
+Name the history according to the analysis that has been or will be performed there. Add tags and an annotation summary when the history is created. Update those fields as needed. After filling them in, they can be collapsed to maximize space in the history panel.
 
 ![](../../images/cpt-galaxy-best-practices-screenshots/7_tagged_annotated_p22.png)
 
-> ### {% icon hands_on %} Tagging in Saved Histories
-> Clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/10_settings_icon.png) icon opens a drop-down menu containing History Actions. Under *History Lists* is a **Saved Histories** option.
+> ### {% icon hands_on %} Tagging in Saved Histories%
+> Clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
 >
-> ![](../../images/cpt-galaxy-best-practices-screenshots/12_access_saved_histories.png)
+> ![](../../images/cpt-galaxy-best-practices-screenshots/user_history.png)
 >
-> All of the user’s histories will appear as condensed lines in a list in the main Galaxy interface.
+> All of the user’s histories appear as condensed lines in the main Galaxy interface.
 >
-> ![](../../images/cpt-galaxy-best-practices-screenshots/13_saved_histories.png)
+> ![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
 >
-> In the case of a history with existing tags, clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/14_add_tags_icon.png) (circled in red above) will allow the addition of new tags and removal of old tags. For histories without tags, clicking on the *0 Tags* will allow for addition of tags.
+>From here, tags can be added by simply clicking on the tab space in the "tags" column.
 >
-> ![](../../images/cpt-galaxy-best-practices-screenshots/15_new_tags_saved_histories.png)
-> Histories displayed in this view can be searched or sorted using tags alone. 
+> Use the search bar to search by history name or by tag name.
 {: .hands_on}
 
 > ### {% icon comment %} Edit in  the *View all Histories* View
