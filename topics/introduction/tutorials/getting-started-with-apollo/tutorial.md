@@ -140,6 +140,7 @@ Zooming in below, fine comparison of the evidence tracks is possible. Both the *
 > * “Show Track label” facilitates annotation by removing the track’s labeling at the far left of the embedded JBrowse window. This allows for annotation of small features near the end of the genome, which would otherwise be hidden by the track label (e.g. “User-created annotations).
 > * Once you have created an organism in Apollo, you do not need to go through Galaxy every time you want to view it. Navigate to the main Galaxy page by clicking *Analyze Data* on the top menu par and then click the *Apollo* logo in the top right. This will take you to an all-Apollo window outside of Galaxy. 
 {: .tip}
+
 {{box op="start" cssClass="boxed warningBox"}}
 **Warning!**
 
