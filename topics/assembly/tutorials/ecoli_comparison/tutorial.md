@@ -71,10 +71,13 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >    https://zenodo.org/record/3382053/files/genomes_proks.txt
 >    ```
 >
->    > ### {% icon question %} Why not use data directly from NCBI?
->    > Because they change their format too often, resulting in us having to re-update this tutorial constantly.
+>    > ### {% icon question %} Getting the data directly from NCBI
 >    >
->    > If you want to try it with their data, you can follow these instructions, at the risk that some steps will need to be modified to check that you are getting the correct columns.
+>    > For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
+>    > Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
+>    > to be altered (e.g. column numbers) when using data directly from NCBI.
+>    >
+>    > Below we describe how you could obtain this data from NCBI.
 >    >
 >    > 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
 >    >
