@@ -82,9 +82,9 @@ To modify the content of the repository, you need a copy of it on your computer.
 > ### {% icon hands_on %} Hands-on: Clone the GitHub repository
 >
 > 1. Get the URL of your fork. You can find this on the main page of your fork under the green button:
->    1. Click on **Clone or download** (right)
+>    1. Click on **Code** (right)
 >
->       ![Get fork URL](../../images/PR_github_url.png)
+>       ![Get fork URL](../../images/clone_code_button.png)
 >
 >    2. Copy the URL
 >
