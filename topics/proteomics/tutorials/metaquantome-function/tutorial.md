@@ -41,7 +41,7 @@ requirements:
         type: "internal"
         topic_name: proteomics
         tutorials:
-           - metaquantome-data-creation:
+           - metaquantome-data-creation
             
 
 
