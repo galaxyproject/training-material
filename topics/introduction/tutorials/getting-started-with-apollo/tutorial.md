@@ -114,7 +114,7 @@ In the Apollo panel on the right, there is a drop-down menu called the Genome Se
 
 ![](../../images/getting-started-with-apollo-screenshots/20_genome_selector.png)![](../../images/getting-started-with-apollo-screenshots/21_genome_selector_options.png)
 
-As more organisms are added to Apollo from Galaxy via the JiG tool this list will populate with them.
+As more organisms are added to Apollo from Galaxy via the JiG tool, this list will populate with them.
 
 ### User Created Annotations Track
 The pale yellow track that is visible across the screen below the navigation controls is the *User Created Annotations* track. The called genes and other features exist here, so this is where you will be spending much of your time. This track (and the entire annotator panel) is a linear representation of the organism reference sequence, starting with the first base on the left and the last base on the right. Since gene features will be added to this track and edited, this track will *always* be visible. When you export data from Apollo back into Galaxy, only the features and data in this track will be retrieved. All changes you make to this track are automatically and immediately saved in Apollo.
@@ -122,7 +122,7 @@ The pale yellow track that is visible across the screen below the navigation con
 ### Track Selector
 On the left side of the embedded JBrowse instance is a checklist-like column titled “Available Tracks”. Here the evidence tracks currently available for the genome being analyzed are listed. Evidence tracks will appear upon the execution of structural and functional workflows, as well as other custom analyses.
 
-The evidence tracks shown below are from a version of the structural workflow: *SixPack*, *Glimmer3* and *MetaGeneAnnotator* are tools that locate the positions of potential protein-coding genes. Selecting these tracks will display predicted genes below the User-Created Annotations track. These tools were run in Galaxy and their outputs were exported to Apollo via JiG. As shown, Apollo alows the user to directly view where on the genome features are predicted, and allows a stacked comparison of the outputs of different tools.  
+The evidence tracks shown below are from a version of the structural workflow. *SixPack*, *Glimmer3* and *MetaGeneAnnotator* are tools that locate the positions of potential protein-coding genes. Selecting these tracks will display predicted genes below the User-Created Annotations track. These tools were run in Galaxy and their outputs were exported to Apollo via JiG. Apollo allows the user to directly view where on the genome features are predicted and shows a stacked comparison of the outputs of different tools.
 
 ![](../../images/getting-started-with-apollo-screenshots/22_zoomed_out_gene_tracks.png)
 
@@ -140,4 +140,8 @@ Zooming in below, fine comparison of the evidence tracks is possible. Both the *
 > * “Show Track label” facilitates annotation by removing the track’s labeling at the far left of the embedded JBrowse window. This allows for annotation of small features near the end of the genome, which would otherwise be hidden by the track label (e.g. “User-created annotations).
 > * Once you have created an organism in Apollo, you do not need to go through Galaxy every time you want to view it. Navigate to the main Galaxy page by clicking *Analyze Data* on the top menu par and then click the *Apollo* logo in the top right. This will take you to an all-Apollo window outside of Galaxy. 
 {: .tip}
+{{box op="start" cssClass="boxed warningBox"}}
+**Warning!**
 
+This is an important warning.
+{{box op="end"}}
