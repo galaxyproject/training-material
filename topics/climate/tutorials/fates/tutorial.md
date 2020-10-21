@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
 requirements:
   -
     type: "internal"
@@ -57,15 +57,15 @@ The practical aims at familiarzing you with running CLM-FATES within Galaxy Clim
 
 > ### {% icon comment %} Background
 >
-> Background about ESMs, CTSM and FATES. We can have slides too (TO DO separately).
+> FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
+> FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
+> we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
+> of the []Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
+> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in:
+> Fisher, R. A., Muszala, S., Verteinstein, M., Lawrence, P., Xu, C., McDowell, N. G., Knox, R. G., Koven, C., Holm, J., Rogers, B. M., Spessa, A., Lawrence, D., and Bonan, G.: 
+> Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED), Geosci. Model Dev., 8, 3593-3619, [https://doi.org/10.5194/gmd-8-3593-2015](https://doi.org/10.5194/gmd-8-3593-2015), 2015.
 >
-> ##### Earth System Modelling (ESM)
->
-> ##### The Community Terrestrial Systems Model
->
-> ##### The Community Land Model
->
-> ##### Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
+> and this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
 >
 {:  .comment}
 
@@ -75,11 +75,10 @@ The practical aims at familiarzing you with running CLM-FATES within Galaxy Clim
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
 >    {% include snippets/create_new_history.md %}
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.4108341) or from the shared data library
 >
 >    ```
->     TODO: input data for running FATES (so it can be run anywhere if not in data library).
->    https://zenodo.org/record/
+>    https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -91,7 +90,8 @@ The practical aims at familiarzing you with running CLM-FATES within Galaxy Clim
 >
 > 4. Rename Datasets
 >
->    As "https://zenodo.org/record/?????/files/fates_emerald_inputdata.tar" is not a beautiful name and can give errors for some tools, it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/?????/files/` to obtain `fates_emerald_inputdata.tar`, respectively.
+>    As "https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar" is not a beautiful name and can give errors for some tools,
+>    it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/4108341/files/` to obtain `inputdata_version2.0.0_ALP1.tar`, respectively.
 >
 >    {% include snippets/rename_dataset.md %}
 >
