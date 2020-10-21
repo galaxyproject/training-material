@@ -15,17 +15,17 @@ tutorial_name: cpt-galaxy-best-practices
 >
 {: .agenda}
 
-# Rationale -  Reproducible Records
+## Rationale -  Reproducible Records
 
 An important tenet of science is to maintain reproducible and traceable records using a standard. This philosophy is applicable to both lab notebooks *and* Galaxy histories. It is tempting to think that, because of the presence of a ‘history’ in Galaxy, the program adequately maintains the user’s records and no further steps are needed to document research activities/analyses performed within the Galaxy suite. This is **incorrect.** Here, best practices are shown to make data in Galaxy more accessible and reproducible to both the current user and futures users.
 
-# Minimum Essential Practices
+## Minimum Essential Practices
 
 Galaxy enables the editing of *both* histories and individual datasets, as well as the ability to add tags and annotation notes.
 
 ![](../../images/cpt-galaxy-best-practices-screenshots/1_history_dataset_overview.png)
 
-## Histories
+# Histories
 ------
 
 ### History names
@@ -56,32 +56,32 @@ Name the history according to the analysis that has been or will be performed th
 
 > ### {% icon hands_on %} Tagging in Saved Histories
 > Clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
->
-> ![](../../images/cpt-galaxy-best-practices-screenshots/user_history.png =150x350)
->
+<p></p>
+> <img src="../../images/cpt-galaxy-best-practices-screenshots/user_history.png" width="200" height="250" /> 
+<p></p>
 > All of the user’s histories appear as condensed lines in the main Galaxy interface.
->
+<p></p>
 > ![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
->
+<p></p>
 >From here, tags can be added by simply clicking on the tab space in the "tags" column.
->
+<p></p>
 > Use the search bar to search by history name or by tag name.
 {: .hands_on}
 
 > ### {% icon comment %} Edit in  the *View all Histories* View
-> Editing the name of a history and adding tags/annotations can be done in the *View all histories* view. To access this, select the ![](../../images/cpt-galaxy-best-practices-screenshots/8_multi_histories_icon.png) icon in the top right-hand corner of the History panel.
->
+> Editing the name of a history and adding tags/annotations can also be done in the *View all histories* view. To access this, select the ![](../../images/cpt-galaxy-best-practices-screenshots/8_multi_histories_icon.png) icon in the top right-hand corner of the History panel.
+>      
 > ![](../../images/cpt-galaxy-best-practices-screenshots/9_multi_histories_view.png)
->
+>    
 > Clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/4_history_tags_icon.png) and ![](../../images/cpt-galaxy-best-practices-screenshots/5_history_annotation_note_icon.png) icons will open the same sections seen in the History panel. Tags and annotation notes can be added here just as they were added in the History panel.
->
+>    
 > ![](../../images/cpt-galaxy-best-practices-screenshots/11_edit_in_multi_histories.png)
 {: .comment}
 
-## Datasets
+# Datasets
 ------
 
-Datasets populate Galaxy histories, and more datasets are added as workflows/tools/analyses are run within each history. To help organize the history and make it interpretable later, it can be a very helpful practice to re-name datasets after they are generated. Some of the assigned names are descriptive and do not need to be changed. Additionally, Galaxy does not indicate which dataset represents the first output of an executed workflow. It is helpful to rename the first dataset output from a workflow to reflect it as such. 
+Datasets populate Galaxy histories, and more datasets are added as workflows/tools/analyses are run within each history. To help organize the history and make it interpretable later, it can be a very helpful practice to re-naming datasets after they are generated. Some of the assigned names are descriptive and do not need to be changed. Also, note that Galaxy does _not_ indicate which dataset represents the first output of an executed workflow. It is helpful to rename the first dataset output from a workflow to reflect it as such. 
 
 For any dataset, click on the {% icon hands_on %} icon next to the name of the dataset (circled below in red).
 
@@ -119,7 +119,7 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 
 # How Implementing These Practices is Helpful
 
-## Assists the User in Finding Their Data
+### Assists the User in Finding Their Data
 ------
 
 > * It is impossible to remember everything that the user has ever done in Galaxy; there is *nothing wrong* with this. Allowing Galaxy to store that record with some input from the user makes the life of the user easier. Additionally, it makes the work reviewable and reproducible by later users who may browse and try to publish data from past histories.
@@ -128,7 +128,7 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 
 > * In the view all histories view, the user can **search** the annotation notes that have been put onto both histories **and** datasets.
 
-## Assists Collaborators to Use This Data
+### Assists Collaborators to Use This Data
 ------
 
 > * When the creator has moved on to a different lab, lab members will be able to continue using this data for research and publication. **Clear documentation is essential for future publication**.
@@ -151,4 +151,3 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 > When the desired user has been selected, click **Submit**. The publishing/sharing page will appear once more, but with the addition of a list of users that the history has been shared with. Clicking the down-arrow on that list next to the shared user’s e-mail will allow for the un-sharing of that history with that user.
 >
 {: .hands_on}
-
