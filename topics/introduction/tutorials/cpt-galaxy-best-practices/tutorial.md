@@ -55,16 +55,17 @@ Name the history according to the analysis that has been or will be performed th
 ![](../../images/cpt-galaxy-best-practices-screenshots/7_tagged_annotated_p22.png)
 
 > ### {% icon hands_on %} Tagging in Saved Histories
->    > ### {% icon solution %} Clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
->    > <p></p>
+>    > ### {% icon solution %} Click here to learn more.
+>    > By clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
+>    > 
 >    > <img src="../../images/cpt-galaxy-best-practices-screenshots/user_history.png" width="200" height="250" /> 
->    > <p></p>
+>    > 
 >    > All of the user’s histories appear as condensed lines in the main Galaxy interface.
->    > <p></p>
+>    > 
 >    > ![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
->    > <p></p>
+>    > 
 >    > From here, tags can be added by simply clicking on the tab space in the "tags" column.
->    > <p></p>
+>    > 
 >    > Use the search bar to search by history name or by tag name.
 >    {: .solution}
 {: .hands_on}
@@ -110,20 +111,20 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 
 ![](../../images/cpt-galaxy-best-practices-screenshots/21_add_dataset_tags.png)
 
-> ### {% icon tip %} Histories are Free
+> ### {% icon comment %} Histories are Free
 > A collection of well-annotated/tagged histories can be considered akin to entries in a lab notebook for different experiments. The organization and digital tracking afforded by the Galaxy interface gives the illusion of being a lab notebook, but it requires the systematic addition of this type of metadata to *truly* function as a useful digital record. There is no consequence for using more than one history for analyses of the same phage. On the contrary, it helps with the organization of results if a new history is created for each new analysis. Clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/10_settings_icon.png) opens  drop-down menu containing History Actions. Under *Current History* is a *Create New* option. Selecting this will immediately create the new history and have that new history set as the current history. A well-documted, long list of histories is much more useful than a short list of histories that no one can interpret.
-{: .tip}
+{: .comment}
 
 > ### {% icon tip %} Further Documentation of History
 > A text or pdf file containing any additional useful information and or documentation on the project can also be uploaded as a dataset. This further enables the user to create a useful digital record and well documented history.
-{:tip}
+{: .tip}
 
 # How Implementing These Practices is Helpful
 
 ### Assists the User in Finding Their Data
 ------
 
-> * It is impossible to remember everything that the user has ever done in Galaxy; there is *nothing wrong* with this. Allowing Galaxy to store that record with some input from the user makes the life of the user easier. Additionally, it makes the work reviewable and reproducible by later users who may browse and try to publish data from past histories.
+> * It is impossible to remember everything that you as a user have ever done in Galaxy. Allowing Galaxy to store that record with some additional input from the user makes recovery of old data _much easier_. Additionally, it makes the work reviewable and reproducible by later other users who may browse and try to publish data from past histories.
 
 > * In the saved histories view, the user can view/sort through histories based on the tags the histories have been given.
 
@@ -133,22 +134,19 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 ------
 
 > * When the creator has moved on to a different lab, lab members will be able to continue using this data for research and publication. **Clear documentation is essential for future publication**.
-
 > * When the history is shared, the user that it has been shared with can interpret the datasets and trace the path taken without the assistance of the creator of that history.
 
-> ### {% icon hands_on %} Sharing a History
-> To share a history, access the Saved Histories list. Find the desired history, click on the down arrow, and select “Share or Publish.”
->
+> ###  Sharing a History
+> To share a history, access the Histories Option list while on the history you desire to share. Select “Share or Publish.”
+
 > ![](../../images/cpt-galaxy-best-practices-screenshots/23_select_share_history.png)
->
+
 > A new screen will appear in the main Galaxy interface with options for publishing and sharing with  user. Select the *Share with a user* button (outlined in red).
->
+
 > ![](../../images/cpt-galaxy-best-practices-screenshots/24_share_with_user.png)
->
+
 > Another new screen will appear in the main interface, with a space (outlined in red) for the user to input Galaxy user e-mails to share the history with. Typing in letters will act like a search of user e-mails, yielding a list of options in a drop-down menu below. Search for the desired user.
->
+
 > ![](../../images/cpt-galaxy-best-practices-screenshots/25_share_history.png)
->
+
 > When the desired user has been selected, click **Submit**. The publishing/sharing page will appear once more, but with the addition of a list of users that the history has been shared with. Clicking the down-arrow on that list next to the shared user’s e-mail will allow for the un-sharing of that history with that user.
->
-{: .hands_on}
