@@ -139,8 +139,6 @@ On the contrary, tags can *ONLY* be added to a dataset be selecting the ![](../.
 > ###  Sharing a History
 > To share a history, access the Histories Option list while on the history you desire to share. Select “Share or Publish.”
 
-> ![](../../images/cpt-galaxy-best-practices-screenshots/23_select_share_history.png)
-
 > A new screen will appear in the main Galaxy interface with options for publishing and sharing with  user. Select the *Share with a user* button (outlined in red).
 
 > ![](../../images/cpt-galaxy-best-practices-screenshots/24_share_with_user.png)
