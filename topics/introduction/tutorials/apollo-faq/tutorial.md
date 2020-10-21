@@ -13,7 +13,7 @@ tutorial_name: apollo-faq
 > {: .solution}
 {: .question}
 
-> ### {% icon question %} I can not delete a gene
+> ### {% icon question %} I cannot delete a gene
 >    > ### {% icon solution %} Solution
 >    > * You need to *double click* on the gene to select the gene and the Shine-Dalgarno feature, and then right click to select delete.
 > {: .solution}
@@ -22,6 +22,12 @@ tutorial_name: apollo-faq
 > ### {% icon question %} I cannot drag the boundaries of a gene that has a Shine-Dalgarno sequence.
 >    > ### {% icon solution %} Solution
 >    > * Currently the bundaries for genes without Shine-Dalgarno sequences can be modified by directly dragging, but not for genes with Shine-Dalgarno sequences. This is a known issue that we are trying to fix.  Currently we suggest such modification to be carried out in external annotation tools such as Sanger Artemis.  
+> {: .solution}
+{: .question}
+
+> ### {% icon question %} I cannot view all records of a track and see a "Max height reached" at the bottom of the track.
+>    > ### {% icon solution %} Solution
+>    > * You can change the track display configuration by click on the drop down arrow next to the track name, select "Edit config", and in the config window opened, increase the value under "maxHeight".    
 > {: .solution}
 {: .question}
 
