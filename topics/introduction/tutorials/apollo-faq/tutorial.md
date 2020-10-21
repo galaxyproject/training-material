@@ -29,6 +29,7 @@ tutorial_name: apollo-faq
 >    > ### {% icon solution %} Solution
 >    > * You can change the track display configuration by click on the drop down arrow next to the track name, select "Edit config", and in the config window opened, increase the value under "maxHeight".
 >    > ![](../../images/apollo-faq-screenshots/change_track_contig.PNG)
+>    >
 > {: .solution}
 {: .question}
 
