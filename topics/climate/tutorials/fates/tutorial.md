@@ -1,40 +1,33 @@
 ---
 layout: tutorial_hands_on
-title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab
+title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
 zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-interface
+    topic_name: introduction
     tutorials:
-        - jupyterlab
-  -
-    type: "external"
-    title: "Programming with Python"
-    link: "https://swcarpentry.github.io/python-novice-inflammation/"
+        - galaxy-intro-101-everyone
 
 questions:
-- Why and when using Galaxy Climate JupyterLab for CLM-FATES?
-- How to start Galaxy Climate JupyterLab in Galaxy?
+- Who to run CLM-FATES with CLM-FATES Galaxy tool?
 - How to upload input data for running CLM-FATES?
-- How to create CLM-FATES case in Galaxy Climate JupyterLab?
 - How to customize your runs?
 - How to analyze your model outputs?
-- How to upload observations to compare with your model outputs?
-- How to save your model results into a Galaxy history?
-- How to share your results?
+- How to create a workflow for running multi-site configurations?
+- How to share your workflow?
 objectives:
-- Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.
-- Setting up CLM-FATES case with Galaxy Climate JupyterLab.
-- Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.
-- Analyzing CLM-FATES results.
-- Sharing CLM-FATES simulations.
-- Composing, executing and publishing the corresponding Jupyter notebook.
+- Setting up CLM-FATES case.
+- Customizing your runs.
+- Interactive visualization with Panoply
+- Automating your analyzes and visualisations of your CLM-FATES case.
+- Creating multi-case scenarios.
+- Composing, executing and publishing CML-FATES workflow..
 time_estimation: 12H
 key_points:
-- Galaxy Climate JupyterLab
 - CLM-FATES
-- Model analysis
+- Quick visualization of your results with Panoply
+- Create multi-site simulations with a Galaxy workflow
 contributors:
 - annefou
 
@@ -45,7 +38,8 @@ contributors:
 {:.no_toc}
 
 
-The practical aims at familiarzing you with running CLM-FATES within Galaxy Climate JupyterLab. 
+The practical aims at familiarzing you with running CLM-FATES in Galaxy and analyzing the model results. 
+It will also teach you on how to create Galaxy workflow for your CLM-FATES simulations to make your research fully reproducible.
 
 > ### Agenda
 >
@@ -62,15 +56,23 @@ The practical aims at familiarzing you with running CLM-FATES within Galaxy Clim
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
 > we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
 > of the []Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
-> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in:
-> Fisher, R. A., Muszala, S., Verteinstein, M., Lawrence, P., Xu, C., McDowell, N. G., Knox, R. G., Koven, C., Holm, J., Rogers, B. M., Spessa, A., Lawrence, D., and Bonan, G.: 
-> Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED), Geosci. Model Dev., 8, 3593-3619, [https://doi.org/10.5194/gmd-8-3593-2015](https://doi.org/10.5194/gmd-8-3593-2015), 2015.
->
+> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+> {% cite Fisher2015 %}.
 > and this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
+> The [FATES documentation](https://fates-docs.readthedocs.io/en/latest/index.html) will provide some more insight on FATES too.
 >
 {:  .comment}
 
-## Get data
+## Step 1: Get CLM-FATES input data
+
+Preparing CLM-FATES input data is out of scope for this tutorial. We assume the input data tarball contains the following folders:
+
+```
+atm   cpl   lnd   share
+```
+
+Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case.
+For the purpose of this tutorial, input data for a single point location ALP1 (61.0243N, 8.12343E) has been prepared and is ready to use.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -102,153 +104,17 @@ The practical aims at familiarzing you with running CLM-FATES within Galaxy Clim
 >
 {: .hands_on}
 
-## Opening up Climate JupyterLab
+# Step 2: Setting up a CLM-FATES simulation
 
-> ### {% icon hands_on %} Hands-on: Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy
->
-> Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in Galaxy is available on [Live.useGalaxy.eu](https://live.usegalaxy.eu) only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in Galaxy contains all the python packages and additional software we need for running Earth System Model, including Functionally Assembled Terrestrial Ecosystem Simulator (FATES). The default JupyterLab in Galaxy would not be sufficient for executing all the tasks in th
-is tutorial.
->
-> 1. Open the JupyterLab tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook){:target="_blank"}​ with the following par
-ameters:
-> 2. Click Execute
-> 3. The tool will start running and will stay running permanently
-> 4. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the JupyterLab instance you started.
-> 5. Click on your JupyterLab instance (please not that it may take a few minutes before you can click on the link to your jupyterLab instance).
->
-{: .hands_on}
+# Step 3: Quick visualization with Panoply
 
+# Step 4: Using Galaxy tools for analysing your CLM-FATES simulation
 
-You should now be looking at a page with the JupyterLab interface:
+# Step 5: Generate a Galaxy workflow
 
-![Jupyterlab climate session](../../images/jupyterlab_climate_session.png)
+# Step 6: Rerun your workflow with a different location 
 
-
-# Import input data to JupyterLab
-
-We will be using a JupyterLab Terminal for most of this tutorial.
-
-> ### {% icon hands_on %} Hands-on: Open a JupyterLab Terminal
-> To open a new terminal, select theterminal in the new Launcher tab. 
-> More information can be found on the [JupyterLab documentation on Terminals](https://jupyterlab.readthedocs.io/en/stable/user/terminal.html).
->
-> Import the FATES input dataset from your history:
-> ```
-> get -i inputdata_version2.0.0_ALP1.tar -t name
-> ```
->
-> Then untar this file:
-> ```
-> mkdir $HOME/inputdata
-> tar xf /import/inputdata_version2.0.0_ALP1.tar --directory $HOME/inputdata
-> ```
-{: .hands_on}
-
-# CLM-FATES single point simulations
-
-## Get CLM-FATES EMERALD code
-
-> ### {% icon hands_on %} Hands-on: Clone CLM-FATES for Nordic sites
-> 
-> ```
-> git clone -b release-emerald2.0.0 https://github.com/NordicESMhub/ctsm.git
-> cd ctsm
-> ./manage_externals/checkout_externals
-> ```
->
-{: .hands_on}
-
-## Create CLM-FATES new case
-
-> ### {% icon hands_on %} Hands-on: Create CLM-FATES new case for ALP1 site
->
-> ```
-> source activate cesm
->
-> cd cime/scripts
-> ./create_newcase --case ../../../ctsm_cases/fates_alp1 --compset 2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV --res 1x1_ALP1 --machine espresso --run-unsupported
-> ```
->
-{: .hands_on}
-
-## Setup, build and submit your first simulation
-
-> ### {% icon hands_on %} Hands-on: Setup, build and submit
->
-> ```
-> cd ctsm_cases/fates_alp1
-> ./case.setup
-> ./case.build
-> ./xmlchange DOUT_S=FALSE
-> ./case.submit > case_submit.out 2>&1
-> ```
-{: .hands_on}
-
-## Customize your run
-
-> ### {% icon hands_on %} Hands-on: Run 5 years
->
-> ```
-> ./xmlchange --file env_run.xml --id RUN_STARTDATE --val 0001-01-01      # set up the starting date of your simulation 
-> ./xmlchange --file env_run.xml --id STOP_OPTION --val nyears            # set the simulation periods to "years"
-> ./xmlchange --file env_run.xml --id STOP_N --val 5                      # set the length of simulation, i.e, how many years
-> ./xmlchange --file env_run.xml --id CONTINUE_RUN --val TRUE             # if you want to continue your simulation from restart file, set it to TRUE
-> ./xmlchange --file env_run.xml --id RESUBMIT --val 10                   # set up how many times you want to resubmit your simulation.
->                                                                         # e.g, STOP_N=5, RESUBMIT=10, you will have simulation for 5+5*10=55 
-> ./xmlchange --file env_run.xml --id DATM_CLMNCEP_YR_START --val 1901    # set up the start year of the atmospheric forcing 
-> ./xmlchange --file env_run.xml --id DATM_CLMNCEP_YR_END --val 1950      # set up the end year of the atmospheric forcing
-> ./xmlchange DOUT_S=TRUE
-> ./case.submit > case_submit_sontinue_run.out 2>&1
-> ```
->  
-{: .hands_on}
-
-# Analysis
-
-## Analyzing FATES-CLM model outputs
-
-> ### {% icon hands_on %} Hands-on: Open a new Python notebook
-> Create a notebook by clicking the `+` button in the file browser and then selecting a kernel in the new Launcher tab:
-> Get more information online at [JupyterLab notebooks](https://jupyterlab.readthedocs.io/en/stable/user/notebook.html).
-{: .hands_on}
-
-### Use `xarray` to read and plot
-
-In this section, we give an example on how to visualize your results using `xarray`:
-
-```
-import xarray as xr
-
-xr.set_options(display_style="html")
-%matplotlib inline
-
-dset = xr.open_dataset("x.nc")
-```
-
-## Comparisons with observations
-
-> ### {% icon hands_on %} Hands-on: Import observations into your JupyterLab session
->
->
-{: .hands_on}
-
-# Save your results to your Galaxy history
-
-Open a JupyterLab Terminal as the following commands will be executed from the command line.
-
-> ### {% icon hands_on %} Hands-on: Put your data to your Galaxy history
->
-> ```
-> cd /home/jovyan/
-> tar cvf archive_emerald_fates_test.tar archive
-> ```
-> Then you are now ready to put your dataset into Galaxy. As it can be large, we recommend to use FTP:
-> ```
-> curl -T {"archive_emerald_fates_test.tar"} ftp://ftp.usegalaxy.eu --user USER:PASSWORD --ssl
-> ```
-> Where you replace `USER` by your galaxy username (what you used to login to Galaxy and `PASSWORD` by your Galaxy login password.
->
-{: .hands_on}
+Use any of the available input datasets (ALP2, etc.).
 
 # Share your work
 
@@ -278,4 +144,4 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 
 {:.no_toc}
 
-We have learnt to run single-point simulations with FATES-CLM through the Galaxy Climate JupyterLab.
+We have learnt to run single-point simulations with FATES-CLM and generate workflows for multi-site scenarios.
