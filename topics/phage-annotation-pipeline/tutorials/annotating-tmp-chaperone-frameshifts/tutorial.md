@@ -46,9 +46,7 @@ Shown here is the section of lambda’s genome where the TMP, H ,and TMP chapero
 
 # Locating TMPs, Chaperones, and Frameshifts
 
-Begin by opening [CPT](https://cpt.tamu.edu) Galaxy ([CPT Galaxy Public](https://cpt.tamu.edu/galaxy-pub/), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) and accessing the history containing the phage in question. Find the “#: View Genome in Apollo” dataset, and click on the eye {% icon solution %} symbol to open the genome in Apollo.
-
-![](../../images/annotating-tmp-chaperone-frameshifts-screenshots/4_view_genome.png)
+Begin by opening CPT Galaxy ([CPT Galaxy Public](https://cpt.tamu.edu/galaxy-pub/), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) and navigate the organism of interest in Apollo ([_see here_](https://cpt.tamu.edu/training-material-dev/topics/introduction/tutorials/getting-started-with-apollo/tutorial.html##getting-into-apollo) for how to access Apollo).
 
 
 > ### {% icon tip %} Note That…
