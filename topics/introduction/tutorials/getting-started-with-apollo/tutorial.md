@@ -99,7 +99,7 @@ Apollo can be accessed by two different methods, as shown below:
 ![](../../images/getting-started-with-apollo-screenshots/25_access_apollo.png)
 
 > #### Method 2: Galaxy history
->    > After running a structural or functional workflow, the history below will be generated. Click on the {% icon eye %} icon to enter apollo within the Galaxy window. 
+>    > After running a structural or functional workflow, the history below will be generated. Click on the eye icon in that history to enter apollo within the Galaxy window. 
 
 ![](../../images/getting-started-with-apollo-screenshots/24_annotate_data.png)
 
