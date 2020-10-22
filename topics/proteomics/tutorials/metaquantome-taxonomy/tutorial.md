@@ -11,7 +11,7 @@ objectives:
   - "A taxonomy and quantitational analysis of metaproteomic mass spectrometry data."
 time_estimation: "1h"
 key_points:
-  - "With Taxonomy and Quantitation inputs perform statistical analysis"
+  - "Statistical analysis of the differentially expressed taxa in the metaproteomics sample and their abundance."
 contributors:
   - subinamehta
   - timothygriffin
@@ -53,7 +53,7 @@ metaQuantome {% cite Easterly2019 %} software suite was developed by the {% cite
 
 In this tutorial, we will learn specifically about the metaQuantome Taxonomy workflow. In particular, we will learn about how peptide-level quantitation and associated taxonomic information can be used to generate bar plots (for taxonomic composition), volcano plots (to detect differentially expressed taxa) and heatmap cluster analysis. 
 
-To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas (% cite Delogu2020 %)). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
+To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas {% cite Delogu2020 %}. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
 ![MetaQuantome-taxonomy-workflow](../../images/mQ-taxa-workflow.jpg){: width="100%"}
 
@@ -76,7 +76,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial and give it a meaningful name
+> 1. Create a new history for this tutorial and give it a meaningful name.
 >
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
@@ -93,13 +93,11 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/import_from_data_library.md %}
 >
 >
-> 3. Rename the datasets (If needed).
-> 4. Check that the datatype ( Make sure they are in the correct formats).
+> 3. Check that the datatype ( Make sure they were imported correct formats).
 >  Taxonomy File (format=`tabular`), an Intensity file (format=`tabular`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to the name of the input data (optional).
 >
 {: .hands_on}
 
@@ -110,7 +108,6 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
 >    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
 >
-> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -122,7 +119,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    > 1. NCBI taxonomy database. consists of a list of all currently identified taxa and the relationships between them.
 >    > 
 >    > 2. Gene Ontology (GO) term database. metaQuantome uses the go-basic.obo file and the metagenomics slim GO (subset of the full GO). More details are 
->    > available at http://geneontology.org/docs/download-ontology/
+>    > available at [GO term website](http://geneontology.org/docs/download-ontology/)
 >    > 
 >    > 3. ENZYME database with Enzyme Classification (EC) numbers. This database classifies enzymes and organizes the relationships between them.
 >    > 
@@ -131,7 +128,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 {: .hands_on}
 
 
-![MetaQuantome:databases](../../images/mq-db.png){: width="100%"}
+
 
 > ### {% icon question %} Questions
 >
@@ -166,15 +163,11 @@ The create samples file module is used to generate the samples file input file f
 >            - *"Group Name"*: `T7`
 >               - *"Column"*: `T7A_1,T7B_1`
 >     
-> 2. Execute.
 >
 {: .hands_on}
 
-![MetaQuantome:Create-Sample](../../images/mQ-sample.png){: width="100%"}
 
 # **Run metaQuantome**
-
-
 
 
 ## *metaQuantome: expand*
@@ -197,9 +190,8 @@ In taxonomy mode, the following information is required apart from metaQuantome 
 >        - *"Taxonomy column name"*: `taxon_id`
 >    - {% icon param-file %} *"Intensity file"*: `Intensity File` (Input dataset)
 >        - *"Intensity file: peptide column name"*: `peptide`
-> 2. Execute.
 >
-> 3. Rename as "metaQuantome expand".
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `metaQuantome expand`.
 >
 >
 >    > ### {% icon comment %} Comment
@@ -232,9 +224,8 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >    - *"min_children_non_leaf"*: `2`
 >    - *"min_child_nsamp"*: `1`
 >    - *"qthreshold"*: `2`
-> 2. Execute.
 >
-> 3. Rename as "metaQuantome:Filter".
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `metaQuantome:Filter`.
 >
 >
 >    > ### {% icon comment %} Comment
@@ -269,9 +260,8 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >    - *"Perform paired tests"*: `Yes`
 >
 >
-> 2. Execute.
 >
-> 3. Rename as "metaQuantome:stat".
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `metaQuantome:stat`.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -298,7 +288,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >        - *"Plot type"*: `Bar Chart (bar)`
 >            - *"Taxonomic rank to restrict to in the plot"*: ``
 >            - *"Mean intensity column name"*: `T2_mean`
-> 2. Execute.
+> 
 >
 >    > ### {% icon comment %} Comment
 >    > The user has a choice to run Bar plot for T2, T4 and T7 to know the top 5 or 10 most differently expressed taxonomy.
@@ -333,7 +323,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >        - *"Plot type"*: `Volcano Plot (volcano)`
 >            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T7_over_T2`
 >            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T7_over_T2`
-> 2. Execute.
+> 
 {: .hands_on}
 
 ![T7_taxa](../../images/T7_taxa.png){: width="85%"}
@@ -350,7 +340,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Taxonomic rank to restrict to in the plot"*: ``
 >            - *"Mean intensity column name"*: `T4_mean`
 >
-> 2. Execute.
+> 
 {: .hands_on}
 
 ![T4_taxa](../../images/T4_taxa.png){: width="85%"}
@@ -367,7 +357,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T4_over_T2`
 >            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T4_over_T2`
 >        - {% icon param-select %} *"Flip the fold change (i.e., multiply log fold change by -1)"*: `No`
-> 2. Execute.
+> 
 >
 >    > ### {% icon comment %} Comment
 >    >
