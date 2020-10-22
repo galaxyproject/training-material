@@ -1,0 +1,545 @@
+{
+   "uuid":"38641d95-e161-4aa7-a6a9-1b88e1562f13",
+   "tags":[
+      "computational-chemistry"
+   ],
+   "format-version":"0.1",
+   "name":"Workflow constructed from history 'Hsp90-MDAnalysis'",
+   "version":0,
+   "steps":{
+      "0":{
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[
+
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+
+         },
+         "tool_state":"{\"name\": \"Galaxy30-[GROMACS_simulation_on_data_28,_data_15,_and_data_26].gro\"}",
+         "id":0,
+         "uuid":"82ae4961-8bb0-440d-bed6-9206d8b9d860",
+         "errors":null,
+         "name":"Input dataset",
+         "label":null,
+         "inputs":[
+            {
+               "name":"Galaxy30-[GROMACS_simulation_on_data_28,_data_15,_and_data_26].gro",
+               "description":""
+            }
+         ],
+         "position":{
+            "top":10,
+            "left":10
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"data_input"
+      },
+      "1":{
+         "tool_id":null,
+         "tool_version":null,
+         "outputs":[
+
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+
+         },
+         "tool_state":"{\"name\": \"Galaxy31-[GROMACS_simulation_on_data_28,_data_15,_and_data_26].xtc\"}",
+         "id":1,
+         "uuid":"f67e98b9-2b4f-4d7d-9da7-ec3c23ffbd38",
+         "errors":null,
+         "name":"Input dataset",
+         "label":null,
+         "inputs":[
+            {
+               "name":"Galaxy31-[GROMACS_simulation_on_data_28,_data_15,_and_data_26].xtc",
+               "description":""
+            }
+         ],
+         "position":{
+            "top":130,
+            "left":10
+         },
+         "annotation":"",
+         "content_id":null,
+         "type":"data_input"
+      },
+      "2":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2019.1.4",
+         "tool_version":"2019.1.4",
+         "outputs":[
+            {
+               "type":"gro",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "input_file":{
+               "output_name":"output",
+               "id":0
+            }
+         },
+         "tool_state":"{\"box\": \"{\\\"__current_case__\\\": 1, \\\"config\\\": \\\"false\\\"}\", \"__page__\": null, \"capture_log\": \"\\\"false\\\"\", \"input_file\": \"null\", \"output_format\": \"\\\"pdb\\\"\", \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+         "id":2,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"3b8a9d5ced85",
+            "name":"gmx_editconf",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"8e7740cc-9889-46df-9534-5b904688efdf",
+         "errors":null,
+         "name":"GROMACS structure configuration",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":10,
+            "left":230
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/gmx_editconf/gmx_editconf/2019.1.4",
+         "type":"tool"
+      },
+      "3":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.3.2",
+         "tool_version":"1.9.3.2",
+         "outputs":[
+            {
+               "type":"data",
+               "name":"output"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "input_file":{
+               "output_name":"output",
+               "id":1
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"input_file\": \"null\", \"output_format\": \"\\\"dcd\\\"\", \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"__rerun_remap_job_id__\": null}",
+         "id":3,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"79e8ab8f1e81",
+            "name":"md_converter",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"c7e8f328-8ea6-451b-9c00-d305a351d4ac",
+         "errors":null,
+         "name":"MDTraj file converter",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":130,
+            "left":230
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/md_converter/md_converter/1.9.3.2",
+         "type":"tool"
+      },
+      "4":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4",
+         "tool_version":"2.3.4",
+         "outputs":[
+            {
+               "type":"tabular",
+               "name":"output"
+            },
+            {
+               "type":"png",
+               "name":"rmsd_plot"
+            },
+            {
+               "type":"png",
+               "name":"rmsd_hist_plot"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdbin":{
+               "output_name":"output",
+               "id":2
+            },
+            "dcdin":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"rmsd\": \"{\\\"__current_case__\\\": 0, \\\"sele\\\": \\\"calpha\\\"}\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"pdbin\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dcdin\": \"null\"}",
+         "id":4,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"77e28e1da9f4",
+            "name":"bio3d_rmsd",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"a76c9ffd-fca2-443a-b872-0fc8cf1ae22e",
+         "errors":null,
+         "name":"RMSD Analysis",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":10,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4",
+         "type":"tool"
+      },
+      "5":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4",
+         "tool_version":"2.3.4",
+         "outputs":[
+            {
+               "type":"tabular",
+               "name":"output"
+            },
+            {
+               "type":"png",
+               "name":"rmsf_plot"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdbin":{
+               "output_name":"output",
+               "id":2
+            },
+            "dcdin":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"rmsf\": \"{\\\"__current_case__\\\": 0, \\\"sele\\\": \\\"calpha\\\"}\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"pdbin\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dcdin\": \"null\"}",
+         "id":5,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"6bcb804a54c3",
+            "name":"bio3d_rmsf",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"8ca09773-3d34-45d7-b36e-7a06d6a825fd",
+         "errors":null,
+         "name":"RMSF Analysis",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":130,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsf/bio3d_rmsf/2.3.4",
+         "type":"tool"
+      },
+      "6":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4",
+         "tool_version":"2.3.4",
+         "outputs":[
+            {
+               "type":"tabular",
+               "name":"output"
+            },
+            {
+               "type":"png",
+               "name":"pca_plot"
+            },
+            {
+               "type":"png",
+               "name":"pca_cluster"
+            },
+            {
+               "type":"png",
+               "name":"pc1_rmsf"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdbin":{
+               "output_name":"output",
+               "id":2
+            },
+            "dcdin":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"dcdin\": \"null\", \"pdbin\": \"null\", \"pca\": \"{\\\"__current_case__\\\": 0, \\\"sele\\\": \\\"calpha\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"method\": \"\\\"false\\\"\"}",
+         "id":6,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"24867ab16f36",
+            "name":"bio3d_pca",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"fdcabd33-6303-459e-a14c-0732e97bda39",
+         "errors":null,
+         "name":"PCA",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":250,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca/bio3d_pca/2.3.4",
+         "type":"tool"
+      },
+      "7":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/0.20",
+         "tool_version":"0.20",
+         "outputs":[
+            {
+               "type":"tabular",
+               "name":"output"
+            },
+            {
+               "type":"txt",
+               "name":"cosout"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "trajin":{
+               "output_name":"output",
+               "id":3
+            },
+            "strin":{
+               "output_name":"output",
+               "id":2
+            }
+         },
+         "tool_state":"{\"index\": \"\\\"0\\\"\", \"__page__\": null, \"strin\": \"null\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"trajin\": \"null\", \"components\": \"\\\"3\\\"\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+         "id":7,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"e39bc1f90d8f",
+            "name":"mdanalysis_cosine_analysis",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"32333821-6326-449b-b8fe-ad9685874a76",
+         "errors":null,
+         "name":"Cosine Content",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":370,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/mdanalysis_cosine_analysis/mdanalysis_cosine_analysis/0.20",
+         "type":"tool"
+      },
+      "8":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca_visualize/bio3d_pca_visualize/2.3.4",
+         "tool_version":"2.3.4",
+         "outputs":[
+            {
+               "type":"pdb",
+               "name":"pdbout"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdbin":{
+               "output_name":"output",
+               "id":2
+            },
+            "dcdin":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"dcdin\": \"null\", \"pc_id\": \"\\\"1\\\"\", \"pdbin\": \"null\", \"pca\": \"{\\\"__current_case__\\\": 0, \\\"sele\\\": \\\"calpha\\\"}\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"method\": \"\\\"false\\\"\"}",
+         "id":8,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"f61a718993fd",
+            "name":"bio3d_pca_visualize",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"a08577af-1864-461c-8e18-41baaad461fd",
+         "errors":null,
+         "name":"PCA visualization",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":490,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_pca_visualize/bio3d_pca_visualize/2.3.4",
+         "type":"tool"
+      },
+      "9":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3",
+         "tool_version":"1.9.3",
+         "outputs":[
+            {
+               "type":"txt",
+               "name":"detail"
+            },
+            {
+               "type":"txt",
+               "name":"hbond"
+            },
+            {
+               "type":"txt",
+               "name":"report"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "trajin":{
+               "output_name":"output",
+               "id":3
+            },
+            "strin":{
+               "output_name":"output",
+               "id":2
+            }
+         },
+         "tool_state":"{\"distance\": \"\\\"3.0\\\"\", \"angle\": \"\\\"20.0\\\"\", \"__page__\": null, \"sele2\": \"\\\"resname G5E\\\"\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"trajin\": \"null\", \"sele1\": \"\\\"protein\\\"\", \"strin\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"molid\": \"\\\"0\\\"\"}",
+         "id":9,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"8aa5e465b043",
+            "name":"vmd_hbonds",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"5f044466-9a0d-4f9c-b2e6-3e9cdc4910c2",
+         "errors":null,
+         "name":"Hydrogen Bond Analysis using VMD",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":610,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/vmd_hbonds/vmd_hbonds/1.9.3",
+         "type":"tool"
+      },
+      "10":{
+         "tool_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4",
+         "tool_version":"2.3.4",
+         "outputs":[
+            {
+               "type":"tabular",
+               "name":"output"
+            },
+            {
+               "type":"png",
+               "name":"rmsd_plot"
+            },
+            {
+               "type":"png",
+               "name":"rmsd_hist_plot"
+            }
+         ],
+         "workflow_outputs":[
+
+         ],
+         "input_connections":{
+            "pdbin":{
+               "output_name":"output",
+               "id":2
+            },
+            "dcdin":{
+               "output_name":"output",
+               "id":3
+            }
+         },
+         "tool_state":"{\"__page__\": null, \"rmsd\": \"{\\\"__current_case__\\\": 12, \\\"resid\\\": \\\"G5E\\\", \\\"sele\\\": \\\"resid\\\"}\", \"__rerun_remap_job_id__\": null, \"__workflow_invocation_uuid__\": \"\\\"33a7c4388bba11eaaa3d001b21d75532\\\"\", \"pdbin\": \"null\", \"chromInfo\": \"\\\"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\\\"\", \"dcdin\": \"null\"}",
+         "id":10,
+         "tool_shed_repository":{
+            "owner":"chemteam",
+            "changeset_revision":"77e28e1da9f4",
+            "name":"bio3d_rmsd",
+            "tool_shed":"toolshed.g2.bx.psu.edu"
+         },
+         "uuid":"e0fa1995-3a30-4aea-9368-e1e45446b6ba",
+         "errors":null,
+         "name":"RMSD Analysis",
+         "post_job_actions":{
+
+         },
+         "label":null,
+         "inputs":[
+
+         ],
+         "position":{
+            "top":730,
+            "left":450
+         },
+         "annotation":"",
+         "content_id":"toolshed.g2.bx.psu.edu/repos/chemteam/bio3d_rmsd/bio3d_rmsd/2.3.4",
+         "type":"tool"
+      }
+   },
+   "annotation":"High Throughput Molecular Dynamics and Analysis",
+   "a_galaxy_workflow":"true"
+}

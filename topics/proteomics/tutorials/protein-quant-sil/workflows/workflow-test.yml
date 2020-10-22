@@ -1,0 +1,17 @@
+---
+- doc: Test ID Plus Quant SIL Training workflow
+  job:
+    'mzML file':
+      class: File
+      location: https://zenodo.org/record/1051552/files/HEK_SILAC-K6R6_ST905_part.mzml
+      filetype: mzml
+    'fasta file':
+      class: File
+      location: https://zenodo.org/record/892005/files/Human_database_including_decoys_%28cRAP_added%29.fasta
+      filetype: fasta
+  outputs:
+    protein_quant:
+      asserts:
+        has_text_matching:
+          expression: '"sp|P61604|CH10_HUMAN"\s+1\s+0.99'
+

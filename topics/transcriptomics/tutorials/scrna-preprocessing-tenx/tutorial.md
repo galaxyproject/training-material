@@ -36,6 +36,8 @@ contributors:
   - hrhotz
   - blankenberg
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 
@@ -64,7 +66,7 @@ Though there are approximately 3 million 10x gel barcodes used, the amount actua
 
 > ### {% icon details %} Whitelist Barcodes
 >
-> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with 3,000,0000 barcodes.
+> There are actually two sets of barcodes for the different chemistries provided; one which has 737,000 barcodes, and one with ~3,7 million barcodes.
 >
 > Both are provided in the Zenodo link, but we will only work with the 3 million barcodes because this is what is provided with the chemistry version.
 >
@@ -132,7 +134,7 @@ The *Cell Ranger* pipeline requires all three files to perform the demultiplexin
 
 ### Data upload and organization
 
-For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (737,000) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
+For the mapping, we require the sub-sampled source files, as well as a "whitelist" of (~3,7 million) known cell barcodes, [freely extracted](https://kb.10xgenomics.com/hc/en-us/articles/115004506263-What-is-a-barcode-whitelist) from the *Cell Ranger* pipeline. This whitelist file may be found within the Galaxy Data Library, but it is included here in the Zenodo record for convenience and also because the sequencing facility may not always provide this file.
 
 The barcodes in the R1 FASTQ data are checked against these known cell barcodes in order assign a specific read to a specific known cell. The barcodes are designed in such a manner that there is virtually no chance that they will align to a place in the reference genome. In this tutorial we will be using hg19 (GRCh37) version of the human genome, and will therefore also need to use a hg19 GTF file to annotate our reads.
 
@@ -144,6 +146,8 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >    {% include snippets/create_new_history.md %}
 >
 > 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
+>
+>    {% include snippets/import_from_data_library.md %}
 >
 >    ```
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
@@ -182,7 +186,7 @@ The table above gives a summary of the primers used in the image and the number 
 
 > ### {% icon details %} Details: Strandedness
 >
-> Unstranded protocols do not distinguish between whether a fragments was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
+> Unstranded protocols do not distinguish between whether a fragment was sequenced from the forward or the reverse strand, which can lead to some ambiguity if the fragment overlaps two transcripts. In the image below, it is not clear whether the fragment is derived from GeneF or GeneR due to this overlap.
 >
 > ![strandedness]({% link topics/transcriptomics/images/tenx_strandedness.svg %} "Mapping fragments to overlapping transcripts is ambiguous with unstranded protocols.")
 >
@@ -207,7 +211,7 @@ The table above gives a summary of the primers used in the image and the number 
 > >    * They need to be designed in such a way to minimise accidentally aligning to the reference they were prepared to be used for.
 > >    * Longer barcodes tend to be more unique, so this is a problem that is being solved as the barcodes increase in size, allowing for barcodes that can be used on more than one reference to be more common, as seen above.
 > > 1. UMIs (or Unique Molecular identifiers) do not delineate cells as Cell Barcodes do, but instead serve as random 'salt' that tag molecules randomly and are used to mitigate amplification bias by deduplicating any two reads that map to the same position with the same UMI, where the chance of this happening will be astronomically small unless one read is a direct amplicon of the other.
-> > 1. $$4^10 = 1,048,576$$ unique molecules tagged, vs. $$4^12 = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true.
+> > 1. $$4^{10} = 1,048,576$$ unique molecules tagged, vs. $$4^{12} = 16,777,216$$ unique molecules tagged. The reality is much much smaller due to edit distances being used that would reduce both these numbers substantially (as seen in the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides), but the scale factor of 16 times more molecules ($$4^{12-10} = 16$$) can be uniquely tagged is true.
 > > 1. Forward.
 > {: .solution}
 {: .question}
@@ -239,14 +243,13 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 
 > ### {% icon hands_on %} Hands-on
+> 
+> **Build a Paired Collection** 
+> {% include snippets/build_paired_list_collection.md %}
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L001_R2_001.fastq.gz`
->    - {% icon param-repeat %} *Insert Input Pairs*
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: `subset_pbmc_1k_v3_S1_L002_R1_001.fastq.gz`
->    - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: `subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz`
->      (*pay attention to the* **L001** *and* **L002** *names*)
+>    - *"Input Type"*: `Paired collection of barcode and cDNA reads`
+>        - {% icon param-file %} *"Collection of Pairs"*: `the name of your paired collection`
 >    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
@@ -288,7 +291,7 @@ Let us investigate the output log. This type of quality control is essential in 
 >        - In *"STAR output"*:
 >          - In *"1:STAR output"*:
 >            - *"Type of STAR output?"*: `Log`
->            - {% icon param-file %} *"STAR log output"*: `log output of RNA STARsolo`
+>            - {% icon param-file %} *"STAR log output"*: `RNA STARsolo: log`
 {: .hands_on}
 
 
@@ -383,9 +386,9 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `DefaultDrops`
 >            - *"Expected Number of Cells"*: `3000`
@@ -409,7 +412,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 > > ### {% icon solution %} Solution
 > >
 > > 1. By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are `272` cells in the output table.
-> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that 5200 barcodes were detected in total, but only 272 of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
+> > 1. If we expand the {% icon galaxy-eye %} *RNA STARsolo Feature Statistic Summaries* Dataset and look at the `nCellBarcodes` value, we see that *RNA STARsolo* detected `5200` cells. What this means is that *5200* barcodes were detected in total, but only *272* of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by "ranking" the barcodes, to see the dividing line between high and low quality barcodes.
 > {: .solution}
 {: .question}
 
@@ -442,9 +445,9 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Rank Barcodes`
 >        - *"Lower Bound"*: `100`
 >
@@ -473,13 +476,13 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 >
 > **DropletUtils** {% icon tool %} with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
->        - {% icon param-file %} *"Count Data"*: `output_matrix` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Genes List"*: `output_genes` (output of **RNA STARsolo** {% icon tool %})
->        - {% icon param-file %} *"Barcodes List"*: `output_barcodes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
+>        - {% icon param-file %} *"Barcodes List"*: `Barcodes` (output of **RNA STARsolo** {% icon tool %})
 >    - *"Operation"*: `Filter for Barcodes`
 >        - *"Method"*: `EmptyDrops`
 >            - *"Lower-bound Threshold"*: `200`
->            - *"FDR Threshold"*: `0`
+>            - *"FDR Threshold"*: `0.01`
 >        - *"Format for output matrices"*: `Tabular`
 >
 {: .hands_on}

@@ -118,7 +118,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 ## Get data into Galaxy
 
-There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
+There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}). We are going to use the **Get Data** toolbox in the **Tools** panel on the left.
 
 > ### {% icon hands_on %} Hands-on: Open **Get Data** toolbox
 >
@@ -128,7 +128,7 @@ There are [many ways to get data into a Galaxy instance]({% link topics/galaxy-d
 >
 {: .hands_on}
 
-The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({% link topics/galaxy-data-manipulation/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
+The **Get Data** toolbox contains a list of data sources that this Galaxy instance can get data directly from.  **Upload file** is quite useful for getting data from your computer or from the web (see the [Getting data into Galaxy slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %})).  Today we are going to use the **UCSC Main table browser**.
 
 ### Get genes
 
@@ -397,8 +397,7 @@ Of the tools in the **Operate on Genomic Intervals** toolbox, **Join** and parti
 
 > ### {% icon hands_on %} Hands-on: Genomic Interval Tools
 >
-> 1. In the tool panel, *click* **Intersect** in the **Operate on Genomic Intervals** toolbox.
-> 2. **Intersect** {% icon tool %} with the following parameters:
+> 1. {% tool [Intersect](toolshed.g2.bx.psu.edu/repos/devteam/intersect/gops_intersect_1/1.0.0) %} with the following parameters:
 >     - **Return** to `Overlapping Intervals`.
 >       - This looks like it might return whole genes, while `Overlapping pieces` may return only the parts that overlap.  We suspect that whole genes might be more useful.
 >     - **of** (the first dataset) to `Genes, forward strand`
@@ -434,7 +433,7 @@ It turns out that **Lift-Over** and **Collection Operations** are not what we wa
 >
 > 1. *Open* the **Text Manipulation** toolbox.
 > 2. Near the top of the toolbox is **Concatenate datasets tail-to-head**. *Click* on it.  Lets try that tool.
-> 3. **Concatenate** {% icon tool %} with the following parameters:
+> 3. {% tool [Concatenate](cat1) %} with the following parameters:
 >   * *Set* **Concatenate Dataset** to `Overlapping reverse genes`.
 >   * *Click* **+ Insert Dataset**.  This adds a second dataset pull-down menu to the form.
 >   * *Select* `Overlapping forward genes` as the second dataset.
@@ -518,7 +517,7 @@ Let's refine our question slightly
 
 ## Walk through the workflow tutorial
 
-Run the [Create a reusable workflow from a history]({% link topics/galaxy-ui/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
+Run the [Create a reusable workflow from a history]({% link topics/galaxy-interface/tutorials/history-to-workflow/tutorial.md %}) tutorial for how to do this, *and then come back here to run your newly created workflow with the exon data.*
 
 ## Rerun analysis with exon data
 

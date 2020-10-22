@@ -13,7 +13,7 @@ key_points:
   - This can be easier than setting up a local Galaxy and may have more resources available
   - But have a backup plan
 contributors:
-  - erasche
+  - hexylena
 ---
 
 # Introduction

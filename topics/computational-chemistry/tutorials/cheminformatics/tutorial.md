@@ -163,6 +163,13 @@ We will generate our compound library by searching ChEMBL for compounds which ha
 
 There are some other tools available, which will not be used in this tutorial, which help to develop a more focused compound library. For example, the 'Natural product likeness calculator' and 'Drug-likeness' tools assign a score to compounds based on how similar they are to typical natural products and drugs respectively, which could then be used to filter the library. If you are interested, you can try testing them out on the library just generated.
 
+> ### {% icon tip %} Tip: Generating a compound library
+> If you try using this tutorial using your own data, you might encounter some issues. Important things to remember:
+> * If you encounter an error, check the SMILES file only has a single column. Additional columns can be removed using the 'Cut' tool.
+> * If the output file is empty, it may be that the ChEMBL database doesn't have any compounds similar to the input. Consider lowering the Tanimoto coefficient to 70 if this is the case and removing filters (including the Lipinski RO5 filter). If this doesn't help, you will have to use another source of chemical data (e.g. PubChem).
+> * Finally, please remember this step is totally optional if you already have a list of compounds for docking (in SMILES or another format). In this case you can upload them to Galaxy and continue with the next step.
+{: .tip}
+
 > ### {% icon details %} What are SMILES and SDF formats?
 >
 > SMILES and SD-files both represent chemical structures. A SMILES file represents the 2D structure of a molecule as a chemical graph. In other words, it states only the atoms and the connectivity between them. An example of a SMILES string (taken from the ligand in the PDB file) is `c1c2OCCOc2ccc1c1c(C)[nH]nc1c1cc(CC)c(O)cc1O`. For more information on how the notation works, please consult the [OpenSMILES specification](http://opensmiles.org/opensmiles.html) or the description provided by [Wikipedia](https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system). A more comprehensive alternative to the SMILES system is the International Chemical Identifier (InChI).

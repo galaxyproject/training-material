@@ -43,6 +43,8 @@ contributors:
   - erxleben
   - wm75
 
+gitter: Galaxy-Training-Network/galaxy-single-cell
+
 ---
 
 
@@ -148,15 +150,11 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 {: .hands_on}
 
 
-<!--
-For a more detailed understanding of the naming conventions used in generating our FASTQ pair, please consult the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides.
--->
-
 ## Barcode Extraction
 
 > ### {% icon comment %} Note
 >
-> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 1-26, as well as the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
+> Before performing the barcode extraction process, it is recommended that you familiarise yourself with the concepts of designing cell barcodes as given by the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}), as well as the [*Understanding Barcodes*]({% link topics/transcriptomics/tutorials/scrna-umis/tutorial.md %}) hands-on material for an introduction into transcript barcodes.
 >
 {: .comment}
 
@@ -601,7 +599,7 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
 > 1. **Create a Dataset List**
->    {% include snippets/build_dataset_list.md %}
+>    {% include snippets/build_list_collection.md %}
 >
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
 >   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)
@@ -636,7 +634,7 @@ Once the merge is complete, we can now peek at our full combined matrix by once 
 
 In the new combined matrix we see that we have 1536 cells, but this number is greatly overestimated.  This is because *not all batches use the same barcodes*, and yet we applied the full set of 192 barcodes against our FASTQ data during the [*Barcode Extraction*](#barcode-extraction) stage previously.
 
-The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*Plates, Batches, and Barcodes*]({% link topics/transcriptomics/tutorials/scrna-plates-batches-barcodes/slides.html %}) slides 26-52.
+The reason we do this is to test for cross-contamination between batches, the details of which are better explained in the [*accompanying slides*]({% link topics/transcriptomics/tutorials/scrna-preprocessing/slides.html %}).
 
 
 ## Guarding against Cross-Contamination

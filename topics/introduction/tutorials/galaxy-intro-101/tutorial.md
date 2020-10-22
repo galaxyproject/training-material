@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Galaxy 101"
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.4104428"
 level: Introductory
 questions:
   - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
@@ -28,7 +28,7 @@ contributors:
   - nekrut
   - bgruening
   - pajanne
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -109,11 +109,15 @@ First we need to get some data into our history. You can upload files from your 
 >     - *"genome"*: `Human`
 >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
 >     - *"group"*: `Genes and Gene Predictions`
->     - *"track"*: `GENCODE v29`
+>     - *"track"*: `GENCODE v32`
 >     - *"table"*: `knownGene`
 >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
 >     - *"output format"* should be changed to `BED - browser extensible data`
 >     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
+>
+>     > ### {% icon comment %} Comment
+>     > If the *"table"* drop down menu does not show the `knownGene` option. Set *"group"* to `All tables` and scroll down.
+>     {: .comment}
 >
 > 2. Click on the **get output** button and you will see the next screen:
 >
@@ -187,7 +191,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
 >
-> 1. **Join** {% icon tool %} the intervals of two datasets side-by-side:
+> 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0) %}   the intervals of two datasets side-by-side:
 >
 >    Enter the word `join` in the search bar of the tool panel, and select the
 >    tool named `Join - the intervals of two datasets side-by-side`
@@ -227,7 +231,7 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
 > > ### {% icon solution %} Solution
-> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> to look for how many times each is used:
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
 > >
 > > Gene | Occurences
 > > ---- | ----------
@@ -244,7 +248,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
-> 1. **Group** {% icon tool %} data by a column and perform aggregate operation on other columns:
+> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns:
 >
 >    - *"Select data"*: select the output dataset from **Join** {% icon tool %}
 >    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
@@ -276,7 +280,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
-> 1. **Sort** {% icon tool %} data in ascending or descending order:
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order:
 >
 >    - *"Sort Query"*: Output from **Group** {% icon tool %}
 >    - *"Column Selections"*:
@@ -310,7 +314,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. **Select first** {% icon tool %} lines from a dataset:
+> 1. {% tool [Select first](Show+beginning1) %} lines from a dataset:
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
@@ -328,7 +332,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 
 > ### {% icon hands_on %} Hands-on: Compare two Datasets
 >
-> 1. **Compare two Datasets** {% icon tool %} to find common or distinct rows:
+> 1. {% tool [Compare two Datasets](comp1) %} to find common or distinct rows:
 >
 >    - *"Compare"*: `Exons`
 >    - *"Using column"*: `Column: 4`
@@ -352,7 +356,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 >    {% include snippets/change_dbkey.md dbkey="hg38" %}
 >
-> 2. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
+> 2. Second, check that the **format** of your latest history dataset is `bed`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Datatype** field to `bed`.
+>
+>    {% include snippets/change_datatype.md datatype="bed" %}
+>
+> 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 >
 >    ![`display at UCSC main` link](../../images/101_displayucsc.png)
 >
@@ -511,10 +519,12 @@ Now that we have built our workflow, let's use it on some different data. For ex
 > 5. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
->
->    > ### {% icon comment %} Potential workflow issues
->    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
->    {: .comment}
+
+> > ### {% icon comment %} Potential workflow issues
+> >
+> >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input. 
+> >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
+> {: .comment}
 >
 > 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >

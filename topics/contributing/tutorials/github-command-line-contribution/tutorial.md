@@ -28,7 +28,7 @@ contributors:
 # Introduction
 {:.no_toc}
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github.repository_url }}).
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on a [GitHub](https://github.com) repository: [{{ site.github_repository }}]({{ site.github_repository }}).
 
 The process of development of new content is open and transparent, using git and following the [GitHub flow](https://guides.github.com/introduction/flow/):
 
@@ -62,7 +62,7 @@ Forking a repository is a simple two-step process:
 
 > ### {% icon hands_on %} Hands-on: Fork the repository
 >
-> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github.repository_url }})
+> 1. Go on the GitHub repository: [{{ site.github_repository }}]({{ site.github_repository }})
 > 2. Click on **Fork** (top-right corner of the page)
 >
 >    ![Fork](../../images/PR_fork.jpg)
@@ -82,9 +82,9 @@ To modify the content of the repository, you need a copy of it on your computer.
 > ### {% icon hands_on %} Hands-on: Clone the GitHub repository
 >
 > 1. Get the URL of your fork. You can find this on the main page of your fork under the green button:
->    1. Click on **Clone or download** (right)
+>    1. Click on **Code** (right)
 >
->       ![Get fork URL](../../images/PR_github_url.png)
+>       ![Get fork URL](../../images/clone_code_button.png)
 >
 >    2. Copy the URL
 >

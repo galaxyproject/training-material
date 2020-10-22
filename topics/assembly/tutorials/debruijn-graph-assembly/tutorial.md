@@ -18,7 +18,7 @@ key_points:
   - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
 contributors:
   - slugger70
-  - erasche
+  - hexylena
   - shiltemann
 ---
 
