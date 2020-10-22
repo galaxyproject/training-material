@@ -79,7 +79,7 @@ Search for SPAdes in the search bar underneath the Tools column on the left side
 
 ![](../../images/assembling-genome-sequences-screenshots/10_search_spades.png)
 
-Selecting the Galaxy [spades tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) and adjust the following parameters:
+Selecting the Galaxy [spades tool] (https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) and adjust the following parameters:
 
 1. K-mers
 > * All values must be *odd*, less than 128, listed in *ascending* order, and *smaller* than the read length.
@@ -94,13 +94,13 @@ Selecting the Galaxy [spades tool](https://cpt.tamu.edu/galaxy/root?tool_id=tool
 
 ![](../../images/assembling-genome-sequences-screenshots/11_unpaired_reads.png)
 
-**Separate input files** assembly uses *both* forward and reverse reads and it usually gives the best output.
-
-> ### {% icon comment %} Note that...
-> This does not always yield the best output. For this reason, it is recommended that three instances of spades are run to start.
-{: .comment}
+**Separate input files** assembly uses *both* forward and reverse reads and it usually gives the best output, assuming both reads data show good QC reports.
 
 ![](../../images/assembling-genome-sequences-screenshots/12_separate_input_files.png)
+
+> ### {% icon comment %} Note that...
+> Single SPAdes run using one type of setting does not always yield the best output. It is recommended that muiltiple instances of spades assembly using different settings (different choices for K-mer values and data inputs) are carried out to compare the results.
+{: .comment}
 
 Once all of the parameters have been set, **execute** the spades tool by clicking the Execute button at the bottom of the tool. This could take a few hours; however, multiple spades assemblies can be run at once. After the tools have finished running, there will be 5 outputs from each SPAdes run in the history column.
 
