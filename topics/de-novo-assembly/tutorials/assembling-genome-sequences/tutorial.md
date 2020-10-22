@@ -40,14 +40,14 @@ The CPT researcher performing the sequencing runs will upload the sequence reads
 
 # Running the Quality Control Report and Trimming the Reads
 
-To learn about the quality control analysis (FASTQC), read the [FastQC Manual] (http://bficores.colorado.edu/biofrontiers-core-facility-workshops/workshops-in-the-series/short-read-2016-course-materials/day-4-sequencing-qc/day-4-files-2016/fastqc-manual/view) and watch [this quick video] (https://www.youtube.com/watch?v=bz93ReOv87Y) that explains each analysis module.
+To learn about the quality control analysis (FASTQC), read the [FastQC Manual](http://bficores.colorado.edu/biofrontiers-core-facility-workshops/workshops-in-the-series/short-read-2016-course-materials/day-4-sequencing-qc/day-4-files-2016/fastqc-manual/view) and watch [this quick video](https://www.youtube.com/watch?v=bz93ReOv87Y) that explains each analysis module.
 
 > ### {% icon hands_on %} FastQC to Trimming
 > 1. Using the Search bar in the **Tools** column on the left side of the Galaxy interface, search "FastQC." Find the *FastQC Read Quality reports* result.
 >
 >![](../../images/assembling-genome-sequences-screenshots/4_search_fastqc.png)
 > 
-> 2. Run the [FastQC tool] (https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) on both R1 and R2 reads separately. This tool results in two output entries in the history.
+> 2. Run the [FastQC tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) on both R1 and R2 reads separately. This tool results in two output entries in the history.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/3_fastqc_tool.png)
 >
@@ -57,11 +57,11 @@ To learn about the quality control analysis (FASTQC), read the [FastQC Manual] (
 >
 > ![](../../images/assembling-genome-sequences-screenshots/5_per_base.png)
 >
-> 5. The second module to analyze is the Per base Sequence Quality Module. Ideally, the quality score for reads that are trimmed will remain high (at least above 20). To better understand what is and isn't a good quality score, watch [this short video.] (https://www.youtube.com/watch?v=bz93ReOv87Y) Below is an example of a good report where the first 20 bases and the bases after 250 might be trimmed.
+> 5. The second module to analyze is the Per base Sequence Quality Module. Ideally, the quality score for reads that are trimmed will remain high (at least above 20). To better understand what is and isn't a good quality score, watch [this short video.](https://www.youtube.com/watch?v=bz93ReOv87Y) Below is an example of a good report where the first 20 bases and the bases after 250 might be trimmed.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/6_per_base_quality.png)
 >
-> 6. Using the Galaxy [Trim sequences] (https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) tool, set the base parameters, and execute for both R1 and R2.
+> 6. Using the Galaxy [Trim sequences](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) tool, set the base parameters, and execute for both R1 and R2.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/9-search_trim_sequences.png)
 >
@@ -79,7 +79,7 @@ Search for SPAdes in the search bar underneath the Tools column on the left side
 
 ![](../../images/assembling-genome-sequences-screenshots/10_search_spades.png)
 
-Selecting the Galaxy [spades tool] (https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) and adjust the following parameters:
+Selecting the Galaxy [spades tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) and adjust the following parameters:
 
 1. K-mers
 > * All values must be *odd*, less than 128, listed in *ascending* order, and *smaller* than the read length.
@@ -102,7 +102,9 @@ Selecting the Galaxy [spades tool] (https://cpt.tamu.edu/galaxy/root?tool_id=too
 > Single SPAdes run using one type of setting does not always yield the best output. It is recommended that muiltiple instances of spades assembly using different settings (different choices for K-mer values and data inputs) are carried out to compare the results.
 {: .comment}
 
-Once all of the parameters have been set, **execute** the spades tool by clicking the Execute button at the bottom of the tool. This could take a few hours; however, multiple spades assemblies can be run at once. After the tools have finished running, there will be 5 outputs from each SPAdes run in the history column.
+Once all of the parameters have been set, **execute** the spades tool by clicking the Execute button at the bottom of the tool. This could take up to a few hours; however, multiple spades assemblies can be run at once. 
+
+After the tools have finished running, there will be 5 outputs from each SPAdes run in the history column.
 
 ![](../../images/assembling-genome-sequences-screenshots/13_spades_datasets.png)
 
@@ -125,14 +127,14 @@ Choosing "Spades scaffold stats" as the **Sort Dataset** option and "Column: 2" 
 >
 > * Look for contigs with a coverage much higher than the rest of the list. Often contigs with much higher coverage than the rest of the list represent the desired sequence.
 > 
-> * Look for contigs that are the same size in the assembly that came out of using R1 alone, R2 alone, and both R1 and R2 together>
+> * Look for contigs that are the same size in the assembly that came out of using R1 alone, R2 alone, and both R1 and R2 together
 >
-> * If unsure, extract a few candidate nodes and try blasting them as outlined below.
+> * If unsure, extract a few candidate nodes and try BLAST them as outlined below.
 >
 > * In the end, the contig can only definitely be assigned to a specific sample (and shown that it is complete) after a confirmation PCR is attempted, and the genome is closed using PCR/Sanger sequencing. [Tutorial on Genome closure and re-opening](https://cpt.tamu.edu/training-material/topics/de-novo-assembly/tutorials/genome-close-reopen/tutorial.html).
 {: . tip}
 
-To extract the contig, run the **Fasta Extract Sequence** tool; this pulls out the FASTA file associated with a specific node.
+To extract the contig of interest from the assemled contig pool, run the [**Fasta Extract Sequence** tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) and define the contig (node) of interest; this pulls out the FASTA file associated with the specific node.
 
 ![](../../images/assembling-genome-sequences-screenshots/17_fasta_extraction.png)
 
@@ -142,11 +144,11 @@ Choose "SPAdes contigs (fasta)" as the data file. Under "Sequence ID (or partial
 
 # Preliminary analysis
 
-Now, [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) that node! The will help identify which genome from the index this sequence is most likely associated with (ideally, do PCR confirmations to be 100% sure).
+Now, [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome) that contig sequence! The will help identify which genome from the index this sequence is most likely associated with (ideally, do PCR confirmations to be 100% sure).
 
 > * Use BLASTn + megablast, as it will yield the most closely related organisms. For a broader net, choose a different algorithm.
->    > * Doing the analysis on the home BLAST website will give a quick answer, but this is not a result that can be saved. This is recommended if an immediate answer is desired, but the following *must also* be done.
-> * Doing the BLAST in Galaxy will yield a permanent link that can be stored for reference. Choose the output as BLAST XML (later, the [blast2html tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/jankanis/blast2html/blast2html/0.0.14) must be used to convert to html) or html. After the result is ready, right-click on the eye {% icon solution %} icon and choose "open in a new tab." The hyperlink can be copied and subsequently shared with other researchers or pasted into a tracking sheet where confirmation and closure information is compiled.
+>    > * Doing the analysis on the home BLAST website will give a quick answer, but this is not a result that can be saved. To save a record for later reference, doing BLAST in Galaxy is recommended.
+> * Doing the BLAST in Galaxy will yield a permanent link that can be stored for reference. Choose the output as BLAST XML (later, the [blast2html tool** tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) must be used to convert to html) or html. After the result is ready, right-click on the eye {% icon solution %} icon and choose "open in a new tab." The hyperlink can be copied and subsequently shared with other researchers or pasted into a tracking sheet where confirmation and closure information is compiled.
 
 Extracted sequences appear in the history as such:
 
@@ -160,7 +162,7 @@ Extracted sequences appear in the history as such:
 
 ![](../../images/assembling-genome-sequences-screenshots/22_fasta_renamer_parameters.png)
 
-> * Run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to generate a report that suggests the type of genome ends.
+Another preliminary analysis you do is to run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to generate a report that suggests the type of genome ends.
 
 > * Choose the input files based on which dataset gave the contig for the phage genome. For the FASTQ **mandatory input** use the better set (usually R1). For the **optional input**, use the other dataset (usually R2).
 > * Name the output file with the phage name.
@@ -168,8 +170,7 @@ Extracted sequences appear in the history as such:
 > * When complete, open the output called report.
 
 > ### {% icon tip %} More Information
-> * A protocol for confirmation and closure is [here](https://cpt.tamu.edu/training-material/topics/de-novo-assembly/tutorials/genome-close-reopen/tutorial.html).
-> * Protocols on polishing a genome after annotation to prepare for depositing in GenBank will vary from lab to lab. CPT staff can reference [this document](https://docs.google.com/document/d/1aXE01fphROysxygPMrYcWdkl4iU05H6jKvhtOalTh_A/edit#heading=h.lwwpw4ay44cb).
+> * After the raw contig is assembled, the end sequences of the contig need to be verified and completed by PCR.  This is a process called genome closure. A protocol for genome closure is [here](https://cpt.tamu.edu/training-material/topics/de-novo-assembly/tutorials/genome-close-reopen/tutorial.html).
 {: .tip}
 
 
