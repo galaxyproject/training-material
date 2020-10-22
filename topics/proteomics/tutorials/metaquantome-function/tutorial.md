@@ -11,7 +11,7 @@ objectives:
   - "A functional and quantitational analysis of metaproteomic mass spectrometry data."
 time_estimation: "1h"
 key_points:
-  - "With function and Quantitation inputs perform statistical analysis"
+  - "Perform quantititative and statistical analysis of metaproteomics data to study differentially expressed proteins and their functions."
 contributors:
   - subinamehta
   - timothygriffin
@@ -53,7 +53,7 @@ requirements:
 
 metaQuantome {% cite Easterly2019 %} software suite was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group. 
 
-In this tutorial, we will learn specifically about the metaQuantome Function workflow. In particular, we will learn about how peptide-level quantitation and associated functional information can be used to generate bar plots (for functional information such as molecular function, cellular components and biological processes), volcano plots (to detect differentially expressed function) and heatmap cluster analysis. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas (% cite Delogu2020 %)). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
+In this tutorial, we will learn specifically about the metaQuantome Function workflow. In particular, we will learn about how peptide-level quantitation and associated functional information can be used to generate bar plots (for functional information such as molecular function, cellular components and biological processes), volcano plots (to detect differentially expressed function) and heatmap cluster analysis. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas {% cite Delogu2020 %}. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
 ![MetaQuantome-function-workflow](../../images/mQ-function-workflow.jpg){: width="100%"}
 
@@ -94,13 +94,11 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/import_from_data_library.md %}
 >
 >
-> 3. Rename the datasets (If needed).
-> 4. Check that the datatype ( Make sure they are in the correct formats).
+> 3. Check that the datatype ( Make sure they are in the correct formats).
 >  Functional File (format=`tabular`), an Intensity file (format=`tabular`)
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to the name of the input data (optional).
 >
 {: .hands_on}
 
@@ -111,7 +109,6 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
 >    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
 >
-> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -131,8 +128,6 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 {: .hands_on}
 
-
-![MetaQuantome:databases](../../images/mq-db.png){: width="100%"}
 
 > ### {% icon question %} Questions
 >
@@ -167,11 +162,9 @@ The create samples file module is used to generate the samples file input file f
 >            - *"Group Name"*: `T7`
 >               - *"Column"*: `T7A_1,T7B_1`
 >     
-> 2. Execute.
 >
 {: .hands_on}
 
-![MetaQuantome:Create-Sample](../../images/mQ-sample.png){: width="100%"}
 
 # **Run metaQuantome**
 
@@ -196,9 +189,8 @@ In function mode, the following information is required apart from metaQuantome 
 >        - *"Functional column name"*: `go_term`
 >    - {% icon param-file %} *"Intensity file"*: `Intensity File` (Input dataset)
 >        - *"Intensity file: peptide column name"*: `peptide`
-> 2. Execute.
 >
-> 3. Rename as "metaQuantome expand".
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `metaQuantome expand`.
 >
 >
 >
@@ -232,14 +224,13 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >    - *"min_child_nsamp"*: `1`
 >    - *"qthreshold"*: `2`
 >
-> 2. Execute.
 >
-> 3. Rename as "metaQuantome:Filter".
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `metaQuantome:Filter`.
 >
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > To learn more about the filter module please read the metaQuantome paper published by Galaxy-P { % cite Easterly2019 %}.
+>    > To learn more about the filter module please read the metaQuantome paper published by Galaxy-P {% cite Easterly2019 %}.
 >    {: .comment}
 >
 {: .hands_on}
@@ -271,9 +262,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >    - *"Perform paired tests"*: `Yes`
 >
 >
-> 2. Execute.
->
-> 3. Rename as "metaQuantome:stat".
+> 2. **Rename** {% icon galaxy-pencil %} the output file to `metaQuantome:stat`.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -300,7 +289,6 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Mean intensity column name"*: `T2_mean`
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
-> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    > The user has a choice to run Bar plot for T2, T4 and T7 to know the top 5 or 10 most differently expressed functions. Here we have restricted the GO category to Molecular Function but the user can choose Biological Processes or Cellular component as their category.
@@ -337,7 +325,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Mean intensity column name"*: `T4_mean`
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
-> 2. Execute.
+> 
 {: .hands_on}
 ![T4_MF](../../images/T4-mf.png){: width="85%"}
 
@@ -354,7 +342,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
 >
-> 2. Execute.
+> 
 {: .hands_on}
 ![T7_MF](../../images/T7-mf.png){: width="85%"}
 
@@ -372,7 +360,6 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Name of the annotation column"*: `id`
 >        - {% icon param-select %} *"Flip the fold change (i.e., multiply log fold change by -1)"*: `No`
 >        - {% icon param-select %} *"Make one plot for each of BiologicalProcess, CellularComponent, and MolecularFunction GO term categories"*: `Yes`
-> 2. Execute.
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -410,7 +397,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Name of the annotation column"*: `id`
 >        - {% icon param-select %} *"Flip the fold change (i.e., multiply log fold change by -1)"*: `No`
 >        - {% icon param-select %} *"Make one plot for each of BiologicalProcess, CellularComponent, and MolecularFunction GO term categories"*: `Yes`
-> 2. Execute.
+>
 {: .hands_on}
 ![T2-T4-volcano](../../images/T2-T4-volcano.png){: width="100%"}
 
