@@ -15,6 +15,7 @@ tutorial_name: getting-started-with-apollo
 >    >    > 3. Apollo
 >    >    > 4. Stand-alone browsers: Artemis
 > * Annotation Within Apollo
+>    > * Getting into Apollo
 >    > * The Galaxy-Apollo Bridge 
 >    > * Navigating Through Apollo
 {: .agenda}
@@ -88,6 +89,19 @@ Galaxy and Apollo work together extensively at the CPT Galaxy plateform and it i
 JiG essentially sends a "snapshot" of your organism to Apollo, where you can add, remove or edit feature annotations. The changes you make in Apollo are maintained within a separate database and will not appear in Galaxy until you retrieve your data. The retrieved data can then be used to conduct further analyses in Galaxy, which is then sent *back* into Apollo using the same JiG tools. As the annotation process progresses, the organism's JBrowse instance will accumulate more and more data via this process, which is reflected in additional annotation tracks being added to the Apollo record.
 
 Apollo uses the concept of *Organisms,* with each organism having one or more *reference sequences* below it. Some organisms such as eukaryotes might have multiple reference sequences associated with them, which would correspond to multiple chromosomes. For phage annotation projects, **each organism will only have one reference sequence.** 
+
+## Getting into Apollo
+Apollo can be accessed by two different methods, as shown below:
+
+> #### Method 1: Main page
+>    > For users with organisms already loaded into Apollo, this is the most straightforward method. Simple navigate to the home page via "Analyze data" tab or refreshing the screen, and click on "CPT Apollo"
+
+![](../../images/getting-started-with-apollo-screenshots/25_access_apollo.png)
+
+> #### Method 2: Galaxy history
+>    > After running a structural or functional workflow, the history below will be generated. Click on the {% icon eye %} icon to enter apollo within the Galaxy window. 
+
+![](../../images/getting-started-with-apollo-screenshots/24_annotate_data.png)
 
 ## Navigating Through Apollo
 
