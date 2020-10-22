@@ -438,15 +438,14 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
 >    > ### {% icon tip %} Hiding intermediate steps
->    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
+>    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little checkbox in front of every output dataset:
 >    > ![Asterisk for `out_file1` in the `Select First` tool](../../../../shared/images/workflow_editor_mark_output.png)
 >    >
->    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
 >    {: .tip}
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
-> 4. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 4. Make sure the  **check boxes** for `out_file1` in the `Select First` and `Compare two Datasets` tools are selected. Make sure that everything else is not selected.
 >
 >    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.
 >
@@ -466,8 +465,6 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 7. **Repeat** this for the output of the `Compare two Datasets` tool, naming it `Top 5 exons`
 >
 > 8. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
->
->    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
 >
 > 9. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
 >
@@ -510,7 +507,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
 >
-> 5. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
+> 5. **Rename** {% icon galaxy-pencil %} the dataset to `Repeats`
+>
+> 6. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
@@ -518,19 +517,19 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >
-> 6. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+> 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
 >    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
->    - {% icon param-file %} *"SNPs"*
+>    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
 >
->   > ### {% icon comment %} Potential workflow issues
->   >
->   >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
->   >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
->   {: .comment}
+>    > ### {% icon comment %} Potential workflow issues
+>    >
+>    >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>    >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
+>    {: .comment}
 >
-> 7. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+> 8. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
