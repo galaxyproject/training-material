@@ -35,7 +35,7 @@ Finalize the genome annotation in Apollo. Check the following before proceeding 
 
 # Step 2: Retrieve Apollo Annotation Record into Galaxy
 
-> * In Galaxy, run the CPT [Retrieve Data](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.webapollo.export) tool.
+> * In Galaxy, run the CPT [Retrieve Data](https://cpt.tamu.edu/galaxy-pub/root?tool_id=export) tool.
 > * If the genome needs to be re-opened, then do that now following this [tutorial](https://cpt.tamu.edu/training-material/topics/additional-analyses/tutorials/reopening-apollo-with-annotations/tutorial.html). If not, proceed with the gff3 to Genbank step below.
 > * Run the [GFF3 to GenBank](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.gff.gff2gb) conversion tool.
 > * Run the [GenBank to 5 Column Table](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.genbank.GBKtoFiveCol) tool to generate the 5 column table text file, which will be verified and edited before depositing to GenBank.
@@ -49,7 +49,7 @@ In the 5 column table generated from **Step 2**, examine if locus tags assigned 
 {: .tip}
 
 Typically we verify the following:
->    > ### I. Locus Tags
+>    > #### I. Locus Tags
 >    > 
 >    >Verify if the locus tags are assigned properly for the tricky features per [NCBI locus tag rules](https://www.ncbi.nlm.nih.gov/genomes/locustag/Proposal.pdf).  If not correct, you need to run the genbank file through [Renumbering](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.genbank.RelabelTags) tool and re-generatet 5 column table to verify again.
 >    >
@@ -65,11 +65,11 @@ Typically we verify the following:
 >    >
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/1-feature_table.PNG)
 >    >
->    > ### II. Intron-containing Genes
+>    > #### II. Intron-containing Genes
 >    >
 >    > Verify the base locations of the intron-containing genes are correct.  Gene feature span should be a single span covering all exons and introns.  The actual CDS feature should be annotated with sets of nucleotide spans showing how the exons are joined to create the correct product. Informative notes such as “Intron splice site predicted by Blast homology to XXXXX” or “intron contains VSR homing endonuclease” can be added.  When exon boundaries can not be identified, only the gene span covering all exons and introns is reported. See [the interrupted genes tutorial](https://cpt.tamu.edu/training-material/topics/additional-analyses/tutorials/finding-interrupted-genes/tutorial.html) for more info. 
 >    >
->    > ### III. Frameshifts
+>    > #### III. Frameshifts
 >    >
 >    > > > * Make sure the base coordinates of the two joint CDS, such as “join(55078..55479,55478..56029)”, are correct. 
 >    > 
@@ -82,18 +82,18 @@ Typically we verify the following:
 >    > See below for an example with properly formatted frameshifts.
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/2-formatted-frameshifts.PNG)
 >    >
->    > ### IV. Merged CDS on Minus Strand
+>    > #### IV. Merged CDS on Minus Strand
 >    >
 >    > For cases with joint exons or joint frameshift proteins located on minus strand, make sure the order of the two CDS in the 5 column table is correct in order to avoid an error message after NCBI reviews the submission.  Here is an example for the proper order of two merged CDS in a 5 column table (*note the fragment from right side of the genome is listed first in the table*):           
 >    >
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/3-two-merged-cds.PNG)
 >    >
->    > ### V. Terminal Repeats
+>    > #### V. Terminal Repeats
 >    >
 >    > If applicable, add "repeat_region" for terminal repeat with the defined coordinates. The CPT convention is to put the TR at the 5’ end, not repeating the sequence at the 3’ end of the genome.  Add notes such as "direct terminal repeat predicted by PhageTerm", and "right end of genome sequence not duplicated in this record" to indicate that the bases are not repeated in the genome deposited, but that that sequence (and its genes) are present in the viral genome.  See below for an example.
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/4-repeat-region.PNG)
 >    >
->    > ### VI. Cos End Sequence
+>    > #### VI. Cos End Sequence
 >    >
 >    > If applicable, add "misc_feature" for cos end sequence with the defined coordinates to indicate the cos end sequence . See below for an example.
 >    > ![](../../images/Apollo-record-to-Genbank-screenshots/5-misc-feature.PNG)
@@ -102,17 +102,17 @@ Typically we verify the following:
 # Step 4: Final Formatting for GenBank Deposit
 For Genbank submission through [BankIt](https://www.ncbi.nlm.nih.gov/WebSub/?tool=genbank), you need to provide a 5 column table text file, a DNA sequence FASTA file, and fill in genome source information as required. 
 
->    > ### I. 5-column Table Text File
+>    > #### I. 5-column Table Text File
 >    >
 >    > > > * Check the feature table header, it should be >Feature Phagename (such as >Feature Minorna).  All the locus tags in the table can be “CPT_phagename_00X” (such as CPT_ Minorna_00X).
 >    > >
 >    > > > * Change phage name if needed.  In the 5 column table file, execute **Find and Replace** in a text editor.  Be careful if editing in Excel or Word because it can insert characters upon saving that **break** the NCBI uploader.
 >    >
->    > ### II. DNA Sequence FASTA File
+>    > #### II. DNA Sequence FASTA File
 >    >
 >    > > > * Check the header, it should be >Phagename (such as >Minorna).  **This header has to match the name after “Feature” in 5 column table header.**
 >    >
->    > ### III. Source Information
+>    > #### III. Source Information
 >    >
 >    > Gather all source information (source info example is shown below), which are needed when you follow [BankIt](https://www.ncbi.nlm.nih.gov/WebSub/?tool=genbank) to deposit the 5 column table file and the DNA FASTA file to Genbank. 
 >    >
