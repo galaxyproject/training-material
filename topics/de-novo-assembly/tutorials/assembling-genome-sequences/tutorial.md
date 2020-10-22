@@ -6,7 +6,7 @@ tutorial_name: assembling-genome-sequences
 
 # Introduction
 
-In this tutorial users will learn how to assemble phage genomes that have been sequenced at the Center for Phage Technology. This starts from retrieving the raw read data into the CPT Galaxy, trimming those reads, and proceeds through assembly with SPAdes and initial analysis of the contig.
+The CPT conducts routine phage genome sequencing runs using Illumina sequencing for our research. In this tutorial users will learn how to process the Illumina short reads sequences and assemble phage genomes. This starts from retrieving the raw read data stored in the CPT share data libraries into the CPT Galaxy, trimming those reads, and proceeds through assembly with SPAdes and initial analysis of the contig.
 
 > ### Agenda
 >
@@ -20,34 +20,34 @@ In this tutorial users will learn how to assemble phage genomes that have been s
 
 # Import Sequencing Data into a New History in Galaxy
 
-The user performing the sequencing will upload the final BaseSpace data into a shared Data Library in Galaxy.
+The CPT researcher performing the sequencing runs will upload the sequence reads data from Illumina BaseSpace into a shared data library in Galaxy.  The researcher performing the genome assembly will need to retrieve the sequence reads data from the shared data library into a new Galaxy history before conducting assembly. 
 
 > ### {% icon hands_on %}
-> 1. Under the "Shared Data" drop-down menu at the top of the Galaxy home page.
+> 1. Under the "Shared Data" drop-down menu at the top of the Galaxy home page, click on "Data Libraries".
 >
 > ![](../../images/assembling-genome-sequences-screenshots/1_shared_data.png)
 >
 > 2. Click on "CPT Sequencing." On that page, the different sequencing runs are sorted by Year-Month.
 >
-> 3. Identify which index contains the R1 and R2 reads in question (the forward and reverse reads, respectively). Your data file should be a .fastq, fastqsanger, or .fastqsolexa/equivalent.
+> 3. Select the folder that contains your sequence data, identify which index contains the R1 and R2 reads (the forward and reverse reads, respectively) you need to assemble. Your data file should be a .fastq, fastqsanger, or .fastqsolexa/equivalent.
 >
-> 4. If there are multiple samples across multiple indexes, make sure each index gets its own, new history. This can be done by clicking the "to History" button at the top of the current index.
+> 4. Impot your sequence reads data into a history.  This can be done by clicking the "to History" button at the top of the current index. You have the option of either transfering to an existing history or creating a new history.  If there are multiple samples across multiple indexes, it is a good practice to make sure each index gets its own history. 
 >
 > ![](../../images/assembling-genome-sequences-screenshots/2_to_history.png)
 >
-> 5. Once the data has been imported and it is ready to assemble, return to the Galaxy Homepage where all the tools necessary can be accessed.
+> 5. Once the data has been imported and it is ready to assemble, return to the Galaxy Homepage where all the tools can be accessed.
 {: .hands_on}
 
 # Running the Quality Control Report and Trimming the Reads
 
-To learn about the Galaxy tool used for quality control analysis, read the [FastQC Manual](http://bficores.colorado.edu/biofrontiers-core-facility-workshops/workshops-in-the-series/short-read-2016-course-materials/day-4-sequencing-qc/day-4-files-2016/fastqc-manual/view) and watch [this quick video](https://www.youtube.com/watch?v=bz93ReOv87Y) that explains each analysis module.
+To learn about the quality control analysis (FASTQC), read the [FastQC Manual] (http://bficores.colorado.edu/biofrontiers-core-facility-workshops/workshops-in-the-series/short-read-2016-course-materials/day-4-sequencing-qc/day-4-files-2016/fastqc-manual/view) and watch [this quick video] (https://www.youtube.com/watch?v=bz93ReOv87Y) that explains each analysis module.
 
 > ### {% icon hands_on %} FastQC to Trimming
 > 1. Using the Search bar in the **Tools** column on the left side of the Galaxy interface, search "FastQC." Find the *FastQC Read Quality reports* result.
 >
 >![](../../images/assembling-genome-sequences-screenshots/4_search_fastqc.png)
 > 
-> 2. Run the [FastQC tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.63) on both R1 and R2 reads separately. This tool results in two output entries in the history.
+> 2. Run the [FastQC tool] (https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) on both R1 and R2 reads separately. This tool results in two output entries in the history.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/3_fastqc_tool.png)
 >
@@ -57,11 +57,11 @@ To learn about the Galaxy tool used for quality control analysis, read the [Fast
 >
 > ![](../../images/assembling-genome-sequences-screenshots/5_per_base.png)
 >
-> 5. The second module to analyze is the Per base Sequence Quality Module. Ideally, the quality score for reads that are trimmed will remain high (at least above 20). To better understand what is and isn't a good quality score, watch [this short video.](https://www.youtube.com/watch?v=bz93ReOv87Y) Below is an example of a good report where the first 20 bases and the bases after 250 might be trimmed.
+> 5. The second module to analyze is the Per base Sequence Quality Module. Ideally, the quality score for reads that are trimmed will remain high (at least above 20). To better understand what is and isn't a good quality score, watch [this short video.] (https://www.youtube.com/watch?v=bz93ReOv87Y) Below is an example of a good report where the first 20 bases and the bases after 250 might be trimmed.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/6_per_base_quality.png)
 >
-> 6. Using the Galaxy [Trim sequences](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) tool, set the base parameters, and execute for both R1 and R2.
+> 6. Using the Galaxy [Trim sequences] (https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) tool, set the base parameters, and execute for both R1 and R2.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/9-search_trim_sequences.png)
 >
