@@ -342,7 +342,7 @@ The imported workflow will then become available for use under the *Workflow* me
 
 In the collection of workflows, click on the down arrow of the desired workflow, and select *Run.*
 
-![](../../images/introduction-to-cpt-galaxy-screenshots/26_run_workflow.png)
+![](../../images/introduction-to-cpt-galaxy-screenshots/run_workflow.png)
 
 The workflow interface page will appear; this can feel a little overwhelming, especially as a beginner. For the most part, the parameters are pre-configured. Some inputs may need to be manually adjusted by the user. Ask the [CPT](https://cpt.tamu.edu) staff and IT management (cpt@tamu.edu) if there is confusion about the necessary inputs.
 
