@@ -437,11 +437,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
->    > ### {% icon tip %} Hiding intermediate steps
->    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little checkbox in front of every output dataset:
->    > ![Asterisk for `out_file1` in the `Select First` tool](../../../../shared/images/workflow_editor_mark_output.png)
->    >
->    {: .tip}
+>    {% include snippets/workflow_hide_intermediate_steps.md %}
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
