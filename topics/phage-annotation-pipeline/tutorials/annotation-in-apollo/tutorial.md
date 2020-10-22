@@ -67,8 +67,6 @@ Reference the list above to see how the [CPT](https://cpt.tamu.edu) would prefer
 >
 > Clicking anywhere outside of the “Name” field (or the most recently adjusted field) OR hitting tab on the keyboard should automatically save the change. If it has successfully been saved, the change will be immediately noticeable in the User-Created Annotations track, even without closing the popup window.
 >
-> ![](../../images/annotation-in-apollo-screenshots/7_gene_name_saved.png)
->
 > If the changes are not being saved, refresh the page and try again. If this continues to happen, try opening Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) in an **incognito window**.
 {: .tip}
 
