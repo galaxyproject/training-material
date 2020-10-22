@@ -491,9 +491,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
-> 2. Click **Analyze Data** at the top to return to the main analysis window
+> 3. Click **Analyze Data** at the top to return to the main analysis window
 >
-> 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
+> 4. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
 >
 >    **UCSC Main** {% icon tool %} table browser:
 >
@@ -510,23 +510,27 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
 >
-> 4. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
+> 5. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
+>     {% include snippets/run_workflow.md %}
+>
 >    The central panel will change to allow you to configure and launch the workflow.
 >
-> 5. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+> 6. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+>    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
+>    - {% icon param-file %} *"SNPs"*
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
-
-> > ### {% icon comment %} Potential workflow issues
-> >
-> >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input. 
-> >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
-> {: .comment}
 >
-> 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+>   > ### {% icon comment %} Potential workflow issues
+>   >
+>   >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>   >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
+>   {: .comment}
+>
+> 7. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}
