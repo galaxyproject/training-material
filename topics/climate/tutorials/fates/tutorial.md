@@ -106,7 +106,117 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 
 # Step 2: Setting up a CLM-FATES simulation
 
+We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
+
+> ## {% icon comment %} Tip: Finding your tool
+>
+> Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
+>
+> Additionally different servers may have multiple, similarly named tools which accomplish similar functions. When following tutorials, you should use precisely the tools that they describe. For real analyses, however, you will need to search among the various options to find the one that works for you.
+>
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
+>
+> 1. {% tool [CTSM/FATES-EMERALD](ctsm_fates) %} with the following parameters:
+>    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: select the **inputdata_version2.0.0_ALP1.tar** file from your history
+>    - *Name of your case*: ALP1_exp
+>    - *Expand 'Customize the model run period' to change the default values:
+>        - **Determines the model run initialization type.**: select **hybrid**
+>        - **Reference case for hybrid or branch runs**: ALP1_refcase
+>        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2100-01-01
+>        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs.**: 2100-01-01
+>        - **restart for running FATES EMERALD**: ALP1_refcase_2100-01-01.tar
+>        - **Provides a numerical count for STOP_OPTION.**: 5
+>        - **Sets the run length along with STOP_N and STOP_DATE**: nyears
+>    - Click **Execute**
+>
+>    > ### {% icon comment %} Tip: search for the tool
+>    >
+>    > Use the **tools search box** at the top of the tool panel to find **Remove beginning** {% icon tool %}.
+>    {: .tip}
+>
+>    > ## {% icon comment %} startup versus hybrid
+>    >
+>    >  TODO: Explain here why we want to start from an hybrid and not startup
+>    >
+>    {: .comment}
+>
+> 2. Check that the datatype is **netcdf**
+>
+>    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>
+>    {% include snippets/change_datatype.md datatype="datatypes" %}
+>
+> 3. **Rename** {% icon galaxy-pencil %} the output dataset to `ALP1.nc`
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Click on the new history item to expand it
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Which tags are present on this resulting dataset? (You may have to refresh the history panel to see the tags)
+>    > 2. 
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
+
 # Step 3: Quick visualization with Panoply
+
+## Opening up Panoply
+
+> ### {% icon hands_on %} Hands-on: Launch Panoply
+>
+>  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
+>
+> > ### {% icon tip %} Tip: Launch Panoply in Galaxy
+> > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
+> >
+> > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
+> > 2. Check **ALP1.nc** dataset selected in the netcdf input field
+> > 3. Click Execute
+> > 4. The tool will start running and will stay running permanently
+> > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
+> > 6. Click on your Panoply instance
+> >    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
+> > 7. Click on **ALP1.nc** dataset
+> {: .tip}
+{: .hands_on}
+
+## Inspect metadata
+
+> ### {% icon hands_on %} Hands-on: Inspect dataset
+>
+> 1. Inspect dataset content
+> 
+>    Here you can look at the dataset (ALP1.nc) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc) 
+>
+>    > ### {% icon question %} Question
+>    >
+>    > ?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+>
+> 2. Inspect the area occupied by woody plants (AREA_TREE) variable
+>
+>    > ### {% icon question %} Question
+>    >
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > {: .solution}
+>    {: .question}
+>
+{: .hands_on}
 
 # Step 4: Using Galaxy tools for analysing your CLM-FATES simulation
 
