@@ -109,10 +109,10 @@ The Galaxy interface consists of three main parts. The available tools are liste
 
 > ### {% icon hands_on %} Hands-on: Start with an empty history
 >
-> * If this is the first time you have used this Galaxy server, then your history panel will look like the image above.
+> - At the start of the tutorial you should ensure that you are working in a new history, i.e. one without any datasets
 >
-> * If your history has datasets in it (there will be one or more green boxes, *datasets*, there) then create a new history:
->     * Click the **plus icon** to create a new history
+>    {% include snippets/create_new_history.md %}
+>
 {: .hands_on}
 
 ## Get data into Galaxy
@@ -305,7 +305,7 @@ How might we do this?  Column 6 contains the strand information.  Can we split g
 > ### {% icon hands_on %} Searching for and launching a tool
 >
 > 1. Try the **tools search box**.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.
-> 2. If you haven't already searched with it, *enter* `filter` in the **tool search box**.  In the results is
+> 2. If you haven't already searched with it, *enter* `filter` in the **tool search box**.  Among the results you should see
 >    - {% tool [Filter](Filter1) %} data on any column using simple expressions.
 >    - That might work.
 > 3. *Click* on {% tool [Filter](Filter1) %} to open the Filter tool in the central panel.
