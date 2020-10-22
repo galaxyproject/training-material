@@ -340,11 +340,15 @@ The imported workflow will then become available for use under the *Workflow* me
 
 ## Running a Workflow
 
-In the collection of workflows, click on the down arrow of the desired workflow, and select *Run.*
+In the collection of workflows, click on the blue play button to the right of the desired workflow.
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/run_workflow.png.png)
 
 The workflow interface page will appear; this can feel a little overwhelming, especially as a beginner. For the most part, the parameters are pre-configured. Some inputs may need to be manually adjusted by the user. Ask the [CPT](https://cpt.tamu.edu) staff and IT management (cpt@tamu.edu) if there is confusion about the necessary inputs.
+
+> ### {% icon tip %} Note …
+> Larger workflows often take several minutes to populate the screen. Do not refresh your page during this time, or else it will return you to the home screen.
+{: .tip}
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/27_workflow_parameters.png)
 
