@@ -162,7 +162,7 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 > > ### {% icon solution %} Solution
 > >
 > > 1. 271 protein (groups) were found in total.
-> > 2. Depending on the tool version 2387 or 2388 peptides were found in total.
+> > 2. 2387 peptides were found in total.
 > > 3. Sample1: 237, Sample2: 123 (**filter data on any column** {% icon tool %} on the `protein groups` file *"with following condition"* `c32!=0` or `c33!=0` and *"Number of header lines" `1`)
 > >
 > {: .solution}
