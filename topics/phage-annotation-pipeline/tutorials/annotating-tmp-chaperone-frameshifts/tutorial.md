@@ -174,7 +174,7 @@ The TMP chaperone and TMP chaperone frameshift  products have been generated, no
 > * While in the Information Editor window, add the **Attribute** tag “frameshift” with the value “a” to *both* TMP chaperone frameshift products.
 >    > * This will allow for a merger later.
 
-![](../../images/annotating-tmp-chaperone-frameshifts-screenshots/25_edit_annotation.png)
+![](../../images/annotating-tmp-chaperone-frameshifts-screenshots/27_edit_annotation.png)
 
 ## Examples of TMP Chaperone and TMP Chaperone Frameshift Annotations
 
