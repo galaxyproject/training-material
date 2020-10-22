@@ -4,10 +4,9 @@ topic_name: de-novo-assembly
 tutorial_name: genome-close-reopen
 ---
 
-# Genome Closure from a Sequencing Run & Re-opening
+# Genome closure from an assembled contig and re-opening a complete genome
 
 > ### Agenda
->
 > * Genome Closure
 >    > * Confirmation PCR
 >    > * Closure PCR
@@ -26,9 +25,9 @@ tutorial_name: genome-close-reopen
 
 # Genome Closure
 
-This protocol is expected to be useful after a phage genome has been sequenced and the reads assembled, see the [Assembling Genome Sequences tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html) for a tutorial on that process. The assembly results from a sequencing run will include a long list of ‘nodes’. These are contigs that were assembled from the reads in that index. Based on the estimated or known sizes of the input genomes, coverage, and preliminary BLAST results, it is often possible to accurately match a specific node sequence to an input phage gDNA (or other input DNA). Definitive matching requires an experimental approach called **confirmation PCR**, where primers are designed based off the node sequence, then used to amplify the expected sequence from the matching input genome. An amplicon of the correct size is the best verification that the node represents the assembled sequence version of that genomic DNA.
+This protocol is expected to be useful after a phage genome has been sequenced and the reads are assembled into a contig, see the [Assembling Genome from Sequencing reads tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html). The assembly results from a sequencing run will include a long list of ‘nodes’. These are raw contigs that were assembled from the reads in that sequencing index. Based on the estimated or known sizes of the input genomes, the sequencing coverage for the assembled contigs,  and the preliminary BLAST results using the contig sequences, it is often possible to accurately match a specific node sequence to an input phage gDNA (or other input DNA). Definitive matching requires an experimental approach called **confirmation PCR**, where primers are designed based off the raw contig sequence, then the primers are used to amplify the expected sequence using the matching input gDNA. An amplicon of the correct size is the best verification that the raw contig represents the genome of the phage to which the genomic DNA is associated with.
 
-After confirming that the assembled node represents a particular phage genome, the next step is to verify that all the bases of the actual genome are accounted for in the final assembly, the **closure PCR**. For most phage genomes, this can also be done via PCR across the ends of the contig. The relative success of this strategy is typically based on the packaging strategy adopted by the phage. 
+After confirming that the assembled conitg represents a particular phage genome, the next step is to verify that all the bases of the actual genome are accounted for in the assembed sequence, an experimental approach called **closure PCR**. For most phage genomes, this can also be done via PCR across the ends of the contig. The relative success of this strategy is typically based on the packaging strategy adopted by the phage. 
 
 Both T1 and T4-like phages do **pac type packaging** and thus are circularly permuted, so *PCR closure should work*, meaning you should get closure PCR product which you will sequence to make sure no bases are missing at the random breakpoint.   
 
