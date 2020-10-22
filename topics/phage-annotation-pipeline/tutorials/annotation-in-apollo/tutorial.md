@@ -35,6 +35,7 @@ Generally, the annotation process is a synthesis between the understanding of ph
 
 > * Name -> *Gene name* (Could be something like **terminase small subunit** or **hypothetical protein**.) Follow the universal naming conventions at [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/internatprot_nomenguide/) and [UniProt](https://www.uniprot.org/docs/International_Protein_Nomenclature_Guidelines.pdf).
 > * Symbol -> *Do not use.*
+> * Aliases -> *Do not use.*
 > * Description -> *Do not use.*
 > * DBXRefs -> *Only use if the annotator is experienced; please ensure formatting is correct.*
 > * Attributes -> *Do not use,* except in the case of frame shifted proteins.
@@ -46,7 +47,7 @@ Generally, the annotation process is a synthesis between the understanding of ph
 > Calling genes is [covered in another tutorial.]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/structural-annotation-workflow/tutorial.html)
 {: .tip}
 
-To annotate a gene that has been called, right click on the gene in the pale yellow  User-Created Annotations track, and select “Edit information (alt-click).”
+To annotate a gene that has been called, right click on the gene in the pale yellow  User-Created Annotations track, and select “Open Annotation (alt-click).”
 
 ![](../../images/annotation-in-apollo-screenshots/0_right_click.png)
 
@@ -54,14 +55,14 @@ A screen will appear with various fields that can be filled in with information 
 
 ![](../../images/annotation-in-apollo-screenshots/1_gene_information.png)
 
-Reference the list above to see how the [CPT](https://cpt.tamu.edu) would prefer to have genes annotated.
+Reference the list above to see how the CPT would prefer to have genes annotated.
 
 > ### {% icon comment %} Naming Guidelines
 > It is imperative to follow suit with the [UniProt](https://www.uniprot.org/docs/International_Protein_Nomenclature_Guidelines.pdf) and [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/internatprot_nomenguide/) international naming conventions. It allows for standardization and consistency in naming proteins, subsequently aiding data retrieval and improving communication. Follow the convention for capitalization and hypothetical protein naming.
 {: .comment}
 
 > ### {% icon tip %} Ensuring Changes in Gene Information are Saved
-> There are occasional small bumps on the road when annotating in Apollo, many of which are encountered when editing information for a gene. It helps to be aware of how to avoid them, and where to fix issues when they arise. For example, the information being shown is that of the gene highlighted in red; this is a gene in the phage P22 genome. The name has been changed from “gene name” (as is seen in the User-Created Annotations track in the background) to “gtrB” in the Information Editor window. There has been no other action outside of typing in “gtrB”.
+> There are occasional small bumps on the road when annotating in Apollo, many of which are encountered when editing information for a gene. It helps to be aware of how to avoid them, and where to fix issues when they arise. For example, the information being shown is that of the gene highlighted in red; this is a gene in the phage P22 genome. The name has been changed from “gene name” (as is seen in the User-Created Annotations track in the background) to “tail tubular protein B” in the Information Editor window. There has been no other action outside of typing in “tail tubular protein B”.
 >
 > ![](../../images/annotation-in-apollo-screenshots/6_gene_name_before.png)
 >
@@ -73,7 +74,7 @@ Reference the list above to see how the [CPT](https://cpt.tamu.edu) would prefer
 
 # Making the Best Prediction
 
-The [Center for Phage Technology](https://cpt.tamu.edu/) integrates as many data sources as is feasible when making predictions about gene function. Please contact the [CPT](https://cpt.tamu.edu) IT staff (cpt@tamu.edu) if another data source not currently available in Apollo is desired. The [CPT](https://cpt.tamu.edu) staff will assess your recommendation and may add it to the Phage Annotation Pipeline (PAP).
+The Center for Phage Technology integrates as many data sources as is feasible when making predictions about gene function. Please contact the CPT IT staff (cpt@tamu.edu) if another data source not currently available in Apollo is desired. The CPT staff will assess your recommendation and may add it to the Phage Annotation Pipeline (PAP).
 
 > ### {% icon tip %} A word on genome annotation
 > While we use all the best bioinformatic tools available to complete these analyses, all these are still predictions. Hypothetical. Every prediction is subject to being wrong and getting corrected with new information. This is the nature of genome annotation, and science in general. Due diligence and thorough work is expected, but it is inadvisable to agonize over any single gene prediction. 
@@ -87,7 +88,7 @@ The details presented will vary between evidence types (e.g.BLAST vs. InterProSc
 
 ### Gene Calls
 
-The [CPT’s](https://cpt.tamu.edu) PAP integrates gene calls from numerous sources, specifically *MetaGeneAnnotator* and *Glimmer3*. These gene callers are generally very accurate. However, should those fail to find a gene, *SixPack* is a backup gene caller.
+The CPT’s PAP integrates gene calls from numerous sources, specifically *MetaGeneAnnotator* and *Glimmer3*. These gene callers are generally very accurate. However, should those fail to find a gene, *SixPack* is a backup gene caller.
 
 ![](../../images/annotation-in-apollo-screenshots/2_gene_calls.png)
 
@@ -120,7 +121,7 @@ Megablast is run against a copy of NCBI’s NT database. Hovering over a hit seg
 
 BLASTp is run against three databases (in the current PAP iteration):
 
-> * [CPT’s](https://cpt.tamu.edu) Canonical Phage database, a select collection of high-quality and well-studied representative phage proteomes
+> * CPT’s Canonical Phage database, a select collection of high-quality and well-studied representative phage proteomes
 > * SwissProt (curated from UniProt)
 > * TrEMBL (from UniProt)
 > * nr (from NCBI)
@@ -133,19 +134,19 @@ Apollo details similarities between the query/novel protein and the homologs by 
 
 ### Phage Analyses
 
-The [CPT](https://cpt.tamu.edu) has developed a number of phage analysis tools for aid in *phage specific* annotation. These are supplementary bits of information which can inform the analysis, but they must be looked at critically. Many of these tools intentionally yield many possible options, unfortunately yielding high false positive rates.
+The CPT has developed a number of phage analysis tools for aid in *phage specific* annotation. These are supplementary bits of information which can inform the analysis, but they must be looked at critically. Many of these tools intentionally yield many possible options, unfortunately yielding high false positive rates.
 
 ![](../../images/annotation-in-apollo-screenshots/5_phage_analyses.png)
 
 ##### 1. Candidate ISPs/OSPs
 
-Phage lysis genes are [notoriously poorly annotated](https://www.ncbi.nlm.nih.gov/pubmed/30219026). Often they are missed or completely misattributed. To combat this problem for phage spanin proteins, lysis proteins specific to disrupting the outer membrane of gram-negative bacterial hosts, the [CPT](https://cpt.tamu.edu) utilizes the candidate ISP (i-spanin) and OSP (o-spanin) tool output.
+Phage lysis genes are [notoriously poorly annotated](https://www.ncbi.nlm.nih.gov/pubmed/30219026). Often they are missed or completely misattributed. To combat this problem for phage spanin proteins, lysis proteins specific to disrupting the outer membrane of gram-negative bacterial hosts, the CPT utilizes the candidate ISP (i-spanin) and OSP (o-spanin) tool output.
 
 > ### {% icon tip %} Note that…
 > These tracks will feature a *huge* number of false positives. Be sure that the data occurs somewhere around the phage’s lysis cluster (where applicable). Additionally, know what to look for in a lipobox in these potential spanin genes.
 {: .tip}
 
-The ISP track naïvely searches the genome for every possible CDS, and then analyzes them with TMHMM. This happens even in the case of a mis-called or entirely missed i-spanin. The OSP track searches through every possible CDS which contains a lipobox as defined by the [CPT](https://cpt.tamu.edu). *Both* of these datasets are filtered for proximity. Co-incidence of a possible ISP gene and a possible OSP gene is a good sign, but the genomic context information will need to be taken into account to complete the functionality inference.
+The ISP track naïvely searches the genome for every possible CDS, and then analyzes them with TMHMM. This happens even in the case of a mis-called or entirely missed i-spanin. The OSP track searches through every possible CDS which contains a lipobox as defined by the CPT. *Both* of these datasets are filtered for proximity. Co-incidence of a possible ISP gene and a possible OSP gene is a good sign, but the genomic context information will need to be taken into account to complete the functionality inference.
 
 ##### 2. Possible Intron Locations
 
@@ -202,7 +203,7 @@ Terminators are produced from [TransTermHP.](http://transterm.ccb.jhu.edu/) Tran
 
 ##### 4. tRNA and tmRNA
 
-[ARAGORN](https://www.ncbi.nlm.nih.gov/pubmed/14704338) provides the [CPT](https://cpt.tamu.edu) with quality tRNA annotations. An annotator should feel confident annotating tRNA and tmRNA in Apollo using this track. Recall that tRNAs are **not** likely to be embedded within genes.
+[ARAGORN](https://www.ncbi.nlm.nih.gov/pubmed/14704338) provides the CPT with quality tRNA annotations. An annotator should feel confident annotating tRNA and tmRNA in Apollo using this track. Recall that tRNAs are **not** likely to be embedded within genes.
 
 > ### {% icon tip %} Note that…
 > This track can be found underneath the “Sequence Analysis” section of the Structural Annotation portion all of the tracks.
