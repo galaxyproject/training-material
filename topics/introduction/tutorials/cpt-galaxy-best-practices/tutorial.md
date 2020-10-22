@@ -54,31 +54,28 @@ Name the history according to the analysis that has been or will be performed th
 
 ![](../../images/cpt-galaxy-best-practices-screenshots/7_tagged_annotated_p22.png)
 
-> ### {% icon hands_on %} Tagging in Saved Histories
->    > ### {% icon solution %} Click here to learn more.
->    > By clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
->    > 
->    > <img src="../../images/cpt-galaxy-best-practices-screenshots/user_history.png" width="200" height="250" /> 
->    > 
->    > All of the user’s histories appear as condensed lines in the main Galaxy interface.
->    > 
->    > ![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
->    > 
->    > From here, tags can be added by simply clicking on the tab space in the "tags" column.
->    > 
->    > Use the search bar to search by history name or by tag name.
->    {: .solution}
-{: .hands_on}
+### Tagging in Saved Histories
 
-> ### {% icon comment %} Edit in  the *View all Histories* View
-> Editing the name of a history and adding tags/annotations can also be done in the *View all histories* view. To access this, select the ![](../../images/cpt-galaxy-best-practices-screenshots/8_multi_histories_icon.png) icon in the top right-hand corner of the History panel.
->      
+By clicking on the "user" tab on the top of the page opens a drop-down menu containing several options. Click on "Histories" to view saved histories.
+ 
+<img src="../../images/cpt-galaxy-best-practices-screenshots/user_history.png" width="200" height="250" /> 
+ 
+All of the user’s histories appear as condensed lines in the main Galaxy interface.
+
+![](../../images/cpt-galaxy-best-practices-screenshots/saved_history_view.png)
+
+From here, tags can be added by simply clicking on the tab space in the "tags" column.
+
+Use the search bar to search by history name or by tag name.
+
+### Editing in *View all Histories* View
+Editing the name of a history and adding tags/annotations can also be done in the *View all histories* view. To access this, select the ![](../../images/cpt-galaxy-best-practices-screenshots/8_multi_histories_icon.png) icon in the top right-hand corner of the History panel.
+     
 > ![](../../images/cpt-galaxy-best-practices-screenshots/9_multi_histories_view.png)
->    
-> Clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/4_history_tags_icon.png) and ![](../../images/cpt-galaxy-best-practices-screenshots/5_history_annotation_note_icon.png) icons will open the same sections seen in the History panel. Tags and annotation notes can be added here just as they were added in the History panel.
->    
+   
+Clicking on the ![](../../images/cpt-galaxy-best-practices-screenshots/4_history_tags_icon.png) and ![](../../images/cpt-galaxy-best-practices-screenshots/5_history_annotation_note_icon.png) icons will open the same sections seen in the History panel. Tags and annotation notes can be added here just as they were added in the History panel.
+    
 > ![](../../images/cpt-galaxy-best-practices-screenshots/11_edit_in_multi_histories.png)
-{: .comment}
 
 # Datasets
 ------
