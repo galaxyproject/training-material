@@ -21,7 +21,7 @@ contributors:
 ---
 
 # Introduction
-
+{:.no_toc}
 
 The majority of life on Earth is non-diploid and represented by prokaryotes, viruses, and their derivatives, such as our own mitochondria or plant's chloroplasts. In non-diploid systems, allele frequencies can range anywhere between 0 and 100% and there could be multiple (not just two) alleles per locus. The main challenge associated with non-diploid variant calling is the difficulty in distinguishing between the sequencing noise (abundant in all NGS platforms) and true low frequency variants. Some of the early attempts to do this well have been accomplished on human mitochondrial DNA although the same approaches will work equally good on viral and bacterial genomes ({% cite Rebolledo-Jaramillo2014 %}, {% cite Li2015 %}).
 
@@ -30,7 +30,7 @@ As an example of non-diploid systems, we will be using human mitochondrial genom
 There are two ways one can call variants:
 
 1. By comparing reads against an existing genome assembly
-2. By assembling a genome first and then mapping against that assembly
+1. By assembling a genome first and then mapping against that assembly
 
 |                          |
 |--------------------------|
@@ -43,11 +43,20 @@ The goal of this example is to detect heteroplasmies - variants within mitochond
 
 Datasets representing a child and a mother are available in [Zenodo](https://doi.org/10.5281/zenodo.1251112). These datasets were obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
 
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
+
 # Importing example datasets
 
 For this tutorial we have prepared a subset of data previously by our group ({% cite Rebolledo-Jaramillo2014 %}). Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
 
-> ### {% icon hands_on %} Hands-on: Getting the data
+> ### {% icon hands_on %} Hands-on: Get the data
 >
 > Option 1: Data upload from Zenodo
 >
@@ -90,8 +99,8 @@ Before proceeding with the analysis, we need to find out how good the data actua
 
 > ### {% icon hands_on %} Hands-on: Assess quality of data
 >
-> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of the four fastq datasets with the following parameters:
->       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ  datasets selected with **Multiple datasets**
+> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on each of the four FASTQ datasets with the following parameters:
+>       - {% icon param-files %} *"Short read data from your current history"*: all 4 FASTQ datasets selected with **Multiple datasets**
 >
 >    {% include snippets/select_multiple_datasets.md %}
 >
@@ -286,7 +295,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >        - *"The expected mutation rate or pairwise nucleotide diversity among the population under analysis"*: `0.001`
 >        - *"Set ploidy for the analysis"*: `1`
 >        - *"Assume that samples result from pooled sequencing"*: `Yes`
->        - *"Output all alleles which pass input filters, regardles of genotyping outcome or model"*: `Yes`
+>        - *"Output all alleles which pass input filters, regardless of genotyping outcome or model"*: `Yes`
 >
 >    > ### {% icon comment %} Population model options
 >    > The "Population model options" are one of the most important parameter choices to make when calling variants in non-diploid systems.
@@ -312,7 +321,7 @@ FreeBayes is widely used for calling variants in diploid systems. However, it ca
 >    {: .comment}
 {: .hands_on}
 
-FreeBayes will produce a [VCF dataset](https://samtools.github.io/hts-specs/VCFv4.2.pdf) similar to what is shown below (you may need to scroll sideways to see it in full). It lists 25 sites of interest. For brevity, the header lines have been removed:
+FreeBayes will produce a [VCF](https://samtools.github.io/hts-specs/VCFv4.2.pdf) dataset similar to what is shown below (you may need to scroll sideways to see it in full). It lists 25 sites of interest. For brevity, the header lines have been removed:
 
 ```
 #CHROM	POS	ID	REF	ALT	QUAL	FILTER	INFO	FORMAT	raw_child-ds-	raw_mother-ds-
@@ -344,6 +353,7 @@ chrM	15326	.	A	G	73749.6	.	AB=0;ABP=0;AC=2;AF=1;AN=2;AO=2200;CIGAR=1X;DP=2201;DP
 ```
 
 # Filtering VCF data
+
 After filtering the data with stringent input parameters (restricting base quality to a minimum of 30 and mapping quality to a minimum of 20) a considerable amount of variants due to read-alignment bias exists. [Erik Garrison](https://github.com/ekg) has a beautiful illustration of various biases potentially affecting called variants and making a locus sequence-able.
 
 
@@ -444,12 +454,12 @@ Similarly to VCF.IOBIO expanding a history item representing a VCF dataset will 
 >
 >![IGV interface](../../images/mt_igv.png)
 >
-> Here we focus on one particular variant at position 3,243 for reasons that will become apparent in the next section.
+> Here we focus on one particular variant at position 3243 for reasons that will become apparent in the next section.
 {: .hands_on}
 
 # Digging into the data
 
-Visualizing VCF datasets is a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3,243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and with it play a bit more.
+Visualizing VCF datasets is a good way to get an overall idea of the data, but it does not tell a lot of details. For example, above we have visualized site 3243 using IGV. It is interesting but we need to find out more. One thing we can do is to convert VCF dataset into a tab-delimited representation and with it play a bit more.
 
 > ### {% icon hands_on %} Hands-on: Convert VCF to tab-delimited data
 >
