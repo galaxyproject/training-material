@@ -528,8 +528,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://nanopore.usegalaxy.eu/" title="NanoGalaxy">
             NanoGalaxy
         </a>
@@ -596,7 +594,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 18, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 22, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1214,18 +1212,19 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p>When you click on a <span class="notranslate">workflow</span> step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.</p>
 
       <blockquote class="tip">
-        <h3 id="tip-hiding-intermediate-steps"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hiding intermediate steps</h3>
-        <p>When a <span class="notranslate">workflow</span> is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a <span class="notranslate">workflow</span> will be shown, but we can explicitly tell <span class="notranslate">Galaxy</span> which outputs to show and which to hide for a given <span class="notranslate">workflow</span>. This behaviour is controlled by the little asterisk next to every output dataset:
-<img src="../../../../shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p>
 
-        <p>If you click on this asterisk for any of the output datasets, then <em>only</em> files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking <em>all</em> outputs has the same effect as clicking <em>none</em> of the outputs, in both cases all the datasets will be shown.)</p>
+        <h3 id="tip-hiding-intermediate-steps"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Hiding intermediate steps</h3>
+        <p>When a <span class="notranslate">workflow</span> is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a <span class="notranslate">workflow</span> will be shown, but we can explicitly tell <span class="notranslate">Galaxy</span> which outputs to show and which to hide for a given <span class="notranslate">workflow</span>. This behaviour is controlled by the little checkbox in front of every output dataset:</p>
+
+        <p><img src="/training-material/shared/images/workflow_editor_mark_output.png" alt="Asterisk for `out_file1` in the `Select First` tool" /></p>
+
       </blockquote>
     </li>
     <li>
       <p>Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.</p>
     </li>
     <li>
-      <p>Click the <strong>asterisk</strong> for <code class="language-plaintext highlighter-rouge">out_file1</code> in the <code class="language-plaintext highlighter-rouge">Select First</code> and <code class="language-plaintext highlighter-rouge">Compare two Datasets</code> tools.</p>
+      <p>Make sure the  <strong>check boxes</strong> for <code class="language-plaintext highlighter-rouge">out_file1</code> in the <code class="language-plaintext highlighter-rouge">Select First</code> and <code class="language-plaintext highlighter-rouge">Compare two Datasets</code> tools are selected. Make sure that everything else is not selected.</p>
 
       <p>Now, when we run the <span class="notranslate">workflow</span>, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.</p>
     </li>
@@ -1256,8 +1255,6 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     </li>
     <li>
       <p><strong>Save your <span class="notranslate">workflow</span></strong> (important!) by clicking on the <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> icon at the top right of the screen.</p>
-
-      <p><img src="../../images/workflow_editor_save.png" alt="Save option in the workflow editor menu" /></p>
     </li>
     <li>
       <p><strong>Return</strong> to the analysis view by clicking on <strong>Analyze Data</strong> at the top menu bar.</p>
@@ -1275,7 +1272,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
 
 <p>Now that we have built our <span class="notranslate">workflow</span>, let’s use it on some different data. For example, let’s find out which exons have the highest number of repeat elements.</p>
 
-<blockquote>
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run <span class="notranslate">workflow</span></h3>
 
   <ol>
@@ -1324,31 +1321,44 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p>Click on <strong>get output</strong> and then <strong>Send query to <span class="notranslate">Galaxy</span></strong> on the next screen.</p>
     </li>
     <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">Repeats</code></p>
+    </li>
+    <li>
       <p>Open the <strong><span class="notranslate">workflow</span> menu</strong> (top menu bar). Find the <span class="notranslate">workflow</span> you made in the previous section, and select the option <code class="language-plaintext highlighter-rouge">Run</code>.</p>
 
       <p><img src="../../images/101_37.png" alt="`Run` option in the workflow menu" /></p>
 
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-running-a-workflow"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Running a <span class="notranslate">workflow</span></h3>
+        <ul>
+          <li>Click on <em><span class="notranslate">Workflow</span></em> on the top menu bar of <span class="notranslate">Galaxy</span>. You will see a list of all your workflows.</li>
+          <li>Click on the <i class="fas fa-play" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span>-run</span> (<em>Run <span class="notranslate">workflow</span></em>) button next to your <span class="notranslate">workflow</span></li>
+          <li>Configure the <span class="notranslate">workflow</span> as needed</li>
+          <li>Click the <strong>Run <span class="notranslate">Workflow</span></strong> button at the top-right of the screen</li>
+          <li>You may have to refresh your history to see the queued jobs</li>
+        </ul>
+      </blockquote>
+
       <p>The central panel will change to allow you to configure and launch the <span class="notranslate">workflow</span>.</p>
     </li>
-    <li>
-      <p>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="language-plaintext highlighter-rouge">Run <span class="notranslate">workflow</span></code>.</p>
+    <li>Select appropriate datasets for the inputs as shown below, then scroll down and click <code class="language-plaintext highlighter-rouge">Run <span class="notranslate">workflow</span></code>.
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Exons”</em>: the <code class="language-plaintext highlighter-rouge">Exons</code> file you copied from our previous history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Features”</em>: the <code class="language-plaintext highlighter-rouge">Repeats</code> file we downloaded from UCSC</li>
+      </ul>
 
       <p><img src="../../images/101_38.png" alt="Settings for running the workflow" /></p>
+
+      <blockquote class="comment">
+        <h3 id="comment-potential-workflow-issues"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Potential <span class="notranslate">workflow</span> issues</h3>
+
+        <ul>
+          <li><span class="notranslate">Galaxy</span> validates the <span class="notranslate">workflow</span> inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="language-plaintext highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</li>
+          <li>If you see an “Invalid column choice” error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. <code class="language-plaintext highlighter-rouge">4</code> (not <code class="language-plaintext highlighter-rouge">Column 4</code> or anything else).</li>
+        </ul>
+      </blockquote>
     </li>
-  </ol>
-</blockquote>
-
-<blockquote class="notranslate hands_on">
-  <blockquote class="comment">
-    <h3 id="comment-potential-workflow-issues"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Potential <span class="notranslate">workflow</span> issues</h3>
-
-    <ul>
-      <li><span class="notranslate">Galaxy</span> validates the <span class="notranslate">workflow</span> inputs to ensure they’re correct. It may show a validation error at the start, until you select <code class="language-plaintext highlighter-rouge">Exons</code> for the Exons input, and your repeats for the Features input.</li>
-      <li>If you see an “Invalid column choice” error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. <code class="language-plaintext highlighter-rouge">4</code> (not <code class="language-plaintext highlighter-rouge">Column 4</code> or anything else).</li>
-    </ul>
-  </blockquote>
-
-  <ol>
     <li>
       <p>Once the <span class="notranslate">workflow</span> has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:</p>
 
@@ -1484,7 +1494,7 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
     title = "Galaxy 101 (Galaxy Training Materials)",
     year = "2020",
     month = "10",
-    day = "18"
+    day = "22"
     url = "\url{/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
