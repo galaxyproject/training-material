@@ -55,7 +55,7 @@ It will also teach you on how to create Galaxy workflow for your CLM-FATES simul
 > FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
 > we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
-> of the []Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
+> of the [Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
 > FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
 > {% cite Fisher2015 %}.
 > and this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
