@@ -8,6 +8,7 @@ tutorial_name: annotation-in-apollo
 >
 > * Prerequisites
 > * Making an Annotation
+>    > * Ensure Changes in Gene Information are Saved
 > * Making the Best Prediction
 >    > * Gene Calls
 >    > * BLAST
@@ -61,16 +62,8 @@ Reference the list above to see how the CPT would prefer to have genes annotated
 > It is imperative to follow suit with the [UniProt](https://www.uniprot.org/docs/International_Protein_Nomenclature_Guidelines.pdf) and [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/internatprot_nomenguide/) international naming conventions. It allows for standardization and consistency in naming proteins, subsequently aiding data retrieval and improving communication. Follow the convention for capitalization and hypothetical protein naming.
 {: .comment}
 
-> ### {% icon tip %} Ensuring Changes in Gene Information are Saved
-> There are occasional small bumps on the road when annotating in Apollo, many of which are encountered when editing information for a gene. It helps to be aware of how to avoid them, and where to fix issues when they arise. For example, the information being shown is that of the gene highlighted in red; this is a gene in the phage P22 genome. The name has been changed from “gene name” (as is seen in the User-Created Annotations track in the background) to “tail tubular protein B” in the Information Editor window. There has been no other action outside of typing in “tail tubular protein B”.
->
-> ![](../../images/annotation-in-apollo-screenshots/6_gene_name_before.png)
->
-> Clicking anywhere outside of the “Name” field (or the most recently adjusted field) OR hitting tab on the keyboard should automatically save the change. If it has successfully been saved, the change will be immediately noticeable in the User-Created Annotations track, even without closing the popup window.
->
-> If the changes are not being saved, refresh the page and try again. If this continues to happen, try opening Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) in an **incognito window**.
-{: .tip}
-
+### Ensure Changes in Gene Information are Saved
+> There are occasional small bumps on the road when annotating in Apollo, many of which are encountered when editing information for a gene. It helps to be aware of how to avoid them, and where to fix issues when they arise. When changing a data field in the annotation, make sure that the data is saved before moving on. By clicking another field or hitting the tab key, changes should automatically save. If it has successfully been saved, the change will be immediately noticeable in the User-Created Annotations track, even without closing the annotation window. If the changes are not being saved, refresh the page and try again. If this continues to happen, try opening Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy)) in an incognito window.
 
 # Making the Best Prediction
 
