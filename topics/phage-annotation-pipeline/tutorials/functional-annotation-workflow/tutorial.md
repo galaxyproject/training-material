@@ -41,14 +41,14 @@ A successfully imported workflow will result in a message in a green box where y
 
 ![](../../images/functional-annotation-workflow-screenshots/5_import_functional_workflow_success.png)
 
-Alternatively, click on the Workflows menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the functional workflow that has just been imported, click on the drop-down menu, and select “Run". 
+Alternatively, click on the Workflows menu item at the top of the center panel of Galaxy. All imported and user-generated workflows on this Galaxy account are shown and can be run. Find the functional workflow that has just been imported (at the top of the list), and click on the blue run button to the right of the title. 
 
 ![](../../images/functional-annotation-workflow-screenshots/6_running_workflow.png)
 
 In the center pane, adjust the parameters to run the functional annotation workflow. Specifically, ensure that datasets are associated with their correct phage counterpart.
-> 1. Genome Sequence should contain the “#. Sequence(s) from Apollo” dataset (where # varies dependent on their place in the current History).
-> 2. Apollo Organism JSON File should contain the “#. Metadata from Apollo” dataset (where # varies dependent on their place in the current History).
-> 3. Annotation Set should contain the “#. Annotation from Apollo” dataset (where # varies dependent on their place in the current History).
+> 1. Genome Sequence should contain the “#\: Sequence(s) from Apollo” dataset (where # varies dependent on their place in the current History).
+> 2. Apollo Organism JSON File should contain the “#\: Metadata from Apollo” dataset (where # varies dependent on their place in the current History).
+> 3. Annotation Set should contain the “#\: Annotation from Apollo” dataset (where # varies dependent on their place in the current History).
 
 ![](../../images/functional-annotation-workflow-screenshots/7_workflow_parameters.png)
 
