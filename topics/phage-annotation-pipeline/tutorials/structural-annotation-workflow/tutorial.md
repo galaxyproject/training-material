@@ -28,21 +28,20 @@ This tutorial will walk you through the beginning of the phage genome annotation
 First, you must have an active account in Galaxy. For TAMU users, navigate to [**CPT TAMU Galaxy**](https://cpt.tamu.edu/galaxy) and log in with your NetID. For external users, navigate to [**CPT Galaxy Public**](https://cpt.tamu.edu/galaxy-pub). You should be presented with the main Galaxy page and an empty history.
 
 > ### {% icon tip %} For BICH 464 Students
-[**Updated for 2020**] 
-The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* on the top menu bar and navigate to *BICH 464 Genomes* and the folder for your class genomes. You have been assigned a phage genome by name in a spreadsheet in the class Google Drive. Locate your genome and import it into a new history by clicking the checkbox to the left of your genome's name and then clicking the *To History* button at the top of the window. Select or create the history you would like to use and click *Import*.  You should import the genome into an empty history. 
-
-Click *Analyze Data* on the top menu bar and you should be taken to the main Galaxy window. 
+> [**Updated for 2020**] 
+> The class genomes for this year are stored in a Data Library within Galaxy. Click on *Shared Data > Data Libraries* on the top menu bar and navigate to *BICH 464 Genomes* and the folder for your class genomes. You have been assigned a phage genome by name in a spreadsheet in the class Google Drive. Locate your genome and import it into a new history by clicking the checkbox to the left of your genome's name and then clicking the *To History* button at the top of the window. Select or create the history you would like to use and click *Import*.  You should import the genome into an empty history. 
+> <p></p>
+> Click *Analyze Data* on the top menu bar and you should be taken to the main Galaxy window. 
 {: .tip}
 
 For all other users, upload or add your phage into an empty history. Your active history should now contain a single dataset: the DNA sequence of your phage in FASTA format.
 
 # Importing and Running the Workflow
 
-> ### {% icon tip %} Annotation in a nutshell
+> ### Annotation in a nutshell
 Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). 
-{: .hands_on}
 
-> ### {% icon tip %} For BICH 464 Students
+> #### {% icon tip %} For BICH 464 Students
 More details on the principles of these processes will be provided in class.
 {: .tip}
 
@@ -62,9 +61,9 @@ A successfully imported workflow will result in a message in a green box where y
 
 ![](../../images/structural-annotation-workflow-screenshots/4_successfully_imported_workflow.png)
 
-Once the workflow has been imported to your account, you can always run it by clicking on the *Workflow* menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the desired workflow, click on the drop-down menu, and select *Run*. 
+Once the workflow has been imported to your account, you can always run it by clicking on the *Workflow* menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the desired workflow and click on blue button to the right of the title to run it. 
 
-![](../../images/structural-annotation-workflow-screenshots/5_imported_workflows.png)
+![](../../images/structural-annotation-workflow-screenshots/6_running_workflow2.png)
 
 When the Structural workflow has loaded, you will see that this workflow will invoke over twenty separate Galaxy tools to produce the data you will need for structural annotation in Apollo.  There are two parameters that the user **must** set for the workflow to function. Conveniently, Galaxy will automatically expand the workflow steps that need attention from the user.
 
