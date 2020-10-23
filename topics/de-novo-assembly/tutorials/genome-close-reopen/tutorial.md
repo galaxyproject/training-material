@@ -4,8 +4,6 @@ topic_name: de-novo-assembly
 tutorial_name: genome-close-reopen
 ---
 
-# Genome closure from an assembled contig and re-opening a complete genome
-
 > ### Agenda
 > * Genome Closure
 >    > * Confirmation PCR
@@ -25,15 +23,15 @@ tutorial_name: genome-close-reopen
 
 # Genome Closure
 
-This protocol is expected to be useful after a phage genome has been sequenced and the reads are assembled into a contig, see the [Assembling Genome from Sequencing reads tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html). The assembly results from a sequencing run will include a long list of ‘nodes’. These are raw contigs that were assembled from the reads in that sequencing index. Based on the estimated or known sizes of the input genomes, the sequencing coverage for the assembled contigs,  and the preliminary BLAST results using the contig sequences, it is often possible to accurately match a specific node sequence to an input phage gDNA (or other input DNA). Definitive matching requires an experimental approach called **confirmation PCR**, where primers are designed based off the raw contig sequence, then the primers are used to amplify the expected sequence using the matching input gDNA. An amplicon of the correct size is the best verification that the raw contig represents the genome of the phage to which the genomic DNA is associated with.
+This protocol is expected to be useful after a phage genome has been sequenced and the reads are assembled into a contig, see the [Assembling Genome from Sequencing reads tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html). The assembly results from a sequencing run will include a long list of ‘nodes’. These are raw contigs that were assembled from the reads in that sequencing index. Based on the estimated or known sizes of the input genomes, the sequencing coverage for the assembled contigs,  and the preliminary BLAST results using the contig sequences, it is often possible to accurately match a specific node sequence to an input phage gDNA (or other input DNA). Definitive matching requires an experimental approach called **confirmation PCR**, where primers are designed based off the raw contig sequence, then the primers are used to amplify the expected sequence using the matching input gDNA as template. An amplicon of the correct size is the best verification that the raw contig represents the genome of the phage to which the genomic DNA is associated with.
 
-After confirming that the assembled conitg represents a particular phage genome, the next step is to verify that all the bases of the actual genome are accounted for in the assembed sequence, called genome **closure**. Closure is usually accomplished by the sequencing of PCR products amplified from the phage genomic DNA, or by sequencing directly off the ends of the phage genomic DNA. The success of this procedure is dependent on the the mechanism by which the phage packages its DNA into the capsid, and the resulting termini of the genome. 
+After confirming that the assembled conitg represents a particular phage genome, the next step is to verify that all the bases of the actual genome are accounted for in the assembed sequence, an approach called **genome closure**. Genome closure is usually accomplished by the sequencing of PCR products amplified from the phage genomic DNA acrossing the contig ends, or by sequencing directly off the ends of the phage genomic DNA. The success of this procedure is dependent on the the mechanism by which the phage packages its DNA into the capsid, and the resulting termini of the genome. 
 
 Phages like T4, T1, P1 or P22 do **pac type packaging** and thus the phage genomic DNA is both terminally redundant and circularly permuted.  This means that there is no single true end coordinate for the genome, as each individual packaged phage chromosome will start and end at a different position. Because of this, primers designed facing away from each other off the ends of the assembled contig should produce a product that can be sequenced to ensure that no bases are missing from your genome.
 
-Phages like T7, T5 or SPO1 are terminally redundant but *not* permuted, and thus have **terminal direct repeats** at the ends of the genome; these repeats can be short (~100-300 bp, as in T7) or long (several kb, as in T5).  Although every packaged phage chromosome starts and stops at the same position, the the two repeats are usually collapsed into the middle of the contig by the assembler because no individual k-mer is long enough to span the entire repeat.  Becasue of this, the assemblies of terminal repeat phages are typically opened at a random position with the two identical repeat regions collapsed into a single region somewhere in the middle of the contig.  These phages will appear to be permuted like a pac-type phage.  Unless you are very unlucky and the contig is opened by the assembler at or near the actual terminal repeats, the closure PCR should using primers facing off the ends of the contig *should* work.
+Phages like T7, T5 or SPO1 are terminally redundant but *not* permuted, and thus have **terminal direct repeats** at the ends of the genome; these repeats can be short (~100-300 bp, as in T7) or long (several kb, as in T5).  Although every packaged phage chromosome starts and stops at the same position, the the two repeats are usually collapsed into the middle of the contig by the assembler because no individual k-mer is long enough to span the entire repeat.  Becasue of this, the assemblies of terminal repeat phages are typically opened at a random position with the two identical repeat regions collapsed into a single region somewhere in the middle of the contig.  These phages will appear to be permuted like a pac type phage.  Unless you are very unlucky and the contig is opened by the assembler at or near the actual terminal repeats, the closure PCR should using primers facing off the ends of the contig *should* work.
 
-The genomes of phages that package their DNA by **cos type packaging**, like lambda or P2, have no terminal redundancy and are not permuted, so each packaged phage chromosome has the same ends, which typically have short (~10-20 bp) single-stranded overhangs. If the assembler opened the phage contig at its cos ends, PCR will not work for this phage type. Instead, the end sequence will need to be determined experimentally via direct sequencing (sequencing off the end using genomic DNA as template), and/or ligation of the genomic DNA then PCR and sequencing the ligated region. In practice, we have observed that a band can be sometimes be recovered across the cos ends for these phage as well, even though they should not theoretically be amplified.
+The genomes of phages that package their DNA by **cos type packaging**, like lambda or P2, have no terminal redundancy and are not permuted, so each packaged phage chromosome has the same ends, which typically have short (~10-20 bp) single-stranded overhangs. If the assembler opened the phage contig at its cos ends, PCR will not work for this phage type in theory. Instead, the end sequence will need to be determined experimentally via direct sequencing (sequencing off the end using genomic DNA as template), and/or ligation of the genomic DNA then PCR and sequencing the ligated region. In practice, we have observed that a PCR product can sometimes be obtained across the cos ends for these phage as well, even though they should not theoretically be amplified by closure PCR.
 
 > ### {% icon comment %} A Useful Reference
 > [Software-based analysis of bacteriophage genomes, physical ends, and packaging strategies. BMC Genomics. 2016 Aug 26](https://bmcgenomics.biomedcentral.com/articles/10.1186/s12864-016-3018-2) [PMID: 27561606](https://www.ncbi.nlm.nih.gov/pubmed/?term=27561606)
@@ -41,12 +39,12 @@ The genomes of phages that package their DNA by **cos type packaging**, like lam
 
 ## Confirmation PCR
 
-Begin by retrieving the sequence from the node that putatively matches to the phage genomic DNA.
-> * The node FASTA file will be present in the Galaxy history where the phage assembly was performed.
+Begin by retrieving the sequence from the contig (node) that putatively matches to the phage genomic DNA. 
+> * The contig FASTA file will be present in the Galaxy history where the phage assembly was performed. Extract the contig of interest from the assemled contig pool
 >    > * If you assembled the genome, locate the history in which it was assembled.
->    > * If someone else assembled it, look under "Histories shared with me", and import the history.
+>    > * If someone else assembled it and shared the assemply results with you, look under "Histories shared with me", and import the history.
 
-Design confirmation PCR primers off the node sequence. This primer pair can be designed manually, or with any primer design software. The instruction below uses the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex) since it is very flexible and does automated design of high-quality primer pairs.
+Design confirmation PCR primers off the contig sequence. This primer pair can be designed manually, or with any primer design software. The instruction below uses the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex), since it is very flexible and does automated design of high-quality primer pairs.
 > * Navigate to the [IDT PrimerQuest Tool.](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex) Under the Tools drop-down menu, open the "Show Custom Design Parameters" tab.
 
 ![](../../images/genome-close-reopen-screenshots/1_primerquest.png)
@@ -66,7 +64,7 @@ Design confirmation PCR primers off the node sequence. This primer pair can be d
 ![](../../images/genome-close-reopen-screenshots/4_sequence_file_format.png)
 
 Set up a PCR reaction with new confirmation primers as follows:
-> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM (1 nmol= 10 uL H20) stock, and a 10 uM working stock.
+> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM stock, and a 10 uM working stock.
 > * Assemble the PCR reaction with the following agents, which can be scaled up as needed.
 
 ![](../../images/genome-close-reopen-screenshots/5.1_pcr_agents_composition.png)
@@ -75,15 +73,12 @@ Set up a PCR reaction with new confirmation primers as follows:
 
 ![](../../images/genome-close-reopen-screenshots/6.1_pcr_reaction_conditions.png)
 
-Visualize the PCR product on a 2% agarose gel using a visualizing agent, such as ethidium bromide or SYBR Safe.
+Visualize the PCR product on a 1% agarose gel using a visualizing agent, such as ethidium bromide or SYBR Safe.
 > * Mix loading dye with the PCR product at the appropriate concentrations (5 uL of product with 1 uL of 6X loading dye). Also load a 100 bp ladder and perform electrophoresis at 100 constant Volts.
 > * Image the gel after approximately 45-60 minutes. Record whether the product sizes match the expected length.
 > * Save the results. Upload the properly labeled images to an appropriate storage location (such as a shared Google Drive folder).
-> * Should the results be unexpected, see the troubleshooting section below.
 
-![](../../images/genome-close-reopen-screenshots/7_pcr_example.png)
-
-If a confirmation product is identified, congratulations! This node matches the input phage and you may proceed to the closure PCR stage.
+If a confirmation product of the expected size is identified, congratulations! This contig represents the genome of the phage to which the genomic DNA is associated with, and you may proceed to the closure PCR stage. 
 > * If the confirmation PCR result is unexpected, see the troubleshooting section below.
 
 ## Closure PCR
