@@ -136,9 +136,9 @@ Analyze the sequencing results to verify the genome end sequence.
 > * Use the Sanger sequencing results to fix the contig end sequences.  You may need to change bases, trim redundant bases, or add missing bases to your contig sequence.  Note that you should sequence the closure PCR product from both ends (using both the forward and reverse primers as sequencing primers), to make sure high-quality sequences are long enough to support the verification of contig ends. You can make correction to the contig sequence in the text file directly, or you can do it in Galaxy.  
 >    > * After correction, an error-free contig sequence can be generated and be re-named as *Closed_phagename*, to indicate this is the complete genome sequence of that phage.
 
-## Trimming/Renaming Genome Nodes
+## Trimming/Renaming Genome Contigs in Galaxy
 
-If no sequence needs to be removed, proceed to "Rename the FASTA file..." in this section. If your phage sequence needs to be altered, by removing bases at one end or the other of the genome, proceed with the following:
+If no sequence needs to be removed, proceed to "Rename the FASTA file..." in this section. If your contig sequence needs to be altered by removing bases at one end or the other of the genome, proceed with the following:
 
 In CPT Galaxy, locate the phage genome FASTA file-containing history.
 > * If you assembled the genome, locate the history in which it was assembled.
@@ -226,9 +226,9 @@ In each history used for this process, add a detailed annotation. Include aspect
 
 # Contig Re-Opening
 
-In the final deposited phage genome, base 1 should be in a logical place. The convention is to follow the accepted standard in the field. We try to make it mostly syntenic with genomes already in the database. If your phage is similar to another genome in the database, best-practice will open your genome in the same place. It should not be in the middle of a feature (especially genes). Sometimes, there is no precedent, or the precedent might not make sense in light of published data, in which case, a different course can be taken.
+In the final deposited phage genome, genome opening (base 1 of the genome) should be in a logical place. The CPT convention is to make it mostly syntenic with genomes already in the database, especially the well-studied phages. If your phage is similar to another genome in the database, best-practice will open your genome in the same place. It should not be in the middle of a feature (especially genes). Sometimes, there is no precedent, or the precedent might not make sense in light of published data, in which case, a different course can be taken.
 
-For your phage genome, re-opening will likely need to take place. Many researchers will save this for the last step, or penultimate step, after gene calling and similarity analyses have been determined through the annotation process. In some cases, such as the undergraduate teaching setting, it may be desirable to re-open the genome prior to annotation. Below are described the considerations that might be taken into account when:
+After you close your contig, re-opening will likely need to take place. Many researchers will save this for the last step, or penultimate step, after gene calling and similarity analyses have been determined through the annotation process. This way you will have better data to determine what is the best spot to re-open your genome.  In some cases, such as the undergraduate teaching setting, it may be desirable to re-open the genome prior to annotation. Below are the considerations that might be taken into account when:
 
 1) deciding where to re-open an unannotated genome, and
 2) understanding the mechanics of re-opening a genome in Galaxy.
@@ -270,7 +270,7 @@ If your genome's phage type can be determined, re-open your genome to make it sy
 
 ### PhageTerm Analysis
 
-[PhageTerm](https://www.nature.com/articles/s41598-017-07910-5) [PMID:28811656](https://www.ncbi.nlm.nih.gov/pubmed/?term=28811656) predicts termini and packaging mechanisms using the raw reads of a phage sequenced with technologies that rely on random fragmentation and its genomic reference sequence. While not fully verified, the tool provides a good guide for genomes with well-described end types. Sometimes this prediction is informative when closing a genome (see this Genome Assembly tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html); it can also be useful for deciding where to re-open a genomic sequence. After BLASTn, run [PhageTerm in Galaxy](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) as detailed below.
+[PhageTerm](https://www.nature.com/articles/s41598-017-07910-5) ([PMID:28811656](https://www.ncbi.nlm.nih.gov/pubmed/?term=28811656)) predicts termini and packaging mechanisms using the raw reads of a phage sequenced with technologies that rely on random fragmentation and its genomic reference sequence. While not fully verified, the tool provides a good guide for genomes with well-described end types. Sometimes this prediction is informative when closing a genome (see this Genome Assembly tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html); it can also be useful for deciding where to re-open a genomic sequence. After BLASTn, run [PhageTerm in Galaxy](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) as detailed below.
 
 **_Procedure_**
 > * Choose the input files based on which dataset gave the contig for the phage genome. For the FASTQ **mandatory input** use the better set (usually R1). For the **optional input**, use the other dataset (usually R2).
