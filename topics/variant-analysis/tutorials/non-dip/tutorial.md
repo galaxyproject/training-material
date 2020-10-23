@@ -38,17 +38,17 @@ There are two ways one can call variants:
 |                          |
 |--------------------------|
 | ![2 approaches](../../images/ref_vs_assembly.jpg) |
-| <small>This figure from a manuscript by [Olson:2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4493402/) contrasts the two approaches.</small> |
+| <small>This figure from a manuscript by {% cite Olson2015 %} contrasts the two approaches.</small> |
 
-In this tutorials we will take the *first* path, in which we map reads against an existing assembly. Later in the course (after we learn about assembly approaches) we will try the second approach as well.
+In this tutorial we will take the *first* path, in which we map reads against an existing assembly. Later in the course, after we learn about assembly approaches, we will try the second approach as well.
 
-The goal of this example is to detect heteroplasmies (variants within mitochondrial DNA). Mitochondria are transmitted maternally, and heteroplasmy frequencies may change dramatically and unpredictably during the transmission due to a germ-line bottleneck [Cree:2008](https://www.nature.com/ng/journal/v40/n2/abs/ng.2007.63.html). As we mentioned above, the procedure for finding variants in bacterial or viral genomes will be essentially the same.
+The goal of this example is to detect heteroplasmies - variants within mitochondrial DNA. Mitochondria are transmitted maternally, and heteroplasmy frequencies may change dramatically and unpredictably during the transmission due to a germ-line bottleneck ({% cite Cree2008 %}). As we mentioned above, the procedure for finding variants in bacterial or viral genomes will be essentially the same.
 
-Zenodo contains [datasets representing a child and a mother](https://doi.org/10.5281/zenodo.1251112). These datasets were obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
+Datasets representing a child and a mother are available in [Zenodo](https://doi.org/10.5281/zenodo.1251112). These datasets were obtained by paired-end Illumina sequencing of human genomic DNA enriched for mitochondria. The enrichment was performed using long-range PCR with two primer pairs that amplify the entire mitochondrial genome. Samples will therefore still contain a lot of DNA from the nuclear genome, which, in this case, is a contaminant.
 
 # Importing example datasets
 
-For this tutorial we have prepared a subset of data previously [published](http://www.pnas.org/content/111/43/15474.abstract) by our group. Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
+For this tutorial we have prepared a subset of data previously by our group ({% cite Rebolledo-Jaramillo2014 %}). Let's import these data into Galaxy. They are available from [this Galaxy Library](https://usegalaxy.org/library/folders/Fe4842bd0c37b03a7) or via [Zenodo](https://zenodo.org/record/582600)
 
 > ### {% icon hands_on %} Hands-on: Getting the data
 >
@@ -106,7 +106,7 @@ Before proceeding with the analysis, we need to find out how good the data actua
 
 # Mapping the reads
 
-Our reads are long (250 bp) and as a result we will be using [bwa mem](https://arxiv.org/pdf/1303.3997v2.pdf) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).
+Our reads are long (250 bp) and as a result we will be using **BWA-MEM** ({% cite Li2013 %}) to align them against the reference genome as it has good mapping performance for longer reads (100bp and up).
 
 > ### Mapping with `bwa mem`
 >
@@ -134,7 +134,7 @@ We can BAM dataset using **NGS: Picard** &#8594; **MergeSAMFiles** tool:
 
 ## Removing duplicates
 
-Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has its own biases, which are especially profound in cases of multi-template PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has its own biases, which are especially profound in cases of multi-template PCR used for construction of sequencing libraries ({% cite Kanagawa2003 %}).
 
 Duplicates can be identified based on their outer alignment coordinates or using sequence-based clustering. One of the common ways for identification of duplicate reads is the `MarkDuplicates` utility from [Picard](https://broadinstitute.github.io/picard/command-line-overview.html) package. It is designed to identify both PCR and optical duplicates (the following is an excerpt from Picard documentation):
 
@@ -173,7 +173,7 @@ In other words the two datasets had ~6% and ~9% duplicates, respectively.
 
 # Left-aligning indels
 
-Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by [Tan:2015](https://academic.oup.com/bioinformatics/article/31/13/2202/196142/Unified-representation-of-genetic-variants). Suppose you have a reference sequence and a sequencing read:
+Left aligning of indels (a variant of re-aligning) is extremely important for obtaining accurate variant calls. This concept, while not difficult, requires some explanation. For illustrating how left-aligning works we expanded on an example provided by {% cite Tan2015 %}. Suppose you have a reference sequence and a sequencing read:
 
 
 ```
@@ -196,7 +196,7 @@ GGGCACACACAGGG            Ref: GCA
 GGG--CACACAGGG            Alt: G
 ```
 
-The last of these is *left-aligned*. In this case gaps (dashes) as moved as far left as possible (for a formal definition of left-alignment and variant normalization see [Tan:2015](https://bioinformatics.oxfordjournals.org/content/31/13/2202.abstract)).
+The last of these is *left-aligned*. In this case gaps (dashes) are moved as far left as possible. For a formal definition of left-alignment and variant normalization, see {% cite Tan2015 %}.
 
 Let's perform left alignment using **NGS: Variant Analysis** &#8594; **BamLeftAlign**:
 
