@@ -126,7 +126,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
 >        - **Reference case for hybrid or branch runs**: ALP1_refcase
 >        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2100-01-01
 >        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs.**: 2100-01-01
->        - **restart for running FATES EMERALD**: ALP1_refcase_2100-01-01.tar
+>        - **restart for running FATES EMERALD**: ALP1_refcase_restart_2100-01-01.tar
 >        - **Provides a numerical count for STOP_OPTION.**: 5
 >        - **Sets the run length along with STOP_N and STOP_DATE**: nyears
 >    - Click **Execute**
@@ -138,29 +138,49 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
 >
 >    > ## {% icon comment %} startup versus hybrid
 >    >
->    >  TODO: Explain here why we want to start from an hybrid and not startup
+>    >  When using **startup**, the FATES model will start from some arbitrary baseline state that need not be associated with any previous run.
+>    > Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
+>    > For any scientific study, starting from an arbitraty baseline state implies you would need to run the model for a long period (between 100 and 200 years)
+>    > before being able to use the model outputs. For this reason, we usually make a first simulation (spin-up) in **startup** mode and reuse this case as a baseline
+>    > for our scientific study. We then use **hybrid** type and give additional inputs (restart files) to our simulation case. It is then important to specify the dates
+>    > of your restart files. This is what we do in this tutorial.
 >    >
 >    {: .comment}
 >
-> 2. Check that the datatype is **netcdf**
+> 2. Check that the datatype of your outputs (history files) is **netcdf**
 >
->    Files you uploaded are in netcdf format. In Galaxy, Datatypes are, by default, automatically guessed. Here, as necdf is a derivative of the h5 format, Galaxy automatically affect the h5 datatype to netcdf files. To cope with that, one can change the datatype manually, once datasets uploaded (as shown below) OR you can directly specify datatype on the upload tool form so Galaxy will not try to automatically guess it.
+>    All the history files contain gridded data values written at specified times during the model run. 
+>    Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
+>    `ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc` (for non-monthly history files).
+>    Datatypes are, by default, automatically guessed. Here, as the prefix is `.nc', the format is not always recognized as `netcdf` files.
+>    To cope with that, one can change the datatype manually, as shown below.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} the output dataset to `ALP1.nc`
+> 3. **Rename** {% icon galaxy-pencil %} the output dataset to `ALP1_exp.nc`
+>
+>    Our FATES model has run for 5 years only so we get a single output file. As previously, we recommend
+>    to rename all netCDF files so that they do not contain any special characters or dots (except for the file extension) or slashes. Some tools, in
+>    particular Panoply, won't be able to recognize your file if not named properly.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Click on the new history item to expand it
+> 4. Getting metadata information for CLM-FATES netCDF outputs
 >
+>    {% tool [NetCDF xarray Metadata Info](NetCDF+xarray+Metadata+Info) %}  with the following parameters:
+>    - **Netcdf file**: ALP1_exp.nc
+>    - Click **Execute**
+>
+>    Inspect the generated output files and identify which variables would provide you some insights about canopy transpiration.
+> 
 >    > ### {% icon question %} Questions
 >    >
->    > 1. Which tags are present on this resulting dataset? (You may have to refresh the history panel to see the tags)
->    > 2. 
+>    > 1. What are the short names of the relevant variables? Which one will you pick if you want a result in **mm/s**.
+>    > 2. What are the dimensions of these variables?
 >    >
 >    > > ### {% icon solution %} Solution
->    > >
+>    > > 1. **FCTR** is the canopy transpiration in W/m^2 and **QVEGT** is in mm/s. Therefore, we would select the latter.
+>    > > 2. These variables are stored as a function of time and lndgrid and since we have only one grid cell, lngrid=1, hence the time series.
 >    > {: .solution}
 >    {: .question}
 >
@@ -178,13 +198,13 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
 > >
 > > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
-> > 2. Check **ALP1.nc** dataset selected in the netcdf input field
+> > 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
 > > 3. Click Execute
 > > 4. The tool will start running and will stay running permanently
 > > 5. Click on the "User" menu at the top and go to "Active Interactive Tools" and locate the Panoply instance you started.
 > > 6. Click on your Panoply instance
 > >    ![Panoply dataset selection](../../images/select_dataset.png "Select dataset")
-> > 7. Click on **ALP1.nc** dataset
+> > 7. Click on **ALP1_exp.nc** dataset
 > {: .tip}
 {: .hands_on}
 
@@ -194,37 +214,142 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
 >
 > 1. Inspect dataset content
 > 
->    Here you can look at the dataset (ALP1.nc) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc) 
+>    Here you can look at the dataset (ALP1_exp.nc) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc) 
 >
 >    > ### {% icon question %} Question
 >    >
->    > ?
+>    > 1. What is the long name of **MORTALITY**? 
+>    > 2. What is its physical unit?
 >    >
 >    > > ### {% icon solution %} Solution
->    > >
+>    > > 1. Rate of total mortality per PFT
+>    > > 2. indiv/ha/yr
 >    > {: .solution}
 >    {: .question}
 >
 >
-> 2. Inspect the area occupied by woody plants (AREA_TREE) variable
+> 2. Plot the total carbon in live plant leaves (**LEAFC**)
 >
+>    Cutomize your plot and save it as **png** file in the output folder. Remember that
+>    if you do not save in the output folder, your plot will get lost.
 >    > ### {% icon question %} Question
->    >
+>    > 1. Can you observe any pattern? Does it make any sense?
 >    >
 >    > > ### {% icon solution %} Solution
->    > >
+>    > > 1. We can clearly see a seasonal cycle.
+>    > > ![Panoply LEAFC timeserie](../../images/panoply_LEAFC_ALP1_exp.png "LEAFC")
 >    > {: .solution}
 >    {: .question}
 >
+> 
+> 3. Plot the rate of total mortality per PFT (MORTALITY)
+>
+>    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
+>    Make sure to adjust the y-axis and save your plots in the output folder (as png file).
+>    > ### {% icon question %} Question
+>    > 1. Can you observe? Does it make any sense?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. We can clearly see a seasonal cycle.
+>    > > ![Panoply MORTALITY per PFT](../../images/panoply_MORTALITY_ALP1_exp.png "total mortality per PFT")
+>    > {: .solution}
+>    {: .question}
+>
+>    > ## {% icon comment %} Quit Panoply properly to save your plots!
+>    >
+>    > To make sure all your plots stored in **outputs** folder  get exported to Galaxy, you need to quit panoply: **File** --> **Quit Panoply**.
+>    {: .comment}
 {: .hands_on}
 
 # Step 4: Using Galaxy tools for analysing your CLM-FATES simulation
 
-# Step 5: Generate a Galaxy workflow
+Panoply is a great tool for exploring the results of your simulations but what we would like is to automate the generation of the plots
+so that we can reuse it for any simulations.
 
-# Step 6: Rerun your workflow with a different location 
+> ### {% icon hands_on %} Hands-on: Select and plot **LEAFC**
+>
+> 1. Select the total carbon in live plant leaves (**LEAFC**)
+>    {% tool [NetCDF xarray Selection](NetCDF+xarray+Selection) %} with the following parameters:
+>    - **Input netcdf file**: ALP1_exp.nc
+>    - **Tabular of variables**: Metadata infos from ALP1_exp.nc
+>    - **Choose the variable to extract**: LEAFC
+>    - Click **Execute**
+>
+> 2. Rename Dataset to **NetCDF xarray Selection on ALP1_exp.nc**
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 3. Clean date column for plotting
+>    {% tool [Replace parts of text ](Replace+parts+of+text) %} with the following parameters:
+>    - **File to process**: NetCDF xarray Selection on ALP1_exp.nc
+>    - **Find pattern**:  00:00:00
+>    - **Find-Pattern is a regular expression**: Select *No*
+>    - **Replace all occurences of the pattern**: Select *Yes*
+>    - **Case-Insensitive search**: Select *No*
+>    - **Find whole-words**: Select *Yes*
+>    - **Ignore first line**: Select *Yes*
+>    - **Find and Replace text in**: Select *entire line*
+>    - Click **Execute**
+>
+> 3. Rename Dataset to **LEAFC_clean.tabular**
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Plot the total carbon in live plant leaves (**LEAFC**)
+>
+> To make a plot, you can use **Scatterplot w ggplot2**  {% icon tool %} with the following parameters:
+>    - *"Input in tabular format"*: `LEAFC_clean.tabular`
+>    - *"Column to plot on x-axis"*: 1
+>    - *"Column to plot on y-axis"*: 4
+>    - *"Plot title"*: Total carbon in live plant leaves
+>    - *"Label for x axis"*: Time
+>    - *"Label for y axis"*: LEAFC (kgC ha-1)
+>    - In `Advanced Options` change `Type of plot` to **Points and Lines**.
+>    - And finally in `Output options` set `width of output` to **19.0 and `height of output`* to 5.0*.
+> 
+>    4. **View** {% icon galaxy-eye%} the resulting plot:
+>
+>    ![LEAFC](../../images/LEAFC_ALP1_exp_ggplot.png)
+>
+{: .hands_on}
 
-Use any of the available input datasets (ALP2, etc.).
+# Step 5: Convert your analysis history into a Galaxy workflow
+
+> ## {% icon hands_on %} Hands-on: Extract workflow
+>
+> 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
+>    - Select the **Extract Workflow** option.
+>
+> 2. **Rename** the workflow to something descriptive
+>    - For example: `CLM-FATES_ ALP1 simulation (5 years)`.
+>    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
+>
+> 3. Download your workflow on your local computer
+>    - You may inspect it with any text editor.
+>
+{: .hands_on}
+
+# Step 6: Change your CLM-FATES case and rerun your workflow
+
+We would like to run a CLM-FATES case where the atmospheric Carobon Dioxyde Concentration (CO2) is increase by a factor of 4.
+
+> ### {% icon hands_on %} Hands-on: Compare the two simulations
+>
+>    Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
+>    of an increase in the atmosperhic CO2 on the outputs of the model.
+>    > ### {% icon question %} Question
+>    > 1. Is the model response to this significant increase of atmospheric CO2 what you expected?
+>    >   Justify your answer.
+>    > 2. Is the current workflow (in particular the variables selected for the plots) the best choice?
+>    >   What changes/additions would you recommend?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. Running 5 years is already sufficient to highlight significant changes.
+>    > > 2. Many suggestions can be given here. One simple addition can be the generation of plots where
+>    > > both simulations are represented on the same plot.
+>    > {: .solution}
+>    {: .question}
+>
 
 # Share your work
 
@@ -249,6 +374,12 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 {: .hands_on}
 
 
+> ### {% icon comment %} Publish your history to https://workflowhub.eu/
+> One step further is to share your workflow on [https://workflowhub.eu](https://workflowhub.eu) where it
+> will be stored in a Galaxy workflow format as well as in [Common Workflow Language](https://www.commonwl.org/). 
+> It provides standardised workflow identifiers and descriptions needed for workflow discovery, reuse, preservation, interoperability and monitoring and metadata harvesting using standard protocols.
+> Please note that [https://workflowhub.eu](https://workflowhub.eu) is still under active development.
+{:  .comment}
 
 # Conclusion
 
