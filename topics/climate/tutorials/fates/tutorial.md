@@ -8,6 +8,11 @@ requirements:
     topic_name: introduction
     tutorials:
         - galaxy-intro-101-everyone
+  -
+    type: "internal"
+    topic_name: climate
+    tutorials:
+        - panoply
 
 questions:
 - Who to run CLM-FATES with CLM-FATES Galaxy tool?
@@ -27,7 +32,7 @@ time_estimation: 12H
 key_points:
 - CLM-FATES
 - Quick visualization of your results with Panoply
-- Create multi-site simulations with a Galaxy workflow
+- Create multi-case simulations with a Galaxy workflow
 contributors:
 - annefou
 

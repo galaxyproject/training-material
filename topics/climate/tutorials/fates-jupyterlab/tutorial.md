@@ -7,7 +7,7 @@ requirements:
     type: "internal"
     topic_name: climate
     tutorials:
-        - fates-galaxy
+        - fates
   -
     type: "internal"
     topic_name: galaxy-interface
