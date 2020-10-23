@@ -83,30 +83,30 @@ If a confirmation product of the expected size is identified, congratulations! T
 
 ## Closure PCR
 
-Return to the FASTA file for the confirmed node (*Raw_phagename*). Design a set of primers that amplifies 500-700 bp product across the ends. If using the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex), follow the guidelines given above, with the following modifications.
+Return to the FASTA file for the confirmed contig (you can re-name the file as *Raw_phagename*). Design a set of primers that amplifies 500-700 bp product across the ends. If using the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex), follow the guidelines given above, with the following modifications.
 > * Set the design parameters to “General PCR (primers only)" in the Custom Design section and enter the following parameters:
 
 ![](../../images/genome-close-reopen-screenshots/8_closure_pcr_parameters.png)
 
-> * From the genome saved in the word processor, copy and paste approximately the last 500 bases from the 3’ end and paste into the “*Paste Sequence(s) here*” textbox. Then copy approximately the first 500 bases from the 5’ end and paste it below the earlier sequence (closure PCR should span from the 3’ to the 5’ end).
+> * From the contig sequence saved in the text file, copy and paste approximately the last 500 bases from the 3’ end and paste into the “*Paste Sequence(s) here*” textbox. Then copy approximately the first 500 bases from the 5’ end and paste it below the earlier sequence (closure PCR should span from the 3’ to the 5’ end).
 > * From the list given, pick the primer pair which approximately covers the regions connecting 300 bp from the 3’ end and  300 bp from the 5’ end.
 > * Verify that hairpin loops will not form in your PCR conditions (see below) using  IDT analyzing tools before checkout.
-> * Order those primers using the naming convention: *TwoInitials PhageName close for/rev* (for example: TM Maine close For, TM Maine close Rev).
-> * For the records, highlight the amplicon and primer sequences in the genome.
+> * Order those primers using the CPT naming convention: *TwoInitials PhageName close for/rev* (for example: TM Maine close For, TM Maine close Rev).
+> * For the records, highlight the amplicon and primer sequences in the contig sequence text file.
 
-Set up a PCR reaction with the new closure primers as follows.
-> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM (1 nmol= 10 uL H20) stock, and a 10 uM working stock.
-> * Assemble the PCR reaction as for the confirmation reaction above.
+Set up a PCR reaction with the new closure primers as follows:
+> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM stock, and a 10 uM working stock.
+> * Set up the PCR reaction as for the confirmation reaction above.
 > * Run the reaction with the following conditions:
 
 ![](../../images/genome-close-reopen-screenshots/9.1_pcr_reaction_conditions.png)
 
 Visualize and record the gel results as described above.
-> * If an amplicon is identified, send the PCR product for sequencing.
+> * If an amplicon is identified, send the closure PCR product for Sanger sequencing.
 > * If no amplicon is observed, proceed with the troubleshooting options below.
 
 Send the PCR product for Sanger sequencing.
-> * At the [CPT](https://cpt.tamu.edu/), we use the services of [EtonBioscience](https://www.etonbio.com/). Log in using the lab credentials and place an order for unpurified PCR product sequencing with local pick up.
+> * At the CPT, we use the services of [EtonBioscience](https://www.etonbio.com/). Log in using the lab credentials and place an order for unpurified PCR product sequencing with local pick up.
 
 ![](../../images/genome-close-reopen-screenshots/10_etonbio_pcr_ordering.png)
 
@@ -119,13 +119,13 @@ Send the PCR product for Sanger sequencing.
 Analyze the sequencing results to verify the genome end sequence.
 > * When Sanger sequencing results become available, inspect the quality reports and raw chromatograms.
 >    > * For poor sequencing results, request that the company rerun the reactions. For repeated poor sequencing, consult with supervisor for direction.
->    > * For high-quality and long reads, continue with the analysis.
+>    > * For good-quality results, continue with the analysis.
 > * Download the appropriate .ab1 files and open them with a sequence analysis program like [ApE](http://jorgensen.biology.utah.edu/wayned/ape/).
-> * Inspect the contig sequence alongside the sequencing chromatogram. This can be performed manually (see below), or by an alignment within [ApE](http://jorgensen.biology.utah.edu/wayned/ape/).
+> * Inspect the contig sequence alongside the sequencing chromatogram to verify the contig ends. This can be performed manually (see below), or by an alignment within [ApE](http://jorgensen.biology.utah.edu/wayned/ape/).
 
 ![](../../images/genome-close-reopen-screenshots/12_sequencing_chromatogram.png)
 
-> * From the genome saved in the word processor, copy and paste approximately the last 500 bases from the 3’ end and the first 500 bases from the 5’ end into a new DNA file in [ApE](http://jorgensen.biology.utah.edu/wayned/ape/). This now should contain the entire expected closure PCR product sequence. Open the .ab1 file and align the two sequences. Look for large regions of broken alignment, as shown here where there are extra bases in the raw node DNA (top sequence line) not present in the actual sequence data (bottom sequence line).
+> * From the contig sequence saved in the text file, copy and paste approximately the last 500 bases from the 3’ end and the first 500 bases from the 5’ end into a new DNA file in [ApE](http://jorgensen.biology.utah.edu/wayned/ape/). This now should contain the entire expected closure PCR product sequence. Open the .ab1 file and align the two sequences. Look for large regions of broken alignment, as shown here where there are extra bases in the raw contig sequence (top sequence line) not present in the actual sequence data (bottom sequence line).
 
 ![](../../images/genome-close-reopen-screenshots/13_genome_needs-corrections.png)
 
@@ -133,10 +133,8 @@ Analyze the sequencing results to verify the genome end sequence.
 
 ![](../../images/genome-close-reopen-screenshots/14_genome_no_corrections.png)
 
-> * Take notes of base pair changes and duplicated portions of the genome. Note that sequencing results are noisy at the 5’ and 3’ ends, which is why both the forward and reverse reactions results should be consulted only in the regions where the signal is high and of good quality.
-> * Record errors or inconsistencies (duplicated or extra sequence).
->    > * An error-free sequence file can be generated where these node mistakes are corrected to align with the sequencing data. ,This document is optional, as trimming will be performed in Galaxy, but it can be helpful for tracking the changes made. Title the error-free sequence *Closed_phagename* and save with the other files.
->    > * If there is continuous coverage over the entire 3’ → 5’ region with no mistakes, rename the original raw file to indicate that it is the closed genome sequence: *Closed_phagename*.
+> * Use the Sanger sequencing results to fix the contig end sequences.  You may need to change bases, trim redundant bases, or add missing bases to your contig sequence.  Note that you should sequence the closure PCR product from both ends (using both the forward and reverse primers as sequencing primers), to make sure high-quality sequences are long enough to support the verification of contig ends. You can make correction to the contig sequence in the text file directly, or you can do it in Galaxy.  
+>    > * After correction, an error-free contig sequence can be generated and be re-named as *Closed_phagename*, to indicate this is the complete genome sequence of that phage.
 
 ## Trimming/Renaming Genome Nodes
 
