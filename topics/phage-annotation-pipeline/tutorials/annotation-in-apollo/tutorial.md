@@ -116,18 +116,18 @@ BLASTp is run against three databases (in the most recent PAP iteration, after P
 
 > * CPT’s Canonical Phage database, a select collection of high-quality and well-studied representative phage proteomes
 > * SwissProt (curated from UniProt)
-> * nr (from NCBI). *Note that we use a nr database that only include viruses that infect baceria.* 
+> * nr (from NCBI).  *Note that the CPT use a nr database that only include viruses that infect baceria in the most recent functional workflow.* 
 
 These databases offer insight into possible names and functionalities for the phage proteins being analyzed. An example of the Canonical phage track can be seen below.
 
-![](../../images/annotation-in-apollo-screenshots/Canonical_track_functional_flow.png)
+![](../../images/annotation-in-apollo-screenshots/Canonical_track_functional_flow.PNG)
 
 
 ### Phage Analyses
 
 The CPT has developed a number of phage analysis tools for aid in *phage specific* annotation. These are supplementary bits of information which can inform the analysis, but they must be looked at critically. Many of these tools intentionally yield many possible options, unfortunately yielding high false positive rates.
 
-![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_functional_flow.png)
+![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_functional_flow.PNG)
 
 ##### 1. Candidate ISPs/OSPs
 
@@ -155,9 +155,9 @@ Both 195a and 195b align to distinct regions of the same protein, based on BLAST
 
 Additional analyses run in the PAP are listed in the Annotations Track on the left under both the structural and functional sections. 
 
-![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.png)
+![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.PNG)
 
-![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_functional_flow.png)
+![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_functional_flow.PNG)
 
 #### 1. InterProScan
 
@@ -188,7 +188,7 @@ Terminators are produced from [TransTermHP.](http://transterm.ccb.jhu.edu/) Tran
 > ### {% icon tip %} Note that…
 > This track can be found underneath the “Sequence Analysis” section of the Structural Annotation portion all of the tracks.
 >
-> ![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.png)
+> ![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.PNG)
 >
 {: .tip}
 
@@ -199,6 +199,6 @@ Terminators are produced from [TransTermHP.](http://transterm.ccb.jhu.edu/) Tran
 > ### {% icon tip %} Note that…
 > tRNA tracks can be found underneath the “Sequence Analysis” section of the Structural Annotation portion.
 >
-> ![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.png)
+> ![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.PNG)
 >
 {: .tip}
