@@ -314,15 +314,16 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > ```
 > %%bash
 > source activate fates
-> 
+> cd $HOME/ctsm_cases/fates_alp1
+>
 > ./xmlchange RUN_STARTDATE=0001-01-01      # set up the starting date of your simulation 
 > ./xmlchange STOP_OPTION=nyears            # set the simulation periods to "years"
 > ./xmlchange STOP_N=5                      # set the length of simulation, i.e, how many years
 > ./xmlchange CONTINUE_RUN=TRUE             # if you want to continue your simulation from restart file, set it to TRUE
 > ./xmlchange RESUBMIT=1                    # set up how many times you want to resubmit your simulation.
 >                                           # e.g, STOP_N=5, RESUBMIT=1, you will have simulation for 5+5*1=10 
-> ./xmlchange --file env_run.xml --id DATM_CLMNCEP_YR_START --val 1901    # set up the start year of the atmospheric forcing 
-> ./xmlchange --file env_run.xml --id DATM_CLMNCEP_YR_END --val 1910      # set up the end year of the atmospheric forcing
+> ./xmlchange DATM_CLMNCEP_YR_START=1901    # set up the start year of the atmospheric forcing 
+> ./xmlchange DATM_CLMNCEP_YR_END=1910      # set up the end year of the atmospheric forcing
 > ./case.submit > case_submit_sontinue_run.out 2>&1
 > ```
 > This step will take several hours.
