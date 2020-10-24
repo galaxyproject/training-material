@@ -324,7 +324,7 @@ Doing these tasks one by one would mean keeping track of *at least* 4 files. The
 
 ## Importing a Workflow
 
-Often times, a workflow will need to be imported for it to be used. Select the *Shared Data* drop-down menu at the top of the galaxy interface, and Select *Workflows.* This will bring up a page of all of the available workflows in [CPT](https://cpt.tamu.edu) Galaxy.
+Often times, a workflow will need to be imported for it to be used. Select the *Shared Data* drop-down menu at the top of the galaxy interface, and Select *Workflows.* This will bring up a page of all of the available workflows in [CPT Galaxy](https://cpt.tamu.edu/galaxy-pub).
 
 ![](../../images/introduction-to-cpt-galaxy-screenshots/24_access_workflows.png)
 
