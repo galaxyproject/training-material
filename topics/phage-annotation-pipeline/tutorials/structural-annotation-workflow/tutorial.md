@@ -41,7 +41,7 @@ For all other users, upload or add your phage into an empty history. Your active
 > ### Annotation in a nutshell
 Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). 
 
-> #### {% icon tip %} For BICH 464 Students
+> ### {% icon tip %} For BICH 464 Students
 More details on the principles of these processes will be provided in class.
 {: .tip}
 
