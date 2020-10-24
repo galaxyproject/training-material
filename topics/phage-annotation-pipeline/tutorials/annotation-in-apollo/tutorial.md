@@ -104,30 +104,30 @@ Although BLAST is accessible through the [NCBI website](https://blast.ncbi.nlm.n
 > In practice, an E-value of less than 1e-3 or 1e-5 are considered relevant, **if that hit covers most or all of the protein!**
 {: .tip}
 
-##### 1. NT (Nucleotide) database
+##### 1. Nucleotide (NT) database
 
 Megablast is run against a copy of NCBI’s NT database. Hovering over a hit segment will show where in the target genome the region aligns. *Look into the functional flow used for the exact setting (such as the Dice value cutoff when displaying the results) to better interpret the results.*  
 
 ![](../../images/annotation-in-apollo-screenshots/3_blast_nt.png)
 
-##### 2. NR (non-redundant) protein database
+##### 2. Protein database
 
 BLASTp is run against three databases (in the most recent PAP iteration, after PAP Functional Workflow v2020.07):
 
 > * CPT’s Canonical Phage database, a select collection of high-quality and well-studied representative phage proteomes
 > * SwissProt (curated from UniProt)
-> * nr (from NCBI). *Note this database only include viruses that infect baceria.* 
+> * nr (from NCBI). *Note that we use a nr database that only include viruses that infect baceria.* 
 
-These databases offer insight into possible names and functionalities for the phage proteins being analyzed. An example of the BLAST track can be seen below.
+These databases offer insight into possible names and functionalities for the phage proteins being analyzed. An example of the Canonical phage track can be seen below.
 
-![](../../images/annotation-in-apollo-screenshots/4_blast_trembl.png)
+![](../../images/annotation-in-apollo-screenshots/Canonical_track_functional_flow.png)
 
 
 ### Phage Analyses
 
 The CPT has developed a number of phage analysis tools for aid in *phage specific* annotation. These are supplementary bits of information which can inform the analysis, but they must be looked at critically. Many of these tools intentionally yield many possible options, unfortunately yielding high false positive rates.
 
-![](../../images/annotation-in-apollo-screenshots/5_phage_analyses.png)
+![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_functional_flow.png)
 
 ##### 1. Candidate ISPs/OSPs
 
@@ -155,9 +155,9 @@ Both 195a and 195b align to distinct regions of the same protein, based on BLAST
 
 Additional analyses run in the PAP are listed in the Annotations Track on the left under both the structural and functional sections. 
 
-![](../../images/annotation-in-apollo-screenshots/9_structural_annotation_tracks.png)
+![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.png)
 
-![](../../images/annotation-in-apollo-screenshots/10_functional_annotation_tracks.png)
+![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_functional_flow.png)
 
 #### 1. InterProScan
 
@@ -188,17 +188,17 @@ Terminators are produced from [TransTermHP.](http://transterm.ccb.jhu.edu/) Tran
 > ### {% icon tip %} Note that…
 > This track can be found underneath the “Sequence Analysis” section of the Structural Annotation portion all of the tracks.
 >
-> ![](../../images/annotation-in-apollo-screenshots/9_structural_annotation_tracks.png)
+> ![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.png)
 >
 {: .tip}
 
-##### 4. tRNA and tmRNA
+##### 4. tRNA
 
-[ARAGORN](https://www.ncbi.nlm.nih.gov/pubmed/14704338) provides the CPT with quality tRNA annotations. An annotator should feel confident annotating tRNA and tmRNA in Apollo using this track. Recall that tRNAs are **not** likely to be embedded within genes.
+[ARAGORN](https://www.ncbi.nlm.nih.gov/pubmed/14704338) and [tRNAscan-SE](http://lowelab.ucsc.edu/tRNAscan-SE/) provides the CPT with quality tRNA annotations. Recall that tRNAs are **not** likely to be embedded within genes.
 
 > ### {% icon tip %} Note that…
-> This track can be found underneath the “Sequence Analysis” section of the Structural Annotation portion all of the tracks.
+> tRNA tracks can be found underneath the “Sequence Analysis” section of the Structural Annotation portion.
 >
-> ![](../../images/annotation-in-apollo-screenshots/9_structural_annotation_tracks.png)
+> ![](../../images/annotation-in-apollo-screenshots/Sequence_Analysis_Structual_flow.png)
 >
 {: .tip}
