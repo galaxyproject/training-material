@@ -335,7 +335,8 @@ In this section, we will be able to analyze your 10 year simulation only when th
 ## Analyzing FATES-CLM model outputs
 
 > ### {% icon hands_on %} Hands-on: Open a new Python notebook
-> Create a notebook by clicking the `+` button in the file browser and then selecting a kernel in the new Launcher tab:
+> - Create a notebook by clicking the `+` button in the file browser and then selecting a kernel in the new Launcher tab:
+> - Rename your notebook to **analyse_case.ipynb**
 > Get more information online at [JupyterLab notebooks](https://jupyterlab.readthedocs.io/en/stable/user/notebook.html).
 {: .hands_on}
 
@@ -369,6 +370,18 @@ dset = xr.open_dataset("x.nc")
 > Where you replace `USER` by your galaxy username (what you used to login to Galaxy i.e. usually your email address
 > and `PASSWORD` by your Galaxy login password.
 >
+> To get `archive_emerald_fates_test.tar` in your history:
+>  - Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
+>  - Click on **Choose FTP files** and select `archive_emerald_fates_test.tar` to import it into your history.
+>
+> And make sure to save all your notebooks to your Galaxy history too:
+> 
+> ```
+> %%bash
+> put -p ipython_galaxy_notebook.ipynb
+> put -p check_analysis.ipynb
+> put -p analyse_case.ipynb
+> ```
 {: .hands_on}
 
 # Share your work
