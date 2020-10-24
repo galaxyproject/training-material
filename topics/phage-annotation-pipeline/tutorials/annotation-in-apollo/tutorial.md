@@ -145,7 +145,7 @@ This track analyzes BLASTp against NR data for locations where two or more calle
 
 ![](../../images/annotation-in-apollo-screenshots/8_intron_phage_k.png)
 
-Both 195a and 195b align to distinct regions of the same protein, based on BLAST data. It can be theorized that these are actually *one* protein with *one* intron and *two* exons; however, **this evidence should not be taken as 100% correct**. Similar results may happen for other reasons, such as separation of domains from a single protein due to evolution, sequencing errors, and a myriad of other possibilities.
+Both 195a and 195b align to distinct regions of the same protein, based on BLAST data. It can be theorized that these are actually *one* protein with *one* intron and *two* exons; however, **this evidence should not be taken as 100% correct**. Similar results may happen for other reasons, such as separation of domains from a single protein due to evolution, sequencing errors, and a myriad of other possibilities. See [this tutorial]({{ site.baseurl }}//topics/additional-analyses/tutorials/finding-interrupted-genes/tutorial.html) on how to use the possible intron locations track to annotate interrupted genes.  
 
 > ### {% icon tip %} Note that…
 > Currenty the CPT does not have a tool that can automatically detect frameshifts. Refer to this [frameshifts annotation tutorial]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/annotating-tmp-chaperone-frameshifts/tutorial.html) for more information on how to annotate tape measure protein chaperone frameshifts.
