@@ -133,7 +133,7 @@ Analyze the sequencing results to verify the genome end sequence.
 
 ![](../../images/genome-close-reopen-screenshots/14_genome_no_corrections.png)
 
-> * Use the Sanger sequencing results to fix the contig end sequences.  You may need to change bases, trim redundant bases, or add missing bases to your contig sequence.  Note that you should sequence the closure PCR product from both ends (using both the forward and reverse primers as sequencing primers), to make sure high-quality sequences are long enough to support the verification of contig ends. You can make correction to the contig sequence in the text file directly, or you can do it in Galaxy.  
+> * Use the Sanger sequencing results to fix the contig end sequences.  You may need to change bases, trim redundant bases, or add missing bases to your contig sequence.  Note that you should sequence the closure PCR product from both ends (using both the forward and reverse primers as sequencing primers), to make sure high-quality sequences are long enough to support the verification of contig ends. **You can make correction to the contig sequence in the text file directly, or you can do it in Galaxy.**.  See below for how to trimm redunant bases from a contig and how to re-name a contig.    
 >    > * After correction, an error-free contig sequence can be generated and be re-named as *Closed_phagename*, to indicate this is the complete genome sequence of that phage.
 
 ## Trimming/Renaming Genome Contigs in Galaxy
@@ -178,7 +178,7 @@ To rename the sequence ID in the header of the FASTA file, open the [Fasta Seque
 ![](../../images/genome-close-reopen-screenshots/18_fasta_sequence_renamer_tool.png)
 
 > ### {% icon comment %} Note that...
-> You may wish to collect an entire set of closed genomes (such as a group of phage that will be used for a class) into one history.
+> For better data organizing, you may wish to collect an entire set of closed genomes (such as a group of phage genomes that will be used for a class or a project) into one history.
 {: .comment}
 
 In each history used for this process, add tags for each phage genome with datasets manipulated in the history. Do this for the history where the phage was assembled (usually titled by the index from the sequencing run), and for the history where it was closed. Tags and history names are *searchable* in Galaxy, therefore this step is **critical in the documenting process** so that all data can be easily retrieved across the years and between researchers.
