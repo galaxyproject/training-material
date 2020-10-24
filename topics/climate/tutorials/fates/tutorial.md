@@ -157,7 +157,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    >
 >    {: .comment}
 >
-> 2. Check that the datatype of your outputs (history files) is **netcdf**
+> 2. Check that the datatype of your outputs (history file) is **netcdf**
 >
 >    All the history files contain gridded data values written at specified times during the model run. 
 >    Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
@@ -167,7 +167,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 3. **Rename** {% icon galaxy-pencil %} the output dataset to `ALP1_exp.nc`
+> 3. **Rename** {% icon galaxy-pencil %} the output dataset (history file) to `ALP1_exp.nc`
 >
 >    Our FATES model has run for 5 years only so we get a single output file. As previously, we recommend
 >    to rename all netCDF files so that they do not contain any special characters or dots (except for the file extension) or slashes. Some tools, in
@@ -205,7 +205,10 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
 > > ### {% icon tip %} Tip: Launch Panoply in Galaxy
-> > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or, as all interactive tools, from the dedicated usGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu)
+> > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or,
+> > as all interactive tools, from the dedicated useGalaxy.eu subdomain: [Live.useGalaxy.eu](https://live.usegalaxy.eu).
+> > You may have to login again to [Live.usrGalaxy.eu](https://live.usegalaxy.eu) (use the same username and password than on other useGalaxy.eu subdomains)
+> > and switch to the correct history.
 > >
 > > 1. Open the Panoply tool {% icon tool %} by clicking [here](https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply){:target="_blank"}
 > > 2. Check **ALP1_exp.nc** dataset selected in the netcdf input field
@@ -301,11 +304,11 @@ so that we can reuse it for any simulations.
 >    - **Find and Replace text in**: Select *entire line*
 >    - Click **Execute**
 >
-> 3. Rename Dataset to **LEAFC_clean.tabular**
+> 4. Rename Dataset to **LEAFC_clean.tabular**
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Plot the total carbon in live plant leaves (**LEAFC**)
+> 5. Plot the total carbon in live plant leaves (**LEAFC**)
 >
 > To make a plot, you can use **Scatterplot w ggplot2**  {% icon tool %} with the following parameters:
 >    - *"Input in tabular format"*: `LEAFC_clean.tabular`
@@ -316,8 +319,10 @@ so that we can reuse it for any simulations.
 >    - *"Label for y axis"*: LEAFC (kgC ha-1)
 >    - In `Advanced Options` change `Type of plot` to **Points and Lines**.
 >    - And finally in `Output options` set `width of output` to **19.0 and `height of output`* to 5.0*.
-> 
->    4. **View** {% icon galaxy-eye%} the resulting plot:
+>
+> 6. Click on **Execute**.
+>
+> 7. **View** {% icon galaxy-eye%} the resulting plot:
 >
 >    ![LEAFC](../../images/LEAFC_ALP1_exp_ggplot.png)
 >
@@ -329,24 +334,35 @@ so that we can reuse it for any simulations.
 >
 > 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
 >    - Select the **Extract Workflow** option.
+>    - Remove any unwanted steps
 >
 > 2. **Rename** the workflow to something descriptive
 >    - For example: `CLM-FATES_ ALP1 simulation (5 years)`.
 >    - If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
-> 3. Download your workflow on your local computer
+> 3. Click "Create Workflow"
+>    - Click on "edit" and check your workflow
+>    - Check all the steps
+>
+> 4. Download your workflow on your local computer
 >    - You may inspect it with any text editor.
 >
 {: .hands_on}
 
 # Step 6: Change your CLM-FATES case and rerun your workflow
 
-We would like to run a CLM-FATES case where the atmospheric Carobon Dioxyde Concentration (CO2) is increase by a factor of 4.
+We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increase by a factor of 4.
 
 > ### {% icon hands_on %} Hands-on: Compare the two simulations
 >
 >    Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
 >    of an increase in the atmosperhic CO2 on the outputs of the model.
+>    1. Edit your workflow and customize it to run your new CO2 experiment. For this you would need to
+>       add an extra step to extract the first history file from the history collection and generate the
+>       corresponding plot. The final workflow would be similar to the one shown below:
+>
+>  ![FATES workflow](../../images/fates_workflow.png "FATES workflow")
+>
 >    > ### {% icon question %} Question
 >    > 1. Is the model response to this significant increase of atmospheric CO2 what you expected?
 >    >   Justify your answer.
