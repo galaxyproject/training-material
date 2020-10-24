@@ -1,17 +1,17 @@
 ---
 layout: tutorial_hands_on
 
-title: "Calling very rare variants"
+title: "Calling low frequency variants"
 zenodo_link: ""
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"
   - "What are the different types of consensus sequences produced from duplex sequencing?"
 objectives:
   - "Processing raw duplex sequencing data into consensus sequences"
-  - "Find rare variants without relying on diploid assumptions"
+  - "Find low frequency variants without relying on diploid assumptions"
 time_estimation: "3h"
 key_points:
-  - "Diploid variant calling relies on assumptions that rare variant calling cannot make"
+  - "Diploid variant calling relies on assumptions that low frequency variant calling cannot make"
   - "Duplex consensus sequences are usually most accurate, but sometimes you must rely on single-strand consensus sequences instead."
 contributors:
   - nekrut
@@ -31,11 +31,11 @@ This page explains how to perform discovery of low frequency variants from duple
 
 ## Background
 
-### Finding rare variants
+### Finding low frequency variants
 
 Most popular variant callers focus on the common case of sequencing a diploid individual to find heterozygous and homozygous variants. This is a well-studied problem with its own challenges, but at least you can expect your variants to be present in either 100%, 50%, or 0% of your sample DNA. If you observe a variant present in 99%, 56%, or 2% of the reads at a site, you can probably assume the allele is actually present at 100%, 50%, or 0%, respectively, in your sample.
 
-But in this tutorial, we're looking for **rare variants**. So our true frequency might actually be 13%, 1%, or even 0.4%. The challenge then becomes distinguishing these situations from sequencing errors. Next-generation sequencers produce noise at this level, making it challenging to make this distinction in data produced with standard resequencing methods.
+But in this tutorial, we're looking for **low frequency variants**. So our true frequency might actually be 13%, 1%, or even 0.4%. The challenge then becomes distinguishing these situations from sequencing errors. Next-generation sequencers produce noise at this level, making it challenging to make this distinction in data produced with standard resequencing methods.
 
 ### Duplex sequencing
 
@@ -282,7 +282,7 @@ Now we'll use our aligned consensus reads to find variants.
 
 Normally, in a diploid resequencing experiment, you would call variants relative to the reference. So, you'd report sites which are different from the reference (and whether they're hetero- or homozygous).
 
-In our case, we're interested in *rare* variants. So what we'll report is the sites where there is more than one allele, and what the frequency is of the less-common allele (the **minor allele**). This has the potential to include every small sequencing error (even though we're using duplex, there still are errors). So to reduce the noise, we'll set a lower threshold at 1% minor allele frequency (**MAF**).
+In our case, we're interested in *low frequency* variants. So what we'll report is the sites where there is more than one allele, and what the frequency is of the less-common allele (the **minor allele**). This has the potential to include every small sequencing error (even though we're using duplex, there still are errors). So to reduce the noise, we'll set a lower threshold at 1% minor allele frequency (**MAF**).
 
 ### Finding variants in the alignment
 
@@ -400,7 +400,7 @@ You can use the variant calling workflow to call variants using the SSCS instead
 
 # Conclusion
 
-You should now understand duplex sequencing, rare variants, and be able to process the former to find the latter.
+You should now understand duplex sequencing, low frequency variants, and be able to process the former to find the latter.
 
 ### If things don't work...
 ...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.
