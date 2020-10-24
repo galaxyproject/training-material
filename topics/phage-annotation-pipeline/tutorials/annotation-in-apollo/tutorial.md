@@ -39,7 +39,7 @@ Generally, the annotation process is a synthesis between the understanding of ph
 > * Aliases -> *Do not use.*
 > * Description -> *Do not use.*
 > * DBXRefs -> *Only use if the annotator is experienced; please ensure formatting is correct.*
-> * Attributes -> *Do not use,* except in the case of frame shifted proteins.
+> * Attributes -> *Do not use,* except in spacial cases such as for frame shifted proteins.
 > * PubMed IDs -> *Do not use.*
 > * Gene Ontology IDs -> *Do not use.*
 > * Comments -> *Apply any free-text comments here.* (Could be something like **the e-value(s)** between the annotated gene and homologs or notes to one’s self.)
@@ -56,7 +56,7 @@ A screen will appear with various fields that can be filled in with information 
 
 ![](../../images/annotation-in-apollo-screenshots/1_gene_information.png)
 
-Reference the list above to see how the CPT would prefer to have genes annotated.
+Reference the list above to see how the CPT would prefer to have genes annotated. *Note that in the current Apollo verion, when you select the gene under "Name" in the annotation screen shown above, the gene name is NOT directly editable.  Instead, only the mRNA name is editable and the annotated mRNA name is what is displayed in the annotation track. We are working on syncing the gene and mRNA name for better user experience.*  
 
 > ### {% icon comment %} Naming Guidelines
 > It is imperative to follow suit with the [UniProt](https://www.uniprot.org/docs/International_Protein_Nomenclature_Guidelines.pdf) and [NCBI](https://www.ncbi.nlm.nih.gov/genome/doc/internatprot_nomenguide/) international naming conventions. It allows for standardization and consistency in naming proteins, subsequently aiding data retrieval and improving communication. Follow the convention for capitalization and hypothetical protein naming.
