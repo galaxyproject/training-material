@@ -83,23 +83,28 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
 >    {% include snippets/create_new_history.md %}
-> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.4108341) or from the shared data library
+> 2. Import the [input data from Zenodo](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
+>    or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
+>    https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Check the datatype is **tar**
+> 3. Check the datatype (for both files) is **tar**
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
 > 4. Rename Datasets
 >
->    As "https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar" is not a beautiful name and can give errors for some tools,
->    it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/4108341/files/` to obtain `inputdata_version2.0.0_ALP1.tar`, respectively.
+>    As "https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar" and "https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar"
+>    are not beautiful names and can give errors for some tools,
+>    it is a good practice to change the dataset nameis by something more meaningfull. For example by removing 
+>    `https://zenodo.org/record/4108341/files/` and `https://zenodo.org/record/4126404/files/` to obtain `inputdata_version2.0.0_ALP1.tar`
+>    and `CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`, respectively.
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -111,7 +116,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 
 # Step 2: Setting up a CLM-FATES simulation
 
-We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
+We will be using the CTSM/FATES-EMERALD Galaxy tool.
 
 > ## {% icon comment %} Tip: Finding your tool
 >
@@ -129,9 +134,9 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool to evaluate ???
 >    - *Expand 'Customize the model run period' to change the default values:
 >        - **Determines the model run initialization type.**: select **hybrid**
 >        - **Reference case for hybrid or branch runs**: ALP1_refcase
->        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2100-01-01
->        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs.**: 2100-01-01
->        - **restart for running FATES EMERALD**: ALP1_refcase_restart_2100-01-01.tar
+>        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2300-01-01
+>        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs.**: 0001-01-01
+>        - **restart for running FATES EMERALD**: CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
 >        - **Provides a numerical count for STOP_OPTION.**: 5
 >        - **Sets the run length along with STOP_N and STOP_DATE**: nyears
 >    - Click **Execute**
