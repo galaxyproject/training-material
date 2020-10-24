@@ -14,13 +14,13 @@ tutorial_name: reopening-apollo-with-annotations
 
 # Import Apollo data into Galaxy
 
-Import Apollo data into Galaxy using the [Retrieve Data](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.webapollo.export) tool. You will get three files from this step (FASTA, GFF3, Json).  
+Import Apollo data into Galaxy using the [Retrieve Data](https://cpt.tamu.edu/galaxy/root?tool_id=export) tool. *Note that by default the tool retrieves the "GFF annotations + whole genome", which gives you two files, "Annotation and Sequence from Apollo" and "Metadata from Apollo".* The "Annotation and Sequence from Apollo" is a .gff3 file that combines the GFF3 annotation and the genome FASTA sequence. You will need to run this [Split tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt2.gff3.splitGff) to separate the "Annotation and Sequence from Apollo" file into a separate GFF3 file (containing only the GFF3 annotation) and a FASTA file (containing only the genome sequence).    
 
 # Rearrange the Genome
 
 Then, use the [Genome Editor](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.gff3.genome_editor) tool in Galaxy to edit the genome appropriately: delete extra sequence, add missing sequence, or re-open at the appropriate position.  
 
-Select as input the GFF3 and FASTA data retrieved from Apollo, and click on “Insert sequence component selections” to concatenate them together. You need to fill in a new ID name for the edited genome (like Phage.v2). 
+Select the GFF3 and FASTA data associated with your genome as input files, click on “Insert sequence component selections” to concatenate them together. You need to fill in a new ID name for the edited genome (like Phage.v2). 
 
 
 ![](../../images/reopening-apollo-with-annotations-screenshots/1-editor-tool.png)
