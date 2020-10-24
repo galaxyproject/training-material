@@ -29,6 +29,11 @@ The following are useful workflows in the [published workflows](https://cpt.tamu
 2. Published workflow: **Custom BLASTp to Apollo Evidence Track** with variations for UserDB and LocalDB
 > * Runs BlASTp against a user-created or locally installed database and creates a new Apollo evidence track.
 
+After importing and launching the workflow, select the genome sequence file and the annotation file you want to conduct analysis with, and the Apollo Json organism you want the new evidence track to be added to.  Select the local database by click on the "Protein BLAST database" pendil icon at the NCBI BLAST+blastp step (Step 9). Run the workflow.  After the workflow is finished, click on "Annotaion on data XX" to view the new track in Apollo. 
+
+![](../../images/adding-evidence-tracks-screenshots/BLAST_local_database_1.PNG)
+![](../../images/adding-evidence-tracks-screenshots/BLAST_local_database_2.PNG)
+
 3. Published workflow: **BLAST antiCRISPRdb to Apollo Evidence track**
 > * Runs BLASTp with specified input query proteins against the current anti-CRISPR database (import from Shared Data) and adds an evidence track to Apollo.
 
@@ -44,7 +49,7 @@ When adding custom evidence tracks is not working for you, consider the followin
 ![](../../images/adding-evidence-tracks-screenshots/2-change-datatype.png)
 
 
-3. To ensure the evidence track categories have the desired name, change the preset "Category label" (gray header name) in  the workflow by changing it to set at runtime in the JBrowse settings.
+3.To ensure the evidence track categories have the desired name, change the preset "Category label" (gray header name) in  the workflow by changing it to set at runtime in the JBrowse settings.
 
 ![](../../images/adding-evidence-tracks-screenshots/3-available-tracks.png)
 
@@ -53,6 +58,6 @@ When adding custom evidence tracks is not working for you, consider the followin
 ![](../../images/adding-evidence-tracks-screenshots/5-track-group.png)
 
 
-4. The most common reason for workflow failure in these cases is name mismatch between the comparison gff3 and the Apollo organism. Workflow prompts for a name change, but the parameters have to be manually expanded.
+4.The most common reason for workflow failure in these cases is name mismatch between the comparison gff3 and the Apollo organism. Workflow prompts for a name change, but the parameters have to be manually expanded.
 
 ![](../../images/adding-evidence-tracks-screenshots/6-rename-sequence.png)
