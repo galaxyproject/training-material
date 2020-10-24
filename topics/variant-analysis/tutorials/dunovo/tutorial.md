@@ -132,7 +132,7 @@ The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags 
 >  - {% icon param-file %} *"Sequencing reads, mate 2"*: select the reverse read dataset (it might be hidden) produced by **Faster Download** {% icon tool %}
 >  - {% icon param-text %} *"Tag length"*: `12`
 >
->  > ### {% icon comment %} Finding Du Novo
+>  > ### {% icon comment %} Finding forward and reverse datasets
 >  > If the forward and reverse reads datasets don't appear as options for *"Sequencing reads, mate 1"* and *"Sequencing reads, mate 2"*, click *"Browse Datasets"* to the right of the options and select the corresponding files from the list that pops up.
 >  {: .comment}
 >
@@ -265,7 +265,7 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 
 ### Left Aligning indels
 
-To normalize the positional distribution of indels we use the {% icon tool %} **BamLeftAlign** utility from the [FreeBayes](https://github.com/ekg/freebayes#indels) package. You can find it in the **NGS: Variant Analysis** section. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):
+To normalize the positional distribution of indels we use the {% icon tool %} **BamLeftAlign** utility from the [FreeBayes](https://github.com/ekg/freebayes#indels) package. This is necessary to avoid erroneous polymorphisms flanking regions with indels (e.g., in low complexity loci):
 
 > ### {% icon hands_on %} Hands-on: Left-align indels
 >
@@ -287,7 +287,7 @@ In our case, we're interested in *rare* variants. So what we'll report is the si
 
 ### Finding variants in the alignment
 
-To identify sites containing variants we use the {% icon tool %} **Naive Variant Caller (NVC)** tool from the **NGS: Variant Analysis** section. This reads the alignment and counts the number of bases of each type at each site.
+To identify sites containing variants we use the {% icon tool %} **Naive Variant Caller (NVC)** tool. This reads the alignment and counts the number of bases of each type at each site.
 
 > ### {% icon hands_on %} Hands-on: Count the variants
 >
@@ -311,7 +311,7 @@ The {% icon tool %} **Naive Variant Caller (NVC)** generates a [VCF](https://en.
 
 ### Finding minor alleles
 
-Now we'll want to parse the VCF produced by the NVC, determine what the major and minor allele is at each site, and calculate their frequencies. The {% icon tool %} **Variant Annotator** from the **NGS: Variant Analysis** section can do this.
+Now we'll want to parse the VCF produced by the NVC, determine what the major and minor allele is at each site, and calculate their frequencies. The {% icon tool %} **Variant Annotator** tool can do this.
 
 > ### {% icon hands_on %} Hands-on: Read the variants file
 >
@@ -329,7 +329,7 @@ Now we'll want to parse the VCF produced by the NVC, determine what the major an
 
 Now we have a file containing the base counts for every site covered by at least 10 reads. We'd like to filter through this data to find sites with a reasonable chance of being a real variant, not sequencing error.
 
-The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, with one site per line. We can use the {% icon tool %} **Filter** tool from the **Filter and Sort** section to process this kind of file. We'll use the filter `c16 >= 0.01` to remove lines where the value in column 16 is less than 0.01. Column 16 contains the minor allele frequency, so this will remove all sites with a MAF less than 1%.
+The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, with one site per line. We can use the {% icon tool %} **Filter** tool to process this kind of file. We'll use the filter `c16 >= 0.01` to remove lines where the value in column 16 is less than 0.01. Column 16 contains the minor allele frequency, so this will remove all sites with a MAF less than 1%.
 
 > ### {% icon hands_on %} Hands-on: Filter the raw variants list
 >
