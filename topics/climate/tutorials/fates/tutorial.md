@@ -15,19 +15,19 @@ requirements:
         - panoply
 
 questions:
-- Who to run CLM-FATES with CLM-FATES Galaxy tool?
+- How to run CLM-FATES with the CLM-FATES Galaxy tool?
 - How to upload input data for running CLM-FATES?
 - How to customize your runs?
 - How to analyze your model outputs?
-- How to create a workflow for running multi-site configurations?
+- How to create a workflow?
 - How to share your workflow?
 objectives:
-- Setting up CLM-FATES case.
-- Customizing your runs.
+- Setting up a CLM-FATES case.
+- Customizing your run.
 - Interactive visualization with Panoply
 - Automating your analyzes and visualisations of your CLM-FATES case.
 - Creating multi-case scenarios.
-- Composing, executing and publishing CML-FATES workflow..
+- Composing, executing and publishing CML-FATES workflow.
 time_estimation: 12H
 key_points:
 - CLM-FATES
