@@ -21,7 +21,7 @@ contributors:
 
 # Introduction
 
-This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the *ABL1* dataset published by [Schmitt and colleagues](https://www.ncbi.nlm.nih.gov/pubmed/25849638) (SRA accession [SRR1799908](https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
+This page explains how to perform discovery of low frequency variants from duplex sequencing data. As an example we use the *ABL1* dataset published by {% cite Schmitt2015 %} (SRA accession [SRR1799908](https://www.ncbi.nlm.nih.gov/sra/?term=SRR1799908)).
 
 > ### Agenda
 >
@@ -40,9 +40,9 @@ But in this tutorial, we're looking for **rare variants**. So our true frequency
 
 ### Duplex sequencing
 
-[Duplex sequencing](http://www.pnas.org/content/109/36/14508.short) is a method that addresses the problem of distinguishing sequencing signal from noise. It can increase sequencing accuracy by over four orders of magnitude. Duplex sequencing uses randomly generated oligomers to uniquely tag each fragment in a sample after random shearing. The tagged fragments are then PCR amplified prior to sequencing, so that many reads can be obtained from each original molecule. The tags in each read can then be used to identify which original fragment the read came from. Identifying multiple reads from each fragment allows building a consensus of the original sequence of the fragment, eliminating errors.
+Duplex sequencing ({% cite Schmitt2012 %}) is a method that addresses the problem of distinguishing sequencing signal from noise. It can increase sequencing accuracy by over four orders of magnitude. Duplex sequencing uses randomly generated oligomers to uniquely tag each fragment in a sample after random shearing. The tagged fragments are then PCR amplified prior to sequencing, so that many reads can be obtained from each original molecule. The tags in each read can then be used to identify which original fragment the read came from. Identifying multiple reads from each fragment allows building a consensus of the original sequence of the fragment, eliminating errors.
 
-The key to duplex sequencing, as opposed to other types of consensus-based methods ([review here](https://www.nature.com/articles/nrg.2017.117)), is that both ends of the original fragment are tagged such that its strands can be distinguished. Knowing which strand each read comes from allows us to recognize errors even in the first round of PCR.
+The key to duplex sequencing, as opposed to other types of consensus-based methods ({% cite Salk2018 %}), is that both ends of the original fragment are tagged such that its strands can be distinguished. Knowing which strand each read comes from allows us to recognize errors even in the first round of PCR.
 
 Processing the raw reads into consensus sequences consists of four main steps:
 1. Group reads by their tags.
@@ -54,24 +54,20 @@ Du Novo is a tool which can carry out these steps. Unlike most other such tools,
 
 > ### {% icon comment %} Terminology
 >
-> Du Novo processes the tags from each fragment by concatenating them into a single **barcode**.
->
+> - Du Novo processes the tags from each fragment by concatenating them into a single **barcode**.
 > - For a standard protocol with two 12bp tags, this results in a 24bp barcode which identifies each family.
 >
 {: .comment}
 
-[Schmitt *et al.* 2012](http://www.pnas.org/content/109/36/14508.short) provides this overview of the whole method:
-![duplex](../../images/ds.png)
+{% cite Schmitt2012 %} provides this overview of the whole method:
 
-**Figure 1:** The logic of duplex sequencing. The computational process is shown in part **C**.
+![duplex](../../images/ds.png "The logic of duplex sequencing. The computational process is shown in part C.")
 
 ### The value of single-strand consensus sequences
 
-The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a duplex experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since the duplex procedure requires a substantial amount of starting DNA (between [between 0.2 and 3 micrograms](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4271547/)) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming heteroduplex molecules:
+The DCSs have the ultimate accuracy, yet the SSCSs can also be very useful when ampliconic DNA is used as an input to a duplex experiment. Let us illustrate the utility of SSCSs with the following example. Suppose one is interested in quantifying variants in a virus that has a very low titer in body fluids. Since the duplex procedure requires a substantial amount of starting DNA (between 0.2 and 3 micrograms, {% cite Kennedy2014 %}) the virus needs to be enriched. This can be done, for example, with a PCR designed to amplify the entire genome of the virus. Yet the problem is that during the amplification heterologous strands will almost certainly realign to some extent forming heteroduplex molecules:
 
-![hd](../../images/het.png){:height="444px" width="605px"}
-
-**Figure 2:** Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from [Stoler *et al.* 2016](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-016-1039-4). Here there are two distinct types of viral genomes: carrying `A` and `G`. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs.
+![hd](../../images/het.png "Heteroduplex formation in ampliconic templates. Image by Barbara Arbeithuber from {% cite Stoler2016 %}. Here there are two distinct types of viral genomes: carrying A and G. Because the population of genomes is enriched via PCR, heteroduplex formation takes place, skewing frequency estimates performed using DCSs."){:height="444px" width="605px"}
 
 In the image above there are two alleles: green (`A`) and red (`G`). After PCR a fraction of molecules are in heteroduplex state. If this PCR-derived DNA is now used as the starting material for a DS experiment, the heteroduplex molecules will manifest themselves as having an `N` base at this site (because Du Novo interprets disagreements as `N`s during consensus generation). So, DSCs produced from this dataset will have `A`, `G`, and `N` at the polymorphic site. Yet, SSCSs will only have `A` and `G`. Thus SSCS will give a more accurate estimate of the allele frequency at this site in this particular case. In Du Novo SSCSs are generated when the {% icon param-check %} *Output single-strand consensus sequences* option of {% icon tool %} **Du Novo: Make consensus reads** tool is set to `Yes` (see [below](#making-consensus-sequences)).
 
@@ -81,9 +77,7 @@ The entire analysis described here is accessible as a [Galaxy history](https://u
 
 > ### {% icon comment %} Running the tools
 > * Leave all parameters on their default settings, unless instructed otherwise.
->   > ### {% icon comment %} Helping Du Novo
->   > But if you'd like to help improve Du Novo, consider checking `Yes` under {% icon param-check %} *Send usage data*.
->   {: .comment}
+> * If you'd like to help improve Du Novo, consider checking `Yes` under {% icon param-check %} *"Send usage data"*.
 {: .comment}
 
 This analysis can be divided into three parts:
@@ -92,51 +86,40 @@ This analysis can be divided into three parts:
  3. [Calling variants with single strand consensus sequences](#calling-variants-with-single-strand-consensus-sequences)
 
 Here are the steps, displayed as the Galaxy history you'll end up with if you follow the instructions:
-- Note: Galaxy histories show the first step at the bottom!
 
-![steps](../../images/history-dunovo.png)
-
-**Figure 3:** Analysis outline
+![steps](../../images/history-dunovo.png "Analysis outline.")
 
 # Generating consensus sequences
 
-The starting point of the analysis is sequencing reads (in [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format) produced from a duplex sequencing library.
+The starting point of the analysis is importing sequencing reads in [FASTQ](https://en.wikipedia.org/wiki/FASTQ_format) format produced from a duplex sequencing library.
 
 ## Getting data in and assessing quality
 
-We uploaded the [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/) data directly from SRA as shown in [this screencast](https://vimeo.com/121187220).
-
-> ### {% icon hands_on %} Hands-on: Importing the raw data
+> ### {% icon hands_on %} Hands-on: Importing and QCing data
 >
-> You can obtain the reads from this dataset by copying [this history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
-> 1. Make sure you're logged into [Galaxy](https://usegalaxy.org).
-> 2. Go to [the history](https://usegalaxy.org/u/nstoler/h/srr1799908---schmitt-2015).
-> 3. Click on **Import history** in the upper right.
+> 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.8+galaxy0) %} with the following parameters:
+>      - *"Select input type"*: `SRR Accession`
+>      - *"Accession"*: `SRR1799908`
+>      - In *"Advanced options"*
+>        - *"Select how to split the spots"*: {% icon param-check %} `--split-3: write properly paired biological reads into different files and single reads in another file`
 >
-> Or, if you'd like to use a different Galaxy instance, you can import it:
-> 1. Click on the gear icon at the top of the **History** pane.
-> 2. Click on "Import from File" at the bottom of the menu.
-> 3. Enter this link in the box under **Archived History URL**:
-> `https://usegalaxy.org/history/export_archive?id=7ac09d1db287dbba`
+> 1. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on the paired-end dataset collection with the following parameters
+>      - {% icon param-collection %} *"Short read data from your current history"*: select the pair-end dataset collection produced by **Faster Download** {% icon tool %}
+>
+>     > ### {% icon comment %} Tool outputs
+>     > The first step created a dataset pair in our Galaxy history with one dataset containing the forward reads and one containing the reverse reads. The tool produced three additional datasets which you are welcome to explore, although we don't need them for the rest of the tutorial.
+> We then evaluated the quality of the data by running FastQC on the datasets. You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
+>     {: .comment}
 {: .hands_on}
-
-This created two datasets in our galaxy history: one for forward reads and one for reverse. We then evaluated the quality of the data by running FastQC on both datasets (forward and reverse). You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
 
 This gave us the following plots:
 
-![Quality scores across all bases: foward](../../images/abl1-f-qc.png) | ![Quality scores across all bases: reverse](../../images/abl1-r-qc.png)
-
-**Figure 4:** FastQC assessment of the quality of the raw reads. **Left:** Forward reads. **Right:** Reverse reads.
-
-One can see that these data are of excellent quality and no additional processing is required before we can start the actual analysis.
+![Quality scores across all bases: foward](../../images/abl1-f-qc.png)
+![Quality scores across all bases: reverse](../../images/abl1-r-qc.png "FastQC assessment of the quality of the raw reads. These data are of excellent quality and no additional processing is required before we start the actual analysis. Top: Forward reads. Bottom: Reverse reads.")
 
 ## Processing reads into duplex consensus sequences with Du Novo
 
 Now we are ready to collapse the raw reads into duplex consensus sequences.
-
-> ### {% icon comment %} Finding Du Novo
-> * The tools in this portion of the tutorial can all be found in the **NGS: Du Novo** section.
-{: .comment}
 
 ### Sorting reads into families
 
@@ -144,10 +127,14 @@ The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags 
 
 > ### {% icon hands_on %} Hands-on: Sorting reads into families
 >
-> Run {% icon tool %} **Du Novo: Make families** with the following parameters:
->  - {% icon param-file %} *Sequencing reads, mate 1*: `1: SRR1799908_forward`
->  - {% icon param-file %} *Sequencing reads, mate 2*: `2: SRR1799908_reverse`
->  - {% icon param-text %} *Tag length*: `12`
+> Run {% tool [Du Novo: Make families](toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/2.15) %} with the following parameters:
+>  - {% icon param-file %} *"Sequencing reads, mate 1"*: select the forward read dataset (it might be hidden) produced by **Faster Download** {% icon tool %}
+>  - {% icon param-file %} *"Sequencing reads, mate 2"*: select the reverse read dataset (it might be hidden) produced by **Faster Download** {% icon tool %}
+>  - {% icon param-text %} *"Tag length"*: `12`
+>
+>  > ### {% icon comment %} Finding Du Novo
+>  > If the forward and reverse reads datasets don't appear as options for *"Sequencing reads, mate 1"* and *"Sequencing reads, mate 2"*, click *"Browse Datasets"* to the right of the options and select the corresponding files from the list that pops up.
+>  {: .comment}
 >
 > Output: `7: Du Novo: Make families on data 2 and data 1`
 {: .hands_on}
@@ -160,7 +147,7 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 
 > ### {% icon hands_on %} Hands-on: Correcting barcodes
 >
-> Run {% icon tool %} **Du Novo: Correct barcodes** with the following parameters:
+> Run {% tool [Du Novo: Correct barcodes](toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/2.15) %} with the following parameters:
 >  - {% icon param-file %} *Input reads*: `7: Du Novo: Make families on data 2 and data 1`
 >  - {% icon param-text %} *Maximum differences*: `3`
 >
@@ -172,15 +159,12 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 After grouping reads that came from the same original fragment, we need to align them with each other. This next tool will perform a multiple sequence alignment on each family.
 
 > ### {% icon comment %} Analysis bottleneck
-> This is by far the most time-consuming step.
->
-> On this dataset, it took 2 hours to complete when run on [Galaxy Main](https://usegalaxy.org/).
-> - At the time, Galaxy allocated 6 cores to the job.
+> This is by far the most time-consuming step. On this dataset, it took 2 hours to complete when run on [Galaxy Main](https://usegalaxy.org/). At the time, Galaxy allocated 6 cores to the job.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Aligning families
 >
-> Run {% icon tool %} **Du Novo: Align families** with the following parameters:
+> Run {% tool [Du Novo: Align families](toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/2.15) %} with the following parameters:
 >  - {% icon param-file %} *Input reads*: `8: Du Novo: Correct barcodes on data 7`
 >  - {% icon param-select %} *Multiple sequence aligner*: `Kalign2`
 >
@@ -195,7 +179,7 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 
 > ### {% icon hands_on %} Hands-on: Making consensus sequences
 >
-> Run {% icon tool %} **Du Novo: Make consensus reads** with the following parameters:
+> Run {% tool [Du Novo: Make consensus reads](toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/2.15) %} with the following parameters:
 >  - {% icon param-file %} *Aligned input reads*: `9: Du Novo: Align families on data 8`
 >  - {% icon param-text %} *Minimum reads for a consensus sequence*: `3`
 >  - {% icon param-text %} *Consensus % threshold*: `0.7`
@@ -241,7 +225,7 @@ This information could be useful for some analyses, but not for our variant call
 
 > ### {% icon hands_on %} Hands-on: Filtering the consensus sequences
 >
-> Run {% icon tool %} **Sequence Content Trimmer** with the following parameters:
+> Run {% tool [Sequence Content Trimmer](toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1) %} with the following parameters:
 >  - {% icon param-select %} *Paired reads?*: `Paired`
 >  - {% icon param-file %} *Input reads (mate 1)*: `10: Du Novo: Make consensus reads on data 9 (mate 1)`
 >  - {% icon param-file %} *Input reads (mate 2)*: `11: Du Novo: Make consensus reads on data 9 (mate 2)`
@@ -271,7 +255,7 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 
 > ### {% icon hands_on %} Hands-on: Align with BWA-MEM
 >
-> Run {% icon tool %} **Map with BWA-MEM** with the following parameters:
+> Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >  - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
 >  - {% icon param-file %} *Select first set of reads*: `14: Sequence Content Trimmer on data 10 and data 11`
 >  - {% icon param-file %} *Select second set of reads*: `15: Sequence Content Trimmer on data 10 and data 11`
@@ -285,7 +269,7 @@ To normalize the positional distribution of indels we use the {% icon tool %} **
 
 > ### {% icon hands_on %} Hands-on: Left-align indels
 >
-> Run {% icon tool %} **BamLeftAlign** with the following parameters:
+> Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %} with the following parameters:
 >  - {% icon param-file %} *Select alignment file in BAM format*: `16: Map with BWA-MEM on data 15 and data 14 (mapped reads in BAM format)`
 >  - {% icon param-select %} *Using reference genome*: `Human (Homo sapiens): hg38`
 >    - The same genome we aligned to.
@@ -307,7 +291,7 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 
 > ### {% icon hands_on %} Hands-on: Count the variants
 >
-> Run {% icon tool %} **Naive Variant Caller (NVC)** with the following parameters:
+> Run {% tool [Naive Variant Caller (NVC)](toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4) %} with the following parameters:
 >  - {% icon param-file %} *BAM file*: `17: BamLeftAlign on data 16 (alignments)`
 >  - {% icon param-select %} *Using reference genome*: `hg38`
 >    - The same genome we aligned to.
@@ -331,7 +315,7 @@ Now we'll want to parse the VCF produced by the NVC, determine what the major an
 
 > ### {% icon hands_on %} Hands-on: Read the variants file
 >
-> Run {% icon tool %} **Variant Annotator** with the following parameters:
+> Run {% tool [Variant Annotator](toolshed.g2.bx.psu.edu/repos/devteam/variant_annotator/gatk_variant_annotator/0.0.5) %} with the following parameters:
 >  - {% icon param-file %} *Input variants from Naive Variants Detector*: `18: Naive Variant Caller (NVC) on data 17`
 >  - {% icon param-text %} *Minor allele frequency threshold*: `0`
 >  - {% icon param-text %} *Coverage threshold*: `10`
@@ -349,7 +333,7 @@ The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, 
 
 > ### {% icon hands_on %} Hands-on: Filter the raw variants list
 >
-> Run {% icon tool %} **Filter** with the following parameters:
+> Run {% tool [Filter](https://usegalaxy.org/root?tool_id=Filter1) %} with the following parameters:
 >  - {% icon param-file %} *Filter*: `19: Variant Annotator on data 18`
 >  - {% icon param-text %} *With following condition*: `c16 >= 0.01`
 >  - {% icon param-check %} *Number of header lines to skip*: `1`
@@ -367,7 +351,7 @@ Position (chr9)| Major allele | Minor allele |    MAF    |
   130,872,141  |      G       |      A       |  0.01259  |
   130,880,141  |      A       |      G       |  0.47764  |
 
-The polymorphism we are interested in (and the one reported by [Schmitt *et al.* 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4414912/)) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
+The polymorphism we are interested in (and the one reported by {% cite Schmitt2015 %}) is at the position 130,872,141 and has a frequency of 1.3%. The other site (position 130,880,141) is a known common variant [rs2227985](https://www.ncbi.nlm.nih.gov/SNP/snp_ref.cgi?type=rs&rs=rs2227985), which is heterozygous in this sample.
 
 # Calling variants with single strand consensus sequences
 
@@ -411,13 +395,9 @@ You can use the variant calling workflow to call variants using the SSCS instead
 > But again, if you'd like to help improve Du Novo, consider turning it on.
 {: .comment}
 
-**Workflow: Making consensus sequences**
+[![Du Novo workflow](../../images/workflow-dunovo.png)](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial "Workflow: Making consensus sequences")
 
-[![Du Novo workflow](../../images/workflow-dunovo.png)](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial)
-
-**Workflow: Variant calling**
-
-[![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png)](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial)
+[![Variant calling workflow](../../images/workflow-dunovo-variant-calling.png)](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial "Workflow: Variant calling")
 
 # Conclusion
 
