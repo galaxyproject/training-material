@@ -106,24 +106,22 @@ Although BLAST is accessible through the [NCBI website](https://blast.ncbi.nlm.n
 
 ##### 1. NT (Nucleotide) database
 
-Megablast is run against a copy of NCBI’s NT database. Hovering over a hit segment will show where in the target genome the region aligns.
+Megablast is run against a copy of NCBI’s NT database. Hovering over a hit segment will show where in the target genome the region aligns. *Look into the functional flow used for the exact setting (such as the Dice value cutoff when displaying the results) to better interpret the results.*  
 
 ![](../../images/annotation-in-apollo-screenshots/3_blast_nt.png)
 
 ##### 2. NR (non-redundant) protein database
 
-BLASTp is run against three databases (in the current PAP iteration):
+BLASTp is run against three databases (in the most recent PAP iteration, after PAP Functional Workflow v2020.07):
 
 > * CPT’s Canonical Phage database, a select collection of high-quality and well-studied representative phage proteomes
 > * SwissProt (curated from UniProt)
-> * TrEMBL (from UniProt)
-> * nr (from NCBI)
+> * nr (from NCBI). *Note this database only include viruses that infect baceria.* 
 
-These databases offer insight into possible names and functionalities for the phage proteins being analyzed. An example from TrEMBL can be seen below.
+These databases offer insight into possible names and functionalities for the phage proteins being analyzed. An example of the BLAST track can be seen below.
 
 ![](../../images/annotation-in-apollo-screenshots/4_blast_trembl.png)
 
-Apollo details similarities between the query/novel protein and the homologs by the saturation of the color of the evidence tracks. The more saturated the color of the track, the greater the similarity between the two proteins. 
 
 ### Phage Analyses
 
@@ -136,7 +134,7 @@ The CPT has developed a number of phage analysis tools for aid in *phage specifi
 Phage lysis genes are [notoriously poorly annotated](https://www.ncbi.nlm.nih.gov/pubmed/30219026). Often they are missed or completely misattributed. To combat this problem for phage spanin proteins, lysis proteins specific to disrupting the outer membrane of gram-negative bacterial hosts, the CPT utilizes the candidate ISP (i-spanin) and OSP (o-spanin) tool output.
 
 > ### {% icon tip %} Note that…
-> These tracks will feature a *huge* number of false positives. Be sure that the data occurs somewhere around the phage’s lysis cluster (where applicable). Additionally, know what to look for in a lipobox in these potential spanin genes.
+> These tracks will generate false positives. Be sure that the data occurs somewhere around the phage’s lysis cluster (where applicable). Additionally, know what to look for in a lipobox in these potential spanin genes.
 {: .tip}
 
 The ISP track naïvely searches the genome for every possible CDS, and then analyzes them with TMHMM. This happens even in the case of a mis-called or entirely missed i-spanin. The OSP track searches through every possible CDS which contains a lipobox as defined by the CPT. *Both* of these datasets are filtered for proximity. Co-incidence of a possible ISP gene and a possible OSP gene is a good sign, but the genomic context information will need to be taken into account to complete the functionality inference.
@@ -149,9 +147,9 @@ This track analyzes BLASTp against NR data for locations where two or more calle
 
 Both 195a and 195b align to distinct regions of the same protein, based on BLAST data. It can be theorized that these are actually *one* protein with *one* intron and *two* exons; however, **this evidence should not be taken as 100% correct**. Similar results may happen for other reasons, such as separation of domains from a single protein due to evolution, sequencing errors, and a myriad of other possibilities.
 
-##### 3. Possible Frameshifts
-
-Like the Possible Intron Locations track, the Possible Frameshifts track is very optimistic in what it considers a possible frameshift; it is searching for a frameshift that may indicate phage tape measure protein chaperones. It searches for an XXXYYYZ nucleotide pattern (allowing for some wobble) wherein a frameshift would **not** change both codons. This is based on evidence shown in [this research paper.](https://www.sciencedirect.com/science/article/pii/S1097276504005398?via%3Dihub)
+> ### {% icon tip %} Note that…
+> Currenty the CPT does not have a tool that can automatically detect frameshifts. Refer to this [frameshifts annotation tutorial]({{ site.baseurl }}//topics/phage-annotation-pipeline/tutorials/annotating-tmp-chaperone-frameshifts/tutorial.html) for more information on how to annotate tape measure protein chaperone frameshifts.
+{: .tip}
 
 ### Sequence Analyses
 
