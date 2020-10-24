@@ -28,7 +28,7 @@ objectives:
 - Automating your analyzes and visualisations of your CLM-FATES case.
 - Creating multi-case scenarios.
 - Composing, executing and publishing CML-FATES workflow.
-time_estimation: 12H
+time_estimation: 4H
 key_points:
 - CLM-FATES
 - Quick visualization of your results with Panoply
