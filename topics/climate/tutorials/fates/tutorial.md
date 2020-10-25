@@ -149,7 +149,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 >    > ## {% icon comment %} startup versus hybrid
 >    >
->    >  When using **startup**, the FATES model will start from some arbitrary baseline state that need not be associated with any previous run.
+>    >  When using **startup**, the FATES model will start from some arbitrary baseline state that is not linked to any previous run.
 >    > Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
 >    > For any scientific study, starting from an arbitraty baseline state implies you would need to run the model for a long period (between 100 and 200 years)
 >    > before being able to use the model outputs. For this reason, we usually make a first simulation (spin-up) in **startup** mode and reuse this case as a baseline
