@@ -163,7 +163,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    All the history files contain gridded data values written at specified times during the model run. 
 >    Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
 >    `ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc` (for non-monthly history files).
->    Datatypes are, by default, automatically guessed. Here, as the prefix is `.nc', the format is not always recognized as `netcdf` files.
+>    Datatypes are, by default, automatically guessed. Here, as the prefix is `.nc`, the format is not always recognized as `netcdf` files.
 >    To cope with that, one can change the datatype manually, as shown below.
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
