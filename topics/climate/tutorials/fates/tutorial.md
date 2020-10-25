@@ -331,7 +331,7 @@ so that we can reuse it for any simulations.
 
 # Step 5: Convert your analysis history into a Galaxy workflow
 
-> ## {% icon hands_on %} Hands-on: Extract workflow
+> ### {% icon hands_on %} Hands-on: Extract workflow
 >
 > 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
 >    - Select the **Extract Workflow** option.
