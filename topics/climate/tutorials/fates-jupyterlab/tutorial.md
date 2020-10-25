@@ -64,7 +64,7 @@ The practical aims at familiarizing you with running CLM-FATES within Galaxy Cli
 >
 {: .agenda}
 
-> ## {% icon comment %} Background
+> ### {% icon comment %} Background
 >
 > FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
@@ -93,7 +93,7 @@ The main advantage over the Galaxy CLM-FATES tool is that you can run any versio
 that are not released yet. However, it is not recommended to run more than a few decades of simulation time. 
 In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy tool.
 
-> ## {% icon comment %} CML-FATES in JupyterLab versus CLM-FATES Galaxy tool
+> ### {% icon comment %} CML-FATES in JupyterLab versus CLM-FATES Galaxy tool
 > Do not use the interactive Galaxy Climate JupyterLab for running long and "operational" simulations and
 > do not forget that you need to save back your results to your Galaxy history or local machine before
 > stopping your JupyterLab.
@@ -240,9 +240,45 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 >
 {: .hands_on}
 
+> ### {% icon warning %} Command not found!
+> If you get an error when invoking `create_newcase` make sure you have switch to fates conda environment:
+> ```
+> %%bash
+> source acticate fates
+> create_newcase --help
+> ```
+{: .warning}
+
+The 4 main arguments of create_newcase are explained on the figure below: ![create_newcase main arguments](../../image/newcase_fates.png).
+
+- **case**: specifies the name and location of the case being created. It creates a new case in `$HOME/ctsm_cases/` and its name is `fates_alp1`. make sure to give a meaningful name to your FATES experiments.
+- **res**: specifies the model resolution (resolution of the grid). Here **1x1_ALP1** corresponds to a single point resolution.
+- **compset**: specifies the component set, i.e., component models, forcing scenarios and physics options for those models.
+  - The long name of the compset we have chosen is `2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV`
+  - The notation for the compset longname is: `TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]`
+  - The compset longname has the specified order: **atm, lnd, ice, ocn, river, glc wave cesm-options** where:
+    - **Initialization Time**:2000
+    - **Atmosphere**: Data atmosphere DATM%1PTGSWP3
+    - **Land**: CLM50%FATES
+    - **Sea-Ice**: SICE Stub ICE
+    - **Ocean**: SOCN Stub ocean
+    - **River runoff**:MOSART: MOdel for Scale Adaptive River Transport
+    - **Land Ice**: SGLC Stub Glacier (land ice) component
+    - **Wave**-   SWAV Stub wave component
+   The list of available component set is given [here](http://www.cesm.ucar.edu/models/cesm2/config/compsets.html). 
+- **mach**: specifies the machine where CLM-FATES will be compiled and run. We use `espresso` which is the local setup (see `$HOME/.cime/` folder).
+
 ## Setup, build and submit your first simulation
 
 > ### {% icon hands_on %} Hands-on: Setup, build and submit
+>
+> Check the content of the directory and browse the sub-directories:
+> - CaseDocs: namelists or similar
+> - SourceMods: this is where you can add local source code changes.
+> - Tools: a few utilities (we won’t use them directly)
+> - Buildconf: configuration for building each component
+> For this tutorial, we  wish to have a “cold” start as we are mostly interested in setting up our model.
+> When ready to run in production, the model needs to be spin-up (run for several centuries until it reaches some kind of equilibrium).
 >
 > We will first make a short simulation (1 month):
 >
@@ -275,36 +311,68 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > ls -la
 > ```
 > You should see two folders:
-> - bld
-> - run
+> - bld: contains the object and CESM executable (called cesm.exe) for your configuration
+> - run: this directory will be used during your simulation run to generate output files, etc.
 >
 > The **bld** folder contains the model executable (called `cesm,exe`) while **run** contains all the files used for running CLM-FATES (and not already archived).
 > Once your run is terminated, many files are moved from the **run** folder to the **archive** folder:
-> 
+>
 > ```
 > %%bash
 > cd $HOME/archive/fates
 > ls lnd/hist
 > ```
+>
 > We are interested in the "history" files from the CLM-FATES model and these files are all located in `lnd/hist` folder.
+> You can also check other model components in the archive directory (atm, etc.): in our case, it is not of a great interest as
+> we are running the CLM-FATES component.
+> We have run a very short simulation and get one file only, called `fates_alp1_t.clm2.h0.2000-01.nc`. The
+> CLM-FATES model outputs are stored in netCDF format.
+>
+> > ### {% icon comment %} What is a netCDF file?
+> >
+> > Netcdf stands for “network Common Data Form”. It is self-describing, portable, metadata friendly, supported by many languages
+> > (including python, R, fortran, C/C++, Matlab, NCL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in particular NCO and CDO).
+> {: .comment}
 >
 > 2. Create a new Jupyter Notebook for analyzing your results:
 >   - From the **File Menu** --> **New** --> **Notebook**:
 >      - Rename your notebook to **check_analysis.ipynb**
 >      - All the analysis of the 2 month FATES simulation will be done from this notebook
 > 
-> 3. In a Code cell:
+> 3. Get metadata
+> In a Code cell:
 >
 > ```
+> import os
 > import xarray as xr
 > xr.set_options(display_style="html")
 > %matplotlib inline
-> 
-> dset = xr.open_dataset("x.nc")
+>
+> case = 'fates_alp1'
+> path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
+> dset = xr.open_dataset(path + '/fates_alp1_t.clm2.h0.2000-01.nc')
+> dset
 > ```
 > As shown above, we are now using Python 3 for analyzing the results and [xarray](http://xarray.pydata.org/en/stable/) which 
 > is a Python package that can easily handle [netCDF](https://en.wikipedia.org/wiki/NetCDF) files.
+> we opened the single history file and print metadata.
 >
+> 4. Plotting 1D variables (timeseries)
+>
+> You can select a variable by using its short name (see metadata above) and then calling the plot method:
+> ```
+> dset['AREA_TREES'].plot()
+> ```
+> As we ran one month only, we have very little points in our timeseries!
+>
+> To plot 2D variables such as **CANOPY_AREA_BY_AGE**, you can use the *col_wrap* option when plotting:
+>
+> ```
+> dset['CANOPY_AREA_BY_AGE'].plot(aspect=3, size=6, col='fates_levage', col_wrap=1)
+> ```
+> In the plot above, we have one plot per row (*col_wrap=1*) and we will have a plot for each value of the *fates_levage* dimension.
+> We also changed the aspect of the plot (aspect=3, size=6).
 {: .hands_on}
 
 ## Customize your run
@@ -347,12 +415,52 @@ In this section, we give additional examples on how to visualize your results us
 
 ```
 import xarray as xr
-
 xr.set_options(display_style="html")
 %matplotlib inline
 
-dset = xr.open_dataset("x.nc")
+case = 'fates_alp1'
+path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
+dset = xr.open_mfdataset(path + '/*.nc', combine='by_coords')
+dset
 ```
+As you can see, we are now using `open_mfdataset` to read all the netCDF files available in the history folder.
+The option `combine='by_coords')` is used to tell the method `open_mfdataset` how to combine the different files
+together.
+
+You can use the same `plot` method as before for plotting any variable. For instance:
+
+```
+dset['AREA_TREES'].plot(aspect=3, size=6)
+
+```
+
+For saving your plot, for instance in a *png* file format:
+
+```
+import matplotlib.pyplot as plt
+fig = plt.figure(1, figsize=[14,7])
+ax = plt.subplot(1, 1, 1)
+dset['AREA_TREES'].plot(ax=ax)
+ax.set_title(dset['AREA_TREES'].long_name)
+fig.savefig('AREA_TREES.png')
+```
+
+![AREA TREES (10 years)](../../images/AREA_TREES_10yrs.png)
+
+In the plot above, we create a figure (with specific dimension [14,7]) and one subplot with one row and one column.
+The last argument of *subplot* is the index (1) of this particular subplot.
+
+Finally, the resulting figure is saved in a file called 'AREA_TREES.png'.
+
+
+To plot 2D variables and save the resulting plot in a png file, for instance **CANOPY_HEIGHT_DIST**:
+
+```
+p = dset['CANOPY_HEIGHT_DIST'].plot(aspect=3, size=6, col_wrap=1, col='fates_levheight')
+p.fig.savefig('CANOPY_HEIGHT_DIST.png')
+```
+
+![CANOPY HEIGHT DIST (10 years)](../../images/CANOPY_HEIGHT_DIST_10yrs.png)
 
 # Save your results to your Galaxy history
 
@@ -382,8 +490,16 @@ dset = xr.open_dataset("x.nc")
 > put -p ipython_galaxy_notebook.ipynb
 > put -p check_analysis.ipynb
 > put -p analyse_case.ipynb
+> put -p AREA_TREES.png
+> put -p CANOPY_HEIGHT_DIST.png
 > ```
 {: .hands_on}
+
+> ### {% icon warning %} Danger: You can lose data!
+> If you do not copy data (FATES model results, jupyter notebooks, plots, etc.) before you stop your Galaxy climate
+> JupyterLab tool, all your results will be lost!
+{: .warning}
+
 
 # Share your work
 

@@ -118,7 +118,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 
 We will be using the CTSM/FATES-EMERALD Galaxy tool.
 
-> ## {% icon comment %} Tip: Finding your tool
+> ### {% icon comment %} Tip: Finding your tool
 >
 > Different Galaxy servers may have tools available under different sections, therefore it is often useful to use the **search bar** at the top of the tool panel to find your tool.
 >
@@ -344,9 +344,6 @@ so that we can reuse it for any simulations.
 >    - Click on "edit" and check your workflow
 >    - Check all the steps
 >
-> 4. Download your workflow on your local computer
->    - You may inspect it with any text editor.
->
 {: .hands_on}
 
 # Step 6: Change your CLM-FATES case and rerun your workflow
@@ -371,11 +368,13 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. Running 5 years is already sufficient to highlight significant changes.
+>    > > ![LEAFC 4xCO2](../../images/LEAFC_ALP1_4CO2_ggplot.png)
 >    > > 2. Many suggestions can be given here. One simple addition can be the generation of plots where
 >    > > both simulations are represented on the same plot.
 >    > {: .solution}
 >    {: .question}
 >
+{: .hands_on}
 
 # Share your work
 
@@ -395,7 +394,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 
 > ### {% icon hands_on %} Hands-on: Share history
 >
-> 1. Share your history with your neighbour.
+> 1. Share your history with your neighbour (ask for his/her galaxy username).
 > 2. Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead "User" menu under `Histories shared with me`.
 {: .hands_on}
 
