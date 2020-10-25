@@ -138,7 +138,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2300-01-01
 >        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs**: 0001-01-01
 >        - **Restart for running FATES EMERALD**: CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
->        - **Provides a numerical count for STOP_OPTION.**: 5
+>        - **Provides a numerical count for STOP_OPTION**: 5
 >        - **Sets the run length along with STOP_N and STOP_DATE**: nyears
 >    - Click **Execute**
 >
