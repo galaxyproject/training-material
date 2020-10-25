@@ -250,7 +250,7 @@ In this part of the tutorial, we will be using the existing Jupyter Notebook cal
 > ```
 {: .warning}
 
-The 4 main arguments of create_newcase are explained on the figure below: ![create_newcase main arguments](../../image/newcase_fates.png).
+The 4 main arguments of create_newcase are explained on the figure below: ![create_newcase main arguments](../../images/newcase_fates.png).
 
 - **case**: specifies the name and location of the case being created. It creates a new case in `$HOME/ctsm_cases/` and its name is `fates_alp1`. make sure to give a meaningful name to your FATES experiments.
 - **res**: specifies the model resolution (resolution of the grid). Here **1x1_ALP1** corresponds to a single point resolution.
