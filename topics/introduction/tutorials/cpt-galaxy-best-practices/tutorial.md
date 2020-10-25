@@ -19,6 +19,10 @@ tutorial_name: cpt-galaxy-best-practices
 
 An important tenet of science is to maintain reproducible and traceable records using a standard. This philosophy is applicable to both lab notebooks *and* Galaxy histories. It is tempting to think that, because of the presence of a ‘history’ in Galaxy, the program adequately maintains the user’s records and no further steps are needed to document research activities/analyses performed within the Galaxy suite. This is **incorrect.** Here, best practices are shown to make data in Galaxy more accessible and reproducible to both the current user and futures users.
 
+> ### {% icon tip %} Note that…
+> The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
+{: .tip}
+
 ## Minimum Essential Practices
 
 Galaxy enables the editing of *both* histories and individual datasets, as well as the ability to add tags and annotation notes.
