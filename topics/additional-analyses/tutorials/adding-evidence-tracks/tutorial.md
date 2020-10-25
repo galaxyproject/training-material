@@ -21,20 +21,24 @@ The analyses that the basic [Structural](https://cpt.tamu.edu/training-material/
 # Custom Workflows
 The following are useful workflows in the [published workflows](https://cpt.tamu.edu/galaxy-pub/workflows/list_published) list on Galaxy that add custom evidence tracks to Apollo.  Search for the appropriate one to run for your experimental needs.
 
-1. Published workflow: **GFF3 to Apollo Evidence Track**
+## Published workflow: **GFF3 to Apollo Evidence Track**
 > * Adds gff3 evidence track to Apollo organisms. Includes regulatory features like terminators, CDSs, and repeat regions.
 > * _Note:_ This is usually used on data coming from Genbank and allows comparison to features called by others.
 > * _Note:_ Many special annotation features are currently not supported by the Apollo and thus may not be displayed correctly. The team are working on improvement to this issue.
 
-2. Published workflow: **Custom BLASTp to Apollo Evidence Track** with variations for UserDB and LocalDB
-> * Runs BlASTp against a user-created or locally installed database and creates a new Apollo evidence track.
+## Published workflow: **Custom BLASTp to Apollo Evidence Track** with LocalDB
+> * Runs BlASTp against a locally installed database and creates a new Apollo evidence track.
 
-After importing and launching the workflow, select the genome sequence file and the annotation file you want to conduct analysis with, and the Apollo Json organism you want the new evidence track to be added to.  Select the local database by click on the "Protein BLAST database" pendil icon at the NCBI BLAST+blastp step (Step 9). Run the workflow.  After the workflow is finished, click on "Annotaion on data XX" to view the new track in Apollo. 
+After importing and launching the the newest **Custom BLASTp to Apollo Evidence Track - LocalDB**, select the genome sequence file and the annotation file you want to conduct analysis with, and the Apollo Json organism you want the new evidence track to be added to.  Select the local database by click on the "Protein BLAST database" pendil icon at the NCBI BLAST+blastp step (Step 9). Run the workflow.  After the workflow is finished, click on "Annotaion on data XX" to view the new track in Apollo. 
 
 ![](../../images/adding-evidence-tracks-screenshots/BLAST_local_database_1.PNG)
 ![](../../images/adding-evidence-tracks-screenshots/BLAST_local_database_2.PNG)
 
-3. Published workflow: **BLAST antiCRISPRdb to Apollo Evidence track**
+## Published workflow: **Custom BLASTp to Apollo Evidence Track** using user-created DB
+> * Runs BlASTp against a user-created database and creates a new Apollo evidence track.
+Run [makeblastdb tool](https://cpt.tamu.edu/galaxy/root?tool_id=ncbi_makeblastdb_latest), selecte the protein FASTA file as your "Input FASTA file" to create the database you want to run BLAST against. Import and lauch the newest **Custom BLASTp to Apollo Evidence Track - UserDB** workflow, select the genome sequence file and the annotation file you want to conduct analysis with, the user-created DB, and the Apollo Json organism you want the new evidence track to be added to. Run the workflow.  After the workflow is finished, click on "Annotaion on data XX" to view the new track in Apollo. 
+
+## Published workflow: **BLAST antiCRISPRdb to Apollo Evidence track**
 > * Runs BLASTp with specified input query proteins against the current anti-CRISPR database (import from Shared Data) and adds an evidence track to Apollo.
 
 # Troubleshooting
