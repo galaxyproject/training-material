@@ -349,7 +349,7 @@ so that we can reuse it for any simulations.
 
 # Step 6: Change your CLM-FATES case and rerun your workflow
 
-We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increase by a factor of 4.
+We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increased by a factor of 4.
 
 > ### {% icon hands_on %} Hands-on: Compare the two simulations
 >
