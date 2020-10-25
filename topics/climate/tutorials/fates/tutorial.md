@@ -99,7 +99,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 4. Rename Datasets
+> 4. Rename datasets as
 >
 >    As "https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar" and "https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar"
 >    are not beautiful names and can give errors for some tools,
