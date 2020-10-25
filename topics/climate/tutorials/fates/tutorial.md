@@ -6,11 +6,6 @@ zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
 requirements:
   -
     type: "internal"
-    topic_name: introduction
-    tutorials:
-        - galaxy-intro-101-everyone
-  -
-    type: "internal"
     topic_name: climate
     tutorials:
         - panoply
