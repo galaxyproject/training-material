@@ -64,7 +64,7 @@ It will also teach you on how to create Galaxy workflow for your CLM-FATES simul
 > of the [Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
 > FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
 > {% cite Fisher2015 %}.
-> and this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
+> And this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
 > The [FATES documentation](https://fates-docs.readthedocs.io/en/latest/index.html) will provide some more insight on FATES too.
 >
 {:  .comment}
