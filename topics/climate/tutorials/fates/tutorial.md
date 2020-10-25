@@ -186,7 +186,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 > 
 >    > ### {% icon question %} Questions
 >    >
->    > 1. What are the short names of the relevant variables? Which one will you pick if you want a result in **mm/s**.
+>    > 1. What are the short names of the relevant variables? Which one will you pick if you want a result in **mm/s**?
 >    > 2. What are the dimensions of these variables?
 >    >
 >    > > ### {% icon solution %} Solution
