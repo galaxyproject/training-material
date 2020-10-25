@@ -48,7 +48,7 @@ The NIH genetic sequence database, GenBank, is an open access collection of anno
 >
 >    > ### {% icon tip %} Tip
 >    >
->    > *In theory,* this file can be directly imported into Galaxy.
+>    > *In theory,* this file can be directly imported into Galaxy through the [NCBI EFetch tool](https://cpt.tamu.edu/galaxy/root?tool_id=ncbi_eutils_efetch).
 >    >
 >    {: .tip}
 {: .hands_on}
@@ -79,7 +79,7 @@ Now that the genome has been downloaded in the proper format, it is ready to be 
 
 # Preparing Genome for Annotation in Apollo
 
-You have successfully uploaded a genome into Galaxy. The next step is creating an organism for annotation editing in Apollo To do this, you will need to import and run a workflow called “Load GenBank (.gb, .gbk) into Apollo.”
+You have successfully uploaded a genome into Galaxy. The next step is creating an organism for annotation editing in Apollo. To do this, you will need to import and run a workflow called “Load GenBank (.gb, .gbk) into Apollo.”
 
 1. At the top of the Galaxy page, click on the “Shared Data” drop-down menu. Select “workflows,” and you will be brought to a new page containing workflows that execute different functions within Galaxy.
 
