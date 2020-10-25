@@ -38,8 +38,9 @@ After importing and launching the the newest **Custom BLASTp to Apollo Evidence 
 > * Runs BlASTp against a user-created database and creates a new Apollo evidence track.
 Run [makeblastdb tool](https://cpt.tamu.edu/galaxy/root?tool_id=ncbi_makeblastdb_latest), selecte the protein FASTA file as your "Input FASTA file" to create the database you want to run BLAST against. Import and lauch the newest **Custom BLASTp to Apollo Evidence Track - UserDB** workflow, select the genome sequence file and the annotation file you want to conduct analysis with, the user-created DB, and the Apollo Json organism you want the new evidence track to be added to. Run the workflow.  After the workflow is finished, click on "Annotaion on data XX" to view the new track in Apollo. 
 
-## Published workflow: **BLAST antiCRISPRdb to Apollo Evidence track**
+### Published workflow: **BLAST antiCRISPRdb to Apollo Evidence track**
 > * Runs BLASTp with specified input query proteins against the current anti-CRISPR database (import from Shared Data) and adds an evidence track to Apollo.
+
 
 # Troubleshooting
 When adding custom evidence tracks is not working for you, consider the following reasons for remediating the problem.
@@ -62,6 +63,6 @@ When adding custom evidence tracks is not working for you, consider the followin
 ![](../../images/adding-evidence-tracks-screenshots/5-track-group.png)
 
 
-4.The most common reason for workflow failure in these cases is name mismatch between the comparison gff3 and the Apollo organism. Workflow prompts for a name change, but the parameters have to be manually expanded.
+The most common reason for workflow failure in these cases is name mismatch between the comparison gff3 and the Apollo organism. Workflow prompts for a name change, but the parameters have to be manually expanded.
 
 ![](../../images/adding-evidence-tracks-screenshots/6-rename-sequence.png)
