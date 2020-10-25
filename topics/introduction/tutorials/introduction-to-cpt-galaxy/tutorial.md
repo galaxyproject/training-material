@@ -27,6 +27,10 @@ tutorial_name: introduction-to-cpt-galaxy
 
 Galaxy is a platform for doing reproducible bioinformatics research. It provides a user-friendly interface for a vast number of complex command line tools, and it encourages consistent science by using identical software and interfaces across all Galaxy instances. Galaxy aims to make computational biology accessible to research scientists that may not have computer programming or system administration experience. The [Center for Phage Technology (CPT)](https://cpt.tamu.edu/) utilizes Galaxy for most computer-based analysis. Computationally intensive jobs can be launched and left; enabling scientists returns to lab work. Galaxy keeps track of the job progress and automatically saves the work done up until that point.
 
+> ### {% icon tip %} Note that…
+> The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
+{: .tip}
+
 ![](../../images/introduction-to-cpt-galaxy-screenshots/1_galaxy_interface.png)
 
 The Galaxy user interface consists of three panels; on the left (boxed in blue) is a column containing all available tools. In the center (boxed in purple) is where analysis will occur and results displayed. On the right (boxed in red) is where the current history resides.
