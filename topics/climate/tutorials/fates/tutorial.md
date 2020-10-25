@@ -133,7 +133,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: select the **inputdata_version2.0.0_ALP1.tar** file from your history
 >    - *Name of your case*: ALP1_exp
 >    - Expand *'Customize the model run period'* to change the default values:
->        - **Determines the model run initialization type.**: select **hybrid**
+>        - **Determines the model run initialization type**: select **hybrid**
 >        - **Reference case for hybrid or branch runs**: ALP1_refcase
 >        - **Reference date for hybrid or branch runs (yyyy-mm-dd)**: 2300-01-01
 >        - **Run start date (yyyy-mm-dd). Only used for startup or hybrid runs.**: 0001-01-01
