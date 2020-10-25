@@ -103,7 +103,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 >    As `https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar` and `https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`
 >    are not beautiful names and can give errors for some tools,
->    it is a good practice to change the dataset nameis by something more meaningfull. For example by removing 
+>    it is a good practice to change the dataset names by something more meaningful. For example by removing 
 >    `https://zenodo.org/record/4108341/files/` and `https://zenodo.org/record/4126404/files/` to obtain `inputdata_version2.0.0_ALP1.tar`
 >    and `CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`, respectively.
 >
