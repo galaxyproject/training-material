@@ -170,7 +170,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 > 3. **Rename** {% icon galaxy-pencil %} the output dataset (history file) to `ALP1_exp.nc`
 >
->    Our FATES model has run for 5 years only so we get a single output file. As previously, we recommend
+>    Our FATES model has run for 5 years only, so we get a single output file. As previously, we recommend
 >    to rename all netCDF files so that they do not contain any special characters or dots (except for the file extension) or slashes. Some tools, in
 >    particular Panoply, won't be able to recognize your file if not named properly.
 >
