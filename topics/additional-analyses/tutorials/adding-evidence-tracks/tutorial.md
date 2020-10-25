@@ -17,6 +17,7 @@ Sometimes annotation in Apollo can be enhanced with evidence that is not generat
 
 # Introduction
 The analyses that the basic [Structural](https://cpt.tamu.edu/training-material/topics/phage-annotation-pipeline/tutorials/structural-annotation-workflow/tutorial.html) and [Functional](https://cpt.tamu.edu/training-material//topics/phage-annotation-pipeline/tutorials/functional-annotation-workflow/tutorial.html) workflows provide are a good start for phage genome annotation. When additional, updated, or custom analyses are performed, those data can also be added to Apollo as evidence tracks, if they are in the appropriate format. This includes custom BLAST analyses, comparison annotation data, or any properly formatted GFF3 data with coordinates that match the genome for the organism in question.
+Note that all the workflows below requires the Apollo JSON organism object to be in your history in order to properly transfer the results of these analyses to the organism in Apollo. 
 
 # Custom Workflows
 The following are useful workflows in the [published workflows](https://cpt.tamu.edu/galaxy-pub/workflows/list_published) list on Galaxy that add custom evidence tracks to Apollo.  Search for the appropriate one to run for your experimental needs.
