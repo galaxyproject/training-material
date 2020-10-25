@@ -84,7 +84,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
 >    {% include snippets/create_new_history.md %}
-> 2. Import the [input data from Zenodo](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
+> 2. Import the [input data](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
 >    or from the shared data library
 >
 >    ```
