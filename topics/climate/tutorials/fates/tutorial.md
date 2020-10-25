@@ -44,7 +44,7 @@ contributors:
 {:.no_toc}
 
 
-The practical aims at familiarzing you with running CLM-FATES in Galaxy and analyzing the model results. 
+The practical aims at familiarizing you with running CLM-FATES in Galaxy and analyzing the model results. 
 It will also teach you on how to create Galaxy workflow for your CLM-FATES simulations to make your research fully reproducible.
 
 > ### Agenda
