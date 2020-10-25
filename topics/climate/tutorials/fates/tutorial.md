@@ -25,7 +25,7 @@ questions:
 objectives:
 - Setting up a CLM-FATES case.
 - Customizing your run.
-- Interactive visualization with Panoply
+- Interactive visualization with Panoply.
 - Automating your analyzes and visualisations of your CLM-FATES case.
 - Creating multi-case scenarios.
 - Composing, executing and publishing CML-FATES workflow.
