@@ -261,7 +261,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
 >    Make sure to adjust the y-axis and save your plots in the output folder (as png file).
 >    > ### {% icon question %} Question
->    > 1. Can you observe? Does it make any sense?
+>    > 1. Can you observe any pattern? Does it make any sense?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. We can clearly see a seasonal cycle.
