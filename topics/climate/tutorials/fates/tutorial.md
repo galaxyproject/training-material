@@ -228,7 +228,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 > 1. Inspect dataset content
 > 
->    Here you can look at the dataset (ALP1_exp.nc) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc) 
+>    Here you can look at the dataset (`ALP1_exp.nc`) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc.) 
 >
 >    > ### {% icon question %} Question
 >    >
