@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</title>
+    
+        <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="Learn to analyze climate data through Galaxy." />
+    <meta property="og:title" content="Galaxy Training: Functionally Assembled Terrestrial Ecosystem Simulator (F..." />
+    <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+  },
+  "courseCode": "climate / fates / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Functionally Assembled Terrestrial Ecosystem Simulator (FATES)' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/fates/slides.html",
+  "timeRequired": "PT30M",
+  "keywords": "climate, ecology",
+  "description": "The questions this  addresses are:\n - What is FATES?\n - How can I use FATES?\n\n\\nThe objectives are:\n - Have an understanding of what FATES is and how it works\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org/training-material/topics/climate/slides/introduction.html#1",
+      "name": "introduction to climate data"
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Rosie Fisher"
+    },
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Rosie Fisher"
+    },
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/climate" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/climate/tutorials/fates/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Functionally Assembled Terrestrial Ecosystem Simulator (FATES)
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+
+
+    
+- [introduction to climate data](https://training.galaxyproject.org/training-material/topics/climate/slides/introduction.html#1)
+    
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+## Evolution of land surface models
+
+![Evolution of land surface models](../../images/lsm_evolution.png)
+
+*reference*: Fisher R.A. &amp; Koven C.D.  JAMES, 2020
+
+---
+
+## Evolution of land surface models
+
+![Global Carbon budget](../../images/lsm_evolution_cb.png)
+
+*reference*: Fisher R.A. &amp; Koven C.D.  JAMES, 2020
+
+---
+
+## Evolution of land surface models
+
+![Climate feedback](../../images/lsm_evolution_climate_feedback.png)
+
+*reference*: Fisher R.A. &amp; Koven C.D.  JAMES, 2020
+
+---
+
+![Surface processes](../../images/surface_processes.png)
+
+Surface processes play a key role in **extreme events** (heat waves, fires, crop failures, floods, droughts). 
+
+---
+
+## Evolution of land surface models
+
+![Climate impact](../../images/lsm_evolution_climate_impacts.png)
+
+*reference*: Fisher R.A. &amp; Koven C.D.  JAMES, 2020
+
+---
+
+## Problems with the status quo
+
+
+![Status quo](../../images/lsm_status_quo.png)
+
+1. Perpetual increase in complexity
+
+---
+
+## Land surface modelling in the world
+
+![LSM teams](../../images/lsm_teams.png)
+
+---
+## Problems with the status quo
+
+
+![Status quo](../../images/lsm_status_quo.png)
+
+1. Perpetual increase in complexity
+2. Sub-critical development efforts
+3. Over-simplified representation of ecosystems
+---
+
+## Ecological processes in land surface models
+
+
+![Ecological processes](../../images/ecological_processes.png)
+
+---
+
+## Solutions
+
+![Status quo](../../images/lsm_status_quo.png)
+
+1. Perpetual increase in complexity
+    - Complexity management
+2. Sub-critical development efforts
+    - Open-source community development
+3. Over-simplified representation of ecosystems
+    - Balanced ecological realism
+
+---
+# What is FATES?
+
+FATES stands for the **Functionally Assembled Terrestrial Ecosystem Simulator** and
+is a module with fully **open-source** development:
+
+![FATES](../../images/FATES_NGEET.png)
+---
+
+## FATES open-source
+
+- Available on GitHub: [https://github.com/NGEET/fates](https://github.com/NGEET/fates)
+
+
+It is designed to operate in a **&quot;host&quot;** land surface model, which simulates:
+- plant physiology,
+- competitive processes,
+- ecosystem assembly
+and
+- vegetation distribution
+
+---
+
+## Cohort model
+
+![Concept of Cohort model](../../images/cohort_concept.png)
+
+*reference*: Benchmarking and parameter sensitivity of physiological and vegetation dynamics using the Functionally Assembled Terrestrial Ecosystem Simulator (FATES) at Barro Colorado Island, Panama
+Charles D. Koven et al., 2020.
+
+---
+
+## Balanced ecological realism
+
+What are the advances allowed by a demographic model?
+
+- Representation of light competition &amp; ecosystem assembly.
+- Prediction of the distribution of plants based on their **functional traits**.
+- **Lags** between climate and vegetation change and growth after **disturbances**.
+- Better representation of **physiological processes** (hydraulics, fire, nutrients).
+
+
+![Ecological realism](../../images/ecological_realism.png)
+---
+
+![development](../../images/FATES_development.png)
+
+---
+
+![development cluster](../../images/FATES_development_cluster.png)
+
+---
+
+# Open source, community development
+
+**Growth in participation in FATES**
+
+![FATES community](../../images/FATES_community.png)
+
+---
+# FATES development
+- About 39 funded researchers.
+- 6 countries, 26+ institutions.
+- 130 participants at the recent planning meeting.
+- 3 Earth System Modelling Centres.
+- More than 11 proposal funded (2020). Many more ongoing.
+
+---
+
+# Code complexity management
+
+- Modular complexity: a strategy to manage the proliferation of processes
+
+![FATES code complexity](../../images/FATES_code_complexity.png)
+
+**Reference**: Fisher R.A. &amp; Koven C.D.  “Perspectives on the Future of Land Surface Models and the Challenges of Representing Complex Terrestrial Systems” AGU Perspective article. JAMES, 2020
+
+
+---
+
+## FATES reduced complexity modes
+
+![FATES reduced complexity](../../images/FATES_reduced_complexity.png)
+
+---
+
+# But that's not all...
+
+FATES (in common with all land surface models that are part of ESMs) remains technically challenging to run. 
+- Scripting environment is complicated.
+- Porting model to a new supercomputer is incredibly hard.  
+- Running at single sites or regions is more cumbersome than running globally.
+- Tools developed on one platform often do not work on another.
+- Workflows are complicated by computing architecture. 
+
+---
+
+# But that's not all...
+
+**Interesting science** is at the interface of the input parameters, model processes and emergent outcomes.
+
+![Learning curve](../../images/FATES_learning_curve.png)
+
+
+**Reference**: Eva Lieungh, Sonya Geange, Hui Tang
+
+---
+
+# How can I use FATES in Galaxy?
+
+- With CLM-FATES [Galaxy tool](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) for running operational and long simulations.
+- [Galaxy climate JupyterLab](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook)
+  for learning, developing the model, setting up simulations and visualizing results.
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+<a href="/training-material/hall-of-fame/rosiealice/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/rosiealice" alt="Rosie Fisher">Rosie Fisher</a>, <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/climate/tutorials/fates/slides.html)]
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>

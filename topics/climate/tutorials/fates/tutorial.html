@@ -1,0 +1,1257 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Functionally Assembled Terrestrial Ecosystem Simulator (F..." />
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Climate
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/climate/tutorials/fates/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+  },
+  "courseCode": "climate / fates / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Functionally Assembled Terrestrial Ecosystem Simulator (FATES)' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/fates/tutorial.html",
+  "timeRequired": "PT4H",
+  "description": "The questions this  addresses are:\n - How to run CLM-FATES with the CLM-FATES Galaxy tool?\n - How to upload input data for running CLM-FATES?\n - How to customize your runs?\n - How to analyze your model outputs?\n - How to create a workflow?\n - How to share your workflow?\n\n\\nThe objectives are:\n - Setting up a CLM-FATES case.\n - Customizing your run.\n - Interactive visualization with Panoply.\n - Automating your analyzes and visualisations of your CLM-FATES case.\n - Creating multi-case scenarios.\n - Composing, executing and publishing CML-FATES workflow.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/panoply/tutorial.html",
+      "name": "Visualize Climate data with Panoply netCDF viewer",
+      "description": "Hands-on for 'Visualize Climate data with Panoply netCDF viewer' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</h1>
+        
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Under Development!</h4>
+            <p>This tutorial is not in its final state. The content may change a lot in the next months.
+            Because of this status, it is also not listed in the topic pages.</p>
+        </div>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to run CLM-FATES with the CLM-FATES Galaxy tool?</p>
+</li>
+            
+            <li><p>How to upload input data for running CLM-FATES?</p>
+</li>
+            
+            <li><p>How to customize your runs?</p>
+</li>
+            
+            <li><p>How to analyze your model outputs?</p>
+</li>
+            
+            <li><p>How to create a workflow?</p>
+</li>
+            
+            <li><p>How to share your workflow?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Setting up a CLM-FATES case.</p>
+</li>
+            
+            <li><p>Customizing your run.</p>
+</li>
+            
+            <li><p>Interactive visualization with Panoply.</p>
+</li>
+            
+            <li><p>Automating your analyzes and visualisations of your CLM-FATES case.</p>
+</li>
+            
+            <li><p>Creating multi-case scenarios.</p>
+</li>
+            
+            <li><p>Composing, executing and publishing CML-FATES workflow.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/climate">Climate</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Visualize Climate data with Panoply netCDF viewer:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/climate/tutorials/panoply/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 4 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/climate/slides/introduction.html" title="Introduction slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/climate/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 25, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The practical aims at familiarizing you with running CLM-FATES in <span class="notranslate">Galaxy</span> and analyzing the model results. 
+It will also teach you on how to create <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for your CLM-FATES simulations to make your research fully reproducible.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#step-1-get-clm-fates-input-data" id="markdown-toc-step-1-get-clm-fates-input-data">Step 1: Get CLM-FATES input data</a></li>
+  <li><a href="#step-2-setting-up-a-clm-fates-simulation" id="markdown-toc-step-2-setting-up-a-clm-fates-simulation">Step 2: Setting up a CLM-FATES simulation</a>    <ol>
+      <li><a href="#comment-startup-versus-hybrid" id="markdown-toc-comment-startup-versus-hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> startup versus hybrid</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-3-quick-visualization-with-panoply" id="markdown-toc-step-3-quick-visualization-with-panoply">Step 3: Quick visualization with Panoply</a>    <ol>
+      <li><a href="#opening-up-panoply" id="markdown-toc-opening-up-panoply">Opening up Panoply</a></li>
+      <li><a href="#inspect-metadata" id="markdown-toc-inspect-metadata">Inspect metadata</a></li>
+      <li><a href="#comment-quit-panoply-properly-to-save-your-plots" id="markdown-toc-comment-quit-panoply-properly-to-save-your-plots"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Quit Panoply properly to save your plots!</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-4-using-galaxy-tools-for-analysing-your-clm-fates-simulation" id="markdown-toc-step-4-using-galaxy-tools-for-analysing-your-clm-fates-simulation">Step 4: Using <span class="notranslate">Galaxy</span> tools for analysing your CLM-FATES simulation</a></li>
+  <li><a href="#step-5-convert-your-analysis-history-into-a-galaxy-workflow" id="markdown-toc-step-5-convert-your-analysis-history-into-a-galaxy-workflow">Step 5: Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></a></li>
+  <li><a href="#step-6-change-your-clm-fates-case-and-rerun-your-workflow" id="markdown-toc-step-6-change-your-clm-fates-case-and-rerun-your-workflow">Step 6: Change your CLM-FATES case and rerun your <span class="notranslate">workflow</span></a></li>
+  <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
+
+  <p>FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
+FATES needs what we call a “Host Land Model” (HLM) to run and in this tutorial
+we will be using the <a href="http://www.cesm.ucar.edu/models/clm/">Community Land Model</a>
+of the <a href="https://github.com/ESCOMP/CTSM">Community Terrestrial Systems Model</a> (CLM-CTSM).
+FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+<a class="citation" href="#Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b> 2015</a>.
+And this technical note was first published as an appendix to <a href="https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf">that paper</a>.
+The <a href="https://fates-docs.readthedocs.io/en/latest/index.html">FATES documentation</a> will provide some more insight on FATES too.</p>
+
+</blockquote>
+
+<h2 id="step-1-get-clm-fates-input-data">Step 1: Get CLM-FATES input data</h2>
+
+<p>Preparing CLM-FATES input data is out of scope for this tutorial. We assume the input data tarball contains the following folders:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>atm   cpl   lnd   share
+</code></pre></div></div>
+
+<p>Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case.
+For the purpose of this tutorial, input data for a single point location ALP1 (61.0243N, 8.12343E) has been prepared and is ready to use.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial. If you are not inspired, you can name it <em>fates</em>.
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the <a href="https://doi.org/10.5281/zenodo.4108341">input data</a> and the <a href="https://doi.org/10.5281/zenodo.4126404">restart dataset from Zenodo</a>
+or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
+https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check the datatype (for both files) is <strong>tar</strong></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename datasets as</p>
+
+      <p>As <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar</code> and <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code>
+are not beautiful names and can give errors for some tools,
+it is a good practice to change the dataset names by something more meaningful. For example by removing 
+<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/</code> and <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4126404/files/</code> to obtain <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code>
+and <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code>, respectively.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add a tag to the dataset corresponding to <code class="language-plaintext highlighter-rouge">fates</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-2-setting-up-a-clm-fates-simulation">Step 2: Setting up a CLM-FATES simulation</h1>
+
+<p>We will be using the CTSM/FATES-EMERALD <span class="notranslate">Galaxy</span> tool.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-tip-finding-your-tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: Finding your tool</h3>
+
+  <p>Different <span class="notranslate">Galaxy</span> servers may have tools available under different sections, therefore it is often useful to use the <strong>search bar</strong> at the top of the tool panel to find your tool.</p>
+
+  <p>Additionally different servers may have multiple, similarly named tools which accomplish similar functions. When following tutorials, you should use precisely the tools that they describe. For real analyses, however, you will need to search among the various options to find the one that works for you.</p>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-a-new-ctsmfates-emerald-case"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a new CTSM/FATES-EMERALD case</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="ctsm_fates" title="Tested with ctsm_fates"><strong>CTSM/FATES-EMERALD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: ctsm_fates</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“inputdata for running FATES EMERALD”</em>: select the <strong>inputdata_version2.0.0_ALP1.tar</strong> file from your history</li>
+        <li><em>Name of your case</em>: ALP1_exp</li>
+        <li>Expand <em>‘Customize the model run period’</em> to change the default values:
+          <ul>
+            <li><strong>Determines the model run initialization type</strong>: select <strong>hybrid</strong></li>
+            <li><strong>Reference case for hybrid or branch runs</strong>: ALP1_refcase</li>
+            <li><strong>Reference date for hybrid or branch runs (yyyy-mm-dd)</strong>: 2300-01-01</li>
+            <li><strong>Run start date (yyyy-mm-dd). Only used for startup or hybrid runs</strong>: 0001-01-01</li>
+            <li><strong>Restart for running FATES EMERALD</strong>: CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</li>
+            <li><strong>Provides a numerical count for STOP_OPTION</strong>: 5</li>
+            <li><strong>Sets the run length along with STOP_N and STOP_DATE</strong>: nyears</li>
+          </ul>
+        </li>
+        <li>Click <strong>Execute</strong></li>
+      </ul>
+
+      <blockquote class="tip">
+        <h3 id="comment-tip-search-for-the-tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: search for the tool</h3>
+
+        <p>Use the <strong>tools search box</strong> at the top of the tool panel to find <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h2 id="comment-startup-versus-hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> startup versus hybrid</h2>
+
+        <p>When using <strong>startup</strong>, the FATES model will start from some arbitrary baseline state that is not linked to any previous run.
+Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
+For any scientific study, starting from an arbitraty baseline state implies you would need to run the model for a long period (between 100 and 200 years)
+before being able to use the model outputs. For this reason, we usually make a first simulation (spin-up) in <strong>startup</strong> mode and reuse this case as a baseline
+for our scientific study. We then use <strong>hybrid</strong> type and give additional inputs (restart files) to our simulation case. It is then important to specify the dates
+of your restart files. This is what we do in this tutorial.</p>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Check that the datatype of your outputs (history file) is <strong>netcdf</strong></p>
+
+      <p>All the history files contain gridded data values written at specified times during the model run. 
+Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
+<code class="language-plaintext highlighter-rouge">ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc</code> (for non-monthly history files).
+Datatypes are, by default, automatically guessed. Here, as the prefix is <code class="language-plaintext highlighter-rouge">.nc</code>, the format is not always recognized as <code class="language-plaintext highlighter-rouge">netcdf</code> files.
+To cope with that, one can change the datatype manually, as shown below.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output dataset (history file) to <code class="language-plaintext highlighter-rouge">ALP1_exp.nc</code></p>
+
+      <p>Our FATES model has run for 5 years only, so we get a single output file. As previously, we recommend
+to rename all netCDF files so that they do not contain any special characters or dots (except for the file extension) or slashes. Some tools, in
+particular Panoply, won’t be able to recognize your file if not named properly.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Getting metadata information for CLM-FATES netCDF outputs</p>
+
+      <p><span class="tool" data-tool="NetCDF+xarray+Metadata+Info" title="Tested with NetCDF+xarray+Metadata+Info"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: NetCDF+xarray+Metadata+Info</span></span>   with the following parameters:</p>
+      <ul>
+        <li><strong>Netcdf file</strong>: ALP1_exp.nc</li>
+        <li>Click <strong>Execute</strong></li>
+      </ul>
+
+      <p>Inspect the generated output files and identify which variables would provide you some insights about canopy transpiration.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What are the short names of the relevant variables? Which one will you pick if you want a result in <strong>mm/s</strong>?</li>
+          <li>What are the dimensions of these variables?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li><strong>FCTR</strong> is the canopy transpiration in W/m^2 and <strong>QVEGT</strong> is in mm/s. Therefore, we would select the latter.</li>
+            <li>These variables are stored as a function of time and lndgrid and since we have only one grid cell, lngrid=1, hence the time series.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-3-quick-visualization-with-panoply">Step 3: Quick visualization with Panoply</h1>
+
+<h2 id="opening-up-panoply">Opening up Panoply</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-launch-panoply"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch Panoply</h3>
+
+  <p>Panoply is available as a <span class="notranslate">Galaxy</span> interactive environment and may not be available on all <span class="notranslate">Galaxy</span> servers.</p>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-launch-panoply-in-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch Panoply in <span class="notranslate">Galaxy</span></h3>
+    <p>Currently Panoply in <span class="notranslate">Galaxy</span> is available on use<span class="notranslate">Galaxy</span>.eu instance, on the “Interactive tools” tool panel section or,
+as all interactive tools, from the dedicated use<span class="notranslate">Galaxy</span>.eu subdomain: <a href="https://live.usegalaxy.eu">Live.use<span class="notranslate">Galaxy</span>.eu</a>.
+You may have to login again to <a href="https://live.usegalaxy.eu">Live.usr<span class="notranslate">Galaxy</span>.eu</a> (use the same use<span class="notranslate">rna</span>me and password than on other use<span class="notranslate">Galaxy</span>.eu subdomains)
+and switch to the correct history.</p>
+
+    <ol>
+      <li>Open the Panoply tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://live.usegalaxy.eu/?tool_id=interactive_tool_panoply" target="_blank">here</a></li>
+      <li>Check <strong>ALP1_exp.nc</strong> dataset selected in the netcdf input field</li>
+      <li>Click Execute</li>
+      <li>The tool will start running and will stay running permanently</li>
+      <li>Click on the “User” menu at the top and go to “Active Interactive Tools” and locate the Panoply instance you started.</li>
+      <li>Click on your Panoply instance
+        <figure id="figure-1"><img src="../../images/select_dataset.png" alt="Panoply dataset selection" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Select dataset</figcaption></figure>
+      </li>
+      <li>Click on <strong>ALP1_exp.nc</strong> dataset</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<h2 id="inspect-metadata">Inspect metadata</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-inspect-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Inspect dataset</h3>
+
+  <ol>
+    <li>
+      <p>Inspect dataset content</p>
+
+      <p>Here you can look at the dataset (<code class="language-plaintext highlighter-rouge">ALP1_exp.nc</code>) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc.)</p>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+
+        <ol>
+          <li>What is the long name of <strong>MORTALITY</strong>?</li>
+          <li>What is its physical unit?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>Rate of total mortality per PFT</li>
+            <li>indiv/ha/yr</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Plot the total carbon in live plant leaves (<strong>LEAFC</strong>)</p>
+
+      <p>Cutomize your plot and save it as <strong>png</strong> file in the output folder. Remember that
+if you do not save in the output folder, your plot will get lost.</p>
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <ol>
+          <li>Can you observe any pattern? Does it make any sense?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>We can clearly see a seasonal cycle.</li>
+          </ol>
+          <figure id="figure-2"><img src="../../images/panoply_LEAFC_ALP1_exp.png" alt="Panoply LEAFC timeserie" /><figcaption><span class="figcaption-prefix">Figure 2:</span> LEAFC</figcaption></figure>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Plot the rate of total mortality per PFT (MORTALITY)</p>
+
+      <p>Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
+Make sure to adjust the y-axis and save your plots in the output folder (as png file).</p>
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <ol>
+          <li>Can you observe any pattern? Does it make any sense?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>We can clearly see a seasonal cycle.</li>
+          </ol>
+          <figure id="figure-3"><img src="../../images/panoply_MORTALITY_ALP1_exp.png" alt="Panoply MORTALITY per PFT" /><figcaption><span class="figcaption-prefix">Figure 3:</span> total mortality per PFT</figcaption></figure>
+        </blockquote>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h2 id="comment-quit-panoply-properly-to-save-your-plots"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Quit Panoply properly to save your plots!</h2>
+
+        <p>To make sure all your plots stored in <strong>outputs</strong> folder  get exported to <span class="notranslate">Galaxy</span>, you need to quit panoply: <strong>File</strong> –&gt; <strong>Quit Panoply</strong>.</p>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h1 id="step-4-using-galaxy-tools-for-analysing-your-clm-fates-simulation">Step 4: Using <span class="notranslate">Galaxy</span> tools for analysing your CLM-FATES simulation</h1>
+
+<p>Panoply is a great tool for exploring the results of your simulations but what we would like is to automate the generation of the plots
+so that we can reuse it for any simulations.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-select-and-plot-leafc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Select and plot <strong>LEAFC</strong></h3>
+
+  <ol>
+    <li>Select the total carbon in live plant leaves (<strong>LEAFC</strong>)
+<span class="tool" data-tool="NetCDF+xarray+Selection" title="Tested with NetCDF+xarray+Selection"><strong>NetCDF xarray Selection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: NetCDF+xarray+Selection</span></span>  with the following parameters:
+      <ul>
+        <li><strong>Input netcdf file</strong>: ALP1_exp.nc</li>
+        <li><strong>Tabular of variables</strong>: Metadata infos from ALP1_exp.nc</li>
+        <li><strong>Choose the variable to extract</strong>: LEAFC</li>
+        <li>Click <strong>Execute</strong></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename Dataset to <strong>NetCDF xarray Selection on ALP1_exp.nc</strong></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Clean date column for plotting
+<span class="tool" data-tool="Replace+parts+of+text" title="Tested with Replace+parts+of+text"><strong>Replace parts of text </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Replace+parts+of+text</span></span>  with the following parameters:
+      <ul>
+        <li><strong>File to process</strong>: NetCDF xarray Selection on ALP1_exp.nc</li>
+        <li><strong>Find pattern</strong>:  00:00:00</li>
+        <li><strong>Find-Pattern is a regular <span class="notranslate">expression</span></strong>: Select <em>No</em></li>
+        <li><strong>Replace all occurences of the pattern</strong>: Select <em>Yes</em></li>
+        <li><strong>Case-Insensitive search</strong>: Select <em>No</em></li>
+        <li><strong>Find whole-words</strong>: Select <em>Yes</em></li>
+        <li><strong>Ignore first line</strong>: Select <em>Yes</em></li>
+        <li><strong>Find and Replace text in</strong>: Select <em>entire line</em></li>
+        <li>Click <strong>Execute</strong></li>
+      </ul>
+    </li>
+    <li>
+      <p>Rename Dataset to <strong>LEAFC_clean.tabular</strong></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-3"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Plot the total carbon in live plant leaves (<strong>LEAFC</strong>)</li>
+  </ol>
+
+  <p>To make a plot, you can use <strong>Scatterplot w ggplot2</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+  <ul>
+    <li><em>“Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">LEAFC_clean.tabular</code></li>
+    <li><em>“Column to plot on x-axis”</em>: 1</li>
+    <li><em>“Column to plot on y-axis”</em>: 4</li>
+    <li><em>“Plot title”</em>: Total carbon in live plant leaves</li>
+    <li><em>“Label for x axis”</em>: Time</li>
+    <li><em>“Label for y axis”</em>: LEAFC (kgC ha-1)</li>
+    <li>In <code class="language-plaintext highlighter-rouge">Advanced Options</code> change <code class="language-plaintext highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</li>
+    <li>And finally in <code class="language-plaintext highlighter-rouge">Output options</code> set <code class="language-plaintext highlighter-rouge">width of output</code> to <em>*19.0 and <code class="language-plaintext highlighter-rouge">height of output</code></em> to 5.0*.</li>
+  </ul>
+
+  <ol>
+    <li>
+      <p>Click on <strong>Execute</strong>.</p>
+    </li>
+    <li>
+      <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
+
+      <p><img src="../../images/LEAFC_ALP1_exp_ggplot.png" alt="LEAFC" /></p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-5-convert-your-analysis-history-into-a-galaxy-workflow">Step 5: Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-extract-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract <span class="notranslate">workflow</span></h3>
+
+  <ol>
+    <li>Go to the <strong>History Options menu</strong>  <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> menu
+      <ul>
+        <li>Select the <strong>Extract <span class="notranslate">Workflow</span></strong> option.</li>
+        <li>Remove any unwanted steps</li>
+      </ul>
+    </li>
+    <li><strong>Rename</strong> the <span class="notranslate">workflow</span> to something descriptive
+      <ul>
+        <li>For example: <code class="language-plaintext highlighter-rouge">CLM-FATES_ ALP1 simulation (5 years)</code>.</li>
+        <li>If there are any steps that shouldn’t be included in the <span class="notranslate">workflow</span>, you can <strong>uncheck</strong> them.</li>
+      </ul>
+    </li>
+    <li>Click “Create <span class="notranslate">Workflow</span>”
+      <ul>
+        <li>Click on “edit” and check your <span class="notranslate">workflow</span></li>
+        <li>Check all the steps</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-6-change-your-clm-fates-case-and-rerun-your-workflow">Step 6: Change your CLM-FATES case and rerun your <span class="notranslate">workflow</span></h1>
+
+<p>We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increased by a factor of 4.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compare-the-two-simulations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare the two simulations</h3>
+
+  <p>Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
+   of an increase in the atmosperhic CO2 on the outputs of the model.</p>
+  <ol>
+    <li>Edit your <span class="notranslate">workflow</span> and customize it to run your new CO2 experiment. For this you would need to
+add an extra step to extract the first history file from the history collection and generate the
+corresponding plot. The final <span class="notranslate">workflow</span> would be similar to the one shown below:</li>
+  </ol>
+
+  <figure id="figure-4"><img src="../../images/fates_workflow.png" alt="FATES workflow" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FATES <span class="notranslate">workflow</span></figcaption></figure>
+
+  <blockquote class="question">
+    <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+    <ol>
+      <li>Is the model response to this significant increase of atmospheric CO2 what you expected?
+  Justify your answer.</li>
+      <li>Is the current <span class="notranslate">workflow</span> (in particular the variables selected for the plots) the best choice?
+  What changes/additions would you recommend?</li>
+    </ol>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <ol>
+        <li>Running 5 years is already sufficient to highlight significant changes.
+<img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2" /></li>
+        <li>Many suggestions can be given here. One simple addition can be the generation of plots where
+both simulations are represented on the same plot.</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<h1 id="share-your-work">Share your work</h1>
+
+<p>One of the most important features of <span class="notranslate">Galaxy</span> comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. <span class="notranslate">Galaxy</span> enables users to easily share their workflows and histories with others.</p>
+
+<p>To share a history, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon in the history panel and select <code class="language-plaintext highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+
+<ol>
+  <li><strong>Make History Accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
+  <li><strong>Make History Accessible and Publish</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="language-plaintext highlighter-rouge">Shared Data → Histories</code> in the top menu.</li>
+  <li><strong>Share with a user</strong>. This will share the history only with specific users on the <span class="notranslate">Galaxy</span> instance.</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-permissions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Permissions</h3>
+  <p>Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.</p>
+
+  <p>Be sure to select <strong>Also make all objects within the History accessible</strong> whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-share-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Share history</h3>
+
+  <ol>
+    <li>Share your history with your neighbour (ask for his/her <span class="notranslate">galaxy</span> use<span class="notranslate">rna</span>me).</li>
+    <li>Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead “User” menu under <code class="language-plaintext highlighter-rouge">Histories shared with me</code>.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-publish-your-history-to-httpsworkflowhubeu"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Publish your history to https://workflowhub.eu/</h3>
+  <p>One step further is to share your <span class="notranslate">workflow</span> on <a href="https://workflowhub.eu">https://workflowhub.eu</a> where it
+will be stored in a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> format as well as in <a href="https://www.commonwl.org/">Common <span class="notranslate">Workflow</span> Language</a>. 
+It provides standardised <span class="notranslate">workflow</span> identifiers and descriptions needed for <span class="notranslate">workflow</span> discovery, reuse, preservation, interoperability and monitoring and metadata harvesting using standard protocols.
+Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is still under active development.</p>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p class="no_toc">We have learnt to run single-point simulations with FATES-CLM and generate workflows for multi-site scenarios.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>CLM-FATES</p>
+</li>
+                            
+                            <li><p>Quick visualization of your results with Panoply</p>
+</li>
+                            
+                            <li><p>Create multi-case simulations with a Galaxy workflow</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b>, 2015.</span>
+    
+    
+    <a href="https://doi.org/10.5194/gmd-8-3593-2015">10.5194/gmd-8-3593-2015</a>
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Climate)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Anne Fouilloux, 2020 <b>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)</b>. <a href="/training-material/topics/climate/tutorials/fates/tutorial.html">/training-material/topics/climate/tutorials/fates/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{climate-fates,
+    author = "Anne Fouilloux",
+    title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)",
+    year = "2020",
+    month = "10",
+    day = "25"
+    url = "\url{/training-material/topics/climate/tutorials/fates/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/climate/tutorials/fates/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

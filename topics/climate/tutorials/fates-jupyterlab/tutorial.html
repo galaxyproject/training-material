@@ -1,0 +1,1417 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Functionally Assembled Terrestrial Ecosystem Simulator (F..." />
+        <meta property="og:description" content="Learn to analyze climate data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/climate" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Climate
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates-jupyterlab%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates-jupyterlab%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates-jupyterlab%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates-jupyterlab%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates-jupyterlab%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fclimate%2Ftutorials%2Ffates-jupyterlab%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/climate/tutorials/fates-jupyterlab/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Climate",
+    "description": "Learn to analyze climate data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+  },
+  "courseCode": "climate / fates-jupyterlab / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html",
+  "timeRequired": "PT6H",
+  "description": "The questions this  addresses are:\n - Why and when using Galaxy Climate JupyterLab for CLM-FATES?\n - How to start Galaxy Climate JupyterLab in Galaxy?\n - How to upload input data for running CLM-FATES?\n - How to create CLM-FATES case in Galaxy Climate JupyterLab?\n - How to customize your run?\n - How to analyze your model outputs?\n - How to save your model results into a Galaxy history?\n - How to share your results?\n\n\\nThe objectives are:\n - Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.\n - Setting up CLM-FATES case with Galaxy Climate JupyterLab.\n - Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.\n - Analyzing CLM-FATES results.\n - Sharing CLM-FATES simulations.\n - Composing, executing and publishing the corresponding Jupyter notebooks.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/fates/slides.html",
+      "name": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)",
+      "description": "Slides for 'Functionally Assembled Terrestrial Ecosystem Simulator (FATES)' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/tutorials/fates/tutorial.html",
+      "name": "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)",
+      "description": "Hands-on for 'Functionally Assembled Terrestrial Ecosystem Simulator (FATES)' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html",
+      "name": "JupyterLab in Galaxy",
+      "description": "Hands-on for 'JupyterLab in Galaxy' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "https://swcarpentry.github.io/python-novice-inflammation/",
+      "name": "Programming with Python"
+    },
+    {
+      "@type": "CreativeWork",
+      "url": "http://swcarpentry.github.io/shell-novice/",
+      "name": "The Unix Shell"
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anne Fouilloux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Climate",
+      "description": "Learn to analyze climate data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/climate/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab</h1>
+        
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Under Development!</h4>
+            <p>This tutorial is not in its final state. The content may change a lot in the next months.
+            Because of this status, it is also not listed in the topic pages.</p>
+        </div>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>Why and when using Galaxy Climate JupyterLab for CLM-FATES?</p>
+</li>
+            
+            <li><p>How to start Galaxy Climate JupyterLab in Galaxy?</p>
+</li>
+            
+            <li><p>How to upload input data for running CLM-FATES?</p>
+</li>
+            
+            <li><p>How to create CLM-FATES case in Galaxy Climate JupyterLab?</p>
+</li>
+            
+            <li><p>How to customize your run?</p>
+</li>
+            
+            <li><p>How to analyze your model outputs?</p>
+</li>
+            
+            <li><p>How to save your model results into a Galaxy history?</p>
+</li>
+            
+            <li><p>How to share your results?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Motivation for using the Galaxy Climate JupyterLab for CLM-FATES.</p>
+</li>
+            
+            <li><p>Setting up CLM-FATES case with Galaxy Climate JupyterLab.</p>
+</li>
+            
+            <li><p>Running CLM-FATES in Galaxy for single-point locations where in-situ measurements are available.</p>
+</li>
+            
+            <li><p>Analyzing CLM-FATES results.</p>
+</li>
+            
+            <li><p>Sharing CLM-FATES simulations.</p>
+</li>
+            
+            <li><p>Composing, executing and publishing the corresponding Jupyter notebooks.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/climate">Climate</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">User Interface and Data Manipulation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> JupyterLab in Galaxy:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/jupyterlab/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        <a href="https://swcarpentry.github.io/python-novice-inflammation/">Programming with Python</a>
+    
+    </li>
+
+    <li>
+    
+        <a href="http://swcarpentry.github.io/shell-novice/">The Unix Shell</a>
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 6 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/climate/slides/introduction.html" title="Introduction slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Introduction slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/climate/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 25, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The practical aims at familiarizing you with running CLM-FATES within <span class="notranslate">Galaxy</span> Climate JupyterLab.</p>
+
+<blockquote class="agenda">
+  <h2 id="agenda">Agenda</h2>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#agenda" id="markdown-toc-agenda">Agenda</a></li>
+  <li><a href="#motivation" id="markdown-toc-motivation">Motivation</a></li>
+  <li><a href="#step-1-get-data" id="markdown-toc-step-1-get-data">Step-1: Get data</a>    <ol>
+      <li><a href="#hands_on-hands-on-data-upload" id="markdown-toc-hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</a></li>
+    </ol>
+  </li>
+  <li><a href="#step-2-opening-up-climate-jupyterlab" id="markdown-toc-step-2-opening-up-climate-jupyterlab">Step-2: Opening up Climate JupyterLab</a>    <ol>
+      <li><a href="#hands_on-hands-on-launch-jupyterlab-for-ocean--atmosphere--land--climate-python-ecosystem-in-galaxy" id="markdown-toc-hands_on-hands-on-launch-jupyterlab-for-ocean--atmosphere--land--climate-python-ecosystem-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in <span class="notranslate">Galaxy</span></a></li>
+    </ol>
+  </li>
+  <li><a href="#step-3-create-a-new-session-clm-fates-in-jupyterlab" id="markdown-toc-step-3-create-a-new-session-clm-fates-in-jupyterlab">Step-3: Create a new session CLM-FATES in JupyterLab</a>    <ol>
+      <li><a href="#import-input-data-to-jupyterlab" id="markdown-toc-import-input-data-to-jupyterlab">Import input data to JupyterLab</a></li>
+      <li><a href="#get-clm-fates-emerald-release" id="markdown-toc-get-clm-fates-emerald-release">Get CLM-FATES EMERALD release</a></li>
+      <li><a href="#create-clm-fates-new-case" id="markdown-toc-create-clm-fates-new-case">Create CLM-FATES new case</a></li>
+      <li><a href="#setup-build-and-submit-your-first-simulation" id="markdown-toc-setup-build-and-submit-your-first-simulation">Setup, build and submit your first simulation</a></li>
+      <li><a href="#check-your-run" id="markdown-toc-check-your-run">Check your run</a></li>
+      <li><a href="#customize-your-run" id="markdown-toc-customize-your-run">Customize your run</a></li>
+    </ol>
+  </li>
+  <li><a href="#analysis" id="markdown-toc-analysis">Analysis</a>    <ol>
+      <li><a href="#analyzing-fates-clm-model-outputs" id="markdown-toc-analyzing-fates-clm-model-outputs">Analyzing FATES-CLM model outputs</a></li>
+    </ol>
+  </li>
+  <li><a href="#save-your-results-to-your-galaxy-history" id="markdown-toc-save-your-results-to-your-galaxy-history">Save your results to your <span class="notranslate">Galaxy</span> history</a></li>
+  <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
+  <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
+</ol>
+
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
+
+  <p>FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
+FATES needs what we call a “Host Land Model” (HLM) to run and in this tutorial
+we will be using the <a href="http://www.cesm.ucar.edu/models/clm/">Community Land Model</a>
+of the <a href="https://github.com/ESCOMP/CTSM">Community Terrestrial Systems Model</a> (CLM-CTSM).
+FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+<a class="citation" href="#Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b> 2015</a>.
+and this technical note was first published as an appendix to <a href="https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf">that paper</a>.
+The <a href="https://fates-docs.readthedocs.io/en/latest/index.html">FATES documentation</a> will provide some more insight on FATES too.</p>
+
+</blockquote>
+
+<h2 id="motivation">Motivation</h2>
+
+<p>In this tutorial, we will be using a <span class="notranslate">Galaxy</span> interactive tool called <span class="notranslate">Galaxy</span> Climate JupyterLab for running CLM-FATES.
+This interactive tool is only available from <a href="https://live.usegalaxy.eu/" target="_blank">Live<span class="notranslate">Galaxy</span>.eu</a>.</p>
+
+<p>This platform is meant to be used for:</p>
+<ul>
+  <li>preparing new input datasets;</li>
+  <li>testing new versions of fates, including code changes;</li>
+  <li>developing new notebooks for analyzing and showing the model results;</li>
+  <li>creating interactive publications (notebooks);</li>
+  <li>teaching purposes.</li>
+</ul>
+
+<p>The main advantage over the <span class="notranslate">Galaxy</span> CLM-FATES tool is that you can run any versions of FATES, including developments
+that are not released yet. However, it is not recommended to run more than a few decades of simulation time. 
+In that particular case, we would suggest to use the <span class="notranslate">Galaxy</span> CLM-FATES <span class="notranslate">Galaxy</span> tool.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-cml-fates-in-jupyterlab-versus-clm-fates-galaxy-tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> CML-FATES in JupyterLab versus CLM-FATES <span class="notranslate">Galaxy</span> tool</h3>
+  <p>Do not use the interactive <span class="notranslate">Galaxy</span> Climate JupyterLab for running long and “operational” simulations and
+do not forget that you need to save back your results to your <span class="notranslate">Galaxy</span> history or local machine before
+stopping your JupyterLab.</p>
+
+</blockquote>
+
+<h1 id="step-1-get-data">Step-1: Get data</h1>
+
+<blockquote class="notranslate hands_on">
+  <h2 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h2>
+
+  <ol>
+    <li>Create a new history for this tutorial. If you are not inspired, you can name it <em>fates-jupyterlab</em>.
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the files from <a href="https://doi.org/10.5281/zenodo.4108341">Zenodo</a> or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Check the datatype is <strong>tar</strong></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Rename Datasets</p>
+
+      <p>As “https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar” is not a beautiful name and can give errors for some tools,
+it is a good practice to change the dataset name by something more meaningfull. For example by removing <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/</code> to obtain <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code>, respectively.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Add a tag to the dataset corresponding to <code class="language-plaintext highlighter-rouge">fates-jupyterlab</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="step-2-opening-up-climate-jupyterlab">Step-2: Opening up Climate JupyterLab</h1>
+
+<blockquote class="notranslate hands_on">
+  <h2 id="hands_on-hands-on-launch-jupyterlab-for-ocean--atmosphere--land--climate-python-ecosystem-in-galaxy"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in <span class="notranslate">Galaxy</span></h2>
+
+  <p>Currently JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem in <span class="notranslate">Galaxy</span> is available on <a href="https://live.usegalaxy.eu">Live.use<span class="notranslate">Galaxy</span>.eu</a> only. JupyterLab for Ocean / Atmosphere / Land / Climate Python ecosystem and not the default JupyterLab in <span class="notranslate">Galaxy</span> contains all the python packages and additional software we need for running Earth System Model, including Functionally Assembled Terrestrial Ecosystem Simulator (FATES). The default JupyterLab in <span class="notranslate">Galaxy</span> would not be sufficient for executing all the tasks in th
+is tutorial.</p>
+
+  <ol>
+    <li>Open the JupyterLab tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> by clicking <a href="https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook" target="_blank">here</a>​ with the following par
+ameters:</li>
+    <li>Click Execute</li>
+    <li>The tool will start running and will stay running permanently</li>
+    <li>Click on the “User” menu at the top and go to “Active Interactive Tools” and locate the JupyterLab instance you started.</li>
+    <li>Click on your JupyterLab instance (please not that it may take a few minutes before you can click on the link to your jupyterLab instance).</li>
+  </ol>
+
+</blockquote>
+
+<p>You should now be looking at a page with the JupyterLab interface:</p>
+
+<p><img src="../../images/jupyterlab_climate_session.png" alt="Jupyterlab climate session" /></p>
+
+<h1 id="step-3-create-a-new-session-clm-fates-in-jupyterlab">Step-3: Create a new session CLM-FATES in JupyterLab</h1>
+
+<h2 id="import-input-data-to-jupyterlab">Import input data to JupyterLab</h2>
+
+<p>In this part of the tutorial, we will be using the existing Jupyter Notebook called <strong>ipython_<span class="notranslate">galaxy</span>_notebook.ipynb</strong></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-open-a-jupyterlab-terminal"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Open a JupyterLab Terminal</h3>
+  <p>To open <strong>ipython_<span class="notranslate">galaxy</span>_notebook.ipynb</strong>, double click on it.
+More information on the JupyterLab interface can be found on the <a href="https://jupyterlab.readthedocs.io/en/stable/user/interface.html">JupyterLab documentation</a>.</p>
+
+  <p>Import the FATES input dataset from your history:</p>
+  <ul>
+    <li>In a new code cell:</li>
+  </ul>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+
+get -i inputdata_version2.0.0_ALP1.tar -t name
+</code></pre></div>  </div>
+
+  <p>By default code cells execute Python 3 code (default kernel) so to execute the Shell command lines
+we will use <code class="language-plaintext highlighter-rouge">%%bash</code>.  In that case the cell runs with bash in a subprocess.</p>
+
+  <p>Then untar this file:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+mkdir $HOME/inputdata
+tar xf /import/inputdata_version2.0.0_ALP1.tar --directory $HOME/inputdata
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-direct-download-in-jupyterlab-from-zenodo"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Direct download in JupyterLab from Zenodo</h3>
+
+  <p>You may also download the input dataset directly from Zenodo.</p>
+  <ul>
+    <li>Open a JupyterLab Terminal and enter the following command:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+cd /import
+wget https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
+</code></pre></div>      </div>
+    </li>
+  </ul>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-using-jupyterlab-terminal"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Using JupyterLab Terminal</h3>
+
+  <p>Most of the tutorial (except visualization) can be executed from a JupyterLab Terminal. In that case,
+you should not add <code class="language-plaintext highlighter-rouge">%%bash</code> to your commands. More on JupyterLab Terminal can be found <a href="https://jupyterlab.readthedocs.io/en/stable/user/terminal.html">here</a>.</p>
+</blockquote>
+
+<h2 id="get-clm-fates-emerald-release">Get CLM-FATES EMERALD release</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-clone-clm-fates-for-nordic-sites"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Clone CLM-FATES for Nordic sites</h3>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+conda create --name fates -y fates-emerald=2.0.1
+</code></pre></div>  </div>
+  <p>The command above is required once only. It creates a new conda environment called <strong>fates</strong> and
+install <strong>fates-emerald</strong> version 2.0.1 conda package. It is important to always specify the version of
+CLM-FATES you would like to use as it needs to match your input dataset.
+Now a new <strong>fates</strong> conda environment has been 
+created in your current JupyterLab session and can be use every time you activate it.</p>
+
+  <p>Then to activate this new conda environment:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+source activate fates
+</code></pre></div>  </div>
+  <p>Please note that you would need to activate <strong>fates</strong> environment in every new code cell (because it starts a new Shell subprocess).</p>
+
+</blockquote>
+
+<h2 id="create-clm-fates-new-case">Create CLM-FATES new case</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-clm-fates-new-case-for-alp1-site"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create CLM-FATES new case for ALP1 site</h3>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+source activate fates
+
+create_newcase --case $HOME/ctsm_cases/fates_alp1 --compset 2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV --res 1x1_ALP1 --machine espresso --run-unsupported
+</code></pre></div>  </div>
+
+</blockquote>
+
+<blockquote class="warning">
+  <h3 id="warning-command-not-found"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Command not found!</h3>
+  <p>If you get an error when invoking <code class="language-plaintext highlighter-rouge">create_newcase</code> make sure you have switch to fates conda environment:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+source acticate fates
+create_newcase --help
+</code></pre></div>  </div>
+</blockquote>
+
+<p>The 4 main arguments of create_newcase are explained on the figure below: <img src="../../images/newcase_fates.png" alt="create_newcase main arguments" />.</p>
+
+<ul>
+  <li><strong>case</strong>: specifies the name and location of the case being created. It creates a new case in <code class="language-plaintext highlighter-rouge">$HOME/ctsm_cases/</code> and its name is <code class="language-plaintext highlighter-rouge">fates_alp1</code>. make sure to give a meaningful name to your FATES experiments.</li>
+  <li><strong>res</strong>: specifies the model resolution (resolution of the grid). Here <strong>1x1_ALP1</strong> corresponds to a single point resolution.</li>
+  <li><strong>compset</strong>: specifies the component set, i.e., component models, forcing scenarios and physics options for those models.
+    <ul>
+      <li>The long name of the compset we have chosen is <code class="language-plaintext highlighter-rouge">2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV</code></li>
+      <li>The notation for the compset longname is: <code class="language-plaintext highlighter-rouge">TIME_ATM[%phys]_LND[%phys]_ICE[%phys]_OCN[%phys]_ROF[%phys]_GLC[%phys]_WAV[%phys][_BGC%phys]</code></li>
+      <li>The compset longname has the specified order: <strong>atm, lnd, ice, ocn, river, glc wave cesm-options</strong> where:
+        <ul>
+          <li><strong>Initialization Time</strong>:2000</li>
+          <li><strong>Atmosphere</strong>: Data atmosphere DATM%1PTGSWP3</li>
+          <li><strong>Land</strong>: CLM50%FATES</li>
+          <li><strong>Sea-Ice</strong>: SICE Stub ICE</li>
+          <li><strong>Ocean</strong>: SOCN Stub ocean</li>
+          <li><strong>River runoff</strong>:MOSART: MOdel for Scale Adaptive River Transport</li>
+          <li><strong>Land Ice</strong>: SGLC Stub Glacier (land ice) component</li>
+          <li><strong>Wave</strong>-   SWAV Stub wave component
+ The list of available component set is given <a href="http://www.cesm.ucar.edu/models/cesm2/config/compsets.html">here</a>.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><strong>mach</strong>: specifies the machine where CLM-FATES will be compiled and run. We use <code class="language-plaintext highlighter-rouge">espresso</code> which is the local setup (see <code class="language-plaintext highlighter-rouge">$HOME/.cime/</code> folder).</li>
+</ul>
+
+<h2 id="setup-build-and-submit-your-first-simulation">Setup, build and submit your first simulation</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setup-build-and-submit"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setup, build and submit</h3>
+
+  <p>Check the content of the directory and browse the sub-directories:</p>
+  <ul>
+    <li>CaseDocs: namelists or similar</li>
+    <li>SourceMods: this is where you can add local source code changes.</li>
+    <li>Tools: a few utilities (we won’t use them directly)</li>
+    <li>Buildconf: configuration for building each component
+For this tutorial, we  wish to have a “cold” start as we are mostly interested in setting up our model.
+When ready to run in production, the model needs to be spin-up (run for several centuries until it reaches some kind of equilibrium).</li>
+  </ul>
+
+  <p>We will first make a short simulation (1 month):</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+source activate fates
+
+cd $HOME/ctsm_cases/fates_alp1
+./case.setup
+./case.build
+./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "years"
+./xmlchange STOP_N=1                       # set the length of simulation, i.e, how many years
+./case.submit &gt; case_submit.out 2&gt;&amp;1
+</code></pre></div>  </div>
+  <p>The step above can take a lot of time because it needs to compile and run the FATES model.
+Therefore we suggest you make a break and come back later (or the following day) before you continue the
+tutorial.</p>
+</blockquote>
+
+<h2 id="check-your-run">Check your run</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-your-simulation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: check your simulation</h3>
+
+  <ol>
+    <li>From a new code cell:</li>
+  </ol>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash 
+
+cd $HOME/work/fates
+ls -la
+</code></pre></div>  </div>
+  <p>You should see two folders:</p>
+  <ul>
+    <li>bld: contains the object and CESM executable (called cesm.exe) for your configuration</li>
+    <li>run: this directory will be used during your simulation run to generate output files, etc.</li>
+  </ul>
+
+  <p>The <strong>bld</strong> folder contains the model executable (called <code class="language-plaintext highlighter-rouge">cesm,exe</code>) while <strong>run</strong> contains all the files used for running CLM-FATES (and not already archived).
+Once your run is terminated, many files are moved from the <strong>run</strong> folder to the <strong>archive</strong> folder:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+cd $HOME/archive/fates
+ls lnd/hist
+</code></pre></div>  </div>
+
+  <p>We are interested in the “history” files from the CLM-FATES model and these files are all located in <code class="language-plaintext highlighter-rouge">lnd/hist</code> folder.
+You can also check other model components in the archive directory (atm, etc.): in our case, it is not of a great interest as
+we are running the CLM-FATES component.
+We have run a very short simulation and get one file only, called <code class="language-plaintext highlighter-rouge">fates_alp1_t.clm2.h0.2000-01.nc</code>. The
+CLM-FATES model outputs are stored in netCDF format.</p>
+
+  <blockquote class="comment">
+    <h3 id="comment-what-is-a-netcdf-file"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> What is a netCDF file?</h3>
+
+    <p>Netcdf stands for “network Common Data Form”. It is self-describing, portable, metadata friendly, supported by many languages
+(including python, R, fortran, C/C++, Matlab, NCL, etc.), viewing tools (like panoply, ncview/ncdump) and tool suites of file operators (in particular NCO and CDO).</p>
+  </blockquote>
+
+  <ol>
+    <li>Create a new Jupyter Notebook for analyzing your results:
+      <ul>
+        <li>From the <strong>File Menu</strong> –&gt; <strong>New</strong> –&gt; <strong>Notebook</strong>:</li>
+      </ul>
+      <ul>
+        <li>Rename your notebook to <strong>check_analysis.ipynb</strong></li>
+        <li>All the analysis of the 2 month FATES simulation will be done from this notebook</li>
+      </ul>
+    </li>
+    <li>Get metadata
+In a Code cell:</li>
+  </ol>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import os
+import xarray as xr
+xr.set_options(display_style="html")
+%matplotlib inline
+
+case = 'fates_alp1'
+path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
+dset = xr.open_dataset(path + '/fates_alp1_t.clm2.h0.2000-01.nc')
+dset
+</code></pre></div>  </div>
+  <p>As shown above, we are now using Python 3 for analyzing the results and <a href="http://xarray.pydata.org/en/stable/">xarray</a> which 
+is a Python package that can easily handle <a href="https://en.wikipedia.org/wiki/NetCDF">netCDF</a> files.
+we opened the single history file and print metadata.</p>
+
+  <ol>
+    <li>Plotting 1D variables (timeseries)</li>
+  </ol>
+
+  <p>You can select a variable by using its short name (see metadata above) and then calling the plot method:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dset['AREA_TREES'].plot()
+</code></pre></div>  </div>
+  <p>As we ran one month only, we have very little points in our timeseries!</p>
+
+  <p>To plot 2D variables such as <strong>CANOPY_AREA_BY_AGE</strong>, you can use the <em>col_wrap</em> option when plotting:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dset['CANOPY_AREA_BY_AGE'].plot(aspect=3, size=6, col='fates_levage', col_wrap=1)
+</code></pre></div>  </div>
+  <p>In the plot above, we have one plot per row (<em>col_wrap=1</em>) and we will have a plot for each value of the <em>fates_levage</em> dimension.
+We also changed the aspect of the plot (aspect=3, size=6).</p>
+</blockquote>
+
+<h2 id="customize-your-run">Customize your run</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-10-years"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run 10 years</h3>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+source activate fates
+cd $HOME/ctsm_cases/fates_alp1
+
+./xmlchange RUN_STARTDATE=0001-01-01      # set up the starting date of your simulation 
+./xmlchange STOP_OPTION=nyears            # set the simulation periods to "years"
+./xmlchange STOP_N=5                      # set the length of simulation, i.e, how many years
+./xmlchange CONTINUE_RUN=TRUE             # if you want to continue your simulation from restart file, set it to TRUE
+./xmlchange RESUBMIT=1                    # set up how many times you want to resubmit your simulation.
+                                          # e.g, STOP_N=5, RESUBMIT=1, you will have simulation for 5+5*1=10 
+./xmlchange DATM_CLMNCEP_YR_START=1901    # set up the start year of the atmospheric forcing 
+./xmlchange DATM_CLMNCEP_YR_END=1910      # set up the end year of the atmospheric forcing
+./case.submit &gt; case_submit_sontinue_run.out 2&gt;&amp;1
+</code></pre></div>  </div>
+  <p>This step will take several hours.</p>
+</blockquote>
+
+<h1 id="analysis">Analysis</h1>
+
+<p>In this section, we will be able to analyze your 10 year simulation only when the run is terminated (note that data will be moved to the archive folder every 5 years).</p>
+
+<h2 id="analyzing-fates-clm-model-outputs">Analyzing FATES-CLM model outputs</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-open-a-new-python-notebook"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Open a new Python notebook</h3>
+  <ul>
+    <li>Create a notebook by clicking the <code class="language-plaintext highlighter-rouge">+</code> button in the file browser and then selecting a kernel in the new Launcher tab:</li>
+    <li>Rename your notebook to <strong>analyse_case.ipynb</strong>
+Get more information online at <a href="https://jupyterlab.readthedocs.io/en/stable/user/notebook.html">JupyterLab notebooks</a>.</li>
+  </ul>
+</blockquote>
+
+<h3 id="use-xarray-to-read-and-plot">Use <code class="language-plaintext highlighter-rouge">xarray</code> to read and plot</h3>
+
+<p>In this section, we give additional examples on how to visualize your results using <code class="language-plaintext highlighter-rouge">xarray</code>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import xarray as xr
+xr.set_options(display_style="html")
+%matplotlib inline
+
+case = 'fates_alp1'
+path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
+dset = xr.open_mfdataset(path + '/*.nc', combine='by_coords')
+dset
+</code></pre></div></div>
+<p>As you can see, we are now using <code class="language-plaintext highlighter-rouge">open_mfdataset</code> to read all the netCDF files available in the history folder.
+The option <code class="language-plaintext highlighter-rouge">combine='by_coords')</code> is used to tell the method <code class="language-plaintext highlighter-rouge">open_mfdataset</code> how to combine the different files
+together.</p>
+
+<p>You can use the same <code class="language-plaintext highlighter-rouge">plot</code> method as before for plotting any variable. For instance:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dset['AREA_TREES'].plot(aspect=3, size=6)
+
+</code></pre></div></div>
+
+<p>For saving your plot, for instance in a <em>png</em> file format:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>import matplotlib.pyplot as plt
+fig = plt.figure(1, figsize=[14,7])
+ax = plt.subplot(1, 1, 1)
+dset['AREA_TREES'].plot(ax=ax)
+ax.set_title(dset['AREA_TREES'].long_name)
+fig.savefig('AREA_TREES.png')
+</code></pre></div></div>
+
+<p><img src="../../images/AREA_TREES_10yrs.png" alt="AREA TREES (10 years)" /></p>
+
+<p>In the plot above, we create a figure (with specific dimension [14,7]) and one subplot with one row and one column.
+The last argument of <em>subplot</em> is the index (1) of this particular subplot.</p>
+
+<p>Finally, the resulting figure is saved in a file called ‘AREA_TREES.png’.</p>
+
+<p>To plot 2D variables and save the resulting plot in a png file, for instance <strong>CANOPY_HEIGHT_DIST</strong>:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>p = dset['CANOPY_HEIGHT_DIST'].plot(aspect=3, size=6, col_wrap=1, col='fates_levheight')
+p.fig.savefig('CANOPY_HEIGHT_DIST.png')
+</code></pre></div></div>
+
+<p><img src="../../images/CANOPY_HEIGHT_DIST_10yrs.png" alt="CANOPY HEIGHT DIST (10 years)" /></p>
+
+<h1 id="save-your-results-to-your-galaxy-history">Save your results to your <span class="notranslate">Galaxy</span> history</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-put-your-data-to-your-galaxy-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Put your data to your <span class="notranslate">Galaxy</span> history</h3>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+cd $HOME
+tar cvf archive_emerald_fates_test.tar archive
+</code></pre></div>  </div>
+  <p>Then you are now ready to put your dataset into <span class="notranslate">Galaxy</span>. As it can be large, we recommend to use FTP:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl -T {"archive_emerald_fates_test.tar"} ftp://ftp.use<span class="notranslate">galaxy</span>.eu --user USER:PASSWORD --ssl
+</code></pre></div>  </div>
+  <p>Where you replace <code class="language-plaintext highlighter-rouge">USER</code> by your <span class="notranslate">galaxy</span> use<span class="notranslate">rna</span>me (what you used to login to <span class="notranslate">Galaxy</span> i.e. usually your email address
+and <code class="language-plaintext highlighter-rouge">PASSWORD</code> by your <span class="notranslate">Galaxy</span> login password.</p>
+
+  <p>To get <code class="language-plaintext highlighter-rouge">archive_emerald_fates_test.tar</code> in your history:</p>
+  <ul>
+    <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>
+    <li>Click on <strong>Choose FTP files</strong> and select <code class="language-plaintext highlighter-rouge">archive_emerald_fates_test.tar</code> to import it into your history.</li>
+  </ul>
+
+  <p>And make sure to save all your notebooks to your <span class="notranslate">Galaxy</span> history too:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+put -p ipython_<span class="notranslate">galaxy</span>_notebook.ipynb
+put -p check_analysis.ipynb
+put -p analyse_case.ipynb
+put -p AREA_TREES.png
+put -p CANOPY_HEIGHT_DIST.png
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="warning">
+  <h3 id="warning-danger-you-can-lose-data"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Danger: You can lose data!</h3>
+  <p>If you do not copy data (FATES model results, jupyter notebooks, plots, etc.) before you stop your <span class="notranslate">Galaxy</span> climate
+JupyterLab tool, all your results will be lost!</p>
+</blockquote>
+
+<h1 id="share-your-work">Share your work</h1>
+
+<p>One of the most important features of <span class="notranslate">Galaxy</span> comes at the end of an analysis. When you have published striking findings, it is important that other researchers are able to reproduce your in-silico experiment. <span class="notranslate">Galaxy</span> enables users to easily share their workflows and histories with others.</p>
+
+<p>To share a history, click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon in the history panel and select <code class="language-plaintext highlighter-rouge">Share or Publish</code>. On this page you can do 3 things:</p>
+
+<ol>
+  <li><strong>Make History Accessible via Link</strong>. This generates a link that you can give out to others. Anybody with this link will be able to view your history.</li>
+  <li><strong>Make History Accessible and Publish</strong>. This will not only create a link, but will also publish your history. This means your history will be listed under <code class="language-plaintext highlighter-rouge">Shared Data → Histories</code> in the top menu.</li>
+  <li><strong>Share with a user</strong>. This will share the history only with specific users on the <span class="notranslate">Galaxy</span> instance.</li>
+</ol>
+
+<blockquote class="comment">
+  <h3 id="comment-permissions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Permissions</h3>
+  <p>Different servers have different default permission settings. Some servers create all of your datasets completely private to you, while others make them accessible if you know the secret ID.</p>
+
+  <p>Be sure to select <strong>Also make all objects within the History accessible</strong> whenever you make a history accessible via link, otherwise whomever you send your link to might not be able to see your history.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-share-history"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Share history</h3>
+
+  <ol>
+    <li>Share your history with your neighbour.</li>
+    <li>Find the history shared by your neighbour. Histories shared with specific users can be accessed by those users under their top masthead “User” menu under <code class="language-plaintext highlighter-rouge">Histories shared with me</code>.</li>
+  </ol>
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-clone-clm-fates-release-for-nordic-site-from-github-advanced"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Clone CLM-FATES release for Nordic site from github (advanced)</h3>
+
+  <p>You may also get the CLM-FATES release 2.0.1 directly from github:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+cd $HOME
+git clone -b release-emerald-platform2.0.1 https://github.com/NordicESMhub/ctsm.git
+cd ctsm
+./manage_exte<span class="notranslate">rna</span>ls/checkout_exte<span class="notranslate">rna</span>ls
+</code></pre></div>  </div>
+  <p>This approach may be interesting if you wish to run another release or development version of CLM-FATES.
+All the tutorial shown can be done with your local version. In that case, you would need to use the
+local command such as <code class="language-plaintext highlighter-rouge">create__newcase</code> which then require the following steps:</p>
+  <ul>
+    <li>locate the command on your local folder; for instance to locate <code class="language-plaintext highlighter-rouge">create_newcase</code>:</li>
+  </ul>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
+cd $HOME/ctsm
+find . -name create_newcase
+</code></pre></div>  </div>
+  <p>The command above will give you the location of <code class="language-plaintext highlighter-rouge">create_newcase</code>:</p>
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./cime/scripts/create_newcase
+</code></pre></div>  </div>
+  <p>Be aware that it is a relative path. Then to create a new case:</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./cime/scripts/create_newcase --case $HOME/ctsm_cases/fates_alp1_local --compset 2000_DATM%1PTGSWP3_CLM50%FATES_SICE_SOCN_MOSART_SGLC_SWAV --res 1x1_ALP1 --machine espresso --run-unsupported
+
+</code></pre></div>  </div>
+  <p>Finally, if you wish to make changes to the source code, we recommend first to add your changes in different folder and use the option <code class="language-plaintext highlighter-rouge">--user-mods-dir</code> when 
+creating your case. In addition, you should make sure to use version control to save your changes.
+If you are not familiar with <code class="language-plaintext highlighter-rouge">git</code>, you could also save your changes in the corresponding <span class="notranslate">Galaxy</span> history.</p>
+</blockquote>
+
+<h1 id="conclusion">Conclusion</h1>
+
+<p class="no_toc">We have learnt to run single-point simulations with FATES-CLM through the <span class="notranslate">Galaxy</span> Climate JupyterLab.</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Galaxy Climate JupyterLab</p>
+</li>
+                            
+                            <li><p>CLM-FATES</p>
+</li>
+                            
+                            <li><p>Model analysis</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b>, 2015.</span>
+    
+    
+    <a href="https://doi.org/10.5194/gmd-8-3593-2015">10.5194/gmd-8-3593-2015</a>
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab (Climate)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Anne Fouilloux, 2020 <b>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab (Galaxy Training Materials)</b>. <a href="/training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html">/training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{climate-fates-jupyterlab,
+    author = "Anne Fouilloux",
+    title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab (Galaxy Training Materials)",
+    year = "2020",
+    month = "10",
+    day = "25"
+    url = "\url{/training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/climate/tutorials/fates-jupyterlab/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
