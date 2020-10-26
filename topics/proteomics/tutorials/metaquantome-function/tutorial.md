@@ -53,9 +53,9 @@ requirements:
 
 metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group. 
 
-In this tutorial, we will learn specifically about the metaQuantome Function workflow. In particular, we will learn about how peptide-level quantitation and associated functional information can be used to generate bar plots (for functional information such as molecular function, cellular components and biological processes), volcano plots (to detect differentially expressed function) and heatmap cluster analysis. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas {% cite Delogu2020 %}. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
+In this tutorial, we will learn specifically about the metaQuantome Function workflow. In particular, we will learn about how peptide-level quantitation and associated functional information can be used to generate bar plots (for functional information such as molecular function, cellular components and biological processes), volcano plots (to detect differentially expressed function) and heatmap cluster analysis. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas ({% cite Delogu2020 %}). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
-![MetaQuantome-function-workflow](../../images/mQ-function-workflow.jpg){: width="100%"}
+![MetaQuantome-function-workflow](../../images/mQ-function-workflow.jpg "MetaQuantome workflow showing steps to generate visualisations and analysis results from input data."){: width="100%"}
 
 
 > ### Agenda
@@ -70,7 +70,7 @@ In this tutorial, we will learn specifically about the metaQuantome Function wor
 
 # **Pretreatments**
 
-The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
+The first step in this tutorial is to get the data from the Zenodo link provided and make sure that it is in the correct format.
 
 
 ## *Get data*
@@ -82,7 +82,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files: a Functional File, an Intensity file from [Zenodo]({{ page.zenodo_link }})
+> 2. > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >    ```
@@ -91,13 +91,13 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 >    ```
 >    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    Alternatively, import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >
-> 3. Check that the datatype ( Make sure they are in the correct formats).
->  Functional File (format=`tabular`), an Intensity file (format=`tabular`)
+> 3. Check that the files are the correct datatypes. The Functional File should be datatype `tabular` and the Intensity File should also be datatype `tabular`.
+> 
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 >
 {: .hands_on}
@@ -173,7 +173,7 @@ The create samples file module is used to generate the samples file input file f
 
 The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed functions in the samples.
 In function mode, the following information is required apart from metaQuantome databases and samples file:
-- The name of the peptide column in the functional annotation file (` peptide`)
+- The name of the peptide column in the functional annotation file (`peptide`)
 - The name of the functional annotation column in the functional annotation file (`go_term`)
 - The name of the peptide column in the Intensity file (`peptide`)
 
@@ -299,7 +299,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 
 ![picture \label{fig1}](figure1.png)
 
-![T2_MF \label{T2 Top 5 Molecular Function}](../../images/T2-mf.png){: width="85%"}
+![T2_MF](../../images/T2-mf.png "Top five differentially expressed Molecular Function GO terms for sample T2."){: width="85%"}
 
 > ### {% icon question %} Questions
 >
@@ -329,7 +329,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Color for the bar fill"*: `Orange`
 > 
 {: .hands_on}
-![T4_MF](../../images/T4-mf.png){: width="85%"}
+![T4_MF](../../images/T4-mf.png "Top five differentially expressed Molecular Function GO terms for sample T4."){: width="85%"}
 
 
 
@@ -346,7 +346,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 > 
 {: .hands_on}
-![T7_MF](../../images/T7-mf.png){: width="85%"}
+![T7_MF](../../images/T7-mf.png "Top five differentially expressed Molecular Function GO terms for sample T7."){: width="85%"}
 
 ## *metaQuantome: visualize* Volcano Plots
 
@@ -369,7 +369,8 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    {: .comment}
 >
 {: .hands_on}
-![T2-T7-volcano](../../images/T2-T7-volcano.png){: width="100%"}
+![T2-T7-volcano](../../images/T2-T7-volcano.png "Volcano Plot of differentially expressed Go-term in T2 and T7."){: width="100%"}
+
 
 > ### {% icon question %} Questions
 >
@@ -401,7 +402,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >        - {% icon param-select %} *"Make one plot for each of BiologicalProcess, CellularComponent, and MolecularFunction GO term categories"*: `Yes`
 >
 {: .hands_on}
-![T2-T4-volcano](../../images/T2-T4-volcano.png){: width="100%"}
+![T2-T4-volcano](../../images/T2-T4-volcano.png "Volcano Plot of differentially expressed Go-term in T2 and T4."){: width="100%"}
 
 # Conclusion
 {:.no_toc}
