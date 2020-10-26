@@ -82,8 +82,8 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
->    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
+>  
 >
 >    ```
 >    https://zenodo.org/record/4110725/files/Function-File.tabular
