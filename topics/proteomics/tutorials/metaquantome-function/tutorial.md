@@ -51,7 +51,7 @@ requirements:
 # Introduction
 {:.no_toc}
 
-metaQuantome {% cite Easterly2019 %} software suite was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group. 
+metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group. 
 
 In this tutorial, we will learn specifically about the metaQuantome Function workflow. In particular, we will learn about how peptide-level quantitation and associated functional information can be used to generate bar plots (for functional information such as molecular function, cellular components and biological processes), volcano plots (to detect differentially expressed function) and heatmap cluster analysis. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas {% cite Delogu2020 %}. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
@@ -131,7 +131,7 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 
 > ### {% icon question %} Questions
 >
-> 1. Why is it necessary to download metaQuanome databases?
+> 1. Why is it necessary to download metaQuantome databases?
 > 2. Can these databases be downloaded from other sources?
 >
 > > ### {% icon solution %} Solution
@@ -174,7 +174,7 @@ The create samples file module is used to generate the samples file input file f
 The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed functions in the samples.
 In function mode, the following information is required apart from metaQuantome databases and samples file:
 - The name of the peptide column in the functional annotation file (` peptide`)
-- The name of the functional annotation column in the functional annotation file.(`go_term`)
+- The name of the functional annotation column in the functional annotation file (`go_term`)
 - The name of the peptide column in the Intensity file (`peptide`)
 
 > ### {% icon hands_on %} Hands-on: Run metaQuantome expand
@@ -277,7 +277,7 @@ The  outputs of the visualization module of metaQuantome are high-quality, publi
 Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
 There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
 
-## *metaQuantome: visualize* : Bar Chart
+## *metaQuantome: visualize* Bar Chart
 
 > ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T2 sample.
 >
@@ -297,7 +297,9 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 {: .hands_on}
 
-![T2_MF](../../images/T2-mf.png){: width="85%"}
+![picture \label{fig1}](figure1.png)
+
+![T2_MF \label{T2 Top 5 Molecular Function}](../../images/T2-mf.png){: width="85%"}
 
 > ### {% icon question %} Questions
 >
@@ -331,7 +333,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 
 
 
-> ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T4 sample.
+> ### {% icon hands_on %} Hands-on: Bar chart visualization of Functions in T7 sample.
 >
 > 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
@@ -346,7 +348,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 {: .hands_on}
 ![T7_MF](../../images/T7-mf.png){: width="85%"}
 
-## *metaQuantome: visualize* for Volcano Plots
+## *metaQuantome: visualize* Volcano Plots
 
 > ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T7 and T2.
 >
