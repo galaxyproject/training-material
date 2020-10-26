@@ -76,6 +76,10 @@ Artemis is capable of adding, deleting and editing genome features and annotatio
 >For the BICH 464 class, Artemis is not used genome annotation.  However, Artemis is useful for viewing genomes retrieved from the public databases such as NCBI GenBank. Artemis is able to directly read GenBank-formatted files downloaded from the internet.  As needed, Artemis may be used on an individual basis later in the course. Our primary tool in BICH 464 is the Apollo interface.
 {: .tip}
 
+> ### {% icon tip %} Note that…
+> The screenshots displayed here may not precisely reflect what you see on your screen. As our systems are regularly updated, it is likely that the current version year/number or the exact window display is different. Look for the most recent workflows/tools.
+{: .tip}
+
 # Annotation Within Apollo
 
 Continuing on to Apollo, this section will cover the relationship between Galaxy and Apollo and the general layout of the Apollo window. 

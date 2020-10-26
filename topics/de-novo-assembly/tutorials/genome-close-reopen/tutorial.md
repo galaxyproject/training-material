@@ -83,30 +83,30 @@ If a confirmation product of the expected size is identified, congratulations! T
 
 ## Closure PCR
 
-Return to the FASTA file for the confirmed node (*Raw_phagename*). Design a set of primers that amplifies 500-700 bp product across the ends. If using the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex), follow the guidelines given above, with the following modifications.
+Return to the FASTA file for the confirmed contig (you can re-name the file as *Raw_phagename*). Design a set of primers that amplifies 500-700 bp product across the ends. If using the [IDT PrimerQuest Tool](https://www.idtdna.com/site/account/login?returnurl=%2FPrimerquest%2FHome%2FIndex), follow the guidelines given above, with the following modifications.
 > * Set the design parameters to “General PCR (primers only)" in the Custom Design section and enter the following parameters:
 
 ![](../../images/genome-close-reopen-screenshots/8_closure_pcr_parameters.png)
 
-> * From the genome saved in the word processor, copy and paste approximately the last 500 bases from the 3’ end and paste into the “*Paste Sequence(s) here*” textbox. Then copy approximately the first 500 bases from the 5’ end and paste it below the earlier sequence (closure PCR should span from the 3’ to the 5’ end).
+> * From the contig sequence saved in the text file, copy and paste approximately the last 500 bases from the 3’ end and paste into the “*Paste Sequence(s) here*” textbox. Then copy approximately the first 500 bases from the 5’ end and paste it below the earlier sequence (closure PCR should span from the 3’ to the 5’ end).
 > * From the list given, pick the primer pair which approximately covers the regions connecting 300 bp from the 3’ end and  300 bp from the 5’ end.
 > * Verify that hairpin loops will not form in your PCR conditions (see below) using  IDT analyzing tools before checkout.
-> * Order those primers using the naming convention: *TwoInitials PhageName close for/rev* (for example: TM Maine close For, TM Maine close Rev).
-> * For the records, highlight the amplicon and primer sequences in the genome.
+> * Order those primers using the CPT naming convention: *TwoInitials PhageName close for/rev* (for example: TM Maine close For, TM Maine close Rev).
+> * For the records, highlight the amplicon and primer sequences in the contig sequence text file.
 
-Set up a PCR reaction with the new closure primers as follows.
-> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM (1 nmol= 10 uL H20) stock, and a 10 uM working stock.
-> * Assemble the PCR reaction as for the confirmation reaction above.
+Set up a PCR reaction with the new closure primers as follows:
+> * Dilute new primers by resuspending the lyophilized product in pure water after a brief centrifugation. Prepare a 100 uM stock, and a 10 uM working stock.
+> * Set up the PCR reaction as for the confirmation reaction above.
 > * Run the reaction with the following conditions:
 
 ![](../../images/genome-close-reopen-screenshots/9.1_pcr_reaction_conditions.png)
 
 Visualize and record the gel results as described above.
-> * If an amplicon is identified, send the PCR product for sequencing.
+> * If an amplicon is identified, send the closure PCR product for Sanger sequencing.
 > * If no amplicon is observed, proceed with the troubleshooting options below.
 
 Send the PCR product for Sanger sequencing.
-> * At the [CPT](https://cpt.tamu.edu/), we use the services of [EtonBioscience](https://www.etonbio.com/). Log in using the lab credentials and place an order for unpurified PCR product sequencing with local pick up.
+> * At the CPT, we use the services of [EtonBioscience](https://www.etonbio.com/). Log in using the lab credentials and place an order for unpurified PCR product sequencing with local pick up.
 
 ![](../../images/genome-close-reopen-screenshots/10_etonbio_pcr_ordering.png)
 
@@ -119,13 +119,13 @@ Send the PCR product for Sanger sequencing.
 Analyze the sequencing results to verify the genome end sequence.
 > * When Sanger sequencing results become available, inspect the quality reports and raw chromatograms.
 >    > * For poor sequencing results, request that the company rerun the reactions. For repeated poor sequencing, consult with supervisor for direction.
->    > * For high-quality and long reads, continue with the analysis.
+>    > * For good-quality results, continue with the analysis.
 > * Download the appropriate .ab1 files and open them with a sequence analysis program like [ApE](http://jorgensen.biology.utah.edu/wayned/ape/).
-> * Inspect the contig sequence alongside the sequencing chromatogram. This can be performed manually (see below), or by an alignment within [ApE](http://jorgensen.biology.utah.edu/wayned/ape/).
+> * Inspect the contig sequence alongside the sequencing chromatogram to verify the contig ends. This can be performed manually (see below), or by an alignment within [ApE](http://jorgensen.biology.utah.edu/wayned/ape/).
 
 ![](../../images/genome-close-reopen-screenshots/12_sequencing_chromatogram.png)
 
-> * From the genome saved in the word processor, copy and paste approximately the last 500 bases from the 3’ end and the first 500 bases from the 5’ end into a new DNA file in [ApE](http://jorgensen.biology.utah.edu/wayned/ape/). This now should contain the entire expected closure PCR product sequence. Open the .ab1 file and align the two sequences. Look for large regions of broken alignment, as shown here where there are extra bases in the raw node DNA (top sequence line) not present in the actual sequence data (bottom sequence line).
+> * From the contig sequence saved in the text file, copy and paste approximately the last 500 bases from the 3’ end and the first 500 bases from the 5’ end into a new DNA file in [ApE](http://jorgensen.biology.utah.edu/wayned/ape/). This now should contain the entire expected closure PCR product sequence. Open the .ab1 file and align the two sequences. Look for large regions of broken alignment, as shown here where there are extra bases in the raw contig sequence (top sequence line) not present in the actual sequence data (bottom sequence line).
 
 ![](../../images/genome-close-reopen-screenshots/13_genome_needs-corrections.png)
 
@@ -133,14 +133,12 @@ Analyze the sequencing results to verify the genome end sequence.
 
 ![](../../images/genome-close-reopen-screenshots/14_genome_no_corrections.png)
 
-> * Take notes of base pair changes and duplicated portions of the genome. Note that sequencing results are noisy at the 5’ and 3’ ends, which is why both the forward and reverse reactions results should be consulted only in the regions where the signal is high and of good quality.
-> * Record errors or inconsistencies (duplicated or extra sequence).
->    > * An error-free sequence file can be generated where these node mistakes are corrected to align with the sequencing data. ,This document is optional, as trimming will be performed in Galaxy, but it can be helpful for tracking the changes made. Title the error-free sequence *Closed_phagename* and save with the other files.
->    > * If there is continuous coverage over the entire 3’ → 5’ region with no mistakes, rename the original raw file to indicate that it is the closed genome sequence: *Closed_phagename*.
+> * Use the Sanger sequencing results to fix the contig end sequences.  You may need to change bases, trim redundant bases, or add missing bases to your contig sequence.  Note that you should sequence the closure PCR product from both ends (using both the forward and reverse primers as sequencing primers), to make sure high-quality sequences are long enough to support the verification of contig ends. **You can make correction to the contig sequence in the text file directly, or you can do it in Galaxy.**.  See below for how to trimm redunant bases from a contig and how to re-name a contig.    
+>    > * After correction, an error-free contig sequence can be generated and be re-named as *Closed_phagename*, to indicate this is the complete genome sequence of that phage.
 
-## Trimming/Renaming Genome Nodes
+## Trimming/Renaming Genome Contigs in Galaxy
 
-If no sequence needs to be removed, proceed to "Rename the FASTA file..." in this section. If your phage sequence needs to be altered, by removing bases at one end or the other of the genome, proceed with the following:
+If no sequence needs to be removed, proceed to "Rename the FASTA file..." in this section. If your contig sequence needs to be altered by removing bases at one end or the other of the genome, proceed with the following:
 
 In CPT Galaxy, locate the phage genome FASTA file-containing history.
 > * If you assembled the genome, locate the history in which it was assembled.
@@ -180,7 +178,7 @@ To rename the sequence ID in the header of the FASTA file, open the [Fasta Seque
 ![](../../images/genome-close-reopen-screenshots/18_fasta_sequence_renamer_tool.png)
 
 > ### {% icon comment %} Note that...
-> You may wish to collect an entire set of closed genomes (such as a group of phage that will be used for a class) into one history.
+> For better data organizing, you may wish to collect an entire set of closed genomes (such as a group of phage genomes that will be used for a class or a project) into one history.
 {: .comment}
 
 In each history used for this process, add tags for each phage genome with datasets manipulated in the history. Do this for the history where the phage was assembled (usually titled by the index from the sequencing run), and for the history where it was closed. Tags and history names are *searchable* in Galaxy, therefore this step is **critical in the documenting process** so that all data can be easily retrieved across the years and between researchers.
@@ -228,9 +226,9 @@ In each history used for this process, add a detailed annotation. Include aspect
 
 # Contig Re-Opening
 
-In the final deposited phage genome, base 1 should be in a logical place. The convention is to follow the accepted standard in the field. We try to make it mostly syntenic with genomes already in the database. If your phage is similar to another genome in the database, best-practice will open your genome in the same place. It should not be in the middle of a feature (especially genes). Sometimes, there is no precedent, or the precedent might not make sense in light of published data, in which case, a different course can be taken.
+In the final deposited phage genome, genome opening (base 1 of the genome) should be in a logical place. The CPT convention is to make it mostly syntenic with genomes already in the database, especially the well-studied phages. If your phage is similar to another genome in the database, best-practice will open your genome in the same place. It should not be in the middle of a feature (especially genes). Sometimes, there is no precedent, or the precedent might not make sense in light of published data, in which case, a different course can be taken.
 
-For your phage genome, re-opening will likely need to take place. Many researchers will save this for the last step, or penultimate step, after gene calling and similarity analyses have been determined through the annotation process. In some cases, such as the undergraduate teaching setting, it may be desirable to re-open the genome prior to annotation. Below are described the considerations that might be taken into account when:
+After you close your contig, re-opening will likely need to take place. Many researchers will save this for the last step, or penultimate step, after gene calling and similarity analyses have been determined through the annotation process. This way you will have better data to determine what is the best spot to re-open your genome.  In some cases, such as the undergraduate teaching setting, it may be desirable to re-open the genome prior to annotation. Below are the considerations that might be taken into account when:
 
 1) deciding where to re-open an unannotated genome, and
 2) understanding the mechanics of re-opening a genome in Galaxy.
@@ -272,7 +270,7 @@ If your genome's phage type can be determined, re-open your genome to make it sy
 
 ### PhageTerm Analysis
 
-[PhageTerm](https://www.nature.com/articles/s41598-017-07910-5) [PMID:28811656](https://www.ncbi.nlm.nih.gov/pubmed/?term=28811656) predicts termini and packaging mechanisms using the raw reads of a phage sequenced with technologies that rely on random fragmentation and its genomic reference sequence. While not fully verified, the tool provides a good guide for genomes with well-described end types. Sometimes this prediction is informative when closing a genome (see this Genome Assembly tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html); it can also be useful for deciding where to re-open a genomic sequence. After BLASTn, run [PhageTerm in Galaxy](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) as detailed below.
+[PhageTerm](https://www.nature.com/articles/s41598-017-07910-5) ([PMID:28811656](https://www.ncbi.nlm.nih.gov/pubmed/?term=28811656)) predicts termini and packaging mechanisms using the raw reads of a phage sequenced with technologies that rely on random fragmentation and its genomic reference sequence. While not fully verified, the tool provides a good guide for genomes with well-described end types. Sometimes this prediction is informative when closing a genome (see this Genome Assembly tutorial]({{ site.baseurl }}//topics/de-novo-assembly/tutorials/assembling-genome-sequences/tutorial.html); it can also be useful for deciding where to re-open a genomic sequence. After BLASTn, run [PhageTerm in Galaxy](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) as detailed below.
 
 **_Procedure_**
 > * Choose the input files based on which dataset gave the contig for the phage genome. For the FASTQ **mandatory input** use the better set (usually R1). For the **optional input**, use the other dataset (usually R2).

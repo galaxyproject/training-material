@@ -41,7 +41,7 @@ For all other users, upload or add your phage into an empty history. Your active
 > ### Annotation in a nutshell
 Genome annotation is the process of interpreting the raw DNA sequence of a genome into predictions of its function.  Genome annotation can be divided into two major steps: structural and functional. **Structural annotation** is the process of defining the locations and boundaries of features in the genome ("where are the genes?"). **Functional annotation** is the process of assigning functions or predicted phenotypes to the genome features ("what do the genes do?"). 
 
-> #### {% icon tip %} For BICH 464 Students
+> ### {% icon tip %} For BICH 464 Students
 More details on the principles of these processes will be provided in class.
 {: .tip}
 
@@ -51,7 +51,7 @@ The structural annotation workflow will analyze the DNA sequence of the input ge
 
 The next [page](https://cpt.tamu.edu/galaxy/workflows/list_published) will list all the public and shared workflows developed at the CPT. The Phage Annotation Pipeline (PAP) workflows are available here. Look for most recent version labelled with the year and a version number, “PAP 2019 Structural (v #.#)”. Click on the drop-down menu arrow for that most recent structural workflow, and select “Import.”
 
-![](../../images/structural-annotation-workflow-screenshots/3_import_workflow.png)
+![](../../images/structural-annotation-workflow-screenshots/structual_flow.PNG)
 
 > ### {% icon tip %} Note that…
 > The screenshots displayed here may not precisely reflect what you see on your screen. As these are regularly updated, it is likely that the current version year or number is different. Just look for the most recent one.
@@ -59,7 +59,7 @@ The next [page](https://cpt.tamu.edu/galaxy/workflows/list_published) will list 
 
 A successfully imported workflow will result in a message in a green box where you can click on the 'start using this workflow link'. 
 
-![](../../images/structural-annotation-workflow-screenshots/4_successfully_imported_workflow.png)
+![](../../images/structural-annotation-workflow-screenshots/structual_flow_import.PNG)
 
 Once the workflow has been imported to your account, you can always run it by clicking on the *Workflow* menu item at the top of the center panel of Galaxy. In this list will be all the workflows that can run from this Galaxy account. Find the desired workflow and click on blue button to the right of the title to run it. 
 
