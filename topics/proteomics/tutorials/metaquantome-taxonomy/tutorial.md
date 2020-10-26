@@ -298,7 +298,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 {: .hands_on}
 
 
-![T2_taxa](../../images/T2_taxa.png){: width="85%"}
+![T2_taxa](../../images/T2_taxa.png "Bar Chart visualization of Top 5 genus present in T2 sample."){: width="85%"}
 
 > ### {% icon question %} Questions
 >
@@ -327,7 +327,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 > 
 {: .hands_on}
 
-![T7_taxa](../../images/T7_taxa.png){: width="85%"}
+![T7_taxa](../../images/T7_taxa.png "Bar Chart visualization of Top 5 genus present in T7 sample."){: width="85%"}
 
 
 
@@ -344,7 +344,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 > 
 {: .hands_on}
 
-![T4_taxa](../../images/T4_taxa.png){: width="85%"}
+![T4_taxa](../../images/T4_taxa.png "Bar Chart visualization of Top 5 genus present in T4 sample."){: width="85%"}
 
 ## *metaQuantome: visualize* Volcano Plots
 
@@ -366,9 +366,8 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    {: .comment}
 >
 {: .hands_on}
-![T2-T4-taxa-volcano](../../images/T2-T4-taxa-volcano.png){: width="100%"}
->
-{: .hands_on}
+![T2-T4-taxa-volcano](../../images/T2-T4-taxa-volcano.png "Volcano plot for differentially expressed taxa comparing sample T4 and T2."){: width="100%"}
+
 
 > ### {% icon question %} Questions
 >
