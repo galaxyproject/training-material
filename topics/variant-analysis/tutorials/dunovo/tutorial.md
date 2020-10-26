@@ -332,7 +332,7 @@ The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, 
 
 > ### {% icon hands_on %} Hands-on: Filter the raw variants list
 >
-> Run {% tool [Filter](https://usegalaxy.org/root?tool_id=Filter1) %} with the following parameters:
+> Run {% tool [Filter](Filter1) %} with the following parameters:
 >  - {% icon param-file %} *Filter*: `19: Variant Annotator on data 18`
 >  - {% icon param-text %} *With following condition*: `c16 >= 0.01`
 >  - {% icon param-check %} *Number of header lines to skip*: `1`
