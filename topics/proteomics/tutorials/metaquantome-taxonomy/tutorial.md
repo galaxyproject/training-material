@@ -49,11 +49,11 @@ requirements:
 # Introduction
 {:.no_toc}
 
-metaQuantome {% cite Easterly2019 %} software suite was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
+metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 
 In this tutorial, we will learn specifically about the metaQuantome Taxonomy workflow. In particular, we will learn about how peptide-level quantitation and associated taxonomic information can be used to generate bar plots (for taxonomic composition), volcano plots (to detect differentially expressed taxa) and heatmap cluster analysis. 
 
-To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas {% cite Delogu2020 %}. After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
+To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas ({% cite Delogu2020 %}). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
 ![MetaQuantome-taxonomy-workflow](../../images/mQ-taxa-workflow.jpg){: width="100%"}
 
@@ -69,7 +69,7 @@ To demonstrate the use of this workflow, we have used a thermophilic biogas reac
 
 # **Pretreatments**
 
-The first step in a tutorial is to get the data from the zenodo link provided and making sure that it is in the correct format.
+The first step in this tutorial is to get the data from the Zenodo link provided and make sure that it is in the correct format.
 
 
 ## *Get data*
@@ -81,8 +81,8 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files: a Taxonomy File, an Intensity file from [Zenodo]({{ page.zenodo_link }})
->    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
+> 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
+>   
 >
 >    ```
 >    https://zenodo.org/record/4110725/files/Intensity-File.tabular
@@ -90,13 +90,13 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 >    ```
 >    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+> Alternatively, import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
 >
-> 3. Check that the datatype ( Make sure they were imported correct formats).
->  Taxonomy File (format=`tabular`), an Intensity file (format=`tabular`)
+> 3. Check that the files are the correct datatypes. The Functional File should be datatype `tabular` and the Intensity File should also be datatype `tabular`.
+> 
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 >
 {: .hands_on}
@@ -175,8 +175,8 @@ The create samples file module is used to generate the samples file input file f
 The expand module is the first analysis step in the metaQuantome analysis workflow, and can be run to analyze differently expressed Taxa in the samples.
 In taxonomy mode, the following information is required apart from metaQuantome databases and samples file: a tab-separated taxonomy annotation file, with a peptide column and a taxonomy annotation column. The taxonomic annotations should be the lowest common ancestor (LCA) for each peptide, preferably given as NCBI taxonomy IDs.
 
-- The name of the peptide column in the taxonomic annotation file (`peptide`).
-- The name of the taxonomy annotation column in the taxonomy annotation file (`taxon_id`).
+- The name of the peptide column in the taxonomic annotation file (`peptide`)
+- The name of the taxonomy annotation column in the taxonomy annotation file (`taxon_id`)
 - The name of the peptide column in the Intensity file (`peptide`)
 
 > ### {% icon hands_on %} Hands-on: Run metaQuantome expand
@@ -230,7 +230,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > To learn more about the filter module please read the metaQuantome paper published by Galaxy-P { % cite Easterly2019 %}.
+>    > To learn more about the filter module please read the metaQuantome paper published by Galaxy-P {% cite Easterly2019 %}.
 >    {: .comment}
 >
 {: .hands_on}
@@ -286,7 +286,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
->            - *"Taxonomic rank to restrict to in the plot"*: ``
+>            - *"Taxonomic rank to restrict to in the plot"*: `genus`
 >            - *"Mean intensity column name"*: `T2_mean`
 > 
 >
@@ -296,6 +296,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    {: .comment}
 >
 {: .hands_on}
+
 
 ![T2_taxa](../../images/T2_taxa.png){: width="85%"}
 
@@ -337,7 +338,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
 >        - *"Plot type"*: `Bar Chart (bar)`
->            - *"Taxonomic rank to restrict to in the plot"*: ``
+>            - *"Taxonomic rank to restrict to in the plot"*: `genus`
 >            - *"Mean intensity column name"*: `T4_mean`
 >
 > 
@@ -345,7 +346,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 
 ![T4_taxa](../../images/T4_taxa.png){: width="85%"}
 
-## *metaQuantome: visualize* for Volcano Plots
+## *metaQuantome: visualize* Volcano Plots
 
 > ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T4 and T2.
 >
