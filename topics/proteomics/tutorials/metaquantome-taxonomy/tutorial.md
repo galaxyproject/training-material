@@ -380,7 +380,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 > 
 {: .hands_on}
 
-
+![T2-T7-taxa-volcano](../../images/T2-T7-taxa-volcano.png "Volcano plot for differentially expressed taxa comparing sample T7 and T2."){: width="100%"}
 
 > ### {% icon question %} Questions
 >
