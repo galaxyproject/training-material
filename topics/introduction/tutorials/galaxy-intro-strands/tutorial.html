@@ -541,7 +541,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 27, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 27, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -672,16 +672,23 @@
 
   <ul>
     <li>
-      <p>If this is the first time you have used this <span class="notranslate">Galaxy</span> server, then your history panel will look like the image above.</p>
-    </li>
-    <li>
-      <p>If your history has datasets in it (there will be one or more green boxes, <em>datasets</em>, there) then create a new history:</p>
-      <ol>
-        <li>Click the <strong>gear icon</strong> at the top of the history panel</li>
-        <li>Select the option <strong>Create New</strong> from the menu</li>
-      </ol>
+      <p>At the start of the tutorial you should ensure that you are working in a new history, i.e. one without any datasets</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
     </li>
   </ul>
+
 </blockquote>
 
 <h2 id="get-data-into-galaxy">Get data into <span class="notranslate">Galaxy</span></h2>
@@ -710,7 +717,7 @@
 
   <ol>
     <li>
-      <p><em>Click</em> on the tool <strong>UCSC Main table browser</strong> to go to UCSC.</p>
+      <p><em>Click</em> on the tool <span class="tool" data-tool="ucsc_table_direct1" title="Tested with ucsc_table_direct1"><strong>UCSC Main table browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: ucsc_table_direct1</span></span>  to go to UCSC.</p>
 
       <p><img src="../../images/101_01.png" alt="Click on UCSC Main table browser" /></p>
     </li>
@@ -731,14 +738,16 @@
   <li><strong>genome:</strong> <code class="language-plaintext highlighter-rouge">Human</code></li>
   <li><strong>assembly:</strong> <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
   <li><strong>group:</strong> <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code></li>
-  <li><strong>track:</strong> <code class="language-plaintext highlighter-rouge">GENCODE v24</code></li>
+  <li><strong>track:</strong> <code class="language-plaintext highlighter-rouge">GENCODE v32</code></li>
 </ul>
 
 <p><strong>clade</strong> and <strong>genome</strong> seem pretty clear.  <strong>assembly</strong> asks which version/definition of the human genome we want.  (Any will do for our question, but UCSC is suggesting <code class="language-plaintext highlighter-rouge">hg38</code>, which is also the most recent.)  <strong>group</strong> is set to <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code> which sounds like what we want. So far so good.</p>
 
-<p><strong>track</strong> has a bewildering list of options. UCSC suggests <code class="language-plaintext highlighter-rouge">GENCODE v24</code>.  A web search leads us to the <a href="https://www.gencodegenes.org/">GENCODE web site</a> which prominently states:</p>
+<p><strong>track</strong> has a bewildering list of options. UCSC suggests <code class="language-plaintext highlighter-rouge">GENCODE v32</code>.  A web search leads us to the <a href="https://www.gencodegenes.org/">GENCODE web site</a> which prominently states:</p>
 
-<p>The GENCODE project produces high quality reference gene annotation and …</p>
+<blockquote class="quote">
+  <p>The goal of the GENCODE project is to identify and classify all gene features in the human and mouse genomes with high accuracy based on biological evidence…</p>
+</blockquote>
 
 <p>Time for a few more definitions.</p>
 
@@ -766,7 +775,7 @@
 
 <p>The <strong>track</strong> option asks us which set of annotations do we want to get?  There are so many choices because annotation is the result of analysis and interpretation, and there are many ways to do this. (And in this case, many of the options aren’t even genes or gene predictions.)</p>
 
-<p>GENCODE is “high-quality” and  “gene annotation.” That sounds like a good thing to use.  Lets stay with the default: <code class="language-plaintext highlighter-rouge">GENCODE V24</code>.</p>
+<p>GENCODE is “high-quality” and  “gene annotation.” That sounds like a good thing to use.  Lets stay with the default: <code class="language-plaintext highlighter-rouge">GENCODE V32</code>.</p>
 
 <p>So far we haven’t changed <em>anything</em> from the defaults.  Lets change something.  The default  <strong>region</strong> is the whole genome, which can be done, but it’s a lot of information. For this exercise lets use just one (small) chromosome.</p>
 
@@ -972,13 +981,13 @@ This displays all of the data</p>
 
   <ol>
     <li>Try the <strong>tools search box</strong>.  Think of terms that might describe what we want to do and type them in the search box.  Do you see anything promising?  Explore a little.</li>
-    <li>If you haven’t already searched with it, <em>enter</em> <code class="language-plaintext highlighter-rouge">split</code> in the <strong>tool search box</strong>.  Near the top of the results is
+    <li>If you haven’t already searched with it, <em>enter</em> <code class="language-plaintext highlighter-rouge">filter</code> in the <strong>tool search box</strong>.  Among the results you should see
       <ul>
-        <li><strong>Filter</strong> data on any column using simple <span class="notranslate">expression</span>s.</li>
+        <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  data on any column using simple <span class="notranslate">expression</span>s.</li>
         <li>That might work.</li>
       </ul>
     </li>
-    <li><em>Click</em> on <strong>Filter</strong> to open the Filter tool in the central panel.</li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  to open the Filter tool in the central panel.</li>
     <li>Take a look at the <strong>Syntax</strong> and <strong>Example</strong> sections to understand what the tool does.</li>
   </ol>
 
@@ -1030,7 +1039,7 @@ This specifies that column 6 (the strand) must be equal to (<code class="languag
 
   <p><strong>Method 2</strong></p>
   <ol>
-    <li><em>Click</em> on <strong>Filter</strong> in the tool panel to open the Filter tool in the central panel.</li>
+    <li><em>Click</em> on <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  in the tool panel to open the Filter tool in the central panel.</li>
     <li><em>Fill</em> the form as before, <em>except</em>:
       <ul>
         <li>Make sure the <strong>Dataset</strong> pulldown is set to the <code class="language-plaintext highlighter-rouge">Genes</code> dataset.</li>
@@ -1085,7 +1094,7 @@ In <span class="notranslate">Galaxy</span>, a <em>genomic interval</em> is a som
   <h3 id="hands_on-hands-on-genomic-interval-tools"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Genomic Interval Tools</h3>
 
   <ul>
-    <li>In the tool panel, <em>open</em> the <strong>Operate on Genomic Intervals</strong> toolbox.  It’s typically past the <strong>NGS</strong> toolboxes.</li>
+    <li>The next step is finding overlapping intervals, so type <code class="language-plaintext highlighter-rouge">interval</code> in the tool search box. There are many results from this search, so you might want to click the <em>Show sections</em> button (available on <span class="notranslate">Galaxy</span> servers) to see which sections the tools are organised into.</li>
     <li><em>Explore</em> the tools in this toolbox, looking for something that we can use to see which genes on opposite strands overlap.</li>
   </ul>
 </blockquote>
@@ -1287,7 +1296,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
 
 <p>And your new history appears in the history panel with the copied <em>genes</em> dataset.  What we need is <em>exons.</em> How can we get the exon information?  There are two relatively easy ways to get this information, one of which will be very familiar.</p>
 
-<p>The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v24, and just <code class="language-plaintext highlighter-rouge">chr22</code>. The second form is what changes.  Instead of getting the <strong>Whole Gene</strong>, we need to retrieve the <strong>Coding Exons</strong> only.</p>
+<p>The first method involves going back to the UCSC Table Browser.  Everything on the first form would stay the same: We still want human, hg38, GENCODE v32, and just <code class="language-plaintext highlighter-rouge">chr22</code>. The second form is what changes.  Instead of getting the <strong>Whole Gene</strong>, we need to retrieve the <strong>Coding Exons</strong> only.</p>
 
 <p>The second method is to use the <strong>Gene <span class="notranslate">BED</span> To Exon/Intron/Codon <span class="notranslate">BED</span> expander</strong> tool in the <strong>Operate on Genomic Intervals</strong> toolbox to extract the exon information from the genes <span class="notranslate">BED</span> file we already have. (<em>Of course!</em> you say.  Umm, there is no way that you should have known that you already had this information in the genes file, or that this tool existed.)</p>
 
@@ -1295,7 +1304,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
   <h3 id="hands_on-get-the-exon-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Get the exon data</h3>
 
   <ol>
-    <li>Get the exon information, either by revisiting UCSC, or by using the <strong>Gene <span class="notranslate">BED</span> To Exon/Intron/Codon <span class="notranslate">BED</span> expander</strong> tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
+    <li>Get the exon information, either by revisiting UCSC, or by using the <span class="tool" data-tool="gene2exon1" title="Tested with gene2exon1"><strong>Gene <span class="notranslate">BED</span> To Exon/Intron/Codon <span class="notranslate">BED</span> expander</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: gene2exon1</span></span>  tool.  If you use the expander tool select <strong>Coding Exons only</strong> from the <strong>Extract</strong> pull-down.</li>
     <li>Give the resulting dataset a meaningful name.</li>
   </ol>
 </blockquote>
@@ -1446,7 +1455,7 @@ In humans (and in all plants and animals) the molecules that are built from gene
     author = "Dave Clements",
     title = "Introduction to Genomics and Galaxy (Galaxy Training Materials)",
     year = "2020",
-    month = "07",
+    month = "10",
     day = "27"
     url = "\url{/training-material/topics/introduction/tutorials/galaxy-intro-strands/tutorial.html}",
     note = "[Online; accessed TODAY]"
