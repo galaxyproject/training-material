@@ -100,26 +100,26 @@ The starting point of the analysis is importing sequencing reads in [FASTQ](http
 >    - *"Select input type"*: `SRR Accession`
 >    - *"Accession"*: `SRR1799908`
 >    - In *"Advanced options"* (click to expand section):
->      - *"Select how to split the spots"*:
+>      - In *"Select how to split the spots"*, check:
 >        - {% icon param-check %} `--split-3: write properly paired biological reads into different files and single reads in another file`
 >
 >    > ### {% icon comment %} Nothing happening?
->    > It may seem as though nothing is happening at this point, but fear not, Galaxy is working in your background to fetch the files.
->    > Since Galaxy cannot know how many files to expect for a given accession number, no history items are made until the download as completed.
+>    > It may seem as though nothing is happening at this point, but fear not, Galaxy is working in the background to fetch your files.
+>    > Since Galaxy cannot know how many files to expect for a given accession number, no history items are made until the download has completed.
 >    >
->    > Please be patient, maybe grab a cup of tea, your files should show up in your history in 5-10 minutes.
+>    > Please be patient, maybe grab a cup of tea, your files should show up in your history in 5-10 minutes (you may need to click the refresh button {% icon galaxy-refresh %} at the top of your history).
 >    {: .comment}
 >
-> 2. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on the paired-end dataset collection with the following parameters
->    - {% icon param-collection %} *"Short read data from your current history"*: select the pair-end dataset collection produced by **Faster Download** {% icon tool %}
+> 2. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters
+>    - {% icon param-collection %} *"Short read data from your current history"*: `pair-end data` output from **Faster Download** {% icon tool %}
 >
 >    > ### {% icon comment %} Tool outputs
->    > The first step created a dataset pair in our Galaxy history with one dataset containing the forward reads and one containing the reverse reads. The tool produced three additional datasets which you are welcome to explore, although we don't need them for the rest of the tutorial.
-> We then evaluated the quality of the data by running FastQC on the datasets. You can read about using {% icon tool %} **FastQC** [here]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
+>    > The first step created a *dataset pair* in our Galaxy history with one sub-dataset containing the forward reads and one containing the reverse reads. The tool produced three additional datasets which you are welcome to explore, although we don't need them for the rest of the tutorial.
+> We then evaluated the quality of the data by running FastQC on the datasets. You can read about using {% icon tool %} **FastQC** in our [dedicated  tutorial]({{ site.baseurl }}/topics/sequence-analysis/tutorials/quality-control/tutorial.html#assess-the-read-quality).
 >    {: .comment}
 {: .hands_on}
 
-This gave us the following plots:
+View the webpage output from FastQC. This gave us the following quality plots:
 
 ![Quality scores across all bases: foward](../../images/abl1-f-qc.png)
 ![Quality scores across all bases: reverse](../../images/abl1-r-qc.png "FastQC assessment of the quality of the raw reads. These data are of excellent quality and no additional processing is required before we start the actual analysis. Top: Forward reads. Bottom: Reverse reads.")
@@ -135,13 +135,17 @@ The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags 
 > ### {% icon hands_on %} Hands-on: Sorting reads into families
 >
 > 1. Run {% tool [Du Novo: Make families](toolshed.g2.bx.psu.edu/repos/nick/dunovo/make_families/2.15) %} with the following parameters:
->    - {% icon param-file %} *"Sequencing reads, mate 1"*: select the forward read dataset (it might be hidden) produced by **Faster Download** {% icon tool %}
->    - {% icon param-file %} *"Sequencing reads, mate 2"*: select the reverse read dataset (it might be hidden) produced by **Faster Download** {% icon tool %}
+>    - {% icon param-file %} *"Sequencing reads, mate 1"*: `SRR1799908:forward` (dataset might be hidden) from **Faster Download** {% icon tool %}
+>    - {% icon param-file %} *"Sequencing reads, mate 2"*: `SRR1799908:reverse` (dataset might be hidden) from **Faster Download** {% icon tool %}
 >    - {% icon param-text %} *"Tag length"*: `12`
 >
->  > ### {% icon comment %} Finding forward and reverse datasets
->  > If the forward and reverse reads datasets don't appear as options for *"Sequencing reads, mate 1"* and *"Sequencing reads, mate 2"*, click *"Browse Datasets"* to the right of the options and select the corresponding files from the list that pops up.
->  {: .comment}
+>
+>    > ### {% icon comment %} Using hidden datasets as tool inputs
+>    >
+>    >  If the inputs for *"Sequencing reads, mate 1"* and *"Sequencing reads, mate 2"* do not appear:
+>    >   -  **Click** *"Browse Datasets"* {% icon galaxy-browse-datasets %} to the right of the input file parameter
+>    >   - **Select** the corresponding files from the list that pops up.
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -154,8 +158,8 @@ Du Novo includes a tool which can correct most of these errors and recover the a
 > ### {% icon hands_on %} Hands-on: Correcting barcodes
 >
 > 1. Run {% tool [Du Novo: Correct barcodes](toolshed.g2.bx.psu.edu/repos/nick/dunovo/correct_barcodes/2.15) %} with the following parameters:
->    - {% icon param-file %} *Input reads*: output from  **Du Novo: Make families** {% icon tool %}
->    - {% icon param-text %} *Maximum differences*: `3`
+>    - {% icon param-file %} *"Input reads"*: output from  **Du Novo: Make families** {% icon tool %}
+>    - {% icon param-text %} *"Maximum differences"*: `3`
 >
 {: .hands_on}
 
@@ -170,8 +174,8 @@ After grouping reads that came from the same original fragment, we need to align
 > ### {% icon hands_on %} Hands-on: Aligning families
 >
 > 1. Run {% tool [Du Novo: Align families](toolshed.g2.bx.psu.edu/repos/nick/dunovo/align_families/2.15) %} with the following parameters:
->    - {% icon param-file %} *Input reads*: output from **Du Novo: Correct barcodes** {% icon tool %}
->    - {% icon param-select %} *Multiple sequence aligner*: `Kalign2`
+>    - {% icon param-file %} *"Input reads"*: output from **Du Novo: Correct barcodes** {% icon tool %}
+>    - {% icon param-select %} *"Multiple sequence aligner"*: `Kalign2`
 >
 {: .hands_on}
 
@@ -184,11 +188,11 @@ Normally, the tool only produces the final double-stranded consensus sequences. 
 > ### {% icon hands_on %} Hands-on: Making consensus sequences
 >
 > 1. Run {% tool [Du Novo: Make consensus reads](toolshed.g2.bx.psu.edu/repos/nick/dunovo/dunovo/2.15) %} with the following parameters:
->    - {% icon param-file %} *Aligned input reads*: output from **Du Novo: Align families** {% icon tool %}
->    - {% icon param-text %} *Minimum reads for a consensus sequence*: `3`
->    - {% icon param-text %} *Consensus % threshold*: `0.7`
->    - {% icon param-select %} *Output format*: `FASTQ`
->    - {% icon param-check %} *Output single-strand consensus sequences as well*: `Yes`
+>    - {% icon param-file %} *"Aligned input reads"*: output from **Du Novo: Align families** {% icon tool %}
+>    - {% icon param-text %} *"Minimum reads for a consensus sequence"*: `3`
+>    - {% icon param-text %} *"Consensus % threshold"*: `0.7`
+>    - {% icon param-select %} *"Output format"*: `FASTQ`
+>    - {% icon param-check %} *"Output single-strand consensus sequences as well"*: `Yes`
 >
 {: .hands_on}
 
@@ -225,15 +229,15 @@ This information could be useful for some analyses, but not for our variant call
 > ### {% icon hands_on %} Hands-on: Filtering the consensus sequences
 >
 > 1. Run {% tool [Sequence Content Trimmer](toolshed.g2.bx.psu.edu/repos/nick/sequence_content_trimmer/sequence_content_trimmer/0.1) %} with the following parameters:
->    - {% icon param-select %} *Paired reads?*: `Paired`
->    - {% icon param-file %} *Input reads (mate 1)*: `mate 1` output from **Du Novo: Make consensus reads** {% icon tool %}
->    - {% icon param-file %} *Input reads (mate 2)*: `mate 2` output from **Du Novo: Make consesnsus reads** {% icon tool %}
->    - {% icon param-text %} *Bases to filter on*: `ACGT`
->    - {% icon param-text %} *Frequency threshold*: `0.2`
->    - {% icon param-text %} *Size of the window*: `10`
->    - {% icon param-check %} *Invert filter bases*: `Yes`
->    - {% icon param-check %} *Set a minimum read length*: `Yes`
->    - {% icon param-text %} *Minimum read length*: `50`
+>    - {% icon param-select %} *"Paired reads?"*: `Paired`
+>    - {% icon param-file %} *"Input reads (mate 1)"*: `mate 1` output from **Du Novo: Make consensus reads** {% icon tool %}
+>    - {% icon param-file %} *"Input reads (mate 2)"*: `mate 2` output from **Du Novo: Make consesnsus reads** {% icon tool %}
+>    - {% icon param-text %} *"Bases to filter on"*: `ACGT`
+>    - {% icon param-text %} *"Frequency threshold"*: `0.2`
+>    - {% icon param-text %} *"Size of the window"*: `10`
+>    - {% icon param-check %} *"Invert filter bases"*: `Yes`
+>    - {% icon param-check %} *"Set a minimum read length"*: `Yes`
+>    - {% icon param-text %} *"Minimum read length"*: `50`
 >
 {: .hands_on}
 
@@ -252,9 +256,9 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 > ### {% icon hands_on %} Hands-on: Align with BWA-MEM
 >
 > 1. Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
->   - {% icon param-select %} *Using reference genome?*: `Human (Homo sapiens) (b38): hg38`
->   - {% icon param-file %} *Select first set of reads*: First output from **Sequence Content Trimmer** {% icon tool %}
->   - {% icon param-file %} *Select second set of reads*: `Second output from **Sequence Content Trimmer** {% icon tool %}
+>   - {% icon param-select %} *"Using reference genome?"*: `Human (Homo sapiens) (b38): hg38`
+>   - {% icon param-file %} *"Select first set of reads"*: First output from **Sequence Content Trimmer** {% icon tool %}
+>   - {% icon param-file %} *"Select second set of reads"*: `Second output from **Sequence Content Trimmer** {% icon tool %}
 >
 {: .hands_on}
 
@@ -265,8 +269,8 @@ To normalize the positional distribution of indels we use the {% icon tool %} **
 > ### {% icon hands_on %} Hands-on: Left-align indels
 >
 > 1. Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %} with the following parameters:
->    - {% icon param-file %} *Select alignment file in BAM format*: `mapped reads` output from **Map with BWA-MEM** {% icon tool %}
->    - {% icon param-select %} *Using reference genome*: `Human (Homo sapiens): hg38` (the same genome we aligned to).
+>    - {% icon param-file %} *"Select alignment file in BAM format"*: `mapped reads` output from **"Map with BWA-MEM"** {% icon tool %}
+>    - {% icon param-select %} *"Using reference genome"*: `Human (Homo sapiens): hg38` (the same genome we aligned to).
 >
 {: .hands_on}
 
@@ -285,16 +289,16 @@ To identify sites containing variants we use the {% icon tool %} **Naive Variant
 > ### {% icon hands_on %} Hands-on: Count the variants
 >
 > 1. Run {% tool [Naive Variant Caller (NVC)](toolshed.g2.bx.psu.edu/repos/blankenberg/naive_variant_caller/naive_variant_caller/0.0.4) %} with the following parameters:
->    - {% icon param-file %} *BAM file*: `alignments` output from **BamLeftAlign** {% icon tool %}
->    - {% icon param-select %} *Using reference genome*: `hg38`
+>    - {% icon param-file %} *"BAM file"*: `alignments` output from **BamLeftAlign** {% icon tool %}
+>    - {% icon param-select %} *"Using reference genome"*: `hg38`
 >      - The same genome we aligned to.
->    - {% icon param-check %} *Insert Restrict to regions*: Click to add a region.
->    - {% icon param-text %} *Chromosome*: `chr9`
+>    - {% icon param-check %} *"Insert Restrict to regions"*: Click to add a region.
+>    - {% icon param-text %} *"Chromosome"*: `chr9`
 >      - *ABL1* is on chr9. Restricting it to this region saves some processing time.
->    - {% icon param-text %} *Minimum base quality*: `0`
+>    - {% icon param-text %} *"Minimum base quality"*: `0`
 >      - In our case, base quality [isn't meaningful](#details-where-do-the-fastq-quality-scores-come-from), so we set the threshold to 0.
->    - {% icon param-text %} *Minimum mapping quality*: `20`
->    - {% icon param-text %} *Ploidy*: `1`
+>    - {% icon param-text %} *"Minimum mapping quality"*: `20`
+>    - {% icon param-text %} *"Ploidy"*: `1`
 >      - Ploidy is irrelevant here as it is a mixture of multiple genomes.
 >
 {: .hands_on}
@@ -308,10 +312,10 @@ Now we'll want to parse the VCF produced by the NVC, determine what the major an
 > ### {% icon hands_on %} Hands-on: Read the variants file
 >
 > 1. Run {% tool [Variant Annotator](toolshed.g2.bx.psu.edu/repos/devteam/variant_annotator/gatk_variant_annotator/0.0.5) %} with the following parameters:
->    - {% icon param-file %} *Input variants from Naive Variants Detector*: output from **Naive Variant Caller (NVC)** {% icon tool %}
->    - {% icon param-text %} *Minor allele frequency threshold*: `0`
->    - {% icon param-text %} *Coverage threshold*: `10`
->    - {% icon param-check %} *Output stranded base counts*: `Yes`
+>    - {% icon param-file %} *"Input variants from Naive Variants Detector"*: output from **Naive Variant Caller (NVC)** {% icon tool %}
+>    - {% icon param-text %} *"Minor allele frequency threshold"*: `0`
+>    - {% icon param-text %} *"Coverage threshold"*: `10`
+>    - {% icon param-check %} *"Output stranded base counts"*: `Yes`
 >      - To be able to filter for strand bias.
 >
 {: .hands_on}
@@ -325,9 +329,9 @@ The {% icon tool %} **Variant Annotator** produces a simple tab-delimited file, 
 > ### {% icon hands_on %} Hands-on: Filter the raw variants list
 >
 > 1. Run {% tool [Filter](Filter1) %} with the following parameters:
->   - {% icon param-file %} *Filter*: output from **Variant Annotator** {% icon tool %}
->   - {% icon param-text %} *With following condition*: `c16 >= 0.01`
->   - {% icon param-check %} *Number of header lines to skip*: `1`
+>   - {% icon param-file %} *"Filter"*: output from **Variant Annotator** {% icon tool %}
+>   - {% icon param-text %} *"With following condition"*: `c16 >= 0.01`
+>   - {% icon param-check %} *"Number of header lines to skip"*: `1`
 >
 {: .hands_on}
 
