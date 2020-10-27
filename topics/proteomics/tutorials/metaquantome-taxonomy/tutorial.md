@@ -90,13 +90,11 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 >    ```
 >    {% include snippets/import_via_link.md %}
-> Alternatively, import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
+>    Alternatively, import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
-> 3. Check that the files are the correct datatypes. The Functional File should be datatype `tabular` and the Intensity File should also be datatype `tabular`.
-> 
+>    {% include snippets/import_from_data_library.md %}
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 >
 {: .hands_on}
