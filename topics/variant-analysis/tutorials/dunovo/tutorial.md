@@ -153,7 +153,7 @@ The {% icon tool %} **Du Novo: Make families** tool will separate the 12bp tags 
 
 The grouping reads based on barcode relies on exact barcode matches. Any PCR or sequencing error in the barcode sequence will prevent the affected reads from being joined with their other family members.
 
-Du Novo includes a tool which can correct most of these errors and recover the affected reads. This can increase the final yield of duplex consensus reads by up to 11% (Stoler *et al.* 2018, in preparation).
+Du Novo includes a tool which can correct most of these errors and recover the affected reads. This can increase the final yield of duplex consensus reads by up to 11% ({% cite Stoler2020 %}).
 
 > ### {% icon hands_on %} Hands-on: Correcting barcodes
 >
