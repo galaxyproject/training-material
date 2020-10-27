@@ -103,6 +103,12 @@ The starting point of the analysis is importing sequencing reads in [FASTQ](http
 >      - *"Select how to split the spots"*:
 >        - {% icon param-check %} `--split-3: write properly paired biological reads into different files and single reads in another file`
 >
+>    > ### {% icon comment %} Nothing happening?
+>    > It may seem as though nothing is happening at this point, but fear not, Galaxy is working in your background to fetch the files.
+>    > Since Galaxy cannot know how many files to expect for a given accession number, no history items are made until the download as completed.
+>    >
+>    > Please be patient, maybe grab a cup of tea, your files should show up in your history in 5-10 minutes.
+>    {: .comment}
 >
 > 2. Run {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} on the paired-end dataset collection with the following parameters
 >    - {% icon param-collection %} *"Short read data from your current history"*: select the pair-end dataset collection produced by **Faster Download** {% icon tool %}
