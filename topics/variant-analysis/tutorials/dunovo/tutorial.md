@@ -365,16 +365,20 @@ There's a shortcut to avoid setting every parameter the second time you run a to
 
 ## Re-running analyses with workflows
 
-An even bigger shortcut is possible; instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads.
+An even bigger shortcut is also possible; instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads.
 
 Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows [here](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
 
-We've prepared two workflows which split the above analysis into two steps:
+You can create a workflow based on your history
 
-1. [Using Du Novo](https://usegalaxy.org/u/nstoler/w/du-novo-gtn-tutorial) to create consensus sequencs from raw reads.
+{% include snippets/extract_workflow.md %}
+
+We've prepared [two workflows](workflows/) which split the above analysis into two steps:
+
+1. [Using Du Novo](workflows/dunovo.ga) to create consensus sequencs from raw reads.
   - This will generate trimmed DCS and SSCS files from raw sequencing data.
   - This does not include the FastQC step. You should always run FastQC on your raw reads first, to check the quality of your sequencing run before proceeding with the analysis.
-2. [Calling variants](https://usegalaxy.org/u/nstoler/w/copy-of-du-novo-gtn-tutorial) from consensus sequences.
+2. [Calling variants](workflows/variant-calling.ga) from consensus sequences.
   - This takes a pair of FASTQ files and calls variants using them.
   - If you'd like variants from both DCS and SSCS, you'll have to run this twice, once on each.
   - **N.B.** Remember that this workflow is designed for the above *ABL1* analysis. If you want to use it for any other dataset, you'll have to change the relevant options.
@@ -396,5 +400,3 @@ You can use the variant calling workflow to call variants using the SSCS instead
 
 You should now understand duplex sequencing, low frequency variants, and be able to process the former to find the latter.
 
-### If things don't work...
-...you need to complain. Use [Galaxy's Help Channel](https://help.galaxyproject.org/) to do this.
