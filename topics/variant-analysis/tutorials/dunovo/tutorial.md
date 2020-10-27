@@ -357,18 +357,17 @@ Analysis of SSCS data follows the exact same trajectory:
  	- [Left aligning indels](#left-aligning-indels)
 * [Calling the variants](#calling-the-variants)
 
-> ### {% icon tip %} Tip: Re-running with the same settings
->
-> There's a shortcut to avoid setting every parameter the second time you run a tool.
->
-> 1. In your history, click on an output of the first run to expand it.
-> 2. Click on the button with the circular "re-run" arrows.
-> 3. Now the parameters will all be the same as the last run. All you have to do is change the input file(s).
-{: .tip}
+
+There's a shortcut to avoid setting every parameter the second time you run a tool:
+
+{% include snippets/rerun_tool.md %}
+
 
 ## Re-running analyses with workflows
 
-Instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads. Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows [here](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
+An even bigger shortcut is possible; instead of manually re-running all the tools in the variant calling section, you can use a **workflow** to automatically run the same tools, but on the SSCS reads.
+
+Workflows let you run a chain of tools on different input data with a single click of a button. You can find more information on using workflows [here](../../../introduction/tutorials/galaxy-intro-101/tutorial.html#run-workflow-on-different-data).
 
 We've prepared two workflows which split the above analysis into two steps:
 
