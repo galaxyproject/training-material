@@ -128,8 +128,6 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 {: .hands_on}
 
 
-
-
 > ### {% icon question %} Questions
 >
 > 1. Why is it necessary to download metaQuanome databases?
@@ -321,9 +319,11 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
 >    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
 >    - *"Mode"*: `Taxonomic analysis`
->        - *"Plot type"*: `Volcano Plot (volcano)`
->            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T7_over_T2`
->            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T7_over_T2`
+>        - *"Plot type"*: `Bar Chart (bar)`
+>            - *"Taxonomic rank to restrict to in the plot"*: `genus`
+>            - *"Mean intensity column name"*: `T7_mean`
+>
+> 
 > 
 {: .hands_on}
 
@@ -366,7 +366,22 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    {: .comment}
 >
 {: .hands_on}
+
+
 ![T2-T4-taxa-volcano](../../images/T2-T4-taxa-volcano.png "Volcano plot for differentially expressed taxa comparing sample T4 and T2."){: width="100%"}
+
+> ### {% icon hands_on %} Hands-on: Volcano Plot visualization of the data T7 and T2.
+>
+> 1. {% tool [metaQuantome: visualize](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0) %} with the following parameters:
+>    - {% icon param-file %} *"Tabular file from metaQuantome stats or metaQuantome filter"*: `metaQuantome:stat` (output of **metaQuantome: stat** {% icon tool %})
+>    - {% icon param-file %} *"Samples file"*: `metaQuantome:create samples_file` (output of **metaQuantome: create samples file** {% icon tool %})
+>    - *"Mode"*: `Taxonomic analysis`
+>        - *"Plot type"*: `Volcano Plot (volcano)`
+>            - *"Name of the fold change column in the stat dataframe"*: `log2fc_T7_over_T2`
+>            - *"Name of the Corrected p-value column in the stat dataframe"*: `corrected_p_T7_over_T2`
+> 
+{: .hands_on}
+
 
 
 > ### {% icon question %} Questions
