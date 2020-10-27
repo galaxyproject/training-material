@@ -11,7 +11,7 @@ objectives:
   - "A functional and quantitational analysis of metaproteomic mass spectrometry data."
 time_estimation: "1h"
 key_points:
-  - "Perform quantititative and statistical analysis of metaproteomics data to study differentially expressed proteins and their functions."
+  - "Perform quantitative and statistical analysis of metaproteomics data to study differentially expressed proteins and their functions."
 contributors:
   - subinamehta
   - timothygriffin
@@ -91,13 +91,11 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >
 >    ```
 >    {% include snippets/import_via_link.md %}
+>
 >    Alternatively, import the files from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
 >
+>    {% include snippets/import_from_data_library.md %}
 >
-> 3. Check that the files are the correct datatypes. The Functional File should be datatype `tabular` and the Intensity File should also be datatype `tabular`.
-> 
->
->    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 >
 {: .hands_on}
@@ -296,8 +294,6 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >    {: .comment}
 >
 {: .hands_on}
-
-![picture \label{fig1}](figure1.png)
 
 ![T2_MF](../../images/T2-mf.png "Top five differentially expressed Molecular Function GO terms for sample T2."){: width="85%"}
 
