@@ -258,7 +258,7 @@ Here, we'll use {% icon tool %} **Map with BWA-MEM** to map the DCS reads to the
 > 1. Run {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >   - {% icon param-select %} *"Using reference genome?"*: `Human (Homo sapiens) (b38): hg38`
 >   - {% icon param-file %} *"Select first set of reads"*: First output from **Sequence Content Trimmer** {% icon tool %}
->   - {% icon param-file %} *"Select second set of reads"*: `Second output from **Sequence Content Trimmer** {% icon tool %}
+>   - {% icon param-file %} *"Select second set of reads"*: Second output from **Sequence Content Trimmer** {% icon tool %}
 >
 {: .hands_on}
 
@@ -269,7 +269,7 @@ To normalize the positional distribution of indels we use the {% icon tool %} **
 > ### {% icon hands_on %} Hands-on: Left-align indels
 >
 > 1. Run {% tool [BamLeftAlign](toolshed.g2.bx.psu.edu/repos/devteam/freebayes/bamleftalign/1.3.1) %} with the following parameters:
->    - {% icon param-file %} *"Select alignment file in BAM format"*: `mapped reads` output from **"Map with BWA-MEM"** {% icon tool %}
+>    - {% icon param-file %} *"Select alignment file in BAM format"*: `mapped reads` output from **Map with BWA-MEM** {% icon tool %}
 >    - {% icon param-select %} *"Using reference genome"*: `Human (Homo sapiens): hg38` (the same genome we aligned to).
 >
 {: .hands_on}
