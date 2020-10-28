@@ -12,7 +12,8 @@ objectives:
 time_estimation: "1h"
 key_points:
   - "All the inputs should have one column in common i.e. peptides."
-  - "Running metaQuantome data creation workflow can help format the input data necessary for running metaQuantome"
+  - "Functional annotation can be performed using GO terms and EC numbers"
+  - "Having basic knowledge regarding tools that can perform functional annotation can come in handy"
 contributors:
   - subinamehta
   - timothygriffin
