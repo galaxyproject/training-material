@@ -11,7 +11,8 @@ objectives:
   - "A functional and quantitational analysis of metaproteomic mass spectrometry data."
 time_estimation: "1h"
 key_points:
-  - "Perform quantitative and statistical analysis of metaproteomics data to study differentially expressed proteins and their functions."
+  - "All the inputs should have one column in common i.e. peptides."
+  - "Running metaQuantome data creation workflow can help format the input data necessary for running metaQuantome"
 contributors:
   - subinamehta
   - timothygriffin
