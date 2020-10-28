@@ -99,7 +99,7 @@ Skip to the section on setting up below that is appropriate for you
 
 Once your VMs are running, great! Now you'll need to bootstrap the instances and prepare them for student use.
 
-The GAT team maintains some infrastructure to handle the bootstrapping in [this the GAT repository](https://github.com/galaxyproject/admin-training/tree/2020-bcc/bootstrap-instances)
+The GAT team maintains some infrastructure to handle the bootstrapping in [the GAT repository](https://github.com/galaxyproject/admin-training/tree/2020-bcc/bootstrap-instances)
 
 > ### {% icon hands_on %} Non-EU: Setting up VMs
 >
