@@ -21,32 +21,22 @@ contributors:
   - emmaleith
   - mariecrane
   - pravs3683
-
 follow_up_training:
-
-    -
-        type: "internal"
-        topic_name: proteomics
-        tutorials:
-            - metaproteomics
-            
-        
-        type: "internal"
-        topic_name: proteomics
-        tutorials:
-            - metaquantome-taxonomy
-            
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - metaproteomics
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - metaquantome-taxonomy      
 requirements:
-
-   -
-   
-        type: "internal"
-        topic_name: proteomics
-        tutorials:
-           - metaquantome-data-creation
-            
-
-
+  -
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
+      - metaquantome-data-creation
 ---
 
 
