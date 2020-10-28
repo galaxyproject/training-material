@@ -11,7 +11,8 @@ objectives:
   - "A taxonomy and quantitational analysis of metaproteomic mass spectrometry data."
 time_estimation: "1h"
 key_points:
-  - "Statistical analysis of the differentially expressed taxa in the metaproteomics sample and their abundance."
+  - "All the inputs should have one column in common i.e. peptides."
+  - "Running metaQuantome data creation workflow can help format the input data necessary for running metaQuantome"
 contributors:
   - subinamehta
   - timothygriffin
