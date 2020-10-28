@@ -12,7 +12,7 @@ objectives:
 time_estimation: "1h"
 key_points:
   - "All the inputs should have one column in common i.e. peptides."
-  - "Running metaQuantome data creation workflow can help format the input data necessary for running metaQuantome"
+  - "Learning different tools such as Unipept, MEGAN, MetaGOmics etc. for taxonomic annotation of peptides will benefit."
 contributors:
   - subinamehta
   - timothygriffin
