@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: metaQuantome Data creation tutorial
 zenodo_link: "https://doi.org/10.5281/zenodo.4037137"
+level: Intermediate
 questions:
  - "How do I perform functional and taxonomy analysis on metaproteomics data?"
  - "How can I perform quantitation on metaproteomics data?"
