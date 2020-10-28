@@ -4,7 +4,7 @@ layout: tutorial_hands_on
 title: "metaQuantome 3: Taxonomy"
 zenodo_link: "https://doi.org/10.5281/zenodo.4110725"
 questions:
- - "How do I look at differentially expressed taxa ?"
+ - "How do I look at differentially expressed taxa?"
  - "Can we get top 5 or 10 taxa present in the sample?"
  - "How can I visualize my results?"
 objectives:
