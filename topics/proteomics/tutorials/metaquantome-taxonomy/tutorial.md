@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: metaQuantome-taxonomy
 zenodo_link: "https://doi.org/10.5281/zenodo.4110725"
+level: Intermediate
 questions:
  - "How do I look at differentially expressed taxa ?"
  - "Can we get top 5 or 10 taxa present in the sample?"
