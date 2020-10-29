@@ -14,6 +14,12 @@ key_points:
   - Infrastructure is available for running GATs for free from UseGalaxy.eu
   - This can be very convenient and easy to use
   - EU provides appropriate DNS entries so you can run trainings with ITs.
+requirements:
+  - type: "internal"
+    topic_name: admin
+    tutorials:
+      - ansible
+      - terraform
 contributors:
   - hexylena
 ---
@@ -103,7 +109,26 @@ Once your VMs are running, great! Now you'll need to bootstrap the instances and
 
 The GAT team maintains some infrastructure to handle the bootstrapping in [the GAT repository](https://github.com/galaxyproject/admin-training/tree/2020-bcc/bootstrap-instances)
 
-> ### {% icon hands_on %} Non-EU: Setting up VMs
+We use a more complicated hosts file in the project, as we have multiple pools of VMs across global regions. This is seen in the `workshop_eu` and `workshop_oz` groups, and the corresponding commands in the Makefile. However, this distinction of regions is not necessary. The most simple hosts file looks like:
+
+```
+# Your Machines
+[workshop_instances]
+192.0.2.1
+192.0.2.2
+192.0.2.3
+...
+
+# Some variables for those machines
+[workshop_instances:vars]
+ansible_host_key_checking = false
+ansible_user = ubuntu
+ansible_become = true
+ansible_ssh_private_key_file = ~/admintraining.key
+set_password = true      # Generate a random password
+```
+
+> ### {% icon hands_on %} Everyone: Setting up VMs
 >
 > 1. `git clone https://github.com/galaxyproject/admin-training/` and change into that repo
 >
@@ -116,7 +141,7 @@ The GAT team maintains some infrastructure to handle the bootstrapping in [the G
 >    A range of DNS entries (`gat-0` to `gat-39`)
 >
 >    ```
->    [workshop_eu]
+>    [workshop_]
 >    gat-[0:39].training.galaxyproject.eu
 >    ```
 >
@@ -218,7 +243,7 @@ gat-24    postgres ✔ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(s
 gat-6     postgres ✘ ✘ galaxy(http) ✘ SysD-gxy ✘ SysD-nginx ✘ galaxy(ssl) ✘
 ```
 
-You can see a checkmark reported for every step completed by students, giving you a nice overview of how many students have completed each step, and if you're ready to move on. Additionally you know precisely which students you should reach out to check in with, if they aren't progressing.
+You can see a checkmark reported for every step completed by students, giving you a nice overview of how many students have completed each step, and if you're ready to move on. Additionally you know precisely which students you should reach out to check in with, if they aren't progressing. The `-eu` again refers to the specific pool of machines, and if you're using a different hosts file, with different group names, you may need to edit the Makefile accordingly.
 
 There are other `make check-` commands for each of the `gat` status commands. Run `make` to list all of them.
 
