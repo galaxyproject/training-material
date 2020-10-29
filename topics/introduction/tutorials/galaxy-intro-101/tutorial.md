@@ -514,7 +514,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 3. Click **Analyze Data** at the top to return to the main analysis window
 >
-> 4. Import the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
+> 4. {% tool [Upload](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >
 >    ```
 >    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
