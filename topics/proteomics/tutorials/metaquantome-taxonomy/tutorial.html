@@ -1,0 +1,1525 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>metaQuantome 3: Taxonomy</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: metaQuantome 3: Taxonomy" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaquantome-taxonomy%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaquantome-taxonomy%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaquantome-taxonomy%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaquantome-taxonomy%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaquantome-taxonomy%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fmetaquantome-taxonomy%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "metaQuantome 3: Taxonomy",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Proteomics",
+    "description": "Training material for proteomics workflows in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+  },
+  "courseCode": "proteomics / metaquantome-taxonomy / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'metaQuantome 3: Taxonomy' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How do I look at differentially expressed taxa?\n - Can we get top 5 or 10 taxa present in the sample?\n - How can I visualize my results?\n\n\\nThe objectives are:\n - A taxonomy and quantitational analysis of metaproteomic mass spectrometry data.\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html",
+      "name": "metaQuantome 1: Data creation",
+      "description": "Hands-on for 'metaQuantome 1: Data creation' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Subina Mehta"
+    },
+    {
+      "@type": "Person",
+      "name": "Timothy J. Griffin"
+    },
+    {
+      "@type": "Person",
+      "name": "Pratik Jagtap"
+    },
+    {
+      "@type": "Person",
+      "name": "Emma Leith"
+    },
+    {
+      "@type": "Person",
+      "name": "Marie Crane"
+    },
+    {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Subina Mehta"
+    },
+    {
+      "@type": "Person",
+      "name": "Timothy J. Griffin"
+    },
+    {
+      "@type": "Person",
+      "name": "Pratik Jagtap"
+    },
+    {
+      "@type": "Person",
+      "name": "Emma Leith"
+    },
+    {
+      "@type": "Person",
+      "name": "Marie Crane"
+    },
+    {
+      "@type": "Person",
+      "name": "Praveen Kumar"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>metaQuantome 3: Taxonomy</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/subinamehta/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/subinamehta" alt="Subina Mehta">Subina Mehta</a>, <a href="/training-material/hall-of-fame/timothygriffin/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/timothygriffin" alt="Timothy J. Griffin">Timothy J. Griffin</a>, <a href="/training-material/hall-of-fame/pratikdjagtap/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pratikdjagtap" alt="Pratik Jagtap">Pratik Jagtap</a>, <a href="/training-material/hall-of-fame/emmaleith/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/emmaleith" alt="Emma Leith">Emma Leith</a>, <a href="/training-material/hall-of-fame/mariecrane/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mariecrane" alt="Marie Crane">Marie Crane</a>, <a href="/training-material/hall-of-fame/pravs3683/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/pravs3683" alt="Praveen Kumar">Praveen Kumar</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How do I look at differentially expressed taxa?</p>
+</li>
+            
+            <li><p>Can we get top 5 or 10 taxa present in the sample?</p>
+</li>
+            
+            <li><p>How can I visualize my results?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>A taxonomy and quantitational analysis of metaproteomic mass spectrometry data.</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/proteomics">Proteomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> metaQuantome 1: Data creation:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4110725">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/workflows/" title="Workflows" alt="metaQuantome 3: Taxonomy workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="http://galaxy.migale.inra.fr/" title="Migale">
+            Migale
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 28, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>metaQuantome software suite <a class="citation" href="#Easterly2019">Easterly <i>et al.</i> 2019</a> was developed by the <a class="citation" href="#Galaxy-P">Team</a> for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional <span class="notranslate">expression</span> analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.</p>
+
+<p>In this tutorial, we will learn specifically about the metaQuantome Taxonomy <span class="notranslate">workflow</span>. In particular, we will learn about how peptide-level quantitation and associated taxonomic information can be used to generate bar plots (for taxonomic composition), volcano plots (to detect differentially expressed taxa) and heatmap cluster analysis.</p>
+
+<p>To demonstrate the use of this <span class="notranslate">workflow</span>, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas (<a class="citation" href="#Delogu2020">Delogu <i>et al.</i> 2020</a>). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.</p>
+
+<p><img src="../../images/mQ-taxa-workflow.jpg" alt="MetaQuantome-taxonomy-workflow" width="100%" /></p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#pretreatments" id="markdown-toc-pretreatments"><strong>Pretreatments</strong></a>    <ol>
+      <li><a href="#get-data" id="markdown-toc-get-data"><em>Get data</em></a></li>
+    </ol>
+  </li>
+  <li><a href="#download-metaquantome-databases" id="markdown-toc-download-metaquantome-databases"><strong>Download metaQuantome Databases</strong></a></li>
+  <li><a href="#create-metaquantome-sample-file" id="markdown-toc-create-metaquantome-sample-file"><strong>Create metaQuantome sample file</strong></a></li>
+  <li><a href="#run-metaquantome" id="markdown-toc-run-metaquantome"><strong>Run metaQuantome</strong></a>    <ol>
+      <li><a href="#metaquantome-expand" id="markdown-toc-metaquantome-expand"><em>metaQuantome: expand</em></a></li>
+      <li><a href="#metaquantome-filter" id="markdown-toc-metaquantome-filter"><em>metaQuantome: filter</em></a></li>
+      <li><a href="#metaquantome-stat" id="markdown-toc-metaquantome-stat"><em>metaQuantome: stat</em></a></li>
+    </ol>
+  </li>
+  <li><a href="#visualize-your-data" id="markdown-toc-visualize-your-data"><strong>Visualize your Data</strong></a>    <ol>
+      <li><a href="#metaquantome-visualize" id="markdown-toc-metaquantome-visualize"><em>metaQuantome: visualize</em></a></li>
+      <li><a href="#metaquantome-visualize-volcano-plots" id="markdown-toc-metaquantome-visualize-volcano-plots"><em>metaQuantome: visualize</em> Volcano Plots</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="pretreatments"><strong>Pretreatments</strong></h1>
+
+<p>The first step in this tutorial is to get the data from the Zenodo link provided and make sure that it is in the correct format.</p>
+
+<h2 id="get-data"><em>Get data</em></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a meaningful name.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import the files from <a href="https://doi.org/10.5281/zenodo.4110725">Zenodo</a>: a Functional File and an Intensity file.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4110725/files/Intensity-File.tabular
+https://zenodo.org/record/4110725/files/Taxonomy-File.tabular
+
+</code></pre></div>      </div>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <p>Alte<span class="notranslate">rna</span>tively, import the files from the shared data library (<code class="language-plaintext highlighter-rouge">GTN - Material</code> -&gt; <code class="language-plaintext highlighter-rouge">proteomics</code> -&gt; <code class="language-plaintext highlighter-rouge">metaQuantome 3: Taxonomy</code>)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="download-metaquantome-databases"><strong>Download metaQuantome Databases</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-metaquantome-databases"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run metaQuantome databases</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464" title="Tested with https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464"><strong>metaQuantome: databases</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: https://<span class="notranslate">toolshed</span>.g2.bx.psu.edu/view/<span class="notranslate">galaxy</span>p/metaquantome_db/7c45aa1c9464</span></span>  with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Databases to Download”</em>: <code class="language-plaintext highlighter-rouge">Select All</code> (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>metaQuantome uses freely available bioinformatic databases to expand your set of direct annotations.</p>
+
+        <p>The databases are:</p>
+
+        <ol>
+          <li>
+            <p>NCBI taxonomy database. consists of a list of all currently identified taxa and the relationships between them.</p>
+          </li>
+          <li>
+            <p>Gene Ontology (GO) term database. metaQuantome uses the go-basic.obo file and the metagenomics slim GO (subset of the full GO). More details are 
+available at <a href="http://geneontology.org/docs/download-ontology/">GO term website</a></p>
+          </li>
+          <li>
+            <p>ENZYME database with Enzyme Classification (EC) numbers. This database classifies enzymes and organizes the relationships between them.</p>
+          </li>
+        </ol>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Why is it necessary to download metaQuanome databases?</li>
+    <li>Can these databases be downloaded from other sources?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>metaQuantome databases help the metaQuantome:expand tool to co-relate information your have provided in your input files according to the GO term, taxa or EC databases and its relationship .</li>
+      <li>For metaQuantome, we use freely available databases. This module downloads the most recent releases of the specified databases and stores them in a single file, which can then be accessed by the rest of the metaQuantome modules. For reference, the taxonomy database is the largest (~500 Mb), while the GO and EC databases are smaller: ~34 Mb and ~10Mb, respectively. Also, note that the databases will be stored in the history so that the date of download can be referenced later. Thus, the databases will not be modified, except for the NCBI database.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="create-metaquantome-sample-file"><strong>Create metaQuantome sample file</strong></h1>
+
+<p>The create samples file module is used to generate the samples file input file for the metaQuantome <span class="notranslate">workflow</span>. This input file is used to specify the column names used for each experimental group. These column names are referenced when handling the input data and performing statistical analysis.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-an-experimental-design-file-for-sorting-samples"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create an experimental Design file for sorting samples</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_sample/49a957fb353a" title="Tested with https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_sample/49a957fb353a"><strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: https://<span class="notranslate">toolshed</span>.g2.bx.psu.edu/view/<span class="notranslate">galaxy</span>p/metaquantome_sample/49a957fb353a</span></span>  with the following parameters:
+      <ul>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Sample file creation method”</em>: <code class="language-plaintext highlighter-rouge">Manually specify experimental conditions and samples</code></li>
+        <li>In <em>“Insert Samples”</em>:
+          <ul>
+            <li><em>“1.Samples”</em>:
+              <ul>
+                <li><em>“Group Name”</em>: <code class="language-plaintext highlighter-rouge">T2</code>
+                  <ul>
+                    <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">T2_A1,T2_B1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><em>“2.Samples”</em>:
+              <ul>
+                <li><em>“Group Name”</em>: <code class="language-plaintext highlighter-rouge">T4</code>
+                  <ul>
+                    <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">T4A_1,T4B_1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><em>“3.Samples”</em>:
+              <ul>
+                <li><em>“Group Name”</em>: <code class="language-plaintext highlighter-rouge">T7</code>
+                  <ul>
+                    <li><em>“Column”</em>: <code class="language-plaintext highlighter-rouge">T7A_1,T7B_1</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="run-metaquantome"><strong>Run metaQuantome</strong></h1>
+
+<h2 id="metaquantome-expand"><em>metaQuantome: expand</em></h2>
+
+<p>The expand module is the first analysis step in the metaQuantome analysis <span class="notranslate">workflow</span>, and can be run to analyze differently expressed Taxa in the samples.
+In taxonomy mode, the following information is required apart from metaQuantome databases and samples file: a tab-separated taxonomy annotation file, with a peptide column and a taxonomy annotation column. The taxonomic annotations should be the lowest common ancestor (LCA) for each peptide, preferably given as NCBI taxonomy IDs.</p>
+
+<ul>
+  <li>The name of the peptide column in the taxonomic annotation file (<code class="language-plaintext highlighter-rouge">peptide</code>)</li>
+  <li>The name of the taxonomy annotation column in the taxonomy annotation file (<code class="language-plaintext highlighter-rouge">taxon_id</code>)</li>
+  <li>The name of the peptide column in the Intensity file (<code class="language-plaintext highlighter-rouge">peptide</code>)</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-run-metaquantome-expand"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run metaQuantome expand</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_expand/metaquantome_expand/2.0.0-0"><strong>metaQuantome: expand</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_expand/metaquantome_expand/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Database Archive File”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome databases</code> (output of <strong>metaQuantome: database</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome: create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Taxonomy file”</em>: <code class="language-plaintext highlighter-rouge">Taxonomy File</code> (Input dataset)</li>
+            <li><em>“Taxonomy file: peptide column name”</em>: <code class="language-plaintext highlighter-rouge">peptide</code></li>
+            <li><em>“Taxonomy column name”</em>: <code class="language-plaintext highlighter-rouge">taxon_id</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Intensity file”</em>: <code class="language-plaintext highlighter-rouge">Intensity File</code> (Input dataset)
+          <ul>
+            <li><em>“Intensity file: peptide column name”</em>: <code class="language-plaintext highlighter-rouge">peptide</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output file to <code class="language-plaintext highlighter-rouge">metaQuantome expand</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>term id</th>
+              <th>info about term. (one or more columns)</th>
+              <th>mean term intensity (by sample group)</th>
+              <th>term intensity (by sample)</th>
+              <th>number of unique peptides (by sample)</th>
+              <th>number of sample children in each sample</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>term1</td>
+              <td>name, rank, etc.</td>
+              <td>note that this is the log2 of the mean intensity</td>
+              <td>this is the log2 of term intensity in each sample. Missing data is coded as NA.</td>
+              <td>integer. 0 is coded as NA</td>
+              <td>integer. 0 is coded as NA</td>
+            </tr>
+            <tr>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+              <td> </td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="metaquantome-filter"><em>metaQuantome: filter</em></h2>
+
+<p>The filter module is the second step in the metaQuantome <span class="notranslate">workflow</span>. The filter module filters the expanded terms to those that are representative of the data according to the sample parameters the user has specified.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filtering-the-expanded-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering the expanded data</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_filter/metaquantome_filter/2.0.0-0"><strong>metaQuantome: filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_filter/metaquantome_filter/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“metaquantome expand file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:expand</code> (output of <strong>metaQuantome: expand</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“min_peptides”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“min_pep_nsamp”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“min_children_non_leaf”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+        <li><em>“min_child_nsamp”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“qthreshold”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output file to <code class="language-plaintext highlighter-rouge">metaQuantome:Filter</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>To learn more about the filter module please read the metaQuantome paper published by <span class="notranslate">Galaxy</span>-P <a class="citation" href="#Easterly2019">Easterly <i>et al.</i> 2019</a>.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Can we change the filter parameters?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The parameters can be changed according to the experimental design or depending on the data.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="metaquantome-stat"><em>metaQuantome: stat</em></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-statistical-analysis-of-the-filtered-data-on-multiple-conditions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Statistical analysis of the filtered data on multiple conditions.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_stat/metaquantome_stat/2.0.0-0"><strong>metaQuantome: stat</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_stat/metaquantome_stat/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“metaquantome expanded or filtered file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:Filter</code> (output of <strong>metaQuantome: filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code></li>
+        <li><em>“Name of the control sample group of control (used as denominator for fold change evaluation).”</em>: <code class="language-plaintext highlighter-rouge">T2</code></li>
+        <li><em>“Statistical test to perform”</em>: <code class="language-plaintext highlighter-rouge">standard t-test (parametric)</code></li>
+        <li><em>“Perform paired tests”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output file to <code class="language-plaintext highlighter-rouge">metaQuantome:stat</code>.</p>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>In this tutorial, we have used the sample T2 as the control group for fold change evaluation. The users have the ability to choose their own control sample group. The initial version of the metaQuantome stat module could only process 2 conditions at a time. However, the new update of metaQuantome has the ability to perform statistical analysis across multiple conditions.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="visualize-your-data"><strong>Visualize your Data</strong></h1>
+
+<p>The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions. 
+Here were are showing 2 visualizations: <strong>Barplot and Volcano Plot</strong>. The Heatmap and PCA plot for multiple conditions are under development.
+There are two outputs of the visualization tool : an <strong>HTML file (figure) and a tabular output containing the plot data</strong>.</p>
+
+<h2 id="metaquantome-visualize"><em>metaQuantome: visualize</em></h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-bar-chart-visualization-of-taxonomy-in-t2-sample"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bar chart visualization of Taxonomy in T2 sample.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0"><strong>metaQuantome: visualize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_viz/metaquantome_viz/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file from metaQuantome stats or metaQuantome filter”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:stat</code> (output of <strong>metaQuantome: stat</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code>
+          <ul>
+            <li><em>“Plot type”</em>: <code class="language-plaintext highlighter-rouge">Bar Chart (bar)</code>
+              <ul>
+                <li><em>“Taxonomic rank to restrict to in the plot”</em>: <code class="language-plaintext highlighter-rouge">genus</code></li>
+                <li><em>“Mean intensity column name”</em>: <code class="language-plaintext highlighter-rouge">T2_mean</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <p>The user has a choice to run Bar plot for T2, T4 and T7 to know the top 5 or 10 most differently expressed taxonomy.</p>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-1"><img src="../../images/T2_taxa.png" alt="T2_taxa" width="85%" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Bar Chart visualization of Top 5 genus present in T2 sample.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Can we select any color for the bar chart?</li>
+    <li>Can we increase the number of terms to display?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Yes, the available colors are blue, orange, yellow, violet, black and red.</li>
+      <li>Yes, the user can choose their own number, however, the larger the display numbers are the dimensions of the image has to be adjusted accordingly.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-bar-chart-visualization-of-taxonomy-in-t7-sample"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bar chart visualization of Taxonomy in T7 sample.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0"><strong>metaQuantome: visualize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_viz/metaquantome_viz/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file from metaQuantome stats or metaQuantome filter”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:stat</code> (output of <strong>metaQuantome: stat</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code>
+          <ul>
+            <li><em>“Plot type”</em>: <code class="language-plaintext highlighter-rouge">Bar Chart (bar)</code>
+              <ul>
+                <li><em>“Taxonomic rank to restrict to in the plot”</em>: <code class="language-plaintext highlighter-rouge">genus</code></li>
+                <li><em>“Mean intensity column name”</em>: <code class="language-plaintext highlighter-rouge">T7_mean</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-2"><img src="../../images/T7_taxa.png" alt="T7_taxa" width="85%" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Bar Chart visualization of Top 5 genus present in T7 sample.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-bar-chart-visualization-of-taxonomy-in-t4-sample"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Bar chart visualization of Taxonomy in T4 sample.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0"><strong>metaQuantome: visualize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_viz/metaquantome_viz/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file from metaQuantome stats or metaQuantome filter”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:stat</code> (output of <strong>metaQuantome: stat</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code>
+          <ul>
+            <li><em>“Plot type”</em>: <code class="language-plaintext highlighter-rouge">Bar Chart (bar)</code>
+              <ul>
+                <li><em>“Taxonomic rank to restrict to in the plot”</em>: <code class="language-plaintext highlighter-rouge">genus</code></li>
+                <li><em>“Mean intensity column name”</em>: <code class="language-plaintext highlighter-rouge">T4_mean</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-3"><img src="../../images/T4_taxa.png" alt="T4_taxa" width="85%" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Bar Chart visualization of Top 5 genus present in T4 sample.</figcaption></figure>
+
+<h2 id="metaquantome-visualize-volcano-plots"><em>metaQuantome: visualize</em> Volcano Plots</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-volcano-plot-visualization-of-the-data-t4-and-t2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Volcano Plot visualization of the data T4 and T2.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0"><strong>metaQuantome: visualize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_viz/metaquantome_viz/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file from metaQuantome stats or metaQuantome filter”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:stat</code> (output of <strong>metaQuantome: stat</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code>
+          <ul>
+            <li><em>“Plot type”</em>: <code class="language-plaintext highlighter-rouge">Volcano Plot (volcano)</code>
+              <ul>
+                <li><em>“Name of the fold change column in the stat dataframe”</em>: <code class="language-plaintext highlighter-rouge">log2fc_T4_over_T2</code></li>
+                <li><em>“Name of the Corrected p-value column in the stat dataframe”</em>: <code class="language-plaintext highlighter-rouge">corrected_p_T4_over_T2</code></li>
+              </ul>
+            </li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Flip the fold change (i.e., multiply log fold change by -1)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+        <p>Here, we show metaQuantome’s Taxonomy differential abundance volcano plot. The user may select the significance threshold (0.05 by default), and terms with statistically significant fold changes are colored green and labeled. However, we can currently only compare two conditions at a time. Here we have compared T4 and T2 time points. The user can also perform comparison of T7 and T2.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-4"><img src="../../images/T2-T4-taxa-volcano.png" alt="T2-T4-taxa-volcano" width="100%" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Volcano plot for differentially expressed taxa comparing sample T4 and T2.</figcaption></figure>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-volcano-plot-visualization-of-the-data-t7-and-t2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Volcano Plot visualization of the data T7 and T2.</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_viz/metaquantome_viz/2.0.0-0"><strong>metaQuantome: visualize</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/metaquantome_viz/metaquantome_viz/2.0.0-0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular file from metaQuantome stats or metaQuantome filter”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:stat</code> (output of <strong>metaQuantome: stat</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Samples file”</em>: <code class="language-plaintext highlighter-rouge">metaQuantome:create samples_file</code> (output of <strong>metaQuantome: create samples file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Taxonomic analysis</code>
+          <ul>
+            <li><em>“Plot type”</em>: <code class="language-plaintext highlighter-rouge">Volcano Plot (volcano)</code>
+              <ul>
+                <li><em>“Name of the fold change column in the stat dataframe”</em>: <code class="language-plaintext highlighter-rouge">log2fc_T7_over_T2</code></li>
+                <li><em>“Name of the Corrected p-value column in the stat dataframe”</em>: <code class="language-plaintext highlighter-rouge">corrected_p_T7_over_T2</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-5"><img src="../../images/T2-T7-taxa-volcano.png" alt="T2-T7-taxa-volcano" width="100%" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Volcano plot for differentially expressed taxa comparing sample T7 and T2.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>Can we choose to Flip the fold change?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>Certainly, the user has the ability to flip the fold changes.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>This completes the walkthrough of the metaQuantome taxonomy <span class="notranslate">workflow</span>. This tutorial is a guide to run the metaQuantome modules and can be used for metaproteomics research. Here, we have incorporated only two visualization modules in this <span class="notranslate">workflow</span> but we will make the heatmap and PCA plot also available. Researchers can use this <span class="notranslate">workflow</span> with their data also, please note that the tool parameters and the <span class="notranslate">workflow</span> will be needed to be modified accordingly. Also, refer to the metaQuantome data creation <span class="notranslate">workflow</span> to understand how to make files metaQuantome compatible.</p>
+
+<p>This <span class="notranslate">workflow</span> was developed by the <span class="notranslate">Galaxy</span>-P team at the University of Minnesota. For more information about <span class="notranslate">Galaxy</span>-P or our ongoing work, please visit us at <a href="https://galaxyp.org"><span class="notranslate">galaxy</span>p.org</a></p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>All the inputs should have one column in common i.e. peptides.</p>
+</li>
+                            
+                            <li><p>Learning different tools such as Unipept, MEGAN, MetaGOmics etc. for taxonomic annotation of peptides will benefit.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Galaxy-P">Team, G.-P. <b>Galaxy-P</b>.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://galaxyp.org/">http://galaxyp.org/</a>
+      
+    
+
+</li>
+<li><span id="Easterly2019">Easterly, C. W., R. Sajulga, S. Mehta, J. Johnson, P. Kumar <i>et al.</i>, 2019 <b>metaQuantome: An Integrated,  Quantitative Metaproteomics Approach Reveals Connections Between Taxonomy and Protein Function in Complex Microbiomes</b>. Molecular &amp; Cellular Proteomics 18: S82–S91.</span>
+    
+    
+    <a href="https://doi.org/10.1074/mcp.ra118.001240">10.1074/mcp.ra118.001240</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Delogu2020">Delogu, F., B. J. Kunath, P. N. Evans, M. Ø. Arntzen, T. R. Hvidsten <i>et al.</i>, 2020 <b>Integration of absolute multi-omics reveals dynamic protein-to-RNA ratios and metabolic interplay within mixed-domain microbiomes</b>. Nature Communications 11:</span>
+    
+    
+    <a href="https://doi.org/10.1038/s41467-020-18543-0">10.1038/s41467-020-18543-0</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=metaQuantome 3: Taxonomy (Proteomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Emma Leith, Marie Crane, Praveen Kumar, 2020 <b>metaQuantome 3: Taxonomy (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html">/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{proteomics-metaquantome-taxonomy,
+    author = "Subina Mehta and Timothy J. Griffin and Pratik Jagtap and Emma Leith and Marie Crane and Praveen Kumar",
+    title = "metaQuantome 3: Taxonomy (Galaxy Training Materials)",
+    year = "2020",
+    month = "10",
+    day = "28"
+    url = "\url{/training-material/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+        <blockquote class="agenda follow-up">
+            <strong class="follow-up"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">curriculum</span> Do you want to extend your knowledge? Follow one of our recommended follow-up trainings:</strong>
+            <ul>
+                
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/proteomics">Proteomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> metaQuantome 2: Function:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/proteomics/tutorials/metaquantome-function/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+        </blockquote>
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Emma Leith, Marie Crane, Praveen Kumar)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/metaquantome-taxonomy/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
