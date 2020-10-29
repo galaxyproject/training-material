@@ -13,7 +13,7 @@ objectives:
   - "Learn how histories work"
   - "Learn how to create a workflow"
   - "Learn how to share your work"
-time_estimation: "1H30M"
+time_estimation: "1H"
 key_points:
   - "Galaxy provides an easy-to-use graphical user interface for often complex command-line tools"
   - "Galaxy keeps a full record of your analysis in a history"
@@ -92,88 +92,116 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 
 First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.
 
-> ### {% icon hands_on %} Hands-on: Data upload from UCSC
+> ### {% icon hands_on %} Hands-on: Upload SNPs and Exons
+> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
 >
-> 1. **UCSC Main** {% icon tool %} table browser:
+>    ![upload button](../../images/upload-data.png)
 >
->     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+>    This brings up a box:
 >
->     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
+>    ![filebox](../../images/upload-box.png){:width="500px"}
 >
->     You will be taken to the **UCSC table browser**, which looks something like this:
+> 2. Click **Paste/Fetch data** and paste in the following URLs in the box that appears.
 >
->     ![`UCSC table browser` tool, first screen for exons](../../images/101_02.png)
+>    ```
+>    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Coding-Exons.bed
+>    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs.bed
+>    ````
 >
->     Now set the following parameters:
->     - *"clade"*: `Mammal`
->     - *"genome"*: `Human`
->     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
->     - *"group"*: `Genes and Gene Predictions`
->     - *"track"*: `GENCODE v32`
->     - *"table"*: `knownGene`
->     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
->     - *"output format"* should be changed to `BED - browser extensible data`
->     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
+> 3. Click **Start**, and the **Close**
 >
->     > ### {% icon comment %} Comment
->     > If the *"table"* drop down menu does not show the `knownGene` option. Set *"group"* to `All tables` and scroll down.
->     {: .comment}
+> 4. When they're ready, rename the datasets to "Exons" and "SNPs", respectively.
 >
-> 2. Click on the **get output** button and you will see the next screen:
+>    {% include snippets/rename_dataset.md %}
 >
->    ![`UCSC table browser` tool, second screen for exons](../../images/101_03.png)
->
->    Change **Create one BED record per** to `Coding Exons` and then click on the **Send query to Galaxy** button.
->
->     > ### {% icon comment %} Comment
->     > After this you will see your first history item in Galaxy's right panel. It will go through
->     > the gray (preparing/queued) and yellow (running) states to become green (success):
->     >
->     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
->     {: .comment}
->
-> 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
->
->    ![Contents of the `UCSC Main on Human: knownGene` dataset](../../images/101_exons.png)
->
->    Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.
->
-> 4. Let's rename our dataset to something more recognizable.
->    - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
->    - In the central panel, change the **Name** field to `Exons`
->    - Click the **Save** button
->
->    Your history should now look something like this:
->
->    ![Rename dataset to `Exons`](../../images/101_rename.png)
 {: .hands_on}
 
-## Obtaining SNP information
-
-We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
-
-> ### {% icon hands_on %} Hands-on: SNP information
-> Again open the `UCSC Main - table browser` tool and set the following parameters
+> ### {% icon tip %} Obtaining the Data from UCSC
 >
-> 1. **UCSC Main** {% icon tool %} table browser:
->    - *"group"* should be changed to `Variation`
->    - {% icon param-text %} *"region"* should be changed again to `position` with value `chr22`
->    - *"output format"* should be changed again to `BED - browser extensible data`
+> This can be a somewhat error prone process for new users, but if you wish to obtain the newest data from UCSC, you can do that by doing the following:
 >
->    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
+> > ### {% icon hands_on %} Hands-on: Obtaining Exons from UCSC
+> >
+> > 1. **UCSC Main** {% icon tool %} table browser:
+> >
+> >     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+> >
+> >     ![`UCSC Main table browser` menu entry](../../images/101_01.png)
+> >
+> >     You will be taken to the **UCSC table browser**, which looks something like this:
+> >
+> >     ![`UCSC table browser` tool, first screen for exons](../../images/101_02.png)
+> >
+> >     Now set the following parameters:
+> >     - *"clade"*: `Mammal`
+> >     - *"genome"*: `Human`
+> >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+> >     - *"group"*: `Genes and Gene Predictions`
+> >     - *"track"*: `GENCODE v32`
+> >     - *"table"*: `knownGene`
+> >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
+> >     - *"output format"* should be changed to `BED - browser extensible data`
+> >     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
+> >
+> >     > ### {% icon comment %} Comment
+> >     > If the *"table"* drop down menu does not show the `knownGene` option. Set *"group"* to `All tables` and scroll down.
+> >     {: .comment}
+> >
+> > 2. Click on the **get output** button and you will see the next screen:
+> >
+> >    ![`UCSC table browser` tool, second screen for exons](../../images/101_03.png)
+> >
+> >    Change **Create one BED record per** to `Coding Exons` and then click on the **Send query to Galaxy** button.
+> >
+> >     > ### {% icon comment %} Comment
+> >     > After this you will see your first history item in Galaxy's right panel. It will go through
+> >     > the gray (preparing/queued) and yellow (running) states to become green (success):
+> >     >
+> >     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
+> >     {: .comment}
+> >
+> > 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
+> >
+> >    ![Contents of the `UCSC Main on Human: knownGene` dataset](../../images/101_exons.png)
+> >
+> >    Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.
+> >
+> > 4. Let's rename our dataset to something more recognizable.
+> >    - Click on the {% icon galaxy-pencil %} **pencil icon** for the dataset to edit its attributes
+> >    - In the central panel, change the **Name** field to `Exons`
+> >    - Click the **Save** button
+> >
+> >    Your history should now look something like this:
+> >
+> >    ![Rename dataset to `Exons`](../../images/101_rename.png)
+> {: .hands_on}
 >
->    The *"track"* setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+> We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let's get some information about SNP locations from UCSC as well:
 >
-> 2. Click on the **get output** button to find a form similar to this:
+> > ### {% icon hands_on %} Hands-on: Obtaining SNPs from UCSC
+> > Again open the `UCSC Main - table browser` tool and set the following parameters
+> >
+> > 1. **UCSC Main** {% icon tool %} table browser:
+> >    - *"group"* should be changed to `Variation`
+> >    - {% icon param-text %} *"region"* should be changed again to `position` with value `chr22`
+> >    - *"output format"* should be changed again to `BED - browser extensible data`
+> >
+> >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
+> >
+> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+> >
+> > 2. Click on the **get output** button to find a form similar to this:
+> >
+> >    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
+> >
+> >    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. A second item will appear in your analysis history.
+> >
+> > 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+> >
+> >    {% include snippets/rename_dataset.md name="SNPs" %}
+> {: .hands_on}
 >
->    ![`UCSC table browser` tool, second screen for SNPs](../../images/101_07.png)
->
->    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. A second item will appear in your analysis history.
->
-> 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
->
->    {% include snippets/rename_dataset.md name="SNPs" %}
-{: .hands_on}
+{: .tip}
 
 # Analysis
 
@@ -486,22 +514,36 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 3. Click **Analyze Data** at the top to return to the main analysis window
 >
-> 4. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
+> 4. Import the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >
->    **UCSC Main** {% icon tool %} table browser:
+>    ```
+>    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
+>    ```
 >
->     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+>    {% include snippets/import_via_link.md %}
 >
->     Now set the following parameters:
->     - *"clade"*: `Mammal`
->     - *"genome"*: `Human`
->     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
->     - *"group"*: `Repeats`
->     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
->     - *"output format"* should be changed to `BED - browser extensible data`
->     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
->
->    Click on **get output** and then **Send query to Galaxy** on the next screen.
+>    > ### {% icon tip %} Obtaining the Data from UCSC
+>    >
+>    > Again, for reproducibility we obtain the data from Zenodo ensuring that the results will never change, allowing us to do good science! However if you wish to obtain UCSC data:
+>    >
+>    > > ### {% icon hands_on %} Hands-on: Obtaining Exons from UCSC
+>    > >
+>    > > 1. **UCSC Main** {% icon tool %} table browser:
+>    > >
+>    > >     In the tool menu, navigate to `Get Data -> UCSC Main - table browser`
+>    > >
+>    > >     Now set the following parameters:
+>    > >     - *"clade"*: `Mammal`
+>    > >     - *"genome"*: `Human`
+>    > >     - *"assembly"*: `Dec. 2013 (GRCh38/hg38)`
+>    > >     - *"group"*: `Repeats`
+>    > >     - {% icon param-text %} *"region"* should be changed to `position` with value `chr22`
+>    > >     - *"output format"* should be changed to `BED - browser extensible data`
+>    > >     - {% icon param-check %} *"Send output to"* should have the option `Galaxy` checked
+>    > >
+>    > >   Click on **get output** and then **Send query to Galaxy** on the next screen.
+>    > {: .hands_on}
+>    {: .tip}
 >
 > 5. **Rename** {% icon galaxy-pencil %} the dataset to `Repeats`
 >
