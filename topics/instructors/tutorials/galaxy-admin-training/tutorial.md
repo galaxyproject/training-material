@@ -4,8 +4,8 @@ layout: tutorial_hands_on
 title: Galaxy Admin Training
 time_estimation: 60m
 questions:
-  - How do I prepare for a Galaxy Admin Training (GAT)
-  - What do I need to setup
+  - How do I organise a Galaxy Admin Training (GAT)
+  - What do I need to set up?
   - What should I know during the training?
 objectives:
   - Interact with the UseGalaxy.eu admins to arrange for infrastructure
@@ -23,9 +23,9 @@ contributors:
 
 ![GAT logo is the GTN logo over a space background and text reading galaxy admin traiing.](../../images/gat.png)
 
-Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick to setup and run.
+Setting up and running a Galaxy Admin Training is not a very complicated process thanks to a significant amount of work that has been put into making it easy and quick.
 
-This tutorial has multiple audiences who are all adressed within this one tutorial. We encourage everyone involved in hosting the GAT event to read this, so you are aware of all of the moving parts which are required for such an event.
+This tutorial has multiple audiences who are all adressed within this one tutorial. We encourage everyone involved in hosting a GAT event to read this, so you are aware of all of the moving parts which are required for such an event.
 
 > ### Agenda
 >
@@ -42,8 +42,8 @@ First consider the requirements for your training:
 
 - How many days will the training be?
 - What topics do you want to cover?
-	- Do you have enough helpers?
-	- Is the training online or in person?
+- How many helpers will you need?
+- Will the training be online or in person? Teaching online is slower, so you may not be able to cover as many topic as in person; you may also need more helpers.
 - Do you have your own infrastructure, or do you need to request infrastructure?
 
 We recommend [checking out an example schedule from the GAT repository](https://github.com/galaxyproject/admin-training/tree/2020-barcelona) and modifying it based on your needs.
@@ -151,15 +151,15 @@ The GAT team maintains some infrastructure to handle the bootstrapping in [the G
 >
 {: .hands_on}
 
-Make in turn runs the `playbook.yml` which does a large number of things:
+The last command runs the `playbook.yml`, which in turn does a large number of things:
 
 - Bootstraps python on the machine if it isn't available already (Ubuntu stopped including it for some reason.)
-- (Generates if needed) and copies an ssh key to all of the machines to make login easier (this is stored in `id_rsa` and `id_rsa.pub` in the same directory as the makefile.)
+- (Generates if needed) and copies an SSH key to all of the machines to make login easier (this is stored in `id_rsa` and `id_rsa.pub` in the same directory as the makefile.)
 - This key is set as the ubuntu user's key, and added to their authorized_keys, to permit them to run ansible easily on that machine (if they don't configure the local connection correctly.)
 	- (When pulsar is in use) the pulsar machines are provisioned identically to the ones where Galaxy is setup, so the students can login passwordlessly to their pulsar machine.
 - Updates packages (slow)
-- Installs basic dependencies (emacs/vim/nano, git, etc.)
-- Adds `gat-cli` script to `/usr/bin/gat`
+- Installs basic dependencies (emacs, vim, nano, git, etc.)
+- Adds the `gat-cli` script to `/usr/bin/gat`
 - Optionally sets a password to the machine
 	- If you set `set_password=true` in the hosts file, you can set a password on machines.
 	- This is useful when your machines only have an SSH key on them, and no password set for students.
@@ -167,14 +167,14 @@ Make in turn runs the `playbook.yml` which does a large number of things:
 
 # Testing
 
-Once your VMs are ready you should test ALL of the lessons you intend to teach. Most of the training should be fine, but sometimes changes in e.g. Galaxy versions or the availability of newer versions of the ansible modules will indicate you should test the training as you plan to teach it, and update the training materials where relevant.
+Once your VMs are ready, you should test ALL of the lessons you intend to teach. Most of the training should be fine, but sometimes changes in e.g. Galaxy versions or the availability of newer versions of some ansible modules will indicate you should test the training as you plan to teach it, and update the training materials where relevant.
 
 # Starting Your Training
 
 We recommend providing a website [similar to our GitHub repository](https://github.com/galaxyproject/admin-training/tree/2020-barcelona) (or using our repository! Ask us for a branch.) with at minimum the following links:
 
-- **Q&A** pointing to a Google document where students ask their questions.
-	- This is an excellent format for discussion as it allows students to ask as many questions and responses can be "threaded" by default.
+- **Q&A** pointing to a Google document where students can ask questions.
+	- In our experience this is an excellent format for discussion: it allows students to ask as many questions as they have, and responses can be given in real-time right below each question.
 	- Additionally images and complex formatting is easy
 	- Lastly, it's *anonymous* which many students prefer.
 - **Chat** pointing to `https://gxy.io/gatchat` (or your preferred channel)
@@ -183,7 +183,7 @@ We recommend providing a website [similar to our GitHub repository](https://gith
 
 # During Your Training
 
-During planning for BCC2020 we found that monitoring student progress would be extremely difficult, it was not a situation we had encountered before as this was first remote GAT during the pandemic. So we developed a small utility, the `gat-cli`, which assists in monitoring students' progress.
+During planning for BCC2020 we found that monitoring student progress would be extremely difficult, it was not a situation we had encountered before as this was the first remote GAT during the pandemic. So we developed a small utility, the `gat-cli`, which assists in monitoring students' progress.
 
 ```
 $ gat
@@ -198,7 +198,7 @@ Galaxy Admin Training (gat) tool:
 Each of these commands run a couple checks on their local machine. For example the `status-galaxy` command checks:
 
 - Check that the `postgresql` service is running
-- Does a db exists named `galaxy`
+- Does a db named `galaxy` exist
 - Does http://localhost:8080/api/version respond with *some* content
 - Check that the `galaxy` service is running
 - Check that the `nginx` service is running
