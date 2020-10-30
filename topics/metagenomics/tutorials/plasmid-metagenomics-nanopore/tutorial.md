@@ -128,9 +128,9 @@ report page.
 
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
-> 1. **NanoPlot** {% icon tool %} with the following parameters
->   - {% icon param-filter %} *"Select multifile mode"*: `batch`
->   - {% icon param-filter %} *"Type of the file(s) to work on"*: `fasta`
+> 1. {% [Nanoplot](tool toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+>   - {% icon param-select %} *"Select multifile mode"*: `batch`
+>   - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
 >   - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
 >
 >     {% include snippets/select_collection.md %}
@@ -179,13 +179,13 @@ the Minimap2 publication ({% cite Li2018 %}).
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
 > 1. **Map with minimap2** {% icon tool %} with the following parameters
->    - {% icon param-filter %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-select %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >    - {% icon param-collection %} *"Use the following data collection as the reference sequence"*: `Created dataset collection (Plasmids)`
->    - {% icon param-filter %} *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-select %} *"Single or Paired-end reads"*: `Single`
 >    - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` dataset collection
->    - {% icon param-filter%} *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
+>    - {% icon param-select%} *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
 >    - In the section **Set advanced output options**:
->      - {% icon param-filter %} *"Select an output format"*: `paf`
+>      - {% icon param-select %} *"Select an output format"*: `paf`
 >
 >    {% include snippets/select_collection.md %}
 >
@@ -260,13 +260,13 @@ Remapping is done with the original reads, using the Miniasm assembly as a refer
 >   - {% icon param-collection %} *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
 >
 > 2. **Map with minimap2** {% icon tool %} with the following parameters
->    - {% icon param-filter %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-select %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >    - {% icon param-collection %} *"Use the following dataset as the reference sequence"*: `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
->    - {% icon param-filter %} *"Single or Paired-end reads"*: `single`
+>    - {% icon param-select %} *"Single or Paired-end reads"*: `single`
 >    - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` collection
->    - {% icon param-filter %} *"Select analysis mode (sets default)"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
+>    - {% icon param-select %} *"Select analysis mode (sets default)"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
 >    - In the section **Set advanced output options**:
->       - {% icon param-filter %} *"Select an output format"*: `paf`
+>       - {% icon param-select %} *"Select an output format"*: `paf`
 >
 >
 >     {% include snippets/select_collection.md %}
@@ -373,7 +373,7 @@ Let's try it on our data!
 > ### {% icon hands_on %} Hands-on: Unicycler assembly
 >
 > 1. **Create assemblies with Unicycler** {% icon tool %} with the following parameters
->   - {% icon param-filter %} *"Paired or Single end data"*: `None`
+>   - {% icon param-select %} *"Paired or Single end data"*: `None`
 >   - {% icon param-collection %} *"Select long reads. If there are no long reads, leave this empty"*: The `Plasmids` dataset collection
 >
 > 2. **Bandage image** {% icon tool %} with the following parameters
