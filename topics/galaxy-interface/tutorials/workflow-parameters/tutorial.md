@@ -57,6 +57,8 @@ can be added.
 > 4. Click on import workflow
 {: .hands_on}
 
+{% include snippets/edit_workflow.md %}
+
 # Add an integer workflow parameter
 
 This workflow takes an input dataset and outputs the first 10 lines of that input dataset.
