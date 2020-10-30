@@ -382,14 +382,25 @@ Let's try it on our data!
 >
 > 3. Examine {% icon galaxy-eye %} the output images again
 >
-> > ### {% icon question %} Question
-> >
-> > For which samples has the plasmid assembly improved?
-> >
-> > > ### {% icon solution %} Solution
-> > > Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.
-> > {: .solution }
-> {: .question}
+> 4. Use the **Scratchbook** {% icon galaxy-scratchbook %} to compare the two assemblies for sample `RB01`
+>    - Compare the **Bandage** {% icon tool %} images for our two assemblies:
+>      1. The assembly we got from running **minimap2, miniasm, racon** {% icon tool%} (first time we ran bandage)
+>      2. The assembly obtained with **Unicycler** {% icon tool %}
+>    - Tip: Search your history for the term `bandage` to easily find the outputs from our two bandage runs
+>
+>    {% include snippets/scratchbook.md %}
+>    {% include snippets/history_search.md %}
+>
+> 5. Repeat this comparison for the other samples.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > For which samples has the plasmid assembly improved?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.
+>    > {: .solution }
+>    {: .question}
 >
 {: .hands_on}
 
