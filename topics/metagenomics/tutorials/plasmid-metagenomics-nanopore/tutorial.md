@@ -129,9 +129,9 @@ report page.
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
 > 1. **NanoPlot** {% icon tool %} with the following parameters
->   - *"Select multifile mode"*: `batch`
->   - *"Type of the file(s) to work on"*: `fasta`
->   - *"files"*: The `Plasmids` dataset collection you just created
+>   - {% icon param-filter %} *"Select multifile mode"*: `batch`
+>   - {% icon param-filter %} *"Type of the file(s) to work on"*: `fasta`
+>   - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
 >
 >     {% include snippets/select_collection.md %}
 >
@@ -179,13 +179,13 @@ the Minimap2 publication ({% cite Li2018 %}).
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
 > 1. **Map with minimap2** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->    - *"Use the following data collection as the reference sequence"*: `Created dataset collection (Plasmids)`
->    - *"Single or Paired-end reads"*: `Single`
->    - *"Select fastq dataset"*: The `Plasmids` dataset collection
->    - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
+>    - {% icon param-filter %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-collection %} *"Use the following data collection as the reference sequence"*: `Created dataset collection (Plasmids)`
+>    - {% icon param-filter %} *"Single or Paired-end reads"*: `Single`
+>    - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` dataset collection
+>    - {% icon param-filter%} *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
 >    - In the section **Set advanced output options**:
->      - *"Select an output format"*: `paf`
+>      - {% icon param-filter %} *"Select an output format"*: `paf`
 >
 >    {% include snippets/select_collection.md %}
 >
@@ -232,8 +232,8 @@ Thus the per-base error rate is similar to the raw input reads.
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
 > 1. **miniasm** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: The `Plasmids` dataset collection
->   - *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
+>   - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
+>   - {% icon param-collection %} *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
 >
 >    {% include snippets/select_collection.md %}
 >
@@ -257,16 +257,16 @@ Remapping is done with the original reads, using the Miniasm assembly as a refer
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
 > 1. **GFA to Fasta** {% icon tool %} with the following parameters
->   - *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
+>   - {% icon param-collection %} *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
 >
 > 2. **Map with minimap2** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->    - *"Use the following dataset as the reference sequence"*: `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
->    - *"Single or Paired-end reads"*: `single`
->    - *"Select fastq dataset"*: The `Plasmids` collection
->    - *"Select analysis mode (sets default)"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
+>    - {% icon param-filter %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>    - {% icon param-collection %} *"Use the following dataset as the reference sequence"*: `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
+>    - {% icon param-filter %} *"Single or Paired-end reads"*: `single`
+>    - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` collection
+>    - {% icon param-filter %} *"Select analysis mode (sets default)"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
 >    - In the section **Set advanced output options**:
->       - *"Select an output format"*: `paf`
+>       - {% icon param-filter %} *"Select an output format"*: `paf`
 >
 >
 >     {% include snippets/select_collection.md %}
@@ -297,9 +297,9 @@ It supports data produced by both Pacific Biosciences and Oxford Nanopore Techno
 > ### {% icon hands_on %} Hands-on: Consensus module
 >
 > 1. **Racon** {% icon tool %} with the following parameters
->   - *"Sequences"*: The `Plasmids` dataset collection
->   - *"Overlaps"*: the latest `PAF file` collection created by **Minimap2** {% icon tool %}
->   - *"Target sequences"*: the `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
+>   - {% icon param-collection %} *"Sequences"*: The `Plasmids` dataset collection
+>   - {% icon param-collection %} *"Overlaps"*: the latest `PAF file` collection created by **Minimap2** {% icon tool %}
+>   - {% icon param-collection %} *"Target sequences"*: the `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
 >
 {: .hands_on}
 
@@ -327,7 +327,7 @@ By visualizing these assembly graphs, Bandage allows users to better understand,
 > ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
 >
 > 1. **Bandage image** {% icon tool %} with the following parameters
->   - *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
+>   - {% icon param-collection %} *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
 >
 > 2. Explore {% icon galaxy-eye %} the output images
 >
@@ -373,11 +373,11 @@ Let's try it on our data!
 > ### {% icon hands_on %} Hands-on: Unicycler assembly
 >
 > 1. **Create assemblies with Unicycler** {% icon tool %} with the following parameters
->   - *"Paired or Single end data"*: `None`
->   - *"Select long reads. If there are no long reads, leave this empty"*: The `Plasmids` dataset collection
+>   - {% icon param-filter %} *"Paired or Single end data"*: `None`
+>   - {% icon param-collection %} *"Select long reads. If there are no long reads, leave this empty"*: The `Plasmids` dataset collection
 >
 > 2. **Bandage image** {% icon tool %} with the following parameters
->   - *"Graphical Fragment Assembly"*: the `Final Assembly Graph` collection created by **Unicycler** {% icon tool %}
+>   - {% icon param-collection %} *"Graphical Fragment Assembly"*: the `Final Assembly Graph` collection created by **Unicycler** {% icon tool %}
 >
 > 3. Examine {% icon galaxy-eye %} the output images again
 >
@@ -411,7 +411,7 @@ It relies on the neural network models trained on full genome and plasmid sequen
 > ### {% icon hands_on %} Hands-on: Prediction of plasmid sequences
 >
 > 1. **PlasFlow** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
+>   - {% icon param-collection %} *"Sequence Reads"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -457,7 +457,7 @@ and compiles a summary report of detected antimicrobial resistance genes.
 > ### {% icon hands_on %} Hands-on: Prediction of AMR genes
 >
 > 1. **staramr** {% icon tool %} with the following parameters
->   - *"genomes"*: the `Final Assembly` collection created by **Unicycler**
+>   - {% icon param-collection %} *"genomes"*: the `Final Assembly` collection created by **Unicycler**
 >
 > > ### {% icon question %} Question
 > >
