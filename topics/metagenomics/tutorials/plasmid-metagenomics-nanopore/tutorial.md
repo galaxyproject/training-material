@@ -259,6 +259,19 @@ Remapping is done with the original reads, using the Miniasm assembly as a refer
 > 1. {% tool [GFA to Fasta](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1) %} with the following parameters
 >   - {% icon param-collection %} *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
 >
+>     > ### {% icon question %} Question
+>     >
+>     > How many contigs do we have for thte RB05 sample after de novo assembly?
+>     > <br><br>
+>     > Hint: run **Nanoplot** {% icon tool %} on the output of **GFA to Fasta** {% icon tool %}
+>     >
+>     > > ### {% icon solution %} Solution
+>     > > 25
+>     > >
+>     > > This can be determined by looking at the NanoStats output of NanoPlot.
+>     > {: .solution }
+>     {: .question}
+>
 > 2. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters
 >    - {% icon param-select %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >      - {% icon param-collection %} *"Use the following dataset as the reference sequence"*: `FASTA file` output from **GFA to Fasta** {% icon tool %} (collection)
@@ -271,18 +284,6 @@ Remapping is done with the original reads, using the Miniasm assembly as a refer
 >
 >     {% include snippets/select_collection.md %}
 >
->     > ### {% icon question %} Question
->     >
->     > How many contigs do we have for the RB05 sample after the use of **Minimap2** {% icon tool %} and **Miniasm** {% icon tool %}?
->     > <br><br>
->     > Hint: run **Nanoplot** {% icon tool %} on the output of **GFA to Fasta** {% icon tool %}
->     >
->     > > ### {% icon solution %} Solution
->     > > 22
->     > >
->     > > This can be determined by looking at the NanoStats output of NanoPlot.
->     > {: .solution }
->     {: .question}
 {: .hands_on}
 
 ## Ultrafast consensus module using Racon
