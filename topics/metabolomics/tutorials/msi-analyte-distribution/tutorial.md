@@ -193,7 +193,7 @@ We will follow up on the average mass spectra plots from the quality control rep
 
 > ### {% icon hands_on %} Hands-on: Average mass spectra
 >
-> 1. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.1) %}
+> 1. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
@@ -264,7 +264,7 @@ x     y     compartment
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
-> 2. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.1) %}
+> 2. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0) %}
 >    - Press the rerun button, changing only the following:
 >    - *"Choose spectra (pixel) and/or add spectra annotations"*: `Single spectra`
 >        - {% icon param-file %} *"Load tabular file with pixel coordinates"*: `annotations` (Input dataset)
