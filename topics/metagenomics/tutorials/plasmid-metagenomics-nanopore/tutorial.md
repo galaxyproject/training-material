@@ -261,7 +261,7 @@ Remapping is done with the original reads, using the Miniasm assembly as a refer
 >
 >     > ### {% icon question %} Question
 >     >
->     > How many contigs do we have for thte RB05 sample after de novo assembly?
+>     > How many contigs do we have for the RB05 sample after de novo assembly?
 >     > <br><br>
 >     > Hint: run **Nanoplot** {% icon tool %} on the output of **GFA to Fasta** {% icon tool %}
 >     >
@@ -529,5 +529,4 @@ may provide further insight.
 You have worked your way through the following pipeline:
 
 ![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
-
 
