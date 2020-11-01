@@ -1,0 +1,597 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Mass spectrometry imaging: Examining the spatial distribution of analytes",
+    "format-version": "0.1",
+    "name": "MSI Workflow: spatial distribution",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Uploaded Composite Dataset (imzml)"
+                }
+            ],
+            "label": "Uploaded Composite Dataset (imzml)",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 409.6999969482422,
+                "height": 82.19999694824219,
+                "left": 375,
+                "right": 575,
+                "top": 327.5,
+                "width": 200,
+                "x": 375,
+                "y": 327.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d6fee109-e1af-4064-b014-051fbcede1d0",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "c5922e0d-d30d-4c15-84c9-7b97bc5aa93e"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Annotation"
+                }
+            ],
+            "label": "Annotation",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 522.3000030517578,
+                "height": 61.80000305175781,
+                "left": 377,
+                "right": 577,
+                "top": 460.5,
+                "width": 200,
+                "x": 377,
+                "y": 460.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "d0be9936-9e28-45f6-ac65-08d037ab9dc3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "d826e468-2c46-4a28-9a24-bff61b41b35b"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "m/z features"
+                }
+            ],
+            "label": "m/z features",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 866.3000030517578,
+                "height": 61.80000305175781,
+                "left": 385,
+                "right": 585,
+                "top": 804.5,
+                "width": 200,
+                "x": 385,
+                "y": 804.5
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "02d90f0d-2375-47a8-9a7b-5c8ee43592c3",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "2d72fda0-0ccd-46b5-9011-a62a9c4f5e8e"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSI Qualitycontrol",
+                    "name": "calibrant_file"
+                },
+                {
+                    "description": "runtime parameter for tool MSI Qualitycontrol",
+                    "name": "infile"
+                }
+            ],
+            "label": null,
+            "name": "MSI Qualitycontrol",
+            "outputs": [
+                {
+                    "name": "QC_report",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 312.6999969482422,
+                "height": 205.1999969482422,
+                "left": 669,
+                "right": 869,
+                "top": 107.5,
+                "width": 200,
+                "x": 669,
+                "y": 107.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1",
+            "tool_shed_repository": {
+                "changeset_revision": "ecaebe7c7b54",
+                "name": "cardinal_quality_report",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"calibrant_file\": {\"__class__\": \"RuntimeValue\"}, \"calibrant_header\": \"false\", \"calibrantratio\": [], \"centroids\": \"true\", \"do_pca\": \"true\", \"filename\": \"\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"mz_column\": \"\", \"name_column\": \"\", \"plusminus_ppm\": \"200.0\", \"processed_cond\": {\"processed_file\": \"processed\", \"__current_case__\": 1, \"accuracy\": \"0.2\", \"units\": \"mz\"}, \"tabular_annotation\": {\"load_annotation\": \"no_annotation\", \"__current_case__\": 1}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.1",
+            "type": "tool",
+            "uuid": "2ee50695-f822-4b88-b753-04722aa2ffca",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "QC_report",
+                    "uuid": "adaa90d0-760d-4605-9076-d76e35d3e03f"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSI plot spectra",
+                    "name": "infile"
+                }
+            ],
+            "label": null,
+            "name": "MSI plot spectra",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 456.5,
+                "height": 134,
+                "left": 669,
+                "right": 869,
+                "top": 322.5,
+                "width": 200,
+                "x": 669,
+                "y": 322.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "d2596e1be091",
+                "name": "cardinal_spectra_plots",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"centroids\": \"true\", \"filename\": \"\", \"fullmz\": \"true\", \"grid_variable\": \"false\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"mz_range\": {\"mz_range_options\": \"manual_mz\", \"__current_case__\": 2, \"zoomed_sample\": [{\"__index__\": 0, \"xlimmin\": \"10.0\", \"xlimmax\": \"200.0\"}, {\"__index__\": 1, \"xlimmin\": \"200.0\", \"xlimmax\": \"500.0\"}, {\"__index__\": 2, \"xlimmin\": \"500.0\", \"xlimmax\": \"1000.0\"}, {\"__index__\": 3, \"xlimmin\": \"1000.0\", \"xlimmax\": \"1500.0\"}, {\"__index__\": 4, \"xlimmin\": \"1500.0\", \"xlimmax\": \"2000.0\"}]}, \"pixel_conditional\": {\"pixel_type\": \"all_pixel\", \"__current_case__\": 1}, \"processed_cond\": {\"processed_file\": \"processed\", \"__current_case__\": 1, \"accuracy\": \"0.2\", \"units\": \"mz\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.0",
+            "type": "tool",
+            "uuid": "afd04232-7e33-418c-8409-524d2331fc65",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plots",
+                    "uuid": "9468b2d2-782c-41d9-a2f4-2ec7c838c47f"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSI filtering",
+                    "name": "infile"
+                }
+            ],
+            "label": null,
+            "name": "MSI filtering",
+            "outputs": [
+                {
+                    "name": "outfile_imzml",
+                    "type": "imzml"
+                },
+                {
+                    "name": "QC_overview",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 824.8999938964844,
+                "height": 164.39999389648438,
+                "left": 672,
+                "right": 872,
+                "top": 660.5,
+                "width": 200,
+                "x": 672,
+                "y": 660.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "2aefa66e48e5",
+                "name": "cardinal_filtering",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"centroids\": \"true\", \"features_cond\": {\"features_filtering\": \"features_range\", \"__current_case__\": 2, \"min_mz\": \"15.0\", \"max_mz\": \"1000.0\"}, \"infile\": {\"__class__\": \"RuntimeValue\"}, \"pixels_cond\": {\"pixel_filtering\": \"none\", \"__current_case__\": 0}, \"processed_cond\": {\"processed_file\": \"processed\", \"__current_case__\": 1, \"accuracy\": \"0.2\", \"units\": \"mz\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.0",
+            "type": "tool",
+            "uuid": "69f61159-f6e3-4dc9-a8f7-b5f1a1334fc6",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "QC_overview",
+                    "uuid": "7fc1700f-e7b5-45eb-b9d8-dd1bf6594385"
+                },
+                {
+                    "label": null,
+                    "output_name": "outfile_imzml",
+                    "uuid": "45f6e115-e334-4ea7-9c8a-7bc36735affa"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "infile": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "pixel_conditional|pixel_file": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSI plot spectra",
+                    "name": "infile"
+                },
+                {
+                    "description": "runtime parameter for tool MSI plot spectra",
+                    "name": "pixel_conditional"
+                }
+            ],
+            "label": null,
+            "name": "MSI plot spectra",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 649.3000030517578,
+                "height": 184.8000030517578,
+                "left": 669,
+                "right": 869,
+                "top": 464.5,
+                "width": 200,
+                "x": 669,
+                "y": 464.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "d2596e1be091",
+                "name": "cardinal_spectra_plots",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"centroids\": \"true\", \"filename\": \"\", \"fullmz\": \"true\", \"grid_variable\": \"false\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"mz_range\": {\"mz_range_options\": \"manual_mz\", \"__current_case__\": 2, \"zoomed_sample\": [{\"__index__\": 0, \"xlimmin\": \"10.0\", \"xlimmax\": \"200.0\"}, {\"__index__\": 1, \"xlimmin\": \"200.0\", \"xlimmax\": \"500.0\"}, {\"__index__\": 2, \"xlimmin\": \"500.0\", \"xlimmax\": \"1000.0\"}, {\"__index__\": 3, \"xlimmin\": \"1000.0\", \"xlimmax\": \"1500.0\"}, {\"__index__\": 4, \"xlimmin\": \"1500.0\", \"xlimmax\": \"2000.0\"}]}, \"pixel_conditional\": {\"pixel_type\": \"tabular_pixel\", \"__current_case__\": 0, \"pixel_file\": {\"__class__\": \"RuntimeValue\"}, \"column_pixel_x\": \"1\", \"column_pixel_y\": \"2\", \"column_pixel_annotation\": \"3\", \"tabular_pixel_header\": \"true\"}, \"processed_cond\": {\"processed_file\": \"processed\", \"__current_case__\": 1, \"accuracy\": \"0.2\", \"units\": \"mz\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.0",
+            "type": "tool",
+            "uuid": "27e49459-5afa-49d9-a357-811fbe90650c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plots",
+                    "uuid": "69cb29ad-3b9e-4c7c-b1f7-01c78525e6a6"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile_imzml"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "MSI data exporter",
+            "outputs": [
+                {
+                    "name": "intensity_matrix",
+                    "type": "tabular"
+                },
+                {
+                    "name": "feature_output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 540.1000061035156,
+                "height": 225.60000610351562,
+                "left": 940,
+                "right": 1140,
+                "top": 314.5,
+                "width": 200,
+                "x": 940,
+                "y": 314.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "137bfc63e758",
+                "name": "cardinal_data_exporter",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"imzml\", \"centroids\": \"true\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"counting_calibrants\": {\"pixel_with_calibrants\": \"no_calibrants\", \"__current_case__\": 0}, \"infile\": {\"__class__\": \"ConnectedValue\"}, \"output_options\": [\"int_matrix\", \"mz_tabular\"], \"processed_cond\": {\"processed_file\": \"no_processed\", \"__current_case__\": 0}, \"tabular_annotation\": {\"load_annotation\": \"no_annotation\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.0",
+            "type": "tool",
+            "uuid": "f1647eea-23ca-4713-ae2e-7f68e6388aa7",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "intensity_matrix",
+                    "uuid": "eadf7793-dbdc-4691-b9ed-b359229b35c7"
+                },
+                {
+                    "label": null,
+                    "output_name": "feature_output",
+                    "uuid": "ea4d3b0c-8b42-45c2-adaa-65fc0ce368f9"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "calibrant_file": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile_imzml"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSI mz images",
+                    "name": "calibrant_file"
+                },
+                {
+                    "description": "runtime parameter for tool MSI mz images",
+                    "name": "infile"
+                }
+            ],
+            "label": null,
+            "name": "MSI mz images",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 940.3000030517578,
+                "height": 184.8000030517578,
+                "left": 933,
+                "right": 1133,
+                "top": 755.5,
+                "width": 200,
+                "x": 933,
+                "y": 755.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "a95a82eb4d50",
+                "name": "cardinal_mz_images",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"calibrant_file\": {\"__class__\": \"RuntimeValue\"}, \"calibrant_header\": \"false\", \"centroids\": \"true\", \"colorkey\": \"true\", \"colorscale\": \"viridis\", \"filename\": \"\", \"image_contrast\": \"suppression\", \"image_smoothing\": \"none\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"mz_column\": \"1\", \"name_column\": \"1\", \"normalize_image\": \"false\", \"overlay_cond\": {\"overlay_selection\": \"yes_overlay\", \"__current_case__\": 1, \"colours\": [{\"__index__\": 0, \"feature_color\": \"#c00000\"}, {\"__index__\": 1, \"feature_color\": \"#0070c0\"}, {\"__index__\": 2, \"feature_color\": \"#92d050\"}], \"legend_position\": \"topright\"}, \"plusminus_dalton\": \"0.4\", \"processed_cond\": {\"processed_file\": \"no_processed\", \"__current_case__\": 0}, \"svg_pixelimage\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.1",
+            "type": "tool",
+            "uuid": "34143b6c-d77e-4dc8-8c5e-18cc685fdc74",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plots",
+                    "uuid": "a8a97f8e-6bfa-4376-8c5f-a3305f8af429"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "Filter1",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "input": {
+                    "id": 7,
+                    "output_name": "feature_output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Filter",
+            "outputs": [
+                {
+                    "name": "out_file1",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 570.6999969482422,
+                "height": 93.19999694824219,
+                "left": 1176,
+                "right": 1376,
+                "top": 477.5,
+                "width": 200,
+                "x": 1176,
+                "y": 477.5
+            },
+            "post_job_actions": {},
+            "tool_id": "Filter1",
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"cond\": \"c2>=55 and c2<=65 or c2>=75 and c2<=85\", \"header_lines\": \"1\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "8b864289-7691-4045-b6c2-ad191a86a6f9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "out_file1",
+                    "uuid": "59998a93-7244-4c6b-b2c3-be3cc5f44458"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "calibrant_file": {
+                    "id": 9,
+                    "output_name": "out_file1"
+                },
+                "infile": {
+                    "id": 5,
+                    "output_name": "outfile_imzml"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool MSI mz images",
+                    "name": "calibrant_file"
+                },
+                {
+                    "description": "runtime parameter for tool MSI mz images",
+                    "name": "infile"
+                }
+            ],
+            "label": null,
+            "name": "MSI mz images",
+            "outputs": [
+                {
+                    "name": "plots",
+                    "type": "pdf"
+                }
+            ],
+            "position": {
+                "bottom": 791.3000030517578,
+                "height": 184.8000030517578,
+                "left": 1410,
+                "right": 1610,
+                "top": 606.5,
+                "width": 200,
+                "x": 1410,
+                "y": 606.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "a95a82eb4d50",
+                "name": "cardinal_mz_images",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"calibrant_file\": {\"__class__\": \"RuntimeValue\"}, \"calibrant_header\": \"true\", \"centroids\": \"true\", \"colorkey\": \"true\", \"colorscale\": \"viridis\", \"filename\": \"\", \"image_contrast\": \"suppression\", \"image_smoothing\": \"none\", \"infile\": {\"__class__\": \"RuntimeValue\"}, \"mz_column\": \"2\", \"name_column\": \"1\", \"normalize_image\": \"false\", \"overlay_cond\": {\"overlay_selection\": \"no_overlay\", \"__current_case__\": 0}, \"plusminus_dalton\": \"0.4\", \"processed_cond\": {\"processed_file\": \"no_processed\", \"__current_case__\": 0}, \"svg_pixelimage\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.6.0.1",
+            "type": "tool",
+            "uuid": "24081ed2-7205-45c8-a3ea-9de110785398",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "plots",
+                    "uuid": "095a38a2-99e1-42f1-a3d0-57c54f242c2e"
+                }
+            ]
+        }
+    },
+    "tags": [
+        "metabolomics"
+    ],
+    "uuid": "77378fbf-0b41-492c-8228-8045199732ad",
+    "version": 3
+}
