@@ -447,33 +447,11 @@
         
     
         
-        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
-            Galaxy Africa
-        </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
     
         
         <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
             Galaxy@GenOuest
         </a>
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
         
     
         
@@ -525,12 +503,6 @@
         
     
         
-        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
-            UseGalaxy.eu
-        </a>
-        
-    
-        
     
         
     
@@ -553,7 +525,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 28, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 22, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -686,7 +658,7 @@ https://zenodo.org/record/3774452/files/Sample2.raw
   <h3 id="hands_on-hands-on-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MaxQuant analysis</h3>
 
   <ol>
-    <li><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/maxquant/maxquant/1.6.10.43+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters
       <ul>
         <li>In <em>“Input Options”</em>:
           <ul>
@@ -796,7 +768,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
 
     <ol>
       <li>271 protein (groups) were found in total.</li>
-      <li>Depending on the tool version 2387 or 2388 peptides were found in total.</li>
+      <li>2387 peptides were found in total.</li>
       <li>Sample1: 237, Sample2: 123 (<strong>filter data on any column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <code class="language-plaintext highlighter-rouge">protein groups</code> file <em>“with following condition”</em> <code class="language-plaintext highlighter-rouge">c32!=0</code> or <code class="language-plaintext highlighter-rouge">c33!=0</code> and *“Number of header lines” <code class="language-plaintext highlighter-rouge">1</code>)</li>
     </ol>
 
@@ -812,9 +784,9 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
   <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
+    <li>In which sample were more contaminantes quantified?</li>
     <li>How good was the tryptic digestion (percentage of zero missed cleavages)?</li>
     <li>Which sample yielded more protein identifications?</li>
-    <li>In which sample were more contaminantes quantified?</li>
     <li>Do you already have a guess on which sample was depleted?</li>
   </ol>
 
@@ -822,9 +794,9 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
+      <li>Sample 2 has more contaminants, especially serum albumin is high abundant. <img src="../../images/maxquant_lfq_contaminants.png" alt="PTXQC_contaminants" /></li>
       <li>The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. <img src="../../images/maxquant_lfq_missedcleavages.png" alt="PTXQC_missed" /></li>
       <li>Sample 1 yielded more protein identifications <img src="../../images/maxquant_lfq_proteinid.png" alt="PTXQC_ids" /></li>
-      <li>Sample 2 has more contaminants, especially serum albumin is high abundant. <img src="../../images/maxquant_lfq_contaminants.png" alt="PTXQC_contaminants" /></li>
       <li>Sample1, more information can be found in the next section.</li>
     </ol>
 
@@ -833,19 +805,32 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
 
 <h1 id="serum-composition">Serum composition</h1>
 
-<p>To explore the proteomic composition of the two serum samples some postprocessing steps are necessary. The protein groups file has many different columns, therefore the first step is to extract only columns that are of interest for this task. These are the column with the fasta header (this includes the protein name as it was written in the fasta file) and the two columns with LFQ intensities for both files. To find the most abundant proteins the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
+<p>To explore the proteomic composition of the two serum samples some postprocessing steps on the Protein Groups file are necessary. The Protein Groups file contains all relevant information on the protein level. The best way to explore this vast table is by clicking on the  scratch book <i class="fas fa-th" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-scratchbook</span> on the top menu. Clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> eye icon opens the Protein Groups file. <span class="notranslate">Galaxy</span> does not work with the names of the columns but instead with their number. Find the column numbers for: Fasta headers (includes protein ID + name + species), LFQ intensities for each sample and reverse proteins. First we remove “decoy” proteins, which are named “reverse” in MaxQuant. Next, we remove contaminants. For non-human samples, we could just remove all proteins, that are marked with a “+” in the “potential contaminant” column. We have seen before that many human proteins were marked as contaminant and as we study a human sample we don’t want to remove them. Therefore, we only remove non-human contaminant proteins. Then, we shrink the file to keep only columns that are interesting in the next steps: the fasta header and the columns with LFQ intensities for both files. To find the most abundant proteins per sample, the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-exploring-serum-composition"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Exploring serum composition</h3>
 
   <ol>
-    <li><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
       <ul>
-        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c32,c33</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">proteinGroups</code> (output of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">proteinGroups</code> (output of <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c31!="+"</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">filter_file</code> (output of <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(HUMAN)|(Majority)</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c8,c32,c33</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">select_file</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -858,7 +843,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
         </li>
       </ul>
     </li>
-    <li><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -895,6 +880,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
   <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
+    <li>How many decoy proteins were removed?</li>
     <li>What are the top 5 most abundant proteins in both files? Do they reflect typical serum proteins?</li>
     <li>Which sample was depleted for the top serum proteins?</li>
     <li>How much did the serum albumin abundance percentage decrease? Was the depletion overall succesful?</li>
@@ -904,6 +890,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
+      <li>2 (272 lines (Protein Groups) minus 272 lines (Filter))</li>
       <li>Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins (<a href="https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms">plasma proteins found by MS</a>).</li>
       <li>Sample1 was depleted, sample2 was pure serum.</li>
       <li>In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.</li>
@@ -915,13 +902,13 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
 
 <h1 id="quantitative-assessment">Quantitative Assessment</h1>
 
-<p>After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.</p>
+<p>After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots, this requires cutting only the relevant columns before visualization. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-quantitative-assessment"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quantitative Assessment</h3>
 
   <ol>
-    <li><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> version 1.2.0 with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0"><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">log(c2,2)</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: <code class="language-plaintext highlighter-rouge">cut_file</code> (output of <strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -932,7 +919,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
         </li>
       </ul>
     </li>
-    <li><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> version 1.2.0 with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0"><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">log(c3,2)</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
@@ -943,10 +930,10 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
         </li>
       </ul>
     </li>
-    <li><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="Cut1" title="Tested with Cut1"><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cut1</span></span>  with the following parameters:
       <ul>
         <li><em>“Cut columns”</em>: <code class="language-plaintext highlighter-rouge">c4,c5</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the last <strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“From”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the last <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
     </li>
     <li>Click <i class="fas fa-chart-bar" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-barchart</span> “Visualize this data” on the <strong>cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> result.
@@ -962,18 +949,18 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
         <li>Confirm and save <i class="far fa-save" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-save</span> (file is saved under “User” –&gt; “Visualizations”)</li>
       </ul>
     </li>
-    <li><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> version 1.2.0 with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0"><strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0</span></span>  with the following parameters:
       <ul>
         <li><em>“Add <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">c4-c5</code></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“as a new column to”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the last <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Skip a header line”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><em>“The new column name”</em>: <code class="language-plaintext highlighter-rouge">log2 Fold Change</code></li>
+            <li><em>“The new column name”</em>: <code class="language-plaintext highlighter-rouge">log2 Fold Change (sample1/sample2)</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li><strong>Histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4"><strong>Histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">compute_file</code> (output of the previous <strong>Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
         <li><em>“Numerical column for x axis”</em>: <code class="language-plaintext highlighter-rouge">c6</code></li>
@@ -1014,7 +1001,7 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     <li>The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.</li>
     <li>A necessary first step is to log2-transform the LFQ intensities.</li>
     <li>Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.</li>
-    <li>Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as <a href="https://www.doi.org/10.1093/nar/gkv007">LIMMA</a>, <a href="https://www.doi.org/10.1073/pnas.091062498">SAM</a> and <a href="https://doi.org/10.1093/bioinformatics/btu305">MSstats</a>. Do not apply statistical methods designed for count data (e.g. <span class="notranslate">RNA</span>-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
+    <li>Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as <a href="https://www.doi.org/10.1093/nar/gkv007">LIMMA</a>, <a href="https://www.doi.org/10.1073/pnas.091062498">SAM</a> and <a href="https://doi.org/10.1093/bioinformatics/btu305">MSstats</a> <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0"><strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/msstats/msstats/3.20.1.0</span></span> . Do not apply statistical methods designed for count data (e.g. <span class="notranslate">RNA</span>-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.</li>
   </ol>
 
 </blockquote>
@@ -1132,8 +1119,8 @@ https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
     author = "Melanie Föll and Matthias Fahrner",
     title = "Label-free data analysis using MaxQuant (Galaxy Training Materials)",
     year = "2020",
-    month = "07",
-    day = "28"
+    month = "10",
+    day = "22"
     url = "\url{/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

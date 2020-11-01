@@ -450,10 +450,6 @@
         
     
         
-        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
-            Galaxy Africa
-        </a>
-        
     
         
     
@@ -499,30 +495,6 @@
     
         
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
-            UseGalaxy.eu
-        </a>
         
     
         
@@ -544,7 +516,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 13, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 31, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -604,8 +576,8 @@
         </ol>
       </blockquote>
     </li>
-    <li>Open <strong>Protein Database Downloader</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></li>
-    <li>Select in the drop-down menues <code class="language-plaintext highlighter-rouge">Taxonomy</code>: “Homo sapiens (Human)” and <code class="language-plaintext highlighter-rouge">reviewed</code>: “UniprotKB/Swiss-Prot (reviewed only)”.</li>
+    <li>Open <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1"><strong>Protein Database Downloader</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/dbbuilder/dbbuilder/0.3.1</span></span></li>
+    <li>Select in the drop-down menues  <em>“Taxonomy”</em>: <code class="language-plaintext highlighter-rouge">Homo sapiens (Human)</code> and <code class="language-plaintext highlighter-rouge">reviewed</code>: “UniprotKB/Swiss-Prot (reviewed only)”.</li>
     <li>Click on <code class="language-plaintext highlighter-rouge">Execute</code>. There will be a new dataset named <code class="language-plaintext highlighter-rouge">Protein database</code> in your history, now.</li>
     <li>Rename the <code class="language-plaintext highlighter-rouge">Protein database</code> to <code class="language-plaintext highlighter-rouge">Main database</code>.</li>
   </ol>
@@ -643,18 +615,23 @@
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-contaminant-databases"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Contaminant databases</h3>
   <ol>
-    <li>Open <strong>Protein Database Downloader</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</li>
-    <li>Select <code class="language-plaintext highlighter-rouge">Download from</code>: “cRAP (contaminants)” and execute.</li>
-    <li>Rename the new database to “crap database”.</li>
+    <li>Open <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1"><strong>Protein Database Downloader</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/dbbuilder/dbbuilder/0.3.1</span></span></li>
+    <li>Select <em>“Download from”</em>: <code class="language-plaintext highlighter-rouge">cRAP (contaminants)</code> and execute.</li>
+    <li>Rename the new database to <code class="language-plaintext highlighter-rouge">crap database</code>.</li>
   </ol>
 
   <p>To be able to distinguish contaminants from proteins of interest, you should add a tag to each contaminant protein.</p>
 
   <ol>
-    <li>Run <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on your crap database.</li>
-    <li>Run <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the new output. In the field <code class="language-plaintext highlighter-rouge">Add this value</code> enter “CONTAMINANT” and execute.</li>
-    <li>Run <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. Use column 1 and column 3 as Title columns and column 2 as sequence column.</li>
-    <li>Rename the <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output to “Tagged cRAP database”.</li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1"><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</span></span>  on your crap database.</li>
+    <li>Run <span class="tool" data-tool="addValue" title="Tested with addValue"><strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: addValue</span></span>  on the new output. In the field <code class="language-plaintext highlighter-rouge">Add this value</code> enter “CONTAMINANT” and execute.</li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1"><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</span></span>  .
+      <ul>
+        <li><em>“Title column”</em>: <code class="language-plaintext highlighter-rouge">Column 1</code> and <code class="language-plaintext highlighter-rouge">Column 3</code></li>
+        <li><em>“Sequence column”</em>: <code class="language-plaintext highlighter-rouge">Column 2</code></li>
+      </ul>
+    </li>
+    <li>Rename the new fasta file to <code class="language-plaintext highlighter-rouge">Tagged cRAP database</code>.</li>
   </ol>
 
   <blockquote class="question">
@@ -679,10 +656,10 @@
   <p>90 - 95 % of mycoplasma infection in cell culture originates from the following species: <em>M. orale, M. hyorhinis, M. arginini, M. fermentans, M. hominis</em> and <em>A. laidlawii</em> (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3463982/">Drexler and Uphoff, Cytotechnology, 2002</a>).</p>
 
   <ol>
-    <li>Use <strong>Protein Database Downloader</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to download the six mycoplasma databases. We will merge them to the main database in the next part of the tutorial.</li>
-    <li>Run <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to combine all mycoplasma databases into a single one.</li>
-    <li>Tag each entry in the combined database with the string “MYCOPLASMA_CONTAMINANT” by using <strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, <strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, as explained <a href="#contaminant-databases">above</a>.</li>
-    <li>Rename the <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output to “Tagged Mycoplasma database”.</li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/dbbuilder/dbbuilder/0.3.1"><strong>Protein Database Downloader</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/dbbuilder/dbbuilder/0.3.1</span></span>  five times to download all reviewed mycoplasma databases. We will merge them to the main database in the next part of the tutorial.</li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0"><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0</span></span>  to combine all mycoplasma databases into a single one.</li>
+    <li>Tag each entry in the combined database with the string “MYCOPLASMA_CONTAMINANT” by using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1"><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fasta_to_tabular/fasta2tab/1.1.1</span></span> , <span class="tool" data-tool="addValue" title="Tested with addValue"><strong>Add column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: addValue</span></span>  and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1"><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.1</span></span> , as explained <a href="#contaminant-databases">above</a>.</li>
+    <li>Rename the <strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> output to <code class="language-plaintext highlighter-rouge">Tagged Mycoplasma database</code>.</li>
   </ol>
 
   <blockquote class="comment">
@@ -699,9 +676,28 @@
   <h3 id="hands_on-hands-on-merging-databases"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merging databases</h3>
 
   <ol>
-    <li>Run <strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the main database and the tagged cRAP database.
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0"><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/fasta_merge_files_and_filter_unique_sequences/fasta_merge_files_and_filter_unique_sequences/1.2.0</span></span>  on the main database and the tagged cRAP database.
       <ul>
-        <li>Set <code class="language-plaintext highlighter-rouge">How are sequences judged to be unique?</code> to ‘Accession Only’.</li>
+        <li>In <em>“Input FASTA File(s)”</em>:</li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Input FASTA File(s)”</em>
+          <ul>
+            <li>In <em>“Input FASTA File(s)”</em>
+              <ul>
+                <li><em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">tagged cRAP database</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert Input FASTA File(s)”</em>
+          <ul>
+            <li>In <em>“Input FASTA File(s)”</em>
+              <ul>
+                <li><em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">main database</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Set <em>“How are sequences judged to be unique?”</em> to <code class="language-plaintext highlighter-rouge">Accession Only</code>.</li>
       </ul>
     </li>
     <li>
@@ -719,7 +715,8 @@
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-creating-a-decoy-database"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a Decoy Database</h3>
   <ol>
-    <li>Run <strong>DecoyDatabase</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the merged database.</li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_decoydatabase/DecoyDatabase/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_decoydatabase/DecoyDatabase/2.6+galaxy0"><strong>DecoyDatabase</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_decoydatabase/DecoyDatabase/2.6+<span class="notranslate">galaxy</span>0</span></span>  on the merged database.</li>
+    <li>Rename the final database to <code class="language-plaintext highlighter-rouge">human reviewed cRAP decoy database</code>, or <code class="language-plaintext highlighter-rouge">human reviewed cRAP mycoplasma decoy database</code></li>
   </ol>
 
   <blockquote class="comment">
@@ -826,8 +823,8 @@
     author = "Florian Christoph Sigloch and Björn Grüning",
     title = "Protein FASTA Database Handling (Galaxy Training Materials)",
     year = "2020",
-    month = "07",
-    day = "13"
+    month = "10",
+    day = "31"
     url = "\url{/training-material/topics/proteomics/tutorials/database-handling/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

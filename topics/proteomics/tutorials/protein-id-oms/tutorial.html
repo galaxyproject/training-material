@@ -311,7 +311,7 @@
       "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
     }
   ],
-  "skillLevel": "Intermediate"
+  "skillLevel": "Advanced"
 }
     </script>
 
@@ -436,8 +436,8 @@
 
             
             <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
-             Intermediate 
-<span class="level intermediate" title="Intermediate Tutorial">
+             Advanced 
+<span class="level advanced" title="Advanced Tutorial">
   <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
 </span>
 
@@ -532,10 +532,6 @@
         
     
         
-        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
-            Galaxy Africa
-        </a>
-        
     
         
     
@@ -581,30 +577,6 @@
     
         
     
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-    
-        
-        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
-            UseGalaxy.eu
-        </a>
         
     
         
@@ -630,7 +602,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 13, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 31, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -751,14 +723,14 @@ https://zenodo.org/record/892005/files/qExactive01819_profile.mzml
     <li>
       <p>Rename the dataset to something meaningful</p>
     </li>
-    <li>Run <strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the training <code class="language-plaintext highlighter-rouge">raw</code> file to convert to the <code class="language-plaintext highlighter-rouge">mzML</code> format
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1"><strong>msconvert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/msconvert/msconvert/3.0.19052.1</span></span>  on the training <code class="language-plaintext highlighter-rouge">raw</code> file to convert to the <code class="language-plaintext highlighter-rouge">mzML</code> format
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input unrefined MS data”</em>: imported <code class="language-plaintext highlighter-rouge">raw</code> file</li>
         <li><em>“Do you agree to the vendor licenses”</em>: set to <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“Output Type”</em>: set to <code class="language-plaintext highlighter-rouge">mzML</code></li>
       </ul>
     </li>
-    <li>Run <strong>PeakPickerHiRes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the resulting file
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peakpickerhires/PeakPickerHiRes/2.3.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peakpickerhires/PeakPickerHiRes/2.3.0"><strong>PeakPickerHiRes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_peakpickerhires/PeakPickerHiRes/2.3.0</span></span>  on the resulting file
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> *“input profile data file”: output of <strong>msconvert</strong> or <code class="language-plaintext highlighter-rouge">mzML</code> file</li>
         <li>In <em>“param_algorithm_ms_levels”</em>
@@ -814,37 +786,16 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
   </blockquote>
 
   <ol>
-    <li>Run the tool <strong>XTandemAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with:
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_xtandemadapter/XTandemAdapter/2.6+galaxy0"><strong>XTandemAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_xtandemadapter/XTandemAdapter/2.6+<span class="notranslate">galaxy</span>0</span></span>  with:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file containing MS2 spectra”</em>: MS2-centroided mzML file</li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: FASTA protein database</li>
         <li><em>“Fragment mass error”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
         <li><em>“Fragment monoisotopic mass error units”</em>: <code class="language-plaintext highlighter-rouge">ppm</code></li>
-      </ul>
-      <ul>
-        <li>In <em>“param_fixed_modifications”</em>
-          <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_fixed_modifications”</em></li>
-            <li>In <em>“1: param_fixed_modifications”</em>
-              <ul>
-                <li><em>“Fixed modifications”</em>: <code class="language-plaintext highlighter-rouge">Carbamidomethyl (C)</code></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-        <li>In <em>“param_variable_modifications”</em>
-          <ul>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click on <em>“Insert param_variable_modifications”</em></li>
-            <li>In <em>“1: param_variable_modifications”</em>
-              <ul>
-                <li><em>“Variable modifications”</em>: <code class="language-plaintext highlighter-rouge">Oxidation (M)</code></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
+        <li><em>“Optional Outputs”</em> select <code class="language-plaintext highlighter-rouge">out (Output file containing search results)</code></li>
       </ul>
     </li>
-    <li>Run the tool <strong>FileInfo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0"><strong>FileInfo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_fileinfo/FileInfo/2.6+<span class="notranslate">galaxy</span>0</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>XTandem</strong> output</li>
       </ul>
@@ -872,43 +823,43 @@ To find out the peptide sequences, the MS2 spectrum is compared to a theoretical
 The calculation is based on a simple assumption: for every decoy peptide identified with a given score, we expect one false positive with at least the same score.
 The false discovery rate is therefore defined as the number of false discoveries (decoy hits) divided by the number of false and correct discoveries (both target and decoy hits) at a given score threshold.</p>
 
-<p>We will calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm used by OpenMS. To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. We will then filter PSMs for 1 % FDR and set the score back to PEP.</p>
+<p>To calculate FDRs, we first have to annotate the identified peptides to determine which of them are decoys. This is done with the tool <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. This tool allows the annotation of protein names and calculates the protein coverage based on the identified peptides. Then we calculate peptide posterior error probabilities (PEPs), because they are needed for the protein inference algorithm Fido, which is used by OpenMS. We will then filter PSMs for 1 % FDR with <strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>. and set the score back to PEP with <strong>IDScoreSwitcher</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-peptide-fdr-filtering"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Peptide FDR filtering</h3>
 
   <ol>
-    <li>Run <strong>IDPosteriorErrorProbability</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_peptideindexer/PeptideIndexer/2.6+galaxy0"><strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_peptideindexer/PeptideIndexer/2.6+<span class="notranslate">galaxy</span>0</span></span>  with
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>XTandemAdapter</strong> output</li>
-        <li><em>“If set scores will be calculated as ‘1 - ErrorProbabilities’ and can be interpreted as probabilities for correct identifications”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-    </li>
-    <li>Run <strong>PeptideIndexer</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input idXML file containing the identifications”</em>: output of <strong>IDPosteriorErrorProbability</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input idXML file containing the identifications”</em>: output of <strong>XTandemAdapter</strong></li>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input sequence database in FASTA format”</em>: FASTA protein database</li>
         <li><em>“If set, the protein sequences are stored as well”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
         <li><em>“If set, the protein description is stored as well”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Specificity of the enzyme”</em>: <code class="language-plaintext highlighter-rouge">none</code></li>
+        <li>In the <em>“enzyme”</em> section set <em>“Specificity of the enzyme”</em>: <code class="language-plaintext highlighter-rouge">none</code></li>
       </ul>
     </li>
-    <li>Run <strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+galaxy"><strong>IDPosteriorErrorProbability</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_idposteriorerrorprobability/IDPosteriorErrorProbability/2.6+<span class="notranslate">galaxy</span></span></span>  with
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>PeptideIndexer</strong></li>
-        <li><em>“Perform FDR calculation on protein level”</em>: <code class="language-plaintext highlighter-rouge">false</code></li>
-        <li><em>“Filter PSMs based on q-value”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
-        <li><em>“If ‘true’ decoy peptides will be written to output file, too”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>PeptideIndexer</strong> output</li>
+        <li><em>“If set scores will be calculated as ‘1 - ErrorProbabilities’ and can be interpreted as probabilities for correct identifications”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <strong>IDScoreSwitcher</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0"><strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+<span class="notranslate">galaxy</span>0</span></span>  with
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>IDPosteriorErrorProbability</strong></li>
+        <li><em>“Perform FDR calculation on protein level”</em>: <code class="language-plaintext highlighter-rouge">false</code></li>
+        <li>In the <em>“FDR control”</em> section select <em>“Filter PSMs based on q-value”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
+        <li>In the “Parameter section for the FDR calculation algorithm”* section select <em>“If ‘true’ decoy peptides will be written to output file, too”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_idscoreswitcher/IDScoreSwitcher/2.6+galaxy0"><strong>IDScoreSwitcher</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_idscoreswitcher/IDScoreSwitcher/2.6+<span class="notranslate">galaxy</span>0</span></span>  with
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
         <li><em>“Name of the meta value to use as the new score”</em>: <code class="language-plaintext highlighter-rouge">Posterior Probability_score</code></li>
         <li><em>“Orientation of the new score”</em>: <code class="language-plaintext highlighter-rouge">higher_better</code></li>
       </ul>
     </li>
-    <li>Run <strong>FileInfo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified peptides
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0"><strong>FileInfo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_fileinfo/FileInfo/2.6+<span class="notranslate">galaxy</span>0</span></span>  to get basic information about the identified peptides
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: <strong>IDScoreSwitcher</strong> output</li>
       </ul>
@@ -927,41 +878,37 @@ The false discovery rate is therefore defined as the number of false discoveries
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>You should have identified 3366 non-redundant peptide hits.</li>
-      <li>798 peptides contain an oxidized methionine.</li>
+      <li>You should have identified 3378 non-redundant peptide hits.</li>
+      <li>804 peptides contain an oxidized methionine.
+Numbers may slightly vary depending on the versions of the tools and the used FASTA file.</li>
     </ol>
   </blockquote>
 </blockquote>
 
 <h1 id="protein-inference">Protein Inference</h1>
 <p>In bottom-up proteomics, it is necessary to combine the identified peptides to proteins. This is not a trivial task, as proteins are redundant to some degree. Thus, not every peptide can be assigned to only one protein.
-The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Fido</a> algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches.</p>
+The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20712337">Fido</a> algorithm for protein inference. Fido uses a Bayesian probabilistic model to group and score proteins based on peptide-spectrum matches. Afterwards, we keep only proteins with 1% FDR.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-protein-inference"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Protein inference</h3>
 
   <ol>
-    <li>Run <strong>FidoAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fidoadapter/FidoAdapter/2.6+galaxy0"><strong>FidoAdapter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_fidoadapter/FidoAdapter/2.6+<span class="notranslate">galaxy</span>0</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input: identification results”</em>: output of <strong>IDScoreSwitcher</strong></li>
         <li><em>“Post-process Fido output with greedy resolution of shared peptides based on the protein probabilities”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Run <strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+galaxy0"><strong>FalseDiscoveryRate</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_falsediscoveryrate/FalseDiscoveryRate/2.6+<span class="notranslate">galaxy</span>0</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Identifications from searching a target-decoy database”</em>: output of <strong>FidoAdapter</strong></li>
         <li><em>“Perform FDR calculation on PSM level”</em>: <code class="language-plaintext highlighter-rouge">false</code></li>
+        <li>In the <em>“FDR control”</em> section select <em>“Filter proteins based on q-value”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
       </ul>
     </li>
-    <li>Run <strong>IDFilter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_fileinfo/FileInfo/2.6+galaxy0"><strong>FileInfo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_fileinfo/FileInfo/2.6+<span class="notranslate">galaxy</span>0</span></span>  to get basic information about the identified proteins
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: output of <strong>FalseDiscoveryRate</strong></li>
-        <li><em>“The score which should be reached by a protein hit to be kept”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
-      </ul>
-    </li>
-    <li>Run <strong>FileInfo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to get basic information about the identified proteins
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“input file”</em>: output of <strong>IDFilter</strong></li>
       </ul>
     </li>
   </ol>
@@ -978,7 +925,8 @@ The OpenMS suite implemented the <a href="https://www.ncbi.nlm.nih.gov/pubmed/20
 
   <blockquote class="solution">
     <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>You should have identified 1255 proteins.</p>
+    <p>You should have identified 1252 proteins.
+Numbers may slightly vary depending on the versions of the tools and the used FASTA file.</p>
   </blockquote>
 </blockquote>
 
@@ -993,19 +941,19 @@ It also enables you to check for contaminations in your samples.</p>
   <h3 id="hands_on-hands-on-analysis-of-contaminants"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-On: Analysis of Contaminants</h3>
 
   <ol>
-    <li>Run <strong>TextExporter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to convert the idXML output to a human-readable tabular file.
+    <li>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_textexporter/TextExporter/2.6+galaxy0"><strong>TextExporter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_textexporter/TextExporter/2.6+<span class="notranslate">galaxy</span>0</span></span>  to convert the idXML output to a human-readable tabular file.
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <strong>IDFilter</strong> output</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <strong>FalseDiscoveryRate</strong> output</li>
       </ul>
     </li>
-    <li>Run <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+    <li>Run <span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">CONTAMINANT</code></li>
       </ul>
     </li>
-    <li>Run <strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to remove all non human proteins (e.g. bovine)
+    <li>Run <span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select lines that match an <span class="notranslate">expression</span></strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  to remove all non human proteins (e.g. bovine)
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <strong>TextExporter</strong></li>
         <li><em>“that”</em>: <code class="language-plaintext highlighter-rouge">Matching</code></li>
@@ -1254,8 +1202,8 @@ By comparing results of multiple search engines, you may improve the <em>sensiti
     author = "Florian Christoph Sigloch and Björn Grüning",
     title = "Peptide and Protein ID using OpenMS tools (Galaxy Training Materials)",
     year = "2020",
-    month = "07",
-    day = "13"
+    month = "10",
+    day = "31"
     url = "\url{/training-material/topics/proteomics/tutorials/protein-id-oms/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
