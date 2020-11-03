@@ -47,7 +47,7 @@ To learn about the quality control analysis (FASTQC), read the [FastQC Manual](h
 >
 >![](../../images/assembling-genome-sequences-screenshots/4_search_fastqc.png)
 > 
-> 2. Run the [FastQC tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) on both R1 and R2 reads separately. This tool results in two output entries in the history.
+> 2. Run the [FastQC tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) if you are TAMU internal user) on both R1 and R2 reads separately. This tool results in two output entries in the history.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/3_fastqc_tool.png)
 >
@@ -61,7 +61,7 @@ To learn about the quality control analysis (FASTQC), read the [FastQC Manual](h
 >
 > ![](../../images/assembling-genome-sequences-screenshots/6_per_base_quality.png)
 >
-> 6. Using the Galaxy [Trim sequences](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) tool, set the base parameters, and execute for both R1 and R2.
+> 6. Using the Galaxy [Trim sequences](https://cpt.tamu.edu/galaxy-pub/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) tool (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/devteam/fastx_trimmer/cshl_fastx_trimmer/1.0.0) if you are TAMU internal user), set the base parameters, and execute for both R1 and R2.
 >
 > ![](../../images/assembling-genome-sequences-screenshots/9-search_trim_sequences.png)
 >
@@ -79,7 +79,7 @@ Search for SPAdes in the search bar underneath the Tools column on the left side
 
 ![](../../images/assembling-genome-sequences-screenshots/10_search_spades.png)
 
-Selecting the Galaxy [spades tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) and adjust the following parameters:
+Selecting the Galaxy [spades tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/lionelguy/spades/spades/1.0) if you are TAMU internal user) and adjust the following parameters:
 
 1. K-mers
 > * All values must be *odd*, less than 128, listed in *ascending* order, and *smaller* than the read length.
@@ -108,7 +108,7 @@ After the tools have finished running, there will be 5 outputs from each SPAdes 
 
 ![](../../images/assembling-genome-sequences-screenshots/13_spades_datasets.png)
 
-The contigs from each SPAdes iteration can be organized based on size by running the [Sort tool.](https://cpt.tamu.edu/galaxy/root?tool_id=sort1)
+The contigs from each SPAdes iteration can be organized based on size by running the [Sort tool.](https://cpt.tamu.edu/galaxy-pub/root?tool_id=sort1) (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=sort1) if you are TAMU internal user)
 
 ![](../../images/assembling-genome-sequences-screenshots/14_sort_tool.png)
 
@@ -134,7 +134,7 @@ Choosing "Spades scaffold stats" as the **Sort Dataset** option and "Column: 2" 
 > * In the end, the contig can only definitely be assigned to a specific sample (and shown that it is complete) after a confirmation PCR is attempted, and the genome is closed using PCR/Sanger sequencing. [Tutorial on Genome closure and re-opening](https://cpt.tamu.edu/training-material/topics/de-novo-assembly/tutorials/genome-close-reopen/tutorial.html).
 {: . tip}
 
-To extract the contig of interest from the assemled contig pool, run the [**Fasta Extract Sequence** tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) and define the contig (node) of interest; this pulls out the FASTA file associated with the specific node.
+To extract the contig of interest from the assemled contig pool, run the [Fasta Extract Sequence tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) if you are TAMU internal user) and define the contig (node) of interest; this pulls out the FASTA file associated with the specific node.
 
 ![](../../images/assembling-genome-sequences-screenshots/17_fasta_extraction.png)
 
@@ -148,7 +148,7 @@ Now, [BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastn&PAGE_TYPE=B
 
 > * Use BLASTn + megablast, as it will yield the most closely related organisms. For a broader net, choose a different algorithm.
 >    > * Doing the analysis on the home BLAST website will give a quick answer, but this is not a result that can be saved. To save a record for later reference, doing BLAST in Galaxy is recommended.
-> * Doing the BLAST in Galaxy will yield a permanent link that can be stored for reference. Choose the output as BLAST XML (later, the [blast2html tool** tool](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) must be used to convert to html) or html. After the result is ready, right-click on the eye {% icon solution %} icon and choose "open in a new tab." The hyperlink can be copied and subsequently shared with other researchers or pasted into a tracking sheet where confirmation and closure information is compiled.
+> * Doing the BLAST in Galaxy will yield a permanent link that can be stored for reference. Choose the output as BLAST html or XML. Later, the [blast2html tool tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) (use this [link](https://cpt.tamu.edu/galaxy/root?tool_id=toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_extract/fa-extract-sequence/1.0.0) for TAMU internal user) must be used to convert XML to html. After the result is ready, right-click on the eye {% icon solution %} icon and choose "open in a new tab." The hyperlink can be copied and subsequently shared with other researchers or pasted into a tracking sheet where confirmation and closure information is compiled.
 
 Extracted sequences appear in the history as such:
 
@@ -156,13 +156,13 @@ Extracted sequences appear in the history as such:
 
 > 1. First, click on the pencil ![](../../images/assembling-genome-sequences-screenshots/20_pencil_icon.png) icon to bring upon the attributes of that dataset. Rename the dataset by editing the "Name" section of the attributes, and then select "Save." Example name: NODE_X:RawName ("raw" because this is the raw, unclosed contig).
 
-> 2. Next, rename it using the ["Fasta Sequence Renamer" tool.](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.rename) Do NOT put "raw" in this name, because this is the identifier that Galaxy will use to identify the contig, no matter how it is edited. This changes the header in the FASTA file on the first line after the >
+> 2. Next, rename it using the ["Fasta Sequence Renamer" tool.](https://cpt.tamu.edu/galaxy-pub/root?tool_id=edu.tamu.cpt.fasta.rename) (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=edu.tamu.cpt.fasta.rename) if you are TAMU internal user). Do NOT put "raw" in this name, because this is the identifier that Galaxy will use to identify the contig, no matter how it is edited. This changes the header in the FASTA file on the first line after the >
 
 ![](../../images/assembling-genome-sequences-screenshots/21_fasta_sequener_renamer.png)
 
 ![](../../images/assembling-genome-sequences-screenshots/22_fasta_renamer_parameters.png)
 
-Another preliminary analysis you do is to run the [PhageTerm tool](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) to generate a report that suggests the type of genome ends.
+Another preliminary analysis you do is to run the [PhageTerm tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=PhageTerm) (use this [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=PhageTerm) if you are TAMU internal user) to generate a report that suggests the type of genome ends.
 
 > * Choose the input files based on which dataset gave the contig for the phage genome. For the FASTQ **mandatory input** use the better set (usually R1). For the **optional input**, use the other dataset (usually R2).
 > * Name the output file with the phage name.
