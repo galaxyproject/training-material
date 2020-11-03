@@ -48,7 +48,7 @@ The NIH genetic sequence database, GenBank, is an open access collection of anno
 >
 >    > ### {% icon tip %} Tip
 >    >
->    > *In theory,* this file can be directly imported into Galaxy through the [NCBI EFetch tool](https://cpt.tamu.edu/galaxy/root?tool_id=ncbi_eutils_efetch).
+>    > *In theory,* this file can be directly imported into Galaxy through the [NCBI EFetch tool](https://cpt.tamu.edu/galaxy-pub/root?tool_id=ncbi_eutils_efetch) (TAMU user [tool link](https://cpt.tamu.edu/galaxy/root?tool_id=ncbi_eutils_efetch)).
 >    >
 >    {: .tip}
 {: .hands_on}
