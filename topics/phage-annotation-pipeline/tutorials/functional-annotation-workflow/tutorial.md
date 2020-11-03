@@ -17,7 +17,7 @@ This tutorial is used to run analyses for gene function prediction after the gen
 
 # Workflow
 
-To begin the analysis in Galaxy, the genome data must be retrieved from its Apollo record. Start by accessing Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy/)). It is recommended to create and name a new history. Once in the appropriate history, navigate to the [Retrieve Data tool](https://cpt.tamu.edu/galaxy/tool_runner?tool_id=export) using the search bar at the top of the Tool panel on the left. Open the tool by clicking on the hyperlink of the same name underneath CPT: Get Data, and the parameters to adjust will load in the center pane. 
+To begin the analysis in Galaxy, the genome data must be retrieved from its Apollo record. Start by accessing Galaxy ([CPT Public Galaxy](https://cpt.tamu.edu/galaxy-pub), [CPT TAMU Galaxy](https://cpt.tamu.edu/galaxy/)). It is recommended to create and name a new history. Once in the appropriate history, navigate to the [Retrieve Data tool](https://cpt.tamu.edu/galaxy-pub/tool_runner?tool_id=export) (use this [tool link](https://cpt.tamu.edu/galaxy-pub/tool_runner?tool_id=export) if you are CPT internal user) using the search bar at the top of the Tool panel on the left. Open the tool by clicking on the hyperlink of the same name underneath CPT: Get Data, and the parameters to adjust will load in the center pane. 
 
 ![](../../images/functional-annotation-workflow-screenshots/1_retrieve_data_tool.png)
 
