@@ -17,12 +17,27 @@ srcdir="$(dirname "$source")"
 
 # Extract the script from a tutorial
 generate_script(){
+	# The title page
 	./bin/extract-frontmatter.rb "$1" | jq .title -r
+	# If there's a questions page, generate a line reading "Questions"
+	question_count=$(./bin/extract-frontmatter.rb "$1" | jq '.questions | length')
+	if (( question_count > 0 )); then
+		./bin/extract-frontmatter.rb "$1" | jq '.questions[]' -r | paste -s -d' '
+	fi
+
+	# If there's a objectives page, generate a line reading "Objectives"
+	objective_count=$(./bin/extract-frontmatter.rb "$1" | jq '.objectives | length')
+	if (( objective_count > 0 )); then
+		./bin/extract-frontmatter.rb "$1" | jq '.objectives[]' -r | paste -s -d' '
+	fi
+
+	# The contents
 	cat "$1" | \
 		sed -n '/???/p;/???/,/---/{//!p};' | \
 		tr '\n' ' ' | \
 		sed 's/^??? //' | \
 		sed 's/???\s*/\n/g' | \
+		sed 's/\s*$/   /g' | \
 		pandoc -t html | \
 		sed -r 's|</?p>||g;s|<br />$||g' | \
 		sed 's/<[^>]*>/ /g'
@@ -31,7 +46,7 @@ generate_script(){
 cache_speech() {
 	line="$1"; shift;
 
-	linehash="$(echo "$line" | md5sum | cut -c1-32)"
+	linehash="$(echo "$line" | md5sum | cut -c1-32 | sed 's/\s*//g')"
 
 	fn="${GTN_CACHE}/${linehash}-${VOICE_ID}"
 	# Generate audio
@@ -70,7 +85,7 @@ while read -r line; do
 
 	echo "  Speaking/$VOICE_ID: $(echo "$line" | cut -c1-64)..."
 	# Create the speech file
-	hash=$(cache_speech "$line" "${build_dir}")
+	hash=$(cache_speech "$line" "${build_dir}" | sed 's/\s*//g')
 
 	# Get the duration of the clip
 	duration=$(ffprobe -show_streams -print_format json "${build_dir}/${hash}.mp3" 2>/dev/null | jq .streams[0].duration -r)
@@ -107,7 +122,10 @@ echo "  Building Subtitles"
 python3 bin/ari-subs.py "${build_dir}" --format srt > "${build_dir}/tmp.srt"
 python3 bin/ari-subs.py "${build_dir}" --format webvtt > "${build_dir}/out.vtt"
 echo "  Building Audio"
-ffmpeg -loglevel $ffmpeglog -f concat -i "$sounds" "${build_dir}/tmp.m4a"
+# Concat first within the same format, this is very important. If you don't, the time codes get massively screwed up
+ffmpeg -loglevel $ffmpeglog -f concat -i "$sounds" "${build_dir}/tmp.mp3"
+# Then convert to the format we really want, m4a.
+ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp3" "${build_dir}/tmp.m4a"
 echo "  Building Video"
 ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264 "${build_dir}/tmp.mp4"
 # Mux it together
