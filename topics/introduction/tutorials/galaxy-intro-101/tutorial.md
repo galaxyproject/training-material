@@ -108,17 +108,20 @@ First we need to get some data into our history. You can upload files from your 
 >    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs.bed
 >    ````
 >
-> 3. Click **Start**, and the **Close**
+> 3. Click **Start**, and then **Close**
 >
-> 4. When they're ready, rename the datasets to "Exons" and "SNPs", respectively.
+> 4. When they're ready, **rename** {% icon galaxy-pencil %} the datasets to `Exons` and `SNPs`, respectively.
 >
 >    {% include snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
-> ### {% icon tip %} Obtaining the Data from UCSC
+For this tutorial, we made the input datasets available on Zenodo for you. However, these datasets can also obtained directly from UCSC, without leaving Galaxy.
+Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.
+
+> ### {% icon tip %} Optional: Obtaining the Data directly from UCSC
 >
-> This can be a somewhat error prone process for new users, but if you wish to obtain the newest data from UCSC, you can do that by doing the following:
+> This tool works a bit differently than most Galaxy tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:
 >
 > > ### {% icon hands_on %} Hands-on: Obtaining Exons from UCSC
 > >
@@ -196,9 +199,8 @@ First we need to get some data into our history. You can upload files from your 
 > >
 > >    Make sure that *"Create one BED record per"* is set to `Whole Gene` (Whole Gene here really means Whole Feature), and click on **Send query to Galaxy**. A second item will appear in your analysis history.
 > >
-> > 3. Now **rename** your new dataset to `SNPs` so we can easily remember what the file contains.
+> > 3. Now **rename** {% icon galaxy-pencil %} your new dataset to `SNPs` so we can easily remember what the file contains.
 > >
-> >    {% include snippets/rename_dataset.md name="SNPs" %}
 > {: .hands_on}
 >
 {: .tip}
