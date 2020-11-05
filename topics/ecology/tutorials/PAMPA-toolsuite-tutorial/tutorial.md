@@ -1,18 +1,20 @@
 ---
 layout: tutorial_hands_on
 
-title: Compute and analyse Essential Biodiversity Variables with PAMPA toolsuite
+title: Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How to evaluate properly species populations and communities biological state with abundance data?
+- How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are 
+  doing over time and space?
+- How to compute and analyze Essential Biodiversity Variables (EBV) on abundance data?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- Upload data from DATRAS portal of ICES
+- Pre-process population data with Galaxy
+- Learning how to use an Essential Biodiversity Variables (EBV) scientific workflow from 
+  raw data to graphical representations
+- Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question
+- Learning how to interpret a Generalized Linear (Mixed) Model
 time_estimation: 3H
 key_points:
 - The take-home messages
@@ -25,7 +27,6 @@ contributors:
 
 # Introduction
 {:.no_toc}
-
 
 This tutorial aims to present the PAMPA Galaxy workflow and how to use it to compute 
 Essential Biodiversity Variables (EBV) from species abundance data and analyse it through generalized 
@@ -45,7 +46,7 @@ by the ```Species-Population``` analysis.
 > 
 {: .details}
 
-![PAMPA toolsuite workflow](../../images/PAMPA_toolsuite_tutorial/PAMPA_workflow.png "PAMPA toolsuite workflow")
+![PAMPA toolsuite workflow](../../images/PAMPA-toolsuite-tutorial/PAMPA_workflow.png "PAMPA toolsuite workflow")
 
 Each part of this workflow has the same elementary steps :
  - **A first tool** to compute metrics : 
@@ -60,7 +61,8 @@ Each part of this workflow has the same elementary steps :
    - ```Species-Population``` analysis (**Compute GLM on population data** {% icon tool %}) : One GLM(M) is computed 
      on each species separately
  - **A third tool** common for ```Community``` and ```Species-Population``` analyses with ```year``` as a fixed effect to 
-   create time-series plots from your GLM(M) results (**Create a plot from GLM data** {% icon tool %}). Two plots will be created for each GLM(M) : one from the 'Estimate'
+   create time-series plots from your GLM(M) results (**Create a plot from GLM data** {% icon tool %}). Two plots will be 
+   created for each GLM(M) : one from the 'Estimate'
    values of the GLM(M) and one from raw values from metrics file.
 
 > ### {% icon details %} Details about Generalized Linear (Mixed) Models
@@ -497,10 +499,7 @@ As said above, analyses will be separated by the field ```Survey``` (first colum
 
 ### Read and interpret raw GLM outputs
 
-
-
 ***TODO*** Interpret outputs
-
 
 > ### {% icon hands_on %} Hands-on: Create plots from ```Community``` metrics file and GLMM results 
 >
@@ -514,7 +513,7 @@ As said above, analyses will be separated by the field ```Survey``` (first colum
 >
 {: .hands_on}
 
-***TODO*** Interpret outputs
+![Community analysis plots](../../images/PAMPA-toolsuite-tutorial/Community.png "Community analysis plots")
 
 ## Compute GLMMs and create plots on ```Species-Population``` metrics
 
@@ -569,7 +568,9 @@ at a given time and location. This metric is located on the fourth column of the
 
 ### 
 
-***TODO*** Interpret outputs
+![EVHOE population analysis plots](../../images/PAMPA-toolsuite-tutorial/EVHOE.png "EVHOE population analysis plots")
+![BITS population analysis plots](../../images/PAMPA-toolsuite-tutorial/BITS.png "BITS population analysis plots")
+![SWCIBTS population analysis plots](../../images/PAMPA-toolsuite-tutorial/SWCIBTS.png "SWCIBTS population analysis plots")
 
 # Conclusion
 {:.no_toc}
