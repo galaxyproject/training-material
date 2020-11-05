@@ -6,7 +6,7 @@ zenodo_link: ''
 questions:
 - How to evaluate properly species populations and communities biological state with abundance data?
 - How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are 
-  doing over time and space?
+  doing over time?
 - How to compute and analyze Essential Biodiversity Variables (EBV) on abundance data?
 objectives:
 - Upload data from DATRAS portal of ICES
@@ -497,9 +497,53 @@ As said above, analyses will be separated by the field ```Survey``` (first colum
 > 
 {: .details}
 
-### Read and interpret raw GLM outputs
+### Read and interpret raw GLMM outputs
 
-***TODO*** Interpret outputs
+The GLM tool has three outputs: 
+ - The first output, 'GLM - results from your community analysis' data file, contains the summary of each GLMMs
+   on each lines.
+ - The second output, 'Simple statistics on chosen variables' file, contains descriptive statistics (mean, median, ...) 
+   of the interest variable for the whole input data table and for each selected factor levels combinations.
+   Here, each `site` at each `year`.
+ - The third output, 'Your analysis rating file', contains a notation for all analyses performed and notations for 
+   each GLMMs processed. This rate is based on nine criterias commonly used in ecology to estimate wether a Linear 
+   Model has been constructed properly or not. At the end of the file, red flags and advices to improve your model
+   are displayed also depending on the same criterias. This file is really useful to look at the bigger picture
+
+> ### {% icon details %} Details on criterias used in 'Your analysis rating file'
+> 
+> For now, there are nine criterias taken into account to rate GLM(M)s in the Galaxy tools : 
+>  - *Plan completeness* : If part of factor levels combinations are inexistant, bias can be induced. (0.5)
+>  - *Plan balance* : If factor levels combinations aren't present in same quantity, bias can be induced. (0.5)
+>  - *NA proportion* : Lines with one or more NA value are ignored in Linear Models. If many NA values, there are
+>    less observations taken in account in the model than expected. (1)
+>  - *Residuals dispersion* (DHARMa package) : If the dispersion of residuals isn't regular, the distribution selected
+>    for the model isn't right. (1.5)
+>  - *Residuals uniformity* (DHARMa package) : If the residuals aren't uniform, the distribution selected for the model
+>    isn't right. (1)
+>  - *Outliers proportion* (DHARMa package) : If too much outliers, the distribution selected for the model isn't right
+>    or data is biased. (0.5)
+>  - *Zero-inflation* (DHARMa package) : If too much zeros in data, bias can be induced. (1)
+>  - *Observations / factors ratio* : If the number of factors taken into account in the model exceeds 10% of the number
+>    of observations (ex : 10 factors for 90 observations), bias can be induced. (1)
+>  - *Number of levels of the random effect* : If no random effect in the model or if the factor selected as random effect
+>    has less than 10 levels. (1)
+> 
+{: .details}
+
+First, on the 'GLM - results from your community analysis' data file, we see four analyses : `global` on the whole dataset
+and one analysis for each survey `BITS`, `EVHOE` and `SWC-IBTS`. We also see the `Poisson` distribution has been automatically
+selected by the tool. It seems right as the interest variable ```Species richness``` is a count.
+
+Then, we see five fields that gives informations on the whole model :
+ - *"AIC"* Akaike information criterion, permits to evaluate the quality of a model in comparison to another model performed
+   on the same data, so it can't be used to compare the four models performed here. It is based on the number of factors 
+   selected. 
+ - *"BIC"* Bayesian information criterion, is a derivate of AIC. It is based on the number of factors selected and on the 
+   sample size.
+ - *"logLik"* 
+
+As `site` have been set as a random effect, we can't make any conclusion regarding its effects on species richness
 
 > ### {% icon hands_on %} Hands-on: Create plots from ```Community``` metrics file and GLMM results 
 >
@@ -546,8 +590,6 @@ at a given time and location. This metric is located on the fourth column of the
 >    `#Concatenate #BITS #unitobs` `#Concatenate #SWCIBTS #unitobs` 'GLM - results from your community analysis' data file
 >
 {: .hands_on}
-
-***TODO*** Details on advanced parameters
 
 ### Read and interpret raw GLM outputs
 
