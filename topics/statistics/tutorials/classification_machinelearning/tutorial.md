@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Classification in Machine Learning'
-zenodo_link: https://zenodo.org/record/3738729#.XoZyHXUzaV4
+zenodo_link: "https://zenodo.org/record/3738729"
 questions:
 - What is classification and how we can use classification techniques?
 objectives:
@@ -136,7 +136,7 @@ The second thing we need is an optimization algorithm for iteratively updating t
 > > ### {% icon solution %} Solution
 > >
 > > In the logistic regressoion model, the coefficients of the logistic regression algorithm have be estimated from our training data. This is done using [maximum-likelihood estimation](https://en.wikipedia.org/wiki/Maximum_likelihood_estimation).
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -161,7 +161,7 @@ Now, we will predict the class in the test dataset using this classifier in orde
 
 ## Visualize the logistic regression classification results
 
-We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (`LogisticRegression_result`). We have one more dataset (`test_rows_labels`) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, `LogisticRegression_result` has no header, so first we should remove the header from `test_rows_labels` to compare. 
+We will evaluate the classification by comparing the predicted with the expected classes. In the previous step, we classified the test dataset (`LogisticRegression_result`). We have one more dataset (`test_rows_labels`) which contains the true class label of the test set. Using the true and predicted class labels in the test set, we will verify the performance by analyzing the plots. As you can see, `LogisticRegression_result` has no header, so first we should remove the header from `test_rows_labels` to compare.
 
 > ### {% icon hands_on %} Hands-on: Remove the header
 >
@@ -204,7 +204,7 @@ These plots are important to visualize the quality of the classifier and the tru
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures 2,3 and 4 show that the classification is acceptable, but as you will see in the next steps, the results can be improved. 
+> > Figures 2,3 and 4 show that the classification is acceptable, but as you will see in the next steps, the results can be improved.
 > >
 > {: .solution}
 {: .question}
@@ -267,12 +267,12 @@ At the second step, we will use k-nearest neighbor classifier. In the [k-nearest
 > What is the value of k (number of neighbors) for the model?
 >
 > > ### {% icon solution %} Solution
-> > As you can see in the Advanced Options, the default value for the number of neighbors is 5, and we used the default value. You can set this parameter based on your problem and data. 
+> > As you can see in the Advanced Options, the default value for the number of neighbors is 5, and we used the default value. You can set this parameter based on your problem and data.
 > >
 > {: .solution}
 {: .question}
 
-Now, we should evaluate the performance on the test dataset to find out whether the KNN classifier is a good model from the training dataset or not. 
+Now, we should evaluate the performance on the test dataset to find out whether the KNN classifier is a good model from the training dataset or not.
 
 > ### {% icon hands_on %} Hands-on: Predict class using the k-nearest neighbor classifier
 >
@@ -286,7 +286,7 @@ Now, we should evaluate the performance on the test dataset to find out whether 
 {: .hands_on}
 
 
-Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare. 
+Now we visualize and analyze the classification. As you can see, `NearestNeighbors_result` has a header, so use `test_rows_labels` to compare.
 
 > ### {% icon hands_on %} Hands-on: Check and visualize the classification
 > 1. **Plot confusion matrix, precision, recall and ROC and AUC curves** {% icon tool %} with the following parameters to visualize the classification:
@@ -311,7 +311,7 @@ The visualization tool creates diagrams for the Confusion matrix, Precision, rec
 To solve this problem, SVM uses kernel functions to map the input to a high dimension feature space, i.e hyperplane, where a linear decision boundary is constructed in such a manner that the boundary maximises the margin between two classes. The kernel approach is simply an efficient computational approach for accommodating a non-linear boundary between classes.
 
 Without going into technical details, a kernel is a function that quantifies the similarity of two observations. Two special properties of SVMs are that SVMs achieve (1) high generalization by maximizing the margin and (2) support an efficient learning of nonlinear functions by
-kernel trick. In the next step, we will build a SVM classifier with our data. 
+kernel trick. In the next step, we will build a SVM classifier with our data.
 
 > ### {% icon hands_on %} Hands-on: Train a SVM classifier
 >
@@ -337,7 +337,7 @@ kernel trick. In the next step, we will build a SVM classifier with our data.
 > > ### {% icon solution %} Solution
 > >
 > > The coefficients of the line with the maximal margin in the kernel space is learned in the training phase.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -447,7 +447,7 @@ At the last step, we will create a bagging classifier by using  the **Pipeline b
 >        - *"Choose the module that contains target estimator"*: `sklearn.ensemble`
 >            - *"Choose estimator class"*: `BaggingClassifier`
 >    - In *"Output parameters for searchCV?"*: `Yes`
-> 
+>
 >      We choose `Final Estimator` as we have only the estimator and no preprocessor and need the parameters of only the estimator.
 >
 {: .hands_on}
@@ -491,7 +491,7 @@ After extracting the parameter names from the **Pipeline builder** file, we will
 >
 > > ### {% icon solution %} Solution
 > >
-> > 20 - even though the default value of the number of estimators for Bagging Classifier is `10`, `20` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset. 
+> > 20 - even though the default value of the number of estimators for Bagging Classifier is `10`, `20` gives the best accuracy. That's why it is important to perform hyperparameter search to tune these parameters for any dataset.
 > >
 > {: .solution}
 >

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: RNA Seq Counts to Viz in R
-zenodo_link: "https://zenodo.org/record/3477564/"
+zenodo_link: "https://zenodo.org/record/3477564"
 requirements:
   -
     type: "internal"

@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Galaxy 101 for everyone"
-zenodo_link: https://zenodo.org/record/1319069/files/iris.csv
+zenodo_link: "https://zenodo.org/record/1319069"
 level: Introductory
 questions:
   - "What are the differences between the Iris species?"

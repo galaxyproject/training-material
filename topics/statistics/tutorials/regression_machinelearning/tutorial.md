@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Regression in Machine Learning'
-zenodo_link: https://zenodo.org/record/2545213#.XEWTJ9-YVa0
+zenodo_link: 'https://zenodo.org/record/2545213'
 questions:
 - How to use regression techniques to create predictive models from biological datasets?
 objectives:
@@ -63,13 +63,13 @@ In linear regression, our goal is to find the line that best models the path of 
 >
 >![regression](images/cost_function.png "Distance between true value and prediction.")
 We know an error above the actual value and an error below the actual value should be about as bad as each other. The squared error makes this clear because both positive and negative values of the error result in a positive squared error. We will use the Mean Squared Error (MSE) function as our cost function. This function finds the average squared error value for all of our data points. Cost functions are important to us because they measure how accurate our model is against the target values.
-> 
+>
 {: .details}
 
 
 # Analyze DNA methylation dataset
 
-As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict the chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans. 
+As a benchmark, we will use the [DNA methylation dataset](https://www.sciencedirect.com/science/article/pii/S1872497317301643?via%3Dihub) to predict the chronological age. One important reason to choose this dataset for an age prediction task is that DNA methylation changes with age and this change occurs at specific CpG sites in humans.
 It has been recognized that DNA methylation analysis, which mostly occurs in a CpG sequence context, can give additional information besides the DNA profile.  It has been shown that DNA methylation changes with age within each individual. This alteration in DNA methylation occurs at specific CpG sites in all individuals, but with individual differences in “speed”, showing more DNA methylation differences in older twins compared to young ones.
 
 Epigenomic and phenotypic changes which are age-dependent are also contained in these cells. This knowledge is used to select useful biomarkers from the DNA methylation dataset. The CpG sites with the highest correlation to age are selected as biomarkers (features). In this study, specific biomarkers are analyzed by machine learning algorithms to create an age prediction model.
@@ -78,7 +78,7 @@ In this tutorial, we will apply a couple of ([scikit-learn](https://scikit-learn
 
 ## Get training and test datasets
 
-Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. We proceed with the analysis by uploading new datasets and creating a new history. 
+Whole blood samples are collected from humans with their ages falling in the range 18-69 and the best age-correlated CpG sites in the genome are chosen as features. The dataset is divided into two parts - training and test sets. The training set is used to train a regressor and the test set is used to evaluate the performance of the trained model. We proceed with the analysis by uploading new datasets and creating a new history.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -142,7 +142,7 @@ The dataset is divided into two parts - training and test sets. The training set
 > > ### {% icon solution %} Solution
 > >
 > > The linear regressor learns the coefficients of the best fit line to the data.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -219,7 +219,7 @@ These plots are important to visualize the quality of regression and the true an
 >
 > > ### {% icon solution %} Solution
 > >
-> > Figures 5, 6 and 7 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors. 
+> > Figures 5, 6 and 7 show that the prediction is acceptable and the predicted age lies about close to the true age, but the reults can be improved by using better algorithms such as ensemble-based regressors.
 > >
 > {: .solution}
 {: .question}
@@ -270,7 +270,7 @@ Like the random forest method, gradient boosting is an ensemble-based regressor,
 > > **Gradient boosting** regressor learns multiple attributes like **feature_importances_** (weight for each feature/column),
 > > **oob_improvement_** (which stores incremental improvements in learning), **estimators_** (collection of weak learners) and a few more.
 > > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by using the **Estimator attributes** tool on the `gradient_boosting_model` dataset.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -312,7 +312,7 @@ In the final step, we will create a pipeline learner with the **Pipeline builder
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
 >            - *"Type in parameter settings if different from default"*: `random_state=42`
 >        - In *"Output parameters for searchCV?"*: `Yes`
-> 
+>
 >      `random_state` could be set to any arbitrary integer number; its purpose is to ensure a determistic and therefore reproducible result.
 >
 {: .hands_on}
@@ -421,7 +421,7 @@ Now we will verify the performance by creating and analyzing the plots.
 >
 > > ### {% icon solution %} Solution
 > >
-> > The figures show that the prediction is very good because the predicted age lies close to the true age. 
+> > The figures show that the prediction is very good because the predicted age lies close to the true age.
 > {: .solution}
 {: .question}
 
@@ -442,5 +442,5 @@ Figure [13](#figure-13) shows that we achieved an R2 score of `0.94` and root me
 
 
 # Conclusion
-By following these steps, we learned how to perform regression and visualize the predictions using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset. 
-The quality of predictions is visualized using multiple plots to ascertain the robustness of machine learning tasks. There are many other regressors in the machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analyzed using these regressors. The regressors have many parameters which can be altered while performing the analyses to see if they affect the prediction accuracy. It may be beneficial to perform a hyperparameter search to tune these parameters for different datasets. 
+By following these steps, we learned how to perform regression and visualize the predictions using Galaxy's machine learning and plotting tools. The features of the training dataset are mapped to the real-valued targets. This mapping is used to make predictions on an unseen (test) dataset.
+The quality of predictions is visualized using multiple plots to ascertain the robustness of machine learning tasks. There are many other regressors in the machine learning suite which can be tried out on these datasets to find how they perform. Different datasets can also be analyzed using these regressors. The regressors have many parameters which can be altered while performing the analyses to see if they affect the prediction accuracy. It may be beneficial to perform a hyperparameter search to tune these parameters for different datasets.

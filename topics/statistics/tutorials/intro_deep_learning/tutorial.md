@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Introduction to deep learning
-zenodo_link: https://zenodo.org/record/3706539#.XmjDYHVKg5k
+zenodo_link: "https://zenodo.org/record/3706539"
 questions:
 - What are deep learning and neural networks?
 - Why is it useful?
@@ -138,7 +138,7 @@ Defining a neural network architecture needs to ascertain the types and number o
 > 1. **Create a deep learning model architecture using Keras** {% icon tool %} with the following parameters:
 >    - *"Select keras model type"*: `Sequential`
 >    - *"input_shape"*: `(7129, )`
->       
+>
 >    - In *"LAYER"*:
 >        - {% icon param-repeat %} *"1: LAYER"*:
 >            - *"Choose the type of layer"*: `Core -- Dense`
@@ -152,7 +152,7 @@ Defining a neural network architecture needs to ascertain the types and number o
 >            - *"Choose the type of layer"*: `Core -- Dense`
 >                - *"units"*: `1`
 >                - *"Activation function"*: `sigmoid`
-> 
+>
 >
 {: .hands_on}
 
@@ -166,17 +166,17 @@ The tool returns a JSON output file containing data about the neural network lay
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configurations (JSON)"*: `Keras model config` (output of **Create a deep learning model architecture using Keras** {% icon tool %})
 >    - *"Do classification or regression?"*: `KerasGClassifier`
-> 
+>
 >    `KerasGClassifier` is chosen because the learning task is classfication i.e. assigning each patient a type of cancer.
 >    - In *"Compile Parameters"*:
 >        - *"Select a loss function"*: `binary_crossentropy`
-> 
+>
 >        The loss function is `binary_crossentropy` because the labels are discrete and binary (0 and 1).
 >        - *"Select an optimizer"*: `RMSprop - RMSProp optimizer`
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `10`
 >        - *"batch_size"*: `4`
-> 
+>
 >        The training data is small (only 38 patients). Therefore the number of epochs and batch size are also small.
 >
 {: .hands_on}
@@ -207,7 +207,7 @@ The tool gives 3 files as output - a tabular file containing output (accuracy of
 After training, the saved architecture (fitted estimator) and weights are used to predict labels for the test data. For each patient in the test data, a type of cancer is predicted using the trained model learned in the previous step.
 
 > ### {% icon hands_on %} Hands-on: Model Prediction predicts on new data using a preffited model
-> 
+>
 > 1. **Model Prediction predicts on new data using a preffited model** {% icon tool %} with the following parameters:
 >    - *"Choose the dataset containing pipeline/estimator object"*: `Fitted estimator or estimator skeleton` (output of **Deep learning training and evaluation** {% icon tool %})
 >    - *"Choose the dataset containing weights for the estimator above"*: `Weights trained` (output of **Create deep learning model** {% icon tool %})
@@ -216,7 +216,7 @@ After training, the saved architecture (fitted estimator) and weights are used t
 >        - *"Training samples dataset"*: `X_test`
 >        - *"Does the dataset contain header"*: `Yes`
 >        - *"Choose how to select data by column"*: `All columns`
-> 
+>
 >
 {: .hands_on}
 
@@ -226,15 +226,15 @@ The tool returns the predicted labels (0 for ALL and 1 AML) for test data in a t
 Visualising the results is important to ascertain the generalisation ability of the trained model on an unseen dataset. Using a dataset with the actual labels for the test data, the performance of the trained model is estimated by comparing the actual labels against the predicted labels using a confusion matrix plot.
 
 > ### {% icon hands_on %} Hands-on: Machine Learning Visualization Extension includes several types of plotting for machine learning
-> 
+>
 > 1. **Machine Learning Visualization Extension includes several types of plotting for machine learning** {% icon tool %} with the following parameters:
->    - *"Select a plotting type"*: `Confusion matrix for classes` 
+>    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing true labels"*: `y_test`
 >    - *"Does the dataset contain header"*: `Yes`
 >    - *"Choose how to select data by column"*: `All columns`
 >    - *"Select dataset containing predicted labels"*: `Model prediction` (output of **Model Prediction predicts on new data using a preffited model** {% icon tool %})
 >    - *"Does the dataset contain header"*: `Yes`
-> 
+>
 >
 {: .hands_on}
 

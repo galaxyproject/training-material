@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Age prediction using machine learning
-zenodo_link: https://zenodo.org/record/2545213#.XEWTJ9-YVa0
+zenodo_link: "https://zenodo.org/record/2545213"
 questions:
 - How to use machine learning to create predictive models from biological datasets (RNA-seq and DNA methylation)?
 objectives:
@@ -236,7 +236,7 @@ The output plot has the following legend: the colour-coding is based on the `mea
 >
 > > ### {% icon solution %} Solution
 > >
-> > Worst four: 
+> > Worst four:
 > >    - alpha: 0.00001, normalize: False, k: 5880
 > >    - alpha: 0.00001, normalize: False, k: 5890
 > >    - alpha: 0.00001, normalize: False, k: 5895
@@ -300,7 +300,7 @@ We will create a pipeline with **Pipeline builder** tool, but this time, we just
 >            - *"Choose estimator class"*: `GradientBoostingRegressor`
 >            - *"Type in parameter settings if different from default"*: `random_state=42`
 >    - In *"Output parameters for searchCV?"*: `Yes`
-> 
+>
 >
 {: .hands_on}
 

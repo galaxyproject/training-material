@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: 'Machine learning: classification and regression'
-zenodo_link: https://zenodo.org/record/2579649#.XHep39F7mL4
+zenodo_link: "https://zenodo.org/record/2579649"
 questions:
 - what are classification and regression techniques?
 - How they can be used for prediction?
@@ -123,7 +123,7 @@ The training dataset is used for learning the associations between features and 
 > > Two attributes **coef_** and **intercept_** are learned by the classifier using the training dataset. The **coef_** contains importance weight for each feature and **intercept_** is just a
 > > constant scalar. However, for different classifiers, these attributes are different. The attributes shown here are specific to the **Linear support vector** classifier.
 > > These attributes are stored in the trained model and can be accessed by reading this file.
-> > 
+> >
 > {: .solution}
 >
 {: .question}
@@ -239,7 +239,7 @@ the [Gradient boosting regressor](http://scikit-learn.org/stable/modules/ensembl
 > > the **Gradient boosting** regressor learns multiple attributes such as **feature_importances_** (weight for each feature/column),
 > > **oob_improvement_** (which stores incremental improvements in learning), **estimators_** (collection of weak learners) and a few more.
 > > These attributes are used to predict the target for a new sample and are stored in the trained model. They can be accessed by reading this file.
-> > 
+> >
 > {: .solution}
 >
 {: .question}

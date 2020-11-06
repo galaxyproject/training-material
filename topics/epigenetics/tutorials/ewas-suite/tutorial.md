@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Infinium Human Methylation BeadChip"
-zenodo_link: "https://zenodo.org/record/1251211#.WwREQ1Mvz-Y"
+zenodo_link: "https://zenodo.org/record/1251211"
 questions:
   - "Which DNA regions and positions are diffrentialy methylated in pre MAPKi treatment and post MAPKi resistance Melanomas GSE65183?"
   - "How to analyse and visualise Infinium Human Methylation BeadChip's?"

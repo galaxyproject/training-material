@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "From NCBI's Sequence Read Archive (SRA) to Galaxy: SARS-CoV-2 variant analysis"
-zenodo_link: 'http://zenodo.org/record/3906454'
+zenodo_link: "https://zenodo.org/record/3906454"
 questions:
 - Learn how to get and use data from the Sequence Read Archive in Galaxy.
 objectives:
