@@ -106,15 +106,15 @@ We will use three files for this analysis:
 >
 >     To import the files, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/4249516)
 >
 >     {% include snippets/import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
 >     ```
->     https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->     https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+>     https://zenodo.org/record/4249555/files/SampleInfo.txt
+>     https://zenodo.org/record/4249555/files/GSE60450_Lactation-GenewiseCounts.txt
 >     ```
 >
 >     - Select *"Genome"*: `mm10`
@@ -262,7 +262,7 @@ It turns out that there has been a mix-up with two samples, they have been misla
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
-> 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
+> 1. Import the correct sample information file from `https://zenodo.org/record/4249555/files/SampleInfo_Corrected.txt`
 > 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
 > 3. Delete the incorrect sample information datasets to avoid any confusion.
 > 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-Seq reads to counts
-zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+zenodo_link: "https://zenodo.org/record/4249555"
 tags:
   - collections
   - mouse
@@ -28,6 +28,12 @@ contributors:
 - mblue9
 - bphipson
 - hdashnow
+requirements:
+  - type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+      - collections
+      - upload-rules
 
 ---
 
@@ -70,24 +76,24 @@ Read sequences are usually stored in compressed (gzipped) FASTQ files. Before th
 
 If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy's Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy's Rule-based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy.
 
-The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
+The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Zenodo](https://zenodo.org/record/4249555) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
 
 The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the [Galaxy Rule-based Uploader tutorial]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
 
 ```
 SampleID	Group	URL
-MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137
-MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137
-MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137
-MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137
-MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137
-MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137
-MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137
-MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137
-MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137
-MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137
-MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137
-MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137
+MCL1-DL	basallactate	https://zenodo.org/record/4249555/files/SRR1552455.fastq.gz
+MCL1-DK	basallactate	https://zenodo.org/record/4249555/files/SRR1552454.fastq.gz
+MCL1-DJ	basalpregnant	https://zenodo.org/record/4249555/files/SRR1552453.fastq.gz
+MCL1-DI	basalpregnant	https://zenodo.org/record/4249555/files/SRR1552452.fastq.gz
+MCL1-DH	basalvirgin	https://zenodo.org/record/4249555/files/SRR1552451.fastq.gz
+MCL1-DG	basalvirgin	https://zenodo.org/record/4249555/files/SRR1552450.fastq.gz
+MCL1-LF	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552449.fastq.gz
+MCL1-LE	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552448.fastq.gz
+MCL1-LD	luminalpregnant	https://zenodo.org/record/4249555/files/SRR1552447.fastq.gz
+MCL1-LC	luminalpregnant	https://zenodo.org/record/4249555/files/SRR1552446.fastq.gz
+MCL1-LB	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552445.fastq.gz
+MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.gz
 ```
 
 In order to get these files into Galaxy, we will want to do a few things:
@@ -105,7 +111,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files from Figshare using Galaxy's Rule-based Uploader.
+> 2. Import the files from Zenodo using Galaxy's Rule-based Uploader.
 >    - Open the Galaxy Upload Manager
 >    - Click the tab **Rule-based**
 >        - *"Upload data as"*: `Collection(s)`
