@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: "Protein FASTA Database Handling"
 edam_ontology: "topic_0121"
-zenodo_link: ""
 level: Introductory
 questions:
   - "How to download protein FASTA databases of a certain organism?"

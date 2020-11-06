@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Reference Data with CVMFS without Ansible"
-zenodo_link: ""
 questions:
 objectives:
   - Have an understanding of what CVMFS is and how it works

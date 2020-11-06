@@ -27,7 +27,6 @@ key_points:
 contributors:
 - beatrizserrano
 - jkh1
-zenodo_link: ''
 ---
 
 

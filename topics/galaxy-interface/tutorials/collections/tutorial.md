@@ -6,7 +6,6 @@ redirect_from:
 title: "Using dataset collections"
 tags:
 - collections
-zenodo_link: ""
 level: Intermediate
 questions:
   - "How to manipulate large numbers of datasets at once?"

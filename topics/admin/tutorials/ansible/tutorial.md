@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Ansible"
-zenodo_link: ""
 questions:
   - Why Ansible?
   - How and when to use Ansible?

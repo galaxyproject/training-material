@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Calling very rare variants"
-zenodo_link: ""
 enable: false
 questions:
   - "What frequency of variants is so low that it is obscured by sequencing error rate?"

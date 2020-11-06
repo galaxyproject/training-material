@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "IGV Introduction"
-zenodo_link: ""
 questions:
 objectives:
 time_estimation: "2H"

@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/upload-rules/tutorial
 
 title: "Rule Based Uploader"
-zenodo_link: ""
 level: Intermediate
 questions:
   - "How to use the rule based uploader to create complex collections"

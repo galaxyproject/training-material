@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/download-delete-data/tutorial
 
 title: 'Downloading and Deleting Data in Galaxy'
-zenodo_link: ''
 level: Introductory
 questions:
 - How can I efficiently download my data from Galaxy once I've completed my analyses?

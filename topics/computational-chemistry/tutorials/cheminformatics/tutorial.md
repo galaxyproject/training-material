@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: Protein-ligand docking
 level: Intermediate
-zenodo_link: ''
 questions:
 - What is cheminformatics?
 - What is protein-ligand docking?

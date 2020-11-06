@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Galaxy Monitoring with gxadmin"
-zenodo_link: ""
 questions:
   - What is gxadmin
   - What can it do?

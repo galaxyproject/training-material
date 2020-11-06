@@ -6,7 +6,6 @@ redirect_from:
 title: "Multisample Analysis"
 tags:
   - collections
-zenodo_link: ""
 level: Advanced
 questions:
 objectives:

@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-ui/tutorials/history/tutorial
 
 title: "Understanding Galaxy history system"
-zenodo_link: ""
 questions:
   - "How do Galaxy histories work?"
 objectives:

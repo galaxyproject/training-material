@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "NGS data logistics"
-zenodo_link: ""
 questions:
   - "How to manipulate and process NGS data"
 objectives:

@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-ui/tutorials/rstudio/tutorial
 
 title: RStudio in Galaxy
-zenodo_link: ""
 questions:
 - How can I manipulate data using R in Galaxy?
 objectives:

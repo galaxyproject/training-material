@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Galaxy Interactive Tools"
-zenodo_link: ""
 questions:
 objectives:
   - Understand what Galaxy Interactive Tools are and how they work

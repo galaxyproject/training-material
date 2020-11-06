@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-ui/tutorials/jupyterlab/tutorial
 
 title: JupyterLab in Galaxy
-zenodo_link: ""
 questions:
 - How can I manipulate data using JupyterLab in Galaxy?
 - How can I start a notebook in JupyterLab?

@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/name-tags/tutorial
 
 title: Name tags for following complex histories
-zenodo_link: ''
 questions:
 - What are name tags or hash tags?
 - How can I use them to keep track of my data?

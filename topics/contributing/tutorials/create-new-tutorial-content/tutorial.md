@@ -41,7 +41,6 @@ The tutorial's content should be placed in the file `tutorial.md`. Its syntax an
 layout: tutorial_hands_on
 
 title: Title of the tutorial
-zenodo_link: ''
 questions:
 - Which biological questions are addressed by the tutorial?
 - Which bioinformatics techniques are important to know for this type of data?

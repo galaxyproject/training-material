@@ -4,7 +4,6 @@ redirect_from:
   - /topics/galaxy-data-manipulation/tutorials/group-tags/tutorial
 
 title: Group tags for complex experimental designs
-zenodo_link: ''
 questions:
 - What are group tags?
 - How can I use group tags to perform multi-factor analyses with collections

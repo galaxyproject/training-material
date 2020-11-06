@@ -3,7 +3,6 @@ layout: tutorial_hands_on
 
 title: R basics in Galaxy
 level: Introductory
-zenodo_link: ""
 requirements:
   -
     type: "internal"

@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Recording Job Metrics"
-zenodo_link: ""
 questions:
 objectives:
   - What are job metrics?

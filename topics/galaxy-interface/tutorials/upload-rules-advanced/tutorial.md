@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Rule Based Uploader: Advanced"
-zenodo_link: ""
 level: Advanced
 questions:
   - "How to use the rule based uploader to create complex collections"

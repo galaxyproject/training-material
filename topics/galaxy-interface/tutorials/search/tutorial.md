@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Searching Your History"
-zenodo_link: ""
 level: Introductory
 questions:
   - How can you find your datasets?

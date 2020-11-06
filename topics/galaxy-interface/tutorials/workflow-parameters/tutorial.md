@@ -6,7 +6,6 @@ redirect_from:
 title: 'Using Workflow Parameters'
 tags:
 - workflows
-zenodo_link: ''
 questions:
 - What are Workflow Parameters
 - How can I define and use Workflow Parameters
