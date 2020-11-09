@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite
-zenodo_link: ''
+zenodo_link: 'https://doi.org/10.5281/zenodo.4264936'
 questions:
 - How to evaluate properly species populations and communities biological state with abundance data?
 - How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are 
@@ -109,9 +109,10 @@ This first step consist of downloading and properly prepare the data to use it i
 >    {% include snippets/create_new_history.md %} 
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the CSV files from [Zenodo]() or from the shared data library or directly from DATRAS data portal
+> 2. Import the CSV files from [Zenodo](https://zenodo.org/badge/DOI/10.5281/zenodo.4264936.svg) or from the shared data 
+>    library or directly from DATRAS data portal
 >    ```
->    LINK
+>    https://zenodo.org/badge/DOI/10.5281/zenodo.4264936.svg
 >    ```
 >
 >    {% include snippets/import_via_link.md %} 
