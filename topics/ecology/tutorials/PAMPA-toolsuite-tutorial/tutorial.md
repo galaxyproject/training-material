@@ -17,8 +17,12 @@ objectives:
 - Learning how to interpret a Generalized Linear (Mixed) Model
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- Use a Essential Biodiversity Variables workflow
+- Pre-process abundance data
+- Compute Community and Population Essential Biodiversity Variables
+- Construct a GL(M)M with Essential Biodiversity Variables
+- Interpret (and correct if needed) GL(M)M results
+- Learn about and interpret common tests to evaluate the quality of your GL(M)M
 contributors:
 - ColineRoyaux
 
@@ -87,17 +91,12 @@ on the abundance of each species.
 >
 > In this tutorial, we will cover:
 >
-> 1. Upload and pre-processing of the data
-> {:1_toc}
-> 2. Compute Essential Biodiversity Variables and create observation unit file
-> {:2_toc}
-> 3. GLMMs and plots on ```Community``` and ```Species-Population``` metrics
-> {:3_toc}
+> 1. TOC
+> {:toc}
 >
 {: .agenda}
 
 # Step 0 : Upload and pre-processing of the data
-{:.1_toc}
 
 This first step consist of downloading and properly prepare the data to use it in PAMPA toolsuite.
 
@@ -325,7 +324,6 @@ files used for the concatenation.
 {: .details}
 
 # Step 1 : Compute Essential Biodiversity Variables and create observation unit file
-{:.2_toc}
 
 In this part of the tutorial, we're starting to use tools from the PAMPA toolsuite to compute ```Community``` 
 and ```Species-Population``` Essential Biodiversity Variables. Then, we'll be creating the observation unit file.
@@ -436,7 +434,6 @@ nomenclature for the ```observation.unit``` fields, namely :
 {: .hands_on}
 
 # Step 2 & 3 : GLMMs and plots on ```Community``` and ```Species-Population``` metrics
-{:.3_toc}
 
 Now that we have all our input files for GLM(M) tools ready, we can start computing statistical models to make 
 conclusions on our surveys. But before starting to use the **Compute GLM on community data** {% icon tool %}
@@ -547,7 +544,7 @@ on the same data, so they can't be used to compare the four models performed her
  - *"deviance"*, evaluates the model's goodness of fit. The lower deviance is better.
  - *"df.resid"*, degrees of freedom in residuals used to calculate the adjusted R-square that indicates the fit quality.
 
-Three statistics about the random effect `site` are given in the first file : standard deviation, number of observations taken
+Three statistics about the random effect `site` are given in this first file : standard deviation, number of observations taken
 into account in the model and number of levels in the random effect. 
 As `site` have been set as a random effect, pseudo-replication caused by the factor `site` variable is taken into account to 
 fit the model as well as its effects on the interest variable but it is not tested so we can't make any conclusion regarding 
@@ -570,9 +567,9 @@ and if it is a continuous variable they will be provided only once for the whole
 
 Here, the factor `year` may be considered a continuous variable as well as a qualitative variable. Only, it doesn't provide the same
 informations :
- - If we consider `year` as a continuous variable the model will inform on the trend of the species richness on the whole time-series.
+ - If we consider `year` as a continuous variable the model will inform on the trend of the interest variable on the whole time-series.
    Making it more interesting to know about the global effect of the time on the interest variable.
- - If we consider `year` as a qualitative variable the model will inform on the relative mean of species richness for each year 
+ - If we consider `year` as a qualitative variable the model will inform on the relative mean of interest variable for each year 
    individually. Making it more interesting to know about each year individually and plot a detailed curve.
 
 As both these solutions are interesting, the tool is computing two GLMMs when `year` is selected as a fixed effect : 
@@ -610,14 +607,25 @@ aren't robust. The third output will help us get a supplementary layer of unders
 the quality of the models performed.
 We see the global rate is 3.625 out of 10 so it seems the analyses aren't of good quality but we need to see 
 each analysis individually to make real conclusions. The best rate is for the analysis on `EVHOE` survey 4.5 out 
-of 8 which is a medium rate, the model isn't bad but it can be improved. You can see in the last part of the file 
-'Red flags - advice', some advices to improve your models but the issues detected in models can come from 
-different reasons (like here, the data isn't representative enough of the whole community) and may be hard to correct. 
+of 8 which is a medium rate, the model isn't necessarily bad but it can be improved. Indeed, data for this model
+contains few NA values and it has a complete plan but not balanced. However, two very important criterias aren't
+checked : residuals haven't a regular dispersion and aren't uniform so it seems Poisson distribution doesn't fit.
+Besides, there isn't enough factor's levels in `site` to use it as a random effect. To get a relevant model we 
+should redo the model without `site` as a random effect but in order to shorten this tutorial we won't develop this
+manipulation here.
+You can see in the last part of the file 'Red flags - advice', some advices to improve your models but the issues 
+detected in models can come from different reasons (like here, the data isn't representative enough of the whole 
+community) and may be hard to correct. Hence, you can try with another probability distribution but this issue may
+comme from the fact that the data isn't suited to make an analysis on species richness.
 Overall, the four models aren't really trust-worthy.
 
 #### Summary
 
-Don't visualize really even if it is not trust worthy we'll see on plots for the tutorial
+With all this interpretation made from raw results, we still don't really visualize these results clearly. For this, it 
+could be nice to get a graphical representation of the GLMMs results and the interest variable.
+Here, for these models, we know these plots won't be trust-worthy but it can still be interesting.
+
+***Share the community analysis on the whole Datras to show it is robust this time?***
 
 ### Create and read plots
 
@@ -634,6 +642,21 @@ Don't visualize really even if it is not trust worthy we'll see on plots for the
 {: .hands_on}
 
 ![Community analysis plots](../../images/PAMPA-toolsuite-tutorial/Community.png "Community analysis plots")
+
+Each PNG file contains two plots :
+ - In the upper plot (blue), the line represents the *"Estimate"* values for each year and the confidence interval
+   is the light blue ribbon. There is no significantly different year here but, usually, it is represented by a white
+   dot inside the blue point of the *"Estimate"* value of the year. The writing on top of the plot is the *"Estimate"*
+   value for the whole time-series (year as continuous variable), if nothing else is written it isn't significant.
+ - In the lower plot (purple), the line represents the observed mean of the species richness for each year (calculated
+   directly from the input metrics data table). If the interest variable had been a presence-absence, it would have been
+   a presence proportion and if it had been an abundance it would have been a raw abundance (sum of all abundances each year).
+
+We'll ignore the 'global' analysis plot as it associate data from different communities. We see on both plots of each survey
+that, as predicted, species richness haven't varied much as few species are taken into account in the analysed data set and 
+these species are very commonly found as we selected only 'Standard species' when downloading the datasets.
+Hence, mean species richness are globally around the maximum number of species taken into account in the surveys (7 for 
+`SWC-IBTS`, 6 for `EVHOE` and 3 for `BITS`). Moreover, confidence intervals are very wide and global trends are around 1.
 
 ## Compute GLMMs and create plots on ```Species-Population``` metrics
 
@@ -663,13 +686,96 @@ at a given time and location. This metric is located on the fourth column of the
 > on Galaxy as a data table, we advise to do the following optional step.
 >
 > 2. (optional) **Transpose rows/columns in a tabular file** {% icon tool %} with `#Concatenate #EVHOE #unitobs` 
->    `#Concatenate #BITS #unitobs` `#Concatenate #SWCIBTS #unitobs` 'GLM - results from your community analysis' data file
+>    `#Concatenate #BITS #unitobs` `#Concatenate #SWCIBTS #unitobs` 'GLM - results from your community analysis' data files
 >
 {: .hands_on}
 
 ### Read and interpret raw GLM outputs
 
-***TODO*** Interpret outputs
+The three outputs for each time the population GLM tool runs are the same as in the community GLM tool described in
+the previous part 3. 1. 1. Read and interpret raw GLM outputs. 
+For the need of this tutorial, we'll be analyzing only the `BITS` survey analysis results.
+
+#### First output : 'GLM - results from your population analysis'
+
+First, on the `#Concatenate #BITS #unitobs` 'GLM - results from your community analysis' data file, we see three analyses 
+one for each species in the `BITS` survey: `Gadus morhua` (Atlantic cod), `Platichthys flesus` (European flounder) and 
+`Pleuronectes platessa` (European plaice).
+
+![BITS survey standard fish species](../../images/PAMPA-toolsuite-tutorial/Fish-BITS.png "BITS survey standard fish species")
+
+We also see the `Gaussian` distribution has been automatically selected by the tool. It seems right even if the interest variable 
+```Abundance``` is usually a count, here it is a Catch Per Unit Effort abundance so it isn't a round value.
+
+Then, the details of what contains each field in this file has been developped in the previous part on community analyses 
+3. 1. 1. 1. First output : 'GLM - results from your community analysis'.
+
+Three statistics about the random effect `site` are given in this first file : standard deviation, number of observations taken
+into account in the model and number of levels in the random effect. 
+As `site` have been set as a random effect, pseudo-replication caused by the factor `site` variable is taken into account to 
+fit the model as well as its effects on the ```Abundance``` but it is not tested so we can't make any conclusion regarding 
+its effects on CPUE abundance.
+
+As said above, the tool is computing two GLMMs when `year` is selected as a fixed effect : 
+ - one GLMM with `year` as a continuous variable with results on fields *"year Estimate"*, *"year Std.Err"*, *"year Zvalue"*,
+   *"year Pvalue"*, *"year IC_up"*, *"year IC_inf"* and *"year signif"*.
+ - one GLMM with `year` as a qualitative variable in the same fields with each `year`'s levels as *"YYYY Estimate"*, 
+   *"YYYY Std.Err"*, *"YYYY Zvalue"*, *"YYYY Pvalue"*, *"YYYY IC_up"*, *"YYYY IC_inf"* and *"YYYY signif"*.
+
+The *"(Intercept)"* value represents the reference value, it is rarely used for interpretations. 
+
+Regarding the significance of the effect `year` as continuous variable:
+ - It isn't significant in the `Gadus morhua` model.
+ - It is significant in the `Platichthys flesus` model.
+ - It is significant in the `Pleuronectes platessa` model.
+
+> ### {% icon question %} Question
+> What does these results on the effect `year` as continuous variable mean?
+> > ### {% icon solution %} Solution
+> > The question behind the test of this effect is : "Is the global temporal trend different from 1 ?"
+> > When it isn't significant as in the `Gadus morhua` model, it means the *"year Estimate"* value isn't 
+> > significantly different from 1 so the interest variable ```Abundance``` hasn't varied much through time.
+> > When it is significant as in the two other models, the *"year Estimate"* value is significantly different 
+> > from 1 so the interest variable ```Abundance``` has varied through time.
+> {: .solution}
+{: .question}
+
+These results are consistent with the results on the significance of the effects `year` as qualitative variable:
+ - Only one year out of 30 considered significantly different in the `Gadus morhua` model. On year 1995.
+ - 14 years out of 30 considered significantly different in the `Platichthys flesus` model. On years 2001, 2002, 2005, 
+   2007, 2008, 2010 to 2017 and 2019.
+ - 8 years out of 30 considered significantly different in the `Pleuronectes platessa` model. From year 2012 to 2019.
+
+#### Second output : 'Simple statistics on chosen variables'
+
+The second output file doesn't tell much about the statistic models, it contains details for you to have an outlook on 
+the interest variable of the input data file containing the population metrics. We can see for example in the 'Statistics 
+per combination of factor levels' part that the median value for the CPUE abundance in the location "22" in 1991 is 6.862473.
+
+#### Third output : 'Your analysis rating file'
+
+The third output will help us get a supplementary layer of understanding and take a step back on the quality of 
+the models performed.
+We see the global rate is 5.166667 out of 10 so it seems the analyses are of average quality but we need to see 
+each analysis individually to make real conclusions. 
+The best rate is for the analysis on `Gadus morhua` survey 6 out of 8 which is a nice rate. However, the model
+can still be improved by removing the random effect. As residuals aren't uniform, we could select another 
+distribution but dispersion of residuals and residuals outliers are regular so we don't advise it.
+All analyses checked an important critera : the dispersion of residuals is regular so, more broadly we don't 
+advise changing the distribution for any of these models.
+You can see in the last part of the file 'Red flags - advice', some advices to improve your models but the issues 
+detected in models can come from different reasons (like here, the data isn't representative enough of the whole 
+community) and may be hard to correct. Hence, if you really want to improve your models, you can try to get a tighter 
+geographical resolution in order to get more locations and sites to keep the random effect on `site`. You can also try 
+to remove biased observations from your original dataset by finding out more about the sampling methods used (years with 
+different methods or different fleet for example).
+
+#### Summary
+
+With all this interpretation made from raw results, we still don't really visualize these results clearly. For this, it 
+could be nice to get a graphical representation of the GLMMs results and the interest variable.
+Here, for these models, the plots we'll create will certainly be more trust-worthy than the previous `Community` analyses.
+Hence, more interesting to look at.
 
 ### Create and read plots
 
@@ -683,14 +789,54 @@ at a given time and location. This metric is located on the fourth column of the
 >
 > The three outputs must be a data collection.
 >
-{: .hands_on} 
+{: .hands_on}
+
+See the previous part 3. 1. 2. Create and read plots to get details on output PNG files.
+As the interest variable is ```Abundance```, the plot with a purple line represents raw abundance : the sum of
+all abundances of the studied species for one year.
+ 
+![BITS population analysis plots](../../images/PAMPA-toolsuite-tutorial/BITS.png "BITS population analysis plots")
+
+On the `Gadus morhua` plots, only small variations of the abundance occured between 1991 and 2020 apart for year 1995
+where we see a huge augmentation for the estimated value and the raw abundance (value almost tripled). As the values 
+are coming back to an average range of values the following year, there should be some bias or even a count or 
+typing mistake in the dataset.
+
+> ### {% icon question %} Question
+> How can we see if there is a mistake in the dataframe? How can we deal with it?
+> > ### {% icon solution %} Solution
+> > To see if there is an abnormal value in the `number` field representing the CPUE abundance we'll use 
+> > the **Sort data in ascending or descending order** {% icon tool %} tool in the "Text Manipulation" 
+> > tool collection with following parameters :
+> >  - {% icon param-files %} *"Sort Query"* : `#BITS` 'Calculate presence absence table' data file
+> >  - {% icon param-text %} *"Number of header lines"* : `1`
+> >  - *"1 : Column selections"*
+> >    - {% icon param-select %} *"on column"* : `Column: 4`
+> >    - {% icon param-check %} *"in"* : `Descending order`
+> >    - {% icon param-check %} *"Flavor"* : `Fast numeric sort (-n)`
+> >    - {% icon param-select %} *"Output unique values"* : `No`
+> >    - {% icon param-select %} *"Ignore case"* : `No`
+> > 
+> > The first value should be a measure of `Gadus morhua` on year "1995" and location "BITS-23", this
+> > value is of *'13253.12023'* which is way higher than the next biggest value *'4709.504184'*. 
+> > This value may create bias in the statistical model so, even if we won't develop it here, you can
+> > remove this line from the `#BITS` 'Calculate presence absence table' data file and re-run the model.
+> {: .solution}
+{: .question}
+
+We see on both plots of `*Platichthys flesus*` and `Pleuronectes platessa` that CPUE abundance has significantly increased 
+since 30 years. Both species had a first CPUE abundance increase around 2000 that can be explained by a fleet change in 
+the trawl survey around this time. Then, for `Platichthys flesus`, after a decrease in 2003 had a more or less stable 
+CPUE abundance. For `Pleuronectes platessa` a second wave of increase occured between 2008 and 2013 to decrease after 2018.
 
 ![EVHOE population analysis plots](../../images/PAMPA-toolsuite-tutorial/EVHOE.png "EVHOE population analysis plots")
-![BITS population analysis plots](../../images/PAMPA-toolsuite-tutorial/BITS.png "BITS population analysis plots")
 ![SWCIBTS population analysis plots](../../images/PAMPA-toolsuite-tutorial/SWCIBTS.png "SWCIBTS population analysis plots")
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial, you analyzed abundance data from three trawl surveys with an Essential Biodiversity Variables
+workflow. You learned how to pre-process abundance data with Galaxy and compute Community and Population metrics.
+You know now how to construct a proper GL(M)M easily and interpret its results. The construction of a Generalized
+Linear (Mixed) Model has to be well thought out and may need corrections a posteriori by the use of common tests 
+that helps evaluate the quality of your GL(M)M (found in the rating file).
