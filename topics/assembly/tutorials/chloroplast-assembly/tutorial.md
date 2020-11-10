@@ -46,7 +46,6 @@ contributors:
 Let's start with uploading the data.
 
 > ### {% icon hands_on %} Hands-on: Import the data
->
 > 1. Create a new history for this tutorial and give it a proper name
 >
 >    {% include snippets/create_new_history.md %}
@@ -63,7 +62,6 @@ Let's start with uploading the data.
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
->
 {: .hands_on}
 
 # Check read quality
@@ -76,14 +74,13 @@ Let's start with uploading the data.
 >    - *"Select multifile mode"*: `batch`
 >    - *"Type of file to work on"*: `fastq`
 >    - *"files"*: select the `nanopore FASTQ file`
-
 {: .hands_on}
 
-* There are five output files.
+There are five output files.
 
 * *Optional further steps:*
 * Find out the quality of your reads using other tools such as fastp or FastQC.
-* To visualize base quality using emoji you can also use FASTQE :smile:
+* To visualize base quality using emoji you can also use FASTQE.
 * Run FASTQE for the illumina reads. In the output, look at the mean values (the middle row)
 * Repeat FASTQE for the nanopore reads. In the tool settings, increase the maximum read length to 30000.
 
@@ -92,14 +89,10 @@ Let's start with uploading the data.
 > What summary statistics would be useful to look at?
 >
 > > ### {% icon solution %} Solution
-> >
-This will depend on the aim of your analysis, but usually:
-
->> **Sequencing depth** (the number of reads covering each base position; also called "coverage"). Higher depth is usually better, but at very high depths it may be better to subsample the reads, as errors can swamp the assembly graph.
-
->> * **Sequencing quality** (the quality score indicates probability of base call being correct). You may trim or filter reads on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail [here](https://en.wikipedia.org/wiki/Phred_quality_score).
-
->> * **Read lengths** (read lengths histogram, and reads lengths vs. quality plots). Your analysis or assembly may need reads of a certain length.
+> > This will depend on the aim of your analysis, but usually:
+> > **Sequencing depth** (the number of reads covering each base position; also called "coverage"). Higher depth is usually better, but at very high depths it may be better to subsample the reads, as errors can swamp the assembly graph.
+> > * **Sequencing quality** (the quality score indicates probability of base call being correct). You may trim or filter reads on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail [here](https://en.wikipedia.org/wiki/Phred_quality_score).
+> > * **Read lengths** (read lengths histogram, and reads lengths vs. quality plots). Your analysis or assembly may need reads of a certain length.
 > >
 > >
 > {: .solution}
@@ -113,10 +106,9 @@ This will depend on the aim of your analysis, but usually:
 >    - *"Input reads"*: `sweet-potato-chloroplast-nanopore-reduced.fastq`
 >    - *"Estimated genome size"*: `160000`
 >    - *"Leave other settings as default"
-
 {: .hands_on}
 
-* There are five output files.
+There are five output files.
 * *Note: this tool is heuristic; your results may differ slightly from the results here, and if repeated.*
 * View the `log` file and scroll to the end.
 * How many contigs (fragments) were assembled?
@@ -135,7 +127,6 @@ This will depend on the aim of your analysis, but usually:
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` `(not the "assembly_graph" file)
 >    - *"Node length labels": `Yes`
 >    - *"Leave other settings as default"
-
 {: .hands_on}
 
 * Your assembly graph may look like this:
@@ -153,14 +144,13 @@ This will depend on the aim of your analysis, but usually:
 > >
 > >
 > {: .solution}
-
 {: .question}
 
 * <op>Optional further steps:</op>
 * Repeat the Flye assembly with different parameters, and/or a filtered read set.
 * Try an alternative assembly tool, such as Canu or Unicycler.
 
-## Polish assembly
+# Polish assembly
 
 Short illumina reads are more accurate the nanopore reads. We will use them to correct errors in the nanopore assembly.
 
@@ -170,11 +160,10 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Will you select a reference genome from your history"*: `Use a genome from history`
 >    - *"Use the following dataset as the reference sequence"*: `flye-assembly.fasta`
 >    - *"Algorithm for constructing the BWT index"*: `Auto. Let BWA decide`
->    - *"Single or Paired-end reads": `Single`
->    - *"Select fastq dataset": `sweet-potato-illumina-reduced.fastq`
->    - *"Set read groups information?": `Do not set`
->    - *"Select analysis mode": `Simple Illumina mode`
-
+>    - *"Single or Paired-end reads"*: `Single`
+>    - *"Select fastq dataset"*: `sweet-potato-illumina-reduced.fastq`
+>    - *"Set read groups information?"*: `Do not set`
+>    - *"Select analysis mode"*: `Simple Illumina mode`
 {: .hands_on}
 
 * This maps the short reads to the assembly, and creates an alignment file.
@@ -189,29 +178,24 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Input BAM file": `illumina.bam`
 >    - *"Variant calling mode": `No`
 >    - *"Create changes file": `Yes`
-
 {: .hands_on}
 
 * This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
 * There are two outputs: a `fasta` file and a `changes` file.
 * What is in the `changes` file?
-* Re-name the fasta output file `polished-assembly.fasta`.
+* Re-name the fasta output file `polished-assembly.fasta`
 * Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
 
 > ### {% icon question %} Question
 >
-> How does the short-read Pilon-polished assembly compare to the unpolished assembly?
+> How does the polished assembly compare to the unpolished assembly?
 >
 > > ### {% icon solution %} Solution
-
->> This will depend on the settings, but as an example: your polished assembly might be about 10-15 Kbp longer. Nanopore reads can have homopolymer deletions - a run of AAAA may be interpreted as AAA - so the more accurate illumina reads may correct these parts of the long-read assembly. In the changes file, there may be a lot of cases showing a supposed deletion (represented by a dot) being corrected to a base.
-> >
-> >
+> > This will depend on the settings, but as an example: your polished assembly might be about 10-15 Kbp longer. Nanopore reads can have homopolymer deletions - a run of AAAA may be interpreted as AAA - so the more accurate illumina reads may correct these parts of the long-read assembly. In the changes file, there may be a lot of cases showing a supposed deletion (represented by a dot) being corrected to a base.
 > {: .solution}
-
 {: .question}
 
-* *Optional further steps:*
+*Optional further steps:*
 * Run a second round (or more) of Pilon polishing. Keep track of file naming; you will need to generate a new bam file first before each round of Pilon.
 * Run an alternative polishing tool, such as Racon. This uses the long reads themselves to correct the long-read (Flye) assembly. It would be better to run this tool on the Flye assembly before running Pilon, rather than after Pilon.
 
@@ -232,13 +216,12 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-tiny.fastq
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.fastq
 >    ```
-
 {: .hands_on}
 
 * Map the Illumina reads (the new "tiny" dataset) to the `polished-assembly.fasta`, the same way we did before, using bwa mem.
-* This creates one output file: re-name it `illumina-tiny.bam`.
-* Map the Nanopore reads (the new "tiny" dataset) to the `polished-assembly.fasta`. The settings will be the same, except `Select analysis mode` should be `Nanopore`.
-* This creates one output file: re-name it `nanopore-tiny.bam`.
+* This creates one output file: re-name it `illumina-tiny.bam`
+* Map the Nanopore reads (the new "tiny" dataset) to the `polished-assembly.fasta`. The settings will be the same, except `Select analysis mode` should be `Nanopore`
+* This creates one output file: re-name it `nanopore-tiny.bam`
 
 
 > ### {% icon hands_on %} Hands-on: Visualise mapped reads
@@ -247,23 +230,22 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Reference genome to display"*: `Use a genome from history`
 >    - *"Select a reference genome"*: `polished-assembly.fasta`
 >    - *"Produce Standalone Instance"*: `Yes`
->    - *"Genetic Code": `11. The Bacterial, Archaeal and Plant Plastid Code`
->    - *"JBrowse-in-Galaxy Action": `New JBrowse instance`
->    - *"Insert Track Group"
->    - *"Insert Annotation Track"
->    - *"Track Type": `BAM pileups`
->    - *"BAM track data": `nanopore-tiny.bam`
->    - *"Autogenerate SNP track": `No`
->    - *"Leave the other track features as default"
->    - *"Insert Annotation Track".
->    - *"Track Type": `BAM pileups`
->    - *"BAM track data": `illumina-tiny.bam`
->    - *"Autogenerate SNP track": `No`
->    - *"Leave the other track features as default"
-
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
+>    - *"Insert Track Group"*
+>    - *"Insert Annotation Track"*
+>    - *"Track Type"*: `BAM pileups`
+>    - *"BAM track data"*: `nanopore-tiny.bam`
+>    - *"Autogenerate SNP track"*: `No`
+>    - *Leave the other track features as default*
+>    - *"Insert Annotation Track"*.
+>    - *"Track Type"*: `BAM pileups`
+>    - *"BAM track data"*: `illumina-tiny.bam`
+>    - *"Autogenerate SNP track"*: `No`
+>    - *Leave the other track features as default*
 {: .hands_on}
 
-There is one output file: re-name: `assembly-and-reads`.
+There is one output file: re-name: `assembly-and-reads`
 * Click on the eye icon to view. (For more room, collapse Galaxy side menus with corner < > signs).
 *  Make sure the bam files are ticked in the left hand panel.
 * Choose a contig in the drop down menu. Zoom in and out with + and - buttons.
@@ -282,7 +264,6 @@ There is one output file: re-name: `assembly-and-reads`.
 > >
 > >
 > {: .solution}
-
 {: .question}
 
 ![read mapping](../images//jbrowse-read-mapping-zoomed-in.png "Zoomed in view of reads mapped back to the assembly")
@@ -296,7 +277,6 @@ There is one output file: re-name: `assembly-and-reads`.
 >> Nanopore reads are longer and have a higher error rate.  
 > >
 > {: .solution}
-
 {: .question}
 
 # View annotations
@@ -319,14 +299,13 @@ Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (
 >    - *"Reference genome to display"*: `Use a genome from history`
 >    - *"Select a reference genome"*: `polished-assembly.fasta`
 >    - *"Produce Standalone Instance"*: `Yes`
->    - *"Genetic Code": `11. The Bacterial, Archaeal and Plant Plastid Code`
->    - *"JBrowse-in-Galaxy Action": `New JBrowse instance`
->    - *"Insert Track Group"
->    - *"Insert Annotation Track"
->    - *"Track Type": `GFF/GFF3/BED/GBK Features`
->    - *"GFF/GFF3/BED Track Data": the `gff3` file
->    - *"Leave the other track features as default"
-
+>    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
+>    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
+>    - *"Insert Track Group"*
+>    - *"Insert Annotation Track"*
+>    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>    - *"GFF/GFF3/BED Track Data"*: the `gff3` file
+>    - *Leave the other track features as default
 {: .hands_on}
 
 
@@ -352,7 +331,6 @@ Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (
 >> One reason is that these are predictions from different tools - such as BLAT or HMMER.
 > >
 > {: .solution}
-
 {: .question}
 
 
@@ -367,7 +345,6 @@ We can assemble another chloroplast genome using sequence data from a different 
 * Polish assembly: Use Pilon to polish the assembly with short Illumina reads. *Note: Don't forget to map these Illumina reads to the assembly first using bwa-mem, then use the resulting `bam` file as input to Pilon.*
 * Annotate: Use the GeSeq tool at [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html).
 * View annotations:Use <ss>JBrowse to view the assembled, annotated genome.
-
 
 # Conclusion
 {:.no_toc}
