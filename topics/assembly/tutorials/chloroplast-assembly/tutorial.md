@@ -2,36 +2,24 @@
 layout: tutorial_hands_on
 
 title: "Chloroplast genome assembly"
-level: Introductory
-
 zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
-
-requirements :
-  type: internal
-  topic_name: Assembly
-  tutorials: Introduction to Galaxy Analyses
-
-tags:
-- plants
-- assembly
-
 questions:
-- "How can we assemble a chloroplast genome?"
+  - "How can we assemble a chloroplast genome?"
 objectives:
-- "Assemble a chloroplast genome from long reads"
-- "Polish the assembly with short reads"
-- "Map reads to the assembly and view"
-- "View an annotated assembly"
-time_estimation: "2H"
+  - "Assemble a chloroplast genome from long reads"
+  - "Polish the assembly with short reads"
+  - "Map reads to the assembly and view"
+  - "View an annotated assembly"
+time_estimation: "2h"
 key_points:
-- "A chloroplast genome can be assembled with long reads and polished with short reads"
-- "The assembly graph is useful to look at and think about genomic structure, and ambiguity"
-- "We can map raw reads back to the assembly and investigate areas of high or low read coverage"
-- "We can view an assembly, its mapped reads, and its annotations in JBrowse"
+  - "A chloroplast genome can be assembled with long reads and polished with short reads"
+  - "The assembly graph is useful to look at and think about genomic structure, and ambiguity"
+  - "We can map raw reads back to the assembly and investigate areas of high or low read coverage"
+  - "We can view an assembly, its mapped reads, and its annotations in JBrowse"
 contributors:
-- annasyme
-
+  - annasyme
 ---
+
 # Introduction
 {:.no_toc}
 
