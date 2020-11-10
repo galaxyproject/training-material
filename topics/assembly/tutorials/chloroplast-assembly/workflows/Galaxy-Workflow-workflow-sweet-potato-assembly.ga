@@ -1,0 +1,299 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Chloroplast genome assembly tutorial - workflow 1",
+    "format-version": "0.1",
+    "name": "workflow-sweet-potato-assembly",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Nanopore_reads"
+                }
+            ],
+            "label": "Nanopore_reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 199.98265075683594,
+                "top": 307.4479217529297
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "59b157b8-f5c4-498c-b66c-0d206ba06ee9",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Illumina_reads"
+                }
+            ],
+            "label": "Illumina_reads",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 763.0208740234375,
+                "top": 801.4409942626953
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "35434963-8a88-47e2-99f0-ef3eb0484f7e",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "mode|reads|files": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NanoPlot",
+            "outputs": [
+                {
+                    "name": "output_html",
+                    "type": "html"
+                },
+                {
+                    "name": "nanostats",
+                    "type": "txt"
+                },
+                {
+                    "name": "nanostats_post_filtering",
+                    "type": "txt"
+                },
+                {
+                    "name": "read_length",
+                    "type": "png"
+                },
+                {
+                    "name": "log_read_length",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 340.97224283218384,
+                "top": 446.96180725097656
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1",
+            "tool_shed_repository": {
+                "changeset_revision": "edbb6c5028f5",
+                "name": "nanoplot",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"customization\": {\"color\": null, \"format\": \"png\", \"plots\": null, \"N50\": \"false\"}, \"filter\": {\"maxlength\": \"\", \"minlength\": \"\", \"drop_outliers\": \"false\", \"downsample\": \"\", \"loglength\": \"false\", \"percentqual\": \"false\", \"alength\": \"false\", \"minqual\": \"\", \"readtype\": null, \"barcoded\": \"false\"}, \"mode\": {\"choice\": \"batch\", \"__current_case__\": 0, \"reads\": {\"type\": \"fastq\", \"__current_case__\": 0, \"files\": {\"__class__\": \"ConnectedValue\"}}}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.28.2+galaxy1",
+            "type": "tool",
+            "uuid": "d54bb18a-d15a-43c5-8eba-45e80b06d448",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "inputs": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Assembly",
+            "outputs": [
+                {
+                    "name": "scaffolds",
+                    "type": "fasta"
+                },
+                {
+                    "name": "assembly_info",
+                    "type": "tabular"
+                },
+                {
+                    "name": "assembly_graph",
+                    "type": "graph_dot"
+                },
+                {
+                    "name": "assembly_gfa",
+                    "type": "txt"
+                },
+                {
+                    "name": "flye_log",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "left": 703.0208740234375,
+                "top": 174.9479217529297
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7",
+            "tool_shed_repository": {
+                "changeset_revision": "1ce9b1d72ec3",
+                "name": "flye",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/mnt/galaxy/galaxy-app/tool-data/len/?.len\", \"g\": \"160000\", \"i\": \"1\", \"inputs\": {\"__class__\": \"ConnectedValue\"}, \"m\": \"\", \"mode\": \"--nano-raw\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.3.7",
+            "type": "tool",
+            "uuid": "fb85c2bb-e169-4bd4-b669-2ff77b56b97f",
+            "workflow_outputs": []
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "fastq_input|fastq_input1": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "reference_source|ref_file": {
+                    "id": 3,
+                    "output_name": "scaffolds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Map with BWA-MEM",
+            "outputs": [
+                {
+                    "name": "bam_output",
+                    "type": "bam"
+                }
+            ],
+            "position": {
+                "left": 1071.979248046875,
+                "top": 635.9201507568359
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1",
+            "tool_shed_repository": {
+                "changeset_revision": "3fe632431b68",
+                "name": "bwa",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"analysis_type\": {\"analysis_type_selector\": \"illumina\", \"__current_case__\": 0}, \"chromInfo\": \"/mnt/galaxy/galaxy-app/tool-data/len/?.len\", \"fastq_input\": {\"fastq_input_selector\": \"single\", \"__current_case__\": 1, \"fastq_input1\": {\"__class__\": \"ConnectedValue\"}}, \"reference_source\": {\"reference_source_selector\": \"history\", \"__current_case__\": 1, \"ref_file\": {\"__class__\": \"ConnectedValue\"}, \"index_a\": \"auto\"}, \"rg\": {\"rg_selector\": \"do_not_set\", \"__current_case__\": 3}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.7.17.1",
+            "type": "tool",
+            "uuid": "70a3b82e-058c-431d-ad9c-dcc08a02bdc2",
+            "workflow_outputs": []
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "auto_selection|bam": {
+                    "id": 4,
+                    "output_name": "bam_output"
+                },
+                "reference_genome|history_item": {
+                    "id": 3,
+                    "output_name": "scaffolds"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "pilon",
+            "outputs": [
+                {
+                    "name": "output_changes",
+                    "type": "txt"
+                },
+                {
+                    "name": "output_fasta",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "left": 1262.0487060546875,
+                "top": 297.96876525878906
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1",
+            "tool_shed_repository": {
+                "changeset_revision": "11e5408fd238",
+                "name": "pilon",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"auto_selection\": {\"auto_enabled\": \"true\", \"__current_case__\": 0, \"bam\": {\"__class__\": \"ConnectedValue\"}}, \"changes\": \"true\", \"chromInfo\": \"/mnt/galaxy/galaxy-app/tool-data/len/?.len\", \"options\": {\"selection_mode\": \"default\", \"__current_case__\": 0}, \"reference_genome\": {\"reference_genome_source\": \"history\", \"__current_case__\": 0, \"history_item\": {\"__class__\": \"ConnectedValue\"}}, \"variant\": \"false\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.20.1",
+            "type": "tool",
+            "uuid": "a823a290-f16f-49da-a5b1-12c07b40a3d5",
+            "workflow_outputs": []
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "dataset": {
+                    "id": 5,
+                    "output_name": "output_fasta"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Fasta Statistics",
+            "outputs": [
+                {
+                    "name": "stats",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "left": 1524.0452270507812,
+                "top": 557.9861297607422
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "20ca2574216a",
+                "name": "fasta_stats",
+                "owner": "simon-gladman",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"chromInfo\": \"/mnt/galaxy/galaxy-app/tool-data/len/?.len\", \"dataset\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "6f542db0-bbca-47ed-80c8-b9ec1649a097",
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "Assembly"
+    ],
+    "uuid": "6a9cde7a-47e0-4922-9bec-72fadfabb0cf",
+    "version": 4
+}
