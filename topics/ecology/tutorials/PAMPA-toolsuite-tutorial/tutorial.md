@@ -15,7 +15,7 @@ objectives:
   raw data to graphical representations
 - Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question
 - Learning how to interpret a Generalized Linear (Mixed) Model
-time_estimation: 3H
+time_estimation: 2H
 key_points:
 - Use a Essential Biodiversity Variables workflow
 - Pre-process abundance data
