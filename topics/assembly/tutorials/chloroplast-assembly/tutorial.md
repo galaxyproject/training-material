@@ -53,12 +53,9 @@ Let's start with uploading the data.
 >    {% include snippets/rename_history.md %}
 >
 > 2. Import from [Zenodo](https://zenodo.org/record/3567224) or a data library (ask your instructor):
-
-
 >   - FASTQ file with illumina reads: `sweet-potato-chloroplast-illumina-reduced.fastq`
 >   - FASTQ file with nanopore reads: `sweet-potato-chloroplast-nanopore-reduced.fastq`
 >   - Note: make sure to import the files with "reduced" in the names, not the ones with "tiny" in the names.
-
 >    ```
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-reduced.fastq
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq    
@@ -67,12 +64,6 @@ Let's start with uploading the data.
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
->
-> 3. Rename the files
->
->    {% include snippets/rename_dataset.md %}
->
-
 {: .hands_on}
 
 # Check read quality
@@ -112,7 +103,6 @@ This will depend on the aim of your analysis, but usually:
 > >
 > >
 > {: .solution}
-
 {: .question}
 
 # Assemble reads
