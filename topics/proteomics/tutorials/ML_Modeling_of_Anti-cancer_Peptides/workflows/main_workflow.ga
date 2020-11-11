@@ -1,0 +1,716 @@
+{
+    "a_galaxy_workflow": "true", 
+    "annotation": "", 
+    "format-version": "0.1", 
+    "name": "ML_PeptideWorkFlow", 
+    "steps": {
+        "0": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 0, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "ACPs"
+                }
+            ], 
+            "label": "ACPs", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 220, 
+                "top": 298.984375
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"optional\": false}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "dc47867b-e6d1-41b5-a074-e7a7c513731d", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "057ae990-2afa-4ac8-85b6-db9e2cf59333"
+                }
+            ]
+        }, 
+        "1": {
+            "annotation": "", 
+            "content_id": null, 
+            "errors": null, 
+            "id": 1, 
+            "input_connections": {}, 
+            "inputs": [
+                {
+                    "description": "", 
+                    "name": "non-ACPs"
+                }
+            ], 
+            "label": "non-ACPs", 
+            "name": "Input dataset", 
+            "outputs": [], 
+            "position": {
+                "left": 200, 
+                "top": 415.48828125
+            }, 
+            "tool_id": null, 
+            "tool_state": "{\"optional\": false}", 
+            "tool_version": null, 
+            "type": "data_input", 
+            "uuid": "49bd69bd-3c9f-4606-9151-394bf9ef5cf8", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "02890a31-8c1a-4e35-b81f-ec7f1a02e4f4"
+                }
+            ]
+        }, 
+        "2": {
+            "annotation": "", 
+            "content_id": "pdaug_sequence_property_based_descriptors", 
+            "errors": null, 
+            "id": 2, 
+            "input_connections": {
+                "input1": {
+                    "id": 0, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Sequence Property Based Descriptors", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "CTD descriptor for ACPs", 
+            "name": "PDAUG Sequence Property Based Descriptors", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 440.48828125, 
+                "top": 200
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "pdaug_sequence_property_based_descriptors", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"SelectDiscriptor\": {\"__current_case__\": 9, \"DesType\": \"CTD\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "6b297341-5a06-4751-b582-095d120b9900", 
+            "workflow_outputs": []
+        }, 
+        "3": {
+            "annotation": "", 
+            "content_id": "pdaug_sequence_property_based_descriptors", 
+            "errors": null, 
+            "id": 3, 
+            "input_connections": {
+                "input1": {
+                    "id": 1, 
+                    "output_name": "output"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Sequence Property Based Descriptors", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "CTD descriptor for non-ACPs", 
+            "name": "PDAUG Sequence Property Based Descriptors", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 455.48828125, 
+                "top": 466.484375
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "pdaug_sequence_property_based_descriptors", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"SelectDiscriptor\": {\"__current_case__\": 9, \"DesType\": \"CTD\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "620f9d63-ec6b-442e-953b-c394db98b5cc", 
+            "workflow_outputs": []
+        }, 
+        "4": {
+            "annotation": "", 
+            "content_id": "pdaug_addclasslabel", 
+            "errors": null, 
+            "id": 4, 
+            "input_connections": {
+                "input1": {
+                    "id": 2, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Add Class Label", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "ACPs marked as 1", 
+            "name": "PDAUG Add Class Label", 
+            "outputs": [
+                {
+                    "name": "OutFile1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 791.97265625, 
+                "top": 208.984375
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionOutFile1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "OutFile1"
+                }
+            }, 
+            "tool_id": "pdaug_addclasslabel", 
+            "tool_state": "{\"ClassLabel\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"ClassLabelTitle\": \"Class_label\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "99a33419-41f9-4f7e-ad53-10f6299fc5de", 
+            "workflow_outputs": []
+        }, 
+        "5": {
+            "annotation": "", 
+            "content_id": "pdaug_addclasslabel", 
+            "errors": null, 
+            "id": 5, 
+            "input_connections": {
+                "input1": {
+                    "id": 3, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Add Class Label", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "non-ACPs marked as 0", 
+            "name": "PDAUG Add Class Label", 
+            "outputs": [
+                {
+                    "name": "OutFile1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 782.98828125, 
+                "top": 446.484375
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionOutFile1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "OutFile1"
+                }
+            }, 
+            "tool_id": "pdaug_addclasslabel", 
+            "tool_state": "{\"ClassLabel\": \"0\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"ClassLabelTitle\": \"Class_label\"}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "acfbd8c5-dfd1-4db7-b00c-6864891c34a7", 
+            "workflow_outputs": []
+        }, 
+        "6": {
+            "annotation": "", 
+            "content_id": "pdaug_merge_dataframes", 
+            "errors": null, 
+            "id": 6, 
+            "input_connections": {
+                "input1": [
+                    {
+                        "id": 4, 
+                        "output_name": "OutFile1"
+                    }, 
+                    {
+                        "id": 5, 
+                        "output_name": "OutFile1"
+                    }
+                ]
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Merge Dataframes", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "Merge data frame", 
+            "name": "PDAUG Merge Dataframes", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1086.484375, 
+                "top": 325
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "pdaug_merge_dataframes", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "a03c6464-4ec0-42c8-9901-f67b2ed56972", 
+            "workflow_outputs": []
+        }, 
+        "7": {
+            "annotation": "", 
+            "content_id": "pdaug_ml_models", 
+            "errors": null, 
+            "id": 7, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG ML Models", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "SVMC", 
+            "name": "PDAUG ML Models", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1406.9921875, 
+                "top": 325
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "pdaug_ml_models", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SVMC\", \"__current_case__\": 0, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "3d1b414d-fabd-4a3c-b69a-478b5d2e57e2", 
+            "workflow_outputs": []
+        }, 
+        "8": {
+            "annotation": "", 
+            "content_id": "pdaug_ml_models", 
+            "errors": null, 
+            "id": 8, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG ML Models", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "SGDC", 
+            "name": "PDAUG ML Models", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1406.9921875, 
+                "top": 476.484375
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "pdaug_ml_models", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"SGDC\", \"__current_case__\": 1, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "31d47839-6e2a-4c21-8518-a115df8cbab1", 
+            "workflow_outputs": []
+        }, 
+        "9": {
+            "annotation": "", 
+            "content_id": "pdaug_ml_models", 
+            "errors": null, 
+            "id": 9, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG ML Models", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "DTC", 
+            "name": "PDAUG ML Models", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1406.9921875, 
+                "top": 627.98828125
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "pdaug_ml_models", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"DTC\", \"__current_case__\": 2, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "1995a118-7857-4423-b9cc-2e62ebda58be", 
+            "workflow_outputs": []
+        }, 
+        "10": {
+            "annotation": "", 
+            "content_id": "pdaug_ml_models", 
+            "errors": null, 
+            "id": 10, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG ML Models", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "GBC", 
+            "name": "PDAUG ML Models", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1406.9921875, 
+                "top": 780.48828125
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "pdaug_ml_models", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"GBC\", \"__current_case__\": 3, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "1eef2d05-a7b5-461f-ae6c-e9b1e0b75137", 
+            "workflow_outputs": []
+        }, 
+        "11": {
+            "annotation": "", 
+            "content_id": "pdaug_ml_models", 
+            "errors": null, 
+            "id": 11, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG ML Models", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "RFC", 
+            "name": "PDAUG ML Models", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1406.9921875, 
+                "top": 932.98828125
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "pdaug_ml_models", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"RFC\", \"__current_case__\": 4, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "f2552b44-2daa-42e2-9424-3e65d52b256c", 
+            "workflow_outputs": []
+        }, 
+        "12": {
+            "annotation": "", 
+            "content_id": "pdaug_ml_models", 
+            "errors": null, 
+            "id": 12, 
+            "input_connections": {
+                "input1": {
+                    "id": 6, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG ML Models", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "LRC", 
+            "name": "PDAUG ML Models", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }, 
+                {
+                    "name": "output2", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 1406.9921875, 
+                "top": 1085.48828125
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }, 
+                "HideDatasetActionoutput2": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output2"
+                }
+            }, 
+            "tool_id": "pdaug_ml_models", 
+            "tool_state": "{\"__page__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}, \"scalling\": \"Min_Max\", \"__rerun_remap_job_id__\": null, \"TestMethods\": {\"SelTestMethods\": \"Internal\", \"nFolds\": \"5\", \"__current_case__\": 0}, \"SelMLAlgo\": {\"MLAlgo\": \"LRC\", \"__current_case__\": 5, \"settings\": {\"__current_case__\": 0, \"advanced\": \"simple\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "79a98058-4863-423e-a228-3f2afe2bd5e6", 
+            "workflow_outputs": []
+        }, 
+        "13": {
+            "annotation": "", 
+            "content_id": "pdaug_merge_dataframes", 
+            "errors": null, 
+            "id": 13, 
+            "input_connections": {
+                "input1": [
+                    {
+                        "id": 7, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 8, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 9, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 10, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 11, 
+                        "output_name": "output1"
+                    }, 
+                    {
+                        "id": 12, 
+                        "output_name": "output1"
+                    }
+                ]
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Merge Dataframes", 
+                    "name": "input1"
+                }
+            ], 
+            "label": "Merge Data Frame", 
+            "name": "PDAUG Merge Dataframes", 
+            "outputs": [
+                {
+                    "name": "output1", 
+                    "type": "tabular"
+                }
+            ], 
+            "position": {
+                "left": 1680.48828125, 
+                "top": 325
+            }, 
+            "post_job_actions": {
+                "HideDatasetActionoutput1": {
+                    "action_arguments": {}, 
+                    "action_type": "HideDatasetAction", 
+                    "output_name": "output1"
+                }
+            }, 
+            "tool_id": "pdaug_merge_dataframes", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"input1\": {\"__class__\": \"RuntimeValue\"}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "c428fc1b-aff9-42d6-a50f-c6f5f19eee19", 
+            "workflow_outputs": []
+        }, 
+        "14": {
+            "annotation": "", 
+            "content_id": "pdaug_basic_plots", 
+            "errors": null, 
+            "id": 14, 
+            "input_connections": {
+                "SelPlotting|InFile": {
+                    "id": 13, 
+                    "output_name": "output1"
+                }
+            }, 
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool PDAUG Basic Plots", 
+                    "name": "SelPlotting"
+                }
+            ], 
+            "label": "Classifier performance Heat map ", 
+            "name": "PDAUG Basic Plots", 
+            "outputs": [
+                {
+                    "name": "output", 
+                    "type": "html"
+                }
+            ], 
+            "position": {
+                "left": 2000.99609375, 
+                "top": 325
+            }, 
+            "post_job_actions": {}, 
+            "tool_id": "pdaug_basic_plots", 
+            "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"SelPlotting\": {\"Plot\": \"HeatMap\", \"IndexColumn\": \"Algo\", \"x_label\": \"Performance\", \"y_label\": \"Algorithms\", \"__current_case__\": 0, \"InFile\": {\"__class__\": \"RuntimeValue\"}}}", 
+            "tool_version": "0.1.0", 
+            "type": "tool", 
+            "uuid": "0aa5ed87-f0b9-44ea-9d75-258ceff481e6", 
+            "workflow_outputs": [
+                {
+                    "label": null, 
+                    "output_name": "output", 
+                    "uuid": "fb443912-4df0-4292-a235-664a04e73b19"
+                }
+            ]
+        }
+    }, 
+    "tags": [], 
+    "uuid": "f51c234f-2856-4208-9af5-7ac7d2f70d25", 
+    "version": 5
+}
