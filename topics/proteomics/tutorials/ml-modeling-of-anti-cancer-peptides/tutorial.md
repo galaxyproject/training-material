@@ -3,17 +3,16 @@ layout: tutorial_hands_on
 
 title: ML Modeling of Anti-cancer Peptides
 questions:
-- Which ML algorithm is superior in predicting anti-cancer peptides?
+  - Which ML algorithm is superior in predicting anti-cancer peptides?
 objectives:
-- Learn, how to calculate peptide descriptor 
-- Learn, how to create training data set from features?
-- Assessment of best ML algorithm in predicting anti-cancer peptide 
+  - Learn, how to calculate peptide descriptor
+  - Learn, how to create training data set from features?
+  - Assessment of best ML algorithm in predicting anti-cancer peptide
 time_estimation: '1h'
 
 contributors:
-- contributor1
-- contributor2
-
+  - jaidevjoshi83
+  - blankenberg
 ---
 
 ## Introduction
@@ -50,8 +49,8 @@ Data can access in several ways. 
 > 2. Import the files from [Zenodo]() or from the shared data library
 >
 >    ```
->      https://zenodo.org/record/4111092/files/ACPs.fasta
->      https://zenodo.org/record/4111092/files/non_ACPs.fasta
+>    https://zenodo.org/record/4111092/files/ACPs.fasta
+>    https://zenodo.org/record/4111092/files/non_ACPs.fasta
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -75,13 +74,13 @@ Biological molecules such as proteins,  peptides, DNA, and RNA can be represent
 properties, for model building 
 ")
 
-In this tutorial, we used 6 different machine learning algorithms for the prediction of ACPs using the peptide sequence-based CTD (Composition transition and distribution descriptors)descriptors or features. 
+In this tutorial, we used 6 different machine learning algorithms for the prediction of ACPs using the peptide sequence-based CTD (Composition transition and distribution descriptors) descriptors or features. 
 All the models were trained using our dataset that combines 138 Anticancer peptides and 138 non-anticancer peptides. We applied 10 fold cross validation on this data set.
 
 
 ## Calculating Peptide Descriptors 
 
-A descriptor or feature is the quantitative or a qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to summarise a biological property such as anti-cancer activity.    In this example, we utilized CTD descriptors, describes as composition, transition, and distribution descriptors. 
+A descriptor or feature is the quantitative or a qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to summarise a biological property such as anti-cancer activity. In this example, we utilized CTD descriptors, describes as composition, transition, and distribution descriptors. 
 
 
 - **Calculating descriptor for ACPs.** 
