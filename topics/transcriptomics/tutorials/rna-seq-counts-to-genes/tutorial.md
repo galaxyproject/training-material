@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-seq counts to genes
-zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+zenodo_link: "https://zenodo.org/record/4269562"
 tags:
   - limma-voom
   - mouse
@@ -106,20 +106,20 @@ We will use three files for this analysis:
 >
 >     To import the files, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/4269562)
 >
 >     {% include snippets/import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
 >     ```
->     https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->     https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+      https://zenodo.org/record/4269562/files/countdata.tsv
+      https://zenodo.org/record/4269562/files/factordata.tsv
 >     ```
 >
 >     - Select *"Genome"*: `mm10`
 >
-> 2. Rename the counts dataset as `seqdata` and the sample information dataset as `sampleinfo` using the {% icon galaxy-pencil %} (pencil) icon.
+> 2. Rename the counts dataset as `countdata` and the sample information dataset as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
@@ -129,50 +129,59 @@ We will use three files for this analysis:
 {: .hands_on}
 
 
-Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
+Let’s take a look at the data. The `countdata` file contains information about genes (one gene per row), the first column has the Entrez gene id and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
 
-![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
+![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file (after formatting)")
 
-The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
+The `factordata` file contains basic information about the samples that we will need for the analysis. See below.
 
-![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
+![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file (after formatting)")
 
-## Format the data
 
-Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
-
-> ### {% icon hands_on %} Hands-on: Format the counts data
+> ### {% icon details %} Formatting the data
 >
-> 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to cut"*: `seqdata`
->      - {% icon param-select %} *"Operation"*: `Discard`
->      - {% icon param-select %} *"List of fields"*: Select `Column:2`
-> 2. **Replace Text in entire line** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
->      - {% icon param-text %} *"Find pattern"*: `_B[A-Z0-9_]+`
-> 3. **Replace Text in entire line** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to process"*: output of **Replace Text** {% icon tool %}
->      - {% icon param-text %} *"Find pattern"*: `-`
->      - {% icon param-text %} *"Replace with"*: `.`
-> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->    ![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file (after formatting)")
-{: .hands_on}
-
-Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
-
-> ### {% icon hands_on %} Hands-on: Format the sample information file
+>The original files were processed in Galaxy to format them for the limma-voom tool as described below.
+>They are available at 
+>     `https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a`
+>     `https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a`
 >
-> 1. **Merge Columns together** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"Select data"*: `sampleinfo`
->      - {% icon param-select %} *"Merge column"*: `Column: 3`
->      - {% icon param-select %} *"with column"*: `Column: 4`
-> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to cut"*: output of **Merge Columns** {% icon tool %}
->      - {% icon param-select %} *"Operation"*: `Keep`
->      - {% icon param-select %} *"List of fields"*: Select `Column:2` and `Column:5`
-> 3. Rename file as `factordata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->    ![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file (after formatting)")
-{: .hands_on}
+>![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
+>
+>![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
+>
+>Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **>Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
+>
+>> ### {% icon hands_on %} Hands-on: Format the counts data
+>>
+>> 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to cut"*: `seqdata`
+>>      - {% icon param-select %} *"Operation"*: `Discard`
+>>      - {% icon param-select %} *"List of fields"*: Select `Column:2`
+>> 2. **Replace Text in entire line** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
+>>      - {% icon param-text %} *"Find pattern"*: `_B[A-Z0-9_]+`
+>> 3. **Replace Text in entire line** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to process"*: output of **Replace Text** {% icon tool %}
+>>      - {% icon param-text %} *"Find pattern"*: `-`
+>>      - {% icon param-text %} *"Replace with"*: `.`
+>> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. 
+>{: .hands_on}
+>
+>Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
+>
+>> ### {% icon hands_on %} Hands-on: Format the sample information file
+>>
+>> 1. **Merge Columns together** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"Select data"*: `sampleinfo`
+>>      - {% icon param-select %} *"Merge column"*: `Column: 3`
+>>      - {% icon param-select %} *"with column"*: `Column: 4`
+>> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to cut"*: output of **Merge Columns** {% icon tool %}
+>>      - {% icon param-select %} *"Operation"*: `Keep`
+>>      - {% icon param-select %} *"List of fields"*: Select `Column:2` and `Column:5`
+>> 3. Rename file as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
+>{: .hands_on}
+{: .details}
 
 ## Get gene annotations
 
@@ -262,7 +271,7 @@ It turns out that there has been a mix-up with two samples, they have been misla
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
-> 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
+> 1. Import the correct sample information file from `https://zenodo.org/record/4269562/files/factordata_fixed.tsv`
 > 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
 > 3. Delete the incorrect sample information datasets to avoid any confusion.
 > 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
@@ -318,21 +327,24 @@ Density plots can be output in the `Report` if *Filter lowly expressed genes* is
 
 ![Density Plots](../../images/rna-seq-counts-to-genes/densityplots.png "Density Plots")
 
-We can also have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.
-
 The `Report` provides links to PDFs of all plots shown in the `Report` and also to the rest of the additional plots selected to be output.
 
 ![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs")
 
-Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
-
-![CPM threshold Plots](../../images/rna-seq-counts-to-genes/cpmsvscounts.png "CPM vs Raw Counts Plots")
-
-> ### {% icon comment %} Thresholds
+> ### {% icon details %} More details on Cpm plots
 >
-> * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
+>We can also have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.
 >
-{: .comment}
+>Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
+>
+>![CPM threshold Plots](../../images/rna-seq-counts-to-genes/cpmsvscounts.png "CPM vs Raw Counts Plots")
+>
+>> ### {% icon comment %} Thresholds
+>>
+>> * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
+>>
+>{: .comment}
+{: .details}
 
 
 ## Box plots
@@ -368,14 +380,14 @@ The TMM normalization generates normalization factors, where the product of thes
 >    {: .solution}
 {: .question}
 
-## MD plots for samples
-
-It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
-
-Click on the `MDPlots_Samples.pdf` link in the `Report`. You should see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
-![MD Plot LA](../../images/rna-seq-counts-to-genes/mdsampleLA.png "MD Plots for MCL1.LA before and after TMM normalization")
-![MD Plot LE](../../images/rna-seq-counts-to-genes/mdsampleLE.png "MD Plots for MCL1.LE before and after TMM normalization")
-
+> ### {% icon details %} MD plots for samples
+>
+>It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
+>
+>Click on the `MDPlots_Samples.pdf` link in the `Report`. You should see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
+>![MD Plot LA](../../images/rna-seq-counts-to-genes/mdsampleLA.png "MD Plots for MCL1.LA before and after TMM normalization")
+>![MD Plot LE](../../images/rna-seq-counts-to-genes/mdsampleLE.png "MD Plots for MCL1.LE before and after TMM normalization")
+{: .details}
 
 ## Voom variance plot
 
