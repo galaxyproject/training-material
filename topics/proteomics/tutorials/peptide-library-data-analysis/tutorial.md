@@ -7,10 +7,7 @@ questions:
 objectives:
   - Calculate descriptors
   - Qunatitative analysis of peptide sequence properties
-time_estimation: ''
-key_points:
-  - The take-home messages
-  - They will appear at the end of the tutorial
+time_estimation: '20m'
 contributors:
    - jaidevjoshi83
    - blankenberg
@@ -36,7 +33,7 @@ Several computational methods have been proven very useful in the initial screen
 
 ## Peptide Data
 
-In this step, we will retrieve the inbuild dataset, which contains anti-microbial and transmembrane peptides.
+In this step, we will retrieve the inbuild dataset, which contains anti-microbial (AMPs)  and transmembrane peptides (TMPs).
 
 
 > ### {% icon hands_on %} Hands-on: Task description
@@ -60,23 +57,9 @@ In this step, we will be converting and splitting the tabular data file into fas
 >
 {: .hands_on}
 
+## Analyzing peptide libraries (AMPs and TMPs) based on features and feature space 
 
-## Calculating Sequence Property-Based Descriptors 
-
-In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptors" tool to calculate  CTD (Composition Transition and Distribution) descriptor.  
-
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **PDAUG Sequence Property Based Descriptors** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input fasta file"*: `OutFile1` (output of **PDAUG TSVtoFASTA** {% icon tool %})
->    - *"Descriptor Type"*: `CTD`
->
->
-{: .hands_on}
-
-
-## Summary Plot for peptide libraries 
+### Summary Plot for peptide libraries 
 
 In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare peptide sequences based on hydrophobicity, hydrophobic movement, charge, amino acid fraction, and sequence length and creates a summary plot.
 
@@ -97,21 +80,8 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 ![Alternative text](../../images/SummaryPlot.png " Summary plot shows comparisoin between AMPs and TMPs")
 
 
-## Calculating Sequence Property-Based Descriptors
 
-In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptors" tool to calculate  CTD (Composition Transition and Distribution) descriptor.
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **PDAUG Sequence Property Based Descriptors** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input fasta file"*: `OutFile2` (output of **PDAUG TSVtoFASTA** {% icon tool %})
->    - *"Descriptor Type"*: `CTD`
->
->
-{: .hands_on}
-
-
-## Assessing feature space distribution 
+### Assessing feature space distribution 
 
 In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide library based on the feature space using the Fisher test. 
 
@@ -129,17 +99,41 @@ In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libr
 
 ![Alternative text](../../images/FeatureSpace.png " TMPs peptides show amino acides with larger hydrophobic residues in compare to AMPs ")
 
+The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher's plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.
 
-## Adding Class labels 
+## Assessing the clustering of peptides based on 3D scatter plot and CTD descriptors  
+
+### Calculating Sequence Property-Based Descriptors 
+
+In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptors" tool to calculate  CTD (Composition Transition and Distribution) descriptor.  
+
+- **Calculating descriptors for AMPs**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **PDAUG Add Class Label** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `output1` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
+> 1. **PDAUG Sequence Property Based Descriptors** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input fasta file"*: `OutFile1` (output of **PDAUG TSVtoFASTA** {% icon tool %})
+>    - *"Descriptor Type"*: `CTD`
 >
 >
 {: .hands_on}
 
+- **Calculating descriptors for TMPs**n
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **PDAUG Sequence Property Based Descriptors** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input fasta file"*: `OutFile2` (output of **PDAUG TSVtoFASTA** {% icon tool %})
+>    - *"Descriptor Type"*: `CTD`
+>
+>
+{: .hands_on}
+
+
+
+### Adding Class labels 
+
+- **Adding class label in AMPs data**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -147,11 +141,21 @@ In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libr
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
 >    - *"Class Label"*: `1`
 >
+{: .hands_on}
+
+- **Adding class label in TMPs data**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. **PDAUG Add Class Label** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input file"*: `output1` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
+>    - *"Class Label"*: `o`
+>
 >
 {: .hands_on}
 
 
-## Merging the two data frames 
+### Merging the two data frames 
 
 We utilize **PDAUG Merge Dataframes** to merge two dataframes. 
 
@@ -165,7 +169,7 @@ We utilize **PDAUG Merge Dataframes** to merge two dataframes.
 {: .hands_on}
 
 
-##  Basic data plotting 
+###  Plotting CTD descriptor data as Scatter plot  
 
 In this step, we utilize the **PDAUG Basic Plots** tool to compare two libraries based on three CTD descriptors SecondaryStrD1100, SolventAccessibilityD2001, and NormalizedVDWVD3050 respectively. A 3D scatter plot will be generated. 
 
@@ -191,5 +195,5 @@ In this step, we utilize the **PDAUG Basic Plots** tool to compare two libraries
 
 In this tutorial, we learned the flexible and extensible analysis of the peptide data using PDAUG tools. We generated various plots based on the quantitative properties of amino acids and peptide sequences. 
 
-![Alternative text](../../images/WorkFlow.png "Workflow used")
+![Alternative text](../../images/PeptideAnalysisWorkflow.png "Workflow used")
 

@@ -41,7 +41,7 @@ Data can access in several ways. 
 2. Using direct link. 
 
 
-## Get data
+### Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -67,47 +67,48 @@ Data can access in several ways. 
 >
 {: .hands_on}
 
-## Machine Learning Modeling of anti-cancer peptides 
 
-Biological molecules such as proteins,  peptides, DNA, and RNA can be represented by the sequences, and based on these sequences various properties can be calculated.  These properties can be related to various biological properties of these sequences.  Properties associated with a peptide sequence such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build a machine learning model and predict the biological properties of unknown peptides. Finding anticancer peptides (ACPs) through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation.  
-![Alternative text](../../images/PDAUG_ML_1.png "ML algorithms use descriptors, a numerical representation of a sequence-based 
-properties, for model building 
-")
 
-In this tutorial, we used 6 different machine learning algorithms for the prediction of ACPs using the peptide sequence-based CTD (Composition transition and distribution descriptors) descriptors or features. 
-All the models were trained using our dataset that combines 138 Anticancer peptides and 138 non-anticancer peptides. We applied 10 fold cross validation on this data set.
+## Background
+
+Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequences-based properties. These properties can be utilized to deduce biological meanings.  Properties associated with a peptide sequence such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build a machine learning model and predict the biological properties of unknown peptides. Finding anticancer peptides (ACPs) through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. 
+In this tutorial, we used 6 different machine learning algorithms for the prediction of ACPs using the peptide sequence-based CTD (Composition transition and distribution descriptors) descriptors or features. All the models were trained using our dataset that combines 138 Anticancer peptides and 138 non-anticancer peptides. We applied 10 fold cross-validation on this data set.
 
 
 ## Calculating Peptide Descriptors 
 
 A descriptor or feature is the quantitative or a qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to summarise a biological property such as anti-cancer activity. In this example, we utilized CTD descriptors, describes as composition, transition, and distribution descriptors. 
 
+![Alternative text](../../images/PDAUG_ML_1.png "ML algorithms use numerical representation of a sequence-based properties for model building")
 
-- **Calculating descriptor for ACPs.** 
+### Calculating descriptor for ACPs
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Peptide Sequence Descriptors** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *""*: `output` (Input dataset)
+> 1. **PDAUG Sequence Property Based Descriptors** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input fasta file"*: `output` (output of **Input dataset** {% icon tool %})
 >    - *"DesType"*: `CTD`
 >
 >
 {: .hands_on}
 
-- **Calculating descriptor for non-ACPs.**
+### Calculating descriptor for non-ACPs
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Peptide Sequence Descriptors** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *""*: `output` (Input dataset)
+> 1. **PDAUG Sequence Property Based Descriptors** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Input fasta file"*: `output` (output of **Input dataset** {% icon tool %})
 >    - *"DesType"*: `CTD`
->
 >
 >
 {: .hands_on}
 
 
-## Adding class label in training data
+## Preparing a traning data set
+
+We will combine the ACPs and non-ACPs data set as a single data frame and will add the class label. 
+
+### Adding class label in training data
 
 
 The class label usually describes samples from two different groups, in our case ACPs and non-ACPs.   In the case of binary classification, usually, samples are labeled as "0" or 1. 
@@ -117,7 +118,7 @@ The class label usually describes samples from two different groups, in our ca
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Add Class Label** {% icon tool %} with the following parameters:
+> 1. **PDAUG Add Class Label** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Peptide Sequence Descriptors** {% icon tool %})
 >    - *"Class Label"*: `1`
 >
@@ -129,21 +130,21 @@ The class label usually describes samples from two different groups, in our ca
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Add Class Label** {% icon tool %} with the following parameters:
+> 1. **PDAUG Add Class Label** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Peptide Sequence Descriptors** {% icon tool %})
->
+>    - *"Class Label"*: `0`
 >
 >
 {: .hands_on}
 
 
-## Merging data frame to combine Negative and Positive data set
+### Merging data frames to combine Negative and Positive data set
 
 In previous steps, we have calculated descriptors and labeled the data as positive and negative for ACPs and non-ACPs respectively, now we can use this dataset as a training dataset, however before to final step we have to merge both the dataset as one that represents our final training dataset with the class labels.  
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Merge dataframes** {% icon tool %} with the following parameters:
+> 1. **PDAUG Merge Dataframes** {% icon tool %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `OutFile1` (output of **Add Class Label** {% icon tool %}), `OutFile1` (output of **Add Class Label** {% icon tool %})
 >
 >
@@ -160,7 +161,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **ML Models** {% icon tool %} with the following parameters:
+> 1. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `LRC`
 >        - *"Select advanced parameters"*: `No, use program defaults.`
@@ -173,7 +174,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 2. **ML Models** {% icon tool %} with the following parameters:
+> 2. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `RFC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
@@ -187,7 +188,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **ML Models** {% icon tool %} with the following parameters:
+> 1. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `GBC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
@@ -202,7 +203,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **ML Models** {% icon tool %} with the following parameters:
+> 1. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `DTC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
@@ -215,7 +216,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **ML Models** {% icon tool %} with the following parameters:
+> 1. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `SGDC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
@@ -225,12 +226,11 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 {: .hands_on}
 
 
-
 - **Support vector machine Classifier (SVMC)**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **ML Models** {% icon tool %} with the following parameters:
+> 1. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `output1` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `SVMC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
@@ -238,36 +238,39 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 >
 {: .hands_on}
 
+## Results assessment
 
-## Merging results in one file
+### Merging results in one file
 
 In previous steps we have trained the machine learning models, these models return a TSV  that captures performance measures of these algorithms. We used the Marge Data Frame tool to combine these results as one file in this step.  
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Merge dataframes** {% icon tool %} with the following parameters:
->    - {% icon param-files %} *"Input files"*: `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %})
+> 1. **PDAUG Merge Dataframes** {% icon tool %} with the following parameters:
+>    - {% icon param-files %} *"Input files"*: `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %}), `output1` (output of **ML Models** {% icon tool %})
 >
 >
 {: .hands_on}
 
 
-## Creating a final heat map to assess the results 
+### Creating a final heat map to assess the results 
 
 In the final step, a heat map will be generated which represents performance measures of various algorithms. We applied five different performance measures, accuracy, recall, F1-score, precision, and mean AUC (Area Under Curve) score.    
 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Heat Map** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *""*: `output1` (output of **Merge dataframes** {% icon tool %})
+> 1. **PDAUG Basic Plots** {% icon tool %} with the following parameters:
+>    - *"Data plotting method"*: `Heat Map`
+>        - {% icon param-file %} *"Input file"*: `output1` (output of **PDAUG Merge Dataframes** {% icon tool %})
+>        - *"Index Column"*: `Algo`
+>        - *"Label for x-axis"*: `Performance Measures`
+>        - *"Label for y-axis"*: `ML algorithms`
 >
 >
 {: .hands_on}
 
-![Alternative text](../../images/PDAUG_ML_2.png "ML algorithms use descriptors, a numerical representation of a sequence-based 
-properties, for model building 
-")
+![Alternative text](../../images/ML_HEATMAP.png "Heatmap represents the performance of 6 machine learning algorithms")
 
 The brighter yellow color shows high-performance while the blue color shows a lower score.  Heart map suggests that algorithms GBC, LRC, and SVMC show high performs in comparison to the other three.   DTC shows an intermediate performance while RFC and SGDC performed poorly on this data set. 
 
