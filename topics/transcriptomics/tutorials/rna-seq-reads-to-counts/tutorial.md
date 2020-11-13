@@ -434,7 +434,7 @@ The counts files are currently in the format of one file per sample. However, it
 >
 {: .hands_on}
 
-Take a look at the output (the output for the full dataset is shown below).
+Take a look at the output. The tutorial uses a small subset of the data ~ 1000 reads per sample to save on processing time. Most rows in that matrix will be all zero but you should have ~600 non-zero rows. The output for the full dataset is shown below. 
 
 ![Count matrix](../../images/rna-seq-reads-to-counts/count_matrix.png "Count matrix")
 
