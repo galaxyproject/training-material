@@ -15,7 +15,7 @@ objectives:
   - "QC of count data"
   - "Visualisation and interactive exploration of count data"
   - "Identification of differentially expressed genes"
-time_estimation: "3h"
+time_estimation: "2h"
 key_points:
   - "The limma-voom tool can be used to perform differential expression and output useful plots"
   - "Multiple comparisons can be input and compared"
@@ -113,8 +113,8 @@ We will use three files for this analysis:
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
 >     ```
-      https://zenodo.org/record/4269562/files/countdata.tsv
-      https://zenodo.org/record/4269562/files/factordata.tsv
+>     https://zenodo.org/record/4269562/files/countdata.tsv
+>     https://zenodo.org/record/4269562/files/factordata.tsv
 >     ```
 >
 >     - Select *"Genome"*: `mm10`
@@ -131,25 +131,26 @@ We will use three files for this analysis:
 
 Let’s take a look at the data. The `countdata` file contains information about genes (one gene per row), the first column has the Entrez gene id and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
 
-![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file (after formatting)")
+![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file")
 
 The `factordata` file contains basic information about the samples that we will need for the analysis. See below.
 
-![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file (after formatting)")
+![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file")
 
 
 > ### {% icon details %} Formatting the data
 >
->The original files were processed in Galaxy to format them for the limma-voom tool as described below.
->They are available at 
->     `https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a`
->     `https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a`
+>The original files were imported and processed in Galaxy to format them as described below. They are available at
+>     ```
+>     https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
+>     https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+>     ``` 
 >
 >![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
 >
 >![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
 >
->Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **>Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
+>To create the file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **>Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
 >
 >> ### {% icon hands_on %} Hands-on: Format the counts data
 >>
@@ -167,7 +168,7 @@ The `factordata` file contains basic information about the samples that we will 
 >> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. 
 >{: .hands_on}
 >
->Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
+>To create the file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
 >
 >> ### {% icon hands_on %} Hands-on: Format the sample information file
 >>
@@ -243,6 +244,15 @@ Since we are interested in differences between groups, we need to specify which 
 >          - {% icon param-text %} *"Minimum Samples"*: `2`
 > 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
+
+
+> ### {% icon tip %} Tip: Multiple factors
+>
+> If we need to account for additional sources of variation, for example, batch, sex, genotype etc, we can input that information as additional factors. For example, if we were interested in the genes differentially expressed between the luminal and basal cell types, we could include an additional column to account for the variation due to the different stages.
+> ![Multiple factors](../../images/rna-seq-reads-to-counts/multiplefactors_factordata.png "Multiple factors")
+>
+{: .tip}
+
 
 # QC of count data
 
@@ -331,7 +341,7 @@ The `Report` provides links to PDFs of all plots shown in the `Report` and also 
 
 ![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs")
 
-> ### {% icon details %} More details on Cpm plots
+> ### {% icon details %} Cpm plots
 >
 >We can also have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.
 >

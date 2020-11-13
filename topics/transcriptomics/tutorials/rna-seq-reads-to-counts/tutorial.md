@@ -68,13 +68,27 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 ([Kim, Langmead, and Salzberg, 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/)), STAR ([Dobin et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/)) and Subread ([Liao, Smyth, and Shi 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3664803/)]). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don't have access to a server you can try to use one of the publically available Galaxies e.g. [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au/).
 
-If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. If your FASTQs are provided through Galaxy's Shared Data, you can easily import them into a history. For publicly available sequence data, such as from GEO/SRA/ENA, Galaxy's Rule-based Uploader can be used to import the files from URLs, saving on the need to download to your computer and upload into Galaxy.
+The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. 
 
-The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. We are going to import the files into a Collection. Using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, see the [Galaxy Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}).
+If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. For sequence data available through URLs, The [Galaxy Rule-based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}) can be used to import the files. It is much quicker than downloading FASTQs to your computer and uploading into Galaxy and also enables importing as a **Collection**. When you have more than a few files, using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, you can take a look at the [Galaxy Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) for more details. The screenshots below show a comparison of what the FASTQ datasets for this tutorial would look like in the history if we imported them as datasets versus as a collection with the Rule-based Uploader.
 
-TODO Add figure that shows example difference of using with and without collections here.
+Datasets | Collection
+--- | ---
+![Samples imported as datasets](../../images/rna-seq-reads-to-counts/imported-as-datasets.png)| ![Samples imported as collection with Rule-based Uploader](../../images/rna-seq-reads-to-counts/imported-as-collection.png)
 
-The sample information (sample ID, Group) and link to the FASTQ file (URL) are in the grey box below. To generate a file like this to import data from SRA/ENA see the [Galaxy Rule-based Uploader tutorial]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}).
+
+> ### {% icon details %} Collections and sample names
+> 
+> Collections can also help to maintain the original sample names on the files throughout the tools used. The screenshots below show what we would see in one of the MultiQC reports that we will generate if we used datasets versus a collection.
+> 
+> Datasets | Collection
+> --- | ---
+> ![Sample names without collection](../../images/rna-seq-reads-to-counts/samplesnames_without_collection.png)| ![Sample names with collection](../../images/rna-seq-reads-to-counts/samplesnames_with_collection.png)
+> 
+{: .details}
+
+
+The information we need to import the samples for this tutorial (sample ID, Group, and link to the FASTQ file (URL) are in the grey box below.
 
 ```
 SampleID	Group	URL
@@ -91,6 +105,7 @@ MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_l
 MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137
 MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137
 ```
+
 
 In order to get these files into Galaxy, we will want to do a few things:
 
@@ -143,7 +158,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >
 {: .hands_on}
 
-If your data is not accessible by URL, for example, if your FASTQ files are located on your laptop, you can upload into a collection as below.
+If your data is not accessible by URL, for example, if your FASTQ files are located on your laptop and are not too large, you can upload into a collection as below. If they are large you could use FTP. You can take a look at the [Getting data into Galaxy slides]({% link topics/galaxy-interface/tutorials/get-data/slides.html %}) for more information.
 
 > ### {% icon tip %} Tip: Upload local files into a collection
 >
@@ -203,6 +218,15 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
+
+> ### {% icon tip %} Tip: Using collections with a tool
+>
+> To use a collection with a tool you click the folder button as shown below.
+> ![Collection button](../../images/rna-seq-reads-to-counts/collection_icon.png "Collection button")
+>
+{: .tip}
+
+
 > ### {% icon question %} Questions
 > 1. What is the read length?
 > 2. What base quality score encoding is used?
@@ -213,13 +237,13 @@ Sequence quality control is therefore an essential first step in your analysis. 
 > > 2. Sanger quality score encoding is used.
 > > This information can be seen at the top of the FastQC Webpage as below.
 > >
-> > ![FastQC Webpage](../../images/rna-seq-reads-to-counts/fastqc_webpage.png "FastQC Webpage"){: width="50px"}
+> > ![FastQC Webpage](../../images/rna-seq-reads-to-counts/fastqc_webpage.png "FastQC Webpage")
 > >
 > {: .solution}
 >
 {: .question}
 
-The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC that can summarise QC information for multiple samples into a single report.
+The FastQC report contains a lot of information and we can look at the report for each sample. However, that is quite a few reports, 12 for this dataset. If you had more samples it could be a lot more. Luckily, there is a very useful tool called MultiQC that can summarise QC information for multiple samples into a single report. We'll generate a few MultiQC outputs in this tutorial so we'll add name tags so we can differentiate them.
 
 > ### {% icon hands_on %} Hands-on: Aggregate FastQC reports with **MultiQC**
 >
@@ -229,8 +253,12 @@ The FastQC report contains a lot of information and we can look at the report fo
 >        - In *"FastQC output"*
 >           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
-> 2. Inspect the `Webpage` output from MultiQC
+> 2. Add a tag `#fastqc-raw` to the `Webpage` output from MultiQC and inspect the webpage
+>
+> {% include snippets/add_tag.md type="name" %}
+>
 {: .hands_on}
+
 
 Note that these are the results for just 1000 reads. The FastQC results for the full dataset are shown below. The 1000 reads are the first reads from the FASTQ files, and the first reads usually originate from the flowcell edges, so we can expect that they may have lower quality and the patterns may be a bit different from the distribution in the full dataset.
 
@@ -302,7 +330,7 @@ We can take a look at the reads again now that they've been trimmed.
 >        - In *"FastQC output"*
 >           - {% icon param-select %} *"Type of FastQC output?"*: `Raw data`
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %})
-> 3. Inspect the `Webpage` output from MultiQC
+> 3. Add a tag `#fastqc-trimmed` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
 The MultiQC plot below shows the result from the full dataset for comparison.
@@ -335,7 +363,7 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 >    - In *"Results"*
 >        - {% icon param-select %} *"Which tool was used generate logs?"*: `HISAT2`
 >        - {% icon param-collection %} *"Output of HISAT2"*: `Mapping summary` (output of **HISAT2** {% icon tool %})
-> 3. Inspect the `Webpage` output from MultiQC
+> 3. Add a tag `#hisat` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
 The MultiQC plot below shows the result from the full dataset for comparison.
@@ -389,7 +417,7 @@ The alignment produces a set of BAM files, where each file contains the read ali
 > 2. **MultiQC** {% icon tool %} with the following parameters:
 >    - {% icon param-select %} *"Which tool was used generate logs?"*: `featureCounts`
 >        - {% icon param-collection %} *"Output of FeatureCounts"*: `featureCounts summary` (output of **featureCounts** {% icon tool %})
-> 3. Inspect the `Webpage` output from MultiQC
+> 3. Add a tag `#featurecounts` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
 The MultiQC plot below shows the result from the full dataset for comparison.
@@ -434,7 +462,7 @@ The counts files are currently in the format of one file per sample. However, it
 >
 {: .hands_on}
 
-Take a look at the output. The tutorial uses a small subset of the data ~ 1000 reads per sample to save on processing time. Most rows in that matrix will be all zero but you should have ~600 non-zero rows. The output for the full dataset is shown below. 
+Take a look at the output. The tutorial uses a small subset of the data ~ 1000 reads per sample to save on processing time. Most rows in that matrix will contain all zeros, there will be ~600 non-zero rows. The output for the full dataset is shown below. 
 
 ![Count matrix](../../images/rna-seq-reads-to-counts/count_matrix.png "Count matrix")
 
@@ -456,7 +484,7 @@ We'll use a prepared workflow to run these steps. This will also demonstrate how
 >
 > 2. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Reference genes"*: Use Galaxy Uploader to import this file as type BED file `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download`
+>    - {% icon param-file %} *"1: Reference genes"*: Import this file as type BED file `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download`
 >    - {% icon param-collection %} *"2: BAM files"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >
 >    {% include snippets/run_workflow.md %}
@@ -465,9 +493,7 @@ We'll use a prepared workflow to run these steps. This will also demonstrate how
 
 That will generate a MultiQC report with aggregated output from the tools below. 
 
-**You do not need to run the steps below.**
-
-That is to show how you could run the tools individually and what parameters were set for this dataset. 
+**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters were used for the tools in the workflow. 
 
 ## Strandness
 
