@@ -54,7 +54,7 @@ time_estimation: "2h"
 
 ### Why is sequence comparison hard?
 
-- The complexity of the problem grows as the length of the sequences become larger
+- The complexity of the problem grows as the length of the sequences becomes larger
 - Computing power doubles every two years according to Moore’s law but sequence databases grow purely exponential every year
 
 - Large-sized genomics are more fun!
@@ -112,6 +112,116 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 ![](../../images/hpc-for-lsgc/Dot02.png)
 
 ---
+
+### How useful are raw dotplots?
+
+.pull-left[
+
+
+
+- Dot matrix methods do not take into account the global information or context
+
+ - Noise
+
+ - Where is the signal?
+]
+
+.pull-right[.image-70[![](../../images/hpc-for-lsgc/Dot03.png)]]
+
+
+---
+
+### How do we include alignments?
+
+.pull-left[
+
+- Alignments have to take into account their surroundings!
+
+- Use dynamic programming to compute an accumulated score
+ 
+- Match =  4
+- Miss  = -4
+
+]
+
+.pull-right[
+.image-70[
+![](../../images/hpc-for-lsgc/Dot04.png)
+]
+]
+
+---
+
+### How do we include alignments? Cont. I
+
+.pull-left[
+
+- Alignments have to take into account their surroundings!
+
+- Use dynamic programming to compute an accumulated score
+
+- Match =  4
+- Miss  = -4
+- **Gap   = -iG - eG*L**
+
+]
+
+.pull-right[
+![](../../images/hpc-for-lsgc/Dot05.png)
+]
+
+---
+
+### How do we include alignments? Cont. II
+
+
+![](../../images/hpc-for-lsgc/Dot06.png)
+
+---
+
+### How do we include alignments? Cont. III 
+
+- But what if the two sequences are not toy examples?
+
+ - Typically, a mammalian chromosome is around the 100 MBp mark
+
+- Worst case scenario this algorithm takes quadratic time and space
+
+ - Imagine comparing two amoeba genomes (Not your usual case, though)
+  - Total number of cells: 10<sup>22</sup> \~the number of sand grains in the earth
+
+---
+### How do we include alignments? Cont. IV
+
+
+![](../../images/hpc-for-lsgc/Dot07.png)
+
+
+---
+
+### How to speed up finding alignments?
+
+- DP algorithms are not feasible for long sequences
+
+- Use seeds of fixed size (k-mers) to find anchor points and then perform the alignment
+
+- Can be done in linear time
+
+- But careful, the number of common seeds can be huge and optimization is still needed
+
+---
+
+### How to speed up finding alignments? Cont. I
+
+![](../../images/hpc-for-lsgc/Dot08.png)
+
+---
+### How to speed up finding alignments? Cont. II
+
+
+
+---
+
 
 ###  wat
 
