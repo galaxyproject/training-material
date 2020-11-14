@@ -34,21 +34,9 @@ follow_up_training:
         type: "internal"
         topic_name: transcriptomics
         tutorials:
-            - rna-seq-viz-with-cummerbund
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
+            - rna-seq-genes-to-pathways
             - rna-seq-viz-with-heatmap2
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
             - rna-seq-viz-with-volcanoplot
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
             - rna-seq-analysis-with-askomics-it
 ---
 
