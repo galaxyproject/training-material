@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-Seq reads to counts
-zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+zenodo_link: "https://zenodo.org/record/4249555"
 tags:
   - collections
   - mouse
@@ -91,7 +91,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 
 Read sequences are usually stored in compressed (gzipped) FASTQ files. Before the differential expression analysis can proceed, these reads must be aligned to the reference genome and counted into annotated genes. Mapping reads to the genome is a very important task, and many different aligners are available, such as HISAT2 ([Kim, Langmead, and Salzberg, 2015](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4655817/)), STAR ([Dobin et al. 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3530905/)) and Subread ([Liao, Smyth, and Shi 2013](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3664803/)]). Most mapping tasks require larger computers than an average laptop, so usually read mapping is done on a server in a linux-like environment, requiring some programming knowledge. However, Galaxy enables you to do this mapping without needing to know programming and if you don't have access to a server you can try to use one of the publically available Galaxies e.g. [usegalaxy.org](https://usegalaxy.org), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au/).
 
-The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Figshare](https://figshare.com/s/f5d63d8c265a05618137) and the links to the FASTQ files are provided below. 
+The raw reads used in this tutorial were obtained from SRA from the link given in GEO for the the mouse mammary gland dataset (Fu et al. 2015) (e.g `ftp://ftp-trace.ncbi.nlm.nih.gov/sra/sra-instant/reads/ByStudy/sra/SRP%2FSRP045%2FSRP045534`). For the purpose of this tutorial we are going to be working with a small part of the FASTQ files. We are only going to be mapping 1000 reads from each sample to enable running through all the steps quickly. If working with your own data you would use the full data and some results for the full mouse dataset will be shown for comparison. The small FASTQ files are available in [Zenodo](https://zenodo.org/record/4249555) and the links to the FASTQ files are provided below. 
 
 If you are sequencing your own data, the sequencing facility will almost always provide compressed FASTQ files which you can upload into Galaxy. For sequence data available through URLs, The [Galaxy Rule-based Uploader]({% link topics/galaxy-interface/tutorials/upload-rules/tutorial.md %}) can be used to import the files. It is much quicker than downloading FASTQs to your computer and uploading into Galaxy and also enables importing as a **Collection**. When you have more than a few files, using Galaxy Collections helps keep the datasets organised and tidy in the history. Collections also make it easier to maintain the sample names through tools and workflows. If you are not familiar with collections, you can take a look at the [Galaxy Collections tutorial]({% link topics/galaxy-interface/tutorials/collections/tutorial.md %}) for more details. The screenshots below show a comparison of what the FASTQ datasets for this tutorial would look like in the history if we imported them as datasets versus as a collection with the Rule-based Uploader.
 
@@ -115,18 +115,18 @@ The information we need to import the samples for this tutorial (sample ID, Grou
 
 ```
 SampleID	Group	URL
-MCL1-DL	basallactate	https://ndownloader.figshare.com/files/5053573?private_link=f5d63d8c265a05618137
-MCL1-DK	basallactate	https://ndownloader.figshare.com/files/5053570?private_link=f5d63d8c265a05618137
-MCL1-DJ	basalpregnant	https://ndownloader.figshare.com/files/5053567?private_link=f5d63d8c265a05618137
-MCL1-DI	basalpregnant	https://ndownloader.figshare.com/files/5053564?private_link=f5d63d8c265a05618137
-MCL1-DH	basalvirgin	https://ndownloader.figshare.com/files/5053561?private_link=f5d63d8c265a05618137
-MCL1-DG	basalvirgin	https://ndownloader.figshare.com/files/5053558?private_link=f5d63d8c265a05618137
-MCL1-LF	luminalvirgin	https://ndownloader.figshare.com/files/5053555?private_link=f5d63d8c265a05618137
-MCL1-LE	luminalvirgin	https://ndownloader.figshare.com/files/5053588?private_link=f5d63d8c265a05618137
-MCL1-LD	luminalpregnant	https://ndownloader.figshare.com/files/5053579?private_link=f5d63d8c265a05618137
-MCL1-LC	luminalpregnant	https://ndownloader.figshare.com/files/5053582?private_link=f5d63d8c265a05618137
-MCL1-LB	luminalvirgin	https://ndownloader.figshare.com/files/5053585?private_link=f5d63d8c265a05618137
-MCL1-LA	luminalvirgin	https://ndownloader.figshare.com/files/5053552?private_link=f5d63d8c265a05618137
+MCL1-DL	basallactate	https://zenodo.org/record/4249555/files/SRR1552455.fastq.gz
+MCL1-DK	basallactate	https://zenodo.org/record/4249555/files/SRR1552454.fastq.gz
+MCL1-DJ	basalpregnant	https://zenodo.org/record/4249555/files/SRR1552453.fastq.gz
+MCL1-DI	basalpregnant	https://zenodo.org/record/4249555/files/SRR1552452.fastq.gz
+MCL1-DH	basalvirgin	https://zenodo.org/record/4249555/files/SRR1552451.fastq.gz
+MCL1-DG	basalvirgin	https://zenodo.org/record/4249555/files/SRR1552450.fastq.gz
+MCL1-LF	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552449.fastq.gz
+MCL1-LE	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552448.fastq.gz
+MCL1-LD	luminalpregnant	https://zenodo.org/record/4249555/files/SRR1552447.fastq.gz
+MCL1-LC	luminalpregnant	https://zenodo.org/record/4249555/files/SRR1552446.fastq.gz
+MCL1-LB	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552445.fastq.gz
+MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.gz
 ```
 
 
@@ -145,7 +145,7 @@ In order to get these files into Galaxy, we will want to do a few things:
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the files from Figshare using Galaxy's Rule-based Uploader.
+> 2. Import the files from Zenodo using Galaxy's Rule-based Uploader.
 >    - Open the Galaxy Upload Manager
 >    - Click the tab **Rule-based**
 >        - *"Upload data as"*: `Collection(s)`
