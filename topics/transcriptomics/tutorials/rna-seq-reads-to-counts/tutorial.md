@@ -28,6 +28,12 @@ contributors:
 - mblue9
 - bphipson
 - hdashnow
+follow_up_training:
+    -
+        type: "internal"
+        topic_name: transcriptomics
+        tutorials:
+            - rna-seq-counts-to-genes
 
 ---
 
