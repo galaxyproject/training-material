@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-seq counts to genes
-zenodo_link: "https://zenodo.org/record/4269562"
+zenodo_link: "https://zenodo.org/record/4273218"
 tags:
   - limma-voom
   - mouse
@@ -106,15 +106,15 @@ We will use three files for this analysis:
 >
 >     To import the files, there are two options:
 >     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Zenodo](https://zenodo.org/record/4269562)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
 >     {% include snippets/import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
 >     ```
->     https://zenodo.org/record/4269562/files/countdata.tsv
->     https://zenodo.org/record/4269562/files/factordata.tsv
+>     https://zenodo.org/record/4273218/files/countdata.tsv
+>     https://zenodo.org/record/4273218/files/factordata.tsv
 >     ```
 >
 >     - Select *"Genome"*: `mm10`
@@ -142,8 +142,8 @@ The `factordata` file contains basic information about the samples that we will 
 >
 >The original files were imported and processed in Galaxy to format them as described below. They are available at
 >     ```
->     https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->     https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+>     https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
+>     https://zenodo.org/record/4273218/files/SampleInfo.txt
 >     ``` 
 >
 >![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
@@ -281,10 +281,9 @@ It turns out that there has been a mix-up with two samples, they have been misla
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
-> 1. Import the correct sample information file from `https://zenodo.org/record/4269562/files/factordata_fixed.tsv`
-> 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
-> 3. Delete the incorrect sample information datasets to avoid any confusion.
-> 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
+> 1. Import the correct sample information file from `https://zenodo.org/record/4273218/files/factordata_fixed.tsv`
+> 2. Delete the incorrect sample information datasets to avoid any confusion.
+> 3. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
 >      - **Output Options**
 >          - {% icon param-check %} *"Additional Plots"* tick:
 >              - `Glimma Interactive Plots`
