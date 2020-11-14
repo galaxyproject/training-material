@@ -8,7 +8,7 @@ objectives:
   - Learn, how to calculate peptide descriptor
   - Learn, how to create training data set from features?
   - Assessment of best ML algorithm in predicting anti-cancer peptide
-time_estimation: '1h'
+time_estimation: '30m'
 
 contributors:
   - jaidevjoshi83
@@ -61,9 +61,6 @@ Data can access in several ways. 
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
