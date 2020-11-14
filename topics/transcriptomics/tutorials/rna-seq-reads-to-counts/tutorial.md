@@ -238,10 +238,10 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
->
->  {% include snippets/select_collection.md %}
->
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
+>
+> {% include snippets/select_collection.md %}
+>
 {: .hands_on}
 
 
