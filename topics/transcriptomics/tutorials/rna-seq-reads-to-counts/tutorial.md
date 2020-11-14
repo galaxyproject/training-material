@@ -28,12 +28,29 @@ contributors:
 - mblue9
 - bphipson
 - hdashnow
+requirements:
+  -
+    type: "internal"
+    topic_name: quality-control
+    tutorials:
+      - sequence-analysis
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - ref-based
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+      - collections
+      - upload-rules
 follow_up_training:
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
-            - rna-seq-counts-to-genes
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - rna-seq-counts-to-genes
 
 ---
 
