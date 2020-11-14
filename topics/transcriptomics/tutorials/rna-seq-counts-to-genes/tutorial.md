@@ -282,7 +282,7 @@ It turns out that there has been a mix-up with two samples, they have been misla
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
 > 1. Import the correct sample information file from `https://zenodo.org/record/4269562/files/factordata_fixed.tsv`
-> 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
+> 2. Use the **Rerun** {% icon galaxy-refresh %} button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
 > 3. Delete the incorrect sample information datasets to avoid any confusion.
 > 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
 >      - **Output Options**
