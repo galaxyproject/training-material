@@ -105,7 +105,7 @@ We will use three files for this analysis:
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >     To import the files, there are two options:
->     - Option 1: From a shared data library if available (ask your instructor)
+>     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
 >     - Option 2: From [Zenodo](https://zenodo.org/record/4269562)
 >
 >     {% include snippets/import_via_link.md %}
