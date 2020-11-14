@@ -93,7 +93,7 @@ We will use three files for this analysis:
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >     To import the files, there are two options:
->     - Option 1: From a shared data library if available (ask your instructor)
+>     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
 >     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
 >     {% include snippets/import_via_link.md %}
@@ -237,7 +237,7 @@ Since we are interested in differences between groups, we need to specify which 
 > ### {% icon tip %} Tip: Multiple factors
 >
 > If we need to account for additional sources of variation, for example, batch, sex, genotype etc, we can input that information as additional factors. For example, if we were interested in the genes differentially expressed between the luminal and basal cell types, we could include an additional column to account for the variation due to the different stages.
-> ![Multiple factors](../../images/rna-seq-reads-to-counts/multiplefactors_factordata.png "Multiple factors")
+> ![Multiple factors](../../images/rna-seq-counts-to-genes/multiplefactors_factordata.png "Multiple factors")
 >
 {: .tip}
 
