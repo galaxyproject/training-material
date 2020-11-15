@@ -967,7 +967,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 14, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 15, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1540,14 +1540,6 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 </blockquote>
 
-<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
-
-<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 15:</span> HISAT2 <span class="notranslate">mapping</span></figcaption></figure>
-
-<p>An important metric to check is the percentage of <span class="notranslate">reads</span> mapped to the reference genome. A low percentage can indicate issues with the data or analysis. Over 90% of <span class="notranslate">reads</span> have mapped in all samples, which is a good <span class="notranslate">mapping</span> rate, and the vast majority of <span class="notranslate">reads</span> have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
-
-<p class="hands_on">It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#inspection-of-the-mapping-results"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>.</p>
-
 <blockquote class="comment">
   <h3 id="comment-settings-for-paired-end-or-stranded-reads"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Settings for Paired-end or Stranded <span class="notranslate">reads</span></h3>
 
@@ -1564,6 +1556,14 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
     </li>
   </ul>
 </blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-15"><img src="../../images/rna-seq-reads-to-counts/hisat2_se_plot.png" alt="HISAT2 mapping" /><figcaption><span class="figcaption-prefix">Figure 15:</span> HISAT2 <span class="notranslate">mapping</span></figcaption></figure>
+
+<p>An important metric to check is the percentage of <span class="notranslate">reads</span> mapped to the reference genome. A low percentage can indicate issues with the data or analysis. Over 90% of <span class="notranslate">reads</span> have mapped in all samples, which is a good <span class="notranslate">mapping</span> rate, and the vast majority of <span class="notranslate">reads</span> have mapped uniquely, they haven’t mapped to multiple locations in the reference genome.</p>
+
+<p class="hands_on">It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the <a href="/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html#inspection-of-the-mapping-results"><span class="notranslate">RNA</span>-seq ref-based tutorial</a>.</p>
 
 <p><strong>HISAT2</strong> generates a BAM file with mapped <span class="notranslate">reads</span>.</p>
 
@@ -1729,24 +1729,6 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 </blockquote>
 
-<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
-
-<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 16:</span> featureCounts assignments</figcaption></figure>
-
-<blockquote class="question">
-  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
-
-  <p>What % <span class="notranslate">reads</span> are assigned to exons?</p>
-
-  <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-    <p>~60-70% of <span class="notranslate">reads</span> are assigned to exons. This is a fairly typical number for <span class="notranslate">RNA</span>-seq.</p>
-
-  </blockquote>
-
-</blockquote>
-
 <blockquote class="comment">
   <h3 id="comment-settings-for-paired-end-or-stranded-reads-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Settings for Paired-end or Stranded <span class="notranslate">reads</span></h3>
 
@@ -1766,6 +1748,24 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
       </ul>
     </li>
   </ul>
+</blockquote>
+
+<p>The MultiQC plot below shows the result from the full dataset for comparison.</p>
+
+<figure id="figure-16"><img src="../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png" alt="featureCounts assignments" /><figcaption><span class="figcaption-prefix">Figure 16:</span> featureCounts assignments</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <p>What % <span class="notranslate">reads</span> are assigned to exons?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <p>~60-70% of <span class="notranslate">reads</span> are assigned to exons. This is a fairly typical number for <span class="notranslate">RNA</span>-seq.</p>
+
+  </blockquote>
+
 </blockquote>
 
 <p>The counts for the samples are output as tabular files. Take a look at one. The numbers in the first column of the counts file represent the Entrez gene identifiers for each gene, while the second column contains the counts for each gene for the sample.</p>
@@ -1795,9 +1795,9 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <h1 id="generating-a-qc-summary-report">Generating a QC summary report</h1>
 
-<p>There are several additional QCs we can perform to better understand the data, to see how good quality it is. These can also help determine if changes could be made in the lab to improve the quality of future datasets.</p>
+<p>There are several additional QCs we can perform to better understand the data, to see if it’s good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets.</p>
 
-<p>We’ll use a prepared <span class="notranslate">workflow</span> to run these steps. This will also demonstrate how you can make use of <span class="notranslate">Galaxy</span> workflows to easily run and reuse multiple steps.</p>
+<p>We’ll use a prepared <span class="notranslate">workflow</span> to run the first few of the QCs below. This will also demonstrate how you can make use of <span class="notranslate">Galaxy</span> workflows to easily run and reuse multiple analysis steps. The <span class="notranslate">workflow</span> will run the first three tools: Infer Experiment, MarkDuplicates and IdxStats and generate a MultiQC report. You can then edit the <span class="notranslate">workflow</span> if you’d like to add other steps.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-qc-report-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run QC report <span class="notranslate">workflow</span></h3>
@@ -1825,10 +1825,36 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
         </ul>
       </blockquote>
     </li>
+    <li>Import this file as type <span class="notranslate">BED</span> file:
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://sourceforge.net/projects/rseqc/files/<span class="notranslate">BED</span>/Mouse_Mus_musculus/mm10_RefSeq.<span class="notranslate">bed</span>.gz/download
+</code></pre></div>      </div>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+    </li>
     <li>Run <strong><span class="notranslate">Workflow</span> QC Report</strong> <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">workflow</span></span> using the following parameters:
       <ul>
         <li><em>“Send results to a new history”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Reference genes”</em>: Import this file as type <span class="notranslate">BED</span> file <code class="language-plaintext highlighter-rouge">https://sourceforge.net/projects/rseqc/files/<span class="notranslate">BED</span>/Mouse_Mus_musculus/mm10_RefSeq.<span class="notranslate">bed</span>.gz/download</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“1: Reference genes”</em>: the imported RefSeq <span class="notranslate">BED</span> file</li>
         <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“2: BAM files”</em>: <code class="language-plaintext highlighter-rouge">aligned <span class="notranslate">reads</span> (BAM)</code> (output of <strong>HISAT2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
       </ul>
 
@@ -1848,9 +1874,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
   </ol>
 </blockquote>
 
-<p>That will generate a MultiQC report with aggregated output from the tools below.</p>
-
-<p><strong>You do not need to run the hands-on steps below.</strong> They are just to show how you could run the tools individually and what parameters were used for the tools in the <span class="notranslate">workflow</span>.</p>
+<p><strong>You do not need to run the hands-on steps below.</strong> They are just to show how you could run the tools individually and what parameters to set.</p>
 
 <h2 id="strandness">Strandness</h2>
 
@@ -2335,7 +2359,7 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
     title = "RNA-Seq reads to counts (Galaxy Training Materials)",
     year = "2020",
     month = "11",
-    day = "14"
+    day = "15"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
