@@ -385,6 +385,14 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 > 3. Add a tag `#hisat` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
+> ### {% icon comment %} Settings for Paired-end or Stranded reads
+>
+> - If you have **paired-end** reads
+>     - Select *"Is this a single or paired library"* `Paired-end` or `Paired-end Dataset Collection` or `Paired-end data from single interleaved dataset`
+> - If you have **stranded** reads
+>     - Select *"Specify strand information"*: `Forward (FR)` or `Reverse (RF)`
+{: .comment}
+
 The MultiQC plot below shows the result from the full dataset for comparison.
 
 ![HISAT2 mapping](../../images/rna-seq-reads-to-counts/hisat2_se_plot.png "HISAT2 mapping")
@@ -393,14 +401,6 @@ An important metric to check is the percentage of reads mapped to the reference 
 
 It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#inspection-of-the-mapping-results).
 {: .hands_on}
-
-> ### {% icon comment %} Settings for Paired-end or Stranded reads
->
-> - If you have **paired-end** reads
->     - Select *"Is this a single or paired library"* `Paired-end` or `Paired-end Dataset Collection` or `Paired-end data from single interleaved dataset`
-> - If you have **stranded** reads
->     - Select *"Specify strand information"*: `Forward (FR)` or `Reverse (RF)`
-{: .comment}
 
 **HISAT2** generates a BAM file with mapped reads.
 
@@ -411,7 +411,6 @@ It is also good practice to visualise the read alignments in the BAM file, for e
 > To download a collection of datasets (e.g. the collection of BAM files) click on the floppy disk icon within the collection. This will download a tar file containing all the datasets in the collection. Note that for BAM files the .bai indexes (required for IGV) will be included automatically in the download.
 >
 {: .tip}
-
 
 
 # Counting
@@ -439,6 +438,15 @@ The alignment produces a set of BAM files, where each file contains the read ali
 > 3. Add a tag `#featurecounts` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
+> ### {% icon comment %} Settings for Paired-end or Stranded reads
+>
+> - If you have **paired-end** reads
+>     - Click *"Options for paired-end reads"*
+>         - {% icon param-select %} *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+> - If you have **stranded** reads
+>     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
+{: .comment}
+
 The MultiQC plot below shows the result from the full dataset for comparison.
 
 ![featureCounts assignments](../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png "featureCounts assignments")
@@ -455,15 +463,6 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 >
 {: .question}
 
-
-> ### {% icon comment %} Settings for Paired-end or Stranded reads
->
-> - If you have **paired-end** reads
->     - Click *"Options for paired-end reads"*
->         - {% icon param-select %} *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
-> - If you have **stranded** reads
->     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
-{: .comment}
 
 The counts for the samples are output as tabular files. Take a look at one. The numbers in the first column of the counts file represent the Entrez gene identifiers for each gene, while the second column contains the counts for each gene for the sample.
 
@@ -489,9 +488,9 @@ Now it is easier to see the counts for a gene across all samples. The accompanyi
 
 # Generating a QC summary report
 
-There are several additional QCs we can perform to better understand the data, to see how good quality it is. These can also help determine if changes could be made in the lab to improve the quality of future datasets.
+There are several additional QCs we can perform to better understand the data, to see if it's good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets. 
 
-We'll use a prepared workflow to run these steps. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple steps.
+We'll use a prepared workflow to run the first few of the QCs below. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple analysis steps. The workflow will run the first three tools: Infer Experiment, MarkDuplicates and IdxStats and generate a MultiQC report. You can then edit the workflow if you'd like to add other steps.
 
 > ### {% icon hands_on %} Hands-on: Run QC report workflow
 >
@@ -501,18 +500,23 @@ We'll use a prepared workflow to run these steps. This will also demonstrate how
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
+> 2. Import this file as type BED file: 
+>    ```
+>    https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download
+>    ```
+>    {% include snippets/import_via_link.md %} 
+>
+> 3. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Reference genes"*: Import this file as type BED file `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download`
+>    - {% icon param-file %} *"1: Reference genes"*: the imported RefSeq BED file
 >    - {% icon param-collection %} *"2: BAM files"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >
 >    {% include snippets/run_workflow.md %}
-> 3. Inspect the `Webpage` output from MultiQC
+> 4. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
-That will generate a MultiQC report with aggregated output from the tools below. 
 
-**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters were used for the tools in the workflow. 
+**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters to set. 
 
 ## Strandness
 
