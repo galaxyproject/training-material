@@ -413,7 +413,6 @@ It is also good practice to visualise the read alignments in the BAM file, for e
 {: .tip}
 
 
-
 # Counting
 
 The alignment produces a set of BAM files, where each file contains the read alignments for each sample. In the BAM file, there is a chromosomal location for every read that mapped. Now that we have figured out where each read comes from in the genome, we need to summarise the information across genes or exons. The mapped reads can be counted across mouse genes by using a tool called featureCounts ({% cite liao2013featurecounts %}). featureCounts requires gene annotation specifying the genomic start and end position of each exon of each gene. For convenience, featureCounts contains built-in annotation for mouse (`mm10`, `mm9`) and human (`hg38`, `hg19`) genome assemblies, where exon intervals are defined from the NCBI RefSeq annotation of the reference genome. Reads that map to exons of genes are added together to obtain the count for each gene, with some care taken with reads that span exon-exon boundaries. The output is a count for each Entrez Gene ID, which are numbers such as `100008567`. For other species, users will need to read in a data frame in GTF format to define the genes and exons. Users can also specify a custom annotation file in SAF format. See the tool help in Galaxy, which has an example of what an SAF file should like like, or the Rsubread users guide for more information.
@@ -489,9 +488,9 @@ Now it is easier to see the counts for a gene across all samples. The accompanyi
 
 # Generating a QC summary report
 
-There are several additional QCs we can perform to better understand the data, to see how good quality it is. These can also help determine if changes could be made in the lab to improve the quality of future datasets.
+There are several additional QCs we can perform to better understand the data, to see if it's good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets. 
 
-We'll use a prepared workflow to run these steps. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple steps.
+We'll use a prepared workflow to run the first few of the QCs below. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple analysis steps. The workflow will run the first three tools: Infer Experiment, MarkDuplicates and IdxStats and generate a MultiQC report. You can then edit the workflow if you'd like to add other steps.
 
 > ### {% icon hands_on %} Hands-on: Run QC report workflow
 >
@@ -510,9 +509,8 @@ We'll use a prepared workflow to run these steps. This will also demonstrate how
 > 3. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
-That will generate a MultiQC report with aggregated output from the tools below. 
 
-**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters were used for the tools in the workflow. 
+**You do not need to run the hands-on steps below.** They are just to show how you could run the tools individually and what parameters to set. 
 
 ## Strandness
 
