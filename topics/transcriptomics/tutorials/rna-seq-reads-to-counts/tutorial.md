@@ -500,13 +500,19 @@ We'll use a prepared workflow to run the first few of the QCs below. This will a
 >
 >    {% include snippets/import_workflow.md %}
 >
-> 2. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
+> 2. Import this file as type BED file: 
+>    ```
+>    https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download
+>    ```
+>    {% include snippets/import_via_link.md %} 
+>
+> 3. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
->    - {% icon param-file %} *"1: Reference genes"*: Import this file as type BED file `https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download`
+>    - {% icon param-file %} *"1: Reference genes"*: the imported RefSeq BED file
 >    - {% icon param-collection %} *"2: BAM files"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >
 >    {% include snippets/run_workflow.md %}
-> 3. Inspect the `Webpage` output from MultiQC
+> 4. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 
 
