@@ -86,7 +86,7 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 >    - In *"Input Options"*:
 >        - {% icon param-file %} *"FASTA files"*: `protein database`
 >        - *"Identifier parse rule"*: `>.*\|(.*)\|`
->        - *"Description parse rule"*: `>.*\|.*\|[^ ]+ (.*) OS`
+>        - *"Description parse rule"*: `>(.*) OS`
 >    - In *"Search Options"*:
 >        - *"minimum unique peptides"*: `1`
 >    - In *"Parameter Group"*:
@@ -201,7 +201,7 @@ To explore the proteomic composition of the two serum samples some postprocessin
 >
 > 1. {% tool [Filter](Filter1) %} with the following parameters:
 >    - {% icon param-file %} *"Filter"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
->    - *"With following condition"*: `c31!="+"`
+>    - *"With following condition"*: `c38!="+"`
 >    - *"Number of header lines to skip"*: `1`
 >
 > 2. {% tool [Select](Grep1) %} with the following parameters:
