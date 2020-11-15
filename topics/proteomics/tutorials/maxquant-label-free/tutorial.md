@@ -61,9 +61,9 @@ The serum proteomic samples and the fasta file for this training were deposited 
 > 2. Import the fasta and raw files from [Zenodo](https://zenodo.org/record/3774452)
 >
 >    ```
->    https://zenodo.org/record/3774452/files/Protein_database.fasta
->    https://zenodo.org/record/3774452/files/Sample1.raw
->    https://zenodo.org/record/3774452/files/Sample2.raw
+>    https://zenodo.org/record/4274987/files/Protein_database.fasta
+>    https://zenodo.org/record/4274987/files/Sample1.raw
+>    https://zenodo.org/record/4274987/files/Sample2.raw
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
@@ -145,10 +145,10 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 > 1. Import the files from [Zenodo](https://zenodo.org/record/3774452)
 >
 >    ```
->    https://zenodo.org/record/3774452/files/PTXQC_report.pdf
->    https://zenodo.org/record/3774452/files/MaxQuant_Protein_Groups.tabular
->    https://zenodo.org/record/3774452/files/MaxQuant_Peptides.tabular
->    https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
+>    https://zenodo.org/record/4274987/files/PTXQC_report.pdf
+>    https://zenodo.org/record/4274987/files/MaxQuant_Protein_Groups.tabular
+>    https://zenodo.org/record/4274987/files/MaxQuant_Peptides.tabular
+>    https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 >    ```
 {: .tip}
 
