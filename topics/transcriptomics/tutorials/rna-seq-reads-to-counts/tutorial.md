@@ -385,6 +385,14 @@ Now that we have prepared our reads, we can align the reads for our 12 samples. 
 > 3. Add a tag `#hisat` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
+> ### {% icon comment %} Settings for Paired-end or Stranded reads
+>
+> - If you have **paired-end** reads
+>     - Select *"Is this a single or paired library"* `Paired-end` or `Paired-end Dataset Collection` or `Paired-end data from single interleaved dataset`
+> - If you have **stranded** reads
+>     - Select *"Specify strand information"*: `Forward (FR)` or `Reverse (RF)`
+{: .comment}
+
 The MultiQC plot below shows the result from the full dataset for comparison.
 
 ![HISAT2 mapping](../../images/rna-seq-reads-to-counts/hisat2_se_plot.png "HISAT2 mapping")
@@ -393,14 +401,6 @@ An important metric to check is the percentage of reads mapped to the reference 
 
 It is also good practice to visualise the read alignments in the BAM file, for example using IGV, see the [RNA-seq ref-based tutorial]({{ site.baseurl }}/topics/transcriptomics/tutorials/ref-based/tutorial.html#inspection-of-the-mapping-results).
 {: .hands_on}
-
-> ### {% icon comment %} Settings for Paired-end or Stranded reads
->
-> - If you have **paired-end** reads
->     - Select *"Is this a single or paired library"* `Paired-end` or `Paired-end Dataset Collection` or `Paired-end data from single interleaved dataset`
-> - If you have **stranded** reads
->     - Select *"Specify strand information"*: `Forward (FR)` or `Reverse (RF)`
-{: .comment}
 
 **HISAT2** generates a BAM file with mapped reads.
 
@@ -439,6 +439,15 @@ The alignment produces a set of BAM files, where each file contains the read ali
 > 3. Add a tag `#featurecounts` to the `Webpage` output from MultiQC and inspect the webpage
 {: .hands_on}
 
+> ### {% icon comment %} Settings for Paired-end or Stranded reads
+>
+> - If you have **paired-end** reads
+>     - Click *"Options for paired-end reads"*
+>         - {% icon param-select %} *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
+> - If you have **stranded** reads
+>     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
+{: .comment}
+
 The MultiQC plot below shows the result from the full dataset for comparison.
 
 ![featureCounts assignments](../../images/rna-seq-reads-to-counts/featureCounts_assignment_plot.png "featureCounts assignments")
@@ -455,15 +464,6 @@ The MultiQC plot below shows the result from the full dataset for comparison.
 >
 {: .question}
 
-
-> ### {% icon comment %} Settings for Paired-end or Stranded reads
->
-> - If you have **paired-end** reads
->     - Click *"Options for paired-end reads"*
->         - {% icon param-select %} *"Count fragments instead of reads"*: `Enabled; fragments (or templates) will be counted instead of reads`
-> - If you have **stranded** reads
->     - {% icon param-select %} Select *"Specify strand information"*: `Stranded (Forward)` or `Stranded (Reverse)`
-{: .comment}
 
 The counts for the samples are output as tabular files. Take a look at one. The numbers in the first column of the counts file represent the Entrez gene identifiers for each gene, while the second column contains the counts for each gene for the sample.
 
