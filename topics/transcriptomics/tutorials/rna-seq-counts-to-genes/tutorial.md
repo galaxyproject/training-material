@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: RNA-seq counts to genes
-zenodo_link: "https://figshare.com/s/f5d63d8c265a05618137"
+zenodo_link: "https://zenodo.org/record/4273218"
 tags:
   - limma-voom
   - mouse
@@ -15,7 +15,7 @@ objectives:
   - "QC of count data"
   - "Visualisation and interactive exploration of count data"
   - "Identification of differentially expressed genes"
-time_estimation: "3h"
+time_estimation: "2h"
 key_points:
   - "The limma-voom tool can be used to perform differential expression and output useful plots"
   - "Multiple comparisons can be input and compared"
@@ -34,21 +34,9 @@ follow_up_training:
         type: "internal"
         topic_name: transcriptomics
         tutorials:
-            - rna-seq-viz-with-cummerbund
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
+            - rna-seq-genes-to-pathways
             - rna-seq-viz-with-heatmap2
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
             - rna-seq-viz-with-volcanoplot
-    -
-        type: "internal"
-        topic_name: transcriptomics
-        tutorials:
             - rna-seq-analysis-with-askomics-it
 ---
 
@@ -62,11 +50,11 @@ There are many steps involved in analysing an RNA-Seq experiment. The analysis b
 
 **Mouse mammary gland dataset**
 
-The data for this tutorial comes from a Nature Cell Biology paper, [EGF-mediated induction of Mcl-1 at the switch to lactation is essential for alveolar cell survival](https://www.ncbi.nlm.nih.gov/pubmed/25730472)), Fu et al. 2015. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number [GSE60450](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450).
+The data for this tutorial comes from a Nature Cell Biology paper by {% cite Fu2015 %}. Both the raw data (sequence reads) and processed data (counts) can be downloaded from Gene Expression Omnibus database (GEO) under accession number [GSE60450](http://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE60450).
 
-This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq reads to counts tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the [Rsubread](https://www.biorxiv.org/content/early/2018/08/15/377762) aligner, followed by counting reads mapped to RefSeq genes with [featureCounts](https://academic.oup.com/bioinformatics/article/30/7/923/232889) (Liao, Smyth, and Shi 2014), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
+This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq reads to counts tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the Rsubread aligner ({% cite Liao2019 %}), followed by counting reads mapped to RefSeq genes with featureCounts ({% cite liao2013featurecounts %}), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
 
-We will use **limma-voom** for identifying differentially expressed genes here. Other popular alternatives are edgeR and DESeq2. Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity ([Costa-Silva, Domingues and Lopes 2017](https://www.ncbi.nlm.nih.gov/pubmed/29267363)) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples ([Chen, Lun, Smyth 2016](https://f1000research.com/articles/5-1438/v2)).
+We will use **limma-voom** ({% cite law2016rna %}) for identifying differentially expressed genes here. Other popular alternatives are edgeR ({% cite robinson2010edger %}) and DESeq2 ({% cite love2014moderated %}). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity ({% cite CostaSilva2017 %}) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples ({% cite Chen2016 %}).
 
 This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html), first taught [here](http://combine-australia.github.io/2016-05-11-RNAseq/).
 
@@ -105,21 +93,21 @@ We will use three files for this analysis:
 > 2. Import the mammary gland counts table and the associated sample information file.
 >
 >     To import the files, there are two options:
->     - Option 1: From a shared data library if available (ask your instructor)
->     - Option 2: From [Figshare](https://figshare.com/s/1d788fd384d33e913a2a)
+>     - Option 1: From a shared data library if available (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }}`)
+>     - Option 2: From [Zenodo](https://zenodo.org/record/4273218)
 >
 >     {% include snippets/import_via_link.md %}
 >
 >     - You can paste both links below into the **Paste/Fetch** box:
 >
 >     ```
->     https://ndownloader.figshare.com/files/5057929?private_link=1d788fd384d33e913a2a
->     https://ndownloader.figshare.com/files/5999829?private_link=1d788fd384d33e913a2a
+>     https://zenodo.org/record/4273218/files/countdata.tsv
+>     https://zenodo.org/record/4273218/files/factordata.tsv
 >     ```
 >
 >     - Select *"Genome"*: `mm10`
 >
-> 2. Rename the counts dataset as `seqdata` and the sample information dataset as `sampleinfo` using the {% icon galaxy-pencil %} (pencil) icon.
+> 2. Rename the counts dataset as `countdata` and the sample information dataset as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
 >
@@ -129,50 +117,60 @@ We will use three files for this analysis:
 {: .hands_on}
 
 
-Let’s take a look at the data. The `seqdata` file contains information about genes (one gene per row), the first column has the Entrez gene id, the second has the gene length and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
+Let’s take a look at the data. The `countdata` file contains information about genes (one gene per row), the first column has the Entrez gene id and the remaining columns contain information about the number of reads aligning to the gene in each experimental sample. There are two replicates for each cell type and time point (detailed sample info can be found in file “GSE60450_series_matrix.txt” from the GEO website). The first few rows and columns of the seqdata file are shown below.
 
-![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
+![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file")
 
-The `sampleinfo` file contains basic information about the samples that we will need for the analysis. See below.
+The `factordata` file contains basic information about the samples that we will need for the analysis. See below.
 
-![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
+![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file")
 
-## Format the data
 
-Let’s create a new file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
-
-> ### {% icon hands_on %} Hands-on: Format the counts data
+> ### {% icon details %} Formatting the data
 >
-> 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to cut"*: `seqdata`
->      - {% icon param-select %} *"Operation"*: `Discard`
->      - {% icon param-select %} *"List of fields"*: Select `Column:2`
-> 2. **Replace Text in entire line** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
->      - {% icon param-text %} *"Find pattern"*: `_B[A-Z0-9_]+`
-> 3. **Replace Text in entire line** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to process"*: output of **Replace Text** {% icon tool %}
->      - {% icon param-text %} *"Find pattern"*: `-`
->      - {% icon param-text %} *"Replace with"*: `.`
-> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->    ![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file (after formatting)")
-{: .hands_on}
-
-Next, let's create a new file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
-
-> ### {% icon hands_on %} Hands-on: Format the sample information file
+>The original files were imported and processed in Galaxy to format them as described below. They are available at
+>     ```
+>     https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
+>     https://zenodo.org/record/4273218/files/SampleInfo.txt
+>     ``` 
 >
-> 1. **Merge Columns together** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"Select data"*: `sampleinfo`
->      - {% icon param-select %} *"Merge column"*: `Column: 3`
->      - {% icon param-select %} *"with column"*: `Column: 4`
-> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
->      - {% icon param-file %} *"File to cut"*: output of **Merge Columns** {% icon tool %}
->      - {% icon param-select %} *"Operation"*: `Keep`
->      - {% icon param-select %} *"List of fields"*: Select `Column:2` and `Column:5`
-> 3. Rename file as `factordata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
->    ![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file (after formatting)")
-{: .hands_on}
+>![seqdata file](../../images/rna-seq-counts-to-genes/seqdata.png "Count file (before formatting)")
+>
+>![sampleinfo file](../../images/rna-seq-counts-to-genes/sampleinfo.png "Sample information file (before formatting)")
+>
+>To create the file, `countdata`, that contains only the counts for the 12 samples i.e. we'll remove the gene length column with the **Cut columns from a table (cut)** tool. The sample names are also pretty long so we'll use the **>Replace Text in entire line** tool to shorten these to contain only the relevant information about each sample. We will also replace the hyphen in the sample names with a dot so they match the names in the sample information file.
+>
+>> ### {% icon hands_on %} Hands-on: Format the counts data
+>>
+>> 1. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to cut"*: `seqdata`
+>>      - {% icon param-select %} *"Operation"*: `Discard`
+>>      - {% icon param-select %} *"List of fields"*: Select `Column:2`
+>> 2. **Replace Text in entire line** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to process"*: output of **Cut** {% icon tool %}
+>>      - {% icon param-text %} *"Find pattern"*: `_B[A-Z0-9_]+`
+>> 3. **Replace Text in entire line** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to process"*: output of **Replace Text** {% icon tool %}
+>>      - {% icon param-text %} *"Find pattern"*: `-`
+>>      - {% icon param-text %} *"Replace with"*: `.`
+>> 4. Rename file as `countdata` using the {% icon galaxy-pencil %} (pencil) icon. 
+>{: .hands_on}
+>
+>To create the file, `factordata`, that contains the groups information that we need for the limma-voom tool. We'll combine the cell type and mouse status to make 6 groups e.g. we'll combine the CellType `basal` with the Status `pregnant` for the group `basalpregnant`. We'll use the **Merge Columns** tool to combine the cell type and mouse status columns in the sample information file, making a column with the 6 group names.
+>
+>> ### {% icon hands_on %} Hands-on: Format the sample information file
+>>
+>> 1. **Merge Columns together** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"Select data"*: `sampleinfo`
+>>      - {% icon param-select %} *"Merge column"*: `Column: 3`
+>>      - {% icon param-select %} *"with column"*: `Column: 4`
+>> 2. **Cut columns from a table (cut)** {% icon tool %} with the following parameters:
+>>      - {% icon param-file %} *"File to cut"*: output of **Merge Columns** {% icon tool %}
+>>      - {% icon param-select %} *"Operation"*: `Keep`
+>>      - {% icon param-select %} *"List of fields"*: Select `Column:2` and `Column:5`
+>> 3. Rename file as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
+>{: .hands_on}
+{: .details}
 
 ## Get gene annotations
 
@@ -204,12 +202,12 @@ There are a few ways to filter out lowly expressed genes. When there are biologi
 
 > ### {% icon details %} More details on filtering
 >
-> The limma tool uses the `cpm` function from the edgeR package [Robinson, McCarthy, and Smyth 2010](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2796818/) to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalizing for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for expression in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.
+> The limma tool uses the `cpm` function from the edgeR package ({% cite robinson2010edger %}) to generate the CPM values which can then be filtered. Note that by converting to CPMs we are normalizing for the different sequencing depths for each sample. A CPM of 0.5 is used as it corresponds to a count of 10-15 for the library sizes in this data set. If the count is any smaller, it is considered to be very low, indicating that the associated gene is not expressed in that sample. A requirement for expression in two or more libraries is used as each group contains two replicates. This ensures that a gene will be retained if it is only expressed in one group. Smaller CPM thresholds are usually appropriate for larger libraries. As a general rule, a good threshold can be chosen by identifying the CPM that corresponds to a count of 10, which in this case is about 0.5. You should filter with CPMs rather than filtering on the counts directly, as the latter does not account for differences in library sizes between samples.
 {: .details}
 
 ## Normalization for composition bias
 
-In an RNA-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less reads from other genes. By default, TMM normalization [(Robinson and Oshlack 2010)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC2864565/) is performed by the limma tool using the edgeR `calcNormFactors` function (this can be changed under **Advanced Options**). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log expression ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.
+In an RNA-seq analysis, the counts are normalized for different sequencing depths between samples. Normalizing to eliminate composition biases between samples is also typically performed. Composition biases can occur, for example, if there are a few highly expressed genes dominating in some samples, leading to less reads from other genes. By default, TMM normalization ({% cite robinson2010scaling %}) is performed by the limma tool using the edgeR `calcNormFactors` function (this can be changed under **Advanced Options**). TMM stands for Trimmed Mean of M values, where a weighted trimmed mean of the log expression ratios is used to scale the counts for the samples. See the figure from the TMM paper below. Note the plot (Figure 1c) that shows how a few highly expressed genes in the liver sample (where the arrow is) results in the majority of other genes in the sample having the appearance of being expressed lower in liver. The mid-line through the points is offset from the expected zero and the TMM normalization factor (red line) scales the counts to adjust for this.
 
 ![TMM normalization](../../images/rna-seq-counts-to-genes/TMM.png "TMM normalization (Robinson and Oshlack 2010)")
 
@@ -235,13 +233,22 @@ Since we are interested in differences between groups, we need to specify which 
 > 2. Inspect the `Report` produced by clicking on the {% icon galaxy-eye %} (eye) icon
 {: .hands_on}
 
+
+> ### {% icon tip %} Tip: Multiple factors
+>
+> If we need to account for additional sources of variation, for example, batch, sex, genotype etc, we can input that information as additional factors. For example, if we were interested in the genes differentially expressed between the luminal and basal cell types, we could include an additional column to account for the variation due to the different stages.
+> ![Multiple factors](../../images/rna-seq-counts-to-genes/multiplefactors_factordata.png "Multiple factors")
+>
+{: .tip}
+
+
 # QC of count data
 
 Before we check out the differentially expressed genes, we can look at the `Report` information to check that the data is good quality and that the samples are as we would expect.
 
 ## Multidimensional scaling plot
 
-By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions, and you may choose to include batch as an additional factor in the differential expression analysis. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** *Additional Plots* `MDS Extra`. These are displayed in the `Report` along with a link to a PDF version (MDSPlot_extra.pdf). Selecting the `Glimma Interactive Plots` will generate an interactive version of the MDS plot, see the plots section of the report below. If outlier samples are detected you may decide to remove them. Alternatively, you could downweight them by choosing the option in the limma tool *Apply voom with sample quality weights?*. The voom sample quality weighting is described in the paper *Why weight? Modelling sample and observational level variability improves power in RNA-seq analyses* [(Liu et al. 2015)](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4551905/).
+By far, one of the most important plots we make when we analyse RNA-Seq data are MDS plots. An MDS plot is a visualisation of a principal components analysis, which determines the greatest sources of variation in the data. A principal components analysis is an example of an unsupervised analysis, where we don’t need to specify the groups. If your experiment is well controlled and has worked well, what we hope to see is that the greatest sources of variation in the data are the treatments/groups we are interested in. It is also an incredibly useful tool for quality control and checking for outliers. This Galaxy limma tool outputs an MDS plot by default in the `Report` and a link is also provided to a PDF version (`MDSPlot_CellTypeStatus.pdf`). A scree plot is also produced that shows how much variation is attributed to each dimension. If there was a batch effect for example, you may see high values for additional dimensions, and you may choose to include batch as an additional factor in the differential expression analysis. The limma tool plots the first two dimensions by default (1 vs 2), however you can also plot additional dimensions 2 vs 3 and 3 vs 4 using under **Output Options** *Additional Plots* `MDS Extra`. These are displayed in the `Report` along with a link to a PDF version (MDSPlot_extra.pdf). Selecting the `Glimma Interactive Plots` will generate an interactive version of the MDS plot, see the plots section of the report below. If outlier samples are detected you may decide to remove them. Alternatively, you could downweight them by choosing the option in the limma tool *Apply voom with sample quality weights?*. The voom sample quality weighting is described in the paper *Why weight? Modelling sample and observational level variability improves power in RNA-seq analyses ({% cite Liu2015 %})*.
 
 ![MDS Plot](../../images/rna-seq-counts-to-genes/mdsscree.png "MDS Plot")
 
@@ -262,10 +269,9 @@ It turns out that there has been a mix-up with two samples, they have been misla
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
-> 1. Import the correct sample information file from `https://ndownloader.figshare.com/files/5999832?private_link=1d788fd384d33e913a2a`
-> 2. Use the Rerun button in the History to redo the **Merge Columns** and **Cut** steps on the correct sample information file.
-> 3. Delete the incorrect sample information datasets to avoid any confusion.
-> 4. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
+> 1. Import the correct sample information file from `https://zenodo.org/record/4273218/files/factordata_fixed.tsv`
+> 2. Delete the incorrect sample information datasets to avoid any confusion.
+> 3. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
 >      - **Output Options**
 >          - {% icon param-check %} *"Additional Plots"* tick:
 >              - `Glimma Interactive Plots`
@@ -318,21 +324,24 @@ Density plots can be output in the `Report` if *Filter lowly expressed genes* is
 
 ![Density Plots](../../images/rna-seq-counts-to-genes/densityplots.png "Density Plots")
 
-We can also have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.
-
 The `Report` provides links to PDFs of all plots shown in the `Report` and also to the rest of the additional plots selected to be output.
 
 ![Report Outputs](../../images/rna-seq-counts-to-genes/report_plots.png "Report outputs")
 
-Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
-
-![CPM threshold Plots](../../images/rna-seq-counts-to-genes/cpmsvscounts.png "CPM vs Raw Counts Plots")
-
-> ### {% icon comment %} Thresholds
+> ### {% icon details %} Cpm plots
 >
-> * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
+>We can also have a look more closely to see whether our threshold of 0.5 CPM does indeed correspond to a count of about 10-15 reads in each sample with the plots of CPM versus raw counts.
 >
-{: .comment}
+>Click on the `CpmPlots.pdf` link in the `Report`. You should see 12 plots, one for each sample. Two of the plots are shown below. From these plots we can see that 0.5 CPM is equivalent to ~10 counts in each of the 12 samples, so 0.5 seems to be an appropriate threshold for this dataset (these samples all have sequencing depth of 20-30 million, see the `Library information` file below, so a CPM value of 0.5 would be ~10 counts).
+>
+>![CPM threshold Plots](../../images/rna-seq-counts-to-genes/cpmsvscounts.png "CPM vs Raw Counts Plots")
+>
+>> ### {% icon comment %} Thresholds
+>>
+>> * A threshold of 1 CPM in at least minimum group sample size is a good rule of thumb for samples with about 10 million reads. For larger library sizes increase the CPM theshold and for smaller library sizes decrease it. Check the CpmPlots to see if the selected threshold looks appropriate for the samples (equivalent to ~10 reads).
+>>
+>{: .comment}
+{: .details}
 
 
 ## Box plots
@@ -368,14 +377,14 @@ The TMM normalization generates normalization factors, where the product of thes
 >    {: .solution}
 {: .question}
 
-## MD plots for samples
-
-It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
-
-Click on the `MDPlots_Samples.pdf` link in the `Report`. You should see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
-![MD Plot LA](../../images/rna-seq-counts-to-genes/mdsampleLA.png "MD Plots for MCL1.LA before and after TMM normalization")
-![MD Plot LE](../../images/rna-seq-counts-to-genes/mdsampleLE.png "MD Plots for MCL1.LE before and after TMM normalization")
-
+> ### {% icon details %} MD plots for samples
+>
+>It is considered good practice to make mean-difference (MD) plots for all the samples as a quality check, as described in this [edgeR workflow article](https://f1000research.com/articles/5-1438/v2). These plots allow expression profiles of individual samples to be explored more closely. An MD plot shows the log-fold change between a sample against the average expression across all the other samples. This visualisation can help you see if there are genes highly upregulated or downregulated in a sample. If we look at mean difference plots for these samples, we should be able to see the composition bias problem. The mean-difference plots show average expression (mean: x-axis) against log-fold-changes (difference: y-axis).
+>
+>Click on the `MDPlots_Samples.pdf` link in the `Report`. You should see 12 MD plots, one for each sample. Let's take a look at the plots for the two samples MCL1.LA and MCL1.LE that had the largest and smallest normalization factors. The MD plots on the left below show the counts normalized for library size and the plots on the right show the counts after the TMM normalization has been applied. MCL1.LA had the largest normalization factor and was above the median line in the unnormalized by TMM box plots. MCL1.LE had the smallest normalization factor and was below the median line in the box plots. These MD plots help show the composition bias problem has been addressed.
+>![MD Plot LA](../../images/rna-seq-counts-to-genes/mdsampleLA.png "MD Plots for MCL1.LA before and after TMM normalization")
+>![MD Plot LE](../../images/rna-seq-counts-to-genes/mdsampleLE.png "MD Plots for MCL1.LE before and after TMM normalization")
+{: .details}
 
 ## Voom variance plot
 
@@ -397,7 +406,7 @@ The SA plot below plots log2 residual standard deviations against mean log-CPM v
 >
 >   ![Voom Mixedup Plot](../../images/rna-seq-counts-to-genes/voomplot_mixed.png "Voom Plot mixed-up samples")
 >
-> More examples of the variation this plot can show can be seen in Figure 1 from the [limma-voom](https://genomebiology.biomedcentral.com/articles/10.1186/gb-2014-15-2-r29) paper, shown below.
+> More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper ({% cite law2016rna %}), shown below.
 >
 >   ![Voom Plot Examples](../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg "Voom Plot more examples")
 >
@@ -434,7 +443,7 @@ The MD Plot highlighted genes are significant at an adjusted p-value (adj.P) thr
 
 # Testing relative to a threshold (TREAT)
 
-When there is a lot of differential expression, sometimes we may want to cut-off on a fold change threshold, as well as a p-value threshold, so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called `treat` in limma that performs this style of analysis correctly [(McCarthy and Smyth 2009)](https://www.ncbi.nlm.nih.gov/pubmed/19176553). TREAT will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this `basalpregnant-basallactate` comparison, so let's rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a fold change of 1.5).
+When there is a lot of differential expression, sometimes we may want to cut-off on a fold change threshold, as well as a p-value threshold, so that we follow up on the most biologically significant genes. However, it is not recommended to simply rank by p-value and then discard genes with small logFC’s, as this has been shown to increase the false discovery rate. In other words, you are not controlling the false discovery rate at 5% any more. There is a function called `treat` in limma that performs this style of analysis correctly ({% cite McCarthy2009 %}). TREAT will simply take a user-specified log fold change cut-off and recalculate the moderated t-statistics and p-values with the new information about logFC. There are thousands of genes differentially expressed in this `basalpregnant-basallactate` comparison, so let's rerun the analysis applying TREAT and similar thresholds to what was used in the Fu paper: an adjusted P value of 0.01 (1% false discovery rate) and a log-fold-change cutoff of 0.58 (equivalent to a fold change of 1.5).
 
 > ### {% icon hands_on %} Hands-on: Testing relative to a threshold (TREAT)
 >
@@ -474,7 +483,7 @@ The limma-voom tool can also auto-generate stripcharts to view the expression of
 
 ## Interactive DE plots (Glimma)
 
-Interactive versions of the MD and Volcano plots can be output by the limma-voom tool via the [Glimma](https://github.com/Shians/Glimma) package, if a gene annotation file is provided and `Glimma Interactive Plots` is selected. Links to the Glimma html pages are generated in the `Report`.
+Interactive versions of the MD and Volcano plots can be output by the limma-voom tool via the Glimma package ({% cite Su2017 %}), if a gene annotation file is provided and `Glimma Interactive Plots` is selected. Links to the Glimma html pages are generated in the `Report`.
 
 Let's take a look at the interactive MD plot. Click on the `Glimma_MDPlot_basalpregnant-basallactate.html` link in the `Report`. You should see a two-panel interactive MD plot like below. The left plot shows the log-fold-change vs average expression. The right plot shows the expression levels of a particular gene of each sample by groups (similar to the stripcharts). Hovering over points on left plot will plot expression level for corresponding gene, clicking on points will fix the expression plot to gene. Clicking on rows on the table has the same effect as clicking on the corresponding gene in the plot.
 
@@ -527,4 +536,4 @@ To see some methods for identifying differentially expressed pathways in this da
 # Conclusion
 {:.no_toc}
 
-In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, [RNA-seq reads to counts]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}), that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; *RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR* [(Law et al. 2016)](https://f1000research.com/articles/5-1408/v2) and *From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline* [(Chen, Lun, Smyth 2016)](https://f1000research.com/articles/5-1438/v2).
+In this tutorial we have seen how counts files can be converted into differentially expressed genes with limma-voom. This follows on from the accompanying tutorial, [RNA-seq reads to counts]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}), that showed how to generate counts from the raw reads (FASTQs) for this dataset. In this part we have seen ways to visualise the count data, and QC checks that can be performed to help assess the quality and results. We have also reproduced results similar to what the authors found in the original paper with this dataset. For further reading on analysis of RNA-seq count data and the methods used here, see the articles; *RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR ({% cite Law2018 %})*  and *From reads to genes to pathways: differential expression analysis of RNA-Seq experiments using Rsubread and the edgeR quasi-likelihood pipeline ({% cite Chen2016 %})*.
