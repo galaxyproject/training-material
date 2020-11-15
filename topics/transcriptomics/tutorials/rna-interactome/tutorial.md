@@ -14,7 +14,8 @@ objectives:
 - Visualization and filtering of results
 time_estimation: 2H
 key_points:
-- The CLEAR-CLIP protocol can be used to analyze chimeric reads
+- Choosing the correct alignment parameters is one of the imporatant factor in the analysis.
+- For poorly annotated organisms use reference genome instead of trascriptome.
 contributors:
 - pavanvidem
 
@@ -315,7 +316,7 @@ sqlite database from the `ChiRA` output.
 > This loads the data into the visualization framework and shows some basic plots from the data.
 >   - The visualization split into two to show the left and the right arms information.
 >   - On home page pie charts of left and right chimeric arms, types of interactions and top 50 expressed RNAs are shown.
->![ChiRAViz home page](../../images/rna-interactome/chiraviz_home.png)
+>![ChiRAViz home page](../../images/rna-interactome/chiraviz_view1.png)
 > 2. Now choose the bio types of interactions that you want to work with. Here we first get all available interactions,
 and then filter the interactions we are interested in next page. To get all interactions, choose `all` in both dropdowns
  on the top and then click on **"Get interactions"**.
@@ -336,9 +337,11 @@ then the hybrid filed contains an `NA` value.
 >       - From **"--operator--"** choose `<>`
 >       - Enter `NA` in the value field and hit the enter key.
 This filters out 10 more records and results in 17 records.
->    - At this point, you can click on **Summary** to view the summary plots for this subset of interactions.
->    - Tick **"Check all"** on the bottom left corner and then click on **Export** to export the resulting interactions.
->    - This will export all the results to a file.
+>    - At this point, you can select individual interactions by clicking the individual checkboxes or by clicking **"Check
+all"**. Both the possibilities are highlighted in red color in the following figure.
+>    - Click on **Summary** to view the summary plots for the selected interactions.
+>    - Clicking on **Export** to export the selected interactions to a file.
+>![ChiRAViz filter page](../../images/rna-interactome/chiraviz_view2.png)
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -356,13 +359,13 @@ This filters out 10 more records and results in 17 records.
 {: .hands_on}
 >
 > ### {% icon hands_on %} Hands-on:  Viewing individual interaction information
-> - From the list of interactions in the left panel expand the interaction `mmu-miR-190a-5p:Myo5a`. There are 4 sub-records
+> - From the list of interactions in the left panel expand the interaction `mmu-miR-190a-5p:Myo5a` by clicking on "+" (highlighted in red). There are 4 sub-records
 corresponds to 4 different transcripts of the target gene `Myo5a`.
-> - Click on one of the records to view followin information.
+> - Click on one of the records to view following information.
 >   - **"Chimera"** panel in the middle depicts the mapping positions on the read with read length.
 >   - **"Interacting partners"** panel shows the information on which transcripts the left and right arm are mapping to with their alignment positions on the transcripts.
 >   - **"Alignment Information"** panel shows the alignment if present with a possibility to download the alignment.
->![ChiRAViz single interaction](../../images/rna-interactome/chiraviz_single.png)
+>![ChiRAViz single interaction](../../images/rna-interactome/chiraviz_view3.png)
 {: .hands_on}
 >
 # Conclusion
