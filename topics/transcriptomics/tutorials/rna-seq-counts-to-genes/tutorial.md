@@ -29,6 +29,12 @@ contributors:
   - hdashnow
   - Shians
   - charitylaw
+requirements:
+    -
+        type: "internal"
+        topic_name: transcriptomics
+        tutorials:
+          - rna-seq-reads-to-counts
 follow_up_training:
     -
         type: "internal"
