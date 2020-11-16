@@ -112,7 +112,7 @@ A common problem in mass spectrometry are misassigned mono-isotopic precursor pe
 >
 > 4. Modify the workflow
 >
->   1. Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node.
+>   1. Connect the `mzML` input directly to the **XTandemAdapter** {% icon tool %} node and delete **PeakPickerHiRes**.
 >   2. Change the **XTandemAdapter** {% icon tool %} parameters: Add the **param_variable_modifications** `Label:13C(6) (K)` and `Label:13C(6) (R)`
 >
 > 4. Run the workflow with
