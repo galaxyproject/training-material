@@ -205,15 +205,15 @@ If your FASTQ files are located in Shared Data, you can import them into your hi
 
 Take a look at one of the FASTQ files to see what it contains.
 
-> ### {% icon details %} FASTQ format
-> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-{: .details}
-
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
 > 1. Click on the collection name (`fastqs`)
 > 2. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
+
+> ### {% icon details %} FASTQ format
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+{: .details}
 
 
 ## Raw reads QC
