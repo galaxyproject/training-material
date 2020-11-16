@@ -29,6 +29,12 @@ contributors:
   - hdashnow
   - Shians
   - charitylaw
+requirements:
+    -
+        type: "internal"
+        topic_name: transcriptomics
+        tutorials:
+          - rna-seq-reads-to-counts
 follow_up_training:
     -
         type: "internal"
@@ -105,8 +111,6 @@ We will use three files for this analysis:
 >     https://zenodo.org/record/4273218/files/factordata.tsv
 >     ```
 >
->     - Select *"Genome"*: `mm10`
->
 > 2. Rename the counts dataset as `countdata` and the sample information dataset as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
@@ -121,14 +125,17 @@ Let’s take a look at the data. The `countdata` file contains information about
 
 ![countdata file](../../images/rna-seq-counts-to-genes/countdata.png "Count file")
 
-The `factordata` file contains basic information about the samples that we will need for the analysis. See below.
+The `factordata` file contains basic information about the samples that we will need for the analysis. See below. Note that the sample ids must match exactly with the ids in the counts file.
 
 ![factordata file](../../images/rna-seq-counts-to-genes/factordata.png "Sample information file")
 
 
 > ### {% icon details %} Formatting the data
 >
->The original files were imported and processed in Galaxy to format them as described below. They are available at
+>The files above have been formatted for you. If you are interested to know how they were formatted the information is below. 
+>
+> The original files are available at
+>
 >     ```
 >     https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
 >     https://zenodo.org/record/4273218/files/SampleInfo.txt
@@ -189,7 +196,7 @@ Optionally, gene annotations can be provided to the limma-voom tool and if provi
 >          - `GENENAME`
 > 2. Rename file as `annodata` using the {% icon galaxy-pencil %} (pencil) icon. The file should look like below.
 >    ![annodata file](../../images/rna-seq-counts-to-genes/annodata.png "Gene annotation file")
-> 3. There must be the same number of lines (rows) in the counts and annotation. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both.
+> 3. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both. There must be the same number of lines (rows) in the counts and annotation.
 {: .hands_on}
 
 # Differential expression with limma-voom
@@ -269,9 +276,8 @@ It turns out that there has been a mix-up with two samples, they have been misla
 
 > ### {% icon hands_on %} Hands-on: Use the Rerun button to redo steps
 >
-> 1. Import the correct sample information file from `https://zenodo.org/record/4273218/files/factordata_fixed.tsv`
-> 2. Delete the incorrect sample information datasets to avoid any confusion.
-> 3. Rerun **limma** as before with the correct `sampleinfo` file and adding the following parameters:
+> 1. Import the correct sample information file from `https://zenodo.org/record/4273218/files/factordata_fixed.tsv` and name as `factordata_fixed`
+> 2. Use the **Rerun** {% icon galaxy-refresh %} button in the History to run **limma** {% icon tool %} as before with the `factordata_fixed` file and adding the following parameters:
 >      - **Output Options**
 >          - {% icon param-check %} *"Additional Plots"* tick:
 >              - `Glimma Interactive Plots`
@@ -282,7 +288,7 @@ It turns out that there has been a mix-up with two samples, they have been misla
 >              - `MD Plots for individual samples`
 >              - `Heatmaps (top DE genes)`
 >              - `Stripcharts (top DE genes)`
->          - {% icon param-check %} *"Output Library information file?"*: `Yes`
+> 3. Delete the incorrect `factordata` file and its limma outputs to avoid any confusion.
 {: .hands_on}
 
 In the `Report` you should then see the correct MDS plot as below.
@@ -362,20 +368,23 @@ We can also use box plots to check the distributions of counts in the samples. B
 {: .question}
 
 
-The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the `Library information` file that we selected to output. Click on the {% icon galaxy-eye %} (eye) icon to view.
-
-![Library Info file](../../images/rna-seq-counts-to-genes/libinfo.png "Library information file")
-
-> ### {% icon question %} Question
+> ### {% icon details %} Normalization factors 
 >
-> Which sample has the largest normalization factor? Which sample has the smallest?
+>The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the `Library information` file if we select to output it with *"Output Library information file?"*: `Yes`. Click on the {% icon galaxy-eye %} (eye) icon to view.
 >
->    > ### {% icon solution %} Solution
->    >
->    > MCL1.LA has the largest normalization factor and MCL1.LE the smallest.
->    >
->    {: .solution}
-{: .question}
+>![Library Info file](../../images/rna-seq-counts-to-genes/libinfo.png "Library information file")
+>
+>> ### {% icon question %} Question
+>>
+>> Which sample has the largest normalization factor? Which sample has the smallest?
+>>
+>>    > ### {% icon solution %} Solution
+>>    >
+>>    > MCL1.LA has the largest normalization factor and MCL1.LE the smallest.
+>>    >
+>>    {: .solution}
+>{: .question}
+{: .details}
 
 > ### {% icon details %} MD plots for samples
 >
@@ -447,14 +456,15 @@ When there is a lot of differential expression, sometimes we may want to cut-off
 
 > ### {% icon hands_on %} Hands-on: Testing relative to a threshold (TREAT)
 >
-> 1. Rerun **limma** {% icon tool %} with the following parameters:
->      - *"**Output Options**"*
->          - {% icon param-check %} "Output Library information file?": `No`
+> 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun **limma** {% icon tool %} with the following parameters:
 >      - *"**Advanced Options**"*
 >          - {% icon param-text %} *"Minimum Log2 Fold Change"*: `0.58`
 >          - {% icon param-text %} *"P-Value Adjusted Threshold"*: `0.01`
 >          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
-> 2. Inspect the `Report`
+> 2. Add a tag `#treat` to the `Report` output and inspect the report
+>
+> {% include snippets/add_tag.md type="name" %}
+>
 {: .hands_on}
 
 We can see that much fewer genes are now highlighted in the MD plot and identified as differentially expressed.
@@ -505,14 +515,10 @@ Multiple contrasts can be run with the limma tool. For example, we can compare t
 
 > ### {% icon hands_on %} Hands-on: Run multiple contrasts
 >
-> 1. Rerun **limma** {% icon tool %} adding the following parameters *(i.e. run with 2 contrasts)*:
+> 1. Use the **Rerun** {% icon galaxy-refresh %} button in the History to rerun the **limma** {% icon tool %} `#treat` analysis adding the following parameters *(i.e. run with 2 contrasts)*:
 >      - {% icon param-text %} *"Contrast of Interest"*: `basalpregnant-basallactate`
 >      - {% icon param-text %} *"Contrast of Interest"*: `luminalpregnant-luminallactate`
->      - *"**Advanced Options**"*
->          - {% icon param-text %} *"Minimum Log2 Fold Change"*: `0.58`
->          - {% icon param-text %} *"P-Value Adjusted Threshold"*: `0.01`
->          - {% icon param-check %} *"Test significance relative to a fold-change threshold (TREAT)"*: `Yes`
-> 2. Inspect the `Report`
+> 2. Add a tag `#multiple-contrasts` to the `Report` output and inspect the report
 >
 >   You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.
 > ![Basal Luminal DE counts](../../images/rna-seq-counts-to-genes/basal_luminal_decounts.png "Basal vs Luminal DE counts")

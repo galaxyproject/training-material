@@ -31,11 +31,6 @@ contributors:
 requirements:
   -
     type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - quality-control
-  -
-    type: "internal"
     topic_name: transcriptomics
     tutorials:
       - ref-based
@@ -135,8 +130,6 @@ In order to get these files into Galaxy, we will want to do a few things:
 * Strip the *header* out of the sample information (it doesn’t contain a URL Galaxy can download).
 * Define the file **Identifier** column (`SampleID`).
 * Define the **URL** column (`URL`) (this is the location Galaxy can download the data from).
-* Tell Galaxy to treat these files as `fastqsanger.gz` files
-* Tell Galaxy to treat these files as `mm10` files
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -169,8 +162,6 @@ In order to get these files into Galaxy, we will want to do a few things:
 >                - *"URL"*: `C`
 >            - Click `Apply`, and you should see your new column definitions listed
 >
->        - **Specify the file type**. Select *"Type"*: `fastqsanger.gz`
->        - **Specify the genome**. Select *"Genome"*: `mm10`
 >        - **Name the collection**. For *"Name"* enter: `fastqs` *(You should now see below)*
 >        - Click `Upload`
 >
@@ -189,8 +180,6 @@ If your data is not accessible by URL, for example, if your FASTQ files are loca
 > - Click the tab **Collection**
 > - Click **Choose Local Files** and locate the files you want to upload
 >     - *"Collection Type"*: `List`
->     - *"File Type"*: `fastqsanger.gz`
->     - *"Genome"*: `mm10`
 > - In the pop up that appears:
 >     - *"Name"*: `fastqs`
 >     - Click `Create list`
@@ -216,16 +205,15 @@ If your FASTQ files are located in Shared Data, you can import them into your hi
 
 Take a look at one of the FASTQ files to see what it contains.
 
-> ### {% icon details %} FASTQ format
-> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-{: .details}
-
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
 > 1. Click on the collection name (`fastqs`)
-> 2. Click on the name of one of the collection elements (e.g `MCL1-DL`). Check that the data type is `fastqsanger.gz` and the database `mm10`.
-> 3. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
+
+> ### {% icon details %} FASTQ format
+> If you are not familiar with FASTQ format, see the [Quality Control tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+{: .details}
 
 
 ## Raw reads QC
@@ -473,7 +461,7 @@ The counts files are currently in the format of one file per sample. However, it
 > ### {% icon hands_on %} Hands-on: Create count matrix with **Column Join on Collection**
 >
 > **Column Join on Collection** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Tabular files"*: `featureCounts output` (output of **featureCounts** {% icon tool %})
+>    - {% icon param-collection %} *"Tabular files"*: `Counts` (output of **featureCounts** {% icon tool %})
 >    - {% icon param-text %} *"Identifier column"*: `1`
 >    - {% icon param-text %} *"Number of header lines in each input file"*: `1`
 >    - {% icon param-check %} *"Add column name to header"*: `No`
@@ -490,7 +478,7 @@ Now it is easier to see the counts for a gene across all samples. The accompanyi
 
 There are several additional QCs we can perform to better understand the data, to see if it's good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets. 
 
-We'll use a prepared workflow to run the first few of the QCs below. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple analysis steps. The workflow will run the first three tools: Infer Experiment, MarkDuplicates and IdxStats and generate a MultiQC report. You can then edit the workflow if you'd like to add other steps.
+We'll use a prepared workflow to run the first few of the QCs below. This will also demonstrate how you can make use of Galaxy workflows to easily run and reuse multiple analysis steps. The workflow will run the first three tools: **Infer Experiment**, **MarkDuplicates** and **IdxStats** and generate a **MultiQC** report. You can then edit the workflow if you'd like to add other steps.
 
 > ### {% icon hands_on %} Hands-on: Run QC report workflow
 >
