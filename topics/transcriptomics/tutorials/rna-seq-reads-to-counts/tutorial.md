@@ -130,8 +130,6 @@ In order to get these files into Galaxy, we will want to do a few things:
 * Strip the *header* out of the sample information (it doesn’t contain a URL Galaxy can download).
 * Define the file **Identifier** column (`SampleID`).
 * Define the **URL** column (`URL`) (this is the location Galaxy can download the data from).
-* Tell Galaxy to treat these files as `fastqsanger.gz` files
-* Tell Galaxy to treat these files as `mm10` files
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -164,8 +162,6 @@ In order to get these files into Galaxy, we will want to do a few things:
 >                - *"URL"*: `C`
 >            - Click `Apply`, and you should see your new column definitions listed
 >
->        - **Specify the file type**. Select *"Type"*: `fastqsanger.gz`
->        - **Specify the genome**. Select *"Genome"*: `mm10`
 >        - **Name the collection**. For *"Name"* enter: `fastqs` *(You should now see below)*
 >        - Click `Upload`
 >
@@ -184,8 +180,6 @@ If your data is not accessible by URL, for example, if your FASTQ files are loca
 > - Click the tab **Collection**
 > - Click **Choose Local Files** and locate the files you want to upload
 >     - *"Collection Type"*: `List`
->     - *"File Type"*: `fastqsanger.gz`
->     - *"Genome"*: `mm10`
 > - In the pop up that appears:
 >     - *"Name"*: `fastqs`
 >     - Click `Create list`
@@ -218,8 +212,7 @@ Take a look at one of the FASTQ files to see what it contains.
 > ### {% icon hands_on %} Hands-on: Take a look at FASTQ format
 >
 > 1. Click on the collection name (`fastqs`)
-> 2. Click on the name of one of the collection elements (e.g `MCL1-DL`). Check that the data type is `fastqsanger.gz` and the database `mm10`.
-> 3. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
+> 2. Click on the {% icon galaxy-eye %} (eye) icon of one of the FASTQ files to have a look at what it contains
 {: .hands_on}
 
 
