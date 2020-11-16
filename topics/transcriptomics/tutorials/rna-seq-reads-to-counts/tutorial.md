@@ -461,7 +461,7 @@ The counts files are currently in the format of one file per sample. However, it
 > ### {% icon hands_on %} Hands-on: Create count matrix with **Column Join on Collection**
 >
 > **Column Join on Collection** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Tabular files"*: `featureCounts output` (output of **featureCounts** {% icon tool %})
+>    - {% icon param-collection %} *"Tabular files"*: `Counts` (output of **featureCounts** {% icon tool %})
 >    - {% icon param-text %} *"Identifier column"*: `1`
 >    - {% icon param-text %} *"Number of header lines in each input file"*: `1`
 >    - {% icon param-check %} *"Add column name to header"*: `No`
