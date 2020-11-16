@@ -111,8 +111,6 @@ We will use three files for this analysis:
 >     https://zenodo.org/record/4273218/files/factordata.tsv
 >     ```
 >
->     - Select *"Genome"*: `mm10`
->
 > 2. Rename the counts dataset as `countdata` and the sample information dataset as `factordata` using the {% icon galaxy-pencil %} (pencil) icon.
 > 3. Check that the datatype is `tabular`.
 >    If the datatype is not `tabular`, please change the file type to `tabular`.
