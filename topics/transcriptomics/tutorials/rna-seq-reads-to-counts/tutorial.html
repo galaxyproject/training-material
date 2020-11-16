@@ -317,34 +317,6 @@
     },
     {
       "@type": "Course",
-      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
-      "name": "Quality Control",
-      "description": "Slides for 'Quality Control' tutorial",
-      "learningResourceType": "slides",
-      "interactivityType": "expositive",
-      "provider": {
-        "@type": "Organization",
-        "email": "galaxytrainingnetwork@gmail.com",
-        "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
-      }
-    },
-    {
-      "@type": "Course",
-      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
-      "name": "Quality Control",
-      "description": "Hands-on for 'Quality Control' tutorial",
-      "learningResourceType": "hands-on tutorial",
-      "interactivityType": "expositive",
-      "provider": {
-        "@type": "Organization",
-        "email": "galaxytrainingnetwork@gmail.com",
-        "name": "Galaxy Training Network",
-        "url": "https://galaxyproject.org/teach/gtn/"
-      }
-    },
-    {
-      "@type": "Course",
       "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html",
       "name": "Reference-based RNA-Seq data analysis",
       "description": "Hands-on for 'Reference-based RNA-Seq data analysis' tutorial",
@@ -549,38 +521,6 @@
     </li>
 
             
-    <li>
-    
-        
-        
-        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
-        
-            <ul>
-                
-                    
-                        
-                    
-                        
-                            
-                            <li> Quality Control:
-                            
-                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
-                                
-                            
-                            
-                                
-                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
-                                
-                            
-                            </li>
-                        
-                    
-                
-            </ul>
-        
-    
-    </li>
-
     <li>
     
         
@@ -967,7 +907,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 15, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 16, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -1106,8 +1046,6 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
   <li>Strip the <em>header</em> out of the sample information (it doesn’t contain a URL <span class="notranslate">Galaxy</span> can download).</li>
   <li>Define the file <strong>Identifier</strong> column (<code class="language-plaintext highlighter-rouge">SampleID</code>).</li>
   <li>Define the <strong>URL</strong> column (<code class="language-plaintext highlighter-rouge">URL</code>) (this is the location <span class="notranslate">Galaxy</span> can download the data from).</li>
-  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> files</li>
-  <li>Tell <span class="notranslate">Galaxy</span> to treat these files as <code class="language-plaintext highlighter-rouge">mm10</code> files</li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -1183,8 +1121,6 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
                 <li>Click <code class="language-plaintext highlighter-rouge">Apply</code>, and you should see your new column definitions listed</li>
               </ul>
             </li>
-            <li><strong>Specify the file type</strong>. Select <em>“Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
-            <li><strong>Specify the genome</strong>. Select <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
             <li><strong>Name the collection</strong>. For <em>“Name”</em> enter: <code class="language-plaintext highlighter-rouge">fastqs</code> <em>(You should now see below)</em></li>
             <li>Click <code class="language-plaintext highlighter-rouge">Upload</code></li>
           </ul>
@@ -1210,8 +1146,6 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
     <li>Click <strong>Choose Local Files</strong> and locate the files you want to upload
       <ul>
         <li><em>“Collection Type”</em>: <code class="language-plaintext highlighter-rouge">List</code></li>
-        <li><em>“File Type”</em>: <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code></li>
-        <li><em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
       </ul>
     </li>
     <li>In the pop up that appears:
@@ -1252,19 +1186,18 @@ MCL1-LA	luminalvirgin	https://zenodo.org/record/4249555/files/SRR1552444.fastq.g
 
 <p>Take a look at one of the FASTQ files to see what it contains.</p>
 
-<blockquote class="details">
-  <h3 id="details-fastq-format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> FASTQ format</h3>
-  <p>If you are not familiar with FASTQ format, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></p>
-</blockquote>
-
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-take-a-look-at-fastq-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Take a look at FASTQ format</h3>
 
   <ol>
     <li>Click on the collection name (<code class="language-plaintext highlighter-rouge">fastqs</code>)</li>
-    <li>Click on the name of one of the collection elements (e.g <code class="language-plaintext highlighter-rouge">MCL1-DL</code>). Check that the data type is <code class="language-plaintext highlighter-rouge">fastqsanger.gz</code> and the database <code class="language-plaintext highlighter-rouge">mm10</code>.</li>
     <li>Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon of one of the FASTQ files to have a look at what it contains</li>
   </ol>
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-fastq-format"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> FASTQ format</h3>
+  <p>If you are not familiar with FASTQ format, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></p>
 </blockquote>
 
 <h2 id="raw-reads-qc">Raw <span class="notranslate">reads</span> QC</h2>
@@ -1779,7 +1712,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
   <p><strong>Column Join on Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: <code class="language-plaintext highlighter-rouge">featureCounts output</code> (output of <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+    <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Tabular files”</em>: <code class="language-plaintext highlighter-rouge">Counts</code> (output of <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
     <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Identifier column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
     <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines in each input file”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
     <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Add column name to header”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1797,7 +1730,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
 
 <p>There are several additional QCs we can perform to better understand the data, to see if it’s good quality. These can also help determine if changes could be made in the lab to improve the quality of future datasets.</p>
 
-<p>We’ll use a prepared <span class="notranslate">workflow</span> to run the first few of the QCs below. This will also demonstrate how you can make use of <span class="notranslate">Galaxy</span> workflows to easily run and reuse multiple analysis steps. The <span class="notranslate">workflow</span> will run the first three tools: Infer Experiment, MarkDuplicates and IdxStats and generate a MultiQC report. You can then edit the <span class="notranslate">workflow</span> if you’d like to add other steps.</p>
+<p>We’ll use a prepared <span class="notranslate">workflow</span> to run the first few of the QCs below. This will also demonstrate how you can make use of <span class="notranslate">Galaxy</span> workflows to easily run and reuse multiple analysis steps. The <span class="notranslate">workflow</span> will run the first three tools: <strong>Infer Experiment</strong>, <strong>MarkDuplicates</strong> and <strong>IdxStats</strong> and generate a <strong>MultiQC</strong> report. You can then edit the <span class="notranslate">workflow</span> if you’d like to add other steps.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-qc-report-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run QC report <span class="notranslate">workflow</span></h3>
@@ -1818,7 +1751,7 @@ This information can be seen at the top of the FastQC Webpage as below.</li>
           <li>Provide your <span class="notranslate">workflow</span>
             <ul>
               <li>Option 1: Paste the URL of the <span class="notranslate">workflow</span> into the box labelled <em>“Archived <span class="notranslate">Workflow</span> URL”</em></li>
-              <li>Option 2: Upload the worflow file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>
+              <li>Option 2: Upload the <span class="notranslate">workflow</span> file in the box labelled <em>“Archived <span class="notranslate">Workflow</span> File”</em></li>
             </ul>
           </li>
           <li>Click the <strong>Import <span class="notranslate">workflow</span></strong> button</li>
@@ -2359,7 +2292,7 @@ BAM)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visua
     title = "RNA-Seq reads to counts (Galaxy Training Materials)",
     year = "2020",
     month = "11",
-    day = "15"
+    day = "16"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

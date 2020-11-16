@@ -314,6 +314,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html",
+      "name": "RNA-Seq reads to counts",
+      "description": "Hands-on for 'RNA-Seq reads to counts' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -513,6 +527,79 @@
     </li>
 
             
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/transcriptomics">Transcriptomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> RNA-Seq reads to counts:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
             </ul>
             
 
@@ -721,7 +808,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 14, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 16, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -876,10 +963,6 @@ because of stochastic processes in the algorithms.</p>
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://zenodo.org/record/4273218/files/countdata.tsv
  https://zenodo.org/record/4273218/files/factordata.tsv
 </code></pre></div>      </div>
-
-      <ul>
-        <li>Select <em>“Genome”</em>: <code class="language-plaintext highlighter-rouge">mm10</code></li>
-      </ul>
     </li>
     <li>Rename the counts dataset as <code class="language-plaintext highlighter-rouge">countdata</code> and the sample information dataset as <code class="language-plaintext highlighter-rouge">factordata</code> using the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon.</li>
     <li>
@@ -905,18 +988,22 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
 
 <figure id="figure-2"><img src="../../images/rna-seq-counts-to-genes/countdata.png" alt="countdata file" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Count file</figcaption></figure>
 
-<p>The <code class="language-plaintext highlighter-rouge">factordata</code> file contains basic information about the samples that we will need for the analysis. See below.</p>
+<p>The <code class="language-plaintext highlighter-rouge">factordata</code> file contains basic information about the samples that we will need for the analysis. See below. Note that the sample ids must match exactly with the ids in the counts file.</p>
 
 <figure id="figure-3"><img src="../../images/rna-seq-counts-to-genes/factordata.png" alt="factordata file" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sample information file</figcaption></figure>
 
 <blockquote class="details">
   <h3 id="details-formatting-the-data"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Formatting the data</h3>
 
-  <p>The original files were imported and processed in <span class="notranslate">Galaxy</span> to format them as described below. They are available at
-    <code class="language-plaintext highlighter-rouge">
-    https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
-    https://zenodo.org/record/4273218/files/SampleInfo.txt
-   </code></p>
+  <p>The files above have been formatted for you. If you are interested to know how they were formatted the information is below.</p>
+
+  <p>The original files are available at</p>
+
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>```
+https://zenodo.org/record/4273218/files/GSE60450_Lactation-GenewiseCounts.txt
+https://zenodo.org/record/4273218/files/SampleInfo.txt
+``` 
+</code></pre></div>  </div>
 
   <figure id="figure-4"><img src="../../images/rna-seq-counts-to-genes/seqdata.png" alt="seqdata file" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Count file (before formatting)</figcaption></figure>
 
@@ -1003,7 +1090,7 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
     <li>Rename file as <code class="language-plaintext highlighter-rouge">annodata</code> using the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> (pencil) icon. The file should look like below.
       <figure id="figure-6"><img src="../../images/rna-seq-counts-to-genes/annodata.png" alt="annodata file" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Gene annotation file</figcaption></figure>
     </li>
-    <li>There must be the same number of lines (rows) in the counts and annotation. Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both.</li>
+    <li>Check the number of lines shown on the datasets in the history, there should be 27,180 lines in both. There must be the same number of lines (rows) in the counts and annotation.</li>
   </ol>
 </blockquote>
 
@@ -1106,9 +1193,8 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
   <h3 id="hands_on-hands-on-use-the-rerun-button-to-redo-steps"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Use the Rerun button to redo steps</h3>
 
   <ol>
-    <li>Import the correct sample information file from <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4273218/files/factordata_fixed.tsv</code></li>
-    <li>Delete the incorrect sample information datasets to avoid any confusion.</li>
-    <li>Rerun <strong>limma</strong> as before with the correct <code class="language-plaintext highlighter-rouge">sampleinfo</code> file and adding the following parameters:
+    <li>Import the correct sample information file from <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4273218/files/factordata_fixed.tsv</code> and name as <code class="language-plaintext highlighter-rouge">factordata_fixed</code></li>
+    <li>Use the <strong>Rerun</strong> <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> button in the History to run <strong>limma</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> as before with the <code class="language-plaintext highlighter-rouge">factordata_fixed</code> file and adding the following parameters:
       <ul>
         <li><strong>Output Options</strong>
           <ul>
@@ -1124,11 +1210,11 @@ If the datatype is not <code class="language-plaintext highlighter-rouge">tabula
                 <li><code class="language-plaintext highlighter-rouge">Stripcharts (top DE genes)</code></li>
               </ul>
             </li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Output Library information file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
           </ul>
         </li>
       </ul>
     </li>
+    <li>Delete the incorrect <code class="language-plaintext highlighter-rouge">factordata</code> file and its limma outputs to avoid any confusion.</li>
   </ol>
 </blockquote>
 
@@ -1215,20 +1301,24 @@ What is the second greatest source of variation in the data?</p>
   </blockquote>
 </blockquote>
 
-<p>The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the <code class="language-plaintext highlighter-rouge">Library information</code> file that we selected to output. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view.</p>
+<blockquote class="details">
+  <h3 id="details-normalization-factors"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Normalization factors</h3>
 
-<figure id="figure-15"><img src="../../images/rna-seq-counts-to-genes/libinfo.png" alt="Library Info file" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Library information file</figcaption></figure>
+  <p>The TMM normalization generates normalization factors, where the product of these factors and the library sizes defines the effective library size. TMM normalization (and most scaling normalization methods) scale relative to one sample. The normalization factors multiply to unity across all libraries. A normalization factor below one indicates that the library size will be scaled down, as there is more suppression (i.e., composition bias) in that library relative to the other libraries. This is also equivalent to scaling the counts upwards in that sample. Conversely, a factor above one scales up the library size and is equivalent to downscaling the counts. We can see the normalization factors for these samples in the <code class="language-plaintext highlighter-rouge">Library information</code> file if we select to output it with <em>“Output Library information file?”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to view.</p>
 
-<blockquote class="question">
-  <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <figure id="figure-15"><img src="../../images/rna-seq-counts-to-genes/libinfo.png" alt="Library Info file" /><figcaption><span class="figcaption-prefix">Figure 15:</span> Library information file</figcaption></figure>
 
-  <p>Which sample has the largest normalization factor? Which sample has the smallest?</p>
+  <blockquote class="question">
+    <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
 
-  <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>Which sample has the largest normalization factor? Which sample has the smallest?</p>
 
-    <p>MCL1.LA has the largest normalization factor and MCL1.LE the smallest.</p>
+    <blockquote class="solution">
+      <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
+      <p>MCL1.LA has the largest normalization factor and MCL1.LE the smallest.</p>
+
+    </blockquote>
   </blockquote>
 </blockquote>
 
@@ -1307,13 +1397,8 @@ What is the second greatest source of variation in the data?</p>
   <h3 id="hands_on-hands-on-testing-relative-to-a-threshold-treat"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing relative to a threshold (TREAT)</h3>
 
   <ol>
-    <li>Rerun <strong>limma</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li>Use the <strong>Rerun</strong> <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> button in the History to rerun <strong>limma</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><em>“<strong>Output Options</strong>”</em>
-          <ul>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> “Output Library information file?”: <code class="language-plaintext highlighter-rouge">No</code></li>
-          </ul>
-        </li>
         <li><em>“<strong>Advanced Options</strong>”</em>
           <ul>
             <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Log2 Fold Change”</em>: <code class="language-plaintext highlighter-rouge">0.58</code></li>
@@ -1323,8 +1408,25 @@ What is the second greatest source of variation in the data?</p>
         </li>
       </ul>
     </li>
-    <li>Inspect the <code class="language-plaintext highlighter-rouge">Report</code></li>
+    <li>Add a tag <code class="language-plaintext highlighter-rouge">#treat</code> to the <code class="language-plaintext highlighter-rouge">Report</code> output and inspect the report</li>
   </ol>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+    <ul>
+      <li>Click on the dataset</li>
+      <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+      <li>
+        <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
+
+        <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+      </li>
+      <li>Check that the tag is appearing below the dataset name</li>
+    </ul>
+
+  </blockquote>
+
 </blockquote>
 
 <p>We can see that much fewer genes are now highlighted in the MD plot and identified as differentially expressed.</p>
@@ -1376,20 +1478,13 @@ What is the second greatest source of variation in the data?</p>
   <h3 id="hands_on-hands-on-run-multiple-contrasts"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run multiple contrasts</h3>
 
   <ol>
-    <li>Rerun <strong>limma</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> adding the following parameters <em>(i.e. run with 2 contrasts)</em>:
+    <li>Use the <strong>Rerun</strong> <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> button in the History to rerun the <strong>limma</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <code class="language-plaintext highlighter-rouge">#treat</code> analysis adding the following parameters <em>(i.e. run with 2 contrasts)</em>:
       <ul>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="language-plaintext highlighter-rouge">basalpregnant-basallactate</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Contrast of Interest”</em>: <code class="language-plaintext highlighter-rouge">luminalpregnant-luminallactate</code></li>
-        <li><em>“<strong>Advanced Options</strong>”</em>
-          <ul>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum Log2 Fold Change”</em>: <code class="language-plaintext highlighter-rouge">0.58</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“P-Value Adjusted Threshold”</em>: <code class="language-plaintext highlighter-rouge">0.01</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Test significance relative to a fold-change threshold (TREAT)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-          </ul>
-        </li>
       </ul>
     </li>
-    <li>Inspect the <code class="language-plaintext highlighter-rouge">Report</code></li>
+    <li>Add a tag <code class="language-plaintext highlighter-rouge">#multiple-contrasts</code> to the <code class="language-plaintext highlighter-rouge">Report</code> output and inspect the report</li>
   </ol>
 
   <p>You should find that there are more genes differentially expressed for the luminal cells than the basal. There are ~274 genes DE in basal cells versus ~ 1610 in the luminal cells.</p>
@@ -1624,7 +1719,7 @@ What is the second greatest source of variation in the data?</p>
     title = "RNA-seq counts to genes (Galaxy Training Materials)",
     year = "2020",
     month = "11",
-    day = "14"
+    day = "16"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
