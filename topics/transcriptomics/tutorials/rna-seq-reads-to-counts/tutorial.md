@@ -31,11 +31,6 @@ contributors:
 requirements:
   -
     type: "internal"
-    topic_name: sequence-analysis
-    tutorials:
-      - quality-control
-  -
-    type: "internal"
     topic_name: transcriptomics
     tutorials:
       - ref-based
