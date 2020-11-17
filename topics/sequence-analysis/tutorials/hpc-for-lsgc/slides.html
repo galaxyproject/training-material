@@ -16,6 +16,12 @@ objectives:
   - Using CHROMEISTER for comparing large sequences such as plants and chromosomes
 requirements:
 time_estimation: "2h"
+key_points:
+  - Sequence comparison is difficult due to its computational complexity
+  - We can use GECKO for single chromosome comparisons and/or exhaustive searchs
+  - We can post-process it with GECKO-MGV online
+  - But for larger experiments including many sequence comparisons, we can use CHROMEISTER first to accelerate the search or to get an idea
+
 ---
 
 ### What is sequence comparison?
@@ -259,7 +265,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
  - GECKO: fine-grained sequence comparison that uses secondary memory to enable virtually comparisons of any size
   - GECKO Multi-Genome-Viewer: A tool for the interactive inspection of sequence comparisons
- - CHROMEISTER: Ultra-fast approach for the previsualization of sequence comparisons, including full mammalian genomes and plants
+ - CHROMEISTER: Ultra-fast approach for the previsualization of sequence comparisons while dealing with noise and repeats, including full mammalian genomes and plants
 
 ---
 
@@ -320,7 +326,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 - GECKO also employs a second level of parallelism besides using MPI to distribute data dynamically
 
-- It consists on sorting the initial seeds found using shared memory threads (pthreads and openMP)
+- It consists on sorting the initial seeds found (which is the most time-consuming step) using shared memory threads (pthreads and openMP)
 
 - Each core uses up to t threads to sort the dictionaries containing the seeds
 ]
@@ -355,7 +361,21 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 ---
 
-### slide with reps of gecko-mgv
+### GECKO-MGV: interactive sequence comparison (Cont. II)
+
+- A typical exercise would include running a sequence comparison with GECKO
+
+- Visualizing the alignments with GECKO-MGV
+
+- Interactively selecting regions of interest and performing post-processing
+
+ - Such as selecting repeats, extracting them and performing multiple sequence alignment to find out single point mutations
+
+---
+
+### GECKO-MGV: interactive sequence comparison (Cont. III)
+
+![](../../images/hpc-for-lsgc/Gecko05.png)
 
 ---
 
@@ -363,11 +383,14 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 
 .pull-left[
-- Online platforms do not allow for on-demand experiments (can not process own experiments)
 
-- Extremely large computation times 
-  - E.g. all vs all chromosomes any two species generate usually over > 400 comparisons
-  - Do all of these even have any similarity signals?
+- GECKO is suitable for chromosome comparisons
+
+- But all vs all chromosomes between any two species generate usually over 400 comparisons
+
+- This results in extremely large computation times 
+ - Do all of these even have any similarity signals?
+ - Instead of runnning everything from scratch with GECKO, first use CHROMEISTER to detect significant comparisons
 ]
 
 .pull-right[
@@ -383,7 +406,7 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 
 - State-of-the-art methods get stuck handling large number of repetitions or resulting dotplots are too noisy
 
-- Can we extract any information from raw hits without having to generate fragments (slower)?
+- Can we extract any information from raw seeds (hits) without having to generate fragments (slower)?
 ]
 
 .pull-right[
@@ -402,9 +425,13 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 - CHROMEISTER (CHROmosome MEISTER) is an ultra fast heuristic approach to computing extremely large pairwise genome comparison in desktop PCs
 
 - Hybrid indexing approach
+
  - Heuristically select long, unique and inexact hits!
+
 - Probabilistic filtering
+
  - Higher concentration of unique hits within HSPs
+
 - Apply a kernel to improve visualization
 
 
@@ -461,35 +488,4 @@ Amoeba genome		|  ~6 * 10<sup>11</sup> bp
 .pull-right[
 ![](../../images/hpc-for-lsgc/Chrom07.png)
 ]
----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
