@@ -126,7 +126,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    > * Go to link: https://datras.ices.dk/Data_products/Download/Download_Data_public.aspx 
 >    > * In the field 'Data products' choose 'CPUE per length per area' 
 >    > * In the field 'Survey' choose the survey(s) of interest. Here, we chose to use 'EVHOE', 'BITS' 
->    >   and 'SWC-IBTS' surveys, you'll have to repeat the six following steps for each surveys
+>    >   and 'SWC-IBTS' surveys, you'll have to repeat the six following steps for each of the 3 surveys
 >    > * In the field 'Quarter(s)' we chose to tick 'All'
 >    > * In the field 'Year(s)' we chose to tick 'All'
 >    > * In the field 'Area(s)' we chose to tick 'All'
