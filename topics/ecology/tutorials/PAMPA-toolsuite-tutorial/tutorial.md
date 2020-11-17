@@ -437,7 +437,7 @@ nomenclature for the ```observation.unit``` fields, namely:
 >
 {: .hands_on}
 
-# Step 2 & 3: GLMMs and plots on ```Community``` and ```Species-Population``` metrics
+# GLMMs and plots on "Community" and "Species-Population" metrics
 
 Now that we have all our input files for GLM(M) tools ready, we can start computing statistical models to make 
 conclusions on our surveys. But before starting to use the **Compute GLM on community data** {% icon tool %}
