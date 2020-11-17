@@ -95,7 +95,7 @@ on the abundance of each species.
 >
 {: .agenda}
 
-# Step 0: Upload and pre-processing of the data
+# Upload and pre-processing of the data
 
 This first step consist of downloading and properly prepare the data to use it in PAMPA toolsuite.
 
