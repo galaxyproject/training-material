@@ -117,7 +117,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >    {% include snippets/import_via_link.md %} 
 >    {% include snippets/import_from_data_library.md %}
 >
->    The files used for this tutorial have been imported from DATRAS data portal in October 2020, those files are 
+>    The files used for this tutorial have been imported from DATRAS data portal in October 2020. Those files are 
 >    often updated on the data portal. So if you choose to download files directly from DATRAS there may be 
 >    some differences with the files on Zenodo and the final results of this tutorial.
 >
