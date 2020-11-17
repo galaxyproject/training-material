@@ -24,7 +24,7 @@ key_points:
 - Interpret (and correct if needed) GL(M)M results
 - Learn about and interpret common tests to evaluate the quality of your GL(M)M
 contributors:
-- ColineRoyaux
+- colineroyaux
 
 ---
 
