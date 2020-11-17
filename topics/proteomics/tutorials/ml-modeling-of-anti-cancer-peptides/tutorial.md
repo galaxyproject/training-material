@@ -151,10 +151,10 @@ In previous steps, we have calculated descriptors and labeled the data as posi
 
 ## Applying 6 different ML algorithms on the training data set
 
-In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) with  10 fold cross-validation on the training data.   In cross-validation, positive and negative data are randomly divided into 10  parts each set has the 10th part of active as well as inactive peptides. The algorithm was trained on the 9 sets and the prediction was made on the remaining 10th set. This process was repeated for every set. Thus the final performance scores are calculated as a mean of all the folds. We used z-scaling to normalize the data before ML modeling. The entire workflow was applied to the four descriptor sets and accuracy was estimated based on accuracy, precision, recall, f1, and AUC.  
+In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) with  10 fold cross-validation on the training data. In cross-validation, positive and negative data are randomly divided into 10  parts each set has the 10th part of active as well as inactive peptides. The algorithm was trained on the 9 sets and the prediction was made on the remaining 10th set. This process was repeated for every set. Thus the final performance scores are calculated as a mean of all the folds. We used min-max to normalize the data before ML modeling. The entire workflow was applied to the four descriptor sets and accuracy was estimated based on accuracy, precision, recall, f1, and AUC.  
 
 
-- **Linear regression Classifier (LRC)** 
+- **Linear Regression Classifier (LRC)** 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -181,7 +181,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 {: .hands_on}
 
 
-- **Gradient boosting Classifier (GBC)**
+- **Gradient Boosting Classifier (GBC)**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -196,7 +196,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 {: .hands_on}
 
 
-- **Decision tree (DTC)**
+- **Decision Tree Classifier (DTC)**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -209,7 +209,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 {: .hands_on}
 
 
-- **Stochastic gradient descent Classifier (SGDC)**
+- **Stochastic Gradient Descent Classifier (SGDC)**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -223,7 +223,7 @@ In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) 
 {: .hands_on}
 
 
-- **Support vector machine Classifier (SVMC)**
+- **Support Vector Machine Classifier (SVMC)**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
