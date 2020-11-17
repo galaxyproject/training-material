@@ -345,7 +345,7 @@ This step selects the peptide column from the Select output ( where we have remo
 In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, e.g. moFF and MaxQuant are available in Galaxy.
 
 ### *FlashLFQ*
-FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
+[FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow. 
 >
 > ### {% icon hands_on %} Hands-on: Quantification
 >
@@ -362,6 +362,11 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >    > ### {% icon comment %} Comment
 >    >
 >    > [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats.
+To run FlashLFQ on Galaxy, there are three main input files: 
+- PSM report from Peptide Shaker (`Input_for_FlashLFQ`)
+- MZML/ RAW spectrum files (`MZML dataset collection`)
+- Experimental Design File ( `ExperimentalDesign.tsv`)
+   The Experimental Design file should be a tabular file with a "File", "Condition", "Sample", "Fraction", and "Replicate" column. The "File" column should match your mzml spectrum file name.
 >    {: .comment}
 >
 {: .hands_on}
