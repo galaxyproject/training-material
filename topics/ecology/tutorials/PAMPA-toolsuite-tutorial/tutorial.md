@@ -327,7 +327,7 @@ files used for the concatenation.
 > 
 {: .details}
 
-# Step 1: Compute Essential Biodiversity Variables and create observation unit file
+# Compute Essential Biodiversity Variables
 
 In this part of the tutorial, we're starting to use tools from the PAMPA toolsuite to compute ```Community``` 
 and ```Species-Population``` Essential Biodiversity Variables. Then, we'll be creating the observation unit file.
