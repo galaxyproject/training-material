@@ -193,7 +193,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 >   have a "observation.unit" field but only ```year``` and "location"
 > 
 > If you already have your own nomenclature for the primary key linking your files, it will remain untouched by the tools but the 
-> output data table from the first tools to compute metrics won't contain ```year``` and "location" field.
+> output data table from the first tools to compute metrics won't contain ```year``` and "location" fields.
 > In this case and if you want to add such informations to your metrics data file, you can use the tool 
 > {% tool [Join](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2) %} 
 > with the metrics data file and the observation unit data file.
