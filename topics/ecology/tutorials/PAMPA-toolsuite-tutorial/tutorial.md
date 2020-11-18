@@ -34,7 +34,7 @@ contributors:
 This tutorial aims to present the PAMPA Galaxy workflow and how to use it to compute 
 Essential Biodiversity Variables (EBV) from species abundance data and analyse it through generalized 
 linear (mixed) models (GLM and GLMM). This workflow made up of 5 tools will allow you to process
-temporal series data that include at least ```year```, location and species sampled along with 
+temporal series data that include at least ```year```, "location" and species sampled along with 
 abundance value and, finally, generate article-ready data products.
 
 The PAMPA workflow is an EBV workflow, like so, it is divided as the EBV classes Community and 
@@ -103,18 +103,24 @@ This first step consist of downloading and properly prepare the data to use it i
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial and give it a name for you to find it again later if needed
+> 1. Create a new history for this tutorial and give it a name (example: "DATRAS data analysis through PAMPA EBV workflow") 
+>    for you to find it again later if needed.
 >
 >    {% include snippets/create_new_history.md %} 
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import the CSV files from [Zenodo](https://doi.org/10.5281/zenodo.4264936) or from the shared data 
->    library or directly from DATRAS data portal
+> 2. Import the CSV files from [Zenodo](https://doi.org/10.5281/zenodo.4264936) via link with the three following links 
 >    ```
->    https://doi.org/10.5281/zenodo.4264936
+>    https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_A.csv?download=1
+>    https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_B.csv?download=1
+>    https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_C.csv?download=1
 >    ```
 >
->    {% include snippets/import_via_link.md %} 
+>    {% include snippets/import_via_link.md %}
+>
+>    You may as well use the shared data library or directly download from DATRAS data portal but the previous
+>    method is preferred.
+>
 >    {% include snippets/import_from_data_library.md %}
 >
 >    The files used for this tutorial have been imported from DATRAS data portal in October 2020. Those files are 
@@ -231,13 +237,18 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    - {% icon param-text %} *"With following condition"*: `c1!='Survey'`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 >
-> 4. Make sure there is only one header line left with {% tool [Count occurrences of each record](Count1) %} and following parameters :
->    - {% icon param-file %} *"from dataset"*: Filtered data file
->    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
->    - {% icon param-select %} *"Delimited by"*: `Tab`
->    - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
->
->    The value `Survey` must have only `1` occurrence
+>    > ### {% icon question %} Question
+>    > How many header line(s) is left?
+>    > Use {% tool [Count occurrences of each record](Count1) %} and following parameters :
+>    >   - {% icon param-file %} *"from dataset"*: Filtered data file
+>    >   - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
+>    >   - {% icon param-select %} *"Delimited by"*: `Tab`
+>    >   - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > One header line is left as the value `Survey` has only `1` occurrence in the first column.
+>    > {: .solution}
+>    {: .question}
 >
 {: .hands_on}
 
@@ -269,7 +280,7 @@ files used for the concatenation.
 
 {% include snippets/select_multiple_datasets.md %}
 
-> ### {% icon hands_on %} Hands-on: Create the location field
+> ### {% icon hands_on %} Hands-on: Create the "location" field
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0) %} 
 >    with following parameters: 
@@ -384,7 +395,7 @@ nomenclature for the "observation.unit" fields, namely:
 >    - {% icon param-select %} *"Merge column"*: `Column: 2`
 >    - {% icon param-select %} *"with column"*: `Column: 9`
 >
->    Check if the output data file has a supplementary column called "yearlocation" and values with the ```year``` and location ID
+>    Check if the output data file has a supplementary column called "yearlocation" and values with the ```year``` and "location" ID
 >    separated with `_`.
 >
 > 3. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0) %} 
@@ -436,7 +447,7 @@ nomenclature for the "observation.unit" fields, namely:
 >         - {% icon param-text %} *"Find Regex"*: `location` 
 >         - {% icon param-text %} *"Replacement"*: `site`
 >
->    Here, we define ```site``` represent the same geographical level as "location".
+>    Here, we define ```site``` represents the same geographical level as "location".
 >
 > 7. Tag the output `#Concatenate` Regex Find And Replace data file with `#unitobs`
 >
@@ -450,7 +461,7 @@ nomenclature for the "observation.unit" fields, namely:
 Now that we have all our input files for GLM(M) tools ready, we can start computing statistical models to make 
 conclusions on our surveys. But before starting to use the {% tool [Compute GLM on community data](toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2) %}
 and the {% tool [Compute GLM on population data](toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2) %} tools, we have to think about the model we want to compute. 
-The tools allows to test the effects ```Year````, ```Site``` and/or ```Habitat```. As we don't have data about the 
+The tools allows to test the effects ```Year```, ```Site``` and/or ```Habitat```. As we don't have data about the 
 ```Habitat``` we can't test its effect on the interest metric. It is always better to take a temporal and a geographical
 variable into account in an ecological model so we'll test the effect of ```Year``` and ```Site``` with a random effect 
 of ```Site``` to take geographical pseudo-replication into account.
@@ -543,8 +554,8 @@ The GLM tool has three outputs:
 #### First output: 'GLM - results from your community analysis'
 
 First, on the 'GLM - results from your community analysis' data file, we see four analyses: `global` on the whole dataset
-and one analysis for each survey `BITS`, `EVHOE` and `SWC-IBTS`. We also see the `Poisson` distribution has been automatically
-selected by the tool. It seems right as the interest variable "Species richness" is a count.
+and one analysis for each of the three surveys `BITS`, `EVHOE` and `SWC-IBTS`. We also see the `Poisson` distribution has been 
+automatically selected by the tool. It seems right as the interest variable "Species richness" is a count.
 
 Then, we see five fields that gives indexes to evaluate the quality of a model in comparison to another model performed
 on the same data, so they can't be used to compare the four models performed here :
@@ -592,7 +603,7 @@ As both these solutions are interesting, the tool is computing two GLMMs when ``
 
 The *"(Intercept)"* value represents the reference value, it is rarely used for interpretations. 
 We see no significant effect on the 'global' model which seems logical as it considers the three surveys that are in 
-three geographical areas so three distinct communities. However, we observe that also with models on each surveys separately.
+three geographical areas so three distinct communities. However, we observe that also with models on each of the three surveys separately.
 
 > ### {% icon question %} Question
 > What does this result with no significant effect found mean? How can we explain it?
@@ -665,9 +676,9 @@ Each PNG file contains two plots :
    directly from the input metrics data table). If the interest variable had been a presence-absence, it would have been
    a presence proportion and if it had been an abundance it would have been a raw abundance (sum of all abundances each year).
 
-We'll ignore the 'global' analysis plot as it associate data from different communities. We see on both plots of each survey
-that, as predicted, species richness haven't varied much as few species are taken into account in the analysed data set and 
-these species are very commonly found as we selected only 'Standard species' when downloading the datasets.
+We'll ignore the 'global' analysis plot as it associate data from different communities. We see on both plots of each of the 
+three surveys that, as predicted, species richness haven't varied much as few species are taken into account in the analysed 
+data set and these species are very commonly found as we selected only 'Standard species' when downloading the datasets.
 Hence, mean species richness are globally around the maximum number of species taken into account in the surveys (7 for 
 `SWC-IBTS`, 6 for `EVHOE` and 3 for `BITS`). Moreover, confidence intervals are very wide and global trends are around 1.
 
