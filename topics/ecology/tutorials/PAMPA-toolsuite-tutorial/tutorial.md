@@ -183,10 +183,12 @@ Before starting the preparation of the data, we need to identify which inputs we
 > For this workflow, two nomenclatures are advised :
 > * The PAMPA file nomenclature: 
 >   ```[Two first letters of 'site'][Two last numbers of 'year'][Identifier of the precise sampled location in four numbers]```
+>
 >   The fields ```year``` and "location" will be automatically infered from this nomenclature in the first tools to 
 >   compute metrics
 > 
 > * The automatic nomenclature: ```['year' in four numbers]_[Identifier of the precise sampled location in any character chain]```
+>
 >   This nomenclature will be automatically constructed in the first tools to compute metrics if the input file doesn't already 
 >   have a "observation.unit" field but only ```year``` and "location"
 > 
