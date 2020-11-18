@@ -229,15 +229,9 @@ There is one output file: re-name: `assembly-and-reads`
 *  Make sure the bam files are ticked in the left hand panel.
 * Choose a contig in the drop down menu. Zoom in and out with + and - buttons.
 
-test here to view jbrowse snippet
+Here is an embedded snippet showing JBrowse and the mapped reads:
 
 {% include snippets/jbrowse.html datadir="data" %}
-
-
-
-
-
-![read mapping](../../images/jbrowse-read-mapping-zoomed-out.png "Overview of reads mapped back to the assembly")
 
 
 > ### {% icon question %} Questions
