@@ -71,7 +71,7 @@ Skip to the section on setting up below that is appropriate for you
 
 > ### {% icon hands_on %} EU: Setting up VMs
 >
-> 1. Open a PR editing the [count variable](https://github.com/usegalaxy-eu/infrastructure/blob/master/training-vms.tf#L1) and increasing it to the desired number of VMs.
+> 1. Open a PR editing the [count variable](https://github.com/usegalaxy-eu/infrastructure/blob/master/gat.tf#L1) and increasing it to the desired number of VMs.
 >
 > 2. Merge
 >
@@ -97,7 +97,7 @@ Skip to the section on setting up below that is appropriate for you
 >    - 8Gb RAM
 >    - 2 VCPUs
 >
->    If you're using terraform, you can take inspiration from [UseGalaxy.eu's terraform configuration](https://github.com/usegalaxy-eu/infrastructure/blob/3f7694a/training-vms.tf)
+>    If you're using terraform, you can take inspiration from [UseGalaxy.eu's terraform configuration](https://github.com/usegalaxy-eu/infrastructure/blob/master/gat.tf)
 >
 > 2. Place the list of usernames and IPs and passwords in the [GAT Machines](http://gxy.io/gatmachines) spreadsheet in the correct tab.
 >
