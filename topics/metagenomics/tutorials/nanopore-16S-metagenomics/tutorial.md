@@ -35,7 +35,7 @@ On the other hand, many species of microorganisms establish complex __symbiotic 
 
 ![Bacterial communities](../../images/metagenomics-nanopore/bacteria_community.png "Representation of the relationships between root microbiomes and plant organisms.")
 
-In this tutorial we will use sequencing data obtained through the __MinION sequencer__ (Oxford Nanopore Technologies) with two objectives: to evaluate the health status of soil samples and to study how microbial populations are modified by their interaction with plant roots. This example was inspired in {% cite Brown2017 %}.
+In this tutorial, we will use sequencing data obtained through the __MinION sequencer__ (Oxford Nanopore Technologies) with two objectives: 1) evaluate the health status of soil samples and 2) study how microbial populations are modified by their interaction with plant roots. This example was inspired by {% cite Brown2017 %}.
 
 > ### Agenda
 >
