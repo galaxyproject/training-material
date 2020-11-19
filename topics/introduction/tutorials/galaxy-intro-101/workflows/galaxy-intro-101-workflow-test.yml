@@ -1,0 +1,20 @@
+---
+- doc: Test sample data for the workflow
+  job:
+    exons:
+      class: File
+      location: https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Coding-Exons.bed
+      filetype: bed
+    features:
+      class: File
+      location: https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs.bed
+      filetype: bed
+  outputs:
+    top_5:
+      asserts:
+        has_text:
+          text: 'ENST00000253255.7_cds_0_0_chr22_46256561_r'
+    top_5_coords:
+      asserts:
+        has_text:
+          text: 'ENST00000216268.6_cds_1_0_chr22_49883663_f'

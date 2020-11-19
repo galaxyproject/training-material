@@ -1,61 +1,33 @@
 #!/bin/bash
 exit_with=0
 
-#python script to iterate over the steps in the workflow.
-function tester { 
-    python3 - <<END
-import sys 
-import json 
+for wf in $(find topics -path '*/workflows/*' -and -name '*.ga'); do
+	topic=$(echo "$wf" | cut -d/ -f 2)
 
-with open("$1") as json_file:
-    data = json.load(json_file)
-    # Checking for 'tags' in workflow
-    if 'tags' not in data or "$2" not in data['tags']:
-        sys.stderr.write("-------------------------------------------\n")
-        sys.stderr.write(
-            "Workflow {} has no corresponding 'tags' attribute. Please add:\n".format(data['name']))
-        sys.stderr.write('"tags": [' + "\n\t" + '"' + "$2" + '"' + "\n]\n")
-        sys.exit(False)
+	echo "Linting $wf"
 
-    # Checking for 'annotation' in workflow
-    elif 'annotation' not in data or not data['annotation']:
-        sys.stderr.write("-------------------------------------------\n")
-        sys.stderr.write(
-            "Workflow {} has no corresponding 'annotation' attribute. Please add: \n".format(data['name']))
-        sys.stderr.write('"annotation": "<title of tutorial>"' + "\n")
-        sys.exit(False)
+	jq '.tags[]' -r < "$wf" | grep -q "$topic"
+	ec=$?
 
-    # Checking if there are tools used from the testtoolshed
-    else:
-        for stepnr, step in data['steps'].items():
-            if step['tool_id'] and step['type'] == 'tool' and 'testtoolshed.g2.bx.psu.edu' in step['tool_id']:
-                sys.stderr.write("-------------------------------------------\n")
-                sys.stderr.write("Workflow {} has a tool from the testtoolshed in step {}.\n".format(
-                    data['name'], str(stepnr)))
-                sys.exit(False)
-        sys.exit(True)
-END
-}
+	if (( ec > 0 )); then
+		echo "	The tags attribute is missing. Please add:"
+		echo '	"tags": ["'"$topic"'"]'
+		exit_with=1
+	fi
 
-for topicdir in ./topics/*
-do
-    topic=$(basename $topicdir)
-    for tutdir in $topicdir/tutorials/*
-    do
-        if [ -d $tutdir/workflows/ ];
-        then
-            for w in $tutdir/workflows/*.ga
-            do
-                echo "Checking $w"
+	annotation=$(jq '.annotation' -r < "$wf")
+	if [[ "$annotation" == "null" ]] || [[ "$annotation" == "" ]]; then
+		echo "	The 'annotation' attribute is missing or incorrect. Please add: \"annotation\": \"<title of tutorial>\""
+		exit_with=1
+	fi
 
-                if tester $w $topic;
-                then
-                    echo "-------------Invalid workflow--------------"
-		            exit_with=1
-                fi
-            done
-        fi
-    done
+	tts_tools=$(jq '.steps[].tool_id' -r < "$wf" | grep -c testtoolshed.g2.bx.psu.edu)
+	if (( tts_tools > 0 )); then
+		echo "	Some steps have tools from the testtoolshed. These are not permitted in GTN tutorials."
+		jq '.steps[].tool_id' -r < "$wf" | grep -c testtoolshed.g2.bx.psu.edu
+		exit_with=1
+	fi
+
 done
 
 exit $exit_with

@@ -1,0 +1,492 @@
+{
+  "a_galaxy_workflow": "true",
+  "annotation": "workflow-editor",
+  "format-version": "0.1",
+  "name": "Subworkflow",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [],
+      "label": null,
+      "name": "Input dataset collection",
+      "outputs": [],
+      "position": {
+        "bottom": 521.9460067749023,
+        "height": 80.96590423583984,
+        "left": 714.9431762695312,
+        "right": 914.9431762695312,
+        "top": 440.9801025390625,
+        "width": 200,
+        "x": 714.9431762695312,
+        "y": 440.9801025390625
+      },
+      "tool_id": null,
+      "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+      "tool_version": null,
+      "type": "data_collection_input",
+      "uuid": "04b2dd36-a4a2-45ea-8a42-5543b7b78b5f",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "output",
+          "uuid": "9f031818-b9f1-479b-b5e4-064c9f21af40"
+        }
+      ]
+    },
+    "1": {
+      "annotation": "",
+      "id": 1,
+      "input_connections": {
+        "0:Input dataset collection": {
+          "id": 0,
+          "input_subworkflow_step_id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "workflow 1"
+        }
+      ],
+      "label": "workflow 1",
+      "name": "Tutorial workflow",
+      "outputs": [],
+      "position": {
+        "bottom": 524.9147491455078,
+        "height": 91.96022033691406,
+        "left": 981.960205078125,
+        "right": 1181.960205078125,
+        "top": 432.95452880859375,
+        "width": 200,
+        "x": 981.960205078125,
+        "y": 432.95452880859375
+      },
+      "subworkflow": {
+        "a_galaxy_workflow": "true",
+        "annotation": "",
+        "format-version": "0.1",
+        "name": "Tutorial workflow",
+        "steps": {
+          "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+              "bottom": 594.9005355834961,
+              "height": 80.96590423583984,
+              "left": 716.5056762695312,
+              "right": 916.5056762695312,
+              "top": 513.9346313476562,
+              "width": 200,
+              "x": 716.5056762695312,
+              "y": 513.9346313476562
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "0bfe552c-0ac2-4eed-8565-8d14c61275c0",
+            "workflow_outputs": [
+              {
+                "label": null,
+                "output_name": "output",
+                "uuid": "1f0fc6bc-e12e-4328-b7dd-a6514ee5e1a8"
+              }
+            ]
+          },
+          "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+              "infile": {
+                "id": 0,
+                "output_name": "output"
+              }
+            },
+            "inputs": [],
+            "label": "Reverse dataset",
+            "name": "tac",
+            "outputs": [
+              {
+                "name": "outfile",
+                "type": "input"
+              }
+            ],
+            "position": {
+              "bottom": 604.1051177978516,
+              "height": 91.96022033691406,
+              "left": 945.9090576171875,
+              "right": 1145.9090576171875,
+              "top": 512.1448974609375,
+              "width": 200,
+              "x": 945.9090576171875,
+              "y": 512.1448974609375
+            },
+            "post_job_actions": {
+              "HideDatasetActionoutfile": {
+                "action_arguments": {},
+                "action_type": "HideDatasetAction",
+                "output_name": "outfile"
+              },
+              "TagDatasetActionoutfile": {
+                "action_arguments": {
+                  "tags": "name:reverse"
+                },
+                "action_type": "TagDatasetAction",
+                "output_name": "outfile"
+              }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0",
+            "tool_shed_repository": {
+              "changeset_revision": "9ff72e942410",
+              "name": "text_processing",
+              "owner": "bgruening",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"separator\": {\"separator_select\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "ba7c2986-a652-419f-9295-de6a32e4da1e",
+            "workflow_outputs": []
+          },
+          "2": {
+            "annotation": "",
+            "content_id": "Show beginning1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+              "input": {
+                "id": 1,
+                "output_name": "outfile"
+              }
+            },
+            "inputs": [],
+            "label": "Select first lines",
+            "name": "Select first",
+            "outputs": [
+              {
+                "name": "out_file1",
+                "type": "input"
+              }
+            ],
+            "position": {
+              "bottom": 611.1363677978516,
+              "height": 91.96022033691406,
+              "left": 1175.3125,
+              "right": 1375.3125,
+              "top": 519.1761474609375,
+              "width": 200,
+              "x": 1175.3125,
+              "y": 519.1761474609375
+            },
+            "post_job_actions": {
+              "RenameDatasetActionout_file1": {
+                "action_arguments": {
+                  "newname": "Last lines"
+                },
+                "action_type": "RenameDatasetAction",
+                "output_name": "out_file1"
+              },
+              "TagDatasetActionout_file1": {
+                "action_arguments": {
+                  "tags": "name:first"
+                },
+                "action_type": "TagDatasetAction",
+                "output_name": "out_file1"
+              }
+            },
+            "tool_id": "Show beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"lineNum\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "486eca04-1479-4770-bd0a-e5f378e44d42",
+            "workflow_outputs": [
+              {
+                "label": "First lines",
+                "output_name": "out_file1",
+                "uuid": "daf1abd9-a5c8-4b25-add1-5475e594f187"
+              }
+            ]
+          }
+        },
+        "tags": "",
+        "uuid": "93bfe747-6f39-4260-b836-fd102446a559"
+      },
+      "tool_id": "25cb3a27446df7a6",
+      "type": "subworkflow",
+      "uuid": "97c98f36-55c3-4d30-ac12-2c664e87491f",
+      "workflow_outputs": [
+        {
+          "label": "First lines",
+          "output_name": "First lines",
+          "uuid": "88160926-01a6-4903-8737-1f3d65449e12"
+        }
+      ]
+    },
+    "2": {
+      "annotation": "",
+      "id": 2,
+      "input_connections": {
+        "0:Input dataset collection": {
+          "id": 0,
+          "input_subworkflow_step_id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "",
+          "name": "workflow 2"
+        }
+      ],
+      "label": "workflow 2",
+      "name": "Tutorial workflow",
+      "outputs": [],
+      "position": {
+        "bottom": 671.9459991455078,
+        "height": 91.96022033691406,
+        "left": 978.9772338867188,
+        "right": 1178.9772338867188,
+        "top": 579.9857788085938,
+        "width": 200,
+        "x": 978.9772338867188,
+        "y": 579.9857788085938
+      },
+      "subworkflow": {
+        "a_galaxy_workflow": "true",
+        "annotation": "",
+        "format-version": "0.1",
+        "name": "Tutorial workflow",
+        "steps": {
+          "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset collection",
+            "outputs": [],
+            "position": {
+              "bottom": 594.9005355834961,
+              "height": 80.96590423583984,
+              "left": 716.5056762695312,
+              "right": 916.5056762695312,
+              "top": 513.9346313476562,
+              "width": 200,
+              "x": 716.5056762695312,
+              "y": 513.9346313476562
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false, \"collection_type\": \"list\"}",
+            "tool_version": null,
+            "type": "data_collection_input",
+            "uuid": "0bfe552c-0ac2-4eed-8565-8d14c61275c0",
+            "workflow_outputs": [
+              {
+                "label": null,
+                "output_name": "output",
+                "uuid": "1f0fc6bc-e12e-4328-b7dd-a6514ee5e1a8"
+              }
+            ]
+          },
+          "1": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0",
+            "errors": null,
+            "id": 1,
+            "input_connections": {
+              "infile": {
+                "id": 0,
+                "output_name": "output"
+              }
+            },
+            "inputs": [],
+            "label": "Reverse dataset",
+            "name": "tac",
+            "outputs": [
+              {
+                "name": "outfile",
+                "type": "input"
+              }
+            ],
+            "position": {
+              "bottom": 604.1051177978516,
+              "height": 91.96022033691406,
+              "left": 945.9090576171875,
+              "right": 1145.9090576171875,
+              "top": 512.1448974609375,
+              "width": 200,
+              "x": 945.9090576171875,
+              "y": 512.1448974609375
+            },
+            "post_job_actions": {
+              "HideDatasetActionoutfile": {
+                "action_arguments": {},
+                "action_type": "HideDatasetAction",
+                "output_name": "outfile"
+              },
+              "TagDatasetActionoutfile": {
+                "action_arguments": {
+                  "tags": "name:reverse"
+                },
+                "action_type": "TagDatasetAction",
+                "output_name": "outfile"
+              }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_tac/1.1.0",
+            "tool_shed_repository": {
+              "changeset_revision": "9ff72e942410",
+              "name": "text_processing",
+              "owner": "bgruening",
+              "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"infile\": {\"__class__\": \"ConnectedValue\"}, \"separator\": {\"separator_select\": \"no\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.0",
+            "type": "tool",
+            "uuid": "ba7c2986-a652-419f-9295-de6a32e4da1e",
+            "workflow_outputs": []
+          },
+          "2": {
+            "annotation": "",
+            "content_id": "Show beginning1",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+              "input": {
+                "id": 1,
+                "output_name": "outfile"
+              }
+            },
+            "inputs": [],
+            "label": "Select first lines",
+            "name": "Select first",
+            "outputs": [
+              {
+                "name": "out_file1",
+                "type": "input"
+              }
+            ],
+            "position": {
+              "bottom": 611.1363677978516,
+              "height": 91.96022033691406,
+              "left": 1175.3125,
+              "right": 1375.3125,
+              "top": 519.1761474609375,
+              "width": 200,
+              "x": 1175.3125,
+              "y": 519.1761474609375
+            },
+            "post_job_actions": {
+              "RenameDatasetActionout_file1": {
+                "action_arguments": {
+                  "newname": "Last lines"
+                },
+                "action_type": "RenameDatasetAction",
+                "output_name": "out_file1"
+              },
+              "TagDatasetActionout_file1": {
+                "action_arguments": {
+                  "tags": "name:first"
+                },
+                "action_type": "TagDatasetAction",
+                "output_name": "out_file1"
+              }
+            },
+            "tool_id": "Show beginning1",
+            "tool_state": "{\"input\": {\"__class__\": \"ConnectedValue\"}, \"lineNum\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.0.0",
+            "type": "tool",
+            "uuid": "486eca04-1479-4770-bd0a-e5f378e44d42",
+            "workflow_outputs": [
+              {
+                "label": "First lines",
+                "output_name": "out_file1",
+                "uuid": "daf1abd9-a5c8-4b25-add1-5475e594f187"
+              }
+            ]
+          }
+        },
+        "tags": "",
+        "uuid": "93bfe747-6f39-4260-b836-fd102446a559"
+      },
+      "tool_id": "25cb3a27446df7a6",
+      "type": "subworkflow",
+      "uuid": "87480457-e30c-4869-be75-a3b60d5a898e",
+      "workflow_outputs": [
+        {
+          "label": "First lines",
+          "output_name": "First lines",
+          "uuid": "f18ca9d2-a8bb-4317-86cb-bad2ef3d2fba"
+        }
+      ]
+    },
+    "3": {
+      "annotation": "",
+      "content_id": "Paste1",
+      "errors": null,
+      "id": 3,
+      "input_connections": {
+        "input1": {
+          "id": 1,
+          "output_name": "First lines"
+        },
+        "input2": {
+          "id": 2,
+          "output_name": "First lines"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "Paste",
+      "outputs": [
+        {
+          "name": "out_file1",
+          "type": "input"
+        }
+      ],
+      "position": {
+        "bottom": 617.9119110107422,
+        "height": 121.96022033691406,
+        "left": 1326.960205078125,
+        "right": 1526.960205078125,
+        "top": 495.9516906738281,
+        "width": 200,
+        "x": 1326.960205078125,
+        "y": 495.9516906738281
+      },
+      "post_job_actions": {},
+      "tool_id": "Paste1",
+      "tool_state": "{\"delimiter\": \"T\", \"input1\": {\"__class__\": \"ConnectedValue\"}, \"input2\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+      "tool_version": "1.0.0",
+      "type": "tool",
+      "uuid": "aa96e52b-7c25-41c3-9ebc-57f1bb4ef40e",
+      "workflow_outputs": [
+        {
+          "label": null,
+          "output_name": "out_file1",
+          "uuid": "91e2e281-37c0-4af8-baba-94f775e37a02"
+        }
+      ]
+    }
+  },
+  "tags": [
+    "galaxy-interface"
+  ],
+  "uuid": "ffdf65ab-cea7-4b60-b048-64f2cd074652",
+  "version": 4
+}

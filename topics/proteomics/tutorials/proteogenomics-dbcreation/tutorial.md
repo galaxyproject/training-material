@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Proteogenomics 1: Database Creation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1489208"
+level: Intermediate
 questions:
   - "How to create a customized Protein Database from RNAseq data?"
 objectives:

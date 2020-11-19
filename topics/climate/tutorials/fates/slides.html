@@ -1,0 +1,217 @@
+---
+layout: base_slides
+logo: "GTN"
+title: "Functionally Assembled Terrestrial Ecosystem Simulator (FATES)"
+questions:
+  - What is FATES?
+  - How can I use FATES?
+objectives:
+  - Have an understanding of what FATES is and how it works
+time_estimation: "30m"
+key_points:
+  - FATES
+contributors:
+  - rosiealice
+  - annefou
+tags:
+  - climate
+  - ecology
+requirements:
+  - type: "external"
+    title: introduction to climate data
+    link: https://training.galaxyproject.org/training-material/topics/climate/slides/introduction.html#1
+---
+
+## Evolution of land surface models
+
+![Evolution of land surface models](../../images/lsm_evolution.png)
+
+*reference*: Fisher R.A. & Koven C.D.  JAMES, 2020
+
+---
+
+## Evolution of land surface models
+
+![Global Carbon budget](../../images/lsm_evolution_cb.png)
+
+*reference*: Fisher R.A. & Koven C.D.  JAMES, 2020
+
+---
+
+## Evolution of land surface models
+
+![Climate feedback](../../images/lsm_evolution_climate_feedback.png)
+
+*reference*: Fisher R.A. & Koven C.D.  JAMES, 2020
+
+---
+
+![Surface processes](../../images/surface_processes.png)
+
+Surface processes play a key role in **extreme events** (heat waves, fires, crop failures, floods, droughts). 
+
+---
+
+## Evolution of land surface models
+
+![Climate impact](../../images/lsm_evolution_climate_impacts.png)
+
+*reference*: Fisher R.A. & Koven C.D.  JAMES, 2020
+
+---
+
+## Problems with the status quo
+
+
+![Status quo](../../images/lsm_status_quo.png)
+
+1. Perpetual increase in complexity
+
+---
+
+## Land surface modelling in the world
+
+![LSM teams](../../images/lsm_teams.png)
+
+---
+## Problems with the status quo
+
+
+![Status quo](../../images/lsm_status_quo.png)
+
+1. Perpetual increase in complexity
+2. Sub-critical development efforts
+3. Over-simplified representation of ecosystems
+---
+
+## Ecological processes in land surface models
+
+
+![Ecological processes](../../images/ecological_processes.png)
+
+---
+
+## Solutions
+
+![Status quo](../../images/lsm_status_quo.png)
+
+1. Perpetual increase in complexity
+    - Complexity management
+2. Sub-critical development efforts
+    - Open-source community development
+3. Over-simplified representation of ecosystems
+    - Balanced ecological realism
+
+---
+# What is FATES?
+
+FATES stands for the **Functionally Assembled Terrestrial Ecosystem Simulator** and
+is a module with fully **open-source** development:
+
+![FATES](../../images/FATES_NGEET.png)
+---
+
+## FATES open-source
+
+- Available on GitHub: [https://github.com/NGEET/fates](https://github.com/NGEET/fates)
+
+
+It is designed to operate in a **"host"** land surface model, which simulates:
+- plant physiology,
+- competitive processes,
+- ecosystem assembly
+and
+- vegetation distribution
+
+---
+
+## Cohort model
+
+![Concept of Cohort model](../../images/cohort_concept.png)
+
+*reference*: Benchmarking and parameter sensitivity of physiological and vegetation dynamics using the Functionally Assembled Terrestrial Ecosystem Simulator (FATES) at Barro Colorado Island, Panama
+Charles D. Koven et al., 2020.
+
+---
+
+## Balanced ecological realism
+
+What are the advances allowed by a demographic model?
+
+- Representation of light competition & ecosystem assembly.
+- Prediction of the distribution of plants based on their **functional traits**.
+- **Lags** between climate and vegetation change and growth after **disturbances**.
+- Better representation of **physiological processes** (hydraulics, fire, nutrients).
+
+
+![Ecological realism](../../images/ecological_realism.png)
+---
+
+![development](../../images/FATES_development.png)
+
+---
+
+![development cluster](../../images/FATES_development_cluster.png)
+
+---
+
+# Open source, community development
+
+**Growth in participation in FATES**
+
+![FATES community](../../images/FATES_community.png)
+
+---
+# FATES development
+- About 39 funded researchers.
+- 6 countries, 26+ institutions.
+- 130 participants at the recent planning meeting.
+- 3 Earth System Modelling Centres.
+- More than 11 proposal funded (2020). Many more ongoing.
+
+---
+
+# Code complexity management
+
+- Modular complexity: a strategy to manage the proliferation of processes
+
+![FATES code complexity](../../images/FATES_code_complexity.png)
+
+**Reference**: Fisher R.A. & Koven C.D.  “Perspectives on the Future of Land Surface Models and the Challenges of Representing Complex Terrestrial Systems” AGU Perspective article. JAMES, 2020
+
+
+---
+
+## FATES reduced complexity modes
+
+![FATES reduced complexity](../../images/FATES_reduced_complexity.png)
+
+---
+
+# But that's not all...
+
+FATES (in common with all land surface models that are part of ESMs) remains technically challenging to run. 
+- Scripting environment is complicated.
+- Porting model to a new supercomputer is incredibly hard.  
+- Running at single sites or regions is more cumbersome than running globally.
+- Tools developed on one platform often do not work on another.
+- Workflows are complicated by computing architecture. 
+
+---
+
+# But that's not all...
+
+**Interesting science** is at the interface of the input parameters, model processes and emergent outcomes.
+
+![Learning curve](../../images/FATES_learning_curve.png)
+
+
+**Reference**: Eva Lieungh, Sonya Geange, Hui Tang
+
+---
+
+# How can I use FATES in Galaxy?
+
+- With CLM-FATES [Galaxy tool](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) for running operational and long simulations.
+- [Galaxy climate JupyterLab](https://live.usegalaxy.eu/?tool_id=interactive_tool_climate_notebook)
+  for learning, developing the model, setting up simulations and visualizing results.

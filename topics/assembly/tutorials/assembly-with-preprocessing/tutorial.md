@@ -30,7 +30,7 @@ requirements:
       - mapping
   -
     type: "internal"
-    topic_name: galaxy-data-manipulation
+    topic_name: galaxy-interface
     tutorials:
       - collections
 tags:
@@ -109,7 +109,7 @@ tutorial offers two ways to access the sequenced reads input data:
    >
    > If, after this first taste, you are interested in a thorough introduction
    > we recommend the advanced tutorial
-   > [Collections: Rule Based Uploader](../../../galaxy-data-manipulation/tutorials/upload-rules/tutorial.html).
+   > [Collections: Rule Based Uploader](../../../galaxy-interface/tutorials/upload-rules/tutorial.html).
    {: .details}
 
    Use this method if the direct download from the NCBI SRA does not work, or

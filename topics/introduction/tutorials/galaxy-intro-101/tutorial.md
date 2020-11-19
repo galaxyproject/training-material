@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Galaxy 101"
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.4104428"
 level: Introductory
 questions:
   - "Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?"
@@ -191,7 +191,7 @@ Our objective is to find which exon contains the most SNPs. Therefore we have to
 
 > ### {% icon hands_on %} Hands-on: Finding Exons
 >
-> 1. **Join** {% icon tool %} the intervals of two datasets side-by-side:
+> 1. {% tool [Join](toolshed.g2.bx.psu.edu/repos/devteam/join/gops_join_1/1.0.0) %}   the intervals of two datasets side-by-side:
 >
 >    Enter the word `join` in the search bar of the tool panel, and select the
 >    tool named `Join - the intervals of two datasets side-by-side`
@@ -248,7 +248,7 @@ Since each line in our file represents a single overlap between SNP and exon, we
 
 > ### {% icon hands_on %} Hands-on: Counting SNPs
 >
-> 1. **Group** {% icon tool %} data by a column and perform aggregate operation on other columns:
+> 1. {% tool [Group](Grouping1) %} data by a column and perform aggregate operation on other columns:
 >
 >    - *"Select data"*: select the output dataset from **Join** {% icon tool %}
 >    - *"Group by column"*: `Column: 4` (the column with the exon IDs)
@@ -280,7 +280,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 
 > ### {% icon hands_on %} Hands-on: Sorting
 >
-> 1. **Sort** {% icon tool %} data in ascending or descending order:
+> 1. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} data in ascending or descending order:
 >
 >    - *"Sort Query"*: Output from **Group** {% icon tool %}
 >    - *"Column Selections"*:
@@ -314,7 +314,7 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 
 > ### {% icon hands_on %} Hands-on: Select first
 >
-> 1. **Select first** {% icon tool %} lines from a dataset:
+> 1. {% tool [Select first](Show+beginning1) %} lines from a dataset:
 >
 >    - *"Select first"*: `5`
 >    - *"from"*: The output from **Sort** {% icon tool %}
@@ -332,7 +332,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 
 > ### {% icon hands_on %} Hands-on: Compare two Datasets
 >
-> 1. **Compare two Datasets** {% icon tool %} to find common or distinct rows:
+> 1. {% tool [Compare two Datasets](comp1) %} to find common or distinct rows:
 >
 >    - *"Compare"*: `Exons`
 >    - *"Using column"*: `Column: 4`
@@ -437,16 +437,11 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
->    > ### {% icon tip %} Hiding intermediate steps
->    > When a workflow is executed, the user is usually primarily interested in the final product and not in all intermediate steps. By default all the outputs of a workflow will be shown, but we can explicitly tell Galaxy which outputs to show and which to hide for a given workflow. This behaviour is controlled by the little asterisk next to every output dataset:
->    > ![Asterisk for `out_file1` in the `Select First` tool](../../../../shared/images/workflow_editor_mark_output.png)
->    >
->    > If you click on this asterisk for any of the output datasets, then *only* files with an asterisk will be shown, and all outputs without an asterisk will be hidden. (Note that clicking *all* outputs has the same effect as clicking *none* of the outputs, in both cases all the datasets will be shown.)
->    {: .tip}
+>    {% include snippets/workflow_hide_intermediate_steps.md %}
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
-> 4. Click the **asterisk** for `out_file1` in the `Select First` and `Compare two Datasets` tools.
+> 4. Make sure the  **check boxes** for `out_file1` in the `Select First` and `Compare two Datasets` tools are selected. Make sure that everything else is not selected.
 >
 >    Now, when we run the workflow, we will only see the final two outputs, i.e. the table with the top-5 exons and their SNP counts, and the file with exons ready for viewing in a genome browser.
 >
@@ -466,8 +461,6 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 7. **Repeat** this for the output of the `Compare two Datasets` tool, naming it `Top 5 exons`
 >
 > 8. **Save your workflow** (important!) by clicking on the {% icon galaxy-save %} icon at the top right of the screen.
->
->    ![Save option in the workflow editor menu](../../images/workflow_editor_save.png)
 >
 > 9. **Return** to the analysis view by clicking on **Analyze Data** at the top menu bar.
 >
@@ -491,9 +484,9 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![Drag and drop of `Exons` dataset in the history overview](../../images/101_copydataset.png)
 >
-> 2. Click **Analyze Data** at the top to return to the main analysis window
+> 3. Click **Analyze Data** at the top to return to the main analysis window
 >
-> 3. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
+> 4. We wanted to know something about the repetitive elements per exon. We get this data from UCSC.
 >
 >    **UCSC Main** {% icon tool %} table browser:
 >
@@ -510,21 +503,29 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    Click on **get output** and then **Send query to Galaxy** on the next screen.
 >
-> 4. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
+> 5. **Rename** {% icon galaxy-pencil %} the dataset to `Repeats`
+>
+> 6. Open the **workflow menu** (top menu bar). Find the workflow you made in the previous section, and select the option `Run`.
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
+>     {% include snippets/run_workflow.md %}
+>
 >    The central panel will change to allow you to configure and launch the workflow.
 >
-> 5. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+> 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+>    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
+>    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
 >
 >    ![Settings for running the workflow](../../images/101_38.png)
 >
 >    > ### {% icon comment %} Potential workflow issues
->    > Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>    >
+>    >  * Galaxy validates the workflow inputs to ensure they're correct. It may show a validation error at the start, until you select `Exons` for the Exons input, and your repeats for the Features input.
+>    >  * If you see an "Invalid column choice" error, you need to specify which column you want to use. If you have to type the column number, you need to type just the number e.g. `4` (not `Column 4` or anything else).
 >    {: .comment}
 >
-> 6. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
+> 8. Once the workflow has started, you will initially be able to see all its steps, but the unimportant intermediates will disappear after they complete successfully:
 >
 >    ![Datasets appearing in the history](../../images/101_39.png)
 {: .hands_on}

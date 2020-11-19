@@ -37,7 +37,9 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 {: .agenda}
 
-## Installation with Ansible
+## Installing gxadmin
+
+It's simple to install gxadmin. Here's how you do it, if you haven't done it already.
 
 > ### {% icon hands_on %} Hands-on: Installing gxadmin with Ansible
 >
@@ -45,7 +47,7 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 >
 >    ```yml
 >    - src: usegalaxy_eu.gxadmin
->      version: 0.0.2
+>      version: 0.0.3
 >    ```
 >
 > 2. Install the role with `ansible-galaxy install -p roles -r requirements.yml`
@@ -59,7 +61,7 @@ Since then it became the home for "all of the SQL queries we [galaxy admins] run
 ## Configuration
 
 If `psql` runs without any additional arguments, and permits you to access your galaxy database then you do not need to do any more configuration for gxadmin.
-Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#query-setup)
+Otherwise, you may need to set some of the [PostgreSQL environment variables](https://github.com/usegalaxy-eu/gxadmin#postgres)
 
 ## Overview
 
@@ -226,6 +228,20 @@ gxadmin iquery queue-overview --short-tool-id
 gxadmin iquery workflow-invocation-status
 ```
 
+
+> ### {% icon tip %} Which queries support iquery?
+> This data is not currently exposed, so, just try the queries. But it's easy to add influx support when missing! [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L54), we set the variables in a function:
+>
+> ```
+> fields="count=1"
+> tags="tool_id=0"
+> ```
+>
+> This means: column 0 is a tag named tool_id, and column 1 is a field (real value) named count.
+> [Here is an example](https://github.com/usegalaxy-eu/gxadmin/blob/e0ec0174ebbdce1acd8c40c7431308934981aa0c/parts/22-query.sh#L1987) that has multiple fields that are stored.
+>
+{: .tip}
+
 # Implementing a Query
 
 Queries are really easy to implement! All you have to do is add your SQL, with a small bash function to wrap it. `gxadmin` supports 'local' functions, which you can add locally without contributing back. We strongly encourage you to contribute your functions back to `gxadmin` though, you'll never know who wants to know the same thing about their db.
@@ -243,7 +259,7 @@ Queries are really easy to implement! All you have to do is add your SQL, with a
 > 3. Add the following to the file and save it.
 >
 >    ```bash
->    local_hello() { ## hello: Says hi
+>    local_hello() { ## : Says hi
 >    	echo "hi!"
 >    }
 >    ```
@@ -297,7 +313,7 @@ Every function is improved by documentation! Let's add that now:
 > 2. Update your function to add the `handle_help` call:
 >
 >    ```bash
->    local_hello() { ## hello: Says hi
+>    local_hello() { ## : Says hi
 >    	handle_help "$@" <<-EOF
 >    		Greets you
 >    	EOF
@@ -347,7 +363,7 @@ The bulk of gxadmin is not functions calling shell commands though, it's mostly 
 > 2. Add a new function:
 >
 >    ```bash
->    local_query-latest() { ## query-latest [jobs|10]: Queries latest N jobs (default to 10)
+>    local_query-latest() { ## [jobs|10]: Queries latest N jobs (default to 10)
 >    	handle_help "$@" <<-EOF
 >    		Find information about the latest jobs on your server.
 >    	EOF

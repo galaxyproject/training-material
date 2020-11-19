@@ -16,9 +16,12 @@
         </a>
         <ul class="dropdown-menu">
         {% for lang in language %}
-            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
-                {{ lang | upcase }}
+            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{ lang[0] }}&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                {{ lang[1] }}
             </a>
         {% endfor %}
+        <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ include.topic }}%2Ftutorials%2F{{ include.material.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+            And more!
+        </a>
     </span>
 {% endif %}

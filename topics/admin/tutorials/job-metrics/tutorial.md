@@ -53,7 +53,7 @@ These include very basic submission parameters. We want more information!
 
 > ### {% icon hands_on %} Hands-on: Setting up the job metrics file
 >
-> 1. Create the file `files/galaxy/config/job_metrics_conf.xml` with the following contents:
+> 1. Create the file `templates/galaxy/config/job_metrics_conf.xml.j2` with the following contents:
 >
 >    ```xml
 >    <?xml version="1.0"?>
@@ -76,30 +76,27 @@ These include very basic submission parameters. We want more information!
 >
 >    You'll need to make two edits:
 >    - Setting the `job_metrics_config_file`, to tell Galaxy where to look for the job metrics configuration.
->    - Adding the file to the list of `galaxy_config_files` to deploy it to the server:
+>    - Adding the file to the list of `galaxy_config_templates` to deploy it to the server:
 >
 >    {% raw %}
 >    ```diff
 >    --- galaxyservers.yml.old
 >    +++ galaxyservers.yml
->
->    + galaxy_job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
->
 >      galaxy_config:
 >        galaxy:
->    +     job_metrics_config_file: "{{ galaxy_job_metrics_config_file }}"
+>    +     job_metrics_config_file: "{{ galaxy_config_dir }}/job_metrics_conf.xml"
 >          brand: "My Galaxy"
 >          admin_users: admin@example.org
 >          database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    @@ -120,6 +121,8 @@ gie_proxy_setup_service: systemd
->      gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
-> 
->      galaxy_config_files:
->    +   - src: files/galaxy/config/job_metrics_conf.xml
->    +     dest: "{{ galaxy_job_metrics_config_file }}"
->        - src: files/galaxy/config/tool_conf_interactive.xml
->          dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
->        - src: files/galaxy/config/job_conf.xml
+>     gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
+>
+>     galaxy_config_templates:
+>    +  - src: templates/galaxy/config/job_metrics_conf.xml.j2
+>    +    dest: "{{ galaxy_config.galaxy.job_metrics_config_file }}"
+>       - src: templates/galaxy/config/tool_conf_interactive.xml
+>         dest: "{{ galaxy_config_dir }}/tool_conf_interactive.xml"
+>       - src: templates/galaxy/config/job_conf.xml
 >    ```
 >    {% endraw %}
 >
@@ -129,3 +126,7 @@ With this, the job metrics tracking should be set up. Now when you run a job, yo
 ## What should I collect?
 
 There is not a good rule we can tell you, just choose what you think is useful or will be. Numeric parameters are "cheaper" than the text parameters like uname to store, eventually you may find yourself wanting to remove old job metrics if you decide to collect the environment variables or similar.
+
+## Accessing the data
+
+You can access the data via BioBlend ([`JobsClient.get_metrics`](https://bioblend.readthedocs.io/en/latest/api_docs/galaxy/all.html#bioblend.galaxy.jobs.JobsClient.get_metrics)), or via SQL with [`gxadmin`](https://usegalaxy-eu.github.io/gxadmin/#/README.query?id=query-tool-metrics)

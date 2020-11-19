@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Proteogenomics 2: Database Search"
 zenodo_link: "https://doi.org/10.5281/zenodo.1489208"
+level: Intermediate
 questions:
   - "How to identify variant proteoforms in MS data by searching with the customized Protein database?"
 objectives:
@@ -293,7 +294,7 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >
 >  1. **Query Tabular** {% icon tool %} with the following parameters:
 >
->  - {% icon param-repeat %} **Insert Database Table** (a):
+>  - {% icon param-repeat %} **Insert Database Table** (a): `output from group`
 >    - Section **Table Options**:
 >      - *"Tabular Dataset for Table"*: Uniprot
 >      - *"Use first line as column names"* : `No`
@@ -301,7 +302,8 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >      - {% icon param-repeat %} **Insert Table Index**:
 >        - *"Table Index"*: `No`
 >        - *"Index on Columns"*: `Prot`
->  - {% icon param-repeat %} **Insert Database Table** (b):
+>
+>  - {% icon param-repeat %} **Insert Database Table** (b): `PSM report`
 >    - Section **Filter Dataset Input**:
 >      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**
 >        - *"Filter by"*:  `skip leading lines`
@@ -316,7 +318,7 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >        - *"Table Index"*: `No`
 >        - *"Index on Columns"*: `id`
 >
-> - {% icon param-repeat %} **Insert Database Table** (c):
+> - {% icon param-repeat %} **Insert Database Table** (c):`PSM report`
 >
 >    - Section **Filter Dataset Input**
 >      - {% icon param-repeat %} **Insert Filter Tabular Input Lines**

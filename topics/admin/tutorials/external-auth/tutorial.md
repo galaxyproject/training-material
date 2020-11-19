@@ -71,6 +71,11 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >    `GX_SECRET` is added as a header for security purposes, to prevent any other users on the system impersonating nginx and sending requests to Galaxy. NGINX and other webservers like Apache will strip any user-sent `REMOTE_USER` headers, as that header defines the authenticated user. If you can talk directly to Galaxy (e.g. via curl) and provide the `REMOTE_USER` header, you can impersonate any other use. While having Galaxy listen on `127.0.0.1` prevents any requests from outside of the system reaching Galaxy, anyone on the system can still send requests to that port. Here you can choose to switch to a unix socket with permissions only permitting Galaxy and Nginx to connect. `GX_SECRET` adds additional security as it needs to match `remote_user_secret` in your galaxy configutation.
 >
+>    > ### {% icon tip %} Proxy bypass
+>    > Users can bypass the authentication only if they can talk directly to the uWSGI processes (if you have socket/http: 0.0.0.0, or if it is directly responsible for serving galaxy, and there is no proxy.)
+>    > This can happen mostly when some users have command line access to the Galaxy server, which is considered a bad practice.
+>    {: .tip}
+>
 > 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/latest/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
 >
 >    Add a pre_task using the [`htpasswd`](https://docs.ansible.com/ansible/2.4/htpasswd_module.html) module which sets up a password file in `/etc/nginx/passwd`, with owner and group set to root, and a name and password, and a mode of 0640.
@@ -155,6 +160,10 @@ location /api/ {
     allow all;
 }
 ```
+
+> ### {% icon tip %} Notification of Registration
+> There is no built-in way to be notified if users are registered, with external authentication or built-in. However, you could automate this easily. There is a [gxadmin](https://github.com/usegalaxy-eu/gxadmin) command we use called `gxadmin query latest-users` which Björn uses often. Other sites have other methods, e.g. Nicola's [cron script](https://gist.github.com/nsoranzo/f023e26aa60024ef6a7e3a3fe5fb2e4f) which runs daily on his server, to add new users to a group according to their email domain name.
+{: .tip}
 
 # Reverting
 

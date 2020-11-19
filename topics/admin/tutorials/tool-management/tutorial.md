@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Ephemeris for Galaxy Tool Management"
+title: "Galaxy Tool Management with Ephemeris"
 questions:
   - How to install, update, and maintain Galaxy tools?
   - How to extract a list of tools from a workflow or Galaxy instance?
@@ -61,7 +61,9 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 
 # Extracting Tools
 
-Galaxy workflow files are complex JSON documents, and the process of mapping the tool IDs to a ToolShed repository and revision is not trivial. Workflow files contain tool IDs which look like:
+A common request you will experience as an administrator is "I want to run this workflow". Since this is such a common workflow, Galaxy has a built in way to accomplish it. We can use Ephemeris to extract a list of tools from a Galaxy workflow document, and then use Ephemeris to install these tools and specific versions into your Galaxy.
+
+However, Galaxy workflow files are complex JSON documents, and the process of mapping the tool IDs to a ToolShed repository and revision is not trivial. Workflow files contain tool IDs which look like:
 
 ```
 toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.71
@@ -73,7 +75,7 @@ toolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/2.4.1
 toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.1
 ```
 
-However, in order to actually install these tools, we need to convert each tool ID into a ToolShed repository name and revision. For example, FastQC version 0.71 corresponds to revision `ff9530579d1f` in the ToolShed.
+In order to actually install these tools, we need to convert each tool ID into a ToolShed repository name and revision. For example, FastQC version 0.71 corresponds to revision `ff9530579d1f` in the ToolShed.
 
 ```yaml
 - name: fastqc
@@ -90,7 +92,7 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 >
 > 1. Download the mapping workflow:
 >    ```console
->    $ wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
+>    wget {{ site.url }}{% link topics/sequence-analysis/tutorials/mapping/workflows/mapping.ga %}
 >    ```
 >
 > 2. Use the Ephemeris [`workflow-to-tools`](https://ephemeris.readthedocs.io/en/latest/commands/workflow-to-tools.html) command to extract the tool list from this workflow into a file named `workflow_tools.yml`.
@@ -100,7 +102,7 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > ```console
->    > > $ workflow-to-tools -w mapping.ga -o workflow_tools.yml -l "mapping tools"
+>    > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l "mapping tools"
 >    > > ```
 >    > {: .solution }
 >    {: .question}
@@ -139,7 +141,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > $ shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
+>    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
 >    > > ```
 >    > {: .solution}
 >    {: .question}
@@ -176,7 +178,7 @@ For that, you can install from a YAML file:
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > $ shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
+>    > > shed-tools install -g https://your-galaxy -a <api-key> -t workflow_tools.yml
 >    > > ```
 >    > {: .solution}
 >    {: .question}
@@ -187,6 +189,14 @@ For that, you can install from a YAML file:
 {: .hands_on}
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
+
+> ### {% icon tip %} Can I install tools without restarting?
+> Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.
+{: .tip}
+
+> ### {% icon tip %} Can I install tools without a ToolShed?
+> Yes. The `galaxy_local_tools` option for the `galaxyproject.galaxy` Ansible role can be used to install local tools, or you can manage them in another way that fits your workflow better. UseGalaxy.eu, for example, maintains a repository of tools that are not installed from the ToolShed to aid their local developers. This is deployed to the server using the `git` module, rather than the Galaxy Ansible role.
+{: .tip}
 
 
 # Tool Testing
@@ -204,7 +214,7 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > $ shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
+>    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
 >    > > ```
 >    > {: .solution}
 >    {: .question}
@@ -227,7 +237,7 @@ Sometimes a user might ask you to install all the tools they were previously usi
 >    > > This command does not require authentication and can be used to obtain the tool list from any public Galaxy server:
 >    > >
 >    > > ```console
->    > > $ get-tool-list -g "https://usegalaxy.eu" -o "eu_tool_list.yaml"
+>    > > get-tool-list -g "https://usegalaxy.eu" -o "eu_tool_list.yaml"
 >    > > ```
 >    > {: .solution}
 >    {: .question}
@@ -235,13 +245,34 @@ Sometimes a user might ask you to install all the tools they were previously usi
 
 We will not install all the tools from the EU Galaxy server as that server likely has more tools than any other Galaxy instance, but it is useful as an example of how you can use Ephemeris to facilitate the mirroring of another Galaxy instance.
 
+> ### {% icon tip %} Non-shed tools
+> The output of `get-tool-list` only includes ToolShed tools, not local non-TS tools.
+{: .tip}
+
 # Production Best Practices
 
 The servers which are part of the `usegalaxy.*` network use Ephemeris extensively to manage their large tool sets.
 
 Interestingly, UseGalaxy.eu and UseGalaxy.org.au have different approaches:
-- AU maintains [a separate YAML file](https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/current) per each toolbox category, which allows to easily identify where tools should be added or found to add new revisions. They follow a cycle of adding the tool to their YAML file, triggering installation, and then updating the YAML files from the current server status.
+- AU maintains [a separate YAML file per tool panel section](https://github.com/usegalaxy-au/usegalaxy-au-tools/tree/master/usegalaxy.org.au), which allows to easily identify where tools should be added or found to add new revisions. They follow a cycle of adding the tool to their YAML file, triggering installation, and then updating the YAML files from the current server status.
 - EU maintains [YAML files roughly per domain](https://github.com/usegalaxy-eu/usegalaxy-eu-tools), it is not as clear of an ordering. They maintain a YAML file where humans add the tools which should be installed in a given category, and lock files are automatically generated from these with the latest revision if it is missing. They follow a cycle of updating the lock files with the latest available revisions of tools, and then installing from these lock files any missing revisions. They use a [Jenkins server](https://build.galaxyproject.eu/job/usegalaxy-eu/job/install-tools/) to automatically run tool installation weekly.
 - Together, `usegalaxy.*` are working on a collaborative approach at [galaxyproject/usegalaxy-tools](https://github.com/galaxyproject/usegalaxy-tools) but this is not consumption ready yet.
 
 If running ephemeris directly is not your preference, there is also an Ansible [role](https://github.com/galaxyproject/ansible-galaxy-tools) and a sample [playbook](https://github.com/afgane/galaxy-tools-playbook) that can help automate some tasks.
+
+> ### {% icon tip %} What if environments are not working
+> It sometimes happens in Galaxy, that one environment isn't working anymore. It mostly happens from the start when it does happen. You can remove the environment on disk, or use the "Manage Dependencies" interface, select the environment, and delete it. Then re-install the dependency through the same Manage Dependencies interface.
+{: .tip}
+
+> ### {% icon tip %} Can you install multiple tools simultaneously?
+> Previous experience with this is not good, there was a lot of unsafe code that would do things simultaneously that would destroy config files. But now it's conda, so you may destroy conda environments. A solution for this is like how [UseGalaxy.eu does it](https://github.com/usegalaxy-eu/usegalaxy-eu-tools), where we keep the full list of tools we want to install, and then a CI server (Jenkins) installs them. In this way we can enforce that only a single install process is running at any time.
+{: .tip}
+
+> ### {% icon tip %} Certificate Issues (GAT Only)
+> If a student is running `shed-tools` on the VM, then it should work without certificate issues, because we installed the Fake LE X1 CA certificate, meaning that to your VM, the certificate chain is valid.
+> We cannot (and would not recommend) setting that certificate on your local machine. That is the first way that comes to mind, that running an ephemeris command could generate that error.
+{: .tip}
+
+> ### {% icon tip %} Uninstalling tools
+> While there is a function to accomplish this in BioBlend, it has not been [included in Ephemeris yet.](https://github.com/galaxyproject/ephemeris/issues/83) If you're looking for a way to contribute to Galaxy, this would be great :)
+{: .tip}
