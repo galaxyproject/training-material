@@ -259,7 +259,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}), a tool that assigns labels by examining the k-mers within a sequence and querying them in a database that uses a compact hash table for algorithm efficiency ({% cite deKoning2020 %}).
 
-![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kramer2 sequence classification algoritm ({% cite Wood2014 %})")
+![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kramer2 sequence classification algorithm ({% cite Wood2014 %})")
 
 For this tutorial we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 
