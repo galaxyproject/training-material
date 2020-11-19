@@ -290,7 +290,7 @@ For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It
 >
 > > ### {% icon solution %} Solution
 > >
-> >  The term k-mer refers to all of a sequence's subsequences of length _k_, such that the sequence GATACA would have six monomers (G,A,T,A,C,A), five 2-mers (GA,AT,TA,AC,CA), four 3-mers (GAT,ATA,TAC,ACA), three 4-mer (GATA,ATAC,TACA) and two 5-mer (GATAC,ATACA).
+> >  The term k-mer refers to all the sequence's subsequences of length _k_. For example, the sequence `GATACA` would have six monomers (`G`,`A`,`T`,`A`,`C`,`A`), five 2-mers (`GA`,`AT`,`TA`,`AC`,`CA`), four 3-mers (`GAT`,`ATA`,`TAC`,`ACA`), three 4-mer (`GATA`,`ATAC`,`TACA`) and two 5-mer (`GATAC`,`ATACA`).
 > >
 > {: .solution}
 >
