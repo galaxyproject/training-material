@@ -165,7 +165,7 @@ Let's have a look at figure 4, which shows the content of the GC by sequence.
 >
 > > ### {% icon solution %} Solution
 > >
-> > There are several possible causes for the presence of twin peaks in the CG content. One possible explanation is the presence of adapters in the sequence. Another possible cause is some kind of contamination, such as chimeras.
+> > There are several possible causes for the presence of twin peaks in the GC content. One possible explanation is the presence of adapters in the sequence. Another possible cause is some kind of contamination, such as chimeras.
 > >
 > {: .solution}
 >
