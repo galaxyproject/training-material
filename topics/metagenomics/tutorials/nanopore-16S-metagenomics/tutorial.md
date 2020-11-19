@@ -154,7 +154,7 @@ In the first place, we are going to analyse the sequence length distribution of 
 
 If we examine figure 3, we can see that up to 3000 bp the quality of our sequencing data is around a __Phred score__ of 12, which is a relatively low value compared to other sequencing technologies. This is explained because Nanopore reads poses __high error rates in the basecalled reads__ (10% as compared to 1% for Illumina). However, Nanopore sequencing generates __very long reads__ (in theory only limited by the mechanisms of extraction of the genetic material), enabling the sequencing of the complete 16S rRNA gene, which makes it possible to identify bacterial taxa at higher resolution.
 
-![FasTQC plots CG](../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png "Per sequence CG content")
+![FasTQC plots CG](../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png "Per sequence GC content")
 
 Let's have a look at figure 4, which shows the content of the GC by sequence.
 
