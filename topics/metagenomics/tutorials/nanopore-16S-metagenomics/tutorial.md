@@ -277,7 +277,7 @@ For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A confidence score of 0.1 means that at least 10% of  kmers should match with de databse.  This value can be reduced if a less restrictive taxonomic assignation is desired. 
+>    > A confidence score of 0.1 means that at least 10% of the k-mers should match entries in the database. This value can be reduced if a less restrictive taxonomic assignation is desired. 
 >    {: .comment}
 >
 {: .hands_on}
