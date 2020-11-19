@@ -5,9 +5,18 @@ zenodo_link: ''
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-ui
+    topic_name: galaxy-interface
     tutorials:
         - jupyterlab
+  -
+    type: "external"
+    title: "Programming with Python"
+    link: "https://swcarpentry.github.io/python-novice-inflammation/"
+  -
+    type: "external"
+    title: "The Unix Shell"
+    link: "http://swcarpentry.github.io/shell-novice/"
+
 questions:
 - Why using Climate data from the Coupled Model Intercomparison Project (CMIP) Phase 6? 
 - How to use CMIP6 data with Galaxy Climate JupyterLab?
