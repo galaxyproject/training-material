@@ -134,7 +134,7 @@ __FastQC__ provides information on various parameters, such as the range of qual
 
 ![FastQC plots length](../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png "Sequence length distribution")
 
-In the first place, we are going to analyse the sequence lenght distribution of the different datasets.
+In the first place, we are going to analyse the sequence length distribution of the different datasets.
 
 > ### {% icon question %} Question
 >
