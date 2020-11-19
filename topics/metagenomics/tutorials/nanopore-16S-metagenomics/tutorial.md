@@ -100,7 +100,7 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 
 # Assess datasets quality
 
-Before starting to work on our datasets, it is necessary to evaluate their quality. This is an essetial step if we aim to obtain a __meaningful downstream analysis__.
+Before starting to work on our datasets, it is necessary to assess their quality. This is an essential step if we aim to obtain a __meaningful downstream analysis__.
 
 
 > ### {% icon details %} FASTQ sequence quality format
