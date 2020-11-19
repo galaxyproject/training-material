@@ -118,7 +118,7 @@ This first step consist of downloading and properly prepare the data to use it i
 >
 >    {% include snippets/import_via_link.md %}
 >
->    You may as well use the shared data library or directly download from DATRAS data portal but the previous
+>    You may as well use the shared data library or directly download the data from the DATRAS data portal but the previous
 >    method is preferred.
 >
 >    {% include snippets/import_from_data_library.md %}
@@ -131,8 +131,10 @@ This first step consist of downloading and properly prepare the data to use it i
 >    >
 >    > * Go to link: https://datras.ices.dk/Data_products/Download/Download_Data_public.aspx 
 >    > * In the field 'Data products' choose 'CPUE per length per area' 
->    > * In the field 'Survey' choose the survey(s) of interest. Here, we chose to use 'EVHOE', 'BITS' 
->    >   and 'SWC-IBTS' surveys, you'll have to repeat the six following steps for each of the 3 surveys
+>    > * In the field 'Survey' choose the survey of interest. Here, we chose to use 'EVHOE', 'BITS' 
+>    >   and 'SWC-IBTS' surveys but you can't select the three surveys at once in this field. 
+>    >   So, you'll have to select one survey at a time ('EVHOE', 'BITS' and 'SWC-IBTS') and then
+>    >   repeat the six following steps for each of the three surveys.
 >    > * In the field 'Quarter(s)' we chose to tick 'All'
 >    > * In the field 'Year(s)' we chose to tick 'All'
 >    > * In the field 'Area(s)' we chose to tick 'All'
@@ -148,7 +150,14 @@ This first step consist of downloading and properly prepare the data to use it i
 > 3. Make sure that each datasets has the following header ```"Survey","Year","Quarter","Area","AphiaID",
 >    "Species","LngtClass","CPUE_number_per_hour"``` and that separator are ","
 >
-> 4. Change datatype CSV to tabular for each data file
+> 4. In order to avoid mixing up the data files, we'll add a tag to each file: 
+>       - tag `#EVHOE` to the tabular data file of the EVHOE survey : "CPUE per length per area_A.csv"
+>       - tag `#SWCIBTS` to the tabular data file of the SWC-IBTS survey : "CPUE per length per area_B.csv"
+>       - tag `#BITS` to the tabular data file of the BITS survey : "CPUE per length per area_C.csv"
+>
+>    {% include snippets/add_tag.md %}
+>
+> 5. Change datatype CSV to tabular for each data file
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -219,28 +228,32 @@ Before starting the preparation of the data, we need to identify which inputs we
 
 > ### {% icon hands_on %} Hands-on: Data files concatenation
 >
-> 1. {% tool [Concatenate datasets tail-to-head](Cat1) %} select 
->    the three datasets in {% icon param-files %} *"Datasets to concatenate"*
+> 1. {% tool [Concatenate datasets tail-to-head](Cat1) %} select the three `#BITS`, `#EVHOE` and `#SWCIBTS`
+>    datasets in {% icon param-files %} *"Datasets to concatenate"*
 > 
 >    {% include snippets/select_multiple_datasets.md %} 
 >
+> 2. Suppress the `#BITS`, `#EVHOE` and `#SWCIBTS` tags and add the `#Concatenate` tag to the Concatenated data file
+>
+>    {% include snippets/add_tag.md %}
+>
 > 2. Verify if the three header lines have been included in the concatenate with {% tool [Count occurrences of each record](Count1) %}
 >    and following parameters :
->    - {% icon param-file %} *"from dataset"*: Concatenated data file
+>    - {% icon param-file %} *"from dataset"*: `#Concatenate` Concatenated data file
 >    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
 >    - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
 >
 > 3. If the value `Survey` has more than `1` occurrence use {% tool [Filter data on any column using simple expressions](Filter1) %} 
 >    with following parameters :
->    - {% icon param-file %} *"Filter"*: Concatenated data file
+>    - {% icon param-file %} *"Filter"*: `#Concatenate` Concatenated data file
 >    - {% icon param-text %} *"With following condition"*: `c1!='Survey'`
 >    - {% icon param-text %} *"Number of header lines to skip"*: `1`
 >
 >    > ### {% icon question %} Question
 >    > How many header line(s) is left?
 >    > Use {% tool [Count occurrences of each record](Count1) %} and following parameters :
->    >   - {% icon param-file %} *"from dataset"*: Filtered data file
+>    >   - {% icon param-file %} *"from dataset"*: `#Concatenate` Filtered data file
 >    >   - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    >   - {% icon param-select %} *"Delimited by"*: `Tab`
 >    >   - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
@@ -262,21 +275,14 @@ columns needed for the PAMPA workflow considering there is no primary key close 
  - "species.code" from "Species"
  - ```number``` from "CPUE_number_per_hour"
 
-This concatenated data file containing the three surveys will be used to create the observation unit data file and 
+This `#Concatenate` Filtered data file containing the three surveys will be used to create the observation unit data file and 
 compute Community metrics as the Community analysis can be automatically processed on each survey separately. 
 However, this file can't be used as it is to compute Species-Population metrics as it may contain data for several 
-populations of the same species that do not interact with each other. Therefore, we have to work on the three original tabular 
-files for the Species-Population analysis. 
-In order to avoid mixing up the four data files, we'll add a tag to each file: 
- - tag `#Concatenate` to the concatenated and filtered file containing the three surveys
- - tag `#EVHOE` to the tabular data file of the EVHOE survey
- - tag `#BITS` to the tabular data file of the BITS survey
- - tag `#SWCIBTS` to the tabular data file of the SWC-IBTS survey
+populations of the same species that do not interact with each other. Therefore, we have to work on the three 
+`#BITS`, `#EVHOE` and `#SWCIBTS` original tabular files for the Species-Population analysis. 
 
-{% include snippets/add_tag.md %}
-
-Hence, the following manipulations will be applied not only on concatenated data file but also on the three original tabular
-files used for the concatenation.
+Hence, the following manipulations will be applied not only on `#Concatenate` Filtered data file but also on 
+the three `#BITS`, `#EVHOE` and `#SWCIBTS` original tabular files used for the concatenation.
 
 {% include snippets/select_multiple_datasets.md %}
 
@@ -284,7 +290,8 @@ files used for the concatenation.
 >
 > 1. {% tool [Column Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0) %} 
 >    with following parameters: 
->    - {% icon param-files %} *"Select cells from"*: Filtered data file; three tabular data files
+>    - {% icon param-files %} *"Select cells from"*: `#Concatenate` Filtered data file + 
+>      three `#BITS`, `#EVHOE` and `#SWCIBTS` tabular data files
 >    - {% icon param-select %} *"using column"*: `Column: 1`
 >    - {% icon param-repeat %} Click *"+ Insert Check"*: 
 >         - {% icon param-text %} *"Find Regex"*: `([A-Z]{3}[A-Z]+)` 
@@ -301,7 +308,8 @@ files used for the concatenation.
 >    {: .question}
 >
 > 2. {% tool [Merge Columns](toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2) %} with following parameters :
->    - {% icon param-files %} *"Select data"*: four Column Regex Find And Replace data files
+>    - {% icon param-files %} *"Select data"*: four `#Concatenate`, `#BITS`, `#EVHOE` and `#SWCIBTS` 
+>      Column Regex Find And Replace data files
 >    - {% icon param-select %} *"Merge column"*: `Column: 1`
 >    - {% icon param-select %} *"with column"*: `Column: 4`
 >
@@ -312,7 +320,7 @@ files used for the concatenation.
 > ### {% icon hands_on %} Hands-on: Change column names
 >
 > {% tool [Regex Find And Replace](toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0) %} with following parameters :
->    - {% icon param-files %} *"Select lines from"*: four Merged data files
+>    - {% icon param-files %} *"Select lines from"*: four `#Concatenate`, `#BITS`, `#EVHOE` and `#SWCIBTS` Merged data files
 >    - {% icon param-repeat %} Click *"+ Insert Check"*: 
 >         - {% icon param-text %} *"Find Regex"*: `Year` 
 >         - {% icon param-text %} *"Replacement"*: `year`
@@ -449,6 +457,7 @@ nomenclature for the "observation.unit" fields, namely:
 >
 >    Here, we define ```site``` represents the same geographical level as "location".
 >
+
 > 7. Tag the output `#Concatenate` Regex Find And Replace data file with `#unitobs`
 >
 >    Check if the output `#Concatenate #unitobs` data file has the following column names ```"Survey","year","Quarter",
@@ -461,10 +470,10 @@ nomenclature for the "observation.unit" fields, namely:
 Now that we have all our input files for GLM(M) tools ready, we can start computing statistical models to make 
 conclusions on our surveys. But before starting to use the {% tool [Compute GLM on community data](toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2) %}
 and the {% tool [Compute GLM on population data](toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2) %} tools, we have to think about the model we want to compute. 
-The tools allows to test the effects ```Year```, ```Site``` and/or ```Habitat```. As we don't have data about the 
-```Habitat``` we can't test its effect on the interest metric. It is always better to take a temporal and a geographical
-variable into account in an ecological model so we'll test the effect of ```Year``` and ```Site``` with a random effect 
-of ```Site``` to take geographical pseudo-replication into account.
+The tools allows to test the effects ```Year```, ```Site``` and/or ```Habitat``` on one interest variable at a time. 
+As we don't have data about the ```Habitat``` we can't test its effect. It is always better to take a temporal and a 
+geographical variable into account in an ecological model so we'll test the effect of ```Year``` and ```Site``` with 
+a random effect of ```Site``` to take geographical pseudo-replication into account.
 
 ## Compute GLMMs and create plots on Community metrics
 
@@ -477,9 +486,14 @@ For the Community analysis we have the choice to test the effect of ```Year``` a
  - or "Pielou index" 
  - or "Hill index"
 
-We choose to take "Species richness" as the interest variable, namely the quantity of different species 
-at a given time and location. This metric is located on the fourth column of the `#Concatenate #Community` 
-metrics data file. 
+As a GLM(M) permits to take into account only one interest variable at a time, we choose to take "Species richness" 
+as the interest variable, namely the quantity of different species at a given time and location.
+This metric is located on the fourth column of the `#Concatenate #Community` metrics data file.
+
+However, if you're interested to test the effects of ```Year``` and ```Site``` on another metric you may compute
+the GLM(M) tool again and choose any column of the `#Concatenate #Community` metrics data file containing one of 
+the metrics cited above.
+
 As said above, analyses will be separated by the field "Survey" (first column) to avoid bias. 
 
 > ### {% icon hands_on %} Hands-on: Compute GLMM on Community metrics
@@ -512,11 +526,30 @@ As said above, analyses will be separated by the field "Survey" (first column) t
 >    model. When `Auto` is selected, the tool will automatically set the distribution on `Gaussian`, `Binomial`
 >    or `Poisson` depending on the type of your interest variable but it may exist a better probability distribution
 >    to fit your model. Mind that if you choose to use a random effect, "quasi" distribution can't be used for your model.
+>
 >  - {% icon param-select %} *"GLM object(s) as .Rdata output?"* permits you to get .Rdata file of your GLM(M)s if you
 >    want to use it in your own R console.
 > 
 {: .details}
 
+> ### {% icon details %} How to choose a proper distribution family for your model?
+>
+> The distribution family for a model is mainly selected by looking at the interest variable of the model:
+>  - If your interest variable is a continuous numeric variable (weigth, size, mean, ...) it follows a
+>    `Gaussian` distribution so you should select `Gaussian`.
+>  - If your interest variable is a discrete numeric variable (count) it follows a `Poisson` distribution
+>    so you should select `Poisson`.
+>  - If your interest variable is a binary variable (0-1, presence-absence) it follows a `Binomial` distribution
+>    so you should select `Binomial`.
+>
+> These three distributions are the most commonly used, the other distributions are used when the interest variable
+> , the data and/or the model has specifics:
+>  - When the model is over-dispersed, use a `Quasi-Poisson` (when interest variable is discrete) or a `Quasi-Binomial` 
+>    (when interest variable is binary) distribution.
+>  - If your model doesn't fit well and your interest variable is a **positive** continuous variable, you may try
+>    with `Gamma` or `Inverse-Gaussian` distribution.
+>
+{: .details}
 ### Read and interpret raw GLMM outputs
 
 The GLM tool has three outputs: 
@@ -537,8 +570,10 @@ The GLM tool has three outputs:
 >  - *Plan balance*: If factor levels combinations aren't present in same quantity, bias can be induced. (0.5)
 >  - *NA proportion*: Lines with one or more NA value are ignored in Linear Models. If many NA values, there are
 >    less observations taken in account in the model than expected. (1)
->  - *Residuals dispersion* (DHARMa package): If the dispersion of residuals isn't regular, the distribution selected
->    for the model isn't right. (1.5)
+>  - *Residuals dispersion* (DHARMa package): If the dispersion of residuals isn't regular, the model is either under- or
+>    over-dispersed. The distribution selected for the model isn't right. (1.5)
+>    To know if it is under- or over-dispersion, compute *"deviance"*/*"df.resid"* : if the result is > 1 it is 
+>    over-dispersion, if the result is < 1 it is under-dispersion.
 >  - *Residuals uniformity* (DHARMa package): If the residuals aren't uniform, the distribution selected for the model
 >    isn't right. (1)
 >  - *Outliers proportion* (DHARMa package): If too much outliers, the distribution selected for the model isn't right
@@ -688,9 +723,13 @@ For the Species-Population analysis we have the choice to test the effect of ```
  - "Abundance"
  - or "Presence-absence"
 
-We choose to take "Abundance" as the interest variable, namely the quantity of a given species 
-at a given time and location. This metric is located on the fourth column of the `#EVHOE`, `#BITS` and `#SWCIBTS`
-Species-Population metrics data file. 
+As a GLM(M) permits to take into account only one interest variable at a time, we choose to take 
+"Abundance" as the interest variable, namely the quantity of a given species at a given time and location. 
+This metric is located on the fourth column of the `#EVHOE`, `#BITS` and `#SWCIBTS` Species-Population metrics data files.
+
+However, if you're interested to test the effects of ```Year``` and ```Site``` on "Presence-absence" you may compute
+the GLM(M) tool again and choose the fifth column of the `#EVHOE`, `#BITS` and `#SWCIBTS` Species-Population metrics data 
+files. 
 
 > ### {% icon hands_on %} Hands-on: Compute GLMM on Species-Population metrics
 >
