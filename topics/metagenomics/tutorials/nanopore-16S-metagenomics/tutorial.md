@@ -52,7 +52,7 @@ Next we will introduce some details about the datasets that  we are going to use
 
 ## The datasets
 
-In this example we will use a dataset originally hosted in the __NCBI SRA database__, with the accession number [SRP194577](https://www.ncbi.nlm.nih.gov/sra?term=SRP194577). In terms of the experimental design for obtaining the samples, the DNA was extracted using the Zymo Research Kit, followed by __PCR amplification of 16S rRNA genes__. Sequening was carried out on a Nanopore Minion device. We are going to use four datasets, corresponding to two experimental conditions:
+In this example, we will use a dataset originally hosted in the __NCBI SRA database__, with the accession number [SRP194577](https://www.ncbi.nlm.nih.gov/sra?term=SRP194577). To obtain the samples, the DNA was extracted using the Zymo Research Kit, followed by __PCR amplification of 16S rRNA genes__. Sequencing was carried out on a Nanopore Minion device. We are going to use four datasets, corresponding to two experimental conditions:
 
 - Soil:
 	- Surface sample (0-5 cm): `bulk_top.fastq.gz` 
