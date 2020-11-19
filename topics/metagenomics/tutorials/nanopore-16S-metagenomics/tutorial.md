@@ -190,7 +190,7 @@ Nanopore sequencing technology requires to ligate adapters to both ends of genom
 {: .comment}
 
 
-On the other hand, __chimeric sequences__ are considered a contaminant, and should be remove because they can result in an artificial inflation of the microbial diversity. __Porechop__ also allows to eliminate these anomalous sequences. 
+On the other hand, __chimeric sequences__ are considered a contaminant and should be removed because they can result in artificial inflation of the microbial diversity. With __Porechop__ you can eliminate them. 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
