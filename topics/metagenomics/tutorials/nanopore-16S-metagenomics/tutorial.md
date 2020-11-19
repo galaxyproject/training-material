@@ -338,7 +338,7 @@ Let's take a look at the result. Using the search bar we can check if certain ta
 > ### {% icon question %} Questions
 >
 > 1. What can we say about the health status of the soil samples?
-> 2. Are there significant differences in bacterial population structure between soil samples and rhizosphere samples?
+> 2. Are there significant differences in the bacterial population structure between soil samples and rhizosphere samples?
 >
 > > ### {% icon solution %} Solution
 > >
