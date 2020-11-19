@@ -249,7 +249,7 @@ After processing the sequences, we are going to analyze them again using __FastQ
 
 We can verify that after processing the samples, the GC content presents a unimodal distribution, which indicates that the anomalies in the sequences have been successfully eliminated.
 
-![FasTQC plots CG](../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png "Per sequence CG content in processed samplesp")
+![FasTQC plots GC](../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png "Per sequence GC content in processed samples")
 
 # Assign taxonomic classifications
 
