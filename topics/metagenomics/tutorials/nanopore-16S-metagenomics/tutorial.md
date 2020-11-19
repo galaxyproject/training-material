@@ -257,7 +257,7 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 ## Taxonomic classification with Kraken2
 
-In order to perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}), a tool which assign labels by examining the k-mers within a sequence and querying them in a database that uses a compact hash table for algorithm efficiency ({% cite deKoning2020 %}).
+To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}), a tool that assigns labels by examining the k-mers within a sequence and querying them in a database that uses a compact hash table for algorithm efficiency ({% cite deKoning2020 %}).
 
 ![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kramer2 sequence classification algoritm ({% cite Wood2014 %})")
 
