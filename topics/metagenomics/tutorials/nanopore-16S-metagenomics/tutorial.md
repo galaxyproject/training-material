@@ -203,7 +203,7 @@ On the other hand, __chimeric sequences__ are considered a contaminant and shoul
 
 ## Filter sequences with fastp
 
-In order to increase the specificity of the analysis, we will select the reads whose length is between 1000 bp and 2000 bp, which are more informative from a taxonomic point of view, because they include both preserved and hypervariable regions for the 16S rRNA gene. In addition, sequences will be filtered on a minimum average read quality score of 9, according the recommendations of {% cite Nygaard2020 %}. This stage will be carried out through the use of __fastp__ ({% cite Chen_2018 %}), an open-source tool designed to process FASTQ files.
+To increase the specificity of the analysis, we will select the reads with lengths between 1000 bp and 2000 bp, which are more informative from a taxonomic point of view, because they include both preserved and hypervariable regions of the 16S rRNA gene. In addition, sequences will be filtered on a minimum average read quality score of 9, according to the recommendations from {% cite Nygaard2020 %}. This stage will be carried out through the use of __fastp__ ({% cite Chen_2018 %}), an open-source tool designed to process FASTQ files.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
