@@ -142,7 +142,7 @@ In the first place, we are going to analyse the sequence length distribution of 
 >
 > > ### {% icon solution %} Solution
 > >
-> > The main peak, around 1700 bp, corresponds approximately to the length of the gene coding for 16S rRNAx. There is also a secondary peak around 200 bp, which may be due to __truncated amplifications__, or as a result of __non-specific hybridization of primers__ used for PCR.
+> > The main peak, around 1700 bp, corresponds approximately to the length of the gene coding for 16S rRNA. There is also a secondary peak around 200 bp, which may be due to __truncated amplifications__, or as a result of __non-specific hybridization of primers__ used for PCR.
 > >
 > {: .solution}
 {: .question}
@@ -205,7 +205,7 @@ On the other hand, __chimeric sequences__ are considered a contaminant and shoul
 
 To increase the specificity of the analysis, we will select the reads with lengths between 1000 bp and 2000 bp, which are more informative from a taxonomic point of view, because they include both preserved and hypervariable regions of the 16S rRNA gene. In addition, sequences will be filtered on a minimum average read quality score of 9, according to the recommendations from {% cite Nygaard2020 %}. This stage will be carried out through the use of __fastp__ ({% cite Chen_2018 %}), an open-source tool designed to process FASTQ files.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Filter sequence with fastp
 >
 > 1. {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Single-end`
@@ -263,7 +263,7 @@ To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_20
 
 For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Assign taxonomic labels with Kraken2
 >
 > 1. {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} with the following parameters:
 >    - *"Single or paired reads"*: `Single`
@@ -301,7 +301,7 @@ For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It
 
 Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the __Krona__ tool ({% cite Ondov_2011 %}). But before that, we need to adjust the format of the data output from __Kraken2__.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Adjust dataset format
 >
 > 1. {% tool [Reverse](toolshed.g2.bx.psu.edu/repos/iuc/datamash_reverse/datamash_reverse/1.1.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `Report: Kraken2 on collection`
@@ -322,7 +322,7 @@ Once we have assigned the corresponding taxa to each sequence, the next step is 
 
 __Krona__ allows hierarchical data to be explored with zooming, multi-layered pie charts. With this tool, we can easily visualize the composition of the bacterial communities and compare how the populations of microorganisms are modified according to the conditions of the environment.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Visualize metagenomics analysis results
 >
 > 1. {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} with the following parameters:
 >    - *"What is the type of your input data"*: `Tabular`
