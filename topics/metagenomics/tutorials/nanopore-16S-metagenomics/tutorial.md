@@ -261,7 +261,7 @@ To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_20
 
 ![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kramer2 sequence classification algorithm ({% cite Wood2014 %})")
 
-For this tutorial we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
+For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
