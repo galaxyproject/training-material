@@ -320,7 +320,7 @@ Once we have assigned the corresponding taxa to each sequence, the next step is 
 
 ## Visualize the taxonomical classification with Krona
 
-__Krona__ allows hierarchical data to be explored with zooming, multi-layered pie charts. Through this tool we can easily visualize the composition of the bacterial communities, as well as compare how the populations of microorganisms are modified according to the conditions of the environment.
+__Krona__ allows hierarchical data to be explored with zooming, multi-layered pie charts. With this tool, we can easily visualize the composition of the bacterial communities and compare how the populations of microorganisms are modified according to the conditions of the environment.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
