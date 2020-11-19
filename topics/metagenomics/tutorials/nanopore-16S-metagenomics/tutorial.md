@@ -299,7 +299,7 @@ For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It
 
 # Analyze taxonomic assigment
 
-Once we have assigned the corresponding taxa to each sequence, the next step is to be able to properly visualize the data, for which we will use the __Krona__ tool ({% cite Ondov_2011 %}). Previosuly it is necessary to adjust the format of the data output from __Kraken2__.
+Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the __Krona__ tool ({% cite Ondov_2011 %}). But before that, we need to adjust the format of the data output from __Kraken2__.
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
