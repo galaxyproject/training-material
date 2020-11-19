@@ -9,6 +9,11 @@ requirements:
     topic_name: climate
     tutorials:
         - panoply
+  -
+    type: "internal"
+    topic_name: galaxy-interface
+    tutorials:
+        - history-to-workflow
 
 questions:
 - How to run CLM-FATES with the CLM-FATES Galaxy tool?
@@ -330,7 +335,7 @@ so that we can reuse it for any simulations.
 >
 > 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
 >    - Select the **Extract Workflow** option.
->    - Remove any unwanted steps
+>    - Remove any unwanted steps, in particular all steps with Panoply.
 >
 > 2. **Rename** the workflow to something descriptive
 >    - For example: `CLM-FATES_ ALP1 simulation (5 years)`.
