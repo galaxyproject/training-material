@@ -130,7 +130,7 @@ __FastQC__ is one of the most widely used tools to __check the quality__ of the 
 >
 {: .hands_on}
 
-__FastQC__ provides information on various parameters, such as the  range of quality values across all bases at each position. __MultiQC__ allows to summarize the output of different outputs from __FastQC__.
+__FastQC__ provides information on various parameters, such as the range of quality values across all bases at each position. __MultiQC__ allows summarizing the output of different outputs from __FastQC__.
 
 ![FastQC plots length](../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png "Sequence length distribution")
 
