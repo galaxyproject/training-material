@@ -67,7 +67,7 @@ In this example, we will use a dataset originally hosted in the __NCBI SRA datab
 >  Why do we sequence the 16S rRNA genes for analyzing microbial communities?
 >
 > > ### {% icon solution %} Solution
-> > There are several reasons for the use of these genes as taxonomic markers. Firstly, they are universally distributed, because ribosomes, of which are constituents parts, are highly conserved biological machineries. On the other hand, it presents regions with varying degrees of sequence variability, which allows them to be used as a species-specific signature.
+> > There are several reasons to use these genes as taxonomic markers. First, they are constituent parts of ribosomes, a piece of highly-conserved biological machinery, which makes them universally distributed. On the other hand, these genes present regions with varying degrees of sequence variability, which allows them to be used as a species-specific signature.
 > {: .solution}
 {: .question}
 
