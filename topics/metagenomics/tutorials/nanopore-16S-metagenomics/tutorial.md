@@ -48,7 +48,7 @@ In this tutorial, we will use sequencing data obtained through the __MinION sequ
 
 # Background on data
 
-Next we will introduce some details about the datasets that  we are going to use to carry out the analysis.
+Next, we will introduce some details about the datasets that we are going to use to perform the analysis.
 
 ## The datasets
 
