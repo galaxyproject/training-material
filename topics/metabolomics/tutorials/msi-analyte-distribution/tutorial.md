@@ -238,7 +238,7 @@ We will follow up on the average mass spectra plots from the quality control rep
 >
 {: .question}
 
-In the average spectrum of the complete m/z range there are no visible peaks above 800 Th. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1000 and 2000 Th only a few distinct peaks can be identified in the noise. In accordance with [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9), we will restrict further analysis to the m/z range between 15 and 1000. 
+In the average spectrum of the complete m/z range there are no visible peaks above 800 Th. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 Th only a few distinct peaks can be identified in the noise. In accordance with [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9), we will restrict further analysis to the m/z range between 15 and 1000. 
 
 ![Average plots](../../images/msi_distribution_average_spectra.png "Complete and zoomed in average mass spectra")
 
@@ -343,14 +343,14 @@ This requires three steps. Firstly, all m/z features of the dataset with the MSI
 >    - *"With following condition"*: `c2>=55 and c2<=65 or c2>=75 and c2<=85`
 >    - *"Number of header lines to skip"*: `1`
 >
-> 3. {% tool [MSI mz images](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0) %}
+> 3. {% tool [MSI mz images](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.1) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data` (output of **Filter** {% icon tool %})
 >    - *"Column with m/z values"*: `column:2`
 >    - *"Column with name of m/z values"*: `column:1`
 >    - *"Tabular file contains a header line"*: `Yes`
->    - *"Select a contrast enhancement function for the heatmap images"*: `suppression`
+>    - *"Contrast enhancement"*: `suppression`
 >    - *"M/z range"*: `0.4`
 >
 {: .hands_on}
@@ -410,12 +410,12 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 >    - *"Column with m/z values"*: `column:1`
 >    - *"Column with name of m/z values"*: `column:1`
 >    - *"Tabular file contains a header line"*: `No`
->    - *"Select a contrast enhancement function for the heatmap images"*: `suppression`
+>    - *"Contrast enhancement"*: `suppression`
 >    - *"M/z range"*: `0.4`
 >    - *"Overlay image"*: `Yes`
->        - *"1: Colours for the plots"*: `red`
->        - *"2: Colours for the plots"*: `blue`
->        - *"3: Colours for the plots"*: `green`
+>        - *"1: Colours for the plots"*: `blue`
+>        - *"2: Colours for the plots"*: `green`
+>        - *"3: Colours for the plots"*: `red`
 >
 {: .hands_on}
 

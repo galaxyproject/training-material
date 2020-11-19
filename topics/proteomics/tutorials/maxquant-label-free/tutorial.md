@@ -61,9 +61,9 @@ The serum proteomic samples and the fasta file for this training were deposited 
 > 2. Import the fasta and raw files from [Zenodo](https://zenodo.org/record/3774452)
 >
 >    ```
->    https://zenodo.org/record/3774452/files/Protein_database.fasta
->    https://zenodo.org/record/3774452/files/Sample1.raw
->    https://zenodo.org/record/3774452/files/Sample2.raw
+>    https://zenodo.org/record/4274987/files/Protein_database.fasta
+>    https://zenodo.org/record/4274987/files/Sample1.raw
+>    https://zenodo.org/record/4274987/files/Sample2.raw
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
@@ -82,11 +82,11 @@ The MaxQuant Galaxy implementation contains the most important MaxQuant paramete
 
 > ### {% icon hands_on %} Hands-on: MaxQuant analysis
 >
-> 1. **MaxQuant** {% icon tool %} with the following parameters:
+> 1. {% tool [MaxQuant](toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3) %} with the following parameters
 >    - In *"Input Options"*:
 >        - {% icon param-file %} *"FASTA files"*: `protein database`
 >        - *"Identifier parse rule"*: `>.*\|(.*)\|`
->        - *"Description parse rule"*: `>.*\|.*\|[^ ]+ (.*) OS`
+>        - *"Description parse rule"*: `>(.*) OS`
 >    - In *"Search Options"*:
 >        - *"minimum unique peptides"*: `1`
 >    - In *"Parameter Group"*:
@@ -145,10 +145,10 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 > 1. Import the files from [Zenodo](https://zenodo.org/record/3774452)
 >
 >    ```
->    https://zenodo.org/record/3774452/files/PTXQC_report.pdf
->    https://zenodo.org/record/3774452/files/MaxQuant_Protein_Groups.tabular
->    https://zenodo.org/record/3774452/files/MaxQuant_Peptides.tabular
->    https://zenodo.org/record/3774452/files/MaxQuant_mqpar.xml
+>    https://zenodo.org/record/4274987/files/PTXQC_report.pdf
+>    https://zenodo.org/record/4274987/files/MaxQuant_Protein_Groups.tabular
+>    https://zenodo.org/record/4274987/files/MaxQuant_Peptides.tabular
+>    https://zenodo.org/record/4274987/files/MaxQuant_mqpar.xml
 >    ```
 {: .tip}
 
@@ -162,7 +162,7 @@ MaxQuant automatically generates several output files. In the *"Output Options"*
 > > ### {% icon solution %} Solution
 > >
 > > 1. 271 protein (groups) were found in total.
-> > 2. Depending on the tool version 2387 or 2388 peptides were found in total.
+> > 2. 2387 peptides were found in total.
 > > 3. Sample1: 237, Sample2: 123 (**filter data on any column** {% icon tool %} on the `protein groups` file *"with following condition"* `c32!=0` or `c33!=0` and *"Number of header lines" `1`)
 > >
 > {: .solution}
@@ -176,17 +176,17 @@ To get a first overview of the MaxQuant results, the PTXQC report is helpful. Cl
 
 > ### {% icon question %} Questions
 >
-> 1. How good was the tryptic digestion (percentage of zero missed cleavages)?
-> 2. Which sample yielded more protein identifications?
-> 3. In which sample were more contaminantes quantified?
+> 1. In which sample were more contaminantes quantified?
+> 2. How good was the tryptic digestion (percentage of zero missed cleavages)?
+> 3. Which sample yielded more protein identifications?
 > 4. Do you already have a guess on which sample was depleted?
 >
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. ![PTXQC_missed](../../images/maxquant_lfq_missedcleavages.png)
-> > 2. Sample 1 yielded more protein identifications ![PTXQC_ids](../../images/maxquant_lfq_proteinid.png)
-> > 3. Sample 2 has more contaminants, especially serum albumin is high abundant. ![PTXQC_contaminants](../../images/maxquant_lfq_contaminants.png)
+> > 1. Sample 2 has more contaminants, especially serum albumin is high abundant. ![PTXQC_contaminants](../../images/maxquant_lfq_contaminants.png)
+> > 2. The digestion was not ideal but good enough to work with. The proportion of zero missed cleavages was 75% for sample1 and around 85% for sample2. ![PTXQC_missed](../../images/maxquant_lfq_missedcleavages.png)
+> > 3. Sample 1 yielded more protein identifications ![PTXQC_ids](../../images/maxquant_lfq_proteinid.png)
 > > 4. Sample1, more information can be found in the next section.
 > >
 > {: .solution}
@@ -195,15 +195,24 @@ To get a first overview of the MaxQuant results, the PTXQC report is helpful. Cl
 
 # Serum composition
 
-To explore the proteomic composition of the two serum samples some postprocessing steps are necessary. The protein groups file has many different columns, therefore the first step is to extract only columns that are of interest for this task. These are the column with the fasta header (this includes the protein name as it was written in the fasta file) and the two columns with LFQ intensities for both files. To find the most abundant proteins the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.
+To explore the proteomic composition of the two serum samples some postprocessing steps on the Protein Groups file are necessary. The Protein Groups file contains all relevant information on the protein level. The best way to explore this vast table is by clicking on the  scratch book {% icon galaxy-scratchbook %} on the top menu. Clicking on the {% icon galaxy-eye %} eye icon opens the Protein Groups file. Galaxy does not work with the names of the columns but instead with their number. Find the column numbers for: Fasta headers (includes protein ID + name + species), LFQ intensities for each sample and reverse proteins. First we remove "decoy" proteins, which are named "reverse" in MaxQuant. Next, we remove contaminants. For non-human samples, we could just remove all proteins, that are marked with a "+" in the "potential contaminant" column. We have seen before that many human proteins were marked as contaminant and as we study a human sample we don't want to remove them. Therefore, we only remove non-human contaminant proteins. Then, we shrink the file to keep only columns that are interesting in the next steps: the fasta header and the columns with LFQ intensities for both files. To find the most abundant proteins per sample, the LFQ intensities can be sorted. On this sorted dataset we will explore the composition of the serum proteins within both samples using an interactive pie charts diagram.
 
 > ### {% icon hands_on %} Hands-on: Exploring serum composition
 >
-> 1. **Cut columns from a table** {% icon tool %} with the following parameters:
->    - *"Cut columns"*: `c8,c32,c33`
->    - {% icon param-file %} *"From"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
+> 1. {% tool [Filter](Filter1) %} with the following parameters:
+>    - {% icon param-file %} *"Filter"*: `proteinGroups` (output of **MaxQuant** {% icon tool %})
+>    - *"With following condition"*: `c38!="+"`
+>    - *"Number of header lines to skip"*: `1`
 >
-> 2. **Sort data in ascending or descending order** {% icon tool %} with the following parameters:
+> 2. {% tool [Select](Grep1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `filter_file` (output of **Filter** {% icon tool %})
+>    - *"the pattern"*: `(HUMAN)|(Majority)`
+>
+> 3. {% tool [Cut](Cut1) %} with the following parameters:
+>    - *"Cut columns"*: `c8,c32,c33`
+>    - {% icon param-file %} *"From"*: `select_file` (output of **Select** {% icon tool %})
+>
+> 4. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Query"*: `cut_file` (output of **Cut** {% icon tool %})
 >    - *"Number of header lines"*: `1`
 >    - In *"Column selections"*:
@@ -211,14 +220,14 @@ To explore the proteomic composition of the two serum samples some postprocessin
 >        - *"in"*: `Descending order`
 >        - *"Flavor"*: `General numeric sort ( scientific notation -g)`
 >
-> 3. **Sort data in ascending or descending order** {% icon tool %} with the following parameters:
+> 5. {% tool [Sort](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1) %} with the following parameters:
 >    - {% icon param-file %} *"Sort Query"*: `cut_file` (output of **Cut** {% icon tool %})
 >    - *"Number of header lines"*: `1`
 >    - In *"Column selections"*:
 >        - *"on column"*: `c3`
 >        - *"in"*: `Descending order`
 >        - *"Flavor"*: `General numeric sort ( scientific notation -g)`
-> 4. Click {% icon galaxy-barchart %} “Visualize this data” on the last **Sort** {% icon tool %} result.
+> 6. Click {% icon galaxy-barchart %} “Visualize this data” on the last **Sort** {% icon tool %} result.
 >   - Select `Pie chart (NVD3)`
 >   - *"Provide a title"*: `Serum compositions`
 >   - Click `Select data` {% icon galaxy-chart-select-data %}
@@ -238,15 +247,17 @@ To explore the proteomic composition of the two serum samples some postprocessin
 
 > ### {% icon question %} Questions
 >
-> 1. What are the top 5 most abundant proteins in both files? Do they reflect typical serum proteins?
-> 2. Which sample was depleted for the top serum proteins?
-> 3. How much did the serum albumin abundance percentage decrease? Was the depletion overall succesful?
+> 1. How many decoy proteins were removed? 
+> 2. What are the top 5 most abundant proteins in both files? Do they reflect typical serum proteins?
+> 3. Which sample was depleted for the top serum proteins?
+> 4. How much did the serum albumin abundance percentage decrease? Was the depletion overall succesful?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins ([plasma proteins found by MS](https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms)).
-> > 2. Sample1 was depleted, sample2 was pure serum.
-> > 3. In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.
+> > 1. 2 (272 lines (Protein Groups) minus 272 lines (Filter))
+> > 2. Sample1: Complement C4-A, Ceruloplasmin, Hemopexin, Serum albumin, Complement factor B. Sample2: Serum albumin, Immunoglobulin heavy constant gamma 1, Serotransferrin, Immunoglobulin kappa constant, Haptoglobin. All of those proteins are typical (high abundant) serum proteins ([plasma proteins found by MS](https://www.proteinatlas.org/humanproteome/blood/proteins+detected+in+ms)).
+> > 3. Sample1 was depleted, sample2 was pure serum.
+> > 4. In the depleted sample1, there is a depletion in some of the most abundant proteins, especially Albumin, which proportion of the total sample intensities decreased by 58 percentage. Compared to the pure serum the depleted sample showed a duplication of identified and quantified proteins rendering it quite successful. However, there is still room for improvement as some of the most abundant proteins which should have been depleted did not change their abundance compared to the overall protein abundance.
 > >
 > {: .solution}
 >
@@ -255,23 +266,23 @@ To explore the proteomic composition of the two serum samples some postprocessin
 
 # Quantitative Assessment
 
-After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.
+After analyzing the composition of each sample separately, the intensities between both samples are compared. For this, the intensity values are log2-transform and the normal distribution is visualized as boxplots, this requires cutting only the relevant columns before visualization. Next the log2 fold change is calculated and its distribution visualized as histogram. The log2 fold change helps to find proteins with abundances changes between the samples.
 
 > ### {% icon hands_on %} Hands-on: Quantitative Assessment
 >
-> 1. **Compute** {% icon tool %} version 1.2.0 with the following parameters:
+> 1. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
 >    - *"Add expression"*: `log(c2,2)`
 >    - {% icon param-file %} *"as a new column to"*: `cut_file` (output of **Cut** {% icon tool %})
 >    - *"Skip a header line"*: `yes`
 >        - *"The new column name"*: `log2 intensity sample1`
-> 2. **Compute** {% icon tool %} version 1.2.0 with the following parameters:
+> 2. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
 >    - *"Add expression"*: `log(c3,2)`
 >    - {% icon param-file %} *"as a new column to"*: `compute_file` (output of **Compute** {% icon tool %})
 >    - *"Skip a header line"*: `yes`
 >        - *"The new column name"*: `log2 intensity sample2`
-> 3. **Cut columns from a table** {% icon tool %} with the following parameters:
+> 3. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c4,c5`
->    - {% icon param-file %} *"From"*: `compute_file` (output of the last **MaxQuant** {% icon tool %})
+>    - {% icon param-file %} *"From"*: `compute_file` (output of the last **Compute** {% icon tool %})
 > 4. Click {% icon galaxy-barchart %} “Visualize this data” on the **cut** {% icon tool %} result.
 >   - Select `box plot(jqPlot)`
 >   - *"Use multi-panels"*: `No`
@@ -282,12 +293,12 @@ After analyzing the composition of each sample separately, the intensities betwe
 >   - *"Provide a label"*: `log sample2`
 >   - *"Observations"*: `Column: 2`
 >   - Confirm and save {% icon galaxy-save %} (file is saved under "User" --> "Visualizations")
-> 5. **Compute** {% icon tool %} version 1.2.0 with the following parameters:
+> 5. {% tool [Compute](toolshed.g2.bx.psu.edu/repos/devteam/column_maker/Add_a_column1/1.3.0) %} with the following parameters:
 >    - *"Add expression"*: `c4-c5`
 >    - {% icon param-file %} *"as a new column to"*: `compute_file` (output of the last **Compute** {% icon tool %})
 >    - *"Skip a header line"*: `yes`
->        - *"The new column name"*: `log2 Fold Change`
-> 6. **Histogram** {% icon tool %} with the following parameters:
+>        - *"The new column name"*: `log2 Fold Change (sample1/sample2)`
+> 6. {% tool [Histogram](toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4) %} with the following parameters:
 >    - {% icon param-file %} *"Dataset"*: `compute_file` (output of the previous **Compute** {% icon tool %})
 >    - *"Numerical column for x axis"*: `c6`
 >    - *"Label for x axis"*: `log2 Fold Change`
@@ -318,7 +329,7 @@ After analyzing the composition of each sample separately, the intensities betwe
 > 1. The columns in the MaxQuant output file change with the number of input files. Before using the cut tool, open the output file and check which columns contain the LFQ intensities - then adjust the cut tool to cut all those columns from the file.
 > 2. A necessary first step is to log2-transform the LFQ intensities.
 > 3. Even though LFQ intensities are already normalized, before statistical analysis it is recommended to median normalize the LFQ intensities for each sample. Control the intensity distribution with histograms or boxplots. Even before normalization the boxplots should already be more similar in their intensity range if a normal biological replicate was analyzed (and not a different sample preparation protocol as in the training dataset). After normalization box plot medians should be very similar.
-> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as [LIMMA](https://www.doi.org/10.1093/nar/gkv007), [SAM](https://www.doi.org/10.1073/pnas.091062498) and [MSstats](https://doi.org/10.1093/bioinformatics/btu305). Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.
+> 4. Often the aim of proteomic projects is finding differentially regulated proteins across conditions. Classical statistical methods like t-test and ANOVA are not ideal options but ok when multiple testing correction (e.g. benjamini-hochberg) is performed afterwards. The better option are algorithms tailored for the analysis of omics intensity data such as [LIMMA](https://www.doi.org/10.1093/nar/gkv007), [SAM](https://www.doi.org/10.1073/pnas.091062498) and [MSstats](https://doi.org/10.1093/bioinformatics/btu305) {% tool [MSstats](toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0) %}. Do not apply statistical methods designed for count data (e.g. RNA-seq) such as Limma-voom or DESq2 - those are not applicable for proteomics intensity data.
 >
 {: .tip}
 

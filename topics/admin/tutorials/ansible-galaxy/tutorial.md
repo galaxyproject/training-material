@@ -1548,6 +1548,12 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 
 Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
 
+> ### {% icon tip %} "Empty Response"
+> This can happen whenever uWSGI is speaking its own "uwsgi" protocol instead of HTTP. Check that your uwsgi is listening on `http: 0.0.0.0:8080`
+>
+> At this step in the tutorial you should be starting Galaxy and uWSGI through systemd. If you need to change something in your configuration, check that Galaxy has been restarted after you re-run the playbook.
+{: .tip}
+
 > ### {% icon details %} Ansible, failures, and notifications
 >
 > Sometimes Ansible tasks will fail. Usually due to misconfiguration, but occasionally due to other issues like your coworker restarted the server while you were doing maintenance, or network failures, or any other possible error. It happens. An unfortunate side effect can be observed in specific situations:

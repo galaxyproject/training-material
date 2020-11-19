@@ -68,7 +68,7 @@ Freiburg). The data format may also have been changed (for instance to tabular) 
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *climate101*.
 >    {% include snippets/create_new_history.md %}
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3776500) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/3776500/files/tg_ens_mean_0.1deg_reg_v20.0e_Paris_daily.csv
