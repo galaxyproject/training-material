@@ -182,7 +182,7 @@ In order to improve the quality of our data, we will use two tools presented abo
 
 ## Adapter and chimera removal with porechop
 
-Nanopore sequencing technology requires to ligate adapters to both ends of genomic material to facilitate the strand capture and loading of a processive enzyme at the 5'end, boosting the effectiveness o the sequencing process. Adapter sequences should be remove removed because they __can interfere with aligment of reads__ to 16S rRNA gene reference database, for which we will use the __porechop__ tool ({% cite rrwick2017 %}).
+Nanopore sequencing technology requires to ligate adapters to both ends of genomic material to facilitate the strand capture and loading of a processive enzyme at the 5'end, boosting the effectiveness of the sequencing process. Adapter sequences should be removed because they __can interfere with aligment of reads__ to 16S rRNA gene reference database, for which we will use the __porechop__ tool ({% cite rrwick2017 %}).
 
 > ### {% icon comment %} Comment
 > If you are interested in Nanopore sequecing technology, you can find more information in {% cite Jain2016 %}.
