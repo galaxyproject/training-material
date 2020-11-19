@@ -156,7 +156,7 @@ If we examine figure 3, we can see that up to 3000 bp the quality of our sequenc
 
 ![FasTQC plots CG](../../images/metagenomics-nanopore/fastqc_per_sequence_gc_content_plot.png "Per sequence CG content")
 
-Let's have a look at the figure 4, which represent shows the content of CG by sequence.
+Let's have a look at figure 4, which shows the content of the GC by sequence.
 
 >
 > ### {% icon question %} Questions
