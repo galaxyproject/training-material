@@ -26,7 +26,7 @@ contributors:
 <!-- This is a comment. -->
 
 
-__Healthy soils__ are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop stategies to __mitigate ecosystem damage__. Some of the species considered as __key bioindicators__ of soil quality are those belonging to the genera _Rhizobium_ and _Nitrosomonas_, because they are very sensitive to agro-industrial compounds.
+__Healthy soils__ are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop strategies to __mitigate ecosystem damage__. Some of the species considered as __key bioindicators__ of soil quality are those belonging to the genera _Rhizobium_ and _Nitrosomonas_, because they are very sensitive to agro-industrial compounds.
 
 ![Bacterial bioindicators](../../images/metagenomics-nanopore/bioindicators.jpg "Relationship between bacterial community composition and soil parameters {% cite Hermans2016 %}.")
 
