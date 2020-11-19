@@ -118,7 +118,7 @@ __FastQC__ is one of the most widely used tools to __check the quality__ of the 
 > 1. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
 >    - {% icon param-collection %} *"Dataset collection"*: `soil collection` 
 >
-> 4. Rename the outputs as `FastQC unprocessed: Raw` and `FastQC unprocessed: Web` 
+> 2. Rename the outputs as `FastQC unprocessed: Raw` and `FastQC unprocessed: Web` 
 > 3. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >      - *"Which tool was used generate logs?"*: `FastQC`
