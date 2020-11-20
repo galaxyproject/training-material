@@ -692,6 +692,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -720,9 +722,13 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://humancellatlas.usegalaxy.eu/" title="Human Cell Atlas">
             Human Cell Atlas
         </a>
+        
+    
         
     
         
@@ -798,7 +804,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 16, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 20, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -820,7 +826,7 @@
 
 <p>This study examined the <span class="notranslate">expression</span> profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for <span class="notranslate">RNA</span>-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alte<span class="notranslate">rna</span>tively, you could create a count matrix from the raw sequence <span class="notranslate">reads</span>, as demonstrated in the <a href="/training-material/topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.html"><span class="notranslate">RNA</span>-seq <span class="notranslate">reads</span> to counts tutorial</a>. The GEO count file was generated from aligning the <span class="notranslate">reads</span> to the mouse <code class="language-plaintext highlighter-rouge">mm10</code> genome with the Rsubread aligner (<a class="citation" href="#Liao2019">Liao <i>et al.</i> 2019</a>), followed by counting <span class="notranslate">reads</span> mapped to RefSeq genes with featureCounts (<a class="citation" href="#liao2013featurecounts">Liao <i>et al.</i> 2013</a>), see the <a href="https://www.nature.com/articles/ncb3117">Fu paper</a> for details.</p>
 
-<p>We will use <strong>limma-voom</strong> (<a class="citation" href="#law2016rna">Law <i>et al.</i> 2016</a>) for identifying differentially expressed genes here. Other popular alte<span class="notranslate">rna</span>tives are edgeR (<a class="citation" href="#robinson2010edger">Robinson <i>et al.</i> 2010</a>) and DESeq2 (<a class="citation" href="#love2014moderated">Love <i>et al.</i> 2014</a>). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity (<a class="citation" href="#CostaSilva2017">Costa-Silva <i>et al.</i> 2017</a>) and, due to its speed, it’s particularly recommended for large-scale datasets with 100s of samples (<a class="citation" href="#Chen2016">Chen <i>et al.</i> 2016</a>).</p>
+<p>We will use <strong>limma-voom</strong> (<a class="citation" href="#Law2014">Law <i>et al.</i> 2014</a>) for identifying differentially expressed genes here. Other popular alte<span class="notranslate">rna</span>tives are edgeR (<a class="citation" href="#robinson2010edger">Robinson <i>et al.</i> 2010</a>) and DESeq2 (<a class="citation" href="#love2014moderated">Love <i>et al.</i> 2014</a>). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity (<a class="citation" href="#CostaSilva2017">Costa-Silva <i>et al.</i> 2017</a>) and, due to its speed, it’s particularly recommended for large-scale datasets with 100s of samples (<a class="citation" href="#Chen2016">Chen <i>et al.</i> 2016</a>).</p>
 
 <p>This is a <span class="notranslate">Galaxy</span> tutorial based on material from the <a href="http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html">COMBINE R <span class="notranslate">RNA</span>seq workshop</a>, first taught <a href="http://combine-australia.github.io/2016-05-11-RNAseq/">here</a>.</p>
 
@@ -1343,7 +1349,7 @@ What is the second greatest source of variation in the data?</p>
 
   <figure id="figure-21"><img src="../../images/rna-seq-counts-to-genes/voomplot_mixed.png" alt="Voom Mixedup Plot" /><figcaption><span class="figcaption-prefix">Figure 21:</span> Voom Plot mixed-up samples</figcaption></figure>
 
-  <p>More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper (<a class="citation" href="#law2016rna">Law <i>et al.</i> 2016</a>), shown below.</p>
+  <p>More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper (<a class="citation" href="#Law2014">Law <i>et al.</i> 2014</a>), shown below.</p>
 
   <figure id="figure-22"><img src="../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg" alt="Voom Plot Examples" /><figcaption><span class="figcaption-prefix">Figure 22:</span> Voom Plot more examples</figcaption></figure>
 
@@ -1563,6 +1569,17 @@ What is the second greatest source of variation in the data?</p>
     
 
 </li>
+<li><span id="Law2014">Law, C. W., Y. Chen, W. Shi, and G. K. Smyth, 2014 <b>voom: precision weights unlock linear model analysis tools for RNA-seq read counts</b>. Genome Biology 15: R29.</span>
+    
+    
+    <a href="https://doi.org/10.1186/gb-2014-15-2-r29">10.1186/gb-2014-15-2-r29</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
 <li><span id="love2014moderated">Love, M. I., W. Huber, and S. Anders, 2014 <b>Moderated estimation of fold change and dispersion for RNA-seq data with DESeq2</b>. Genome biology 15: 550.</span>
     
     
@@ -1588,12 +1605,6 @@ What is the second greatest source of variation in the data?</p>
     
       <!-- prevent duplicate doi links -->
       
-    
-
-</li>
-<li><span id="law2016rna">Law, C. W., M. Alhamdoosh, S. Su, X. Dong, L. Tian <i>et al.</i>, 2016 <b>RNA-seq analysis is easy as 1-2-3 with limma, Glimma and edgeR</b>. F1000Research 5:</span>
-    
-    
     
 
 </li>
@@ -1709,7 +1720,7 @@ What is the second greatest source of variation in the data?</p>
     title = "RNA-seq counts to genes (Galaxy Training Materials)",
     year = "2020",
     month = "11",
-    day = "16"
+    day = "20"
     url = "\url{/training-material/topics/transcriptomics/tutorials/rna-seq-counts-to-genes/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
