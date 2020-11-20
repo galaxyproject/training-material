@@ -25,6 +25,7 @@ key_points:
 - Learn about and interpret common tests to evaluate the quality of your GL(M)M
 contributors:
 - colineroyaux
+- yvanlebras
 
 ---
 
@@ -256,7 +257,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    >   - {% icon param-file %} *"from dataset"*: `#Concatenate` Filtered data file
 >    >   - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    >   - {% icon param-select %} *"Delimited by"*: `Tab`
->    >   - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
+>    >   - {% icon param-select %} *"How should the results be sorted?"*: `With the most common value first` so multiple occurences can be seen at first lines of the resulting file
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > One header line is left as the value `Survey` has only `1` occurrence in the first column.
