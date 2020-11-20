@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 16s microbial analysis with nanopore data
+title: 16S Microbial analysis with nanopore data
 zenodo_link: https://zenodo.org/record/4274812
 questions:
 - How can we analyse the health status of the soil?
