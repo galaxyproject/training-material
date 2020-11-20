@@ -228,7 +228,7 @@ To increase the specificity of the analysis, we will select the reads with lengt
 
 # Re-evaluate datasets quality
 
-After processing the sequences, we are going to analyze them again using __FastQC__ and __MultiQC__ to see if we have managed to correct the anomalies that we had detected.
+After processing the sequences, we are going to analyze them again using {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} and {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} to see if we have managed to correct the anomalies that we had detected.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
