@@ -228,7 +228,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 
 > ### {% icon hands_on %} Hands-on: Data files concatenation
 >
-> 1. {% tool [Concatenate datasets tail-to-head](Cat1) %} select the three `#BITS`, `#EVHOE` and `#SWCIBTS`
+> 1. {% tool [Concatenate datasets tail-to-head (cat)](tp_cat) %} select the three `#BITS`, `#EVHOE` and `#SWCIBTS`
 >    datasets in {% icon param-files %} *"Datasets to concatenate"*
 > 
 >    {% include snippets/select_multiple_datasets.md %} 
