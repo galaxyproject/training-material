@@ -247,7 +247,7 @@ After processing the sequences, we are going to analyze them again using {% tool
 >
 {: .hands_on}
 
-We can verify that after processing the samples, the GC content presents a unimodal distribution, which indicates that the anomalies in the sequences have been successfully eliminated.
+We can verify that after processing the samples, the GC content presents a unimodal distribution, which indicates that the anomalies in the sequences have been successfully eliminated (Figure 6).
 
 ![FasTQC plots GC](../../images/metagenomics-nanopore/fasqc_per_sequence_content_plot_clean.png "Per sequence GC content in processed samples")
 
