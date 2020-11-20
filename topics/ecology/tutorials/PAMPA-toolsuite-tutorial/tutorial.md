@@ -243,7 +243,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    - {% icon param-file %} *"from dataset"*: `#Concatenate` Concatenated data file
 >    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
->    - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
+>    - {% icon param-select %} *"How should the results be sorted?"*: `With the most common value first` so multiple occurences can be seen directly at first lines of the resulting file
 >
 > 3. If the value `Survey` has more than `1` occurrence use {% tool [Filter data on any column using simple expressions](Filter1) %} 
 >    with following parameters :
@@ -257,7 +257,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    >   - {% icon param-file %} *"from dataset"*: `#Concatenate` Filtered data file
 >    >   - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    >   - {% icon param-select %} *"Delimited by"*: `Tab`
->    >   - {% icon param-select %} *"How should the results be sorted?"*: `With the most common value first` so multiple occurences can be seen at first lines of the resulting file
+>    >   - {% icon param-select %} *"How should the results be sorted?"*: `With the most common value first`
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > One header line is left as the value `Survey` has only `1` occurrence in the first column.
