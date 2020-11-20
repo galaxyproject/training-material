@@ -1,0 +1,1863 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-45719423-18' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:title" content="Galaxy Training: Compute and analyze Essential Biodiversity Variables with..." />
+        <meta property="og:description" content="Learn to analyse Ecological data through Galaxy." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/ecology" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Ecology
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FPAMPA-toolsuite-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FPAMPA-toolsuite-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FPAMPA-toolsuite-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FPAMPA-toolsuite-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FPAMPA-toolsuite-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fecology%2Ftutorials%2FPAMPA-toolsuite-tutorial%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Ecology",
+    "description": "Learn to analyse Ecological data through Galaxy.",
+    "url": "https://training.galaxyproject.org//training-material/topics/ecology/"
+  },
+  "courseCode": "ecology / PAMPA-toolsuite-tutorial / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - How to evaluate properly species populations and communities biological state with abundance data?\n - How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are doing over time?\n - How to compute and analyze Essential Biodiversity Variables (EBV) on abundance data?\n\n\\nThe objectives are:\n - Upload data from DATRAS portal of ICES\n - Pre-process population data with Galaxy\n - Learning how to use an Essential Biodiversity Variables (EBV) scientific workflow from raw data to graphical representations\n - Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question\n - Learning how to interpret a Generalized Linear (Mixed) Model\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Coline Royaux"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Coline Royaux"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Ecology",
+      "description": "Learn to analyse Ecological data through Galaxy.",
+      "url": "https://training.galaxyproject.org//training-material/topics/ecology/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0610",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0610",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0610"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/colineroyaux/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/colineroyaux" alt="Coline Royaux">Coline Royaux</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to evaluate properly species populations and communities biological state with abundance data?</p>
+</li>
+            
+            <li><p>How does trawl exploited populations of Baltic sea, Southern Atlantic and Scotland are doing over time?</p>
+</li>
+            
+            <li><p>How to compute and analyze Essential Biodiversity Variables (EBV) on abundance data?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Upload data from DATRAS portal of ICES</p>
+</li>
+            
+            <li><p>Pre-process population data with Galaxy</p>
+</li>
+            
+            <li><p>Learning how to use an Essential Biodiversity Variables (EBV) scientific workflow from raw data to graphical representations</p>
+</li>
+            
+            <li><p>Learning how to construct a Generalized Linear (Mixed) Model from a usual ecological question</p>
+</li>
+            
+            <li><p>Learning how to interpret a Generalized Linear (Mixed) Model</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4264936">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/workflows/" title="Workflows" alt="Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/ecology/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 19, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This tutorial aims to present the PAMPA <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> and how to use it to compute 
+Essential Biodiversity Variables (EBV) from species abundance data and analyse it through generalized 
+linear (mixed) models (GLM and GLMM). This <span class="notranslate">workflow</span> made up of 5 tools will allow you to process
+temporal series data that include at least <code class="language-plaintext highlighter-rouge">year</code>, “location” and species sampled along with 
+abundance value and, finally, generate article-ready data products.</p>
+
+<p>The PAMPA <span class="notranslate">workflow</span> is an EBV <span class="notranslate">workflow</span>, like so, it is divided as the EBV classes Community and 
+Species-Population. Only the last tool to create a plot from your GLM results is common to the 
+two parts of this <span class="notranslate">workflow</span>. Thus, in this tutorial, we’ll start by the Community analysis followed
+by the Species-Population analysis.</p>
+
+<blockquote class="details">
+  <h3 id="details-ecological-definitions-of-population-and-community"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Ecological definitions of “Population” and Community</h3>
+
+  <p>“Population”: group of individuals of the same species interacting with each other.
+Community: group of several species interacting with each other.</p>
+
+</blockquote>
+
+<figure id="figure-1"><img src="../../images/PAMPA-toolsuite-tutorial/PAMPA_workflow.png" alt="PAMPA toolsuite workflow" /><figcaption><span class="figcaption-prefix">Figure 1:</span> PAMPA toolsuite <span class="notranslate">workflow</span></figcaption></figure>
+
+<p>Each part of this <span class="notranslate">workflow</span> has the same elementary steps :</p>
+<ul>
+  <li><strong>A first tool</strong> to compute metrics:
+    <ul>
+      <li>Community metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2"><strong>Calculate community metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2</span></span> ): 
+Total abundance, Species richness, Shannon index, Simpson index, Hill index and Pielou index</li>
+      <li>Species-Population metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2"><strong>Calculate presence absence table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2</span></span> ): 
+Abundance, Presence-absence</li>
+    </ul>
+  </li>
+  <li><strong>A second tool</strong> to compute Generalized Linear (Mixed) Models, testing the effect of <code class="language-plaintext highlighter-rouge">site</code>, <code class="language-plaintext highlighter-rouge">year</code> and/or
+<code class="language-plaintext highlighter-rouge">habitat</code> on a metric selected by the user:
+    <ul>
+      <li>Community analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2"><strong>Compute GLM on community data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2</span></span> ): 
+The GLM(M) is computed on the whole dataset and, if a separation factor is selected by the user, GLM(M)s are computed on subsets 
+of the dataset (example: one GLM(M) per ecoregion)</li>
+      <li>Species-Population analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2"><strong>Compute GLM on population data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2</span></span> ): 
+One GLM(M) is computed on each species separately</li>
+    </ul>
+  </li>
+  <li><strong>A third tool</strong> common for Community and Species-Population analyses with <code class="language-plaintext highlighter-rouge">year</code> as a fixed effect to 
+create time-series plots from your GLM(M) results (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2"><strong>Create a plot from GLM data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2</span></span> ). 
+Two plots will be created for each GLM(M): one from the <em>“Estimate”</em> values of the GLM(M) and one from raw values from metrics file.</li>
+</ul>
+
+<blockquote class="details">
+  <h3 id="details-details-about-generalized-linear-mixed-models"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details about Generalized Linear (Mixed) Models</h3>
+
+  <p>Generalized Linear Models (GLMs) and Generalized Linear Mixed Models (GLMMs) are two extensions of Linear Models (LMs).
+As LMs uses only Gaussian distribution (for continuous variables), GLMs permits to analyse a wide spectrum of data 
+with various probability distributions (including Poisson distribution for count data and binomial distribution for 
+presence-absence data). To go further, GLMMs permits to handle pseudo-replication generated by non-independant 
+repeated observations by defining one or more random effect in your model.
+Here, GLM(M) tools allows you to define <code class="language-plaintext highlighter-rouge">year</code> and/or <code class="language-plaintext highlighter-rouge">site</code> as random effects to take account of temporal 
+and/or spatial replicas. The other effects taken into account in the model that aren’t random are defined as ‘fixed’.</p>
+
+</blockquote>
+
+<p>In this tutorial, we’ll be working on data extracted from the data portal DATRAS (Database of Trawls Surveys) of the 
+Inte<span class="notranslate">rna</span>tional Council for the Exploration of the Sea (ICES). After pre-processing to fit the input format of the tools,
+we’ll see how to calculate Essential Biodiversity Variables and construct properly, easily and with good practice, 
+several GLMMs to test the effect of <code class="language-plaintext highlighter-rouge">year</code> and <code class="language-plaintext highlighter-rouge">site</code> on the species richness of each survey studied and 
+on the abundance of each species.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#upload-and-pre-processing-of-the-data" id="markdown-toc-upload-and-pre-processing-of-the-data">Upload and pre-processing of the data</a>    <ol>
+      <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
+      <li><a href="#prepare-the-data" id="markdown-toc-prepare-the-data">Prepare the data</a></li>
+    </ol>
+  </li>
+  <li><a href="#compute-essential-biodiversity-variables" id="markdown-toc-compute-essential-biodiversity-variables">Compute Essential Biodiversity Variables</a>    <ol>
+      <li><a href="#compute-community-and-species-population-metrics" id="markdown-toc-compute-community-and-species-population-metrics">Compute Community and Species-Population metrics</a></li>
+      <li><a href="#creation-of-the-observation-unit-file" id="markdown-toc-creation-of-the-observation-unit-file">Creation of the observation unit file</a></li>
+    </ol>
+  </li>
+  <li><a href="#glmms-and-plots-on-community-and-species-population-metrics" id="markdown-toc-glmms-and-plots-on-community-and-species-population-metrics">GLMMs and plots on Community and Species-Population metrics</a>    <ol>
+      <li><a href="#compute-glmms-and-create-plots-on-community-metrics" id="markdown-toc-compute-glmms-and-create-plots-on-community-metrics">Compute GLMMs and create plots on Community metrics</a></li>
+      <li><a href="#compute-glmms-and-create-plots-on-species-population-metrics" id="markdown-toc-compute-glmms-and-create-plots-on-species-population-metrics">Compute GLMMs and create plots on Species-Population metrics</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="upload-and-pre-processing-of-the-data">Upload and pre-processing of the data</h1>
+
+<p>This first step consist of downloading and properly prepare the data to use it in PAMPA toolsuite.</p>
+
+<h2 id="data-upload">Data upload</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a name (example: “DATRAS data analysis through PAMPA EBV <span class="notranslate">workflow</span>”) 
+for you to find it again later if needed.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Import the CSV files from <a href="https://doi.org/10.5281/zenodo.4264936">Zenodo</a> via link with the three following links
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_A.csv?download=1
+https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_B.csv?download=1
+https://zenodo.org/record/4264936/files/CPUE%20per%20length%20per%20area_C.csv?download=1
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <p>You may as well use the shared data library or directly download the data from the DATRAS data portal but the previous
+method is preferred.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+
+      <p>The files used for this tutorial have been imported from DATRAS data portal in October 2020. Those files are 
+often updated on the data portal. So if you choose to download files directly from DATRAS there may be 
+some differences with the files on Zenodo and the final results of this tutorial.</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-tip-importing-data-from-datras-data-portal"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from DATRAS data portal</h3>
+
+        <ul>
+          <li>Go to link: https://datras.ices.dk/Data_products/Download/Download_Data_public.aspx</li>
+          <li>In the field ‘Data products’ choose ‘CPUE per length per area’</li>
+          <li>In the field ‘Survey’ choose the survey of interest. Here, we chose to use ‘EVHOE’, ‘BITS’ 
+and ‘SWC-IBTS’ surveys but you can’t select the three surveys at once in this field. 
+So, you’ll have to select one survey at a time (‘EVHOE’, ‘BITS’ and ‘SWC-IBTS’) and then
+repeat the six following steps for each of the three surveys.</li>
+          <li>In the field ‘Quarter(s)’ we chose to tick ‘All’</li>
+          <li>In the field ‘Year(s)’ we chose to tick ‘All’</li>
+          <li>In the field ‘Area(s)’ we chose to tick ‘All’</li>
+          <li>In the field ‘Species’ we chose to tick ‘Standard species’ and ‘All’</li>
+          <li>Click on ‘Submit’</li>
+          <li>Tick ‘I accept the documents and their associated restrictions and agree to acknowledge the data source’</li>
+          <li>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</li>
+          <li>Drop files on the dedicated area or click ‘Choose local files’</li>
+          <li>Click on ‘Start’</li>
+          <li>Click on ‘Close’ to return to <span class="notranslate">Galaxy</span> tools interface</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Make sure that each datasets has the following header <code class="language-plaintext highlighter-rouge">"Survey","Year","Quarter","Area","AphiaID",
+"Species","LngtClass","CPUE_number_per_hour"</code> and that separator are “,”</p>
+    </li>
+    <li>In order to avoid mixing up the data files, we’ll add a tag to each file:
+      <ul>
+        <li>tag <code class="language-plaintext highlighter-rouge">#EVHOE</code> to the tabular data file of the EVHOE survey : “CPUE per length per area_A.csv”</li>
+        <li>tag <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> to the tabular data file of the SWC-IBTS survey : “CPUE per length per area_B.csv”</li>
+        <li>tag <code class="language-plaintext highlighter-rouge">#BITS</code> to the tabular data file of the BITS survey : “CPUE per length per area_C.csv”</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+    <li>
+      <p>Change datatype CSV to tabular for each data file</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">datatypes</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>These three data files gather Catch Per Unit Effort (CPUE) observations, a relative abundance measure mostly used 
+to assess exploited fish species populations :</p>
+<ul>
+  <li>EVHOE <a class="citation" href="#EVHOE">MAHE Jean-Claude 1987</a> is a French survey on Southern Atlantic Bottom Trawl, the extracted file available on Zenodo goes from 
+1997 to 2018 and records CPUE for seven exploited fish species</li>
+  <li>BITS <a class="citation" href="#BITS">“<b>Fish trawl survey: ICES Baltic Inte<span class="notranslate">rna</span>tional Trawl Survey for commercial fish species. ICES Database of trawl surveys (DATRAS)</b>” 2010</a> is an inte<span class="notranslate">rna</span>tional survey on Trawl in Baltic sea, the extracted file available on Zenodo goes from 1991
+to 2020 and records CPUE for three exploited fish species</li>
+  <li>SWC-IBTS <a class="citation" href="#SWCIBTS">“<b>DATRAS Scottish West Coast Bottom Trawl Survey (SWC-IBTS)</b>” 2013</a> is a Scottish survey on bottom trawl in the west coast, the extracted file available on Zenodo goes 
+from 1985 to 2010 and records CPUE for six exploited fish species</li>
+</ul>
+
+<h2 id="prepare-the-data">Prepare the data</h2>
+
+<p>Before starting the preparation of the data, we need to identify which inputs we need for the tools and their format
+(same for Community or Species-Population analyses except for a few details):</p>
+<ul>
+  <li>Input for the tools to compute metrics: Observation data file containing at least <code class="language-plaintext highlighter-rouge">year</code> and “location” sampled 
+that might be represented in one field “observation.unit”, “species.code” to name the species sampled, 
+and <code class="language-plaintext highlighter-rouge">number</code> as the abundance value</li>
+  <li>Supplementary input for the tools to compute a GLM(M) analysis: Observation unit data file containing at least
+“observation.unit” and <code class="language-plaintext highlighter-rouge">year</code>. It might also contain <code class="language-plaintext highlighter-rouge">habitat</code>, <code class="language-plaintext highlighter-rouge">site</code> and any other information
+about the location at a given <code class="language-plaintext highlighter-rouge">year</code> that seems useful (examples: “temperature”, “substrate type”, “plant cover”)</li>
+</ul>
+
+<blockquote class="details">
+  <h3 id="details-what-is-the-observationunit-field"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What is the ‘observation.unit’ field?</h3>
+
+  <p>The ‘observation.unit’ field is a primary key linking the observation data file and the metrics data file to an observation 
+unit data file. An unique ‘observation.unit’ identifier represents an unique sampling event at a given year and location.
+Such a file permits to reduce the size of data files, if all informations about the sampling event (examples: 
+“temperature”,”substrate type”,”plant cover”) are gathered in the same dataframe as the observations data 
+(“species sampled”,”count”) same informations will be unnecessarily repeated in many lines.</p>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-the-observationunit-nomenclature"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> The ‘observation.unit’ nomenclature</h3>
+
+  <p>For this <span class="notranslate">workflow</span>, two nomenclatures are advised :</p>
+  <ul>
+    <li>
+      <p>The PAMPA file nomenclature:
+<code class="language-plaintext highlighter-rouge">[Two first letters of 'site'][Two last numbers of 'year'][Identifier of the precise sampled location in four numbers]</code></p>
+
+      <p>The fields <code class="language-plaintext highlighter-rouge">year</code> and “location” will be automatically infered from this nomenclature in the first tools to 
+compute metrics</p>
+    </li>
+    <li>
+      <p>The automatic nomenclature: <code class="language-plaintext highlighter-rouge">['year' in four numbers]_[Identifier of the precise sampled location in any character chain]</code></p>
+
+      <p>This nomenclature will be automatically constructed in the first tools to compute metrics if the input file doesn’t already 
+have a “observation.unit” field but only <code class="language-plaintext highlighter-rouge">year</code> and “location”</p>
+    </li>
+  </ul>
+
+  <p>If you already have your own nomenclature for the primary key linking your files, it will remain untouched by the tools but the 
+output data table from the first tools to compute metrics won’t contain <code class="language-plaintext highlighter-rouge">year</code> and “location” fields.
+In this case and if you want to add such informations to your metrics data file, you can use the tool 
+<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2"><strong>Join</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_easyjoin_tool/1.1.2</span></span><br />
+with the metrics data file and the observation unit data file.</p>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-the-difference-between-fields-site-and-location"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> The difference between fields <code class="language-plaintext highlighter-rouge">site</code> and “location”?</h3>
+
+  <p>Those two fields both inform a geographical indication. 
+“location” is the finest geographical level and <code class="language-plaintext highlighter-rouge">site</code> may represent a wider geographical range but can also 
+represent the same geographical level as “location”. This choice is up to your discretion, depending which geographical
+level you want to take into account in your statistical analysis.</p>
+
+</blockquote>
+
+<h3 id="concatenation-of-data-files">Concatenation of data files</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-files-concatenation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data files concatenation</h3>
+
+  <ol>
+    <li>
+      <p><span class="tool" data-tool="Cat1" title="Tested with Cat1"><strong>Concatenate datasets tail-to-head</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cat1</span></span>  select the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code>
+datasets in <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Datasets to concatenate”</em></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-select-multiple-datasets"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+        <ol>
+          <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Suppress the <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> tags and add the <code class="language-plaintext highlighter-rouge">#Concatenate</code> tag to the Concatenated data file</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-adding-a-tag-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
+        <ul>
+          <li>Click on the dataset</li>
+          <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
+          <li>
+            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
+
+            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
+          </li>
+          <li>Check that the tag is appearing below the dataset name</li>
+        </ul>
+
+      </blockquote>
+    </li>
+    <li>Verify if the three header lines have been included in the concatenate with <span class="tool" data-tool="Count1" title="Tested with Count1"><strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Count1</span></span> 
+and following parameters :
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Concatenated data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">By the values being counted</code></li>
+      </ul>
+    </li>
+    <li>If the value <code class="language-plaintext highlighter-rouge">Survey</code> has more than <code class="language-plaintext highlighter-rouge">1</code> occurrence use <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span><br />
+with following parameters :
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Concatenated data file</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c1!='Survey'</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <p>How many header line(s) is left?
+Use <span class="tool" data-tool="Count1" title="Tested with Count1"><strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Count1</span></span>  and following parameters :</p>
+        <ul>
+          <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file</li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">By the values being counted</code></li>
+        </ul>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>One header line is left as the value <code class="language-plaintext highlighter-rouge">Survey</code> has only <code class="language-plaintext highlighter-rouge">1</code> occurrence in the first column.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="formating-of-data-files">Formating of data files</h3>
+
+<p>Here we have data from the three surveys in one datatable (Filtered data file) with the following fields <code class="language-plaintext highlighter-rouge">"Survey",
+"Year","Quarter","Area", "AphiaID","Species","LngtClass","CPUE_number_per_hour"</code>. We now need to define the proper 
+columns needed for the PAMPA <span class="notranslate">workflow</span> considering there is no primary key close to “observation.unit” :</p>
+<ul>
+  <li>“location” from “Area” associated with “Survey” to avoid mixing up areas from different surveys</li>
+  <li><code class="language-plaintext highlighter-rouge">year</code> from “Year”</li>
+  <li>“species.code” from “Species”</li>
+  <li><code class="language-plaintext highlighter-rouge">number</code> from “CPUE_number_per_hour”</li>
+</ul>
+
+<p>This <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file containing the three surveys will be used to create the observation unit data file and 
+compute Community metrics as the Community analysis can be automatically processed on each survey separately. 
+However, this file can’t be used as it is to compute Species-Population metrics as it may contain data for several 
+populations of the same species that do not interact with each other. Therefore, we have to work on the three 
+<code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> original tabular files for the Species-Population analysis.</p>
+
+<p>Hence, the following manipulations will be applied not only on <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file but also on 
+the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> original tabular files used for the concatenation.</p>
+
+<blockquote>
+
+  <blockquote class="tip">
+    <h3 id="tip-tip-select-multiple-datasets-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+    <ol>
+      <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+      <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+    </ol>
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-the-location-field"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create the “location” field</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regexColumn1/1.0.0</span></span><br />
+with following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file + 
+three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> tabular data files</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">([A-Z]{3}[A-Z]+)</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1-</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <p>What did we do with this tool?</p>
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>We searched for every character chain matching the extended regular <span class="notranslate">expression</span> (Regex) <code class="language-plaintext highlighter-rouge">([A-Z]{3}[A-Z]+)</code> 
+in the first column “Survey” meaning every character chain of 4 or more capital letters. With the replacement <code class="language-plaintext highlighter-rouge">\1-</code>
+we indicated to add <code class="language-plaintext highlighter-rouge">-</code> after the bracketed character chain. This manipulation is made in order to merge 
+properly columns “Area” and “Survey” with a separation.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2"><strong>Merge Columns</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2</span></span>  with following parameters :
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select data”</em>: four <code class="language-plaintext highlighter-rouge">#Concatenate</code>, <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> 
+Column Regex Find And Replace data files</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“with column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
+      </ul>
+
+      <p>Check if the output data files has a supplementary column called “SurveyArea” and values with the survey ID and area ID
+separated with <code class="language-plaintext highlighter-rouge">-</code>.</p>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-change-column-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change column names</h3>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.0</span></span>  with following parameters :</p>
+  <ul>
+    <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: four <code class="language-plaintext highlighter-rouge">#Concatenate</code>, <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Merged data files</li>
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+      <ul>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">Year</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">year</code></li>
+      </ul>
+    </li>
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+      <ul>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">Species</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">species.code</code></li>
+      </ul>
+    </li>
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+      <ul>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">CPUE_number_per_hour</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">number</code></li>
+      </ul>
+    </li>
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+      <ul>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">SurveyArea</code></li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">location</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>Check if the columns are corresponding to <code class="language-plaintext highlighter-rouge">"Survey","year","Quarter","Area","AphiaID","species.code","LngtClass",
+"number","location"</code> (pay attention to case).</p>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-other-tools-that-could-be-useful-to-pre-process-data"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Other tools that could be useful to pre-process data</h3>
+
+  <p><span><strong>Add input name as column</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; <span><strong>Compute an <span class="notranslate">expression</span> on every row</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span><br />
+; <span><strong>Table Compute</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; <span><strong>Join two files on column allowing a small difference</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> 
+; <span><strong>Join two files</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; <span><strong>Filter Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; <span><strong>melt</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> 
+; <span><strong>Unfold columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; <span><strong>Remove columns by heading</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span><br />
+; <span><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; <span><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> 
+; <span><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i></span> ; …</p>
+
+</blockquote>
+
+<h1 id="compute-essential-biodiversity-variables">Compute Essential Biodiversity Variables</h1>
+
+<p>In this part of the tutorial, we’re starting to use tools from the PAMPA toolsuite to compute Community 
+and Species-Population Essential Biodiversity Variables. Then, we’ll be creating the observation unit file.</p>
+
+<h2 id="compute-community-and-species-population-metrics">Compute Community and Species-Population metrics</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compute-community-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute Community metrics</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2"><strong>Calculate community metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2</span></span><br />
+with following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the community metrics you want to compute”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
+      </ul>
+
+      <p>Check if the output Community metrics data file has the following column names <code class="language-plaintext highlighter-rouge">"year","location","number",
+"species.richness","simpson","simpson_l","shannon","pielou","hill","observation.unit"</code>.</p>
+    </li>
+    <li>Tag the output Community metrics with <code class="language-plaintext highlighter-rouge">#Community</code></li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compute-species-population-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute Species-Population metrics</h3>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2"><strong>Calculate presence absence table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2</span></span><br />
+with <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Regex Find And Replace data files</p>
+
+  <p>Check if the outputs Species-Population metrics data files has the following column names <code class="language-plaintext highlighter-rouge">"year","location",
+"species.code","number","presence_absence","observation.unit"</code>.</p>
+
+</blockquote>
+
+<h2 id="creation-of-the-observation-unit-file">Creation of the observation unit file</h2>
+
+<p>Now that we have the “observation.unit” fields automatically created in the Community and Species-Population 
+metrics files we can create the observation unit file from the <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file with the same 
+nomenclature for the “observation.unit” fields, namely:
+<code class="language-plaintext highlighter-rouge">['year' in four numbers]_[Identifier of the precise sampled location in any character chain]</code></p>
+
+<blockquote>
+  <h3 id="hands_on-hands-on-create-the-observation-unit-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create the observation unit file</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regexColumn1/1.0.0</span></span><br />
+with following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">([0-9]{4})</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1_</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2"><strong>Merge Columns</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/merge_cols/mergeCols1/1.0.2</span></span>  with following parameters :
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Column Regex Find And Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Merge column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“with column”</em>: <code class="language-plaintext highlighter-rouge">Column: 9</code></li>
+      </ul>
+
+      <p>Check if the output data file has a supplementary column called “yearlocation” and values with the <code class="language-plaintext highlighter-rouge">year</code> and “location” ID
+separated with <code class="language-plaintext highlighter-rouge">_</code>.</p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regexColumn1/1.0.0"><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regexColumn1/1.0.0</span></span><br />
+with following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Merge Columns data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“using column”</em>: <code class="language-plaintext highlighter-rouge">Column: 2</code></li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">([0-9]{4})_</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">\1</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="question">
+        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <p>What did we do with this tool?</p>
+        <blockquote class="solution">
+          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <p>We removed the <code class="language-plaintext highlighter-rouge">_</code> we added in the first part of this “Hands_on” from the values of the second column
+<code class="language-plaintext highlighter-rouge">year</code> to get proper numeric values back.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0"><strong>Cut columns from a table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0</span></span><br />
+with following parameters :
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“File to cut”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Column Regex Find And Replace data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Operation”</em>: <code class="language-plaintext highlighter-rouge">Keep</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Cut by”</em>: <code class="language-plaintext highlighter-rouge">fields</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“List of Fields”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code> <code class="language-plaintext highlighter-rouge">Column: 2</code> <code class="language-plaintext highlighter-rouge">Column: 3</code> <code class="language-plaintext highlighter-rouge">Column: 4</code> <code class="language-plaintext highlighter-rouge">Column: 9</code> <code class="language-plaintext highlighter-rouge">Column: 10</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Check if the output <code class="language-plaintext highlighter-rouge">#Concatenate</code> Advanced Cut data file has the following column names <code class="language-plaintext highlighter-rouge">"Survey","year","Quarter",
+"Area","location","yearlocation"</code>.</p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span> 
+ with following parameters :
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Advanced Cut data file</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+        <li><em>“1: Column selections”</em>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 6</code></li>
+            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“in”</em>: <code class="language-plaintext highlighter-rouge">Ascending order</code></li>
+            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Alphabetical sort</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output unique values”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Ignore case”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>The output <code class="language-plaintext highlighter-rouge">#Concatenate</code> Sort data file must have fewer lines than the <code class="language-plaintext highlighter-rouge">#Concatenate</code> Advanced Cut data file.</p>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/regex_find_replace/regex1/1.0.0"><strong>Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/regex_find_replace/regex1/1.0.0</span></span>  with following parameters :
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Sort data file</li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">yearlocation</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">observation.unit</code></li>
+          </ul>
+        </li>
+        <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> Click <em>”+ Insert Check”</em>:
+          <ul>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find Regex”</em>: <code class="language-plaintext highlighter-rouge">location</code></li>
+            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Replacement”</em>: <code class="language-plaintext highlighter-rouge">site</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Here, we define <code class="language-plaintext highlighter-rouge">site</code> represents the same geographical level as “location”.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <ol>
+    <li>
+      <p>Tag the output <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file with <code class="language-plaintext highlighter-rouge">#unitobs</code></p>
+
+      <p>Check if the output <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file has the following column names <code class="language-plaintext highlighter-rouge">"Survey","year","Quarter",
+"Area","site","observation.unit"</code>.</p>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="glmms-and-plots-on-community-and-species-population-metrics">GLMMs and plots on Community and Species-Population metrics</h1>
+
+<p>Now that we have all our input files for GLM(M) tools ready, we can start computing statistical models to make 
+conclusions on our surveys. But before starting to use the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2"><strong>Compute GLM on community data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2</span></span> 
+and the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2"><strong>Compute GLM on population data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2</span></span>  tools, we have to think about the model we want to compute. 
+The tools allows to test the effects <code class="language-plaintext highlighter-rouge">Year</code>, <code class="language-plaintext highlighter-rouge">Site</code> and/or <code class="language-plaintext highlighter-rouge">Habitat</code> on one interest variable at a time. 
+As we don’t have data about the <code class="language-plaintext highlighter-rouge">Habitat</code> we can’t test its effect. It is always better to take a temporal and a 
+geographical variable into account in an ecological model so we’ll test the effect of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> with 
+a random effect of <code class="language-plaintext highlighter-rouge">Site</code> to take geographical pseudo-replication into account.</p>
+
+<h2 id="compute-glmms-and-create-plots-on-community-metrics">Compute GLMMs and create plots on Community metrics</h2>
+
+<p>For the Community analysis we have the choice to test the effect of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> on:</p>
+<ul>
+  <li>“Total abundance”</li>
+  <li>or “Species richness”</li>
+  <li>or “Simpson index”</li>
+  <li>or “1 - Simpson index”</li>
+  <li>or “Shannon index”</li>
+  <li>or “Pielou index”</li>
+  <li>or “Hill index”</li>
+</ul>
+
+<p>As a GLM(M) permits to take into account only one interest variable at a time, we choose to take “Species richness” 
+as the interest variable, namely the quantity of different species at a given time and location.
+This metric is located on the fourth column of the <code class="language-plaintext highlighter-rouge">#Concatenate #Community</code> metrics data file.</p>
+
+<p>However, if you’re interested to test the effects of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> on another metric you may compute
+the GLM(M) tool again and choose any column of the <code class="language-plaintext highlighter-rouge">#Concatenate #Community</code> metrics data file containing one of 
+the metrics cited above.</p>
+
+<p>As said above, analyses will be separated by the field “Survey” (first column) to avoid bias.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compute-glmm-on-community-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute GLMM on Community metrics</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2"><strong>Compute GLM on community data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2</span></span>  with following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input metrics file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #Community</code> metrics data file</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Unitobs informations file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Interest variable from metrics file”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Separation factor of your analysis from unitobs file”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Response variables”</em>: <code class="language-plaintext highlighter-rouge">Year</code> <code class="language-plaintext highlighter-rouge">Site</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Random effect?”</em>: <code class="language-plaintext highlighter-rouge">Site</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <p>The three outputs must have three tags <code class="language-plaintext highlighter-rouge">#Concatenate #Community #unitobs</code> and the first one named ‘GLM - results 
+from your community analysis’ must contain five lines. This file is formated to have one line per GLM processed,
+it has been formated this way to make GLM results easier to represent and modify if needed. However, this format is 
+often not suited to read directly the results on <span class="notranslate">Galaxy</span> as <span class="notranslate">Galaxy</span> handles better tabular files with a lot of lines
+rather than files with a lot of columns. So, if your file doesn’t display properly on <span class="notranslate">Galaxy</span> as a data table, we advise
+to do the following optional step.</p>
+
+  <ol>
+    <li>(optional) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</span></span><br />
+ with <code class="language-plaintext highlighter-rouge">#Concatenate #Community #unitobs</code> ‘GLM - results from your community analysis’ data file</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-details-on-advanced-parameters-of-glm-tools"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details on advanced parameters of GLM tools</h3>
+
+  <p>For now, there are two advanced parameters you can setup in the GLM tools:</p>
+  <ul>
+    <li>
+      <p><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Distribution for model”</em> permits you to choose a probability distribution for your 
+model. When <code class="language-plaintext highlighter-rouge">Auto</code> is selected, the tool will automatically set the distribution on <code class="language-plaintext highlighter-rouge">Gaussian</code>, <code class="language-plaintext highlighter-rouge">Binomial</code>
+or <code class="language-plaintext highlighter-rouge">Poisson</code> depending on the type of your interest variable but it may exist a better probability distribution
+to fit your model. Mind that if you choose to use a random effect, “quasi” distribution can’t be used for your model.</p>
+    </li>
+    <li>
+      <p><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“GLM object(s) as .Rdata output?”</em> permits you to get .Rdata file of your GLM(M)s if you
+want to use it in your own R console.</p>
+    </li>
+  </ul>
+
+</blockquote>
+
+<blockquote class="details">
+  <h3 id="details-how-to-choose-a-proper-distribution-family-for-your-model"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> How to choose a proper distribution family for your model?</h3>
+
+  <p>The distribution family for a model is mainly selected by looking at the interest variable of the model:</p>
+  <ul>
+    <li>If your interest variable is a continuous numeric variable (weigth, size, mean, …) it follows a
+<code class="language-plaintext highlighter-rouge">Gaussian</code> distribution so you should select <code class="language-plaintext highlighter-rouge">Gaussian</code>.</li>
+    <li>If your interest variable is a discrete numeric variable (count) it follows a <code class="language-plaintext highlighter-rouge">Poisson</code> distribution
+so you should select <code class="language-plaintext highlighter-rouge">Poisson</code>.</li>
+    <li>If your interest variable is a binary variable (0-1, presence-absence) it follows a <code class="language-plaintext highlighter-rouge">Binomial</code> distribution
+so you should select <code class="language-plaintext highlighter-rouge">Binomial</code>.</li>
+  </ul>
+
+  <p>These three distributions are the most commonly used, the other distributions are used when the interest variable
+, the data and/or the model has specifics:</p>
+  <ul>
+    <li>When the model is over-dispersed, use a <code class="language-plaintext highlighter-rouge">Quasi-Poisson</code> (when interest variable is discrete) or a <code class="language-plaintext highlighter-rouge">Quasi-Binomial</code> 
+(when interest variable is binary) distribution.</li>
+    <li>If your model doesn’t fit well and your interest variable is a <strong>positive</strong> continuous variable, you may try
+with <code class="language-plaintext highlighter-rouge">Gamma</code> or <code class="language-plaintext highlighter-rouge">Inverse-Gaussian</code> distribution.</li>
+  </ul>
+
+</blockquote>
+<h3 id="read-and-interpret-raw-glmm-outputs">Read and interpret raw GLMM outputs</h3>
+
+<p>The GLM tool has three outputs:</p>
+<ul>
+  <li>The first output, ‘GLM - results from your community analysis’ data file, contains the summary of each GLMMs
+on each lines.</li>
+  <li>The second output, ‘Simple statistics on chosen variables’ file, contains descriptive statistics (mean, median, …) 
+of the interest variable for the whole input data table and for each selected factor levels combinations.
+Here, each <code class="language-plaintext highlighter-rouge">site</code> at each <code class="language-plaintext highlighter-rouge">year</code>.</li>
+  <li>The third output, ‘Your analysis rating file’, contains a notation for all analyses performed and notations for 
+each GLMMs processed. This rate is based on nine criterias commonly used in ecology to estimate wether a Linear 
+Model has been constructed properly or not. At the end of the file, red flags and advices to improve your model
+are displayed also depending on the same criterias. This file is really useful to look at the bigger picture</li>
+</ul>
+
+<blockquote class="details">
+  <h3 id="details-details-on-criterias-used-in-your-analysis-rating-file"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Details on criterias used in ‘Your analysis rating file’</h3>
+
+  <p>For now, there are nine criterias taken into account to rate GLM(M)s in the <span class="notranslate">Galaxy</span> tools:</p>
+  <ul>
+    <li><em>Plan completeness</em>: If part of factor levels combinations are inexistant, bias can be induced. (0.5)</li>
+    <li><em>Plan balance</em>: If factor levels combinations aren’t present in same quantity, bias can be induced. (0.5)</li>
+    <li><em>NA proportion</em>: Lines with one or more NA value are ignored in Linear Models. If many NA values, there are
+less observations taken in account in the model than expected. (1)</li>
+    <li><em>Residuals dispersion</em> (DHARMa package): If the dispersion of residuals isn’t regular, the model is either under- or
+over-dispersed. The distribution selected for the model isn’t right. (1.5)
+To know if it is under- or over-dispersion, compute <em>“deviance”</em>/<em>“df.resid”</em> : if the result is &gt; 1 it is 
+over-dispersion, if the result is &lt; 1 it is under-dispersion.</li>
+    <li><em>Residuals uniformity</em> (DHARMa package): If the residuals aren’t uniform, the distribution selected for the model
+isn’t right. (1)</li>
+    <li><em>Outliers proportion</em> (DHARMa package): If too much outliers, the distribution selected for the model isn’t right
+or data is biased. (0.5)</li>
+    <li><em>Zero-inflation</em> (DHARMa package): If too much zeros in data, bias can be induced. (1)</li>
+    <li><em>Observations / factors ratio</em>: If the number of factors taken into account in the model exceeds 10% of the number
+of observations (ex: 10 factors for 90 observations), bias can be induced. (1)</li>
+    <li><em>Number of levels of the random effect</em>: If no random effect in the model or if the factor selected as random effect
+has less than 10 levels. (1)</li>
+  </ul>
+
+</blockquote>
+
+<h4 id="first-output-glm---results-from-your-community-analysis">First output: ‘GLM - results from your community analysis’</h4>
+
+<p>First, on the ‘GLM - results from your community analysis’ data file, we see four analyses: <code class="language-plaintext highlighter-rouge">global</code> on the whole dataset
+and one analysis for each of the three surveys <code class="language-plaintext highlighter-rouge">BITS</code>, <code class="language-plaintext highlighter-rouge">EVHOE</code> and <code class="language-plaintext highlighter-rouge">SWC-IBTS</code>. We also see the <code class="language-plaintext highlighter-rouge">Poisson</code> distribution has been 
+automatically selected by the tool. It seems right as the interest variable “Species richness” is a count.</p>
+
+<p>Then, we see five fields that gives indexes to evaluate the quality of a model in comparison to another model performed
+on the same data, so they can’t be used to compare the four models performed here :</p>
+<ul>
+  <li><em>“AIC”</em> Akaike information criterion. It is based on the number of factors. The lower AIC is better.</li>
+  <li><em>“BIC”</em> Bayesian information criterion, is a derivate of AIC. It is based on the number of factors selected and on the 
+sample size. The lower BIC is better.</li>
+  <li><em>“logLik”</em> log-likelihood, is an index that estimates the likelihood of obtaining the sample of observations used
+for the model in the selected distribution. The higher logLik is better.</li>
+  <li><em>“deviance”</em>, evaluates the model’s goodness of fit. The lower deviance is better.</li>
+  <li><em>“df.resid”</em>, degrees of freedom in residuals used to calculate the adjusted R-square that indicates the fit quality.</li>
+</ul>
+
+<p>Three statistics about the random effect <code class="language-plaintext highlighter-rouge">site</code> are given in this first file: standard deviation, number of observations taken
+into account in the model and number of levels in the random effect. 
+As <code class="language-plaintext highlighter-rouge">site</code> have been set as a random effect, pseudo-replication caused by the factor <code class="language-plaintext highlighter-rouge">site</code> variable is taken into account to 
+fit the model as well as its effects on the interest variable but it is not tested so we can’t make any conclusion regarding 
+its effects on species richness.</p>
+
+<p>At this point on, elements on fixed effects are displayed :</p>
+<ul>
+  <li><em>“Estimate”</em> is the mean value of the interest variable estimated by the model for a given factor.</li>
+  <li><em>“Std.Err”</em> standard error, is the standard deviation of the <em>“Estimate”</em>. It measures uncertainty of the <em>“Estimate”</em>.</li>
+  <li><em>“Zvalue”</em> (or <em>“Tvalue”</em> depending on the distribution) is the <em>“Estimate”</em> divided by the <em>“Std.Err”</em>.</li>
+  <li><em>“Pvalue”</em> is the probability that the interest variable is not impacted by a given factor. If this probability is under a 
+certain value (commonly 5% in ecology so a p-value under 0.05), we determine the factor has a significant effect on the 
+interest variable.</li>
+  <li><em>“IC_up”</em> and <em>“IC_inf”</em> are the upper and lower values of the confidence interval at 95% of the <em>“Estimate”</em>. The confidence
+interval is the range of values that your <em>“Estimate”</em> may take 95% of the time if you re-sample your data.</li>
+  <li><em>“signif”</em> significativity, “yes” if the <em>“Pvalue”</em> is inferior to 0.05. Tells you wether the tested factor has a significant
+effect on your interest variable.</li>
+</ul>
+
+<p>If the factor used as fixed effect is defined as a qualitative variable, those seven fields will be provided for each factor’s level
+and if it is a continuous variable they will be provided only once for the whole factor.</p>
+
+<p>Here, the factor <code class="language-plaintext highlighter-rouge">year</code> may be considered a continuous variable as well as a qualitative variable. Only, it doesn’t provide the same
+informations :</p>
+<ul>
+  <li>If we consider <code class="language-plaintext highlighter-rouge">year</code> as a continuous variable the model will inform on the trend of the interest variable on the whole time-series.
+Making it more interesting to know about the global behaviour of the interest variable over time.</li>
+  <li>If we consider <code class="language-plaintext highlighter-rouge">year</code> as a qualitative variable the model will inform on the relative mean of interest variable for each year 
+individually. Making it more interesting to know about each year individually and plot a detailed curve.</li>
+</ul>
+
+<p>As both these solutions are interesting, the tool is computing two GLMMs when <code class="language-plaintext highlighter-rouge">year</code> is selected as a fixed effect:</p>
+<ul>
+  <li>one GLMM with <code class="language-plaintext highlighter-rouge">year</code> as a continuous variable with results on fields <em>“year Estimate”</em>, <em>“year Std.Err”</em>, <em>“year Zvalue”</em>,
+<em>“year Pvalue”</em>, <em>“year IC_up”</em>, <em>“year IC_inf”</em> and <em>“year signif”</em>.</li>
+  <li>one GLMM with <code class="language-plaintext highlighter-rouge">year</code> as a qualitative variable in the same fields with each <code class="language-plaintext highlighter-rouge">year</code>’s levels as <em>“YYYY Estimate”</em>, 
+<em>“YYYY Std.Err”</em>, <em>“YYYY Zvalue”</em>, <em>“YYYY Pvalue”</em>, <em>“YYYY IC_up”</em>, <em>“YYYY IC_inf”</em> and <em>“YYYY signif”</em>.</li>
+</ul>
+
+<p>The <em>“(Intercept)”</em> value represents the reference value, it is rarely used for interpretations. 
+We see no significant effect on the ‘global’ model which seems logical as it considers the three surveys that are in 
+three geographical areas so three distinct communities. However, we observe that also with models on each of the three surveys separately.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>What does this result with no significant effect found mean? How can we explain it?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>This result would mean that the communities sampled in this dataset haven’t change in the whole 
+time series. However, this result can’t be really trusted because the interest variable we selected is
+the species richness and for the need of this tutorial we downloaded only part of the dataset with
+a limited number of species. Hence, this dataset isn’t really suited to perform a community analysis
+as only a little part of the community is considered.</p>
+  </blockquote>
+</blockquote>
+
+<h4 id="second-output-simple-statistics-on-chosen-variables">Second output: ‘Simple statistics on chosen variables’</h4>
+
+<p>The second output file doesn’t tell much about the statistic models, it contains details for you to have an outlook on 
+the interest variable of the input data file containing the community metrics. We can see in the ‘Base statistics’ 
+part that the maximum species richness in the data file is 7 which is very low for trawl surveys and confirms this dataset 
+isn’t suited to perform community analyses.</p>
+
+<h4 id="third-output-your-analysis-rating-file">Third output: ‘Your analysis rating file’</h4>
+
+<p>Here, we already pointed out a major issue with the original data file for community analyses and we know they 
+aren’t robust. The third output will help us get a supplementary layer of understanding and take a step back on 
+the quality of the models performed.
+We see the global rate is 3.75 out of 10 so it seems the analyses aren’t of good quality but we need to see 
+each analysis individually to make real conclusions. The best rate is for the analysis on <code class="language-plaintext highlighter-rouge">EVHOE</code> survey 4.5 out 
+of 8 which is a medium rate, the model isn’t necessarily bad but it can be improved. Indeed, data for this model
+contains few NA values and it has a complete plan but not balanced. However, two very important criterias aren’t
+checked: residuals haven’t a regular dispersion and aren’t uniform so it seems Poisson distribution doesn’t fit.
+Besides, there isn’t enough factor’s levels in <code class="language-plaintext highlighter-rouge">site</code> to use it as a random effect. To get a relevant model we 
+should redo the model without <code class="language-plaintext highlighter-rouge">site</code> as a random effect but in order to shorten this tutorial we won’t develop this
+manipulation here.</p>
+
+<p>You can see in the last part of the file ‘Red flags - advice’, some advices to improve your models but the issues 
+detected in models can come from different reasons (like here, the data isn’t representative enough of the whole 
+community) and may be hard to correct. Hence, you can try with another probability distribution but this issue may
+comme from the fact that the data isn’t suited to make an analysis on species richness.
+Overall, the four models aren’t really trust-worthy.</p>
+
+<h4 id="summary">Summary</h4>
+
+<p>With all this interpretation made from raw results, we still don’t really visualize these results clearly. For this, it 
+could be nice to get a graphical representation of the GLMMs results and the interest variable.
+Here, for these models, we know these plots won’t be trust-worthy but it can still be interesting.</p>
+
+<p><strong><em>Share the community analysis on the whole Datras to show it is robust this time?</em></strong></p>
+
+<h3 id="create-and-read-plots">Create and read plots</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-plots-from-community-metrics-file-and-glmm-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create plots from Community metrics file and GLMM results</h3>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2"><strong>Create a plot from GLM data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2</span></span>  with following parameters:</p>
+  <ul>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input glm results file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #Community #unitobs</code> ‘GLM - results 
+from your community analysis’ data file</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data table used for glm”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #Community</code> metrics data file</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Unitobs table used for glm”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file</li>
+  </ul>
+
+  <p>The output must be a data collection with four PNG files.</p>
+
+</blockquote>
+
+<figure id="figure-2"><img src="../../images/PAMPA-toolsuite-tutorial/Community.png" alt="Community analysis plots" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Community analysis plots</figcaption></figure>
+
+<p>Each PNG file contains two plots :</p>
+<ul>
+  <li>In the upper plot (blue), the line represents the <em>“Estimate”</em> values for each year and the confidence interval
+is the light blue ribbon. There is no significantly different year here but, usually, it is represented by a white
+dot inside the blue point of the <em>“Estimate”</em> value of the year. The writing on top of the plot is the <em>“Estimate”</em>
+value for the whole time-series (year as continuous variable), if nothing else is written it isn’t significant.</li>
+  <li>In the lower plot (purple), the line represents the observed mean of the species richness for each year (calculated
+directly from the input metrics data table). If the interest variable had been a presence-absence, it would have been
+a presence proportion and if it had been an abundance it would have been a raw abundance (sum of all abundances each year).</li>
+</ul>
+
+<p>We’ll ignore the ‘global’ analysis plot as it associate data from different communities. We see on both plots of each of the 
+three surveys that, as predicted, species richness haven’t varied much as few species are taken into account in the analysed 
+data set and these species are very commonly found as we selected only ‘Standard species’ when downloading the datasets.
+Hence, mean species richness are globally around the maximum number of species taken into account in the surveys (7 for 
+<code class="language-plaintext highlighter-rouge">SWC-IBTS</code>, 6 for <code class="language-plaintext highlighter-rouge">EVHOE</code> and 3 for <code class="language-plaintext highlighter-rouge">BITS</code>). Moreover, confidence intervals are very wide and global trends are around 1.</p>
+
+<h2 id="compute-glmms-and-create-plots-on-species-population-metrics">Compute GLMMs and create plots on Species-Population metrics</h2>
+
+<p>For the Species-Population analysis we have the choice to test the effect of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> on:</p>
+<ul>
+  <li>“Abundance”</li>
+  <li>or “Presence-absence”</li>
+</ul>
+
+<p>As a GLM(M) permits to take into account only one interest variable at a time, we choose to take 
+“Abundance” as the interest variable, namely the quantity of a given species at a given time and location. 
+This metric is located on the fourth column of the <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Species-Population metrics data files.</p>
+
+<p>However, if you’re interested to test the effects of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> on “Presence-absence” you may compute
+the GLM(M) tool again and choose the fifth column of the <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Species-Population metrics data 
+files.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-compute-glmm-on-species-population-metrics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compute GLMM on Species-Population metrics</h3>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2"><strong>Compute GLM on population data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2</span></span>  with following parameters:</p>
+  <ul>
+    <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input metrics file”</em>: <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> metrics data files</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Unitobs informations file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file</li>
+    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Interest variable from metrics file”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
+    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Response variables”</em>: <code class="language-plaintext highlighter-rouge">Year</code> <code class="language-plaintext highlighter-rouge">Site</code></li>
+    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Random effect?”</em>: <code class="language-plaintext highlighter-rouge">Site</code></li>
+    <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults</code></li>
+  </ul>
+
+  <p>The three outputs for each survey must have three tags <code class="language-plaintext highlighter-rouge">#Concatenate #SurveyID #unitobs</code>. 
+The first files of each survey named ‘GLM - results from your population analysis’ must contain one line 
+per GLM processed, it has been formated this way to make GLM results easier to represent and modify if needed.
+However, this format is often not suited to read directly the results on <span class="notranslate">Galaxy</span> as <span class="notranslate">Galaxy</span> handles better tabular 
+files with a lot of lines rather than files with a lot of columns. So, if your files doesn’t display properly
+on <span class="notranslate">Galaxy</span> as a data table, we advise to do the following optional step.</p>
+
+  <ol>
+    <li>(optional) <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0"><strong>Transpose rows/columns in a tabular file</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0</span></span> 
+with <code class="language-plaintext highlighter-rouge">#Concatenate #EVHOE #unitobs</code> <code class="language-plaintext highlighter-rouge">#BITS #Concatenate #unitobs</code> <code class="language-plaintext highlighter-rouge">#Concatenate #SWCIBTS #unitobs</code> 
+‘GLM - results from your population analysis’ data files</li>
+  </ol>
+
+</blockquote>
+
+<h3 id="read-and-interpret-raw-glm-outputs">Read and interpret raw GLM outputs</h3>
+
+<p>The three outputs for each time the population GLM tool runs are the same as in the community GLM tool described in
+the previous part 3. 1. 1. Read and interpret raw GLM outputs. 
+For the need of this tutorial, we’ll be analyzing only the <code class="language-plaintext highlighter-rouge">BITS</code> survey analysis results.</p>
+
+<h4 id="first-output-glm---results-from-your-population-analysis">First output: ‘GLM - results from your population analysis’</h4>
+
+<p>First, on the <code class="language-plaintext highlighter-rouge">#BITS #Concatenate #unitobs</code> ‘GLM - results from your population analysis’ data file, we see three analyses 
+one for each species in the <code class="language-plaintext highlighter-rouge">BITS</code> survey: <code class="language-plaintext highlighter-rouge">Gadus morhua</code> (Atlantic cod), <code class="language-plaintext highlighter-rouge">Platichthys flesus</code> (European flounder) and 
+<code class="language-plaintext highlighter-rouge">Pleuronectes platessa</code> (European plaice).</p>
+
+<figure id="figure-3"><img src="../../images/PAMPA-toolsuite-tutorial/Fish-BITS.png" alt="BITS survey standard fish species" /><figcaption><span class="figcaption-prefix">Figure 3:</span> BITS survey standard fish species</figcaption></figure>
+
+<p>We also see the <code class="language-plaintext highlighter-rouge">Gaussian</code> distribution has been automatically selected by the tool. It seems right even if the interest variable 
+“Abundance” is usually a count, here it is a Catch Per Unit Effort abundance so it isn’t a round value.</p>
+
+<p>Then, the details of what contains each field in this file has been developped in the previous part on community analyses</p>
+<ol>
+  <li>
+    <ol>
+      <li>
+        <ol>
+          <li>
+            <ol>
+              <li>First output: ‘GLM - results from your community analysis’.</li>
+            </ol>
+          </li>
+        </ol>
+      </li>
+    </ol>
+  </li>
+</ol>
+
+<p>Three statistics about the random effect <code class="language-plaintext highlighter-rouge">site</code> are given in this first file: standard deviation, number of observations taken
+into account in the model and number of levels in the random effect. 
+As <code class="language-plaintext highlighter-rouge">site</code> have been set as a random effect, pseudo-replication caused by the factor <code class="language-plaintext highlighter-rouge">site</code> variable is taken into account to 
+fit the model as well as its effects on the “Abundance” but it is not tested so we can’t make any conclusion regarding 
+its effects on CPUE abundance.</p>
+
+<p>As said above, the tool is computing two GLMMs when <code class="language-plaintext highlighter-rouge">year</code> is selected as a fixed effect:</p>
+<ul>
+  <li>one GLMM with <code class="language-plaintext highlighter-rouge">year</code> as a continuous variable with results on fields <em>“year Estimate”</em>, <em>“year Std.Err”</em>, <em>“year Zvalue”</em>,
+<em>“year Pvalue”</em>, <em>“year IC_up”</em>, <em>“year IC_inf”</em> and <em>“year signif”</em>.</li>
+  <li>one GLMM with <code class="language-plaintext highlighter-rouge">year</code> as a qualitative variable in the same fields with each <code class="language-plaintext highlighter-rouge">year</code>’s levels as <em>“YYYY Estimate”</em>, 
+<em>“YYYY Std.Err”</em>, <em>“YYYY Zvalue”</em>, <em>“YYYY Pvalue”</em>, <em>“YYYY IC_up”</em>, <em>“YYYY IC_inf”</em> and <em>“YYYY signif”</em>.</li>
+</ul>
+
+<p>The <em>“(Intercept)”</em> value represents the reference value, it is rarely used for interpretations.</p>
+
+<p>Regarding the significance of the effect <code class="language-plaintext highlighter-rouge">year</code> as continuous variable:</p>
+<ul>
+  <li>It isn’t significant in the <code class="language-plaintext highlighter-rouge">Gadus morhua</code> model.</li>
+  <li>It is significant in the <code class="language-plaintext highlighter-rouge">Platichthys flesus</code> model.</li>
+  <li>It is significant in the <code class="language-plaintext highlighter-rouge">Pleuronectes platessa</code> model.</li>
+</ul>
+
+<blockquote class="question">
+  <h3 id="question-question-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>What does these results on the effect <code class="language-plaintext highlighter-rouge">year</code> as continuous variable mean?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>The question behind the test of this effect is: “Is the global temporal trend different from 1?”
+When it isn’t significant as in the <code class="language-plaintext highlighter-rouge">Gadus morhua</code> model, it means the <em>“year Estimate”</em> value isn’t 
+significantly different from 1 so the interest variable “Abundance” hasn’t varied much through time.
+When it is significant as in the two other models, the <em>“year Estimate”</em> value is significantly different 
+from 1 so the interest variable “Abundance” has varied through time.</p>
+  </blockquote>
+</blockquote>
+
+<p>These results are consistent with the results on the significance of the effects <code class="language-plaintext highlighter-rouge">year</code> as qualitative variable:</p>
+<ul>
+  <li>Only one year out of 30 considered significantly different in the <code class="language-plaintext highlighter-rouge">Gadus morhua</code> model. On year 1995.</li>
+  <li>14 years out of 30 considered significantly different in the <code class="language-plaintext highlighter-rouge">Platichthys flesus</code> model. On years 2001, 2002, 2005, 
+2007, 2008, 2010 to 2017 and 2019.</li>
+  <li>8 years out of 30 considered significantly different in the <code class="language-plaintext highlighter-rouge">Pleuronectes platessa</code> model. From year 2012 to 2019.</li>
+</ul>
+
+<h4 id="second-output-simple-statistics-on-chosen-variables-1">Second output: ‘Simple statistics on chosen variables’</h4>
+
+<p>The second output file doesn’t tell much about the statistic models, it contains details for you to have an outlook on 
+the interest variable of the input data file containing the population metrics. We can see for example in the ‘Statistics 
+per combination of factor levels’ part that the median value for the CPUE abundance in the location “22” in 1991 is 6.862473.</p>
+
+<h4 id="third-output-your-analysis-rating-file-1">Third output: ‘Your analysis rating file’</h4>
+
+<p>The third output will help us get a supplementary layer of understanding and take a step back on the quality of 
+the models performed.
+We see the global rate is 8 out of 10 so it seems the analyses are of good quality but we need to see 
+each analysis individually to make real conclusions. 
+The best rates are for the analyses on <code class="language-plaintext highlighter-rouge">Gadus morhua</code> and <code class="language-plaintext highlighter-rouge">Platichthys flesus</code> 6 out of 8 which is a nice rate. However, 
+the models can still be improved by removing the random effect. As residuals aren’t uniform, we could select another 
+distribution but dispersion of residuals and residuals outliers are regular so we don’t advise it.
+All analyses checked an important critera: the dispersion of residuals is regular so, more broadly we don’t 
+advise changing the distribution for any of these models.</p>
+
+<p>You can see in the last part of the file ‘Red flags - advice’, some advices to improve your models but the issues 
+detected in models can come from different reasons and may be hard to correct. Hence, if you really want to improve 
+your models, you can try to get a tighter geographical resolution in order to get more locations and sites to keep 
+the random effect on <code class="language-plaintext highlighter-rouge">site</code>. You can also try to remove biased observations from your original dataset by finding out 
+more about the sampling methods used (years with different methods or different fleet for example).</p>
+
+<h4 id="summary-1">Summary</h4>
+
+<p>With all this interpretation made from raw results, we still don’t really visualize these results clearly. For this, it 
+could be nice to get a graphical representation of the GLMMs results and the interest variable.
+Here, for these models, the plots we’ll create will certainly be more trust-worthy than the previous Community analyses.
+Hence, more interesting to look at.</p>
+
+<h3 id="create-and-read-plots-1">Create and read plots</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-create-plots-from-species-population-metrics-file-and-glmm-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create plots from Species-Population metrics file and GLMM results</h3>
+
+  <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2"><strong>Create a plot from GLM data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2</span></span>  with following parameters:</p>
+  <ul>
+    <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input glm results file”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #EVHOE #unitobs</code> <code class="language-plaintext highlighter-rouge">#BITS #Concatenate #unitobs</code>
+<code class="language-plaintext highlighter-rouge">#Concatenate #SWCIBTS #unitobs</code> ‘GLM - results from your population analysis’ data files</li>
+    <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Data table used for glm”</em>: <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> metrics data files</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Unitobs table used for glm”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate #unitobs</code> data file</li>
+  </ul>
+
+  <p>The three outputs must be a data collection.</p>
+
+</blockquote>
+
+<p>See the previous part 3. 1. 2. Create and read plots to get details on output PNG files.
+As the interest variable is “Abundance”, the plot with a purple line represents raw abundance: the sum of
+all abundances of the studied species for one year.</p>
+
+<figure id="figure-4"><img src="../../images/PAMPA-toolsuite-tutorial/BITS.png" alt="BITS population analysis plots" /><figcaption><span class="figcaption-prefix">Figure 4:</span> BITS population analysis plots</figcaption></figure>
+
+<p>On the <code class="language-plaintext highlighter-rouge">Gadus morhua</code> plots, only small variations of the abundance occured between 1991 and 2020 apart for year 1995
+where we see a huge augmentation for the estimated value and the raw abundance (value almost tripled). As the values 
+are coming back to an average range of values the following year, there should be some bias or even a count or 
+typing mistake in the dataset.</p>
+
+<blockquote class="question">
+  <h3 id="question-question-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>How can we see if there is a mistake in the dataframe? How can we deal with it?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>To see if there is an abnormal value in the <code class="language-plaintext highlighter-rouge">number</code> field representing the CPUE abundance we’ll use 
+the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1"><strong>Sort data in ascending or descending order</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sort_header_tool/1.1.1</span></span><br />
+tool in the “Text Manipulation” tool collection with following parameters :</p>
+    <ul>
+      <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Sort Query”</em>: <code class="language-plaintext highlighter-rouge">#BITS</code> ‘Calculate presence absence table’ data file</li>
+      <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      <li><em>“1: Column selections”</em>
+        <ul>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“on column”</em>: <code class="language-plaintext highlighter-rouge">Column: 4</code></li>
+          <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“in”</em>: <code class="language-plaintext highlighter-rouge">Descending order</code></li>
+          <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Flavor”</em>: <code class="language-plaintext highlighter-rouge">Fast numeric sort (-n)</code></li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output unique values”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Ignore case”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        </ul>
+      </li>
+    </ul>
+
+    <p>The first value should be a measure of <code class="language-plaintext highlighter-rouge">Gadus morhua</code> on year “1995” and location “BITS-23”, this
+value is of <em>‘13253.12023’</em> which is way higher than the next biggest value <em>‘4709.504184’</em>. 
+This value may create bias in the statistical model so, even if we won’t develop it here, you can
+remove this line from the <code class="language-plaintext highlighter-rouge">#BITS</code> ‘Calculate presence absence table’ data file and re-run the model.</p>
+  </blockquote>
+</blockquote>
+
+<p>We see on both plots of <code class="language-plaintext highlighter-rouge">Platichthys flesus</code> and <code class="language-plaintext highlighter-rouge">Pleuronectes platessa</code> that CPUE abundance has significantly increased 
+since 30 years. Both species had a first CPUE abundance increase around 2000 that can be explained by a fleet change in 
+the trawl survey around this time. Then, for <code class="language-plaintext highlighter-rouge">Platichthys flesus</code>, after a decrease in 2003 had a more or less stable 
+CPUE abundance. For <code class="language-plaintext highlighter-rouge">Pleuronectes platessa</code> a second wave of increase occured between 2008 and 2013 to decrease after 2018.</p>
+
+<figure id="figure-5"><img src="../../images/PAMPA-toolsuite-tutorial/EVHOE.png" alt="EVHOE population analysis plots" /><figcaption><span class="figcaption-prefix">Figure 5:</span> EVHOE population analysis plots</figcaption></figure>
+<figure id="figure-6"><img src="../../images/PAMPA-toolsuite-tutorial/SWCIBTS.png" alt="SWCIBTS population analysis plots" /><figcaption><span class="figcaption-prefix">Figure 6:</span> SWCIBTS population analysis plots</figcaption></figure>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, you analyzed abundance data from three trawl surveys with an Essential Biodiversity Variables
+<span class="notranslate">workflow</span>. You learned how to pre-process abundance data with <span class="notranslate">Galaxy</span> and compute Community and Population metrics.
+You know now how to construct a proper GL(M)M easily and interpret its results. The construction of a Generalized
+Linear (Mixed) Model has to be well thought out and may need corrections a posteriori by the use of common tests 
+that helps evaluate the quality of your GL(M)M (found in the rating file).</p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Use a Essential Biodiversity Variables workflow</p>
+</li>
+                            
+                            <li><p>Pre-process abundance data</p>
+</li>
+                            
+                            <li><p>Compute Community and Population Essential Biodiversity Variables</p>
+</li>
+                            
+                            <li><p>Construct a GL(M)M with Essential Biodiversity Variables</p>
+</li>
+                            
+                            <li><p>Interpret (and correct if needed) GL(M)M results</p>
+</li>
+                            
+                            <li><p>Learn about and interpret common tests to evaluate the quality of your GL(M)M</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/ecology#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="EVHOE">MAHE Jean-Claude, 1987 <b>EVHOE EVALUATION HALIEUTIQUE OUEST DE L’EUROPE</b>.</span>
+    
+    
+    <a href="https://doi.org/10.18142/8">10.18142/8</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://campagnes.flotteoceanographique.fr/series/8/">https://campagnes.flotteoceanographique.fr/series/8/</a>
+      
+    
+
+</li>
+<li><span id="BITS"><b>Fish trawl survey: ICES Baltic International Trawl Survey for commercial fish species. ICES Database of trawl surveys (DATRAS)</b>, 2010.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://ecosystemdata.ices.dk">http://ecosystemdata.ices.dk</a>
+      
+    
+
+</li>
+<li><span id="SWCIBTS"><b>DATRAS Scottish West Coast Bottom Trawl Survey (SWC-IBTS)</b>, 2013.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://gis.ices.dk/geonetwork/srv/api/records/a38fb537-0ec4-40bb-a3de-750b5dd3829a">https://gis.ices.dk/geonetwork/srv/api/records/a38fb537-0ec4-40bb-a3de-750b5dd3829a</a>
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite (Ecology)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Coline Royaux, 2020 <b>Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite (Galaxy Training Materials)</b>. <a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{ecology-PAMPA-toolsuite-tutorial,
+    author = "Coline Royaux",
+    title = "Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite (Galaxy Training Materials)",
+    year = "2020",
+    month = "11",
+    day = "19"
+    url = "\url{/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Coline Royaux)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
