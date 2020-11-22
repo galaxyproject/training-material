@@ -26,9 +26,14 @@ contributors:
 <!-- This is a comment. -->
 
 
-__Healthy soils__ are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop strategies to __mitigate ecosystem damage__. Some of the species considered as __key bioindicators__ of soil quality are those belonging to the genera _Rhizobium_ and _Nitrosomonas_, because they are very sensitive to agro-industrial compounds.
+__Healthy soils__ are an essential element in maintaining the planet’s ecological balance. That is why their protection must be considered a priority in order to guarantee the well-being of humanity. The alteration of microbial populations often precedes changes in the physical and chemical properties of soils, so monitoring their condition can serve to predict their future evolution, allowing to develop strategies to __mitigate ecosystem damage__.
 
-![Bacterial bioindicators](../../images/metagenomics-nanopore/bioindicators.jpg "Relationship between bacterial community composition and soil parameters {% cite Hermans2016 %}.")
+Advances in sequencing technologies have opened up the possibility of using the study of taxa present in bacterial communities as indicators of soil condition. For such an approach to be possible, variations in microbial populations need to be less affected by spatial factors than by human-derived alterations, which has been confirmed by various investigations ({% cite Hermans2016 %}, {% cite Fierer2006 %}).
+
+Among the environmental variables that have shown the greatest correlation with alterations in the composition of bacterial communities are soil pH, the carbon-nitrogen ratio (C:N), and the co-concentrations of Olsen P (a measure of plant available phosphorus), aluminium and copper (Fig. 1).
+
+
+![Bacterial bioindicators](../../images/metagenomics-nanopore/bioindicators.jpg "Relationship between bacterial community composition and soil parameters. The radius of each circle represents the taxon abundance that was accounted for by each soil variable, based on adjusted R-squared values from distance-based multivariate multiple regression analyses. The univariate relationship between the abundance of each taxon and soil variables, calculated using Pearson’s correlation coefficient, is represented by the color of the circle. Phyla or classes are ordered according to overall abundance in all the samples, from most abundant (top) to least abundant (bottom). Image published originally in {% cite Hermans2016 %}.")
 
 
 On the other hand, many species of microorganisms establish complex __symbiotic relationships__ with plant organisms. The fraction of the substrate that is directly influenced by root secretions and associated microorganism is known as __rhizosphere__. Thus, for example, bacteria of the genus _Bacillus_, _Pseudomonas_ or _Burkholderia_ appear associated with the plant roots, protecting them from pathogenic microorganisms.
@@ -130,7 +135,7 @@ __FastQC__ is one of the most widely used tools to __check the quality__ of the 
 >
 {: .hands_on}
 
-{% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} provides information on various parameters, such as the range of quality values across all bases at each position. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} allows summarizing the output of different outputs from {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %}.
+__FastQC__ provides information on various parameters, such as the range of quality values across all bases at each position. __MultiQC__ allows summarizing the output of different outputs from __FastQC__.
 
 ![FastQC plots length](../../images/metagenomics-nanopore/fastqc_sequence_length_distribution_plot.png "Sequence length distribution")
 
@@ -228,7 +233,7 @@ To increase the specificity of the analysis, we will select the reads with lengt
 
 # Re-evaluate datasets quality
 
-After processing the sequences, we are going to analyze them again using {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} and {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} to see if we have managed to correct the anomalies that we had detected.
+After processing the sequences, we are going to analyze them again using __FastQC__ and __MultiQC__ to see if we have managed to correct the anomalies that we had detected.
 
 > ### {% icon hands_on %} Hands-on: Quality check
 >
@@ -257,9 +262,15 @@ One of the key steps in metagenomic data analysis is to identify the taxon to wh
 
 ## Taxonomic classification with Kraken2
 
-To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}), a tool that assigns labels by examining the k-mers within a sequence and querying them in a database that uses a compact hash table for algorithm efficiency ({% cite deKoning2020 %}).
+To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_2019 %}). This tool uses the minimizer method to sample the k-mers (all the read's subsequences of length _k_) in a deterministic fashion in order to reduce memory constumption and processing time. In addition, it masks low-complexity sequences from reference sequences by using __dustmasker__.
 
-![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kramer2 sequence classification algorithm ({% cite Wood2014 %})")
+
+> ### {% icon comment %} Comments
+> __Kraken2__ uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of _s_ spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer. 
+> You can find more information about the Kraken2 algorithm in the paper [_Improved metagenomic analysis with Kraken 2_](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0).
+{: .comment}
+
+![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in {% cite Wood2014 %}")
 
 For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 
@@ -283,23 +294,10 @@ For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It
 {: .hands_on}
 
 
-> ### {% icon question %} Questions
->
-> What does the term k-mer mean?
-> 
->
-> > ### {% icon solution %} Solution
-> >
-> >  The term k-mer refers to all the sequence's subsequences of length _k_. For example, the sequence `GATACA` would have six monomers (`G`,`A`,`T`,`A`,`C`,`A`), five 2-mers (`GA`,`AT`,`TA`,`AC`,`CA`), four 3-mers (`GAT`,`ATA`,`TAC`,`ACA`), three 4-mer (`GATA`,`ATAC`,`TACA`) and two 5-mer (`GATAC`,`ATACA`).
-> >
-> {: .solution}
->
-{: .question}
-
 
 # Analyze taxonomic assigment
 
-Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the {% tool [Krona pie chart](toolshed.g2.bx.psu.edu/repos/crs4/taxonomy_krona_chart/taxonomy_krona_chart/2.7.1) %} tool ({% cite Ondov_2011 %}). But before that, we need to adjust the format of the data output from {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %}.
+Once we have assigned the corresponding taxa to each sequence, the next step is to properly visualize the data, for which we will use the __Krona pie chart__ tool ({% cite Ondov_2011 %}). But before that, we need to adjust the format of the data output from __Kraken2__.
 
 > ### {% icon hands_on %} Hands-on: Adjust dataset format
 >
