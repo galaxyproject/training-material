@@ -1,19 +1,19 @@
 ---
 layout: tutorial_hands_on
 
-title: 16S Microbial analysis with nanopore data
+title: 16S Microbial analysis with Nanopore data
 zenodo_link: https://zenodo.org/record/4274812
 questions:
 - How can we analyse the health status of the soil?
 - How do plants modify the composition of microbial communities?
 objectives:
-- Use nanopore data for studying soil metagenomics
-- Analyze and preprocess nanopore reads
+- Use Nanopore data for studying soil metagenomics
+- Analyze and preprocess Nanopore reads
 - Use Kraken2 to assign a taxonomic labels
 time_estimation: 2H
 key_points:
-- We learned to use nanopore data for analyzing the health status of the soil
-- We preprocessed nanopore sequences in order to improve their quality
+- We learned to use MinION Nanopore data for analyzing the health status of the soil
+- We preprocessed Nanopore sequences in order to improve their quality
 contributors:
 - gallardoalba
 
@@ -267,10 +267,10 @@ To perform the taxonomic classification we will use __Kraken2__ ({% cite Wood_20
 
 > ### {% icon comment %} Comments
 > __Kraken2__ uses a compact hash table, a probabilistic data structure that allows for faster queries and lower memory requirements. It applies a spaced seed mask of _s_ spaces to the minimizer and calculates a compact hash code, which is then used as a search query in its compact hash table; the lowest common ancestor (LCA) taxon associated with the compact hash code is then assigned to the k-mer. 
-> You can find more information about the Kraken2 algorithm in the paper [_Improved metagenomic analysis with Kraken 2_](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0).
+> You can find more information about the __Kraken2__ algorithm in the paper [_Improved metagenomic analysis with Kraken 2_](https://genomebiology.biomedcentral.com/articles/10.1186/s13059-019-1891-0).
 {: .comment}
 
-![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in {% cite Wood2014 %}")
+![Taxonomic classification](../../images/metagenomics-nanopore/kmers-kraken.jpg "Kraken2 sequence classification algorithm. To classify a sequence, each l-mer is mapped to the lowest common ancestor (LCA) of the genomes that contain that l-mer in a database. In the classification tree, each node has a weight equal to the number of l-mers in the sequence associated with the node’s taxon. Image originally published in {% cite Wood2014 %}.")
 
 For this tutorial, we will use the __SILVA database__ ({% cite Quast2012 %}). It includes over 3.2 million 16S rRNA sequences from the _Bacteria_, _Archaea_ and _Eukaryota_ domains.
 
@@ -348,6 +348,5 @@ Let's take a look at the result. Using the search bar we can check if certain ta
 {: .question}
 
 # Conclusion
-{:.no_toc}
 
 In this tutorial we used MinION Nanopore sequencing data to study the health status of soil samples and the structure of bacterial populations. The results indicate that the soil suffers some degree of erosion as a result of their exposure to agrochemicals. We have also been able to study how the composition of microbial communities is modified in presence of plant organisms.
