@@ -28,6 +28,8 @@ requirements:
       - ansible
   - type: "none"
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+
+galaxy_version: 20.09
 ---
 
 # Overview
@@ -243,10 +245,29 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    - src: uchida.miniconda
 >      version: 0.3.0
 >    - src: usegalaxy_eu.galaxy_systemd
->      version: 0.1.2
+>      version: 0.1.4
 >    - src: usegalaxy_eu.certbot
 >      version: 0.1.3
 >    ```
+>
+>    > ### {% icon details %} What do each of these roles do?
+>    > We'll cover it in more detail as we use each of the roles but briefly:
+>    > Role | Purpose
+>    > ---- | -----
+>    > `galaxyproject.galaxy` | Installs and configures the Galaxy application
+>    > `galaxyproject.nginx` | Sets up a webserver
+>    > `galaxyproject.postgresql` | Installs our database, PostgreSQL
+>    > `natefoo.postgresql_objects` | Creates users and databases within PostgreSQL
+>    > `geerlingguy.pip` | Ensures that pip is available
+>    > `uchida.miniconda` | Installs miniconda, which is used by Galaxy
+>    > `usegalaxy_eu.galaxy_systemd` | Supplies systemd service units for Galaxy
+>    > `usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates
+>    {: .details}
+>
+>    > ### {% icon details %} Role version vs Galaxy version?
+>    > Q: Is there a correspondence between galaxy role versions and galaxy versions?
+>    > A: They  are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
+>    {: .details}
 >
 > 3. In the same directory, run:
 >
@@ -537,6 +558,33 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
 >    {: .comment}
 >
+>    > ### {% icon tip %} Why didn't we use `-i` in our ansible command?
+>    > In our `ansible.cfg` file we specified the inventory was stored in a file called `hosts`:
+>    >
+>    > ```ini
+>    > [defaults]
+>    > interpreter_python = /usr/bin/python3
+>    > inventory = hosts
+>    > retry_files_enabled = false
+>    > ```
+>    {: .tip}
+>
+>    > ### {% icon question %} I get an error: "skipping: no hosts matched"
+>    > There can be multiple reasons this happens, so we'll step through all of them.
+>    > We'll start by assuming you're running the command
+>    >
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    >
+>    > The following things can cause issues:
+>    >
+>    > 1. Within your `galaxy.yml`, you've referred to a host group that doesn't exist or is misspelled. Check the `hosts: galaxyservers` to ensure it matches the host group defined in the `hosts` file.
+>    > 2. Vice-versa, the group in your `hosts` file should match the hosts selected in the playbook, `galaxy.yml`.
+>    > 3. If neither of these are the issue, it's possible Ansible doesn't know to check the `hosts` file for the inventory. Make sure you've specified `inventory = hosts` in your `ansible.cfg`.
+>    >
+>    {: .question}
+>
 > 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
 >
 >    - `/etc/postgresql`
@@ -685,7 +733,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    We need to set the following variables at the top level:
 >
->    {% raw %}
 >    Variable                     | Value                                     | Purpose
 >    ---                          | -----                                     | ---
 >    `galaxy_create_user`         | `true`                                    | Instruct the role to create a Galaxy user
@@ -694,12 +741,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_20.05`                           | The git reference to check out, which in this case is the branch for Galaxy Release 20.05
+>    `galaxy_commit_id`           | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
 >    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `miniconda_prefix`           | `{{ galaxy_tool_dependency_dir }}/_conda` | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
+>    `miniconda_prefix`           | {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`          | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
->    {% endraw %}
 >
 >    > ### {% icon tip %} Different Galaxy Releases!
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -809,7 +855,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > How does your current group variables file look?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > {% raw %}
 >    > > ```yaml
 >    > > ---
 >    > > # python3 support
@@ -831,9 +876,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_layout: root-dir
 >    > > galaxy_root: /srv/galaxy
 >    > > galaxy_user: {name: galaxy, shell: /bin/bash}
->    > > galaxy_commit_id: release_20.05
+>    > > galaxy_commit_id: release_{{ page.galaxy_version }}
 >    > > galaxy_config_style: yaml
 >    > > galaxy_force_checkout: true
+>    > > {% raw %}
 >    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    > > miniconda_version: "4.7.12"
 >    > >
@@ -1538,6 +1584,17 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon tip %} Unit galaxy.service could not be found.
+>    > If you see this message:
+>    >
+>    > ```
+>    > $ systemctl status galaxy
+>    > Unit galaxy.service could not be found.
+>    > ```
+>    >
+>    > when running `systemctl status galaxy`, it means you didn't install the `galaxy_systemd` role, or forgot to re-run the playbook after adding it. Double check the first step of this hands-on section.
+>    {: .tip}
+>
 > 6. Some things to note:
 >
 >    1. Refreshing the page before Galaxy has restarted will hang until the process is ready, a nice feature of uWSGI
@@ -1867,7 +1924,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_20.05/lib/galaxy/config/sample/job_conf.xml.sample_basic)), though there is a symlink to the file in `/srv/galaxy/server/config`.
+One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_{{ page.galaxy_version }}/lib/galaxy/config/sample/job_conf.xml.sample_basic)), though there is a symlink to the file in `/srv/galaxy/server/config`.
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
