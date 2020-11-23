@@ -35,9 +35,6 @@ All users have one 'current' history, which can be thought of as **a workspace**
 bioinformatics terms. Your current history is displayed in the right hand side of the main 'Analyze Data' Galaxy page in
 what is called the history panel.
 
-
-
-
 ![Current history buttons](../../images/history.png "Galaxy History is simply the right panel of the interface")
 
 
@@ -63,12 +60,12 @@ clear you sessions - that history will be lost!** We can not recover it for you 
 
 Above the current history panel are three buttons: the refresh, history options, and 'view all histories' button.
 
-The 'refresh' button will entirely reload the history being viewed. This can be helpful if you believe the history
-interface needs to be updated or isn't updating properly.
+- The 'refresh' button will entirely reload the history being viewed. This can be helpful if you believe the history interface needs to be updated or isn't updating properly.
+- The 'create new history' button will create an empty history.
+- The 'view all histories' button sends you to the interface for managing multiple histories.
+- The 'history options' button opens the history options menu which allows you to perform history-related tasks.
 
-The 'history options' button opens the history options menu which allows you to perform history-related tasks.
 
-The 'view all histories' button sends you to the interface for managing multiple histories
 
 ## History Information
 
