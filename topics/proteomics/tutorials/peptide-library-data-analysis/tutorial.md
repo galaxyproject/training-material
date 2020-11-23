@@ -101,7 +101,7 @@ In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libr
 
 The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher's plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.
 
-## Assessing the clustering of peptides based on 3D scatter plot and CTD descriptors
+## Assessing the relation between peptide features by 3D scatter plot
 
 ### Calculating Sequence Property-Based Descriptors 
 
