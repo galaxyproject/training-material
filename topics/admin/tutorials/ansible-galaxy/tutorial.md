@@ -737,7 +737,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ---                          | -----                                     | ---
 >    `galaxy_create_user`         | `true`                                    | Instruct the role to create a Galaxy user
 >    `galaxy_separate_privileges` | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
->    `galaxy_manage_paths`        | `true`                                    | Instruct thre role to create the needed directories.
+>    `galaxy_manage_paths`        | `true`                                    | Instruct the role to create the needed directories.
 >    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
@@ -745,7 +745,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`           | {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
->    `miniconda_version`          | `4.6.14`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_version`          | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
 >
 >    > ### {% icon tip %} Different Galaxy Releases!
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -770,7 +770,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
->    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
 >    > ### {% icon tip %} Data storage
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
@@ -881,7 +881,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > > galaxy_force_checkout: true
 >    > > {% raw %}
 >    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    > > miniconda_version: "4.6.14"
+>    > > miniconda_version: "4.7.12"
 >    > >
 >    > > galaxy_config:
 >    > >   galaxy:
@@ -1648,7 +1648,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ group_vars/galaxyservers.yml
 >    @@ -29,7 +29,7 @@
 >         check_migrate_tools: false
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         tool_data_path: {% raw %}"{{ galaxy_mutable_data_dir }}/tool-data"{% endraw %}
 >       uwsgi:
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080

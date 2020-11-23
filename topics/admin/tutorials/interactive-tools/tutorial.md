@@ -201,7 +201,7 @@ When an Interactive Tool's Docker container starts, it will be assigned a random
 - Requests for Galaxy are delivered from nginx to Galaxy over a UNIX domain socket (uWSGI protocol)
 - Requests for Interactive Tools are delivered from nginx to the Interactive Tools Proxy over (by default) **port 8000** (http)
   - GxIT http requests are forwarded by the proxy to Docker on the node on the container's (randomly assigned) **port 32768**
-  - GxIT http requests are again forwarded by Docker to Jupyter on its in-container "published" **port 8888*
+  - GxIT http requests are again forwarded by Docker to Jupyter on its in-container "published" **port 8888**
 
 [//]: # The source for this figure can be found at: https://docs.google.com/presentation/d/1_4PtfM6A4mOxOlgGh6OGWvzFcxD1bdw4CydEWtm5n8k/
 
@@ -222,33 +222,31 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >
 >    The relevant variables to set for this role are:
 >
->    | Variable                      | Type          | Description                                                           |
->    | ----------                    | -------       | -------------                                                         |
->    | `gie_proxy_dir`               | path (string) | Path of directory into which the proxy application will be installed  |
->    | `gie_proxy_git_version`       | string        | Git reference to clone                                                |
->    | `gie_proxy_setup_nodejs`      | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
->    | `gie_proxy_virtulenv_command` | string        | Command to create virtualenv when using `nodeenv` method              |
->    | `gie_proxy_nodejs_version`    | string        | Version of Node.js to install if using `nodeenv` method               |
->    | `gie_proxy_virtualenv`        | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
->    | `gie_proxy_setup_service`     | string        | Whether to configure the proxy as a service, only option is `systemd` |
->    | `gie_proxy_sessions_path`     | path (string) | Path of Interactive Tools sessions map                                |
+>    | Variable                       | Type          | Description                                                           |
+>    | ----------                     | -------       | -------------                                                         |
+>    | `gie_proxy_dir`                | path (string) | Path of directory into which the proxy application will be installed  |
+>    | `gie_proxy_git_version`        | string        | Git reference to clone                                                |
+>    | `gie_proxy_setup_nodejs`       | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
+>    | `gie_proxy_virtualenv_command` | string        | Command to create virtualenv when using `nodeenv` method              |
+>    | `gie_proxy_nodejs_version`     | string        | Version of Node.js to install if using `nodeenv` method               |
+>    | `gie_proxy_virtualenv`         | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
+>    | `gie_proxy_setup_service`      | string        | Whether to configure the proxy as a service, only option is `systemd` |
+>    | `gie_proxy_sessions_path`      | path (string) | Path of Interactive Tools sessions map                                |
 >
 >    Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
 >    {% raw %}
 >    ```yaml
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
->    gie_proxy_git_version: ie2
+>    gie_proxy_git_version: master
 >    gie_proxy_setup_nodejs: nodeenv
->    gie_proxy_virtulenv_command: "{{ pip_virtualenv_command }}"
+>    gie_proxy_virtualenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"
 >    gie_proxy_virtualenv: /srv/galaxy/gie-proxy/venv
 >    gie_proxy_setup_service: systemd
 >    gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
 >    ```
 >    {% endraw %}
->
->    Note the value of `gie_proxy_git_version` is `ie2`: this is because the default branch only works with Interactive Environments, whereas the `ie2` branch has been updated for Interactive Tools. As Interactive Tools mature, this will likely be merged back to the default branch.
 >
 >    We have chosen to install Node.js using [nodeenv][] because the version in the training image's package manager is fairly old.
 >
@@ -455,7 +453,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 
 > ### {% icon hands_on %} Hands-on: Enabling Interactive Tools in Galaxy
 >
-> 1. Rather than modify the default tool configuration file, we'll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.
+> 1. Rather than modifying the default tool configuration file, we'll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config into our playbook.
 >
 >    If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` (`mkdir -p templates/galaxy/config/`)
 >
@@ -718,7 +716,7 @@ Because we want to maintain dataset privacy, Pulsar is the better choice here. A
 >    ```
 >    {% endraw %}
 >
->    Addiitionally, you will need to set the `galaxy_infrastructure_url` config option:
+>    Additionally, you will need to set the `galaxy_infrastructure_url` config option:
 >
 >    {% raw %}
 >    ```yaml
