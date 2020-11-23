@@ -266,12 +266,20 @@
     {
       "@type": "Person",
       "name": "Coline Royaux"
+    },
+    {
+      "@type": "Person",
+      "name": "Yvan Le Bras"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Coline Royaux"
+    },
+    {
+      "@type": "Person",
+      "name": "Yvan Le Bras"
     }
   ],
   "about": [
@@ -298,7 +306,7 @@
 
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame/colineroyaux/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/colineroyaux" alt="Coline Royaux">Coline Royaux</a>
+<a href="/training-material/hall-of-fame/colineroyaux/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/colineroyaux" alt="Coline Royaux">Coline Royaux</a>, <a href="/training-material/hall-of-fame/yvanlebras/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/yvanlebras" alt="Yvan Le Bras">Yvan Le Bras</a>
 
 </div>
 
@@ -414,7 +422,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 19, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 23, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -758,7 +766,7 @@ level you want to take into account in your statistical analysis.</p>
 
   <ol>
     <li>
-      <p><span class="tool" data-tool="Cat1" title="Tested with Cat1"><strong>Concatenate datasets tail-to-head</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Cat1</span></span>  select the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code>
+      <p><span class="tool" data-tool="tp_cat" title="Tested with tp_cat"><strong>Concatenate datasets tail-to-head (cat)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: tp_cat</span></span>  select the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code>
 datasets in <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Datasets to concatenate”</em></p>
 
       <blockquote class="tip">
@@ -797,7 +805,7 @@ and following parameters :
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Concatenated data file</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">By the values being counted</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">With the most common value first</code> so multiple occurences can be seen directly at first lines of the resulting file</li>
       </ul>
     </li>
     <li>If the value <code class="language-plaintext highlighter-rouge">Survey</code> has more than <code class="language-plaintext highlighter-rouge">1</code> occurrence use <span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter data on any column using simple <span class="notranslate">expression</span>s</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span><br />
@@ -808,7 +816,7 @@ with following parameters :
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
 
-      <blockquote class="question">
+      <blockquote class="tip">
         <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
         <p>How many header line(s) is left?
 Use <span class="tool" data-tool="Count1" title="Tested with Count1"><strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Count1</span></span>  and following parameters :</p>
@@ -816,8 +824,24 @@ Use <span class="tool" data-tool="Count1" title="Tested with Count1"><strong>Cou
           <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“from dataset”</em>: <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file</li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Count occurrences of values in column(s)”</em>: <code class="language-plaintext highlighter-rouge">Column: 1</code></li>
           <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
-          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">By the values being counted</code></li>
+          <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How should the results be sorted?”</em>: <code class="language-plaintext highlighter-rouge">With the most common value first</code></li>
         </ul>
+
+        <p>You can also “just” rerun <span class="tool" data-tool="Count1" title="Tested with Count1"><strong>Count occurrences of each record</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Count1</span></span>  job you submit previously updating the input dataset.</p>
+        <blockquote>
+
+          <h3 id="tip-tip-re-running-a-tool"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Re-running a tool</h3>
+        </blockquote>
+
+        <ol>
+          <li><strong>Expand</strong> one of the output datasets of the tool (by clicking on it)</li>
+          <li><strong>Click</strong> re-run <i class="fas fa-sync-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-refresh</span> the tool</li>
+        </ol>
+
+        <p>This is useful if you want to run the tool again but with slightly different paramters, or if you just want to check which parameter setting you used.</p>
+      </blockquote>
+
+      <blockquote class="question">
 
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
@@ -1747,7 +1771,7 @@ that helps evaluate the quality of your GL(M)M (found in the rating file).</p>
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Coline Royaux, 2020 <b>Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite (Galaxy Training Materials)</b>. <a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Coline Royaux, Yvan Le Bras, 2020 <b>Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite (Galaxy Training Materials)</b>. <a href="/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html">/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1762,11 +1786,11 @@ that helps evaluate the quality of your GL(M)M (found in the rating file).</p>
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{ecology-PAMPA-toolsuite-tutorial,
-    author = "Coline Royaux",
+    author = "Coline Royaux and Yvan Le Bras",
     title = "Compute and analyze Essential Biodiversity Variables with PAMPA toolsuite (Galaxy Training Materials)",
     year = "2020",
     month = "11",
-    day = "19"
+    day = "23"
     url = "\url{/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1813,7 +1837,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Coline Royaux)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Coline Royaux, Yvan Le Bras)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
