@@ -222,16 +222,16 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >
 >    The relevant variables to set for this role are:
 >
->    | Variable                      | Type          | Description                                                           |
->    | ----------                    | -------       | -------------                                                         |
->    | `gie_proxy_dir`               | path (string) | Path of directory into which the proxy application will be installed  |
->    | `gie_proxy_git_version`       | string        | Git reference to clone                                                |
->    | `gie_proxy_setup_nodejs`      | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
->    | `gie_proxy_virtulenv_command` | string        | Command to create virtualenv when using `nodeenv` method              |
->    | `gie_proxy_nodejs_version`    | string        | Version of Node.js to install if using `nodeenv` method               |
->    | `gie_proxy_virtualenv`        | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
->    | `gie_proxy_setup_service`     | string        | Whether to configure the proxy as a service, only option is `systemd` |
->    | `gie_proxy_sessions_path`     | path (string) | Path of Interactive Tools sessions map                                |
+>    | Variable                       | Type          | Description                                                           |
+>    | ----------                     | -------       | -------------                                                         |
+>    | `gie_proxy_dir`                | path (string) | Path of directory into which the proxy application will be installed  |
+>    | `gie_proxy_git_version`        | string        | Git reference to clone                                                |
+>    | `gie_proxy_setup_nodejs`       | string        | Whether to install Node.js, options are `package` and `nodeenv`       |
+>    | `gie_proxy_virtualenv_command` | string        | Command to create virtualenv when using `nodeenv` method              |
+>    | `gie_proxy_nodejs_version`     | string        | Version of Node.js to install if using `nodeenv` method               |
+>    | `gie_proxy_virtualenv`         | path (string) | Path of virtualenv into which nodeenv/Node.js/npm will be installed   |
+>    | `gie_proxy_setup_service`      | string        | Whether to configure the proxy as a service, only option is `systemd` |
+>    | `gie_proxy_sessions_path`      | path (string) | Path of Interactive Tools sessions map                                |
 >
 >    Add the following lines to your `group_vars/galaxyservers.yml` file:
 >
@@ -240,7 +240,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
 >    gie_proxy_git_version: master
 >    gie_proxy_setup_nodejs: nodeenv
->    gie_proxy_virtulenv_command: "{{ pip_virtualenv_command }}"
+>    gie_proxy_virtualenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"
 >    gie_proxy_virtualenv: /srv/galaxy/gie-proxy/venv
 >    gie_proxy_setup_service: systemd
