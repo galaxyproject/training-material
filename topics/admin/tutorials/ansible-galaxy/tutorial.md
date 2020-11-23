@@ -724,7 +724,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
->    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >
 >    > ### {% icon tip %} Data storage
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
@@ -1591,7 +1591,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ group_vars/galaxyservers.yml
 >    @@ -29,7 +29,7 @@
 >         check_migrate_tools: false
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         tool_data_path: {% raw %}"{{ galaxy_mutable_data_dir }}/tool-data"{% endraw %}
 >       uwsgi:
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080
