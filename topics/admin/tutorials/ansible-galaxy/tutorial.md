@@ -690,7 +690,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ---                          | -----                                     | ---
 >    `galaxy_create_user`         | `true`                                    | Instruct the role to create a Galaxy user
 >    `galaxy_separate_privileges` | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
->    `galaxy_manage_paths`        | `true`                                    | Instruct thre role to create the needed directories.
+>    `galaxy_manage_paths`        | `true`                                    | Instruct the role to create the needed directories.
 >    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
 >    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.

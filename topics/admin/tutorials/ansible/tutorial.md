@@ -398,7 +398,7 @@ Now that you've done this, here are some starting points for exploration:
 
 ## Facts
 
-In the last step of the last hands-on, you ran your playbook. The first `TASK` that was executed was not one that you had written, it read:
+In the last step of the last hands-on, you ran your playbook. The first `TASK` that was executed was not one that you had written, it reads:
 
 ```
 TASK [Gathering Facts] *********************************************************

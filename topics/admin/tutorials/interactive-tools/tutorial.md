@@ -201,7 +201,7 @@ When an Interactive Tool's Docker container starts, it will be assigned a random
 - Requests for Galaxy are delivered from nginx to Galaxy over a UNIX domain socket (uWSGI protocol)
 - Requests for Interactive Tools are delivered from nginx to the Interactive Tools Proxy over (by default) **port 8000** (http)
   - GxIT http requests are forwarded by the proxy to Docker on the node on the container's (randomly assigned) **port 32768**
-  - GxIT http requests are again forwarded by Docker to Jupyter on its in-container "published" **port 8888*
+  - GxIT http requests are again forwarded by Docker to Jupyter on its in-container "published" **port 8888**
 
 [//]: # The source for this figure can be found at: https://docs.google.com/presentation/d/1_4PtfM6A4mOxOlgGh6OGWvzFcxD1bdw4CydEWtm5n8k/
 
@@ -455,7 +455,7 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 
 > ### {% icon hands_on %} Hands-on: Enabling Interactive Tools in Galaxy
 >
-> 1. Rather than modify the default tool configuration file, we'll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.
+> 1. Rather than modifying the default tool configuration file, we'll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config into our playbook.
 >
 >    If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` (`mkdir -p templates/galaxy/config/`)
 >
@@ -718,7 +718,7 @@ Because we want to maintain dataset privacy, Pulsar is the better choice here. A
 >    ```
 >    {% endraw %}
 >
->    Addiitionally, you will need to set the `galaxy_infrastructure_url` config option:
+>    Additionally, you will need to set the `galaxy_infrastructure_url` config option:
 >
 >    {% raw %}
 >    ```yaml
