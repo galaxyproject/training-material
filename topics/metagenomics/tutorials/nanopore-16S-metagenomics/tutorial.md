@@ -110,7 +110,7 @@ Before starting to work on our datasets, it is necessary to assess their quality
 
 > ### {% icon details %} FASTQ sequence quality format
 >
-> FASTQ format is a text-based format for storing both a biological sequence and its corresponding quality scores. Both the sequence letter and the quality score are encoded with a single ASCII character for brevity. You can find more info in the [Wikipedia article](FASTQ format).
+> FASTQ format is a text-based format for storing both a biological sequence and its corresponding quality scores. Both the sequence letter and the quality score are encoded with a single ASCII character for brevity. You can find more info in the [Wikipedia article](https://en.wikipedia.org/wiki/FASTQ_format).
 >
 {: .details}
 
