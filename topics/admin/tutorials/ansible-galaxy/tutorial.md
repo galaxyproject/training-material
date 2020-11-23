@@ -245,7 +245,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    - src: uchida.miniconda
 >      version: 0.3.0
 >    - src: usegalaxy_eu.galaxy_systemd
->      version: 0.1.2
+>      version: 0.1.4
 >    - src: usegalaxy_eu.certbot
 >      version: 0.1.3
 >    ```
