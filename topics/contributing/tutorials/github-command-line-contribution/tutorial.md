@@ -298,7 +298,7 @@ One of the reviewers of your pull request asked you to add your name after your 
 
 # Check the automatic tests
 
-When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.org/) to be sure that the changes do not break the website, the URL are valid, etc.
+When a pull request is opened, some automated tests are automatically launched on [Travis](http://travis-ci.com/) to be sure that the changes do not break the website, the URL are valid, etc.
 
 On the bottom of your pull request, you can see the status of the tests:
 
@@ -312,7 +312,7 @@ On the bottom of your pull request, you can see the status of the tests:
 
     ![Failed tests](../../images/PR_test_red.png)
 
-    When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.org/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
+    When it is red, you can investigate why by clicking on **Details**. You will be redirected on [Travis](http://travis-ci.com/) where you can see the logs of the tests. Get in touch with us on [Gitter]({{ site.gitter_url }}) if you need help to understand the issue.
 
 - Green (with tick)
 
