@@ -238,7 +238,7 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    {% raw %}
 >    ```yaml
 >    gie_proxy_dir: /srv/galaxy/gie-proxy/proxy
->    gie_proxy_git_version: ie2
+>    gie_proxy_git_version: master
 >    gie_proxy_setup_nodejs: nodeenv
 >    gie_proxy_virtulenv_command: "{{ pip_virtualenv_command }}"
 >    gie_proxy_nodejs_version: "10.13.0"
@@ -247,8 +247,6 @@ The GIE Proxy is written in [Node.js][nodejs] and requires some configuration. T
 >    gie_proxy_sessions_path: "{{ galaxy_mutable_data_dir }}/interactivetools_map.sqlite"
 >    ```
 >    {% endraw %}
->
->    Note the value of `gie_proxy_git_version` is `ie2`: this is because the default branch only works with Interactive Environments, whereas the `ie2` branch has been updated for Interactive Tools. As Interactive Tools mature, this will likely be merged back to the default branch.
 >
 >    We have chosen to install Node.js using [nodeenv][] because the version in the training image's package manager is fairly old.
 >
