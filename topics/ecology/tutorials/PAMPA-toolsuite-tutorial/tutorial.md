@@ -25,6 +25,7 @@ key_points:
 - Learn about and interpret common tests to evaluate the quality of your GL(M)M
 contributors:
 - colineroyaux
+- yvanlebras
 
 ---
 
@@ -228,7 +229,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 
 > ### {% icon hands_on %} Hands-on: Data files concatenation
 >
-> 1. {% tool [Concatenate datasets tail-to-head](Cat1) %} select the three `#BITS`, `#EVHOE` and `#SWCIBTS`
+> 1. {% tool [Concatenate datasets tail-to-head (cat)](tp_cat) %} select the three `#BITS`, `#EVHOE` and `#SWCIBTS`
 >    datasets in {% icon param-files %} *"Datasets to concatenate"*
 > 
 >    {% include snippets/select_multiple_datasets.md %} 
@@ -242,7 +243,7 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    - {% icon param-file %} *"from dataset"*: `#Concatenate` Concatenated data file
 >    - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    - {% icon param-select %} *"Delimited by"*: `Tab`
->    - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
+>    - {% icon param-select %} *"How should the results be sorted?"*: `With the most common value first` so multiple occurences can be seen directly at first lines of the resulting file
 >
 > 3. If the value `Survey` has more than `1` occurrence use {% tool [Filter data on any column using simple expressions](Filter1) %} 
 >    with following parameters :
@@ -256,7 +257,10 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    >   - {% icon param-file %} *"from dataset"*: `#Concatenate` Filtered data file
 >    >   - {% icon param-select %} *"Count occurrences of values in column(s)"*: `Column: 1`
 >    >   - {% icon param-select %} *"Delimited by"*: `Tab`
->    >   - {% icon param-select %} *"How should the results be sorted?"*: `By the values being counted`
+>    >   - {% icon param-select %} *"How should the results be sorted?"*: `With the most common value first`
+>    >
+>    > You can also "just" rerun {% tool [Count occurrences of each record](Count1) %} job you submit previously updating the input dataset.
+>    >    {% include snippets/rerun_tool.md %}
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > One header line is left as the value `Survey` has only `1` occurrence in the first column.
