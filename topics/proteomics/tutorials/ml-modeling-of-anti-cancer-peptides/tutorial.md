@@ -33,10 +33,6 @@ Several computational methods have been proven very useful in the initial screen
 
 A high-quality dataset was retrieved from a previously published work (Hajisharifi et al., 2014). A balanced dataset, 138 ACPs (positive), and 138 non-ACPs (negative) sequences were obtained by randomly removing negative sequences. The length distribution of the positive dataset is somewhat different from the negative dataset.
 
-Data can access in several ways.  
-
-1. Files can be imported from the computer 
-2. Using direct link. 
 
 
 ### Get data
