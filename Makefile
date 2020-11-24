@@ -135,6 +135,10 @@ check-yaml: ## lint yaml files
 	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
 
+check-tool-links: ## lint tool links
+	./bin/check-broken-tool-links.sh
+.PHONY: check-tool-links
+
 check-snippets: ## lint snippets
 	./bin/check-for-trailing-newline
 .PHONY: check-snippets
@@ -151,7 +155,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter check-workflows check-snippets ## run linting checks which do not require a built site
+lint: check-frontmatter check-workflows check-snippets check-tool-links ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
