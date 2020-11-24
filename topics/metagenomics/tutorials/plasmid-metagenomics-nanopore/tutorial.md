@@ -128,7 +128,7 @@ report page.
 
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
-> 1. {% tool [Nanoplot](tool toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+> 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
 >   - {% icon param-select %} *"Select multifile mode"*: `batch`
 >   - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
 >   - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created

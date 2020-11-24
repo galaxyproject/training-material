@@ -39,7 +39,7 @@ contributors:
 {:.no_toc}
 
 
-The practical aims at familiarizing you with running CLM-FATES in Galaxy and analyzing the model results. 
+The practical aims at familiarizing you with running CLM-FATES in Galaxy and analyzing the model results.
 It will also teach you on how to create Galaxy workflow for your CLM-FATES simulations to make your research fully reproducible.
 
 > ### Agenda
@@ -57,7 +57,7 @@ It will also teach you on how to create Galaxy workflow for your CLM-FATES simul
 > FATES needs what we call a "Host Land Model" (HLM) to run and in this tutorial
 > we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
 > of the [Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
-> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+> FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
 > {% cite Fisher2015 %}.
 > And this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
 > The [FATES documentation](https://fates-docs.readthedocs.io/en/latest/index.html) will provide some more insight on FATES too.
@@ -98,7 +98,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 >    As `https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar` and `https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`
 >    are not beautiful names and can give errors for some tools,
->    it is a good practice to change the dataset names by something more meaningful. For example by removing 
+>    it is a good practice to change the dataset names by something more meaningful. For example by removing
 >    `https://zenodo.org/record/4108341/files/` and `https://zenodo.org/record/4126404/files/` to obtain `inputdata_version2.0.0_ALP1.tar`
 >    and `CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar`, respectively.
 >
@@ -124,7 +124,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 
 > ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
 >
-> 1. {% tool [CTSM/FATES-EMERALD](ctsm_fates) %} with the following parameters:
+> 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: select the **inputdata_version2.0.0_ALP1.tar** file from your history
 >    - *Name of your case*: ALP1_exp
 >    - Expand *'Customize the model run period'* to change the default values:
@@ -155,7 +155,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 > 2. Check that the datatype of your outputs (history file) is **netcdf**
 >
->    All the history files contain gridded data values written at specified times during the model run. 
+>    All the history files contain gridded data values written at specified times during the model run.
 >    Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
 >    `ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc` (for non-monthly history files).
 >    Datatypes are, by default, automatically guessed. Here, as the prefix is `.nc`, the format is not always recognized as `netcdf` files.
@@ -173,12 +173,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 > 4. Getting metadata information for CLM-FATES netCDF outputs
 >
->    {% tool [NetCDF xarray Metadata Info](NetCDF+xarray+Metadata+Info) %}  with the following parameters:
+>    {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %}  with the following parameters:
 >    - **Netcdf file**: ALP1_exp.nc
 >    - Click **Execute**
 >
 >    Inspect the generated output files and identify which variables would provide you some insights about canopy transpiration.
-> 
+>
 >    > ### {% icon question %} Questions
 >    >
 >    > 1. What are the short names of the relevant variables? Which one will you pick if you want a result in **mm/s**?
@@ -222,12 +222,12 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 > ### {% icon hands_on %} Hands-on: Inspect dataset
 >
 > 1. Inspect dataset content
-> 
->    Here you can look at the dataset (`ALP1_exp.nc`) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc.) 
+>
+>    Here you can look at the dataset (`ALP1_exp.nc`) and related variables (FSDS, FSA, AREA_TREE, BIOMASS_CANOPY, etc.)
 >
 >    > ### {% icon question %} Question
 >    >
->    > 1. What is the long name of **MORTALITY**? 
+>    > 1. What is the long name of **MORTALITY**?
 >    > 2. What is its physical unit?
 >    >
 >    > > ### {% icon solution %} Solution
@@ -250,7 +250,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    > {: .solution}
 >    {: .question}
 >
-> 
+>
 > 3. Plot the rate of total mortality per PFT (MORTALITY)
 >
 >    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
@@ -278,7 +278,7 @@ so that we can reuse it for any simulations.
 > ### {% icon hands_on %} Hands-on: Select and plot **LEAFC**
 >
 > 1. Select the total carbon in live plant leaves (**LEAFC**)
->    {% tool [NetCDF xarray Selection](NetCDF+xarray+Selection) %} with the following parameters:
+>    {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} with the following parameters:
 >    - **Input netcdf file**: ALP1_exp.nc
 >    - **Tabular of variables**: Metadata infos from ALP1_exp.nc
 >    - **Choose the variable to extract**: LEAFC
@@ -289,7 +289,7 @@ so that we can reuse it for any simulations.
 >    {% include snippets/rename_dataset.md %}
 >
 > 3. Clean date column for plotting
->    {% tool [Replace parts of text ](Replace+parts+of+text) %} with the following parameters:
+>    {% tool [Replace parts of text](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} with the following parameters:
 >    - **File to process**: NetCDF xarray Selection on ALP1_exp.nc
 >    - **Find pattern**:  00:00:00
 >    - **Find-Pattern is a regular expression**: Select *No*
@@ -397,7 +397,7 @@ To share a history, click on the {% icon galaxy-gear %} icon in the history pane
 
 > ### {% icon comment %} Publish your history to https://workflowhub.eu/
 > One step further is to share your workflow on [https://workflowhub.eu](https://workflowhub.eu) where it
-> will be stored in a Galaxy workflow format as well as in [Common Workflow Language](https://www.commonwl.org/). 
+> will be stored in a Galaxy workflow format as well as in [Common Workflow Language](https://www.commonwl.org/).
 > It provides standardised workflow identifiers and descriptions needed for workflow discovery, reuse, preservation, interoperability and monitoring and metadata harvesting using standard protocols.
 > Please note that [https://workflowhub.eu](https://workflowhub.eu) is still under active development.
 {:  .comment}
