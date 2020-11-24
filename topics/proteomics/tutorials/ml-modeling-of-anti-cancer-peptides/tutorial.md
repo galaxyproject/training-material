@@ -152,9 +152,7 @@ In previous steps, we have calculated descriptors and labeled the data as posi
 In this step, we will apply six ML algorithms (LRC, RFC, GBC, DTC, SGDC & SVMC) with 10 fold cross-validation on the training data. In cross-validation, positive and negative data are randomly divided into 10 parts each set has the 10th part of active as well as inactive peptides. The algorithm was trained on the 9 sets and the prediction was made on the remaining 10th set. This process was repeated for every set. Thus the final performance scores are calculated as a mean of all the folds. We used min-max to normalize the data before ML modeling. The entire workflow was applied to the four descriptor sets and accuracy was estimated based on accuracy, precision, recall, f1, and AUC.
 
 
-- **Linear Regression Classifier (LRC)** 
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Linear Regression Classifier (LRC)
 >
 > 1. **PDAUG ML Models** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
