@@ -569,7 +569,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    {: .tip}
 >
->    > ### {% icon question %} I get an error: "skipping: no hosts matched"
+>    > ### {% icon tip %} Error: "skipping: no hosts matched"
 >    > There can be multiple reasons this happens, so we'll step through all of them.
 >    > We'll start by assuming you're running the command
 >    >
@@ -583,7 +583,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > 2. Vice-versa, the group in your `hosts` file should match the hosts selected in the playbook, `galaxy.yml`.
 >    > 3. If neither of these are the issue, it's possible Ansible doesn't know to check the `hosts` file for the inventory. Make sure you've specified `inventory = hosts` in your `ansible.cfg`.
 >    >
->    {: .question}
+>    {: .tip}
 >
 > 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
 >
@@ -744,7 +744,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_commit_id`           | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
 >    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `miniconda_prefix`           | {% raw %}`{{ galaxy_tool_dependency_dir }}/_conda`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
+>    `miniconda_prefix`           | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`          | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
 >
 >    > ### {% icon tip %} Different Galaxy Releases!
@@ -1362,8 +1362,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    {: .code-out.code-max-300}
 >
->    > ### {% icon comment %} Huge wealth of knowledge
->    > You will notice the huge volume of output from this playbook! There are
+>    > ### {% icon comment %} Free knowledge
+>    > You will notice the significant volume of output from this playbook! There are
 >    > many, many steps for deploying a production Galaxy, and there is a vast
 >    > amount of knowledge encoded into these playbooks by the developers and
 >    > admins who use them. While we recommend this, choosing to use Ansible
