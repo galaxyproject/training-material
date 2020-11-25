@@ -74,11 +74,11 @@ A descriptor or feature is the quantitative or a qualitative measure of a prop
 
 > ### {% icon hands_on %} Hands-on: Calculating CTD descriptors for ACPs and non-ACPs
 >
-> 1. {% tool [PDAUG Sequence Property Based Descriptors](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_sequence_property_based_descriptors/6b6aec52638d) %} with the following parameters:
+> 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input fasta file"*: `ACPs.fasta` (output of **Input dataset** {% icon tool %})
 >    - *"DesType"*: `CTD`
 >
-> 1. {% tool [PDAUG Sequence Property Based Descriptors](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_sequence_property_based_descriptors/6b6aec52638d) %} with the following parameters:
+> 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input fasta file"*: `non_ACPs.fasta` (output of **Input dataset** {% icon tool %})
 >    - *"DesType"*: `CTD`
 >
@@ -99,11 +99,11 @@ The class label usually describes samples from two different groups, in our ca
 
 > ### {% icon hands_on %} Hands-on: Adding class labels to the data frames
 >
-> 1. {% tool [PDAUG Add Class Label](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_addclasslabel/2df11ea23f10) %} with the following parameters:
+> 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 1 - CTD (tabular)` (output of **Peptide Sequence Descriptors** {% icon tool %})
 >    - *"Class Label"*: `1`
 >
-> 2. {% tool [PDAUG Add Class Label](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_addclasslabel/2df11ea23f10) %} with the following parameters:
+> 2. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)` (output of **Peptide Sequence Descriptors** {% icon tool %})
 >    - *"Class Label"*: `0`
 >
@@ -117,7 +117,7 @@ In previous steps, we have calculated descriptors and labeled the data as posi
 
 > ### {% icon hands_on %} Hands-on: Merging two data frames
 >
-> 1. {% tool [PDAUG Merge Dataframes](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_merge_dataframes/5bb52d4bf172) %} with the following parameters:
+> 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG Add Class Label on data 3 - (tabular)` (output of **Add Class Label** {% icon tool %}), `PDAUG Add Class Label on data 4 - (tabular)` (output of **Add Class Label** {% icon tool %})
 >
 >
@@ -132,42 +132,42 @@ In this step, we will apply six ML algorithms Linear Regression Classifier (LRC)
 
 > ### {% icon hands_on %} Hands-on: Applying 6 ML algorithms on the training data set
 >
-> 1. {% tool [PDAUG ML Models](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 1. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `LRC`
 >        - *"Select advanced parameters"*: `No, use program defaults.`
 >    - *"Choose the Test method"*: `Internal`
 >    - *"Cross validation"*: `10`
 >
-> 2. {% tool [PDAUG ML Models](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 2. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `RFC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
 >    - *"Choose the Test method"*: `Internal`
 >    - *"Cross validation"*: `10`
 >
-> 3. {% tool [PDAUG ML Models](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 3. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `GBC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
 >    - *"Choose the Test method"*: `Internal`
 >    - *"Cross validation"*: `10`
 >
-> 4. {% tool [PDAUG ML Models](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 4. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `DTC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
 >    - *"Choose the Test method"*: `Internal`
 >    - *"Cross validation"*: `10`
 >
-> 5. {% tool [PDAUG ML Models](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 5. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `SGDC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
 >    - *"Choose the Test method"*: `Internal`
 >    - *"Cross validation"*: `10`
 >
-> 6. {% tool [PDAUG ML Models](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 6. {% tool [PDAUG ML Models](toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 6 and data 5 - (tabular)` (output of **Merge dataframes** {% icon tool %})
 >    - *"Select Machine Learning algorithms"*: `SVMC`
 >        - *"Specify advanced parameters"*: `No, use program defaults.`
@@ -184,7 +184,7 @@ In previous steps we have trained the machine learning models, these models retu
 
 > ### {% icon hands_on %} Hands-on: Merging result as one tabular file
 >
-> 1. {% tool [PDAUG Merge Dataframes](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_merge_dataframes/5bb52d4bf172) %} with the following parameters:
+> 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG ML Models on data 7 - LRC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - RFC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - GBC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - DTC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - SGDC (tabular)` (output of **ML Models** {% icon tool %}), `PDAUG ML Models on data 7 - SVMC (tabular)` (output of **ML Models** {% icon tool %})
 >
 >
@@ -198,7 +198,7 @@ In the final step, a heat map will be generated which represents performance me
 
 > ### {% icon hands_on %} Hands-on: Plotting the results
 >
-> 1. {% tool [PDAUG Basic Plots](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_ml_models/0973f093d98f) %} with the following parameters:
+> 1. {% tool [PDAUG Basic Plots](toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0) %} with the following parameters:
 >    - *"Data plotting method"*: `Heat Map`
 >        - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 18, data 16, and others - (tabular)` (output of **PDAUG Merge Dataframes** {% icon tool %})
 >        - *"Index Column"*: `Algo`

@@ -38,7 +38,7 @@ In this step, we will retrieve the inbuild dataset, which contains anti-microbia
 
 > ### {% icon hands_on %} Hands-on: Fetching inbuild data
 > 
-> 1. {% tool [PDAUG Peptide Data Access](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_peptide_data_access/6c12ca9f5d88) %} with the following parameters:
+> 1. {% tool [PDAUG Peptide Data Access](toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0) %} with the following parameters:
 >    - *"Datasets"*: `AMPvsTM` 
 >
 {: .hands_on}
@@ -50,7 +50,7 @@ In this step, we will be converting and splitting the tabular data file into fas
 
 > ### {% icon hands_on %} Hands-on: Converting tabular data into fasta formate
 > 
-> 1. {% tool [PDAUG TSVtoFASTA](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_tsvtofasta/e272809a193f) %} with the following parameters:
+> 1. {% tool [PDAUG TSVtoFASTA](toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Peptide Data Access - AMPvsTM (tabular)` (output of **PDAUG Peptide Data Access** {% icon tool %})
 >    - *"Data conversion"*: ` WithClassLabel `
 >
@@ -67,7 +67,7 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 
 > ### {% icon hands_on %} Hands-on: Generating a summary plot to assess peptide dataset
 > 
-> 1. {% tool [PDAUG Peptide Sequence Analysis](https://toolshed.g2.bx.psu.edu/view/jay/padaug_peptide_sequence_analysis/aa0416e63597) %} with the following parameters:
+> 1. {% tool [PDAUG Peptide Sequence Analysis](toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0) %} with the following parameters:
 >    - *"Analysis options"*: `Plot Summary`
 >        - {% icon param-file %} *"First input file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
 >        - {% icon param-file %} *"Second input file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
@@ -88,7 +88,7 @@ In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libr
 
 > ### {% icon hands_on %} Hands-on: Generating a Fisher's plot to assess peptide dataset
 > 
-> 1. {% tool [PDAUG Fisher's Plot](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_fishers_plot/548a9bddde6c) %} with the following parameters:
+> 1. {% tool [PDAUG Fisher's Plot](toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"First fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - {% icon param-file %} *"Second fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - *"Label for first population"*: `AMP`
@@ -110,11 +110,11 @@ In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptor
 
 > ### {% icon hands_on %} Hands-on: Calculating descriptors for the peptide dataset
 > 
-> 1. {% tool [PDAUG Sequence Property Based Descriptors](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_sequence_property_based_descriptors/6b6aec52638d) %} with the following parameters:
+> 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - *"Descriptor Type"*: `CTD`
 >
-> 1. {% tool [PDAUG Sequence Property Based Descriptors](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_sequence_property_based_descriptors/6b6aec52638d) %} with the following parameters:
+> 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - *"Descriptor Type"*: `CTD`
 >
@@ -129,11 +129,11 @@ In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptor
 
 > ### {% icon hands_on %} Hands-on: Adding class labels to the data frames
 > 
-> 1. {% tool [PDAUG Add Class Label](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_addclasslabel/2df11ea23f10) %} with the following parameters:
+> 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
 >    - *"Class Label"*: `1`
 >
-> 1. {% tool [PDAUG Add Class Label](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_addclasslabel/2df11ea23f10) %} with the following parameters:
+> 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 3 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
 >    - *"Class Label"*: `0`
 >
@@ -148,7 +148,7 @@ We utilize **PDAUG Merge Dataframes** to merge two dataframes.
 
 > ### {% icon hands_on %} Hands-on: Merging two dataframes
 > 
-> 1. {% tool [PDAUG Merge Dataframes](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_merge_dataframes/5bb52d4bf172) %} with the following parameters:
+> 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG Add Class Label on data 6 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %}), `PDAUG Add Class Label on data 7 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %})
 >
 >
@@ -162,7 +162,7 @@ In this step, we utilize the **PDAUG Basic Plots** tool to compare two libraries
 
 > ### {% icon hands_on %} Hands-on: Generating a scatter plot to assess features
 > 
-> 1. {% tool [PDAUG Basic Plots](https://toolshed.g2.bx.psu.edu/view/jay/pdaug_basic_plots/7d247e27ff11) %} with the following parameters:
+> 1. {% tool [PDAUG Basic Plots](toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0) %} with the following parameters:
 >    - *"Data plotting method"*: `Scatter Plot`
 >        - {% icon param-file %} *"Input file"*: `PDAUG Merge Dataframes on data 9 and data 8 - (tabular)` (output of **PDAUG Merge Dataframes** {% icon tool %})
 >        - *"Scatter Plot type"*: `3D`
