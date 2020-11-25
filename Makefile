@@ -78,7 +78,7 @@ check-frontmatter: ## Validate the frontmatter
 		xargs -n1 bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
-check-html: build ## validate HTML
+_check-html: # Internal
 	$(ACTIVATE_ENV) && \
 	  	htmlproofer \
 	      	--assume-extension \
@@ -88,6 +88,10 @@ check-html: build ## validate HTML
 	      	--file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
 	      	--allow-hash-href \
 	      	./_site
+.PHONY: _check-html
+
+check-html: build ## validate HTML
+	$(MAKE) _check-html
 .PHONY: check-html
 
 check-workflows: ## validate Workflows
@@ -99,7 +103,7 @@ check-references: build ## validate no missing references
 	bash bin/validate-references.sh
 .PHONY: check-references
 
-check-html-internal: build ## validate HTML (internal links only)
+_check-html-internal: # Internal
 	$(ACTIVATE_ENV) && \
 		htmlproofer \
 	      	--assume-extension \
@@ -110,6 +114,10 @@ check-html-internal: build ## validate HTML (internal links only)
 	      	--disable-external \
 	      	--allow-hash-href \
 	      	./_site
+.PHONY: _check-html-internal
+
+check-html-internal: build ## validate HTML (internal links only)
+	$(MAKE) _check-html-internal
 .PHONY: check-html-internal
 
 check-slides: build  ## check the markdown-formatted links in slides

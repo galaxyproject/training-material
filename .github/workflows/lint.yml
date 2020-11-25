@@ -62,3 +62,54 @@ jobs:
         with:
           fetch-depth: 1
       - run: make check-snippets
+
+  build-site:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [2.7]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material
+      - uses: actions/upload-artifact@v2
+        with:
+          name: site-build
+          path: _site
+
+  htmlproofer:
+    needs: build-site
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [2.7]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - run: bundle exec jekyll build --strict_front_matter -d _site/training-material
+      - uses: actions/download-artifact@v2
+        with:
+          name: site-build
+      - run: ls -R
+      - run: make _check-html ACTIVATE_ENV=pwd
