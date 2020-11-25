@@ -2,19 +2,63 @@
 # https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#example-using-a-list-of-events
 on: [pull_request]
 
-
 jobs:
-  linting:
+  setup:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        ruby: [2.4.4]
+        ruby: [2.7]
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
       - name: Install dependencies
-        run: bundle install
-      - name: Run linting
-        run: make lint
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+  lint-frontmatter:
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [2.7]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - run: make check-frontmatter ACTIVATE_ENV=pwd
+
+  lint-workflows:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - run: make check-workflows
+
+  lint-snippets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - run: make check-snippets

@@ -75,7 +75,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
 		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
-	    xargs -n1 ruby bin/validate-frontmatter.rb
+		xargs -n1 bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
 check-html: build ## validate HTML
@@ -91,14 +91,12 @@ check-html: build ## validate HTML
 .PHONY: check-html
 
 check-workflows: ## validate Workflows
-	$(ACTIVATE_ENV) && \
-		bash bin/validate-json.sh && \
-		bash bin/validate-workflow-tags.sh
+	bash bin/validate-json.sh
+	bash bin/validate-workflow-tags.sh
 .PHONY: check-workflows
 
 check-references: build ## validate no missing references
-	$(ACTIVATE_ENV) && \
-		bash bin/validate-references.sh
+	bash bin/validate-references.sh
 .PHONY: check-references
 
 check-html-internal: build ## validate HTML (internal links only)
@@ -128,10 +126,7 @@ check-slides: build  ## check the markdown-formatted links in slides
 .PHONY: check-slides
 
 check-yaml: ## lint yaml files
-	$(ACTIVATE_ENV) && \
-		find . -name "*.yaml" | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint {}" \
-		find topics -name '*.yml' | xargs -L 1 -I '{}' sh -c "yamllint {}" \
-		ruby bin/check-contributors.rb
+	find . -name '*.yaml' | grep -v .github | xargs -L 1 -I '{}' sh -c "yamllint -c .yamllint {}"
 .PHONY: check-yaml
 
 check-snippets: ## lint snippets
@@ -147,15 +142,10 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 	./bin/check-broken-boxes
 .PHONY: check-broken-boxes
 
-check: check-yaml check-frontmatter check-html-internal check-html check-broken-boxes check-slides check-workflows check-references check-snippets ## run all checks
+check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: ## run all linting checks
-	$(MAKE) check-yaml
-	$(MAKE) check-frontmatter
-	$(MAKE) check-workflows
-	$(MAKE) check-references
-	$(MAKE) check-snippets
+lint: check-frontmatter check-workflows check-snippets ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
