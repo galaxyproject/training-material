@@ -271,9 +271,11 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 3. In the same directory, run:
 >
->    ```
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    {: .code-in}
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
@@ -416,7 +418,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >
 >    > > > 10 directories, 5 files
 >    > > > ```
->    > > {: .code-out}
+>    > > {: .code-out.code-max-300}
 >    > >
 >    > {: .solution }
 >    >
@@ -1854,7 +1856,6 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > > ansible-playbook galaxy.yml
 >    > > ```
 >    > {: .code-in}
->
 >    > > ### {% icon code-in %} Output
 >    > > ```
 >    > > ...
@@ -2015,14 +2016,13 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```
 >    {% endraw %}
 >
-> 4. Run the playbook: `ansible-playbook galaxy.yml`. At the very end, you should see output like the following indicating that Galaxy has been restarted:
+> 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```
 >    > > ansible-playbook galaxy.yml
 >    > > ```
 >    > {: .code-in}
->
 >    > > ### {% icon code-in %} Output
 >    > > ```
 >    > > ...
@@ -2053,7 +2053,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    >     </tools>
 >    > </job_conf>
 >    > ```
->    {: .code-out}
+>    {: .code-out.code-max-300}
 >
 {: .hands_on}
 
@@ -2083,7 +2083,17 @@ But not you! You spent the day writing this Ansible playbook that describes your
 
 > ### {% icon hands_on %} Hands-on: Revert the Apocalypse
 >
-> 1. `ansible-playbook galaxy.yml`
+> 1. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
+>
+> 2. Get a hot beverage of your choice while it rebuilds.
+>
+> 3. Congratulate yourself for saving the day.
 >
 {: .hands_on}
 
