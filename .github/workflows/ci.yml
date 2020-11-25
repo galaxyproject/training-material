@@ -26,26 +26,26 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
-  lint-frontmatter:
-    needs: setup
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - run: make check-frontmatter ACTIVATE_ENV=pwd
+  #lint-frontmatter:
+    #needs: setup
+    #runs-on: ubuntu-latest
+    #strategy:
+      #matrix:
+        #ruby: [2.5]
+    #steps:
+      #- uses: actions/checkout@v2
+        #with:
+          #fetch-depth: 1
+      #- uses: actions/setup-ruby@v1
+        #with:
+          #ruby-version: ${{ matrix.ruby }}
+      #- uses: actions/cache@v2
+        #with:
+          #path: vendor/bundle
+          #key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          #restore-keys: |
+            #${{ runner.os }}-gems-
+      #- run: make check-frontmatter ACTIVATE_ENV=pwd
 
   lint-workflows:
     runs-on: ubuntu-latest
@@ -83,32 +83,12 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-gems-
       - run: bundle exec jekyll build --strict_front_matter -d _site/training-material
-      - uses: actions/upload-artifact@v2
-        with:
-          name: site-build
-          path: _site
-
-  htmlproofer:
-    needs: build-site
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
-      - uses: actions/setup-ruby@v1
-        with:
-          ruby-version: ${{ matrix.ruby }}
-      - uses: actions/cache@v2
-        with:
-          path: vendor/bundle
-          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-gems-
-      - uses: actions/download-artifact@v2
-        with:
-          name: site-build
-      - run: ls -R
-      - run: make _check-html ACTIVATE_ENV=pwd
+      - run: |
+          bundle exec htmlproofer \
+            --assume-extension \
+            --http-status-ignore 405,503,999 \
+            --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
+            --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+            --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
+            --allow-hash-href \
+            ./_site
