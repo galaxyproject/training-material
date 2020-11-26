@@ -11,7 +11,7 @@
     (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
     m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
     })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-    ga('create', 'UA-45719423-18' , 'auto');
+    ga('create', '' , 'auto');
     ga('send', 'pageview');
 </script>
         
@@ -513,7 +513,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 26, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 26, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -705,7 +705,7 @@
 
 <h2 id="handlers">Handlers</h2>
 
-<p>A number of the tasks that are executed will trigger a restart of <span class="notranslate">Galaxy</span>. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own <a href="https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change">handler</a>, which we will do in this exercise. As <span class="notranslate">Galaxy</span> continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.</p>
+<p>A number of the tasks that are executed will trigger a restart of <span class="notranslate">Galaxy</span>. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own <a href="https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change">handler</a>, which we will do in this exercise. As <span class="notranslate">Galaxy</span> continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.</p>
 
 <h2 id="defaults">Defaults</h2>
 
@@ -735,7 +735,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
 <ol>
   <li>
-    <p>You have <a href="https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html">Ansible installed</a> on the machine where you will install <span class="notranslate">Galaxy</span></p>
+    <p>You have <a href="https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html">Ansible installed</a> on the machine where you will install <span class="notranslate">Galaxy</span></p>
 
     <blockquote class="comment">
       <h3 id="comment-comment-running-ansible-on-remote-machine"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Running Ansible on remote machine</h3>
@@ -815,7 +815,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
   <ol>
     <li>
-      <p>Create a <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file (next to your playbook) to <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html">configure settings</a> like the inventory file (and save ourselves some typing!), or the Python interpreter to use:</p>
+      <p>Create a <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file (next to your playbook) to <a href="https://docs.ansible.com/ansible/2.9/reference_appendices/config.html">configure settings</a> like the inventory file (and save ourselves some typing!), or the Python interpreter to use:</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
 <span class="py">interpreter_python</span> <span class="p">=</span> <span class="s">/usr/bin/python3</span>
@@ -834,7 +834,7 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
 </code></pre></div>      </div>
 
-      <p>Pipelining will make <a href="https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
+      <p>Pipelining will make <a href="https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
     </li>
     <li>
       <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. If you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="language-plaintext highlighter-rouge">ansible_connection=local</code>.</p>
@@ -1225,7 +1225,7 @@ best practices and knowledge from previous admins codified for you.</p>
       <p>Open <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> with your text editor and set the following:</p>
 
       <ul>
-        <li>Amend the <a href="https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="language-plaintext highlighter-rouge">git</code>, <code class="language-plaintext highlighter-rouge">make</code>, <code class="language-plaintext highlighter-rouge">virtualenv</code>, <code class="language-plaintext highlighter-rouge">tar</code>, and <code class="language-plaintext highlighter-rouge">bzip2</code>.</li>
+        <li>Amend the <a href="https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module">package installation</a> pre-task to install some additional necessary dependencies: <code class="language-plaintext highlighter-rouge">git</code>, <code class="language-plaintext highlighter-rouge">make</code>, <code class="language-plaintext highlighter-rouge">virtualenv</code>, <code class="language-plaintext highlighter-rouge">tar</code>, and <code class="language-plaintext highlighter-rouge">bzip2</code>.</li>
         <li>Add the roles <code class="language-plaintext highlighter-rouge">geerlingguy.pip</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> run as the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
       </ul>
 
@@ -1341,7 +1341,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2020-10-26), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2020-11-26), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -1393,7 +1393,7 @@ postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql
 
         <ol>
           <li>It collects variables defined in group variables and other places</li>
-          <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/latest/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
+          <li>The first task for each machine is the <a href="https://docs.ansible.com/ansible/2.9/modules/setup_module.html"><code class="language-plaintext highlighter-rouge">setup</code> module</a> which gathers facts about the host, which are added to the available variables</li>
           <li>As roles are executed:
             <ol>
               <li>Their defaults are added to the set of variables (the group variables having precedence over these variables)</li>
@@ -2145,7 +2145,7 @@ The client is only re-built when there are changes in the files needed for the <
       <p>The last variable, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>, informs the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role that it should look for a handler with that name, and trigger it whenever changes are made to <span class="notranslate">Galaxy</span>’s configuration. Now we’ll define the handler:</p>
     </li>
     <li>
-      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use systemd to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="language-plaintext highlighter-rouge">handlers:</code> section at the same level as <code class="language-plaintext highlighter-rouge">pre_tasks:</code> and <code class="language-plaintext highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/latest/modules/systemd_module.html">systemd Ansible module</a>. Handlers are structured just like tasks:</p>
+      <p>Now that we have defined a process manager for <span class="notranslate">Galaxy</span>, we can also instruct <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> to use systemd to restart it when <span class="notranslate">Galaxy</span> is upgraded or other configuration changes are made. To do so, open the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook and add a <code class="language-plaintext highlighter-rouge">handlers:</code> section at the same level as <code class="language-plaintext highlighter-rouge">pre_tasks:</code> and <code class="language-plaintext highlighter-rouge">roles:</code>, and add a handler to restart <span class="notranslate">Galaxy</span> using the <a href="https://docs.ansible.com/ansible/2.9/modules/systemd_module.html">systemd Ansible module</a>. Handlers are structured just like tasks:</p>
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- <span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ <span class="notranslate">galaxy</span>.yml
@@ -2914,7 +2914,7 @@ Additionally you can automatically send failing job error reports, even if users
     author = "Helena Rasche and Nate Coraor and Simon Gladman and Saskia Hiltemann and Nicola Soranzo",
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2020",
-    month = "10",
+    month = "11",
     day = "26"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
