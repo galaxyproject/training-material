@@ -252,16 +252,17 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    > ### {% icon details %} What do each of these roles do?
 >    > We'll cover it in more detail as we use each of the roles but briefly:
->    > Role | Purpose
->    > ---- | -----
->    > `galaxyproject.galaxy` | Installs and configures the Galaxy application
->    > `galaxyproject.nginx` | Sets up a webserver
->    > `galaxyproject.postgresql` | Installs our database, PostgreSQL
->    > `natefoo.postgresql_objects` | Creates users and databases within PostgreSQL
->    > `geerlingguy.pip` | Ensures that pip is available
->    > `uchida.miniconda` | Installs miniconda, which is used by Galaxy
->    > `usegalaxy_eu.galaxy_systemd` | Supplies systemd service units for Galaxy
->    > `usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates
+>    >
+>    >  | Role | Purpose |
+>    >  |------|---------|
+>    >  |`galaxyproject.galaxy` | Installs and configures the Galaxy application|
+>    >  |`galaxyproject.nginx` | Sets up a webserver|
+>    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
+>    >  |`natefoo.postgresql_objects` | Creates users and databases within PostgreSQL|
+>    >  |`geerlingguy.pip` | Ensures that pip is available|
+>    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
+>    >  |`usegalaxy_eu.galaxy_systemd` | Supplies systemd service units for Galaxy|
+>    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
 >    {: .details}
 >
 >    > ### {% icon details %} Role version vs Galaxy version?
@@ -1905,7 +1906,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
-## Login to Galaxy
+## Log in to Galaxy
 
 Now that your production-ready Galaxy is running, try registering a new user and logging in!
 
