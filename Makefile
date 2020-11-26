@@ -74,8 +74,7 @@ build: clean ## build files but do not run a server (You can specify FLAGS= to p
 
 check-frontmatter: ## Validate the frontmatter
 	$(ACTIVATE_ENV) && \
-		find topics/ -name tutorial.md -or -name slides.html -or -name metadata.yaml | \
-		xargs -n1 bundle exec ruby bin/validate-frontmatter.rb
+		bundle exec ruby bin/validate-frontmatter.rb
 .PHONY: check-frontmatter
 
 _check-html: # Internal
