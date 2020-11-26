@@ -54,17 +54,14 @@ jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: reviewdog/action-setup@v1
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
       - run: make check-workflows
       - run: make check-snippets
       - name: Lint 🔍👁👁
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          make check-tool-links | reviewdog -reporter=github-pr-review -efm="%f:%l %m"
+          make check-tool-links
 
   build-site:
     needs: setup
