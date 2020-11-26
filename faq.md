@@ -70,7 +70,7 @@ If your organization/consortia/community has its own Galaxy server, then you may
 
 Some topics have a [Docker](https://www.docker.com/) image that can be installed and run on participants' laptops.  These Docker images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant. You will need to [install Docker](https://docs.docker.com/install/).
 
-Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://launch.genome.edu.au/launch) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done.
+Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://www.gvl.org.au/) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done.
 
 If you are already familiar with, and have an account on [Amazon Web Services](https://aws.amazon.com/) then you can also launch a Galaxy server there using [CloudLaunch](https://launch.usegalaxy.org/).
 
@@ -184,7 +184,7 @@ The easiest way to start contributing is to [file an issue]({{ site.github_repos
 
 Perhaps you've been asked to review an interactive tour, or maybe you just want to try one out. The easiest way to run an interactive tour is to use the [Tour builder](https://tailordev.fr/blog/2017/07/19/the-galaxy-tour-builder-extension/) browser extension.
 
-1. Install the Tour Builder extension to your browser ([Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg), [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/galaxy-tour-builder/), [Opera add-on](https://addons.opera.com/en/extensions/details/galaxy-tour-builder/)).
+1. Install the Tour Builder extension to your browser ([Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg), [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/galaxy-tour-builder/)).
 2. Navigate to a Galaxy instance supporting the tutorial. To find which Galaxy instances support each tutorial, please see the dropdown menu next to the tutorial on the training website. Using one of the usegalaxy.\* instances ([Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)
 ) is usually a good bet.
 3. Start the Tour Builder plugin by clicking on the icon in your browser menu bar
