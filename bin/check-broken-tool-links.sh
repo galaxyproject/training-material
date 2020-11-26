@@ -10,7 +10,7 @@ grep -n '\{% tool \[' -R topics | sed 's/:\([0-9]\+\):.*{% tool/:\1/g;s/)\s*%}.*
 # If there was output, exit.
 lines=$(wc -l $output | cut -f1 -d' ')
 if (( lines > 0 )); then
-	echo "ERROR: There were multiple broken tool links. Please see above and correct."
+	(>&2 echo "ERROR: There were multiple broken tool links. Please see above and correct.")
 	exit 1;
 fi
 
