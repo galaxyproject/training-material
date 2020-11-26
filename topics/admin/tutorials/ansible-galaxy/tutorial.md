@@ -753,7 +753,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_layout: root-dir
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
->    +galaxy_commit_id: release_20.09
+>    +galaxy_commit_id: release_{{page.galaxy_version}}
 >    +galaxy_config_style: yaml
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: {% raw %}"{{ galaxy_tool_dependency_dir }}/_conda"{% endraw %}
