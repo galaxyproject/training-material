@@ -472,7 +472,7 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>The practical aims at familiarizing you with running CLM-FATES in <span class="notranslate">Galaxy</span> and analyzing the model results. 
+<p>The practical aims at familiarizing you with running CLM-FATES in <span class="notranslate">Galaxy</span> and analyzing the model results.
 It will also teach you on how to create <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for your CLM-FATES simulations to make your research fully reproducible.</p>
 
 <blockquote class="agenda">
@@ -508,7 +508,7 @@ It will also teach you on how to create <span class="notranslate">Galaxy</span> 
 FATES needs what we call a “Host Land Model” (HLM) to run and in this tutorial
 we will be using the <a href="http://www.cesm.ucar.edu/models/clm/">Community Land Model</a>
 of the <a href="https://github.com/ESCOMP/CTSM">Community Terrestrial Systems Model</a> (CLM-CTSM).
-FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in 
+FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
 <a class="citation" href="#Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b> 2015</a>.
 And this technical note was first published as an appendix to <a href="https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf">that paper</a>.
 The <a href="https://fates-docs.readthedocs.io/en/latest/index.html">FATES documentation</a> will provide some more insight on FATES too.</p>
@@ -613,7 +613,7 @@ https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_res
 
       <p>As <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar</code> and <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code>
 are not beautiful names and can give errors for some tools,
-it is a good practice to change the dataset names by something more meaningful. For example by removing 
+it is a good practice to change the dataset names by something more meaningful. For example by removing
 <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/</code> and <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4126404/files/</code> to obtain <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code>
 and <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code>, respectively.</p>
 
@@ -667,7 +667,7 @@ and <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_versio
   <h3 id="hands_on-hands-on-creating-a-new-ctsmfates-emerald-case"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a new CTSM/FATES-EMERALD case</h3>
 
   <ol>
-    <li><span class="tool" data-tool="ctsm_fates" title="Tested with ctsm_fates"><strong>CTSM/FATES-EMERALD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: ctsm_fates</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1"><strong>CTSM/FATES-EMERALD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1</span></span>  with the following parameters:
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“inputdata for running FATES EMERALD”</em>: select the <strong>inputdata_version2.0.0_ALP1.tar</strong> file from your history</li>
         <li><em>Name of your case</em>: ALP1_exp</li>
@@ -706,7 +706,7 @@ of your restart files. This is what we do in this tutorial.</p>
     <li>
       <p>Check that the datatype of your outputs (history file) is <strong>netcdf</strong></p>
 
-      <p>All the history files contain gridded data values written at specified times during the model run. 
+      <p>All the history files contain gridded data values written at specified times during the model run.
 Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
 <code class="language-plaintext highlighter-rouge">ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc</code> (for non-monthly history files).
 Datatypes are, by default, automatically guessed. Here, as the prefix is <code class="language-plaintext highlighter-rouge">.nc</code>, the format is not always recognized as <code class="language-plaintext highlighter-rouge">netcdf</code> files.
@@ -743,7 +743,7 @@ particular Panoply, won’t be able to recognize your file if not named properly
     <li>
       <p>Getting metadata information for CLM-FATES netCDF outputs</p>
 
-      <p><span class="tool" data-tool="NetCDF+xarray+Metadata+Info" title="Tested with NetCDF+xarray+Metadata+Info"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: NetCDF+xarray+Metadata+Info</span></span>   with the following parameters:</p>
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>   with the following parameters:</p>
       <ul>
         <li><strong>Netcdf file</strong>: ALP1_exp.nc</li>
         <li>Click <strong>Execute</strong></li>
@@ -889,7 +889,7 @@ so that we can reuse it for any simulations.</p>
 
   <ol>
     <li>Select the total carbon in live plant leaves (<strong>LEAFC</strong>)
-<span class="tool" data-tool="NetCDF+xarray+Selection" title="Tested with NetCDF+xarray+Selection"><strong>NetCDF xarray Selection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: NetCDF+xarray+Selection</span></span>  with the following parameters:
+<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1"><strong>NetCDF xarray Selection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1</span></span>  with the following parameters:
       <ul>
         <li><strong>Input netcdf file</strong>: ALP1_exp.nc</li>
         <li><strong>Tabular of variables</strong>: Metadata infos from ALP1_exp.nc</li>
@@ -911,7 +911,7 @@ so that we can reuse it for any simulations.</p>
       </blockquote>
     </li>
     <li>Clean date column for plotting
-<span class="tool" data-tool="Replace+parts+of+text" title="Tested with Replace+parts+of+text"><strong>Replace parts of text </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Replace+parts+of+text</span></span>  with the following parameters:
+<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  with the following parameters:
       <ul>
         <li><strong>File to process</strong>: NetCDF xarray Selection on ALP1_exp.nc</li>
         <li><strong>Find pattern</strong>:  00:00:00</li>
@@ -1063,7 +1063,7 @@ both simulations are represented on the same plot.</li>
 <blockquote class="comment">
   <h3 id="comment-publish-your-history-to-httpsworkflowhubeu"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Publish your history to https://workflowhub.eu/</h3>
   <p>One step further is to share your <span class="notranslate">workflow</span> on <a href="https://workflowhub.eu">https://workflowhub.eu</a> where it
-will be stored in a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> format as well as in <a href="https://www.commonwl.org/">Common <span class="notranslate">Workflow</span> Language</a>. 
+will be stored in a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> format as well as in <a href="https://www.commonwl.org/">Common <span class="notranslate">Workflow</span> Language</a>.
 It provides standardised <span class="notranslate">workflow</span> identifiers and descriptions needed for <span class="notranslate">workflow</span> discovery, reuse, preservation, interoperability and monitoring and metadata harvesting using standard protocols.
 Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is still under active development.</p>
 </blockquote>
