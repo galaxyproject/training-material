@@ -94,8 +94,7 @@ check-html: build ## validate HTML
 .PHONY: check-html
 
 check-workflows: ## validate Workflows
-	bash bin/validate-json.sh
-	bash bin/validate-workflow-tags.sh
+	find topics -name '*.ga' | grep /workflows/ | xargs -P8 -n1 bash bin/validate-workflow.sh
 .PHONY: check-workflows
 
 check-references: build ## validate no missing references
