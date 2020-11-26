@@ -96,7 +96,7 @@ jobs:
             --assume-extension \
             --http-status-ignore 405,503,999 \
             --url-ignore "/.*localhost.*/","/.*vimeo\.com.*/","/.*gitter\.im.*/","/.*drmaa\.org.*/" \
-            --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${REPO}/tree/${BRANCH}" \
+            --url-swap "github.com/galaxyproject/training-material/tree/master:github.com/${GITHUB_REPOSITORY}/tree/${GITHUB_REF##*/}" \
             --file-ignore "/.*\/files\/.*/","/.*\/node_modules\/.*/" \
             --allow-hash-href \
             ./_site
