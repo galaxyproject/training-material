@@ -136,7 +136,7 @@ check-yaml: ## lint yaml files
 .PHONY: check-yaml
 
 check-tool-links: ## lint tool links
-	./bin/check-broken-tool-links.sh
+	@bash ./bin/check-broken-tool-links.sh
 .PHONY: check-tool-links
 
 check-snippets: ## lint snippets
