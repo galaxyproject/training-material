@@ -14,7 +14,7 @@ The following is a set of guidelines for contributing to this training material 
 
 # What should I know before I get started?
 
-This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://galaxyproject.github.io/training-material/topics/training/slides/)
+This repository is a project of unification of the Galaxy training material. You can find more information about this project in this [small presentation](https://galaxyproject.github.io/training-material/topics/contributing/slides/introduction.html)
 
 By contributing, you agree that we may redistribute your work under [this repository's license](LICENSE.md).
 
