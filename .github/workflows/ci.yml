@@ -57,10 +57,10 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
-      - run: make check-workflows
-      - run: make check-snippets
       - name: Lint 🔍👁👁
         run: |
+          make check-workflows
+          make check-snippets
           make check-tool-links
 
   build-site:
