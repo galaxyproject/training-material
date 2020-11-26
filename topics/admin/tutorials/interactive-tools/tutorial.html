@@ -816,7 +816,7 @@
   <li>Requests for Interactive Tools are delivered from nginx to the Interactive Tools Proxy over (by default) <strong>port 8000</strong> (http)
     <ul>
       <li>GxIT http requests are forwarded by the proxy to Docker on the node on the container’s (randomly assigned) <strong>port 32768</strong></li>
-      <li>GxIT http requests are again forwarded by Docker to Jupyter on its in-container “published” <em>*port 8888</em></li>
+      <li>GxIT http requests are again forwarded by Docker to Jupyter on its in-container “published” <strong>port 8888</strong></li>
     </ul>
   </li>
 </ul>
@@ -861,7 +861,7 @@
             <td>Whether to install Node.js, options are <code class="language-plaintext highlighter-rouge">package</code> and <code class="language-plaintext highlighter-rouge">nodeenv</code></td>
           </tr>
           <tr>
-            <td><code class="language-plaintext highlighter-rouge">gie_proxy_virtulenv_command</code></td>
+            <td><code class="language-plaintext highlighter-rouge">gie_proxy_virtualenv_command</code></td>
             <td>string</td>
             <td>Command to create virtualenv when using <code class="language-plaintext highlighter-rouge">nodeenv</code> method</td>
           </tr>
@@ -891,16 +891,14 @@
       <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">gie_proxy_dir</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/gie-proxy/proxy</span>
-<span class="na">gie_proxy_git_version</span><span class="pi">:</span> <span class="s">ie2</span>
+<span class="na">gie_proxy_git_version</span><span class="pi">:</span> <span class="s">master</span>
 <span class="na">gie_proxy_setup_nodejs</span><span class="pi">:</span> <span class="s">nodeenv</span>
-<span class="na">gie_proxy_virtulenv_command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">pip_virtualenv_command</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="na">gie_proxy_virtualenv_command</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">pip_virtualenv_command</span><span class="nv"> </span><span class="s">}}"</span>
 <span class="na">gie_proxy_nodejs_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">10.13.0"</span>
 <span class="na">gie_proxy_virtualenv</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span>/gie-proxy/venv</span>
 <span class="na">gie_proxy_setup_service</span><span class="pi">:</span> <span class="s">systemd</span>
 <span class="na">gie_proxy_sessions_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/interactivetools_map.sqlite"</span>
 </code></pre></div>      </div>
-
-      <p>Note the value of <code class="language-plaintext highlighter-rouge">gie_proxy_git_version</code> is <code class="language-plaintext highlighter-rouge">ie2</code>: this is because the default branch only works with Interactive Environments, whereas the <code class="language-plaintext highlighter-rouge">ie2</code> branch has been updated for Interactive Tools. As Interactive Tools mature, this will likely be merged back to the default branch.</p>
 
       <p>We have chosen to install Node.js using <a href="https://github.com/ekalinin/nodeenv">nodeenv</a> because the version in the training image’s package manager is fairly old.</p>
     </li>
@@ -1141,7 +1139,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
   <ol>
     <li>
-      <p>Rather than modify the default tool configuration file, we’ll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config in to our playbook.</p>
+      <p>Rather than modifying the default tool configuration file, we’ll add a new one that only references the Interactive Tools. This way, the default set of tools will still load without us having to incorporate the entire default tool config into our playbook.</p>
 
       <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> (<code class="language-plaintext highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>)</p>
 
@@ -1397,7 +1395,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/pulsar_app.yml"</span>
 </code></pre></div>      </div>
 
-      <p>Addiitionally, you will need to set the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code> config option:</p>
+      <p>Additionally, you will need to set the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_infrastructure_url</code> config option:</p>
 
       <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
   <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>

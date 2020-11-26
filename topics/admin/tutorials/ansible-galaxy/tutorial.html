@@ -551,7 +551,7 @@
       <li><a href="#galaxy" id="markdown-toc-galaxy"><span class="notranslate">Galaxy</span></a></li>
       <li><a href="#systemd" id="markdown-toc-systemd">systemd</a></li>
       <li><a href="#nginx" id="markdown-toc-nginx">NGINX</a></li>
-      <li><a href="#login-to-galaxy" id="markdown-toc-login-to-galaxy">Login to <span class="notranslate">Galaxy</span></a></li>
+      <li><a href="#log-in-to-galaxy" id="markdown-toc-log-in-to-galaxy">Log in to <span class="notranslate">Galaxy</span></a></li>
       <li><a href="#job-configuration" id="markdown-toc-job-configuration">Job Configuration</a></li>
       <li><a href="#disaster-strikes-optional" id="markdown-toc-disaster-strikes-optional">Disaster Strikes! (Optional)</a></li>
     </ol>
@@ -791,16 +791,73 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">uchida.miniconda</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.3.0</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.2</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.4</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.certbot</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.1.3</span>
 </code></pre></div>      </div>
+
+      <blockquote class="details">
+        <h3 id="details-what-do-each-of-these-roles-do"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> What do each of these roles do?</h3>
+        <p>We’ll cover it in more detail as we use each of the roles but briefly:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Role</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code></td>
+              <td>Installs and configures the <span class="notranslate">Galaxy</span> application</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code></td>
+              <td>Sets up a webserver</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.postgresql</code></td>
+              <td>Installs our database, PostgreSQL</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code></td>
+              <td>Creates users and databases within PostgreSQL</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">geerlingguy.pip</code></td>
+              <td>Ensures that pip is available</td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">uchida.miniconda</code></td>
+              <td>Installs miniconda, which is used by <span class="notranslate">Galaxy</span></td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code></td>
+              <td>Supplies systemd service units for <span class="notranslate">Galaxy</span></td>
+            </tr>
+            <tr>
+              <td><code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.certbot</code></td>
+              <td>Installs certbot and requests SSL certificates</td>
+            </tr>
+          </tbody>
+        </table>
+      </blockquote>
+
+      <blockquote class="details">
+        <h3 id="details-role-version-vs-galaxy-version"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Role version vs <span class="notranslate">Galaxy</span> version?</h3>
+        <p>Q: Is there a correspondence between <span class="notranslate">galaxy</span> role versions and <span class="notranslate">galaxy</span> versions?
+A: They  are correlated (because generally new <span class="notranslate">Galaxy</span> versions could introduce e.g. new configuration options that the <span class="notranslate">galaxy</span> role would then need to adopt), but the <span class="notranslate">Galaxy</span> role can install older versions of <span class="notranslate">Galaxy</span>.</p>
+      </blockquote>
     </li>
     <li>
       <p>In the same directory, run:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-<span class="notranslate">galaxy</span> install -p roles -r requirements.yml
+</code></pre></div>        </div>
+      </blockquote>
 
       <p>This will install all of the required modules for this training into the <code class="language-plaintext highlighter-rouge">roles/</code> folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.</p>
     </li>
@@ -841,7 +898,7 @@ best practices and knowledge from previous admins codified for you.</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
-          <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
           <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span>hosts
 </code></pre></div>          </div>
         </blockquote>
@@ -899,19 +956,7 @@ best practices and knowledge from previous admins codified for you.</p>
         <li>A role for <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code>, run as the postgres user. (You will need <code class="language-plaintext highlighter-rouge">become</code>/<code class="language-plaintext highlighter-rouge">become_user</code>.) This role allows for managing users and databases within postgres.</li>
       </ul>
 
-      <blockquote class="code-2col">
-        <blockquote class="code-in">
-          <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
-          <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat </span><span class="notranslate">galaxy</span>.yml
-</code></pre></div>          </div>
-        </blockquote>
-
-        <blockquote class="code-out">
-          <h3 id="code-out-output-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
-
-          <p>Your <span class="notranslate">galaxy</span> playbook yml file should look approximately like this:</p>
-
-          <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+      <div class="language-yml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
 <span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
   <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
   <span class="na">pre_tasks</span><span class="pi">:</span>
@@ -923,9 +968,7 @@ best practices and knowledge from previous admins codified for you.</p>
     <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
       <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
       <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
-</code></pre></div>          </div>
-        </blockquote>
-      </blockquote>
+</code></pre></div>      </div>
 
       <blockquote class="question">
         <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -950,8 +993,8 @@ best practices and knowledge from previous admins codified for you.</p>
 </code></pre></div>            </div>
           </blockquote>
 
-          <blockquote class="code-out">
-            <h3 id="code-out-output-bash-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+          <blockquote class="code-out code-max-300">
+            <h3 id="code-out-output-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
             <p>Your directory should look approximately like this:</p>
 
@@ -1003,7 +1046,7 @@ best practices and knowledge from previous admins codified for you.</p>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <h3 id="code-out-output-bash-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <h3 id="code-out-output-bash-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PLAY</span> <span class="nn">[<span class="notranslate">galaxy</span>servers]</span> <span class="err">************************************************************************************</span>
 
@@ -1106,6 +1149,35 @@ best practices and knowledge from previous admins codified for you.</p>
         <h3 id="comment-comment-when-running-ansible"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: When running Ansible</h3>
         <p>Always pay close attention to tasks reported as <strong>changed</strong> and ensure that the changes were expected!</p>
       </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-why-didnt-we-use--i-in-our-ansible-command"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why didn’t we use <code class="language-plaintext highlighter-rouge">-i</code> in our ansible command?</h3>
+        <p>In our <code class="language-plaintext highlighter-rouge">ansible.cfg</code> file we specified the inventory was stored in a file called <code class="language-plaintext highlighter-rouge">hosts</code>:</p>
+
+        <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[defaults]</span>
+<span class="py">interpreter_python</span> <span class="p">=</span> <span class="s">/usr/bin/python3</span>
+<span class="py">inventory</span> <span class="p">=</span> <span class="s">hosts</span>
+<span class="py">retry_files_enabled</span> <span class="p">=</span> <span class="s">false</span>
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-error-skipping-no-hosts-matched"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Error: “skipping: no hosts matched”</h3>
+        <p>There can be multiple reasons this happens, so we’ll step through all of them.
+We’ll start by assuming you’re running the command</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+
+        <p>The following things can cause issues:</p>
+
+        <ol>
+          <li>Within your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>, you’ve referred to a host group that doesn’t exist or is misspelled. Check the <code class="language-plaintext highlighter-rouge">hosts: <span class="notranslate">galaxy</span>servers</code> to ensure it matches the host group defined in the <code class="language-plaintext highlighter-rouge">hosts</code> file.</li>
+          <li>Vice-versa, the group in your <code class="language-plaintext highlighter-rouge">hosts</code> file should match the hosts selected in the playbook, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code>.</li>
+          <li>If neither of these are the issue, it’s possible Ansible doesn’t know to check the <code class="language-plaintext highlighter-rouge">hosts</code> file for the inventory. Make sure you’ve specified <code class="language-plaintext highlighter-rouge">inventory = hosts</code> in your <code class="language-plaintext highlighter-rouge">ansible.cfg</code>.</li>
+        </ol>
+
+      </blockquote>
     </li>
     <li>
       <p>Inspect the changes that have been made on your <span class="notranslate">Galaxy</span> server. Places to look include:</p>
@@ -1124,7 +1196,7 @@ best practices and knowledge from previous admins codified for you.</p>
         </blockquote>
 
         <blockquote class="code-out">
-          <h3 id="code-out-output-bash-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+          <h3 id="code-out-output-bash-3"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                              <span class="err">List</span> <span class="err">of</span> <span class="err">databases</span>
    <span class="err">Name</span>    <span class="err">|</span>  <span class="err">Owner</span>   <span class="err">|</span> <span class="err">Encoding</span> <span class="err">|</span> <span class="err">Collate</span> <span class="err">|</span>  <span class="err">Ctype</span>  <span class="err">|</span>   <span class="err">Access</span> <span class="err">privileges</span>
@@ -1148,7 +1220,7 @@ best practices and knowledge from previous admins codified for you.</p>
       </blockquote>
 
       <blockquote class="code-out">
-        <h3 id="code-out-output-bash-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <h3 id="code-out-output-bash-4"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
         <p>The database will currently be empty (check relations with \d and list of roles with \dg) as <span class="notranslate">Galaxy</span> has not yet connected to it. Once you install <span class="notranslate">Galaxy</span> in the next step, the database will be populated. (Quit database with \q)</p>
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">psql</span> <span class="err">(10.12</span> <span class="err">(Ubuntu</span> <span class="err">10.12-0ubuntu0.18.04.1))</span>
 <span class="err">Type</span> <span class="err">"help"</span> <span class="err">for</span> <span class="err">help.</span>
@@ -1175,7 +1247,7 @@ best practices and knowledge from previous admins codified for you.</p>
         </blockquote>
 
         <blockquote class="code-out">
-          <h3 id="code-out-output-bash-6"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+          <h3 id="code-out-output-bash-5"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">conf.d</span>
 <span class="err">environment</span>
@@ -1229,36 +1301,26 @@ best practices and knowledge from previous admins codified for you.</p>
         <li>Add the roles <code class="language-plaintext highlighter-rouge">geerlingguy.pip</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> run as the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
       </ul>
 
-      <blockquote class="question">
-        <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-        <p>How does the updated playbook look?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="pi">-</span> <span class="na">hosts</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>servers</span>
-  <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
-  <span class="na">pre_tasks</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Install Dependencies</span>
-      <span class="na">package</span><span class="pi">:</span>
-        <span class="na">name</span><span class="pi">:</span> <span class="pi">[</span><span class="s1">'</span><span class="s">git'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">make'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">python3-psycopg2'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">virtualenv'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">tar'</span><span class="pi">,</span> <span class="s1">'</span><span class="s">bzip2'</span><span class="pi">]</span>
-  <span class="na">roles</span><span class="pi">:</span>
-    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
-    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
-      <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
-      <span class="na">become_user</span><span class="pi">:</span> <span class="s">postgres</span>
-    <span class="pi">-</span> <span class="s">geerlingguy.pip</span>
-    <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-    <span class="pi">-</span> <span class="na">role</span><span class="pi">:</span> <span class="s">uchida.miniconda</span>
-      <span class="na">become</span><span class="pi">:</span> <span class="no">true</span>
-      <span class="na">become_user</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-</code></pre></div>          </div>
-
-        </blockquote>
-
-      </blockquote>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/<span class="notranslate">galaxy</span>.yml b/<span class="notranslate">galaxy</span>.yml
+</span><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -4,9 +4,14 @@</span>
+   pre_tasks:
+     - name: Install Dependencies
+       package:
+<span class="gd">-        name: 'python3-psycopg2'
+</span><span class="gi">+        name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+</span>   roles:
+     - <span class="notranslate">galaxy</span>project.postgresql
+     - role: natefoo.postgresql_objects
+       become: true
+       become_user: postgres
+<span class="gi">+    - geerlingguy.pip
++    - <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>
++    - role: uchida.miniconda
++      become: true
++      become_user: <span class="notranslate">galaxy</span>
+</span></code></pre></div>      </div>
 
       <blockquote class="tip">
         <h3 id="tip-miniconda-fails-to-work"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Miniconda fails to work</h3>
@@ -1294,7 +1356,7 @@ best practices and knowledge from previous admins codified for you.</p>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_manage_paths</code></td>
             <td><code class="language-plaintext highlighter-rouge">true</code></td>
-            <td>Instruct thre role to create the needed directories.</td>
+            <td>Instruct the role to create the needed directories.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_layout</code></td>
@@ -1313,8 +1375,8 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_commit_id</code></td>
-            <td><code class="language-plaintext highlighter-rouge">release_20.05</code></td>
-            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 20.05</td>
+            <td><code class="language-plaintext highlighter-rouge">release_20.09</code></td>
+            <td>The git reference to check out, which in this case is the branch for <span class="notranslate">Galaxy</span> Release 20.09</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_style</code></td>
@@ -1328,12 +1390,12 @@ best practices and knowledge from previous admins codified for you.</p>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_prefix</code></td>
-            <td><code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda</code></td>
+            <td><code class="language-plaintext highlighter-rouge">"{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda"</code></td>
             <td>We will manually install conda as well. Normally <span class="notranslate">Galaxy</span> will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge">miniconda_version</code></td>
-            <td><code class="language-plaintext highlighter-rouge">4.6.14</code></td>
+            <td><code class="language-plaintext highlighter-rouge">4.7.12</code></td>
             <td>Install a specific miniconda version, the latest one at the time of writing that was tested and working.</td>
           </tr>
         </tbody>
@@ -1347,6 +1409,27 @@ best practices and knowledge from previous admins codified for you.</p>
 
         <p>Please ensure you consult the <a href="https://docs.galaxyproject.org/en/master/releases/index.html">releases documentation</a></p>
       </blockquote>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -10,3 +10,16 @@</span> postgresql_objects_users:
+ postgresql_objects_databases:
+   - name: <span class="notranslate">galaxy</span>
+     owner: <span class="notranslate">galaxy</span>
+<span class="gi">+
++# <span class="notranslate">Galaxy</span>
++<span class="notranslate">galaxy</span>_create_user: true
++<span class="notranslate">galaxy</span>_separate_privileges: true
++<span class="notranslate">galaxy</span>_manage_paths: true
++<span class="notranslate">galaxy</span>_layout: root-dir
++<span class="notranslate">galaxy</span>_root: /srv/<span class="notranslate">galaxy</span>
++<span class="notranslate">galaxy</span>_user: {name: <span class="notranslate">galaxy</span>, shell: /bin/bash}
++<span class="notranslate">galaxy</span>_commit_id: release_20.09
++<span class="notranslate">galaxy</span>_config_style: yaml
++<span class="notranslate">galaxy</span>_force_checkout: true
++miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda"
++miniconda_version: 4.7.12
+</span></code></pre></div>      </div>
     </li>
     <li>
       <p>Again edit the group variables file and add a variable for <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code>. It will be a hash with one key, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> which will also be a hash. Inside here you can place all of your <span class="notranslate">Galaxy</span> configuration.</p>
@@ -1364,8 +1447,25 @@ best practices and knowledge from previous admins codified for you.</p>
         <li><code class="language-plaintext highlighter-rouge">database_connection</code> to point to the database you setup earlier (<code class="language-plaintext highlighter-rouge">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql</code>).</li>
         <li><code class="language-plaintext highlighter-rouge">file_path</code> to a place to store data, <code class="language-plaintext highlighter-rouge">/data</code> is fine for this lesson which sets up a single-node <span class="notranslate">Galaxy</span>. If you have separate compute machines, this will normally need to be storage shared between the <span class="notranslate">Galaxy</span> node and compute nodes.</li>
         <li><code class="language-plaintext highlighter-rouge">check_migrate_tools</code> must be set to <code class="language-plaintext highlighter-rouge">false</code> due to a new installation of <span class="notranslate">Galaxy</span>.</li>
-        <li><code class="language-plaintext highlighter-rouge">tool_data_path</code> to <code class="language-plaintext highlighter-rouge">/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
+        <li><code class="language-plaintext highlighter-rouge">tool_data_path</code> to <code class="language-plaintext highlighter-rouge">{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data</code>, so that when tools are installed, due to privilege separation, this will happen in a directory <span class="notranslate">Galaxy</span> can actually write into.</li>
       </ol>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -23,3 +23,12 @@</span> <span class="notranslate">galaxy</span>_config_style: yaml
+ <span class="notranslate">galaxy</span>_force_checkout: true
+ miniconda_prefix: "{{ <span class="notranslate">galaxy</span>_tool_dependency_dir }}/_conda"
+ miniconda_version: 4.7.12
+<span class="gi">+
++<span class="notranslate">galaxy</span>_config:
++  <span class="notranslate">galaxy</span>:
++    brand: "🧬🔬🚀"
++    admin_users: admin@example.org
++    database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
++    file_path: /data
++    check_migrate_tools: false
++    tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
+</span></code></pre></div>      </div>
 
       <blockquote class="tip">
         <h3 id="tip-data-storage"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Data storage</h3>
@@ -1409,35 +1509,38 @@ So it is not always easy to tell what variables will be set, or what their final
     <li>
       <p>In order to use mule messaging, we need to edit the uWSGI configuration of <span class="notranslate">Galaxy</span>. This has a default value, but we will have to override it. Add the following configuration as a child of the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config</code> variable:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-  <span class="s">...</span>
-  <span class="na">uwsgi</span><span class="pi">:</span>
-    <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
-    <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
-    <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
-    <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
-    <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
-    <span class="na">static-map</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
-      <span class="pi">-</span> <span class="s">/favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico</span>
-    <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
-    <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
-    <span class="na">module</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()</span>
-    <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">hook-master-start</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-      <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
-    <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">mule</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
-      <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
-    <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
-</code></pre></div>      </div>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -32,3 +32,28 @@</span> <span class="notranslate">galaxy</span>_config:
+     file_path: /data
+     check_migrate_tools: false
+     tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
+<span class="gi">+  uwsgi:
++    http: 0.0.0.0:8080
++    buffer-size: 16384
++    processes: 1
++    th<span class="notranslate">reads</span>: 4
++    offload-th<span class="notranslate">reads</span>: 2
++    static-map:
++      - /static={{ <span class="notranslate">galaxy</span>_server_dir }}/static
++      - /favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico
++    static-safe: client/<span class="notranslate">galaxy</span>/images
++    master: true
++    virtualenv: "{{ <span class="notranslate">galaxy</span>_venv_dir }}"
++    pythonpath: "{{ <span class="notranslate">galaxy</span>_server_dir }}/lib"
++    module: <span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()
++    thunder-lock: true
++    die-on-term: true
++    hook-master-start:
++      - unix_signal:2 gracefully_kill_them_all
++      - unix_signal:15 gracefully_kill_them_all
++    py-call-osafterfork: true
++    enable-th<span class="notranslate">reads</span>: true
++    mule:
++      - lib/<span class="notranslate">galaxy</span>/main.py
++      - lib/<span class="notranslate">galaxy</span>/main.py
++    farm: job-handlers:1,2
+</span></code></pre></div>      </div>
 
       <blockquote class="tip">
         <h3 id="tip-how-many-mules"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> How many mules?</h3>
@@ -1453,79 +1556,6 @@ So it is not always easy to tell what variables will be set, or what their final
           <li><code class="language-plaintext highlighter-rouge">workers</code> in job_conf (covered later) is the number of th<span class="notranslate">reads</span> in an inte<span class="notranslate">rna</span>l <span class="notranslate">Galaxy</span> thread pool that are available in each job handler for preparing and finishing jobs (more th<span class="notranslate">reads</span> increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).</li>
         </ol>
       </blockquote>
-
-      <blockquote class="question">
-        <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-
-        <p>How does your current group variables file look?</p>
-
-        <blockquote class="solution">
-          <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-
-          <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
-<span class="c1"># python3 support</span>
-<span class="na">pip_virtualenv_command</span><span class="pi">:</span> <span class="s">/usr/bin/python3 -m virtualenv</span> <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot, use<span class="notranslate">galaxy</span>_eu.tiaas2, <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></span>
-<span class="na">certbot_virtualenv_package_name</span><span class="pi">:</span> <span class="s">python3-virtualenv</span>    <span class="c1"># use<span class="notranslate">galaxy</span>_eu.certbot</span>
-<span class="na">pip_package</span><span class="pi">:</span> <span class="s">python3-pip</span>                               <span class="c1"># geerlingguy.pip</span>
-
-<span class="c1"># PostgreSQL</span>
-<span class="na">postgresql_objects_users</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-<span class="na">postgresql_objects_databases</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-    <span class="na">owner</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
-
-<span class="c1"># <span class="notranslate">Galaxy</span></span>
-<span class="na"><span class="notranslate">galaxy</span>_create_user</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span>_separate_privileges</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span>_manage_paths</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na"><span class="notranslate">galaxy</span>_layout</span><span class="pi">:</span> <span class="s">root-dir</span>
-<span class="na"><span class="notranslate">galaxy</span>_root</span><span class="pi">:</span> <span class="s">/srv/<span class="notranslate">galaxy</span></span>
-<span class="na"><span class="notranslate">galaxy</span>_user</span><span class="pi">:</span> <span class="pi">{</span><span class="nv">name</span><span class="pi">:</span> <span class="nv"><span class="notranslate">galaxy</span></span><span class="pi">,</span> <span class="nv">shell</span><span class="pi">:</span> <span class="nv">/bin/bash</span><span class="pi">}</span>
-<span class="na"><span class="notranslate">galaxy</span>_commit_id</span><span class="pi">:</span> <span class="s">release_20.05</span>
-<span class="na"><span class="notranslate">galaxy</span>_config_style</span><span class="pi">:</span> <span class="s">yaml</span>
-<span class="na"><span class="notranslate">galaxy</span>_force_checkout</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">miniconda_prefix</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_tool_dependency_dir</span><span class="nv"> </span><span class="s">}}/_conda"</span>
-<span class="na">miniconda_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">4.6.14"</span>
-
-<span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="na">brand</span><span class="pi">:</span> <span class="s2">"</span><span class="s">🧬🔬🚀"</span>
-    <span class="na">admin_users</span><span class="pi">:</span> <span class="s">admin@example.org</span>
-    <span class="na">database_connection</span><span class="pi">:</span> <span class="s2">"</span><span class="s">postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"</span>
-    <span class="na">file_path</span><span class="pi">:</span> <span class="s">/data</span>
-    <span class="na">check_migrate_tools</span><span class="pi">:</span> <span class="no">false</span>
-    <span class="na">tool_data_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_mutable_data_dir</span><span class="nv"> </span><span class="s">}}/tool-data"</span>
-  <span class="na">uwsgi</span><span class="pi">:</span>
-    <span class="na">http</span><span class="pi">:</span> <span class="s">0.0.0.0:8080</span>
-    <span class="na">buffer-size</span><span class="pi">:</span> <span class="m">16384</span>
-    <span class="na">processes</span><span class="pi">:</span> <span class="m">1</span>
-    <span class="na">th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">4</span>
-    <span class="na">offload-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="m">2</span>
-    <span class="na">static-map</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">/static={{ <span class="notranslate">galaxy</span>_server_dir }}/static</span>
-      <span class="pi">-</span> <span class="s">/favicon.ico={{ <span class="notranslate">galaxy</span>_server_dir }}/static/favicon.ico</span>
-    <span class="na">static-safe</span><span class="pi">:</span> <span class="s">client/<span class="notranslate">galaxy</span>/images</span>
-    <span class="na">master</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">virtualenv</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_venv_dir</span><span class="nv"> </span><span class="s">}}"</span>
-    <span class="na">pythonpath</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_server_dir</span><span class="nv"> </span><span class="s">}}/lib"</span>
-    <span class="na">module</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>.webapps.<span class="notranslate">galaxy</span>.buildapp:uwsgi_app()</span>
-    <span class="na">thunder-lock</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">die-on-term</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">hook-master-start</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">unix_signal:2 gracefully_kill_them_all</span>
-      <span class="pi">-</span> <span class="s">unix_signal:15 gracefully_kill_them_all</span>
-    <span class="na">py-call-osafterfork</span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">enable-th<span class="notranslate">reads</span></span><span class="pi">:</span> <span class="no">true</span>
-    <span class="na">mule</span><span class="pi">:</span>
-      <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
-      <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
-    <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
-</code></pre></div>          </div>
-
-        </blockquote>
-
-      </blockquote>
     </li>
     <li>
       <p>Run the playbook.</p>
@@ -1537,7 +1567,7 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <h3 id="code-out-output-bash-7"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <h3 id="code-out-output-bash-6"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">PLAY</span> <span class="nn">[<span class="notranslate">galaxy</span>servers]</span> <span class="err">***************************************************************************</span>
 
@@ -1968,8 +1998,8 @@ So it is not always easy to tell what variables will be set, or what their final
       </blockquote>
 
       <blockquote class="comment">
-        <h3 id="comment-huge-wealth-of-knowledge"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Huge wealth of knowledge</h3>
-        <p>You will notice the huge volume of output from this playbook! There are
+        <h3 id="comment-free-knowledge"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Free knowledge</h3>
+        <p>You will notice the significant volume of output from this playbook! There are
 many, many steps for deploying a production <span class="notranslate">Galaxy</span>, and there is a vast
 amount of knowledge encoded into these playbooks by the developers and
 admins who use them. While we recommend this, choosing to use Ansible
@@ -2013,7 +2043,7 @@ The client is only re-built when there are changes in the files needed for the <
         </blockquote>
 
         <blockquote class="code-out">
-          <h3 id="code-out-output-bash-8"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+          <h3 id="code-out-output-bash-7"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">/srv/<span class="notranslate">galaxy</span>/</span>
 <span class="err">├──</span> <span class="err">config</span>
@@ -2035,7 +2065,7 @@ The client is only re-built when there are changes in the files needed for the <
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <h3 id="code-out-output-bash-9"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <h3 id="code-out-output-bash-8"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
         <p>You’ll notice that the file is significantly different from the configuration you have set up in your group variables. The Ansible role adds a significant number of additional configuration options which all require a path, and templates the appropriate paths into all of them.</p>
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">---</span>
 <span class="c">##
@@ -2132,15 +2162,33 @@ The client is only re-built when there are changes in the files needed for the <
   <ol>
     <li>
       <p>Add the role <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/<span class="notranslate">galaxy</span>.yml b/<span class="notranslate">galaxy</span>.yml
+index 941272f..785ad03 100644
+</span><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -15,3 +15,4 @@</span>
+     - role: uchida.miniconda
+       become: true
+       become_user: <span class="notranslate">galaxy</span>
+<span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd
+</span></code></pre></div>      </div>
     </li>
     <li>
-      <p>Add the following to the bottom of your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
+      <p>Configure the role in <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># systemd</span>
-<span class="na"><span class="notranslate">galaxy</span>_systemd_mode</span><span class="pi">:</span> <span class="s">mule</span>
-<span class="na"><span class="notranslate">galaxy</span>_zergpool_listen_addr</span><span class="pi">:</span> <span class="s">127.0.0.1:8080</span>
-<span class="na"><span class="notranslate">galaxy</span>_restart_handler_name</span><span class="pi">:</span> <span class="s2">"</span><span class="s">Restart</span><span class="nv"> </span><span class="s"><span class="notranslate">Galaxy</span>"</span>
-</code></pre></div>      </div>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -57,3 +57,8 @@</span> <span class="notranslate">galaxy</span>_config:
+       - lib/<span class="notranslate">galaxy</span>/main.py
+       - lib/<span class="notranslate">galaxy</span>/main.py
+     farm: job-handlers:1,2
+<span class="gi">+
++# systemd
++<span class="notranslate">galaxy</span>_systemd_mode: mule
++<span class="notranslate">galaxy</span>_zergpool_listen_addr: 127.0.0.1:8080
++<span class="notranslate">galaxy</span>_restart_handler_name: "Restart <span class="notranslate">Galaxy</span>"
+</span></code></pre></div>      </div>
 
       <p>The last variable, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_restart_handler_name</code>, informs the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role that it should look for a handler with that name, and trigger it whenever changes are made to <span class="notranslate">Galaxy</span>’s configuration. Now we’ll define the handler:</p>
     </li>
@@ -2165,18 +2213,24 @@ The client is only re-built when there are changes in the files needed for the <
     </li>
     <li>
       <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Log in and check the status with <code class="language-plaintext highlighter-rouge">sudo systemctl status <span class="notranslate">galaxy</span></code></p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-10"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>systemctl status <span class="notranslate">galaxy</span>
 </code></pre></div>        </div>
       </blockquote>
 
       <blockquote class="code-out code-max-300">
-        <h3 id="code-out-output-bash-10"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <h3 id="code-out-output-bash-9"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
 
         <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="err">●</span> <span class="err"><span class="notranslate">galaxy</span>.service</span> <span class="err">-</span> <span class="err"><span class="notranslate">Galaxy</span></span>
    <span class="err">Loaded:</span> <span class="err">loaded</span> <span class="err">(/etc/systemd/system/<span class="notranslate">galaxy</span>.service</span><span class="c">; enabled; vendor preset: enabled)
@@ -2203,6 +2257,17 @@ The client is only re-built when there are changes in the files needed for the <
 <span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30740,w:0,m:1]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.sequence:Axt</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">axt.</span>
 <span class="err">Jul</span> <span class="err">08</span> <span class="err">12:55:22</span> <span class="err">gat-0</span> <span class="err">uwsgi</span><span class="nn">[30426]</span><span class="err">:</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.registry</span> <span class="err">DEBUG</span> <span class="err">2020-07-08</span> <span class="err">12:55:22,682</span> <span class="nn">[p:30741,w:0,m:2]</span> <span class="nn">[MainThread]</span> <span class="err">Retrieved</span> <span class="err">datatype</span> <span class="err">module</span> <span class="err"><span class="notranslate">galaxy</span>.datatypes.binary:Anndata</span> <span class="err">from</span> <span class="err">the</span> <span class="err">datatype</span> <span class="err">registry</span> <span class="err">for</span> <span class="err">extension</span> <span class="err">h5ad.</span>
 </code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-unit-galaxyservice-could-not-be-found"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Unit <span class="notranslate">galaxy</span>.service could not be found.</h3>
+        <p>If you see this message:</p>
+
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>$ systemctl status <span class="notranslate">galaxy</span>
+Unit <span class="notranslate">galaxy</span>.service could not be found.
+</code></pre></div>        </div>
+
+        <p>when running <code class="language-plaintext highlighter-rouge">systemctl status <span class="notranslate">galaxy</span></code>, it means you didn’t install the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_systemd</code> role, or forgot to re-run the playbook after adding it. Double check the first step of this hands-on section.</p>
       </blockquote>
     </li>
     <li>
@@ -2261,15 +2326,24 @@ The client is only re-built when there are changes in the files needed for the <
   <ol>
     <li>
       <p>Add the role <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.nginx</code> to the end of your playbook and have it run as root.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -21,3 +21,4 @@</span>
+       become: true
+       become_user: <span class="notranslate">galaxy</span>
+     - use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd
+<span class="gi">+    - <span class="notranslate">galaxy</span>project.nginx
+</span></code></pre></div>      </div>
     </li>
     <li>
       <p>Edit your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>, we will update the line that <code class="language-plaintext highlighter-rouge">http: 0.0.0.0:8080</code> to be <code class="language-plaintext highlighter-rouge">socket: 127.0.0.1:8080</code>. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- group_vars/<span class="notranslate">galaxy</span>servers.yml.orig
-</span><span class="gi">+++ group_vars/<span class="notranslate">galaxy</span>servers.yml
-</span><span class="p">@@ -29,7 +29,7 @@</span>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -33,7 +33,7 @@</span> <span class="notranslate">galaxy</span>_config:
      check_migrate_tools: false
-     tool_data_path: "/tool-data"
+     tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
    uwsgi:
 <span class="gd">-    http: 0.0.0.0:8080
 </span><span class="gi">+    socket: 127.0.0.1:8080
@@ -2283,36 +2357,43 @@ The client is only re-built when there are changes in the files needed for the <
 
       <p>Add the following to your group variables file:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Certbot</span>
-<span class="na">certbot_auto_renew_hour</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">23</span><span class="nv"> </span><span class="s">|random(seed=inventory_hostname)</span><span class="nv">  </span><span class="s">}}"</span>
-<span class="na">certbot_auto_renew_minute</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">59</span><span class="nv"> </span><span class="s">|random(seed=inventory_hostname)</span><span class="nv">  </span><span class="s">}}"</span>
-<span class="na">certbot_auth_method</span><span class="pi">:</span> <span class="s">--webroot</span>
-<span class="na">certbot_install_method</span><span class="pi">:</span> <span class="s">virtualenv</span>
-<span class="na">certbot_auto_renew</span><span class="pi">:</span> <span class="s">yes</span>
-<span class="na">certbot_auto_renew_user</span><span class="pi">:</span> <span class="s">root</span>
-<span class="na">certbot_environment</span><span class="pi">:</span> <span class="s">staging</span>
-<span class="na">certbot_well_known_root</span><span class="pi">:</span> <span class="s">/srv/nginx/_well-known_root</span>
-<span class="na">certbot_share_key_users</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">nginx</span>
-<span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="s">systemctl restart nginx || true</span>
-<span class="na">certbot_domains</span><span class="pi">:</span>
- <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
-<span class="na">certbot_agree_tos</span><span class="pi">:</span> <span class="s">--agree-tos</span>
-
-<span class="c1"># NGINX</span>
-<span class="na">nginx_selinux_allow_local_connections</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">nginx_servers</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">redirect-ssl</span>
-<span class="na">nginx_enable_default_server</span><span class="pi">:</span> <span class="no">false</span>
-<span class="na">nginx_ssl_servers</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span></span>
-<span class="na">nginx_conf_http</span><span class="pi">:</span>
-  <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">1g</span>
-<span class="na">nginx_ssl_role</span><span class="pi">:</span> <span class="s">use<span class="notranslate">galaxy</span>_eu.certbot</span>
-<span class="na">nginx_conf_ssl_certificate</span><span class="pi">:</span> <span class="s">/etc/ssl/certs/fullchain.pem</span>
-<span class="na">nginx_conf_ssl_certificate_key</span><span class="pi">:</span> <span class="s">/etc/ssl/user/privkey-nginx.pem</span>
-</code></pre></div>      </div>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -62,3 +62,33 @@</span> <span class="notranslate">galaxy</span>_config:
+ <span class="notranslate">galaxy</span>_systemd_mode: mule
+ <span class="notranslate">galaxy</span>_zergpool_listen_addr: 127.0.0.1:8080
+ <span class="notranslate">galaxy</span>_restart_handler_name: "Restart <span class="notranslate">Galaxy</span>"
+<span class="gi">+
++# Certbot
++certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
++certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
++certbot_auth_method: --webroot
++certbot_install_method: virtualenv
++certbot_auto_renew: yes
++certbot_auto_renew_user: root
++certbot_environment: staging
++certbot_well_known_root: /srv/nginx/_well-known_root
++certbot_share_key_users:
++  - nginx
++certbot_post_renewal: |
++    systemctl restart nginx || true
++certbot_domains:
++ - "{{ inventory_hostname }}"
++certbot_agree_tos: --agree-tos
++
++# NGINX
++nginx_selinux_allow_local_connections: true
++nginx_servers:
++  - redirect-ssl
++nginx_enable_default_server: false
++nginx_ssl_servers:
++  - <span class="notranslate">galaxy</span>
++nginx_conf_http:
++  client_max_body_size: 1g
++nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
++nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
++nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+</span></code></pre></div>      </div>
 
       <blockquote class="details">
         <h3 id="details-certbot-details"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> Certbot details</h3>
@@ -2364,37 +2445,23 @@ The client is only re-built when there are changes in the files needed for the <
 
         <p>Instead of the above step you should do:</p>
 
-        <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Certbot</span>
-<span class="c1"># You can comment these out if you wish; they will never be used if no role tries to access them.</span>
-<span class="na">certbot_auto_renew_hour</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">23</span><span class="nv"> </span><span class="s">|random(seed=inventory_hostname)</span><span class="nv">  </span><span class="s">}}"</span>
-<span class="na">certbot_auto_renew_minute</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">59</span><span class="nv"> </span><span class="s">|random(seed=inventory_hostname)</span><span class="nv">  </span><span class="s">}}"</span>
-<span class="na">certbot_auth_method</span><span class="pi">:</span> <span class="s">--webroot</span>
-<span class="na">certbot_install_method</span><span class="pi">:</span> <span class="s">virtualenv</span>
-<span class="na">certbot_auto_renew</span><span class="pi">:</span> <span class="s">yes</span>
-<span class="na">certbot_auto_renew_user</span><span class="pi">:</span> <span class="s">root</span>
-<span class="na">certbot_environment</span><span class="pi">:</span> <span class="s">staging</span>
-<span class="na">certbot_well_known_root</span><span class="pi">:</span> <span class="s">/srv/nginx/_well-known_root</span>
-<span class="na">certbot_share_key_users</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s">nginx</span>
-<span class="na">certbot_post_renewal</span><span class="pi">:</span> <span class="pi">|</span>
-    <span class="s">systemctl restart nginx || true</span>
-<span class="na">certbot_domains</span><span class="pi">:</span>
- <span class="pi">-</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s">inventory_hostname</span><span class="nv"> </span><span class="s">}}"</span>
-<span class="na">certbot_agree_tos</span><span class="pi">:</span> <span class="s">--agree-tos</span>
-
-<span class="c1"># NGINX</span>
-<span class="na">nginx_selinux_allow_local_connections</span><span class="pi">:</span> <span class="no">true</span>
-<span class="na">nginx_servers</span><span class="pi">:</span>
-  <span class="pi">-</span> <span class="s"><span class="notranslate">galaxy</span></span> <span class="c1"># NOT redirect-ssl</span>
-<span class="na">nginx_enable_default_server</span><span class="pi">:</span> <span class="no">false</span>
-<span class="c1"># nginx_ssl_servers:</span>
-<span class="c1">#   - <span class="notranslate">galaxy</span></span>
-<span class="na">nginx_conf_http</span><span class="pi">:</span>
-  <span class="na">client_max_body_size</span><span class="pi">:</span> <span class="s">1g</span>
-<span class="c1"># nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot</span>
-<span class="c1"># nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem</span>
-<span class="c1"># nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem</span>
-</code></pre></div>        </div>
+        <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -83,12 +83,7 @@</span> certbot_agree_tos: --agree-tos
+ # NGINX
+ nginx_selinux_allow_local_connections: true
+ nginx_servers:
+<span class="gd">-  - redirect-ssl
+-nginx_enable_default_server: false
+-nginx_ssl_servers:
+</span>   - <span class="notranslate">galaxy</span>
+<span class="gi">+nginx_enable_default_server: false
+</span> nginx_conf_http:
+   client_max_body_size: 1g
+<span class="gd">-nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
+-nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+-nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+</span></code></pre></div>        </div>
 
       </blockquote>
     </li>
@@ -2480,20 +2547,31 @@ The client is only re-built when there are changes in the files needed for the <
 
         <p>In your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.j2</code> in the above step, you should change the <code class="language-plaintext highlighter-rouge">listen</code> parameter:</p>
 
-        <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Change this</span>
-<span class="k">listen</span>        <span class="s">*:443</span> <span class="s">ssl</span> <span class="s">default_server</span><span class="p">;</span>
-<span class="c1"># to this</span>
-<span class="k">listen</span>        <span class="s">*:80</span> <span class="s">default_server</span><span class="p">;</span>
-</code></pre></div>        </div>
+        <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gd">-listen        *:443 ssl default_server;
+</span><span class="gi">+listen        *:80 default_server;
+</span></code></pre></div>        </div>
 
       </blockquote>
     </li>
     <li>
       <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
-changed: [<span class="notranslate">galaxy</span>.example.org]
-</code></pre></div>      </div>
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-12"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>          </div>
+        </blockquote>
+        <blockquote class="code-out">
+          <h3 id="code-in-output"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
+changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
 
       <p>If you didn’t, you might have missed the first step in this hands-on.</p>
     </li>
@@ -2569,7 +2647,7 @@ In a training setting there is no need to request certificates that will be trus
   </table>
 </blockquote>
 
-<h2 id="login-to-galaxy">Login to <span class="notranslate">Galaxy</span></h2>
+<h2 id="log-in-to-galaxy">Log in to <span class="notranslate">Galaxy</span></h2>
 
 <p>Now that your production-ready <span class="notranslate">Galaxy</span> is running, try registering a new user and logging in!</p>
 
@@ -2577,7 +2655,7 @@ In a training setting there is no need to request certificates that will be trus
 
 <h2 id="job-configuration">Job Configuration</h2>
 
-<p>One of the most important configuration files for a large <span class="notranslate">Galaxy</span> server is the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file. This file tells <span class="notranslate">Galaxy</span> where to run all of the jobs that users execute. If <span class="notranslate">Galaxy</span> can’t find a job conf file or none has been specified in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file, it will use a default configuration, <code class="language-plaintext highlighter-rouge">job_conf.xml.sample_basic</code> file. This file is deployed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/lib/<span class="notranslate">galaxy</span>/config/sample/job_conf.xml.sample_basic</code> (or see it <a href="https://github.com/galaxyproject/galaxy/blob/release_20.05/lib/galaxy/config/sample/job_conf.xml.sample_basic">in the codebase</a>), though there is a symlink to the file in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/config</code>.</p>
+<p>One of the most important configuration files for a large <span class="notranslate">Galaxy</span> server is the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file. This file tells <span class="notranslate">Galaxy</span> where to run all of the jobs that users execute. If <span class="notranslate">Galaxy</span> can’t find a job conf file or none has been specified in the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> file, it will use a default configuration, <code class="language-plaintext highlighter-rouge">job_conf.xml.sample_basic</code> file. This file is deployed to <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/lib/<span class="notranslate">galaxy</span>/config/sample/job_conf.xml.sample_basic</code> (or see it <a href="https://github.com/galaxyproject/galaxy/blob/release_20.09/lib/galaxy/config/sample/job_conf.xml.sample_basic">in the codebase</a>), though there is a symlink to the file in <code class="language-plaintext highlighter-rouge">/srv/<span class="notranslate">galaxy</span>/server/config</code>.</p>
 
 <p>The job configuration file allows <span class="notranslate">Galaxy</span> to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:</p>
 
@@ -2625,7 +2703,13 @@ In a training setting there is no need to request certificates that will be trus
 
   <ol>
     <li>
-      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook (<code class="language-plaintext highlighter-rouge">mkdir -p templates/<span class="notranslate">galaxy</span>/config/</code>).</p>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-13"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p templates/<span class="notranslate">galaxy</span>/config/
+</code></pre></div>        </div>
+      </blockquote>
     </li>
     <li>
       <p>Create <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):</p>
@@ -2645,38 +2729,64 @@ In a training setting there is no need to request certificates that will be trus
     <li>
       <p>Inform <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> of where you would like the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
-  <span class="na"><span class="notranslate">galaxy</span></span><span class="pi">:</span>
-    <span class="c1"># ... existing configuration options in the `<span class="notranslate">galaxy</span>` section ...</span>
-    <span class="na">job_config_file</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config_dir</span><span class="nv"> </span><span class="s">}}/job_conf.xml"</span>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -32,6 +32,7 @@</span> <span class="notranslate">galaxy</span>_config:
+     file_path: /data
+     check_migrate_tools: false
+     tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
+<span class="gi">+    job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.xml"
+</span>   uwsgi:
+     socket: 127.0.0.1:8080
+     buffer-size: 16384
 </code></pre></div>      </div>
 
       <p>And then deploy the new config file using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_templates</code> var in your group vars:</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
-  <span class="c1"># ... possible existing config file definitions</span>
-  <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</span>
-    <span class="na">dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span> <span class="s">a/group_vars/<span class="notranslate">galaxy</span>servers.yml</span>
+<span class="s">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml</span>
+<span class="err">@@</span> <span class="s">-59,6 +59,10 @@ <span class="notranslate">galaxy</span>_config</span><span class="pi">:</span>
+       <span class="pi">-</span> <span class="s">lib/<span class="notranslate">galaxy</span>/main.py</span>
+     <span class="na">farm</span><span class="pi">:</span> <span class="s">job-handlers:1,2</span>
+
+<span class="s">+<span class="notranslate">galaxy</span>_config_templates</span><span class="pi">:</span>
+<span class="s">+  - src</span><span class="pi">:</span> <span class="s">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</span>
+<span class="s">+    dest</span><span class="pi">:</span> <span class="s2">"</span><span class="s">{{</span><span class="nv"> </span><span class="s"><span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file</span><span class="nv"> </span><span class="s">}}"</span>
+<span class="s">+</span>
+ <span class="s"># systemd</span>
+ <span class="s"><span class="notranslate">galaxy</span>_systemd_mode</span><span class="pi">:</span> <span class="s">mule</span>
+ <span class="s"><span class="notranslate">galaxy</span>_zergpool_listen_addr</span><span class="pi">:</span> <span class="s">127.0.0.1:8080</span>
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Run the playbook: <code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code>. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
+      <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
-changed: [<span class="notranslate">galaxy</span>.example.org]
-</code></pre></div>      </div>
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-14"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>          </div>
+        </blockquote>
+        <blockquote class="code-out">
+          <h3 id="code-in-output-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
+changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
     </li>
     <li>
       <p>Checkout the new job_conf.xml file.</p>
 
       <blockquote class="code-in">
-        <h3 id="code-in-input-bash-11"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <h3 id="code-in-input-bash-15"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
         <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /srv/<span class="notranslate">galaxy</span>/config/job_conf.xml
 </code></pre></div>        </div>
       </blockquote>
 
-      <blockquote class="code-out">
-        <h3 id="code-out-output-bash-11"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output-bash-10"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
         <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;job_conf&gt;</span>
     <span class="nt">&lt;plugins</span> <span class="na">workers=</span><span class="s">"4"</span><span class="nt">&gt;</span>
         <span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"local_plugin"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"</span><span class="nt">/&gt;</span>
@@ -2727,7 +2837,21 @@ changed: [<span class="notranslate">galaxy</span>.example.org]
   <h3 id="hands_on-hands-on-revert-the-apocalypse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Revert the Apocalypse</h3>
 
   <ol>
-    <li><code class="language-plaintext highlighter-rouge">ansible-playbook <span class="notranslate">galaxy</span>.yml</code></li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-16"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Get a hot beverage of your choice while it rebuilds.</p>
+    </li>
+    <li>
+      <p>Congratulate yourself for saving the day.</p>
+    </li>
   </ol>
 
 </blockquote>
