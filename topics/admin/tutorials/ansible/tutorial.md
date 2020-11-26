@@ -79,7 +79,7 @@ db_1.example.org ansible_user=root
 Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to specify which user to connect with.
 
 > ### {% icon details %} Ansible Inventory Documentation
-> For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html).
+> For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
 {: .details}
 
 ## Roles
@@ -123,7 +123,7 @@ vars      | Default values for variables the user should normally not change (e.
 
 > ### {% icon details %} Ansible Role Documentation
 >
-> For more information check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/playbooks_reuse_roles.html).
+> For more information check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_reuse_roles.html).
 {: .details}
 
 ## Modules and Tasks
@@ -147,11 +147,11 @@ A `tasks/main.yml` file calls multiple Ansible modules to accomplish its goal. A
 
 Here we have two tasks. Each has a `name` that will be shown to the person running the playbook.
 
-The first invokes the `yum` module with the arguments `name: cvmfs, state: ...`. This will use yum to install the package named `cvmfs`. The state parameter uses a [Jinja2](http://jinja.pocoo.org/) template to evaluate the value of the variable `cvmfs_upgrade_client`. We can [grep through](https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&unscoped_q=cvmfs_upgrade_client) the repository and see that `defaults/main.yml` sets that to `false` by default. We can override this if we need, we'll come back to that later. The first task also has a `when` condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic [`package`](http://docs.ansible.com/ansible/latest/package_module.html) module, if possible.
+The first invokes the `yum` module with the arguments `name: cvmfs, state: ...`. This will use yum to install the package named `cvmfs`. The state parameter uses a [Jinja2](http://jinja.pocoo.org/) template to evaluate the value of the variable `cvmfs_upgrade_client`. We can [grep through](https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&unscoped_q=cvmfs_upgrade_client) the repository and see that `defaults/main.yml` sets that to `false` by default. We can override this if we need, we'll come back to that later. The first task also has a `when` condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic [`package`](http://docs.ansible.com/ansible/2.9/package_module.html) module, if possible.
 
-The second invokes the [`service`](http://docs.ansible.com/ansible/latest/service_module.html) module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service `name: autofs` will be `enabled` and its `state` should be `started`.
+The second invokes the [`service`](http://docs.ansible.com/ansible/2.9/service_module.html) module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service `name: autofs` will be `enabled` and its `state` should be `started`.
 
-[Many modules](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html) are available for you to use.
+[Many modules](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html) are available for you to use.
 
 ### Stylistic Choices
 
@@ -188,7 +188,7 @@ This is a quite minimal playbook. It selects a `hosts` group named `webservers`,
 
 > ### {% icon details %} Ansible Playbook Documentation
 >
-> For more information check out [the official documentation on this topic](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html).
+> For more information check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html).
 {: .details}
 
 ### Philosophies
@@ -202,7 +202,7 @@ Playbooks that execute one-off commands | Works well when you have commands that
 
 ## Variables
 
-There are a bunch of places variables can be set. [The list is ridiculous.](https://docs.ansible.com/ansible/latest/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) Try and find a convention within your group and stick to that to help manage the chaos.
+There are a bunch of places variables can be set. [The list is ridiculous.](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_variables.html#variable-precedence-where-should-i-put-a-variable) Try and find a convention within your group and stick to that to help manage the chaos.
 
 There are some special places you can put variables that will be loaded automatically:
 
@@ -213,7 +213,7 @@ For a real-life example, UseGalaxy.eu [generally attempts](https://github.com/us
 
 ## Vaults
 
-[`ansible-vault`](https://docs.ansible.com/ansible/latest/user_guide/vault.html) is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml)'s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.
+[`ansible-vault`](https://docs.ansible.com/ansible/2.9/user_guide/vault.html) is a super useful tool that lets you encrypt secrets for your group using a pre-shared key. This allows you to commit ALL of your Ansible playbooks and variables to source control, without the concern of leaking secrets. E.g. [UseGalaxy.eu](https://github.com/usegalaxy-eu/infrastructure-playbook/blob/master/secret_group_vars/all.yml)'s vault file. The encrypted version is not very interesting to look at, but it is mostly to show that we confidently place an encrypted copy of our secrets online, under configuration management. This has made our life a lot easier.
 
 
 # Your First Playbook and First Role
@@ -244,7 +244,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    All of the steps are the same, no matter which machine Ansible will manage and where you run it. The only difference is the connection setup
 >
-> 2. [Install Ansible.](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) where you will run it
+> 2. [Install Ansible.](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) where you will run it
 >
 > 3. Create an directory named `intro` and `cd` into it
 >
@@ -252,7 +252,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    1. We will call our group `my_hosts`
 >
->    2. Create [an inventory file](https://docs.ansible.com/ansible/latest/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
+>    2. Create [an inventory file](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
 >
 >       > ### {% icon solution %} Solution
 >       > The file should look like:
@@ -301,10 +301,10 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >        dest: /tmp/test.txt
 >    ```
 >
->    You can read about all of the parameters available to the [`copy`](http://docs.ansible.com/ansible/latest/copy_module.html) module on Ansible's documentation.
+>    You can read about all of the parameters available to the [`copy`](http://docs.ansible.com/ansible/2.9/copy_module.html) module on Ansible's documentation.
 >
 >    > ### {% icon details %} Ansible Module Documentation
->    > You can usually find a module that will represent most commands you will run at a shell. Usually by searching the internet for "ansible do-some-action" e.g. "ansible copy file to server" or "ansible restart service." If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/latest/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
+>    > You can usually find a module that will represent most commands you will run at a shell. Usually by searching the internet for "ansible do-some-action" e.g. "ansible copy file to server" or "ansible restart service." If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/2.9/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
 >    >
 >    {: .details }
 >
@@ -405,7 +405,7 @@ TASK [Gathering Facts] *********************************************************
 ok: [localhost]
 ```
 
-The [`setup`](https://docs.ansible.com/ansible/latest/modules/setup_module.html) module runs by default for every host and gathers facts about the host.
+The [`setup`](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) module runs by default for every host and gathers facts about the host.
 
 > ### {% icon hands_on %} Hands-on: The Setup Module
 >
@@ -574,7 +574,7 @@ Templates give you greater control over the files you are deploying to the targe
 > When Ansible runs:
 >
 > 1. It collects variables defined in group variables and other places
-> 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
+> 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
 > 3. When multiple roles execute in a playbook:
 >    1. Their defaults are added to the set of variables (the group variables having precedence over these variables)
 >    2. They can also dynamically define more variables which may not be set until that role is run
@@ -631,7 +631,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > > `become` causes Ansible to attempt to become a different user (using sudo/su/whatever is appropriate), by default this is `root`. If you want to become a different user, just set `become_user`. Beware, the user should be able to privilege escalate without a password prompt. Otherwise when you execute the playbook you should set `--ask-become-pass`, using the privilege escalation password for that host.
 >    > >
 >    > > > ### {% icon details %} Ansible Become
->    > > > See the [documentation](https://docs.ansible.com/ansible/latest/user_guide/become.html) if you need to control this behaviour differently. `become` can be set either at the task level or the playbook level.
+>    > > > See the [documentation](https://docs.ansible.com/ansible/2.9/user_guide/become.html) if you need to control this behaviour differently. `become` can be set either at the task level or the playbook level.
 >    > > >
 >    > > {: .details}
 >    > >

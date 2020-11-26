@@ -1,0 +1,37 @@
+on:
+  push:
+    tags:
+    - '*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby: [2.5]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - uses: actions/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby }}
+      - uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gems-${{ hashFiles('**/Gemfile.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-gems-
+      - name: Install dependencies
+        run: |
+          bundle config path vendor/bundle
+          bundle install --jobs 4 --retry 3
+
+      - run: |
+          sed -i s"|^baseurl: .*|baseurl: '/archive/${TRAVIS_TAG}'|g" _config.yml
+          sed -i s"|^github_repository_branch: .*|github_repository_branch: '${TRAVIS_TAG}'|g" _config.yml
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+      - name: Deploy 🚀
+        run: |
+            pip install awscli
+            ./bin/publish-archive

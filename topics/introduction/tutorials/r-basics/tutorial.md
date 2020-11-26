@@ -811,7 +811,7 @@ Let's summarize this section on coercion with a few take home messages:
 Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode.
 
 > ### {% icon comment %} Learning more about lists
-> Learn more about creating and using lists using this [nice tutorial](http://r4ds.had.co.nz/lists.html). In this one example, we will create a named list and show you how to retrieve items from the list.
+> Learn more about creating and using lists using this [nice tutorial](https://r4ds.had.co.nz/vectors.html#lists). In this one example, we will create a named list and show you how to retrieve items from the list.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Create and manipulate list objects

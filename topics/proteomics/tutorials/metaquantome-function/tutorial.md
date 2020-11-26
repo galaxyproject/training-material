@@ -96,7 +96,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 
 > ### {% icon hands_on %} Hands-on: Run metaQuantome databases
 >
-> 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
+> 1. {% tool [metaQuantome: databases](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.0-0) %} with the following parameters:
 >    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
 >
 >
@@ -139,7 +139,7 @@ The create samples file module is used to generate the samples file input file f
 
 > ### {% icon hands_on %} Hands-on: Create an experimental Design file for sorting samples
 >
-> 1. {% tool [metaQuantome: create samples file](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_sample/49a957fb353a) %} with the following parameters:
+> 1. {% tool [metaQuantome: create samples file](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.0-0) %} with the following parameters:
 >    - {% icon param-select %} *"Sample file creation method"*: `Manually specify experimental conditions and samples`
 >    - In *"Insert Samples"*:
 >        - *"1.Samples"*:
