@@ -108,9 +108,9 @@ The `tutorial.md` needs to start with some metadata at the top:
 >
 {: .hands_on}
 
-This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+This information is used to display the data from the topic and tutorial page. They are also used to check which information is missing for the tutorials.
 
-We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
+We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
 - `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
     - `type`: the type of link (`internal` or `external`)
@@ -144,7 +144,7 @@ We also define metadata related to the pedagogical content of the tutorial, whic
     - `title`: title of the external resource
     - `link`: URL to the external resource
 
-    They will be displayed at the end of a tutorial.
+    They will be displayed at the end of the tutorial.
 - `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
@@ -335,7 +335,7 @@ This box at the top of each tutorial is automatically generated using the metada
 > **{% icon objectives %} Objectives**
 > - The learning objectives are the goals of the tutorial
 > - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course
-> - They are single sentences describing what a learner should be able to do once they have done completed tutorial
+> - They are single sentences describing what a learner should be able to do once they have completed the tutorial
 > - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements
