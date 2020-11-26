@@ -23,12 +23,11 @@ contributors:
   - mariecrane
   - pravs3683
 follow_up_training:
-  -
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
       - metaproteomics
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
       - metaquantome-taxonomy
