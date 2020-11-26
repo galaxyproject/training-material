@@ -51,21 +51,15 @@ jobs:
           bundle install --jobs 4 --retry 3
       - run: make check-frontmatter ACTIVATE_ENV=pwd
 
-  lint-workflows:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+      fetch-depth: 1
       - run: make check-workflows
-
-  lint-snippets:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 1
       - run: make check-snippets
+      - run: make check-tool-links
 
   build-site:
     needs: setup
