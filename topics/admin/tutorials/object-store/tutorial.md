@@ -84,7 +84,7 @@ First, note that your Galaxy datasets have been created thus far in the director
 >    </object_store>
 >    ```
 >
-> 4. Add a `pre_task` to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/latest/modules/file_module.html).
+> 4. Add a `pre_task` to create the `/data2` folder [using the file module](https://docs.ansible.com/ansible/2.9/modules/file_module.html).
 >
 >    ```
 >        - name: Create the second storage directory

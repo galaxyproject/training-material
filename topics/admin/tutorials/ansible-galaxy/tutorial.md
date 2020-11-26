@@ -166,7 +166,7 @@ As an administrator who often forgot to run the upgrade, and would only notice i
 
 ## Handlers
 
-A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
+A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
 
 ## Defaults
 
@@ -192,7 +192,7 @@ With the necessary background in place, you are ready to install Galaxy with Ans
 
 To proceed from here it is expected that:
 
-1. You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
 
    > ### {% icon comment %} Comment: Running Ansible on remote machine
    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
@@ -261,7 +261,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 
 > ### {% icon hands_on %} Hands-on: Configuration files
 >
-> 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/latest/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
+> 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
 >    ```ini
 >    [defaults]
@@ -281,7 +281,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    pipelining = true
 >    ```
 >
->    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
+>    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >
 > 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. If you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
 >
@@ -642,7 +642,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, `virtualenv`, `tar`, and `bzip2`.
+>    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, `virtualenv`, `tar`, and `bzip2`.
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    > ### {% icon question %} Question
@@ -749,7 +749,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > When Ansible runs:
 >    >
 >    > 1. It collects variables defined in group variables and other places
->    > 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
+>    > 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
 >    > 3. As roles are executed:
 >    >    1. Their defaults are added to the set of variables (the group variables having precedence over these variables)
 >    >    2. They can also dynamically define more variables which may not be set until that role is run
@@ -1479,7 +1479,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/2.9/modules/systemd_module.html). Handlers are structured just like tasks:
 >
 >    ```diff
 >    --- galaxy.yml
