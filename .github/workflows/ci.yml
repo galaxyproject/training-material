@@ -9,6 +9,7 @@ jobs:
       matrix:
         ruby: [2.5]
     steps:
+      - run: "echo ${GITHUB_REF} ${GITHUB_BASE_REF} ${GITHUB_HEAD_REF}"
       - uses: actions/checkout@v2
         with:
           fetch-depth: 1
@@ -91,7 +92,6 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
       - run: bundle exec jekyll build --strict_front_matter -d _site/training-material
-      - run: "echo ${GITHUB_REF}"
       - run: |
           bundle exec htmlproofer \
             --assume-extension \
