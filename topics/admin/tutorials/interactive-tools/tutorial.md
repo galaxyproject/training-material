@@ -21,6 +21,7 @@ contributors:
   - natefoo
   - slugger70
   - hexylena
+  - abretaud
 tags:
   - ansible
 requirements:
@@ -29,6 +30,7 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+      - connect-to-compute-cluster
 ---
 
 > ### {% icon warning %} Evolving Topic
