@@ -471,6 +471,7 @@ If you are completing this tutorial as part of a [Galaxy Admin Training][gat] co
 >         - galaxyproject.nginx
 >         - geerlingguy.docker
 >         - usegalaxy_eu.gie_proxy
+>    ```
 >
 > 4. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
