@@ -107,7 +107,7 @@ We will use several Ansible roles for this tutorial. In order to avoid repetetiv
 >    - src: geerlingguy.docker
 >      version: 2.6.0
 >    - src: usegalaxy_eu.gie_proxy
->      version: 0.0.1
+>      version: 0.0.2
 >    ```
 >
 > 2. Install the requirements with `ansible-galaxy`:
