@@ -758,7 +758,7 @@ files.
 > ### {% icon hands_on %} Hands-on: Compute GLMM on Species-Population metrics
 >
 > 1. {% tool [Compute GLM on population data](toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2) %} with following parameters:
->     - {% icon param-files %} *"Input metrics file"*: `#EVHOE`, `#BITS` and `#SWCIBTS` metrics data files
+>     - {% icon param-files %} *"Input metrics file"*: `#EVHOE`, `#BITS` and `#SWCIBTS` metrics (here presence absence) data files
 >     - {% icon param-file %} *"Unitobs informations file"*: `#Concatenate #unitobs` data file
 >     - {% icon param-select %} *"Interest variable from metrics file"*: `Column: 4`
 >     - {% icon param-select %} *"Response variables"*: `Year` `Site`
