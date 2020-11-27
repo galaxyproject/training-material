@@ -440,7 +440,7 @@ nomenclature for the "observation.unit" fields, namely:
 >    >
 >    {: .question}
 >
-> 4. {% tool [Cut columns from a table](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
+> 4. {% tool [Cut columns from a table (cut)](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %}
 >    with following parameters :
 >    - {% icon param-files %} *"File to cut"*: `#Concatenate` Column Regex Find And Replace data file
 >    - {% icon param-select %} *"Operation"*: `Keep`
