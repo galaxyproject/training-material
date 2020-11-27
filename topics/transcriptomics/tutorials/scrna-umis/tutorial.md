@@ -200,7 +200,7 @@ This then provides us with the true count of the number of true transcripts for 
 > >
 > >   e.g.
 > >
-> >  | BC:Cell | Maps to Gene | BC:UMI | Maps to Gene |
+> >  | BC:Cell | Maps to Gene | BC:UMI |
 > >  |------|-----|------|
 > >  | AAAT | Slx1 | TCA |
 > >  | AAAT | Slx2 | GTG |
