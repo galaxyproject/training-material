@@ -68,7 +68,7 @@ In this tutorial, we used 6 different machine learning algorithms for the predic
 
 ## Calculating Peptide Descriptors 
 
-A descriptor or feature is the quantitative or a qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to summarise a biological property such as anti-cancer activity. In this example, we utilized CTD descriptors, describes as composition, transition, and distribution descriptors. 
+A descriptor or feature is the quantitative or a qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to summarise a biological property such as anti-cancer activity. In this example, we utilized CTD (composition, transition, and distribution) descriptors. 
 
 ![Peptide descriptors](../../images/PDAUG_ML_1.png "ML algorithms use numerical representation of a sequence-based properties for model building")
 
@@ -95,7 +95,7 @@ We will combine the ACPs and non-ACPs data set as a single data frame and will a
 ### Adding class labels to the training data
 
 
-The class label usually describes samples from two different groups, in our case ACPs and non-ACPs.   In the case of binary classification, usually, samples are labeled as "0" or 1. 
+The class label usually describes samples from two different groups, in our case ACPs and non-ACPs.   In the case of binary classification, usually, samples are labeled as "0" or "1". 
 
 
 
@@ -113,9 +113,9 @@ The class label usually describes samples from two different groups, in our ca
 {: .hands_on}
 
 
-### Merging data frames to combine Negative and Positive data set
+### Merging ACPs and non-ACPs samples to create a traning dataset
 
-In previous steps, we have calculated descriptors and labeled the data as positive and negative for ACPs and non-ACPs respectively, now we can use this dataset as a training dataset, however, before the final step, we have to merge both of the datasets into a single one that represents our final training dataset with the class labels.  
+In previous steps, we labeled positive data or ACPs as "1", and negative data or non-ACPs as "0", now we can combine these two data frames as one training dataset.  In this step, we will merge these data frames as a labeled training data set. 
 
 > ### {% icon hands_on %} Hands-on: Merging two data frames
 >
