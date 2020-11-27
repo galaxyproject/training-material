@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: Peptide Library Data Analysis
+level: Intermediate
 questions:
   - How to utilize quantitative properties of amino acids and peptide sequence to analyse peptide data?
 objectives:

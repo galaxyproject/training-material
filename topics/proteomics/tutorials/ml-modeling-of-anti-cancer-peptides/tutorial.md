@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: ML Modeling of Anti-cancer Peptides
 zenodo_link: "https://doi.org/10.5281/zenodo.4111092"
+level: Intermediate
 questions:
   - Which ML algorithm is superior in predicting anti-cancer peptides?
 objectives:
