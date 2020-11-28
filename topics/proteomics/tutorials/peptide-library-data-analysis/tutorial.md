@@ -69,9 +69,9 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 > 
 > 1. {% tool [PDAUG Peptide Sequence Analysis](toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0) %} with the following parameters:
 >    - *"Analysis options"*: `Plot Summary`
->        - {% icon param-file %} *"First input file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
->        - {% icon param-file %} *"Second input file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
->        - *"Second input file"*: `AMP`
+>        - {% icon param-file %} *"First input file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
+>        - {% icon param-file %} *"Second input file"*: `PDAUG TSVtoFASTA on data 1 - second (fasta)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
+>        - *"first input file"*: `AMP`
 >        - *"Second input file"*: `TM `
 >
 >
@@ -89,8 +89,8 @@ In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libr
 > ### {% icon hands_on %} Hands-on: Generating a Fisher's plot to assess peptide dataset
 > 
 > 1. {% tool [PDAUG Fisher's Plot](toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0) %} with the following parameters:
->    - {% icon param-file %} *"First fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
->    - {% icon param-file %} *"Second fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
+>    - {% icon param-file %} *"First fasta file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
+>    - {% icon param-file %} *"Second fasta file"*: `PDAUG TSVtoFASTA on data 1 - second (fasta)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - *"Label for first population"*: `AMP`
 >    - *"Label for second population"*: `TM`
 >
@@ -111,11 +111,11 @@ In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptor
 > ### {% icon hands_on %} Hands-on: Calculating descriptors for the peptide dataset
 > 
 > 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
+>    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - *"Descriptor Type"*: `CTD`
 >
 > 1. {% tool [PDAUG Sequence Property Based Descriptors](toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - WithClassLabel (tabular)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
+>    - {% icon param-file %} *"Input fasta file"*: `PDAUG TSVtoFASTA on data 1 - second (fasta)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - *"Descriptor Type"*: `CTD`
 >
 >
