@@ -290,14 +290,6 @@ Here is an embedded snippet showing JBrowse and the annotations:
 {% include snippets/jbrowse.html datadir="data2" %}
 
 
-Your annotations may look like this:
-
-![annotations](../../images/annotations1.png "Annotations - zoomed out view")
-
-Zoom in (with the plus button) to see annotation details. Click on an annotation to see its sequence and source (e.g. the tool that predicted it).
-
-![annotations](../../images/annotations2.png "Annotations - zoomed in view")
-
 > ### {% icon question %} Question
 > Why might there be several annotations over the same genome region?
 > > ### {% icon solution %} Solution
