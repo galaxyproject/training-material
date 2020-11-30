@@ -247,7 +247,9 @@ Here is an embedded snippet showing JBrowse and the mapped reads:
 
 # Annotate the assembly
 
-We can now annotate our assembled genome with information about genomic features. A chloroplast genome annotation tool is not yet available in Galaxy. Instead, we can use a web-based tool to annotate (or upload an example annotation).
+We can now annotate our assembled genome with information about genomic features.
+* A chloroplast genome annotation tool is not yet available in Galaxy, although for an approximation we could use the tool for bacterial genome annotation, Prokka.
+* However here we will use a web-based tool designed for chloroplast genomes to annotate our assembly (or, you can upload an example annotation).
 
 Follow these steps to annotate your assembly, or upload an example annotation file from this [Zenodo link](http://doi.org/10.5281/zenodo.4267171) to your current Galaxy history, and skip to the next step.
 
