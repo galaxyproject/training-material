@@ -1,25 +1,32 @@
 ---
 layout: tutorial_hands_on
 
-title: Advanced computing for large-scale genome comparison
-zenodo_link: ''
+title: "Large-scale genome comparison"
+
+zenodo_link: ""
+
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How can we run pairwise genome comparisons using Galaxy?
+- How can we extract further information from sequence comparisons in Galaxy?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+- Learn the basics of pairwise sequence comparison
+- Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels
+- Learn how to post-process your sequence comparisons
+time_estimation: 2H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- We learnt that sequence comparison is a demanding problem and that there are several ways to approach it
+- We learnt how to run sequence comparisons in Galaxy with different levels of precision
+- Fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively
+- We learnt how to post-process our comparison by extracting alignments, performing realigments, etc.
+requirements:
+  -
+    type: "internal"
+    topic_name: introduction
+    tutorials:
+      - galaxy-intro-101
+
 contributors:
-- contributor1
-- contributor2
+- estebanpw
 
 ---
 
@@ -29,27 +36,14 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
+Sequence comparison is a core problem in bioinformatics. It is used widely in evolutionary studies, structural and functional analyses, assembly, metagenomics, etc. Despite its regular presence in everyday Life-sciences pipelines, it is still not a trivial step that can be overlooked. Therefore, understanding how sequence comparison works is key to developing efficient workflows that are central to so many other disciplines.
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
+In the following tutorial, we will learn how to compare both small and large sequences using both seed-based alignment methods and alignment-free methods, and how to post-process our comparisons interactively to refine our results. Besides, we will also learn about the theoretical background of sequence comparison, including why some tools are suitable for some jobs and others are not.
 
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
+This tutorial is divided into two large sections:
 
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
+ - Fine-grained interactive sequence comparison: In this part of the tutorial we will use `GECKO` and `GECKO-MGV` to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.
+ - Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using `CHROMEISTER`, and alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes.
 
 > ### Agenda
 >
@@ -60,119 +54,103 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# Fine-grained interactive sequence comparison
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+Imagine you are working on an evolutionary study regarding the species `mycoplasma hyopneumoniae`. In particular, you are interested in the strains `232` and `7422` and wish to compare their DNA sequence to know more about the evolutionary changes that took place between both. The workflow you will follow starts with (1) acquiring the data,(2)  getting it ready for Galaxy, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let's go! 
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+## Preparing the data
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+First we will be uploading the data to Galaxy so that we can run our tools on it.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Sequence comparison hands-on"
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
+> 2. Import `mycoplasma-hyopneumoniae-232` and `mycoplasma-hyopneumoniae-7422` from [Zenodo](zenodoFolderLink). You can also download these two sequences from the NCBI from [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_006360.1?report=fasta) and [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_021831.1?report=fasta).
 >
 >    ```
->    
+>    https://zenodo.org/linkTo232
+>    https://zenodo.org/linkTo7422
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+>    As default, Galaxy takes the link as name, so rename them.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+> 3. Rename the files to `232.fasta` and `7422.fasta` and change the datatype to `fasta`.
 >
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
+>    {% include snippets/rename_dataset.md %}
+>    {% include snippets/change_datatype.md %}
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+If you were successful, both sequences should now be available as `.fasta` datasets in your history.
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **My Tool**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. {% tool [My Tool]() %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: File
->    - *"Parameter"*: `a value`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. What do you think about the size of the sequences in regards to the difficulty of comparing them?
 >
 > > ### {% icon solution %} Solution
+> > 1. It always depends on the focus of our study. For instance, if we were looking for optimal alignments, two 1 MB sequences are indeed large enough to make most approaches either fail or take a decent amount of time and resources. On the other hand, if we were looking for seed-based local alignments (e.g. `GECKO` ({% cite GECKO %}) or `BLAST` ({% cite BLAST %}) ), the comparison would require merely seconds (check the slides for more information).
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> {: .solution }
+>
+{: .question}
+
+As we discussed in the previous section, running optimal aligning tools on such "small" data can be difficult (in fact, tools such as the well-known `EMBOSS needle` will require cuadratic amounts of time and memory, whereas tools such as `EMBOSS strecher` will require quadratic time ({% cite myers1988optimal %})). These limitations can make it impractical in many situations. Therefore, we will now learn how to overcome these limitations by employing seed-based methods, particularly `GECKO`.
+
+## Running the comparison
+
+We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycoplasma hyopneumoniae 7422` in Galaxy using `GECKO`.
+
+> ### {% icon hands_on %} Hands-on: Comparing two mycoplasmas with GECKO
+> 1. **GECKO** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Query sequence"*: `232.fasta`
+>    - {% icon param-file %} *"Reference sequence"*: `7422.fasta`
+>    - *"K-mer seed size"*: `16`
+>    - *"Minimum length"*: `50`
+>    - *"Minimum similarity"*: `60`
+>    - *"Generate alignments file?"*: `Extract alignments (CSV and alignments file)`
+> 2. Check out the files that have been generated, i.e. the `CSV` and the `Alignments` file. 
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What information is provided in the `CSV` file?
+>    > 2. And in the `Alignments` file?
+>    > 2. What happens if we re-run the experiment with other parameters (e.g. change `Minimum length` to `5000` and `Minimum similarity` to `95`)?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > 1. The `CSV` file contains a summary of the detected High-Scoring Segment Pairs (HSPs) or alignments. The file is divided in a few rows of metadata (e.g. containing the sequence names) and one row per alignment detected. Check out the `GECKO` help (bottom of the tool {% icon tool %} page to know what each column does!
+>    > > 2. The `Alignments` file contains the actual regions of the query and reference sequence for each alignment detected. With this file, you can investigate individual alignments, find mutations and differences between the sequences, extract the aligned part, etc.
+>    > > 3. Changing the parameters affect the number of alignments GECKO will detect. In fact, if we use parameters that are too restrictive, then we might not get any alignments at all! On the other hand, if we use parameters that are too permissive, then we might get a lot of noise in the output. Thus, it is very important to understand what the parameters do. Never leave your parameters default, always know what they do! Check out the help section to get information about the parameters.
+>    >  {: .solution }
+>    {: .question}
+>
+{: .hands_on}
+
+## Interactive post-processing
+
+todo
+
+# Coarse-grained sequence comparison
+
+todo
+
+> ### {% icon question %} Questions
+>
+> 1. We already discussed the mycoplasma sequences in regards to their size. What do you think about the size of the two chromosomes that we will be comparing now?
+>
+> > ### {% icon solution %} Solution
+> > 1. Chromosome-like sequences are arguably some of the largest DNA sequences you can find. Regarding the comparison, optimal chromosome comparison typically requires either large clusters to be run or special hardware accelerators (such as GPUs). On the other hand, for seed-based local alignment we can still use common approaches, but they will take a considerable amount of time. Finally, if we use alignment-free methods such as CHROMEISTER ({% cite perez2019ultra %}), we can perform a comparison in less than 5 minutes (check the slides for more information).
 > >
-> {: .solution}
+> {: .solution }
 >
 {: .question}
 
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
