@@ -141,6 +141,8 @@ Your assembly graph may look like this:
 
 Short illumina reads are more accurate the nanopore reads. We will use them to correct errors in the nanopore assembly.
 
+First, we will map the short reads to the assembly and create an alignment file.
+
 > ### {% icon hands_on %} Hands-on: Map reads
 > 1. **Map with BWA-MEM** {% icon tool %}:
 >    - *"Will you select a reference genome from your history"*: `Use a genome from history`
@@ -150,10 +152,11 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Select fastq dataset"*: `sweet-potato-illumina-reduced.fastq`
 >    - *"Set read groups information?"*: `Do not set`
 >    - *"Select analysis mode"*: `Simple Illumina mode`
+>2. **Re-name output file**:
+>   - Re-name this file `illumina.bam`
 {: .hands_on}
 
-* This maps the short reads to the assembly, and creates an alignment file.
-* Re-name this file `illumina.bam`
+Next, we will compare the short reads to the assembly, and create a polished (corrected) assembly file.
 
 > ### {% icon hands_on %} Hands-on: Polish
 > 1. **pilon** {% icon tool %}:
@@ -164,14 +167,16 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Variant calling mode"*: `No`
 >    - *"Create changes file"*: `Yes`
 >
->  2. Rename the fasta output to `polished-assembly.fasta`
+> 2. **Re-name output file**:
+>    - Rename the fasta output to `polished-assembly.fasta`
 >
 >    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
 >
->   * This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
->   * There are two outputs: a `fasta` file and a `changes` file.
+> 3. **View output**:
 >   * What is in the `changes` file?
->   * Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
+>
+> 4. **Fasta Statistics**:
+>    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
 > ### {% icon question %} Question
@@ -227,11 +232,11 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 >            - *Leave the other track features as default*
 > 2. **Re-name output file**:
 >    - JBrowse may take a few minutes to run. There is one output file: re-name it `assembly-and-reads`
+> 3. **View output**:
+>    * Click on the eye icon to view. (For more room, collapse Galaxy side menus with corner < > signs).
+>    *  Make sure the bam files are ticked in the left hand panel.
+>    * Choose a contig in the drop down menu. Zoom in and out with + and - buttons.
 {: .hands_on}
-
-* Click on the eye icon to view. (For more room, collapse Galaxy side menus with corner < > signs).
-*  Make sure the bam files are ticked in the left hand panel.
-* Choose a contig in the drop down menu. Zoom in and out with + and - buttons.
 
 Here is an embedded snippet showing JBrowse and the mapped reads:
 
@@ -248,6 +253,8 @@ Here is an embedded snippet showing JBrowse and the mapped reads:
 > > 2. There may be lots of reasons for varying read coverage. Some possibilities: In areas of high read coverage: this region may be a collapsed repeat. In areas of low or no coverage: this region may be difficult to sequence; or, this region may be a misassembly.
 > {: .solution}
 {: .question}
+
+* To learn more about JBrowse and its features, see the [Genomic Data Visualisation with JBrowse tutorial]({{site.baseurl}}/topics/visualisation/tutorials/jbrowse/tutorial.html)
 
 # Annotate the assembly
 
@@ -281,16 +288,15 @@ Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (
 >            - *Leave the other track features as default*
 > 2. **Re-name output file**:
 >    - JBrowse may take a few minutes to run. There is one output file: re-name it `view-annotations`
+> 3. **View output**:
+>    * Click on the eye icon to view the annotations file.
+>    * Select the right contig to view, in the drop down box.
+>    * Zoom out (with the minus button) until annotations are visible.
 {: .hands_on}
-
-* Click on the eye icon to view the annotations file.
-* Select the right contig to view, in the drop down box.
-* Zoom out (with the minus button) until annotations are visible.
 
 Here is an embedded snippet showing JBrowse and the annotations:
 
 {% include snippets/jbrowse.html datadir="data2" %}
-
 
 > ### {% icon question %} Question
 > Why might there be several annotations over the same genome region?
