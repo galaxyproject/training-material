@@ -62,14 +62,14 @@ Imagine you are working on an evolutionary study regarding the species `mycoplas
 
 First we will be uploading the data to Galaxy so that we can run our tools on it.
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Mycoplasma data upload
 >
-> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Sequence comparison hands-on"
+> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Mycoplasma comparison hands-on"
 >
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `mycoplasma-hyopneumoniae-232` and `mycoplasma-hyopneumoniae-7422` from [Zenodo](zenodoFolderLink). You can also download these two sequences from the NCBI from [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_006360.1?report=fasta) and [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_021831.1?report=fasta).
+> 2. Import `mycoplasma-hyopneumoniae-232.fasta` and `mycoplasma-hyopneumoniae-7422.fasta` from [Zenodo](zenodoFolderLink). You can also download these two sequences from the NCBI from [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_006360.1?report=fasta) and [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_021831.1?report=fasta).
 >
 >    ```
 >    https://zenodo.org/linkTo232
@@ -128,6 +128,12 @@ We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycopla
 >    > > 3. Changing the parameters affect the number of alignments GECKO will detect. In fact, if we use parameters that are too restrictive, then we might not get any alignments at all! On the other hand, if we use parameters that are too permissive, then we might get a lot of noise in the output. Thus, it is very important to understand what the parameters do. Never leave your parameters default, always know what they do! Check out the help section to get information about the parameters.
 >    >  {: .solution }
 >    {: .question}
+>    >
+>    > ### {% icon comment %} Note about parameters
+>    > 1. Besides the `minimum length` and `minimum similarity` parameters, which are applied as a filter after the comparison is completed, the `k-mer seed size` is an internal parameter that regulates the number of seeds that can be found. A smaller `k-mer` size will translate into detecting more seeds, which are starting points for alignments.
+>    > 2. Notice that this parameter must be taken into account depending on the type of sequence that we are working with. For example, if we set `k-mer seed size` to `32`, then `GECKO` will attempt to find alignments that start with 32 consecutive, equally aligned base pairs between the two sequences. If your sequences are far away from each other (in terms of evolutionary distance) then it will be very hard to find such 32 consecutive base pairs!
+>    > 3. Some advice: this parameter can affect performance greatly. For instance, setting `k-mer seed size` to `8` in the case of chromosomes can require much more computing time than using for instance `32`. On the other hand, if we set it to `32` in the case of small bacterial sequences, we might not find any alignments!
+>    > {: .comment}
 >
 {: .hands_on}
 
@@ -135,25 +141,90 @@ We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycopla
 
 todo
 
+### Connecting to the DOCKER container
+
+todo: running geckomgv and muscle
+
 # Coarse-grained sequence comparison
 
-todo
+In this second part of the tutorial, we are going to work with chromosome-sized sequences. While we can still use `GECKO` for chromosomes, it will take some more time and resources. However, consider now the case where you do not need alignments, but rather are in one of the following cases:
+
+- You are working with a very large *de novo* assembly genome for which you do not know the strain and thus you need to compare it to several candidates. 
+- You want to study large evolutionary rearrangements at a block level rather than alignment level at several species at once.
+- You want to generate a dotplot between several massive chromosomes from e.g. plants to find the main syntenies, but your sequences are full of repeats.
+
+As you can imagine, all three scenarios require several large-scale sequence comparisons. While there are also other ways to approach these situations, in this tutorial we will learn how we can use `CHROMEISTER` ({% cite perez2019ultra %}) which is specifically designed for large-scale genome comparison without alignments (alignment-free method).
+
+Before jumping on the hands-on, let us see an example of the second case: say we wanted to study the evolutionary rearrangements between the grass and common wheat genomes (*Aegilops tauschii* and *Triticum aestivum*). The following plot shows the comparison:
+
+![Large-scale genome comparison example](../../images/hpc-for-lsgc/Chrom07.png "Chromosome comparison for Aegilops tauschii and Triticum aestivum. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!")
+
+Now there are some things to note here: (1) we have been able to perform an alignment-free comparison very quickly, (2) we can visually see the large rearrangements and (3) we have identified which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use `CHROMEISTER` to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, e.g. *Homo sapiens* and *Mus musculus*).
+
+Let us now jump into the hands-on! We will learn how to compare chromosomes with `CHROMEISTER`, particularly the grass and common wheat genomes.
+
+> ### {% icon hands_on %} Hands-on: Chromosome data upload
+>
+> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Chromosome comparison hands-on"
+>
+>    {% include snippets/create_new_history.md %}
+>    {% include snippets/rename_history.md %}
+>
+> 2. Import `aegilops-tauschii-chr1.fasta` and `triticum-aestivum-chr1.fasta` from [Zenodo](zenodoFolderLink).
+>
+>    ```
+>    https://zenodo.org/linkTo232
+>    https://zenodo.org/linkTo7422
+>    ```
+>
+>    {% include snippets/import_via_link.md %}
+>
+>    As default, Galaxy takes the link as name, so rename them.
+>
+> 3. Rename the files to `aegilops-chr1.fasta` and `triticum-chr1.fasta` and change the datatype to `fasta`.
+>
+>    {% include snippets/rename_dataset.md %}
+>    {% include snippets/change_datatype.md %}
+>
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
 > 1. We already discussed the mycoplasma sequences in regards to their size. What do you think about the size of the two chromosomes that we will be comparing now?
 >
 > > ### {% icon solution %} Solution
-> > 1. Chromosome-like sequences are arguably some of the largest DNA sequences you can find. Regarding the comparison, optimal chromosome comparison typically requires either large clusters to be run or special hardware accelerators (such as GPUs). On the other hand, for seed-based local alignment we can still use common approaches, but they will take a considerable amount of time. Finally, if we use alignment-free methods such as CHROMEISTER ({% cite perez2019ultra %}), we can perform a comparison in less than 5 minutes (check the slides for more information).
+> > 1. Chromosome-like sequences are arguably some of the largest DNA sequences you can find. Regarding the comparison, optimal chromosome comparison typically requires either large clusters to be run or special hardware accelerators (such as GPUs). On the other hand, for seed-based local alignment we can still use common approaches, but they will take a considerable amount of time. Finally, if we use alignment-free methods such as `CHROMEISTER`, we can perform a comparison in few minutes (check the slides for more information) instead of hours.
 > >
 > {: .solution }
 >
 {: .question}
 
-
+> ### {% icon hands_on %} Hands-on: Comparing two plant chromosomes with CHROMEISTER
+> 1. **CHROMEISTER** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"Query sequence"*: `aegilops-chr1.fasta`
+>    - {% icon param-file %} *"Reference sequence"*: `triticum-chr1.fasta`
 
 # Conclusion
 {:.no_toc}
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
