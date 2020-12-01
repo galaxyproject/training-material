@@ -166,12 +166,15 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Input BAM file"*: `illumina.bam`
 >    - *"Variant calling mode"*: `No`
 >    - *"Create changes file"*: `Yes`
+>  2. Rename the fasta output to `polished-assembly.fasta`
+>
+>    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
+>
 {: .hands_on}
 
 * This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
 * There are two outputs: a `fasta` file and a `changes` file.
 * What is in the `changes` file?
-* Re-name the fasta output file `polished-assembly.fasta`
 * Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
 
 > ### {% icon question %} Question
