@@ -248,7 +248,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 2. [Install Ansible.](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) where you will run it
 >
-> 3. Create an directory named `intro` and `cd` into it
+> 3. Create a directory named `intro` and `cd` into it
 >
 > 4. Create your inventory file (named `hosts`) in this folder
 >
@@ -267,7 +267,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    > ### {% icon details %} Running Ansible on a different machine
 >    >
->    > The best practice is to store playbooks in a git repository, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machine is one of the strengths of Ansible.
+>    > The best practice is to store playbooks in a git repository, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machines is one of the strengths of Ansible.
 >    >
 >    > In order to run remotely:
 >    >
