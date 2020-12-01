@@ -48,7 +48,8 @@ jobs:
 
       - name: Deploy 🚀
         run: |
-            pip install awscli
-            ./bin/publish-archive
+          git pull --tags
+          pip install awscli
+          ./bin/publish-archive
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
