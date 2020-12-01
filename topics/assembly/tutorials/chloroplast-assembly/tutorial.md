@@ -166,13 +166,16 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 >    - *"Input BAM file"*: `illumina.bam`
 >    - *"Variant calling mode"*: `No`
 >    - *"Create changes file"*: `Yes`
+>
+>  2. Rename the fasta output to `polished-assembly.fasta`
+>
+>    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
+>
+>   * This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
+>   * There are two outputs: a `fasta` file and a `changes` file.
+>   * What is in the `changes` file?
+>   * Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
 {: .hands_on}
-
-* This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
-* There are two outputs: a `fasta` file and a `changes` file.
-* What is in the `changes` file?
-* Re-name the fasta output file `polished-assembly.fasta`
-* Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
 
 > ### {% icon question %} Question
 > How does the polished assembly compare to the unpolished assembly?
@@ -225,9 +228,10 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 >            - *"BAM track data"*: `illumina-tiny.bam`
 >            - *"Autogenerate SNP track"*: `No`
 >            - *Leave the other track features as default*
+> 2. **Re-name output file**:
+>    - JBrowse may take a few minutes to run. There is one output file: re-name it `assembly-and-reads`
 {: .hands_on}
 
-There is one output file: re-name: `assembly-and-reads`
 * Click on the eye icon to view. (For more room, collapse Galaxy side menus with corner < > signs).
 *  Make sure the bam files are ticked in the left hand panel.
 * Choose a contig in the drop down menu. Zoom in and out with + and - buttons.
@@ -258,7 +262,7 @@ Follow these steps to annotate your assembly, or upload an example annotation fi
 
 > ### {% icon hands_on %} Hands-on: Annotate with GeSeq
 > * Download `polished.fasta` to your computer (click on the file in your history; then click on the disk icon).
-> * In a new broswer tab, go to [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) where we will use the [GeSeq tool](https://academic.oup.com/nar/article/45/W1/W6/3806659) to annotate our sequence.
+> * In a new broswer tab, go to [Chlorobox](https://chlorobox.mpimp-golm.mpg.de/geseq.html) where we will use the GeSeq tool {% cite Tillich_2017 %} to annotate our sequence.
 > * Upload the `fasta` file there. Information about how to use the tool is available on the page.
 > * Once the annotation is completed, download the required files.
 > * In Galaxy, import the annotation `GFF3` file.
@@ -278,10 +282,11 @@ Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (
 >            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
 >            - *"GFF/GFF3/BED Track Data"*: the `GFF3` file
 >            - *Leave the other track features as default*
+> 2. **Re-name output file**:
+>    - JBrowse may take a few minutes to run. There is one output file: re-name it `view-annotations`
 {: .hands_on}
 
-This may take a few minutes. There is one output file: re-name it `view-annotations`
-* Click on the eye icon to view.
+* Click on the eye icon to view the annotations file.
 * Select the right contig to view, in the drop down box.
 * Zoom out (with the minus button) until annotations are visible.
 
