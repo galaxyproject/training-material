@@ -135,11 +135,14 @@ A `tasks/main.yml` file calls multiple Ansible modules to accomplish its goal. A
 
 ```yaml
 ---
-- name: Install CernVM-FS client (yum)
-  yum:
-    name: cvmfs
-    state: {% raw %}"{{ 'latest' if cvmfs_upgrade_client else 'present' }}"{% endraw %}
-  when: ansible_os_family == "RedHat"
+- name: Download cvmfs_preload utility when desired
+  get_url:
+    url: https://cvmrepo.web.cern.ch/cvmrepo/preload/cvmfs_preload
+    dest: "{% raw %}{{ cvmfs_preload_path }}/cvmfs_preload{% endraw %}"
+    owner: root
+    group: root
+    mode: 755
+  when: cvmfs_preload_install | bool
 
 - name: Ensure AutoFS is enabled + running
   service:
@@ -150,7 +153,7 @@ A `tasks/main.yml` file calls multiple Ansible modules to accomplish its goal. A
 
 Here we have two tasks. Each has a `name` that will be shown to the person running the playbook.
 
-The first invokes the [`yum`](https://docs.ansible.com/ansible/2.9/modules/yum_module.html) module with the arguments `name: cvmfs, state: ...`. This will use yum to install the package named `cvmfs`. The state parameter uses a [Jinja2](http://jinja.pocoo.org/) template to evaluate the value of the variable `cvmfs_upgrade_client`. We can [grep through](https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&unscoped_q=cvmfs_upgrade_client) the repository and see that `defaults/main.yml` sets that to `false` by default. We can override this if we need, we'll come back to that later. The first task also has a `when` condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic [`package`](https://docs.ansible.com/ansible/2.9/modules/package_module.html) module, if possible.
+The first invokes the [`get_url`](https://docs.ansible.com/ansible/2.9/modules/get_url_module.html) module with the arguments `url: ..., dest: ..., owner: root, group: root, mode: 755`. This will download a file from `url` to the location specified in `dest`, change user and group ownership to `owner` and `group`, respectively, and assign permissions specified in `mode`. The `dest` parameter uses a [Jinja2](http://jinja.pocoo.org/) template to evaluate the value of the variable `cvmfs_preload_path`. We can [grep through](https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_preload_path) the repository and see that `defaults/main.yml` sets that to `/usr/bin` by default. We can override this if we need, we'll come back to that later. The first task also has a `when` condition to ensure it only runs when the `cvmfs_preload_install` variable is set.
 
 The second invokes the [`service`](https://docs.ansible.com/ansible/2.9/modules/service_module.html) module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service `name: autofs` will be `enabled` and its `state` should be `started`.
 
