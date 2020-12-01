@@ -107,9 +107,9 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 │   ├── ...
 │   └── stratum1_squid.conf.j2
 └── vars
-    ├── debian.yml
+    ├── ...
     ├── main.yml
-    └── redhat.yml
+    └── ...
 ```
 
 These are the folders that are included in many complex roles. Simpler roles will often not need all of the folders.
