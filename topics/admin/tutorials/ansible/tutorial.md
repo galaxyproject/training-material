@@ -303,10 +303,10 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >        dest: /tmp/test.txt
 >    ```
 >
->    You can read about all of the parameters available to the [`copy`](http://docs.ansible.com/ansible/2.9/modules/copy_module.html) module on Ansible's documentation.
+>    You can read about all of the parameters available to the [`copy`](http://docs.ansible.com/ansible/2.9/modules/copy_module.html) module in Ansible's documentation.
 >
 >    > ### {% icon details %} Ansible Module Documentation
->    > You can usually find a module that will represent most commands you will run at a shell. Usually by searching the internet for "ansible do-some-action" e.g. "ansible copy file to server" or "ansible restart service." If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/2.9/modules/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
+>    > You can usually find a module for most commands you will run in a shell. Usually by searching the internet for "ansible do-some-action" (e.g. "ansible copy file to server" or "ansible restart service)." If you cannot find a module that does it, there is the [`command`](http://docs.ansible.com/ansible/2.9/modules/command_module.html) module, but this should be avoided if possible. Expect to have a browser session with 10-30 different Ansible module documentation tabs if you work with Ansible regularly, no one remembers what arguments are available to every module.
 >    >
 >    {: .details }
 >
