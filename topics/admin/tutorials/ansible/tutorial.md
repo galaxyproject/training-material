@@ -149,9 +149,9 @@ A `tasks/main.yml` file calls multiple Ansible modules to accomplish its goal. A
 
 Here we have two tasks. Each has a `name` that will be shown to the person running the playbook.
 
-The first invokes the `yum` module with the arguments `name: cvmfs, state: ...`. This will use yum to install the package named `cvmfs`. The state parameter uses a [Jinja2](http://jinja.pocoo.org/) template to evaluate the value of the variable `cvmfs_upgrade_client`. We can [grep through](https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&unscoped_q=cvmfs_upgrade_client) the repository and see that `defaults/main.yml` sets that to `false` by default. We can override this if we need, we'll come back to that later. The first task also has a `when` condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic [`package`](http://docs.ansible.com/ansible/2.9/package_module.html) module, if possible.
+The first invokes the [`yum`](https://docs.ansible.com/ansible/2.9/modules/yum_module.html) module with the arguments `name: cvmfs, state: ...`. This will use yum to install the package named `cvmfs`. The state parameter uses a [Jinja2](http://jinja.pocoo.org/) template to evaluate the value of the variable `cvmfs_upgrade_client`. We can [grep through](https://github.com/galaxyproject/ansible-cvmfs/search?q=cvmfs_upgrade_client&unscoped_q=cvmfs_upgrade_client) the repository and see that `defaults/main.yml` sets that to `false` by default. We can override this if we need, we'll come back to that later. The first task also has a `when` condition to ensure it only runs on RHEL family machines, so RedHat or CentOS. It is better to use the OS-generic [`package`](https://docs.ansible.com/ansible/2.9/modules/package_module.html) module, if possible.
 
-The second invokes the [`service`](http://docs.ansible.com/ansible/2.9/service_module.html) module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service `name: autofs` will be `enabled` and its `state` should be `started`.
+The second invokes the [`service`](https://docs.ansible.com/ansible/2.9/modules/service_module.html) module. The arguments to this one are quite legible and the functionality can be inferred from the names for the most part: The service `name: autofs` will be `enabled` and its `state` should be `started`.
 
 [Many modules](https://docs.ansible.com/ansible/2.9/modules/modules_by_category.html) are available for you to use.
 
@@ -173,7 +173,7 @@ And an inline style.
 {% raw %}- package name={{ package_name }} state={{ package_state }}{% endraw %}
 ```
 
-Some groups prefer one style or another. You can mix both of these but you probably shouldn't. The inline style does not require quoting of templated values.
+Some groups prefer one style or another. You can mix both of these but you probably shouldn't. The YAML style requires that the templated value is quoted (if the value after the colon starts with a "{"). The inline style does not require quoting of templated values.
 
 ## Playbooks
 
