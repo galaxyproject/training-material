@@ -92,7 +92,7 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 ├── files
 │   ├── cvmfs_remount_sync.c
 │   ├── cvmfs_remount_sync.centos_6
-│   ├── cvmfs_wipecache.centos_7
+│   ├── cvmfs_remount_sync.centos_7
 │   └── ...
 ├── handlers
 │   └── main.yml
