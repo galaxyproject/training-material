@@ -441,10 +441,10 @@ The [`setup`](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) mo
 
 ## Templates
 
-Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
+Templates give you greater control over the files you are deploying to the target system. If you need to deploy a file to multiple hosts, but configure it differently on each host, you should use templates. For instance, deploying a service that should only listen on the correct IP address for that host would be a good use case for templates. All of the facts you discovered in the previous hands-on are available to you to use in templates, `when` statements (like the [ansible-cvmfs example we saw earlier](#modules-and-tasks)). Additionally all of the variables you've defined are available as well.
 
 > ### {% icon details %} Template Syntax
-> Templates end with the `.j2` suffix and use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the .j2 suffix.
+> Templates end with the `.j2` suffix and use Jinja2 syntax. If you are not familiar with it, you should [read about it](http://jinja.pocoo.org/docs/2.10/templates/) first, before moving on with the tutorial. Ansible fills the templates with variable values and copies the file to its remote destination without the `.j2` suffix.
 {: .details}
 
 > ### {% icon hands_on %} Hands-on: Variables and Templates
@@ -555,16 +555,16 @@ Templates give you greater control over the files you are deploying to the targe
 >     >  listen = 192.168.0.25
 >     > changed: [localhost]
 >     > PLAY RECAP **********************************************
->     > localhost                  : ok=3    changed=1    unreachable=0    failed=0
+>     > localhost                  : ok=3    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
 >     > ```
->     > Here you can see that the server_name value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
+>     > Here you can see that the `server_name` value will be changed. Despite Ansible reporting `changed=1`, no changes have actually been applied to the system.
 >     {: .code-out}
 >
 > 13. Run the playbook again, without the `--check` flag to apply your changes.
 {: .hands_on}
 
 > ### {% icon comment %} Ansible Variable Templating
-> In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
+> In this hands-on we used some templated variables. We defined them in a template, but they are also commonly used in the group variables file. Our templated variable looked like: {% raw %}`listen = {{ ansible_default_ipv4.address }}`{% endraw %}.
 >
 > It is common to see things like this in Ansible roles:
 >
@@ -607,7 +607,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > > ```
 >    > > - downloading role 'git', owned by geerlingguy
 >    > > - downloading role from https://github.com/geerlingguy/ansible-role-git/archive/3.0.0.tar.gz
->    > > - extracting geerlingguy.git to /tmp/tmp.Jm681gks8d/roles/geerlingguy.git
+>    > > - extracting geerlingguy.git to /home/xhr/ansible/intro/roles/geerlingguy.git
 >    > > - geerlingguy.git (3.0.0) was installed successfully
 >    > > ```
 >    > {: .code-out}
