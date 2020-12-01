@@ -72,9 +72,10 @@ We will look at the quality of the nanopore reads.
 >    - *"Select multifile mode"*: `batch`
 >    - *"Type of file to work on"*: `fastq`
 >    - *"files"*: select the `nanopore FASTQ file`
+> 2. **View output**:
+>    * There are five output files.
+>    *  Look at the `HTML report` to learn about the read quality.
 {: .hands_on}
-
-There are five output files. Look at the `HTML report` to learn about the read quality.
 
 > ### {% icon question %} Question
 > What summary statistics would be useful to look at?
