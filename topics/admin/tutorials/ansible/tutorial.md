@@ -90,8 +90,8 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 ├── defaults
 │   └── main.yml
 ├── files
-│   ├── cvmfs_wipecache.c
-│   ├── cvmfs_wipecache.centos_6
+│   ├── cvmfs_remount_sync.c
+│   ├── cvmfs_remount_sync.centos_6
 │   ├── cvmfs_wipecache.centos_7
 │   └── ...
 ├── handlers
