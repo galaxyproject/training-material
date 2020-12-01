@@ -14,4 +14,8 @@ jobs:
         with:
           python-version: '3.7'
           architecture: 'x64'
-      - run: python bin/make_release.py
+      - name: Tag it
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests
+          python bin/make_release.py
