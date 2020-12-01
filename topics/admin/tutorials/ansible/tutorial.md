@@ -69,14 +69,28 @@ Looking at each of these briefly:
 
 ```ini
 [webservers]
-web_a
-web_b
+web_1.host.fqdn.or.ip
+web_2.host.fqdn.or.ip
 
 [databases]
 db_1.example.org ansible_user=root
 ```
 
-Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to specify which user to connect with.
+Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to
+specify which user to connect with (you need to specify that if you SSH in with a username different
+than your current local user account’s name).
+
+As you can see, in this inventory we connect to multiple remote machines. This is common practice;
+Ansible playbooks are stored on your laptop or a build server, and from there Ansible connects out to the
+remote machines that are managed. The advantage of running remotely is that you can manage dozens of
+machines simultaneously, rather than just the local machine. This scaling out to N machines is one of
+the strengths of Ansible.
+
+Additionally, playbooks are often stored in Git or other version control repositories to ensure that
+if anything happens to the infrastructure you manage, you'll still have a copy of the information
+required to rebuild everything with Ansible.
+
+
 
 > ### {% icon details %} Ansible Inventory Documentation
 > For more advanced features of the inventory file, check out [the official documentation on this topic](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html).
@@ -268,30 +282,6 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >       > localhost ansible_connection=local
 >       > ```
 >       {: .solution }
->
->    > ### {% icon details %} Running Ansible on a different machine
->    >
->    > The best practice is to store playbooks in a git repository, then it doesn't matter whether you run it locally or remotely. The advantage of running remotely is that you can manage dozens of machines simultaneously, rather than just the local machine. This scaling out to N machines is one of the strengths of Ansible.
->    >
->    > In order to run remotely:
->    >
->    > 1. Make sure you can SSH into it. (Test it now)
->    >
->    > 2. We will call our group `my_hosts`
->    >
->    > 3. Create a hosts file with the group `my_hosts` and your host.
->    >
->    >    > ### {% icon solution %} Solution
->    >    > The file should look like:
->    >    >
->    >    > ```ini
->    >    > [my_hosts]
->    >    > your.host.fqdn.or.ip
->    >    > ```
->    >    > Remember that if you SSH in with a username different than your current local user account's name, you will need to specify `ansible_ssh_user=remote-user-name`
->    >    {: .solution }
->    >
->    {: .details}
 >
 > 5. Create the roles directory, your role, and the tasks folder: `mkdir -p roles/my-role/tasks/`
 >
