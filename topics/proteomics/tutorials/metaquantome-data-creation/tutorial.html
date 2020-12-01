@@ -434,6 +434,130 @@
         </li>
     
     
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
     </ul>
 
 
@@ -980,7 +1104,7 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
 <p>In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, e.g. moFF and MaxQuant are available in <span class="notranslate">Galaxy</span>.</p>
 
 <h3 id="flashlfq"><em>FlashLFQ</em></h3>
-<p>FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this <span class="notranslate">workflow</span>.</p>
+<p><a href="https://github.com/smith-chem-wisc/FlashLFQ">FlashLFQ</a> can quantify MS peaks in order to find the abundances of peptides. FlashLFQ is a fast label-free quantification algorithm. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this <span class="notranslate">workflow</span>.</p>
 <blockquote class="notranslate hands_on">
 
   <h3 id="hands_on-hands-on-quantification"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Quantification</h3>
@@ -1006,7 +1130,14 @@ This tool is removing the extensions (.raw,.mzml,.mgf) in the spectral file colu
       <blockquote class="comment">
         <h3 id="comment-comment-5"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p><a href="https://github.com/smith-chem-wisc/FlashLFQ">FlashLFQ</a> is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats.</p>
+        <p><a href="https://github.com/smith-chem-wisc/FlashLFQ">FlashLFQ</a> is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats.
+To run FlashLFQ on <span class="notranslate">Galaxy</span>, there are three main input files:</p>
+        <ul>
+          <li>PSM report from Peptide Shaker (<code class="language-plaintext highlighter-rouge">Input_for_FlashLFQ</code>)</li>
+          <li>MZML/ RAW spectrum files (<code class="language-plaintext highlighter-rouge">MZML dataset collection</code>)</li>
+          <li>Experimental Design File ( <code class="language-plaintext highlighter-rouge">ExperimentalDesign.tsv</code>)
+The Experimental Design file should be a tabular file with a “File”, “Condition”, “Sample”, “Fraction”, and “Replicate” column. The “File” column should match your mzml spectrum file name.</li>
+        </ul>
       </blockquote>
     </li>
   </ol>
