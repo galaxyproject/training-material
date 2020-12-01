@@ -365,7 +365,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >     > {: .code-out}
 >     {: .code-2col}
 >
-> 12. Login to the appropriate host and `cat /tmp/test.txt` to see that the change was made.
+> 12. Login to the appropriate host (unless your host was `localhost`) and `cat /tmp/test.txt` to see that the change was made.
 >
 {: .hands_on}
 
