@@ -41,7 +41,7 @@ This will be a very practical training with emphasis on looking at examples from
 
 # What is Ansible?
 
-Ansible runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like puppet. If you've used Puppet, Ansible doesn't evaluate what changes need to be made and make those, it just runs through all of commands every time.
+Ansible runs commands on local or remote computers. It can move files around, create files from templates, and run command line tools. Primarily used for system administration tasks at scale. It has a push model rather than a pull model like Puppet. If you've used Puppet, Ansible doesn't evaluate what changes need to be made and make those, it just runs through all of commands every time.
 
 Some terms that you should know first:
 
@@ -51,16 +51,16 @@ Inventory file
 Ansible module
 :    A piece of Python code that converts some parameters into an invocation. An example would be the `command` module which converts parameters like `command: ls` into a command line that is executed. There are pre-built modules for just about everything.
 
-task
+Task
 :    A call to an Ansible module that should be executed and the configuration for this module.
 
-role
+Role
 :    A folder containing some tasks, templates, files, and default values for variables, with a predefined directory structure. People share roles on ["Ansible Galaxy"](https://galaxy.ansible.com/).
 
-playbook
-:    a YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
+Playbook
+:    A YAML file listing a set of tasks and/or roles that should be applied to a group of hosts.
 
-vault
+Vault
 :    An encrypted YAML file. You put your secrets here and then you can use them in tasks, roles and playbooks.
 
 Looking at each of these briefly:
