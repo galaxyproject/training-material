@@ -100,6 +100,7 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 │   └── main.yml
 ├── tasks
 │   ├── apache.yml
+│   ├── ...
 │   ├── main.yml
 │   └── ...
 ├── templates
