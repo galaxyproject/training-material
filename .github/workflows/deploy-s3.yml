@@ -12,6 +12,8 @@ jobs:
         ruby: [2.5]
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -48,7 +50,6 @@ jobs:
 
       - name: Deploy 🚀
         run: |
-          git pull --tags
           pip install awscli
           ./bin/publish-archive
         env:
