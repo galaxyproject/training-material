@@ -608,7 +608,7 @@ Now that you've built a small role, you can imagine that building real roles tha
 >    > > ```
 >    > > - downloading role 'git', owned by geerlingguy
 >    > > - downloading role from https://github.com/geerlingguy/ansible-role-git/archive/3.0.0.tar.gz
->    > > - extracting geerlingguy.git to /home/xhr/ansible/intro/roles/geerlingguy.git
+>    > > - extracting geerlingguy.git to /home/ubuntu/ansible/intro/roles/geerlingguy.git
 >    > > - geerlingguy.git (3.0.0) was installed successfully
 >    > > ```
 >    > {: .code-out}
