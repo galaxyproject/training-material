@@ -107,11 +107,8 @@ We will assemble the long nanopore reads.
 
 There are five output files.
 * *Note: this tool is heuristic; your results may differ slightly from the results here, and if repeated.*
-* View the `log` file and scroll to the end.
-* How many contigs (fragments) were assembled?
-* What is the length of the assembly?
-* View the `assembly_info` file.
-* What are the contig names and lengths?
+* View the `log` file and scroll to the end to see how many contigs (fragments) were assembled and the length of the assembly.
+* View the `assembly_info` file to see contig names and lengths.
 * The assembly sequence is in the `consensus`. Re-name this `flye-assembly.fasta`
 
 > ### {% icon hands_on %} Hands-on: View the assembly
