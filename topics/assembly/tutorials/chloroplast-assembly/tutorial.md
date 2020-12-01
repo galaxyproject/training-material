@@ -106,6 +106,9 @@ We will assemble the long nanopore reads.
 >    - *Leave other settings as default*
 > 2. **Re-name output**:
 >    * Re-name the `consensus` output file to `flye-assembly.fasta`
+>
+>    {% include snippets/rename_dataset.md name="flye-assembly.fasta" %}
+>
 > 3. **View output**:
 >    * There are five output files.
 >    * *Note: this tool is heuristic; your results may differ slightly from the results here, and if repeated.*
@@ -172,8 +175,6 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >
 > 2. **Re-name output file**:
 >    - Rename the fasta output to `polished-assembly.fasta`
->
->    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
 >
 > 3. **View output**:
 >   * What is in the `changes` file?
