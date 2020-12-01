@@ -173,7 +173,7 @@ And an inline style.
 {% raw %}- package name={{ package_name }} state={{ package_state }}{% endraw %}
 ```
 
-Some groups prefer one style or another. You can mix both of these but you probably shouldn't. The YAML style requires that the templated value is quoted (if the value after the colon starts with a "{"). The inline style does not require quoting of templated values.
+Some groups prefer one style or another. You can mix both of these but you probably shouldn't. The YAML style requires that the templated value is quoted (if the value after the colon starts with a `{`). The inline style does not require quoting of templated values.
 
 ## Playbooks
 
