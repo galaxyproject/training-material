@@ -55,7 +55,7 @@ Let's start with uploading the data.
 >   - Note: make sure to import the files with "reduced" in the names, not the ones with "tiny" in the names.
 >    ```
 >    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-reduced.fastq
->    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq    
+>    https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -172,10 +172,10 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >    - *"Input BAM file"*: `illumina.bam`
 >    - *"Variant calling mode"*: `No`
 >    - *"Create changes file"*: `Yes`
-<<<<<<< HEAD
 >
-> 2. **Re-name output file**:
->    - Rename the fasta output to `polished-assembly.fasta`
+>  2. Rename the fasta output to `polished-assembly.fasta`
+>
+>    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
 >
 > 3. **View output**:
 >   * What is in the `changes` file?
@@ -184,19 +184,6 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
-=======
->  2. Rename the fasta output to `polished-assembly.fasta`
->
->    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
->
-{: .hands_on}
-
-* This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
-* There are two outputs: a `fasta` file and a `changes` file.
-* What is in the `changes` file?
-* Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
-
->>>>>>> 7a96b7f4466445e316759e7ab75e249f2e29ba0f
 > ### {% icon question %} Question
 > How does the polished assembly compare to the unpolished assembly?
 > > ### {% icon solution %} Solution
@@ -267,7 +254,7 @@ Here is an embedded snippet showing JBrowse and the mapped reads:
 > 2. What are some reasons that the read coverage may vary across the reference genome?
 >
 > > ### {% icon solution %} Solutions
-> > 1. Nanopore reads are longer and have a higher error rate.  
+> > 1. Nanopore reads are longer and have a higher error rate.
 > > 2. There may be lots of reasons for varying read coverage. Some possibilities: In areas of high read coverage: this region may be a collapsed repeat. In areas of low or no coverage: this region may be difficult to sequence; or, this region may be a misassembly.
 > {: .solution}
 {: .question}
