@@ -68,7 +68,7 @@ We will look at the quality of the nanopore reads.
 
 > ### {% icon hands_on %} Hands-on: Check read quality
 >
-> 1. **Nanoplot** {% icon tool %}:
+> 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %}:
 >    - *"Select multifile mode"*: `batch`
 >    - *"Type of file to work on"*: `fastq`
 >    - *"files"*: select the `nanopore FASTQ file`
@@ -100,12 +100,12 @@ We will look at the quality of the nanopore reads.
 We will assemble the long nanopore reads.
 
 > ### {% icon hands_on %} Hands-on: Assemble reads
-> 1. **Flye** {% icon tool %}:
+> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7) %}:
 >    - *"Input reads"*: `sweet-potato-chloroplast-nanopore-reduced.fastq`
 >    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
-> 2. **Re-name output**:
->    * Re-name the `consensus` output file to `flye-assembly.fasta`
+>
+> 2. Re-name the `consensus` output file to `flye-assembly.fasta`
 >
 >    {% include snippets/rename_dataset.md name="flye-assembly.fasta" %}
 >
@@ -118,11 +118,11 @@ We will assemble the long nanopore reads.
 
 
 > ### {% icon hands_on %} Hands-on: View the assembly
-> 1. **Bandage Info** {% icon tool %}:
+> 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
 >    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
-> 2. **Bandage Image** {% icon tool %}:
+> 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
 >    - *"Node length labels"*: `Yes`
 >    - *Leave other settings as default*
@@ -150,7 +150,7 @@ Short illumina reads are more accurate the nanopore reads. We will use them to c
 First, we will map the short reads to the assembly and create an alignment file.
 
 > ### {% icon hands_on %} Hands-on: Map reads
-> 1. **Map with BWA-MEM** {% icon tool %}:
+> 1. {% tool [Map with BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %}:
 >    - *"Will you select a reference genome from your history"*: `Use a genome from history`
 >    - *"Use the following dataset as the reference sequence"*: `flye-assembly.fasta`
 >    - *"Algorithm for constructing the BWT index"*: `Auto. Let BWA decide`
@@ -165,7 +165,7 @@ First, we will map the short reads to the assembly and create an alignment file.
 Next, we will compare the short reads to the assembly, and create a polished (corrected) assembly file.
 
 > ### {% icon hands_on %} Hands-on: Polish
-> 1. **pilon** {% icon tool %}:
+> 1. {% tool [pilon](toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1) %}:
 >    - *"Source for reference genome used for BAM alignments"*: `Use a genome from history`
 >    - *"Select a reference genome"*: `flye-assembly.fasta`
 >    - *"Type automatically determined by pilon"*: `Yes`
@@ -180,7 +180,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 > 3. **View output**:
 >   * What is in the `changes` file?
 >
-> 4. **Fasta Statistics**:
+> 4. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0) %}
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
@@ -200,7 +200,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 We will look at the original sequencing reads mapped to the genome assembly. In this tutorial, we will import very cut-down read sets so that they are easier to view.
 
 > ### {% icon hands_on %} Hands-on: Import cut-down read sets
-> 1. Import from [Zenodo](https://zenodo.org/record/3567224) or a data library (ask your instructor):
+> 1. {% tool [Import](upload1) %} from [Zenodo](https://zenodo.org/record/3567224) or a data library (ask your instructor):
 >   - FASTQ file with illumina reads: `sweet-potato-chloroplast-illumina-tiny.fastq`
 >   - FASTQ file with nanopore reads: `sweet-potato-chloroplast-nanopore-tiny.fastq`
 >   - Note: these are the "tiny" files, not the "reduced" files we imported earlier.
@@ -218,7 +218,7 @@ We will look at the original sequencing reads mapped to the genome assembly. In 
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Visualise mapped reads
-> 1. **JBrowse genome browser** {% icon tool %}:
+> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - *"Select a reference genome"*: `polished-assembly.fasta`
 >    - *"Produce Standalone Instance"*: `Yes`
@@ -280,7 +280,7 @@ Follow these steps to annotate your assembly, or upload an example annotation fi
 Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (the polished.fasta file).
 
 > ### {% icon hands_on %} Hands-on: View annotations
-> 1. **JBrowse genome browser** {% icon tool %}:
+> 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
 >        - *"Reference genome to display"*: `Use a genome from history`
 >    - *"Select a reference genome"*: `polished-assembly.fasta`
 >    - *"Produce Standalone Instance"*: `Yes`
