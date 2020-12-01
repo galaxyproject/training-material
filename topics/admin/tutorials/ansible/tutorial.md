@@ -92,7 +92,8 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 ├── files
 │   ├── cvmfs_wipecache.c
 │   ├── cvmfs_wipecache.centos_6
-│   └── cvmfs_wipecache.centos_7
+│   ├── cvmfs_wipecache.centos_7
+│   └── ...
 ├── handlers
 │   └── main.yml
 ├── meta
@@ -102,9 +103,11 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 │   ├── main.yml
 │   └── ...
 ├── templates
-│   └── stratum1_squid.conf.j2
+│   ├── stratum1_squid.conf.j2
+│   └── ...
 └── vars
     ├── debian.yml
+    ├── main.yml
     └── redhat.yml
 ```
 
@@ -115,11 +118,10 @@ Folder    | Usage
 defaults  | Default values for variables the user can set (e.g. "version of software to install").
 files     | These are files which should be copied as-is over to the remote location.
 handlers  | This is typically used for restarting processes.
-library   | For internal modules (rarely used)
 meta      | Only needed to publish your role to Ansible Galaxy.
-tasks     | **Always start reading here**. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here, e.g. variables to load, handlers, files, templates.
+tasks     | **Always start reading here**. This is the most important folder and the best place to start when trying to understand what an unfamiliar role does. Anything that is loaded will be referenced here (e.g. variables to load, handlers, files, templates).
 templates | Files that are templated out with variables before being copied.
-vars      | Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions)
+vars      | Default values for variables the user should normally not change (e.g. name of a package in different Linux distributions).
 
 > ### {% icon details %} Ansible Role Documentation
 >
