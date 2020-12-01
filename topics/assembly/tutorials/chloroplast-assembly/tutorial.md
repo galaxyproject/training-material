@@ -172,6 +172,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >    - *"Input BAM file"*: `illumina.bam`
 >    - *"Variant calling mode"*: `No`
 >    - *"Create changes file"*: `Yes`
+<<<<<<< HEAD
 >
 > 2. **Re-name output file**:
 >    - Rename the fasta output to `polished-assembly.fasta`
@@ -183,6 +184,19 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
+=======
+>  2. Rename the fasta output to `polished-assembly.fasta`
+>
+>    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
+>
+{: .hands_on}
+
+* This compares the short reads to the assembly, and creates a polished (corrected) assembly file.
+* There are two outputs: a `fasta` file and a `changes` file.
+* What is in the `changes` file?
+* Find and run the tool called "Fasta statistics" on the original flye assembly and the polished version.
+
+>>>>>>> 7a96b7f4466445e316759e7ab75e249f2e29ba0f
 > ### {% icon question %} Question
 > How does the polished assembly compare to the unpolished assembly?
 > > ### {% icon solution %} Solution
