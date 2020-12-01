@@ -104,8 +104,8 @@ We can look at the [ansible-cvmfs role](https://github.com/galaxyproject/ansible
 │   ├── main.yml
 │   └── ...
 ├── templates
-│   ├── stratum1_squid.conf.j2
-│   └── ...
+│   ├── ...
+│   └── stratum1_squid.conf.j2
 └── vars
     ├── debian.yml
     ├── main.yml
