@@ -15,7 +15,7 @@ objectives:
 time_estimation: "60m"
 key_points:
   - Ansible lets you do system administration at scale
-  - Many system administration, software installation, and software management tasks are already available as ansible tasks or roles
+  - Many system administration, software installation, and software management tasks are already available as Ansible tasks or roles
 contributors:
   - hexylena
   - shiltemann
@@ -759,8 +759,8 @@ Duplicating tasks ten times to install ten packages is not efficient, so Ansible
     - vim
 ```
 
-This works for any task, not just package installation if you have things you'd like to repeat.
-Note that for this task one would normally list multiple packages in the `name` parameter of the package module
+This works for any task, not just package installation, if you have things you'd like to repeat.
+Note that for this task one would normally list multiple packages in the `name` parameter of the package module.
 
 ```yaml
 - name: Install stuff
@@ -780,10 +780,10 @@ Doing something only when a task is in the "changed" state is a common pattern. 
 - name: Copy configuration file
   copy:
     src: main.conf
-    dest: "/etc/service/main.conf
-    owner: "root"
-    group: "root"
-    mode: "0644"
+    dest: /etc/service/main.conf
+    owner: root
+    group: root
+    mode: 0644
   register: service_conf
 
 - name: Restart the service
@@ -816,7 +816,7 @@ First, move the restarting or reloading of the service into the `handlers/main.y
 
 Now you can change your task definitions:
 
-```
+```yaml
 - name: Copy configuration file
   copy:
     src: main.conf
@@ -827,4 +827,4 @@ Now you can change your task definitions:
   notify: 'restart service'
 ```
 
-We no longer `register` the command, instead the `notify` attribute automatically marks that the appropriate handler should be called *at the end of the playbook run*. Additionally tasks from outside of this role can use the same `notify`. So if you use a community built role for managing apache, and then have a custom role that builds the apache configuration, you can use changes there to reload the service using their definition of the reload/restart.
+We no longer `register` the command, instead the `notify` attribute automatically marks that the appropriate handler should be called *at the end of the playbook run*. Additionally, tasks from outside of this role can use the same `notify`. So if you use a community built role for managing apache, and then have a custom role that builds the apache configuration, you can use changes there to reload the service using their definition of the reload/restart.
