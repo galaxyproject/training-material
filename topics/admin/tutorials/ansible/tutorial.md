@@ -69,11 +69,11 @@ Looking at each of these briefly:
 
 ```ini
 [webservers]
-web_1.host.fqdn.or.ip
-web_2.host.fqdn.or.ip
+192.0.2.0
+192.0.2.1
 
 [databases]
-db_1.example.org ansible_user=root
+192.0.2.3 ansible_user=root
 ```
 
 Here we've defined two groups of computers, `webservers` and `databases`. `ansible_user` is used to
