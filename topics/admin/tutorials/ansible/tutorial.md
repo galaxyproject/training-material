@@ -583,31 +583,31 @@ Templates give you greater control over the files you are deploying to the targe
 
 Now that you've built a small role, you can imagine that building real roles that manage the full installation of a piece of software are not simple things. Ansible Galaxy is the answer here. Many roles for common administration tasks, and software installation and setup are readily available on Ansible Galaxy.
 
-**Warning**: This will install git on the target machine.
+**Warning**: This will install Memcached on the target machine.
 
 > ### {% icon hands_on %} Hands-on: Installing a module using ansible-galaxy
 >
-> 1. Install the geerlingguy.git role with ansible-galaxy into your roles folder:
+> 1. Install the geerlingguy.memcached role with ansible-galaxy into your roles folder:
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```bash
 >    > > ansible-galaxy install \
->    > >     -p roles/ geerlingguy.git
+>    > >     -p roles/ geerlingguy.memcached
 >    > > ```
 >    > {: .code-in}
 >    >
 >    > > ### {% icon code-out %} Output
 >    > > This will install the new role into your `roles` folder, alongside your own role.
 >    > > ```
->    > > - downloading role 'git', owned by geerlingguy
->    > > - downloading role from https://github.com/geerlingguy/ansible-role-git/archive/3.0.0.tar.gz
->    > > - extracting geerlingguy.git to /home/ubuntu/ansible/intro/roles/geerlingguy.git
->    > > - geerlingguy.git (3.0.0) was installed successfully
+>    > > - downloading role 'memcached', owned by geerlingguy
+>    > > - downloading role from https://github.com/geerlingguy/ansible-role-memcached/archive/1.1.0.tar.gz
+>    > > - extracting geerlingguy.memcached to /home/ubuntu/ansible/intro/roles/geerlingguy.memcached
+>    > > - geerlingguy.memcached (1.1.0) was installed successfully
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
 >
-> 2. Edit your playbook.yml and add the role `geerlingguy.git` at the bottom, after `my-role`
+> 2. Edit your playbook.yml and add the role `geerlingguy.memcached` at the bottom, after `my-role`
 >
 > 3. Run the playbook
 >
