@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Library Generation for DIA Analysis</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', '' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Library Generation for DIA Analysis" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_lib_OSW%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_lib_OSW%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_lib_OSW%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_lib_OSW%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_lib_OSW%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_lib_OSW%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Library Generation for DIA Analysis",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Proteomics",
+    "description": "Training material for proteomics workflows in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+  },
+  "courseCode": "proteomics / DIA_lib_OSW / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Library Generation for DIA Analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How does the peptide identification work in data independent acquisition (DIA) mass spectrometry (MS) data?\n - What is a spectral library and how to generate a spectral library using Maxquant, diapysef and OpenSwath tools?\n\n\\nThe objectives are:\n - Generating a spectral library from data dependent acquisition (DDA) MS data\n - Understanding DIA data principles and characteristics\n - Optimizing and refining a spectral library for the analysis of DIA data\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Matthias Fahrner"
+    },
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Matthias Fahrner"
+    },
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Library Generation for DIA Analysis</h1>
+        
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Under Development!</h4>
+            <p>This tutorial is not in its final state. The content may change a lot in the next months.
+            Because of this status, it is also not listed in the topic pages.</p>
+        </div>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/matthias313/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/matthias313" alt="Matthias Fahrner">Matthias Fahrner</a>, <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Melanie Föll">Melanie Föll</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How does the peptide identification work in data independent acquisition (DIA) mass spectrometry (MS) data?</p>
+</li>
+            
+            <li><p>What is a spectral library and how to generate a spectral library using Maxquant, diapysef and OpenSwath tools?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Generating a spectral library from data dependent acquisition (DDA) MS data</p>
+</li>
+            
+            <li><p>Understanding DIA data principles and characteristics</p>
+</li>
+            
+            <li><p>Optimizing and refining a spectral library for the analysis of DIA data</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 2, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>The proteome refers to the entirety of proteins in a biological system (e.g cell, tissue, organism). Proteomics is the large-scale experimental analysis of proteins and proteomes, most often performed by mass spectrometry that enables great sensitivity and throughput. Especially for complex protein mixtures, bottom-up mass spectrometry is the standard approach. In bottom-up proteomics, proteins are digested with a specific protease into peptides and the measured peptides are in silico reassembled into the corresponding proteins. Inside the mass spectrometer, not only the peptides are measured (MS1 level), but the peptides are also fragmented into smaller peptides which are measured again (MS2 level). This is referred to as tandem-mass spectrometry (MS/MS). Identification of peptides is performed by peptide spectrum matching of the theoretical spectra generated from the input protein database (fasta file) with the measured MS2 spectra. Peptide quantification is most often performed by measuring the area under the curve of the MS1 level peptide peaks, but special techniques such as TMT and DIA allow to quantify peptides on MS2 level. Nowadays, bottom-up tandem-mass spectrometry approaches allow for the identification and quantification of several thousand proteins.</p>
+
+<p>To enable the identification and quantification of such high numbers of proteins in a time-wise limited measurement there has been a lot of MS method and data acquisition optimization. The most commonly used technique is the data dependent acquisition (DDA). Here only the most abundant (top N) peptides from each MS1 scan are selected for subsequent fragmentation, with the most promising chance for successful identifications due to high intensity signals. Afterwards the respective mass over charge (m/z) values are set on an exclusion list enabling the selection of less abundant peptides from the following MS1 scan for the next cycle of top N fragmentation (MS2) scans. However, since this acquisition method is highly dependent on the abundance of the respective peptides at a given retention time this method is referred to as data dependent acquisition (DDA). This dependency on both time as well as intensity leads to measurement specific identifications between multiple measurements.</p>
+
+<p>Another more recently developed method is the so called data independent acquisition (DIA). However due to some unique characteristics of this acquisition method it requieres spectral libraries, which contain the peptide sequences as well as their respective fragment spectrum (MS2) information.
+Here we will use DDA data from the same samples to build a spectral library which can than be used for the identification of peptides in data independent acquisition (DIA) data from the same samples using e.g. OpenSwath<span class="notranslate">Workflow</span> <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">OpenSwath<span class="notranslate">workflow</span> tutorial</a>.</p>
+
+<figure id="figure-1"><img src="../../images/DIA_lib_gen_basic.png" alt="DDA_lib_gen" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Labelfree proteomics using liquid chromatography tandem-mass spectrometry (LC-MS/MS). Principles of data dependent acquisition (DDA).</figcaption></figure>
+
+<p>High quality spectral libraries can be generated by fractionation and separate measurment of a representative sample or mixture for a cohort. During the analysis the peptide and protein identifications of all fractions can than be combined into comprehensive spectral libraries. Here the spectral libraries tend to be relativly large offering great sensitivity (even to low abundant peptides), but also contain peptides which are only observable due to the prior fractionation. 
+Another way of generating spectral libraries is by measuring the same samples using DDA as well as using DIA. Here the DDA results will be analyzed and sample specific spectral library is generated which can than be used for the analysis of the DIA data. The resulting spectral libraries are often smaller and contain only peptides which are observable in complex and non-fractionated samples.</p>
+
+<p>A plethora of software solutions were developed for the analysis of DDA proteomics data. MaxQuant is one of the most popular proteomics softwares because it is an easy to use and free software that offers functionalities for nearly all kinds of proteomics data analysis challenges <a class="citation" href="#Cox2008">Cox and Mann 2008</a>. Mass spectrometry raw data is normally obtained in a vendor specific, proprietary file format. MaxQuant can directly take those raw files as input. For peptide identification MaxQuant uses a search engine called “Andromeda”.</p>
+
+<p>The dataset in this training consists of different Spike-in mixtures of stable amounts of human peptides and different amounts of Ecoli peptides. Each sample reflects a non-fractionated MS measurement (DDA) of different Spike-in ratios. To faciliate the analysis and directly combine the identifications of all measurements, we will define the different measurements as fractions of one sample, as it would be the case for e.g. high pH, SCX or HILIC fractionated samples.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#maxquant-analysis-of-dda-data" id="markdown-toc-maxquant-analysis-of-dda-data"><strong>MaxQuant</strong> Analysis of DDA data</a>    <ol>
+      <li><a href="#quality-control-results" id="markdown-toc-quality-control-results">Quality control results</a></li>
+      <li><a href="#filter-for-unique-peptides-in-the-evidence-and-msms-output" id="markdown-toc-filter-for-unique-peptides-in-the-evidence-and-msms-output"><strong>Filter</strong> for unique peptides in the <em>evidence</em> and <em>msms</em> output</a></li>
+    </ol>
+  </li>
+  <li><a href="#diapysef-library-generation" id="markdown-toc-diapysef-library-generation"><strong>diapysef library generation</strong></a></li>
+  <li><a href="#spectral-library-refinement-with-openswathassaygenerator" id="markdown-toc-spectral-library-refinement-with-openswathassaygenerator">Spectral library refinement with <strong>OpenSwathAssayGenerator</strong></a></li>
+  <li><a href="#adding-decoy-sequences-with-openswathdecoygenerator" id="markdown-toc-adding-decoy-sequences-with-openswathdecoygenerator">Adding decoy sequences with <strong>OpenSwathDecoyGenerator</strong></a></li>
+  <li><a href="#converting-the-spectral-library-with-targetedfileconverter" id="markdown-toc-converting-the-spectral-library-with-targetedfileconverter">Converting the spectral library with <strong>TargetedFileConverter</strong></a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="get-data">Get data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a meaningful name</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Import the fasta and raw files as well as the experimental annotation and the iRTassays file from <a href="https://zenodo.org/record/4293493">Zenodo</a>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4293493/files/Human_database_plus_iRT.fasta
+https://zenodo.org/record/4293493/files/Ecoli_database.fasta
+https://zenodo.org/record/4293493/files/iRTassays.tsv
+https://zenodo.org/record/4293493/files/HEK_Ecoli_exp_design.txt
+https://zenodo.org/record/4293493/files/Sample1.raw
+https://zenodo.org/record/4293493/files/Sample2.raw
+https://zenodo.org/record/4293493/files/Sample3.raw
+https://zenodo.org/record/4293493/files/Sample4.raw
+https://zenodo.org/record/4293493/files/Sample5.raw
+</code></pre></div>      </div>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+    </li>
+    <li>Once the files are green, rename the experimental design file in ‘HEK_Ecoli_exp_design’, the iRT transition file in ‘iRTassays’ and all of the the raw files in ‘Sample1.raw’, ‘Sample2.raw’, ‘Sample3.raw’, ‘Sample4.raw’ and ‘Sample5.raw’
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Once the files are green, generate a collection for all .raw files (and name it DDA_data) as well as for both .fasta files (and name it FASTA)
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection</h3>
+
+        <ul>
+          <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>
+          <li>Check all the datasets in your history you would like to include</li>
+          <li>
+            <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>
+
+            <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>
+          </li>
+          <li>Enter a name for your collection</li>
+          <li>Click <strong>Create List</strong> to build your collection</li>
+          <li>Click on the checkmark icon at the top of your history again</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="maxquant-analysis-of-dda-data"><strong>MaxQuant</strong> Analysis of DDA data</h1>
+
+<p>The MaxQuant <span class="notranslate">Galaxy</span> implementation contains the most important MaxQuant parameters. As an alte<span class="notranslate">rna</span>tive, <strong>MaxQuant (using mqpar.xml)</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can be used with a preconfigured mqpar.xml file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-maxquant-analysis"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: MaxQuant Analysis</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/maxquant/maxquant/1.6.10.43+galaxy3"><strong>MaxQuant</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/maxquant/maxquant/1.6.10.43+<span class="notranslate">galaxy</span>3</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“Input Options”</em>:
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“FASTA files”</em>: <code class="language-plaintext highlighter-rouge">FASTA</code> collection</li>
+            <li><em>“identifier parse rule”</em>: <code class="language-plaintext highlighter-rouge">&gt;([^ ]*)</code></li>
+            <li><em>“description parse rule”</em>: <code class="language-plaintext highlighter-rouge">^&gt;.*\|.*\|[^ ]+ (.*) OS.*$</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Search Options”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Specify an experimental design template”</em>: <code class="language-plaintext highlighter-rouge">HEK_Ecoli_exp_design.txt</code></li>
+            <li><em>“minimum unique peptides”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+            <li><em>“Match between runs”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Protein quantification”</em>:
+          <ul>
+            <li><em>“Use only unmodified peptides”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Parameter Group”</em>:
+          <ul>
+            <li><i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">param-collection</span> <em>“Infiles”</em>: <code class="language-plaintext highlighter-rouge">DDA_data</code> collection
+              <ul>
+                <li><em>“missed cleavages”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                <li><em>“variable modifications”</em>: <code class="language-plaintext highlighter-rouge">Oxidation (M)</code></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li><em>“Generate PTXQC (proteomics quality control pipeline) report? (experimental setting)”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>In <em>“Output Options”</em>:
+          <ul>
+            <li><em>“Select the desired outputs.”</em>: <code class="language-plaintext highlighter-rouge">Protein Groups</code> <code class="language-plaintext highlighter-rouge">Peptides</code> <code class="language-plaintext highlighter-rouge">mqpar.xml</code> <code class="language-plaintext highlighter-rouge">Evidence</code> <code class="language-plaintext highlighter-rouge">MSMS</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-protein-groups"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Protein Groups</h3>
+        <p>Proteins that share all their peptides with other proteins cannot be unambiguously identified. Therefore, MaxQuant groups such proteins into one protein group and only one common quantification will be calculated. The different protein properties are separated by semicolon.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Here we used a variation of the <em>“identifier parse rule”</em> to allow for the organism label to be present in the spectral library. For investigations of single organisms and to keep only the Uniprot identifier one can adjust the <em>“identifier parse rule”</em> accordingly
+More details on the different <strong>MaxQuant</strong> parameters can be found in this <a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">MaxQuant tutorial</a>.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-continue-with-results-from-zenodo"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Continue with results from Zenodo</h3>
+
+  <p>In case the MaxQuant run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
+  <ol>
+    <li>Import the files from <a href="https://zenodo.org/record/4293493">Zenodo</a>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4293493/files/MaxQuant_PTXQC_report.pdf
+https://zenodo.org/record/4293493/files/MaxQuant_Protein_Groups.tabular
+https://zenodo.org/record/4293493/files/MaxQuant_Peptides.tabular
+https://zenodo.org/record/4293493/files/MaxQuant_Evidence.tabular
+https://zenodo.org/record/4293493/files/MaxQuant_MSMS.tabular
+https://zenodo.org/record/4293493/files/MaxQuant_mqpar.xml
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="quality-control-results">Quality control results</h2>
+
+<p>To get a first overview of the MaxQuant results, the PTXQC report is helpful. Click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> eye of the PTXQC pdf file to open it in <span class="notranslate">Galaxy</span>. Screening through the different plots might already give you a hint on how many peptides and proteins were identified as well as some of the data quality.</p>
+
+<p>The PTXQC software (<a class="citation" href="#Bielow2015">Bielow <i>et al.</i> 2015</a>) was built to enable direct proteomcs quality control from MaxQuant result files. This quality control can be directly used in the <span class="notranslate">Galaxy</span> MaxQuant wrapper by setting <em>“Generate PTXQC”</em> to <code class="language-plaintext highlighter-rouge">yes</code>. This will generate a pdf file with multiple quality control plots. Be aware that the cutoffs set in PTXQC might not be applicable to your experiment and mass spectrometer type and therefore “under performing” and “fail” do not necessarily mean that the quality is poor.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many proteins were found in total?</li>
+    <li>How many peptides were found in total?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>Approximately 5370 proteins were found (see ProteinGroups output)</li>
+      <li>Approximately 34970 peptides were found (see Peptides output)</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="filter-for-unique-peptides-in-the-evidence-and-msms-output"><strong>Filter</strong> for unique peptides in the <em>evidence</em> and <em>msms</em> output</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-filtering-the-maxquant-search-results-for-unique-peptides"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Filtering the <strong>MaxQuant</strong> search results for unique peptides</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant_Evidence</code>
+      <ul>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">len(c9.split(';')) &lt; 2</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+    - <i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">MaxQuant_MSMS</code>
+      <ul>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">len(c12.split(';')) &lt; 2</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-unique-features--peptides"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Unique Features / peptides</h3>
+        <p>Peptides which only occur in one protein are considered as unique for this specific protein. To avoid ambigious protein <span class="notranslate">mapping</span> later we filter the <strong>MaxQuant</strong> search results for unique peptides only. CAUTION: This increase in specificity (each peptide originates from only one protein) will reduce the size of the spectral library and might lead to decreased sensitivity  during the DIA analysis.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many unique features per lines remain after the filtering in the evidence and the msms output?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>~100.000 lines in the evidence and ~98.000 lines in the msms.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="diapysef-library-generation"><strong>diapysef library generation</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generation-of-a-spectral-library-using-the-unique-maxquant-search-results-and-indexed-retention-time-irt-peptides"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generation of a spectral library using the unique <strong>MaxQuant</strong> search results and indexed retention time <em>iRT</em> peptides</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/diapysef/diapysef/0.3.5.0"><strong>diapysef library generation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/diapysef/diapysef/0.3.5.0</span></span>  with the following parameters:
+      <ul>
+        <li>In <em>“MaxQuant output file msms.txt</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">Filter on MaxQuant_MSMS</code></li>
+          </ul>
+        </li>
+        <li>In <em>“MaxQuant output file evidence.txt</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">Filter on MaxQuant_Evidence</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Retention time alignment method”</em>:
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Infile”</em>: <code class="language-plaintext highlighter-rouge">iRTassays.tsv</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-indexed-retention-time-irt-peptides"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Indexed retention time <em>iRT</em> peptides</h3>
+        <p>To allow for improved alignement of the different measurements, synthetic (non-endogenous) peptides which were spiked-in to all samples prior to the MS measurement. First the measured retention times (RTs) of those spiked-in peptides are extracted in the <strong>MaxQuant</strong> search results. Using the measured RTs as well as arbitrary assigned values (ranging from -26 to 99) a linear regression through the 11 synthetic peptides is applied.  Based on this linear regression fit <em>indexed</em> retention times (iRTs) are assigned to all other peptides.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many of the 11 synthetic peptides were found in the first DDA (Sample1) file?</li>
+    <li>How many were found in the second DDA (Sample2) file?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>8 iRT peptides were found in the first DDA file</li>
+      <li>9 iRT peptides were found in the second DDA file</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="spectral-library-refinement-with-openswathassaygenerator">Spectral library refinement with <strong>OpenSwathAssayGenerator</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-spectral-library-optimization-and-refinement-using-openswathassaygenerator"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Spectral library optimization and refinement using <strong>OpenSwathAssayGenerator</strong></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+galaxy0"><strong>OpenSwathAssayGenerator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_openswathassaygenerator/OpenSwathAssayGenerator/2.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">tabular (tsv)</code></li>
+        <li><em>“MZ threshold in Thomson for precursor ion selection”</em>: <code class="language-plaintext highlighter-rouge">0.015</code></li>
+        <li><em>“upper MZ limit for precursor ions”</em>: <code class="language-plaintext highlighter-rouge">1000.0</code></li>
+        <li><em>“MZ threshold in Thomson for fragment ion annotation”</em>: <code class="language-plaintext highlighter-rouge">0.015</code></li>
+        <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-adjustment-of-the-spectral-library"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Adjustment of the Spectral library</h3>
+        <p>The spectral library coming from <strong>diapysef library generation</strong> contains all observed fragment ions from the DDA runs resulting in a relativly large spectral library. Large libraries can lead to inceased processing times as well as fewer identifications after adjusting based on the False Discovery Rate (FDR). Thus, it is recommened to optimize and refine the spectral library by e.g. filtering for peptides with at least 6 transitions (increased confidence) and limiting the maximum also to 6 transitions (avoiding inflated libraries). Furthermore, the scan range can be adjusted (here between 400 - 1000 m/z) covering the same m/z range as in the DIA measurements.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many transitions does the refined spectral library contain and how many were removed?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The refined library contains ~170.000 lines, and almost 700.000 lines were removed.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="adding-decoy-sequences-with-openswathdecoygenerator">Adding decoy sequences with <strong>OpenSwathDecoyGenerator</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-decoy-transitions-to-the-spectral-library"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding <em>decoy</em> transitions to the spectral library</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+galaxy0"><strong>OpenSwathDecoyGenerator</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_openswathdecoygenerator/OpenSwathDecoyGenerator/2.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">tabular (tsv)</code>
+          <ul>
+            <li><em>“MZ threshold in Thomson for fragment ion annotation”</em>: <code class="language-plaintext highlighter-rouge">0.015</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-decoy-transitions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: <em>Decoy</em> transitions</h3>
+        <p>To enable correct false discovery rate (FDR) computation later on, we add computanionally generated decoy sequences to the spectral library. Those “non-observed” sequences can be generated based on the observed sequences with slight modifications. The most commonly used methods are either <strong>shuffle</strong> (randomly altering the amino acid sequence of each observed transition) or <strong>reverse</strong> (by reversing the actually obeserved transitions). Those artificially generated transitions were labelled as <strong>decoy</strong> and are later on considered as known false positives. 
+Example: By applying an FDR of 1 % we only allow for e.g only 1 such decoy transition out of 100 identifications. Thus one could estimate that the remaining 99 non-labeled identifications contain also 1 % false positive hits.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many lines do you expect after running the <strong>OpenSwathDecoyGenerator</strong> on your spectral library containing only observed transitions?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>We expect double the amount of lines, since we generate one <em>decoy</em> (non-observed) per <em>target</em> (observed) sequence.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="converting-the-spectral-library-with-targetedfileconverter">Converting the spectral library with <strong>TargetedFileConverter</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-converting-the-final-spectral-library-from-tsv-to-the-sqlite-pqp-format"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting the final spectral library from <em>.tsv</em> to the sqlite <em>.pqp</em> format</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/openms_targetedfileconverter/TargetedFileConverter/2.6+galaxy0"><strong>TargetedFileConverter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/openms_targetedfileconverter/TargetedFileConverter/2.6+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Output file type – default: determined from file extension or content”</em>: <code class="language-plaintext highlighter-rouge">pqp</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-finding-the-right-format-for-the-spectral-library"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Finding the right format for the spectral library.</h3>
+        <p>Generally there is a broad variety of data formats for spectral libraries including <em>.tsv</em>, <em>.dlib</em>, <em>.pqp</em> and more. Depending on the DIA analysis software one or multiple formats are supported and can be used. In <strong>OpenSwath<span class="notranslate">Workflow</span></strong> one needs to have the spectral library in <em>.pqp</em> format to being able to combine multiple runs after the DIA analysis and before applying the FDR scoring. This is particularily interesting when the multiple runs should be compared later on.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many peptides and proteins does the final library contain?</li>
+    <li>How many <em>target</em> peptides and proteins are in the library?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The final spectral library contains 56.789 peptides covering 10.232 proteins.</li>
+      <li>Since we added equal numbers of <em>decoy</em> sequences we expect to have only half of the peptides and proteins (~28.000 and ~5.100) which are real targets.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<figure id="figure-2"><img src="../../images/DIA_lib_gen_sum.png" alt="DDA_lib_gen_pipe" /><figcaption><span class="figcaption-prefix">Figure 2:</span> All-in one <span class="notranslate">workflow</span> for DIA analysis in <span class="notranslate">Galaxy</span>. The generation of a spectral library is highlighted in red.</figcaption></figure>
+
+<p>Using data dependent acquisiton (DDA) mass spectrometry data we generated a spectral library which can be used for the analysis of data independent acquisition (DIA) data. The quality and content of the spectral library is crucial for the following DIA data analysis. Thus, in some analysis it might be beneficial or even necessary to use slightly adjusted spectral libraries, containing e.g. semi-tryptic peptides (see enzyme in <strong>MaxQuant</strong>), non-unique peptides (skip filtering) or longer peptides (higher missed cleavages).</p>
+
+<figure id="figure-3"><img src="../../images/DIA_lib_gen_workflow.png" alt="DDA_lib_gen_galaxy" /><figcaption><span class="figcaption-prefix">Figure 3:</span> <span class="notranslate">Galaxy</span> worfklow containing all necessary steps for the genration of a spectral library.</figcaption></figure>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>MaxQuant, diapysef and OpenSwath tools enable the generation of spectral libraries from DDA data</p>
+</li>
+                            
+                            <li><p>Generated spectral libraries can be used for the analysis of DIA data</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Cox2008">Cox, J., and M. Mann, 2008 <b>MaxQuant enables high peptide identification rates,  individualized p.p.b.-range mass accuracies and proteome-wide protein quantification</b>. Nature Biotechnology 26: 1367–1372.</span>
+    
+    
+    <a href="https://doi.org/10.1038/nbt.1511">10.1038/nbt.1511</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Bielow2015">Bielow, C., G. Mastrobuoni, and S. Kempa, 2015 <b>Proteomics Quality Control: Quality Control Software for MaxQuant Results</b>. Journal of Proteome Research 15: 777–787.</span>
+    
+    
+    <a href="https://doi.org/10.1021/acs.jproteome.5b00780">10.1021/acs.jproteome.5b00780</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Library Generation for DIA Analysis (Proteomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Matthias Fahrner, Melanie Föll, 2020 <b>Library Generation for DIA Analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html">/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{proteomics-DIA_lib_OSW,
+    author = "Matthias Fahrner and Melanie Föll",
+    title = "Library Generation for DIA Analysis (Galaxy Training Materials)",
+    year = "2020",
+    month = "12",
+    day = "02"
+    url = "\url{/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Matthias Fahrner, Melanie Föll)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

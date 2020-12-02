@@ -1,0 +1,1067 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Statistical analysis of DIA data</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', '' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Statistical analysis of DIA data" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_Analysis_MSstats%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_Analysis_MSstats%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_Analysis_MSstats%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_Analysis_MSstats%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_Analysis_MSstats%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2FDIA_Analysis_MSstats%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Statistical analysis of DIA data",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Proteomics",
+    "description": "Training material for proteomics workflows in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+  },
+  "courseCode": "proteomics / DIA_Analysis_MSstats / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Statistical analysis of DIA data' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The questions this  addresses are:\n - How to perform statistical analysis on DIA mass spectrometry data?\n - How to detect and quantify differentially abundant proteins in a HEK-Ecoli Benchmark DIA datatset?\n\n\\nThe objectives are:\n - Statistical analysis of a HEK-Ecoli Benchmark DIA dataset\n - Understanding statistical approaches in proteomic analysis\n - Using MSstats to find significantly dysregulated proteins in a Spike-in dataset\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html",
+      "name": "Library Generation for DIA Analysis",
+      "description": "Hands-on for 'Library Generation for DIA Analysis' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html",
+      "name": "DIA Analysis using OpenSwathWorkflow",
+      "description": "Hands-on for 'DIA Analysis using OpenSwathWorkflow' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Matthias Fahrner"
+    },
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Matthias Fahrner"
+    },
+    {
+      "@type": "Person",
+      "name": "Melanie Föll"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Statistical analysis of DIA data</h1>
+        
+        <div class="alert alert-warning" role="alert">
+            <h4 class="alert-heading">Under Development!</h4>
+            <p>This tutorial is not in its final state. The content may change a lot in the next months.
+            Because of this status, it is also not listed in the topic pages.</p>
+        </div>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/matthias313/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/matthias313" alt="Matthias Fahrner">Matthias Fahrner</a>, <a href="/training-material/hall-of-fame/foellmelanie/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/foellmelanie" alt="Melanie Föll">Melanie Föll</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to perform statistical analysis on DIA mass spectrometry data?</p>
+</li>
+            
+            <li><p>How to detect and quantify differentially abundant proteins in a HEK-Ecoli Benchmark DIA datatset?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Statistical analysis of a HEK-Ecoli Benchmark DIA dataset</p>
+</li>
+            
+            <li><p>Understanding statistical approaches in proteomic analysis</p>
+</li>
+            
+            <li><p>Using MSstats to find significantly dysregulated proteins in a Spike-in dataset</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/proteomics">Proteomics</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 2, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>This training covers the statistical analysis of data independent acquisition (DIA) mass spectrometry (MS) data, after successfull identification and quantification of peptides and proteins. We therefore recommend to first go through the <a href="/training-material/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html">DIA library generation tutorial</a> as well as the <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_OSW/tutorial.html">DIA analysis tutorial</a>, which teach the principles and characteristics of DIA data analysis.</p>
+
+<p>Modern mass spectrometry approaches enables the identification and quantification of thousands of proteins and tens of thousands of peptides in single measurements. This provides immense potential to in-depth explorative analysis of a variety of biological samples. However, often the number of available samples is limited leading to large proteomic datasets with only a few numbers of replicates or samples per condition. Thus, the statistical analysis remains challenging in such in-depth proteomic studies.</p>
+
+<p>Here we will use <strong>MSstats</strong>, which enables the statistical analysis and processing of proteomic data (<a class="citation" href="#Choi2014">Choi <i>et al.</i> 2014</a>).</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#statistical-analysis-with-msstats" id="markdown-toc-statistical-analysis-with-msstats">Statistical analysis with <strong>MSstats</strong></a>    <ol>
+      <li><a href="#detailed-investigation-of-ecoli-identifications-and-quantifications" id="markdown-toc-detailed-investigation-of-ecoli-identifications-and-quantifications">Detailed investigation of Ecoli identifications and quantifications</a></li>
+    </ol>
+  </li>
+  <li><a href="#statistical-analysis-with-msstats-1" id="markdown-toc-statistical-analysis-with-msstats-1">Statistical analysis with <strong>MSstats</strong></a>    <ol>
+      <li><a href="#detailed-investigation-of-ecoli-identifications-and-quantifications-1" id="markdown-toc-detailed-investigation-of-ecoli-identifications-and-quantifications-1">Detailed investigation of Ecoli identifications and quantifications</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h2 id="get-data">Get data</h2>
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a meaningful name</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>Import the DIA analysis results, the sample annotation and the comparison matrix from <a href="https://zenodo.org/record/4302084">Zenodo</a>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4302084/files/PyProphet_export.tabular
+https://zenodo.org/record/4302084/files/Sample_annot_MSstats.txt
+https://zenodo.org/record/4302084/files/Comp_matrix_HEK_Ecoli.txt
+https://zenodo.org/record/4302084/files/PyProphet_msstats_input.tabular
+</code></pre></div>      </div>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+    </li>
+    <li>Once the files are green, rename the sample annotation file in ‘Sample_annot_MSstats’, the comparison matrix file in ‘Comp_matrix_HEK_Ecoli’ and the two DIA analysis results files in ‘PyProphet_export’ and ‘PyProphet_msstats_input’
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="statistical-analysis-with-msstats">Statistical analysis with <strong>MSstats</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-performing-statistical-analysis-using-msstats-and-the-tabular-output-from-pyprophet-export"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Performing statistical analysis using <strong>MSstats</strong> and the tabular output from <strong>PyProphet export</strong></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0"><strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/msstats/msstats/3.20.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“input source”</em>: <code class="language-plaintext highlighter-rouge">OpenSWATH</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“OpenSWATH_input”</em>: <code class="language-plaintext highlighter-rouge">PyProphet_export</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“OpenSWATH_annotation”</em>: <code class="language-plaintext highlighter-rouge">Sample_annot_MSstats</code></li>
+          </ul>
+        </li>
+        <li><em>“Compare Groups”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Comparison Matrix”</em>: <code class="language-plaintext highlighter-rouge">Comp_matrix_HEK_Ecoli</code></li>
+          </ul>
+        </li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-data-process-and-group-comparison"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: data Process and group comparison</h3>
+        <p>During the data process step the peptide intensities are normalized and protein inference is performed. Using a predefined comparison matrix multiple comparisons can be performed.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many lines does the PyPyprophet_export.tabular file have? How many lines does the ProcessedData have and do you notice any differences in their structure or format?</li>
+    <li>How many proteins were used for the Group comparison? (see ComparisonResult)</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The PyPyprophet_export.tabular has appr. 230.000 lines whereas the ProcessedData has over 1 mio lines and is in the so called long format. Here every individual transition (single m/z value) is reported per row.</li>
+      <li>The ComparisonResult has 5022 lines, meaning over 5000 Proteins were compared between the two different Spike-in conditions.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-continue-with-results-from-zenodo"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Continue with results from Zenodo</h3>
+
+  <p>In case the <strong>MSstats</strong> run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
+  <ol>
+    <li>Import the files from <a href="https://zenodo.org/record/4302084">Zenodo</a>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_export_tabular.tsv
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="detailed-investigation-of-ecoli-identifications-and-quantifications">Detailed investigation of Ecoli identifications and quantifications</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-investigating-ecoli-proteins-in-the-msstats-comparison-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Investigating Ecoli proteins in the MSstats comparison results</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">MSstats_ComparisonResult_export_tabular</code> (output of <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(ECOLI)|(logFC)</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Select_Ecoli</code> (output of <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7!='NA'</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4"><strong>Histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">Filter_Ecoli</code> (output of the previous <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Numerical column for x axis”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+        <li><em>“Number of breaks (bars)”</em>: <code class="language-plaintext highlighter-rouge">25</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Distribution of Ecoli Protein log FC values</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">log2 Fold Change</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-extracting-ecoli-information"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Extracting Ecoli information</h3>
+        <p>First we only select rows containing specific terms such as “Ecoli” from the complete ComparisonResults file. Afterwards, the table is filtered to containg only proteins with valid statistical information (e.g. p-value). Using the log2 Fold change values from all remaining Ecoli proteins we can observe the distribution of log2FC values from the comparison of the two Spike-in conditions.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many Ecoli proteins were identified and for how many was the p-value for the comparison of the two Spike-in conditions computed?</li>
+    <li>How does the distribution of the log2FC values look like? Which Spike-in contained higher amounts of Ecoli and is it possible to see how much more Ecoli was spiked-in?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>In total, over 800 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions.</li>
+      <li>We can see a gaussian distribution of the log2FC values around a positive value of 3. Since we compared Spike_in_2 / Spike_in_1 we can directly see that Spike_in_2 contained higher amounts of Ecoli. Furthermore, since the apex of the distribution is around 3 and we compared log2 intensities, we could estimate that Spike_in_2 contained approx. 8-times more Ecoli than Spike_in_1.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 id="statistical-analysis-with-msstats-1">Statistical analysis with <strong>MSstats</strong></h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-performing-statistical-analysis-using-msstats-and-the-msstats_input-from-pyprophet-export"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Performing statistical analysis using <strong>MSstats</strong> and the msstats_input from <strong>PyProphet export</strong></h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/galaxyp/msstats/msstats/3.20.1.0"><strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/<span class="notranslate">galaxy</span>p/msstats/msstats/3.20.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“input source”</em>: <code class="language-plaintext highlighter-rouge">MStats 10 column format</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“MSstats 10-column input”</em>: <code class="language-plaintext highlighter-rouge">PyProphet_msstats_input</code></li>
+          </ul>
+        </li>
+        <li><em>“Compare Groups”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-comment-msstats-input-format"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: MSstats input format</h3>
+        <p>For the statistical analysis using MSstats the input must be in the long format, containing all relevant information in 10 predefined columns. The conversion of the <strong>PyProphet export</strong> output can either be done using <strong>MSstats</strong> (as we did above), or during the <strong>Pyprophet export</strong> step by using another R package called swath2stats (<a class="citation" href="#Blattmann2016">Blattmann <i>et al.</i> 2016</a>). Prior to the conversion the data can be processed and filtered using the swath2stats functionalities.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many lines does the <code class="language-plaintext highlighter-rouge">PyProphet_msstats_input.tabular</code> file have? How many lines does the ProcessedData have and do you notice any differences in their structure or format?</li>
+    <li>How many proteins were used for the Group comparison? And do you already see a difference to the first <strong>MSstats</strong> step?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>The <code class="language-plaintext highlighter-rouge">PyProphet_msstats_input.tabular</code> has over 870.000 lines and the ProcessedData has over 1 mio lines. Here both files are in the long format, in which every transition is reported per row.</li>
+      <li>Here the ComparisonResult has only 3871 lines, meaning that almonst 1200 fewer proteins were used in the comparison of the two spike-in conditions.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<blockquote class="tip">
+  <h3 id="tip-tip-continue-with-results-from-zenodo-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Continue with results from Zenodo</h3>
+
+  <p>In case the <strong>MSstats</strong> run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial</p>
+  <ol>
+    <li>Import the files from <a href="https://zenodo.org/record/4302084">Zenodo</a>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4302084/files/MSstats_ComparisonResult_msstats_input.tsv
+</code></pre></div>      </div>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="detailed-investigation-of-ecoli-identifications-and-quantifications-1">Detailed investigation of Ecoli identifications and quantifications</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-investigating-ecoli-proteins-in-the-msstats-comparison-results-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Investigating Ecoli proteins in the MSstats comparison results</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="Grep1" title="Tested with Grep1"><strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Grep1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select lines from”</em>: <code class="language-plaintext highlighter-rouge">MSstats_ComparisonResult_msstats_input</code> (output of the second <strong>MSstats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">(ECOLI)|(logFC)</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="Filter1" title="Tested with Filter1"><strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: Filter1</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Filter”</em>: <code class="language-plaintext highlighter-rouge">Select_Ecoli</code> (output of the second <strong>Select</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“With following condition”</em>: <code class="language-plaintext highlighter-rouge">c7!='NA'</code></li>
+        <li><em>“Number of header lines to skip”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4"><strong>Histogram</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/histogram/histogram_rpy/1.0.4</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Dataset”</em>: <code class="language-plaintext highlighter-rouge">Filter_Ecoli</code> (output of the previous <strong>Filter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Numerical column for x axis”</em>: <code class="language-plaintext highlighter-rouge">Column: 3</code></li>
+        <li><em>“Number of breaks (bars)”</em>: <code class="language-plaintext highlighter-rouge">25</code></li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Distribution of Ecoli Protein log FC values</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">log2 Fold Change</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many Ecoli proteins were identified and for how many was the p-value for the comparison of the two Spike-in conditions computed? Are there any differences compared to the selected and filtered results from the previous <strong>MSstats</strong> step?</li>
+    <li>How does the distribution of the log2FC values look like? Are there any differences compared to the selected and filtered results from the previous <strong>MSstats</strong> step?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>In total, over 600 Ecoli proteins were identified from which 500 have a p-value for the comparison of the two Spike-in conditions. Here we identify 200 Ecoli proteins less than before, however, the number of proteins for which a p-value was calculated differs only slightly.</li>
+      <li>Generally, the two log2FC distribution look very similar, showing a gaussian distribution of the log2FC values around a positive value of 3. There seems to be a slight difference of the apex of the distribution, in the first <strong>MSstats</strong> analysis it seems to be higher than 3, whereas in the second <strong>MSstats</strong> analysis the apex seems to be lower than 3.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<figure id="figure-1"><img src="../../images/DIA_MSstats_sum.png" alt="DIA_MSstats_pipe" /><figcaption><span class="figcaption-prefix">Figure 1:</span> All-in one <span class="notranslate">workflow</span> for DIA analysis in <span class="notranslate">Galaxy</span>. The statistical analysis using MSstats is highlighted in green.</figcaption></figure>
+
+<p>Using <strong>MSstats</strong> we were able to identify and quantify differentially regulated proteins between two Spike-in conditions in a HEK/Ecoli Benchmark DIA datatset. Furthermore, the preprocessing of the proteomic data prior to the statistical analysis can directly impact results. Thus, it might be beneficial to try various ways of intermediate data processing and statistical analysis to increase the sensitivity and specificity of the investigation.</p>
+
+<figure id="figure-2"><img src="../../images/DIA_MSstats_galaxy.png" alt="DIA_MSstats_galaxy" /><figcaption><span class="figcaption-prefix">Figure 2:</span> <span class="notranslate">Galaxy</span> worfklow containing all necessary steps for the statistical analysis of DIA data using MSstats</figcaption></figure>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Statistical analyses are crucial for meaningful conclusion in proteomic studies</p>
+</li>
+                            
+                            <li><p>MSstats enables statistical analysis of data independent acquisition mass spectrometry data</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Choi2014">Choi, M., C.-Y. Chang, T. Clough, D. Broudy, T. Killeen <i>et al.</i>, 2014 <b>MSstats: an R package for statistical analysis of quantitative mass spectrometry-based proteomic experiments</b>. Bioinformatics 30: 2524–2526.</span>
+    
+    
+    <a href="https://doi.org/10.1093/bioinformatics/btu305">10.1093/bioinformatics/btu305</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:">https://academic.oup.com/bioinformatics/bioinformatics/article/2748156/MSstats:</a>
+      
+    
+
+</li>
+<li><span id="Blattmann2016">Blattmann, P., M. Heusel, and R. Aebersold, 2016 <b>SWATH2stats: An R/bioconductor package to process and convert quantitative SWATH-MS proteomics data for downstream analysis tools</b>. PLoS ONE 11: 1–7.</span>
+    
+    
+    <a href="https://doi.org/10.1371/journal.pone.0153160">10.1371/journal.pone.0153160</a>
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Statistical analysis of DIA data (Proteomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Matthias Fahrner, Melanie Föll, 2020 <b>Statistical analysis of DIA data (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html">/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{proteomics-DIA_Analysis_MSstats,
+    author = "Matthias Fahrner and Melanie Föll",
+    title = "Statistical analysis of DIA data (Galaxy Training Materials)",
+    year = "2020",
+    month = "12",
+    day = "02"
+    url = "\url{/training-material/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Matthias Fahrner, Melanie Föll)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/DIA_Analysis_MSstats/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
