@@ -196,7 +196,7 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 > > ### {% icon solution %} Solution
 > >
 > > 1. Yes, we can see a clearly different distribution of the target identification and the decoys. Both, target and decoy distribution were highest around 0. However, the target distribution shows a second peak at positiv d-score values. 
-> > 2. The decoy identifications show a Gaussian distribution around 0 which could be explained by the fact that the decoy sequences were randomly generated alterations from the target sequences in the spectral library (see [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DDIA_lib_OSW/tutorial.html)). Most target identifications show also d-scores around 0, thus reflect potential false positive identifications. Only the distribution of target identifications shows a second increase in higher d-score values, representing more confident identifications. 
+> > 2. The decoy identifications show a Gaussian distribution around 0 which could be explained by the fact that the decoy sequences were randomly generated alterations from the target sequences in the spectral library (see [DIA library generation tutorial]({{site.baseurl}}/topics/proteomics/tutorials/DIA_lib_OSW/tutorial.html)). Most target identifications show also d-scores around 0, thus reflect potential false positive identifications. Only the distribution of target identifications shows a second increase in higher d-score values, representing more confident identifications. 
 > >
 > {: .solution}
 >
