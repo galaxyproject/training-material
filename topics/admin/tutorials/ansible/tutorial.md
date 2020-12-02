@@ -568,7 +568,7 @@ Templates give you greater control over the files you are deploying to the targe
 >
 > ```yaml
 > root_dir = /opt/my-app
-> config_dir = "{{ root_dir }}/config"
+> config_dir = {% raw %}"{{ root_dir }}/config"{% endraw %}
 > ```
 >
 > When Ansible runs:
