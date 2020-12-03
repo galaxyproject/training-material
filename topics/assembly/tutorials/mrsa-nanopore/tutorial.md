@@ -497,6 +497,10 @@ from prokka as an information track.
 >
 {: .hands_on}
 
+If it takes too long to build the JBrowse instance, you can view an embedded one here. (**Warning**: feature name search will not work.)
+
+{% include snippets/jbrowse.html datadir="data" tracks="DNA,d6de62f94b0de381be4ee8f27dd61ab9_0,81dca2c0e6930aa541a1a88927ed51dd_0" %}
+
 A useful option is the "search features" option
 
 1. Under the **View** menu click on the **Search Features** option
