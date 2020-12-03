@@ -21,6 +21,7 @@ contributors:
   - natefoo
   - slugger70
   - hexylena
+  - abretaud
 tags:
   - ansible
 requirements:
@@ -29,6 +30,7 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
+      - connect-to-compute-cluster
 ---
 
 > ### {% icon warning %} Evolving Topic
@@ -107,7 +109,7 @@ We will use several Ansible roles for this tutorial. In order to avoid repetetiv
 >    - src: geerlingguy.docker
 >      version: 2.6.0
 >    - src: usegalaxy_eu.gie_proxy
->      version: 0.0.1
+>      version: 0.0.2
 >    ```
 >
 > 2. Install the requirements with `ansible-galaxy`:
@@ -363,9 +365,11 @@ During the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ans
 
 In order to ensure each Interactive Tool's cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your Galaxy server (e.g. `<unique-id>.interactivetoolentrypoint.interactivetool.galaxy.example.org`). Your SSL cert is not valid for this subdomain. Further, in order to support the random `<unique-id>` in the hostname, we need a *wildcard certificate* for `*.interactivetoolentrypoint.interactivetool.galaxy.example.org`. Let's Encrypt wildcard certificates [can only be generated using the DNS-01 challenge method][lets-encrypt-faq], which works by issuing a [dynamic DNS][ddns] update to set the requested domain's `TXT` record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.
 
-If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, we have precreated a dynamic DNS server that you will use for this step. The *TSIG key* that allows you to perform dynamic DNS updates will be provided to you.
+If you are completing this tutorial as part of a [Galaxy Admin Training][gat] course, we have precreated a dynamic DNS server that you will use for this step. The *TSIG key* that allows you to perform dynamic DNS updates will be provided to you. Your instructor will also tell you which option to follow (1 or 2), depending on the DNS provider that was chosen for this course.
 
-> ### {% icon hands_on %} Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible
+> ### {% icon hands_on %} Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 1 (rfc2136)
+>
+> This method uses a DNS provider hosted by the Galaxy Project.
 >
 > 1. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
@@ -435,6 +439,108 @@ If you are completing this tutorial as part of a [Galaxy Admin Training][gat] co
 >    {: .question}
 >
 >    Be patient! The certificate request step can take time due to the time allowed for DNS propagation to occur.
+>
+{: .hands_on}
+
+
+> ### {% icon hands_on %} Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 2 (route53)
+>
+> This method uses route53, the Amazon Web Services DNS provider. To manage connection to AWS, we will first install a specific role.
+>
+> 1. In your working directory, add the aws_cli role to your `requirements.yml`:
+>
+>    ```yaml
+>    - src: usegalaxy_eu.aws_cli
+>      version: 0.0.1
+>    ```
+>
+> 2. Install the requirements with `ansible-galaxy`:
+>
+>    ```
+>    ansible-galaxy role install -p roles -r requirements.yml
+>    ```
+> 3. Open `galaxy.yml` with your text editor to add the role `usegalaxy_eu.aws_cli` just before the nginx role:
+>
+>    ```diff
+>    diff --git a/galaxy.yml b/galaxy.yml
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -21,6 +21,7 @@
+>           become: true
+>           become_user: galaxy
+>         - usegalaxy_eu.galaxy_systemd
+>    +    - usegalaxy_eu.aws_cli
+>         - galaxyproject.nginx
+>         - geerlingguy.docker
+>         - usegalaxy_eu.gie_proxy
+>    ```
+>
+> 4. Edit the group variables file, `group_vars/galaxyservers.yml`:
+>
+>    The relevant variables to set for this role are:
+>
+>    | Variable                  | Type       | Description                                                                                                      |
+>    | ----------                | -------    | -------------                                                                                                    |
+>    | `certbot_domains`         | list       | List of domains to include as subject alternative names (the first will also be the certificate's *common name*) |
+>    | `certbot_dns_provider`    | string     | Name of [Certbot DNS plugin][certbot-dns-plugins] to use                                                         |
+>    | `certbot_dns_credentials` | dictionary | Plugin-specific credentials for performing dynamic DNS updates                                                   |
+>    | `certbot_expand`          | boolean    | Whether to "expand" an existing certificate (add new domain names to it)                                         |
+>
+>    - Add a new item to the **existing** `certbot_domains` list so it matches:
+>
+>      {% raw %}
+>      ```yaml
+>      certbot_domains:
+>        - "{{ inventory_hostname }}"
+>        - "*.interactivetoolentrypoint.interactivetool.{{ inventory_hostname }}"
+>      ```
+>      {% endraw %}
+>
+>    - Comment out the existing `certbot_auth_method` like so:
+>
+>      ```yaml
+>      #certbot_auth_method: --webroot
+>      ```
+>
+>        Although this is not explicitly required (setting `cerbot_dns_provider` as we do overrides this setting), doing so is less confusing in the future, since it makes it clear that the "webroot" method for Let's Encrypt WEB-01 challenges is no longer in use for this server.
+>
+>    - Add the following lines to your `group_vars/galaxyservers.yml` file:
+>
+>      ```yaml
+>      certbot_dns_provider: route53
+>      aws_cli_credentials:
+>        - access_key: "<SECRET PROVIDED BY INSTRUCTOR>"
+>          secret_key: "<SECRET PROVIDED BY INSTRUCTOR>"
+>          homedir: /root
+>          owner: root
+>          group: root
+>      ```
+>
+> 5. Run the playbook **with `certbot_expand`**:
+>
+>    ```
+>    ansible-playbook galaxy.yml -e certbot_expand=true
+>    ```
+>
+>    > ### {% icon question %} Question
+>    >
+>    > What is the `-e` flag to `ansible-playbook` and why did we use it?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > As per `ansible-playbook --help`:
+>    > >
+>    > > ```
+>    > >   -e EXTRA_VARS, --extra-vars EXTRA_VARS
+>    > >                         set additional variables as key=value or YAML/JSON, if
+>    > >                         filename prepend with @
+>    > > ```
+>    > >
+>    > > We used this flag because `certbot_expand` only needs to be set *once*, when we are adding a new domain to the certificate. It should not be enabled on subsequent runs of the playbook, or else we would request a new certificate on each run! Thus, it does not make sense to add it to a vars file.
+>    > >
+>    > {: .solution }
+>    >
+>    {: .question}
 >
 {: .hands_on}
 

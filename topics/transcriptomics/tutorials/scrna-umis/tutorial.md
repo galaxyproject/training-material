@@ -84,7 +84,7 @@ Cell barcodes are designed primarily for delineating one cell from another, such
 
  ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two seperate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
 
-Transcript barcodes are different. These can be thought of as "random salt" that is sprinkled onto any given cell that helps reduce the number of duplicate transcripts.
+Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.
 
  ![Transcript Barcodes](../../images/scrna_umi_add.svg "Random oligonucleotides barcodes added to (cell barcoded) reads")
 
@@ -139,7 +139,7 @@ Consider the above example where two reads from different transcripts are amplif
 
 > |  | Reads in Cell 1 |
 > |--|------------------|
-> | Gene Red | 5 |
+> | Gene Red | 4 |
 > | Gene Blue | 0 |
 {: .matrix}
 
@@ -200,13 +200,13 @@ This then provides us with the true count of the number of true transcripts for 
 > >
 > >   e.g.
 > >
-> >  | BC:Cell | BC:UMI | Maps to Gene |
+> >  | BC:Cell | Maps to Gene | BC:UMI |
 > >  |------|-----|------|
-> >  | AAAT | TCA | Slx1 |
-> >  | AAAT | GTG | Slx2 |
-> >  | AAAT | TCA | Gh13 |
-> >  | TTAA | TCA | Slx1 |
-> >  | TTAA | CCC | Atp3 |
+> >  | AAAT | Slx1 | TCA |
+> >  | AAAT | Slx2 | GTG |
+> >  | AAAT | Gh13 | TCA |
+> >  | TTAA | Slx1 | TCA |
+> >  | TTAA | Atp3 | CCC |
 > >
 > > If UMIs were unique to a gene, then the `TCA` UMI barcode would not have reads that map to both *Slx1* and *Gh13* in the same cell (`AAAT`).
 > >
@@ -372,7 +372,7 @@ The encoding of the barcodes on the first read can actually be seen by examining
 > ### {% icon hands_on %} Hands-on: Confirming the Barcoding
 >
 > 1. **FastQC** {% icon tool %} with the following parameters:
->    - {% icon param-collection %} *"Short read data from your current history"*: `Paired FastQ` (the original paired set)
+>    - {% icon param-collection %} *"Short read data from your current history"*: `Paired FastQ` (the original paired set) You will need to choose 'Dataset collection' to allow this as an input.
 >
 >    > ### {% icon comment %} Comment
 >    >

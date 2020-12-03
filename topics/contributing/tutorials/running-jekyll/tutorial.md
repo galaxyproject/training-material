@@ -50,7 +50,9 @@ This step has to be done once.
 >     It will install some needed tools (ruby, nodejs, etc) in a protected environment, without interfering with the existing tools or versions.
 >
 >     1. Install conda (if not already installed): `make install-conda`
->     2. Create the `galaxy_training_material` conda environment: `make create-env`
+>     2. (You may need to exit the terminal and re-open for conda to be recognised. Navigate back to the same place.)
+>     3. Create the `galaxy_training_material` conda environment: `make create-env`
+>     4. Activate the environment: `conda activate galaxy_training_network`
 >
 > 4. Install Jekyll and related modules into the conda environment: `make install`
 {: .hands_on}
