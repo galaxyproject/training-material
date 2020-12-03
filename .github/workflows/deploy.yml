@@ -26,11 +26,13 @@ jobs:
             ${{ runner.os }}-gems-
       - name: Install dependencies
         run: |
+          gem install bundler
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
       - name: Build Site
         run: |
+          gem install bundler
           python -m pip install --upgrade pip
           pip install requests ephemeris
           export PATH=/home/runner/.local/bin:$PATH
