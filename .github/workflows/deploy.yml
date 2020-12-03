@@ -1,3 +1,5 @@
+name: Deploy Website
+
 on:
   push:
     branches:
@@ -27,7 +29,13 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
-      - run: JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+      - name: Build Site
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests ephemeris
+          export PATH=/home/runner/.local/bin:$PATH
+          make annotate ACTIVATE_ENV=pwd
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3

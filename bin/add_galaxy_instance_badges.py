@@ -89,7 +89,8 @@ def badge_it(label, value, color, CACHE_DIR, identifier_parts, output_dir):
 
     # Copy the badge to a per-instance named .svg file.
     up = ['..'] * (len(identifier_parts) - 1)
-    symlink_source = os.path.join(*up, real_badge_path[len('badges/'):])
+    total = up + [real_badge_path[len('badges/'):]]
+    symlink_source = os.path.join(*total)
     if not DRY_RUN:
         # Remove it if it exists, since this is easier than testing for
         # equality.

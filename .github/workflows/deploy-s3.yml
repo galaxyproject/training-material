@@ -1,7 +1,8 @@
+name: Publish tagged release to AWS S3
+
 on:
-  push:
-    tags:
-    - '*'
+  release:
+    types: [published]
 
 jobs:
   deploy:
@@ -12,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -27,11 +28,29 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
-      - run: |
-          sed -i s"|^baseurl: .*|baseurl: '/archive/${TRAVIS_TAG}'|g" _config.yml
-          sed -i s"|^github_repository_branch: .*|github_repository_branch: '${TRAVIS_TAG}'|g" _config.yml
+      - name: Configure AWS credentials from GTN account
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Obtain tag name
+        id: branch_name
+        run: |
+          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
+
+      - name: Build Site
+        run: |
+          sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
+          sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+        env:
+          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+
       - name: Deploy 🚀
         run: |
-            pip install awscli
-            ./bin/publish-archive
+          pip install awscli
+          ./bin/publish-archive
+        env:
+          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
