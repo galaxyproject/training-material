@@ -120,7 +120,7 @@ We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycopla
 >    >
 >    > 1. What information is provided in the `CSV` file?
 >    > 2. And in the `Alignments` file?
->    > 2. What happens if we re-run the experiment with other parameters (e.g. change `Minimum length` to `5000` and `Minimum similarity` to `95`)?
+>    > 3. What happens if we re-run the experiment with other parameters (e.g. change `Minimum length` to `5000` and `Minimum similarity` to `95`)?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. The `CSV` file contains a summary of the detected High-Scoring Segment Pairs (HSPs) or alignments. The file is divided in a few rows of metadata (e.g. containing the sequence names) and one row per alignment detected. Check out the `GECKO` help (bottom of the tool {% icon tool %} page to know what each column does!
@@ -137,9 +137,54 @@ We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycopla
 >
 {: .hands_on}
 
-## Interactive post-processing
+## Post-processing
 
-todo
+We will now use additional tools to post-process our alignments. Consider the case where you are interested in a set of DNA repeats located at a given position in the sequences. 
+
+> ### {% icon comment %} Note about interactive exploration of alignments
+> In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use `GECKO-MGV` to ease the process. `GECKO-MGV`generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the `GECKO-MGV` article ({% cite diaz2019combining %}) or run it with a dockerized container from [here](https://github.com/estebanpw/docker-geckomgv).
+{: .comment}
+
+
+For our current experiment, we will be looking for the following set of repeats:
+
+![Mycoplasma hyopneumoniae comparison example](../../images/hpc-for-lsgc/GeckoMGV01.PNG "(Left) Sequence comparison between Mycoplasma hyopneumoniae 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.")
+
+Let's extract the repeats highlighted in red (Figure 2, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. Mycoplasma hyopneumoniae 7422) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 2 we are selecting the ones stacked vertically).
+
+> ### {% icon hands_on %} Hands-on: Muiltiple Sequence Alignment of a set of repeats
+> 1. **Text reformatting** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"File to process"*: `Gecko on data 2 and 1: Alignments`
+>    - *"AWK Program"*: `BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf(">sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } `
+>    > ### {% icon comment %} Note about AWK
+>    >
+>    > Although the AWK script looks a bit threatening, it is very simple.
+>    >  - The `BEGIN{FS=" "}` tells it to separate fields by a space. 
+>    >  - The `/@\(196[0-9][0-9]/` is a regular expression that indicates we are looking for a line containing the string `@(196xx` where `xx` are two random digits between 0 and 9. This is used to identify the repeats that start at coordinates 19,600 to 19,699.
+>    >  - The previous regular expression triggers an action. The first part `printf(">sequence%s%s\n", $(NF-1), $NF); getline` prints out the sequence ID along with the coordinates and moves on to the next line.
+>    >  - The second part `while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline;` scans the next lines and prints the nucleotide sequence corresponding to the `Y` sequence (the reference), up until a `>` is found, which means we are done with the sequence.
+>    >
+>    {: .comment}
+>
+> 2. Change the name of the output file `Text reformatting on data ...` to `repeats` Change the datatype to `.fasta`.
+>    {% include snippets/rename_dataset.md %}
+>    {% include snippets/change_datatype.md %}
+>
+> 3. **ClustalW** {% icon tool %} with the following parameters
+>    - {% icon param-file %} *"FASTA file"*: `repeats.fasta`
+>    - *"Data type"*: `DNA nucleotide sequences`
+>    - *"Output alignment format"*: `Native Clustal output format`
+>    - *"Show residue numbers in clustal format output"*: `No`
+>    - *"Output order"*: `Aligned`
+>    - *"Output complete alignment"*: `Complete alignment`
+> 
+{: .hands_on}
+
+
+...
+use this one
+
+
 
 ### Connecting to the DOCKER container
 
@@ -185,6 +230,9 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >
 >    {% include snippets/rename_dataset.md %}
 >    {% include snippets/change_datatype.md %}
+>    > ### {% icon comment %} Note on the name of the chromosomes
+>    > Please notice that these chromosomes are not labelled as "chromosome 1" at their original sources. We have renamed them for simplicity.
+>    {: .comment}
 >
 {: .hands_on}
 
@@ -203,6 +251,19 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 > 1. **CHROMEISTER** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Query sequence"*: `aegilops-chr1.fasta`
 >    - {% icon param-file %} *"Reference sequence"*: `triticum-chr1.fasta`
+>    - *"Output dotplot size"*: `1000`
+>    - *"K-mer seed size"*: `32`
+>    - *"Diffuse value"*: `4`
+>    - *"Add grid to plot for multi-fasta data sets"*: `No`
+> 2. Run the job and wait for the results. It should take around ~3 minutes.
+> 3. Let's inspect the output files:
+>    - *"Comparison matrix"*: This file is the "core" of the comparison. It contains the heuristically matched seeds sampled per section of the chromosomes. This file is used for custom post-processing.
+>    - *"Comparison dotplot"*: This file is a `.png` image representing the pairwise comparison. 
+>    - *"Comparison metainformation"*: This CSV file contains information about the comparison such as name of the sequences compared, length, etc. It is particularly useful when using multi-fasta inputs. 
+>    - *"Detected events"*: This CSV file contains information regarding rearrangements automatically detected. 
+>    - *"Comparison score"*: This text file contains the scoring distance between the query and the reference.
+{: .hands_on}
+
 
 # Conclusion
 {:.no_toc}
