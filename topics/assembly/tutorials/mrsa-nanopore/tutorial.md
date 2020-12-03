@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Genome Assembly of MRSA using Oxford Nanopore MinION Data
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/4304328'
 questions:
 - How to check the quality of the MinION data?
 - How to perform an assembly with MinION data?
@@ -111,10 +111,10 @@ Each read consists of the following parts:
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. {% tool [Import](upload1) %} the files from [Zenodo]() or from the shared data library
+> 2. {% tool [Import](upload1) %} the files from [Zenodo](https://zenodo.org/record/4304328/files/DRR187567.fastq.bz2) or from the shared data library
 >
 >    ```
->    ftp://ftp.ddbj.nig.ac.jp/ddbj_database/dra/fastq/DRA008/DRA008776/DRX178039/DRR187567.fastq.bz2
+>    https://zenodo.org/record/4304328/files/DRR187567.fastq.bz2
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
