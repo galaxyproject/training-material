@@ -21,7 +21,7 @@ key_points: []
 tags:
 - nanopore
 contributors:
-- bksanders
+- bazante1
 - miaomiaozhou88
 - hexylena
 
@@ -447,8 +447,28 @@ from prokka as an information track.
 >    - *"Kingdom (--kingdom)"*: `Bacteria`
 >    - *"Additional outputs"*: Select only the "Annotation in GFF3 format contaianing both sequences and annotations"
 >
+> 2. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
+>    - {% icon param-file %} *"Select lines from"*: `staramr on data .. detailed_summary.tsv`
+>    - *"that"*: Matching
+>    - *"the pattern"*: `[0-9]+\.[0-9]+\t`
 >
-> 2. **JBrowse** {% icon tool %} with the following parameters:
+>    This will select lines with a decimal value (###.##) followed by a tab character, the column separator in Galaxy. As a result, any lines without an identity value will be filtered out.
+>
+> 3. {% tool [Table to GFF3](toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2) %}
+>    - {% icon param-file %} *"Table"*: the output of the **Select lines** {% icon tool %} step.
+>    - *"Record ID column or value"*: `8`
+>    - *"Feature start column or value"*: `9`
+>    - *"Feature end column or value"*: `10`
+>    - *"Feature score column or value"*: `5`
+>    - *"Feature source column or value"*: `3`
+>    - {% icon param-repeat %} *"Insert Qualifiers"*
+>        - *"Name"*: `Name`
+>        - *"Qualifier value column or raw text"*: `2`
+>    - {% icon param-repeat %} *"Insert Qualifiers"*
+>        - *"Name"*: `phenotype`
+>        - *"Qualifier value column or raw text"*: `4`
+>
+> 4. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `consensus` (output of **Flye assembly** {% icon tool %})
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
@@ -460,6 +480,17 @@ from prokka as an information track.
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `out_gff` (output of **Prokka** {% icon tool %})
 >                        - *"Index this track"*: `Yes`
+>                        - *"Track Visibility"*: `On for new users`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `AMR`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: the output of the table to gff3 step
+>                        - *"Index this track"*: `Yes`
+>                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
+>                        - In *"JBrowse Feature Score Scaling & Colouring Options [Advanced]"*
+>                            - *"Color Score Algorithm"*: `Based on score`
 >                        - *"Track Visibility"*: `On for new users`
 >
 > 3. View the output of JBrowse
@@ -510,11 +541,8 @@ found genes, but it can be used with many more inputs.
 >
 > 1. Did the location of the aac(6')-aph(2'') regions in staramr correspond with any of the found genes in the prokka/jbrowse output?
 >
-> 2. Find a gene starting with the b. Write down this gene and its starting codon.
->
 > > ### {% icon solution %} Solution
 > > 1. Yes, multiple aacA-aphD genes are found within the staramr annotated aac(6')-aph(2'') region
-> > 2.
 > {: .solution}
 {: .question}
 
