@@ -265,10 +265,8 @@ Before starting the preparation of the data, we need to identify which inputs we
 >    >   - {% icon param-select %} *"Delimited by"*: `Tab`
 >    >   - {% icon param-select %} *"How should the results be sorted?"*: `With the rarest value first`
 >    >
->    > You can also "just" rerun {% tool [Count occurrences of each record](Count1) %} job you submit previously updating
->    > the input dataset.
->    >
->    > {% include snippets/rerun_tool.md %}
+>    > **Tip:** Hit the rerun button {% icon galaxy-refresh %} on the output of the previous run of {% tool [Count occurrences of each record](Count1) %},
+>    > and change the input dataset.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > One header line is left as the value `Survey` has only `1` occurrence in the first column.
