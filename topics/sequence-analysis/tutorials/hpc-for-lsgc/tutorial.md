@@ -38,11 +38,11 @@ contributors:
 
 Sequence comparison is a core problem in bioinformatics. It is used widely in evolutionary studies, structural and functional analyses, assembly, metagenomics, etc. Despite its regular presence in everyday Life-sciences pipelines, it is still not a trivial step that can be overlooked. Therefore, understanding how sequence comparison works is key to developing efficient workflows that are central to so many other disciplines.
 
-In the following tutorial, we will learn how to compare both small and large sequences using both seed-based alignment methods and alignment-free methods, and how to post-process our comparisons interactively to refine our results. Besides, we will also learn about the theoretical background of sequence comparison, including why some tools are suitable for some jobs and others are not.
+In the following tutorial, we will learn how to compare both small and large sequences using both seed-based alignment methods and alignment-free methods, and how to post-process our comparisons to refine our results. Besides, we will also learn about the theoretical background of sequence comparison, including why some tools are suitable for some jobs and others are not.
 
 This tutorial is divided into two large sections:
 
- - Fine-grained interactive sequence comparison: In this part of the tutorial we will use `GECKO` and `GECKO-MGV` to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.
+ - Fine-grained sequence comparison: In this part of the tutorial we will use `GECKO` to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.
  - Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using `CHROMEISTER`, and alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes.
 
 > ### Agenda
@@ -54,7 +54,7 @@ This tutorial is divided into two large sections:
 >
 {: .agenda}
 
-# Fine-grained interactive sequence comparison
+# Fine-grained sequence comparison
 
 Imagine you are working on an evolutionary study regarding the species `mycoplasma hyopneumoniae`. In particular, you are interested in the strains `232` and `7422` and wish to compare their DNA sequence to know more about the evolutionary changes that took place between both. The workflow you will follow starts with (1) acquiring the data,(2)  getting it ready for Galaxy, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let's go! 
 
@@ -108,7 +108,7 @@ As we discussed in the previous section, running optimal aligning tools on such 
 We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycoplasma hyopneumoniae 7422` in Galaxy using `GECKO`.
 
 > ### {% icon hands_on %} Hands-on: Comparing two mycoplasmas with GECKO
-> 1. **GECKO** {% icon tool %} with the following parameters
+> 1. Run the tool **GECKO** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"Query sequence"*: `232.fasta`
 >    - {% icon param-file %} *"Reference sequence"*: `7422.fasta`
 >    - *"K-mer seed size"*: `16`
@@ -153,42 +153,40 @@ For our current experiment, we will be looking for the following set of repeats:
 Let's extract the repeats highlighted in red (Figure 2, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. Mycoplasma hyopneumoniae 7422) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 2 we are selecting the ones stacked vertically).
 
 > ### {% icon hands_on %} Hands-on: Muiltiple Sequence Alignment of a set of repeats
-> 1. **Text reformatting** {% icon tool %} with the following parameters
+> 1. Run the tool **Text reformatting** with AWK {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"File to process"*: `Gecko on data 2 and 1: Alignments`
 >    - *"AWK Program"*: `BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf(">sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } `
+>    
 >    > ### {% icon comment %} Note about AWK
->    >
->    > Although the AWK script looks a bit threatening, it is very simple.
->    >  - The `BEGIN{FS=" "}` tells it to separate fields by a space. 
+>    > Although the AWK script looks a bit threatening, it is very simple:
+>    >  - The `BEGIN{FS=" "}` tells it to separate fields by a space.
 >    >  - The `/@\(196[0-9][0-9]/` is a regular expression that indicates we are looking for a line containing the string `@(196xx` where `xx` are two random digits between 0 and 9. This is used to identify the repeats that start at coordinates 19,600 to 19,699.
 >    >  - The previous regular expression triggers an action. The first part `printf(">sequence%s%s\n", $(NF-1), $NF); getline` prints out the sequence ID along with the coordinates and moves on to the next line.
 >    >  - The second part `while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline;` scans the next lines and prints the nucleotide sequence corresponding to the `Y` sequence (the reference), up until a `>` is found, which means we are done with the sequence.
->    >
 >    {: .comment}
 >
 > 2. Change the name of the output file `Text reformatting on data ...` to `repeats` Change the datatype to `.fasta`.
+>
 >    {% include snippets/rename_dataset.md %}
 >    {% include snippets/change_datatype.md %}
 >
-> 3. **ClustalW** {% icon tool %} with the following parameters
+> 3. Run the tool **ClustalW** {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"FASTA file"*: `repeats.fasta`
 >    - *"Data type"*: `DNA nucleotide sequences`
 >    - *"Output alignment format"*: `Native Clustal output format`
 >    - *"Show residue numbers in clustal format output"*: `No`
 >    - *"Output order"*: `Aligned`
 >    - *"Output complete alignment"*: `Complete alignment`
-> 
+>
+> 4. Inspect the output file `ClustalW on data ... clustal`.
+>    - The file is divided into several blocks.
+>    - Each block contains the next 50 contiguos nucleotides of each alignment in one line per sequence.
+>    - Gaps are included.
+>    - The asterisk symbol `*` indicates that there is consensus across all sequences in the current position.
+>
 {: .hands_on}
 
-
-...
-use this one
-
-
-
-### Connecting to the DOCKER container
-
-todo: running geckomgv and muscle
+So far we have learnt how to run our own custom sequence comparison, extract a set of DNA repeats and perform multiple sequence alignment on them (MSA). While this represents an common example of a bioinformatics pipeline, in the next part of the tutorial we will jump to a large-scale comparison scenario where we do not need fine-grained alignments, but instead we will be looking at the "bigger picture" using alignment-free methods. 
 
 # Coarse-grained sequence comparison
 
@@ -206,11 +204,11 @@ Before jumping on the hands-on, let us see an example of the second case: say we
 
 Now there are some things to note here: (1) we have been able to perform an alignment-free comparison very quickly, (2) we can visually see the large rearrangements and (3) we have identified which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use `CHROMEISTER` to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, e.g. *Homo sapiens* and *Mus musculus*).
 
-Let us now jump into the hands-on! We will learn how to compare chromosomes with `CHROMEISTER`, particularly the grass and common wheat genomes.
+Let us now jump into the hands-on! We will learn how to compare chromosomes with `CHROMEISTER`, particularly the grass and common wheat genomes, which are nearly 5 times larger than the average human chromosome!
 
 > ### {% icon hands_on %} Hands-on: Chromosome data upload
 >
-> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Chromosome comparison hands-on"
+> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Chromosome comparison hands-on")
 >
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
@@ -238,7 +236,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 
 > ### {% icon question %} Questions
 >
-> 1. We already discussed the mycoplasma sequences in regards to their size. What do you think about the size of the two chromosomes that we will be comparing now?
+> 1. We already discussed the mycoplasma sequences in regards to their size. What do you think about the size of the two chromosomes that we will be comparing now from a computational standpoint?
 >
 > > ### {% icon solution %} Solution
 > > 1. Chromosome-like sequences are arguably some of the largest DNA sequences you can find. Regarding the comparison, optimal chromosome comparison typically requires either large clusters to be run or special hardware accelerators (such as GPUs). On the other hand, for seed-based local alignment we can still use common approaches, but they will take a considerable amount of time. Finally, if we use alignment-free methods such as `CHROMEISTER`, we can perform a comparison in few minutes (check the slides for more information) instead of hours.
@@ -255,14 +253,17 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >    - *"K-mer seed size"*: `32`
 >    - *"Diffuse value"*: `4`
 >    - *"Add grid to plot for multi-fasta data sets"*: `No`
+>    - *"Plot block classification"*: `Yes`
 > 2. Run the job and wait for the results. It should take around ~3 minutes.
 > 3. Let's inspect the output files:
 >    - *"Comparison matrix"*: This file is the "core" of the comparison. It contains the heuristically matched seeds sampled per section of the chromosomes. This file is used for custom post-processing.
 >    - *"Comparison dotplot"*: This file is a `.png` image representing the pairwise comparison. 
 >    - *"Comparison metainformation"*: This CSV file contains information about the comparison such as name of the sequences compared, length, etc. It is particularly useful when using multi-fasta inputs. 
 >    - *"Detected events"*: This CSV file contains information regarding rearrangements automatically detected. 
+>    - *"Block classification plot"*" This file is a `.png` image showing the detected events. 
 >    - *"Comparison score"*: This text file contains the scoring distance between the query and the reference.
 {: .hands_on}
+
 
 
 # Conclusion
