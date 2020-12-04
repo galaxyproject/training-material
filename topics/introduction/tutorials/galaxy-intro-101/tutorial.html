@@ -243,7 +243,7 @@
   "learningResourceType": "hands-on tutorial",
   "name": "Hands-on for 'Galaxy 101' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html",
-  "timeRequired": "PT1H30M",
+  "timeRequired": "PT1H",
   "description": "The questions this  addresses are:\n - Which coding exon has the highest number of single nucleotide polymorphisms (SNPs) on human chromosome 22?\n\n\\nThe objectives are:\n - Familiarize yourself with the basics of Galaxy\n - Learn how to obtain data from external sources\n - Learn how to run tools\n - Learn how histories work\n - Learn how to create a workflow\n - Learn how to share your work\n\n",
   "hasPart": [
 
@@ -366,7 +366,7 @@
             
 
             
-            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour 30 minutes</p>
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
             
 
             
@@ -631,7 +631,6 @@ because of stochastic processes in the algorithms.</p>
 <ol id="markdown-toc">
   <li><a href="#pretreatments" id="markdown-toc-pretreatments">Pretreatments</a>    <ol>
       <li><a href="#locating-exons" id="markdown-toc-locating-exons">Locating Exons</a></li>
-      <li><a href="#obtaining-snp-information" id="markdown-toc-obtaining-snp-information">Obtaining SNP information</a></li>
     </ol>
   </li>
   <li><a href="#analysis" id="markdown-toc-analysis">Analysis</a>    <ol>
@@ -723,116 +722,151 @@ But even with your data in hand, you stll have the question: “how do I actuall
 <p>First we need to get some data into our history. You can upload files from your computer, or <span class="notranslate">Galaxy</span> can also fetch data directly from exte<span class="notranslate">rna</span>l sources. We know UCSC has exon locations for humans and we can use <span class="notranslate">Galaxy</span> to import the data for chromosome 22, directly from the UCSC table browser.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-data-upload-from-ucsc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload from UCSC</h3>
-
+  <h3 id="hands_on-hands-on-upload-snps-and-exons"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Upload SNPs and Exons</h3>
   <ol>
     <li>
-      <p><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
+      <p>At the top of the <strong>Tools</strong> panel (on the left), click <i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> <strong>Upload</strong></p>
 
-      <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+      <p><img src="../../images/upload-data.png" alt="upload button" /></p>
 
-      <p><img src="../../images/101_01.png" alt="`UCSC Main table browser` menu entry" /></p>
+      <p>This brings up a box:</p>
 
-      <p>You will be taken to the <strong>UCSC table browser</strong>, which looks something like this:</p>
-
-      <p><img src="../../images/101_02.png" alt="`UCSC table browser` tool, first screen for exons" /></p>
-
-      <p>Now set the following parameters:</p>
-      <ul>
-        <li><em>“clade”</em>: <code class="language-plaintext highlighter-rouge">Mammal</code></li>
-        <li><em>“genome”</em>: <code class="language-plaintext highlighter-rouge">Human</code></li>
-        <li><em>“assembly”</em>: <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
-        <li><em>“group”</em>: <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code></li>
-        <li><em>“track”</em>: <code class="language-plaintext highlighter-rouge">GENCODE v32</code></li>
-        <li><em>“table”</em>: <code class="language-plaintext highlighter-rouge">knownGene</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-        <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
-      </ul>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-        <p>If the <em>“table”</em> drop down menu does not show the <code class="language-plaintext highlighter-rouge">knownGene</code> option. Set <em>“group”</em> to <code class="language-plaintext highlighter-rouge">All tables</code> and scroll down.</p>
-      </blockquote>
+      <p><img src="../../images/upload-box.png" alt="filebox" width="500px" /></p>
     </li>
     <li>
-      <p>Click on the <strong>get output</strong> button and you will see the next screen:</p>
+      <p>Click <strong>Paste/Fetch data</strong> and paste in the following URLs in the box that appears.</p>
 
-      <p><img src="../../images/101_03.png" alt="`UCSC table browser` tool, second screen for exons" /></p>
-
-      <p>Change <strong>Create one <span class="notranslate">BED</span> record per</strong> to <code class="language-plaintext highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to <span class="notranslate">Galaxy</span></strong> button.</p>
-
-      <blockquote class="comment">
-        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
-        <p>After this you will see your first history item in <span class="notranslate">Galaxy</span>’s right panel. It will go through
-the gray (preparing/queued) and yellow (running) states to become green (success):</p>
-
-        <p><img src="../../images/101_04.png" alt="`UCSC Main on Human: knownGene` dataset is green" /></p>
-      </blockquote>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Coding-Exons.<span class="notranslate">bed</span>
+https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-dbSNP153-Whole-Gene-SNPs.<span class="notranslate">bed</span>
+</code></pre></div>      </div>
     </li>
     <li>
-      <p>When the dataset is green, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
-
-      <p><img src="../../images/101_exons.png" alt="Contents of the `UCSC Main on Human: knownGene` dataset" /></p>
-
-      <p>Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.</p>
+      <p>Click <strong>Start</strong>, and then <strong>Close</strong></p>
     </li>
     <li>
-      <p>Let’s rename our dataset to something more recognizable.</p>
-      <ul>
-        <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-        <li>In the central panel, change the <strong>Name</strong> field to <code class="language-plaintext highlighter-rouge">Exons</code></li>
-        <li>Click the <strong>Save</strong> button</li>
-      </ul>
-
-      <p>Your history should now look something like this:</p>
-
-      <p><img src="../../images/101_rename.png" alt="Rename dataset to `Exons`" /></p>
-    </li>
-  </ol>
-</blockquote>
-
-<h2 id="obtaining-snp-information">Obtaining SNP information</h2>
-
-<p>We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let’s get some information about SNP locations from UCSC as well:</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-snp-information"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: SNP information</h3>
-  <p>Again open the <code class="language-plaintext highlighter-rouge">UCSC Main - table browser</code> tool and set the following parameters</p>
-
-  <ol>
-    <li><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:
-      <ul>
-        <li><em>“group”</em> should be changed to <code class="language-plaintext highlighter-rouge">Variation</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed again to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-        <li><em>“output format”</em> should be changed again to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
-      </ul>
-
-      <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs" /></p>
-
-      <p>The <em>“track”</em> setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
-    </li>
-    <li>
-      <p>Click on the <strong>get output</strong> button to find a form similar to this:</p>
-
-      <p><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs" /></p>
-
-      <p>Make sure that <em>“Create one <span class="notranslate">BED</span> record per”</em> is set to <code class="language-plaintext highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to <span class="notranslate">Galaxy</span></strong>. A second item will appear in your analysis history.</p>
-    </li>
-    <li>
-      <p>Now <strong>rename</strong> your new dataset to <code class="language-plaintext highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</p>
+      <p>When they’re ready, <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the datasets to <code class="language-plaintext highlighter-rouge">Exons</code> and <code class="language-plaintext highlighter-rouge">SNPs</code>, respectively.</p>
 
       <blockquote class="tip">
 
         <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
         <ul>
           <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-          <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">SNPs</code></li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
           <li>Click the <strong>Save</strong> button</li>
         </ul>
       </blockquote>
     </li>
   </ol>
+
+</blockquote>
+
+<p>For this tutorial, we made the input datasets available on Zenodo for you. However, these datasets can also obtained directly from UCSC, without leaving <span class="notranslate">Galaxy</span>.
+Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-optional-obtaining-the-data-directly-from-ucsc"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Optional: Obtaining the Data directly from UCSC</h3>
+
+  <p>This tool works a bit differently than most <span class="notranslate">Galaxy</span> tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-obtaining-exons-from-ucsc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining Exons from UCSC</h3>
+
+    <ol>
+      <li>
+        <p><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
+
+        <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+
+        <p><img src="../../images/101_01.png" alt="`UCSC Main table browser` menu entry" /></p>
+
+        <p>You will be taken to the <strong>UCSC table browser</strong>, which looks something like this:</p>
+
+        <p><img src="../../images/101_02.png" alt="`UCSC table browser` tool, first screen for exons" /></p>
+
+        <p>Now set the following parameters:</p>
+        <ul>
+          <li><em>“clade”</em>: <code class="language-plaintext highlighter-rouge">Mammal</code></li>
+          <li><em>“genome”</em>: <code class="language-plaintext highlighter-rouge">Human</code></li>
+          <li><em>“assembly”</em>: <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
+          <li><em>“group”</em>: <code class="language-plaintext highlighter-rouge">Genes and Gene Predictions</code></li>
+          <li><em>“track”</em>: <code class="language-plaintext highlighter-rouge">GENCODE v32</code></li>
+          <li><em>“table”</em>: <code class="language-plaintext highlighter-rouge">knownGene</code></li>
+          <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
+          <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
+          <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
+        </ul>
+
+        <blockquote class="comment">
+          <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+          <p>If the <em>“table”</em> drop down menu does not show the <code class="language-plaintext highlighter-rouge">knownGene</code> option. Set <em>“group”</em> to <code class="language-plaintext highlighter-rouge">All tables</code> and scroll down.</p>
+        </blockquote>
+      </li>
+      <li>
+        <p>Click on the <strong>get output</strong> button and you will see the next screen:</p>
+
+        <p><img src="../../images/101_03.png" alt="`UCSC table browser` tool, second screen for exons" /></p>
+
+        <p>Change <strong>Create one <span class="notranslate">BED</span> record per</strong> to <code class="language-plaintext highlighter-rouge">Coding Exons</code> and then click on the <strong>Send query to <span class="notranslate">Galaxy</span></strong> button.</p>
+
+        <blockquote class="comment">
+          <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+          <p>After this you will see your first history item in <span class="notranslate">Galaxy</span>’s right panel. It will go through
+the gray (preparing/queued) and yellow (running) states to become green (success):</p>
+
+          <p><img src="../../images/101_04.png" alt="`UCSC Main on Human: knownGene` dataset is green" /></p>
+        </blockquote>
+      </li>
+      <li>
+        <p>When the dataset is green, click on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> (eye) icon to <strong>view the contents</strong> of the file. It should look something like this:</p>
+
+        <p><img src="../../images/101_exons.png" alt="Contents of the `UCSC Main on Human: knownGene` dataset" /></p>
+
+        <p>Each line represents an exon, the first three columns are the genomic location, and the fourth column contains the name of the exon.</p>
+      </li>
+      <li>
+        <p>Let’s rename our dataset to something more recognizable.</p>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field to <code class="language-plaintext highlighter-rouge">Exons</code></li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+
+        <p>Your history should now look something like this:</p>
+
+        <p><img src="../../images/101_rename.png" alt="Rename dataset to `Exons`" /></p>
+      </li>
+    </ol>
+  </blockquote>
+
+  <p>We now have information about the exon locations, but our original question was which exon contains the largest number of SNPs, so let’s get some information about SNP locations from UCSC as well:</p>
+
+  <blockquote class="notranslate hands_on">
+    <h3 id="hands_on-hands-on-obtaining-snps-from-ucsc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining SNPs from UCSC</h3>
+    <p>Again open the <code class="language-plaintext highlighter-rouge">UCSC Main - table browser</code> tool and set the following parameters</p>
+
+    <ol>
+      <li><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:
+        <ul>
+          <li><em>“group”</em> should be changed to <code class="language-plaintext highlighter-rouge">Variation</code></li>
+          <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed again to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
+          <li><em>“output format”</em> should be changed again to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
+        </ul>
+
+        <p><img src="../../images/101_06.png" alt="`UCSC table browser` tool, first screen for SNPs" /></p>
+
+        <p>The <em>“track”</em> setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.</p>
+      </li>
+      <li>
+        <p>Click on the <strong>get output</strong> button to find a form similar to this:</p>
+
+        <p><img src="../../images/101_07.png" alt="`UCSC table browser` tool, second screen for SNPs" /></p>
+
+        <p>Make sure that <em>“Create one <span class="notranslate">BED</span> record per”</em> is set to <code class="language-plaintext highlighter-rouge">Whole Gene</code> (Whole Gene here really means Whole Feature), and click on <strong>Send query to <span class="notranslate">Galaxy</span></strong>. A second item will appear in your analysis history.</p>
+      </li>
+      <li>Now <strong>rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> your new dataset to <code class="language-plaintext highlighter-rouge">SNPs</code> so we can easily remember what the file contains.</li>
+    </ol>
+
+  </blockquote>
 
 </blockquote>
 
@@ -1307,24 +1341,64 @@ Keep in mind this may depend on your settings when getting the data from UCSC.</
       <p>Click <strong>Analyze Data</strong> at the top to return to the main analysis window</p>
     </li>
     <li>
-      <p>We wanted to know something about the repetitive elements per exon. We get this data from UCSC.</p>
+      <p><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Upload</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  the Repeats file from <a href="https://doi.org/10.5281/zenodo.4104428">Zenodo</a></p>
 
-      <p><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.<span class="notranslate">bed</span>
+</code></pre></div>      </div>
 
-      <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+      <blockquote class="tip">
 
-      <p>Now set the following parameters:</p>
-      <ul>
-        <li><em>“clade”</em>: <code class="language-plaintext highlighter-rouge">Mammal</code></li>
-        <li><em>“genome”</em>: <code class="language-plaintext highlighter-rouge">Human</code></li>
-        <li><em>“assembly”</em>: <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
-        <li><em>“group”</em>: <code class="language-plaintext highlighter-rouge">Repeats</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
-        <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
-      </ul>
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
 
-      <p>Click on <strong>get output</strong> and then <strong>Send query to <span class="notranslate">Galaxy</span></strong> on the next screen.</p>
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-obtaining-the-data-from-ucsc"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Obtaining the Data from UCSC</h3>
+
+        <p>Again, for reproducibility we obtain the data from Zenodo ensuring that the results will never change, allowing us to do good science! However if you wish to obtain UCSC data:</p>
+
+        <blockquote class="notranslate hands_on">
+          <h3 id="hands_on-hands-on-obtaining-exons-from-ucsc-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Obtaining Exons from UCSC</h3>
+
+          <ol>
+            <li>
+              <p><strong>UCSC Main</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> table browser:</p>
+
+              <p>In the tool menu, navigate to <code class="language-plaintext highlighter-rouge">Get Data -&gt; UCSC Main - table browser</code></p>
+
+              <p>Now set the following parameters:</p>
+              <ul>
+                <li><em>“clade”</em>: <code class="language-plaintext highlighter-rouge">Mammal</code></li>
+                <li><em>“genome”</em>: <code class="language-plaintext highlighter-rouge">Human</code></li>
+                <li><em>“assembly”</em>: <code class="language-plaintext highlighter-rouge">Dec. 2013 (GRCh38/hg38)</code></li>
+                <li><em>“group”</em>: <code class="language-plaintext highlighter-rouge">Repeats</code></li>
+                <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“region”</em> should be changed to <code class="language-plaintext highlighter-rouge">position</code> with value <code class="language-plaintext highlighter-rouge">chr22</code></li>
+                <li><em>“output format”</em> should be changed to <code class="language-plaintext highlighter-rouge"><span class="notranslate">BED</span> - browser extensible data</code></li>
+                <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Send output to”</em> should have the option <code class="language-plaintext highlighter-rouge"><span class="notranslate">Galaxy</span></code> checked</li>
+              </ul>
+            </li>
+          </ol>
+
+          <p>Click on <strong>get output</strong> and then <strong>Send query to <span class="notranslate">Galaxy</span></strong> on the next screen.</p>
+        </blockquote>
+      </blockquote>
     </li>
     <li>
       <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the dataset to <code class="language-plaintext highlighter-rouge">Repeats</code></p>
