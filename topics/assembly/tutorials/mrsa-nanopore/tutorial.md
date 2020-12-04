@@ -26,6 +26,7 @@ tags:
 contributors:
 - bazante1
 - miaomiaozhou88
+- shiltemann
 - hexylena
 
 requirements:
@@ -378,13 +379,11 @@ Because we are working with a MRSA we are curious to see which resistance genes 
 
 ## CARD database
 
-To get more information about these antibiotic resistant genes, you can
-check the [CARD database (Comprehensive Antibiotic Resistance
-Database)](https://card.mcmaster.ca/) {% cite Alcock_2019 %}
+To get more information about these antibiotic resistant genes, you can check the [CARD database](https://card.mcmaster.ca) (**C**omprehensive **A**ntibiotic **R**esistance **D**atabase) ({% cite Jia2016 %})
 
-![Screenshot of mecA sequence in CARD database with lots of metadata](../../images/mrsa/card.png)
+![Screenshot of mecA sequence in CARD database with lots of metadata](../../images/mrsa/card.png "Screenshot of the CARD database interface. CARD gives information about the antibiotic resistance genes, as well as links to relevant publications.")
 
-Card can be very helpful to check all the resistance genes and check if
+CARD can be very helpful to check all the resistance genes and check if
 it is logical to find the resistance gene in a specific bacteria.
 
 > ### {% icon question %} Question
