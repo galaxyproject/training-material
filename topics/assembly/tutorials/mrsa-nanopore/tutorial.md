@@ -13,6 +13,7 @@ objectives:
 - Assess your data on quality and quantity
 - Assemble a genome
 - Assess your assembly quality
+- Assess presence of anitmicrobial resistance genes
 - Perform a species identification and MLST typing
 - Search for resistance genes on the assembly
 - Find a gene on your genome using Prokka + JBrowse
@@ -20,6 +21,8 @@ time_estimation: 4h
 key_points: []
 tags:
 - nanopore
+- assembly
+- amr
 contributors:
 - bazante1
 - miaomiaozhou88

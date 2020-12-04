@@ -2,7 +2,6 @@
 layout: tutorial_hands_on
 
 title: "Antibiotic resistance detection"
-tags: [nanopore, plasmids]
 zenodo_link: "https://doi.org/10.5281/zenodo.3247504"
 questions:
   - "How do I assemble a genome with Nanopore data?"
@@ -23,6 +22,11 @@ key_points:
 contributors:
   - willemdek11
   - shiltemann
+tags:
+  - nanopore
+  - plasmids
+  - assembly
+  - amr
 ---
 
 # Overview
