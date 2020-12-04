@@ -44,15 +44,14 @@ Learn more in this tutorial.
 # Import data from InterMine
 
 > ### {% icon hands_on %} Hands-on: Import
-> 1. Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **InterMine Server** under **Get Data**.
-{: .hands_on}
-
-
-This will redirect you to the InterMine registry, which shows a full list of InterMines and the various organisms they support. Find an InterMine that has the organism type you’re working with, and click on it to redirect to that InterMine.
-
-Once you arrive at your InterMine of choice, you can run a query as normal - this could be a search, a list results page, a template, or a query in the query builder. Eventually you’ll be presented with an InterMine results table.
-
-> ### {% icon hands_on %} Hands-on: Run a query on Intermine
+> Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **InterMine Server** under **Get Data**.
+>
+> 1. {% tool [InterMine Server](intermine) %}
+>
+> 2. This will redirect you to the InterMine registry, which shows a full list of InterMines and the various organisms they support. Find an InterMine that has the organism type you’re working with, and click on it to redirect to that InterMine.
+>
+> 3. Once you arrive at your InterMine of choice, you can run a query as normal - this could be a search, a list results page, a template, or a query in the query builder. Eventually you’ll be presented with an InterMine results table.
+>
 > 4. Click on **Export** (top right). This will bring up a modal window.
 > 5. Select **Send to Galaxy** and double-check the *"Galaxy Location"* is correct.
 > 6. Click on the **Send to Galaxy** button on the bottom right of the pop-up window.
@@ -72,7 +71,7 @@ You have now exported your query results from InterMine to Galaxy.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Import some fly data from [Zenodo](https://zenodo.org/record/3407174) or from the data librar<>
+> 1. Import some fly data from [Zenodo](https://zenodo.org/record/3407174) or from the data library
 >
 >    ```
 >    https://zenodo.org/record/3407174/files/GenesLocatedOnChromosome4.tsv
