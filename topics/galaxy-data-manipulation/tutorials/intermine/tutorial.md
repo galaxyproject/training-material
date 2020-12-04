@@ -96,7 +96,7 @@ The dataset contains the secondary identifier and the symbol of the *Drosophila 
 >
 > > ### {% icon solution %} Solution
 > >
-> > No, they don't. So we have to specify it, when we create the InterMine Interchange file 
+> > No, they don't. So we have to specify it, when we create the InterMine Interchange file
 > >
 > {: .solution}
 >
@@ -104,31 +104,32 @@ The dataset contains the secondary identifier and the symbol of the *Drosophila 
 
 ## Create InterMine Interchange dataset
 
-Search Galaxy for `InterMine` (not case sensitive; `intermine` is fine too), and click on **Create InterMine Interchange Dataset** under **Convert Formats** in order to generate an intermediate file which will be used to send the identifiers (e.g. gene's identifiers) to InterMine. This file requires the identifier's type (e.g. `Gene`), the identifier (e.g `WBGene00007063`) and, optionally, the organims's name.
+We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to generate an intermediate file which will be used to send the identifiers (e.g. gene identifiers) to InterMine. This file requires the identifier's type (e.g. `Gene`), the identifier (e.g `WBGene00007063`) and, optionally, the organims's name.
 
 > ### {% icon hands_on %} Hands-on: Generate InterMine file
 >
-> 1. **Create InterMine Interchange dateset** {% icon tool %} with the following parameters:
+> 1. {% tool [Create InterMine Interchange dateset](toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: select the `GenesLocatedOnChromosome4` dataset which contains some fly's genes
 >    - *"Feature Type Column"*: select a column from the input file which contains the identifer's type you are exporting to InterMine.
 >    In this example, because the `GenesLocatedOnChromosome4` dataset does not containt the type we have to edit it, in the *"Feature Type"*
 >    - *"Feature Type"*: edit the type of the identifiers you are exporting to InterMine, in this example `Gene`. It must be a class in the InterMine data model.
->    - *"Feature Identifier column"*: select a column from the input file which contains the identifier. In our example select the column *Column 2* which contains the  gene symbol 
+>    - *"Feature Identifier column"*: select a column from the input file which contains the identifier. In our example select the column *Column 2* which contains the  gene symbol
 >    - *"Feature Identifier"*: edit the identifier. This could be, as an example, a gene symbol like `GATA1` or another other identifier, e.g. `FBGN0000099` or perhaps a  protein accession. In our example we do not have to edit anything because it's retrieved from the `GenesLocatedOnChromosome4` dataset, under the *Column 2*
 >    - *"Organism Name column"*: select a column from the input file which contains the organism's name. In our example select the column *Nothing selected*
 >    - *"Organism Name"*: edit the organism's name, if you know it. In this example, no need to edit anything.
 >
 >    > ### {% icon comment %} Comment
->    >
 >    >  The organims' name is not mandatory, but is good to provide if it is known. It does not have to be precise
 >    {: .comment}
+>
 > 2. Click on **Execute**
+>
 {: .hands_on}
 
 ## Send identifiers to InterMine
 
-Once the generation of the interchange dataset has been completed, open the green box related to **Create InterMine Interchange on data1**.
- 
+Once the generation of the interchange dataset has been completed, open the green box related to **Create InterMine Interchange on data**.
+
 > ### {% icon hands_on %} Hands-on: Send data
 >
 > 1. Click on view intermine at **Registry** to be redirected to the InterMine registry, which shows a full list of InterMines and the various organisms they support.
