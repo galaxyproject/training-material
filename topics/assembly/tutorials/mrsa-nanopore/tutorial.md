@@ -75,38 +75,7 @@ reads, which are sequences of detected nucleotides. Depending on the
 technique these have specific lengths (30-500bp) or using Oxford
 Nanopore Technologies sequencing have much longer variable lengths.
 
-## Oxford Nanopore Data
-
-When using Oxford Nanopore Technologies (ONT) sequencing, the change in
-electrical current is measured over the membrane of a flow cell. When
-nucleotides pass the pores in the flow cell the current change is
-registered in a fast5 file.
-
-![How nanopore sequencing works: DNA goes through a membrane and a signal is generated with different levels corresponding to different nucleotides](../../images/mrsa/image1.jpeg)
-
-The change in current is translated (basecalled) to nucleotides by
-special software. A schematic overview is given in the picture above.
-
-When sequencing using a MinIT of MinION Mk1C the basecalling software is
-present on the devices. With basecalling the electrical signals are translated
-to bases (A,T,G,C) with a quality score per base. The sequenced DNA strand will
-be basecalled and this will form one read. Multiple reads will be stored in a
-fastq file. Below a small piece of a fastq file is shown.
-
-```
-@SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-GTGGATATGGATATCCAAATTATATTTGCATAATTTG
-+SRR031716.1 HWI-EAS299_4_30M2BAAXX:3:1:944:1798 length=37
-IIIIIIIIIIIIIIIIIIIIIIIIIIIII8IIIIIII
-```
-
-Each read consists of the following parts:
-
--   A `@` followed by a name and sometimes information of the read
--   A nucleotide sequence
--   A `+` (optional followed by the name)
--   The quality score per base of nucleotide sequence (Each symbol
-    represents a quality score, which will be explained later)
+{% include snippets/nanopore.md %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >

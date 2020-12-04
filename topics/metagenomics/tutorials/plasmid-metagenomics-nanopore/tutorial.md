@@ -72,21 +72,7 @@ In this tutorial we use metagenomic Nanopore data, but similar pipelines can be 
 We are interested in the reconstruction of full plasmid sequences and determining the presence of any antimicrobial resistance genes.
 We will use the plasmid dataset created by {% cite LiXie2018 %} for their evaluation of the efficiency of MDR plasmid sequencing by MinION platform. In the experiment, 12 MDR plasmid-bearing bacterial strains were selected for plasmid extraction, including *E. coli*, *S. typhimurium*, *V. parahaemolyticus*, and *K. pneumoniae*.
 
-
-> ### {% icon comment %} Background: Nanopore sequencing
->
-> Nanopore sequencing has several properties that make it well-suited for our purposes
->
-> 1. Long-read sequencing technology offers **simplified** and less ambiguous genome **assembly**
-> 2. Long-read sequencing gives the ability to **span repetitive genomic regions**
-> 3. Long-read sequencing makes it possible to **identify large structural variations**
->
-> ![How nanopore sequencing works](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
->
->
-{: .comment}
-
-
+{% include snippets/nanopore.md %}
 
 ## Importing the data into Galaxy
 
