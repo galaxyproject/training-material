@@ -1,0 +1,1343 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Chloroplast genome assembly</title>
+        
+            <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    ga('create', '' , 'auto');
+    ga('send', 'pageview');
+</script>
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta property="og:title" content="Galaxy Training: Chloroplast genome assembly" />
+        <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/assembly" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Assembly
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fchloroplast-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fchloroplast-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fchloroplast-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fchloroplast-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fchloroplast-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fassembly%2Ftutorials%2Fchloroplast-assembly%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/assembly/tutorials/chloroplast-assembly/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Chloroplast genome assembly",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org//training-material/topics/assembly/"
+  },
+  "courseCode": "assembly / chloroplast-assembly / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Chloroplast genome assembly' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/assembly/tutorials/chloroplast-assembly/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - How can we assemble a chloroplast genome?\n\n\\nThe objectives are:\n - Assemble a chloroplast genome from long reads\n - Polish the assembly with short reads\n - Map reads to the assembly and view\n - View an annotated assembly\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Anna Syme"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Anna Syme"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org//training-material/topics/assembly/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Chloroplast genome assembly</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/annasyme/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annasyme" alt="Anna Syme">Anna Syme</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can we assemble a chloroplast genome?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Assemble a chloroplast genome from long reads</p>
+</li>
+            
+            <li><p>Polish the assembly with short reads</p>
+</li>
+            
+            <li><p>Map reads to the assembly and view</p>
+</li>
+            
+            <li><p>View an annotated assembly</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/sequence-analysis">Sequence analysis</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                            
+                            <li> Quality Control:
+                            
+                                <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="http://doi.org/10.5281/zenodo.3567224">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/assembly/tutorials/chloroplast-assembly/workflows/" title="Workflows" alt="Chloroplast genome assembly workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/assembly/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.org.au" title="UseGalaxy.org.au">
+            UseGalaxy.org.au
+        </a>
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 4, 2020 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<h2 id="what-is-genome-assembly">What is genome assembly?</h2>
+
+<p>Genome assembly is the process of joining together <span class="notranslate">DNA</span> sequencing fragments into longer pieces, ideally up to chromosome lengths.The <span class="notranslate">DNA</span> fragments are produced by <span class="notranslate">DNA</span> sequencing machines, and are called “<span class="notranslate">reads</span>”. These are in lengths of about 150 nucleotides (base pairs), to up to a million+ nucleotides, depending on the sequencing technology used. Currently, most <span class="notranslate">reads</span> are from Illumina (short), PacBio (long) or Oxford Nanopore (long and extra-long).</p>
+
+<p>It is difficult to assemble plant genomes as they are often large (for example, 3,000,000,000 base pairs), have many repeat regions (such as transposons), and may be polyploid. This tutorial shows genome assembly for a smaller data set - the plant chloroplast genome - a single circular chromosome which is typically about 160,000 base pairs. It is thought that the the chloroplast evolved from a cyanobacteria that was living in plant cells.</p>
+
+<p>In this tutorial, we will use a subset of a real data set from sweet potato, from the paper <a class="citation" href="#Zhou2018">Zhou <i>et al.</i> 2018</a>. To find out more about each of the tools used here, see the tool panel page for a summary and links to more information.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+  <p>In this tutorial we will deal with:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#what-is-genome-assembly" id="markdown-toc-what-is-genome-assembly">What is genome assembly?</a></li>
+  <li><a href="#upload-data" id="markdown-toc-upload-data">Upload data</a></li>
+  <li><a href="#check-read-quality" id="markdown-toc-check-read-quality">Check read quality</a></li>
+  <li><a href="#assemble-reads" id="markdown-toc-assemble-reads">Assemble <span class="notranslate">reads</span></a></li>
+  <li><a href="#polish-assembly" id="markdown-toc-polish-assembly">Polish assembly</a></li>
+  <li><a href="#view-reads" id="markdown-toc-view-reads">View <span class="notranslate">reads</span></a></li>
+  <li><a href="#annotate-the-assembly" id="markdown-toc-annotate-the-assembly">Annotate the assembly</a></li>
+  <li><a href="#repeat-with-new-data" id="markdown-toc-repeat-with-new-data">Repeat with new data</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="upload-data">Upload data</h1>
+
+<p>Let’s start with uploading the data.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-the-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import the data</h3>
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a proper name</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import from <a href="https://zenodo.org/record/3567224">Zenodo</a> or a data library (ask your instructor):</p>
+      <ul>
+        <li>FASTQ file with illumina <span class="notranslate">reads</span>: <code class="language-plaintext highlighter-rouge">sweet-potato-chloroplast-illumina-reduced.fastq</code></li>
+        <li>FASTQ file with nanopore <span class="notranslate">reads</span>: <code class="language-plaintext highlighter-rouge">sweet-potato-chloroplast-nanopore-reduced.fastq</code></li>
+        <li>Note: make sure to import the files with “reduced” in the names, not the ones with “tiny” in the names.
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-reduced.fastq
+https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduced.fastq
+</code></pre></div>          </div>
+        </li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="check-read-quality">Check read quality</h1>
+
+<p>We will look at the quality of the nanopore <span class="notranslate">reads</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-check-read-quality"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Check read quality</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1"><strong>Nanoplot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+<span class="notranslate">galaxy</span>1</span></span> :
+      <ul>
+        <li><em>“Select multifile mode”</em>: <code class="language-plaintext highlighter-rouge">batch</code></li>
+        <li><em>“Type of file to work on”</em>: <code class="language-plaintext highlighter-rouge">fastq</code></li>
+        <li><em>“files”</em>: select the <code class="language-plaintext highlighter-rouge">nanopore FASTQ file</code></li>
+      </ul>
+    </li>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>There are five output files.</li>
+        <li>Look at the <code class="language-plaintext highlighter-rouge">HTML report</code> to learn about the read quality.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>What summary statistics would be useful to look at?</p>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>This will depend on the aim of your analysis, but usually:</p>
+    <ul>
+      <li><strong>Sequencing depth</strong> (the number of <span class="notranslate">reads</span> covering each base position; also called “coverage”). Higher depth is usually better, but at very high depths it may be better to subsample the <span class="notranslate">reads</span>, as errors can swamp the assembly graph.</li>
+      <li><strong>Sequencing quality</strong> (the quality score indicates probability of base call being correct). You may trim or filter <span class="notranslate">reads</span> on quality. Phred quality scores are logarithmic: phred quality 10 = 90% chance of base call being correct; phred quality 20 = 99% chance of base call being correct. More detail <a href="https://en.wikipedia.org/wiki/Phred_quality_score">here</a>.</li>
+      <li><strong>Read lengths</strong> (read lengths histogram, and <span class="notranslate">reads</span> lengths vs. quality plots). Your analysis or assembly may need <span class="notranslate">reads</span> of a certain length.</li>
+    </ul>
+  </blockquote>
+</blockquote>
+
+<p><em>Optional further steps:</em></p>
+<ul>
+  <li>Find out the quality of your <span class="notranslate">reads</span> using other tools such as fastp or FastQC.</li>
+  <li>To visualize base quality using emoji you can also use FASTQE.</li>
+  <li>Run FASTQE for the illumina <span class="notranslate">reads</span>. In the output, look at the mean values (the middle row)</li>
+  <li>Repeat FASTQE for the nanopore <span class="notranslate">reads</span>. In the tool settings, increase the maximum read length to 30000.</li>
+  <li>To learn more, see the <a href="/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html">Quality Control tutorial</a></li>
+</ul>
+
+<h1 id="assemble-reads">Assemble <span class="notranslate">reads</span></h1>
+
+<p>We will assemble the long nanopore <span class="notranslate">reads</span>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-assemble-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assemble <span class="notranslate">reads</span></h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7</span></span> :
+      <ul>
+        <li><em>“Input <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">sweet-potato-chloroplast-nanopore-reduced.fastq</code></li>
+        <li><em>“Estimated genome size”</em>: <code class="language-plaintext highlighter-rouge">160000</code></li>
+        <li><em>Leave other settings as default</em></li>
+      </ul>
+    </li>
+    <li>
+      <p>Re-name the <code class="language-plaintext highlighter-rouge">consensus</code> output file to <code class="language-plaintext highlighter-rouge">flye-assembly.fasta</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">flye-assembly.fasta</code></li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>There are five output files.</li>
+        <li><em>Note: this tool is heuristic; your results may differ slightly from the results here, and if repeated.</em></li>
+        <li>View the <code class="language-plaintext highlighter-rouge">log</code> file and scroll to the end to see how many contigs (fragments) were assembled and the length of the assembly.</li>
+        <li>View the <code class="language-plaintext highlighter-rouge">assembly_info</code> file to see contig names and lengths.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-view-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View the assembly</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1"><strong>Bandage Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+<span class="notranslate">galaxy</span>1</span></span>
+      <ul>
+        <li><em>“Graphical Fragment Assembly”</em>: the Flye output file <code class="language-plaintext highlighter-rouge">Graphical Fragment Assembly</code> (not the “assembly_graph” file)</li>
+        <li><em>“Estimated genome size”</em>: <code class="language-plaintext highlighter-rouge">160000</code></li>
+        <li><em>Leave other settings as default</em></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2"><strong>Bandage Image</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+<span class="notranslate">galaxy</span>2</span></span>
+      <ul>
+        <li><em>“Graphical Fragment Assembly”</em>: the Flye output file <code class="language-plaintext highlighter-rouge">Graphical Fragment Assembly</code> (not the “assembly_graph” file)</li>
+        <li><em>“Node length labels”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>Leave other settings as default</em></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Your assembly graph may look like this:</p>
+
+<figure id="figure-1"><img src="../../images/sweet-potato-assembly-graph.png" alt="assembly graph" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Assembly graph of the nanopore <span class="notranslate">reads</span>, for the sweet potato chloroplast genome. In your image, some of the labels may be truncated; this is a known bug under investigation.</figcaption></figure>
+
+<blockquote class="question">
+  <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>What is your interpretation of this assembly graph?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>One interpretation is that this represents the typical circular chloroplast structure: There is a long single-copy region (the node of around 78,000 bp), connected to the inverted repeat (a node of around 28,000 bp), connected to the short single-copy region (of around 11,000 bp). In the graph, each end loop is a single-copy region (either long or short) and the centre bar is the collapsed inverted repeat which should have about twice the sequencing depth.</p>
+  </blockquote>
+</blockquote>
+
+<p><em>Optional further steps:</em></p>
+<ul>
+  <li>Repeat the Flye assembly with different parameters, and/or a filtered read set.</li>
+  <li>Try an alte<span class="notranslate">rna</span>tive assembly tool, such as Canu or Unicycler.</li>
+</ul>
+
+<h1 id="polish-assembly">Polish assembly</h1>
+
+<p>Short illumina <span class="notranslate">reads</span> are more accurate the nanopore <span class="notranslate">reads</span>. We will use them to correct errors in the nanopore assembly.</p>
+
+<p>First, we will map the short <span class="notranslate">reads</span> to the assembly and create an alignment file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map <span class="notranslate">reads</span></h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1"><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1</span></span> :
+      <ul>
+        <li><em>“Will you select a reference genome from your history”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code></li>
+        <li><em>“Use the following dataset as the reference sequence”</em>: <code class="language-plaintext highlighter-rouge">flye-assembly.fasta</code></li>
+        <li><em>“Algorithm for constructing the BWT index”</em>: <code class="language-plaintext highlighter-rouge">Auto. Let BWA decide</code></li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code></li>
+        <li><em>“Select fastq dataset”</em>: <code class="language-plaintext highlighter-rouge">sweet-potato-illumina-reduced.fastq</code></li>
+        <li><em>“Set read groups information?”</em>: <code class="language-plaintext highlighter-rouge">Do not set</code></li>
+        <li><em>“Select analysis mode”</em>: <code class="language-plaintext highlighter-rouge">Simple Illumina mode</code></li>
+      </ul>
+    </li>
+    <li><strong>Re-name output file</strong>:
+      <ul>
+        <li>Re-name this file <code class="language-plaintext highlighter-rouge">illumina.bam</code></li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Next, we will compare the short <span class="notranslate">reads</span> to the assembly, and create a polished (corrected) assembly file.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-polish"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Polish</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1"><strong>pilon</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/pilon/pilon/1.20.1</span></span> :
+      <ul>
+        <li><em>“Source for reference genome used for BAM alignments”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code></li>
+        <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">flye-assembly.fasta</code></li>
+        <li><em>“Type automatically determined by pilon”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Input BAM file”</em>: <code class="language-plaintext highlighter-rouge">illumina.bam</code></li>
+        <li><em>“Variant calling mode”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Create changes file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Rename the fasta output to <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+  </ol>
+
+  <blockquote class="tip">
+
+    <h3 id="tip-tip-renaming-a-dataset-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+    <ul>
+      <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+      <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+      <li>Click the <strong>Save</strong> button</li>
+    </ul>
+  </blockquote>
+
+  <ol>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>What is in the <code class="language-plaintext highlighter-rouge">changes</code> file?</li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0</span></span>
+      <ul>
+        <li>Find and run the tool called “Fasta statistics” on both the original flye assembly and the polished version.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>How does the polished assembly compare to the unpolished assembly?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>This will depend on the settings, but as an example: your polished assembly might be about 10-15 Kbp longer. Nanopore <span class="notranslate">reads</span> can have homopolymer deletions - a run of AAAA may be interpreted as AAA - so the more accurate illumina <span class="notranslate">reads</span> may correct these parts of the long-read assembly. In the changes file, there may be a lot of cases showing a supposed deletion (represented by a dot) being corrected to a base.</p>
+  </blockquote>
+</blockquote>
+
+<p><em>Optional further steps:</em></p>
+<ul>
+  <li>Run a second round (or more) of Pilon polishing. Keep track of file naming; you will need to generate a new bam file first before each round of Pilon.</li>
+  <li>Run an alte<span class="notranslate">rna</span>tive polishing tool, such as Racon. This uses the long <span class="notranslate">reads</span> themselves to correct the long-read (Flye) assembly. It would be better to run this tool on the Flye assembly before running Pilon, rather than after Pilon.</li>
+</ul>
+
+<h1 id="view-reads">View <span class="notranslate">reads</span></h1>
+
+<p>We will look at the original sequencing <span class="notranslate">reads</span> mapped to the genome assembly. In this tutorial, we will import very cut-down read sets so that they are easier to view.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-import-cut-down-read-sets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Import cut-down read sets</h3>
+  <ol>
+    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>  from <a href="https://zenodo.org/record/3567224">Zenodo</a> or a data library (ask your instructor):
+      <ul>
+        <li>FASTQ file with illumina <span class="notranslate">reads</span>: <code class="language-plaintext highlighter-rouge">sweet-potato-chloroplast-illumina-tiny.fastq</code></li>
+        <li>FASTQ file with nanopore <span class="notranslate">reads</span>: <code class="language-plaintext highlighter-rouge">sweet-potato-chloroplast-nanopore-tiny.fastq</code></li>
+        <li>Note: these are the “tiny” files, not the “reduced” files we imported earlier.
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-illumina-tiny.fastq
+https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.fastq
+</code></pre></div>          </div>
+        </li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-map-the-reads-to-the-assembly"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map the <span class="notranslate">reads</span> to the assembly</h3>
+  <ul>
+    <li>Map the Illumina <span class="notranslate">reads</span> (the new “tiny” dataset) to the <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code>, the same way we did before, using bwa mem.</li>
+    <li>This creates one output file: re-name it <code class="language-plaintext highlighter-rouge">illumina-tiny.bam</code></li>
+    <li>Map the Nanopore <span class="notranslate">reads</span> (the new “tiny” dataset) to the <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code>. The settings will be the same, except <code class="language-plaintext highlighter-rouge">Select analysis mode</code> should be <code class="language-plaintext highlighter-rouge">Nanopore</code></li>
+    <li>This creates one output file: re-name it <code class="language-plaintext highlighter-rouge">nanopore-tiny.bam</code></li>
+  </ul>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-visualise-mapped-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualise mapped <span class="notranslate">reads</span></h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3"><strong>JBrowse genome browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+<span class="notranslate">galaxy</span>3</span></span> :
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+          </ul>
+        </li>
+        <li><em>“Produce Standalone Instance”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse instance</code></li>
+        <li><em>“Insert Track Group”</em>
+          <ul>
+            <li><em>“Insert Annotation Track”</em>
+              <ul>
+                <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM pileups</code></li>
+                <li><em>“BAM track data”</em>: <code class="language-plaintext highlighter-rouge">nanopore-tiny.bam</code></li>
+                <li><em>“Autogenerate SNP track”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>Leave the other track features as default</em></li>
+              </ul>
+            </li>
+            <li><em>“Insert Annotation Track”</em>.
+              <ul>
+                <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">BAM pileups</code></li>
+                <li><em>“BAM track data”</em>: <code class="language-plaintext highlighter-rouge">illumina-tiny.bam</code></li>
+                <li><em>“Autogenerate SNP track”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>Leave the other track features as default</em></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Re-name output file</strong>:
+      <ul>
+        <li>JBrowse may take a few minutes to run. There is one output file: re-name it <code class="language-plaintext highlighter-rouge">assembly-and-<span class="notranslate">reads</span></code></li>
+      </ul>
+    </li>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>Click on the eye icon to view. (For more room, collapse <span class="notranslate">Galaxy</span> side menus with corner &lt; &gt; signs).</li>
+        <li>Make sure the bam files are ticked in the left hand panel.</li>
+        <li>Choose a contig in the drop down menu. Zoom in and out with + and - buttons.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Here is an embedded snippet showing JBrowse and the mapped <span class="notranslate">reads</span>:</p>
+
+<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?tracklist=0&amp;data=/training-material/topics/assembly/tutorials/chloroplast-assembly/data" border="0" width="100%" height="500px"></iframe>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What are the differences between the nanopore and the illumina <span class="notranslate">reads</span>?</li>
+    <li>What are some reasons that the read coverage may vary across the reference genome?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solutions"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solutions</h3>
+    <ol>
+      <li>Nanopore <span class="notranslate">reads</span> are longer and have a higher error rate.</li>
+      <li>There may be lots of reasons for varying read coverage. Some possibilities: In areas of high read coverage: this region may be a collapsed repeat. In areas of low or no coverage: this region may be difficult to sequence; or, this region may be a misassembly.</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<ul>
+  <li>To learn more about JBrowse and its features, see the <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">Genomic Data Visualisation with JBrowse tutorial</a></li>
+</ul>
+
+<h1 id="annotate-the-assembly">Annotate the assembly</h1>
+
+<p>We can now annotate our assembled genome with information about genomic features.</p>
+<ul>
+  <li>A chloroplast genome annotation tool is not yet available in <span class="notranslate">Galaxy</span>, although for an approximation we could use the tool for bacterial genome annotation, Prokka.</li>
+  <li>However here we will use a web-based tool designed for chloroplast genomes to annotate our assembly (or, you can upload an example annotation).</li>
+</ul>
+
+<p>Follow these steps to annotate your assembly, or upload an example annotation file from this <a href="http://doi.org/10.5281/zenodo.4267171">Zenodo link</a> to your current <span class="notranslate">Galaxy</span> history, and skip to the next step.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-annotate-with-geseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotate with GeSeq</h3>
+  <ul>
+    <li>Download <code class="language-plaintext highlighter-rouge">polished.fasta</code> to your computer (click on the file in your history; then click on the disk icon).</li>
+    <li>In a new broswer tab, go to <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a> where we will use the GeSeq tool <a class="citation" href="#Tillich_2017">Tillich <i>et al.</i> 2017</a> to annotate our sequence.</li>
+    <li>Upload the <code class="language-plaintext highlighter-rouge">fasta</code> file there. Information about how to use the tool is available on the page.</li>
+    <li>Once the annotation is completed, download the required files.</li>
+    <li>In <span class="notranslate">Galaxy</span>, import the annotation <code class="language-plaintext highlighter-rouge">GFF3</code> file.</li>
+  </ul>
+</blockquote>
+
+<p>Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (the polished.fasta file).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-view-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View annotations</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3"><strong>JBrowse genome browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+<span class="notranslate">galaxy</span>3</span></span> :
+    - <em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+      <ul>
+        <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+        <li><em>“Produce Standalone Instance”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse instance</code></li>
+        <li><em>“Insert Track Group”</em>
+          <ul>
+            <li><em>“Insert Annotation Track”</em>
+              <ul>
+                <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span>/GBK Features</code></li>
+                <li><em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: the <code class="language-plaintext highlighter-rouge">GFF3</code> file</li>
+                <li><em>Leave the other track features as default</em></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Re-name output file</strong>:
+      <ul>
+        <li>JBrowse may take a few minutes to run. There is one output file: re-name it <code class="language-plaintext highlighter-rouge">view-annotations</code></li>
+      </ul>
+    </li>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>Click on the eye icon to view the annotations file.</li>
+        <li>Select the right contig to view, in the drop down box.</li>
+        <li>Zoom out (with the minus button) until annotations are visible.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Here is an embedded snippet showing JBrowse and the annotations:</p>
+
+<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?tracklist=0&amp;data=/training-material/topics/assembly/tutorials/chloroplast-assembly/data2" border="0" width="100%" height="500px"></iframe>
+
+<blockquote class="question">
+  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+  <p>Why might there be several annotations over the same genome region?</p>
+  <blockquote class="solution">
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <p>One reason is that these are predictions from different tools - such as BLAT or HMMER.</p>
+  </blockquote>
+</blockquote>
+
+<h1 id="repeat-with-new-data">Repeat with new data</h1>
+
+<p><em>Optional extension exercise</em></p>
+
+<p>We can assemble another chloroplast genome using sequence data from a different plant species: the snow gum, <em>Eucalyptus pauciflora</em>. This data is from <a class="citation" href="#Wang2018">Wang <i>et al.</i> 2018</a>. It is a subset of the original FASTQ read files (Illumina - SRR7153063, Nanopore - SRR7153095).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-assembly-and-annotation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assembly and annotation</h3>
+  <ul>
+    <li>Get data: at this <a href="https://doi.org/10.5281/zenodo.3600662">Zenodo link</a>, then upload to <span class="notranslate">Galaxy</span>.</li>
+    <li>Check <span class="notranslate">reads</span>: Run Nanoplot on the nanopore <span class="notranslate">reads</span>.</li>
+    <li>Assemble: Use Flye to assemble the nanopore <span class="notranslate">reads</span>, then get Fasta statistics <em>Note: this may take several hours.</em></li>
+    <li>Polish assembly: Use Pilon to polish the assembly with short Illumina <span class="notranslate">reads</span>. <em>Note: Don’t forget to map these Illumina <span class="notranslate">reads</span> to the assembly first using bwa-mem, then use the resulting <code class="language-plaintext highlighter-rouge">bam</code> file as input to Pilon.</em></li>
+    <li>Annotate: Use the GeSeq tool at <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a>.</li>
+    <li>View annotations:Use <ss>JBrowse to view the assembled, annotated genome.</ss></li>
+  </ul>
+</blockquote>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>A chloroplast genome can be assembled with long reads and polished with short reads</p>
+</li>
+                            
+                            <li><p>The assembly graph is useful to look at and think about genomic structure</p>
+</li>
+                            
+                            <li><p>We can map raw reads back to the assembly and investigate areas of high or low read coverage</p>
+</li>
+                            
+                            <li><p>We can view an assembly, its mapped reads, and its annotations in JBrowse</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Tillich_2017">Tillich, M., P. Lehwark, T. Pellizzer, E. S. Ulbricht-Jones, A. Fischer <i>et al.</i>, 2017 <b>GeSeq – versatile and accurate annotation of organelle genomes</b>. Nucleic Acids Research 45: W6–W11.</span>
+    
+    
+    <a href="https://doi.org/10.1093/nar/gkx391">10.1093/nar/gkx391</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Wang2018">Wang, C.-Y., T. Jégu, H.-P. Chu, H. J. Oh, and J. T. Lee, 2018 <b>SMCHD1 Merges Chromosome Compartments and Assists Formation of Super-Structures on the Inactive X</b>. Cell 174: 406–421.e25.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.cell.2018.05.007">10.1016/j.cell.2018.05.007</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Zhou2018">Zhou, C., T. Duarte, R. Silvestre, G. Rossel, R. O. M. Mwanga <i>et al.</i>, 2018 <b>Insights into population structure of East African sweetpotato cultivars from hybrid assembly of chloroplast genomes</b>. Gates Open Research 2: 41.</span>
+    
+    
+    <a href="https://doi.org/10.12688/gatesopenres.12856.1">10.12688/gatesopenres.12856.1</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Chloroplast genome assembly (Assembly)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Anna Syme, 2020 <b>Chloroplast genome assembly (Galaxy Training Materials)</b>. <a href="/training-material/topics/assembly/tutorials/chloroplast-assembly/tutorial.html">/training-material/topics/assembly/tutorials/chloroplast-assembly/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{assembly-chloroplast-assembly,
+    author = "Anna Syme",
+    title = "Chloroplast genome assembly (Galaxy Training Materials)",
+    year = "2020",
+    month = "12",
+    day = "04"
+    url = "\url{/training-material/topics/assembly/tutorials/chloroplast-assembly/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anna Syme)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/assembly/tutorials/chloroplast-assembly/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
