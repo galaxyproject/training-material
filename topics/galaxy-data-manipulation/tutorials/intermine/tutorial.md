@@ -18,7 +18,6 @@ contributors:
 # Introduction
 {:.no_toc}
 
-<!-- This is a comment. -->
 InterMine ({% cite Smith2012 %}) is a well-establish platform to integrate and access life sciences data.
 It provides the integrated data via a web interface and RESTful web services.
 
@@ -26,7 +25,7 @@ Other organizations download and deploy InterMine on their servers:
 there are more than 30 instances over the world (registered at [registry.intermine.org](http://registry.intermine.org)), covering many organism,
 including human data, model animals, plants and drug targets.
 
-InterMine has been integrated with the Galaxy suite ({% cite Blankenberg2011 %}): the InterMine tool server in Galaxy allows 
+InterMine has been integrated with Galaxy: the InterMine tool server in Galaxy allows
 to import the data returned by any InterMine search and viceversa, using the InterMine Interchange format
 it's possible to export a list of identifiers from Galaxy into any InterMine instance of your choice.
 
