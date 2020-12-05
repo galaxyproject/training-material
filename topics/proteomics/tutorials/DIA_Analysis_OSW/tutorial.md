@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: DIA Analysis using OpenSwathWorkflow
-zenodo_link: 'https://zenodo.org/record/4301690'
+zenodo_link: 'https://zenodo.org/record/4307762'
 level: Intermediate
 questions:
 - How to analyze data independent acquisition (DIA) mass spectrometry (MS) data using OpenSwathWorkflow?
@@ -71,19 +71,19 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 >
 >    {% snippet faqs/galaxy/histories_create_new.md %}
 >
-> 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4301690)
+> 2. Import the fasta and raw files as well as the sample annotation and the iRT Transition file from [Zenodo](https://zenodo.org/record/4307762)
 >    ```
->    https://zenodo.org/record/4301690/files/HEK_Ecoli_lib.pqp
->    https://zenodo.org/record/4301690/files/iRTassays.tsv
->    https://zenodo.org/record/4301690/files/Sample_annotation.txt
->    https://zenodo.org/record/4301690/files/Sample1.raw
->    https://zenodo.org/record/4301690/files/Sample2.raw
->    https://zenodo.org/record/4301690/files/Sample3.raw
->    https://zenodo.org/record/4301690/files/Sample4.raw
->    https://zenodo.org/record/4301690/files/Sample5.raw
->    https://zenodo.org/record/4301690/files/Sample6.raw
->    https://zenodo.org/record/4301690/files/Sample7.raw
->    https://zenodo.org/record/4301690/files/Sample8.raw
+>    https://zenodo.org/record/4307762/files/HEK_Ecoli_lib.pqp
+>    https://zenodo.org/record/4307762/files/iRTassays.tsv
+>    https://zenodo.org/record/4307762/files/Sample_annotation.txt
+>    https://zenodo.org/record/4307762/files/Sample1.raw
+>    https://zenodo.org/record/4307762/files/Sample2.raw
+>    https://zenodo.org/record/4307762/files/Sample3.raw
+>    https://zenodo.org/record/4307762/files/Sample4.raw
+>    https://zenodo.org/record/4307762/files/Sample5.raw
+>    https://zenodo.org/record/4307762/files/Sample6.raw
+>    https://zenodo.org/record/4307762/files/Sample7.raw
+>    https://zenodo.org/record/4307762/files/Sample8.raw
 >    ```
 >
 >    {% snippet faqs/galaxy/datasets_import_via_link.md %}
@@ -186,10 +186,10 @@ The dataset in this tutorial consists of two different Spike-in mixtures of huma
 > ### {% icon tip %} Tip: Continue with results from Zenodo
 >
 > In case the pyprophet score run is not yet finished, the results can be downloaded from Zenodo to be able to continue the tutorial
-> 1. Import the files from [Zenodo](https://zenodo.org/record/4301690)
+> 1. Import the files from [Zenodo](https://zenodo.org/record/4307762)
 >    ```
->    https://zenodo.org/record/4301690/files/PyProphet_score_report.pdf
->    https://zenodo.org/record/4301690/files/PyProphet_score.osw
+>    https://zenodo.org/record/4307762/files/PyProphet_score_report.pdf
+>    https://zenodo.org/record/4307762/files/PyProphet_score.osw
 >    ```
 {: .tip}
 
