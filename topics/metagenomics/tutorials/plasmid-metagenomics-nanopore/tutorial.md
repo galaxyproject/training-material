@@ -231,7 +231,7 @@ It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
 Thus the per-base error rate is similar to the raw input reads.
 
-![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png "Sequencing and Assembly Schematic. A longer sequence is sequenced in many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.")
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png "Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.")
 
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
@@ -533,4 +533,3 @@ may provide further insight.
 You have worked your way through the following pipeline:
 
 ![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
-
