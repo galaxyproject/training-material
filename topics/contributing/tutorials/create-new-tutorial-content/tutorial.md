@@ -244,6 +244,21 @@ The prefix "Figure 1." is automatically added before its caption. This is done w
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
+### Guidelines on Alt vs Figcaption Text
+
+> While both the alt attribute and the figcaption element provide a way to
+> describe images, the way we write for them is different. **`alt` descriptions
+> should be functional; `figcaption` descriptions should be editorial or
+> illustrative.**
+>
+> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
+{: .blockquote}
+
+As an example:
+
+```markdown
+![Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
+```
 
 ## Writing mathematical expressions
 
