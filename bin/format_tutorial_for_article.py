@@ -7,11 +7,14 @@ import yaml
 from pathlib import Path
 
 
-def check_exists(fp):
+def check_exists(fp, noerror=False):
     '''Check if file in fp exists
     
     :param fp: Path object to file to test
+    :param noerror: Return a boolean instead of raising an error
     '''
+    if noerror:
+        return(fp.exists())
     if not fp.exists():
         raise ValueError("%s does not exist" % fp)
 
