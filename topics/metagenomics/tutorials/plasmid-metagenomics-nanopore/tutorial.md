@@ -161,13 +161,16 @@ For more information on the topic of quality control, please see our training ma
 
 ## Pairwise alignment using Minimap2
 
-In this experiment we used Nanopore sequencing; this means that sequencing results in long reads with overlap.
+In this experiment we used Nanopore sequencing; this means sequencing results with long reads, and significant overlaps between those reads.
 To find this overlap, Minimap2 is used. Minimap2 is a sequence alignment program that can be used for different
 purposes, but in this case we'll use it to find overlaps between long reads with an error rate up to ~15%.
-Typical other use cases for Minimap2 include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human genome;
-(2) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome;
-(3) aligning Illumina single- or paired-end reads; (4) assembly-to-assembly alignment; (5) full-genome alignment
-between two closely related species with divergence below ~15%.
+Typical other use cases for Minimap2 include:
+
+1. mapping PacBio or Oxford Nanopore genomic reads to the human genome
+2. splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome
+3. aligning Illumina single- or paired-end reads
+4. assembly-to-assembly alignment
+5. full-genome alignment between two closely related species with divergence below ~15%.
 
 Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
 therefore widely used for Nanopore alignment. Detailed evaluations of Minimap2 are available in
@@ -183,7 +186,7 @@ the Minimap2 publication ({% cite Li2018 %}).
 >      - {% icon param-collection %} *"Use the following data collection as the reference sequence"*: `Plasmids` dataset collection we just created
 >    - {% icon param-select %} *"Single or Paired-end reads"*: `Single`
 >      - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` dataset collection
->      - {% icon param-select%} *"Select a profile of preset options"*: `Oxford Nanopore all-vs--all overlap mapping`
+>      - {% icon param-select%} *"Select a profile of preset options"*: `Oxford Nanopore all-vs-all overlap mapping`
 >    - In the section **Set advanced output options**:
 >      - {% icon param-select %} *"Select an output format"*: `paf`
 >
@@ -227,7 +230,8 @@ Different from mainstream assemblers, miniasm does not have a consensus step.
 It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
 Thus the per-base error rate is similar to the raw input reads.
-![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png)
+
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png "Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.")
 
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
@@ -250,9 +254,9 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 
 ## Remapping using Minimap2
 
-The Assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format.
+Remapping is done with the original reads, using the Miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by **Racon** {% icon tool %} for consensus construction. This is done as some reads which might not have mapped well during the consensus calling, will now map to your scaffold.
 
-Remapping is done with the original reads, using the Miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by **Racon** {% icon tool %} for consensus construction.
+The Assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format.
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
@@ -529,4 +533,3 @@ may provide further insight.
 You have worked your way through the following pipeline:
 
 ![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
-
