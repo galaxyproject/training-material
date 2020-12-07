@@ -213,11 +213,20 @@ slide to change on the other. Useful when presenting.
 
 ---
 
-## Galaxy Vocabulary
+## Galaxy tools
 
-* `tool` or `tool wrapper` - XML file that describes to Galaxy how the underlying software works.
-* `repository` - Versioned code archive in Tool Shed containing Galaxy tool(s).
-* `requirement` or `dependency` - the underlying software needed to execute the tool command
+* A Galaxy `tool` or `wrapper` is an XML file describing how some software program works
+  * allows Galaxy to display the tool interface and execute the software in the right way
+* The underlying softwares needed to execute the tool command are called `requirements` or `dependencies`
+
+---
+
+## Tool Shed
+
+- Galaxy &quot;App Store&quot;
+- It is a free service that hosts repositories containing Galaxy tools.
+- The Tool Shed is a hosting (not a development) platform.
+  - Each repository should link to its development repository.
 
 ---
 class: left
@@ -235,10 +244,10 @@ You can add tools to Galaxy either
 
 ## How to add tools manually
 
-- By default Galaxy loads all tools in `tool_conf.xml.sample` into tool panel.
+- By default Galaxy adds all tools listed in `tool_conf.xml.sample` to the tool panel
 - To add a local tool by hand:
-  - Make a copy `$ cp tool_conf.xml.sample tool_conf.xml`.
-  - Add your tool entry to the `tool_conf.xml`.
+  - Make a copy `$ cp tool_conf.xml.sample tool_conf.xml`
+  - Add your tool entry to the `tool_conf.xml`
 - To add local tools with the [galaxyproject.galaxy Ansible role][galaxy-role]:
   - Set `galaxy_local_tools` to the local tool paths
   - Run the playbook
@@ -256,6 +265,48 @@ You can add tools to Galaxy either
 - From the Galaxy admin UI, select &quot;Tool Management &gt; Install and Uninstall&quot;
 - Find the repository with the tool(s) you want to install
 - Install the tool repository into Galaxy
+
+---
+
+## Advantages of using the Tool Shed
+
+- Installing from the Tool Shed takes care of
+  - dependencies
+  - reference data tables
+  - configuration files
+- Multiple versions (&quot;installable revisions&quot;) of a repository can be installed to preserve reproducibility
+
+---
+
+## Which Tool Shed?
+
+- The Main Tool Shed ( https://toolshed.g2.bx.psu.edu ) serves all Galaxies worldwide.
+  - Everybody can create a repository.
+  - Repositories are public, including their whole history.
+- The Test Tool Shed ( https://testtoolshed.g2.bx.psu.edu ) can be used for repositories not yet production-ready.
+- Local sheds can be run e.g. for private or custom-licensed tools.
+
+???
+
+Repositories on the TTS are also public.
+
+We discourage running local TS.
+
+---
+
+class: normal
+## Which Tool Shed? - Configuration
+
+The list of available Tool Sheds is defined in `tool_sheds_conf.xml`:
+```xml
+&lt;?xml version=&quot;1.0&quot;?&gt;
+&lt;tool_sheds&gt;
+    &lt;tool_shed name=&quot;Galaxy Main Tool Shed&quot; url=&quot;https://toolshed.g2.bx.psu.edu/&quot;/&gt;
+&lt;!-- Test Tool Shed should be used only for testing purposes.
+    &lt;tool_shed name=&quot;Galaxy Test Tool Shed&quot; url=&quot;https://testtoolshed.g2.bx.psu.edu/&quot;/&gt;
+--&gt;
+&lt;/tool_sheds&gt;
+```
 
 ---
 
@@ -424,22 +475,96 @@ Galaxy Version: 17.05
 
 ---
 
-# More on Tool Management:
+# More on Tool Management
 
+- Repository structure
 - Tool installation
-- Configuration
 - Dependencies
 
 ---
 
-## What happens when installing a tool from TS
+class: normal
+## Simple TS repository (`remove_beginning`)
 
-* Repository is downloaded.
-* If needed, Galaxy installs the tool's dependencies typically using [conda][conda].
-* Galaxy creates an entry for the tool in its database.
-* Galaxy adds the tool to `shed_tool_conf.xml` .
+```
+.
+├── remove_beginning.pl          # optional accompanying script
+├── remove_beginning.xml         # tool wrapper
+├── .shed.yml                    # metadata file
+└── test-data                    # subdirectory for test data
+    ├── 1.bed                    # test input file
+    └── eq-removebeginning.dat   # test output file
+```
 
-[conda]: https://conda.io/
+---
+class: normal
+## `.shed.yml` file
+
+Contains repository's metadata.
+
+```yaml
+categories:
+- Text Manipulation
+description: Remove lines from the beginning of a file.
+long_description: |
+  This tool removes the specified number of lines from the beginning
+  of the input dataset.
+name: remove_beginning
+owner: devteam
+remote_repository_url: https://github.com/galaxyproject/tools-devteam/tree/master/tools/remove_beginning
+type: unrestricted
+```
+
+---
+class: normal
+## Complex TS Repository (`varscan`)
+
+```
+.
+├── macros.xml                         # defines tool macros
+├── .shed.yml
+├── test-data
+│   ├── control_chrM.bam
+│   ├── fasta_indexes.loc              # Loc file for tests
+...
+│   └── varscan_mpileup_result1.vcf
+├── tool-data
+│   └── fasta_indexes.loc.sample       # Sample loc file
+├── tool_data_table_conf.xml.sample    # Sample data table
+├── tool_data_table_conf.xml.test      # Data table for tests
+├── varscan_copynumber.xml             # wrapper for tool #1
+├── varscan_mpileup.xml                # wrapper for tool #2
+├── varscan.py
+└── varscan_somatic.xml                # wrapper for tool #3
+```
+
+---
+
+## Data tables and loc files
+
+- Several tools need to access **reference data**, e.g. genome sequences or indexes for aligner
+- A *loc file* is a tab-separated file containing metadata and paths for a set of reference data
+- A *data table* describes the columns of a loc file used by a tool
+- You can read more about this in the [Reference Genomes in Galaxy slides](../reference-genomes/slides.html)
+
+---
+
+## Suite repositories
+
+- Suites can be used to split up a set of tools into multiple repositories
+  - A suite is a single repository that 'depends' on many others
+  - When you install the suite, all 'dependency repositories' will be installed too
+- With a tweak to `.shed.yml`, [Planemo](https://planemo.readthedocs.io) can upload a directory of tools to the TS as a suite of separate tools
+
+---
+
+## What happens when installing a repo from TS
+
+* The repository is downloaded
+* If needed, `.loc` files and data tables are installed
+* If needed, the tools' dependencies are installed
+* An entry for each tool is created in the Galaxy database
+* The tools are added to `shed_tool_conf.xml`
 
 ---
 class: left
@@ -459,26 +584,15 @@ class: left
 &lt;/section&gt;
 ```
 
----
+???
 
-## Tool panel management
-
-* How the tool panel looks like is decided in a file called `integrated_tool_panel.xml`.
-* By default it resides in Galaxy's `config/` folder.
-* If missing it is generated from all other tool config files during startup.
-* Modify it if you want to reorder tools or move section.
-
-```xml
-&lt;section id=&quot;filter&quot; name=&quot;Filter and Sort&quot; version=&quot;&quot;&gt;
-    &lt;tool id=&quot;testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1&quot; /&gt;
-&lt;/section&gt;
-```
+This file should be modified only to hide a tool from the panel.
 
 ---
 
 ## Tool dependency resolution
 
-* We aim to make Galaxy resolver-independent but Conda-oriented.
+* We aim to make Galaxy resolver-independent, with a preference for [conda](https://conda.io/) and containers
 * What resolver is going to be used for the tool dependencies is determined at runtime
 according to the order specified in `dependency_resolvers_conf.xml`.
 
@@ -507,7 +621,7 @@ class: left
 
 ## Dependency resolution example
 
-Tool XML contains:
+A tool XML contains:
 
 ```xml
 &lt;tool id=&quot;foo&quot;&gt;
@@ -606,6 +720,21 @@ Submit the job anyway, maybe it's available on `$PATH`
 
 - Galaxy can also use **Docker** or **Singularity** containers to resolve dependencies
 - You can read more about this in the [Tool Dependencies and Containers slides](../../../dev/tutorials/containers/slides.html)
+
+---
+
+## Tool panel management
+
+* How the tool panel looks like is decided in a file called `integrated_tool_panel.xml`.
+* By default it resides in Galaxy's `config/` folder.
+* If missing it is generated from all other tool config files during startup.
+* Modify it if you want to reorder tools or move section.
+
+```xml
+&lt;section id=&quot;filter&quot; name=&quot;Filter and Sort&quot; version=&quot;&quot;&gt;
+    &lt;tool id=&quot;testtoolshed.g2.bx.psu.edu/repos/devteam/bamtools_filter/bamFilter/0.0.1&quot; /&gt;
+&lt;/section&gt;
+```
 
 
 ---
