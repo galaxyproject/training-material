@@ -1678,9 +1678,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_selinux_allow_local_connections: true
 >    +nginx_servers:
 >    +  - redirect-ssl
->    +nginx_enable_default_server: false
 >    +nginx_ssl_servers:
 >    +  - galaxy
+>    +nginx_enable_default_server: false
 >    +nginx_conf_http:
 >    +  client_max_body_size: 1g
 >    +nginx_ssl_role: usegalaxy_eu.certbot
@@ -1740,10 +1740,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >  nginx_selinux_allow_local_connections: true
 >    >  nginx_servers:
 >    > -  - redirect-ssl
->    > -nginx_enable_default_server: false
 >    > -nginx_ssl_servers:
 >    >    - galaxy
->    > +nginx_enable_default_server: false
+>    > nginx_enable_default_server: false
 >    >  nginx_conf_http:
 >    >    client_max_body_size: 1g
 >    > -nginx_ssl_role: usegalaxy_eu.certbot
