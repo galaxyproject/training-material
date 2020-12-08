@@ -120,7 +120,6 @@ We will assemble the long nanopore reads.
 > ### {% icon hands_on %} Hands-on: View the assembly
 > 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
->    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
 > 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
