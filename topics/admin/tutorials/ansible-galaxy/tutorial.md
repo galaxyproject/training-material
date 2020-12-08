@@ -1334,6 +1334,16 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > The client is only re-built when there are changes in the files needed for the Galaxy user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
 >    {: .tip}
 >
+>    > ### {% icon tip %} ERROR: Failed to set permissions on the temporary files
+>    > Did you get an error message like this?
+>    > ```
+>    > fatal: [localhost]: FAILED! => {"msg": "Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user (rc: 1, err: chown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/': Operation not permitted\nchown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/source': Operation not permitted\n}). For information on working around this, see https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user"}
+>    > ```
+>    >
+>    > You're missing the `setfacl` command provided by the `acl` package. [reference](https://github.com/georchestra/ansible/issues/55#issuecomment-588313638)
+>    >
+>    {: .tip}
+>
 > 6. Explore what has been set up for you.
 >
 >    - Galaxy has been deployed to `/srv/galaxy/server`
