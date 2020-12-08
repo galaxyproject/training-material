@@ -1841,8 +1841,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    > {% raw %}
 >    > ```diff
->    > --- a/group_vars/galaxyservers.yml
->    > +++ b/group_vars/galaxyservers.yml
+>    > --- a/templates/nginx/galaxy.j2
+>    > +++ b/templates/nginx/galaxy.j2
 >    > -listen        *:443 ssl default_server;
 >    > +listen        *:80 default_server;
 >    > ```
