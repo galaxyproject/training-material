@@ -139,6 +139,6 @@ Once the generation of the interchange dataset has been completed, open the gree
 >
 {: .hands_on}
 
-You have now exported your identifiers from Galaxy to InterMine.
-
 # Conclusion
+
+You have now exported your identifiers from Galaxy to InterMine.
