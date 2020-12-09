@@ -1309,7 +1309,7 @@ We’ll start by assuming you’re running the command</p>
      - name: Install Dependencies
        package:
 <span class="gd">-        name: 'python3-psycopg2'
-</span><span class="gi">+        name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+</span><span class="gi">+        name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2', 'acl']
 </span>   roles:
      - <span class="notranslate">galaxy</span>project.postgresql
      - role: natefoo.postgresql_objects
@@ -2015,6 +2015,16 @@ large community of admins.</p>
         <p>The deployment can be slowed down by the client build.
 The client is only re-built when there are changes in the files needed for the <span class="notranslate">Galaxy</span> user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.</p>
       </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-error-failed-to-set-permissions-on-the-temporary-files"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> ERROR: Failed to set permissions on the temporary files</h3>
+        <p>Did you get an error message like this?</p>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fatal: [localhost]: FAILED! =&gt; {"msg": "Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user (rc: 1, err: chown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/': Operation not permitted\nchown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/source': Operation not permitted\n}). For information on working around this, see https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user"}
+</code></pre></div>        </div>
+
+        <p>You’re missing the <code class="language-plaintext highlighter-rouge">setfacl</code> command provided by the <code class="language-plaintext highlighter-rouge">acl</code> package. <a href="https://github.com/georchestra/ansible/issues/55#issuecomment-588313638">reference</a></p>
+
+      </blockquote>
     </li>
     <li>
       <p>Explore what has been set up for you.</p>
@@ -2200,7 +2210,7 @@ index 941272f..785ad03 100644
 </span><span class="p">@@ -5,6 +5,11 @@</span>
      - name: Install Dependencies
        package:
-         name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
+         name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2', 'acl']
 <span class="gi">+  handlers:
 +    - name: Restart <span class="notranslate">Galaxy</span>
 +      systemd:
@@ -2385,9 +2395,9 @@ Unit <span class="notranslate">galaxy</span>.service could not be found.
 +nginx_selinux_allow_local_connections: true
 +nginx_servers:
 +  - redirect-ssl
-+nginx_enable_default_server: false
 +nginx_ssl_servers:
 +  - <span class="notranslate">galaxy</span>
++nginx_enable_default_server: false
 +nginx_conf_http:
 +  client_max_body_size: 1g
 +nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
@@ -2452,10 +2462,9 @@ Unit <span class="notranslate">galaxy</span>.service could not be found.
  nginx_selinux_allow_local_connections: true
  nginx_servers:
 <span class="gd">-  - redirect-ssl
--nginx_enable_default_server: false
 -nginx_ssl_servers:
 </span>   - <span class="notranslate">galaxy</span>
-<span class="gi">+nginx_enable_default_server: false
+<span class="p">nginx_enable_default_server: false
 </span> nginx_conf_http:
    client_max_body_size: 1g
 <span class="gd">-nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
