@@ -152,7 +152,9 @@ For our current experiment, we will be looking for the following set of repeats:
 
 Let's extract the repeats highlighted in red (Figure 2, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. Mycoplasma hyopneumoniae 7422) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 2 we are selecting the ones stacked vertically).
 
-> ### {% icon hands_on %} Hands-on: Muiltiple Sequence Alignment of a set of repeats
+### Extracting repeat alignments and running Multiple SEquence Alignment
+
+> ### {% icon hands_on %} Hands-on: Multiple Sequence Alignment of a set of repeats
 > 1. Run the tool **Text reformatting** with AWK {% icon tool %} with the following parameters
 >    - {% icon param-file %} *"File to process"*: `Gecko on data 2 and 1: Alignments`
 >    - *"AWK Program"*: `BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf(">sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } `
@@ -186,6 +188,44 @@ Let's extract the repeats highlighted in red (Figure 2, right) which are aligned
 >
 {: .hands_on}
 
+Your output alignment file `ClustalW on data ... clustal` should look similar to the following one (click on {% icon galaxy-eye %}) :
+
+```
+CLUSTAL 2.1 multiple sequence alignment
+
+
+sequence@_19610_31252_      AAAATAAAATCAGAATTTCGTGAAAAAGCACGTAAAATAGCGACTCTTTG
+sequence@_19610_28814_      AAAATAAAATCAGAATTTCGTGAAAAAGCACGTAAAATAGCGACTCTTTG
+sequence@_19610_25551_      AAAATAAAATCTGAATTTCGCGAAAAAGCACGTAAAATACCGACTCTTTG
+                            *********** ******** ****************** **********
+
+sequence@_19610_31252_      TTTTTCACCACCGGATAAATCTTTGACTTGTTGGTTTAGTTTGTCATTTT
+sequence@_19610_28814_      TTTTTCACCACCGGATAAATCTTTGACTTGTTGGTTTAGTTTGTCATTTT
+sequence@_19610_25551_      TTTCTCGCCACCCGATAAATCTTTGACTTGTTGATTTAGTTTTTCATTTT
+                            *** ** ***** ******************** ******** *******
+
+sequence@_19610_31252_      CGATATTGAGGAAATTTGCACTTTTTTCAAGTAAGACTTGGTCAAATTCC
+sequence@_19610_28814_      CGATATTGAGGAAATTTGCACTTTTTTCAAGTAAGACTTGGTCAAATTCC
+sequence@_19610_25551_      CAATATTAAGAAAATTTGCTCTTTTTTCAAGCAAATTTTGATCAAATTCT
+                            * ***** ** ******** *********** **   *** ******** 
+
+sequence@_19610_31252_      CTTTTAATTATGTTATTTCCAATTAAAATATTATTTTTAACCGATAAATT
+sequence@_19610_28814_      CTTTTAATTATGTTATTTCCAATTAAAATATTATTTTTAACCGATAAATT
+sequence@_19610_25551_      TTTTGAATTAAGCTATTTCCAATTAAAATATTATTTTTAACAGAAAGATT
+                             *** ***** * **************************** ** * ***
+
+sequence@_19610_31252_      CTCAATCAAATTAAAATCTTGAAAAACTACATCAATTAAAGGGTTTTTTT
+sequence@_19610_28814_      CTCAATCAAATTAAAATCTTGAAAAACTACATCAATTAAAGGGTTTTTTT
+sequence@_19610_25551_      TTCAATTAGGTTAAAATCCTGAAAAACTACATCAATTAAAGGATTTTTTT
+                             ***** *  ******** *********************** *******
+
+sequence@_19610_31252_      CTTCTTTACCTT
+sequence@_19610_28814_      CTTCTTTACCTT
+sequence@_19610_25551_      CTTCTTT-----
+                            *******     
+
+```
+
 So far we have learnt how to run our own custom sequence comparison, extract a set of DNA repeats and perform multiple sequence alignment on them (MSA). While this represents an common example of a bioinformatics pipeline, in the next part of the tutorial we will jump to a large-scale comparison scenario where we do not need fine-grained alignments, but instead we will be looking at the "bigger picture" using alignment-free methods. 
 
 # Coarse-grained sequence comparison
@@ -198,6 +238,8 @@ In this second part of the tutorial, we are going to work with chromosome-sized 
 
 As you can imagine, all three scenarios require several large-scale sequence comparisons. While there are also other ways to approach these situations, in this tutorial we will learn how we can use `CHROMEISTER` ({% cite perez2019ultra %}) which is specifically designed for large-scale genome comparison without alignments (alignment-free method).
 
+## Introduction
+
 Before jumping on the hands-on, let us see an example of the second case: say we wanted to study the evolutionary rearrangements between the grass and common wheat genomes (*Aegilops tauschii* and *Triticum aestivum*). The following plot shows the comparison:
 
 ![Large-scale genome comparison example](../../images/hpc-for-lsgc/Chrom07.png "Chromosome comparison for Aegilops tauschii and Triticum aestivum. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!")
@@ -205,6 +247,8 @@ Before jumping on the hands-on, let us see an example of the second case: say we
 Now there are some things to note here: (1) we have been able to perform an alignment-free comparison very quickly, (2) we can visually see the large rearrangements and (3) we have identified which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use `CHROMEISTER` to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, e.g. *Homo sapiens* and *Mus musculus*).
 
 Let us now jump into the hands-on! We will learn how to compare chromosomes with `CHROMEISTER`, particularly the grass and common wheat genomes, which are nearly 5 times larger than the average human chromosome!
+
+## Preparing the data
 
 > ### {% icon hands_on %} Hands-on: Chromosome data upload
 >
@@ -224,7 +268,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the files to `aegilops-chr1.fasta` and `triticum-chr1.fasta` and change the datatype to `fasta`.
+> 3. Rename the files to `aegilops.fasta` and `triticum.fasta` and change the datatype to `fasta`.
 >
 >    {% include snippets/rename_dataset.md %}
 >    {% include snippets/change_datatype.md %}
@@ -245,26 +289,47 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >
 {: .question}
 
+## Running the comparison
+
 > ### {% icon hands_on %} Hands-on: Comparing two plant chromosomes with CHROMEISTER
 > 1. **CHROMEISTER** {% icon tool %} with the following parameters
->    - {% icon param-file %} *"Query sequence"*: `aegilops-chr1.fasta`
->    - {% icon param-file %} *"Reference sequence"*: `triticum-chr1.fasta`
+>    - {% icon param-file %} *"Query sequence"*: `aegilops.fasta`
+>    - {% icon param-file %} *"Reference sequence"*: `triticum.fasta`
 >    - *"Output dotplot size"*: `1000`
 >    - *"K-mer seed size"*: `32`
 >    - *"Diffuse value"*: `4`
 >    - *"Add grid to plot for multi-fasta data sets"*: `No`
->    - *"Plot block classification"*: `Yes`
+>    - *"Generate image of detected events"*: `Generate events plot`
 > 2. Run the job and wait for the results. It should take around ~3 minutes.
 > 3. Let's inspect the output files:
 >    - *"Comparison matrix"*: This file is the "core" of the comparison. It contains the heuristically matched seeds sampled per section of the chromosomes. This file is used for custom post-processing.
 >    - *"Comparison dotplot"*: This file is a `.png` image representing the pairwise comparison. 
 >    - *"Comparison metainformation"*: This CSV file contains information about the comparison such as name of the sequences compared, length, etc. It is particularly useful when using multi-fasta inputs. 
 >    - *"Detected events"*: This CSV file contains information regarding rearrangements automatically detected. 
->    - *"Block classification plot"*" This file is a `.png` image showing the detected events. 
+>    - *"Detected events plot"*" This file is a `.png` image showing the detected events. 
 >    - *"Comparison score"*: This text file contains the scoring distance between the query and the reference.
 {: .hands_on}
 
+Let us inspect the output files (remember to inspect each using the {% icon galaxy-eye %} icon). The `Comparison dotplot` file should look like this: 
 
+![Single chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum.png "Chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER.")
+
+Notice ...
+
+![Events in chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum-events.png "Automatically detected events in the chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)")
+
+Explain ... 
+
+```
+xStart,yStart,xEnd,yEnd,strand,approximate length,description
+189935556,218167395,202237082,205056373,f,12301526,conserved block
+...
+156475406,165723309,175173725,185127621,r,18698319,inversion
+...
+208633875,239669470,213062425,234949502,f,4428550,transposition
+...
+86602740,73946160,103332815,91252708,r,16730075,inverted transposition
+```
 
 # Conclusion
 {:.no_toc}
