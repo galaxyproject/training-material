@@ -110,16 +110,17 @@ We will use **Create InterMine Interchange Dataset** {% icon tool %} in order to
 >
 > 1. {% tool [Create InterMine Interchange dateset](toolshed.g2.bx.psu.edu/repos/iuc/intermine_galaxy_exchange/galaxy_intermine_exchange/0.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Tabular file"*: select the `GenesLocatedOnChromosome4` dataset which contains some fly's genes
->    - *"Feature Type Column"*: select a column from the input file which contains the identifer's type you are exporting to InterMine.
->    In this example, because the `GenesLocatedOnChromosome4` dataset does not containt the type we have to edit it, in the *"Feature Type"*
->    - *"Feature Type"*: edit the type of the identifiers you are exporting to InterMine, in this example `Gene`. It must be a class in the InterMine data model.
->    - *"Feature Identifier column"*: select a column from the input file which contains the identifier. In our example select the column *Column 2* which contains the  gene symbol
->    - *"Feature Identifier"*: edit the identifier. This could be, as an example, a gene symbol like `GATA1` or another other identifier, e.g. `FBGN0000099` or perhaps a  protein accession. In our example we do not have to edit anything because it's retrieved from the `GenesLocatedOnChromosome4` dataset, under the *Column 2*
->    - *"Organism Name column"*: select a column from the input file which contains the organism's name. In our example select the column *Nothing selected*
->    - *"Organism Name"*: edit the organism's name, if you know it. In this example, no need to edit anything.
+>    - *"Feature Type Column"*: `Column: 1`
+>    - *"Feature Type"*: `Gene`
+>    - *"Feature Identifier column"*: `Column: 2`
 >
 >    > ### {% icon comment %} Comment
->    >  The organims' name is not mandatory, but is good to provide if it is known. It does not have to be precise
+>    > - In this example, because the `GenesLocatedOnChromosome4` dataset does not contain the type we have to specify it, in the *"Feature Type"*
+>    > - *"Feature Type"*: this is type of the identifiers you are exporting to InterMine, in this example `Gene`. It must be a class in the InterMine data model.
+>    > - *"Feature Identifier column"*: select a column from the input file which contains the identifier. We have selected Column 2, which contains the gene symbol.
+>    > - *"Feature Identifier"*: This could be, as an example, a gene symbol like `GATA1` or another other identifier, e.g. `FBGN0000099` or perhaps a  protein accession. In our example we do not have to edit anything because the values for this field are contained in the `GenesLocatedOnChromosome4` dataset, in *Column 2*.
+>    > - *"Organism Name column"*: select a column from the input file which contains the organism's name, if you have multiple organisms in the same dataset.
+>    > - *"Organism Name"*: alternatively you can directly provide the organism's name. The organims' name is not mandatory, but is good to provide if it is known. It does not have to be precise
 >    {: .comment}
 >
 > 2. Click on **Execute**
