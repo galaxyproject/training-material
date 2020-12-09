@@ -314,7 +314,7 @@ Here is an embedded snippet showing JBrowse and the annotations:
 
 *Optional extension exercise*
 
-We can assemble another chloroplast genome using sequence data from a different plant species: the snow gum, *Eucalyptus pauciflora*. This data is from {% cite Wang2018 %}. It is a subset of the original FASTQ read files (Illumina - SRR7153063, Nanopore - SRR7153095).
+We can assemble another chloroplast genome using sequence data from a different plant species: the snow gum, *Eucalyptus pauciflora*. This data is from {% cite Wang_etal_2018 %}. It is a subset of the original FASTQ read files (Illumina - SRR7153063, Nanopore - SRR7153095).
 
 > ### {% icon hands_on %} Hands-on: Assembly and annotation
 > * Get data: at this [Zenodo link](https://doi.org/10.5281/zenodo.3600662), then upload to Galaxy.
