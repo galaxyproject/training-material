@@ -693,7 +693,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         - name: Install Dependencies
 >           package:
 >    -        name: 'python3-psycopg2'
->    +        name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+>    +        name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2', 'acl']
 >       roles:
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
@@ -1334,6 +1334,16 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > The client is only re-built when there are changes in the files needed for the Galaxy user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
 >    {: .tip}
 >
+>    > ### {% icon tip %} ERROR: Failed to set permissions on the temporary files
+>    > Did you get an error message like this?
+>    > ```
+>    > fatal: [localhost]: FAILED! => {"msg": "Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user (rc: 1, err: chown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/': Operation not permitted\nchown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/source': Operation not permitted\n}). For information on working around this, see https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user"}
+>    > ```
+>    >
+>    > You're missing the `setfacl` command provided by the `acl` package. [reference](https://github.com/georchestra/ansible/issues/55#issuecomment-588313638)
+>    >
+>    {: .tip}
+>
 > 6. Explore what has been set up for you.
 >
 >    - Galaxy has been deployed to `/srv/galaxy/server`
@@ -1505,7 +1515,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    @@ -5,6 +5,11 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
+>             name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2', 'acl']
 >    +  handlers:
 >    +    - name: Restart Galaxy
 >    +      systemd:
@@ -1678,9 +1688,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_selinux_allow_local_connections: true
 >    +nginx_servers:
 >    +  - redirect-ssl
->    +nginx_enable_default_server: false
 >    +nginx_ssl_servers:
 >    +  - galaxy
+>    +nginx_enable_default_server: false
 >    +nginx_conf_http:
 >    +  client_max_body_size: 1g
 >    +nginx_ssl_role: usegalaxy_eu.certbot
@@ -1740,10 +1750,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >  nginx_selinux_allow_local_connections: true
 >    >  nginx_servers:
 >    > -  - redirect-ssl
->    > -nginx_enable_default_server: false
 >    > -nginx_ssl_servers:
 >    >    - galaxy
->    > +nginx_enable_default_server: false
+>    > nginx_enable_default_server: false
 >    >  nginx_conf_http:
 >    >    client_max_body_size: 1g
 >    > -nginx_ssl_role: usegalaxy_eu.certbot
@@ -1841,8 +1850,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    > {% raw %}
 >    > ```diff
->    > --- a/group_vars/galaxyservers.yml
->    > +++ b/group_vars/galaxyservers.yml
+>    > --- a/templates/nginx/galaxy.j2
+>    > +++ b/templates/nginx/galaxy.j2
 >    > -listen        *:443 ssl default_server;
 >    > +listen        *:80 default_server;
 >    > ```

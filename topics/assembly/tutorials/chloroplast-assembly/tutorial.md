@@ -120,7 +120,6 @@ We will assemble the long nanopore reads.
 > ### {% icon hands_on %} Hands-on: View the assembly
 > 1. {% tool [Bandage Info](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_info/0.8.1+galaxy1) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
->    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
 > 2. {% tool [Bandage Image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %}
 >    - *"Graphical Fragment Assembly"*: the Flye output file `Graphical Fragment Assembly` (not the "assembly_graph" file)
@@ -314,7 +313,7 @@ Here is an embedded snippet showing JBrowse and the annotations:
 
 *Optional extension exercise*
 
-We can assemble another chloroplast genome using sequence data from a different plant species: the snow gum, *Eucalyptus pauciflora*. This data is from {% cite Wang2018 %}. It is a subset of the original FASTQ read files (Illumina - SRR7153063, Nanopore - SRR7153095).
+We can assemble another chloroplast genome using sequence data from a different plant species: the snow gum, *Eucalyptus pauciflora*. This data is from {% cite Wang_etal_2018 %}. It is a subset of the original FASTQ read files (Illumina - SRR7153063, Nanopore - SRR7153095).
 
 > ### {% icon hands_on %} Hands-on: Assembly and annotation
 > * Get data: at this [Zenodo link](https://doi.org/10.5281/zenodo.3600662), then upload to Galaxy.

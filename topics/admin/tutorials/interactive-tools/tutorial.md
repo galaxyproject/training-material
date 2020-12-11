@@ -595,8 +595,8 @@ A few Interactive Tool wrappers are provided with Galaxy, but they are [commente
 > 3. Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default `local` destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the [advanced sample job configuration][job-conf-docker] as a guide. Finally, use the [EtherCalc GxIT's][ethercalc-tool-wrapper] tool ID to route executions of the EtherCalc GxIT to the newly created destination:
 >
 >    ```diff
->    --- job_conf.xml.old
->    +++ job_conf.xml
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
 >         <plugins workers="4">
 >             <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >         </plugins>
@@ -789,8 +789,8 @@ Because we want to maintain dataset privacy, Pulsar is the better choice here. A
 >    {: .warning}
 >
 >    ```diff
->    --- job_conf.xml.old
->    +++ job_conf.xml
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
 >         <destinations default="local">
 >             <destination id="local" runner="local"/>
 >    -        <destination id="interactive_local" runner="local">
