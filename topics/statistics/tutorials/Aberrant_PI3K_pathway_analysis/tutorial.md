@@ -47,25 +47,36 @@ Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (T
 >
 {: .agenda}
 
-# Title for your first section
+# **Pancancer aberrant pathway activity analysis (PAPAA)** 
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+Machine Learning use learning features from datasets and generate predictive models. Extracting transcriptional patterns and learning insights from this abundance of data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer (Men et al. 2018). Such perturbations in oncogenic pathways can be useful in predicting sensitivity to therapeutic agents (Bild et al. 2006). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the pan-cancer data(Way et al. 2018). This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from [PanCanAtlas](https://gdc.cancer.gov/). 
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+TCGA Pancancer has uniformly processed Multi-omics data including RNASeq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available RNASeq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: [Pancancer analysis](https://github.com/nvk747/pancancer.git)
 
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+***Machine learning methodology***
+Logistic regression is a kind of machine learning approach where statistical analysis that is used to predict the outcome of a dependent variable based on prior observations. Changes in gene expression are directly connected to alterations/mutations in genes. we used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (i) has a aberrant gene event given the sample’s RNAseq measurements (Xi). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (w) that optimize the following penalized logistic function.
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+![Equations for probability measurement ](../../images/PAPAA@0.1.8/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutaional status can be estimated by Multiplying Xi with gene specific weights (W). The negativeloglikelihood (L) is used for calculating minimum weights for each sample")
 
+Where alpha and l are regularization and elastic net mixing hyperparameters that are only active during training. Each model was tested at multiple alpha and l values and 5 fold cross validation was performed.  
+
+***Sample Processing step:***
+
+**x-matrix**
+> Gene-expression data comprises of expression levels for ~20000 genes in ~10000 samples. Top 8000 highly variable genes between the samples were measured by median absolute deviation (MAD) and considered for analysis. 
+
+**y-matrix**
+> copy number and mutational data in the binary format for all samples. This set is sorted to given pathway target genes and cancer types. 
+
+We then randomly held out 10% of the samples to create a test set and rest 90% for training.  Testing set is used as the validation to evaluate the performance of any machine learning algorithm and the remaining parts are used for learning/training. The training set is balanced for different cancer-types and PI3K status. 
+
+Predicting probabilities of an observation belonging to each class in a classification problem is more flexible rather than predicting classes directly. This method has an added advantage to trade-off errors made by the model as it depends on interpretation of probabilities using different thresholds. Two diagnostic tools that help in the interpretation of probabilistic forecast for binary (two-class) classification predictive modeling problems are ROC Curves and Precision-Recall curves. Each model generated is evaluated and performance metrics is measured using AUROC and AUPR.
+
+As elastic net penalty with stochastic decent gradient approach induces sparsity in the number of features used in classification, and the best/top features (genes) are likely to represent transcriptional signature of given disease or aberrant activity of the mutated genes in a pathway. 
+
+Each feature (gene) is given a rank and score(negative or positive) depending on its contribution to classification. The positive scored genes are likely to be upregulated in activated pathway samples and negatively scored genes are likely to be downstream targets of altered pathways. 
+
+In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that are helpful in for treatment of various cancers. Generate model using from ERBB2,KRAS,PIK3CA,AKT11 oncogenes from ERK/RAS/PI3K signaling axis pathway. 
 have fun!
 
 ## Get data
@@ -592,7 +603,8 @@ In this step we use the classifier derived cell line predictions and use them to
 
 ![Afatinib_pharmacological_response](../../images/PAPAA@0.1.8/PI3K_OG_gdsc1_ccle_drug.png "Natural log fitted IC50 (Ln-IC50) values of afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. cell lines treated with Afatinib [EGFR inhibitor]")
 
-> ### {% icon hands_on %} Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model>    - {% icon param-file %} *"gdsc1 targene pharmacology predictions"*: `gdsc1_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
+> ### {% icon hands_on %} Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model
+>    - {% icon param-file %} *"gdsc1 targene pharmacology predictions"*: `gdsc1_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
 >    - {% icon param-file %} *"gdsc2 targene pharmacology predictions"*: `gdsc2_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
 >    - {% icon param-file %} *"gdsc1 ccle targene pharmacology predictions"*: `gdsc1_ccle_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
 >    - {% icon param-file %} *"gdsc2 ccle targene pharmacology predictions"*: `gdsc2_ccle_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
@@ -631,14 +643,6 @@ In this step we use the classifier derived cell line predictions and use them to
 > {: .solution}
 >
 {: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # **Conclusions**
 {:.no_toc}
