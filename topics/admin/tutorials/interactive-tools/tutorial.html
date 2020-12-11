@@ -1430,8 +1430,8 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
     <li>
       <p>Next, we need to configure the interactive tools destination. First, we explicitly set the destination to the default <code class="language-plaintext highlighter-rouge">local</code> destination since there will now be two destinations defined. Then we add a destination for submitting jobs as docker containers using the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/lib/galaxy/config/sample/job_conf.xml.sample_advanced#L410">advanced sample job configuration</a> as a guide. Finally, use the <a href="https://github.com/galaxyproject/galaxy/blob/6622ad1acb91866febb3d2f229de7cfb8af3a9f6/tools/interactive/interactivetool_ethercalc.xml">EtherCalc GxIT’s</a> tool ID to route executions of the EtherCalc GxIT to the newly created destination:</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- job_conf.xml.old
-</span><span class="gi">+++ job_conf.xml
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span>     &lt;plugins workers="4"&gt;
          &lt;plugin id="local" type="runner" load="<span class="notranslate">galaxy</span>.jobs.runners.local:LocalJobRunner"/&gt;
      &lt;/plugins&gt;
@@ -1618,8 +1618,8 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
         <p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, you will also need the <code class="language-plaintext highlighter-rouge">&lt;env&gt;</code> setting shown below to prevent problems with the untrusted SSL certificates in use during the course. <span class="notranslate">Galaxy</span> servers with valid SSL certificates <em>do not need this option</em>.</p>
       </blockquote>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- job_conf.xml.old
-</span><span class="gi">+++ job_conf.xml
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span>     &lt;destinations default="local"&gt;
          &lt;destination id="local" runner="local"/&gt;
 <span class="gd">-        &lt;destination id="interactive_local" runner="local"&gt;
