@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: PAPAA PI3K_OG:Pancancer Aberrant Pathway Activity Analysis
+title: PAPAA PI3K_OG: Pancancer Aberrant Pathway Activity Analysis
 zenodo_link: https://zenodo.org/record/4306639#.X9FJF-lKgZE
 questions:
 - how to predict aberrant pathway activity in The Cancer Genome Atlas(TCGA) using
@@ -33,7 +33,7 @@ The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and
 
 In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNASeq information and mutational and copy number information of following frequently altered genes. We named this tutorial as Pancancer Aberrant Pathway Activity Analysis (PAPAA)
 
-![pi3k_pathway](../../images/PAPAA@0.1.8/pi3k_pathway.png "Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes, blue text indicates Tumor suppressors genes.")
+![pi3k_pathway](../../images/papaa/pi3k_pathway.png "Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes, blue text indicates Tumor suppressors genes.")
 
 
 Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (TSG) share common phenotypical outcome. However, they often have divergent molecular mechanisms  that drive the outcome. We are interested in capturing mutational specific differential transcriptional outcome among OG and TSG. In Fig-1 Genes in red are oncogenes (have activating or copy gain) and blue are tumor suppressor genes (have inactivating or copy loss).
@@ -56,7 +56,7 @@ TCGA Pancancer has uniformly processed Multi-omics data including RNASeq, copy n
 ***Machine learning methodology***
 Logistic regression is a kind of machine learning approach where statistical analysis that is used to predict the outcome of a dependent variable based on prior observations. Changes in gene expression are directly connected to alterations/mutations in genes. we used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (i) has a aberrant gene event given the sample’s RNAseq measurements (Xi). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (w) that optimize the following penalized logistic function.
 
-![Equations for probability measurement ](../../images/PAPAA@0.1.8/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutaional status can be estimated by Multiplying Xi with gene specific weights (W). The negativeloglikelihood (L) is used for calculating minimum weights for each sample")
+![Equations for probability measurement ](../../images/papaa/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutaional status can be estimated by Multiplying Xi with gene specific weights (W). The negativeloglikelihood (L) is used for calculating minimum weights for each sample")
 
 Where alpha and l are regularization and elastic net mixing hyperparameters that are only active during training. Each model was tested at multiple alpha and l values and 5 fold cross validation was performed.  
 
@@ -124,16 +124,16 @@ have fun!
 
 ## **PAPAA: PanCancer classifier**
 This first step is designed to generate model with ERBB2,KRAS,PIK3CA,AKT11 genes belonging to a ERK/RAS/PI3K signaling axis pathway(path_genes) and BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS cancer types/diseases(ref: tcga_dictionary.tsv) from The Cancer Genome Atlas (TCGA). Additionally the generated model was used to evaluate alternative genes (PTEN,PIK3R1,STK11) and alternative diseases (BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS) performance. This steps takes feature information (pancan_rnaseq_freeze.tsv.gz), mutational information(pancan_mutation_freeze.tsv.gz),load of mutations in each samples(mutation_burden_freeze.tsv.gz), threshold passed sample information(sample_freeze.tsv) and copy number information(copy_number_loss_status.tsv.gz & copy_number_gain_status.tsv.gz).
-![Prediction metrics for PI3K_OG model](../../images/PAPAA@0.1.8/pi3k_OG_auroc_aupr.png "Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.") 
-![PI3K_OG Classifier Coefficients](../../images/PAPAA@0.1.8/PI3K_OG_classifier_coef.png "PI3K_OG classifier coefficients represent the genes that impact the classification")
+![Prediction metrics for PI3K_OG model](../../images/papaa/pi3k_OG_auroc_aupr.png "Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.") 
+![PI3K_OG Classifier Coefficients](../../images/papaa/PI3K_OG_classifier_coef.png "PI3K_OG classifier coefficients represent the genes that impact the classification")
 
 > ### {% icon hands_on %} Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types
 >
 > 1. {% tool [PAPAA: PanCancer classifier](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.8) %} with the following parameters:
->    - {% icon param-file %} *"Filename of features to use in model"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename mutations"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename of mutation burden"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename of sample"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset)
 >    - *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1`
 >    - *"Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in --filter_count and --filter_prop."*: `BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS`
 >    - *"option to set seed"*: `1234`
@@ -157,8 +157,6 @@ This first step is designed to generate model with ERBB2,KRAS,PIK3CA,AKT11 genes
 >    - *"Decision to drop gene expression values from X"*: `No`
 >    - *"Decision to drop covariate information from X"*: `No`
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs
 >    - \--genes 	comma separated string of HUGO symbols for target genes or targenes_list.csv file
@@ -208,23 +206,21 @@ This step is designed to generate individual pan-within models for each individu
 > ### {% icon hands_on %} Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1
 >
 > 1. {% tool [PAPAA: PanCancer within disease analysis](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.8) %} with the following parameters:
->    - {% icon param-file %} *"Filename of features to use in model"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename mutations"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename of mutation burden"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename of sample"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset)
 >    - *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1`
 >    - *"Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in --filter_count and --filter_prop."*: `BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS`
->    - {% icon param-file %} *"File with Copy number loss"*: `output` (Input dataset)
->    - {% icon param-file %} *"File with Copy number gain"*: `output` (Input dataset)
->    - {% icon param-file %} *"File with cancer gene classification table"*: `output` (Input dataset)
+>    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
 >    - *"the alphas for parameter sweep"*: `0.1,0.13,0.15,0.18,0.2,0.3,0.4,0.6,0.7`
 >    - *"the l1 ratios for parameter sweep"*: `0.1,0.125,0.15,0.2,0.25,0.3,0.35`
 >    - *"Remove hypermutated samples"*: `Yes`
 >    - *"option to set seed"*: `1234`
 >    - *"Number of MAD genes to include in classifier"*: `8000`
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs
 >    - \--genes 	Comma separated string of HUGO symbols for target genes or targenes_list.csv file
@@ -255,7 +251,7 @@ This step is designed to generate individual pan-within models for each individu
 
 ## **PanCancer compare within models**
 we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model and individual models.
-![Compare Pan model with with-in disease model](../../images/PAPAA@0.1.8/within.png "Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type")
+![Compare Pan model with with-in disease model](../../images/papaa/within.png "Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type")
 
 > ### {% icon hands_on %} Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models
 >
@@ -266,8 +262,6 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 >    - {% icon param-file %} *"pan_within classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})
 >    - *"Would you want to compare given model with alt gene model?"*: `do not do alt gene`
 {: .hands_on}
-
->   *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs
 >    - \--pancan_model 	location of pan and pan-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s  
@@ -285,16 +279,17 @@ In this step we would like to predict y status (mutational status) using x matri
 > ### {% icon hands_on %} Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model
 >
 > 1. {% tool [PAPAA: PanCancer apply weights](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.8) %} with the following parameters:
->    - {% icon param-file %} *"Filename of features to use in model"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename mutations"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename of mutation burden"*: `output` (Input dataset)
->    - {% icon param-file %} *"Filename of sample"*: `output` (Input dataset)
+>    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
+>    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset)
 >    - *"Supplement Y matrix with copy number events"*: `Yes`
+>    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
 >    - {% icon param-file %} *"pancancer classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `apply_weights.py` inputs
 >    - \--classifier_summary 	String of the location of classifier_summary.txt file
@@ -313,18 +308,15 @@ In this step we would like to predict y status (mutational status) using x matri
 >    - Log file for script run and additional information	
 {: .comment}
 
-
 ## **PanCancer visualize decisions**
 In this step we generate visualization plots using classifier decision function for samples in each individual disease, total decisions for all samples in all diseases, and hypermutated samples in all diseases.
-![PI3K_Og_total_decisions_plot](../../images/PAPAA@0.1.8/PI3K_OG_total_decisions.png "Probability density plot for total decisions for all samples with the given classifier decision function")
+![PI3K_Og_total_decisions_plot](../../images/papaa/PI3K_OG_total_decisions.png "Probability density plot for total decisions for all samples with the given classifier decision function")
 
 > ### {% icon hands_on %} Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model
 >
 > 1. {% tool [PAPAA: PanCancer visualize decisions](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.8) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 {: .hands_on}
-
-> *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `visualize_decisions.py` inputs
 >    - \--classifier_decisions 	String of the folder location of classifier_decisions.tsv
@@ -346,15 +338,13 @@ In this step we combined variant level information for each mutation combining w
 >
 > 1. {% tool [PAPAA: PanCancer map mutation class](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.8) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions.tsv` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
->    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_genes.txt` (Input dataset)
+>    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_rtk_ras_pi3k_genes.txt` (Input dataset)
 >    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset)
 >    - *"Supplement Y matrix with copy number events"*: `Yes`
 >    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
 >    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename of raw mut MAF"*: `mc3.v0.2.8.PUBLIC.maf` (Input dataset)
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs
 >    - \--classifer_decisions 	String of the location of folder containing classifier_decisions.tsv
@@ -377,15 +367,13 @@ In this step we combine classifier weights,copy number information, recalculate 
 > 1. {% tool [PAPAA: PanCancer alternative genes pathwaymapper](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.8) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions.tsv` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 >    - *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1`
->    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_genes.txt` (Input dataset)
+>    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_rtk_ras_pi3k_genes.txt` (Input dataset)
 >    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv ` (Input dataset)
 >    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset)
 >    - *"Supplement Y matrix with copy number events"*: `Yes`
 >    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
 >    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs
 >    - \--genes 	comma separated string of HUGO symbols for target genes or targenes_list.csv file
@@ -406,7 +394,7 @@ In this step we combine classifier weights,copy number information, recalculate 
 
 ## **PanCancer pathway count heatmaps**
 This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway. 
-![PI3K_OG_combined_heatmap](../../images/PAPAA@0.1.8/PI3K_OG_combined_heatmap.png) "Combined count heatmap(mutation and copynumber) for all genes in the target pathway with in each cancer type")
+![PI3K_OG_combined_heatmap](../../images/papaa/PI3K_OG_combined_heatmap.png) "Combined count heatmap(mutation and copynumber) for all genes in the target pathway with in each cancer type")
 
 > ### {% icon hands_on %} Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model
 >
@@ -415,7 +403,7 @@ This step generates combined heatmap from mutation and copy number information a
 >    - {% icon param-file %} *"pancancer metrics pathwaymapper"*: `pathway_metrics_pathwaymapper.txt` (output of **PAPAA: PanCancer alternative genes pathwaymapper** {% icon tool %})
 >    - {% icon param-file %} *"pancancer gene metric ranks"*: `all_gene_metric_ranks.tsv` (output of **PAPAA: PanCancer alternative genes pathwaymapper** {% icon tool %})
 >    - *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1`
->    - {% icon param-file %} *"String of the pathway genes to extract"*: `path_genes.txt` (Input dataset)
+>    - {% icon param-file %} *"String of the pathway genes to extract"*: `path_rtk_ras_pi3k_genes.txt` (Input dataset)
 >    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv.gz` (Input dataset)
 >    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
@@ -424,8 +412,6 @@ This step generates combined heatmap from mutation and copy number information a
 >    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
 >    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_pathway_count_heatmaps.py` inputs
 >    - \--genes 	comma separated string of HUGO symbols for target genes or targenes_list.csv file
@@ -464,8 +450,6 @@ This step generates plots summarizing various analysis, including heatmaps for d
 >    - {% icon param-file %} *"pancancer gene metric ranks"*: `all_gene_metric_ranks.tsv` (output of **PAPAA: PanCancer alternative genes pathwaymapper** {% icon tool %})
 {: .hands_on}
 
->    *Check parameter descriptions*
-
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_summary_figures.R` inputs
 >    - \--classifier_summary 	String of the location of classifier data
 >    - \--seed 	value specifies the initial value of the random number seed
@@ -488,8 +472,8 @@ This step generates plots summarizing various analysis, including heatmaps for d
 
 ## **PanCancer targene cell line predictions**
 In this step we use our classifier information and predict mutational status for various cell lines in CCLE and GDSC data sources.
-![CCLE_targene_celline_classification](../../images/PAPAA@0.1.8/CCLE_classification.png "PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.")
-![GDSC_targene_celline_classification](../../images/PAPAA@0.1.8/GDSC_classification.png "PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSCCell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. ")
+![CCLE_targene_celline_classification](../../images/papaa/CCLE_classification.png "PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.")
+![GDSC_targene_celline_classification](../../images/papaa/GDSC_classification.png "PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSCCell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. ")
 
 > ### {% icon hands_on %} Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model
 >
@@ -499,7 +483,7 @@ In this step we use our classifier information and predict mutational status for
 >    - {% icon param-file %} *"nucleotide mutation scores"*: `nucleotide_acid_mutation_scores.tsv` (output of **PAPAA: PanCancer targene summary figures** {% icon tool %})
 >    - {% icon param-file %} *"amino acid mutation scores"*: `amino_acid_mutation_scores.tsv` (output of **PAPAA: PanCancer targene summary figures** {% icon tool %})
 >    - *"Comma separated string of HUGO targene symbols"*: `ERBB2_MUT,PIK3CA_MUT,KRAS_MUT,AKT1_MUT`
->    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_genes.txt` (Input dataset)
+>    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_rtk_ras_pi3k_genes.txt` (Input dataset)
 >    - {% icon param-file %} *"Filename ccle rnaseq data"*: `ccle_rnaseq_genes_rpkm_20180929_mod.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename ccle mutational data"*: `CCLE_MUT_CNA_AMP_DEL_binary_Revealer.gct` (Input dataset)
 >    - {% icon param-file %} *"Filename ccle variant data"*: `CCLE_DepMap_18Q1_maf_20180207.txt` (Input dataset)
@@ -508,8 +492,6 @@ In this step we use our classifier information and predict mutational status for
 >    - {% icon param-file %} *"Filename for gdsc1 pharmacological data file"*: `gdsc1_ccle_pharm_fitted_dose_data.txt` (Input dataset)
 >    - {% icon param-file %} *"Filename for gdsc2 pharmacological data file"*: `gdsc2_ccle_pharm_fitted_dose_data.txt` (Input dataset)
 {: .hands_on}
-
->   *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_cell_line_predictions.py` inputs
 >    - \--targenes        comma separated string of HUGO symbols for target genes or targenes_list.csv file
@@ -542,7 +524,7 @@ In this step we use our classifier information and predict mutational status for
 
 ## **PanCancer external sample status prediction**
 In this step we use our classifier information and predict mutational status for PTENKO, PI3KCA mutant, WT when PI3K is inhibited using A66. 
-![GSE69822_samples_classification](../../images/PAPAA@0.1.8/external.png ") PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT (blue circles) or having a PIK3CA-H1074R mutation (orange circles).")
+![GSE69822_samples_classification](../../images/papaa/external.png ") PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT (blue circles) or having a PIK3CA-H1074R mutation (orange circles).")
 
 > ### {% icon hands_on %} Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model
 >
@@ -552,8 +534,6 @@ In this step we use our classifier information and predict mutational status for
 >    - {% icon param-file %} *"external sample gene expression data"*: `vlog_trans.csv` (Input dataset)
 >    - {% icon param-file %} *"given mutational status"*: `sign.txt` (Input dataset)
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs
 >    - \--classifier_summary 	String of the location of classifier scores file
@@ -569,7 +549,7 @@ In this step we use our classifier information and predict mutational status for
 ## **PanCancer targene pharmacology**
 In this step we use the classifier derived cell line predictions and use them to evaluate pharmacological response of these cell lines. We plot log IC50 with classifier scores for each cell line and draw a correlation for drug response in absence or presence of targene mutations
 
-![Afatinib_pharmacological_response](../../images/PAPAA@0.1.8/PI3K_OG_gdsc1_ccle_drug.png "Natural log fitted IC50 (Ln-IC50) values of afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. cell lines treated with Afatinib [EGFR inhibitor]")
+![Afatinib_pharmacological_response](../../images/papaa/PI3K_OG_gdsc1_ccle_drug.png "Natural log fitted IC50 (Ln-IC50) values of afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. cell lines treated with Afatinib [EGFR inhibitor]")
 
 > ### {% icon hands_on %} Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model
 >    - {% icon param-file %} *"gdsc1 targene pharmacology predictions"*: `gdsc1_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
@@ -578,8 +558,6 @@ In this step we use the classifier derived cell line predictions and use them to
 >    - {% icon param-file %} *"gdsc2 ccle targene pharmacology predictions"*: `gdsc2_ccle_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
 >    - {% icon param-file %} *"Filename list of compounds"*: `compounds_of_interest.txt` (Input dataset)
 {: .hands_on}
-
->    *Check parameter descriptions*
 
 > ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_pharmacology.R` inputs
 >    - \--classifier_results 	String of the location of classifier folder
@@ -596,7 +574,6 @@ In this step we use the classifier derived cell line predictions and use them to
 >    - Scatter plots with visualizing drug response compared to CCLE targene classifier scores
 >    for GDSC2 pharmacological dataset (GDSC2_ccle_targene_all_drug_response.pdf)
 {: .comment}
-
 
 > ### {% icon question %} Tutorial Questions
 >
