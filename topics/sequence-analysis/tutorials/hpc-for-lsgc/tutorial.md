@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Large-scale genome comparison"
+title: "From small to large-scale sequence comparison"
 
 zenodo_link: ""
 
@@ -17,7 +17,7 @@ key_points:
 - We learnt that sequence comparison is a demanding problem and that there are several ways to approach it
 - We learnt how to run sequence comparisons in Galaxy with different levels of precision
 - Fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively
-- We learnt how to post-process our comparison by extracting alignments, performing realigments, etc.
+- We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc.
 requirements:
   -
     type: "internal"
@@ -43,7 +43,7 @@ In the following tutorial, we will learn how to compare both small and large seq
 This tutorial is divided into two large sections:
 
  - Fine-grained sequence comparison: In this part of the tutorial we will use `GECKO` to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.
- - Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using `CHROMEISTER`, and alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes.
+ - Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using `CHROMEISTER`, an alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes and automatically detect large-scale rearrangements.
 
 > ### Agenda
 >
@@ -137,7 +137,7 @@ We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycopla
 >
 {: .hands_on}
 
-## Post-processing
+## Post-processing: extracting alignments
 
 We will now use additional tools to post-process our alignments. Consider the case where you are interested in a set of DNA repeats located at a given position in the sequences. 
 
@@ -150,9 +150,9 @@ For our current experiment, we will be looking for the following set of repeats:
 
 ![Mycoplasma hyopneumoniae comparison example](../../images/hpc-for-lsgc/GeckoMGV01.PNG "(Left) Sequence comparison between Mycoplasma hyopneumoniae 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.")
 
-Let's extract the repeats highlighted in red (Figure 2, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. Mycoplasma hyopneumoniae 7422) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 2 we are selecting the ones stacked vertically).
+Let's extract the repeats highlighted in red (Figure 2, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. *Mycoplasma hyopneumoniae 7422*) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 2 we are selecting the ones stacked vertically).
 
-### Extracting repeat alignments and running Multiple SEquence Alignment
+### Extracting repeat alignments and running Multiple Sequence Alignment
 
 > ### {% icon hands_on %} Hands-on: Multiple Sequence Alignment of a set of repeats
 > 1. Run the tool **Text reformatting** with AWK {% icon tool %} with the following parameters
@@ -225,6 +225,9 @@ sequence@_19610_25551_      CTTCTTT-----
                             *******     
 
 ```
+We can see that there are several locus along the duplicated repeats where single point mutations have taken place, and that the ending of the last repeat is missing.
+
+
 
 So far we have learnt how to run our own custom sequence comparison, extract a set of DNA repeats and perform multiple sequence alignment on them (MSA). While this represents an common example of a bioinformatics pipeline, in the next part of the tutorial we will jump to a large-scale comparison scenario where we do not need fine-grained alignments, but instead we will be looking at the "bigger picture" using alignment-free methods. 
 
@@ -308,17 +311,47 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >    - *"Detected events"*: This CSV file contains information regarding rearrangements automatically detected. 
 >    - *"Detected events plot"*" This file is a `.png` image showing the detected events. 
 >    - *"Comparison score"*: This text file contains the scoring distance between the query and the reference.
+>
+>    > ### {% icon comment %} About parameters
+>    >
+>    > Some of the parameters used in `CHROMEISTER` are similar to those in `GECKO`, but others are new, in particular:
+>    > 1. *"Output dotplot size"*: This number represents the width and height of the resulting comparison plot, but it also affects the degree of precision with which alignment-free blocks are calculated. A value of `1000` is adequate for mostly everything (resulting in a `1000x1000` output doplot), but for extremely large sequences a value of `2000` will yield more resolution since less blocks will be grouped together. 
+>    > 2. *"K-mer seed size"*: This value is the same as in `GECKO`. Generally, `32` is a good choice for any sequence that is not very small such as the mycoplasmas from the previous part of the tutorial, which were around 1 Mbp in size.
+>    > 3. *"Diffuse value"*: This parameter regulates the stringency with which alignment-free seeds are matched. A diffuse value of `1` means perfect matching, whereas a value of `4` means match only a fourth of the seed (taken in uniform steps). The value of `4` is recommended for everything except when signals start to deteriorate in large comparisons with plenty of repeats.
+>   > 4. The *"Add grid to plot for multi-fasta data sets"* parameter adds grid lines to the plot to separate multiple sequences. This is useful when using multi-fasta inputs.
+>   > 5. The *"Generate image of detected events"* parameter will include, if enabled, a plot of the rearrangements detected with colors, one per type of rearrangement. More on that later!
+>    {: .comment}
+>    >
+>
 {: .hands_on}
 
-Let us inspect the output files (remember to inspect each using the {% icon galaxy-eye %} icon). The `Comparison dotplot` file should look like this: 
 
-![Single chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum.png "Chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER.")
 
-Notice ...
+Your `Comparison dotplot` file (remember to inspect each using the {% icon galaxy-eye %} icon) should look like this: 
+
+![Single chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum.png "Chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end. ")
+
+Figure 3 shows the comparison plot for the plant chromosomes. Notice that the origin of both sequences is at the top-left and the ending is at the bottom-right of the plot. Noise and small repeats are filtered out automatically by `CHROMEISTER` to allow focusing on where the main similarity blocks are located. We can see that there three types of blocks:
+
+- Blocks that are "conserved" are on the main diagonal. This means that the sequences are similar (in a coarse-grained fashion) in such regions.
+- Blocks that are inverted are on the antidiagonals, i.e. rotated 90 degrees. These blocks show sequence regions that have been reversed and rearranged into the complementary strand.
+- Blocks that are not in the main diagonal are "transposed", meaning that they have been rearranged in one of the sequences but not in the other. These can also be inverted.
+
+> ### {% icon comment %} Note on the comparison plot
+Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if `CHROMEISTER` was run with parameter **Output dotplot size** equal to `1000`, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.
+{: .comment}
+
+Also note that a `score` value can be seen in the title of the plot (this value is also available in the **Comparison score** file). This value is calculated based on the alignment coverage and number of rearrangements and can be used to automatically filter out similar from dissimilar sequence comparisons. 
+
+## Post-processing: detecting rearrangements
+
+Let us now see how the blocks detected in the comparison are automatically classified for further processing. Figure 4 shows the blocks detected heuristically from the comparison and classified according to their position and orientation. This plot is available in the file **Detected events plot**.
 
 ![Events in chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum-events.png "Automatically detected events in the chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)")
 
-Explain ... 
+In Figure 4 we can see a similar plot to that in Figure 3 but with the addition of colors. Each detected block is labelled according to whether it is in the main diagonal (red), transposed (blue) or inverted (green). Inverted transpositions are also labelled green. Notice that this automatic classification process is based on the Hough transform ({% cite duda1972use %}) which is governed by a set of parameters which can therefore affect the sensitivity of the detection of blocks, and hence some blocks can be missed.
+
+Each of these blocks is also available in the `CSV` file **Detected events**. Let us take a peek:
 
 ```
 xStart,yStart,xEnd,yEnd,strand,approximate length,description
@@ -331,12 +364,21 @@ xStart,yStart,xEnd,yEnd,strand,approximate length,description
 86602740,73946160,103332815,91252708,r,16730075,inverted transposition
 ```
 
+The header line describes each column. `xStart` and `xEnd` are the starting and ending coordinates in the query sequence, wheras `yStart` and `yEnd` are the same but for the reference sequence. The strand can be either `f` for the forward strand or `r` for the reverse strand. Notice that the length of the block is approximate, since it is an estimation based on the length of the line and transformed by the length of each sequence. The `description` column contains the label of the detected event. The four possible types (conserved block, inversion, transposition or inverted transposition) are shown above with examples.
+
+Besides providing a visual understanding of the large rearrangements that took place between two sequences, the detection of blocks can be further used to research evolutionary distances, for instance by incorporating the number of Large Scale Genome Rearrangements to generate richer metrics in phylogenetic studies.
+
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+From a pratical perspective, we have shown how to run pairwise genome comparisons using Galaxy, from small to large-scale sequences (in particular bacterial mycoplasmas and plant chromosomes) throughout two levels of precision:
 
+- Using `GECKO` to find High-scoring Segment Pair alignments.
+- Using `CHROMEISTER` to find large-scale conserved blocks.
+
+Moreover, we have described how we can use additional tools to post-process our comparisons, including extraction of alignments, multiple sequence alignment, automatic detection of rearrangements, etc. Additionally, we recommend taking a look at `GECKO-MGV` ({% cite diaz2019combining %}), a tool for the interactive exploration of sequence comparisons produced with `GECKO`.
+
+On the other hand, from a theoretical standpoint, we have discussed why sequence comparison is a difficult problem, how the length of the sequences can affect runtimes, the complexity of the algorithms, impact of parameters, etc., (more details in the slides).
 
 
 
