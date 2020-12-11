@@ -12,6 +12,7 @@ echo "Building in $build_dir"
 slides=$1; shift; # _site/training-material/topic/admin/tutorials/ansible/slides.pdf
 source=$1; shift; # topic/admin/tutorials/ansible/slides.html
 output=$1; shift; # _site/training-material/topic/admin/tutorials/ansible/slides.mp4
+subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
 aws=$1; shift; # Empty or 'upload'
 srcdir="$(dirname "$source")"
 
@@ -134,6 +135,7 @@ ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" 
 	-c:v copy -c:a copy -c:s mov_text -map 0:v:0 -map 1:a:0 -map 2 -b:a 192k "${build_dir}/out.mp4"
 
 cp "${build_dir}/out.mp4" "$output"
+cp "${build_dir}/out.vtt" "$subtitles"
 
 if [[ "$aws" == "upload" ]]; then
 	aws s3 cp "${build_dir}/out.mp4" "s3://galaxy-training/videos/$srcdir/slides.mp4"
