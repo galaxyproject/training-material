@@ -10,7 +10,7 @@ objectives:
 - Learn to predict aberrant pathway activity using RNAseq data, mutational status
   and copy number variation data from TCGA.
 - Apply logistic regression based machine learning algorithms on TCGA data.
-time_estimation: 1.5H
+time_estimation: 1H30M
 key_points:
 - Identify the transcriptomic signature of tumors with PI3K gene mutations and potential biomarkers that are
   useful in improving personalized medicine
@@ -20,7 +20,6 @@ contributors:
 - blankenberg
 
 ---
-
 
 # Introduction
 {:.no_toc}
@@ -56,7 +55,7 @@ TCGA Pancancer has uniformly processed Multi-omics data including RNASeq, copy n
 ***Machine learning methodology***
 Logistic regression is a kind of machine learning approach where statistical analysis that is used to predict the outcome of a dependent variable based on prior observations. Changes in gene expression are directly connected to alterations/mutations in genes. we used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (i) has a aberrant gene event given the sample’s RNAseq measurements (Xi). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (w) that optimize the following penalized logistic function.
 
-![Equations for probability measurement ](../../images/aberrant_pi3k_pathway_analysis/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutaional status can be estimated by Multiplying Xi with gene specific weights (W). The negativeloglikelihood (L) is used for calculating minimum weights for each sample")
+![Equations for probability measurement ](../../images/aberrant_pi3k_pathway_analysis/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negativeloglikelihood (L) is used for calculating minimum weights for each sample")
 
 Where alpha and l are regularization and elastic net mixing hyperparameters that are only active during training. Each model was tested at multiple alpha and l values and 5 fold cross validation was performed.  
 
@@ -304,13 +303,13 @@ In this step we would like to predict y status (mutational status) using x matri
 {: .details}
 
 > ### {% icon comment %} Outputs
->    - Apply a logit transform on expression values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates "classifier_decisions.tsv" file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specifific classification. 
+>    - Apply a logit transform on expression values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates "classifier_decisions.tsv" file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification. 
 >    - Log file for script run and additional information	
 {: .comment}
 
 ## **PanCancer visualize decisions**
 In this step we generate visualization plots using classifier decision function for samples in each individual disease, total decisions for all samples in all diseases, and hypermutated samples in all diseases.
-![PI3K_Og_total_decisions_plot](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png "Probability density plot for total decisions for all samples with the given classifier decision function")
+![PI3K_OG_total_decisions_plot](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png "Probability density plot for total decisions for all samples with the given classifier decision function")
 
 > ### {% icon hands_on %} Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model
 >
@@ -549,7 +548,7 @@ In this step we use our classifier information and predict mutational status for
 ## **PanCancer targene pharmacology**
 In this step we use the classifier derived cell line predictions and use them to evaluate pharmacological response of these cell lines. We plot log IC50 with classifier scores for each cell line and draw a correlation for drug response in absence or presence of targene mutations
 
-![Afatinib_pharmacological_response](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png "Natural log fitted IC50 (Ln-IC50) values of afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. cell lines treated with Afatinib [EGFR inhibitor]")
+![Afatinib_pharmacological_response](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png "Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. cell lines treated with Afatinib [EGFR inhibitor]")
 
 > ### {% icon hands_on %} Hands-on: GDSC1 and GDSC2 pharmacological analysis using ERBB2_PIK3CA_KRAS_AKT1 model
 >    - {% icon param-file %} *"gdsc1 targene pharmacology predictions"*: `gdsc1_targene_pharmacology_predictions.tsv` (output of **PAPAA: PanCancer targene cell line predictions** {% icon tool %})
@@ -577,8 +576,8 @@ In this step we use the classifier derived cell line predictions and use them to
 
 > ### {% icon question %} Tutorial Questions
 >
-> 1. Can you build a classifer for tumor suppressor gene combination in PI3K pathway?
-> 2. how did the PI3K_LOSS model performed compared to PI3K_GAIN?
+> 1. Can you build a classifier for tumor suppressor gene combination in PI3K pathway?
+> 2. how did the PI3K_TSG model performed compared to PI3K_OG?
 >
 > > ### {% icon solution %} Solution
 > >
