@@ -208,9 +208,9 @@ _site/%.pdf: _site/%.html
 
 AWS_UPLOAD?=""
 VIDEOS := $(shell find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
-video: $(VIDEOS:topics/%.html=_site/training-material/topics/%.mp4) ## Build videos where possible
+#video: $(VIDEOS:topics/%.html=videos/topics/%.mp4) ## Build videos where possible
 
-_site/training-material/%/slides.mp4: _site/training-material/%/slides.pdf %/slides.html
+videos/%/slides.mp4: _site/training-material/%/slides.pdf %/slides.html
 	./bin/ari.sh $^ $@ $(AWS_UPLOAD)
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges

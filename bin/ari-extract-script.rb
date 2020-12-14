@@ -67,8 +67,9 @@ blocks.push(["Thank you for watching!"])
 def translate(word)
   m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
 
-
-  if m[2] then
+  if WORD_MAP.key?(word) then
+    fixed = WORD_MAP[word]
+  elsif m[2] then
     fixed = WORD_MAP.fetch(m[2].downcase, m[2])
   else
     fixed = m[2]
@@ -88,7 +89,6 @@ blocks = blocks.map{ |block|
   end
   # Remove blank entries
   script_lines = script_lines.filter{ |x| x.length != 0 }
-  # Translate specific words as needed
   script_lines = script_lines.map{ |line|
     line.delete_prefix("- ")
     # If they don't end with punctuation, fix it.
@@ -104,6 +104,7 @@ blocks = blocks.map{ |block|
 #out_subs.write(blocks.map{ |line| line.join(" ") }.join("\n"))
 
 blocks2 = blocks.map { |block|
+  # Translate specific words as needed
   s = block.map{ |line|
     line = line.split(' ').map{ |w|
       translate(w)
