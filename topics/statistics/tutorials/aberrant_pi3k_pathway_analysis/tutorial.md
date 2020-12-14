@@ -1,10 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: PAPAA PI3K_OG: Pancancer Aberrant Pathway Activity Analysis
+title: 'PAPAA PI3K_OG: Pancancer Aberrant Pathway Activity Analysis'
 zenodo_link: https://zenodo.org/record/4306639#.X9FJF-lKgZE
 questions:
-- how to predict aberrant pathway activity in The Cancer Genome Atlas(TCGA) using
+- How to predict aberrant pathway activity in The Cancer Genome Atlas(TCGA) using
   Machine learning approaches?
 objectives:
 - Learn to predict aberrant pathway activity using RNAseq data, mutational status
