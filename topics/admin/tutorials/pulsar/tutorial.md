@@ -56,8 +56,9 @@ At the Galaxy end, it is configured within the `job_conf.xml` file and uses one 
 
 In this tutorial, we will:
 
+* Install and configure a message queueing system on our Galaxy server (can be a different VM)
 * Install and configure a Pulsar server on a remote linux machine using ansible
-    * We will configure the Pulsar server to run via the RESTful interface
+    * We will configure the Pulsar server to run via the message queueing interface
 * Configure our Galaxy servers to run a job there
 * Run a job remotely
 
@@ -72,11 +73,144 @@ In this tutorial, we will:
 This tutorial assumes that you have:
 
 - A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
-- That you have completed the "Galaxy Installation with Ansible" and CVMFS tutorials (Job configuration tutorial is optional.)
+- That you have completed the "Galaxy Installation with Ansible" and CVMFS tutorials (Job configuration tutorial is optional) and have access to the VM/computer where it is installed.
+
+# Overview
+
+We will be installing the RabbitMQ server daemon onto the Galaxy server to act as an intermediary message passing system between Galaxy and the remote Pulsar. The figure below shows a schematic representation of the system.
+
+![pulsar_australia.png](../../images/pulsar_amqp_schema.png)
+
+**Figure 1: Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server.**
+
+**How it will work:** 
+
+1. Galaxy will send a message to the RabbitMQ server on the Pulsar server's particular queue saying that there is a job to be run and then will monitor the queue for job status updates.
+2. The Pulsar server monitors this queue and when the job appears it will take control of it.
+3. The Pulsar server will then download the required data etc. from the Galaxy server using `curl`.
+4. The Pulsar server will install any required tools/tool dependencies using Conda.
+5. The Pulsar server will start running the job using it's local mechanism and will send a message to the "queue" stating that the job has started.
+6. Once the job has finished running, the Pulsar server will send a message to the queue stating that the job has finished.
+7. Pulsar then sends the output data etc. back to the Galaxy server by `curl` again.
+8. The Galaxy server acknowledges the job status and closes the job.
+
+**Some notes:**
+
+* RabbitMQ uses the Advanced Message Queueing Protocol (AMQP) to communicate with both the Galaxy server and the remote Pulsar VM.
+* Transport of files, meta-data etc. occur via `curl` from the Pulsar end.
+* RabbitMQ is written in erlang and does not add much overhead to the Galaxy VM, although in larger installations, RabbitMQ is commonly installed on a separate VM to Galaxy. e.g. Galaxy Europe, Galaxy Main and Galaxy Australia.
+
+# Installing the RabbitMQ role
+
+We will install the RabbitMQ server on your Galaxy server VM. To do this we will add and configure another *role* to our Galaxy playbook - a slightly modified version of `jasonroyle.rabbitmq`
+
+> ### {% icon hands_on %} Hands-on: Install the modified `jasonroyle.rabbitmq` ansible role
+>
+> 1. From your ansible working directory, edit the `requirements.yml` file and add the following line:
+>
+>    ```yaml
+>    - src: https://github.com/slugger70/ansible-role-rabbitmq
+>      version: 0.0.5
+>      name: jasonroyle.rabbitmq
+>    ```
+>
+> 2. Now install it with:
+>
+>    ```bash
+>    ansible-galaxy install -p roles -r requirements.yml
+>    ```
+>
+{: .hands_on}
+
+# Configuring RabbitMQ
+
+We need to configure RabbitMQ to be able to handle Pulsar messages. To do this we will need to create some queues, Rabbit users, some queue vhosts and set some passwords. We also need to configure rabbit to listen on various interfaces and ports.
+
+## Defining Virtual Hosts
+
+Each set of queues in RabbitMQ are grouped and accessed via virtual hosts. We need to create one of these for the transactions between the Galaxy server and Pulsar server. They are set as an array under the `rabbitmq_vhosts` variable. 
+
+## Defining users
+
+Users need to be defined, given passwords and access to the various queues. We will need to create a user that can access this vhost. We will also create an admin user. The queue will need access to the Pulsar queue vhost. They are set as an array under the `rabbitmq_users` variable with the following structure:
+
+
+```yaml
+rabbitmq_users:
+  - user: username
+    password: somelongpasswordstring
+    vhost: /vhostname
+```
+
+Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag.
+
+## RabbitMQ server config
+
+We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).
+
+**NOTE: We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Default port number is: 5671**
+
+More information about the rabbitmq ansible role can be found [here](https://github.com/Slugger70/ansible-role-rabbitmq).
+
+## Add configuration to Galaxy VM.
+
+> ### {% icon hands_on %} Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.
+>
+> 1. Create or edit the file `group_vars/all.yml` and set your private token:
+>
+>    ```yaml
+>    rabbitmq_password_galaxy_au: areallylongpasswordhere
+>    ```
+>
+>    This is going in a special file because all (two) of our services need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
+>
+>    Replace `areallylongpasswordhere` with a long randomish (or not) string.
+>
+> 2. From your ansible working directory, edit the `group_vars/galaxy.yml` file and add the following lines:
+>
+>    ```yaml
+>    rabbitmq_admin_password: somereallylongpasswordhere
+>
+>    rabbitmq_version: 3.8.9-1
+>    rabbitmq_plugins: rabbitmq_management
+>
+>    rabbitmq_config:
+>      - ssl_listeners:
+>        - "'0.0.0.0'": 5671
+>        - "'127.0.0.1'": 5671
+>      - ssl_options:
+>         - cacertfile: /etc/ssl/certs/fullchain.pem
+>         - certfile: /etc/ssl/certs/cert.pem
+>         - keyfile: /etc/ssl/user/privkey-rabbitmq.pem
+>         - fail_if_no_peer_cert: 'false'
+>
+>    rabbitmq_vhosts:
+>      - /pulsar/galaxy_au
+>
+>    rabbitmq_users:
+>      - user: admin
+>        password: "{{ rabbitmq_admin_password }}"
+>        tags: administrator
+>        vhost: /
+>      - user: galaxy_au
+>        password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
+>        vhosts: /pulsar/galaxy_au        
+>        
+>    ```
+>
+> 3. Update the Galaxy playbook to include the *jasonroyle.rabbitmq* role.
+>
+> 4. Run the playbook.
+>
+> The rabbitmq server daemon will have been installed on your Galaxy VM. You can check it's running with `systemctl status rabbitmq-server`.
+>
+{: .hands_on}
+
+
 
 # Installing the Pulsar Role
 
-We need to create a new ansible playbook to install Pulsar. We will be using a *role* developed by the Galaxy community - `galaxyproject.pulsar`
+Now that we have a message queueing system running on our Galaxy VM, we need to install and configure Pulsar on our remote compute VM. To do this we need to create a new ansible playbook to install Pulsar. We will be using a *role* developed by the Galaxy community - `galaxyproject.pulsar`
 
 > ### {% icon hands_on %} Hands-on: Install the `galaxyproject.pulsar` ansible role
 >
@@ -84,7 +218,7 @@ We need to create a new ansible playbook to install Pulsar. We will be using a *
 >
 >    ```yaml
 >    - src: galaxyproject.pulsar
->      version: 1.0.2
+>      version: 1.0.6
 >    ```
 >
 > 2. Now install it with:
@@ -116,62 +250,45 @@ Then there are a lot of optional variables. They are listed here for information
 `pulsar_create_user`           | Should a user be created for running pulsar?                                                       |
 `pulsar_user`                  | Define the user details                                                                            |
 
-Additional options from Pulsar's server.ini are configurable via the following variables (these options are explained in the Pulsar documentation and server.ini.sample):
-
-Variable               | Description                                                                                                                                                              | Default
-----------             | -------------                                                                                                                                                            | ------
-`pulsar_host`          | This is the interface pulsar will listen to, we will set it to `0.0.0.0`                                                                                                 | localhost
-`pulsar_port`          |                                                                                                                                                                          | 8913
-`pulsar_uwsgi_socket`  | If unset, uWSGI will be configured to listen for HTTP requests on pulsar_host port pulsar_port; If set, uWSGI will listen for uWSGI protocol connections on this socket. | `unset`
-`pulsar_uwsgi_options` | Hash (dictionary) of additional uWSGI options to place in the [uwsgi] section of server.ini                                                                              | `{}`
-
-
 Some of the other options we will be using are:
 
-* We are going to run in RESTful mode so we will need to specify a `private_token` variable so we can "secure" the connection. (For a given value of "secure".)
-* We will be using the uwsgi web server to host the RESTful interface.
 * We will set the tool dependencies to rely on **conda** for tool installs.
+
+* You will need to know the FQDN or IP address of the Galaxy server VM that you installed RabbitMQ on.
 
 > ### {% icon hands_on %} Hands-on: Configure pulsar group variables
 >
-> 1. Create or edit the file `group_vars/all.yml` and set your private token:
->
->    ```yaml
->    private_token: your_private_token_here
->    ```
->
->    This is going in a special file because all (two) of our services need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
->
->    Replace `your_private_token_here` with a long randomish (or not) string.
 >
 > 2. Create a new file in `group_vars` called `pulsarservers.yml` and set some of the above variables as well as some others.
 >
 >    {% raw %}
 >    ```yaml
+>    galaxy_server_url: #please put the your Galaxy server's fqdn or ip address here (or the fqdn or ip address of the RabbitMQ server).
+>
+>    pulsar_root: /mnt/pulsar
 >    pulsar_server_dir: /mnt/pulsar/server
 >    pulsar_venv_dir: /mnt/pulsar/venv
 >    pulsar_config_dir: /mnt/pulsar/config
->    pulsar_staging_dir: /mnt/pulsar/staging
->    pulsar_systemd: true
+>    pulsar_staging_dir: /mnt/pulsar/files/staging
+>    pulsar_persistence_dir: /mnt/pulsar/files/persistent_data
+>    pulsar_dependencies_dir: /mnt/pulsar/deps
 >
->    pulsar_host: 0.0.0.0
->    pulsar_port: 8913
+>    pulsar_pip_install: true
+>    pulsar_pycurl_ssl_library: openssl
+>    pulsar_systemd: true
+>    pulsar_systemd_runner: webless
 >
 >    pulsar_create_user: true
->    pulsar_user: {name: pulsar, shell: /bin/bash}
+>    pulsar_user: {name: ubuntu, shell: /bin/bash}
 >
 >    pulsar_optional_dependencies:
 >      - pyOpenSSL
 >      # For remote transfers initiated on the Pulsar end rather than the Galaxy end
 >      - pycurl
->      # uwsgi used for more robust deployment than paste
->      - uwsgi
 >      # drmaa required if connecting to an external DRM using it.
 >      - drmaa
 >      # kombu needed if using a message queue
 >      - kombu
->      # requests and poster using Pulsar remote staging and pycurl is unavailable
->      - requests
 >      # psutil and pylockfile are optional dependencies but can make Pulsar
 >      # more robust in small ways.
 >      - psutil
@@ -181,15 +298,16 @@ Some of the other options we will be using are:
 >      conda_auto_init: True
 >      conda_auto_install: True
 >      staging_directory: "{{ pulsar_staging_dir }}"
->      private_token: "{{ private_token }}"
+>      persistence_directory: "{{ pulsar_persistence_dir }}"
+>      # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
+>      message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671/pulsar/galaxu_au?ssl=1"
+>      min_polling_interval: 0.5
+>      amqp_publish_retry: True
+>      amqp_publish_retry_max_retries: 5
+>      amqp_publish_retry_interval_start: 10
+>      amqp_publish_retry_interval_step: 10
+>      amqp_publish_retry_interval_max: 60
 >
->    # NGINX
->    nginx_selinux_allow_local_connections: true
->    nginx_servers:
->      - pulsar-proxy
->    nginx_enable_default_server: false
->    nginx_conf_http:
->      client_max_body_size: 5g
 >    ```
 >    {% endraw %}
 >
@@ -200,26 +318,9 @@ Some of the other options we will be using are:
 >    <ip_address of your pulsar server>
 >    ```
 >
-> 4. Create the file `templates/nginx/pulsar-proxy.j2` with the following contents:
->
->    ```nginx
->    server {
->        # Listen on 80, you should secure your server better :)
->        listen 80 default_server;
->        listen [::]:80 default_server;
->
->        location / {
->            proxy_redirect off;
->            proxy_set_header Host $host;
->            proxy_set_header X-Real-IP $remote_addr;
->            proxy_pass http://localhost:8913;
->        }
->    }
->    ```
->
 {: .hands_on}
 
-We will now write a new playbook for the pulsar installation similar to the one we did for the CVMFS installation earlier in the week.
+We will now write a new playbook for the pulsar installation as we are going to install it on a separate VM. We will also install the CVMFS client and the Galaxy CVMFS repos on this machine so Pulsar has the same access to reference data that Galaxy does.
 
 We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
@@ -261,9 +362,6 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >
 >    There are a couple of *pre-tasks* here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.
 >
->    > ### {% icon comment %} Why NGINX?
->    Additionally we install NGINX, you might not have expected this! We used to use Pulsar's webserving directly via uWSGI, but in Python 3 Galaxy, the requests that are sent to Pulsar are chunked, a transfer encoding that is not part of the wsgi spec and unsupported. *Our recommendation*: avoid all of this weirdness and use RabbitMQ as the transport instead. Unfortunately that is currently outside of the scope of this tutorial. [The documentation](https://pulsar.readthedocs.io/en/latest/galaxy_with_rabbitmq_conf.html) covers it in detail.
->    {: .comment}
 >
 {: .hands_on}
 
@@ -386,18 +484,32 @@ There are three things we need to do here:
 > 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
 >
 >    ```xml
->    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarRESTJobRunner" />
+>    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
+>        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/pulsar/galaxy_au?ssl=1</param>
+>        <param id="amqp_ack_republish_time">1200</param>
+>        <param id="amqp_acknowledge">True</param>
+>        <param id="amqp_consumer_timeout">2.0</param>
+>        <param id="amqp_publish_retry">True</param>
+>        <param id="amqp_publish_retry_max_retries">60</param>
+>        <param id="galaxy_url">https://your_galaxy_ip_address_or_fqdn_here</param>
+>        <param id="manager">_default_</param>
+>    </plugin>
 >    ```
 >
->    Then add the Pulsar destination. We will need the ip address of your pulsar server and the `private_token` string you used when you created it.
+> **Make sure you replace *your_galaxy_ip_address_or_fqdn_here* with your Galaxy servers IP adress or FQDN**
 >
 >    Add the following to the `<destinations>` section of your `job_conf.xml` file:
 >
 >    {% raw %}
 >    ```xml
 >    <destination id="pulsar" runner="pulsar_runner" >
->        <param id="url">http://your_ip_address_here:80/</param>
->        <param id="private_token">{{ private_token }}</param>
+>        <param id="default_file_action">remote_transfer</param>
+>        <param id="dependency_resolution">remote</param>
+>        <param id="jobs_directory">/mnt/pulsar/files/staging</param>
+>        <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
+>        <param id="remote_metadata">False</param>
+>        <param id="rewrite_parameters">True</param>
+>        <param id="transport">curl</param>
 >    </destination>
 >    ```
 >    {% endraw %}
