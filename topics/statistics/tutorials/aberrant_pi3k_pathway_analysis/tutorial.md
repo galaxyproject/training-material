@@ -76,7 +76,7 @@ Each feature (gene) is given a rank and score(negative or positive) depending on
 In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that are helpful in for treatment of various cancers. Generate model using from ERBB2,KRAS,PIK3CA,AKT11 oncogenes from ERK/RAS/PI3K signaling axis pathway. 
 have fun!
 
-# **Get data for analysis from classifier to pharmocological correlations**
+## **Get data for analysis from classifier to pharmocological correlations**
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -469,8 +469,8 @@ This step generates plots summarizing various analysis, including heatmaps for d
 
 ## **PanCancer targene cell line predictions**
 In this step we use our classifier information and predict mutational status for various cell lines in CCLE and GDSC data sources.
-![CCLE_targene_celline_classification](../../images/aberrant_pi3k_pathway_analysis/CCLE_classification.png "PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.")
-![GDSC_targene_celline_classification](../../images/aberrant_pi3k_pathway_analysis/GDSC_classification.png "PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSCCell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. ")
+![CCLE_targene_celline_classification](../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png "PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.")
+![GDSC_targene_celline_classification](../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png "PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSCCell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. ")
 
 > ### {% icon hands_on %} Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model
 >
