@@ -23,7 +23,7 @@ contributors:
 ???
 
 - Many tools need reference data
-- E.g. this B W A Mem tool requires a reference genome
+- E.g. this BWAMem tool requires a reference genome
 - But where do you get this data?
 - And how do tools know where to find it?
 
@@ -52,10 +52,10 @@ contributors:
 
 - Here is a more conrete example
 - A reference dataset is required as input
-- A tool (e.g. b w a) is used to build the index
-- The outputs are registered with Galaxy's data registry in an l o c, or lock file
+- A tool (e.g. bwa) is used to build the index
+- The outputs are registered with Galaxy's data registry in a loc file
 - The tool data table xml file has a listing of all of the lock files
-- When a user runs the B W A tool, Galaxy knows where to find this reference data
+- When a user runs the BWA tool, Galaxy knows where to find this reference data
 
 ---
 
@@ -140,7 +140,7 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 - When a tool wants to use the data from those tables, it needs to declare which tables it wants to access (see previous slide)
 - A select type parameter is created for the user's selections
-- The tool knows that the options should come from a b w a mem indexes lock file
+- The tool knows that the options should come from a bwamem indexes lock file
 - These reference datasets are sorted by column 2, probably the name
 - An some validators ensure a helpful message is shown if no data is available
 
@@ -195,11 +195,11 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 ???
 
-- C V M F S and the I D C solves these issues
-- C V M F S provides a global repository of reference data
+- CVMFS and the IDC solves these issues
+- CVMFS provides a global repository of reference data
 - Originally built by CERN for sharing software, we use it for data
 - It's an HTTP based protocol and very firewall friendly
-- All of the use galaxy dot star servers host a C V M F S repository
+- All of the use galaxy dot star servers host a CVMFS repository
 
 ---
 
@@ -211,8 +211,8 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 ???
 
-- The I D C is the other half of the puzzle
-- C V M F S provides the storage, and the I D C provides the data
+- The IDC is the other half of the puzzle
+- CVMFS provides the storage, and the IDC provides the data
 - Join us on github if you are interested
 
 ---
@@ -225,11 +225,11 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 ???
 
-- C V M F S has a hierarchical structure
+- CVMFS has a hierarchical structure
 - At the top is the stratum 0 server, the original copy of the datasets
 - This is replicated to the read-only stratum 1 servers
 - Anyone can connect to these stratum 1 servers
-- And whenever connections fail, C V M F S will fail over to another mirror
+- And whenever connections fail, CVMFS will fail over to another mirror
 - The mirror selection process is based on connection round trip times
 - As a result, the nearest mirror is usually selected.
 
@@ -241,6 +241,6 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 ???
 
-- There are C V M F S servers across the entire world
+- There are CVMFS servers across the entire world
 - The primary mirrors are run by Galaxy project, Galaxy Europe, and Galaxy Australia
 - If one of these mirrors fails, you will still be able to use the reference data

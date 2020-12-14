@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'json'
 
 fn = ARGV[0]
 metadata = YAML.load_file(fn)
@@ -8,8 +9,7 @@ YAML.load_file(ARGV[1]).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
 
-out_subs = File.new(ARGV[2], 'w')
-out_ari = File.new(ARGV[3], 'w')
+out_script = File.new(ARGV[2], 'w')
 
 # Do we have these slides? Yes or no.
 has_questions = metadata.fetch('questions', []).length > 0
@@ -98,9 +98,9 @@ blocks = blocks.map{ |block|
   script_lines
 }
 
-out_subs.write(blocks.map{ |line| line.join(" ") }.join("\n"))
+#out_subs.write(blocks.map{ |line| line.join(" ") }.join("\n"))
 
-blocks = blocks.map { |block|
+blocks2 = blocks.map { |block|
   s = block.map{ |line|
     line = line.split(' ').map{ |w|
       translate(w)
@@ -110,9 +110,6 @@ blocks = blocks.map { |block|
   s
 }
 
-out_ari.write(blocks.map{ |line| line.join(" ") }.join("\n"))
-# Then Translate words for the audio script.
-#
-    # Translate relevant words
-
-
+final = blocks.zip(blocks2)
+dump = JSON.pretty_generate(final)
+out_script.write(dump)

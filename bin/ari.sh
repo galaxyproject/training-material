@@ -1,6 +1,4 @@
 #!/bin/bash
-VOICE_ID=Amy
-POLLY_PARAMS="--engine neural --language-code en-GB --voice-id $VOICE_ID"
 GTN_CACHE="$(pwd)/.jekyll-cache/aws-polly/"
 mkdir -p "$GTN_CACHE"
 
@@ -15,34 +13,6 @@ output=$1; shift; # _site/training-material/topic/admin/tutorials/ansible/slides
 subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
 aws=$1; shift; # Empty or 'upload'
 srcdir="$(dirname "$source")"
-
-# Extract the script from a tutorial
-generate_script(){
-	# The title page
-	./bin/extract-frontmatter.rb "$1" | jq .title -r
-	# If there's a questions page, generate a line reading "Questions"
-	question_count=$(./bin/extract-frontmatter.rb "$1" | jq '.questions | length')
-	if (( question_count > 0 )); then
-		./bin/extract-frontmatter.rb "$1" | jq '.questions[]' -r | paste -s -d' '
-	fi
-
-	# If there's a objectives page, generate a line reading "Objectives"
-	objective_count=$(./bin/extract-frontmatter.rb "$1" | jq '.objectives | length')
-	if (( objective_count > 0 )); then
-		./bin/extract-frontmatter.rb "$1" | jq '.objectives[]' -r | paste -s -d' '
-	fi
-
-	# The contents
-	cat "$1" | \
-		sed -n '/???/p;/???/,/---/{//!p};' | \
-		tr '\n' ' ' | \
-		sed 's/^??? //' | \
-		sed 's/???\s*/\n/g' | \
-		sed 's/\s*$/   /g' | \
-		pandoc -t html | \
-		sed -r 's|</?p>||g;s|<br />$||g' | \
-		sed 's/<[^>]*>/ /g'
-}
 
 cache_speech() {
 	line="$1"; shift;
@@ -71,14 +41,14 @@ cache_speech() {
 ffmpeglog=warning
 
 # Setup output files
-script="${build_dir}/script.txt"
+script="${build_dir}/script.json"
 images="${build_dir}/images.txt"
 sounds="${build_dir}/sounds.txt"
 
 # Generate our script
-generate_script "$source" > "$script"
+ruby bin/extract-slide-script.rb "$source" bin/ari-map.yml "$script"
 
-echo "  There are $(wc -w "$script" | awk '{print $1}') words in the script"
+echo "  There are $(wc -w "$script_sub" | awk '{print $1}') words in the script"
 
 i=0;
 while read -r line; do
@@ -100,7 +70,7 @@ while read -r line; do
 	printf "file 'silence.mp3'\nduration 1.04\n" >> "$sounds"
 
 	i=$((i + 1));
-done < "$script"
+done < "$script_sub"
 
 # Generate images for use.
 echo "  Extracting slides"
