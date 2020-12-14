@@ -9,6 +9,7 @@ questions:
 objectives:
   - "Adding a video to a set of slides"
 time_estimation: "20m"
+topic: extras
 key_points:
   - "Thanks to the GTN, videos are easy to add"
   - "Be mindful of your captions. Short sentences are good!"

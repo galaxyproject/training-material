@@ -9,6 +9,7 @@ objectives:
   - "Create a pull request"
   - "Update a pull request"
 time_estimation: "20m"
+subtopic: contribute
 key_points:
   - "You can't add or push directly to the `master` branch, so you need to create a pull request"
   - "1 pull request = 1 branch"
