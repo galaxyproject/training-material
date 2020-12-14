@@ -620,7 +620,7 @@ install and you don't know whether Galaxy will be ready.
 # More on Tool Management
 
 - Repository structure
-- Tool installation
+- Reference data
 - Dependencies
 
 ---
@@ -720,6 +720,25 @@ link tools with reference files.
 If CVMFS is installed a lot of your reference data needs will be
 taken care of.  There are data manager tools in the toolshed for installing reference
 data for tools.  These can be run from the admin panel or using ephemeris
+
+---
+
+## Suite repositories
+
+- Suites can be used to split up a set of tools into multiple repositories
+  - A suite is a single repository that 'depends' on many others
+  - When you install the suite, all 'dependency repositories' will be installed too
+- With a tweak to `.shed.yml`, [Planemo](https://planemo.readthedocs.io) can upload a directory of tools to the TS as a suite of separate tools
+- Examples: suite_samtools, suite_hicexplorer
+
+???
+
+There are also repositories in the Tool Shed that are suite repositories.  These can be used
+to install multiple tool shed repositories at once.
+
+For example: there are many tools associated
+with samtools owned by the IUC, such as samtools_view or samtools_mpileup.  Installing the suite
+will result in all of these samtools repositories being installed.
 
 ---
 
