@@ -1,15 +1,15 @@
 #!/usr/bin/env ruby
 require 'yaml'
+require 'shellwords'
 require 'json'
 
 fn = ARGV[0]
 metadata = YAML.load_file(fn)
+ARI_MAP = File.expand_path(File.join(__dir__, 'ari-map.yml'))
 WORD_MAP = {}
-YAML.load_file(ARGV[1]).each_pair do |k,v|
+YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
-
-out_script = File.new(ARGV[2], 'w')
 
 # Do we have these slides? Yes or no.
 has_questions = metadata.fetch('questions', []).length > 0
@@ -33,7 +33,7 @@ end_meta = lines[1..-1].index("---") + 2
 contents = lines[end_meta..-1]
 
 # This will be our final script
-blocks = []
+blocks = [[metadata['title']]]
 if has_questions
   blocks.push(metadata['questions'])
 end
@@ -62,6 +62,7 @@ contents.each{ |x|
   end
 }
 blocks.push(current_block)
+blocks.push(["Thank you for watching!"])
 
 def translate(word)
   m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
@@ -82,7 +83,9 @@ blocks = blocks.map{ |block|
   # Remove the - prefix from each line
   script_lines = block.map{ |x| x.delete_prefix("- ") }
   # Remove the leading ???
-  script_lines = script_lines[1..-1]
+  if script_lines[0] == '???'
+    script_lines = script_lines[1..-1]
+  end
   # Remove blank entries
   script_lines = script_lines.filter{ |x| x.length != 0 }
   # Translate specific words as needed
@@ -111,5 +114,4 @@ blocks2 = blocks.map { |block|
 }
 
 final = blocks.zip(blocks2)
-dump = JSON.pretty_generate(final)
-out_script.write(dump)
+print JSON.pretty_generate(final)
