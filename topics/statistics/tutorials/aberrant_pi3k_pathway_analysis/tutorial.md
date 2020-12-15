@@ -25,16 +25,15 @@ contributors:
 {:.no_toc}
 
 Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways 
-({% cite SanchezVega2018 %}). One-third of these tumors possess multiple alterations and have potentially complex phenotypes. Identifying a transcriptomic signature in these tumors would enable personalized therapeutic design strategies. A plethora of evidence suggests complex diseases, like cancer, can be the result of multiple genetic aberrations in biological networks or pathways rather than variation in a single gene. Often starter mutations occur in a key component network that ultimately leads to multigene dysregulation causing hallmark cancer phenotypes {% cite Hanahan2000 %}. Many of these phenotypes are the result of disrupted transcriptional programs that affect the clinical progression and therapeutic responsiveness. Recent progress in exploring these transcriptomic changes in cancer pathogenesis provided useful clues in precision medicine {% cite Bradner2017 %}.
+({% cite SanchezVega2018 %}). One-third of these tumors possess multiple alterations and have potentially complex phenotypes. Identifying a transcriptomic signature in these tumors would enable personalized therapeutic design strategies. A plethora of evidence suggests complex diseases, like cancer, can be the result of multiple genetic aberrations in biological networks or pathways rather than variation in a single gene. Often starter mutations occur in a key component network that ultimately leads to multigene dysregulation causing hallmark cancer phenotypes ({% cite Hanahan2000 %}). Many of these phenotypes are the result of disrupted transcriptional programs that affect the clinical progression and therapeutic responsiveness. Recent progress in exploring these transcriptomic changes in cancer pathogenesis provided useful clues in precision medicine ({% cite Bradner2017 %}).
 
-The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and is commonly altered in various cancers (Fruman and Rommel 2014). Perturbations across this axis can lead to deficiencies in cell-cycle, survival, metabolism, motility and genome stability, triggering hallmark phenotypes of cancer. The constitutive activation and presence of phosphatidylinositol-3,4,5-trisphosphate (PIP3) trigger membrane-bound onco-signalosomes. This presents significant challenges for treatment, as PI3K cascade can be activated in several ways {% cite Zhao2006 %}.
+The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and is commonly altered in various cancers ({% cite Fruman2014 %}). Perturbations across this axis can lead to deficiencies in cell-cycle, survival, metabolism, motility and genome stability, triggering hallmark phenotypes of cancer. The constitutive activation and presence of phosphatidylinositol-3,4,5-trisphosphate (PIP3) trigger membrane-bound onco-signalosomes. This presents significant challenges for treatment, as PI3K cascade can be activated in several ways ({% cite Zhao2006 %}).
+
+Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (TSG) share common phenotypical outcome. However, they often have divergent molecular mechanisms  that drive the outcome. We are interested in capturing mutational specific differential transcriptional outcome among OG and TSG. In Fig-1 Genes in red are oncogenes (have activating or copy gain) and blue are tumor suppressor genes (have inactivating or copy loss).
 
 In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNASeq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA)
 
 ![pi3k_pathway](../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png "Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes, blue text indicates Tumor suppressors genes.")
-
-
-Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (TSG) share common phenotypical outcome. However, they often have divergent molecular mechanisms  that drive the outcome. We are interested in capturing mutational specific differential transcriptional outcome among OG and TSG. In Fig-1 Genes in red are oncogenes (have activating or copy gain) and blue are tumor suppressor genes (have inactivating or copy loss).
 
 > ### Agenda
 >
@@ -47,7 +46,7 @@ Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (T
 
 # **PanCancer aberrant pathway activity analysis (PAPAA)** 
 
-Machine Learning use learning features from datasets and generate predictive models. Extracting transcriptional patterns and learning insights from this abundance of data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer { Men2018 }. Such perturbations in oncogenic pathways can be useful in predicting sensitivity to therapeutic agents { Bild2005 }. Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the pan-cancer data {% cite Way2018 %}. This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from [PanCanAtlas](https://gdc.cancer.gov/about-data/publications/pancanatlas).
+Machine Learning methodologies learn from various features in datasets and generate predictive models. Extracting transcriptional patterns and learning insights of tumor physiology from gene expression data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer ({% cite Men2018 }). Such perturbations in oncogenic pathways can be useful in predicting sensitivity to therapeutic agents ({% cite Bild2005 %}). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the PanCancer data ({% cite Way2018 %}). This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from [PanCanAtlas](https://gdc.cancer.gov/about-data/publications/pancanatlas).
 
 TCGA Pancancer has uniformly processed Multi-omics data including RNASeq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available RNASeq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: [PanCancer aberrant pathway activity analysis](https://github.com/nvk747/papaa.git).
 
@@ -120,7 +119,8 @@ In this tutorial, we made series of steps to generate classification models and 
 {: .hands_on}
 
 ## **PAPAA: PanCancer classifier**
-This first step is designed to generate model with ERBB2,KRAS,PIK3CA,AKT11 genes belonging to a ERK/RAS/PI3K signaling axis pathway (path_genes) and BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS cancer types/diseases(ref: tcga_dictionary.tsv) from The Cancer Genome Atlas (TCGA). Additionally, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance. This steps takes feature information (pancan_rnaseq_freeze.tsv.gz), mutational information (pancan_mutation_freeze.tsv.gz), load of mutations in each samples (mutation_burden_freeze.tsv.gz), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv.gz & copy_number_gain_status.tsv.gz).
+This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2,KRAS,PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV, PRAD,READ,STAD,UCEC, and UCS (ref: tcga_dictionary.tsv).  This step takes feature information (pancan_rnaseq_freeze.tsv.gz), mutational information (pancan_mutation_freeze.tsv.gz), load of mutations in each samples (mutation_burden_freeze.tsv.gz), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv.gz & copy_number_gain_status.tsv.gz) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance. 
+
 ![Prediction metrics for PI3K_OG model](../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png "Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.") 
 ![PI3K_OG Classifier Coefficients](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png "PI3K_OG classifier coefficients represent the genes that impact the classification")
 
@@ -271,7 +271,7 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 {: .comment}
 
 ## **PanCancer apply weights**
-In this step we would like to predict y status (mutational status) using x matrix (gene expression). Subset the x matrix to MAD genes, scaling the expression and add covariate information. A logit transformation will be applied to output probabilities and classifier decisions. 
+In this step we would like to predict 'y' status (mutational status) using 'x' matrix (gene expression). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the expression and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions. 
 
 > ### {% icon hands_on %} Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model
 >
@@ -520,7 +520,7 @@ In this step we use our classifier information and predict mutational status for
 {: .comment}
 
 ## **PanCancer external sample status prediction**
-In this step we use our classifier information and predict mutational status for PI3KCA mutant, WT when PI3K is inhibited using A66. 
+In this step we use our classifier information and predict mutational status for PI3KCA mutant and WT samples.
 ![GSE69822_samples_classification](../../images/aberrant_pi3k_pathway_analysis/external.png ") PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT (blue circles) or having a PIK3CA-H1074R mutation (orange circles).")
 
 > ### {% icon hands_on %} Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model
@@ -574,7 +574,7 @@ In this step we use the classifier derived cell line predictions and use them to
 
 > ### {% icon question %} Tutorial Questions
 >
-> 1. Can you build a classifier for tumor suppressor gene combination in PI3K pathway?
+> 1. Can you build a classifier for tumor suppressor genes (TSG) combination in PI3K pathway?
 > 2. How did the PI3K_TSG model performed compared to PI3K_OG?
 >
 > > ### {% icon solution %} Solution
@@ -589,9 +589,6 @@ In this step we use the classifier derived cell line predictions and use them to
 # **Conclusions**
 {:.no_toc}
 
-In our tutorial, we were able to use machine learning based PI3K oncogene classifier in galaxy to distinguish tumor samples based upon PI3K activity. The shows high accuracy in detecting aberrant PI3K activity in TCGA samples. The model output include top weighted genes that represent transcriptional signature of the tumors with selected gene mutations.  The pan model (all disease gene model) has higher performance for most of individual diseases. We also learned how to work with multi-omic datasets, and perform 5 fold cross-validation to output probability scores for each samples. Further, we can apply the trained models to make predictions on a external expression dataset provided and predict their mutational status. In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals. 
+In our tutorial, we were able to use machine learning based PI3K oncogene classifier in galaxy to distinguish tumor samples based upon PI3K activity. The classifier shows high accuracy in detecting aberrant PI3K activity in TCGA samples. The model output include top weighted genes that represent transcriptional signature of the tumors with selected gene mutations.  The pan model (all disease gene model) when compared to individual disease models have equal or higher performance for most of individual diseases. We also learned how to work with multi-omic datasets, and perform 5 fold cross-validation to output probability scores for each samples. Further, we can apply the trained models to make predictions on a external expression dataset provided and predict their mutational status. In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals. 
 
 ![tutorial_summary](../../images/aberrant_pi3k_pathway_analysis/project_summary.png "Galaxy based Machine Learning approach for Pancancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. ")
-
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
