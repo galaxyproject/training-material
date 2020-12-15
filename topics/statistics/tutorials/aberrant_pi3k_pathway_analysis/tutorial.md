@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: 'PAPAA PI3K_OG: Pancancer Aberrant Pathway Activity Analysis'
+title: 'PAPAA PI3K_OG: PanCancer Aberrant Pathway Activity Analysis'
 zenodo_link: https://zenodo.org/record/4306639#.X9FJF-lKgZE
 questions:
 - How to predict aberrant pathway activity in The Cancer Genome Atlas(TCGA) using
@@ -29,7 +29,7 @@ Signaling pathways are among the most commonly altered across different tumor ty
 
 The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and is commonly altered in various cancers (Fruman and Rommel 2014). Perturbations across this axis can lead to deficiencies in cell-cycle, survival, metabolism, motility and genome stability, triggering hallmark phenotypes of cancer. The constitutive activation and presence of phosphatidylinositol-3,4,5-trisphosphate (PIP3) trigger membrane-bound onco-signalosomes. This presents significant challenges for treatment, as PI3K cascade can be activated in several ways { Zhao2006 }.
 
-In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNASeq information and mutational and copy number information of following frequently altered genes. We named this tutorial as Pancancer Aberrant Pathway Activity Analysis (PAPAA)
+In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA dataset using RNASeq information and mutational and copy number information of following frequently altered genes. We named this tutorial as PanCancer Aberrant Pathway Activity Analysis (PAPAA)
 
 ![pi3k_pathway](../../images/aberrant_pi3k_pathway_analysis/pi3k_pathway.png "Genes used in this study from ERK/RAS/PI3K pathway. Red text indicates Oncogenes, blue text indicates Tumor suppressors genes.")
 
@@ -45,11 +45,11 @@ Cancer driver genes comprising both oncogenes (OG) and Tumor suppressor genes (T
 >
 {: .agenda}
 
-# **Pancancer aberrant pathway activity analysis (PAPAA)** 
+# **PanCancer aberrant pathway activity analysis (PAPAA)** 
 
 Machine Learning use learning features from datasets and generate predictive models. Extracting transcriptional patterns and learning insights from this abundance of data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer { Men2018 }. Such perturbations in oncogenic pathways can be useful in predicting sensitivity to therapeutic agents { Bild2005 }. Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the pan-cancer data { Way2018 }. This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from [PanCanAtlas](https://gdc.cancer.gov/about-data/publications/pancanatlas).
 
-TCGA Pancancer has uniformly processed Multi-omics data including RNASeq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available RNASeq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: [Pancancer aberrant pathway activity analysis](https://github.com/nvk747/papaa.git).
+TCGA Pancancer has uniformly processed Multi-omics data including RNASeq, copy number and mutational data. It covers 33 different cancer types and having information from over 10000 samples. We used publicly available RNASeq, mutation and CNV data sets from TCGA. Description and processing details of these data sets are listed at this site: [PanCancer aberrant pathway activity analysis](https://github.com/nvk747/papaa.git).
 
 ***Machine learning methodology***
 Logistic regression is a kind of machine learning approach where statistical analysis that is used to predict the outcome of a dependent variable based on prior observations. Changes in gene expression are directly connected to alterations/mutations in genes. We used above approach to predict mutational status given the gene expression. Optimizing to the above prediction of mutational status with gene expression variable, we used elastic net penalty with gradient descent algorithm is used to find the optimal cost function by going over a number of iterations. The objective of the classifier is to determine the probability a given sample (*i*) has a aberrant gene event given the sample’s RNAseq measurements (*Xi*). In order to achieve the objective, the classifier learns a vector of coefficients or gene-specific weights (*w*) that optimize the following penalized logistic function.
@@ -155,7 +155,7 @@ This first step is designed to generate model with ERBB2,KRAS,PIK3CA,AKT11 genes
 >    - *"Decision to drop covariate information from X"*: `No`
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs
 >    - \--genes 	comma separated string of HUGO symbols for target genes or targenes_list.csv file
 >    - \--diseases 	comma separated string of disease types/TCGA acronyms for classifier
 >    - \--folds 	number of cross validation folds
@@ -219,7 +219,7 @@ This step is designed to generate individual pan-within models for each individu
 >    - *"Number of MAD genes to include in classifier"*: `8000`
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `within_disease_analysis.py` inputs
 >    - \--genes 	Comma separated string of HUGO symbols for target genes or targenes_list.csv file
 >    - \--diseases 	Comma separated diseases list in a file
 >    - \--alphas 	The alphas for parameter sweep
@@ -254,13 +254,13 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 >
 > 1. {% tool [PAPAA: PanCancer compare within models](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer classifier** {% icon tool %})
->    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: PanCancer classifier** {% icon tool %})
+>    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pan_within classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})
->    - {% icon param-file %} *"pan_within classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})
+>    - {% icon param-file %} *"pan_within classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer within disease analysis** {% icon tool %})
 >    - *"Would you want to compare given model with alt gene model?"*: `do not do alt gene`
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs
 >    - \--pancan_model 	location of pan and pan-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s  
 >    - \--alt_model 	location of alt and alt-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s
 {: .details}
@@ -288,7 +288,7 @@ In this step we would like to predict y status (mutational status) using x matri
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `apply_weights.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `apply_weights.py` inputs
 >    - \--classifier_summary 	String of the location of classifier_summary.txt file
 >    - \--copy_number 	Supplement Y matrix with copy number events
 >    - \--x_matrix 	Filename of features to use in model
@@ -315,7 +315,7 @@ In this step we generate visualization plots using classifier decision function 
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `visualize_decisions.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `visualize_decisions.py` inputs
 >    - \--classifier_decisions 	String of the folder location of classifier_decisions.tsv
 >    - \--custom  comma separated list of columns to plot
 >    (optional: True)
@@ -343,7 +343,7 @@ In this step we combined variant level information for each mutation combining w
 >    - {% icon param-file %} *"Filename of raw mut MAF"*: `mc3.v0.2.8.PUBLIC.maf` (Input dataset)
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs
 >    - \--classifer_decisions 	String of the location of folder containing classifier_decisions.tsv
 >    - \--path_genes 	comma separated string of HUGO symbols for all genes in the pathway or Pathway genes list file
 >    - \--filename_copy_loss 	Filename of copy number loss
@@ -372,7 +372,7 @@ In this step we combine classifier weights,copy number information, recalculate 
 >    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `targene_alternative_genes_pathwaymapper.py` inputs
 >    - \--genes 	comma separated string of HUGO symbols for target genes or targenes_list.csv file
 >    - \--path_genes comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file
 >    - \--classifier_decisions 	String of the location of classifier scores/alt_folder
@@ -410,7 +410,7 @@ This step generates combined heatmap from mutation and copy number information a
 >    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_pathway_count_heatmaps.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `targene_pathway_count_heatmaps.py` inputs
 >    - \--genes 	comma separated string of HUGO symbols for target genes or targenes_list.csv file
 >    - \--path_genes 	comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file
 >    - \--classifier_decisions 	String of the location of classifier scores/alt_folder
@@ -447,7 +447,7 @@ This step generates plots summarizing various analysis, including heatmaps for d
 >    - {% icon param-file %} *"pancancer gene metric ranks"*: `all_gene_metric_ranks.tsv` (output of **PAPAA: PanCancer alternative genes pathwaymapper** {% icon tool %})
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_summary_figures.R` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `targene_summary_figures.R` inputs
 >    - \--classifier_summary 	String of the location of classifier data
 >    - \--seed 	value specifies the initial value of the random number seed
 {: .details}
@@ -490,7 +490,7 @@ In this step we use our classifier information and predict mutational status for
 >    - {% icon param-file %} *"Filename for gdsc2 pharmacological data file"*: `gdsc2_ccle_pharm_fitted_dose_data.txt` (Input dataset)
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_cell_line_predictions.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `targene_cell_line_predictions.py` inputs
 >    - \--targenes        comma separated string of HUGO symbols for target genes or targenes_list.csv file
 >    - \--path_genes      comma separated string of HUGO symbols for all genes in the target pathway or path_genes.csv file
 >    - \--classifier      String of the location of classifier_summary file
@@ -532,7 +532,7 @@ In this step we use our classifier information and predict mutational status for
 >    - {% icon param-file %} *"given mutational status"*: `sign.txt` (Input dataset)
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs
 >    - \--classifier_summary 	String of the location of classifier scores file
 >    - \--expression_file 	File path for external sample expression data file (fpkm/rpkm/rlog/vlog/nlog values)
 >    - \--status_sign Provide sign for tumor/mutant [1] or normal/WT [-1] along with sorted sample names
@@ -556,7 +556,7 @@ In this step we use the classifier derived cell line predictions and use them to
 >    - {% icon param-file %} *"Filename list of compounds"*: `compounds_of_interest.txt` (Input dataset)
 {: .hands_on}
 
-> ### {% icon details %} Pancancer Aberrant Pathway Activity Analysis `targene_pharmacology.R` inputs
+> ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `targene_pharmacology.R` inputs
 >    - \--classifier_results 	String of the location of classifier folder
 >    - \--compound 	Filename of list of pharmacological compounds for evaluation
 {: .details}
