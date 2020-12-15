@@ -66,6 +66,7 @@ def synthesize(line, engine)
     # So we put in a check that the duration hasn't done something crazy, and
     # if it is add something to the end which seems to short-circuit that
     # error.
+    puts "Strange: line was too long"
     call_engine(engine, line + '.', mp3)
     duration = find_duration(mp3)
   end

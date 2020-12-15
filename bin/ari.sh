@@ -32,6 +32,7 @@ srcdir="$(dirname "$source")"
 # Metadata
 meta_authors="$(ruby bin/extract-frontmatter.rb topics/admin/tutorials/cvmfs/slides.html | jq '.contributors | join(", ")' -r)"
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
+REVISION="$(cut -c1-12 < .git/$(cut -f 2 -d' ' .git/HEAD))"
 
 # We'll cache audio locally.
 ffmpeglog=warning
@@ -86,7 +87,7 @@ ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264
 echo "  Muxing"
 ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \
 	-movflags +faststart \
-	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$HOST/$USER/$engine" \
+	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$REVISION/$USER/$engine" \
 	-metadata network="Galaxy Training Network"\
 	-metadata artist="$meta_authors" \
 	-metadata title="$meta_title" \
