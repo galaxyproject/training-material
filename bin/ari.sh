@@ -74,6 +74,7 @@ ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264
 # Mux it together
 echo "  Muxing"
 ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \
+	-movflags +faststart \
 	-c:v copy -c:a copy -c:s mov_text -map 0:v:0 -map 1:a:0 -map 2 -b:a 192k "${build_dir}/out.mp4"
 
 # Check if output dir needs to be created
