@@ -12,8 +12,12 @@ YAML.load_file(ARI_MAP).each_pair do |k,v|
 end
 
 # Do we have these slides? Yes or no.
-has_questions = metadata.fetch('questions', []).length > 0
-has_objectives = metadata.fetch('objectives', []).length > 0
+m_qs = metadata.fetch('questions', [])
+m_qs = [] if m_qs.nil?
+m_os = metadata.fetch('objectives', [])
+m_os = [] if m_os.nil?
+has_questions = m_qs.length > 0
+has_objectives = m_os.length > 0
 
 # Parse the material for the slide notes
 file = File.open(fn)

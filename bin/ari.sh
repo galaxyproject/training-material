@@ -43,6 +43,7 @@ images="${build_dir}/images.txt"
 sounds="${build_dir}/sounds.txt"
 
 # Generate our script
+echo ruby bin/ari-extract-script.rb "$source"
 ruby bin/ari-extract-script.rb "$source" > "$script"
 
 # Now explode that into individual lines, synthesize, and re-assemble them into
