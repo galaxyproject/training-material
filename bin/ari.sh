@@ -1,5 +1,5 @@
 #!/bin/bash
-set -euo pipefail
+set -eo pipefail
 
 GTN_CACHE="$(pwd)/.jekyll-cache/aws-polly/"
 mkdir -p "$GTN_CACHE"
@@ -7,10 +7,10 @@ mkdir -p "$GTN_CACHE"
 # Setup our Engine
 mozilla_port=$(ss -lptn 'sport = :5002' | wc -l)
 if (( mozilla_port > 1 )); then
-	engine="--mozilla"
+	engine="mozilla"
 	echo "Using MozillaTTS for speech"
 elif [[ -n "$AWS_ACCESS_KEY_ID" ]]; then
-	engine="--aws"
+	engine="aws"
 	echo "Using AWS for speech (this will cost money!)"
 else
 	echo "Cannot run, no speech engine setup. "
@@ -42,7 +42,7 @@ ruby bin/ari-extract-script.rb "$source" > "$script"
 
 # Now explode that into individual lines, synthesize, and re-assemble them into
 # our images.txt/sounds.txt scripts
-ruby bin/ari-prep-script.rb "${script}" "${build_dir}"
+ruby bin/ari-prep-script.rb "${script}" "${build_dir}" "${engine}"
 
 
 # Generate images for use.
@@ -51,7 +51,7 @@ convert -density 300 "${slides}" "${build_dir}/slides.%03d.png"
 
 # Generate a pause of 1 seconds, used after slides.
 sox -n -r 44100 -c 2 "${build_dir}/silence-unfixed.mp3" trim 0 1
-ffmpeg -i "${build_dir}/silence-unfixed.mp3"  "${build_dir}/silence.mp3"
+ffmpeg -loglevel $ffmpeglog -i "${build_dir}/silence-unfixed.mp3"  "${build_dir}/silence.mp3"
 
 # Build components
 echo "  Building Subtitles"
@@ -61,16 +61,23 @@ echo "  Building Audio"
 
 
 # Concatenate (literally) the files. This is how the concat filter (not
-# demuxer!!!) works in ffmpeg. It makes NO sense.
+# demuxer!!!) works in ffmpeg. It makes NO sense. but it gets the right output time.
+# If you use the concat demuxer, you get something that's off by ~3 seconds
+# over 250 seconds. It's not clear what generates this discrepancy but it's
+# solved by first concatenating them all, then transcoding once within the same
+# format (still wrong time) then transcoding again to the new format (finally
+# correct.)
 for f in $(cat "${build_dir}/sounds.txt" | grep '^file' | cut -f2 -d' ' | sed "s/'//g"); do
 	cat "${build_dir}/$f" >> "${build_dir}/ugly.mp3"
 done
 # This conversion step fixes the headers (still the wrong timestamps)
 ffmpeg -loglevel fatal -i "${build_dir}/ugly.mp3" "${build_dir}/ugly2.mp3"
+
 # Finally it's right.
 ffmpeg -loglevel fatal -i "${build_dir}/ugly2.mp3" "${build_dir}/tmp.m4a"
 echo "  Building Video"
 ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264 "${build_dir}/tmp.mp4"
+
 # Mux it together
 echo "  Muxing"
 ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \

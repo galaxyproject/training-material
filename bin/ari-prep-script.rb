@@ -10,6 +10,7 @@ require 'json'
 
 script = JSON.parse(File.open(ARGV[0], 'r').read)
 dir = ARGV[1]
+engine = ARGV[2]
 
 # For each line in the script, iterate
 # The spoken line is the one that's hashed. (2nd col)
@@ -26,7 +27,7 @@ final_script = script.map.with_index{ |slide, idx|
     handle.write(subtitle)
 
     # Synthesize and copy to the temp dir
-    mp3, json, duration = synthesize(spoken, 'mozilla')
+    mp3, json, duration = synthesize(spoken, engine)
     puts "\tSynthesizing: #{spoken}"
     FileUtils.cp(mp3, File.join(dir, digest + '.mp3'))
     FileUtils.cp(json, File.join(dir, digest + '.json'))

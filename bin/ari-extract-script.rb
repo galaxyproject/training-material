@@ -68,7 +68,7 @@ def translate(word)
   m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
 
   if WORD_MAP.key?(word) then
-    fixed = WORD_MAP[word]
+    return WORD_MAP[word]
   elsif m[2] then
     fixed = WORD_MAP.fetch(m[2].downcase, m[2])
   else
@@ -88,7 +88,7 @@ blocks = blocks.map{ |block|
     script_lines = script_lines[1..-1]
   end
   # Remove blank entries
-  script_lines = script_lines.filter{ |x| x.length != 0 }
+  script_lines = script_lines.select{ |x| x.length != 0 }
   script_lines = script_lines.map{ |line|
     line.delete_prefix("- ")
     # If they don't end with punctuation, fix it.
