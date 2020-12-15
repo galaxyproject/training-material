@@ -29,6 +29,10 @@ output=$1; shift; # _site/training-material/topic/admin/tutorials/ansible/slides
 subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
 srcdir="$(dirname "$source")"
 
+# Metadata
+meta_authors="$(ruby bin/extract-frontmatter.rb topics/admin/tutorials/cvmfs/slides.html | jq '.contributors | join(", ")' -r)"
+meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
+
 # We'll cache audio locally.
 ffmpeglog=warning
 
@@ -82,7 +86,14 @@ ffmpeg -loglevel $ffmpeglog -f concat -i "$images" -pix_fmt yuv420p -vcodec h264
 echo "  Muxing"
 ffmpeg -loglevel $ffmpeglog -i "${build_dir}/tmp.mp4" -i "${build_dir}/tmp.m4a" -i "${build_dir}/tmp.srt" \
 	-movflags +faststart \
-	-c:v copy -c:a copy -c:s mov_text -map 0:v:0 -map 1:a:0 -map 2 -b:a 192k "${build_dir}/out.mp4"
+	-metadata comment="build-tag:$(date --rfc-3339=seconds)/$HOST/$USER/$engine" \
+	-metadata network="Galaxy Training Network"\
+	-metadata artist="$meta_authors" \
+	-metadata title="$meta_title" \
+	-c:v copy -c:a copy -c:s mov_text \
+	-map 0:v:0 -map 1:a:0 -map 2 \
+	-metadata:s:s:0 language=English -disposition:s:s:0 forced \
+	-b:a 192k "${build_dir}/out.mp4"
 
 # Check if output dir needs to be created
 mkdir -p "$(dirname "$output")"

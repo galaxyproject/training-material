@@ -12,6 +12,24 @@ GTN_CACHE = File.expand_path(File.join(File.expand_path(__dir__), '..', '.jekyll
 AWS_PARAMS = ["--engine", "neural", "--language-code", "en-GB", "--voice-id", "Amy"]
 FileUtils.mkdir_p GTN_CACHE
 
+def call_engine(engine, line, mp3)
+  if engine == "aws" then
+    # Synthesize
+    system('aws', 'polly', 'synthesize-speech', *AWS_PARAMS, '--output-format', 'mp3', '--text', line, mp3) or raise "Failed to speak #{mp3}"
+  elsif engine == "mozilla" then
+    raw = Tempfile.new('synth-raw')
+    system('curl', '--silent', '-G', '--output', raw.path, 'http://localhost:5002/api/tts?text=' + CGI.escape(line))
+    system('ffmpeg', '-loglevel', 'error', '-i', raw.path, '-y', mp3)
+  end
+end
+
+def find_duration(mp3)
+  stdout, status = Open3.capture2('ffprobe', '-loglevel', 'warning', '-show_format', '-show_streams', '-print_format', 'json', '-i', mp3)
+  data = JSON.parse(stdout)
+  duration = data['format']['duration'].to_f
+  return duration
+end
+
 def synthesize(line, engine)
   digest = Digest::MD5.hexdigest line
   mp3 = File.join(GTN_CACHE, "#{engine}-#{digest}.mp3")
@@ -21,22 +39,31 @@ def synthesize(line, engine)
     return mp3, json, duration.to_f
   end
 
+  # Call our engine
+  call_engine(engine, line, mp3)
+  duration = find_duration(mp3)
 
-  if engine == "aws" then
-    # Synthesize
-    system('aws', 'polly', 'synthesize-speech', *AWS_PARAMS, '--output-format', 'mp3', '--text', line, mp3) or raise "Failed to speak #{mp3}"
-  elsif engine == "mozilla" then
-    raw = Tempfile.new('synth-raw')
-    system('curl', '--silent', '-G', '--output', raw.path, 'http://localhost:5002/api/tts?text=' + CGI.escape(line))
-    system('ffmpeg', '-loglevel', 'error', '-i', raw.path, '-y', mp3)
+  if duration > 20
+    # Helena managed to find a specific bad string which, when fed to Mozilla's
+    # TTS would generate
+    #
+    # In: Some important terms you should know.
+    # Out Some important terms you should know know know know know know know know know know know know know know know know ...
+    #
+    # So we put in a check that the duration hasn't done something crazy, and
+    # if it is add something to the end which seems to short-circuit that
+    # error.
+    call_engine(engine, line + '.', mp3)
+    duration = find_duration(mp3)
+  end
+
+  if duration > 20
+    # Or maybe they just wrote a super long sentence. Or maybe we need to update the cutoff time.
+    puts "ERROR: #{duration} of line is bad: #{line}"
   end
 
   # Now collect metadata for JSON
   json_handle = File.open(json, 'w')
-  stdout, status = Open3.capture2('ffprobe', '-loglevel', 'warning', '-show_format', '-show_streams', '-print_format', 'json', '-i', mp3)
-  data = JSON.parse(stdout)
-  duration = data['format']['duration'].to_f
-
   json_handle.write(JSON.generate({"time": 0, "type": "sentence", "start": 0, "end": duration, "value": line}))
   json_handle.close
 

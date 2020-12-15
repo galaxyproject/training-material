@@ -48,7 +48,6 @@ def script2timings(d):
 
 def main(d, fmt="webvtt"):
     (ordering, timings) = script2timings(d)
-    print(ordering, timings)
 
     if fmt == "webvtt":
         print("WEBVTT\n\n")
