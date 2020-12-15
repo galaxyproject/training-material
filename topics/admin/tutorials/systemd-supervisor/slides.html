@@ -93,7 +93,7 @@ WantedBy=multi-user.target
 - and if it does not start within 10 seconds, something is wrong.
 - We provide a command that should be run.
 - And some environment variables like the path or home directory.
-- A memory limit is provided, which systemd enforces through c groups.
+- A memory limit is provided, which systemd enforces through cgroups.
 - next, the process should always restart if it crashes.
 - And various accounting is enabled.
 
@@ -149,8 +149,8 @@ The former recommended method for managing multiple Galaxy processes
 
 ???
 
-- before systemd there was supervisor.
-- we do not use this as much anymore.
+- Before systemd there was supervisor.
+- We do not use this as much anymore.
 
 ---
 # Supervisor
@@ -165,8 +165,8 @@ A process manager written in Python
 
 ???
 
-- supervisor was a process manager written in python.
-- it could run as an unprivileged user, and was similar to systemd.
+- Supervisor was a process manager written in python.
+- It could run as an unprivileged user, and was similar to systemd.
 
 ---
 class: smaller
@@ -195,8 +195,8 @@ proftpd                          RUNNING    pid 1916, uptime 8 days, 6:44:21
 
 ???
 
-- the supervisor status command would show running parent processes.
-- very similar to systemd
+- The supervisor status command would show running parent processes.
+- Very similar to systemd
 
 ---
 # Supervisor - program
@@ -243,5 +243,5 @@ $ systemctl status supervisor
 
 ???
 
-- These two could be combined
-- systemd could start supervisor.
+- These two can be combined.
+- systemd can start supervisor, if you have reason to need supervisor.

@@ -14,10 +14,15 @@ end
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
 m_qs = [] if m_qs.nil?
+has_questions = m_qs.length > 0
+
 m_os = metadata.fetch('objectives', [])
 m_os = [] if m_os.nil?
-has_questions = m_qs.length > 0
 has_objectives = m_os.length > 0
+
+m_kp = metadata.fetch('key_points', [])
+m_kp = [] if m_kp.nil?
+has_keypoints = m_kp.length > 0
 
 # Parse the material for the slide notes
 file = File.open(fn)
@@ -66,6 +71,9 @@ contents.each{ |x|
   end
 }
 blocks.push(current_block)
+if has_keypoints
+  blocks.push(metadata['key_points'])
+end
 blocks.push(["Thank you for watching!"])
 
 def translate(word)
@@ -95,6 +103,7 @@ blocks = blocks.map{ |block|
   script_lines = script_lines.select{ |x| x.length != 0 }
   script_lines = script_lines.map{ |line|
     line.delete_prefix("- ")
+    line.gsub!(/`/, '"')
     # If they don't end with punctuation, fix it.
     if ! (line.end_with?('.') or line.end_with?('?') or line.end_with?('!'))
       line += '.'
