@@ -15,16 +15,29 @@ FileUtils.mkdir_p GTN_CACHE
 def call_engine(engine, line, mp3)
   if engine == "aws" then
     # Synthesize
-    system('aws', 'polly', 'synthesize-speech', *AWS_PARAMS, '--output-format', 'mp3', '--text', line, mp3) or raise "Failed to speak #{mp3}"
+    _, stderr, err = Open3.capture3('aws', 'polly', 'synthesize-speech', *AWS_PARAMS, '--output-format', 'mp3', '--text', line, mp3)
+    if err.exited? and err.exitstatus > 0
+      puts "ERROR: #{stderr}"
+      exit 1
+    end
   elsif engine == "mozilla" then
     raw = Tempfile.new('synth-raw')
-    system('curl', '--silent', '-G', '--output', raw.path, 'http://localhost:5002/api/tts?text=' + CGI.escape(line))
-    system('ffmpeg', '-loglevel', 'error', '-i', raw.path, '-y', mp3)
+    _, stderr, err = Open3.capture3('curl', '--silent', '-G', '--output', raw.path, 'http://localhost:5002/api/tts?text=' + CGI.escape(line))
+    if err.exited? and err.exitstatus > 0
+      puts "ERROR: #{stderr}"
+      exit 1
+    end
+
+    _, stderr, err = Open3.capture3('ffmpeg', '-loglevel', 'error', '-i', raw.path, '-y', mp3)
+    if err.exited? and err.exitstatus > 0
+      puts "ERROR: #{stderr}"
+      exit 1
+    end
   end
 end
 
 def find_duration(mp3)
-  stdout, status = Open3.capture2('ffprobe', '-loglevel', 'warning', '-show_format', '-show_streams', '-print_format', 'json', '-i', mp3)
+  stdout, _ = Open3.capture2('ffprobe', '-loglevel', 'error', '-show_format', '-show_streams', '-print_format', 'json', '-i', mp3)
   data = JSON.parse(stdout)
   duration = data['format']['duration'].to_f
   return duration

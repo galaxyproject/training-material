@@ -56,7 +56,7 @@ contributors:
 - A reference dataset is required as input
 - A tool (e.g. bwa) is used to build the index
 - The outputs are registered with Galaxy's data registry in a loc file
-- The tool data table xml file has a listing of all of the lock files
+- The tool data table xml file has a listing of all of the loc files
 - When a user runs the BWA tool, Galaxy knows where to find this reference data
 
 ---
@@ -74,7 +74,7 @@ contributors:
 
 - Data managers are special tools in Galaxy
 - They create the reference data
-- And update the lock files
+- And update the loc files
 
 ---
 
@@ -95,7 +95,7 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 ???
 
-- Here is an example lock file
+- Here is an example loc file
 - They list all of the indexes of a specific type
 - Some of these indexes will be tool specific like this one, and some will be more general like a list of genomes
 - This file is updated by the data manager.
@@ -118,8 +118,8 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 ???
 
-- The tool data table conf file lists table names, and their associated lock file
-- Additionally it defines the meaning of each column in the lock file
+- The tool data table conf file lists table names, and their associated loc file
+- Additionally it defines the meaning of each column in the loc file
 
 ---
 
@@ -142,8 +142,8 @@ mm10    mm10    Mouse (mm10)    /genomes/mm10/bwa_mem_index/mm10/mm10.fa
 
 - When a tool wants to use the data from those tables, it needs to declare which tables it wants to access (see previous slide)
 - A select type parameter is created for the user's selections
-- The tool knows that the options should come from a bwamem indexes lock file
-- These reference datasets are sorted by column 2, probably the name
+- The tool knows that the options should come from a bwamem indexes loc file
+- These reference datasets are sorted by column 2, the name
 - An some validators ensure a helpful message is shown if no data is available
 
 ---

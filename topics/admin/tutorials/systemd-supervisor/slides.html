@@ -18,7 +18,7 @@ Used to bootstrap the user space and to manage system processes after booting
 
 ???
 
-- system D is a popular linux init system.
+- systemd is a popular linux init system.
 - It manages processes and ensures they are running after boot.
 - It can restart processes when they crash.
 
@@ -37,7 +37,7 @@ INI config format
 
 ???
 
-- system d replaces many previous alternative init systems
+- systemd replaces many previous alternative init systems
 - it is quite easy to work with
 
 ---
@@ -51,7 +51,7 @@ INI config format
 - systemd has two separate pools of service definitions.
 - in lib are the system and package provided definitions.
 - in etc are the user provided definitions.
-- Galaxy's will be in etc.
+- Galaxy's will be in /etc.
 
 ---
 # systemd - Galaxy service unit
@@ -93,7 +93,7 @@ WantedBy=multi-user.target
 - and if it does not start within 10 seconds, something is wrong.
 - We provide a command that should be run.
 - And some environment variables like the path or home directory.
-- A memory limit is provided, which system d enforces through c groups.
+- A memory limit is provided, which systemd enforces through c groups.
 - next, the process should always restart if it crashes.
 - And various accounting is enabled.
 
@@ -108,7 +108,7 @@ WantedBy=multi-user.target
 
 ???
 
-- the system c t l command lets you interact with the service.
+- the systemctl command lets you interact with the service.
 - You can start, stop, or restart the service.
 - You can enable or disable the service if you do or do not want it to start at boot.
 
@@ -136,9 +136,9 @@ $ systemctl status galaxy
 - Here is an example output of the status command.
 - The word enabled in the loaded line shows that the service will start at boot
 - The service is running since 1 day and 20 hours.
-- We are told the main p i d.
+- We are told the main PID.
 - And shown the memory usage next to the memory usage limit.
-- systemd starts services in a c group, so all children can be kept track of.
+- systemd starts services in a cgroup, so all children can be kept track of.
 - Child processes which are started by the parent process are likewise listed.
 
 ---
@@ -196,7 +196,7 @@ proftpd                          RUNNING    pid 1916, uptime 8 days, 6:44:21
 ???
 
 - the supervisor status command would show running parent processes.
-- very similar to system d
+- very similar to systemd
 
 ---
 # Supervisor - program
@@ -220,7 +220,7 @@ stopsignal      = INT
 - Here it is named galaxy.
 - A command and working directory are provided.
 - A user to run the command is listed.
-- comparable to system d service definitions.
+- comparable to systemd service definitions.
 
 ---
 # Supervisor + systemd
@@ -244,4 +244,4 @@ $ systemctl status supervisor
 ???
 
 - These two could be combined
-- system d could start supervisor.
+- systemd could start supervisor.
