@@ -77,7 +77,7 @@ Every sentence must end with punctuation like `.` or `?` or even `!` if you're f
 
 ### Abbreviations
 
-These arae generally fine as-is. Make sure they are all caps though.
+These are generally fine as-is. Make sure they are all caps though.
 
 > **Good**
 > This role deploys CVMFS.
@@ -97,7 +97,7 @@ nginx      | engine X
 gxadmin    | GX admin
 /etc       | / E T C
 
-This is the same for the many terms we read them differently than they're written, e.g. 'src' vs 'source'. Most of us would pronounce it like the latter, even though it isn't spelt that way. Our speaking robot doesn't know what we mean, so we need to spell it out properly.
+The same applies to the many terms we read differently from how they are written, e.g. 'src' vs 'source'. Most of us would pronounce it like the latter, even though it isn't spelt that way. Our speaking robot doesn't know what we mean, so we need to spell it out properly.
 
 So we write the definition in the [`bin/ari-map.yml`](https://github.com/galaxyproject/training-material/blob/master/bin/ari-map.yml) file.
 
