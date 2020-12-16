@@ -57,7 +57,7 @@ contents.each{ |x|
   # Check whether we're in the notes or out of them.
   if x == "???" then
     in_notes = true
-  elsif x == "---" then
+  elsif x == "---" or x == "--" then
     if in_notes then
       blocks.push(current_block)
       current_block = []
