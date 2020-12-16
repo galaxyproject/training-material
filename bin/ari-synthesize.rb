@@ -66,7 +66,13 @@ def synthesize(line, engine)
     # So we put in a check that the duration hasn't done something crazy, and
     # if it is add something to the end which seems to short-circuit that
     # error.
-    puts "Strange: line was too long"
+    #
+    # I've reported this upstream but the response was not useful, apparently
+    # this is an "expected failure mode".
+    #
+    # https://github.com/synesthesiam/docker-mozillatts/issues/9
+    # https://discourse.mozilla.org/t/sentences-which-trigger-an-endless-loop/72261/8
+    STDERR.puts "Strange: line was too long"
     call_engine(engine, line + '.', mp3)
     duration = find_duration(mp3)
   end
