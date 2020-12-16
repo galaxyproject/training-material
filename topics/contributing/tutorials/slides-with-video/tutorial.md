@@ -101,6 +101,16 @@ The same applies to the many terms we read differently from how they are written
 
 So we write the definition in the [`bin/ari-map.yml`](https://github.com/galaxyproject/training-material/blob/master/bin/ari-map.yml) file.
 
+### Other Considerations
+
+(*Written 2020-12-16, things may have changed since.*)
+
+Be sure to check the pronunciation of the slides. There are known issues with [Homographs](https://en.wikipedia.org/wiki/Homograph), words spelt the same but pronounced differently often depending on context. Consider "read" for a classic example, or ["analyses"](https://en.wiktionary.org/wiki/analyses#English) for one that comes up often in the GTN. "She analyses data" and "Multiple analyses" are pronounced quite differently based on their usage in sentences. See the [wiktionary](https://en.wiktionary.org/wiki/analyses#English) page for more information, or the [list of English homographs](https://en.wikipedia.org/wiki/List_of_English_homographs) you might want to be aware of.
+
+This becomes an issue for AWS Polly and Mozilla's TTS which both don't have sufficient context sometimes to choose between the two pronunciations. You'll find that "many analyses" is pronounced correctly while "multiple analyses" isn't.
+
+Oftentimes the services don't understand part of speech, so by adding adjectives to analyses, you confuse the engine in to thinking it should be the third person singular pronunciation. This is probably because it only has one or two words of context ahead of the word to be pronounced.
+
 ## Enable the Video
 
 Lastly, we need to tell the GTN framework we would like videos to be generated.
