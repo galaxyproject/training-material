@@ -105,7 +105,7 @@ So we write the definition in the [`bin/ari-map.yml`](https://github.com/galaxyp
 
 (*Written 2020-12-16, things may have changed since.*)
 
-Be sure to check the pronunciation of the slides. There are known issues with [Homographs](https://en.wikipedia.org/wiki/Homograph), words spelt the same but pronounced differently often depending on context. Consider "read" for a classic example, or ["analyses"](https://en.wiktionary.org/wiki/analyses#English) for one that comes up often in the GTN. "She analyses data" and "Multiple analyses" are pronounced quite differently based on their usage in sentences. See the [wiktionary](https://en.wiktionary.org/wiki/analyses#English) page for more information, or the [list of English homographs](https://en.wikipedia.org/wiki/List_of_English_homographs) you might want to be aware of.
+Be sure to check the pronunciation of the slides. There are known issues with [heteronyms](https://en.wikipedia.org/wiki/Heteronym_(linguistics)), words spelt the same but having different pronunciation and meaning. Consider "read" for a classic example, or ["analyses"](https://en.wiktionary.org/wiki/analyses#English) for one that comes up often in the GTN. "She analyses data" and "Multiple analyses" are pronounced quite differently based on their usage in sentences. See the [wiktionary](https://en.wiktionary.org/wiki/analyses#English) page for more information, or the [list of English heteronyms](https://en.wiktionary.org/wiki/Category:English_heteronyms) you might want to be aware of.
 
 This becomes an issue for AWS Polly and Mozilla's TTS which both don't have sufficient context sometimes to choose between the two pronunciations. You'll find that "many analyses" is pronounced correctly while "multiple analyses" isn't.
 
