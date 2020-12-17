@@ -14,6 +14,7 @@ module Jekyll
         git_head_ref = 'none'
       end
       site.config['git_revision'] = git_head_ref
+      site.config['gtn_fork'] = ENV['GTN_FORK']
 
       # Add other environment variables to `site.config` here...
     end
