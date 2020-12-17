@@ -126,7 +126,7 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 
 > ### {% icon hands_on %} Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types
 >
-> 1. {% tool [PAPAA: PanCancer classifier](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer classifier](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_classifier/pancancer_classifier/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
@@ -202,7 +202,7 @@ This step is designed to generate individual pan-within models for each individu
 
 > ### {% icon hands_on %} Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1
 >
-> 1. {% tool [PAPAA: PanCancer within disease analysis](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer within disease analysis](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_within_disease_analysis/pancancer_within_disease_analysis/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
@@ -252,7 +252,7 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 
 > ### {% icon hands_on %} Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models
 >
-> 1. {% tool [PAPAA: PanCancer compare within models](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer compare within models](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pan_within classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})
@@ -275,7 +275,7 @@ In this step we would like to predict 'y' status (mutational status) using 'x' m
 
 > ### {% icon hands_on %} Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer apply weights](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer apply weights](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_apply_weights/pancancer_apply_weights/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Filename of features to use in model"*: `pancan_rnaseq_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset)
 >    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset)
@@ -311,7 +311,7 @@ In this step we generate visualization plots using classifier decision function 
 
 > ### {% icon hands_on %} Hands-on: Visualize decisions for ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer visualize decisions](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer visualize decisions](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_visualize_decisions/pancancer_visualize_decisions/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 {: .hands_on}
 
@@ -333,7 +333,7 @@ In this step we combined variant level information for each mutation combining w
 
 > ### {% icon hands_on %} Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer map mutation class](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer map mutation class](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_map_mutation_class/pancancer_map_mutation_class/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions.tsv` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 >    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_rtk_ras_pi3k_genes.txt` (Input dataset)
 >    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset)
@@ -361,7 +361,7 @@ In this step we combine classifier weights,copy number information, recalculate 
 
 > ### {% icon hands_on %} Hands-on: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer alternative genes pathwaymapper](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer alternative genes pathwaymapper](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_alternative_genes_pathwaymapper/pancancer_alternative_genes_pathwaymapper/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions.tsv` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 >    - *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1`
 >    - {% icon param-file %} *"string of the genes to extract or gene list file"*: `path_rtk_ras_pi3k_genes.txt` (Input dataset)
@@ -395,7 +395,7 @@ This step generates combined heatmap from mutation and copy number information a
 
 > ### {% icon hands_on %} Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer pathway count heatmaps](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer pathway count heatmaps](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_pathway_count_heatmaps/pancancer_pathway_count_heatmaps/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer decisions"*: `classifier_decisions.tsv` (output of **PAPAA: PanCancer apply weights** {% icon tool %})
 >    - {% icon param-file %} *"pancancer metrics pathwaymapper"*: `pathway_metrics_pathwaymapper.txt` (output of **PAPAA: PanCancer alternative genes pathwaymapper** {% icon tool %})
 >    - {% icon param-file %} *"pancancer gene metric ranks"*: `all_gene_metric_ranks.tsv` (output of **PAPAA: PanCancer alternative genes pathwaymapper** {% icon tool %})
@@ -437,7 +437,7 @@ This step generates plots summarizing various analysis, including heatmaps for d
 
 > ### {% icon hands_on %} Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer targene summary figures](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer targene summary figures](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_summary_figures/pancancer_targene_summary_figures/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Classifier data"*: `classifier_summary.txt` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - *"option to set seed"*: `123`
@@ -474,7 +474,7 @@ In this step we use our classifier information and predict mutational status for
 
 > ### {% icon hands_on %} Hands-on: Analysis of CCLE and GDSC cell-lines using ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer targene cell line predictions](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer targene cell line predictions](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_targene_cell_line_predictions/pancancer_targene_cell_line_predictions/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Classifier data"*: `classifier_summary.txt` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"nucleotide mutation scores"*: `nucleotide_acid_mutation_scores.tsv` (output of **PAPAA: PanCancer targene summary figures** {% icon tool %})
@@ -525,7 +525,7 @@ In this step we use our classifier information and predict mutational status for
 
 > ### {% icon hands_on %} Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model
 >
-> 1. {% tool [PAPAA: PanCancer external sample status prediction](testtoolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9) %} with the following parameters:
+> 1. {% tool [PAPAA: PanCancer external sample status prediction](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Classifier data"*: `classifier_summary.txt` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"external sample gene expression data"*: `vlog_trans.csv` (Input dataset)
