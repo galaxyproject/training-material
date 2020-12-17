@@ -49,6 +49,7 @@ jobs:
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
           SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+          GTN_FORK: ${{ secrets.GTN_FORK }}
 
       - name: Deploy 🚀
         run: |
