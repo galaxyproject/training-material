@@ -5,7 +5,6 @@ module Jekyll
   class EnvironmentVariablesGenerator < Generator
 
     def generate(site)
-      site.config['google_analytics_id'] = ENV['GOOGLE_ANALYTICS_ID']
 
       begin
         git_head = File.open(File.join('.git', 'HEAD')).read.strip.split(' ')[1]
