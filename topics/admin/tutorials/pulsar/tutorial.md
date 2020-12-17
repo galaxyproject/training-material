@@ -193,6 +193,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 > 2. From your ansible working directory, edit the `group_vars/galaxy.yml` file and add the following lines:
 >
+>    {% raw %}
 >    ```yaml
 >    rabbitmq_admin_password: a-different-long-password
 >
@@ -222,6 +223,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >        vhosts: /pulsar/galaxy_au
 >
 >    ```
+>    {% endraw %}
 >
 > 3. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
@@ -378,9 +380,10 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 >
 > 1. Create a `templates` directory in your working directory.
 >
->    ```bash
->    mkdir templates
->    ```
+>    > ```bash
+>    > mkdir templates
+>    > ```
+>    {: .code-in}
 >
 > 2. Create a `dependency_resolvers_conf.xml.j2` file inside the `templates` directory with the following contents:
 >
@@ -435,18 +438,20 @@ There are three things we need to do here:
 >
 > 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
 >
+>    {% raw %}
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/pulsar/galaxy_au?ssl=1</param>
+>        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671{{ rabbitmq_vhosts[0] }}?ssl=1</param>
 >        <param id="amqp_ack_republish_time">1200</param>
 >        <param id="amqp_acknowledge">True</param>
 >        <param id="amqp_consumer_timeout">2.0</param>
 >        <param id="amqp_publish_retry">True</param>
 >        <param id="amqp_publish_retry_max_retries">60</param>
->        <param id="galaxy_url">https://your_galaxy_ip_address_or_fqdn_here</param>
+>        <param id="galaxy_url">https://{{ inventory_hostname }}</param>
 >        <param id="manager">_default_</param>
 >    </plugin>
 >    ```
+>    {% endraw %}
 >
 > **Make sure you replace *your_galaxy_ip_address_or_fqdn_here* with your Galaxy servers IP adress or FQDN**
 >
@@ -457,8 +462,8 @@ There are three things we need to do here:
 >    <destination id="pulsar" runner="pulsar_runner" >
 >        <param id="default_file_action">remote_transfer</param>
 >        <param id="dependency_resolution">remote</param>
->        <param id="jobs_directory">/mnt/pulsar/files/staging</param>
->        <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
+>        <param id="jobs_directory">{{ pulsar_staging_dir }}</param>
+>        <param id="persistence_directory">{{ pulsar_persistence_dir }}</param>
 >        <param id="remote_metadata">False</param>
 >        <param id="rewrite_parameters">True</param>
 >        <param id="transport">curl</param>
