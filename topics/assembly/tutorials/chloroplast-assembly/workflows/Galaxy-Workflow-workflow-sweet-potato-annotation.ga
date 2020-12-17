@@ -1,0 +1,113 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Chloroplast genome assembly tutorial - workflow 3",
+    "format-version": "0.1",
+    "name": "workflow-sweet-potato-annotation",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "polished-assembly.fasta"
+                }
+            ],
+            "label": "polished-assembly.fasta",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 246.94448852539062,
+                "top": 278.4548645019531
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "2f8f516c-4698-4cf3-90aa-ba0a9aabe891",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "3ac61143-650e-432e-8001-8d5912ae7af6"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "GeSeqJob-20200105-162248_contig_2_pilon_GFF3.gff3"
+                }
+            ],
+            "label": "GeSeqJob-20200105-162248_contig_2_pilon_GFF3.gff3",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 255.97225952148438,
+                "top": 427.9861145019531
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "5cc99a63-317c-445d-8661-e14930f84935",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "reference_genome|genome": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "track_groups_0|data_tracks_0|data_format|annotation": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "JBrowse",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "html"
+                }
+            ],
+            "position": {
+                "left": 561.9618225097656,
+                "top": 301.9618225097656
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3",
+            "tool_shed_repository": {
+                "changeset_revision": "2bb2e07a7a21",
+                "name": "jbrowse",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"action\": {\"action_select\": \"create\", \"__current_case__\": 0}, \"chromInfo\": \"/mnt/galaxy/galaxy-app/tool-data/len/?.len\", \"gencode\": \"11\", \"jbgen\": {\"defaultLocation\": \"\", \"trackPadding\": \"20\", \"shareLink\": \"true\", \"aboutDescription\": \"\", \"show_tracklist\": \"true\", \"show_nav\": \"true\", \"show_overview\": \"true\", \"show_menu\": \"true\", \"hideGenomeOptions\": \"false\"}, \"plugins\": {\"BlastView\": \"true\", \"ComboTrackSelector\": \"false\", \"GCContent\": \"false\"}, \"reference_genome\": {\"genome_type_select\": \"history\", \"__current_case__\": 1, \"genome\": null}, \"standalone\": \"true\", \"track_groups\": [{\"__index__\": 0, \"category\": \"Default\", \"data_tracks\": [{\"__index__\": 0, \"data_format\": {\"data_format_select\": \"gene_calls\", \"__current_case__\": 2, \"annotation\": {\"__class__\": \"ConnectedValue\"}, \"match_part\": {\"match_part_select\": \"false\", \"__current_case__\": 1}, \"index\": \"false\", \"track_config\": {\"track_class\": \"NeatHTMLFeatures/View/Track/NeatFeatures\", \"__current_case__\": 3, \"html_options\": {\"topLevelFeatures\": \"\"}}, \"jbstyle\": {\"style_classname\": \"feature\", \"style_label\": \"product,name,id\", \"style_description\": \"note,description\", \"style_height\": \"10px\", \"max_height\": \"600\"}, \"jbcolor_scale\": {\"color_score\": {\"color_score_select\": \"none\", \"__current_case__\": 0, \"color\": {\"color_select\": \"automatic\", \"__current_case__\": 0}}}, \"jb_custom_config\": {\"option\": []}, \"jbmenu\": {\"track_menu\": []}, \"track_visibility\": \"default_off\", \"override_apollo_plugins\": \"False\", \"override_apollo_drag\": \"False\"}}]}], \"uglyTestingHack\": \"\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.16.4+galaxy3",
+            "type": "tool",
+            "uuid": "4693cbf5-1a03-45a8-b552-11611a49fbdb",
+            "workflow_outputs": []
+        }
+    },
+    "tags": [
+        "assembly"
+    ],
+    "uuid": "82e466a6-a4b9-4949-b68f-7f7d24ab4e04",
+    "version": 1
+}

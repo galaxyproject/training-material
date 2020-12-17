@@ -23,15 +23,14 @@ contributors:
   - mariecrane
   - pravs3683
 follow_up_training:
-  -
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
       - metaproteomics
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
-      - metaquantome-taxonomy      
+      - metaquantome-taxonomy
 requirements:
   -
     type: "internal"
@@ -44,7 +43,7 @@ requirements:
 # Introduction
 {:.no_toc}
 
-metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group. 
+metaQuantome software suite {% cite Easterly2019 %} was developed by the {% cite Galaxy-P %} for quantitative and statistical analysis of metaproteomics data. For taxonomic and functional expression analysis within the microbial community, metaQuantome leverages peptide-level quantitative information to generate visual outputs for data interpretation. It also generates outputs that help in understanding the taxonomic contribution to a selected function as well as functions expressed by selected taxonomic group.
 
 In this tutorial, we will learn specifically about the metaQuantome Function workflow. In particular, we will learn about how peptide-level quantitation and associated functional information can be used to generate bar plots (for functional information such as molecular function, cellular components and biological processes), volcano plots (to detect differentially expressed function) and heatmap cluster analysis. To demonstrate the use of this workflow, we have used a thermophilic biogas reactor dataset wherein municipal food waste and manure is digested to generate methane gas ({% cite Delogu2020 %}). After one round in the reactor, the microbial community was simplified and enriched via serial dilution. This inoculum was then transferred to a solution of cellulose from Norwegian Spruce and incubated at 65°C. Triplicate samples were taken in a time series from 0 to 43 hours after inoculation and mass spectrometry data was acquired on a Q-Exactive (Thermo) mass spectrometer. For this training, we have chosen three time points (8 hours, 18 hours and 33 hours) from this dataset.
 
@@ -76,7 +75,7 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 >    {% include snippets/rename_history.md %}
 >
 > 2. Import the files from [Zenodo]({{ page.zenodo_link }}): a Functional File and an Intensity file.
->  
+>
 >
 >    ```
 >    https://zenodo.org/record/4110725/files/Function-File.tabular
@@ -97,24 +96,24 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 
 > ### {% icon hands_on %} Hands-on: Run metaQuantome databases
 >
-> 1. {% tool [metaQuantome: databases](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_db/7c45aa1c9464) %} with the following parameters:
+> 1. {% tool [metaQuantome: databases](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_db/metaquantome_db/2.0.0-0) %} with the following parameters:
 >    - {% icon param-select %} *"Databases to Download"*: `Select All` (NCBI Taxonomy Database, Gene Ontology Database and Enzyme Commission (EC) database)
 >
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > metaQuantome uses freely available bioinformatic databases to expand your set of direct annotations. 
->    > 
->    > 
+>    > metaQuantome uses freely available bioinformatic databases to expand your set of direct annotations.
+>    >
+>    >
 >    > The databases are:
->    > 
+>    >
 >    > 1. NCBI taxonomy database. consists of a list of all currently identified taxa and the relationships between them.
->    > 
->    > 2. Gene Ontology (GO) term database. metaQuantome uses the go-basic.obo file and the metagenomics slim GO (subset of the full GO). More details are 
+>    >
+>    > 2. Gene Ontology (GO) term database. metaQuantome uses the go-basic.obo file and the metagenomics slim GO (subset of the full GO). More details are
 >    > available at http://geneontology.org/docs/download-ontology/
->    > 
+>    >
 >    > 3. ENZYME database with Enzyme Classification (EC) numbers. This database classifies enzymes and organizes the relationships between them.
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -136,23 +135,23 @@ The first step in this tutorial is to get the data from the Zenodo link provided
 
 # **Create metaQuantome sample file**
 
-The create samples file module is used to generate the samples file input file for the metaQuantome workflow. This input file is used to specify the column names used for each experimental group. These column names are referenced when handling the input data and performing statistical analysis. 
+The create samples file module is used to generate the samples file input file for the metaQuantome workflow. This input file is used to specify the column names used for each experimental group. These column names are referenced when handling the input data and performing statistical analysis.
 
 > ### {% icon hands_on %} Hands-on: Create an experimental Design file for sorting samples
 >
-> 1. {% tool [metaQuantome: create samples file](https://toolshed.g2.bx.psu.edu/view/galaxyp/metaquantome_sample/49a957fb353a) %} with the following parameters:
+> 1. {% tool [metaQuantome: create samples file](toolshed.g2.bx.psu.edu/repos/galaxyp/metaquantome_sample/metaquantome_sample/2.0.0-0) %} with the following parameters:
 >    - {% icon param-select %} *"Sample file creation method"*: `Manually specify experimental conditions and samples`
 >    - In *"Insert Samples"*:
->        - *"1.Samples"*: 
+>        - *"1.Samples"*:
 >            - *"Group Name"*: `T2`
 >               - *"Column"*: `T2_A1,T2_B1`
->        - *"2.Samples"*: 
+>        - *"2.Samples"*:
 >            - *"Group Name"*: `T4`
 >               - *"Column"*: `T4A_1,T4B_1`
->        - *"3.Samples"*: 
+>        - *"3.Samples"*:
 >            - *"Group Name"*: `T7`
 >               - *"Column"*: `T7A_1,T7B_1`
->     
+>
 >
 {: .hands_on}
 
@@ -188,7 +187,7 @@ In function mode, the following information is required apart from metaQuantome 
 >
 >    > ### {% icon comment %} Comment
 >    >The structure of the output file depends on the analysis mode and the experimental design, but the columns generally look like this, with one row for each term:
->    > 
+>    >
 | term id | info about term. (one or more columns) | mean term intensity (by sample group)            | term intensity (by sample)                                                      | number of unique peptides (by sample) | number of sample children in each sample |
 |---------|----------------------------------------|--------------------------------------------------|---------------------------------------------------------------------------------|---------------------------------------|------------------------------------------|
 | term1   | name, rank, etc.                       | note that this is the log2 of the mean intensity | this is the log2 of term intensity in each sample. Missing data is coded as NA. | integer. 0 is coded as NA             | integer. 0 is coded as NA                |
@@ -264,7 +263,7 @@ The filter module is the second step in the metaQuantome workflow. The filter mo
 
 # **Visualize your Data**
 
-The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions. 
+The  outputs of the visualization module of metaQuantome are high-quality, publication-ready visualizations: barplots for the analysis of a single sample or experimental condition and differential abundance analysis, volcano plots, heatmaps, and principal components analysis for comparisons between two or more experimental conditions.
 Here were are showing 2 visualizations: **Barplot and Volcano Plot**. The Heatmap and PCA plot for multiple conditions are under development.
 There are two outputs of the visualization tool : an **HTML file (figure) and a tabular output containing the plot data**.
 
@@ -283,7 +282,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 >    > ### {% icon comment %} Comment
 >    > The user has a choice to run Bar plot for T2, T4 and T7 to know the top 5 or 10 most differently expressed functions. Here we have restricted the GO category to Molecular Function but the user can choose Biological Processes or Cellular component as their category.
->    > 
+>    >
 >    {: .comment}
 >
 {: .hands_on}
@@ -316,7 +315,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"Mean intensity column name"*: `T4_mean`
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
-> 
+>
 {: .hands_on}
 ![T4_MF](../../images/T4-mf.png "Top five differentially expressed Molecular Function GO terms for sample T4."){: width="85%"}
 
@@ -333,7 +332,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >            - *"GO category to restrict to"*: `Molecular Function`
 >            - *"Color for the bar fill"*: `Orange`
 >
-> 
+>
 {: .hands_on}
 ![T7_MF](../../images/T7-mf.png "Top five differentially expressed Molecular Function GO terms for sample T7."){: width="85%"}
 
@@ -354,7 +353,7 @@ There are two outputs of the visualization tool : an **HTML file (figure) and a 
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Here, we show metaQuantome's Functional differential abundance volcano plot. The user may select the significance threshold (0.05 by default), and terms with statistically significant fold changes are colored green and labeled. However, we can currently only compare two conditions at a time. Here we have compared T7 and T2 time points. 
+>    > Here, we show metaQuantome's Functional differential abundance volcano plot. The user may select the significance threshold (0.05 by default), and terms with statistically significant fold changes are colored green and labeled. However, we can currently only compare two conditions at a time. Here we have compared T7 and T2 time points.
 >    {: .comment}
 >
 {: .hands_on}

@@ -1117,7 +1117,7 @@ If you have variables this can produce a more complex dependency graph:
 
 ![A more complex graph showing variables](../../images/graph2.png "A more complex graph showing variables")
 
-Once you develop complex infrastructure, these graphics become less useful. For reference, you can find [UseGalaxy.eu's infrastructure graph](https://raw.githubusercontent.com/usegalaxy-eu/infrastructure/master/graph.png) in our repository (you will need to zoom in a lot.)
+Once you develop complex infrastructure, these graphics become less useful.
 
 # Tearing Everything Down
 

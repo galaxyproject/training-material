@@ -57,7 +57,7 @@ Circos is an extremely flexible but also very complex tool. The Galaxy Circos to
 >
 > To learn more about using Circos outside of Galaxy (e.g. for tweaking the
 > Circos configuration output by the Galaxy tool), there are a wide range
-> of tutorials available from the [Circos website](https://circos.ca)
+> of tutorials available from the [Circos website](http://circos.ca)
 {: .comment}
 
 

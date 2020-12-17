@@ -60,7 +60,7 @@ The data for this tutorial comes from a Nature Cell Biology paper by {% cite Fu2
 
 This study examined the expression profiles of basal and luminal cells in the mammary gland of virgin, pregnant and lactating mice. Six groups are present, with one for each combination of cell type and mouse status. Note that two biological replicates are used here, two independent sorts of cells from the mammary glands of virgin, pregnant or lactating mice, however three replicates is usually recommended as a minimum requirement for RNA-seq. In this tutorial we will use the GEO counts file as a starting point for our analysis. Alternatively, you could create a count matrix from the raw sequence reads, as demonstrated in the [RNA-seq reads to counts tutorial]({% link topics/transcriptomics/tutorials/rna-seq-reads-to-counts/tutorial.md %}). The GEO count file was generated from aligning the reads to the mouse `mm10` genome with the Rsubread aligner ({% cite Liao2019 %}), followed by counting reads mapped to RefSeq genes with featureCounts ({% cite liao2013featurecounts %}), see the [Fu paper](https://www.nature.com/articles/ncb3117) for details.
 
-We will use **limma-voom** ({% cite law2016rna %}) for identifying differentially expressed genes here. Other popular alternatives are edgeR ({% cite robinson2010edger %}) and DESeq2 ({% cite love2014moderated %}). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity ({% cite CostaSilva2017 %}) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples ({% cite Chen2016 %}).
+We will use **limma-voom** ({% cite Law2014 %}) for identifying differentially expressed genes here. Other popular alternatives are edgeR ({% cite robinson2010edger %}) and DESeq2 ({% cite love2014moderated %}). Limma-voom has been shown to be perform well in terms of precision, accuracy and sensitivity ({% cite CostaSilva2017 %}) and, due to its speed, it's particularly recommended for large-scale datasets with 100s of samples ({% cite Chen2016 %}).
 
 This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop](http://combine-australia.github.io/RNAseq-R/06-rnaseq-day1.html), first taught [here](http://combine-australia.github.io/2016-05-11-RNAseq/).
 
@@ -415,7 +415,7 @@ The SA plot below plots log2 residual standard deviations against mean log-CPM v
 >
 >   ![Voom Mixedup Plot](../../images/rna-seq-counts-to-genes/voomplot_mixed.png "Voom Plot mixed-up samples")
 >
-> More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper ({% cite law2016rna %}), shown below.
+> More examples of the variation this plot can show can be seen in Figure 1 from the limma-voom paper ({% cite Law2014 %}), shown below.
 >
 >   ![Voom Plot Examples](../../images/rna-seq-counts-to-genes/voom_variance_examples.jpg "Voom Plot more examples")
 >

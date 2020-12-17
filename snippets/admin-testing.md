@@ -1,4 +1,4 @@
-> ### {% icon tip %} Operating System Compatability
+> ### {% icon tip %} Operating System Compatibility
 >
 > These Ansible roles and training materials were last tested on Centos 7 and Ubuntu 18.04, but will probably work on other RHEL and Debian variants.
 >
