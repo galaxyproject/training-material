@@ -38,6 +38,8 @@ jobs:
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+        env:
+          GTN_FORK: ${{ github.repository_owner }}
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3
