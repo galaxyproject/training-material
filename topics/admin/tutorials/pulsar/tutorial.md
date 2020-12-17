@@ -40,14 +40,13 @@ requirements:
 # Overview
 {:.no_toc}
 
-Pulsar is the Galaxy Project's remote job running system. It was written by John Chilton (@jmchilton) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.
+Pulsar is the Galaxy Project's remote job running system. It was written by John Chilton ([@jmchilton](https://github.com/jmchilton)) of the Galaxy Project. It is a python server application that can accept jobs from a Galaxy server, submit them to a local resource and then send the results back to the originating Galaxy server.
 
 More details on Pulsar can be found at:
 
 - [Pulsar's Documentation](https://pulsar.readthedocs.io/en/latest/index.html)
 - [Pulsar's Github Repository](https://github.com/galaxyproject/pulsar)
 - [Pulsar Ansible Role](https://github.com/galaxyproject/ansible-pulsar)
-
 
 Transport of data, tool information and other metadata can be configured as a web application via a RESTful interface or using a message passing system such as RabbitMQ.
 
@@ -75,7 +74,7 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 ![Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server](../../images/pulsar_amqp_schema.png "Schematic diagram of Galaxy communicating with a Pulsar server via the RabbitMQ server. Red arrows represent AMQP communications and blue represent file transfers (initiated by the Pulsar server.)")
 
 
-**How it will work:** 
+**How it will work:**
 
 1. Galaxy will send a message to the RabbitMQ server on the Pulsar server's particular queue saying that there is a job to be run and then will monitor the queue for job status updates.
 2. The Pulsar server monitors this queue and when the job appears it will take control of it.
@@ -120,27 +119,29 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 
 In this section we will install the RabbitMQ server on your Galaxy server VM.
 
-RabbitMQ is an AMQP server that can queue messages between systems for all sorts of reasons. Here, we will be using the queue so that Galaxy and Pulsar can communicate jobs, job status and job metadata between them easily and robustly. More information on RabbitMQ can be found [here](https://www.rabbitmq.com/).
+RabbitMQ is an AMQP server that can queue messages between systems for all sorts of reasons. Here, we will be using the queue so that Galaxy and Pulsar can communicate jobs, job status and job metadata between them easily and robustly. More information on RabbitMQ can be found [on their website](https://www.rabbitmq.com/).
 
-## Installing the RabbitMQ role
+## Installing the roles
 
-Firstly we will add and configure another *role* to our Galaxy playbook - a slightly modified version of `jasonroyle.rabbitmq`
+Firstly we will add and configure another *role* to our Galaxy playbook - we maintain a slightly modified version of `jasonroyle.rabbitmq` to support python3 and other minor updates. Additionally we will use the Galaxy community role for deploying Pulsar
 
-> ### {% icon hands_on %} Hands-on: Install the modified `jasonroyle.rabbitmq` ansible role
+> ### {% icon hands_on %} Hands-on: Install the Ansible roles
 >
-> 1. From your ansible working directory, edit the `requirements.yml` file and add the following line:
+> 1. From your ansible working directory, edit the `requirements.yml` file and add the following lines:
 >
 >    ```yaml
->    - src: https://github.com/slugger70/ansible-role-rabbitmq
+>    - name: usegalaxy_eu.rabbitmq
 >      version: 0.0.5
->      name: jasonroyle.rabbitmq
+>    - src: galaxyproject.pulsar
+>      version: 1.0.6
 >    ```
 >
 > 2. Now install it with:
 >
->    ```bash
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ```bash
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    {: .code-in}
 >
 {: .hands_on}
 
@@ -150,7 +151,7 @@ We need to configure RabbitMQ to be able to handle Pulsar messages. To do this w
 
 ### Defining Virtual Hosts
 
-Each set of queues in RabbitMQ are grouped and accessed via virtual hosts. We need to create one of these for the transactions between the Galaxy server and Pulsar server. They are set as an array under the `rabbitmq_vhosts` variable. 
+Each set of queues in RabbitMQ are grouped and accessed via virtual hosts. We need to create one of these for the transactions between the Galaxy server and Pulsar server. They are set as an array under the `rabbitmq_vhosts` variable.
 
 ### Defining users
 
@@ -164,15 +165,17 @@ rabbitmq_users:
     vhost: /vhostname
 ```
 
-Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag.
+Optional: You can add tags to each user if required. e.g. For an admin user it could be useful to add in a *administrator* tag. These tags allow you to grant permissions to every user with a specific tag.
 
 ### RabbitMQ server config
 
 We also need to set some RabbitMQ server configuration variables. Such as where its security certificates are and which ports to listen on (both via localhost and network).
 
-**NOTE: We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Default port number is: 5671**
+> ### {% icon tip %} Port accessibility is important!
+> We will need to make sure that the RabbitMQ default port is open and accessible on the server we are installing RabbitMQ onto. (In our case this is the Galaxy server). Default port number is: `5671`
+{: .tip}
 
-More information about the rabbitmq ansible role can be found [here](https://github.com/Slugger70/ansible-role-rabbitmq).
+More information about the rabbitmq ansible role can be found [in the repository](https://github.com/usegalaxy-eu/ansible-role-rabbitmq).
 
 ## Add RabbitMQ configuration to Galaxy VM.
 
@@ -184,14 +187,14 @@ More information about the rabbitmq ansible role can be found [here](https://git
 >    rabbitmq_password_galaxy_au: areallylongpasswordhere
 >    ```
 >
->    This is going in a special file because all (two) of our services need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
+>    This is going in a special file because both of our services, Galaxy and Pulsar, need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
 >
 >    Replace `areallylongpasswordhere` with a long randomish (or not) string.
 >
 > 2. From your ansible working directory, edit the `group_vars/galaxy.yml` file and add the following lines:
 >
 >    ```yaml
->    rabbitmq_admin_password: somereallylongpasswordhere
+>    rabbitmq_admin_password: a-different-long-password
 >
 >    rabbitmq_version: 3.8.9-1
 >    rabbitmq_plugins: rabbitmq_management
@@ -216,11 +219,11 @@ More information about the rabbitmq ansible role can be found [here](https://git
 >        vhost: /
 >      - user: galaxy_au
 >        password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->        vhosts: /pulsar/galaxy_au        
->        
+>        vhosts: /pulsar/galaxy_au
+>
 >    ```
 >
-> 3. Update the Galaxy playbook to include the *jasonroyle.rabbitmq* role.
+> 3. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
 > 4. Run the playbook.
 >
@@ -229,32 +232,9 @@ More information about the rabbitmq ansible role can be found [here](https://git
 {: .hands_on}
 
 
-
 # Installing and configuring Pulsar on a remote machine
 
-Now that we have a message queueing system running on our Galaxy VM, we need to install and configure Pulsar on our remote compute VM. To do this we need to create a new ansible playbook to install Pulsar. 
-
-## Install the Pulsar ansible role
-
-We will be using a *role* developed by the Galaxy community - `galaxyproject.pulsar`
-
-> ### {% icon hands_on %} Hands-on: Install the `galaxyproject.pulsar` ansible role
->
-> 1. From your ansible working directory, edit the `requirements.yml` file and add the following line:
->
->    ```yaml
->    - src: galaxyproject.pulsar
->      version: 1.0.6
->    ```
->
-> 2. Now install it with:
->
->    ```bash
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
->
-{: .hands_on}
-
+Now that we have a message queueing system running on our Galaxy VM, we need to install and configure Pulsar on our remote compute VM. To do this we need to create a new ansible playbook to install Pulsar.
 
 ## Configuring Pulsar
 
