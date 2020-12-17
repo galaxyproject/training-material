@@ -272,9 +272,11 @@ In this section we will reproduce this Circos plot step by step.
 
 As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
 
-
-
-
+> ### {% icon comment %} Note
+>
+> This tutorial requires to use	the Circos tool	version 0.69.8+galaxy4.
+>
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
@@ -290,7 +292,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >        - In *"Cytogenic Bands"*:
 >            - {% icon param-file %} *"Cytogenic Bands"*: `hg18_karyotype_bands.tsv`
 >            - *"Convert bands from BED format to circos karyotype band format"*: `No`
->            - *"Fill Bands"*: `2`
+>            - *"Band Transparency"*: `2`
 >            - *"Band Stroke Thickness"*: `1`
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
