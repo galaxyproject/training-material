@@ -342,12 +342,6 @@
     <section class="tutorial">
         <h1 data-toc-skip>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab</h1>
         
-        <div class="alert alert-warning" role="alert">
-            <h4 class="alert-heading">Under Development!</h4>
-            <p>This tutorial is not in its final state. The content may change a lot in the next months.
-            Because of this status, it is also not listed in the topic pages.</p>
-        </div>
-        
 
         <div class="contributors-line">By: 
 
@@ -431,6 +425,8 @@
         
             <ul>
                 
+                    
+                        
                     
                         
                     
@@ -538,6 +534,13 @@
                 
 
                 
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4108341">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
 
                 
 
@@ -567,7 +570,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 15, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 17, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -942,7 +945,7 @@ For this tutorial, we  wish to have a “cold” start as we are mostly interest
 When ready to run in production, the model needs to be spin-up (run for several centuries until it reaches some kind of equilibrium).</li>
   </ul>
 
-  <p>We will first make a short simulation (1 month):</p>
+  <p>We will first make a short simulation (6 months):</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
 source activate fates
@@ -950,8 +953,8 @@ source activate fates
 cd $HOME/ctsm_cases/fates_alp1
 ./case.setup
 ./case.build
-./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "years"
-./xmlchange STOP_N=1                       # set the length of simulation, i.e, how many years
+./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "nmonths"
+./xmlchange STOP_N=6                       # set the length of simulation, i.e, how many months
 ./case.submit &gt; case_submit.out 2&gt;&amp;1
 </code></pre></div>  </div>
   <p>The step above can take a lot of time because it needs to compile and run the FATES model.
@@ -970,7 +973,7 @@ tutorial.</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash 
 
-cd $HOME/work/fates
+cd $HOME/work/fates_alp1
 ls -la
 </code></pre></div>  </div>
   <p>You should see two folders:</p>
@@ -979,11 +982,11 @@ ls -la
     <li>run: this directory will be used during your simulation run to generate output files, etc.</li>
   </ul>
 
-  <p>The <strong>bld</strong> folder contains the model executable (called <code class="language-plaintext highlighter-rouge">cesm,exe</code>) while <strong>run</strong> contains all the files used for running CLM-FATES (and not already archived).
+  <p>The <strong>bld</strong> folder contains the model executable (called <code class="language-plaintext highlighter-rouge">cesm.exe</code>) while <strong>run</strong> contains all the files used for running CLM-FATES (and not already archived).
 Once your run is terminated, many files are moved from the <strong>run</strong> folder to the <strong>archive</strong> folder:</p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>%%bash
-cd $HOME/archive/fates
+cd $HOME/archive/fates_alp1
 ls lnd/hist
 </code></pre></div>  </div>
 
@@ -1007,7 +1010,7 @@ CLM-FATES model outputs are stored in netCDF format.</p>
       </ul>
       <ul>
         <li>Rename your notebook to <strong>check_analysis.ipynb</strong></li>
-        <li>All the analysis of the 2 month FATES simulation will be done from this notebook</li>
+        <li>All the analysis of the 6 month FATES simulation will be done from this notebook</li>
       </ul>
     </li>
     <li>Get metadata
@@ -1021,7 +1024,7 @@ xr.set_options(display_style="html")
 
 case = 'fates_alp1'
 path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
-dset = xr.open_dataset(path + '/fates_alp1_t.clm2.h0.2000-01.nc')
+dset = xr.open_dataset(path + '/fates_alp1.clm2.h0.2000-01.nc')
 dset
 </code></pre></div>  </div>
   <p>As shown above, we are now using Python 3 for analyzing the results and <a href="http://xarray.pydata.org/en/stable/">xarray</a> which 
@@ -1035,7 +1038,7 @@ we opened the single history file and print metadata.</p>
   <p>You can select a variable by using its short name (see metadata above) and then calling the plot method:</p>
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>dset['AREA_TREES'].plot()
 </code></pre></div>  </div>
-  <p>As we ran one month only, we have very little points in our timeseries!</p>
+  <p>As we ran 6 months only, we have very little points in our timeseries!</p>
 
   <p>To plot 2D variables such as <strong>CANOPY_AREA_BY_AGE</strong>, you can use the <em>col_wrap</em> option when plotting:</p>
 
@@ -1324,7 +1327,7 @@ If you are not familiar with <code class="language-plaintext highlighter-rouge">
     title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab (Galaxy Training Materials)",
     year = "2020",
     month = "12",
-    day = "15"
+    day = "17"
     url = "\url{/training-material/topics/climate/tutorials/fates-jupyterlab/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
