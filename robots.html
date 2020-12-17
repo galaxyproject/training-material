@@ -1,5 +1,10 @@
 ---
 permalink: robots.txt
 ---
-{%- unless site.gtn_fork == 'galaxyproject' -%}User-agent: *
-Disallow: / {% endunless %}
+{%- if site.gtn_fork == 'galaxyproject' -%}
+User-agent: *
+Allow: /
+{% else %}
+User-agent: *
+Disallow: /
+{% endif %}
