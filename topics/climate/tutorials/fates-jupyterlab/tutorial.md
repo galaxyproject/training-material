@@ -280,7 +280,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > For this tutorial, we  wish to have a “cold” start as we are mostly interested in setting up our model.
 > When ready to run in production, the model needs to be spin-up (run for several centuries until it reaches some kind of equilibrium).
 >
-> We will first make a short simulation (1 month):
+> We will first make a short simulation (6 months):
 >
 > ```
 > %%bash
@@ -289,8 +289,8 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > cd $HOME/ctsm_cases/fates_alp1
 > ./case.setup
 > ./case.build
-> ./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "years"
-> ./xmlchange STOP_N=6                       # set the length of simulation, i.e, how many years
+> ./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "nmonths"
+> ./xmlchange STOP_N=6                       # set the length of simulation, i.e, how many months
 > ./case.submit > case_submit.out 2>&1
 > ```
 > The step above can take a lot of time because it needs to compile and run the FATES model.
@@ -338,7 +338,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > 2. Create a new Jupyter Notebook for analyzing your results:
 >   - From the **File Menu** --> **New** --> **Notebook**:
 >      - Rename your notebook to **check_analysis.ipynb**
->      - All the analysis of the 2 month FATES simulation will be done from this notebook
+>      - All the analysis of the 6 month FATES simulation will be done from this notebook
 > 
 > 3. Get metadata
 > In a Code cell:
@@ -364,7 +364,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > ```
 > dset['AREA_TREES'].plot()
 > ```
-> As we ran one month only, we have very little points in our timeseries!
+> As we ran 6 months only, we have very little points in our timeseries!
 >
 > To plot 2D variables such as **CANOPY_AREA_BY_AGE**, you can use the *col_wrap* option when plotting:
 >
