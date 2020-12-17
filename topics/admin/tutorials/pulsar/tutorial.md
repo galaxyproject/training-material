@@ -451,60 +451,6 @@ There are three things we need to do here:
 * Create job destination which references the above job runner.
 * Tell Galaxy which tools to send to the job destination: We will use `bwa-mem`
 
-> ### {% icon tip %} Missing Job Conf? One-day admin training?
->
-> For some of our training events we do just a subset of the trainings, often Ansible, Ansible-Galaxy, and then one of these topics. For Pulsar, we need some basic job configuration file though, in order to proceed to the next steps. Follow these steps to get caught up:
->
-> > ### {% icon hands_on %} Hands-on: Get caught up
-> >
-> > 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p templates/galaxy/config/`).
-> >
-> > 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents:
-> >
-> >    ```xml
-> >    <job_conf>
-> >        <plugins workers="4">
-> >            <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
-> >        </plugins>
-> >        <destinations default="local">
-> >            <destination id="local" runner="local"/>
-> >        </destinations>
-> >        <tools>
-> >        </tools>
-> >    </job_conf>
-> >    ```
-> >
-> > 3. Install bwa from the admin installation interface if it is missing.
-> >
-> > 4. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside in your group variables:
-> >
-> >    {% raw %}
-> >    ```yaml
-> >    galaxy_config:
-> >      galaxy:
-> >        # ... existing configuration options in the `galaxy` section ...
-> >        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
-> >    ```
-> >    {% endraw %}
-> >
-> >    And then deploy the new config file using the `galaxy_config_templates` var in your group vars:
-> >
-> >    {% raw %}
-> >    ```yaml
-> >    galaxy_config_templates:
-> >      # ... possible existing config file definitions
-> >      - src: templates/galaxy/config/job_conf.xml.j2
-> >        dest: "{{ galaxy_config.galaxy.job_config_file }}"
-> >    ```
-> >    {% endraw %}
-> >
-> > If you want to get caught up properly and understand what the above configuration *means*, we recommend following the [job configuration tutorial]({% link topics/admin/tutorials/connect-to-compute-cluster/tutorial.md %}).
-> >
-> {: .hands_on}
->
-> We hope that got you caught up!
-{: .tip}
-
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
 > 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
