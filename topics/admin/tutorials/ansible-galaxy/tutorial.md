@@ -685,7 +685,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    ```diff
->    diff --git a/galaxy.yml b/galaxy.yml
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
 >    @@ -4,9 +4,14 @@
@@ -1468,8 +1467,6 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 > 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
 >    ```diff
->    diff --git a/galaxy.yml b/galaxy.yml
->    index 941272f..785ad03 100644
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
 >    @@ -15,3 +15,4 @@
@@ -2128,8 +2125,6 @@ If you have set your `galaxy_commit_id` group variable to a branch name like `re
 With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a commit from UseGalaxy.eu's upgrade:
 
 ```diff
-diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
-index ce17525..54d0746 100644
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu

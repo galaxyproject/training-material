@@ -109,8 +109,8 @@ We will be installing the RabbitMQ server daemon onto the Galaxy server to act a
 > ### {% icon details %} Why are we using Pulsar in MQ mode here and not the RESTful interface?
 > We are teaching you to install Pulsar and configure it in MQ mode in this tutorial. Configuring Pulsar in RESTful mode is also possible and is quite useful in certain situations. However, in the most common situation MQ mode is preferable for a number of reasons:
 > * When running Pulsar in RESTful mode, all of the job control and data transfer is controlled by the Galaxy server usually using http transfers. This can place a limit on the size of files that can be transferred without constant configuring of the webserver.
-> * When running in RESTful mode, you also need to run a https server such as nginx, including securing it, configuring it, getting certificates and opening ports. This can be very difficult to do if you are attempting to submit jobs to an institutional HPC where the admins probably won't let you do any of these things.
-> * In MQ mode, you only need to open a port for the RabbitMQ server on a machine you are more likely to control.
+> * When running in RESTful mode, Pulsar also needs to have an https server such as nginx, including securing it, configuring it, getting certificates and opening ports. This can be very difficult to do if you are attempting to submit jobs to an institutional HPC where the admins probably won't let you do any of these things.
+> * In MQ mode, you only need to open a port for the RabbitMQ server on a machine you are more likely to control. The HPC side running Pulsar can just connect back to you.
 >
 > See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
 {: .details}
@@ -138,6 +138,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >
 > 2. Now install it with:
 >
+>    > ### {% icon code-in %} Input: Bash
 >    > ```bash
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
@@ -191,45 +192,113 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    Replace `areallylongpasswordhere` with a long randomish (or not) string.
 >
-> 2. From your ansible working directory, edit the `group_vars/galaxy.yml` file and add the following lines:
+> 2. From your ansible working directory, edit the `group_vars/galaxy.yml` file and add make the following changes.
 >
 >    {% raw %}
->    ```yaml
->    rabbitmq_admin_password: a-different-long-password
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -81,6 +81,7 @@ certbot_environment: staging
+>     certbot_well_known_root: /srv/nginx/_well-known_root
+>     certbot_share_key_users:
+>       - nginx
+>    +  - rabbitmq
+>     certbot_post_renewal: |
+>         systemctl restart nginx || true
+>     certbot_domains:
+>    @@ -100,3 +101,29 @@ nginx_ssl_role: usegalaxy_eu.certbot
+>     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >
->    rabbitmq_version: 3.8.9-1
->    rabbitmq_plugins: rabbitmq_management
->
->    rabbitmq_config:
->      - ssl_listeners:
->        - "'0.0.0.0'": 5671
->        - "'127.0.0.1'": 5671
->      - ssl_options:
->         - cacertfile: /etc/ssl/certs/fullchain.pem
->         - certfile: /etc/ssl/certs/cert.pem
->         - keyfile: /etc/ssl/user/privkey-rabbitmq.pem
->         - fail_if_no_peer_cert: 'false'
->
->    rabbitmq_vhosts:
->      - /pulsar/galaxy_au
->
->    rabbitmq_users:
->      - user: admin
->        password: "{{ rabbitmq_admin_password }}"
->        tags: administrator
->        vhost: /
->      - user: galaxy_au
->        password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->        vhosts: /pulsar/galaxy_au
->
+>    +# RabbitMQ
+>    +rabbitmq_admin_password: a-different-long-password
+>    +rabbitmq_version: 3.8.9-1
+>    +rabbitmq_plugins: rabbitmq_management
+>    +
+>    +rabbitmq_config:
+>    +- rabbit:
+>    +  - tcp_listeners:
+>    +    - "'127.0.0.1'": 5672
+>    +  - ssl_listeners:
+>    +    - "'0.0.0.0'": 5671
+>    +  - ssl_options:
+>    +     - cacertfile: /etc/ssl/certs/fullchain.pem
+>    +     - certfile: /etc/ssl/certs/cert.pem
+>    +     - keyfile: /etc/ssl/user/privkey-rabbitmq.pem
+>    +     - fail_if_no_peer_cert: 'false'
+>    +
+>    +rabbitmq_vhosts:
+>    +  - /pulsar/galaxy_au
+>    +
+>    +rabbitmq_users:
+>    +  - user: admin
+>    +    password: "{{ rabbitmq_admin_password }}"
+>    +    tags: administrator
+>    +    vhost: /
+>    +  - user: galaxy_au
+>    +    password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
+>    +    vhosts: /pulsar/galaxy_au
 >    ```
 >    {% endraw %}
 >
 > 3. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -15,3 +15,4 @@
+>         - role: uchida.miniconda
+>           become: true
+>           become_user: galaxy
+>         - galaxyproject.cvmfs
+>    +    - usegalaxy_eu.rabbitmq
+>    ```
+>
 > 4. Run the playbook.
 >
-> The rabbitmq server daemon will have been installed on your Galaxy VM. You can check it's running with `systemctl status rabbitmq-server`.
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
+>
+> The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > systemctl status rabbitmq-server
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output: Bash
+>    >
+>    > ```ini
+>    > ● rabbitmq-server.service - RabbitMQ broker
+>    >      Loaded: loaded (/lib/systemd/system/rabbitmq-server.service; enabled; vendor preset: enabled)
+>    >      Active: active (running) since Fri 2020-12-18 13:52:14 UTC; 8min ago
+>    >    Main PID: 533733 (beam.smp)
+>    >      Status: "Initialized"
+>    >       Tasks: 163 (limit: 19175)
+>    >      Memory: 105.3M
+>    >      CGroup: /system.slice/rabbitmq-server.service
+>    >              ├─533733 /usr/lib/erlang/erts-11.1.4/bin/beam.smp -W w -K true -A 128 -MBas ageffcbf -MHas ageffcbf -MBlmbcs 512 -MHlmbcs 512 -MMmcs 30 -P 1048576 -t 5000000 -stbt db -zdbbl 1280>
+>    >              ├─533923 erl_child_setup 32768
+>    >              ├─533969 /usr/lib/erlang/erts-11.1.4/bin/epmd -daemon
+>    >              ├─534002 inet_gethost 4
+>    >              └─534003 inet_gethost 4
+>    >
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   ##########  Licensed under the MPL 2.0. Website: https://rabbitmq.com
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Doc guides: https://rabbitmq.com/documentation.html
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Support:    https://rabbitmq.com/contact.html
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Tutorials:  https://rabbitmq.com/getstarted.html
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Monitoring: https://rabbitmq.com/monitoring.html
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Logs: /var/log/rabbitmq/rabbit@gat-0.log
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:         /var/log/rabbitmq/rabbit@gat-0_upgrade.log
+>    > Dec 18 13:52:10 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Config file(s): (none)
+>    > Dec 18 13:52:14 gat-0.training.galaxyproject.eu rabbitmq-server[533733]:   Starting broker... completed with 0 plugins.
+>    > Dec 18 13:52:14 gat-0.training.galaxyproject.eu systemd[1]: Started RabbitMQ broker.
+>    > ```
+>    {: .code-out.code-max-300}
 >
 {: .hands_on}
 
