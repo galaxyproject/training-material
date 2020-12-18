@@ -383,7 +383,7 @@ Some of the other options we will be using are:
 >    pulsar_systemd_runner: webless
 >
 >    pulsar_create_user: true
->    pulsar_user: {name: ubuntu, shell: /bin/bash}
+>    pulsar_user: {name: pulsar, shell: /bin/bash}
 >
 >    pulsar_optional_dependencies:
 >      - pyOpenSSL
@@ -430,7 +430,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 > ### {% icon hands_on %} Hands-on: Creating the playbook
 >
-> 1. Create a `pulsar-playbook.yml` file with the following contents:
+> 1. Create a `pulsar.yml` file with the following contents:
 >
 >    {% raw %}
 >    ```yaml
@@ -448,17 +448,8 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >            state: present
 >            update_cache: yes
 >          become: yes
->        - name: chown the /mnt dir to ubuntu
->          file:
->            path: /mnt
->            owner: ubuntu
->            group: ubuntu
->            mode: 0755
->          become: yes
 >      roles:
 >        - role: galaxyproject.cvmfs
->          become: yes
->        - role: galaxyproject.nginx
 >          become: yes
 >        - galaxyproject.pulsar
 >    ```
@@ -477,7 +468,7 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 > 1. Create a `templates` directory in your working directory.
 >
 >    > ```bash
->    > mkdir templates
+>    > mkdir -p templates
 >    > ```
 >    {: .code-in}
 >
@@ -505,7 +496,7 @@ We also need to create the dependency resolver file so pulsar knows how to find 
 > 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
 >
 >    ```bash
->    ansible-playbook pulsar-playbook.yml
+>    ansible-playbook pulsar.yml
 >    ```
 >
 >    After the script has run, pulsar will be installed on the remote machines!
