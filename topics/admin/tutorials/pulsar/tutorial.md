@@ -596,8 +596,6 @@ How awesome is that? Pulsar in another continent with reference data automatical
 
 If you want to make use of Pulsar on a Supercomputer, you only need access to a submit node, and you will need to run Pulsar there. We recommend that if you need to run a setup with Pulsar, that you deploy an AMQP server (e.g. RabbitMQ) alongside your Galaxy. That way, you can run Pulsar on any submit nodes, and it can connect directly to the AMQP and Galaxy. Other Pulsar deployment options require exposing ports wherever Pulsar is running, and this requires significant more coordination effort.
 
-You can also create multiple queues on your RabbitMQ server for multiple Pulsar servers. On Galaxy Australia, we run 5 different Pulsar servers spread out all around the country. They all communicate with Galaxy via the one RabbitMQ server. Galaxy Main (USA) and Galaxy Europe have similar setups with Galaxy Europe having over 7 Pulsars each configured for different roles!
-
 For each new Pulsar server, you will need to add:
   1. In the RabbitMQ config:
       * A vhost
@@ -608,3 +606,20 @@ For each new Pulsar server, you will need to add:
 
 Pulsar servers can be the head node of a cluster. You can create a cluster and use your favourite job scheduler such as Slurm or PBS to schedule jobs. You can have many destinations in your Galaxy job_conf.xml file that change the number of cpus, amount of RAM etc. It can get quite complex and flexible if you like.
 
+## Australia
+
+You can also create multiple queues on your RabbitMQ server for multiple Pulsar servers. On Galaxy Australia, we run 5 different Pulsar servers spread out all around the country. They all communicate with Galaxy via the one RabbitMQ server.
+
+![Map of australia with 8 pulsar nodes marked around the country.](../../images/australia_locations.png)
+
+## Europe
+
+Galaxy Europe has taken Pulsar and built [The Pulsar Network](https://pulsar-network.readthedocs.io/en/latest). This provides a framework for easily deploying Pulsar clusters in the cloud, something needed to support compute centers which might not have as much experience. This way they get an easy package they can deploy and the European Galaxy team can manage.
+
+![Map of europe with pulsar nodes marked in many countries. An inset shows australia with a node there too.](https://pulsar-network.readthedocs.io/en/latest/_images/nodes.png)
+
+The main purpose of this network is to support the workload of the UseGalaxy.eu instance by distributing it across several European data centers and clusters. If you're interested in setting up something similar, they [provide documentation](https://pulsar-network.readthedocs.io/en/latest/introduction.html) on how to install and configure a Pulsar network endpoint on a cloud infrastructure and how to connect it to your server.
+
+# Conclusion
+
+You're ready to ship your Galaxy jobs around the world! Now wherever you have compute space, you know how to setup a Pulsar node and connect it to Galaxy. Let us know if you come up with creative places to run your Galaxy jobs (coworker's laptops, your IoT fridge, the sky is the limit if it's x86 and has python)
