@@ -392,7 +392,6 @@ Some of the other options we will be using are:
 >      - psutil
 >
 >    pulsar_yaml_config:
->      dependency_resolvers_config_file: dependency_resolvers_conf.xml
 >      conda_auto_init: True
 >      conda_auto_install: True
 >      staging_directory: "{{ pulsar_staging_dir }}"
@@ -406,8 +405,21 @@ Some of the other options we will be using are:
 >      amqp_publish_retry_interval_step: 10
 >      amqp_publish_retry_interval_max: 60
 >
+>    # We also need to create the dependency resolver file so pulsar knows how to
+>    # find and install dependencies for the tools we ask it to run. The simplest
+>    # method which covers 99% of the use cases is to use conda auto installs similar
+>    # to how Galaxy works.
+>    pulsar_dependency_resolvers:
+>      - name: conda
+>        args:
+>          - name: auto_init
+>            value: true
 >    ```
 >    {% endraw %}
+>
+>    > ### {% icon details %} Running non-conda tools
+>    > If the tool you want to run on Pulsar doesn't have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
+>    {: .details}
 >
 > 3. Add the following lines to your `hosts` file:
 >
@@ -453,36 +465,6 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >
 >
 {: .hands_on}
-
-We also need to create the dependency resolver file so pulsar knows how to find and install dependencies for the tools we ask it to run. The simplest method which covers 99% of the use cases is to use conda auto installs similar to how Galaxy works. We need to create the file and put it where the `galaxyproject.pulsar` role can find it.
-
-
-> ### {% icon hands_on %} Hands-on: Creating dependency resolver configuration
->
-> 1. Create a `templates` directory in your working directory.
->
->    > ```bash
->    > mkdir -p templates
->    > ```
->    {: .code-in}
->
-> 2. Create a `dependency_resolvers_conf.xml.j2` file inside the `templates` directory with the following contents:
->
->    ```xml
->    <dependency_resolvers>
->        <conda auto_install="True" auto_init="True"/>
->    </dependency_resolvers>
->    ```
->
->    This tells pulsar to **only** look for dependencies in conda.
->
->
-{: .hands_on}
-
-
-> ### {% icon details %} Running non-conda tools
-> If the tool you want to run on Pulsar doesn't have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
-{: .details}
 
 
 > ### {% icon hands_on %} Hands-on: Run the Playbook
