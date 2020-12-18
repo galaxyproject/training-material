@@ -370,12 +370,6 @@ Some of the other options we will be using are:
 >    galaxy_server_url: #please put the your Galaxy server's fqdn or ip address here (or the fqdn or ip address of the RabbitMQ server).
 >
 >    pulsar_root: /mnt/pulsar
->    pulsar_server_dir: /mnt/pulsar/server
->    pulsar_venv_dir: /mnt/pulsar/venv
->    pulsar_config_dir: /mnt/pulsar/config
->    pulsar_staging_dir: /mnt/pulsar/files/staging
->    pulsar_persistence_dir: /mnt/pulsar/files/persistent_data
->    pulsar_dependencies_dir: /mnt/pulsar/deps
 >
 >    pulsar_pip_install: true
 >    pulsar_pycurl_ssl_library: openssl
