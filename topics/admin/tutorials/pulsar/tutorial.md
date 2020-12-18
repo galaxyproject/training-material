@@ -300,6 +300,33 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    But this doesn't tell the whole story, so run the diagnostics command to
+>    check that the interfaces are setup and listening. RabbitMQ has a bad
+>    habit of silently failing when processing the configuration, without any
+>    logging information If RabbitMQ has any problem reading the configuration
+>    file, it falls back to the default configuration (listens *without* ssl on
+>    `tcp/5672`) so be sure to check that everything is OK before continuing.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > sudo rabbitmq-diagnostics status
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output: Bash
+>    >
+>    > ```ini
+>    > ...
+>    >
+>    > Listeners
+>    >
+>    > Interface: [::], port: 15672, protocol: http, purpose: HTTP API
+>    > Interface: [::], port: 25672, protocol: clustering, purpose: inter-node and CLI tool communication
+>    > Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
+>    > Interface: 0.0.0.0, port: 5671, protocol: amqp/ssl, purpose: AMQP 0-9-1 and AMQP 1.0 over TLS
+>    > ```
+>    {: .code-out.code-max-300}
+>
 {: .hands_on}
 
 
