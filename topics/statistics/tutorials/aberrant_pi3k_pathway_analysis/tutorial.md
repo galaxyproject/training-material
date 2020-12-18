@@ -12,9 +12,10 @@ objectives:
 - Apply logistic regression based machine learning algorithms on TCGA data.
 time_estimation: 1H30M
 key_points:
-- Identify the transcriptomic signature of tumors with PI3K gene mutations and potential biomarkers that are
-  useful in improving personalized medicine
-- They will appear at the end of the tutorial
+- Identify the transcriptomic signature of tumors with PI3K gene mutations 
+- Identify potential biomarkers that are associated with aberrant PI3K activity
+- Perform classification task of samples according to aberrant PI3K activity
+- Correlations from classifier predictions and pharmacological responses can be useful in improving personalized medicine approaches. 
 contributors:
 - nvk747
 - blankenberg
@@ -98,25 +99,27 @@ In this tutorial, we made series of steps to generate classification models and 
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GDSC_EXP_CCLE_converted_name.tsv.gz
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE69822_pi3k_sign.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE69822_pi3k_trans.csv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
+>    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_rtk_ras_pi3k_genes.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mc3.v0.2.8.PUBLIC.maf.gz
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/mutation_burden_freeze.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_GISTIC_threshold.tsv.gz
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_mutation_freeze.tsv.gz
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/pancan_rnaseq_freeze.tsv.gz
+>    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/sample_freeze.tsv
+>    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionary.tsv
+>    ```
+{: .hands_on}
+
+> ### {% icon hands_on %} Hands-on: Some additional files that you can use for alternative analysis
+>    ```
+>	 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
+>    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_cell_cycle_genes.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_myc_genes.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_ras_genes.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_rtk_ras_pi3k_genes.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_wnt_genes.txt
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/sample_freeze.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/sampleset_freeze_version4_modify.csv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/seg_based_scores.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/tcga_dictionary.tsv
->    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/vogelstein_cancergenes.tsv
 >    ```
 {: .hands_on}
+
 
 ## **PAPAA: PanCancer classifier**
 This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2,KRAS,PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV, PRAD,READ,STAD,UCEC, and UCS (ref: tcga_dictionary.tsv).  This step takes feature information (pancan_rnaseq_freeze.tsv.gz), mutational information (pancan_mutation_freeze.tsv.gz), load of mutations in each samples (mutation_burden_freeze.tsv.gz), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv.gz & copy_number_gain_status.tsv.gz) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance. 
@@ -137,6 +140,9 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 >    - *"Number of cross validation folds to perform"*: `5`
 >    - *"Decision to drop input genes from X matrix"*: `Yes`
 >    - *"Supplement Y matrix with copy number events"*: `Yes`
+>    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
 >    - *"Min number of mutations in diseases to include"*: `15`
 >    - *"Min proportion of positives to include disease"*: `0.05`
 >    - *"Number of MAD genes to include in classifier"*: `8000`
@@ -179,7 +185,7 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 {: .details}
 
 > ### {% icon comment %} Outputs
->    - Several outputs are generated from this step: A combined disease model (pan-model) and individual disease models are generated. Logistic regression with elastic net penalization outputs sparse classifiers with 150-250 genes whose scores or weights are important for classification tasks. This tool computes predictions, accuracy measurements and measures AUROC and AUPR curves for the combined disease model (pan-model). Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alternative genes and cancer types. An overall model statistics are provided in the form of classifier summary. Additionally a tabular output that includes each gene mutation and copy number counts per each targene and proportions in various diseases is listed. 
+>    - Several outputs are generated from this step: A combined disease model (Pan-model) and individual disease models are generated. Logistic regression with elastic net penalization outputs sparse classifiers with 150-250 genes whose scores or weights are important for classification tasks. This tool computes predictions, accuracy measurements and measures AUROC and AUPR curves for the combined disease model (Pan-model). Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alternative genes and cancer types. An overall model statistics are provided in the form of classifier summary. Additionally a tabular output that includes each gene mutation and copy number counts per each targene and proportions in various diseases is listed. 
 >    - Log file for script run and additional information
 >    - alt_gene_alt_disease_summary.tsv
 >    - alt_summary_counts.csv
@@ -528,8 +534,8 @@ In this step we use our classifier information and predict mutational status for
 > 1. {% tool [PAPAA: PanCancer external sample status prediction](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_external_sample_status_prediction/pancancer_external_sample_status_prediction/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Classifier data"*: `classifier_summary.txt` (output of **PAPAA: PanCancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: PanCancer classifier** {% icon tool %})
->    - {% icon param-file %} *"external sample gene expression data"*: `vlog_trans.csv` (Input dataset)
->    - {% icon param-file %} *"given mutational status"*: `sign.txt` (Input dataset)
+>    - {% icon param-file %} *"external sample gene expression data"*: `GSE69822_pi3k_trans.csv` (Input dataset)
+>    - {% icon param-file %} *"given mutational status"*: `GSE69822_pi3k_sign.txt` (Input dataset)
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `external_sample_pred_targene_classifier.py` inputs
