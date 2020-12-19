@@ -20,7 +20,7 @@ contributors:
 ## Introduction
 {:.no_toc}
 
-Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. In this tutorial, we will learn how to use different utilities of PDAUG to calculate various peptide-based descriptors and use these descriptors for machine learning modeling of peptides with known anti-cancer properties. We will use CTD (composition, transition, and distribution ) descriptor to define peptide sequences in the training set and will test 6 different machine learning algorithms. We will also assess the effect of normalization on the accuracy of ML models.
+Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. In this tutorial, we will learn how to use different utilities of Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for machine learning (ML) modeling of peptides with known anti-cancer properties. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different machine learning algorithms. We will also assess the effect of normalization on the accuracy of ML models.
 
 > ### Agenda
 >
@@ -62,7 +62,7 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 
 ## Background
 
-Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequences-based properties. These properties can be utilized to deduce biological meanings. Properties associated with a peptide sequence such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build a machine learning model and predict the biological properties of unknown peptides. Finding anticancer peptides (ACPs) through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation.
+Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequences-based properties. These properties can be utilized to deduce biological meanings. Properties associated with a peptide sequence such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build a machine learning model (ML) and predict the biological properties of unknown peptides. Finding anticancer peptides (ACPs) through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation.
 In this tutorial, we used 6 different machine learning algorithms for the prediction of ACPs using the peptide sequence-based CTD (Composition transition and distribution descriptors) descriptors or features. All the models were trained using our dataset that combines 138 Anticancer peptides and 138 non-anticancer peptides. We applied 10 fold cross-validation on this data set.
 
 
@@ -182,7 +182,7 @@ In this step, we will apply six ML algorithms Linear Regression Classifier (LRC)
 
 ### Merging results in one file
 
-In previous steps we have trained the machine learning models, these models return a TSV  that captures performance measures of these algorithms. We used the Marge Data Frame tool to combine these results as one file in this step.  
+In previous steps we have trained the machine learning models, these models return a TSV  that captures performance measures of these algorithms. We used the Merge Data Frame tool to combine these results as one file in this step.  
 
 > ### {% icon hands_on %} Hands-on: Merging result as one tabular file
 >
