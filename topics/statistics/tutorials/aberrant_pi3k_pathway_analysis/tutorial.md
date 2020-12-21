@@ -26,7 +26,7 @@ contributors:
 {:.no_toc}
 
 Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways 
-({% cite SanchezVega2018 %}). One-third of these tumors possess multiple alterations and have potentially complex phenotypes. Identifying a transcriptomic signature in these tumors would enable personalized therapeutic design strategies. A plethora of evidence suggests complex diseases, like cancer, can be the result of multiple genetic aberrations in biological networks or pathways rather than variation in a single gene. Often starter mutations occur in a key component network that ultimately leads to multigene dysregulation causing hallmark cancer phenotypes ({% cite Hanahan2000 %}). Many of these phenotypes are the result of disrupted transcriptional programs that affect the clinical progression and therapeutic responsiveness. Recent progress in exploring these transcriptomic changes in cancer pathogenesis provided useful clues in precision medicine ({% cite Bradner2017 %}).
+({% cite SanchezVega2018 %}). One-third of these tumors possess multiple alterations and have potentially complex phenotypes. Identifying a transcriptomic signature in these tumors would enable personalized therapeutic design strategies. A plethora of evidence suggests complex diseases, like cancer, can be the result of multiple genetic aberrations in biological networks or pathways rather than variation in a single gene. Often starter mutations occur in a key component network that ultimately leads to multi-gene dysregulation causing hallmark cancer phenotypes ({% cite Hanahan2000 %}). Many of these phenotypes are the result of disrupted transcriptional programs that affect the clinical progression and therapeutic responsiveness. Recent progress in exploring these transcriptomic changes in cancer pathogenesis provided useful clues in precision medicine ({% cite Bradner2017 %}).
 
 The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and is commonly altered in various cancers ({% cite Fruman2014 %}). Perturbations across this axis can lead to deficiencies in cell-cycle, survival, metabolism, motility and genome stability, triggering hallmark phenotypes of cancer. The constitutive activation and presence of phosphatidylinositol-3,4,5-trisphosphate (PIP3) trigger membrane-bound onco-signalosomes. This presents significant challenges for treatment, as PI3K cascade can be activated in several ways ({% cite Zhao2006 %}).
 
@@ -111,7 +111,7 @@ In this tutorial, we made series of steps to generate classification models and 
 
 > ### {% icon hands_on %} Hands-on: Some additional files that you can use for alternative analysis
 >    ```
->	 https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
+>	https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_cell_cycle_genes.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/path_myc_genes.txt
@@ -120,6 +120,32 @@ In this tutorial, we made series of steps to generate classification models and 
 >    ```
 {: .hands_on}
 
+## **Datasets descriptions**
+
+-	**pancan_rnaseq_freeze.tsv.gz:** Publicly available gene expression data for the TCGA Pan-cancer dataset. This file 	has gene-expression data for ~20000 genes (columns) in ~10000 samples (rows). 
+-	**pancan_mutation_freeze.tsv.gz:** Publicly available Mutational information for TCGA Pan-cancer dataset.  This file 	 has mutational data for all genes (columns) as binary valued (0/1) in all samples (rows).
+-	**mutation_burden_freeze.tsv.gz:** Publicly available Mutational information for TCGA Pan-cancer dataset. This file 	has mutational burden information for all samples(rows) 
+-	**sample_freeze.tsv:** The file lists the frozen samples as determined by TCGA PanCancer Atlas consortium along with 	 raw RNAseq and mutation data. These were previously determined and included for all downstream analysis All other 
+	datasets were processed and subset according to the frozen samples.
+-	**cosmic_cancer_classification.tsv:** Compendium of OG and TSG used for the analysis. This file has list of cancer 		genes(rows) from [cosmic database](https://cancer.sanger.ac.uk/cosmic) classified as Oncogene or tumor suppressor (		columns). 
+-	**CCLE_DepMap_18Q1_maf_20180207.txt.gz:** Publicly available Mutational data for CCLE cell lines from Broad Institute 		Cancer Cell Line Encyclopedia [CCLE](https://portals.broadinstitute.org/ccle)/[DepMap Portal](https://depmap.org/portal/). Variant classification along with nucleotide and protein level changes are provided in the columns for genes(		rows)  
+-	**ccle_rnaseq_genes_rpkm_20180929_mod.tsv.gz:** Publicly available Expression data for 1019 cell lines (RPKM) from  	Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-expression data for genes(		rows) in various cell lines (columns).
+-	**CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv:** Publicly available merged Mutational and copy number alterations that 	include gene amplifications and deletions for the CCLE cell lines. This file has mutational/copy number variation data 	   for all cancer genes (rows) as binary valued (0/1) in all CCLE cell lines (columns).
+-	**GDSC_cell_lines_EXP_CCLE_names.tsv.gz:** Publicly available RMA normalized expression data for Genomics of Drug 		Sensitivity in Cancer [GDSC](https://www.cancerrxgene.org/) cell-lines. This data was subset to 382 cell lines that 	are common among CCLE and GDSC. This file has gene-expression data for genes(rows) in various cell lines (columns). 
+-	**GDSC_CCLE_common_mut_cnv_binary.tsv.gz:** A subset of merged Mutational and copy number alterations that include 		gene amplifications and deletions for common cell lines between GDSC and CCLE.
+-	**gdsc1_ccle_pharm_fitted_dose_data.txt.gz:** Pharmacological data for GDSC-1 cell lines. This data was subset to 379 	  cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug 				information, concentrations used, AUC(columns) of 304 tested compounds in various cell-lines(rows).
+-	**gdsc2_ccle_pharm_fitted_dose_data.txt.gz:** Pharmacological data for GDSC-2 cell lines. This data was subset to 347 	  cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug 				information, concentrations used, AUC(columns) of 170 tested compounds in various cell-lines(rows).
+-	**compounds_of_interest.txt:** This file contains the compounds of interest for generation of pharmacological 			correlations with classifier scores. List of inhibitor compounds against EGFR-signaling, ERK-MAPK-signaling, 			Other-kinases, 	PI3K/MTOR-signaling, and RTK-signaling pathways.
+-	**tcga_dictonary.tsv:** List of cancer types used in the analysis.
+-	**GSE69822_pi3k_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited	  in Gene Expression Omnibus database accession:[GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822)
+-	**GSE69822_pi3k_trans.csv:** Variant stabilized transformed values for the RNA expression levels in the external 		samples from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822)
+-	**path_rtk_ras_pi3k_genes.txt:** List of genes belong to RTK,RAS,PI3K used in our study.
+-	**path_myc_genes.txt:** List of genes belong to Myc signaling pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3) 
+-	**path_ras_genes.txt:** List of genes belong to Ras signaling Pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3) 
+-	**path_cell_cycle_genes.txt:** List of genes belong to cell cycle pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3) 
+-	**path_wnt_genes.txt:** List of genes belong to wnt signaling pathway [Sanchez Vega et.al 2018](https://www.cell.com/action/showPdf?pii=S0092-8674%2818%2930359-3) 
+-	**GSE94937_rpkm_kras.csv:** RNA expression levels in the external samples from [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937)
+-	**GSE94937_kras_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited	  in Gene Expression Omnibus database accession:[GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937)
 
 ## **PAPAA: PanCancer classifier**
 This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2,KRAS,PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV, PRAD,READ,STAD,UCEC, and UCS (ref: tcga_dictionary.tsv).  This step takes feature information (pancan_rnaseq_freeze.tsv.gz), mutational information (pancan_mutation_freeze.tsv.gz), load of mutations in each samples (mutation_burden_freeze.tsv.gz), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv.gz & copy_number_gain_status.tsv.gz) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance. 
@@ -259,16 +285,16 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 > ### {% icon hands_on %} Hands-on: compare the ERBB2_PIK3CA_KRAS_AKT1 pan model with individual disease models
 >
 > 1. {% tool [PAPAA: PanCancer compare within models](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9) %} with the following parameters:
->    - {% icon param-file %} *"pancancer classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer classifier** {% icon tool %})
->    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer classifier** {% icon tool %})
->    - {% icon param-file %} *"pan_within classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})
->    - {% icon param-file %} *"pan_within classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer within disease analysis** {% icon tool %})
+>    - {% icon param-file %} *"pancancer classifier summary"*: `classifier_summary.txt` (output of **PAPAA: PanCancer classifier** {% icon tool %})
+>    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: Pancancer classifier** {% icon tool %}) 
+>    - {% icon param-file %} *"pan_within classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})(Note: Select all pan-within classifier summaries as dataset collection instead of multiple datasets)
+>    - {% icon param-file %} *"pan_within classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer within disease analysis** {% icon tool %}) (Note: Select all pan-within classifier coefficients as dataset collection instead of multiple datasets)
 >    - *"Would you want to compare given model with alt gene model?"*: `do not do alt gene`
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs
->    - \--pancan_model 	location of pan and pan-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s  
->    - \--alt_model 	location of alt and alt-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s
+>    - \--pancan_model 	location of pan and pan-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s dataset collections
+>    - \--alt_model 	location of alt and alt-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s dataset collections 
 {: .details}
 
 > ### {% icon comment %} Outputs
@@ -350,7 +376,7 @@ In this step we combined variant level information for each mutation combining w
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `map_mutation_class.py` inputs
->    - \--classifer_decisions 	String of the location of folder containing classifier_decisions.tsv
+>    - \--classifier_decisions 	String of the location of folder containing classifier_decisions.tsv
 >    - \--path_genes 	comma separated string of HUGO symbols for all genes in the pathway or Pathway genes list file
 >    - \--filename_copy_loss 	Filename of copy number loss
 >    - \--filename_copy_gain 	Filename of copy number gain
@@ -526,8 +552,8 @@ In this step we use our classifier information and predict mutational status for
 {: .comment}
 
 ## **PanCancer external sample status prediction**
-In this step we use our classifier information and predict mutational status for PI3KCA mutant and WT samples.
-![GSE69822_samples_classification](../../images/aberrant_pi3k_pathway_analysis/external.png ") PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT (blue circles) or having a PIK3CA-H1074R mutation (orange circles).")
+In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822), where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wildtype MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.  
+![GSE69822_samples_classification](../../images/aberrant_pi3k_pathway_analysis/external.png ") PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).")
 
 > ### {% icon hands_on %} Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model
 >
