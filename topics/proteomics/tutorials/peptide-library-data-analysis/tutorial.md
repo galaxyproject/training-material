@@ -61,7 +61,7 @@ In this step, we will be converting and splitting the tabular data file into fas
 
 ### Summary Plot for peptide libraries 
 
-In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare peptide sequences based on hydrophobicity, hydrophobic movement, charge, amino acid fraction, and sequence length and creates a summary plot.
+In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare peptide sequences based on hydrophobicity, hydrophobic movement, charge, amino acid fraction, and sequence length and create a summary plot.
 
 
 
@@ -74,6 +74,19 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 >        - *"first input file"*: `AMP`
 >        - *"Second input file"*: `TM `
 >
+>   > ### {% icon question %} Questions
+>   > What can be concluded from the summary plot based on different properties?
+>   >
+>   >  > ### {% icon solution %} Solution
+>   >  > The summary plot represents differences between two sets of peptides based on an amino acid fraction, global charge, sequence length, global hydrophobicity, glocal hydrophobic movement. Additionally, 3D scattered plot shows the clustering of peptides based on three features.
+>   >  >  
+>   >  > 1. Leucine and Valine show relatively higher differences in terms of their fraction within both groups. 
+>   >  > 2. TMPs show a global charge in the range of 0-5 in comparison to AMPs which show a global charge in a range of 0-14.
+>   >  > 3. AMPs show higher variability in terms of their length, global hydrophobic movement, and hydrophobicity in comparison to TMPs.
+>   >  > 4. Hydrophobicity of peptides is important to determine their transmembrane properties which is evident with this summary plot.
+>   >  > 5. Clustering of two different kinds of peptides can be observed with a 3D scattered plot based on their properties, however, we can also observe a few peptides with overlapping feature space.
+>   >  {: .solution }
+>   {: .question}
 >
 {: .hands_on}
 
@@ -83,7 +96,7 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 
 ### Assessing feature space distribution 
 
-In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide library based on the feature space using the Fisher test. 
+In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libraries based on the feature space using the Fisher test. 
 
 
 > ### {% icon hands_on %} Hands-on: Generating a Fisher's plot to assess peptide dataset
@@ -94,6 +107,15 @@ In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libr
 >    - *"Label for first population"*: `AMP`
 >    - *"Label for second population"*: `TM`
 >
+>   > ### {% icon question %} Questions
+>   > What does Fisher's plot represents?
+>   >
+>   >  > ### {% icon solution %} Solution
+>   >  > The summary plot represents differences between two sets of peptides based on an amino acid fraction, global charge, sequence length, global hydrophobicity, glocal hydrophobic movement. Additionally, 3D scattered plot shows the clustering of peptides based on three features.
+>   >  >  
+>   >  > Fisher's plot represents the difference between two groups of peptides based on their feature space. Each tiny square in this plot represents the feature space. Based on the sliding window Fisher's test was performed for each feature space to assess the presence of peptides from two different groups on each of the tiny squares.  The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher's plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.
+>   >  {: .solution }
+>   {: .question}
 >
 {: .hands_on}
 
@@ -105,7 +127,7 @@ The AMPs and TMPs in the feature space represented by their mean hydropathy and 
 
 ### Calculating Sequence Property-Based Descriptors 
 
-In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptors" tool to calculate CTD (Composition Transition and Distribution) descriptor.
+In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length{% cite Govindan_Nair_2013 %}.
 
 
 > ### {% icon hands_on %} Hands-on: Calculating descriptors for the peptide dataset
@@ -122,12 +144,13 @@ In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptor
 {: .hands_on}
 
 
+### Adding Class labels in both AMPs and TMPs
 
-### Adding Class labels 
+Usually, class labels are represented by 0 or 1. If data has multi-class classification problems it can be represented by 0,1,2,3, etc. In addition to this, class labels can also be represented by a specific string such as "anticancer" and "non-anticancer" or "treated" and "untreated".
 
-- **Adding class label in AMPs data**
+- **Adding class label in AMPs and TMPs data**
 
-> ### {% icon hands_on %} Hands-on: Adding class labels to the data frames
+> ### {% icon hands_on %} Hands-on: Adding class labels to the tabular data
 > 
 > 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
@@ -141,12 +164,12 @@ In this step, we will be utilizing the "PDAUG Sequence Property Based Descriptor
 {: .hands_on}
 
 
-### Merging the two data frames 
+### Merging the two tabular data files 
 
-We utilize **PDAUG Merge Dataframes** to merge two dataframes. 
+We utilize **PDAUG Merge Dataframes** to merge two tabular data files. 
 
 
-> ### {% icon hands_on %} Hands-on: Merging two dataframes
+> ### {% icon hands_on %} Hands-on: Merging two tabular data files
 > 
 > 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG Add Class Label on data 6 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %}), `PDAUG Add Class Label on data 7 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %})
