@@ -68,7 +68,7 @@ TCTATATCTCGGCTCTAGG    <- read 1
 ## Directed graphs
 
 We build a *directed graph* where directed *edges* connect *nodes* representing overlapping reads:
-![](../images/dag.png)
+![Image showing example reads represented as nodes, and an overlap between two reads as an edge](../../images/dag.png)
 
 >**Directed graph** representing overlapping reads. (Image from [Ben Langmead](http://www.cs.jhu.edu/~langmea/resources/lecture_notes/assembly_scs.pdf)).
 
@@ -84,14 +84,14 @@ We're lucky, we know the corresponding genome sequence is TAATGCCATGGGATGTT
 
 So the 15 reads can be represented as the following directed graph:
 
-![](../images/4.6.png)
+![A graph representing the 15 overlapping example reads](../../images/4.6.png)
 
 ---
 
 **However**, in real life we do not know the actual genome! All we have is a collection of reads. Let's first build an overlap graph by connecting two 3-mers if suffix of one is equal to the prefix of the other:
 
 
->![](../images/4.7.png)
+>![All possible overlap connections for our 3-mer collection](../../images/4.7.png)
 >
 >**Overlap graph**. All possible overlap connections for our 3-mer collection. (Fig. 4.7 from [CP](http://bioinformaticsalgorithms.com/))
 
@@ -101,8 +101,8 @@ So to determine the sequence of the underlying genome we are looking for a path 
 
 For example for our 3-mer collection there are two possible Hamiltonian paths:
 
-![](../images/4.9a.png)
-![](../images/4.9b.png)
+![First possible Hamiltonian path](../../images/4.9a.png)
+![Second possible Hamiltonian path](../../images/4.9b.png)
 
 **Two Hamiltonian paths for the 15 3-mers**. Edges spelling "genomes" <code>TAATGCCATGGGATGTT</code> and <code>TAATGGGATGCCATGTT</code> are highlighted in black. (Fig. 4.9. from [[CP](http://bioinformaticsalgorithms.com/)](http://bioinformaticsalgorithms.com/)).
 
@@ -132,61 +132,61 @@ Based on a counter-intuitive idea
 ---
 
 # **What are K-mers?**
-![](../images/kmers01.png)
+![K-mers are subwords of length k of a string](../../images/kmers01.png)
 
 ---
 
 # **K-mers de Bruijn graph**
-![](../images/ex1-1.png)
+![Example with 4 english words](../../images/ex1-1.png)
 
 ---
 
 # **K-mers de Bruijn graph**
-![](../images/ex1-2.png)
+![Example with 4 english words](../../images/ex1-2.png)
 
 ---
 
 # **K-mers de Bruijn graph**
-![](../images/ex1-3.png)
+![Example with 4 english words](../../images/ex1-3.png)
 
 ---
 
 # **K-mers de Bruijn graph**
-![](../images/ex1-4.png)
+![Example with 4 english words](../../images/ex1-4.png)
 
 ---
 
 # **The problem of repeats**
-![](../images/ex2-1.png)
+![Example with a word containing repeats: Mississippi](../../images/ex2-1.png)
 
 ---
 
 # **The problem of repeats**
-![](../images/ex2-2.png)
+![Example with a word containing repeats: Mississippi](../../images/ex2-2.png)
 
 ---
 
 # **The problem of repeats**
-![](../images/ex2-3.png)
+![Example with a word containing repeats: Mississippi](../../images/ex2-3.png)
 
 ---
 
 # **The problem of repeats**
-![](../images/ex2-4.png)
+![Example with a word containing repeats: Mississippi](../../images/ex2-4.png)
 
 ---
 
 # **Different k**
-![](../images/ex2a-1.png)
+![Effect of the size of k](../../images/ex2a-1.png)
 ---
 # **Different k**
-![](../images/ex2a-2.png)
+![Effect of the size of k](../../images/ex2a-2.png)
 ---
 # **Different k**
-![](../images/ex2a-3.png)
+![Effect of the size of k](../../images/ex2a-3.png)
 ---
 # **Different k**
-![](../images/ex2a-4.png)
+![Effect of the size of k](../../images/ex2a-4.png)
 
 ---
 # **Choose k wisely**
@@ -206,21 +206,21 @@ Based on a counter-intuitive idea
 ---
 
 # **Read errors**
-.image-75[![](../images/ex3-head.png)]
-![](../images/blank.png)
+.image-75[![Example of english words with errors](../../images/ex3-head.png)]
+![Example of english words with errors](../../images/blank.png)
 ---
 
 # **Read errors**
-.image-75[![](../images/ex3-head.png)]
-![](../images/ex3-2.png)
+.image-75[![Example of english words with errors](../../images/ex3-head.png)]
+![Example of english words with errors](../../images/ex3-2.png)
 ---
 # **Read errors**
-.image-75[![](../images/ex3-head.png)]
-![](../images/ex3-3.png)
+.image-75[![Example of english words with errors](../../images/ex3-head.png)]
+![Example of english words with errors](../../images/ex3-3.png)
 ---
 # **Read errors**
-.image-75[![](../images/ex3-head.png)]
-![](../images/ex3-4.png)
+.image-75[![Example of english words with errors](../../images/ex3-head.png)]
+![Example of english words with errors](../../images/ex3-4.png)
 
 ---
 
@@ -228,7 +228,7 @@ Based on a counter-intuitive idea
 
 The number of unique reads that contain a given nucleotide in the reconstructed sequence.
 
-![](../images/coverage.png)
+![Aligned reads showing the notion of coverage](../../images/coverage.png)
 
 Source: [Wikimedia](https://commons.wikimedia.org/wiki/File:Read,_read_length_and_read_depth_to_achieve_a_read_depth)
 
@@ -251,7 +251,7 @@ Source: [Wikimedia](https://commons.wikimedia.org/wiki/File:Read,_read_length_an
 ***More coverage depth will help overcome errors!***
 ---
 # **Read errors revisited**
-![](../images/ex3a.png)
+![Graph annotated with coverage](../../images/ex3a.png)
 
 ---
 
@@ -285,19 +285,19 @@ In this topic we've learned about two ways of representing the relationship betw
 
 # Overlap graph
 
-![](../images/4.7.png)
+![An example overlap graph](../../images/4.7.png)
 
 ---
 
 # de Bruijn Graph - same data
 
-![](../images/4.13f.png)
+![An example de Bruijn graph](../../images/4.13f.png)
 
 ---
 
 Whatever the representation will be it will be messy:
 
-![](../images/t12_mess.png)
+![An example of a real-life, noisy graph](../../images/t12_mess.png)
 
 A fragment of a very large De Bruijn graph (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -310,7 +310,7 @@ There are multiple reasons for such messiness:
 
 Sequencing machines do not give perfect data. This results in spurious deviations on the graph. Some sequencing technologies such as Oxford Nanopore have very high error rate of ~15%.
 
->![](../images/t12_errors.png)
+>![Zoom on graph region containing sequencing errors](../../images/t12_errors.png)
 >
 >Graph components resulting from sequencing errors (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -320,7 +320,7 @@ Sequencing machines do not give perfect data. This results in spurious deviation
 
 As we discussed earlier humans are diploid and there are multiple differences between maternal and paternal genomes. This creates "bubbles" on assembly graphs:
 
->![](../images/t12_bubble.png)
+>![Impact of diploid genome sequencing on graphs](../../images/t12_bubble.png)
 >
 >Bubbles due to a heterozygous site  (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -330,7 +330,7 @@ As we discussed earlier humans are diploid and there are multiple differences be
 
 As we've seen the third law of assembly is unbeatable. As a result some regions of the genome simply cannot be resolved and are reported in segments called *contigs*:
 
->![](../images/t12_contigs.png)
+>![Impact of repeats on graphs](../../images/t12_contigs.png)
 >
 >The following "genomic" segment will be reported in three pieces corresponding to regions flanking the repeat and repeat itself (Image from [BL](https://github.com/BenLangmead/ads1-slides/blob/master/0580_asm__practice.pdf)).
 
@@ -350,7 +350,7 @@ Other data and tools for polishing (scaffolding, gap filling, ...)
 
 # Other data: Optical maps
 
-![](../images/Optical_mapping.jpg)
+![Optical mapping workflow](../../images/Optical_mapping.jpg)
 (Source: [Wikimedia](https://en.wikipedia.org/wiki/Optical_mapping#/media/File:Optical_mapping.jpg))
 
 Use for scaffolding by comparing the restriction map with the predicted restriction sites in the contig sequences
@@ -359,7 +359,7 @@ Use for scaffolding by comparing the restriction map with the predicted restrict
 
 # Other data:  Hi-C
 
-![](../images/hic.jpg)
+![Hi-C sequencing workflow](../../images/hic.jpg)
 (Source: Dovetail genomics)
 
 Sequence chunks of genome colocalized
@@ -368,7 +368,7 @@ Sequence chunks of genome colocalized
 
 # Other data: Linked-Reads
 
-![](../images/linked_reads.png)
+![Linked-Reads workflow](../../images/linked_reads.png)
 (Source: 10X)
 
 Reads grouped by physical regions on the genome thanks to barcodes
