@@ -5,7 +5,7 @@ title: Machine Learning Modeling of Anticancer Peptides
 zenodo_link: "https://doi.org/10.5281/zenodo.4111092"
 level: Intermediate
 questions:
-  - Which machine learning (ML) algorithm is superior in classifying anticancer (ACPs) and non-anticancer peptides (non-ACPs)?
+  - Which machine learning (ML) algorithm is superior in classifying anticancer peptides (ACPs) and non-anticancer peptides (non-ACPs)?
 objectives:
   - Learn, how to calculate peptide descriptor
   - Learn, how to create training data set from features?
@@ -21,12 +21,13 @@ contributors:
 {:.no_toc}
 
 
-Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequences-based properties. These properties can be utilized to deduce biological meanings using ML modeling. A descriptor or feature is the quantitative or a qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to summarise a biological property such as anticancer activity. Properties associated with a peptide sequence such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build a ML and predict the biological properties of unknown peptides. Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. Finding ACPs through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. Additionally, we will learn how to use different utilities of Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for ML modeling of peptides with known anticancer properties. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different ML algorithms. We will also assess the effect of normalization on the accuracy of ML models.
+Biological molecules such as proteins, peptides, DNA, and RNA can be represented by their biochemical or sequence-based properties. These properties can be utilized to deduce biological meanings using ML modeling. A descriptor or feature is the quantitative or qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to describe a biological activity such as anticancer property. Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build an ML model in predicting the biological properties of unknown peptides. Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. Finding ACPs through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for ML modeling. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different ML algorithms. We will also assess the effect of normalization on the accuracy of ML models.
+
 
 
 ![Peptide descriptors](../../images/PDAUG_ML_1.png "ML algorithms use numerical representation of a sequence-based properties for model building")
 
-In **Figurre 1** features or descriptors are represented with (F1, F2, F3, etc.), and the class labels are represented with 0, or 1. In binary classification, usually, class labels are represented by 0 or 1. If data has multi-class classification problems it can be represented by 0, 1, 2, 3, etc. In addition to this, in ML the class labels can also be represented by a specific string such as "anticancer" and "non-anticancer" or "treated" and "untreated". Here we will be discussing the binary classification problem hence our two groups of peptides will be represented by 1 (APCs) and 0 (non-ACPs). 
+In **Figure 1** features or descriptors are represented with (F1, F2, F3, etc.) and in binary classification, usually, class labels are represented by 0 or 1. 
 
 
 > ### Agenda
@@ -40,7 +41,7 @@ In **Figurre 1** features or descriptors are represented with (F1, F2, F3, etc.)
 
 ## Training data set
 
-A high-quality dataset was retrieved from a previously published work {% cite hajisharifi_predicting_2014 %}. A balanced dataset, 138 ACPs, and 138 non-ACPs, as positive and negative datasets respectiverly, were obtained by randomly removing negative sequences. The length distribution of the positive dataset is somewhat different from the negative dataset.
+A high-quality dataset was retrieved from a previously published work {% cite hajisharifi_predicting_2014 %}.  In, ML it’s always recommended to have a balanced training dataset. However,  imbalance data can also be handled, and sometimes, to assess the robustness of the model an imbalanced training set is intentionally created.  The objective of this tutorial is to provide a basic introduction of ML in peptide research hence introducing an imbalanced training set and tuning the algorithms is beyond the scope of this tutorial.  To keep this tutorial simple we have created a balanced training dataset with an equal number of positive (ACPs) and negative (non-ACPs) data points.  A simple python code was applied to randomly select and removed several non-ACPs to reduce their number from 205 to 138. A balanced dataset, 138 ACPs, and 138 non-ACPs, as positive and negative datasets respectively, were obtained by randomly removing negative sequences. The length distribution of the positive dataset is somewhat different from the negative dataset.
 
 
 ### Get data
@@ -181,7 +182,7 @@ In this step, we will apply six ML algorithms Linear Regression Classifier (LRC)
 
 ### Merging results in one file
 
-In previous steps we have trained the ML models, these models return a TSV  that captures performance measures of these algorithms. We used the Merge Data Frame tool to combine these results as one file in this step.  
+In previous steps we have trained the ML models, these models return a TSV  that captures performance measures of these algorithms. We used the `Merge Data Frame` tool to combine these results as one file in this step.  
 
 > ### {% icon hands_on %} Hands-on: Merging result as one tabular file
 >
@@ -220,7 +221,7 @@ The performance of ML algorithms can be assessed by commonly used performance me
 - **Recall** also known as sensitivity, is defined as the estimation of the percentage of the correctly predicted positive instances and is also calculated with TP (True Positive) and FP (False positive). 
 
 
-The value for each of these estimates falls between 0 and 1, and larger values indicating a better performance and accuracy. The brighter yellow color shows high-performance while the blue color shows a lower score.  Heat map suggests that algorithms GBC, LRC, and SVMC show high performs in comparison to the other three, which means these classifiers been able to classify ACPs and non-ACPs more accurately than others. DTC shows an intermediate performance while RFC and SGDC performed poorly on this data set. Finally, we learn how to calculate features, how to utilize these features to buld ML models, and how we can assess the performance of an ML model. In the future, advanced parameters of this algorithm can be assessed to improve the performance of the models. Additionally,  there are several features that can be calculated other than CTD and utilized to build ML models and assess performance.  
+The value for each of these estimates falls between 0 and 1, and larger values indicating a better performance and accuracy. The brighter yellow color shows high-performance while the blue color shows a lower score.  Heat map suggests that algorithms GBC, LRC, and SVMC show high performs in comparison to the other three, which means these classifiers have been able to classify ACPs and non-ACPs more accurately than others. DTC shows an intermediate performance while RFC and SGDC performed poorly on this data set. Finally, we learn how to calculate features, how to utilize these features to build ML models, and how we can assess the performance of an ML model. In the future, advanced parameters of this algorithm can be assessed to improve the performance of the models. Additionally, several features can be calculated other than CTD and utilized to build ML models and assess performance. 
 
 
 

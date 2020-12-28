@@ -33,13 +33,13 @@ Several computational methods have been proven very useful in the initial screen
 
 ## Peptide Data
 
-In this step, we will retrieve the inbuild dataset, which contains anti-microbial (AMPs) and transmembrane peptides (TMPs).
+ Several inbuilt data sets have been provided, we have used antimicrobial peptides (AMPs) and transmembrane peptides (TMPs) as an example data set. There is no specific reason two include this particular data set.
 
 
 > ### {% icon hands_on %} Hands-on: Fetching inbuild data
 > 
 > 1. {% tool [PDAUG Peptide Data Access](toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0) %} with the following parameters:
->    - *"Datasets"*: `AMPvsTM` 
+>    - *"Datasets"*: `AMPvsTMP` 
 >
 {: .hands_on}
 
@@ -51,7 +51,7 @@ In this step, we will be converting and splitting the tabular data file into fas
 > ### {% icon hands_on %} Hands-on: Converting tabular data into fasta formate
 > 
 > 1. {% tool [PDAUG TSVtoFASTA](toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0) %} with the following parameters:
->    - {% icon param-file %} *"Input file"*: `PDAUG Peptide Data Access - AMPvsTM (tabular)` (output of **PDAUG Peptide Data Access** {% icon tool %})
+>    - {% icon param-file %} *"Input file"*: `PDAUG Peptide Data Access - AMPvsTMP (tabular)` (output of **PDAUG Peptide Data Access** {% icon tool %})
 >    - *"Data conversion"*: ` WithClassLabel `
 >
 >
@@ -83,20 +83,20 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 >   >  > 1. Leucine and Valine show relatively higher differences in terms of their fraction within both groups. 
 >   >  > 2. TMPs show a global charge in the range of 0-5 in comparison to AMPs which show a global charge in a range of 0-14.
 >   >  > 3. AMPs show higher variability in terms of their length, global hydrophobic movement, and hydrophobicity in comparison to TMPs.
->   >  > 4. Hydrophobicity of peptides is important to determine their transmembrane properties which is evident with this summary plot.
+>   >  > 4. Hydrophobic properties are important in determining transmembrane properties of proteins and peptides which is evident with this summary plot.
 >   >  > 5. Clustering of two different kinds of peptides can be observed with a 3D scattered plot based on their properties, however, we can also observe a few peptides with overlapping feature space.
 >   >  {: .solution }
 >   {: .question}
 >
 {: .hands_on}
 
-![Summary Plot](../../images/SummaryPlot.png "Summary plot shows comparisoin between AMPs and TMPs")
+![Summary Plot](../../images/SummaryPlot.png "Summary plot shows comparison between AMPs and TMPs")
 
 
 
 ### Assessing feature space distribution 
 
-In this tool, we have used **PDAUG Fisher's Plot** that compare two peptide libraries based on the feature space using the Fisher test. 
+In this tool, we have used **PDAUG Fisher's Plot** that compares two peptide libraries based on the feature space using the Fisher test. 
 
 
 > ### {% icon hands_on %} Hands-on: Generating a Fisher's plot to assess peptide dataset
@@ -144,13 +144,15 @@ In this step we will calculate CTD descriptos. Composition describptors are defi
 {: .hands_on}
 
 
-### Adding Class labels in both AMPs and TMPs
+### Adding the Class Label in both AMPs and TMPs
 
-Usually, class labels are represented by 0 or 1. If data has multi-class classification problems it can be represented by 0,1,2,3, etc. In addition to this, class labels can also be represented by a specific string such as "anticancer" and "non-anticancer" or "treated" and "untreated".
+Class labels or target labels column usually represents the class of peptides. Here in our data set, we have peptides, either as AMP or TMP. Since we have two classes we can represent these two classes with binary labels 0 or 1.  Default target labels for datasets in the "PDAUG Peptide Data Access" tool are represented by 1 and 0.  We will add "1" and "0" as Class Labels to represent AMPs and TMPs. 
 
-- **Adding class label in AMPs and TMPs data**
 
-> ### {% icon hands_on %} Hands-on: Adding class labels to the tabular data
+
+- **Adding Class Label (target labels) in AMPs and TMPs data**
+
+> ### {% icon hands_on %} Hands-on: Adding Class Labels (target labels) to the tabular data
 > 
 > 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
