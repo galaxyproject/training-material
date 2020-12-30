@@ -127,7 +127,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 
 > ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
 >
-> 1. {% tool [CTSM/FATES-EMERALD](ctsm_fates) %} with the following parameters:
+> 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: `inputdata_version2.0.0_ALP1.tar` file from your history
 >    - *"Name of your case"*: ALP1_exp
 >    - In section *"Customize the model run period"*:
@@ -172,7 +172,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. {% tool [NetCDF xarray Metadata Info](NetCDF+xarray+Metadata+Info) %}  to get metadata information for CLM-FATES netCDF outputs:
+> 4. {% tool [NetCDF xarray Metadata Info](toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1) %}  to get metadata information for CLM-FATES netCDF outputs:
 >      - {% icon param-file %} *"Netcdf file"*: `ALP1_exp.nc`
 >
 > 5. **Inspect** {% icon galaxy-eye %} the generated output files
@@ -276,7 +276,7 @@ so that we can reuse it for any simulations.
 
 > ### {% icon hands_on %} Hands-on: Select and plot **LEAFC**
 >
-> 1. {% tool [NetCDF xarray Selection](NetCDF+xarray+Selection) %} to select the total carbon in live plant leaves (**LEAFC**)
+> 1. {% tool [NetCDF xarray Selection](toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1) %} to select the total carbon in live plant leaves (**LEAFC**)
 >      - {% icon param-file %} *"Input netcdf file"*: ALP1_exp.nc
 >      - {% icon param-file %} *"Tabular of variables"*: Metadata info from `ALP1_exp.nc` (output of **NetCDF xarray Metadata Info** {% icon tool %})
 >      - {% icon param-select %} *"Choose the variable to extract"*: `LEAFC`
@@ -285,7 +285,7 @@ so that we can reuse it for any simulations.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 3. {% tool [Replace parts of text ](Replace+parts+of+text) %} to clean date column for plotting:
+> 3. {% tool [Replace parts of text ](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3) %} to clean date column for plotting:
 >      - {% icon param-file %} *"File to process"*: NetCDF xarray Selection on ALP1_exp.nc
 >      - {% icon param-text %} *"Find pattern"*: `00:00:00`
 >      - *"Find-Pattern is a regular expression"*: `No`
