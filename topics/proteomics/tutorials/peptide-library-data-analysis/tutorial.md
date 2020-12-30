@@ -147,7 +147,6 @@ In this step we will calculate Composition, Transition and Distribution (CTD) de
 Class labels or target labels usually represents the class of peptides. Here in our data set, we have peptides, either as AMP or TMP. Since we have two classes we can represent these two classes with their actual labels AMPs and TMPs.  
 
 
-
 - **Adding Class Label (target labels) in AMPs and TMPs data**
 
 > ### {% icon hands_on %} Hands-on: Adding Class Labels (target labels) to the tabular data
