@@ -138,7 +138,7 @@ We will first run this tool on the genome sequence to evaluate its quality.
 
 > ### {% icon hands_on %} Hands-on: Run Busco on the genome
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: select the genome sequence from your history
 >    - *"Mode"*: `Genome`
 >    - *"Lineage"*: `fungi_odb9`
@@ -251,7 +251,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
@@ -375,7 +375,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
@@ -482,7 +482,7 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
-> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
@@ -511,7 +511,7 @@ If you look at the content of the `final annotation` dataset, you will notice th
 
 > ### {% icon hands_on %} Hands-on: Change gene names
 >
-> 1. {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.10) %} with the following parameters:
+> 1. {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >    - *"Prefix for ids"*: `"TEST_"`
 >    - *"Justify numeric ids to this length"*: `"6"`
