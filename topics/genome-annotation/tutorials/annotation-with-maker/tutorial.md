@@ -200,7 +200,7 @@ For this first round, we configure Maker to construct gene models only by aligni
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either provide your own repeats library, or use [RepBase](https://www.girinst.org/repbase/). As RepBase is not free to use, you will need to download manually the RepBaseRepeatMaskerEdition file and upload the enclosed EMBL format file (`RMRBSeqs.embl`) to use with Maker.
+>    > For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either use [Dfam](https://www.dfam.org) or provide your own repeats library.
 >    {: .comment}
 >
 {: .hands_on}
