@@ -27,7 +27,7 @@ contributors:
 
 Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.
 
-In this tutorial we will use a software tool called Maker {% cite Campbell2014 %} to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).
+In this tutorial we will use a software tool called Maker {% cite Campbell2014 %} to annotate the genome sequence of a small eukaryote: *Schizosaccharomyces pombe* (a yeast).
 
 Maker is able to annotate both prokaryotes and eukaryotes. It works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.
 
@@ -89,10 +89,10 @@ To annotate a genome using Maker, you need the following files:
 
 You have four main datasets:
 
-- `S_pombe_trinity_assembly.fasta` contains the EST sequences
-- `Swissprot_no_S_pombe.fasta` contanis the protein sequences from SwissProt
-- `S_pombe_genome.fasta` contains the full genome sequence
-- `S_pombe_chrIII.fasta` contains only the third chromosome from the full genome
+- `S_pombe_trinity_assembly.fasta` contains EST sequences from *S. pombe*, assembled from RNASeq data with Trinity
+- `Swissprot_no_S_pombe.fasta` contains a subset of the SwissProt protein sequence database (public sequences from *S. pombe* were removed to stay as close as possible to real-life analysis)
+- `S_pombe_genome.fasta` contains the full genome sequence of *S. pombe*
+- `S_pombe_chrIII.fasta` contains only the third chromosome from the full genome of *S. pombe*
 
 
 > ### {% icon hands_on %} Hands-on: Choose your Genome
@@ -118,7 +118,7 @@ Before running the full annotation process, you need first to evaluate the quali
 
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
-> 1. **Fasta Statistics** {% icon tool %} with the following parameters:
+> 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: select `genome.fasta` sequence from your history
 >
 {: .hands_on}
@@ -138,7 +138,7 @@ We will first run this tool on the genome sequence to evaluate its quality.
 
 > ### {% icon hands_on %} Hands-on: Run Busco on the genome
 >
-> 1. **Busco** {% icon tool %} with the following parameters:
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
 >    - {% icon param-file %} *"Sequences to analyse"*: select the genome sequence from your history
 >    - *"Mode"*: `Genome`
 >    - *"Lineage"*: `fungi_odb9`
@@ -183,7 +183,7 @@ For this first round, we configure Maker to construct gene models only by aligni
 
 > ### {% icon hands_on %} Hands-on: First draft annotation with Maker
 >
-> 1. **Maker** {% icon tool %} with the following parameters:
+> 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - *"Re-annotate using an existing Maker annotation"*: `No`
 >    - *"Organism type"*: `Eukaryotic`
@@ -219,8 +219,8 @@ First, use the `Genome annotation statistics` that will compute some general sta
 
 > ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
-> 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %})
+> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
+>    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >    - *"Reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
@@ -232,12 +232,12 @@ First, use the `Genome annotation statistics` that will compute some general sta
 
 Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will inspect the transcript sequences of the genes predicted by Maker.
 
-First we need to compute all the transcript sequences from the Maker annotation.
+First we need to compute all the transcript sequences from the Maker annotation, using {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %}. This tool will compute the sequence of each transcript that was predicted by {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %}.
 
 > ### {% icon hands_on %} Hands-on: Extract transcript sequences
 >
-> 1. **gffread** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %})
+> 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >    - *"Reference Genome"*: `select the genome sequence from your history`
 >        - *"Select fasta outputs"*:
 >           - `fasta file with spliced exons for each GFF transcript (-w exons.fa)`
@@ -251,8 +251,8 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
-> 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -288,9 +288,9 @@ We will use two of the most widely used ab-initio predictors: SNAP and Augustus.
 
 > ### {% icon hands_on %} Hands-on: Train SNAP
 >
-> 1. **Train SNAP** {% icon tool %} with the following parameters:
+> 1. {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
->    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %})
+>    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >
 {: .hands_on}
 
@@ -299,9 +299,9 @@ Augustus is trained in a very similar way.
 
 > ### {% icon hands_on %} Hands-on: Train Augustus
 >
-> 1. **Train Augustus** {% icon tool %} with the following parameters:
+> 1. {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
->    - {% icon param-file %} *"Annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %})
+>    - {% icon param-file %} *"Annotation to use for training"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >
 {: .hands_on}
 
@@ -314,16 +314,16 @@ The Augustus training usually takes around 2 hours to complete, to continue this
 ## Maker
 
 We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments as is.
-But this time, enable ab-initio gene prediction, and input the output of **Train SNAP** {% icon tool %} and **Train Augustus** {% icon tool %} tools.
+But this time, enable ab-initio gene prediction, and input the output of {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %} and {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %} tools.
 We also disable inferring gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments *and* ab-initio gene predictions.
 
 > ### {% icon hands_on %} Hands-on: Second draft annotation with Maker
 >
-> 1. **Maker** {% icon tool %} with the following parameters:
+> 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - *"Organism type"*: `Eukaryotic`
 >    - *"Re-annotate using an existing Maker annotation"*: `Yes`
->        - {% icon param-file %} *"Previous Maker annotation"*: `evidences` (output of the previous **Maker** {% icon tool %} run)
+>        - {% icon param-file %} *"Previous Maker annotation"*: `evidences` (output of the previous {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run)
 >        - *"Re-use ESTs"*: `Yes`
 >        - *"Re-use alternate organism ESTs"*: `Yes`
 >        - *"Re-use protein alignments"*: `Yes`
@@ -333,9 +333,9 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
 >    - In *"Protein evidences (for best results provide at least one of these)"*:
 >        - *"Infer gene predictions directly from all protein alignments"*: `No`
 >    - In *"Ab-initio gene prediction"*:
->        - *"SNAP model"*: `snap model` (output of **Train SNAP** {% icon tool %})
+>        - *"SNAP model"*: `snap model` (output of {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %})
 >        - *"Prediction with Augustus"*: `Run Augustus with a custom prediction model`
->            - {% icon param-file %} *"Augustus model"*: `augustus model` (output of **Train Augustus** {% icon tool %})
+>            - {% icon param-file %} *"Augustus model"*: `augustus model` (output of {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %})
 >    - In *"Repeat masking"*:
 >        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
@@ -348,8 +348,8 @@ Do we get a better result from Maker after this second run? Let's run the same t
 
 > ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
-> 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} second run)
+> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
+>    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} second run)
 >    - *"Reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
@@ -360,8 +360,8 @@ Do we get a better result from Maker after this second run? Let's run the same t
 
 > ### {% icon hands_on %} Hands-on: Extract transcript sequences
 >
-> 1. **gffread** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %} second run)
+> 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} second run)
 >    - *"Reference Genome"*: `select the genome sequence from your history`
 >        - *"Select fasta outputs"*:
 >           - `fasta file with spliced exons for each GFF transcript (-w exons.fa)`
@@ -375,8 +375,8 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
-> 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -403,14 +403,14 @@ To get better results, we are going to perform a second training of SNAP and Aug
 
 > ### {% icon hands_on %} Hands-on: Train SNAP and Augustus
 >
-> 1. **Train SNAP** {% icon tool %} with the following parameters:
+> 1. {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
->    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %}, second run)
+>    - {% icon param-file %} *"Maker annotation to use for training"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %}, second run)
 >    - *"Number of gene model to use for training"*: `"1000"`
 >
-> 2. **Train Augustus** {% icon tool %} with the following parameters:
+> 2. {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
->    - {% icon param-file %} *"Annotation to use for training"*: `final annotation` (output of **Maker** {% icon tool %}, second run)
+>    - {% icon param-file %} *"Annotation to use for training"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %}, second run)
 >
 {: .hands_on}
 
@@ -424,11 +424,11 @@ Let's run the final round of Maker, in the same way as we did for the second run
 
 > ### {% icon hands_on %} Hands-on: Final annotation with Maker
 >
-> 1. **Maker** {% icon tool %} with the following parameters:
+> 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select the genome sequence from your history
 >    - *"Organism type"*: `Eukaryotic`
 >    - *"Re-annotate using an existing Maker annotation"*: `Yes`
->        - {% icon param-file %} *"Previous Maker annotation"*: `evidences` (output of the previous second **Maker** {% icon tool %} run)
+>        - {% icon param-file %} *"Previous Maker annotation"*: `evidences` (output of the previous second {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run)
 >        - *"Re-use ESTs"*: `Yes`
 >        - *"Re-use alternate organism ESTs"*: `Yes`
 >        - *"Re-use protein alignments"*: `Yes`
@@ -438,9 +438,9 @@ Let's run the final round of Maker, in the same way as we did for the second run
 >    - In *"Protein evidences (for best results provide at least one of these)"*:
 >        - *"Infer gene predictions directly from all protein alignments"*: `No`
 >    - In *"Ab-initio gene prediction"*:
->        - {% icon param-file %} *"SNAP model"*: `snap model` (output of **Train SNAP** {% icon tool %})
+>        - {% icon param-file %} *"SNAP model"*: `snap model` (output of {% tool [Train SNAP](toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1) %})
 >        - *"Prediction with Augustus"*: `Run Augustus with a custom prediction model`
->        - {% icon param-file %} *"Augustus model"*: `augustus model` (output of **Train Augustus** {% icon tool %})
+>        - {% icon param-file %} *"Augustus model"*: `augustus model` (output of {% tool [Train Augustus](toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3) %})
 >    - In *"Repeat masking"*:
 >        - *"Repeat library source"*: `Disable repeat masking (not recommended)`
 >
@@ -453,8 +453,8 @@ Do we get a better result from Maker after this third run? Let's run the same to
 
 > ### {% icon hands_on %} Hands-on: Get annotation statistics
 >
-> 1. **Genome annotation statistics** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of **Maker** {% icon tool %} third run)
+> 1. {% tool [Genome annotation statistics](toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4) %} with the following parameters:
+>    - {% icon param-file %} *"Annotation to analyse"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} third run)
 >    - *"Reference genome"*: `Use a genome from history`
 >        - {% icon param-file %} *"Corresponding genome sequence"*: select the genome sequence from your history
 >
@@ -465,8 +465,8 @@ Do we get a better result from Maker after this third run? Let's run the same to
 
 > ### {% icon hands_on %} Hands-on: Extract transcript sequences
 >
-> 1. **gffread** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of **Maker** {% icon tool %} third run)
+> 1. {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %} with the following parameters:
+>    - {% icon param-file %} *"Input GFF3 or GTF feature file"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} third run)
 >    - *"Reference Genome"*: `select the genome sequence from your history`
 >        - *"Select fasta outputs"*:
 >           - `fasta file with spliced exons for each GFF transcript (-w exons.fa)`
@@ -482,8 +482,8 @@ Now run BUSCO with the predicted transcript sequences:
 
 > ### {% icon hands_on %} Hands-on: Run BUSCO
 >
-> 1. **Busco** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of **gffread** {% icon tool %})
+> 1. {% tool [Busco](toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.2) %} with the following parameters:
+>    - {% icon param-file %} *"Sequences to analyse"*: `exons` (output of {% tool [GFFread](toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1) %})
 >    - *"Mode"*: `Transcriptome`
 >    - *"Lineage"*: `fungi_odb9`
 >
@@ -511,8 +511,8 @@ If you look at the content of the `final annotation` dataset, you will notice th
 
 > ### {% icon hands_on %} Hands-on: Change gene names
 >
-> 1. **Map annotation ids** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of **Maker** {% icon tool %})
+> 1. {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.10) %} with the following parameters:
+>    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
 >    - *"Prefix for ids"*: `"TEST_"`
 >    - *"Justify numeric ids to this length"*: `"6"`
 >
@@ -532,7 +532,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 
 > ### {% icon hands_on %} Hands-on: Visualize annotations in JBrowse
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
@@ -544,7 +544,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each **Maker** {% icon tool %} run
+>                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 >                    - *"This is match/match_part data"*: `No`
 >
 {: .hands_on}
@@ -573,11 +573,11 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 
 > ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
 >    - *"JBrowse-in-Galaxy Action"*: `Update existing JBrowse Instance`
->    - *"Previous JBrowse Instance"*: select the result from the previous **JBrowse** {% icon tool %} run
+>    - *"Previous JBrowse Instance"*: select the result from the previous {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} run
 >    - In *"Track Group"*:
 >        - Click on *"Insert Track Group"*:
 >        - In *"1: Track Group"*:
@@ -586,7 +586,7 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
 >                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each **Maker** {% icon tool %} run
+>                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 >                    - *"This is match/match_part data"*: `Yes`
 >                        - *"Match Part Feature Type"*: Leave empty
 >
