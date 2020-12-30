@@ -18,7 +18,7 @@ contributors:
 {:.no_toc}
 
 
- Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to assess the effect of these variables on biological properties and build informative plots.
+ Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.
 
 
 > ### Agenda
@@ -33,7 +33,7 @@ contributors:
 
 ## Peptide Data
 
-Several inbuilt data sets have been provided, antimicrobial peptides (AMPs) versus transmembrane peptides (TMPs) dataset was used as an example data set to understand the overall relation between features and biological properties of peptides.
+Several inbuilt data sets have been provided with the tool`PDAUG Peptide Data Access`. The antimicrobial peptides (AMPs) versus transmembrane peptides (TMPs) dataset was used as an example data set to understand the overall relation between features and biological properties of peptides. AMPs consist of an intersection of all activity annotations of the APD2 and CAMP databases, where gram-positive, gram-negative, and antifungal exact matches were observed. TMPs were extracted from alpha-helical transmembrane regions of proteins for classification.
 
 > ### {% icon hands_on %} Hands-on: Fetching inbuild data
 > 
@@ -95,7 +95,7 @@ In this step, we utilize `PDAUG Peptide Sequence Analysis` tool to compare pepti
 
 ### Assessing feature space distribution 
 
-In this tool, we have used **PDAUG Fisher's Plot** that compares two peptide libraries based on the feature space using the Fisher test. 
+In this tool, we have used `PDAUG Fisher's Plot` that compares two peptide libraries based on the feature space using the Fisher test. 
 
 
 > ### {% icon hands_on %} Hands-on: Generating a Fisher's plot to assess peptide dataset
@@ -110,7 +110,6 @@ In this tool, we have used **PDAUG Fisher's Plot** that compares two peptide lib
 >   > What does Fisher's plot represents?
 >   >
 >   >  > ### {% icon solution %} Solution
->   >  > The summary plot represents differences between two sets of peptides based on an amino acid fraction, global charge, sequence length, global hydrophobicity, glocal hydrophobic movement. Additionally, 3D scattered plot shows the clustering of peptides based on three features.
 >   >  >  
 >   >  > Fisher's plot represents the difference between two groups of peptides based on their feature space. Each tiny square in this plot represents the feature space. Based on the sliding window Fisher's test was performed for each feature space to assess the presence of peptides from two different groups on each of the tiny squares.  The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher's plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.
 >   >  {: .solution }
@@ -126,7 +125,7 @@ The AMPs and TMPs in the feature space represented by their mean hydropathy and 
 
 ### Calculating Sequence Property-Based Descriptors 
 
-In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length{% cite Govindan_Nair_2013 %}.
+In this step we will calculate Composition, Transition and Distribution (CTD) descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property located on this length {% cite Govindan_Nair_2013 %}.
 
 
 > ### {% icon hands_on %} Hands-on: Calculating descriptors for the peptide dataset
@@ -167,7 +166,7 @@ Class labels or target labels usually represents the class of peptides. Here in 
 
 ### Merging the two tabular data files 
 
-We utilize **PDAUG Merge Dataframes** to merge two tabular data files. 
+We utilize `PDAUG Merge Dataframes` to merge two tabular data files. 
 
 
 > ### {% icon hands_on %} Hands-on: Merging two tabular data files
@@ -181,7 +180,7 @@ We utilize **PDAUG Merge Dataframes** to merge two tabular data files.
 
 ### Plotting CTD descriptor data as Scatter plot
 
-In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length{% cite Govindan_Nair_2013 %}. Tool **PDAUG Basic Plots** will be used to compare two peptide libraries based on three CTD descriptors SecondaryStrD1100, SolventAccessibilityD2001, and NormalizedVDWVD3050 respectively. A 3D scatter plot will be generated. 
+Tool `PDAUG Basic Plots` will be used to compare two peptide libraries based on three CTD descriptors `SecondaryStrD1100`, `SolventAccessibilityD2001`, and `NormalizedVDWVD3050` respectively. A 3D scatter plot will be generated. 
 
 
 > ### {% icon hands_on %} Hands-on: Generating a scatter plot to assess features
@@ -199,6 +198,11 @@ In this step we will calculate CTD descriptos. Composition describptors are defi
 {: .hands_on}
 
 ![3D Scatter plot ](../../images/3DScattered.png "3D scatter Plot shows relation between featues")
+
+**Figure 3** Represent 3D scattered plot generated based on the CTD descriptors. Red dots represent TMPs and blue dots represent AMPs. Based on these 3 features, we can observe that both groups do not show any clear separation or cluster in the 3D space.
+
+
+In this tutorial, we learned how to utilize inbuild data, calculate features, and utilize descriptors or features to assess biological properties. We also learned how to utilize various utilities of `PDAUG` to generate useful plots to include in our peptide research. 
 
 # Conclusion
 {:.no_toc}
