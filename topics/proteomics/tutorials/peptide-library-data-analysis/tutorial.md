@@ -18,7 +18,7 @@ contributors:
 {:.no_toc}
 
 
-Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches. In this tutorial, we will be discussing how to analyze peptide libraries on the basis of quantitative properties. In this tutorial, we will learn how to use different utilities of PDAUG to calculate various peptide-based features and utilize these features for various informative plots.
+ Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alternatives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under Galaxy (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to assess the effect of these variables on biological properties and build informative plots.
 
 
 > ### Agenda
@@ -33,8 +33,7 @@ Several computational methods have been proven very useful in the initial screen
 
 ## Peptide Data
 
- Several inbuilt data sets have been provided, we have used antimicrobial peptides (AMPs) and transmembrane peptides (TMPs) as an example data set. There is no specific reason two include this particular data set.
-
+Several inbuilt data sets have been provided, antimicrobial peptides (AMPs) versus transmembrane peptides (TMPs) dataset was used as an example data set to understand the overall relation between features and biological properties of peptides.
 
 > ### {% icon hands_on %} Hands-on: Fetching inbuild data
 > 
@@ -46,7 +45,7 @@ Several computational methods have been proven very useful in the initial screen
 
 ## Converting tabular data into fasta format
 
-In this step, we will be converting and splitting the tabular data file into fasta format. This tool splits data into two files based on their class labels.
+`PDAUG Peptide Data Access` tool returns data as a tabular file that contains sequences from both the classes. In order to utilize this data in the next steps, first we need to convert tabular data into fasta format. If data contains sequences from two different classes `PDAUG TSVtoFASTA` tool converts and splits data into two separate files for each of the class,  AMPs, and TMPs.  The reason behind converting and splitting the data is that all the downstream tools require two separate files if we are comparing two different peptide classes or calculating features. 
 
 > ### {% icon hands_on %} Hands-on: Converting tabular data into fasta formate
 > 
@@ -71,8 +70,8 @@ In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare pep
 >    - *"Analysis options"*: `Plot Summary`
 >        - {% icon param-file %} *"First input file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
 >        - {% icon param-file %} *"Second input file"*: `PDAUG TSVtoFASTA on data 1 - second (fasta)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
->        - *"first input file"*: `AMP`
->        - *"Second input file"*: `TM `
+>        - *"first input file"*: `TMPs`
+>        - *"Second input file"*: `AMPs`
 >
 >   > ### {% icon question %} Questions
 >   > What can be concluded from the summary plot based on different properties?
@@ -104,8 +103,8 @@ In this tool, we have used **PDAUG Fisher's Plot** that compares two peptide lib
 > 1. {% tool [PDAUG Fisher's Plot](toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"First fasta file"*: `PDAUG TSVtoFASTA on data 1 - first (fasta)` (first output of **PDAUG TSVtoFASTA** {% icon tool %})
 >    - {% icon param-file %} *"Second fasta file"*: `PDAUG TSVtoFASTA on data 1 - second (fasta)` (second output of **PDAUG TSVtoFASTA** {% icon tool %})
->    - *"Label for first population"*: `AMP`
->    - *"Label for second population"*: `TM`
+>    - *"Label for first population"*: `TMPs`
+>    - *"Label for second population"*: `AMPs`
 >
 >   > ### {% icon question %} Questions
 >   > What does Fisher's plot represents?
@@ -146,7 +145,7 @@ In this step we will calculate CTD descriptos. Composition describptors are defi
 
 ### Adding the Class Label in both AMPs and TMPs
 
-Class labels or target labels column usually represents the class of peptides. Here in our data set, we have peptides, either as AMP or TMP. Since we have two classes we can represent these two classes with binary labels 0 or 1.  Default target labels for datasets in the "PDAUG Peptide Data Access" tool are represented by 1 and 0.  We will add "1" and "0" as Class Labels to represent AMPs and TMPs. 
+Class labels or target labels usually represents the class of peptides. Here in our data set, we have peptides, either as AMP or TMP. Since we have two classes we can represent these two classes with their actual labels AMPs and TMPs.  
 
 
 
@@ -156,11 +155,11 @@ Class labels or target labels column usually represents the class of peptides. H
 > 
 > 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
->    - *"Class Label"*: `1`
+>    - *"Class Label"*: `TMPs`
 >
 > 1. {% tool [PDAUG Add Class Label](toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Sequence Property Based Descriptors on data 3 - CTD (tabular)` (output of **PDAUG Sequence Property Based Descriptors** {% icon tool %})
->    - *"Class Label"*: `0`
+>    - *"Class Label"*: `AMPs`
 >
 >
 {: .hands_on}
@@ -182,7 +181,7 @@ We utilize **PDAUG Merge Dataframes** to merge two tabular data files.
 
 ### Plotting CTD descriptor data as Scatter plot
 
-In this step, we utilize the **PDAUG Basic Plots** tool to compare two libraries based on three CTD descriptors SecondaryStrD1100, SolventAccessibilityD2001, and NormalizedVDWVD3050 respectively. A 3D scatter plot will be generated. 
+In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length{% cite Govindan_Nair_2013 %}. Tool **PDAUG Basic Plots** will be used to compare two peptide libraries based on three CTD descriptors SecondaryStrD1100, SolventAccessibilityD2001, and NormalizedVDWVD3050 respectively. A 3D scatter plot will be generated. 
 
 
 > ### {% icon hands_on %} Hands-on: Generating a scatter plot to assess features
