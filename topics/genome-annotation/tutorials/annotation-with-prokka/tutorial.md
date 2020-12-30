@@ -13,6 +13,7 @@ objectives:
   - "Annotate genome with Prokka"
   - "View annotations in JBrowse"
 time_estimation: "1h"
+level: Introductory
 key_points:
   - "Prokka is a useful tool to annotate a bacterial genome."
   - "JBrowse can be used to inspect the annotation of a genome."
