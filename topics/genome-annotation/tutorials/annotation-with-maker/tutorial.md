@@ -14,6 +14,7 @@ objectives:
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
 time_estimation: 4h
+level: Advanced
 key_points:
   - Maker allows to annotate a eukaryotic genome.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
@@ -532,7 +533,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 
 > ### {% icon hands_on %} Hands-on: Visualize annotations in JBrowse
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse Instance`
@@ -573,11 +574,11 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 
 > ### {% icon hands_on %} Hands-on: Visualize evidences in JBrowse
 >
-> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: select the genome sequence from your history
 >    - *"JBrowse-in-Galaxy Action"*: `Update existing JBrowse Instance`
->    - *"Previous JBrowse Instance"*: select the result from the previous {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} run
+>    - *"Previous JBrowse Instance"*: select the result from the previous {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0) %} run
 >    - In *"Track Group"*:
 >        - Click on *"Insert Track Group"*:
 >        - In *"1: Track Group"*:
