@@ -60,7 +60,7 @@ Several inbuilt data sets have been provided, antimicrobial peptides (AMPs) vers
 
 ### Summary Plot for peptide libraries 
 
-In this step, we utilize **PDAUG Peptide Sequence Analysis** tool to compare peptide sequences based on hydrophobicity, hydrophobic movement, charge, amino acid fraction, and sequence length and create a summary plot.
+In this step, we utilize `PDAUG Peptide Sequence Analysis` tool to compare peptide sequences based on hydrophobicity, hydrophobic movement, charge, amino acid fraction, and sequence length and create a summary plot.
 
 
 
