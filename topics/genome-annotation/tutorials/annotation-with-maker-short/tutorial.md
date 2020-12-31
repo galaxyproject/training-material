@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: Genome annotation with Maker
+title: Genome annotation with Maker (short)
 zenodo_link: https://doi.org/10.5281/zenodo.4406623
 tags:
   - eukaryote
@@ -13,8 +13,8 @@ objectives:
   - Annotate genome with Maker
   - Evaluate annotation quality with BUSCO
   - View annotations in JBrowse
-time_estimation: 4h
-level: Advanced
+time_estimation: 2h
+level: Intermediate
 key_points:
   - Maker allows to annotate a eukaryotic genome.
   - BUSCO and JBrowse allow to inspect the quality of an annotation.
@@ -22,4 +22,4 @@ contributors:
   - abretaud
 ---
 
-{% include {{ page.dir }}content.md short=false %}
+{% include topics/genome-annotation/tutorials/annotation-with-maker/content.md short=true %}
