@@ -71,7 +71,7 @@ A high-quality dataset was retrieved from a previously published work {% cite ha
 
 ## Calculating Peptide Descriptors 
 
-In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length{% cite Govindan_Nair_2013 %}.
+In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length {% cite Govindan_Nair_2013 %}.
 
 
 > ### {% icon hands_on %} Hands-on: Calculating CTD descriptors for ACPs and non-ACPs
@@ -95,7 +95,7 @@ We will combine the ACPs and non-ACPs data set as a single tabular data and will
 ### Adding class labels to the training data
 
 
-The class label usually describes samples from two different groups, in our case ACPs and non-ACPs.   In the case of binary classification, usually, samples are labeled as "0" or "1". 
+In Binary classification, ML algorithms classify the elements of a set into two groups based on a classification rule. Binary classes are usually represented by `0` and `1`. In our example, we are finding peptides with anticancer properties, therefore we can denote all the peptides with anticancer properties as `1` and peptides with non-anticancer properties as `0`.  In general, samples represented with `1` also describe as positive data, and samples with `0` labels as negative data.  Data with multi-class classification problems can also be represented by `0, 1, 2, 3,` etc. In addition to this, in ML the class labels can also be represented by a string such as "anticancer" and "non-anticancer" or "treated" and "untreated".  However, there are several ML tools and libraries prefer numerical class label over a string therefore, in this tutorial, `0` and `1` will be used as class labels. 
 
 
 
