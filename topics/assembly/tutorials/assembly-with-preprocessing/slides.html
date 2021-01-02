@@ -1,0 +1,139 @@
+---
+layout: tutorial_slides
+logo: "GTN"
+class: enlarge120
+
+title: "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads"
+zenodo_link: "https://zenodo.org/record/3732359"
+questions:
+  - "How can a genome of interest be assembled against a background of contaminating reads from other genomes?"
+  - "How can sequencing data from public sources be turned into assembly-ready polished datasets?"
+objectives:
+  - "Obtain viral (SARS-CoV-2) sequencing data with contaminating human reads from public sources."
+  - "Organize the data into collections and check its quality."
+  - "Detect and remove human reads."
+  - "Assemble retained freads and explore the results."
+time_estimation: "2h"
+key_points:
+  - "Certain types of NGS samples can be heavily contaminated with sequences from other genomes."
+  - "Reads from known/expected contaminating sources can be identified by mapping to the respective genomes."
+  - "After mapping, use filtering tools to remove identified contaminating reads, and use conversion tools to convert remaining mapped reads back into raw sequenced reads expected by most downstream tools."
+contributors:
+  - slugger70
+
+---
+.enlarge120[
+
+# **SARS-CoV-2**
+
+]
+
+
+The severe acute respiratory syndrome coronavirus, known as SARS-CoV-2, is a betacoronavirus which belongs to the subfamily Coronavidinae, family Coronavidae.
+
+* Genome characteristics:
+
+  * Positive-sense single-stranded RNA (+ssRNA) virus of 30 kb.
+  * Encode 9860 aminoacids.
+  * Includes 14 functional ORFs.
+  * Codify 4 structural proteins and 23 non-structural proteins.
+
+---
+
+# **Genome structure**
+
+![](../../images/SARS-CoV-2_Genome.png)
+
+- NSP1-NSP16 encode the replicase-transcriptase complex
+- It include four structural proteins: spike (S), envelope (E), membrane (M) and nucleocapsid (N).
+
+---
+
+# **SARS-CoV-2 structure**
+
+![](../../images/structure_SARS-CoV_2.jpg)
+
+---
+
+.enlarge200[
+
+# **Data sources**
+
+]
+
+We will perform an hybrid assembly by using a combination of Oxford Nanopore (long reads) and Illumina (short reads) to produce a high quality SARS-CoV-2 genome sequence.
+
+---
+
+.enlarge200[
+
+# **Data sources**
+
+]
+
+.pull-left[
+
+**Illumina reads**
+
+- Second generation sequencing
+- Short size: 200 bp
+- Low error rate (~1%)
+
+![](../../images/illumina_sequencing.jpg)
+
+]
+
+.pull-right[
+
+**Oxford Nanopore reads**
+
+- Third generation sequencing
+- Long size:  >40,000 bp
+- High error rate (~10%)
+
+![](../../images/nanopore_sequencing.jpg)
+
+]
+
+
+---
+
+
+.enlarge120[
+
+# **Data sources: Illumina sequencing**
+
+]
+
+.image-75[![](../../images/illumina_sequencing_cluster.png)]
+
+.reduce70[
+ 
+1. The DNA is fragmented and adapters are added. Each nanowell contains oligonucleotides that provide an anchoring point for the adaptors.
+
+2. The DNA strand bends and attaches to the oligo that is complementary to the top adapter sequence.
+
+3. A primer attaches to the forward strands adapter primer binding site.
+
+4. Polymerase adds a fluorescently tagged dNTP to the DNA strand. Each of the four bases has a unique emission, which allows to identify which base has been incorporated.
+
+5. The now double stranded DNA is denatured so that each strand can separately attach to an oligonucleotide sequence anchored to the flow cell.
+
+6.  Over and over again, DNA strands will bend and attach to the solid support.
+
+]
+
+
+---
+
+
+.enlarge200[
+
+# **Data sources: Nanopore sequencing**
+
+]
+
+![](../../images/nanopore_sequencing_process.png)
+
+
+---
