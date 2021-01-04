@@ -396,7 +396,7 @@ Some of the other options we will be using are:
 >      conda_auto_install: True
 >      staging_directory: "{{ pulsar_staging_dir }}"
 >      persistence_directory: "{{ pulsar_persistence_dir }}"
->      tool_dependency_dir: "{{ pulsar_root }}/dependencies"
+>      tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
 >      # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
 >      message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671//pulsar/galaxy_au?ssl=1"
 >      min_polling_interval: 0.5
