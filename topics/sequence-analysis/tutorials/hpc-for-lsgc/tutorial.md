@@ -15,8 +15,7 @@ objectives:
 time_estimation: 2H
 key_points:
 - We learnt that sequence comparison is a demanding problem and that there are several ways to approach it
-- We learnt how to run sequence comparisons in Galaxy with different levels of precision
-- Fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively
+- We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively
 - We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc.
 requirements:
   -
@@ -56,7 +55,7 @@ This tutorial is divided into two large sections:
 
 # Fine-grained sequence comparison
 
-Imagine you are working on an evolutionary study regarding the species `mycoplasma hyopneumoniae`. In particular, you are interested in the strains `232` and `7422` and wish to compare their DNA sequence to know more about the evolutionary changes that took place between both. The workflow you will follow starts with (1) acquiring the data,(2)  getting it ready for Galaxy, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let's go! 
+Imagine you are working on an evolutionary study regarding the species `mycoplasma hyopneumoniae`. In particular, you are interested in the strains `232` and `7422` and wish to compare their DNA sequence to know more about the evolutionary changes that took place between both. The workflow you will follow starts with (1) acquiring the data, (2)  getting it ready for Galaxy, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let's go! 
 
 ## Preparing the data
 
@@ -64,7 +63,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 
 > ### {% icon hands_on %} Hands-on: Mycoplasma data upload
 >
-> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Mycoplasma comparison hands-on"
+> 1. Create a new history for this tutorial and give it a descriptive name (e.g. "Mycoplasma comparison hands-on")
 >
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
@@ -80,7 +79,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the files to `232.fasta` and `7422.fasta` and change the datatype to `fasta`.
+> 3. Rename the files to `232.fasta` and `7422.fasta` and change the datatype if needed to `fasta` (Galaxy will auto-discover the format of the files).
 >
 >    {% include snippets/rename_dataset.md %}
 >    {% include snippets/change_datatype.md %}
@@ -108,7 +107,7 @@ As we discussed in the previous section, running optimal aligning tools on such 
 We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycoplasma hyopneumoniae 7422` in Galaxy using `GECKO`.
 
 > ### {% icon hands_on %} Hands-on: Comparing two mycoplasmas with GECKO
-> 1. Run the tool **GECKO** {% icon tool %} with the following parameters
+> 1. {% tool [GECKO](toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.1) %} with the following parameters
 >    - {% icon param-file %} *"Query sequence"*: `232.fasta`
 >    - {% icon param-file %} *"Reference sequence"*: `7422.fasta`
 >    - *"K-mer seed size"*: `16`
@@ -155,9 +154,9 @@ Let's extract the repeats highlighted in red (Figure 2, right) which are aligned
 ### Extracting repeat alignments and running Multiple Sequence Alignment
 
 > ### {% icon hands_on %} Hands-on: Multiple Sequence Alignment of a set of repeats
-> 1. Run the tool **Text reformatting** with AWK {% icon tool %} with the following parameters
->    - {% icon param-file %} *"File to process"*: `Gecko on data 2 and 1: Alignments`
->    - *"AWK Program"*: `BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf(">sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } `
+> 1. {% tool [Text reformatting with AWK](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters
+>    - {% icon param-file %} *"File to process"*: `Gecko on data 2 and 1: Alignments` (Note: if you have run the previous experiment with different parameters, make sure to select here the alignments file corresponding to the first experiment, and make sure you ran it with the same parameters!)
+>    - *"AWK Program"*: `BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf(">sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } ` (Paste this code into the text box)
 >    
 >    > ### {% icon comment %} Note about AWK
 >    > Although the AWK script looks a bit threatening, it is very simple:
@@ -172,7 +171,7 @@ Let's extract the repeats highlighted in red (Figure 2, right) which are aligned
 >    {% include snippets/rename_dataset.md %}
 >    {% include snippets/change_datatype.md %}
 >
-> 3. Run the tool **ClustalW** {% icon tool %} with the following parameters
+> 3. {% tool [ClustalW](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters
 >    - {% icon param-file %} *"FASTA file"*: `repeats.fasta`
 >    - *"Data type"*: `DNA nucleotide sequences`
 >    - *"Output alignment format"*: `Native Clustal output format`
@@ -237,7 +236,7 @@ In this second part of the tutorial, we are going to work with chromosome-sized 
 
 - You are working with a very large *de novo* assembly genome for which you do not know the strain and thus you need to compare it to several candidates. 
 - You want to study large evolutionary rearrangements at a block level rather than alignment level at several species at once.
-- You want to generate a dotplot between several massive chromosomes from e.g. plants to find the main syntenies, but your sequences are full of repeats.
+- You want to generate a dotplot between several massive chromosomes from e.g. plants to find the main syntenies, but your sequences are full of repeats and other computational approaches fail.
 
 As you can imagine, all three scenarios require several large-scale sequence comparisons. While there are also other ways to approach these situations, in this tutorial we will learn how we can use `CHROMEISTER` ({% cite perez2019ultra %}) which is specifically designed for large-scale genome comparison without alignments (alignment-free method).
 
@@ -247,9 +246,9 @@ Before jumping on the hands-on, let us see an example of the second case: say we
 
 ![Large-scale genome comparison example](../../images/hpc-for-lsgc/Chrom07.png "Chromosome comparison for Aegilops tauschii and Triticum aestivum. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!")
 
-Now there are some things to note here: (1) we have been able to perform an alignment-free comparison very quickly, (2) we can visually see the large rearrangements and (3) we have identified which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use `CHROMEISTER` to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, e.g. *Homo sapiens* and *Mus musculus*).
+Now there are some things to note here: (1) these alignment-free comparisons can be performed very quickly, (2) we can visually see the large rearrangements and (3) we can identify which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use `CHROMEISTER` to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, *e.g.* *Homo sapiens* and *Mus musculus*).
 
-Let us now jump into the hands-on! We will learn how to compare chromosomes with `CHROMEISTER`, particularly the grass and common wheat genomes, which are nearly 5 times larger than the average human chromosome!
+Let us now jump into the hands-on! We will learn how to compare chromosomes with `CHROMEISTER`, particularly from the grass and common wheat genomes, which are nearly 5 times larger than the average human chromosome!
 
 ## Preparing the data
 
@@ -271,7 +270,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
-> 3. Rename the files to `aegilops.fasta` and `triticum.fasta` and change the datatype to `fasta`.
+> 3. Rename the files to `aegilops.fasta` and `triticum.fasta` and change the datatype to `fasta` if needed.
 >
 >    {% include snippets/rename_dataset.md %}
 >    {% include snippets/change_datatype.md %}
@@ -295,7 +294,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 ## Running the comparison
 
 > ### {% icon hands_on %} Hands-on: Comparing two plant chromosomes with CHROMEISTER
-> 1. **CHROMEISTER** {% icon tool %} with the following parameters
+> 1. {% tool [CHROMEISTER](toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.2) %} with the following parameters
 >    - {% icon param-file %} *"Query sequence"*: `aegilops.fasta`
 >    - {% icon param-file %} *"Reference sequence"*: `triticum.fasta`
 >    - *"Output dotplot size"*: `1000`
