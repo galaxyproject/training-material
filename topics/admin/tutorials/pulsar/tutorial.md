@@ -396,6 +396,7 @@ Some of the other options we will be using are:
 >      conda_auto_install: True
 >      staging_directory: "{{ pulsar_staging_dir }}"
 >      persistence_directory: "{{ pulsar_persistence_dir }}"
+>      tool_dependency_dir: "{{ pulsar_root }}/dependencies"
 >      # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
 >      message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671/pulsar/galaxu_au?ssl=1"
 >      min_polling_interval: 0.5
@@ -525,8 +526,8 @@ There are three things we need to do here:
 >    <destination id="pulsar" runner="pulsar_runner" >
 >        <param id="default_file_action">remote_transfer</param>
 >        <param id="dependency_resolution">remote</param>
->        <param id="jobs_directory">{{ pulsar_staging_dir }}</param>
->        <param id="persistence_directory">{{ pulsar_persistence_dir }}</param>
+>        <param id="jobs_directory">/mnt/pulsar/files/staging</param>
+>        <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
 >        <param id="remote_metadata">False</param>
 >        <param id="rewrite_parameters">True</param>
 >        <param id="transport">curl</param>
@@ -610,7 +611,7 @@ Pulsar servers can be the head node of a cluster. You can create a cluster and u
 
 You can also create multiple queues on your RabbitMQ server for multiple Pulsar servers. On Galaxy Australia, we run 5 different Pulsar servers spread out all around the country. They all communicate with Galaxy via the one RabbitMQ server.
 
-![Map of australia with 8 pulsar nodes marked around the country.](../../images/australia_locations.png)
+![Map of australia with 6 pulsar nodes marked around the country.](../../images/pulsar_australia.png)
 
 ## Europe
 
