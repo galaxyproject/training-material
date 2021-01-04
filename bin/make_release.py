@@ -5,7 +5,7 @@ import requests
 
 # repository info
 repo = "https://api.github.com/repos/galaxyproject/training-material/releases"
-gh_token = os.environ['GH_TOKEN_RELEASES']
+gh_token = os.environ['GITHUB_TOKEN']
 
 
 # create release name from today's date
