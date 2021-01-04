@@ -78,7 +78,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    ```yaml
 >    - src: galaxyproject.cvmfs
->      version: 0.2.8
+>      version: 0.2.13
 >    ```
 >
 > 2. Install the requirements with `ansible-galaxy`:
