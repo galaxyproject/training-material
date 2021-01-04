@@ -524,8 +524,8 @@ There are three things we need to do here:
 >    <destination id="pulsar" runner="pulsar_runner" >
 >        <param id="default_file_action">remote_transfer</param>
 >        <param id="dependency_resolution">remote</param>
->        <param id="jobs_directory">/mnt/pulsar/files/staging</param>
->        <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
+>        <param id="jobs_directory">{{ pulsar_staging_dir }}</param>
+>        <param id="persistence_directory">{{ pulsar_persistence_dir }}</param>
 >        <param id="remote_metadata">False</param>
 >        <param id="rewrite_parameters">True</param>
 >        <param id="transport">curl</param>
