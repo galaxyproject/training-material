@@ -241,7 +241,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    - src: natefoo.postgresql_objects
 >      version: 1.1
 >    - src: geerlingguy.pip
->      version: 1.3.0
+>      version: 2.0.0
 >    - src: uchida.miniconda
 >      version: 0.3.0
 >    - src: usegalaxy_eu.galaxy_systemd
@@ -681,7 +681,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, `virtualenv`, `tar`, and `bzip2`.
+>    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `acl`, `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
 >    ```diff
@@ -693,7 +693,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         - name: Install Dependencies
 >           package:
 >    -        name: 'python3-psycopg2'
->    +        name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2', 'acl']
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >       roles:
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
@@ -716,19 +716,20 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    We need to set the following variables at the top level:
 >
->    Variable                     | Value                                     | Purpose
->    ---                          | -----                                     | ---
->    `galaxy_create_user`         | `true`                                    | Instruct the role to create a Galaxy user
->    `galaxy_separate_privileges` | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
->    `galaxy_manage_paths`        | `true`                                    | Instruct the role to create the needed directories.
->    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
->    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
->    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
->    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `miniconda_prefix`           | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
->    `miniconda_version`          | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    Variable                        | Value                                     | Purpose
+>    ---                             | -----                                     | ---
+>    `galaxy_create_user`            | `true`                                    | Instruct the role to create a Galaxy user
+>    `galaxy_separate_privileges`    | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
+>    `galaxy_manage_paths`           | `true`                                    | Instruct the role to create the needed directories.
+>    `galaxy_layout`                 | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_root`                   | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
+>    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
+>    `galaxy_commit_id`              | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
+>    `galaxy_config_style`           | `yaml`                                    | We want to opt-in to the new style YAML configuration.
+>    `galaxy_force_checkout`         | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
+>    `miniconda_version`             | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_manage_dependencies` | `false`                                   | Specify whether to install the miniconda installer dependencies.
 >
 >    > ### {% icon tip %} Different Galaxy Releases!
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -758,6 +759,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: {% raw %}"{{ galaxy_tool_dependency_dir }}/_conda"{% endraw %}
 >    +miniconda_version: 4.7.12
+>    +miniconda_manage_dependencies: false
 >    ```
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
@@ -1515,7 +1517,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    @@ -5,6 +5,11 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2', 'acl']
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >    +  handlers:
 >    +    - name: Restart Galaxy
 >    +      systemd:
@@ -1923,7 +1925,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_{{ page.galaxy_version }}/lib/galaxy/config/sample/job_conf.xml.sample_basic)), though there is a symlink to the file in `/srv/galaxy/server/config`.
+One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_{{ page.galaxy_version }}/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -1989,7 +1991,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    </job_conf>
 >    ```
 >
-> 3. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
+> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
 >    ```diff
@@ -2006,7 +2008,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    ```
 >    {% endraw %}
 >
->    And then deploy the new config file using the `galaxy_config_templates` var in your group vars:
+>    And then deploy the new config file using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
 >
 >    {% raw %}
 >    ```yaml
