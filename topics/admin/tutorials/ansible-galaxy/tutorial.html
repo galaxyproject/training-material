@@ -1289,8 +1289,7 @@ We’ll start by assuming you’re running the command</p>
         <li>Add the roles <code class="language-plaintext highlighter-rouge">geerlingguy.pip</code>, <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> and <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> (in this order) at the end, with <code class="language-plaintext highlighter-rouge">uchida.miniconda</code> run as the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code> user.</li>
       </ul>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/<span class="notranslate">galaxy</span>.yml b/<span class="notranslate">galaxy</span>.yml
-</span><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
 </span><span class="p">@@ -4,9 +4,14 @@</span>
    pre_tasks:
@@ -2167,9 +2166,7 @@ The client is only re-built when there are changes in the files needed for the <
     <li>
       <p>Add the role <code class="language-plaintext highlighter-rouge">use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd</code> to your playbook. This should run <strong>after</strong> all of the roles we have already added so far.</p>
 
-      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/<span class="notranslate">galaxy</span>.yml b/<span class="notranslate">galaxy</span>.yml
-index 941272f..785ad03 100644
-</span><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
 </span><span class="p">@@ -15,3 +15,4 @@</span>
      - role: uchida.miniconda
@@ -2891,9 +2888,7 @@ changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
 
 <p>With Ansible, upgrading <span class="notranslate">Galaxy</span> to a new release is incredibly easy. Here is a commit from Use<span class="notranslate">Galaxy</span>.eu’s upgrade:</p>
 
-<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gh">diff --git a/group_vars/<span class="notranslate">galaxy</span>servers.yml b/group_vars/<span class="notranslate">galaxy</span>servers.yml
-index ce17525..54d0746 100644
-</span><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+<div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
 </span><span class="p">@@ -345,7 +345,7 @@</span> <span class="notranslate">galaxy</span>_instance_hostname: use<span class="notranslate">galaxy</span>.eu
  <span class="notranslate">galaxy</span>_config_style: ini
