@@ -224,7 +224,7 @@ BUSCO produces three output datasets
 {% if include.short %}
 # Maker
 
-Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.wikipedia.org/wiki/Expressed_sequence_tag) and proteins to the genome, and it will run ab initio predictors (SNAP and Augustus) using pre-trained models for this organism (have a look at the [longer version of tutorial]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %} to understand how they were trained)).
+Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.wikipedia.org/wiki/Expressed_sequence_tag) and proteins to the genome, and it will run ab initio predictors (SNAP and Augustus) using pre-trained models for this organism (have a look at the [longer version of tutorial]({% link topics/genome-annotation/tutorials/annotation-with-maker/tutorial.md %}) to understand how they were trained).
 
 > ### {% icon hands_on %} Hands-on: Annotation with Maker
 >
