@@ -398,7 +398,7 @@ Some of the other options we will be using are:
 >      persistence_directory: "{{ pulsar_persistence_dir }}"
 >      tool_dependency_dir: "{{ pulsar_root }}/dependencies"
 >      # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
->      message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671/pulsar/galaxu_au?ssl=1"
+>      message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671//pulsar/galaxy_au?ssl=1"
 >      min_polling_interval: 0.5
 >      amqp_publish_retry: True
 >      amqp_publish_retry_max_retries: 5
@@ -505,7 +505,7 @@ There are three things we need to do here:
 >    {% raw %}
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672{{ rabbitmq_vhosts[0] }}</param>
+>        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
 >        <param id="amqp_ack_republish_time">1200</param>
 >        <param id="amqp_acknowledge">True</param>
 >        <param id="amqp_consumer_timeout">2.0</param>
