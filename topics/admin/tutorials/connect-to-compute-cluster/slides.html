@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
 logo: "GTN"
+video: true
 
 title: "Connecting Galaxy to a compute cluster"
 questions:
@@ -36,6 +37,13 @@ tags:
   - **Resource** selection mappings: give users job execution options on the tool form
   - **Limits**: job runtime limits, e.g. the max number of concurrent jobs
 
+???
+
+- The job_conf file is a very powerul galaxy configuration piece critical to smooth cluster operation.
+- Written in XML it connects your server with the available cluster resources.
+- You can configure it in myriad ways.
+- Study the advanced sample provided with codebase once you get a basic understanding.
+
 ---
 
 # Why cluster?
@@ -45,6 +53,11 @@ Running jobs on the Galaxy server negatively impacts Galaxy UI performance
 Even adding one other host helps
 
 Can restart Galaxy without interrupting jobs
+
+???
+
+- Galaxy itself is not resource hungry, but the jobs often are.
+- Offloading the jobs to different machines is a more sustainable and reliable setup.
 
 ---
 
@@ -64,11 +77,21 @@ Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com
 - Go-Docker
 - Chronos
 
+???
+
+- Galaxy supports plugins for various job runners covering most of the popular ones.
+- Galaxy community also maintains its own called Pulsar.
+
 ---
 
 # Cluster library stack (DRMAA)
 
 ![Cluster library stack](../../images/cluster_lib_stack.png)
+
+???
+
+- There are underlying technologies that you are going to depend on.
+- You don't need to have an in-depth understanding to run cluster deployment correctly.
 
 ---
 
@@ -81,6 +104,13 @@ Define which Galaxy processes are job handlers
 - The list of plugins that are loaded by a job handler can be limited using `<plugin>` subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)
 - Not defined in `job_conf.xml` when using *job handler mules*
 
+???
+
+- The next set of slides is about configuration sections of the job configuration file.
+- The first is the handler section.
+- You match Galaxy with the separate handler process using this configuration
+- Handlers can be customized and jobs sent to them can be filtered.
+
 ---
 
 # Destinations
@@ -91,6 +121,11 @@ Define *how* jobs should be run
 - In a Docker container? Which one?
 - **DRM params** (queue, cores, memory, walltime)?
 - Environment (variables e.g. `$PATH`, source an env file, run a command)?
+
+???
+
+- The destination section of the job configuration file is a map that defines what jobs are going where.
+- Every job will find a path through this configuration and eventually get dispatched to the matching runner.
 
 ---
 
@@ -111,6 +146,11 @@ Define *how* jobs should be run
     </destinations>
 </job_conf>
 ```
+
+???
+
+- The default job configuration is using a local runner and the main process as a handler.
+
 ---
 
 # Job Config - Tags
@@ -119,6 +159,11 @@ Both destinations and handlers can be grouped by **tags**
 
 - Allows random selection from multiple resources
 - Allows concurrency limits at the destination group level
+
+???
+
+- Tags can help the load distribution.
+
 ---
 
 # Job Environment
@@ -133,6 +178,11 @@ Both destinations and handlers can be grouped by **tags**
 
 Source and command execution will be handled on the remote destination, don't need to work on the Galaxy server
 
+???
+
+- You can specify environment variables on the destination.
+- Galaxy will ensure these are executed in the same environment and ahead of the job.
+
 ---
 
 # Limits
@@ -142,6 +192,10 @@ Available limits
 - Walltime (if not available with your DRM)
 - Output size (if *any* tool output grows larger than this limit)
 - Concurrency: Number of "active" (queued or running) jobs
+
+???
+
+- Configuration of job limits are provided by your DRM, but some basic ones are available through Galaxy.
 
 ---
 
@@ -153,6 +207,11 @@ Available limits
 - Number of active jobs per unregistered user
 - Number of active jobs per registered user in a specified destination or destination tag
 - Number of total active jobs in a specified destination or destination tag
+
+???
+
+- Using concurrency limits you can balance your instance between internal and external users.
+- Or between various internal teams.
 
 ---
 
@@ -193,6 +252,11 @@ Galaxy automatically sets `$GALAXY_SLOTS` to the CPU/core count you specify when
 
 Tool configs: Consume `\${GALAXY_SLOTS:-4}`
 
+???
+
+- For multiprocessing to be available both the tool and the Galaxy tool wrapper need to support it.
+- Admin needs to understand what tools are being run and set destinations for them with the appropriate specification.
+
 ---
 
 # Memory requirements
@@ -220,6 +284,10 @@ If your Galaxy users == System users:
 
 See: [Cluster documentation](https://wiki.galaxyproject.org/Admin/Config/Performance/Cluster)
 
+???
+
+- If you galaxy users map to the systme users you can make galaxy invisible to your DRM.
+- This allows proper resource accounting.
 
 ---
 
@@ -234,12 +302,14 @@ Problem: Tool A uses single core, Tool B uses multiple
 ## Job Config - Mapping Tools to Destinations
 
 Solution:
+
 ```xml
     <destinations default="single">
         <destination id="single" runner="slurm" />
         <destination id="multi" runner="slurm">
             <param id="nativeSpecification">--ntasks=4</param>
         </destination>
+    </destinations>
     <tools>
         <tool id="hisat2" destination="multi"/>
     </tools>
