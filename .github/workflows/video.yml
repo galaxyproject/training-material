@@ -47,6 +47,10 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb libfontconfig wkhtmltopdf ffmpeg
 
+      - name: Change ImageMagick policy to allow pdf->png conversion.
+        run: |
+          sudo sed -i 's/^.*policy.*none.*PDF.*//' /etc/ImageMagick-6/policy.xml
+
       - name: Build Site
         run: |
           gem install bundler
