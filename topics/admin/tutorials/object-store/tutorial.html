@@ -305,6 +305,10 @@
     {
       "@type": "Person",
       "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Gianmauro Cuccuru"
     }
   ],
   "contributor": [
@@ -315,6 +319,10 @@
     {
       "@type": "Person",
       "name": "Helena Rasche"
+    },
+    {
+      "@type": "Person",
+      "name": "Gianmauro Cuccuru"
     }
   ],
   "about": [
@@ -334,7 +342,7 @@
 
         <div class="contributors-line">By: 
 
-<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+<a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>, <a href="/training-material/hall-of-fame/gmauro/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/gmauro" alt="Gianmauro Cuccuru">Gianmauro Cuccuru</a>
 
 </div>
 
@@ -606,6 +614,7 @@
   <li><a href="#hierarchical-object-store" id="markdown-toc-hierarchical-object-store">Hierarchical Object Store</a></li>
   <li><a href="#distributed-object-store" id="markdown-toc-distributed-object-store">Distributed Object Store</a></li>
   <li><a href="#s3-object-store" id="markdown-toc-s3-object-store">S3 Object Store</a></li>
+  <li><a href="#dropbox" id="markdown-toc-dropbox">Dropbox</a></li>
 </ol>
 
 </blockquote>
@@ -848,6 +857,130 @@ dataset_24.dat
 
 </blockquote>
 
+<h1 id="dropbox">Dropbox</h1>
+
+<p>Dropbox is a well-known cloud storage service where you can store and share files with anyone. 
+As of <a href="https://github.com/galaxyproject/galaxy/pull/9888">20.09</a>, <span class="notranslate">Galaxy</span> has support for a couple of different file storage backends, including NextCloud (via webdavfs) and Dropbox.</p>
+
+<p>This tutorial will help you setup the connection between <span class="notranslate">Galaxy</span> and Dropbox, allowing your users to add their account details and then access their Dropbox data within <span class="notranslate">Galaxy</span></p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configure-galaxy-to-access-the-dropbox-service"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</h3>
+
+  <ol>
+    <li>
+      <p>If the folder does not exist, create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> next to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p files/<span class="notranslate">galaxy</span>/config
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/file_sources_conf.yml</code> with the following contents:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">type</span><span class="pi">:</span> <span class="s">dropbox</span>
+  <span class="na">id</span><span class="pi">:</span> <span class="s">dropbox</span>
+  <span class="na">label</span><span class="pi">:</span> <span class="s">Your Dropbox Files</span>
+  <span class="na">doc</span><span class="pi">:</span> <span class="s">Your Dropbox files - configure an access token via the user preferences</span>
+  <span class="na">accessToken</span><span class="pi">:</span> <span class="s">${user.preferences['dropbox|access_token']}</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/user_preferences_extra_conf.yml</code> with the following contents:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">preferences</span><span class="pi">:</span>
+    <span class="na">dropbox</span><span class="pi">:</span>
+        <span class="na">description</span><span class="pi">:</span> <span class="s">Your Dropbox account</span>
+        <span class="na">inputs</span><span class="pi">:</span>
+            <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">access_token</span>
+              <span class="na">label</span><span class="pi">:</span> <span class="s">Dropbox access token</span>
+              <span class="na">type</span><span class="pi">:</span> <span class="s">password</span>
+              <span class="na">required</span><span class="pi">:</span> <span class="s">False</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Inform the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role of where you would like the <code class="language-plaintext highlighter-rouge">file_sources_conf.yml</code> and <code class="language-plaintext highlighter-rouge">user_preferences_extra_conf.yml</code> to reside, by setting it in your <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -35,6 +35,8 @@</span> <span class="notranslate">galaxy</span>_config:
+     check_migrate_tools: false
+     tool_data_path: "{{ <span class="notranslate">galaxy</span>_mutable_data_dir }}/tool-data"
+     job_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/job_conf.xml"
+<span class="gi">+    file_sources_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/file_sources_conf.yml"
++    user_preferences_extra_conf_path: "{{ <span class="notranslate">galaxy</span>_config_dir }}/user_preferences_extra_conf.yml"
+</span>   uwsgi:
+     socket: 127.0.0.1:8080
+     buffer-size: 16384
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Deploy the new config files using the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> var (also from the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span></code> role) in your group vars:</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -65,6 +67,12 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+
++<span class="notranslate">galaxy</span>_config_files:
+<span class="gi">+  - src: files/<span class="notranslate">galaxy</span>/config/user_preferences_extra_conf.yml
++    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.user_preferences_extra_conf_path }}"
++  - src: files/<span class="notranslate">galaxy</span>/config/file_sources_conf.yml
++    dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.file_sources_config_file }}"
++
+</span> # systemd
+ <span class="notranslate">galaxy</span>_systemd_mode: mule
+ <span class="notranslate">galaxy</span>_zergpool_listen_addr: 127.0.0.1:8080
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook. At the very end, you should see output like the following indicating that <span class="notranslate">Galaxy</span> has been restarted:</p>
+
+      <blockquote class="code-2col">
+        <blockquote class="code-in">
+          <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>          </div>
+        </blockquote>
+        <blockquote class="code-out">
+          <h3 id="code-in-output"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Output</h3>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+RUNNING HANDLER [restart <span class="notranslate">galaxy</span>] ****************************************
+changed: [gat-88.training.<span class="notranslate">galaxy</span>project.eu]
+</code></pre></div>          </div>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Now we are ready to configure a <span class="notranslate">Galaxy</span>’s user account to upload dataset from Dropbox to the <span class="notranslate">Galaxy</span> server.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configure-galaxy-to-access-the-dropbox-service-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure <span class="notranslate">Galaxy</span> to access the Dropbox service</h3>
+
+  <ol>
+    <li>
+      <p>Generate a Dropbox access token following the <a href="https://www.dropbox.com/lp/developers/reference/oauth-guide">Dropbox Oauth guide</a></p>
+    </li>
+    <li>Add the Dropbox access token in the <span class="notranslate">Galaxy</span>’s user preferences
+      <ul>
+        <li>Go to https://&lt;server&gt;/user/information</li>
+        <li>Here you will find the form user will fill in with his own Dropbox access token:
+<img src="../../images/storage_dropbox_form.png" alt="user preferences form" /></li>
+      </ul>
+    </li>
+    <li>Click the upload icon toward the top left corner.
+You will have a new “Choose remote files” button that will open the remote files windows with the link to reach your Dropbox files:
+ <img src="../../images/storage_dropbox_remote_files_window.png" alt="remote files window" /></li>
+  </ol>
+
+</blockquote>
+
 
                     
                     <blockquote class="key_points">
@@ -904,7 +1037,7 @@ dataset_24.dat
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Nate Coraor, Helena Rasche, 2021 <b>Distributed Object Storage (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/object-store/tutorial.html">/training-material/topics/admin/tutorials/object-store/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Nate Coraor, Helena Rasche, Gianmauro Cuccuru, 2021 <b>Distributed Object Storage (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/object-store/tutorial.html">/training-material/topics/admin/tutorials/object-store/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -919,7 +1052,7 @@ dataset_24.dat
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{admin-object-store,
-    author = "Nate Coraor and Helena Rasche",
+    author = "Nate Coraor and Helena Rasche and Gianmauro Cuccuru",
     title = "Distributed Object Storage (Galaxy Training Materials)",
     year = "2021",
     month = "01",
@@ -970,7 +1103,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Nate Coraor, Helena Rasche)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Nate Coraor, Helena Rasche, Gianmauro Cuccuru)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
