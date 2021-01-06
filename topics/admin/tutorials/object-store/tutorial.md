@@ -14,6 +14,7 @@ key_points:
 contributors:
   - natefoo
   - hexylena
+  - gmauro
 subtopic: features
 tags:
   - storage
