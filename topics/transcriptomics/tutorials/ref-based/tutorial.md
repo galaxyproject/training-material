@@ -1083,11 +1083,12 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > 7. Compute the normalized counts: divide the original counts by the scaling factors
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
->     A | 0 | 23 | 9
->     B | 2 | 6 | 12
->     C | 13 | 21 | 78
+>     A | 0 | 11.11 | 1.6
+>     B | 5 | 6.67 | 4.8
+>     C | 83 | 61.11 | 80
 >
-> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU)*
+> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU&t=35s)*
+
 {: .details}
 
 DESeq2 runs also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:
