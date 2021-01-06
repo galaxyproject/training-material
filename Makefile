@@ -195,7 +195,7 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
-_site/%.pdf: _site/%.html
+_site/%/slides.pdf: _site/%/slides.html
 	if ! grep 'http-equiv="refresh"' $< --quiet; then \
 		$(ACTIVATE_ENV) && \
 		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
