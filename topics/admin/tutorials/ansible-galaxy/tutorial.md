@@ -305,9 +305,9 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    pipelining = true
 >    ```
 >
->    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
+>    Pipelining will make [Ansible run faster](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >
-> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. If you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
+> 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```bash
@@ -321,7 +321,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > >
 >    > > ```ini
 >    > > [galaxyservers]
->    > > gat-88.training.galaxyproject.eu ansible_connection=local
+>    > > gat-88.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -720,7 +720,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_create_user`            | `true`                                    | Instruct the role to create a Galaxy user
 >    `galaxy_separate_privileges`    | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
 >    `galaxy_manage_paths`           | `true`                                    | Instruct the role to create the needed directories.
->    `galaxy_layout`                 | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
+>    `galaxy_layout`                 | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
 >    `galaxy_root`                   | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
 >    `galaxy_commit_id`              | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
