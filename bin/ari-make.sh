@@ -18,5 +18,4 @@ for slides in $(find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
 
 	# Build the slides
 	./bin/ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
-	exit
 done
