@@ -84,6 +84,16 @@ jobs:
         run: |
           make check-tool-links
 
+  lint-data-lib-yaml:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 1
+      - name: Check yaml are valid and can be merged
+        run: |
+          python bin/mergeyaml.py --nondocker > /dev/null
+
   build-site:
     needs: setup
     runs-on: ubuntu-latest
