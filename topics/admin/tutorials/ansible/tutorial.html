@@ -684,14 +684,14 @@ Ansible provides some flags which can help you identify changes before they’re
           <p>We will call our group <code class="language-plaintext highlighter-rouge">my_hosts</code></p>
         </li>
         <li>
-          <p>Create <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells ansible to not use SSH, and just use the local connection.</p>
+          <p>Create <a href="https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html">an inventory file</a> with the group <code class="language-plaintext highlighter-rouge">my_hosts</code> and <code class="language-plaintext highlighter-rouge">localhost ansible_connection=local</code>, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the <code class="language-plaintext highlighter-rouge">ansible_user</code> variable to the use<span class="notranslate">rna</span>me to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not <code class="language-plaintext highlighter-rouge">ansible_user</code> is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.</p>
 
           <blockquote class="solution">
             <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
             <p>The file should look like:</p>
 
             <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[my_hosts]</span>
-<span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+<span class="err">localhost</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local ansible_user=ubuntu</span>
 </code></pre></div>            </div>
           </blockquote>
         </li>

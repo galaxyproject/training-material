@@ -879,10 +879,10 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 <span class="py">pipelining</span> <span class="p">=</span> <span class="s">true</span>
 </code></pre></div>      </div>
 
-      <p>Pipelining will make <a href="https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining">ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
+      <p>Pipelining will make <a href="https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining">Ansible run faster</a> by significantly reducing the number of new SSH connections that must be opened.</p>
     </li>
     <li>
-      <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so, include a group for <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> with the address of the host where you want to install <span class="notranslate">Galaxy</span>. If you are running ansible on the same machine as <span class="notranslate">Galaxy</span> will be installed to, you should set <code class="language-plaintext highlighter-rouge">ansible_connection=local</code>.</p>
+      <p>Create the <code class="language-plaintext highlighter-rouge">hosts</code> inventory file if you have not done so yet, defining a <code class="language-plaintext highlighter-rouge">[<span class="notranslate">galaxy</span>servers]</code> group with the address of the host where you want to install <span class="notranslate">Galaxy</span>. If you are running Ansible on the same machine where <span class="notranslate">Galaxy</span> will be installed to, you should set the <code class="language-plaintext highlighter-rouge">ansible_connection=local</code> variable. Lastly, you should explicitly set the <code class="language-plaintext highlighter-rouge">ansible_user</code> variable to the use<span class="notranslate">rna</span>me to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not <code class="language-plaintext highlighter-rouge">ansible_user</code> is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.</p>
 
       <blockquote class="code-2col">
         <blockquote class="code-in">
@@ -897,7 +897,7 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
           <p>Your hostname is probably different:</p>
 
           <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[<span class="notranslate">galaxy</span>servers]</span>
-<span class="err">gat-88.training.<span class="notranslate">galaxy</span>project.eu</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local</span>
+<span class="err">gat-88.training.<span class="notranslate">galaxy</span>project.eu</span> <span class="py">ansible_connection</span><span class="p">=</span><span class="s">local ansible_user=ubuntu</span>
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -1348,7 +1348,7 @@ We’ll start by assuming you’re running the command</p>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_layout</code></td>
             <td><code class="language-plaintext highlighter-rouge">root-dir</code></td>
-            <td>This enables the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> <span class="notranslate">Galaxy</span> deployment layout: all of the code, configuration, and data folders will live beneath <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>.</td>
+            <td>This enables the <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code> <span class="notranslate">Galaxy</span> deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code>. User data is stored under <code class="language-plaintext highlighter-rouge">file_path</code>, a variable we will set later.</td>
           </tr>
           <tr>
             <td><code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_root</code></td>
