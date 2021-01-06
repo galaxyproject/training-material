@@ -47,6 +47,11 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y xvfb libfontconfig wkhtmltopdf ffmpeg
 
+      - name: Build Site
+        run: |
+          gem install bundler
+          JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+
       - name: Build Videos
         run: |
           env | grep AWS | grep -vi secret
