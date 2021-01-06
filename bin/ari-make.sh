@@ -1,9 +1,14 @@
 #!/bin/bash
-for slides in $(find topics -name 'slides.html' | xargs ./bin/filter-has-videos); do
+set -e
+
+# We have an old commit ID, so we need to figure out which slides to build.
+changed_slides="$(join <(find topics -name 'slides.html' | xargs ./bin/filter-has-videos | sort) <(git diff ${PREVIOUS_COMMIT_ID} --name-only | sort))"
+
+for slides in $changed_slides; do
 	echo "====== $slides ======"
 	dir="$(dirname "$slides")"
 	pdf="$dir/$(basename "$slides" .html).pdf"
-	mp4="$dir/$(basename "$slides" .html).mp4"
+	mp4="videos/$dir/$(basename "$slides" .html).mp4"
 	built_slides="_site/training-material/$slides"
 
 	# Process the slides
@@ -17,5 +22,9 @@ for slides in $(find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
 			- _site/training-material/"$pdf";
 
 	# Build the slides
+	echo ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
 	./bin/ari.sh "_site/training-material/$pdf" "$slides" "$mp4"
 done
+
+# Now we'll note our current, changed commit since this all went so well.
+git log -1 --format=%H > videos/topics/last-commit
