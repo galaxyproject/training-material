@@ -272,14 +272,14 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    1. We will call our group `my_hosts`
 >
->    2. Create [an inventory file](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
+>    2. Create [an inventory file](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the `ansible_user` to your username on the server. Ansible has changed it's behaviour over time regarding whether or not `ansible_user` is defined, and it's most effective to define it explicitly even when it sometimes can be inferred.
 >
 >       > ### {% icon solution %} Solution
 >       > The file should look like:
 >       >
 >       > ```ini
 >       > [my_hosts]
->       > localhost ansible_connection=local
+>       > localhost ansible_connection=local ansible_user=ubuntu
 >       > ```
 >       {: .solution }
 >

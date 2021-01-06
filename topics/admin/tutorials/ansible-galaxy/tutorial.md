@@ -307,7 +307,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >
-> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. If you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
+> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. If you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`. Lastly, you should explicitly set the `ansible_user` to your username on the server. Ansible has changed it's behaviour over time regarding whether or not `ansible_user` is defined, and it's most effective to define it explicitly even when it sometimes can be inferred.
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```bash
@@ -321,7 +321,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > >
 >    > > ```ini
 >    > > [galaxyservers]
->    > > gat-88.training.galaxyproject.eu ansible_connection=local
+>    > > gat-88.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
