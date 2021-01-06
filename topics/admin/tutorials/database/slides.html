@@ -122,6 +122,10 @@
     {
       "@type": "Person",
       "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "contributor": [
@@ -136,6 +140,10 @@
     {
       "@type": "Person",
       "name": "Nate Coraor"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
     }
   ],
   "about": [
@@ -189,6 +197,14 @@ slide to change on the other. Useful when presenting.
 
 ---
 
+
+
+
+
+
+
+
+
 # Galactic Database
 
 .left[Galaxy uses a database for:]
@@ -198,6 +214,13 @@ slide to change on the other. Useful when presenting.
 .left[Galaxy does not use a database for:]
 * Dataset **contents**: files on disk
 
+???
+
+- Galaxy objects like users, histories, datasets, and workflows are stored in the database.
+- All job information is likewise stored there.
+- User and reference data, however, are stored outside of the database.
+- You will want to backup both user data and your database.
+
 ---
 
 # Defaults
@@ -205,6 +228,11 @@ slide to change on the other. Useful when presenting.
 * Galaxy uses the [SQLAlchemy](http://www.sqlalchemy.org/) database abstraction layer. This allows for different database servers to be plugged in.
 * By default Galaxy automatically creates and uses an [SQLite](https://sqlite.org/) database during the first startup.
   * The database is in the file `database/universe.sqlite`
+
+???
+
+- Galaxy uses SQLAlchemy for interacting with databases.
+- This allows Galaxy to transparently use sqlite or postgres.
 
 ---
 # Choices
@@ -215,6 +243,12 @@ slide to change on the other. Useful when presenting.
   * The recommended standard for anything serious.
 * ~~MySQL~~
   * Supported by SQLAlchemy but Galaxy is not tested against it.
+
+???
+
+- sqlite is fine in development, but should not be used for production.
+- postgres is the best for any production server.
+- Do not use mysql if possible.
 
 ---
 # Sizing
@@ -227,23 +261,39 @@ Allocate at least 20 GB of disk to start, 50+ GB if expanding would be difficult
 
 Recommended: Run PostgreSQL on a different server for resource isolation.
 
+???
+
+- Data is not removed from the database, so plan accordingly.
+- Allocated at least 20 GB of disk to start, and 50 if expanding later is difficult.
+- The RAM usage is usually not significant.
+- We recommend running the database on a separate server from Galaxy for better isolation.
+
 ---
 # Configuration
 
 `database_connection` is specified as a [database URL](http://docs.sqlalchemy.org/en/latest/core/engines.html#database-urls) in `galaxy.yml`
-  * Default SQLite:  
+  * Default SQLite:
       `sqlite:///./database/universe.sqlite?isolation_level=IMMEDIATE`
 
-  * Local PostgreSQL (socket):  
+  * Local PostgreSQL (socket):
        `postgresql:///&lt;db_name&gt;[?host=/var/run/postgresql]`
 
-  * Network PostgreSQL:  
+  * Network PostgreSQL:
       `postgresql://[user][:password]@&lt;host&gt;[:5432]/&lt;db_name&gt;`
+
+???
+
+- The parameter database_connection tells galaxy where the database is.
+- There are several styles, depending on how you connect to your database.
 
 ---
 # New Database
 
 On first startup with an empty database, Galaxy creates its schema
+
+???
+
+- On first startup with an empty database, Galaxy creates its schema.
 
 ---
 # Migrations
@@ -257,6 +307,11 @@ $ ./manage_db.sh upgrade
 $ ./manage_db.sh downgrade --version=132
 ```
 
+???
+
+- Whenever Galaxy is upgraded, there may be changes to the database schema.
+- These are stored in migration scripts, and you can use the manage db script to up or downgrade.
+
 ---
 # Tuning - Pool
 
@@ -267,8 +322,14 @@ If the server logs errors about not having enough database pool connections.
 | `database_engine_option_pool_size`    | `5`           | `10`                |
 | `database_engine_option_max_overflow` | `10`          | `20`                |
 
+[Values for usegalaxy.org](https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/group_vars/all/galaxy_config_vars.yml)
+
 ???
-Values for usegalaxy.org are available at https://github.com/galaxyproject/usegalaxy-playbook/blob/master/env/main/group_vars/all/galaxy_config_vars.yml
+
+- Databases have a limited number of connection slots.
+- Galaxy can pool connections, and re-use existing connections from a pool when it needs to query the DB.
+- There are a couple of options for controlling pooling.
+- The defaults are generally fine until you see errors.
 
 ---
 # Tuning - Server-side cursors
@@ -280,6 +341,11 @@ If large database query results are causing memory or response time issues in th
 | ------                                       | ------------- | ------------------- |
 | `database_engine_option_server_side_cursors` | `false`       | `true`              |
 
+???
+
+- Large queries may slow down Galaxy or the DB.
+- You can enable server side cursors to help with this.
+
 ---
 # Tuning - Slow query logging
 
@@ -288,6 +354,12 @@ Queries slower than this threshold (in s) will be logged at debug level.
 | Galaxy config option       | default value | usegalaxy.org value |
 | ------                     | ------------- | ------------------- |
 | `slow_query_log_threshold` | `0`           | `2`                 |
+
+???
+
+- If you notice slow responses, you can enable slow query logging.
+- This will print a message in your Galaxy log if a query takes more than a specified time period.
+- This can be useful to help you debug issues.
 
 ---
 # Tuning - TS install database
@@ -298,18 +370,16 @@ Galaxy can track Tool Shed data in a separate DB.
 | ------                        | -------------                  | ------------------- |
 | `install_database_connection` | value of `database_connection` | SQLite DB in CVMFS  |
 
+All other database config options but prefixed with `install_` are also available.
+
 .left[This allows:]
 * Bootstrapping fresh Galaxy instances with prebuilt/tested tool sets
 * Atomic installation/rollback (esp. with SQLite: backup and restore DB file)
 
 ???
-All other database config options but prefixed with `install_` are also available.
 
----
-# Other Databases
-
-* The Reports app is hooked to the Galaxy DB to present data in useful format.
-* The Tool Shed app has its own database.
+- Galaxy can track tool shed data in a separate database
+- This can enable deploying Galaxies with prebuilt tool sets
 
 ---
 # Access through model
@@ -326,12 +396,27 @@ Python script to access Galaxy's database layer **via the Galaxy model**.
 ```
 
 ???
-Need to be inside the Galaxy virtualenv for this to work
+
+- You can use the Galaxy python models to interact with the database.
+- After activating the galaxy virtual environment, you can use the DB shell script to interface.
+- This can allow scripting tasks like resetting passwords.
 
 ---
 # Useful queries
 
 Captured in [gxadmin](/training-material/topics/admin/tutorials/gxadmin/slides.html) ([tutorial](/training-material/topics/admin/tutorials/gxadmin/tutorial.html))
+
+???
+
+- Many useful DB queries are captured in gxadmin
+- Look into this if you need to query the database for information like running jobs or recent users.
+
+
+
+
+
+
+
 
 
 ---
@@ -344,7 +429,7 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 <div class="contributors-line">
 
 
-<a href="/training-material/hall-of-fame/martenson/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/martenson" alt="Martin Čech">Martin Čech</a>, <a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>, <a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>
+<a href="/training-material/hall-of-fame/martenson/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/martenson" alt="Martin Čech">Martin Čech</a>, <a href="/training-material/hall-of-fame/nsoranzo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nsoranzo" alt="Nicola Soranzo">Nicola Soranzo</a>, <a href="/training-material/hall-of-fame/natefoo/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/natefoo" alt="Nate Coraor">Nate Coraor</a>, <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
 
 
 </div>
@@ -356,8 +441,6 @@ This material is the result of a collaborative work. Thanks to the [Galaxy Train
 
 This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
 
-
-.footnote[Found a typo? Something is wrong in this tutorial? <br/>Edit it on [GitHub](https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/database/slides.html)]
 
     </textarea>
 	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
