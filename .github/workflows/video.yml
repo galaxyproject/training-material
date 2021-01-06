@@ -24,6 +24,10 @@ jobs:
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: 2.5
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -41,7 +45,7 @@ jobs:
       - name: Install wkhtmltopdf
         run: |
           sudo apt-get update
-          sudo apt-get install -y xvfb libfontconfig wkhtmltopdf
+          sudo apt-get install -y xvfb libfontconfig wkhtmltopdf ffmpeg
 
       - name: Build Videos
         run: |
