@@ -258,7 +258,7 @@ we will set up a local S3-compatible object store, and then talk to the API of t
 
 # Dropbox
 
-Dropbox is a well-known cloud storage sevice where you can store and share files with anyone. 
+Dropbox is a well-known cloud storage service where you can store and share files with anyone. 
 As of [20.09](https://github.com/galaxyproject/galaxy/pull/9888), Galaxy has support for a couple of different file storage backends, including NextCloud (via webdavfs) and Dropbox.
 
 This tutorial will help you setup the connection between Galaxy and Dropbox, allowing your users to add their account details and then access their Dropbox data within Galaxy
