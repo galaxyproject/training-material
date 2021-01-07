@@ -181,16 +181,23 @@ Depending on the analysis it could be possible that a certain quality or length 
 >                - *"Minimum quality required to keep a base"*: `20`
 >        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
 >            - *"Select Trimmomatic operation to perform"*: `Sliding window trimming (SLIDINGWINDOW)`
+>                - *"Number of bases to average across"*: `4`
+>                - *"Average quality required"*: `20`
 >        - {% icon param-repeat %} *"Insert Trimmomatic Operation"*
 >            - *"Select Trimmomatic operation to perform"*: `Drop reads below a specified length (MINLEN)`
 >                - *"Minimum length of reads to be kept"*: `30`
+>
+>    This produces two sets of output files, the R1/R2 paired, and R1/R2 unpaired.
+>
+>    - The first first two are the paired reads, the reads in each of those files match up.
+>    - The second two are the unpaired reads where one of the two reads was discarded.
 >
 > 2. Edit the tags of the trimmomatic outputs. Remove the `#unfiltered` tag and add a new tag, `#filtered`
 >
 >    {% include snippets/add_tag.md %}
 >
 > 3. {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} with the following parameters:
->    - {% icon param-files %} *"Short read data from your current history"*: `DRR187567_1` and `DRR187567_2`
+>    - {% icon param-files %} *"Short read data from your current history"*: `Trimmomatic on DRR187567_1 (R1 Paired)` and `Trimmomatic on DRR187567_2 (R2 Paired)`
 >
 > 4. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.9) %} with the following parameters:
 >    - In *"Results"*:
@@ -240,8 +247,7 @@ MultiQC is a tool to combine multiple outputs in one clear and easy to read over
 {: .question}
 
 
-
-# Assembly using Shovill
+# Assembly
 
 When the quality of the reads is determined and the data is filtered and/or
 trimmed an assembly can be made. There are many tools that create assembly for
@@ -316,7 +322,6 @@ also possible with QUAST.
 This fasta file contains 32 contigs, meaning the chromosome is separated over multiple contigs. These contigs can also contain (parts of) plasmids.
 
 > ### {% icon question %} Question
-> Question 5:
 > 1. What is you GC content?
 > 2. Is your GC content similar compared to other MRSA strains?
 >
@@ -391,8 +396,8 @@ from prokka as an information track.
 
 > ### {% icon hands_on %} Hands-on: Annotating the Genome
 >
-> 1. **Prokka** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Contigs to annotate"*: `consensus` (output of **Flye assembly** {% icon tool %})
+> 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Contigs to annotate"*: `Shovill on data ... Contigs`
 >    - *"Genus name (--genus)"*: `staphylococcus `
 >    - *"Species name (--species)"*: `aureus`
 >    - *"Kingdom (--kingdom)"*: `Bacteria`
@@ -406,7 +411,7 @@ from prokka as an information track.
 >    This will select lines with a decimal value (###.##) followed by a tab character, the column separator in Galaxy. As a result, any lines without an identity value will be filtered out.
 >
 > 3. {% tool [Table to GFF3](toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2) %}
->    - {% icon param-file %} *"Table"*: the output of the **Select lines** {% icon tool %} step.
+>    - {% icon param-file %} *"Table"*: the output of the above **Select lines** {% icon tool %} step.
 >    - *"Record ID column or value"*: `8`
 >    - *"Feature start column or value"*: `9`
 >    - *"Feature end column or value"*: `10`
@@ -419,21 +424,18 @@ from prokka as an information track.
 >        - *"Name"*: `phenotype`
 >        - *"Qualifier value column or raw text"*: `4`
 >
-> 4. **Bowtie2** {% icon tool %} with the following parameters:
+> 4. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`
 >        - {% icon param-file %} *"FASTA/Q file #1"*: `Trimmomatic on DRR187567_1 uncompressed (R1 paired)` (output of **Trimmomatic** {% icon tool %})
 >        - {% icon param-file %} *"FASTA/Q file #2"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)` (output of **Trimmomatic** {% icon tool %})
->        - *"Do you want to set paired-end options?"*: `No`
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
 >        - {% icon param-file %} *"Select reference genome"*: `contigs` (output of **Shovill** {% icon tool %})
->    - *"Set read groups information?"*: `Do not set`
->    - *"Select analysis mode"*: `1: Default setting only`
->    - *"Do you want to tweak SAM/BAM Options?"*: `No`
+>    - *"Select analysis mode"*: `1: Default setting only` - You should have a look at the non-default parameters and try to understand them, but they don't need to be changed currently.
 >    - *"Save the bowtie2 mapping statistics to the history"*: `Yes`
 >
 > 5. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
->        - {% icon param-file %} *"Select the reference genome"*: `consensus` (output of **Flye assembly** {% icon tool %})
+>        - {% icon param-file %} *"Select the reference genome"*: `consensus` (output of **Shovill assembly** {% icon tool %})
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
 >    - In *"Track Group"*:
 >        - {% icon param-repeat %} *"Insert Track Group"*
@@ -442,32 +444,33 @@ from prokka as an information track.
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `out_gff` (output of **Prokka** {% icon tool %})
->                        - *"Index this track"*: `Yes`
->                        - *"Track Visibility"*: `On for new users`
->        - {% icon param-repeat %} *"Insert Track Group"*
->            - *"Track Category"*: `Sequencing`
->            - In *"Annotation Track"*:
->                - {% icon param-repeat %} *"Insert Annotation Track"*
->                    - *"Track Type"*: `BAM Pileups`
->                        - *"Autogenerate SNP Track"*: `Yes`
+>                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
 >                        - *"Track Visibility"*: `On for new users`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `AMR`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
->                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: the output of the table to gff3 step
->                        - *"Index this track"*: `Yes`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Table to GFF3 on ...`, the output of the table to gff3 step
 >                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
->                        - In *"JBrowse Feature Score Scaling & Colouring Options [Advanced]"*
->                            - *"Color Score Algorithm"*: `Based on score`
 >                        - *"Track Visibility"*: `On for new users`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Sequencing`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BAM Pileups`
+>                        - {% icon param-file %} *"BAM Track Data"*: Bowtie2's output
+>                        - *"Autogenerate SNP Track"*: `Yes`
 >
 > 3. View the output of JBrowse
 >
 {: .hands_on}
 
 In the output of the JBrowse you can view the mapped reads and the found genes against the reference genome. With the search tools you can easily find genes of interest. JBrowse can handle many inputs and can be very useful. Using the bowtie2 mapping output, low coverage regions can be detected. This SNP detection can also give a clear view of where the data was less reliable or where variations were located.
+
+If it takes too long to build the JBrowse instance, you can view an embedded one here. (**Warning**: feature name search will not work.)
+
+{% include snippets/jbrowse.html datadir="data" loc="contig00018:5488..27391" tracks="DNA,14e421a8469880793f2a8d774224e10d_0,6851a9d3f5d62263e4e4b34f1513980c_0" %}
 
 # Conclusion
 {:.no_toc}

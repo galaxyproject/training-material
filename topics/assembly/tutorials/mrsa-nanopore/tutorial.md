@@ -17,7 +17,7 @@ objectives:
 - Perform a species identification and MLST typing
 - Search for resistance genes on the assembly
 - Find a gene on your genome using Prokka + JBrowse
-time_estimation: 4h
+time_estimation: 2h
 key_points: []
 tags:
 - nanopore
@@ -312,10 +312,6 @@ also possible with QUAST.
 > 1. {% tool [Quast](toolshed.g2.bx.psu.edu/repos/iuc/quast/quast/5.0.2+galaxy1) %} with the following parameters:
 >    - *"Use customized names for the input files?"*: `No, use dataset names`
 >        - {% icon param-file %} *"Contigs/scaffolds file"*: `consensus` (output of **Flye assembly** {% icon tool %})
->    - *"Type of assembly"*: `Genome`
->        - *"Use a reference genome?"*: `No`
->    - In *"Genes"*:
->        - *"Tool for gene prediction"*: `Don't predict genes`
 >
 > 2. View {% icon galaxy-eye %} the HTML report from QUAST
 >
@@ -411,7 +407,7 @@ from prokka as an information track.
 
 > ### {% icon hands_on %} Hands-on: Annotating the Genome
 >
-> 1. **Prokka** {% icon tool %} with the following parameters:
+> 1. {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Contigs to annotate"*: `consensus` (output of **Flye assembly** {% icon tool %})
 >    - *"Genus name (--genus)"*: `staphylococcus `
 >    - *"Species name (--species)"*: `aureus`
@@ -426,7 +422,7 @@ from prokka as an information track.
 >    This will select lines with a decimal value (###.##) followed by a tab character, the column separator in Galaxy. As a result, any lines without an identity value will be filtered out.
 >
 > 3. {% tool [Table to GFF3](toolshed.g2.bx.psu.edu/repos/iuc/tbl2gff3/tbl2gff3/1.2) %}
->    - {% icon param-file %} *"Table"*: the output of the **Select lines** {% icon tool %} step.
+>    - {% icon param-file %} *"Table"*: the output of the above **Select lines** {% icon tool %} step.
 >    - *"Record ID column or value"*: `8`
 >    - *"Feature start column or value"*: `9`
 >    - *"Feature end column or value"*: `10`
@@ -451,17 +447,15 @@ from prokka as an information track.
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `out_gff` (output of **Prokka** {% icon tool %})
 >                        - *"Index this track"*: `Yes`
+>                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
 >                        - *"Track Visibility"*: `On for new users`
 >        - {% icon param-repeat %} *"Insert Track Group"*
 >            - *"Track Category"*: `AMR`
 >            - In *"Annotation Track"*:
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
->                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: the output of the table to gff3 step
->                        - *"Index this track"*: `Yes`
+>                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Table to GFF3 on ...`, the output of the table to gff3 step
 >                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
->                        - In *"JBrowse Feature Score Scaling & Colouring Options [Advanced]"*
->                            - *"Color Score Algorithm"*: `Based on score`
 >                        - *"Track Visibility"*: `On for new users`
 >
 > 3. View the output of JBrowse
