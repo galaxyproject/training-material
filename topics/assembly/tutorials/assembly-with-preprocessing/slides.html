@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html>
+
+
+
+
+
+
+
+
+
+  <head>
+    <meta charset="utf-8">
+    <title>Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads</title>
+    
+        <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+    
+    <link rel="stylesheet" href="/training-material/assets/css/slides.css">
+    <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+    
+    
+    
+    
+    <meta name="description" content="DNA sequence data has become an indispensable tool for Mo..." />
+    <meta property="og:title" content="Galaxy Training: Unicycler assembly of SARS-CoV-2 genome with preprocessin..." />
+    <meta property="og:description" content="DNA sequence data has become an indispensable tool for Mo..." />
+    <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    <script type="application/ld+json">
+      
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Assembly",
+    "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+    "url": "https://training.galaxyproject.org//training-material/topics/assembly/"
+  },
+  "courseCode": "assembly / assembly-with-preprocessing / slides",
+  "learningResourceType": "slides",
+  "name": "Slides for 'Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/assembly/tutorials/assembly-with-preprocessing/slides.html",
+  "timeRequired": "PT4H",
+  "description": "The questions this  addresses are:\n - How can a genome of interest be assembled against a background of contaminating reads from other genomes?\n - How can sequencing data used to obtain an assembled genome?\n\n\\nThe objectives are:\n - Know basic characteristics of SARS-CoV-2\n - Understand Nanopore and Illumina technologies\n - Detect and remove human reads from SARS-CoV-2 sequencing reads\n - Know main _de novo_ genome assembly algorithms\n - Perform a hybrid _de novo_ genome assembly \n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/slides.html",
+      "name": "Quality Control",
+      "description": "Slides for 'Quality Control' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html",
+      "name": "Quality Control",
+      "description": "Hands-on for 'Quality Control' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Cristóbal Gallardo"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Assembly",
+      "description": "DNA sequence data has become an indispensable tool for Molecular Biology & Evolutionary Biology. Study in these fields now require a genome sequence to work from. We call this a 'Reference Sequence.' We need to build a reference for each species. We do this by Genome Assembly. De novo Genome Assembly is the process of reconstructing the original DNA sequence from the fragment reads alone.",
+      "url": "https://training.galaxyproject.org//training-material/topics/assembly/"
+    }
+  ]
+}
+    </script>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+name: inverse
+layout: true
+class: center, middle, inverse
+
+<div class="my-header"><span>
+<a href="/training-material/topics/assembly" title="Return to topic page" ><i class="fa fa-level-up" aria-hidden="true"></i></a>
+
+<a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/assembly/tutorials/assembly-with-preprocessing/slides.html"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+
+</span></div>
+
+<div class="my-footer"><span>
+
+<img src="/training-material/assets/images/GTN-60px.png" alt="Galaxy Training Network" style="height: 40px;"/>
+
+</span></div>
+
+---
+
+# Unicycler assembly of SARS-CoV-2 genome with preprocessing to remove human genome reads
+
+
+
+---
+
+## Requirements
+
+Before diving into this slide deck, we recommend you to have a look at:
+
+
+
+    
+        
+        
+            
+        
+- [Introduction to Galaxy Analyses](/training-material/topics/introduction)
+    
+
+    
+        
+        
+            
+        
+- [Sequence analysis](/training-material/topics/sequence-analysis)
+    - Quality Control: [<i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides](/training-material/topics/sequence-analysis/tutorials/quality-control/slides.html) - [<i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on](/training-material/topics/sequence-analysis/tutorials/quality-control/tutorial.html)
+    
+
+
+
+
+
+
+.footnote[Tip: press `P` to view the presenter notes]
+
+???
+Presenter notes contain extra information which might be useful if you
+intend to use these slides for teaching.
+
+Press `P` again to switch presenter notes off
+
+Press `C` to create a new window where the same presentation will be displayed.
+This window is linked to the main window. Changing slides on one will cause the
+slide to change on the other. Useful when presenting.
+
+---
+
+
+
+
+
+
+### &lt;i class=&quot;far fa-question-circle&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;question&lt;/span&gt; Questions
+
+
+- How can a genome of interest be assembled against a background of contaminating reads from other genomes?
+
+- How can sequencing data used to obtain an assembled genome?
+
+
+---
+
+
+
+### &lt;i class=&quot;fas fa-bullseye&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;objectives&lt;/span&gt; Objectives
+
+
+- Know basic characteristics of SARS-CoV-2
+
+- Understand Nanopore and Illumina technologies
+
+- Detect and remove human reads from SARS-CoV-2 sequencing reads
+
+- Know main _de novo_ genome assembly algorithms
+
+- Perform a hybrid _de novo_ genome assembly 
+
+
+---
+
+
+.enlarge120[
+
+# **SARS-CoV-2**
+
+]
+
+
+The severe acute respiratory syndrome coronavirus, known as SARS-CoV-2, is a betacoronavirus which belongs to the subfamily Coronavidinae, family Coronavidae.
+
+* Genome characteristics:
+
+  * Positive-sense single-stranded RNA (+ssRNA) virus of 30 kb.
+  * Encode 9860 aminoacids.
+  * Includes 14 functional ORFs.
+  * Codify 4 structural proteins and 23 non-structural proteins.
+
+---
+
+# **SARS-CoV-2 genome structure**
+
+![](../../images/SARS-CoV-2_Genome.png)
+
+- NSP1-NSP16 encode the replicase-transcriptase complex
+- It include four structural proteins: Spike (S), Envelope (E), Membrane (M) and Nucleocapsid (N).
+
+---
+
+# **SARS-CoV-2 structure**
+
+![](../../images/structure_SARS-CoV_2.jpg)
+
+---
+
+.enlarge200[
+
+# **Hybrid assembly**
+
+]
+
+.reduce70[
+Hybrid assembly consist in using a combination long and short reads to produce genome sequence.
+
+Long reads are used to resolve ambiguities that exist in genomes previously assembled using the short reads. In addition, low rate-error short reads are used to correct errors in that exist in the error-prone long reads.
+]
+
+![](../../images/hybrid_assembly.png)
+
+
+---
+
+.enlarge200[
+
+# **Data sources**
+
+]
+
+.pull-left[
+
+**Illumina reads**
+
+- Second generation sequencing
+- Short size: 200 bp
+- Low error rate (~1%)
+
+![](../../images/illumina_sequencing.jpg)
+
+]
+
+.pull-right[
+
+**Oxford Nanopore reads**
+
+- Third generation sequencing
+- Long size:  &gt;40,000 bp
+- High error rate (~10%)
+
+![](../../images/nanopore_sequencing.jpg)
+
+]
+
+
+---
+
+
+.enlarge120[
+
+# **Data sources: Illumina sequencing**
+
+]
+
+![](../../images/illumina_sequencing_cluster.png)
+
+
+---
+
+
+.enlarge200[
+
+# **Data sources: Nanopore sequencing**
+
+]
+
+![](../../images/nanopore_sequencing_process.png)
+
+---
+
+
+.enlarge200[
+
+# **Quality control**
+
+]
+
+Quality control, read trimming and filtering are essential preprocessing steps are essential steps required to garantee accurate results from RNA-seq datasets. Due to their very different nature, Illumina and Nanopore reads should be processed by using different tools.
+
+![](../../images/rna-seq_processing.png)
+
+.reduce70[
+
+
+]
+
+---
+
+
+
+.enlarge200[
+
+# **Subtraction of reads mapping to the human reference genome**
+
+]
+
+Since the SARS-CoV-2 samples were obtained from human tissues, it is necessary  to retain only those reads don't map to the human genome, i.e those of potential viral origin.
+
+
+---
+
+
+.enlarge200[
+
+# **Subtraction of reads mapping to the human reference genome**
+
+]
+
+.image-75[![](../../images/mapping_human_genome.png)]
+
+.reduce70[
+
+As with quality control, differential characteristics of Illumina and Nanopore reads require different tools for mapping the reads to the human genome:
+
+- __Bowtie2__:  It is optimized for the read lengths and error modes yielded by typical Illumina sequencers.
+
+- __Minimap2__: It is particularly efficient for mapping Nanopore long reads.
+
+]
+
+---
+
+
+.enlarge200[
+
+# **Genome assembly**
+
+]
+
+Now everything is ready to perform genome assembly!
+
+![](../../images/jigsaw_genome.jpg)
+
+Genome assembly is a complex computational process whose objetive is to reconstruct a genome from the reads obtained by sequencing technologies. 
+
+---
+
+
+
+.enlarge200[
+
+# **_De novo_ genome assembly**
+
+]
+
+
+_De novo_ assembly is a method for constructing genomes from a large number of  DNA fragments, with no a priori knowledge of the correct sequence or order of those fragments.
+
+Two common types of _de novo_ assemblers are greedy algorithm assemblers and graph method assemblers.
+
+
+---
+
+
+
+.enlarge200[
+
+# **_De novo_ genome assembly algorithms**
+
+]
+
+
+.pull-left[
+
+__Greedy algorithm assemblers__
+
+It finds overlaps between reads, then builds a consensus sequence from the aligned overlapping reads.
+
+
+&lt;/br&gt;
+.reduce70[
+
+- Relative efficiency
+- Do not work well for large read sets because only takes into account local information
+- Do not perform well with repeat regions
+
+]
+
+.image-75[![](../../images/greedy_algoritm.png)]
+
+]
+
+
+.pull-right[
+
+__Graph method assemblers__
+
+Basically it represent reads as a set of nodes, and overlaps between these reads as directed edges which connect these nodes to form a complete graph.
+
+
+.reduce70[
+
+- Computationally more expensive
+- Aim for global optima
+- Perform well on large read sets, specially when they contain repeat regions.
+]
+
+.image-75[![](../../images/graph_example.png)]
+
+]
+
+---
+
+
+
+.enlarge200[
+
+# **Graph methods assemblers: de Brujin graphs**
+]
+
+.reduce70[
+De Bruijn graphs is the graph model used by most genome assemblers.
+
+During the assembly process reads are broken into smaller fragments of a specified size, the k-mer, whichs are then used as nodes in the graph assembly. Nodes that overlap are then connect by an edge, which represent the reads. An ideal genome assembly corresponds to the path that travels to every node exactly once.
+
+]
+
+.image-75[![](../../images/olc_pic.png)]
+
+
+---
+
+.enlarge200[
+
+# **Graph methods assemblers: de Brujin graphs**
+
+]
+
+The [de Brujin graph assembly tutorial](https://training.galaxyproject.org/training-material/topics/assembly/tutorials/debruijn-graph-assembly/slides.html#1) provides a detailed explanation about this topic.
+
+
+
+---
+
+.enlarge200[
+
+# **Assembly genome with Unicycler**
+
+]
+
+.image-50[![](../../images/unicycler_logo.png)]
+
+Unicycler is an software tool designed specifically for hybrid assembly of small genomes.
+
+
+
+
+---
+
+.enlarge200[
+
+# **Assembly genome with Unicycler**
+
+]
+
+It employs a multi-step process that utilizes a set of software tools.
+
+![](../../images/unicycler_pipeline.png)
+
+
+
+
+
+---
+### &lt;i class=&quot;fas fa-key&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;&lt;span class=&quot;visually-hidden&quot;&gt;keypoints&lt;/span&gt; Key points
+
+
+- Certain types of NGS samples can be heavily contaminated with sequences from other genomes.
+
+- Reads from known/expected contaminating sources can be identified by mapping to the respective genomes.
+
+- The different characteristics of Illumina and Nanopore sequencing technologies require processing by different tools.
+
+- Hybrid genome assembly allows to obtain high quality genome sequences.
+
+
+
+
+
+
+
+---
+
+## Thank you!
+
+This material is the result of a collaborative work. Thanks to the [Galaxy Training Network](https://wiki.galaxyproject.org/Teach/GTN) and all the contributors!
+
+
+<div class="contributors-line">
+
+
+<a href="/training-material/hall-of-fame/gallardoalba/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/gallardoalba" alt="Cristóbal Gallardo">Cristóbal Gallardo</a>
+
+
+</div>
+
+
+
+<img src="/training-material/assets/images/GTN.png" alt="Galaxy Training Network" style="height: 100px;"/>
+
+
+This material is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+
+
+    </textarea>
+	<script src="/training-material/assets/js/remark-latest.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+      var slideshow = remark.create({navigation: {scroll: false,}});
+      var hljs = remark.highlighter.engine;
+      var snippets = document.querySelectorAll('code.remark-code');
+        [].forEach.call(snippets,function(snippet){
+          snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+        });
+      var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.parentElement;
+      }});
+    </script>
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('body').prepend("<div style='text-align: center'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+
+  </body>
+</html>
