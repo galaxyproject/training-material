@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Writing content in Markdown"
+title: "Creating content in Markdown"
 questions:
   - "How to write a tutorial with hands-on?"
   - "What are the different boxes?"
@@ -13,6 +13,7 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
+subtopic: writing
 contributors:
   - bebatut
   - bgruening
