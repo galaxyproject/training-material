@@ -284,7 +284,7 @@ Let us investigate the output log. This type of quality control is essential in 
 
 > ### {% icon hands_on %} Hands-on
 >
-> **MultiQC** {% icon tool %} with the following parameters:
+> **MultiQC** {% icon tool %} with the following parameters (please note that sometimes MultiQC doesn't appear from using the search box. You'll find it under FASTQ Quality Control or a similar category):
 >    - In *"Results"*:
 >      - In *"1:Results"*:
 >        - *"Which tool was used generate logs?"*: `STAR`
