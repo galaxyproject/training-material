@@ -111,7 +111,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
->    > singularity exec docker://hello-world /hello
+>    > singularity run docker://hello-world
 >    > ```
 >    {: .code-in}
 >
