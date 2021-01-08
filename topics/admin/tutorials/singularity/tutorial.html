@@ -1,0 +1,1180 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Use Singularity containers for running Galaxy jobs</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Use Singularity containers for running Galaxy jobs" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fsingularity%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fsingularity%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fsingularity%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fsingularity%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fsingularity%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fsingularity%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/singularity/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Use Singularity containers for running Galaxy jobs",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "courseCode": "admin / singularity / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Use Singularity containers for running Galaxy jobs' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/singularity/tutorial.html",
+  "timeRequired": "PT1H",
+  "description": "The objectives are:\n - Configure your Galaxy to use Singularity and BioContainers for running jobs\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/cvmfs/slides.html",
+      "name": "Reference Data with CVMFS",
+      "description": "Slides for 'Reference Data with CVMFS' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/cvmfs/tutorial.html",
+      "name": "Reference Data with CVMFS",
+      "description": "Hands-on for 'Reference Data with CVMFS' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Torfinn Nome"
+    },
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Torfinn Nome"
+    },
+    {
+      "@type": "Person",
+      "name": "Marius van den Beek"
+    },
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Use Singularity containers for running Galaxy jobs</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/torfinnnome/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/torfinnnome" alt="Torfinn Nome">Torfinn Nome</a>, <a href="/training-material/hall-of-fame/mvdbeek/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mvdbeek" alt="Marius van den Beek">Marius van den Beek</a>, <a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Configure your Galaxy to use Singularity and BioContainers for running jobs</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Reference Data with CVMFS:
+                            
+                                <a href="/training-material/topics/admin/tutorials/cvmfs/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/cvmfs/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 1 hour</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/admin/slides/introduction.html" title="Topic Overview slides">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 8, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="overview">Overview</h1>
+
+<p>In this tutorial you will learn how to configure <span class="notranslate">Galaxy</span> to run jobs using <a href="https://sylabs.io/singularity/">Singularity</a> containers provided by the <a href="https://biocontainers.pro/">BioContainers</a> community.</p>
+
+<h2 id="background">Background</h2>
+
+<blockquote class="quote">
+  <p>BioContainers is a community-driven project that provides the infrastructure and basic guidelines to create, manage and distribute bioinformatics packages (e.g conda) and containers (e.g docker, singularity). BioContainers is based on the popular frameworks Conda, Docker and Singularity.</p>
+
+  <p>– <a href="https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html">https://biocontainers-edu.readthedocs.io/en/latest/what_is_biocontainers.html</a></p>
+</blockquote>
+
+<p>Singularity is an alte<span class="notranslate">rna</span>tive to Docker that is much friendlier for HPCs</p>
+
+<blockquote class="quote">
+  <p>Singularity is a container platform. It allows you to create and run containers that package up pieces of software in a way that is portable and reproducible.</p>
+
+  <p>– <a href="https://sylabs.io/guides/3.7/user-guide/introduction.html">https://sylabs.io/guides/3.7/user-guide/introduction.html</a></p>
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#background" id="markdown-toc-background">Background</a></li>
+  <li><a href="#installing-singularity" id="markdown-toc-installing-singularity">Installing Singularity</a>    <ol>
+      <li><a href="#configure-galaxy-to-use-singularity" id="markdown-toc-configure-galaxy-to-use-singularity">Configure <span class="notranslate">Galaxy</span> to use Singularity</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="installing-singularity">Installing Singularity</h1>
+
+<p>First, we will install Singularity using Ansible. On most operating systems there is no package for singularity yet, so we must use a role which will compile it from source. If you’re on CentOS7/8, it is available through the EPEL repository.</p>
+
+<blockquote class="tip">
+  <h3 id="tip-centos7"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> CentOS7</h3>
+  <p>If you are using CentOS7, you can skip this hands-on section and instead install the <code class="language-plaintext highlighter-rouge">epel-release</code> and <code class="language-plaintext highlighter-rouge">singularity</code> system packages in your <code class="language-plaintext highlighter-rouge">pre_tasks</code>.</p>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-installing-singularity-with-ansible"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing Singularity with Ansible</h3>
+
+  <ol>
+    <li>
+      <p>In your working directory, add the Singularity role to your <code class="language-plaintext highlighter-rouge">requirements.yml</code> file:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">cyverse-ansible.singularity</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">ad4de5e4b0bb3f8a43de0f3565757aa156853485</span>
+<span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">gantsign.golang</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">2.6.3</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Install the requirements with <code class="language-plaintext highlighter-rouge">ansible-<span class="notranslate">galaxy</span></code>:</p>
+
+      <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">ansible-<span class="notranslate">galaxy</span> role install -p roles -r requirements.yml
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Specify which version of Singularity you want to install, in <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code>:</p>
+
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># Golang</span>
+<span class="na">golang_gopath</span><span class="pi">:</span> <span class="s1">'</span><span class="s">/opt/workspace-go'</span>
+<span class="c1"># Singularity target version</span>
+<span class="na">singularity_version</span><span class="pi">:</span> <span class="s2">"</span><span class="s">3.7.0"</span>
+<span class="na">singularity_go_path</span><span class="pi">:</span> <span class="s2">"</span><span class="s">"</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Add the new roles to your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> playbook, before the <span class="notranslate">Galaxy</span> server itself. We’ll do this bceause it’s a dependency of <span class="notranslate">Galaxy</span> to run, so it needs to be there before <span class="notranslate">Galaxy</span> starts.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -16,6 +16,8 @@</span>
+       become: true
+       become_user: postgres
+     - geerlingguy.pip
+<span class="gi">+    - gantsign.golang
++    - cyverse-ansible.singularity
+</span>     - <span class="notranslate">galaxy</span>project.<span class="notranslate">galaxy</span>
+     - role: uchida.miniconda
+       become: true
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Singularity should now be installed on your <span class="notranslate">Galaxy</span> server. You can test this by connecting
+to your server and run the following command:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>singularity exec docker://hello-world /hello
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>INFO:    Converting OCI blobs to SIF format
+INFO:    Starting build...
+Getting image source signatures
+Copying blob 0e03bdcc26d7 done
+Copying config b23a8f6569 done
+Writing manifest to image destination
+Storing signatures
+2021/01/08 11:25:12  info unpack layer: sha256:0e03bdcc26d7a9a57ef3b6f1bf1a210cff6239bff7c8cac72435984032851689
+INFO:    Creating SIF file...
+WARNING: passwd file doesn't exist in container, not updating
+WARNING: group file doesn't exist in container, not updating
+
+Hello from Docker!
+This message shows that your installation appears to be working correctly.
+...
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+</blockquote>
+
+<h2 id="configure-galaxy-to-use-singularity">Configure <span class="notranslate">Galaxy</span> to use Singularity</h2>
+
+<p>Now, we will configure <span class="notranslate">Galaxy</span> to run tools using Singularity containers, which will be automatically fetched from <a href="https://quay.io/organization/biocontainers">the BioContainers repository</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-configure-galaxy-to-use-singularity"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Configure <span class="notranslate">Galaxy</span> to use Singularity</h3>
+
+  <ol>
+    <li>
+      <p>Edit the <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> file and add a <code class="language-plaintext highlighter-rouge">dependency_resolvers_config_file</code> entry and a corresponding <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>_config_files</code> entry:</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -28,6 +28,7 @@</span> miniconda_manage_dependencies: false
+
+ <span class="notranslate">galaxy</span>_config:
+   <span class="notranslate">galaxy</span>:
+<span class="gi">+    dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
+</span>     brand: "🧬🔬🚀"
+     admin_users: admin@example.org
+     database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
+<span class="p">@@ -65,6 +66,11 @@</span> <span class="notranslate">galaxy</span>_config_templates:
+   - src: templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+     dest: "{{ <span class="notranslate">galaxy</span>_config.<span class="notranslate">galaxy</span>.job_config_file }}"
+
++<span class="notranslate">galaxy</span>_config_files:
+<span class="gi">+- src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
++  dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
+</span></code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create the <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config</code> directory if it doesn’t exist:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mkdir -p files/<span class="notranslate">galaxy</span>/config
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>Create the new file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml</code>. This will not enable any dependency resolvers like the legacy <span class="notranslate">toolshed</span> packages or <span class="notranslate">Galaxy</span> packages, and instead everything will be resolved through Singularity.</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency_resolvers&gt;</span>
+<span class="nt">&lt;/dependency_resolvers&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Now, we want to make <span class="notranslate">Galaxy</span> run jobs using Singularity. Modify the file <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code>, by adding the <code class="language-plaintext highlighter-rouge">singularity_enabled</code> parameter:</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="p">@@ -3,7 +3,9 @@</span>
+     &lt;/plugins&gt;
+     &lt;destinations&gt;
+<span class="gd">-        &lt;destination id="local_destination" runner="local_plugin"/&gt;
+</span><span class="gi">+        &lt;destination id="local_destination" runner="local_plugin"&gt;
++            &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
++            &lt;!-- Ensuring a consistent collation environment is good for reproducibility. --&gt;
++            &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
++            &lt;!-- The cache directory holds the docker containers that get converted. --&gt;
++            &lt;env id="SINGULARITY_CACHEDIR"&gt;/tmp/singularity&lt;/env&gt;
++            &lt;!-- Singularity uses a temporary directory to build the squashfs filesystem. --&gt;
++            &lt;env id="SINGULARITY_TMPDIR"&gt;/tmp&lt;/env&gt;
++        &lt;/destination&gt;
+</span>     &lt;/destinations&gt;
+     &lt;tools&gt;
+     &lt;/tools&gt;
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Re-run the playbook</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>In your <span class="notranslate">Galaxy</span> admin interface, install the minimap2 tool.</p>
+
+      <ul>
+        <li>Login to <span class="notranslate">Galaxy</span> as the admin user</li>
+        <li>Click the “admin” menu at the top</li>
+        <li>Under “Tool Management” on the left select “Install and Uninstall”</li>
+        <li>search for <code class="language-plaintext highlighter-rouge">minimap2</code> and install the latest version with the Target Section “<span class="notranslate">Mapping</span>”</li>
+      </ul>
+
+      <p><img src="../../images/install-minimap2.png" alt="Screenshot of the install interface, minimap2 is entered in the search box and the latest revision shows it is currently cloning" /></p>
+    </li>
+    <li>
+      <p>Upload the following fasta file</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt;testing
+GATTACAGATHISISJUSTATESTGATTACA
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p><strong>Map with minimap2</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters</p>
+      <ul>
+        <li><em>“Will you select a reference genome from your history or use a built-in index”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in genome index</code></li>
+        <li><em>“Use the following dataset as the reference sequence”</em>: The fasta file you uploaded</li>
+        <li><em>“Single or Paired-end <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">Single</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select fastq dataset”</em>: The fasta file you uploaded</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p>Your job should be executed using Singularity with a BioContainer! You can watch the logs of <span class="notranslate">Galaxy</span> to see this happening.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jou<span class="notranslate">rna</span>lctl -f
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out code-max-300">
+        <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>uwsgi[1190010]: <span class="notranslate">galaxy</span>.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
+uwsgi[1190010]: <span class="notranslate">galaxy</span>.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/<span class="notranslate">galaxy</span>/jobs/000/23/tool_script.sh] for tool command [minimap2 --version &gt; /srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs/COMMAND_VERSION 2&gt;&amp;1; ln -f -s '/data/000/dataset_22.dat' reference.fa &amp;&amp; minimap2           -t ${<span class="notranslate">GALAXY</span>_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${<span class="notranslate">GALAXY</span>_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' &gt; '/data/000/dataset_23.dat']
+uwsgi[1190010]: <span class="notranslate">galaxy</span>.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
+uwsgi[1190010]: if [ -d _working ]; then
+uwsgi[1190010]:     rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
+uwsgi[1190010]: else
+uwsgi[1190010]:     cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
+uwsgi[1190010]: fi
+uwsgi[1190010]: cd working; SINGULARITYENV_<span class="notranslate">GALAXY</span>_SLOTS=$<span class="notranslate">GALAXY</span>_SLOTS SINGULARITYENV_HOME=$HOME SINGULARITYENV__<span class="notranslate">GALAXY</span>_JOB_HOME_DIR=$_<span class="notranslate">GALAXY</span>_JOB_HOME_DIR SINGULARITYENV__<span class="notranslate">GALAXY</span>_JOB_TMP_DIR=$_<span class="notranslate">GALAXY</span>_JOB_TMP_DIR SINGULARITYENV_TMPDIR=$TMPDIR SINGULARITYENV_TMP=$TMP SINGULARITYENV_TEMP=$TEMP singularity -s exec -B /srv/<span class="notranslate">galaxy</span>/server:/srv/<span class="notranslate">galaxy</span>/server:ro -B /srv/<span class="notranslate">galaxy</span>/var/shed_tools/<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:/srv/<span class="notranslate">galaxy</span>/var/shed_tools/<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:ro -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23:/srv/<span class="notranslate">galaxy</span>/jobs/000/23 -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/outputs -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/configs:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/configs -B /srv/<span class="notranslate">galaxy</span>/jobs/000/23/working:/srv/<span class="notranslate">galaxy</span>/jobs/000/23/working -B /data:/data -B /srv/<span class="notranslate">galaxy</span>/var/tool-data:/srv/<span class="notranslate">galaxy</span>/var/tool-data:ro -B /srv/<span class="notranslate">galaxy</span>/var/tool-data:/srv/<span class="notranslate">galaxy</span>/var/tool-data:ro --home $HOME:$HOME docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0 /bin/bash /srv/<span class="notranslate">galaxy</span>/jobs/000/23/tool_script.sh &gt; ../outputs/tool_stdout 2&gt; ../outputs/tool_stderr; return_code=$?; cd '/srv/<span class="notranslate">galaxy</span>/jobs/000/23';
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<!--
+## Use Singularity containers from CVMFS
+
+Galaxy can be configured to use pre-made Singularity containers available from /cvmfs/singularity.galaxyproject.org/.
+In order to do so, you will first need to set up CVMFS by doing the [CVMFS](/training-material/topics/admin/tutorials/cvmfs/tutorial.html) tutorial.
+After finishing the CVMFS tutorial, come back, and do this hands-on.
+
+> ### <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Optional: Hands-on: Configure Galaxy to use Singularity containers from CVMFS
+>
+> 1. Edit the `group_vars/galaxyservers.yml` file and add `containers_resolvers_config_file` and `galaxy_singularity_images_cvmfs_path`:
+>
+>    ```yaml
+>    galaxy_singularity_images_cvmfs_path: "/cvmfs/singularity.galaxyproject.org/all/"
+>    galaxy_config:
+>      galaxy:
+>        ...
+>        containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    ```
+>
+>
+> 2. Also in `group_vars/galaxyservers.yml`, add a `galaxy_config_templates` entry:
+>
+>    ```yaml
+>    galaxy_config_templates:
+>      - src: templates/galaxy/config/container_resolvers_conf.xml.j2
+>        dest: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    ```
+>
+>
+> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`:
+>
+>    ```xml
+>    <containers_resolvers>
+>        <explicit_singularity />
+>        <cached_mulled_singularity cache_directory="{{ galaxy_singularity_images_cvmfs_path }}"/>
+>    </containers_resolvers>
+>    ```
+>
+>
+> 4. Re-run the playbook (`ansible-playbook galaxy.yml`)
+>
+> 5. Rerun your minimap2 job from the previous section. This time it should use a container served by CVMFS.
+>
+{: .hands_on}
+
+-->
+
+
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Use Singularity containers for running Galaxy jobs (Galaxy Server administration)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Torfinn Nome, Marius van den Beek, Helena Rasche, 2021 <b>Use Singularity containers for running Galaxy jobs (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/singularity/tutorial.html">/training-material/topics/admin/tutorials/singularity/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-singularity,
+    author = "Torfinn Nome and Marius van den Beek and Helena Rasche",
+    title = "Use Singularity containers for running Galaxy jobs (Galaxy Training Materials)",
+    year = "2021",
+    month = "01",
+    day = "08"
+    url = "\url{/training-material/topics/admin/tutorials/singularity/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Torfinn Nome, Marius van den Beek, Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/singularity/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
