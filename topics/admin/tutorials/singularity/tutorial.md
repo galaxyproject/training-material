@@ -145,7 +145,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `dependency_resolvers_config_file` entry and a corresponding `galaxy_config_files` entry:
 >
 >    {% raw %}
->    ```yaml
+>    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -28,6 +28,7 @@ miniconda_manage_dependencies: false
@@ -174,13 +174,10 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    > ```
 >    {: .code-in}
 >
-> 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`:
+> 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
 >
 >    ```xml
 >    <dependency_resolvers>
->       <tool_shed_packages />
->       <galaxy_packages />
->       <galaxy_packages versionless="true" />
 >    </dependency_resolvers>
 >    ```
 >
@@ -207,21 +204,61 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         </tools>
 >    ```
 >
-> 4. Re-run the playbook (`ansible-playbook galaxy.yml`)
+> 4. Re-run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
 >
 > 5. In your Galaxy admin interface, install the minimap2 tool.
 >
-> 6. Upload a fasta file, and run the minimap2 tool using this fasta file as both reference and target file:
+>    - Login to Galaxy as the admin user
+>    - Click the "admin" menu at the top
+>    - Under "Tool Management" on the left select "Install and Uninstall"
+>    - search for `minimap2` and install the latest version with the Target Section "Mapping"
+>
+>    ![Screenshot of the install interface, minimap2 is entered in the search box and the latest revision shows it is currently cloning](../../images/install-minimap2.png)
+>
+> 6. Upload the following fasta file
 >
 >    ```
 >    >testing
 >    GATTACAGATHISISJUSTATESTGATTACA
 >    ```
 >
-> Your job should be executed using Singularity with a BioContainer!
+> 2. **Map with minimap2** {% icon tool %} with the following parameters
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a built-in genome index`
+>    - *"Use the following dataset as the reference sequence"*: The fasta file you uploaded
+>    - *"Single or Paired-end reads"*: `Single`
+>        - {% icon param-file %} *"Select fastq dataset"*: The fasta file you uploaded
+>
+>    Your job should be executed using Singularity with a BioContainer! You can watch the logs of Galaxy to see this happening.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > journalctl -f
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output
+>    > ```
+>    > uwsgi[1190010]: galaxy.tool_util.deps.containers INFO 2021-01-08 13:37:30,342 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Checking with container resolver [MulledSingularityContainerResolver[namespace=biocontainers]] found description [ContainerDescription[identifier=docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0,type=singularity]]
+>    > uwsgi[1190010]: galaxy.jobs.command_factory INFO 2021-01-08 13:37:30,418 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] Built script [/srv/galaxy/jobs/000/23/tool_script.sh] for tool command [minimap2 --version > /srv/galaxy/jobs/000/23/outputs/COMMAND_VERSION 2>&1; ln -f -s '/data/000/dataset_22.dat' reference.fa && minimap2           -t ${GALAXY_SLOTS:-4} reference.fa '/data/000/dataset_22.dat' -a | samtools sort -@${GALAXY_SLOTS:-2} -T "${TMPDIR:-.}" -O BAM -o '/data/000/dataset_23.dat' > '/data/000/dataset_23.dat']
+>    > uwsgi[1190010]: galaxy.jobs.runners DEBUG 2021-01-08 13:37:30,441 [p:1190010,w:0,m:2] [LocalRunner.work_thread-1] (23) command is: mkdir -p working outputs configs
+>    > uwsgi[1190010]: if [ -d _working ]; then
+>    > uwsgi[1190010]:     rm -rf working/ outputs/ configs/; cp -R _working working; cp -R _outputs outputs; cp -R _configs configs
+>    > uwsgi[1190010]: else
+>    > uwsgi[1190010]:     cp -R working _working; cp -R outputs _outputs; cp -R configs _configs
+>    > uwsgi[1190010]: fi
+>    > uwsgi[1190010]: cd working; SINGULARITYENV_GALAXY_SLOTS=$GALAXY_SLOTS SINGULARITYENV_HOME=$HOME SINGULARITYENV__GALAXY_JOB_HOME_DIR=$_GALAXY_JOB_HOME_DIR SINGULARITYENV__GALAXY_JOB_TMP_DIR=$_GALAXY_JOB_TMP_DIR SINGULARITYENV_TMPDIR=$TMPDIR SINGULARITYENV_TMP=$TMP SINGULARITYENV_TEMP=$TEMP singularity -s exec -B /srv/galaxy/server:/srv/galaxy/server:ro -B /srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:/srv/galaxy/var/shed_tools/toolshed.g2.bx.psu.edu/repos/iuc/minimap2/8c6cd2650d1f/minimap2:ro -B /srv/galaxy/jobs/000/23:/srv/galaxy/jobs/000/23 -B /srv/galaxy/jobs/000/23/outputs:/srv/galaxy/jobs/000/23/outputs -B /srv/galaxy/jobs/000/23/configs:/srv/galaxy/jobs/000/23/configs -B /srv/galaxy/jobs/000/23/working:/srv/galaxy/jobs/000/23/working -B /data:/data -B /srv/galaxy/var/tool-data:/srv/galaxy/var/tool-data:ro -B /srv/galaxy/var/tool-data:/srv/galaxy/var/tool-data:ro --home $HOME:$HOME docker://quay.io/biocontainers/mulled-v2-66534bcbb7031a148b13e2ad42583020b9cd25c4:e1ea28074233d7265a5dc2111d6e55130dff5653-0 /bin/bash /srv/galaxy/jobs/000/23/tool_script.sh > ../outputs/tool_stdout 2> ../outputs/tool_stderr; return_code=$?; cd '/srv/galaxy/jobs/000/23';
+>    > ```
+>    {: .code-out.code-max-300}
 >
 {: .hands_on}
 
+<!--
 ## Use Singularity containers from CVMFS
 
 Galaxy can be configured to use pre-made Singularity containers available from /cvmfs/singularity.galaxyproject.org/.
@@ -266,5 +303,4 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
 >
 {: .hands_on}
 
-
-
+-->
