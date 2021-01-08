@@ -454,6 +454,12 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 > ### {% icon hands_on %} Hands-on: Uploading sequences and annotations
 > Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.
 >
+> 1. {% tool [Upload](upload1) %} the *E. coli* C genome if you have not done so already:
+>   - Click **Paste/Fetch data** button (Bottom of the interface box)
+>   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
+>   - *"Type"*: `fasta`
+>   - Click **Start**
+>
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >   - *"Select lines from"*: the `genomes.tsv` you uploaded earlier
 >   - *"the pattern"*: `LT906474|CP024090|CP020543`
