@@ -487,7 +487,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       > This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:
 >       >
 >       > ```json
->       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":0,"expression":".*\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
+>       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":1,"expression":".*\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
 >       > ```
 >       >
 >       > You can click the {% icon tool %} next to the header **Rules** {% icon tool %}, and paste the contents there, before clicking **Apply**, checking "Add nametag for name" and then **Upload**.
@@ -530,7 +530,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       - *"Value"*: `DNA`
 >       - Click `Apply`
 >    3. From **Column**, select `Using a Regular Expression`
->       - *"From Column"*: `A`
+>       - *"From Column"*: `B`
 >       - Select `Create columns matching expression groups`
 >       - *"Regular Expression"*: `.*\/(.*)`
 >       - *"Number of Groups"*: `1`
