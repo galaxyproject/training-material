@@ -63,7 +63,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >        master: true
 >        virtualenv: {{ galaxy_venv_dir }}
 >        pythonpath: {{ galaxy_server_dir }}/lib
->        mount: /reports=galaxy.webapps.reports.buildapp:uwsgi_app()
+>        module: galaxy.webapps.reports.buildapp:uwsgi_app()
 >        manage-script-name: true
 >        thunder-lock: false
 >        die-on-term: true
