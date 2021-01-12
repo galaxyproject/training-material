@@ -272,7 +272,8 @@
       "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
       "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
     }
-  ]
+  ],
+  "skillLevel": "Advanced"
 }
     </script>
 
@@ -338,6 +339,14 @@
             
 
             
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Advanced 
+<span class="level advanced" title="Advanced Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
 
             
             
@@ -354,7 +363,7 @@
 
                 
                     <li class="btn btn-default supporting_material">
-<a class="topic-icon" href="https://doi.org/10.5281/zenodo.1488687">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4406623">
     <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
 </a>
 
@@ -546,7 +555,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 12, 2019 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 31, 2020 </p>
         </blockquote>
 
         <div class="container">
@@ -556,11 +565,12 @@
                     <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
                 </div>
                 <div class="col-sm-10">
-                    <h1 class="no_toc" id="introduction">Introduction</h1>
+                    
+<h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>Genome annotation of eukaryotes is a little more complicated than for prokaryotes: eukaryotic genomes are usually larger than prokaryotes, with more genes. The sequences determining the beginning and the end of a gene are generally less conserved than the prokaryotic ones. Many genes also contain introns, and the limits of these introns (acceptor and donor sites) are not highly conserved.</p>
 
-<p>In this tutorial we will use a software tool called Maker <a class="citation" href="#Campbell2014">Campbell <i>et al.</i> 2014</a> to annotate the genome sequence of a small eukaryote: Schizosaccharomyces pombe (a yeast).</p>
+<p>In this tutorial we will use a software tool called Maker <a class="citation" href="#Campbell2014">Campbell <i>et al.</i> 2014</a> to annotate the genome sequence of a small eukaryote: <em>Schizosaccharomyces pombe</em> (a yeast).</p>
 
 <p>Maker is able to annotate both prokaryotes and eukaryotes. It works by aligning as many evidences as possible along the genome sequence, and then reconciliating all these signals to determine probable gene structures.</p>
 
@@ -573,6 +583,17 @@
 <p>More information about Maker can be found <a href="http://www.yandell-lab.org/software/maker.html">here</a>.</p>
 
 <p>This tutorial was inspired by the MAKER Tutorial for <a href="http://weatherby.genetics.utah.edu/MAKER/wiki/index.php/MAKER_Tutorial_for_WGS_Assembly_and_Annotation_Winter_School_2018">WGS Assembly and Annotation Winter School 2018</a>, don’t hesitate to consult it for more information on Maker, and on how to run it with command line.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-note-two-versions-of-this-tutorial"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note: Two versions of this tutorial</h3>
+
+  <p>Because this tutorial consists of many steps, we have made two versions of it, one long and one short.</p>
+
+  <p>This is the <strong>extended version</strong>. We will perform the complete training of ab-initio predictors and discuss the results in detail.
+If you would like to run through the tutorial a bit quicker and focus on the main
+analysis steps, please see the <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker-short/tutorial.html">shorter version of this tutorial</a></p>
+
+</blockquote>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -645,14 +666,14 @@
       </blockquote>
     </li>
     <li>
-      <p>Import the following files from <a href="https://doi.org/10.5281/zenodo.1488687">Zenodo</a> or from the shared data library</p>
+      <p>Import the following files from <a href="https://doi.org/10.5281/zenodo.4406623">Zenodo</a> or from the shared data library</p>
 
-      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_1.tar.gz
-https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/augustus_training_2.tar.gz
-https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_chrIII.fasta
-https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_genome.fasta
-https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/S_pombe_trinity_assembly.fasta
-https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S_pombe.fasta
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_chrIII.fasta
+https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_genome.fasta
+https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/S_pombe_trinity_assembly.fasta
+https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/Swissprot_no_S_pombe.fasta
+https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/augustus_training_1.tar.gz
+https://zenodo.org/api/files/647ad552-19a8-46d9-aad8-f81f56860582/augustus_training_2.tar.gz
 </code></pre></div>      </div>
 
       <blockquote class="tip">
@@ -700,7 +721,7 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
     </li>
     <li>Rename the datasets</li>
     <li>
-      <p>Check that the datatype for <code class="language-plaintext highlighter-rouge">augustus_training_1.tar.gz</code> an <code class="language-plaintext highlighter-rouge">augustus_training_2.tar.gz</code> are set to <code class="language-plaintext highlighter-rouge">augustus</code></p>
+      <p>Check that the datatype for <code class="language-plaintext highlighter-rouge">augustus_training_1.tar.gz</code> and <code class="language-plaintext highlighter-rouge">augustus_training_2.tar.gz</code> is set to <code class="language-plaintext highlighter-rouge">augustus</code></p>
 
       <blockquote class="tip">
 
@@ -717,13 +738,13 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
 
 </blockquote>
 
-<p>You have four main datasets:</p>
+<p>You have the following main datasets:</p>
 
 <ul>
-  <li><code class="language-plaintext highlighter-rouge">S_pombe_trinity_assembly.fasta</code> contains the EST sequences</li>
-  <li><code class="language-plaintext highlighter-rouge">Swissprot_no_S_pombe.fasta</code> contanis the protein sequences from SwissProt</li>
-  <li><code class="language-plaintext highlighter-rouge">S_pombe_genome.fasta</code> contains the full genome sequence</li>
-  <li><code class="language-plaintext highlighter-rouge">S_pombe_chrIII.fasta</code> contains only the third chromosome from the full genome</li>
+  <li><code class="language-plaintext highlighter-rouge">S_pombe_trinity_assembly.fasta</code> contains EST sequences from <em>S. pombe</em>, assembled from <span class="notranslate">RNA</span>Seq data with Trinity</li>
+  <li><code class="language-plaintext highlighter-rouge">Swissprot_no_S_pombe.fasta</code> contains a subset of the SwissProt protein sequence database (public sequences from <em>S. pombe</em> were removed to stay as close as possible to real-life analysis)</li>
+  <li><code class="language-plaintext highlighter-rouge">S_pombe_chrIII.fasta</code> contains only the third chromosome from the full genome of <em>S. pombe</em></li>
+  <li><code class="language-plaintext highlighter-rouge">S_pombe_genome.fasta</code> contains the full genome sequence of <em>S. pombe</em></li>
 </ul>
 
 <blockquote class="notranslate hands_on">
@@ -755,7 +776,7 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
 
 </blockquote>
 
-<p>The two other datasets (<code class="language-plaintext highlighter-rouge">augustus_training_1.tar.gz</code> an <code class="language-plaintext highlighter-rouge">augustus_training_2.tar.gz</code>) will be used later in the tutorial.</p>
+<p>The other datasets will be used later in the tutorial.</p>
 
 <h1 id="genome-quality-evaluation">Genome quality evaluation</h1>
 
@@ -767,9 +788,9 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-get-genome-sequence-statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get genome sequence statistics</h3>
 
   <ol>
-    <li><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> sequence from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
       </ul>
     </li>
   </ol>
@@ -786,6 +807,13 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
 
 <p>These statistics are useful to detect obvious problems in the genome assembly, but it gives no information about the quality of the sequence content. We want to evaluate if the genome sequence contains all the genes we expect to find in the considered species, and if their sequence are correct.</p>
 
+<blockquote class="comment">
+  <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+
+  <p>If you chose to use only the chromosome III sequence (<code class="language-plaintext highlighter-rouge">S_pombe_chrIII.fasta</code>), the statistics will be different. You will only see 1 contig.</p>
+
+</blockquote>
+
 <p><a href="http://busco.ezlab.org/">BUSCO</a> (Benchmarking Universal Single-Copy Orthologs) is a tool allowing to answer this question: by comparing genomes from various more or less related species, the authors determined sets of ortholog genes that are present in single copy in (almost) all the species of a clade (Bacteria, Fungi, Plants, Insects, Mammalians, …). Most of these genes are essential for the organism to live, and are expected to be found in any newly sequenced genome from the corresponding clade. Using this data, BUSCO is able to evaluate the proportion of these essential genes (also named BUSCOs) found in a genome sequence or a set of (predicted) transcript or protein sequences. This is a good evaluation of the “completeness” of the genome or annotation.</p>
 
 <p>We will first run this tool on the genome sequence to evaluate its quality.</p>
@@ -794,17 +822,17 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-run-busco-on-the-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run Busco on the genome</h3>
 
   <ol>
-    <li><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: select the genome sequence from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Genome</code></li>
-        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">fungi_odb9</code></li>
+        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Fungi</code></li>
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>We select fungi_odb9 as the genome we will annotate is a fungi. It is usually better to select the most specific lineage for the species you study. Large lineages (like Metazoa) will consist of fewer genes, but with a strong support. More specific lineages (like Hymenoptera) will have more genes, but with a weaker support (has they are found in fewer genomes).</p>
+        <p>We select <code class="language-plaintext highlighter-rouge">Fungi</code> as we will annotate the genome of <em>Schizosaccharomyces pombe</em> which belongs to the Fungi kingdom. It is usually better to select the most specific lineage for the species you study. Large lineages (like Metazoa) will consist of fewer genes, but with a strong support. More specific lineages (like Hymenoptera) will have more genes, but with a weaker support (has they are found in fewer genomes).</p>
       </blockquote>
     </li>
   </ol>
@@ -819,7 +847,7 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <li>A table of missing BUSCOs: this is the list of all genes that were not found in the genome</li>
 </ul>
 
-<figure id="figure-1"><img src="../../images/busco_genome_summary.png" alt="BUSCO genome summary" /><figcaption><span class="figcaption-prefix">Figure 1:</span> BUSCO short summary. Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all.</figcaption></figure>
+<p><img src="../../images/busco_genome_summary.png" alt="BUSCO genome summary" title="Example of BUSCO short summary (not from this tutorial). Here BUSCO searched for 290 genes in a genome, and found 282 of them complete (269 in single-copy, and 13 duplicated). 5 where found but are fragmented, and 3 were not found at all." /></p>
 
 <blockquote class="question">
   <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -829,16 +857,19 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <blockquote class="solution">
     <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>The genome consists of the expected 4 chromosomes sequences, with very few N, which is the ideal case. Most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That’s a very good material to perform an annotation.</p>
+    <p>The genome consists of the expected number of chromosome sequences (4, or 1 if you chose to annotate chromosome III only), with very few N, which is the ideal case.</p>
+
+    <p>If you used the full genome, most of the BUSCO genes are found as complete single copy, and very few are fragmented, which means that our genome have a good quality as it contains most of the expected content. That’s a very good material to perform an annotation. If you only analysed chromosome III, many BUSCO genes are missing, but still ~100 are found as complete single copy, and very few are found fragmented, which means that our genome have a good quality, at least on this single chromosome.</p>
 
   </blockquote>
 
 </blockquote>
 
 <blockquote class="comment">
-  <h3 id="comment-comment-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+  <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
   <p>If you chose to use only the chromosome III sequence (<code class="language-plaintext highlighter-rouge">S_pombe_chrIII.fasta</code>), the statistics will be different. The genome size will be lower, with only 1 chromosome. The BUSCO result will also show a lot of missing genes: it is expected as all the BUSCO genes that are not on the chromosome III cannot be found by the tool. Keep it in mind when comparing these results with the other BUSCO results later.</p>
+
 </blockquote>
 
 <h1 id="first-maker-annotation-round">First Maker annotation round</h1>
@@ -851,9 +882,9 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-first-draft-annotation-with-maker"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: First draft annotation with Maker</h3>
 
   <ol>
-    <li><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
         <li><em>“Re-annotate using an existing Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><em>“Organism type”</em>: <code class="language-plaintext highlighter-rouge">Eukaryotic</code></li>
         <li>In <em>“EST evidences (for best results provide at least one of these)”</em>:
@@ -881,9 +912,9 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-        <p>For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either provide your own repeats library, or use <a href="https://www.girinst.org/repbase/">RepBase</a>. As RepBase is not free to use, you will need to download manually the RepBaseRepeatMaskerEdition file and upload the enclosed EMBL format file (<code class="language-plaintext highlighter-rouge">RMRBSeqs.embl</code>) to use with Maker.</p>
+        <p>For this tutorial repeat masking is disabled, which is not the recommended setting. When doing a real-life annotation, you should either use <a href="https://www.dfam.org">Dfam</a> or provide your own repeats library.</p>
       </blockquote>
     </li>
   </ol>
@@ -908,12 +939,12 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-get-annotation-statistics"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get annotation statistics</h3>
 
   <ol>
-    <li><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4"><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> )</li>
         <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select the genome sequence from your history</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
           </ul>
         </li>
       </ul>
@@ -922,20 +953,40 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
 
 </blockquote>
 
+<blockquote class="question">
+  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>How many genes where predicted by Maker?</li>
+    <li>What is the mean gene locus size of these genes?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+    <ol>
+      <li>712 genes (503 for the chromosome III only)</li>
+      <li>1570 bp (1688bp for the chromosome III only)</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
 <h2 id="busco">Busco</h2>
 
-<p>Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will inspect the transcript sequences of the genes predicted by Maker.</p>
+<p>Just as we did for the genome at the beginning, we can use BUSCO to check the quality of this first Maker annotation. Instead of looking for known genes in the genome sequence, BUSCO will inspect the transcript sequences of the genes predicted by Maker. This will allow us to see if Maker was able to properly identify the set of genes that Busco found in the genome sequence at the beginning of this tutorial.</p>
 
-<p>First we need to compute all the transcript sequences from the Maker annotation.</p>
+<p>First we need to compute all the transcript sequences from the Maker annotation, using <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span> . This tool will compute the sequence of each transcript that was predicted by <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  and write them all in a FASTA file.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-transcript-sequences"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract transcript sequences</h3>
 
   <ol>
-    <li><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
-        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">select the genome sequence from your history</code>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> )</li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">select </code>genome.fasta<code class="language-plaintext highlighter-rouge"> from your history</code>
           <ul>
             <li><em>“Select fasta outputs”</em>:
               <ul>
@@ -959,11 +1010,11 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-run-busco"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run BUSCO</h3>
 
   <ol>
-    <li><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">exons</code> (output of <strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">exons</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span> )</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Transcriptome</code></li>
-        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">fungi_odb9</code></li>
+        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Fungi</code></li>
       </ul>
     </li>
   </ol>
@@ -971,23 +1022,14 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <ol>
-    <li>How many genes and transcripts where predicted by Maker?</li>
-    <li>What is the medium length of these genes?</li>
-    <li>How do the BUSCO statistics compare to the ones at the genome level?</li>
-  </ol>
+  <p>How do the BUSCO statistics compare to the ones at the genome level?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <p>These numbers are for the full genome only (not the chromosome III).</p>
-    <ol>
-      <li>713 genes, 752 transcripts</li>
-      <li>993 bp</li>
-      <li>40 complete single-copy, 6 duplicated, 9 fragmented, 235 missing. This is far from what BUSCO found in the genome sequence, which means the quality of this first draft is not very good.</li>
-    </ol>
+    <p>Around 100 complete single-copy, and 650 missing. As the quality of this first draft is yey not very good, you should see better results after next rounds of Maker.</p>
 
   </blockquote>
 
@@ -1007,10 +1049,10 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-train-snap"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train SNAP</h3>
 
   <ol>
-    <li><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1"><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> )</li>
       </ul>
     </li>
   </ol>
@@ -1023,10 +1065,10 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
   <h3 id="hands_on-hands-on-train-augustus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train Augustus</h3>
 
   <ol>
-    <li><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3"><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> )</li>
       </ul>
     </li>
   </ol>
@@ -1042,20 +1084,20 @@ https://zenodo.org/api/files/4385871d-9632-4fae-9aaf-f8ed692163d1/Swissprot_no_S
 <h2 id="maker-1">Maker</h2>
 
 <p>We need now to run a new round of Maker. As the evidences were already aligned on the genome on the first run, we can reuse these alignments as is.
-But this time, enable ab-initio gene prediction, and input the output of <strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and <strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> tools.
+But this time, enable ab-initio gene prediction, and input the output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1"><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+<span class="notranslate">galaxy</span>1</span></span>  and <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3"><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3</span></span>  tools.
 We also disable inferring gene predictions directly from all ESTs and proteins: now we want Maker to infer gene predictions by reconciliating evidence alignments <em>and</em> ab-initio gene predictions.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-second-draft-annotation-with-maker"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Second draft annotation with Maker</h3>
 
   <ol>
-    <li><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
         <li><em>“Organism type”</em>: <code class="language-plaintext highlighter-rouge">Eukaryotic</code></li>
         <li><em>“Re-annotate using an existing Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Previous Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">evidences</code> (output of the previous <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Previous Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">evidences</code> (output of the previous <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  run)</li>
             <li><em>“Re-use ESTs”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Re-use alte<span class="notranslate">rna</span>te organism ESTs”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Re-use protein alignments”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1074,10 +1116,10 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
         </li>
         <li>In <em>“Ab-initio gene prediction”</em>:
           <ul>
-            <li><em>“SNAP model”</em>: <code class="language-plaintext highlighter-rouge">snap model</code> (output of <strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“SNAP model”</em>: <code class="language-plaintext highlighter-rouge">snap model</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1"><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+<span class="notranslate">galaxy</span>1</span></span> )</li>
             <li><em>“Prediction with Augustus”</em>: <code class="language-plaintext highlighter-rouge">Run Augustus with a custom prediction model</code>
               <ul>
-                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Augustus model”</em>: <code class="language-plaintext highlighter-rouge">augustus model</code> (output of <strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Augustus model”</em>: <code class="language-plaintext highlighter-rouge">augustus model</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3"><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3</span></span> )</li>
               </ul>
             </li>
           </ul>
@@ -1101,12 +1143,12 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-get-annotation-statistics-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get annotation statistics</h3>
 
   <ol>
-    <li><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4"><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> second run)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  second run)</li>
         <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select the genome sequence from your history</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
           </ul>
         </li>
       </ul>
@@ -1121,10 +1163,10 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-extract-transcript-sequences-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract transcript sequences</h3>
 
   <ol>
-    <li><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> second run)</li>
-        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">select the genome sequence from your history</code>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  second run)</li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">select </code>genome.fasta<code class="language-plaintext highlighter-rouge"> from your history</code>
           <ul>
             <li><em>“Select fasta outputs”</em>:
               <ul>
@@ -1148,11 +1190,11 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-run-busco-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run BUSCO</h3>
 
   <ol>
-    <li><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">exons</code> (output of <strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">exons</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span> )</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Transcriptome</code></li>
-        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">fungi_odb9</code></li>
+        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Fungi</code></li>
       </ul>
     </li>
   </ol>
@@ -1160,7 +1202,7 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
   <ol>
     <li>How does the second annotation compare to the previous one? Did the ab-initio predictors training improve the results?</li>
@@ -1168,10 +1210,10 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>The annotation looks much better: 253 complete single-copy instead of 40, 5,036 genes instead of 713.</li>
+      <li>The annotation looks much better: more BUSCO complete single-copy, and more genes</li>
       <li>Using ab-initio predictors allowed to find much more genes in regions where EST or protein alignments were not sufficient to predict genes.</li>
     </ol>
 
@@ -1187,17 +1229,17 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-train-snap-and-augustus"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Train SNAP and Augustus</h3>
 
   <ol>
-    <li><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1"><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+<span class="notranslate">galaxy</span>1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, second run)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> , second run)</li>
         <li><em>“Number of gene model to use for training”</em>: <code class="language-plaintext highlighter-rouge">"1000"</code></li>
       </ul>
     </li>
-    <li><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3"><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>, second run)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to use for training”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> , second run)</li>
       </ul>
     </li>
   </ol>
@@ -1216,13 +1258,13 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-final-annotation-with-maker"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Final annotation with Maker</h3>
 
   <ol>
-    <li><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select the genome sequence from your history</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Genome to annotate”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
         <li><em>“Organism type”</em>: <code class="language-plaintext highlighter-rouge">Eukaryotic</code></li>
         <li><em>“Re-annotate using an existing Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Previous Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">evidences</code> (output of the previous second <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Previous Maker annotation”</em>: <code class="language-plaintext highlighter-rouge">evidences</code> (output of the previous second <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  run)</li>
             <li><em>“Re-use ESTs”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Re-use alte<span class="notranslate">rna</span>te organism ESTs”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
             <li><em>“Re-use protein alignments”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
@@ -1241,9 +1283,9 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
         </li>
         <li>In <em>“Ab-initio gene prediction”</em>:
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SNAP model”</em>: <code class="language-plaintext highlighter-rouge">snap model</code> (output of <strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“SNAP model”</em>: <code class="language-plaintext highlighter-rouge">snap model</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+galaxy1"><strong>Train SNAP</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snap_training/snap_training/2013_11_29+<span class="notranslate">galaxy</span>1</span></span> )</li>
             <li><em>“Prediction with Augustus”</em>: <code class="language-plaintext highlighter-rouge">Run Augustus with a custom prediction model</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Augustus model”</em>: <code class="language-plaintext highlighter-rouge">augustus model</code> (output of <strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Augustus model”</em>: <code class="language-plaintext highlighter-rouge">augustus model</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3"><strong>Train Augustus</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/augustus_training/augustus_training/3.3.3</span></span> )</li>
           </ul>
         </li>
         <li>In <em>“Repeat masking”</em>:
@@ -1265,12 +1307,12 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-get-annotation-statistics-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get annotation statistics</h3>
 
   <ol>
-    <li><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4"><strong>Genome annotation statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jcvi_gff_stats/jcvi_gff_stats/0.8.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> third run)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Annotation to analyse”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  third run)</li>
         <li><em>“Reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select the genome sequence from your history</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Corresponding genome sequence”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
           </ul>
         </li>
       </ul>
@@ -1285,10 +1327,10 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-extract-transcript-sequences-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract transcript sequences</h3>
 
   <ol>
-    <li><strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> third run)</li>
-        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">select the genome sequence from your history</code>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input GFF3 or GTF feature file”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  third run)</li>
+        <li><em>“Reference Genome”</em>: <code class="language-plaintext highlighter-rouge">select </code>genome.fasta<code class="language-plaintext highlighter-rouge"> from your history</code>
           <ul>
             <li><em>“Select fasta outputs”</em>:
               <ul>
@@ -1314,11 +1356,11 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-run-busco-2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run BUSCO</h3>
 
   <ol>
-    <li><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4"><strong>Busco</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/busco/busco/4.1.4</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">exons</code> (output of <strong>gffread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Sequences to analyse”</em>: <code class="language-plaintext highlighter-rouge">exons</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1"><strong>GFFread</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/gffread/gffread/2.2.1.1</span></span> )</li>
         <li><em>“Mode”</em>: <code class="language-plaintext highlighter-rouge">Transcriptome</code></li>
-        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">fungi_odb9</code></li>
+        <li><em>“Lineage”</em>: <code class="language-plaintext highlighter-rouge">Fungi</code></li>
       </ul>
     </li>
   </ol>
@@ -1326,20 +1368,14 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
 </blockquote>
 
 <blockquote class="question">
-  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <ol>
-    <li>How do you explain the evolution of the gene number?</li>
-    <li>How do the third annotation compare to the previous ones? Did the second ab-initio predictors training improve the results?</li>
-  </ol>
+  <p>How do the third annotation compare to the previous ones? Did the second ab-initio predictors training improve the results?</p>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
-    <ol>
-      <li>We now get 4,767 genes instead of 5,036 after the second round. But you’ll notice that the average gene length have increased from 1,562 to 1,658. It means that in this third round, Maker was able to merge some genes that were considered separate beforehand.</li>
-      <li>The annotation looks better: BUSCO found 256 complete single-copy instead of 253, and genes are longer, and have more exons. It means Maker was able to predict genes with more complex structure.</li>
-    </ol>
+    <p>Depending on wether you annotated the full genome or only chromosome III, you should see nearly the same, or even less genes than in the previous Maker round. But you’ll notice that the number of multi-exon genes have increased. It means that in this third round, Maker was able to predict more complex genes, for example merging some genes that were considered separate beforehand.</p>
 
   </blockquote>
 
@@ -1355,15 +1391,15 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-change-gene-names"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Change gene names</h3>
 
   <ol>
-    <li><strong>Map annotation ids</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11"><strong>Map annotation ids</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation where to change ids”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Maker annotation where to change ids”</em>: <code class="language-plaintext highlighter-rouge">final annotation</code> (output of <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span> )</li>
         <li><em>“Prefix for ids”</em>: <code class="language-plaintext highlighter-rouge">"TEST_"</code></li>
         <li><em>“Justify numeric ids to this length”</em>: <code class="language-plaintext highlighter-rouge">"6"</code></li>
       </ul>
 
       <blockquote class="comment">
-        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+        <h3 id="comment-comment-4"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
         <p>Genes will be renamed to look like: <code class="language-plaintext highlighter-rouge">TEST_001234</code>. You can replace <code class="language-plaintext highlighter-rouge">TEST_</code> by anything you like, usually an uppercase short prefix.</p>
       </blockquote>
@@ -1382,11 +1418,11 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
   <h3 id="hands_on-hands-on-visualize-annotations-in-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize annotations in JBrowse</h3>
 
   <ol>
-    <li><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: select the genome sequence from your history</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
           </ul>
         </li>
         <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse Instance</code></li>
@@ -1401,9 +1437,15 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
                     <li>Click on <em>“Insert Annotation Track”</em>:</li>
                     <li>In <em>“1: Annotation Track”</em>:
                       <ul>
-                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span>/GBK Features</code></li>
-                        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: select the final annotation of each <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-                        <li><em>“This is match/match_part data”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                        <li>
+                          <p><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span>/GBK Features</code></p>
+                        </li>
+                        <li>
+                          <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: select the final annotation of each <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  run</p>
+                        </li>
+                        <li>
+                          <p><em>“This is match/match_part data”</em>: <code class="language-plaintext highlighter-rouge">No</code></p>
+                        </li>
                       </ul>
                     </li>
                   </ul>
@@ -1421,21 +1463,21 @@ We also disable inferring gene predictions directly from all ESTs and proteins: 
 <p>Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.</p>
 
 <blockquote class="question">
-  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
 
-  <p>Navigate to the sequence named <code class="language-plaintext highlighter-rouge">NC_003421.2</code> (NCBI identifier for Chromosome III), between positions <code class="language-plaintext highlighter-rouge">41800</code> and <code class="language-plaintext highlighter-rouge">45200</code> (or between <code class="language-plaintext highlighter-rouge">143850</code> and <code class="language-plaintext highlighter-rouge">148763</code> if you used the full genome sequence sequence).</p>
-  <figure id="figure-2"><img src="../../images/jbrowse_navigate.png" alt="JBrowse navigation" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Navigating to the given sequence and positions.</figcaption></figure>
+  <p>Navigate to the position <code class="language-plaintext highlighter-rouge">NC_003421.2:143850..148763</code> (meaning: on the sequence named <code class="language-plaintext highlighter-rouge">NC_003421.2</code> (NCBI identifier for Chromosome III), between positions <code class="language-plaintext highlighter-rouge">143850</code> and <code class="language-plaintext highlighter-rouge">148763</code>).
+<img src="../../images/jbrowse_navigate.png" alt="JBrowse navigation" title="Navigating to the given sequence and positions." /></p>
   <ol>
     <li>How did the annotation improved in this region after each Maker round?</li>
   </ol>
 
   <blockquote class="solution">
-    <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <h3 id="solution-solution-5"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
 
     <ol>
-      <li>At the end of the first round, no gene model was predicted by Maker in this region, because not enough EST or protein could be aligned there.
-After the second round, Maker was able to predict a first gene model with no intron. Notice the name of the model beginning with <code class="language-plaintext highlighter-rouge">snap_masked</code>: it means that Maker used mainly a gene prediction from SNAP to construct this gene model.
-After the third round, there are two gene models, more complex as they contain introns. Training Augustus and SNAP allowed to refine the gene structures and to detect a new gene.</li>
+      <li>At the end of the first round, a first short gene model was predicted by Maker in this region.
+After the second round, Maker was able to predict a second gene model in this region. Notice the name of the model beginning with <code class="language-plaintext highlighter-rouge">snap_masked</code>: it means that Maker used mainly a gene prediction from SNAP to construct this gene model.
+After the third round, the two genes were merged into a single one. Training Augustus and SNAP allowed to refine the gene structures and to refine the gene structures found in this region.</li>
     </ol>
 
   </blockquote>
@@ -1450,15 +1492,15 @@ After the third round, there are two gene models, more complex as they contain i
   <h3 id="hands_on-hands-on-visualize-evidences-in-jbrowse"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Visualize evidences in JBrowse</h3>
 
   <ol>
-    <li><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters:
       <ul>
         <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: select the genome sequence from your history</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select the reference genome”</em>: select <code class="language-plaintext highlighter-rouge">genome.fasta</code> from your history</li>
           </ul>
         </li>
         <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">Update existing JBrowse Instance</code></li>
-        <li><em>“Previous JBrowse Instance”</em>: select the result from the previous <strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
+        <li><em>“Previous JBrowse Instance”</em>: select the result from the previous <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+galaxy0"><strong>JBrowse</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.10+<span class="notranslate">galaxy</span>0</span></span>  run</li>
         <li>In <em>“Track Group”</em>:
           <ul>
             <li>Click on <em>“Insert Track Group”</em>:</li>
@@ -1470,9 +1512,14 @@ After the third round, there are two gene models, more complex as they contain i
                     <li>Click on <em>“Insert Annotation Track”</em>:</li>
                     <li>In <em>“1: Annotation Track”</em>:
                       <ul>
-                        <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span>/GBK Features</code></li>
-                        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: select the “evidences” output of each <strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> run</li>
-                        <li><em>“This is match/match_part data”</em>: <code class="language-plaintext highlighter-rouge">Yes</code>
+                        <li>
+                          <p><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span>/GBK Features</code></p>
+                        </li>
+                        <li>
+                          <p><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: select the “evidences” output of each <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11"><strong>Maker</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11</span></span>  run</p>
+                        </li>
+                        <li>
+                          <p><em>“This is match/match_part data”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></p>
                           <ul>
                             <li><em>“Match Part Feature Type”</em>: Leave empty</li>
                           </ul>
@@ -1491,7 +1538,7 @@ After the third round, there are two gene models, more complex as they contain i
 
 </blockquote>
 
-<p>You will now see three new tracks displaying all the evidences used by Maker to generate consensus gene models.</p>
+<p>You will now see new tracks displaying all the evidences used by Maker to generate consensus gene models.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
@@ -1502,6 +1549,7 @@ After the third round, there are two gene models, more complex as they contain i
 <p>After generating your annotation, you will probably want to automatically assign functional annotation to each predicted gene model. You can do it by using Blast, InterProScan, or Blast2GO for example.</p>
 
 <p>An automatic annotation of an eukaryotic genome is rarely perfect. If you inspect some predicted genes, you will probably find some mistakes made by Maker, e.g. wrong exon/intron limits, splitted genes, or merged genes. Setting up a manual curation project using <a href="http://genomearchitect.org/">Apollo</a> helps a lot to manually fix these errors.</p>
+
 
 
                     
@@ -1572,7 +1620,7 @@ After the third round, there are two gene models, more complex as they contain i
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Anthony Bretaudeau, 2019 <b>Genome annotation with Maker (Galaxy Training Materials)</b>. <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Anthony Bretaudeau, 2020 <b>Genome annotation with Maker (Galaxy Training Materials)</b>. <a href="/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html">/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1589,9 +1637,9 @@ After the third round, there are two gene models, more complex as they contain i
 <code id="citation-code">@misc{genome-annotation-annotation-with-maker,
     author = "Anthony Bretaudeau",
     title = "Genome annotation with Maker (Galaxy Training Materials)",
-    year = "2019",
-    month = "11",
-    day = "12"
+    year = "2020",
+    month = "12",
+    day = "31"
     url = "\url{/training-material/topics/genome-annotation/tutorials/annotation-with-maker/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
