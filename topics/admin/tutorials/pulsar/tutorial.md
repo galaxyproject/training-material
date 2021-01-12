@@ -344,8 +344,26 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
 >    > Interface: 0.0.0.0, port: 5671, protocol: amqp/ssl, purpose: AMQP 0-9-1 and AMQP 1.0 over TLS
 >    > ```
+>    {: .code-out.code-max-300}
+>
+>    But wait! There are more ways it can go wrong. To be extra sure, run a quick `curl` command.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > curl http://localhost:5672
+>    > curl -k https://localhost:5671
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output: Bash
 >    >
->    > If you dont see the ssl port you can try the following:
+>    > These should *both* report the same response:
+>    >
+>    > ```console
+>    > curl: (1) Received HTTP/0.9 when not allowed
+>    > ```
+>    >
+>    > if they don't, consider the following debugging steps:
 >    >
 >    > 1. Restarting RabbiMQ
 >    > 2. Check that the configuration looks correct (ssl private key path looks valid)
