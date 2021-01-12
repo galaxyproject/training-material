@@ -13,6 +13,8 @@ contributors:
   - mvdbeek
   - hexylena
 subtopic: features
+tags:
+  - jobs
 requirements:
   - type: "internal"
     topic_name: admin
