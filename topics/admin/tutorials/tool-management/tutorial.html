@@ -347,7 +347,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jul 24, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 12, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -447,7 +447,7 @@ pip install ephemeris
 
         <blockquote class="solution">
           <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"><span class="notranslate">workflow</span>-to-tools -w <span class="notranslate">mapping</span>.ga -o workflow_tools.yml -l "<span class="notranslate">mapping</span> tools"
+          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go"><span class="notranslate">workflow</span>-to-tools -w <span class="notranslate">mapping</span>.ga -o workflow_tools.yml -l <span class="notranslate">Mapping</span>
 </span></code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -486,7 +486,7 @@ pip install ephemeris
 
   <ol>
     <li>
-      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to install the tool <code class="language-plaintext highlighter-rouge">bwa</code>, owned by user <code class="language-plaintext highlighter-rouge">devteam</code> into a section named <code class="language-plaintext highlighter-rouge"><span class="notranslate">Mapping</span></code></p>
+      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to install the tool <code class="language-plaintext highlighter-rouge">pilon</code>, owned by <code class="language-plaintext highlighter-rouge">iuc</code> into a section named <code class="language-plaintext highlighter-rouge">Assembly</code></p>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -496,7 +496,7 @@ pip install ephemeris
           <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Use your <span class="notranslate">Galaxy</span> URL and API key in the example command below:</p>
 
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools install -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> bwa <span class="nt">--owner</span> devteam <span class="nt">--section_label</span> <span class="notranslate">Mapping</span>
+          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools install -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> pilon <span class="nt">--owner</span> iuc <span class="nt">--section_label</span> Assembly
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -559,6 +559,17 @@ For that, you can install from a YAML file:</p>
 <p>Occasionally the tool installation may fail due to network issues; if it does, just re-run the <code class="language-plaintext highlighter-rouge">shed-tools</code> installation process until it succeeds. This is a known issue the developers are working on.</p>
 
 <blockquote class="tip">
+  <h3 id="tip-tip-opening-a-split-screen-in-byobu"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Opening a split screen in byobu</h3>
+  <p><code class="language-plaintext highlighter-rouge">Shift-F2</code>: Create a horizontal split</p>
+
+  <p><code class="language-plaintext highlighter-rouge">Shift-Left/Right/Up/Down</code>: Move focus among splits</p>
+
+  <p><code class="language-plaintext highlighter-rouge">Ctrl-F6</code>:  Close split in focus</p>
+
+  <p>There are more byobu commands described in this <a href="https://gist.github.com/devhero/7b9a7281db0ac4ba683f">gist</a></p>
+</blockquote>
+
+<blockquote class="tip">
   <h3 id="tip-can-i-install-tools-without-restarting"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Can I install tools without restarting?</h3>
   <p>Yes. The default tool config (<code class="language-plaintext highlighter-rouge">config/tool_conf.xml.sample</code>, copy to <code class="language-plaintext highlighter-rouge">config/tool_conf.xml</code> to modify) has an option, <code class="language-plaintext highlighter-rouge">monitor="true"</code> set in the root <code class="language-plaintext highlighter-rouge">&lt;toolbox&gt;</code> tag. This instructs <span class="notranslate">Galaxy</span> to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.</p>
 </blockquote>
@@ -577,7 +588,7 @@ For that, you can install from a YAML file:</p>
 
   <ol>
     <li>
-      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">bamtools_filter</code> tool on your <span class="notranslate">Galaxy</span>.</p>
+      <p>Use the Ephemeris <a href="https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html"><code class="language-plaintext highlighter-rouge">shed-tools</code></a> command to test the <code class="language-plaintext highlighter-rouge">pilon</code> tool on your <span class="notranslate">Galaxy</span>.</p>
 
       <blockquote class="question">
         <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -587,7 +598,7 @@ For that, you can install from a YAML file:</p>
           <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <p>Use your <span class="notranslate">Galaxy</span> URL and API key in the example command below:</p>
 
-          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools test -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> bamtools_filter <span class="nt">--owner</span> devteam
+          <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gp">shed-tools test -g https://your-<span class="notranslate">galaxy</span> -a &lt;api-key&gt;</span><span class="w"> </span><span class="nt">--name</span> pilon <span class="nt">--owner</span> iuc
 </code></pre></div>          </div>
         </blockquote>
       </blockquote>
@@ -724,7 +735,7 @@ We cannot (and would not recommend) setting that certificate on your local machi
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Martin Čech, Helena Rasche, Nicola Soranzo, 2020 <b>Galaxy Tool Management with Ephemeris (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">/training-material/topics/admin/tutorials/tool-management/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Martin Čech, Helena Rasche, Nicola Soranzo, 2021 <b>Galaxy Tool Management with Ephemeris (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">/training-material/topics/admin/tutorials/tool-management/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -741,9 +752,9 @@ We cannot (and would not recommend) setting that certificate on your local machi
 <code id="citation-code">@misc{admin-tool-management,
     author = "Martin Čech and Helena Rasche and Nicola Soranzo",
     title = "Galaxy Tool Management with Ephemeris (Galaxy Training Materials)",
-    year = "2020",
-    month = "07",
-    day = "24"
+    year = "2021",
+    month = "01",
+    day = "12"
     url = "\url{/training-material/topics/admin/tutorials/tool-management/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
