@@ -588,16 +588,30 @@ There are three things we need to do here:
 >
 >    Add the following to the end of the `job_conf.xml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
 >
->    ```xml
->    <tools>
->        <tool id="bwa" destination="pulsar"/>
->        <tool id="bwa_mem" destination="pulsar"/>
->    </tools>
+>    ```diff
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
+>    @@ -35,6 +35,7 @@
+>
+>         </destinations>
+>         <tools>
+>    +        <tool id="bwa" destination="pulsar"/>
+>    +        <tool id="bwa_mem" destination="pulsar"/>
+>         </tools>
+>     </job_conf>
 >    ```
 >
 >    You can use the full tool ID here (toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.
 >
-> 3. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
+> 3. Install `bwa` from the admin installation interface if it is missing.
+>
+>    1. Access the admin menu from the top bar (only available if logged in with the admin_user email)
+>    2. Click "Install and Uninstall", which can be found on the left, under "Tool Management"
+>    3. Enter `bwa` in the search interface
+>    4. Click on the first hit, from `devteam`
+>    5. Click the "Install" button for the latest version and enter "Mapping" for the target section.
+>
+> 4. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
 {: .hands_on}
 
