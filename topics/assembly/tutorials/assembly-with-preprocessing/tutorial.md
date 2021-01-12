@@ -90,7 +90,7 @@ tutorial offers two ways to access the sequenced reads input data:
 
 1. Direct download from the NCBI SRA based on accession numbers and using the
    dedicated **Faster Download** tool
-   
+
    Use this method if it works and is fast enough for you, and if you are
    interested in learning to obtain short-reads data directly from NCBI, in
    general.
@@ -101,7 +101,7 @@ tutorial offers two ways to access the sequenced reads input data:
    It also showcases **rule-based** uploads and demonstrates how they can be
    used to download several datasets and to arrange them into easy to handle
    data structures at the same time.
-   
+
    > ### {% icon details %} Rule-based uploads
    > In this tutorial you will only use the features of Galaxy's rule-based
    > uploader that are required to get the input data ready for our analysis,
@@ -115,7 +115,7 @@ tutorial offers two ways to access the sequenced reads input data:
    Use this method if the direct download from the NCBI SRA does not work, or
    is too slow for your time frame, or if you are interested in advanced use
    of Galaxy's data import functionality.
-   
+
 The corresponding two step-by-step instructions below have been crafted to
 produce identically arranged data structures in your history so all subsequent
 steps are independent of the data source you choose.
@@ -591,7 +591,7 @@ potential viral origin.
 >    {% include snippets/change_dbkey.md dbkey="unspecified (?)" %}
 >
 {: .hands_on}
-   
+
 
 # Format conversion of remaining reads
 
