@@ -280,6 +280,7 @@ Tool configs: Consume `\${GALAXY_SLOTS:-4}`
 
 - For multiprocessing to be available both the tool and the Galaxy tool wrapper need to support it.
 - You need to understand what tools are being run and set destinations for them with the appropriate specification.
+- You'll need to check for presence of GALAXY_SLOTS in the tool wrappers and tool macros to see if the tool supports multiple threads.
 
 ---
 
@@ -301,6 +302,7 @@ For Java tools, be sure to set `-Xmx`, e.g.:
 
 - Memory requirements can be set as well.
 - For some tools, you'll need to additionally provide environment variables to specify memory limits.
+- This is different per DRM.
 
 ---
 
