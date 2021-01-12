@@ -555,7 +555,7 @@ There are three things we need to do here:
 >    {% raw %}
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
+>        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param>
 >        <param id="amqp_ack_republish_time">1200</param>
 >        <param id="amqp_acknowledge">True</param>
 >        <param id="amqp_consumer_timeout">2.0</param>
