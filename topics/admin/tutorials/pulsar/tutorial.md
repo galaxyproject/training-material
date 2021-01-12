@@ -204,8 +204,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >       - nginx
 >    +  - rabbitmq
 >     certbot_post_renewal: |
->    -    systemctl restart nginx || true
->    +    systemctl restart nginx rabbitmq-server || true
+>         systemctl restart nginx || true
+>    +    systemctl restart rabbitmq-server || true
 >     certbot_domains:
 >    @@ -100,3 +101,29 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
@@ -238,7 +238,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    vhost: /
 >    +  - user: galaxy_au
 >    +    password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->    +    vhosts: /pulsar/galaxy_au
+>    +    vhost: /pulsar/galaxy_au
 >    ```
 >    {% endraw %}
 >
@@ -249,8 +249,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +++ b/galaxy.yml
 >    @@ -25,4 +26,3 @@
 >         - usegalaxy_eu.galaxy_systemd
->         - galaxyproject.nginx
 >    +    - usegalaxy_eu.rabbitmq
+>         - galaxyproject.nginx
 >    ```
 >
 >    > ### {% icon tip %} Why is this at the end?
