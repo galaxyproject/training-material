@@ -247,7 +247,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    - src: usegalaxy_eu.galaxy_systemd
 >      version: 0.1.4
 >    - src: usegalaxy_eu.certbot
->      version: 0.1.3
+>      version: 0.1.5
 >    ```
 >
 >    > ### {% icon details %} What do each of these roles do?
