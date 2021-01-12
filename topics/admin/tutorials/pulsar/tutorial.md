@@ -204,7 +204,8 @@ More information about the rabbitmq ansible role can be found [in the repository
 >       - nginx
 >    +  - rabbitmq
 >     certbot_post_renewal: |
->         systemctl restart nginx || true
+>    -    systemctl restart nginx || true
+>    +    systemctl restart nginx rabbitmq-server || true
 >     certbot_domains:
 >    @@ -100,3 +101,29 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
@@ -246,13 +247,31 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -15,3 +15,4 @@
->         - role: uchida.miniconda
->           become: true
->           become_user: galaxy
->         - galaxyproject.cvmfs
+>    @@ -25,4 +26,3 @@
+>         - usegalaxy_eu.galaxy_systemd
+>         - galaxyproject.nginx
 >    +    - usegalaxy_eu.rabbitmq
 >    ```
+>
+>    > ### {% icon tip %} Why is this at the end?
+>    > This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.
+>    >
+>    > Here are the dependencies between the roles:
+>    >
+>    > From             | To               | Purpose
+>    > ---------------- | --               | -------
+>    > nginx            | galaxy           | The nginx templates depend on variables only available after the Galaxy role is run
+>    > SSL certificates | nginx            | A running nginx is required
+>    > RabbitMQ         | SSL certificates | RabbitMQ will silently start with incorrect configuration if SSL certificates are not present at boot time.
+>    > Galaxy           | RabbitMQ         | Galaxy needs the RabbitMQ available to submit jobs.
+>    >
+>    > And as you can see there is a circular dependency. Galaxy requires RabbitMQ, but RabbitMQ depends on a long chain of things that depends finally on Galaxy.
+>    >
+>    > There are some mitigating factors, some software will start with incomplete configuration. We can rely on Galaxy retrying access to RabbitMQ if it isn't already present. Additionally on first run, Galaxy is restarted by a handler which runs at the end. (Except that the nginx role triggers all pending handlers as part of the SSL certificate deployment.)
+>    >
+>    > We try to present the optimal version here but due to these interdependencies and Ansible specifics, sometimes it is not possible to determine a good ordering of roles, and multiple runs might be required.
+>    >
+>    {: .tip}
 >
 > 4. Run the playbook.
 >
@@ -325,6 +344,12 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > Interface: [::], port: 5672, protocol: amqp, purpose: AMQP 0-9-1 and AMQP 1.0
 >    > Interface: 0.0.0.0, port: 5671, protocol: amqp/ssl, purpose: AMQP 0-9-1 and AMQP 1.0 over TLS
 >    > ```
+>    >
+>    > If you dont see the ssl port you can try the following:
+>    >
+>    > 1. Restarting RabbiMQ
+>    > 2. Check that the configuration looks correct (ssl private key path looks valid)
+>    > 3. Check that the private key is shared correctly with the rabbitmq user
 >    {: .code-out.code-max-300}
 >
 {: .hands_on}
@@ -367,7 +392,8 @@ Some of the other options we will be using are:
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_server_url: #please put the your Galaxy server's fqdn or ip address here (or the fqdn or ip address of the RabbitMQ server).
+>    galaxy_server_url: # Important!!!
+>    # Put the your Galaxy server's FQDN (or the FQDN of the RabbitMQ server).
 >
 >    pulsar_root: /mnt/pulsar
 >
@@ -426,7 +452,7 @@ Some of the other options we will be using are:
 >
 >    ```ini
 >    [pulsarservers]
->    <ip_address of your pulsar server>
+>    <ip_address or fqdn of your pulsar server> ansible_user=<username to login with>
 >    ```
 >
 {: .hands_on}
@@ -470,13 +496,19 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 > ### {% icon hands_on %} Hands-on: Run the Playbook
 >
-> 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
+> 1. Run the playbook.
 >
->    ```bash
->    ansible-playbook pulsar.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook pulsar.yml
+>    > ```
+>    {: .code-in}
 >
 >    After the script has run, pulsar will be installed on the remote machines!
+>
+>    > ### {% icon tip %} Connection issues?
+>    > If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
+>    {: .tip}
 >
 > 2. Log in to the machines and have a look in the `/mnt/pulsar` directory. You will see the venv and config directories. All the config files created by Ansible can be perused.
 >
