@@ -91,7 +91,7 @@ If you were successful, both sequences should now be available as `.fasta` datas
 
 > ### {% icon question %} Questions
 >
-> 1. What do you think about the size of the sequences in regards to the difficulty of comparing them?
+> 1. What do you think about the size of the sequences in regards to the difficulty of comparing them? (You can check the size of the files by clicking on the information icon)
 >
 > > ### {% icon solution %} Solution
 > > 1. It always depends on the focus of our study. For instance, if we were looking for optimal alignments, two 1 MB sequences are indeed large enough to make most approaches either fail or take a decent amount of time and resources. On the other hand, if we were looking for seed-based local alignments (e.g. `GECKO` ({% cite GECKO %}) or `BLAST` ({% cite BLAST %}) ), the comparison would require merely seconds (check the slides for more information).
@@ -107,7 +107,7 @@ As we discussed in the previous section, running optimal aligning tools on such 
 We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycoplasma hyopneumoniae 7422` in Galaxy using `GECKO`.
 
 > ### {% icon hands_on %} Hands-on: Comparing two mycoplasmas with GECKO
-> 1. {% tool [GECKO](toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.1) %} with the following parameters
+> 1. {% tool [GECKO](toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2) %} with the following parameters
 >    - {% icon param-file %} *"Query sequence"*: `232.fasta`
 >    - {% icon param-file %} *"Reference sequence"*: `7422.fasta`
 >    - *"K-mer seed size"*: `16`
@@ -149,12 +149,12 @@ For our current experiment, we will be looking for the following set of repeats:
 
 ![Mycoplasma hyopneumoniae comparison example](../../images/hpc-for-lsgc/GeckoMGV01.PNG "(Left) Sequence comparison between Mycoplasma hyopneumoniae 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.")
 
-Let's extract the repeats highlighted in red (Figure 2, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. *Mycoplasma hyopneumoniae 7422*) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 2 we are selecting the ones stacked vertically).
+Let's extract the repeats highlighted in red (Figure 1, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. *Mycoplasma hyopneumoniae 7422*) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 1 we are selecting the ones stacked vertically).
 
 ### Extracting repeat alignments and running Multiple Sequence Alignment
 
 > ### {% icon hands_on %} Hands-on: Multiple Sequence Alignment of a set of repeats
-> 1. {% tool [Text reformatting with AWK](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} with the following parameters
+> 1. Search for the tool {% tool [Text reformatting with AWK](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2) %} and run it with the following parameters
 >    - {% icon param-file %} *"File to process"*: `Gecko on data 2 and 1: Alignments` (Note: if you have run the previous experiment with different parameters, make sure to select here the alignments file corresponding to the first experiment, and make sure you ran it with the same parameters!)
 >    - *"AWK Program"*: `BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf(">sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != ">"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } ` (Paste this code into the text box)
 >    
@@ -184,6 +184,7 @@ Let's extract the repeats highlighted in red (Figure 2, right) which are aligned
 >    - Each block contains the next 50 contiguos nucleotides of each alignment in one line per sequence.
 >    - Gaps are included.
 >    - The asterisk symbol `*` indicates that there is consensus across all sequences in the current position.
+> 5. Another file `ClustalW on data ... dnd` is also generated which can be used to view the output alignment as a tree.
 >
 {: .hands_on}
 
@@ -301,7 +302,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >    - *"K-mer seed size"*: `32`
 >    - *"Diffuse value"*: `4`
 >    - *"Add grid to plot for multi-fasta data sets"*: `No`
->    - *"Generate image of detected events"*: `Generate events plot`
+>    - *"Generate image of detected events"*: `Yes`
 > 2. Run the job and wait for the results. It should take around ~3 minutes.
 > 3. Let's inspect the output files:
 >    - *"Comparison matrix"*: This file is the "core" of the comparison. It contains the heuristically matched seeds sampled per section of the chromosomes. This file is used for custom post-processing.
@@ -340,7 +341,7 @@ Figure 3 shows the comparison plot for the plant chromosomes. Notice that the or
 Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if `CHROMEISTER` was run with parameter **Output dotplot size** equal to `1000`, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.
 {: .comment}
 
-Also note that a `score` value can be seen in the title of the plot (this value is also available in the **Comparison score** file). This value is calculated based on the alignment coverage and number of rearrangements and can be used to automatically filter out similar from dissimilar sequence comparisons. 
+Also note that a `score` value can be seen in the title of the plot (this value is also available in the **Comparison score** file). This value is calculated based on the alignment coverage and number of rearrangements and can be used to automatically filter out similar from dissimilar sequence comparisons. A value of `0` means that the sequences are nearly equal (rearrangement-wise), whereas a value closer to `1` means that the sequences are more dissimilar.
 
 ## Post-processing: detecting rearrangements
 
