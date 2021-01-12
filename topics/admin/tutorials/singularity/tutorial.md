@@ -188,9 +188,10 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
 >    @@ -3,7 +3,9 @@
 >         </plugins>
->         <destinations>
->    -        <destination id="local_destination" runner="local_plugin"/>
->    +        <destination id="local_destination" runner="local_plugin">
+>    -    <destinations default="local_destination">
+>    +    <destinations default="singularity">
+>             <destination id="local_destination" runner="local_plugin"/>
+>    +        <destination id="singularity" runner="local_plugin">
 >    +            <param id="singularity_enabled">true</param>
 >    +            <!-- Ensuring a consistent collation environment is good for reproducibility. -->
 >    +            <env id="LC_ALL">C</env>
