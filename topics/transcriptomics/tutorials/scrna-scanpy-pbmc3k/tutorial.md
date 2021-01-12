@@ -315,7 +315,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > There are now 13,714 cells. So 19,024 (32,738 - 13,714) genes have been removed.
+>    > > There are now 13,714 genes. So 19,024 (32,738 - 13,714) genes have been removed.
 >    > >
 >    > {: .solution}
 >    >

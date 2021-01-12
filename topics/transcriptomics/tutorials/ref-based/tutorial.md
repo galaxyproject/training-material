@@ -1088,7 +1088,7 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 >     C | 83 | 61.11 | 80
 >
 > *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU&t=35s)*
-
+>
 {: .details}
 
 DESeq2 runs also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:

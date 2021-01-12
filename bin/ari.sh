@@ -32,7 +32,7 @@ srcdir="$(dirname "$source")"
 # Metadata
 meta_authors="$(ruby bin/extract-frontmatter.rb topics/admin/tutorials/cvmfs/slides.html | jq '.contributors | join(", ")' -r)"
 meta_title="$(ruby bin/extract-frontmatter.rb "${source}" | jq .title -r)"
-REVISION="$(cut -c1-12 < .git/$(cut -f 2 -d' ' .git/HEAD))"
+REVISION="$(git log -1 --format=%H)"
 
 # We'll cache audio locally.
 ffmpeglog=warning

@@ -702,7 +702,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    - galaxyproject.galaxy
 >    +    - role: uchida.miniconda
 >    +      become: true
->    +      become_user: galaxy
+>    +      become_user: "{{ galaxy_user.name }}"
 >    ```
 >
 >    > ### {% icon tip %} Miniconda fails to work
@@ -1484,7 +1484,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    @@ -15,3 +15,4 @@
 >         - role: uchida.miniconda
 >           become: true
->           become_user: galaxy
+>           become_user: "{{ galaxy_user.name }}"
 >    +    - usegalaxy_eu.galaxy_systemd
 >    ```
 >
@@ -1633,7 +1633,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ b/galaxy.yml
 >    @@ -21,3 +21,4 @@
 >           become: true
->           become_user: galaxy
+>           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.galaxy_systemd
 >    +    - galaxyproject.nginx
 >    ```
