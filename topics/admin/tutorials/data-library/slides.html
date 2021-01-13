@@ -1,6 +1,7 @@
 ---
 layout: base_slides
 logo: "GTN"
+video: true
 
 title: "Storage Management"
 questions:
@@ -26,9 +27,9 @@ contributors:
 .image-75[![data libraries screenshot]({{site.baseurl}}/topics/admin/images/data/data-library-screenshot.png)]
 
 ???
-Data libraries provide a convenient way for Galaxy administrators to share datasets with users.
 
-This is ideal for commonly used datasets such as reference data, or data for G.T.N. tutorials.
+- Data libraries provide a convenient way for Galaxy administrators to share datasets with users.
+- This is ideal for commonly used datasets such as reference data, or data for GTN tutorials.
 
 ---
 
@@ -51,9 +52,8 @@ This is ideal for commonly used datasets such as reference data, or data for G.T
 
 ???
 
-Users can browse these data libraries and import datasets directly into their histories.
-
-Additionally, these datasets can also be selected directly from the tool form.
+- Users can browse these data libraries and import datasets directly into their histories.
+- Additionally, these datasets can also be selected directly from the tool form.
 
 ---
 
@@ -72,7 +72,10 @@ Additionally, these datasets can also be selected directly from the tool form.
 
 ???
 
-- Every dataset in the library is *stored only once* no matter how many users are using it in their histories.
+- Every dataset in the library is stored only once, no matter how many users are using it in their histories.
+- The data in data libraries does not count against user quotas.
+- Management of libraries can be delegated to users.
+- And lastly, libraries can be public, restricted to individuals, or to groups.
 
 ---
 
@@ -85,6 +88,14 @@ Additionally, these datasets can also be selected directly from the tool form.
   - From remote source
 
 ![import menu]({{site.baseurl}}/topics/admin/images/data/import-menu.png)
+
+???
+
+- Galaxy provides many options for importing data.
+- You can import data from a history, or from disk.
+- Importing data on disk is convenient, as Galaxy can recreate the folder structure that is on disk.
+- Additionally Galaxy can store library data as a symlink.
+- This prevents needing to copy large shared datasets into Galaxy's own data store.
 
 ---
 
@@ -100,13 +111,6 @@ In `galaxy.yml`:
   * Admin-only, allows importing from any path that the Galaxy's user has access to.
 
 ???
-If you use old library interface you can also set `library_import_dir`.
-It specifies which folder admins may browse and import from.
 
----
-
-# Shared Data project
-
-- Initiative to unify data libraries across usegalaxy.* servers
-- You're welcome to join!
-- See also https://github.com/usegalaxy-eu/shared-data
+- If you use old library interface you can also set library_import_dir.
+- It specifies which folder admins may browse and import from.
