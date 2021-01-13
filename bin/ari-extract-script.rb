@@ -94,7 +94,7 @@ end
 # For each block, cleanup first.
 blocks = blocks.map{ |block|
   # Remove the - prefix from each line
-  script_lines = block.map{ |x| x.delete_prefix("- ") }
+  script_lines = block.map{ |x| x.strip.delete_prefix("- ") }
   # Remove the leading ???
   if script_lines[0] == '???'
     script_lines = script_lines[1..-1]
@@ -119,7 +119,7 @@ blocks = blocks.map{ |block|
 blocks2 = blocks.map { |block|
   # Translate specific words as needed
   s = block.map{ |line|
-    line = line.split(' ').map{ |w|
+    line = line.strip.split(' ').map{ |w|
       translate(w)
     }.join(' ')
     line
