@@ -28,10 +28,10 @@ requirements:
      - tool-management
 ---
 
-TODO: overview.
-
-- save space for users, files don't count against quota
-- great for e.g. sharing sequencing run with a bunch of people.
+Data libraries are a great way to provide structured repositories of data to
+everyone on your server, or to a subset of your users. Datasets in libraries do
+not count against user quotas, so they are commonly used to provide the results
+of a sequencing run or similar project to a group of users on the servers.
 
 > ### Agenda
 >
@@ -41,7 +41,7 @@ TODO: overview.
 {: .agenda}
 
 
-# Adding local data
+# Setup
 
 Before we can import local data, we need to configure Galaxy to permit this. Additionally we will setup an example data library which we can use for demonstrative purposes.
 
