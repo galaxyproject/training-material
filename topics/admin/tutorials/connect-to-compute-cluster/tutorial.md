@@ -500,6 +500,16 @@ Slurm allows us to query the exit state of jobs for a time period of the value o
 
 After the job has been purged from the active jobs database, a bit of information (but not as much as `scontrol` provides) can be retrieved from Slurm's logs. However, it's a good idea to set up Slurm's accounting database to keep old job information in a queryable format.
 
+> ### {% icon tip %} Which directories need to be shared on a cluster?
+> The following directories need to be accesible via the same path on both the head node and compute nodes:
+> - `galaxy_shed_tools_dir`
+> - `galaxy_tool_dependency_dir`
+> - `galaxy_file_path`
+> - `galaxy_job_working_directory`
+> - `galaxy_server_dir`
+> - `galaxy_venv_dir`
+{: .tip}
+
 ## Further Reading
 
 - [Galaxy's cluster documentation](https://docs.galaxyproject.org/en/latest/admin/cluster.html) describes in detail alternative cluster configurations.

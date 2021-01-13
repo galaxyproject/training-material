@@ -221,7 +221,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >     galaxy_local_tools:
 >     - testing.xml
 >    +galaxy_dynamic_job_rules:
->    +  - my_rules.py
+>    +- my_rules.py
 >
 >     # systemd
 >     galaxy_systemd_mode: mule
@@ -566,8 +566,8 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    @@ -81,6 +81,7 @@ galaxy_local_tools:
 >     - testing.xml
 >     galaxy_dynamic_job_rules:
->       - my_rules.py
->    +  - map_resources.py
+>     - my_rules.py
+>    +- map_resources.py
 >
 >     # systemd
 >     galaxy_systemd_mode: mule

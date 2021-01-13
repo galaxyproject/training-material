@@ -111,11 +111,15 @@ Define which Galaxy processes are job handlers
 - Dedicated handlers can be reserved, e.g. for small, high throughput jobs
 - The list of plugins that are loaded by a job handler can be limited using `<plugin>` subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)
 - Not defined in `job_conf.xml` when using *job handler mules*
+- Defines how jobs are assigned to individual processes (use `db-skip-locked` !)
 
 ???
 
 - Handlers are the Galaxy processes which interact with the cluster.
 - You can define dedicated handlers for different types of jobs, or to interact with different clusters.
+- Additionally, handlers definition in the job configuration controls how jobs are assigned to individual processes.
+- There are many options for the assignment process, all are discussed in the advanced sample job configuration.
+- db-skip-locked is the best choice for most cases, it enables handlers to grab multiple jobs to work on at once.
 
 ---
 
@@ -123,7 +127,7 @@ Define which Galaxy processes are job handlers
 
 Define *how* jobs should be run
 
-- Which plugin?
+- Which plugin? (Slurm, Condor, Pulsar, etc?)
 - In a Docker container? Which one?
 - **DRM params** (queue, cores, memory, walltime)?
 - Environment (variables e.g. `$PATH`, source an env file, run a command)?
@@ -131,6 +135,7 @@ Define *how* jobs should be run
 ???
 
 - The destination section of the job configuration file is a map that defines which jobs go where.
+- Jobs from any destination, can be processed by any plugin.
 - Every job will find a path through this configuration and eventually get dispatched to the matching runner.
 - These destinations can specify things like environment variables or resource requirements.
 
@@ -145,9 +150,6 @@ Define *how* jobs should be run
     <plugins>
         <plugin id="local" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner" workers="4"/>
     </plugins>
-    <handlers>
-        <handler id="main"/>
-    </handlers>
     <destinations>
         <destination id="local" runner="local"/>
     </destinations>
@@ -157,7 +159,7 @@ Define *how* jobs should be run
 ???
 
 - This is the default job configuration.
-- It uses a local runner and the main process as a handler.
+- It uses a local runner with 4 workers, or processes to process jobs.
 - As a result if you restart Galaxy, jobs will be lost.
 
 ---
@@ -206,8 +208,10 @@ Available limits
 
 ???
 
-- Configuration of job limits are usually provided by your DRM, but some basic ones are available through Galaxy.
+- Configuration of job limits is best acommplished using both the DRM provided limits and the ones from Galaxy.
+- Walltime is best set in your DRM, while output size is only possible through Galaxy.
 - We recommend you set these at the DRM level which is better equipped to terminate misbehaving jobs.
+- The most important limit however is usually concurrency.
 
 ---
 
@@ -261,6 +265,7 @@ The second can be worked around with Pulsar REST/MQ (with a performance/throughp
 - For the DRMs which require a shared filesystem there are additional requirements.
 - First, Galaxy and the tool dependencies are at the same location on the head and compute nodes.
 - Job directories must be in a shared location on both head and compute nodes.
+- This is mentioned in more detail in the tutorial.
 
 ---
 
