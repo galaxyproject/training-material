@@ -236,9 +236,11 @@ Let's try setting that up in our Galaxy!
 >
 {: .hands_on}
 
-That's it! It's quite easy. Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
-
 ![Screenshot of data libraries, we're in a library folder named "Mouse sequencing project" and a directory and single file are shown. The file has an ugly URL as its name](../../images/data/imported.png)
+
+That's it! You should be able to see your newly created data library in your Galaxy.
+
+Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 
 ### `--legacy`
 
