@@ -411,7 +411,7 @@ Some of the other options we will be using are:
 >    {% raw %}
 >    ```yaml
 >    galaxy_server_url: # Important!!!
->    # Put the your Galaxy server's FQDN (or the FQDN of the RabbitMQ server).
+>    # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >
 >    pulsar_root: /mnt/pulsar
 >
