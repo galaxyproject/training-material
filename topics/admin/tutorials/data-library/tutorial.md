@@ -33,6 +33,9 @@ everyone on your server, or to a subset of your users. Datasets in libraries do
 not count against user quotas, so they are commonly used to provide the results
 of a sequencing run or similar project to a group of users on the servers.
 
+![screenshot of data libraries]({{site.baseurl}}/topics/admin/images/data/data-library-screenshot.png)
+
+
 > ### Agenda
 >
 > 1. TOC
