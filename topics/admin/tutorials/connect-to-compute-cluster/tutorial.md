@@ -93,7 +93,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >           become: true
 >    ```
 >
-> 4. Add the slurm ariables to your `group_vars/galaxyservers.yml`:
+> 4. Add the slurm variables to your `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
 >    ```diff
