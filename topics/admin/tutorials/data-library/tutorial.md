@@ -189,43 +189,49 @@ Let's try setting that up in our Galaxy!
 
 {% include snippets/finding_your_admin_api_key.md %}
 
-> ### {% icon hands_on %} Hands-on: Importing Data Library YAML.
+> ### {% icon hands_on %} hands-on: importing data library yaml.
 >
-> 1. Re-activate the virtualenv you created for the [Ephemeris Tool Management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
+> 1. re-activate the virtualenv you created for the [ephemeris tool management tutorial]({% link topics/admin/tutorials/tool-management/tutorial.md %}).
 >
->    > ### {% icon code-in %} Input: Bash
+>    > ### {% icon code-in %} input: bash
 >    > ```
 >    > . ~/ephemeris_venv/bin/activate
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon tip %} Missing?
+>    > ### {% icon tip %} missing?
 >    >
->    > Then you might need to re-run the steps:
+>    > then you might need to re-run the steps:
 >    >
->    > ```console
+>    > ```bash
 >    > virtualenv -p python3 ~/ephemeris_venv
 >    > . ~/ephemeris_venv/bin/activate
 >    > pip install ephemeris
 >    > ```
 >    {: .tip}
 >
-> 2. We'll use the `setup-data-libraries` command to install the data in this yaml file into a library in our Galaxy.
+> 2. we'll use the `setup-data-libraries` command to install the data in this yaml file into a library in our galaxy.
 >
->    > ### {% icon code-in %} Input: Bash
+>    > ### {% icon code-in %} input: bash
 >    > ```
 >    > setup-data-libraries -g https://your-galaxy -k <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
 >    {: .code-in}
 >
->    > ### {% icon code-out %} Output
+>    > ### {% icon code-out %} output
 >    > ```
->    > Library name: Mouse sequencing project
+>    > library name: mouse sequencing project
 >    > ```
 >    {: .code-out}
 >
+> 3. this command is safe to re-run. for example if you update the yaml, it will simply report that the library exists before ensuring all files exist in their appropriate location:
 >
-{: hands_on}
+>    ```bash
+>    library name: mouse sequencing project
+>    library already exists! id: f597429621d6eb2b
+>    ```
+>
+{: .hands_on}
 
 That's it! It's quite easy. Note that we've used some special flags here, `--training` and `--legacy`. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)
 
