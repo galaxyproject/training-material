@@ -211,9 +211,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > > galaxy_config:
 >    > >   galaxy:
 >    > >     # ... existing configuration options in the `galaxy` section ...
->    > >     tool_data_table_config_path:
->    > >       - /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml
->    > >       - /cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>    > >     tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    > > ```
 >    > >
 >    > {: .solution }
