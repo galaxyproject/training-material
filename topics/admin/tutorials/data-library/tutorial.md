@@ -27,6 +27,10 @@ requirements:
      - ansible-galaxy
 ---
 
+TODO: overview.
+
+- save space for users, files don't count against quota
+- great for e.g. sharing sequencing run with a bunch of people.
 
 > ### Agenda
 >
@@ -38,54 +42,121 @@ requirements:
 
 # Adding local data
 
-Before we can import local data, we need to configure Galaxy to permit this:
+Before we can import local data, we need to configure Galaxy to permit this. Additionally we will setup an example data library which we can use for demonstrative purposes.
 
 > ### {% icon hands_on %} Hands-on: Setting up Grafana
 >
 > 1. We will add a pre-task to clone [a data repository](https://github.com/galaxyproject/galaxy-test-data) into your machine. We will use this as the source for a library dataset.
 >
->
->
->        - name: Create the second storage directory
->          file:
->            owner: galaxy
->            group: galaxy
->            path: /libraries/
->            state: directory
->            mode: '0755'
->        - name: Create the second storage directory
->          file:
->            owner: galaxy
->            group: galaxy
->            path: /libraries/user/
->            state: directory
->            mode: '0755'
->        - git:
->            repo: 'https://github.com/galaxyproject/galaxy-test-data'
->            dest: /libraries/admin
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -5,6 +5,9 @@
+>         - name: Install Dependencies
+>           package:
+>             name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+>    +    - git:
+>    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
+>    +        dest: /libraries/
+>       handlers:
+>         - name: Restart Galaxy
+>           systemd:
+>    ```
 >
 > 4. Edit the file `group_vars/galaxyservers.yml` and set the following variables:
 >
->    ```yaml
->    galaxy_config:
->      galaxy:
->        library_import_dir: /libraries/admin
->        user_library_import_dir: /libraries/user
->        user_library_import_dir_auto_creation: true
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -28,6 +28,9 @@ miniconda_manage_dependencies: false
+>
+>     galaxy_config:
+>       galaxy:
+>    +    library_import_dir: /libraries/admin
+>    +    user_library_import_dir: /libraries/user
+>         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
+>         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >    ```
 >
 > 5. Run the playbook:
 >
->    ```
->    ansible-playbook galaxy.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
 >
 {: .hands_on}
+
+# Importing Data
+
+There are multiple options for importing data from your server, we'll go through all of your choices below. But first, let's take a quick look at the example library structure we've provided.
+
+> > ### {% icon code-in %} Input: Bash
+> > ```bash
+> > tree /libraries
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output: Bash
+> > ```
+> > /libraries/
+> > ├── admin
+> > │   └── admin-wildtype.fna
+> > ├── example-library.yaml
+> > ├── README.md
+> > └── user
+> >     ├── admin@example.com
+> >     │   └── user-wildtype.fna
+> >     └── admin@example.org
+> >         └── user-wildtype.fna
+> >
+> > 4 directories, 5 files
+> > ```
+> {: .code-out}
+{: .code-2col}
+
+We have a directory named `admin`, which will be available to all admin users (we set `library_import_dir: /libraries/admin` earlier.)
+
+Additionally we have a `user` directory, below the user directory are more directories with the user's email as they directory key. Data can be placed in here, and it will become accessible to those users (we set `user_library_import_dir: /libraries/user` for this.)
+
+![An add datasets dropdown menu in galaxy showing the options from history, from user directory, and under admins only, from import directory](../../images/data/import-menu.png)
+
+## from History
+
+This is by far the easiest and most convenient option for small datasets, or datasets that are just already in a history
+
+![A select box is shown listing files in the user's history](../../images/data/import-admin.png)
+
+You can easily select multiple files and quickly import them.
+
+## from User Directory
+
+If user directories are configured, as we did at the beginning of this tutorial, then users will be able to import any files under their personal directory. This can be used for a wide variety of setups, e.g. providing the output of sequencing machines to users. This can point to the same directory structure that's used by the FTP service, if you want your users to be able to import files directly from FTP.
+
+![Import popup with a list of files with one file, user-wildtype.fna, and buttons for configuring import behaviour.](../../images/data/import-user.png)
+
+## from import Directory (Admins only)
+
+
+![Same as the previous image, import popup listing options and one file, admin-wildtype.fna](../../images/data/import-admin.png)
+
+
+
+select-from-lib0.png
+select-from-lib1.png
+select-from-lib2.png
+
 
 data is set up
 
 - walk through import interface
 - unprivileged user import?
+
+
+
+
+
 
 
 # Installing remote data
