@@ -77,6 +77,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 4. Specify which version of Singularity you want to install, in `group_vars/galaxyservers.yml`:
 >
+>    {% raw %}
 >    ```yaml
 >    # Golang
 >    golang_gopath: '/opt/workspace-go'
@@ -84,6 +85,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    singularity_version: "3.7.0"
 >    singularity_go_path: "{{ golang_install_dir }}"
 >    ```
+>    {% endraw %}
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
 >    ```diff
