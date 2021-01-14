@@ -62,7 +62,15 @@ class: center, middle, inverse
 
 ---
 
+<img src="{{ site.baseurl }}/{{ site.logo }}" alt="Galaxy Training Network" style="height: 8em;"/>
+
 # {{ title }}
+
+{% if tutorial.contributors %}
+<div class="contributors-line">
+{% include _includes/contributor-badge-list.html contributors=tutorial.contributors %}
+</div>
+{% endif %}
 
 {% if topic.requirements or page.requirements %}
 
