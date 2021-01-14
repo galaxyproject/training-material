@@ -127,7 +127,7 @@ Before running the full annotation process, you need first to evaluate the quali
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
 > 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: select `{{ genome_name }}` from your history
+>    - {% icon param-file %} *"fasta or multifasta file"*: select `{{ genome_name }}` from your history
 >
 {: .hands_on}
 
