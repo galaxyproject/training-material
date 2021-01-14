@@ -631,7 +631,6 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 > {% else %}
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 > {% endif %}
->                    - *"This is match/match_part data"*: `No`
 >
 {: .hands_on}
 
