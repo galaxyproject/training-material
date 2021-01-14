@@ -19,7 +19,6 @@ requirements:
     tutorials:
       - ansible
       - ansible-galaxy
-      - cvmfs
 ---
 
 # Overview
