@@ -347,7 +347,7 @@ Now run BUSCO with the predicted transcript sequences:
 > > ### {% icon solution %} Solution
 > >
 > > {% if include.short %}
-> > 128 complete single-copy, 0 duplicated, 10 fragmented, 620 missing. This is in fact better than what BUSCO found in the genome sequence. That means the quality of this annotation is very good (by default BUSCO in genome mode can miss some genes, the advanced options can improve this at the cost of computing time).
+> > 128 complete single-copy, 0 duplicated, 10 fragmented, 620 missing. This is in fact better than what BUSCO found in the genome sequence. That means the quality of this annotation is very good (by default BUSCO in genome mode can miss some genes, the advanced options can improve this at the cost of computing time). (Results can be very slightly different in your own history, it's normal).
 > > {% else %}
 > > Around 100 complete single-copy, and 650 missing. As the quality of this first draft is yey not very good, you should see better results after next rounds of Maker.
 > > {% endif %}
