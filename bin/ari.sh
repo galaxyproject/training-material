@@ -6,12 +6,12 @@ mkdir -p "$GTN_CACHE"
 
 # Setup our Engine
 mozilla_port=$(ss -lptn 'sport = :5002' | wc -l)
-if (( mozilla_port > 1 )); then
-	engine="mozilla"
-	echo "Using MozillaTTS for speech"
-elif [[ -n "$AWS_ACCESS_KEY_ID" ]]; then
+if [[ -n "$AWS_ACCESS_KEY_ID" ]]; then
 	engine="aws"
 	echo "Using AWS for speech (this will cost money!)"
+elif (( mozilla_port > 1 )); then
+	engine="mozilla"
+	echo "Using MozillaTTS for speech"
 else
 	echo "Cannot run, no speech engine setup. "
 	echo "If you're testing, try: docker run -it -p 5002:5002 synesthesiam/mozillatts"
