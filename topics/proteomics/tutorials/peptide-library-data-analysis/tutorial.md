@@ -51,7 +51,9 @@ Several inbuilt data sets have been provided with the tool`PDAUG Peptide Data Ac
 > 
 > 1. {% tool [PDAUG TSVtoFASTA](toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0) %} with the following parameters:
 >    - {% icon param-file %} *"Input file"*: `PDAUG Peptide Data Access - AMPvsTMP (tabular)` (output of **PDAUG Peptide Data Access** {% icon tool %})
->    - *"Data conversion"*: ` WithClassLabel `
+>    - *"Peptide Column"*:  `name`
+>    - *"Method to convert data"*: `Split Data By Class Label`
+>    - *"Column with the class label"*: `class label`
 >
 >
 {: .hands_on}
@@ -172,6 +174,7 @@ We utilize `PDAUG Merge Dataframes` to merge two tabular data files.
 > 
 > 1. {% tool [PDAUG Merge Dataframes](toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0) %} with the following parameters:
 >    - {% icon param-files %} *"Input files"*: `PDAUG Add Class Label on data 6 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %}), `PDAUG Add Class Label on data 7 - (tabular)` (output of **PDAUG Add Class Label** {% icon tool %})
+>    - *"Option to merg data"*: `Merge data without adding class label`
 >
 >
 {: .hands_on}
