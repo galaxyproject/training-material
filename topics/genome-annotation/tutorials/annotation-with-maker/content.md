@@ -595,8 +595,8 @@ If you look at the content of the `final annotation` dataset, you will notice th
 >
 > 1. {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
->    - *"Prefix for ids"*: `"TEST_"`
->    - *"Justify numeric ids to this length"*: `"6"`
+>    - *"Prefix for ids"*: `TEST_`
+>    - *"Justify numeric ids to this length"*: `6`
 >
 >    > ### {% icon comment %} Comment
 >    >
