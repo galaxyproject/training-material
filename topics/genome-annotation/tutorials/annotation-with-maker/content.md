@@ -627,7 +627,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >                - In *"1: Annotation Track"*:
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 > {% if include.short %}
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of your {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
+>                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the output of {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11) %}
 > {% else %}
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 > {% endif %}
