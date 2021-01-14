@@ -625,7 +625,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >            - In *"Annotation Track"*:
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
->                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
 > {% if include.short %}
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of your {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 > {% else %}
@@ -675,7 +675,7 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 >            - In *"Annotation Track"*:
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
->                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
 > {% if include.short %}
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of your {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 > {% else %}

@@ -102,7 +102,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      - In **1: Track Group**
 >           - *"Track Cateogry"*: `gene annotations`
 >           - Click on `Insert Annotation Track` and fill it with:
->               - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>               - *"Track Type"*: `GFF/GFF3/BED Features`
 >               - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
 >
 >    A new file will be created in your history, this contains the JBrowse interactive visualisation. We will now view its contents and play with it

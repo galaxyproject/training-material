@@ -287,7 +287,7 @@ Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
 >    - *"Insert Track Group"*
 >        - *"Insert Annotation Track"*
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
 >            - *"GFF/GFF3/BED Track Data"*: the `GFF3` file
 >            - *Leave the other track features as default*
 > 2. **Re-name output file**:
