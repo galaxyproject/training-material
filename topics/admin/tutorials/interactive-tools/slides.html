@@ -276,11 +276,11 @@ You will sometimes see Interactive Tools referred to as Interactive Environments
 
 ???
 
-- Some settings are needed to configure an interactive tool’s wrapper.
+- Some settings are needed to configure an interactive tool wrapper.
 - The tool type must be set to interactive.
 - As a requirement, set the path to the repository where the container is to be pulled from.
 - The tool entry point on the container must be defined. 
-- For instance, for a Jupyter Notebook, you’ll give the port the application is served on and the domain name suffix.
+- For instance, for a Jupyter Notebook, you'll give the port the application is served on and the domain name suffix.
 
 ---
 # Mapping clients to containers
@@ -307,15 +307,15 @@ You will sometimes see Interactive Tools referred to as Interactive Environments
 ???
 
 - This slide illustrates the steps allowing a client to interact with a Galaxy Interactive Tool.
-- We consider a Galaxy server running behind a reverse proxy (NGINX). 
+- We consider a Galaxy server running behind a reverse proxy (NGINX).
 - The client only ever speaks to NGINX on the Galaxy server, running on the standard HTTPS 443 port.
 - Based on the elements provided by the URL, NGINX redirects the requests to Galaxy over a unix domain socket as usual.
 - On the other hand, HTTP requests targetting interactive tools are redirected by NGINX to a proxy, called GIE Proxy, running on port 8000.
-- At this point, remember, when an docker container starts, it will be assigned a host (server or node) and a random port on that host (in our example, port 32768). 
+- At this point, remember, when an docker container starts, it will be assigned a host (server or node) and a random port on that host (in our example, port 32768).
 - This information is stored by Galaxy in a sqlite database.
 - So the GIE proxy checks in this sqlite database to know which node and port the IT container is to be found.
 - The GIE proxy forwards the HTTP request to Docker on that node and port.
-- Docker, in turn, forwards it to the application (e.g. Jupyter) on the container’s port, defined in the wrapper.
+- Docker, in turn, forwards it to the application (e.g. Jupyter) on the container's port, defined in the wrapper.
 
 ---
 # Galaxy configuration

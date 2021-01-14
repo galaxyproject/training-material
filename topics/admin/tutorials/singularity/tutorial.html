@@ -487,7 +487,11 @@
                     
                         
                     
+                        
+                    
                 
+                    
+                        
                     
                         
                     
@@ -575,6 +579,8 @@
                         
                     
                 
+                    
+                        
                     
                         
                     
@@ -857,6 +863,7 @@ This message shows that your installation appears to be working correctly.
  <span class="notranslate">galaxy</span>_config:
    <span class="notranslate">galaxy</span>:
 <span class="gi">+    dependency_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
++    containers_resolvers_config_file: "{{ <span class="notranslate">galaxy</span>_config_dir }}/container_resolvers_conf.xml"
 </span>     brand: "🧬🔬🚀"
      admin_users: admin@example.org
      database_connection: "postgresql:///<span class="notranslate">galaxy</span>?host=/var/run/postgresql"
@@ -867,6 +874,8 @@ This message shows that your installation appears to be working correctly.
 +<span class="notranslate">galaxy</span>_config_files:
 <span class="gi">+- src: files/<span class="notranslate">galaxy</span>/config/dependency_resolvers_conf.xml
 +  dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/dependency_resolvers_conf.xml"
++- src: files/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml
++  dest: "{{ <span class="notranslate">galaxy</span>_config_dir }}/container_resolvers_conf.xml"
 </span></code></pre></div>      </div>
     </li>
     <li>
@@ -883,6 +892,17 @@ This message shows that your installation appears to be working correctly.
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;dependency_resolvers&gt;</span>
 <span class="nt">&lt;/dependency_resolvers&gt;</span>
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Create the new file <code class="language-plaintext highlighter-rouge">files/<span class="notranslate">galaxy</span>/config/container_resolvers_conf.xml</code>, this specifies the order in which to attempt container resolution.</p>
+
+      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;containers_resolvers&gt;</span>
+  <span class="nt">&lt;explicit_singularity</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;cached_mulled_singularity</span> <span class="nt">/&gt;</span>
+  <span class="nt">&lt;mulled_singularity</span> <span class="na">auto_install=</span><span class="s">"False"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;build_mulled_singularity</span> <span class="na">auto_install=</span><span class="s">"False"</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/containers_resolvers&gt;</span>
 </code></pre></div>      </div>
     </li>
     <li>

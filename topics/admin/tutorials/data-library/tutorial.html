@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Data Libraries</title>
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:title" content="Galaxy Training: Data Libraries" />
+        <meta property="og:description" content="Resources related to configuration and maintenance of Gal..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxyproject/admins'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/admin" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Galaxy Server administration
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fdata-library%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fdata-library%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fdata-library%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fdata-library%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fdata-library%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fadmin%2Ftutorials%2Fdata-library%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/admin/tutorials/data-library/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Data Libraries",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Galaxy Server administration",
+    "description": "Resources related to configuration and maintenance of Galaxy servers",
+    "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+  },
+  "courseCode": "admin / data-library / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Data Libraries' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/data-library/tutorial.html",
+  "timeRequired": "PT30M",
+  "keywords": "storage",
+  "description": "The questions this  addresses are:\n - How do data libraries work?\n - What are they good for?\n - How can I use them?\n - How can I setup permissions for them?\n\n\\nThe objectives are:\n - Setup a data library\n - Manage permissions\n - Import data from disk\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/slides.html",
+      "name": "Ansible",
+      "description": "Slides for 'Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible/tutorial.html",
+      "name": "Ansible",
+      "description": "Hands-on for 'Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/slides.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Slides for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html",
+      "name": "Galaxy Installation with Ansible",
+      "description": "Hands-on for 'Galaxy Installation with Ansible' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/tool-management/slides.html",
+      "name": "Galaxy Tool Management with Ephemeris",
+      "description": "Slides for 'Galaxy Tool Management with Ephemeris' tutorial",
+      "learningResourceType": "slides",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/tool-management/tutorial.html",
+      "name": "Galaxy Tool Management with Ephemeris",
+      "description": "Hands-on for 'Galaxy Tool Management with Ephemeris' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Helena Rasche"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Galaxy Server administration",
+      "description": "Resources related to configuration and maintenance of Galaxy servers",
+      "url": "https://training.galaxyproject.org//training-material/topics/admin/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Data Libraries</h1>
+        
+
+        <div class="contributors-line">By: 
+
+<a href="/training-material/hall-of-fame/hexylena/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hexylena" alt="Helena Rasche">Helena Rasche</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How do data libraries work?</p>
+</li>
+            
+            <li><p>What are they good for?</p>
+</li>
+            
+            <li><p>How can I use them?</p>
+</li>
+            
+            <li><p>How can I setup permissions for them?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Setup a data library</p>
+</li>
+            
+            <li><p>Manage permissions</p>
+</li>
+            
+            <li><p>Import data from disk</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/admin">Galaxy Server administration</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Installation with Ansible:
+                            
+                                <a href="/training-material/topics/admin/tutorials/ansible-galaxy/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy Tool Management with Ephemeris:
+                            
+                                <a href="/training-material/topics/admin/tutorials/tool-management/slides.html"><i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> slides</a>
+                                
+                            
+                            
+                                
+                                    - <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default"><a href="/training-material/topics/admin/tutorials/data-library/slides.html" title="Slides for this tutorial">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
+                    </a></li>
+                
+
+                
+
+                
+
+                
+
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 13, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <p>Data libraries are a great way to provide structured repositories of data to
+everyone on your server, or to a subset of your users. Datasets in libraries do
+not count against user quotas, so they are commonly used to provide the results
+of a sequencing run or similar project to a group of users on the servers.</p>
+
+<p><img src="/training-material/topics/admin/images/data/data-library-screenshot.png" alt="screenshot of data libraries" /></p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+<ol id="markdown-toc">
+  <li><a href="#setup" id="markdown-toc-setup">Setup</a></li>
+  <li><a href="#importing-data" id="markdown-toc-importing-data">Importing Data</a>    <ol>
+      <li><a href="#from-history" id="markdown-toc-from-history">from History</a></li>
+      <li><a href="#from-user-directory" id="markdown-toc-from-user-directory">from User Directory</a></li>
+      <li><a href="#from-import-directory-admins-only" id="markdown-toc-from-import-directory-admins-only">from import Directory (Admins only)</a></li>
+    </ol>
+  </li>
+  <li><a href="#automatically-populating-a-data-library" id="markdown-toc-automatically-populating-a-data-library">Automatically Populating a Data Library</a></li>
+  <li><a href="#gtn-data" id="markdown-toc-gtn-data">GTN Data</a></li>
+  <li><a href="#using-data-from-libraries" id="markdown-toc-using-data-from-libraries">Using Data from Libraries</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="setup">Setup</h1>
+
+<p>Before we can import local data, we need to configure <span class="notranslate">Galaxy</span> to permit this. Additionally we will setup an example data library which we can use for demonstrative purposes.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-setting-up-data-libraries"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Setting up Data Libraries</h3>
+
+  <ol>
+    <li>
+      <p>We will add a pre-task to clone <a href="https://github.com/galaxyproject/galaxy-test-data">a data repository</a> into your machine. We will use this as the source for a library dataset.</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
+</span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
+</span><span class="p">@@ -5,6 +5,9 @@</span>
+     - name: Install Dependencies
+       package:
+         name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+<span class="gi">+    - git:
++        repo: 'https://github.com/use<span class="notranslate">galaxy</span>-eu/libraries-training-repo'
++        dest: /libraries/
+</span>   handlers:
+     - name: Restart <span class="notranslate">Galaxy</span>
+       systemd:
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Edit the file <code class="language-plaintext highlighter-rouge">group_vars/<span class="notranslate">galaxy</span>servers.yml</code> and set the following variables:</p>
+
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="gi">+++ b/group_vars/<span class="notranslate">galaxy</span>servers.yml
+</span><span class="p">@@ -28,6 +28,9 @@</span> miniconda_manage_dependencies: false
+
+ <span class="notranslate">galaxy</span>_config:
+   <span class="notranslate">galaxy</span>:
+<span class="gi">+    library_import_dir: /libraries/admin
++    user_library_import_dir: /libraries/user
+</span>     job_resource_params_file: "/job_resource_params_conf.xml"
+     tool_destinations_config_file: "/tool_destinations.yml"
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Run the playbook:</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook <span class="notranslate">galaxy</span>.yml
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h1 id="importing-data">Importing Data</h1>
+
+<p>There are multiple options for importing data from your server, we’ll go through all of your choices below. But first, let’s take a quick look at the example library structure we’ve provided.</p>
+
+<blockquote class="code-2col">
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-1"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tree /libraries
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out">
+    <h3 id="code-out-output-bash"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+    <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/libraries/
+├── admin
+│   └── admin-wildtype.fna
+├── example-library.yaml
+├── README.md
+└── user
+    ├── admin@example.com
+    │   └── user-wildtype.fna
+    └── admin@example.org
+        └── user-wildtype.fna
+
+4 directories, 5 files
+</code></pre></div>    </div>
+  </blockquote>
+</blockquote>
+
+<p>We have a directory named <code class="language-plaintext highlighter-rouge">admin</code>, which will be available to all admin users (we set <code class="language-plaintext highlighter-rouge">library_import_dir: /libraries/admin</code> earlier.)</p>
+
+<p>Additionally we have a <code class="language-plaintext highlighter-rouge">user</code> directory, below the user directory are more directories with the user’s email as they directory key. Data can be placed in here, and it will become accessible to those users (we set <code class="language-plaintext highlighter-rouge">user_library_import_dir: /libraries/user</code> for this.)</p>
+
+<p><img src="../../images/data/import-menu.png" alt="An add datasets dropdown menu in galaxy showing the options from history, from user directory, and under admins only, from import directory" /></p>
+
+<h2 id="from-history">from History</h2>
+
+<p>This is by far the easiest and most convenient option for small datasets, or datasets that are just already in a history</p>
+
+<p><img src="../../images/data/import-admin.png" alt="A select box is shown listing files in the user's history" /></p>
+
+<p>You can easily select multiple files and quickly import them.</p>
+
+<h2 id="from-user-directory">from User Directory</h2>
+
+<p>If user directories are configured, as we did at the beginning of this tutorial, then users will be able to import any files under their personal directory. This can be used for a wide variety of setups, e.g. providing the output of sequencing machines to users. This can point to the same directory structure that’s used by the FTP service, if you want your users to be able to import files directly from FTP.</p>
+
+<p><img src="../../images/data/import-user.png" alt="Import popup with a list of files with one file, user-wildtype.fna, and buttons for configuring import behaviour." /></p>
+
+<p>This will enable the option for everyone, any unprivileged user with a folder in the <code class="language-plaintext highlighter-rouge">user_library_import_dir</code> directory <em>and</em> permissions on a data library can import things from their import directory.</p>
+
+<h2 id="from-import-directory-admins-only">from import Directory (Admins only)</h2>
+
+<p>Similarly to the user import directories, there is the option to have an admin only import area. If one admin is responsible for creating the data libraries and importing data this can be a good option.</p>
+
+<p><img src="../../images/data/import-admin.png" alt="Same as the previous image, import popup listing options and one file, admin-wildtype.fna" /></p>
+
+<p>An important feature of data libraries importing is the ability to “link files instead of copying”. If you know your data will not be deleted (e.g. sequencing data sitting on an NFS), then you can use this option to further decrease the amount of storage your <span class="notranslate">Galaxy</span> server requires. The datasets can be used as if they were normal datasets, imported by users and analysed, but not imported into the <span class="notranslate">Galaxy</span> data storage area.</p>
+
+<h1 id="automatically-populating-a-data-library">Automatically Populating a Data Library</h1>
+
+<p>If your data is accessible via URL, you can write a yaml file to import and setup the data library automatically.
+We’ve included this file in the example data libraries repository we cloned at the beginning:</p>
+
+<blockquote class="code-in">
+  <h3 id="code-in-input-bash-2"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+  <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">cat</span> /libraries/example-library.yaml
+</code></pre></div>  </div>
+</blockquote>
+
+<blockquote class="code-out">
+  <h3 id="code-out-output-bash-1"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+  <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">---</span>
+<span class="na">destination</span><span class="pi">:</span>
+  <span class="na">type</span><span class="pi">:</span> <span class="s">library</span>
+  <span class="na">name</span><span class="pi">:</span> <span class="s">Mouse sequencing project</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">some data</span>
+  <span class="na">synopsis</span><span class="pi">:</span> <span class="s">samples collected from somewhere</span>
+<span class="na">items</span><span class="pi">:</span>
+<span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/wildtype.fna</span>
+  <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
+  <span class="na">ext</span><span class="pi">:</span> <span class="s">fasta</span>
+  <span class="na">info</span><span class="pi">:</span> <span class="s">https://doi.org/10.5281/zenodo.582600</span>
+<span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">A directory</span>
+  <span class="na">description</span><span class="pi">:</span> <span class="s">Exome sequencing means that all protein-coding genes in a genome are</span>
+  <span class="na">items</span><span class="pi">:</span>
+  <span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R1.fastq</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
+    <span class="na">ext</span><span class="pi">:</span> <span class="s">fastqsanger</span>
+    <span class="na">info</span><span class="pi">:</span> <span class="s">https://doi.org/10.5281/zenodo.582600</span>
+  <span class="pi">-</span> <span class="na">url</span><span class="pi">:</span> <span class="s">https://zenodo.org/api/files/287966da-5411-4f79-8cfb-0ffa84d0d6cc/mutant_R2.fastq</span>
+    <span class="na">src</span><span class="pi">:</span> <span class="s">url</span>
+    <span class="na">ext</span><span class="pi">:</span> <span class="s">fastqsanger</span>
+    <span class="na">info</span><span class="pi">:</span> <span class="s">https://doi.org/10.5281/zenodo.582600</span>
+</code></pre></div>  </div>
+</blockquote>
+
+<p>Let’s try setting that up in our <span class="notranslate">Galaxy</span>!</p>
+
+<blockquote class="tip">
+  <h3 id="tip-getting-your-admin-api-key"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Getting your admin API key</h3>
+
+  <p><span class="notranslate">Galaxy</span> admin accounts are specified as a comma-separated email list in the <code class="language-plaintext highlighter-rouge">admin_users</code> directive of <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.yml</code> . If you have set up your <span class="notranslate">Galaxy</span> server using the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, this is set to <code class="language-plaintext highlighter-rouge">admin@example.org</code>.</p>
+
+  <ol>
+    <li>In your browser, open your <span class="notranslate">Galaxy</span> homepage</li>
+    <li>Log in using the admin email, or register a new account with it if it is the first time you use it</li>
+    <li>Go to <code class="language-plaintext highlighter-rouge">User -&gt; Preferences</code> in the top menu bar, then click on <code class="language-plaintext highlighter-rouge">Manage API key</code></li>
+    <li>If there is no current API key available, click on <code class="language-plaintext highlighter-rouge">Create a new key</code> to generate it</li>
+    <li>Copy your API key to somewhere convenient, you will need it throughout this tutorial</li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-importing-data-library-yaml"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> hands-on: importing data library yaml.</h3>
+
+  <ol>
+    <li>
+      <p>re-activate the virtualenv you created for the <a href="/training-material/topics/admin/tutorials/tool-management/tutorial.html">ephemeris tool management tutorial</a>.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-3"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> input: bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>. ~/ephemeris_venv/bin/activate
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="tip">
+        <h3 id="tip-missing"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> missing?</h3>
+
+        <p>then you might need to re-run the steps:</p>
+
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>virtualenv <span class="nt">-p</span> python3 ~/ephemeris_venv
+<span class="nb">.</span> ~/ephemeris_venv/bin/activate
+pip <span class="nb">install </span>ephemeris
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>we’ll use the <code class="language-plaintext highlighter-rouge">setup-data-libraries</code> command to install the data in this yaml file into a library in our <span class="notranslate">galaxy</span>.</p>
+
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> input: bash</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>setup-data-libraries -g https://your-<span class="notranslate">galaxy</span> -k &lt;api-key&gt; --training -i /libraries/example-library.yaml --legacy
+</code></pre></div>        </div>
+      </blockquote>
+
+      <blockquote class="code-out">
+        <h3 id="code-out-output"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> output</h3>
+        <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library name: mouse sequencing project
+</code></pre></div>        </div>
+      </blockquote>
+    </li>
+    <li>
+      <p>this command is safe to re-run. for example if you update the yaml, it will simply report that the library exists before ensuring all files exist in their appropriate location:</p>
+
+      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>library name: mouse sequencing project
+library already exists! <span class="nb">id</span>: f597429621d6eb2b
+</code></pre></div>      </div>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p><img src="../../images/data/imported.png" alt="Screenshot of data libraries, we're in a library folder named &quot;Mouse sequencing project&quot; and a directory and single file are shown. The file has an ugly URL as its name" /></p>
+
+<p>That’s it! You should be able to see your newly created data library in your <span class="notranslate">Galaxy</span>.</p>
+
+<p>Note that we’ve used some special flags here, <code class="language-plaintext highlighter-rouge">--training</code> and <code class="language-plaintext highlighter-rouge">--legacy</code>. Training sets some defaults that make sense for the GTN (mostly around library descriptions / etc.)</p>
+
+<h3 id="--legacy"><code class="language-plaintext highlighter-rouge">--legacy</code></h3>
+
+<p>This enables the use of legacy APIs even for newer Galaxies that should have a batch upload API enabled. Unfortunately the new batch upload API is not able to update existing data libraries in place and will always create new libraries with the same name. So currently <code class="language-plaintext highlighter-rouge">--legacy</code> is quite useful for maintaining a YAML file, and running <code class="language-plaintext highlighter-rouge">setup-data-libraries</code> regularly whenever that file has updates.</p>
+
+<p>But this comes with the downside that the entire URL is used for the filename.</p>
+
+<h1 id="gtn-data">GTN Data</h1>
+
+<p>This process scales quite well. <span class="notranslate">Galaxy</span> Europe, in their mission to support all of the GTN materials on their server setup <a href="https://github.com/usegalaxy-eu/shared-data">a shared-data repository</a>, a single giant YAML file with all of the data from the GTN tutorials. This was then expanded to other Use<span class="notranslate">Galaxy</span>.* servers to provide synced training libraries for all of the major servers.</p>
+
+<p>Do you want the training data synced on your server? If so join the shared data repository! If you provide us with a non-admin API key and a data library to upload data into, we can sync this automatically.</p>
+
+<h1 id="using-data-from-libraries">Using Data from Libraries</h1>
+
+<p>Users can now conveniently use datasets in libraries when they are running analyses, without having to import them first.</p>
+
+<p>The tool form provides a button on the right of every dataset selector which allows users to “Browse datasets”</p>
+
+<p><img src="../../images/data/select-from-lib0.png" alt="tool form with the folder icon to the right of the dataset selector shown, the button with tooltip &quot;Browse datasets&quot; is highlighted" /></p>
+
+<p>Users can then choose from datasets in their history, or browse through the data libraries</p>
+
+<p><img src="../../images/data/select-from-lib1.png" alt="Popup with &quot;Data Libraries&quot;, datasets from histories, and an upload button" /></p>
+
+<p>Here users can see every file accessible to them in the data library to begin analysing.</p>
+
+<p><img src="../../images/data/select-from-lib2.png" alt="Same popup as previous image, but the file listing now shows the contents of the data library we created during the hands-on step with Mouse data" /></p>
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>Data libraries are a great way to share data with groups of users</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Data Libraries (Galaxy Server administration)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Helena Rasche, 2021 <b>Data Libraries (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/data-library/tutorial.html">/training-material/topics/admin/tutorials/data-library/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{admin-data-library,
+    author = "Helena Rasche",
+    title = "Data Libraries (Galaxy Training Materials)",
+    year = "2021",
+    month = "01",
+    day = "13"
+    url = "\url{/training-material/topics/admin/tutorials/data-library/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Helena Rasche)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/admin/tutorials/data-library/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
