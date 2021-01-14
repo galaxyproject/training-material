@@ -681,7 +681,6 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 > {% endif %}
 >                    - *"This is match/match_part data"*: `Yes`
->                        - *"Match Part Feature Type"*: Leave empty
 >
 {: .hands_on}
 
