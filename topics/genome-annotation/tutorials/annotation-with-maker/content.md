@@ -207,8 +207,8 @@ Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.w
 >
 > 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
->    - *"Re-annotate using an existing Maker annotation"*: `No`
 >    - *"Organism type"*: `Eukaryotic`
+>    - *"Re-annotate using an existing Maker annotation"*: `No`
 >    - In *"EST evidences (for best results provide at least one of these)"*:
 >        - {% icon param-file %} *"ESTs or assembled cDNA"*: `S_pombe_trinity_assembly.fasta`
 >    - In *"Protein evidences (for best results provide at least one of these)"*:
