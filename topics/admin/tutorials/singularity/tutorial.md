@@ -11,6 +11,7 @@ key_points:
 contributors:
   - torfinnnome
   - mvdbeek
+  - bernt-matthias
   - hexylena
 subtopic: features
 requirements:

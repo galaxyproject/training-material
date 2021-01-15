@@ -684,6 +684,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `acl`, `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
@@ -704,6 +705,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      become: true
 >    +      become_user: "{{ galaxy_user.name }}"
 >    ```
+>    {% endraw %}
 >
 >    > ### {% icon tip %} Miniconda fails to work
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
@@ -2008,7 +2010,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    And then deploy the new config file using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
 >
 >    {% raw %}
->    ```yaml
+>    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -59,6 +59,10 @@ galaxy_config:
@@ -2184,7 +2186,7 @@ If you need to run on a cluster with a shared file system, you will need to expo
 - `galaxy_server_dir`
 - `galaxy_venv_dir`
 
-Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two difference copies of them, if that is better for performance:
+Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two different copies of them, if that is better for performance:
 
 - `galaxy_server_dir`
 - `galaxy_venv_dir`
