@@ -30,7 +30,7 @@ An easy way to install and use the PDAUG toolset, and follow this tutorial is vi
 > 1. Downloading the docker image from the docker hub using `docker pull jayadevjoshi12/galaxy_pdaug:latest` command. 
 > 2. Running the container with latest PDAUG tools `docker run -i -t -p 8080:80 jayadevjoshi12/galaxy_pdaug:latest`.  
 > 3. Workflow is available under the workflow section, use `admin` as username and `password` as a password to login as an administrator of your galaxy instance.
-> 4. Use `admin` as username and `password` as a password to login galaxy instance, which is available at `http://127.0.0.1:8080` to access workflow and data.
+> 4. Use `admin` as username and `password` as a password to login galaxy instance, which is available at [localhost](http://127.0.0.1:8080) to access workflow and data.
 >
 {: .hands_on}
 
