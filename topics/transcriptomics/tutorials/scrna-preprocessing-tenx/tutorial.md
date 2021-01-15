@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
 title: "Pre-processing of 10X Single-Cell RNA Datasets"
+subtopic: single-cell
 zenodo_link: "https://zenodo.org/record/3457880"
 tags:
   - single-cell
@@ -243,8 +244,8 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 
 > ### {% icon hands_on %} Hands-on
-> 
-> **Build a Paired Collection** 
+>
+> **Build a Paired Collection**
 > {% include snippets/build_paired_list_collection.md %}
 >
 > **RNA STARsolo** {% icon tool %} with the following parameters:

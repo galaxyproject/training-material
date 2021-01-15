@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Reference-based RNA-Seq data analysis"
+subtopic: introduction
 tags:
     - bulk
     - rna-seq
@@ -167,8 +168,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences. 
->    > >    
+>    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
+>    > >
 >    > >    All files except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data)
 >    > >
 >    > >    ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")

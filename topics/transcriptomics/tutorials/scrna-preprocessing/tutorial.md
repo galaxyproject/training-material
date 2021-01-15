@@ -4,6 +4,7 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna_preprocessing/tutorial
 
 title: "Pre-processing of Single-Cell RNA Data"
+subtopic: single-cell
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
   - single-cell
