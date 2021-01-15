@@ -127,7 +127,7 @@ Before running the full annotation process, you need first to evaluate the quali
 > ### {% icon hands_on %} Hands-on: Get genome sequence statistics
 >
 > 1. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %} with the following parameters:
->    - {% icon param-file %} *"Sequences to analyse"*: select `{{ genome_name }}` from your history
+>    - {% icon param-file %} *"fasta or multifasta file"*: select `{{ genome_name }}` from your history
 >
 {: .hands_on}
 
@@ -207,8 +207,8 @@ Let's run Maker to predict gene models! Maker will use align [ESTs](https://en.w
 >
 > 1. {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Genome to annotate"*: select `{{ genome_name }}` from your history
->    - *"Re-annotate using an existing Maker annotation"*: `No`
 >    - *"Organism type"*: `Eukaryotic`
+>    - *"Re-annotate using an existing Maker annotation"*: `No`
 >    - In *"EST evidences (for best results provide at least one of these)"*:
 >        - {% icon param-file %} *"ESTs or assembled cDNA"*: `S_pombe_trinity_assembly.fasta`
 >    - In *"Protein evidences (for best results provide at least one of these)"*:
@@ -347,7 +347,7 @@ Now run BUSCO with the predicted transcript sequences:
 > > ### {% icon solution %} Solution
 > >
 > > {% if include.short %}
-> > 128 complete single-copy, 0 duplicated, 10 fragmented, 620 missing. This is in fact better than what BUSCO found in the genome sequence. That means the quality of this annotation is very good (by default BUSCO in genome mode can miss some genes, the advanced options can improve this at the cost of computing time).
+> > 128 complete single-copy, 0 duplicated, 10 fragmented, 620 missing. This is in fact better than what BUSCO found in the genome sequence. That means the quality of this annotation is very good (by default BUSCO in genome mode can miss some genes, the advanced options can improve this at the cost of computing time). (Results can be very slightly different in your own history, it's normal).
 > > {% else %}
 > > Around 100 complete single-copy, and 650 missing. As the quality of this first draft is yey not very good, you should see better results after next rounds of Maker.
 > > {% endif %}
@@ -595,8 +595,8 @@ If you look at the content of the `final annotation` dataset, you will notice th
 >
 > 1. {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11) %} with the following parameters:
 >    - {% icon param-file %} *"Maker annotation where to change ids"*: `final annotation` (output of {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %})
->    - *"Prefix for ids"*: `"TEST_"`
->    - *"Justify numeric ids to this length"*: `"6"`
+>    - *"Prefix for ids"*: `TEST_`
+>    - *"Justify numeric ids to this length"*: `6`
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -625,18 +625,17 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 >            - In *"Annotation Track"*:
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
->                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
 > {% if include.short %}
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of your {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
+>                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the output of {% tool [Map annotation ids](toolshed.g2.bx.psu.edu/repos/iuc/maker_map_ids/maker_map_ids/2.31.11) %}
 > {% else %}
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the final annotation of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
 > {% endif %}
->                    - *"This is match/match_part data"*: `No`
 >
 {: .hands_on}
 
 {% if include.short %}
-Enable the different tracks on the left side of JBrowse, then navigate along the genome and look at the genes that were predicted by Maker.
+Enable the track on the left side of JBrowse, then navigate along the genome and look at the genes that were predicted by Maker.
 {% else %}
 Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.
 
@@ -657,6 +656,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 {: .question}
 {% endif %}
 
+{% unless include.short %}
 ## More visualisation
 
 You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST alignments, protein alignments, ab-initio predictions, ...) by using JBrowse too.
@@ -675,18 +675,14 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 >            - In *"Annotation Track"*:
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
->                    - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
-> {% if include.short %}
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of your {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
-> {% else %}
+>                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
-> {% endif %}
 >                    - *"This is match/match_part data"*: `Yes`
->                        - *"Match Part Feature Type"*: Leave empty
 >
 {: .hands_on}
 
 You will now see new tracks displaying all the evidences used by Maker to generate consensus gene models.
+{% endunless %}
 
 # Conclusion
 {:.no_toc}
