@@ -76,12 +76,26 @@ Each feature (gene) is given a rank and score (negative or positive) depending o
 
 In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that may be helpful for treatment of various cancers. Here, we generate models using ERBB2, KRAS, PIK3CA, and AKT11 oncogenes from the ERK/RAS/PI3K signaling axis pathway.  **Have fun!**
 
+## **Pre-installed tutorial tools, datasets and workflows from the docker image**
+> An efficient way to install and run the tutorial using papaa tools is available on docker based galaxy instance that has pre-installed papaa tool-suite as **papaa** under tools section. Additionally this local galaxy instance comes with datasets and workflow for generating PI3K_OG classifier. Instructions to run the docker image is below.
+
+> ### {% icon hands_on %} Hands-on: Tutorial for galaxy docker container installation and running the workflow:
+> 1. Pulling the docker image from docker hub: Open a terminal and type the following command: 
+>       ```docker pull nvk747/galaxy_papaa:0.1.9```
+> 2. For running the docker container use the following command :
+>       ```docker run -p 8888:80 --detach nvk747/galaxy_papaa:0.1.9```
+> 3. Open the following [*http://localhost:8888*](http://localhost:8888) in your web browser.
+> 4. Use *'admin'* as username and *'password'* as password to login as **admin** into the docker galaxy instance.
+> 5. The Workflow **'papaa@0.1.9_PI3K_OG_model_tutorial'** from workflow section to run PI3K_OG tutorial is pre-installed.
+> 6. Instructions to get datasets from shared library is given in Hands-on: Data upload.
+{: .hands_on}
+
 ## **Get data for analysis from classifier to pharmocological correlations**
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the shared data library (`library`->`GTN-Material`->`PAPAA:PanCancer Aberrant Pathway Activity Analysis`->`DOI: 10.5281/zenodo.4306639#.X9FJF-lKgZE`
+> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker shared data library (`library`->`GTN-Material`->`PAPAA:PanCancer Aberrant Pathway Activity Analysis`->`DOI: 10.5281/zenodo.4306639#.X9FJF-lKgZE`
 >
 >    ```
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_DepMap_18Q1_maf_20180207.txt.gz
@@ -297,8 +311,8 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `compare_within_models.R` inputs
->    - \--pancan_model: location of pan and pan-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s dataset collections.
->    - \--alt_model: location of alt and alt-within-disease models classifier_summary.txt/s and classfier_coefficients.tsv/s dataset collections.
+>    - \--pancan_model: location of pan and pan-within-disease models classifier_summary.txt/s and classifier_coefficients.tsv/s dataset collections.
+>    - \--alt_model: location of alt and alt-within-disease models classifier_summary.txt/s and classifier_coefficients.tsv/s dataset collections.
 {: .details}
 
 > ### {% icon comment %} Outputs
@@ -555,7 +569,7 @@ In this step we use our classifier information and predict mutational status for
 {: .comment}
 
 ## **PanCancer external sample status prediction**
-In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822), where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wildtype MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.  
+In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822), where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.  
 ![GSE69822_samples_classification](../../images/aberrant_pi3k_pathway_analysis/external.png ") PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).")
 
 > ### {% icon hands_on %} Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model
