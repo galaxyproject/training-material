@@ -331,7 +331,7 @@ We could go through all of the variants in the VCF files and read them out of a 
 >       - **Track 3 - annotated reference**: Click on `Insert Track Group` and fill it with
 >           - "Track Category" to `annotated reference`
 >           - Click on `Insert Annotation Track` and fill it with
->               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "Track Type" to `GFF/GFF3/BED Features`
 >               - "GFF/GFF3/BED Track Data" to `https://zenodo.org/record/3531703/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3`
 >               - "JBrowse Track Type [Advanced]" to `Canvas Features`
 >               - Click on "JBrowse Styling Options [Advanced]"
