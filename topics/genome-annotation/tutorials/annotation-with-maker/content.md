@@ -635,7 +635,7 @@ With Galaxy, you can visualize the annotation you have generated using JBrowse. 
 {: .hands_on}
 
 {% if include.short %}
-Enable the different tracks on the left side of JBrowse, then navigate along the genome and look at the genes that were predicted by Maker.
+Enable the track on the left side of JBrowse, then navigate along the genome and look at the genes that were predicted by Maker.
 {% else %}
 Enable the three different tracks on the left side of JBrowse, then navigate along the genome and compare the three different annotations. You should see how Maker progressively produced more complex gene models.
 
@@ -656,6 +656,7 @@ Enable the three different tracks on the left side of JBrowse, then navigate alo
 {: .question}
 {% endif %}
 
+{% unless include.short %}
 ## More visualisation
 
 You might want to understand how a specific gene model was predicted by Maker. You can easily visualise the evidences used by Maker (EST alignments, protein alignments, ab-initio predictions, ...) by using JBrowse too.
@@ -675,16 +676,13 @@ You might want to understand how a specific gene model was predicted by Maker. Y
 >                - Click on *"Insert Annotation Track"*:
 >                - In *"1: Annotation Track"*:
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
-> {% if include.short %}
->                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of your {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
-> {% else %}
 >                    - {% icon param-files %} *"GFF/GFF3/BED Track Data"*: select the "evidences" output of each {% tool [Maker](toolshed.g2.bx.psu.edu/repos/iuc/maker/maker/2.31.11) %} run
-> {% endif %}
 >                    - *"This is match/match_part data"*: `Yes`
 >
 {: .hands_on}
 
 You will now see new tracks displaying all the evidences used by Maker to generate consensus gene models.
+{% endunless %}
 
 # Conclusion
 {:.no_toc}
