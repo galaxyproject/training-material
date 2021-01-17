@@ -205,6 +205,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +  - rabbitmq
 >     certbot_post_renewal: |
 >         systemctl restart nginx || true
+>    +    systemctl restart rabbitmq-server || true
 >     certbot_domains:
 >    @@ -100,3 +101,29 @@ nginx_ssl_role: usegalaxy_eu.certbot
 >     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
@@ -237,7 +238,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    vhost: /
 >    +  - user: galaxy_au
 >    +    password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->    +    vhosts: /pulsar/galaxy_au
+>    +    vhost: /pulsar/galaxy_au
 >    ```
 >    {% endraw %}
 >
@@ -246,13 +247,31 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -15,3 +15,4 @@
->         - role: uchida.miniconda
->           become: true
->           become_user: galaxy
->         - galaxyproject.cvmfs
+>    @@ -25,4 +26,3 @@
+>         - usegalaxy_eu.galaxy_systemd
 >    +    - usegalaxy_eu.rabbitmq
+>         - galaxyproject.nginx
 >    ```
+>
+>    > ### {% icon tip %} Why is this at the end?
+>    > This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.
+>    >
+>    > Here are the dependencies between the roles:
+>    >
+>    > From             | To               | Purpose
+>    > ---------------- | --               | -------
+>    > nginx            | galaxy           | The nginx templates depend on variables only available after the Galaxy role is run
+>    > SSL certificates | nginx            | A running nginx is required
+>    > RabbitMQ         | SSL certificates | RabbitMQ will silently start with incorrect configuration if SSL certificates are not present at boot time.
+>    > Galaxy           | RabbitMQ         | Galaxy needs the RabbitMQ available to submit jobs.
+>    >
+>    > And as you can see there is a circular dependency. Galaxy requires RabbitMQ, but RabbitMQ depends on a long chain of things that depends finally on Galaxy.
+>    >
+>    > There are some mitigating factors, some software will start with incomplete configuration. We can rely on Galaxy retrying access to RabbitMQ if it isn't already present. Additionally on first run, Galaxy is restarted by a handler which runs at the end. (Except that the nginx role triggers all pending handlers as part of the SSL certificate deployment.)
+>    >
+>    > We try to present the optimal version here but due to these interdependencies and Ansible specifics, sometimes it is not possible to determine a good ordering of roles, and multiple runs might be required.
+>    >
+>    {: .tip}
 >
 > 4. Run the playbook.
 >
@@ -327,6 +346,30 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    But wait! There are more ways it can go wrong. To be extra sure, run a quick `curl` command.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > curl http://localhost:5672
+>    > curl -k https://localhost:5671
+>    > ```
+>    {: .code-in}
+>
+>    > ### {% icon code-out %} Output: Bash
+>    >
+>    > These should *both* report the same response:
+>    >
+>    > ```console
+>    > curl: (1) Received HTTP/0.9 when not allowed
+>    > ```
+>    >
+>    > if they don't, consider the following debugging steps:
+>    >
+>    > 1. Restarting RabbiMQ
+>    > 2. Check that the configuration looks correct (ssl private key path looks valid)
+>    > 3. Check that the private key is shared correctly with the rabbitmq user
+>    {: .code-out.code-max-300}
+>
 {: .hands_on}
 
 
@@ -367,7 +410,8 @@ Some of the other options we will be using are:
 >
 >    {% raw %}
 >    ```yaml
->    galaxy_server_url: #please put the your Galaxy server's fqdn or ip address here (or the fqdn or ip address of the RabbitMQ server).
+>    galaxy_server_url: # Important!!!
+>    # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >
 >    pulsar_root: /mnt/pulsar
 >
@@ -426,7 +470,7 @@ Some of the other options we will be using are:
 >
 >    ```ini
 >    [pulsarservers]
->    <ip_address of your pulsar server>
+>    <ip_address or fqdn of your pulsar server> ansible_user=<username to login with>
 >    ```
 >
 {: .hands_on}
@@ -470,13 +514,19 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 
 > ### {% icon hands_on %} Hands-on: Run the Playbook
 >
-> 1. Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
+> 1. Run the playbook.
 >
->    ```bash
->    ansible-playbook pulsar.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```bash
+>    > ansible-playbook pulsar.yml
+>    > ```
+>    {: .code-in}
 >
 >    After the script has run, pulsar will be installed on the remote machines!
+>
+>    > ### {% icon tip %} Connection issues?
+>    > If your remote pulsar machine uses a different key, you may need to supply the `ansible-playbook` command with the private key for the connection using the `--private-key key.pem` option.
+>    {: .tip}
 >
 > 2. Log in to the machines and have a look in the `/mnt/pulsar` directory. You will see the venv and config directories. All the config files created by Ansible can be perused.
 >
@@ -505,7 +555,7 @@ There are three things we need to do here:
 >    {% raw %}
 >    ```xml
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
+>        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param>
 >        <param id="amqp_ack_republish_time">1200</param>
 >        <param id="amqp_acknowledge">True</param>
 >        <param id="amqp_consumer_timeout">2.0</param>
@@ -538,16 +588,30 @@ There are three things we need to do here:
 >
 >    Add the following to the end of the `job_conf.xml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
 >
->    ```xml
->    <tools>
->        <tool id="bwa" destination="pulsar"/>
->        <tool id="bwa_mem" destination="pulsar"/>
->    </tools>
+>    ```diff
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
+>    @@ -35,6 +35,7 @@
+>
+>         </destinations>
+>         <tools>
+>    +        <tool id="bwa" destination="pulsar"/>
+>    +        <tool id="bwa_mem" destination="pulsar"/>
+>         </tools>
+>     </job_conf>
 >    ```
 >
 >    You can use the full tool ID here (toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.
 >
-> 3. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
+> 3. Install `bwa` from the admin installation interface if it is missing.
+>
+>    1. Access the admin menu from the top bar (only available if logged in with the admin_user email)
+>    2. Click "Install and Uninstall", which can be found on the left, under "Tool Management"
+>    3. Enter `bwa` in the search interface
+>    4. Click on the first hit, from `devteam`
+>    5. Click the "Install" button for the latest version and enter "Mapping" for the target section.
+>
+> 4. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
 {: .hands_on}
 

@@ -247,7 +247,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    - src: usegalaxy_eu.galaxy_systemd
 >      version: 0.1.4
 >    - src: usegalaxy_eu.certbot
->      version: 0.1.3
+>      version: 0.1.5
 >    ```
 >
 >    > ### {% icon details %} What do each of these roles do?
@@ -1989,6 +1989,10 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >        </tools>
 >    </job_conf>
 >    ```
+>
+>    > ### {% icon tip %} workers=4
+>    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    {: .tip}
 >
 > 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
 >
