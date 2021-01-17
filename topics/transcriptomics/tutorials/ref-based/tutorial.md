@@ -3,6 +3,8 @@ layout: tutorial_hands_on
 
 title: "Reference-based RNA-Seq data analysis"
 subtopic: introduction
+priority: 2
+
 tags:
     - bulk
     - rna-seq
