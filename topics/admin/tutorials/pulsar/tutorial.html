@@ -545,6 +545,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -590,6 +592,8 @@
                                 
                             
                             </li>
+                        
+                    
                         
                     
                         
@@ -723,7 +727,11 @@
                     
                         
                     
+                        
+                    
                 
+                    
+                        
                     
                         
                     
@@ -857,7 +865,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 4, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 13, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -1078,7 +1086,8 @@
 <span class="gi">+  - rabbitmq
 </span> certbot_post_renewal: |
      systemctl restart nginx || true
- certbot_domains:
+<span class="gi">+    systemctl restart rabbitmq-server || true
+</span> certbot_domains:
 <span class="p">@@ -100,3 +101,29 @@</span> nginx_ssl_role: use<span class="notranslate">galaxy</span>_eu.certbot
  nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
  nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
@@ -1110,7 +1119,7 @@
 +    vhost: /
 +  - user: <span class="notranslate">galaxy</span>_au
 +    password: "{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}"  #This password is set in group_vars/all.yml
-+    vhosts: /pulsar/<span class="notranslate">galaxy</span>_au
++    vhost: /pulsar/<span class="notranslate">galaxy</span>_au
 </span></code></pre></div>      </div>
     </li>
     <li>
@@ -1118,13 +1127,57 @@
 
       <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/<span class="notranslate">galaxy</span>.yml
 </span><span class="gi">+++ b/<span class="notranslate">galaxy</span>.yml
-</span><span class="p">@@ -15,3 +15,4 @@</span>
-     - role: uchida.miniconda
-       become: true
-       become_user: <span class="notranslate">galaxy</span>
-     - <span class="notranslate">galaxy</span>project.cvmfs
+</span><span class="p">@@ -25,4 +26,3 @@</span>
+     - use<span class="notranslate">galaxy</span>_eu.<span class="notranslate">galaxy</span>_systemd
 <span class="gi">+    - use<span class="notranslate">galaxy</span>_eu.rabbitmq
-</span></code></pre></div>      </div>
+</span>     - <span class="notranslate">galaxy</span>project.nginx
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+        <h3 id="tip-why-is-this-at-the-end"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Why is this at the end?</h3>
+        <p>This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.</p>
+
+        <p>Here are the dependencies between the roles:</p>
+
+        <table>
+          <thead>
+            <tr>
+              <th>From</th>
+              <th>To</th>
+              <th>Purpose</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>nginx</td>
+              <td><span class="notranslate">galaxy</span></td>
+              <td>The nginx templates depend on variables only available after the <span class="notranslate">Galaxy</span> role is run</td>
+            </tr>
+            <tr>
+              <td>SSL certificates</td>
+              <td>nginx</td>
+              <td>A running nginx is required</td>
+            </tr>
+            <tr>
+              <td>RabbitMQ</td>
+              <td>SSL certificates</td>
+              <td>RabbitMQ will silently start with incorrect configuration if SSL certificates are not present at boot time.</td>
+            </tr>
+            <tr>
+              <td><span class="notranslate">Galaxy</span></td>
+              <td>RabbitMQ</td>
+              <td><span class="notranslate">Galaxy</span> needs the RabbitMQ available to submit jobs.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <p>And as you can see there is a circular dependency. <span class="notranslate">Galaxy</span> requires RabbitMQ, but RabbitMQ depends on a long chain of things that depends finally on <span class="notranslate">Galaxy</span>.</p>
+
+        <p>There are some mitigating factors, some software will start with incomplete configuration. We can rely on <span class="notranslate">Galaxy</span> retrying access to RabbitMQ if it isn’t already present. Additionally on first run, <span class="notranslate">Galaxy</span> is restarted by a handler which runs at the end. (Except that the nginx role triggers all pending handlers as part of the SSL certificate deployment.)</p>
+
+        <p>We try to present the optimal version here but due to these interdependencies and Ansible specifics, sometimes it is not possible to determine a good ordering of roles, and multiple runs might be required.</p>
+
+      </blockquote>
     </li>
     <li>
       <p>Run the playbook.</p>
@@ -1200,6 +1253,32 @@
 <span class="err">Interface:</span> <span class="nn">[::]</span><span class="err">,</span> <span class="err">port:</span> <span class="err">5672,</span> <span class="err">protocol:</span> <span class="err">amqp,</span> <span class="err">purpose:</span> <span class="err">AMQP</span> <span class="err">0-9-1</span> <span class="err">and</span> <span class="err">AMQP</span> <span class="err">1.0</span>
 <span class="err">Interface:</span> <span class="err">0.0.0.0,</span> <span class="err">port:</span> <span class="err">5671,</span> <span class="err">protocol:</span> <span class="err">amqp/ssl,</span> <span class="err">purpose:</span> <span class="err">AMQP</span> <span class="err">0-9-1</span> <span class="err">and</span> <span class="err">AMQP</span> <span class="err">1.0</span> <span class="err">over</span> <span class="err">TLS</span>
 </code></pre></div>    </div>
+  </blockquote>
+
+  <p>But wait! There are more ways it can go wrong. To be extra sure, run a quick <code class="language-plaintext highlighter-rouge">curl</code> command.</p>
+
+  <blockquote class="code-in">
+    <h3 id="code-in-input-bash-4"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>curl http://localhost:5672
+curl <span class="nt">-k</span> https://localhost:5671
+</code></pre></div>    </div>
+  </blockquote>
+
+  <blockquote class="code-out code-max-300">
+    <h3 id="code-out-output-bash-2"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Bash</h3>
+
+    <p>These should <em>both</em> report the same response:</p>
+
+    <div class="language-console highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="go">curl: (1) Received HTTP/0.9 when not allowed
+</span></code></pre></div>    </div>
+
+    <p>if they don’t, consider the following debugging steps:</p>
+
+    <ol>
+      <li>Restarting RabbiMQ</li>
+      <li>Check that the configuration looks correct (ssl private key path looks valid)</li>
+      <li>Check that the private key is shared correctly with the rabbitmq user</li>
+    </ol>
   </blockquote>
 
 </blockquote>
@@ -1283,7 +1362,8 @@
     <li>
       <p>Create a new file in <code class="language-plaintext highlighter-rouge">group_vars</code> called <code class="language-plaintext highlighter-rouge">pulsarservers.yml</code> and set some of the above variables as well as some others.</p>
 
-      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_server_url</span><span class="pi">:</span> <span class="c1">#please put the your <span class="notranslate">Galaxy</span> server's fqdn or ip address here (or the fqdn or ip address of the RabbitMQ server).</span>
+      <div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na"><span class="notranslate">galaxy</span>_server_url</span><span class="pi">:</span> <span class="c1"># Important!!!</span>
+<span class="c1"># Put your <span class="notranslate">Galaxy</span> server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.</span>
 
 <span class="na">pulsar_root</span><span class="pi">:</span> <span class="s">/mnt/pulsar</span>
 
@@ -1342,7 +1422,7 @@
       <p>Add the following lines to your <code class="language-plaintext highlighter-rouge">hosts</code> file:</p>
 
       <div class="language-ini highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nn">[pulsarservers]</span>
-<span class="err">&lt;ip_address</span> <span class="err">of</span> <span class="err">your</span> <span class="err">pulsar</span> <span class="err">server&gt;</span>
+<span class="err">&lt;ip_address</span> <span class="err">or</span> <span class="err">fqdn</span> <span class="err">of</span> <span class="err">your</span> <span class="err">pulsar</span> <span class="err">server&gt;</span> <span class="py">ansible_user</span><span class="p">=</span><span class="s">&lt;use<span class="notranslate">rna</span>me to login with&gt;</span>
 </code></pre></div>      </div>
     </li>
   </ol>
@@ -1391,12 +1471,20 @@
 
   <ol>
     <li>
-      <p>Run the playbook. If your remote pulsar machine uses a different key, you may need to supply the <code class="language-plaintext highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="language-plaintext highlighter-rouge">--private-key key.pem</code> option.</p>
+      <p>Run the playbook.</p>
 
-      <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar.yml
-</code></pre></div>      </div>
+      <blockquote class="code-in">
+        <h3 id="code-in-input-bash-5"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: Bash</h3>
+        <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ansible-playbook pulsar.yml
+</code></pre></div>        </div>
+      </blockquote>
 
       <p>After the script has run, pulsar will be installed on the remote machines!</p>
+
+      <blockquote class="tip">
+        <h3 id="tip-connection-issues"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Connection issues?</h3>
+        <p>If your remote pulsar machine uses a different key, you may need to supply the <code class="language-plaintext highlighter-rouge">ansible-playbook</code> command with the private key for the connection using the <code class="language-plaintext highlighter-rouge">--private-key key.pem</code> option.</p>
+      </blockquote>
     </li>
     <li>
       <p>Log in to the machines and have a look in the <code class="language-plaintext highlighter-rouge">/mnt/pulsar</code> directory. You will see the venv and config directories. All the config files created by Ansible can be perused.</p>
@@ -1432,7 +1520,7 @@
       <p>In your <code class="language-plaintext highlighter-rouge">templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2</code> file add the following job runner to the <code class="language-plaintext highlighter-rouge">&lt;plugins&gt;</code> section:</p>
 
       <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;plugin</span> <span class="na">id=</span><span class="s">"pulsar_runner"</span> <span class="na">type=</span><span class="s">"runner"</span> <span class="na">load=</span><span class="s">"<span class="notranslate">galaxy</span>.jobs.runners.pulsar:PulsarMQJobRunner"</span> <span class="nt">&gt;</span>
-    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_url"</span><span class="nt">&gt;</span>pyamqp://<span class="notranslate">galaxy</span>_au:{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}<span class="nt">&lt;/param&gt;</span>
+    <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_url"</span><span class="nt">&gt;</span>pyamqp://<span class="notranslate">galaxy</span>_au:{{ rabbitmq_password_<span class="notranslate">galaxy</span>_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_ack_republish_time"</span><span class="nt">&gt;</span>1200<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_acknowledge"</span><span class="nt">&gt;</span>True<span class="nt">&lt;/param&gt;</span>
     <span class="nt">&lt;param</span> <span class="na">id=</span><span class="s">"amqp_consumer_timeout"</span><span class="nt">&gt;</span>2.0<span class="nt">&lt;/param&gt;</span>
@@ -1462,13 +1550,30 @@ We need to know the full id of the tool in question, we can get this out of the 
 
       <p>Add the following to the end of the <code class="language-plaintext highlighter-rouge">job_conf.xml</code> file (inside the <code class="language-plaintext highlighter-rouge">&lt;tools&gt;</code> section if it exists or create it if it doesn’t.)</p>
 
-      <div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;tools&gt;</span>
-    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"bwa"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
-    <span class="nt">&lt;tool</span> <span class="na">id=</span><span class="s">"bwa_mem"</span> <span class="na">destination=</span><span class="s">"pulsar"</span><span class="nt">/&gt;</span>
-<span class="nt">&lt;/tools&gt;</span>
+      <div class="language-diff highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="gd">--- a/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
+</span><span class="p">@@ -35,6 +35,7 @@</span>
+
+     &lt;/destinations&gt;
+     &lt;tools&gt;
+<span class="gi">+        &lt;tool id="bwa" destination="pulsar"/&gt;
++        &lt;tool id="bwa_mem" destination="pulsar"/&gt;
+</span>     &lt;/tools&gt;
+ &lt;/job_conf&gt;
 </code></pre></div>      </div>
 
       <p>You can use the full tool ID here (<span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.</p>
+    </li>
+    <li>
+      <p>Install <code class="language-plaintext highlighter-rouge">bwa</code> from the admin installation interface if it is missing.</p>
+
+      <ol>
+        <li>Access the admin menu from the top bar (only available if logged in with the admin_user email)</li>
+        <li>Click “Install and Uninstall”, which can be found on the left, under “Tool Management”</li>
+        <li>Enter <code class="language-plaintext highlighter-rouge">bwa</code> in the search interface</li>
+        <li>Click on the first hit, from <code class="language-plaintext highlighter-rouge">devteam</code></li>
+        <li>Click the “Install” button for the latest version and enter “<span class="notranslate">Mapping</span>” for the target section.</li>
+      </ol>
     </li>
     <li>
       <p>Run the <span class="notranslate">Galaxy</span> playbook in order to deploy the updated job configuration, and to restart <span class="notranslate">Galaxy</span>.</p>
@@ -1635,7 +1740,7 @@ https://zenodo.org/record/582600/files/mutant_R2.fastq
     title = "Running Jobs on Remote Resources with Pulsar (Galaxy Training Materials)",
     year = "2021",
     month = "01",
-    day = "04"
+    day = "13"
     url = "\url{/training-material/topics/admin/tutorials/pulsar/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

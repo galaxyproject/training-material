@@ -260,6 +260,9 @@ slide to change on the other. Useful when presenting.
 - Written in XML it connects your server with the available cluster resources.
 - You can configure it in myriad ways.
 - Study the advanced sample provided with codebase once you get a basic understanding.
+- There are several major components of the job conf file.
+- Plugins, handlers, destinations, tools, resources, and limits.
+- We'll go into detail on each of these in the tutorial.
 
 ---
 
@@ -275,6 +278,7 @@ Can restart Galaxy without interrupting jobs
 
 - Galaxy itself is not resource hungry, but the jobs often are.
 - Offloading the jobs to different machines is a more sustainable and reliable setup.
+- This can prevent user jobs from making Galaxy unresponsive.
 
 ---
 
@@ -296,8 +300,9 @@ Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com
 
 ???
 
-- Galaxy supports plugins for various job runners covering most of the popular ones.
-- Galaxy community also maintains its own called Pulsar.
+- Galaxy supports plugins for various job runners covering most of the popular DRMs.
+- The Galaxy community also maintains its own job management system called Pulsar.
+- If the scheduler you use is missing, talk to us!
 
 ---
 
@@ -307,7 +312,10 @@ Correspond to job runner plugins in [lib/galaxy/jobs/runners](https://github.com
 
 ???
 
-- There are underlying technologies that you are going to depend on.
+- The cluster library stack we use in this tutorial will use DRMAA.
+- DRMAA is an interface that many distributed resource managers provide.
+- Galaxy can use DRMAA to interact with these in an agnostic manner.
+- However, there are more underlying technologies that you are going to depend on.
 - You don't need to have an in-depth understanding to run cluster deployment correctly.
 
 ---
@@ -320,13 +328,15 @@ Define which Galaxy processes are job handlers
 - Dedicated handlers can be reserved, e.g. for small, high throughput jobs
 - The list of plugins that are loaded by a job handler can be limited using `&lt;plugin&gt;` subelements (e.g. when the DRMAA plugin needs to be loaded with different library paths)
 - Not defined in `job_conf.xml` when using *job handler mules*
+- Defines how jobs are assigned to individual processes (use `db-skip-locked` !)
 
 ???
 
-- The next set of slides is about configuration sections of the job configuration file.
-- The first is the handler section.
-- You match Galaxy with the separate handler process using this configuration
-- Handlers can be customized and jobs sent to them can be filtered.
+- Handlers are the Galaxy processes which interact with the cluster.
+- You can define dedicated handlers for different types of jobs, or to interact with different clusters.
+- Additionally, handlers definition in the job configuration controls how jobs are assigned to individual processes.
+- There are many options for the assignment process, all are discussed in the advanced sample job configuration.
+- db-skip-locked is the best choice for most cases, it enables handlers to grab multiple jobs to work on at once.
 
 ---
 
@@ -334,15 +344,17 @@ Define which Galaxy processes are job handlers
 
 Define *how* jobs should be run
 
-- Which plugin?
+- Which plugin? (Slurm, Condor, Pulsar, etc?)
 - In a Docker container? Which one?
 - **DRM params** (queue, cores, memory, walltime)?
 - Environment (variables e.g. `$PATH`, source an env file, run a command)?
 
 ???
 
-- The destination section of the job configuration file is a map that defines what jobs are going where.
+- The destination section of the job configuration file is a map that defines which jobs go where.
+- Jobs from any destination, can be processed by any plugin.
 - Every job will find a path through this configuration and eventually get dispatched to the matching runner.
+- These destinations can specify things like environment variables or resource requirements.
 
 ---
 
@@ -355,9 +367,6 @@ Define *how* jobs should be run
     &lt;plugins&gt;
         &lt;plugin id=&quot;local&quot; type=&quot;runner&quot; load=&quot;galaxy.jobs.runners.local:LocalJobRunner&quot; workers=&quot;4&quot;/&gt;
     &lt;/plugins&gt;
-    &lt;handlers&gt;
-        &lt;handler id=&quot;main&quot;/&gt;
-    &lt;/handlers&gt;
     &lt;destinations&gt;
         &lt;destination id=&quot;local&quot; runner=&quot;local&quot;/&gt;
     &lt;/destinations&gt;
@@ -366,7 +375,9 @@ Define *how* jobs should be run
 
 ???
 
-- The default job configuration is using a local runner and the main process as a handler.
+- This is the default job configuration.
+- It uses a local runner with 4 workers, or processes to process jobs.
+- As a result if you restart Galaxy, jobs will be lost.
 
 ---
 
@@ -379,6 +390,8 @@ Both destinations and handlers can be grouped by **tags**
 
 ???
 
+- Tags can be applied to both destinations and handlers.
+- This permits selecting randomly amongst the handlers or destinations.
 - Tags can help the load distribution.
 
 ---
@@ -412,7 +425,10 @@ Available limits
 
 ???
 
-- Configuration of job limits are provided by your DRM, but some basic ones are available through Galaxy.
+- Configuration of job limits is best acommplished using both the DRM provided limits and the ones from Galaxy.
+- Walltime is best set in your DRM, while output size is only possible through Galaxy.
+- We recommend you set these at the DRM level which is better equipped to terminate misbehaving jobs.
+- The most important limit however is usually concurrency.
 
 ---
 
@@ -427,8 +443,9 @@ Available limits
 
 ???
 
-- Using concurrency limits you can balance your instance between internal and external users.
-- Or between various internal teams.
+- Using concurrency limits lets you ensure quality of service for everyone.
+- By limiting jobs per user, you can prevent a single user from overwhelming the server, and ensure everyone can run jobs.
+- Additionally with concurrency limits you can balance your instance between internal and external users.
 
 ---
 
@@ -437,6 +454,11 @@ Available limits
 Most job plugins require a **shared filesystem** between the Galaxy server and compute.
 
 The exception is **Pulsar**. More on this in *Using heterogeneous compute resources*
+
+???
+
+- Most DRMs require a shared filesystem to ensure datasets are available to the jobs.
+- Galaxy's Pulsar does not, and can be used in situations where no shared filesystem is available.
 
 ---
 
@@ -455,6 +477,13 @@ The first can be worked around with symlinks or Pulsar embedded (later)
 
 The second can be worked around with Pulsar REST/MQ (with a performance/throughput penalty)
 
+???
+
+- For the DRMs which require a shared filesystem there are additional requirements.
+- First, Galaxy and the tool dependencies are at the same location on the head and compute nodes.
+- Job directories must be in a shared location on both head and compute nodes.
+- This is mentioned in more detail in the tutorial.
+
 ---
 
 # Multiprocessing
@@ -472,7 +501,8 @@ Tool configs: Consume `\${GALAXY_SLOTS:-4}`
 ???
 
 - For multiprocessing to be available both the tool and the Galaxy tool wrapper need to support it.
-- Admin needs to understand what tools are being run and set destinations for them with the appropriate specification.
+- You need to understand what tools are being run and set destinations for them with the appropriate specification.
+- You'll need to check for presence of GALAXY_SLOTS in the tool wrappers and tool macros to see if the tool supports multiple threads.
 
 ---
 
@@ -490,6 +520,12 @@ For Java tools, be sure to set `-Xmx`, e.g.:
 &lt;/destination&gt;
 ```
 
+???
+
+- Memory requirements can be set as well.
+- For some tools, you'll need to additionally provide environment variables to specify memory limits.
+- This is different per DRM.
+
 ---
 
 # Run jobs as the &quot;real&quot; user
@@ -503,8 +539,8 @@ See: [Cluster documentation](https://wiki.galaxyproject.org/Admin/Config/Perform
 
 ???
 
-- If you galaxy users map to the systme users you can make galaxy invisible to your DRM.
-- This allows proper resource accounting.
+- If you galaxy users map to the system users you can have Galaxy run the jobs with the account of those users.
+- This allows proper resource accounting, but comes at some additional configuration complexities.
 
 ---
 
@@ -513,6 +549,11 @@ See: [Cluster documentation](https://wiki.galaxyproject.org/Admin/Config/Perform
 Problem: Tool A uses single core, Tool B uses multiple
 - Both submit to the same cluster
 - Need different submit parameters (`--ntasks=1` vs. `--ntasks=4` in Slurm)
+
+???
+
+- Mapping tools to destinations is the heart of the job configuration.
+- This permits you to define which tools go to which destinations, and what resources they need.
 
 ---
 
@@ -532,11 +573,22 @@ Solution:
     &lt;/tools&gt;
 ```
 
+???
+
+- Here is an example mapping the hisat2 tool to a definition named multi.
+- The multi destination specifies that 4 cores should be allocated for each job, and uses the slurm plugin.
+
 ---
 
 # The Dynamic Job Runner
 
 For when basic tool-to-destination mapping isn't enough
+
+???
+
+- However this static mapping sometimes isn't sufficient.
+- Here a dynamic mapping can be used instead.
+- Galaxy has several different methods for accomplishing this.
 
 ---
 
@@ -552,6 +604,11 @@ Map jobs to destinations on more than just tool IDs
 
 See: [Dynamic Destination Mapping](https://docs.galaxyproject.org/en/master/admin/jobs.html#dynamic-destination-mapping)
 
+???
+
+- There are two built in ways to do this: dynamic tool destinations, and custom Python functions.
+- We will cover both of these in the tutorial.
+
 ---
 
 ## Dynamic Tool Destinations
@@ -563,6 +620,12 @@ See: [Dynamic Destination Mapping](https://docs.galaxyproject.org/en/master/admi
   - Input dataset number of records
   - User
 - Maps to static destinations defined in job config
+
+???
+
+- The Dynamic Tool Destinations are written as a yaml file.
+- You can easily write rules based on file input sizes or number of inputs or user information.
+- This can be used to determine memory and cpu allocations.
 
 ---
 
@@ -581,12 +644,13 @@ See: [Dynamic Destination Mapping](https://docs.galaxyproject.org/en/master/admi
     - ...?
 - Can dynamically modify destinations in job config (i.e. `sbatch` params)
 
----
+???
 
-## Tool Dependency Resolution
-
-- Galaxy can resolve dependencies using Conda, Singularity, Docker, and other systems like Modules
-- You can read more about this in the [Galaxy Tool Management with Ephemeris slides](../tool-management/slides.html)
+- If Dynamic Tool Destinations are insufficiently flexible, then custom Python functions can be written.
+- These can use any arbitrary information you want.
+- They have full access to submitter information, job parameters, and any other resource you might want.
+- They can dynamically modify destination parameters during runtime.
+- If you need flexibility, these are what you want.
 
 
 

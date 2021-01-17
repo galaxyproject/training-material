@@ -237,6 +237,7 @@
   "name": "Hands-on for 'Use Singularity containers for running Galaxy jobs' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/admin/tutorials/singularity/tutorial.html",
   "timeRequired": "PT1H",
+  "keywords": "jobs",
   "description": "The objectives are:\n - Configure your Galaxy to use Singularity and BioContainers for running jobs\n\n",
   "coursePrerequisites": [
     {
@@ -472,6 +473,8 @@
                     
                         
                     
+                        
+                    
                 
                     
                         
@@ -561,6 +564,8 @@
                     
                         
                     
+                        
+                    
                 
             </ul>
         
@@ -600,7 +605,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 15, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 17, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -806,9 +811,10 @@ This message shows that your installation appears to be working correctly.
 </span><span class="gi">+++ b/templates/<span class="notranslate">galaxy</span>/config/job_conf.xml.j2
 </span><span class="p">@@ -3,7 +3,9 @@</span>
      &lt;/plugins&gt;
-     &lt;destinations&gt;
-<span class="gd">-        &lt;destination id="local_destination" runner="local_plugin"/&gt;
-</span><span class="gi">+        &lt;destination id="local_destination" runner="local_plugin"&gt;
+<span class="gd">-    &lt;destinations default="local_destination"&gt;
+</span><span class="gi">+    &lt;destinations default="singularity"&gt;
+</span>         &lt;destination id="local_destination" runner="local_plugin"/&gt;
+<span class="gi">+        &lt;destination id="singularity" runner="local_plugin"&gt;
 +            &lt;param id="singularity_enabled"&gt;true&lt;/param&gt;
 +            &lt;!-- Ensuring a consistent collation environment is good for reproducibility. --&gt;
 +            &lt;env id="LC_ALL"&gt;C&lt;/env&gt;
@@ -997,7 +1003,7 @@ After finishing the CVMFS tutorial, come back, and do this hands-on.
     title = "Use Singularity containers for running Galaxy jobs (Galaxy Training Materials)",
     year = "2021",
     month = "01",
-    day = "15"
+    day = "17"
     url = "\url{/training-material/topics/admin/tutorials/singularity/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
