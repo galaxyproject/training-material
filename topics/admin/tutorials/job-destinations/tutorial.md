@@ -242,12 +242,6 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +        </destination>
 >         </destinations>
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
->             <tool id="testing" destination="slurm-2c"/>
->    +        <tool id="testing" destination="dynamic_admin_only" />
->         </tools>
->     </job_conf>
 >    ```
 >
 >    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
@@ -304,7 +298,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >            upper_bound: Infinity
 >            destination: slurm-2c
 >        default_destination: slurm
->    default_destination: local_singularity
+>    default_destination: slurm 
 >    verbose: True
 >    ```
 >
@@ -312,7 +306,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    - If the tool has ID `testing`:
 >      - If the input dataset is >=16 bytes, run on the destination `slurm-2c`
 >      - If the input dataset is <16 bytes, run on the destination `slurm`
->    - Else, run on the destination `local_singularity`
+>    - Else, run on the destination `slurm`
 >
 > 2. We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy_config` > `galaxy`. Additionally we need to add a `galaxy_config_files` entry to ensure it is deployed.
 >

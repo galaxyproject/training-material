@@ -352,16 +352,15 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >                 <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
 >    @@ -15,7 +16,7 @@
 >         </plugins>
->    -    <destinations default="local_singularity">
+>    -    <destinations default="local_destination">
 >    +    <destinations default="slurm">
->             <destination id="local_destination" runner="local_plugin"/>
 >    +        <destination id="slurm" runner="slurm">
 >    +            <param id="singularity_enabled">true</param>
 >    +            <env id="LC_ALL">C</env>
 >    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
 >    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
 >    +        </destination>
->             <destination id="local_singularity" runner="local_plugin">
+>             <destination id="local_destination" runner="local_plugin">
 >                 <param id="singularity_enabled">true</param>
 >                 <!-- Ensuring a consistent collation environment is good for reproducibility. -->
 >    ```
