@@ -167,9 +167,9 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    +galaxy_config_files:
 >    +- src: files/galaxy/config/dependency_resolvers_conf.xml
->    +  dest: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +- src: files/galaxy/config/container_resolvers_conf.xml
->    +  dest: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    +  dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    ```
 >    {% endraw %}
 >

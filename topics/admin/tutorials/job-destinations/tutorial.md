@@ -80,7 +80,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -71,6 +71,8 @@ galaxy_config_files:
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
->       dest: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >
 >    +galaxy_local_tools:
 >    +- testing.xml
@@ -329,7 +329,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    +- src: files/galaxy/config/tool_destinations.yml
 >    +  dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
->       dest: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    ```
 >    {% endraw %}
 >
