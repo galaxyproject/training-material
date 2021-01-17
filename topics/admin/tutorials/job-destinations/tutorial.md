@@ -422,10 +422,10 @@ Such form elements can be added to tools without modifying each tool's configura
 >         farm: job-handlers:1,2
 >
 >     galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
->    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->       - src: templates/galaxy/config/job_conf.xml.j2
->         dest: "{{ galaxy_config.galaxy.job_config_file }}"
+>    +- src: templates/galaxy/config/job_resource_params_conf.xml.j2
+>    +  dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
+>     - src: templates/galaxy/config/job_conf.xml.j2
+>       dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    ```
 >    {% endraw %}
 >
