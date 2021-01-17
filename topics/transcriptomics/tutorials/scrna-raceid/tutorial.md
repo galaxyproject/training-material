@@ -1,7 +1,9 @@
 ---
 layout: tutorial_hands_on
-title: Downstream Single-cell RNA analysis with RaceID
+title: "Downstream Single-cell RNA analysis with RaceID"
 subtopic: single-cell
+priority: 5
+
 zenodo_link: 'https://zenodo.org/record/1511582'
 tags:
   - single-cell

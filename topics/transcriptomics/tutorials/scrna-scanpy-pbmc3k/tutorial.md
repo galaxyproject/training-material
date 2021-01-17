@@ -1,8 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Clustering 3K PBMCs with Scanpy
+title: "Clustering 3K PBMCs with Scanpy"
 subtopic: single-cell
+priority: 7
+
 zenodo_link: 'https://zenodo.org/record/3581213'
 questions:
 - What are the steps to prepare single-cell RNA-Seq data for clustering?
