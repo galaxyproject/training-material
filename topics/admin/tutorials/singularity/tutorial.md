@@ -247,7 +247,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >
 > 2. **Map with minimap2** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a built-in genome index`
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a genome from history and build index`
 >    - *"Use the following dataset as the reference sequence"*: The fasta file you uploaded
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: The fasta file you uploaded
