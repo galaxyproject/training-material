@@ -23,9 +23,14 @@ build_dir=$(mktemp -d /tmp/gtn-ari.XXXXXXXXXX)
 echo "Building in $build_dir"
 
 # Setup inputs
-slides=$1; shift; # _site/training-material/topic/admin/tutorials/ansible/slides.pdf
-source=$1; shift; # topic/admin/tutorials/ansible/slides.html
-output=$1; shift; # _site/training-material/topic/admin/tutorials/ansible/slides.mp4
+if [ "$#" -ne 3 ]; then
+    echo "Error, expecting 3 parameters: slides_PDF slides_source mp4_output"
+	exit 1
+fi
+
+slides=$1  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.pdf
+source=$2  # e.g. topic/admin/tutorials/ansible/slides.html
+output=$3  # e.g. _site/training-material/topic/admin/tutorials/ansible/slides.mp4
 subtitles="$(dirname "$output")"/"$(basename "$output" .mp4)".en.vtt
 srcdir="$(dirname "$source")"
 
