@@ -10,6 +10,7 @@ WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
+PUNCTUATION = ['-', '--', '@']
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
@@ -23,6 +24,10 @@ has_objectives = m_os.length > 0
 m_kp = metadata.fetch('key_points', [])
 m_kp = [] if m_kp.nil?
 has_keypoints = m_kp.length > 0
+
+m_rq = metadata.fetch('requirements', [])
+m_rq = [] if m_rq.nil?
+has_requirements = m_rq.length > 0
 
 # Parse the material for the slide notes
 file = File.open(fn)
@@ -43,6 +48,9 @@ contents = lines[end_meta..-1]
 
 # This will be our final script
 blocks = [[metadata['title']]]
+if has_requirements
+  blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
+end
 if has_questions
   blocks.push(metadata['questions'])
 end
@@ -81,6 +89,8 @@ def translate(word)
 
   if WORD_MAP.key?(word) then
     return WORD_MAP[word]
+  elsif PUNCTUATION.find_index(word) then
+    return word
   elsif m[2] then
     fixed = WORD_MAP.fetch(m[2].downcase, m[2])
   else
