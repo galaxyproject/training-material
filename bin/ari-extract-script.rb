@@ -24,6 +24,10 @@ m_kp = metadata.fetch('key_points', [])
 m_kp = [] if m_kp.nil?
 has_keypoints = m_kp.length > 0
 
+m_rq = metadata.fetch('requirements', [])
+m_rq = [] if m_rq.nil?
+has_requirements = m_rq.length > 0
+
 # Parse the material for the slide notes
 file = File.open(fn)
 lines = file.readlines.map(&:chomp)
@@ -43,6 +47,9 @@ contents = lines[end_meta..-1]
 
 # This will be our final script
 blocks = [[metadata['title']]]
+if has_requirements
+  blocks.push(['Before diving into this slide deck, we recommend you to have a look at the following.'])
+end
 if has_questions
   blocks.push(metadata['questions'])
 end
