@@ -260,7 +260,7 @@ steps are independent of the data source you choose.
 >            - *"Paired-end Indicator"*: `C`
 >          - Click **Apply**
 >        - *"Type"*: `fastqsanger.gz`
->        - *"Name"*: `Illumnia PE data` (or similar)
+>        - *"Name"*: `Illumina PE data` (or similar)
 >        - *"Add nametag for name:"* {% icon param-check %}
 >
 >          > ### {% icon comment %} Name tags in the analysis
@@ -375,7 +375,7 @@ metrics for all samples before and after preprocessing.
 >          JSON-formatted reports, second collection produced by **fastp**
 >          {% icon tool %}
 >
->    This tool run generates a single output with the combined quality reports
+>    This tool run generates a single webpage output with the combined quality reports
 >    for all samples before and after processing with **fastp** {% icon tool %}.
 >
 {: .hands_on}
@@ -480,7 +480,7 @@ widely-used, well-tested tool here.
 >    > >    shows the lowest relative contamination with human reads, that
 >    > >    does not mean that all other reads are from SARS-CoV-2. They could
 >    > >    come from other species (*e.g.*, bacteria or other viruses)
->    > >    contained in this BALF sample. 
+>    > >    contained in this BALF sample.
 >    >  {: .solution }
 >    {: .question}
 >
@@ -502,7 +502,7 @@ aligner, which is particularly efficient for mapping long reads.
 >      - {% icon param-collection %} *"Select fastq dataset"*: the collection
 >        of Nanopore-sequenced reads as set up in the *Get Data* section
 >
->    - *"Select analysis mode (sets default)"*: `Oxford Nanopore read to reference mapping. ...`
+>    - *"Select a profile of preset options"*: `Oxford Nanopore read to reference mapping. ...`
 >
 >    This tool run produces one collection with the actual mapped reads for
 >    each Nanopore-sequenced sample. Unlike **Bowtie2** it does not have an
@@ -543,7 +543,7 @@ Nanopore-sequenced samples.
 Next, we are going to filter the data from both collections to retain only
 those reads that were *not* mapped to the human genome, *i.e* those of
 potential viral origin.
-   
+
 > ### {% icon hands_on %} Hands-on: Mapped reads filtering
 >
 > 1. **Samtools view** {% icon tool %} to filter the Illumina-sequenced reads mapped with Bowtie2:
@@ -919,4 +919,3 @@ contigs is a challenging task, which Unicycler solved without major issues!
 Nevertheless, good quality assemblies still rely on proper preprocessing and
 filtering to reduce the number of misassembly events, ambiguous assemblies and
 of incorporation of sequencing errors into the final assembly.
-
