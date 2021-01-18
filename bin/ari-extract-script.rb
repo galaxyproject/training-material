@@ -10,6 +10,7 @@ WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
+PUNCTUATION = ['-', '--', '@']
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
@@ -88,6 +89,8 @@ def translate(word)
 
   if WORD_MAP.key?(word) then
     return WORD_MAP[word]
+  elsif PUNCTUATION.find_index(word) then
+    return word
   elsif m[2] then
     fixed = WORD_MAP.fetch(m[2].downcase, m[2])
   else
