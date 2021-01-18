@@ -1017,12 +1017,12 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 >    - *"Genetic code"*: `11. The Bacterial, Archael and Plant Plastid Code`
 >    - {% icon param-repeat %} Insert Track Group
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Genes (E. coli Relatives)` from **Collapse Collection** {% icon tool %}
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Genes (E. coli Relatives)` from **Collapse Collection** {% icon tool %}
 >            - *"JBrowse Track Type"*: `Canvas Features`
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Target & Query Alignments`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Target & Query Alignments`
 >            - *"JBrowse Track Type"*: `Canvas Features`
 >            - *"JBrowse Feature Score Scaling & Colouring Options"*
 >                - *"Color Score Algorithm"*: `Based on score`
@@ -1030,8 +1030,8 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 >                - *"Minimum expected score"*: `0`
 >                - *"Maximum expected score"*: `100`
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Gaps`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Gaps`
 >
 {: .hands_on}
 

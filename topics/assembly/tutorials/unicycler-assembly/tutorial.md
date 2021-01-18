@@ -131,7 +131,7 @@ Pilon improves draft assemblies by using the information from the original reads
 
 ### Annotation
 
-For annotation we are using [Prokka](http://www.vicbioinformatics.com/software.prokka.shtml) (also see {% cite Seemann2014 %}). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from {% cite Seemann2014 %}):
+For annotation we are using [Prokka](https://vicbioinformatics.com/software.prokka.shtml) (also see {% cite Seemann2014 %}). It scans the assembly generated with Unicycler with a set of feature prediction tools and compiles a list of genome annotation. It predicts the following features (Table from {% cite Seemann2014 %}):
 
 | Feature | Tool used by Prokka |
 |---------|----------------------|
@@ -221,7 +221,7 @@ Now it is time to perform assembly.
 
 ## Assess Assembly quality with Quast
 
-[Quast](http://quast.bioinf.spbau.ru) ({% cite Gurevich2013 %}) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
+Quast ({% cite Gurevich2013 %}) is a tool providing quality metrics for assemblies, and can also be used to compare multiple assemblies. The tool can also take an optional reference file as input, and will provide complementary metrics.
 
 > ### {% icon hands_on %} Hands-on: Assembly Quality
 >

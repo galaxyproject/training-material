@@ -76,7 +76,7 @@ For this exercise we will use a basic password file method for authenticating - 
 >    > This can happen mostly when some users have command line access to the Galaxy server, which is considered a bad practice.
 >    {: .tip}
 >
-> 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/latest/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
+> 2. Add a pre_task using the [`pip`](https://docs.ansible.com/ansible/2.9/modules/pip_module.html) module which installs the library `passlib`, which is required for `htpasswd`.
 >
 >    Add a pre_task using the [`htpasswd`](https://docs.ansible.com/ansible/2.4/htpasswd_module.html) module which sets up a password file in `/etc/nginx/passwd`, with owner and group set to root, and a name and password, and a mode of 0640.
 >    > ### {% icon question %} Question
