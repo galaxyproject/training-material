@@ -568,11 +568,11 @@ from the [Pasilla Bioconductor Package](https://bioconductor.org/packages/releas
 >     - From **Rules** menu, select `Add / Modify Column Definitions`
 >       - `Add Definition`, `List Identifier(s)`, Column `A`
 >
->     ![screenshot](http://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules/rules_apply_rules_example_4_12_apply_rules_filter.png)
+>     ![screenshot](http://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_12_apply_rules_filter.png)
 >
 >     The resulting collection should be a filtered version of the original list.
 >
->     ![screenshot](http://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules/rules_apply_rules_example_4_13_filtered.png)
+>     ![screenshot](http://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_apply_rules_example_4_13_filtered.png)
 >
 >     Structural re-organizations of collections can also be combined with filtering. To demonstrate this, reopen the original flat list created for this example again in the rule builder of the Apply Rules tool. Use the same regular expression as last time to filter the result but also add a column for "treated" and "untreated" list identifiers.
 >
