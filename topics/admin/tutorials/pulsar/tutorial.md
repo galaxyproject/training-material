@@ -365,7 +365,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    >
 >    > if they don't, consider the following debugging steps:
 >    >
->    > 1. Restarting RabbiMQ
+>    > 1. Restarting RabbitMQ
 >    > 2. Check that the configuration looks correct (ssl private key path looks valid)
 >    > 3. Check that the private key is shared correctly with the rabbitmq user
 >    {: .code-out.code-max-300}
