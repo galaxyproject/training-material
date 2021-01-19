@@ -80,7 +80,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -71,6 +71,8 @@ galaxy_config_files:
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
->       dest: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >
 >    +galaxy_local_tools:
 >    +- testing.xml
@@ -242,12 +242,6 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +        </destination>
 >         </destinations>
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
->             <tool id="testing" destination="slurm-2c"/>
->    +        <tool id="testing" destination="dynamic_admin_only" />
->         </tools>
->     </job_conf>
 >    ```
 >
 >    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
@@ -304,7 +298,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >            upper_bound: Infinity
 >            destination: slurm-2c
 >        default_destination: slurm
->    default_destination: local_singularity
+>    default_destination: slurm 
 >    verbose: True
 >    ```
 >
@@ -312,7 +306,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    - If the tool has ID `testing`:
 >      - If the input dataset is >=16 bytes, run on the destination `slurm-2c`
 >      - If the input dataset is <16 bytes, run on the destination `slurm`
->    - Else, run on the destination `local_singularity`
+>    - Else, run on the destination `slurm`
 >
 > 2. We also need to inform Galaxy of the path to the file we've just created, which is done using the `tool_destinations_config_file` in `galaxy_config` > `galaxy`. Additionally we need to add a `galaxy_config_files` entry to ensure it is deployed.
 >
@@ -335,7 +329,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    +- src: files/galaxy/config/tool_destinations.yml
 >    +  dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
->       dest: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    ```
 >    {% endraw %}
 >
@@ -428,10 +422,10 @@ Such form elements can be added to tools without modifying each tool's configura
 >         farm: job-handlers:1,2
 >
 >     galaxy_config_templates:
->    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
->    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
->       - src: templates/galaxy/config/job_conf.xml.j2
->         dest: "{{ galaxy_config.galaxy.job_config_file }}"
+>    +- src: templates/galaxy/config/job_resource_params_conf.xml.j2
+>    +  dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
+>     - src: templates/galaxy/config/job_conf.xml.j2
+>       dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    ```
 >    {% endraw %}
 >

@@ -167,9 +167,9 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 >    +galaxy_config_files:
 >    +- src: files/galaxy/config/dependency_resolvers_conf.xml
->    +  dest: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    +- src: files/galaxy/config/container_resolvers_conf.xml
->    +  dest: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    +  dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >    ```
 >    {% endraw %}
 >
@@ -247,7 +247,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```
 >
 > 2. **Map with minimap2** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a built-in genome index`
+>    - *"Will you select a reference genome from your history or use a built-in index"*: `Use a genome from history and build index`
 >    - *"Use the following dataset as the reference sequence"*: The fasta file you uploaded
 >    - *"Single or Paired-end reads"*: `Single`
 >        - {% icon param-file %} *"Select fastq dataset"*: The fasta file you uploaded
