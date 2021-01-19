@@ -64,7 +64,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 >    ```yaml
 >    - src: cyverse-ansible.singularity
->      version: ad4de5e4b0bb3f8a43de0f3565757aa156853485
+>      version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    - src: gantsign.golang
 >      version: 2.6.3
 >    ```
