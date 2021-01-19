@@ -131,7 +131,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >
 >    ```yaml
 >    - name: usegalaxy_eu.rabbitmq
->      version: 0.0.5
+>      version: 0.1.0
 >    - src: galaxyproject.pulsar
 >      version: 1.0.6
 >    ```
