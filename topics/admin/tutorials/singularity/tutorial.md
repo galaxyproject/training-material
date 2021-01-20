@@ -277,6 +277,11 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 {: .hands_on}
 
+> ### {% icon tip %} Manage dependencies menu
+> You can manually pull one or many containers for tools in the admin menu. Go to the admin menu, click Manage Dependencies and select the Containers tab. This will list all tools, their dependencies and whether containers are already pulled or can be pulled on demand.
+{: .tip}
+
+
 <!--
 ## Use Singularity containers from CVMFS
 
