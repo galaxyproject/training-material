@@ -277,9 +277,12 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 {: .hands_on}
 
-> ### {% icon tip %} Manage dependencies menu
+> ### {% icon comment %} Manage dependencies menu
 > You can manually pull one or many containers for tools in the admin menu. Go to the admin menu, click Manage Dependencies and select the Containers tab. This will list all tools, their dependencies and whether containers are already pulled or can be pulled on demand.
-{: .tip}
+>
+> When a container has been resolved through Singularity, you'll see something like this:
+> ![Image of a table entry with minimap2 having requirements minimap2+singularity, a resolved column with a green checkmark next to via singularity, the resolver is mulled_singularity, and a container column with a path to /srv/galaxy/var/cache/singularity/mulled and some long hash.](../../images/singularity-resolved.png)
+{: .comment}
 
 
 <!--
