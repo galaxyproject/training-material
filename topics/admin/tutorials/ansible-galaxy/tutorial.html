@@ -510,7 +510,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 17, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 19, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -780,7 +780,7 @@ best practices and knowledge from previous admins codified for you.</p>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.nginx</span>
   <span class="na">version</span><span class="pi">:</span> <span class="s">0.6.4</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span>project.postgresql</span>
-  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.2</span>
+  <span class="na">version</span><span class="pi">:</span> <span class="s">1.0.3</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">natefoo.postgresql_objects</span>
   <span class="na">version</span><span class="pi">:</span> <span class="m">1.1</span>
 <span class="pi">-</span> <span class="na">src</span><span class="pi">:</span> <span class="s">geerlingguy.pip</span>
@@ -921,7 +921,7 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 
 <p>PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the “peer” authentication method which allows access for system users with matching PostgreSQL use<span class="notranslate">rna</span>mes (other authentication mechanisms are available, see the <a href="https://www.postgresql.org/docs/current/static/client-authentication.html">PostgreSQL Client Authentication documentation</a>.</p>
 
-<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step.</p>
+<p>For this tutorial, we will use the default “peer” authentication, so we need to create a PostgreSQL user matching the system user under which <span class="notranslate">Galaxy</span> will be running, i.e. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span></code>. This is normally done with the PostgreSQL <code class="language-plaintext highlighter-rouge">createuser</code> command, and it must be run as the <code class="language-plaintext highlighter-rouge">postgres</code> user. In our case, we will use the <code class="language-plaintext highlighter-rouge">natefoo.postgresql_objects</code> role to handle this step. Additionally we’re setting a couple of variables to control the automatic backups, they’ll be placed in the /data/backups folder next to our user uploaded <span class="notranslate">Galaxy</span> data.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-installing-postgresql"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Installing PostgreSQL</h3>
@@ -942,6 +942,9 @@ A: They  are correlated (because generally new <span class="notranslate">Galaxy<
 <span class="na">postgresql_objects_databases</span><span class="pi">:</span>
   <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
     <span class="na">owner</span><span class="pi">:</span> <span class="s"><span class="notranslate">galaxy</span></span>
+<span class="c1"># PostgreSQL Backups</span>
+<span class="na">postgresql_backup_dir</span><span class="pi">:</span> <span class="s">/data/backups</span>
+<span class="na">postgresql_backup_local_dir</span><span class="pi">:</span> <span class="s2">"</span><span class="s">~postgres/backups"</span>
 </code></pre></div>      </div>
     </li>
     <li>
@@ -1404,7 +1407,7 @@ We’ll start by assuming you’re running the command</p>
 
       <blockquote class="tip">
         <h3 id="tip-different-galaxy-releases"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Different <span class="notranslate">Galaxy</span> Releases!</h3>
-        <p>In the time between this tutorial was last updated (2021-01-17), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
+        <p>In the time between this tutorial was last updated (2021-01-19), and when you are now reading it, one or more new releases of <span class="notranslate">Galaxy</span> may have occured.</p>
 
         <p>If you wish to use a different version of <span class="notranslate">Galaxy</span> than the one listed, you can do so, but there is no guarantee this tutorial will work without modifications.</p>
 
@@ -3051,7 +3054,7 @@ Additionally you can automatically send failing job error reports, even if users
     title = "Galaxy Installation with Ansible (Galaxy Training Materials)",
     year = "2021",
     month = "01",
-    day = "17"
+    day = "19"
     url = "\url{/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
