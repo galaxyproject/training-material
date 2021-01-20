@@ -131,7 +131,7 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >
 >    ```yaml
 >    - name: usegalaxy_eu.rabbitmq
->      version: 0.0.5
+>      version: 0.1.0
 >    - src: galaxyproject.pulsar
 >      version: 1.0.6
 >    ```
@@ -365,7 +365,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    >
 >    > if they don't, consider the following debugging steps:
 >    >
->    > 1. Restarting RabbiMQ
+>    > 1. Restarting RabbitMQ
 >    > 2. Check that the configuration looks correct (ssl private key path looks valid)
 >    > 3. Check that the private key is shared correctly with the rabbitmq user
 >    {: .code-out.code-max-300}

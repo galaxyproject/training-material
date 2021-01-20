@@ -11,6 +11,10 @@ postgresql_objects_databases:
   - name: galaxy
     owner: galaxy
 
+# PostgreSQL Backups
+postgresql_backup_dir: /data/backups
+postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+
 # Galaxy
 galaxy_create_user: true
 galaxy_separate_privileges: true
@@ -91,9 +95,9 @@ certbot_agree_tos: --agree-tos
 nginx_selinux_allow_local_connections: true
 nginx_servers:
   - redirect-ssl
-nginx_enable_default_server: false
 nginx_ssl_servers:
   - galaxy
+nginx_enable_default_server: false
 nginx_conf_http:
   client_max_body_size: 1g
 nginx_ssl_role: usegalaxy_eu.certbot
