@@ -162,14 +162,15 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
 >    @@ -65,6 +66,11 @@ galaxy_config_templates:
+>     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
+>    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
+>    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
 >
 >    +galaxy_config_files:
->    +- src: files/galaxy/config/dependency_resolvers_conf.xml
->    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->    +- src: files/galaxy/config/container_resolvers_conf.xml
->    +  dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
+>    + - src: files/galaxy/config/dependency_resolvers_conf.xml
+>    +   dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
 >    ```
 >    {% endraw %}
 >
@@ -188,14 +189,14 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    </dependency_resolvers>
 >    ```
 >
-> 3. Create the new file `files/galaxy/config/container_resolvers_conf.xml`, this specifies the order in which to attempt container resolution.
+> 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`, this specifies the order in which to attempt container resolution.
 >
 >    ```xml
 >    <containers_resolvers>
 >      <explicit_singularity />
->      <cached_mulled_singularity />
->      <mulled_singularity auto_install="False"/>
->      <build_mulled_singularity auto_install="False"/>
+>      <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>      <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>      <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
 >    </containers_resolvers>
 >    ```
 > 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.xml.j2`, by adding the `singularity_enabled` parameter:
