@@ -35,6 +35,7 @@ key_points:
 - Create multi-case simulations with a Galaxy workflow
 contributors:
 - annefou
+- huitang-earth
 
 ---
 
