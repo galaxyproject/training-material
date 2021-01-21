@@ -431,6 +431,8 @@ Some of the other options we will be using are:
 >      - drmaa
 >      # kombu needed if using a message queue
 >      - kombu
+>      # amqp 5.0.3 changes behaviour in an unexpected way, pin for now.
+>      - 'amqp==5.0.2'
 >      # psutil and pylockfile are optional dependencies but can make Pulsar
 >      # more robust in small ways.
 >      - psutil
