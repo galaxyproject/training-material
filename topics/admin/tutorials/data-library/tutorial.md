@@ -16,6 +16,7 @@ key_points:
 - Data libraries are a great way to share data with groups of users
 contributors:
   - hexylena
+  - shiltemann
 subtopic: features
 tags:
   - storage
