@@ -16,6 +16,7 @@ key_points:
 - Data libraries are a great way to share data with groups of users
 contributors:
   - hexylena
+  - shiltemann
 subtopic: features
 tags:
   - storage
@@ -50,7 +51,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 
 > ### {% icon hands_on %} Hands-on: Setting up Data Libraries
 >
-> 1. We will add a pre-task to clone [a data repository](https://github.com/galaxyproject/galaxy-test-data) into your machine. We will use this as the source for a library dataset.
+> 1. We will add a pre-task to clone [a data repository](https://github.com/usegalaxy-eu/libraries-training-repo) into your machine. We will use this as the source for a library dataset.
 >
 >    ```diff
 >    --- a/galaxy.yml
@@ -217,7 +218,7 @@ Let's try setting that up in our Galaxy!
 >
 >    > ### {% icon code-in %} input: bash
 >    > ```
->    > setup-data-libraries -g https://your-galaxy -k <api-key> --training -i /libraries/example-library.yaml --legacy
+>    > setup-data-libraries -g https://your-galaxy -a <api-key> --training -i /libraries/example-library.yaml --legacy
 >    > ```
 >    {: .code-in}
 >
