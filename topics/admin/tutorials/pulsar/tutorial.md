@@ -192,7 +192,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 >    Replace `areallylongpasswordhere` with a long randomish (or not) string.
 >
-> 2. From your ansible working directory, edit the `group_vars/galaxy.yml` file and add make the following changes.
+> 2. From your ansible working directory, edit the `group_vars/galaxyservers.yml` file and add make the following changes.
 >
 >    {% raw %}
 >    ```diff
