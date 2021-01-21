@@ -77,7 +77,7 @@ Preparing CLM-FATES input data is out of scope for this tutorial. We assume the 
 atm   cpl   lnd   share
 ```
 
-Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case.
+Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, 'atm' contains all the meteorological forcing data for running CLM-FATES. 'lnd' contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in [CLM and FATES documentation](https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements).
 For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. More details about the sites can be found in [Klanderud et al. (2015)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130205) and  [Vigdis et al. (2020)](https://www.pnas.org/content/117/37/22858) 
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -85,7 +85,7 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates*.
 >    {% include snippets/create_new_history.md %}
 > 2. Import the [input data](https://doi.org/10.5281/zenodo.4108341) and the [restart dataset from Zenodo](https://doi.org/10.5281/zenodo.4126404)
->    or from the shared data library
+>    or from the shared data library. Restart dataset will be used if you want to initialize the model from exisiting experiments rather than running the model from a cold start to shorten spin-up time needed for the model.
 >
 >    ```
 >    https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
