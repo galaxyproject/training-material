@@ -43,9 +43,8 @@ contributors:
 # Introduction
 {:.no_toc}
 
-
-The practical aims at familiarizing you with running site-level CLM-FATES in Galaxy and analyzing the model results.
-It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible.
+Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in Galaxy and analyzing the model results.
+It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community. 
 
 > ### Agenda
 >
@@ -78,7 +77,7 @@ atm   cpl   lnd   share
 ```
 
 Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, 'atm' contains all the meteorological forcing data for running CLM-FATES. 'lnd' contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in [CLM and FATES documentation](https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements).
-For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %} 
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %} 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -112,7 +111,7 @@ For the purpose of this tutorial, input data for a single point location (ALP1) 
 
 # Setting up a CLM-FATES simulation
 
-We will be using the CTSM/FATES-EMERALD Galaxy tool.
+We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the version of [CLM-FATES](https://github.com/NordicESMhub/ctsm/tree/fates_emerald_api) that have been adapted to run at the sites included in the EMERALD project. More details about this model version can be found in [README_fates_emerald_api](https://github.com/NordicESMhub/ctsm/blob/fates_emerald_api/README_fates_emerald_api)
 
 > ### {% icon comment %} Tip: Finding your tool
 >
@@ -131,6 +130,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
+
 >
 > 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: `inputdata_version2.0.0_ALP1.tar` file from your history
@@ -240,7 +240,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    > 2. What is its physical unit?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. Rate of total mortality per PFT
+>    > > 1. Rate of total mortality per PFT (Plat functional types)
 >    > > 2. indiv/ha/yr
 >    > {: .solution}
 >    {: .question}
@@ -262,13 +262,13 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 > 3. Plot the rate of total mortality per PFT (MORTALITY)
 >
->    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
+>    Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT (Plant functional type).
 >    Make sure to adjust the y-axis and save your plots in the output folder (as png file).
 >    > ### {% icon question %} Question
 >    > 1. Can you observe any pattern? Does it make any sense?
 >    >
 >    > > ### {% icon solution %} Solution
->    > > 1. We can clearly see a seasonal cycle.
+>    > > 1. We can clearly see a seasonal cycle of PFT2.
 >    > > ![Panoply MORTALITY per PFT](../../images/panoply_MORTALITY_ALP1_exp.png "total mortality per PFT")
 >    > {: .solution}
 >    {: .question}
