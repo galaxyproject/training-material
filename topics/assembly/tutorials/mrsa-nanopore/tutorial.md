@@ -224,7 +224,7 @@ General summary     | Not Filtered   | Filtered (Filtlong) | Change (%)
 Mean read length    | 6,813.0        | 8,721.1             | 28.0%
 Mean read quality   | 9              | 9                   | 0.0%
 Median read length  | 3,400.0        | 5,451.0             | 60.3%
-Median read quality | 9.0            | 8.9                 | -1.1%
+Median read quality | 8.9            | 9.0                 | -1.1%
 Number of reads     | 91,288.0       | 69,906.0            | -23.4%
 Read length N50     | 14,810.0       | 15,102.0            | 2.0%
 Total bases         | 621,945,741.0  | 609,657,642.0       | -2.0%
@@ -300,7 +300,7 @@ for the "+" sign and the quality score.
 
 ## QC
 
-[Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013% %})
+[Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013 %})
 is a tool providing quality metrics for assemblies, and can also be used
 to compare multiple assemblies. The tool can also take an optional
 reference file as input, and will provide complementary metrics. QUAST
