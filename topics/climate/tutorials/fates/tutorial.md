@@ -77,7 +77,7 @@ atm   cpl   lnd   share
 ```
 
 Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case.
-For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. More details about the sites can be found in [Klanderud et al. (2015)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130205)
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. More details about the sites can be found in [Klanderud et al. (2015)](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0130205) and  [Vigdis et al. (2020)](https://www.pnas.org/content/117/37/22858) 
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
