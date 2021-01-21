@@ -280,17 +280,16 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a ciruclar layout with the following parameters:
 >    - In *"Karyotype"*:
->        - *"Reference Genome"*: `Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.tsv`
+>        - *"Reference Genome Source"*: `Custom Karyotype`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.txt`
 >    - In *"Ideogram"*:
+         - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
 >        - *"Thickness"*: `45`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `64`
 >        - In *"Cytogenic Bands"*:
->            - {% icon param-file %} *"Cytogenic Bands"*: `hg18_karyotype_bands.tsv`
->            - *"Convert bands from BED format to circos karyotype band format"*: `No`
->            - *"Fill Bands"*: `2`
+>            - *"Bands transparency"*: `2`
 >            - *"Band Stroke Thickness"*: `1`
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
@@ -461,7 +460,7 @@ Given that Circos is a very complex with dozens of parameters to set, we re-run 
 >                           - In *"Actions to Apply"*:
 >                               - {% icon param-repeat %} *"Insert Actions to Apply"*
 >                                   - *"Action"*: `Change Link Colour`
->                                   - *"Link Color"*: {% color_picker #ff0000 %} (red)
+>                                   - *"Change fill Color"*: {% color_picker #ff0000 %} (red)
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot SVs`
 >
@@ -640,7 +639,7 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 >                - *"Scatter Plot Data Source"*: `cnv-circos.txt`
 >                - In *"Plot Format Specific Options"*:
 >                    - *"Glyph Size"*: `4`
->                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                    - *"Fill Color"*: {% color_picker #7f7f7f %} (gray)
 >                    - *"Stroke Thickness"*: `0`
 >            - *"Minimum / maximum options"*: `Supply min/max values`
 >                - *"Minimum value"*: `-1.0`
@@ -693,7 +692,7 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >        - {% icon param-repeat %} *"Insert Rule"*
 >            - In *"Conditions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                    - *"Condition"*: `Apply based on point value`
+>                    - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
 >                        - *"Points above this value"*: `0.15`
 >            - In *"Actions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Actions to Apply"*
@@ -702,7 +701,7 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >        - {% icon param-repeat %} *"Insert Rule"*
 >            - In *"Conditions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                    - *"Condition"*: `Apply based on point value`
+>                    - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
 >                       - *"Points below this value"*: `-0.15`
 >            - In *"Actions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Actions to Apply"*
@@ -722,11 +721,10 @@ We can do this as follows:
 >    - In *"Axes"*:
 >        - In *"Axis"*:
 >            - {% icon param-repeat %} *"Insert Axis"*
->                - *"Inside Radius"*: `-1`
->                - *"Outside Radius"*: `1`
->                - *"Color"*: {% color_picker #7f7f7f %} (gray)
 >                - *"Spacing"*: `0.25`
->
+>                - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                - *"y0"*: -1
+>                - *"y1"*: 1
 > 3. **Rename** {% icon galaxy-pencil%} the output `Circos Plot CopyNumber`
 >
 {: .hands_on}
@@ -790,11 +788,11 @@ We will make another scatterplot, so our data should be in the same format as th
 >
 > 1. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
->    - {% icon param-file %} *"from"*: `B-allele frequence.tsv`
+>    - {% icon param-file %} *"from"*: `VCaP_B-allele frequence.tsv`
 >
 > 2. {% tool [Select random lines](random_lines1) %} with the following parameters:
 >    - *"Randomly select"*: `25000`
->    - {% icon param-file %} *"from"*: output of **Select** {% icon tool %}
+>    - {% icon param-file %} *"from"*: output of **Remove** {% icon tool %}
 >    - *"Set a random seed"*: `Don't set seed`
 >
 > 3. **Rename** {% icon galaxy-pencil %} this file to `baf-circos.tsv`
@@ -816,7 +814,7 @@ Now are data is ready to be plotted in Circos. We will plot this track directly 
 >                - {% icon param-file %} *"Scatter Plot Data Source"*: `baf-circos.tsv` (output of **Select random lines** {% icon tool %})
 >                - In *"Plot Format Specific Options"*:
 >                    - *"Glyph Size"*: `4`
->                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                    - *"Fill Color"*: {% color_picker #7f7f7f %} (gray)
 >                    - *"Stroke Thickness"*: `0`
 >            - *"Minimum / maximum options"*: `Supply min/max values`
 >                - *"Minimum value"*: `0.0`
@@ -871,7 +869,7 @@ There is a parameter of the link track type called *Bezier*, which controls how 
 
 > ### {% icon hands_on %} Hands-on: Change Bezier radius
 >
-> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot CopyNumber`)
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot BAF`)
 >
 > 2. Change the Bezier parameter of the SV track:
 >    - In *"Link Tracks"*:
@@ -1024,9 +1022,11 @@ Let's start by creating the ideogram for our plot:
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
 >    - In *"Karyotype"*:
->        - *"Reference Genome"*: `Karyotype`
+>        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
 >    - In *"Ideogram"*:
+         - *"Chromosome units"*: `bases`
+         - *"Spacing Between Ideograms (in chromosome units)"*: `20`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `40`
 >
@@ -1067,22 +1067,24 @@ Now, let's use this file to create our highlights track
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot karyotype`)
 >
 > 2. Add highlights to the ideogram:
->    - In "Highlights":
->        - {% icon param-repeat %} Insert Highlight:
+>    - In "2D Data Tracks":
+>        - In "2D Data Plots": 
 >            - *"Outside Radius"*: `1`
 >            - *"Inside Radius"*: `0.9`
+>            - *"Plot Type"*: `Highlight`
 >            - {% icon param-file %} *"Highlight Data Source"*: `debate_slices.tab`
->            - *"Fill Color"*: {% color_picker #d99696 %} (light red)
->            - In "Rules":
->                - {% icon param-repeat %} Insert Rule
->                    - In *"Conditions to Apply"*:
->                        - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                            - *"Condition"*: `Check for presence/absence per chromosome`
->                            - *"Contig IDs"*: `obama|richardson|clinton`
->                    - In *"Actions to Apply"*:
->                        - {% icon param-repeat %} *"Insert Actions to Apply"*
->                            - *"Action"*: `Change Fill Color for all points`
->                            - *"Fill Color"*: {% color_picker #548dd4 %} (light blue)
+>            - In "Plot Format Specific Options":
+>                - *"Fill Color"*: {% color_picker #d99696 %} (light red)
+>        - In "Rules":
+>            - {% icon param-repeat %} Insert Rule
+>                - In *"Conditions to Apply"*:
+>                    - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                        - *"Condition"*: `Check for presence/absence per chromosome`
+>                        - *"Contig IDs"*: `obama|richardson|clinton`
+>                - In *"Actions to Apply"*:
+>                    - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                        - *"Action"*: `Change Fill Color for all points`
+>                        - *"Fill Color"*: {% color_picker #548dd4 %} (light blue)
 >
 > 3. **Rename** {% icon galaxy-pencil%} the output `Circos Plot highlights`
 >
@@ -1210,26 +1212,28 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
 >    - In *"Karyotype"*:
->        - *"Reference Genome"*: `Karyotype`
+>        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
->    - In *"General"*:
->        - *"Plot Background"*: `Solid Color`
->            - *"Background Color"*: {% color_picker #000000 %}
 >    - In *"Ideogram"*:
 >        - *"Thickness"*: `0.0`
 >        - In *"Labels"*:
 >            - *"Show Label"*: `Yes`
->    - In *"Highlights"*:
->        - In *"Highlight"*:
->            - Click on *"Insert Highlight"*:
->            - In *"1: Highlight"*:
+>    - In *"General"*:
+>        - *"Plot Background"*: `Solid Color`
+>            - *"Background Color"*: {% color_picker #000000 %}
+>    - In *"2D Tracks"*:
+>        - In *"2D Data Plot"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - In *"1: 2D Data Plot
 >                - *"Outside Radius"*: `0.99`
 >                - *"Inside Radius"*: `0.9`
+>                - *"Plot Type"*: `Highlight`
 >                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
->            - Click on *"Insert Highlight"*:
->            - In *"2: Highlight"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - In *"2: 2D Data Plot
 >                - *"Outside Radius"*: `0.89`
 >                - *"Inside Radius"*: `0.8`
+>                - *"Plot Type"*: `Highlight`
 >                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:
@@ -1259,10 +1263,11 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 >                                    - *"Action"*: `Change Fill Color for all points`
 >                                        - *"Fill Color"*: {% color_picker #ffff00 %} (yellow)
 >                            - *"Continue flow"*: `Yes`
->            - Click on *"Insert Highlight"*:
->            - In *"3: Highlight"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - In *"3: 2D Data Plot
 >                - *"Outside Radius"*: `0.79`
 >                - *"Inside Radius"*: `0.7`
+>                - *"Plot Type"*: `Highlight`
 >                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:
