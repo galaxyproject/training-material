@@ -100,7 +100,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 > 4. Rename {% icon galaxy-pencil %} datasets
 >      - Dataset names are the full URL, but this is not very nice to work with, and can even give errors for some tools
->      - It is good practice to change the dataset names to something more meaningful
+>      - It is good practice to change the dataset names to something more meaningful and without any special characters
 >        -  E.g. by stripping off the beginning of the URL
 >      - Example: rename `https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar` to `inputdata_version2.0.0_ALP1.tar`
 >      - Do the same for the other dataset
