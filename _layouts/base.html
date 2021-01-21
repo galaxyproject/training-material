@@ -7,6 +7,9 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{{ page.title | default: site.title }}</title>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
+        {% endif %}
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap-toc.min.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
