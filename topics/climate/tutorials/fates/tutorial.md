@@ -107,10 +107,6 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 5. Add a tag to the dataset corresponding to `#fates`
->
->    {% include snippets/add_tag.md %}
->
 {: .hands_on}
 
 # Setting up a CLM-FATES simulation
@@ -125,6 +121,13 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >
 {: .comment}
 
+> ### {% icon comment %} Tip: Pre-selected tool parameters
+>
+> When selecting a tool, Galaxy will pre-fill the tool parameters, selecting the first dataset with the corresponding type in your history.
+> Be aware that very often, the default pre-selection is incorrect and do not correspond to the required dataset.
+> So always check and update accordingly the tool parameters!
+>
+{: .comment}
 > ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
 >
 > 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
@@ -150,8 +153,13 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 >    >
 >    {: .comment}
 >
-> 2. Check that the datatype {% icon galaxy-pencil %} of your outputs (history file) is **netcdf**
+> 2. Check that the datatype {% icon galaxy-pencil %} of your outputs (history file) is **[netcdf](https://en.wikipedia.org/wiki/NetCDF)**
 >      - If this is not the case, please change the datatype now
+>
+>    > ### {% icon comment %} About CLM-FATES history files
+>    > All the CLM-FATES history files are organized in a collection.
+>    >
+>    {: .comment}
 >
 >    > ### {% icon comment %} About datatypes
 >    >
@@ -197,7 +205,7 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.
 
 > ### {% icon hands_on %} Hands-on: Launch Panoply
 >
->  Panoply is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
+>  [Panoply](https://www.giss.nasa.gov/tools/panoply/) plots geo-referenced and other arrays from netCDF and is available as a Galaxy interactive environment and may not be available on all Galaxy servers.
 >
 > > ### {% icon tip %} Tip: Launch Panoply in Galaxy
 > > Currently Panoply in Galaxy is available on useGalaxy.eu instance, on the "Interactive tools" tool panel section or,
@@ -325,7 +333,7 @@ so that we can reuse it for any simulations.
 >
 > 1. Go to the **History Options menu**  {% icon galaxy-gear %} menu
 >    - Select the **Extract Workflow** option.
->    - Remove any unwanted steps, in particular all steps with Panoply.
+>    - Remove any unwanted steps, in particular all steps with Panoply as we do not want to have interactive tools in our automated workflow..
 >
 > 2. **Rename** the workflow to something descriptive
 >    - For example: `CLM-FATES_ ALP1 simulation (5 years)`.
@@ -352,7 +360,8 @@ We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Conce
 >
 > 2. Edit your workflow and customize it to run your new CO2 experiment. For this you would need to:
 >      - In "Advanced customization", change "Atmospheric CO2 molar ratio (by volume) only used when co2_type==constant (umol/mol)" from 367.0 to 1468.0.
->      - Add an extra step to extract the first history file from the history collection
+>      - Add an extra step to extract the first history file from the history collection: {% tool [Extract Dataset](__EXTRACT_DATASET__) %}
+>        and make sure to select "netcdf" in the change datatype field.
 >      - Generate the corresponding plot.
 >    The final workflow would be similar to the one shown below:
 >
