@@ -233,7 +233,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    ```yaml
 >    - src: galaxyproject.galaxy
->      version: 0.9.6
+>      version: 0.9.7
 >    - src: galaxyproject.nginx
 >      version: 0.6.4
 >    - src: galaxyproject.postgresql
@@ -729,7 +729,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    `galaxy_root`                   | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
 >    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
 >    `galaxy_commit_id`              | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
->    `galaxy_config_style`           | `yaml`                                    | We want to opt-in to the new style YAML configuration.
 >    `galaxy_force_checkout`         | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
 >    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
 >    `miniconda_version`             | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
@@ -759,7 +758,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_root: /srv/galaxy
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
 >    +galaxy_commit_id: release_{{page.galaxy_version}}
->    +galaxy_config_style: yaml
 >    +galaxy_force_checkout: true
 >    +miniconda_prefix: {% raw %}"{{ galaxy_tool_dependency_dir }}/_conda"{% endraw %}
 >    +miniconda_version: 4.7.12
@@ -787,7 +785,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -23,3 +23,12 @@ galaxy_config_style: yaml
+>    @@ -23,3 +23,12 @@
 >     galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
@@ -2148,7 +2146,6 @@ With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a co
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
- galaxy_config_style: ini
 
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
