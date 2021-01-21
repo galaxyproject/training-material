@@ -44,7 +44,7 @@ contributors:
 {:.no_toc}
 
 Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in Galaxy and analyzing the model results.
-It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community. 
+It will also teach you on how to create Galaxy workflow for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.
 
 > ### Agenda
 >
@@ -62,7 +62,7 @@ It will also teach you on how to create Galaxy workflow for your site-level CLM-
 > we will be using the [Community Land Model](http://www.cesm.ucar.edu/models/clm/)
 > of the [Community Terrestrial Systems Model](https://github.com/ESCOMP/CTSM) (CLM-CTSM).
 > FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
-> {% cite Fisher2015 %} and {% cite Koven2020 %}. 
+> {% cite Fisher2015 %} and {% cite Koven2020 %}.
 > And this technical note was first published as an appendix to [that paper](https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf).
 > The [FATES documentation](https://fates-docs.readthedocs.io/en/latest/index.html) will provide some more insight on FATES too.
 >
@@ -77,7 +77,7 @@ atm   cpl   lnd   share
 ```
 
 Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, 'atm' contains all the meteorological forcing data for running CLM-FATES. 'lnd' contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in [CLM and FATES documentation](https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements).
-For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %} 
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in {% cite Klanderud2015 %} and  {% cite Vigdis2020 %}
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -130,7 +130,6 @@ We will be using the CTSM/FATES-EMERALD Galaxy tool.This tool is based on the ve
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Creating a new CTSM/FATES-EMERALD case
-
 >
 > 1. {% tool [CTSM/FATES-EMERALD](toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1) %} with the following parameters:
 >    - {% icon param-file %} *"inputdata for running FATES EMERALD"*: `inputdata_version2.0.0_ALP1.tar` file from your history
