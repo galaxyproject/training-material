@@ -268,6 +268,20 @@
         "name": "Galaxy Training Network",
         "url": "https://galaxyproject.org/teach/gtn/"
       }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html",
+      "name": "Extracting Workflows from Histories",
+      "description": "Hands-on for 'Extracting Workflows from Histories' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
     }
   ],
   "hasPart": [
@@ -277,12 +291,20 @@
     {
       "@type": "Person",
       "name": "Anne Fouilloux"
+    },
+    {
+      "@type": "Person",
+      "name": "Hui Tang"
     }
   ],
   "contributor": [
     {
       "@type": "Person",
       "name": "Anne Fouilloux"
+    },
+    {
+      "@type": "Person",
+      "name": "Hui Tang"
     }
   ],
   "about": [
@@ -299,16 +321,10 @@
     <section class="tutorial">
         <h1 data-toc-skip>Functionally Assembled Terrestrial Ecosystem Simulator (FATES)</h1>
         
-        <div class="alert alert-warning" role="alert">
-            <h4 class="alert-heading">Under Development!</h4>
-            <p>This tutorial is not in its final state. The content may change a lot in the next months.
-            Because of this status, it is also not listed in the topic pages.</p>
-        </div>
-        
 
         <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a>
+ <a href="/training-material/hall-of-fame/annefou/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/annefou" alt="Anne Fouilloux">Anne Fouilloux</a> <a href="/training-material/hall-of-fame/huitang-earth/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/huitang-earth" alt="Hui Tang">Hui Tang</a>
 
 </div>
 
@@ -390,6 +406,8 @@
                         
                     
                         
+                    
+                        
                             
                             <li> Visualize Climate data with Panoply netCDF viewer:
                             
@@ -399,6 +417,65 @@
                                 
                             
                             </li>
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/galaxy-interface">User Interface and Data Manipulation</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Extracting Workflows from Histories:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/galaxy-interface/tutorials/history-to-workflow/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
                         
                     
                 
@@ -424,11 +501,18 @@
             <ul>
                 <div class="supporting_material">
                 
-                    <li class="btn btn-default supporting_material"><a href="/training-material/topics/climate/slides/introduction.html" title="Topic Overview slides">
-                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Topic Overview slides
+                    <li class="btn btn-default"><a href="/training-material/topics/climate/tutorials/fates/slides.html" title="Slides for this tutorial">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
                     </a></li>
                 
 
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4108341">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
                 
 
                 
@@ -459,7 +543,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Nov 26, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 21, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -471,8 +555,8 @@
                 <div class="col-sm-10">
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
-<p>The practical aims at familiarizing you with running CLM-FATES in <span class="notranslate">Galaxy</span> and analyzing the model results.
-It will also teach you on how to create <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for your CLM-FATES simulations to make your research fully reproducible.</p>
+<p>Terrestrial ecosystem models have been widely used to study the impact of climate changes on vegetation and terrestrial biogeochemical cycles in climate modelling community. They are also more and more applied in ecological studies to help ecologists to better understand the processes. But the technical challenges are still too high for most of the ecologists to use them. This practical aims at familiarizing you (especially ecologists) with running a terrestrial ecosystem model (i.e., CLM-FATES) at site-level in <span class="notranslate">Galaxy</span> and analyzing the model results.
+It will also teach you on how to create <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span> for your site-level CLM-FATES simulations to make your research fully reproducible. We hope this tutorial will promote the use of CLM-FATES and other terrestrial ecosystem models by a broader community.</p>
 
 <blockquote class="agenda">
   <h3 id="agenda">Agenda</h3>
@@ -480,20 +564,16 @@ It will also teach you on how to create <span class="notranslate">Galaxy</span> 
   <p>In this tutorial, we will cover:</p>
 
 <ol id="markdown-toc">
-  <li><a href="#step-1-get-clm-fates-input-data" id="markdown-toc-step-1-get-clm-fates-input-data">Step 1: Get CLM-FATES input data</a></li>
-  <li><a href="#step-2-setting-up-a-clm-fates-simulation" id="markdown-toc-step-2-setting-up-a-clm-fates-simulation">Step 2: Setting up a CLM-FATES simulation</a>    <ol>
-      <li><a href="#comment-startup-versus-hybrid" id="markdown-toc-comment-startup-versus-hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> startup versus hybrid</a></li>
-    </ol>
-  </li>
-  <li><a href="#step-3-quick-visualization-with-panoply" id="markdown-toc-step-3-quick-visualization-with-panoply">Step 3: Quick visualization with Panoply</a>    <ol>
+  <li><a href="#get-clm-fates-input-data" id="markdown-toc-get-clm-fates-input-data">Get CLM-FATES input data</a></li>
+  <li><a href="#setting-up-a-clm-fates-simulation" id="markdown-toc-setting-up-a-clm-fates-simulation">Setting up a CLM-FATES simulation</a></li>
+  <li><a href="#quick-visualization-with-panoply" id="markdown-toc-quick-visualization-with-panoply">Quick visualization with Panoply</a>    <ol>
       <li><a href="#opening-up-panoply" id="markdown-toc-opening-up-panoply">Opening up Panoply</a></li>
       <li><a href="#inspect-metadata" id="markdown-toc-inspect-metadata">Inspect metadata</a></li>
-      <li><a href="#comment-quit-panoply-properly-to-save-your-plots" id="markdown-toc-comment-quit-panoply-properly-to-save-your-plots"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Quit Panoply properly to save your plots!</a></li>
     </ol>
   </li>
-  <li><a href="#step-4-using-galaxy-tools-for-analysing-your-clm-fates-simulation" id="markdown-toc-step-4-using-galaxy-tools-for-analysing-your-clm-fates-simulation">Step 4: Using <span class="notranslate">Galaxy</span> tools for analysing your CLM-FATES simulation</a></li>
-  <li><a href="#step-5-convert-your-analysis-history-into-a-galaxy-workflow" id="markdown-toc-step-5-convert-your-analysis-history-into-a-galaxy-workflow">Step 5: Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></a></li>
-  <li><a href="#step-6-change-your-clm-fates-case-and-rerun-your-workflow" id="markdown-toc-step-6-change-your-clm-fates-case-and-rerun-your-workflow">Step 6: Change your CLM-FATES case and rerun your <span class="notranslate">workflow</span></a></li>
+  <li><a href="#using-galaxy-tools-for-analysing-your-clm-fates-simulation" id="markdown-toc-using-galaxy-tools-for-analysing-your-clm-fates-simulation">Using <span class="notranslate">Galaxy</span> tools for analysing your CLM-FATES simulation</a></li>
+  <li><a href="#convert-your-analysis-history-into-a-galaxy-workflow" id="markdown-toc-convert-your-analysis-history-into-a-galaxy-workflow">Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></a></li>
+  <li><a href="#change-your-clm-fates-case-and-rerun-your-workflow" id="markdown-toc-change-your-clm-fates-case-and-rerun-your-workflow">Change your CLM-FATES case and rerun your <span class="notranslate">workflow</span></a></li>
   <li><a href="#share-your-work" id="markdown-toc-share-your-work">Share your work</a></li>
   <li><a href="#conclusion" id="markdown-toc-conclusion">Conclusion</a></li>
 </ol>
@@ -503,26 +583,26 @@ It will also teach you on how to create <span class="notranslate">Galaxy</span> 
 <blockquote class="comment">
   <h3 id="comment-background"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Background</h3>
 
-  <p>FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”.
+  <p>FATES is the “Functionally Assembled Terrestrial Ecosystem Simulator”, which is a vegetation demographic model (<a class="citation" href="#Fisher2017">Fisher <i>et al.</i> 2017</a>).
 FATES needs what we call a “Host Land Model” (HLM) to run and in this tutorial
 we will be using the <a href="http://www.cesm.ucar.edu/models/clm/">Community Land Model</a>
 of the <a href="https://github.com/ESCOMP/CTSM">Community Terrestrial Systems Model</a> (CLM-CTSM).
 FATES was derived from the CLM Ecosystem Demography model (CLM(ED)), which was documented in
-<a class="citation" href="#Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b> 2015</a>.
+<a class="citation" href="#Fisher2015"><b>Taking off the training wheels: the properties of a dynamic vegetation model without climate envelopes, CLM4.5(ED)</b> 2015</a> and <a class="citation" href="#Koven2020">Koven <i>et al.</i> 2020</a>. 
 And this technical note was first published as an appendix to <a href="https://pdfs.semanticscholar.org/396c/b9f172cb681421ed78325a2237bfb428eece.pdf">that paper</a>.
 The <a href="https://fates-docs.readthedocs.io/en/latest/index.html">FATES documentation</a> will provide some more insight on FATES too.</p>
 
 </blockquote>
 
-<h2 id="step-1-get-clm-fates-input-data">Step 1: Get CLM-FATES input data</h2>
+<h1 id="get-clm-fates-input-data">Get CLM-FATES input data</h1>
 
 <p>Preparing CLM-FATES input data is out of scope for this tutorial. We assume the input data tarball contains the following folders:</p>
 
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>atm   cpl   lnd   share
 </code></pre></div></div>
 
-<p>Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case.
-For the purpose of this tutorial, input data for a single point location ALP1 (61.0243N, 8.12343E) has been prepared and is ready to use.</p>
+<p>Each sub-folder will then contain all the necessary inputs for running your CLM-FATES case. For instance, ‘atm’ contains all the meteorological forcing data for running CLM-FATES. ‘lnd’ contains the data required to describe surface conditions (e.g., soil depth) for the model. More details about the model inputdata can be found in <a href="https://escomp.github.io/ctsm-docs/versions/master/html/tech_note/Ecosystem/CLM50_Tech_Note_Ecosystem.html#model-input-requirements">CLM and FATES documentation</a>.
+For the purpose of this tutorial, input data for a single point location (ALP1) on the Norwegian alpine tundra ecosystem (Latitude: 61.0243N, Longitude: 8.12343E, Elevation: 1208 m) has been prepared and is ready to use. This is a site included in the modelling platform developed under [EMERALD project] (https://www.mn.uio.no/geo/english/research/projects/emerald/). More details about the sites can be found in <a class="citation" href="#Klanderud2015">Klanderud <i>et al.</i> 2015</a> and  (missing reference)</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
@@ -544,7 +624,7 @@ For the purpose of this tutorial, input data for a single point location ALP1 (6
     </li>
     <li>
       <p>Import the <a href="https://doi.org/10.5281/zenodo.4108341">input data</a> and the <a href="https://doi.org/10.5281/zenodo.4126404">restart dataset from Zenodo</a>
-or from the shared data library</p>
+or from the shared data library. Restart dataset will be used if you want to initialize the model from exisiting experiments rather than running the model from a cold start to shorten spin-up time needed for the model.</p>
 
       <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
 https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar
@@ -607,14 +687,17 @@ https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_res
         </ul>
       </blockquote>
     </li>
-    <li>
-      <p>Rename datasets as</p>
-
-      <p>As <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar</code> and <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4126404/files/CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code>
-are not beautiful names and can give errors for some tools,
-it is a good practice to change the dataset names by something more meaningful. For example by removing
-<code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/</code> and <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4126404/files/</code> to obtain <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code>
-and <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code>, respectively.</p>
+    <li>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> datasets
+      <ul>
+        <li>Dataset names are the full URL, but this is not very nice to work with, and can even give errors for some tools</li>
+        <li>It is good practice to change the dataset names to something more meaningful and without any special characters
+          <ul>
+            <li>E.g. by stripping off the beginning of the URL</li>
+          </ul>
+        </li>
+        <li>Example: rename <code class="language-plaintext highlighter-rouge">https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar</code> to <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code></li>
+        <li>Do the same for the other dataset</li>
+      </ul>
 
       <blockquote class="tip">
 
@@ -626,32 +709,13 @@ and <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_versio
         </ul>
       </blockquote>
     </li>
-    <li>
-      <p>Add a tag to the dataset corresponding to <code class="language-plaintext highlighter-rouge">fates</code></p>
-
-      <blockquote class="tip">
-
-        <h3 id="tip-tip-adding-a-tag"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Adding a tag</h3>
-        <ul>
-          <li>Click on the dataset</li>
-          <li>Click on <i class="fas fa-tags" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-tags</span> <strong>Edit dataset tags</strong></li>
-          <li>
-            <p>Add a tag starting with <code class="language-plaintext highlighter-rouge">#</code></p>
-
-            <p>Tags starting with <code class="language-plaintext highlighter-rouge">#</code> will be automatically propagated to the outputs of tools using this dataset.</p>
-          </li>
-          <li>Check that the tag is appearing below the dataset name</li>
-        </ul>
-
-      </blockquote>
-    </li>
   </ol>
 
 </blockquote>
 
-<h1 id="step-2-setting-up-a-clm-fates-simulation">Step 2: Setting up a CLM-FATES simulation</h1>
+<h1 id="setting-up-a-clm-fates-simulation">Setting up a CLM-FATES simulation</h1>
 
-<p>We will be using the CTSM/FATES-EMERALD <span class="notranslate">Galaxy</span> tool.</p>
+<p>We will be using the CTSM/FATES-EMERALD <span class="notranslate">Galaxy</span> tool.This tool is based on the version of <a href="https://github.com/NordicESMhub/ctsm/tree/fates_emerald_api">CLM-FATES</a> that have been adapted to run at the sites included in the EMERALD project. More details about this model version can be found in <a href="https://github.com/NordicESMhub/ctsm/blob/fates_emerald_api/README_fates_emerald_api">README_fates_emerald_api</a></p>
 
 <blockquote class="comment">
   <h3 id="comment-tip-finding-your-tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: Finding your tool</h3>
@@ -662,36 +726,44 @@ and <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_versio
 
 </blockquote>
 
-<blockquote class="notranslate hands_on">
+<blockquote class="comment">
+  <h3 id="comment-tip-pre-selected-tool-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: Pre-selected tool parameters</h3>
+
+  <p>When selecting a tool, <span class="notranslate">Galaxy</span> will pre-fill the tool parameters, selecting the first dataset with the corresponding type in your history.
+Be aware that very often, the default pre-selection is incorrect and do not correspond to the required dataset.
+So always check and update accordingly the tool parameters!</p>
+
+</blockquote>
+
+<blockquote>
   <h3 id="hands_on-hands-on-creating-a-new-ctsmfates-emerald-case"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating a new CTSM/FATES-EMERALD case</h3>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
 
   <ol>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1" title="Tested with toolshed.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1"><strong>CTSM/FATES-EMERALD</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/climate/ctsm_fates/ctsm_fates/2.0.1</span></span>  with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“inputdata for running FATES EMERALD”</em>: select the <strong>inputdata_version2.0.0_ALP1.tar</strong> file from your history</li>
-        <li><em>Name of your case</em>: ALP1_exp</li>
-        <li>Expand <em>‘Customize the model run period’</em> to change the default values:
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“inputdata for running FATES EMERALD”</em>: <code class="language-plaintext highlighter-rouge">inputdata_version2.0.0_ALP1.tar</code> file from your history</li>
+        <li><em>“Name of your case”</em>: ALP1_exp</li>
+        <li>In section <em>“Customize the model run period”</em>:
           <ul>
-            <li><strong>Determines the model run initialization type</strong>: select <strong>hybrid</strong></li>
-            <li><strong>Reference case for hybrid or branch runs</strong>: ALP1_refcase</li>
-            <li><strong>Reference date for hybrid or branch runs (yyyy-mm-dd)</strong>: 2300-01-01</li>
-            <li><strong>Run start date (yyyy-mm-dd). Only used for startup or hybrid runs</strong>: 0001-01-01</li>
-            <li><strong>Restart for running FATES EMERALD</strong>: CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</li>
-            <li><strong>Provides a numerical count for STOP_OPTION</strong>: 5</li>
-            <li><strong>Sets the run length along with STOP_N and STOP_DATE</strong>: nyears</li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Determines the model run initialization type:</em>: <code class="language-plaintext highlighter-rouge">hybrid</code>
+              <ul>
+                <li><em>“Reference case for hybrid or branch runs”</em>: <code class="language-plaintext highlighter-rouge">ALP1_refcase</code></li>
+                <li><em>“Reference date for hybrid or branch runs (yyyy-mm-dd)”</em>: <code class="language-plaintext highlighter-rouge">2300-01-01</code></li>
+                <li><em>“Run start date (yyyy-mm-dd). Only used for startup or hybrid runs”</em>: <code class="language-plaintext highlighter-rouge">0001-01-01</code></li>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Restart for running FATES EMERALD”</em>: <code class="language-plaintext highlighter-rouge">CTSM_FATES-EMERALD_version2.0.0_ALP1_restart_2300-01-01.tar</code></li>
+              </ul>
+            </li>
+            <li><em>“Provides a numerical count for STOP_OPTION”</em>: <code class="language-plaintext highlighter-rouge">5</code></li>
+            <li><em>“Sets the run length along with STOP_N and STOP_DATE”</em>: <code class="language-plaintext highlighter-rouge">nyears</code></li>
           </ul>
         </li>
-        <li>Click <strong>Execute</strong></li>
       </ul>
 
-      <blockquote class="tip">
-        <h3 id="comment-tip-search-for-the-tool"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Tip: search for the tool</h3>
-
-        <p>Use the <strong>tools search box</strong> at the top of the tool panel to find <strong>Remove beginning</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
-      </blockquote>
-
       <blockquote class="comment">
-        <h2 id="comment-startup-versus-hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> startup versus hybrid</h2>
+        <h3 id="comment-startup-versus-hybrid"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Startup versus Hybrid</h3>
 
         <p>When using <strong>startup</strong>, the FATES model will start from some arbitrary baseline state that is not linked to any previous run.
 Startup runs are typically initialized using a start date of 0001-01-01 except if you change it (start date option).
@@ -702,14 +774,26 @@ of your restart files. This is what we do in this tutorial.</p>
 
       </blockquote>
     </li>
-    <li>
-      <p>Check that the datatype of your outputs (history file) is <strong>netcdf</strong></p>
+    <li>Check that the datatype <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> of your outputs (history file) is <strong><a href="https://en.wikipedia.org/wiki/NetCDF">netcdf</a></strong>
+      <ul>
+        <li>If this is not the case, please change the datatype now</li>
+      </ul>
 
-      <p>All the history files contain gridded data values written at specified times during the model run.
+      <blockquote class="comment">
+        <h3 id="comment-about-clm-fates-history-files"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> About CLM-FATES history files</h3>
+        <p>All the CLM-FATES history files are organized in a collection.</p>
+
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-about-datatypes"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> About datatypes</h3>
+
+        <p>All the history files contain gridded data values written at specified times during the model run.
 Depending on the length of your simulation, you may have one or more history files that you can recognize from their names:
 <code class="language-plaintext highlighter-rouge">ALP1_exp.clm2.h0.yyyy-mm-dd-sssss.nc</code> (for non-monthly history files).
 Datatypes are, by default, automatically guessed. Here, as the prefix is <code class="language-plaintext highlighter-rouge">.nc</code>, the format is not always recognized as <code class="language-plaintext highlighter-rouge">netcdf</code> files.
 To cope with that, one can change the datatype manually, as shown below.</p>
+      </blockquote>
 
       <blockquote class="tip">
 
@@ -739,16 +823,15 @@ particular Panoply, won’t be able to recognize your file if not named properly
         </ul>
       </blockquote>
     </li>
-    <li>
-      <p>Getting metadata information for CLM-FATES netCDF outputs</p>
-
-      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>   with the following parameters:</p>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1"><strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_metadata_info/xarray_metadata_info/0.15.1</span></span>   to get metadata information for CLM-FATES netCDF outputs:
       <ul>
-        <li><strong>Netcdf file</strong>: ALP1_exp.nc</li>
-        <li>Click <strong>Execute</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Netcdf file”</em>: <code class="language-plaintext highlighter-rouge">ALP1_exp.nc</code></li>
       </ul>
-
-      <p>Inspect the generated output files and identify which variables would provide you some insights about canopy transpiration.</p>
+    </li>
+    <li><strong>Inspect</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the generated output files
+      <ul>
+        <li>Identify which variables would provide you some insights about canopy transpiration.</li>
+      </ul>
 
       <blockquote class="question">
         <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
@@ -771,14 +854,14 @@ particular Panoply, won’t be able to recognize your file if not named properly
 
 </blockquote>
 
-<h1 id="step-3-quick-visualization-with-panoply">Step 3: Quick visualization with Panoply</h1>
+<h1 id="quick-visualization-with-panoply">Quick visualization with Panoply</h1>
 
 <h2 id="opening-up-panoply">Opening up Panoply</h2>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-launch-panoply"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Launch Panoply</h3>
 
-  <p>Panoply is available as a <span class="notranslate">Galaxy</span> interactive environment and may not be available on all <span class="notranslate">Galaxy</span> servers.</p>
+  <p><a href="https://www.giss.nasa.gov/tools/panoply/">Panoply</a> plots geo-referenced and other arrays from netCDF and is available as a <span class="notranslate">Galaxy</span> interactive environment and may not be available on all <span class="notranslate">Galaxy</span> servers.</p>
 
   <blockquote class="tip">
     <h3 id="tip-tip-launch-panoply-in-galaxy"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Launch Panoply in <span class="notranslate">Galaxy</span></h3>
@@ -823,7 +906,7 @@ and switch to the correct history.</p>
         <blockquote class="solution">
           <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>Rate of total mortality per PFT</li>
+            <li>Rate of total mortality per PFT (Plat functional types)</li>
             <li>indiv/ha/yr</li>
           </ol>
         </blockquote>
@@ -852,7 +935,7 @@ if you do not save in the output folder, your plot will get lost.</p>
     <li>
       <p>Plot the rate of total mortality per PFT (MORTALITY)</p>
 
-      <p>Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT.
+      <p>Select a 2D plot with time as x-axis and colored by the rate of total mortality per PFT (Plant functional type).
 Make sure to adjust the y-axis and save your plots in the output folder (as png file).</p>
       <blockquote class="question">
         <h3 id="question-question-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -863,14 +946,14 @@ Make sure to adjust the y-axis and save your plots in the output folder (as png 
         <blockquote class="solution">
           <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
           <ol>
-            <li>We can clearly see a seasonal cycle.</li>
+            <li>We can clearly see a seasonal cycle of PFT2.</li>
           </ol>
           <figure id="figure-3"><img src="../../images/panoply_MORTALITY_ALP1_exp.png" alt="Panoply MORTALITY per PFT" /><figcaption><span class="figcaption-prefix">Figure 3:</span> total mortality per PFT</figcaption></figure>
         </blockquote>
       </blockquote>
 
       <blockquote class="comment">
-        <h2 id="comment-quit-panoply-properly-to-save-your-plots"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Quit Panoply properly to save your plots!</h2>
+        <h3 id="comment-quit-panoply-properly-to-save-your-plots"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Quit Panoply properly to save your plots!</h3>
 
         <p>To make sure all your plots stored in <strong>outputs</strong> folder  get exported to <span class="notranslate">Galaxy</span>, you need to quit panoply: <strong>File</strong> –&gt; <strong>Quit Panoply</strong>.</p>
       </blockquote>
@@ -878,7 +961,7 @@ Make sure to adjust the y-axis and save your plots in the output folder (as png 
   </ol>
 </blockquote>
 
-<h1 id="step-4-using-galaxy-tools-for-analysing-your-clm-fates-simulation">Step 4: Using <span class="notranslate">Galaxy</span> tools for analysing your CLM-FATES simulation</h1>
+<h1 id="using-galaxy-tools-for-analysing-your-clm-fates-simulation">Using <span class="notranslate">Galaxy</span> tools for analysing your CLM-FATES simulation</h1>
 
 <p>Panoply is a great tool for exploring the results of your simulations but what we would like is to automate the generation of the plots
 so that we can reuse it for any simulations.</p>
@@ -887,17 +970,15 @@ so that we can reuse it for any simulations.</p>
   <h3 id="hands_on-hands-on-select-and-plot-leafc"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Select and plot <strong>LEAFC</strong></h3>
 
   <ol>
-    <li>Select the total carbon in live plant leaves (<strong>LEAFC</strong>)
-<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1"><strong>NetCDF xarray Selection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1"><strong>NetCDF xarray Selection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/xarray_select/xarray_select/0.15.1</span></span>  to select the total carbon in live plant leaves (<strong>LEAFC</strong>)
       <ul>
-        <li><strong>Input netcdf file</strong>: ALP1_exp.nc</li>
-        <li><strong>Tabular of variables</strong>: Metadata infos from ALP1_exp.nc</li>
-        <li><strong>Choose the variable to extract</strong>: LEAFC</li>
-        <li>Click <strong>Execute</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input netcdf file”</em>: ALP1_exp.nc</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Tabular of variables”</em>: Metadata info from <code class="language-plaintext highlighter-rouge">ALP1_exp.nc</code> (output of <strong>NetCDF xarray Metadata Info</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the variable to extract”</em>: <code class="language-plaintext highlighter-rouge">LEAFC</code></li>
       </ul>
     </li>
     <li>
-      <p>Rename Dataset to <strong>NetCDF xarray Selection on ALP1_exp.nc</strong></p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> dataset to <code class="language-plaintext highlighter-rouge">NetCDF xarray Selection on ALP1_exp.nc</code></p>
 
       <blockquote class="tip">
 
@@ -909,22 +990,20 @@ so that we can reuse it for any simulations.</p>
         </ul>
       </blockquote>
     </li>
-    <li>Clean date column for plotting
-<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace parts of text</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  with the following parameters:
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3"><strong>Replace parts of text </strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_find_and_replace/1.1.3</span></span>  to clean date column for plotting:
       <ul>
-        <li><strong>File to process</strong>: NetCDF xarray Selection on ALP1_exp.nc</li>
-        <li><strong>Find pattern</strong>:  00:00:00</li>
-        <li><strong>Find-Pattern is a regular <span class="notranslate">expression</span></strong>: Select <em>No</em></li>
-        <li><strong>Replace all occurences of the pattern</strong>: Select <em>Yes</em></li>
-        <li><strong>Case-Insensitive search</strong>: Select <em>No</em></li>
-        <li><strong>Find whole-words</strong>: Select <em>Yes</em></li>
-        <li><strong>Ignore first line</strong>: Select <em>Yes</em></li>
-        <li><strong>Find and Replace text in</strong>: Select <em>entire line</em></li>
-        <li>Click <strong>Execute</strong></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: NetCDF xarray Selection on ALP1_exp.nc</li>
+        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">00:00:00</code></li>
+        <li><em>“Find-Pattern is a regular <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Replace all occurences of the pattern”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Case-Insensitive search”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Find whole-words”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Ignore first line”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Find and Replace text in”</em>: <code class="language-plaintext highlighter-rouge">entire line</code></li>
       </ul>
     </li>
     <li>
-      <p>Rename Dataset to <strong>LEAFC_clean.tabular</strong></p>
+      <p><strong>Rename</strong> <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> dataset to <code class="language-plaintext highlighter-rouge">LEAFC_clean.tabular</code></p>
 
       <blockquote class="tip">
 
@@ -936,24 +1015,26 @@ so that we can reuse it for any simulations.</p>
         </ul>
       </blockquote>
     </li>
-    <li>Plot the total carbon in live plant leaves (<strong>LEAFC</strong>)</li>
-  </ol>
-
-  <p>To make a plot, you can use <strong>Scatterplot w ggplot2</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
-  <ul>
-    <li><em>“Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">LEAFC_clean.tabular</code></li>
-    <li><em>“Column to plot on x-axis”</em>: 1</li>
-    <li><em>“Column to plot on y-axis”</em>: 4</li>
-    <li><em>“Plot title”</em>: Total carbon in live plant leaves</li>
-    <li><em>“Label for x axis”</em>: Time</li>
-    <li><em>“Label for y axis”</em>: LEAFC (kgC ha-1)</li>
-    <li>In <code class="language-plaintext highlighter-rouge">Advanced Options</code> change <code class="language-plaintext highlighter-rouge">Type of plot</code> to <strong>Points and Lines</strong>.</li>
-    <li>And finally in <code class="language-plaintext highlighter-rouge">Output options</code> set <code class="language-plaintext highlighter-rouge">width of output</code> to <em>*19.0 and <code class="language-plaintext highlighter-rouge">height of output</code></em> to 5.0*.</li>
-  </ul>
-
-  <ol>
-    <li>
-      <p>Click on <strong>Execute</strong>.</p>
+    <li><strong>Scatterplot w ggplot2</strong>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to plot the total carbon in live plant leaves (<strong>LEAFC</strong>):
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input in tabular format”</em>: <code class="language-plaintext highlighter-rouge">LEAFC_clean.tabular</code></li>
+        <li><em>“Column to plot on x-axis”</em>: 1</li>
+        <li><em>“Column to plot on y-axis”</em>: 4</li>
+        <li><em>“Plot title”</em>: <code class="language-plaintext highlighter-rouge">Total carbon in live plant leaves</code></li>
+        <li><em>“Label for x axis”</em>: <code class="language-plaintext highlighter-rouge">Time</code></li>
+        <li><em>“Label for y axis”</em>: <code class="language-plaintext highlighter-rouge">LEAFC (kgC ha-1)</code></li>
+        <li>In <code class="language-plaintext highlighter-rouge">Advanced Options</code>
+          <ul>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Type of plot”</em>: <code class="language-plaintext highlighter-rouge">Points and Lines</code></li>
+          </ul>
+        </li>
+        <li>In <code class="language-plaintext highlighter-rouge">Output options</code>
+          <ul>
+            <li><em>“width of output”</em>:<code class="language-plaintext highlighter-rouge">19.0</code></li>
+            <li><em>“height of output”</em>: <code class="language-plaintext highlighter-rouge">5.0</code></li>
+          </ul>
+        </li>
+      </ul>
     </li>
     <li>
       <p><strong>View</strong> <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting plot:</p>
@@ -964,7 +1045,7 @@ so that we can reuse it for any simulations.</p>
 
 </blockquote>
 
-<h1 id="step-5-convert-your-analysis-history-into-a-galaxy-workflow">Step 5: Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></h1>
+<h1 id="convert-your-analysis-history-into-a-galaxy-workflow">Convert your analysis history into a <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span></h1>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-extract-workflow"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Extract <span class="notranslate">workflow</span></h3>
@@ -973,7 +1054,7 @@ so that we can reuse it for any simulations.</p>
     <li>Go to the <strong>History Options menu</strong>  <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> menu
       <ul>
         <li>Select the <strong>Extract <span class="notranslate">Workflow</span></strong> option.</li>
-        <li>Remove any unwanted steps</li>
+        <li>Remove any unwanted steps, in particular all steps with Panoply as we do not want to have interactive tools in our automated <span class="notranslate">workflow</span>..</li>
       </ul>
     </li>
     <li><strong>Rename</strong> the <span class="notranslate">workflow</span> to something descriptive
@@ -992,7 +1073,7 @@ so that we can reuse it for any simulations.</p>
 
 </blockquote>
 
-<h1 id="step-6-change-your-clm-fates-case-and-rerun-your-workflow">Step 6: Change your CLM-FATES case and rerun your <span class="notranslate">workflow</span></h1>
+<h1 id="change-your-clm-fates-case-and-rerun-your-workflow">Change your CLM-FATES case and rerun your <span class="notranslate">workflow</span></h1>
 
 <p>We would like to run a CLM-FATES case where the atmospheric Carbon Dioxyde Concentration (CO2) is increased by a factor of 4.</p>
 
@@ -1000,34 +1081,56 @@ so that we can reuse it for any simulations.</p>
   <h3 id="hands_on-hands-on-compare-the-two-simulations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Compare the two simulations</h3>
 
   <p>Using the results from your two CLM-FATES simulations and the generated plots, assess the impact
-   of an increase in the atmosperhic CO2 on the outputs of the model.</p>
+ of an increase in the atmosperhic CO2 on the outputs of the model.</p>
+
   <ol>
-    <li>Edit your <span class="notranslate">workflow</span> and customize it to run your new CO2 experiment. For this you would need to
-add an extra step to extract the first history file from the history collection and generate the
-corresponding plot. The final <span class="notranslate">workflow</span> would be similar to the one shown below:</li>
-  </ol>
+    <li>
+      <p>Open the <strong><span class="notranslate">workflow</span> editor</strong></p>
 
-  <figure id="figure-4"><img src="../../images/fates_workflow.png" alt="FATES workflow" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FATES <span class="notranslate">workflow</span></figcaption></figure>
+      <blockquote class="tip">
 
-  <blockquote class="question">
-    <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-    <ol>
-      <li>Is the model response to this significant increase of atmospheric CO2 what you expected?
+        <h3 id="hands_on-tip-opening-the-workflow-editor"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Tip: opening the <span class="notranslate">workflow</span> editor</h3>
+
+        <ol>
+          <li>Click on the name of the imported <span class="notranslate">workflow</span>
+<img src="../../../galaxy-interface/images/edit_workflow.png" alt="Workflow drop down menu showing Edit option" title="When you click on the name of a workflow it will open a drop down menu whose first option is Edit. Select the Edit option to edit the workflow." /></li>
+          <li>Select the Edit <span class="notranslate">workflow</span> to open the <span class="notranslate">workflow</span> in the <span class="notranslate">workflow</span> editor</li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Edit your <span class="notranslate">workflow</span> and customize it to run your new CO2 experiment. For this you would need to:</p>
+      <ul>
+        <li>In “Advanced customization”, change “Atmospheric CO2 molar ratio (by volume) only used when co2_type==constant (umol/mol)” from 367.0 to 1468.0.</li>
+        <li>Add an extra step to extract the first history file from the history collection: <span class="tool" data-tool="__EXTRACT_DATASET__" title="Tested with __EXTRACT_DATASET__"><strong>Extract Dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <strong>EXTRACT_DATASET</strong></span></span> 
+and make sure to select “netcdf” in the change datatype field.</li>
+        <li>Generate the corresponding plot.
+The final <span class="notranslate">workflow</span> would be similar to the one shown below:</li>
+      </ul>
+
+      <figure id="figure-4"><img src="../../images/fates_workflow.png" alt="FATES workflow" /><figcaption><span class="figcaption-prefix">Figure 4:</span> FATES <span class="notranslate">workflow</span></figcaption></figure>
+
+      <blockquote class="question">
+        <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
+        <ol>
+          <li>Is the model response to this significant increase of atmospheric CO2 what you expected?
   Justify your answer.</li>
-      <li>Is the current <span class="notranslate">workflow</span> (in particular the variables selected for the plots) the best choice?
+          <li>Is the current <span class="notranslate">workflow</span> (in particular the variables selected for the plots) the best choice?
   What changes/additions would you recommend?</li>
-    </ol>
+        </ol>
 
-    <blockquote class="solution">
-      <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-      <ol>
-        <li>Running 5 years is already sufficient to highlight significant changes.
+        <blockquote class="solution">
+          <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>Running 5 years is already sufficient to highlight significant changes.
 <img src="../../images/LEAFC_ALP1_4CO2_ggplot.png" alt="LEAFC 4xCO2" /></li>
-        <li>Many suggestions can be given here. One simple addition can be the generation of plots where
+            <li>Many suggestions can be given here. One simple addition can be the generation of plots where
 both simulations are represented on the same plot.</li>
-      </ol>
-    </blockquote>
-  </blockquote>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
 
 </blockquote>
 
@@ -1077,13 +1180,13 @@ Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is 
                         <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
                         <ul>
                             
-                            <li><p>CLM-FATES</p>
+                            <li><p>CLM-FATES is a numerical terrestrial ecosystem model used in climate models</p>
 </li>
                             
-                            <li><p>Quick visualization of your results with Panoply</p>
+                            <li><p>Panoply is a quick visualization tools for plotting your results</p>
 </li>
                             
-                            <li><p>Create multi-case simulations with a Galaxy workflow</p>
+                            <li><p>Multi-case simulations can be easily developed and shared with a Galaxy workflow</p>
 </li>
                             
                         </ul>
@@ -1099,6 +1202,39 @@ Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is 
     
     <a href="https://doi.org/10.5194/gmd-8-3593-2015">10.5194/gmd-8-3593-2015</a>
     
+    
+
+</li>
+<li><span id="Klanderud2015">Klanderud, K., V. Vandvik, and D. Goldberg, 2015 <b>The Importance of Biotic vs. Abiotic Drivers of Local Plant Community Composition Along Regional Bioclimatic Gradients</b> (C. Armas, Ed.). PLOS ONE 10: e0130205.</span>
+    
+    
+    <a href="https://doi.org/10.1371/journal.pone.0130205">10.1371/journal.pone.0130205</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Fisher2017">Fisher, R. A., C. D. Koven, W. R. L. Anderegg, B. O. Christoffersen, M. C. Dietze <i>et al.</i>, 2017 <b>Vegetation demographics in Earth System Models: A review of progress and priorities</b>. Global Change Biology 24: 35–54.</span>
+    
+    
+    <a href="https://doi.org/10.1111/gcb.13910">10.1111/gcb.13910</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Koven2020">Koven, C. D., R. G. Knox, R. A. Fisher, J. Q. Chambers, B. O. Christoffersen <i>et al.</i>, 2020 <b>Benchmarking and parameter sensitivity of physiological and vegetation dynamics using the Functionally Assembled Terrestrial Ecosystem Simulator (FATES) at Barro Colorado Island,  Panama</b>. Biogeosciences 17: 3017–3044.</span>
+    
+    
+    <a href="https://doi.org/10.5194/bg-17-3017-2020">10.5194/bg-17-3017-2020</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
     
 
 </li></ol>
@@ -1140,7 +1276,7 @@ Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is 
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Anne Fouilloux, 2020 <b>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)</b>. <a href="/training-material/topics/climate/tutorials/fates/tutorial.html">/training-material/topics/climate/tutorials/fates/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Anne Fouilloux, Hui Tang, 2021 <b>Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)</b>. <a href="/training-material/topics/climate/tutorials/fates/tutorial.html">/training-material/topics/climate/tutorials/fates/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1155,11 +1291,11 @@ Please note that <a href="https://workflowhub.eu">https://workflowhub.eu</a> is 
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{climate-fates,
-    author = "Anne Fouilloux",
+    author = "Anne Fouilloux and Hui Tang",
     title = "Functionally Assembled Terrestrial Ecosystem Simulator (FATES) (Galaxy Training Materials)",
-    year = "2020",
-    month = "11",
-    day = "26"
+    year = "2021",
+    month = "01",
+    day = "21"
     url = "\url{/training-material/topics/climate/tutorials/fates/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1206,7 +1342,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Anne Fouilloux, Hui Tang)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
