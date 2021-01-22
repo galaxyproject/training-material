@@ -276,7 +276,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 
 > ### {% icon hands_on %} Hands-on: Concatenate karyotype definitions and bads
 >
-> 1. {% tool [Concatenate datasets tail-to-head](https://toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets) %}:
+> 1. {% tool [Concatenate datasets tail-to-head](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %}:
 >     - {% icon param-file %} *"Concatenate Datasets"*: `hg18_karyotype.txt`
 >     - {% icon param-repeat %} *"Insert Dataset"*
 >         - In *"1. Dataset"*:
