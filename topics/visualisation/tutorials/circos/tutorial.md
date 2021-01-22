@@ -273,15 +273,27 @@ In this section we will reproduce this Circos plot step by step.
 As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
 
 
+> ### {% icon hands_on %} Hands-on: Concatenate karyotype definitions and bads
+>
+> 1. {% tool [Concatenate datasets tail-to-head](https://toolshed.g2.bx.psu.edu/repos/artbio/concatenate_multiple_datasets) %}:
+>     - {% icon param-file %} *"Concatenate Datasets"*: `hg18_karyotype.txt`
+>     - {% icon param-repeat %} *"Insert Dataset"*
+>         - In *"1. Dataset"*:
+>             - {% icon param-file %} *"Select"*: `hg18_karyotype_bands.tsv`
+>
+> 2. **Rename** {% icon galaxy-pencil%} the output as `hg18_karyotype_combined.txt`
+>
+>    {% include snippets/rename_dataset.md %}
+{: .hands_on}
 
-
-
+Now we can visualize our karyotype.
+    
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a ciruclar layout with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.txt`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_combined.txt`
 >    - In *"Ideogram"*:
          - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
@@ -294,7 +306,6 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
 >
->    {% include snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
