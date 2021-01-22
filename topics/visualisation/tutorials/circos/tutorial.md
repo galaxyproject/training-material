@@ -274,7 +274,7 @@ In this section we will reproduce this Circos plot step by step.
 As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
 
 
-> ### {% icon hands_on %} Hands-on: Concatenate karyotype definitions and bads
+> ### {% icon hands_on %} Hands-on: Concatenate karyotype definitions and bands
 >
 > 1. {% tool [Concatenate datasets tail-to-head](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %}:
 >     - {% icon param-file %} *"Concatenate Datasets"*: `hg18_karyotype.txt`
