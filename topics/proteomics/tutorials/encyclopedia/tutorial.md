@@ -44,7 +44,7 @@ get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
 
 With the example you will find in the `tutorial.bib` file, you can add a citation to
 this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
+{% raw %} `{% cite FernandezCosta2020 %}`{% endraw %}.
 This will be rendered like this: {% cite Batut2018 %}, and links to a
 [bibliography section](#bibliography) which will automatically be created at the end of the
 tutorial.
@@ -113,14 +113,12 @@ have fun!
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Conversion of file types
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+msconvert is the first tool in this EncyclopeDIA workflow and before analysis of such DIA data may begin, the data file must be converted to the correct file type (mzML) from the raw data. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the Gas Phase Fractionated DIA data and the Experimental DIA data are run through msconvert to convert to the necessary file type (mzML) for the following steps, creation of the chromatogram library and analysis of DIA data through EncyclopeDIA.
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
 
 ***TODO***: *Consider adding a detail box to expand the theory*
 
@@ -170,8 +168,8 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. WHy is converting to mzml necessary?
+> 2. Can you use any other tool for conversion?
 >
 > > ### {% icon solution %} Solution
 > >
@@ -231,7 +229,15 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **SearchToLib**
+# Chromatogram Library Generation
+
+Write about Chromatogram Libraries and add few images
+![Alternative text](../../images/image_name "Legend of the image")
+![Alternative text](../../images/image_name "Legend of the image")
+
+SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the spectral files converted previously, a background protein database in FASTA format, as well as a .dlib spectral library. Outputs from this tool include the Chromatogram Library in an .elib format, as well as a text log file.
+
+## **SearchToLib**
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -263,7 +269,7 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
+> 1. What happens if you already have a library?
 > 2. Question2?
 >
 > > ### {% icon solution %} Solution
@@ -274,6 +280,46 @@ A big step can have several subsections or sub steps:
 > {: .solution}
 >
 {: .question}
+
+# Without Chromatogram library
+
+Write about Walnut if Chromatogram Libraries are absent and add few images
+![Alternative text](../../images/image_name "Legend of the image")
+![Alternative text](../../images/image_name "Legend of the image")
+
+## Sub-step with **Walnut**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [EncyclopeDIA Quantify](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/0.9.5.0) %} with the following parameters:
+>    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
+>    - {% icon param-file %} *"Library: Chromatagram .ELIB or Spectrum .DLIB"*: `elib` (output of **SearchToLib** {% icon tool %})
+>    - {% icon param-file %} *"Background proteome protein fasta database"*: `output` (Input dataset)
+>    - In *"Parameter Settings"*:
+>        - *"Set Acquisition Options"*: `No - use default options`
+>        - *"Set Tolerance Options"*: `No - use default options`
+>        - *"Set Percolator Options"*: `No - use default options`
+>        - *"Set Peak Options"*: `No - use default options`
+>        - *"Set Window Options"*: `No - use default options`
+>        - *"Set Modifications Options"*: `No - use default options`
+>        - *"Set Search Options"*: `No - use default options`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+# Analysis of DIA data through EncyclopeDIA
+
+Encyclopedia is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs, one for protein quantitation and one for peptide quantitation. 
+
+![Alternative text](../../images/image_name "Legend of the image")
 
 ## Sub-step with **EncyclopeDIA Quantify**
 
