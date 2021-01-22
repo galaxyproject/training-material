@@ -1,0 +1,981 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Peptide Library Data Analysis</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Peptide Library Data Analysis" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fpeptide-library-data-analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fpeptide-library-data-analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fpeptide-library-data-analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fpeptide-library-data-analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fpeptide-library-data-analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fpeptide-library-data-analysis%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Peptide Library Data Analysis",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Proteomics",
+    "description": "Training material for proteomics workflows in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+  },
+  "courseCode": "proteomics / peptide-library-data-analysis / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Peptide Library Data Analysis' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html",
+  "timeRequired": "PT20M",
+  "description": "The questions this  addresses are:\n - How to utilize quantitative properties of amino acids and peptide sequence to analyse peptide data?\n\n\\nThe objectives are:\n - Calculate descriptors\n - Quantitative analysis of peptide sequence properties\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jayadev Joshi"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Jayadev Joshi"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Peptide Library Data Analysis</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/jaidevjoshi83/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jaidevjoshi83" alt="Jayadev Joshi">Jayadev Joshi</a> <a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankenberg" alt="Daniel Blankenberg">Daniel Blankenberg</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How to utilize quantitative properties of amino acids and peptide sequence to analyse peptide data?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Calculate descriptors</p>
+</li>
+            
+            <li><p>Quantitative analysis of peptide sequence properties</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 20 minutes</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/workflows/" title="Workflows" alt="Peptide Library Data Analysis workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 22, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<p>Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alte<span class="notranslate">rna</span>tives to the lengthy and expensive traditional experimental approaches.  Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to compare peptide sequences and libraries.  In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to analyze the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under <span class="notranslate">Galaxy</span> (PDAUG) package to calculate various peptide-based descriptors, and use these descriptors and feature spaces to build informative plots.</p>
+
+<h3 id="easy-access-to-tools-workflows-and-data-from-the-docker-image">Easy access to tools, workflows and data from the docker image</h3>
+
+<p>An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, <span class="notranslate">workflow</span>, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-easy-access-of-tools-workflows-and-data-from-docker-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Easy access of tools, workflows and data from docker image</h3>
+
+  <ol>
+    <li>Downloading the docker image from the docker hub using <code class="language-plaintext highlighter-rouge">docker pull jayadevjoshi12/<span class="notranslate">galaxy</span>_pdaug:latest</code> command.</li>
+    <li>Running the container with latest PDAUG tools <code class="language-plaintext highlighter-rouge">docker run -i -t -p 8080:80 jayadevjoshi12/<span class="notranslate">galaxy</span>_pdaug:latest</code>.</li>
+    <li><span class="notranslate">Workflow</span> is available under the <span class="notranslate">workflow</span> section, use <code class="language-plaintext highlighter-rouge">admin</code> as use<span class="notranslate">rna</span>me and <code class="language-plaintext highlighter-rouge">password</code> as a password to login as an administrator of your <span class="notranslate">galaxy</span> instance.</li>
+    <li>Use <code class="language-plaintext highlighter-rouge">admin</code> as use<span class="notranslate">rna</span>me and <code class="language-plaintext highlighter-rouge">password</code> as a password to login <span class="notranslate">galaxy</span> instance, which is available at <a href="http://127.0.0.1:8080">localhost</a> to access <span class="notranslate">workflow</span> and data.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#peptide-data" id="markdown-toc-peptide-data">Peptide Data</a></li>
+  <li><a href="#converting-tabular-data-into-fasta-format" id="markdown-toc-converting-tabular-data-into-fasta-format">Converting tabular data into fasta format</a></li>
+  <li><a href="#analyzing-peptide-libraries-amps-and-tmps-based-on-features-and-feature-space" id="markdown-toc-analyzing-peptide-libraries-amps-and-tmps-based-on-features-and-feature-space">Analyzing peptide libraries (AMPs and TMPs) based on features and feature space</a></li>
+  <li><a href="#assessing-the-relation-between-peptide-features-by-3d-scatter-plot" id="markdown-toc-assessing-the-relation-between-peptide-features-by-3d-scatter-plot">Assessing the relation between peptide features by 3D scatter plot</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="peptide-data">Peptide Data</h2>
+
+<p>Several inbuilt data sets have been provided with the tool<code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access</code>. The antimicrobial peptides (AMPs) versus transmembrane peptides (TMPs) dataset was used as an example data set to understand the overall relation between features and biological properties of peptides. AMPs consist of an intersection of all activity annotations of the APD2 and CAMP databases, where gram-positive, gram-negative, and antifungal exact matches were observed. TMPs were extracted from alpha-helical transmembrane regions of proteins for classification.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-fetching-inbuild-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Fetching inbuild data</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0"><strong>PDAUG Peptide Data Access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_peptide_data_access/pdaug_peptide_data_access/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Datasets”</em>: <code class="language-plaintext highlighter-rouge">AMPvsTMP</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="converting-tabular-data-into-fasta-format">Converting tabular data into fasta format</h2>
+
+<p><code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access</code> tool returns data as a tabular file that contains sequences from both the classes. In order to utilize this data in the next steps, first we need to convert tabular data into fasta format. If data contains sequences from two different classes <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA</code> tool converts and splits data into two separate files for each of the class,  AMPs, and TMPs.  The reason behind converting and splitting the data is that all the <span class="notranslate">downstream</span> tools require two separate files if we are comparing two different peptide classes or calculating features.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-converting-tabular-data-into-fasta-formate"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Converting tabular data into fasta formate</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0"><strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_tsvtofasta/pdaug_tsvtofasta/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Peptide Data Access - AMPvsTMP (tabular)</code> (output of <strong>PDAUG Peptide Data Access</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Peptide Column”</em>:  <code class="language-plaintext highlighter-rouge">name</code></li>
+        <li><em>“Method to convert data”</em>: <code class="language-plaintext highlighter-rouge">Split Data By Class Label</code></li>
+        <li><em>“Column with the class label”</em>: <code class="language-plaintext highlighter-rouge">class label</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="analyzing-peptide-libraries-amps-and-tmps-based-on-features-and-feature-space">Analyzing peptide libraries (AMPs and TMPs) based on features and feature space</h2>
+
+<h3 id="summary-plot-for-peptide-libraries">Summary Plot for peptide libraries</h3>
+
+<p>In this step, we utilize <code class="language-plaintext highlighter-rouge">PDAUG Peptide Sequence Analysis</code> tool to compare peptide sequences based on hydrophobicity, hydrophobic movement, charge, amino acid fraction, and sequence length and create a summary plot.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generating-a-summary-plot-to-assess-peptide-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating a summary plot to assess peptide dataset</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0"><strong>PDAUG Peptide Sequence Analysis</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_peptide_sequence_analysis/pdaug_peptide_sequence_analysis/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Analysis options”</em>: <code class="language-plaintext highlighter-rouge">Plot Summary</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“first input file”</em>: <code class="language-plaintext highlighter-rouge">TMPs</code></li>
+            <li><em>“Second input file”</em>: <code class="language-plaintext highlighter-rouge">AMPs</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+    <p>What can be concluded from the summary plot based on different properties?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+      <p>The summary plot represents differences between two sets of peptides based on an amino acid fraction, global charge, sequence length, global hydrophobicity, glocal hydrophobic movement. Additionally, 3D scattered plot shows the clustering of peptides based on three features.</p>
+
+      <ol>
+        <li>Leucine and Valine show relatively higher differences in terms of their fraction within both groups.</li>
+        <li>TMPs show a global charge in the range of 0-5 in comparison to AMPs which show a global charge in a range of 0-14.</li>
+        <li>AMPs show higher variability in terms of their length, global hydrophobic movement, and hydrophobicity in comparison to TMPs.</li>
+        <li>Hydrophobic properties are important in determining transmembrane properties of proteins and peptides which is evident with this summary plot.</li>
+        <li>Clustering of two different kinds of peptides can be observed with a 3D scattered plot based on their properties, however, we can also observe a few peptides with overlapping feature space.</li>
+      </ol>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<figure id="figure-1"><img src="../../images/SummaryPlot.png" alt="Summary Plot" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Summary plot shows comparison between AMPs and TMPs</figcaption></figure>
+
+<h3 id="assessing-feature-space-distribution">Assessing feature space distribution</h3>
+
+<p>In this tool, we have used <code class="language-plaintext highlighter-rouge">PDAUG Fisher's Plot</code> that compares two peptide libraries based on the feature space using the Fisher test.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generating-a-fishers-plot-to-assess-peptide-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating a Fisher’s plot to assess peptide dataset</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0"><strong>PDAUG Fisher’s Plot</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_fishers_plot/pdaug_fishers_plot/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“First fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Second fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Label for first population”</em>: <code class="language-plaintext highlighter-rouge">TMPs</code></li>
+        <li><em>“Label for second population”</em>: <code class="language-plaintext highlighter-rouge">AMPs</code></li>
+      </ul>
+    </li>
+  </ol>
+
+  <blockquote class="question">
+    <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+    <p>What does Fisher’s plot represents?</p>
+
+    <blockquote class="solution">
+      <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+      <p>Fisher’s plot represents the difference between two groups of peptides based on their feature space. Each tiny square in this plot represents the feature space. Based on the sliding window Fisher’s test was performed for each feature space to assess the presence of peptides from two different groups on each of the tiny squares.  The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher’s plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.</p>
+    </blockquote>
+  </blockquote>
+
+</blockquote>
+
+<figure id="figure-2"><img src="../../images/FeatureSpace.png" alt="Fishers plot" /><figcaption><span class="figcaption-prefix">Figure 2:</span> TMPs peptides show amino acids with larger hydrophobic residues in compare to AMPs</figcaption></figure>
+
+<p>The AMPs and TMPs in the feature space represented by their mean hydropathy and amino acid volume. Fisher’s plot shows that the sequences with larger hydrophobic amino acids are more frequent in TMPs in comparison to AMPs.</p>
+
+<h2 id="assessing-the-relation-between-peptide-features-by-3d-scatter-plot">Assessing the relation between peptide features by 3D scatter plot</h2>
+
+<h3 id="calculating-sequence-property-based-descriptors">Calculating Sequence Property-Based Descriptors</h3>
+
+<p>In this step we will calculate Composition, Transition and Distribution (CTD) descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property located on this length <a class="citation" href="#Govindan_Nair_2013">Govindan and Nair 2013</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculating-descriptors-for-the-peptide-dataset"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculating descriptors for the peptide dataset</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - first (fasta)</code> (first output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Descriptor Type”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG TSVtoFASTA on data 1 - second (fasta)</code> (second output of <strong>PDAUG TSVtoFASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Descriptor Type”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="adding-the-class-label-in-both-amps-and-tmps">Adding the Class Label in both AMPs and TMPs</h3>
+
+<p>Class labels or target labels usually represents the class of peptides. Here in our data set, we have peptides, either as AMP or TMP. Since we have two classes we can represent these two classes with their actual labels AMPs and TMPs.</p>
+
+<ul>
+  <li><strong>Adding Class Label (target labels) in AMPs and TMPs data</strong></li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-class-labels-target-labels-to-the-tabular-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding Class Labels (target labels) to the tabular data</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)</code> (output of <strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">TMPs</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 3 - CTD (tabular)</code> (output of <strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">AMPs</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="merging-the-two-tabular-data-files">Merging the two tabular data files</h3>
+
+<p>We utilize <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes</code> to merge two tabular data files.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-merging-two-tabular-data-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merging two tabular data files</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input files”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 6 - (tabular)</code> (output of <strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 7 - (tabular)</code> (output of <strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Option to merg data”</em>: <code class="language-plaintext highlighter-rouge">Merge data without adding class label</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="plotting-ctd-descriptor-data-as-scatter-plot">Plotting CTD descriptor data as Scatter plot</h3>
+
+<p>Tool <code class="language-plaintext highlighter-rouge">PDAUG Basic Plots</code> will be used to compare two peptide libraries based on three CTD descriptors <code class="language-plaintext highlighter-rouge">SecondaryStrD1100</code>, <code class="language-plaintext highlighter-rouge">SolventAccessibilityD2001</code>, and <code class="language-plaintext highlighter-rouge">NormalizedVDWVD3050</code> respectively. A 3D scatter plot will be generated.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-generating-a-scatter-plot-to-assess-features"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Generating a scatter plot to assess features</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0"><strong>PDAUG Basic Plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Data plotting method”</em>: <code class="language-plaintext highlighter-rouge">Scatter Plot</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 9 and data 8 - (tabular)</code> (output of <strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Scatter Plot type”</em>: <code class="language-plaintext highlighter-rouge">3D</code>
+              <ul>
+                <li><em>“First feature”</em>: <code class="language-plaintext highlighter-rouge">_SecondaryStrD1100</code></li>
+                <li><em>“Second feature”</em>: <code class="language-plaintext highlighter-rouge">_SolventAccessibilityD2001</code></li>
+                <li><em>“Third feature”</em>: <code class="language-plaintext highlighter-rouge">_NormalizedVDWVD3050</code></li>
+              </ul>
+            </li>
+            <li><em>“Class label column”</em>: <code class="language-plaintext highlighter-rouge">Class_label</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-3"><img src="../../images/3DScattered.png" alt="3D Scatter plot " /><figcaption><span class="figcaption-prefix">Figure 3:</span> 3D scatter Plot shows relation between featues</figcaption></figure>
+
+<p><strong>Figure 3</strong> Represent 3D scattered plot generated based on the CTD descriptors. Red dots represent TMPs and blue dots represent AMPs. Based on these 3 features, we can observe that both groups do not show any clear separation or cluster in the 3D space.</p>
+
+<p>In this tutorial, we learned how to utilize inbuild data, calculate features, and utilize descriptors or features to assess biological properties. We also learned how to utilize various utilities of <code class="language-plaintext highlighter-rouge">PDAUG</code> to generate useful plots to include in our peptide research.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we learned an example flexible and extensible analysis of peptide data using PDAUG tools. We generated various plots based on the quantitative properties of amino acids and peptide sequences.</p>
+
+<figure id="figure-4"><img src="../../images/PeptideAnalysisWorkflow.png" alt="Workflow" /><figcaption><span class="figcaption-prefix">Figure 4:</span> <span class="notranslate">Workflow</span> used</figcaption></figure>
+
+
+
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Govindan_Nair_2013">Govindan, G., and A. S. Nair, 2013 <b>Bagging with CTD – A Novel Signature for the Hierarchical Prediction of Secreted Protein Trafficking in Eukaryotes</b>. Genomics, Proteomics &amp; Bioinformatics 11: 385–390.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.gpb.2013.07.005">10.1016/j.gpb.2013.07.005</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Peptide Library Data Analysis (Proteomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Jayadev Joshi, Daniel Blankenberg, 2021 <b>Peptide Library Data Analysis (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html">/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{proteomics-peptide-library-data-analysis,
+    author = "Jayadev Joshi and Daniel Blankenberg",
+    title = "Peptide Library Data Analysis (Galaxy Training Materials)",
+    year = "2021",
+    month = "01",
+    day = "22"
+    url = "\url{/training-material/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Jayadev Joshi, Daniel Blankenberg)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/peptide-library-data-analysis/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>

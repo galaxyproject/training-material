@@ -1,0 +1,1073 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Machine Learning Modeling of Anticancer Peptides</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:title" content="Galaxy Training: Machine Learning Modeling of Anticancer Peptides" />
+        <meta property="og:description" content="Training material for proteomics workflows in Galaxy" />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/proteomics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Proteomics
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fml-modeling-of-anti-cancer-peptides%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fml-modeling-of-anti-cancer-peptides%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fml-modeling-of-anti-cancer-peptides%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fml-modeling-of-anti-cancer-peptides%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fml-modeling-of-anti-cancer-peptides%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fproteomics%2Ftutorials%2Fml-modeling-of-anti-cancer-peptides%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Machine Learning Modeling of Anticancer Peptides",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Proteomics",
+    "description": "Training material for proteomics workflows in Galaxy",
+    "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+  },
+  "courseCode": "proteomics / ml-modeling-of-anti-cancer-peptides / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Machine Learning Modeling of Anticancer Peptides' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html",
+  "timeRequired": "PT30M",
+  "description": "The questions this  addresses are:\n - Which machine learning (ML) algorithm is superior in classifying anticancer peptides (ACPs) and non-anticancer peptides (non-ACPs)?\n\n\\nThe objectives are:\n - Learn, how to calculate peptide descriptor\n - Learn, how to create training data set from features?\n - Assessment of best ML algorithm in predicting anticancer peptide\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Jayadev Joshi"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Jayadev Joshi"
+    },
+    {
+      "@type": "Person",
+      "name": "Daniel Blankenberg"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Proteomics",
+      "description": "Training material for proteomics workflows in Galaxy",
+      "url": "https://training.galaxyproject.org//training-material/topics/proteomics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_0121",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_0121",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_0121"
+    }
+  ],
+  "skillLevel": "Intermediate"
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Machine Learning Modeling of Anticancer Peptides</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/jaidevjoshi83/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/jaidevjoshi83" alt="Jayadev Joshi">Jayadev Joshi</a> <a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankenberg" alt="Daniel Blankenberg">Daniel Blankenberg</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>Which machine learning (ML) algorithm is superior in classifying anticancer peptides (ACPs) and non-anticancer peptides (non-ACPs)?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn, how to calculate peptide descriptor</p>
+</li>
+            
+            <li><p>Learn, how to create training data set from features?</p>
+</li>
+            
+            <li><p>Assessment of best ML algorithm in predicting anticancer peptide</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 30 minutes</p>
+            
+
+            
+            <p><strong><i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> Level: </strong>
+             Intermediate 
+<span class="level intermediate" title="Intermediate Tutorial">
+  <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span> <i class="fas fa-graduation-cap" aria-hidden="true"></i><span class="visually-hidden">level</span>
+</span>
+
+</p>
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4111092">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/workflows/" title="Workflows" alt="Machine Learning Modeling of Anticancer Peptides workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 22, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h2 class="no_toc" id="introduction">Introduction</h2>
+
+<p>Biological molecules such as proteins, peptides, <span class="notranslate">DNA</span>, and <span class="notranslate">RNA</span> can be represented by their biochemical or sequence-based properties. These properties can be utilized to deduce biological meanings using ML modeling. A descriptor or feature is the quantitative or qualitative measure of a property that is associated with a sequence. For example, a chemical compound can be described via its charge chemical formula, molecular weight, number of rotatable bonds, etc. Similarly, several properties can be deduced from the biological sequence that can be utilized to describe a biological activity such as anticancer property. Properties associated with a group of peptide sequences such as overall charge, hydrophobicity profile, or k-mer composition can be utilized to build an ML model and this model can be used to predict biological properties of unknown peptides. Several computational methods have been proven very useful in the initial screening and prediction of peptides for various biological properties. These methods have emerged as effective alte<span class="notranslate">rna</span>tives to the lengthy and expensive traditional experimental approaches. Finding ACPs through wet-lab methods is costly and time-consuming; thus, the development of an efficient computational approach is useful to predict potential ACP peptides before wet-lab experimentation. In this tutorial, we will be discussing how peptide-based properties like charge, hydrophobicity, the composition of amino acids, etc. can be utilized to predict the biological properties of peptides. Additionally, we will learn how to use different utilities of the Peptide Design and Analysis Under <span class="notranslate">Galaxy</span> (PDAUG) package to calculate various peptide-based descriptors and use these descriptors for ML modeling. We will use CTD (composition, transition, and distribution) descriptor to define peptide sequences in the training set and will test 6 different ML algorithms. We will also assess the effect of normalization on the accuracy of ML models.</p>
+
+<figure id="figure-1"><img src="../../images/PDAUG_ML_1.png" alt="Peptide descriptors" /><figcaption><span class="figcaption-prefix">Figure 1:</span> ML algorithms use numerical representation of a sequence-based properties for model building</figcaption></figure>
+
+<p>In <strong>Figure 1</strong> features or descriptors are represented with (F1, F2, F3, etc.) and in binary classification, usually, class labels are represented by 0 or 1.</p>
+
+<h3 id="easy-access-to-tools-workflows-and-data-from-the-docker-image">Easy access to tools, workflows and data from the docker image</h3>
+
+<p>An easy way to install and use the PDAUG toolset, and follow this tutorial is via a prebuilt docker image equipped with a PDAUG toolset, <span class="notranslate">workflow</span>, and data library. A prebuilds docker image can be downloaded and run by typing a simple command at the terminal after installing docker software on any operating system.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-easy-access-of-tools-workflows-and-data-from-docker-image"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Easy access of tools, workflows and data from docker image</h3>
+
+  <ol>
+    <li>Downloading the docker image from the docker hub using <code class="language-plaintext highlighter-rouge">docker pull jayadevjoshi12/<span class="notranslate">galaxy</span>_pdaug:latest</code> command.</li>
+    <li>Running the container with latest PDAUG tools <code class="language-plaintext highlighter-rouge">docker run -i -t -p 8080:80 jayadevjoshi12/<span class="notranslate">galaxy</span>_pdaug:latest</code>.</li>
+    <li><span class="notranslate">Workflow</span> is available under the <span class="notranslate">workflow</span> section, use <code class="language-plaintext highlighter-rouge">admin</code> as use<span class="notranslate">rna</span>me and <code class="language-plaintext highlighter-rouge">password</code> as a password to login as an administrator of your <span class="notranslate">galaxy</span> instance.</li>
+    <li>Use <code class="language-plaintext highlighter-rouge">admin</code> as use<span class="notranslate">rna</span>me and <code class="language-plaintext highlighter-rouge">password</code> as a password to login <span class="notranslate">galaxy</span> instance, which is available at <a href="http://127.0.0.1:8080">localhost</a> to access <span class="notranslate">workflow</span> and data.</li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#training-data-set" id="markdown-toc-training-data-set">Training data set</a></li>
+  <li><a href="#calculating-peptide-descriptors" id="markdown-toc-calculating-peptide-descriptors">Calculating Peptide Descriptors</a></li>
+  <li><a href="#preparing-a-traning-data-set" id="markdown-toc-preparing-a-traning-data-set">Preparing a traning data set</a></li>
+  <li><a href="#applying-6-different-ml-algorithms-on-the-training-data-set" id="markdown-toc-applying-6-different-ml-algorithms-on-the-training-data-set">Applying 6 different ML algorithms on the training data set</a></li>
+  <li><a href="#results-assessment" id="markdown-toc-results-assessment">Results assessment</a></li>
+</ol>
+
+</blockquote>
+
+<h2 id="training-data-set">Training data set</h2>
+
+<p>A high-quality dataset was retrieved from a previously published work <a class="citation" href="#hajisharifi_predicting_2014">Hajisharifi <i>et al.</i> 2014</a>.  In the, ML balance training set (an equal number of positive and negative samples) is always recommended. However, an imbalance training set can also be handled, and sometimes, to assess the robustness of the model an imbalanced training set is intentionally introduced.  The objective of this tutorial is to provide a basic introduction of ML in peptide research hence we will use a balanced training dataset with an equal number of positive (ACPs) and negative (non-ACPs) data.  A simple python code was applied to randomly select and removed several non-ACPs, which reduces their number from 205 to 138. The final training set contains 138 ACPs and 138 non-ACPs. The length distribution of the positive dataset is somewhat different from the negative dataset. Peptide length is an important feature in determining biological activity. Based on their length we assess the differences between ACPs and non-ACPs, and we found that except for a few outliers both ACPs and non-ACPs show a mean length of  40 and 32 respectively.</p>
+
+<h3 id="get-data">Get data</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ol>
+    <li>Create a new history for this tutorial</li>
+    <li>
+      <p>Import the files from <a href="https://zenodo.org/record/4111092#.X712_6pKhhE">Zenodo</a> or from the shared data library</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4111092/files/ACPs.fasta
+https://zenodo.org/record/4111092/files/non_ACPs.fasta
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>Rename the datasets to their basename (ACPs.fasta, non_ACPs.fasta)</li>
+    <li>
+      <p>Check that the datatype is correctly set to fasta</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">fasta</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="calculating-peptide-descriptors">Calculating Peptide Descriptors</h2>
+
+<p>In this step we will calculate CTD descriptos. Composition describptors are defined as the number of amino acids of a particular property divided by total number of amino acids.  Transition descriptors are representd as the number of transition from a particular property to different property divided by (total number of amino acids − 1). Distribution descriptors are derived by chain length and the amino acids of a particular property are located on this length <a class="citation" href="#Govindan_Nair_2013">Govindan and Nair 2013</a>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-calculating-ctd-descriptors-for-acps-and-non-acps"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Calculating CTD descriptors for ACPs and non-ACPs</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">ACPs.fasta</code> (output of <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“DesType”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0"><strong>PDAUG Sequence Property Based Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_sequence_property_based_descriptors/pdaug_sequence_property_based_descriptors/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input fasta file”</em>: <code class="language-plaintext highlighter-rouge">non_ACPs.fasta</code> (output of <strong>Input dataset</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“DesType”</em>: <code class="language-plaintext highlighter-rouge">CTD</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="preparing-a-traning-data-set">Preparing a traning data set</h2>
+
+<p>We will combine the ACPs and non-ACPs data set as a single tabular data and will add the class label.</p>
+
+<h3 id="adding-class-labels-to-the-training-data">Adding class labels to the training data</h3>
+
+<p>In Binary classification, ML algorithms classify the elements of a set into two groups based on a classification rule. Binary classes are usually represented by <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code>. In our example, we are finding peptides with anticancer properties, therefore we can denote all the peptides with anticancer properties as <code class="language-plaintext highlighter-rouge">1</code> and peptides with non-anticancer properties as <code class="language-plaintext highlighter-rouge">0</code>.  In general, samples represented with <code class="language-plaintext highlighter-rouge">1</code> also describe as positive data, and samples with <code class="language-plaintext highlighter-rouge">0</code> labels as negative data.  Data with multi-class classification problems can also be represented by <code class="language-plaintext highlighter-rouge">0, 1, 2, 3,</code> etc. In addition to this, in ML the class labels can also be represented by a string such as “anticancer” and “non-anticancer” or “treated” and “untreated”.  However, there are several ML tools and libraries prefer numerical class label over a string therefore, in this tutorial, <code class="language-plaintext highlighter-rouge">0</code> and <code class="language-plaintext highlighter-rouge">1</code> will be used as class labels.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-adding-class-labels-to-the-tabular-data"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Adding class labels to the tabular data</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 1 - CTD (tabular)</code> (output of <strong>Peptide Sequence Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0"><strong>PDAUG Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_addclasslabel/pdaug_addclasslabel/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Sequence Property Based Descriptors on data 2 - CTD (tabular)</code> (output of <strong>Peptide Sequence Descriptors</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Class Label”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="merging-acps-and-non-acps-samples-to-create-a-traning-dataset">Merging ACPs and non-ACPs samples to create a traning dataset</h3>
+
+<p>In previous steps, we labeled positive data or ACPs as “1”, and negative data or non-ACPs as “0”, now we can combine these two tabular datafiles as one training dataset.  In this step, we will merge these tabular detasets as a labeled training data set.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-merging-two-tabular-files"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merging two tabular files</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input files”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 3 - (tabular)</code> (output of <strong>Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG Add Class Label on data 4 - (tabular)</code> (output of <strong>Add Class Label</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="applying-6-different-ml-algorithms-on-the-training-data-set">Applying 6 different ML algorithms on the training data set</h2>
+
+<p>In this step, we will apply six ML algorithms Linear Regression Classifier (LRC), Random Forest Classifier(RFC), Gaussian naive Bayes Classifier (GBC), Decision Tree Classifier (DTC), Stochastic Gradient Descent Classifier (SGDC) &amp; Support Vector Machine Classifier (SVMC) with 10 fold cross-validation on the training data. In cross-validation, positive and negative data are randomly divided into 10 parts each set has the 10th part of active as well as inactive peptides. The algorithm was trained on the 9 sets and the prediction was made on the remaining 10th set. This process was repeated for every set. Thus the final performance scores are calculated as a mean of all the folds. We used min-max to normalize the data before ML modeling. The entire <span class="notranslate">workflow</span> was applied to the four descriptor sets and accuracy was estimated based on accuracy, precision, recall, f1, and AUC.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-applying-6-ml-algorithms-on-the-training-data-set"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Applying 6 ML algorithms on the training data set</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 6 and data 5 - (tabular)</code> (output of <strong>Merge dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select Machine Learning algorithms”</em>: <code class="language-plaintext highlighter-rouge">LRC</code>
+          <ul>
+            <li><em>“Select advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults.</code></li>
+          </ul>
+        </li>
+        <li><em>“Choose the Test method”</em>: <code class="language-plaintext highlighter-rouge">Inte<span class="notranslate">rna</span>l</code></li>
+        <li><em>“Cross validation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 6 and data 5 - (tabular)</code> (output of <strong>Merge dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select Machine Learning algorithms”</em>: <code class="language-plaintext highlighter-rouge">RFC</code>
+          <ul>
+            <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults.</code></li>
+          </ul>
+        </li>
+        <li><em>“Choose the Test method”</em>: <code class="language-plaintext highlighter-rouge">Inte<span class="notranslate">rna</span>l</code></li>
+        <li><em>“Cross validation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 6 and data 5 - (tabular)</code> (output of <strong>Merge dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select Machine Learning algorithms”</em>: <code class="language-plaintext highlighter-rouge">GBC</code>
+          <ul>
+            <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults.</code></li>
+          </ul>
+        </li>
+        <li><em>“Choose the Test method”</em>: <code class="language-plaintext highlighter-rouge">Inte<span class="notranslate">rna</span>l</code></li>
+        <li><em>“Cross validation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 6 and data 5 - (tabular)</code> (output of <strong>Merge dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select Machine Learning algorithms”</em>: <code class="language-plaintext highlighter-rouge">DTC</code>
+          <ul>
+            <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults.</code></li>
+          </ul>
+        </li>
+        <li><em>“Choose the Test method”</em>: <code class="language-plaintext highlighter-rouge">Inte<span class="notranslate">rna</span>l</code></li>
+        <li><em>“Cross validation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 6 and data 5 - (tabular)</code> (output of <strong>Merge dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select Machine Learning algorithms”</em>: <code class="language-plaintext highlighter-rouge">SGDC</code>
+          <ul>
+            <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults.</code></li>
+          </ul>
+        </li>
+        <li><em>“Choose the Test method”</em>: <code class="language-plaintext highlighter-rouge">Inte<span class="notranslate">rna</span>l</code></li>
+        <li><em>“Cross validation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+      </ul>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0"><strong>PDAUG ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_ml_models/pdaug_ml_models/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 6 and data 5 - (tabular)</code> (output of <strong>Merge dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+        <li><em>“Select Machine Learning algorithms”</em>: <code class="language-plaintext highlighter-rouge">SVMC</code>
+          <ul>
+            <li><em>“Specify advanced parameters”</em>: <code class="language-plaintext highlighter-rouge">No, use program defaults.</code></li>
+          </ul>
+        </li>
+        <li><em>“Choose the Test method”</em>: <code class="language-plaintext highlighter-rouge">Inte<span class="notranslate">rna</span>l</code></li>
+        <li><em>“Cross validation”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="results-assessment">Results assessment</h2>
+
+<h3 id="merging-results-in-one-file">Merging results in one file</h3>
+
+<p>In previous steps we have trained the ML models, these models return a TSV  that captures performance measures of these algorithms. We used the <code class="language-plaintext highlighter-rouge">Merge Data Frame</code> tool to combine these results as one file in this step.  </p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-merging-result-as-one-tabular-file"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Merging result as one tabular file</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0"><strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_merge_dataframes/pdaug_merge_dataframes/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input files”</em>: <code class="language-plaintext highlighter-rouge">PDAUG ML Models on data 7 - LRC (tabular)</code> (output of <strong>ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG ML Models on data 7 - RFC (tabular)</code> (output of <strong>ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG ML Models on data 7 - GBC (tabular)</code> (output of <strong>ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG ML Models on data 7 - DTC (tabular)</code> (output of <strong>ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG ML Models on data 7 - SGDC (tabular)</code> (output of <strong>ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>), <code class="language-plaintext highlighter-rouge">PDAUG ML Models on data 7 - SVMC (tabular)</code> (output of <strong>ML Models</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h3 id="creating-a-final-heat-map-to-assess-the-results">Creating a final heat map to assess the results</h3>
+
+<p>In the final step, a heat map will be generated which represents performance measures of various algorithms. We applied five different performance measures, accuracy, recall, F1-score, precision, and mean AUC (Area Under Curve) score.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-plotting-the-results"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Plotting the results</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0" title="Tested with toolshed.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0"><strong>PDAUG Basic Plots</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/jay/pdaug_basic_plots/pdaug_basic_plots/0.1.0</span></span>  with the following parameters:
+      <ul>
+        <li><em>“Data plotting method”</em>: <code class="language-plaintext highlighter-rouge">Heat Map</code>
+          <ul>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input file”</em>: <code class="language-plaintext highlighter-rouge">PDAUG Merge Dataframes on data 18, data 16, and others - (tabular)</code> (output of <strong>PDAUG Merge Dataframes</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>)</li>
+            <li><em>“Index Column”</em>: <code class="language-plaintext highlighter-rouge">Algo</code></li>
+            <li><em>“Label for x-axis”</em>: <code class="language-plaintext highlighter-rouge">Performance Measures</code></li>
+            <li><em>“Label for y-axis”</em>: <code class="language-plaintext highlighter-rouge">ML algorithms</code></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ol>
+
+</blockquote>
+
+<figure id="figure-2"><img src="../../images/ML_HEATMAP.png" alt="ML results" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Heatmap represents the performance of 6 ML algorithms</figcaption></figure>
+
+<p>The performance of ML algorithms can be assessed by commonly used performance measures represented in <strong>Figure 2</strong>.</p>
+
+<ul>
+  <li><strong>Accuracy</strong> is described as correctly predicted instances and calculated based on true positive (TP) and true negative (TN) divided by TP, TN, false positive (FP), and false-negative (FN).</li>
+  <li><strong>AUC</strong> is Area under ROC curve, where ROC is a receiver operating characteristic. AUC represents the area covered by ROC.</li>
+  <li><strong>F1</strong> measures also an important estimate in model accuracy and can be defined as a harmonic mean of precision.</li>
+  <li><strong>Precision</strong> also known as the probability of positive values (PPV), is summarised as the probability of currently predicted positive instances and estimated based on TP  and FP.</li>
+  <li><strong>Recall</strong> also known as sensitivity, is defined as the estimation of the percentage of the correctly predicted positive instances and is also calculated with TP  and FP.</li>
+</ul>
+
+<p>The value for each of these estimates falls between 0 and 1, and larger values indicating a better performance and accuracy. The brighter yellow color shows high-performance while the blue color shows a lower score.  Heat map suggests that algorithms GBC, LRC, and SVMC show high performs in comparison to the other three. Better performance means these classifiers have been able to classify ACPs and non-ACPs more accurately than others. DTC shows an intermediate performance while RFC and SGDC performed poorly on this data set. Finally, we learn how to calculate features, how to utilize these features to build ML models, and how we can assess the performance of an ML model. In the future, advanced parameters of this algorithm can be assessed to improve the performance of the models. Additionally, several features can be calculated other than CTD and utilized to build ML models and assess performance.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we learn how to utilize the quantitative properties of peptide sequences and apply the ML algorithms to predict the biological properties of the peptide sequence.</p>
+
+<figure id="figure-3"><img src="../../images/MLWorkFlow.png" alt="Used workflow" /><figcaption><span class="figcaption-prefix">Figure 3:</span> <span class="notranslate">Workflow</span></figcaption></figure>
+
+
+                    
+
+                    
+                    <h1 data-toc-skip>Useful literature</h1>
+                    <p>Further information, including links to documentation and original publications, regarding the tools, analysis techniques and the interpretation of results described in this tutorial can be found <a href="/training-material/topics/proteomics#references">here</a>.</p>
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Govindan_Nair_2013">Govindan, G., and A. S. Nair, 2013 <b>Bagging with CTD – A Novel Signature for the Hierarchical Prediction of Secreted Protein Trafficking in Eukaryotes</b>. Genomics, Proteomics &amp; Bioinformatics 11: 385–390.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.gpb.2013.07.005">10.1016/j.gpb.2013.07.005</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="hajisharifi_predicting_2014">Hajisharifi, Z., M. Piryaiee, M. Mohammad Beigi, M. Behbahani, and H. Mohabatkar, 2014 <b>Predicting anticancer peptides with Chou′s pseudo amino acid composition and investigating their mutagenicity via Ames test</b>. Journal of Theoretical Biology 341: 34–40.</span>
+    
+    
+    <a href="https://doi.org/10.1016/j.jtbi.2013.08.037">10.1016/j.jtbi.2013.08.037</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://linkinghub.elsevier.com/retrieve/pii/S0022519313004190">https://linkinghub.elsevier.com/retrieve/pii/S0022519313004190</a>
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Machine Learning Modeling of Anticancer Peptides (Proteomics)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Jayadev Joshi, Daniel Blankenberg, 2021 <b>Machine Learning Modeling of Anticancer Peptides (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html">/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{proteomics-ml-modeling-of-anti-cancer-peptides,
+    author = "Jayadev Joshi and Daniel Blankenberg",
+    title = "Machine Learning Modeling of Anticancer Peptides (Galaxy Training Materials)",
+    year = "2021",
+    month = "01",
+    day = "22"
+    url = "\url{/training-material/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Jayadev Joshi, Daniel Blankenberg)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/proteomics/tutorials/ml-modeling-of-anti-cancer-peptides/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
