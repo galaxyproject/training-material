@@ -1,25 +1,27 @@
 ---
 layout: tutorial_hands_on
 
-title: Title of the tutorial
+title: EncyclopeDIA
 zenodo_link: ''
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How to perform quantitative analysis using DIA data with the help of EncyclopeDIA?
+- How to perform quantitation with or without Chromatogram Libraries?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
+- Understand the difference between DDA and DIA methods
+- Performing quantitative analysis using DIA data
+- Understand the purpose and benefits of using a Chromatogram Library for detection of peptides
 - You can use Bloom's Taxonomy to write effective learning objectives
 time_estimation: 3H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- With SearchToLib, Chromatogram Libraries can be created
+- Learning conversion of file types using MSConvert
 contributors:
-- contributor1
-- contributor2
+- emmaleith
+- subinamehta
+- jj-umn
+- pratikdjagtap
+- timothygriffin
+
 
 ---
 
