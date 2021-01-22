@@ -384,7 +384,7 @@ it is logical to find the resistance gene in a specific bacteria.
 
 > ### {% icon question %} Question
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
-> 2. Do you aspect to find this gene in this MRSA strain and why?
+> 2. Do you expect to find this gene in this MRSA strain and why?
 > > ### {% icon solution %} Solution
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
