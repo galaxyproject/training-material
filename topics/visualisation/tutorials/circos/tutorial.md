@@ -16,6 +16,7 @@ key_points:
 contributors:
   - shiltemann
   - hexylena
+  - gallardoalba
 ---
 
 # Introduction
