@@ -189,7 +189,7 @@ Occasionally the tool installation may fail due to network issues; if it does, j
 >
 > `Ctrl-F6`:  Close split in focus
 >
-> `Ctrl-D`:  (Mac users) Close split in focus
+> `Ctrl-D`:  (Linux, Mac users) Close split in focus
 >
 > There are more byobu commands described in this [gist](https://gist.github.com/devhero/7b9a7281db0ac4ba683f)
 {: .tip}
