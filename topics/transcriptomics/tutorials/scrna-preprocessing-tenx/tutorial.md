@@ -284,7 +284,7 @@ Let us investigate the output log. This type of quality control is essential in 
 
 > ### {% icon hands_on %} Hands-on
 >
-> **MultiQC** {% icon tool %} with the following parameters:
+> {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %} with the following parameters:
 >    - In *"Results"*:
 >      - In *"1:Results"*:
 >        - *"Which tool was used generate logs?"*: `STAR`

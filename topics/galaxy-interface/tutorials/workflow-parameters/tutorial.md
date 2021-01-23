@@ -57,7 +57,6 @@ can be added.
 > 4. Click on import workflow
 {: .hands_on}
 
-{% include snippets/edit_workflow.md %}
 
 # Add an integer workflow parameter
 
@@ -72,22 +71,26 @@ that allows the user to set this parameter when running the workflow.
 
 > ### {% icon hands_on %} Hands-on: Updating the Workflow
 >
-> 1. Click the **Select first** {% icon tool %} tool in your workflow
-> 2. Find the **Number of lines** parameter in the right hand panel.
-> 3. Click on the workflow connection button {% icon galaxy-wf-connection %} to convert the Number of lines parameter into a workflow parameter connection
+> 1. Open the **workflow editor**
+>
+>    {% include snippets/edit_workflow.md %}
+>
+> 2. Click the **Select first** {% icon tool %} tool in your workflow
+> 3. Find the **Number of lines** parameter in the right hand panel.
+> 4. Click on the workflow connection button {% icon galaxy-wf-connection %} to convert the Number of lines parameter into a workflow parameter connection
 >
 >    You will see that a new input with the text `Number of lines` has appeared on the **Select first** tool in the editor.
 >
-> 4. Add a **Simple inputs used for workflow logic**, found under the Inputs section of your toolbox
-> 5. If you click on the Input parameter box in the editor you will see in the `Details panel` that the **Parameter type** is set to `Text`. If you try to connect this parameter to the "Number of lines" parameter you will see that the noodle turns orange and that you cannot create a connection.
+> 5. Add a **Simple inputs used for workflow logic**, found under the Inputs section of your toolbox
+> 6. If you click on the Input parameter box in the editor you will see in the `Details panel` that the **Parameter type** is set to `Text`. If you try to connect this parameter to the "Number of lines" parameter you will see that the noodle turns orange and that you cannot create a connection.
 >
-> 6. Click on Input parameter, and change the **Parameter type** to **Integer**
+> 7. Click on Input parameter, and change the **Parameter type** to **Integer**
 >
-> 7. Connect *"output"* from Input parameter {% icon tool %} to the *"Number of lines"* input of the Select first {% icon tool %}.
+> 8. Connect *"output"* from Input parameter {% icon tool %} to the *"Number of lines"* input of the Select first {% icon tool %}.
 >
-> 8. Save {% icon galaxy-save %} your workflow
+> 9. Save {% icon galaxy-save %} your workflow
 >
-> 9. Run your workflow
+> 10. Run your workflow
 >
 >    {% include snippets/run_workflow.md %}
 >

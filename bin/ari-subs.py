@@ -3,21 +3,14 @@ import re
 import time
 import os
 import sys
-import json
 import argparse
 
 
-def lj(fn):
-    with open(fn) as handle:
-        for line in handle:
-            yield json.loads(line)
-
-
-def gf(d, fn):
-    return os.path.join(d, fn)
-
-
 def timefmt(t, fmt):
+    """
+    Format a timestamp in the correct way for subtitles. This is the only
+    reason we need a programming language and can't do this in bash easily.
+    """
     seconds = t % (24 * 3600)
     hours = int(seconds // 3600)
     seconds %= 3600
@@ -35,7 +28,7 @@ def timefmt(t, fmt):
 
 def script2timings(d):
     # Read in the sounds script
-    with open(gf(d, "sounds.txt"), "r") as handle:
+    with open(os.path.join(d, "sounds.txt"), "r") as handle:
         script = handle.read()
 
     # This file contains something like the following:
@@ -61,26 +54,17 @@ def main(d, fmt="webvtt"):
 
     offset = 0
     for idx, (mid, timing) in enumerate(zip(ordering, timings)):
-        if mid == "silence":
-            offset += timing
-            continue
+        # If there's a sentence, not silence
+        if mid != 'silence':
+            # load the text for the subtitles
+            sound_data = os.path.join(d, mid + "-subtitle.txt")
+            with open(sound_data, 'r') as handle:
+                sentence = handle.read().strip()
 
-        sound_data = list(lj(gf(d, mid + ".json")))
-        sentences = [x for x in sound_data if x["type"] == "sentence"]
-
-        sentence_offset = 0
-        for si, sentence in enumerate(sentences):
-            start = sentence["time"] / 1000
-            # If it isn't the last sentence, we end when the next one starts.
-            if si < len(sentences) - 1:
-                end = sentences[si + 1]["time"] / 1000
-            else:
-                # Otherwise, it's the end of this section.
-                end = timing
-
+            # And print it.
             print(idx)
-            print(f"{timefmt(offset + start, fmt)} --> {timefmt(offset + end, fmt)}")
-            print(sentence["value"])
+            print(f"{timefmt(offset, fmt)} --> {timefmt(offset + timing, fmt)}")
+            print(sentence)
             print()
 
         offset += timing

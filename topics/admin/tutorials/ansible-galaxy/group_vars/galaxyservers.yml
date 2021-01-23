@@ -11,6 +11,10 @@ postgresql_objects_databases:
   - name: galaxy
     owner: galaxy
 
+# PostgreSQL Backups
+postgresql_backup_dir: /data/backups
+postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+
 # Galaxy
 galaxy_create_user: true
 galaxy_separate_privileges: true
@@ -18,20 +22,22 @@ galaxy_manage_paths: true
 galaxy_layout: root-dir
 galaxy_root: /srv/galaxy
 galaxy_user: {name: galaxy, shell: /bin/bash}
-galaxy_commit_id: release_20.05
-galaxy_config_style: yaml
+galaxy_commit_id: release_20.09
 galaxy_force_checkout: true
+
 miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
-miniconda_version: "4.6.14"
+miniconda_version: "4.7.12"
+miniconda_manage_dependencies: false
 
 galaxy_config:
   galaxy:
-    brand: "My Galaxy"
+    brand: "🧬🔬🚀"
     admin_users: admin@example.org
     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
     file_path: /data
     check_migrate_tools: false
     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
   uwsgi:
     socket: 127.0.0.1:8080
     buffer-size: 16384
@@ -57,6 +63,10 @@ galaxy_config:
       - lib/galaxy/main.py
       - lib/galaxy/main.py
     farm: job-handlers:1,2
+
+galaxy_config_templates:
+  - src: templates/galaxy/config/job_conf.xml.j2
+    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 
 # systemd
 galaxy_systemd_mode: mule
@@ -84,9 +94,9 @@ certbot_agree_tos: --agree-tos
 nginx_selinux_allow_local_connections: true
 nginx_servers:
   - redirect-ssl
-nginx_enable_default_server: false
 nginx_ssl_servers:
   - galaxy
+nginx_enable_default_server: false
 nginx_conf_http:
   client_max_body_size: 1g
 nginx_ssl_role: usegalaxy_eu.certbot

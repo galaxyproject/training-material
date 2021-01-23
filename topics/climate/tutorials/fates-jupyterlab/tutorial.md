@@ -1,7 +1,6 @@
 ---
 layout: tutorial_hands_on
 title: Functionally Assembled Terrestrial Ecosystem Simulator (FATES) with Galaxy Climate JupyterLab
-enable: false
 zenodo_link: 'https://doi.org/10.5281/zenodo.4108341'
 requirements:
   -
@@ -281,7 +280,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > For this tutorial, we  wish to have a “cold” start as we are mostly interested in setting up our model.
 > When ready to run in production, the model needs to be spin-up (run for several centuries until it reaches some kind of equilibrium).
 >
-> We will first make a short simulation (1 month):
+> We will first make a short simulation (6 months):
 >
 > ```
 > %%bash
@@ -290,8 +289,8 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > cd $HOME/ctsm_cases/fates_alp1
 > ./case.setup
 > ./case.build
-> ./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "years"
-> ./xmlchange STOP_N=1                       # set the length of simulation, i.e, how many years
+> ./xmlchange STOP_OPTION=nmonths            # set the simulation periods to "nmonths"
+> ./xmlchange STOP_N=6                       # set the length of simulation, i.e, how many months
 > ./case.submit > case_submit.out 2>&1
 > ```
 > The step above can take a lot of time because it needs to compile and run the FATES model.
@@ -308,19 +307,19 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > ```
 > %%bash 
 > 
-> cd $HOME/work/fates
+> cd $HOME/work/fates_alp1
 > ls -la
 > ```
 > You should see two folders:
 > - bld: contains the object and CESM executable (called cesm.exe) for your configuration
 > - run: this directory will be used during your simulation run to generate output files, etc.
 >
-> The **bld** folder contains the model executable (called `cesm,exe`) while **run** contains all the files used for running CLM-FATES (and not already archived).
+> The **bld** folder contains the model executable (called `cesm.exe`) while **run** contains all the files used for running CLM-FATES (and not already archived).
 > Once your run is terminated, many files are moved from the **run** folder to the **archive** folder:
 >
 > ```
 > %%bash
-> cd $HOME/archive/fates
+> cd $HOME/archive/fates_alp1
 > ls lnd/hist
 > ```
 >
@@ -339,7 +338,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > 2. Create a new Jupyter Notebook for analyzing your results:
 >   - From the **File Menu** --> **New** --> **Notebook**:
 >      - Rename your notebook to **check_analysis.ipynb**
->      - All the analysis of the 2 month FATES simulation will be done from this notebook
+>      - All the analysis of the 6 month FATES simulation will be done from this notebook
 > 
 > 3. Get metadata
 > In a Code cell:
@@ -352,7 +351,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 >
 > case = 'fates_alp1'
 > path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
-> dset = xr.open_dataset(path + '/fates_alp1_t.clm2.h0.2000-01.nc')
+> dset = xr.open_dataset(path + '/fates_alp1.clm2.h0.2000-01.nc')
 > dset
 > ```
 > As shown above, we are now using Python 3 for analyzing the results and [xarray](http://xarray.pydata.org/en/stable/) which 
@@ -365,7 +364,7 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 > ```
 > dset['AREA_TREES'].plot()
 > ```
-> As we ran one month only, we have very little points in our timeseries!
+> As we ran 6 months only, we have very little points in our timeseries!
 >
 > To plot 2D variables such as **CANOPY_AREA_BY_AGE**, you can use the *col_wrap* option when plotting:
 >
