@@ -14,7 +14,7 @@ objectives:
 time_estimation: 3H
 key_points:
 - With SearchToLib, Chromatogram Libraries can be created
-- Learning conversion of file types using MSConvert
+- Learning conversion of file types using msconvert
 contributors:
 - emmaleith
 - subinamehta
@@ -115,7 +115,7 @@ have fun!
 
 # Conversion of file types
 
-msconvert is the first tool in this EncyclopeDIA workflow and before analysis of such DIA data may begin, the data file must be converted to the correct file type (mzML) from the raw data. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the Gas Phase Fractionated DIA data and the Experimental DIA data are run through msconvert to convert to the necessary file type (mzML) for the following steps, creation of the chromatogram library and analysis of DIA data through EncyclopeDIA.
+msconvert is the first tool in this EncyclopeDIA workflow as before analysis of such DIA data may begin, the data files must be converted to the correct file type (mzML) from the raw data. Conversion from raw to mzML is important because SearchToLib (generation of the Chromatogram Library), as well as EncyclopeDIA (analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
@@ -231,6 +231,12 @@ A big step can have several subsections or sub steps:
 
 # Chromatogram Library Generation
 
+Libraries used in DIA data analysis are often constructed from DDA data assuming that assuming that DDA data is a reasonable substitute or reasonable representation of DIA data, which is not always the case. However, researchers began postulating that libraries could be generated using DIA data, and have begun utilizing these libraries as well as libraries generated through other methods. 
+
+As mentioned, there are challenges associated with the use of DDA libraries to analyze DIA data. The main challenge is that the difference in the method of data generation means that the retention times contained in DDA libraries are not always accurate to the retention times in the DIA data to which it is compared. Retention time accuracy is dependent on how the protein elutes off the column as well as how this changes based on what elutes in its environment creating variance between DDA and DIA methods. Additionally, DDA libraries can be cumbersome to generate when examining DIA data due to fractionation. More specifically, the method in which the fractions are generated is important. For example, SCX fractionation provides a vastly different profile compared to high pH reverse phase fractionation. Thus, to generate a comprehensive profile in DDA library generation, multiple fractionation methods must be completed. So, while DDA libraries can be used to analyze DIA data, their use significantly increases the required labor and the quantity of data required to generate a library.
+
+Libraries generated using DIA data could bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller. This allows for a far richer and more in-depth understanding of the peptide content within the sample making it a useful tool in library generation. In addition to producing a more comprehensive picture of the sample, the GPF method can be used on pooled DIA quantitative samples. Therefore, the pooled sample generates a thorough library through GPF while incorporating a spectrum library to create an “On-column Chromatogram Library” from DIA sample data.
+
 Write about Chromatogram Libraries and add few images
 ![Alternative text](../../images/image_name "Legend of the image")
 ![Alternative text](../../images/image_name "Legend of the image")
@@ -269,19 +275,27 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 
 > ### {% icon question %} Questions
 >
-> 1. What happens if you already have a library?
-> 2. Question2?
+> 1. Question 1?
+> 2. 
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. answer to question1
+
+> > 2. answerto question2
+
 > >
 > {: .solution}
 >
 {: .question}
 
 # Without Chromatogram library
+
+However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
+
+Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis; predicted libraries generally underperform compared to DDA generated libraries. However, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in the analysis of DIA data.
+
+In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect the monoisotopic precursor peaks.
 
 Write about Walnut if Chromatogram Libraries are absent and add few images
 ![Alternative text](../../images/image_name "Legend of the image")
