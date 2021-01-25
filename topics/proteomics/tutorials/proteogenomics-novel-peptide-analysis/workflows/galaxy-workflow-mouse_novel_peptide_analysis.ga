@@ -1,464 +1,596 @@
 {
-  "a_galaxy_workflow": "true",
-  "annotation": "Proteogenomics 3: Novel peptide analysis",
-  "format-version": "0.1",
-  "name": "Copy Of ABRF Workflow3 Novel Peptide Analysis",
-  "steps": {
-    "0": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 0,
-      "input_connections": {},
-      "inputs": [],
-      "label": "After_BlastP_Peptides",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 291,
-        "top": 301.5
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "5dfd4419-dc5f-4eb3-abfc-63a2d67b10d2",
-      "workflow_outputs": []
+    "a_galaxy_workflow": "true",
+    "annotation": "Proteogenomics 3: Novel peptide analysis",
+    "format-version": "0.1",
+    "name": "Proteogenomics_Novel_peptide_analysis",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Peptides_for_Blast-P_analysis"
+                }
+            ],
+            "label": "Peptides_for_Blast-P_analysis",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 332,
+                "height": 101,
+                "left": 47,
+                "right": 247,
+                "top": 231,
+                "width": 200,
+                "x": 47,
+                "y": 231
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "0553ed61-fbe8-4a5d-858c-4b66668b7498",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "b98c657d-b412-44d9-947a-d12b5580a23f"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "PeptideShaker_PSM"
+                }
+            ],
+            "label": "PeptideShaker_PSM",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 628,
+                "height": 81,
+                "left": 321,
+                "right": 521,
+                "top": 547,
+                "width": 200,
+                "x": 321,
+                "y": 547
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "45c1c0e9-524a-4534-9228-bca4449a516a",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "231f1ee3-cfd0-4f52-84bb-816510180256"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 2,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "mz_to_sqlite"
+                }
+            ],
+            "label": "mz_to_sqlite",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 252,
+                "height": 61,
+                "left": 624.5,
+                "right": 824.5,
+                "top": 191,
+                "width": 200,
+                "x": 624.5,
+                "y": 191
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "da6a08cf-587e-4570-841d-b8e400c6afc9",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "deb2b45c-d08f-4289-a4f8-b451154b7923"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 3,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "Genomic_mapping_sqlite"
+                }
+            ],
+            "label": "Genomic_mapping_sqlite",
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 346,
+                "height": 81,
+                "left": 626.5,
+                "right": 826.5,
+                "top": 265,
+                "width": 200,
+                "x": 626.5,
+                "y": 265
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4fc7aeee-b4ad-4a1f-822b-23f8607f5718",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "f3cdf4d0-035c-44f3-bb1a-60e6273aaba5"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.0",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Tabular-to-FASTA",
+                    "name": "input"
+                }
+            ],
+            "label": null,
+            "name": "Tabular-to-FASTA",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "fasta"
+                }
+            ],
+            "position": {
+                "bottom": 493.5,
+                "height": 112,
+                "left": 48.5,
+                "right": 248.5,
+                "top": 381.5,
+                "width": 200,
+                "x": 48.5,
+                "y": 381.5
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/tabular_to_fasta/tab2fasta/1.1.0",
+            "tool_shed_repository": {
+                "changeset_revision": "0a7799698fe5",
+                "name": "tabular_to_fasta",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"input\": {\"__class__\": \"RuntimeValue\"}, \"seq_col\": \"2\", \"title_col\": \"1\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.1",
+            "type": "tool",
+            "uuid": "81619544-0b3e-42bc-9748-6e1dfd4fc267",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "58af265a-da49-46ca-bb9d-9ebd2612afe1"
+                }
+            ]
+        },
+        "5": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3",
+            "errors": null,
+            "id": 5,
+            "input_connections": {
+                "query": {
+                    "id": 4,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "NCBI BLAST+ blastp",
+            "outputs": [
+                {
+                    "name": "output1",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 444.5,
+                "height": 132,
+                "left": 312,
+                "right": 512,
+                "top": 312.5,
+                "width": 200,
+                "x": 312,
+                "y": 312.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput1": {
+                    "action_arguments": {
+                        "newname": "BlastP_output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output1"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/ncbi_blast_plus/ncbi_blastp_wrapper/0.3.3",
+            "tool_shed_repository": {
+                "changeset_revision": "2889433c7ae1",
+                "name": "ncbi_blast_plus",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"adv_opts\": {\"adv_opts_selector\": \"advanced\", \"__current_case__\": 1, \"filter_query\": \"false\", \"matrix_gapcosts\": {\"matrix\": \"PAM30\", \"__current_case__\": 8, \"gap_costs\": \"-gapopen 9 -gapextend 1\"}, \"max_hits\": \"1\", \"max_hsps\": \"1\", \"word_size\": \"2\", \"window_size\": \"40\", \"threshold\": \"11\", \"comp_based_stats\": \"0\", \"parse_deflines\": \"false\", \"adv_optional_id_files_opts\": {\"adv_optional_id_files_opts_selector\": \"none\", \"__current_case__\": 0}, \"qcov_hsp_perc\": \"0.0\", \"use_sw_tback\": \"false\"}, \"blast_type\": \"blastp-short\", \"db_opts\": {\"db_opts_selector\": \"db\", \"__current_case__\": 0, \"database\": [\"nr_2018-01-22\"], \"histdb\": \"\", \"subject\": \"\"}, \"evalue_cutoff\": \"200000.0\", \"output\": {\"out_format\": \"ext\", \"__current_case__\": 1}, \"query\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.3.3",
+            "type": "tool",
+            "uuid": "71bdd0c9-534a-4477-86b3-d8b03ee6b497",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output1",
+                    "uuid": "34e46a85-2d5f-41f1-9168-07634d0d8c56"
+                }
+            ]
+        },
+        "6": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "errors": null,
+            "id": 6,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 5,
+                    "output_name": "output1"
+                },
+                "tables_1|table": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": "PSM_Novel_Peptides",
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 636.5,
+                "height": 252,
+                "left": 618.5,
+                "right": 818.5,
+                "top": 384.5,
+                "width": 200,
+                "x": 618.5,
+                "y": 384.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Identifying_Novel_Peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "33d61c89fb8d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"35\"}, \"save_db\": \"false\", \"sqlquery\": \"SELECT distinct psm.*\\nFROM psm join blast on psm.Sequence = blast.qseqid\\nWHERE blast.pident < 100 OR blast.gapopen >= 1 OR blast.length < blast.qlen\\nORDER BY psm.Sequence, psm.ID\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"blast\", \"column_names_from_first_line\": \"false\", \"col_names\": \"qseqid,sseqid,pident,length,mismatch,gapopen,qstart,qend,sstart,send,evalue,bitscore,sallseqid,score,nident,positive,gaps,ppos,qframe,sframe,qseq,sseq,qlen,slen,salltitles\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}, {\"__index__\": 1, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}]}, \"tbl_opts\": {\"table_name\": \"psm\", \"column_names_from_first_line\": \"false\", \"col_names\": \"ID,Proteins,Sequence,AAs_Before,AAs_After,Position,Modified_Sequence,Variable_Modifications,Fixed_Modifications,Spectrum_File,Spectrum_Title,Spectrum_Scan_Number,RT,mz,Measured_Charge,Identification_Charge,Theoretical_Mass,Isotope_Number,Precursor_mz_Error_ppm,Localization_Confidence,Probabilistic_PTM_score,Dscore,Confidence,Validation\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "b78673de-6e95-4be9-9f82-82a5566152a7",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "7b2f5d43-0ef5-453d-bb33-73273cfd9ef0"
+                }
+            ]
+        },
+        "7": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "errors": null,
+            "id": 7,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": "Novel_Peptides",
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 867,
+                "height": 202,
+                "left": 633.5,
+                "right": 833.5,
+                "top": 665,
+                "width": 200,
+                "x": 633.5,
+                "y": 665
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Novel_Peptides"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "33d61c89fb8d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"no\", \"__current_case__\": 1}, \"save_db\": \"false\", \"sqlquery\": \"select distinct Sequence from psm\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}]}, \"tbl_opts\": {\"table_name\": \"psm\", \"column_names_from_first_line\": \"false\", \"col_names\": \"ID,Proteins,Sequence\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "304bf6a1-5407-47fb-807e-caa914600191",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "91f0b1b4-bae7-4e8c-b0f0-a444c3a27d91"
+                }
+            ]
+        },
+        "8": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1",
+            "errors": null,
+            "id": 8,
+            "input_connections": {
+                "mapping": {
+                    "id": 3,
+                    "output_name": "output"
+                },
+                "mzsqlite": {
+                    "id": 2,
+                    "output_name": "output"
+                },
+                "peptideinput": {
+                    "id": 7,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Peptide Genomic Coodinate",
+            "outputs": [
+                {
+                    "name": "peptide_bed",
+                    "type": "bed"
+                }
+            ],
+            "position": {
+                "bottom": 414,
+                "height": 252,
+                "left": 916,
+                "right": 1116,
+                "top": 162,
+                "width": 200,
+                "x": 916,
+                "y": 162
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/peptide_genomic_coordinate/peptide_genomic_coordinate/0.1.1",
+            "tool_shed_repository": {
+                "changeset_revision": "5f49ffce52cb",
+                "name": "peptide_genomic_coordinate",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"mapping\": {\"__class__\": \"ConnectedValue\"}, \"mzsqlite\": {\"__class__\": \"ConnectedValue\"}, \"peptideinput\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.1",
+            "type": "tool",
+            "uuid": "69e01562-2bf5-480e-9573-1064d018ea30",
+            "workflow_outputs": [
+                {
+                    "label": "Peptide Genomic Coodinate on input dataset(s)",
+                    "output_name": "peptide_bed",
+                    "uuid": "c7fe1f7f-08d8-4234-b4a8-081aff5e3c79"
+                }
+            ]
+        },
+        "9": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3",
+            "errors": null,
+            "id": 9,
+            "input_connections": {
+                "bed": {
+                    "id": 8,
+                    "output_name": "peptide_bed"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "PepPointer",
+            "outputs": [
+                {
+                    "name": "classified",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 575.5,
+                "height": 132,
+                "left": 916.5,
+                "right": 1116.5,
+                "top": 443.5,
+                "width": 200,
+                "x": 916.5,
+                "y": 443.5
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionclassified": {
+                    "action_arguments": {
+                        "newtype": "bed"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "classified"
+                },
+                "RenameDatasetActionclassified": {
+                    "action_arguments": {
+                        "newname": "PepPointer"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "classified"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3",
+            "tool_shed_repository": {
+                "changeset_revision": "073a2965e3b2",
+                "name": "pep_pointer",
+                "owner": "galaxyp",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"bed\": {\"__class__\": \"ConnectedValue\"}, \"gtf_input\": {\"gtf_source\": \"cached\", \"__current_case__\": 0, \"gtf\": \"Mus_musculus.GRCm38.84.gtf\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.1.3",
+            "type": "tool",
+            "uuid": "e0c7b77b-02f6-4e3b-a33d-15241f409e4c",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "classified",
+                    "uuid": "ac82e31d-83e1-481b-b6d3-b3521f68e49e"
+                }
+            ]
+        },
+        "10": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "errors": null,
+            "id": 10,
+            "input_connections": {
+                "tables_0|table": {
+                    "id": 9,
+                    "output_name": "classified"
+                },
+                "tables_1|table": {
+                    "id": 6,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Query Tabular",
+                    "name": "add_to_database"
+                }
+            ],
+            "label": "Final_Summary_Novel_Peptides_Output",
+            "name": "Query Tabular",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "tabular"
+                }
+            ],
+            "position": {
+                "bottom": 876.5,
+                "height": 272,
+                "left": 909.5,
+                "right": 1109.5,
+                "top": 604.5,
+                "width": 200,
+                "x": 909.5,
+                "y": 604.5
+            },
+            "post_job_actions": {
+                "RenameDatasetActionoutput": {
+                    "action_arguments": {
+                        "newname": "Final_Summary_Novel_Peptides_Output"
+                    },
+                    "action_type": "RenameDatasetAction",
+                    "output_name": "output"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/3.0.0",
+            "tool_shed_repository": {
+                "changeset_revision": "33d61c89fb8d",
+                "name": "query_tabular",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"add_to_database\": {\"withdb\": {\"__class__\": \"RuntimeValue\"}}, \"addqueries\": {\"queries\": []}, \"modify_database\": {\"sql_stmts\": []}, \"query_result\": {\"header\": \"yes\", \"__current_case__\": 0, \"header_prefix\": \"35\"}, \"save_db\": \"false\", \"sqlquery\": \"SELECT psm.Sequence as PeptideSequence, count(psm.Sequence) as SpectralCount, psm.Proteins as Proteins, bed_pep_pointer.chrom as Chromosome, bed_pep_pointer.start as Start, bed_pep_pointer.end as End, bed_pep_pointer.strand as Strand, bed_pep_pointer.annot as Annotation, bed_pep_pointer.chrom||':'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as GenomeCoordinate,'https://genome.ucsc.edu/cgi-bin/hgTracks?db=mm10&position='||bed_pep_pointer.chrom||'%3A'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as UCSC_Genome_Browser \\nFROM psm \\nINNER JOIN bed_pep_pointer on bed_pep_pointer.peptide = psm.Sequence \\nGROUP BY psm.Sequence\", \"tables\": [{\"__index__\": 0, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": []}, \"tbl_opts\": {\"table_name\": \"bed_pep_pointer\", \"column_names_from_first_line\": \"false\", \"col_names\": \"chrom,start,end,peptide,score,strand,annot\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}, {\"__index__\": 1, \"table\": {\"__class__\": \"ConnectedValue\"}, \"input_opts\": {\"linefilters\": [{\"__index__\": 0, \"filter\": {\"filter_type\": \"skip\", \"__current_case__\": 0, \"skip_lines\": \"1\"}}]}, \"tbl_opts\": {\"table_name\": \"psm\", \"column_names_from_first_line\": \"false\", \"col_names\": \"ID,Proteins,Sequence,AAs_Before,AAs_After,Position,Modified_Sequence,Variable_Modifications,Fixed_Modifications,Spectrum_File,Spectrum_Title,Spectrum_Scan_Number,RT,mz,Measured_Charge,Identification_Charge,Theoretical_Mass,Isotope_Number,Precursor_mz_Error_ppm,Localization_Confidence,Probabilistic_PTM_score,Dscore,Confidence,Validation\", \"load_named_columns\": \"false\", \"pkey_autoincr\": \"\", \"indexes\": []}}], \"workdb\": \"workdb.sqlite\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "3.0.0",
+            "type": "tool",
+            "uuid": "7dbc7e08-326e-40fc-9b9d-f9a112e67fdc",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "6c49c8e8-c6e4-439c-be86-a49aa9a2f47a"
+                }
+            ]
+        }
     },
-    "1": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 1,
-      "input_connections": {},
-      "inputs": [],
-      "label": "PeptideShaker_PSM",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 284,
-        "top": 707
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "b0ed88a7-2260-4ef6-a96d-3ce746c62829",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "0e94e5da-13a2-4b9e-96db-05aca8dc5778"
-        }
-      ]
-    },
-    "2": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 2,
-      "input_connections": {},
-      "inputs": [],
-      "label": "mz_to_sqlite",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 274.5,
-        "top": 791
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "cdf8da96-3078-45f6-b756-ca609b87af2d",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "6ad88525-7840-4777-bd3b-dbe5564b9528"
-        }
-      ]
-    },
-    "3": {
-      "annotation": "",
-      "content_id": null,
-      "errors": null,
-      "id": 3,
-      "input_connections": {},
-      "inputs": [],
-      "label": "Genomic_mapping_sqlite",
-      "name": "Input dataset",
-      "outputs": [],
-      "position": {
-        "left": 282.5,
-        "top": 886
-      },
-      "tool_id": null,
-      "tool_state": "{}",
-      "tool_version": null,
-      "type": "data_input",
-      "uuid": "651e708c-8739-40b5-9723-ed2a25bed62e",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "c6793f2d-2855-4bc5-bf66-3cd16107057e"
-        }
-      ]
-    },
-    "4": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/2.0.0",
-      "errors": null,
-      "id": 4,
-      "input_connections": {
-        "tables_0|table": {
-          "id": 0,
-          "output_name": "output"
-        },
-        "tables_1|table": {
-          "id": 1,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Query Tabular",
-          "name": "add_to_database"
-        }
-      ],
-      "label": "PSM_Novel_Peptides",
-      "name": "Query Tabular",
-      "outputs": [
-        {
-          "name": "sqlitedb",
-          "type": "sqlite"
-        },
-        {
-          "name": "output",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 614.5,
-        "top": 240.5
-      },
-      "post_job_actions": {
-        "HideDatasetActionsqlitedb": {
-          "action_arguments": {},
-          "action_type": "HideDatasetAction",
-          "output_name": "sqlitedb"
-        },
-        "RenameDatasetActionoutput": {
-          "action_arguments": {
-            "newname": "Identifying_Novel_Peptides"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "output"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/2.0.0",
-      "tool_shed_repository": {
-        "changeset_revision": "1ea4e668bf73",
-        "name": "query_tabular",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"tables\": \"[{\\\"tbl_opts\\\": {\\\"pkey_autoincr\\\": \\\"\\\", \\\"load_named_columns\\\": \\\"false\\\", \\\"indexes\\\": [], \\\"table_name\\\": \\\"blast\\\", \\\"col_names\\\": \\\"qseqid,sseqid,pident,length,mismatch,gapopen,qstart,qend,sstart,send,evalue,bitscore,sallseqid,score,nident,positive,gaps,ppos,qframe,sframe,qseq,sseq,qlen,slen,salltitles\\\", \\\"column_names_from_first_line\\\": \\\"false\\\"}, \\\"__index__\\\": 0, \\\"input_opts\\\": {\\\"linefilters\\\": []}, \\\"table\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"tbl_opts\\\": {\\\"pkey_autoincr\\\": \\\"\\\", \\\"load_named_columns\\\": \\\"false\\\", \\\"indexes\\\": [], \\\"table_name\\\": \\\"psm\\\", \\\"col_names\\\": \\\"ID,Proteins,Sequence,AAs_Before,AAs_After,Position,Modified_Sequence,Variable_Modifications,Fixed_Modifications,Spectrum_File,Spectrum_Title,Spectrum_Scan_Number,RT,mz,Measured_Charge,Identification_Charge,Theoretical_Mass,Isotope_Number,Precursor_mz_Error_ppm,Localization_Confidence,Probabilistic_PTM_score,Dscore,Confidence,Validation\\\", \\\"column_names_from_first_line\\\": \\\"false\\\"}, \\\"__index__\\\": 1, \\\"input_opts\\\": {\\\"linefilters\\\": [{\\\"filter\\\": {\\\"skip_lines\\\": \\\"1\\\", \\\"__current_case__\\\": 0, \\\"filter_type\\\": \\\"skip\\\"}, \\\"__index__\\\": 0}]}, \\\"table\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"save_db\": \"\\\"false\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"sqlquery\": \"\\\"SELECT distinct psm.*\\\\nFROM psm join blast on psm.Sequence = blast.qseqid\\\\nWHERE blast.pident < 100 OR blast.gapopen >= 1 OR blast.length < blast.qlen\\\\nORDER BY psm.Sequence, psm.ID\\\"\", \"add_to_database\": \"{\\\"withdb\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"query_result\": \"{\\\"header\\\": \\\"yes\\\", \\\"header_prefix\\\": \\\"35\\\", \\\"__current_case__\\\": 0}\", \"workdb\": \"\\\"workdb.sqlite\\\"\"}",
-      "tool_version": "2.0.0",
-      "type": "tool",
-      "uuid": "992204de-3d7f-4f6a-b123-7114287bc5ae",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "cc67207d-a83f-4f0a-98e9-a9d55845395e"
-        }
-      ]
-    },
-    "5": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/2.0.0",
-      "errors": null,
-      "id": 5,
-      "input_connections": {
-        "tables_0|table": {
-          "id": 4,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Query Tabular",
-          "name": "add_to_database"
-        }
-      ],
-      "label": "Novel_Peptides",
-      "name": "Query Tabular",
-      "outputs": [
-        {
-          "name": "sqlitedb",
-          "type": "sqlite"
-        },
-        {
-          "name": "output",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 608.5,
-        "top": 488
-      },
-      "post_job_actions": {
-        "HideDatasetActionsqlitedb": {
-          "action_arguments": {},
-          "action_type": "HideDatasetAction",
-          "output_name": "sqlitedb"
-        },
-        "RenameDatasetActionoutput": {
-          "action_arguments": {
-            "newname": "Novel_Peptides"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "output"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/2.0.0",
-      "tool_shed_repository": {
-        "changeset_revision": "1ea4e668bf73",
-        "name": "query_tabular",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"tables\": \"[{\\\"tbl_opts\\\": {\\\"pkey_autoincr\\\": \\\"\\\", \\\"load_named_columns\\\": \\\"false\\\", \\\"indexes\\\": [], \\\"table_name\\\": \\\"psm\\\", \\\"col_names\\\": \\\"ID,Proteins,Sequence\\\", \\\"column_names_from_first_line\\\": \\\"false\\\"}, \\\"__index__\\\": 0, \\\"input_opts\\\": {\\\"linefilters\\\": [{\\\"filter\\\": {\\\"skip_lines\\\": \\\"1\\\", \\\"__current_case__\\\": 0, \\\"filter_type\\\": \\\"skip\\\"}, \\\"__index__\\\": 0}]}, \\\"table\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"save_db\": \"\\\"false\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"sqlquery\": \"\\\"select distinct Sequence from psm\\\"\", \"add_to_database\": \"{\\\"withdb\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"query_result\": \"{\\\"header\\\": \\\"no\\\", \\\"__current_case__\\\": 1}\", \"workdb\": \"\\\"workdb.sqlite\\\"\"}",
-      "tool_version": "2.0.0",
-      "type": "tool",
-      "uuid": "4e91e65f-2c04-4213-b161-b105db718a0b",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "36e2f71c-0bbf-4f27-b1fa-4b95baf785a1"
-        }
-      ]
-    },
-    "6": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/pravs/peptidegenomiccoordinate/peptidegenomiccoordinate/0.1.1",
-      "errors": null,
-      "id": 6,
-      "input_connections": {
-        "mapping": {
-          "id": 3,
-          "output_name": "output"
-        },
-        "mzsqlite": {
-          "id": 2,
-          "output_name": "output"
-        },
-        "peptideinput": {
-          "id": 5,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Peptide Genomic Coordinate",
-          "name": "peptideinput"
-        },
-        {
-          "description": "runtime parameter for tool Peptide Genomic Coordinate",
-          "name": "mapping"
-        },
-        {
-          "description": "runtime parameter for tool Peptide Genomic Coordinate",
-          "name": "mzsqlite"
-        }
-      ],
-      "label": null,
-      "name": "Peptide Genomic Coordinate",
-      "outputs": [
-        {
-          "name": "peptide_bed",
-          "type": "bed"
-        }
-      ],
-      "position": {
-        "left": 982.5,
-        "top": 286
-      },
-      "post_job_actions": {
-        "ChangeDatatypeActionpeptide_bed": {
-          "action_arguments": {
-            "newtype": "bed"
-          },
-          "action_type": "ChangeDatatypeAction",
-          "output_name": "peptide_bed"
-        },
-        "RenameDatasetActionpeptide_bed": {
-          "action_arguments": {
-            "newname": "Pep_gen_coordinate.bed"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "peptide_bed"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/pravs/peptidegenomiccoordinate/peptidegenomiccoordinate/0.1.1",
-      "tool_shed_repository": {
-        "changeset_revision": "561b62936e2c",
-        "name": "peptidegenomiccoordinate",
-        "owner": "pravs",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"peptideinput\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"mapping\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"mzsqlite\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-      "tool_version": "0.1.1",
-      "type": "tool",
-      "uuid": "e5823e0c-1de6-41bd-9470-d786c29f2674",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "peptide_bed",
-          "uuid": "52cb0533-4f0e-4dcf-8fa8-1deed1bfc26d"
-        }
-      ]
-    },
-    "7": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3",
-      "errors": null,
-      "id": 7,
-      "input_connections": {
-        "bed": {
-          "id": 6,
-          "output_name": "peptide_bed"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool PepPointer",
-          "name": "bed"
-        }
-      ],
-      "label": null,
-      "name": "PepPointer",
-      "outputs": [
-        {
-          "name": "classified",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 939.5,
-        "top": 551.5
-      },
-      "post_job_actions": {
-        "ChangeDatatypeActionclassified": {
-          "action_arguments": {
-            "newtype": "bed"
-          },
-          "action_type": "ChangeDatatypeAction",
-          "output_name": "classified"
-        },
-        "RenameDatasetActionclassified": {
-          "action_arguments": {
-            "newname": "PepPointer"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "classified"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/galaxyp/pep_pointer/pep_pointer/0.1.3",
-      "tool_shed_repository": {
-        "changeset_revision": "073a2965e3b2",
-        "name": "pep_pointer",
-        "owner": "galaxyp",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"__page__\": null, \"__rerun_remap_job_id__\": null, \"gtf_input\": \"{\\\"gtf\\\": \\\"Mus_Musculus_GRCm38.90_Ensembl_GTF\\\", \\\"gtf_source\\\": \\\"cached\\\", \\\"__current_case__\\\": 0}\", \"bed\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
-      "tool_version": "0.1.3",
-      "type": "tool",
-      "uuid": "8c1dd3b7-ba0b-4899-9551-776fb0499469",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "classified",
-          "uuid": "9c96c105-4284-4db9-b0ef-941262062ea1"
-        }
-      ]
-    },
-    "8": {
-      "annotation": "",
-      "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/2.0.0",
-      "errors": null,
-      "id": 8,
-      "input_connections": {
-        "tables_0|table": {
-          "id": 7,
-          "output_name": "classified"
-        },
-        "tables_1|table": {
-          "id": 4,
-          "output_name": "output"
-        }
-      },
-      "inputs": [
-        {
-          "description": "runtime parameter for tool Query Tabular",
-          "name": "add_to_database"
-        }
-      ],
-      "label": "Final_Summary_Novel_Peptides_Output",
-      "name": "Query Tabular",
-      "outputs": [
-        {
-          "name": "sqlitedb",
-          "type": "sqlite"
-        },
-        {
-          "name": "output",
-          "type": "tabular"
-        }
-      ],
-      "position": {
-        "left": 889.5,
-        "top": 720.5
-      },
-      "post_job_actions": {
-        "HideDatasetActionsqlitedb": {
-          "action_arguments": {},
-          "action_type": "HideDatasetAction",
-          "output_name": "sqlitedb"
-        },
-        "RenameDatasetActionoutput": {
-          "action_arguments": {
-            "newname": "Final_Summary_Novel_Peptides_Output"
-          },
-          "action_type": "RenameDatasetAction",
-          "output_name": "output"
-        }
-      },
-      "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/query_tabular/query_tabular/2.0.0",
-      "tool_shed_repository": {
-        "changeset_revision": "1ea4e668bf73",
-        "name": "query_tabular",
-        "owner": "iuc",
-        "tool_shed": "toolshed.g2.bx.psu.edu"
-      },
-      "tool_state": "{\"tables\": \"[{\\\"tbl_opts\\\": {\\\"pkey_autoincr\\\": \\\"\\\", \\\"load_named_columns\\\": \\\"false\\\", \\\"indexes\\\": [], \\\"table_name\\\": \\\"bed_pep_pointer\\\", \\\"col_names\\\": \\\"chrom,start,end,peptide,score,strand,annot\\\", \\\"column_names_from_first_line\\\": \\\"false\\\"}, \\\"__index__\\\": 0, \\\"input_opts\\\": {\\\"linefilters\\\": []}, \\\"table\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"tbl_opts\\\": {\\\"pkey_autoincr\\\": \\\"\\\", \\\"load_named_columns\\\": \\\"false\\\", \\\"indexes\\\": [], \\\"table_name\\\": \\\"psm\\\", \\\"col_names\\\": \\\"ID,Proteins,Sequence,AAs_Before,AAs_After,Position,Modified_Sequence,Variable_Modifications,Fixed_Modifications,Spectrum_File,Spectrum_Title,Spectrum_Scan_Number,RT,mz,Measured_Charge,Identification_Charge,Theoretical_Mass,Isotope_Number,Precursor_mz_Error_ppm,Localization_Confidence,Probabilistic_PTM_score,Dscore,Confidence,Validation\\\", \\\"column_names_from_first_line\\\": \\\"false\\\"}, \\\"__index__\\\": 1, \\\"input_opts\\\": {\\\"linefilters\\\": [{\\\"filter\\\": {\\\"skip_lines\\\": \\\"1\\\", \\\"__current_case__\\\": 0, \\\"filter_type\\\": \\\"skip\\\"}, \\\"__index__\\\": 0}]}, \\\"table\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"save_db\": \"\\\"false\\\"\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"sqlquery\": \"\\\"SELECT psm.Sequence as PeptideSequence, count(psm.Sequence) as SpectralCount, psm.Proteins as Proteins, bed_pep_pointer.chrom as Chromosome, bed_pep_pointer.start as Start, bed_pep_pointer.end as End, bed_pep_pointer.strand as Strand, bed_pep_pointer.annot as Annotation, bed_pep_pointer.chrom||':'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as GenomeCoordinate,'https://genome.ucsc.edu/cgi-bin/hgTracks?db=mm10&position='||bed_pep_pointer.chrom||'%3A'||bed_pep_pointer.start||'-'||bed_pep_pointer.end as UCSC_Genome_Browser \\\\nFROM psm \\\\nINNER JOIN bed_pep_pointer on bed_pep_pointer.peptide = psm.Sequence \\\\nGROUP BY psm.Sequence\\\"\", \"add_to_database\": \"{\\\"withdb\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}\", \"query_result\": \"{\\\"header\\\": \\\"yes\\\", \\\"header_prefix\\\": \\\"35\\\", \\\"__current_case__\\\": 0}\", \"workdb\": \"\\\"workdb.sqlite\\\"\"}",
-      "tool_version": "2.0.0",
-      "type": "tool",
-      "uuid": "624e04e1-828e-46f6-85cb-91f4f2bd8562",
-      "workflow_outputs": [
-        {
-          "label": null,
-          "output_name": "output",
-          "uuid": "f042204b-816b-477f-b594-afea57c34f44"
-        }
-      ]
-    }
-  },
-  "tags": [
-    "proteomics"
-  ],
-  "uuid": "92196cd4-283a-4f0e-af12-c6a17ddf9295"
+    "tags": ["proteomics"],
+    "uuid": "3d8aa3c9-06b3-4af0-b9ca-f435a481417a",
+    "version": 3
 }
