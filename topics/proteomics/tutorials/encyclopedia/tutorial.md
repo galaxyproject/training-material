@@ -57,29 +57,50 @@ tutorial.
 >
 > In this tutorial, we will cover:
 >
-> 1. TOC
+> 1. What the EncyclopeDIA workflow accomplishes.
+> 2. What inputs are needed to run the EncyclopeDIA workflow.
+> 2. How to prepare inputs and how to run the EncyclopeDIA workflow.
 > {:toc}
 >
 {: .agenda}
 
-# Title for your first section
+# DDA, DIA, and the differences between them
 
-Give some background about what the trainees will be doing in the section.
+Data Independent Acquisition (DIA) is a novel technique for the analysis of proteomic data samples and is a promising alternative to Data Dependent Acquisition (DDA) which has been traditionally used. 
+
+DDA is a method in which specific precursor ions are selected for fragmentation based on their measured abundance in MS1. Once selected, MS2 data is collected for this m/z time point and used to determine the sequence of the peptide that was present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be further calculated. The process is repeated many times in which other precursor ions are selected for specific m/z time points and MS2 data is generated based on their abundances in MS1.
+
+FIGURE 1?
+
+On the other hand, DIA selects for multiple ion fragments within a specified m/z range. As DDA selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex data containing peak information from multiple peptides. 
+
+FIGURE 2?
+
+In a typical DIA experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are taken, each containing several fragment scans spanning across the entire 400-1000 m/z range. Specific fragment ion scans can then be condensed. Each combined fragment ion scan containing a small m/z range can be examined for peaks and peptide presence can then be analyzed. 
+
+FIGURE 3?
+
+FIGURE 4?
+
+
+-->(Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+so make sure to explain all the relevant concepts.)<--
 
 ## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+
+-->(Section and subsection titles will be displayed in the tutorial index on the left side of
+the page, so try to make them informative and concise!)<--
 
 # Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
+
+-->(Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
 as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
+see fit, this is just a starting point :) )<--
 
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
+-->(Anywhere you find the word "***TODO***", there is something that needs to be changed
+depending on the specifics of your tutorial.) <--
 
 have fun!
 
@@ -116,6 +137,7 @@ have fun!
 # Conversion of file types
 
 msconvert is the first tool in this EncyclopeDIA workflow as before analysis of such DIA data may begin, the data files must be converted to the correct file type (mzML) from the raw data. Conversion from raw to mzML is important because SearchToLib (generation of the Chromatogram Library), as well as EncyclopeDIA (analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
+
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
@@ -236,6 +258,10 @@ Libraries used in DIA data analysis are often constructed from DDA data assuming
 As mentioned, there are challenges associated with the use of DDA libraries to analyze DIA data. The main challenge is that the difference in the method of data generation means that the retention times contained in DDA libraries are not always accurate to the retention times in the DIA data to which it is compared. Retention time accuracy is dependent on how the protein elutes off the column as well as how this changes based on what elutes in its environment creating variance between DDA and DIA methods. Additionally, DDA libraries can be cumbersome to generate when examining DIA data due to fractionation. More specifically, the method in which the fractions are generated is important. For example, SCX fractionation provides a vastly different profile compared to high pH reverse phase fractionation. Thus, to generate a comprehensive profile in DDA library generation, multiple fractionation methods must be completed. So, while DDA libraries can be used to analyze DIA data, their use significantly increases the required labor and the quantity of data required to generate a library.
 
 Libraries generated using DIA data could bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller. This allows for a far richer and more in-depth understanding of the peptide content within the sample making it a useful tool in library generation. In addition to producing a more comprehensive picture of the sample, the GPF method can be used on pooled DIA quantitative samples. Therefore, the pooled sample generates a thorough library through GPF while incorporating a spectrum library to create an “On-column Chromatogram Library” from DIA sample data.
+
+FIGURE 5?
+
+FIGURE 6?
 
 Write about Chromatogram Libraries and add few images
 ![Alternative text](../../images/image_name "Legend of the image")
