@@ -244,24 +244,29 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > ### {% icon hands_on %} Hands-on
 > 
-> **Build a Paired Collection** 
-> {% include snippets/build_paired_list_collection.md %}
->
 > **RNA STARsolo** {% icon tool %} with the following parameters:
->    - *"Input Type"*: `Paired collection of barcode and cDNA reads`
->        - {% icon param-file %} *"Collection of Pairs"*: `the name of your paired collection`
->    - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
 >            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
->    - In *"Advanced Settings"*:
+>            - *"Length of genomic sequence around annotated junctions"*: `100`
+>    - *"Type of single-cell RNA-seq"*: `Drop-seq or 10X Chromium`
+>        - *"Input Type"*: `Separate barcode and cDNA reads`
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, Barcode reads"*: Multi-select `L001_R1_001` and `L002_R1_001` using the Ctrl key.
+>        - {% icon param-file %} *"RNA-Seq FASTQ/FASTA file, cDNA reads"*: Multi-select `L001_R2_001` and `L002_R2_001` using the Ctrl key.
+>        - {% icon param-file %} *"RNA-Seq Cell Barcode Whitelist"*: `3M-february-2018.txt.gz`
 >        - *"Configure Chemistry Options"*: `Cell Ranger v3`
+>        - *"UMI deduplication (collapsing) algorithm"*: `All`
+>        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 3)`
+>    - Under *"Advanced Settings"*:
+>        - *"Strandedness of Library"*: `Forward`
+>        - *Collect UMI counts for these genomic features* at `Gene: Count reads matching the Gene Transcript`
+>        - *"Type of UMI filtering"*: `Remove lower-count UMIs that map to more than one gene (introduced in CellRanger 3.x.x)`
+>        - *"Cell filter type and parameters"*: `Do not filter`
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > We leave the *Genomic features to collect UMI counts upon* at `Gene` and *UMI deduplication (collapsing) algorithm* at `All`, as these are the options that emulate the *Cell Ranger* pipeline.
->    >
+>    > The in-built Cell filtering is a relatively new feature that emulates the CellRanger pipeline. Here, we set the filtering options to not filter because we will use our own methods to better understand how this works. For your own future datasets, you may wish to enable the filtering parameter.
 >    {: .comment}
 >
 {: .hands_on}
