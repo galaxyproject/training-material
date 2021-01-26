@@ -519,4 +519,7 @@ In this workflow we have learned to quickly perform mapping and quantification o
 
 A full pipeline which produces both an AnnData and tabular file for inspection is provided [here](workflows/scrna_tenx.ga).
 
+Note that, since version *2.7.7a* of the tool, the entire *Cell Ranger* pipeline including the filtering can be performed natively within **RNA STARsolo**. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.
+
+
 <!-- ![Recap of workflow]({% link topics/transcriptomics/images/scrna_workflow.svg %} "A recap of the entire workflow") -->
