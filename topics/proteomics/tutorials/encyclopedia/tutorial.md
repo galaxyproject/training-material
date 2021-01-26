@@ -73,18 +73,21 @@ DDA is a method in which specific precursor ions are selected for fragmentation 
 
 ![Novel Peptides](../../images/potential_novel_publication.png
 
-![Alternative text](training-material/topics/proteomics/images/EncyclopeDIA_Figure1.png)
+![Alternative text](../../images/EncyclopeDIA_Figure1.png)
 
 FIGURE 1?
 
 On the other hand, DIA selects for multiple ion fragments within a specified m/z range. As DDA selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex data containing peak information from multiple peptides. 
 
+![Alternative text](../../images/EncyclopeDIA_Figure2.png)
 FIGURE 2?
 
 In a typical DIA experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are taken, each containing several fragment scans spanning across the entire 400-1000 m/z range. Specific fragment ion scans can then be condensed. Each combined fragment ion scan containing a small m/z range can be examined for peaks and peptide presence can then be analyzed. 
 
+![Alternative text](../../images/EncyclopeDIA_Figure3.png)
 FIGURE 3?
 
+![Alternative text](../../images/EncyclopeDIA_Figure4.png)
 FIGURE 4?
 
 
@@ -264,8 +267,10 @@ As mentioned, there are challenges associated with the use of DDA libraries to a
 
 Libraries generated using DIA data could bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller. This allows for a far richer and more in-depth understanding of the peptide content within the sample making it a useful tool in library generation. In addition to producing a more comprehensive picture of the sample, the GPF method can be used on pooled DIA quantitative samples. Therefore, the pooled sample generates a thorough library through GPF while incorporating a spectrum library to create an “On-column Chromatogram Library” from DIA sample data.
 
+![Alternative text](../../images/EncyclopeDIA_Figure5.png)
 FIGURE 5?
 
+![Alternative text](../../images/EncyclopeDIA_Figure6.png)
 FIGURE 6?
 
 Write about Chromatogram Libraries and add few images
