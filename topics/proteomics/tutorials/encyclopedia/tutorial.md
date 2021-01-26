@@ -137,6 +137,7 @@ have fun!
 
 msconvert is the first tool in this EncyclopeDIA workflow as before analysis of such DIA data may begin, the data files must be converted to the correct file type (mzML) from the raw data. Conversion from raw to mzML is important because SearchToLib (generation of the Chromatogram Library), as well as EncyclopeDIA (analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
 
+In this workflow, msconvert uses dataset collections. The tool will convert each of the data files in the collection from a raw file-type to a mzML file-type. Then, a dataset collection containing the mzML files will be generated as the output from msconvert.
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
@@ -265,6 +266,16 @@ Write about Chromatogram Libraries and add few images
 ![Alternative text](../../images/image_name "Legend of the image")
 
 SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the spectral files converted previously, a background protein database in FASTA format, as well as a .dlib spectral library. Outputs from this tool include the Chromatogram Library in an .elib format, as well as a text log file.
+
+SearchToLib generates two output files:
+
+- a Log txt file
+
+  While this file is not visualized in the final outputs, it contains
+
+- a Chromatogram library in ELIB format
+
+  
 
 ## **SearchToLib**
 
