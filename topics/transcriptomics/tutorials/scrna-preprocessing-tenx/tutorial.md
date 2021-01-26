@@ -315,27 +315,40 @@ Let us investigate the output log. This type of quality control is essential in 
 
 ### Quantification Quality
 
-Let us investigate the STARsolo specific log. We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file.
+The above tool provides a nice visualisation of the output log, and is a fantastic way to combine multiple quality sources into one concise report.
+
+However, sometimes it is often more informative to look directly at the source quality control file. For example, let us investigate the STARsolo Feature summaries file.
+
+We can look at this directly by clicking on the {% icon galaxy-eye %} symbol of the *Feature Statistic Summaries* file.
 
 
 > ### {% icon details %}: RNA STARsolo log output
 > ```
->                     Barcodes:
->                  nNinBarcode            358
+> Barcodes:
+>                   nNoAdapter              0
+>                       nNoUMI              0
+>                        nNoCB              0
+>                       nNinCB              0
+>                      nNinUMI            358
 >              nUMIhomopolymer            707
 >                     nTooMany              0
 >                     nNoMatch          50037
->                         Gene:
->                    nUnmapped          11454
->                   nNoFeature        3326967
+>          nMismatchesInMultCB              0
+>                  nExactMatch        7530489
+>               nMismatchOneWL          19534
+>            nMismatchToMultWL          84800
+> Genes:
+>                    nUnmapped         278029
+>                   nNoFeature        3060392
 >                nAmbigFeature         419262
 >        nAmbigFeatureMultimap         333163
->                     nTooMany          28645
->                nNoExactMatch           7148
+>                     nTooMany          18448
+>                nNoExactMatch              0
 >                  nExactMatch        3829826
->                       nMatch        3841347
->                nCellBarcodes           5200
->                        nUMIs        1689661
+>                       nMatch        3858692
+>                nCellBarcodes           6101
+>                        nUMIs        1697298
+>
 > ```
 {: .comment}
 
@@ -345,9 +358,9 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 >
 >  | Parameter | Explanation |
 >  |-----------|-------------|
->  | nNinBarcode | number of reads with more than 2 Ns in cell barcode (CB) |
+>  | nNinCB | number of reads with more than 2 Ns in cell barcode (CB) |
 >  | nUMIhomopolymer | number of reads with homopolymer in CB |
->  | nTooMany | not used at the moment |
+>  | nTooMany | (not used at the moment) |
 >  | nNoMatch | number of reads with CBs that do not match whitelist even with one mismatch |
 >
 > All of the above reads are discarded from Solo output.
@@ -366,8 +379,8 @@ The explanation of these parameters can be seen in the [RNA STAR Manual](https:/
 >
 > These metrics can be grouped into more broad categories:
 >
-> * `nNinBarcode` + `nUMIhomopolymer` + `nNoMatch` + `nTooMany` + `nNoExactMatch` = number of reads with CBs that do not match whitelist.
-> * `nUnmapped` + `nAmbigFeature` + `nNoFeature` + `nTooMany` (from the `Gene` section) = number of reads without defined feature (gene).
+> * `nNinCB` + `nUMIhomopolymer` + `nNoMatch` + `nTooMany` + `nNoExactMatch` = number of reads with CBs that do not match whitelist.
+> * `nUnmapped` + `nAmbigFeature` = number of reads without defined feature (gene).
 > * `nMatch` = number of reads that are output as solo counts.
 >
 > The three categories above summed together should be equal to the total number of reads (which is also given in the MultiQC output).
