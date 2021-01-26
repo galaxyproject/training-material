@@ -273,18 +273,20 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 ## Inspecting the Output Files
 
-At this stage **RNA STARsolo** has output 5 files, 2 mapping quality files and 3 matrix files:
+At this stage **RNA STARsolo** has output 6 files; a program log, a mapping quality file, a BAM file of alignments, and 3 count matrix files:
  1. Log
  1. Feature Statistic Summaries
+ 1. Alignments
  1. Matrix Gene Counts
  1. Barcodes
  1. Genes
+
+The log and the summaries files give program logistics and metrics about the quality of the mapping. The BAM file contains the reads mapped to the reference genome. The matrix gene counts is the count matrix in *matrixmarket* format, accompanied by the list of genes and cell barcodes in separate files. These can be converted into *tabular* or *AnnData* formats using the {% icon tool %} **Import Anndata and loom** tool.
 
 
 ### Mapping Quality
 
 Let us investigate the output log. This type of quality control is essential in any RNA-based analysis and it is strongly recommended that you familiarise yourself with the [Quality Control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}) tutorial.
-
 
 
 > ### {% icon hands_on %} Hands-on
