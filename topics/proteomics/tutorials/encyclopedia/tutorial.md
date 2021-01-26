@@ -73,7 +73,7 @@ DDA is a method in which specific precursor ions are selected for fragmentation 
 
 ![Novel Peptides](../../images/potential_novel_publication.png
 
-![Novel Peptides] (training-material/topics/proteomics/images/EncyclopeDIA_Figure1.png)
+![Alternative text](training-material/topics/proteomics/images/EncyclopeDIA_Figure1.png)
 
 FIGURE 1?
 
