@@ -269,12 +269,13 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 
 SearchToLib generates two output files:
 
-- a Log txt file
+- Log txt file
 
-  While this file is not visualized in the final outputs, it contains
+  This file is not visualized in the workflow output as it contains the progress of the workings of SearchToLib.
 
-- a Chromatogram library in ELIB format
+- Chromatogram Library in ELIB format
 
+  As the Chromatogram Library is generated using an ELIB format, it contains additional quantification data on retention time, peak intensity, and m/z ratios compared to DDA library files, typically generated using a DLIB format. This file will serve as the Chromatogram Library ELIB File input when running EncyclopeDIA.
   
 
 ## **SearchToLib**
@@ -368,6 +369,22 @@ Write about Walnut if Chromatogram Libraries are absent and add few images
 Encyclopedia is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs, one for protein quantitation and one for peptide quantitation. 
 
 ![Alternative text](../../images/image_name "Legend of the image")
+
+EncyclopeDIA generates five output files:
+
+- Log txt file
+
+- Quantification of datasets in ELIB format
+
+- Contatenated quantification of datasets in txt format
+
+- Peptide quantitation in txt format
+
+  This file contains information on peptide sequence, protein ID, and quantity of fragments.
+
+- Protein quantitation in txt format
+
+  This file contains information on sequence of peptides, quantity of peptide fragments, as well as protein IDs.
 
 ## Sub-step with **EncyclopeDIA Quantify**
 
