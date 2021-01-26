@@ -70,6 +70,11 @@ Data Independent Acquisition (DIA) is a novel technique for the analysis of prot
 
 DDA is a method in which specific precursor ions are selected for fragmentation based on their measured abundance in MS1. Once selected, MS2 data is collected for this m/z time point and used to determine the sequence of the peptide that was present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be further calculated. The process is repeated many times in which other precursor ions are selected for specific m/z time points and MS2 data is generated based on their abundances in MS1.
 
+
+![Novel Peptides](../../images/potential_novel_publication.png
+
+![Novel Peptides] (training-material/topics/proteomics/images/EncyclopeDIA_Figure1.png)
+
 FIGURE 1?
 
 On the other hand, DIA selects for multiple ion fragments within a specified m/z range. As DDA selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex data containing peak information from multiple peptides. 
