@@ -1,23 +1,24 @@
 ---
 layout: tutorial_hands_on
+
 title: "Pre-processing of 10X Single-Cell RNA Datasets"
-zenodo_link: "https://zenodo.org/record/3457880"
 tags:
   - single-cell
   - 10x
+zenodo_link: "https://zenodo.org/record/3457880"
 questions:
-  - "What is 10X?"
-  - "What is STARsolo and what is Cell Ranger?"
-  - "What are BCL and MTX files?"
-  - "What is an HDF5 file, and why is it important?"
+  - What is 10X?
+  - What is STARsolo and what is Cell Ranger?
+  - What are BCL and MTX files?
+  - What is an HDF5 file, and why is it important?
 objectives:
-  - "Demultiplex single-cell FASTQ data from 10X Genomics"
-  - "Learn about transparent matrix formats"
-  - "Understand the importance of high and low quality cells"
-time_estimation: "1h"
+  - Demultiplex single-cell FASTQ data from 10X Genomics
+  - Learn about transparent matrix formats
+  - Understand the importance of high and low quality cells
+time_estimation: 1h
 key_points:
-  - "Barcode FASTQ Reads are used to parse cDNA sequencing Reads."
-  - "A raw matrix is too large to process alone, and need to be filtered into a high quality one for downstream analysis"
+  - Barcode FASTQ Reads are used to parse cDNA sequencing Reads.
+  - A raw matrix is too large to process alone, and need to be filtered into a high quality one for downstream analysis
 requirements:
   -
     type: "internal"
@@ -35,6 +36,7 @@ contributors:
   - mtekman
   - hrhotz
   - blankenberg
+  - nomadscientist
 
 gitter: Galaxy-Training-Network/galaxy-single-cell
 
@@ -260,7 +262,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 >        - *"Matching the Cell Barcodes to the WhiteList"*: `Multiple matches (CellRanger 3)`
 >    - Under *"Advanced Settings"*:
 >        - *"Strandedness of Library"*: `Forward`
->        - *Collect UMI counts for these genomic features* at `Gene: Count reads matching the Gene Transcript`
+>        - *"Collect UMI counts for these genomic features"*: `Gene: Count reads matching the Gene Transcript`
 >        - *"Type of UMI filtering"*: `Remove lower-count UMIs that map to more than one gene (introduced in CellRanger 3.x.x)`
 >        - *"Cell filter type and parameters"*: `Do not filter`
 >
