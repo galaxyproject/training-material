@@ -176,11 +176,9 @@ A big step can have several subsections or sub steps:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > For this workflow, msconvert requires that the raw datasets be in a dataset collection.
 >    {: .comment}
 >
 {: .hands_on}
@@ -189,12 +187,12 @@ A big step can have several subsections or sub steps:
 
 > ### {% icon question %} Questions
 >
-> 1. WHy is converting to mzml necessary?
+> 1. Why is conversion from raw to mzML necessary?
 > 2. Can you use any other tool for conversion?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
+> > 1. SearchToLib and EncyclopeDIA require mzML file inputs. Failing to convert the experimental DIA data and the GPF DIA data from raw files would mean that SearchToLib and EncyclopeDIA would not run successfully. 
 > > 2. Answer for question2
 > >
 > {: .solution}
