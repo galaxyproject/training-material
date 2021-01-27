@@ -546,9 +546,11 @@ Galaxy talks to the Pulsar server via it's `job_conf.xml` file. We need to let G
 
 There are three things we need to do here:
 
-* We will need to create a job runner which uses the  `galaxy.jobs.runners.pulsar:PulsarMQJobRunner` code.
-* Create job destination which references the above job runner.
-* Tell Galaxy which tools to send to the job destination: We will use `bwa-mem`
+* Create a job runner which uses the  `galaxy.jobs.runners.pulsar:PulsarMQJobRunner` code.
+* Create a job destination referencing the above job runner.
+* Tell Galaxy which tools to send to this job destination.
+
+For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on Pulsar.
 
 > ### {% icon hands_on %} Hands-on: Configure Galaxy
 >
@@ -585,8 +587,11 @@ There are three things we need to do here:
 >    ```
 >    {% endraw %}
 >
-> 2. Finally we need to tell Galaxy which tools to send to Pulsar. We will tell it to send bwa-mem jobs to it. We use the `<tools>` section of the `job_conf.xml` file.
->    We need to know the full id of the tool in question, we can get this out of the `integrated_tool_panel.xml` file in the `mutable-config` directory. Then we tell Galaxy which destination to send it to (pulsar).
+> 2. Install the BWA and BWA-MEM tools, if needed.
+>
+>    {% include snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
+>
+> 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.xml` file.
 >
 >    Add the following to the end of the `job_conf.xml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
 >
@@ -603,17 +608,9 @@ There are three things we need to do here:
 >     </job_conf>
 >    ```
 >
->    You can use the full tool ID here (toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4), or the short version. By using the full version, we restrict to only running that specific version in pulsar.
+>    Note that here we are using the short tool IDs. If you want to run only a specific version of a tool in Pulsar, you have to use the full tool ID (e.g. `toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4`) instead. The full tool ID can be found inside the `integrated_tool_panel.xml` file in the `mutable-config` directory.
 >
-> 3. Install `bwa` from the admin installation interface if it is missing.
->
->    1. Access the admin menu from the top bar (only available if logged in with the admin_user email)
->    2. Click "Install and Uninstall", which can be found on the left, under "Tool Management"
->    3. Enter `bwa` in the search interface
->    4. Click on the first hit, from `devteam`
->    5. Click the "Install" button for the latest version and enter "Mapping" for the target section.
->
-> 4. Run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
+> 4. Finally run the Galaxy playbook in order to deploy the updated job configuration, and to restart Galaxy.
 >
 {: .hands_on}
 
