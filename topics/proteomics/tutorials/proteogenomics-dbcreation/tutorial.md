@@ -17,7 +17,14 @@ follow_up_training:
     type: "internal"
     topic_name: proteomics
     tutorials:
+      - proteogenomics-dbsearch
+
+    type: "internal"
+    topic_name: proteomics
+    tutorials:
       - proteogenomics-novel-peptide-analysis
+      
+
 
 contributors:
   - subinamehta
@@ -150,25 +157,11 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 
 ![Variant calling](../../images/variant_calling.png)
 
-Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate
-a VCF dataset describing SNPs, indels, and complex variants in samples in the input
-alignments. By default, FreeBayes will consider variants supported by at least two observations
-in a single sample (`-C`) and also by at least 20% of the reads from a single sample (`-F`). These
-settings are suitable for low to high depth sequencing in haploid and diploid samples, but
-users working with polyploid or pooled samples may adjust them depending on the characteristics
-of their sequencing data.
+Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate a VCF dataset describing SNPs, indels, and complex variants in samples in the input alignments. By default, FreeBayes will consider variants supported by at least two observations in a single sample (`-C`) and also by at least 20% of the reads from a single sample (`-F`). These settings are suitable for low to high depth sequencing in haploid and diploid samples, but users working with polyploid or pooled samples may adjust them depending on the characteristics of their sequencing data.
 
-FreeBayes is capable of calling variant haplotypes shorter than a read length where multiple
-polymorphisms segregate on the same read. The maximum distance between polymorphisms phased in
-this way is determined by the `--max-complex-gap`, which defaults to 3bp. In practice, this can
-comfortably be set to half the read length. Ploidy may be set to any level (`-p`), but by default
-all samples are assumed to be diploid. FreeBayes can model per-sample and per-region variation
-in copy-number (`-A`) using a copy-number variation map.
+FreeBayes is capable of calling variant haplotypes shorter than a read length where multiple polymorphisms segregate on the same read. The maximum distance between polymorphisms phased in this way is determined by the `--max-complex-gap`, which defaults to 3bp. In practice, this can comfortably be set to half the read length. Ploidy may be set to any level (`-p`), but by default all samples are assumed to be diploid. FreeBayes can model per-sample and per-region variation in copy-number (`-A`) using a copy-number variation map.
 
-FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in
-terms of observation frequency rather than called genotypes. To do so, use --pooled-continuous
-and set input filters to a suitable level. Allele observation counts will be described by AO
-and RO fields in the VCF output.
+FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use --pooled-continuous and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
 
 
 > ### {% icon hands_on %} Hands-on: Variant Calling with FreeBayes
@@ -275,13 +268,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 >    {% include snippets/change_datatype.md %}
 {: .hands_on}
 
-StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be
-sorted by genomic location (coordinate position). This file contains spliced read alignments
-and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a
-fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across
-at least one junction) in the input BAM file must contain the tag XS to indicate the genomic
-strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2
-(when run with the `--dta` option) already include this tag, but if you use a different read mapper
+StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be sorted by genomic location (coordinate position). This file contains spliced read alignments and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across at least one junction) in the input BAM file must contain the tag XS to indicate the genomic strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2 (when run with the `--dta` option) already include this tag, but if you use a different read mapper
 you should check that this XS tag is included for spliced alignments.
 
 > ### {% icon details %} Note about parameter settings
@@ -630,4 +617,16 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 > ### {% icon comment %} Tool versions
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
+
+
+# **Conclusion**
+{:.no_toc}
+
+This completes the walkthrough of the proteogenomics database creation workflow. This tutorial is a guide to have a database and mapping files ready for  Database searching and novel peptide analysis. Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
+
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
+
+
+{: .comment}
+
 
