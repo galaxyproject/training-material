@@ -101,7 +101,7 @@ We will look at the quality of the nanopore reads.
 We will assemble the long nanopore reads.
 
 > ### {% icon hands_on %} Hands-on: Assemble reads
-> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7) %}:
+> 1. {% tool [Flye](toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0) %}:
 >    - *"Input reads"*: `sweet-potato-chloroplast-nanopore-reduced.fastq`
 >    - *"Estimated genome size"*: `160000`
 >    - *Leave other settings as default*
@@ -231,8 +231,8 @@ Now make a JBrowse file to view the annotations (the GFF3 file - produced from e
 
 > ### {% icon hands_on %} Hands-on: View annotations
 > 1. {% tool [JBrowse genome browser](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3) %}:
->        - *"Reference genome to display"*: `Use a genome from history`
->    - *"Select a reference genome"*: `polished-assembly.fasta`
+>    - *"Reference genome to display"*: `Use a genome from history`
+>        - *"Select a reference genome"*: `polished-assembly.fasta`
 >    - *"Produce Standalone Instance"*: `Yes`
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
 >    - *"JBrowse-in-Galaxy Action"*: `New JBrowse instance`
