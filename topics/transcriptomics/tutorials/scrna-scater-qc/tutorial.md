@@ -1,7 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Single-cell quality control with scater
+title: "Single-cell quality control with scater"
+subtopic: single-cell
+priority: 4
+
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
   - single-cell
