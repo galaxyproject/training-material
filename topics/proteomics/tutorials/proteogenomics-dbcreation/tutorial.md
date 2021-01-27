@@ -71,8 +71,9 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
+> 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
+>    https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 >    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
@@ -88,6 +89,25 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
 >    {% include snippets/change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
 >
+{: .hands_on}
+
+# Change the chromosome names in the Ensembl GTF to match a UCSC genome reference
+
+UCSC prefaces chromosome names with chr while Ensembl does not.  
+
+> ### {% icon hands_on %} Hands-on: Replace Text in a specific column
+>  1. Change numbered chromosome names
+>    - {% icon param-select %} *"in column"*: `1`
+>    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
+>    - {% icon param-select %} *"Replace with*: `chr\\1`
+>  2. Change XY chromosomes
+>    - {% icon param-select %} *"in column"*: `1`
+>    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
+>    - {% icon param-select %} *"Replace with*: `chr\\1`
+>  3. Change mitochondrial chromosome
+>    - {% icon param-select %} *"in column"*: `1`
+>    - {% icon param-select %} *"Find pattern"*: `^MT$`
+>    - {% icon param-select %} *"Replace with*: `chrM`
 {: .hands_on}
 
 
@@ -386,19 +406,47 @@ along with the UniProt and cRAP databases.
 >   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
 >   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
-{: .hands_on}
-
 > ### {% icon comment %} Tool parameters explained
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
-> - Rename it as **CustomProDB Merged Fasta**
 {: .comment}
+>
+> ### {% icon comment %} CustomProDB generated protein Accession names need to be changed for PeptideShaker
+> PeptideShaker does not allow greaterthan sign, comma, or spaces in the protein accession name.
+> PeptideShaker also requires the FASTA ID to start with a source, e.g. *>sp|Q8C4J7|* for SwissProt entries.  Nonstandard entries must be prefixed *generic|*.
+> We will also need to similarily modify the accessions in the genomic mapping and and variant annotation outputs.
+{: .comment}
+> ### {% icon hands_on %} Hands-on: FASTA to Tabular
+> 1. **FASTA to Tabular** {% icon tool %}: with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from' (fasta)`
+>
+> 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
+>    - {% icon param-select %} *"Using"*: `column 1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
+>      - {% icon param-text %} *"Replacement"*: `.\1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      - {% icon param-text %} *"Replacement"*: `generic\1`
+>
+> 2. **Tabular-to-FASTA** {% icon tool %} with the following parameters:
+>    - *"Title column"*: `1`
+>    - *"Sequence Column"*:`2`
+> - Rename it as **CustomProDB Merged Fasta**
+>
+{: .hands_on}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)
 
 
 For visualization purposes we also use the concatenate tool to concatenate the genomic mapping with the protein mapping dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.
+
+We also need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 
 An SQLite database containing the genomic mapping SQLite, variant annotation and information from the protein mapping file is concatenated to form a single genomic mapping SQLite database later used as an input for the 'Peptide Genomic Coordinate' tool. For that we need to follow the steps below:
 
@@ -419,7 +467,8 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 > 2. Rename output to `genomic_mapping_sqlite`
 >    {% include snippets/rename_dataset.md %}
 >
->    The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
+>    The output is further processed so that the results are compatible with the Multiomics Visualization Platform. 
+>    We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 >
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
@@ -428,7 +477,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*:  `,([A-Z]\d+[A-Z])\s*`
+>      - {% icon param-text %} *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
 >      - {% icon param-text %} *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
@@ -468,7 +517,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 ## Variant Annotations database
 
-We will repeat the process for the variant annotations
+We will repeat the process for the variant annotations.  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 
 > ### {% icon hands_on %} Hands-on: Create database for variant annotations
 >
@@ -489,7 +538,7 @@ We will repeat the process for the variant annotations
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**:
->      - {% icon param-text %} *"Find Regex"*: `,([A-Z]\d+[A-Z])\s*`
+>      - {% icon param-text %} *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
 >      - {% icon param-text %} *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**:
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
