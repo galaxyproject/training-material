@@ -23,8 +23,6 @@ follow_up_training:
     tutorials:
       - proteogenomics-novel-peptide-analysis
       
-
-
 contributors:
   - subinamehta
   - timothygriffin
