@@ -68,11 +68,11 @@ tutorial.
 
 Data Independent Acquisition (DIA) is a novel technique for the analysis of proteomic data samples and is a promising alternative to Data Dependent Acquisition (DDA) which has been traditionally used. 
 
-DDA is a method in which specific precursor ions are selected for fragmentation based on their measured abundance in MS1. Once selected, MS2 data is collected for this m/z time point and used to determine the sequence of the peptide that was present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be further calculated. The process is repeated many times in which other precursor ions are selected for specific m/z time points and MS2 data is generated based on their abundances in MS1 (Figure 1).
+DDA is a method in which specific precursor ions are selected for fragmentation based on their measured abundance in MS1. Once selected, MS2 data is collected for these m/z time points and used to determine the sequences of the peptides that are present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be further calculated. The various precursor ions that are further analyzed with MS2 are selected based on their abundances in MS1 (Figure 1).
 
 ![Alternative text](../../images/EncyclopeDIA_Figure1.png)
 
-On the other hand, DIA selects for multiple ion fragments within a specified m/z range (Figure 2). As DDA selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex data containing peak information from multiple peptides. 
+On the other hand, DIA selects for multiple ion fragments within a specified m/z range (Figure 2). Compared to DDA that selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex data containing peak information from multiple peptides. 
 
 ![Alternative text](../../images/EncyclopeDIA_Figure2.png)
 
