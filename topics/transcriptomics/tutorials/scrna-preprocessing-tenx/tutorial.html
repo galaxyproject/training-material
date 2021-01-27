@@ -356,6 +356,10 @@
     {
       "@type": "Person",
       "name": "Daniel Blankenberg"
+    },
+    {
+      "@type": "Person",
+      "name": "Wendi Bacon"
     }
   ],
   "contributor": [
@@ -370,6 +374,10 @@
     {
       "@type": "Person",
       "name": "Daniel Blankenberg"
+    },
+    {
+      "@type": "Person",
+      "name": "Wendi Bacon"
     }
   ],
   "about": [
@@ -396,7 +404,7 @@
 
         <div class="contributors-line">By: 
 
- <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hrhotz" alt="Hans-Rudolf Hotz">Hans-Rudolf Hotz</a> <a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankenberg" alt="Daniel Blankenberg">Daniel Blankenberg</a>
+ <a href="/training-material/hall-of-fame/mtekman/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/mtekman" alt="Mehmet Tekman">Mehmet Tekman</a> <a href="/training-material/hall-of-fame/hrhotz/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/hrhotz" alt="Hans-Rudolf Hotz">Hans-Rudolf Hotz</a> <a href="/training-material/hall-of-fame/blankenberg/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/blankenberg" alt="Daniel Blankenberg">Daniel Blankenberg</a> <a href="/training-material/hall-of-fame/nomadscientist/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/nomadscientist" alt="Wendi Bacon">Wendi Bacon</a>
 
 </div>
 
@@ -806,7 +814,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 17, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 27, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -1110,47 +1118,36 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
-  <p><strong>Build a Paired Collection</strong></p>
-  <blockquote class="tip">
-
-    <h3 id="tip-tip-creating-a-dataset-collection-of-pairs"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection of pairs</h3>
-
-    <ul>
-      <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>
-      <li>Check all the datasets in your history you would like to include</li>
-      <li>
-        <p>Click <strong>For all selected..</strong> and choose <strong>Build List of Dataset Pairs</strong></p>
-      </li>
-      <li>Change the text of <em>unpaired forward</em> to a common selector for the forward <span class="notranslate">reads</span></li>
-      <li>Change the text of <em>unpaired reverse</em> to a common selector for the reverse <span class="notranslate">reads</span></li>
-      <li>Click <strong>Pair these datasets</strong> for each valid <em>forward</em> and <em>reverse</em> pair.</li>
-      <li>Enter a name for your collection</li>
-      <li>Click <strong>Create List</strong> to build your collection</li>
-      <li>Click on the checkmark icon at the top of your history again</li>
-    </ul>
-  </blockquote>
-
   <p><strong><span class="notranslate">RNA</span> STARsolo</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
   <ul>
-    <li><em>“Input Type”</em>: <code class="language-plaintext highlighter-rouge">Paired collection of barcode and c<span class="notranslate">DNA</span> <span class="notranslate">reads</span></code>
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Collection of Pairs”</em>: <code class="language-plaintext highlighter-rouge">the name of your paired collection</code></li>
-      </ul>
-    </li>
-    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq Cell Barcode Whitelist”</em>: <code class="language-plaintext highlighter-rouge">3M-february-2018.txt.gz</code></li>
     <li><em>“Custom or built-in reference genome”</em>: <code class="language-plaintext highlighter-rouge">Use a built-in index</code>
       <ul>
         <li><em>“Reference genome with or without an annotation”</em>: <code class="language-plaintext highlighter-rouge">use genome reference without builtin gene-model</code>
           <ul>
             <li><em>“Select reference genome”</em>: <code class="language-plaintext highlighter-rouge">Human (Homo Sapiens): hg19 Full</code></li>
             <li><em>“Gene model (gff3,gtf) file for splice junctions”</em>: <code class="language-plaintext highlighter-rouge">Homo_sapiens.GRCh37.75.gtf</code></li>
+            <li><em>“Length of genomic sequence around annotated junctions”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li>In <em>“Advanced Settings”</em>:
+    <li><em>“Type of <span class="notranslate">single-cell</span> <span class="notranslate">RNA</span>-seq”</em>: <code class="language-plaintext highlighter-rouge">Drop-seq or 10X Chromium</code>
       <ul>
+        <li><em>“Input Type”</em>: <code class="language-plaintext highlighter-rouge">Separate barcode and c<span class="notranslate">DNA</span> <span class="notranslate">reads</span></code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, Barcode <span class="notranslate">reads</span>”</em>: Multi-select <code class="language-plaintext highlighter-rouge">L001_R1_001</code> and <code class="language-plaintext highlighter-rouge">L002_R1_001</code> using the Ctrl key.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq FASTQ/FASTA file, c<span class="notranslate">DNA</span> <span class="notranslate">reads</span>”</em>: Multi-select <code class="language-plaintext highlighter-rouge">L001_R2_001</code> and <code class="language-plaintext highlighter-rouge">L002_R2_001</code> using the Ctrl key.</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“<span class="notranslate">RNA</span>-Seq Cell Barcode Whitelist”</em>: <code class="language-plaintext highlighter-rouge">3M-february-2018.txt.gz</code></li>
         <li><em>“Configure Chemistry Options”</em>: <code class="language-plaintext highlighter-rouge">Cell Ranger v3</code></li>
+        <li><em>“UMI deduplication (collapsing) algorithm”</em>: <code class="language-plaintext highlighter-rouge">All</code></li>
+        <li><em>“Matching the Cell Barcodes to the WhiteList”</em>: <code class="language-plaintext highlighter-rouge">Multiple matches (CellRanger 3)</code></li>
+      </ul>
+    </li>
+    <li>Under <em>“Advanced Settings”</em>:
+      <ul>
+        <li><em>“Strandedness of Library”</em>: <code class="language-plaintext highlighter-rouge">Forward</code></li>
+        <li><em>“Collect UMI counts for these genomic features”</em>: <code class="language-plaintext highlighter-rouge">Gene: Count <span class="notranslate">reads</span> matching the Gene Transcript</code></li>
+        <li><em>“Type of UMI filtering”</em>: <code class="language-plaintext highlighter-rouge">Remove lower-count UMIs that map to more than one gene (introduced in CellRanger 3.x.x)</code></li>
+        <li><em>“Cell filter type and parameters”</em>: <code class="language-plaintext highlighter-rouge">Do not filter</code></li>
       </ul>
     </li>
   </ul>
@@ -1158,22 +1155,24 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   <blockquote class="comment">
     <h3 id="comment-comment"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-    <p>We leave the <em>Genomic features to collect UMI counts upon</em> at <code class="language-plaintext highlighter-rouge">Gene</code> and <em>UMI deduplication (collapsing) algorithm</em> at <code class="language-plaintext highlighter-rouge">All</code>, as these are the options that emulate the <em>Cell Ranger</em> pipeline.</p>
-
+    <p>The in-built Cell filtering is a relatively new feature that emulates the CellRanger pipeline. Here, we set the filtering options to not filter because we will use our own methods to better understand how this works. For your own future datasets, you may wish to enable the filtering parameter.</p>
   </blockquote>
 
 </blockquote>
 
 <h2 id="inspecting-the-output-files">Inspecting the Output Files</h2>
 
-<p>At this stage <strong><span class="notranslate">RNA</span> STARsolo</strong> has output 5 files, 2 <span class="notranslate">mapping</span> quality files and 3 matrix files:</p>
+<p>At this stage <strong><span class="notranslate">RNA</span> STARsolo</strong> has output 6 files; a program log, a <span class="notranslate">mapping</span> quality file, a BAM file of alignments, and 3 count matrix files:</p>
 <ol>
   <li>Log</li>
   <li>Feature Statistic Summaries</li>
+  <li>Alignments</li>
   <li>Matrix Gene Counts</li>
   <li>Barcodes</li>
   <li>Genes</li>
 </ol>
+
+<p>The log and the summaries files give program logistics and metrics about the quality of the <span class="notranslate">mapping</span>. The BAM file contains the <span class="notranslate">reads</span> mapped to the reference genome. The matrix gene counts is the count matrix in <em>matrixmarket</em> format, accompanied by the list of genes and cell barcodes in separate files. These can be converted into <em>tabular</em> or <em>AnnData</em> formats using the <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> <strong>Import Anndata and loom</strong> tool.</p>
 
 <h3 id="mapping-quality"><span class="notranslate">Mapping</span> Quality</h3>
 
@@ -1223,26 +1222,39 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <h3 id="quantification-quality">Quantification Quality</h3>
 
-<p>Let us investigate the STARsolo specific log. We can look at this directly by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol of the <em>Feature Statistic Summaries</em> file.</p>
+<p>The above tool provides a nice visualisation of the output log, and is a fantastic way to combine multiple quality sources into one concise report.</p>
+
+<p>However, sometimes it is often more informative to look directly at the source quality control file. For example, let us investigate the STARsolo Feature summaries file.</p>
+
+<p>We can look at this directly by clicking on the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> symbol of the <em>Feature Statistic Summaries</em> file.</p>
 
 <blockquote class="comment">
   <h3 id="details-rna-starsolo-log-output"><i class="fas fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span>: <span class="notranslate">RNA</span> STARsolo log output</h3>
-  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>                    Barcodes:
-                 nNinBarcode            358
+  <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Barcodes:
+                  nNoAdapter              0
+                      nNoUMI              0
+                       nNoCB              0
+                      nNinCB              0
+                     nNinUMI            358
              nUMIhomopolymer            707
                     nTooMany              0
                     nNoMatch          50037
-                        Gene:
-                   nUnmapped          11454
-                  nNoFeature        3326967
+         nMismatchesInMultCB              0
+                 nExactMatch        7530489
+              nMismatchOneWL          19534
+           nMismatchToMultWL          84800
+Genes:
+                   nUnmapped         278029
+                  nNoFeature        3060392
                nAmbigFeature         419262
        nAmbigFeatureMultimap         333163
-                    nTooMany          28645
-               nNoExactMatch           7148
+                    nTooMany          18448
+               nNoExactMatch              0
                  nExactMatch        3829826
-                      nMatch        3841347
-               nCellBarcodes           5200
-                       nUMIs        1689661
+                      nMatch        3858692
+               nCellBarcodes           6101
+                       nUMIs        1697298
+
 </code></pre></div>  </div>
 </blockquote>
 
@@ -1260,7 +1272,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
     </thead>
     <tbody>
       <tr>
-        <td>nNinBarcode</td>
+        <td>nNinCB</td>
         <td>number of <span class="notranslate">reads</span> with more than 2 Ns in cell barcode (CB)</td>
       </tr>
       <tr>
@@ -1269,7 +1281,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
       </tr>
       <tr>
         <td>nTooMany</td>
-        <td>not used at the moment</td>
+        <td>(not used at the moment)</td>
       </tr>
       <tr>
         <td>nNoMatch</td>
@@ -1320,8 +1332,8 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   <p>These metrics can be grouped into more broad categories:</p>
 
   <ul>
-    <li><code class="language-plaintext highlighter-rouge">nNinBarcode</code> + <code class="language-plaintext highlighter-rouge">nUMIhomopolymer</code> + <code class="language-plaintext highlighter-rouge">nNoMatch</code> + <code class="language-plaintext highlighter-rouge">nTooMany</code> + <code class="language-plaintext highlighter-rouge">nNoExactMatch</code> = number of <span class="notranslate">reads</span> with CBs that do not match whitelist.</li>
-    <li><code class="language-plaintext highlighter-rouge">nUnmapped</code> + <code class="language-plaintext highlighter-rouge">nAmbigFeature</code> + <code class="language-plaintext highlighter-rouge">nNoFeature</code> + <code class="language-plaintext highlighter-rouge">nTooMany</code> (from the <code class="language-plaintext highlighter-rouge">Gene</code> section) = number of <span class="notranslate">reads</span> without defined feature (gene).</li>
+    <li><code class="language-plaintext highlighter-rouge">nNinCB</code> + <code class="language-plaintext highlighter-rouge">nUMIhomopolymer</code> + <code class="language-plaintext highlighter-rouge">nNoMatch</code> + <code class="language-plaintext highlighter-rouge">nTooMany</code> + <code class="language-plaintext highlighter-rouge">nNoExactMatch</code> = number of <span class="notranslate">reads</span> with CBs that do not match whitelist.</li>
+    <li><code class="language-plaintext highlighter-rouge">nUnmapped</code> + <code class="language-plaintext highlighter-rouge">nAmbigFeature</code> = number of <span class="notranslate">reads</span> without defined feature (gene).</li>
     <li><code class="language-plaintext highlighter-rouge">nMatch</code> = number of <span class="notranslate">reads</span> that are output as solo counts.</li>
   </ul>
 
@@ -1329,7 +1341,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 </blockquote>
 
-<p>The main information to gather at this stage is that the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> tell us how many cells were detected in our sample, where we see that there are 5200 cells, which is expected of our sub-sampled data. Another metric to take into account is that the number of matches (<code class="language-plaintext highlighter-rouge">nMatch</code>) has the largest value, and that the number of <span class="notranslate">reads</span> that map to the genome but not to a feature/gene given in the GTF (<code class="language-plaintext highlighter-rouge">nNoFeature</code>) is not too large. The number of no features is also quite high when <span class="notranslate">mapping</span> the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.</p>
+<p>The main information to gather at this stage is that the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> tell us how many cells were detected in our sample, where we see that there are 6101 cells. Another metric to take into account is that the number of matches (<code class="language-plaintext highlighter-rouge">nMatch</code>) has the largest value, and that the number of <span class="notranslate">reads</span> that map to the genome but not to a feature/gene given in the GTF (<code class="language-plaintext highlighter-rouge">nNoFeature</code>) is not too large. The number of no features is also quite high when <span class="notranslate">mapping</span> the original (non-subsampled) 10x input datasets, so this appears to be the default expected behaviour.</p>
 
 <h1 id="producing-a-quality-count-matrix">Producing a Quality Count Matrix</h1>
 
@@ -1388,7 +1400,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
     <ol>
       <li>By clicking on the title of the output dataset in the history we can expand the box to see the output says that there are <code class="language-plaintext highlighter-rouge">272</code> cells in the output table.</li>
-      <li>If we expand the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <em><span class="notranslate">RNA</span> STARsolo Feature Statistic Summaries</em> Dataset and look at the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> value, we see that <em><span class="notranslate">RNA</span> STARsolo</em> detected <code class="language-plaintext highlighter-rouge">5200</code> cells. What this means is that <em>5200</em> barcodes were detected in total, but only <em>272</em> of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by “ranking” the barcodes, to see the dividing line between high and low quality barcodes.</li>
+      <li>If we expand the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> <em><span class="notranslate">RNA</span> STARsolo Feature Statistic Summaries</em> Dataset and look at the <code class="language-plaintext highlighter-rouge">nCellBarcodes</code> value, we see that <em><span class="notranslate">RNA</span> STARsolo</em> detected <code class="language-plaintext highlighter-rouge">6101</code> cells. What this means is that <em>6101</em> barcodes were detected in total, but only <em>272</em> of them were above an acceptable threshold of quality, based on the default upper quantile and lower proportion parameters given in the tool. Later on, we will actually later visualise these thresholds ourselves by “ranking” the barcodes, to see the dividing line between high and low quality barcodes.</li>
     </ol>
   </blockquote>
 </blockquote>
@@ -1454,7 +1466,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
   <blockquote class="solution">
     <h3 id="solution-solution-4"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
     <ol>
-      <li>We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as <code class="language-plaintext highlighter-rouge">"knee = 5300"</code>. This is in good accordance with the <code class="language-plaintext highlighter-rouge">5200</code> cells shown in the STARsolo log output previously.</li>
+      <li>We see the blue knee line cross the threshold of barcodes at just below than the 10000 Rank on the horizontal log scale, which is shown in the expanded view of our data as <code class="language-plaintext highlighter-rouge">"knee = 5300"</code>. This is in good accordance with the <code class="language-plaintext highlighter-rouge">6101</code> cells shown in the STARsolo log output previously.</li>
       <li>This threshold is given by the inflection line, which is given at <code class="language-plaintext highlighter-rouge">"inflection = 260"</code>, so 260 cells.</li>
       <li>The vertical drop in the chart occurs at a log X-axis position just above <code class="language-plaintext highlighter-rouge">1e+02</code>, so we can estimate ~ 200 UMIs minimum per cell.</li>
     </ol>
@@ -1492,13 +1504,15 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
 <figure id="figure-8"><img src="/training-material/topics/transcriptomics/images/tenx_cells.png" alt="cells" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Detected Cells (red)</figcaption></figure>
 
-<p>Here we recover 282 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean <span class="notranslate">downstream</span> clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the <span class="notranslate">downstream</span> analysis training materials.</p>
+<p>Here we recover 278 high quality cells instead of the 272 detected via the default method previously. On large datasets, this difference can help clean <span class="notranslate">downstream</span> clustering. For example, soft or less well-defined clusters are derived from too much noise in the data due to too many low quality cells being in the data during the clustering. Filtering these out during the pre-processing would produce much better separation, albeit at the cost of having less cells to cluster. This filter-cluster trade-off is discussed in more detail in the <span class="notranslate">downstream</span> analysis training materials.</p>
 
 <h1 class="no_toc" id="conclusion">Conclusion</h1>
 
 <p>In this <span class="notranslate">workflow</span> we have learned to quickly perform <span class="notranslate">mapping</span> and quantification of sc<span class="notranslate">RNA</span>-seq FASTQ data in a single step via <strong><span class="notranslate">RNA</span> STARsolo</strong>, and have reproduced a <em>Cell Ranger</em> <span class="notranslate">workflow</span> using the <strong>DropletUtils</strong> suite, where we further explored the use of barcode rankings to determine better filtering thresholds to generate a high quality count matrix.</p>
 
 <p>A full pipeline which produces both an AnnData and tabular file for inspection is provided <a href="workflows/scrna_tenx.ga">here</a>.</p>
+
+<p>Note that, since version <em>2.7.7a</em> of the tool, the entire <em>Cell Ranger</em> pipeline including the filtering can be performed natively within <strong><span class="notranslate">RNA</span> STARsolo</strong>. As this is still a relatively new feature, we do not use it here in this tutorial, but eager users are encouraged to try it out.</p>
 
 <!-- <figure id="figure-9"><img src="/training-material/topics/transcriptomics/images/scrna_workflow.svg" alt="Recap of workflow" ><figcaption><span class="figcaption-prefix">Figure 9:</span> A recap of the entire <span class="notranslate">workflow</span></figcaption></figure> -->
 
@@ -1561,7 +1575,7 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Mehmet Tekman, Hans-Rudolf Hotz, Daniel Blankenberg, 2021 <b>Pre-processing of 10X Single-Cell RNA Datasets (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html">/training-material/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Mehmet Tekman, Hans-Rudolf Hotz, Daniel Blankenberg, Wendi Bacon, 2021 <b>Pre-processing of 10X Single-Cell RNA Datasets (Galaxy Training Materials)</b>. <a href="/training-material/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html">/training-material/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1576,11 +1590,11 @@ https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz
 
                     <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
 <code id="citation-code">@misc{transcriptomics-scrna-preprocessing-tenx,
-    author = "Mehmet Tekman and Hans-Rudolf Hotz and Daniel Blankenberg",
+    author = "Mehmet Tekman and Hans-Rudolf Hotz and Daniel Blankenberg and Wendi Bacon",
     title = "Pre-processing of 10X Single-Cell RNA Datasets (Galaxy Training Materials)",
     year = "2021",
     month = "01",
-    day = "17"
+    day = "27"
     url = "\url{/training-material/topics/transcriptomics/tutorials/scrna-preprocessing-tenx/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
@@ -1710,7 +1724,7 @@ document.getElementById("citation-text").innerHTML = document.getElementById("ci
         <p>
             This material is the result of a collaborative work. Thanks to the
             <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
-            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mehmet Tekman, Hans-Rudolf Hotz, Daniel Blankenberg)!
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Mehmet Tekman, Hans-Rudolf Hotz, Daniel Blankenberg, Wendi Bacon)!
         </p>
         <p>
             Found a typo? Something is wrong in this tutorial? Edit it on
