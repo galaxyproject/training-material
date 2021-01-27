@@ -308,7 +308,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the target host and place it in `/tmp`.
 >
-> 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
+> 10. Create and open `playbook.yml` file for editing in the `intro` directory you created. Place the following content in there:
 >
 >     ```yaml
 >     ---

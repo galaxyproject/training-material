@@ -333,7 +333,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```
 >    {% endraw %}
 >
-> 3. We need to update Galaxy's job configuration to use this rule. Open `files/galaxy/config/job_conf.xml` and add a DTD destination.
+> 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.xml.j2` and add a DTD destination.
 >    Also, comment out or remove the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
 >
 >    ```diff

@@ -77,10 +77,9 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >
 >     galaxy_config:
 >       galaxy:
+>         # ... existing galaxy configurations ...
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
->         job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
->         tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
 >    ```
 >
 > 5. Run the playbook:
