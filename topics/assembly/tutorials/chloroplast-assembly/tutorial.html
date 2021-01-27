@@ -241,7 +241,7 @@
   "name": "Hands-on for 'Chloroplast genome assembly' tutorial",
   "url": "https://training.galaxyproject.org//training-material/topics/assembly/tutorials/chloroplast-assembly/tutorial.html",
   "timeRequired": "PT2H",
-  "description": "The questions this  addresses are:\n - How can we assemble a chloroplast genome?\n\n\\nThe objectives are:\n - Assemble a chloroplast genome from long reads\n - Polish the assembly with short reads\n - Map reads to the assembly and view\n - View an annotated assembly\n\n",
+  "description": "The questions this  addresses are:\n - How can we assemble a chloroplast genome?\n\n\\nThe objectives are:\n - Assemble a chloroplast genome from long reads\n - Polish the assembly with short reads\n - Annotate the assembly and view\n - Map reads to the assembly and view\n\n",
   "coursePrerequisites": [
     {
       "@type": "CreativeWork",
@@ -339,10 +339,10 @@
             <li><p>Polish the assembly with short reads</p>
 </li>
             
-            <li><p>Map reads to the assembly and view</p>
+            <li><p>Annotate the assembly and view</p>
 </li>
             
-            <li><p>View an annotated assembly</p>
+            <li><p>Map reads to the assembly and view</p>
 </li>
             
             </ul>
@@ -559,8 +559,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -605,7 +603,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 14, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 27, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -635,8 +633,8 @@
   <li><a href="#check-read-quality" id="markdown-toc-check-read-quality">Check read quality</a></li>
   <li><a href="#assemble-reads" id="markdown-toc-assemble-reads">Assemble <span class="notranslate">reads</span></a></li>
   <li><a href="#polish-assembly" id="markdown-toc-polish-assembly">Polish assembly</a></li>
-  <li><a href="#view-reads" id="markdown-toc-view-reads">View <span class="notranslate">reads</span></a></li>
   <li><a href="#annotate-the-assembly" id="markdown-toc-annotate-the-assembly">Annotate the assembly</a></li>
+  <li><a href="#view-reads" id="markdown-toc-view-reads">View <span class="notranslate">reads</span></a></li>
   <li><a href="#repeat-with-new-data" id="markdown-toc-repeat-with-new-data">Repeat with new data</a></li>
 </ol>
 
@@ -790,7 +788,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-assemble-reads"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Assemble <span class="notranslate">reads</span></h3>
   <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/flye/flye/2.3.7</span></span> :
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+galaxy0"><strong>Flye</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/flye/flye/2.6+<span class="notranslate">galaxy</span>0</span></span> :
       <ul>
         <li><em>“Input <span class="notranslate">reads</span>”</em>: <code class="language-plaintext highlighter-rouge">sweet-potato-chloroplast-nanopore-reduced.fastq</code></li>
         <li><em>“Estimated genome size”</em>: <code class="language-plaintext highlighter-rouge">160000</code></li>
@@ -844,6 +842,8 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
 
 <figure id="figure-1"><img src="../../images/sweet-potato-assembly-graph.png" alt="assembly graph" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Assembly graph of the nanopore <span class="notranslate">reads</span>, for the sweet potato chloroplast genome. In your image, some of the labels may be truncated; this is a known bug under investigation.</figcaption></figure>
 
+<p><em>Note: a newer version of the Flye assembly tool now resolves this assembly into a single circle.</em></p>
+
 <blockquote class="question">
   <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
   <p>What is your interpretation of this assembly graph?</p>
@@ -853,11 +853,14 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
   </blockquote>
 </blockquote>
 
-<p><em>Optional further steps:</em></p>
-<ul>
-  <li>Repeat the Flye assembly with different parameters, and/or a filtered read set.</li>
-  <li>Try an alte<span class="notranslate">rna</span>tive assembly tool, such as Canu or Unicycler.</li>
-</ul>
+<blockquote class="comment">
+  <h3 id="comment-further-learning"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Further Learning</h3>
+  <ul>
+    <li>Repeat the Flye assembly with different parameters, and/or a filtered read set.</li>
+    <li>You can also try repeating the Flye assembly with an earlier version of the tool, to see the difference it makes. In the tool panel for Flye, click on the ‘Versions’ button at the top to change.</li>
+    <li>Try an alte<span class="notranslate">rna</span>tive assembly tool, such as Canu or Unicycler.</li>
+  </ul>
+</blockquote>
 
 <h1 id="polish-assembly">Polish assembly</h1>
 
@@ -902,24 +905,21 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
         <li><em>“Create changes file”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
       </ul>
     </li>
-    <li>Rename the fasta output to <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
-  </ol>
-
-  <blockquote class="tip">
-
-    <h3 id="tip-tip-renaming-a-dataset-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
-    <ul>
-      <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
-      <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
-      <li>Click the <strong>Save</strong> button</li>
-    </ul>
-  </blockquote>
-
-  <ol>
     <li><strong>View output</strong>:
       <ul>
         <li>What is in the <code class="language-plaintext highlighter-rouge">changes</code> file?</li>
+        <li>Rename the fasta output to <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
       </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field  to <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
     </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0" title="Tested with toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0"><strong>Fasta Statistics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0</span></span>
       <ul>
@@ -943,6 +943,98 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-reduce
   <li>Run a second round (or more) of Pilon polishing. Keep track of file naming; you will need to generate a new bam file first before each round of Pilon.</li>
   <li>Run an alte<span class="notranslate">rna</span>tive polishing tool, such as Racon. This uses the long <span class="notranslate">reads</span> themselves to correct the long-read (Flye) assembly. It would be better to run this tool on the Flye assembly before running Pilon, rather than after Pilon.</li>
 </ul>
+
+<h1 id="annotate-the-assembly">Annotate the assembly</h1>
+
+<p>We can now annotate our assembled genome with information about genomic features.</p>
+
+<ul>
+  <li>A chloroplast genome annotation tool is not yet available in <span class="notranslate">Galaxy</span>; for an approximation, here we can use the tool for bacterial genome annotation, Prokka.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-annotate-with-prokka"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotate with Prokka</h3>
+
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0"><strong>Prokka</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+<span class="notranslate">galaxy</span>0</span></span>  with the following parameters (leave everything else unchanged)
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“contigs to annotate”</em>: <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+      </ul>
+    </li>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>The GFF and GBK files contain all of the information about the features annotated (in different formats.)</li>
+        <li>The .txt file contains a summary of the number of features annotated.</li>
+        <li>The .faa file contains the protein sequences of the genes annotated.</li>
+        <li>The .ffn file contains the nucleotide sequences of the genes annotated.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Alte<span class="notranslate">rna</span>tively, you might want to use a web-based tool designed for chloroplast genomes.</p>
+
+<ul>
+  <li>One option is the GeSeq tool, described here. Skip this step if you have already used Prokka above.</li>
+</ul>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-annotate-with-geseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotate with GeSeq</h3>
+  <ul>
+    <li>Download <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code> to your computer (click on the file in your history; then click on the disk icon).</li>
+    <li>In a new broswer tab, go to <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a> where we will use the GeSeq tool (<a class="citation" href="#Tillich_2017">Tillich <i>et al.</i> 2017</a>) to annotate our sequence.</li>
+    <li>Upload the <code class="language-plaintext highlighter-rouge">fasta</code> file there. Information about how to use the tool is available on the page.</li>
+    <li>Once the annotation is completed, download the required files.</li>
+    <li>In <span class="notranslate">Galaxy</span>, import the annotation <code class="language-plaintext highlighter-rouge">GFF3</code> file.</li>
+  </ul>
+</blockquote>
+
+<p>Now make a JBrowse file to view the annotations (the GFF3 file - produced from either Prokka or GeSeq) under the assembly (the polished-assembly.fasta file).</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-view-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View annotations</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3"><strong>JBrowse genome browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+<span class="notranslate">galaxy</span>3</span></span> :
+      <ul>
+        <li><em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
+          <ul>
+            <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
+          </ul>
+        </li>
+        <li><em>“Produce Standalone Instance”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
+        <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse instance</code></li>
+        <li><em>“Insert Track Group”</em>
+          <ul>
+            <li><em>“Insert Annotation Track”</em>
+              <ul>
+                <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code></li>
+                <li><em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: the <code class="language-plaintext highlighter-rouge">GFF3</code> file</li>
+                <li><em>Leave the other track features as default</em></li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Re-name output file</strong>:
+      <ul>
+        <li>JBrowse may take a few minutes to run. There is one output file: re-name it <code class="language-plaintext highlighter-rouge">view-annotations</code></li>
+      </ul>
+    </li>
+    <li><strong>View output</strong>:
+      <ul>
+        <li>Click on the eye icon to view the annotations file.</li>
+        <li>Select the right contig to view, in the drop down box.</li>
+        <li>Zoom out (with the minus button) until annotations are visible.</li>
+      </ul>
+    </li>
+  </ol>
+</blockquote>
+
+<p>Here is an embedded snippet showing JBrowse and the annotations:</p>
+
+<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?tracklist=0&amp;data=/training-material/topics/assembly/tutorials/chloroplast-assembly/data2" border="0" width="100%" height="500px"></iframe>
 
 <h1 id="view-reads">View <span class="notranslate">reads</span></h1>
 
@@ -1050,80 +1142,6 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
   <li>To learn more about JBrowse and its features, see the <a href="/training-material/topics/visualisation/tutorials/jbrowse/tutorial.html">Genomic Data Visualisation with JBrowse tutorial</a></li>
 </ul>
 
-<h1 id="annotate-the-assembly">Annotate the assembly</h1>
-
-<p>We can now annotate our assembled genome with information about genomic features.</p>
-<ul>
-  <li>A chloroplast genome annotation tool is not yet available in <span class="notranslate">Galaxy</span>, although for an approximation we could use the tool for bacterial genome annotation, Prokka.</li>
-  <li>However here we will use a web-based tool designed for chloroplast genomes to annotate our assembly (or, you can upload an example annotation).</li>
-</ul>
-
-<p>Follow these steps to annotate your assembly, or upload an example annotation file from this <a href="http://doi.org/10.5281/zenodo.4267171">Zenodo link</a> to your current <span class="notranslate">Galaxy</span> history, and skip to the next step.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-annotate-with-geseq"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Annotate with GeSeq</h3>
-  <ul>
-    <li>Download <code class="language-plaintext highlighter-rouge">polished.fasta</code> to your computer (click on the file in your history; then click on the disk icon).</li>
-    <li>In a new broswer tab, go to <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a> where we will use the GeSeq tool <a class="citation" href="#Tillich_2017">Tillich <i>et al.</i> 2017</a> to annotate our sequence.</li>
-    <li>Upload the <code class="language-plaintext highlighter-rouge">fasta</code> file there. Information about how to use the tool is available on the page.</li>
-    <li>Once the annotation is completed, download the required files.</li>
-    <li>In <span class="notranslate">Galaxy</span>, import the annotation <code class="language-plaintext highlighter-rouge">GFF3</code> file.</li>
-  </ul>
-</blockquote>
-
-<p>Make a JBrowse file to view the annotations (the GFF3 file) under the assembly (the polished.fasta file).</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-view-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: View annotations</h3>
-  <ol>
-    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+galaxy3"><strong>JBrowse genome browser</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.4+<span class="notranslate">galaxy</span>3</span></span> :
-    - <em>“Reference genome to display”</em>: <code class="language-plaintext highlighter-rouge">Use a genome from history</code>
-      <ul>
-        <li><em>“Select a reference genome”</em>: <code class="language-plaintext highlighter-rouge">polished-assembly.fasta</code></li>
-        <li><em>“Produce Standalone Instance”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Genetic Code”</em>: <code class="language-plaintext highlighter-rouge">11. The Bacterial, Archaeal and Plant Plastid Code</code></li>
-        <li><em>“JBrowse-in-<span class="notranslate">Galaxy</span> Action”</em>: <code class="language-plaintext highlighter-rouge">New JBrowse instance</code></li>
-        <li><em>“Insert Track Group”</em>
-          <ul>
-            <li><em>“Insert Annotation Track”</em>
-              <ul>
-                <li><em>“Track Type”</em>: <code class="language-plaintext highlighter-rouge">GFF/GFF3/<span class="notranslate">BED</span> Features</code></li>
-                <li><em>“GFF/GFF3/<span class="notranslate">BED</span> Track Data”</em>: the <code class="language-plaintext highlighter-rouge">GFF3</code> file</li>
-                <li><em>Leave the other track features as default</em></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
-    <li><strong>Re-name output file</strong>:
-      <ul>
-        <li>JBrowse may take a few minutes to run. There is one output file: re-name it <code class="language-plaintext highlighter-rouge">view-annotations</code></li>
-      </ul>
-    </li>
-    <li><strong>View output</strong>:
-      <ul>
-        <li>Click on the eye icon to view the annotations file.</li>
-        <li>Select the right contig to view, in the drop down box.</li>
-        <li>Zoom out (with the minus button) until annotations are visible.</li>
-      </ul>
-    </li>
-  </ol>
-</blockquote>
-
-<p>Here is an embedded snippet showing JBrowse and the annotations:</p>
-
-<iframe id="embedded_jbrowse" src="/training-material/assets/jbrowse/index.html?tracklist=0&amp;data=/training-material/topics/assembly/tutorials/chloroplast-assembly/data2" border="0" width="100%" height="500px"></iframe>
-
-<blockquote class="question">
-  <h3 id="question-question-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
-  <p>Why might there be several annotations over the same genome region?</p>
-  <blockquote class="solution">
-    <h3 id="solution-solution-3"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-    <p>One reason is that these are predictions from different tools - such as BLAT or HMMER.</p>
-  </blockquote>
-</blockquote>
-
 <h1 id="repeat-with-new-data">Repeat with new data</h1>
 
 <p><em>Optional extension exercise</em></p>
@@ -1137,8 +1155,8 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
     <li>Check <span class="notranslate">reads</span>: Run Nanoplot on the nanopore <span class="notranslate">reads</span>.</li>
     <li>Assemble: Use Flye to assemble the nanopore <span class="notranslate">reads</span>, then get Fasta statistics <em>Note: this may take several hours.</em></li>
     <li>Polish assembly: Use Pilon to polish the assembly with short Illumina <span class="notranslate">reads</span>. <em>Note: Don’t forget to map these Illumina <span class="notranslate">reads</span> to the assembly first using bwa-mem, then use the resulting <code class="language-plaintext highlighter-rouge">bam</code> file as input to Pilon.</em></li>
-    <li>Annotate: Use the GeSeq tool at <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a>.</li>
-    <li>View annotations:Use <ss>JBrowse to view the assembled, annotated genome.</ss></li>
+    <li>Annotate: Use the GeSeq tool at <a href="https://chlorobox.mpimp-golm.mpg.de/geseq.html">Chlorobox</a> or the Prokka tool within <span class="notranslate">Galaxy</span>.</li>
+    <li>View annotations:Use JBrowse to view the assembled, annotated genome.</li>
   </ul>
 </blockquote>
 
@@ -1260,7 +1278,7 @@ https://zenodo.org/record/3567224/files/sweet-potato-chloroplast-nanopore-tiny.f
     title = "Chloroplast genome assembly (Galaxy Training Materials)",
     year = "2021",
     month = "01",
-    day = "14"
+    day = "27"
     url = "\url{/training-material/topics/assembly/tutorials/chloroplast-assembly/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
