@@ -78,6 +78,8 @@ On the other hand, DIA selects for multiple ion fragments within a specified m/z
 
 In a typical DIA experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are taken, each containing several fragment scans spanning across the entire 400-1000 m/z range (Figure 3). Specific corresponding fragment ion scans can then be condensed and each combined fragment ion scan containing a small m/z range can be examined for peaks and peptide presence can then be analyzed (Figure 4). 
 
+![Alternative text](../../images/EncyclopeDIA_Figure3.png)
+
 DELETE![Alternative text]../../images/EncyclopeDIA_Figure4.png
 
 -->(Give some background about what the trainees will be doing in the section.
