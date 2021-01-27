@@ -13,13 +13,12 @@ key_points:
   - "Generating variant protein database"
   - "Generating genomic and variant mapping files for visualization"
 follow_up_training:
-  -
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
       - proteogenomics-dbsearch
 
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
       - proteogenomics-novel-peptide-analysis
