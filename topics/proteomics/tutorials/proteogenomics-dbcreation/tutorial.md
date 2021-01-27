@@ -369,6 +369,8 @@ The original form of this program is also distributed as part of the Cufflinks s
 >   - {% icon param-file %} *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
 >   - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
 >   - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
+>   - {% icon param-select %} *"Fasta ID Options"*
+>     - {% icon param-select %} *"fasta ID source, e.g. generic"*: `generic`
 >
 >    Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
 >
@@ -419,7 +421,7 @@ along with the UniProt and cRAP databases.
 {: .comment}
 > ### {% icon hands_on %} Hands-on: FASTA to Tabular
 > 1. **FASTA to Tabular** {% icon tool %}: with the default parameters
->    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from' (fasta)`
+>    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
 >
 > 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
@@ -588,6 +590,44 @@ To do so:
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
+{: .comment}
+
+## List of Reference Protein Accession names
+
+Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial. 
+
+> ### {% icon hands_on %} Hands-on: FASTA to Tabular
+> 1. **FASTA to Tabular** {% icon tool %}: with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `HISAT_Output.rpkm (fasta)`
+>
+> 2. **Filter Tabular** {% icon tool %}: with these filters:
+>   - {% icon param-file %} *"Tabular Dataset to filter"*: `HISAT_Output.rpkm (tabular)`
+>   - {% icon param-text %} *"Filter by"*: `select columns`
+>     - {% icon param-text %} *"enter column numbers to keep"*: `1`
+>   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
+>     - {% icon param-text %} *"enter column number to replace"*: `1`
+>     - {% icon param-text %} *"regex pattern"*: `^([^ |]+).*$`
+>     - {% icon param-text %} *"replacement expression"*: `1`
+>
+> 3. **FASTA to Tabular** {% icon tool %}: with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)`
+>
+> 4. **Filter Tabular** {% icon tool %}: with these filters:
+>   - {% icon param-file %} *"Tabular Dataset to filter"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (tabular)`
+>   - {% icon param-text %} *"Filter by"*: `select columns`
+>     - {% icon param-text %} *"enter column numbers to keep"*: `1`
+>   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
+>     - {% icon param-text %} *"enter column number to replace"*: `1`
+>     - {% icon param-text %} *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
+>     - {% icon param-text %} *"replacement expression"*: `1`
+>
+> 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
+>   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous 2 "Filter Tabular" outputs.
+>
+{: .hands_on}
+
+
+> ### {% icon comment %} Tool versions
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
 
