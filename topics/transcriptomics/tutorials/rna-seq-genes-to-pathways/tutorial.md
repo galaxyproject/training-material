@@ -1,6 +1,7 @@
 ---
 layout: tutorial_hands_on
-title: RNA-seq genes to pathways
+title: "3: RNA-seq genes to pathways"
+subtopic: end-to-end
 zenodo_link: "https://zenodo.org/record/2596382"
 tags:
   - mouse
@@ -225,7 +226,7 @@ An enrichment plot of the each of the top pathways can also be produced, one is 
 ![fgsea Enrichment](../../images/rna-seq-genes-to-pathways/fgsea_enrichplot.png "fgsea Enrichment plot")
 
 > ### {% icon question %} Questions
-> Can you run fgsea on the luminal contrast and generate the fgsea summary table plot? 
+> Can you run fgsea on the luminal contrast and generate the fgsea summary table plot?
 >
 > > ### {% icon solution %} Solution
 > >

@@ -18,6 +18,7 @@
   </thead>
   <tbody class="list">
 
+  {% assign topic_material = topic_material | sort: 'priority'%}
   {% for material in topic_material %}
     {% if include.sub and include.sub.id == material.subtopic %}
       {% assign show = true %}
@@ -31,7 +32,7 @@
       {% if material.enable == nil or material.enable == true %}
         <tr>
           <td class="tutorial_title">
-          {{ material.title }}
+          {{ material.title}}
           <div class="">
           {% if material.level %}
             {% include _includes/difficulty-indicator.html level=material.level %}
