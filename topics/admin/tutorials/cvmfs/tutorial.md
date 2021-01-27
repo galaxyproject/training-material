@@ -223,7 +223,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 3. Install the BWA-MEM tool, if needed.
 >
->    {% include snippets/install_tool.md query=bwa name="Map with BWA-MEM" section="Mapping" %}
+>    {% include snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
 > 4. In your Galaxy server, open the **Map with BWA-MEM** {% icon tool %} tool. Now check that there are a lot more reference genomes available for use!
 >
