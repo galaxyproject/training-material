@@ -141,10 +141,11 @@ Your assembly graph may look like this:
 > {: .solution}
 {: .question}
 
-*Optional further steps:*
-* Repeat the Flye assembly with different parameters, and/or a filtered read set.
-* You can also try repeating the Flye assembly with an earlier version of the tool, to see the difference it makes. In the tool panel for Flye, click on the 'Versions' button at the top to change.
-* Try an alternative assembly tool, such as Canu or Unicycler.
+> ### {% icon comment %} Further Learning
+> * Repeat the Flye assembly with different parameters, and/or a filtered read set.
+> * You can also try repeating the Flye assembly with an earlier version of the tool, to see the difference it makes. In the tool panel for Flye, click on the 'Versions' button at the top to change.
+> * Try an alternative assembly tool, such as Canu or Unicycler.
+{: .comment} 
 
 # Polish assembly
 
