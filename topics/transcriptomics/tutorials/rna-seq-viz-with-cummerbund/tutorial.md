@@ -2,6 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualization of RNA-Seq results with CummeRbund"
+subtopic: visualisation
 zenodo_link: "https://zenodo.org/record/1001880"
 questions:
   - "How are RNA-Seq results stored?"

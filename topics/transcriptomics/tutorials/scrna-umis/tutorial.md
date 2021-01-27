@@ -1,6 +1,9 @@
 ---
 layout: tutorial_hands_on
 title: "Understanding Barcodes"
+subtopic: single-cell
+priority: 2
+
 zenodo_link: "https://zenodo.org/record/2573177"
 tags:
   - single-cell
