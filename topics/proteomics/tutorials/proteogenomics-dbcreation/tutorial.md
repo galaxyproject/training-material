@@ -158,7 +158,7 @@ Provided with some BAM dataset(s) and a reference sequence, FreeBayes will gener
 
 FreeBayes is capable of calling variant haplotypes shorter than a read length where multiple polymorphisms segregate on the same read. The maximum distance between polymorphisms phased in this way is determined by the `--max-complex-gap`, which defaults to 3bp. In practice, this can comfortably be set to half the read length. Ploidy may be set to any level (`-p`), but by default all samples are assumed to be diploid. FreeBayes can model per-sample and per-region variation in copy-number (`-A`) using a copy-number variation map.
 
-FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use --pooled-continuous and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
+FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use `--pooled-continuous` and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
 
 
 > ### {% icon hands_on %} Hands-on: Variant Calling with FreeBayes
@@ -625,5 +625,4 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 
 {: .comment}
-
 
