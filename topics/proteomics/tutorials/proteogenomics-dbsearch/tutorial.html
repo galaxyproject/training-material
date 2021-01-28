@@ -661,7 +661,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 28, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 27, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -688,10 +688,7 @@
       <li><a href="#peptideshaker" id="markdown-toc-peptideshaker">PeptideShaker</a></li>
     </ol>
   </li>
-  <li><a href="#create-database" id="markdown-toc-create-database">Create database</a></li>
-  <li><a href="#remove-known-peptides" id="markdown-toc-remove-known-peptides">Remove known peptides</a>    <ol>
-      <li><a href="#merged-uniprot-and-crap-database" id="markdown-toc-merged-uniprot-and-crap-database">Merged Uniprot and cRAP database</a></li>
-      <li><a href="#text-manipulation-steps" id="markdown-toc-text-manipulation-steps">Text Manipulation steps</a></li>
+  <li><a href="#create-database" id="markdown-toc-create-database">Create database</a>    <ol>
       <li><a href="#query-tabular" id="markdown-toc-query-tabular">Query Tabular</a></li>
     </ol>
   </li>
@@ -953,115 +950,18 @@ new row in the tabular output.</p>
 
 </blockquote>
 
-<p>The next step is to remove known peptides from the list of PSM’s that we acquired from the Peptide Shaker results. For that we need to perform some text manipulation steps to extract list of known peptides from the UniProt and cRAP database.</p>
-
-<h1 id="remove-known-peptides">Remove known peptides</h1>
-
-<h2 id="merged-uniprot-and-crap-database">Merged Uniprot and cRAP database</h2>
-
-<p>The file named “Trimmed_ref_500_Uniprot_cRAP.fasta” is the trimmed version of Uniprot and cRAP database merged Fasta files.</p>
-
-<p>This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The known peptides are those which are already annotated in the reference database, in this case the Uniprot database. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on--hands-on-fasta-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span>  Hands-on: FASTA to Tabular</h3>
-
-  <ol>
-    <li>Run <strong>FASTA to Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Data input ‘input’ (fasta)”</em>: <code class="language-plaintext highlighter-rouge">Trimmed_ref_500_Uniprot_cRAP.fasta</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“How many columns to divide title string into?”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“How many title characters to keep?”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>The resultant tabular file will go through a series of text manipulation steps to make it suitable for
-input to the Query Tabular tool.</p>
-
-<h2 id="text-manipulation-steps">Text Manipulation steps</h2>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-text-manipulation"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Text Manipulation</h3>
-
-  <ol>
-    <li><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c1</code></li>
-        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Tab</code></li>
-      </ul>
-
-      <p>Upon completion of this step you will have extracted C1 (column 1) from the input tabular file</p>
-    </li>
-    <li><strong>Convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Convert all”</em>: <code class="language-plaintext highlighter-rouge">Whitespaces</code></li>
-        <li><em>“in Dataset”</em> : <code class="language-plaintext highlighter-rouge">Data input 'input' (txt)</code></li>
-        <li><em>“Strip leading and trailing whitespaces”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Condense consecutive delimiters in one TAB”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-
-      <p>This step will convert all the white spaces into different tabular column.</p>
-    </li>
-    <li><strong>Cut</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Cut Columns”</em>: <code class="language-plaintext highlighter-rouge">c2</code></li>
-        <li><em>“Delimited by”</em>: <code class="language-plaintext highlighter-rouge">Pipe</code></li>
-      </ul>
-
-      <p>This step will extract information in column2 separated by Pipe</p>
-    </li>
-    <li><strong>Convert</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Convert all”</em>: <code class="language-plaintext highlighter-rouge">Dots</code></li>
-        <li><em>“in Dataset”</em> : <code class="language-plaintext highlighter-rouge">Data input 'input' (txt)</code></li>
-        <li><em>“Strip leading and trailing whitespaces”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-        <li><em>“Condense consecutive delimiters in one TAB”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
-      </ul>
-
-      <p>This step will convert all the dots into different tabular column.</p>
-    </li>
-    <li><strong>Group</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
-      <ul>
-        <li><em>“Select data”</em>: <code class="language-plaintext highlighter-rouge">input from above</code></li>
-        <li><em>“Group by column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>Now that we have the list of known peptides, the query tabular tool is used to move these reference pepides from the PSM report.</p>
+<p>The next step is to remove known peptides from the list of PSM’s that we acquired from the Peptide Shaker results. For that we need to perform Query tabular to extract list of known peptides from the UniProt and cRAP database.</p>
 
 <h2 id="query-tabular">Query Tabular</h2>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-query-tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Query Tabular</h3>
+  <h3 id="hands_on-hands-on-remove-reference-proteins"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Remove Reference proteins</h3>
 
   <ol>
     <li><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</li>
   </ol>
 
   <ul>
-    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong> (a): <code class="language-plaintext highlighter-rouge">output from group</code>
-      <ul>
-        <li>Section <strong>Table Options</strong>:
-          <ul>
-            <li><em>“Tabular Dataset for Table”</em>: Uniprot</li>
-            <li><em>“Use first line as column names”</em> : <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="language-plaintext highlighter-rouge">prot</code></li>
-            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>:
-              <ul>
-                <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">Prot</code></li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li>
     <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong> (b): <code class="language-plaintext highlighter-rouge">PSM report</code>
       <ul>
         <li>Section <strong>Filter Dataset Input</strong>:
@@ -1130,6 +1030,23 @@ input to the Query Tabular tool.</p>
               </ul>
             </li>
           </ul>
+        </li>
+      </ul>
+    </li>
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Database Table</strong> (a): <code class="language-plaintext highlighter-rouge">Reference_Protein_Acessions</code>
+      <ul>
+        <li>Section <strong>Table Options</strong>:
+          <ul>
+            <li><em>“Tabular Dataset for Table”</em>: <code class="language-plaintext highlighter-rouge">Uniprot</code></li>
+            <li><em>“Use first line as column names”</em> : <code class="language-plaintext highlighter-rouge">No</code></li>
+            <li><em>“Specify Column Names (comma-separated list)”</em>:<code class="language-plaintext highlighter-rouge">prot</code></li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>:
+              <ul>
+                <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">prot</code></li>
+              </ul>
+            </li>
+          </ul>
 
           <blockquote class="comment">
             <h3 id="comment-comment-2"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment:</h3>
@@ -1171,7 +1088,7 @@ ORDER BY psms.id
 <p>The output from this step is that the resultant peptides would be those which doesn’t belong in the Uniprot or cRAP database. The query tabular tool is used again to create a tabular output containing peptides ready for Blast P analysis.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-query-tabular-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Query Tabular</h3>
+  <h3 id="hands_on-hands-on-query-tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Query Tabular</h3>
 
   <p><strong>Query Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:</p>
 
@@ -1297,6 +1214,13 @@ Thus, running the <span class="notranslate">workflow</span> provided with the tu
 
 </blockquote>
 
+<h1 class="no_toc" id="conclusion"><strong>Conclusion</strong></h1>
+
+<p>This completes the walkthrough of the proteogenomics database search <span class="notranslate">workflow</span>. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN “Proteogenomics Novel Peptide Analysis”. 
+Researchers can use this <span class="notranslate">workflow</span> with their data also, please note that the tool parameters, reference genomes and the <span class="notranslate">workflow</span> will be needed to be modified accordingly.</p>
+
+<p>This <span class="notranslate">workflow</span> was developed by the <span class="notranslate">Galaxy</span>-P team at the University of Minnesota. For more information about <span class="notranslate">Galaxy</span>-P or our ongoing work, please visit us at <a href="https://galaxyp.org"><span class="notranslate">galaxy</span>p.org</a></p>
+
 
 
                     
@@ -1354,7 +1278,7 @@ Thus, running the <span class="notranslate">workflow</span> provided with the tu
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Ray Sajulga, James Johnson, Praveen Kumar, 2020 <b>Proteogenomics 2: Database Search (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Ray Sajulga, James Johnson, Praveen Kumar, 2021 <b>Proteogenomics 2: Database Search (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html">/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1371,9 +1295,9 @@ Thus, running the <span class="notranslate">workflow</span> provided with the tu
 <code id="citation-code">@misc{proteomics-proteogenomics-dbsearch,
     author = "Subina Mehta and Timothy J. Griffin and Pratik Jagtap and Ray Sajulga and James Johnson and Praveen Kumar",
     title = "Proteogenomics 2: Database Search (Galaxy Training Materials)",
-    year = "2020",
-    month = "10",
-    day = "28"
+    year = "2021",
+    month = "01",
+    day = "27"
     url = "\url{/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
