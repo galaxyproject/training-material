@@ -76,10 +76,6 @@ On the other hand, DIA selects for multiple ion fragments within a specified m/z
 
 ![Alternative text](../../images/EncyclopeDIA_Figure2.png)
 
--->(Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.)<--
-
 ## What does a typical DIA experiment look like?
 
 In a typical DIA experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are taken, each containing several fragment scans spanning across the entire 400-1000 m/z range (Figure 3A). Specific corresponding fragment ion scans can then be condensed and each combined fragment ion scan containing a small m/z range  and its peaks can be examined and its peptide content can then be analyzed (Figure 3B). 
@@ -88,24 +84,11 @@ In a typical DIA experiment, the precursor scan usually ranges between 400-1000 
 
 > ### {% icon details %} Advantages of DIA over DDA
 >
-> An advantage of DIA compared to DDA is that it is possible to obtain a better idea of peptide composition within a sample. Because DDA focuses on single peptides with high abundance indicated by their precursor peaks, this means that less abundant (but perhaps equally interesting or important) peptides are not examined. Therefore, DIA can provide a more comprehensive idea of peptide content within a sample because instead of selecting for fragment ions based on abundance, they are selected within a range. Another advantage to DIA compared to DDA is related to interference from coeluting peptides. Because DDA focuses on a single time point with a single peptide, coelution of another peptide can negatively impact the ability for quantitation. DIA, in contrast, examines multiple peptides through a range of m/z values. Therefore, if interference through coelution threatens the fidelity of a specific peptide, this peptide can be discarded and quantitation can continue with the other peptides within this m/z range. Finally, in cases in which peptides do not emit a precursor signal, DDA is not sufficient to examine these peptides, as their m/z time point will never be chosen based on their lack of abundance in MS1. Because DDA selects for a range of m/z time points, peptides that lack a precursor signal can still be included for further analysis in MS2. For a more detailed description of DIA and its applications and advantages, Brian Searle has given two talks at link and link. 
+> An advantage of DIA compared to DDA is that it is possible to obtain a better idea of peptide composition within a sample. Because DDA focuses on single peptides with high abundance indicated by their precursor peaks, this means that less abundant (but perhaps equally interesting or important) peptides are not examined. Therefore, DIA can provide a more comprehensive idea of peptide content within a sample because instead of selecting for fragment ions based on abundance, they are selected within a range. Another advantage to DIA compared to DDA is related to interference from coeluting peptides. Because DDA focuses on a single time point with a single peptide, coelution of another peptide can negatively impact the ability for quantitation. DIA, in contrast, examines multiple peptides through a range of m/z values. Therefore, if interference through coelution threatens the fidelity of a specific peptide, this peptide can be discarded and quantitation can continue with the other peptides within this m/z range. Finally, in cases in which peptides do not emit a precursor signal, DDA is not sufficient to examine these peptides, as their m/z time point will never be chosen based on their lack of abundance in MS1. Because DDA selects for a range of m/z time points, peptides that lack a precursor signal can still be included for further analysis in MS2. For a more detailed description of DIA and its applications and advantages, Brian Searle has given two talks at **ADD link and link**. 
 >
 {: .details}
 
--->(Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!)<--
-
 # Hands-on Sections
-
--->(Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :) )<--
-
--->(Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.) <--
-
-have fun!
 
 ## Get data
 
@@ -177,7 +160,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > For this workflow, msconvert requires that the raw datasets be in a dataset collection.
+>    > For this workflow, msconvert uses a raw dataset collection and generates a mzML dataset collection as an output. SearchToLib and EncyclopeDIA require that the GPF and Experimental DIA mzML file-types be in dataset collections.
 >    {: .comment}
 >
 {: .hands_on}
@@ -247,6 +230,20 @@ As shown in Figure 4, GPF and its multiple injections allows for a far richer an
 
 SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the spectral files converted previously, a background protein database in FASTA format, as well as a .dlib spectral library. Outputs from this tool include the Chromatogram Library in an .elib format, as well as a text log file.
 
+In this Standard EncyclopeDIA workflow, SearchToLib requires three inputs:
+
+- GPF DIA MS/MS data in mzML file-type
+
+  This file is required for the generation of the Chromatogram Library
+  
+- Spectral Library in DLIB file-type (DDA or PROSIT generated)
+
+  This spectral library (generated either from DDA data or via PROSIT) is incorporated in Chromatogram Library generation to build a more complete library with which to analyze the Experimental DIA data.
+
+- Background Proteome FASTA file
+
+  In generating the Chromatogram Library, a Background Proteome FASTA file is searched against to provide context for the experiment, as this file will contain information on all proteins that could be in the sample of interest.
+
 SearchToLib generates two output files:
 
 - Log txt file
@@ -311,6 +308,10 @@ Predicted libraries are being studied in their use in DIA experiments. Specifica
 
 In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect monoisotopic precursor peaks.
 
+# Without DLIB Spectral Library
+
+DIA data analysis with EncyclopeDIA is still possible without a Spectral library. Although a Spectral library is a required input for SearchToLib in the Standard EncyclopeDIA workflow, WALNUT (another form of the EncyclopeDIA workflow) can be used. When using the WALNUT workflow, the Background Proteome FASTA file is important, as this will be the primary file SearchToLib will search against in formation of the Chromatogram Library. Otherwise, the WALNUT workflow works similarly to the Standard EncyclopeDIA workflow
+
 Write about Walnut if Chromatogram Libraries are absent and add few images
 ![Alternative text](../../images/image_name "Legend of the image")
 ![Alternative text](../../images/image_name "Legend of the image")
@@ -367,7 +368,7 @@ EncyclopeDIA generates five output files:
 
 ## Sub-step with **EncyclopeDIA Quantify**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Library searching directly from DIA MS/MS data.
 >
 > 1. {% tool [EncyclopeDIA Quantify](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_quantify/encyclopedia_quantify/0.9.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
@@ -422,6 +423,29 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+
+TIPS:
+
+(-->(Below are a series of hand-on boxes, one for each tool in your workflow file.
+Often you may wish to combine several boxes into one or make other adjustments such
+as breaking the tutorial into sections, we encourage you to make such changes as you
+see fit, this is just a starting point :) )<--
+
+-->(Anywhere you find the word "***TODO***", there is something that needs to be changed
+depending on the specifics of your tutorial.) <--
+
+have fun!)
+
+
+(-->(Section and subsection titles will be displayed in the tutorial index on the left side of
+the page, so try to make them informative and concise!)<--)
+
+
+(-->(Give some background about what the trainees will be doing in the section.
+Remember that many people reading your materials will likely be novices,
+so make sure to explain all the relevant concepts.)<--) 
+
 
 ( copied from msconvert: ![Alternative text](../../images/image_name "Legend of the image")
 
