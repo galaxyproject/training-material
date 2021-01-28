@@ -68,23 +68,29 @@ tutorial.
 
 Data Independent Acquisition (DIA) is a novel technique for the analysis of proteomic data samples and is a promising alternative to Data Dependent Acquisition (DDA) which has been traditionally used. 
 
-DDA is a method in which specific precursor ions are selected for fragmentation based on their measured abundance in MS1. Once selected, MS2 data is collected for these m/z time points and used to determine the sequences of the peptides that are present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be further calculated. The various precursor ions that are further analyzed with MS2 are selected based on their abundances in MS1 (Figure 1).
+DDA is a method in which specific precursor ions are selected for fragmentation based on their measured abundance in MS1 (Figure 1) . Once selected, MS2 data is collected for these m/z time points and used to determine the sequences of the peptides that are present. Additionally, when integrated with the information given with the precursor peak, the quantity of peptide can be further calculated.
 
 ![Alternative text](../../images/EncyclopeDIA_Figure1.png)
 
-On the other hand, DIA selects for multiple ion fragments within a specified m/z range (Figure 2). Compared to DDA that selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex data containing peak information from multiple peptides. 
+On the other hand, DIA selects for multiple ion fragments within a specified m/z range (Figure 2). Compared to DDA that selects for a specific time point corresponding to a specific peptide, DIA scans across a time range resulting in multiplexed and complex MS2 data containing peak information from multiple peptides. 
 
 ![Alternative text](../../images/EncyclopeDIA_Figure2.png)
-
-In a typical DIA experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are taken, each containing several fragment scans spanning across the entire 400-1000 m/z range (Figure 3A). Specific corresponding fragment ion scans can then be condensed and each combined fragment ion scan containing a small m/z range can be examined for peaks and peptide presence can then be analyzed (Figure 3B). 
-
-![Alternative text](../../images/EncyclopeDIA_Figure3.png)
 
 -->(Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
 so make sure to explain all the relevant concepts.)<--
 
-## Title for a subsection
+## What does a typical DIA experiment look like?
+
+In a typical DIA experiment, the precursor scan usually ranges between 400-1000 m/z as opposed to 400-1600 m/z typically associated with DDA experiments. Multiple precursor scans are taken, each containing several fragment scans spanning across the entire 400-1000 m/z range (Figure 3A). Specific corresponding fragment ion scans can then be condensed and each combined fragment ion scan containing a small m/z range  and its peaks can be examined and its peptide content can then be analyzed (Figure 3B). 
+
+![Alternative text](../../images/EncyclopeDIA_Figure3.png)
+
+> ### {% icon details %} Advantages of DIA over DDA
+>
+> An advantage of DIA compared to DDA is that it is possible to obtain a better idea of peptide composition within a sample. Because DDA focuses on single peptides with high abundance indicated by their precursor peaks, this means that less abundant (but perhaps equally interesting or important) peptides are not examined. Therefore, DIA can provide a more comprehensive idea of peptide content within a sample because instead of selecting for fragment ions based on abundance, they are selected within a range. Another advantage to DIA compared to DDA is related to interference from coeluting peptides. Because DDA focuses on a single time point with a single peptide, coelution of another peptide can negatively impact the ability for quantitation. DIA, in contrast, examines multiple peptides through a range of m/z values. Therefore, if interference through coelution threatens the fidelity of a specific peptide, this peptide can be discarded and quantitation can continue with the other peptides within this m/z range. Finally, in cases in which peptides do not emit a precursor signal, DDA is not sufficient to examine these peptides, as their m/z time point will never be chosen based on their lack of abundance in MS1. Because DDA selects for a range of m/z time points, peptides that lack a precursor signal can still be included for further analysis in MS2. For a more detailed description of DIA and its applications and advantages, Brian Searle has given two talks at link and link. 
+>
+{: .details}
 
 -->(Section and subsection titles will be displayed in the tutorial index on the left side of
 the page, so try to make them informative and concise!)<--
@@ -133,27 +139,21 @@ have fun!
 
 # Conversion of file types
 
-msconvert is the first tool in this EncyclopeDIA workflow as before analysis of such DIA data may begin, the data files must be converted to the correct file type (mzML) from the raw data. Conversion from raw to mzML is important because SearchToLib (generation of the Chromatogram Library), as well as EncyclopeDIA (analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
+msconvert is the first tool in this EncyclopeDIA workflow as before analysis of such DIA data may begin, the data files must be converted to the correct file-type (mzML) from the raw data. Conversion from raw to mzML is important because the SearchToLib tool (generation of the Chromatogram Library), as well as the EncyclopeDIA tool (analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
 
-In this workflow, msconvert uses dataset collections. The tool will convert each of the data files in the collection from a raw file-type to a mzML file-type. Then, a dataset collection containing the mzML files will be generated as the output from msconvert.
+In this workflow, msconvert uses dataset collections. The tool will convert each of the data files in the collection from a raw file-type to a mzML file-type. Then, a dataset collection containing the mzML files will be generated as the output from msconvert. msconvert will run twice, as both the GPF raw DIA data as well as the Experimental DIA raw data need to be converted to mzML file-type. Therefore, two outputs will be generated:
 
-![Alternative text](../../images/image_name "Legend of the image")
+- GPF mzML DIA dataset collection
 
+  This output will serve as an input for SearchToLib in generating the Chromatogram Library.
 
-***TODO***: *Consider adding a detail box to expand the theory*
+- Experimental mzML DIA dataset collection
 
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
+  This output will be the DIA data analyzed with EncyclopeDIA with help from the Chromatogram Library.
 
 ## Sub-step with **msconvert**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
@@ -192,7 +192,7 @@ A big step can have several subsections or sub steps:
 > > ### {% icon solution %} Solution
 > >
 > > 1. SearchToLib and EncyclopeDIA require mzML file inputs. Failing to convert the experimental DIA data and the GPF DIA data from raw files would mean that SearchToLib and EncyclopeDIA would not run successfully. 
-> > 2. Answer for question2
+> > 2. msconvert is specifically used in this workflow as it specializes in conversion of mass spectrometry data, and can therefore be applied to the DIA data that requires conversion to be analyzed in this workflow. However, there is an option to convert from raw to mzML using a command line-based tool.
 > >
 > {: .solution}
 >
@@ -200,7 +200,7 @@ A big step can have several subsections or sub steps:
 
 ## Sub-step with **msconvert**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.
 >
 > 1. {% tool [msconvert](toolshed.g2.bx.psu.edu/repos/galaxyp/msconvert/msconvert/3.0.19052.1) %} with the following parameters:
 >    - {% icon param-collection %} *"Input unrefined MS data"*: `output` (Input dataset collection)
@@ -231,29 +231,13 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
 # Chromatogram Library Generation
 
-Libraries used in DIA data analysis are often constructed from DDA data assuming that assuming that DDA data is a reasonable substitute or reasonable representation of DIA data, which is not always the case. However, researchers began postulating that libraries could be generated using DIA data, and have begun utilizing these libraries as well as libraries generated through other methods. 
+Libraries used in DIA data analysis are often constructed from DDA data assuming that assuming that DDA data is a reasonable substitute or reasonable representation of DIA data, which is not always the case. However, researchers began postulating that libraries could be generated using DIA data, and formed methods of generating DIA data libraries as well as libraries generated through other methods. 
 
-As mentioned, there are challenges associated with the use of DDA libraries to analyze DIA data. The main challenge is that the difference in the method of data generation means that the retention times contained in DDA libraries are not always accurate to the retention times in the DIA data to which it is compared. Retention time accuracy is dependent on how the protein elutes off the column as well as how this changes based on what elutes in its environment creating variance between DDA and DIA methods. Additionally, DDA libraries can be cumbersome to generate when examining DIA data due to fractionation. More specifically, the method in which the fractions are generated is important. For example, SCX fractionation provides a vastly different profile compared to high pH reverse phase fractionation. Thus, to generate a comprehensive profile in DDA library generation, multiple fractionation methods must be completed. So, while DDA libraries can be used to analyze DIA data, their use significantly increases the required labor and the quantity of data required to generate a library.
+As mentioned, there are challenges associated with the use of DDA libraries to analyze DIA data. The main challenge is that the difference in the method of data generation causes inconvenient variance between the DDA library and the DIA data to be analyzed, making accurate investigation of data difficult. One significant difference that arises between DDA libraries and DIA data is retention time. Dependent on how the protein elutes off the column as well as changes caused by coelution in the environment, retention time varies between DDA and DIA methods. Additionally, DDA libraries can be cumbersome to generate when examining DIA data due to differences in methods of fractionation. For example, SCX fractionation provides a vastly different profile compared to high pH reverse phase fractionation. Thus, to generate a comprehensive profile with a DDA library, multiple fractionation methods must be completed. So, while DDA libraries can be used to analyze DIA data, their use significantly increases the required labor and the quantity of data required to generate a library.
 
-Libraries generated using DIA data could bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller (Figure 4). 
+Libraries generated using DIA data can bypass several issues, including lowering the overall labor required to produce the library, as well as increasing the accuracy of the library concerning the sample that is being analyzed. To generate libraries using DIA data, Gas Phase Fractionation (GPF) is used. In DDA library generation, typically one injection is performed over the precursor scan, with multiple (24) ion fraction windows contained over the scan. However, using GPF, multiple acquisitions are used for each precursor scan to make up the range of 400-1000 m/z. For example, if six injections are performed over this m/z range, each containing the same number of windows like that of the injection in DDA library generation, then each window will be far smaller (Figure 4). 
 
 ![Alternative text](../../images/EncyclopeDIA_Figure4.png)
 
@@ -275,7 +259,7 @@ SearchToLib generates two output files:
 
 ## **SearchToLib**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Building a Chromatogram Library with DIA MS/MS data.
 >
 > 1. {% tool [SearchToLib](toolshed.g2.bx.psu.edu/repos/galaxyp/encyclopedia_searchtolib/encyclopedia_searchtolib/0.9.5.0) %} with the following parameters:
 >    - {% icon param-file %} *"Spectrum files in  mzML format"*: `output` (output of **msconvert** {% icon tool %})
@@ -323,9 +307,9 @@ SearchToLib generates two output files:
 
 However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
 
-Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis; predicted libraries generally underperform compared to DDA generated libraries. However, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in the analysis of DIA data.
+Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis; predicted libraries generally underperform compared to DDA generated libraries; however, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in analyzing DIA data.
 
-In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect the monoisotopic precursor peaks.
+In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect monoisotopic precursor peaks.
 
 Write about Walnut if Chromatogram Libraries are absent and add few images
 ![Alternative text](../../images/image_name "Legend of the image")
@@ -438,3 +422,34 @@ Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
 pipeline used.
+
+( copied from msconvert: ![Alternative text](../../images/image_name "Legend of the image")
+
+***TODO***: *Consider adding a detail box to expand the theory*
+
+> ### {% icon details %} More details about the theory
+>
+> But to describe more details, it is possible to use the detail boxes which are expandable
+>
+{: .details}
+
+A big step can have several subsections or sub steps: copied from msconvert
+
+
+***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
+> ### {% icon question %} Questions
+>
+> 1. Question1?
+> 2. Question2?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Answer for question1
+> > 2. Answer for question2
+> >
+> {: .solution}
+>
+{: .question})
+
+
