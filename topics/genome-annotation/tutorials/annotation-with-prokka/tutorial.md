@@ -100,7 +100,7 @@ Now that we have annotated the draft genome sequence, we would like to view the 
 >      We will choose to display the annotations (the Prokka.gff file).
 >
 >      - In **1: Track Group**
->           - *"Track Cateogry"*: `gene annotations`
+>           - *"Track Category"*: `gene annotations`
 >           - Click on `Insert Annotation Track` and fill it with:
 >               - *"Track Type"*: `GFF/GFF3/BED Features`
 >               - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `gff` output of {% tool [Prokka](toolshed.g2.bx.psu.edu/repos/crs4/prokka/prokka/1.14.5+galaxy0) %}
