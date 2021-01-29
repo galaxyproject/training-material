@@ -373,7 +373,7 @@ Please look at the following tutorials in this proteogenomics series:
 1. [Proteogenomics database creation]({% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
 2. [Proteogenomics database search]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
 
-This workflow is also available at [Proteogenomics gateway](http://galaxyp-proteogenomics.duckdns.org/).
+This workflow is also available at [usegalaxy.eu](usegalaxy.eu).
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](http://galaxyp.org)
