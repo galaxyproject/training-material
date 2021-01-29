@@ -17,10 +17,6 @@ follow_up_training:
     topic_name: proteomics
     tutorials:
       - proteogenomics-dbsearch
-
-  - type: "internal"
-    topic_name: proteomics
-    tutorials:
       - proteogenomics-novel-peptide-analysis
       
 contributors:
@@ -158,7 +154,7 @@ Provided with some BAM dataset(s) and a reference sequence, FreeBayes will gener
 
 FreeBayes is capable of calling variant haplotypes shorter than a read length where multiple polymorphisms segregate on the same read. The maximum distance between polymorphisms phased in this way is determined by the `--max-complex-gap`, which defaults to 3bp. In practice, this can comfortably be set to half the read length. Ploidy may be set to any level (`-p`), but by default all samples are assumed to be diploid. FreeBayes can model per-sample and per-region variation in copy-number (`-A`) using a copy-number variation map.
 
-FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use --pooled-continuous and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
+FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use `--pooled-continuous` and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
 
 
 > ### {% icon hands_on %} Hands-on: Variant Calling with FreeBayes
@@ -392,12 +388,13 @@ along with the UniProt and cRAP databases.
 >   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
 >   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
+{: .hands_on}
 > ### {% icon comment %} Tool parameters explained
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
 {: .comment}
->
+
 > ### {% icon comment %} CustomProDB generated protein Accession names need to be changed for PeptideShaker
 > PeptideShaker does not allow greaterthan sign, comma, or spaces in the protein accession name.
 > PeptideShaker also requires the FASTA ID to start with a source, e.g. *>sp|Q8C4J7|* for SwissProt entries.  Nonstandard entries must be prefixed *generic|*.
