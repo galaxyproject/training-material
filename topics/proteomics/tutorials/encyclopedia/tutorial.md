@@ -49,6 +49,7 @@ This will be rendered like this: {% cite Batut2018 %}, and links to a
 [bibliography section](#bibliography) which will automatically be created at the end of the
 tutorial.
 
+![Alternative text](../../images/EncyclopeDIA_Workflow.png)
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
