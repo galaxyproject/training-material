@@ -18,10 +18,6 @@ follow_up_training:
     topic_name: proteomics
     tutorials:
       - proteogenomics-dbcreation
-  -
-    type: "internal"
-    topic_name: proteomics
-    tutorials:
       - proteogenomics-dbsearch
 
 contributors:
@@ -72,7 +68,37 @@ All the files to run this workflow can be obtained from the [second tutorial]({%
 {: .hands_on}
 
 
+
 # Peptide Selection
+
+The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.
+
+> ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
+>
+> 1. **NCBI BLAST+ blastp** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} **Protein query sequence(s)** - `Peptides for Blast-P analysis.tabular`
+>    - {% icon param-select %} **Subject database/sequences** - `Locally installed BLAST database`
+>      - {% icon param-select %} **Protein BLAST database** - `NCBI-NR(dated)`
+>    - {% icon param-select %} **Type of BLAST** - `blast-p short`
+>    - {% icon param-text %} **Set expectation value cutoff** - `200000.0`
+>    - {% icon param-select %} **Output format** - `Tabular format (25 columns)`
+>    - {% icon param-select %} **Advanced Options** - `show advanced options`
+>      - {% icon param-check %} **Filter out low complexity regions (with SEG)** - `No`
+>      - {% icon param-select %} **Scoring matrix and gap costs** - `PAM30`
+>         - {% icon param-select %} **Gap Costs** - `Extension:9 Extension:1`
+>      - {% icon param-text %} **Maximum hits to consider/show** - `1`
+>      - {% icon param-text %} **Maximum number of HSPs (alignments) to keep for any single query-subject pair** - `1`
+>      - {% icon param-text %} **Word size for wordfinder algorithm** - `2`
+>      - {% icon param-text %} **Multiple hits window size: use 0 to specify 1-hit algorithm, leave blank for default** - `40`
+>      - {% icon param-text %} **Minimum score to add a word to the BLAST lookup table** - `11`
+>      - {% icon param-select %} **Composition-based statistics** - `0: no composition-based statistics`
+>      - {% icon param-check %} **Should the query and subject defline(s) be parsed?** - `No`
+>      - {% icon param-select %} **Restrict search of database to a given set of ID's** - `No restriction, search the entire database`
+>      - {% icon param-check %} **Minimum query coverage per hsp (percentage, 0 to 100)?** - `0`
+>      - {% icon param-check %} **Compute locally optimal Smith-Waterman alignments** - `No`
+>  2. Click **Execute** and inspect the query results file after it turned green.
+>
+{: .hands_on}
 
 Once Blast-P search is performed, it provides a tabular output containing “**Novel peptides**”. Now this output is further processed by comparing the Novel Peptide output with the PSM report for selecting only distinct peptides which meet the criteria.
 
