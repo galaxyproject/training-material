@@ -81,17 +81,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >      version: 0.2.13
 >    ```
 >
-> 2. Install the requirements with `ansible-galaxy`:
+> 2. Install the role with:
 >
 >    ```console
 >    ansible-galaxy role install -p roles -r requirements.yml
 >    ```
 >
-> 3. Edit the group variables file, `group_vars/galaxyservers.yml`:
->
->    <br/>
->
->    The variables available in this role are:
+> 3. The variables available in this role are:
 >
 >    | Variable             | Type          | Description                                                                                                                                                                    |
 >    | ----------           | -------       | -------------                                                                                                                                                                  |
@@ -101,11 +97,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    | `cvmfs_repositories` | list of dicts | CVMFS repository configurations, `CVMFS_REPOSITORIES` in `/etc/cvmfs/default.local` plus additional settings in `/etc/cvmfs/repositories.d/<repository>/{client,server}.conf`. |
 >    | `cvmfs_quota_limit`  | integer in MB | Size of CVMFS client cache. Default is `4000`.                                                                                                                                 |
 >
->    <br/>
->
 >    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to `config-repo`. We will also set the `cvmfs_quota_limit` to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.
->
->    <br/>
 >
 >    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
