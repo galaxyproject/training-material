@@ -15,6 +15,7 @@ layout: base
     {% endif %}
 {% endfor %}
 
+
 <div class="container main-content">
 <section>
 
@@ -29,9 +30,9 @@ The GTN now generates videos for selected slide decks. Click on on topic below t
   <tr><th>Topic</th></tr>
  </thead>
  <tbody>
-  {% for topic in sorted_topics %}
+  {% for topic in sorted_topics %} {% unless topic[0] == 'contributors' %}
   <tr><td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/videos/">{{ topic[1].title }}</a></td></tr>
-  {% endfor %}
+  {% endunless %}{% endfor %}
  </tbody>
 </table>
 
