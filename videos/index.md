@@ -22,13 +22,15 @@ layout: base
 
 The GTN now generates videos for selected slide decks. Click on on topic below to jump to the video page for that topic!
 
+<br/><br/>
+
 <table class="table table-striped">
  <thead>
   <tr><th>Topic</th></tr>
  </thead>
  <tbody>
   {% for topic in sorted_topics %}
-  <tr><td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/">{{ topic[1].title }}</a></td></tr>
+  <tr><td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/videos/">{{ topic[1].title }}</a></td></tr>
   {% endfor %}
  </tbody>
 </table>
