@@ -267,7 +267,9 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
-> 2. Rename PSM_Report_no_contaminants
+> 2. Rename {% icon galaxy-pencil %} to output file to `PSM_Report_no_contaminants`
+>
+>    {% include snippets/rename_dataset.md %}
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
@@ -278,8 +280,8 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
-> 2. Rename Peptide_Report_no_contaminants
-{: .hands_on}
+> 2. Rename {% icon galaxy-pencil%} the output file to `Peptide_Report_no_contaminants`
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
