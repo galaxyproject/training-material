@@ -419,7 +419,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 18, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 29, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -432,7 +432,7 @@
                     <h1 class="no_toc" id="introduction">Introduction</h1>
 
 <p>This tutorial aims to present the PAMPA <span class="notranslate">Galaxy</span> <span class="notranslate">workflow</span>, how to use it to compute common
-biodiversity metrics from species abundance data and analyse it through generalized 
+biodiversity metrics from species abundance data and analyse it through generalized
 linear (mixed) models (GLM and GLMM). This <span class="notranslate">workflow</span> made up of 5 tools will allow you to process
 temporal series data that include at least year, location and species sampled along with
 abundance value and, finally, generate article-ready data products.</p>
@@ -459,7 +459,7 @@ Thus, in this tutorial, we’ll start by the Community analysis followed by the 
     <ul>
       <li>Community metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2"><strong>Calculate community metrics</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_communitymetrics/pampa_communitymetrics/0.0.2</span></span> ):
 Total abundance, Species richness, Shannon index, Simpson index, Hill index and Pielou index</li>
-      <li>Population metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2"><strong>Calculate presence absence table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2</span></span> ): 
+      <li>Population metrics (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2"><strong>Calculate presence absence table</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_presabs/pampa_presabs/0.0.2</span></span> ):
 Abundance, Presence-absence</li>
     </ul>
   </li>
@@ -469,12 +469,12 @@ Abundance, Presence-absence</li>
       <li>Community analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2"><strong>Compute GLM on community data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmcomm/pampa_glmcomm/0.0.2</span></span> ):
 The GLM(M) is computed on the whole dataset and, if a separation factor is selected by the user, GLM(M)s are computed on subsets
 of the dataset (example: one GLM(M) per ecoregion)</li>
-      <li>Population analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2"><strong>Compute GLM on population data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2</span></span> ): 
+      <li>Population analysis (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2"><strong>Compute GLM on population data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_glmsp/pampa_glmsp/0.0.2</span></span> ):
 One GLM(M) is computed on each species separately</li>
     </ul>
   </li>
-  <li><strong>A third tool</strong> common for Community and Population analyses with at least <code class="language-plaintext highlighter-rouge">'year'</code> as a fixed effect to 
-create time-series plots from your GLM(M) results (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2"><strong>Create a plot from GLM data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2</span></span> ). 
+  <li><strong>A third tool</strong> common for Community and Population analyses with at least <code class="language-plaintext highlighter-rouge">'year'</code> as a fixed effect to
+create time-series plots from your GLM(M) results (<span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2" title="Tested with toolshed.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2"><strong>Create a plot from GLM data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/ecology/pampa_plotglm/pampa_plotglm/0.0.2</span></span> ).
 Two plots will be created for each GLM(M): one from the <em>“Estimate”</em> values of the GLM(M) and one from raw values from metrics file.</li>
 </ul>
 
@@ -532,7 +532,7 @@ of each species.</p>
 
   <ol>
     <li>
-      <p>Create a new history for this tutorial and give it a name (example: “DATRAS data analysis through PAMPA <span class="notranslate">workflow</span>”) 
+      <p>Create a new history for this tutorial and give it a name (example: “DATRAS data analysis through PAMPA <span class="notranslate">workflow</span>”)
 for you to find it again later if needed.</p>
 
       <blockquote class="tip">
@@ -702,8 +702,8 @@ from 1985 to 2010 and records CPUE for six exploited fish species</li>
 <p>Before starting the preparation of the data, we need to identify which inputs we need for the tools and their format
 (same for Community or Population analyses except for a few details):</p>
 <ul>
-  <li>Input for the tools to compute metrics: Observation data file containing at least <code class="language-plaintext highlighter-rouge">'year'</code> and “location” sampled 
-that might be represented in one field “observation.unit”, “species.code” to name the species sampled, 
+  <li>Input for the tools to compute metrics: Observation data file containing at least <code class="language-plaintext highlighter-rouge">'year'</code> and “location” sampled
+that might be represented in one field “observation.unit”, “species.code” to name the species sampled,
 and <code class="language-plaintext highlighter-rouge">'number'</code> as the abundance value</li>
   <li>Supplementary input for the tools to compute a GLM(M) analysis: Observation unit data file containing at least
 “observation.unit” and <code class="language-plaintext highlighter-rouge">'year'</code>. It might also contain <code class="language-plaintext highlighter-rouge">'habitat'</code>, <code class="language-plaintext highlighter-rouge">'site'</code> and any other information
@@ -856,28 +856,14 @@ columns needed for the PAMPA <span class="notranslate">workflow</span> consideri
   <li><code class="language-plaintext highlighter-rouge">'number'</code> from “CPUE_number_per_hour”</li>
 </ul>
 
-<p>This <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file containing the three surveys will be used to create the observation unit data file and 
-compute Community metrics as the Community analysis can be automatically processed on each survey separately. 
-However, this file can’t be used as it is to compute Population metrics as it may contain data for several 
-populations of the same species that do not interact with each other. Therefore, we have to work on the three 
+<p>This <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file containing the three surveys will be used to create the observation unit data file and
+compute Community metrics as the Community analysis can be automatically processed on each survey separately.
+However, this file can’t be used as it is to compute Population metrics as it may contain data for several
+populations of the same species that do not interact with each other. Therefore, we have to work on the three
 <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> original tabular files for the Population analysis.</p>
 
 <p>Hence, the following manipulations will be applied not only on <code class="language-plaintext highlighter-rouge">#Concatenate</code> Filtered data file but also on
 the three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code class="language-plaintext highlighter-rouge">#EVHOE</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> original tabular files used for the concatenation.</p>
-
-<blockquote>
-
-  <blockquote class="tip">
-    <h3 id="tip-tip-select-multiple-datasets-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
-
-    <ol>
-      <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
-      <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
-<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
-    </ol>
-  </blockquote>
-
-</blockquote>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-the-location-field"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create the “location” field</h3>
@@ -895,6 +881,17 @@ three <code class="language-plaintext highlighter-rouge">#BITS</code>, <code cla
           </ul>
         </li>
       </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-select-multiple-datasets-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Select multiple datasets</h3>
+
+        <ol>
+          <li>Click on <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <strong>Multiple datasets</strong></li>
+          <li>Select several files by keeping the <kbd>Ctrl</kbd> (or
+<kbd>COMMAND</kbd>) key pressed and clicking on the files of interest</li>
+        </ol>
+      </blockquote>
 
       <blockquote class="question">
         <h3 id="question-question-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Question</h3>
@@ -976,7 +973,7 @@ separated with <code class="language-plaintext highlighter-rouge">-</code>.</p>
 
 <h1 id="compute-community-and-population-metrics">Compute Community and Population metrics</h1>
 
-<p>In this part of the tutorial, we’re starting to use tools from the PAMPA toolsuite to compute Community 
+<p>In this part of the tutorial, we’re starting to use tools from the PAMPA toolsuite to compute Community
 and Population metrics. Then, we’ll be creating the observation unit file.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1009,8 +1006,8 @@ and Population metrics. Then, we’ll be creating the observation unit file.</p>
 
 <h2 id="creation-of-the-observation-unit-file">Creation of the observation unit file</h2>
 
-<p>Now that we have the “observation.unit” fields automatically created in the Community and Population 
-metrics files we can create the observation unit file from the <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file with the same 
+<p>Now that we have the “observation.unit” fields automatically created in the Community and Population
+metrics files we can create the observation unit file from the <code class="language-plaintext highlighter-rouge">#Concatenate</code> Regex Find And Replace data file with the same
 nomenclature for the “observation.unit” fields, namely:</p>
 
 <p><code class="language-plaintext highlighter-rouge">['year' in four numbers]_[Identifier of the precise sampled location in any character chain]</code></p>
@@ -1432,12 +1429,12 @@ Hence, mean species richness are globally around the maximum number of species t
   <li>or “Presence-absence”</li>
 </ul>
 
-<p>As a GLM(M) permits to take into account only one interest variable at a time, we choose to take 
-“Abundance” as the interest variable, namely the quantity of a given species at a given time and location. 
+<p>As a GLM(M) permits to take into account only one interest variable at a time, we choose to take
+“Abundance” as the interest variable, namely the quantity of a given species at a given time and location.
 This metric is located on the fourth column of the <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Population metrics data files.</p>
 
 <p>However, if you’re interested to test the effects of <code class="language-plaintext highlighter-rouge">Year</code> and <code class="language-plaintext highlighter-rouge">Site</code> on “Presence-absence” you may compute
-the GLM(M) tool again and choose the fifth column of the <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Population metrics data 
+the GLM(M) tool again and choose the fifth column of the <code class="language-plaintext highlighter-rouge">#EVHOE</code>, <code class="language-plaintext highlighter-rouge">#BITS</code> and <code class="language-plaintext highlighter-rouge">#SWCIBTS</code> Population metrics data
 files.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1769,7 +1766,7 @@ that helps evaluate the quality of your GL(M)M (found in the rating file).</p>
     title = "Compute and analyze biodiversity metrics with PAMPA toolsuite (Galaxy Training Materials)",
     year = "2021",
     month = "01",
-    day = "18"
+    day = "29"
     url = "\url{/training-material/topics/ecology/tutorials/PAMPA-toolsuite-tutorial/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

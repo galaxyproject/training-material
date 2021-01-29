@@ -584,7 +584,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 1, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 29, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -769,28 +769,25 @@ https://zenodo.org/record/4037137/files/T7B_1.mzml
       <ul>
         <li>Click the <strong>Operations on multiple datasets</strong> check box at the top of the history panel</li>
       </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection</h3>
+
+        <ul>
+          <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>
+          <li>Check all the datasets in your history you would like to include</li>
+          <li>
+            <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>
+
+            <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>
+          </li>
+          <li>Enter a name for your collection</li>
+          <li>Click <strong>Create List</strong> to build your collection</li>
+          <li>Click on the checkmark icon at the top of your history again</li>
+        </ul>
+      </blockquote>
     </li>
-  </ol>
-
-  <blockquote class="tip">
-
-    <h3 id="tip-tip-creating-a-dataset-collection"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a dataset collection</h3>
-
-    <ul>
-      <li>Click on <strong>Operations on multiple datasets</strong> (check box icon) at the top of the history panel <img src="../../../galaxy-interface/images/historyItemControls.png" alt="Operations on multiple datasets button" /></li>
-      <li>Check all the datasets in your history you would like to include</li>
-      <li>
-        <p>Click <strong>For all selected..</strong> and choose <strong>Build dataset list</strong></p>
-
-        <p><img src="/training-material/topics/galaxy-interface/images/buildList.png" alt="build list collection menu item" width="15%" /></p>
-      </li>
-      <li>Enter a name for your collection</li>
-      <li>Click <strong>Create List</strong> to build your collection</li>
-      <li>Click on the checkmark icon at the top of your history again</li>
-    </ul>
-  </blockquote>
-
-  <ol>
     <li>Rename the dataset collection as <code class="language-plaintext highlighter-rouge">MZML dataset collection</code>.</li>
   </ol>
 
@@ -1014,8 +1011,21 @@ our tutorial on <a href="/training-material/topics/proteomics/tutorials/protein-
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">con_</code></li>
       </ul>
     </li>
-    <li>Rename PSM_Report_no_contaminants</li>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> to output file to <code class="language-plaintext highlighter-rouge">PSM_Report_no_contaminants</code></p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
   </ol>
+
 </blockquote>
 
 <blockquote class="notranslate hands_on">
@@ -1029,19 +1039,19 @@ our tutorial on <a href="/training-material/topics/proteomics/tutorials/protein-
         <li><em>“the pattern”</em>: <code class="language-plaintext highlighter-rouge">con_</code></li>
       </ul>
     </li>
-    <li>Rename Peptide_Report_no_contaminants</li>
-  </ol>
-</blockquote>
-<blockquote>
+    <li>
+      <p>Rename <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> the output file to <code class="language-plaintext highlighter-rouge">Peptide_Report_no_contaminants</code></p>
 
-  <blockquote class="comment">
-    <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
+      <blockquote class="comment">
+        <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment</h3>
 
-    <p>In Proteomics, contamination is generally detected as peaks in spectra that did not originate
+        <p>In Proteomics, contamination is generally detected as peaks in spectra that did not originate
 from the samples and can be introduced in the sample from a variety of environmental sources or human error. Identification of these
 contaminants is critical to enable their removal before data analysis, mainly, to maintain the validity of conclusions
 drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data.</p>
-  </blockquote>
+      </blockquote>
+    </li>
+  </ol>
 
 </blockquote>
 
@@ -1065,8 +1075,8 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 <h2 id="removing-file-extensions-for-quantification"><em>Removing file extensions for Quantification</em></h2>
 <p>This is a data manipulation step to make the data compatible with other <span class="notranslate">downstream</span> processing tools. The Replace text tool replaces the .mgf extension from the PSM report so that it can be used as an input for FlashLFQ.</p>
-<blockquote class="notranslate hands_on">
 
+<blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-removing-file-extensions"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Removing file extensions</h3>
 
   <ol>
@@ -1678,7 +1688,7 @@ FROM ec</code></li>
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Emma Leith, Marie Crane, 2020 <b>metaQuantome 1: Data creation (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html">/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Subina Mehta, Timothy J. Griffin, Pratik Jagtap, Emma Leith, Marie Crane, 2021 <b>metaQuantome 1: Data creation (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html">/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1695,9 +1705,9 @@ FROM ec</code></li>
 <code id="citation-code">@misc{proteomics-metaquantome-data-creation,
     author = "Subina Mehta and Timothy J. Griffin and Pratik Jagtap and Emma Leith and Marie Crane",
     title = "metaQuantome 1: Data creation (Galaxy Training Materials)",
-    year = "2020",
-    month = "12",
-    day = "01"
+    year = "2021",
+    month = "01",
+    day = "29"
     url = "\url{/training-material/topics/proteomics/tutorials/metaquantome-data-creation/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
