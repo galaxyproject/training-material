@@ -612,7 +612,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 4, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 29, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -692,7 +692,7 @@
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Then we need to tell NGINX it should serve our Reports app under <code class="language-plaintext highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>servers</code> group variables file, and under the NGINX configuration, add a block for proxying the reports application. It should look like:</p>
+      <p>Then we need to tell NGINX it should serve our Reports app under <code class="language-plaintext highlighter-rouge">&lt;server_url&gt;/reports</code> url. Edit your <code class="language-plaintext highlighter-rouge">templates/nginx/<span class="notranslate">galaxy</span>.j2</code> file, and within the server block, add a block for proxying the reports application. It should look like:</p>
 
       <div class="language-nginx highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">location</span> <span class="n">/reports/</span> <span class="p">{</span>
     <span class="kn">uwsgi_pass</span>           <span class="nf">127.0.0.1</span><span class="p">:</span><span class="mi">9001</span><span class="p">;</span>
@@ -766,7 +766,7 @@
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Nate Coraor, Björn Grüning, Simon Gladman, Helena Rasche, 2020 <b>Galaxy Monitoring with Reports (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">/training-material/topics/admin/tutorials/reports/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Nate Coraor, Björn Grüning, Simon Gladman, Helena Rasche, 2021 <b>Galaxy Monitoring with Reports (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/reports/tutorial.html">/training-material/topics/admin/tutorials/reports/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -783,9 +783,9 @@
 <code id="citation-code">@misc{admin-reports,
     author = "Nate Coraor and Björn Grüning and Simon Gladman and Helena Rasche",
     title = "Galaxy Monitoring with Reports (Galaxy Training Materials)",
-    year = "2020",
-    month = "03",
-    day = "04"
+    year = "2021",
+    month = "01",
+    day = "29"
     url = "\url{/training-material/topics/admin/tutorials/reports/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
