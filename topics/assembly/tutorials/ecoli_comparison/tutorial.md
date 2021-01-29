@@ -43,6 +43,8 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 
 [*E. coli*](https://en.wikipedia.org/wiki/Escherichia_coli) is one of the most studied organisms. There are thousands of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
+> ### {% icon comment %} Slow steps ahead
+> The first part of this tutorial can take a significant amount of time to find the most related genomes. If you want, you can upload this (outdated) copy of the NCBI E. Coli Genomes table to your history:
 >
 > 1. Import the following URL:
 >
@@ -111,7 +113,7 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 > 1. {% tool [Cut](Cut1) %}   columns from a table:
 >
 >    - *"Cut columns"*: `c8,c20`
->    - *"From"*: the tabular version of the file.
+>    - *"From"*: `genome_proks.txt`
 >
 > > ### {% icon question %} Questions
 > >
