@@ -50,46 +50,42 @@ Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis works
 ---
 
 
-### Bulk RNA-Seq
+## Bulk RNA-Seq
 
-.left-column70[![](../../images/scrna-intro/rna_cells_bulkrez.svg)]
+.pull-left-large[![](../../images/scrna-intro/rna_cells_bulkrez.svg)]
 
 .pull-right[
+.reduce90[
 .center[*Summary*]
 
-* Resolution:
-  * Entire tissues
-
-* Signal:
-  * Average gene expression per tissue
-
-* Differential Expression:
-  * Difference between average gene expression between tissues
-  * Types of DE normalisation techniques to use?
+| | |
+|-:|:-|
+| Resolution| Entire tissues |
+| Signal | Average gene expression per tissue |
+| Differential Expression | Difference between average gene expression between tissues |
 ]
+]
+
 
 ???
 Let's start with what the differences are between Bulk RNA-seq and single cell RNA seq data. With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues. Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high. The differential expression is then measured as the relative expression of a given gene between one tissue and and another.
 
 ---
 
-### Single Cell RNA-Seq
+## Single Cell RNA-Seq
 
-.left-column70[![](../../images/scrna-intro/rna_cells_singlerez.svg)]
+.pull-left-large[![](../../images/scrna-intro/rna_cells_singlerez.svg)]
 
 .pull-right[
+.reduce90[
 .center[*Summary*]
 
-* Resolution:
-  * Individual cells within tissues
-
-* Signal:
-  * Individual gene expression per cell
-
-* Differential Expression:
-  * Some cells express the same set of genes in the same way
-  * Difference between one set of cells against another
-
+| | |
+|-:|:-|
+| Resolution| Individual cells within tissues |
+| Signal | Individual gene expression per cell |
+| Differential Expression | Some cells express the same set of genes in the same way; comparing one set of cells against another |
+]
 ]
 
 
@@ -99,25 +95,23 @@ With single cell RNA-seq analysis, the stage shifts away from measuring the aver
 
 ---
 
-### From Bulk RNA to Single Cell RNA
+# From Bulk RNA to Single Cell RNA
 
 
+.reduce90[
 * In order to quantify RNA at the level of individual cells:
-
   * New methods of library preparation
-  
   * New methods of sequencing
-  
   * New methods of quality control
-  
   * New methods of analysis
+]
   
 ???
 New technologies means new methods and techniques to harness the new features that come with them. Single-cell RNA-seq data requires different means of library preparation, sequencing, quality control and analysis.
 
 ---
 
-### Cell Capture and Replicates
+# Cell Capture and Replicates
 
 .center[*How do we prepare samples for sequencing?*]
 
@@ -126,8 +120,8 @@ For example, how are cells captured and sequenced?
 
 --
 
-
 .pull-left[
+.reduce90[
 
 __Bulk RNA-seq__
 
@@ -137,6 +131,7 @@ __Bulk RNA-seq__
   1. Perform sequencing on leftover goop
 
 ]
+]
 
 ???
 In bulk RNA-seq analysis, the process involves taking a sample, removing unwanted molecules and sequencing everything else.
@@ -144,6 +139,7 @@ In bulk RNA-seq analysis, the process involves taking a sample, removing unwante
 --
 
 .pull-left[
+.reduce90[
 
 __Single-cell RNA-seq__
 
@@ -155,6 +151,7 @@ __Single-cell RNA-seq__
   1. Perform sequencing in a common pool
 
 ]
+]
 
 ???
 For single cell analysis, the process is much the same, except that each sample is a cell, and must therefore be sequenced separately from other cells. Once isolated, unique barcodes are added to each cell, and then sequenced.
@@ -164,12 +161,15 @@ For single cell analysis, the process is much the same, except that each sample 
 
 __Biological Replicates__
 
-* Bulk RNA-seq: 
-  * Each tissue slice is a sample, can take another slice
-* Single-cell RNA-seq:
-  * Each cell is sample, cannot directly replicate because unique
+.center[
+.reduce90[
 
-
+|  |  |
+|--------:|:-----------|
+| **Bulk RNA-seq** | Each tissue slice is a sample, can take another slice |
+| **Single-cell RNA-seq** | Each cell is sample, cannot directly replicate because unique |
+]
+]
 
 ???
 Because the level of resolution in single-cell is at the cell level, and that each cell is unique, the concept biological replicates is not quite the same as that in bulk RNA-seq.
@@ -177,25 +177,26 @@ Because the level of resolution in single-cell is at the cell level, and that ea
 
 ---
 
-### Capture / Sorting:
+# Capture / Sorting:
 
-.pull-left[
 *How are cells isolated?*
-]
+
 
 ???
 Cell isolation can be performed in different ways.
 
 --
 
-.pull-right[![](../../images/scrna-intro/mouthpipette.jpg)]
+.pull-right[.image-90[![](../../images/scrna-intro/mouthpipette.jpg)]]
 
 .pull-left[
+.reduce90[
 * Manual pipette:
    * Use a thin glass tube to suction up a cell
    * Maintain pressure in tube
    * Transport to new environment
    * Release pressure in tube
+]
 ]
 
 ???
@@ -205,8 +206,10 @@ One method is manual pipetting, where wet lab scientists suction up individual c
 --
 
 .pull-left[
+.reduce90[
 * Repeat 1000 times to isolate 1000 cells
   * Error-prone
+]
 ]
 
 ???
@@ -216,9 +219,10 @@ They can do this hundreds of times to isolate hundreds of cells, but it is error
 --
 
 .pull-left[
-
+.reduce90[
 * Automatic pipette:
   * Flow cytometry
+]
 ]
 
 ???
@@ -226,28 +230,33 @@ Another method is flow cytometry, which reduces the human-error component of thi
 
 ---
 
-### Capture / Sorting: Flow Cytometry
+# Capture / Sorting: Flow Cytometry
 
 .pull-right[![](../../images/scrna-intro/opticssystem.png)]
 
-.left-column70[
+.pull-left[
+.reduce90[
 * Stream cells along a liquid through a narrow tube
   * Narrow to permit one cell at a time
   * Fluid enough to allow high-throughput.
 ]
+]
 
-.left-column70[
+.pull-left[
+.reduce90[
 * Screen each cell with a laser to probe properties:
    * Cell Size and Type
       * Front scatter vs Side scatter
    * Cell Type by Fluorescent Labelling
      *  Cell Surface Markers (CDs)
      *  Fluorescent Labelling
-
+]
 ]
 
-.left-column70[
+.pull-left[
+.reduce90[
 * Isolate a cell into its own sequencing environment
+]
 ]
 
 ???
@@ -255,7 +264,7 @@ Flow cytometry floats cells in a shallow liquid bath and streams them along a na
 
 ---
 
-### Capture / Sorting: Size and Type
+# Capture / Sorting: Size and Type
 
 .pull-right[
   ![](../../images/scrna-intro/opticssystem.png)
@@ -279,16 +288,18 @@ Optical scatter properties can be used to probe size and consistency of the cell
 
 ---
 
-### Capture / Sorting: Size and Type
+# Capture / Sorting: Size and Type
 
 .pull-left[
+.reduce90[
 *Forward Scatter (FSC)*
   * Measures along the path of the laser
   * FSC intensity proportional to diameter of cell
   * Good for distinguishing between immune cells
 ]
+]
 
-.pull-right[![](../../images/scrna-intro/FlowJo_Layouts__01-Mar-2017.jpg)]
+.image-75[.pull-right[![](../../images/scrna-intro/FlowJo_Layouts__01-Mar-2017.jpg)]]
 
 
 ???
@@ -297,13 +308,17 @@ Forward scatter is aligned with the main laser and measures the diameter of cell
 --
 
 .pull-left[
+.reduce90[
+<br />
+
 *Side Scatter (SSC)*
   * Measures 90° to laser, along path of cells
   * Much weaker intensities than FSC
   * Refraction/reflection proportional to granularity of cell
 ]
+]
 
-.pull-right[![](../../images/scrna-intro/Granulocytes_vs_Monocytes_scatter.jpg)]
+.image-75[.pull-right[![](../../images/scrna-intro/Granulocytes_vs_Monocytes_scatter.jpg)]]
 
 
 ???
@@ -311,14 +326,15 @@ Side scatter is perpendicular to the main laser, and measures the granularity of
 
 ---
 
-### Capture / Sorting: FACS
+# Capture / Sorting: FACS
 
-.footnote[Image from BD Biosciences]
-
-.pull-left[![](../../images/scrna-intro/CD8vsCD3.png)]
+.pull-left[
+![](../../images/scrna-intro/CD8vsCD3.png)
+.footnote[.reduce70[Image from BD Biosciences]]
+]
 
 .pull-right[
-
+.reduce90[
 *Fluorescence-Activated Cell Sorting (FACS)*
   * Cell surface markers
     * Fluorescent Markers for each cell
@@ -329,36 +345,37 @@ Side scatter is perpendicular to the main laser, and measures the granularity of
   * Can set gating thresholds to isolate analysis to enriched subset of cells
 
 ]
+]
 
 ???
 Cells can also be gated and characterised by their cell surface markers via FACS. By plotting different surface marker intensities against one another, cells can be separated, gated, and labelled based on these fluorescent properties.
 
 ---
 
-### Barcoding Cells
+# Barcoding Cells
 
 .center[![](../../images/scrna-intro/scrna_pbb_barcodes_add.svg)]
 
-* Add unique barcodes to every transcript in a cell
+.footnote[Add unique barcodes to every transcript in a cell]
 
 ???
 Once isolated, cells can be barcoded. Barcodes are unique sequences that are added to each RNA molecule. They are not unique to the molecule, but unique to the cell such that any two RNA molecules will be tagged by the same cell barcode, should they exist in the same cell. RNA molecules from different cells will have different cell barcodes.
 
 ---
 
-### Barcoding Cells
+# Barcoding Cells
 
 .footnote[Place cells into sequencing plate]
 
-.left-column70[![](../../images/scrna-intro/scrna_pbb_barcodes_overview.svg)]
+.pull-left-large[![](../../images/scrna-intro/scrna_pbb_barcodes_overview.svg)]
 
 .pull-right[
-
+.reduce90[
 * From a pool of many *many* different tissue samples / cells:
 
    * Cell Barcodes tell us which cell the transcript from
    * UMIs can tell us how much the transcript was amplified, by comparing it with other transcripts from the same gene with the same UMI tag.
-
+]
 ]
 
 ???
@@ -368,16 +385,16 @@ Once the RNA molecules have been tagged by cell barcodes, they can be amplified,
 
 ### Sequencing Issues: Amplification
 
-.center[![](../../images/scrna-intro/amplification_errors.svg)]
+.center[.image-75[![](../../images/scrna-intro/amplification_errors.svg)]]
 
-
+.reduce90[
 * Polymerase Chain Reaction (PCR)
    * Takes a single-stranded read and duplicates it
    * Works well when enough reads are present in pool
 * Low coverage
    * When reads in sequencing pool are low, many will be missed
    * Can lead to one-sided amplification
-
+]
 
 ???
 PCR amplifies the gene products to make them more easily detectable during sequencing. When there is a lot of gene product to amplify, as is the case for bulk RNA-seq, PCR works quite well in amplifying all products in a reasonably well-represented manner. However, in the case of single-cell products, the amount to amplify is very small, and many unique reads might be missed during this phase whereas others may be over amplified, as shown in the blue and red transcripts in the example.
@@ -386,17 +403,24 @@ PCR amplifies the gene products to make them more easily detectable during seque
 
 ### Sequencing Issues: Amp. + UMIs
 
-.left-column70[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 
 .pull-right[
+.reduce90[
 * How many red transcripts in the cell?
+
 * After PCR amplification?
+
 * What do the little coloured tags at the start of each transcript do?
 
 
 * Unique Molecular Identifiers (UMIs)
+
 * Added to help mitigate bias from amplification.
 ]
+]
+
+???
 
 To guard against this type of amplification bias, we can add a random element to the barcoding. These random barcodes known as UMIs, uniquely tag transcripts such that any two transcripts of the same gene are likely to have different random barcodes.
 
@@ -404,17 +428,18 @@ To guard against this type of amplification bias, we can add a random element to
 
 ### Sequencing Issues: Amp. + UMIs
 
-.left-column70[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 
 .pull-right[
 
-.center[Counting Reads]
+.center[Counting Reads
 
-|          | # Reads |
-|---------:|:-------:|
-|  **Red** | 6       |
-| **Blue** | 3       |
+|          | Reads |
+|---------:|:-----:|
+|  **Red** | 6     |
+| **Blue** | 3     |
 
+]
 ]
 
 ???
@@ -423,11 +448,11 @@ Let us consider the example to the left: we have 2 red transcripts and 2 blue tr
 
 --
 
-.left-column70[
+.pull-left-large[
 
-.center[Grouping Reads by Gene and UMI]
+.center[Grouping Reads by Gene and UMI
 
-|          | **UMIs** | **# Reads** |
+|          | **UMIs** | **Reads** |
 |---------:|:--------:|:-----------:|
 |  **Red** | Pink     | 2           |
 |          | Cyan     | 4           |
@@ -435,16 +460,18 @@ Let us consider the example to the left: we have 2 red transcripts and 2 blue tr
 |          | Green    | 2           |
 
 ]
+]
 
 .pull-right[
 
-.center[Counting de-duplicated Reads]
+.center[Counting de-duplicated Reads
 
-|          | **UMIs (Grouped)** | **# Reads** |
+|          | **UMIs (Grouped)** | **# UMIs** |
 |---------:|:------------------:|:-----------:|
 |  **Red** | {Pink, Cyan}       | 2           |
 | **Blue** | {Pink, Green}      | 2           |
 
+]
 ]
 
 ???
@@ -455,9 +482,8 @@ However if we group the reads by their UMIs, and then count only the number of u
 
 ### Sequencing Issues: Unique UMIs?
 
-<!-- .footnote[[How Many mRNAs Are In a Cell](http://book.bionumbers.org/how-many-mrnas-are-in-a-cell/)] -->
 
-.left-column70[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 .pull-right[
 
 |          | **UMIs** | **#Reads** |
@@ -465,8 +491,10 @@ However if we group the reads by their UMIs, and then count only the number of u
 |  **Red** | {Pink, Cyan}       | 2           |
 | **Blue** | {Pink, Green}      | 2           |
 
+.reduce90[
 * Pink appears twice in different genes.
 * In what context are UMIs unique?
+]
 
 ]
 
@@ -476,25 +504,29 @@ UMIs are relatively random, but not truly random. Notice that the pink UMI appea
 
 --
 
+<br />
+
+.reduce90[
 * Can every transcript in a cell have its own UMI?
 
 * Number of mRNA transcripts in a cell?
-  * ~ $10^5$ to $10^6$ in a mammalian cell.
+  * ~ 10⁵ to 10⁶ in a mammalian cell.
 
-* Require at minimum barcodes of length N, where $4^N = 10^5$
+* Require at minimum barcodes of length *N*, where 4ᴺ = 10⁵
+]
 
 ???
 This is due to there being often more transcripts than available UMIs, both which are dependent on the number of transcripts in a cell, and the length of the barcode.
 
 ---
 
-### Sequencing Issues: Unique UMIs?
+# Sequencing Issues: Unique UMIs?
 
-.center[Barcodes of length $N$ with Edit Distance of $B$:]
+.center[Barcodes of length *N* with Edit Distance of *B*:]
 
 .pull-left[
 
-.center[$N = 5$ and $B = 1$]
+.center[*N = 5* and *B = 1*]
 
 ```
 AAAAA AAAAC AAAAG AAAAT AAACA ····
@@ -504,13 +536,13 @@ CCCCC CCCCA CCCCG CCCCT CCCAC ····
               ·
 ```
 
-.center[$4^5 = 1024$ barcodes]
+.center[*4⁵ = 1024* barcodes]
 
 ]
 
 .pull-right[
 
-.center[$N = 5$ and $B = 2$]
+.center[*N = 5* and *B = 2*]
 
 ```
 AAAAA AAACC AAAGG AAATT AACCA ····
@@ -520,7 +552,7 @@ CCCCC CCCAA CCCGG CCCTT CCCAA ····
               ·
 ```
 
-.center[$4^{5-1} = 512$ barcodes]
+.center[*4⁵⁻¹ = 512* barcodes]
 
 ]
 
@@ -536,21 +568,28 @@ Consider a set of barcodes of length 5 with an edit distance of 1 between adjace
 
 ---
 
-### Sequencing Issues: Unique UMIs?
+# Sequencing Issues: Unique UMIs?
 
-.left-column70[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
+.pull-left-large[![](../../images/scrna-intro/scrna_amplif_errors_umis.svg)]
 .pull-right[
 
-|          | **UMIs** | **#Reads** |
-|---------:|:------------------:|:-----------:|
-|  **Red** | {Pink, Cyan}       | 2           |
-| **Blue** | {Pink, Green}      | 2           |
+|          | **UMIs**      | **# Reads** |
+|---------:|:-------------:|:----------:|
+|  **Red** | {Pink, Cyan}  | 2          |
+| **Blue** | {Pink, Green} | 2          |
 
+.reduce90[
 * Pink appears twice in different genes.
 * In what context are UMIs unique?
 
+<br />
+<br />
+
 ]
 
+]
+
+.reduce90[
 *In what context are UMIs unique?*
   * UMIs are "random salt"
     * 'Unique enough' at the transcript level
@@ -558,13 +597,14 @@ Consider a set of barcodes of length 5 with an edit distance of 1 between adjace
   * We wish to count transcripts only
     * De-duplication of UMIs at transcript level
     * Good estimation of true transcript abundance
+]
 
 ???
 In the context of amplification, UMIs do not need to be unique, they just need to be random enough to deduplicate transcripts in order to give a more accurate estimate of the number of transcripts within a cell.
 
 ---
 
-### Cell Barcodes and UMIs (Recap)
+# Cell Barcodes and UMIs (Recap)
 
 For Each Cell:
 
@@ -576,7 +616,7 @@ So let's just recap what we've learned: First each cell has cell barcodes added 
 
 ---
 
-### Cell Barcodes and UMIs (Recap)
+# Cell Barcodes and UMIs (Recap)
 
 For Each Cell:
 
@@ -590,7 +630,7 @@ Then we add random UMIs to all transcripts, which further tag the molecules. The
 
 ---
 
-### QC: Overcoming Background Noise
+# QC: Overcoming Background Noise
 
 
 
@@ -604,9 +644,9 @@ One way to do this is to set thresholds on the limits of detectability for genes
 
 ---
 
-### Normalisation: Bulk vs Single-Cell
+# Normalisation: Bulk vs Single-Cell
 
-.left-column70[
+.pull-left-large[
 
 *Bulk RNA-seq*: High Coverage 
   
@@ -615,12 +655,10 @@ One way to do this is to set thresholds on the limits of detectability for genes
 | **GeneA** | 100 | 80 | 40 |
 | **GeneB** |  45 | 30 | 40 |
 
-  * Median Gene Expression is high
-
-]
+.reduce70[* Median Gene Expression is high]
 
 
-.left-column70[
+<br />
 
 *scRNA-seq*: Very Low Sequencing Depth 
   
@@ -629,7 +667,7 @@ One way to do this is to set thresholds on the limits of detectability for genes
 | **GeneA** |  0 |  0 |  2 |  0 |  1 |
 | **GeneB** |  2 |  0 | 15 |  0 |  0 |
 
-  * Median Gene Expression is zero...
+.reduce70[* Median Gene Expression is zero]
 
 ]
 
@@ -638,14 +676,10 @@ One way to do this is to set thresholds on the limits of detectability for genes
 
 __Why is this a problem?__
 
-]
-
-.pull-right[
-
 .center[
-$R(s,g) = \frac{X\_{sg}}{(\prod\_{s} X\_{s})^{\frac{1}{n}}}$
+$$R(s,g) = \frac{X\_{sg}}{(\prod\_{s} X\_{s})^{\frac{1}{n}}}$$
 
-$DESeq(s,g) = \frac{X\_{sg}}{Med(R\_{s})}$
+$$DESeq(s,g) = \frac{X\_{sg}}{Med(R\_{s})}$$
 
 ]
 ]
@@ -656,7 +690,7 @@ Filtering can be a luxury however, as many single-cell RNA-seq datasets have typ
 --
 
 .pull-right[
-* Can't divide by zero...
+Can't divide by zero!
 ]
 
 ???
@@ -664,7 +698,7 @@ But if the median gene expression is zero, as is often the case with single-cell
 
 ---
 
-### Normalisation: SCRAN method
+# Normalisation: SCRAN method
 
 .footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
 
@@ -672,11 +706,15 @@ But if the median gene expression is zero, as is often the case with single-cell
 
 
 .pull-right[
+.reduce90[
 1. Calculate the library sizes of all cells
-1. Calculate the library size of a pseudo reference cell (average)
-1. Separate odd sizes (red) and even sizes (blue) into two groups
-1. Sort each group by library size and place on opposite sides of a "ring"
 
+1. Calculate the library size of a pseudo reference cell (average)
+
+1. Separate odd sizes (red) and even sizes (blue) into two groups
+
+1. Sort each group by library size and place on opposite sides of a "ring"
+]
 ]
 
 ???
@@ -684,22 +722,25 @@ One such method is the SCRAN method which works by creating overlapping pools of
 
 ---
 
-### Normalisation: SCRAN method
+# Normalisation: SCRAN method
 
 .footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
 
 .pull-right[![](../../images/scrna-intro/scran_pooling_right.svg)]
 
 .pull-left[
-1. Define overlapping pools of adjacent cells of size $k$
+.reduce90[
+1. Define overlapping pools of adjacent cells of size *k*
+
 1. For each pool
     1. Sum the library sizes of all cells within
     1. Derive a size factor by dividing by the reference cell
+
 1. For each cell
     1. Find which pools it belongs to 
     1. Build a linear model using these size factors
     1. Estimate the size factor of the cell on this linear model
-
+]
 ]
 
 ???
@@ -707,7 +748,7 @@ Overlapping pools of fixed sizes are defined, resulting in each cell being defin
 
 ---
 
-### Normalisation: SCRAN method
+# Normalisation: SCRAN method
 
 .footnote[.small[[*Pooling across cells to normalize single-cell RNA sequencing data with many zero counts*, Lun et al., 2016](https://doi.org/10.1186/s13059-016-0947-7)]]
 
@@ -719,11 +760,12 @@ By this method, the issue of low sequence coverage is worked around by turning c
 
 ---
 
-### Wanted vs Unwanted Variation
+# Wanted vs Unwanted Variation
 
 .pull-right[![](../../images/scrna-intro/variance.svg)]
 
 .pull-left[
+.reduce90[
 *Wanted Variation*
   * Expression from the top most differentially expressed genes
 
@@ -735,26 +777,30 @@ By this method, the issue of low sequence coverage is worked around by turning c
   * Biological Variation
      * Intrinsic cell noise
 ]
+]
 
 ???
 Other factors that we need to take into account during a single cell RNA analysis are the unwanted factors that can confound the analysis. Ideally we wish to see the gene profiles that separate different types of cells are driven by biological variance. There is however confounding variation from both technical and biological sources that are not useful to the analysis but do contribute to the variance.
 
 ---
 
-### Confounding Variation: Biological
+# Confounding Variation: Biological
 
 .center[![](../../images/scrna-intro/raceid_cellcycle.svg)]
 
 .pull-left[
+.reduce90[
 .center[*Transcription Bursting*]
  * Transcription not continuous, occurs in "bursts"
  * Phenomenon hidden in bulk RNA-seq
 ]
-
+]
 
 .pull-right[
+.reduce90[
 .center[*Cell Cycle*]
  * Cells of the same type have twice the amount of mRNA at M-phase than G1-phase
+]
 ]
 
 ???
@@ -763,20 +809,24 @@ Confounding biological variance appears in two forms: Transcriptional bursting, 
 
 ---
 
-### Confounding Variation: Technical
+# Confounding Variation: Technical
 
 .center[![](../../images/scrna-intro/raceid_technical_variation.svg)]
 
 .pull-left[
+.reduce90[
 *Amplification Bias*
 * Different transcripts are amplified more than others
 * Mitigated via UMIs
 ]
+]
 
 .pull-left[
+.reduce90[
 *Dropout Events*
 * Some genes are falsely not detected in cells
 * Mitigated via better capture methods and normalisation
+]
 ]
 
 ???
@@ -784,7 +834,7 @@ Confounding technical variance appears in a three forms: Amplification bias, Dro
 
 ---
 
-### Confounding Variation: Technical
+# Confounding Variation: Technical
 
 .center[![](../../images/scrna-intro/raceid_technical_variation.svg)]
 
@@ -797,7 +847,7 @@ Library size variation arises for a variety of different reasons, but is the mai
 
 ---
 
-### Relationships Between Cells 
+# Relationships Between Cells
 
 Consider:
  * 1,000s of Cells
@@ -816,7 +866,7 @@ Once we have removed unwanted confounders from the analysis we have the issue of
 
 ---
 
-### Distance Matrix
+# Distance Matrix
 
 ![](../../images/scrna-intro/raceid_distance.svg)
 
@@ -825,7 +875,7 @@ A distance matrix does just this, defining the distance between any two cells by
 
 ---
 
-### Relatedness of Cells: KNN
+# Relatedness of Cells: KNN
 
 ![](../../images/scrna-intro/scrna_knn.svg)
 
@@ -837,19 +887,24 @@ Once a distance matrix is generated, we can perform K-nearest neighbours upon th
 
 ---
 
-### Dimensional Reduction
+# Dimensional Reduction
 
 ![](../../images/scrna-intro/raceid_dimred.svg)
 
 .pull-left[
+.reduce90[
 *Aim:*
 * Take a high-dimensional dataset and reduce it into a lower dimension that we can understand.
   * e.g. 10000-D → 2D
 ]
+]
+
 .pull-right[
+.reduce90[
 *Constraint*
 * Preserve the high dimensional topology in a low dimensional space.
    * e.g. if Cell A is far from Cell D yet close to Cell B in 3D, it should replicate those relationships in 2D.
+]
 ]
 
 ???
@@ -860,13 +915,15 @@ We can represent this 3 dimensional space easily as 3 independent axes with poin
 
 ### Clustering
 
-.left-column70[![](../../images/scrna-intro/singlecellplot3.png)]
+.pull-left-large[.image-100[![](../../images/scrna-intro/singlecellplot3.png)]]
 
 .pull-right[
+.reduce90[
 1. 2D Projection
    * Each dot is a cell
    * Clustering colours the dots, where different coloured cells belong to different clusters
    * Different clusters represent different cell types
+]
 ]
 
 ???
@@ -877,14 +934,16 @@ Once the number of variables of the dataset have been sufficiently reduced via f
 
 ### Clustering
 
-.left-column70[![](../../images/scrna-intro/singlecellplot4.png)]
+.pull-left-large[.image-100[![](../../images/scrna-intro/singlecellplot4.png)]]
 
 .pull-right[
+.reduce90[
 1. 2D Projection
 1. Discrete Cell Types
   * Each cluster should represent a different type
   * Look for the most DE genes in each cluster
     * Find the marker genes → Cell Type
+]
 ]
 
 ???
@@ -895,9 +954,10 @@ By inspecting the top differentially expressed genes in each cluster against all
 
 ### Clustering
 
-.left-column70[![](../../images/scrna-intro/singlecellplot6.png)]
+.pull-left-large[.image-100[![](../../images/scrna-intro/singlecellplot6.png)]]
 
 .pull-right[
+.reduce90[
 1. 2D Projection
 1. Discrete Cell Types
 1. Relationships infer Lineage
@@ -906,6 +966,7 @@ By inspecting the top differentially expressed genes in each cluster against all
      * Entropy of cluster
      * Proximity of cluster
 ]
+]
 
 ???
 We can also further derive the relationships between these clusters by computing lineage trees based on the amount of noise in each cluster, with the expectation that stem cells have noisy expression profiles yielding broader clusters, and mature cells have very clear expression profiles yielding tighter clusters.
@@ -913,45 +974,36 @@ We can also further derive the relationships between these clusters by computing
 
 ---
 
-### Clustering: Hard vs Soft
-
-.pull-left[
-![](../../images/scrna-intro/singlecellplot3.png)
-
-*Hard*
-  * Big spaces between clusters
-  * Cell types are well defined and the clustering reflects that
-
-]
+## Clustering: Hard vs Soft
 
 
-.pull-right[
-![](../../images/scrna-intro/10xdata.png)
+|  |  |
+|--|--|
+| .image-100[![](../../images/scrna-intro/singlecellplot3.png)] | .image-100[![](../../images/scrna-intro/10xdata.png)] |
+| .center[**Hard**] | .center[**Soft**] |
+| Big spaces between clusters | Clusters bleed into one another |
+| Cell types are well defined and the clustering reflects that | Cell types seem to intermingle with one another. |
 
-*Soft*
-  * Clusters bleed into one another
-  * Cell types seem to intermingle with one another.
-
-]
 
 ???
 The types of clustering you are likely to encounter in an analysis is dependent on the input datasets, where cells taken from late stage samples are less likely to be bunched together and are more likely to yield large visible gaps known as hard clusters that clearly defined different types. Earlier stage datasets are more likely to yield softer clusters, where neighbouring clusters share soft boundaries as clusters intermingle slightly with one another.
 
 ---
 
-### Continuous Phenotypes:
+# Continuous Phenotypes:
 
 .center[![](../../images/scrna-intro/raceid_contpheno.svg)]
-
+.reduce90[
 * Cells aren't discrete, they transition
 * Continuously changing over time from a less mature type to more mature type
+]
 
 ???
 Soft clustering is to be expected, since although clustering is a statistical method for discretely partitioning  data, the underlying cell biology of the data is a continuous process, where cells transition from one well-defined state to another through intermediate stages which are represented in-between two cluster centres.
 
 ---
 
-### Performing Clustering
+## Performing Clustering
 
 .pull-left[
 Variety of different clustering methods:
@@ -974,17 +1026,19 @@ To actually perform the clustering there are three commonly-used methods: K-mean
 .pull-right[![](../../images/scrna-intro/kmeans.gif)]
 
 .pull-left[
+.reduce90[
 *K-means*
-   1. Initialise $k$ random positions
+   1. Initialise *k* random positions
    1. Iteration Step:
-      1. Calculate distance from each cell to each $k$ position
-      1. Assign each cell to it's nearest $k$
-      1. Set new $k$ positions to the mean position of all cells in that group
+      1. Calculate distance from each cell to each *k* position
+      1. Assign each cell to it's nearest *k*
+      1. Set new *k* positions to the mean position of all cells in that group
 
 *K-medians*
    * Same as above, but use median position instead
    * Less influenced by outliers
    
+]
 ]
 
 ???
@@ -1013,35 +1067,40 @@ Hierarchical clustering is more flexible and does not need an initial parameter 
 ---
 
 
-### Community Clustering: Louvain
+## Community Clustering: Louvain
 
 .center[![](../../images/scrna-intro/commgraph1.svg)]
 
+.reduce90[
 Aim: Maximise internal links and minimise external links
+]
 
 ???
 Louvain clustering is a widely used type of community clustering for single cell data. Here each cell is assigned a neighbourhood of its own and the number of internal and external links between neighbourhoods are counted. for each iteration, a random cell is selected and brought within the neighbourhood of another cell, and the internal and external links are once again counted. If the new configuration has reduced the number of external links in favour of more internal links, then the configuration is kept. 
 
 ---
 
-### Community Clustering: Louvain
+## Community Clustering: Louvain
 
 .center[![](../../images/scrna-intro/commgraph2.svg)]
 
+.reduce90[
 * Randomly pick a cell and try to place it in a neighbour's cluster
   * Accept if Internal:External increases
   * Reject and pick another
-  
+]
+
 ???
 If the new configuration has instead increased the number of external links, then the configuration is rejected and another cell is picked and tested. By performing this multiple times, a community structure of cells is built to whichever degree of specificity the user desires.
 
 ---
 
-### Summary
+# Summary
 
-.left-column70[![](../../images/scrna-intro/rna_cells_singlerez.svg)]
+.pull-left-large[![](../../images/scrna-intro/rna_cells_singlerez.svg)]
 
 .pull-right[
+.reduce90[
 * Single-cell datasets are vast and sparsely populated
 
 * Quality filtering and normalisation are required
@@ -1054,6 +1113,7 @@ If the new configuration has instead increased the number of external links, the
 
 * Many ways to analyse the data
  * Play with it!
+]
 ]
 
 ???
@@ -1068,11 +1128,3 @@ Single cell analysis is non-trivial, and each stage, from the filtering to the n
 ???
 In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard. Please explore them to better develop your understanding.
 
----
-
-## Thanks
-## for
-## Watching!
-
-???
-Thank you!
