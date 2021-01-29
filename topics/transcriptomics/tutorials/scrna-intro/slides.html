@@ -46,7 +46,8 @@ contributors:
 An introduction to scRNA-seq data analysis
 
 ???
-Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis workshop. Here we will walk you through some of the basics and concepts when dealing with single cell data.
+- Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis workshop.
+- Here we will walk you through some of the basics and concepts when dealing with single cell data.
 
 ---
 
@@ -69,7 +70,10 @@ Greetings everybody and welcome to the Galaxy single cell RNA-seq analysis works
 
 
 ???
-Let's start with what the differences are between Bulk RNA-seq and single cell RNA seq data. With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues. Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high. The differential expression is then measured as the relative expression of a given gene between one tissue and and another.
+- Let's start with what the differences are between Bulk RNA-seq and single cell RNA seq data.
+- With Bulk RNA-seq we compare two tissues by looking at the average expression of each gene detected across each of the tissues.
+- Due to the number of RNA molecules being considered, the sequencing depth and the strength of the analysis is reasonably high.
+- The differential expression is then measured as the relative expression of a given gene between one tissue and and another.
 
 ---
 
@@ -91,7 +95,12 @@ Let's start with what the differences are between Bulk RNA-seq and single cell R
 
 
 ???
-With single cell RNA-seq analysis, the stage shifts away from measuring the average expression of a tissue, and towards measuring the specific gene expression of individual cells within those tissues. Here we are no longer comparing tissue against tissue, but cell against cell. Each cell is assigned a gene profile which describes the relative abundance of genes detected within it. Many cells share the same gene profile, where a gene profile ideally describes a cell type. Sometimes we need to compare single-cell datasets across tissues, and we see that many cells across tissues share the same cell type. For example, look at the purple and green gene profiles which are shared across both tissues.
+- With single cell RNA-seq analysis, the stage shifts away from measuring the average expression of a tissue, and towards measuring the specific gene expression of individual cells within those tissues.
+- Here we are no longer comparing tissue against tissue, but cell against cell.
+- Each cell is assigned a gene profile which describes the relative abundance of genes detected within it.
+- Many cells share the same gene profile, where a gene profile ideally describes a cell type.
+- Sometimes we need to compare single-cell datasets across tissues, and we see that many cells across tissues share the same cell type.
+- For example, look at the purple and green gene profiles which are shared across both tissues.
 
 
 ---
@@ -107,9 +116,10 @@ With single cell RNA-seq analysis, the stage shifts away from measuring the aver
   * New methods of quality control
   * New methods of analysis
 ]
-  
+
 ???
-New technologies means new methods and techniques to harness the new features that come with them. Single-cell RNA-seq data requires different means of library preparation, sequencing, quality control and analysis.
+- New technologies means new methods and techniques to harness the new features that come with them.
+- Single-cell RNA-seq data requires different means of library preparation, sequencing, quality control and analysis.
 
 ---
 
@@ -156,7 +166,8 @@ __Single-cell RNA-seq__
 ]
 
 ???
-For single cell analysis, the process is much the same, except that each sample is a cell, and must therefore be sequenced separately from other cells. Once isolated, unique barcodes are added to each cell, and then sequenced.
+- For single cell analysis, the process is much the same, except that each sample is a cell, and must therefore be sequenced separately from other cells.
+- Once isolated, unique barcodes are added to each cell, and then sequenced.
 
 
 --
@@ -262,7 +273,9 @@ Another method is flow cytometry, which reduces the human-error component of thi
 ]
 
 ???
-Flow cytometry floats cells in a shallow liquid bath and streams them along a narrow channel, just narrow for one cell to pass through. Cells can be screened by a variety of properties this way, such as by their light scatter properties, and from fluorescent cell labelling. Cells can be tagged and isolated in this manner.
+- Flow cytometry floats cells in a shallow liquid bath and streams them along a narrow channel, just narrow for one cell to pass through.
+- Cells can be screened by a variety of properties this way, such as by their light scatter properties, and from fluorescent cell labelling.
+- Cells can be tagged and isolated in this manner.
 
 ---
 
@@ -286,7 +299,8 @@ Flow cytometry floats cells in a shallow liquid bath and streams them along a na
 ]
 
 ???
-Optical scatter properties can be used to probe size and consistency of the cell, where cells with a smaller size than the laser wavelength yield lower intensities and more inconsistent scatter patterns. There are two main types of optical scatter: Forward scatter, and Side scatter.
+- Optical scatter properties can be used to probe size and consistency of the cell, where cells with a smaller size than the laser wavelength yield lower intensities and more inconsistent scatter patterns.
+- There are two main types of optical scatter: Forward scatter, and Side scatter.
 
 ---
 
@@ -350,7 +364,8 @@ Side scatter is perpendicular to the main laser, and measures the granularity of
 ]
 
 ???
-Cells can also be gated and characterised by their cell surface markers via FACS. By plotting different surface marker intensities against one another, cells can be separated, gated, and labelled based on these fluorescent properties.
+- Cells can also be gated and characterised by their cell surface markers via FACS.
+- By plotting different surface marker intensities against one another, cells can be separated, gated, and labelled based on these fluorescent properties.
 
 ---
 
@@ -361,7 +376,10 @@ Cells can also be gated and characterised by their cell surface markers via FACS
 .footnote[Add unique barcodes to every transcript in a cell]
 
 ???
-Once isolated, cells can be barcoded. Barcodes are unique sequences that are added to each RNA molecule. They are not unique to the molecule, but unique to the cell such that any two RNA molecules will be tagged by the same cell barcode, should they exist in the same cell. RNA molecules from different cells will have different cell barcodes.
+- Once isolated, cells can be barcoded.
+- Barcodes are unique sequences that are added to each RNA molecule.
+- They are not unique to the molecule, but unique to the cell such that any two RNA molecules will be tagged by the same cell barcode, should they exist in the same cell.
+- RNA molecules from different cells will have different cell barcodes.
 
 ---
 
@@ -399,7 +417,9 @@ Once the RNA molecules have been tagged by cell barcodes, they can be amplified,
 ]
 
 ???
-PCR amplifies the gene products to make them more easily detectable during sequencing. When there is a lot of gene product to amplify, as is the case for bulk RNA-seq, PCR works quite well in amplifying all products in a reasonably well-represented manner. However, in the case of single-cell products, the amount to amplify is very small, and many unique reads might be missed during this phase whereas others may be over amplified, as shown in the blue and red transcripts in the example.
+- PCR amplifies the gene products to make them more easily detectable during sequencing.
+- When there is a lot of gene product to amplify, as is the case for bulk RNA-seq, PCR works quite well in amplifying all products in a reasonably well-represented manner.
+- However, in the case of single-cell products, the amount to amplify is very small, and many unique reads might be missed during this phase whereas others may be over amplified, as shown in the blue and red transcripts in the example.
 
 ---
 
@@ -424,7 +444,8 @@ PCR amplifies the gene products to make them more easily detectable during seque
 
 ???
 
-To guard against this type of amplification bias, we can add a random element to the barcoding. These random barcodes known as UMIs, uniquely tag transcripts such that any two transcripts of the same gene are likely to have different random barcodes.
+- To guard against this type of amplification bias, we can add a random element to the barcoding.
+- These random barcodes known as UMIs, uniquely tag transcripts such that any two transcripts of the same gene are likely to have different random barcodes.
 
 ---
 
@@ -445,7 +466,8 @@ To guard against this type of amplification bias, we can add a random element to
 ]
 
 ???
-Let us consider the example to the left: we have 2 red transcripts and 2 blue transcripts inside the cell, which after amplification equate to 6 red transcripts and 3 blue transcripts. If we were to compare the differential gene expression between the red and blue transcripts, just by looking at the amplified reads, we would come to the false conclusion that the red transcripts are expressed twice more than the blue.
+- Let us consider the example to the left: we have 2 red transcripts and 2 blue transcripts inside the cell, which after amplification equate to 6 red transcripts and 3 blue transcripts.
+- If we were to compare the differential gene expression between the red and blue transcripts, just by looking at the amplified reads, we would come to the false conclusion that the red transcripts are expressed twice more than the blue.
 
 
 --
@@ -501,7 +523,8 @@ However if we group the reads by their UMIs, and then count only the number of u
 ]
 
 ???
-UMIs are relatively random, but not truly random. Notice that the pink UMI appears twice: once in the blue transcript and once in the pink transcript.
+- UMIs are relatively random, but not truly random.
+- Notice that the pink UMI appears twice: once in the blue transcript and once in the pink transcript.
 
 
 --
@@ -566,7 +589,9 @@ Edit distances guard against **sequencing errors.**
 
 ???
 
-Consider a set of barcodes of length 5 with an edit distance of 1 between adjacent barcodes, and another set with an edit distance of 2. The former is not robust against common sequencing errors of 1 base pair, but the latter only allows for half the number of barcodes. This trade-off between the number of available barcodes and guarding against sequencing errors is instrumental in the design of cell barcodes and UMIs.
+- Consider a set of barcodes of length 5 with an edit distance of 1 between adjacent barcodes, and another set with an edit distance of 2.
+- The former is not robust against common sequencing errors of 1 base pair, but the latter only allows for half the number of barcodes.
+- This trade-off between the number of available barcodes and guarding against sequencing errors is instrumental in the design of cell barcodes and UMIs.
 
 ---
 
@@ -628,7 +653,9 @@ For Each Cell:
 
 
 ???
-Then we add random UMIs to all transcripts, which further tag the molecules. These can then be used deduplicate the transcripts after amplification. After amplification we need to perform some quality control.
+- Then we add random UMIs to all transcripts, which further tag the molecules.
+- These can then be used deduplicate the transcripts after amplification.
+- After amplification we need to perform some quality control.
 
 ---
 
@@ -642,7 +669,13 @@ Then we add random UMIs to all transcripts, which further tag the molecules. The
 * Min-Max filtering helps clip off the fat-tails of a distribution.
 
 ???
-One way to do this is to set thresholds on the limits of detectability for genes and for cells. Consider an analysis governed only by 3 genes (G1, G2 and G3), and 5 cells (A, B, C, D and E). The first row of the top table defines the library size, which is total number of messenger RNAs across all genes in each cell. The subsequent rows are the thresholds of gene detectability, displaying how many genes are detected in each cell for genes greater than the threshold amounts of 0 to 4. We see that even a threshold of greater than 3 transcripts detected in a given cell  still keeps 3 cells in the analysis: B, C, and E. In the lower table, the opposite is represented, with the total number of transcripts across all cells for each gene. By setting thresholds of detectability, we can see how many cells are described by the gene for that threshold. In both cases, we can see that if we set the thresholds too low, then we risk keeping low quality genes or cells, but if we set the thresholds of detectability too high, then we risk losing too many.
+- One way to do this is to set thresholds on the limits of detectability for genes and for cells.
+- Consider an analysis governed only by 3 genes (G1, G2 and G3), and 5 cells (A, B, C, D and E).
+- The first row of the top table defines the library size, which is total number of messenger RNAs across all genes in each cell.
+- The subsequent rows are the thresholds of gene detectability, displaying how many genes are detected in each cell for genes greater than the threshold amounts of 0 to 4.
+- We see that even a threshold of greater than 3 transcripts detected in a given cell  still keeps 3 cells in the analysis: B, C, and E. In the lower table, the opposite is represented, with the total number of transcripts across all cells for each gene.
+- By setting thresholds of detectability, we can see how many cells are described by the gene for that threshold.
+- In both cases, we can see that if we set the thresholds too low, then we risk keeping low quality genes or cells, but if we set the thresholds of detectability too high, then we risk losing too many.
 
 ---
 
@@ -650,8 +683,8 @@ One way to do this is to set thresholds on the limits of detectability for genes
 
 .pull-left-large[
 
-*Bulk RNA-seq*: High Coverage 
-  
+*Bulk RNA-seq*: High Coverage
+
 |            |  T1 | T2 | T3 |
 |:-----------|----:|---:|----|
 | **GeneA** | 100 | 80 | 40 |
@@ -662,8 +695,8 @@ One way to do this is to set thresholds on the limits of detectability for genes
 
 <br />
 
-*scRNA-seq*: Very Low Sequencing Depth 
-  
+*scRNA-seq*: Very Low Sequencing Depth
+
 |            | C1 | C2 | C3 | C4 | C5 |
 |:-----------|---:|---:|---:|---:|---:|
 | **GeneA** |  0 |  0 |  2 |  0 |  1 |
@@ -687,7 +720,10 @@ $$DESeq(s,g) = \frac{X\_{sg}}{Med(R\_{s})}$$
 ]
 
 ???
-Filtering can be a luxury however, as many single-cell RNA-seq datasets have typically low sequencing depth compared to bulk RNA-seq. During the process of normalisation, samples are scaled against one another to make them more comparable. This is normally performed by using median values. For example, for DE-Seq normalisation, the geometric mean count for a cell is taken, and each gene value in that cell is divided by it and by the median value of all geometric means of all cells. If median gene expression is high, then this normalisation method works quite well.
+- Filtering can be a luxury however, as many single-cell RNA-seq datasets have typically low sequencing depth compared to bulk RNA-seq.
+- During the process of normalisation, samples are scaled against one another to make them more comparable.
+- This is normally performed by using median values. For example, for DE-Seq normalisation, the geometric mean count for a cell is taken, and each gene value in that cell is divided by it and by the median value of all geometric means of all cells.
+- If median gene expression is high, then this normalisation method works quite well.
 
 --
 
@@ -696,7 +732,8 @@ Can't divide by zero!
 ]
 
 ???
-But if the median gene expression is zero, as is often the case with single-cell data, then we have the problem of dividing by zero. There are methods to get around these zero counts.
+- But if the median gene expression is zero, as is often the case with single-cell data, then we have the problem of dividing by zero.
+- There are methods to get around these zero counts.
 
 ---
 
@@ -720,7 +757,8 @@ But if the median gene expression is zero, as is often the case with single-cell
 ]
 
 ???
-One such method is the SCRAN method which works by creating overlapping pools of cells such that any individual cell is characterized by cells of similar library sizes. The method involves splitting all cells into an odd and even group by their library size, and arranging them onto a ring structure where neighbouring cells on the ring have similar sizes.
+- One such method is the SCRAN method which works by creating overlapping pools of cells such that any individual cell is characterized by cells of similar library sizes.
+- The method involves splitting all cells into an odd and even group by their library size, and arranging them onto a ring structure where neighbouring cells on the ring have similar sizes.
 
 ---
 
@@ -739,14 +777,15 @@ One such method is the SCRAN method which works by creating overlapping pools of
     1. Derive a size factor by dividing by the reference cell
 
 1. For each cell
-    1. Find which pools it belongs to 
+    1. Find which pools it belongs to
     1. Build a linear model using these size factors
     1. Estimate the size factor of the cell on this linear model
 ]
 ]
 
 ???
-Overlapping pools of fixed sizes are defined, resulting in each cell being defined by multiple pools. A linear model for that cell can then be built by the pools it occurs within, and normalisation factors for all cells can be determined this way.
+- Overlapping pools of fixed sizes are defined, resulting in each cell being defined by multiple pools.
+- A linear model for that cell can then be built by the pools it occurs within, and normalisation factors for all cells can be determined this way.
 
 ---
 
@@ -757,7 +796,8 @@ Overlapping pools of fixed sizes are defined, resulting in each cell being defin
 .center[![](../../images/scrna-intro/scran_pooling.svg)]
 
 ???
-By this method, the issue of low sequence coverage is worked around by turning cells with low library sizes into useful components of a size factor that can be applied to similar cells. Such novel normalization methods were commonplace a few years ago, but as sequencing technologies have improved, the issue of many zero counts in a matrix becomes less important, and normalisation size factors can be derived using bulk RNA-seq methods once again.
+- By this method, the issue of low sequence coverage is worked around by turning cells with low library sizes into useful components of a size factor that can be applied to similar cells.
+- Such novel normalization methods were commonplace a few years ago, but as sequencing technologies have improved, the issue of many zero counts in a matrix becomes less important, and normalisation size factors can be derived using bulk RNA-seq methods once again.
 
 
 ---
@@ -782,7 +822,9 @@ By this method, the issue of low sequence coverage is worked around by turning c
 ]
 
 ???
-Other factors that we need to take into account during a single cell RNA analysis are the unwanted factors that can confound the analysis. Ideally we wish to see the gene profiles that separate different types of cells are driven by biological variance. There is however confounding variation from both technical and biological sources that are not useful to the analysis but do contribute to the variance.
+- Other factors that we need to take into account during a single cell RNA analysis are the unwanted factors that can confound the analysis.
+- Ideally we wish to see the gene profiles that separate different types of cells are driven by biological variance.
+- There is however confounding variation from both technical and biological sources that are not useful to the analysis but do contribute to the variance.
 
 ---
 
@@ -806,7 +848,12 @@ Other factors that we need to take into account during a single cell RNA analysi
 ]
 
 ???
-Confounding biological variance appears in two forms: Transcriptional bursting, and Cell cycle variation. Transcriptional bursting is a phenomenon that occurs in cells in which transcription occurs in discrete states of active and inactive, where the interval between these states is hard to model. In bulk RNA-seq, this phenomenon is unnoticeable as the effects are averaged out over many cells. But in single cell, two cells of the same type may exhibit different gene profiles simply because one cell was actively transcribing and the other was not. This is not something we can control for in the analysis, but it is something we should be aware of when understanding why cell clusters can be noisy. Cell cycle variation on the other hand is a much more well understood process, where the amount of RNA in a cell is approximately double that from a cell of the same type due to one being in the early G1 phase and the other being in the M-phase during the cell cycle. There are genes which are known to covary with the cell cycle, and so by regressing the effect of these genes, we can control against the cell cycle.
+- Confounding biological variance appears in two forms: Transcriptional bursting, and Cell cycle variation.
+- Transcriptional bursting is a phenomenon that occurs in cells in which transcription occurs in discrete states of active and inactive, where the interval between these states is hard to model.
+- In bulk RNA-seq, this phenomenon is unnoticeable as the effects are averaged out over many cells. But in single cell, two cells of the same type may exhibit different gene profiles simply because one cell was actively transcribing and the other was not.
+- This is not something we can control for in the analysis, but it is something we should be aware of when understanding why cell clusters can be noisy.
+- Cell cycle variation on the other hand is a much more well understood process, where the amount of RNA in a cell is approximately double that from a cell of the same type due to one being in the early G1 phase and the other being in the M-phase during the cell cycle.
+- There are genes which are known to covary with the cell cycle, and so by regressing the effect of these genes, we can control against the cell cycle.
 
 
 ---
@@ -832,7 +879,9 @@ Confounding biological variance appears in two forms: Transcriptional bursting, 
 ]
 
 ???
-Confounding technical variance appears in a three forms: Amplification bias, Dropout events, and Library size variation. Amplification bias can be mitigated by UMIs as demonstrated before. Dropout events give rise to the prevalent zeroes in the count matrices, and their effect can be reduced by using clever normalisation techniques such as the pooling method shown previously, as well as by using better sequencing methods.
+- Confounding technical variance appears in a three forms: Amplification bias, Dropout events, and Library size variation.
+- Amplification bias can be mitigated by UMIs as demonstrated before.
+- Dropout events give rise to the prevalent zeroes in the count matrices, and their effect can be reduced by using clever normalisation techniques such as the pooling method shown previously, as well as by using better sequencing methods.
 
 ---
 
@@ -845,7 +894,8 @@ Confounding technical variance appears in a three forms: Amplification bias, Dro
 * Mitigated via normalisation
 
 ???
-Library size variation arises for a variety of different reasons, but is the main source of variation within an analysis. Like bulk RNA-seq, this is reduced with good normalisation methods.
+- Library size variation arises for a variety of different reasons, but is the main source of variation within an analysis.
+- Like bulk RNA-seq, this is reduced with good normalisation methods.
 
 ---
 
@@ -855,7 +905,7 @@ Consider:
  * 1,000s of Cells
  * 10,000s of Genes
  * 10k dimensional dataset, with 1k observations
- 
+
 Aim:
  * Find groupings of Cells in a subset of these Genes
 
@@ -864,7 +914,11 @@ Note:
 * How to represent this?
 
 ???
-Once we have removed unwanted confounders from the analysis we have the issue of quantifying the relationships between cells. From a data analysis standpoint, we treat each cell as an observation, and each gene as a variable. For large genomes this means extremely high dimensional datasets. Cells exist as points in this extremely sparsely populated high dimensional space, making it difficult to see the natural groupings. The high dimensional space can be reduced a lot by simply filtering out genes that do not appear to be differentially expressed across all cells. To find the relationships between these cells however, we need to define the distances between cells.
+- Once we have removed unwanted confounders from the analysis we have the issue of quantifying the relationships between cells.
+- From a data analysis standpoint, we treat each cell as an observation, and each gene as a variable.
+- For large genomes this means extremely high dimensional datasets. Cells exist as points in this extremely sparsely populated high dimensional space, making it difficult to see the natural groupings.
+- The high dimensional space can be reduced a lot by simply filtering out genes that do not appear to be differentially expressed across all cells.
+- To find the relationships between these cells however, we need to define the distances between cells.
 
 ---
 
@@ -873,7 +927,10 @@ Once we have removed unwanted confounders from the analysis we have the issue of
 ![](../../images/scrna-intro/raceid_distance.svg)
 
 ???
-A distance matrix does just this, defining the distance between any two cells by a single score. Here we use the Euclidean distance on a 3 dimensional dataset of 3 genes (G1, G2 and G3), and 3 cells (R, P and V). The distance between any two cells can be calculated as the sum of squares of the difference in gene values. Note how the distance matrix is symmetrical along the diagonal, confirming that for example the distance from cells R to V is the distance from V to R as expected.
+- A distance matrix does just this, defining the distance between any two cells by a single score.
+- Here we use the Euclidean distance on a 3 dimensional dataset of 3 genes (G1, G2 and G3), and 3 cells (R, P and V).
+- The distance between any two cells can be calculated as the sum of squares of the difference in gene values.
+- Note how the distance matrix is symmetrical along the diagonal, confirming that for example the distance from cells R to V is the distance from V to R as expected.
 
 ---
 
@@ -884,7 +941,9 @@ A distance matrix does just this, defining the distance between any two cells by
 * Perform *K-nearest neighbours* to connect edges to cell vertices.
 
 ???
-Once a distance matrix is generated, we can perform K-nearest neighbours upon the distance matrix where directed edges are generated between cells. For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row's cell has to the selected column cells. If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.   
+- Once a distance matrix is generated, we can perform K-nearest neighbours upon the distance matrix where directed edges are generated between cells.
+- For each row of the distance matrix, K of the cells with the smallest distance values are selected representing the nearest neighbour that current row's cell has to the selected column cells.
+- If the edges are mutually shared between neighbouring cells, then this is called a shared nearest neighbour approach.
 
 
 ---
@@ -910,7 +969,11 @@ Once a distance matrix is generated, we can perform K-nearest neighbours upon th
 ]
 
 ???
-We can represent this 3 dimensional space easily as 3 independent axes with points that denote the cells. Extrapolating this relatively low dimensional example set to a real dataset which thousands of dimensions is beyond the scope of human possibility. Dimensional reduction is a type of technique that takes a high dimensional dataset and produces a low dimensional representation, usually 2 dimensional, that tries to preserve the distances between the data points.  Here the relative differences between cells is maintained in both the high and low dimensional representations. There are  many different kinds of dimension reduction techniques, each with their own strengths and weaknesses dependent on the type and the dimensionality of the data.
+- We can represent this 3 dimensional space easily as 3 independent axes with points that denote the cells.
+- Extrapolating this relatively low dimensional example set to a real dataset which thousands of dimensions is beyond the scope of human possibility.
+- Dimensional reduction is a type of technique that takes a high dimensional dataset and produces a low dimensional representation, usually 2 dimensional, that tries to preserve the distances between the data points.
+- Here the relative differences between cells is maintained in both the high and low dimensional representations.
+- There are  many different kinds of dimension reduction techniques, each with their own strengths and weaknesses dependent on the type and the dimensionality of the data.
 
 
 ---
@@ -929,7 +992,9 @@ We can represent this 3 dimensional space easily as 3 independent axes with poin
 ]
 
 ???
-Once the number of variables of the dataset have been sufficiently reduced via filtering and dimensional reduction, clustering can be performed more easily. Here in this 2D projection, each circle is a cell, and the unique colours depict the clusters they have been assigned to. The physical distances between the groups of coloured cells tell us how good the clustering is for this projection.
+- Once the number of variables of the dataset have been sufficiently reduced via filtering and dimensional reduction, clustering can be performed more easily.
+- Here in this 2D projection, each circle is a cell, and the unique colours depict the clusters they have been assigned to.
+- The physical distances between the groups of coloured cells tell us how good the clustering is for this projection.
 
 
 ---
@@ -949,7 +1014,9 @@ Once the number of variables of the dataset have been sufficiently reduced via f
 ]
 
 ???
-By inspecting the top differentially expressed genes in each cluster against all other clusters, clues to the type of cell that the cluster describes can be found. Cell types are often characterized by the expression of specific marker genes, and the presence of these genes are strong indicators of type. Marker gene discovery can then be used to annotate the clusters.
+- By inspecting the top differentially expressed genes in each cluster against all other clusters, clues to the type of cell that the cluster describes can be found.
+- Cell types are often characterized by the expression of specific marker genes, and the presence of these genes are strong indicators of type.
+- Marker gene discovery can then be used to annotate the clusters.
 
 
 ---
@@ -988,7 +1055,8 @@ We can also further derive the relationships between these clusters by computing
 
 
 ???
-The types of clustering you are likely to encounter in an analysis is dependent on the input datasets, where cells taken from late stage samples are less likely to be bunched together and are more likely to yield large visible gaps known as hard clusters that clearly defined different types. Earlier stage datasets are more likely to yield softer clusters, where neighbouring clusters share soft boundaries as clusters intermingle slightly with one another.
+- The types of clustering you are likely to encounter in an analysis is dependent on the input datasets, where cells taken from late stage samples are less likely to be bunched together and are more likely to yield large visible gaps known as hard clusters that clearly defined different types.
+- Earlier stage datasets are more likely to yield softer clusters, where neighbouring clusters share soft boundaries as clusters intermingle slightly with one another.
 
 ---
 
@@ -1001,7 +1069,7 @@ The types of clustering you are likely to encounter in an analysis is dependent 
 ]
 
 ???
-Soft clustering is to be expected, since although clustering is a statistical method for discretely partitioning  data, the underlying cell biology of the data is a continuous process, where cells transition from one well-defined state to another through intermediate stages which are represented in-between two cluster centres.
+Soft clustering is to be expected, since although clustering is a statistical method for discretely partitioning data, the underlying cell biology of the data is a continuous process, where cells transition from one well-defined state to another through intermediate stages which are represented in-between two cluster centres.
 
 ---
 
@@ -1030,11 +1098,10 @@ Soft clustering is to be expected, since although clustering is a statistical me
 
 
 ???
-Because of the continuous nature of these single-cell datasets and the extremely high dimensionality of the data, discrete partitioning is often a poor model for partitioning the data.
-
-If we instead assume that cell clusters are related to one another via transitional cells which would naturally lie in-between clusters, then manifold learning techniques are better suited. These techniques derive an expression landscape that can not only be used to relate clusters to one another, but also can be used to infer lineage and hierarchy.
-
-To actually perform the clustering there are three commonly-used methods: K-means, hierarchical and community clustering.
+- Because of the continuous nature of these single-cell datasets and the extremely high dimensionality of the data, discrete partitioning is often a poor model for partitioning the data.
+- If we instead assume that cell clusters are related to one another via transitional cells which would naturally lie in-between clusters, then manifold learning techniques are better suited.
+- These techniques derive an expression landscape that can not only be used to relate clusters to one another, but also can be used to infer lineage and hierarchy.
+- To actually perform the clustering there are three commonly-used methods: K-means, hierarchical and community clustering.
 
 ---
 
@@ -1054,12 +1121,15 @@ To actually perform the clustering there are three commonly-used methods: K-mean
 *K-medians*
    * Same as above, but use median position instead
    * Less influenced by outliers
-   
+
 ]
 ]
 
 ???
-K-means and K-medians follow the same method: the number of clusters are defined before hand, and initialised in random positions. The positions are then updated by the contribution of the cells more closer to it than to other positions. This process occurs multiples times until the positions no longer significantly change or until a set number of iterations have been achieved. The final assignment of each cell then becomes the cluster assignment.
+- K-means and K-medians follow the same method: the number of clusters are defined before hand, and initialised in random positions.
+- The positions are then updated by the contribution of the cells more closer to it than to other positions.
+- This process occurs multiples times until the positions no longer significantly change or until a set number of iterations have been achieved.
+- The final assignment of each cell then becomes the cluster assignment.
 
 ---
 
@@ -1080,7 +1150,10 @@ K-means and K-medians follow the same method: the number of clusters are defined
 ]
 
 ???
-Hierarchical clustering is more flexible and does not need an initial parameter to define the number of resulting clusters. Here the two closest points in a distance matrix are joined into a single group, distances are recalculated, and the two closest points are once again joined. This process repeats until all data has been consumed into one. By tracing the process backwards, a hierarchy can be established that is represented by a dendrogram.
+- Hierarchical clustering is more flexible and does not need an initial parameter to define the number of resulting clusters.
+- Here the two closest points in a distance matrix are joined into a single group, distances are recalculated, and the two closest points are once again joined.
+- This process repeats until all data has been consumed into one.
+- By tracing the process backwards, a hierarchy can be established that is represented by a dendrogram.
 
 ---
 
@@ -1094,7 +1167,10 @@ Aim: Maximise internal links and minimise external links
 ]
 
 ???
-Louvain clustering is a widely used type of community clustering for single cell data. Here each cell is assigned a neighbourhood of its own and the number of internal and external links between neighbourhoods are counted. for each iteration, a random cell is selected and brought within the neighbourhood of another cell, and the internal and external links are once again counted. If the new configuration has reduced the number of external links in favour of more internal links, then the configuration is kept. 
+- Louvain clustering is a widely used type of community clustering for single cell data.
+- Here each cell is assigned a neighbourhood of its own and the number of internal and external links between neighbourhoods are counted.
+- For each iteration, a random cell is selected and brought within the neighbourhood of another cell, and the internal and external links are once again counted.
+- If the new configuration has reduced the number of external links in favour of more internal links, then the configuration is kept.
 
 ---
 
@@ -1135,7 +1211,10 @@ If the new configuration has instead increased the number of external links, the
 ]
 
 ???
-Single cell analysis is non-trivial, and each stage, from the filtering to the normalisation to the dimension reduction and the clustering can drastically affect the outcome of the analysis. Due to the variability in the analysis, one should not panic when faced with uncertainty. The goal is to play around with the data until it begins to reflect the biology. This can take many many tries to achieve, and it may never be perfect, but the idea is to try as many different ways as possible to see what robust conclusions you can come to.
+- Single cell analysis is non-trivial, and each stage, from the filtering to the normalisation to the dimension reduction and the clustering can drastically affect the outcome of the analysis.
+- Due to the variability in the analysis, one should not panic when faced with uncertainty.
+- The goal is to play around with the data until it begins to reflect the biology.
+- This can take many many tries to achieve, and it may never be perfect, but the idea is to try as many different ways as possible to see what robust conclusions you can come to.
 
 ---
 
@@ -1144,5 +1223,6 @@ Single cell analysis is non-trivial, and each stage, from the filtering to the n
 ![](../../images/scrna-intro/training_single_cell.png)
 
 ???
-In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard. Please explore them to better develop your understanding.
+- In this regard, the vast UseGalaxy resources can be put to good use by testing out the many different paths of the analysis, and the Galaxy Training Network provides tutorials and hands-on trainings to assist you in this regard.
+- Please explore them to better develop your understanding.
 
