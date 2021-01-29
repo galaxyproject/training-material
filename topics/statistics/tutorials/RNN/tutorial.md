@@ -10,7 +10,7 @@ objectives:
 - Understand the difference between feedforward neural networks (FNN) and RNN
 - Learn various RNN types and acrchitectures
 - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy
-time_estimation: 3H
+time_estimation: 2H
 contributors:
 - Kaivan Kamali
 
@@ -22,30 +22,88 @@ contributors:
 
 <!-- This is a comment. -->
 
-In feedforward neural networks (FNN) all the fields of a training example are presented 
-to the network at once, after which the the network generates an output. For example, a 
-lung X-ray image is passed to a FNN, and the network predicts tumor or no tumor. By contrast, 
-in RNNs the training example fields are presented to the network one at a time. For example, 
-a sequence of English words is passed to an RNN, one at a time, and the network generates a 
-sequence of Persian words, one at a time. RNNs handle sequential data, whether its temporal or ordinal.   
+Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a 
+human brain work. In the past decade, there has been a huge resurgence of neural networks thanks 
+to the vast availability of training data and enormous increases in computing capacity (Successfully 
+training complex neural networks in some domains requires lots of data and compute capacity). There 
+are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss 
+the recurrent neural networks and explain how they differ from feedforward variants. We also describe 
+various RNN architectures and solve a sentiment analysis problem using RNN in Galaxy.       
 
-![Alternative text](../../images/FFNN_no_hidden.png "Simple feedforward neural network")
+> ### Agenda
+>
+> In this tutorial, we will cover:
+>
+> 1. TOC
+> {:toc}
+>
+{: .agenda}
 
-Figure 1 shows a simple FNN, where the input is 3 dimensional. Each input field is multiplied by a 
+# Review of feedforward neural networks (FNN)
+
+In feedforward neural networks (FNN) all the fields of a training example are presented
+to the network at once, after which the the network generates an output. For example, a
+lung X-ray image is passed to a FNN, and the network predicts tumor or no tumor. By contrast,
+in RNNs the training example fields are presented to the network one at a time. For example,
+a sequence of English words is passed to an RNN, one at a time, and the network generates a
+sequence of Persian words, one at a time. RNNs handle sequential data, whether its temporal or ordinal.
+
+## Single layer FNN
+
+![Alternative text](../../images/FFNN_no_hidden.png "Single layer feedforward neural network")
+
+Figure 1 shows a single layer FNN, where the input is 3 dimensional. Each input field is multiplied by a
 weight. Afterwards, the results are summed up, along with a bias, and passed to an activation function.
 
 ![Alternative text](../../images/activation.gif "Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.")
 
-The activation function can have many forms (Sigmoid, Tanh, ReLU, linear, step function, isign function, etc.)
+The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
+Output layer neurons usually have sigmoid or tanh functions.
 
 ![Alternative text](../../images/sigmoid.gif "Sigmoid activation function")
 
-Such simple FNN cannot solve the XOR problem (Minsky and Papert). Adding one (or more) hidden layers to 
-FNN allows it solve the XOR problem. In theory a FNN with one hidden layer can represent any function (add reference), 
-although in practice training such a function is very difficult (if not impossible), hence, we usually
-add multiple hidden layers to solve complex problems.   
+## FFN with hidden layer
+
+Minsky and Papert published a book in 1969 that showed that a single layer FNN cannot solve problems in which 
+the data is not linearly separable (such as the XOR problem). Adding one (or more) hidden layers to FNN enables 
+it solve problems in which data is non-linearly separable. In theory a FNN with one hidden layer can represent 
+any function (add reference), although in practice training such a model is very difficult (if not impossible), 
+hence, we usually add multiple hidden layers to solve complex problems.   
 
 ![Alternative text](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are ommitted for clarity")
+
+## Learning algorithm 
+
+The learning algorithm incrementally tweaks the network weights, so that the network error on the training 
+set is minimized. Training set is composed of many training examples. Each training set is fed to the network 
+and the network output is compared to the expected output. We need to define a **loss function** to objectively 
+measure how much the predicted output is off of the expected output. For classification problems we use the 
+**cross entropy** loss function.     
+
+![Alternative text](../../images/CrossEntropy.gif "Cross entropy loss function")
+
+Loss function is calculated for each training example. The average of the calculated loss functions over all training 
+examples in the training set is the **Cost function**. The goal of the learning algorithm is to minimize the cost 
+function. The cost function is a function of network weightsand biases of all neurons in all layers. The **backpropagation** 
+learning algorithm iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights 
+and biases in the opposite direction of the gradient, to find the local minimum.
+
+![Alternative text](../../images/CostFunction.gif "Cross entropy cost function")
+  
+# Recurrent neural networks
+
+## Possible inputs/outputs
+## RNN architectures
+
+Section and subsection titles will be displayed in the tutorial index on the left side of
+the page, so try to make them informative and concise!
+
+# Text representation schemes
+
+## Bag of words
+## Text frequency inverse document frequency
+## Word2Vec
+
 
 You may want to cite some publications; this can be done by adding citations to the
 bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
@@ -62,39 +120,6 @@ tutorial.
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
-
-> ### Agenda
->
-> In this tutorial, we will cover:
->
-> 1. TOC
-> {:toc}
->
-{: .agenda}
-
-# Review of feedforward neural networks (FNN)
-
-## Perceptron
-## Multi-layer perceptron
-## Learning algorithm for
-
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
-
-# Recurrent neural networks
-
-## Possible inputs/outputs 
-## RNN architectures
-
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Text representation schemes
-
-## Bag of words
-## Text frequency inverse document frequency
-## Word2Vec
 
 # Hands-on Sections
 Below are a series of hand-on boxes, one for each tool in your workflow file.
