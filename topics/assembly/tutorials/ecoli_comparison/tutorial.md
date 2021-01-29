@@ -43,8 +43,6 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 
 [*E. coli*](https://en.wikipedia.org/wiki/Escherichia_coli) is one of the most studied organisms. There are thousands of complete genomes (in fact, the total number of *E. coli* assemblies in Genbank is over 10,500). Here we will shows how to uploaded all (!) complete *E. coli* genomes at once.
 
-> ### {% icon comment %} Slow steps ahead
-> The first part of this tutorial can take a significant amount of time to find the most related genomes. If you want, you can upload this (outdated) copy of the NCBI E. Coli Genomes table to your history:
 >
 > 1. Import the following URL:
 >
@@ -56,6 +54,7 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 >
 > 2. And skip ahead to [comparing the most related genomes](#comparing-genome-architectures).
 {: .comment}
+
 
 ## Getting complete *E. coli* genomes into Galaxy
 
@@ -71,39 +70,45 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >    https://zenodo.org/record/3382053/files/genomes_proks.txt
 >    ```
 >
->    > ### {% icon question %} Getting the data directly from NCBI
->    >
->    > For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
->    > Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
->    > to be altered (e.g. column numbers) when using data directly from NCBI.
->    >
->    > Below we describe how you could obtain this data from NCBI.
->    >
->    > 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
->    >
->    > 2. Click on "Filters" at the top right:
->    >
->    >    ![Filter menu button](../../images/ecoli-list-filter.png)
->    >
->    > 3. Select only the "Complete" genomes with the filter at the top
->    >
->    >    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
->    >
->    > 3. At the top right, click "Download"
->    >
->    > 4. Upload this table to Galaxy
->    >
->    > 4. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
->    >
->    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->    >
->    > 5. Rename this file to `genomes.tsv`
->    >
->    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->    >
->    {: .question}
+{: .hands_on}
+
+
+> ### {% icon details %} Getting the data directly from NCBI
 >
-> 2. {% tool [Cut](Cut1) %}   columns from a table:
+> For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
+> Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
+> to be altered (e.g. column numbers) when using data directly from NCBI.
+>
+> Below we describe how you could obtain this data from NCBI.
+>
+> 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
+>
+> 2. Click on "Filters" at the top right:
+>
+>    ![Filter menu button](../../images/ecoli-list-filter.png)
+>
+> 3. Select only the "Complete" genomes with the filter at the top
+>
+>    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
+>
+> 3. At the top right, click "Download"
+>
+> 4. Upload this table to Galaxy
+>
+> 5. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 6. Rename this file to `genomes.tsv`
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+{: .details}
+
+
+> ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
+>
+> 1. {% tool [Cut](Cut1) %}   columns from a table:
 >
 >    - *"Cut columns"*: `c8,c20`
 >    - *"From"*: the tabular version of the file.

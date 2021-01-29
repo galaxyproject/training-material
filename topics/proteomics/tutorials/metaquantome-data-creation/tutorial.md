@@ -106,8 +106,8 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >
+>    {% include snippets/build_list_collection.md %}
 >
->  {% include snippets/build_list_collection.md %}
 > 7. Rename the dataset collection as `MZML dataset collection`.
 >
 {: .hands_on}
@@ -145,7 +145,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 >
 >
 >    > ### {% icon comment %} Comment
->    >This is a critical step for running this workflow.
+>    > This is a critical step for running this workflow.
 >    {: .comment}
 >
 {: .hands_on}
@@ -289,7 +289,7 @@ contaminants is critical to enable their removal before data analysis, mainly, t
 drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data.
 >    {: .comment}
 >
-
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
@@ -306,7 +306,7 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 ## *Removing file extensions for Quantification*
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extension from the PSM report so that it can be used as an input for FlashLFQ.
->
+
 > ### {% icon hands_on %} Hands-on: Removing file extensions
 >
 >
