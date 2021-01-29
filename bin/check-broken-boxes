@@ -19,4 +19,10 @@ for box in ${BROKEN_BOXES}; do
 	grep --color=always '<blockquote>' -A2 -B2 _site/training-material/$html
 done
 
-exit 0;
+if [[ $BROKEN_BOXES ]]; then
+    exit 1;
+else
+    echo "No broken boxes!"
+    exit 0;
+fi
+
