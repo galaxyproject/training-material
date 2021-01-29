@@ -743,7 +743,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Dec 11, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 29, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -1149,9 +1149,15 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 
 <p>During the <a href="/training-material/topics/admin/tutorials/ansible-galaxy/tutorial.html"><span class="notranslate">Galaxy</span> Installation with Ansible</a> tutorial, we acquired an SSL certificate for our <span class="notranslate">Galaxy</span> server from <a href="https://letsencrypt.org/">Let’s Encrypt</a>. This certificate was issued for the hostname of your <span class="notranslate">Galaxy</span> server (e.g. <code class="language-plaintext highlighter-rouge"><span class="notranslate">galaxy</span>.example.org</code>). SSL certificates are valid <em>only for the name to which they were issued</em>. This presents a problem for us due to the way that <span class="notranslate">Galaxy</span> Interactive Tools work.</p>
 
-<p>In order to ensure each Interactive Tool’s cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your <span class="notranslate">Galaxy</span> server (e.g. <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>). Your SSL cert is not valid for this subdomain. Further, in order to support the random <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;</code> in the hostname, we need a <em>wildcard certificate</em> for <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>. Let’s Encrypt wildcard certificates <a href="https://letsencrypt.org/docs/faq/">can only be generated using the DNS-01 challenge method</a>, which works by issuing a <a href="https://en.wikipedia.org/wiki/Dynamic_DNS">dynamic DNS</a> update to set the requested domain’s <code class="language-plaintext highlighter-rouge">TXT</code> record. As a result, this process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.</p>
+<p>In order to ensure each Interactive Tool’s cookies are unique, and to provide each tool with a unique entry point, they are served from a subdomain of your <span class="notranslate">Galaxy</span> server (e.g. <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>). Your SSL cert is not valid for this subdomain. Further, in order to support the random <code class="language-plaintext highlighter-rouge">&lt;unique-id&gt;</code> in the hostname, we need a <em>wildcard certificate</em> for <code class="language-plaintext highlighter-rouge">*.interactivetoolentrypoint.interactivetool.<span class="notranslate">galaxy</span>.example.org</code>.</p>
 
-<p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, we have precreated a dynamic DNS server that you will use for this step. The <em>TSIG key</em> that allows you to perform dynamic DNS updates will be provided to you. Your instructor will also tell you which option to follow (1 or 2), depending on the DNS provider that was chosen for this course.</p>
+<p>This process is highly dependent on your site; specifically, your SSL certificate vendor, and your DNS server software or cloud provider.</p>
+
+<p>Let’s Encrypt, the SSL certificate vendor we use in our tutorials, <a href="https://letsencrypt.org/docs/faq/">can only generate wildcard certificates using the DNS-01 challenge method</a>, which works by issuing a <a href="https://en.wikipedia.org/wiki/Dynamic_DNS">dynamic DNS</a> update to set the requested domain’s <code class="language-plaintext highlighter-rouge">TXT</code> record.</p>
+
+<p>If you are completing this tutorial as part of a <a href="https://github.com/galaxyproject/dagobah-training"><span class="notranslate">Galaxy</span> Admin Training</a> course, we might have precreated a dynamic DNS server that you will use for this step. The <em>TSIG key</em> that allows you to perform dynamic DNS updates will be provided to you. Your instructor will also tell you which option to follow (1 or 2), depending on the DNS provider that was chosen for this course.</p>
+
+<p>As we use Let’s Encrypt in staging mode, the wildcard certificates generated with either option 1 or 2 will still be invalid, and you will still see a warning in your web browser when accessing an Interactive Tool. If this warning is not a problem for you, you can just skip this section of the tutorial, and move on to “Enabling Interactive Tools in <span class="notranslate">Galaxy</span>”.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-requesting-a-wildcard-certificate-with-certbot-using-ansible---option-1-rfc2136"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Requesting a Wildcard Certificate with Certbot using Ansible - Option 1 (rfc2136)</h3>
@@ -1779,7 +1785,7 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Nate Coraor, Simon Gladman, Helena Rasche, Anthony Bretaudeau, 2020 <b>Galaxy Interactive Tools (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">/training-material/topics/admin/tutorials/interactive-tools/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Nate Coraor, Simon Gladman, Helena Rasche, Anthony Bretaudeau, 2021 <b>Galaxy Interactive Tools (Galaxy Training Materials)</b>. <a href="/training-material/topics/admin/tutorials/interactive-tools/tutorial.html">/training-material/topics/admin/tutorials/interactive-tools/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1796,9 +1802,9 @@ Feb 14 17:38:49 gcc-4 node[3679]: Watching path /srv/<span class="notranslate">g
 <code id="citation-code">@misc{admin-interactive-tools,
     author = "Nate Coraor and Simon Gladman and Helena Rasche and Anthony Bretaudeau",
     title = "Galaxy Interactive Tools (Galaxy Training Materials)",
-    year = "2020",
-    month = "12",
-    day = "11"
+    year = "2021",
+    month = "01",
+    day = "29"
     url = "\url{/training-material/topics/admin/tutorials/interactive-tools/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
