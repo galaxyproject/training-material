@@ -1,4 +1,4 @@
---
+---
 layout: tutorial_hands_on
 
 title: "Mapping Jobs to Destinations"
