@@ -21,7 +21,7 @@ layout: base
 
 <h1> GTN Video Slides </h1>
 
-The GTN now generates videos for selected slide decks. Click on on topic below to jump to the video page for that topic!
+The GTN now generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
 
 <br/><br/>
 
