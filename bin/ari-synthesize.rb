@@ -56,7 +56,7 @@ def synthesize(line, engine)
   call_engine(engine, line, mp3)
   duration = find_duration(mp3)
 
-  if duration > 20
+  if line.length < 200 && duration > 27
     # Helena managed to find a specific bad string which, when fed to Mozilla's
     # TTS would generate
     #
@@ -77,9 +77,9 @@ def synthesize(line, engine)
     duration = find_duration(mp3)
   end
 
-  if duration > 20
+  if line.length < 200 && duration > 27
     # Or maybe they just wrote a super long sentence. Or maybe we need to update the cutoff time.
-    puts "ERROR: #{duration} of line is bad: #{line}"
+    STDERR.puts "ERROR: #{duration} of line is bad: #{line}"
   end
 
   # Now collect metadata for JSON
