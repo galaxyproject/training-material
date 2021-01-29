@@ -387,8 +387,8 @@ along with the UniProt and cRAP databases.
 >     ```
 >   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
 >   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+>
 {: .hands_on}
-
 > ### {% icon comment %} Tool parameters explained
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
@@ -622,4 +622,5 @@ This workflow was developed by the Galaxy-P team at the University of Minnesota.
 
 
 {: .comment}
+
 
