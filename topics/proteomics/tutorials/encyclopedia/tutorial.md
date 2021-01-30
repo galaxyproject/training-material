@@ -161,7 +161,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > For this workflow, msconvert uses a raw dataset collection and generates a mzML dataset collection as an output. SearchToLib and EncyclopeDIA require that the GPF and Experimental DIA mzML file-types be in dataset collections.
+>    > SearchToLib uses the mzML dataset collection from this step as its input, making this step vital for the function of the workflow.
 >    {: .comment}
 >
 {: .hands_on}
@@ -206,11 +206,9 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 >    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow.
 >    {: .comment}
 >
 {: .hands_on}
@@ -274,11 +272,9 @@ SearchToLib generates two output files:
 >
 >    ***TODO***: *Check parameter descriptions*
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Chromatogram Library generation using SearchToLib is the step that takes the most time in this workflow. With larger datasets, more time is required to generate the Chromatogram Library and SearchToLib may take up to several days to complete. 
 >    {: .comment}
 >
 {: .hands_on}
@@ -293,23 +289,11 @@ SearchToLib generates two output files:
 > > ### {% icon solution %} Solution
 > >
 > > 1. answer to question1
-
 > > 2. answerto question2
-
 > >
 > {: .solution}
 >
 {: .question}
-
-> ### {% icon details %} Without a Chromatogram Library
->
-> However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
->
-> Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis; predicted libraries generally underperform compared to DDA generated libraries; however, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in analyzing DIA data.
-> 
-> In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect monoisotopic precursor peaks.
->
-{: .details}
 
 # Analysis of DIA data with EncyclopeDIA Without DLIB Spectral Library
 
@@ -348,6 +332,16 @@ Write about Walnut if Chromatogram Libraries are absent and add few images
 >    {: .comment}
 >
 {: .hands_on}
+
+> ### {% icon details %} Without a Chromatogram Library
+>
+> However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
+>
+> Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis; predicted libraries generally underperform compared to DDA generated libraries; however, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in analyzing DIA data.
+> 
+> In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect monoisotopic precursor peaks.
+>
+{: .details}
 
 # Analysis of DIA data through EncyclopeDIA
 
