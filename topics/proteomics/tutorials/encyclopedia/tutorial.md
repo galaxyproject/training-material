@@ -49,7 +49,13 @@ This will be rendered like this: {% cite Batut2018 %}, and links to a
 [bibliography section](#bibliography) which will automatically be created at the end of the
 tutorial.
 
+**Up to down Workflow Image**
+
 ![Alternative text](../../images/EncyclopeDIA_Workflow.png)
+
+**Left to right workflow image**
+
+![Alternative text](../../images/EncyclopeDIA_Workflow_LTR.png)
 
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
@@ -302,8 +308,8 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 **Add an image on the flow of the WALNUT EncyclopeDIA workflow**
 
 Write about Walnut if Chromatogram Libraries are absent and add few images
-![Alternative text](../../images/image_name "Legend of the image")
-![Alternative text](../../images/image_name "Legend of the image")
+
+![Alternative text](../../images/EncyclopeDIA_WALNUT_Workflow.png)
 
 ## Sub-step with **Walnut**
 
