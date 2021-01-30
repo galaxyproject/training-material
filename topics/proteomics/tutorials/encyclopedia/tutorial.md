@@ -53,6 +53,8 @@ tutorial.
 
 ![Alternative text](../../images/EncyclopeDIA_Workflow.png)
 
+We can choose an image that works better here. I am also not sure where to put the workflow. It says that it is nice to have a schematic by the introduction, but it also says that for the conclusion (I don't know if it's preference or if there is a standard place)
+
 **Left to right workflow image**
 
 ![Alternative text](../../images/EncyclopeDIA_Workflow_LTR.png)
@@ -309,6 +311,8 @@ DIA data analysis with EncyclopeDIA is still possible without a Spectral library
 
 Write about Walnut if Chromatogram Libraries are absent and add few images
 
+Added this image of WALNUT, I was not exactly sure how to convey the slight difference in the workflow without putting the WALNUT and the Standard workflows side by side (which I did not want to do in case it looked cluttered)
+
 ![Alternative text](../../images/EncyclopeDIA_WALNUT_Workflow.png)
 
 ## Sub-step with **Walnut**
@@ -334,7 +338,7 @@ Write about Walnut if Chromatogram Libraries are absent and add few images
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > Chromatogram Library generation using SearchToLib is the biggest change between the WALNUT and Standard EncyclopeDIA workflows.
 >    {: .comment}
 >
 {: .hands_on}
