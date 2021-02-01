@@ -73,7 +73,7 @@ We can choose an image that works better here. I am also not sure where to put t
 >
 {: .agenda}
 
-# DDA, DIA, and the differences between them
+# DDA, DIA, and their differences 
 
 Data Independent Acquisition (DIA) is a novel technique for the analysis of proteomic data samples and is a promising alternative to Data Dependent Acquisition (DDA) which has been traditionally used. 
 
@@ -93,7 +93,7 @@ In a typical DIA experiment, the precursor scan usually ranges between 400-1000 
 
 > ### {% icon details %} Advantages of DIA over DDA
 >
-> An advantage of DIA compared to DDA is that it is possible to obtain a better idea of peptide composition within a sample. Because DDA focuses on single peptides with high abundance indicated by their precursor peaks, this means that less abundant (but perhaps equally interesting or important) peptides are not examined. Therefore, DIA can provide a more comprehensive idea of peptide content within a sample because instead of selecting for fragment ions based on abundance, they are selected within a range. Another advantage to DIA compared to DDA is related to interference from coeluting peptides. Because DDA focuses on a single time point with a single peptide, coelution of another peptide can negatively impact the ability for quantitation. DIA, in contrast, examines multiple peptides through a range of m/z values. Therefore, if interference through coelution threatens the fidelity of a specific peptide, this peptide can be discarded and quantitation can continue with the other peptides within this m/z range. Finally, in cases in which peptides do not emit a precursor signal, DDA is not sufficient to examine these peptides, as their m/z time point will never be chosen based on their lack of abundance in MS1. Because DDA selects for a range of m/z time points, peptides that lack a precursor signal can still be included for further analysis in MS2. For a more detailed description of DIA and its applications and advantages, Brian Searle has given two talks at **ADD link and link**. 
+> An advantage of DIA compared to DDA is that it is possible to obtain a better idea of peptide composition within a sample. Because DDA focuses on single peptides with high abundance indicated by their precursor peaks, this means that less abundant (but perhaps equally interesting or important) peptides are not examined. Therefore, DIA can provide a more comprehensive idea of peptide content within a sample because instead of selecting for fragment ions based on abundance, they are selected within a range. Another advantage to DIA compared to DDA is related to interference from coeluting peptides. Because DDA focuses on a single time point with a single peptide, coelution of another peptide can negatively impact the ability for quantitation. DIA, in contrast, examines multiple peptides through a range of m/z values. Therefore, if interference through coelution threatens the fidelity of a specific peptide, this peptide can be discarded and quantitation can continue with the other peptides within this m/z range. Finally, in cases in which peptides do not emit a precursor signal, DDA is not sufficient to examine these peptides, as their m/z time point will never be chosen based on their lack of abundance in MS1. Because DDA selects for a range of m/z time points, peptides that lack a precursor signal can still be included for further analysis in MS2. For a more detailed description of DIA and its applications and advantages, Brian Searle has given two talks at **ADD link and link**.
 >
 {: .details}
 
@@ -143,7 +143,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 
   This output will be the DIA data analyzed with EncyclopeDIA with help from the Chromatogram Library.
 
-## Sub-step with **msconvert**
+## **msconvert**
 
 > ### {% icon hands_on %} Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.
 >
@@ -190,7 +190,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 {: .question}
 
-## Sub-step with **msconvert**
+## **msconvert**
 
 > ### {% icon hands_on %} Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.
 >
@@ -315,7 +315,7 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 
 ![Alternative text](../../images/EncyclopeDIA_WALNUT_Workflow.png)
 
-## Sub-step with **Walnut**
+## **Walnut**
 
 > ### {% icon hands_on %} Hands-on: Chromatogram Library generation using WALNUT variation.
 >
@@ -375,7 +375,7 @@ EncyclopeDIA generates five output files:
 
   This file contains information on sequence of peptides, quantity of peptide fragments, as well as protein IDs.
 
-## Sub-step with **EncyclopeDIA Quantify**
+## **EncyclopeDIA Quantify**
 
 > ### {% icon hands_on %} Hands-on: Library searching directly from DIA MS/MS data.
 >
@@ -427,11 +427,15 @@ To create the template, each step of the workflow had its own subsection.
 ***TODO***: *Re-arrange the generated subsections into sections or other subsections.
 Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
-# Conclusion
+# **Conclusion**
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+This completes the walkthrough of the Encyclopedia workflow. This tutorial is a guide to ....... Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.
+
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
+
+
+{: .comment}
 
 
 TIPS:
