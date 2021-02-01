@@ -33,7 +33,7 @@ contributors:
 
 General introduction about the topic and then an introduction of the
 tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
+scheme to sum up the pipelhhine used during the tutorial. The idea is to
 give to trainees insight into the content of the tutorial and the (theoretical
 and technical) key concepts they will learn.
 
@@ -360,7 +360,7 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences protein ID, quantity of fragments
+>    > EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences, protein IDs, quantity of fragments
 >    {: .comment}
 >
 {: .hands_on}
