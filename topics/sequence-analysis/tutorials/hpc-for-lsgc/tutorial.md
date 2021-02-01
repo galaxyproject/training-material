@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "From small to large-scale sequence comparison"
+title: "From small to large-scale genome comparison"
 
 zenodo_link: ""
 
