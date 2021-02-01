@@ -68,7 +68,7 @@ We can choose an image that works better here. I am also not sure where to put t
 >
 > 1. What the EncyclopeDIA workflow accomplishes.
 > 2. What inputs are needed to run the EncyclopeDIA workflow.
-> 2. How to prepare inputs and how to run the EncyclopeDIA workflow.
+> 3. How to prepare inputs and how to run the EncyclopeDIA workflow.
 > {:toc}
 >
 {: .agenda}
@@ -170,7 +170,6 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 {: .hands_on}
 
-
 > ### {% icon question %} Questions
 >
 > 1. Why is conversion from raw to mzML necessary?
@@ -231,29 +230,7 @@ As shown in Figure 4, GPF and its multiple injections allows for a far richer an
 
 SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the spectral files converted previously, a background protein database in FASTA format, as well as a .dlib spectral library. Outputs from this tool include the Chromatogram Library in an .elib format, as well as a text log file.
 
-In this Standard EncyclopeDIA workflow, SearchToLib requires three inputs:
 
-- GPF DIA MS/MS data in mzML file-type
-
-  This file is required for the generation of the Chromatogram Library
-  
-- Spectral Library in DLIB file-type (DDA or PROSIT generated)
-
-  This spectral library (generated either from DDA data or via PROSIT) is incorporated in Chromatogram Library generation to build a more complete library with which to analyze the Experimental DIA data.
-
-- Background Proteome FASTA file
-
-  In generating the Chromatogram Library, a Background Proteome FASTA file is searched against to provide context for the experiment, as this file will contain information on all proteins that could be in the sample of interest.
-
-SearchToLib generates two output files:
-
-- Log txt file
-
-  This file is not visualized in the workflow output as it contains the progress of the workings of SearchToLib.
-
-- Chromatogram Library in ELIB format
-
-  As the Chromatogram Library is generated using an ELIB format, it contains additional quantification data on retention time, peak intensity, and m/z ratios compared to DDA library files, typically generated using a DLIB format. This file will serve as the Chromatogram Library ELIB File input when running EncyclopeDIA.
 
 ## **SearchToLib**
 
@@ -280,29 +257,46 @@ SearchToLib generates two output files:
 >
 {: .hands_on}
 
-
-
 > ### {% icon question %} Questions
 >
-> 1. Question 1?
-> 2. 
+> 1. What are the benefits to using Chromatogram Libraries compared to DDA generated libraries?
+> 2. How does the EncyclopeDIA workflow change change in the absence of a spectral DLIB library?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. answer to question1
-> > 2. answerto question2
+> > 1. The benefit to using Chromatogram Libraries compared to DDA generated libraries is largely found in the method of data aquisition. Because Chromatogram Libraries use pooled DIA sample data and use GPF to generate fractions, Chromatogram Libraries are found to be both very comprehensive, as well as very relevant libraries to the experimental samples that are to be analyzed. Additionally, this method also avoids the extra labor associated with performing DDA for just library generation to analyze DIA samples.
+> > 2. The EncyclopeDIA Walnut workflow, a variation of the Standard EncyclopeDIA workflow (described in this tutorial), can be run in the absence of a spectral DLIB library. The step in the workflow that is most affected by the absence of the spectral DLIB library is Chromatogram Library generation using SearchToLib. The EncyclopeDIA WALNUT workflow and the changed SearchToLib step are described below.
 > >
 > {: .solution}
 >
 {: .question}
 
+> ### {% icon details %} SearchToLib inputs and outputs
+>
+> In this Standard EncyclopeDIA workflow, SearchToLib requires three inputs:
+>
+> - GPF DIA MS/MS data in mzML file-type
+>  This file is required for the generation of the Chromatogram Library
+>
+> - Spectral Library in DLIB file-type (DDA or PROSIT generated)
+>  This spectral library (generated either from DDA data or via PROSIT) is incorporated in Chromatogram Library generation to build a more complete library with which to analyze the Experimental DIA data.
+>
+> - Background Proteome FASTA file
+>  In generating the Chromatogram Library, a Background Proteome FASTA file is searched against to provide context for the experiment, as this file will contain information on all proteins that could be in the sample of interest.
+>
+> SearchToLib generates two output files:
+>
+> - Log txt file
+>  This file is not visualized in the workflow output as it contains the progress of the workings of SearchToLib.
+>
+> - Chromatogram Library in ELIB format
+>  As the Chromatogram Library is generated using an ELIB format, it contains additional quantification data on retention time, peak intensity, and m/z ratios compared to DDA library files, typically generated using a DLIB format. This file will serve as the Chromatogram Library ELIB File input when running EncyclopeDIA.
+>
+{: .details}
+
 # Analysis of DIA data with EncyclopeDIA Without DLIB Spectral Library
 
 DIA data analysis with EncyclopeDIA is still possible without a Spectral library. Although a Spectral library is a required input for SearchToLib in the Standard EncyclopeDIA workflow, WALNUT (another form of the EncyclopeDIA workflow) can be used. When using the WALNUT workflow, the Background Proteome FASTA file is important, as this will be the primary file SearchToLib will search against in formation of the Chromatogram Library. Otherwise, the WALNUT EncyclopeDIA workflow works similarly to the Standard EncyclopeDIA workflow-- it just does not use a Spectral Library.
-
-**Add an image on the flow of the WALNUT EncyclopeDIA workflow**
-
-Write about Walnut if Chromatogram Libraries are absent and add few images
 
 Added this image of WALNUT, I was not exactly sure how to convey the slight difference in the workflow without putting the WALNUT and the Standard workflows side by side (which I did not want to do in case it looked cluttered)
 
@@ -327,7 +321,7 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > Chromatogram Library generation using SearchToLib is the biggest change between the WALNUT and Standard EncyclopeDIA workflows.
+>    > The biggest change between the WALNUT and the Standard EncyclopeDIA workflows is found in Chromatogram Library generation using SearchToLib.
 >    {: .comment}
 >
 {: .hands_on}
@@ -345,9 +339,6 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 # Analysis of DIA data through EncyclopeDIA
 
 Encyclopedia is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs, one for protein quantitation and one for peptide quantitation. 
-
-![Alternative text](../../images/image_name "Legend of the image")
-
 
 ## **EncyclopeDIA Quantify**
 
@@ -369,11 +360,10 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences protein ID, quantity of fragments
 >    {: .comment}
 >
 {: .hands_on}
-
 
 > ### {% icon question %} Questions
 >
@@ -398,11 +388,7 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 >
 > - Peptide quantitation in txt format (**screenshot**)
 >
->  This file contains information on peptide sequence, protein ID, and quantity of fragments.
->
 > - Protein quantitation in txt format(**screenshot**)
->
->  This file contains information on sequence of peptides, quantity of peptide fragments, as well as protein IDs.
 >
 {: .details}
 
