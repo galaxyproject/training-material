@@ -130,10 +130,42 @@ thousands of layers.
 
 # Text representation schemes
 
+In this tutorial we perform sentiment analysis on IMDB movie reviews dataset. Our training set is made up of 25000 movie reviews (some positive 
+reviews, and some negative). We then test the RNN on our test set, which is made up of another another 25000 movie reviews (disjoint from the 
+training set), and measure the performance of the RNN. Since we are dealing with text data, its a good idea to review various mechanisms for 
+representing text data.
+ 
 ## Bag of words
-## Text frequency inverse document frequency
+
+In bag of words (BoW) scheme, we have a 2 dimensional table. The rows represent the documents (in our example, movie reviews) and the columns
+represent the words in our voabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero 
+as the entry. If a word is present in the document, we have a one as the entry -- Or we could use the icount of the word or its frequency.
+
+![Alternative text](../../images/BoW.png "Bag of words (BoW) representation")
+
+Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW 
+representation of these documents is given in Figure 10. 
+
+BoW is simple, yet it does not take into account the rarity of a word across documents, which unlike common words are 
+important for document classification. 
+
+## Text frequency inverse document frequency (TF-IDF)
+
+In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the 
+frequency of the word in the document, and 2) Inverse document frequency, the inverse of the number of documents that have the word in 
+them divided by the total number of documents (we usually use logarithm of the IDF).
+
+TF-IDF takes into account the rarity of a word across documents, but it does not capture word order or word meaning in documents.
+
 ## Word2Vec
 
+In Word2Vec, each word is represented as an n dimensional vector, such that the words that have similar meanings are closer to each other 
+in this vector space, and words that don't have a similar meaning are farther from each other. Words are considered to have a similar 
+meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability of a word given the 
+surrounding words (Continous BOW), and one that given a word predicts the probability of the surrounding words (Continous skip-gram).
+
+In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
+improve the sentiment classification task.    
 
 You may want to cite some publications; this can be done by adding citations to the
 bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
