@@ -111,9 +111,6 @@ In a typical DIA experiment, the precursor scan usually ranges between 400-1000 
 >    ```
 >    
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -165,7 +162,6 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >        - *"Sum adjacent scans"*: `Yes`
 >        - *"Output multiple runs per file"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -212,7 +208,6 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >        - *"Sum adjacent scans"*: `Yes`
 >        - *"Output multiple runs per file"*: `Yes`
 >
->    ***TODO***: *Check parameter descriptions*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -278,7 +273,6 @@ SearchToLib generates two output files:
 >        - *"Set Modifications Options"*: `No - use default options`
 >        - *"Set Search Options"*: `No - use default options`
 >
->    ***TODO***: *Check parameter descriptions*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -332,10 +326,6 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 >        - *"Set Modifications Options"*: `No - use default options`
 >        - *"Set Search Options"*: `No - use default options`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
 >    > ### {% icon comment %} Comment
 >    >
 >    > Chromatogram Library generation using SearchToLib is the biggest change between the WALNUT and Standard EncyclopeDIA workflows.
@@ -359,21 +349,6 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 
 ![Alternative text](../../images/image_name "Legend of the image")
 
-EncyclopeDIA generates five output files:
-
-- Log txt file
-
-- Quantification of datasets in ELIB format
-
-- Contatenated quantification of datasets in txt format
-
-- Peptide quantitation in txt format
-
-  This file contains information on peptide sequence, protein ID, and quantity of fragments.
-
-- Protein quantitation in txt format
-
-  This file contains information on sequence of peptides, quantity of peptide fragments, as well as protein IDs.
 
 ## **EncyclopeDIA Quantify**
 
@@ -392,9 +367,6 @@ EncyclopeDIA generates five output files:
 >        - *"Set Modifications Options"*: `No - use default options`
 >        - *"Set Search Options"*: `No - use default options`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -419,13 +391,29 @@ EncyclopeDIA generates five output files:
 >
 {: .question}
 
+> ### {% icon details %} EncyclopeDIA Outputs
+> - Log txt file
+>
+> - Quantification of datasets in ELIB format
+>
+> - Contatenated quantification of datasets in txt format
+>
+> - Peptide quantitation in txt format (**screenshot**)
+>
+>  This file contains information on peptide sequence, protein ID, and quantity of fragments.
+>
+> - Protein quantitation in txt format(**screenshot**)
+>
+>  This file contains information on sequence of peptides, quantity of peptide fragments, as well as protein IDs.
+>
+{: .details}
 
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> ### {% icon comment %} Comment: Tool Versions
+>
+> The tools are subjected to changes while being upgraded.
+> Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
+>
+{: .comment}
 
 # **Conclusion**
 {:.no_toc}
