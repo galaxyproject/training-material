@@ -140,7 +140,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 
   This output will be the DIA data analyzed with EncyclopeDIA with help from the Chromatogram Library.
 
-## **msconvert**
+## **_msconvert_**
 
 > ### {% icon hands_on %} Hands-on: Conversion of GPF DIA mass spectrometry raw data to mzML data-type.
 >
@@ -170,7 +170,6 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
@@ -186,7 +185,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 {: .question}
 
-## **msconvert**
+## **_msconvert_**
 
 > ### {% icon hands_on %} Hands-on: Conversion of Experimental DIA mass spectrometry raw data to mzML data-type.
 >
@@ -281,7 +280,7 @@ SearchToLib generates two output files:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+
 
 > ### {% icon question %} Questions
 >
@@ -375,7 +374,6 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
 
 > ### {% icon question %} Questions
 >
