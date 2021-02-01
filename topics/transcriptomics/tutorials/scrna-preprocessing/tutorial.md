@@ -4,6 +4,9 @@ redirect_from:
   - /topics/transcriptomics/tutorials/scrna_preprocessing/tutorial
 
 title: "Pre-processing of Single-Cell RNA Data"
+subtopic: single-cell
+priority: 2
+
 zenodo_link: "https://zenodo.org/record/3253142"
 tags:
   - single-cell
@@ -23,19 +26,19 @@ key_points:
   - "Relocating barcodes into headers"
   - "Merging matrices from different batches together"
   - "Removing unwanted barcodes"
-# requirements:
-#   -
-#     type: "internal"
-#     topic_name: transcriptomics
-#     tutorials:
-#         - scrna-introduction
-#         - scrna-plates-batches-barcodes
-#         - scrna-umis
-#
-# follow_up_training:
-#   -
-#     type: "internal"
-#     topic_name: transcriptomics
+requirements:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-intro
+
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+        - scrna-umis
 
 contributors:
   - mtekman

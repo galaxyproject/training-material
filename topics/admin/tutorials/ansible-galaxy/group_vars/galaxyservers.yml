@@ -11,6 +11,10 @@ postgresql_objects_databases:
   - name: galaxy
     owner: galaxy
 
+# PostgreSQL Backups
+postgresql_backup_dir: /data/backups
+postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+
 # Galaxy
 galaxy_create_user: true
 galaxy_separate_privileges: true
@@ -19,11 +23,10 @@ galaxy_layout: root-dir
 galaxy_root: /srv/galaxy
 galaxy_user: {name: galaxy, shell: /bin/bash}
 galaxy_commit_id: release_20.09
-galaxy_config_style: yaml
 galaxy_force_checkout: true
 
 miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
-miniconda_version: "4.6.14"
+miniconda_version: "4.7.12"
 miniconda_manage_dependencies: false
 
 galaxy_config:
@@ -91,9 +94,9 @@ certbot_agree_tos: --agree-tos
 nginx_selinux_allow_local_connections: true
 nginx_servers:
   - redirect-ssl
-nginx_enable_default_server: false
 nginx_ssl_servers:
   - galaxy
+nginx_enable_default_server: false
 nginx_conf_http:
   client_max_body_size: 1g
 nginx_ssl_role: usegalaxy_eu.certbot

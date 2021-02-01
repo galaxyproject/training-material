@@ -630,7 +630,7 @@ You can run the playbook now, or wait until you have configured Telegraf below:
 >      monitor_galaxy_queue:
 >        plugin: "exec"
 >        config:
->          - commands = ["/usr/bin/env PGDATABASE=galaxy /usr/bin/gxadmin iquery queue-overview --short-tool-id"]
+>          - commands = ["/usr/bin/env PGDATABASE=galaxy /usr/local/bin/gxadmin iquery queue-overview --short-tool-id"]
 >          - timeout = "10s"
 >          - data_format = "influx"
 >          - interval = "15s"

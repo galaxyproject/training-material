@@ -52,8 +52,8 @@ To run this tutorial, you will need to [install Ephemeris](https://ephemeris.rea
 > 1. Install `virtualenv` if it is not already available. On Ubuntu this can be done with `sudo apt install virtualenv`
 > 2. Create a virtual environment just for ephemeris, activate it and install ephemeris inside it:
 >    ```console
->    virtualenv -p python3 ephemeris_venv
->    . ephemeris_venv/bin/activate
+>    virtualenv -p python3 ~/ephemeris_venv
+>    . ~/ephemeris_venv/bin/activate
 >    pip install ephemeris
 >    ```
 {: .tip}
@@ -102,7 +102,7 @@ Ephemeris can take care of this process. Let's practice this on a real worfklow.
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > ```console
->    > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l "mapping tools"
+>    > > workflow-to-tools -w mapping.ga -o workflow_tools.yml -l Mapping
 >    > > ```
 >    > {: .solution }
 >    {: .question}
@@ -118,21 +118,13 @@ Now that you have extracted a list of tools, let's install these on your Galaxy 
 - The URL of your Galaxy server
 - The API key for your account, which must be an admin
 
-> ### {% icon tip %} Get the API key of an admin account
->
-> Galaxy admin accounts are specified as a comma-separated email list in the `admin_users` directive of `galaxy.yml` . If you have set up your Galaxy server using the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial, this is set to `admin@example.org` .
-> 1. In your browser, open your Galaxy homepage
-> 2. Log in using the admin email, or register a new account with it if it is the first time you use it
-> 3. Go to `User -> Preferences` in the top menu bar, then click on `Manage API key`
-> 4. If there is no current API key available, click on `Create a new key` to generate it
-> 5. Copy your API key to somewhere convenient, you will need it throughout this tutorial
-{: .tip}
+{% include snippets/finding_your_admin_api_key.md %}
 
 There are two ways to install tools, depending on how you specify the tools to install:
 
 > ### {% icon hands_on %} Hands-on: Installing a single tool
 >
-> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install the tool `bwa`, owned by user `devteam` into a section named `Mapping`
+> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to install the tool `pilon`, owned by `iuc` into a section named `Assembly`
 >
 >    > ### {% icon question %} Question
 >    > What did your command look like?
@@ -141,7 +133,7 @@ There are two ways to install tools, depending on how you specify the tools to i
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > shed-tools install -g https://your-galaxy -a <api-key> --name bwa --owner devteam --section_label Mapping
+>    > > shed-tools install -g https://your-galaxy -a <api-key> --name pilon --owner iuc --section_label Assembly
 >    > > ```
 >    > {: .solution}
 >    {: .question}
@@ -190,6 +182,18 @@ For that, you can install from a YAML file:
 
 Occasionally the tool installation may fail due to network issues; if it does, just re-run the `shed-tools` installation process until it succeeds. This is a known issue the developers are working on.
 
+> ###  {% icon tip %} Tip: Opening a split screen in byobu
+> `Shift-F2`: Create a horizontal split
+>
+> `Shift-Left/Right/Up/Down`: Move focus among splits
+>
+> `Ctrl-F6`:  Close split in focus
+>
+> `Ctrl-D`:  (Linux, Mac users) Close split in focus
+>
+> There are more byobu commands described in this [gist](https://gist.github.com/devhero/7b9a7281db0ac4ba683f)
+{: .tip}
+
 > ### {% icon tip %} Can I install tools without restarting?
 > Yes. The default tool config (`config/tool_conf.xml.sample`, copy to `config/tool_conf.xml` to modify) has an option, `monitor="true"` set in the root `<toolbox>` tag. This instructs Galaxy to watch the tool files referenced in that config and load or reload them as necessary. It will also add any tools you have added.
 {: .tip}
@@ -205,7 +209,7 @@ Having the tools installed is a good first step, but your users will expect that
 
 > ### {% icon hands_on %} Hands-on: Test the installed tools
 >
-> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to test the `bamtools_filter` tool on your Galaxy.
+> 1. Use the Ephemeris [`shed-tools`](https://ephemeris.readthedocs.io/en/latest/commands/shed-tools.html) command to test the `pilon` tool on your Galaxy.
 >
 >    > ### {% icon question %} Question
 >    > What did your command look like?
@@ -214,7 +218,7 @@ Having the tools installed is a good first step, but your users will expect that
 >    > > Use your Galaxy URL and API key in the example command below:
 >    > >
 >    > > ```console
->    > > shed-tools test -g https://your-galaxy -a <api-key> --name bamtools_filter --owner devteam
+>    > > shed-tools test -g https://your-galaxy -a <api-key> --name pilon --owner iuc
 >    > > ```
 >    > {: .solution}
 >    {: .question}

@@ -1,6 +1,7 @@
 ---
 layout: tutorial_slides
 logo: "GTN"
+video: true
 
 title: "User, Group and Quota managment"
 zenodo_link: ""
@@ -10,20 +11,22 @@ questions:
 objectives:
   - Learn the Galaxy user/group management and assign Quotas.
   - Understand the Role Based Access Control (RBAC) of Galaxy.
-time_estimation: "1h"
+time_estimation: "15m"
 key_points:
   - Galaxy has a powerful user and group managment system that can be utilized for Quota management.
 contributors:
   - natefoo
   - bgruening
+  - hexylena
 
 ---
-# Users, Groups, Quotas
+# Users, Groups, and Quotas
 
-.footnote[\#usegalaxy / @galaxyproject]
+???
+
+Users, Groups, and Quotas
 
 ---
-class: left
 
 ## Overview
 
@@ -39,9 +42,10 @@ This section will cover handling of users, groups and quotas for Galaxy. We will
 
 ???
 
-- Lots of different topics, but everything is related to users and permissions
+- There are a large number of topics related to users, groups and quotas
 - As an admin you have lots of control over this
-- Most configuration in galaxy.yml file
+- Most of the configuration lives in the galaxy.yaml file
+- Some of the configuration must be done in the UI
 
 ---
 ## User Control
@@ -59,11 +63,13 @@ option | description
 
 ???
 
-These options let you control anonymous access, if users can register
-themselves or an admin needs to create them, and what sort of responsibility they have
+- These options let you control user login.
+- For example, are anonymous users permitted?
+- Are users able to register themselves?
+- Are users able to purge datasets themselves?
+- All of these are questions you will need to consider.
 
 ---
-class: left
 
 ## User Activation
 
@@ -74,19 +80,15 @@ option | description
 `user_activation_on` | Require users to click link in email before running jobs.
 `activation_grace_period` | Time (hours) that a user can 'explore' Galaxy before activation lockout.
 `inactivity_box_content` | Message provided to non-activated users.
-`blacklist_file` | Defines domains in XXX.YYY format that will be rejected as user emails.
-
-Exercise:
-  - Enable User activation
-  - Register a new user (second email / email+1@example.com)
-  - Upload a Dataset
+`email_domain_blocklist_file` | Defines domains in XXX.YYY format that will be rejected as user emails.
 
 .footnote[.center[options in `galaxy.yml`]]
 
 ???
 
-- Whenever a user registers, user activation settings control how this process goes
-- If you want require activation, let them explore first, or blacklist certain email domains
+- Whenever a user registers, user activation settings control how this process happens
+- If you want to require activation they cannot run tools until they receive the confirmation email
+- If you want to prevent users registering from specific domains
 
 ---
 ## Password & Session Policies
@@ -101,9 +103,9 @@ option | description
 ???
 
 - Some options are related to IT security policies
+- Check with your local IT authority for best practices for your organisation
 
 ---
-class: left
 
 ## Admin Control
 
@@ -114,21 +116,17 @@ option | description
 `allow_user_impersonation` | Admins can become other users. Great for debugging / user assistance.
 `master_api_key` | Admin super-key allows many API admin actions without having a real admin user.
 
-Exercise:
- - Enable user impersonation
- - Log in as admin and become other user
- - View existing and create Histories and Datasets.
-
 .footnote[.center[options in `galaxy.yml`]]
 
 ???
 
-- You used `admin_users` in the basic admin training to define an admin email address
-- User impersonation is a very commonly used feature, allowing admins to debug issues in their users' histories
-- A master api key can be set but there are some caveats, as it isn't tied to a user account.
+- In the ansible galaxy training, you set the admin_users variable to define an admin email
+- User impersonation is a very commonly used feature
+- It allows admins to debug issues in their users' histories
+- A master api key cannot be used for every task an admin API key can be used for
+- This is because it is not tied to an individual user
 
 ---
-class: left
 
 ## User Privacy
 
@@ -142,11 +140,13 @@ option | description
 
 ???
 
-- These options control if the username/email is shown as a dropdown in the history sharing dialogue.
-- The `new_user_dataset_access_role_default_private` is important, by default when users share-by-link, all datasets are public. When you set this option, datasets are private, even thoughthe history is shared via link. Users complain when it doesn't work, and have to be educated to click the appropriate buttons.
+- These options control if the username or email are shown as a dropdown in the sharing menus
+- The option "new user dataset access role default private" is important
+- By default when users share by link, all datasets are public
+- When you set this option, datasets are private, even though the history is shared via link
+- Users will complain when it doesn't work, and have to be educated to click the appropriate buttons
 
 ---
-class: left
 
 ## Roles and Groups
 
@@ -164,11 +164,12 @@ class: left
 
 ???
 
-- Galaxy uses RBAC for permissions in many places. Roles can be creaed, and assigned permissions. Roles and groups behave similarly, grouping users together and granting permisisons.
+- Galaxy uses RBAC for permissions in many places
+- Roles can be created, and assigned permissions
+- Roles and groups behave similarly, grouping users together and granting permisisons
 
 ---
 
-class: left
 ## Dataset Roles
 
 
@@ -186,30 +187,41 @@ class: left
 .right-column50[.middle[.image-90[
 ![User_roles](../../images/dataset_roles.png)
 ]]]
+
+???
+
+- The manage permission controls which accounts can manage permissions of datasets
+- Access permission is those who can see and work with the data
+- These can be controlled in the permissions menu of datasets
+- Or more generally at the history level
+- Users must have every role listed in order to access that dataset
+- This leads to the odd case where users wish to share with multiple groups
+- But by adding more roles, it becomes unavailable to everyone
+
 ---
 
 ## Library Roles
 
 
 .left-column50[
-* **modify library item**: Users having associated role can modify this library item
 * **access library**: Restrict access to this library to only users having associated role
-* **add library item**: Users having associated role can add library items to this library item
 * **manage library permissions**: Users having associated role can manage roles associated with permissions on this library item
+* **add library item**: Users having associated role can add library items to this library item
+* **modify library item**: Users having associated role can modify this library item
 ]
 .left-column50[.image-90[
 ![Library_roles](../../images/Library_roles.png)
 ]]
 
----
-class: left
-## Role Demo
+???
 
-* We will now demonstrate creation of Groups and Roles.
-* We will show how restricting access to a Dataset prevents usage or download.
+- Access library permits users with any of the listed roles to access the library
+- No roles means a public library
+- Generally the last three are set to the same values, unless you have complicated requirements
+- In the library management, someone with any subset of the roles listed may make changes
+- This is very different from dataset permission management, where users must have every role
 
 ---
-class: left, reduce90
 ## Quotas
 
 Used to control user disk usage.
@@ -251,11 +263,21 @@ Storage
 
 - Quotas are stored in the DB tables `galaxy_user`, `galaxy_group`, and `quota`
 
+???
+
+- Quotas can be set for Users or Groups
+- But it is applied individually, as users may receive multiple quota changes
+- E.g. a user working for two groups, might receive two different quota increases
+
 ---
-class: left
 ## Quota Automation
 
 - There is currently no quota automation.
 - Some individuals have written their own quota automation but it is quite ugly ([usegalaxy-eu/quota-sync](https://github.com/usegalaxy-eu/quota-sync))
 - Could be nicer with a lot of work
 - Quotas are like group/user management: not managed by files, only within UI/API
+
+???
+
+- Quotas can be managed through the API
+- Some people want to automate this process, but it needs more work.

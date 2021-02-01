@@ -78,20 +78,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    ```yaml
 >    - src: galaxyproject.cvmfs
->      version: 0.2.8
+>      version: 0.2.13
 >    ```
 >
-> 2. Install the requirements with `ansible-galaxy`:
+> 2. Install the role with:
 >
 >    ```console
 >    ansible-galaxy role install -p roles -r requirements.yml
 >    ```
 >
-> 3. Edit the group variables file, `group_vars/galaxyservers.yml`:
->
->    <br/>
->
->    The variables available in this role are:
+> 3. The variables available in this role are:
 >
 >    | Variable             | Type          | Description                                                                                                                                                                    |
 >    | ----------           | -------       | -------------                                                                                                                                                                  |
@@ -101,11 +97,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    | `cvmfs_repositories` | list of dicts | CVMFS repository configurations, `CVMFS_REPOSITORIES` in `/etc/cvmfs/default.local` plus additional settings in `/etc/cvmfs/repositories.d/<repository>/{client,server}.conf`. |
 >    | `cvmfs_quota_limit`  | integer in MB | Size of CVMFS client cache. Default is `4000`.                                                                                                                                 |
 >
->    <br/>
->
 >    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to `config-repo`. We will also set the `cvmfs_quota_limit` to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.
->
->    <br/>
 >
 >    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
@@ -211,9 +203,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > > galaxy_config:
 >    > >   galaxy:
 >    > >     # ... existing configuration options in the `galaxy` section ...
->    > >     tool_data_table_config_path:
->    > >       - /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml
->    > >       - /cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>    > >     tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    > > ```
 >    > >
 >    > {: .solution }
@@ -223,11 +213,15 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 2. Re-run the playbook (`ansible-playbook galaxy.yml`)
 >
-> 3. In your Galaxy interface, open the **BWA** {% icon tool %}, **BWA-MEM** {% icon tool %} or **Bowtie2** {% icon tool %} tool interface (whichever you may have installed). Now check that there are a lot more Genomes available for use!
+> 3. Install the BWA-MEM tool, if needed.
+>
+>    {% include snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
+>
+> 4. In your Galaxy server, open the **Map with BWA-MEM** {% icon tool %} tool. Now check that there are a lot more reference genomes available for use!
 >
 >    ![available_genomes.png](../../images/available_genomes.png)
 >
-> 4. Login to Galaxy as the admin user, and go to **Admin → Data Tables → bwa_mem indexes**
+> 5. Login to Galaxy as the admin user, and go to **Admin → Data Tables → bwa_mem indexes**
 >
 >    ![bwa_mem_indices.png](../../images/bwa_mem_indices.png)
 >

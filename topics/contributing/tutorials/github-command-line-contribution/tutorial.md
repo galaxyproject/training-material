@@ -14,6 +14,7 @@ objectives:
   - "Create a pull request"
   - "Update a pull request"
 time_estimation: "30m"
+subtopic: contribute
 key_points:
   - "Work on your fork"
   - "1 branch = 1 feature"

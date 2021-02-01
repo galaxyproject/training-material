@@ -1,7 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Single-cell quality control with scater
+title: "Single-cell quality control with scater"
+subtopic: single-cell
+priority: 5
+
 zenodo_link: 'https://zenodo.org/record/3386291'
 tags:
   - single-cell
@@ -17,7 +20,14 @@ requirements:
     type: "internal"
     topic_name: transcriptomics
     tutorials:
-      - scrna-preprocessing
+      - scrna-plates-batches-barcodes
+follow_up_training:
+  -
+    type: "internal"
+    topic_name: transcriptomics
+    tutorials:
+      - scrna-raceid
+
 time_estimation: 1H
 key_points:
 - Single-cell RNA-seq data is often noisy

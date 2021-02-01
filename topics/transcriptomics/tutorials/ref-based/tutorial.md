@@ -2,6 +2,9 @@
 layout: tutorial_hands_on
 
 title: "Reference-based RNA-Seq data analysis"
+subtopic: introduction
+priority: 2
+
 tags:
     - bulk
     - rna-seq
@@ -167,8 +170,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences. 
->    > >    
+>    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
+>    > >
 >    > >    All files except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data)
 >    > >
 >    > >    ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
@@ -1083,11 +1086,12 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > 7. Compute the normalized counts: divide the original counts by the scaling factors
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
->     A | 0 | 23 | 9
->     B | 2 | 6 | 12
->     C | 13 | 21 | 78
+>     A | 0 | 11.11 | 1.6
+>     B | 5 | 6.67 | 4.8
+>     C | 83 | 61.11 | 80
 >
-> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU)*
+> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU&t=35s)*
+>
 {: .details}
 
 DESeq2 runs also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:

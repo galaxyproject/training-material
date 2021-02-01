@@ -9,6 +9,7 @@ objectives:
   - "Running the GTN material website locally"
   - "Tracking changes to the content live in the webbrowser"
 time_estimation: "15m"
+subtopic: writing
 key_points:
   - "Checking the generated website can be done locally"
 contributors:

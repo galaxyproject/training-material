@@ -45,7 +45,7 @@ ACTIVATE_ENV = source $(shell dirname $(dir $(CONDA)))/bin/activate $(CONDA_ENV)
 install: clean create-env ## install dependencies
 	$(ACTIVATE_ENV) && \
 		gem update --system && \
-		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify
+		gem install addressable:'2.5.2' jekyll jekyll-feed jekyll-scholar jekyll-redirect-from jekyll-last-modified-at csl-styles awesome_bot html-proofer pkg-config kwalify jekyll-sitemap
 .PHONY: install
 
 serve: ## run a local server (You can specify PORT=, HOST=, and FLAGS= to set the port, host or to pass additional flags)
@@ -195,7 +195,7 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 			- $@; \
 	fi
 
-_site/%.pdf: _site/%.html
+_site/%/slides.pdf: _site/%/slides.html
 	if ! grep 'http-equiv="refresh"' $< --quiet; then \
 		$(ACTIVATE_ENV) && \
 		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
@@ -206,12 +206,8 @@ _site/%.pdf: _site/%.html
 			- $@; \
 	fi
 
-AWS_UPLOAD?=""
-VIDEOS := $(shell find topics -name 'slides.html' | xargs ./bin/filter-has-videos)
-video: $(VIDEOS:topics/%.html=_site/training-material/topics/%.mp4) ## Build videos where possible
-
-_site/training-material/%/slides.mp4: _site/training-material/%/slides.pdf %/slides.html
-	./bin/ari.sh $^ $@ $(AWS_UPLOAD)
+video: ## Build all videos
+	bash bin/ari-make.sh
 
 annotate: ## annotate the tutorials with usable Galaxy instances and generate badges
 	${ACTIVATE_ENV} && \
@@ -226,7 +222,6 @@ clean: ## clean up junk files
 	@rm -rf .bundle
 	@rm -rf vendor
 	@rm -rf node_modules
-	@rm -rf .jekyll-cache
 	@rm -rf .jekyll-metadata
 	@find . -name .DS_Store -exec rm {} \;
 	@find . -name '*~' -exec rm {} \;

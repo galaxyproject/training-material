@@ -57,6 +57,7 @@ In this tutorial we begin with a new genome assembly just produced in the [Unicy
 > 2. And skip ahead to [comparing the most related genomes](#comparing-genome-architectures).
 {: .comment}
 
+
 ## Getting complete *E. coli* genomes into Galaxy
 
 Our initial objective is to compare our assembly against all complete *E. coli* genomes to identify the most related ones and to find any interesting genome alterations. In order to do this we need to align our assembly against all other genomes. And in order to do that we need to first obtain all these other genomes.
@@ -71,42 +72,48 @@ Our initial objective is to compare our assembly against all complete *E. coli* 
 >    https://zenodo.org/record/3382053/files/genomes_proks.txt
 >    ```
 >
->    > ### {% icon question %} Getting the data directly from NCBI
->    >
->    > For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
->    > Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
->    > to be altered (e.g. column numbers) when using data directly from NCBI.
->    >
->    > Below we describe how you could obtain this data from NCBI.
->    >
->    > 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
->    >
->    > 2. Click on "Filters" at the top right:
->    >
->    >    ![Filter menu button](../../images/ecoli-list-filter.png)
->    >
->    > 3. Select only the "Complete" genomes with the filter at the top
->    >
->    >    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
->    >
->    > 3. At the top right, click "Download"
->    >
->    > 4. Upload this table to Galaxy
->    >
->    > 4. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
->    >
->    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->    >
->    > 5. Rename this file to `genomes.tsv`
->    >
->    >    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
->    >
->    {: .question}
+{: .hands_on}
+
+
+> ### {% icon details %} Getting the data directly from NCBI
 >
-> 2. {% tool [Cut](Cut1) %}   columns from a table:
+> For this tutorial we made this dataset available from Zenodo, but it is of course also possible to obtain the data directly from NCBI.
+> Note that the format of the files on NCBI may change, which means some of the parameter settings of tools in this tutorial will need
+> to be altered (e.g. column numbers) when using data directly from NCBI.
+>
+> Below we describe how you could obtain this data from NCBI.
+>
+> 1. Open [the NCBI list of of *E. coli* genomes](https://www.ncbi.nlm.nih.gov/genome/genomes/167) in a new window
+>
+> 2. Click on "Filters" at the top right:
+>
+>    ![Filter menu button](../../images/ecoli-list-filter.png)
+>
+> 3. Select only the "Complete" genomes with the filter at the top
+>
+>    ![Filter settings, only "complete" is checked](../../images/ecoli-list.png)
+>
+> 3. At the top right, click "Download"
+>
+> 4. Upload this table to Galaxy
+>
+> 5. As this file is a CSV file, we need to convert it to TSV before Galaxy can use it.
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+> 6. Rename this file to `genomes.tsv`
+>
+>    {% include snippets/convert_datatype.md conversion="Convert CSV to Tabular" %}
+>
+{: .details}
+
+
+> ### {% icon hands_on %} Hands-on: Preparing a list of all complete *E. coli* genomes
+>
+> 1. {% tool [Cut](Cut1) %}   columns from a table:
 >
 >    - *"Cut columns"*: `c8,c20`
->    - *"From"*: the tabular version of the file.
+>    - *"From"*: `genome_proks.txt`
 >
 > > ### {% icon question %} Questions
 > >
@@ -454,6 +461,12 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 > ### {% icon hands_on %} Hands-on: Uploading sequences and annotations
 > Using the three accession listed above we will fetch necessary data from NCBI. We will use the spreadsheet we uploaded at the start to accomplish this.
 >
+> 1. {% tool [Upload](upload1) %} the *E. coli* C genome if you have not done so already:
+>   - Click **Paste/Fetch data** button (Bottom of the interface box)
+>   - **Paste** `https://zenodo.org/record/1306128/files/Ecoli_C_assembly.fna` into the box.
+>   - *"Type"*: `fasta`
+>   - Click **Start**
+>
 > 1. {% tool [Select lines that match an expression](Grep1) %} with the following parameters:
 >   - *"Select lines from"*: the `genomes.tsv` you uploaded earlier
 >   - *"the pattern"*: `LT906474|CP024090|CP020543`
@@ -487,7 +500,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       > This step is quite long and potentially error prone. If you want to skip those steps, you can copy and paste this bit of text:
 >       >
 >       > ```json
->       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":0,"expression":".*\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
+>       > {"rules":[{"type":"add_column_regex","target_column":1,"expression":".*(\\/GCA.*$)","group_count":1},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"remove_columns","target_columns":[1,2]},{"type":"add_column_value","value":"_feature_table.txt.gz"},{"type":"add_column_value","value":"_genomic.fna.gz"},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":2},{"type":"add_column_concatenate","target_column_0":1,"target_column_1":3},{"type":"remove_columns","target_columns":[1,2,3]},{"type":"add_column_value","value":"Genes"},{"type":"add_column_value","value":"DNA"},{"type":"add_column_regex","target_column":1,"expression":".*\\/(.*)","group_count":1},{"type":"swap_columns","target_column_0":0,"target_column_1":5},{"type":"remove_columns","target_columns":[5]},{"type":"split_columns","target_columns_0":[1,3],"target_columns_1":[2,4]}],"mapping":[{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[1]},{"type":"collection_name","columns":[2]}]}
 >       > ```
 >       >
 >       > You can click the {% icon tool %} next to the header **Rules** {% icon tool %}, and paste the contents there, before clicking **Apply**, checking "Add nametag for name" and then **Upload**.
@@ -530,7 +543,7 @@ Now that we know the three genomes most closely related to ours, let's take a cl
 >       - *"Value"*: `DNA`
 >       - Click `Apply`
 >    3. From **Column**, select `Using a Regular Expression`
->       - *"From Column"*: `A`
+>       - *"From Column"*: `B`
 >       - Select `Create columns matching expression groups`
 >       - *"Regular Expression"*: `.*\/(.*)`
 >       - *"Number of Groups"*: `1`
@@ -1017,12 +1030,12 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 >    - *"Genetic code"*: `11. The Bacterial, Archael and Plant Plastid Code`
 >    - {% icon param-repeat %} Insert Track Group
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Genes (E. coli Relatives)` from **Collapse Collection** {% icon tool %}
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Genes (E. coli Relatives)` from **Collapse Collection** {% icon tool %}
 >            - *"JBrowse Track Type"*: `Canvas Features`
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Target & Query Alignments`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Target & Query Alignments`
 >            - *"JBrowse Track Type"*: `Canvas Features`
 >            - *"JBrowse Feature Score Scaling & Colouring Options"*
 >                - *"Color Score Algorithm"*: `Based on score`
@@ -1030,8 +1043,8 @@ JBrowse is an interactive genome browser, which has been integrated into Galaxy 
 >                - *"Minimum expected score"*: `0`
 >                - *"Maximum expected score"*: `100`
 >        - {% icon param-repeat %} Insert Annotation Track
->            - *"Track Type"*: `GFF/GFF3/BED/GBK Features`
->            - {% icon param-file %} *"GFF/GFF3/BED/GBK Track Data"*: `Gaps`
+>            - *"Track Type"*: `GFF/GFF3/BED Features`
+>            - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Gaps`
 >
 {: .hands_on}
 

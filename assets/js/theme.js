@@ -41,6 +41,12 @@
 		$("#theme-selector").click(function(evt){
 			var theme = $(evt.target).data('value');
 			setTheme(theme);
+			if(theme === "straya"){
+				$("body").addClass('downunder');
+				setTimeout(function(){
+					$("body").removeClass('downunder');
+				}, 8000);
+			}
 		})
 
 		training_theme_cookie = getThemePreference()

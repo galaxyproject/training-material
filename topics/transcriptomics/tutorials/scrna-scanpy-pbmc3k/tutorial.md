@@ -1,7 +1,10 @@
 ---
 layout: tutorial_hands_on
 
-title: Clustering 3K PBMCs with Scanpy
+title: "Clustering 3K PBMCs with Scanpy"
+subtopic: single-cell
+priority: 8
+
 zenodo_link: 'https://zenodo.org/record/3581213'
 questions:
 - What are the steps to prepare single-cell RNA-Seq data for clustering?
@@ -315,7 +318,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > There are now 13,714 cells. So 19,024 (32,738 - 13,714) genes have been removed.
+>    > > There are now 13,714 genes. So 19,024 (32,738 - 13,714) genes have been removed.
 >    > >
 >    > {: .solution}
 >    >

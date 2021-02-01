@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 1
+          fetch-depth: 0
       - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
@@ -38,6 +38,8 @@ jobs:
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
+        env:
+          GTN_FORK: ${{ github.repository_owner }}
 
       - name: Deploy 🚀
         uses: peaceiris/actions-gh-pages@v3

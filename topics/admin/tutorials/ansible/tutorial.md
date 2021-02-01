@@ -272,14 +272,14 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 >    1. We will call our group `my_hosts`
 >
->    2. Create [an inventory file](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells ansible to not use SSH, and just use the local connection.
+>    2. Create [an inventory file](https://docs.ansible.com/ansible/2.9/user_guide/intro_inventory.html) with the group `my_hosts` and `localhost ansible_connection=local`, which tells Ansible to not use SSH, and just use the local connection. Additionally, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
 >       > ### {% icon solution %} Solution
 >       > The file should look like:
 >       >
 >       > ```ini
 >       > [my_hosts]
->       > localhost ansible_connection=local
+>       > localhost ansible_connection=local ansible_user=ubuntu
 >       > ```
 >       {: .solution }
 >
@@ -308,7 +308,7 @@ The above introduction was certainly not enough for you to feel confident in Ans
 >
 > 9. This is a complete role by itself and will copy the file `test.txt` from the `roles/my-role/files/` folder over to the target host and place it in `/tmp`.
 >
-> 10. Open `playbook.yml` for editing in the root folder. Place the following content in there:
+> 10. Create and open `playbook.yml` file for editing in the `intro` directory you created. Place the following content in there:
 >
 >     ```yaml
 >     ---

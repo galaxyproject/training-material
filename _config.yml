@@ -17,7 +17,7 @@
 title: "Galaxy Training!"
 email: galaxytrainingnetwork@gmail.com
 description: A collection of tutorials generated and maintained by Galaxy Community Members across the world
-url: "https://galaxyproject.github.io/"
+url: "https://training.galaxyproject.org"
 baseurl: "/training-material"
 github_repository: "https://github.com/galaxyproject/training-material"
 github_repository_branch: "master"
@@ -192,6 +192,8 @@ exclude:
   - "**/plantuml.jar"
   - Procfile
   - app.json
+  # These are provided by an S3 proxy in production
+  - videos/topics/
 include:
   - .nojekyll
 
@@ -201,4 +203,12 @@ plugins:
   - jekyll-scholar
   - jekyll-redirect-from
   - jekyll-last-modified-at
+  - jekyll-sitemap
 
+# Sitemap Configuration
+defaults:
+  -
+    scope:
+      path:            "topics/*/images/**"
+    values:
+      sitemap:         false
