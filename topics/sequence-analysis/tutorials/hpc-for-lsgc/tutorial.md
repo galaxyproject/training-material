@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "From small to large-scale genome comparison"
 
-zenodo_link: ""
+zenodo_link: "https://doi.org/10.5281/zenodo.4485547"
 
 questions:
 - How can we run pairwise genome comparisons using Galaxy?
@@ -68,11 +68,11 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `mycoplasma-hyopneumoniae-232.fasta` and `mycoplasma-hyopneumoniae-7422.fasta` from [Zenodo](zenodoFolderLink). You can also download these two sequences from the NCBI from [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_006360.1?report=fasta) and [here](https://www.ncbi.nlm.nih.gov/nuccore/NC_021831.1?report=fasta).
+> 2. Import `mycoplasma-hyopneumoniae-232.fasta` and `mycoplasma-hyopneumoniae-7422.fasta` from [Zenodo](zenodoFolderLink).
 >
 >    ```
->    https://zenodo.org/linkTo232
->    https://zenodo.org/linkTo7422
+>    https://zenodo.org/record/4485547/files/mycoplasma-232.fasta
+>    https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -263,8 +263,8 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 > 2. Import `aegilops-tauschii-chr1.fasta` and `triticum-aestivum-chr1.fasta` from [Zenodo](zenodoFolderLink).
 >
 >    ```
->    https://zenodo.org/linkTo232
->    https://zenodo.org/linkTo7422
+>    https://zenodo.org/record/4485547/files/aegilops_tauschii_chr1.fasta
+>    https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -295,7 +295,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 ## Running the comparison
 
 > ### {% icon hands_on %} Hands-on: Comparing two plant chromosomes with CHROMEISTER
-> 1. {% tool [CHROMEISTER](toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.2) %} with the following parameters
+> 1. {% tool [CHROMEISTER](toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a) %} with the following parameters
 >    - {% icon param-file %} *"Query sequence"*: `aegilops.fasta`
 >    - {% icon param-file %} *"Reference sequence"*: `triticum.fasta`
 >    - *"Output dotplot size"*: `1000`
