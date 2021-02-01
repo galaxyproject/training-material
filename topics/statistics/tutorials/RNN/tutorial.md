@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Introduction to recurrent neural networks (RNN)
-zenodo_link: ''
+zenodo_link: 'http://doi.org/10.5281/zenodo.4477881'
 questions:
 - What is a recurrent neural network (RNN)?
 - What are some applications of RNN?
@@ -92,7 +92,28 @@ and biases in the opposite direction of the gradient, to find the local minimum.
   
 # Recurrent neural networks
 
+Unlike FNN, in RNN the output of the network at time t is used as network input at time t+1. RNN handle sequential data (e.g. temporal or ordinal). 
+
 ## Possible inputs/outputs
+
+There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many, 
+where we have one input and a variable number of output. One example application is image captioning, where a single image is provided 
+as input and a variable number of words (which caption the image) is returned as output (See Figure 7).   
+
+![Alternative text](../../images/RNN_1_to_n.png "One-to-many RNN")
+
+Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment 
+classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
+has a positive or negative sentiment regarding a topic (See Figure 8).
+
+![Alternative text](../../images/RNN_n_to_1.png "Many-to-one RNN")
+
+There are two types of many-to-many RNN. One in which the number of input and output matches, e.g., in labeling video frames the number of 
+frames matches the number of labels, and the other in which the number of input and output does not match, e.g., in language translation we 
+pass in n words in English and get m words in Italian (See Figure 9).
+
+![Alternative text](../../images/RNN_n_to_m.png "Many-to-many RNN")
+
 ## RNN architectures
 
 Section and subsection titles will be displayed in the tutorial index on the left side of
