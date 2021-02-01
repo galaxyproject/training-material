@@ -94,7 +94,7 @@ and biases in the opposite direction of the gradient, to find the local minimum.
 
 Unlike FNN, in RNN the output of the network at time t is used as network input at time t+1. RNN handle sequential data (e.g. temporal or ordinal). 
 
-## Possible inputs/outputs
+## Possible RNN inputs/outputs
 
 There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many, 
 where we have one input and a variable number of output. One example application is image captioning, where a single image is provided 
@@ -108,16 +108,25 @@ has a positive or negative sentiment regarding a topic (See Figure 8).
 
 ![Alternative text](../../images/RNN_n_to_1.png "Many-to-one RNN")
 
-There are two types of many-to-many RNN. One in which the number of input and output matches, e.g., in labeling video frames the number of 
-frames matches the number of labels, and the other in which the number of input and output does not match, e.g., in language translation we 
-pass in n words in English and get m words in Italian (See Figure 9).
+There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number 
+of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation 
+we pass in n words in English and get m words in Italian (See Figure 9).
 
 ![Alternative text](../../images/RNN_n_to_m.png "Many-to-many RNN")
 
 ## RNN architectures
 
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
+Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM, and 3) GRU. A Vanilla RNN, simply combines the state information from the 
+previous timestamp with the input from the current timestamp to generate the state information for current timestamp. The problem with Vanilla 
+RNN is that training deep RNN networks is impossible due to the **vanishing gradient** problem. Basically, starting from the output layer, 
+in order to determine weights/biases updates, we need to calculate the derivative of the loss function relative to the layers input, which is 
+usually a small number. This is not a problem for the output layer, but for the previous layers, this process must be repeated recursively, 
+resulting in very small updates in weights/biases of the initial layers of the RNN, lting the learning process.
+
+LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this 
+tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU used **gates** such that the weights/biases updates in previous 
+layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or 
+thousands of layers. 
 
 # Text representation schemes
 
