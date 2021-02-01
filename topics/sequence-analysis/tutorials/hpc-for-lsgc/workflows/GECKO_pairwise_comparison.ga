@@ -1,0 +1,266 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "A workflow designed to compare two sequences using GECKO, extract repeats and perform multiple sequence alignment",
+    "format-version": "0.1",
+    "name": "GECKO pairwise comparison",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 445.1999969482422,
+                "height": 82.19999694824219,
+                "left": 421,
+                "right": 621,
+                "top": 363,
+                "width": 200,
+                "x": 421,
+                "y": 363
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "c2505bbf-a606-4600-9015-12c0d7363f1f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "88ce59d3-1bc6-48f8-bbc5-fa7fb96f61b6"
+                }
+            ]
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "bottom": 570.1999969482422,
+                "height": 82.19999694824219,
+                "left": 422,
+                "right": 622,
+                "top": 488,
+                "width": 200,
+                "x": 422,
+                "y": 488
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "4749c9b2-0d97-462f-a799-4ea4b22ed3e8",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "output",
+                    "uuid": "9ddacfe0-ced9-48bf-a56d-47a49a6b99b2"
+                }
+            ]
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "db": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "query": {
+                    "id": 0,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [
+                {
+                    "description": "runtime parameter for tool Gecko",
+                    "name": "db"
+                },
+                {
+                    "description": "runtime parameter for tool Gecko",
+                    "name": "query"
+                }
+            ],
+            "label": null,
+            "name": "Gecko",
+            "outputs": [
+                {
+                    "name": "csv_output1",
+                    "type": "csv"
+                },
+                {
+                    "name": "alignments2",
+                    "type": "txt"
+                }
+            ],
+            "position": {
+                "bottom": 681.8000030517578,
+                "height": 194.8000030517578,
+                "left": 781,
+                "right": 981,
+                "top": 487,
+                "width": 200,
+                "x": 781,
+                "y": 487
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "5efbd15675ca",
+                "name": "gecko",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"db\": {\"__class__\": \"RuntimeValue\"}, \"kmer\": \"16\", \"minlen\": \"50\", \"options\": {\"selection_mode\": \"alignments\", \"__current_case__\": 0}, \"query\": {\"__class__\": \"RuntimeValue\"}, \"similarity\": \"60\", \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.2",
+            "type": "tool",
+            "uuid": "217b825b-dfa8-4443-95cb-ea55dd499397",
+            "workflow_outputs": [
+                {
+                    "label": "Gecko on input dataset(s): CSV",
+                    "output_name": "csv_output1",
+                    "uuid": "fe5218ed-ad06-4157-9460-6dcb943940e4"
+                },
+                {
+                    "label": null,
+                    "output_name": "alignments2",
+                    "uuid": "e438bead-9693-4585-9f9e-aa871015d1be"
+                }
+            ]
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "infile": {
+                    "id": 2,
+                    "output_name": "alignments2"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Text reformatting",
+            "outputs": [
+                {
+                    "name": "outfile",
+                    "type": "input"
+                }
+            ],
+            "position": {
+                "bottom": 712.6000061035156,
+                "height": 113.60000610351562,
+                "left": 1102,
+                "right": 1302,
+                "top": 599,
+                "width": 200,
+                "x": 1102,
+                "y": 599
+            },
+            "post_job_actions": {
+                "ChangeDatatypeActionoutfile": {
+                    "action_arguments": {
+                        "newtype": "fasta"
+                    },
+                    "action_type": "ChangeDatatypeAction",
+                    "output_name": "outfile"
+                }
+            },
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2",
+            "tool_shed_repository": {
+                "changeset_revision": "ddf54b12c295",
+                "name": "text_processing",
+                "owner": "bgruening",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"code\": \"BEGIN{FS=\\\" \\\"} /@\\\\(196[0-9][0-9]/ { printf(\\\">sequence%s%s\\\\n\\\", $(NF-1), $NF); getline; while(substr($0,1,1) != \\\">\\\"){ if(substr($0,1,1) ==\\\"Y\\\"){ print $2; } getline; } } \", \"infile\": {\"__class__\": \"ConnectedValue\"}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "1.1.2",
+            "type": "tool",
+            "uuid": "ac13faf0-b6dc-48fa-b5b4-31fec9a4733f",
+            "workflow_outputs": [
+                {
+                    "label": null,
+                    "output_name": "outfile",
+                    "uuid": "8c035e8b-4d45-4fe1-ba19-1e3d402fffbb"
+                }
+            ]
+        },
+        "4": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
+            "errors": null,
+            "id": 4,
+            "input_connections": {
+                "input": {
+                    "id": 3,
+                    "output_name": "outfile"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "ClustalW",
+            "outputs": [
+                {
+                    "name": "output",
+                    "type": "clustal"
+                },
+                {
+                    "name": "dnd",
+                    "type": "nhx"
+                }
+            ],
+            "position": {
+                "bottom": 836.8000030517578,
+                "height": 184.8000030517578,
+                "left": 1476,
+                "right": 1676,
+                "top": 652,
+                "width": 200,
+                "x": 1476,
+                "y": 652
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/devteam/clustalw/clustalw/2.1",
+            "tool_shed_repository": {
+                "changeset_revision": "d6694932c5e0",
+                "name": "clustalw",
+                "owner": "devteam",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"dnarna\": \"DNA\", \"input\": {\"__class__\": \"ConnectedValue\"}, \"out_order\": \"ALIGNED\", \"outcontrol\": {\"outform\": \"clustal\", \"__current_case__\": 2, \"out_seqnos\": \"false\"}, \"range\": {\"mode\": \"complete\", \"__current_case__\": 0}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "2.1",
+            "type": "tool",
+            "uuid": "b95c1c44-a967-47fd-a85c-3a3121163486",
+            "workflow_outputs": [
+                {
+                    "label": "ClustalW on input dataset(s): clustal",
+                    "output_name": "output",
+                    "uuid": "fe694bba-9062-4de8-90e5-e96a180cfb7d"
+                },
+                {
+                    "label": "ClustalW on input dataset(s): dnd",
+                    "output_name": "dnd",
+                    "uuid": "aacac373-2c00-4d89-9229-8dd0364a1b17"
+                }
+            ]
+        }
+    },
+    "tags": [],
+    "uuid": "ddaa6cae-be45-4002-94ce-caa4656454c9",
+    "version": 4
+}
