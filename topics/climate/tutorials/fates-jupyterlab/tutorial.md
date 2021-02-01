@@ -351,12 +351,12 @@ The 4 main arguments of create_newcase are explained on the figure below: ![crea
 >
 > case = 'fates_alp1'
 > path = os.path.join(os.getenv('HOME'), 'archive', case, 'lnd', 'hist')
-> dset = xr.open_dataset(path + '/fates_alp1.clm2.h0.2000-01.nc')
+> dset = xr.open_mfdataset(path + '/*.nc', combine='by_coords')
 > dset
 > ```
 > As shown above, we are now using Python 3 for analyzing the results and [xarray](http://xarray.pydata.org/en/stable/) which 
 > is a Python package that can easily handle [netCDF](https://en.wikipedia.org/wiki/NetCDF) files.
-> we opened the single history file and print metadata.
+> we opened all the history files we have produced and print metadata.
 >
 > 4. Plotting 1D variables (timeseries)
 >
