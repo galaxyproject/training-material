@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualisation with Circos"
-zenodo_link: "https://zenodo.org/record/3603221"
+zenodo_link: "https://zenodo.org/record/4494146"
 questions:
   - "What can the Circos Galaxy tool be used for?"
   - "How can I visualise common genomic datasets using Circos?"
@@ -255,11 +255,10 @@ In this section we will reproduce this Circos plot step by step.
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3603221/files/VCaP_Copy-Number.tsv
->    https://zenodo.org/record/3603221/files/VCaP_B-allele-Frequency.tsv
->    https://zenodo.org/record/3603221/files/VCaP-highConfidenceJunctions.tsv
->    https://zenodo.org/record/3603221/files/hg18_karyotype_bands.tsv
->    https://zenodo.org/record/3603221/files/hg18_karyotype.txt
+>    https://zenodo.org/record/4494146/files/VCaP_Copy-Number.tsv
+>    https://zenodo.org/record/4494146/files/VCaP_B-allele-Frequency.tsv
+>    https://zenodo.org/record/4494146/files/VCaP-highConfidenceJunctions.tsv
+>    https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.tsv
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -273,28 +272,12 @@ In this section we will reproduce this Circos plot step by step.
 
 As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
 
-
-> ### {% icon hands_on %} Hands-on: Concatenate karyotype definitions and bands
->
-> 1. {% tool [Concatenate datasets tail-to-head](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cat/0.1.0) %}:
->     - {% icon param-file %} *"Concatenate Datasets"*: `hg18_karyotype.txt`
->     - {% icon param-repeat %} *"Insert Dataset"*
->         - In *"1. Dataset"*:
->             - {% icon param-file %} *"Select"*: `hg18_karyotype_bands.tsv`
->
-> 2. **Rename** {% icon galaxy-pencil%} the output as `hg18_karyotype_combined.txt`
->
->    {% include snippets/rename_dataset.md %}
-{: .hands_on}
-
-Now we can visualize our karyotype.
-
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_combined.txt`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.tsv`
 >    - In *"Ideogram"*:
          - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
@@ -998,9 +981,9 @@ First, let's get the data we need for this plot:
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3603221/files/debate_karyotype.txt
->    https://zenodo.org/record/3603221/files/debate_links.tab
->    https://zenodo.org/record/3603221/files/debate_slices.tab
+>    https://zenodo.org/record/4494146/files/debate_karyotype.txt
+>    https://zenodo.org/record/4494146/files/debate_links.tab
+>    https://zenodo.org/record/4494146/files/debate_slices.tab
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -1197,11 +1180,11 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from Zenodo or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/3603221/files/chrom.tab
->    https://zenodo.org/record/3603221/files/highlights.tab
+>    https://zenodo.org/record/4494146/files/chrom.tab
+>    https://zenodo.org/record/4494146/files/highlights.tab
 >    ```
 >    {% include snippets/import_via_link.md %}
 >
