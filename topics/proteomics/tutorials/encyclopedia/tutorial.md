@@ -266,9 +266,11 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 > SearchToLib generates two output files:
 >
 > - Log txt file
+>
 >  This file is not visualized in the workflow output as it contains the progress of the workings of SearchToLib.
 >
 > - Chromatogram Library in ELIB format
+>  
 >  As the Chromatogram Library is generated using an ELIB format, it contains additional quantification data on retention time, peak intensity, and m/z ratios compared to DDA library files, typically generated using a DLIB format. This file will serve as the Chromatogram Library ELIB File input when running EncyclopeDIA.
 >
 {: .details}
