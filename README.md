@@ -1,6 +1,6 @@
-# Galaxy Training Material [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 ![GTN logo, a star on a coloured circle with the text Galaxy Training Network at an upward angle.](./shared/images/GTNLogo1000.png)
+
+# Galaxy Training Material [![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 This repository collects tutorials, slides, and exercises developed and maintained by the Galaxy community.
 
