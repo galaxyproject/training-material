@@ -258,9 +258,11 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >  This file is required for the generation of the Chromatogram Library
 >
 > - Spectral Library in DLIB file-type (DDA or PROSIT generated)
+>
 >  This Spectral Library (generated either from DDA data or via PROSIT) is incorporated in Chromatogram Library generation to build a more complete library with which to analyze the Experimental DIA data.
 >
 > - Background Proteome FASTA file
+>
 >  In generating the Chromatogram Library, a Background Proteome FASTA file is searched against to provide context for the experiment, as this file will contain information on all proteins that could be in the sample of interest.
 >
 > SearchToLib generates two output files:
