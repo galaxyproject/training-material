@@ -508,6 +508,7 @@ We see from this image that chromosome 5 has an unusually large number of SVs, l
 > 2. **Change** the following tool parameters:
 >    - In *"Ideogram"*:
 >       - *"Limit/Filter Chromosomes"*: `chr5`
+>       - *"Spacing Between Ideograms (in chromosome units)"*: `0.5`
 >
 {: .hands_on}
 
