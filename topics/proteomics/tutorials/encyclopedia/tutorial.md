@@ -51,7 +51,7 @@ tutorial.
 
 **Up to down Workflow Image**
 
-![Alternative text](../../images/EncyclopeDIA_Workflow.png)
+
 
 We can choose an image that works better here. I am also not sure where to put the workflow. It says that it is nice to have a schematic by the introduction, but it also says that for the conclusion (I don't know if it's preference or if there is a standard place)
 
@@ -209,7 +209,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow.
+>    > In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow. Additionally, as DIA uses overlapping windows and fragments (Figure 3B), deconvolution of the data is vital to analyze it correctly. Conversion from raw to mzML allows for this deconvolution to occur within the workflow as part of the data's conversion.
 >    {: .comment}
 >
 {: .hands_on}
@@ -271,7 +271,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >
 {: .question}
 
-> ### {% icon details %} SearchToLib inputs and outputs
+> ### {% icon details %} SearchToLib Inputs and Outputs
 >
 > In this Standard EncyclopeDIA workflow, SearchToLib requires three inputs:
 >
@@ -338,7 +338,7 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 
 # Analysis of DIA data through EncyclopeDIA
 
-Encyclopedia is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs, one for protein quantitation and one for peptide quantitation. 
+Encyclopedia is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides. 
 
 ## **EncyclopeDIA Quantify**
 
@@ -360,35 +360,53 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences, protein IDs, quantity of fragments
+>    > EncyclopeDIA will generate two important ouputs: Peptide Quantitation Ouput, as well as Protein Quantitation Output (both .txt files). These outputs will contain information on the peptide sequences, protein IDs, and quantitation of protein and peptide fragments.
 >    {: .comment}
 >
 {: .hands_on}
 
 > ### {% icon question %} Questions
 >
-> 1. Question1?
-> 2. Question2?
+> 1. Are there any other tools available to analyze DIA data?
+> 2. Can EncyclopeDIA be used if a Chromatogram Library is not generated?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Answer for question1
-> > 2. Answer for question2
+> > 1. There are other softwares to analyze DIA data, such as Spectronaut and Scaffold DIA. However, these softwares have not been wrapped to form tools on the GalaxyEU platform, and therefore cannot be incorporated into this workflow.
+> > 2. Yes, EncyclopeDIA accepts ELIB (Chromatogram Library format) or DLIB (DDA Library format), and therefore a DDA generated library could be used with the EncyclopeDIA tool to analyze DIA data.
 > >
 > {: .solution}
 >
 {: .question}
 
-> ### {% icon details %} EncyclopeDIA Outputs
+As mentioned, EncyclopeDIA generates quantitative information on both peptides and proteins. 
+
+Sample ouput of the Peptide Quantitation Ouput:
+![Alternative text](../../images/EncyclopeDIA_PeptideQuantitation_Output.png)
+
+Sample output of the Protein Quantitation Output:
+![Alternative text](../../images/EncyclopeDIA_ProteinQuantitation_Output.png)
+
+> ### {% icon details %} EncyclopeDIA Inputs and Ouputs
+> Inputs required for EncyclopeDIA:
+>
+> - Chromatogram Library
+>
+> - Background Proteome FASTA file
+>
+> - Experimental DIA mzML datset collection
+>
+>EncyclopeDIA generated ouputs:
+>
 > - Log txt file
 >
 > - Quantification of datasets in ELIB format
 >
-> - Contatenated quantification of datasets in txt format
+> - Contatenated quantification of datasets in tabular format
 >
-> - Peptide quantitation in txt format (**screenshot**)
+> - Peptide quantitation in tabular format
 >
-> - Protein quantitation in txt format(**screenshot**)
+> - Protein quantitation in tabular format
 >
 {: .details}
 
@@ -402,63 +420,12 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 # **Conclusion**
 {:.no_toc}
 
-This completes the walkthrough of the Encyclopedia workflow. This tutorial is a guide to ....... Researchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.
+This completes the walkthrough of the EncyclopeDIA Standard workflow. 
+
+![Alternative text](../../images/EncyclopeDIA_Workflow.png)
+
+This tutorial is a guide to converting DIA data to the required input format, generation of a Chromatogram Library, and analysis of experimental DIA data using the EncyclopeDIA tool, developed by Brian Searle. This tutesearchers can use this workflow with their data also, please note that the tool parameters and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
 
-
 {: .comment}
-
-
-TIPS:
-
-(-->(Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :) )<--
-
--->(Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.) <--
-
-have fun!)
-
-
-(-->(Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!)<--)
-
-
-(-->(Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.)<--) 
-
-
-( copied from msconvert: ![Alternative text](../../images/image_name "Legend of the image")
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps: copied from msconvert
-
-
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question})
-
-
