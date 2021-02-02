@@ -288,7 +288,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 {: .hands_on}
 
 Now we can visualize our karyotype.
-    
+
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
@@ -438,7 +438,7 @@ So in order to convert this to Circos format, we need to
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `^[#><]`
 >
-> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
+> 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c2,c3,c3,c6,c7,c7`
 >    - {% icon param-file %} *"From"*: output of **Select** {% icon tool %}
 >
@@ -1080,7 +1080,7 @@ Now, let's use this file to create our highlights track
 >
 > 2. Add highlights to the ideogram:
 >    - In "2D Data Tracks":
->        - In "2D Data Plots": 
+>        - In "2D Data Plots":
 >            - *"Outside Radius"*: `1`
 >            - *"Inside Radius"*: `0.9`
 >            - *"Plot Type"*: `Highlight`
