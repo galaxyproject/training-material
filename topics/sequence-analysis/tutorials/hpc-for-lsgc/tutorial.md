@@ -69,7 +69,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `mycoplasma-hyopneumoniae-232.fasta` and `mycoplasma-hyopneumoniae-7422.fasta` from [Zenodo](zenodoFolderLink).
+> 2. Import `mycoplasma-hyopneumoniae-232.fasta` and `mycoplasma-hyopneumoniae-7422.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
 >
 >    ```
 >    https://zenodo.org/record/4485547/files/mycoplasma-232.fasta
@@ -261,7 +261,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `aegilops-tauschii-chr1.fasta` and `triticum-aestivum-chr1.fasta` from [Zenodo](zenodoFolderLink).
+> 2. Import `aegilops-tauschii-chr1.fasta` and `triticum-aestivum-chr1.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
 >
 >    ```
 >    https://zenodo.org/record/4485547/files/aegilops_tauschii_chr1.fasta
