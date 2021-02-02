@@ -7,7 +7,8 @@ zenodo_link: "https://doi.org/10.5281/zenodo.4485547"
 
 questions:
 - How can we run pairwise genome comparisons using Galaxy?
-- How can we extract further information from sequence comparisons in Galaxy?
+- How can we run massive chromosome comparisons in Galaxy?
+- How can we quickly visualize genome comparisons in Galaxy?
 objectives:
 - Learn the basics of pairwise sequence comparison
 - Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels
@@ -41,8 +42,8 @@ In the following tutorial, we will learn how to compare both small and large seq
 
 This tutorial is divided into two large sections:
 
- - Fine-grained sequence comparison: In this part of the tutorial we will use `GECKO` to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.
- - Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using `CHROMEISTER`, an alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes and automatically detect large-scale rearrangements.
+ - Fine-grained sequence comparison: In this part of the tutorial we will use `GECKO` ({% cite GECKO %}) to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.
+ - Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using `CHROMEISTER` ({% cite perez2019ultra %}), an alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes and automatically detect large-scale rearrangements.
 
 > ### Agenda
 >
@@ -94,7 +95,7 @@ If you were successful, both sequences should now be available as `.fasta` datas
 > 1. What do you think about the size of the sequences in regards to the difficulty of comparing them? (You can check the size of the files by clicking on the information icon)
 >
 > > ### {% icon solution %} Solution
-> > 1. It always depends on the focus of our study. For instance, if we were looking for optimal alignments, two 1 MB sequences are indeed large enough to make most approaches either fail or take a decent amount of time and resources. On the other hand, if we were looking for seed-based local alignments (e.g. `GECKO` ({% cite GECKO %}) or `BLAST` ({% cite BLAST %}) ), the comparison would require merely seconds (check the slides for more information).
+> > 1. It always depends on the focus of our study. For instance, if we were looking for optimal alignments, two 1 MB sequences are indeed large enough to make most approaches either fail or take a decent amount of time and resources. On the other hand, if we were looking for seed-based local alignments (e.g. `GECKO` or `BLAST` ({% cite BLAST %}) ), the comparison would require merely seconds (check the slides for more information).
 > >
 > {: .solution }
 >
@@ -239,7 +240,7 @@ In this second part of the tutorial, we are going to work with chromosome-sized 
 - You want to study large evolutionary rearrangements at a block level rather than alignment level at several species at once.
 - You want to generate a dotplot between several massive chromosomes from e.g. plants to find the main syntenies, but your sequences are full of repeats and other computational approaches fail.
 
-As you can imagine, all three scenarios require several large-scale sequence comparisons. While there are also other ways to approach these situations, in this tutorial we will learn how we can use `CHROMEISTER` ({% cite perez2019ultra %}) which is specifically designed for large-scale genome comparison without alignments (alignment-free method).
+As you can imagine, all three scenarios require several large-scale sequence comparisons. While there are also other ways to approach these situations, in this tutorial we will learn how we can use `CHROMEISTER` which is specifically designed for large-scale genome comparison without alignments (alignment-free method).
 
 ## Introduction
 
@@ -373,12 +374,12 @@ Besides providing a visual understanding of the large rearrangements that took p
 
 From a pratical perspective, we have shown how to run pairwise genome comparisons using Galaxy, from small to large-scale sequences (in particular bacterial mycoplasmas and plant chromosomes) throughout two levels of precision:
 
-- Using `GECKO` to find High-scoring Segment Pair alignments.
-- Using `CHROMEISTER` to find large-scale conserved blocks.
+- Using `GECKO` to detect High-scoring Segment Pairs, which can be used to find fine-grained alignments such as repeats, genes, synteny blocks, etc.
+- Using `CHROMEISTER` to find large-scale conserved blocks, which enables us to look at the "big picture" of a comparison as well as study its large-scale rearrangements.
 
-Moreover, we have described how we can use additional tools to post-process our comparisons, including extraction of alignments, multiple sequence alignment, automatic detection of rearrangements, etc. Additionally, we recommend taking a look at `GECKO-MGV` ({% cite diaz2019combining %}), a tool for the interactive exploration of sequence comparisons produced with `GECKO`.
+Moreover, we have described how we can use additional tools to post-process our comparisons, including extraction of alignments, multiple sequence alignment, automatic detection of rearrangements, dotplot visualization, etc. Additionally, we recommend taking a look at `GECKO-MGV` ({% cite diaz2019combining %}), a tool for the interactive exploration of sequence comparisons produced with `GECKO`.
 
-On the other hand, from a theoretical standpoint, we have discussed why sequence comparison is a difficult problem, how the length of the sequences can affect runtimes, the complexity of the algorithms, impact of parameters, etc., (more details in the slides).
+On the other hand, from a theoretical standpoint, we have discussed why sequence comparison is a difficult problem, how the length of the sequences can affect runtimes, the complexity of the algorithms, impact of parameters, etc., in order to give researchers a broader understanding of how to use sequence comparison algorithms for their scientific experiments (more details in the slides).
 
 
 
