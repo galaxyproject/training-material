@@ -130,39 +130,53 @@ thousands of layers.
 
 # Text representation schemes
 
-In this tutorial we perform sentiment analysis on IMDB movie reviews dataset. Our training set is made up of 25000 movie reviews (some positive 
-reviews, and some negative). We then test the RNN on our test set, which is made up of another another 25000 movie reviews (disjoint from the 
-training set), and measure the performance of the RNN. Since we are dealing with text data, its a good idea to review various mechanisms for 
-representing text data.
+In this tutorial we perform sentiment analysis on IMDB movie reviews dataset. We train our RNN on the training dataset, which is made up of 25000 
+movie reviews, some positive and some negative. We then test our RNN on the test set, which is also made up of 25000 movie reviews, again some 
+positive and some negative. The training and test sets have no overlap. Since we are dealing with text data, its a good idea to review various 
+mechanisms for representing text data.
  
-## Bag of words
+## Bag of words and TF-IDF
 
-In bag of words (BoW) scheme, we have a 2 dimensional table. The rows represent the documents (in our example, movie reviews) and the columns
+If you don't care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
+In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
 represent the words in our voabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero 
-as the entry. If a word is present in the document, we have a one as the entry -- Or we could use the icount of the word or its frequency.
+at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry -- Alternatively, we could use 
+the word count or frequency.
 
 ![Alternative text](../../images/BoW.png "Bag of words (BoW) representation")
 
 Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW 
 representation of these documents is given in Figure 10. 
 
-BoW is simple, yet it does not take into account the rarity of a word across documents, which unlike common words are 
+BoW's advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
 important for document classification. 
 
-## Text frequency inverse document frequency (TF-IDF)
-
 In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the 
-frequency of the word in the document, and 2) Inverse document frequency, the inverse of the number of documents that have the word in 
-them divided by the total number of documents (we usually use logarithm of the IDF).
+frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided 
+by the total number of documents (we usually use logarithm of the IDF).
 
-TF-IDF takes into account the rarity of a word across documents, but it does not capture word order or word meaning in documents.
+TF-IDF takes into account the rarity of a word across documents, but like BoW does not capture word order or word meaning in documents. BoW 
+and TF-IDF are suitable representations for when word order is not important. They are used in document classification problems like spam detection.
+
+## One hot encoding (OHE)
+
+OHE is a technique to convert categorical variables such as words into a vector. Suppose our vocabulary has 3 words: orange, apple, banana. 
+Each word for this vocabulary is represented by a vector of size 3. Orange is represented by a vector whose first element is 1 and other 
+elements are 0; Apple is represented by a vector whose second element is 1 and other elements are 0; And banana is represented by a 
+vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0's. The same 
+concept applies if the size of the vocabulary is N.    
+
+![Alternative text](../../images/OHE.gif "One hot encoding (OHE) representation")
+
+The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no 
+concept of word similarity.   
 
 ## Word2Vec
 
-In Word2Vec, each word is represented as an n dimensional vector, such that the words that have similar meanings are closer to each other 
-in this vector space, and words that don't have a similar meaning are farther from each other. Words are considered to have a similar 
-meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability of a word given the 
-surrounding words (Continous BOW), and one that given a word predicts the probability of the surrounding words (Continous skip-gram).
+In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have 
+similar meanings are closer to each other in the vector space, and words that don't have a similar meaning are farther apart. Words are 
+considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability 
+of a word given the surrounding words (Continous BOW), and one that given a word predicts the probability of the surrounding words (Continous skip-gram).
 
 In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
 improve the sentiment classification task.    
