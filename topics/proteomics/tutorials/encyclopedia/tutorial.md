@@ -109,7 +109,7 @@ In a typical DIA experiment, the precursor scan usually ranges between 400-1000 
 
 # Conversion of file types
 
-msconvert is the first tool in this EncyclopeDIA workflow as before analysis of such DIA data may begin, the data files must be converted to the correct file-type (mzML) from the raw data. Conversion from raw to mzML is important because the SearchToLib tool (generation of the Chromatogram Library), as well as the EncyclopeDIA tool (analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
+msconvert is the first tool in this EncyclopeDIA workflow as before analysis of DIA data may begin, the data files must be converted to the correct file-type (mzML) from the raw data. Conversion from raw to mzML is important because the SearchToLib tool (responsible for generation of the Chromatogram Library), as well as the EncyclopeDIA tool (responsible for analysis of DIA data) require mzmL inputs. As msconvert exists on the Galaxy platform, conversion of files to the necessary type is straightforward, and can be incorporated into the workflow itself as opposed to a separate precursor. Both the GPF DIA raw data and the Experimental DIA raw data are run through msconvert for conversion to mzML for the following steps, creation of the Chromatogram Library and analysis of DIA data through EncyclopeDIA.
 
 In this workflow, msconvert uses dataset collections. The tool will convert each of the data files in the collection from a raw file-type to a mzML file-type. Then, a dataset collection containing the mzML files will be generated as the output from msconvert. msconvert will run twice, as both the GPF raw DIA data as well as the Experimental DIA raw data need to be converted to mzML file-type. Therefore, two outputs will be generated:
 
@@ -119,7 +119,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 
 - Experimental mzML DIA dataset collection
 
-  This output will be the DIA data analyzed with EncyclopeDIA with help from the Chromatogram Library.
+  This output will be the DIA data analyzed with EncyclopeDIA.
 
 ## **_msconvert_**
 
@@ -190,7 +190,7 @@ In this workflow, msconvert uses dataset collections. The tool will convert each
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow. Additionally, as DIA uses overlapping windows and fragments (Figure 3B), deconvolution of the data is vital to analyze it correctly. Conversion from raw to mzML allows for this deconvolution to occur within the workflow as part of the data's conversion.
+>    > In order for analysis of the Experimental DIA data via EncyclopeDIA to proceed, the raw dataset collection must be converted to mzML which makes this a critical step in the function of this workflow. Additionally, as DIA uses overlapping windows and fragments (Figure 3B), deconvolution of the data is vital to analyze it correctly in the removal of repeated data. Conversion from raw to mzML allows for this deconvolution to occur within the workflow as part of the data's conversion.
 >    {: .comment}
 >
 {: .hands_on}
@@ -209,7 +209,7 @@ As shown in Figure 4, GPF and its multiple injections allows for a far richer an
 
 ![Alternative text](../../images/EncyclopeDIA_Figure5.png)
 
-SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the spectral files converted previously, a background protein database in FASTA format, as well as a .dlib Spectral Library. Outputs from this tool include the Chromatogram Library in an .elib format, as well as a text log file.
+SearchToLib is the tool responsible for the generation of the Chromatogram Library in this EncyclopeDIA workflow. A library is generated using the GPF DIA dataset collection converted previously, a background proteome FASTA file, as well as a DLIB Spectral Library. Outputs from this tool include the Chromatogram Library in [ELIB format] (https://support.proteomesoftware.com/hc/en-us/articles/360022979832-Reference-Libraries-Used-in-Scaffold-DIA), as well as a text log file.
 
 ## **SearchToLib**
 
@@ -243,7 +243,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. The benefit to using Chromatogram Libraries compared to DDA generated libraries is largely found in the method of data aquisition. Because Chromatogram Libraries use pooled DIA sample data and use GPF to generate fractions, Chromatogram Libraries are found to be both very comprehensive, as well as very relevant libraries to the experimental samples that are to be analyzed. Additionally, this method also avoids the extra labor associated with performing DDA for just library generation to analyze DIA samples.
+> > 1. The benefit to using Chromatogram Libraries compared to DDA generated libraries is largely found in the method of data aquisition. Because Chromatogram Libraries use pooled DIA sample data and use GPF to generate fractions, Chromatogram Libraries are found to be both very comprehensive, as well as very relevant libraries to the experimental samples that are to be analyzed. As Chromatogram Libraries take the form of an ELIB file-type, they contain additional information on retention times, peak intensities, and more compared to their DLIB DDA generated library counterparts. Furthermore, this method also avoids the extra labor associated with performing DDA for just library generation to analyze DIA samples.
 > > 2. The EncyclopeDIA Walnut workflow, a variation of the Standard EncyclopeDIA workflow (described in this tutorial), can be run in the absence of a spectral DLIB library. The step in the workflow that is most affected by the absence of the spectral DLIB library is Chromatogram Library generation using SearchToLib. The EncyclopeDIA WALNUT workflow and the changed SearchToLib step are described below.
 > >
 > {: .solution}
@@ -275,9 +275,7 @@ SearchToLib is the tool responsible for the generation of the Chromatogram Libra
 
 # Analysis of DIA data with EncyclopeDIA Without DLIB Spectral Library
 
-DIA data analysis with EncyclopeDIA is still possible without a Spectral library. Although a Spectral library is a required input for SearchToLib in the Standard EncyclopeDIA workflow, WALNUT (another form of the EncyclopeDIA workflow) can be used. When using the WALNUT workflow, the Background Proteome FASTA file is important, as this will be the primary file SearchToLib will search against in formation of the Chromatogram Library. Otherwise, the WALNUT EncyclopeDIA workflow works similarly to the Standard EncyclopeDIA workflow-- it just does not use a Spectral Library.
-
-Added this image of WALNUT, I was not exactly sure how to convey the slight difference in the workflow without putting the WALNUT and the Standard workflows side by side (which I did not want to do in case it looked cluttered)
+DIA data analysis with EncyclopeDIA is still possible without a Spectral library. Although a Spectral library is a required input for SearchToLib in the Standard EncyclopeDIA workflow, WALNUT (another form of the EncyclopeDIA workflow) can be used. When using the WALNUT workflow, the Background Proteome FASTA file is important, as this will be the primary file SearchToLib will search against in formation of the Chromatogram Library. Otherwise, the WALNUT EncyclopeDIA workflow works similarly to the Standard EncyclopeDIA workflow:
 
 ![Alternative text](../../images/EncyclopeDIA_WALNUT_Workflow.png)
 
@@ -309,7 +307,7 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 >
 > However, there are situations in which DIA data is analyzed without the use of DIA data generated libraries (Chromatogram Libraries) or DDA libraries. There are a few different methods and tools that can be used in cases where neither a Chromatogram library nor a DDA library can be generated.
 >
-> Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide {% cite Searle2020 %}. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis; predicted libraries generally underperform compared to DDA generated libraries; however, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in analyzing DIA data.
+> Predicted libraries are being studied in their use in DIA experiments. Specifically, PROSIT is a tool that is used for predicted library generation and it functions by entering peptide sequences through its neural network where it estimates the fragmentation patterns as well as the retention times for the peptide {% cite Searle2020 %}. As PROSIT generates estimates on peptide inputs, it generates a predicted library that can be used in DIA data analysis. This predicted library requires neither DIA sample data nor DDA sample data and is, therefore, a low labor tool in library generation. Predicted libraries are still being studied in their application to DIA data analysis. Predicted libraries generally underperform compared to DDA generated libraries; however, these libraries do significantly increase the quality of results compared to forgoing the use of a library altogether. This fact combined with their non-laborious nature means that predicted libraries can be useful in analyzing DIA data.
 > 
 > In the case in which a predicted library cannot be generated, DIA-Umpire is another tool that is involved in DIA data analysis in which pseudo-spectra are generated {% cite TsouCC2015 %}. This tool extracts information on coeluting fragment ions that are associated with a specific peptide. This information is used to generate a pseudo-spectrum examining the monoisotopic peak as well as its precursor signals and fragment ions that coelute. Once this information is combined and the pseudo-spectrum is generated with DIA-Umpire, this spectrum can be used relatively normally as if it were a DDA generated library. This method of generating pseudo-spectra is relatively robust; however, it does rely on the ability to detect monoisotopic precursor peaks.
 >
@@ -317,7 +315,7 @@ Added this image of WALNUT, I was not exactly sure how to convey the slight diff
 
 # Analysis of DIA data through EncyclopeDIA
 
-Encyclopedia is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides. 
+EncyclopeDIA is the tool used for DIA data analysis through searching peptides against the generated Chromatogram Library. Utilizing the generated Chromatogram library, as well as the experimental DIA data (mzML format), and the background protein database used previously, EncyclopeDIA searches the experimental DIA data against these libraries. Generated are a log .txt file and two quantitation outputs for both proteins and peptides. 
 
 ## **EncyclopeDIA Quantify**
 
@@ -352,7 +350,7 @@ Encyclopedia is the tool used for DIA data analysis through searching peptides a
 > > ### {% icon solution %} Solution
 > >
 > > 1. There are other softwares to analyze DIA data, such as Spectronaut and Scaffold DIA. However, these softwares have not been wrapped to form tools on the GalaxyEU platform, and therefore cannot be incorporated into this workflow.
-> > 2. Yes, EncyclopeDIA accepts ELIB (Chromatogram Library format) or DLIB (DDA Library format), and therefore a DDA generated library could be used with the EncyclopeDIA tool to analyze DIA data.
+> > 2. EncyclopeDIA accepts ELIB (Chromatogram Library format) or DLIB (DDA Library format), and therefore a DDA generated library could be used with the EncyclopeDIA tool to analyze DIA data.
 > >
 > {: .solution}
 >
