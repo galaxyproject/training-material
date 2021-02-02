@@ -404,5 +404,3 @@ This completes the walkthrough of the EncyclopeDIA Standard workflow.
 This tutorial is a guide to converting DIA data to the required input format, generation of a Chromatogram Library, and analysis of experimental DIA data using the EncyclopeDIA tool, developed by Brian Searle. This tutorial and workflow are available for use bt researchers with their data; however, please note that the tool parameters and the workflow will be needed to be modified accordingly.
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
-
-{: .comment}
