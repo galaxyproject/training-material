@@ -230,66 +230,69 @@ cost function via backpropagation.
 >
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+# Sentiment Classification of IMDB movie reviews with RNN
 
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
+In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the 
+words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset 
+and plot the confusion matrix.
 
-The idea is to keep the theory description before quite simple to focus more on the practical part.
+### **Create a deep learning model architecture**
 
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
+> ### {% icon hands_on %} Hands-on: Model config
 >
-> But to describe more details, it is possible to use the detail boxes which are expandable
->
-{: .details}
-
-A big step can have several subsections or sub steps:
-
-
-## Sub-step with **Create deep learning model**
-
-> ### {% icon hands_on %} Hands-on: Task description
->
-> 1. **Create deep learning model** {% icon tool %} with the following parameters:
->    - *"Choose a building mode"*: `Build a training model`
->        - In *"Compile Parameters"*:
->            - *"Select an optimizer"*: `Adam - Adam optimizer `
->            - *"Select metrics"*: ``
->        - In *"Fit Parameters"*:
->            - *"epochs"*: `2`
->            - *"batch_size"*: `128`
->            - In *"callback"*:
->                - {% icon param-repeat %} *"Insert callback"*
->                    - *"Choose a callback"*: `None`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
+> 1. **Create a deep learning model architecture** using Keras {% icon tool %} with the following parameters:
+>    - *"Select keras model type"*: `sequential`
+>    - *"input_shape"*: `(500,)`
+>    - *"Layer"*: 
+>      - *"Choose the type of layer"*: `Embedding -- Embedding`
+>      - *"input_dim"*": `10000`
+>      - *"output_dim"*": `32`
+>      - Click *"Insert Layer"*"
+>      - *"Choose the type of layer"*: `Recurrent -- LSTM`
+>      - *"units"*": `100`
+>      - Click *"Insert Layer"*"
+>      - *"Choose the type of layer"*: `Core -- Dense`
+>      - *"units"*": `1`
+>      - *"Activation function"*: `sigmoid`
+>      - Click *"Insert Layer"*"
+>    - Click *"Execute"* 
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> ### {% icon comment %} Comment
+> Our neural network has 3 layers. The first layer is an embedding layer, that transforms words into a 32 dimensional vectors (*output_dim*). 
+  We have 10000 unique words in our IMDB dataset (*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM 
+  layer has a size of *100*. The third layer is a *Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are 
+  connected to a single neuron in this layer). It has a *sigmoid* activation function, that generates an output between 0 and 1. Any output 
+  greater than 0.5 is considered a predicted positive review, and anything less than 0.5 a negative one. The model config can be downloaded 
+  as a JSON file.
+{: .comment}
 
-> ### {% icon question %} Questions
+### **Create a deep learning model**
+
+> ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
 >
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+> 2. **Create deep learning model** with an optimizer, loss function and fit parameters {% icon tool %} with the following parameters:
+>    - *"Choose a building mode"*: `Build a training model`
+>    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
+>    - *"Do classification or regression?"*: `KerasGClassifier`
+>    - In *"Compile Parameters"*:
+>        - *"Select a loss function"*: `binary_crossentropy` 
+>        - *"Select an optimizer"*: `Adam - Adam optimizer `
+>        - *"Select metrics"*: `acc/accuracy`
+>    - In *"Fit Parameters"*:
+>        - *"epochs"*: `2`
+>        - *"batch_size"*: `128`
+>    - Click *"Execute"*:
+{: .hands_on}
+
+> ### {% icon comment %} Comment
+> A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use 
+  *binary cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2 
+  means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is 
+  feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present 
+  only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset. 
+  The model builder can be downloaded as a zip file.
+{: .comment}
 
 ## Sub-step with **Deep learning training and evaluation**
 
