@@ -290,6 +290,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
 >
+>    {% include snippets/rename_dataset.md name="Circos Plot ideogram" %}
 >
 {: .hands_on}
 
