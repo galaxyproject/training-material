@@ -124,12 +124,13 @@ we pass in n words in English and get m words in Italian (See Figure 9).
 
 ## RNN architectures
 
-Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM, and 3) GRU. A Vanilla RNN, simply combines the state information from the 
-previous timestamp with the input from the current timestamp to generate the state information for current timestamp. The problem with Vanilla 
-RNN is that training deep RNN networks is impossible due to the **vanishing gradient** problem. Basically, starting from the output layer, 
-in order to determine weights/biases updates, we need to calculate the derivative of the loss function relative to the layers input, which is 
-usually a small number. This is not a problem for the output layer, but for the previous layers, this process must be repeated recursively, 
-resulting in very small updates in weights/biases of the initial layers of the RNN, lting the learning process.
+Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM ({% cite hochreiter1997long %}), and 3) GRU ({% cite cho-etal-2014-learning %}). 
+A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the 
+state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the 
+**vanishing gradient** problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate 
+the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer, 
+but for the previous layers, this process must be repeated recursively, resulting in very small updates in weights/biases of the initial layers 
+of the RNN, lting the learning process.
 
 LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this 
 tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU used **gates** such that the weights/biases updates in previous 
@@ -138,10 +139,23 @@ thousands of layers.
 
 # Text representation schemes
 
-In this tutorial we perform sentiment analysis on IMDB movie reviews dataset. We train our RNN on the training dataset, which is made up of 25000 
-movie reviews, some positive and some negative. We then test our RNN on the test set, which is also made up of 25000 movie reviews, again some 
-positive and some negative. The training and test sets have no overlap. Since we are dealing with text data, its a good idea to review various 
-mechanisms for representing text data.
+In this tutorial we perform sentiment analysis on IMDB movie reviews dataset ({% cite maas-EtAl %}). We train our RNN on the training dataset, 
+which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is also made up of 25000 
+movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with text data, its a 
+good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess text documents. 
+
+## Text preprocessing
+
+The first step is to tokenize a document, i.e., break it down into words. Next, we remove punctuations, URLs, and stop words -- words like 'a', 'of', 
+'the', etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize the text, 
+e.g., replace 'brb' with 'Be right back', etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we do 
+stemming or lemmatization. Basically, if we have words like 'organizer', 'organize', 'organized', and 'organization' we want to reduce all of them 
+to a single word. Stemming cuts the end of these words to come up with a single root (e.g., 'organiz'). The root may not be an actual word. 
+Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., 'organize'). All of these steps help reduce 
+the number of features in feature vector of a document and should make the training of our model faster/easier.
+
+For this introductory tutorial, we do minimal text preprocessing. We ignore the top 50 words in IMDB reviews (mostly stop words) and include 
+the next 10,000 words in our dataset. Reviews are limited to 500 words. They are trimmed if they are longer and padded if they are shorter.
  
 ## Bag of words and TF-IDF
 
@@ -187,60 +201,32 @@ considered to have a similar meaning if they co-occur often in documents. There 
 of a word given the surrounding words (Continous BOW), and one that given a word predicts the probability of the surrounding words (Continous skip-gram).
 
 In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
-improve the sentiment classification task.    
+improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the 
+cost function via backpropagation. 
 
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
-
-## Get data
+# Get data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from [Zenodo](https://zenodo.org/record/4477881#.YBrEQ3dKgvo) or from the shared data library
 >
 >    ```
->    
+>    https://zenodo.org/record/4477881/files/X_test.tsv
+>    https://zenodo.org/record/4477881/files/X_train.tsv
+>    https://zenodo.org/record/4477881/files/y_test.tsv
+>    https://zenodo.org/record/4477881/files/y_train.tsv
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
->
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
+> 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` repectively
+>
+>    {% include snippets/rename_dataset.md %}
+>
+> 4. Check that the datatype of `X_test` and `X_train` is `tabular` and `y_test` and `y_train` is `txt`
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
