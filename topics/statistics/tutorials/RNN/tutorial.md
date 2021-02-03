@@ -8,7 +8,7 @@ questions:
 - What are some applications of RNN?
 objectives:
 - Understand the difference between feedforward neural networks (FNN) and RNN
-- Learn various RNN types and acrchitectures
+- Learn various RNN types and architectures
 - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy
 requirements:
   -
@@ -52,9 +52,9 @@ various RNN architectures and solve a sentiment analysis problem using RNN in Ga
 In feedforward neural networks (FNN) all the fields of a training example are presented
 to the network at once, after which the the network generates an output. For example, a
 lung X-ray image is passed to a FNN, and the network predicts tumor or no tumor. By contrast,
-in RNNs the training example fields are presented to the network one at a time. For example,
+in RNN the training example fields are presented to the network one at a time. For example,
 a sequence of English words is passed to an RNN, one at a time, and the network generates a
-sequence of Persian words, one at a time. RNNs handle sequential data, whether its temporal or ordinal.
+sequence of Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.
 
 ## Single layer FNN
 
@@ -73,12 +73,12 @@ Output layer neurons usually have sigmoid or tanh functions.
 ## Multi-layer FFN
 
 Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable, 
-such as the XOR problem ({% cite Newell780 %}). Adding one (or more) hidden layers to FNN enables it solve problems 
+such as the XOR problem ({% cite Newell780 %}). Adding one (or more) hidden layers to FNN enables it to solve problems 
 in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent 
 any function ({% cite Cybenko1989 %}), although in practice training such a model is very difficult (if not impossible), 
 hence, we usually add multiple hidden layers to solve complex problems.
 
-![Alternative text](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are ommitted for clarity")
+![Alternative text](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
 
 ## Learning algorithm 
 
@@ -92,7 +92,7 @@ measure how much the predicted output is off of the expected output. For classif
 
 Loss function is calculated for each training example. The average of the calculated loss functions over all training 
 examples in the training set is the **Cost function**. The goal of the learning algorithm is to minimize the cost 
-function. The cost function is a function of network weightsand biases of all neurons in all layers. The **backpropagation** 
+function. The cost function is a function of network weights and biases of all neurons in all layers. The **backpropagation** 
 learning algorithm iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights 
 and biases in the opposite direction of the gradient, to find the local minimum.
 
@@ -129,8 +129,8 @@ A Vanilla RNN, simply combines the state information from the previous timestamp
 state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the 
 **vanishing gradient** problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate 
 the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer, 
-but for the previous layers, this process must be repeated recursively, resulting in very small updates in weights/biases of the initial layers 
-of the RNN, lting the learning process.
+but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers 
+of the RNN, halting the learning process.
 
 LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this 
 tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU used **gates** such that the weights/biases updates in previous 
@@ -141,16 +141,14 @@ thousands of layers.
 
 In this tutorial we perform sentiment analysis on IMDB movie reviews dataset ({% cite maas-EtAl %}). We train our RNN on the training dataset, 
 which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is also made up of 25000 
-movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with text data, its a 
+movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with text data, it's a 
 good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess text documents. 
 
 ## Text preprocessing
 
-The first step is to tokenize a document, i.e., break it down into words. Next, we remove punctuations, URLs, and stop words -- words like 'a', 'of', 
-'the', etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize the text, 
-e.g., replace 'brb' with 'Be right back', etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we do 
-stemming or lemmatization. Basically, if we have words like 'organizer', 'organize', 'organized', and 'organization' we want to reduce all of them 
-to a single word. Stemming cuts the end of these words to come up with a single root (e.g., 'organiz'). The root may not be an actual word. 
+The first step is to tokenize a document, i.e., break it down into words. Next, we remove the punctuation marks, URLs, and stop words -- words like 
+'a', 'of', 'the', etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize 
+the text, e.g., replace 'brb' with 'Be right back', etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Basically, if we have words like 'organizer', 'organize', 'organized', and 'organization' we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., 'organiz'). The root may not be an actual word. 
 Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., 'organize'). All of these steps help reduce 
 the number of features in feature vector of a document and should make the training of our model faster/easier.
 
@@ -161,7 +159,7 @@ the next 10,000 words in our dataset. Reviews are limited to 500 words. They are
 
 If you don't care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
 In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
-represent the words in our voabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero 
+represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero 
 at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry -- Alternatively, we could use 
 the word count or frequency.
 
@@ -198,7 +196,8 @@ concept of word similarity.
 In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have 
 similar meanings are closer to each other in the vector space, and words that don't have a similar meaning are farther apart. Words are 
 considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability 
-of a word given the surrounding words (Continous BOW), and one that given a word predicts the probability of the surrounding words (Continous skip-gram).
+of a word given the surrounding words (Continuous BOW), and one that given a word predicts the probability of the surrounding words (Continuous 
+skip-gram).
 
 In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
 improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the 
@@ -220,7 +219,7 @@ cost function via backpropagation.
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` repectively
+> 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively
 >
 >    {% include snippets/rename_dataset.md %}
 >
@@ -332,7 +331,7 @@ and plot the confusion matrix.
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> The prediction step generates 1 dataset. Its a file that has predictions (1 or 0 for postive or negative movie reviews) for every review in 
+> The prediction step generates 1 dataset. It's a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in 
   the test dataset.
 {: .comment}
 
@@ -342,7 +341,7 @@ and plot the confusion matrix.
 >
 > 1. **Machine Learning Visualization Extension** includes several types of plotting for machine learning {% icon tool %} with the following parameters:
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
->    - *"Select datset containing the true labels"*": `y_test` 
+>    - *"Select dataset containing the true labels"*": `y_test` 
 >    - *"Choose how to select data by column:"*: `All columns`
 >    - *"Does the dataset contain header:"*: `Yes`
 >    - Click *"Execute"*
@@ -350,8 +349,8 @@ and plot the confusion matrix.
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> "Confusion Matrix" is a table that describes the performance of a classification model. It lists the number of postive and negative examples 
-  that were correctly classified by the model (True positives and true negatives, repsectively). It also lists the number of examples that were 
+> "Confusion Matrix" is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
+  that were correctly classified by the model (True positives and true negatives, respectively). It also lists the number of examples that were 
   classified as positive that were actually negative (False positive or Type I error), and the number of examples that were classified as negative
   that were actually positive (False negative or Type 2 error).
 {: .comment}
