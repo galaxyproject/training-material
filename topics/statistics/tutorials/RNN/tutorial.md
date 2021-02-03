@@ -271,7 +271,7 @@ and plot the confusion matrix.
 
 > ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
 >
-> 2. **Create deep learning model** with an optimizer, loss function and fit parameters {% icon tool %} with the following parameters:
+> 1. **Create deep learning model** with an optimizer, loss function and fit parameters {% icon tool %} with the following parameters:
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGClassifier`
@@ -294,129 +294,72 @@ and plot the confusion matrix.
   The model builder can be downloaded as a zip file.
 {: .comment}
 
-## Sub-step with **Deep learning training and evaluation**
+### **Deep learning training and evaluation**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Training the model
 >
-> 1. **Deep learning training and evaluation** {% icon tool %} with the following parameters:
+> 1. **Deep learning training and evaluation** conduct deep training and evaluation either implicitly or explicitly {% icon tool %} with the following parameters:
 >    - *"Select a scheme"*: `Train and Validate`
->        - In *"Validation holdout"*:
->            - *"Select the splitting method"*: `ShuffleSplit`
->        - In *"Metrics for evaluation"*:
->            - *"Select the primary metric (scoring):"*: `default with estimator`
+>    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step. 
 >    - *"Select input type:"*: `tabular data`
+>        - *"Training samples dataset"*: Select `X_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
+>        - *"Dataset containing class labels or target values"*: Select `y_train` dataset
 >        - *"Choose how to select data by column:"*: `All columns`
->    - *"Save the fitted model"*: ``
+>    - Click *"Execute"*
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> ### {% icon comment %} Comment
+> The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained 
+  model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step. 
+{: .comment}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+### **Model Prediction**
 
-## Sub-step with **Model Prediction**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Testing the model
 >
-> 1. **Model Prediction** {% icon tool %} with the following parameters:
+> 1. **Model Prediction** predicts on new data using a prefitted model {% icon tool %} with the following parameters:
+>    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step. 
+>    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step. 
+>    - *"Select invocation method"*: `predict`
 >    - *"Select input data type for prediction"*: `tabular data`
->        - *"Choose how to select data by column:"*: `All columns`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Training samples dataset"*: Select `X_test` dataset 
+>    - *"Choose how to select data by column:"*: `All columns`
+>    - Click *"Execute"*
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> ### {% icon comment %} Comment
+> The prediction step generates 1 dataset. Its a file that has predictions (1 or 0 for postive or negative movie reviews) for every review in 
+  the test dataset.
+{: .comment}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
+### **Machine Learning Visualization Extension**
 
-## Sub-step with **Machine Learning Visualization Extension**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Creating the confusion matrix
 >
-> 1. **Machine Learning Visualization Extension** {% icon tool %} with the following parameters:
+> 1. **Machine Learning Visualization Extension** includes several types of plotting for machine learning {% icon tool %} with the following parameters:
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
->        - *"Choose how to select data by column:"*: `All columns`
->        - *"Does the dataset contain header:"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"Select datset containing the true labels"*": `y_test` 
+>    - *"Choose how to select data by column:"*: `All columns`
+>    - *"Does the dataset contain header:"*: `Yes`
+>    - Click *"Execute"*
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
+> ### {% icon comment %} Comment
+> "Confusion Matrix" is a table that describes the performance of a classification model. It lists the number of postive and negative examples 
+  that were correctly classified by the model (True positives and true negatives, repsectively). It also lists the number of examples that were 
+  classified as positive that were actually negative (False positive or Type I error), and the number of examples that were classified as negative
+  that were actually positive (False negative or Type 2 error).
+{: .comment}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-
-## Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 # Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various 
+RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used Galaxy to solve a sentiment 
+classification problem using RNN on IMDB movie reviews dataset. 
