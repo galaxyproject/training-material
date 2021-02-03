@@ -298,7 +298,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >            upper_bound: Infinity
 >            destination: slurm-2c
 >        default_destination: slurm
->    default_destination: slurm 
+>    default_destination: slurm
 >    verbose: True
 >    ```
 >
@@ -333,7 +333,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    ```
 >    {% endraw %}
 >
-> 3. We need to update Galaxy's job configuration to use this rule. Open `files/galaxy/config/job_conf.xml` and add a DTD destination.
+> 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.xml.j2` and add a DTD destination.
 >    Also, comment out or remove the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
 >
 >    ```diff
@@ -587,43 +587,43 @@ Lastly, we need to write the rule that will read the value of the job resource p
 
 The cores parameter can be verified from the output of the tool. The walltime can be verified with `scontrol`:
 
->    > ### {% icon code-in %} Input: Bash
->    > Your job number may be different.
->    > ```
->    > scontrol show job 24
->    > ```
->    {: .code-in}
->
->    > ### {% icon code-out %} Output
->    > Your output may look slightly different. Note that the `TimeLimit` for this job (which I gave a 12 hour time limit) was set to `12:00:00`.
->    > ```console
->    > JobId=24 JobName=g24_multi_anonymous_10_0_2_2
->    >    UserId=galaxy(999) GroupId=galaxy(999)
->    >    Priority=4294901747 Nice=0 Account=(null) QOS=(null)
->    >    JobState=COMPLETED Reason=None Dependency=(null)
->    >    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
->    >    RunTime=00:00:05 TimeLimit=12:00:00 TimeMin=N/A
->    >    SubmitTime=2016-11-05T22:01:09 EligibleTime=2016-11-05T22:01:09
->    >    StartTime=2016-11-05T22:01:09 EndTime=2016-11-05T22:01:14
->    >    PreemptTime=None SuspendTime=None SecsPreSuspend=0
->    >    Partition=debug AllocNode:Sid=gat2016:1860
->    >    ReqNodeList=(null) ExcNodeList=(null)
->    >    NodeList=localhost
->    >    BatchHost=localhost
->    >    NumNodes=1 NumCPUs=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
->    >    TRES=cpu=1,node=1
->    >    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
->    >    MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0
->    >    Features=(null) Gres=(null) Reservation=(null)
->    >    Shared=OK Contiguous=0 Licenses=(null) Network=(null)
->    >    Command=(null)
->    >    WorkDir=/srv/galaxy/server/database/jobs/000/24
->    >    StdErr=/srv/galaxy/server/database/jobs/000/24/galaxy_24.e
->    >    StdIn=StdIn=/dev/null
->    >    StdOut=/srv/galaxy/server/database/jobs/000/24/galaxy_24.o
->    >    Power= SICP=0
->    > ```
->    {: .code-out}
+> ### {% icon code-in %} Input: Bash
+> Your job number may be different.
+> ```
+> scontrol show job 24
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> Your output may look slightly different. Note that the `TimeLimit` for this job (which I gave a 12 hour time limit) was set to `12:00:00`.
+> ```console
+> JobId=24 JobName=g24_multi_anonymous_10_0_2_2
+>    UserId=galaxy(999) GroupId=galaxy(999)
+>    Priority=4294901747 Nice=0 Account=(null) QOS=(null)
+>    JobState=COMPLETED Reason=None Dependency=(null)
+>    Requeue=1 Restarts=0 BatchFlag=1 Reboot=0 ExitCode=0:0
+>    RunTime=00:00:05 TimeLimit=12:00:00 TimeMin=N/A
+>    SubmitTime=2016-11-05T22:01:09 EligibleTime=2016-11-05T22:01:09
+>    StartTime=2016-11-05T22:01:09 EndTime=2016-11-05T22:01:14
+>    PreemptTime=None SuspendTime=None SecsPreSuspend=0
+>    Partition=debug AllocNode:Sid=gat2016:1860
+>    ReqNodeList=(null) ExcNodeList=(null)
+>    NodeList=localhost
+>    BatchHost=localhost
+>    NumNodes=1 NumCPUs=1 CPUs/Task=1 ReqB:S:C:T=0:0:*:*
+>    TRES=cpu=1,node=1
+>    Socks/Node=* NtasksPerN:B:S:C=0:0:*:* CoreSpec=*
+>    MinCPUsNode=1 MinMemoryNode=0 MinTmpDiskNode=0
+>    Features=(null) Gres=(null) Reservation=(null)
+>    Shared=OK Contiguous=0 Licenses=(null) Network=(null)
+>    Command=(null)
+>    WorkDir=/srv/galaxy/server/database/jobs/000/24
+>    StdErr=/srv/galaxy/server/database/jobs/000/24/galaxy_24.e
+>    StdIn=StdIn=/dev/null
+>    StdOut=/srv/galaxy/server/database/jobs/000/24/galaxy_24.o
+>    Power= SICP=0
+> ```
+{: .code-out}
 
 
 ## Further Reading

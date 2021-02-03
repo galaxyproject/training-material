@@ -5,6 +5,10 @@ require 'json'
 
 fn = ARGV[0]
 metadata = YAML.load_file(fn)
+
+topic_fn = fn.split('/').slice(0, 2).join('/') + '/metadata.yaml'
+topic_metadata = YAML.load_file(topic_fn)
+
 ARI_MAP = File.expand_path(File.join(__dir__, 'ari-map.yml'))
 WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k,v|
@@ -27,7 +31,9 @@ has_keypoints = m_kp.length > 0
 
 m_rq = metadata.fetch('requirements', [])
 m_rq = [] if m_rq.nil?
-has_requirements = m_rq.length > 0
+t_rq = topic_metadata.fetch('requirements', [])
+t_rq = [] if t_rq.nil?
+has_requirements = m_rq.length > 0 || t_rq.length > 0
 
 # Parse the material for the slide notes
 file = File.open(fn)

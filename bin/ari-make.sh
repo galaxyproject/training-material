@@ -31,4 +31,5 @@ for slides in $changed_slides; do
 done
 
 # Now we'll note our current, changed commit since this all went so well.
+mkdir -p videos/topics/
 git log -1 --format=%H > videos/topics/last-commit

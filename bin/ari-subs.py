@@ -46,6 +46,23 @@ def script2timings(d):
     return ordering, timings
 
 
+def split_sentence(sentence, timing):
+    split_sentence = sentence.split(' ')
+    spaces = sentence.count(" ")
+    parts = 1 + int(spaces // 20)
+    part_off = int(spaces / parts)
+
+    o = 0
+    tacc = 0
+    for i in range(parts):
+        if i == parts - 1:
+            yield (' '.join(split_sentence[o:]), tacc, tacc + timing / parts)
+        else:
+            yield (' '.join(split_sentence[o:o + part_off]), tacc, tacc + timing / parts)
+        o += part_off
+        tacc += timing / parts
+
+
 def main(d, fmt="webvtt"):
     (ordering, timings) = script2timings(d)
 
@@ -53,7 +70,8 @@ def main(d, fmt="webvtt"):
         print("WEBVTT\n\n")
 
     offset = 0
-    for idx, (mid, timing) in enumerate(zip(ordering, timings)):
+    idx = 0
+    for (mid, timing) in zip(ordering, timings):
         # If there's a sentence, not silence
         if mid != 'silence':
             # load the text for the subtitles
@@ -61,13 +79,17 @@ def main(d, fmt="webvtt"):
             with open(sound_data, 'r') as handle:
                 sentence = handle.read().strip()
 
-            # And print it.
-            print(idx)
-            print(f"{timefmt(offset, fmt)} --> {timefmt(offset + timing, fmt)}")
-            print(sentence)
-            print()
+            for (sen_part, time_prev, time_next) in split_sentence(sentence, timing):
+                # print(sen_part, time_prev, time_next)
+                # And print it.
+                print(idx)
+                print(f"{timefmt(offset + time_prev, fmt)} --> {timefmt(offset + time_next, fmt)}")
+                print(sen_part)
+                print()
+            # sys.stderr.write(f'{sentence.count(" ")} {sentence}\n')
 
         offset += timing
+        idx += 1
 
 
 if __name__ == "__main__":

@@ -150,10 +150,11 @@ def lint_file(fn)
     puts "\e[48;5;09m#{fn} has errors\e[m"
     errs.each {|x| puts "  #{x}" }
   end
+  return errs
 end
 
 
-
+ec = 0
 Find.find('./topics') do |path|
   if FileTest.directory?(path)
     if File.basename(path).start_with?('.')
@@ -163,8 +164,12 @@ Find.find('./topics') do |path|
     end
   else
     if ['tutorial.md', 'slides.html', 'metadata.yaml'].include?(path.split('/')[-1]) then
-      lint_file(path)
+      errs = lint_file(path)
+      if !errs.nil? && errs.length > 0 then
+        ec = 1
+      end
     end
   end
 end
 
+exit ec

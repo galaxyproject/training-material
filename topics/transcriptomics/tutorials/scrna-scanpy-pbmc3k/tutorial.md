@@ -3,7 +3,7 @@ layout: tutorial_hands_on
 
 title: "Clustering 3K PBMCs with Scanpy"
 subtopic: single-cell
-priority: 7
+priority: 8
 
 zenodo_link: 'https://zenodo.org/record/3581213'
 questions:

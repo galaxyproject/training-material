@@ -225,83 +225,14 @@ The mzidentml output from the Peptide shaker is converted into an sqlite databas
 >
 {: .hands_on}
 
-The next step is to remove known peptides from the list of PSM's that we acquired from the Peptide Shaker results. For that we need to perform some text manipulation steps to extract list of known peptides from the UniProt and cRAP database.
+The next step is to remove known peptides from the list of PSM's that we acquired from the Peptide Shaker results. For that we need to perform Query tabular to extract list of known peptides from the UniProt and cRAP database.
 
-# Remove known peptides
-
-## Merged Uniprot and cRAP database
-
-The file named "Trimmed_ref_500_Uniprot_cRAP.fasta" is the trimmed version of Uniprot and cRAP database merged Fasta files.
-
-This Fasta file will be subjected to few text manipulation steps in order to get the tabular file for the known peptides. The known peptides are those which are already annotated in the reference database, in this case the Uniprot database. The first step is to convert this FASTA file to tabular in order to proceed with text manipulation.
-
-> ### {% icon hands_on %}  Hands-on: FASTA to Tabular
->
-> 1. Run **FASTA to Tabular** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Data input 'input' (fasta)"*: `Trimmed_ref_500_Uniprot_cRAP.fasta`
->    - {% icon param-text %} *"How many columns to divide title string into?"*: `2`
->    - {% icon param-text %} *"How many title characters to keep?"*: `0`
->
-{: .hands_on}
-
-The resultant tabular file will go through a series of text manipulation steps to make it suitable for
-input to the Query Tabular tool.
-
-
-## Text Manipulation steps
-
-> ### {% icon hands_on %} Hands-on: Text Manipulation
->
-> 1. **Cut** {% icon tool %} with the following parameters:
->    - *"Cut Columns"*: `c1`
->    - *"Delimited by"*: `Tab`
->
->    Upon completion of this step you will have extracted C1 (column 1) from the input tabular file
->
-> 2. **Convert** {% icon tool %} with the following parameters:
->    - *"Convert all"*: `Whitespaces`
->    - *"in Dataset"* : `Data input 'input' (txt)`
->    - *"Strip leading and trailing whitespaces"*: `Yes`
->    - *"Condense consecutive delimiters in one TAB"*: `Yes`
->
->    This step will convert all the white spaces into different tabular column.
->
-> 3. **Cut** {% icon tool %} with the following parameters:
->    - *"Cut Columns"*: `c2`
->    - *"Delimited by"*: `Pipe`
->
->    This step will extract information in column2 separated by Pipe
->
-> 4. **Convert** {% icon tool %} with the following parameters:
->    - *"Convert all"*: `Dots`
->    - *"in Dataset"* : `Data input 'input' (txt)`
->    - *"Strip leading and trailing whitespaces"*: `Yes`
->    - *"Condense consecutive delimiters in one TAB"*: `Yes`
->
->    This step will convert all the dots into different tabular column.
->
-> 5. **Group** {% icon tool %} with the following parameters:
->    - *"Select data"*: `input from above`
->    - *"Group by column"*: `1`
->
-{: .hands_on}
-
-Now that we have the list of known peptides, the query tabular tool is used to move these reference pepides from the PSM report.
 
 ## Query Tabular
 
-> ### {% icon hands_on %} Hands-on: Query Tabular
+> ### {% icon hands_on %} Hands-on: Remove Reference proteins
 >
 >  1. **Query Tabular** {% icon tool %} with the following parameters:
->
->  - {% icon param-repeat %} **Insert Database Table** (a): `output from group`
->    - Section **Table Options**:
->      - *"Tabular Dataset for Table"*: Uniprot
->      - *"Use first line as column names"* : `No`
->      - *"Specify Column Names (comma-separated list)"*:`prot`
->      - {% icon param-repeat %} **Insert Table Index**:
->        - *"Table Index"*: `No`
->        - *"Index on Columns"*: `Prot`
 >
 >  - {% icon param-repeat %} **Insert Database Table** (b): `PSM report`
 >    - Section **Filter Dataset Input**:
@@ -340,6 +271,16 @@ Now that we have the list of known peptides, the query tabular tool is used to m
 >      - {% icon param-repeat %} **Insert Table Index**:
 >        - *"Table Index"*: `No`
 >        - *"Index on Columns"*: `prot, id`
+>
+>  - {% icon param-repeat %} **Insert Database Table** (a): `Reference_Protein_Acessions`
+>    - Section **Table Options**:
+>      - *"Tabular Dataset for Table"*: `Uniprot`
+>      - *"Use first line as column names"* : `No`
+>      - *"Specify Column Names (comma-separated list)"*:`prot`
+>      - {% icon param-repeat %} **Insert Table Index**:
+>        - *"Table Index"*: `No`
+>        - *"Index on Columns"*: `prot`
+>
 >
 >      > ### {% icon comment %} Comment:
 >      >
@@ -471,5 +412,18 @@ Once BlastP search is performed, it provides with a tabular output containing pe
 > The tools are subjected to changes while being upgraded.
 > Thus, running the workflow provided with the tutorial, the user might need to make sure they are using the latest version including updating the parameters.
 >
+{: .comment}
+
+
+
+# **Conclusion**
+{:.no_toc}
+
+This completes the walkthrough of the proteogenomics database search workflow. This tutorial is a guide to perform database searching with mass spectronetry files and have peptides ready for Blast-P analysis, you can perform follow up analysis using the next GTN "Proteogenomics Novel Peptide Analysis". 
+Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
+
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
+
+
 {: .comment}
 
