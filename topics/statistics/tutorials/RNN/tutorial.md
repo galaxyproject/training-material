@@ -72,11 +72,11 @@ Output layer neurons usually have sigmoid or tanh functions.
 
 ## FFN with hidden layer
 
-Minsky and Papert published a book in 1969 that showed that a single layer FNN cannot solve problems in which 
-the data is not linearly separable (such as the XOR problem). Adding one (or more) hidden layers to FNN enables 
-it solve problems in which data is non-linearly separable. In theory a FNN with one hidden layer can represent 
-any function (add reference), although in practice training such a model is very difficult (if not impossible), 
-hence, we usually add multiple hidden layers to solve complex problems.   
+Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable, 
+such as the XOR problem {% cite Newell780 %}. Adding one (or more) hidden layers to FNN enables it solve problems 
+in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent 
+any function {% cite Cybenko1989 %}, although in practice training such a model is very difficult (if not impossible), 
+hence, we usually add multiple hidden layers to solve complex problems.
 
 ![Alternative text](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are ommitted for clarity")
 
