@@ -11,11 +11,11 @@ objectives:
 - Learn various RNN types and acrchitectures
 - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy
 requirements:
--
-  type: internal
-  topic_name: statistics
-  tutorials:
-    - intro_deep_learning
+  -
+    type: internal
+    topic_name: statistics
+    tutorials:
+      - intro_deep_learning
 time_estimation: 2H
 contributors:
 - kxk302
