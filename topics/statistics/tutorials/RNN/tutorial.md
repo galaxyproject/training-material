@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: Introduction to recurrent neural networks (RNN)
-zenodo_link: 'http://doi.org/10.5281/zenodo.4477881'
+zenodo_link: https://zenodo.org/record/4477881
 questions:
 - What is a recurrent neural network (RNN)?
 - What are some applications of RNN?
@@ -10,11 +10,19 @@ objectives:
 - Understand the difference between feedforward neural networks (FNN) and RNN
 - Learn various RNN types and acrchitectures
 - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy
+requirements:
+-
+  type: internal
+  topic_name: statistics
+  tutorials:
+    - intro_deep_learning
 time_estimation: 2H
 contributors:
-- Kaivan Kamali
+- kxk302
 
 ---
+
+
 
 
 # Introduction
@@ -240,8 +248,6 @@ have fun!
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
 
 The idea is to keep the theory description before quite simple to focus more on the practical part.
 
