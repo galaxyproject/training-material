@@ -127,13 +127,13 @@ We will now run a comparison between *Mycoplasma hyopneumoniae 232* and *Mycopla
 >    > > 2. The `Alignments` file contains the actual regions of the query and reference sequence for each alignment detected. With this file, you can investigate individual alignments, find mutations and differences between the sequences, extract the aligned part, etc.
 >    > > 3. Changing the parameters affect the number of alignments GECKO will detect. In fact, if we use parameters that are too restrictive, then we might not get any alignments at all! On the other hand, if we use parameters that are too permissive, then we might get a lot of noise in the output. Thus, it is very important to understand what the parameters do. Never leave your parameters default, always know what they do! Check out the help section to get information about the parameters.
 >    >  {: .solution }
->    {: .question}
->    >
+>    {: .question} 
+>
 >    > ### {% icon comment %} Note about parameters
 >    > 1. Besides the `minimum length` and `minimum similarity` parameters, which are applied as a filter after the comparison is completed, the `k-mer seed size` is an internal parameter that regulates the number of seeds that can be found. A smaller `k-mer` size will translate into detecting more seeds, which are starting points for alignments.
 >    > 2. Notice that this parameter must be taken into account depending on the type of sequence that we are working with. For example, if we set `k-mer seed size` to `32`, then `GECKO` will attempt to find alignments that start with 32 consecutive, equally aligned base pairs between the two sequences. If your sequences are far away from each other (in terms of evolutionary distance) then it will be very hard to find such 32 consecutive base pairs!
 >    > 3. Some advice: this parameter can affect performance greatly. For instance, setting `k-mer seed size` to `8` in the case of chromosomes can require much more computing time than using for instance `32`. On the other hand, if we set it to `32` in the case of small bacterial sequences, we might not find any alignments!
->    > {: .comment}
+>    {: .comment}
 >
 {: .hands_on}
 
