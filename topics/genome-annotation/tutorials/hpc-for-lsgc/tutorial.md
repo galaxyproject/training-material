@@ -246,7 +246,7 @@ As you can imagine, all three scenarios require several large-scale sequence com
 
 Before jumping on the hands-on, let us see an example of the second case: say we wanted to study the evolutionary rearrangements between the grass and common wheat genomes (*Aegilops tauschii* and *Triticum aestivum*). The following plot shows the comparison:
 
-![Large-scale genome comparison example](../../images/hpc-for-lsgc/Chrom07.png "Chromosome comparison for Aegilops tauschii and Triticum aestivum. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!")
+![Large-scale genome comparison example](../../images/hpc-for-lsgc/Chrom07.png "Chromosome comparison for <em>Aegilops tauschii</em> and <em>Triticum aestivum</em>. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!")
 
 Now there are some things to note here: (1) these alignment-free comparisons can be performed very quickly, (2) we can visually see the large rearrangements and (3) we can identify which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use `CHROMEISTER` to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, *e.g.* *Homo sapiens* and *Mus musculus*).
 
@@ -330,7 +330,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 
 Your `Comparison dotplot` file (remember to inspect each using the {% icon galaxy-eye %} icon) should look like this: 
 
-![Single chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum.png "Chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end. ")
+![Single chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum.png "Chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end. ")
 
 Figure 3 shows the comparison plot for the plant chromosomes. Notice that the origin of both sequences is at the top-left and the ending is at the bottom-right of the plot. Noise and small repeats are filtered out automatically by `CHROMEISTER` to allow focusing on where the main similarity blocks are located. We can see that there three types of blocks:
 
@@ -348,7 +348,7 @@ Also note that a `score` value can be seen in the title of the plot (this value 
 
 Let us now see how the blocks detected in the comparison are automatically classified for further processing. Figure 4 shows the blocks detected heuristically from the comparison and classified according to their position and orientation. This plot is available in the file **Detected events plot**.
 
-![Events in chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum-events.png "Automatically detected events in the chromosome comparison corresponding to Aegilops tauschii and Triticum aestivum as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)")
+![Events in chromosome comparison](../../images/hpc-for-lsgc/aegilops-triticum-events.png "Automatically detected events in the chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)")
 
 In Figure 4 we can see a similar plot to that in Figure 3 but with the addition of colors. Each detected block is labelled according to whether it is in the main diagonal (red), transposed (blue) or inverted (green). Inverted transpositions are also labelled green. Notice that this automatic classification process is based on the Hough transform ({% cite duda1972use %}) which is governed by a set of parameters which can therefore affect the sensitivity of the detection of blocks, and hence some blocks can be missed.
 
