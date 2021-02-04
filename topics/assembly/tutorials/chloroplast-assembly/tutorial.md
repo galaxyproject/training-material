@@ -3,6 +3,9 @@ layout: tutorial_hands_on
 
 title: "Chloroplast genome assembly"
 zenodo_link: "http://doi.org/10.5281/zenodo.3567224"
+tags:
+  - plant
+  - nanopore
 questions:
   - "How can we assemble a chloroplast genome?"
 objectives:
@@ -10,7 +13,7 @@ objectives:
   - "Polish the assembly with short reads"
   - "Annotate the assembly and view"
   - "Map reads to the assembly and view"
-  
+
 time_estimation: "2h"
 key_points:
   - "A chloroplast genome can be assembled with long reads and polished with short reads"
@@ -145,7 +148,7 @@ Your assembly graph may look like this:
 > * Repeat the Flye assembly with different parameters, and/or a filtered read set.
 > * You can also try repeating the Flye assembly with an earlier version of the tool, to see the difference it makes. In the tool panel for Flye, click on the 'Versions' button at the top to change.
 > * Try an alternative assembly tool, such as Canu or Unicycler.
-{: .comment} 
+{: .comment}
 
 # Polish assembly
 
@@ -202,7 +205,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 
 We can now annotate our assembled genome with information about genomic features.
 
-* A chloroplast genome annotation tool is not yet available in Galaxy; for an approximation, here we can use the tool for bacterial genome annotation, Prokka. 
+* A chloroplast genome annotation tool is not yet available in Galaxy; for an approximation, here we can use the tool for bacterial genome annotation, Prokka.
 
 > ### {% icon hands_on %} Hands-on: Annotate with Prokka
 >
@@ -216,9 +219,9 @@ We can now annotate our assembled genome with information about genomic features
 {: .hands_on}
 
 
-Alternatively, you might want to use a web-based tool designed for chloroplast genomes. 
+Alternatively, you might want to use a web-based tool designed for chloroplast genomes.
 
-* One option is the GeSeq tool, described here. Skip this step if you have already used Prokka above. 
+* One option is the GeSeq tool, described here. Skip this step if you have already used Prokka above.
 
 > ### {% icon hands_on %} Hands-on: Annotate with GeSeq
 > * Download `polished-assembly.fasta` to your computer (click on the file in your history; then click on the disk icon).
