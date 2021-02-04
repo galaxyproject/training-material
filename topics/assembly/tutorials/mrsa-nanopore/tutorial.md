@@ -289,11 +289,13 @@ for the "+" sign and the quality score.
 >
 > 1. How many contigs do you have?
 > 2. What is the coverage of your biggest contig?
+> 3. What is the length of your biggest contig?
 >
 > > ### {% icon solution %} Solution
 > > While results may vary due to randomness in the assembly process, in our case we had:
 > >
 > > 1. 2
+> > 2. 181
 > > 2. 2.9mb
 > {: .solution}
 {: .question}
@@ -369,6 +371,7 @@ Because we are working with a MRSA we are curious to see which resistance genes 
 >    - For the plasmid and resistance results the identity, overlap, length and the location on the contig can be found here.
 >    - Multiple rep sequences are located on the second contig. (See "plasmid typing for gram-positive bacteria" {% cite Lozano_2012 %} for more information)
 >    - Multiple resistance genes can be found on both contig 1 and contig 2.
+>    - In the last column there are "Accession" numbers.
 >
 {: .hands_on}
 
