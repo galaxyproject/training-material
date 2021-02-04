@@ -148,7 +148,7 @@ We will now use additional tools to post-process our alignments. Consider the ca
 
 For our current experiment, we will be looking for the following set of repeats:
 
-![Mycoplasma hyopneumoniae comparison example](../../images/hpc-for-lsgc/GeckoMGV01.PNG "(Left) Sequence comparison between Mycoplasma hyopneumoniae 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.")
+![Mycoplasma hyopneumoniae comparison example](../../images/hpc-for-lsgc/GeckoMGV01.PNG "(Left) Sequence comparison between <em>Mycoplasma hyopneumoniae</em> 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.")
 
 Let's extract the repeats highlighted in red (Figure 1, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. *Mycoplasma hyopneumoniae 7422*) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 1 we are selecting the ones stacked vertically).
 
