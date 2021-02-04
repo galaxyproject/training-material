@@ -56,7 +56,7 @@ This tutorial is divided into two large sections:
 
 # Fine-grained sequence comparison
 
-Imagine you are working on an evolutionary study regarding the species `mycoplasma hyopneumoniae`. In particular, you are interested in the strains `232` and `7422` and wish to compare their DNA sequence to know more about the evolutionary changes that took place between both. The workflow you will follow starts with (1) acquiring the data, (2)  getting it ready for Galaxy, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let's go! 
+Imagine you are working on an evolutionary study regarding the species *Mycoplasma hyopneumoniae*. In particular, you are interested in the strains `232` and `7422` and wish to compare their DNA sequence to know more about the evolutionary changes that took place between both. The workflow you will follow starts with (1) acquiring the data, (2)  getting it ready for Galaxy, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let's go! 
 
 ## Preparing the data
 
@@ -69,7 +69,7 @@ First we will be uploading the data to Galaxy so that we can run our tools on it
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `mycoplasma-hyopneumoniae-232.fasta` and `mycoplasma-hyopneumoniae-7422.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
+> 2. Import `mycoplasma-232.fasta` and `mycoplasma-7422.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
 >
 >    ```
 >    https://zenodo.org/record/4485547/files/mycoplasma-232.fasta
@@ -105,7 +105,7 @@ As we discussed in the previous section, running optimal aligning tools on such 
 
 ## Running the comparison
 
-We will now run a comparison between `mycoplasma hyopneumoniae 232` and `mycoplasma hyopneumoniae 7422` in Galaxy using `GECKO`.
+We will now run a comparison between *Mycoplasma hyopneumoniae 232* and *Mycoplasma hyopneumoniae 7422* in Galaxy using `GECKO`.
 
 > ### {% icon hands_on %} Hands-on: Comparing two mycoplasmas with GECKO
 > 1. {% tool [GECKO](toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2) %} with the following parameters
@@ -261,7 +261,7 @@ Let us now jump into the hands-on! We will learn how to compare chromosomes with
 >    {% include snippets/create_new_history.md %}
 >    {% include snippets/rename_history.md %}
 >
-> 2. Import `aegilops-tauschii-chr1.fasta` and `triticum-aestivum-chr1.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
+> 2. Import `aegilops_tauschii_chr1.fasta` and `triticum_aestivum_chr1.fasta` from [Zenodo](https://zenodo.org/record/4485547#.YBj8XHmCGUk).
 >
 >    ```
 >    https://zenodo.org/record/4485547/files/aegilops_tauschii_chr1.fasta
