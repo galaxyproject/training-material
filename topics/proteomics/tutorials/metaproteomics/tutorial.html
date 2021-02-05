@@ -586,7 +586,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Oct 15, 2020 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 4, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -789,7 +789,7 @@ generating PSMs from MS/MS data. For the purpose of this tutorial, <strong>X!Tan
 
       <ul>
         <li><strong>Fragment Tolerance Units</strong>: <code class="language-plaintext highlighter-rouge">Daltons</code></li>
-        <li><strong>Fragment Tolerance</strong>: <code class="language-plaintext highlighter-rouge">0.02</code>- this is high resolution MS/MS data</li>
+        <li><strong>Fragment Tolerance</strong>: <code class="language-plaintext highlighter-rouge">0.2</code>- this is high resolution MS/MS data</li>
         <li><strong>Maximum Charge</strong>: <code class="language-plaintext highlighter-rouge">6</code></li>
       </ul>
 
@@ -916,7 +916,7 @@ proteins and provides a fast matching algorithm for peptides.</p>
   <h3 id="comment-unipept"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Unipept</h3>
 
   <p>Users can access UniPept via a <a href="https://unipept.ugent.be">web page</a> and paste peptide
-sequences into the search form to retrieve protein information. But we`ll use the <span class="notranslate">Galaxy</span>
+sequences into the search form to retrieve protein information. But we’ll use the <span class="notranslate">Galaxy</span>
 <em>Unipept</em> tool to automate the process. The <em>Unipept</em> tool sends the peptide list to the
 UniPept REST API service, then transforms the results into datasets that can be further analyzed
 or operated on within <span class="notranslate">Galaxy</span>.</p>
@@ -1046,15 +1046,15 @@ Therefore we can search the database for the peptides and count the occurrence w
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
+          <p>`SELECT sequence as “peptide”, count(id) as “PSMs”</p>
 
-FROM psm
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM psm
 
 WHERE confidence &gt;= 95
 
 GROUP BY sequence
 
-ORDER BY sequence
+ORDER BY sequence`
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1191,7 +1191,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
 
 FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 
@@ -1199,7 +1199,7 @@ WHERE confidence &gt;= 95
 
 GROUP BY lca.genus
 
-ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1447,7 +1447,7 @@ for each protein.</p>
         <li><strong>Filter Tabular Input Lines</strong>: Click on <code class="language-plaintext highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
         <li><strong>Filter By</strong>: Select <code class="language-plaintext highlighter-rouge">skip leading lines</code>
           <ul>
-            <li><strong>Skip lines</strong>: leave blank</li>
+            <li><strong>Skip lines</strong>: <code class="language-plaintext highlighter-rouge">1</code></li>
           </ul>
         </li>
         <li>Add another Filter: Click on <code class="language-plaintext highlighter-rouge">+ Insert Filter Tabular Input Lines</code>:</li>
@@ -1531,15 +1531,15 @@ for each protein.</p>
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
+          <p>`SELECT sequence as “peptide”, count(id) as “PSMs”</p>
 
-FROM bering_psms
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM bering_psms
 
 WHERE confidence &gt;= 95
 
 GROUP BY sequence
 
-ORDER BY sequence
+ORDER BY sequence`
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1565,9 +1565,9 @@ ORDER BY sequence
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT go.description,
+          <p>`SELECT go.description,</p>
 
-count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
 
 FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN
 
@@ -1577,7 +1577,7 @@ WHERE go.aspect = 'molecular_function'
 
 GROUP BY go.description
 
-ORDER BY  bering_peptides desc,bering_psms desc
+ORDER BY  bering_peptides desc,bering_psms desc`
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1605,9 +1605,6 @@ ORDER BY  bering_peptides desc,bering_psms desc
     </li>
     <li>
       <p><a href="https://www.ncbi.nlm.nih.gov/pubmed/28552653">Unipept</a></p>
-    </li>
-    <li>
-      <p><a href="http://z.umn.edu/metaproteomicsgateway"><span class="notranslate">Galaxy</span>-P Metaproteomics instance</a></p>
     </li>
     <li>
       <p><a href="http://z.umn.edu/mpvideo2018">Metaproteomics video</a></p>
@@ -1678,7 +1675,7 @@ ORDER BY  bering_peptides desc,bering_psms desc
                     <h1>Citing this Tutorial</h1>
                     <p>
                         <ol>
-                            <li id="citation-text">Timothy J. Griffin, Pratik Jagtap, James Johnson, Clemens Blank, Subina Mehta, 2020 <b>Metaproteomics tutorial (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html">/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html</a> Online; accessed TODAY
+                            <li id="citation-text">Timothy J. Griffin, Pratik Jagtap, James Johnson, Clemens Blank, Subina Mehta, 2021 <b>Metaproteomics tutorial (Galaxy Training Materials)</b>. <a href="/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html">/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html</a> Online; accessed TODAY
                             </li>
                             <li>
                             Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
@@ -1695,9 +1692,9 @@ ORDER BY  bering_peptides desc,bering_psms desc
 <code id="citation-code">@misc{proteomics-metaproteomics,
     author = "Timothy J. Griffin and Pratik Jagtap and James Johnson and Clemens Blank and Subina Mehta",
     title = "Metaproteomics tutorial (Galaxy Training Materials)",
-    year = "2020",
-    month = "10",
-    day = "15"
+    year = "2021",
+    month = "02",
+    day = "04"
     url = "\url{/training-material/topics/proteomics/tutorials/metaproteomics/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
