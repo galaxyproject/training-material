@@ -32,11 +32,14 @@ contributors:
 
 Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a 
 human brain work. In the past decade, there has been a huge resurgence of neural networks thanks 
-to the vast availability of training data and enormous increases in computing capacity (Successfully 
+to the vast availability of data and enormous increases in computing capacity (Successfully 
 training complex neural networks in some domains requires lots of data and compute capacity). There 
 are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss 
-the recurrent neural networks and explain how they differ from feedforward variants. We also describe 
-various RNN architectures and solve a sentiment analysis problem using RNN in Galaxy.       
+recurrent neural networks, which model sequential data, and have been successfully applied to language 
+generation, machine translation, speech recognition, image description, and text summarization 
+({% cite wen-etal-2015-semantically %}, {% cite cho-etal-2014-learning %}, {% cite LimEtAl %}, 
+{% cite karpathyEtAl %}, {% cite li-etal-2017-deep %}). We then explain how RNN differ from feedforward networks, 
+describe various RNN architectures and solve a sentiment analysis problem using RNN in Galaxy.
 
 > ### Agenda
 >
@@ -49,12 +52,12 @@ various RNN architectures and solve a sentiment analysis problem using RNN in Ga
 
 # Review of feedforward neural networks (FNN)
 
-In feedforward neural networks (FNN) all the fields of a training example are presented
-to the network at once, after which the the network generates an output. For example, a
-lung X-ray image is passed to a FNN, and the network predicts tumor or no tumor. By contrast,
-in RNN the training example fields are presented to the network one at a time. For example,
-a sequence of English words is passed to an RNN, one at a time, and the network generates a
-sequence of Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.
+In feedforward neural networks (FNN) a single training example is presented to the network, 
+after which the the network generates an output. For example, a lung X-ray image is passed 
+to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of 
+training examples are presented to the network one at a time. For example, a sequence of 
+English words is passed to a RNN, one at a time, and the network generates a sequence of 
+Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.
 
 ## Single layer FNN
 
@@ -66,7 +69,8 @@ weight. Afterwards, the results are summed up, along with a bias, and passed to 
 ![Alternative text](../../images/activation.gif "Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.")
 
 The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
-Output layer neurons usually have sigmoid or tanh functions.
+Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation 
+functions, please refer to {% cite nwankpaEtAl %}.
 
 ![Alternative text](../../images/sigmoid.gif "Sigmoid activation function")
 
@@ -82,19 +86,19 @@ hence, we usually add multiple hidden layers to solve complex problems.
 
 ## Learning algorithm 
 
-The learning algorithm incrementally tweaks the network weights, so that the network error on the training 
-set is minimized. Training set is composed of many training examples. Each training set is fed to the network 
-and the network output is compared to the expected output. We need to define a **loss function** to objectively 
-measure how much the predicted output is off of the expected output. For classification problems we use the 
-**cross entropy** loss function.     
+In supervised learning, we are given a set of input-output pairs, called the *training set*. Given the training set, the learning algorithm 
+(iteratively) adjusts the model parameters, so that the model can accurately map inputs to outputs. We usually have another set of input-output 
+pairs, called the *test set*, which is not used by the learning algorithm. When the learning algorithm completes, we assess the learned model by 
+providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a **loss function** to objectively 
+measure how much the model output is off of the expected output. For classification problems we use the **cross entropy** loss function.
 
 ![Alternative text](../../images/CrossEntropy.gif "Cross entropy loss function")
 
-Loss function is calculated for each training example. The average of the calculated loss functions over all training 
-examples in the training set is the **Cost function**. The goal of the learning algorithm is to minimize the cost 
-function. The cost function is a function of network weights and biases of all neurons in all layers. The **backpropagation** 
-learning algorithm iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights 
-and biases in the opposite direction of the gradient, to find the local minimum.
+The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training 
+set input-output pairs is called the **Cost function**. The goal of the learning algorithm is to minimize the cost function. The cost function 
+is a function of network weights and biases of all neurons in all layers. The **backpropagation** learning algorithm {% cite Rumelhart1986 %} 
+iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite 
+direction of the gradient, to find the local minimum.  
 
 ![Alternative text](../../images/CostFunction.gif "Cross entropy cost function")
   
