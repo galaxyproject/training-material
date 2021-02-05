@@ -137,16 +137,17 @@ but for the previous layers, this process must be repeated recursively, resultin
 of the RNN, halting the learning process.
 
 LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this 
-tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU used **gates** such that the weights/biases updates in previous 
+tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use **gates** such that the weights/biases updates in previous 
 layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or 
 thousands of layers. 
 
 # Text representation schemes
 
-In this tutorial we perform sentiment analysis on IMDB movie reviews dataset ({% cite maas-EtAl %}). We train our RNN on the training dataset, 
-which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is also made up of 25000 
-movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with text data, it's a 
-good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess text documents. 
+In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset ({% cite maas-EtAl %}). We train our RNN on 
+the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is 
+also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with 
+text data, it's a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess 
+text documents. 
 
 ## Text preprocessing
 
@@ -227,7 +228,7 @@ cost function via backpropagation.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype of `X_test` and `X_train` is `tabular` and `y_test` and `y_train` is `txt`
+> 4. Check that the datatype of `X_test`, `X_train`, `y_test`, and `y_train` is `tabular`
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -246,28 +247,28 @@ and plot the confusion matrix.
 > 1. **Create a deep learning model architecture** using Keras {% icon tool %} with the following parameters:
 >    - *"Select keras model type"*: `sequential`
 >    - *"input_shape"*: `(500,)`
->    - *"Layer"*: 
->      - *"Choose the type of layer"*: `Embedding -- Embedding`
->      - *"input_dim"*": `10000`
->      - *"output_dim"*": `32`
->      - Click *"Insert Layer"*"
->      - *"Choose the type of layer"*: `Recurrent -- LSTM`
->      - *"units"*": `100`
->      - Click *"Insert Layer"*"
->      - *"Choose the type of layer"*: `Core -- Dense`
->      - *"units"*": `1`
->      - *"Activation function"*: `sigmoid`
->      - Click *"Insert Layer"*"
+>    - In *"LAYER"*:
+>        - {% icon param-repeat %} *"1: LAYER"*:
+>            - *"Choose the type of layer"*: `Embedding -- Embedding`
+>                - *"input_dim"*": `10000`
+>                - *"output_dim"*": `32`
+>        - {% icon param-repeat %} *"2: LAYER"*:
+>            - *"Choose the type of layer"*: `Recurrent -- LSTM`
+>                - *"units"*": `100`
+>        - {% icon param-repeat %} *"3: LAYER"*:
+>            - *"Choose the type of layer"*: `Core -- Dense`
+>                - *"units"*: `1`
+>                - *"Activation function"*: `sigmoid`
 >    - Click *"Execute"* 
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> Our neural network has 3 layers. The first layer is an embedding layer, that transforms words into a 32 dimensional vectors (*output_dim*). 
-  We have 10000 unique words in our IMDB dataset (*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM 
-  layer has a size of *100*. The third layer is a *Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are 
-  connected to a single neuron in this layer). It has a *sigmoid* activation function, that generates an output between 0 and 1. Any output 
-  greater than 0.5 is considered a predicted positive review, and anything less than 0.5 a negative one. The model config can be downloaded 
-  as a JSON file.
+> Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is 
+  an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10000 unique words in our IMDB dataset 
+  (*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM layer has a size of *100*. The third layer is a 
+  *Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a 
+  *sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review, 
+  and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
 {: .comment}
 
 ### **Create a deep learning model**
@@ -285,7 +286,7 @@ and plot the confusion matrix.
 >    - In *"Fit Parameters"*:
 >        - *"epochs"*: `2`
 >        - *"batch_size"*: `128`
->    - Click *"Execute"*:
+>    - Click *"Execute"*
 {: .hands_on}
 
 > ### {% icon comment %} Comment
@@ -347,16 +348,20 @@ and plot the confusion matrix.
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test` 
 >    - *"Choose how to select data by column:"*: `All columns`
+>    - *"Select dataset containing the predicted labels"*": Select `Model Prediction` from the previous step 
 >    - *"Does the dataset contain header:"*: `Yes`
 >    - Click *"Execute"*
 >
 {: .hands_on}
 
 > ### {% icon comment %} Comment
-> "Confusion Matrix" is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
-  that were correctly classified by the model (True positives and true negatives, respectively). It also lists the number of examples that were 
-  classified as positive that were actually negative (False positive or Type I error), and the number of examples that were classified as negative
-  that were actually positive (False negative or Type 2 error).
+> **Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
+  that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that 
+  were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified 
+  as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and **recall** 
+  {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall is the fraction 
+  of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is to use the **F score**, 
+  which is the harmonic mean of precision and recall (F = (2 * precision * recall) / (precision + recall)).
 {: .comment}
 
 
