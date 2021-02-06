@@ -9,6 +9,7 @@ questions:
 objectives:
 - Understand the difference between feedforward neural networks (FNN) and RNN
 - Learn various RNN types and architectures
+- Learn how to create a neural network using Galaxy's deep learning tools
 - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy
 requirements:
   -
