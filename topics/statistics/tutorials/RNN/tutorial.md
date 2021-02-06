@@ -228,7 +228,7 @@ cost function via backpropagation.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype of `X_test`, `X_train`, `y_test`, and `y_train` is `tabular`
+> 4. Check that the datatype of all the four datasets is `tabular`
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
