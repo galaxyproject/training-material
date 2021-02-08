@@ -223,16 +223,18 @@ data manager to create these annotations to make them available for users.
 > 2. Inspect {% icon galaxy-eye %} the resulting files
 {: .hands_on}
 
-Three FASTA files are generated through the CustomProDB tool:
-- a variant FASTA file for short indels,
-- a Single Amino acid Variant (SAV) FASTA file
-- an Sqlite file (genome mapping and variant mapping)
+There are 6 files are generated through the CustomProDB tool:
+- rpkm.fasta: reference proteins filtered by transcript expression level (RPKM calculated from a BAM file)
+- snv.fasta: Single Nucleotide Variants detected by FreeBayes (.vcf file)
+- indel.fasta: Insertions/Deletions detected by FreeBayes (.vcf file)
+- Genomic_mapping.sqlite: mapping proteins to genome
+- Variant_annotation.sqlite: used to visualize the variants in the Multi-omics Visualization Platform
+- RData: set of annotation files (in RData format) to create reference and variant protein sequences
 
-for mapping proteins to genome and an RData file for variant protein coding sequences.
-Similar to the genomic mapping, a variant mapping file is also generated from CustomProDB.
-This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
-variant annotation file will be used to visualize the variants in the Multi-omics Visualization
-Platform (in-house visualization platform developed by Galaxy-P senior developers).
+
+For mapping proteins to genome and an RData file for variant protein coding sequences. Similar to the genomic mapping, a variant mapping file 
+is also generated from CustomProDB. This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
+variant annotation file will be used to visualize the variants in the Multi-omics Visualization Platform (in-house visualization platform developed by Galaxy-P senior developers).
 
 # Transcript Assembly
 
@@ -398,8 +400,9 @@ along with the UniProt and cRAP databases.
 > ### {% icon comment %} CustomProDB generated protein Accession names need to be changed for PeptideShaker
 > PeptideShaker does not allow greaterthan sign, comma, or spaces in the protein accession name.
 > PeptideShaker also requires the FASTA ID to start with a source, e.g. *>sp|Q8C4J7|* for SwissProt entries.  Nonstandard entries must be prefixed *generic|*.
-> We will also need to similarily modify the accessions in the genomic mapping and and variant annotation outputs.
+> We will also need to similarily modify the accessions in the genomic mapping and and variant annotation outputs. For eg: ENSEMBL-PRO (output from CustomProDB) and STRG (from StringTie) are not standard format.
 {: .comment}
+
 > ### {% icon hands_on %} Hands-on: FASTA to Tabular
 > 1. **FASTA to Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
@@ -500,7 +503,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 ## Variant Annotations database
 
-We will repeat the process for the variant annotations.  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
+We will repeat the process for the variant annotations (this file will be used as a input to the new updates that will be made on the Multiomics Visualization platform).  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 
 > ### {% icon hands_on %} Hands-on: Create database for variant annotations
 >
