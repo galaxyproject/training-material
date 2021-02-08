@@ -404,7 +404,7 @@ along with the UniProt and cRAP databases.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: FASTA to Tabular
-> 1. **FASTA to Tabular** {% icon tool %}: with the default parameters
+> 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
 >
 > 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
@@ -581,7 +581,7 @@ To do so:
 Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial. 
 
 > ### {% icon hands_on %} Hands-on: FASTA to Tabular
-> 1. **FASTA to Tabular** {% icon tool %}: with the default parameters
+> 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `HISAT_Output.rpkm (fasta)`
 >
 > 2. **Filter Tabular** {% icon tool %}: with these filters:
@@ -593,7 +593,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >     - {% icon param-text %} *"regex pattern"*: `^([^ |]+).*$`
 >     - {% icon param-text %} *"replacement expression"*: `1`
 >
-> 3. **FASTA to Tabular** {% icon tool %}: with the default parameters
+> 3. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)`
 >
 > 4. **Filter Tabular** {% icon tool %}: with these filters:
@@ -610,6 +610,9 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >
 {: .hands_on}
 
+> ### {% icon comment %} **FASTA-to-Tabular**
+> Please make sure the tool version is 1.1.1
+{: .comment}
 
 > ### {% icon comment %} Tool versions
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
