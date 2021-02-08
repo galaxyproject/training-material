@@ -197,14 +197,6 @@ outputs.
 >
 {: .hands_on}
 
-
-A number of new items will appear in your history, each corresponding to the outputs selected
-in the PeptideShaker parameters. Most relevant for this tutorial is the PSM report:
-
-Scrolling at the bottom to the left will show the sequence for the PSM that matched to these
-peptide entries. Column 3 is the sequence matched for each PSM entry. Every PSM is a
-new row in the tabular output.
-
 A number of new items will appear in your History, each corresponding to the outputs selected in the PeptideShaker parameters. The Peptide Shaker’s PSM report is used as an input for the BlastP analysis. Before performing BlastP analysis. The Query Tabular tool and few test manipulation tools are used to remove spectra that belongs to the reference proteins. The output tabular file “Peptides_for_Blast-P_analysis” will contain only those spectra that did not belong to any known proteins.
 
 # Create database
@@ -270,7 +262,7 @@ The next step is to remove known peptides from the list of PSM's that we acquire
 >      - *"Only load the columns you have named into database"*: `Yes`
 >      - {% icon param-repeat %} **Insert Table Index**:
 >        - *"Table Index"*: `No`
->        - *"Index on Columns"*: `prot, id`
+>        - *"Index on Columns"*: `prot,id`
 >
 >  - {% icon param-repeat %} **Insert Database Table** (a): `Reference_Protein_Acessions`
 >    - Section **Table Options**:
@@ -360,52 +352,14 @@ The output from this step is that the resultant peptides would be those which do
 BlastP search is carried out with the PSM report (output from PeptideShaker). Before, BlastP analysis the “Peptides_for_Blast-P_analysis” is first converted from Tabular format to FASTA file format which can be easily read by the BlastP algorithm. This is done with the help of “Tabular to FASTA” conversion tool.
 The short BlastP uses parameters for short peptide sequences (8-30 aas). Please use the rerun option to look at the parameters used.
 
-> ### {% icon hands_on %} Hands-on: Tabular to FASTA
-> 1. **Tabular to FASTA** {% icon tool %}: with the following parameters:
+> ### {% icon hands_on %} Hands-on: Tabular to FASTA (version 1.1.1)
+> 1. **Tabular-to-FASTA** {% icon tool %}: with the following parameters:
 >    - *"Title column"*: `1`
 >    - *"Sequence Column"*:`2`
 >
 {: .hands_on}
 
 The output FASTA file is going to be subjected to BLAST-P analysis.
-
-> ### {% icon hands_on %} Hands-on: NCBI BLAST+ blastp
->
-> 1. **NCBI BLAST+ blastp** {% icon tool %}: Run **BLASTP** with:
->    - {% icon param-file %} *"Protein query sequence(s)"*: `Data input 'query' (fasta)`
->    - {% icon param-select %} *"Subject database/sequences"*: `Locally installed BLAST database`
->      - {% icon param-select %} *"Protein Blast database"*: Select `nr_mouse_current`
->    - {% icon param-check %} *"Type of BLAST"*: `blastp-short - BLASTP optimized for queries shorter than 30 residues`
->    - {% icon param-text %} *"Set expectation value cutoff"*:`200000.0`
->    - {% icon param-select %} *"Output format"*: `Tabular(extended 25 columns)`
->    - *"Advanced Options"*: `Show Advanced Options`
->      - {% icon param-check %} *"Filter out low complexity regions (with SEG)"*: `No`
->      - {% icon param-select %} *"Scoring matrix and gap costs"*: `PAM30`
->        - {% icon param-select %} *"Gap Costs"*: `Existence: 9 Extension: 1`
->      - {% icon param-text %} *"Maximum hits to show"*: `1`
->      - {% icon param-text %} *"Maximum number of HSPs (alignments) to keep for any single query-subject pair"*:`1`
->      - {% icon param-text %} *"Word size for wordfinder algorithm"*: `2`
->      - {% icon param-text %} *"Multiple hits window size"*: `40`
->      - {% icon param-text %} *"Minimum score to add a word to the BLAST lookup table"*: `11`
->      - {% icon param-select %} *"Composition-based statistics"*: `0 (No composition)`
->      - {% icon param-check %} *"Should the query and subject defline(s) be parsed?"*: `No`
->      - {% icon param-select %} *"Restrict search of database to a given set of ID's"*:`No restriction`
->
->      > ### {% icon comment %} Comment:
->      >
->      > This feature provides a means to exclude ID's from a BLAST database search.
->      > The expectation values in the BLAST results are based upon the sequences actually
->      > searched, and not on the underlying database. Note this cannot be used when
->      > comparing against a FASTA file.
->      >
->      {: .comment}
->
->    - {% icon param-text %} *"Minimum query coverage per hsp (percentage, 0 to 100)"*: `0`
->    - {% icon param-check %} *"Compute locally optimal Smith-Waterman alignments"*:`No`
->
-{: .hands_on}
-
-Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “**Novel peptides**”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.
 
 > ### {% icon comment %} Comment: Tool Versions
 >
