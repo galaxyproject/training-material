@@ -1,0 +1,1405 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>From small to large-scale genome comparison</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:title" content="Galaxy Training: From small to large-scale genome comparison" />
+        <meta property="og:description" content="Genome annotation is a multi-level process that includes ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'galaxy-genome-annotation/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/genome-annotation" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Genome Annotation
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fhpc-for-lsgc%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fhpc-for-lsgc%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fhpc-for-lsgc%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fhpc-for-lsgc%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fhpc-for-lsgc%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fgenome-annotation%2Ftutorials%2Fhpc-for-lsgc%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "From small to large-scale genome comparison",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Genome Annotation",
+    "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+    "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+  },
+  "courseCode": "genome-annotation / hpc-for-lsgc / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'From small to large-scale genome comparison' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - How can we run pairwise genome comparisons using Galaxy?\n - How can we run massive chromosome comparisons in Galaxy?\n - How can we quickly visualize genome comparisons in Galaxy?\n\n\\nThe objectives are:\n - Learn the basics of pairwise sequence comparison\n - Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels\n - Learn how to post-process your sequence comparisons\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html",
+      "name": "Galaxy 101",
+      "description": "Hands-on for 'Galaxy 101' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Esteban Perez-Wohlfeil"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Esteban Perez-Wohlfeil"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Genome Annotation",
+      "description": "Genome annotation is a multi-level process that includes prediction of protein-coding\ngenes, as well as other functional genome units such as structural RNAs, tRNAs,\nsmall RNAs, pseudogenes, control regions, direct and inverted repeats, insertion\nsequences, transposons and other mobile elements.\n",
+      "url": "https://training.galaxyproject.org//training-material/topics/genome-annotation/"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>From small to large-scale genome comparison</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/estebanpw/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/estebanpw" alt="Esteban Perez-Wohlfeil">Esteban Perez-Wohlfeil</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>How can we run pairwise genome comparisons using Galaxy?</p>
+</li>
+            
+            <li><p>How can we run massive chromosome comparisons in Galaxy?</p>
+</li>
+            
+            <li><p>How can we quickly visualize genome comparisons in Galaxy?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Learn the basics of pairwise sequence comparison</p>
+</li>
+            
+            <li><p>Learn how to run different tools in Galaxy to perform sequence comparison at fine and coarse-grained levels</p>
+</li>
+            
+            <li><p>Learn how to post-process your sequence comparisons</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Galaxy 101:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/introduction/tutorials/galaxy-intro-101/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+                    <li class="btn btn-default"><a href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/slides.html" title="Slides for this tutorial">
+                        <i class="fab fa-slideshare" aria-hidden="true"></i><span class="visually-hidden">slides</span> Slides
+                    </a></li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://doi.org/10.5281/zenodo.4485547">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/workflows/" title="Workflows" alt="From small to large-scale genome comparison workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/genome-annotation/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://metagenomics.usegalaxy.eu/" title="Metagenomics">
+            Metagenomics
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 4, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<!-- This is a comment. -->
+
+<p>Sequence comparison is a core problem in bioinformatics. It is used widely in evolutionary studies, structural and functional analyses, assembly, metagenomics, etc. Despite its regular presence in everyday Life-sciences pipelines, it is still not a trivial step that can be overlooked. Therefore, understanding how sequence comparison works is key to developing efficient workflows that are central to so many other disciplines.</p>
+
+<p>In the following tutorial, we will learn how to compare both small and large sequences using both seed-based alignment methods and alignment-free methods, and how to post-process our comparisons to refine our results. Besides, we will also learn about the theoretical background of sequence comparison, including why some tools are suitable for some jobs and others are not.</p>
+
+<p>This tutorial is divided into two large sections:</p>
+
+<ul>
+  <li>Fine-grained sequence comparison: In this part of the tutorial we will use <code class="language-plaintext highlighter-rouge">GECKO</code> (<a class="citation" href="#GECKO">Torreno and Trelles 2015</a>) to perform sequence alignment between small sequences. We will also identify, extract and re-align regions of interest.</li>
+  <li>Coarse-grained sequence comparison: In this part of the tutorial, we will tackle on how to compare massive sequences using <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> (<a class="citation" href="#perez2019ultra">Pérez-Wohlfeil <i>et al.</i> 2019</a>), an alignment-free sequence comparison tool. We will generate visualization plots for the comparison of large plant genomes and automatically detect large-scale rearrangements.</li>
+</ul>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#fine-grained-sequence-comparison" id="markdown-toc-fine-grained-sequence-comparison">Fine-grained sequence comparison</a>    <ol>
+      <li><a href="#preparing-the-data" id="markdown-toc-preparing-the-data">Preparing the data</a></li>
+      <li><a href="#running-the-comparison" id="markdown-toc-running-the-comparison">Running the comparison</a></li>
+      <li><a href="#post-processing-extracting-alignments" id="markdown-toc-post-processing-extracting-alignments">Post-processing: extracting alignments</a></li>
+    </ol>
+  </li>
+  <li><a href="#coarse-grained-sequence-comparison" id="markdown-toc-coarse-grained-sequence-comparison">Coarse-grained sequence comparison</a>    <ol>
+      <li><a href="#introduction-1" id="markdown-toc-introduction-1">Introduction</a></li>
+      <li><a href="#preparing-the-data-1" id="markdown-toc-preparing-the-data-1">Preparing the data</a></li>
+      <li><a href="#running-the-comparison-1" id="markdown-toc-running-the-comparison-1">Running the comparison</a></li>
+      <li><a href="#post-processing-detecting-rearrangements" id="markdown-toc-post-processing-detecting-rearrangements">Post-processing: detecting rearrangements</a></li>
+    </ol>
+  </li>
+</ol>
+
+</blockquote>
+
+<h1 id="fine-grained-sequence-comparison">Fine-grained sequence comparison</h1>
+
+<p>Imagine you are working on an evolutionary study regarding the species <em>Mycoplasma hyopneumoniae</em>. In particular, you are interested in the strains <code class="language-plaintext highlighter-rouge">232</code> and <code class="language-plaintext highlighter-rouge">7422</code> and wish to compare their <span class="notranslate">DNA</span> sequence to know more about the evolutionary changes that took place between both. The <span class="notranslate">workflow</span> you will follow starts with (1) acquiring the data, (2)  getting it ready for <span class="notranslate">Galaxy</span>, (3) running the comparison and (4) inspecting and working with the resulting alignments. Let’s go!</p>
+
+<h2 id="preparing-the-data">Preparing the data</h2>
+
+<p>First we will be uploading the data to <span class="notranslate">Galaxy</span> so that we can run our tools on it.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-mycoplasma-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Mycoplasma data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a descriptive name (e.g. “Mycoplasma comparison hands-on”)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import <code class="language-plaintext highlighter-rouge">mycoplasma-232.fasta</code> and <code class="language-plaintext highlighter-rouge">mycoplasma-7422.fasta</code> from <a href="https://zenodo.org/record/4485547#.YBj8XHmCGUk">Zenodo</a>.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4485547/files/mycoplasma-232.fasta
+https://zenodo.org/record/4485547/files/mycoplasma-7422.fasta
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
+    </li>
+    <li>
+      <p>Rename the files to <code class="language-plaintext highlighter-rouge">232.fasta</code> and <code class="language-plaintext highlighter-rouge">7422.fasta</code> and change the datatype if needed to <code class="language-plaintext highlighter-rouge">fasta</code> (<span class="notranslate">Galaxy</span> will auto-discover the format of the files).</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select ``</li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>If you were successful, both sequences should now be available as <code class="language-plaintext highlighter-rouge">.fasta</code> datasets in your history.</p>
+
+<blockquote class="question">
+  <h3 id="question-questions"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>What do you think about the size of the sequences in regards to the difficulty of comparing them? (You can check the size of the files by clicking on the information icon)</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>It always depends on the focus of our study. For instance, if we were looking for optimal alignments, two 1 MB sequences are indeed large enough to make most approaches either fail or take a decent amount of time and resources. On the other hand, if we were looking for seed-based local alignments (e.g. <code class="language-plaintext highlighter-rouge">GECKO</code> or <code class="language-plaintext highlighter-rouge">BLAST</code> (<a class="citation" href="#BLAST">Altschul <i>et al.</i> 1990</a>) ), the comparison would require merely seconds (check the slides for more information).</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<p>As we discussed in the previous section, running optimal aligning tools on such “small” data can be difficult (in fact, tools such as the well-known <code class="language-plaintext highlighter-rouge">EMBOSS needle</code> will require cuadratic amounts of time and memory, whereas tools such as <code class="language-plaintext highlighter-rouge">EMBOSS strecher</code> will require quadratic time (<a class="citation" href="#myers1988optimal">Myers and Miller 1988</a>)). These limitations can make it impractical in many situations. Therefore, we will now learn how to overcome these limitations by employing seed-based methods, particularly <code class="language-plaintext highlighter-rouge">GECKO</code>.</p>
+
+<h2 id="running-the-comparison">Running the comparison</h2>
+
+<p>We will now run a comparison between <em>Mycoplasma hyopneumoniae 232</em> and <em>Mycoplasma hyopneumoniae 7422</em> in <span class="notranslate">Galaxy</span> using <code class="language-plaintext highlighter-rouge">GECKO</code>.</p>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-comparing-two-mycoplasmas-with-gecko"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Comparing two mycoplasmas with GECKO</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2"><strong>GECKO</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/gecko/gecko/1.2</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query sequence”</em>: <code class="language-plaintext highlighter-rouge">232.fasta</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference sequence”</em>: <code class="language-plaintext highlighter-rouge">7422.fasta</code></li>
+        <li><em>“K-mer seed size”</em>: <code class="language-plaintext highlighter-rouge">16</code></li>
+        <li><em>“Minimum length”</em>: <code class="language-plaintext highlighter-rouge">50</code></li>
+        <li><em>“Minimum similarity”</em>: <code class="language-plaintext highlighter-rouge">60</code></li>
+        <li><em>“Generate alignments file?”</em>: <code class="language-plaintext highlighter-rouge">Extract alignments (CSV and alignments file)</code></li>
+      </ul>
+    </li>
+    <li>Check out the files that have been generated, i.e. the <code class="language-plaintext highlighter-rouge">CSV</code> and the <code class="language-plaintext highlighter-rouge">Alignments</code> file.
+      <blockquote class="question">
+        <h3 id="question-questions-1"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>What information is provided in the <code class="language-plaintext highlighter-rouge">CSV</code> file?</li>
+          <li>And in the <code class="language-plaintext highlighter-rouge">Alignments</code> file?</li>
+          <li>What happens if we re-run the experiment with other parameters (e.g. change <code class="language-plaintext highlighter-rouge">Minimum length</code> to <code class="language-plaintext highlighter-rouge">5000</code> and <code class="language-plaintext highlighter-rouge">Minimum similarity</code> to <code class="language-plaintext highlighter-rouge">95</code>)?</li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-1"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+          <ol>
+            <li>The <code class="language-plaintext highlighter-rouge">CSV</code> file contains a summary of the detected High-Scoring Segment Pairs (HSPs) or alignments. The file is divided in a few rows of metadata (e.g. containing the sequence names) and one row per alignment detected. Check out the <code class="language-plaintext highlighter-rouge">GECKO</code> help (bottom of the tool <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> page to know what each column does!</li>
+            <li>The <code class="language-plaintext highlighter-rouge">Alignments</code> file contains the actual regions of the query and reference sequence for each alignment detected. With this file, you can investigate individual alignments, find mutations and differences between the sequences, extract the aligned part, etc.</li>
+            <li>Changing the parameters affect the number of alignments GECKO will detect. In fact, if we use parameters that are too restrictive, then we might not get any alignments at all! On the other hand, if we use parameters that are too permissive, then we might get a lot of noise in the output. Thus, it is very important to understand what the parameters do. Never leave your parameters default, always know what they do! Check out the help section to get information about the parameters.</li>
+          </ol>
+        </blockquote>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-note-about-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note about parameters</h3>
+        <ol>
+          <li>Besides the <code class="language-plaintext highlighter-rouge">minimum length</code> and <code class="language-plaintext highlighter-rouge">minimum similarity</code> parameters, which are applied as a filter after the comparison is completed, the <code class="language-plaintext highlighter-rouge">k-mer seed size</code> is an inte<span class="notranslate">rna</span>l parameter that regulates the number of seeds that can be found. A smaller <code class="language-plaintext highlighter-rouge">k-mer</code> size will translate into detecting more seeds, which are starting points for alignments.</li>
+          <li>Notice that this parameter must be taken into account depending on the type of sequence that we are working with. For example, if we set <code class="language-plaintext highlighter-rouge">k-mer seed size</code> to <code class="language-plaintext highlighter-rouge">32</code>, then <code class="language-plaintext highlighter-rouge">GECKO</code> will attempt to find alignments that start with 32 consecutive, equally aligned base pairs between the two sequences. If your sequences are far away from each other (in terms of evolutionary distance) then it will be very hard to find such 32 consecutive base pairs!</li>
+          <li>Some advice: this parameter can affect performance greatly. For instance, setting <code class="language-plaintext highlighter-rouge">k-mer seed size</code> to <code class="language-plaintext highlighter-rouge">8</code> in the case of chromosomes can require much more computing time than using for instance <code class="language-plaintext highlighter-rouge">32</code>. On the other hand, if we set it to <code class="language-plaintext highlighter-rouge">32</code> in the case of small bacterial sequences, we might not find any alignments!</li>
+        </ol>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<h2 id="post-processing-extracting-alignments">Post-processing: extracting alignments</h2>
+
+<p>We will now use additional tools to post-process our alignments. Consider the case where you are interested in a set of <span class="notranslate">DNA</span> repeats located at a given position in the sequences.</p>
+
+<blockquote class="comment">
+  <h3 id="comment-note-about-interactive-exploration-of-alignments"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note about interactive exploration of alignments</h3>
+  <p>In a different scenario where e.g. you do not know what to look for or need to find the location of particular alignments, and you need an interactive exploration, you can also use <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> to ease the process. <code class="language-plaintext highlighter-rouge">GECKO-MGV</code>generates a visual representation where you can zoom in and out of the alignments, select and export as FASTA, etc., find more in the <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> article (<a class="citation" href="#diaz2019combining">Diaz-del-Pino <i>et al.</i> 2019</a>) or run it with a dockerized container from <a href="https://github.com/estebanpw/docker-geckomgv">here</a>.</p>
+</blockquote>
+
+<p>For our current experiment, we will be looking for the following set of repeats:</p>
+
+<figure id="figure-1"><img src="../../images/hpc-for-lsgc/GeckoMGV01.PNG" alt="Mycoplasma hyopneumoniae comparison example" /><figcaption><span class="figcaption-prefix">Figure 1:</span> (Left) Sequence comparison between <em>Mycoplasma hyopneumoniae</em> 232 and 7422. (Right) Zoomed-in region where the repeats of interest are located.</figcaption></figure>
+
+<p>Let’s extract the repeats highlighted in red (Figure 1, right) which are aligned to the position 19,610 in the query sequence and perform a multiple sequence alignment on them to check if there are any evolutionary differences. The sequences will be extracted from the reference (i.e. <em>Mycoplasma hyopneumoniae 7422</em>) since this is where the repeats duplicate in respect to the query sequence (notice that in Figure 1 we are selecting the ones stacked vertically).</p>
+
+<h3 id="extracting-repeat-alignments-and-running-multiple-sequence-alignment">Extracting repeat alignments and running Multiple Sequence Alignment</h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-multiple-sequence-alignment-of-a-set-of-repeats"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Multiple Sequence Alignment of a set of repeats</h3>
+  <ol>
+    <li>Search for the tool <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>Text reformatting with AWK</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  and run it with the following parameters
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Gecko on data 2 and 1: Alignments</code> (Note: if you have run the previous experiment with different parameters, make sure to select here the alignments file corresponding to the first experiment, and make sure you ran it with the same parameters!)</li>
+        <li><em>“AWK Program”</em>: <code class="language-plaintext highlighter-rouge">BEGIN{FS=" "} /@\(196[0-9][0-9]/ { printf("&gt;sequence%s%s\n", $(NF-1), $NF); getline; while(substr($0,1,1) != "&gt;"){ if(substr($0,1,1) =="Y"){ print $2; } getline; } } </code> (Paste this code into the text box)</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-note-about-awk"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note about AWK</h3>
+        <p>Although the AWK script looks a bit threatening, it is very simple:</p>
+        <ul>
+          <li>The <code class="language-plaintext highlighter-rouge">BEGIN{FS=" "}</code> tells it to separate fields by a space.</li>
+          <li>The <code class="language-plaintext highlighter-rouge">/@\(196[0-9][0-9]/</code> is a regular <span class="notranslate">expression</span> that indicates we are looking for a line containing the string <code class="language-plaintext highlighter-rouge">@(196xx</code> where <code class="language-plaintext highlighter-rouge">xx</code> are two random digits between 0 and 9. This is used to identify the repeats that start at coordinates 19,600 to 19,699.</li>
+          <li>The previous regular <span class="notranslate">expression</span> triggers an action. The first part <code class="language-plaintext highlighter-rouge">printf("&gt;sequence%s%s\n", $(NF-1), $NF); getline</code> prints out the sequence ID along with the coordinates and moves on to the next line.</li>
+          <li>The second part <code class="language-plaintext highlighter-rouge">while(substr($0,1,1) != "&gt;"){ if(substr($0,1,1) =="Y"){ print $2; } getline;</code> scans the next lines and prints the nucleotide sequence corresponding to the <code class="language-plaintext highlighter-rouge">Y</code> sequence (the reference), up until a <code class="language-plaintext highlighter-rouge">&gt;</code> is found, which means we are done with the sequence.</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li>
+      <p>Change the name of the output file <code class="language-plaintext highlighter-rouge">Text reformatting on data ...</code> to <code class="language-plaintext highlighter-rouge">repeats</code> Change the datatype to <code class="language-plaintext highlighter-rouge">.fasta</code>.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select ``</li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2"><strong>ClustalW</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_awk_tool/1.1.2</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“FASTA file”</em>: <code class="language-plaintext highlighter-rouge">repeats.fasta</code></li>
+        <li><em>“Data type”</em>: <code class="language-plaintext highlighter-rouge"><span class="notranslate">DNA</span> nucleotide sequences</code></li>
+        <li><em>“Output alignment format”</em>: <code class="language-plaintext highlighter-rouge">Native Clustal output format</code></li>
+        <li><em>“Show residue numbers in clustal format output”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Output order”</em>: <code class="language-plaintext highlighter-rouge">Aligned</code></li>
+        <li><em>“Output complete alignment”</em>: <code class="language-plaintext highlighter-rouge">Complete alignment</code></li>
+      </ul>
+    </li>
+    <li>Inspect the output file <code class="language-plaintext highlighter-rouge">ClustalW on data ... clustal</code>.
+      <ul>
+        <li>The file is divided into several blocks.</li>
+        <li>Each block contains the next 50 contiguos nucleotides of each alignment in one line per sequence.</li>
+        <li>Gaps are included.</li>
+        <li>The asterisk symbol <code class="language-plaintext highlighter-rouge">*</code> indicates that there is consensus across all sequences in the current position.</li>
+      </ul>
+    </li>
+    <li>Another file <code class="language-plaintext highlighter-rouge">ClustalW on data ... dnd</code> is also generated which can be used to view the output alignment as a tree.</li>
+  </ol>
+
+</blockquote>
+
+<p>Your output alignment file <code class="language-plaintext highlighter-rouge">ClustalW on data ... clustal</code> should look similar to the following one (click on <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span>) :</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLUSTAL 2.1 multiple sequence alignment
+
+
+sequence@_19610_31252_      AAAATAAAATCAGAATTTCGTGAAAAAGCACGTAAAATAGCGACTCTTTG
+sequence@_19610_28814_      AAAATAAAATCAGAATTTCGTGAAAAAGCACGTAAAATAGCGACTCTTTG
+sequence@_19610_25551_      AAAATAAAATCTGAATTTCGCGAAAAAGCACGTAAAATACCGACTCTTTG
+                            *********** ******** ****************** **********
+
+sequence@_19610_31252_      TTTTTCACCACCGGATAAATCTTTGACTTGTTGGTTTAGTTTGTCATTTT
+sequence@_19610_28814_      TTTTTCACCACCGGATAAATCTTTGACTTGTTGGTTTAGTTTGTCATTTT
+sequence@_19610_25551_      TTTCTCGCCACCCGATAAATCTTTGACTTGTTGATTTAGTTTTTCATTTT
+                            *** ** ***** ******************** ******** *******
+
+sequence@_19610_31252_      CGATATTGAGGAAATTTGCACTTTTTTCAAGTAAGACTTGGTCAAATTCC
+sequence@_19610_28814_      CGATATTGAGGAAATTTGCACTTTTTTCAAGTAAGACTTGGTCAAATTCC
+sequence@_19610_25551_      CAATATTAAGAAAATTTGCTCTTTTTTCAAGCAAATTTTGATCAAATTCT
+                            * ***** ** ******** *********** **   *** ******** 
+
+sequence@_19610_31252_      CTTTTAATTATGTTATTTCCAATTAAAATATTATTTTTAACCGATAAATT
+sequence@_19610_28814_      CTTTTAATTATGTTATTTCCAATTAAAATATTATTTTTAACCGATAAATT
+sequence@_19610_25551_      TTTTGAATTAAGCTATTTCCAATTAAAATATTATTTTTAACAGAAAGATT
+                             *** ***** * **************************** ** * ***
+
+sequence@_19610_31252_      CTCAATCAAATTAAAATCTTGAAAAACTACATCAATTAAAGGGTTTTTTT
+sequence@_19610_28814_      CTCAATCAAATTAAAATCTTGAAAAACTACATCAATTAAAGGGTTTTTTT
+sequence@_19610_25551_      TTCAATTAGGTTAAAATCCTGAAAAACTACATCAATTAAAGGATTTTTTT
+                             ***** *  ******** *********************** *******
+
+sequence@_19610_31252_      CTTCTTTACCTT
+sequence@_19610_28814_      CTTCTTTACCTT
+sequence@_19610_25551_      CTTCTTT-----
+                            *******     
+
+</code></pre></div></div>
+<p>We can see that there are several locus along the duplicated repeats where single point mutations have taken place, and that the ending of the last repeat is missing.</p>
+
+<p>So far we have learnt how to run our own custom sequence comparison, extract a set of <span class="notranslate">DNA</span> repeats and perform multiple sequence alignment on them (MSA). While this represents an common example of a bioinformatics pipeline, in the next part of the tutorial we will jump to a large-scale comparison scenario where we do not need fine-grained alignments, but instead we will be looking at the “bigger picture” using alignment-free methods.</p>
+
+<h1 id="coarse-grained-sequence-comparison">Coarse-grained sequence comparison</h1>
+
+<p>In this second part of the tutorial, we are going to work with chromosome-sized sequences. While we can still use <code class="language-plaintext highlighter-rouge">GECKO</code> for chromosomes, it will take some more time and resources. However, consider now the case where you do not need alignments, but rather are in one of the following cases:</p>
+
+<ul>
+  <li>You are working with a very large <em>de novo</em> assembly genome for which you do not know the strain and thus you need to compare it to several candidates.</li>
+  <li>You want to study large evolutionary rearrangements at a block level rather than alignment level at several species at once.</li>
+  <li>You want to generate a dotplot between several massive chromosomes from e.g. plants to find the main syntenies, but your sequences are full of repeats and other computational approaches fail.</li>
+</ul>
+
+<p>As you can imagine, all three scenarios require several large-scale sequence comparisons. While there are also other ways to approach these situations, in this tutorial we will learn how we can use <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> which is specifically designed for large-scale genome comparison without alignments (alignment-free method).</p>
+
+<h2 id="introduction-1">Introduction</h2>
+
+<p>Before jumping on the hands-on, let us see an example of the second case: say we wanted to study the evolutionary rearrangements between the grass and common wheat genomes (<em>Aegilops tauschii</em> and <em>Triticum aestivum</em>). The following plot shows the comparison:</p>
+
+<figure id="figure-2"><img src="../../images/hpc-for-lsgc/Chrom07.png" alt="Large-scale genome comparison example" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Chromosome comparison for <em>Aegilops tauschii</em> and <em>Triticum aestivum</em>. Since both genomes have seven chromosomes, we would require seven times seven comparisons, i.e. 49 chromosome comparisons with each sequence being over 500 MBs in size!</figcaption></figure>
+
+<p>Now there are some things to note here: (1) these alignment-free comparisons can be performed very quickly, (2) we can visually see the large rearrangements and (3) we can identify which chromosome comparisons actually have any signal. This last point is interesting because it allows us to use <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to quickly identify which comparisons are worth to perform with more accurate tools and avoid lots of unnecessary computation (in this case only the diagonal has similarity, but it might not be the case, <em>e.g.</em> <em>Homo sapiens</em> and <em>Mus musculus</em>).</p>
+
+<p>Let us now jump into the hands-on! We will learn how to compare chromosomes with <code class="language-plaintext highlighter-rouge">CHROMEISTER</code>, particularly from the grass and common wheat genomes, which are nearly 5 times larger than the average human chromosome!</p>
+
+<h2 id="preparing-the-data-1">Preparing the data</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-chromosome-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Chromosome data upload</h3>
+
+  <ol>
+    <li>
+      <p>Create a new history for this tutorial and give it a descriptive name (e.g. “Chromosome comparison hands-on”)</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-creating-a-new-history-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Creating a new history</h3>
+
+        <p>Click the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> icon at the top of the history panel</p>
+
+        <p>If the <i class="fas fa-plus" aria-hidden="true"></i><span class="visually-hidden">new-history</span> is missing:</p>
+        <ol>
+          <li>Click on the <i class="fas fa-cog" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-gear</span> icon (<strong>History options</strong>) on the top of the history panel</li>
+          <li>Select the option <strong>Create New</strong> from the menu</li>
+        </ol>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-history-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a history</h3>
+
+        <ol>
+          <li>Click on <strong>Unnamed history</strong> (or the current name of the history) (<strong>Click to rename history</strong>) at the top of your history panel</li>
+          <li>Type the new name</li>
+          <li>Press <kbd>Enter</kbd></li>
+        </ol>
+      </blockquote>
+    </li>
+    <li>
+      <p>Import <code class="language-plaintext highlighter-rouge">aegilops_tauschii_chr1.fasta</code> and <code class="language-plaintext highlighter-rouge">triticum_aestivum_chr1.fasta</code> from <a href="https://zenodo.org/record/4485547#.YBj8XHmCGUk">Zenodo</a>.</p>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>https://zenodo.org/record/4485547/files/aegilops_tauschii_chr1.fasta
+https://zenodo.org/record/4485547/files/triticum_aestivum_chr1.fasta
+</code></pre></div>      </div>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <p>As default, <span class="notranslate">Galaxy</span> takes the link as name, so rename them.</p>
+    </li>
+    <li>
+      <p>Rename the files to <code class="language-plaintext highlighter-rouge">aegilops.fasta</code> and <code class="language-plaintext highlighter-rouge">triticum.fasta</code> and change the datatype to <code class="language-plaintext highlighter-rouge">fasta</code> if needed.</p>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype-2"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select ``</li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <blockquote class="comment">
+        <h3 id="comment-note-on-the-name-of-the-chromosomes"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note on the name of the chromosomes</h3>
+        <p>Please notice that these chromosomes are not labelled as “chromosome 1” at their original sources. We have renamed them for simplicity.</p>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<blockquote class="question">
+  <h3 id="question-questions-2"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+  <ol>
+    <li>We already discussed the mycoplasma sequences in regards to their size. What do you think about the size of the two chromosomes that we will be comparing now from a computational standpoint?</li>
+  </ol>
+
+  <blockquote class="solution">
+    <h3 id="solution-solution-2"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+    <ol>
+      <li>Chromosome-like sequences are arguably some of the largest <span class="notranslate">DNA</span> sequences you can find. Regarding the comparison, optimal chromosome comparison typically requires either large clusters to be run or special hardware accelerators (such as GPUs). On the other hand, for seed-based local alignment we can still use common approaches, but they will take a considerable amount of time. Finally, if we use alignment-free methods such as <code class="language-plaintext highlighter-rouge">CHROMEISTER</code>, we can perform a comparison in few minutes (check the slides for more information) instead of hours.</li>
+    </ol>
+
+  </blockquote>
+
+</blockquote>
+
+<h2 id="running-the-comparison-1">Running the comparison</h2>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-comparing-two-plant-chromosomes-with-chromeister"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Comparing two plant chromosomes with CHROMEISTER</h3>
+  <ol>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a"><strong>CHROMEISTER</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/chromeister/chromeister/1.5.a</span></span>  with the following parameters
+      <ul>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Query sequence”</em>: <code class="language-plaintext highlighter-rouge">aegilops.fasta</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference sequence”</em>: <code class="language-plaintext highlighter-rouge">triticum.fasta</code></li>
+        <li><em>“Output dotplot size”</em>: <code class="language-plaintext highlighter-rouge">1000</code></li>
+        <li><em>“K-mer seed size”</em>: <code class="language-plaintext highlighter-rouge">32</code></li>
+        <li><em>“Diffuse value”</em>: <code class="language-plaintext highlighter-rouge">4</code></li>
+        <li><em>“Add grid to plot for multi-fasta data sets”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><em>“Generate image of detected events”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+      </ul>
+    </li>
+    <li>Run the job and wait for the results. It should take around ~3 minutes.</li>
+    <li>Let’s inspect the output files:
+      <ul>
+        <li><em>“Comparison matrix”</em>: This file is the “core” of the comparison. It contains the heuristically matched seeds sampled per section of the chromosomes. This file is used for custom post-processing.</li>
+        <li><em>“Comparison dotplot”</em>: This file is a <code class="language-plaintext highlighter-rouge">.png</code> image representing the pairwise comparison.</li>
+        <li><em>“Comparison metainformation”</em>: This CSV file contains information about the comparison such as name of the sequences compared, length, etc. It is particularly useful when using multi-fasta inputs.</li>
+        <li><em>“Detected events”</em>: This CSV file contains information regarding rearrangements automatically detected.</li>
+        <li><em>“Detected events plot”</em>” This file is a <code class="language-plaintext highlighter-rouge">.png</code> image showing the detected events.</li>
+        <li><em>“Comparison score”</em>: This text file contains the scoring distance between the query and the reference.</li>
+      </ul>
+
+      <blockquote class="comment">
+        <h3 id="comment-about-parameters"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> About parameters</h3>
+
+        <p>Some of the parameters used in <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> are similar to those in <code class="language-plaintext highlighter-rouge">GECKO</code>, but others are new, in particular:</p>
+        <ol>
+          <li><em>“Output dotplot size”</em>: This number represents the width and height of the resulting comparison plot, but it also affects the degree of precision with which alignment-free blocks are calculated. A value of <code class="language-plaintext highlighter-rouge">1000</code> is adequate for mostly everything (resulting in a <code class="language-plaintext highlighter-rouge">1000x1000</code> output doplot), but for extremely large sequences a value of <code class="language-plaintext highlighter-rouge">2000</code> will yield more resolution since less blocks will be grouped together.</li>
+          <li><em>“K-mer seed size”</em>: This value is the same as in <code class="language-plaintext highlighter-rouge">GECKO</code>. Generally, <code class="language-plaintext highlighter-rouge">32</code> is a good choice for any sequence that is not very small such as the mycoplasmas from the previous part of the tutorial, which were around 1 Mbp in size.</li>
+          <li><em>“Diffuse value”</em>: This parameter regulates the stringency with which alignment-free seeds are matched. A diffuse value of <code class="language-plaintext highlighter-rouge">1</code> means perfect matching, whereas a value of <code class="language-plaintext highlighter-rouge">4</code> means match only a fourth of the seed (taken in uniform steps). The value of <code class="language-plaintext highlighter-rouge">4</code> is recommended for everything except when signals start to deteriorate in large comparisons with plenty of repeats.</li>
+          <li>The <em>“Add grid to plot for multi-fasta data sets”</em> parameter adds grid lines to the plot to separate multiple sequences. This is useful when using multi-fasta inputs.</li>
+          <li>The <em>“Generate image of detected events”</em> parameter will include, if enabled, a plot of the rearrangements detected with colors, one per type of rearrangement. More on that later!</li>
+        </ol>
+      </blockquote>
+      <blockquote>
+
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>Your <code class="language-plaintext highlighter-rouge">Comparison dotplot</code> file (remember to inspect each using the <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> icon) should look like this:</p>
+
+<figure id="figure-3"><img src="../../images/hpc-for-lsgc/aegilops-triticum.png" alt="Single chromosome comparison" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Each axis corresponds to one sequence, from origin to end. </figcaption></figure>
+
+<p>Figure 3 shows the comparison plot for the plant chromosomes. Notice that the origin of both sequences is at the top-left and the ending is at the bottom-right of the plot. Noise and small repeats are filtered out automatically by <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to allow focusing on where the main similarity blocks are located. We can see that there three types of blocks:</p>
+
+<ul>
+  <li>Blocks that are “conserved” are on the main diagonal. This means that the sequences are similar (in a coarse-grained fashion) in such regions.</li>
+  <li>Blocks that are inverted are on the antidiagonals, i.e. rotated 90 degrees. These blocks show sequence regions that have been reversed and rearranged into the complementary strand.</li>
+  <li>Blocks that are not in the main diagonal are “transposed”, meaning that they have been rearranged in one of the sequences but not in the other. These can also be inverted.</li>
+</ul>
+
+<blockquote class="comment">
+  <h3 id="comment-note-on-the-comparison-plot"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Note on the comparison plot</h3>
+  <p>Notice that the comparison plot is only an approximation. It is aimed at showing the general location and direction of syntenies. For example, if <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> was run with parameter <strong>Output dotplot size</strong> equal to <code class="language-plaintext highlighter-rouge">1000</code>, then each pixel in the plot contains the averaged information of nearly 500,000 base pairs! Thus, any block can contain lots of smaller rearrangements, mutations, inversions, etc., that are ignored for the sake of providing a clean overview of the general alignment direction in a pairwise comparison.</p>
+</blockquote>
+
+<p>Also note that a <code class="language-plaintext highlighter-rouge">score</code> value can be seen in the title of the plot (this value is also available in the <strong>Comparison score</strong> file). This value is calculated based on the alignment coverage and number of rearrangements and can be used to automatically filter out similar from dissimilar sequence comparisons. A value of <code class="language-plaintext highlighter-rouge">0</code> means that the sequences are nearly equal (rearrangement-wise), whereas a value closer to <code class="language-plaintext highlighter-rouge">1</code> means that the sequences are more dissimilar.</p>
+
+<h2 id="post-processing-detecting-rearrangements">Post-processing: detecting rearrangements</h2>
+
+<p>Let us now see how the blocks detected in the comparison are automatically classified for further processing. Figure 4 shows the blocks detected heuristically from the comparison and classified according to their position and orientation. This plot is available in the file <strong>Detected events plot</strong>.</p>
+
+<figure id="figure-4"><img src="../../images/hpc-for-lsgc/aegilops-triticum-events.png" alt="Events in chromosome comparison" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Automatically detected events in the chromosome comparison corresponding to <em>Aegilops tauschii</em> and <em>Triticum aestivum</em> as generated with CHROMEISTER. Legend: conserved blocks (red), inverted blocks (green) and transposed blocks (blue)</figcaption></figure>
+
+<p>In Figure 4 we can see a similar plot to that in Figure 3 but with the addition of colors. Each detected block is labelled according to whether it is in the main diagonal (red), transposed (blue) or inverted (green). Inverted transpositions are also labelled green. Notice that this automatic classification process is based on the Hough transform (<a class="citation" href="#duda1972use">Duda and Hart 1972</a>) which is governed by a set of parameters which can therefore affect the sensitivity of the detection of blocks, and hence some blocks can be missed.</p>
+
+<p>Each of these blocks is also available in the <code class="language-plaintext highlighter-rouge">CSV</code> file <strong>Detected events</strong>. Let us take a peek:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xStart,yStart,xEnd,yEnd,strand,approximate length,description
+189935556,218167395,202237082,205056373,f,12301526,conserved block
+...
+156475406,165723309,175173725,185127621,r,18698319,inversion
+...
+208633875,239669470,213062425,234949502,f,4428550,transposition
+...
+86602740,73946160,103332815,91252708,r,16730075,inverted transposition
+</code></pre></div></div>
+
+<p>The header line describes each column. <code class="language-plaintext highlighter-rouge">xStart</code> and <code class="language-plaintext highlighter-rouge">xEnd</code> are the starting and ending coordinates in the query sequence, wheras <code class="language-plaintext highlighter-rouge">yStart</code> and <code class="language-plaintext highlighter-rouge">yEnd</code> are the same but for the reference sequence. The strand can be either <code class="language-plaintext highlighter-rouge">f</code> for the forward strand or <code class="language-plaintext highlighter-rouge">r</code> for the reverse strand. Notice that the length of the block is approximate, since it is an estimation based on the length of the line and transformed by the length of each sequence. The <code class="language-plaintext highlighter-rouge">description</code> column contains the label of the detected event. The four possible types (conserved block, inversion, transposition or inverted transposition) are shown above with examples.</p>
+
+<p>Besides providing a visual understanding of the large rearrangements that took place between two sequences, the detection of blocks can be further used to research evolutionary distances, for instance by incorporating the number of Large Scale Genome Rearrangements to generate richer metrics in phylogenetic studies.</p>
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>From a pratical perspective, we have shown how to run pairwise genome comparisons using <span class="notranslate">Galaxy</span>, from small to large-scale sequences (in particular bacterial mycoplasmas and plant chromosomes) throughout two levels of precision:</p>
+
+<ul>
+  <li>Using <code class="language-plaintext highlighter-rouge">GECKO</code> to detect High-scoring Segment Pairs, which can be used to find fine-grained alignments such as repeats, genes, synteny blocks, etc.</li>
+  <li>Using <code class="language-plaintext highlighter-rouge">CHROMEISTER</code> to find large-scale conserved blocks, which enables us to look at the “big picture” of a comparison as well as study its large-scale rearrangements.</li>
+</ul>
+
+<p>Moreover, we have described how we can use additional tools to post-process our comparisons, including extraction of alignments, multiple sequence alignment, automatic detection of rearrangements, dotplot visualization, etc. Additionally, we recommend taking a look at <code class="language-plaintext highlighter-rouge">GECKO-MGV</code> (<a class="citation" href="#diaz2019combining">Diaz-del-Pino <i>et al.</i> 2019</a>), a tool for the interactive exploration of sequence comparisons produced with <code class="language-plaintext highlighter-rouge">GECKO</code>.</p>
+
+<p>On the other hand, from a theoretical standpoint, we have discussed why sequence comparison is a difficult problem, how the length of the sequences can affect runtimes, the complexity of the algorithms, impact of parameters, etc., in order to give researchers a broader understanding of how to use sequence comparison algorithms for their scientific experiments (more details in the slides).</p>
+
+
+
+                    
+                    <blockquote class="key_points">
+                        <h3><i class="fas fa-key" aria-hidden="true"></i><span class="visually-hidden">keypoints</span> Key points</h3>
+                        <ul>
+                            
+                            <li><p>We learnt that sequence comparison is a demanding problem and that there are several ways to approach it</p>
+</li>
+                            
+                            <li><p>We learnt how to run sequence comparisons in Galaxy with different levels of precision, particularly fine-grained and coarse-grained sequence comparison using GECKO and CHROMEISTER for smaller and larger sequences, respectively</p>
+</li>
+                            
+                            <li><p>We learnt how to post-process our comparison by extracting alignments, fine-tuning with multiple sequence alignment, detecting rearrangements, etc.</p>
+</li>
+                            
+                        </ul>
+                    </blockquote>
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="duda1972use">Duda, R. O., and P. E. Hart, 1972 <b>Use of the Hough transformation to detect lines and curves in pictures</b>. Communications of the ACM 15: 11–15.</span>
+    
+    
+    
+
+</li>
+<li><span id="myers1988optimal">Myers, E. W., and W. Miller, 1988 <b>Optimal alignments in linear space</b>. Bioinformatics 4: 11–17.</span>
+    
+    
+    
+
+</li>
+<li><span id="BLAST">Altschul, S. F., W. Gish, W. Miller, E. W. Myers, and D. J. Lipman, 1990 <b>Basic local alignment search tool</b>. Journal of molecular biology 215: 403–410.</span>
+    
+    
+    
+
+</li>
+<li><span id="GECKO">Torreno, O., and O. Trelles, 2015 <b>Breaking the computational barriers of pairwise genome comparison</b>. BMC bioinformatics 16: 250.</span>
+    
+    
+    
+
+</li>
+<li><span id="diaz2019combining">Diaz-del-Pino, S., P. Rodriguez-Brazzarola, E. Perez-Wohlfeil, and O. Trelles, 2019 <b>Combining Strengths for Multi-genome Visual Analytics Comparison</b>. Bioinformatics and biology insights 13: 1177932218825127.</span>
+    
+    
+    
+
+</li>
+<li><span id="perez2019ultra">Pérez-Wohlfeil, E., S. Diaz-del-Pino, and O. Trelles, 2019 <b>Ultra-fast genome comparison for large-scale genomic experiments</b>. Scientific reports 9: 1–10.</span>
+    
+    
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=From small to large-scale genome comparison (Genome Annotation)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Esteban Perez-Wohlfeil, 2021 <b>From small to large-scale genome comparison (Galaxy Training Materials)</b>. <a href="/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html">/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{genome-annotation-hpc-for-lsgc,
+    author = "Esteban Perez-Wohlfeil",
+    title = "From small to large-scale genome comparison (Galaxy Training Materials)",
+    year = "2021",
+    month = "02",
+    day = "04"
+    url = "\url{/training-material/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Esteban Perez-Wohlfeil)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/genome-annotation/tutorials/hpc-for-lsgc/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
