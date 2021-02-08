@@ -426,6 +426,9 @@ along with the UniProt and cRAP databases.
 > - Rename it as **CustomProDB Merged Fasta**
 >
 {: .hands_on}
+> ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
+> Please make sure the tool version is 1.1.1
+{: .comment}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)
 
@@ -610,7 +613,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >
 {: .hands_on}
 
-> ### {% icon comment %} **FASTA-to-Tabular**
+> ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
 > Please make sure the tool version is 1.1.1
 {: .comment}
 
