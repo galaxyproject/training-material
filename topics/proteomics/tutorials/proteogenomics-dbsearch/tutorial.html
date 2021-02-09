@@ -553,6 +553,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -663,7 +665,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 27, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 8, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -920,13 +922,6 @@ used by both SearchGUI and PeptideShaker in the analysis. This can be downloaded
 
 </blockquote>
 
-<p>A number of new items will appear in your history, each corresponding to the outputs selected
-in the PeptideShaker parameters. Most relevant for this tutorial is the PSM report:</p>
-
-<p>Scrolling at the bottom to the left will show the sequence for the PSM that matched to these
-peptide entries. Column 3 is the sequence matched for each PSM entry. Every PSM is a
-new row in the tabular output.</p>
-
 <p>A number of new items will appear in your History, each corresponding to the outputs selected in the PeptideShaker parameters. The Peptide Shaker’s PSM report is used as an input for the BlastP analysis. Before performing BlastP analysis. The Query Tabular tool and few test manipulation tools are used to remove spectra that belongs to the reference proteins. The output tabular file “Peptides_for_Blast-P_analysis” will contain only those spectra that did not belong to any known proteins.</p>
 
 <h1 id="create-database">Create database</h1>
@@ -1028,7 +1023,7 @@ new row in the tabular output.</p>
             <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Table Index</strong>:
               <ul>
                 <li><em>“Table Index”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">prot, id</code></li>
+                <li><em>“Index on Columns”</em>: <code class="language-plaintext highlighter-rouge">prot,id</code></li>
               </ul>
             </li>
           </ul>
@@ -1141,9 +1136,9 @@ ORDER BY length(Sequence),Sequence
 The short BlastP uses parameters for short peptide sequences (8-30 aas). Please use the rerun option to look at the parameters used.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-tabular-to-fasta"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Tabular to FASTA</h3>
+  <h3 id="hands_on-hands-on-tabular-to-fasta-version-111"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Tabular to FASTA (version 1.1.1)</h3>
   <ol>
-    <li><strong>Tabular to FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:
+    <li><strong>Tabular-to-FASTA</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the following parameters:
       <ul>
         <li><em>“Title column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><em>“Sequence Column”</em>:<code class="language-plaintext highlighter-rouge">2</code></li>
@@ -1154,59 +1149,6 @@ The short BlastP uses parameters for short peptide sequences (8-30 aas). Please 
 </blockquote>
 
 <p>The output FASTA file is going to be subjected to BLAST-P analysis.</p>
-
-<blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-ncbi-blast-blastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: NCBI BLAST+ blastp</h3>
-
-  <ol>
-    <li><strong>NCBI BLAST+ blastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: Run <strong>BLASTP</strong> with:
-      <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Protein query sequence(s)”</em>: <code class="language-plaintext highlighter-rouge">Data input 'query' (fasta)</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Subject database/sequences”</em>: <code class="language-plaintext highlighter-rouge">Locally installed BLAST database</code>
-          <ul>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Protein Blast database”</em>: Select <code class="language-plaintext highlighter-rouge">nr_mouse_current</code></li>
-          </ul>
-        </li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Type of BLAST”</em>: <code class="language-plaintext highlighter-rouge">blastp-short - BLASTP optimized for queries shorter than 30 residues</code></li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Set expectation value cutoff”</em>:<code class="language-plaintext highlighter-rouge">200000.0</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output format”</em>: <code class="language-plaintext highlighter-rouge">Tabular(extended 25 columns)</code></li>
-        <li><em>“Advanced Options”</em>: <code class="language-plaintext highlighter-rouge">Show Advanced Options</code>
-          <ul>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Filter out low complexity regions (with SEG)”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Scoring matrix and gap costs”</em>: <code class="language-plaintext highlighter-rouge">PAM30</code>
-              <ul>
-                <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Gap Costs”</em>: <code class="language-plaintext highlighter-rouge">Existence: 9 Extension: 1</code></li>
-              </ul>
-            </li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum hits to show”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Maximum number of HSPs (alignments) to keep for any single query-subject pair”</em>:<code class="language-plaintext highlighter-rouge">1</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Word size for wordfinder algorithm”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Multiple hits window size”</em>: <code class="language-plaintext highlighter-rouge">40</code></li>
-            <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum score to add a word to the BLAST lookup table”</em>: <code class="language-plaintext highlighter-rouge">11</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Composition-based statistics”</em>: <code class="language-plaintext highlighter-rouge">0 (No composition)</code></li>
-            <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Should the query and subject defline(s) be parsed?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Restrict search of database to a given set of ID’s”</em>:<code class="language-plaintext highlighter-rouge">No restriction</code></li>
-          </ul>
-
-          <blockquote class="comment">
-            <h3 id="comment-comment-3"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment:</h3>
-
-            <p>This feature provides a means to exclude ID’s from a BLAST database search.
-The expectation values in the BLAST results are based upon the sequences actually
-searched, and not on the underlying database. Note this cannot be used when
-comparing against a FASTA file.</p>
-
-          </blockquote>
-        </li>
-        <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Minimum query coverage per hsp (percentage, 0 to 100)”</em>: <code class="language-plaintext highlighter-rouge">0</code></li>
-        <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Compute locally optimal Smith-Waterman alignments”</em>:<code class="language-plaintext highlighter-rouge">No</code></li>
-      </ul>
-    </li>
-  </ol>
-
-</blockquote>
-
-<p>Once BlastP search is performed, it provides with a tabular output containing peptides corresponding to novel proteoforms termed as “<strong>Novel peptides</strong>”. Now this output is further processed by comparing the novel peptide output with the PSM report for selecting only distinct peptides which pass these criteria. This could be achieved by proceeding to the novel peptide analysis tutorial.</p>
 
 <blockquote class="comment">
   <h3 id="comment-comment-tool-versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> Comment: Tool Versions</h3>
@@ -1298,8 +1240,8 @@ Researchers can use this <span class="notranslate">workflow</span> with their da
     author = "Subina Mehta and Timothy J. Griffin and Pratik Jagtap and Ray Sajulga and James Johnson and Praveen Kumar",
     title = "Proteogenomics 2: Database Search (Galaxy Training Materials)",
     year = "2021",
-    month = "01",
-    day = "27"
+    month = "02",
+    day = "08"
     url = "\url{/training-material/topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }

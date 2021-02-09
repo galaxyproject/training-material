@@ -474,6 +474,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
             Galaxy Africa
         </a>
@@ -584,7 +586,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 29, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 8, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -904,18 +906,19 @@ data manager to create these annotations to make them available for users.</p>
   </ol>
 </blockquote>
 
-<p>Three FASTA files are generated through the CustomProDB tool:</p>
+<p>There are 6 files are generated through the CustomProDB tool:</p>
 <ul>
-  <li>a variant FASTA file for short indels,</li>
-  <li>a Single Amino acid Variant (SAV) FASTA file</li>
-  <li>an Sqlite file (genome <span class="notranslate">mapping</span> and variant <span class="notranslate">mapping</span>)</li>
+  <li>rpkm.fasta: reference proteins filtered by transcript <span class="notranslate">expression</span> level (RPKM calculated from a BAM file)</li>
+  <li>snv.fasta: Single Nucleotide Variants detected by FreeBayes (.vcf file)</li>
+  <li>indel.fasta: Insertions/Deletions detected by FreeBayes (.vcf file)</li>
+  <li>Genomic_<span class="notranslate">mapping</span>.sqlite: <span class="notranslate">mapping</span> proteins to genome</li>
+  <li>Variant_annotation.sqlite: used to visualize the variants in the Multi-omics Visualization Platform</li>
+  <li>RData: set of annotation files (in RData format) to create reference and variant protein sequences</li>
 </ul>
 
-<p>for <span class="notranslate">mapping</span> proteins to genome and an RData file for variant protein coding sequences.
-Similar to the genomic <span class="notranslate">mapping</span>, a variant <span class="notranslate">mapping</span> file is also generated from CustomProDB.
-This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
-variant annotation file will be used to visualize the variants in the Multi-omics Visualization
-Platform (in-house visualization platform developed by <span class="notranslate">Galaxy</span>-P senior developers).</p>
+<p>For <span class="notranslate">mapping</span> proteins to genome and an RData file for variant protein coding sequences. Similar to the genomic <span class="notranslate">mapping</span>, a variant <span class="notranslate">mapping</span> file 
+is also generated from CustomProDB. This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
+variant annotation file will be used to visualize the variants in the Multi-omics Visualization Platform (in-house visualization platform developed by <span class="notranslate">Galaxy</span>-P senior developers).</p>
 
 <h1 id="transcript-assembly">Transcript Assembly</h1>
 
@@ -1149,12 +1152,13 @@ along with the UniProt and cRAP databases.</li>
   <h3 id="comment-customprodb-generated-protein-accession-names-need-to-be-changed-for-peptideshaker"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> CustomProDB generated protein Accession names need to be changed for PeptideShaker</h3>
   <p>PeptideShaker does not allow greaterthan sign, comma, or spaces in the protein accession name.
 PeptideShaker also requires the FASTA ID to start with a source, e.g. <em>&gt;sp|Q8C4J7|</em> for SwissProt entries.  Nonstandard entries must be prefixed <em>generic|</em>.
-We will also need to similarily modify the accessions in the genomic <span class="notranslate">mapping</span> and and variant annotation outputs.</p>
+We will also need to similarily modify the accessions in the genomic <span class="notranslate">mapping</span> and and variant annotation outputs. For eg: ENSEMBL-PRO (output from CustomProDB) and STRG (from StringTie) are not standard format.</p>
 </blockquote>
+
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-fasta-to-tabular"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: FASTA to Tabular</h3>
   <ol>
-    <li><strong>FASTA to Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
+    <li><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">Merged and Filtered FASTA from (fasta)</code></li>
       </ul>
@@ -1192,6 +1196,10 @@ We will also need to similarily modify the accessions in the genomic <span class
     </li>
   </ol>
 
+</blockquote>
+<blockquote class="comment">
+  <h3 id="comment-fasta-to-tabular-and-tabular-to-fasta-versions"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <strong>FASTA-to-Tabular</strong> and <strong>Tabular-to-FASTA</strong> versions</h3>
+  <p>Please make sure the tool version is 1.1.1</p>
 </blockquote>
 
 <p><img src="../../images/Fasta_sequence.png" alt="Fasta sequence" /></p>
@@ -1308,7 +1316,7 @@ We need to modify the CustomProDB protein accessions the same as was done for th
 
 <h2 id="variant-annotations-database">Variant Annotations database</h2>
 
-<p>We will repeat the process for the variant annotations.  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.</p>
+<p>We will repeat the process for the variant annotations (this file will be used as a input to the new updates that will be made on the Multiomics Visualization platform).  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-create-database-for-variant-annotations"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Create database for variant annotations</h3>
@@ -1424,7 +1432,7 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-fasta-to-tabular-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: FASTA to Tabular</h3>
   <ol>
-    <li><strong>FASTA to Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
+    <li><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">HISAT_Output.rpkm (fasta)</code></li>
       </ul>
@@ -1442,7 +1450,7 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“replacement <span class="notranslate">expression</span>”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
       </ul>
     </li>
-    <li><strong>FASTA to Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
+    <li><strong>FASTA-to-Tabular</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>: with the default parameters
       <ul>
         <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Convert these sequences”</em>: <code class="language-plaintext highlighter-rouge">Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)</code></li>
       </ul>
@@ -1467,6 +1475,11 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
     </li>
   </ol>
 
+</blockquote>
+
+<blockquote class="comment">
+  <h3 id="comment-fasta-to-tabular-and-tabular-to-fasta-versions-1"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> <strong>FASTA-to-Tabular</strong> and <strong>Tabular-to-FASTA</strong> versions</h3>
+  <p>Please make sure the tool version is 1.1.1</p>
 </blockquote>
 
 <blockquote class="comment">
@@ -1560,8 +1573,8 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
     author = "Subina Mehta and Timothy J. Griffin and Pratik Jagtap and Ray Sajulga and James Johnson and Praveen Kumar",
     title = "Proteogenomics 1: Database Creation (Galaxy Training Materials)",
     year = "2021",
-    month = "01",
-    day = "29"
+    month = "02",
+    day = "08"
     url = "\url{/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
