@@ -229,7 +229,7 @@ cost function via backpropagation.
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype of all the four datasets is `tabular`
+> 4. Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
