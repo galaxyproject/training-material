@@ -115,7 +115,7 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >        - *"Only load the columns you have named into database"*: `Yes`
 >        - {% icon param-repeat %} **Insert Table Index**
 >          - *"Table Index"*: `No`
->          - *"Index on Columns"*: `id`
+>          - *"Index on Columns"*: `qseqid`
 >
 >    - {% icon param-repeat %} **Insert Database Table**
 >      - Section **Filter Dataset Input**
@@ -146,6 +146,11 @@ Once Blast-P search is performed, it provides a tabular output containing “**N
 >      ORDER BY psm.Sequence, psm.ID
 >      ```
 >
+>       > ### {% icon comment %} Query information
+>       >
+>       > The query wants a tabular list of peptides in which the lenght of the PSM sequence is equal to the length of the Blast sequence, where in the pident (percentage identity) is less that 100 i.e. Peptide cannot be a 100% identical to the NCBI-nr reference database. Or it should fulfill the criteria that there should be atleast 1 gap present (blast.gapopen >= 1) or the length of the peptide in NCBI-nr should be less than the length of the query length. If the peptide follows all this then it is accepted as a "Novel" proteoform.
+>       >
+>       {: .comment}
 >    - *"Include query result column headers"*: `Yes`
 >
 >  2. Click **Execute** and inspect the query results file after it turned green.
@@ -181,7 +186,7 @@ Once this step is completed, a tabular output containing novel proteoforms are d
 
 # Multiomics Visualization Platform (MVP)
 
-The Multiomics Visualization Platform is a galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin.
+The Multiomics Visualization Platform is a Galaxy visualization plugin that allows the user to browse the selected proteomics data. It uses the SQlite database which allows the data to be filtered and aggregated in a user defined manner. It allows various features such as; the PSM can be displayed with a lorikeet spectral view, the selected peptide can be displayed in a protein view and an IGV browser is also available for the selected protein. The step by step guide shown below will provide a walkthrough on how to use this plugin (NOTE: the example shown below is a representative peptide which is subjected to change, so while you are running this tool please take a look at the "Novel Peptide" output from the previous steps).
 
 > ### {% icon hands_on %} Hands-on: Guide to MVP
 >
@@ -274,6 +279,7 @@ The next tool in the workflow is the Peptide genomic coordinate tool which takes
 
 
 
+
 # Obtain Peptide genomic Coordinates
 
 Gets genomic coordinate of peptides based on the information in mzsqlite and genomic mapping sqlite files. This program
@@ -301,13 +307,13 @@ Given chromosomal locations of peptides in a BED file, PepPointer classifies the
 > ### {% icon hands_on %} Hands-on: Peppointer
 >
 > 1. **Peppointer** {% icon tool %} with the following parameters:
->   - {% icon param-select %} *"Choose the source of the GTF file"* - `Locally Installed`
->   - {% icon param-file %} *"GTF file with the genome of interest"* - `Mus_Musculus_GRCm38.90_Ensembl_GTF`
+>   - {% icon param-select %} *"Choose the source of the GTF file"* - `From History`
+>   - {% icon param-file %} *"GTF file with the genome of interest"* - `edited_Mus_Musculus_GRCm38.90_Ensembl_GTF`
 >   - {% icon param-file %} *"BED file with chromosomal coordinates of peptides"*: `Bed file from Peptide genomic coordinate tool`
 >
 > 2. Click **Execute** and inspect the query results file after it turned green.
 >
-> This tool provides a bed output with the classification of the genomic location of the peptides.
+> This tool provides a bed output with the classification of the genomic location of the peptides.The Mus-musculus GTF file will be in your history if you have completed the proteogenomics 1 tutorial.
 >
 > ![Output PP](../../images/Output_PP.png){:width="50%"}
 >
