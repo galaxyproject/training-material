@@ -68,7 +68,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker shared data library (`library`->`GTN-Material`->`PAPAA:PanCancer Aberrant Pathway Activity Analysis`->`DOI: 10.5281/zenodo.4306639#.X9FJF-lKgZE`
+> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker shared data library (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )
 >
 >    ```
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_DepMap_18Q1_maf_20180207.txt.gz
