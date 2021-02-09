@@ -251,7 +251,7 @@ We will now proceed to demultiplex, map, and quantify both sets of reads using t
 
 > ### {% icon hands_on %} Hands-on
 > 
-> **RNA STARsolo** {% icon tool %} with the following parameters:
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
 >            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
@@ -410,7 +410,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 
 > ### {% icon hands_on %} Hands-on: Default Method
 >
-> **DropletUtils** {% icon tool %} with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -469,7 +469,7 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 
 > ### {% icon hands_on %} Hands-on: Rank Barcodes
 >
-> **DropletUtils** {% icon tool %} with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -500,7 +500,7 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 
 > ### {% icon hands_on %} Hands-on: Custom Filtering
 >
-> **DropletUtils** {% icon tool %} with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
