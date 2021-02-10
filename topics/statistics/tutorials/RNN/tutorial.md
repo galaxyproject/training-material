@@ -263,14 +263,12 @@ and plot the confusion matrix.
 >    - Click *"Execute"* 
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is 
-  an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10000 unique words in our IMDB dataset 
-  (*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM layer has a size of *100*. The third layer is a 
-  *Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a 
-  *sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review, 
-  and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
-{: .comment}
+Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is 
+an embedding layer, that transforms each review words into a 32 dimensional vector (*output_dim*). We have 10000 unique words in our IMDB dataset 
+(*input_dim*). The second layer is an *LSTM* layer, which is a type of RNN. Output of the LSTM layer has a size of *100*. The third layer is a 
+*Dense* layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a 
+*sigmoid* activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review, 
+and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.
 
 ### **Create a deep learning model**
 
@@ -290,14 +288,12 @@ and plot the confusion matrix.
 >    - Click *"Execute"*
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use 
-  *binary cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2 
-  means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is 
-  feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present 
-  only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset. 
-  The model builder can be downloaded as a zip file.
-{: .comment}
+A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use 
+*binary cross entropy* as loss function. Epochs is the number of times the whole training data is used to train the model. Setting *epochs* to 2 
+means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is 
+feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present 
+only a subset of the training examples to the network, after which we update the weights/biases. *batch_size* decides the size of this subset. 
+The model builder can be downloaded as a zip file.
 
 ### **Deep learning training and evaluation**
 
@@ -316,10 +312,8 @@ and plot the confusion matrix.
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained 
-  model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step. 
-{: .comment}
+The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained 
+model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step. 
 
 ### **Model Prediction**
 
@@ -336,10 +330,8 @@ and plot the confusion matrix.
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> The prediction step generates 1 dataset. It's a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in 
-  the test dataset.
-{: .comment}
+The prediction step generates 1 dataset. It's a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in 
+the test dataset.
 
 ### **Machine Learning Visualization Extension**
 
@@ -355,15 +347,13 @@ and plot the confusion matrix.
 >
 {: .hands_on}
 
-> ### {% icon comment %} Comment
-> **Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
-  that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that 
-  were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified 
-  as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and **recall** 
-  {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall is the fraction 
-  of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is to use the **F score**, 
-  which is the harmonic mean of precision and recall (F = (2 * precision * recall) / (precision + recall)).
-{: .comment}
+**Confusion Matrix** is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
+that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that 
+were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified 
+as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and 
+**recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall 
+is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is 
+to use the **F score**, which is the harmonic mean of precision and recall (F = (2 * precision * recall) / (precision + recall)).
 
 
 # Conclusion
