@@ -84,7 +84,7 @@ We will start by adding a couple of gene call tracks. In our case these are gene
 
 > ### {% icon hands_on %} Hands-on: Build the JBrowse
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
@@ -128,7 +128,7 @@ All of the track types in the JBrowse tool support a wide array of features. We'
 
 > ### {% icon hands_on %} Hands-on: Build a JBrowse for viewing Genes
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
@@ -198,7 +198,7 @@ Next we will add a sequencing dataset, a BAM file which maps some sequencing rea
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
@@ -250,7 +250,7 @@ The best way to accomplish this is through the `gffread` tool which can cleanup 
 
 > ### {% icon hands_on %} Hands-on: Building a JBrowse for Blast results
 >
-> 1. **JBrowse** {% icon tool %} with the following parameters:
+> 1. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `genome.fa`
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
