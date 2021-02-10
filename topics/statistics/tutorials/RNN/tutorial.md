@@ -213,8 +213,9 @@ cost function via backpropagation.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo](https://zenodo.org/record/4477881#.YBrEQ3dKgvo) or from the shared data library
+> - {% tool [Import some data](upload1) %}
+>    - Create a new history for this tutorial
+>    - Import the files from [Zenodo](https://zenodo.org/record/4477881#.YBrEQ3dKgvo) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/4477881/files/X_test.tsv
@@ -225,11 +226,11 @@ cost function via backpropagation.
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively
+>    - Rename the datasets as `X_test`, `X_train`, `y_test`, and `y_train` respectively
 >
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
+>    - Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -274,7 +275,7 @@ and anything less than 0.5 a negative one. The model config can be downloaded as
 
 > ### {% icon hands_on %} Hands-on: Model builder (Optimizer, loss function, and fit parameters)
 >
-> 1. **Create deep learning model** with an optimizer, loss function and fit parameters {% icon tool %} with the following parameters:
+> - {% tool [Create deep learning model](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0) %}
 >    - *"Choose a building mode"*: `Build a training model`
 >    - *"Select the dataset containing model configuration"*: Select the *Keras Model Config* from the previous step.
 >    - *"Do classification or regression?"*: `KerasGClassifier`
@@ -299,7 +300,7 @@ The model builder can be downloaded as a zip file.
 
 > ### {% icon hands_on %} Hands-on: Training the model
 >
-> 1. **Deep learning training and evaluation** conduct deep training and evaluation either implicitly or explicitly {% icon tool %} with the following parameters:
+> - {% tool [Deep learning training and evaluation](toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2) %}
 >    - *"Select a scheme"*: `Train and Validate`
 >    - *"Choose the dataset containing pipeline/estimator object"*: Select the *Keras Model Builder* from the previous step. 
 >    - *"Select input type:"*: `tabular data`
@@ -319,7 +320,7 @@ model weights, downloadable as an hdf5 file. These files are needed for predicti
 
 > ### {% icon hands_on %} Hands-on: Testing the model
 >
-> 1. **Model Prediction** predicts on new data using a prefitted model {% icon tool %} with the following parameters:
+> - {% tool [Model Prediction](toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2) %}
 >    - *"Choose the dataset containing pipeline/estimator object"* : Select the trained model from the previous step. 
 >    - *"Choose the dataset containing weights for the estimator above"* : Select the trained model weights from the previous step. 
 >    - *"Select invocation method"*: `predict`
@@ -337,7 +338,7 @@ the test dataset.
 
 > ### {% icon hands_on %} Hands-on: Creating the confusion matrix
 >
-> 1. **Machine Learning Visualization Extension** includes several types of plotting for machine learning {% icon tool %} with the following parameters:
+> - {% tool [Machine Learning Visualization Extension](toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2) %}
 >    - *"Select a plotting type"*: `Confusion matrix for classes`
 >    - *"Select dataset containing the true labels"*": `y_test` 
 >    - *"Choose how to select data by column:"*: `All columns`
