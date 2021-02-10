@@ -358,6 +358,7 @@ Because we are working with a MRSA we are curious to see which resistance genes 
 >    - For the plasmid and resistance results the identity, overlap, length and the location on the contig can be found here.
 >    - Multiple rep sequences are located on the second contig. (See "plasmid typing for gram-positive bacteria" {% cite Lozano_2012 %} for more information)
 >    - Multiple resistance genes can be found on both contig 1 and contig 2.
+>    - In the last column there are "Accession" numbers. These are references to NCBI, and you can search for these numbers there. E.g. [M13771](https://www.ncbi.nlm.nih.gov/nuccore/M13771)
 >
 {: .hands_on}
 
@@ -373,10 +374,12 @@ it is logical to find the resistance gene in a specific bacteria.
 
 > ### {% icon question %} Question
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
-> 2. Do you aspect to find this gene in this MRSA strain and why?
+> 2. Do you expect to find this gene in this MRSA strain and why?
+> 3. Is the accession number of the entry related to the accession reported by staramr?
 > > ### {% icon solution %} Solution
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
+> > 3. No, these are completely unrelated. Unfortunately this is a **very** common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them 'accessions'), and then someone else needs to build a service to link these databases.
 > {: .solution}
 {: .question}
 
@@ -423,6 +426,9 @@ from prokka as an information track.
 >    - {% icon param-repeat %} *"Insert Qualifiers"*
 >        - *"Name"*: `phenotype`
 >        - *"Qualifier value column or raw text"*: `4`
+>    - {% icon param-repeat %} *"Insert Qualifiers"*
+>        - *"Name"*: `accession`
+>        - *"Qualifier value column or raw text"*: `11`
 >
 > 4. {% tool [Bowtie2](toolshed.g2.bx.psu.edu/repos/devteam/bowtie2/bowtie2/2.3.4.3+galaxy0) %} with the following parameters:
 >    - *"Is this single or paired library"*: `Paired-end`

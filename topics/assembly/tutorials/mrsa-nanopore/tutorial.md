@@ -371,7 +371,7 @@ Because we are working with a MRSA we are curious to see which resistance genes 
 >    - For the plasmid and resistance results the identity, overlap, length and the location on the contig can be found here.
 >    - Multiple rep sequences are located on the second contig. (See "plasmid typing for gram-positive bacteria" {% cite Lozano_2012 %} for more information)
 >    - Multiple resistance genes can be found on both contig 1 and contig 2.
->    - In the last column there are "Accession" numbers.
+>    - In the last column there are "Accession" numbers. These are references to NCBI, and you can search for these numbers there. E.g. [M13771](https://www.ncbi.nlm.nih.gov/nuccore/M13771)
 >
 {: .hands_on}
 
@@ -388,9 +388,11 @@ it is logical to find the resistance gene in a specific bacteria.
 > ### {% icon question %} Question
 > 1. To what family does [mecA](https://card.mcmaster.ca/ontology/36911) belong?
 > 2. Do you expect to find this gene in this MRSA strain and why?
+> 3. Is the accession number of the entry related to the accession reported by staramr?
 > > ### {% icon solution %} Solution
 > > 1. [Methicillin resistant PBP2](https://card.mcmaster.ca/ontology/37589)
 > > 2. The strain we use is a Methicillin(multi) resistant Staphylococcus aureus. As `mecA` has a perfect resistome mach with *S. aureus*, and the AMR Gene Family is methicillin resistant PBP2, we expect to see mecA in MRSA.
+> > 3. No, these are completely unrelated. Unfortunately this is a **very** common issue in bioinformatics. Everyone builds their own numbering system for entries in their database (usually calling them 'accessions'), and then someone else needs to build a service to link these databases.
 > {: .solution}
 {: .question}
 
@@ -437,8 +439,20 @@ from prokka as an information track.
 >    - {% icon param-repeat %} *"Insert Qualifiers"*
 >        - *"Name"*: `phenotype`
 >        - *"Qualifier value column or raw text"*: `4`
+>    - {% icon param-repeat %} *"Insert Qualifiers"*
+>        - *"Name"*: `accession`
+>        - *"Qualifier value column or raw text"*: `11`
 >
-> 4. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
+> 4. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters:
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>        - {% icon param-file %} *"FASTA/Q file #2"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)` (output of **Trimmomatic** {% icon tool %})
+>    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from the history and build index`
+>        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `consensus` (output of **Flye assembly** {% icon tool %})
+>    - *"Single or Paired-end reads"*: `Single`
+>    - *"Select fastq dataset"*: `DRR187567-filtered`
+>    - *"Select a profile of preset options"*: `Oxford Nanopore read to reference mapping. Slightly more sensitive for Oxford Nanopore to reference mapping (-k15). For PacBio reads, HPC minimizers consistently leads to faster performance and more sensitive results in comparison to normal minimizers. For Oxford Nanopore data, normal minimizers are better, though not much. The effectiveness of HPC is determined by the sequencing error mode. (map-ont)`
+>
+> 5. {% tool [JBrowse](toolshed.g2.bx.psu.edu/repos/iuc/jbrowse/jbrowse/1.16.9+galaxy0) %} with the following parameters:
 >    - *"Reference genome to display"*: `Use a genome from history`
 >        - {% icon param-file %} *"Select the reference genome"*: `consensus` (output of **Flye assembly** {% icon tool %})
 >    - *"Genetic Code"*: `11. The Bacterial, Archaeal and Plant Plastid Code`
@@ -449,7 +463,6 @@ from prokka as an information track.
 >                - {% icon param-repeat %} *"Insert Annotation Track"*
 >                    - *"Track Type"*: `GFF/GFF3/BED Features`
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `out_gff` (output of **Prokka** {% icon tool %})
->                        - *"Index this track"*: `Yes`
 >                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
 >                        - *"Track Visibility"*: `On for new users`
 >        - {% icon param-repeat %} *"Insert Track Group"*
@@ -460,6 +473,13 @@ from prokka as an information track.
 >                        - {% icon param-file %} *"GFF/GFF3/BED Track Data"*: `Table to GFF3 on ...`, the output of the table to gff3 step
 >                        - *"JBrowse Track Type [Advanced]"*: `Neat Canvas Features`
 >                        - *"Track Visibility"*: `On for new users`
+>        - {% icon param-repeat %} *"Insert Track Group"*
+>            - *"Track Category"*: `Sequencing`
+>            - In *"Annotation Track"*:
+>                - {% icon param-repeat %} *"Insert Annotation Track"*
+>                    - *"Track Type"*: `BAM Pileups`
+>                        - {% icon param-file %} *"BAM Track Data"*: Minimap2's output
+>                        - *"Autogenerate SNP Track"*: `Yes`
 >
 > 3. View the output of JBrowse
 >
