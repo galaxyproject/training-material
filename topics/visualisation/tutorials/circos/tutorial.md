@@ -258,7 +258,7 @@ In this section we will reproduce this Circos plot step by step.
 >    https://zenodo.org/record/4494146/files/VCaP_Copy-Number.tsv
 >    https://zenodo.org/record/4494146/files/VCaP_B-allele-Frequency.tsv
 >    https://zenodo.org/record/4494146/files/VCaP-highConfidenceJunctions.tsv
->    https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.tsv
+>    https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
 >    ```
 >
 >    {% include snippets/import_via_link.md %}
@@ -277,7 +277,7 @@ As the first step to this Circos plot, let's configure the ideogram (set of chro
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
 >    - In *"Karyotype"*:
 >        - *"Reference Genome Source"*: `Custom Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.tsv`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.txt`
 >    - In *"Ideogram"*:
          - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
@@ -455,7 +455,7 @@ Given that Circos is a very complex with dozens of parameters to set, we re-run 
 >                                   - *"Condition"*: `Interchromosomal`
 >                           - In *"Actions to Apply"*:
 >                               - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                   - *"Action"*: `Change Link Colour`
+>                                   - *"Action"*: `Change Fill Colour`
 >                                   - *"Change fill Color"*: {% color_picker #ff0000 %} (red)
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot SVs`
