@@ -245,7 +245,7 @@ and plot the confusion matrix.
 
 > ### {% icon hands_on %} Hands-on: Model config
 >
-> 1. **Create a deep learning model architecture** using Keras {% icon tool %} with the following parameters:
+> - {% tool [Create a deep learning model architecture](toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0) %}
 >    - *"Select keras model type"*: `sequential`
 >    - *"input_shape"*: `(500,)`
 >    - In *"LAYER"*:
