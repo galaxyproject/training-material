@@ -142,7 +142,7 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 >            - *"Variables index"*: `gene_symbols`
 >            - *"Make the variable index unique by appending '-1', '-2'?"*: `Yes`
 >
-> 2. Rename the generated file to `Input 3k PBMC` 
+> 2. Rename the generated file to `Input 3k PBMC`
 
 > 3. Check that the format is `h5ad`
 {: .hands_on}
@@ -296,8 +296,7 @@ Genes that appear in less than a few cells can be considered noise and thus remo
 
 > ### {% icon hands_on %} Hands-on: Remove genes found in less than 3 cells
 >
-> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.4.4.post1+galaxy3
-) %} with the following parameters:
+> 1. {% tool [Filter with scanpy](toolshed.g2.bx.psu.edu/repos/iuc/scanpy_filter/scanpy_filter/1.4.4.post1+galaxy3) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `Input 3k PBMC`
 >    - *"Method used for filtering"*: `Filter genes based on number of cells or counts, using 'pp.filter_genes'`
 >        - *"Filter"*: `Minimum number of cells expressed`
