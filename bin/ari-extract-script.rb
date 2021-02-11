@@ -14,7 +14,7 @@ WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
-PUNCTUATION = ['-', '--', '@']
+PUNCTUATION = ['-', '--', '@', '%', '‘', '’']
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
