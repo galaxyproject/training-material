@@ -1,0 +1,362 @@
+---
+layout: introduction_slides
+logo: "GTN"
+
+title: "Introduction to proteomics, protein identification, quantification and statistical modelling"
+type: "introduction"
+contributors:
+  - foellmelanie
+
+---
+
+## Introduction to proteomics, protein identification, quantification and statistical modelling
+
+---
+
+# Proteomics
+
+*"A Proteome is the entire protein complement expressed
+by a genome or by a cell or tissue type at a given time."* - Marc Wilkins 1996
+
+![Schematic overview of proteomics]({{site.baseurl}}/topics/proteomics/images/intro-slides/proteomics_schematic.png)
+
+.footnote[Image credit: [Madprime](https://commons.wikimedia.org/wiki/File:Genetic_code.svg)]
+
+---
+
+# Mass Spectometry-based Proteomics
+
+
+
+.force-right[
+- Bottom-up approach: measurement of peptides after
+enzymatic digestion of proteins
+- Measures the peptides mass-to-charge (m/z) ratio and stores
+m/z – intensity pairs in mass spectra
+- High sensitivity and throughput
+- Standard method for the analysis of complex samples
+]
+
+<br><br>
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/ms-proteomics.png)
+
+
+---
+
+# MS-based Proteomic Techniques
+
+
+|   |   |   |
+|:-:|:-:|:-:|
+| .image-90[![]({{site.baseurl}}/topics/proteomics/images/intro-slides/explorative-proteomics.png)] | .image-90[![]({{site.baseurl}}/topics/proteomics/images/intro-slides/targeted-proteomics.png)] | .image-90[![]({{site.baseurl}}/topics/proteomics/images/intro-slides/ms-imaging.png)] |
+| **Explorative Proteomics** | **Targeted Proteomics** | **Mass Spectometry** |
+| **(DDA/DIA)** | **(SRM/PRM)** | **Imaging** |
+| All proteins of a cell/organ(ism) | Focus on subset of proteins | Focus on location of proteins |
+
+---
+
+# Proteomics tools in Galaxy
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/tools-overview.png)
+
+
+---
+
+# Active Development of Tools and Training Materials
+
+---
+
+
+# Explorative Proteomics
+
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/explorative-proteomics.png)
+
+**(DDA/DIA)**
+
+All proteins of a cell / organ / organism
+
+---
+
+# Explorative Proteomics Workflow
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/explorative-proteomics-workflow.png)
+
+---
+
+class: top
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf1-sample-prep.png)
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/sample-prep.png)
+
+
+---
+class: top
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf2-mass-spec.png)
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/mass-spec-schematic.png)
+
+
+---
+class: top
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf2-mass-spec.png)
+
+Tandem mass spectrometry (LC-MS/MS) using data dependent acquisition (Top3)
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/mass-spec-schematic2.png)
+
+
+---
+class: top
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf3-data-analysis.png)
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/data-analysis-schematic.png)
+
+---
+
+# Typical label-free data dependent acquisition (DDA) workflow (tandem mass spectrometry)
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/all-schematic.png)
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/wf4-all.png)
+
+---
+
+# Peptide identification with MS2 fragment spectra
+
+.left-column50[
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/fragment-spectra.png)
+]
+
+.right-column40[
+**Identification options:**
+
+- Manual interpretation
+
+- De novo sequencing
+
+- Matching to in-silico spectra (generated from FASTA database)
+]
+
+---
+
+# Peptide identification via an in-silico database
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/insilico-identification1.png)
+
+---
+
+# Peptide identification via an in-silico database
+
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/insilico-identification2.png)
+
+---
+
+# FASTA File Format
+
+- Text based file to store DNA, RNA, protein sequences in a single letter code
+- Each entry has
+  - One header line: starting with `>` and containing a unique identifier
+  - A (nucleotide/amino acid) sequence
+
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/fasta-proteomics.png)
+
+
+---
+
+# FASTA Files for Proteomics
+
+- A proteome is the set of proteins thought to be expressed by an organism.
+
+
+- Only proteins that are present in the FASTA file can be identified
+
+
+- The more proteins are present in the FASTA file the higher the changes for false identifications
+  - Choose the right FASTA file
+
+
+- Source for proteome FASTA files:
+  - Uniprot, neXtProt, NCBI, own/public DNA or RNA sequencing data
+
+
+
+.footnote[
+Tutorial: [Protein FASTA database handling](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/database-handling/tutorial.html)
+]
+
+---
+
+# Protein Identification via Protein Inference
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/protein-interference.png)
+
+
+---
+
+# Quantification methods in proteomics
+
+
+TODO Meli: Please add image here, it didn't look good on my off-brand powerpoint ;P
+
+---
+
+
+# Benefits and Drawbacks: Overview Table
+
+.table-100[
+
+| Category                  | Label-free   | Labelled |
+|---------------------------|:------------:|:--------:|
+| Machine Time              | More         | **Less** |
+| Wet lab complexity & Time <span style="width:50%"/> | **Little**   | Medium   |
+| Comparability of Samples  | Difficult    | **Easy** |
+| Data Analysis             | Complex      | Complex  |
+| Study Design              | **Flexible** | Fixed    |
+
+]
+
+Note: The **superior techniques** in each line is marked in **bold**
+
+
+.footnote[ Tutorial: [Label-free versus Labelled: How to Choose Your Quantitation Method](https://training.galaxyproject.org/training-material/topics/proteomics/tutorials/labelfree-vs-labelled/tutorial.html
+) ]
+---
+
+# Quantification Methods in Proteomics
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/quantification-methods.png)
+
+---
+
+# Label-free Peptide Quantification
+
+![]({{site.baseurl}}/topics/proteomics/images/intro-slides/label-free-quantification.png)
+
+---
+
+# Protein Quantification
+
+- **Potential Decisions:**
+  - Include only quantifications of unique (proteotypic) peptides, or also „razor“ (ambiguous, assigned to the protein group with the most other peptides)
+  - Include peptides with modifications?
+  - How to compute protein abundance based on multiple peptides:
+    - Median, Mean, Weighted Mean, Sum
+
+
+.left-column60[
+.image-90[![]({{site.baseurl}}/topics/proteomics/images/intro-slides/protein-quantification-table.png)]
+]
+
+.right-column40[
+
+- **Fold Change:** Ratio of protein abundances in both samples.
+
+- **Log2 Fold Change:** facilitates interpretation of changes
+]
+
+---
+
+# MaxQuant Software
+
+
+.left-column50[
+
+.image-100[
+  ![]({{site.baseurl}}/topics/proteomics/images/intro-slides/maxquant-paper.png)
+]
+
+- Freeware, "Black Box"
+- Popular non-commercial proteomics software
+]
+
+.right-column50[
+
+- **Raw data import**
+- **Protein Identification:**
+  - Andromeda Search Engine
+  - Speciality: Match-between-runs
+- **Protein Quantification:**
+  - Label-free
+  - Label-based
+      - SILAC, Dimethyl, …
+  - Reporter ion MS2
+      - TMT, iTRAQ
+]
+
+
+
+.footnote[
+Watch: [MaxQuant video on YouTube](https://www.youtube.com/channel/UCKYzYTm1cnmc0CFAMhxDO8w)
+]
+
+---
+
+# Follow  up / Statistical Analysis
+
+.pull-left[
+**Typical follow up procedures:**
+
+
+- Visualization
+  - E.g. venn-diagramm, volcano plot, heatmap, boxplots, histogram
+
+
+- Protein-Protein interaction network analysis
+
+- GO annotation and enrichment analysis
+
+- Differentially abundant protein analysis
+
+]
+
+.pull-right[
+.image-100[
+ ![]({{site.baseurl}}/topics/proteomics/images/intro-slides/statistical-analysis.png)
+]
+]
+
+.footnote[
+Müller, 2018, Neoplasia
+]
+
+---
+
+#  MSstats Software
+
+.left-column50[
+
+.image-100[
+  ![]({{site.baseurl}}/topics/proteomics/images/intro-slides/msstats-paper.png)
+]
+
+- Two Bioconductor R Packages
+  - MSstats & MSstatsTMT
+- Popular open-source statistical proteomics software
+]
+
+.right-column50[
+
+- **Import results from common proteomics software:**
+  - MaxQuant, Skyline, OpenMS
+- **Transformation and normalization**
+- **Missing value imputation**
+- **Protein summarization and quantification**
+- **Statistical modelling**
+  - linear models to detect differentially abundant proteins in label-free and isobaric labeled experiments
+
+]
+
+
+
+.footnote[
+Watch: [MSstats videos on YouTube](https://www.youtube.com/c/MayInstituteNEU/search?query=msstats
+)
+]
+
