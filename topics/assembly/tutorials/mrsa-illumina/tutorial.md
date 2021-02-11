@@ -51,7 +51,7 @@ follow_up_training:
 # Introduction
 {:.no_toc}
 
-_Staphylococcus aureus_ is currently the pathogen responsible of most common hospital-acquired infections, whose success results of it extensive virulence factors. One of the characteristics of this bacterial species is its ability to adquire resistance to antibiotics, which often results in epidemic waves. Methicillin-resistant _S. aureus_ (MRSA) refers to group of strains which have adquired a multiple drug resistance to beta-lactam antibiotics. Its clinical manifestations range from asymptomatic colonization of the nasal mucosa to soft tissue infection to fulminant invasive disease.
+_Staphylococcus aureus_ is currently the pathogen responsible of most common hospital-acquired infections, whose success results of its extensive virulence factors. One of the characteristics of this bacterial species is its ability to adquire resistance to antibiotics, which often results in epidemic waves. Methicillin-resistant _S. aureus_ (MRSA) refers to group of strains which have adquired a multiple drug resistance to beta-lactam antibiotics. Its clinical manifestations range from asymptomatic colonization of the nasal mucosa to soft tissue infection to fulminant invasive disease.
     
 In this training we are going to report the complete genome sequences of eight MRSA strains isolated from patients in Japan, by using RNA-seq data generated in {% cite Hikichi_2019 %}.
 
