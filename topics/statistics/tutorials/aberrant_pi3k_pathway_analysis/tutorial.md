@@ -63,12 +63,12 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 > 6. Instructions to get datasets from shared library is given in Hands-on: Data upload.
 {: .hands_on}
 
-# **Get data for analysis from classifier to pharmocological correlations**
+# **Get data for analysis from classifier to pharmacological correlations**
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker shared data library (`GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )
+> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
 >
 >    ```
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/CCLE_DepMap_18Q1_maf_20180207.txt.gz
@@ -97,7 +97,8 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 > ### {% icon hands_on %} Hands-on: Some additional files that you can use for alternative analysis
 > 1. These files are provided to optionally enable you to perform an additional analysis, using the same methodology
 >    described here, but are not required for the main tutorial.
-> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the shared data library (`library`->`GTN-Material`->`PAPAA:PanCancer Aberrant Pathway Activity Analysis`->`DOI: 10.5281/zenodo.4306639#.X9FJF-lKgZE`):
+> 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
+
 >    ```
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
@@ -639,4 +640,4 @@ In this step we use the classifier derived cell line predictions and use them to
 - Further, we can apply the trained models to make predictions on a external expression dataset provided and predict their mutational status. 
 - In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals. 
 
-![tutorial_summary](../../images/aberrant_pi3k_pathway_analysis/project_summary.png "Galaxy based Machine Learning approach for Pancancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. ")
+![tutorial_summary](../../images/aberrant_pi3k_pathway_analysis/project_summary.png "Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. ")
