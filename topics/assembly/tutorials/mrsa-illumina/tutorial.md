@@ -51,16 +51,10 @@ follow_up_training:
 # Introduction
 {:.no_toc}
 
-In this training you're going to make an assembly of data produced by
-"Complete Genome Sequences of Eight Methicillin-Resistant
-Staphylococcus aureus Strains Isolated from Patients in
-Japan" from {% cite Hikichi_2019 %} which describes:
+_Staphylococcus aureus_ is currently the pathogen responsible of most common hospital-acquired infections, whose success results of it extensive virulence factors. One of the characteristics of this bacterial species is its ability to adquire resistance to antibiotics, which often results in epidemic waves. Methicillin-resistant _S. aureus_ (MRSA) refers to group of strains which have adquired a multiple drug resistance to beta-lactam antibiotics. Its clinical manifestations range from asymptomatic colonization of the nasal mucosa to soft tissue infection to fulminant invasive disease.
+    
+In this training we are going to report the complete genome sequences of eight MRSA strains isolated from patients in Japan, by using RNA-seq data generated in {% cite Hikichi_2019 %}.
 
-> Methicillin-resistant Staphylococcus aureus (MRSA) is a major pathogen
-causing nosocomial infections, and the clinical manifestations of MRSA
-range from asymptomatic colonization of the nasal mucosa to soft tissue
-infection to fulminant invasive disease. Here, we report the complete
-genome sequences of eight MRSA strains isolated from patients in Japan.
 
 > ### Agenda
 >
@@ -73,11 +67,7 @@ genome sequences of eight MRSA strains isolated from patients in Japan.
 
 # Background
 
-Sequencing (determining of DNA/RNA nucleotide sequence) is used all over
-the world for all kinds of analysis. The product of these sequencers are
-reads, which are sequences of detected nucleotides. Depending on the
-technique these have specific lengths (30-500bp) or using Oxford
-Nanopore Technologies sequencing have much longer variable lengths.
+Sequencing (determining of DNA/RNA nucleotide sequence) is used all over the world for all kinds of analysis. The product of these sequencers are reads, which are sequences of detected nucleotides. Depending on the technique these have specific lengths (30-500bp) or using Oxford Nanopore Technologies sequencing have much longer variable lengths.
 
 {% include snippets/illumina-miseq.md %}
 
@@ -136,7 +126,7 @@ Tutorial]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md
 To assess the quality by hand would be too much work. That's why tools like
 [NanoPlot](https://github.com/wdecoster/NanoPlot) or
 [FastQC](http://www.bioinformatics.babraham.ac.uk/projects/fastqc/) are made,
-which will generate a summary and plots of the data statistics. NanoPlot is
+which allows generate a summary and plots of the data statistics. NanoPlot is
 mainly used for long-read data, like ONT and PACBIO and FastQC for short read,
 like Illumina and Sanger.
 
@@ -167,7 +157,7 @@ Depending on the analysis it could be possible that a certain quality or length 
 
 > ### {% icon hands_on %} Hands-on: Assessing the data quality of the trimmed reads and comparing to the input reads
 >
-> 1. **Trimmomatic** {% icon tool %} with the following parameters:
+> 1. {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic) %}  with the following parameters:
 >    - *"Single-end or paired-end reads?"*: `Paired-end (two separate input files)`
 >        - {% icon param-file %} *"Input FASTQ file (R1/first of pair)"*: `DRR187559_1 uncompressed`
 >        - {% icon param-file %} *"Input FASTQ file (R2/second of pair)"*: `DRR187559_1 uncompressed`
@@ -259,7 +249,7 @@ based genome assembler, improved to work faster and only for smaller
 
 > ### {% icon hands_on %} Hands-on: Assembly using Shovill
 >
-> 1. **Shovill** {% icon tool %} with the following parameters:
+> 1. {% tool [Shovill](toolshed.g2.bx.psu.edu/repos/iuc/shovill) %} with the following parameters:
 >    - *"Input reads type, collection or single library"*: `Paired End`
 >        - {% icon param-file %} *"Forward reads (R1)"*: `Trimmomatic on DRR187567_1 uncompressed (R1 paired)`
 >        - {% icon param-file %} *"Reverse reads (R2)"*: `Trimmomatic on DRR187567_2 uncompressed (R2 paired)`
@@ -292,7 +282,7 @@ based genome assembler, improved to work faster and only for smaller
 >    ![Bandage output showing a mess of a genome graph](../../images/mrsa/bandage-illumina.jpg)
 {: .hands_on}
 
-## QC
+## Genome assembly evaluation
 
 [Quast](http://quast.bioinf.spbau.ru/) ({% cite Gurevich2013% %})
 is a tool providing quality metrics for assemblies, and can also be used
