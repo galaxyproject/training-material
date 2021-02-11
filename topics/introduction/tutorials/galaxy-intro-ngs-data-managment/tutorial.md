@@ -17,6 +17,8 @@ key_points:
   - "The standard format for storing aligned reads is SAM/BAM. The major toolsets to process these datasets are DeepTools, SAMtools, BAMtools and Picard."
   - "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL."
   - "One can retrieve NGS data from Sequence Read Archive"
+  - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
+  - "One can start Jupyter directly in Galaxy or import data into Google Colaboratory"
 
 subtopic: core
 contributors:
@@ -438,7 +440,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >   - Changing **Format** to `RunInfo`
 >   - Clicking **Create file**
 > Here is how it should look like:
-> ![](../../images/get_runinfo.png) 
+> ![Getting RunInfo from SRA](../../images/get_runinfo.png) 
 > 5. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder. 
 {: .hands_on}
 
@@ -456,9 +458,9 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
-> ![](../../images/upload_button.png)
+> ![Data upload button](../../images/upload_button.png)
 > 1. In the dialog box that would appear click "*Choose local files*" button:
-> ![](../../images/choose_local_files_button.png)
+> ![Choose local files button](../../images/choose_local_files_button.png)
 > 1. Find and select `SraRunInfo.csv` file from your computer
 > 1. Click *Start* button
 > 1. Close dialog by pressing **Close** button
@@ -729,6 +731,11 @@ We will now summarize our analysis with MultiQC, which generates a beautiful rep
 >                - {% icon param-file %} *"Output of SnpEff"*: `csvFile` (output of **SnpEff eff:** {% icon tool %})
 {: .hands_on}
 
+The above state allows us to judge the quality of the data. In this particular case data is not bad as quality values never drop below 30:
+
+![MultiQC plot](../../images/multiqc.png)
+
+
 ## Collapse data into a single dataset
 
 We now extracted meaningful fields from VCF datasets. But they still exist as a collection. To move towards secondary analysis we need to **collapse** this collection into a single data. For more information about collapsing collections see this video:
@@ -787,11 +794,50 @@ After a dataset is converted into an intermediary result (such as variant table 
 > Jupyter notebook functionality in Galaxy is currently in Beta. It means that we are still working on it and its implementation is constantly changing. Be aware of this fact. 
 {: .warning}
 
+> ### {% icon hands_on %} Hands-on: Analyze data in Jupyter from Galaxy
+>
+> 1. Open {% icon tool %} **Interactive Jupyter Notebook** from section **Interactive Tools**
+> 1. *"Do you already have a notebook?"*: `Start with a fresh notebook`
+> 1. *"Include data into the environment"*: Select history dataset containing the output of the collection collapse step
+> 1. Click `Execute`
+> 1. It will create a dataset in the history that will be permanently yellow (running)
+> 1. You will see the following banner:
+> ![Jupyter startup banner](../../images/jupyter_start.png)
+> 1. Click on `User menu`. You may need to wait a bit (go get coffee quickly). In the end you will a `Jupyter Interactive Tool` link. Click on it.
+> 1. This will open a new tab with a fully functional Jupyter environment:
+> ![Jupyter running](../../images/jupyter_running.png)
+> 1. Start a new notebook by clicking on Python 3 image. This will start a fresh notebook.
+> 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history. 
+> 1. Upgrade [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/index.html): `!pip install -U pandas seaborn`
+> 1. Read data into a dataframe: 
+>```
+> import pandas as pd
+> df = pd.read_csv('data/Collapsed_collection',sep='\t')
+> # Drop duplicates is required to get rid of SnpEff artifacts
+> df = df.drop_duplicates(ignore_index=True)
+```
+> {% icon warning %} Note that your file may be named differently! Use it exact name instead of `Collapsed_collection` above.
+> 1. Filter variants with intermediate frequencies between 20% and 80%:
+>```
+>df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
+>```
+> 1. Plot relationship between variant position and alternative allele frequency:
+>```
+>import seaborn as sns
+>%matplotlib inline
+>sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
+>```
+> This plot shows how variants are distributed across the SARS-CoV-2 genome:
+> ![Seaborn plot](../../images/sns_plot.png)
+> 1. Play with it!
+{: .hands_on}
+
+
 # Let's do it: A peek at secondary analysis in Google Colab
 
 We can also import data directly into Google Colab:
 
-> ### {% icon hands_on %} Hands-on: Collapse a collection
+> ### {% icon hands_on %} Hands-on: Analyze data in Google Colab
 >
 > 1. Expand history dataset containing the output of the collection collapse step
 > 1. Right click on {% icon galaxy-save %} (disk) icon and copy link to clipboard
@@ -813,7 +859,7 @@ We can also import data directly into Google Colab:
 >```
 > 1. Filter variants with intermediate frequencies between 20% and 80%:
 >```
->df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
+>df = df[ (df['AF']>=0.05) & (df['AF']<=0.8) ]
 >```
 > 1. Plot relationship between variant position and alternative allele frequency:
 >```
@@ -821,7 +867,7 @@ We can also import data directly into Google Colab:
 >sns.relplot(x='POS',y='AF',hue='EFF[*].FUNCLASS',data=df,height=5,aspect=2,s=100,style='Sample')
 >```
 > This plot shows how variants are distributed across the SARS-CoV-2 genome:
-> ![](../../images/sns_plot.png)
+> ![Seaborn plot](../../images/sns_plot.png)
 > 1. Play with it!
 {: .hands_on}
 
