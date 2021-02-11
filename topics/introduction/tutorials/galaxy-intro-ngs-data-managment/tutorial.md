@@ -18,8 +18,6 @@ key_points:
   - "Data can be uploaded directly from a computer, from EBI SRA and from NCBI SRA, also using FTP or URL."
   - "One can retrieve NGS data from Sequence Read Archive"
   - "Galaxy can analyze massive amounts of data and make them suitable for secondary analysis"
-  - "One can start Jupyter directly in Galaxy or import data into Google Colaboratory"
-
 subtopic: core
 contributors:
   - nekrut
@@ -30,7 +28,7 @@ contributors:
 
 In this section we will look at practical aspects of manipulation of next-generation sequencing data. We will start with the FASTQ format produced by most sequencing machines and will finish with the SAM/BAM format representing mapped reads. The cover image above shows a screen dump of a SAM dataset.
 
-# Introduction to sequecning data
+# Introduction to sequencing data
 
 ## FASTQ manipulation and quality control
 
@@ -418,7 +416,7 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Q4t-beYZ-do" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-# Let's do it: Primary analysis
+# Let's do it: From reads to variants
 
 In primary analysis we start with raw sequencing data (e.g., fastq reads) and convert them into a dataset for secondary analysis. Such dataset can be a list of sequence variants, a collection of ChIP-seq peaks, a list of differentially expressed genes and so on.
 
@@ -783,8 +781,9 @@ We will have a single dataset as the output:
 >```
 {: .code-out}
 
-you can see that added a column with dataset ID taken from collection element name. These data can be used for a quick demo of the secondary analysis. 
+you can see that added a column with dataset ID taken from collection element name. These data are now ready for downstream analysis.
 
+<!--
 
 # Let's do it: A peek at secondary analysis in Galaxy
 
@@ -871,6 +870,7 @@ We can also import data directly into Google Colab:
 > 1. Play with it!
 {: .hands_on}
 
+-->
 
 # Conclusion
 {:.no_toc}
