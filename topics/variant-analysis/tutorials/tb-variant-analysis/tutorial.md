@@ -200,7 +200,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >   - *"Single or Paired-end reads"*: `Paired`
 >       - *"Select first set of reads"*: `Trimmomatic on X (R1 paired)`
->       - *"Select second set of reads"*: `Trimmomatic on X (R1 paired)`
+>       - *"Select second set of reads"*: `Trimmomatic on X (R2 paired)`
 >
 >   - Under *"Advanced parameters"*
 >       - *"Minimum proportion for variant evidence"*: `0.1` (This is so we can see possible rare variants in our sample)
