@@ -33,8 +33,8 @@ final_script = script.map.with_index{ |slide, idx|
     FileUtils.cp(json, File.join(dir, digest + '.json'))
 
     [
-      "file 'slides.%03d.png' # #{spoken}\nduration #{duration}\n" % idx,
-      "file '#{digest}.mp3' # #{spoken}\nduration #{duration}\n",
+      "file 'slides.%03d.png'\nduration #{duration}\n" % idx,
+      "file '#{digest}.mp3'\nduration #{duration}\n",
     ]
   }
   # Silence at the end of the slide
