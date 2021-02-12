@@ -186,7 +186,7 @@ Next, we will compare the short reads to the assembly, and create a polished (co
 >
 >    {% include snippets/rename_dataset.md name="polished-assembly.fasta" %}
 >
-> 3. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/simon-gladman/fasta_stats/fasta-stats/1.0.0) %}
+> 3. {% tool [Fasta Statistics](toolshed.g2.bx.psu.edu/repos/iuc/fasta_stats/fasta-stats/1.0.1) %}
 >    - Find and run the tool called "Fasta statistics" on both the original flye assembly and the polished version.
 {: .hands_on}
 
