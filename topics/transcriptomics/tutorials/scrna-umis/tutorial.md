@@ -85,7 +85,7 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
- ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two seperate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
+ ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
 
 Transcript barcodes, meanwhile, are random sets of nucleotides added to each transcript.
 
@@ -346,7 +346,7 @@ Let us examine these four reads of interest which we have just sub-selected usin
 What we observe are the standard four lines of any FASTQ file:
   1. Read name starting with `@`
   2. Sequence of nucleotide bases
-  3. Seperator `+`
+  3. Separator `+`
   4. Quality string of the nucleotide bases in ASCII
 
 The main source of interest for us is in the (2) sequences of these reads, which somewhere within encode for three crucial pieces of information that we will need to perform quantification:
@@ -447,7 +447,7 @@ In a sense, we have a disparity in our data: the reverse reads contain the seque
 > >     13763:   GCCACCTAATTTCCGTCATCACACTCCTCTCCGTTTTCAACTTGCACAATGCTGTCTCCGCAGAATCCCT
 > >     35690:                        CAATCCTCTCCGTTATCAACTTGCACAATGCTGTCTCCGCAGAATCCCTCCGGATCAGGATCGCTCTCCA
 > >
-> > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as seperate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted seperately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
+> > They describe the same transcript but have sequences from different reads, and therefore both reads *should* be counted as separate reads. Whether or not both these reads are counted as a single read due to their identical barcodes, or counted separately due to their differing sequences depends entirely on the deduplication utility they are fed into it.
 > >
 > {: .solution}
 {: .question}
