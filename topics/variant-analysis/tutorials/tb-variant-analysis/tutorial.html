@@ -642,6 +642,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1128,6 +1130,15 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 
       <p><strong>TB Profiler</strong> produces 3 output files, it’s own VCF file, a report about the sample including it’s likely lineages and any AMR found. There is also a <code class="language-plaintext highlighter-rouge">.json</code> formatted results file.</p>
     </li>
+    <li>
+      <p>When <em>snippy</em> is run with Genbank format input it prepends <code class="language-plaintext highlighter-rouge">GENE_</code> to gene names in the VCF annotation. This causes a problem for <em>TB Variant report</em>, so we need to edit the output with sed.</p>
+
+      <p><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1"><strong>Text transformation with sed</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</p>
+
+      <ul>
+        <li><em>“SED Program”</em>: <code class="language-plaintext highlighter-rouge">s/GENE_//g</code></li>
+      </ul>
+    </li>
     <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0"><strong>TB Variant Report</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+<span class="notranslate">galaxy</span>0</span></span> : <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters
       <ul>
         <li><em>“Input SnpEff annotated M.tuberculosis VCF(s)”</em>: <code class="language-plaintext highlighter-rouge">TB-Profiler Profile VCF on data XX</code></li>
@@ -1245,7 +1256,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 
 <p>You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.</p>
 
-<h1 id="a-different-sample-with-a-different-story">A different sample with a different story</h1>
+<h1 id="different-samples-different-stories">Different samples, different stories</h1>
 
 <p>In <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> we have included sample <em>18-1</em> from the same study (aka. <a href="https://www.ebi.ac.uk/ena/browser/view/ERR1750907">ERR1750907</a>). This is also a southern African
 <em>M. tuberculosis</em> sample, but in some ways quite different from the sample we have analysed in the tutorial thus
@@ -1261,7 +1272,7 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
 </code></pre></div>      </div>
     </li>
     <li>
-      <p>Examine the sequence quality with FastQC <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
     </li>
     <li>
       <p>Examine the sample composition with kraken2 <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
@@ -1297,6 +1308,98 @@ https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
 </blockquote>
 
 <p>As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using <strong>Trimmomatic</strong>, <strong>fastp</strong> or <strong>cutadapt</strong>) and perhaps use the Kraken2 output to decide which <span class="notranslate">reads</span> to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.</p>
+
+<p>The next example is <em>SRR12416842</em> from an Indonesia <a href="https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221">study</a> of multi-drug resistant (MDR) tuberculosis.</p>
+
+<blockquote>
+  <h3 id="hands_on-hands-on-take-a-closer-look-at-sample-srr12416842"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Take a closer look at sample SRR12416842</h3>
+
+  <ol>
+    <li>Fetch the data from EBI European Nucleotide Archive
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_1.fastq.gz
+ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
+</code></pre></div>      </div>
+    </li>
+    <li>
+      <p>Examine the sequence quality with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1"><strong>FastQC</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+<span class="notranslate">galaxy</span>1</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>.</p>
+    </li>
+    <li>
+      <p>Perform quality trimming with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5" title="Tested with toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5"><strong>Trimmomatic</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+    </li>
+    <li>
+      <p>Map the samples to the <em>M. tuberculosis</em> reference genome with <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0"><strong>Snippy</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span></p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-7"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>
+            <p>Was the sequence quality good?</p>
+          </li>
+          <li>
+            <p>How many variants were discovered by snippy?</p>
+          </li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-7"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>
+              <p>The <strong>FastQC</strong> result shows that while there is some dropoff in sequence quality (especially towards the end of the <span class="notranslate">reads</span> from the second dataset), the sequences are of good enough quality to analyse.</p>
+            </li>
+            <li>
+              <p><em>*snippy</em> discovered more than 15,000 variants. This is unusual for a <em>M. tuberculosis</em> sample where we expect at most a few thousand variants across the length of the genome.</p>
+            </li>
+          </ol>
+        </blockquote>
+      </blockquote>
+    </li>
+    <li>
+      <p>Run <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2" title="Tested with toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2"><strong>samtools stats</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+<span class="notranslate">galaxy</span>2</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the <em>snippy on data XX, data XX, and data XX mapped <span class="notranslate">reads</span> (bam)</em> file. In the output, pay attention to the <em>sequences</em>, <em><span class="notranslate">reads</span> mapped</em> and <em><span class="notranslate">reads</span> unmapped</em> results.</p>
+    </li>
+    <li>
+      <p>If it exists on the <span class="notranslate">Galaxy</span> server you are using, run the <span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0" title="Tested with toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0"><strong>BAM Coverage Plotter</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+<span class="notranslate">galaxy</span>0</span></span>  <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> on the mapped <span class="notranslate">reads</span> BAM file that you got from <strong>snippy</strong>.</p>
+
+      <blockquote class="question">
+        <h3 id="question-questions-8"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
+        <ol>
+          <li>
+            <p>What percentage of <span class="notranslate">reads</span> mapped to the reference genome?</p>
+          </li>
+          <li>
+            <p>If you could run the <strong>BAM Coverage Plotter</strong> tool, was the coverage even across the genome?</p>
+          </li>
+        </ol>
+
+        <blockquote class="solution">
+          <h3 id="solution-solution-8"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
+
+          <ol>
+            <li>
+              <p>Only 107351 out of 7297618, that is 1.5%, of the <span class="notranslate">reads</span> mapped to the reference genome.</p>
+            </li>
+            <li>
+              <p>The image from the <strong>BAM Coverage Plotter</strong> tool shows just a few vertical bars, suggestion that almost no <span class="notranslate">reads</span> mapped to the reference genome.</p>
+            </li>
+          </ol>
+
+          <p><img src="../../images/mtb_poor_mapping.png" alt="BAM Coverage Plot of SRR12416842 showing few reads mapped" /></p>
+
+          <p>By contrast, <span class="notranslate">reads</span> from the <code class="language-plaintext highlighter-rouge">004-02</code> map evenly across the <em>M. tuberculosis</em> genome, with an average depth of over 100 <span class="notranslate">reads</span>, as shown in this output from <strong>BAM Coverage Plotter</strong>:</p>
+
+          <p><img src="../../images/mtb_good_mapping.png" alt="BAM Coverage Plot of 004-02 showing reads mapped evenly" /></p>
+
+          <p>If you wish to investigate further, analyse the SRR12416842 sample with <strong>kraken2</strong>.</p>
+        </blockquote>
+      </blockquote>
+    </li>
+  </ol>
+
+</blockquote>
+
+<p>There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn’t map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.</p>
 
 <p>We hope you enjoyed this tutorial!</p>
 
