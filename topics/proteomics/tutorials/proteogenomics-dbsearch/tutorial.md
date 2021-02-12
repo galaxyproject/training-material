@@ -89,6 +89,12 @@ For this, the sequence database-searching program called [SearchGUI](https://com
 >
 > 1. **SearchGUI** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Protein Database"*: `Uniprot_cRAP_SAV_indel_translatedbed.FASTA` (Or however you named the `FASTA` file)
+>
+>        > ### {% icon comment %} Comment:
+>        >    The "Uniprot_cRAP_SAV_indel_translatedbed" FASTA database is obtained when you run the first proteogenomics workflow. 
+>        >    Please make sure to run the 1st workflow.
+>        {: .comment}
+>
 >    - {% icon param-files %} *"Input Peak lists (mgf)"*: `MGF files` dataset collection.
 >
 >      > ### {% icon tip %} Tip: Select dataset collections as input
