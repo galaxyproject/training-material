@@ -237,7 +237,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
-> ![Find data](../../../introduction/images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
 > 3. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
 > 4. Download metadata describing these datasets by:
 >   - clicking on **Send to:** dropdown
@@ -245,7 +245,7 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >   - Changing **Format** to `RunInfo`
 >   - Clicking **Create file**
 > Here is how it should look like:
-> ![](../../introduction/images/get_runinfo.png)
+> ![GetRunInfo](../../images/get_runinfo.png)
 > 5. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder.
 {: .hands_on}
 
@@ -263,9 +263,9 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 >
 > 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
 > 1. Click *Upload Data* button:
-> ![](../../introduction/images/upload_button.png)
+> ![Upload](../../images/upload_button.png)
 > 1. In the dialog box that would appear click "*Choose local files*" button:
-> ![](../../../introduction/images/choose_local_files_button.png)
+> ![Choose local](../../../images/choose_local_files_button.png)
 > 1. Find and select `SraRunInfo.csv` file from your computer
 > 1. Click *Start* button
 > 1. Close dialog by pressing **Close** button
