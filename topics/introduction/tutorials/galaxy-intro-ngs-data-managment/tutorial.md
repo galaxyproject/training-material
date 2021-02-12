@@ -476,7 +476,7 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 > 1. Click `Execute` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
 > 1. Cut the first column from the file using {% icon tool %} "**Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
-> 1. Make sure the dataset produced by the previous step is selected in "*File to cut*" field of the tool form.
+> 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
 > 1. Hit `Execute`
