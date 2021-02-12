@@ -17,6 +17,7 @@ contributors:
 - mvdbeek
 - tnabtaf
 - blankenberg
+- nekrut
 
 ---
 
@@ -24,11 +25,15 @@ contributors:
 # Introduction
 {:.no_toc}
 
-The aim of this tutorial is to learn how to Galaxy and NCBI's Sequence Read Archive interact (SRA) with each other.  This tutorial uses a COVID-19 variant calling example, but it isn't about variant calling per se.
+The aim of this tutorial is to introduce you to the processing of next generation sequencing data in Galaxy.  This tutorial uses a COVID-19 variant calling from Illumina data, but it isn't about variant calling *per se*.
 
+<!--
 SRA, like many data sources is Galaxy aware.  It has support for sending information directly to Galaxy, and it tracks which Galaxy instance it was invoked from.  Getting sequence data from SRA is a multi-step process.  This tutorial explains each step in the process and then demonstrates a particular example of how to use SRA data in Galaxy.
+-->
 
-At the completion of this tutorial you know
+At the completion of this tutorial you will know:
+
+<!--
 
 * how to go from Galaxy to SRA.
 * a basic understanding of how to select data in SRA
@@ -38,7 +43,20 @@ At the completion of this tutorial you know
 * how to run a simple variant analysis in Galaxy using that data
   * See these [variant analysis tutorials](/training-material/topics/variant-analysis) for a more in-depth explanation of variant analysis.
 
+-->
 
+- How to find data in SRA and transfer this information to Galaxy
+- How to perform basic NGS data processing in Galaxy including:
+	- Quality Control (QC) of Illumina data
+	- Mapping
+	- Removal of duplicates
+	- Variant calling with `lofreq` 
+	- Variant annotation
+- Using datasets collections
+- Importing data to Jupyter
+
+
+<!--
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -48,6 +66,14 @@ At the completion of this tutorial you know
 >
 {: .agenda}
 
+## Two paths through this tutorial
+
+We created twoi trajectories that you can follow through this tutorial. 
+
+1. **Trajectory 1** - start with NCBI's SRA and search for available accessions &rarr; Start [here](#the-sequence-read-archive)
+2. **Trajectory 2** - bypass NCBI's SRA and start with Galaxy directly. &rarr; Start [here](#back-in-galaxy)
+
+We recommend beginning with **Trajectory 2**.
 # The Sequence Read Archive
 
 The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  for the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies.
@@ -67,14 +93,14 @@ SRA can be reached either directly through it's website, or through the tool pan
 
 > ### {% icon comment %} Comment
 >
-> Initially the tool panel option exists only on the [usegalaxy.org server](https://usegalaxy.org/).  Support for the direct connection to SRA will be included in the 20.05 release of Galaxy
+> Initially the tool panel option for accessing SRA exists only on the [usegalaxy.org server](https://usegalaxy.org/).  Support for the direct connection to SRA will be included in the 20.05 release of Galaxy
 {: .comment}
 
 
 > ### {% icon hands_on %} Hands-on: Explore SRA Entrez
 >
-> 1. Go to [usegalaxy.org](https://usegalaxy.org/)
-> 1. If your history is not already empty, than start a new history (see here for more on Galaxy histories)
+> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
+> 1. If your history is not already empty, than start a new history (see [here](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/history/tutorial.html) for more on Galaxy histories)
 > 1. **Click** `Get Data` at the top of the tool panel.
 > 1. **Click** `SRA Server` in the list of tools shown under `Get Data`.
 >    This takes you the [Sequence Read Archive home page](https://www.ncbi.nlm.nih.gov/sra) -- you can also start directly from the SRA.  A search box is shown at the top of the page.  Try searching for something you are interested in, such as `dolphin` or `kidney` or `dolphin kidney` and then **click** the  `Search` button.
@@ -201,6 +227,80 @@ The `SRA` dataset is not sequence data, but rather *metadata* that we will use t
 
 Lets now use that metadata to fetch the sequence data from SRA.  SRA provides tools for extracting all sorts of information, including the sequence data itself.  The Galaxy Tool `Faster Download and Extract Reads in FASTQ` is based on the SRA [`fasterq-dump`](https://github.com/ncbi/sra-tools/wiki/HowTo:-fasterq-dump) utility, and does just that.
 
+-->
+
+## Find necessary data in SRA
+
+First we need to find a good dataset to play with. The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  operated by the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies. Let's do that:
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
+> 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
+> ![Find data](../../../images/find_mgh_data.png) (Alternatively, you simply click on this [link](https://www.ncbi.nlm.nih.gov/sra/?term=SARS-CoV-2+Patient+Sequencing+From+Partners+%2F+MGH))
+> 3. The web page will show a large number of SRA datasets (at the time of writing there were 2,223). This is data from a [study](https://science.sciencemag.org/content/early/2020/12/09/science.abe3261) describing analysis of SARS-CoV-2 in Boston area.
+> 4. Download metadata describing these datasets by:
+>   - clicking on **Send to:** dropdown
+>   - Selecting `File`
+>   - Changing **Format** to `RunInfo`
+>   - Clicking **Create file**
+> Here is how it should look like:
+> ![GetRunInfo](../../images/get_runinfo.png)
+> 5. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder.
+{: .hands_on}
+
+Now that we have downloaded this file we can go to a Galaxy instance and start processing it. 
+
+> ### {% icon comment %} Comment
+>
+> Note that the file we just downloaded is **not** sequencing data itself. Rather, it is *metadata* describing properties of sequencing reads. We will filter this list down to just a few accessions that will be used in the remainder of this tutorial.
+>
+{: .comment}
+
+## Process and filter `SraRunInfo.csv` file in Galaxy
+
+> ### {% icon hands_on %} Hands-on: Upload `SraRunInfo.csv` file into Galaxy
+>
+> 1. Go to your Galaxy instance of choice such as one of the [usegalaxy.org](https://usegalaxy.org/), [usegalaxy.eu](https://usegalaxy.eu), [usegalaxy.org.au](https://usegalaxy.org.au) or any other. (This tutorial uses usegalaxy.org).
+> 1. Click *Upload Data* button:
+> ![Upload](../../images/upload_button.png)
+> 1. In the dialog box that would appear click "*Choose local files*" button:
+> ![Choose local](../../../images/choose_local_files_button.png)
+> 1. Find and select `SraRunInfo.csv` file from your computer
+> 1. Click *Start* button
+> 1. Close dialog by pressing **Close** button
+> 1. You can now look at the content of this file by clicking {% icon galaxy-eye %} (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.  
+{: .hands_on}
+
+Galaxy can process all 2,000+ datasets but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
+
+> ### {% icon comment %} Beware of **Cut**s
+> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface. 
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Creating a subset of data
+>
+> 1. Find {% icon tool %} "**Select lines that match an expression**" tool in **Filter and Sort** section of the tool panel.
+>    > ### {% icon tip %} Tip: Finding tools
+>    > Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.
+>    {: .tip}
+> 1. Make sure the `SraRunInfo.csv` dataset we just uploaded is listed in the {% icon param-file %} "*Select lines from*" field of the tool form.
+> 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
+> 1. Click `Execute` button.
+> 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
+> 1. Cut the first column from the file using {% icon tool %} "**Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
+> 1. Change "*Delimited by*" to `Comma`
+> 1. In "*List of fields*" select `Column: 1`.
+> 1. Hit `Execute`
+> This will produce a text file with just two lines:
+> ```
+> SRR12733957
+> SRR11954102
+>```
+{: .hands_on}
+
+Now that we have identifiers of datasets we want we need to download the actual sequencing data.
 
 ## Download sequencing data with **Faster Download and Extract Reads in FASTQ**
 
@@ -208,13 +308,9 @@ Lets now use that metadata to fetch the sequence data from SRA.  SRA provides to
 >
 > 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
->        - {% icon param-file %} *"sra accession list"*: `SRA` (The SRA dataset that we retrieved in the previous step
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset.
+>        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
+>    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
 >
->
->    > ### {% icon tip %} Tip: Finding tools
->    > Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name, in this case `Faster Download and Extract Reads in FASTQ`, in the tool panel search box to find the tool.
->    {: .tip}
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
 >    - **`Single-end data (fasterq-dump)`** Contains Single-end datasets (if available)
@@ -263,12 +359,14 @@ This data is available from Zenodo using the following [link](https://doi.org/10
 > 1.  Import the following file into your history:
 >
 >     ```
->     https://zenodo.org/record/3906454/files/NC_045512.2.fasta
+>https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/009/858/895/GCF_009858895.2_ASM985889v3/GCF_009858895.2_ASM985889v3_genomic.fna.gz
 >     ```
 >
 >    {% include snippets/import_via_link.md %}
 >
 {: .hands_on}
+
+<!-- Previous version of the link -> https://zenodo.org/record/3906454/files/NC_045512.2.fasta -->
 
 
 ## Adapter trimming with **fastp**
