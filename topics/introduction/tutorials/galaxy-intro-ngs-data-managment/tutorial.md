@@ -491,8 +491,7 @@ Now that we have identifiers of datasets we want we need to download the actual 
 
 The remaining portion of this tutorial can also be viewed as a video:
 
-<iframe width="560" height="315" src="https://youtu.be/9mIL0tIfZ_o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
+<iframe width="560" height="315" src="https://www.youtube.com/embed/9mIL0tIfZ_o" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 ## Download sequencing data
 
