@@ -1,6 +1,7 @@
 ---
 layout: introduction_slides
 logo: "GTN"
+video: true
 
 title: "Introduction to proteomics, protein identification, quantification and statistical modelling"
 type: "introduction"
@@ -20,8 +21,8 @@ contributors:
 
 ???
 
-Proteins are macromolecules that have many important functions in a cell. 
-Protein coding genes are transcribed into mRNA, which is translated into amino acids. The amino acid chain forms secondary, tertiary and quartary structures to obtain a functional protein. One gene may generate different proteins due to alternative splicing and post-translational modifications. Therefore, the proteome level shows a higher molecular complexity. The proteome is defined as the entirety of proteins expressed by a genome or by a cell or tissue at a given time. The study of proteins is important as their identity and abundance is only partially predictable from DNA and mRNA information. This is due to alternative splicing, post-translational modifications, protein turnover and subcellular localization. 
+Proteins are macromolecules that have many important functions in a cell.
+Protein coding genes are transcribed into mRNA, which is translated into amino acids. The amino acid chain forms secondary, tertiary and quartary structures to obtain a functional protein. One gene may generate different proteins due to alternative splicing and post-translational modifications. Therefore, the proteome level shows a higher molecular complexity. The proteome is defined as the entirety of proteins expressed by a genome or by a cell or tissue at a given time. The study of proteins is important as their identity and abundance is only partially predictable from DNA and mRNA information. This is due to alternative splicing, post-translational modifications, protein turnover and subcellular localization.
 
 
 ---
@@ -96,7 +97,7 @@ This presentation will focus on explorative proteomics via the traditional DDA a
 
 ???
 
-Proteomics experiments consist of three main steps. The sample is prepared for the analysis in the MS. Then the sample is measured in the MS. And last, the obtained data is analyzed. 
+Proteomics experiments consist of three main steps. The sample is prepared for the analysis in the MS. Then the sample is measured in the MS. And last, the obtained data is analyzed.
 ---
 
 class: top
@@ -119,7 +120,7 @@ class: top
 
 ???
 
-Sample measurement in an MS consists of different steps. A high performance liquid chromatography (HPLC) system is attached in front of the MS. It separates the injected peptide mixture according to their hydrophobicity. The peptides elute from the LC column into the MS within several minutes to hours. This reduces sample complexity and gives the MS more time for the measurement. The acidic LC buffer charges the peptides positively at their N-terminus and the basic lysin or arginin amino acids on the C-terminus. The LC column is directly connected with the ion source needle. There, high voltage and heat are applied to evaporate the ionized peptides into the gas phase. This process is called electrospray ionization. Inside the MS the mass analyzer separates peptides based on their m/z. The detector detects the peptide ions. 
+Sample measurement in an MS consists of different steps. A high performance liquid chromatography (HPLC) system is attached in front of the MS. It separates the injected peptide mixture according to their hydrophobicity. The peptides elute from the LC column into the MS within several minutes to hours. This reduces sample complexity and gives the MS more time for the measurement. The acidic LC buffer charges the peptides positively at their N-terminus and the basic lysin or arginin amino acids on the C-terminus. The LC column is directly connected with the ion source needle. There, high voltage and heat are applied to evaporate the ionized peptides into the gas phase. This process is called electrospray ionization. Inside the MS the mass analyzer separates peptides based on their m/z. The detector detects the peptide ions.
 
 ---
 
@@ -145,7 +146,7 @@ class: top
 
 ???
 
-The analysis of the acquired mass spectra comprises several steps. First, peptides are identified via their MS2 fragmentation spectra. From these peptide identities the corresponding proteins are assembled. The MS1 spectra are used for peptide quantification. Peptide quantities are summarized into protein quantities. The information about protein identity and quantity allows for following statistical analyses. 
+The analysis of the acquired mass spectra comprises several steps. First peptides are identified via their MS2 fragmentation spectra. From these peptide identities the corresponding proteins are assembled. The MS1 spectra are used for peptide quantification. Peptide quantities are summarized into protein quantities. The information about protein identity and quantity allows following statistical analyses. 
 
 ---
 
@@ -157,7 +158,7 @@ The analysis of the acquired mass spectra comprises several steps. First, peptid
 
 ???
 
-This was the overview of a typical explorative tandem mass spectrometry workflow. Now we will dive into more details of the data analysis part. 
+This was the overview of a typical explorative tandem mass spectrometry workflow. Now we will dive into more details of the data analysis part.
 
 ---
 
@@ -207,7 +208,7 @@ Potentially false matches may occur, therefore the false positive rate is contro
 
 ???
 
-The protein sequence database is stored in a FASTA file. This is a text based file to store DNA, RNA or protein sequences in a single letter code. Each entry contains a header line and the sequence. The header line starts with ‘>’ and is follwed by a unique identifier. 
+The protein sequence database is stored in a FASTA file. This is a text based file to store DNA, RNA or protein sequences in a single letter code. Each entry contains a header line and the sequence. The header line starts with ‘>’ and is follwed by a unique identifier.
 
 ---
 
@@ -245,7 +246,7 @@ Sources for proteome FASTA files include uniprot, nextprot, NCBI or DNA and RNA 
 
 ???
 
-After having identified peptides, they need to be reconstructed into proteins. This step is called protein inference and is not trivial. Unique or proteotypic peptide sequences belong to one protein. But other peptide sequences may belong to several proteins. These peptides are called shared or razor peptides. Most protein inference algorithms assign them to the protein that has the most other peptides. In the depicted example peptide two would be matched to protein one which is for sure present in the sample because it has one unique peptide. 
+After having identified peptides, they need to be reconstructed into proteins. This step is called protein inference and is not trivial. Unique or proteotypic peptide sequences belong to one protein. But other peptide sequences may belong to several proteins. These peptides are called shared or razor peptides. Most protein inference algorithms assign them to the protein that has the most other peptides. In the depicted example peptide two would be matched to protein one which is for sure present in the sample because it has one unique peptide.
 
 ---
 
@@ -257,7 +258,7 @@ After having identified peptides, they need to be reconstructed into proteins. T
 
 ???
 
-Different quantification approaches exist in MS based proteomics. In explorative proteomic approaches relative quantification methods are applied. They compare the amount of proteins between different samples. Label-free and label based methods exist. Labels add specific mass tags to the peptides of different samples via metabolic or chemical ways. 
+Different quantification approaches exist in MS based proteomics. In explorative proteomic approaches relative quantification methods are applied. They compare the amount of proteins between different samples. Label-free and label based methods exist. Labels add specific mass tags to the peptides of different samples via metabolic or chemical ways.
 
 ---
 
@@ -296,7 +297,7 @@ For label-free quantification all peak areas in the MS1 spectra are integrated.
 
 ???
 
-Peptide abundances are summarized into protein quantifications. This requires decisions about which peptides to include in the summarization. Only unique peptides? Only proteins with or without modifications? Last, the protein abundance may be computed by taking the median, mean, weighted mean or sum of all its peptides. 
+Peptide abundances are summarized into protein quantifications. This requires decisions about which peptides to include in the summarization. Only unique peptides? Only proteins with or without modifications? Last, the protein abundance may be computed by taking the median, mean, weighted mean or sum of all its peptides.
 
 ---
 
@@ -369,7 +370,7 @@ Exemplary visualizations taken from Müller, 2018, Neoplasia
 
 ???
 
-Typical follow up analyses include visualization, network and GO enrichment analysis. Finding differentially abundant proteins between different groups requires statistical analyses. 
+Typical follow up analyses include visualization, network and GO enrichment analysis. Finding differentially abundant proteins between different groups requires statistical analyses.
 
 ---
 
@@ -434,7 +435,7 @@ MSstats takes identified and quantified spectral peaks from common proteomics so
 
 ???
 
-In addition to the results of the proteomics software an annotation file is needed as input. In this file the experimental design is described. It specifies conditions and biological and technical replicates. In case MaxQuant results are used as MSstats input, an additional column with the label type is needed. In a DDA experiment the value is L for all conditions. 
+In addition to the results of the proteomics software an annotation file is needed as input. In this file the experimental design is described. It specifies conditions and biological and technical replicates. In case MaxQuant results are used as MSstats input, an additional column with the label type is needed. In a DDA experiment the value is L for all conditions.
 
 
 ---
@@ -446,7 +447,7 @@ In addition to the results of the proteomics software an annotation file is need
 
 ???
 
-First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. 
+First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected.
 
 ---
 
@@ -469,7 +470,7 @@ Log transformation brings the peptide intensities into a close to normal distrib
 # Peptide filtering and missing value imputation
 
 - **Feature selection**: which peptides should be kept for protein quantification
-- **Missing value imputation**: Imputation of NA and very low abundant intensities 
+- **Missing value imputation**: Imputation of NA and very low abundant intensities
 - **Protein summarization**: calculates new protein abundances after data processing via TMP model
 
 
@@ -507,4 +508,4 @@ Feature selection allows the use of either all or only the most abundant peptide
 
 ???
 
-The calculated run-level protein summaries are used for statistical group comparison. Any two conditions can be compared to find differentially abundant proteins between them. MSstats uses a family of linear mixed models for this. The model is automatically adjusted for the comparison type according to the information in the annotation file. This means MSstats accounts for technical replicates, paired designs or time course experiments automatically. 
+The calculated run-level protein summaries are used for statistical group comparison. Any two conditions can be compared to find differentially abundant proteins between them. MSstats uses a family of linear mixed models for this. The model is automatically adjusted for the comparison type according to the information in the annotation file. This means MSstats accounts for technical replicates, paired designs or time course experiments automatically.
