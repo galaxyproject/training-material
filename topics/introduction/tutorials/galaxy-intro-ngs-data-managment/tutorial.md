@@ -199,12 +199,6 @@ Mappers usually compare reads against a reference sequence that has been transfo
 For example, the image above shows indexes for `hg38` version of the human genome. You can see that there are actually three choices: (1) `hg38`, (2) `hg38 canonical` and (3) `hg38 canonical female`. The `hg38` contains all chromosomes as well as all unplaced contigs. The `hg38 canonical` does not contain unplaced sequences and only consists of chromosomes 1 through 22, X, Y, and mitochondria. The
 `hg38 canonical female` contains everything from the canonical set with the exception of chromosome Y.
 
-The following video show mapping using BWA:
-
-<!--
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123102338?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
--->
-
 ### What if pre-computed index does not exist?
 
 If Galaxy does not have a genome you need to map against, you can upload your genome sequence as a FASTA file and use it in the mapper directly as shown below (**Load reference genome** is set to `History`).
@@ -215,12 +209,6 @@ If Galaxy does not have a genome you need to map against, you can upload your ge
 |<small>Mapping against a pre-computed index in Galaxy </small>|
 
 In this case Galaxy will first create an index from this dataset and then run mapping analysis against it. 
-
-<!--
-
-<div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123108417?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
-
--->
 
 ## SAM/BAM datasets
 
@@ -416,6 +404,12 @@ Finally, datasets can be uploaded directly from NCBI's short read archive:
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/Q4t-beYZ-do" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
+> ### {% icon comment %} Comment
+>
+> We will use this last approach, getting data from NCBI SRA, in this tutorial.
+>
+{: .comment}
+
 # Let's do it: From reads to variants
 
 In primary analysis we start with raw sequencing data (e.g., fastq reads) and convert them into a dataset for secondary analysis. Such dataset can be a list of sequence variants, a collection of ChIP-seq peaks, a list of differentially expressed genes and so on.
@@ -465,7 +459,7 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 > 1. You can now look at the content of this file by clicking {% icon galaxy-eye %} (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.  
 {: .hands_on}
 
-Galaxy can process all 2,000+ datasets but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
+Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
 
 > ### {% icon warning %} Beware of **Cut**s
 > The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface. 
@@ -495,9 +489,9 @@ Galaxy can process all 2,000+ datasets but to make this tutorial bearable we nee
 
 Now that we have identifiers of datasets we want we need to download the actual sequencing data. You can also watch [this video](#from-ncbi-short-read-archive).
 
-## Download sequencing data with **Faster Download and Extract Reads in FASTQ**
+## Download sequencing data
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get data from SRA
 >
 > 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
@@ -526,7 +520,7 @@ If you ran this tutorial, but retrieved datasets that you were interested in, th
 
 However, if you retrieved the datasets used in this tutorial's examples above, then you are ready to run the SARS-CoV-2 variant analysis below.
 
-In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling and finally look at the geographic distribution of some of the found variants.
+In this part of the tutorial we will perform variant calling and basic analysis of the datasets downloaded above. We will start by downloading the Wuhan-Hu-1 SARS-CoV-2 reference sequence, then run adapter trimming, alignment and variant calling.
 
 > ### {% icon comment %} The usegalaxy.* COVID-19 analysis project
 > This tutorial uses a subset of the data and runs through the
@@ -588,13 +582,15 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 **MarkDuplicates** {% icon tool %} removes duplicate sequences originating from library preparation artifacts and sequencing artifacts. It is important to remove these artefactual sequences to avoid artificial overrepresentation of single molecule.
 
-> ### {% icon hands_on %} Hands-on: Remove PCR duplicates
+> ### {% icon hands_on %} Hands-on: Remove duplicates
 >
 > 1. **MarkDuplicates** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
 {: .hands_on}
+
+<!-- Not used in this version since this step was not included in video
 
 ## Generate alignment statistics with **Samtools stats**
 
@@ -610,6 +606,8 @@ After the duplicate marking step above we can generate statistic about the align
 >    - *"Use a reference sequence"*: `No`
 >    - *"Filter by regions"*: `No`
 {: .hands_on}
+
+-->
 
 ## **Realign reads** with lofreq viterbi
 
@@ -713,20 +711,11 @@ We will now summarize our analysis with MultiQC, which generates a beautiful rep
 >            - *"Which tool was used generate logs?"*: `fastp`
 >                - {% icon param-file %} *"Output of fastp"*: `report_json` (output of **fastp** {% icon tool %})
 >        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `Samtools`
->                - In *"Samtools output"*:
->                    - {% icon param-repeat %} *"Insert Samtools output"*
->                        - *"Type of Samtools output?"*: `stats`
->                            - {% icon param-file %} *"Samtools stats output"*: `output` (output of **Samtools stats** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `Picard`
 >                - In *"Picard output"*:
 >                    - {% icon param-repeat %} *"Insert Picard output"*
 >                        - *"Type of Picard output?"*: `Markdups`
 >                        - {% icon param-file %} *"Picard output"*: `metrics_file` (output of **MarkDuplicates** {% icon tool %})
->        - {% icon param-repeat %} *"Insert Results"*
->            - *"Which tool was used generate logs?"*: `SnpEff`
->                - {% icon param-file %} *"Output of SnpEff"*: `csvFile` (output of **SnpEff eff:** {% icon tool %})
 {: .hands_on}
 
 The above state allows us to judge the quality of the data. In this particular case data is not bad as quality values never drop below 30:
@@ -749,17 +738,17 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 >    - "*Where to add dataset name*": `Same line and each line in dataset`
 {: .hands_on}
 
-You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we a collection as an input:
+You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:
 
 > ### {% icon code-in %} Input: A collection
-> So if we have this in collection element named `SRR11954102`
+> A collection element named `SRR11954102`
 >
 >```
 >NC_045512.2  84 PASS  C T  960.0  28  1.0       0 0,0,15,13 MODIFIER  NONE  INTERGENIC                                  
 >NC_045512.2 241 PASS  C T 2394.0  69  0.971014  0 0,0,39,29 MODIFIER  NONE  INTERGENIC    
 >```
 >
->and this in collection element names `SRR12733957`:
+>A collection element named `SRR12733957`:
 >
 >```
 >NC_045512.2 241 PASS  C T 1954.0  63  0.888889  0 0,0,42,21 MODIFIER  NONE  INTERGENIC                                  
@@ -781,7 +770,18 @@ We will have a single dataset as the output:
 >```
 {: .code-out}
 
-you can see that added a column with dataset ID taken from collection element name. These data are now ready for downstream analysis.
+you can see that added a column with dataset ID taken from collection element name. 
+
+## Anything interesting?
+
+These data are now ready for downstream analysis. One of the interesting things about these data is that it contains some of the mutations identified in the [B.1.1.7](https://cov-lineages.org/global_report_B.1.1.7.html) lineage. For example, dataset `SRR12733957` contains a nonsense mutation (change for legitimate codon specifying an amino acid to a stop codon) in ORF8a:
+
+```
+SRR12733957 NC_045512.2 27972 PASS  C T 56.0  39  0.076923  0 7,29,0,3  HIGH  NONSENSE  STOP_GAINED ORF8  Caa/Taa
+```
+
+This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here? 
+
 
 <!--
 
