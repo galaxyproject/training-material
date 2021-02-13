@@ -1,0 +1,24 @@
+---
+- doc: Test the M. Tuberculosis Variant Analysis workflow - extra 1
+  job:
+    'Read 1':
+      location: https://zenodo.org/record/3960260/files/018-1_1.fastq.gz
+      class: File
+      filetype: fastqsanger.gz
+    'Read 2':
+      location: https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
+      class: File
+      filetype: fastqsanger.gz
+  outputs:
+    mtbva_kraken_report:
+      asserts:
+        has_text:
+          text: '12.76'
+    mtbva_fastqc1:
+      asserts:
+        has_text:
+          text: 'Per base sequence quality'
+    mtbva_fastqc2:
+      asserts:
+        has_text:
+          text: 'Per base sequence quality'
