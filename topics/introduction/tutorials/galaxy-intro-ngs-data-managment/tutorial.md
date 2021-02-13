@@ -344,7 +344,7 @@ GATK forum also provides the following example:
 
 ![Read group example](../../images/rg_example.png)
 
-###Manipulating SAM/BAM datasets
+### Manipulating SAM/BAM datasets
 
 We support four major toolsets for processing of SAM/BAM datasets:
 
@@ -420,7 +420,7 @@ SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We
 
 First we need to find a good dataset to play with. The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  operated by the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies. Let's do that:
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Get Metadata from NCBI SRA
 >
 > 1. Go to NCBI's SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra
 > 2. In the search box enter `SARS-CoV-2 Patient Sequencing From Partners / MGH`:
@@ -463,7 +463,7 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 
 > ### {% icon warning %} Beware of **Cut**s
 > The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface. 
-{: .comment}
+{: .warning}
 
 > ### {% icon hands_on %} Hands-on: Creating a subset of data
 >
@@ -556,7 +556,7 @@ This data is available from directly from GenBank using the following [link](htt
 
 Removing sequencing adapters improves alignments and variant calling. **fastp** {% icon tool %} can automatically detect widely used sequencing adapters.
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Running `fastp`
 >
 > 1. **fastp** {% icon tool %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
@@ -570,7 +570,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 **BWA-MEM** {% icon tool %} is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.
 
-> ### {% icon hands_on %} Hands-on: Align sequencing reads to reference genome
+> ### {% icon hands_on %} Hands-on: Map sequencing reads to reference genome
 >
 > 1. **Map with BWA-MEM** {% icon tool %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
@@ -744,7 +744,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 
 You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:
 
-> ### {% icon code-in %} Input: A collection
+> ### {% icon code-in %} Input: A collection with two items
 > A collection element named `SRR11954102`
 >
 >```
@@ -762,7 +762,7 @@ You can see that this tool takes lines from all collection elements (in our case
 
 We will have a single dataset as the output:
 
-> ### {% icon code-out %} Output: Collapsed collection
+> ### {% icon code-out %} Output: A single dataset
 >
 >then the **Collapse Collection** {% icon tool %} will produce this:
 >
@@ -784,7 +784,7 @@ These data are now ready for downstream analysis. One of the interesting things 
 SRR12733957 NC_045512.2 27972 PASS  C T 56.0  39  0.076923  0 7,29,0,3  HIGH  NONSENSE  STOP_GAINED ORF8  Caa/Taa
 ```
 
-This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here? 
+This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here in these data? 
 
 
 <!--
