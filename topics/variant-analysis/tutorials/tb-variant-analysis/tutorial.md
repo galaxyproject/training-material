@@ -440,7 +440,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > > If you wish to investigate further, analyse the SRR12416842 sample with **kraken2**.
 >    > {: .solution}
 >    {: .question}
->
+{: .hands_on}
 
 There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn't map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.
 
