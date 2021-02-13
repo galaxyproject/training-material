@@ -365,7 +365,7 @@ far.
 >
 > 2. Examine the sequence quality with {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} {% icon tool %}.
 >
-> 3. Examine the sample composition with kraken2 {% icon tool %}.
+> 3. Examine the sample composition with {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} {% icon tool %}.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -417,7 +417,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >
 > 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} {% icon tool %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
 >
-> 6. If it exists on the Galaxy server you are using, run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0)} %} {% icon tool %} on the mapped reads BAM file that you got from **snippy**.
+> 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0)} %} {% icon tool %} on the mapped reads BAM file that you got from **snippy**.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -440,7 +440,7 @@ The next example is *SRR12416842* from an Indonesia [study](https://www.microbio
 >    > > If you wish to investigate further, analyse the SRR12416842 sample with **kraken2**.
 >    > {: .solution}
 >    {: .question}
->
+{: .hands_on}
 
 There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn't map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.
 
