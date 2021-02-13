@@ -487,8 +487,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -537,7 +535,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 12, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -998,7 +996,7 @@ pairs in the format of <code class="language-plaintext highlighter-rouge">&lt;TA
 
 <p><img src="../../images/rg_example.png" alt="Read group example" /></p>
 
-<p>###Manipulating SAM/BAM datasets</p>
+<h3 id="manipulating-sambam-datasets">Manipulating SAM/BAM datasets</h3>
 
 <p>We support four major toolsets for processing of SAM/BAM datasets:</p>
 
@@ -1099,7 +1097,7 @@ Duplicates are identified as read pairs having identical 5' positions (coordinat
 <p>First we need to find a good dataset to play with. The <a href="https://www.ncbi.nlm.nih.gov/sra">Sequence Read Archive (SRA)</a> is the primary archive of <em>unassembled <span class="notranslate">reads</span></em>  operated by the <a href="https://www.ncbi.nlm.nih.gov/">US National Institutes of Health (NIH)</a>.  SRA is a great place to get the sequencing data that underlie publications and studies. Let’s do that:</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-get-metadata-from-ncbi-sra"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Get Metadata from NCBI SRA</h3>
 
   <ol>
     <li>Go to NCBI’s SRA page by pointing your browser to https://www.ncbi.nlm.nih.gov/sra</li>
@@ -1149,7 +1147,7 @@ Here is how it should look like:
 
 <p><span class="notranslate">Galaxy</span> can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets <code class="language-plaintext highlighter-rouge">SRR11954102</code> and <code class="language-plaintext highlighter-rouge">SRR12733957</code>. So, let’s pull them out.</p>
 
-<blockquote class="comment">
+<blockquote class="warning">
   <h3 id="warning-beware-of-cuts"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span class="visually-hidden">warning</span> Beware of <strong>Cut</strong>s</h3>
   <p>The Hands-on section below uses <strong>Cut</strong> tool. There are two <strong>cut</strong> tools in <span class="notranslate">Galaxy</span> due to historical reasons. This example uses tool with the full name <strong>Cut columns from a table (cut)</strong>. However, the same logic applies to the other tool. It simply has a slightly different interface.</p>
 </blockquote>
@@ -1287,7 +1285,7 @@ being updated continuously as new datasets are made public.</p>
 <p>Removing sequencing adapters improves alignments and variant calling. <strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> can automatically detect widely used sequencing adapters.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-task-description-1"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Task description</h3>
+  <h3 id="hands_on-hands-on-running-fastp"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Running <code class="language-plaintext highlighter-rouge">fastp</code></h3>
 
   <ol>
     <li><strong>fastp</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1312,7 +1310,7 @@ being updated continuously as new datasets are made public.</p>
 <p><strong>BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> is a widely used sequence aligner for short-read sequencing datasets such as those we are analysing in this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
-  <h3 id="hands_on-hands-on-align-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Align sequencing <span class="notranslate">reads</span> to reference genome</h3>
+  <h3 id="hands_on-hands-on-map-sequencing-reads-to-reference-genome"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Map sequencing <span class="notranslate">reads</span> to reference genome</h3>
 
   <ol>
     <li><strong>Map with BWA-MEM</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
@@ -1592,7 +1590,7 @@ After the duplicate marking step above we can generate statistic about the align
 <p>You can see that this tool takes lines from all collection elements (in our case we have two), add element name as the first column, and pastes everything together. So if we have a collection as an input:</p>
 
 <blockquote class="code-in">
-  <h3 id="code-in-input-a-collection"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: A collection</h3>
+  <h3 id="code-in-input-a-collection-with-two-items"><i class="far fa-keyboard" aria-hidden="true"></i><span class="visually-hidden">code-in</span> Input: A collection with two items</h3>
   <p>A collection element named <code class="language-plaintext highlighter-rouge">SRR11954102</code></p>
 
   <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NC_045512.2  84 PASS  C T  960.0  28  1.0       0 0,0,15,13 MODIFIER  NONE  INTERGENIC                                  
@@ -1609,7 +1607,7 @@ NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW       LOW   LOW
 <p>We will have a single dataset as the output:</p>
 
 <blockquote class="code-out">
-  <h3 id="code-out-output-collapsed-collection"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: Collapsed collection</h3>
+  <h3 id="code-out-output-a-single-dataset"><i class="fas fa-laptop-code" aria-hidden="true"></i><span class="visually-hidden">code-out</span> Output: A single dataset</h3>
 
   <p>then the <strong>Collapse Collection</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> will produce this:</p>
 
@@ -1629,7 +1627,7 @@ SRR12733957 NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW     
 <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SRR12733957 NC_045512.2 27972 PASS  C T 56.0  39  0.076923  0 7,29,0,3  HIGH  NONSENSE  STOP_GAINED ORF8  Caa/Taa
 </code></pre></div></div>
 
-<p>This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here?</p>
+<p>This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here in these data?</p>
 
 <!--
 
@@ -1818,7 +1816,7 @@ We can also import data directly into Google Colab:
     title = "NGS data logistics (Galaxy Training Materials)",
     year = "2021",
     month = "02",
-    day = "12"
+    day = "13"
     url = "\url{/training-material/topics/introduction/tutorials/galaxy-intro-ngs-data-managment/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
