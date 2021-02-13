@@ -77,12 +77,6 @@ In this case; *Read1* contains the barcoding information followed by the polyT t
 
 # Understanding Barcodes
 
-> ### {% icon comment %} Viewing the pre-requisite topic
->
-> It is highly recommended that the material in the ***Plates, Batches, and Barcodes*** slides [here](../scrna-plates-batches-barcodes/slides.html) are first observed before proceeding with the rest of this tutorial.
->
-{: .comment}
-
 Cell barcodes are designed primarily for delineating one cell from another, such that read transcripts containing different cell barcodes can be trivially said to be derived from different cells.
 
  ![Cell Barcodes](../../images/scrna_pbb_barcodes_add.svg "Two separate cell barcodes GGG and TCT, added to all read transcripts of two different cells")
