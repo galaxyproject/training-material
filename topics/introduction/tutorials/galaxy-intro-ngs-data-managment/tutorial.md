@@ -164,7 +164,7 @@ Sanger/Phred format that is also used by other sequencing platforms and the sequ
 
 ## Assessing data quality
 
-One of the first steps in the analysis of NGS data is seeing how good the data actually is. [FastqQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a fantastic tool allowing you to gauge the quality of FASTQ datasets (and deciding whether to blame or not to blame whoever has done sequencing for you).
+One of the first steps in the analysis of NGS data is seeing how good the data actually is. [FastqQC](https://www.bioinformatics.babraham.ac.uk/projects/fastqc/) is a fantastic tool allowing you to assess the quality of FASTQ datasets (and deciding whether to blame or not to blame whoever has done sequencing for you).
 
 |                                        |                                    |
 |:---------------------------------------|:-----------------------------------|
@@ -357,7 +357,7 @@ We support four major toolsets for processing of SAM/BAM datasets:
 
 ### PCR duplicates
 
-Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this examples) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has it's biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
+Preparation of sequencing libraries (at least at the time of writing) for technologies such as Illumina (used in this example) involves PCR amplification. It is required to generate sufficient number of sequencing templates so that a reliable detection can be performed by base callers. Yet PCR has its biases, which are especially profound in cases of multitemplate PCR used for construction of sequencing libraries (Kanagawa et al. [2003](https://www.ncbi.nlm.nih.gov/entrez/query.fcgi?cmd=Retrieve&db=PubMed&dopt=Abstract&list_uids=16233530)).
 
 |                                              |
 |----------------------------------------------|
