@@ -95,7 +95,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 
 # Change the chromosome names in the Ensembl GTF to match a UCSC genome reference
 
-UCSC prefaces chromosome names with chr while Ensembl does not.  
+UCSC prefaces chromosome names with chr while Ensembl does not. To perform this action, we use the Replace Text in a specific column - a [regular expression](https://docs.python.org/3/library/re.html) tool.
 
 > ### {% icon hands_on %} Hands-on: Replace Text in a specific column
 >  1. Change numbered chromosome names
@@ -110,6 +110,11 @@ UCSC prefaces chromosome names with chr while Ensembl does not.
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
+>
+> > ### {% icon comment %} Note on chromosome name changes
+> >  This step is necessary to help identify and correct errors due to inputs having non-identical chromosome identifiers and/or different chromosome sequence content. [Galaxy Support](https://galaxyproject.org/support/chrom-identifiers/)
+> {: .comment}
+
 {: .hands_on}
 
 
