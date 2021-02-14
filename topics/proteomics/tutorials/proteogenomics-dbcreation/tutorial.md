@@ -303,11 +303,12 @@ The original form of this program is also distributed as part of the Cufflinks s
 > 1. **GffCompare** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_output.gtf`
 >    - {% icon param-select %} *"Use Reference Annotation"*: `yes`
->      - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
+>      - {% icon param-select %} *"Choose the source for the reference annotation"*: `History`
+>        - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
 >      - {% icon param-select %} *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
 >      - {% icon param-select %} *"Ignore input transcripts that are not overlapped by any reference transcripts"*: `No`
 >    - {% icon param-select %} *"Use Sequence Data"*: `No`
->    - {% icon param-select %} *"discard (ignore) single-exon transcripts"*: `No`
+>    - {% icon param-select %} *"Discard (ignore) single-exon transcripts"*: `No`
 >    - {% icon param-text %} *"Max. Distance for assessing exon accuracy"*: `100`
 >    - {% icon param-text %} *"Max distance for transcript grouping"*: `100`
 >    - {% icon param-select %} *"discard intron-redundant transfrags sharing 5'"*: `No`
