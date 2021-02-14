@@ -54,7 +54,7 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 # Step 1: Loading and pre-processing
 
-> The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic region datasets, and associates to each region multiple genomic feature measurements. It allows to align the regions in multiple ways (center, left, right or scale alignment), to smooth the feature curves (possibly filling gaps in the measurements) and to create a graphical representation of the feature measurements in each region datasets (aligned curves or pointwise quantile curves).
+The first tool (IWTomics Load Smooth and Plot) imports a collection of genomic region datasets, and associates to each region multiple genomic feature measurements. It allows to align the regions in multiple ways (center, left, right or scale alignment), to smooth the feature curves (possibly filling gaps in the measurements) and to create a graphical representation of the feature measurements in each region datasets (aligned curves or pointwise quantile curves).
 
 > ### {% icon hands_on %} Hands-on: Get the data
 > 1. Create a new history for this tutorial
@@ -96,9 +96,9 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 # Step 2: Performing Interval-Wise Testing
 
-> The second tool (IWTomics Test and Plot) statistically evaluates differences in genomic features between groups of regions along the genome. In particular, it implements the Interval-Wise Testing for omics data, an extended version of the Interval-Wise Testing for functional data presented in [Pini and Vantini (2017)](https://doi.org/10.1080/10485252.2017.1306627).
+The second tool (IWTomics Test and Plot) statistically evaluates differences in genomic features between groups of regions along the genome. In particular, it implements the Interval-Wise Testing for omics data, an extended version of the Interval-Wise Testing for functional data presented in [Pini and Vantini (2017)](https://doi.org/10.1080/10485252.2017.1306627).
 
-> It allows to perform multiple two sample permutation tests between pairs of region datasets, on several features. It returns the adjusted p-value curves for every test and all possible scales. Moreover, it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) with p-values at the maximum scale. The tool IWTomics Plot with Threshold on Test Scale permits to select the scale to be used in the plots.
+It allows to perform multiple two sample permutation tests between pairs of region datasets, on several features. It returns the adjusted p-value curves for every test and all possible scales. Moreover, it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) with p-values at the maximum scale. The tool IWTomics Plot with Threshold on Test Scale permits to select the scale to be used in the plots.
 
 > ### {% icon hands_on %} Hands-on: Test for difference between ETn and Control regions
 > **Test and Plot** {% icon tool %}: Run **Test and Plot** with:
@@ -113,7 +113,7 @@ The data we use in this tutorial is available at [Zenodo](https://doi.org/10.528
 
 # Step 3: Selecting test scale
 
-> The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the scale for the Interval-Wise Testing results. In particular it returns the p-value curves for the different tests performed at the selected scale, and it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) at the selected scale.
+The third tool (IWTomics Plot with Threshold on Test Scale) allows to select the scale for the Interval-Wise Testing results. In particular it returns the p-value curves for the different tests performed at the selected scale, and it creates a graphical representation of the Interval-Wise Testing results and a summary plot (optional) at the selected scale.
 
 > ### {% icon hands_on %} Hands-on: Change scale for test results
 > **Plot with Threshold on Test Scale** {% icon tool %}: Run **Plot with Threshold on Test Scale** with:

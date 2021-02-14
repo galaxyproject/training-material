@@ -7,20 +7,13 @@
         <meta http-equiv="x-ua-compatible" content="ie=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>{{ page.title | default: site.title }}</title>
-        {% if site.env.GOOGLE_ANALYTICS_ID %}
-        <script>
-            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-            })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-            ga('create', '{{ site.env.GOOGLE_ANALYTICS_ID }}' , 'auto');
-            ga('send', 'pageview');
-        </script>
+        {% if jekyll.environment == 'production' %}
+            {% include _includes/analytics.html %}
         {% endif %}
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap.min.css?v=3" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/bootstrap-toc.min.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/main.css?v=2" | prepend: site.baseurl }}">
-        <link rel="stylesheet" href="{{ "/assets/css/font-awesome.css" | prepend: site.baseurl }}">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="{{ "/assets/css/academicons.css" | prepend: site.baseurl }}">
         <link rel="stylesheet" href="{{ "/assets/css/syntax_highlighting.css" | prepend: site.baseurl }}">
         <link rel="shortcut icon" href="{{ "/favicon.ico" | prepend: site.baseurl }}" type="image/x-icon" />
@@ -49,6 +42,7 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" src="{{ "/assets/js/bootstrap-toc.min.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript" src="{{ "/assets/js/main.js" | prepend: site.baseurl }}"></script>
+    <script type="text/javascript" src="{{ "/assets/js/theme.js" | prepend: site.baseurl }}"></script>
 
     <script type="text/javascript" src="{{ "/assets/js/clipboard.min.js" | prepend: site.baseurl }}"></script>
     <script type="text/javascript">
@@ -65,4 +59,17 @@
     <script type="text/javascript" src="{{ site.baseurl }}/assets/js/list.min.js"></script>
     <script type="text/javascript" src="{{ site.baseurl }}/assets/js/topic.js"></script>
     {% endif %}
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
 </html>

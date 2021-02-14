@@ -28,9 +28,7 @@ One way to do so is to perform functional enrichment analysis. This method consi
 **What is the Gene Ontology?** <br/>
 The [Gene Ontology](http://www.geneontology.org/) (GO) is a structured, controlled vocabulary for the classification of gene function at the molecular and cellular level. It is divided in three separate sub-ontologies or GO types: biological process (e.g., signal transduction), molecular function (e.g., ATPase activity) and cellular component (e.g., ribosome). These sub-ontologies are structured as directed acyclic graphs (a hierarchy with multi-parenting) of GO terms.
 
-![GO Example](../../images/goenrichment_GOexample.png)
->
-**Figure 1** QuickGO - http://www.ebi.ac.uk/QuickGO
+![GO Example](../../images/goenrichment_GOexample.png "QuickGO - http://www.ebi.ac.uk/QuickGO")
 
 The GO Ontology, like other ontologies, are usually coded in the [OBO](http://www.geneontology.org/faq/what-obo-file-format) or the [OWL](http://www.geneontology.org/faq/what-owl-file) formats. It can be downloaded from the [Gene Ontology website](http://geneontology.org/page/download-ontology) or from the [OBO foundry](http://www.obofoundry.org/). You can also find in Galaxy tools that allow you to manipulate and extract information from OBO files, but this is outside the scope of this tutorial.
 
@@ -68,7 +66,7 @@ To perform functional enrichment analysis, we need to have:
 For each GO term, we need to count the frequency (**k**) of genes in the study set (**n**) that are associated to the term, and the frequency (**K**) of genes in the population set (**N**) that are associated to the same term. Then we test how likely would it be to obtain at least **k** genes associated to the term if **n** genes would be randomly sampled from the population, given the frequency **K** and size **N** of the population.
 
 The appropriate statistical test is the one-tailed variant of Fisher’s exact test, also known as the hypergeometric test for over-representation. When the one-tailed version is applied, this test will compute the probability of observing at least the sample frequency, given the population frequency.  The [hypergeometric distribution](https://en.wikipedia.org/wiki/Hypergeometric_distribution) measures precisely the probability of **k** successes in **n** draws, without replacement, from a finite population of size **N** that contains exactly **K** successful objects:
->
+
 ![Go Enrichment Formula](../../images/goenrichment_formula.png)
 
 For this first exercise we will use data from [Trapnell et al. 2014](https://www.ncbi.nlm.nih.gov/pubmed/22383036 "Trapnell et al. data"). In this work, the authors created an artificial dataset of gene expression in *Drosophila melanogaster*, where 300 random genes were set (insilico) to be differentially expressed between two conditions.
@@ -97,9 +95,8 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > 3. **Rename** the *go.obo* file to `GO` and *drosophila_gene_association.fb* file to `GO annotations Drosophila melanogaster`.
 >
->    > After you upload the files, and if you press the {% icon galaxy-eye %} (eye) icon of `trapnellPopulation.tab` it should look something like this:
->    > ![Trapnell File](../../images/goenrichment_trapnellFile.png)
-> **Figure 2** Trapnell file
+>    After you upload the files, and if you press the {% icon galaxy-eye %} (eye) icon of `trapnellPopulation.tab` it should look something like this:
+>    ![Trapnell File](../../images/goenrichment_trapnellFile.png "Trapnell file")
 >
 >
 >    > ### {% icon comment %} Comments
@@ -283,8 +280,6 @@ To test the GO slim approach, let us use the mouse dataset again. First, however
 >
 > This will generate one file called `Slim Annotations`.
 {: .hands_on}
->
->
 
 Now we will go use the GOEnrichment tool with the new Slim Annotations file and the same study set.
 

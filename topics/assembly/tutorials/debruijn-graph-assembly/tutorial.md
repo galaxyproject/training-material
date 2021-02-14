@@ -11,6 +11,7 @@ objectives:
   - "Compare this assembly with those we did in the basic tutorial"
   - "Perform an assembly using the SPAdes assembler."
 time_estimation: "2h"
+level: Introductory
 key_points:
   - "We learned about how the choice of k-mer size will affect assembly outcomes"
   - "We learned about the strategies that assemblers use to make reference genomes"
@@ -18,7 +19,7 @@ key_points:
   - "You should use SPAdes or another more modern assembler than Velvet for actual assemblies now."
 contributors:
   - slugger70
-  - erasche
+  - hexylena
   - shiltemann
 ---
 

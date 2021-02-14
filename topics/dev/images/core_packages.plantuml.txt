@@ -1,0 +1,57 @@
+@startuml
+!include plantuml_options.txt
+
+package galaxy {
+component util
+component auth
+component containers
+component data
+component [job-execution] as job_execution
+component [job-metrics] as job_metrics
+component objectstore
+component selenium
+component [tool-util] as tool_util
+'component toolshed
+
+component app
+component [web-apps] as web_apps
+component [web-framework] as web_framework
+component [web-stack] as web_stack
+}
+
+package galaxy_test {
+    component [test-base] as test_base
+    component [test-driver] as test_driver
+    component [test-api] as test_api
+    component [test-selenium] as test_selenium
+}
+
+[containers] --> [util]
+[tool_util] --> [containers]
+[objectstore] --> [util]
+[data] --> [objectstore]
+[selenium] --> [util]
+[web_stack] --> [util]
+[job_metrics] --> [util]
+[job_execution] --> [data]
+'[toolshed] --> [data]
+[app] --> [auth]
+[app] --> [job_execution]
+[app] --> [web_framework]
+[web_framework] --> [data]
+[web_framework] --> [web_stack]
+[web_apps] --> [app]
+[auth] --> [data]
+
+[app] --> [tool_util]
+[app] --> [job_metrics]
+
+[test_driver] --> [test_base]
+[test_driver] --> [web_apps]
+[test_base] --> [tool_util]
+[test_api] --> [test_base]
+[test_selenium] --> [test_base]
+[test_api] ..> [test_driver] : optional
+[test_selenium] ..> [test_driver] : optional
+[test_selenium] --> [selenium]
+@enduml

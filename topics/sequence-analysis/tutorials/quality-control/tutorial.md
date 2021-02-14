@@ -608,7 +608,7 @@ Paired-end sequencing generates 2 FASTQ files:
 - One file with the sequences corresponding to **forward** orientation of all the fragments
 - One file with the sequences corresponding to **reverse** orientation of all the fragments
 
-Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_r` or `_1` for the forward reads and `_f` or `_2` for the reverse reads.
+Usually we recognize these two files which belong to one sample by the name which has the same identifier for the reads but a different extension, e.g. `sampleA_R1.fastq` for the forward reads and `sampleA_R2.fastq` for the reverse reads. It can also be `_f` or `_1` for the forward reads and `_r` or `_2` for the reverse reads.
 
 The data we analyzed in the previous step was not single-end data but the forward reads of paired-end data. We will now do the quality control on the reverse reads.
 
@@ -686,7 +686,7 @@ After trimming, reverse reads will be shorter because of their quality and then 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > 1. 44,164 bp (`Quality-trimmed:`) for the forward reads and 138,638 bp for the reverse reads.
->    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (334 when only the forward reads were analyzed).
+>    > > 2. 1,376 sequences have been removed because at least one read was shorter than the length cutoff (322 when only the forward reads were analyzed).
 >    > {: .solution }
 >    {: .question}
 >

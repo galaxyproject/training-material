@@ -196,16 +196,17 @@ We can then see that Stack_ID 330 for female corresponds to the 39 for male:
 
 > ### {% icon hands_on %} Hands-on: Stacks: Genotypes
 > **Stacks: genotypes** {% icon tool %}: Re-Run the last step of `Stacks: De novo map` pipeline specifying more options as:
->    > 1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))
->    >
->    >    ![The genetic map type F2](../../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![The genetic map CrossPollination](../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
->    >
->    >
->    > 2. Genotyping options output file type for input in genetic mapper tools (ie JoinMap, R/qtl, ...). Observe that the R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.
->    >
->    > 3. Thresholds concerning a minimal number of progeny and/or minimum stacks depth to consider a locus
->    >
->    > 4. Make Automated Corrections to the Data. This option allows the user to have the program automatically correct some types of errors. This setting can correct errors with the homozygous tags verification in the progeny by confirming the presence or absence of the SNP. If SNP detection model can't identify a site as heterygous or homozygous, that site is temporarily tagged as homozygous to facilitate the search, by sstacks, in concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) and is found on a progeny with a weak frequency (<10% of a stack reads number), the genotypes program can correct the genotype. Additionally, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Corrected genotypes are marked uppercase.
+>
+>    1. The genetic map type (ie F1, F2 (left figure, F1xF1), Double Haploid, Back Cross (F1xF0), Cross Pollination (right figure, F1 or F2 but resulting from the cross of pure homozygous parents))
+>
+>       ![The genetic map type F2](../../images/RAD2_Genetic_Map/Genetic_map_F2.png)    ![The genetic map CrossPollination](../../images/RAD2_Genetic_Map/Genetic_map_CrossPollination.png)
+>
+>
+>    2. Genotyping options output file type for input in genetic mapper tools (ie JoinMap, R/qtl, ...). Observe that the R/qtl format for an F2 cross type can be an input for MapMaker or Carthagene.
+>
+>    3. Thresholds concerning a minimal number of progeny and/or minimum stacks depth to consider a locus
+>
+>    4. Make Automated Corrections to the Data. This option allows the user to have the program automatically correct some types of errors. This setting can correct errors with the homozygous tags verification in the progeny by confirming the presence or absence of the SNP. If SNP detection model can't identify a site as heterygous or homozygous, that site is temporarily tagged as homozygous to facilitate the search, by sstacks, in concordance with the loci catalog. If a second allele is detected on the catalog (ie, in parents) and is found on a progeny with a weak frequency (<10% of a stack reads number), the genotypes program can correct the genotype. Additionally, it will delete a homozygous genotype on a particular individual if locus genotype is supported by less than 5 reads. Corrected genotypes are marked uppercase.
 >
 >    Here is an example of a locus originally marked as homozygous before automatic correction because an allele is supported by less than 5 reads. After correction, this locus is marked as heterozygous.
 >

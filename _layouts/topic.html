@@ -8,19 +8,25 @@ layout: base
 {% assign contributors = site.data['contributors'] %}
 {% assign instances = site.data['instances'] %}
 {% assign topic_material = site.pages | topic_filter:page.topic_name %}
-{% assign language = site.other_languages | split: ", " %}
+{% assign language = site.other_languages %}
 
+
+<!-- Gitter -->
 {% if topic.gitter %}
+  {% assign gitter = topic.gitter %}
+{% else %}
+  {% assign gitter = site.gitter_url %}
+{% endif %}
+
 <script>
   ((window.gitter = {}).chat = {}).options = {
-  room: '{{ topic.gitter }}'
+  room: '{{ gitter | remove: "https://gitter.im/" }}'
   };
 </script>
 <script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
-{% endif %}
 
 <div class="container main-content">
-    <section>
+	<section class="tutorials-list {{ page.topic_name }} topic-type-{{ topic.type }}">
         <h1>{{ topic.title }}</h1>
         <p>{{ topic.summary }}</p>
 
@@ -67,8 +73,9 @@ layout: base
             <p>You can use a public Galaxy instance which has been tested for the availability of the used tools. They are listed along with the tutorials above.</p>
             {% if topic.docker_image and topic.docker_image != "" %}
                 <p>You can also use the following Docker image for these tutorials:</p>
-                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -d -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
-                <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+                <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>docker run -p 8080:80 {{ topic.docker_image }}</code></pre></div></div>
+                <p>NOTE: Use the -d flag at the end of the command if you want to automatically download all the data-libraries into the container.</p>
+                <p>It will launch a flavored Galaxy instance available on <a href="http://localhost:8080">http://localhost:8080</a>. This instance will contain all the tools and workflows to follow the tutorials in this topic. Login as <b>admin</b> with password <b>password</b> to access everything.</p>
             {% endif %}
         {% endif %}
 

@@ -136,8 +136,8 @@ data, the shortened analysis from premapped reads may suit your time frame
 better, and will avoid redundancy if you have previously worked through other
 tutorials demonstrating NGS quality control and read mapping, like the
 dedicated
-[Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
-and [Mapping]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
+[Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %})
+and [Mapping]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %})
 tutorials.
 
 The following hands-on section will guide you through obtaining the right
@@ -319,7 +319,7 @@ of time spent on analyzing low-quality data that is not worth the effort.
 Here, we will perform a standard quality check on our input data and only point
 out a few interesting aspects about that data. For a more thorough explanation
 of NGS data quality control, you may want to have a look at the dedicated
-tutorial on [Quality control]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
+tutorial on [Quality control]({% link topics/sequence-analysis/tutorials/quality-control/tutorial.md %}).
 
 > ### {% icon hands_on %} Hands-on: Quality control of the input datasets
 > 1. Run **FastQC** {% icon tool %} on each of your six fastq datasets
@@ -385,7 +385,7 @@ reference genome.
 We assume here that you are at least vaguely familiar with the concept of read
 mapping and only illustrate the concrete steps necessary  to map our specific
 NGS reads datasets to the human reference genome. We recommend you to follow
-the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}), if you need a general introduction to read mapping.
+the dedicated [Mapping tutorial]({% link topics/sequence-analysis/tutorials/mapping/tutorial.md %}), if you need a general introduction to read mapping.
 
 > ### {% icon hands_on %} Hands-on: Read Mapping
 > 1. **Map with BWA-MEM** {% icon tool %} to map the reads from the **father** sample to the reference genome
@@ -457,7 +457,7 @@ the dedicated [Mapping tutorial]({{ site.baseurl }}{% link topics/sequence-analy
 >        - *"Read group identifier (ID)"*: `001`
 >      - *"Auto-assign"*: `No`
 >        - *"Read group sample name (SM)"*: `mother`
-> 
+>
 > 3. **Map with BWA-MEM** {% icon tool %} to map the reads from the **child** sample to the reference genome **using the same parameters as before** except
 >
 >    - *"Single or Paired-end reads"*: `Paired`
@@ -1174,22 +1174,22 @@ you think could plausibly be causative for the child's disease.
 >
 {: .hands_on}
 
-> > ### {% icon question %} Question
-> >
-> > From the GEMINI reports you generated, can you identify the most likely
-> > candidate variant responsible for the child's disease?
-> {: .question}
+> ### {% icon question %} Question
+>
+> From the GEMINI reports you generated, can you identify the most likely
+> candidate variant responsible for the child's disease?
+{: .question}
 
-> > ### {% icon details %} More GEMINI usage examples
-> >
-> > While only demonstrating command line use of GEMINI, the following tutorial
-> > slides may give you additional ideas for variant queries and filters:
-> >
-> > - [Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
-> > - [Identifying *de novo* mutations with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
-> > - [Identifying recessive gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
-> > - [Identifying dominant gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
-> {: .details}
+> ### {% icon details %} More GEMINI usage examples
+>
+> While only demonstrating command line use of GEMINI, the following tutorial
+> slides may give you additional ideas for variant queries and filters:
+>
+> - [Introduction to GEMINI](https://s3.amazonaws.com/gemini-tutorials/Intro-To-Gemini.pdf)
+> - [Identifying *de novo* mutations with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-DeNovo-Tutorial.pdf)
+> - [Identifying recessive gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Recessive-Tutorial.pdf)
+> - [Identifying dominant gene candidates with GEMINI](https://s3.amazonaws.com/gemini-tutorials/Gemini-Dominant-Tutorial.pdf)
+{: .details}
 
 # Conclusion
 {:.no_toc}

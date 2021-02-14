@@ -193,13 +193,13 @@ We could go through all of the variants like this and read them out of a text ta
 >       - **Track 2 - variants**: Click on `Insert Track Group` and fill it with
 >           - "Track Category" to `variants`
 >           - Click on `Insert Annotation Track` and fill it with
->               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "Track Type" to `GFF/GFF3/BED Features`
 >               - "GFF/GFF3/BED Track Data" to `snippy snps gff file`
 >               - "Track Visibility" to `On for new users`
 >       - **Track 3 - annotated reference**: Click on `Insert Track Group` and fill it with
 >           - "Track Category" to `annotated reference`
 >           - Click on `Insert Annotation Track` and fill it with
->               - "Track Type" to `GFF/GFF3/BED/GBK Features`
+>               - "Track Type" to `GFF/GFF3/BED Features`
 >               - "GFF/GFF3/BED Track Data" to `wildtype.gff`
 >               - "JBrowse Track Type [Advanced]" to `Canvas Features`
 >               - Click on "JBrowse Styling Options [Advanced]"

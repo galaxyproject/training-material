@@ -21,6 +21,7 @@ follow_up_training:
     topic_name: computational-chemistry
     tutorials:
       - analysis-md-simulations
+      - htmd-analysis
 contributors:
   - simonbray
 
@@ -32,12 +33,12 @@ contributors:
 
 Molecular dynamics (MD) is a method to simulate molecular motion by iterative application of Newton's laws of motion. It is often applied to large biomolecules such as proteins or nucleic acids.
 
-Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
+Multiple packages exist for performing MD simulations. One of the most popular is the open-source GROMACS, which is the subject of this tutorial. Other MD packages which are also wrapped in Galaxy are [NAMD]({% link topics/computational-chemistry/tutorials/md-simulation-namd/tutorial.md %}) and CHARMM (available in the [docker container](https://github.com/scientificomputing/BRIDGE)).
 
-This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme. 
+This is a introductory guide to using GROMACS ({% cite abraham15 %}) in Galaxy to prepare and perform molecular dynamics on a small protein. For the tutorial, we will perform our simulations on hen egg white lysozyme.
 
 > ### {% icon comment %} More information
-> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS. 
+> This guide is based on the GROMACS tutorial provided by Justin Lemkul [here](http://www.mdtutorials.com/gmx/lysozyme/index.html) - please consult it if you are interested in a more detailed, technical guide to GROMACS.
 {: .comment}
 
 > ### Agenda
@@ -88,7 +89,7 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 > ### {% icon comment %} Alternative upload
 > As an alternative option, if you prefer to upload the cleaned file directly from Zenodo, you can do so with the following link:
 >    ```
->    https://zenodo.org/record/2598415
+>    https://zenodo.org/record/2598415/files/1AKI_clean.pdb
 >    ```
 >    {% include snippets/import_via_link.md %}
 {: .comment}
@@ -106,32 +107,28 @@ A prepared file is available via Zenodo. Alternatively, you can prepare the file
 ## Lysozyme
 The protein we will look at in this tutorial is hen egg white [lysozyme](https://en.wikipedia.org/wiki/Lysozyme), a widely studied enzyme which is capable of breaking down the polysaccharides of many bacterial cell walls. It is a small (129 residues), highly stable globular protein, which makes it ideal for our purposes.
 
-![Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png]({{ site.baseurl }}{% link topics/computational-chemistry/images/Lysozyme.png %} "Structure of lysozyme")
+![Structure of lysozyme openly available from https://commons.wikimedia.org/wiki/File:Lysozyme.png]({% link topics/computational-chemistry/images/Lysozyme.png %} "Structure of lysozyme")
 
 # Setup
 
 The **GROMACS initial setup** {% icon tool %} tool uses the PDB input to create three files which will be required for MD simulation.
 
-Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model.
+Firstly, a topology for the protein structure is prepared. The topology file contains all the information required to describe the molecule for the purposes of simulation - atom masses, bond lengths and angles, charges. Note that this automatic construction of a topology is only possible if the building blocks of the molecules (i.e. amino acids in the case of a protein) are precalculated for the given force field. A force field and water model must be selected for topology calculation. Multiple choices are available for each; we will use the OPLS/AA force field and SPC/E water model. Secondly, a GRO structure file is created, storing the structure of the protein. Finally, a 'position restraint file' is created which will be used for NVT/NPT equilibration. We will return to this later.
 
-Secondly, a GRO structure file is created, storing the structure of the protein. It also defines the unit cell 'box', centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.
-
-Finally, a 'position restraint file' is created which will be used for NVT/NPT equilibration. We will return to this later.
-
-In summary, this tool will:
+In summary, the initial setup tool will:
 - create a 'topology' file
 - convert a PDB protein structure into a GRO file, with the structure centered in a simulation box (unit cell)
 - create a position restraint file
 
+After these files have been generated, a further step is required to define a simulation box (unit cell) in which the simulation can take place. This can be done with the **GROMACS structure configuration** {% icon tool %} tool. It also defines the unit cell 'box', centered on the structure. Options include box dimensions and shape; here, while a cuboidal box may be most intuitive, rhombic dodecahedron is the most efficient option, as it can contain the protein using the smallest volume, thus reducing the simulation resources devoted to the solvent.
+
 > ### {% icon hands_on %} Hands-on: perform initial processing
 >
-> Run **GROMACS initial setup** {% icon tool %} with the following parameters:
+> 1. Run **GROMACS initial setup** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"PDB input file"*: `1AKI_clean.pdb` (Input dataset)
 >    - *"Water model"*: `SPC/E`
 >    - *"Force field"*: `OPLS/AA`
 >    - *"Ignore hydrogens"*: `No`
->    - *"Box dimensions in nanometers"*: `1.0`
->    - *"Box type"*: `Rectangular box with all sides equal`
 >    - *"Generate detailed log"*: `Yes`
 >
 > > ### {% icon question %} Question
@@ -143,6 +140,13 @@ In summary, this tool will:
 > > {: .solution}
 > {: .question}
 >
+> 2. Run **GROMACS structure configuration** {% icon tool %} with the following parameters:
+>    - *"Input structure"*: GRO output from initial setup tool
+>    - *"Output format"*: `GRO file`
+>    - *"Configure box?"*: `Yes`
+>    - *"Box dimensions in nanometers"*: `1.0`
+>    - *"Box type"*: `Rectangular box with all sides equal`
+>    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
 
@@ -150,12 +154,12 @@ In summary, this tool will:
 
 The next stage is protein solvation, performed using **GROMACS solvation and adding ions** {% icon tool %}. Water molecules are added to the structure and topology files to fill the unit cell. At this stage sodium or chloride ions are also automatically added to neutralize the charge of the system. In our case, as lysozyme has a charge of +8, 8 chloride anions are added.
 
-![Solvated protein]({{ site.baseurl }}{% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
+![Solvated protein]({% link topics/computational-chemistry/images/solvated_protein.png %} "Solvated protein in a cubic unit cell")
 
 > ### {% icon hands_on %} Hands-on: solvation
 >
 > **GROMACS solvation and adding ions** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by setup
+>    - {% icon param-file %} *"GRO structure file"*: GRO structure file produced by the structure configuration tool
 >    - {% icon param-file %} *"Topology (TOP) file"*: Topology produced by setup
 >    - *"Water model for solvation"*: `SPC`
 >    - *"Generate detailed log"*: `Yes`
@@ -256,14 +260,14 @@ Note that we can continue where the last simulation left off (with new parameter
 >    - *"Generate detailed log"*: `Yes`
 {: .hands_on}
 
-> > ### {% icon question %} Question
-> >
-> > Why is the position of the protein restrained during equilibration?
-> >
-> > > ### {% icon solution %} Solution
-> > > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
-> > {: .solution}
-> {: .question}
+> ### {% icon question %} Question
+>
+> Why is the position of the protein restrained during equilibration?
+>
+> > ### {% icon solution %} Solution
+> > The purpose of equilibration is to stabilize the temperature and pressure of the system; these are overwhelmingly dependent on the solvent. Structural changes in the protein are an additional complicating variable, which can more simply be removed by restraining the protein.
+> {: .solution}
+{: .question}
 
 
 # Production simulation
@@ -300,14 +304,14 @@ Now that equilibration is complete, we can release the position restraints. We a
 
 A GROMACS workflow is provided for this tutorial. Overall, the workflow takes a PDB (Protein Data Bank) structure file as input and returns a MD trajectory.
 
-![GROMACS workflow]({{ site.baseurl }}{% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
+![GROMACS workflow]({% link topics/computational-chemistry/images/workflow_gromacs.png %} "The basic GROMACS workflow")
 
 # Conclusion
 {:.no_toc}
 
-After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({{ site.baseurl }}{% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
+After completing the steps, or running the workflow, we have successfully produced a trajectory (the xtc file) which describes the atomic motion of the system. This can be viewed using molecular visualization software or analysed further; please visit the visualization and [analysis]({% link topics/computational-chemistry/tutorials/analysis-md-simulations/tutorial.md %}) tutorials for more information.
 
-![Trajectory]({{ site.baseurl }}{% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
+![Trajectory]({% link topics/computational-chemistry/images/traj.gif %} "Trajectory produced using the GROMACS workflow, visualized with the NGL viewer")
 
 
 

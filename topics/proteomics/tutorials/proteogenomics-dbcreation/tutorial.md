@@ -3,6 +3,7 @@ layout: tutorial_hands_on
 
 title: "Proteogenomics 1: Database Creation"
 zenodo_link: "https://doi.org/10.5281/zenodo.1489208"
+level: Intermediate
 questions:
   - "How to create a customized Protein Database from RNAseq data?"
 objectives:
@@ -12,12 +13,12 @@ key_points:
   - "Generating variant protein database"
   - "Generating genomic and variant mapping files for visualization"
 follow_up_training:
-  -
-    type: "internal"
+  - type: "internal"
     topic_name: proteomics
     tutorials:
+      - proteogenomics-dbsearch
       - proteogenomics-novel-peptide-analysis
-
+      
 contributors:
   - subinamehta
   - timothygriffin
@@ -70,8 +71,9 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 >    {% include snippets/create_new_history.md %}
 >
-> 2. Import the FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
+> 2. Import the Uniprot FASTA, FASTQ file and the GTF file from Zenodo [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1489208.svg)](https://doi.org/10.5281/zenodo.1489208)
 >    ```
+>    https://zenodo.org/api/files/bf8c34bc-ed55-4b1c-9b69-edfe0926ea84/Trimmed_ref_5000_uniprot_cRAP.fasta
 >    https://zenodo.org/record/1489208/files/FASTQ_ProB_22LIST.fastqsanger
 >    https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
 >    ```
@@ -87,6 +89,25 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
 >    {% include snippets/change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
 >
+{: .hands_on}
+
+# Change the chromosome names in the Ensembl GTF to match a UCSC genome reference
+
+UCSC prefaces chromosome names with chr while Ensembl does not.  
+
+> ### {% icon hands_on %} Hands-on: Replace Text in a specific column
+>  1. Change numbered chromosome names
+>    - {% icon param-select %} *"in column"*: `1`
+>    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
+>    - {% icon param-select %} *"Replace with*: `chr\\1`
+>  2. Change XY chromosomes
+>    - {% icon param-select %} *"in column"*: `1`
+>    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
+>    - {% icon param-select %} *"Replace with*: `chr\\1`
+>  3. Change mitochondrial chromosome
+>    - {% icon param-select %} *"in column"*: `1`
+>    - {% icon param-select %} *"Find pattern"*: `^MT$`
+>    - {% icon param-select %} *"Replace with*: `chrM`
 {: .hands_on}
 
 
@@ -129,25 +150,11 @@ The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/h
 
 ![Variant calling](../../images/variant_calling.png)
 
-Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate
-a VCF dataset describing SNPs, indels, and complex variants in samples in the input
-alignments. By default, FreeBayes will consider variants supported by at least two observations
-in a single sample (`-C`) and also by at least 20% of the reads from a single sample (`-F`). These
-settings are suitable for low to high depth sequencing in haploid and diploid samples, but
-users working with polyploid or pooled samples may adjust them depending on the characteristics
-of their sequencing data.
+Provided with some BAM dataset(s) and a reference sequence, FreeBayes will generate a VCF dataset describing SNPs, indels, and complex variants in samples in the input alignments. By default, FreeBayes will consider variants supported by at least two observations in a single sample (`-C`) and also by at least 20% of the reads from a single sample (`-F`). These settings are suitable for low to high depth sequencing in haploid and diploid samples, but users working with polyploid or pooled samples may adjust them depending on the characteristics of their sequencing data.
 
-FreeBayes is capable of calling variant haplotypes shorter than a read length where multiple
-polymorphisms segregate on the same read. The maximum distance between polymorphisms phased in
-this way is determined by the `--max-complex-gap`, which defaults to 3bp. In practice, this can
-comfortably be set to half the read length. Ploidy may be set to any level (`-p`), but by default
-all samples are assumed to be diploid. FreeBayes can model per-sample and per-region variation
-in copy-number (`-A`) using a copy-number variation map.
+FreeBayes is capable of calling variant haplotypes shorter than a read length where multiple polymorphisms segregate on the same read. The maximum distance between polymorphisms phased in this way is determined by the `--max-complex-gap`, which defaults to 3bp. In practice, this can comfortably be set to half the read length. Ploidy may be set to any level (`-p`), but by default all samples are assumed to be diploid. FreeBayes can model per-sample and per-region variation in copy-number (`-A`) using a copy-number variation map.
 
-FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in
-terms of observation frequency rather than called genotypes. To do so, use --pooled-continuous
-and set input filters to a suitable level. Allele observation counts will be described by AO
-and RO fields in the VCF output.
+FreeBayes can act as a frequency-based pooled caller and can describe variants and haplotypes in terms of observation frequency rather than called genotypes. To do so, use `--pooled-continuous` and set input filters to a suitable level. Allele observation counts will be described by AO and RO fields in the VCF output.
 
 
 > ### {% icon hands_on %} Hands-on: Variant Calling with FreeBayes
@@ -216,16 +223,18 @@ data manager to create these annotations to make them available for users.
 > 2. Inspect {% icon galaxy-eye %} the resulting files
 {: .hands_on}
 
-Three FASTA files are generated through the CustomProDB tool:
-- a variant FASTA file for short indels,
-- a Single Amino acid Variant (SAV) FASTA file
-- an Sqlite file (genome mapping and variant mapping)
+There are 6 files are generated through the CustomProDB tool:
+- rpkm.fasta: reference proteins filtered by transcript expression level (RPKM calculated from a BAM file)
+- snv.fasta: Single Nucleotide Variants detected by FreeBayes (.vcf file)
+- indel.fasta: Insertions/Deletions detected by FreeBayes (.vcf file)
+- Genomic_mapping.sqlite: mapping proteins to genome
+- Variant_annotation.sqlite: used to visualize the variants in the Multi-omics Visualization Platform
+- RData: set of annotation files (in RData format) to create reference and variant protein sequences
 
-for mapping proteins to genome and an RData file for variant protein coding sequences.
-Similar to the genomic mapping, a variant mapping file is also generated from CustomProDB.
-This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
-variant annotation file will be used to visualize the variants in the Multi-omics Visualization
-Platform (in-house visualization platform developed by Galaxy-P senior developers).
+
+For mapping proteins to genome and an RData file for variant protein coding sequences. Similar to the genomic mapping, a variant mapping file 
+is also generated from CustomProDB. This SQLite file is also converted to tabular format and made SearchGUI-compatible. This
+variant annotation file will be used to visualize the variants in the Multi-omics Visualization Platform (in-house visualization platform developed by Galaxy-P senior developers).
 
 # Transcript Assembly
 
@@ -254,13 +263,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 >    {% include snippets/change_datatype.md %}
 {: .hands_on}
 
-StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be
-sorted by genomic location (coordinate position). This file contains spliced read alignments
-and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a
-fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across
-at least one junction) in the input BAM file must contain the tag XS to indicate the genomic
-strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2
-(when run with the `--dta` option) already include this tag, but if you use a different read mapper
+StringTie accepts a BAM (or SAM) file of paired-end RNA-seq reads, which must be sorted by genomic location (coordinate position). This file contains spliced read alignments and can be produced directly by programs such as HISAT2. We recommend using HISAT2 as it is a fast and accurate alignment program. Every spliced read alignment (i.e. an alignment across at least one junction) in the input BAM file must contain the tag XS to indicate the genomic strand that produced the RNA from which the read was sequenced. Alignments produced by HISAT2 (when run with the `--dta` option) already include this tag, but if you use a different read mapper
 you should check that this XS tag is included for spliced alignments.
 
 > ### {% icon details %} Note about parameter settings
@@ -348,6 +351,8 @@ The original form of this program is also distributed as part of the Cufflinks s
 >   - {% icon param-file %} *"A BED file with 12 columns"*: `Convert GffCompare-annotated GTF to BED`
 >   - {% icon param-select %} *"Source for Genomic Sequence Data"*: `Locally cached File`
 >   - {% icon param-select %} *"Select reference 2bit file"*: `mm10`
+>   - {% icon param-select %} *"Fasta ID Options"*
+>     - {% icon param-select %} *"fasta ID source, e.g. generic"*: `generic`
 >
 >    Finally, we convert a BED format file of the proteins from a proteomics search database into a tabular format for the Multiomics Visualization Platform (MVP).
 >
@@ -386,18 +391,51 @@ along with the UniProt and cRAP databases.
 >   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
 {: .hands_on}
-
 > ### {% icon comment %} Tool parameters explained
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
+{: .comment}
+
+> ### {% icon comment %} CustomProDB generated protein Accession names need to be changed for PeptideShaker
+> PeptideShaker does not allow greaterthan sign, comma, or spaces in the protein accession name.
+> PeptideShaker also requires the FASTA ID to start with a source, e.g. *>sp|Q8C4J7|* for SwissProt entries.  Nonstandard entries must be prefixed *generic|*.
+> We will also need to similarily modify the accessions in the genomic mapping and and variant annotation outputs. For eg: ENSEMBL-PRO (output from CustomProDB) and STRG (from StringTie) are not standard format.
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: FASTA to Tabular
+> 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
+>
+> 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
+>    - {% icon param-select %} *"Using"*: `column 1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
+>      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
+>      - {% icon param-text %} *"Replacement"*: `.\1`
+>    - {% icon param-repeat %} **Insert Check**
+>      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
+>      - {% icon param-text %} *"Replacement"*: `generic\1`
+>
+> 2. **Tabular-to-FASTA** {% icon tool %} with the following parameters:
+>    - *"Title column"*: `1`
+>    - *"Sequence Column"*:`2`
 > - Rename it as **CustomProDB Merged Fasta**
+>
+{: .hands_on}
+> ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
+> Please make sure the tool version is 1.1.1
 {: .comment}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)
 
 
 For visualization purposes we also use the concatenate tool to concatenate the genomic mapping with the protein mapping dataset. This output will be used for visualization in MVP to view the genomic coordinates of the variant peptide.
+
+We also need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 
 An SQLite database containing the genomic mapping SQLite, variant annotation and information from the protein mapping file is concatenated to form a single genomic mapping SQLite database later used as an input for the 'Peptide Genomic Coordinate' tool. For that we need to follow the steps below:
 
@@ -418,7 +456,8 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 > 2. Rename output to `genomic_mapping_sqlite`
 >    {% include snippets/rename_dataset.md %}
 >
->    The output is further processed so that the results are compatible with the Multiomics Visualization Platform.
+>    The output is further processed so that the results are compatible with the Multiomics Visualization Platform. 
+>    We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 >
 > 3. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
@@ -427,7 +466,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 >      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**
->      - {% icon param-text %} *"Find Regex"*:  `,([A-Z]\d+[A-Z])\s*`
+>      - {% icon param-text %} *"Find Regex"*:  `,([A-Y]\d+[A-Y]?)\s*`
 >      - {% icon param-text %} *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
@@ -467,7 +506,7 @@ An SQLite database containing the genomic mapping SQLite, variant annotation and
 
 ## Variant Annotations database
 
-We will repeat the process for the variant annotations
+We will repeat the process for the variant annotations (this file will be used as a input to the new updates that will be made on the Multiomics Visualization platform).  We need to modify the CustomProDB protein accessions the same as was done for the FASTA database. 
 
 > ### {% icon hands_on %} Hands-on: Create database for variant annotations
 >
@@ -488,7 +527,7 @@ We will repeat the process for the variant annotations
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
 >      - {% icon param-text %} *"Replacement"*: `\1\2_\3`
 >    - {% icon param-repeat %} **Insert Check**:
->      - {% icon param-text %} *"Find Regex"*: `,([A-Z]\d+[A-Z])\s*`
+>      - {% icon param-text %} *"Find Regex"*: `,([A-Y]\d+[A-Y]?)\s*`
 >      - {% icon param-text %} *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**:
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
@@ -538,6 +577,59 @@ To do so:
 > This tool concatenates FASTA database files together.
 > - If the uniqueness criterion is "Accession and Sequence", only the first appearence of each unique sequence will appear in the output. Otherwise, duplicate sequences are allowed, but only the first appearance of each accession will appear in the output.
 > - The default accession parser will treat everything in the header before the first space as the accession.
+{: .comment}
+
+## List of Reference Protein Accession names
+
+Generate a list of Reference Proteins. Identify peptides that are contained in the reference proteins will be filtered out in the next tutorial. 
+
+> ### {% icon hands_on %} Hands-on: FASTA to Tabular
+> 1. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `HISAT_Output.rpkm (fasta)`
+>
+> 2. **Filter Tabular** {% icon tool %}: with these filters:
+>   - {% icon param-file %} *"Tabular Dataset to filter"*: `HISAT_Output.rpkm (tabular)`
+>   - {% icon param-text %} *"Filter by"*: `select columns`
+>     - {% icon param-text %} *"enter column numbers to keep"*: `1`
+>   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
+>     - {% icon param-text %} *"enter column number to replace"*: `1`
+>     - {% icon param-text %} *"regex pattern"*: `^([^ |]+).*$`
+>     - {% icon param-text %} *"replacement expression"*: `1`
+>
+> 3. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
+>    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)`
+>
+> 4. **Filter Tabular** {% icon tool %}: with these filters:
+>   - {% icon param-file %} *"Tabular Dataset to filter"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (tabular)`
+>   - {% icon param-text %} *"Filter by"*: `select columns`
+>     - {% icon param-text %} *"enter column numbers to keep"*: `1`
+>   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
+>     - {% icon param-text %} *"enter column number to replace"*: `1`
+>     - {% icon param-text %} *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
+>     - {% icon param-text %} *"replacement expression"*: `1`
+>
+> 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
+>   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous 2 "Filter Tabular" outputs.
+>
+{: .hands_on}
+
+> ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
+> Please make sure the tool version is 1.1.1
+{: .comment}
+
+> ### {% icon comment %} Tool versions
 > - All the tools mentioned in this tutorial are subjected to change when the tool version is upgraded .
 {: .comment}
+
+
+# **Conclusion**
+{:.no_toc}
+
+This completes the walkthrough of the proteogenomics database creation workflow. This tutorial is a guide to have a database and mapping files ready for  Database searching and novel peptide analysis. Researchers can use this workflow with their data also, please note that the tool parameters, reference genomes and the workflow will be needed to be modified accordingly.
+
+This workflow was developed by the Galaxy-P team at the University of Minnesota. For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](https://galaxyp.org)
+
+
+{: .comment}
+
 

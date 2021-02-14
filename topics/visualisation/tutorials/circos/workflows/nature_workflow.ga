@@ -1,0 +1,163 @@
+{
+    "a_galaxy_workflow": "true",
+    "annotation": "Visualisation with Circos",
+    "format-version": "0.1",
+    "name": "Workflow constructed from history 'Nature workflow'",
+    "steps": {
+        "0": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 0,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "chrom.tab"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 10
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "cc54ba40-fba2-4330-b335-33d702e2eaa3",
+            "workflow_outputs": []
+        },
+        "1": {
+            "annotation": "",
+            "content_id": null,
+            "errors": null,
+            "id": 1,
+            "input_connections": {},
+            "inputs": [
+                {
+                    "description": "",
+                    "name": "highlights.tab"
+                }
+            ],
+            "label": null,
+            "name": "Input dataset",
+            "outputs": [],
+            "position": {
+                "left": 10,
+                "top": 130
+            },
+            "tool_id": null,
+            "tool_state": "{\"optional\": false}",
+            "tool_version": null,
+            "type": "data_input",
+            "uuid": "8fb83ee3-f263-48c1-b024-f3bbb0415e41",
+            "workflow_outputs": []
+        },
+        "2": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
+            "errors": null,
+            "id": 2,
+            "input_connections": {
+                "reference_genome|ref|input_karyotype": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "sec_tdd|data_0|plot_format|data_source": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "sec_tdd|data_1|plot_format|data_source": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "sec_tdd|data_2|plot_format|data_source": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Circos",
+            "outputs": [
+                {
+                    "name": "output_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 10
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
+            "tool_shed_repository": {
+                "changeset_revision": "df7356989ac1",
+                "name": "circos",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"ideogram\": {\"limit_chromosomes\": \"\", \"chromosomes_reverse\": \"\", \"units\": \"mb\", \"spacing\": \"0.5\", \"pairwise_spacing\": [], \"radius\": \"0.9\", \"thickness\": \"0.0\", \"angle_offset\": \"-90\", \"angle_orientation\": \"clockwise\", \"ideogram_labels\": {\"show_label\": \"true\", \"radius_offset\": \"0.075\", \"size\": \"24\", \"parallel\": \"true\"}, \"bands\": {\"show_bands\": \"true\", \"fill_bands\": \"true\", \"band_transparency\": \"3\", \"band_stroke_thickness\": \"0\", \"band_stroke_color\": \"#000000\"}}, \"limits\": {\"max_ticks\": \"5000\", \"max_ideograms\": \"200\", \"max_links\": \"25000\", \"max_points_per_track\": \"25000\"}, \"outputs\": {\"png\": \"true\", \"svg\": \"false\", \"tar\": \"false\"}, \"plot_options\": {\"background\": {\"background_select\": \"color\", \"__current_case__\": 1, \"background_color\": \"#000000\"}, \"radius\": \"1500\", \"colour_profile\": null}, \"reference_genome\": {\"ref\": {\"ref_source\": \"karyotype\", \"__current_case__\": 3, \"input_karyotype\": null}}, \"scaling\": {\"zooms\": []}, \"sec_links\": {\"data\": []}, \"sec_tdd\": {\"data\": [{\"__index__\": 0, \"r1\": \"0.89\", \"r0\": \"0.8\", \"zdepth\": \"0\", \"plot_format\": {\"plot_format_select\": \"highlight\", \"__current_case__\": 3, \"data_source\": null, \"format_specific\": {\"fill_color\": \"#000000\", \"fill_color_alpha\": \"1.0\", \"stroke_color\": \"#000000\", \"stroke_color_alpha\": \"1.0\", \"stroke_thickness\": \"1\"}}, \"orientation\": \"false\", \"minsize\": \"0.0\", \"minmax\": {\"minmax_select\": \"no\", \"__current_case__\": 1}, \"sec_rule\": {\"rules\": []}, \"sec_axes\": {\"axes\": [], \"only_if_data\": \"always\"}, \"sec_bkgs\": {\"backgrounds\": [], \"only_if_data\": \"always\"}}, {\"__index__\": 1, \"r1\": \"0.89\", \"r0\": \"0.8\", \"zdepth\": \"0\", \"plot_format\": {\"plot_format_select\": \"histogram\", \"__current_case__\": 0, \"data_source\": null, \"format_specific\": {\"fill_color\": \"#ffdcfc\", \"fill_color_alpha\": \"1.0\", \"stroke_color\": \"#000000\", \"stroke_color_alpha\": \"1.0\", \"stroke_thickness\": \"1\", \"fill_under\": \"true\", \"extend_bins\": \"false\"}}, \"orientation\": \"false\", \"minsize\": \"0.0\", \"minmax\": {\"minmax_select\": \"no\", \"__current_case__\": 1}, \"sec_rule\": {\"rules\": [{\"__index__\": 0, \"conditions\": [{\"__index__\": 0, \"application\": {\"application_select\": \"random\", \"__current_case__\": 3, \"value\": \"0.1\"}}], \"actions\": [{\"__index__\": 0, \"action\": {\"action_select\": \"fill_color\", \"__current_case__\": 2, \"action_value\": \"#7030a0\"}}], \"continue_flow\": \"true\"}, {\"__index__\": 1, \"conditions\": [], \"actions\": [], \"continue_flow\": \"false\"}]}, \"sec_axes\": {\"axes\": [], \"only_if_data\": \"always\"}, \"sec_bkgs\": {\"backgrounds\": [], \"only_if_data\": \"always\"}}, {\"__index__\": 2, \"r1\": \"0.79\", \"r0\": \"0.7\", \"zdepth\": \"0\", \"plot_format\": {\"plot_format_select\": \"histogram\", \"__current_case__\": 0, \"data_source\": null, \"format_specific\": {\"fill_color\": \"#ffdcfc\", \"fill_color_alpha\": \"1.0\", \"stroke_color\": \"#000000\", \"stroke_color_alpha\": \"1.0\", \"stroke_thickness\": \"1\", \"fill_under\": \"true\", \"extend_bins\": \"false\"}}, \"orientation\": \"false\", \"minsize\": \"0.0\", \"minmax\": {\"minmax_select\": \"no\", \"__current_case__\": 1}, \"sec_rule\": {\"rules\": [{\"__index__\": 0, \"conditions\": [{\"__index__\": 0, \"application\": {\"application_select\": \"random\", \"__current_case__\": 3, \"value\": \"0.2\"}}], \"actions\": [{\"__index__\": 0, \"action\": {\"action_select\": \"fill_color\", \"__current_case__\": 2, \"action_value\": \"#7030a0\"}}], \"continue_flow\": \"true\"}, {\"__index__\": 1, \"conditions\": [{\"__index__\": 0, \"application\": {\"application_select\": \"random\", \"__current_case__\": 3, \"value\": \"0.2\"}}], \"actions\": [{\"__index__\": 0, \"action\": {\"action_select\": \"fill_color\", \"__current_case__\": 2, \"action_value\": \"#ffff00\"}}], \"continue_flow\": \"false\"}]}, \"sec_axes\": {\"axes\": [], \"only_if_data\": \"always\"}, \"sec_bkgs\": {\"backgrounds\": [], \"only_if_data\": \"always\"}}]}, \"ticks\": {\"radius\": \"1.0\", \"skip_first_label\": \"false\", \"skip_last_label\": \"false\", \"tick_group\": []}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.69.8+galaxy7",
+            "type": "tool",
+            "uuid": "2d5d8a86-d52a-40e6-a023-08a931416cff",
+            "workflow_outputs": []
+        },
+        "3": {
+            "annotation": "",
+            "content_id": "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
+            "errors": null,
+            "id": 3,
+            "input_connections": {
+                "reference_genome|ref|input_karyotype": {
+                    "id": 0,
+                    "output_name": "output"
+                },
+                "sec_tdd|data_0|plot_format|data_source": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "sec_tdd|data_1|plot_format|data_source": {
+                    "id": 1,
+                    "output_name": "output"
+                },
+                "sec_tdd|data_2|plot_format|data_source": {
+                    "id": 1,
+                    "output_name": "output"
+                }
+            },
+            "inputs": [],
+            "label": null,
+            "name": "Circos",
+            "outputs": [
+                {
+                    "name": "output_png",
+                    "type": "png"
+                }
+            ],
+            "position": {
+                "left": 230,
+                "top": 130
+            },
+            "post_job_actions": {},
+            "tool_id": "toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7",
+            "tool_shed_repository": {
+                "changeset_revision": "df7356989ac1",
+                "name": "circos",
+                "owner": "iuc",
+                "tool_shed": "toolshed.g2.bx.psu.edu"
+            },
+            "tool_state": "{\"__input_ext\": \"tabular\", \"chromInfo\": \"/opt/galaxy/tool-data/shared/ucsc/chrom/?.len\", \"ideogram\": {\"limit_chromosomes\": \"\", \"chromosomes_reverse\": \"\", \"units\": \"mb\", \"spacing\": \"0.5\", \"pairwise_spacing\": [], \"radius\": \"0.9\", \"thickness\": \"0.0\", \"angle_offset\": \"-90\", \"angle_orientation\": \"clockwise\", \"ideogram_labels\": {\"show_label\": \"true\", \"radius_offset\": \"0.075\", \"size\": \"24\", \"parallel\": \"true\"}, \"bands\": {\"show_bands\": \"true\", \"fill_bands\": \"true\", \"band_transparency\": \"3\", \"band_stroke_thickness\": \"0\", \"band_stroke_color\": \"#000000\"}}, \"limits\": {\"max_ticks\": \"5000\", \"max_ideograms\": \"200\", \"max_links\": \"25000\", \"max_points_per_track\": \"25000\"}, \"outputs\": {\"png\": \"true\", \"svg\": \"false\", \"tar\": \"false\"}, \"plot_options\": {\"background\": {\"background_select\": \"color\", \"__current_case__\": 1, \"background_color\": \"#000000\"}, \"radius\": \"1500\", \"colour_profile\": null}, \"reference_genome\": {\"ref\": {\"ref_source\": \"karyotype\", \"__current_case__\": 3, \"input_karyotype\": null}}, \"scaling\": {\"zooms\": []}, \"sec_links\": {\"data\": []}, \"sec_tdd\": {\"data\": [{\"__index__\": 0, \"r1\": \"0.89\", \"r0\": \"0.8\", \"zdepth\": \"0\", \"plot_format\": {\"plot_format_select\": \"highlight\", \"__current_case__\": 3, \"data_source\": null, \"format_specific\": {\"fill_color\": \"#000000\", \"fill_color_alpha\": \"1.0\", \"stroke_color\": \"#000000\", \"stroke_color_alpha\": \"1.0\", \"stroke_thickness\": \"1\"}}, \"orientation\": \"false\", \"minsize\": \"0.0\", \"minmax\": {\"minmax_select\": \"no\", \"__current_case__\": 1}, \"sec_rule\": {\"rules\": []}, \"sec_axes\": {\"axes\": [], \"only_if_data\": \"always\"}, \"sec_bkgs\": {\"backgrounds\": [], \"only_if_data\": \"always\"}}, {\"__index__\": 1, \"r1\": \"0.89\", \"r0\": \"0.8\", \"zdepth\": \"0\", \"plot_format\": {\"plot_format_select\": \"histogram\", \"__current_case__\": 0, \"data_source\": null, \"format_specific\": {\"fill_color\": \"#ffdcfc\", \"fill_color_alpha\": \"1.0\", \"stroke_color\": \"#000000\", \"stroke_color_alpha\": \"1.0\", \"stroke_thickness\": \"1\", \"fill_under\": \"true\", \"extend_bins\": \"false\"}}, \"orientation\": \"false\", \"minsize\": \"0.0\", \"minmax\": {\"minmax_select\": \"no\", \"__current_case__\": 1}, \"sec_rule\": {\"rules\": [{\"__index__\": 0, \"conditions\": [{\"__index__\": 0, \"application\": {\"application_select\": \"random\", \"__current_case__\": 3, \"value\": \"0.1\"}}], \"actions\": [{\"__index__\": 0, \"action\": {\"action_select\": \"fill_color\", \"__current_case__\": 2, \"action_value\": \"#7030a0\"}}], \"continue_flow\": \"true\"}, {\"__index__\": 1, \"conditions\": [], \"actions\": [], \"continue_flow\": \"false\"}]}, \"sec_axes\": {\"axes\": [], \"only_if_data\": \"always\"}, \"sec_bkgs\": {\"backgrounds\": [], \"only_if_data\": \"always\"}}, {\"__index__\": 2, \"r1\": \"0.79\", \"r0\": \"0.7\", \"zdepth\": \"0\", \"plot_format\": {\"plot_format_select\": \"histogram\", \"__current_case__\": 0, \"data_source\": null, \"format_specific\": {\"fill_color\": \"#ffdcfc\", \"fill_color_alpha\": \"1.0\", \"stroke_color\": \"#000000\", \"stroke_color_alpha\": \"1.0\", \"stroke_thickness\": \"1\", \"fill_under\": \"true\", \"extend_bins\": \"false\"}}, \"orientation\": \"false\", \"minsize\": \"0.0\", \"minmax\": {\"minmax_select\": \"no\", \"__current_case__\": 1}, \"sec_rule\": {\"rules\": [{\"__index__\": 0, \"conditions\": [{\"__index__\": 0, \"application\": {\"application_select\": \"random\", \"__current_case__\": 3, \"value\": \"0.2\"}}], \"actions\": [{\"__index__\": 0, \"action\": {\"action_select\": \"fill_color\", \"__current_case__\": 2, \"action_value\": \"#7030a0\"}}], \"continue_flow\": \"true\"}, {\"__index__\": 1, \"conditions\": [{\"__index__\": 0, \"application\": {\"application_select\": \"random\", \"__current_case__\": 3, \"value\": \"0.2\"}}], \"actions\": [{\"__index__\": 0, \"action\": {\"action_select\": \"fill_color\", \"__current_case__\": 2, \"action_value\": \"#ffff00\"}}], \"continue_flow\": \"false\"}]}, \"sec_axes\": {\"axes\": [], \"only_if_data\": \"always\"}, \"sec_bkgs\": {\"backgrounds\": [], \"only_if_data\": \"always\"}}]}, \"ticks\": {\"radius\": \"1.0\", \"skip_first_label\": \"false\", \"skip_last_label\": \"false\", \"tick_group\": []}, \"__page__\": null, \"__rerun_remap_job_id__\": null}",
+            "tool_version": "0.69.8+galaxy7",
+            "type": "tool",
+            "uuid": "a72e8baa-a4d6-4ba8-9a20-e4a528fd4137",
+            "workflow_outputs": []
+        }
+    },
+    "tags": ["visualisation"],
+    "uuid": "c2247081-6936-4458-8adf-2d8b0819f4d4",
+    "version": 0
+}

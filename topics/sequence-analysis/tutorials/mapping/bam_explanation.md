@@ -1,4 +1,4 @@
-A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) file is a compressed, binary file storing the sequences mapped to a reference sequence. 
+A BAM ([Binary Alignment Map](https://en.wikipedia.org/wiki/SAM_(file_format))) file is a compressed binary file storing the read sequences, whether they have been aligned to a reference sequence (e.g. a chromosome), and if so, the position on the reference sequence at which they have been aligned.
 
 > ### {% icon hands_on %} Hands-on: Inspect a BAM/SAM file
 >

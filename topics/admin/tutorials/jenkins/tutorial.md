@@ -20,7 +20,7 @@ key_points:
   - Especially regular tasks you might forget to do
   - Automatically run Ansible to ensure machines are in compliance
 contributors:
-  - erasche
+  - hexylena
 requirements:
   - type: "internal"
     topic_name: admin
@@ -74,7 +74,7 @@ As per many of the tutorials, we will use Ansible to setup and manage our Jenkin
 >
 >    ```yaml
 >    - src: geerlingguy.java
->      version: 1.9.5
+>      version: 1.10.0
 >    - src: geerlingguy.jenkins
 >      version: 3.7.0
 >    ```
@@ -233,7 +233,7 @@ Setting up Jenkins jobs is as simple as setting up a cron job, but the results a
 
 ## Ansible in Jenkins
 
-We will now setup Jenkins to run Ansible on cron. In the "Galaxy Installation with Ansible" tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.
+We will now setup Jenkins to run Ansible on cron. In the [Galaxy Installation with Ansible]({% link topics/admin/tutorials/ansible-galaxy/tutorial.md %}) tutorial we emphasised that it is useful to often run the entire playbook to ensure that all changes are applied. UseGalaxy.eu likes to accomplish this by having Jenkins run the playbooks every day. We know that even if our coworkers made some changes to the servers, that by tomorrow it will be reverted to a known-good configuration.
 
 > ### {% icon hands_on %} Hands-on: Jenkins running Ansible
 >
@@ -450,7 +450,7 @@ scp -i $PRIV_KEY \
 
 Similar to the Apollo builder but it uploads outputs as GitHub releases which is useful for public projects with complex build pipelines. The CSB takes on average 5-6 hours to run so we cannot easily run this on free infrastructure.
 
-Here we store both the [build](https://github.com/erasche/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/erasche/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
+Here we store both the [build](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/run.sh) and [deploy](https://github.com/hexylena/chado-schema-builder/blob/master/.ci/upload.sh) scripts in the GitHub repository. If you do this, you have to be careful about building PRs, as anyone can edit the build scripts and access your internal infrastructure!
 
 ### Job: Website
 

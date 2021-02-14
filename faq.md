@@ -40,7 +40,7 @@ We wrote an [article](https://doi.org/10.1016/j.cels.2018.05.012) about our effo
 
 ## How can I advertise the training materials on my posters?
 
-We provide some QR codes and logos in the [images folder]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/assets/images).
+We provide some QR codes and logos in the [images folder]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/assets/images).
 
 # For Individual Learners
 
@@ -66,11 +66,11 @@ To run the hands-on tutorials you need a Galaxy server to run them on.
 
 Each tutorial is annotated with information about which [public Galaxy servers](https://galaxyproject.org/public-galaxy-servers/) it can be run on. These servers are available to anyone on the world wide web and some may have all the tools that are needed by a specific tutorial.
 
-If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. You will need to confirm that all necessary tools and reference genomes are available on your server and possible install missing tools and data. To learn how to do that, you can follow our [dedicated tutorial]({{ site.baseurl }}{% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
+If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. You will need to confirm that all necessary tools and reference genomes are available on your server and possible install missing tools and data. To learn how to do that, you can follow our [dedicated tutorial]({% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
 
 Some topics have a [Docker](https://www.docker.com/) image that can be installed and run on participants' laptops.  These Docker images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant. You will need to [install Docker](https://docs.docker.com/install/).
 
-Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://launch.genome.edu.au/launch) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done.
+Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy is [available on many national research infrastructures](https://galaxyproject.org/galaxy-services/) such as [Jetstream](https://galaxyproject.org/cloud/jetstream/) (United States), [GenAP](https://www.genap.ca/) (Canada), [GVL](https://www.gvl.org.au/) (Australia), [CLIMB](http://www.climb.ac.uk/) (United Kingdom), and more.  These instances are typically easy to launch, and easy to shut down when you are done.
 
 If you are already familiar with, and have an account on [Amazon Web Services](https://aws.amazon.com/) then you can also launch a Galaxy server there using [CloudLaunch](https://launch.usegalaxy.org/).
 
@@ -95,7 +95,7 @@ Each tutorial is annotated with the information on which [public Galaxy servers]
 If your organization/consortia/community has its own Galaxy server, then you may  want to run tutorials on that. This can be ideal because then the instance you are teaching on is the same you your participants will be using after the training. They'll also be able to revisit any analysis they did during the training. If you pursue this option you'll need to work with your organization's Galaxy Admins to confirm that
 
 - the server can support a room full of people all doing the same analysis at the same time.
-- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({{ site.baseurl }}{% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
+- all tools and reference datasets needed in the tutorial are locally installed.  To learn how to setup a Galaxy instance for a tutorial, you can follow our [dedicated tutorial]({% link topics/instructors/tutorials/setup-galaxy-for-training/tutorial.md %}).
 - all participants will be able to create/use accounts on the system.
 
 Some training topics have a Docker image that can be installed and run on all participants' laptops.  These images contain Galaxy instances that include all tools and datasets used in a tutorial, as well as saved analyses and repeatable workflows that are relevant.
@@ -104,7 +104,7 @@ Finally, you can also run your tutorials on cloud-based infrastructures.  Galaxy
 
 ## What are the best practices for teaching with Galaxy?
 
-We started to collect some best practices for instructors inside our [Good practices slides]({{ site.baseurl }}{% link topics/instructors/index.md %})
+We started to collect some best practices for instructors inside our [Good practices slides]({% link topics/instructors/index.md %})
 
 ## How do I get help?
 
@@ -118,7 +118,7 @@ First off, thanks for your interest in contributing to the Galaxy training mater
 
 Individual learners and instructors can make these training more effective by contributing back to them. You can report mistakes and errors, create more content, etc. Whatever is your background, there is a way to contribute: via the GitHub website, via command-line or even without dealing with GitHub.
 
-We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community. You can also check our [tutorials]({{ site.baseurl }}{% link topics/contributing/index.md %}) for more details.
+We will address your issues and/or assess your change proposal as promptly as we can, and help you become a member of our community. You can also check our [tutorials]({% link topics/contributing/index.md %}) for more details.
 
 ## How can I get started with contributing?
 
@@ -166,25 +166,25 @@ Below is a checklist of things to look out for to help you get started. If you f
 
 ### 2. Reviewing pull requests
 
-Another great way to help out the project is by reviewing [open pull requests]({{ site.github.repository_url }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
+Another great way to help out the project is by reviewing [open pull requests]({{ site.github_repository }}/pulls?q=is%3Apr+is%3Aopen+sort%3Aupdated-desc). You can use the above checklist as a guide for your review. Some documentation about how to add your review in the GitHub interface can be found [here](https://help.github.com/articles/about-pull-request-reviews/)
 
 
 ## How can I give feedback?
 
 At the end of each tutorial, there is a link to [a feedback form](https://docs.google.com/forms/d/1BILuBp8bPv42odpZ55Kcf2rqzR-k0Czx46agVVSRgm4/edit). We use this information to improve our tutorials.
 
-For global feedbacks, you can open an [issue on GitHub]({{ site.github.repository_url }}/issues/new), write us on [Gitter]({{ site.gitter_url }}) or send us an [email](mailto:{{ site.email }}).
+For global feedbacks, you can open an [issue on GitHub]({{ site.github_repository }}/issues/new), write us on [Gitter]({{ site.gitter_url }}) or send us an [email](mailto:{{ site.email }}).
 
 ## How can I report mistakes or errors?
 
-The easiest way to start contributing is to [file an issue]({{ site.github.repository_url }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
+The easiest way to start contributing is to [file an issue]({{ site.github_repository }}/issues/new) to tell us about a problem such as a typo, spelling mistake, or a factual error. You can then introduce yourself and meet some of our community members.
 
 
 ## How can I test an Interactive Tour?
 
 Perhaps you've been asked to review an interactive tour, or maybe you just want to try one out. The easiest way to run an interactive tour is to use the [Tour builder](https://tailordev.fr/blog/2017/07/19/the-galaxy-tour-builder-extension/) browser extension.
 
-1. Install the Tour Builder extension to your browser ([Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg), [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/galaxy-tour-builder/), [Opera add-on](https://addons.opera.com/en/extensions/details/galaxy-tour-builder/)).
+1. Install the Tour Builder extension to your browser ([Chrome Web Store](https://chrome.google.com/webstore/detail/galaxy-tour-builder/mdfbapknmcpnbmggahhaegehbbbmhmgg), [Firefox add-on](https://addons.mozilla.org/en-US/firefox/addon/galaxy-tour-builder/)).
 2. Navigate to a Galaxy instance supporting the tutorial. To find which Galaxy instances support each tutorial, please see the dropdown menu next to the tutorial on the training website. Using one of the usegalaxy.\* instances ([Galaxy Main](https://usegalaxy.org), [Galaxy Europe](https://usegalaxy.eu), or [Galaxy Australia](https://usegalaxy.org.au)
 ) is usually a good bet.
 3. Start the Tour Builder plugin by clicking on the icon in your browser menu bar
@@ -201,7 +201,7 @@ If you feel uncomfortable with using the git and the [GitHub flow](https://guide
 
 ## How can I contribute in "advanced" mode?
 
-Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github.repository_url }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
+Most of the content is written in [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/) with some metadata (or variables) found in [YAML](http://yaml.org/) files. Everything is stored on our [GitHub repository]({{ site.github_repository }}). Each training material is related to a topic. All training materials (slides, tutorials, etc) related to a topic are found in a dedicated directory (*e.g.* `transcriptomics` directory contains the material related to transcriptomic analysis). Each topic has the following <a name="structure">structure</a>:
 
 ![Structure of the repository](shared/images/repo_organization.png){: width="400px"}
 
@@ -219,14 +219,14 @@ Most of the content is written in [GitHub Flavored Markdown](https://guides.gith
 
 - a directory with the Dockerfile describing the details to build a container for the topic (self-study environments).
 
-To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests (check our [tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})):
+To manage changes, we use [GitHub flow](https://guides.github.com/introduction/flow/) based on Pull Requests (check our [tutorial]({% link topics/contributing/tutorials/create-new-tutorial-content/tutorial.md %})):
 
 1. [Create a fork](https://help.github.com/articles/fork-a-repo/) of this repository on GitHub
 2. Clone your fork of this repository to create a local copy on your computer and initialize the required submodules (`git submodule init` and `git submodule update`)
 3. Create a new branch in your local copy for each significant change
 4. Commit the changes in that branch
 5. Push that branch to your fork on GitHub
-6. Submit a pull request from that branch to the [original repository]({{ site.github.repository_url }})
+6. Submit a pull request from that branch to the [original repository]({{ site.github_repository }})
 7. If you receive feedback, make changes in your local clone and push them to your branch on GitHub: the pull request will update automatically
 8. Pull requests will be merged by the training team members after at least one other person has reviewed the Pull request and approved it.
 
@@ -252,7 +252,7 @@ Globally, the process of development of new content is open and transparent:
 
 ![Development process](shared/images/development_process.png)
 
-To learn how to add new content, check out our [series of tutorials on creating new content]({{ site.baseurl }}{% link topics/contributing/index.md %}):
+To learn how to add new content, check out our [series of tutorials on creating new content]({% link topics/contributing/index.md %}):
 
 {% assign topic = site.data["contributing"] %}
 <ol>
@@ -276,7 +276,7 @@ We also strongly recommend you read and follow [The Carpentries](https://carpent
 
 ## What can I do to help the project?
 
-In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github.repository_url }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
+In [issues](https://github.com/galaxyproject/training-material/issues), you will find lists of issues to fix and features to implement (with the ["newcomer-friendly"]({{ site.github_repository }}/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3Anewcomer-friendly) label for example). Feel free to work on them!
 
 # Other Questions
 

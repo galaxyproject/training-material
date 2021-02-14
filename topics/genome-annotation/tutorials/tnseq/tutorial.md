@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Essential genes detection with Transposon insertion sequencing"
-zenodo_link: "https://doi.org/10.5281/zenodo.940733"
+zenodo_link: "https://doi.org/10.5281/zenodo.2579335"
 tags:
   - bacteria
   - tnseq
@@ -29,14 +29,14 @@ contributors:
 # Introduction
 {:.no_toc}
 
-In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limitated by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
+In microbiology, identifying links between genotype and phenotype is key to understand bacteria growth and virulence mechanisms, and to identify targets for drugs and vaccines. These analysis are limited by the lack of bacterial genome annotations (*e.g.* 30% of genes for *S. pneumoniae* are of unknown function) and by the fact that genotypes often arose from complex composant interactions.
 
 ## Transposon insertion Sequencing
 {:.no_toc}
 
 Transposon insertion sequencing is a technique used to functionally annotate bacterial genomes. In this technique, the genome is saturated by insertions of transposons. Transposons are highly regulated, discrete DNA segments that can relocate within the genome. They have a large influence on gene expression and can be used to determine the function of genes.
 
-When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, i.e. creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.
+When a transposon inserts itself in a gene, the gene's function will be disrupted, affecting the fitness (growth) of the bacteria. We can then manipulate transposons for use in insertional mutagenesis, *i.e.* creation of mutations of DNA by the addition of transposons. The genomes can be then sequenced to locate the transposon insertion site and the function affected by a transposon insertion can be linked to the disrupted gene.
 
 ![Illustration of tnseq Method](../../images/tnseq/principle_tnseq.png "Transposon insertion sequencing method (from <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
@@ -57,7 +57,7 @@ Two type of transposon insertion methods exist:
 
 Different types of transposons can be used depending of the goal of your analysis.
 
-- Randomly pooled tranposon
+- Randomly pooled transposon
     - Mariner-based transposons, common and stable transposons which target the "TA" dinucleotides
 
         The TA are distributed relatively evenly along genome. The Mariner-based transposons can be inserted to impact statistically every gene, with in average more than 30 insertions site per kb. With the low insertion bias, it is easy to build saturated libraries. But local variations means less loci and less statistical power.
@@ -72,11 +72,11 @@ Different types of transposons can be used depending of the goal of your analysi
 
 Independently of the transposon choice we need to be careful about the library complexity. With a large complex library, multiple insertion can be found in every potential locus. The higher density of insertion, the greater precision in identifying limits of regions of interest. If the density of the library is too low, some genes might by chance not be disrupted and mistaken for essential. The advantage of a target specific transposon, like the mariner, in opposition of a Tn5-based transposon inserting randomly, it that the limited number of insertion sites makes it easier to build high complexity libraries.
 
-After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the tranposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.
+After selection of the type of transposon, we need to modify it to allow insertion site amplification and sequencing to get a library fitting the transposon insertion. Biases could be introduced during the process due to uneven fragment sizes. To avoid that, we can introduce a Type I restriction site to cleave DNA downstream of transposon, and get uniform fragment sizes and therefore avoid a bias in the representation of the insertions.
 
 As we just want to identify the TA site affected by an insertion, we only need the location of the start of the reads and not a good coverage of the entire genome. Long reads are then not so important. On the other hand, a minimum transposon length of 16 bp is necessary for precise mapping on the genome {% cite Kwon2015 %}. We can therefore not use the BsmFI restriction site (11 to 12 bp) but MmeI.
 
-**In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformely,** with two specific regions used to specifically sequence the region upstream of the insertion {% cite Santiago2015 %}
+**In this tutorial, we are using mariner transposon targeting TA sequences, in ordered to target the whole genome uniformly,** with two specific regions used to specifically sequence the region upstream of the insertion {% cite Santiago2015 %}
 
 ![Structure of the transposon containing several parcodes and adapters](../../images/tnseq/tranposon_structure.png "Structure of the transposon containing several parcodes and adapters (from <a href='#Santiago2015'> Santiago <i>et al.</i> 2015</a>)")
 
@@ -86,12 +86,12 @@ The transposon inserts itself at TA site at the ITR junctions. These ITR junctio
 
 2. An insertion can sometimes be composed of one or more copies of the transposon (multimer). There is therefore a risk to select plasmid backbone sequence. To solve this problem, an additional NotI has been added in the backbone to create different length construct, that can later be filtrated. Different promoters are added with an additional 3 bp barcode to analyze differential expression impact. This type of complex analysis will be covered in a follow-up tutorial.
 
-Because of this complex tranposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several step of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.
+Because of this complex transposon structure, the reads obtained after sequencing contain a lot of adapters and foreign sequences used to insert and target the transposon. Several steps of preprocessing are then need to extract only the transposon sequence before finding its location on the genome.
 
 ## Tnseq analysis
 {:.no_toc}
 
-Once the genomic sequences are extracted from the initial reads (i.e. remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.
+Once the genomic sequences are extracted from the initial reads (*i.e.* remove non genomic sequences from the reads), they need to be located each on the genome to link them to a TA site and genes. To do that we map them to a reference genome, link them to a specific insertion site, and then count the number of insertion for each TA site and identify essential genes of regions.
 
 We will apply this approach in this tutorial using a subset of TnSeq reads from {% cite Santiago2015 %}.
 
@@ -221,7 +221,7 @@ We would like now to split our Tnseq reads in `Tnseq-Tutorial-reads` given the b
 
 ## Remove Adapter sequence
 
-Our reads are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (`CGTTATGGCACGC`, here). To do so, we emove the adapter and everything downstream, using the end adapter option of **Cutadapt** and not anchor the sequence anywhere. To eliminate reads that might not have been trimmed because of too many mismatches or other reasons, we filter the reads by size, given the known approximate size of the remaining sequences (**how is it computed??**).
+Our reads are now divided by condition. We need to trim their tail containing the Illumina adapters, used for initiating the sequencing (`CGTTATGGCACGC`, here). To do so, we remove the adapter and everything downstream, using the end adapter option of **Cutadapt** and not anchor the sequence anywhere. To eliminate reads that might not have been trimmed because of too many mismatches or other reasons, we filter the reads by size, given the known approximate size of the remaining sequences (**how is it computed??**).
 
 > ### {% icon hands_on %} Hands-on: Remove Adapter with Cutadapt
 >
@@ -290,7 +290,7 @@ The constructs used in this experiment contain different strengths and direction
 >
 >    > ### {% icon question %} Questions
 >    >
->    > What does the `$` mean in the barcode sequence file ?
+>    > What does the `$` mean in the barcode sequence file?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > It means the barcode is anchored at the end of the reads.
@@ -318,7 +318,7 @@ The constructs used in this experiment contain different strengths and direction
 >
 >    > ### {% icon question %} Questions
 >    >
->    > Are the reads equally divided between constructs ?
+>    > Are the reads equally divided between constructs?
 >    >
 >    > > ### {% icon solution %} Solution
 >    > > When you look at the reports, you can see that most of the reads have been assigned to the *blunt* construct (`TAC` barcode): the blunt construct is the control and does not contain any promoters. This means that there is less negative selective pressure on blunt than the other ones, that have affected flanking region in addition to the disrupted gene at the insertion site. This won't be a problem here as the tool we use for the essentiality prediction consider the sum of reads in the replicates.
@@ -374,19 +374,16 @@ To identify the location of each TA site to the count them, the first step is to
 >      - *"Bowtie settings to use"*: `Full parameters list`
 >      - *"Skip the first n reads (-s)"*: `0`
 >      - *"Maximum number of mismatches permitted in the seed (-n)"*: `0`
->
->            > ### {% icon question %} Questions
->            >
->            > Why are we strictly enforcing no mismatch mapping?
->            >
->            > > ### {% icon solution %} Solution
->            > > Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
->            > {: .solution }
->            {: .question}
->
 >      - *"Seed length (-l)"*: `17`
->      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
 >      - *"Whether or not to make Bowtie guarantee that reported singleton alignments are 'best' in terms of stratum and in terms of the quality values at the mismatched positions (--best)"*: `Use best`
+>      - *"Whether or not to try as hard as possible to find valid alignments when they exist (-y)"* : `Try Hard`
+>
+>    > ### {% icon question %} Questions
+>    > Why are we strictly enforcing no mismatch mapping?
+>    > > ### {% icon solution %} Solution
+>    > > Our reads being very short, the smallest size needs precise mapping, allowing even one mismatch would risk having reads mapping in wrong positions.
+>    > {: .solution }
+>    {: .question}
 >
 > 2. Rename your collection for better clarity
 >
@@ -396,7 +393,7 @@ To identify the location of each TA site to the count them, the first step is to
 
 ## Compute coverage of the genome
 
-We have now our reads mapped on the reference genome. We can compute the genome coverage, i.e. how much the nucleotides of the genome are covered by reads. This information will be later crossed with our TA sites position.
+We have now our reads mapped on the reference genome. We can compute the genome coverage, *i.e.* how much the nucleotides of the genome are covered by reads. This information will be later crossed with our TA sites position.
 
 In our case, the sequenced reads cover the  5' region flanking region of the TA site where the transposon inserted. We should not then extract the coverage across the whole reads, as it could cover several TA sites, but only the coverage at the 3' end of the read:
 
@@ -459,7 +456,7 @@ The only information we need here are the positions of the 5' end of each TA sit
 >
 > 3. **Compute an expression on every row** {% icon tool %} to shift the end position of TA sites  by 1 and get the start of the TA site on the reverse strand with:
 >    - *Add expression"*: `c2-1`
->    - {% icon param-files %} *"as a new column to"*: output of **cut**
+>    - {% icon param-file %} *"as a new column to"*: output of **cut**
 >    - *"Round result?"*: `yes`
 >
 >
@@ -479,7 +476,7 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 
 > ### {% icon hands_on %} Hands-on:  Get coverage of TA sites
 >
-> 1. **Join two file** {% icon tool %} with:
+> 1. **Join two files** {% icon tool %} with:
 >    - {% icon param-collection %} *1st file"*: output of **bamCoverage**
 >    - *"Column to use from 1st file"*: `Column 2` (to select the position of the end of the read)
 >    - {% icon param-file %} *"2nd File"*: output of last **cut** with the `forward` tags
@@ -495,14 +492,14 @@ We have now 2 files containing the coordinates of our TA sites for both strands.
 > 3. **Cut columns from a table** {% icon tool %} with:
 >    - Cut columns : `c1,c4`
 >    - *"Delimited by"*: `tab`
->    - {% icon param-file %} *"From"*: output of**Join two file** with the `forward` tag
+>    - {% icon param-file %} *"From"*: output of**Join two files** with the `forward` tag
 >
 >
 > 5. Repeat the same steps for `reverse`
 >
 {: .hands_on}
 
-We now have a read count for each nucleotide at the different TA sites. The insertions on the forward strand files are in a different direction than those on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We can then combinte the forward and reverse counts together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide, by shifting by one position the count on the reverse strand.
+We now have a read count for each nucleotide at the different TA sites. The insertions on the forward strand files are in a different direction than those on the reverse strand file. In our case, we are only interested in studying the gene disruption, and therefore we do not want to consider the directions separately. We can then combine the forward and reverse counts together to get a total count per TA site. In order to do that we need to assign the count of both strand to the same nucleotide, by shifting by one position the count on the reverse strand.
 
 > ### {% icon hands_on %} Hands-on: Get total count per TA site
 >
@@ -560,14 +557,14 @@ We now have a read count for each nucleotide at the different TA sites. The inse
 >
 > Take a look at the output files:
 >
-> 1. What are the data contained in the two columns ?
-> 2. What do the 5 first lines of the blunt sample in the treatment with the condition look like ?
+> 1. What are the data contained in the two columns?
+> 2. What do the 5 first lines of the blunt sample in the treatment with the condition look like?
 >
 > > ### {% icon solution %} Solution
-> > 1. The first column contain the position of the TA site, and the second collumn the number of insertions observed.
+> > 1. The first column contain the position of the TA site, and the second column the number of insertions observed.
 > > 2. Your five first lines should look like this :
-> >     - One collumn with the positions : `4,10,16,42,79`
-> >     - One collumn with the number of insertions : `0,3,20,0,11`
+> >     - One column with the positions : `4,10,16,42,79`
+> >     - One column with the number of insertions : `0,3,20,0,11`
 > >
 > > If your counts are only zeros in one of the blunt sample, you might have made a mistake in merging the counts to the TA sites.
 > >
@@ -577,7 +574,7 @@ We now have a read count for each nucleotide at the different TA sites. The inse
 
 # Predicting Essential Genes with Transit
 
-Now that we have the counts of insertions per TA site, we can use them to predict gene esssentiality. Several methods exist to identify essential genes of regions. They can be divided in two major categories:
+Now that we have the counts of insertions per TA site, we can use them to predict gene essentiality. Several methods exist to identify essential genes of regions. They can be divided in two major categories:
 
 ![Different types of TnSeq Analyses](../../images/tnseq/type_of_analyses.png "Methods of TnSeq Analyses (from <a href='#Chao2016'> Chao <i>et al.</i> 2016</a>)")
 
@@ -592,7 +589,7 @@ Now that we have the counts of insertions per TA site, we can use them to predic
 To predict the essential genes in our datasets, we will use the Transit tool {% cite dejesus2015transit %}.
 
 ## Transit
-Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 tranposon. In total, 3 methods are available to assess gene essentiality in one sample.
+Transit is a software that can be used to analyse TnSeq Data. It is compatible with Mariner and Tn5 transposon. In total, 3 methods are available to assess gene essentiality in one sample.
 
 #### Gumbel method
 
@@ -612,7 +609,7 @@ This method require a well-saturated library and is sensitive to sparse datasets
 
 #### Tn5Gaps method
 
-The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method {% cite griffin2011high %} and adapted to Tn5 transposon specificities.  The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
+The Tn5Gaps method is a method dedicated to the identification of essential genes in studies using Tn5 transposons. The analysis is performed on the whole genome to identify regions of non insertion overlapping with genes. It is based on a Gumbel analysis method {% cite griffin2011high %} and adapted to Tn5 transposon specificity. The main difference comes from the fact that Tn5 transposon can insert everywhere, thus
 creating libraries with lower insertion rates. The difference from the Gumbel method described above is that the run of non insertion are computer on the whole genome instead of individual genes. The longest run of non insertion considered is not the longest within the gene, but the longest one overlapping the gene.
 
 
@@ -624,13 +621,13 @@ In our case, we will use the Gumbel method, because we are using Mariner data an
 In order to use transit, we need to create a an annotation file in the `prot_table` format, specific to the Transit tool. It can be created this file from a GFF3 from GenBank like the one we uploaded earlier.
 
 > ### {% icon hands_on %} Hands-on : Create annotation file in prot_table format
-> 1. Check that the format of `staph_aur.gff` file is `gff3` and not `gff`
+> 1. Check that the format of `staph_aur.gff3` file is `gff3` and not `gff`
 > 2. Change the datatype if needed
 >
->    {% include snippets/change_datatype.md %}
+>    {% include snippets/change_datatype.md datatype="gff3" %}
 >
 > 3. **Convert GFF3 to prot_table for TRANSIT** {% icon tool %} with:
->    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gf` file
+>    - {% icon param-file %} *GenBank GFF file"*: the `staph_aur.gff3` file
 >
 {: .hands_on}
 
@@ -647,8 +644,8 @@ Now that we have prepared the annotation file, we can use the count per TA site 
 >      - {% icon param-collection %} *"Input .wig files"*: output of the latest **Sort**
 >    - {% icon param-file %} *"Input annotation"*: output of the latest **Convert**
 >    - *"Smallest read-count to consider"*: `2` (to ignore single count insertions)
->    - *"Ignore TAs occuring at given fraction of the N terminus."*: `0.1` (to ignore 10% of the insertion at the N-terminus extremity of the gene)
->    - *"Ignore TAs occuring at given fraction of the C terminus."*: `0.1` (to ignore 10% of the insertion at the C-terminus extremity of the gene)
+>    - *"Ignore TAs occurring at given fraction of the N terminus."*: `0.1` (to ignore 10% of the insertion at the N-terminus extremity of the gene)
+>    - *"Ignore TAs occurring at given fraction of the C terminus."*: `0.1` (to ignore 10% of the insertion at the C-terminus extremity of the gene)
 >
 {: .hands_on}
 
@@ -705,14 +702,14 @@ Now let's compare the results between out two conditions.
 >    - *How should a dataset be selected?"*: `Select by index`
 >      - *Element index:"*: `0` to select the first dataset
 >
-> 2. Add the `#control` tag
+> 2. Add the `#condition` tag
 >
 > 3. **Extract Dataset from a list** {% icon tool %} to extract 2nd file in the collection with:
 >    - {% icon param-collection %} *Input List"*: output of the last **Filter**
 >    - *How should a dataset be selected?"*: `Select by index`
 >      - *Element index:"*: `1` to select the second dataset
 >
-> 4. Add the `#condition` tag
+> 4. Add the `#control` tag
 {: .hands_on}
 
 We would like now to get the list of essential gene in both conditions
@@ -783,7 +780,7 @@ Once you get this list of gene, it is interesting to verify manually the genes c
 
 >    {% include snippets/view_mapping_in_IGV.md %}
 
-When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.  
+When looking at the read mapping at the location of predicted essential genes, you may encounter several situation: Some gene will have no read at all mapping to them, some will have an empty region, while other will have no clearly defined empty region but a very low count of reads, possibly indicating a growth defect induced by the gene disruption.
 
 ![Example of Essential gene with no reads mapped](../../images/tnseq/empty_gene.png "Example of Essential gene with no reads mapped")
 ![Example of Essential gene with depleted coverage](../../images/tnseq/low_coverage_gene.png "Example of Essential gene with depleted coverage")

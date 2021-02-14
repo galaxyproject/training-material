@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Writing content in Markdown"
+title: "Creating content in Markdown"
 questions:
   - "How to write a tutorial with hands-on?"
   - "What are the different boxes?"
@@ -13,11 +13,12 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
+subtopic: writing
 contributors:
   - bebatut
   - bgruening
   - shiltemann
-  - erasche
+  - hexylena
 ---
 
 # Introduction
@@ -108,9 +109,9 @@ The `tutorial.md` needs to start with some metadata at the top:
 >
 {: .hands_on}
 
-This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+This information is used to display the data from the topic and tutorial page. They are also used to check which information is missing for the tutorials.
 
-We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
+We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
 - `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
     - `type`: the type of link (`internal` or `external`)
@@ -144,7 +145,7 @@ We also define metadata related to the pedagogical content of the tutorial, whic
     - `title`: title of the external resource
     - `link`: URL to the external resource
 
-    They will be displayed at the end of a tutorial.
+    They will be displayed at the end of the tutorial.
 - `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
@@ -178,15 +179,16 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 > ### {% icon hands_on %} Hands-on: Create the structure of the tutorial from a workflow
 >
 > 1. Create a small workflow with one or two steps on a running Galaxy instance
-> 2. Get the workflow id
+> 2. Add the topic name as Tag and the tutorial title as Annotation/Notes to the workflow using the workflow editor.
+> 3. Get the workflow id
 >    1. Go the "Share" page of the workflow
 >    2. Copy the information after `id=` in the URL of the page
-> 3. Get your API key for this Galaxy instance
+> 4. Get your API key for this Galaxy instance
 >    1. Click on **User** --> **Preferences**
 >    2. Click on **Manage API key**
 >    3. Click on **Create a new key** (if none is available)
 >    4. Copy the API key
-> 4. Generate the skeleton of the tutorial locally
+> 5. Generate the skeleton of the tutorial locally
 >
 >    ```
 >    $ planemo training_generate_from_wf \
@@ -198,7 +200,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >             --zenodo_link "URL to the Zenodo record (Optional)"
 >    ```
 >
->    > ### {% icon comment %} Using a local worklfow
+>    > ### {% icon comment %} Using a local workflow
 >    > It is also possible to download the workflow locally (with the `.ga` extension), and then run a slightly different command:
 >    >
 >    > ```
@@ -210,7 +212,7 @@ To help developing the tutorial, we recommend to create a workflow of the differ
 >    > ```
 >    {: .comment}
 >
-> 5. Inspect the generated `tutorial.md`
+> 6. Inspect the generated `tutorial.md`
 {: .hands_on}
 
 The generated tutorial is structured with:
@@ -243,6 +245,21 @@ The prefix "Figure 1." is automatically added before its caption. This is done w
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
+### Guidelines on Alt vs Figcaption Text
+
+> While both the alt attribute and the figcaption element provide a way to
+> describe images, the way we write for them is different. **`alt` descriptions
+> should be functional; `figcaption` descriptions should be editorial or
+> illustrative.**
+>
+> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
+{: .blockquote}
+
+As an example:
+
+```markdown
+![Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
+```
 
 ## Writing mathematical expressions
 
@@ -334,11 +351,11 @@ This box at the top of each tutorial is automatically generated using the metada
 > **{% icon objectives %} Objectives**
 > - The learning objectives are the goals of the tutorial
 > - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course
-> - They are single sentences describing what a learner should be able to do once they have done completed tutorial
+> - They are single sentences describing what a learner should be able to do once they have completed the tutorial
 > - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements
-> - [Galaxy introduction]({{ site.baseurl }}{% link topics/introduction/index.md %})
+> - [Galaxy introduction]({% link topics/introduction/index.md %})
 >
 > {% icon time %} Time estimation: '1H'
 >
@@ -410,7 +427,7 @@ We find that having users walk through the tutorial, doing all of the steps is i
 >
 >        This parameter should be length of reads - 1
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}: Aggregate the STAR logs with
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
@@ -442,7 +459,7 @@ This will be rendered like:
 >
 >        This parameter should be length of reads - 1
 >
-> 2. **MultiQC** {% icon tool %}: Aggregate the STAR logs with
+> 2. {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}: Aggregate the STAR logs with
 >      - *"Which tool was used generate logs?"*: `STAR`
 >      - *"Type of FastQC output?"*: `Log`
 >      - *"STAR log output"*: the generated `log` files (multiple datasets)
@@ -483,6 +500,45 @@ which, when rendered, look like:
 >      - *"param1"*: `42`
 {: .hands_on}
 
+## Tool Links
+
+With the new [GTN in Galaxy Webhook](https://github.com/galaxyproject/galaxy/pull/10024), trainees can view training directly within Galaxy. As part of this, we enable those trainees to click on tools, and have those tools directly activated in Galaxy, enabling for a seamless training experience for trainees.
+
+![GIF of a user using the GTN in Galaxy webhook.](../../images/88277962-ddda4a80-cce1-11ea-92cd-41b1df063db0.gif "A gif showing how the GTN in Galaxy webhook works. A student clicks the learning hat icon in the masthead of a Galaxy server, and an overlay is activated showing the GTN website. Within the GTN they can browse around and their place in tutorials is saved. While following a tutorial the student reches a step which instructs them to run a specific tool. Instead of the normal experience searching for a tool (quite difficult on large servers), they click a blue button and the tool is activated in Galaxy, and the overlay is closed. The student can reactivate the overlay at any time and return to their place in the tutorial.")
+
+To enable these in your tutorial you can use the following syntax:
+
+{% raw %}
+```
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+```
+{% endraw %}
+
+Which will be rendered as:
+
+- {% tool MultiQC %}
+- {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy0) %}
+- {% tool [Import some data](upload1) %}
+
+When viewed through Galaxy, students will see:
+
+<span data-tool="upload1" title="Tested with upload1" class="tool galaxy-proxy-active"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
+
+### How to find these IDs?
+
+The easiest way is to use planemo to generate the training from a workflow. In recent versions of planemo, this is managed automatically.
+
+The alternative is to figure out the ID for the tool you want to use:
+
+1. Find your tool in Galaxy, and click to access the tool form.
+2. Click on Options at the top right
+3. Click on Share
+4. The URL shown will be something like `https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1`
+5. Keep only the part after the `=`, so `toolshed.g2.bx.psu.edu/repos/galaxyp/mz_to_sqlite/mz_to_sqlite/2.0.4+galaxy1` in this example
+
+![Finding the tool ID](../../images/tool-id.png)
 
 ## **Questions** and **solution** boxes
 
@@ -643,6 +699,96 @@ Boxes can be nested, *e.g.* for having tips inside a hands-on:
 ```
 {% endraw %}
 
+## **Code** box
+
+We have added code in/out boxes to help you show commands, and their effects, when running command line commands.
+
+Normally a single column, with the boxes above one another, it will automatically split side-by-side over a given width (1200px);
+
+{% raw %}
+```markdown
+> > ### {% icon code-in %} Input: Bash
+> > ```bash
+> > cat /tmp/test.ini
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > The file should look like:
+> >
+> > ```ini
+> > [example]
+> > server_name = Dogs!
+> > listen = 192.168.0.2
+> > apikey = super-secret-api-key-wow!
+> > ```
+> {: .code-out}
+{: .code-2col}
+```
+{% endraw %}
+
+Rendered (try it! resize your browser)
+
+> > ### {% icon code-in %} Input: Bash
+> > ```bash
+> > cat /tmp/test.ini
+> > ```
+> {: .code-in}
+>
+> > ### {% icon code-out %} Output
+> > The file should look like:
+> >
+> > ```ini
+> > [example]
+> > server_name = Dogs!
+> > listen = 192.168.0.2
+> > apikey = super-secret-api-key-wow!
+> > ```
+> {: .code-out}
+{: .code-2col}
+
+If you leave off the `{: .code-2col}`, it will render as a single column always.
+
+{% raw %}
+```markdown
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> cat /tmp/test.ini
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> The file should look like:
+>
+> ```ini
+> [example]
+> server_name = Dogs!
+> listen = 192.168.0.2
+> apikey = super-secret-api-key-wow!
+> ```
+{: .code-out}
+```
+{% endraw %}
+
+Rendered:
+
+> ### {% icon code-in %} Input: Bash
+> ```bash
+> cat /tmp/test.ini
+> ```
+{: .code-in}
+
+> ### {% icon code-out %} Output
+> The file should look like:
+>
+> ```ini
+> [example]
+> server_name = Dogs!
+> listen = 192.168.0.2
+> apikey = super-secret-api-key-wow!
+> ```
+{: .code-out}
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 
@@ -687,6 +833,7 @@ A bibliography will automatically be appended to the end of your tutorial (scrol
 > ### {% icon tip %} Tip: Getting a bibtex citation from a doi
 > If you have a DOI for a paper, you can easily obtain the bibtex citation using [doi2bib.org](https://www.doi2bib.org/).
 {: .tip}
+
 
 # Conclusion
 {:.no_toc}

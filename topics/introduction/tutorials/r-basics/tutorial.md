@@ -2,20 +2,21 @@
 layout: tutorial_hands_on
 
 title: R basics in Galaxy
+level: Introductory
 zenodo_link: ""
-enable: false
 requirements:
   -
     type: "internal"
-    topic_name: galaxy-ui
+    topic_name: galaxy-interface
     tutorials:
         - rstudio
 follow_up_training:
-  -
-    type: "internal"
-    topic_name: transcriptomics
-    tutorials:
-        - rna-seq-counts-to-viz-in-r
+-
+  type: "internal"
+  topic_name: introduction
+  tutorials:
+      - r-advanced
+
 questions:
 - What are the basic features and objects of the R language?
 objectives:
@@ -25,6 +26,7 @@ objectives:
 time_estimation: 3H
 key_points:
 - It is important to understand how data are organised by R in a given object type (e.g. numeric, character, logical, etc.) and how the mode of that type determines how R will operate on that data.
+subtopic: r
 contributors:
   - bebatut
   - fpsom
@@ -49,7 +51,9 @@ contributors:
 >
 {: .agenda}
 
-{% include topics/introduction/tutorials/r-basics/start_rstudio.md %}
+Before diving in the tutorial, we need to open RStudio. If you do not know how or never interacted with RStudio, please follow the [dedicated tutorial]({% link topics/galaxy-interface/tutorials/rstudio/tutorial.md %}).
+
+{% include snippets/launch_rstudio.md %}
 
 # Creating objects in R
 
@@ -804,10 +808,10 @@ Let's summarize this section on coercion with a few take home messages:
 
 # Lists
 
-Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode. 
+Lists are quite useful in R. You may come across lists in the way that some bioinformatics programs may store and/or return data to you. One of the key attributes of a list is that, unlike a vector, a list may contain data of more than one mode.
 
 > ### {% icon comment %} Learning more about lists
-> Learn more about creating and using lists using this [nice tutorial](http://r4ds.had.co.nz/lists.html). In this one example, we will create a named list and show you how to retrieve items from the list.
+> Learn more about creating and using lists using this [nice tutorial](https://r4ds.had.co.nz/vectors.html#lists). In this one example, we will create a named list and show you how to retrieve items from the list.
 {: .comment}
 
 > ### {% icon hands_on %} Hands-on: Create and manipulate list objects
@@ -856,4 +860,4 @@ Lists are quite useful in R. You may come across lists in the way that some bioi
 # Conclusion
 {:.no_toc}
 
-This tutorial 
+This tutorial

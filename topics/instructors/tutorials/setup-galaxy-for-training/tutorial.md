@@ -31,7 +31,9 @@ Tutorials in this repository are all supplemented with files describing the tech
   - `workflows` folder: contains one or more workflows with all steps in the tutorial
   - `tours` folder: contains one or more yaml files describing interactive tours
 
-> For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({{ site.baseurl }}{% link topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md %}).
+> ### {% icon comment %} Requirements
+> For more information about how to create these files, please see our module on [specifying the technical requirements for your tutorial]({% link topics/contributing/tutorials/create-new-tutorial-technical/tutorial.md %}).
+{: .comment}
 
 For just the list of Ephemeris commands needed for installation, skip to the [Quickstart section](#quickstart) at the end of this tutorial.
 
@@ -125,9 +127,9 @@ To install to training requirements to our Galaxy, we will use Ephemeris, let's 
 
 # Installing tutorial requirements
 
-We have created a small bash script to automatically install all of a tutorial's requirements to an existing Galaxy. It's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/bin/install_tutorial_requirements.sh)
+We have created a small bash script to automatically install all of a tutorial's requirements to an existing Galaxy. It's located in this repository under: [`bin/install_tutorial_requirements.sh`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/bin/install_tutorial_requirements.sh)
 
-In this example we will install the requirements for the [*Reference-based RNASeq*]({{ site.baseurl }}{% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial to the Galaxy instance running on localhost.
+In this example we will install the requirements for the [*Reference-based RNASeq*]({% link topics/transcriptomics/tutorials/ref-based/tutorial.md %}) tutorial to the Galaxy instance running on localhost.
 
 
 > ### {% icon hands_on %} Hands-on: Install a tutorial
@@ -164,7 +166,7 @@ The only thing the script cannot currently automate is the installation of the i
 
 ### Installing an entire topic
 
-If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github.repository_url }}/tree/{{ site.repository_branch }}/bin/install_topic_requirements.sh)
+If you would like to install all the requirements for every tutorial within an entire topic, you can use the script in [`bin/install_topic_requirements.sh`]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/bin/install_topic_requirements.sh)
 
 
 ### Installing a subset of components
@@ -207,6 +209,8 @@ workflow-install --publish-workflows -g <Galaxy URL> -a <API key> -w topics/<top
 # install tours
 copy the contents of the "tours" directory for the tutorial to Galaxy's "config/plugins/tours/"
 ```
+
+When data libraries are created, depending on the server settings, they may be created privately. You will need to fix their permissions either through the UI or the API if you have many datasets. UseGalaxy.eu uses [a script](https://github.com/usegalaxy-eu/shared-data/blob/fb9b4ed069dcd59a39b40e9c7ea08a068d8a9df2/run.sh) to correct the permissions.
 
 # Conclusion
 {:.no_toc}

@@ -1,6 +1,6 @@
 |Gitter|Build|Links|
 |------|-----|-----|
-|[![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |[![Build Status](https://travis-ci.org/galaxyproject/training-material.svg?branch=master)](https://travis-ci.org/galaxyproject/training-material) | [![Deploy Status](https://travis-ci.org/galaxyproject/training-material.svg?branch=gh-pages)](https://travis-ci.org/galaxyproject/training-material)|
+|[![Gitter](https://badges.gitter.im/Galaxy-Training-Network/training-material.svg)](https://gitter.im/Galaxy-Training-Network/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) |[![Build Status](https://travis-ci.com/galaxyproject/training-material.svg?branch=master)](https://travis-ci.com/galaxyproject/training-material) | [![Deploy Status](https://travis-ci.com/galaxyproject/training-material.svg?branch=gh-pages)](https://travis-ci.com/galaxyproject/training-material)|
 
 
 Galaxy training material
@@ -18,7 +18,9 @@ If you want to build the website locally, please have a look at the [tutorial](h
 
 # License
 
-This work is licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0).
+The content of the tutorials and website are licensed under the [Creative Commons Attribution 4.0 International License](https://creativecommons.org/licenses/by/4.0).
+
+The code behind the infrastructure is licensed under the [MIT License](LICENSE.md)
 
 # Acknowledgment and Funding
 

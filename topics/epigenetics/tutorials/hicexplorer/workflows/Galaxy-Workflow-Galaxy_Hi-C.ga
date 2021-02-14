@@ -1,709 +1,711 @@
 {
-    "a_galaxy_workflow": "true", 
-    "annotation": "", 
-    "format-version": "0.1", 
-    "name": "Galaxy-Workflow-Galaxy_Hi-C (imported from uploaded file)", 
-    "steps": {
-        "0": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 0, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "R1.fastq"
-                }
-            ], 
-            "label": "R1.fastq", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 200, 
-                "top": 200
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"R1.fastq\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "84ea88a5-b0ba-40a3-aa2b-ee04c8b6b846", 
-            "workflow_outputs": []
-        }, 
-        "1": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 1, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "R2.fastq"
-                }
-            ], 
-            "label": "R2.fastq", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 200, 
-                "top": 285
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"R2.fastq\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "fc96cbcd-e768-49a2-9789-5ade13b2f10a", 
-            "workflow_outputs": []
-        }, 
-        "2": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 2, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "H3K27me3.bw"
-                }
-            ], 
-            "label": "H3K27me3.bw", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 200, 
-                "top": 370
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"H3K27me3.bw\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "3c23945d-8ea6-4b47-89e0-5c9fa835fe51", 
-            "workflow_outputs": []
-        }, 
-        "3": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 3, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "H3K36me3.bw"
-                }
-            ], 
-            "label": "H3K36me3.bw", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 200, 
-                "top": 455
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"H3K36me3.bw\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "83c2f87b-b7f7-4888-a706-7e4dc3d5a395", 
-            "workflow_outputs": []
-        }, 
-        "4": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 4, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "H4K16ac.bw"
-                }
-            ], 
-            "label": "H4K16ac.bw", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 200, 
-                "top": 540
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"H4K16ac.bw\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "b206bc1f-6c56-4aa9-a8a7-1a7f7f583943", 
-            "workflow_outputs": []
-        }, 
-        "5": {
-            "annotation": "", 
-            "content_id": null, 
-            "errors": null, 
-            "id": 5, 
-            "input_connections": {}, 
-            "inputs": [
-                {
-                    "description": "", 
-                    "name": "dm3_genes.bed"
-                }
-            ], 
-            "label": "dm3_genes.bed", 
-            "name": "Input dataset", 
-            "outputs": [], 
-            "position": {
-                "left": 200, 
-                "top": 625
-            }, 
-            "tool_id": null, 
-            "tool_state": "{\"name\": \"dm3_genes.bed\"}", 
-            "tool_version": null, 
-            "type": "data_input", 
-            "uuid": "cb4f872d-8441-4f47-bb1c-a72a41a9979e", 
-            "workflow_outputs": []
-        }, 
-        "6": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0", 
-            "errors": null, 
-            "id": 6, 
-            "input_connections": {
-                "paired|fastq": {
-                    "id": 0, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Map with BWA-MEM", 
-                    "name": "paired"
-                }
-            ], 
-            "label": null, 
-            "name": "Map with BWA-MEM", 
-            "outputs": [
-                {
-                    "name": "output", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 431, 
-                "top": 313
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "ebb02ba5987c", 
-                "name": "bwa_mem", 
-                "owner": "crs4", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"genomeSource\": \"{\\\"indices\\\": \\\"dm3\\\", \\\"refGenomeSource\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"paired\": \"{\\\"interPairEnd\\\": \\\"false\\\", \\\"fastq\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0}\", \"params\": \"{\\\"minEditDistSeed\\\": \\\"19\\\", \\\"seqMatch\\\": \\\"1\\\", \\\"clipping\\\": \\\"0\\\", \\\"offDiagonal\\\": \\\"100\\\", \\\"seedsOccurrence\\\": \\\"10000\\\", \\\"minScore\\\": \\\"30\\\", \\\"gapOpen\\\": \\\"6\\\", \\\"mismatch\\\": \\\"4\\\", \\\"outputAll\\\": \\\"false\\\", \\\"unpairedReadpair\\\": \\\"17\\\", \\\"gapExtension\\\": \\\"50\\\", \\\"skipPairing\\\": \\\"false\\\", \\\"bandWidth\\\": \\\"100\\\", \\\"readGroup\\\": {\\\"__current_case__\\\": 1, \\\"specReadGroup\\\": \\\"no\\\"}, \\\"mateRescue\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"mark\\\": \\\"false\\\", \\\"internalSeeds\\\": \\\"1.5\\\", \\\"source_select\\\": \\\"full\\\"}\", \"suppressHeader\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "0.8.0", 
-            "type": "tool", 
-            "uuid": "e7bece23-abf2-4a86-a66a-3821d77fab7f", 
-            "workflow_outputs": []
-        }, 
-        "7": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0", 
-            "errors": null, 
-            "id": 7, 
-            "input_connections": {
-                "paired|fastq": {
-                    "id": 1, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool Map with BWA-MEM", 
-                    "name": "paired"
-                }
-            ], 
-            "label": null, 
-            "name": "Map with BWA-MEM", 
-            "outputs": [
-                {
-                    "name": "output", 
-                    "type": "sam"
-                }
-            ], 
-            "position": {
-                "left": 431, 
-                "top": 200
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "ebb02ba5987c", 
-                "name": "bwa_mem", 
-                "owner": "crs4", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"genomeSource\": \"{\\\"indices\\\": \\\"dm3\\\", \\\"refGenomeSource\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"paired\": \"{\\\"interPairEnd\\\": \\\"false\\\", \\\"fastq\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0}\", \"params\": \"{\\\"minEditDistSeed\\\": \\\"19\\\", \\\"seqMatch\\\": \\\"1\\\", \\\"clipping\\\": \\\"0\\\", \\\"offDiagonal\\\": \\\"100\\\", \\\"seedsOccurrence\\\": \\\"10000\\\", \\\"minScore\\\": \\\"30\\\", \\\"gapOpen\\\": \\\"6\\\", \\\"mismatch\\\": \\\"4\\\", \\\"outputAll\\\": \\\"false\\\", \\\"unpairedReadpair\\\": \\\"17\\\", \\\"gapExtension\\\": \\\"50\\\", \\\"skipPairing\\\": \\\"false\\\", \\\"bandWidth\\\": \\\"100\\\", \\\"readGroup\\\": {\\\"__current_case__\\\": 1, \\\"specReadGroup\\\": \\\"no\\\"}, \\\"mateRescue\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"mark\\\": \\\"false\\\", \\\"internalSeeds\\\": \\\"1.5\\\", \\\"source_select\\\": \\\"full\\\"}\", \"suppressHeader\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}", 
-            "tool_version": "0.8.0", 
-            "type": "tool", 
-            "uuid": "a23d5337-4446-461f-aa77-e80834fd091f", 
-            "workflow_outputs": []
-        }, 
-        "8": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicbuildmatrix/hicexplorer_hicbuildmatrix/2.1.0", 
-            "errors": null, 
-            "id": 8, 
-            "input_connections": {
-                "samFiles_0|samFile": {
-                    "id": 7, 
-                    "output_name": "output"
-                }, 
-                "samFiles_1|samFile": {
-                    "id": 6, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "hicBuildMatrix", 
-            "outputs": [
-                {
-                    "name": "outBam", 
-                    "type": "bam"
-                }, 
-                {
-                    "name": "outFileName", 
-                    "type": "h5"
-                }, 
-                {
-                    "name": "qc", 
-                    "type": "html"
-                }, 
-                {
-                    "name": "raw_qc", 
-                    "type": "txt"
-                }
-            ], 
-            "position": {
-                "left": 696, 
-                "top": 200
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicbuildmatrix/hicexplorer_hicbuildmatrix/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "707f691c974c", 
-                "name": "hicexplorer_hicbuildmatrix", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"outputFormat\": \"\\\"h5\\\"\", \"restrictionSequence\": \"\\\"GATC\\\"\", \"minMappingQuality\": \"\\\"\\\"\", \"region\": \"\\\"\\\"\", \"restrictionCutFileBinSize_conditional\": \"{\\\"__current_case__\\\": 1, \\\"restrictionCutFileBinSize_selector\\\": \\\"optionBinSize\\\", \\\"binSize\\\": \\\"10000\\\"}\", \"samFiles\": \"[{\\\"__index__\\\": 0, \\\"samFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"samFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"danglingSequence\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"keepSelfCircles\": \"\\\"false\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "b060f1c0-8287-4238-84dc-be30632b7ad8", 
-            "workflow_outputs": []
-        }, 
-        "9": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/2.1.0", 
-            "errors": null, 
-            "id": 9, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 8, 
-                    "output_name": "outFileName"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicMergeMatrixBins", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicMergeMatrixBins", 
-            "outputs": [
-                {
-                    "name": "outFileName", 
-                    "type": "h5"
-                }
-            ], 
-            "position": {
-                "left": 996, 
-                "top": 200
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "8926550196ce", 
-                "name": "hicexplorer_hicmergematrixbins", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"outputFormat\": \"\\\"h5\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"numBins\": \"\\\"100\\\"\", \"runningWindow\": \"\\\"false\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "73cc4116-4a5f-4f15-bdd3-2b7e5bbcac0b", 
-            "workflow_outputs": []
-        }, 
-        "10": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0", 
-            "errors": null, 
-            "id": 10, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 8, 
-                    "output_name": "outFileName"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicCorrectMatrix", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicCorrectMatrix", 
-            "outputs": [
-                {
-                    "name": "outFileName", 
-                    "type": "h5"
-                }, 
-                {
-                    "name": "diagnostic_plot", 
-                    "type": "png"
-                }
-            ], 
-            "position": {
-                "left": 996, 
-                "top": 313
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "f7d344dacfeb", 
-                "name": "hicexplorer_hiccorrectmatrix", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"chromosomes\": \"[{\\\"__index__\\\": 0, \\\"chromosome\\\": \\\"chr2L\\\"}, {\\\"__index__\\\": 1, \\\"chromosome\\\": \\\"chr2R\\\"}, {\\\"__index__\\\": 2, \\\"chromosome\\\": \\\"chr3L\\\"}, {\\\"__index__\\\": 3, \\\"chromosome\\\": \\\"chr3R\\\"}, {\\\"__index__\\\": 4, \\\"chromosome\\\": \\\"chrX\\\"}]\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"mode\": \"{\\\"xMax\\\": \\\"\\\", \\\"__current_case__\\\": 0, \\\"mode_selector\\\": \\\"diagnostic_plot\\\"}\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "b4747fdb-8286-4180-8f5a-52819c1a6e0b", 
-            "workflow_outputs": []
-        }, 
-        "11": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0", 
-            "errors": null, 
-            "id": 11, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 8, 
-                    "output_name": "outFileName"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicCorrectMatrix", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicCorrectMatrix", 
-            "outputs": [
-                {
-                    "name": "outFileName", 
-                    "type": "h5"
-                }, 
-                {
-                    "name": "diagnostic_plot", 
-                    "type": "png"
-                }
-            ], 
-            "position": {
-                "left": 996, 
-                "top": 453
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "f7d344dacfeb", 
-                "name": "hicexplorer_hiccorrectmatrix", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"chromosomes\": \"[{\\\"__index__\\\": 0, \\\"chromosome\\\": \\\"chr2L\\\"}, {\\\"__index__\\\": 1, \\\"chromosome\\\": \\\"chr2R\\\"}, {\\\"__index__\\\": 2, \\\"chromosome\\\": \\\"chr3L\\\"}, {\\\"__index__\\\": 3, \\\"chromosome\\\": \\\"chr3R\\\"}, {\\\"__index__\\\": 4, \\\"chromosome\\\": \\\"chrX\\\"}]\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"mode\": \"{\\\"outputFormat\\\": \\\"h5\\\", \\\"__current_case__\\\": 1, \\\"mode_selector\\\": \\\"correct\\\", \\\"filterThreshold_low\\\": \\\"-1.6\\\", \\\"sequencedCountCutoff\\\": \\\"\\\", \\\"filterThreshold_large\\\": \\\"1.8\\\", \\\"transCutoff\\\": \\\"\\\", \\\"perchr\\\": \\\"true\\\", \\\"skipDiagonal\\\": \\\"false\\\", \\\"inflationCutoff\\\": \\\"\\\", \\\"iterNum\\\": \\\"500\\\"}\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "bc5d543d-8efa-44dd-936b-6f7640e6c099", 
-            "workflow_outputs": []
-        }, 
-        "12": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0", 
-            "errors": null, 
-            "id": 12, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 9, 
-                    "output_name": "outFileName"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicPlotMatrix", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicPlotMatrix", 
-            "outputs": [
-                {
-                    "name": "outFileName", 
-                    "type": "png"
-                }
-            ], 
-            "position": {
-                "left": 1256, 
-                "top": 200
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "d398f5373c70", 
-                "name": "hicexplorer_hicplotmatrix", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"perChromosome\": \"\\\"true\\\"\", \"__page__\": null, \"chromosomeOrder\": \"[{\\\"__index__\\\": 0, \\\"chromosome\\\": \\\"chr2L\\\"}, {\\\"__index__\\\": 1, \\\"chromosome\\\": \\\"chr2R\\\"}, {\\\"__index__\\\": 2, \\\"chromosome\\\": \\\"chr3L\\\"}, {\\\"__index__\\\": 3, \\\"chromosome\\\": \\\"chr3R\\\"}, {\\\"__index__\\\": 4, \\\"chromosome\\\": \\\"chrX\\\"}]\", \"colormap\": \"\\\"RdYlBu_r\\\"\", \"vMin\": \"\\\"\\\"\", \"title\": \"\\\"Hi-C matrix for dm3\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"scoreName\": \"\\\"\\\"\", \"image_file_format\": \"\\\"png\\\"\", \"region2\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"vMax\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"region\": \"\\\"\\\"\", \"log1p\": \"\\\"true\\\"\", \"clearMaskedBins\": \"\\\"true\\\"\", \"pca_conditional\": \"{\\\"__current_case__\\\": 0, \\\"pca_type\\\": \\\"\\\"}\", \"log\": \"\\\"false\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "c0809672-7bd7-4439-ad89-a95f8e80c882", 
-            "workflow_outputs": []
-        }, 
-        "13": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0", 
-            "errors": null, 
-            "id": 13, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 11, 
-                    "output_name": "outFileName"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicPlotMatrix", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicPlotMatrix", 
-            "outputs": [
-                {
-                    "name": "outFileName", 
-                    "type": "png"
-                }
-            ], 
-            "position": {
-                "left": 1256, 
-                "top": 313
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "d398f5373c70", 
-                "name": "hicexplorer_hicplotmatrix", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"perChromosome\": \"\\\"false\\\"\", \"__page__\": null, \"chromosomeOrder\": \"[]\", \"colormap\": \"\\\"RdYlBu_r\\\"\", \"vMin\": \"\\\"\\\"\", \"title\": \"\\\"Hi-C matrix for dm3\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"scoreName\": \"\\\"\\\"\", \"image_file_format\": \"\\\"png\\\"\", \"region2\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"vMax\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"region\": \"\\\"chr2L\\\"\", \"log1p\": \"\\\"true\\\"\", \"clearMaskedBins\": \"\\\"false\\\"\", \"pca_conditional\": \"{\\\"__current_case__\\\": 0, \\\"pca_type\\\": \\\"\\\"}\", \"log\": \"\\\"false\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "79bb433a-2935-4990-b816-40106536ff85", 
-            "workflow_outputs": []
-        }, 
-        "14": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicfindtads/hicexplorer_hicfindtads/2.1.0", 
-            "errors": null, 
-            "id": 14, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 11, 
-                    "output_name": "outFileName"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicFindTADs", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicFindTADs", 
-            "outputs": [
-                {
-                    "name": "boundaries", 
-                    "type": "bed"
-                }, 
-                {
-                    "name": "score", 
-                    "type": "bedgraph"
-                }, 
-                {
-                    "name": "domains", 
-                    "type": "bed"
-                }, 
-                {
-                    "name": "boundaries_bin", 
-                    "type": "gff"
-                }, 
-                {
-                    "name": "tad_score", 
-                    "type": "bedgraph"
-                }, 
-                {
-                    "name": "matrix_output", 
-                    "type": "h5"
-                }
-            ], 
-            "position": {
-                "left": 1256, 
-                "top": 426
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicfindtads/hicexplorer_hicfindtads/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "43332e51a712", 
-                "name": "hicexplorer_hicfindtads", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"minBoundaryDistance\": \"\\\"\\\"\", \"__page__\": null, \"minDepth\": \"\\\"30000\\\"\", \"multiple_comparison_conditional\": \"{\\\"multiple_comparison_selector\\\": \\\"fdr\\\", \\\"threshold\\\": \\\"0.05\\\", \\\"__current_case__\\\": 0}\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"step\": \"\\\"10000\\\"\", \"maxDepth\": \"\\\"100000\\\"\", \"delta\": \"\\\"0.001\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "228750c6-d64b-4127-8a95-e6f39acd4f40", 
-            "workflow_outputs": []
-        }, 
-        "15": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicpca/hicexplorer_hicpca/2.1.0", 
-            "errors": null, 
-            "id": 15, 
-            "input_connections": {
-                "matrix_h5_cooler": {
-                    "id": 14, 
-                    "output_name": "matrix_output"
-                }
-            }, 
-            "inputs": [
-                {
-                    "description": "runtime parameter for tool hicPCA", 
-                    "name": "matrix_h5_cooler"
-                }
-            ], 
-            "label": null, 
-            "name": "hicPCA", 
-            "outputs": [
-                {
-                    "name": "pca1", 
-                    "type": "bigwig"
-                }, 
-                {
-                    "name": "pca2", 
-                    "type": "bigwig"
-                }
-            ], 
-            "position": {
-                "left": 1496, 
-                "top": 200
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicpca/hicexplorer_hicpca/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "ea50f7bba657", 
-                "name": "hicexplorer_hicpca", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"outputFormat\": \"\\\"bigwig\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "475e06d4-dcbe-4881-8bd8-85f348ca9cb3", 
-            "workflow_outputs": []
-        }, 
-        "16": {
-            "annotation": "", 
-            "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplottads/hicexplorer_hicplottads/2.1.0", 
-            "errors": null, 
-            "id": 16, 
-            "input_connections": {
-                "tracks_0|track_file_style_conditional|boundaries_file": {
-                    "id": 14, 
-                    "output_name": "domains"
-                }, 
-                "tracks_0|track_file_style_conditional|matrix_h5_cooler": {
-                    "id": 11, 
-                    "output_name": "outFileName"
-                }, 
-                "tracks_1|track_file_style_conditional|track_input_bedgraph_matrix": {
-                    "id": 14, 
-                    "output_name": "tad_score"
-                }, 
-                "tracks_2|track_file_style_conditional|track_input_bigwig": {
-                    "id": 15, 
-                    "output_name": "pca1"
-                }, 
-                "tracks_3|track_file_style_conditional|track_input_bigwig": {
-                    "id": 15, 
-                    "output_name": "pca2"
-                }, 
-                "tracks_4|track_file_style_conditional|track_input_bigwig": {
-                    "id": 3, 
-                    "output_name": "output"
-                }, 
-                "tracks_5|track_file_style_conditional|track_input_bigwig": {
-                    "id": 2, 
-                    "output_name": "output"
-                }, 
-                "tracks_6|track_file_style_conditional|track_input_bigwig": {
-                    "id": 4, 
-                    "output_name": "output"
-                }, 
-                "tracks_7|track_file_style_conditional|track_input_bed": {
-                    "id": 5, 
-                    "output_name": "output"
-                }
-            }, 
-            "inputs": [], 
-            "label": null, 
-            "name": "hicPlotTADs", 
-            "outputs": [
-                {
-                    "name": "outFileName", 
-                    "type": "png"
-                }
-            ], 
-            "position": {
-                "left": 1740, 
-                "top": 200
-            }, 
-            "post_job_actions": {}, 
-            "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplottads/hicexplorer_hicplottads/2.1.0", 
-            "tool_shed_repository": {
-                "changeset_revision": "94fff1a6a899", 
-                "name": "hicexplorer_hicplottads", 
-                "owner": "bgruening", 
-                "tool_shed": "toolshed.g2.bx.psu.edu"
-            }, 
-            "tool_state": "{\"__page__\": null, \"region\": \"\\\"chr2L:14500000-16500000\\\"\", \"image_file_format\": \"\\\"png\\\"\", \"tracks\": \"[{\\\"__index__\\\": 0, \\\"track_file_style_conditional\\\": {\\\"boundaries_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type\\\": null, \\\"colormap\\\": \\\"RdYlBu_r\\\", \\\"title\\\": \\\"HiC dm3 chr2L:14500000-16500000\\\", \\\"track_file_style_selector\\\": \\\"hic_matrix_option\\\", \\\"min_value\\\": \\\"\\\", \\\"width_matrix\\\": \\\"1.5\\\", \\\"transform\\\": \\\"log1p\\\", \\\"x_labels\\\": \\\"true\\\", \\\"depth\\\": \\\"750000\\\", \\\"show_masked_bins\\\": \\\"false\\\", \\\"__current_case__\\\": 0, \\\"max_value\\\": \\\"\\\", \\\"scale_factor\\\": \\\"1.0\\\", \\\"matrix_h5_cooler\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}}, {\\\"__index__\\\": 1, \\\"track_file_style_conditional\\\": {\\\"track_input_bedgraph_matrix\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"title\\\": \\\"TAD separation score\\\", \\\"track_file_style_selector\\\": \\\"bedgraph_matrix_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"__current_case__\\\": 6, \\\"max_value\\\": \\\"\\\", \\\"width_bedgraph\\\": \\\"4.0\\\", \\\"type_lines\\\": \\\"true\\\"}}, {\\\"__index__\\\": 2, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"PC1\\\", \\\"color\\\": \\\"#ff0000\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"-0.03\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"4.0\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"0.03\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 3, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"PC2\\\", \\\"color\\\": \\\"#ffc000\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"-0.03\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"4.0\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"0.03\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 4, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"H3K36me3\\\", \\\"color\\\": \\\"#c3d69b\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"1.5\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 5, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"H3K27me3\\\", \\\"color\\\": \\\"#548dd4\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"1.5\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 6, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"H4K16ac\\\", \\\"color\\\": \\\"#e36c09\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"1.5\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 7, \\\"track_file_style_conditional\\\": {\\\"width_bed\\\": \\\"3.0\\\", \\\"global_max_row\\\": \\\"false\\\", \\\"title\\\": \\\"dm3 genes\\\", \\\"color\\\": \\\"#000000\\\", \\\"track_file_style_selector\\\": \\\"gene_track_option\\\", \\\"labels\\\": \\\"true\\\", \\\"gene_rows\\\": \\\"15\\\", \\\"fontsize\\\": \\\"\\\", \\\"__current_case__\\\": 3, \\\"track_input_bed\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type\\\": \\\"genes\\\"}}]\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"x_axis\": \"{\\\"__current_case__\\\": 1, \\\"x_axis_select\\\": \\\"no\\\"}\"}", 
-            "tool_version": "2.1.0", 
-            "type": "tool", 
-            "uuid": "85476b12-c27d-47e5-8b1c-e4ea9b7cc5b7", 
-            "workflow_outputs": []
+  "a_galaxy_workflow": "true",
+  "annotation": "Hi-C analysis of Drosophila melanogaster cells using HiCExplorer",
+  "format-version": "0.1",
+  "name": "Galaxy Workflow Galaxy Hi C",
+  "steps": {
+    "0": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 0,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "R1.fastq"
         }
-    }, 
-    "tags": [], 
-    "uuid": "ddc731ba-9991-42eb-86c6-d347000755d5"
+      ],
+      "label": "R1.fastq",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 200
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"R1.fastq\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "84ea88a5-b0ba-40a3-aa2b-ee04c8b6b846",
+      "workflow_outputs": []
+    },
+    "1": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 1,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "R2.fastq"
+        }
+      ],
+      "label": "R2.fastq",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 285
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"R2.fastq\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "fc96cbcd-e768-49a2-9789-5ade13b2f10a",
+      "workflow_outputs": []
+    },
+    "2": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 2,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "H3K27me3.bw"
+        }
+      ],
+      "label": "H3K27me3.bw",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 370
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"H3K27me3.bw\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "3c23945d-8ea6-4b47-89e0-5c9fa835fe51",
+      "workflow_outputs": []
+    },
+    "3": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 3,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "H3K36me3.bw"
+        }
+      ],
+      "label": "H3K36me3.bw",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 455
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"H3K36me3.bw\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "83c2f87b-b7f7-4888-a706-7e4dc3d5a395",
+      "workflow_outputs": []
+    },
+    "4": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 4,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "H4K16ac.bw"
+        }
+      ],
+      "label": "H4K16ac.bw",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 540
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"H4K16ac.bw\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "b206bc1f-6c56-4aa9-a8a7-1a7f7f583943",
+      "workflow_outputs": []
+    },
+    "5": {
+      "annotation": "",
+      "content_id": null,
+      "errors": null,
+      "id": 5,
+      "input_connections": {},
+      "inputs": [
+        {
+          "description": "",
+          "name": "dm3_genes.bed"
+        }
+      ],
+      "label": "dm3_genes.bed",
+      "name": "Input dataset",
+      "outputs": [],
+      "position": {
+        "left": 200,
+        "top": 625
+      },
+      "tool_id": null,
+      "tool_state": "{\"name\": \"dm3_genes.bed\"}",
+      "tool_version": null,
+      "type": "data_input",
+      "uuid": "cb4f872d-8441-4f47-bb1c-a72a41a9979e",
+      "workflow_outputs": []
+    },
+    "6": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0",
+      "errors": null,
+      "id": 6,
+      "input_connections": {
+        "paired|fastq": {
+          "id": 0,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Map with BWA-MEM",
+          "name": "paired"
+        }
+      ],
+      "label": null,
+      "name": "Map with BWA-MEM",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 431,
+        "top": 313
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0",
+      "tool_shed_repository": {
+        "changeset_revision": "ebb02ba5987c",
+        "name": "bwa_mem",
+        "owner": "crs4",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"genomeSource\": \"{\\\"indices\\\": \\\"dm3\\\", \\\"refGenomeSource\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"paired\": \"{\\\"interPairEnd\\\": \\\"false\\\", \\\"fastq\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0}\", \"params\": \"{\\\"minEditDistSeed\\\": \\\"19\\\", \\\"seqMatch\\\": \\\"1\\\", \\\"clipping\\\": \\\"0\\\", \\\"offDiagonal\\\": \\\"100\\\", \\\"seedsOccurrence\\\": \\\"10000\\\", \\\"minScore\\\": \\\"30\\\", \\\"gapOpen\\\": \\\"6\\\", \\\"mismatch\\\": \\\"4\\\", \\\"outputAll\\\": \\\"false\\\", \\\"unpairedReadpair\\\": \\\"17\\\", \\\"gapExtension\\\": \\\"50\\\", \\\"skipPairing\\\": \\\"false\\\", \\\"bandWidth\\\": \\\"100\\\", \\\"readGroup\\\": {\\\"__current_case__\\\": 1, \\\"specReadGroup\\\": \\\"no\\\"}, \\\"mateRescue\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"mark\\\": \\\"false\\\", \\\"internalSeeds\\\": \\\"1.5\\\", \\\"source_select\\\": \\\"full\\\"}\", \"suppressHeader\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.8.0",
+      "type": "tool",
+      "uuid": "e7bece23-abf2-4a86-a66a-3821d77fab7f",
+      "workflow_outputs": []
+    },
+    "7": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0",
+      "errors": null,
+      "id": 7,
+      "input_connections": {
+        "paired|fastq": {
+          "id": 1,
+          "output_name": "output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool Map with BWA-MEM",
+          "name": "paired"
+        }
+      ],
+      "label": null,
+      "name": "Map with BWA-MEM",
+      "outputs": [
+        {
+          "name": "output",
+          "type": "sam"
+        }
+      ],
+      "position": {
+        "left": 431,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/crs4/bwa_mem/bwa_mem/0.8.0",
+      "tool_shed_repository": {
+        "changeset_revision": "ebb02ba5987c",
+        "name": "bwa_mem",
+        "owner": "crs4",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"genomeSource\": \"{\\\"indices\\\": \\\"dm3\\\", \\\"refGenomeSource\\\": \\\"indexed\\\", \\\"__current_case__\\\": 0}\", \"__page__\": null, \"__rerun_remap_job_id__\": null, \"paired\": \"{\\\"interPairEnd\\\": \\\"false\\\", \\\"fastq\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"sPaired\\\": \\\"single\\\", \\\"__current_case__\\\": 0}\", \"params\": \"{\\\"minEditDistSeed\\\": \\\"19\\\", \\\"seqMatch\\\": \\\"1\\\", \\\"clipping\\\": \\\"0\\\", \\\"offDiagonal\\\": \\\"100\\\", \\\"seedsOccurrence\\\": \\\"10000\\\", \\\"minScore\\\": \\\"30\\\", \\\"gapOpen\\\": \\\"6\\\", \\\"mismatch\\\": \\\"4\\\", \\\"outputAll\\\": \\\"false\\\", \\\"unpairedReadpair\\\": \\\"17\\\", \\\"gapExtension\\\": \\\"50\\\", \\\"skipPairing\\\": \\\"false\\\", \\\"bandWidth\\\": \\\"100\\\", \\\"readGroup\\\": {\\\"__current_case__\\\": 1, \\\"specReadGroup\\\": \\\"no\\\"}, \\\"mateRescue\\\": \\\"false\\\", \\\"__current_case__\\\": 1, \\\"mark\\\": \\\"false\\\", \\\"internalSeeds\\\": \\\"1.5\\\", \\\"source_select\\\": \\\"full\\\"}\", \"suppressHeader\": \"\\\"false\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/?.len\\\"\"}",
+      "tool_version": "0.8.0",
+      "type": "tool",
+      "uuid": "a23d5337-4446-461f-aa77-e80834fd091f",
+      "workflow_outputs": []
+    },
+    "8": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicbuildmatrix/hicexplorer_hicbuildmatrix/2.1.0",
+      "errors": null,
+      "id": 8,
+      "input_connections": {
+        "samFiles_0|samFile": {
+          "id": 7,
+          "output_name": "output"
+        },
+        "samFiles_1|samFile": {
+          "id": 6,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "hicBuildMatrix",
+      "outputs": [
+        {
+          "name": "outBam",
+          "type": "bam"
+        },
+        {
+          "name": "outFileName",
+          "type": "h5"
+        },
+        {
+          "name": "qc",
+          "type": "html"
+        },
+        {
+          "name": "raw_qc",
+          "type": "txt"
+        }
+      ],
+      "position": {
+        "left": 696,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicbuildmatrix/hicexplorer_hicbuildmatrix/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "707f691c974c",
+        "name": "hicexplorer_hicbuildmatrix",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"outputFormat\": \"\\\"h5\\\"\", \"restrictionSequence\": \"\\\"GATC\\\"\", \"minMappingQuality\": \"\\\"\\\"\", \"region\": \"\\\"\\\"\", \"restrictionCutFileBinSize_conditional\": \"{\\\"__current_case__\\\": 1, \\\"restrictionCutFileBinSize_selector\\\": \\\"optionBinSize\\\", \\\"binSize\\\": \\\"10000\\\"}\", \"samFiles\": \"[{\\\"__index__\\\": 0, \\\"samFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}, {\\\"__index__\\\": 1, \\\"samFile\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}]\", \"danglingSequence\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"keepSelfCircles\": \"\\\"false\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "b060f1c0-8287-4238-84dc-be30632b7ad8",
+      "workflow_outputs": []
+    },
+    "9": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/2.1.0",
+      "errors": null,
+      "id": 9,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 8,
+          "output_name": "outFileName"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicMergeMatrixBins",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicMergeMatrixBins",
+      "outputs": [
+        {
+          "name": "outFileName",
+          "type": "h5"
+        }
+      ],
+      "position": {
+        "left": 996,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicmergematrixbins/hicexplorer_hicmergematrixbins/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "8926550196ce",
+        "name": "hicexplorer_hicmergematrixbins",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"outputFormat\": \"\\\"h5\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"numBins\": \"\\\"100\\\"\", \"runningWindow\": \"\\\"false\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "73cc4116-4a5f-4f15-bdd3-2b7e5bbcac0b",
+      "workflow_outputs": []
+    },
+    "10": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0",
+      "errors": null,
+      "id": 10,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 8,
+          "output_name": "outFileName"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicCorrectMatrix",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicCorrectMatrix",
+      "outputs": [
+        {
+          "name": "outFileName",
+          "type": "h5"
+        },
+        {
+          "name": "diagnostic_plot",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 996,
+        "top": 313
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "f7d344dacfeb",
+        "name": "hicexplorer_hiccorrectmatrix",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"chromosomes\": \"[{\\\"__index__\\\": 0, \\\"chromosome\\\": \\\"chr2L\\\"}, {\\\"__index__\\\": 1, \\\"chromosome\\\": \\\"chr2R\\\"}, {\\\"__index__\\\": 2, \\\"chromosome\\\": \\\"chr3L\\\"}, {\\\"__index__\\\": 3, \\\"chromosome\\\": \\\"chr3R\\\"}, {\\\"__index__\\\": 4, \\\"chromosome\\\": \\\"chrX\\\"}]\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"mode\": \"{\\\"xMax\\\": \\\"\\\", \\\"__current_case__\\\": 0, \\\"mode_selector\\\": \\\"diagnostic_plot\\\"}\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "b4747fdb-8286-4180-8f5a-52819c1a6e0b",
+      "workflow_outputs": []
+    },
+    "11": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0",
+      "errors": null,
+      "id": 11,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 8,
+          "output_name": "outFileName"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicCorrectMatrix",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicCorrectMatrix",
+      "outputs": [
+        {
+          "name": "outFileName",
+          "type": "h5"
+        },
+        {
+          "name": "diagnostic_plot",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 996,
+        "top": 453
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hiccorrectmatrix/hicexplorer_hiccorrectmatrix/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "f7d344dacfeb",
+        "name": "hicexplorer_hiccorrectmatrix",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"chromosomes\": \"[{\\\"__index__\\\": 0, \\\"chromosome\\\": \\\"chr2L\\\"}, {\\\"__index__\\\": 1, \\\"chromosome\\\": \\\"chr2R\\\"}, {\\\"__index__\\\": 2, \\\"chromosome\\\": \\\"chr3L\\\"}, {\\\"__index__\\\": 3, \\\"chromosome\\\": \\\"chr3R\\\"}, {\\\"__index__\\\": 4, \\\"chromosome\\\": \\\"chrX\\\"}]\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"__rerun_remap_job_id__\": null, \"mode\": \"{\\\"outputFormat\\\": \\\"h5\\\", \\\"__current_case__\\\": 1, \\\"mode_selector\\\": \\\"correct\\\", \\\"filterThreshold_low\\\": \\\"-1.6\\\", \\\"sequencedCountCutoff\\\": \\\"\\\", \\\"filterThreshold_large\\\": \\\"1.8\\\", \\\"transCutoff\\\": \\\"\\\", \\\"perchr\\\": \\\"true\\\", \\\"skipDiagonal\\\": \\\"false\\\", \\\"inflationCutoff\\\": \\\"\\\", \\\"iterNum\\\": \\\"500\\\"}\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "bc5d543d-8efa-44dd-936b-6f7640e6c099",
+      "workflow_outputs": []
+    },
+    "12": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0",
+      "errors": null,
+      "id": 12,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 9,
+          "output_name": "outFileName"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicPlotMatrix",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicPlotMatrix",
+      "outputs": [
+        {
+          "name": "outFileName",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 1256,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "d398f5373c70",
+        "name": "hicexplorer_hicplotmatrix",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"perChromosome\": \"\\\"true\\\"\", \"__page__\": null, \"chromosomeOrder\": \"[{\\\"__index__\\\": 0, \\\"chromosome\\\": \\\"chr2L\\\"}, {\\\"__index__\\\": 1, \\\"chromosome\\\": \\\"chr2R\\\"}, {\\\"__index__\\\": 2, \\\"chromosome\\\": \\\"chr3L\\\"}, {\\\"__index__\\\": 3, \\\"chromosome\\\": \\\"chr3R\\\"}, {\\\"__index__\\\": 4, \\\"chromosome\\\": \\\"chrX\\\"}]\", \"colormap\": \"\\\"RdYlBu_r\\\"\", \"vMin\": \"\\\"\\\"\", \"title\": \"\\\"Hi-C matrix for dm3\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"scoreName\": \"\\\"\\\"\", \"image_file_format\": \"\\\"png\\\"\", \"region2\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"vMax\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"region\": \"\\\"\\\"\", \"log1p\": \"\\\"true\\\"\", \"clearMaskedBins\": \"\\\"true\\\"\", \"pca_conditional\": \"{\\\"__current_case__\\\": 0, \\\"pca_type\\\": \\\"\\\"}\", \"log\": \"\\\"false\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "c0809672-7bd7-4439-ad89-a95f8e80c882",
+      "workflow_outputs": []
+    },
+    "13": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0",
+      "errors": null,
+      "id": 13,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 11,
+          "output_name": "outFileName"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicPlotMatrix",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicPlotMatrix",
+      "outputs": [
+        {
+          "name": "outFileName",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 1256,
+        "top": 313
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplotmatrix/hicexplorer_hicplotmatrix/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "d398f5373c70",
+        "name": "hicexplorer_hicplotmatrix",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"perChromosome\": \"\\\"false\\\"\", \"__page__\": null, \"chromosomeOrder\": \"[]\", \"colormap\": \"\\\"RdYlBu_r\\\"\", \"vMin\": \"\\\"\\\"\", \"title\": \"\\\"Hi-C matrix for dm3\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"scoreName\": \"\\\"\\\"\", \"image_file_format\": \"\\\"png\\\"\", \"region2\": \"\\\"\\\"\", \"__rerun_remap_job_id__\": null, \"vMax\": \"\\\"\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"region\": \"\\\"chr2L\\\"\", \"log1p\": \"\\\"true\\\"\", \"clearMaskedBins\": \"\\\"false\\\"\", \"pca_conditional\": \"{\\\"__current_case__\\\": 0, \\\"pca_type\\\": \\\"\\\"}\", \"log\": \"\\\"false\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "79bb433a-2935-4990-b816-40106536ff85",
+      "workflow_outputs": []
+    },
+    "14": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicfindtads/hicexplorer_hicfindtads/2.1.0",
+      "errors": null,
+      "id": 14,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 11,
+          "output_name": "outFileName"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicFindTADs",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicFindTADs",
+      "outputs": [
+        {
+          "name": "boundaries",
+          "type": "bed"
+        },
+        {
+          "name": "score",
+          "type": "bedgraph"
+        },
+        {
+          "name": "domains",
+          "type": "bed"
+        },
+        {
+          "name": "boundaries_bin",
+          "type": "gff"
+        },
+        {
+          "name": "tad_score",
+          "type": "bedgraph"
+        },
+        {
+          "name": "matrix_output",
+          "type": "h5"
+        }
+      ],
+      "position": {
+        "left": 1256,
+        "top": 426
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicfindtads/hicexplorer_hicfindtads/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "43332e51a712",
+        "name": "hicexplorer_hicfindtads",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"minBoundaryDistance\": \"\\\"\\\"\", \"__page__\": null, \"minDepth\": \"\\\"30000\\\"\", \"multiple_comparison_conditional\": \"{\\\"multiple_comparison_selector\\\": \\\"fdr\\\", \\\"threshold\\\": \\\"0.05\\\", \\\"__current_case__\\\": 0}\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"step\": \"\\\"10000\\\"\", \"maxDepth\": \"\\\"100000\\\"\", \"delta\": \"\\\"0.001\\\"\", \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "228750c6-d64b-4127-8a95-e6f39acd4f40",
+      "workflow_outputs": []
+    },
+    "15": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicpca/hicexplorer_hicpca/2.1.0",
+      "errors": null,
+      "id": 15,
+      "input_connections": {
+        "matrix_h5_cooler": {
+          "id": 14,
+          "output_name": "matrix_output"
+        }
+      },
+      "inputs": [
+        {
+          "description": "runtime parameter for tool hicPCA",
+          "name": "matrix_h5_cooler"
+        }
+      ],
+      "label": null,
+      "name": "hicPCA",
+      "outputs": [
+        {
+          "name": "pca1",
+          "type": "bigwig"
+        },
+        {
+          "name": "pca2",
+          "type": "bigwig"
+        }
+      ],
+      "position": {
+        "left": 1496,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicpca/hicexplorer_hicpca/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "ea50f7bba657",
+        "name": "hicexplorer_hicpca",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"outputFormat\": \"\\\"bigwig\\\"\", \"matrix_h5_cooler\": \"{\\\"__class__\\\": \\\"RuntimeValue\\\"}\", \"__rerun_remap_job_id__\": null, \"__page__\": null}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "475e06d4-dcbe-4881-8bd8-85f348ca9cb3",
+      "workflow_outputs": []
+    },
+    "16": {
+      "annotation": "",
+      "content_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplottads/hicexplorer_hicplottads/2.1.0",
+      "errors": null,
+      "id": 16,
+      "input_connections": {
+        "tracks_0|track_file_style_conditional|boundaries_file": {
+          "id": 14,
+          "output_name": "domains"
+        },
+        "tracks_0|track_file_style_conditional|matrix_h5_cooler": {
+          "id": 11,
+          "output_name": "outFileName"
+        },
+        "tracks_1|track_file_style_conditional|track_input_bedgraph_matrix": {
+          "id": 14,
+          "output_name": "tad_score"
+        },
+        "tracks_2|track_file_style_conditional|track_input_bigwig": {
+          "id": 15,
+          "output_name": "pca1"
+        },
+        "tracks_3|track_file_style_conditional|track_input_bigwig": {
+          "id": 15,
+          "output_name": "pca2"
+        },
+        "tracks_4|track_file_style_conditional|track_input_bigwig": {
+          "id": 3,
+          "output_name": "output"
+        },
+        "tracks_5|track_file_style_conditional|track_input_bigwig": {
+          "id": 2,
+          "output_name": "output"
+        },
+        "tracks_6|track_file_style_conditional|track_input_bigwig": {
+          "id": 4,
+          "output_name": "output"
+        },
+        "tracks_7|track_file_style_conditional|track_input_bed": {
+          "id": 5,
+          "output_name": "output"
+        }
+      },
+      "inputs": [],
+      "label": null,
+      "name": "hicPlotTADs",
+      "outputs": [
+        {
+          "name": "outFileName",
+          "type": "png"
+        }
+      ],
+      "position": {
+        "left": 1740,
+        "top": 200
+      },
+      "post_job_actions": {},
+      "tool_id": "toolshed.g2.bx.psu.edu/repos/bgruening/hicexplorer_hicplottads/hicexplorer_hicplottads/2.1.0",
+      "tool_shed_repository": {
+        "changeset_revision": "94fff1a6a899",
+        "name": "hicexplorer_hicplottads",
+        "owner": "bgruening",
+        "tool_shed": "toolshed.g2.bx.psu.edu"
+      },
+      "tool_state": "{\"__page__\": null, \"region\": \"\\\"chr2L:14500000-16500000\\\"\", \"image_file_format\": \"\\\"png\\\"\", \"tracks\": \"[{\\\"__index__\\\": 0, \\\"track_file_style_conditional\\\": {\\\"boundaries_file\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type\\\": null, \\\"colormap\\\": \\\"RdYlBu_r\\\", \\\"title\\\": \\\"HiC dm3 chr2L:14500000-16500000\\\", \\\"track_file_style_selector\\\": \\\"hic_matrix_option\\\", \\\"min_value\\\": \\\"\\\", \\\"width_matrix\\\": \\\"1.5\\\", \\\"transform\\\": \\\"log1p\\\", \\\"x_labels\\\": \\\"true\\\", \\\"depth\\\": \\\"750000\\\", \\\"show_masked_bins\\\": \\\"false\\\", \\\"__current_case__\\\": 0, \\\"max_value\\\": \\\"\\\", \\\"scale_factor\\\": \\\"1.0\\\", \\\"matrix_h5_cooler\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}}}, {\\\"__index__\\\": 1, \\\"track_file_style_conditional\\\": {\\\"track_input_bedgraph_matrix\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"title\\\": \\\"TAD separation score\\\", \\\"track_file_style_selector\\\": \\\"bedgraph_matrix_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"__current_case__\\\": 6, \\\"max_value\\\": \\\"\\\", \\\"width_bedgraph\\\": \\\"4.0\\\", \\\"type_lines\\\": \\\"true\\\"}}, {\\\"__index__\\\": 2, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"PC1\\\", \\\"color\\\": \\\"#ff0000\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"-0.03\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"4.0\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"0.03\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 3, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"PC2\\\", \\\"color\\\": \\\"#ffc000\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"-0.03\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"4.0\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"0.03\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 4, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"H3K36me3\\\", \\\"color\\\": \\\"#c3d69b\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"1.5\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 5, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"H3K27me3\\\", \\\"color\\\": \\\"#548dd4\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"1.5\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 6, \\\"track_file_style_conditional\\\": {\\\"track_input_bigwig\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type_conditional\\\": {\\\"type_selector\\\": \\\"fill_option\\\", \\\"__current_case__\\\": 2}, \\\"title\\\": \\\"H4K16ac\\\", \\\"color\\\": \\\"#e36c09\\\", \\\"track_file_style_selector\\\": \\\"bigwig_track_option\\\", \\\"min_value\\\": \\\"\\\", \\\"data_range\\\": \\\"false\\\", \\\"width_bigwig\\\": \\\"1.5\\\", \\\"nans_to_zeros\\\": \\\"false\\\", \\\"__current_case__\\\": 5, \\\"max_value\\\": \\\"\\\", \\\"number_of_bins\\\": \\\"\\\"}}, {\\\"__index__\\\": 7, \\\"track_file_style_conditional\\\": {\\\"width_bed\\\": \\\"3.0\\\", \\\"global_max_row\\\": \\\"false\\\", \\\"title\\\": \\\"dm3 genes\\\", \\\"color\\\": \\\"#000000\\\", \\\"track_file_style_selector\\\": \\\"gene_track_option\\\", \\\"labels\\\": \\\"true\\\", \\\"gene_rows\\\": \\\"15\\\", \\\"fontsize\\\": \\\"\\\", \\\"__current_case__\\\": 3, \\\"track_input_bed\\\": {\\\"__class__\\\": \\\"RuntimeValue\\\"}, \\\"type\\\": \\\"genes\\\"}}]\", \"__rerun_remap_job_id__\": null, \"chromInfo\": \"\\\"/usr/local/galaxy/galaxy-dist/tool-data/shared/ucsc/chrom/dm3.len\\\"\", \"x_axis\": \"{\\\"__current_case__\\\": 1, \\\"x_axis_select\\\": \\\"no\\\"}\"}",
+      "tool_version": "2.1.0",
+      "type": "tool",
+      "uuid": "85476b12-c27d-47e5-8b1c-e4ea9b7cc5b7",
+      "workflow_outputs": []
+    }
+  },
+  "tags": [
+    "epigenetics"
+  ],
+  "uuid": "ddc731ba-9991-42eb-86c6-d347000755d5"
 }
