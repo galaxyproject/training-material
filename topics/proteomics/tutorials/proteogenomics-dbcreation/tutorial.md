@@ -112,7 +112,7 @@ UCSC prefaces chromosome names with chr while Ensembl does not.
 {: .hands_on}
 
 
-# Aligning FASTQ files to the human genome
+# Aligning FASTQ files to the mouse genome
 
 The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/hisat) alignment tool. It maps next-generation sequence (NGS) reads to the reference genome. This tool requires an RNA-seq file (.FASTQ) and a reference genome file in Gene transfer format (GTF). This .gtf file is obtained from the Ensembl database. When successful, this tool outputs a .bam file (binary version of a SAM: **S**equence **A**lignment/**M**ap).
 
