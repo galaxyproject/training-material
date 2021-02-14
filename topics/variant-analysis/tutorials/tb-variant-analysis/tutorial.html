@@ -696,7 +696,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 13, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 14, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -931,9 +931,9 @@ fastq datasets in the next step</li>
 
 <p><em>Note:</em> We would normally examine our trimmed <span class="notranslate">reads</span> with <strong>FastQC</strong> and <strong>MultiQC</strong> again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.</p>
 
-<h1 id="look-for-contamination-with-kraken2">Look for contamination with Kraken2</h1>
+<h1 id="look-for-contamination-with-kraken2-optional">Look for contamination with Kraken2 (optional)</h1>
 
-<p>We should also look for contamination in our <span class="notranslate">reads</span>. Sometimes, other sources of <span class="notranslate">DNA</span> accidentally or inadvertantly get mixed in with our sample. Any <span class="notranslate">reads</span> from non-sample sources will confound our snp analysis. <strong>Kraken 2</strong> is an effective way of looking and which species is represented in our <span class="notranslate">reads</span> and so we can easily spot possible contamination of our sample.</p>
+<p>We should also look for contamination in our <span class="notranslate">reads</span>. Sometimes, other sources of <span class="notranslate">DNA</span> accidentally or inadvertantly get mixed in with our sample. Any <span class="notranslate">reads</span> from non-sample sources will confound our snp analysis. <strong>Kraken 2</strong> is an effective way of looking and which species is represented in our <span class="notranslate">reads</span> and so we can easily spot possible contamination of our sample. Unfortunately <strong>kraken2</strong> uses a lot of RAM (typically 50GB when used with the <em>Standard</em> database), so you might want to skip this step if your environment doesn’t have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use <strong>kraken2</strong> as part of its analysis, see the optional section on analysing <em>SRR12416842</em> at the end of this tutorial.</p>
 
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-hands-on-run-kraken2"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Run Kraken2</h3>
@@ -1256,7 +1256,7 @@ gene annotation from the <a href="https://www.ncbi.nlm.nih.gov/nuccore/NC_000962
 
 <p>You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.</p>
 
-<h1 id="different-samples-different-stories">Different samples, different stories</h1>
+<h1 id="different-samples-different-stories-optional">Different samples, different stories (optional)</h1>
 
 <p>In <a href="https://doi.org/10.5281/zenodo.3960260">Zenodo</a> we have included sample <em>18-1</em> from the same study (aka. <a href="https://www.ebi.ac.uk/ena/browser/view/ERR1750907">ERR1750907</a>). This is also a southern African
 <em>M. tuberculosis</em> sample, but in some ways quite different from the sample we have analysed in the tutorial thus
@@ -1483,7 +1483,7 @@ ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
     title = "M. tuberculosis Variant Analysis (Galaxy Training Materials)",
     year = "2021",
     month = "02",
-    day = "13"
+    day = "14"
     url = "\url{/training-material/topics/variant-analysis/tutorials/tb-variant-analysis/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
