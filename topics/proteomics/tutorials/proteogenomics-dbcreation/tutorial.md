@@ -96,15 +96,16 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 UCSC prefaces chromosome names with chr while Ensembl does not.  
 
 > ### {% icon hands_on %} Hands-on: Replace Text in a specific column
->  1. Change numbered chromosome names
+>  1. **Replace Text in a specific column** {% icon tool %} with the following parameters:
+>  2. Change numbered chromosome names
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  2. Change XY chromosomes
+>  3. Click *Insert Replacement* to add another replacement option to change XY chromosomes
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  3. Change mitochondrial chromosome
+>  4. Click *Insert Replacement* to add another replacement option to change mitochondrial chromosome
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
