@@ -258,7 +258,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 >      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
 >      - {% icon param-select %} *"Output coverage file?"*: `No`
 > 2. Inspect {% icon galaxy-eye %} the resulting files.
-> 3. Rename the output to `Stringtie_outut.gtf`
+> 3. Rename the output to `Stringtie_output.gtf`
 >    {% include snippets/rename_dataset.md %}
 > 4. Make sure the datatype is `gtf`
 >    {% include snippets/change_datatype.md %}
@@ -301,7 +301,7 @@ The original form of this program is also distributed as part of the Cufflinks s
 > ### {% icon hands_on %} Hands-on: compare assembled transcripts against a reference annotation
 >
 > 1. **GffCompare** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_outut.gtf`
+>    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_output.gtf`
 >    - {% icon param-select %} *"Use Reference Annotation"*: `yes`
 >      - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
 >      - {% icon param-select %} *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
