@@ -83,7 +83,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Make sure that the file `FASTQ_ProB_22List.fastqsanger`
+> 4. Make sure that the datatype of file `FASTQ_ProB_22List.fastqsanger` is set to `fastqsanger`
 >    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
