@@ -88,7 +88,9 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
 >    {% include snippets/change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
->
+> 
+> 6. **Note**: If you are running the workflow taken from the **GTN**, then make sure the tool "**Tabular-to-FASTA**" (tool number 26)
+>    has Title Column labeled as "1" and Sequence Column as "2".
 {: .hands_on}
 
 # Change the chromosome names in the Ensembl GTF to match a UCSC genome reference
@@ -428,6 +430,7 @@ along with the UniProt and cRAP databases.
 {: .hands_on}
 > ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
 > Please make sure the tool version is 1.1.1
+> Also, while running the workflow, the Title column for **Tabular-to-FASTA** might come empty, so please make sure you select Title Column as "1".
 {: .comment}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)
