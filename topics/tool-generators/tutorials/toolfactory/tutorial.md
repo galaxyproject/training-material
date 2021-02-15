@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 logo: "GTN"
 
-title: Tool building with the ToolFactory in Galaxy tutorial.md
+title: Tool building with the ToolFactory in Galaxy
 objectives:
   - Learn to build simple tools quickly using a Galaxy tool - the ToolFactory
 questions:
@@ -31,16 +31,18 @@ contributors:
 
 ---
 
-# Closing the gap between Integrated Environments and tools in Galaxy
+# Integrated Environments and tools in Galaxy: bridging the gap for simple scripts
 
-- A bioinformatician can use an IE to figure out how to perform part of a Galaxy analysis in an interactive environment. They are very popular and are a great way to develop code that can run in Galaxy.
-- Interactive and graphical notebook environments are way more flexible than form driven Galaxy tools. Like tools, they can be persisted and shared. They may suit some skilled users, but are may be
-confusing for users only previously exposed to Galaxy tool forms. They are not available for user workflows.
-- There are fully featured tool wrapper development tools covered in other tutorials, but these are complex and have substantial learning curves. They are not limited once the necessary skills and knowledge are acquired, but it
-can take time that is hard for a busy bioinformatician to find.
-- There is a gap for newcomers to Galaxy who have not yet had time to come up to speed with the developer tools. They can quickly get things working using integrated environments and can develop scripts that can be used in tools, but
+- Bioinformaticians like the Galaxy IE feature. In a persistable integrated environment notebook, they can quickly write and test scripts that do useful things for some analysis.
+They are very popular and are a great way to develop code that can run in Galaxy, free from the constraint of running pre-installed Galaxy tools.
+- Graphical notebook environments are far more flexible and generalised than any possible form driven Galaxy tool. Like tools, they can be persisted and shared. Technically skilled users can run them easily enough, but many users who
+are only familiar with the Galaxy tool form interface may find them confusing. They are not available for user workflows.
+- Getting from an IE script to a Galaxy tool requires getting the script working on a command line, then writing a tool wrapper. The recommended, fully featured tool wrapper development tools such as Planemo and VCS with the new Galaxy
+Language server, are covered in other training sessions. They are complex and have substantial learning curves. They are not limited once the necessary skills and knowledge are acquired, but it
+can take time. That time may not be easy for a busy bioinformatician to find.
+> - There is a gap for newcomers to Galaxy who have not yet had time to come up to speed with the developer tools. They can quickly get things working using integrated environments and can develop scripts that can be used in tools, but
 making a new tool for the first time manually requires some substantial effort. A tool generator can automate most of the work of wrapping simple scripts.
-- This tutorial introduces a Galaxy tool that is a tool generator, enabling a bioinformatician to quickly convert any simple working script into a *new* real tool. There are limits compared to the developer tools but for many
+> - This tutorial introduces a Galaxy tool that is a tool generator, enabling a bioinformatician to quickly convert any simple working script into a *new* real tool. There are limits compared to the developer tools but for many
 simple cases, the generator works well. A Galaxy tool is used to generate the new tool, so a bioinformatician already familiar with the Galaxy forms GUI requires relatively little training. The
 generation of the tool is entirely form driven and happens inside Galaxy. The Galaxy GUI is horrible when forms get very large so although the ToolFactory can probably cope with a very large number
 of form fields, the bioinformatician might not. Simple tools with a few parameters are easy and quick.
