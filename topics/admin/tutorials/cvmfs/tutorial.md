@@ -99,6 +99,10 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    But, luckily for us, the Galaxy Project CVMFS role has a lot of defaults for these variables which we can use by just setting `galaxy_cvmfs_repos_enabled` to `config-repo`. We will also set the `cvmfs_quota_limit` to something sensible (500MB) as we have relatively small disks on our instances. In a production setup, you should size this appropriately for the client.
 >
+>    > ### {% icon tip %} What is a good size for this?
+>    > In production UseGalaxy.org.au uses 100GB, different sites have different needs and you can make your cache smaller depending on your usage. E.g. if your users only use one dataset from the reference data (e.g. just hg38) then perhaps you don't need such a large cache.
+>    {: .tip}
+>
 >    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
 >    ```yaml
