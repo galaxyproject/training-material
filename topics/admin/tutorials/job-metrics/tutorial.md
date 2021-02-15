@@ -72,6 +72,17 @@ These include very basic submission parameters. We want more information!
 >
 > 2. Edit your playbook to install the package named `cgroup-tools` in a pre-task (with git/make/etc). This package is required to use `cgget` which is used in metrics collection.
 >
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -4,9 +4,14 @@
+>       pre_tasks:
+>         - name: Install Dependencies
+>           package:
+>    -        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'cgroup-tools']
+>    ```
+>
 > 3. Edit the group variables file, `group_vars/galaxyservers.yml`:
 >
 >    You'll need to make two edits:
