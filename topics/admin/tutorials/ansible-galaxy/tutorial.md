@@ -2127,6 +2127,93 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 {: .hands_on}
 
+## Productionising Galaxy
+
+This is a fantastic base Galaxy installation but there are numerous additional options we should be setting for a real production Galaxy.
+
+> ### {% icon hands_on %} Hands-on: More Features!
+>
+> 1. Make the following changes to your `group_vars/galaxyservers.yml`:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -38,6 +38,26 @@ galaxy_config:
+>         check_migrate_tools: false
+>         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>    +    # SQL Performance
+>    +    database_engine_option_server_side_cursors: true
+>    +    slow_query_log_threshold: 5
+>    +    enable_per_request_sql_debugging: true
+>    +    # File serving Performance
+>    +    nginx_x_accel_redirect_base: /_x_accel_redirect
+>    +    # Automation / Ease of Use / User-facing features
+>    +    watch_job_rules: 'auto'
+>    +    allow_path_paste: true
+>    +    enable_quotas: true
+>    +    allow_user_deletion: true
+>    +    show_welcome_with_login: true
+>    +    expose_user_name: true
+>    +    expose_dataset_path: true
+>    +    expose_potentially_sensitive_job_metrics: true
+>    +    # Debugging
+>    +    cleanup_job: onerror
+>    +    allow_user_impersonation: true
+>    +    # Tool security
+>    +    outputs_to_working_directory: true
+>    ```
+>    {% endraw %}
+>
+>    > ### {% icon tip %} What do these do?
+>    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/config.html#configuration-options), but we'll discuss a couple briefly:
+>    > - `nginx_x_accel_redirect_base`: This is required to have NGINX serve user files. You don't want Galaxy to waste time reading a 100GB fastq file a user has asked for, so you offload that to NGINX. The request is passed through to Galaxy, so permissions checks still occur, but Galaxy instead replies to NGINX just the path to the file that it should send to the requesting user.
+>    > - `enable_quotas`: You definitely want to set a default quota for your users!
+>    > - `expose_user_name`: This exposes usernames in the history and dataset sharing forms which makes life easier for your users.
+>    > - `expose_dataset_path`: This shares the entire dataset path.
+>    > - `cleanup_job`: This prevents a job from being cleaned up if it failed, allowing you to debug and see what went wrong.
+>    > - `allow_user_impersonation`: Users submit horrible bug reports (often screenshots of unrelated things), impersonation means you can just see their history and look at what went wrong.
+>    {: .tip}
+>
+> 2. Make the following changes to your `templates/nginx/galaxy.j2`:
+>
+>    {% raw %}
+>    ```diff
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
+>    @@ -46,4 +46,16 @@ server {
+>         location /favicon.ico {
+>             alias {{ galaxy_server_dir }}/static/favicon.ico;
+>         }
+>    +
+>    +    location /_x_accel_redirect {
+>    +        internal;
+>    +        alias /;
+>    +    }
+>    +
+>    +    # Support click-to-run in the GTN-in-Galaxy Webhook
+>    +    location /training-material/ {
+>    +        proxy_pass https://training.galaxyproject.org/training-material/;
+>    +    }
+>    ```
+>    {% endraw %}
+>
+>    > ### {% icon tip %} What do these do?
+>    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
+>    {: .tip}
+>
+> 3. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
+>
+{: .hands_on}
+
+
 ## Disaster Strikes! (Optional)
 
 Because you're an admin, you need to be prepared for any situation, including the worst case scenarios. So we're going to simulate a disaster and show you how you can recover from it. It'll be fun!

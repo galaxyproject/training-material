@@ -46,4 +46,16 @@ server {
     location /favicon.ico {
         alias {{ galaxy_server_dir }}/static/favicon.ico;
     }
+
+    location /_x_accel_redirect {
+        internal;
+        alias /;
+        add_header X-Frame-Options SAMEORIGIN;
+        add_header X-Content-Type-Options nosniff;
+    }
+
+    # For GTN in Galaxy Webhook
+    location /training-material/ {
+        proxy_pass https://training.galaxyproject.org/training-material/;
+    }
 }
