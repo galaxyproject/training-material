@@ -63,11 +63,11 @@ At the Galaxy end, it is configured within the `job_conf.xml` file and uses one 
 >
 {: .agenda}
 
-**This tutorial assumes that you have:**
+**This tutorial assumes that:**
 
-- A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
-- That you have completed the "Galaxy Installation with Ansible", Connecting Galaxy to a Compute Cluster, and the CVMFS tutorials
-- And that you have access to the VM/computer where it is installed.
+- You have a VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
+- You have completed the "Galaxy Installation with Ansible", "Connecting Galaxy to a Compute Cluster", and the "CVMFS" tutorials
+- You have access to the VM/computer where it is installed.
 
 > ### {% icon tip %} This is NOT intended as a standalone Pulsar guide
 > This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.

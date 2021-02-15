@@ -256,7 +256,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 # Common Production Questions
 
 > ### {% icon question %} For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?
-> This would be irrelevant, the most used datasets will stay in the cache. CVMFS uses an LRU or "Least Recently Used" cachec (see their [docs](https://cvmfs.readthedocs.io/en/latest/cpt-details.html#disk-cache)), so whenever it runs out of space, it will remove the least recently used file. If you have a file that is very commonly used, it will remain in the cache.
+> This would be irrelevant, the most used datasets will stay in the cache. CVMFS uses a Least Recently Used (LRU) cache (see their [docs](https://cvmfs.readthedocs.io/en/latest/cpt-details.html#disk-cache)), so whenever it runs out of space, it will remove the least recently used file. If you have a file that is very commonly used, it will remain in the cache.
 {: .question}
 
 > ### {% icon question %} Could you explain how to calculate a good cache space?
@@ -268,7 +268,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 {: .question}
 
 > ### {% icon question %} If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?
-> Yes. Often users with a cluster keep a smaller cache local to each compute node, and then setup a Squid proxy to hold the most commonly accessed data on a machine with more storage. E.g. each compute node could have 10-50GB of CVMFS storage while you might setup a Squid proxy with 200-300 GB of storage that will store everything your site users.
+> Yes. Often admins with a cluster keep a smaller cache local to each compute node, and then setup a Squid proxy to hold the most commonly accessed data on a machine with more storage. E.g. each compute node could have 10-50GB of CVMFS storage while you might setup a Squid proxy with 200-300 GB of storage that will store everything your site uses.
 {: .question}
 
 # Other Aspects
