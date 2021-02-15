@@ -119,6 +119,7 @@ for line, text in enumerate(tutorial_contents):
     prev_line = text
 
 # Overwrite the original tutorial
+tuto.seek(0)
 tuto.truncate(0)
 for c in chunks:
     tuto.write(c + '\n')

@@ -231,6 +231,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create a new file in your working directory called `requirements.yml` and include the following contents:
 >
+>    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ requirements.yml
@@ -251,6 +252,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +  version: 0.1.4
 >    +- src: usegalaxy_eu.certbot
 >    +  version: 0.1.5
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
 >
@@ -291,6 +293,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
+>    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ ansible.cfg
@@ -299,6 +302,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +interpreter_python = /usr/bin/python3
 >    +inventory = hosts
 >    +retry_files_enabled = false
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add ansible.cfg"}
 >
@@ -327,12 +331,14 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > >
 >    > > Your hostname is probably different:
 >    > >
+>    > > {% raw %}
 >    > > ```diff
 >    > > --- /dev/null
 >    > > +++ hosts
 >    > > @@ -0,0 +1,2 @@
 >    > > +[galaxyservers]
 >    > > +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    > > {% endraw %}
 >    > > ```
 >    > > {: data-commit="Add hosts"}
 >    > {: .code-out}
@@ -352,6 +358,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >
+>    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ group_vars/galaxyservers.yml
@@ -371,6 +378,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +# PostgreSQL Backups
 >    +postgresql_backup_dir: /data/backups
 >    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add initial group variables file"}
 >
@@ -380,6 +388,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
+>    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ galaxy.yml
@@ -397,6 +406,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +    - role: natefoo.postgresql_objects
 >    +      become: true
 >    +      become_user: postgres
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add initial galaxy playbook"}
 >
@@ -923,6 +933,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable.
 >
+>    {% raw %}
 >    ```diff
 >    --- ansible.cfg
 >    +++ ansible.cfg
@@ -931,6 +942,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >     inventory = hosts
 >     retry_files_enabled = false
 >    +vault_password_file = vault-password.txt
+>    {% endraw %}
 >    ```
 >    {: data-commit="Setup the vault file"}
 >
@@ -1551,6 +1563,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
+>    {% raw %}
 >    ```diff
 >    --- galaxy.yml
 >    +++ galaxy.yml
@@ -1559,11 +1572,13 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - usegalaxy_eu.galaxy_systemd
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add systemd"}
 >
 > 2. Configure the role in `group_vars/galaxyservers.yml` file:
 >
+>    {% raw %}
 >    ```diff
 >    --- group_vars/galaxyservers.yml
 >    +++ group_vars/galaxyservers.yml
@@ -1576,6 +1591,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    +galaxy_systemd_mode: mule
 >    +galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    +galaxy_restart_handler_name: "Restart Galaxy"
+>    {% endraw %}
 >    ```
 >    {: data-commit="Setup systemd variables"}
 >
@@ -1583,6 +1599,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/2.9/modules/systemd_module.html). Handlers are structured just like tasks:
 >
+>    {% raw %}
 >    ```diff
 >    --- galaxy.yml
 >    +++ galaxy.yml
@@ -1598,6 +1615,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >       roles:
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add handler to restart Galaxy"}
 >
@@ -1704,6 +1722,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 1. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
 >
+>    {% raw %}
 >    ```diff
 >    --- galaxy.yml
 >    +++ galaxy.yml
@@ -1712,6 +1731,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.galaxy_systemd
 >    +    - galaxyproject.nginx
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add nginx to playbook"}
 >
@@ -2070,6 +2090,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 > 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
 >
+>    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ templates/galaxy/config/job_conf.xml.j2
@@ -2084,6 +2105,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +    <tools>
 >    +    </tools>
 >    +</job_conf>
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add job conf"}
 >
@@ -2118,7 +2140,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->
+>    
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
@@ -2402,3 +2424,4 @@ It may seem daunting to use ansible, but you don't have to do everything in ansi
 If you've been following along you should have a production-ready Galaxy, secured, everything ready to go.
 
 If you missed any steps, you can compare against the [reference files]({{ site.github_repository }}/tree/{{ site.github_repository_branch }}/topics/admin/tutorials/ansible-galaxy).
+
