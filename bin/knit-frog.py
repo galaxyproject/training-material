@@ -8,7 +8,7 @@ tuto = open(sys.argv[1], 'r')
 
 boxes = r'^([\s>]*>[\s>]*)'
 box_open = r'\s*```diff'
-box_close = r'\s*{: data-commit="true"}'
+box_close = r'\s*{: data-commit="([^"]*)"}'
 whitespace = r'^(\s*)'
 
 diffs = []
@@ -58,10 +58,12 @@ postfix = [
 
 
 for idx, diff in enumerate(diffs):
+    commit_msg = re.match(box_close, diff[-1].strip()).group(1)
+    safe_commit = re.sub('[^a-z0-9-]', '-', commit_msg.lower())
     prefix = [
         'From: The Galaxy Training Network <gtn@example.org>',
         'Date: Mon, 15 Feb 2021 14:06:56 +0100',
-        f'Subject: PATCH [{idx + 1}/{len(diffs)}]: Commit {idx}',
+        f'Subject: PATCH [{idx + 1}/{len(diffs)}]: {commit_msg}',
         '',
         '',
     ]
@@ -89,6 +91,7 @@ for idx, diff in enumerate(diffs):
     if diff[-1] == '{% endraw %}':
         diff = diff[0:-1]
 
-    with open(f'commit-{idx:04d}.patch', 'w') as handle:
-        print(f'Writing commit-{idx:04d}.patch')
+    fn = f'commit-{idx:04d}-{safe_commit}.patch'
+    with open(fn, 'w') as handle:
+        print(fn)
         handle.write('\n'.join(prefix + diff + postfix))
