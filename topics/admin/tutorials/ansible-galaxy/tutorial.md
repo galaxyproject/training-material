@@ -231,24 +231,28 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 2. Create a new file in your working directory called `requirements.yml` and include the following contents:
 >
->    ```yaml
->    - src: galaxyproject.galaxy
->      version: 0.9.7
->    - src: galaxyproject.nginx
->      version: 0.6.4
->    - src: galaxyproject.postgresql
->      version: 1.0.3
->    - src: natefoo.postgresql_objects
->      version: 1.1
->    - src: geerlingguy.pip
->      version: 2.0.0
->    - src: uchida.miniconda
->      version: 0.3.0
->    - src: usegalaxy_eu.galaxy_systemd
->      version: 0.1.4
->    - src: usegalaxy_eu.certbot
->      version: 0.1.5
+>    ```diff
+>    --- /dev/null
+>    +++ requirements.yml
+>    @@ -0,0 +1,16 @@
+>    +- src: galaxyproject.galaxy
+>    +  version: 0.9.7
+>    +- src: galaxyproject.nginx
+>    +  version: 0.6.4
+>    +- src: galaxyproject.postgresql
+>    +  version: 1.0.3
+>    +- src: natefoo.postgresql_objects
+>    +  version: 1.1
+>    +- src: geerlingguy.pip
+>    +  version: 2.0.0
+>    +- src: uchida.miniconda
+>    +  version: 0.3.0
+>    +- src: usegalaxy_eu.galaxy_systemd
+>    +  version: 0.1.4
+>    +- src: usegalaxy_eu.certbot
+>    +  version: 0.1.5
 >    ```
+>    {: data-commit="0001"}
 >
 >    > ### {% icon details %} What do each of these roles do?
 >    > We'll cover it in more detail as we use each of the roles but briefly:
@@ -287,12 +291,16 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 > 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
->    ```ini
->    [defaults]
->    interpreter_python = /usr/bin/python3
->    inventory = hosts
->    retry_files_enabled = false
+>    ```diff
+>    --- /dev/null
+>    +++ ansible.cfg
+>    @@ -0,0 +1,4 @@
+>    +[defaults]
+>    +interpreter_python = /usr/bin/python3
+>    +inventory = hosts
+>    +retry_files_enabled = false
 >    ```
+>    {: data-commit="0002"}
 >
 >    > ### {% icon tip %} CentOS7
 >    > As mentioned in the "Ubuntu or Debian, CentOS or RHEL?" comment above, if you are using CentOS7 do not set `interpreter_python` in `ansible.cfg` .
@@ -319,10 +327,14 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > >
 >    > > Your hostname is probably different:
 >    > >
->    > > ```ini
->    > > [galaxyservers]
->    > > gat-88.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    > > ```diff
+>    > > --- /dev/null
+>    > > +++ hosts
+>    > > @@ -0,0 +1,2 @@
+>    > > +[galaxyservers]
+>    > > +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    > > ```
+>    > > {: data-commit="0003"}
 >    > {: .code-out}
 >    {: .code-2col}
 >
@@ -340,23 +352,27 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >
 > 1. Create and edit `group_vars/galaxyservers.yml` and add some variables to configure PostgreSQL:
 >
->    ```yaml
->    ---
->    # Python 3 support
->    pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
->    certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
->    pip_package: python3-pip                               # geerlingguy.pip
->
->    # PostgreSQL
->    postgresql_objects_users:
->      - name: galaxy
->    postgresql_objects_databases:
->      - name: galaxy
->        owner: galaxy
->    # PostgreSQL Backups
->    postgresql_backup_dir: /data/backups
->    postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
+>    ```diff
+>    --- /dev/null
+>    +++ group_vars/galaxyservers.yml
+>    @@ -0,0 +1,15 @@
+>    +---
+>    +# Python 3 support
+>    +pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
+>    +certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
+>    +pip_package: python3-pip                               # geerlingguy.pip
+>    +
+>    +# PostgreSQL
+>    +postgresql_objects_users:
+>    +  - name: galaxy
+>    +postgresql_objects_databases:
+>    +  - name: galaxy
+>    +    owner: galaxy
+>    +# PostgreSQL Backups
+>    +postgresql_backup_dir: /data/backups
+>    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    ```
+>    {: data-commit="0004"}
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
@@ -364,20 +380,25 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
->    ```yml
->    ---
->    - hosts: galaxyservers
->      become: true
->      pre_tasks:
->        - name: Install Dependencies
->          package:
->            name: 'python3-psycopg2'
->      roles:
->        - galaxyproject.postgresql
->        - role: natefoo.postgresql_objects
->          become: true
->          become_user: postgres
+>    ```diff
+>    --- /dev/null
+>    +++ galaxy.yml
+>    @@ -0,0 +1,13 @@
+>    +---
+>    +- hosts: galaxyservers
+>    +  become: true
+>    +  become_user: root
+>    +  pre_tasks:
+>    +    - name: Install Dependencies
+>    +      package:
+>    +        name: 'python3-psycopg2'
+>    +  roles:
+>    +    - galaxyproject.postgresql
+>    +    - role: natefoo.postgresql_objects
+>    +      become: true
+>    +      become_user: postgres
 >    ```
+>    {: data-commit="0005"}
 >
 >    > ### {% icon question %} Question
 >    >
@@ -689,14 +710,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- a/galaxy.yml
->    +++ b/galaxy.yml
->    @@ -4,9 +4,14 @@
+>    --- galaxy.yml
+>    +++ galaxy.yml
+>    @@ -5,9 +5,14 @@
 >       pre_tasks:
 >         - name: Install Dependencies
 >           package:
 >    -        name: 'python3-psycopg2'
->    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']
 >       roles:
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
@@ -707,8 +728,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    - role: uchida.miniconda
 >    +      become: true
 >    +      become_user: "{{ galaxy_user.name }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0006"}
 >
 >    > ### {% icon tip %} Miniconda fails to work
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
@@ -742,13 +764,14 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > Please ensure you consult the [releases documentation](https://docs.galaxyproject.org/en/master/releases/index.html)
 >    {: .tip}
 >
+>    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -10,3 +10,16 @@ postgresql_objects_users:
->     postgresql_objects_databases:
->       - name: galaxy
->         owner: galaxy
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -13,3 +13,16 @@ postgresql_objects_databases:
+>     # PostgreSQL Backups
+>     postgresql_backup_dir: /data/backups
+>     postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    +
 >    +# Galaxy
 >    +galaxy_create_user: true
@@ -759,10 +782,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +galaxy_user: {name: galaxy, shell: /bin/bash}
 >    +galaxy_commit_id: release_{{page.galaxy_version}}
 >    +galaxy_force_checkout: true
->    +miniconda_prefix: {% raw %}"{{ galaxy_tool_dependency_dir }}/_conda"{% endraw %}
+>    +miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >    +miniconda_version: 4.7.12
 >    +miniconda_manage_dependencies: false
+>    {% endraw %}
 >    ```
+>    {: data-commit="0007"}
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
@@ -785,12 +810,12 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -23,3 +23,12 @@
->     galaxy_force_checkout: true
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -26,3 +26,14 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
+>     miniconda_manage_dependencies: false
 >    +
 >    +galaxy_config:
 >    +  galaxy:
@@ -802,8 +827,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    +    object_store_store_by: uuid
 >    +    id_secret: "{{ id_secret }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0008"}
 >
 >    > ### {% icon tip %} Data storage
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
@@ -841,11 +867,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -32,3 +32,28 @@ galaxy_config:
->         file_path: /data
->         check_migrate_tools: false
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -37,3 +37,28 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ id_secret }}"
@@ -874,8 +898,9 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      - lib/galaxy/main.py
 >    +      - lib/galaxy/main.py
 >    +    farm: job-handlers:1,2
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0009"}
 >
 >    > ### {% icon tip %} How many mules?
 >    > Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
@@ -905,6 +930,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >     retry_files_enabled = false
 >    +vault_password_file = vault-password.txt
 >    ```
+>    {: data-commit="0010"}
 >
 > 7. Create the vault:
 >
@@ -1524,21 +1550,22 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 > 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
 >    ```diff
->    --- a/galaxy.yml
->    +++ b/galaxy.yml
->    @@ -15,3 +15,4 @@
+>    --- galaxy.yml
+>    +++ galaxy.yml
+>    @@ -16,3 +16,4 @@
 >         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - usegalaxy_eu.galaxy_systemd
 >    ```
+>    {: data-commit="0010"}
 >
 > 2. Configure the role in `group_vars/galaxyservers.yml` file:
 >
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -57,3 +57,8 @@ galaxy_config:
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -62,3 +62,8 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
@@ -1548,6 +1575,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    +galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    +galaxy_restart_handler_name: "Restart Galaxy"
 >    ```
+>    {: data-commit="0011"}
 >
 >    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
@@ -1556,10 +1584,10 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    ```diff
 >    --- galaxy.yml
 >    +++ galaxy.yml
->    @@ -5,6 +5,11 @@
+>    @@ -6,6 +6,11 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']
 >    +  handlers:
 >    +    - name: Restart Galaxy
 >    +      systemd:
@@ -1569,6 +1597,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
 >    ```
+>    {: data-commit="0012"}
 >
 > 4. Run the playbook
 >
@@ -1674,24 +1703,23 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 > 1. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
 >
 >    ```diff
->    --- a/galaxy.yml
->    +++ b/galaxy.yml
->    @@ -21,3 +21,4 @@
+>    --- galaxy.yml
+>    +++ galaxy.yml
+>    @@ -22,3 +22,4 @@
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.galaxy_systemd
 >    +    - galaxyproject.nginx
 >    ```
+>    {: data-commit="0013"}
 >
 > 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -33,7 +33,7 @@ galaxy_config:
->         check_migrate_tools: false
->         tool_data_path: {% raw %}"{{ galaxy_mutable_data_dir }}/tool-data"{% endraw %}
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -38,7 +38,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ id_secret }}"
 >       uwsgi:
@@ -1700,17 +1728,18 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         buffer-size: 16384
 >         processes: 1
 >         threads: 4
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0014"}
 >
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
 >    Add the following to your group variables file:
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -62,3 +62,33 @@ galaxy_config:
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -67,3 +67,33 @@ galaxy_config:
 >     galaxy_systemd_mode: mule
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >     galaxy_restart_handler_name: "Restart Galaxy"
@@ -1744,8 +1773,9 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_ssl_role: usegalaxy_eu.certbot
 >    +nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
 >    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0015"}
 >
 >    > ### {% icon details %} Certbot details
 >    >
@@ -1822,81 +1852,89 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    Create the `templates/nginx/redirect-ssl.j2` with the following contents:
 >
 >    {% raw %}
->    ```nginx
->    server {
->        listen 80 default_server;
->        listen [::]:80 default_server;
->
->        server_name "{{ inventory_hostname }}";
->
->        location /.well-known/ {
->            root {{ certbot_well_known_root }};
->        }
->
->        location / {
->            return 302 https://$host$request_uri;
->        }
->    }
->    ```
+>    ```diff
+>    --- /dev/null
+>    +++ templates/nginx/redirect-ssl.j2
+>    @@ -0,0 +1,14 @@
+>    +server {
+>    +    listen 80 default_server;
+>    +    listen [::]:80 default_server;
+>    +
+>    +    server_name "{{ inventory_hostname }}";
+>    +
+>    +    location /.well-known/ {
+>    +        root {{ certbot_well_known_root }};
+>    +    }
+>    +
+>    +    location / {
+>    +        return 302 https://$host$request_uri;
+>    +    }
+>    +}
 >    {% endraw %}
+>    ```
+>    {: data-commit="0016"}
 >
 >    This will redirect all requests to use HTTPS.
 >
 > 5. Create `templates/nginx/galaxy.j2` with the following contents:
 >
 >    {% raw %}
->    ```nginx
->    server {
->        # Listen on port 443
->        listen        *:443 ssl default_server;
->        # The virtualhost is our domain name
->        server_name   "{{ inventory_hostname }}";
->
->        # Our log files will go here.
->        access_log  /var/log/nginx/access.log;
->        error_log   /var/log/nginx/error.log;
->
->        # The most important location block, by default all requests are sent to uWSGI
->        location / {
->            # This is the backend to send the requests to.
->            uwsgi_pass 127.0.0.1:8080;
->            uwsgi_param UWSGI_SCHEME $scheme;
->            include uwsgi_params;
->        }
->
->        # Static files can be more efficiently served by Nginx. Why send the
->        # request to uWSGI which should be spending its time doing more useful
->        # things like serving Galaxy!
->        location /static {
->            alias {{ galaxy_server_dir }}/static;
->            expires 24h;
->        }
->
->        # In Galaxy instances started with run.sh, many config files are
->        # automatically copied around. The welcome page is one of them. In
->        # production, this step is skipped, so we will manually alias that.
->        location /static/welcome.html {
->            alias {{ galaxy_server_dir }}/static/welcome.html.sample;
->            expires 24h;
->        }
->
->        # serve visualization and interactive environment plugin static content
->        location ~ ^/plugins/(?<plug_type>[^/]+?)/((?<vis_d>[^/_]*)_?)?(?<vis_name>[^/]*?)/static/(?<static_file>.*?)$ {
->            alias {{ galaxy_server_dir }}/config/plugins/$plug_type/;
->            try_files $vis_d/${vis_d}_${vis_name}/static/$static_file
->                      $vis_d/static/$static_file =404;
->        }
->
->        location /robots.txt {
->            alias {{ galaxy_server_dir }}/static/robots.txt;
->        }
->
->        location /favicon.ico {
->            alias {{ galaxy_server_dir }}/static/favicon.ico;
->        }
->    }
->    ```
+>    ```diff
+>    --- /dev/null
+>    +++ templates/nginx/galaxy.j2
+>    @@ -0,0 +1,49 @@
+>    +server {
+>    +    # Listen on port 443
+>    +    listen        *:443 ssl default_server;
+>    +    # The virtualhost is our domain name
+>    +    server_name   "{{ inventory_hostname }}";
+>    +
+>    +    # Our log files will go here.
+>    +    access_log  /var/log/nginx/access.log;
+>    +    error_log   /var/log/nginx/error.log;
+>    +
+>    +    # The most important location block, by default all requests are sent to uWSGI
+>    +    location / {
+>    +        # This is the backend to send the requests to.
+>    +        uwsgi_pass 127.0.0.1:8080;
+>    +        uwsgi_param UWSGI_SCHEME $scheme;
+>    +        include uwsgi_params;
+>    +    }
+>    +
+>    +    # Static files can be more efficiently served by Nginx. Why send the
+>    +    # request to uWSGI which should be spending its time doing more useful
+>    +    # things like serving Galaxy!
+>    +    location /static {
+>    +        alias {{ galaxy_server_dir }}/static;
+>    +        expires 24h;
+>    +    }
+>    +
+>    +    # In Galaxy instances started with run.sh, many config files are
+>    +    # automatically copied around. The welcome page is one of them. In
+>    +    # production, this step is skipped, so we will manually alias that.
+>    +    location /static/welcome.html {
+>    +        alias {{ galaxy_server_dir }}/static/welcome.html.sample;
+>    +        expires 24h;
+>    +    }
+>    +
+>    +    # serve visualization and interactive environment plugin static content
+>    +    location ~ ^/plugins/(?<plug_type>[^/]+?)/((?<vis_d>[^/_]*)_?)?(?<vis_name>[^/]*?)/static/(?<static_file>.*?)$ {
+>    +        alias {{ galaxy_server_dir }}/config/plugins/$plug_type/;
+>    +        try_files $vis_d/${vis_d}_${vis_name}/static/$static_file
+>    +                  $vis_d/static/$static_file =404;
+>    +    }
+>    +
+>    +    location /robots.txt {
+>    +        alias {{ galaxy_server_dir }}/static/robots.txt;
+>    +    }
+>    +
+>    +    location /favicon.ico {
+>    +        alias {{ galaxy_server_dir }}/static/favicon.ico;
+>    +    }
+>    +}
 >    {% endraw %}
+>    ```
+>    {: data-commit="0017"}
 >
 >    > ### {% icon details %} Running this tutorial *without* SSL
 >    >
@@ -2030,18 +2068,22 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 > 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
 >
->    ```xml
->    <job_conf>
->        <plugins workers="4">
->            <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
->        </plugins>
->        <destinations default="local_destination">
->            <destination id="local_destination" runner="local_plugin"/>
->        </destinations>
->        <tools>
->        </tools>
->    </job_conf>
+>    ```diff
+>    --- /dev/null
+>    +++ templates/galaxy/config/job_conf.xml.j2
+>    @@ -0,0 +1,10 @@
+>    +<job_conf>
+>    +    <plugins workers="4">
+>    +        <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>    +    </plugins>
+>    +    <destinations default="local_destination">
+>    +        <destination id="local_destination" runner="local_plugin"/>
+>    +    </destinations>
+>    +    <tools>
+>    +    </tools>
+>    +</job_conf>
 >    ```
+>    {: data-commit="0018"}
 >
 >    > ### {% icon tip %} workers=4
 >    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
@@ -2051,11 +2093,9 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -32,6 +32,7 @@ galaxy_config:
->         file_path: /data
->         check_migrate_tools: false
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -37,6 +37,7 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
 >         id_secret: "{{ id_secret }}"
@@ -2063,16 +2103,17 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >       uwsgi:
 >         socket: 127.0.0.1:8080
 >         buffer-size: 16384
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0019"}
 >
 >    And then deploy the new config file using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
->    @@ -59,6 +59,10 @@ galaxy_config:
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
+>    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
 >
@@ -2080,11 +2121,13 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +
+>    +
 >     # systemd
 >     galaxy_systemd_mode: mule
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="0020"}
 >
 > 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
@@ -2137,11 +2180,11 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >
 >    {% raw %}
 >    ```diff
->    --- a/group_vars/galaxyservers.yml
->    +++ b/group_vars/galaxyservers.yml
+>    --- group_vars/galaxyservers.yml
+>    +++ group_vars/galaxyservers.yml
 >    @@ -38,6 +38,26 @@ galaxy_config:
->         check_migrate_tools: false
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         object_store_store_by: uuid
+>         id_secret: "{{ id_secret }}"
 >         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >    +    # SQL Performance
 >    +    database_engine_option_server_side_cursors: true
@@ -2163,8 +2206,12 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    allow_user_impersonation: true
 >    +    # Tool security
 >    +    outputs_to_working_directory: true
->    ```
+>       uwsgi:
+>         socket: 127.0.0.1:8080
+>         buffer-size: 16384
 >    {% endraw %}
+>    ```
+>    {: data-commit="0021"}
 >
 >    > ### {% icon tip %} What do these do?
 >    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/config.html#configuration-options), but we'll discuss a couple briefly:
@@ -2180,9 +2227,9 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >
 >    {% raw %}
 >    ```diff
->    --- a/templates/nginx/galaxy.j2
->    +++ b/templates/nginx/galaxy.j2
->    @@ -46,4 +46,16 @@ server {
+>    --- templates/nginx/galaxy.j2
+>    +++ templates/nginx/galaxy.j2
+>    @@ -46,4 +46,14 @@ server {
 >         location /favicon.ico {
 >             alias {{ galaxy_server_dir }}/static/favicon.ico;
 >         }
@@ -2196,8 +2243,10 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    location /training-material/ {
 >    +        proxy_pass https://training.galaxyproject.org/training-material/;
 >    +    }
->    ```
+>     }
 >    {% endraw %}
+>    ```
+>    {: data-commit="0022"}
 >
 >    > ### {% icon tip %} What do these do?
 >    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
