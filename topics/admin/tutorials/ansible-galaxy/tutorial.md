@@ -816,7 +816,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >    7. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
->    8. `id_secret` to {% raw %}`{{ id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
+>    8. `id_secret` to {% raw %}`{{ vault_id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
 >
 >    {% raw %}
 >    ```diff
@@ -836,7 +836,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    check_migrate_tools: false
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    +    object_store_store_by: uuid
->    +    id_secret: "{{ id_secret }}"
+>    +    id_secret: "{{ vault_id_secret }}"
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure galaxy config"}
@@ -882,7 +882,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    @@ -37,3 +37,28 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
->         id_secret: "{{ id_secret }}"
+>         id_secret: "{{ vault_id_secret }}"
 >    +  uwsgi:
 >    +    http: 0.0.0.0:8080
 >    +    buffer-size: 16384
@@ -954,10 +954,10 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    {: .code-in}
 >
->    This will open the editor. Within that file, define your `id_secret` to be a long random value.
+>    This will open the editor. Within that file, define your `vault_id_secret` to be a long random value.
 >
 >    ```
->    id_secret: BxI6zlQVhoHLPVf3gqQ
+>    vault_id_secret: BxI6zlQVhoHLPVf3gqQ
 >    ```
 >
 >    > ### {% icon tip %} How to get a good random value?
@@ -1743,7 +1743,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +++ group_vars/galaxyservers.yml
 >    @@ -38,7 +38,7 @@ galaxy_config:
 >         object_store_store_by: uuid
->         id_secret: "{{ id_secret }}"
+>         id_secret: "{{ vault_id_secret }}"
 >       uwsgi:
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080
@@ -2122,7 +2122,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -37,6 +37,7 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
->         id_secret: "{{ id_secret }}"
+>         id_secret: "{{ vault_id_secret }}"
 >    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >       uwsgi:
 >         socket: 127.0.0.1:8080
@@ -2208,7 +2208,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +++ group_vars/galaxyservers.yml
 >    @@ -38,6 +38,26 @@ galaxy_config:
 >         object_store_store_by: uuid
->         id_secret: "{{ id_secret }}"
+>         id_secret: "{{ vault_id_secret }}"
 >         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >    +    # SQL Performance
 >    +    database_engine_option_server_side_cursors: true
