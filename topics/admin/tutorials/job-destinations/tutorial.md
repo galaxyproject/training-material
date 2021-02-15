@@ -139,17 +139,12 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    +            <env id="SINGULARITY_CACHEDIR">/tmp/singularity</env>
 >    +            <env id="SINGULARITY_TMPDIR">/tmp</env>
 >    +        </destination>
->             <destination id="pulsar" runner="pulsar_runner" >
->                 <param id="default_file_action">remote_transfer</param>
->                 <param id="dependency_resolution">remote</param>
 >    @@ -34,10 +41,10 @@
 >                 <param id="rewrite_parameters">True</param>
 >                 <param id="transport">curl</param>
 >             </destination>
 >         </destinations>
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
 >    +        <tool id="testing" destination="slurm-2c"/>
 >         </tools>
 >     </job_conf>
@@ -253,8 +248,6 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
 >    @@ -49,7 +52,6 @@
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
 >    -        <tool id="testing" destination="slurm-2c"/>
 >    +        <tool id="testing" destination="dynamic_admin_only" />
 >         </tools>
@@ -348,8 +341,6 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    +        </destination>
 >         </destinations>
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
 >    -        <tool id="testing" destination="dynamic_admin_only" />
 >    +        <tool id="testing" destination="dtd" />
 >         </tools>
@@ -442,8 +433,6 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +        <group id="testing">cores,time</group>
 >    +    </resources>
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
 >    ```
 >
 >    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
@@ -456,8 +445,6 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
 >    @@ -61,6 +61,6 @@
 >         <tools>
->             <tool id="bwa" destination="pulsar"/>
->             <tool id="bwa_mem" destination="pulsar"/>
 >    -        <tool id="testing" destination="dtd" />
 >    +        <tool id="testing" destination="dynamic_cores_time" resources="testing"/>
 >         </tools>

@@ -99,10 +99,6 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -142,3 +142,14 @@ rabbitmq_users:
->       - user: galaxy_au
->         password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
->         vhost: /pulsar/galaxy_au
 >    +
 >    +# slurm
 >    +slurm_roles: ['controller', 'exec'] # Which roles should the machine play? exec are execution hosts.
@@ -347,9 +343,6 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >         <plugins workers="4">
 >             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >    +        <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
->             <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->                 <!-- <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param> -->
->                 <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5672/{{ rabbitmq_vhosts[0] }}</param>
 >    @@ -15,7 +16,7 @@
 >         </plugins>
 >    -    <destinations default="local_destination">
