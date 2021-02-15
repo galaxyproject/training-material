@@ -64,6 +64,11 @@ For this exercise we will use a basic password file method for authenticating - 
 >
 >         # Static files can be more efficiently served by Nginx. Why send the
 >    ```
+
+>    > ### {% icon tip %} Running this tutorial *just* for Reports?
+>    > Add the `auth_basic` and `auth_basic_user_file` lines to your `location /reports/`
+>    {: .tip}
+>
 >
 >    `auth_basic` enables validation of username and password using the "HTTP Basic Authentication" protocol. Its value `galaxy` is used as a realm name to be displayed to the user when prompting for credentials.
 >    `auth_basic_user_file` specifies the file that keeps usernames and passwords.
@@ -118,6 +123,10 @@ For this exercise we will use a basic password file method for authenticating - 
 >        remote_user_maildomain: "{% raw %}{{ inventory_hostname }}{% endraw %}"
 >        remote_user_secret: SOME_SECRET_STRING
 >    ```
+>
+>    > ### {% icon tip %} Running this tutorial *just* for Reports?
+>    > You don't need to make the above changes for Galaxy then.
+>    {: .tip}
 >
 >    Set the `remote_user_maildomain` option to the appropriate domain name for your site.
 >
