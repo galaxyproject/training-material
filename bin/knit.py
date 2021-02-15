@@ -121,6 +121,7 @@ for line, text in enumerate(tutorial_contents):
 # Overwrite the original tutorial
 tuto.seek(0)
 tuto.truncate(0)
-for c in chunks:
+# The last chunk is a newline for some reason.
+for c in chunks[0:-1]:
     tuto.write(c + '\n')
 tuto.close()
