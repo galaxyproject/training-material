@@ -8,7 +8,7 @@ priority: 2
 tags:
     - bulk
     - rna-seq
-zenodo_link: "https://zenodo.org/record/1185122"
+zenodo_link: "https://zenodo.org/record/4541751"
 questions:
     - What are the steps to process RNA-Seq data?
     - How to identify differentially expressed genes across multiple experimental conditions?
@@ -106,7 +106,14 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    > ### {% icon comment %} Comment
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
 >    >
->    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }})
+>    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }}):
+>    >
+>    > ```
+>    > {{ page.zenodo_link }}/files/GSM461177_1_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461177_2_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461180_1_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461180_2_subsampled.fastqsanger
+>    > ```
 >    {: .comment}
 >
 > 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
