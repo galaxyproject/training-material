@@ -26,6 +26,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
       - pulsar
 ---
 

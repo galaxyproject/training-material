@@ -32,6 +32,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
       - cvmfs
   - title: "A server/VM on which to deploy Pulsar"
     type: "none"
@@ -62,11 +63,11 @@ At the Galaxy end, it is configured within the `job_conf.xml` file and uses one 
 >
 {: .agenda}
 
-
-This tutorial assumes that you have:
+**This tutorial assumes that you have:**
 
 - A VM or machine where you will install Pulsar, and a directory in which the installation will be done. This tutorial assumes it is `/mnt`
-- That you have completed the "Galaxy Installation with Ansible" and CVMFS tutorials (Job configuration tutorial is optional) and have access to the VM/computer where it is installed.
+- That you have completed the "Galaxy Installation with Ansible", Connecting Galaxy to a Compute Cluster, and the CVMFS tutorials
+- And that you have access to the VM/computer where it is installed.
 
 # Overview
 

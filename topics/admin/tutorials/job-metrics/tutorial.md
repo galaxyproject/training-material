@@ -19,6 +19,7 @@ requirements:
       - ansible
       - ansible-galaxy
       - connect-to-compute-cluster
+      - job-destinations
 ---
 
 # Overview
@@ -40,6 +41,9 @@ Galaxy includes a built-in framework to collect job metrics and store these in i
 > ### {% icon comment %} Note
 >
 > Job metrics are only visible to Galaxy *admin users*, unless you set `expose_potentially_sensitive_job_metrics: true`, like UseGalaxy.eu does. EU's intention with this is to empower users and make everything as transparent as possible.
+>
+> This is the only option controlling which metrics general users see. Admins see all metrics collected, and by default general users see none.
+> However most of the metrics exposed by this setting are quite safe (e.g. cgroups information on resource consumption, walltime, etc.)
 >
 {: .comment}
 
