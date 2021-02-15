@@ -97,18 +97,20 @@ UCSC prefaces chromosome names with chr while Ensembl does not.
 
 > ### {% icon hands_on %} Hands-on: Replace Text in a specific column
 >  1. **Replace Text in a specific column** {% icon tool %} with the following parameters:
->  2. Change numbered chromosome names
+>  2. {% icon param-file %} *"File to process"*: `Mus_musculus.GRCm38.86.gtf`
+>  3. Change numbered chromosome names
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  3. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change XY chromosomes
+>  4. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change XY chromosomes
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  4. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change mitochondrial chromosome
+>  5. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change mitochondrial chromosome
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
+>  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
 {: .hands_on}
 
 
@@ -253,7 +255,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 >    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
 >    - {% icon param-select %} *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
 >      - {% icon param-select %} *"Reference file"*: `Use file from History`
->      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
+>      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.fixed.gtf`
 >      - {% icon param-select %} *"Use Reference transcripts only?"*: `No`
 >      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
 >      - {% icon param-select %} *"Output coverage file?"*: `No`
