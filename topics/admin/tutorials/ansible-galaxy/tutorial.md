@@ -780,6 +780,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    7. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
 >
 >    {% raw %}
 >    ```diff
@@ -798,6 +799,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    file_path: /data
 >    +    check_migrate_tools: false
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    +    object_store_store_by: uuid
 >    ```
 >    {% endraw %}
 >
@@ -843,6 +845,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         file_path: /data
 >         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         object_store_store_by: uuid
 >    +  uwsgi:
 >    +    http: 0.0.0.0:8080
 >    +    buffer-size: 16384
@@ -1649,6 +1652,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    @@ -33,7 +33,7 @@ galaxy_config:
 >         check_migrate_tools: false
 >         tool_data_path: {% raw %}"{{ galaxy_mutable_data_dir }}/tool-data"{% endraw %}
+>         object_store_store_by: uuid
 >       uwsgi:
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080
@@ -2011,6 +2015,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         file_path: /data
 >         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         object_store_store_by: uuid
 >    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >       uwsgi:
 >         socket: 127.0.0.1:8080
