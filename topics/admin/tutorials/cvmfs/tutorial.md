@@ -253,6 +253,24 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 {: .hands_on}
 
+# Common Production Questions
+
+> ### {% icon question %} For the most used datasets (for ex. hg38) could we have a local copy, or would that be irrelevant?
+> This would be irrelevant, the most used datasets will stay in the cache. CVMFS uses an LRU or "Least Recently Used" cachec (see their [docs](https://cvmfs.readthedocs.io/en/latest/cpt-details.html#disk-cache)), so whenever it runs out of space, it will remove the least recently used file. If you have a file that is very commonly used, it will remain in the cache.
+{: .question}
+
+> ### {% icon question %} Could you explain how to calculate a good cache space?
+> Here are two approaches, there are others:
+> 1. Allocate some cache, see how it is, make it larger if it is fully used + users complain of speed.
+> 2. Enable reference data, and collect a week or two of data, analyse which reference datasets are being used, and allocate enough space for all of them.
+>
+> Essentially you just need data on how your users will behave and what reference data they want, combined with "when will they accept a wait period" to determine how much space you must allocate.
+{: .question}
+
+> ### {% icon question %} If I use a cluster, will I need to configure this FS in each node (given that the folder is at / directly)?
+> Yes. Often users with a cluster keep a smaller cache local to each compute node, and then setup a Squid proxy to hold the most commonly accessed data on a machine with more storage. E.g. each compute node could have 10-50GB of CVMFS storage while you might setup a Squid proxy with 200-300 GB of storage that will store everything your site users.
+{: .question}
+
 # Other Aspects
 
 ## Development
