@@ -69,6 +69,10 @@ At the Galaxy end, it is configured within the `job_conf.xml` file and uses one 
 - That you have completed the "Galaxy Installation with Ansible", Connecting Galaxy to a Compute Cluster, and the CVMFS tutorials
 - And that you have access to the VM/computer where it is installed.
 
+> ### {% icon note %} This is NOT intended as a standalone Pulsar guide
+> This tutorial is not intended to be a standalone Pulsar setup guide. If you read carefully and understand Ansible, it is likely you can figure out which portions are required to just setup Pulsar.
+{: .note}
+
 # Overview
 
 We will be installing the RabbitMQ server daemon onto the Galaxy server to act as an intermediary message passing system between Galaxy and the remote Pulsar. The figure below shows a schematic representation of the system.
