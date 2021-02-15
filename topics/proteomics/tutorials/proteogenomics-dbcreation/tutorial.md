@@ -381,16 +381,18 @@ along with the UniProt and cRAP databases.
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
->   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
->   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
->     ```
->     1.HISAT_Output.rpkm
->     2.HISAT_Output.snv
->     3.HISAT_Output.indel
->     ```
->   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
->   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
+>   - Click *"+ Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
+>   - Use the following parameters:
+>     - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>     - {% icon param-file %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
+>       ```
+>       1.HISAT_Output.rpkm
+>       2.HISAT_Output.snv
+>       3.HISAT_Output.indel
+>       ```
+>     - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>     - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
 {: .hands_on}
 > ### {% icon comment %} Tool parameters explained
