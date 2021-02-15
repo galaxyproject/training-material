@@ -1,0 +1,196 @@
+---
+layout: tutorial_hands_on
+logo: "GTN"
+
+title: "Simple tool building with the ToolFactory in Galaxy"
+objectives:
+  - Learn to build simple tools quickly using a Galaxy tool called the ToolFactory
+questions:
+  - What does the ToolFactory (TF) do?
+  - When might it be useful?
+  - What resources are needed to generate a new Galaxy tool?
+  - Limits and types of tools the TF can make.
+time_estimation: 20M
+key_points:
+  - Integrated environments are very handy for bioinformaticians
+  - Easy way to develop new scripts
+  - The ToolFactory can quickly turn these into Galaxy tools
+  - Generated tools have a test, are lint free and indistinguishable from hand written tools.
+  - No conditionals. Easy to manage in scripts but some Conda dependencies won't like empty default values.
+contributors:
+  - fubar2
+---
+
+# Agenda
+
+1. TOC
+
+{:toc}
+
+---
+
+{: .agenda}
+
+---
+
+### IEs in Galaxy are very useful for bioinformaticians
+
+- Develop code that runs in Galaxy.
+
+- Interactive and graphical notebook environment
+
+- Notebooks can be persisted, shared and rerun.
+
+- Not "real" form-driven Galaxy tools.
+
+- May suit some users
+
+- Not workflows
+
+- Gap is capacity to quickly convert a working script into a *new* real tool
+
+
+---
+
+
+### Packaging software into Galaxy tools
+
+- Requirement:
+
+- Is there an easier way for some situations?
+
+- A tool that generated new Galaxy tools from a form perhaps?
+
+---
+
+### Simple tool building for bioinformaticians
+
+- That’s what the TF is. Form driven simple tools, scripts included.
+
+- Script (e.g.) initially developed in an IE
+
+- Needs to work on the command line with small samples to be a Galaxy tool
+
+- Add command line parameters and test the script.
+
+- **Once it's working** you are ready to build a new tool
+
+- Upload samples. Start the TF tool. Describe the new tool.
+
+- Specify dependencies, I/O and parameters. Paste optional script.
+
+- Generate a new tool with a test, ready for any toolshed or server.
+
+- **Simple tools only** - limited compared to Galaxy developer tools
+
+- No conditionals - ok for scripts where can interpret default '' as None if not set by user
+
+- Problematic for many packages that may not cope - a bash caller might work
+
+---
+
+### The ToolFactory is a *Galaxy tool*. It generates new Galaxy tools
+
+- Wrap many Conda (or system) executable or interpreter+script
+
+- Standard Galaxy tool XML with a test based on the samples
+
+- Auto-generated from the details supplied on a Galaxy form
+
+- Packaged ready for upload to a toolshed
+
+- Could probably wrap any IE script
+
+
+---
+
+
+### When the TF might be useful
+
+- Busy bioinformatician supporting Galaxy users
+
+- Not (yet) familiar with the recommended Galaxy developer tools
+
+- Users demanding functionality not (yet!) available in the toolshed
+
+- IE sessions yield working scripts ready for production
+
+- Scripts needed (quickly!) for repeatable user workflows.
+
+
+
+---
+
+### TF options: Planemo
+
+- planemo tool\_factory … is very handy but **not persistent**
+
+- PR not accepted yet so need to use a fork.
+
+- Clone fubar2/planemo; make a venv; python setup.py install
+
+- Tool archives unpacked topath can be loaded with **--extra\_tools path**
+
+
+
+---
+
+### TF options: Docker
+
+- TF docker - has toolshed, workflow and example tools built in.
+
+- Can be **persistent** if local volumes are mounted in image.
+
+- Clone fubar2/toolfactory-galaxy-docker.
+
+- Edit & run startclean.sh
+
+- FROM quay.io/bgruening/galaxy:latest
+
+
+---
+
+
+### Galaxy ToolFactory: Process overview
+![](../../images/wrapper_big_picture_1.png)
+
+---
+
+### Galaxy ToolFactory: Tool form for hello world
+
+![](../../images/ToolFactory_hello1form.png)
+
+---
+
+
+### Practical limits and usage patterns
+
+- Total all parameters (i/o files; user settings;..) = 10 or fewer. Perhaps 20.
+
+- No conditionals (yet)
+
+- Bash/sed/awk... system utilities with positional parameters and/or scripts
+
+- Python/R/…(anything in conda) scripts with argparse or positional parameters
+
+- Any conda package(s) with sane command line structure should work.
+
+- Tutorials: Hello world!,...,BWA/samtools Planemo “advanced” example.
+
+
+
+---
+
+### Next steps
+
+- Watch “hello World” and other simple tool example videos
+
+- View the planemo TF example workflow demonstration.
+
+- Run it yourself!
+
+- Prepare data and a script for your own purposes and try the TF
+
+- If it works for you, please show your colleagues
+
+- Otherwise, pull requests and issues welcome @ fubar2/toolfactory
