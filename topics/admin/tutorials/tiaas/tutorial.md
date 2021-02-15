@@ -267,7 +267,7 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >      +  - hogwarts.py
 >      ```
 >
-> 3. We next need to configure this plugin in our job configuration (`files/galaxy/config/job_conf.xml`):
+> 3. We next need to configure this plugin in our job configuration (`files/galaxy/config/job_conf.xml.j2`):
 >
 >    ```xml
 >    <destination id="sorting_hat" runner="dynamic">
@@ -276,9 +276,9 @@ In order to achieve this, we first need some way to *sort* the jobs of the train
 >    </destination>
 >    ```
 >
->    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml`
+>    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available to be used in the `job_conf.xml.j2`
 >
-> 4. Again In `job_conf.xml`, update the top level `<destinations>` definition and point it to the sorting hat:
+> 4. Again In `job_conf.xml.j2`, update the top level `<destinations>` definition and point it to the sorting hat:
 >
 >    ```xml
 >    <destinations default="sorting_hat">
