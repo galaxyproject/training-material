@@ -252,7 +252,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +- src: usegalaxy_eu.certbot
 >    +  version: 0.1.5
 >    ```
->    {: data-commit="0001"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon details %} What do each of these roles do?
 >    > We'll cover it in more detail as we use each of the roles but briefly:
@@ -300,7 +300,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    +inventory = hosts
 >    +retry_files_enabled = false
 >    ```
->    {: data-commit="0002"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} CentOS7
 >    > As mentioned in the "Ubuntu or Debian, CentOS or RHEL?" comment above, if you are using CentOS7 do not set `interpreter_python` in `ansible.cfg` .
@@ -334,7 +334,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > +[galaxyservers]
 >    > > +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    > > ```
->    > > {: data-commit="0003"}
+>    > > {: data-commit="true"}
 >    > {: .code-out}
 >    {: .code-2col}
 >
@@ -372,7 +372,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +postgresql_backup_dir: /data/backups
 >    +postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    ```
->    {: data-commit="0004"}
+>    {: data-commit="true"}
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
 >
@@ -398,7 +398,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    +      become: true
 >    +      become_user: postgres
 >    ```
->    {: data-commit="0005"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon question %} Question
 >    >
@@ -730,7 +730,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +      become_user: "{{ galaxy_user.name }}"
 >    {% endraw %}
 >    ```
->    {: data-commit="0006"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} Miniconda fails to work
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
@@ -787,7 +787,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +miniconda_manage_dependencies: false
 >    {% endraw %}
 >    ```
->    {: data-commit="0007"}
+>    {: data-commit="true"}
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
@@ -829,7 +829,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    id_secret: "{{ id_secret }}"
 >    {% endraw %}
 >    ```
->    {: data-commit="0008"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} Data storage
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
@@ -900,7 +900,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    farm: job-handlers:1,2
 >    {% endraw %}
 >    ```
->    {: data-commit="0009"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} How many mules?
 >    > Start with 2 and add more as needed. If you notice that your jobs seem to inexplicably sit for a long time before being dispatched to the cluster, or after they have finished on the cluster, you may need additional handlers.
@@ -924,13 +924,15 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable.
 >
 >    ```diff
->     [defaults]
+>    --- ansible.cfg
+>    +++ ansible.cfg
+>    @@ -2,3 +2,4 @@
 >     interpreter_python = /usr/bin/python3
 >     inventory = hosts
 >     retry_files_enabled = false
 >    +vault_password_file = vault-password.txt
 >    ```
->    {: data-commit="0010"}
+>    {: data-commit="true"}
 >
 > 7. Create the vault:
 >
@@ -1558,7 +1560,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >           become_user: "{{ galaxy_user.name }}"
 >    +    - usegalaxy_eu.galaxy_systemd
 >    ```
->    {: data-commit="0010"}
+>    {: data-commit="true"}
 >
 > 2. Configure the role in `group_vars/galaxyservers.yml` file:
 >
@@ -1575,7 +1577,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    +galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    +galaxy_restart_handler_name: "Restart Galaxy"
 >    ```
->    {: data-commit="0011"}
+>    {: data-commit="true"}
 >
 >    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
@@ -1597,7 +1599,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >         - galaxyproject.postgresql
 >         - role: natefoo.postgresql_objects
 >    ```
->    {: data-commit="0012"}
+>    {: data-commit="true"}
 >
 > 4. Run the playbook
 >
@@ -1711,7 +1713,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         - usegalaxy_eu.galaxy_systemd
 >    +    - galaxyproject.nginx
 >    ```
->    {: data-commit="0013"}
+>    {: data-commit="true"}
 >
 > 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
@@ -1730,7 +1732,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         threads: 4
 >    {% endraw %}
 >    ```
->    {: data-commit="0014"}
+>    {: data-commit="true"}
 >
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
@@ -1775,7 +1777,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >    {% endraw %}
 >    ```
->    {: data-commit="0015"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon details %} Certbot details
 >    >
@@ -1872,7 +1874,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +}
 >    {% endraw %}
 >    ```
->    {: data-commit="0016"}
+>    {: data-commit="true"}
 >
 >    This will redirect all requests to use HTTPS.
 >
@@ -1934,7 +1936,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    +}
 >    {% endraw %}
 >    ```
->    {: data-commit="0017"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon details %} Running this tutorial *without* SSL
 >    >
@@ -2083,7 +2085,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    +    </tools>
 >    +</job_conf>
 >    ```
->    {: data-commit="0018"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} workers=4
 >    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
@@ -2105,7 +2107,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         buffer-size: 16384
 >    {% endraw %}
 >    ```
->    {: data-commit="0019"}
+>    {: data-commit="true"}
 >
 >    And then deploy the new config file using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
 >
@@ -2127,7 +2129,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    {% endraw %}
 >    ```
->    {: data-commit="0020"}
+>    {: data-commit="true"}
 >
 > 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
@@ -2211,7 +2213,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >         buffer-size: 16384
 >    {% endraw %}
 >    ```
->    {: data-commit="0021"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} What do these do?
 >    > Check out the full details in the [Galaxy documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/config.html#configuration-options), but we'll discuss a couple briefly:
@@ -2246,7 +2248,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >     }
 >    {% endraw %}
 >    ```
->    {: data-commit="0022"}
+>    {: data-commit="true"}
 >
 >    > ### {% icon tip %} What do these do?
 >    > The `_x_accel_redirect` is required for the NGINX file serving discussed above. For information on the GTN-in-Galaxy Webhook, see the [Galaxy Documentation](https://docs.galaxyproject.org/en/{{ galaxy_version }}/admin/special_topics/gtn.html?highlight=gtn%20galaxy). It's a very cool feature which helps your users access training materials directly in Galaxy.
