@@ -2,6 +2,7 @@
 import copy
 import re
 import sys
+import knit
 
 # read in a tutorial, and check the structure of it.
 tuto = open(sys.argv[1], 'r')
@@ -18,7 +19,8 @@ def stripN(line, count):
     for i in range(count):
         c = c.lstrip()
         c = c.lstrip('>')
-    return c
+    removed = len(line) - len(c)
+    return (c, line[0:removed])
 
 current = None
 for line, text in enumerate(tuto.read().split('\n')):
@@ -28,10 +30,10 @@ for line, text in enumerate(tuto.read().split('\n')):
     else:
         depth = 0
 
-    unprefixed = stripN(text, depth)
+    (unprefixed, prefix) = stripN(text, depth)
     m1 = re.match(box_open, unprefixed)
     m2 = re.match(box_close, unprefixed)
-    # print(current is not None, text)
+    # print(current is not None, '|', prefix, '|', text)
 
     if m1:
         if current is not None:
@@ -58,8 +60,9 @@ postfix = [
 
 
 for idx, diff in enumerate(diffs):
-    commit_msg = re.match(box_close, diff[-1].strip()).group(1)
+    commit_msg = knit.extractCommitMsg(diff)
     safe_commit = re.sub('[^a-z0-9-]', '-', commit_msg.lower())
+
     prefix = [
         'From: The Galaxy Training Network <gtn@example.org>',
         'Date: Mon, 15 Feb 2021 14:06:56 +0100',
@@ -68,22 +71,7 @@ for idx, diff in enumerate(diffs):
         '',
     ]
 
-    # Fix whitespace.
-    whitespace_prefix = [
-        len(re.match(whitespace, line).group(1))
-        for line in diff
-    ]
-    # __import__('pprint').pprint(whitespace_prefix)
-    # Remove zeros (blank lines have no whitespace, not even the standard of
-    # the rest)
-    whitespace_prefix = [x for x in whitespace_prefix if x != 0]
-    # print(whitespace_prefix)
-    shortest = min(whitespace_prefix)
-
-    diff = [
-        x[shortest:]
-        for x in diff
-    ]
+    (_, diff) = knit.removeWhitespacePrefix(diff)
 
     patch_id = diff[-1]
     # Remove patch id, ```
