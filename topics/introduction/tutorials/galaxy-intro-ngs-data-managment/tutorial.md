@@ -467,7 +467,7 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 
 > ### {% icon hands_on %} Hands-on: Creating a subset of data
 >
-> 1. Find {% icon tool %} "**Select lines that match an expression**" tool in **Filter and Sort** section of the tool panel.
+> 1. Find {% tool [Select lines that match an expression](Grep1) %} tool in **Filter and Sort** section of the tool panel.
 >    > ### {% icon tip %} Tip: Finding tools
 >    > Galaxy may have an overwhelming amount of tools installed. To find a specific tool type the tool name in the tool panel search box to find the tool.
 >    {: .tip}
@@ -475,7 +475,7 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
 > 1. Click `Execute` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% icon tool %} "**Cut**" tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% tool [Cut](tp_cut_tool) %} tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
@@ -497,7 +497,7 @@ The remaining portion of this tutorial can also be viewed as a video:
 
 > ### {% icon hands_on %} Hands-on: Get data from SRA
 >
-> 1. **Faster Download and Extract Reads in FASTQ** {% icon tool %} with the following parameters:
+> 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
 >        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
 >    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
@@ -558,7 +558,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 > ### {% icon hands_on %} Hands-on: Running `fastp`
 >
-> 1. **fastp** {% icon tool %} with the following parameters:
+> Run {% tool [fastp](toolshed.g2.bx.psu.edu/repos/iuc/fastp/fastp/0.20.1+galaxy0) %} with the following parameters:
 >    - *"Single-end or paired reads"*: `Paired Collection`
 >        - {% icon param-file %} *"Select paired collection(s)"*: `list_paired` (output of **Faster Download and Extract Reads in FASTQ** {% icon tool %})
 >    - In *"Output Options"*:
@@ -572,7 +572,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 > ### {% icon hands_on %} Hands-on: Map sequencing reads to reference genome
 >
-> 1. **Map with BWA-MEM** {% icon tool %} with the following parameters:
+> Run {% tool [BWA-MEM](toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa_mem/0.7.17.1) %} with the following parameters:
 >    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
 >        - {% icon param-file %} *"Use the following dataset as the reference sequence"*: `output` (Input dataset)
 >    - *"Single or Paired-end reads"*: `Paired Collection`
@@ -588,7 +588,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
-> 1. **MarkDuplicates** {% icon tool %} with the following parameters:
+> Run {% tool [MarkDuplicates](picard_MarkDuplicates)%} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
@@ -619,7 +619,7 @@ After the duplicate marking step above we can generate statistic about the align
 
 > ### {% icon hands_on %} Hands-on: Realign reads around indels
 >
-> 1. **Realign reads** with lofreq {% icon tool %} with the following parameters:
+> Run {% tool [Realign reads](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_viterbi/lofreq_viterbi/2.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Reads to realign"*: `outFile` (output of **MarkDuplicates** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `History`
 >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
@@ -633,7 +633,7 @@ This step adds indel qualities into our alignment file. This is necessary in ord
 
 > ### {% icon hands_on %} Hands-on: Add indel qualities
 >
-> 1. **Insert indel qualities** with lofreq {% icon tool %} with the following parameters:
+> Run {% tool [Insert indel qualities](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_indelqual/lofreq_indelqual/2.1.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Reads"*: `realigned` (output of **Realign reads** {% icon tool %})
 >    - *"Indel calculation approach"*: `Dindel`
 >        - *"Choose the source for the reference genome"*: `History`
@@ -647,7 +647,7 @@ We are now ready to call variants.
 
 > ### {% icon hands_on %} Hands-on: Call variants
 >
-> 1. **Call variants** with lofreq {% icon tool %} with the following parameters:
+> Run {% tool [Call variants](toolshed.g2.bx.psu.edu/repos/iuc/lofreq_call/lofreq_call/2.1.5+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input reads in BAM format"*: `output` (output of **Insert indel qualities** {% icon tool %})
 >    - *"Choose the source for the reference genome"*: `History`
 >        - {% icon param-file %} *"Reference"*: `output` (Input dataset)
@@ -672,7 +672,7 @@ We will now annotate the variants we called in the previous step with the effect
 
 > ### {% icon hands_on %} Hands-on: Annotate variant effects
 >
-> 1. **SnpEff eff:** {% icon tool %} with the following parameters:
+> Run {% tool [SnpEff](toolshed.g2.bx.psu.edu/repos/iuc/snpeff_sars_cov_2/snpeff_sars_cov_2/4.5covid19) %} with the following parameters:
 >    - {% icon param-file %} *"Sequence changes (SNPs, MNPs, InDels)"*: `variants` (output of **Call variants** {% icon tool %})
 >    - *"Output format"*: `VCF (only if input is VCF)`
 >    - *"Create CSV report, useful for downstream analysis (-csvStats)"*: `Yes`
@@ -690,7 +690,7 @@ We will now select various effects from the VCF and create a tabular file that i
 
 > ### {% icon hands_on %} Hands-on: Create table of variants
 >
-> 1. **SnpSift Extract Fields** {% icon tool %} with the following parameters:
+> Run {% tool [SnpSift Extract Fields](toolshed.g2.bx.psu.edu/repos/iuc/snpsift/snpSift_extractFields/4.3+t.galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Variant input file in VCF format"*: `snpeff_output` (output of **SnpEff eff:** {% icon tool %})
 >    - *"Fields to extract"*: `CHROM POS REF ALT QUAL DP AF SB DP4 EFF[*].IMPACT EFF[*].FUNCLASS EFF[*].EFFECT EFF[*].GENE EFF[*].CODON`
 >    - *"One effect per line"*: `Yes`
@@ -709,7 +709,7 @@ We will now summarize our analysis with MultiQC, which generates a beautiful rep
 
 > ### {% icon hands_on %} Hands-on: Summarize data
 >
-> 1. **MultiQC** {% icon tool %} with the following parameters:
+> Run {% tool [MultiQC](toolshed.g2.bx.psu.edu/repos/iuc/multiqc/multiqc/1.8+galaxy1) %} with the following parameters:
 >    - In *"Results"*:
 >        - {% icon param-repeat %} *"Insert Results"*
 >            - *"Which tool was used generate logs?"*: `fastp`
@@ -735,7 +735,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 
 > ### {% icon hands_on %} Hands-on: Collapse a collection
 >
-> 1. **Collapse Collection** {% icon tool %} with the following parameters:
+> Run {% tool [Collapse Collection](collapse_dataset) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `snpsift extract fields` (output of **SnpSift Extract Fields** {% icon tool %})
 >    - "*Keep one header line*": `Yes`
 >    - "*Prepend File name*": `Yes`
