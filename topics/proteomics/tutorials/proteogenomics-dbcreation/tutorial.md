@@ -101,11 +101,11 @@ UCSC prefaces chromosome names with chr while Ensembl does not.
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  3. Click *Insert Replacement* to add another replacement option to change XY chromosomes
+>  3. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change XY chromosomes
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  4. Click *Insert Replacement* to add another replacement option to change mitochondrial chromosome
+>  4. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change mitochondrial chromosome
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
@@ -382,7 +382,7 @@ along with the UniProt and cRAP databases.
 > ### {% icon hands_on %} Hands-on
 >
 > 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
->   - Click *"+ Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
+>   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
 >   - Use the following parameters:
 >     - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
 >     - {% icon param-file %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
@@ -412,7 +412,7 @@ along with the UniProt and cRAP databases.
 >    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
 >
 > 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
+>    - {% icon param-file %} *"Select cells from"*: `FASTA-to-Tabular output` from previous step
 >    - {% icon param-select %} *"Using"*: `column 1`
 >    - {% icon param-repeat %} **Insert Check**
 >      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
