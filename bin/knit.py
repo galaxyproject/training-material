@@ -53,6 +53,7 @@ def extractCommitMsg(lines):
 
 current = None
 diff_idx = 0
+prev_line = None
 for line, text in enumerate(tutorial_contents):
     m = re.match(boxes, text)
     if m:
@@ -63,19 +64,33 @@ for line, text in enumerate(tutorial_contents):
     m0 = re.match(box_prefix, unprefixed)
     m1 = re.match(box_open, unprefixed)
     m2 = re.match(box_close, unprefixed)
-    # print(current is not None, '|', prefix, '|', text)
+    # print(current is not None, m0 is not None, m1 is not None, m2 is not None, '|', prefix, '|', text[0:100])
 
-    if m1 or m0:
+    if m0:
         current = []
-    elif current is not None:
+    if m1 and current is None:
+        current = []
+        # print('hi', m0, m1, prev_line)
+        # if '{% raw %}' in prev_line:
+            # current.append(prev_line)
+
+    if current is not None:
         current.append(unprefixed)
     else:
         chunks.append(text)
 
-    if current and len(current) > 2 and current[-2].strip() == '```' and not m2:
+    # if current:
+        # print(current, len(current), not m2)
+
+    if current and len(current) > 2 and (current[-2].strip() == '```') and not m2:
+        chunks.extend([prefix + x for x in current])
+        # print(current)
+        # chunks.append('REJECT)')
+        # print('REJECT')
         current = None
 
-    if m2:
+    if m2 and current and len(current) > 0:
+        # print(m2, current)
         (amount, _) = removeWhitespacePrefix(current)
         prefix_text = prefix + (amount * " ")
         from_patch = diffs[diff_idx]
@@ -101,5 +116,10 @@ for line, text in enumerate(tutorial_contents):
         diff_idx += 1
         current = None
 
+    prev_line = text
+
+# Overwrite the original tutorial
+tuto.truncate(0)
 for c in chunks:
-    print(c)
+    tuto.write(c + '\n')
+tuto.close()
