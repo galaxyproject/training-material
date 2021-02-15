@@ -1737,6 +1737,12 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    >
 >    {: .details}
 >
+>    > ### {% icon details %} Running this tutorial with your own SSL certificates
+>    >
+>    > If you want, you can run this with your own SSL certificates. You can read about all of the variables you need to set [in the ansible NGINX role](https://github.com/galaxyproject/ansible-nginx#ssl-configuration).
+>    >
+>    {: .details}
+>
 >    > ### {% icon details %} Running this tutorial *without* SSL
 >    >
 >    > If you want, you can run this tutorial without SSL. We will provide a sketch of the configuration changes needed, but this is of course not recommended for production, so we will not go into detail here:
