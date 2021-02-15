@@ -173,7 +173,7 @@ One of the first steps in the analysis of NGS data is seeing how good the data a
 
 Here you can see FastQC base quality reports (the tools gives you many other types of data) for two datasets: **A** and **B**. The **A** dataset has long reads (250 bp) and very good quality profile with no qualities dropping below [phred score](http://www.phrap.com/phred/) of 30. The **B** dataset is significantly worse with ends of the reads dipping below phred score of 20. The **B** reads may need to be trimmed for further processing.
 
-<!-- 
+<!--
 <div class="embed-responsive embed-responsive-16by9"><iframe src="https://player.vimeo.com/video/123453134?portrait=0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe></div>
 -->
 
@@ -208,7 +208,7 @@ If Galaxy does not have a genome you need to map against, you can upload your ge
 | ![Uploaded genome](../../images/uploaded_genome.png) |
 |<small>Mapping against a pre-computed index in Galaxy </small>|
 
-In this case Galaxy will first create an index from this dataset and then run mapping analysis against it. 
+In this case Galaxy will first create an index from this dataset and then run mapping analysis against it.
 
 ## SAM/BAM datasets
 
@@ -416,7 +416,7 @@ In primary analysis we start with raw sequencing data (e.g., fastq reads) and co
 
 SARS-CoV-2 is undoubtedly the most talked about biological system of the day. We will use SARS-CoV-2 sequencing data to demonstrate how Galaxy handles NGS data. In this case we will going from fastq data to a list of variants.
 
-## Find necessary data in SRA 
+## Find necessary data in SRA
 
 First we need to find a good dataset to play with. The [Sequence Read Archive (SRA)](https://www.ncbi.nlm.nih.gov/sra) is the primary archive of *unassembled reads*  operated by the [US National Institutes of Health (NIH)](https://www.ncbi.nlm.nih.gov/).  SRA is a great place to get the sequencing data that underlie publications and studies. Let's do that:
 
@@ -432,11 +432,11 @@ First we need to find a good dataset to play with. The [Sequence Read Archive (S
 >   - Changing **Format** to `RunInfo`
 >   - Clicking **Create file**
 > Here is how it should look like:
-> ![Getting RunInfo from SRA](../../images/get_runinfo.png) 
-> 5. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder. 
+> ![Getting RunInfo from SRA](../../images/get_runinfo.png)
+> 5. This would create a rather large `SraRunInfo.csv` file in your `Downloads` folder.
 {: .hands_on}
 
-Now that we have downloaded this file we can go to a Galaxy instance and start processing it. 
+Now that we have downloaded this file we can go to a Galaxy instance and start processing it.
 
 > ### {% icon comment %} Comment
 >
@@ -456,13 +456,13 @@ Now that we have downloaded this file we can go to a Galaxy instance and start p
 > 1. Find and select `SraRunInfo.csv` file from your computer
 > 1. Click *Start* button
 > 1. Close dialog by pressing **Close** button
-> 1. You can now look at the content of this file by clicking {% icon galaxy-eye %} (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.  
+> 1. You can now look at the content of this file by clicking {% icon galaxy-eye %} (eye) icon. You will see that this file contains a lot of information about individual SRA accessions. In this study every accession corresponds to an individual patient whose samples were sequenced.
 {: .hands_on}
 
 Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we need to selected a smaller subset. In particular our previous experience with this data shows two interesting datasets `SRR11954102` and `SRR12733957`. So, let's pull them out.
 
 > ### {% icon warning %} Beware of **Cut**s
-> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface. 
+> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table (cut)**. However, the same logic applies to the other tool. It simply has a slightly different interface.
 {: .warning}
 
 > ### {% icon hands_on %} Hands-on: Creating a subset of data
@@ -475,7 +475,7 @@ Galaxy can process all 2,000+ datasets, but to make this tutorial bearable we ne
 > 1. In "*the pattern*" field enter the following expression &rarr; `SRR12733957|SRR11954102`. These are two accession we want to find separated by the pipe symbol `|`. The `|` means `or`: find lines containing `SRR12733957` **or** `SRR11954102`.
 > 1. Click `Execute` button.
 > 1. This will generate a file containing two lines (well ... one line is also used as the header, so it will appear the the file has three lines. It is OK.)
-> 1. Cut the first column from the file using {% tool [Cut](tp_cut_tool) %} tool, which you will find in **Text Manipulation** section of the tool pane.
+> 1. Cut the first column from the file using {% tool [Cut](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_cut_tool/1.1.0) %} tool, which you will find in **Text Manipulation** section of the tool pane.
 > 1. Make sure the dataset produced by the previous step is selected in the "*File to cut*" field of the tool form.
 > 1. Change "*Delimited by*" to `Comma`
 > 1. In "*List of fields*" select `Column: 1`.
@@ -588,7 +588,7 @@ Removing sequencing adapters improves alignments and variant calling. **fastp** 
 
 > ### {% icon hands_on %} Hands-on: Remove duplicates
 >
-> Run {% tool [MarkDuplicates](picard_MarkDuplicates)%} with the following parameters:
+> Run {% tool [MarkDuplicates](toolshed.g2.bx.psu.edu/repos/devteam/picard/picard_MarkDuplicates/2.18.2.2)%} with the following parameters:
 >    - {% icon param-file %} *"Select SAM/BAM dataset or dataset collection"*: `bam_output` (output of **Map with BWA-MEM** {% icon tool %})
 >    - *"If true do not write duplicates to the output file instead of writing them with appropriate flags set"*: `Yes`
 >
@@ -735,7 +735,7 @@ We now extracted meaningful fields from VCF datasets. But they still exist as a 
 
 > ### {% icon hands_on %} Hands-on: Collapse a collection
 >
-> Run {% tool [Collapse Collection](collapse_dataset) %} with the following parameters:
+> Run {% tool [Collapse Collection](toolshed.g2.bx.psu.edu/repos/nml/collapse_collections/collapse_dataset/4.0) %} with the following parameters:
 >    - {% icon param-collection %} *"Collection of files to collapse into single dataset"*: `snpsift extract fields` (output of **SnpSift Extract Fields** {% icon tool %})
 >    - "*Keep one header line*": `Yes`
 >    - "*Prepend File name*": `Yes`
@@ -748,15 +748,15 @@ You can see that this tool takes lines from all collection elements (in our case
 > A collection element named `SRR11954102`
 >
 >```
->NC_045512.2  84 PASS  C T  960.0  28  1.0       0 0,0,15,13 MODIFIER  NONE  INTERGENIC                                  
->NC_045512.2 241 PASS  C T 2394.0  69  0.971014  0 0,0,39,29 MODIFIER  NONE  INTERGENIC    
+>NC_045512.2  84 PASS  C T  960.0  28  1.0       0 0,0,15,13 MODIFIER  NONE  INTERGENIC
+>NC_045512.2 241 PASS  C T 2394.0  69  0.971014  0 0,0,39,29 MODIFIER  NONE  INTERGENIC
 >```
 >
 >A collection element named `SRR12733957`:
 >
 >```
->NC_045512.2 241 PASS  C T 1954.0  63  0.888889  0 0,0,42,21 MODIFIER  NONE  INTERGENIC                                  
->NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW       LOW   LOW 
+>NC_045512.2 241 PASS  C T 1954.0  63  0.888889  0 0,0,42,21 MODIFIER  NONE  INTERGENIC
+>NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW       LOW   LOW
 >```
 {: .code-in}
 
@@ -767,14 +767,14 @@ We will have a single dataset as the output:
 >then the **Collapse Collection** {% icon tool %} will produce this:
 >
 >```
->SRR11954102 NC_045512.2  84 PASS  C T  960.0  28  1.0       0 0,0,15,13 MODIFIER  NONE  INTERGENIC                                  
->SRR11954102 NC_045512.2 241 PASS  C T 2394.0  69  0.971014  0 0,0,39,29 MODIFIER  NONE  INTERGENIC    
->SRR12733957 NC_045512.2 241 PASS  C T 1954.0  63  0.888889  0 0,0,42,21 MODIFIER  NONE  INTERGENIC                                  
->SRR12733957 NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW       LOW   LOW 
+>SRR11954102 NC_045512.2  84 PASS  C T  960.0  28  1.0       0 0,0,15,13 MODIFIER  NONE  INTERGENIC
+>SRR11954102 NC_045512.2 241 PASS  C T 2394.0  69  0.971014  0 0,0,39,29 MODIFIER  NONE  INTERGENIC
+>SRR12733957 NC_045512.2 241 PASS  C T 1954.0  63  0.888889  0 0,0,42,21 MODIFIER  NONE  INTERGENIC
+>SRR12733957 NC_045512.2 823 PASS  C T 1199.0  50  0.76      3 5,6,13,26 LOW       LOW   LOW
 >```
 {: .code-out}
 
-you can see that added a column with dataset ID taken from collection element name. 
+you can see that added a column with dataset ID taken from collection element name.
 
 ## Anything interesting?
 
@@ -784,7 +784,7 @@ These data are now ready for downstream analysis. One of the interesting things 
 SRR12733957 NC_045512.2 27972 PASS  C T 56.0  39  0.076923  0 7,29,0,3  HIGH  NONSENSE  STOP_GAINED ORF8  Caa/Taa
 ```
 
-This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here in these data? 
+This is interesting because these datasets were collected well before B.1.1.7 became widely spread. Can you find more mutations here in these data?
 
 
 <!--
@@ -794,7 +794,7 @@ This is interesting because these datasets were collected well before B.1.1.7 be
 After a dataset is converted into an intermediary result (such as variant table generated during the previous step) by primary analysis, this intermediary data needs to be processed further to produce biological insight. IN Galaxy this can be done by starting a Jupyter notebook directly on history datasets. Here is a short demo.
 
 > ### {% icon warning %} Jupyter is in Beta
-> Jupyter notebook functionality in Galaxy is currently in Beta. It means that we are still working on it and its implementation is constantly changing. Be aware of this fact. 
+> Jupyter notebook functionality in Galaxy is currently in Beta. It means that we are still working on it and its implementation is constantly changing. Be aware of this fact.
 {: .warning}
 
 > ### {% icon hands_on %} Hands-on: Analyze data in Jupyter from Galaxy
@@ -810,9 +810,9 @@ After a dataset is converted into an intermediary result (such as variant table 
 > 1. This will open a new tab with a fully functional Jupyter environment:
 > ![Jupyter running](../../images/jupyter_running.png)
 > 1. Start a new notebook by clicking on Python 3 image. This will start a fresh notebook.
-> 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history. 
+> 1. Type `!ls data/` in the first cell and you will see a file from Galaxy history.
 > 1. Upgrade [Pandas](https://pandas.pydata.org/) and [Seaborn](https://seaborn.pydata.org/index.html): `!pip install -U pandas seaborn`
-> 1. Read data into a dataframe: 
+> 1. Read data into a dataframe:
 >```
 > import pandas as pd
 > df = pd.read_csv('data/Collapsed_collection',sep='\t')
@@ -849,7 +849,7 @@ We can also import data directly into Google Colab:
 > 1. This will copy this dataset into your Colaboratory environment
 > 1. See the dataset file by typing `!ls` in the Colab cell
 > 1. You will see a file with a name that looks something like this: `'display?to_ext=tabular'`
-> 1. Rename it into something palatable: 
+> 1. Rename it into something palatable:
 >```
 >!mv 'display?to_ext=tabular' data.tsv`
 >```
