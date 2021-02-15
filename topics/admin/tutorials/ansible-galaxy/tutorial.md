@@ -781,6 +781,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
 >    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
 >    7. `object_store_store_by` to `uuid`, this is a better way of storing files that will ensure better filesystem balancing than the older system.
+>    8. `id_secret` to {% raw %}`{{ id_secret }}`{% endraw %}, we'll define this variable next but it will be used to encode the IDs used in Galaxy URLs and for securing session cookies.
 >
 >    {% raw %}
 >    ```diff
@@ -800,6 +801,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    +    check_migrate_tools: false
 >    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >    +    object_store_store_by: uuid
+>    +    id_secret: "{{ id_secret }}"
 >    ```
 >    {% endraw %}
 >
@@ -846,6 +848,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
+>         id_secret: "{{ id_secret }}"
 >    +  uwsgi:
 >    +    http: 0.0.0.0:8080
 >    +    buffer-size: 16384
@@ -885,7 +888,43 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > 4. `workers` in job_conf (covered later) is the number of threads in an internal Galaxy thread pool that are available in each job handler for preparing and finishing jobs (more threads increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).
 >    {: .tip}
 >
-> 5. Run the playbook.
+> 5. Let's set up our vault to store the secrets for these tutorials.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > openssl rand -base64 24 > vault-password.txt
+>    > ```
+>    {: .code-in}
+>
+> 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable.
+>
+>    ```diff
+>     [defaults]
+>     interpreter_python = /usr/bin/python3
+>     inventory = hosts
+>     retry_files_enabled = false
+>    +vault_password_file = vault-password.txt
+>    ```
+>
+> 7. Create the vault:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-vault create group_vars/secret.yml
+>    > ```
+>    {: .code-in}
+>
+>    This will open the editor. Within that file, define your `id_secret` to be a long random value.
+>
+>    ```
+>    id_secret: BxI6zlQVhoHLPVf3gqQ
+>    ```
+>
+>    > ### {% icon tip %} How to get a good random value?
+>    > You can use the same command we ran before: `openssl rand -base64 24`
+>    {: .tip}
+>
+> 8. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
@@ -1646,6 +1685,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
@@ -1653,6 +1693,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         check_migrate_tools: false
 >         tool_data_path: {% raw %}"{{ galaxy_mutable_data_dir }}/tool-data"{% endraw %}
 >         object_store_store_by: uuid
+>         id_secret: "{{ id_secret }}"
 >       uwsgi:
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080
@@ -1660,6 +1701,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >         processes: 1
 >         threads: 4
 >    ```
+>    {% endraw %}
 >
 > 3. We need to configure the virtualhost. This is a slightly more complex process as we have to write the proxying configuration ourselves. This may seem annoying, but it is often the case that sites have individual needs to cater to, and it is difficult to provide a truly generic webserver configuration. Additionally, we will enable secure communication via HTTPS using SSL/TLS certificates provided by [certbot](https://certbot.eff.org/).
 >
@@ -2016,6 +2058,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >         check_migrate_tools: false
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
+>         id_secret: "{{ id_secret }}"
 >    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
 >       uwsgi:
 >         socket: 127.0.0.1:8080
