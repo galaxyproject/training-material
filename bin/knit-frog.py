@@ -1,38 +1,24 @@
 #!/usr/bin/env python
-import copy
 import re
 import sys
-import knit
+import knittingneedles as knit
 
 # read in a tutorial, and check the structure of it.
 tuto = open(sys.argv[1], 'r')
 
-boxes = r'^([\s>]*>[\s>]*)'
-box_open = r'\s*```diff'
-box_close = r'\s*{: data-commit="([^"]*)"}'
-whitespace = r'^(\s*)'
 
 diffs = []
-
-def stripN(line, count):
-    c = copy.copy(line)
-    for i in range(count):
-        c = c.lstrip()
-        c = c.lstrip('>')
-    removed = len(line) - len(c)
-    return (c, line[0:removed])
-
 current = None
 for line, text in enumerate(tuto.read().split('\n')):
-    m = re.match(boxes, text)
+    m = re.match(knit.BOXES, text)
     if m:
         depth = m.group(1).count('>')
     else:
         depth = 0
 
-    (unprefixed, prefix) = stripN(text, depth)
-    m1 = re.match(box_open, unprefixed)
-    m2 = re.match(box_close, unprefixed)
+    (unprefixed, prefix) = knit.stripN(text, depth)
+    m1 = re.match(knit.BOX_OPEN, unprefixed)
+    m2 = re.match(knit.BOX_CLOSE, unprefixed)
     # print(current is not None, '|', prefix, '|', text)
 
     if m1:
