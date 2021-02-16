@@ -53,34 +53,42 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >
 > 1. We will add a pre-task to clone [a data repository](https://github.com/usegalaxy-eu/libraries-training-repo) into your machine. We will use this as the source for a library dataset.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -5,6 +5,9 @@
+>    @@ -6,6 +6,9 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']
 >    +    - git:
 >    +        repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >    +        dest: /libraries/
 >       handlers:
 >         - name: Restart Galaxy
 >           systemd:
+>    {% endraw %}
 >    ```
+>    {: data-commit="Add the git repository to the pre-tasks"}
 >
 > 4. Edit the file `group_vars/galaxyservers.yml` and set the following variables:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -28,6 +28,9 @@ miniconda_manage_dependencies: false
->
+>    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
+>     
 >     galaxy_config:
 >       galaxy:
->         # ... existing galaxy configurations ...
 >    +    library_import_dir: /libraries/admin
 >    +    user_library_import_dir: /libraries/user
+>         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>    {% endraw %}
 >    ```
+>    {: data-commit="Configure the library import directories"}
 >
 > 5. Run the playbook:
 >
