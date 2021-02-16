@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/style/base.css" type="text/css" />
+</head>
+<body style="margin: 0">
+
+    <div class="jumbotron">
+        <div class="container">
+            <table><tr><td>
+            <h4>Hello, your <strong>ToolFactory in Planemo</strong> Galaxy is running!</h4>
+            <ul>
+               <li>History archive with samples at <i>https://zenodo.org/record/4542837/files/planemo_demohistory_jan23.tar.gz?download=1</i> Copy this URL and paste it into the History import upload box</li>
+                <li><a href="https://github.com/fubar2/toolfactory/blob/master/README.md" target="_blank">ToolFactory README</a></br></li>
+                <li><a href="https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing" target="_blank" >Hello ToolFactory video demonstration</a> </li>
+            </ul>
+            <font size="4" color="maroon">First time startup of the ToolFactory in Planemo requires some patience !</font></br>
+            Import the history URL above and switch to it.
+            This will provide a range of sample ToolFactory configurations. Try re-running them and editing them to see how they change so you can figure out how to use it for your work.
+            <font size="3" color="maroon">Note: You MUST be logged in using an administrative account to run the ToolFactory - it will error out for non-admin users</font> </br>
+            Generated tools are just ordinary Galaxy tools. They work for any user and in workflows.<br/>
+            Generating a tool takes 1.5-4 minutes on my old desktop. Planemo is run twice and a Galaxy is built and torn down each time. The first run is to generate
+            test outputs that are added to the new tool archive. The second time those sample outputs are tested. Conda adds time to install the dependencies and then there's the actual runtime for the test data</br>
+            There should be a new history containing the demonstration tools. Each Toolshed tarball output has a redo button so you can adjust and regenerate a modified tool<br>
+            There is also a workflow available that will re-create that history and in the process, install those demonstration tools into
+            the Galaxy instance you are using in the ToolFactory section. When you run the workflow, copies of the supplied samples can be
+            copied and reused or you can upload your own fasta, text and fastqsanger and use those for tool test generation<br/></br>
+            Each example job demonstrates a variation of the tool patterns that can be generated. The sample tool generating jobs in the history
+            can be re-run and settings adjusted to experiment with the ToolFactory settings for each tool  <br/>
+            <ul><li>Hello runs a bash script with a single user supplied parameter - "World" for example. STDOUT goes to the history</li>
+            <li>Tacrev uses STDOUT and STDIN without parameters.</li>
+            <li>Two simple python scripts to reverse lines in a text file are driven with (pyrevargparse) argparse style and with (pyrevpos) positional parameters</li>
+            <li>The perl GC counter takes positional parameters and is taken straight from the Planemo documentation tool examples</li>
+            <li>The planemo advanced bwa example is shown in two versions. One uses the original Planemo tutorial code to demonstrate a <b>command
+            over-ride</b>. An equivalent tool but using bash and positional parameters might be easier for some tool builders since it doesn't use mako/markup.</li>
+            <li>The Sed example shows how unix utilities like sed - or any Conda package - can be driven using positional parameters</li>
+            <li>The Evil_script_that_fails example tries to create a file where it should not. It should build ok but an error should be noted in the history tgz after it runs. Note that it can do
+evil under docker because it runs as root - but only evil within the docker container itself. We hope. </li>
+            <li>five_parameters has 5 positional parameters. Galaxy forms were not designed for this complexity. Need to be able to copy a replicate element to edit.</li>
+            </ul>
+            The demonstration tools are relatively simple for a good reason. Galaxy's UI is not ideal for the purpose of building tools with dozens of parameters. It can be done
+            but there will be plenty of cases where the old fashioned manual/Planemo way will be way easier for most people. However, if you have the patience, it works. The
+            ToolFactory is ideal for relatively simple situations with a handful of files and parameters.
+        </td></tr>
+        </table>
+        </div>
+    </div>
+    </br>
+    <p class="lead" align="center">
+            <a target="_blank" href="https://wiki.galaxyproject.org/Admin/Config" class="btn btn-primary btn-lg">Configuring Galaxy »</a>
+            <a target="_blank" href="https://wiki.galaxyproject.org/Admin/Tools/AddToolFromToolShedTutorial" class="btn btn-primary btn-lg">Installing Tools »</a>
+            <a target="_parent" href="/tours/core.galaxy_ui" class="btn btn-primary btn-lg">Guided Tour »</a>
+        <p class="lead">
+         </p>
+
+        <footer>
+            <a target="_blank" class="reference" href="http://galaxyproject.org/">
+            Galaxy</a> is an open platform for supporting data intensive
+            research. Galaxy is developed by <a target="_blank" class="reference" href="http://wiki.galaxyproject.org/GalaxyTeam">The Galaxy Team</a>
+            with the support of  <a target="_blank" class="reference" href="https://github.com/galaxyproject/galaxy/blob/dev/CONTRIBUTORS.md">many contributors</a>.
+            The Galaxy Docker project is supported by the University of Freiburg, part of de.NBI</br>
+            The <a target="_blank" class="reference" href="http://galaxyproject.org/">Galaxy Project</a>
+            is supported in part by <a target="_blank" class="reference" href="http://www.genome.gov">NHGRI</a>,
+            <a target="_blank" class="reference" href="http://www.nsf.gov">NSF</a>,
+            <a target="_blank" class="reference" href="http://www.huck.psu.edu">The Huck Institutes of the Life Sciences</a>,
+            <a target="_blank" class="reference" href="http://www.ics.psu.edu">The Institute for CyberScience at Penn State</a>,
+            and <a target="_blank" class="reference" href="http://www.jhu.edu/">Johns Hopkins University</a>.
+
+        </footer>
+
+    </div>
+
+</body>
+</html>
+
