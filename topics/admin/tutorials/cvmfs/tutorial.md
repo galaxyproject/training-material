@@ -76,10 +76,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
 >
->    ```yaml
+>    ```diff
 >    - src: galaxyproject.cvmfs
 >      version: 0.2.13
 >    ```
+>    {: data-commit="Add requirement"}
 >
 > 2. Install the role with:
 >
@@ -105,12 +106,13 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
->    ```yaml
+>    ```diff
 >    # CVMFS vars
 >    cvmfs_role: client
 >    galaxy_cvmfs_repos_enabled: config-repo
 >    cvmfs_quota_limit: 500
 >    ```
+>    {: data-commit="Configure CVMFS variables"}
 >
 >    > ### {% icon tip %} Why all.yml?
 >    > We've integrated the cvmfs and pulsar tutorials better, such that CVMFS will be used for Pulsar as well, this configuration will be needed on all of our machines. This mirrors real life where you want CVMFS on every node that does computation.
@@ -118,13 +120,14 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 4. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
->    ```yaml
+>    ```diff
 >    - hosts: galaxyservers
 >      become: true
 >      roles:
 >        # ... existing roles ...
 >        - galaxyproject.cvmfs
 >    ```
+>    {: data-commit="Add role to playbook"}
 >
 > 5. Run the playbook
 >
@@ -219,25 +222,22 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `tool_data_table_config_path` entry under the `galaxy` key of the `galaxy_config` section in the `group_vars/galaxyservers.yml` file. This new entry should be a list containing the paths to both `tool_data_table_conf.xml` files referenced above.
 >
->    > ### {% icon question %} Question
->    >
->    > How does your final configuration look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```yaml
->    > > galaxy_config:
->    > >   galaxy:
->    > >     # ... existing configuration options in the `galaxy` section ...
->    > >     tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
->    > > ```
->    > >
->    > {: .solution }
->    >
->    {: .question}
+>    ```diff
+>    # CVMFS vars
+>    cvmfs_role: client
+>    galaxy_cvmfs_repos_enabled: config-repo
+>    cvmfs_quota_limit: 500
+>    ```
+>    {: data-commit="Add tool_data_table_config_path to group variables"}
 >
 >
-> 2. Re-run the playbook (`ansible-playbook galaxy.yml`)
+> 2. Re-run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
 >
 > 3. Install the BWA-MEM tool, if needed.
 >
