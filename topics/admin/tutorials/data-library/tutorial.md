@@ -57,7 +57,7 @@ Before we can import local data, we need to configure Galaxy to permit this. Add
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -6,6 +6,9 @@
+>    @@ -8,6 +8,9 @@
 >         - name: Install Dependencies
 >           package:
 >             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']

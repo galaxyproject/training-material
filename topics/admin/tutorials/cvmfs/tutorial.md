@@ -137,7 +137,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -25,3 +25,4 @@
+>    @@ -27,3 +27,4 @@
 >           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.galaxy_systemd
 >         - galaxyproject.nginx
@@ -244,7 +244,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml

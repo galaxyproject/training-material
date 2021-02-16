@@ -110,7 +110,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -17,6 +17,8 @@
+>    @@ -19,6 +19,8 @@
 >           become: true
 >           become_user: postgres
 >         - geerlingguy.pip

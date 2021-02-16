@@ -92,7 +92,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -15,6 +15,8 @@
+>    @@ -17,6 +17,8 @@
 >             name: galaxy
 >             state: restarted
 >       roles:
@@ -302,7 +302,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -9,6 +9,10 @@
+>    @@ -11,6 +11,10 @@
 >         - git:
 >             repo: 'https://github.com/usegalaxy-eu/libraries-training-repo'
 >             dest: /libraries/
