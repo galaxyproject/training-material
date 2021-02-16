@@ -62,6 +62,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 1. In your working directory, add the Singularity role to your `requirements.yml` file:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/requirements.yml
 >    +++ b/requirements.yml
@@ -73,6 +74,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
 >    +- src: gantsign.golang
 >    +  version: 2.6.3
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add golang and singulary ansible roles"}
 >
@@ -104,10 +106,11 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -16,6 +16,8 @@
+>    @@ -17,6 +17,8 @@
 >           become: true
 >           become_user: postgres
 >         - geerlingguy.pip
@@ -116,6 +119,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >         - galaxyproject.galaxy
 >         - role: uchida.miniconda
 >           become: true
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add the roles to the playbook"}
 >
@@ -169,8 +173,8 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -28,6 +28,7 @@ miniconda_manage_dependencies: false
->
+>    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
+>     
 >     galaxy_config:
 >       galaxy:
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
@@ -178,16 +182,19 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         brand: "🧬🔬🚀"
 >         admin_users: admin@example.org
 >         database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    @@ -65,6 +66,11 @@ galaxy_config_templates:
+>    @@ -87,7 +89,12 @@ galaxy_config:
 >     galaxy_config_templates:
 >       - src: templates/galaxy/config/job_conf.xml.j2
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->
+>     
 >    +galaxy_config_files:
->    + - src: files/galaxy/config/dependency_resolvers_conf.xml
->    +   dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>    +- src: files/galaxy/config/dependency_resolvers_conf.xml
+>    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
+>     
+>     # systemd
+>     galaxy_systemd_mode: mule
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container and dependency resolvers"}
@@ -202,12 +209,14 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 > 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
 >
+>    {% raw %}
 >    ```diff
 >    --- /dev/null
 >    +++ b/files/galaxy/config/dependency_resolvers_conf.xml
 >    @@ -0,0 +1,2 @@
->    <dependency_resolvers>
->    </dependency_resolvers>
+>    +<dependency_resolvers>
+>    +</dependency_resolvers>
+>    {% endraw %}
 >    ```
 >    {: data-commit="Configure the dependency resolvers"}
 >
@@ -218,22 +227,25 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    --- /dev/null
 >    +++ b/templates/galaxy/config/container_resolvers_conf.xml.j2
 >    @@ -0,0 +1,6 @@
->    <containers_resolvers>
->      <explicit_singularity />
->      <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->      <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->      <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
->    </containers_resolvers>
+>    +<containers_resolvers>
+>    +  <explicit_singularity />
+>    +  <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>    +  <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>    +  <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
+>    +</containers_resolvers>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Configure the container resolver"}
 >
 > 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.xml.j2`, by adding the `singularity_enabled` parameter:
 >
+>    {% raw %}
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -3,7 +3,9 @@
+>    @@ -2,8 +2,17 @@
+>         <plugins workers="4">
+>             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
 >         </plugins>
 >    -    <destinations default="local_destination">
 >    +    <destinations default="singularity">
@@ -250,6 +262,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         </destinations>
 >         <tools>
 >         </tools>
+>    {% endraw %}
 >    ```
 >    {: data-commit="Update the job_conf.xml with singularity destination"}
 >
