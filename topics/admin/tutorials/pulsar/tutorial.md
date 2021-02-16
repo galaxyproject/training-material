@@ -135,12 +135,13 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >
 > 1. From your ansible working directory, edit the `requirements.yml` file and add the following lines:
 >
->    ```yaml
+>    ```diff
 >    - name: usegalaxy_eu.rabbitmq
 >      version: 0.1.0
 >    - src: galaxyproject.pulsar
 >      version: 1.0.6
 >    ```
+>    {: data-commit="Add requirements"}
 >
 > 2. Now install it with:
 >
@@ -188,15 +189,22 @@ More information about the rabbitmq ansible role can be found [in the repository
 
 > ### {% icon hands_on %} Hands-on: Add RabbitMQ settings to Galaxy VM groupvars file.
 >
-> 1. Create or edit the file `group_vars/all.yml` and set your private token:
+> 1. Edit your `group_vars/secret.yml` and define some random passwords:
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-vault edit group_vars/secret.yml
+>    > ```
+>    {: .code-in}
 >
 >    ```yaml
->    rabbitmq_password_galaxy_au: areallylongpasswordhere
+>    vault_rabbitmq_password_vhost: "a-really-long-password-here"
+>    vault_rabbitmq_admin_password: "a-different-really-long-password"
 >    ```
 >
->    This is going in a special file because both of our services, Galaxy and Pulsar, need it. Both Galaxy in the job configuration, and Pulsar in its configuration. The `group_vars/all.yml` is included for every playbook run, no matter which group a machine belong to.
+>    This is going in the vault as they are secrets we need to set. Both of our services, Galaxy and Pulsar, need these variables, so we'll need to make sure they're in both playbooks. Both Galaxy in the job configuration, and Pulsar in its configuration.
 >
->    Replace `areallylongpasswordhere` with a long randomish (or not) string.
+>    Replace both with long random (or not) string.
 >
 > 2. From your ansible working directory, edit the `group_vars/galaxyservers.yml` file and add make the following changes.
 >
@@ -218,7 +226,6 @@ More information about the rabbitmq ansible role can be found [in the repository
 >     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >
 >    +# RabbitMQ
->    +rabbitmq_admin_password: a-different-long-password
 >    +rabbitmq_version: 3.8.9-1
 >    +rabbitmq_plugins: rabbitmq_management
 >    +
@@ -239,14 +246,15 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +
 >    +rabbitmq_users:
 >    +  - user: admin
->    +    password: "{{ rabbitmq_admin_password }}"
+>    +    password: "{{ vault_rabbitmq_admin_password }}"
 >    +    tags: administrator
 >    +    vhost: /
 >    +  - user: galaxy_au
->    +    password: "{{ rabbitmq_password_galaxy_au }}"  #This password is set in group_vars/all.yml
+>    +    password: "{{ vault_rabbitmq_password_vhost }}"
 >    +    vhost: /pulsar/galaxy_au
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure RabbitMQ"}
 >
 > 3. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
@@ -258,6 +266,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    +    - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
 >    ```
+>    {: data-commit="Add role"}
 >
 >    > ### {% icon tip %} Why is this at the end?
 >    > This is one of the constant problems with Ansible, how do you order everything correctly? Does an ordering exist such that a single run of the playbook will have everything up and working? We encounter one such instance of this problem now.
@@ -415,7 +424,7 @@ Some of the other options we will be using are:
 > 2. Create a new file in `group_vars` called `pulsarservers.yml` and set some of the above variables as well as some others.
 >
 >    {% raw %}
->    ```yaml
+>    ```diff
 >    galaxy_server_url: # Important!!!
 >    # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
 >
@@ -467,8 +476,9 @@ Some of the other options we will be using are:
 >        args:
 >          - name: auto_init
 >            value: true
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add pulsar group variables"}
 >
 >    > ### {% icon details %} Running non-conda tools
 >    > If the tool you want to run on Pulsar doesn't have a conda package, you will need to make alternative arrangements! This is complex and beyond our scope here. See the [Pulsar documentation](https://pulsar.readthedocs.io/en/latest/) for details.
@@ -476,10 +486,11 @@ Some of the other options we will be using are:
 >
 > 3. Add the following lines to your `hosts` file:
 >
->    ```ini
+>    ```diff
 >    [pulsarservers]
 >    <ip_address or fqdn of your pulsar server> ansible_user=<username to login with>
 >    ```
+>    {: data-commit="Add pulsar host"}
 >
 {: .hands_on}
 
@@ -492,7 +503,7 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 > 1. Create a `pulsar.yml` file with the following contents:
 >
 >    {% raw %}
->    ```yaml
+>    ```diff
 >    - hosts: pulsarservers
 >      pre_tasks:
 >        - name: Install some packages
@@ -511,14 +522,13 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >        - role: galaxyproject.cvmfs
 >          become: yes
 >        - galaxyproject.pulsar
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add pulsar playbook"}
 >
 >    There are a couple of *pre-tasks* here. This is because we need to install some base packages on these very vanilla ubuntu instances as well as give ourselves ownership of the directory we are installing into.
 >
->
 {: .hands_on}
-
 
 > ### {% icon hands_on %} Hands-on: Run the Playbook
 >
@@ -563,7 +573,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 > 1. In your `templates/galaxy/config/job_conf.xml.j2` file add the following job runner to the `<plugins>` section:
 >
 >    {% raw %}
->    ```xml
+>    ```diff
 >    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
 >        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param>
 >        <param id="amqp_ack_republish_time">1200</param>
@@ -574,13 +584,14 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >        <param id="galaxy_url">https://{{ inventory_hostname }}</param>
 >        <param id="manager">_default_</param>
 >    </plugin>
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add pulsar plugin"}
 >
 >    Add the following to the `<destinations>` section of your `job_conf.xml` file:
 >
 >    {% raw %}
->    ```xml
+>    ```diff
 >    <destination id="pulsar" runner="pulsar_runner" >
 >        <param id="default_file_action">remote_transfer</param>
 >        <param id="dependency_resolution">remote</param>
@@ -590,8 +601,9 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >        <param id="rewrite_parameters">True</param>
 >        <param id="transport">curl</param>
 >    </destination>
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Add pulsar destination"}
 >
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
@@ -613,6 +625,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >         </tools>
 >     </job_conf>
 >    ```
+>    {: data-commit="Send bwa and bwa-mem to pulsar"}
 >
 >    Note that here we are using the short tool IDs. If you want to run only a specific version of a tool in Pulsar, you have to use the full tool ID (e.g. `toolshed.g2.bx.psu.edu/repos/devteam/bwa/bwa/0.7.17.4`) instead. The full tool ID can be found inside the `integrated_tool_panel.xml` file in the `mutable-config` directory.
 >
