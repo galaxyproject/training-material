@@ -135,11 +135,19 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 >
 > 1. From your ansible working directory, edit the `requirements.yml` file and add the following lines:
 >
+>    {% raw %}
 >    ```diff
->    - name: usegalaxy_eu.rabbitmq
->      version: 0.1.0
->    - src: galaxyproject.pulsar
->      version: 1.0.6
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -24,3 +24,7 @@
+>       version: 0.0.2
+>     - src: galaxyproject.slurm
+>       version: 0.1.3
+>    +- name: usegalaxy_eu.rabbitmq
+>    +  version: 0.1.0
+>    +- src: galaxyproject.pulsar
+>    +  version: 1.0.6
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add requirements"}
 >
@@ -212,7 +220,7 @@ More information about the rabbitmq ansible role can be found [in the repository
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -81,6 +81,7 @@ certbot_environment: staging
+>    @@ -128,8 +128,10 @@ certbot_environment: staging
 >     certbot_well_known_root: /srv/nginx/_well-known_root
 >     certbot_share_key_users:
 >       - nginx
@@ -221,10 +229,13 @@ More information about the rabbitmq ansible role can be found [in the repository
 >         systemctl restart nginx || true
 >    +    systemctl restart rabbitmq-server || true
 >     certbot_domains:
->    @@ -100,3 +101,29 @@ nginx_ssl_role: usegalaxy_eu.certbot
->     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
->
+>      - "{{ inventory_hostname }}"
+>     certbot_agree_tos: --agree-tos
+>    @@ -162,3 +164,31 @@ slurm_config:
+>       SlurmdParameters: config_overrides   # Ignore errors if the host actually has cores != 2
+>       SelectType: select/cons_res
+>       SelectTypeParameters: CR_CPU_Memory  # Allocate individual cores/memory instead of entire node
+>    +
 >    +# RabbitMQ
 >    +rabbitmq_version: 3.8.9-1
 >    +rabbitmq_plugins: rabbitmq_management
@@ -258,13 +269,18 @@ More information about the rabbitmq ansible role can be found [in the repository
 >
 > 3. Update the Galaxy playbook to include the *usegalaxy_eu.rabbitmq* role.
 >
+>    {% raw %}
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -25,4 +26,3 @@
+>    @@ -33,5 +33,6 @@
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.galaxy_systemd
 >    +    - usegalaxy_eu.rabbitmq
 >         - galaxyproject.nginx
+>         - galaxyproject.cvmfs
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add role"}
 >
@@ -425,57 +441,60 @@ Some of the other options we will be using are:
 >
 >    {% raw %}
 >    ```diff
->    galaxy_server_url: # Important!!!
->    # Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
->
->    pulsar_root: /mnt/pulsar
->
->    pulsar_pip_install: true
->    pulsar_pycurl_ssl_library: openssl
->    pulsar_systemd: true
->    pulsar_systemd_runner: webless
->
->    pulsar_create_user: true
->    pulsar_user: {name: pulsar, shell: /bin/bash}
->
->    pulsar_optional_dependencies:
->      - pyOpenSSL
->      # For remote transfers initiated on the Pulsar end rather than the Galaxy end
->      - pycurl
->      # drmaa required if connecting to an external DRM using it.
->      - drmaa
->      # kombu needed if using a message queue
->      - kombu
->      # amqp 5.0.3 changes behaviour in an unexpected way, pin for now.
->      - 'amqp==5.0.2'
->      # psutil and pylockfile are optional dependencies but can make Pulsar
->      # more robust in small ways.
->      - psutil
->
->    pulsar_yaml_config:
->      conda_auto_init: True
->      conda_auto_install: True
->      staging_directory: "{{ pulsar_staging_dir }}"
->      persistence_directory: "{{ pulsar_persistence_dir }}"
->      tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
->      # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
->      message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671//pulsar/galaxy_au?ssl=1"
->      min_polling_interval: 0.5
->      amqp_publish_retry: True
->      amqp_publish_retry_max_retries: 5
->      amqp_publish_retry_interval_start: 10
->      amqp_publish_retry_interval_step: 10
->      amqp_publish_retry_interval_max: 60
->
->    # We also need to create the dependency resolver file so pulsar knows how to
->    # find and install dependencies for the tools we ask it to run. The simplest
->    # method which covers 99% of the use cases is to use conda auto installs similar
->    # to how Galaxy works.
->    pulsar_dependency_resolvers:
->      - name: conda
->        args:
->          - name: auto_init
->            value: true
+>    --- /dev/null
+>    +++ b/group_vars/pulsarservers.yml
+>    @@ -0,0 +1,51 @@
+>    +galaxy_server_url: # Important!!!
+>    +# Put your Galaxy server's fully qualified domain name (FQDN) (or the FQDN of the RabbitMQ server) above.
+>    +
+>    +pulsar_root: /mnt/pulsar
+>    +
+>    +pulsar_pip_install: true
+>    +pulsar_pycurl_ssl_library: openssl
+>    +pulsar_systemd: true
+>    +pulsar_systemd_runner: webless
+>    +
+>    +pulsar_create_user: true
+>    +pulsar_user: {name: pulsar, shell: /bin/bash}
+>    +
+>    +pulsar_optional_dependencies:
+>    +  - pyOpenSSL
+>    +  # For remote transfers initiated on the Pulsar end rather than the Galaxy end
+>    +  - pycurl
+>    +  # drmaa required if connecting to an external DRM using it.
+>    +  - drmaa
+>    +  # kombu needed if using a message queue
+>    +  - kombu
+>    +  # amqp 5.0.3 changes behaviour in an unexpected way, pin for now.
+>    +  - 'amqp==5.0.2'
+>    +  # psutil and pylockfile are optional dependencies but can make Pulsar
+>    +  # more robust in small ways.
+>    +  - psutil
+>    +
+>    +pulsar_yaml_config:
+>    +  conda_auto_init: True
+>    +  conda_auto_install: True
+>    +  staging_directory: "{{ pulsar_staging_dir }}"
+>    +  persistence_directory: "{{ pulsar_persistence_dir }}"
+>    +  tool_dependency_dir: "{{ pulsar_dependencies_dir }}"
+>    +  # The following are the settings for the pulsar server to contact the message queue with related timeouts etc.
+>    +  message_queue_url: "pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@{{ galaxy_server_url }}:5671//pulsar/galaxy_au?ssl=1"
+>    +  min_polling_interval: 0.5
+>    +  amqp_publish_retry: True
+>    +  amqp_publish_retry_max_retries: 5
+>    +  amqp_publish_retry_interval_start: 10
+>    +  amqp_publish_retry_interval_step: 10
+>    +  amqp_publish_retry_interval_max: 60
+>    +
+>    +# We also need to create the dependency resolver file so pulsar knows how to
+>    +# find and install dependencies for the tools we ask it to run. The simplest
+>    +# method which covers 99% of the use cases is to use conda auto installs similar
+>    +# to how Galaxy works.
+>    +pulsar_dependency_resolvers:
+>    +  - name: conda
+>    +    args:
+>    +      - name: auto_init
+>    +        value: true
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar group variables"}
@@ -486,9 +505,16 @@ Some of the other options we will be using are:
 >
 > 3. Add the following lines to your `hosts` file:
 >
+>    {% raw %}
 >    ```diff
->    [pulsarservers]
->    <ip_address or fqdn of your pulsar server> ansible_user=<username to login with>
+>    --- a/hosts
+>    +++ b/hosts
+>    @@ -1,2 +1,4 @@
+>     [galaxyservers]
+>     gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
+>    +[galaxyservers]
+>    +gat-0.au.training.galaxyproject.eu ansible_user=ubuntu
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar host"}
 >
@@ -504,24 +530,27 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 >
 >    {% raw %}
 >    ```diff
->    - hosts: pulsarservers
->      pre_tasks:
->        - name: Install some packages
->          package:
->            name:
->              - build-essential
->              - git
->              - python3-dev
->              - libcurl4-openssl-dev
->              - libssl-dev
->              - virtualenv
->            state: present
->            update_cache: yes
->          become: yes
->      roles:
->        - role: galaxyproject.cvmfs
->          become: yes
->        - galaxyproject.pulsar
+>    --- /dev/null
+>    +++ b/pulsar.yml
+>    @@ -0,0 +1,18 @@
+>    +- hosts: pulsarservers
+>    +  pre_tasks:
+>    +    - name: Install some packages
+>    +      package:
+>    +        name:
+>    +          - build-essential
+>    +          - git
+>    +          - python3-dev
+>    +          - libcurl4-openssl-dev
+>    +          - libssl-dev
+>    +          - virtualenv
+>    +        state: present
+>    +        update_cache: yes
+>    +      become: yes
+>    +  roles:
+>    +    - role: galaxyproject.cvmfs
+>    +      become: yes
+>    +    - galaxyproject.pulsar
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar playbook"}
@@ -574,16 +603,25 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
->        <param id="amqp_url">pyamqp://galaxy_au:{{ rabbitmq_password_galaxy_au }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param>
->        <param id="amqp_ack_republish_time">1200</param>
->        <param id="amqp_acknowledge">True</param>
->        <param id="amqp_consumer_timeout">2.0</param>
->        <param id="amqp_publish_retry">True</param>
->        <param id="amqp_publish_retry_max_retries">60</param>
->        <param id="galaxy_url">https://{{ inventory_hostname }}</param>
->        <param id="manager">_default_</param>
->    </plugin>
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
+>    @@ -2,6 +2,16 @@
+>         <plugins workers="4">
+>             <plugin id="local_plugin" type="runner" load="galaxy.jobs.runners.local:LocalJobRunner"/>
+>             <plugin id="slurm" type="runner" load="galaxy.jobs.runners.slurm:SlurmJobRunner"/>
+>    +        <plugin id="pulsar_runner" type="runner" load="galaxy.jobs.runners.pulsar:PulsarMQJobRunner" >
+>    +            <param id="amqp_url">pyamqp://galaxy_au:{{ vault_rabbitmq_password_vhost }}@localhost:5671/{{ rabbitmq_vhosts[0] }}?ssl=1</param>
+>    +            <param id="amqp_ack_republish_time">1200</param>
+>    +            <param id="amqp_acknowledge">True</param>
+>    +            <param id="amqp_consumer_timeout">2.0</param>
+>    +            <param id="amqp_publish_retry">True</param>
+>    +            <param id="amqp_publish_retry_max_retries">60</param>
+>    +            <param id="galaxy_url">https://{{ inventory_hostname }}</param>
+>    +            <param id="manager">_default_</param>
+>    +        </plugin>
+>         </plugins>
+>         <destinations default="slurm">
+>             <destination id="local_destination" runner="local_plugin"/>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar plugin"}
@@ -592,15 +630,24 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    {% raw %}
 >    ```diff
->    <destination id="pulsar" runner="pulsar_runner" >
->        <param id="default_file_action">remote_transfer</param>
->        <param id="dependency_resolution">remote</param>
->        <param id="jobs_directory">/mnt/pulsar/files/staging</param>
->        <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
->        <param id="remote_metadata">False</param>
->        <param id="rewrite_parameters">True</param>
->        <param id="transport">curl</param>
->    </destination>
+>    --- a/templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
+>    @@ -15,6 +15,15 @@
+>         </plugins>
+>         <destinations default="slurm">
+>             <destination id="local_destination" runner="local_plugin"/>
+>    +        <destination id="pulsar" runner="pulsar_runner" >
+>    +            <param id="default_file_action">remote_transfer</param>
+>    +            <param id="dependency_resolution">remote</param>
+>    +            <param id="jobs_directory">/mnt/pulsar/files/staging</param>
+>    +            <param id="persistence_directory">/mnt/pulsar/files/persisted_data</param>
+>    +            <param id="remote_metadata">False</param>
+>    +            <param id="rewrite_parameters">True</param>
+>    +            <param id="transport">curl</param>
+>    +        </destination>
+>             <destination id="slurm" runner="slurm">
+>                 <param id="singularity_enabled">true</param>
+>                 <env id="LC_ALL">C</env>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Add pulsar destination"}
@@ -613,17 +660,19 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 >    Add the following to the end of the `job_conf.xml` file (inside the `<tools>` section if it exists or create it if it doesn't.)
 >
+>    {% raw %}
 >    ```diff
 >    --- a/templates/galaxy/config/job_conf.xml.j2
 >    +++ b/templates/galaxy/config/job_conf.xml.j2
->    @@ -35,6 +35,7 @@
->
->         </destinations>
+>    @@ -63,5 +63,7 @@
+>         </resources>
 >         <tools>
+>             <tool id="testing" destination="dynamic_cores_time" resources="testing" />
 >    +        <tool id="bwa" destination="pulsar"/>
 >    +        <tool id="bwa_mem" destination="pulsar"/>
 >         </tools>
 >     </job_conf>
+>    {% endraw %}
 >    ```
 >    {: data-commit="Send bwa and bwa-mem to pulsar"}
 >
