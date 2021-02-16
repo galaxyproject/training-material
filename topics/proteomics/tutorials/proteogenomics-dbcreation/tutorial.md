@@ -83,7 +83,7 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 > 3. Rename the datasets with more descriptive names (strip off the url prefixes)
 >    {% include snippets/rename_dataset.md %}
 >
-> 4. Make sure that the file `FASTQ_ProB_22List.fastqsanger`
+> 4. Make sure that the datatype of file `FASTQ_ProB_22List.fastqsanger` is set to `fastqsanger`
 >    {% include snippets/change_datatype.md datatype="fastqsanger" %}
 >
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
@@ -98,27 +98,31 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 UCSC prefaces chromosome names with chr while Ensembl does not. To perform this action, we use the Replace Text in a specific column - a [regular expression](https://docs.python.org/3/library/re.html) tool.
 
 > ### {% icon hands_on %} Hands-on: Replace Text in a specific column
->  1. Change numbered chromosome names
+>  1. **Replace Text in a specific column** {% icon tool %} with the following parameters:
+>  2. {% icon param-file %} *"File to process"*: `Mus_musculus.GRCm38.86.gtf`
+>  3. Change numbered chromosome names
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([1-9][0-9]*)$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  2. Change XY chromosomes
+>  4. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change XY chromosomes
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^([XY])$`
 >    - {% icon param-select %} *"Replace with*: `chr\\1`
->  3. Change mitochondrial chromosome
+>  5. {% icon param-repeat %} *Insert Replacement* to add another replacement option to change mitochondrial chromosome
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
+
+>  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
+>
 >
 > > ### {% icon comment %} Note on chromosome name changes
 > >  This step is necessary to help identify and correct errors due to inputs having non-identical chromosome identifiers and/or different chromosome sequence content. [Galaxy Support](https://galaxyproject.org/support/chrom-identifiers/)
 > {: .comment}
-
 {: .hands_on}
 
 
-# Aligning FASTQ files to the human genome
+# Aligning FASTQ files to the mouse genome
 
 The first tool in the workflow is the [**HISAT2**](http://ccb.jhu.edu/software/hisat) alignment tool. It maps next-generation sequence (NGS) reads to the reference genome. This tool requires an RNA-seq file (.FASTQ) and a reference genome file in Gene transfer format (GTF). This .gtf file is obtained from the Ensembl database. When successful, this tool outputs a .bam file (binary version of a SAM: **S**equence **A**lignment/**M**ap).
 
@@ -259,12 +263,12 @@ Its input can include not only the alignments of raw reads used by other transcr
 >    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
 >    - {% icon param-select %} *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
 >      - {% icon param-select %} *"Reference file"*: `Use file from History`
->      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.gtf`
+>      - {% icon param-file %} *"GTF/GFF3 dataset to guide assembly"*: `Mus_musculus.GRCm38.86.fixed.gtf`
 >      - {% icon param-select %} *"Use Reference transcripts only?"*: `No`
 >      - {% icon param-select %} *"Output files for differential expression?"*: `No additional output`
 >      - {% icon param-select %} *"Output coverage file?"*: `No`
 > 2. Inspect {% icon galaxy-eye %} the resulting files.
-> 3. Rename the output to `Stringtie_outut.gtf`
+> 3. Rename the output to `Stringtie_output.gtf`
 >    {% include snippets/rename_dataset.md %}
 > 4. Make sure the datatype is `gtf`
 >    {% include snippets/change_datatype.md %}
@@ -307,13 +311,14 @@ The original form of this program is also distributed as part of the Cufflinks s
 > ### {% icon hands_on %} Hands-on: compare assembled transcripts against a reference annotation
 >
 > 1. **GffCompare** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_outut.gtf`
+>    - {% icon param-file %} *"GTF inputs for comparison"*`Stringtie_output.gtf`
 >    - {% icon param-select %} *"Use Reference Annotation"*: `yes`
->      - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
+>      - {% icon param-select %} *"Choose the source for the reference annotation"*: `History`
+>        - {% icon param-file %} *"Reference Annotation"*: `Mus_musculus.GRCm38.86.gtf`
 >      - {% icon param-select %} *"Ignore reference transcripts that are not overlapped by any input transfrags"*: `No`
 >      - {% icon param-select %} *"Ignore input transcripts that are not overlapped by any reference transcripts"*: `No`
 >    - {% icon param-select %} *"Use Sequence Data"*: `No`
->    - {% icon param-select %} *"discard (ignore) single-exon transcripts"*: `No`
+>    - {% icon param-select %} *"Discard (ignore) single-exon transcripts"*: `No`
 >    - {% icon param-text %} *"Max. Distance for assessing exon accuracy"*: `100`
 >    - {% icon param-text %} *"Max distance for transcript grouping"*: `100`
 >    - {% icon param-select %} *"discard intron-redundant transfrags sharing 5'"*: `No`
@@ -386,16 +391,18 @@ along with the UniProt and cRAP databases.
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %} with the following parameters:
->   - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
->   - {% icon param-files %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
->     ```
->     1.HISAT_Output.rpkm
->     2.HISAT_Output.snv
->     3.HISAT_Output.indel
->     ```
->   - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
->   - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
+> 1. **FASTA Merge Files and Filter Unique Sequences** {% icon tool %}
+>   - Click {% icon param-repeat %} *"Insert Input FASTA File(s)"* twice so that there are a total of three *"Input FASTA File(s)"* blocks.
+>   - Use the following parameters:
+>     - {% icon param-check %} *"Run in batch mode?"*: `Merge individual FASTAs (output collection if input is collection)`
+>     - {% icon param-file %} *"Input FASTA File(s)"* : `Input Custom ProDB Fasta File output`
+>       ```
+>       1.HISAT_Output.rpkm
+>       2.HISAT_Output.snv
+>       3.HISAT_Output.indel
+>       ```
+>     - {% icon param-select %} *"How are sequences judged to be unique?"*: `Accession and Sequence`
+>     - {% icon param-text %} *"Accession Parsing Regular Expression"*: `^>([^ |]+).*$`
 >
 {: .hands_on}
 > ### {% icon comment %} Tool parameters explained
@@ -415,7 +422,7 @@ along with the UniProt and cRAP databases.
 >    - {% icon param-file %} *"Convert these sequences"*: `Merged and Filtered FASTA from (fasta)`
 >
 > 2. **Column Regex Find And Replace** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Select cells from"*: `genomic_mapping_sqlite' (tabular)`
+>    - {% icon param-file %} *"Select cells from"*: `FASTA-to-Tabular output` from previous step
 >    - {% icon param-select %} *"Using"*: `column 1`
 >    - {% icon param-repeat %} **Insert Check**
 >      - {% icon param-text %} *"Find Regex"* : `^(ENS[^_]+_\d+:)([ACGTacgt]+)>([ACGTacgt]+)\s*`
