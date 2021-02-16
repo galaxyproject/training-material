@@ -76,9 +76,17 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 1. In your working directory, add the CVMFS role to your `requirements.yml`
 >
+>    {% raw %}
 >    ```diff
->    - src: galaxyproject.cvmfs
->      version: 0.2.13
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -18,3 +18,5 @@
+>       version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+>     - src: gantsign.golang
+>       version: 2.6.3
+>    +- src: galaxyproject.cvmfs
+>    +  version: 0.2.13
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add requirement"}
 >
@@ -106,11 +114,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 >    Add the following lines to your `group_vars/all.yml` file, creating it if it doesn't exist:
 >
+>    {% raw %}
 >    ```diff
->    # CVMFS vars
->    cvmfs_role: client
->    galaxy_cvmfs_repos_enabled: config-repo
->    cvmfs_quota_limit: 500
+>    --- /dev/null
+>    +++ b/group_vars/all.yml
+>    @@ -0,0 +1,4 @@
+>    +# CVMFS vars
+>    +cvmfs_role: client
+>    +galaxy_cvmfs_repos_enabled: config-repo
+>    +cvmfs_quota_limit: 500
+>    {% endraw %}
 >    ```
 >    {: data-commit="Configure CVMFS variables"}
 >
@@ -120,12 +133,16 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 4. Add the new role to the list of roles under the `roles` key in your playbook, `galaxy.yml`:
 >
+>    {% raw %}
 >    ```diff
->    - hosts: galaxyservers
->      become: true
->      roles:
->        # ... existing roles ...
->        - galaxyproject.cvmfs
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -25,3 +25,4 @@
+>           become_user: "{{ galaxy_user.name }}"
+>         - usegalaxy_eu.galaxy_systemd
+>         - galaxyproject.nginx
+>    +    - galaxyproject.cvmfs
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add role to playbook"}
 >
@@ -222,11 +239,19 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 1. Edit the `group_vars/galaxyservers.yml` file and add a `tool_data_table_config_path` entry under the `galaxy` key of the `galaxy_config` section in the `group_vars/galaxyservers.yml` file. This new entry should be a list containing the paths to both `tool_data_table_conf.xml` files referenced above.
 >
+>    {% raw %}
 >    ```diff
->    # CVMFS vars
->    cvmfs_role: client
->    galaxy_cvmfs_repos_enabled: config-repo
->    cvmfs_quota_limit: 500
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
+>     
+>     galaxy_config:
+>       galaxy:
+>    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
+>         dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
+>         containers_resolvers_config_file: "{{ galaxy_config_dir }}/container_resolvers_conf.xml"
+>         brand: "🧬🔬🚀"
+>    {% endraw %}
 >    ```
 >    {: data-commit="Add tool_data_table_config_path to group variables"}
 >
