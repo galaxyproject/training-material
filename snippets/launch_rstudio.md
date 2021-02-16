@@ -3,7 +3,7 @@
 >  Depending on which server you are using, you may be able to run RStudio directly in Galaxy. If that is not available, RStudio Cloud can be an alternative.
 >
 > > ### {% icon tip %} Tip: Launch RStudio in Galaxy
-> > Currently RStudio in Galaxy is only available on [UseGalaxy.eu](https://usegalaxy.eu)
+> > Currently RStudio in Galaxy is only available on [UseGalaxy.eu](https://usegalaxy.eu) and [UseGalaxy.org](https://usegalaxy.org)
 > >
 > > 1. Open the Rstudio tool {% icon tool %} by clicking [here](https://usegalaxy.eu/?tool_id=interactive_tool_rstudio)
 > > 2. Click Execute
