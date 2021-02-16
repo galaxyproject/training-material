@@ -62,12 +62,19 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >
 > 1. In your working directory, add the Singularity role to your `requirements.yml` file:
 >
->    ```yaml
->    - src: cyverse-ansible.singularity
->      version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
->    - src: gantsign.golang
->      version: 2.6.3
+>    ```diff
+>    --- a/requirements.yml
+>    +++ b/requirements.yml
+>    @@ -14,3 +14,7 @@
+>       version: 0.1.4
+>     - src: usegalaxy_eu.certbot
+>       version: 0.1.5
+>    +- src: cyverse-ansible.singularity
+>    +  version: 048c4f178077d05c1e67ae8d9893809aac9ab3b7
+>    +- src: gantsign.golang
+>    +  version: 2.6.3
 >    ```
+>    {: data-commit="Add golang and singulary ansible roles"}
 >
 > 2. Install the requirements with `ansible-galaxy`:
 >
@@ -78,14 +85,23 @@ First, we will install Singularity using Ansible. On most operating systems ther
 > 4. Specify which version of Singularity you want to install, in `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
->    ```yaml
->    # Golang
->    golang_gopath: '/opt/workspace-go'
->    # Singularity target version
->    singularity_version: "3.7.0"
->    singularity_go_path: "{{ golang_install_dir }}"
->    ```
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -123,3 +123,9 @@ nginx_conf_http:
+>     nginx_ssl_role: usegalaxy_eu.certbot
+>     nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>     nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    +
+>    +# Golang
+>    +golang_gopath: '/opt/workspace-go'
+>    +# Singularity target version
+>    +singularity_version: "3.7.0"
+>    +singularity_go_path: "{{ golang_install_dir }}"
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure golang and singularity"}
+>
 > 4. Add the new roles to your `galaxy.yml` playbook, before the Galaxy server itself. We'll do this bceause it's a dependency of Galaxy to run, so it needs to be there before Galaxy starts.
 >
 >    ```diff
@@ -101,6 +117,7 @@ First, we will install Singularity using Ansible. On most operating systems ther
 >         - role: uchida.miniconda
 >           become: true
 >    ```
+>    {: data-commit="Add the roles to the playbook"}
 >
 > 5. Run the playbook
 >
@@ -171,8 +188,9 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    +galaxy_config_files:
 >    + - src: files/galaxy/config/dependency_resolvers_conf.xml
 >    +   dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure the container and dependency resolvers"}
 >
 > 2. Create the `files/galaxy/config` directory if it doesn't exist:
 >
@@ -184,23 +202,31 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >
 > 3. Create the new file `files/galaxy/config/dependency_resolvers_conf.xml`. This will not enable any dependency resolvers like the legacy toolshed packages or Galaxy packages, and instead everything will be resolved through Singularity.
 >
->    ```xml
+>    ```diff
+>    --- /dev/null
+>    +++ b/files/galaxy/config/dependency_resolvers_conf.xml
+>    @@ -0,0 +1,2 @@
 >    <dependency_resolvers>
 >    </dependency_resolvers>
 >    ```
+>    {: data-commit="Configure the dependency resolvers"}
 >
 > 3. Create the new file `templates/galaxy/config/container_resolvers_conf.xml.j2`, this specifies the order in which to attempt container resolution.
 >
 >    {% raw %}
->    ```xml
+>    ```diff
+>    --- /dev/null
+>    +++ b/templates/galaxy/config/container_resolvers_conf.xml.j2
+>    @@ -0,0 +1,6 @@
 >    <containers_resolvers>
 >      <explicit_singularity />
 >      <cached_mulled_singularity cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
 >      <mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
 >      <build_mulled_singularity auto_install="False" cache_directory="{{ galaxy_mutable_data_dir }}/cache/singularity" />
 >    </containers_resolvers>
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Configure the container resolver"}
 >
 > 3. Now, we want to make Galaxy run jobs using Singularity. Modify the file `templates/galaxy/config/job_conf.xml.j2`, by adding the `singularity_enabled` parameter:
 >
@@ -225,6 +251,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         <tools>
 >         </tools>
 >    ```
+>    {: data-commit="Update the job_conf.xml with singularity destination"}
 >
 > 4. Re-run the playbook
 >
