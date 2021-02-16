@@ -1,0 +1,50 @@
+
+<table class="table table-striped">
+ <thead>
+  <tr>
+   <th>Topic</th>
+   <th>Presentor</th>
+   {% unless include.selfstudy %}<th>Type</th>{% endunless %}
+   {% if include.fullprogram %}
+   {% unless include.selfstudy %}
+   <th>Video</th>
+   <th>Length</th>
+   {% endunless %}
+   <th>GTN material</th>
+   <th>FAQ</th>
+   <th>Slack</th>
+   {% endif %}
+  </tr>
+ </thead>
+ <tbody>
+  {% for session in include.sessions %}
+   <tr>
+     <td> {{ session.name }} </td>
+     <td>
+      {% for speaker in session.speaker %}
+       {{ site.data.instructors[speaker].name }}
+      {% endfor %}
+     </td>
+     {% unless include.selfstudy %}<td> {{ session.type }} </td>{% endunless %}
+     {% if include.fullprogram %}
+     {% unless include.selfstudy %}{% unless session.type == 'icebreaker' %}{% unless session.type == 'setup' %}{% unless session.type == 'wrapup' %}
+
+
+     <td> <a target="_blank" href="https://youtu.be/{{ session.video.link }}">Video</a> </td>
+     <td> {{session.video.length | downcase }} </td>
+     {% endunless %}{% endunless %}{% endunless %}{% endunless %}
+     <td>
+      {% if session.material %}{% for m in session.material %}
+       <a href="{{m.link}}?utm_source=smorgasbord&utm_medium=gtn&utm_campaign=smorgasbord2021">{{ m.type | capitalize }}</a>
+      {% endfor %}{% endif %}
+</td>
+     <td> {% if session.faq %} <a target="_blank" href="{{session.faq}}">link</a> {% endif %} </td>
+     <td> <a target="_blank" href="{{session.support_link}}">{{session.support_channel}}</a>  </td>
+     {% endif %}
+   </tr>
+  {% endfor %}
+ </tbody>
+</table>
+{% unless include.selfstudy %}
+**Note:** Length indicates the duration of the video. If you want to follow along and/or perform the tutorial yourself, it will likely take longer to complete.
+{% endunless %}

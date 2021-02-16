@@ -88,12 +88,14 @@ In this tutorial, protein and the total RNA sample was obtained from the early d
 >
 > 5. Make sure the Database/Build (dbkey) is set to `Mouse.Dec 2011 (GRCm38/mm10)(mm10)`
 >    {% include snippets/change_dbkey.md dbkey="Mouse.Dec 2011 (GRCm38/mm10)(mm10)"%}
->
+> 
+> 6. **Note**: If you are running the workflow taken from the **GTN**, then make sure the tool "**Tabular-to-FASTA**" (tool number 26)
+>    has Title Column labeled as "1" and Sequence Column as "2".
 {: .hands_on}
 
 # Change the chromosome names in the Ensembl GTF to match a UCSC genome reference
 
-UCSC prefaces chromosome names with chr while Ensembl does not.  
+UCSC prefaces chromosome names with chr while Ensembl does not. To perform this action, we use the Replace Text in a specific column - a [regular expression](https://docs.python.org/3/library/re.html) tool.
 
 > ### {% icon hands_on %} Hands-on: Replace Text in a specific column
 >  1. **Replace Text in a specific column** {% icon tool %} with the following parameters:
@@ -110,7 +112,13 @@ UCSC prefaces chromosome names with chr while Ensembl does not.
 >    - {% icon param-select %} *"in column"*: `1`
 >    - {% icon param-select %} *"Find pattern"*: `^MT$`
 >    - {% icon param-select %} *"Replace with*: `chrM`
+
 >  6. Rename the output to `Mus_musculus.GRCm38.86.fixed.gtf`
+>
+>
+> > ### {% icon comment %} Note on chromosome name changes
+> >  This step is necessary to help identify and correct errors due to inputs having non-identical chromosome identifiers and/or different chromosome sequence content. [Galaxy Support](https://galaxyproject.org/support/chrom-identifiers/)
+> {: .comment}
 {: .hands_on}
 
 
@@ -434,6 +442,7 @@ along with the UniProt and cRAP databases.
 {: .hands_on}
 > ### {% icon comment %} **FASTA-to-Tabular** and **Tabular-to-FASTA** versions
 > Please make sure the tool version is 1.1.1
+> Also, while running the workflow, the Title column for **Tabular-to-FASTA** might come empty, so please make sure you select Title Column as "1".
 {: .comment}
 
 ![Fasta sequence](../../images/Fasta_sequence.png)

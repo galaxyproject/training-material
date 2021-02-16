@@ -33,6 +33,9 @@ contributors:
 {: .no_toc}
 
 The third and the last workflow in the proteogenomics tutorial is to identifying the "**Novel peptides**" using BlastP and to localize the peptides to its genomic coordinates. Inputs from both workflow 1 and 2 will be used in this workflow.
+Please look at the following tutorials in this proteogenomics series before starting this tutorial:
+1. [Proteogenomics database creation]({% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
+2. [Proteogenomics database search]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
 
 ![Workflow](../../images/Third_workflow.png)
 
@@ -70,6 +73,8 @@ All the files to run this workflow can be obtained from the [second tutorial]({%
 
 
 # Peptide Selection
+
+[BLAST](https://blast.ncbi.nlm.nih.gov/Blast.cgi) is a web based tool used to compare biological sequences. BlastP, matches protein sequences against a protein database. More specifically, it looks at the amino acid sequence of proteins and can detect and evaluate the amount of differences between say, an experimentally derived sequence and all known amino acid sequences from a database. It can then find the most similar sequences and allow for identification of known proteins or for identification of potential peptides associated with novel proteoforms.
 
 The first step in this tutorial is to perfrom BLAST-P analysis using the NCBI-NR database. The output from BLASTP will determine the identification of the novel peptides. The result is a tabular file with 25 columns containing all the information regarding the alignment of these peptides with the sequences in the NCBI-NR database.
 
@@ -371,15 +376,9 @@ The final tool for this workflow generates a tabular output that summarizes the 
 >
 {: .hands_on}
 
-### What's next?
+### Conclusion
 
-This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.
-
-Please look at the following tutorials in this proteogenomics series:
-1. [Proteogenomics database creation]({% link topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.md %})
-2. [Proteogenomics database search]({% link topics/proteomics/tutorials/proteogenomics-dbsearch/tutorial.md %})
-
-This workflow is also available at [usegalaxy.eu](https://usegalaxy.eu/).
+This completes the proteogenomics workflow analysis. This training workflow uses mouse data. For any other organism the data, tool paramters and the workflow will need to be modified accordingly.This workflow is also available at [usegalaxy.eu](https://usegalaxy.eu/).
 
 This workflow was developed by the Galaxy-P team at the University of Minnesota.
 For more information about Galaxy-P or our ongoing work, please visit us at [galaxyp.org](http://galaxyp.org)
