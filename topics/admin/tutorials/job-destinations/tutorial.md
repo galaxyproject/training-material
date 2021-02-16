@@ -58,7 +58,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >
 > 1. Create the directory `files/galaxy/tools/` if it doesn't exist and edit a new file in `files/galaxy/tools/testing.xml` with the following contents:
 >
->    ```xml
+>    ```diff
 >    <tool id="testing" name="Testing Tool">
 >        <command>
 >            <![CDATA[echo "Running with '\${GALAXY_SLOTS:-1}' threads" > "$output1"]]>
@@ -71,7 +71,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >        </outputs>
 >    </tool>
 >    ```
->    {: .question}
+>    {: data-commit="Add testing tool"}
 >
 > 2. Add the tool to the Galaxy group variables under the new item `galaxy_local_tools` :
 >
@@ -88,6 +88,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >     # systemd
 >     galaxy_systemd_mode: mule
 >    ```
+>    {: data-commit="Deploy testing tool"}
 >
 > 3. Run the Galaxy playbook.
 >
@@ -149,6 +150,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >         </tools>
 >     </job_conf>
 >    ```
+>    {: data-commit="Configure testing tool in job conf"}
 >
 > 3. Run the Galaxy playbook. Because we modified `job_conf.xml`, Galaxy will be restarted to reread its config files.
 >
@@ -185,7 +187,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >
 > 1. Create and open `files/galaxy/dynamic_job_rules/my_rules.py`
 >
->    ```python
+>    ```diff
 >    from galaxy.jobs import JobDestination
 >    from galaxy.jobs.mapper import JobMappingException
 >    import os
@@ -197,6 +199,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >            raise JobMappingException("Unauthorized.")
 >        return JobDestination(runner="slurm")
 >    ```
+>    {: data-commit="Add my rules python script"}
 >
 >    This destination will check that the `user_email` is in the set of `admin_users` from your config file.
 >
@@ -221,6 +224,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >     # systemd
 >     galaxy_systemd_mode: mule
 >    ```
+>    {: data-commit="Deploy my_rules dynamic rule"}
 >
 > 3. We next need to configure this plugin in our job configuration:
 >
@@ -238,6 +242,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >         </destinations>
 >         <tools>
 >    ```
+>    {: data-commit="Add dynamic admin only destination"}
 >
 >    This is a **Python function dynamic destination**. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `my_rules.py` to be used in the `job_conf.xml`
 >
@@ -253,6 +258,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >         </tools>
 >     </job_conf>
 >    ```
+>    {: data-commit="Send testing tool to the dynamic admin only destination."}
 >
 > 5. Run the Galaxy playbook.
 >
@@ -281,7 +287,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >
 > 1. Dynamic tool destinations are configured via a YAML file. As before, we'll use a fake example but this is extremely useful in real-life scenarios. Create the file `files/galaxy/config/tool_destinations.yml` with the following contents:
 >
->    ```yaml
+>    ```diff
 >    ---
 >    tools:
 >      testing:
@@ -294,6 +300,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    default_destination: slurm
 >    verbose: True
 >    ```
+>    {: data-commit="Add tool destinations conf"}
 >
 >    The rule says:
 >    - If the tool has ID `testing`:
@@ -323,8 +330,9 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    +  dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
 >       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Deploy tool destinations config file"}
 >
 > 3. We need to update Galaxy's job configuration to use this rule. Open `templates/galaxy/config/job_conf.xml.j2` and add a DTD destination.
 >    Also, comment out or remove the previous `<tool>` definition for the `testing` tool, and replace it with a mapping to the dtd destination like so:
@@ -346,6 +354,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         </tools>
 >     </job_conf>
 >    ```
+>    {: data-commit="Configure dtd in job conf"}
 >
 > 4. Run the Galaxy playbook.
 >
@@ -383,7 +392,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >
 > 1. Create and open `templates/galaxy/config/job_resource_params_conf.xml.j2`
 >
->    ```xml
+>    ```diff
 >    <parameters>
 >        <param label="Cores" name="cores" type="select" help="Number of cores to run job on.">
 >            <option value="1">1 (default)</option>
@@ -392,6 +401,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >      <param label="Time" name="time" type="integer" size="3" min="1" max="24" value="1" help="Maximum job time in hours, 'walltime' value (1-24). Leave blank to use default value." />
 >    </parameters>
 >    ```
+>    {: data-commit="Add job resource params configuration"}
 >
 >    This defines two resource fields, a select box where users can choose between 1 and 2 cores, and a text entry field where users can input an integer value from 1-24 to set the walltime for a job.
 >
@@ -417,8 +427,9 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +  dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
 >     - src: templates/galaxy/config/job_conf.xml.j2
 >       dest: "{{ galaxy_config.galaxy.job_config_file }}"
->    ```
 >    {% endraw %}
+>    ```
+>    {: data-commit="Deploy job resource params configuration"}
 >
 > 3. Next, we define a new section in `job_conf.xml`: `<resources>`. This groups together parameters that should appear together on a tool form. Add the following section to your `templates/galaxy/config/job_conf.xml.j2`:
 >
@@ -434,6 +445,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +    </resources>
 >         <tools>
 >    ```
+>    {: data-commit="Configure resources in job conf"}
 >
 >    The group ID will be used to map a tool to job resource parameters, and the text value of the `<group>` tag is a comma-separated list of `name`s from `job_resource_params_conf.xml` to include on the form of any tool that is mapped to the defined `<group>`.
 >
@@ -450,6 +462,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         </tools>
 >     </job_conf>
 >    ```
+>    {: data-commit="Configure resources in job conf"}
 >
 > 5. We have assigned the `testing` tool to a new destination: `dynamic_cores_time`, but this destination does not exist. We need to create it. Add the following destination in your job conf:
 >
@@ -468,6 +481,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >         <resources>
 >             <group id="testing">cores,time</group>
 >    ```
+>    {: data-commit="Add dynamic_cores_time destination"}
 >
 >    This will be another dynamic destination. Galaxy will load all python files in the {% raw %}`{{ galaxy_dynamic_rule_dir }}`{% endraw %}, and all functions defined in those will be available `dynamic_cores_time` to be used in the `job_conf.xml`
 >
@@ -491,7 +505,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >
 > 1. Create and edit `files/galaxy/dynamic_job_rules/map_resources.py`. Create it with the following contents:
 >
->    ```python
+>    ```diff
 >    import logging
 >    from galaxy.jobs.mapper import JobMappingException
 >
@@ -535,6 +549,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >        log.info('native specification: %s', destination.params.get('nativeSpecification'))
 >        return destination or destination_id
 >    ```
+>    {: data-commit="Add map_resources python"}
 >
 >    It is important to note that **you are responsible for parameter validation, including the job resource selector**. This function only handles the job resource parameter fields, but it could do many other things - examine inputs, job queues, other tool parameters, etc.
 >
@@ -553,6 +568,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >     # systemd
 >     galaxy_systemd_mode: mule
 >    ```
+>    {: data-commit="Deploy map_resources.py"}
 >
 > 3. Run the Galaxy playbook.
 >
