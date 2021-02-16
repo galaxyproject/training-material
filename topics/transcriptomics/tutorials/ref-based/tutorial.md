@@ -446,7 +446,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
 >
-> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCA of low complexity library.
+> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCR of low complexity library.
 >
 > **MarkDuplicates** from [Picard suite](http://broadinstitute.github.io/picard/) examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping to the same location (based on the start position of the mapping).
 >
@@ -485,9 +485,9 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >
 > > 2. **MultiQC** {% icon tool %} to aggregate the idxstats logs:
 > >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `idxstats`
+> >      - *"Which tool was used generate logs?"*: `Samtools`
 > >      - In *"Samtools output"*
-> >         - *"Type of Samtools output?"*: `Markdups`
+> >         - *"Type of Samtools output?"*: `idxstats`
 > >         - {% icon param-files %} *"Samtools output"*: `Samtools idxstats` files
 > >
 > >    > ### {% icon question %} Questions
