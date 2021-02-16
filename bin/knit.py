@@ -1,17 +1,25 @@
 #!/usr/bin/env python
+import argparse
 import re
 import sys
 import knittingneedles as knit
 
-# read in a tutorial, and check the structure of it.
-tuto = open(sys.argv[1], "r+")
-tutorial_contents = tuto.read().split("\n")
+
+parser = argparse.ArgumentParser(
+    description="Extract specially formatted diffs from tutorials as a series of patches to apply"
+)
+parser.add_argument("tutorial", type=argparse.FileType("r+"), help="Input tutorial")
+parser.add_argument(
+    "--patches", nargs='+', help="The patches to knit together with the tutorial"
+)
+args = parser.parse_args()
+tutorial_contents = args.tutorial.read().split("\n")
 chunks = []
-patches = sys.argv[2:]
+
 
 # load patches
 diffs = []
-for patch in patches:
+for patch in args.patches:
     with open(patch, "r") as handle:
         data = handle.readlines()
         commit = data[2].split(": ")[2]
@@ -82,9 +90,9 @@ for line, text in enumerate(tutorial_contents):
     prev_line = text
 
 # Overwrite the original tutorial
-tuto.seek(0)
-tuto.truncate(0)
+args.tutorial.seek(0)
+args.tutorial.truncate(0)
 # The last chunk is a newline for some reason.
 for c in chunks[0:-1]:
-    tuto.write(c + "\n")
-tuto.close()
+    args.tutorial.write(c + "\n")
+args.tutorial.close()
