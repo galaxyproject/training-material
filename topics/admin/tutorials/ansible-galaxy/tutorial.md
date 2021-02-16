@@ -232,7 +232,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ requirements.yml
+>    +++ b/requirements.yml
 >    @@ -0,0 +1,16 @@
 >    +- src: galaxyproject.galaxy
 >    +  version: 0.9.7
@@ -294,7 +294,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ ansible.cfg
+>    +++ b/ansible.cfg
 >    @@ -0,0 +1,4 @@
 >    +[defaults]
 >    +interpreter_python = /usr/bin/python3
@@ -332,7 +332,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > > {% raw %}
 >    > > ```diff
 >    > > --- /dev/null
->    > > +++ hosts
+>    > > +++ b/hosts
 >    > > @@ -0,0 +1,2 @@
 >    > > +[galaxyservers]
 >    > > +gat-0.eu.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
@@ -359,7 +359,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -0,0 +1,15 @@
 >    +---
 >    +# Python 3 support
@@ -389,7 +389,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ galaxy.yml
+>    +++ b/galaxy.yml
 >    @@ -0,0 +1,13 @@
 >    +---
 >    +- hosts: galaxyservers
@@ -718,8 +718,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- galaxy.yml
->    +++ galaxy.yml
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
 >    @@ -5,9 +5,14 @@
 >       pre_tasks:
 >         - name: Install Dependencies
@@ -774,8 +774,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -13,3 +13,16 @@ postgresql_objects_databases:
 >     # PostgreSQL Backups
 >     postgresql_backup_dir: /data/backups
@@ -818,8 +818,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -26,3 +26,14 @@ galaxy_force_checkout: true
 >     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
 >     miniconda_version: 4.7.12
@@ -875,8 +875,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -37,3 +37,28 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
@@ -933,8 +933,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    {% raw %}
 >    ```diff
->    --- ansible.cfg
->    +++ ansible.cfg
+>    --- a/ansible.cfg
+>    +++ b/ansible.cfg
 >    @@ -2,3 +2,4 @@
 >     interpreter_python = /usr/bin/python3
 >     inventory = hosts
@@ -1563,8 +1563,8 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    {% raw %}
 >    ```diff
->    --- galaxy.yml
->    +++ galaxy.yml
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
 >    @@ -16,3 +16,4 @@
 >         - role: uchida.miniconda
 >           become: true
@@ -1578,8 +1578,8 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -62,3 +62,8 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >           - lib/galaxy/main.py
@@ -1599,8 +1599,8 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 >    {% raw %}
 >    ```diff
->    --- galaxy.yml
->    +++ galaxy.yml
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
 >    @@ -6,6 +6,11 @@
 >         - name: Install Dependencies
 >           package:
@@ -1722,8 +1722,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    {% raw %}
 >    ```diff
->    --- galaxy.yml
->    +++ galaxy.yml
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
 >    @@ -22,3 +22,4 @@
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
@@ -1737,8 +1737,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -38,7 +38,7 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -1757,8 +1757,8 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    Add the following to your group variables file:
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -67,3 +67,33 @@ galaxy_config:
 >     galaxy_systemd_mode: mule
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
@@ -1874,7 +1874,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ templates/nginx/redirect-ssl.j2
+>    +++ b/templates/nginx/redirect-ssl.j2
 >    @@ -0,0 +1,14 @@
 >    +server {
 >    +    listen 80 default_server;
@@ -1901,7 +1901,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
 >    @@ -0,0 +1,49 @@
 >    +server {
 >    +    # Listen on port 443
@@ -2091,7 +2091,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    {% raw %}
 >    ```diff
 >    --- /dev/null
->    +++ templates/galaxy/config/job_conf.xml.j2
+>    +++ b/templates/galaxy/config/job_conf.xml.j2
 >    @@ -0,0 +1,10 @@
 >    +<job_conf>
 >    +    <plugins workers="4">
@@ -2115,8 +2115,8 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -37,6 +37,7 @@ galaxy_config:
 >         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
 >         object_store_store_by: uuid
@@ -2133,12 +2133,12 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->    
+>
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
@@ -2202,8 +2202,8 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >
 >    {% raw %}
 >    ```diff
->    --- group_vars/galaxyservers.yml
->    +++ group_vars/galaxyservers.yml
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
 >    @@ -38,6 +38,26 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
@@ -2249,8 +2249,8 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >
 >    {% raw %}
 >    ```diff
->    --- templates/nginx/galaxy.j2
->    +++ templates/nginx/galaxy.j2
+>    --- a/templates/nginx/galaxy.j2
+>    +++ b/templates/nginx/galaxy.j2
 >    @@ -46,4 +46,14 @@ server {
 >         location /favicon.ico {
 >             alias {{ galaxy_server_dir }}/static/favicon.ico;
