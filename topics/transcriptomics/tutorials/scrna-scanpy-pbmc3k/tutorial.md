@@ -141,9 +141,9 @@ This format is used by [Scanpy](https://scanpy.readthedocs.io/en/stable/index.ht
 >            - {% icon param-file %} *"Barcodes"*: `barcodes.tsv`
 >            - *"Variables index"*: `gene_symbols`
 >            - *"Make the variable index unique by appending '-1', '-2'?"*: `Yes`
->
+> 
 > 2. Rename the generated file to `Input 3k PBMC`
-
+> 
 > 3. Check that the format is `h5ad`
 {: .hands_on}
 
