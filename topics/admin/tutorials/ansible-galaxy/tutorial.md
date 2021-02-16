@@ -1584,7 +1584,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -16,3 +16,4 @@
+>    @@ -18,3 +18,4 @@
 >         - role: uchida.miniconda
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
@@ -1620,7 +1620,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -6,6 +6,11 @@
+>    @@ -8,6 +8,11 @@
 >         - name: Install Dependencies
 >           package:
 >             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv', 'other-package']
@@ -1743,7 +1743,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    ```diff
 >    --- a/galaxy.yml
 >    +++ b/galaxy.yml
->    @@ -22,3 +22,4 @@
+>    @@ -24,3 +24,4 @@
 >           become: true
 >           become_user: "{{ galaxy_user.name }}"
 >         - usegalaxy_eu.galaxy_systemd
@@ -2157,7 +2157,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->
+>     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
