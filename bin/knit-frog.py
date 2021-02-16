@@ -16,6 +16,10 @@ parser.add_argument(
 args = parser.parse_args()
 
 
+fnparts = args.tutorial.name.split('/')
+fn_topic = fnparts[fnparts.index('tutorials') - 1]
+fn_tutorial = fnparts[fnparts.index('tutorials') + 1]
+
 diffs = []
 current = None
 for line, text in enumerate(args.tutorial.read().split("\n")):
@@ -56,7 +60,7 @@ for idx, diff in enumerate(diffs):
     prefix = [
         "From: The Galaxy Training Network <gtn@example.org>",
         "Date: Mon, 15 Feb 2021 14:06:56 +0100",
-        f"Subject: PATCH [{idx + 1}/{len(diffs)}]: {commit_msg}",
+        f"Subject: {fn_topic}/{fn_tutorial}/{idx:04d}: {commit_msg}",
         "",
         "",
     ]
