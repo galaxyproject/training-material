@@ -542,8 +542,6 @@
         
     
         
-    
-        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -592,7 +590,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 14, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 16, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -619,7 +617,7 @@
 <ol id="markdown-toc">
   <li><a href="#data-upload" id="markdown-toc-data-upload">Data upload</a></li>
   <li><a href="#change-the-chromosome-names-in-the-ensembl-gtf-to-match-a-ucsc-genome-reference" id="markdown-toc-change-the-chromosome-names-in-the-ensembl-gtf-to-match-a-ucsc-genome-reference">Change the chromosome names in the Ensembl GTF to match a UCSC genome reference</a></li>
-  <li><a href="#aligning-fastq-files-to-the-human-genome" id="markdown-toc-aligning-fastq-files-to-the-human-genome">Aligning FASTQ files to the human genome</a></li>
+  <li><a href="#aligning-fastq-files-to-the-mouse-genome" id="markdown-toc-aligning-fastq-files-to-the-mouse-genome">Aligning FASTQ files to the mouse genome</a></li>
   <li><a href="#variant-analysis" id="markdown-toc-variant-analysis">Variant Analysis</a>    <ol>
       <li><a href="#variant-calling" id="markdown-toc-variant-calling">Variant Calling</a></li>
       <li><a href="#variant-annotation-and-genome-mapping" id="markdown-toc-variant-annotation-and-genome-mapping">Variant annotation and Genome <span class="notranslate">Mapping</span></a></li>
@@ -713,7 +711,7 @@ https://zenodo.org/record/1489208/files/Mus_musculus.GRCm38.86.gtf
         </ul>
       </blockquote>
     </li>
-    <li>Make sure that the file <code class="language-plaintext highlighter-rouge">FASTQ_ProB_22List.fastqsanger</code>
+    <li>Make sure that the datatype of file <code class="language-plaintext highlighter-rouge">FASTQ_ProB_22List.fastqsanger</code> is set to <code class="language-plaintext highlighter-rouge">fastqsanger</code>
       <blockquote class="tip">
 
         <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
@@ -749,6 +747,8 @@ has Title Column labeled as “1” and Sequence Column as “2”.</li>
 <blockquote>
   <h3 id="hands_on-hands-on-replace-text-in-a-specific-column"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Replace Text in a specific column</h3>
   <ol>
+    <li><strong>Replace Text in a specific column</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:</li>
+    <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“File to process”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
     <li>Change numbered chromosome names
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
@@ -756,20 +756,26 @@ has Title Column labeled as “1” and Sequence Column as “2”.</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chr\\1</code></li>
       </ul>
     </li>
-    <li>Change XY chromosomes
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Replacement</em> to add another replacement option to change XY chromosomes
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^([XY])$</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chr\\1</code></li>
       </ul>
     </li>
-    <li>Change mitochondrial chromosome
+    <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>Insert Replacement</em> to add another replacement option to change mitochondrial chromosome
       <ul>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“in column”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Find pattern”</em>: <code class="language-plaintext highlighter-rouge">^MT$</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Replace with</em>: <code class="language-plaintext highlighter-rouge">chrM</code></li>
       </ul>
     </li>
+  </ol>
+</blockquote>
+
+<blockquote class="notranslate hands_on">
+  <ol>
+    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.fixed.gtf</code></li>
   </ol>
 
   <blockquote class="comment">
@@ -778,7 +784,7 @@ has Title Column labeled as “1” and Sequence Column as “2”.</li>
   </blockquote>
 </blockquote>
 
-<h1 class="hands_on" id="aligning-fastq-files-to-the-human-genome">Aligning FASTQ files to the human genome</h1>
+<h1 id="aligning-fastq-files-to-the-mouse-genome">Aligning FASTQ files to the mouse genome</h1>
 
 <p>The first tool in the <span class="notranslate">workflow</span> is the <a href="http://ccb.jhu.edu/software/hisat"><strong>HISAT2</strong></a> alignment tool. It maps next-generation sequence (NGS) <span class="notranslate">reads</span> to the reference genome. This tool requires an <span class="notranslate">RNA</span>-seq file (.FASTQ) and a reference genome file in Gene transfer format (GTF). This .gtf file is obtained from the Ensembl database. When successful, this tool outputs a .bam file (binary version of a SAM: <strong>S</strong>equence <strong>A</strong>lignment/<strong>M</strong>ap).</p>
 
@@ -951,7 +957,7 @@ variant annotation file will be used to visualize the variants in the Multi-omic
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use a reference file to guide assembly?”</em>: <code class="language-plaintext highlighter-rouge">Use Reference GTF/GFF3</code>
           <ul>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Reference file”</em>: <code class="language-plaintext highlighter-rouge">Use file from History</code></li>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
+            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF/GFF3 dataset to guide assembly”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.fixed.gtf</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Reference transcripts only?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output files for differential <span class="notranslate">expression</span>?”</em>: <code class="language-plaintext highlighter-rouge">No additional output</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Output coverage file?”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -960,7 +966,7 @@ variant annotation file will be used to visualize the variants in the Multi-omic
       </ul>
     </li>
     <li>Inspect <i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-eye</span> the resulting files.</li>
-    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Stringtie_outut.gtf</code>
+    <li>Rename the output to <code class="language-plaintext highlighter-rouge">Stringtie_output.gtf</code>
       <blockquote class="tip">
 
         <h3 id="tip-tip-renaming-a-dataset-1"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
@@ -1028,16 +1034,20 @@ annotated, such as human, mouse, or other model organisms.</p>
   <ol>
     <li><strong>GffCompare</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em><code class="language-plaintext highlighter-rouge">Stringtie_outut.gtf</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“GTF inputs for comparison”</em><code class="language-plaintext highlighter-rouge">Stringtie_output.gtf</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">yes</code>
           <ul>
-            <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
+            <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Choose the source for the reference annotation”</em>: <code class="language-plaintext highlighter-rouge">History</code>
+              <ul>
+                <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Reference Annotation”</em>: <code class="language-plaintext highlighter-rouge">Mus_musculus.GRCm38.86.gtf</code></li>
+              </ul>
+            </li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Ignore reference transcripts that are not overlapped by any input transfrags”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
             <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Ignore input transcripts that are not overlapped by any reference transcripts”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
           </ul>
         </li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Use Sequence Data”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“discard (ignore) single-exon transcripts”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
+        <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Discard (ignore) single-exon transcripts”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Max. Distance for assessing exon accuracy”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
         <li><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">param-text</span> <em>“Max distance for transcript grouping”</em>: <code class="language-plaintext highlighter-rouge">100</code></li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“discard intron-redundant transfrags sharing 5’“</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
@@ -1135,13 +1145,17 @@ along with the UniProt and cRAP databases.</li>
   <h3 id="hands_on-hands-on"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on</h3>
 
   <ol>
-    <li><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
+    <li><strong>FASTA Merge Files and Filter Unique Sequences</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span>
+      <ul>
+        <li>Click <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Input FASTA File(s)”</em> twice so that there are a total of three <em>“Input FASTA File(s)”</em> blocks.</li>
+        <li>Use the following parameters:</li>
+      </ul>
       <ul>
         <li><i class="far fa-check-square" aria-hidden="true"></i><span class="visually-hidden">param-check</span> <em>“Run in batch mode?”</em>: <code class="language-plaintext highlighter-rouge">Merge individual FASTAs (output collection if input is collection)</code></li>
-        <li><i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">param-files</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Input Custom ProDB Fasta File output</code>
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> 1.HISAT_Output.rpkm
- 2.HISAT_Output.snv
- 3.HISAT_Output.indel
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Input FASTA File(s)”</em> : <code class="language-plaintext highlighter-rouge">Input Custom ProDB Fasta File output</code>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1.HISAT_Output.rpkm
+2.HISAT_Output.snv
+3.HISAT_Output.indel
 </code></pre></div>          </div>
         </li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“How are sequences judged to be unique?”</em>: <code class="language-plaintext highlighter-rouge">Accession and Sequence</code></li>
@@ -1177,7 +1191,7 @@ We will also need to similarily modify the accessions in the genomic <span class
     </li>
     <li><strong>Column Regex Find And Replace</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with the following parameters:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">genomic_<span class="notranslate">mapping</span>_sqlite' (tabular)</code></li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Select cells from”</em>: <code class="language-plaintext highlighter-rouge">FASTA-to-Tabular output</code> from previous step</li>
         <li><i class="fas fa-filter" aria-hidden="true"></i><span class="visually-hidden">param-select</span> <em>“Using”</em>: <code class="language-plaintext highlighter-rouge">column 1</code></li>
         <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <strong>Insert Check</strong>
           <ul>
@@ -1587,7 +1601,7 @@ by MVP to visualize the genomic loci of any variant peptides.</p>
     title = "Proteogenomics 1: Database Creation (Galaxy Training Materials)",
     year = "2021",
     month = "02",
-    day = "14"
+    day = "16"
     url = "\url{/training-material/topics/proteomics/tutorials/proteogenomics-dbcreation/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
