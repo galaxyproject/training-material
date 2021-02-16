@@ -22,8 +22,23 @@ diffs = []
 for patch in args.patches:
     with open(patch, "r") as handle:
         data = handle.readlines()
-        commit = data[2].split(": ")[2]
-        data = [x.rstrip("\n") for x in data[5:-3]]
+        subject = [x for x in data[0:5] if x.startswith('Subject:')]
+        if len(subject) != 1:
+            commit = "MISSING"
+        else:
+            if subject[0].count(": ") >= 2:
+                commit = subject[0].split(": ")[2]
+            else:
+                commit = "MISSING"
+
+        indexindex = [idx for (idx, x) in enumerate(data) if x.startswith('index ')]
+        if len(indexindex) == 0:
+            # take a guess, it's our format?
+            data = [x.rstrip("\n") for x in data[5:-3]]
+        else:
+            # If 'index ' then we start at the next line
+            data = [x.rstrip("\n") for x in data[indexindex[0] + 1:-3]]
+
         diffs.append((commit, data))
 
 current = None
@@ -74,7 +89,9 @@ for line, text in enumerate(tutorial_contents):
         obs_msg = knit.extractCommitMsg(current).strip()
         exp_msg = from_patch[0].strip()
         if obs_msg != exp_msg:
-            print("WARNING: Diff messages do NOT line up: {obs_msg} != {exp_msg}")
+            print(f"WARNING: Diff messages do NOT line up: {obs_msg} != {exp_msg}")
+            # Replace with current message
+            exp_msg = obs_msg
 
         # Knit it anyway
         new_diff = from_patch[1]
