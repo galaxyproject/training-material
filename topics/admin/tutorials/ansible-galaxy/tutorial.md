@@ -962,7 +962,26 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > You can use the same command we ran before: `openssl rand -base64 24`
 >    {: .tip}
 >
-> 8. Run the playbook.
+> 8. Load the secrets in the playbook
+>
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -2,6 +2,8 @@
+>     - hosts: galaxyservers
+>       become: true
+>       become_user: root
+>    +  vars_files:
+>    +    - group_vars/secret.yml
+>       pre_tasks:
+>         - name: Install Dependencies
+>           package:
+>    {% endraw %}
+>    ```
+>    {: data-commit="Load the vault in the playbook"}
+>
+> 9. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
