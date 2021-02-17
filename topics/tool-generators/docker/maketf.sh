@@ -14,7 +14,7 @@ python3 -m venv .venv
 python3 setup.py build
 python3 setup.py install
 planemo conda_init --conda_prefix ./con
-planemo tool_factory --galaxy_root $TARGDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con --conda_auto_install
+planemo tool_factory --galaxy_root $TARGDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
 
 # planemo tool_factory --galaxy_root ./galaxy-central --port 8080 --host 0.0.0.0 --conda_prefix /planemo/con
 # host is needed to get -p 9090:9090 to work in docker. Default 127.0.0.1 doesn't redirect :(ls -l /tmp
