@@ -21,11 +21,11 @@ if [[ "$op" == "export" ]]; then
 		--- /dev/null
 		+++ b/readme.md
 		@@ -0,0 +1,5 @@
-		+ # GIT-GAT
+		+# GIT-GAT
 		+
-		+ This is a git repository with the current <abbr title="Galaxy Admin Training">GAT</abbr> history. See the current [GAT schedule](https://gxy.io/gat).
+		+This is a git repository with the current <abbr title="Galaxy Admin Training">GAT</abbr> history. See the current [GAT schedule](https://gxy.io/gat).
 		+
-		+ This is built from [the GTN's library of admin training](https://training.galaxyproject.org/topics/admin/tutorials/)
+		+This is built from [the GTN's library of admin training](https://training.galaxyproject.org/topics/admin/tutorials/)
 		--
 		2.25.1
 	EOF
