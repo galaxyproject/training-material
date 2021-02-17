@@ -9,6 +9,8 @@ objectives:
 time_estimation: "5m"
 key_points:
   - "The knitting script works OK?"
+  - "Learn to rebase now, if you haven't yet"
+  - "git am is not fun"
   - "If you have issues, ping me."
 contributors:
   - hexylena
