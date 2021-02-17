@@ -593,6 +593,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -651,7 +653,7 @@
 
 <p>Modern mass spectrometry-based proteomics enables the identification and quantification of thousands of proteins. Therefore, quantitative mass spectrometry represents an indispensable technology for biological and clinical research. Statistical analyses are required for the unbiased answering of scientific questions and to uncover all important information in the proteomic data. Classical statistical approaches and methods from other omics technologies are not ideal because they do not take into account the speciality of mass spectrometry data that include several thousands of proteins but often only a few dozens of samples (referred to as ‘curse of dimensionality’) and stochastic data properties that reflect sample preparation and spectral acquisition (Choi 2014).</p>
 
-<p>In this training we will cover the full analysis <span class="notranslate">workflow</span> from label-free, data dependent acquisition (DDA) raw data to statistical results. We’ll use two popular quantitative proteomics software: MaxQuant and MSstats. MaxQuant allows protein identification and quantification for many different kinds of proteomics data (Cox and Mann 2008).  In case you have no previous experience with MaxQuant, we recommend to go through the <a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">MaxQuant beginners tutorial</a> before. MSstats provides statistical functionalities to find differentially abundant peptides or proteins from data dependent acquisition (DDA), data independent acquisition (DIA) or single reaction monitoring (SRM) proteomic experiments. 
+<p>In this training we will cover the full analysis <span class="notranslate">workflow</span> from label-free, data dependent acquisition (DDA) raw data to statistical results. We’ll use two popular quantitative proteomics software: MaxQuant and MSstats. MaxQuant allows protein identification and quantification for many different kinds of proteomics data (Cox and Mann 2008).  In case you have no previous experience with MaxQuant, we recommend to go through the <a href="/training-material/topics/proteomics/tutorials/maxquant-label-free/tutorial.html">MaxQuant beginners tutorial</a> before. MSstats provides statistical functionalities to find differentially abundant peptides or proteins from data dependent acquisition (DDA), data independent acquisition (DIA) or single reaction monitoring (SRM) proteomic experiments.
 The training dataset consists of a skin cancer cohort of 19 patients, which is a subset of a <a href="https://doi.org/10.1016/j.matbio.2017.11.004">published study</a>. One fifth of all non melanoma skin cancers are cutaneous squamous cell carcinomas (cSCC) that mainly derive from exposure to ultraviolet light. Most cSCC have a good prognosis but the few metastasizing cSCC have dramatically increased mortality. Here, we compare these metastasizing cSCC to cSCC in patients with the genetic disease recessive dystrophic epidermolysis bullosa (RDEB). RDEB is a genetic skin blistering and extracellular matrix disease caused by collagen VII deficiency. To investigate molecular differences between these two aggressive cSCCs with different origin, we used global proteomic analysis of formalin-fixed paraffin-embedded human cSCC tissues.</p>
 
 <blockquote class="agenda">
@@ -977,16 +979,16 @@ https://zenodo.org/record/4544529/files/PTXQC_report.pdf
 
 <h2 id="more-details-on-msstats">More details on MSstats</h2>
 
-<p>MSstats  is designed for statistical modelling of mass spectrometry based proteomic data <a href="https://doi.org/10.1093/bioinformatics/btu305">Choi 2014</a>. 
+<p>MSstats  is designed for statistical modelling of mass spectrometry based proteomic data <a href="https://doi.org/10.1093/bioinformatics/btu305">Choi 2014</a>.
 Proteomic data analysis requires statistical approaches that reduce bias and inefficiencies and distinguish systematic variation from random artifacts <a href="https://doi.org/10.1371/journal.pcbi.1002277">Käll and Vitek 2011</a>.</p>
 
 <p>MSstats is directly compatible with the output of several quantitative proteomics software. In addition to the results of the proteomics software an annotation file is needed as input. The annotation file describes the experimental design such as the conditions, biological and technical replicates. To be compatible with MaxQuant results, an additional column with the label type is needed, which only contains L (light) in DDA experiments.</p>
 
-<p>First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. We keep the default parameters and only change one parameter in order to remove proteins which have only a single peptide measurement. 
-Next, data processing optimizes the data for statistical modelling via log-transformation, and normalization of intensities, feature selection, missing value imputation, and run-level summarization. 
+<p>First, the input data is converted into an MSstats compatible table. For this step several parameters to filter and adjust the input data can be selected. We keep the default parameters and only change one parameter in order to remove proteins which have only a single peptide measurement.
+Next, data processing optimizes the data for statistical modelling via log-transformation, and normalization of intensities, feature selection, missing value imputation, and run-level summarization.
 Log- transformation is performed to transform multiplicative signals to additive signals which are compatible with linear statistical models and bring the intensity distribution close to a normal distribution. Furthermore, it changes the dependence of variances from the intensity values: in the raw data larger intensities have larger variances but after log transformation lower intensities have larger variances.</p>
 
-<p>Normalization aims to make the intensities of different runs more comparable to each other. The default normalization method, equalize medians, assumes that the majority of proteins do not change across runs and shifts all intensities of a run by a constant to obtain equal median intensities across runs. 
+<p>Normalization aims to make the intensities of different runs more comparable to each other. The default normalization method, equalize medians, assumes that the majority of proteins do not change across runs and shifts all intensities of a run by a constant to obtain equal median intensities across runs.
 A feature in label-free DDA data corresponds to a peptide at a given charge state (m/z value), resulting from the identification of MS2 spectra combined with the quantitative information from the MS1 scans. Feature selection allows the use of either all, only the most abundant features or only high quality peptides for protein summarization.</p>
 
 <p>Missing values and noisy features with outliers are typical in label-free DDA datasets but influence protein summarization. Therefore, it is recommended to perform missing value imputation. Missing values are reported differently in different Softwares. MaxQuant reports them as NA and MSstats assumes that missing intensity values from MaxQuant mean that the intensity was below the limit of quantification. This means the values are not missing for random but for the reason of low abundance. Therefore, the values are only partially known and  called “censored”. This may also be the case for very low intensity values, which might not be reliable. The percentile that is not trusted and should be considered a censored value is defined via the “Maximum quantile for deciding censored missing values” parameter. Censored values are replaced by an intensity that is generated via an accelerated failure time model (AFT). Alte<span class="notranslate">rna</span>tively censored values may be replaced by the minimum value of the features, runs or both as defined in the “Cutoff value for censoring”. Runs with no intensity measurement for a protein will be removed for any further calculation on this protein.</p>
@@ -997,8 +999,8 @@ A feature in label-free DDA data corresponds to a peptide at a given charge stat
 
 <h1 id="follow-up-on-msstats-results">Follow up on MSstats results</h1>
 
-<p>We obtain several output files from MSstats. MSstats log file contains the MSstats report with warnings and information about the analysis steps. 
-The MSstats QCPlot visualizes the log transformed intensities for all proteins and runs of the processed data. 
+<p>We obtain several output files from MSstats. MSstats log file contains the MSstats report with warnings and information about the analysis steps.
+The MSstats QCPlot visualizes the log transformed intensities for all proteins and runs of the processed data.
 The volcano plot plots the statistical result as transformed p-values vs. the log2 fold change. A fold change of 1.5 means that a protein is 50% more abundand in one condition than the other. The log2 fold change is 0.58.</p>
 
 <figure id="figure-1"><img src="../../images/maxquant-msstats-lfq/qc_plot.png" alt="qc plot" /><figcaption><span class="figcaption-prefix">Figure 1:</span> QC plot of all proteins</figcaption></figure>
@@ -1071,10 +1073,10 @@ We’ll count and visualize the number of features per run and calculate the dis
 
 <h1 id="filtering-msstats-results">Filtering MSstats results</h1>
 
-<p>The comparison result table summarizes the statistical results per protein and comparison. First, we keep only the Uniprot ID in column 1 to make the ID less cluttered. 
-Then we keep only statistically significant proteins that means they have an adjusted p-value below 0.05. 
-Next, we separate up- and down-regulated proteins by filtering for a positive and negative log2FC. 
-The Sample Quantification Matrix Table contains the summarized intensities per protein and sample. 
+<p>The comparison result table summarizes the statistical results per protein and comparison. First, we keep only the Uniprot ID in column 1 to make the ID less cluttered.
+Then we keep only statistically significant proteins that means they have an adjusted p-value below 0.05.
+Next, we separate up- and down-regulated proteins by filtering for a positive and negative log2FC.
+The Sample Quantification Matrix Table contains the summarized intensities per protein and sample.
 In order to make its IDs compatible with the ones from the comparison result at a later step, we keep only the Uniprot ID as well.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1142,6 +1144,8 @@ In order to make its IDs compatible with the ones from the comparison result at 
 </blockquote>
 
 <blockquote class="question">
+  <h3 id="question-questions-3"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
   <ol>
     <li>Why do we filter for the adjusted p-value?</li>
   </ol>
@@ -1160,7 +1164,7 @@ In order to make its IDs compatible with the ones from the comparison result at 
 <h1 id="follow-up-on-proteins-that-are-missing-in-one-condition">Follow up on proteins that are missing in one condition</h1>
 
 <p>For each group we separate the proteins that are missing in one condition (that means p-value is 0) from the other significant proteins.
-From all missing in one condition proteins we keep only the column with the Uniprot ID and combine the “upregulated” and “downregulated” ones into one file. 
+From all missing in one condition proteins we keep only the column with the Uniprot ID and combine the “upregulated” and “downregulated” ones into one file.
 We extract their average intensities per sample from the sample quantification matrix file and generate a heatmap on their intensities.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1259,6 +1263,8 @@ We extract their average intensities per sample from the sample quantification m
 </blockquote>
 
 <blockquote class="question">
+  <h3 id="question-questions-4"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
   <ol>
     <li>How many proteins have no intensity values in one condition?</li>
     <li>Which protein is present in all samples of one condition and absent in all samples of the other condition?</li>
@@ -1278,7 +1284,7 @@ We extract their average intensities per sample from the sample quantification m
 
 <h1 id="finding-differentially-abundant-proteins">Finding differentially abundant proteins</h1>
 
-<p>The same procedure is applied to the significant proteins that were not missing in one condition. 
+<p>The same procedure is applied to the significant proteins that were not missing in one condition.
 To obtain them we filter the up- and downregulated proteins (p-value &lt;0.05) for p-values &gt; 0 to obtain all p-values larger than 0 but smaller than 0.05.</p>
 
 <blockquote class="notranslate hands_on">
@@ -1350,6 +1356,8 @@ To obtain them we filter the up- and downregulated proteins (p-value &lt;0.05) f
 </blockquote>
 
 <blockquote class="question">
+  <h3 id="question-questions-5"><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</h3>
+
   <ol>
     <li>How many proteins are differentially abundant?</li>
   </ol>
@@ -1403,7 +1411,7 @@ To obtain them we filter the up- and downregulated proteins (p-value &lt;0.05) f
 
 </blockquote>
 
-<p>Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Vitronectin which is higher in metastasizing cSCC than in RDEB cSCC. Vitronectin is an acute phase response protein and a marker of specific changes in the extracellular matrix organization. 
+<p>Two of the differentially abundant proteins found here were also found and stained with antibodies in the original publication: Collagen XIV which is higher in RDEB cSCC than in metastasizing cSCC and Vitronectin which is higher in metastasizing cSCC than in RDEB cSCC. Vitronectin is an acute phase response protein and a marker of specific changes in the extracellular matrix organization.
 Collagen XIV is a fibril associated collagen which may have tissue stabilizing function in the dermis. The upregulation of collagen XIV could be a compensation effort due to the missing collagen VII in RDEB tissues.</p>
 
 <figure id="figure-5"><img src="../../images/maxquant-msstats-lfq/col14_ihc.png" alt="col14 staining" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Immunoflourescence staining of collagen XIV in RDEB and metastasizing cSCC skin tissues</figcaption></figure>
