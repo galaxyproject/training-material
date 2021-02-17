@@ -925,7 +925,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```
->    > openssl rand -base64 24 > vault-password.txt
+>    > openssl rand -base64 24 > .vault-password.txt
 >    > ```
 >    {: .code-in data-cmd="true"}
 >
@@ -939,7 +939,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >     interpreter_python = /usr/bin/python3
 >     inventory = hosts
 >     retry_files_enabled = false
->    +vault_password_file = vault-password.txt
+>    +vault_password_file = .vault-password.txt
 >    {% endraw %}
 >    ```
 >    {: data-commit="Setup the vault file"}
@@ -957,10 +957,11 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    ```
 >    vault_id_secret: BxI6zlQVhoHLPVf3gqQ
 >    ```
->
 >    > ### {% icon tip %} How to get a good random value?
->    > You can use the same command we ran before: `openssl rand -base64 24`
+>    > You can use the same command we ran before: `openssl rand -base64 24` to get a good, secure `id_secret` for your Galaxy
 >    {: .tip}
+>
+>    Your vault should probably look *something* like this, it's safe to commit to GitHub (or another public <abbr title="distributed version control system">DVCS</abbr>) now that you've got the secrets safely encrypted.
 >
 >    {% raw %}
 >    ```diff
