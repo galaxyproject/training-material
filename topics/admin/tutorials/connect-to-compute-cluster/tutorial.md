@@ -111,7 +111,7 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -139,3 +139,13 @@ golang_gopath: '/opt/workspace-go'
+>    @@ -141,3 +141,13 @@ golang_gopath: '/opt/workspace-go'
 >     # Singularity target version
 >     singularity_version: "3.7.0"
 >     singularity_go_path: "{{ golang_install_dir }}"
@@ -348,12 +348,12 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -103,6 +103,7 @@ galaxy_config_files:
+>    @@ -105,6 +105,7 @@ galaxy_config_files:
 >     galaxy_systemd_mode: mule
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >     galaxy_restart_handler_name: "Restart Galaxy"
 >    +galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
->
+>     
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}

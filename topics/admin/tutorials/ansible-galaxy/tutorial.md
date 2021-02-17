@@ -2157,7 +2157,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->
+>     
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
@@ -2223,7 +2223,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    ```diff
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
->    @@ -38,6 +38,26 @@ galaxy_config:
+>    @@ -38,6 +38,28 @@ galaxy_config:
 >         object_store_store_by: uuid
 >         id_secret: "{{ vault_id_secret }}"
 >         job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
@@ -2242,6 +2242,8 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    +    expose_user_name: true
 >    +    expose_dataset_path: true
 >    +    expose_potentially_sensitive_job_metrics: true
+>    +    # NFS workarounds
+>    +    retry_job_output_collection: 3
 >    +    # Debugging
 >    +    cleanup_job: onerror
 >    +    allow_user_impersonation: true

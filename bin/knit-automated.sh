@@ -1,12 +1,12 @@
 #!/bin/bash
-DIR=/tmp/gat-git
+DIR=/tmp/git-gat
 op="$1"
 if [[ "$op" == "export" ]]; then
 	mkdir -p ${DIR}
 
 	idx=0
 	for i in {ansible-galaxy,singularity,cvmfs,data-library,connect-to-compute-cluster,job-destinations,pulsar}; do
-		python bin/knit-frog.py \
+		python3 bin/knit-frog.py \
 			topics/admin/tutorials/$i/tutorial.md \
 			${DIR}/${idx}-$i;
 
@@ -33,7 +33,7 @@ elif [[ "$op" == "import" ]]; then
 
 	# Import all of the patches
 	for i in {ansible-galaxy,singularity,cvmfs,data-library,connect-to-compute-cluster,job-destinations,pulsar}; do
-		python bin/knit.py \
+		python3 bin/knit.py \
 			topics/admin/tutorials/$i/tutorial.md \
 			--patches ${DIR}/*admin-${i}*.patch
 	done
