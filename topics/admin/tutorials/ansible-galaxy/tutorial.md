@@ -2157,7 +2157,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->     
+>
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"

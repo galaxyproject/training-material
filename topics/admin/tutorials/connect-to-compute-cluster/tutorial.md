@@ -353,7 +353,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >     galaxy_restart_handler_name: "Restart Galaxy"
 >    +galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
->     
+>
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}

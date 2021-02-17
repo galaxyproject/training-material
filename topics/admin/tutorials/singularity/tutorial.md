@@ -176,7 +176,7 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,8 @@ miniconda_manage_dependencies: false
->     
+>
 >     galaxy_config:
 >       galaxy:
 >    +    dependency_resolvers_config_file: "{{ galaxy_config_dir }}/dependency_resolvers_conf.xml"
@@ -190,11 +190,11 @@ Now, we will configure Galaxy to run tools using Singularity containers, which w
 >         dest: "{{ galaxy_config.galaxy.job_config_file }}"
 >    +  - src: templates/galaxy/config/container_resolvers_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->     
+>
 >    +galaxy_config_files:
 >    +- src: files/galaxy/config/dependency_resolvers_conf.xml
 >    +  dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->     
+>
 >     # systemd
 >     galaxy_systemd_mode: mule
 >    {% endraw %}
