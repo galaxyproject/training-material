@@ -61,8 +61,19 @@ elif [[ "$op" == "import" ]]; then
 			topics/admin/tutorials/$i/tutorial.md \
 			--patches ${DIR}/*admin-${i}*.patch
 	done
+elif [[ "$op" == "deploy" ]]; then
+	if [[ ! -d "${DIR}" ]]; then
+		echo "Error, ${DIR} is missing"
+		exit 1
+	fi
+
+	cd ${DIR} || exit
+	git init && \
+		git am -3 -- *.patch && \
+		git remote add origin git@github.com:hexylena/git-gat.git && \
+		git push -f origin
 else
-	echo "$0 <import|export>"
+	echo "$0 <import|export|deploy>"
 	exit 1;
 fi
 
