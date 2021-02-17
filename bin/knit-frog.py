@@ -57,7 +57,7 @@ for idx, diff in enumerate(diffs):
     safe_commit = re.sub("[^a-z0-9-]", "-", commit_msg.lower())
 
     prefix = [
-        "From: The Galaxy Training Network <gtn@example.org>",
+        "From: The Galaxy Training Network <galaxytrainingnetwork@gmail.com>",
         "Date: Mon, 15 Feb 2021 14:06:56 +0100",
         f"Subject: {fn_topic}/{fn_tutorial}/{idx:04d}: {commit_msg}",
         "",

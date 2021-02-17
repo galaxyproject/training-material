@@ -286,7 +286,7 @@ When you're done editing, you can run the `./bin/knit-automated.sh import`, it w
 >    ```
 >    $ git commit --amend
 >    [detached HEAD ed290de] admin/ansible-galaxy/0022: Add production facing vars
->     Author: The Galaxy Training Network <gtn@example.org>
+>     Author: The Galaxy Training Network <galaxytrainingnetwork@gmail.com>
 >     Date: Mon Feb 15 14:06:56 2021 +0100
 >     1 file changed, 22 insertions(+)
 >    $ git rebase --continue
