@@ -154,10 +154,10 @@ Firstly we will add and configure another *role* to our Galaxy playbook - we mai
 > 2. Now install it with:
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```bash
+>    > ```
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 {: .hands_on}
 
@@ -307,10 +307,10 @@ More information about the rabbitmq ansible role can be found [in the repository
 > 4. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```bash
+>    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > The rabbitmq server daemon will have been installed on your Galaxy VM. Check that it's running now:
 >
@@ -566,10 +566,10 @@ We need to include a couple of pre-tasks to install virtualenv, git, etc.
 > 1. Run the playbook.
 >
 >    > ### {% icon code-in %} Input: Bash
->    > ```bash
+>    > ```
 >    > ansible-playbook pulsar.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 >    After the script has run, pulsar will be installed on the remote machines!
 >

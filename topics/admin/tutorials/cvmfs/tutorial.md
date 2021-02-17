@@ -92,9 +92,11 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >
 > 2. Install the role with:
 >
->    ```console
->    ansible-galaxy role install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    {: .code-in data-cmd="true"}
 >
 > 3. The variables available in this role are:
 >
@@ -152,7 +154,7 @@ If the terms "Ansible", "role" and "playbook" mean nothing to you, please checko
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 {: .hands_on}
 
 Congratulations, you've set up CVMFS.
@@ -244,7 +246,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->     
+>
 >     galaxy_config:
 >       galaxy:
 >    +    tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
@@ -262,7 +264,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 3. Install the BWA-MEM tool, if needed.
 >

@@ -87,7 +87,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    @@ -99,6 +99,9 @@ galaxy_config_files:
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
 >       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->     
+>
 >    +galaxy_local_tools:
 >    +- testing.xml
 >    +
@@ -104,7 +104,7 @@ We don't want to overload our training VMs trying to run real tools, so to demon
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 4. Reload Galaxy in your browser and the new tool should now appear in the tool panel. If you have not already created a dataset in your history, upload a random text dataset. Once you have a dataset, click the tool's name in the tool panel, then click Execute.
 >
@@ -169,7 +169,7 @@ We want our tool to run with more than one core. To do this, we need to instruct
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 4. Click the rerun button on the last history item, or click **Testing Tool** in the tool panel, and then click the tool's Execute button.
 >
@@ -232,12 +232,12 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -101,6 +101,8 @@ galaxy_config_files:
->     
+>
 >     galaxy_local_tools:
 >     - testing.xml
 >    +galaxy_dynamic_job_rules:
 >    +- my_rules.py
->     
+>
 >     # systemd
 >     galaxy_systemd_mode: mule
 >    {% endraw %}
@@ -291,7 +291,7 @@ Dynamic destinations allow you to write custom python code to dispatch jobs base
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 6. Try running the tool as both an admin user and a non-admin user, non-admins should not be able to run it. You can start a private browsing session to test as a non-admin, anonymous user. Anonymous users were enabled in your Galaxy configuration.
 >
@@ -345,7 +345,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->     
+>
 >     galaxy_config:
 >       galaxy:
 >    +    tool_destinations_config_file: "{{ galaxy_config_dir }}/tool_destinations.yml"
@@ -354,13 +354,13 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >         tool_data_table_config_path: /cvmfs/data.galaxyproject.org/byhand/location/tool_data_table_conf.xml,/cvmfs/data.galaxyproject.org/managed/location/tool_data_table_conf.xml
 >    @@ -96,6 +97,8 @@ galaxy_config_templates:
 >         dest: "{{ galaxy_config.galaxy.containers_resolvers_config_file }}"
->     
+>
 >     galaxy_config_files:
 >    +- src: files/galaxy/config/tool_destinations.yml
 >    +  dest: "{{ galaxy_config.galaxy.tool_destinations_config_file }}"
 >     - src: files/galaxy/config/dependency_resolvers_conf.xml
 >       dest: "{{ galaxy_config.galaxy.dependency_resolvers_config_file }}"
->     
+>
 >    {% endraw %}
 >    ```
 >    {: data-commit="Deploy tool destinations config file"}
@@ -395,7 +395,7 @@ If you don't want to write dynamic destinations yourself, Dynamic Tool Destinati
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 {: .hands_on}
 
@@ -451,7 +451,7 @@ Such form elements can be added to tools without modifying each tool's configura
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -91,6 +91,8 @@ galaxy_config:
 >         farm: job-handlers:1,2
->     
+>
 >     galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_resource_params_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_resource_params_file }}"
@@ -607,7 +607,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    --- a/group_vars/galaxyservers.yml
 >    +++ b/group_vars/galaxyservers.yml
 >    @@ -29,6 +29,7 @@ miniconda_manage_dependencies: false
->     
+>
 >     galaxy_config:
 >       galaxy:
 >    +    job_resource_params_file: "{{ galaxy_config_dir }}/job_resource_params_conf.xml"
@@ -619,7 +619,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >     galaxy_dynamic_job_rules:
 >     - my_rules.py
 >    +- map_resources.py
->     
+>
 >     # systemd
 >     galaxy_systemd_mode: mule
 >    {% endraw %}
@@ -632,7 +632,7 @@ Lastly, we need to write the rule that will read the value of the job resource p
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 4. Run the **Testing Tool** with various resource parameter selections
 >

@@ -129,7 +129,13 @@ be taken into consideration when choosing where to run jobs and what parameters 
 >    ```
 >    {: data-commit="Add slurm configuration"}
 >
-> 5. Run the playbook (`ansible-playbook galaxy.yml`)
+> 5. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in data-cmd="true"}
 >
 {: .hands_on}
 
@@ -323,7 +329,7 @@ Above Slurm in the stack is slurm-drmaa, a library that provides a translational
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 {: .hands_on}
 
@@ -347,7 +353,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >     galaxy_restart_handler_name: "Restart Galaxy"
 >    +galaxy_systemd_zergling_env: DRMAA_LIBRARY_PATH="/usr/lib/slurm-drmaa/lib/libdrmaa.so.1"
->     
+>
 >     # Certbot
 >     certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
 >    {% endraw %}
@@ -390,8 +396,7 @@ At the top of the stack sits Galaxy. Galaxy must now be configured to use the cl
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
->
+>    {: .code-in data-cmd="true"}
 >
 > 5. Watch the logs to check that everything loads correctly
 >

@@ -280,7 +280,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > ```
 >    > ansible-galaxy install -p roles -r requirements.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
@@ -475,7 +475,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 >    > ### {% icon code-out %} Output: Bash
 >    >
@@ -927,7 +927,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    > openssl rand -base64 24 > vault-password.txt
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 6. Tell Ansible where to find the decryption key. Edit your file `ansible.cfg` and add the `vault_password_file` variable.
 >
@@ -987,7 +987,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 >    > ### {% icon code-out %} Output: Bash
 >    >
@@ -1642,13 +1642,13 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 5. Log in and check the status with `sudo systemctl status galaxy`
 >
 >    > ### {% icon code-in %} Input: Bash
 >    > ```bash
->    > systemctl status galaxy
+>    > sudo systemctl status galaxy
 >    > ```
 >    {: .code-in}
 >
@@ -1996,7 +1996,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > > ```
 >    > > ansible-playbook galaxy.yml
 >    > > ```
->    > {: .code-in}
+>    > {: .code-in data-cmd="true"}
 >    > > ### {% icon code-in %} Output
 >    > > ```
 >    > > ...
@@ -2157,7 +2157,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    @@ -64,6 +64,11 @@ galaxy_config:
 >           - lib/galaxy/main.py
 >         farm: job-handlers:1,2
->     
+>
 >    +galaxy_config_templates:
 >    +  - src: templates/galaxy/config/job_conf.xml.j2
 >    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
@@ -2176,7 +2176,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    > > ```
 >    > > ansible-playbook galaxy.yml
 >    > > ```
->    > {: .code-in}
+>    > {: .code-in data-cmd="true"}
 >    > > ### {% icon code-in %} Output
 >    > > ```
 >    > > ...
@@ -2299,7 +2299,7 @@ This is a fantastic base Galaxy installation but there are numerous additional o
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 {: .hands_on}
 
@@ -2336,7 +2336,7 @@ But not you! You spent the day writing this Ansible playbook that describes your
 >    > ```
 >    > ansible-playbook galaxy.yml
 >    > ```
->    {: .code-in}
+>    {: .code-in data-cmd="true"}
 >
 > 2. Get a hot beverage of your choice while it rebuilds.
 >
