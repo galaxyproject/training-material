@@ -353,7 +353,7 @@ We extract their average intensities per sample from the sample quantification m
 > 4. {% tool [Cut](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1`
 >    - {% icon param-file %} *"From"*: `rdeb filtered` (output of the last **Filter** {% icon tool %})
-> 5. {% tool [Remove beginning](Remove beginning1) %} with the following parameters:
+> 5. {% tool [Remove beginning](Remove%20beginning1) %} with the following parameters:
 >    - {% icon param-file %} *"from"*: `cut rdeb` (output of the last **Cut** {% icon tool %})
 > 6. {% tool [Concatenate datasets](cat1) %} with the following parameters:
 >    - {% icon param-file %} *"Concatenate Dataset"*: `cut metastasized` (output of **Cut** {% icon tool %})
