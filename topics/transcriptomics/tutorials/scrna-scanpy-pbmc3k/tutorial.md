@@ -1346,6 +1346,7 @@ The cells in the same clusters should be co-localized in the UMAP coordinate plo
 >      - *"Keys for annotations of observations/cells or variables/genes"*: `louvain, CST3, NKG7, PPBP`
 >      - In *"Plot attributes"*
 >        - *"Number of panels per row"*: `2`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 >
 {: .hands_on}
 
@@ -1602,6 +1603,7 @@ Another approach consists of displaying the mean expression of the marker genes 
 >      - *"Use 'raw' attribute of input if present"*: `Yes`
 >      - In *"Plot attributes"*
 >        - *"Number of panels per row"*: `2`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 >
 {: .hands_on}
 
@@ -1822,6 +1824,7 @@ Cluster | Cell type
 >      - In *"Plot attributes"*
 >        - *"Location of legend"*: `on data`
 >        - *"Draw a frame around the scatter plot?"*: `No`
+>        - *"Colors to use for plotting categorical annotation groups"*: `rainbow`
 {: .hands_on}
 
 ![UMAP plot with annotated clusters](../../images/scrna-scanpy-pbmc3k/umap_annotated_clusters.png)
