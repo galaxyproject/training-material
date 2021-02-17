@@ -110,7 +110,7 @@ And there you can build a repository from them!
 
 ```
 [hxr@mk:/tmp/git-gat]$ git init
-[hxr@mk:/tmp/git-gat]$ git am *
+[hxr@mk:/tmp/git-gat]$ git am -3 *
 Applying: admin/ansible-galaxy/0000: Add requirements
 applying to an empty history
 Applying: admin/ansible-galaxy/0001: Add ansible.cfg
@@ -193,7 +193,7 @@ When you're done editing, you can run the `./bin/knit-automated.sh import`, it w
 >
 >    ```
 >    [hxr@mk:/tmp/git-gat]$ git init
->    [hxr@mk:/tmp/git-gat]$ git am *.patch
+>    [hxr@mk:/tmp/git-gat]$ git am -3 *.patch
 >    Applying: admin/ansible-galaxy/0000: Add requirements
 >    applying to an empty history
 >    Applying: admin/ansible-galaxy/0001: Add ansible.cfg
@@ -322,7 +322,7 @@ The above shows commands with outputs, the rest will be more abbreviated
 >
 >    ```
 >    [hxr@mk:/tmp/git-gat]$ git init
->    [hxr@mk:/tmp/git-gat]$ git am git am 0* 1* 2*
+>    [hxr@mk:/tmp/git-gat]$ git am -3 0* 1* 2*
 >    Applying: admin/ansible-galaxy/0000: Add requirements
 >    applying to an empty history
 >    Applying: admin/ansible-galaxy/0001: Add ansible.cfg
@@ -368,59 +368,3 @@ The above shows commands with outputs, the rest will be more abbreviated
 >
 > 9. Done!
 {: .hands_on}
-
-
-11:48:06|(main) [hxr@mk:/tmp/git-gat]$ git log --oneline | grep 'Setup the vault file'
-881046a admin/ansible-galaxy/0009: Setup the vault file
-11:48:13|(main) [hxr@mk:/tmp/git-gat]$ git rebase -i 881046a
-Stopped at b5d8154...  admin/ansible-galaxy/0010: Load the vault in the playbook
-You can amend the commit now, with
-
-  git commit --amend
-
-Once you are satisfied with your changes, run
-
-  git rebase --continue
-
-
-
-
-
-(.venv) 11:49:50|(b5d8154‽) [hxr@mk:/tmp/git-gat]$ git commit -m 'admin/ansible-galaxy/0010: Zvault'
-[detached HEAD 54872fc] admin/ansible-galaxy/0010: Zvault
- 1 file changed, 7 insertions(+)
- create mode 100644 group_vars/secret.yml
-(.venv) 11:50:09|(54872fc) [hxr@mk:/tmp/git-gat]$ git rebase --continue
-Successfully rebased and updated refs/heads/main.
-
-
-commit 90cf7fdfc404fc22de8459b601b69423a0d2f1ee
-Author: The Galaxy Training Network <gtn@example.org>
-Date:   Mon Feb 15 14:06:56 2021 +0100
-
-    admin/ansible-galaxy/0011: Add systemd
-
-commit 54872fc3df1e449dd40fef6b0c6157800fe04434
-Author: Helena Rasche <hxr@hx42.org>
-Date:   Wed Feb 17 11:50:09 2021 +0100
-
-    admin/ansible-galaxy/0010: Zvault
-
-commit b5d8154198b219a86c49cbd6c093fbe467ce2224
-Author: The Galaxy Training Network <gtn@example.org>
-Date:   Mon Feb 15 14:06:56 2021 +0100
-
-    admin/ansible-galaxy/0010: Load the vault in the playbook
-
-commit 881046a19171cb5a1f3852635fcd94f6b7fd05aa
-
-
-
-ok, almost ready to import. Add this in the correct place
-
-    ```diff
-    ```
-    {: data-commit="Set id_secret in vault"}
-
-
-and knit together.
