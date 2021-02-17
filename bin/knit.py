@@ -54,33 +54,23 @@ for line, text in enumerate(tutorial_contents):
     m0 = re.match(knit.BOX_PREFIX, unprefixed)
     m1 = re.match(knit.BOX_OPEN, unprefixed)
     m2 = re.match(knit.BOX_CLOSE, unprefixed)
-    # print(current is not None, m0 is not None, m1 is not None, m2 is not None, '|', prefix, '|', text[0:100])
 
     if m0:
         current = []
     if m1 and current is None:
         current = []
-        # print('hi', m0, m1, prev_line)
-        # if '{% raw %}' in prev_line:
-        # current.append(prev_line)
 
     if current is not None:
         current.append(unprefixed)
     else:
         chunks.append(text)
 
-    # if current:
-    # print(current, len(current), not m2)
-
     if current and len(current) > 2 and (current[-2].strip() == "```") and not m2:
         chunks.extend([prefix + x for x in current])
-        # print(current)
         # chunks.append('REJECT)')
-        # print('REJECT')
         current = None
 
     if m2 and current and len(current) > 0:
-        # print(m2, current)
         (amount, _) = knit.removeWhitespacePrefix(current)
         prefix_text = prefix + (amount * " ")
         from_patch = diffs[diff_idx]
@@ -89,7 +79,9 @@ for line, text in enumerate(tutorial_contents):
         obs_msg = knit.extractCommitMsg(current).strip()
         exp_msg = from_patch[0].strip()
         if obs_msg != exp_msg:
-            print(f"WARNING: Diff messages do NOT line up: {obs_msg} != {exp_msg}")
+            # Most just got truncated
+            if exp_msg not in obs_msg:
+                print(f"WARNING: Diff messages do NOT line up: {obs_msg} != {exp_msg}")
             # Replace with current message
             exp_msg = obs_msg
 

@@ -32,7 +32,6 @@ for line, text in enumerate(args.tutorial.read().split("\n")):
     (unprefixed, prefix) = knit.stripN(text, depth)
     m1 = re.match(knit.BOX_OPEN, unprefixed)
     m2 = re.match(knit.BOX_CLOSE, unprefixed)
-    # print(current is not None, '|', prefix, '|', text)
 
     if m1:
         if current is not None:
