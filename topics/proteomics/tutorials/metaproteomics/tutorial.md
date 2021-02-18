@@ -321,7 +321,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >
 >    - **SQL Query**:
 >
->         `SELECT sequence as "peptide", count(id) as "PSMs"
+>          SELECT sequence as "peptide", count(id) as "PSMs"
 >
 >          FROM psm
 >
@@ -329,7 +329,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >
 >          GROUP BY sequence
 >
->          ORDER BY sequence`
+>          ORDER BY sequence
 > 
 >
 > 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
