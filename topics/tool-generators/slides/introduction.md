@@ -15,7 +15,7 @@ questions:
  - Who might want to use the ToolFactory for quick tools from scripts?
  - How can I get the ToolFactory working since it should not be on a public server?
 
-title: "Introduction to simple tools from scripts using a Galaxy tool generator"
+title: "Using a Galaxy tool generator for tools from simple scripts"
 type: tutorial_hands_on
 key_points:
   - "The ToolFactory can turn working command line scripts into proper Galaxy tools"
@@ -45,7 +45,7 @@ contributors:
 
 ---
 
-> ### {% icon tip %} Recommendation: Confirm that this training will be useful for you before proceeding !
+> ### {% icon tip %} Before starting, check that this training will be useful for *your* work in Galaxy?
 >
 > * Read the *Brief Introduction* section below.
 > * Most non-programmer scientists using Galaxy do not need this training.
@@ -56,10 +56,7 @@ contributors:
 {: .tip }
 
 
-# A Galaxy tool to generate real Galaxy tools
-
-
-### Brief introduction
+# A Galaxy tool that generates simple Galaxy tools
 
 #### Background
 
@@ -71,8 +68,10 @@ development in scripting languages such as Python or R in Galaxy.
 - It is an automated, form driven code generator that runs in Galaxy.
 - It is ideal for turning **simple** scripts from Interactive Environments into tools for workflows.
 - Developed for bioinformaticians needing to produce "real" Galaxy tools for their users from scripts they have developed in Galaxy IEs.
-- It is much easier to learn to use, but consequently has limits in terms of the complexity it can deal with compared to the recommended **full-fat** Galaxy developer
+- It is much easier to learn to use, but consequently has limits in terms of the complexity it can deal with compared to the recommended Galaxy developer
 tool development software.
+- Training is available for those in the "Development in Galaxy" section of the GTN - for example, "Tool development and integration into Galaxy" linked in the follow-up
+training recommended at the end of this document
 
 ---
 
@@ -88,7 +87,7 @@ tool development software.
 
 ---
 
-### More details
+# The ToolFactory
 
 #### A form driven Galaxy tool generator for bioinformaticians
 
@@ -132,19 +131,7 @@ be manageable, complex ones will often not be possible.
 
 ToolFactory demonstration video
 
-> ### {% icon hands_on %} Exploring the sample tool forms
->
-> * Install the ToolFactory safely to suit your needs as described below
-> * Import the sample history
-> * Select any of the generated toolshed archive history items so you can see the circular "redo" button
-> * Click "redo"
-> * Examine the form settings used to generate the tool
-> * Try changing things - add new parameters or inputs/outputs; press `execute`; check the new version of the tool
-{: .hands_on}
-
-
-
-> ### {% icon tip %} Some notes on the ToolFactory form setup to generate the Hello demonstration
+> ### {% icon tip %} Annotated toolFactory form sections for the Hello demonstration
 >>>![](../images/ToolFactory_hello1form.png)
 >
 > - **The first section of the completed form collects the new tool name and dependencies.**
@@ -160,13 +147,13 @@ ToolFactory demonstration video
 with no difference. Other criteria including `sim_size` are available for the test applied to each output file.
 >
 >
-> ![](../images/ToolFactory_hello3form.png)
+>>> ![](../images/ToolFactory_hello3form.png)
 > - **The third section shows the user supplied parameter to be passed in to the bash script on the command line**
 > - It will be the first positional parameter because the ordinal position is 1
 >
 >
 >
-> ![](../images/ToolFactory_hello4form.png)
+>>> ![](../images/ToolFactory_hello4form.png)
 > - **The fourth section controls ToolFactory actions and optional outputs**
 > - If you supply appropriate API keys, the ToolFactory can upload the newly generated tool to a toolshed. Optionally it can be installed
 back into the Galaxy server specified.
@@ -174,72 +161,69 @@ back into the Galaxy server specified.
 >
 {: .tip }
 
-
-
-#### Generated XML sample
-
-```xml
-<tool name="hello_toolshed" id="hello_toolshed" version="0.01">
-  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-  <!--Created by planemo@galaxyproject.org at 22/01/2021 13:48:27 using the Galaxy Tool Factory.-->
-  <description>Says hello</description>
-  <stdio>
-    <exit_code range="1:" level="fatal"/>
-  </stdio>
-  <version_command><![CDATA[echo "0.01"]]></version_command>
-  <command><![CDATA[bash
-$runme
-"$sayhelloto"
+>### {% icon tip %} Generated XML Hello Galaxy Training Network sample
+>```xml
+><tool name="hello_toolshed" id="hello_toolshed" version="0.01">
+>  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+>  <!--Created by planemo@galaxyproject.org at 22/01/2021 13:48:27 using the Galaxy Tool Factory.-->
+>  <description>Says hello</description>
+>  <stdio>
+>    <exit_code range="1:" level="fatal"/>
+>  </stdio>
+> <version_command><![CDATA[echo "0.01"]]></version_command>
+> <command><![CDATA[bash
+> $runme
+> ">$sayhelloto"
+> $Hello_output]]></command>
+>  <configfiles>
+>    <configfile name="runme"><![CDATA[
+> echo "Hello $1"
+> ]]></configfile>
+>  </configfiles>
+>  <inputs>
+>    <param label="Say hello to" help="" value="Sailor!" type="text" name="sayhelloto" argument="sayhelloto"/>
+>  </inputs>
+>  <outputs>
+>    <data name="Hello_output" format="txt" label="Hello_output" hidden="false"/>
+>  </outputs>
+>  <tests>
+>    <test>
+>      <output name="Hello_output" value="Hello_output_sample" compare="diff" lines_diff="0"/>
+>      <param name="sayhelloto" value="Galaxy Training Network!!"/>
+>    </test>
+>  </tests>
+>  <help><![CDATA[
 >
-$Hello_output]]></command>
-  <configfiles>
-    <configfile name="runme"><![CDATA[
-echo "Hello $1"
-]]></configfile>
-  </configfiles>
-  <inputs>
-    <param label="Say hello to" help="" value="Sailor!" type="text" name="sayhelloto" argument="sayhelloto"/>
-  </inputs>
-  <outputs>
-    <data name="Hello_output" format="txt" label="Hello_output" hidden="false"/>
-  </outputs>
-  <tests>
-    <test>
-      <output name="Hello_output" value="Hello_output_sample" compare="diff" lines_diff="0"/>
-      <param name="sayhelloto" value="Galaxy Training Network!!"/>
-    </test>
-  </tests>
-  <help><![CDATA[
-
-**What it Does**
-
-ToolFactory demonstration - hello world in Galaxy
-
-
-
-------
-
-
-Script::
-
-    echo "Hello $1"
-
-]]></help>
-  <citations>
-    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-  </citations>
-</tool>
-```
+>**What it Does**
+>
+>ToolFactory demonstration - hello world in Galaxy
+>
+>
+>
+>------
+>
+>
+>Script::
+>
+>    echo "Hello $1"
+>
+>]]></help>
+>  <citations>
+>    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+>  </citations>
+></tool>
+>```
+{: .tip }
 
 ---
 
 # Run the ToolFactory locally
 
-Depending on your preferences, the best way to install your own ToolFactory should be chosen from one of the options below. The rest of the training material
-assumes that you have access to one so please make sure you have a working copy before proceeding.
+- Depending on your preferences, the best way to install your own ToolFactory should be chosen from one of the options below.
+- The sections after this assume that you have successfully installed it, so please choose a method
 
 
-#### Install from the ToolShed into an existing local development instance Galaxy
+#### Install into an existing local development Galaxy
 
 See [the tutorial on installing tools from the toolshed](https://galaxyproject.org/admin/tools/add-tool-from-toolshed-tutorial)
 
@@ -263,7 +247,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 ---
 
-#### Run a potentially disposable ToolFactory inside Planemo in a virtual environment
+#### Install a potentially disposable ToolFactory inside Planemo in a virtual environment
 
 - Make a new (potentially throw away) directory for the Planemo installation - e.g. `mkdir tftute` and `cd tftute`
 - [click here to download a bash script to build a local (potentially throw-away) copy of the ToolFactory] (https://zenodo...)
@@ -272,6 +256,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 Edit the location of the galaxy directory `$GALDIR` and remove the code to download galaxy-dev if you wish to save time and space.
 - It will take some time - so watch the Hello World demonstration while you wait.
 
+> ### {% icon tip %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
 > > ### {% icon code-in %} Input: topics/tool-builders/docker/maketf.sh
 > > ```bash
 > > GALDIR="galaxy-central"
@@ -292,15 +277,17 @@ Edit the location of the galaxy directory `$GALDIR` and remove the code to downl
 > > planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
 > > ```
 > {: .code-in}
+{: .tip}
 
 ---
 
-#### Slower but isolated in a container - Training Docker
+#### Build a simple Docker container - Training Docker
 
 - The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers. It does not include this tutorial.
 It runs planemo tool_factory for you and exposes it on port 9090 so you can do all the same things as you
 can with a local venv described above - but a little slower and isolated in a container.
 
+> ### {% icon tip %} Sample Dockerfile to build a simple version of the ToolFactory in Planemo
 > > ### {% icon code-in %} Input: topics/tool-builders/docker/Dockerfile
 > > ```docker
 > ># Galaxy - Using Galaxy tools to generate new Galaxy tools
@@ -347,11 +334,11 @@ can with a local venv described above - but a little slower and isolated in a co
 > >ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con"]
 ```
 > {: .code-in}
-
+{: .tip}
 
 ---
 
-#### ToolFactory docker container
+#### Install the ToolFactory docker container with integrated toolshed
 
 - There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
 - It provides an integrated toolshed and allows tools to be installed and used in the Galaxy used to run the ToolFactory.
@@ -359,9 +346,11 @@ can with a local venv described above - but a little slower and isolated in a co
 
 ---
 
-# Importing the demonstration history after the ToolFactory is installed
+# Import the demonstration history
 
 > ### {% icon comment %} Note!
+> - This is the **first step** recommended after any of the installation options above until you are comfortable using the ToolFactory
+> - It will give access to some sample ToolFactory tools that can be used to learn how the ToolFactory works
 > - This is already done in the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
 {: .comment}
 
@@ -385,7 +374,20 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 
 ---
 
-# Learning how to use the ToolFactory
+# Learning to use the ToolFactory
+
+
+> ### {% icon hands_on %} Exploring the sample tool forms
+>
+> * Install the ToolFactory safely to suit your needs as described below
+> * Import the sample history
+> * Select any of the generated toolshed archive history items so you can see the circular "redo" button
+> * Click "redo"
+> * Examine the form settings used to generate the tool
+> * Try changing things - add new parameters or inputs/outputs; press `execute`; check the new version of the tool
+{: .hands_on}
+
+
 
 Probably the best way is to take a look at each sample tool by rerunning the job. Think about how the options have been configured and try extending it or using the form
 as the basis for a new tool - but remember to change the tool name before you press execute to rerun the job and generate a new toolshed archive and report.
@@ -395,9 +397,29 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 
 ---
 
-# Testing newly generated tools using the Planemo in a virtual environment installation
+# Testing newly generated tools
 
-> ### {% icon hands_on %} Hands-on: Loading generated tools
+#### Using the ToolFactory installed directly into a development instance
+
+> ### {% icon hands_on %} Hands-on: Loading new generated tools in a normal development Galaxy
+>
+> - You need a local toolshed that the Galaxy server is configured to talk to in `config/tool_sheds_conf.xml`
+> - From the Galaxy root, `sh run_tool_shed.sh` should start one on `localhost:9009`
+> - Make a new repository and upload the new toolshed archive
+> - In the `Admin` menu, search for the new tool in your local toolshed and then choose `install`
+> - Refresh the tool menu when installation is complete
+{: .hands_on}
+
+- You need a local toolshed that the Galaxy server is configured to talk to in `config/tool_sheds_conf.xml`
+- From the Galaxy root, `sh run_tool_shed.sh` should start one on `localhost:9009`
+- Make a new repository and upload the new toolshed archive
+- In the `Admin` menu, search for the new tool in your local toolshed and then choose `install`
+- Refresh the tool menu when installation is complete
+
+
+#### Using Planemo in a virtual environment or GTN docker container
+
+> ### {% icon hands_on %} Hands-on: Loading new generated tools in a venv or docker ToolFactory in Planemo
 >
 > - Download the toolshed archive from the Galaxy history where you generated the tool.
 > - Unpack the archive into the planemo/mytools directory. It should appear as a single directory containing a test-data subdirectory and the new tool xml.
