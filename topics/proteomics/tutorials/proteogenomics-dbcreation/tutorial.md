@@ -621,7 +621,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
 >     - {% icon param-text %} *"enter column number to replace"*: `1`
 >     - {% icon param-text %} *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
->     - {% icon param-text %} *"replacement expression"*: `1`
+>     - {% icon param-text %} *"replacement expression"*: `\1`
 >
 > 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
 >   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous 2 "Filter Tabular" outputs.
