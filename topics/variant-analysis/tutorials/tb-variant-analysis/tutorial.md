@@ -151,9 +151,9 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 
 *Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.
 
-# Look for contamination with Kraken2
+# Look for contamination with Kraken2 (optional)
 
-We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our snp analysis. **Kraken 2** is an effective way of looking and which species is represented in our reads and so we can easily spot possible contamination of our sample.
+We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our snp analysis. **Kraken 2** is an effective way of looking and which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately **kraken2** uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
 
 > ### {% icon hands_on %} Hands-on: Run Kraken2
 >
@@ -349,7 +349,7 @@ A new dataset will be created in your history, containing the JBrowse interactiv
 
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
 
-# Different samples, different stories
+# Different samples, different stories (optional)
 
 In [Zenodo](https://doi.org/10.5281/zenodo.3960260) we have included sample *18-1* from the same study (aka. [ERR1750907](https://www.ebi.ac.uk/ena/browser/view/ERR1750907)). This is also a southern African
 *M. tuberculosis* sample, but in some ways quite different from the sample we have analysed in the tutorial thus

@@ -415,6 +415,12 @@ So in order to convert this to Circos format, we need to
 - Remove header lines (lines starting with `#`)
 - Select the columns containing the chromosomes and positions of the breaks (junctions)
 
+
+> ### {% icon warning %} Beware of **Cut**s
+> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table** (without `(cut)`). The difference is that this version allows cutting columns in any order and with repetitions. 
+{: .warning}
+
+
 > ### {% icon hands_on %} Hands-on: Prepare input data
 >
 > 1. {% tool [Select](Grep1) %} lines that match an expression with the following parameters:
@@ -707,6 +713,10 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >
 {: .hands_on}
 
+You should now see a plot like this:
+
+![Circos plot with SNV track with rules defined](../../images/circos/cancer-cnv-full.png){: width="75%"}
+
 Sometimes it can also be nice to see the axes of the plot, to more accurately judge the values of the different data points.
 We can do this as follows:
 
@@ -727,9 +737,9 @@ We can do this as follows:
 {: .hands_on}
 
 
-You should now see a plot like this:
+You should now see a plot with axes:
 
-![Circos plot with SNV track with rules and axes defined](../../images/circos/cancer-cnv-full.png){: width="75%"}
+![Circos plot with SNV track with rules and axes defined](../../images/circos/cancer-cnv-full-axes.png){: width="75%"}
 
 <!-- TODO: update image when axes are fixed (should be able to go to -1) -->
 
