@@ -432,7 +432,7 @@ along with the UniProt and cRAP databases.
 >      - {% icon param-text %} *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
->      - {% icon param-text %} *"Replacement"*: `generic\1`
+>      - {% icon param-text %} *"Replacement"*: `generic|\1`
 >
 > 2. **Tabular-to-FASTA** {% icon tool %} with the following parameters:
 >    - *"Title column"*: `1`
