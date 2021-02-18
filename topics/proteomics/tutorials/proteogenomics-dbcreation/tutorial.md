@@ -259,7 +259,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 > ### {% icon hands_on %} Hands-on: Transcript assembly with StringTie
 >
 > 1. **StringTie** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input mapped reads"*: `FASTQ_ProB_22LIST.BAM`
+>    - {% icon param-file %} *"Input mapped reads"*: `HISAT_Output.BAM`
 >    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
 >    - {% icon param-select %} *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
 >      - {% icon param-select %} *"Reference file"*: `Use file from History`
