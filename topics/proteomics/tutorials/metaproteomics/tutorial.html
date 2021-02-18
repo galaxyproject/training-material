@@ -536,6 +536,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
             Street Science
         </a>
@@ -1193,7 +1195,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>`SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
 
 FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 
@@ -1201,7 +1203,7 @@ WHERE confidence &gt;= 95
 
 GROUP BY lca.genus
 
-ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1533,15 +1535,15 @@ for each protein.</p>
         <li>
           <p><strong>SQL Query to generate tabular output</strong>:</p>
 
-          <p>`SELECT sequence as “peptide”, count(id) as “PSMs”</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT sequence as "peptide", count(id) as "PSMs"
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FROM bering_psms
+FROM bering_psms
 
 WHERE confidence &gt;= 95
 
 GROUP BY sequence
 
-ORDER BY sequence`
+ORDER BY sequence
 </code></pre></div>          </div>
         </li>
       </ul>
@@ -1567,9 +1569,9 @@ ORDER BY sequence`
         <li>
           <p><strong>SQL Query</strong>:</p>
 
-          <p>`SELECT go.description,</p>
+          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SELECT go.description,
 
-          <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
+count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
 
 FROM go JOIN bering_prot_go ON go.go_id = bering_prot_go.go_reference JOIN bering_prot on bering_prot_go.id = bering_prot.id JOIN
 
@@ -1579,7 +1581,7 @@ WHERE go.aspect = 'molecular_function'
 
 GROUP BY go.description
 
-ORDER BY  bering_peptides desc,bering_psms desc`
+ORDER BY  bering_peptides desc,bering_psms desc
 </code></pre></div>          </div>
         </li>
       </ul>
