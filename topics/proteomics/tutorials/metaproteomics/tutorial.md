@@ -421,7 +421,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >
 >    - **SQL Query to generate tabular output**:
 >
->          `SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
+>          SELECT lca.genus,count(psm.sequence) as "PSMs",count(distinct psm.sequence) as "DISTINCT PEPTIDES"
 >
 >          FROM psm LEFT JOIN lca ON psm.sequence = lca.peptide
 >
@@ -429,7 +429,7 @@ once again used, aggregating the number of peptides and PSMs for each genus leve
 >
 >          GROUP BY lca.genus
 >
->          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc`
+>          ORDER BY PSMs desc, 'DISTINCT PEPTIDES' desc
 >
 >
 > 2. Click **Execute** and inspect the query results file after it turned green:
@@ -649,7 +649,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >
 >    - **SQL Query to generate tabular output**:
 >
->         `SELECT sequence as "peptide", count(id) as "PSMs"
+>          SELECT sequence as "peptide", count(id) as "PSMs"
 >
 >          FROM bering_psms
 >
@@ -657,7 +657,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >
 >          GROUP BY sequence
 >
->          ORDER BY sequence`
+>          ORDER BY sequence
 >
 >
 > 5. Click **Execute**.
@@ -673,7 +673,7 @@ With this we have combined all the data into a single database which we can now 
 >    - **SQLite Database**: The created SQLite database from the former step
 >    - **SQL Query**:
 >
->         `SELECT go.description,
+>          SELECT go.description,
 >
 >          count(distinct bering_psms.sequence) as "bering_peptides", count(distinct bering_psms.id) as "bering_psms"
 >
@@ -685,7 +685,7 @@ With this we have combined all the data into a single database which we can now 
 >
 >          GROUP BY go.description
 >
->          ORDER BY  bering_peptides desc,bering_psms desc`
+>          ORDER BY  bering_peptides desc,bering_psms desc
 >
 > 2. Click **Execute**.
 > 3. Repeat these steps two times by replacing `molecular_function` in the fifth row of the SQL query by `biological_process` and `cellular_component`.
