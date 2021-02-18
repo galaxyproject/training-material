@@ -609,7 +609,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
 >     - {% icon param-text %} *"enter column number to replace"*: `1`
 >     - {% icon param-text %} *"regex pattern"*: `^([^ |]+).*$`
->     - {% icon param-text %} *"replacement expression"*: `1`
+>     - {% icon param-text %} *"replacement expression"*: `\1`
 >
 > 3. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)`
