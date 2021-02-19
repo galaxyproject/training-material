@@ -5,10 +5,10 @@ logo: "GTN"
 title: "Tools from simple scripts using a Galaxy tool - the ToolFactory"
 type: tutorial_hands_on
 key_points:
-  - The ToolFactory is a Galaxy tool for programmers and bioinformaticians.
+  - The ToolFactory is a Galaxy tool for programmers and informaticians.
   - It can turn any simple, working command line script into proper Galaxy tool with a test in a few minutes.
   - It generates complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI
-  - Designed for bioinformaticians who enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time.
+  - Designed for informaticians who enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time.
   - With a script, you can control the way parameters are read from the command line so you can usually bypass some of the ToolFactory's limited flexibility.
   - The ToolFactory is a code generator. It only deals with relatively simple situations. These are very common in small scale Galaxy analyses.
   - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly require time to master.
@@ -25,9 +25,9 @@ objectives:
  - Generate new simple Galaxy tools using your own scripts
 
 questions:
- - What's the quickest way for a new-to-Galaxy developer to convert a functioning Galaxy IE script into a `real` workflow compatible, shareable tool?
+ - What's the quickest way for a new-to-Galaxy developer to convert a functioning Galaxy IE script into a real workflow compatible, shareable tool?
  - Who might want to use the ToolFactory for quick tools from scripts?
- - How can I get the ToolFactory working locally, since you say it should not be exposed on a public server?
+ - How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?
 time_estimation: 1H
 
 requirements:
@@ -64,11 +64,11 @@ contributors:
 
 > ### {% icon tip %} Before starting, check to see if this tutorial will be useful for *your* work in Galaxy
 >
-> * Non-programmer scientists using Galaxy *do not need this training*.
-> * Galaxy tool developers who already have the tools they need *do not need this training*
-> * This tutorial is for bioinformaticians and researchers working in Galaxy, who develop their own scripts.
+> * This tutorial is for informaticians and researchers working in Galaxy, who develop their own scripts.
 > * It shows a quick way to bridge the gap between developing interactive environment scripts and installing real tools in Galaxy
 > * It is particularly useful for developers new to Galaxy from other scientific fields
+> * Non-programmer scientists using Galaxy *do not need this training*.
+> * Galaxy tool developers who already have the tools they need *do not need this training*
 {: .tip }
 
 
@@ -89,12 +89,12 @@ contributors:
 - Any scripting language command line driven interpreter supported by Conda can be used.
 - The ToolFactory is an automated, form driven code generator.
 - It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
-- Developed for bioinformaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
-- A bioinformatician or user who is comfortable with scripting languages on a linux command line might find it useful if they ever need a real Galaxy tool.
+- Developed for informaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
+- An informatician or user who is comfortable with scripting languages on a linux command line might find it useful if they ever need a real Galaxy tool.
 - Tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools.
 - They contain a test based on the test data provided at tool generation.
 - Working examples using Rscript, Python, bash, perl and sed are provided - see below.
-- If you are a scientist/programmer or bioinformatician new to Galaxy and new to the dark arts of Galaxy tool building, this tutorial may be of help.
+- If you are a scientist/programmer or informatician new to Galaxy and new to the dark arts of Galaxy tool building, this tutorial may be of help.
 - It will show how to convert IE notebook or other scripts into real tools quickly *inside* Galaxy using a Galaxy tool.
 
 
@@ -214,7 +214,7 @@ back into the Galaxy server specified.
     - Except for one thing. **It is secured so that only administrative users are allowed to run it.**
 - It automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer, on the ToolFactory form.
 - The ToolFactory can wrap any simple script that runs correctly on the command line with some small test input samples.
-- This is potentially handy for developers and bioinformaticians new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
+- This is potentially handy for developers new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
 
 
 > ### {% icon comment %} Under the hood:
@@ -244,7 +244,7 @@ back into the Galaxy server specified.
     - These are far more flexible than the ToolFactory
     - They are recommended for full time tool developers in Galaxy willing to learn to use them and needing the flexibility and power.
     - Training material for those tools is linked at the end of this tutorial.
-- **The ToolFactory is for developers and bioinformaticians not yet familiar with those far more flexible tools.**
+- **The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
 - **Scripts they need to wrap are often simple enough for the ToolFactory.**
 - Compared to the recommended Galaxy developer tool development software
     - Less to learn to get up to speed using a form driven, automated code generator.
@@ -471,12 +471,12 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 
 > ### {% icon hands_on %} Exploring the sample tool forms
 >
-> * Install the ToolFactory safely to suit your needs as described below
-> * Import the sample history
-> * Select any of the generated toolshed archive history items so you can see the circular "redo" button
-> * Click "redo"
-> * Examine the form settings used to generate the tool
-> * Try changing things - add new parameters or inputs/outputs; press `execute`; check the new version of the tool
+> * With the ToolFactory working and the sample history active as described above
+> * Select any of the generated toolshed archive history items.
+> * This should open the item details up, so you can see the circular "redo" button
+> * Click that button - the ToolFactory form that generated that tool will appear.
+> * Examine the form settings used to generate the tool.
+> * Try changing names or prompts. Add new parameters or inputs/outputs; press `execute`; check the new version of the tool
 > * For example, change the default for the Hello example to `Galaxy Training Network` and generate an updated version.
 {: .hands_on}
 
@@ -490,7 +490,7 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 
 ---
 
-## Some useful features
+## Some useful advanced features worth knowing about.
 
 #### STDIN and STDOUT
 
@@ -499,19 +499,21 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 - STDIN is also available as a special designation for history inputs if the script takes input from STDIN when it runs.
 
 
-#### Repeats in the ToolFactory form
+#### Repeats in the ToolFactory form are unrestricted.
 
-- Inputs, outputs and parameters are provided in repeat elements so are unlimited in number for any given tool from a technical perspective
+- Inputs, outputs and parameters are all in repeat elements on the form.
+- Repeats are effectively unlimited in number for any given tool from a technical perspective
 - Particularly if you are willing to create them in the relatively clumsy Galaxy UI
-- A handful is manageable but there are no technical limits
+- A handful is manageable but there are no technical limits to the actual total number
 
 
-#### ToolFactory Collection outputs are handy for hiding dozens of tool outputs in a single history item
+#### ToolFactory collection outputs are handy for hiding dozens of tool outputs in a single history item
 
-- The plotter example is an Rscript that generates as many random plots as you want
+- The plotter example uses an Rscript.
+- It generates as many random plots as you want.
 - The script sends them into the the collection that appears in the history after the job runs.
-
-
+- The user's history shows only one new item after it runs.
+- That is a collection. When selected, all the plots will be listed for viewing
 
 > ### {% icon details %} `plotter` collection output demonstration tool generated XML
 > >```xml
@@ -620,8 +622,8 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 
 #### Selects
 
-- The ToolFactory form includes a select option for additional parameters in addition to text and numeric fields.
-- There is a repeat on the ToolFactory form for pairs of names and values for options.
+- Additional parameters can be text or numeric form fields, or select parameters where a set of prespecified options are presented to the user.
+- There is a repeat on the ToolFactory form to collect the select's pairs of names and values for options.
 - Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
 
 > ### {% icon details %} `select_test` collection output demonstration tool generated XML
@@ -682,7 +684,6 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 > ></tool>
 ```
 {: .details}
-
 
 ---
 ## Running your newly generated tools
