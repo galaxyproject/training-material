@@ -775,8 +775,8 @@ planemo lint $TOOLNAME >> $2
 > >    </test>
 > >  </tests>
 > >  <help><![CDATA[
->>
->>**What it Does**
+> >
+> >**What it Does**
 > >
 > >Echos your selection
 > >
@@ -794,6 +794,7 @@ planemo lint $TOOLNAME >> $2
 > >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
 > >  </citations>
 > ></tool>
+```
 {: .details}
 
 
