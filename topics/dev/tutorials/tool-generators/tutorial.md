@@ -62,10 +62,10 @@ contributors:
 {: .tip }
 
 
-# Introduction: Why you might want to follow the rest of this tutorial about the ToolFactory
+# Introduction: Why you *might* want to follow the rest of this tutorial
 {:.no_toc}
 
-#### Turning interactive environment notebooks and other scripts into real tools. Quickly and in Galaxy.
+#### Want any IE notebooks or other scripts as real tools quickly and *in* Galaxy?
 
 - Galaxy Interactive Environments are very popular and useful for skilled researchers and developers because they allow interactive
 development in scripting languages such as Python or R in Galaxy.
@@ -116,7 +116,7 @@ with no difference. Other criteria including `sim_size` are available for the te
 > - **The third section shows the user supplied parameter to be passed in to the bash script on the command line**
 > - It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples.
 > - The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative
->
+> - This is where you can change the default from "World" to "Galaxy Training Network" on the sample provided and regenerate it to make a new tool later in the tutorial
 >
 >
 >>> ![](../../images/ToolFactory_hello4form.png)
@@ -403,7 +403,7 @@ can with a local venv described above - but a little slower and isolated in a co
 - This will show you the fully completed ToolFactory form used to generate the sample
 - Those samples are the main ToolFactory usage documentation.
 
-#### Import the demonstration history into to see some sample ToolFactory tools
+#### Import the demonstration history to see some sample ToolFactory tools
 
 > ### {% icon comment %} Note!
 > - This is the **first step** recommended after any of the installation options above until you are comfortable using the ToolFactory
@@ -444,6 +444,7 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 > * Click "redo"
 > * Examine the form settings used to generate the tool
 > * Try changing things - add new parameters or inputs/outputs; press `execute`; check the new version of the tool
+> * For example, change the default for the Hello example to `Galaxy Training Network` and generate an updated version.
 {: .hands_on}
 
 
