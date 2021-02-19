@@ -62,42 +62,42 @@ contributors:
 
 ---
 
-> ### {% icon tip %} Before starting, check that this training will be useful for *your* work in Galaxy
+> ### {% icon tip %} Before starting, check to see if this tutorial will be useful for *your* work in Galaxy
 >
 > * Non-programmer scientists using Galaxy *do not need this training*.
-> * The ToolFactory is designed for bioinformaticians and researchers who develop scripts
-> * It can help to bridge the gap between developing interactive environment notebook scripts and installing real tools in Galaxy
 > * Galaxy tool developers who already have the tools they need *do not need this training*
-> * It is particularly useful for developers coming to Galaxy from other scientific fields
-> * Read on and decide if the introductory material seems interesting enough to continue.
+> * This tutorial is for bioinformaticians and researchers working in Galaxy, who develop their own scripts.
+> * It shows a quick way to bridge the gap between developing interactive environment scripts and installing real tools in Galaxy
+> * It is particularly useful for developers new to Galaxy from other scientific fields
 {: .tip }
 
 
-# Why you *might* want to follow the hands-on part of this tutorial
+# Background and introduction to this tutorial
 {:.no_toc}
+
+#### Why you might want to follow the hands-on part of this tutorial
 
 - Galaxy Interactive Environments are very popular and useful for skilled researchers and developers
     - They allow interactive development in scripting languages such as Python or R, in Galaxy.
     - Notebooks can be shared and reused but cannot run in workflows.
     - Notebooks developed in IE's can be turned into command line scripts and tested using suitable small input data sets.
-- Scripts needed for use as Galaxy tools can also be developed as command line scripts without using Galaxy
+- Scripts for Galaxy tools can also be developed as command line scripts from scratch.
 - **No matter the source**, once the script is working correctly with test data on the command line, **the ToolFactory provides a quick route to a real Galaxy tool**.
-- *Any* scripting language interpreter supported by Conda can be used.
-- The ToolFactory is an automated, form driven code generator.
-- It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
-- Developed for bioinformaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
-- Working examples using Rscript, Python, bash, perl and sed are provided in a history you can import.
-- If you are a scientist/programmer or bioinformatician new to Galaxy and new to the dark arts of Galaxy tool building, this tutorial may be of help.
-- It will show how to convert IE notebook or other scripts into real tools quickly *inside* Galaxy using a Galaxy tool.
 
 #### The ToolFactory generates tools
 
-- Quickly turns simple scripts that run correctly on the command line into real Galaxy tools.
-- Scripts might be developed in Galaxy Interactive Environments for example.
+- Any scripting language command line driven interpreter supported by Conda can be used.
+- The ToolFactory is an automated, form driven code generator.
+- It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
+- Developed for bioinformaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
 - A bioinformatician or user who is comfortable with scripting languages on a linux command line might find it useful if they ever need a real Galaxy tool.
 - Tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools.
 - They contain a test based on the test data provided at tool generation.
-- If this sounds interesting so far, read on for a video demonstration and an annotated example
+- Working examples using Rscript, Python, bash, perl and sed are provided - see below.
+- If you are a scientist/programmer or bioinformatician new to Galaxy and new to the dark arts of Galaxy tool building, this tutorial may be of help.
+- It will show how to convert IE notebook or other scripts into real tools quickly *inside* Galaxy using a Galaxy tool.
+
+
 
 ---
 
@@ -208,7 +208,6 @@ back into the Galaxy server specified.
     - command line only
     - need to pass i/o and parameter details on the command line.
     - does not generate a complete tool archive with a test
-- The ToolFactory relies on Planemo internally for testing tools
 - It can wrap any simple script that runs correctly on the command line with some small test input samples.
 - It is potentially handy for developers and bioinformaticians new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
 
@@ -545,11 +544,17 @@ planemo tool_factory.
 - One runs `planemo test...` and the other `planemo lint....` on toolshed archives in a history
 - The ToolFactory makes exposing these Planemo functions as Galaxy tools about as easy as it could get.
 - Similarly tractable Conda dependencies are also potential candidates for being quickly wrapped as tools
-- This is deliberately not emphasised in the introduction in an effort to manage expectations.
-- The ToolFactory is a tool generator. It is never going to replace manual editing by a skilled developer in anything other than simple cases.
-- These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
-- For simple scripts, it's potentially very useful.
+- This is not emphasised in the introduction in order to manage expectations.
 
+#### Limits and ways to overcome them
+
+- The ToolFactory is an automated code generator.
+- No generator can replace manual editing by a skilled developer other than in constrained, simple cases.
+- These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
+- For simple scripts and appropriate Conda packages, it's potentially very useful.
+- Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations.
+- Interestingly, it is not hard to imagine using a Python wrapper to finesse more complex tools.
+- The ToolFactory, if in a persistent form, is a strange, clumsy but useful way to create and maintain Galaxy tools
 
 #### Software bugs and suggestions
 
