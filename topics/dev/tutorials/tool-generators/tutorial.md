@@ -70,7 +70,6 @@ contributors:
 > * Galaxy tool developers who already have the tools they need *do not need this training*
 > * It is particularly useful for developers coming to Galaxy from other scientific fields
 > * Read the two subtopics below and decide if they seem interesting enough to continue.
-> * Watch the [Hello world](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing) tool generation demonstration video to see if it might be useful for your work
 {: .tip }
 
 
@@ -102,9 +101,10 @@ contributors:
 
 ---
 
-#### Generating a trivial `Hello Galaxy Training Network` tool in Galaxy with the ToolFactory
+#### `Hello World` as a Galaxy tool generated with the ToolFactory
 
 - Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
+- Apologies for the poor quality - will try to make a shorter one.
 
 > ### {% icon details %} See ToolFactory form sections from the Hello demonstration with annotation here
 >>>![](../../images/ToolFactory_hello1form.png)
