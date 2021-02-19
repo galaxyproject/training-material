@@ -77,8 +77,6 @@ contributors:
 # Why you *might* want to follow the hands-on part of this tutorial
 {:.no_toc}
 
-- Are you a scientist programmer or bioinformatician new to Galaxy and the dark arts of Galaxy tool building?
-- Need any IE notebooks or other scripts converted into real tools quickly *in* Galaxy?
 - Galaxy Interactive Environments are very popular and useful for skilled researchers and developers
     - They allow interactive development in scripting languages such as Python or R, in Galaxy.
     - Notebooks can be shared and reused but cannot run in workflows.
@@ -90,7 +88,8 @@ contributors:
 - It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
 - Developed for bioinformaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
 - Working examples using Rscript, Python, bash, perl and sed are provided in a history you can import.
-
+- If you are a scientist/programmer or bioinformatician new to Galaxy and new to the dark arts of Galaxy tool building, this tutorial may be of help.
+- It will show how to convert IE notebook or other scripts into real tools quickly *inside* Galaxy using a Galaxy tool.
 
 #### The ToolFactory generates tools
 
