@@ -481,6 +481,8 @@ as the basis for a new tool - but remember to change the tool name before you pr
 The Hello tool is a model for any simple bash script requiring only a few parameters and is easily extended to many situations
 where a tool is needed quickly for a workflow. Try adding another parameter
 
+The
+
 ---
 
 ## Running your newly generated tools
@@ -535,30 +537,285 @@ planemo tool_factory.
 
 ---
 
-# Notes for anyone interested
+# Advanced content: Some ToolFactory features and suggested work-arounds
 
-#### Not just scripts - *some* Conda packages are easy too.
+## Not just scripts - *some* Conda packages are easy too.
 
 - There are two demonstration tools that use Planemo as a Conda dependency
 - One runs `planemo test...` and the other `planemo lint....` on toolshed archives in a history
-- The ToolFactory makes exposing these Planemo functions as Galaxy tools about as easy as it could get.
+- The linter XML is available below. It's a variant of the Hello example in using a bash script.
+- Instead of echo "Hello $1", it takes an input toolshed archive and writes the planemo lint output to STDOUT with this script pasted into the box:
+
+```
+cp \$1 foo.tar
+tar -xvf foo.tar
+TOOLNAME=`find . -name "*.xml"`
+planemo lint $TOOLNAME >> $2
+```
+
+- The ToolFactory makes exposing these Planemo functions as Galaxy tools fairly easy.
 - Similarly tractable Conda dependencies are also potential candidates for being quickly wrapped as tools
 - This is not emphasised in the introduction in order to manage expectations.
 
-#### Limits and ways to overcome them
+> ### {% icon details %} `planemo lint` demonstration tool generated XML
+> >```xml
+> ><tool name="planemo_lint" id="planemo_lint" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by planemo@galaxyproject.org at 08/01/2021 17:34:35 using the Galaxy Tool Factory.-->
+> >  <description>Lints a ToolFactory or other xml using planemo</description>
+> >  <requirements>
+> >    <requirement version="0.74.1" type="package">planemo</requirement>
+> >  </requirements>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[bash
+> >$runme
+> >$input1
+> >$lint_output]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >cp \$1 foo.tar
+> >tar -xvf foo.tar
+> >TOOLNAME=`find . -name "*.xml"`
+> >planemo lint \$TOOLNAME >> \$2
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <param optional="false" label="Toolshed archive to be linted" help="" format="tgz" multiple="false" type="data" name="input1" argument="input1"/>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="lint_output" format="txt" label="lint_output" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="lint_output" value="lint_output_sample" compare="diff" lines_diff="5"/>
+> >      <param name="input1" value="input1_sample"/>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
+> >
+> >*What it Does**
+> >
+> >lanemo lint
+> >
+> >-----
+> >
+> >cript::
+> >
+> >  cp $1 foo.tar
+> >  tar -xvf foo.tar
+> >  TOOLNAME=`find . -name "*.xml"`
+> >  echo "$$$$$TOOLNAME = $TOOLNAME" > $2
+> >  planemo lint $TOOLNAME >> $2
+> >
+> >]></help>
+> ><citations>
+> >  <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> ></citations>
+> >/tool>
+>>
+>>```
+{: .details}
+
+
+## ToolFactory Collection outputs are handy for hiding dozens of tool outputs in a single history item
+
+- The plotter example is an Rscript that generates as many random plots as you want
+- The script sends them into the the collection that appears in the history after the job runs.
+
+
+
+> ### {% icon details %} `plotter` collection output demonstration tool generated XML
+> >```xml
+> ><tool name="plotter" id="plotter" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.-->
+> >  <description>ToolFactory collection demonstration - random plots</description>
+> >  <requirements>
+> >    <requirement version="" type="package">r-base</requirement>
+> >  </requirements>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[Rscript
+> >$runme
+> >"$nplot"]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >\# demo
+> >args = commandArgs(trailingOnly=TRUE)
+> >if (length(args)==0) {
+> >   n_plots = 3
+> >} else {
+> >   n_plots = as.integer(args[1]) }
+> >dir.create('plots')
+> >for (i in 1:n_plots) {
+> >    foo = runif(100)
+> >    bar = rnorm(100)
+> >    bar = foo + 0.05*bar
+> >    pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+> >    plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
+> >    dev.off()
+> >    foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+> >    bar = as.matrix(foo)
+> >    pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+> >    heatmap(bar,main='Random Heatmap')
+> >    dev.off()
+> >}
+> >
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <param label="Number of random plots pairs to draw" help="" value="3" type="text" name="nplot" argument="nplot"/>
+> >  </inputs>
+> >  <outputs>
+> >    <collection name="plots" type="list" label="Plots">
+> >      <discover_datasets pattern="__name_and_ext__" directory="plots" visible="false"/>
+> >    </collection>
+> >  </outputs>
+> >
+> >
+> >  <tests>
+> >    <test>
+> >      <param name="nplot" value="3" />
+> >      <output_collection name="plots" type="list">
+> >     <element file="yet_1_anotherplot_sample" name="yet_1_anotherplot" ftype="pdf" compare="sim_size" delta_frac="0.05"/>
+> >    </output_collection>
+> > </test>
+> >  </tests>
+>>
+>>
+> >
+> >  <help><![CDATA[
+> >
+> >**What it Does**
+> >
+> >Draws as many random plot pairs as you need
+> >
+> >
+> >
+> >------
+> >
+> >
+> >Script::
+> >
+> >    # demo
+> >    args = commandArgs(trailingOnly=TRUE)
+> >    if (length(args)==0) {
+> >       n_plots = 3
+> >    } else {
+> >       n_plots = as.integer(args[1]) }
+> >    dir.create('plots')
+> >    for (i in 1:n_plots) {
+> >        foo = runif(100)
+> >        bar = rnorm(100)
+> >        bar = foo + 0.05*bar
+> >        pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+> >        plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
+> >        dev.off()
+> >        foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+> >        bar = as.matrix(foo)
+> >        pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+> >        heatmap(bar,main='Random Heatmap')
+> >        dev.off()
+> >    }
+> >
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+>>```
+{: .details}
+
+
+## Selects
+
+- The ToolFactory form includes a select option for additional parameters in addition to text and numeric fields.
+- There is a repeat on the ToolFactory form for pairs of names and values for options.
+- Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
+
+> ### {% icon details %} `select_test` collection output demonstration tool generated XML
+> >```xml
+> ><tool name="select_test" id="select_test" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.-->
+> >  <description>ToolFactory select demonstration</description>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[bash
+> >$runme
+> >"$choose"
+> >>
+> >$select_out]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >echo "You chose \$1"
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <param label="Choose" help="" type="select" name="choose" argument="choose">
+> >      <option value="won">one</option>
+> >      <option value="too">two</option>
+> >      <option value="free">three</option>
+> >    </param>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="select_out" format="txt" label="select_out" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="select_out" value="select_out_sample" compare="diff" lines_diff="0"/>
+> >      <param name="choose" value="won"/>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
+>>
+>>**What it Does**
+> >
+> >Echos your selection
+> >
+> >
+> >
+> >------
+> >
+> >
+> >Script::
+> >
+> >    echo "You chose $1"
+> >
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+{: .details}
+
+
+## Limits and ways to overcome them
 
 - The ToolFactory is an automated code generator.
 - No generator can replace manual editing by a skilled developer other than in constrained, simple cases.
 - These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
 - For simple scripts and appropriate Conda packages, it's potentially very useful.
 - Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations.
-- Interestingly, it is not hard to imagine using a Python wrapper to finesse more complex tools.
-- The ToolFactory, if in a persistent form, is a strange, clumsy but useful way to create and maintain Galaxy tools
+- It is not hard to imagine using a Python wrapper to finesse more complex tools just as bash was used in the `planemo lint` example.
+- The ToolFactory, if in a persistent form, is a slightly clumsy but useable way to create and maintain Galaxy tools.
 
-#### Software bugs and suggestions
+---
+
+# Software bugs and suggestions
 
 - This tutorial has had almost no testing yet. It is in pre-review so please use my fork https://github.com/fubar2/training-material for issues and pull requests.
 - The ToolFactory has had little testing in the present form so expect many bugs
 - If the ToolFactory works well for you, please tell all your friends.
 - If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
+
+
+
 
