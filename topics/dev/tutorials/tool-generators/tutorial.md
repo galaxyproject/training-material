@@ -62,6 +62,16 @@ contributors:
 
 ---
 
+> ### {% icon comment %} # Brief note on tutorial design from the authors.
+>
+- This tutorial is designed for Galaxy users who write code as part of their routine work.
+- It is in 2 parts
+- The first part is all reading with an optional demonstration video
+- A quick read should help you to decide whether the material is relevant to your training needs.
+- The second part is the real training.
+- A guided DIY introduction to a Galaxy tool that you may find useful in your work.
+{: .comment}
+
 > ### {% icon tip %} Before starting, check to see if this tutorial will be useful for *your* work in Galaxy
 >
 > * This tutorial is for informaticians and researchers working in Galaxy, who develop their own scripts.
@@ -72,24 +82,31 @@ contributors:
 {: .tip }
 
 
-# Background and introduction to this tutorial
+# The importance of tools, tool building and the ToolFactory in Galaxy.
 {:.no_toc}
+
 
 ## Why you might want to follow the hands-on part of this tutorial
 {: .no_toc}
-- Galaxy Interactive Environments are very popular and useful for skilled researchers and developers
+- Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project library - the Toolshed.
+- The Galaxy code base includes infrastructure to support manually creating new tools, but it takes a new developer some time to come up to speed.
+- Galaxy Interactive Environments allow unrestricted scripting in a Galaxy environment.
+    - They are very popular and useful for skilled researchers and developers, freeing them from the limitations of currently available tools.
     - They allow interactive development in scripting languages such as Python or R, in Galaxy.
     - Notebooks can be shared and reused but cannot run in workflows.
     - Notebooks developed in IE's can be turned into command line scripts and tested using suitable small input data sets.
 - Scripts for Galaxy tools can also be developed as command line scripts from scratch.
-- **No matter the source**, once the script is working correctly with test data on the command line, **the ToolFactory provides a quick route to a real Galaxy tool**.
 
-## The ToolFactory generates tools
+##### *The ToolFactory provides a quick route to a real Galaxy tool once a script is working correctly with test data on the command line.*
+
+## The ToolFactory generates new, normal Galaxy tools.
 {: .no_toc}
-- Any scripting language command line driven interpreter supported by Conda can be used.
+
 - The ToolFactory is an automated, form driven code generator.
-- It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
-- Developed for informaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
+- It runs in Galaxy as a typical Galaxy tool
+    - Except that it will only run for an administrative user as a minimal security precaution (see warnings below)
+- Any scripting language command line driven interpreter supported by Conda can be used.
+- Developed for informaticians who need to create new "real" Galaxy tools for the needs of their users.
 - An informatician or user who is comfortable with scripting languages on a linux command line might find it useful if they ever need a real Galaxy tool.
 - Tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools.
 - They contain a test based on the test data provided at tool generation.
@@ -238,11 +255,11 @@ back into the Galaxy server specified.
 
 - Ideal for simple R/Bash/Python/.... scripts with a few user supplied parameters and a few i/o history files.
 - The script can easily be modified to respond to default empty parameters as if they had not been passed, so conditionals and related tricks requiring manual coding may be avoided.
-- For many Conda dependencies, wrappers need conditionals and other tool XML constructs that are not easy to generate automatically
-    - While some simple dependencies may be manageable, complex ones will likely not be suitable for the Toolfactory.
+- For many Conda dependencies, wrappers need XML conditionals and other tool XML constructs that are not easy to generate automatically
+    - While some simple dependencies may be manageable, complex ones will not be suitable for the Toolfactory.
 - Galaxy developer tools for building tools include Planemo and the new Galaxy Language Server in VCS.
     - These are far more flexible than the ToolFactory
-    - They are recommended for full time tool developers in Galaxy willing to learn to use them and needing the flexibility and power.
+    - They are recommended for regular tool developers willing to learn to use them and needing the flexibility and power.
     - Training material for those tools is linked at the end of this tutorial.
 - **The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
 - **Scripts they need to wrap are often simple enough for the ToolFactory.**
@@ -279,7 +296,7 @@ training recommended at the end of this document
 >- Although it will only run for administrative users, it allows unlimited scripting and that is never a good idea on a public facing machine.
 >- Please install it locally as described below.
 >- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
->-Fortunately, there are a number of local installation alternatives available, depending on how you prefer to work described in the next section.
+>- Fortunately, there are a number of local installation alternatives available, depending on how you prefer to work described in the next section.
 {: .warning}
 
 #### 1. Install into an existing local non-docker development Galaxy
