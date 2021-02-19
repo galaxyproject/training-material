@@ -353,7 +353,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Jan 8, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 19, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -387,21 +387,23 @@
 
 <p>We wrote a short script which does the following:</p>
 
+<p><em>Locally and in production</em>:</p>
+
 <ul>
   <li>Extracts a ‘script’ from the slides. We extract every presenter comment in the slidedeck, and turn this into a text file.</li>
-  <li>
-    <p>Every line of this text file is then narrated by <a href="https://aws.amazon.com/polly/">Amazon Polly</a></p>
-
-    <ul>
-      <li><em>NB</em>: this currently means it is non-free, and requires AWS credentials in order to build the videos locally, which is not an option for everyone. We do not have plans for integrating an open source voice engine but we would welcome it!</li>
-    </ul>
-  </li>
+  <li>Every line of this text file is then narrated by <a href="https://aws.amazon.com/polly/">Amazon Polly</a> (if you have money) or <a href="https://github.com/synesthesiam/docker-mozillatts">MozillaTTS</a> (free).</li>
   <li>The slide deck is converted to a PDF, and then each slide is extracted as a PNG.</li>
   <li>Captions are extracted from the audio components.</li>
   <li>The narration is stitched together into an mp3</li>
   <li>The images are stitched together into an mp4 file</li>
   <li>The video, audio, and captions are muxed together into a final mp4 file</li>
-  <li>This is uploaded to an S3 bucket</li>
+</ul>
+
+<p><em>In production</em></p>
+
+<ul>
+  <li>We use Amazon Polly, paid for by the <span class="notranslate">Galaxy</span>project</li>
+  <li>The result is uploaded to an S3 bucket</li>
 </ul>
 
 <h1 id="enabling-video">Enabling Video</h1>
@@ -416,7 +418,7 @@
 
 <p>Use short and uncomplex sentences whenever possible. Break up ideas into easy to digest bits. Students will be listening to this spoken and possibly reading the captions.</p>
 
-<p>The captioning process is completely automated, but it means that for very long sentences, we do not currently break them up into multiple captions. So please keep your sentences under ~80 characters where possible.</p>
+<p>The captioning process is completely automated, but it means that for very long sentences, we do not currently break them up into multiple captions. So please keep your sentences under ~120 characters where possible.</p>
 
 <blockquote class="code-2col">
   <blockquote class="code-in">
@@ -429,17 +431,21 @@
 
   <blockquote class="code-out">
     <p><strong>Bad</strong>
-Configuration management manages the configuration of machines; it specifies what software should be installed, and how it should be configured</p>
+Configuration management manages the configuration of machines, it specifies what software should be installed, and how it should be configured</p>
   </blockquote>
 </blockquote>
 
+<h3 id="captions-per-slide">Captions per Slide</h3>
+
+<p>Every slide must have some speaker notes in this system, <strong>NO exceptions</strong>.</p>
+
 <h3 id="punctuation">Punctuation</h3>
 
-<p>Every sentence must end with punctuation like <code class="language-plaintext highlighter-rouge">.</code> or <code class="language-plaintext highlighter-rouge">?</code> or even <code class="language-plaintext highlighter-rouge">!</code> if you’re feeling excited. We merge all lines of the presenter notes before having them spoken by Polly. If you forget the punctuation it will be one long run-on sentence.</p>
+<p>Sentences should end with punctuation like <code class="language-plaintext highlighter-rouge">.</code> or <code class="language-plaintext highlighter-rouge">?</code> or even <code class="language-plaintext highlighter-rouge">!</code> if you’re feeling excited.</p>
 
 <h3 id="abbreviations">Abbreviations</h3>
 
-<p>These are generally fine as-is. Make sure they are all caps though.</p>
+<p>These are generally fine as-is. (e.g. <code class="language-plaintext highlighter-rouge">e.g.</code>/<code class="language-plaintext highlighter-rouge">i.e.</code> is fine as-is, <code class="language-plaintext highlighter-rouge"><span class="notranslate">RNA</span></code> is fine, etc.) Make sure abbreviations are all caps though.</p>
 
 <blockquote class="code-in">
   <p><strong>Good</strong>
@@ -588,8 +594,8 @@ This role deploys CVMFS.</p>
     author = "Helena Rasche",
     title = "Adding auto-generated video to your slides (Galaxy Training Materials)",
     year = "2021",
-    month = "01",
-    day = "08"
+    month = "02",
+    day = "19"
     url = "\url{/training-material/topics/contributing/tutorials/slides-with-video/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
