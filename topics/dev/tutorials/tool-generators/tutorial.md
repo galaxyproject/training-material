@@ -204,12 +204,12 @@ back into the Galaxy server specified.
 - It runs in Galaxy like any other tool.
     - Except for one thing. **It is secured so that only administrative users are allowed to run it.**
 - It automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer, on the ToolFactory form.
-    - Planemo generates tool XML but not natively in a Galaxy GUI
-    - It requires the user to use the command line to pass i/o and parameter details.
-    - It does not generate a complete tool archive with a test
-    - The ToolFactory relies on Planemo for testing tools
+- Planemo also generates tool XML
+    - command line only
+    - need to pass i/o and parameter details on the command line.
+    - does not generate a complete tool archive with a test
+- The ToolFactory relies on Planemo internally for testing tools
 - It can wrap any simple script that runs correctly on the command line with some small test input samples.
-- This is exactly what the ToolFactory does best.
 - It is potentially handy for developers and bioinformaticians new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
 
 > ### {% icon comment %} Under the hood:
@@ -237,13 +237,14 @@ back into the Galaxy server specified.
 - Galaxy developer tools for building tools include Planemo and the new Galaxy Language Server in VCS.
     - These are far more flexible than the ToolFactory
     - They are recommended for full time tool developers in Galaxy willing to learn to use them and needing the flexibility and power.
-- *The ToolFactory is for developers and bioinformaticians not yet familiar with those far more flexible tools. Sometimes the scripts they want to wrap are simple enough for the ToolFactory.*
+    - Training material for those tools is linked at the end of this tutorial.
+- **The ToolFactory is for developers and bioinformaticians not yet familiar with those far more flexible tools.**
+- **Scripts they need to wrap are often simple enough for the ToolFactory.**
 - Compared to the recommended Galaxy developer tool development software
-    - Much easier to learn to use a form driven automated code generator
-    - Limits in terms of the complexity it can deal with.
+    - Less to learn to get up to speed using a form driven, automated code generator.
+    - Less capable - limited to relatively simple scripts.
 - Training is available for the much more general tool development infrastructure in the "Development in Galaxy" section of the GTN - for example, "Tool development and integration into Galaxy" linked in the follow-up
 training recommended at the end of this document
-
 
 ---
 
@@ -548,6 +549,7 @@ planemo tool_factory.
 - The ToolFactory is a tool generator. It is never going to replace manual editing by a skilled developer in anything other than simple cases.
 - These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
 - For simple scripts, it's potentially very useful.
+
 
 #### Software bugs and suggestions
 
