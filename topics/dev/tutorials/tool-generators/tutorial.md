@@ -5,7 +5,7 @@ logo: "GTN"
 title: "Tools from simple scripts using a Galaxy tool - the ToolFactory"
 type: tutorial_hands_on
 key_points:
-  - The ToolFactory is a Galaxy tool
+  - The ToolFactory is a Galaxy tool for programmers and bioinformaticians.
   - It can turn any simple, working command line script into proper Galaxy tool with a test in a few minutes.
   - It generates complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI
   - Designed for bioinformaticians who enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time.
@@ -50,9 +50,21 @@ contributors:
 
 ---
 
+> ### {% icon warning %} Warning - Beta release material. There be dragons!
+> - This is a beta release.
+> - An as yet unreviewed new tutorial
+> - Thank you for caring enough to take a look.
+> - Sanity checking, testing and feedback are all needed. Please.
+> - Fork is at https://github.com/fubar2/training-material
+> - enjoy....
+{: .warning}
+
+
+---
+
 > ### {% icon tip %} Before starting, check that this training will be useful for *your* work in Galaxy
 >
-> * Most non-programmer scientists using Galaxy *do not need this training*.
+> * Non-programmer scientists using Galaxy *do not need this training*.
 > * The ToolFactory is designed for bioinformaticians and researchers who develop scripts
 > * It can help to bridge the gap between developing interactive environment notebook scripts and installing real tools in Galaxy
 > * Galaxy tool developers who already have the tools they need *do not need this training*
@@ -62,28 +74,32 @@ contributors:
 {: .tip }
 
 
-# Introduction: Why you *might* want to follow the rest of this tutorial
+# Why you *might* want to follow the hands-on part of this tutorial
 {:.no_toc}
 
-#### Want any IE notebooks or other scripts as real tools quickly and *in* Galaxy?
-
-- Galaxy Interactive Environments are very popular and useful for skilled researchers and developers because they allow interactive
-development in scripting languages such as Python or R in Galaxy.
+- Are you a scientist programmer or bioinformatician new to Galaxy and the dark arts of Galaxy tool building?
+- Need any IE notebooks or other scripts converted into real tools quickly *in* Galaxy?
+- Galaxy Interactive Environments are very popular and useful for skilled researchers and developers
+    - They allow interactive development in scripting languages such as Python or R, in Galaxy.
+    - Notebooks can be shared and reused but cannot run in workflows.
     - Notebooks developed in IE's can be turned into command line scripts and tested using suitable small input data sets.
 - Scripts needed for use as Galaxy tools can also be developed as command line scripts without using Galaxy
-- No matter the source, once the script is working correctly with test data on the command line, **the ToolFactory provides a quick route to a real Galaxy tool**.
-- *Any* scripting language interpreter supported by Conda can be used. Working R and Python, or system utilities like Bash examples are provided.
-- An automated, form driven code generator that runs in Galaxy as a typical Galaxy tool.
+- **No matter the source**, once the script is working correctly with test data on the command line, **the ToolFactory provides a quick route to a real Galaxy tool**.
+- *Any* scripting language interpreter supported by Conda can be used.
+- The ToolFactory is an automated, form driven code generator.
+- It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
 - Developed for bioinformaticians needing to produce "real" Galaxy tools for their users from scripts they have developed.
+- Working examples using Rscript, Python, bash, perl and sed are provided in a history you can import.
+
 
 #### The ToolFactory generates tools
 
 - Quickly turns simple scripts that run correctly on the command line into real Galaxy tools.
 - Scripts might be developed in Galaxy Interactive Environments for example.
 - A bioinformatician or user who is comfortable with scripting languages on a linux command line might find it useful if they ever need a real Galaxy tool.
-- Produces a new Galaxy tool that wraps the supplied script.
-- They pass Planemo lint, and are no different from manually written tools.
+- Tools pass Planemo lint, and are functionally indistinguishable from equivalent manually written tools.
 - They contain a test based on the test data provided at tool generation.
+- If this sounds interesting so far, read on for a video demonstration and an annotated example
 
 ---
 
@@ -186,11 +202,17 @@ back into the Galaxy server specified.
 #### A form driven Galaxy tool generator for programmers needing simple tools
 
 - The ToolFactory is a Galaxy tool and can be found in the ToolShed.
-- It runs in Galaxy like any other tool
+- It runs in Galaxy like any other tool.
+    - Except for one thing. **It is secured so that only administrative users are allowed to run it.**
 - It automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer, on the ToolFactory form.
+    - Planemo generates tool XML but not natively in a Galaxy GUI
+    - It requires the user to use the command line to pass i/o and parameter details.
+    - It does not generate a complete tool archive with a test
+    - The ToolFactory relies on Planemo for testing tools
 - It can wrap any simple script that runs correctly on the command line with some small test input samples.
 - This is exactly what the ToolFactory does best.
 - It is potentially handy for developers and bioinformaticians new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
+
 > ### {% icon comment %} Under the hood:
 >
 >  - It uses galaxyxml to generate the tool XML from ToolFactory form settings.
@@ -209,12 +231,13 @@ back into the Galaxy server specified.
 
 #### *Simple* scripts
 
-- Ideal for simple R/Bash/Python/.... scripts with a few user supplied parameters and a few i/o history files. The script can easily be modified to respond to default
-empty parameters as if they had not been passed so conditionals and related tricks are not needed.
-- For many Conda dependencies, wrappers need conditionals and other tool XML constructs that are not easy to generate automatically so while some may
-be manageable, complex ones will often not be possible.
-- Galaxy developer tools for building tools include Planemo and the new Galaxy Language Server in VCS. These are far more flexible than the ToolFactory
-- They are recommended for full time tool developers in Galaxy willing to learn to use them and needing the flexibility and power.
+- Ideal for simple R/Bash/Python/.... scripts with a few user supplied parameters and a few i/o history files.
+- The script can easily be modified to respond to default empty parameters as if they had not been passed, so conditionals and related tricks requiring manual coding may be avoided.
+- For many Conda dependencies, wrappers need conditionals and other tool XML constructs that are not easy to generate automatically
+    - While some simple dependencies may be manageable, complex ones will likely not be suitable for the Toolfactory.
+- Galaxy developer tools for building tools include Planemo and the new Galaxy Language Server in VCS.
+    - These are far more flexible than the ToolFactory
+    - They are recommended for full time tool developers in Galaxy willing to learn to use them and needing the flexibility and power.
 - *The ToolFactory is for developers and bioinformaticians not yet familiar with those far more flexible tools. Sometimes the scripts they want to wrap are simple enough for the ToolFactory.*
 - Compared to the recommended Galaxy developer tool development software
     - Much easier to learn to use a form driven automated code generator
@@ -225,16 +248,18 @@ training recommended at the end of this document
 
 ---
 
-# Hands on with the ToolFactory - run the ToolFactory locally and adapt the examples
+# Hands on with the ToolFactory
 {: .no_toc}
 
- - If you are still reading, then perhaps the video and other introductory material above were interesting enough.
- - If you wish, you can now start the real work of the tutorial !
- - Set up your own working ToolFactory, install the samples in a history and then start exploring how it works.
-- Depending on your preferences, install your own ToolFactory from one of the options described below.
-- The sections after this can only be completed with a working ToolFactory.
+#### Run the ToolFactory locally and adapt the sample tools
 
->#### Actual Tutorial content
+- If you are still reading, then perhaps the video and other introductory material above were interesting enough.
+- If you wish, you can now start the real work of the tutorial !
+- Set up your own working ToolFactory, install the samples in a history and then start exploring how it works.
+- Depending on your preferences, install your own ToolFactory from one of the options described below.
+- The sections after this can **only be completed with a working ToolFactory**.
+
+>#### Active Tutorial content follows
 >
 > 1. TOC
 > {:toc}
@@ -245,8 +270,10 @@ training recommended at the end of this document
 
 > ### {% icon warning %} Security advisory!
 >- *Please do not install the ToolFactory on a public server*
->- Although it will only run for administrative users, it allows unlimited scripting and that is never a good idea on a public facing machine. Please install it locally as described below.
->- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material. Fortunately, there are a number of local installation alternatives available, depending on how you prefer to work.
+>- Although it will only run for administrative users, it allows unlimited scripting and that is never a good idea on a public facing machine.
+>- Please install it locally as described below.
+>- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
+>-Fortunately, there are a number of local installation alternatives available, depending on how you prefer to work described in the next section.
 {: .warning}
 
 #### 1. Install into an existing local non-docker development Galaxy
@@ -329,7 +356,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 - Your work is not persistent!
 - The instance will be torn down when you stop the container. When restarted, your previous work will be gone unless you download your work as a history
 or export it as a workflow to be imported later.
--  Be sure to save your history - either as a history or exported as a workflow - before shutting down.
+- Be sure to save your history - either as a history or exported as a workflow - before shutting down.
 - The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers.
 - It does not include this tutorial.
 - It runs planemo tool_factory for you and exposes it on port 9090 so you can do all the same things as you
@@ -396,11 +423,12 @@ can with a local venv described above - but a little slower and isolated in a co
 
 # Once your ToolFactory is installed in a local Galaxy
 
-- Congratulations on getting this far.
+- Congratulations on getting this far and acquiring a local instance of the ToolFactory
 - Now things get more interesting
 - There is a history you can import that shows some sample tools
-- You can examine how these were generated by using the Galaxy redo button.
+- You can examine how these were generated by using the Galaxy job redo button.
 - This will show you the fully completed ToolFactory form used to generate the sample
+- You can edit the form and regenerate a new tool with your changes incorporated.
 - Those samples are the main ToolFactory usage documentation.
 
 #### Import the demonstration history to see some sample ToolFactory tools
@@ -472,6 +500,7 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 > - Make a new repository, add categories and upload the new toolshed archive
 > - In the `Admin` menu, search for the new tool in your local toolshed and then choose `install`
 > - If the new tool does not appear in the Galaxy admin interface, you may need to get whoosh reindexing your toolshed. It's a pain.
+       - This and other challenges are resolved in the specialised [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker)
 > - Refresh the tool menu when installation is complete
 {: .hands_on}
 
@@ -508,4 +537,23 @@ planemo tool_factory.
 
 ---
 
-# Conclusion
+# Notes for anyone interested
+
+#### Not just scripts - *some* Conda packages are easy too.
+
+- There are two demonstration tools that use Planemo as a Conda dependency
+- One runs `planemo test...` and the other `planemo lint....` on toolshed archives in a history
+- The ToolFactory makes exposing these Planemo functions as Galaxy tools about as easy as it could get.
+- Similarly tractable Conda dependencies are also potential candidates for being quickly wrapped as tools
+- This is deliberately not emphasised in the introduction in an effort to manage expectations.
+- The ToolFactory is a tool generator. It is never going to replace manual editing by a skilled developer in anything other than simple cases.
+- These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
+- For simple scripts, it's potentially very useful.
+
+#### Software bugs and suggestions
+
+- This tutorial has had almost no testing yet. It is in pre-review so please use my fork https://github.com/fubar2/training-material for issues and pull requests.
+- The ToolFactory has had little testing in the present form so expect many bugs
+- If the ToolFactory works well for you, please tell all your friends.
+- If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
+
