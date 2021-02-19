@@ -76,7 +76,7 @@ contributors:
 {:.no_toc}
 
 ## Why you might want to follow the hands-on part of this tutorial
-
+{: .no_toc}
 - Galaxy Interactive Environments are very popular and useful for skilled researchers and developers
     - They allow interactive development in scripting languages such as Python or R, in Galaxy.
     - Notebooks can be shared and reused but cannot run in workflows.
@@ -85,7 +85,7 @@ contributors:
 - **No matter the source**, once the script is working correctly with test data on the command line, **the ToolFactory provides a quick route to a real Galaxy tool**.
 
 ## The ToolFactory generates tools
-
+{: .no_toc}
 - Any scripting language command line driven interpreter supported by Conda can be used.
 - The ToolFactory is an automated, form driven code generator.
 - It runs in Galaxy as a typical Galaxy tool although it will only run for an administrative user as a security precaution (see warnings below)
@@ -98,11 +98,20 @@ contributors:
 - It will show how to convert IE notebook or other scripts into real tools quickly *inside* Galaxy using a Galaxy tool.
 
 
+> ### {% icon comment %} Alternative tool generators:
+>- The ToolFactory is one option.
+>- Planemo also [generates tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with a test built in.
+>- No GUI. Command line only
+>- Need to pass all i/o and parameter details at once
+>- Takes a little longer to learn to use than a form driven GUI.
+>- Manual editing required for selects and collections.
+>- See the recommended next steps at the end of this tutorial for Planemo related training.
+{: .comment}
 
 ---
 
 ## `Hello World` as a Galaxy tool generated with the ToolFactory
-
+{: .no_toc}
 - Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
 - Apologies for the poor quality - will try to make a shorter one.
 
@@ -199,17 +208,14 @@ back into the Galaxy server specified.
 
 
 ## A form driven Galaxy tool generator for programmers needing simple tools
-
+{: .no_toc}
 - The ToolFactory is a Galaxy tool and can be found in the ToolShed.
 - It runs in Galaxy like any other tool.
     - Except for one thing. **It is secured so that only administrative users are allowed to run it.**
 - It automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer, on the ToolFactory form.
-- Planemo also generates tool XML
-    - command line only
-    - need to pass i/o and parameter details on the command line.
-    - does not generate a complete tool archive with a test
-- It can wrap any simple script that runs correctly on the command line with some small test input samples.
-- It is potentially handy for developers and bioinformaticians new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
+- The ToolFactory can wrap any simple script that runs correctly on the command line with some small test input samples.
+- This is potentially handy for developers and bioinformaticians new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
+
 
 > ### {% icon comment %} Under the hood:
 >
@@ -228,6 +234,7 @@ back into the Galaxy server specified.
 ---
 
 ## *Simple* scripts
+{: .no_toc}
 
 - Ideal for simple R/Bash/Python/.... scripts with a few user supplied parameters and a few i/o history files.
 - The script can easily be modified to respond to default empty parameters as if they had not been passed, so conditionals and related tricks requiring manual coding may be avoided.
@@ -481,10 +488,203 @@ as the basis for a new tool - but remember to change the tool name before you pr
 The Hello tool is a model for any simple bash script requiring only a few parameters and is easily extended to many situations
 where a tool is needed quickly for a workflow. Try adding another parameter
 
-The
-
 ---
 
+## Some useful features
+
+#### STDIN and STDOUT
+
+- Demonstration tools often capture output from a bash script using the special STDOUT designation for output files
+- This can save sending the output path as a parameter to the script or executable
+- STDIN is also available as a special designation for history inputs if the script takes input from STDIN when it runs.
+
+
+#### Repeats in the ToolFactory form
+
+- Inputs, outputs and parameters are provided in repeat elements so are unlimited in number for any given tool from a technical perspective
+- Particularly if you are willing to create them in the relatively clumsy Galaxy UI
+- A handful is manageable but there are no technical limits
+
+
+#### ToolFactory Collection outputs are handy for hiding dozens of tool outputs in a single history item
+
+- The plotter example is an Rscript that generates as many random plots as you want
+- The script sends them into the the collection that appears in the history after the job runs.
+
+
+
+> ### {% icon details %} `plotter` collection output demonstration tool generated XML
+> >```xml
+> ><tool name="plotter" id="plotter" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.-->
+> >  <description>ToolFactory collection demonstration - random plots</description>
+> >  <requirements>
+> >    <requirement version="" type="package">r-base</requirement>
+> >  </requirements>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[Rscript
+> >$runme
+> >"$nplot"]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >\# demo
+> >args = commandArgs(trailingOnly=TRUE)
+> >if (length(args)==0) {
+> >   n_plots = 3
+> >} else {
+> >   n_plots = as.integer(args[1]) }
+> >dir.create('plots')
+> >for (i in 1:n_plots) {
+> >    foo = runif(100)
+> >    bar = rnorm(100)
+> >    bar = foo + 0.05*bar
+> >    pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+> >    plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
+> >    dev.off()
+> >    foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+> >    bar = as.matrix(foo)
+> >    pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+> >    heatmap(bar,main='Random Heatmap')
+> >    dev.off()
+> >}
+> >
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <param label="Number of random plots pairs to draw" help="" value="3" type="text" name="nplot" argument="nplot"/>
+> >  </inputs>
+> >  <outputs>
+> >    <collection name="plots" type="list" label="Plots">
+> >      <discover_datasets pattern="__name_and_ext__" directory="plots" visible="false"/>
+> >    </collection>
+> >  </outputs>
+> >
+> >
+> >  <tests>
+> >    <test>
+> >      <param name="nplot" value="3" />
+> >      <output_collection name="plots" type="list">
+> >     <element file="yet_1_anotherplot_sample" name="yet_1_anotherplot" ftype="pdf" compare="sim_size" delta_frac="0.05"/>
+> >    </output_collection>
+> > </test>
+> >  </tests>
+>>
+>>
+> >
+> >  <help><![CDATA[
+> >
+> >**What it Does**
+> >
+> >Draws as many random plot pairs as you need
+> >
+> >
+> >
+> >------
+> >
+> >
+> >Script::
+> >
+> >    # demo
+> >    args = commandArgs(trailingOnly=TRUE)
+> >    if (length(args)==0) {
+> >       n_plots = 3
+> >    } else {
+> >       n_plots = as.integer(args[1]) }
+> >    dir.create('plots')
+> >    for (i in 1:n_plots) {
+> >        foo = runif(100)
+> >        bar = rnorm(100)
+> >        bar = foo + 0.05*bar
+> >        pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
+> >        plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
+> >        dev.off()
+> >        foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
+> >        bar = as.matrix(foo)
+> >        pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
+> >        heatmap(bar,main='Random Heatmap')
+> >        dev.off()
+> >    }
+> >
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+>>```
+{: .details}
+
+
+#### Selects
+
+- The ToolFactory form includes a select option for additional parameters in addition to text and numeric fields.
+- There is a repeat on the ToolFactory form for pairs of names and values for options.
+- Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
+
+> ### {% icon details %} `select_test` collection output demonstration tool generated XML
+> >```xml
+> ><tool name="select_test" id="select_test" version="0.01">
+> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
+> >  <!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.-->
+> >  <description>ToolFactory select demonstration</description>
+> >  <stdio>
+> >    <exit_code range="1:" level="fatal"/>
+> >  </stdio>
+> >  <version_command><![CDATA[echo "0.01"]]></version_command>
+> >  <command><![CDATA[bash
+> >$runme
+> >"$choose"
+> >>
+> >$select_out]]></command>
+> >  <configfiles>
+> >    <configfile name="runme"><![CDATA[
+> >echo "You chose \$1"
+> >]]></configfile>
+> >  </configfiles>
+> >  <inputs>
+> >    <param label="Choose" help="" type="select" name="choose" argument="choose">
+> >      <option value="won">one</option>
+> >      <option value="too">two</option>
+> >      <option value="free">three</option>
+> >    </param>
+> >  </inputs>
+> >  <outputs>
+> >    <data name="select_out" format="txt" label="select_out" hidden="false"/>
+> >  </outputs>
+> >  <tests>
+> >    <test>
+> >      <output name="select_out" value="select_out_sample" compare="diff" lines_diff="0"/>
+> >      <param name="choose" value="won"/>
+> >    </test>
+> >  </tests>
+> >  <help><![CDATA[
+> >
+> >**What it Does**
+> >
+> >Echos your selection
+> >
+> >
+> >
+> >------
+> >
+> >
+> >Script::
+> >
+> >    echo "You chose $1"
+> >
+> >]]></help>
+> >  <citations>
+> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
+> >  </citations>
+> ></tool>
+```
+{: .details}
+
+
+---
 ## Running your newly generated tools
 
 #### Using the ToolFactory installed directly into a development instance
@@ -617,184 +817,6 @@ planemo lint $TOOLNAME >> $2
 > >/tool>
 >>
 >>```
-{: .details}
-
-
-## ToolFactory Collection outputs are handy for hiding dozens of tool outputs in a single history item
-
-- The plotter example is an Rscript that generates as many random plots as you want
-- The script sends them into the the collection that appears in the history after the job runs.
-
-
-
-> ### {% icon details %} `plotter` collection output demonstration tool generated XML
-> >```xml
-> ><tool name="plotter" id="plotter" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 24/01/2021 05:02:33 using the Galaxy Tool Factory.-->
-> >  <description>ToolFactory collection demonstration - random plots</description>
-> >  <requirements>
-> >    <requirement version="" type="package">r-base</requirement>
-> >  </requirements>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[Rscript
-> >$runme
-> >"$nplot"]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >\# demo
-> >args = commandArgs(trailingOnly=TRUE)
-> >if (length(args)==0) {
-> >   n_plots = 3
-> >} else {
-> >   n_plots = as.integer(args[1]) }
-> >dir.create('plots')
-> >for (i in 1:n_plots) {
-> >    foo = runif(100)
-> >    bar = rnorm(100)
-> >    bar = foo + 0.05*bar
-> >    pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-> >    plot(foo,bar,main=paste("Foo by Bar plot \#",i),col="maroon", pch=3,cex=0.6)
-> >    dev.off()
-> >    foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-> >    bar = as.matrix(foo)
-> >    pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-> >    heatmap(bar,main='Random Heatmap')
-> >    dev.off()
-> >}
-> >
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param label="Number of random plots pairs to draw" help="" value="3" type="text" name="nplot" argument="nplot"/>
-> >  </inputs>
-> >  <outputs>
-> >    <collection name="plots" type="list" label="Plots">
-> >      <discover_datasets pattern="__name_and_ext__" directory="plots" visible="false"/>
-> >    </collection>
-> >  </outputs>
-> >
-> >
-> >  <tests>
-> >    <test>
-> >      <param name="nplot" value="3" />
-> >      <output_collection name="plots" type="list">
-> >     <element file="yet_1_anotherplot_sample" name="yet_1_anotherplot" ftype="pdf" compare="sim_size" delta_frac="0.05"/>
-> >    </output_collection>
-> > </test>
-> >  </tests>
->>
->>
-> >
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Draws as many random plot pairs as you need
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    # demo
-> >    args = commandArgs(trailingOnly=TRUE)
-> >    if (length(args)==0) {
-> >       n_plots = 3
-> >    } else {
-> >       n_plots = as.integer(args[1]) }
-> >    dir.create('plots')
-> >    for (i in 1:n_plots) {
-> >        foo = runif(100)
-> >        bar = rnorm(100)
-> >        bar = foo + 0.05*bar
-> >        pdf(paste('plots/yet',i,"anotherplot.pdf",sep='_'))
-> >        plot(foo,bar,main=paste("Foo by Bar plot #",i),col="maroon", pch=3,cex=0.6)
-> >        dev.off()
-> >        foo = data.frame(a=runif(100),b=runif(100),c=runif(100),d=runif(100),e=runif(100),f=runif(100))
-> >        bar = as.matrix(foo)
-> >        pdf(paste('plots/yet',i,"anotherheatmap.pdf",sep='_'))
-> >        heatmap(bar,main='Random Heatmap')
-> >        dev.off()
-> >    }
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
->>```
-{: .details}
-
-
-## Selects
-
-- The ToolFactory form includes a select option for additional parameters in addition to text and numeric fields.
-- There is a repeat on the ToolFactory form for pairs of names and values for options.
-- Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
-
-> ### {% icon details %} `select_test` collection output demonstration tool generated XML
-> >```xml
-> ><tool name="select_test" id="select_test" version="0.01">
-> >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
-> >  <!--Created by admin@galaxy.org at 24/01/2021 05:03:21 using the Galaxy Tool Factory.-->
-> >  <description>ToolFactory select demonstration</description>
-> >  <stdio>
-> >    <exit_code range="1:" level="fatal"/>
-> >  </stdio>
-> >  <version_command><![CDATA[echo "0.01"]]></version_command>
-> >  <command><![CDATA[bash
-> >$runme
-> >"$choose"
-> >>
-> >$select_out]]></command>
-> >  <configfiles>
-> >    <configfile name="runme"><![CDATA[
-> >echo "You chose \$1"
-> >]]></configfile>
-> >  </configfiles>
-> >  <inputs>
-> >    <param label="Choose" help="" type="select" name="choose" argument="choose">
-> >      <option value="won">one</option>
-> >      <option value="too">two</option>
-> >      <option value="free">three</option>
-> >    </param>
-> >  </inputs>
-> >  <outputs>
-> >    <data name="select_out" format="txt" label="select_out" hidden="false"/>
-> >  </outputs>
-> >  <tests>
-> >    <test>
-> >      <output name="select_out" value="select_out_sample" compare="diff" lines_diff="0"/>
-> >      <param name="choose" value="won"/>
-> >    </test>
-> >  </tests>
-> >  <help><![CDATA[
-> >
-> >**What it Does**
-> >
-> >Echos your selection
-> >
-> >
-> >
-> >------
-> >
-> >
-> >Script::
-> >
-> >    echo "You chose $1"
-> >
-> >]]></help>
-> >  <citations>
-> >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
-> >  </citations>
-> ></tool>
-```
 {: .details}
 
 
