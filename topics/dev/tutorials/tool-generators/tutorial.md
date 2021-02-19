@@ -69,7 +69,7 @@ contributors:
 > * It can help to bridge the gap between developing interactive environment notebook scripts and installing real tools in Galaxy
 > * Galaxy tool developers who already have the tools they need *do not need this training*
 > * It is particularly useful for developers coming to Galaxy from other scientific fields
-> * Read the two subtopics below and decide if they seem interesting enough to continue.
+> * Read on and decide if the introductory material seems interesting enough to continue.
 {: .tip }
 
 
