@@ -237,10 +237,10 @@ back into the Galaxy server specified.
 ## The ToolFactory supports users who routinely write command line scripts in their work.
 {: .no_toc}
 
-The ToolFactory is a Galaxy tool and can be found in the main ToolShed under the `tool-generators` category. It runs in Galaxy like any other tool but **It is secured
-so that only administrative users are allowed to run it.** It automates much of the work needed to prepare a new Galaxy tool using information provided by the script writer,
-on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the command line with some small test input samples. This is potentially
-handy for developers new to Galaxy, and to Galaxy users who are capable of correctly scripting for themselves.
+The ToolFactory is a Galaxy tool and can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
+new Galaxy tool using information provided by the script writer,
+on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
+handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
 
 
 > ### {% icon comment %} Under the hood:
@@ -252,9 +252,9 @@ handy for developers new to Galaxy, and to Galaxy users who are capable of corre
 
 
 > ### {% icon comment %} Note!
-> - *The ToolFactory does not do any of the hard work needed to prepare a script to run correctly on the command line.*
+> - *The ToolFactory does not do any of the hard work needed to prepare and debug a script to run correctly on the command line.*
 > - *Galaxy is far too clumsy as an IDE to be used for that purpose.*
-> - Without a working script and test data that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of no benefit.
+> - Without a working script and test data that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is unlikely to help.
 {: .comment}
 
 
@@ -280,10 +280,12 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 #### Run the ToolFactory locally and adapt the sample tools
 
-- If you found the introductory material presented so far relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial !
-- Set up your own working ToolFactory, install the samples in a history and then start exploring how it works.
+- If you found the introductory material presented so far relevant to your own needs, you may wish to start the DIY/hands-on part of the tutorial that follows
+- Set up your own working ToolFactory, install the samples in a history and then start exploring it and figuring out how it might help your work.
 - Depending on your preferences, install your own ToolFactory from one of the options described below.
 - The sections after this can **only be completed with a working ToolFactory**.
+- `persistence` is used in describing each option. It indicates whether the history recording all your ToolFactory work will still be there, next time you start working.
+- Some options are not persistent. They are recommended only for testing or teaching.
 
 >#### Active Tutorial content follows
 >
@@ -296,18 +298,17 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 > ### {% icon warning %} Security advisory!
 >- *Please do not install the ToolFactory on a public server*
->- Although it will only run for administrative users, it allows unlimited scripting and that is never a good idea on a public facing machine.
+>- Although it will only run for administrative users, it allows unlimited scripting and that is a high security risk opportunity for any public facing machine.
+>- In fact, Galaxy is very good at isolating tools to stop them doing mischief. But that's no reason to chance your arm. They keep inventing better mice.
 >- Please install it locally as described below.
 >- For this reason, the training materials can't make use of existing public Galaxy infrastructure like most of the GTN material.
->- Fortunately, there are a number of local installation alternatives available, depending on how you prefer to work described in the next section.
+>- Fortunately, there are a number of local installation alternatives to choose from, depending on how you prefer to work, described in the next section.
 {: .warning}
 
 #### 1. Install into an existing local non-docker development Galaxy
 
-- Highly recommended if you already have or want to start a local disposable Galaxy server for development. Quick and easy. As persistent as the Galaxy itself.
-- Only administrators can use the ToolFactory. Normal users will see an error message saying that they are not allowed to use it.
+- Highly recommended if you already have or want to start a local disposable Galaxy server for development. Quick and easy.
 - Your work will be persistent like any other jobs on that Galaxy.
-- Please do not install on a public or production Galaxy server
 - Once installed, it appears on the tool menu for all users, **but only local administrative users can successfully execute it**
 - It will fail with an explanation for non-administrative users.
 - If you have a private toolshed, you can configure the ToolFactory to upload new tools and then install them back to the host Galaxy.
@@ -342,7 +343,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 - This method is recommended for testing the ToolFactory if :
     - you do not already run a development Galaxy
-    - you do not wish to risk the wellbeing of your existing development Galaxy instance.
+    - you do not wish to risk the health of your existing development Galaxy instance.
     - you have Python3, python3-venv, curl and git already installed. The script will complain until they are installed.
 - Make a new (potentially throw away) directory for the Planemo installation - e.g. `mkdir tftute` and `cd tftute`
 - Expose and copy the script below. Paste it into a file in the new directory and run it with `sh`.
@@ -353,15 +354,18 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 - The instance will be torn down when you exit Planemo
 - Be sure to save your history - either as a history or exported as a workflow - before shutting down.
 - After shutting down with `ctrl+C` only the last line of the script needs to be rerun to restart Planemo if the directory contents remain untouched.
-- Newly generated tools can be tested in this setup as described below. It involves a restart of planemo and so loss of all your work! So saving the history or workflow for the new tool is necessary
-
-
+- Newly generated tools can be tested in this setup as described below.
+- It involves a restart of planemo and loss of all your unsaved work! Saving the new tool archive does not save the ToolFactory form settings.
+- Saving the history or an extracted workflow for the new tool is necessary
+- It is a good way to get a taste without much typing.
 
 > ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
 > > ### {% icon code-in %} Input: topics/dev/tutorials/tool-builders/docker/maketf.sh
 > > ```bash
+> > # GALDIR could be an existing dev directory, and the curl line could be commented out to save time
 > > GALDIR="galaxy-central"
 > > PDIR="planemo"
+> > CDIR=`pwd`
 > > git clone --recursive https://github.com/fubar2/planemo.git $PDIR
 > > rm -rf $PDIR/docs
 > > mkdir -p $GALDIR
@@ -374,7 +378,8 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 > > . .venv/bin/activate
 > > python3 setup.py build
 > > python3 setup.py install
-> > planemo conda_init --conda_prefix ./con
+> > cd $CDIR
+> > planemo conda_init --conda_prefix $PDIR/con
 > > planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
 > > ```
 > {: .code-in}
@@ -520,12 +525,12 @@ Probably the best way is to take a look at each sample tool by rerunning the job
 as the basis for a new tool. Press `execute` to rerun the job and generate a new toolshed archive and report.
 
 Consider the trivial `Hello` tool example. It is easily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter. For example,
-the planemo `lint` and `test` tools samples (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
+the planemo `lint` and `test` tool examples (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
 In practice, it's a flexible basis for generating many simple tools.
 
 ---
 
-## Some useful advanced features worth knowing about.
+## Advanced features.
 
 #### STDIN and STDOUT
 
