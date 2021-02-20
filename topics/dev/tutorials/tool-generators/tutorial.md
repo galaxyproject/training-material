@@ -384,10 +384,13 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 - Be sure to save your history before shutting down or you will lose your work.
 - The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers.
 - It does not include this tutorial.
-- It runs planemo tool_factory for you and exposes it on port 9090 so you can do all the same things as you
+- It runs planemo tool_factory for you and exposes it on `localhost:9090` so you can do all the same things as you
 can with a local venv described above - but a little slower and isolated in a container.
 
 > ### {% icon details %} Sample Dockerfile to build a simple version of the ToolFactory in Planemo
+>
+>  *See comments for build and run recipes*
+>
 > > ### {% icon code-in %} Input: topics/dev/tutorials/tool-generators/docker/Dockerfile
 > > ```docker
 > ># Galaxy - Using Galaxy tools to generate new Galaxy tools
