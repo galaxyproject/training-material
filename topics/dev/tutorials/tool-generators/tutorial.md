@@ -6,13 +6,13 @@ title: "Tools from simple scripts using a Galaxy tool - the ToolFactory"
 type: tutorial_hands_on
 key_points:
   - The ToolFactory is a Galaxy tool for programmers and informaticians.
-  - It can turn any simple, working command line script into proper Galaxy tool with a test in a few minutes.
+  - It can turn any simple, working command line script into a proper Galaxy tool with a test in a few minutes.
   - It generates complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI
   - Designed for informaticians who enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time.
   - With a script, you can control the way parameters are read from the command line so can bypass some of the ToolFactory's limited flexibility.
   - The ToolFactory is a code generator. It only deals with relatively simple situations. These are common in small scale Galaxy analyses.
   - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly taking considerable experience to master.
-  - Those tools are suitable for a wide range of Conda dependencies.
+  - Those tools are needed to deal with the entire spectrum of Conda dependency command line generation requirements.
   - Please do not upload trivial tools to the main toolshed!!
 
 objectives:
@@ -28,6 +28,7 @@ questions:
  - What's the quickest way for a new-to-Galaxy developer to convert a functioning Galaxy IE script into a real workflow compatible, shareable tool?
  - Who might want to use the ToolFactory for quick tools from scripts?
  - How can I get the ToolFactory working locally, since you tell me it should never be exposed on a public server?
+
 time_estimation: 1H
 
 requirements:
@@ -93,16 +94,16 @@ little explicit instruction about scripting. It is assumed that the student has 
 
 ## Tools make Galaxy useful and attractive to scientists.
 {: .no_toc}
-Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library. Each one is constrained to one executable.
-User supplied parameters exposed on the tool form are the only things that can be changed. The Galaxy project supports extensive software infrastructure to
-support manually creating new tools. These are complex and powerful. New developers will need some time to come up to speed, but can then generate new tools
-to suit their needs.
+Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library. Each is tightly constrained in that
+user supplied parameters exposed on the tool form are the only things that can be changed before execution. Everything else is fixed. The project supports
+extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful.
+New developers need time to come up to speed, but can then use them to generate new tools to suit their needs.
 
-Galaxy Interactive Environments allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
-and developers, because they can work around the limits of currently available tools using scripting languages such as Python or R, inside Galaxy.
+In stark contrast, Galaxy Interactive Environments allow completely unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
+and developers, because they can write and run code inside Galaxy that is not available in any existing tool. Scripting languages such as Python or R, are typically used.
 Notebooks can be shared and reused but cannot run in workflows and lack the formal reproducibility provided by dependency management built in to real tools.
 
-However, code developed in IE's can always be turned into command line scripts and tested using suitable small input data sets. Scripts for Galaxy tools can also be developed as
+Working code developed in IE's can always be turned into command line scripts and tested using suitable small input data sets. Scripts for Galaxy tools can also be developed as
 command line scripts from scratch. Then, things become more interesting in terms of creating new Galaxy tools.
 
 ##### *The ToolFactory provides a quick route to a real Galaxy tool once a script is working correctly with test data on the command line.*
@@ -303,19 +304,23 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 #### 1. Install into an existing local non-docker development Galaxy
 
-- Only useful if you have or want to start a local disposable Galaxy server for development
+- Highly recommended if you already have or want to start a local disposable Galaxy server for development. Quick and easy. As persistent as the Galaxy itself.
 - Only administrators can use the ToolFactory. Normal users will see an error message saying that they are not allowed to use it.
-- If you have a local disposable development Galaxy on your desktop or laptop, this is the easiest way to run a ToolFactory
 - Your work will be persistent like any other jobs on that Galaxy.
 - Please do not install on a public or production Galaxy server
 - Once installed, it appears on the tool menu for all users, **but only local administrative users can successfully execute it**
 - It will fail with an explanation for non-administrative users.
+- If you have a private toolshed, you can configure the ToolFactory to upload new tools and then install them back to the host Galaxy.
+- Provide the URL and API key for the toolshed and the Galaxy and choose the install after test option toward the end of the form.
+- This is good for seeing exactly what a user is going to work with.
+- It is quite feasible to rebuild the tool after edits to fix warts observed during testing.
+- The Galaxy GUI is an odd choice for an IDE, but it works surprisingly well in practice for the tool develop, test, edit... cycle.
 
 > ### {% icon warning %} The normal ToolFactory will not run as a Galaxy tool in Docker!
 > - The normal ToolFactory tool fails mysteriously when run as a tool in Galaxy under docker.
 > - Option 2 uses a fork of Planemo. The ToolFactory works happily inside a Galaxy inside Planemo in Docker. Go Figure.
 > - There is a [Docker compatible version of the ToolFactory you can use instead in Galaxy in Docker](https://github.com/fubar2/toolfactory_docker) that uses a biocontainer.
-> - Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
+> - See option 4 below.
 {: .warning}
 
 See [the tutorial on installing tools from the toolshed](https://galaxyproject.org/admin/tools/add-tool-from-toolshed-tutorial)
@@ -335,7 +340,7 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 #### 2. Install in a virtual environment using the ToolFactory inside Planemo
 
-- This method is recommended if:
+- This method is recommended for testing the ToolFactory if :
     - you do not already run a development Galaxy
     - you do not wish to risk the wellbeing of your existing development Galaxy instance.
     - you have Python3, python3-venv, curl and git already installed. The script will complain until they are installed.
@@ -348,6 +353,8 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 - The instance will be torn down when you exit Planemo
 - Be sure to save your history - either as a history or exported as a workflow - before shutting down.
 - After shutting down with `ctrl+C` only the last line of the script needs to be rerun to restart Planemo if the directory contents remain untouched.
+- Newly generated tools can be tested in this setup as described below. It involves a restart of planemo and so loss of all your work! So saving the history or workflow for the new tool is necessary
+
 
 
 > ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
@@ -378,9 +385,10 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 #### 3. Build a simple Docker container using the tutorial supplied Dockerfile
 
 - This option may be attractive if you are comfortable with docker and do not have a handy development Galaxy
-- Your work is not persistent!
+- Your work is not persistent so this is only useful for testing. Serious development needs persistence through a different method.
 - The instance will be torn down when you stop the container.
-- When restarted, your previous work will be gone unless you download your work as a history or export it as a workflow to be imported later.
+- It might be possible to use a volume mount and persist Galaxy's data that way.
+- Otherwise, when restarted, your previous work will all be gone.
 - Be sure to save your history before shutting down or you will lose your work.
 - The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers.
 - It does not include this tutorial.
@@ -444,6 +452,7 @@ can with a local venv described above - but a little slower and isolated in a co
 #### 4. Install the ToolFactory docker container with integrated toolshed
 
 - There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
+- Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
 - It provides an inbuilt toolshed and allows tools to be installed and used in the Galaxy used to run the ToolFactory.
 - Like installation in a local Galaxy server, the docker container can be persisted as shown in the documentation for docker-galaxy-stable upon which it is based.
 
@@ -508,10 +517,11 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 
 
 Probably the best way is to take a look at each sample tool by rerunning the job. Think about how the options have been configured and try extending it or using the form
-as the basis for a new tool - but remember to change the tool name before you press execute to rerun the job and generate a new toolshed archive and report.
+as the basis for a new tool. Press `execute` to rerun the job and generate a new toolshed archive and report.
 
-The Hello tool is a model for any simple bash script requiring only a few parameters and is easily extended to many situations
-where a tool is needed quickly for a workflow. Try adding another parameter
+Consider the trivial `Hello` tool example. It is easily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter. For example,
+the planemo `lint` and `test` tools samples (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
+In practice, it's a flexible basis for generating many simple tools.
 
 ---
 
@@ -522,14 +532,15 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 - Demonstration tools often capture output from a bash script using the special STDOUT designation for output files
 - This can save sending the output path as a parameter to the script or executable
 - STDIN is also available as a special designation for history inputs if the script takes input from STDIN when it runs.
+- The option `Tool reads selected input file from STDIN and writes STDOUT with no parameters` in the parameter passing model selection list will generate a simple filter tool, executing a script or Conda dependency with input on STDIN and output on STDOUT for those rare situations where that's all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.
 
+#### Repeats in the ToolFactory form are unrestricted. Of the two, your patience will likely fail first.
 
-#### Repeats in the ToolFactory form are unrestricted.
-
-- Inputs, outputs and parameters are all in repeat elements on the form.
+- Inputs, outputs and additional user parameters are all presented within repeat elements on the form.
 - Repeats are effectively unlimited in number for any given tool from a technical perspective
 - Particularly if you are willing to create them in the relatively clumsy Galaxy UI
 - A handful is manageable but there are no technical limits to the actual total number
+- Repeats *on the generated tool form* are not (at present) supported in the ToolFactory but should be doable if galaxyxml supports them.
 
 
 #### ToolFactory collection outputs are handy for hiding dozens of tool outputs in a single history item
@@ -538,7 +549,7 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 - It generates as many random plots as you want.
 - The script sends them into the the collection that appears in the history after the job runs.
 - The user's history shows only one new item after it runs.
-- That is a collection. When selected, all the plots will be listed for viewing
+- That is a collection. When selected, objects linked to each plot will be listed for viewing.
 
 > ### {% icon details %} `plotter` collection output demonstration tool generated XML
 > >```xml
@@ -647,8 +658,9 @@ where a tool is needed quickly for a workflow. Try adding another parameter
 
 #### Selects
 
-- Additional parameters can be text or numeric form fields, or select parameters where a set of prespecified options are presented to the user.
-- There is a repeat on the ToolFactory form to collect the select's pairs of names and values for options.
+- Additional parameter types are selected from a drop down list including text, numeric or select parameters where a set of prespecified options are presented to the user.
+- There is a repeat on the ToolFactory form to collect the select's pairs of names and values for options. It is clumsy and suitable only for a limited number of selects.
+- In a persistent development environment, that's not such a problem since the form can be reproduced by selecting `redo` on the job.
 - Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
 
 > ### {% icon details %} `select_test` collection output demonstration tool generated XML
@@ -858,11 +870,14 @@ planemo lint $TOOLNAME >> $2
 
 ---
 
-# Software bugs and suggestions
+# Please help improve this community resource by telling us what went well and what could be improved for the benefit of future students?
 
-- This tutorial has had almost no testing yet. It is in pre-review so please use my fork https://github.com/fubar2/training-material for issues and pull requests.
+- This tutorial has had almost no testing yet.
+- It is in pre-review.
+- A PR will soon appear once we get the showstoppers sorted.
+- Please use the fork at https://github.com/fubar2/training-material for issues and pull requests for the nonce.
 - The ToolFactory has had little testing in the present form so expect many bugs
-- If the ToolFactory works well for you, please tell all your friends.
+- If the ToolFactory works well for you, please tell your friends.
 - If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
 
 
