@@ -4,8 +4,8 @@
 # To build the docker image, go to root of the training repo and
 #    docker build -t tool-generators -f topics/tool-generators/docker/Dockerfile .
 # Take a break. Takes a while!
-# To run image, make an export directory where you want to run it regularly and then
-#    docker run -p "9090:9090" -v export:/export/  -t tool-generators
+# To run image, make a `planemo --extra_tools` tool directory where you want to run it regularly and then
+#    docker run -p "9090:9090" -v mytools:/planemo/mytools/  -t tool-generators
 # ToolFactory planemo will be available on localhost:9090
 # Training material is not yet installed - not sure how to do that in Planemo ?
 
