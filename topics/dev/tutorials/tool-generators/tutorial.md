@@ -238,7 +238,7 @@ back into the Galaxy server specified.
 ## The ToolFactory supports users who routinely write command line scripts in their work.
 {: .no_toc}
 
-The ToolFactory is a Galaxy tool and can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
+The ToolFactory can be found in the main ToolShed under the `tool-generators` category. It automates much of the work needed to prepare a
 new Galaxy tool using information provided by the script writer,
 on the ToolFactory form. The ToolFactory can wrap any simple script that runs correctly on the linux command line with some small test input samples. This is potentially
 handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
@@ -259,20 +259,20 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 {: .comment}
 
 
-The ToolFactory is ideal for wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files. Scripts are easier than some
+It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files. Scripts are easier than some
 Conda packages because they are easily modified to respond to default empty parameters as if they had not been passed. As a result, advanced tool building elements
 such as conditionals and related tricks requiring manual coding, can often be avoided. On the other hand, many Conda dependencies will require XML conditionals
 or other tool XML constructs that are not easy to generate automatically. While some simple requirements may be manageable, complex ones will not be suitable for the Toolfactory.
 
 **The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
-**Scripts they need to wrap are often simple enough for the ToolFactory.**
+**Scripts they need to wrap are frequently simple enough for the ToolFactory.**
 
 Compared to other Galaxy tool development software, there is far less to learn in order to get up to speed when using a form driven, automated code generator. The
 cost of this convenience is that ToolFactory is limited to automated generation of a large but limited subset of simple script and package wrappers.
 
 ---
 
-# 2. Getting your hands on a ToolFactory
+# 2. Getting your hands on a ToolFactory for some hands-on training.
 {: .no_toc}
 
 #### Run the ToolFactory locally and adapt the sample tools
@@ -544,6 +544,49 @@ In practice, it's a flexible basis for generating many simple tools.
 - Repeats *on the generated tool form* are not (at present) supported in the ToolFactory but should be doable if galaxyxml supports them.
 
 
+#### Command over-ride and test over-ride
+
+- There are two simple BWA wrappers based on a Planemo documentation advanced example
+- One uses a command over-ride pasted into the appropriate text box on the ToolFactory form
+- This was based on the one shown in the example it is copied from.
+- It allows templating - `$foo` is interpreted by mako.
+- The pasted over-ride completely replaces the galaxyxml generated ones.
+
+> ### {% icon details %} `bwa_test_command_override` sample - the command override
+>>```
+>> ## Build reference
+>>#set $reference_fasta_filename = "localref.fa"
+>>ln -s "${ref_file}" "${reference_fasta_filename}" ;
+>>bwa index -a is "${reference_fasta_filename}" ;
+>>bwa mem -t "\${GALAXY_SLOTS:-4}" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
+>>samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
+>>```
+{: .details}
+
+- There is another sample bwa_test tool that achieves the same results using a bash script.
+- It does not need a command over-ride but is more typing because three positional parameters are named for readability.
+- Bash is probably more familiar to many ToolFactory users than mako templating.
+- The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
+
+> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
+>>```
+>>REFFILE=$1
+>>FASTQ=$2
+>>BAMOUT=$3
+>>rm -f "refalias"
+>>ln -s "$REFFILE" "refalias"
+>>bwa index -a is "refalias"
+>>bwa mem -t "2"  -v 1 "refalias" "$FASTQ"  > tempsam
+>>samtools view -Sb tempsam > temporary_bam_file.bam
+>>samtools sort -o "$BAMOUT" temporary_bam_file.bam
+>>```
+{: .details}
+
+
+- Most users may never need to use the command over-ride option to access templating for wrapping their own scripts where they control the command line interpretation.
+- Where the generated test is not sufficient, a hand written one can be substituted. Not needed for the simple BWA example.
+- Test or command over-rides are likely to be edge cases more suited to the alternate, more powerful tools.
+
 #### ToolFactory collection outputs are handy for hiding dozens of tool outputs in a single history item
 
 - The plotter example uses an Rscript.
@@ -654,55 +697,15 @@ In practice, it's a flexible basis for generating many simple tools.
 > >  </citations>
 > ></tool>
 >>```
->> Here's what the collection looks like with 25 pairs of plots from the sample tool.
+>> Here's what the collection looks like with 25 pairs of plots from the sample tool, with one of them displayed using the "eye" icon.
+>> Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a downstream tool.
+>> It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
+>> As shown above, the script only has to write the files to a directory.
+>> Note that the test is over-ridden in the ToolFactory form to generate this tool because I could not get it to test correctly otherwise.
+>>
 >>
 >>![](../../images/toolfactory_plotter_sample_output.png)
 {: .details}
-
-
-#### Command over-ride and test over-ride
-
-- There are two simple BWA wrappers based on a Planemo documentation advanced example
-- One uses a command over-ride pasted into the appropriate text box on the ToolFactory form
-- This was based on the one shown in the example it is copied from.
-- It allows templating - `$foo` is interpreted by mako.
-- The pasted over-ride completely replaces the galaxyxml generated ones.
-
-> ### {% icon details %} `bwa_test_command_override` sample - the command override
->>```
->> ## Build reference
->>#set $reference_fasta_filename = "localref.fa"
->>ln -s "${ref_file}" "${reference_fasta_filename}" ;
->>bwa index -a is "${reference_fasta_filename}" ;
->>bwa mem -t "\${GALAXY_SLOTS:-4}" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
->>samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
->>```
-{: .details}
-
-- There is another sample bwa_test tool that achieves the same results using a bash script.
-- It does not need a command over-ride but is more typing because three positional parameters are named for readability.
-- Bash is probably more familiar to many ToolFactory users than mako templating.
-- The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
-
-> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
->>```
->>REFFILE=$1
->>FASTQ=$2
->>BAMOUT=$3
->>rm -f "refalias"
->>ln -s "$REFFILE" "refalias"
->>bwa index -a is "refalias"
->>bwa mem -t "2"  -v 1 "refalias" "$FASTQ"  > tempsam
->>samtools view -Sb tempsam > temporary_bam_file.bam
->>samtools sort -o "$BAMOUT" temporary_bam_file.bam
->>```
-{: .details}
-
-
-- Most users may never need to use the command over-ride option to access templating for wrapping their own scripts where they control the command line interpretation.
-- Where the generated test is not sufficient, a hand written one can be substituted. Not needed for the simple BWA example.
-- Test or command over-rides are likely to be edge cases more suited to the alternate, more powerful tools.
-
 
 #### Selects as user supplied parameters
 
