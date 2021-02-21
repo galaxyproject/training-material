@@ -264,10 +264,6 @@ Conda packages because they are easily modified to respond to default empty para
 such as conditionals and related tricks requiring manual coding, can often be avoided. On the other hand, many Conda dependencies will require XML conditionals
 or other tool XML constructs that are not easy to generate automatically. While some simple requirements may be manageable, complex ones will not be suitable for the Toolfactory.
 
-Galaxy infrastructure for building tools includes Planemo and the new Galaxy Language Server in VCS. These are far more flexible than the ToolFactory. They are recommended
-for regular tool developers willing to learn to use them and needing their flexibility and power. Training material is linked at the end of this tutorial for users needing
-that flexibility.
-
 **The ToolFactory is for developers and informaticians not yet familiar with those far more flexible tools.**
 **Scripts they need to wrap are often simple enough for the ToolFactory.**
 
@@ -308,9 +304,10 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 #### 1. Install into an existing local non-docker development Galaxy
 
-- Highly recommended if you already have or want to start a local disposable Galaxy server for development. Quick and easy.
+- Highly recommended if you already have or want to start a local disposable Galaxy server for development.
+- Quick and easy.
 - Your work will be persistent like any other jobs on that Galaxy.
-- Once installed, it appears on the tool menu for all users, **but only local administrative users can successfully execute it**
+- Only local administrative users can successfully execute it
 - It will fail with an explanation for non-administrative users.
 - If you have a private toolshed, you can configure the ToolFactory to upload new tools and then install them back to the host Galaxy.
 - Provide the URL and API key for the toolshed and the Galaxy and choose the install after test option toward the end of the form.
@@ -657,6 +654,9 @@ In practice, it's a flexible basis for generating many simple tools.
 > >  </citations>
 > ></tool>
 >>```
+>> Here's what the collection looks like with 25 pairs of plots from the sample tool.
+>>
+>>![](../../images/toolfactory_plotter_sample_output.png)
 {: .details}
 
 
