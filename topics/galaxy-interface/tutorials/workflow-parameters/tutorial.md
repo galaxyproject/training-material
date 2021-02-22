@@ -123,13 +123,13 @@ compose this text parameter using the `Compose text parameter value` tool.
 > 2. Add an Inputs → **Simple inputs used for workflow logic** to the workflow
 >    - {% icon param-select %} *"Parameter type"*: `Text`
 > 3. Add **Compose text parameter value** {% icon tool %} to the workflow
->     - Add two more repeats, you will need three "Repeat" blocks in total.
->     - In the first repeat:
+>     - Add two more "Components" using the "Insert components" button in the workflow editor tool form on the right of the screen. You will need three "Component" blocks in total.
+>     - In the first component:
 >       - *"Enter text that should be part of the computed value"*: `/(`
->     - In the second repeat:
+>     - In the second component:
 >       - *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module" {% icon galaxy-wf-connection %}
 >       - Connect the output of the **Input parameter** {% icon tool %} to this new input
->     - In the third repeat:
+>     - In the third component:
 >       - *"Enter text that should be part of the computed value"*: `)/`
 >
 > 4. Add the **Regex Find And Replace** {% icon tool %} to the workflow
