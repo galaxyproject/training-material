@@ -553,6 +553,8 @@ In practice, it's a flexible basis for generating many simple tools.
 - The pasted over-ride completely replaces the galaxyxml generated ones.
 
 > ### {% icon details %} `bwa_test_command_override` sample - the command override
+>> ToolFactory command over-ride section adapted from the Planemo BWA example.
+>>
 >>```
 >> ## Build reference
 >>#set $reference_fasta_filename = "localref.fa"
@@ -569,6 +571,8 @@ In practice, it's a flexible basis for generating many simple tools.
 - The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
 
 > ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
+>> ToolFactory form bash script to replace above command over-ride section:
+>>
 >>```
 >>REFFILE=$1
 >>FASTQ=$2
@@ -771,7 +775,11 @@ In practice, it's a flexible basis for generating many simple tools.
 > >    <citation type="doi">10.1093/bioinformatics/bts573</citation>
 > >  </citations>
 > ></tool>
-```
+> >```
+>>
+>> The generated tool form from the select demonstration shows the three options and returns the one selected.
+>>
+>>![](../../images/toolfactory_select_test_tool.png)
 {: .details}
 
 ---
