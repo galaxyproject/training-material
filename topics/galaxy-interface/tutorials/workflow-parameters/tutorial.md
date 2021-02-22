@@ -13,7 +13,7 @@ questions:
 - How can I read Parameters from Datasets
 objectives:
 - Learn how to use Workflow Parameters to improve your Workflows
-time_estimation: "10m"
+time_estimation: "30m"
 key_points:
 - Use Workflow Parameters to make your Workflows more versatile
 contributors:
