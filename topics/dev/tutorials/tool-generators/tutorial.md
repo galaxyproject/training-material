@@ -238,6 +238,11 @@ back into the Galaxy server specified.
 >  </citations>
 ></tool>
 >```
+> This form is displayed when the generated Hello tool is executed.
+> The user sees a text box to enter the string
+> When executed, it will be echoed to a new history file called Hello_output
+>
+> ![](../../images/toolfactory_hello_demo_form.png)
 {: .details }
 
 ---
