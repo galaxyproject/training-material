@@ -62,18 +62,18 @@ Persian words, one at a time. RNN handle sequential data, whether its temporal o
 
 ## Single layer FNN
 
-![Alternative text](../../images/FFNN_no_hidden.png "Single layer feedforward neural network")
+![Neurons forming the input and output layers of a single layer feedforward neural network](../../images/FFNN_no_hidden.png "Single layer feedforward neural network")
 
 Figure 1 shows a single layer FNN, where the input is 3 dimensional. Each input field is multiplied by a
 weight. Afterwards, the results are summed up, along with a bias, and passed to an activation function.
 
-![Alternative text](../../images/activation.gif "Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.")
+![An activation function (such as Sigmoid, Tanh, etc.) applied to the input of the only neuron in the output layer of a feedforward neural network](../../images/activation.gif "Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.")
 
 The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
 Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation 
 functions, please refer to {% cite nwankpaEtAl %}.
 
-![Alternative text](../../images/sigmoid.gif "Sigmoid activation function")
+![Mathmatical formula for Sigmoid activation function](../../images/sigmoid.gif "Sigmoid activation function")
 
 ## Multi-layer FFN
 
@@ -83,7 +83,7 @@ in which data is non-linearly separable. Per Universal Approximation Theorem, a 
 any function ({% cite Cybenko1989 %}), although in practice training such a model is very difficult (if not impossible), 
 hence, we usually add multiple hidden layers to solve complex problems.
 
-![Alternative text](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
+![Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network](../../images/FFNN.png "Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity")
 
 ## Learning algorithm 
 
@@ -93,7 +93,7 @@ pairs, called the *test set*, which is not used by the learning algorithm. When 
 providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a **loss function** to objectively 
 measure how much the model output is off of the expected output. For classification problems we use the **cross entropy** loss function.
 
-![Alternative text](../../images/CrossEntropy.gif "Cross entropy loss function")
+![Mathematical formula for calculating the cross entropy loss function, which quantifies the difference between the predicted and desired output of a neural network](../../images/CrossEntropy.gif "Cross entropy loss function")
 
 The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training 
 set input-output pairs is called the **Cost function**. The goal of the learning algorithm is to minimize the cost function. The cost function 
@@ -101,7 +101,7 @@ is a function of network weights and biases of all neurons in all layers. The **
 iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite 
 direction of the gradient, to find the local minimum.  
 
-![Alternative text](../../images/CostFunction.gif "Cross entropy cost function")
+![Mathematical formula for calcuating the cross entropy cost function, which is just the average of cross entropy loss functions for training samples](../../images/CostFunction.gif "Cross entropy cost function")
   
 # Recurrent neural networks
 
@@ -113,19 +113,19 @@ There are 4 possible input/output combinations for RNN and each have a specific 
 where we have one input and a variable number of output. One example application is image captioning, where a single image is provided 
 as input and a variable number of words (which caption the image) is returned as output (See Figure 7).   
 
-![Alternative text](../../images/RNN_1_to_n.png "One-to-many RNN")
+![Neurons forming a one-to-many recurrent neural network](../../images/RNN_1_to_n.png "One-to-many RNN")
 
 Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment 
 classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
 has a positive or negative sentiment regarding a topic (See Figure 8).
 
-![Alternative text](../../images/RNN_n_to_1.png "Many-to-one RNN")
+![Neurons forming a many-to-one recurrent neural network](../../images/RNN_n_to_1.png "Many-to-one RNN")
 
 There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number 
 of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation 
 we pass in n words in English and get m words in Italian (See Figure 9).
 
-![Alternative text](../../images/RNN_n_to_m.png "Many-to-many RNN")
+![Neurons forming a many-to-many recurrent neural network](../../images/RNN_n_to_m.png "Many-to-many RNN")
 
 ## RNN architectures
 
@@ -169,7 +169,7 @@ represent the words in our vocabulary (all the unique words in all the documents
 at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry -- Alternatively, we could use 
 the word count or frequency.
 
-![Alternative text](../../images/BoW.png "Bag of words (BoW) representation")
+![Table showing a bag-of-words representation of sample documents](../../images/BoW.png "Bag of words (BoW) representation")
 
 Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW 
 representation of these documents is given in Figure 10. 
@@ -192,7 +192,7 @@ elements are 0; Apple is represented by a vector whose second element is 1 and o
 vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0's. The same 
 concept applies if the size of the vocabulary is N.    
 
-![Alternative text](../../images/OHE.gif "One hot encoding (OHE) representation")
+![Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana](../../images/OHE.gif "One hot encoding (OHE) representation")
 
 The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no 
 concept of word similarity.   
@@ -215,7 +215,7 @@ cost function via backpropagation.
 >
 > - {% tool [Import some data](upload1) %}
 >    - Create a new history for this tutorial
->    - Import the files from [Zenodo](https://zenodo.org/record/4477881#.YBrEQ3dKgvo) or from the shared data library
+>    - Import the files from [Zenodo](https://zenodo.org/record/4477881) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/4477881/files/X_test.tsv
@@ -232,7 +232,7 @@ cost function via backpropagation.
 >
 >    - Check that the datatype of all the four datasets is `tabular`. If not, change the dataset's datatype to tabular. 
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% include snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -354,8 +354,9 @@ were classified as positive that were actually negative (False positive, FP, or 
 as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate **precision** and 
 **recall** {% cite TatbulEtAl  %}. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall 
 is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is 
-to use the **F score**, which is the harmonic mean of precision and recall (F = (2 * precision * recall) / (precision + recall)).
+to use the **F score**, which is the harmonic mean of precision and recall 
 
+$$ F = \frac{2 * \text{precision * recall}}{\text{precision + recall}} $$
 
 # Conclusion
 {:.no_toc}
