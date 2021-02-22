@@ -255,11 +255,14 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
 {: .blockquote}
 
-As an example:
+As an example for this image:
 
-```markdown
-![Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
-```
+![Image being used as an example, caption described below. Not relevant to content.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg
+
+Field          | Appropriate Contents
+----           | -----
+alt text       | Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.
+figure caption | Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)
 
 ## Writing mathematical expressions
 
