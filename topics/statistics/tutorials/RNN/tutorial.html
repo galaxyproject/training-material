@@ -1,0 +1,1427 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>Introduction to recurrent neural networks (RNN)</title>
+        
+            <script async defer data-domain="training.galaxyproject.org" src="https://plausible.galaxyproject.eu/js/plausible.js"></script>
+
+        
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap.min.css?v=3">
+        <link rel="stylesheet" href="/training-material/assets/css/bootstrap-toc.min.css">
+        <link rel="stylesheet" href="/training-material/assets/css/main.css?v=2">
+        <script src="https://kit.fontawesome.com/67b3f98409.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="/training-material/assets/css/academicons.css">
+        <link rel="stylesheet" href="/training-material/assets/css/syntax_highlighting.css">
+        <link rel="shortcut icon" href="/training-material/favicon.ico" type="image/x-icon" />
+
+        
+        
+        
+        
+        
+        <meta name="description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:title" content="Galaxy Training: Introduction to recurrent neural networks (RNN)" />
+        <meta property="og:description" content="Statistical Analyses for omics data and machine learning ..." />
+        <meta property="og:image" content="/training-material/assets/images/GTNLogo1000.png" />
+    </head>
+    <body data-spy="scroll" data-target="#toc">
+        
+
+
+
+
+
+
+
+
+
+
+
+<!-- Gitter -->
+
+
+<script>
+  ((window.gitter = {}).chat = {}).options = {
+  room: 'Galaxy-Training-Network/Lobby'
+  };
+</script>
+<script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async defer></script>
+
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/training-material/">
+                <img src="/training-material/assets/images/GTN-60px.png" height="30" alt="Galaxy Training Network logo">
+                Galaxy Training!
+            </a>
+
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#top-navbar" aria-controls="top-navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="top-navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/training-material/topics/statistics" title="Go back to list of tutorials">
+                            <i class="far fa-folder" aria-hidden="true"></i><span class="visually-hidden">topic</span> Statistics and machine learning
+                        </a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
+                            <i class="fas fa-language" aria-hidden="true"></i><span class="visually-hidden">language</span> Language
+                        </a>
+                        <div class="dropdown-menu">
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=fr&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                                Français
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ja&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                                日本語
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=es&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                                Español
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=pt&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                                Português
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=ar&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                                العربية
+                            </a>
+                            
+                            <a class="dropdown-item" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2Fstatistics%2Ftutorials%2FRNN%2Ftutorial.html&edit-text=&act=url" title="">
+                                And more!
+                            </a>
+                        </div>
+                    </li>
+
+                    <li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Help">
+        <i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">help</span> Help
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+        <form method="get" action="https://tess.elixir-europe.org/materials">
+            <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
+            <input type="hidden" value="Galaxy Training" name="content_provider">
+            <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
+        </form>
+
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" href="/training-material/faq" title="Check our FAQ">
+            FAQ
+        </a>
+        <a class="dropdown-item" href="https://help.galaxyproject.org/" title="Discuss on Galaxy Help">
+            Discuss on Galaxy Help
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://github.com/galaxyproject/training-material/edit/master/topics/statistics/tutorials/RNN/tutorial.md">
+                            <i class="fab fa-github" aria-hidden="true"></i><span class="visually-hidden">github</span> Edit
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<div class="container main-content">
+    <script type="application/ld+json">
+        
+
+
+{
+  "@context": "http://schema.org",
+  "@type": "Course",
+  "accessMode": [
+    "textual",
+    "visual"
+  ],
+  "accessModeSufficient": [
+    "textual",
+    "visual"
+  ],
+  "accessibilityControl": [
+    "fullKeyboardControl",
+    "fullMouseControl"
+  ],
+  "accessibilityFeature": [
+    "alternativeText",
+    "tableOfContents"
+  ],
+  "accessibilitySummary": "Short descriptions are present but long descriptions will be needed for non-visual users",
+  "audience": {
+    "@type": "EducationalAudience",
+    "educationalRole": "students"
+  },
+  "citation": {
+    "@type": "CreativeWork",
+    "name": "Community-Driven Data Analysis Training for Biology",
+    "url": "https://doi.org/10.1016/j.cels.2018.05.012"
+  },
+  "copyrightHolder": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "discussionUrl": "https://gitter.im/Galaxy-Training-Network/Lobby",
+  "headline": "Introduction to recurrent neural networks (RNN)",
+  "inLanguage": {
+    "@type": "Language",
+    "name": "English",
+    "alternateName": "en"
+  },
+  "interactivityType": "mixed",
+  "isAccessibleForFree": true,
+  "license": "https://github.com/galaxyproject/training-material/blob/master/LICENSE.md",
+  "producer": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "provider": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "sourceOrganization": {
+    "@type": "Organization",
+    "email": "galaxytrainingnetwork@gmail.com",
+    "name": "Galaxy Training Network",
+    "url": "https://galaxyproject.org/teach/gtn/"
+  },
+  "isPartOf": {
+    "@type": "CreativeWork",
+    "name": "Statistics and machine learning",
+    "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+    "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+  },
+  "courseCode": "statistics / RNN / hands-on",
+  "learningResourceType": "hands-on tutorial",
+  "name": "Hands-on for 'Introduction to recurrent neural networks (RNN)' tutorial",
+  "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/RNN/tutorial.html",
+  "timeRequired": "PT2H",
+  "description": "The questions this  addresses are:\n - What is a recurrent neural network (RNN)?\n - What are some applications of RNN?\n\n\\nThe objectives are:\n - Understand the difference between feedforward neural networks (FNN) and RNN\n - Learn various RNN types and architectures\n - Learn how to create a neural network using Galaxy's deep learning tools\n - Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy\n\n",
+  "coursePrerequisites": [
+    {
+      "@type": "CreativeWork",
+      "url": "https://training.galaxyproject.org//training-material/topics/introduction/",
+      "name": "Introduction to Galaxy Analyses",
+      "description": "Introduction to Galaxy Analyses",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    },
+    {
+      "@type": "Course",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html",
+      "name": "Introduction to deep learning",
+      "description": "Hands-on for 'Introduction to deep learning' tutorial",
+      "learningResourceType": "hands-on tutorial",
+      "interactivityType": "expositive",
+      "provider": {
+        "@type": "Organization",
+        "email": "galaxytrainingnetwork@gmail.com",
+        "name": "Galaxy Training Network",
+        "url": "https://galaxyproject.org/teach/gtn/"
+      }
+    }
+  ],
+  "hasPart": [
+
+  ],
+  "author": [
+    {
+      "@type": "Person",
+      "name": "Kaivan Kamali"
+    }
+  ],
+  "contributor": [
+    {
+      "@type": "Person",
+      "name": "Kaivan Kamali"
+    }
+  ],
+  "about": [
+    {
+      "@type": "CreativeWork",
+      "name": "Statistics and machine learning",
+      "description": "Statistical Analyses for omics data and machine learning using Galaxy tools",
+      "url": "https://training.galaxyproject.org//training-material/topics/statistics/"
+    },
+    {
+      "@type": "DefinedTerm",
+      "@id": "http://edamontology.org/topic_2269",
+      "inDefinedTermSet": "http://edamontology.org",
+      "termCode": "topic_2269",
+      "url": "https://bioportal.bioontology.org/ontologies/EDAM/?p=classes&conceptid=http%3A%2F%2Fedamontology.org%2Ftopic_2269"
+    }
+  ]
+}
+    </script>
+
+    <section class="tutorial">
+        <h1 data-toc-skip>Introduction to recurrent neural networks (RNN)</h1>
+        
+
+        <div class="contributors-line">By: 
+
+ <a href="/training-material/hall-of-fame/kxk302/" class="contributor-badge"><img src="https://avatars.githubusercontent.com/kxk302" alt="Kaivan Kamali">Kaivan Kamali</a>
+
+</div>
+
+        <blockquote class="overview">
+            <h3>Overview</h3>
+            <strong><i class="far fa-question-circle" aria-hidden="true"></i><span class="visually-hidden">question</span> Questions</strong>
+            <ul>
+            
+            <li><p>What is a recurrent neural network (RNN)?</p>
+</li>
+            
+            <li><p>What are some applications of RNN?</p>
+</li>
+            
+            </ul>
+
+            <strong><i class="fas fa-bullseye" aria-hidden="true"></i><span class="visually-hidden">objectives</span> Objectives</strong>
+            <ul>
+            
+            <li><p>Understand the difference between feedforward neural networks (FNN) and RNN</p>
+</li>
+            
+            <li><p>Learn various RNN types and architectures</p>
+</li>
+            
+            <li><p>Learn how to create a neural network using Galaxy’s deep learning tools</p>
+</li>
+            
+            <li><p>Solve a sentiment analysis problem on IMDB movie review dataset using RNN in Galaxy</p>
+</li>
+            
+            </ul>
+
+            
+            <strong><i class="fas fa-check-circle" aria-hidden="true"></i><span class="visually-hidden">requirements</span> Requirements</strong>
+            <ul>
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/introduction">Introduction to Galaxy Analyses</a>
+        
+    
+    </li>
+
+            
+    <li>
+    
+        
+        
+        <a href="/training-material/topics/statistics">Statistics and machine learning</a>
+        
+            <ul>
+                
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                            
+                            <li> Introduction to deep learning:
+                            
+                            
+                                
+                                     <a href="/training-material/topics/statistics/tutorials/intro_deep_learning/tutorial.html"><i class="fas fa-laptop" aria-hidden="true"></i><span class="visually-hidden">tutorial</span> hands-on</a>
+                                
+                            
+                            </li>
+                        
+                    
+                        
+                    
+                        
+                    
+                        
+                    
+                
+            </ul>
+        
+    
+    </li>
+
+            </ul>
+            
+
+            
+            <p><strong><i class="fas fa-hourglass-half" aria-hidden="true"></i><span class="visually-hidden">time</span> Time estimation:</strong> 2 hours</p>
+            
+
+            
+
+            
+            
+
+            
+            <p id="supporting-materials"><strong><i class="fa fa-external-link" aria-hidden="true"></i> Supporting Materials</strong></p>
+            <ul>
+                <div class="supporting_material">
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+<a class="topic-icon" href="https://zenodo.org/record/4477881">
+    <i class="far fa-copy" aria-hidden="true"></i><span class="visually-hidden">zenodo_link</span> Datasets
+</a>
+
+</li>
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+    <a class="topic-icon" href="/training-material/topics/statistics/tutorials/RNN/workflows/" title="Workflows" alt="Introduction to recurrent neural networks (RNN) workflows">
+        <i class="fas fa-share-alt" aria-hidden="true"></i><span class="visually-hidden">workflow</span> Workflows
+    </a>
+
+</li>
+                
+
+                
+
+                
+                    <li class="btn btn-default supporting_material">
+
+    <a href="#" class="btn btn-default dropdown-toggle topic-icon" data-toggle="dropdown" aria-expanded="false" title="Where to run the tutorial">
+        <i class="fas fa-globe" aria-hidden="true"></i><span class="visually-hidden">instances</span> Available on these Galaxies
+    </a>
+    <ul class="dropdown-menu">
+    
+        <li>
+            <a class="dropdown-item" href="https://github.com/galaxyproject/training-material/tree/master/topics/statistics/docker" title="Docker image for this tutorial">
+                <i class="fab fa-docker" aria-hidden="true"></i><span class="visually-hidden">docker_image</span> Docker image
+            </a>
+        </li>
+    
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://africa.usegalaxy.eu/" title="Galaxy Africa">
+            Galaxy Africa
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://test.galaxyproject.org/" title="Galaxy Test">
+            Galaxy Test
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://ecology.usegalaxy.eu/" title="Galaxy for Ecology">
+            Galaxy for Ecology
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://galaxy.genouest.org" title="Galaxy@GenOuest">
+            Galaxy@GenOuest
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://ml.usegalaxy.eu/" title="Machine Learning Workbench">
+            Machine Learning Workbench
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://streetscience.usegalaxy.eu/" title="Street Science">
+            Street Science
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.be/" title="UseGalaxy.be">
+            UseGalaxy.be
+        </a>
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.eu" title="UseGalaxy.eu">
+            UseGalaxy.eu
+        </a>
+        
+    
+        
+    
+        
+        <a class="dropdown-item" href="https://usegalaxy.no/" title="UseGalaxy.no">
+            UseGalaxy.no
+        </a>
+        
+    
+        
+    
+        
+    
+        
+    
+        
+    
+    </ul>
+
+
+</li>
+                
+                </div>
+            </ul>
+            
+
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 22, 2021 </p>
+        </blockquote>
+
+        <div class="container">
+            <div class="row">
+                <!-- sidebar, which will move to the top on a small screen -->
+                <div class="col-sm-2">
+                    <nav id="toc" data-toggle="toc" class="sticky-top"></nav>
+                </div>
+                <div class="col-sm-10">
+                    <h1 class="no_toc" id="introduction">Introduction</h1>
+
+<!-- This is a comment. -->
+
+<p>Artificial neural networks are a machine learning discipline roughly inspired by how neurons in a 
+human brain work. In the past decade, there has been a huge resurgence of neural networks thanks 
+to the vast availability of data and enormous increases in computing capacity (Successfully 
+training complex neural networks in some domains requires lots of data and compute capacity). There 
+are various types of neural networks (Feedforward, recurrent, etc). In this tutorial, we discuss 
+recurrent neural networks, which model sequential data, and have been successfully applied to language 
+generation, machine translation, speech recognition, image description, and text summarization 
+(<a class="citation" href="#wen-etal-2015-semantically">Wen <i>et al.</i> 2015</a>, <a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>, <a class="citation" href="#LimEtAl">Lim <i>et al.</i> 2016</a>, 
+<a class="citation" href="#karpathyEtAl">Karpathy and Fei-Fei 2017</a>, <a class="citation" href="#li-etal-2017-deep">Li <i>et al.</i> 2017</a>). We then explain how RNN differ from feedforward networks, 
+describe various RNN architectures and solve a sentiment analysis problem using RNN in <span class="notranslate">Galaxy</span>.</p>
+
+<blockquote class="agenda">
+  <h3 id="agenda">Agenda</h3>
+
+  <p>In this tutorial, we will cover:</p>
+
+<ol id="markdown-toc">
+  <li><a href="#review-of-feedforward-neural-networks-fnn" id="markdown-toc-review-of-feedforward-neural-networks-fnn">Review of feedforward neural networks (FNN)</a>    <ol>
+      <li><a href="#single-layer-fnn" id="markdown-toc-single-layer-fnn">Single layer FNN</a></li>
+      <li><a href="#multi-layer-ffn" id="markdown-toc-multi-layer-ffn">Multi-layer FFN</a></li>
+      <li><a href="#learning-algorithm" id="markdown-toc-learning-algorithm">Learning algorithm</a></li>
+    </ol>
+  </li>
+  <li><a href="#recurrent-neural-networks" id="markdown-toc-recurrent-neural-networks">Recurrent neural networks</a>    <ol>
+      <li><a href="#possible-rnn-inputsoutputs" id="markdown-toc-possible-rnn-inputsoutputs">Possible RNN inputs/outputs</a></li>
+      <li><a href="#rnn-architectures" id="markdown-toc-rnn-architectures">RNN architectures</a></li>
+    </ol>
+  </li>
+  <li><a href="#text-representation-schemes" id="markdown-toc-text-representation-schemes">Text representation schemes</a>    <ol>
+      <li><a href="#text-preprocessing" id="markdown-toc-text-preprocessing">Text preprocessing</a></li>
+      <li><a href="#bag-of-words-and-tf-idf" id="markdown-toc-bag-of-words-and-tf-idf">Bag of words and TF-IDF</a></li>
+      <li><a href="#one-hot-encoding-ohe" id="markdown-toc-one-hot-encoding-ohe">One hot encoding (OHE)</a></li>
+      <li><a href="#word2vec" id="markdown-toc-word2vec">Word2Vec</a></li>
+    </ol>
+  </li>
+  <li><a href="#get-data" id="markdown-toc-get-data">Get data</a></li>
+  <li><a href="#sentiment-classification-of-imdb-movie-reviews-with-rnn" id="markdown-toc-sentiment-classification-of-imdb-movie-reviews-with-rnn">Sentiment Classification of IMDB movie reviews with RNN</a></li>
+</ol>
+
+</blockquote>
+
+<h1 id="review-of-feedforward-neural-networks-fnn">Review of feedforward neural networks (FNN)</h1>
+
+<p>In feedforward neural networks (FNN) a single training example is presented to the network, 
+after which the the network generates an output. For example, a lung X-ray image is passed 
+to a FNN, and the network predicts tumor or no tumor. By contrast, in RNN a sequence of 
+training examples are presented to the network one at a time. For example, a sequence of 
+English words is passed to a RNN, one at a time, and the network generates a sequence of 
+Persian words, one at a time. RNN handle sequential data, whether its temporal or ordinal.</p>
+
+<h2 id="single-layer-fnn">Single layer FNN</h2>
+
+<figure id="figure-1"><img src="../../images/FFNN_no_hidden.png" alt="Neurons forming the input and output layers of a single layer feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 1:</span> Single layer feedforward neural network</figcaption></figure>
+
+<p>Figure 1 shows a single layer FNN, where the input is 3 dimensional. Each input field is multiplied by a
+weight. Afterwards, the results are summed up, along with a bias, and passed to an activation function.</p>
+
+<figure id="figure-2"><img src="../../images/activation.gif" alt="An activation function (such as Sigmoid, Tanh, etc.) applied to the input of the only neuron in the output layer of a feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 2:</span> Activation of the output neuron o1. Activation function f could be Sigmoid, Tanh, ReLU, etc.</figcaption></figure>
+
+<p>The activation function can have many forms (sigmoid, tanh, ReLU, linear, step function, sign function, etc.).
+Output layer neurons usually have sigmoid or tanh functions. For more information on the listed activation 
+functions, please refer to <a class="citation" href="#nwankpaEtAl">Nwankpa <i>et al.</i> 2018</a>.</p>
+
+<figure id="figure-3"><img src="../../images/sigmoid.gif" alt="Mathmatical formula for Sigmoid activation function" /><figcaption><span class="figcaption-prefix">Figure 3:</span> Sigmoid activation function</figcaption></figure>
+
+<h2 id="multi-layer-ffn">Multi-layer FFN</h2>
+
+<p>Minsky and Papert showed that a single layer FNN cannot solve problems in which the data is not linearly separable, 
+such as the XOR problem (<a class="citation" href="#Newell780">Newell 1969</a>). Adding one (or more) hidden layers to FNN enables it to solve problems 
+in which data is non-linearly separable. Per Universal Approximation Theorem, a FNN with one hidden layer can represent 
+any function (<a class="citation" href="#Cybenko1989">Cybenko 1989</a>), although in practice training such a model is very difficult (if not impossible), 
+hence, we usually add multiple hidden layers to solve complex problems.</p>
+
+<figure id="figure-4"><img src="../../images/FFNN.png" alt="Neurons forming the input, output, and hidden layers of a multi-layer feedforward neural network" /><figcaption><span class="figcaption-prefix">Figure 4:</span> Feedforward neural network with a hidden layer. Biases to hidden/output layer neurons are omitted for clarity</figcaption></figure>
+
+<h2 id="learning-algorithm">Learning algorithm</h2>
+
+<p>In supervised learning, we are given a set of input-output pairs, called the <em>training set</em>. Given the training set, the learning algorithm 
+(iteratively) adjusts the model parameters, so that the model can accurately map inputs to outputs. We usually have another set of input-output 
+pairs, called the <em>test set</em>, which is not used by the learning algorithm. When the learning algorithm completes, we assess the learned model by 
+providing the test set inputs to the model and comparing the model outputs to test set outputs. We need to define a <strong>loss function</strong> to objectively 
+measure how much the model output is off of the expected output. For classification problems we use the <strong>cross entropy</strong> loss function.</p>
+
+<figure id="figure-5"><img src="../../images/CrossEntropy.gif" alt="Mathematical formula for calculating the cross entropy loss function, which quantifies the difference between the predicted and desired output of a neural network" /><figcaption><span class="figcaption-prefix">Figure 5:</span> Cross entropy loss function</figcaption></figure>
+
+<p>The loss function is calculated for each input-output pair in the training set. The average of the calculated loss functions for all training 
+set input-output pairs is called the <strong>Cost function</strong>. The goal of the learning algorithm is to minimize the cost function. The cost function 
+is a function of network weights and biases of all neurons in all layers. The <strong>backpropagation</strong> learning algorithm <a class="citation" href="#Rumelhart1986">Rumelhart <i>et al.</i> 1986</a> 
+iteratively computes the gradient of cost function relative to each weight and bias, then updates the weights and biases in the opposite 
+direction of the gradient, to find the local minimum.</p>
+
+<figure id="figure-6"><img src="../../images/CostFunction.gif" alt="Mathematical formula for calcuating the cross entropy cost function, which is just the average of cross entropy loss functions for training samples" /><figcaption><span class="figcaption-prefix">Figure 6:</span> Cross entropy cost function</figcaption></figure>
+
+<h1 id="recurrent-neural-networks">Recurrent neural networks</h1>
+
+<p>Unlike FNN, in RNN the output of the network at time t is used as network input at time t+1. RNN handle sequential data (e.g. temporal or ordinal).</p>
+
+<h2 id="possible-rnn-inputsoutputs">Possible RNN inputs/outputs</h2>
+
+<p>There are 4 possible input/output combinations for RNN and each have a specific application. One-to-one is basically a FNN. One-to-many, 
+where we have one input and a variable number of output. One example application is image captioning, where a single image is provided 
+as input and a variable number of words (which caption the image) is returned as output (See Figure 7).</p>
+
+<figure id="figure-7"><img src="../../images/RNN_1_to_n.png" alt="Neurons forming a one-to-many recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 7:</span> One-to-many RNN</figcaption></figure>
+
+<p>Many-to-one RNN, on the other hand, have a variable number of inputs and a single output. One example application is document sentiment 
+classification, where a variable number of words in a document are presented as input, and a single output predicts whether the document
+has a positive or negative sentiment regarding a topic (See Figure 8).</p>
+
+<figure id="figure-8"><img src="../../images/RNN_n_to_1.png" alt="Neurons forming a many-to-one recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 8:</span> Many-to-one RNN</figcaption></figure>
+
+<p>There are two types of many-to-many RNN. One in which the number of inputs and outputs match, e.g., in labeling the video frames the number 
+of frames matches the number of labels, and the other in which the number of inputs and outputs do not match, e.g., in language translation 
+we pass in n words in English and get m words in Italian (See Figure 9).</p>
+
+<figure id="figure-9"><img src="../../images/RNN_n_to_m.png" alt="Neurons forming a many-to-many recurrent neural network" /><figcaption><span class="figcaption-prefix">Figure 9:</span> Many-to-many RNN</figcaption></figure>
+
+<h2 id="rnn-architectures">RNN architectures</h2>
+
+<p>Mainly, there are three types of RNN: 1) Vanilla RNN, 2) LSTM (<a class="citation" href="#hochreiter1997long">Hochreiter and Schmidhuber 1997</a>), and 3) GRU (<a class="citation" href="#cho-etal-2014-learning">Cho <i>et al.</i> 2014</a>). 
+A Vanilla RNN, simply combines the state information from the previous timestamp with the input from the current timestamp to generate the 
+state information for current timestamp. The problem with Vanilla RNN is that training deep RNN networks is impossible due to the 
+<strong>vanishing gradient</strong> problem. Basically, starting from the output layer, in order to determine weights/biases updates, we need to calculate 
+the derivative of the loss function relative to the layers input, which is usually a small number. This is not a problem for the output layer, 
+but for the previous layers, this process must be repeated recursively, resulting in very small updates to weights/biases of the initial layers 
+of the RNN, halting the learning process.</p>
+
+<p>LSTM and GRU are two RNN architectures that address vanishing gradient problem. Full description of LSTM/GRU is beyond the scope of this 
+tutorial (Please refer to ref1 and ref2), but in a nutshell both LSTM and GRU use <strong>gates</strong> such that the weights/biases updates in previous 
+layers are calculated via a series of additions (not multiplications). Hence, these architectures can learn even when the RNN has hundreds or 
+thousands of layers.</p>
+
+<h1 id="text-representation-schemes">Text representation schemes</h1>
+
+<p>In this tutorial we perform sentiment analysis on IMDB (https://www.imdb.com/) movie reviews dataset (<a class="citation" href="#maas-EtAl">Maas <i>et al.</i> 2011</a>). We train our RNN on 
+the training dataset, which is made up of 25000 movie reviews, some positive and some negative. We then test our RNN on the test set, which is 
+also made up of 25000 movie reviews, again some positive and some negative. The training and test sets have no overlap. Since we are dealing with 
+text data, it’s a good idea to review various mechanisms for representing text data. Before that, we are going to briefly discuss how to preprocess 
+text documents.</p>
+
+<h2 id="text-preprocessing">Text preprocessing</h2>
+
+<p>The first step is to tokenize a document, i.e., break it down into words. Next, we remove the punctuation marks, URLs, and stop words – words like 
+‘a’, ‘of’, ‘the’, etc. that happen frequently in all documents and do not have much value in discriminating between documents. Next, we normalize 
+the text, e.g., replace ‘brb’ with ‘Be right back’, etc. Then, We then run the spell checker to fix typos and also make all words lowercase. Next, we perform stemming or lemmatization. Basically, if we have words like ‘organizer’, ‘organize’, ‘organized’, and ‘organization’ we want to reduce all of them to a single word. Stemming cuts the end of these words to come up with a single root (e.g., ‘organiz’). The root may not be an actual word. 
+Lemmatization is smarter in that it reduces the word variants to a root that is actually a word (e.g., ‘organize’). All of these steps help reduce 
+the number of features in feature vector of a document and should make the training of our model faster/easier.</p>
+
+<p>For this introductory tutorial, we do minimal text preprocessing. We ignore the top 50 words in IMDB reviews (mostly stop words) and include 
+the next 10,000 words in our dataset. Reviews are limited to 500 words. They are trimmed if they are longer and padded if they are shorter.</p>
+
+<h2 id="bag-of-words-and-tf-idf">Bag of words and TF-IDF</h2>
+
+<p>If you don’t care about the order of the words in a document, you can use bag of words (BoW) or text frequency inverse document frequency (TF-IDF).
+In these models we have a 2 dimensional array. The rows represent the documents (in our example, the movie reviews) and the columns
+represent the words in our vocabulary (all the unique words in all the documents). If a word is not present in a document, we have a zero 
+at the corresponding row and column as the entry. If a word is present in the document, we have a one as the entry – Alte<span class="notranslate">rna</span>tively, we could use 
+the word count or frequency.</p>
+
+<figure id="figure-10"><img src="../../images/BoW.png" alt="Table showing a bag-of-words representation of sample documents" /><figcaption><span class="figcaption-prefix">Figure 10:</span> Bag of words (BoW) representation</figcaption></figure>
+
+<p>Suppose we have the following 2 documents: 1) Magic passed the basketball to Kareem, and 2) Lebron stole the basketball from Curry. The BoW 
+representation of these documents is given in Figure 10.</p>
+
+<p>BoW’s advantage is its simplicity, yet it does not take into account the rarity of a word across documents, which unlike common words are
+important for document classification.</p>
+
+<p>In TF-IDF, similar to BoW we have an entry for each document-word pair. In TD-IDF, the entry is the product of 1) Text frequency, the 
+frequency of a word in a document, and 2) Inverse document frequency, the inverse of the number of documents that have the word divided 
+by the total number of documents (we usually use logarithm of the IDF).</p>
+
+<p>TF-IDF takes into account the rarity of a word across documents, but like BoW does not capture word order or word meaning in documents. BoW 
+and TF-IDF are suitable representations for when word order is not important. They are used in document classification problems like spam detection.</p>
+
+<h2 id="one-hot-encoding-ohe">One hot encoding (OHE)</h2>
+
+<p>OHE is a technique to convert categorical variables such as words into a vector. Suppose our vocabulary has 3 words: orange, apple, banana. 
+Each word for this vocabulary is represented by a vector of size 3. Orange is represented by a vector whose first element is 1 and other 
+elements are 0; Apple is represented by a vector whose second element is 1 and other elements are 0; And banana is represented by a 
+vector whose third element is 1 and other elements are 0. As you can see only one element in the vector is 1 and the rest are 0’s. The same 
+concept applies if the size of the vocabulary is N.</p>
+
+<figure id="figure-11"><img src="../../images/OHE.gif" alt="Mathematical vectors representing one-hot-encoding representation of words orange, apple, and banana" /><figcaption><span class="figcaption-prefix">Figure 11:</span> One hot encoding (OHE) representation</figcaption></figure>
+
+<p>The problem with OHE is that for very large vocabulary sizes (say, 100,000 words) it requires tremendous amount of storage. Also, it has no 
+concept of word similarity.</p>
+
+<h2 id="word2vec">Word2Vec</h2>
+
+<p>In Word2Vec, each word is represented as an n dimensional vector (n being much smaller than vocabulary size), such that the words that have 
+similar meanings are closer to each other in the vector space, and words that don’t have a similar meaning are farther apart. Words are 
+considered to have a similar meaning if they co-occur often in documents. There are 2 Word2Vec architectures, one that predicts the probability 
+of a word given the surrounding words (Continuous BOW), and one that given a word predicts the probability of the surrounding words (Continuous 
+skip-gram).</p>
+
+<p>In this tutorial, we find an n dimensional representation of the IMDB movie review words, not based on word meanings, but based on how they
+improve the sentiment classification task. The n dimensional representation is learned by the learning algorithm, simply by reducing the 
+cost function via backpropagation.</p>
+
+<h1 id="get-data">Get data</h1>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-data-upload"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Data upload</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="upload1" title="Tested with upload1"><strong>Import some data</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: upload1</span></span>
+      <ul>
+        <li>Create a new history for this tutorial</li>
+        <li>Import the files from <a href="https://zenodo.org/record/4477881">Zenodo</a> or from the shared data library</li>
+      </ul>
+
+      <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code> https://zenodo.org/record/4477881/files/X_test.tsv
+ https://zenodo.org/record/4477881/files/X_train.tsv
+ https://zenodo.org/record/4477881/files/y_test.tsv
+ https://zenodo.org/record/4477881/files/y_train.tsv
+</code></pre></div>      </div>
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-via-links"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data via links</h3>
+
+        <ul>
+          <li>Copy the link location</li>
+          <li>
+            <p>Open the <span class="notranslate">Galaxy</span> Upload Manager (<i class="fas fa-upload" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-upload</span> on the top-right of the tool panel)</p>
+          </li>
+          <li>Select <strong>Paste/Fetch Data</strong></li>
+          <li>
+            <p>Paste the link into the text field</p>
+          </li>
+          <li>
+            <p>Press <strong>Start</strong></p>
+          </li>
+          <li><strong>Close</strong> the window</li>
+        </ul>
+
+        <p>By default, <span class="notranslate">Galaxy</span> uses the URL as the name, so rename the files with a more useful name.</p>
+
+      </blockquote>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-importing-data-from-a-data-library"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Importing data from a data library</h3>
+
+        <p>As an alte<span class="notranslate">rna</span>tive to uploading the data from a URL or your computer, the files may also have been made available from a <em>shared data library</em>:</p>
+
+        <ul>
+          <li>
+            <p>Go into <strong>Shared data</strong> (top panel) then <strong>Data libraries</strong></p>
+          </li>
+          <li>
+            <p>Find the correct folder (ask your instructor)</p>
+          </li>
+          <li>Select the desired files</li>
+          <li>Click on the <strong>To History</strong> button near the top and select <strong>as Datasets</strong> from the dropdown menu</li>
+          <li>In the pop-up window, select the history you want to import the files to (or create a new one)</li>
+          <li>Click on <strong>Import</strong></li>
+        </ul>
+      </blockquote>
+
+      <ul>
+        <li>Rename the datasets as <code class="language-plaintext highlighter-rouge">X_test</code>, <code class="language-plaintext highlighter-rouge">X_train</code>, <code class="language-plaintext highlighter-rouge">y_test</code>, and <code class="language-plaintext highlighter-rouge">y_train</code> respectively</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-renaming-a-dataset"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Renaming a dataset</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, change the <strong>Name</strong> field</li>
+          <li>Click the <strong>Save</strong> button</li>
+        </ul>
+      </blockquote>
+
+      <ul>
+        <li>Check that the datatype of all the four datasets is <code class="language-plaintext highlighter-rouge">tabular</code>. If not, change the dataset’s datatype to tabular.</li>
+      </ul>
+
+      <blockquote class="tip">
+
+        <h3 id="tip-tip-changing-the-datatype"><i class="far fa-lightbulb" aria-hidden="true"></i><span class="visually-hidden">tip</span> Tip: Changing the datatype</h3>
+        <ul>
+          <li>Click on the <i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-pencil</span> <strong>pencil icon</strong> for the dataset to edit its attributes</li>
+          <li>In the central panel, click on the <i class="fas fa-database" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-chart-select-data</span> <strong>Datatypes</strong> tab on the top</li>
+          <li>Select <code class="language-plaintext highlighter-rouge">tabular</code></li>
+          <li>Click the <strong>Change datatype</strong> button</li>
+        </ul>
+      </blockquote>
+    </li>
+  </ul>
+
+</blockquote>
+
+<h1 id="sentiment-classification-of-imdb-movie-reviews-with-rnn">Sentiment Classification of IMDB movie reviews with RNN</h1>
+
+<p>In the section, we define a RNN and train it using IMDB movie reviews training dataset. The goal is to learn a model such that given the 
+words in a review we can predict whether the review was positive or negative. We then evaluate the trained RNN on the test dataset 
+and plot the confusion matrix.</p>
+
+<h3 id="create-a-deep-learning-model-architecture"><strong>Create a deep learning model architecture</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-model-config"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model config</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0"><strong>Create a deep learning model architecture</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/keras_model_config/keras_model_config/0.5.0</span></span>
+      <ul>
+        <li><em>“Select keras model type”</em>: <code class="language-plaintext highlighter-rouge">sequential</code></li>
+        <li><em>“input_shape”</em>: <code class="language-plaintext highlighter-rouge">(500,)</code></li>
+        <li>In <em>“LAYER”</em>:
+          <ul>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“1: LAYER”</em>:
+              <ul>
+                <li><em>“Choose the type of layer”</em>: <code class="language-plaintext highlighter-rouge">Embedding -- Embedding</code>
+                  <ul>
+                    <li><em>“input_dim”</em>”: <code class="language-plaintext highlighter-rouge">10000</code></li>
+                    <li><em>“output_dim”</em>”: <code class="language-plaintext highlighter-rouge">32</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“2: LAYER”</em>:
+              <ul>
+                <li><em>“Choose the type of layer”</em>: <code class="language-plaintext highlighter-rouge">Recurrent -- LSTM</code>
+                  <ul>
+                    <li><em>“units”</em>”: <code class="language-plaintext highlighter-rouge">100</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+            <li><i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“3: LAYER”</em>:
+              <ul>
+                <li><em>“Choose the type of layer”</em>: <code class="language-plaintext highlighter-rouge">Core -- Dense</code>
+                  <ul>
+                    <li><em>“units”</em>: <code class="language-plaintext highlighter-rouge">1</code></li>
+                    <li><em>“Activation function”</em>: <code class="language-plaintext highlighter-rouge">sigmoid</code></li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+        <li>Click <em>“Execute”</em></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>Input is a movie review of size 500 (longer reviews were trimmed and shorter ones padded). Our neural network has 3 layers. The first layer is 
+an embedding layer, that transforms each review words into a 32 dimensional vector (<em>output_dim</em>). We have 10000 unique words in our IMDB dataset 
+(<em>input_dim</em>). The second layer is an <em>LSTM</em> layer, which is a type of RNN. Output of the LSTM layer has a size of <em>100</em>. The third layer is a 
+<em>Dense</em> layer, which is a fully connected layer (all 100 output neurons in LSTM layer are connected to a single neuron in this layer). It has a 
+<em>sigmoid</em> activation function, that generates an output between 0 and 1. Any output greater than 0.5 is considered a predicted positive review, 
+and anything less than 0.5 a negative one. The model config can be downloaded as a JSON file.</p>
+
+<h3 id="create-a-deep-learning-model"><strong>Create a deep learning model</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-model-builder-optimizer-loss-function-and-fit-parameters"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Model builder (Optimizer, loss function, and fit parameters)</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0"><strong>Create deep learning model</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/keras_model_builder/keras_model_builder/0.5.0</span></span>
+      <ul>
+        <li><em>“Choose a building mode”</em>: <code class="language-plaintext highlighter-rouge">Build a training model</code></li>
+        <li><em>“Select the dataset containing model configuration”</em>: Select the <em>Keras Model Config</em> from the previous step.</li>
+        <li><em>“Do classification or regression?”</em>: <code class="language-plaintext highlighter-rouge">KerasGClassifier</code></li>
+        <li>In <em>“Compile Parameters”</em>:
+          <ul>
+            <li><em>“Select a loss function”</em>: <code class="language-plaintext highlighter-rouge">binary_crossentropy</code></li>
+            <li><em>“Select an optimizer”</em>: <code class="language-plaintext highlighter-rouge">Adam - Adam optimizer </code></li>
+            <li><em>“Select metrics”</em>: <code class="language-plaintext highlighter-rouge">acc/accuracy</code></li>
+          </ul>
+        </li>
+        <li>In <em>“Fit Parameters”</em>:
+          <ul>
+            <li><em>“epochs”</em>: <code class="language-plaintext highlighter-rouge">2</code></li>
+            <li><em>“batch_size”</em>: <code class="language-plaintext highlighter-rouge">128</code></li>
+          </ul>
+        </li>
+        <li>Click <em>“Execute”</em></li>
+      </ul>
+    </li>
+  </ul>
+</blockquote>
+
+<p>A loss function measures how different the predicted output is versus the expected output. For binary classification problems, we use 
+<em>binary cross entropy</em> as loss function. Epochs is the number of times the whole training data is used to train the model. Setting <em>epochs</em> to 2 
+means each training example in our dataset is used twice to train our model. If we update network weights/biases after all the training data is 
+feed to the network, the training will be very slow (as we have 25000 training examples in our dataset). To speed up the training, we present 
+only a subset of the training examples to the network, after which we update the weights/biases. <em>batch_size</em> decides the size of this subset. 
+The model builder can be downloaded as a zip file.</p>
+
+<h3 id="deep-learning-training-and-evaluation"><strong>Deep learning training and evaluation</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-training-the-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Training the model</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2"><strong>Deep learning training and evaluation</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/keras_train_and_eval/keras_train_and_eval/1.0.8.2</span></span>
+      <ul>
+        <li><em>“Select a scheme”</em>: <code class="language-plaintext highlighter-rouge">Train and Validate</code></li>
+        <li><em>“Choose the dataset containing pipeline/estimator object”</em>: Select the <em>Keras Model Builder</em> from the previous step.</li>
+        <li><em>“Select input type:”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code>
+          <ul>
+            <li><em>“Training samples dataset”</em>: Select <code class="language-plaintext highlighter-rouge">X_train</code> dataset</li>
+            <li><em>“Choose how to select data by column:”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
+            <li><em>“Dataset containing class labels or target values”</em>: Select <code class="language-plaintext highlighter-rouge">y_train</code> dataset</li>
+            <li><em>“Choose how to select data by column:”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
+          </ul>
+        </li>
+        <li>Click <em>“Execute”</em></li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>The training step generates 3 datasets. 1) accuracy of the trained model, 2) the trained model, downloadable as a zip file, and 3) the trained 
+model weights, downloadable as an hdf5 file. These files are needed for prediction in the next step.</p>
+
+<h3 id="model-prediction"><strong>Model Prediction</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-testing-the-model"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Testing the model</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2"><strong>Model Prediction</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/model_prediction/model_prediction/1.0.8.2</span></span>
+      <ul>
+        <li><em>“Choose the dataset containing pipeline/estimator object”</em> : Select the trained model from the previous step.</li>
+        <li><em>“Choose the dataset containing weights for the estimator above”</em> : Select the trained model weights from the previous step.</li>
+        <li><em>“Select invocation method”</em>: <code class="language-plaintext highlighter-rouge">predict</code></li>
+        <li><em>“Select input data type for prediction”</em>: <code class="language-plaintext highlighter-rouge">tabular data</code></li>
+        <li><em>“Training samples dataset”</em>: Select <code class="language-plaintext highlighter-rouge">X_test</code> dataset</li>
+        <li><em>“Choose how to select data by column:”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
+        <li>Click <em>“Execute”</em></li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p>The prediction step generates 1 dataset. It’s a file that has predictions (1 or 0 for positive or negative movie reviews) for every review in 
+the test dataset.</p>
+
+<h3 id="machine-learning-visualization-extension"><strong>Machine Learning Visualization Extension</strong></h3>
+
+<blockquote class="notranslate hands_on">
+  <h3 id="hands_on-hands-on-creating-the-confusion-matrix"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> Hands-on: Creating the confusion matrix</h3>
+
+  <ul>
+    <li><span class="tool" data-tool="toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2" title="Tested with toolshed.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2"><strong>Machine Learning Visualization Extension</strong> <i class="fas fa-wrench" aria-hidden="true"></i><i aria-hidden="true" class="fas fa-cog"></i><span class="visually-hidden">Tool: <span class="notranslate">toolshed</span>.g2.bx.psu.edu/repos/bgruening/ml_visualization_ex/ml_visualization_ex/1.0.8.2</span></span>
+      <ul>
+        <li><em>“Select a plotting type”</em>: <code class="language-plaintext highlighter-rouge">Confusion matrix for classes</code></li>
+        <li><em>“Select dataset containing the true labels”</em>”: <code class="language-plaintext highlighter-rouge">y_test</code></li>
+        <li><em>“Choose how to select data by column:”</em>: <code class="language-plaintext highlighter-rouge">All columns</code></li>
+        <li><em>“Select dataset containing the predicted labels”</em>”: Select <code class="language-plaintext highlighter-rouge">Model Prediction</code> from the previous step</li>
+        <li><em>“Does the dataset contain header:”</em>: <code class="language-plaintext highlighter-rouge">Yes</code></li>
+        <li>Click <em>“Execute”</em></li>
+      </ul>
+    </li>
+  </ul>
+
+</blockquote>
+
+<p><strong>Confusion Matrix</strong> is a table that describes the performance of a classification model. It lists the number of positive and negative examples 
+that were correctly classified by the model, True positives (TP) and true negatives (TN), respectively. It also lists the number of examples that 
+were classified as positive that were actually negative (False positive, FP, or Type I error), and the number of examples that were classified 
+as negative that were actually positive (False negative, FN, or Type 2 error). Given the confusion matrix, we can calculate <strong>precision</strong> and 
+<strong>recall</strong> <a class="citation" href="#TatbulEtAl">Tatbul <i>et al.</i> 2018</a>. Precision is the fraction of predicted positives that are true positives (Precision = TP / (TP + FP)). Recall 
+is the fraction of true positives that are predicted (Recall = TP / (TP + FN)). One way to describe the confusion matrix with just one value is 
+to use the <strong>F score</strong>, which is the harmonic mean of precision and recall</p>
+
+\[Precision = \frac{\text{True positives}}{\text{True positives + False positives}}\]
+
+\[Recall = \frac{\text{True positives}}{\text{True positives + False negatives}}\]
+
+\[F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}}\]
+
+<figure id="figure-12"><img src="../../images/ConfusionMatrix.png" alt="Confusion matrix for our sentiment analysis problem" /><figcaption><span class="figcaption-prefix">Figure 12:</span> Sentiment analysis confusion matrix</figcaption></figure>
+
+<p>Figure 12 is the resultant confusion matrix for our sentiment analysis problem. The first row in the table represents the <em>true</em> 0 (or negative sentiment) 
+class labels (we have 10,397 + 2,103 = 12,500 reviews with negative sentiment). The second row represents the <em>true</em> 1 (or positive sentiment) class labels 
+(Again, we have 1,281 + 11,219 = 12,500 reviews with positive sentiment). The left column represents the <em>predicted</em> negative sentiment class labels (Our RNN 
+predicted 10,397 + 1,281 = 11,678 reviews as having a negative sentiment). The right column represents the <em>predicted</em> positive class labels (Our RNN 
+predicted 11,219 + 2,103 = 13,322 reviews as having a positive sentiment).Looking at the bottom right cell, we seethat our RNN has correctly predicted 11,219 
+reviews as having a positive sentiment (True positives). Looking at the top right cell, we see that our RNN has incorrectly predicted 2,103 reviews as having 
+a positive (False positives). Similarly, looking at the top left cell, we see that our RNN has correctly predicted 10,397 reviews as having negative sentiment
+(True negative). Finally, looking at the bottom left cell, we see that our RNN has incorrectly predicted 1,281 reviews as negative (False negative). Given 
+these numbers we can calculate Precision, Recall, and the F score as follows:</p>
+
+\[Precision = \frac{\text{True positives}}{\text{True positives + False positives}} = \frac{11,219}{11,219 + 2,102} = 0.84\]
+
+\[Recall = \frac{\text{True positives}}{\text{True positives + False negatives}} = \frac{11,219}{11,219 + 1,281} = 0.89\]
+
+\[F score = \frac{2 * \text{Precision * Recall}}{\text{Precision + Recall}} = \frac{2 * 0.84 * 0.89}{0.84 + 0.89} = 0.86\]
+
+<h1 class="no_toc" id="conclusion">Conclusion</h1>
+
+<p>In this tutorial, we briefly reviewed feedforward neural networks, explained how recurrent neural networks are different, and discussed various 
+RNN input/output and architectures. We also discussed various text representation and preprocessing schemes and used <span class="notranslate">Galaxy</span> to solve a sentiment 
+classification problem using RNN on IMDB movie reviews dataset.</p>
+
+
+                    
+
+                    
+
+                    
+                    <h1 id="bibliography">References</h1>
+                    <ol class="bibliography"><li><span id="Newell780">Newell, A., 1969 <b>Perceptrons. An Introduction to Computational Geometry. Marvin Minsky and Seymour Papert. M.I.T. Press, Cambridge, Mass., 1969. vi + 258 pp., illus. Cloth, 12; paper, 4.95</b>. Science 165: 780–782.</span>
+    
+    
+    <a href="https://doi.org/10.1126/science.165.3895.780">10.1126/science.165.3895.780</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://science.sciencemag.org/content/165/3895/780">https://science.sciencemag.org/content/165/3895/780</a>
+      
+    
+
+</li>
+<li><span id="Rumelhart1986">Rumelhart, D. E., G. E. Hinton, and R. J. Williams, 1986 <b>Learning representations by back-propagating errors</b>. Nature 323: 533–536.</span>
+    
+    
+    <a href="https://doi.org/10.1038/323533a0">10.1038/323533a0</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="Cybenko1989">Cybenko, G., 1989 <b>Approximation by superpositions of a sigmoidal function</b>. Mathematics of Control, Signals and Systems 2: 303–314.</span>
+    
+    
+    <a href="https://doi.org/10.1007/BF02551274">10.1007/BF02551274</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+    
+
+</li>
+<li><span id="hochreiter1997long">Hochreiter, S., and J. Schmidhuber, 1997 <b>Long short-term memory</b>. Neural computation 9: 1735–1780.</span>
+    
+    
+    
+
+</li>
+<li><span id="maas-EtAl">Maas, A. L., R. E. Daly, P. T. Pham, D. Huang, A. Y. Ng <i>et al.</i>, 2011 <b>Learning Word Vectors for Sentiment Analysis</b>. Proceedings of the 49th Annual Meeting of the Association for Computational Linguistics: Human Language Technologies 142–150.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://www.aclweb.org/anthology/P11-1015">http://www.aclweb.org/anthology/P11-1015</a>
+      
+    
+
+</li>
+<li><span id="cho-etal-2014-learning">Cho, K., B. van Merriënboer, C. Gulcehre, D. Bahdanau, F. Bougares <i>et al.</i>, 2014 <b>Learning Phrase Representations using RNN Encoder–Decoder for Statistical Machine Translation</b>. Proceedings of the 2014 Conference on Empirical Methods in Natural Language Processing (EMNLP) 1724–1734.</span>
+    
+    
+    <a href="https://doi.org/10.3115/v1/D14-1179">10.3115/v1/D14-1179</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://www.aclweb.org/anthology/D14-1179">https://www.aclweb.org/anthology/D14-1179</a>
+      
+    
+
+</li>
+<li><span id="wen-etal-2015-semantically">Wen, T.-H., M. Gasic, N. Mrksic, P.-hao Su, D. Vandyke <i>et al.</i>, 2015 <b>Semantically Conditioned LSTM-based Natural Language Generation for Spoken Dialogue Systems</b>. Proceedings of the 2015 Conference on Empirical Methods in Natural Language Processing 1711–1721.</span>
+    
+    
+    <a href="https://doi.org/10.18653/v1/D15-1199">10.18653/v1/D15-1199</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://www.aclweb.org/anthology/D15-1199">https://www.aclweb.org/anthology/D15-1199</a>
+      
+    
+
+</li>
+<li><span id="LimEtAl">Lim, W., D. Jang, and T. Lee, 2016 <b>Speech emotion recognition using convolutional and Recurrent Neural Networks</b>. 2016 Asia-Pacific Signal and Information Processing Association Annual Summit and Conference (APSIPA) 1–4.</span>
+    
+    
+    <a href="https://doi.org/10.1109/APSIPA.2016.7820699">10.1109/APSIPA.2016.7820699</a>
+    
+    
+
+</li>
+<li><span id="karpathyEtAl">Karpathy, A., and L. Fei-Fei, 2017 <b>Deep Visual-Semantic Alignments for Generating Image Descriptions</b>. IEEE Transactions on Pattern Analysis and Machine Intelligence 39: 664–676.</span>
+    
+    
+    <a href="https://doi.org/10.1109/TPAMI.2016.2598339">10.1109/TPAMI.2016.2598339</a>
+    
+    
+
+</li>
+<li><span id="li-etal-2017-deep">Li, P., W. Lam, L. Bing, and Z. Wang, 2017 <b>Deep Recurrent Generative Decoder for Abstractive Text Summarization</b>. Proceedings of the 2017 Conference on Empirical Methods in Natural Language Processing 2091–2100.</span>
+    
+    
+    <a href="https://doi.org/10.18653/v1/D17-1222">10.18653/v1/D17-1222</a>
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://www.aclweb.org/anthology/D17-1222">https://www.aclweb.org/anthology/D17-1222</a>
+      
+    
+
+</li>
+<li><span id="nwankpaEtAl">Nwankpa, C., W. Ijomah, A. Gachagan, and S. Marshall, 2018 <b>Activation Functions: Comparison of trends in Practice and Research for Deep Learning</b>. CoRR abs/1811.03378:</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="http://arxiv.org/abs/1811.03378">http://arxiv.org/abs/1811.03378</a>
+      
+    
+
+</li>
+<li><span id="TatbulEtAl">Tatbul, N., T. J. Lee, S. Zdonik, M. Alam, and J. Gottschlich, 2018 <b>Precision and Recall for Time Series</b>. Advances in Neural Information Processing Systems 31: 1920–1930.</span>
+    
+    
+    
+      <!-- prevent duplicate doi links -->
+      
+      <a href="https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf">https://proceedings.neurips.cc/paper/2018/file/8f468c873a32bb0619eaeb2050ba45d1-Paper.pdf</a>
+      
+    
+
+</li></ol>
+                    
+
+                    <h1>Feedback</h1>
+                    <p class="text-muted">Did you use this material as an instructor? Feel free to give us feedback on <a href="https://github.com/galaxyproject/training-material/issues/1452" target="_blank">how it went</a>.</p>
+
+                    <div id="feedback-button">
+                        <img src="/training-material/shared/images/feedback.png" title="Click to activate" alt="Click here to load Google feedback frame" />
+                    </div>
+                    <div id="feedback-form">
+                    </div>
+                    <script type="text/javascript">
+                        (function (window, document) {
+                            function onDocumentReady(fn) {
+                                if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+                                    fn();
+                                } else {
+                                    document.addEventListener('DOMContentLoaded', fn);
+                                }
+                            }
+
+                            onDocumentReady(function () {
+                                $("#feedback-button").click(function(evt){
+                                    var e = $(evt.target)
+                                    e.hide();
+
+                                    $("#feedback-form").html(`
+                                        <iframe id="feedback-google" class="google-form" src="https://docs.google.com/forms/d/e/1FAIpQLSd4VZptFTQ03kHkMz0JyW9b6_S8geU5KjNE_tLM0dixT3ZQmA/viewform?embedded=true&entry.1235803833=Introduction to recurrent neural networks (RNN) (Statistics and machine learning)">Loading...</iframe>
+                                    `)
+                                })
+                            });
+                        })(window, document);
+                    </script>
+
+
+
+                    <h1>Citing this Tutorial</h1>
+                    <p>
+                        <ol>
+                            <li id="citation-text">Kaivan Kamali, 2021 <b>Introduction to recurrent neural networks (RNN) (Galaxy Training Materials)</b>. <a href="/training-material/topics/statistics/tutorials/RNN/tutorial.html">/training-material/topics/statistics/tutorials/RNN/tutorial.html</a> Online; accessed TODAY
+                            </li>
+                            <li>
+                            Batut et al., 2018 <b>Community-Driven Data Analysis Training for Biology</b> Cell Systems <a href="https://doi.org/10.1016%2Fj.cels.2018.05.012">10.1016/j.cels.2018.05.012</a>
+                            </li>
+                        </ol>
+                    </p>
+
+
+                    <blockquote class="details">
+                      <h3><i class="fa fa-info-circle" aria-hidden="true"></i><span class="visually-hidden">details</span> BibTeX</h3>
+                      <p style="display: none;">
+
+                    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight">
+<code id="citation-code">@misc{statistics-RNN,
+    author = "Kaivan Kamali",
+    title = "Introduction to recurrent neural networks (RNN) (Galaxy Training Materials)",
+    year = "2021",
+    month = "02",
+    day = "22"
+    url = "\url{/training-material/topics/statistics/tutorials/RNN/tutorial.html}",
+    note = "[Online; accessed TODAY]"
+}
+@article{Batut_2018,
+        doi = {10.1016/j.cels.2018.05.012},
+        url = {https://doi.org/10.1016%2Fj.cels.2018.05.012},
+        year = 2018,
+        month = {jun},
+        publisher = {Elsevier {BV}},
+        volume = {6},
+        number = {6},
+        pages = {752--758.e1},
+        author = {B{\'{e}}r{\'{e}}nice Batut and Saskia Hiltemann and Andrea Bagnacani and Dannon Baker and Vivek Bhardwaj and Clemens Blank and Anthony Bretaudeau and Loraine Brillet-Gu{\'{e}}guen and Martin {\v{C}}ech and John Chilton and Dave Clements and Olivia Doppelt-Azeroual and Anika Erxleben and Mallory Ann Freeberg and Simon Gladman and Youri Hoogstrate and Hans-Rudolf Hotz and Torsten Houwaart and Pratik Jagtap and Delphine Larivi{\`{e}}re and Gildas Le Corguill{\'{e}} and Thomas Manke and Fabien Mareuil and Fidel Ram{\'{\i}}rez and Devon Ryan and Florian Christoph Sigloch and Nicola Soranzo and Joachim Wolff and Pavankumar Videm and Markus Wolfien and Aisanjiang Wubuli and Dilmurat Yusuf and James Taylor and Rolf Backofen and Anton Nekrutenko and Björn Grüning},
+        title = {Community-Driven Data Analysis Training for Biology},
+        journal = {Cell Systems}
+}</code>
+                    </pre></div></div>
+                    </p>
+                    </blockquote>
+
+
+<script type="text/javascript">
+// update the date on load, or leave fallback of 'today'
+d = new Date();
+document.getElementById("citation-code").innerHTML = document.getElementById("citation-code").innerHTML.replace("TODAY", d.toDateString());
+document.getElementById("citation-text").innerHTML = document.getElementById("citation-text").innerHTML.replace("TODAY", d.toDateString());
+</script>
+
+                </div>
+            </div>
+        </div>
+
+        <h3><i class="far fa-thumbs-up" aria-hidden="true"></i><span class="visually-hidden">congratulations</span> Congratulations on successfully completing this tutorial!</h3>
+
+        
+
+        
+    </section>
+</div>
+
+
+<footer>
+    <div class="container">
+        <p>
+            This material is the result of a collaborative work. Thanks to the
+            <a href="https://wiki.galaxyproject.org/Teach/GTN">Galaxy Training Network</a>
+            and all the <a href="/training-material/hall-of-fame">contributors</a> (Kaivan Kamali)!
+        </p>
+        <p>
+            Found a typo? Something is wrong in this tutorial? Edit it on
+            <a href="https://github.com/galaxyproject/training-material/tree/master/topics/statistics/tutorials/RNN/tutorial.md">GitHub</a>.
+        </p>
+        <p>
+    The content of the tutorials and website is licensed under the <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.
+</p>
+    </div>
+</footer>
+
+    </body>
+    <script type="text/javascript" src="/training-material/assets/js/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/popper.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap.min.js?v=3"></script>
+    <script type="text/javascript" src="/training-material/assets/js/details-element-polyfill.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="/training-material/assets/js/bootstrap-toc.min.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/main.js"></script>
+    <script type="text/javascript" src="/training-material/assets/js/theme.js"></script>
+
+    <script type="text/javascript" src="/training-material/assets/js/clipboard.min.js"></script>
+    <script type="text/javascript">
+    var snippets=document.querySelectorAll('div.highlight');
+    [].forEach.call(snippets,function(snippet){
+        snippet.firstChild.insertAdjacentHTML('beforebegin','<button class="btn btn-light" data-clipboard-snippet><i class="fa fa-copy"></i>&nbsp;Copy</button>');
+    });
+
+    var clipboardSnippets=new ClipboardJS('[data-clipboard-snippet]',{
+        target:function(trigger){return trigger.nextElementSibling;
+    }});
+    </script>
+    
+
+    <script type="text/javascript">
+        if(window.location.hostname === "galaxyproject.github.io") {
+            // Redirect
+            var redirect = "https://training.galaxyproject.org" + window.location.pathname + window.location.search;
+            $('div.container.main-content').prepend("<div class='alert alert-warning'><strong>Note: </strong>This content has a new home at <a href=\"" + redirect + "\">" + redirect + "</a>, which you will be redirected to in 5 seconds.</div>");
+
+            window.setTimeout(function(){
+                window.location.href = redirect;
+            }, 5000)
+
+        }
+    </script>
+</html>
