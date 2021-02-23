@@ -104,7 +104,7 @@ The second method works at any step during the analysis.
 >      - *"Group Tags"*: Columns C and D
 >    - Click **Apply**
 >    - Enter a name for the new collection
->    - Click **Build**
+>    - Click **Upload**
 >
 > 8. Expand the generated collection and the files in it and check their names and tags
 >
