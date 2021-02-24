@@ -152,7 +152,7 @@ We will use this information to build a collection of FASTA files from our query
 >    >
 >    > This could additionally be copied and pasted if you need to do the same set of operations on multiple metadata inputs that are similarly formatted.
 >    {: .comment}
-> 7. Click `Build` and wait for your list of FASTA files to appear.
+> 7. Click `Upload` and wait for your list of FASTA files to appear.
 {: .hands_on}
 
 
