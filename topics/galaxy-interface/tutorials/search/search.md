@@ -12,7 +12,7 @@ For example:
 
 * To find all vcf files you might enter: `vcf` alone.
 * To find all files whose names contain data 1, you can enter: `data 1`
-* To search for a VCF file named 'VCF filter on data 1' and tagged with 'experiment 1', you could enter: `vcf filter on data 1 experiment 1`
+* To search for a VCF file named 'VCF filter on data 1' and tagged with 'experiment_1', you could enter: `vcf filter on data 1 experiment_1`
 
 > ### {% icon comment %} Do I search for VCF or vcf?
 > Searches are case-insensitive. For example, `VCF` and `vcf` are equivalent.

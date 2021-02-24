@@ -2,10 +2,13 @@
 layout: tutorial_hands_on
 
 title: "Reference-based RNA-Seq data analysis"
+subtopic: introduction
+priority: 2
+
 tags:
     - bulk
     - rna-seq
-zenodo_link: "https://zenodo.org/record/1185122"
+zenodo_link: "https://zenodo.org/record/4541751"
 questions:
     - What are the steps to process RNA-Seq data?
     - How to identify differentially expressed genes across multiple experimental conditions?
@@ -103,7 +106,14 @@ In the second part of the tutorial, read counts of all 7 samples are used to ide
 >    > ### {% icon comment %} Comment
 >    > Note that these are the full files for the samples and ~1.5Gb each so it may take some minutes to import.
 >    >
->    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }})
+>    > For a quicker run-through of the FASTQ steps a small subset of each FASTQ file (~5Mb) can be found here on [Zenodo]({{ page.zenodo_link }}):
+>    >
+>    > ```
+>    > {{ page.zenodo_link }}/files/GSM461177_1_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461177_2_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461180_1_subsampled.fastqsanger
+>    > {{ page.zenodo_link }}/files/GSM461180_2_subsampled.fastqsanger
+>    > ```
 >    {: .comment}
 >
 > 3. Rename each dataset according to the sample id (e.g. `GSM461177_1`)
@@ -167,8 +177,8 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    >
 >    > > ### {% icon solution %} Solution
 >    > >
->    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences. 
->    > >    
+>    > > 1. Everything seems good for 3 of the files. The `GSM461177` have 10.3 millions of sequences and `GSM461180` 12.3 millions of sequences. But in `GSM461180_2` (reverse reads of GSM461180) the quality decreases quite a lot at the end of the sequences.
+>    > >
 >    > >    All files except `GSM461180_2` have a high proportion of duplicated reads (expected in RNA-Seq data)
 >    > >
 >    > >    ![Sequence Counts](../../images/ref-based/fastqc_sequence_counts_plot.png "Sequence Counts")
@@ -436,7 +446,7 @@ The BAM file contains information for all our reads, making it difficult to insp
 >
 > ![Sequence Duplication Levels](../../images/ref-based/fastqc_sequence_duplication_levels_plot.png "Sequence Duplication Levels")
 >
-> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCA of low complexity library.
+> Duplicate reads can come from highly-expressed genes, therefore they are usually kept in RNA-Seq differential expression analysis. But a high percentage of duplicates may indicate an issue, e.g. over amplification during PCR of low complexity library.
 >
 > **MarkDuplicates** from [Picard suite](http://broadinstitute.github.io/picard/) examines aligned records from a BAM file to locate duplicate reads, i.e. reads mapping to the same location (based on the start position of the mapping).
 >
@@ -475,9 +485,9 @@ The BAM file contains information for all our reads, making it difficult to insp
 > >
 > > 2. **MultiQC** {% icon tool %} to aggregate the idxstats logs:
 > >    - In *"Results"*
-> >      - *"Which tool was used generate logs?"*: `idxstats`
+> >      - *"Which tool was used generate logs?"*: `Samtools`
 > >      - In *"Samtools output"*
-> >         - *"Type of Samtools output?"*: `Markdups`
+> >         - *"Type of Samtools output?"*: `idxstats`
 > >         - {% icon param-files %} *"Samtools output"*: `Samtools idxstats` files
 > >
 > >    > ### {% icon question %} Questions
@@ -1083,11 +1093,12 @@ TPM, RPKM or FPKM do not deal with these differences in library composition in n
 > 7. Compute the normalized counts: divide the original counts by the scaling factors
 >
 >     Gene | Sample 1 | Sample 2 | Sample 3
->     A | 0 | 23 | 9
->     B | 2 | 6 | 12
->     C | 13 | 21 | 78
+>     A | 0 | 11.11 | 1.6
+>     B | 5 | 6.67 | 4.8
+>     C | 83 | 61.11 | 80
 >
-> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU)*
+> *This explanation is a transcription and adaptation of the [StatQuest video explaining Library Normalization in DESEq2](https://www.youtube.com/watch?v=UFB993xufUU&t=35s)*
+>
 {: .details}
 
 DESeq2 runs also the Differential Gene Expression (DGE) analysis, whose two basic tasks are:

@@ -21,7 +21,7 @@ objectives:
 time_estimation: 2H
 key_points:
 - AskOmics helps to integrate multiple data sources into an RDF database without prior knowledge in the Semantic Web
-- It can also be connected to external SPARQL endpoints, such as [neXtProt](https://nextprot.org)
+- It can also be connected to external SPARQL endpoints, such as [neXtProt](https://www.nextprot.org)
 - AskOmics helps to perform complex SPARQL queries without knowing SPARQL, using a user-friendly interface
 contributors:
 - xgaia
@@ -394,7 +394,7 @@ From now, our query is "All Genes that are over-expressed (logFC > 2 and FDR ≤
 
 ### Use neXtProt distant data to refine results
 
-[neXtProt](https://nextprot.org) is a comprehensive human-centric discovery platform, offering its users a seamless integration of and navigation through protein-related data. It offer a [SPARQL endpoint](https://sparql.nextprot.org/sparql) that can be interrogated with AskOmics.
+[neXtProt](https://www.nextprot.org) is a comprehensive human-centric discovery platform, offering its users a seamless integration of and navigation through protein-related data. It offer a [SPARQL endpoint](https://sparql.nextprot.org/sparql) that can be interrogated with AskOmics.
 
 Since we added the neXtProt abstraction into our AskOmics instance, we can link our data to neXtProt.
 

@@ -12,6 +12,8 @@ topic | features
 [RNA-seq Database creation](tutorials/proteogenomics-dbcreation/tutorial.md)| [:book:](tutorials/proteogenomics-dbcreation/tutorial.md)
 [Proteogenomics Database searching](tutorials/proteogenomics-dbsearch/tutorial.md)| [:book:](tutorials/proteogenomics-dbsearch/tutorial.md)
 [Proteogenomics Novel Peptide Analysis](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)| [:book:](tutorials/proteogenomics-novel-peptide-analysis/tutorial.md)
+[metaQuantome-Taxonomy](tutorials/metaquantome-taxonomy/tutorial.md)| [:book:](tutorials/metaquantome-taxonomy/tutorial.md)
+[metaQuantome-Function](tutorials/metaquantome-function/tutorial.md)| [:book:](tutorials/metaquantome-function/tutorial.md)
 
 The Galaxy community offers many different ways of training. The table above lists all available training features of a specific topic to give you a fast and comprehensive overview.
 

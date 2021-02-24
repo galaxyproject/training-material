@@ -21,6 +21,7 @@ key_points:
 - The MSI m/z image tools allow overlaying the distribution images for several analytes.
 contributors:
 - foellmelanie
+- MarenStillger
 
 ---
 
@@ -122,8 +123,7 @@ The imzML composite file consists of two files. The first file contains the meta
 Before starting any analysis it is important to check the characteristics and quality of the MSI data. The MSI quality control tool creates a comprehensive PDF report that contains multiple descriptive visualizations of different data attributes. Here we will use the MSI quality control to get an idea about the m/z range and the shape of the chilli section. More details about the MSI quality control tool can be found in the tutorial [Mass spectrometry imaging 1: Loading and exploring MSI data]({{site.baseurl}}/topics/proteomics/tutorials/mass-spectrometry-imaging-loading-exploring-data/tutorial.html).
 
 > ### {% icon hands_on %} Hands-on: Quality control 
->
-> 1. **MSI Qualitycontrol** {% icon tool %} with the following parameters:
+>1. {% tool [MSI_Qualitycontrol](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_quality_report/cardinal_quality_report/2.6.0.1) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
@@ -193,33 +193,32 @@ We will follow up on the average mass spectra plots from the quality control rep
 
 > ### {% icon hands_on %} Hands-on: Average mass spectra
 >
-> 1. **MSI plot spectra** {% icon tool %} with the following parameters:
+> 1. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
 >        - *"Mass accuracy to which the m/z values will be binned"*: `0.1`
 >        - *"Unit of the mass accuracy"*: `mz`
->    - *"Select if you want to plot the mass spectrum of a single pixel or the average spectrum of all pixels of a sample"*: `Average spectrum for each sample`
->        - *"Use pixel annotation from tabular file for spectra plots"*: `pixels belong into one group only`
->        - In *"Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"1: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>    - *"Choose spectra (pixel)"*: `All spectra`
+>        - In *"zoomed in m/z range"*: `Manual input`
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"1: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `10`
 >                - *"upper m/z boundary for plotting window"*: `200`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"2: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"2: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `200`
 >                - *"upper m/z boundary for plotting window"*: `500`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"3: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"3: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `500`
 >                - *"upper m/z boundary for plotting window"*: `1000`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"4: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"4: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `1000`
 >                - *"upper m/z boundary for plotting window"*: `1500`
->            - Click on *"Insert Zoomed in plots with m/z min and m/z max to define the plot window"*:
->            - In *"5: Zoomed in plots with m/z min and m/z max to define the plot window"*:
+>            - Click on *"Define min m/z and max m/z for the plotting window"*:
+>            - In *"5: Define min m/z and max m/z for the plotting window"*:
 >                - *"lower m/z boundary for plotting window"*: `1500`
 >                - *"upper m/z boundary for plotting window"*: `2000`
 >
@@ -239,7 +238,7 @@ We will follow up on the average mass spectra plots from the quality control rep
 >
 {: .question}
 
-In the average spectrum of the complete m/z range there are no visible peaks above 800 Th. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1000 and 2000 Th only a few distinct peaks can be identified in the noise. In accordance with [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9), we will restrict further analysis to the m/z range between 15 and 1000. 
+In the average spectrum of the complete m/z range there are no visible peaks above 800 Th. Most of the high intensity peaks are below 300 Th, which corresponds to the typical masses of VOCs. Even in the zoomed mass spectra between 1500 and 2000 Th only a few distinct peaks can be identified in the noise. In accordance with [Gamboa-Becerra et al.](https://doi.org/10.1007/s00216-015-8744-9), we will restrict further analysis to the m/z range between 15 and 1000. 
 
 ![Average plots](../../images/msi_distribution_average_spectra.png "Complete and zoomed in average mass spectra")
 
@@ -265,9 +264,10 @@ x     y     compartment
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
-> 2. Press the rerun button of the **MSI plot spectra** {% icon tool %} result, changing only the following:
->    - *"Use pixel annotation from tabular file for spectra plots"*: `group pixels according to annotations`
->        - {% icon param-file %} *"Tabular file with pixel coordinates and annotation"*: `annotations` (Input dataset)
+> 2. {% tool [MSI plot spectra](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_spectra_plots/cardinal_spectra_plots/2.6.0.0) %}
+>    - Press the rerun button, changing only the following:
+>    - *"Choose spectra (pixel) and/or add spectra annotations"*: `Single spectra`
+>        - {% icon param-file %} *"Load tabular file with pixel coordinates"*: `annotations` (Input dataset)
 >        - *"Column with x values"*: `column:1`
 >        - *"Column with y values"*: `column:2`
 >        - *"Column with pixel annotations"*: `column:3`
@@ -277,15 +277,13 @@ x     y     compartment
 
 > ### {% icon question %} Questions
 >
-> 1. What does the NA annotation stand for? 
-> 2. Which compartment does the highest intensity peak belong to? 
-> 3. Which compartment does the third-highest intensity peak belong to?
+> 1. Which compartment does the highest intensity peak belong to? 
+> 2. Which compartment does the third-highest intensity peak belong to?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. All spectra without annotation in the tabular file are considered as NA, which means that NA represents the average spectrum of the dataset except for the 3 annotated pixels.
-> > 2. The highest intensity peak at around 80 Th belongs to the spectrum that is located in the pericarp of the chilli. 
-> > 3. The peak at around 60 Th belongs to the spectrum that is located in the seeds.
+> > 1. The highest intensity peak at around 80 Th belongs to the spectrum that is located in the pericarp of the chilli. 
+> > 2. The peak at around 60 Th belongs to the spectrum that is located in the seeds.
 > {: .solution}
 >
 {: .question}
@@ -298,7 +296,7 @@ The single spectra that derive from different chilli compartments show some majo
 
 > ### {% icon hands_on %} Hands-on: filtering for a m/z range
 >
-> 1. **MSI filtering** {% icon tool %} (Version 1.12) with the following parameters:
+> 1. {% tool [MSI filtering](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_filtering/cardinal_filtering/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `ltpmsi-chilli.imzML` (Input dataset)
 >    - *"Centroided input"*: `yes`
 >    - *"Processed imzML file"*: `yes`
@@ -307,7 +305,6 @@ The single spectra that derive from different chilli compartments show some majo
 >    - *"Select m/z feature filtering option"*: `m/z range (manually)`
 >        - *"Minimum value for m/z"*: `15.0`
 >        - *"Maximum value for m/z"*: `1000.0`
->    - *"Output format"*: `imzML`
 >
 {: .hands_on}
 
@@ -336,25 +333,24 @@ The main question for the chilli dataset is which m/z features have a localized 
 This requires three steps. Firstly, all m/z features of the dataset with the MSI data exporter are extracted. Secondly, all m/z features are filtered in the m/z ranges that we are interested in: between 55 and 65 Th, as well as between 75 and 85 Th (this step can be skipped to obtain distribution images for all features). Thirdly, the MSI m/z image tool is used to automatically generate distribution images for each of the m/z from the second step. As the data is already binned to 0.2 Th, only the m/z tolerance of 0.4 Th has to be specified. The large tolerance was chosen to obtain images from overlapping m/z ranges to make the signal intensity more robust against small m/z inaccuracies in individual mass spectra.
 
 > ### {% icon hands_on %} Hands-on: Generation of multiple analyte images
->
-> 1. **MSI data exporter** {% icon tool %} with the following parameters:
+> 1. {% tool [MSI data exporter](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_data_exporter/cardinal_data_exporter/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - *"Multiple output files can be selected"*: `mz feature output`
 >
-> 2. **Filter data on any column using simple expressions** {% icon tool %} with the following parameters:
+> 2. {% tool [Filter data on any column using simple expressions](Filter1) %}
 >    - {% icon param-file %} *"Filter"*: `MSI data exporter on data 6: features` (output of **MSI data exporter** {% icon tool %})
 >    - *"With following condition"*: `c2>=55 and c2<=65 or c2>=75 and c2<=85`
 >    - *"Number of header lines to skip"*: `1`
 >
-> 3. **MSI mz images** {% icon tool %} with the following parameters:
+> 3. {% tool [MSI mz images](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.1) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `Filter on data` (output of **Filter** {% icon tool %})
 >    - *"Column with m/z values"*: `column:2`
 >    - *"Column with name of m/z values"*: `column:1`
 >    - *"Tabular file contains a header line"*: `Yes`
->    - *"Select a contrast enhancement function for the heatmap images"*: `suppression`
+>    - *"Contrast enhancement"*: `suppression`
 >    - *"M/z range"*: `0.4`
 >
 {: .hands_on}
@@ -393,9 +389,9 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 > 1. Create a tabular file with the m/z of interest and rename it to 'mz features':
 >
 >    ```
->    306.6
 >    62.2
 >    84.2
+>    306.6
 >    ```
 >
 >    > ### {% icon tip %} Tip: Creating a new file
@@ -407,20 +403,19 @@ To get an idea about the distribution of capsaicin in the chilli we will plot it
 >    > * Press **Start** and **Close** the window
 >    {: .tip}
 >
->
-> 2. **MSI mz images** {% icon tool %} with the following parameters:
+> 2. {% tool [MSI mz images](toolshed.g2.bx.psu.edu/repos/galaxyp/cardinal_mz_images/cardinal_mz_images/2.6.0.0) %}
 >    - {% icon param-file %} *"MSI data"*: `filtered imzML` (output of **MSI filtering** {% icon tool %})
 >    - *"Centroided input"*: `yes`
 >    - {% icon param-file %} *"m/z of interest (e.g. internal Calibrants)"*: `mz features` (Input dataset)
 >    - *"Column with m/z values"*: `column:1`
 >    - *"Column with name of m/z values"*: `column:1`
 >    - *"Tabular file contains a header line"*: `No`
->    - *"Select a contrast enhancement function for the heatmap images"*: `suppression`
+>    - *"Contrast enhancement"*: `suppression`
 >    - *"M/z range"*: `0.4`
 >    - *"Overlay image"*: `Yes`
->        - *"1: Colours for the plots"*: `red`
->        - *"2: Colours for the plots"*: `blue`
->        - *"3: Colours for the plots"*: `green`
+>        - *"1: Colours for the plots"*: `blue`
+>        - *"2: Colours for the plots"*: `green`
+>        - *"3: Colours for the plots"*: `red`
 >
 {: .hands_on}
 

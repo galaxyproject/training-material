@@ -4,7 +4,7 @@
 >    > - Click on the upload icon {% icon galaxy-upload %} at the top-right of the screen
 >    > - Provide your workflow
 >    >   - Option 1: Paste the URL of the workflow into the box labelled *"Archived Workflow URL"*
->    >   - Option 2: Upload the worflow file in the box labelled *"Archived Workflow File"*
+>    >   - Option 2: Upload the workflow file in the box labelled *"Archived Workflow File"*
 >    > - Click the **Import workflow** button
 >    {: .tip}
 >

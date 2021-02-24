@@ -102,7 +102,7 @@ The reports application is included with the Galaxy codebase and this tutorial a
 >    ```
 >    {% endraw %}
 >
-> 4. Then we need to tell NGINX it should serve our Reports app under `<server_url>/reports` url. Edit your `galaxyservers` group variables file, and under the NGINX configuration, add a block for proxying the reports application. It should look like:
+> 4. Then we need to tell NGINX it should serve our Reports app under `<server_url>/reports` url. Edit your `templates/nginx/galaxy.j2` file, and within the server block, add a block for proxying the reports application. It should look like:
 >
 >    ```nginx
 >    location /reports/ {

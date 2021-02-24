@@ -28,6 +28,8 @@ requirements:
       - ansible
   - type: "none"
     title: "A VM with at least 2 vCPUs and 4 GB RAM, preferably running Ubuntu 18.04 - 20.04."
+
+galaxy_version: 20.09
 ---
 
 # Overview
@@ -166,7 +168,7 @@ As an administrator who often forgot to run the upgrade, and would only notice i
 
 ## Handlers
 
-A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/latest/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
+A number of the tasks that are executed will trigger a restart of Galaxy. Currently there is no auto-magic implementation of this, and you will have to do something that fits for your setup. The role provides a way to reference your own [handler](https://docs.ansible.com/ansible/2.9/user_guide/playbooks_intro.html#handlers-running-operations-on-change), which we will do in this exercise. As Galaxy continues to standardise on setup, something will be implemented directly in the role to automatically restart the correct processes.
 
 ## Defaults
 
@@ -192,7 +194,7 @@ With the necessary background in place, you are ready to install Galaxy with Ans
 
 To proceed from here it is expected that:
 
-1. You have [Ansible installed](https://docs.ansible.com/ansible/latest/installation_guide/intro_installation.html) on the machine where you will install Galaxy
+1. You have [Ansible installed](https://docs.ansible.com/ansible/2.9/installation_guide/intro_installation.html) on the machine where you will install Galaxy
 
    > ### {% icon comment %} Comment: Running Ansible on remote machine
    > It is possible to have Ansible installed on your laptop/local machine and run it against some remote hosts as well. We will **not** do that in this training.
@@ -231,28 +233,50 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >
 >    ```yaml
 >    - src: galaxyproject.galaxy
->      version: 0.9.6
+>      version: 0.9.7
 >    - src: galaxyproject.nginx
 >      version: 0.6.4
 >    - src: galaxyproject.postgresql
->      version: 1.0.2
+>      version: 1.0.3
 >    - src: natefoo.postgresql_objects
 >      version: 1.1
 >    - src: geerlingguy.pip
->      version: 1.3.0
+>      version: 2.0.0
 >    - src: uchida.miniconda
 >      version: 0.3.0
 >    - src: usegalaxy_eu.galaxy_systemd
->      version: 0.1.2
+>      version: 0.1.4
 >    - src: usegalaxy_eu.certbot
->      version: 0.1.3
+>      version: 0.1.5
 >    ```
+>
+>    > ### {% icon details %} What do each of these roles do?
+>    > We'll cover it in more detail as we use each of the roles but briefly:
+>    >
+>    >  | Role | Purpose |
+>    >  |------|---------|
+>    >  |`galaxyproject.galaxy` | Installs and configures the Galaxy application|
+>    >  |`galaxyproject.nginx` | Sets up a webserver|
+>    >  |`galaxyproject.postgresql` | Installs our database, PostgreSQL|
+>    >  |`natefoo.postgresql_objects` | Creates users and databases within PostgreSQL|
+>    >  |`geerlingguy.pip` | Ensures that pip is available|
+>    >  |`uchida.miniconda` | Installs miniconda, which is used by Galaxy|
+>    >  |`usegalaxy_eu.galaxy_systemd` | Supplies systemd service units for Galaxy|
+>    >  |`usegalaxy_eu.certbot` | Installs certbot and requests SSL certificates|
+>    {: .details}
+>
+>    > ### {% icon details %} Role version vs Galaxy version?
+>    > Q: Is there a correspondence between galaxy role versions and galaxy versions?
+>    > A: They  are correlated (because generally new Galaxy versions could introduce e.g. new configuration options that the galaxy role would then need to adopt), but the Galaxy role can install older versions of Galaxy.
+>    {: .details}
 >
 > 3. In the same directory, run:
 >
->    ```
->    ansible-galaxy install -p roles -r requirements.yml
->    ```
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-galaxy install -p roles -r requirements.yml
+>    > ```
+>    {: .code-in}
 >
 >    This will install all of the required modules for this training into the `roles/` folder. We choose to install to a folder to give you easy access to look through the different roles when you have questions on their behaviour.
 >
@@ -261,7 +285,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 
 > ### {% icon hands_on %} Hands-on: Configuration files
 >
-> 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/latest/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
+> 1. Create a `ansible.cfg` file (next to your playbook) to [configure settings](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html) like the inventory file (and save ourselves some typing!), or the Python interpreter to use:
 >
 >    ```ini
 >    [defaults]
@@ -281,9 +305,9 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    pipelining = true
 >    ```
 >
->    Pipelining will make [ansible run faster](https://docs.ansible.com/ansible/latest/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
+>    Pipelining will make [Ansible run faster](https://docs.ansible.com/ansible/2.9/reference_appendices/config.html#ansible-pipelining) by significantly reducing the number of new SSH connections that must be opened.
 >
-> 2. Create the `hosts` inventory file if you have not done so, include a group for `[galaxyservers]` with the address of the host where you want to install Galaxy. If you are running ansible on the same machine as Galaxy will be installed to, you should set `ansible_connection=local`.
+> 2. Create the `hosts` inventory file if you have not done so yet, defining a `[galaxyservers]` group with the address of the host where you want to install Galaxy. If you are running Ansible on the same machine where Galaxy will be installed to, you should set the `ansible_connection=local` variable. Lastly, you should explicitly set the `ansible_user` variable to the username to use when connecting to the server. Ansible has changed its behaviour over time regarding whether or not `ansible_user` is defined, and it is most effective to define it explicitly even when it can sometimes be inferred.
 >
 >    > > ### {% icon code-in %} Input: Bash
 >    > > ```bash
@@ -297,7 +321,7 @@ We have codified all of the dependencies you will need into a YAML file that `an
 >    > >
 >    > > ```ini
 >    > > [galaxyservers]
->    > > gat-88.training.galaxyproject.eu ansible_connection=local
+>    > > gat-88.training.galaxyproject.eu ansible_connection=local ansible_user=ubuntu
 >    > > ```
 >    > {: .code-out}
 >    {: .code-2col}
@@ -310,7 +334,7 @@ Galaxy is capable of talking to multiple databases through SQLAlchemy drivers. S
 
 PostgreSQL maintains its own user database apart from the system user database. By default, PostgreSQL uses the "peer" authentication method which allows access for system users with matching PostgreSQL usernames (other authentication mechanisms are available, see the [PostgreSQL Client Authentication documentation](https://www.postgresql.org/docs/current/static/client-authentication.html).
 
-For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step.
+For this tutorial, we will use the default "peer" authentication, so we need to create a PostgreSQL user matching the system user under which Galaxy will be running, i.e. `galaxy`. This is normally done with the PostgreSQL `createuser` command, and it must be run as the `postgres` user. In our case, we will use the `natefoo.postgresql_objects` role to handle this step. Additionally we're setting a couple of variables to control the automatic backups, they'll be placed in the /data/backups folder next to our user uploaded Galaxy data.
 
 > ### {% icon hands_on %} Hands-on: Installing PostgreSQL
 >
@@ -329,6 +353,9 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    postgresql_objects_databases:
 >      - name: galaxy
 >        owner: galaxy
+>    # PostgreSQL Backups
+>    postgresql_backup_dir: /data/backups
+>    postgresql_backup_local_dir: "{{ '~postgres' | expanduser }}/backups"
 >    ```
 >
 > 2. Create and open `galaxy.yml` which will be our playbook. Add the following:
@@ -337,32 +364,20 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    - A role for `galaxyproject.postgresql`. This will handle the installation of PostgreSQL.
 >    - A role for `natefoo.postgresql_objects`, run as the postgres user. (You will need `become`/`become_user`.) This role allows for managing users and databases within postgres.
 >
->    > > ### {% icon code-in %} Input: Bash
->    > > ```bash
->    > > cat galaxy.yml
->    > > ```
->    > {: .code-in}
->    >
->    > > ### {% icon code-out %} Output: Bash
->    > >
->    > > Your galaxy playbook yml file should look approximately like this:
->    > >
->    > > ```yml
->    > > ---
->    > > - hosts: galaxyservers
->    > >   become: true
->    > >   pre_tasks:
->    > >     - name: Install Dependencies
->    > >       package:
->    > >         name: 'python3-psycopg2'
->    > >   roles:
->    > >     - galaxyproject.postgresql
->    > >     - role: natefoo.postgresql_objects
->    > >       become: true
->    > >       become_user: postgres
->    > > ```
->    > {: .code-out}
->    {: .code-2col}
+>    ```yml
+>    ---
+>    - hosts: galaxyservers
+>      become: true
+>      pre_tasks:
+>        - name: Install Dependencies
+>          package:
+>            name: 'python3-psycopg2'
+>      roles:
+>        - galaxyproject.postgresql
+>        - role: natefoo.postgresql_objects
+>          become: true
+>          become_user: postgres
+>    ```
 >
 >    > ### {% icon question %} Question
 >    >
@@ -407,7 +422,7 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > > >
 >    > > > 10 directories, 5 files
 >    > > > ```
->    > > {: .code-out}
+>    > > {: .code-out.code-max-300}
 >    > >
 >    > {: .solution }
 >    >
@@ -537,6 +552,33 @@ For this tutorial, we will use the default "peer" authentication, so we need to 
 >    > Always pay close attention to tasks reported as **changed** and ensure that the changes were expected!
 >    {: .comment}
 >
+>    > ### {% icon tip %} Why didn't we use `-i` in our ansible command?
+>    > In our `ansible.cfg` file we specified the inventory was stored in a file called `hosts`:
+>    >
+>    > ```ini
+>    > [defaults]
+>    > interpreter_python = /usr/bin/python3
+>    > inventory = hosts
+>    > retry_files_enabled = false
+>    > ```
+>    {: .tip}
+>
+>    > ### {% icon tip %} Error: "skipping: no hosts matched"
+>    > There can be multiple reasons this happens, so we'll step through all of them.
+>    > We'll start by assuming you're running the command
+>    >
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    >
+>    > The following things can cause issues:
+>    >
+>    > 1. Within your `galaxy.yml`, you've referred to a host group that doesn't exist or is misspelled. Check the `hosts: galaxyservers` to ensure it matches the host group defined in the `hosts` file.
+>    > 2. Vice-versa, the group in your `hosts` file should match the hosts selected in the playbook, `galaxy.yml`.
+>    > 3. If neither of these are the issue, it's possible Ansible doesn't know to check the `hosts` file for the inventory. Make sure you've specified `inventory = hosts` in your `ansible.cfg`.
+>    >
+>    {: .tip}
+>
 > 4. Inspect the changes that have been made on your Galaxy server. Places to look include:
 >
 >    - `/etc/postgresql`
@@ -642,38 +684,31 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 > 1. Open `galaxy.yml` with your text editor and set the following:
 >
->    - Amend the [package installation](https://docs.ansible.com/ansible/latest/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `git`, `make`, `virtualenv`, `tar`, and `bzip2`.
+>    - Amend the [package installation](https://docs.ansible.com/ansible/2.9/modules/package_module.html#package-module) pre-task to install some additional necessary dependencies: `acl`, `bzip2`, `git`, `make`, `tar`, and `virtualenv`.
 >    - Add the roles `geerlingguy.pip`, `galaxyproject.galaxy` and `uchida.miniconda` (in this order) at the end, with `uchida.miniconda` run as the `galaxy` user.
 >
->    > ### {% icon question %} Question
->    >
->    > How does the updated playbook look?
->    >
->    > > ### {% icon solution %} Solution
->    > >
->    > > ```yaml
->    > > ---
->    > > - hosts: galaxyservers
->    > >   become: true
->    > >   pre_tasks:
->    > >     - name: Install Dependencies
->    > >       package:
->    > >         name: ['git', 'make', 'python3-psycopg2', 'virtualenv', 'tar', 'bzip2']
->    > >   roles:
->    > >     - galaxyproject.postgresql
->    > >     - role: natefoo.postgresql_objects
->    > >       become: true
->    > >       become_user: postgres
->    > >     - geerlingguy.pip
->    > >     - galaxyproject.galaxy
->    > >     - role: uchida.miniconda
->    > >       become: true
->    > >       become_user: galaxy
->    > > ```
->    > >
->    > {: .solution }
->    >
->    {: .question}
+>    {% raw %}
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -4,9 +4,14 @@
+>       pre_tasks:
+>         - name: Install Dependencies
+>           package:
+>    -        name: 'python3-psycopg2'
+>    +        name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
+>       roles:
+>         - galaxyproject.postgresql
+>         - role: natefoo.postgresql_objects
+>           become: true
+>           become_user: postgres
+>    +    - geerlingguy.pip
+>    +    - galaxyproject.galaxy
+>    +    - role: uchida.miniconda
+>    +      become: true
+>    +      become_user: "{{ galaxy_user.name }}"
+>    ```
+>    {% endraw %}
 >
 >    > ### {% icon tip %} Miniconda fails to work
 >    > The Galaxy user is created to separate privileges. Then we add `uchida.miniconda`, which is run as the Galaxy user.
@@ -685,21 +720,19 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >
 >    We need to set the following variables at the top level:
 >
->    {% raw %}
->    Variable                     | Value                                     | Purpose
->    ---                          | -----                                     | ---
->    `galaxy_create_user`         | `true`                                    | Instruct the role to create a Galaxy user
->    `galaxy_separate_privileges` | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
->    `galaxy_manage_paths`        | `true`                                    | Instruct thre role to create the needed directories.
->    `galaxy_layout`              | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, and data folders will live beneath `galaxy_root`.
->    `galaxy_root`                | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
->    `galaxy_user`                | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
->    `galaxy_commit_id`           | `release_20.05`                           | The git reference to check out, which in this case is the branch for Galaxy Release 20.05
->    `galaxy_config_style`        | `yaml`                                    | We want to opt-in to the new style YAML configuration.
->    `galaxy_force_checkout`      | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
->    `miniconda_prefix`           | `{{ galaxy_tool_dependency_dir }}/_conda` | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
->    `miniconda_version`          | `4.6.14`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
->    {% endraw %}
+>    Variable                        | Value                                     | Purpose
+>    ---                             | -----                                     | ---
+>    `galaxy_create_user`            | `true`                                    | Instruct the role to create a Galaxy user
+>    `galaxy_separate_privileges`    | `true`                                    | Enable separation mode to install the Galaxy code as `root` but run the Galaxy server as `galaxy`
+>    `galaxy_manage_paths`           | `true`                                    | Instruct the role to create the needed directories.
+>    `galaxy_layout`                 | `root-dir`                                | This enables the `galaxy_root` Galaxy deployment layout: all of the code, configuration, tools, and mutable-data (like caches, location files, etc.) folders will live by default beneath `galaxy_root`. User data is stored under `file_path`, a variable we will set later.
+>    `galaxy_root`                   | `/srv/galaxy`                             | This is the root of the Galaxy deployment.
+>    `galaxy_user`                   | `{name: galaxy, shell: /bin/bash}`        | The user that Galaxy will run as.
+>    `galaxy_commit_id`              | `release_{{ page.galaxy_version }}`       | The git reference to check out, which in this case is the branch for Galaxy Release {{ page.galaxy_version }}
+>    `galaxy_force_checkout`         | `true`                                    | If we make any modifications to the Galaxy codebase, they will be removed. This way we know we're getting an unmodified Galaxy and no one has made any unexpected changes to the codebase.
+>    `miniconda_prefix`              | {% raw %}`"{{ galaxy_tool_dependency_dir }}/_conda"`{% endraw %} | We will manually install conda as well. Normally Galaxy will attempt to auto-install this, but since we will set up a production-ready instance with multiple handlers, there is the chance that they can get stuck.
+>    `miniconda_version`             | `4.7.12`                                  | Install a specific miniconda version, the latest one at the time of writing that was tested and working.
+>    `miniconda_manage_dependencies` | `false`                                   | Specify whether to install the miniconda installer dependencies.
 >
 >    > ### {% icon tip %} Different Galaxy Releases!
 >    > In the time between this tutorial was last updated ({{ page.last_modified_at | date: "%Y-%m-%d" }}), and when you are now reading it, one or more new releases of Galaxy may have occured.
@@ -708,6 +741,28 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    >
 >    > Please ensure you consult the [releases documentation](https://docs.galaxyproject.org/en/master/releases/index.html)
 >    {: .tip}
+>
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -10,3 +10,16 @@ postgresql_objects_users:
+>     postgresql_objects_databases:
+>       - name: galaxy
+>         owner: galaxy
+>    +
+>    +# Galaxy
+>    +galaxy_create_user: true
+>    +galaxy_separate_privileges: true
+>    +galaxy_manage_paths: true
+>    +galaxy_layout: root-dir
+>    +galaxy_root: /srv/galaxy
+>    +galaxy_user: {name: galaxy, shell: /bin/bash}
+>    +galaxy_commit_id: release_{{page.galaxy_version}}
+>    +galaxy_force_checkout: true
+>    +miniconda_prefix: {% raw %}"{{ galaxy_tool_dependency_dir }}/_conda"{% endraw %}
+>    +miniconda_version: 4.7.12
+>    +miniconda_manage_dependencies: false
+>    ```
 >
 > 3. Again edit the group variables file and add a variable for `galaxy_config`. It will be a hash with one key, `galaxy` which will also be a hash. Inside here you can place all of your Galaxy configuration.
 >
@@ -724,7 +779,27 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    3. `database_connection` to point to the database you setup earlier (`postgresql:///galaxy?host=/var/run/postgresql`).
 >    4. `file_path` to a place to store data, `/data` is fine for this lesson which sets up a single-node Galaxy. If you have separate compute machines, this will normally need to be storage shared between the Galaxy node and compute nodes.
 >    5. `check_migrate_tools` must be set to `false` due to a new installation of Galaxy.
->    6. `tool_data_path` to `{{ galaxy_mutable_data_dir }}/tool-data`, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>    6. `tool_data_path` to {% raw %}`{{ galaxy_mutable_data_dir }}/tool-data`{% endraw %}, so that when tools are installed, due to privilege separation, this will happen in a directory Galaxy can actually write into.
+>
+>    {% raw %}
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -23,3 +23,12 @@
+>     galaxy_force_checkout: true
+>     miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
+>     miniconda_version: 4.7.12
+>    +
+>    +galaxy_config:
+>    +  galaxy:
+>    +    brand: "🧬🔬🚀"
+>    +    admin_users: admin@example.org
+>    +    database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
+>    +    file_path: /data
+>    +    check_migrate_tools: false
+>    +    tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    ```
+>    {% endraw %}
 >
 >    > ### {% icon tip %} Data storage
 >    > Galaxy datasets cannot be separated by user or other attribute currently, but you can spread data unintelligently across 1 or more storage pools.
@@ -749,7 +824,7 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > When Ansible runs:
 >    >
 >    > 1. It collects variables defined in group variables and other places
->    > 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/latest/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
+>    > 2. The first task for each machine is the [`setup` module](https://docs.ansible.com/ansible/2.9/modules/setup_module.html) which gathers facts about the host, which are added to the available variables
 >    > 3. As roles are executed:
 >    >    1. Their defaults are added to the set of variables (the group variables having precedence over these variables)
 >    >    2. They can also dynamically define more variables which may not be set until that role is run
@@ -761,35 +836,38 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 > 4. In order to use mule messaging, we need to edit the uWSGI configuration of Galaxy. This has a default value, but we will have to override it. Add the following configuration as a child of the `galaxy_config` variable:
 >
 >    {% raw %}
->    ```yaml
->    galaxy_config:
->      galaxy:
->      ...
->      uwsgi:
->        http: 0.0.0.0:8080
->        buffer-size: 16384
->        processes: 1
->        threads: 4
->        offload-threads: 2
->        static-map:
->          - /static={{ galaxy_server_dir }}/static
->          - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
->        static-safe: client/galaxy/images
->        master: true
->        virtualenv: "{{ galaxy_venv_dir }}"
->        pythonpath: "{{ galaxy_server_dir }}/lib"
->        module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->        thunder-lock: true
->        die-on-term: true
->        hook-master-start:
->          - unix_signal:2 gracefully_kill_them_all
->          - unix_signal:15 gracefully_kill_them_all
->        py-call-osafterfork: true
->        enable-threads: true
->        mule:
->          - lib/galaxy/main.py
->          - lib/galaxy/main.py
->        farm: job-handlers:1,2
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -32,3 +32,28 @@ galaxy_config:
+>         file_path: /data
+>         check_migrate_tools: false
+>         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    +  uwsgi:
+>    +    http: 0.0.0.0:8080
+>    +    buffer-size: 16384
+>    +    processes: 1
+>    +    threads: 4
+>    +    offload-threads: 2
+>    +    static-map:
+>    +      - /static={{ galaxy_server_dir }}/static
+>    +      - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
+>    +    static-safe: client/galaxy/images
+>    +    master: true
+>    +    virtualenv: "{{ galaxy_venv_dir }}"
+>    +    pythonpath: "{{ galaxy_server_dir }}/lib"
+>    +    module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
+>    +    thunder-lock: true
+>    +    die-on-term: true
+>    +    hook-master-start:
+>    +      - unix_signal:2 gracefully_kill_them_all
+>    +      - unix_signal:15 gracefully_kill_them_all
+>    +    py-call-osafterfork: true
+>    +    enable-threads: true
+>    +    mule:
+>    +      - lib/galaxy/main.py
+>    +      - lib/galaxy/main.py
+>    +    farm: job-handlers:1,2
 >    ```
 >    {% endraw %}
 >
@@ -803,79 +881,6 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > 3. the number of mules is the number of Galaxy job handler processes you have (you should have at least 1, this prevents the web workers from handling jobs - and mules do not handle web requests)
 >    > 4. `workers` in job_conf (covered later) is the number of threads in an internal Galaxy thread pool that are available in each job handler for preparing and finishing jobs (more threads increases throughput during periods of frequent submissions or slow response times from the cluster scheduler, but there is no benefit in setting it too high due to the Python GIL).
 >    {: .tip}
->
->    > ### {% icon question %} Question
->    >
->    > How does your current group variables file look?
->    >
->    > > ### {% icon solution %} Solution
->    > > {% raw %}
->    > > ```yaml
->    > > ---
->    > > # python3 support
->    > > pip_virtualenv_command: /usr/bin/python3 -m virtualenv # usegalaxy_eu.certbot, usegalaxy_eu.tiaas2, galaxyproject.galaxy
->    > > certbot_virtualenv_package_name: python3-virtualenv    # usegalaxy_eu.certbot
->    > > pip_package: python3-pip                               # geerlingguy.pip
->    > >
->    > > # PostgreSQL
->    > > postgresql_objects_users:
->    > >   - name: galaxy
->    > > postgresql_objects_databases:
->    > >   - name: galaxy
->    > >     owner: galaxy
->    > >
->    > > # Galaxy
->    > > galaxy_create_user: true
->    > > galaxy_separate_privileges: true
->    > > galaxy_manage_paths: true
->    > > galaxy_layout: root-dir
->    > > galaxy_root: /srv/galaxy
->    > > galaxy_user: {name: galaxy, shell: /bin/bash}
->    > > galaxy_commit_id: release_20.05
->    > > galaxy_config_style: yaml
->    > > galaxy_force_checkout: true
->    > > miniconda_prefix: "{{ galaxy_tool_dependency_dir }}/_conda"
->    > > miniconda_version: "4.6.14"
->    > >
->    > > galaxy_config:
->    > >   galaxy:
->    > >     brand: "🧬🔬🚀"
->    > >     admin_users: admin@example.org
->    > >     database_connection: "postgresql:///galaxy?host=/var/run/postgresql"
->    > >     file_path: /data
->    > >     check_migrate_tools: false
->    > >     tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
->    > >   uwsgi:
->    > >     http: 0.0.0.0:8080
->    > >     buffer-size: 16384
->    > >     processes: 1
->    > >     threads: 4
->    > >     offload-threads: 2
->    > >     static-map:
->    > >       - /static={{ galaxy_server_dir }}/static
->    > >       - /favicon.ico={{ galaxy_server_dir }}/static/favicon.ico
->    > >     static-safe: client/galaxy/images
->    > >     master: true
->    > >     virtualenv: "{{ galaxy_venv_dir }}"
->    > >     pythonpath: "{{ galaxy_server_dir }}/lib"
->    > >     module: galaxy.webapps.galaxy.buildapp:uwsgi_app()
->    > >     thunder-lock: true
->    > >     die-on-term: true
->    > >     hook-master-start:
->    > >       - unix_signal:2 gracefully_kill_them_all
->    > >       - unix_signal:15 gracefully_kill_them_all
->    > >     py-call-osafterfork: true
->    > >     enable-threads: true
->    > >     mule:
->    > >       - lib/galaxy/main.py
->    > >       - lib/galaxy/main.py
->    > >     farm: job-handlers:1,2
->    > > ```
->    > > {% endraw %}
->    > {: .solution }
->    >
->    {: .question}
->
 >
 > 5. Run the playbook.
 >
@@ -1316,8 +1321,8 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ```
 >    {: .code-out.code-max-300}
 >
->    > ### {% icon comment %} Huge wealth of knowledge
->    > You will notice the huge volume of output from this playbook! There are
+>    > ### {% icon comment %} Free knowledge
+>    > You will notice the significant volume of output from this playbook! There are
 >    > many, many steps for deploying a production Galaxy, and there is a vast
 >    > amount of knowledge encoded into these playbooks by the developers and
 >    > admins who use them. While we recommend this, choosing to use Ansible
@@ -1331,6 +1336,16 @@ The configuration is quite simple thanks to the many sensible defaults that are 
 >    > ### {% icon tip %} Slow Deployment
 >    > The deployment can be slowed down by the client build.
 >    > The client is only re-built when there are changes in the files needed for the Galaxy user interface (JavaScript, CSS). Because we are tracking a release branch, we’ll receive updates that are published to that branch during the training since the last time the playbook was run.
+>    {: .tip}
+>
+>    > ### {% icon tip %} ERROR: Failed to set permissions on the temporary files
+>    > Did you get an error message like this?
+>    > ```
+>    > fatal: [localhost]: FAILED! => {"msg": "Failed to set permissions on the temporary files Ansible needs to create when becoming an unprivileged user (rc: 1, err: chown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/': Operation not permitted\nchown: changing ownership of '/var/tmp/ansible-tmp-1607430009.739602-32983298209838/source': Operation not permitted\n}). For information on working around this, see https://docs.ansible.com/ansible/become.html#becoming-an-unprivileged-user"}
+>    > ```
+>    >
+>    > You're missing the `setfacl` command provided by the `acl` package. [reference](https://github.com/georchestra/ansible/issues/55#issuecomment-588313638)
+>    >
 >    {: .tip}
 >
 > 6. Explore what has been set up for you.
@@ -1466,20 +1481,35 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >
 > 1. Add the role `usegalaxy_eu.galaxy_systemd` to your playbook. This should run **after** all of the roles we have already added so far.
 >
-> 2. Add the following to the bottom of your `group_vars/galaxyservers.yml` file:
->
->    {% raw %}
->    ```yaml
->    # systemd
->    galaxy_systemd_mode: mule
->    galaxy_zergpool_listen_addr: 127.0.0.1:8080
->    galaxy_restart_handler_name: "Restart Galaxy"
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -15,3 +15,4 @@
+>         - role: uchida.miniconda
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
+>    +    - usegalaxy_eu.galaxy_systemd
 >    ```
->    {% endraw %}
+>
+> 2. Configure the role in `group_vars/galaxyservers.yml` file:
+>
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -57,3 +57,8 @@ galaxy_config:
+>           - lib/galaxy/main.py
+>           - lib/galaxy/main.py
+>         farm: job-handlers:1,2
+>    +
+>    +# systemd
+>    +galaxy_systemd_mode: mule
+>    +galaxy_zergpool_listen_addr: 127.0.0.1:8080
+>    +galaxy_restart_handler_name: "Restart Galaxy"
+>    ```
 >
 >    The last variable, `galaxy_restart_handler_name`, informs the `galaxyproject.galaxy` role that it should look for a handler with that name, and trigger it whenever changes are made to Galaxy's configuration. Now we'll define the handler:
 >
-> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/latest/modules/systemd_module.html). Handlers are structured just like tasks:
+> 3. Now that we have defined a process manager for Galaxy, we can also instruct `galaxyproject.galaxy` to use systemd to restart it when Galaxy is upgraded or other configuration changes are made. To do so, open the `galaxy.yml` playbook and add a `handlers:` section at the same level as `pre_tasks:` and `roles:`, and add a handler to restart Galaxy using the [systemd Ansible module](https://docs.ansible.com/ansible/2.9/modules/systemd_module.html). Handlers are structured just like tasks:
 >
 >    ```diff
 >    --- galaxy.yml
@@ -1487,7 +1517,7 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    @@ -5,6 +5,11 @@
 >         - name: Install Dependencies
 >           package:
->             name: ['git', 'make', 'python3-psycopg2', 'python3-virtualenv']
+>             name: ['acl', 'bzip2', 'git', 'make', 'python3-psycopg2', 'tar', 'virtualenv']
 >    +  handlers:
 >    +    - name: Restart Galaxy
 >    +      systemd:
@@ -1499,6 +1529,12 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    ```
 >
 > 4. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
 >
 > 5. Log in and check the status with `sudo systemctl status galaxy`
 >
@@ -1538,6 +1574,17 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 >    > ```
 >    {: .code-out.code-max-300}
 >
+>    > ### {% icon tip %} Unit galaxy.service could not be found.
+>    > If you see this message:
+>    >
+>    > ```
+>    > $ systemctl status galaxy
+>    > Unit galaxy.service could not be found.
+>    > ```
+>    >
+>    > when running `systemctl status galaxy`, it means you didn't install the `galaxy_systemd` role, or forgot to re-run the playbook after adding it. Double check the first step of this hands-on section.
+>    {: .tip}
+>
 > 6. Some things to note:
 >
 >    1. Refreshing the page before Galaxy has restarted will hang until the process is ready, a nice feature of uWSGI
@@ -1547,6 +1594,12 @@ Launching Galaxy by hand is not a good use of your time, so we will immediately 
 {: .hands_on}
 
 Galaxy should now be accessible over port :8080, again try connecting to your VM now and checking that Galaxy is working. Note that the welcome page is broken, this is a known issue, and a good reminder to write your own :)
+
+> ### {% icon tip %} "Empty Response"
+> This can happen whenever uWSGI is speaking its own "uwsgi" protocol instead of HTTP. Check that your uwsgi is listening on `http: 0.0.0.0:8080`
+>
+> At this step in the tutorial you should be starting Galaxy and uWSGI through systemd. If you need to change something in your configuration, check that Galaxy has been restarted after you re-run the playbook.
+{: .tip}
 
 > ### {% icon details %} Ansible, failures, and notifications
 >
@@ -1578,14 +1631,24 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 1. Add the role `galaxyproject.nginx` to the end of your playbook and have it run as root.
 >
+>    ```diff
+>    --- a/galaxy.yml
+>    +++ b/galaxy.yml
+>    @@ -21,3 +21,4 @@
+>           become: true
+>           become_user: "{{ galaxy_user.name }}"
+>         - usegalaxy_eu.galaxy_systemd
+>    +    - galaxyproject.nginx
+>    ```
+>
 > 2. Edit your `group_vars/galaxyservers.yml`, we will update the line that `http: 0.0.0.0:8080` to be `socket: 127.0.0.1:8080`. This will cause uWSGI to only respond to uWSGI protocol, and only to requests originating on localhost.
 >
 >    ```diff
->    --- group_vars/galaxyservers.yml.orig
->    +++ group_vars/galaxyservers.yml
->    @@ -29,7 +29,7 @@
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -33,7 +33,7 @@ galaxy_config:
 >         check_migrate_tools: false
->         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>         tool_data_path: {% raw %}"{{ galaxy_mutable_data_dir }}/tool-data"{% endraw %}
 >       uwsgi:
 >    -    http: 0.0.0.0:8080
 >    +    socket: 127.0.0.1:8080
@@ -1598,36 +1661,43 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 >    Add the following to your group variables file:
 >    {% raw %}
->    ```yaml
->    # Certbot
->    certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->    certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
->    certbot_auth_method: --webroot
->    certbot_install_method: virtualenv
->    certbot_auto_renew: yes
->    certbot_auto_renew_user: root
->    certbot_environment: staging
->    certbot_well_known_root: /srv/nginx/_well-known_root
->    certbot_share_key_users:
->      - nginx
->    certbot_post_renewal: |
->        systemctl restart nginx || true
->    certbot_domains:
->     - "{{ inventory_hostname }}"
->    certbot_agree_tos: --agree-tos
->
->    # NGINX
->    nginx_selinux_allow_local_connections: true
->    nginx_servers:
->      - redirect-ssl
->    nginx_enable_default_server: false
->    nginx_ssl_servers:
->      - galaxy
->    nginx_conf_http:
->      client_max_body_size: 1g
->    nginx_ssl_role: usegalaxy_eu.certbot
->    nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->    nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -62,3 +62,33 @@ galaxy_config:
+>     galaxy_systemd_mode: mule
+>     galaxy_zergpool_listen_addr: 127.0.0.1:8080
+>     galaxy_restart_handler_name: "Restart Galaxy"
+>    +
+>    +# Certbot
+>    +certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
+>    +certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
+>    +certbot_auth_method: --webroot
+>    +certbot_install_method: virtualenv
+>    +certbot_auto_renew: yes
+>    +certbot_auto_renew_user: root
+>    +certbot_environment: staging
+>    +certbot_well_known_root: /srv/nginx/_well-known_root
+>    +certbot_share_key_users:
+>    +  - nginx
+>    +certbot_post_renewal: |
+>    +    systemctl restart nginx || true
+>    +certbot_domains:
+>    + - "{{ inventory_hostname }}"
+>    +certbot_agree_tos: --agree-tos
+>    +
+>    +# NGINX
+>    +nginx_selinux_allow_local_connections: true
+>    +nginx_servers:
+>    +  - redirect-ssl
+>    +nginx_ssl_servers:
+>    +  - galaxy
+>    +nginx_enable_default_server: false
+>    +nginx_conf_http:
+>    +  client_max_body_size: 1g
+>    +nginx_ssl_role: usegalaxy_eu.certbot
+>    +nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>    +nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >    ```
 >    {% endraw %}
 >
@@ -1674,37 +1744,22 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > Instead of the above step you should do:
 >    >
 >    > {% raw %}
->    > ```yaml
->    > # Certbot
->    > # You can comment these out if you wish; they will never be used if no role tries to access them.
->    > certbot_auto_renew_hour: "{{ 23 |random(seed=inventory_hostname)  }}"
->    > certbot_auto_renew_minute: "{{ 59 |random(seed=inventory_hostname)  }}"
->    > certbot_auth_method: --webroot
->    > certbot_install_method: virtualenv
->    > certbot_auto_renew: yes
->    > certbot_auto_renew_user: root
->    > certbot_environment: staging
->    > certbot_well_known_root: /srv/nginx/_well-known_root
->    > certbot_share_key_users:
->    >   - nginx
->    > certbot_post_renewal: |
->    >     systemctl restart nginx || true
->    > certbot_domains:
->    >  - "{{ inventory_hostname }}"
->    > certbot_agree_tos: --agree-tos
->    >
->    > # NGINX
->    > nginx_selinux_allow_local_connections: true
->    > nginx_servers:
->    >   - galaxy # NOT redirect-ssl
+>    > ```diff
+>    > --- a/group_vars/galaxyservers.yml
+>    > +++ b/group_vars/galaxyservers.yml
+>    > @@ -83,12 +83,7 @@ certbot_agree_tos: --agree-tos
+>    >  # NGINX
+>    >  nginx_selinux_allow_local_connections: true
+>    >  nginx_servers:
+>    > -  - redirect-ssl
+>    > -nginx_ssl_servers:
+>    >    - galaxy
 >    > nginx_enable_default_server: false
->    > # nginx_ssl_servers:
->    > #   - galaxy
->    > nginx_conf_http:
->    >   client_max_body_size: 1g
->    > # nginx_ssl_role: usegalaxy_eu.certbot
->    > # nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
->    > # nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
+>    >  nginx_conf_http:
+>    >    client_max_body_size: 1g
+>    > -nginx_ssl_role: usegalaxy_eu.certbot
+>    > -nginx_conf_ssl_certificate: /etc/ssl/certs/fullchain.pem
+>    > -nginx_conf_ssl_certificate_key: /etc/ssl/user/privkey-nginx.pem
 >    > ```
 >    > {% endraw %}
 >    >
@@ -1796,11 +1851,11 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >    > In your `galaxy.j2` in the above step, you should change the `listen` parameter:
 >    >
 >    > {% raw %}
->    > ```nginx
->    > # Change this
->    > listen        *:443 ssl default_server;
->    > # to this
->    > listen        *:80 default_server;
+>    > ```diff
+>    > --- a/templates/nginx/galaxy.j2
+>    > +++ b/templates/nginx/galaxy.j2
+>    > -listen        *:443 ssl default_server;
+>    > +listen        *:80 default_server;
 >    > ```
 >    > {% endraw %}
 >    >
@@ -1808,10 +1863,19 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >
 > 6. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
->    ```
->    RUNNING HANDLER [restart galaxy] ****************************************
->    changed: [galaxy.example.org]
->    ```
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```
+>    > > ansible-playbook galaxy.yml
+>    > > ```
+>    > {: .code-in}
+>    > > ### {% icon code-in %} Output
+>    > > ```
+>    > > ...
+>    > > RUNNING HANDLER [restart galaxy] ****************************************
+>    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > ```
+>    > {: .code-out}
+>    {: .code-2col}
 >
 >    If you didn't, you might have missed the first step in this hands-on.
 >
@@ -1853,7 +1917,7 @@ For this, we will use NGINX. It is possible to configure Galaxy with Apache and 
 >  `galaxyproject.nginx`        | This requires Galaxy variables to find the static assets.
 {: .comment}
 
-## Login to Galaxy
+## Log in to Galaxy
 
 Now that your production-ready Galaxy is running, try registering a new user and logging in!
 
@@ -1861,7 +1925,7 @@ In order to be the administrator user, you will need to register an account with
 
 ## Job Configuration
 
-One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_20.05/lib/galaxy/config/sample/job_conf.xml.sample_basic)), though there is a symlink to the file in `/srv/galaxy/server/config`.
+One of the most important configuration files for a large Galaxy server is the `job_conf.xml` file. This file tells Galaxy where to run all of the jobs that users execute. If Galaxy can't find a job conf file or none has been specified in the `galaxy.yml` file, it will use a default configuration, `job_conf.xml.sample_basic` file. This file is deployed to `/srv/galaxy/server/lib/galaxy/config/sample/job_conf.xml.sample_basic` (or see it [in the codebase](https://github.com/galaxyproject/galaxy/blob/release_{{ page.galaxy_version }}/lib/galaxy/config/sample/job_conf.xml.sample_basic)).
 
 The job configuration file allows Galaxy to run jobs in multiple locations using a variety of different mechanisms. Some of these mechanisms include:
 
@@ -1904,7 +1968,13 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 
 > ### {% icon hands_on %} Hands-on: Job Conf
 >
-> 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook (`mkdir -p templates/galaxy/config/`).
+> 1. If the folder does not exist, create `templates/galaxy/config` next to your `galaxy.yml` playbook.
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > mkdir -p templates/galaxy/config/
+>    > ```
+>    {: .code-in}
 >
 > 2. Create `templates/galaxy/config/job_conf.xml.j2` with the following contents (note that we have changed the names of the plugin and destination from the basic sample file to provide a bit more clarity):
 >
@@ -1921,34 +1991,62 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    </job_conf>
 >    ```
 >
-> 3. Inform `galaxyproject.galaxy` of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
+>    > ### {% icon tip %} workers=4
+>    > In the local runner, `workers="4"` means "number of jobs that can be running at one time". For every other job runner, it means the number of threads that are created to start/manage/finish jobs. E.g. if you are in a class and 50 people submit jobs, then there are four threads that can handle these jobs at once. But additional job handlers can be more useful as well.
+>    {: .tip}
+>
+> 3. Inform the `galaxyproject.galaxy` role of where you would like the `job_conf.xml` to reside, by setting it in your `group_vars/galaxyservers.yml`:
 >
 >    {% raw %}
->    ```yaml
->    galaxy_config:
->      galaxy:
->        # ... existing configuration options in the `galaxy` section ...
->        job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -32,6 +32,7 @@ galaxy_config:
+>         file_path: /data
+>         check_migrate_tools: false
+>         tool_data_path: "{{ galaxy_mutable_data_dir }}/tool-data"
+>    +    job_config_file: "{{ galaxy_config_dir }}/job_conf.xml"
+>       uwsgi:
+>         socket: 127.0.0.1:8080
+>         buffer-size: 16384
 >    ```
 >    {% endraw %}
 >
->    And then deploy the new config file using the `galaxy_config_templates` var in your group vars:
+>    And then deploy the new config file using the `galaxy_config_templates` var (also from the `galaxyproject.galaxy` role) in your group vars:
 >
 >    {% raw %}
->    ```yaml
->    galaxy_config_templates:
->      # ... possible existing config file definitions
->      - src: templates/galaxy/config/job_conf.xml.j2
->        dest: "{{ galaxy_config.galaxy.job_config_file }}"
+>    ```diff
+>    --- a/group_vars/galaxyservers.yml
+>    +++ b/group_vars/galaxyservers.yml
+>    @@ -59,6 +59,10 @@ galaxy_config:
+>           - lib/galaxy/main.py
+>         farm: job-handlers:1,2
+>
+>    +galaxy_config_templates:
+>    +  - src: templates/galaxy/config/job_conf.xml.j2
+>    +    dest: "{{ galaxy_config.galaxy.job_config_file }}"
+>    +
+>     # systemd
+>     galaxy_systemd_mode: mule
+>     galaxy_zergpool_listen_addr: 127.0.0.1:8080
 >    ```
 >    {% endraw %}
 >
-> 4. Run the playbook: `ansible-playbook galaxy.yml`. At the very end, you should see output like the following indicating that Galaxy has been restarted:
+> 4. Run the playbook. At the very end, you should see output like the following indicating that Galaxy has been restarted:
 >
->    ```
->    RUNNING HANDLER [restart galaxy] ****************************************
->    changed: [galaxy.example.org]
->    ```
+>    > > ### {% icon code-in %} Input: Bash
+>    > > ```
+>    > > ansible-playbook galaxy.yml
+>    > > ```
+>    > {: .code-in}
+>    > > ### {% icon code-in %} Output
+>    > > ```
+>    > > ...
+>    > > RUNNING HANDLER [restart galaxy] ****************************************
+>    > > changed: [gat-88.training.galaxyproject.eu]
+>    > > ```
+>    > {: .code-out}
+>    {: .code-2col}
 >
 > 5. Checkout the new job_conf.xml file.
 >
@@ -1971,7 +2069,7 @@ Firstly, the plugins section contains a plugin called "local" which is of type "
 >    >     </tools>
 >    > </job_conf>
 >    > ```
->    {: .code-out}
+>    {: .code-out.code-max-300}
 >
 {: .hands_on}
 
@@ -2001,7 +2099,17 @@ But not you! You spent the day writing this Ansible playbook that describes your
 
 > ### {% icon hands_on %} Hands-on: Revert the Apocalypse
 >
-> 1. `ansible-playbook galaxy.yml`
+> 1. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
+>
+> 2. Get a hot beverage of your choice while it rebuilds.
+>
+> 3. Congratulate yourself for saving the day.
 >
 {: .hands_on}
 
@@ -2035,12 +2143,9 @@ If you have set your `galaxy_commit_id` group variable to a branch name like `re
 With Ansible, upgrading Galaxy to a new release is incredibly easy. Here is a commit from UseGalaxy.eu's upgrade:
 
 ```diff
-diff --git a/group_vars/galaxyservers.yml b/group_vars/galaxyservers.yml
-index ce17525..54d0746 100644
 --- a/group_vars/galaxyservers.yml
 +++ b/group_vars/galaxyservers.yml
 @@ -345,7 +345,7 @@ galaxy_instance_hostname: usegalaxy.eu
- galaxy_config_style: ini
 
  galaxy_repo: 'https://github.com/usegalaxy-eu/galaxy.git'
 -galaxy_commit_id: 'release_19.05'
@@ -2085,7 +2190,7 @@ If you need to run on a cluster with a shared file system, you will need to expo
 - `galaxy_server_dir`
 - `galaxy_venv_dir`
 
-Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two difference copies of them, if that is better for performance:
+Some of these can be worked around, by running the portions of the roles that deploy these directories on the shared filesystem. Then Galaxy and the shared filesystem can run off of two different copies of them, if that is better for performance:
 
 - `galaxy_server_dir`
 - `galaxy_venv_dir`

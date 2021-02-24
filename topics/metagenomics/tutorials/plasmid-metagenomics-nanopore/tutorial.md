@@ -128,10 +128,10 @@ report page.
 
 > ### {% icon hands_on %} Hands-on: Plotting scripts for long read sequencing data
 >
-> 1. **NanoPlot** {% icon tool %} with the following parameters
->   - *"Select multifile mode"*: `batch`
->   - *"Type of the file(s) to work on"*: `fasta`
->   - *"files"*: The `Plasmids` dataset collection you just created
+> 1. {% tool [Nanoplot](toolshed.g2.bx.psu.edu/repos/iuc/nanoplot/nanoplot/1.28.2+galaxy1) %} with the following parameters
+>   - {% icon param-select %} *"Select multifile mode"*: `batch`
+>   - {% icon param-select %} *"Type of the file(s) to work on"*: `fasta`
+>   - {% icon param-collection %} *"files"*: The `Plasmids` dataset collection you just created
 >
 >     {% include snippets/select_collection.md %}
 >
@@ -161,13 +161,16 @@ For more information on the topic of quality control, please see our training ma
 
 ## Pairwise alignment using Minimap2
 
-In this experiment we used Nanopore sequencing; this means that sequencing results in long reads with overlap.
+In this experiment we used Nanopore sequencing; this means sequencing results with long reads, and significant overlaps between those reads.
 To find this overlap, Minimap2 is used. Minimap2 is a sequence alignment program that can be used for different
 purposes, but in this case we'll use it to find overlaps between long reads with an error rate up to ~15%.
-Typical other use cases for Minimap2 include: (1) mapping PacBio or Oxford Nanopore genomic reads to the human genome;
-(2) splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome;
-(3) aligning Illumina single- or paired-end reads; (4) assembly-to-assembly alignment; (5) full-genome alignment
-between two closely related species with divergence below ~15%.
+Typical other use cases for Minimap2 include:
+
+1. mapping PacBio or Oxford Nanopore genomic reads to the human genome
+2. splice-aware alignment of PacBio Iso-Seq or Nanopore cDNA or Direct RNA reads against a reference genome
+3. aligning Illumina single- or paired-end reads
+4. assembly-to-assembly alignment
+5. full-genome alignment between two closely related species with divergence below ~15%.
 
 Minimap2 is faster and more accurate than mainstream long-read mappers such as BLASR, BWA-MEM, NGMLR and GMAP and
 therefore widely used for Nanopore alignment. Detailed evaluations of Minimap2 are available in
@@ -178,14 +181,14 @@ the Minimap2 publication ({% cite Li2018 %}).
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
-> 1. **Map with minimap2** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->    - *"Use the following data collection as the reference sequence"*: `Created dataset collection (Plasmids)`
->    - *"Single or Paired-end reads"*: `Single`
->    - *"Select fastq dataset"*: The `Plasmids` dataset collection
->    - *"Select analysis mode (sets default)"*: `Oxford Nanopore all-vs--all overlap mapping`
+> 1. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters
+>    - {% icon param-select %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>      - {% icon param-collection %} *"Use the following data collection as the reference sequence"*: `Plasmids` dataset collection we just created
+>    - {% icon param-select %} *"Single or Paired-end reads"*: `Single`
+>      - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` dataset collection
+>      - {% icon param-select%} *"Select a profile of preset options"*: `Oxford Nanopore all-vs-all overlap mapping`
 >    - In the section **Set advanced output options**:
->      - *"Select an output format"*: `paf`
+>      - {% icon param-select %} *"Select an output format"*: `paf`
 >
 >    {% include snippets/select_collection.md %}
 >
@@ -227,13 +230,14 @@ Different from mainstream assemblers, miniasm does not have a consensus step.
 It simply concatenates pieces of read sequences to generate the final sequences.
 The optimal case would be to recreate a complete chromosome or plasmid.
 Thus the per-base error rate is similar to the raw input reads.
-![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png)
+
+![Pairwise alignment](../../images/plasmid-metagenomics-nanopore/Miniasm.png "Sequencing and Assembly Schematic. A longer sequence is constructed from many smaller, overlapping fragments. These are aligned and reconstructed during assembly to produce the best guess assembly.")
 
 > ### {% icon hands_on %} Hands-on: De novo assembly
 >
-> 1. **miniasm** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: The `Plasmids` dataset collection
->   - *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
+> 1. {% tool [miniasm](toolshed.g2.bx.psu.edu/repos/iuc/miniasm/miniasm/0.3+galaxy0) %} with the following parameters
+>   - {% icon param-collection %} *"Sequence Reads"*: The `Plasmids` dataset collection
+>   - {% icon param-collection %} *"PAF file"*: `Output Minimap dataset collection` created by **Minimap2** {% icon tool %}
 >
 >    {% include snippets/select_collection.md %}
 >
@@ -250,39 +254,40 @@ a	utg000001l	0	channel_364_204a2254-2b6f-4f10-9ec5-6d40f0b870e4_template:101-445
 
 ## Remapping using Minimap2
 
-The Assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format.
+Remapping is done with the original reads, using the Miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by **Racon** {% icon tool %} for consensus construction. This is done as some reads which might not have mapped well during the consensus calling, will now map to your scaffold.
 
-Remapping is done with the original reads, using the Miniasm assembly as a reference, in order to improve the consensus base call per position. This is used by **Racon** {% icon tool %} for consensus construction.
+The Assembly graph created can be used for mapping again with Minimap2, but first the graph should be transformed to FASTA format.
 
 > ### {% icon hands_on %} Hands-on: Pairwise sequence alignment
 >
-> 1. **GFA to Fasta** {% icon tool %} with the following parameters
->   - *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
->
-> 2. **Map with minimap2** {% icon tool %} with the following parameters
->    - *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
->    - *"Use the following dataset as the reference sequence"*: `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
->    - *"Single or Paired-end reads"*: `single`
->    - *"Select fastq dataset"*: The `Plasmids` collection
->    - *"Select analysis mode (sets default)"*: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
->    - In the section **Set advanced output options**:
->       - *"Select an output format"*: `paf`
->
->
->     {% include snippets/select_collection.md %}
+> 1. {% tool [GFA to Fasta](toolshed.g2.bx.psu.edu/repos/iuc/gfa_to_fa/gfa_to_fa/0.1.1) %} with the following parameters
+>   - {% icon param-collection %} *"Input GFA file"*: the `Assembly Graph` (collection) created by **Miniasm** {% icon tool %}
 >
 >     > ### {% icon question %} Question
 >     >
->     > How many contigs do we have for the RB05 sample after the use of **Minimap2** {% icon tool %} and **Miniasm** {% icon tool %}?
+>     > How many contigs do we have for the RB05 sample after de novo assembly?
 >     > <br><br>
 >     > Hint: run **Nanoplot** {% icon tool %} on the output of **GFA to Fasta** {% icon tool %}
 >     >
 >     > > ### {% icon solution %} Solution
->     > > 22
+>     > > 25
 >     > >
 >     > > This can be determined by looking at the NanoStats output of NanoPlot.
 >     > {: .solution }
 >     {: .question}
+>
+> 2. {% tool [Map with minimap2](toolshed.g2.bx.psu.edu/repos/iuc/minimap2/minimap2/2.17+galaxy2) %} with the following parameters
+>    - {% icon param-select %} *"Will you select a reference genome from your history or use a built-in index?"*: `Use a genome from history and build index`
+>      - {% icon param-collection %} *"Use the following dataset as the reference sequence"*: `FASTA file` output from **GFA to Fasta** {% icon tool %} (collection)
+>    - {% icon param-select %} *"Single or Paired-end reads"*: `single`
+>      - {% icon param-collection %} *"Select fastq dataset"*: The `Plasmids` collection
+>      - {% icon param-select %} *"Select a profile of preset options"*:: `PacBio/Oxford Nanopore read to reference mapping (-Hk19)`
+>    - In the section **Set advanced output options**:
+>       - {% icon param-select %} *"Select an output format"*: `paf`
+>
+>
+>     {% include snippets/select_collection.md %}
+>
 {: .hands_on}
 
 ## Ultrafast consensus module using Racon
@@ -296,10 +301,10 @@ It supports data produced by both Pacific Biosciences and Oxford Nanopore Techno
 
 > ### {% icon hands_on %} Hands-on: Consensus module
 >
-> 1. **Racon** {% icon tool %} with the following parameters
->   - *"Sequences"*: The `Plasmids` dataset collection
->   - *"Overlaps"*: the latest `PAF file` collection created by **Minimap2** {% icon tool %}
->   - *"Target sequences"*: the `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
+> 1. {% tool [Racon](toolshed.g2.bx.psu.edu/repos/bgruening/racon/racon/1.4.13) %} with the following parameters
+>   - {% icon param-collection %} *"Sequences"*: The `Plasmids` dataset collection
+>   - {% icon param-collection %} *"Overlaps"*: the latest `PAF file` collection created by **Minimap2** {% icon tool %}
+>   - {% icon param-collection %} *"Target sequences"*: the `FASTA file` collection created by **GFA to Fasta** {% icon tool %}
 >
 {: .hands_on}
 
@@ -326,8 +331,8 @@ By visualizing these assembly graphs, Bandage allows users to better understand,
 
 > ### {% icon hands_on %} Hands-on: Visualising de novo assembly graphs
 >
-> 1. **Bandage image** {% icon tool %} with the following parameters
->   - *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
+> 1. {% tool [Bandage image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %} with the following parameters
+>   - {% icon param-collection %} *"Graphical Fragment Assembly"*: the `Assembly graph` collection created by **Miniasm** {% icon tool %}
 >
 > 2. Explore {% icon galaxy-eye %} the output images
 >
@@ -372,23 +377,34 @@ Let's try it on our data!
 
 > ### {% icon hands_on %} Hands-on: Unicycler assembly
 >
-> 1. **Create assemblies with Unicycler** {% icon tool %} with the following parameters
->   - *"Paired or Single end data"*: `None`
->   - *"Select long reads. If there are no long reads, leave this empty"*: The `Plasmids` dataset collection
+> 1. {% tool [Create assemblies with Unicycler](toolshed.g2.bx.psu.edu/repos/iuc/unicycler/unicycler/0.4.8.0) %} with the following parameters
+>   - {% icon param-select %} *"Paired or Single end data"*: `None`
+>   - {% icon param-collection %} *"Select long reads. If there are no long reads, leave this empty"*: The `Plasmids` dataset collection
 >
-> 2. **Bandage image** {% icon tool %} with the following parameters
->   - *"Graphical Fragment Assembly"*: the `Final Assembly Graph` collection created by **Unicycler** {% icon tool %}
+> 2. {% tool [Bandage image](toolshed.g2.bx.psu.edu/repos/iuc/bandage/bandage_image/0.8.1+galaxy2) %} with the following parameters
+>   - {% icon param-collection %} *"Graphical Fragment Assembly"*: the `Final Assembly Graph` collection created by **Unicycler** {% icon tool %}
 >
 > 3. Examine {% icon galaxy-eye %} the output images again
 >
-> > ### {% icon question %} Question
-> >
-> > For which samples has the plasmid assembly improved?
-> >
-> > > ### {% icon solution %} Solution
-> > > Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.
-> > {: .solution }
-> {: .question}
+> 4. Use the **Scratchbook** {% icon galaxy-scratchbook %} to compare the two assemblies for sample `RB01`
+>    - Compare the **Bandage** {% icon tool %} images for our two assemblies:
+>      1. The assembly we got from running **minimap2, miniasm, racon** {% icon tool%} (first time we ran bandage)
+>      2. The assembly obtained with **Unicycler** {% icon tool %}
+>    - Tip: Search your history for the term `bandage` to easily find the outputs from our two bandage runs
+>
+>    {% include snippets/scratchbook.md %}
+>    {% include snippets/history_search.md %}
+>
+> 5. Repeat this comparison for the other samples.
+>
+>    > ### {% icon question %} Question
+>    >
+>    > For which samples has the plasmid assembly improved?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > > Exploring the outputs for all the samples reveals that many now display circular assemblies, indicating the full plasmids sequence was resolved.
+>    > {: .solution }
+>    {: .question}
 >
 {: .hands_on}
 
@@ -410,8 +426,8 @@ It relies on the neural network models trained on full genome and plasmid sequen
 
 > ### {% icon hands_on %} Hands-on: Prediction of plasmid sequences
 >
-> 1. **PlasFlow** {% icon tool %} with the following parameters
->   - *"Sequence Reads"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
+> 1. {% tool [PlasFlow](toolshed.g2.bx.psu.edu/repos/iuc/plasflow/PlasFlow/1.0) %} with the following parameters
+>   - {% icon param-collection %} *"Sequence Reads"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -456,8 +472,8 @@ and compiles a summary report of detected antimicrobial resistance genes.
 
 > ### {% icon hands_on %} Hands-on: Prediction of AMR genes
 >
-> 1. **staramr** {% icon tool %} with the following parameters
->   - *"genomes"*: the `Final Assembly` collection created by **Unicycler**
+> 1. {% tool [staramr](toolshed.g2.bx.psu.edu/repos/nml/staramr/staramr_search/0.7.1+galaxy2) %} with the following parameters
+>   - {% icon param-collection %} *"genomes"*: the `Final Assembly` collection created by **Unicycler** {% icon tool %}
 >
 > > ### {% icon question %} Question
 > >
@@ -517,5 +533,3 @@ may provide further insight.
 You have worked your way through the following pipeline:
 
 ![Workflow representation of this tutorial](../../images/plasmid-metagenomics-nanopore/Workflow.png)
-
-

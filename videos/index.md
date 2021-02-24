@@ -2,6 +2,8 @@
 layout: base
 ---
 
+{% include _includes/default-header.html %}
+
 {% assign sorted_topics = "" | split: "," %}
 {% assign sorted_topics_pre = site.data | sort | order: "title" %}
 
@@ -13,41 +15,29 @@ layout: base
     {% endif %}
 {% endfor %}
 
-{% include _includes/default-header.html %}
 
-
-<style type="text/css">
-::cue {
-   color:#333;
-}
-</style>
 <div class="container main-content">
-	<section>
-		<h1>Videos</h1>
+<section>
 
-		{% for topic in sorted_topics %}
+<h1> GTN Video Slides </h1>
 
-			{% assign t = site.data[topic[0]] %}
-			{% assign topic_material = site.pages | topic_filter:topic[0] %}
+The GTN now generates videos for selected slide decks. Click on a topic below to jump to the video page for that topic!
 
-			{% for material in topic_material %}
-				{% if material.video %}
-					<h2 id="video-{{ material.topic_name }}-{{ material.tutorial_name }}">{{ topic[1].title }} / {{ material.title }}</h2>
-					<video controls preload="metadata" width="800">
-						<source
-							src="https://galaxy-training.s3.amazonaws.com/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.mp4"
-							type="video/mp4">
-						<track label="English" kind="captions" srclang="en"
-							src="https://training.galaxyproject.org/videos/topics/{{ material.topic_name }}/tutorials/{{ material.tutorial_name }}/slides.en.vtt" default>
-					</video>
+<br/><br/>
 
-				{% endif %}
-			{% endfor %}
+<table class="table table-striped">
+ <thead>
+  <tr><th>Topic</th></tr>
+ </thead>
+ <tbody>
+  {% for topic in sorted_topics %} {% unless topic[0] == 'contributors' %}
+  {% if topic[1].name %}
+  <tr><td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/videos/">{{ topic[1].title }}</a></td></tr>
+  {% endif %}
+  {% endunless %}{% endfor %}
+ </tbody>
+</table>
 
-		{% endfor %}
-
-
-	</section>
+</section>
 </div>
-
 {% include _includes/default-footer.html %}

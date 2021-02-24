@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Writing content in Markdown"
+title: "Creating content in Markdown"
 questions:
   - "How to write a tutorial with hands-on?"
   - "What are the different boxes?"
@@ -13,6 +13,7 @@ time_estimation: "15m"
 key_points:
   - "You can highlight questions, tools and hints with a special syntax"
   - "Self-learning can be done by questions and hidden answers"
+subtopic: writing
 contributors:
   - bebatut
   - bgruening
@@ -108,9 +109,9 @@ The `tutorial.md` needs to start with some metadata at the top:
 >
 {: .hands_on}
 
-This information is used to display the data from the topic and tutorial page. They are also used to check which information are missing for the tutorials.
+This information is used to display the data from the topic and tutorial page. They are also used to check which information is missing for the tutorials.
 
-We also define metadata related to the pedagogical content of the tutorial, which will appear in the top ("Overview" box) and bottom of the online tutorial:
+We also define metadata related to the pedagogical content of the tutorial, which will appear at the top ("Overview" box) and bottom of the online tutorial:
 
 - `requirements`: list of resources that the reader of the material should be familiar with before starting this training:
     - `type`: the type of link (`internal` or `external`)
@@ -144,7 +145,7 @@ We also define metadata related to the pedagogical content of the tutorial, whic
     - `title`: title of the external resource
     - `link`: URL to the external resource
 
-    They will be displayed at the end of a tutorial.
+    They will be displayed at the end of the tutorial.
 - `subtopic`: if the topic has [multiple subtopics defined]({{ site.baseurl }}/topics/contributing/tutorials/create-new-topic/tutorial.html#adapt-the-metadata-for-your-topic), you can assign your tutorial to one of those subtopics here. Without this, the tutorial will appear in the "Other tutorials" section on the topic page.
 
 For this category of metadata, we have taken inspiration from what Software Carpentry has done and particularly what they described in their [Instructor training](https://swcarpentry.github.io/instructor-training/).
@@ -244,6 +245,21 @@ The prefix "Figure 1." is automatically added before its caption. This is done w
 
 We can also cross-reference images inside our Markdown with an anchor. For example, we can link to [the previous figure](#figure-1) using `[the display text](#figure-nb)` (changing `nb` with the image's number).
 
+### Guidelines on Alt vs Figcaption Text
+
+> While both the alt attribute and the figcaption element provide a way to
+> describe images, the way we write for them is different. **`alt` descriptions
+> should be functional; `figcaption` descriptions should be editorial or
+> illustrative.**
+>
+> [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
+{: .blockquote}
+
+As an example:
+
+```markdown
+![Image of cell membrance with an embedded protein with central pore. DNA is shown splitting and entering the pore, an electrical signal comes out reading A C T or G.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg "Using nanopore sequencing, a single molecule of DNA or RNA can be sequenced without the need for PCR amplification or chemical labeling of the sample. (Image from: <a href="https://nanoporetech.com/sites/default/files/s3/white-papers/WGS_Assembly_white_paper.pdf?submissionGuid=40a7546b-9e51-42e7-bde9-b5ddef3c3512">Nanopore sequencing: The advantages of long reads for genome assembly</a>)") <br><br>
+```
 
 ## Writing mathematical expressions
 
@@ -335,7 +351,7 @@ This box at the top of each tutorial is automatically generated using the metada
 > **{% icon objectives %} Objectives**
 > - The learning objectives are the goals of the tutorial
 > - They will be informed by your audience and will communicate to them and to yourself what you should focus on during the course
-> - They are single sentences describing what a learner should be able to do once they have done completed tutorial
+> - They are single sentences describing what a learner should be able to do once they have completed the tutorial
 > - You can use Bloom's Taxonomy to write effective learning objectives
 >
 > {% icon requirements %} Requirements

@@ -1,7 +1,7 @@
 ---
 layout: tutorial_hands_on
 
-title: "Creating a new tutorial - Creating Interactive Galaxy Tours"
+title: "Creating Interactive Galaxy Tours"
 questions:
   - "What is a Interactive Galaxy Tour?"
   - "How can we create an Interactive Tour?"
@@ -9,6 +9,7 @@ objectives:
   - "Creating a Galaxy tour from scratch"
   - "Deploying and running a tour"
 time_estimation: "15m"
+subtopic: extras
 key_points:
   - "The Interactive Tours are a good training object for self-learning at its own speed"
   - "It is now easy to create an Interactive Tour and test it"

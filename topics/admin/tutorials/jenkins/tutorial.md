@@ -74,7 +74,7 @@ As per many of the tutorials, we will use Ansible to setup and manage our Jenkin
 >
 >    ```yaml
 >    - src: geerlingguy.java
->      version: 1.9.5
+>      version: 1.10.0
 >    - src: geerlingguy.jenkins
 >      version: 3.7.0
 >    ```

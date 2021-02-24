@@ -1,8 +1,9 @@
 ---
 layout: tutorial_hands_on
 
-title: metaQuantome Data creation tutorial
+title: "metaQuantome 1: Data creation"
 zenodo_link: "https://doi.org/10.5281/zenodo.4037137"
+level: Intermediate
 questions:
  - "How do I perform functional and taxonomy analysis on metaproteomics data?"
  - "How can I perform quantitation on metaproteomics data?"
@@ -105,8 +106,8 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >
+>    {% include snippets/build_list_collection.md %}
 >
->  {% include snippets/build_list_collection.md %}
 > 7. Rename the dataset collection as `MZML dataset collection`.
 >
 {: .hands_on}
@@ -144,7 +145,7 @@ The mgf file type can then be used as the Input Peak Lists when running SearchGU
 >
 >
 >    > ### {% icon comment %} Comment
->    >This is a critical step for running this workflow.
+>    > This is a critical step for running this workflow.
 >    {: .comment}
 >
 {: .hands_on}
@@ -266,7 +267,9 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
-> 2. Rename PSM_Report_no_contaminants
+> 2. Rename {% icon galaxy-pencil %} to output file to `PSM_Report_no_contaminants`
+>
+>    {% include snippets/rename_dataset.md %}
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
@@ -277,8 +280,8 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `con_`
 >
-> 2. Rename Peptide_Report_no_contaminants
-{: .hands_on}
+> 2. Rename {% icon galaxy-pencil%} the output file to `Peptide_Report_no_contaminants`
+>
 >
 >    > ### {% icon comment %} Comment
 >    >
@@ -288,7 +291,7 @@ contaminants is critical to enable their removal before data analysis, mainly, t
 drawn from statistical analyses. Thus, this selection tool helps us remove the contaminants that were identified in the spectral data.
 >    {: .comment}
 >
-
+{: .hands_on}
 
 > ### {% icon question %} Questions
 >
@@ -305,7 +308,7 @@ drawn from statistical analyses. Thus, this selection tool helps us remove the c
 
 ## *Removing file extensions for Quantification*
 This is a data manipulation step to make the data compatible with other downstream processing tools. The Replace text tool replaces the .mgf extension from the PSM report so that it can be used as an input for FlashLFQ.
->
+
 > ### {% icon hands_on %} Hands-on: Removing file extensions
 >
 >
@@ -344,7 +347,7 @@ This step selects the peptide column from the Select output ( where we have remo
 In this tutorial, we are using FlashLFQ as the quantitation tool. The user can choose to work with other quantitation tools, e.g. moFF and MaxQuant are available in Galaxy.
 
 ### *FlashLFQ*
-FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
+[FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) can quantify MS peaks in order to find the abundances of peptides. FlashLFQ is a fast label-free quantification algorithm. Additionally, the abundances of peptides within the sample can be compared between samples as further analysis beyond this workflow.
 >
 > ### {% icon hands_on %} Hands-on: Quantification
 >
@@ -361,6 +364,11 @@ FlashLFQ can quantify MS peaks in order to find the abundances of peptides. Addi
 >    > ### {% icon comment %} Comment
 >    >
 >    > [FlashLFQ](https://github.com/smith-chem-wisc/FlashLFQ) is a label-free quantification tool for mass-spectrometry proteomics. It supports both .mzML and Thermo .raw file formats.
+>    > To run FlashLFQ on Galaxy, there are three main input files:
+>    > - PSM report from Peptide Shaker (`Input_for_FlashLFQ`)
+>    > - MZML/ RAW spectrum files (`MZML dataset collection`)
+>    > - Experimental Design File ( `ExperimentalDesign.tsv`)
+>    >   The Experimental Design file should be a tabular file with a "File", "Condition", "Sample", "Fraction", and "Replicate" column. The "File" column should match your mzml spectrum file name.
 >    {: .comment}
 >
 {: .hands_on}

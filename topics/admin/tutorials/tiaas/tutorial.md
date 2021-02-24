@@ -96,7 +96,7 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 >    +postgresql_objects_privileges:
 >    +- database: galaxy
 >    +  roles: tiaas
->    +  objs: galaxy_user,galaxy_session,job
+>    +  objs: galaxy_user,galaxy_session,job,history,workflow,workflow_invocation
 >    +  type: table
 >    +  privs: SELECT
 >    +- database: galaxy
@@ -117,26 +117,30 @@ This tutorial will go cover how to set up such a service on your own Galaxy serv
 > 4. Lastly we should add the routes for TIaaS to the NGINX template for Galaxy:
 >
 >    ```nginx
+>        location /tiaas {
+>            uwsgi_pass 127.0.0.1:5000;
+>            uwsgi_param UWSGI_SCHEME $scheme;
+>            include uwsgi_params;
+>        }
 >
->    location /tiaas {
->        uwsgi_pass 127.0.0.1:5000;
->        uwsgi_param UWSGI_SCHEME $scheme;
->        include uwsgi_params;
->    }
+>        location /tiaas/static {
+>            alias /opt/tiaas/static;
+>        }
 >
->    location /tiaas/static {
->        alias /opt/tiaas/static;
->    }
->
->    location /join-training {
->        uwsgi_pass 127.0.0.1:5000;
->        uwsgi_param UWSGI_SCHEME $scheme;
->        include uwsgi_params;
->    }
->
+>        location /join-training {
+>            uwsgi_pass 127.0.0.1:5000;
+>            uwsgi_param UWSGI_SCHEME $scheme;
+>            include uwsgi_params;
+>        }
 >    ```
 >
-> 5. Run the playbook (`ansible-playbook galaxy.yml`)
+> 5. Run the playbook
+>
+>    > ### {% icon code-in %} Input: Bash
+>    > ```
+>    > ansible-playbook galaxy.yml
+>    > ```
+>    {: .code-in}
 >
 {: .hands_on}
 

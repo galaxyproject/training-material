@@ -310,14 +310,36 @@ body.theme-halloween {
 
 }
 
+
+body.downunder {
+	transform:rotate(180deg);
+}
+
+body.theme-straya {
+	h1::before {
+		content: "🇳🇿 ";
+	}
+	h1::after {
+		content: " 🇳🇿";
+	}
+	h2::before {
+		content: "🦘 ";
+	}
+	h2::after {
+		content: " 🐨";
+		display: inline-block;
+		transform: scale(-1, 1) translateX(-1rem);
+	}
+}
+
 body.theme-rainbow {
 	h1::before {
 		content: "🌈 "
 	}
 	h1::after {
 		content: " 🌈 ";
-        display: inline-block;
-        transform: scale(-1, 1) translateX(-1rem);
+		display: inline-block;
+		transform: scale(-1, 1) translateX(-1rem);
 	}
 	header {
 		nav.navbar {
@@ -957,3 +979,15 @@ span.tool {
 }
 
 
+// Don't have such a wide whitespace surrounding on small screen sizes.
+
+@media (max-width:992px) {
+ .container {
+  max-width: unset;
+ }
+}
+
+video::cue {
+  background: #000000cc;
+  color: white;
+}
