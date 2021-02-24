@@ -141,16 +141,12 @@ quickly *inside* Galaxy using a Galaxy tool.
 ## *Hello world* as a Galaxy tool generated with the ToolFactory
 {: .no_toc}
 
-- A video of the ToolFactory generating that first program we have all grown to look forward to.
-- Dissected here for you to explore as a ToolFactory generated artifact.
+- The ToolFactory can generate that first program we have all grown to look forward to - "Hello World!" as a Galaxy tool
 - In this case, a tool that wraps a bash one-liner `echo "Hello $1!"` to echo the first parameter passed on the command line.
 - Surprisingly useful as a model for many Galaxy tools with an extra parameter or two, as discussed below.
 - Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
     - Apologies for the poor quality - will try to make a shorter one.
-- The ToolFactory form that generates the Hello example can be viewed below.
-- The special string "STDOUT" is used as the output file's "position"
-- This causes the new tool to write a new history object with the "Hello ...." string from bash's STDOUT when the generated tool is run.
-- The generated tool XML can also be viewed below. A user view of the generated form using text from the ToolFactory form is also shown.
+- The ToolFactory form configured to generate the Hello example can be viewed here.
 
 > ### {% icon details %} See ToolFactory form sections from the Hello demonstration with annotation here
 >>>![](../../images/ToolFactory_hello1form.png)
@@ -190,6 +186,10 @@ back into the Galaxy server specified.
 > - *This is potentially annoying and dangerous if you have API keys you can misuse - so please be mindful*
 >
 {: .details }
+
+- The special string "STDOUT" is used as the output file's "position" on the form
+- This causes the new tool to write a new history object with the "Hello ...." string from bash's STDOUT when the generated tool is run.
+- The generated tool XML can be viewed below, with a user view of the generated form using text from the ToolFactory form.
 
 >### {% icon details %} See generated XML from the `Hello Galaxy Training Network` sample here
 >```xml
@@ -249,6 +249,7 @@ back into the Galaxy server specified.
 >
 > ![](../../images/toolfactory_hello_demo_form.png)
 {: .details }
+
 
 ---
 
