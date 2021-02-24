@@ -79,16 +79,17 @@ generated tools run. No explicit instruction about scripting is offered.
 
 
 
-> ### {% icon comment %} Brief note on tutorial design from the authors.
+> ### {% icon tip %} Brief note on tutorial design from the authors.
 >
 - This tutorial is suitable for Galaxy users who write code as part of their routine work.
 - It is in 3 parts
-- The first part is all reading, with an optional demonstration video
-- It should help readers decide whether the training is relevant to their needs. A *sorting hat*.
+- The first part is all reading, with an optional demonstration video and a dissected `Hello World!` example
+- It should help readers understand what the ToolFactory does so they can decide whether the training is relevant to their needs. A *sorting hat*.
 - After that it's all hands on.
-- The second part involves choosing how you would prefer to run the ToolFactory, installing it and importing the demonstrations in a sample history. These are the best documentation.
+- The second part involves choosing how they would prefer to run the ToolFactory, installing it and importing the demonstrations in a sample history.
+- The sample tools are the core documentation.
 - The third part offers some tips and suggestions for exploring the demonstration tools and introduces some advanced features.
-{: .comment}
+{: .tip}
 
 # 1. Background: tools, tool building and the ToolFactory in Galaxy.
 {:.no_toc}
@@ -124,29 +125,29 @@ and new to the dark arts of Galaxy tool building, this tutorial may be of help. 
 quickly *inside* Galaxy using a Galaxy tool.
 
 
-> ### {% icon comment %} Alternative tool generators:
->- Planemo also [generates tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
->- Recommended for developers wanting to focus on Galaxy tools. Excellent documentation.
->- Widely used by experienced developers since it requires relatively little time to figure out - Galaxy tool syntax takes longer.
+> ### {% icon tip %} Alternatives to the ToolFactory:
+>- Planemo can [generate tool XML](https://planemo.readthedocs.io/en/latest/writing_standalone.html) with an optional test.
+>- Planemo is recommended for developers who will focus on Galaxy tools. Excellent documentation.
+>- Widely used by experienced developers. Requires relatively little time to figure out - Galaxy tool syntax takes longer.
 >- No GUI. Command line only. Can create archives with additional steps.
 >- Need to pass all i/o and parameter details at once on the command line.
 >- Takes longer to learn to use and less accessible to many users than a form driven GUI might be.
->- Manual editing required for selects and collections.
+>- Manual XML editing required for selects and collections.
 >- See the recommended next steps at the end of this tutorial for Planemo related training.
 >- The ToolFactory uses planemo to generate test data and to run the test.
-{: .comment}
+{: .tip }
 
 ---
 
-## *Hello world* as a Galaxy tool generated with the ToolFactory
+## `Hello world` generated using the ToolFactory
 {: .no_toc}
 
-- The ToolFactory can generate that first program we have all grown to look forward to - "Hello World!" as a Galaxy tool
-- In this case, a tool that wraps a bash one-liner `echo "Hello $1!"` to echo the first parameter passed on the command line.
+- The ToolFactory can easily generate the ubiquitous "Hello World!" example as a Galaxy tool. A parameter (to whom to say hello) is added to make it interactive.
+- It is implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line.
 - Surprisingly useful as a model for many Galaxy tools with an extra parameter or two, as discussed below.
 - Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
     - Apologies for the poor quality - will try to make a shorter one.
-- The ToolFactory form configured to generate the Hello example can be viewed here.
+- The ToolFactory form configured to generate the `Hello` example can be viewed here.
 
 > ### {% icon details %} See ToolFactory form sections from the Hello demonstration with annotation here
 >>>![](../../images/ToolFactory_hello1form.png)
@@ -163,7 +164,7 @@ command line - reproducibility is not an issue here but when it is, specify the 
 >
 >>> ![](../../images/ToolFactory_hello2form.png)
 > - **The second section shows the new generated history output.**
-> - It uses the special name `STDOUT` so the tool will take whatever the bash script writes and create a new text file called `hello_output`
+> - It uses the special name `STDOUT` so the tool will take whatever the bash script writes and create a new text file called `Hello_output`
 > - When the test is generated, the pass criterion is that the default value `Galaxy Training Network` should appear as the message in `hello_output`
 with no difference. Other criteria including `sim_size` are available for the test applied to each output file.
 > - There is no limit (other than your patience) to the number of new generated history outputs
@@ -187,9 +188,19 @@ back into the Galaxy server specified.
 >
 {: .details }
 
-- The special string "STDOUT" is used as the output file's "position" on the form
-- This causes the new tool to write a new history object with the "Hello ...." string from bash's STDOUT when the generated tool is run.
-- The generated tool XML can be viewed below, with a user view of the generated form using text from the ToolFactory form.
+- The special string `STDOUT` is used as the output file's "position" on the form
+- The new tool will write a new history object with the "Hello ...." string collected from bash's `STDOUT` when the generated tool is run.
+- After running, two new items are created in the history
+
+>### {% icon details %} History items created after a successful run
+>> ![](../../images/toolfactory_outputs_hello.png)
+>> - The first item is a downloadable toolshed archive containing the tool and test ready to upload or install (see below on installing newly generated tools)
+>> - The second item is a collection containing a test result, expanded in this image, the generated XML and log.
+>> ![](../../images/toolfactory_hello_collection.png)
+{: .details }
+
+
+- The generated tool XML can be viewed below, with a user view of the generated form, showing how text from the ToolFactory form is included.
 
 >### {% icon details %} See generated XML from the `Hello Galaxy Training Network` sample here
 >```xml
@@ -243,9 +254,9 @@ back into the Galaxy server specified.
 >  </citations>
 ></tool>
 >```
-> This form is displayed when the generated Hello tool is executed.
-> The user sees a text box to enter the string
-> When executed, it will be echoed to a new history file called Hello_output
+> The form displayed when the generated Hello tool is executed is below.
+> The user sees a text box to enter any string
+> When executed, it will be echoed to a new history file called `Hello_output`
 >
 > ![](../../images/toolfactory_hello_demo_form.png)
 {: .details }
@@ -262,19 +273,20 @@ on the ToolFactory form. The ToolFactory can wrap any simple script that runs co
 handy for developers new to Galaxy, and for Galaxy users who are capable of correctly scripting on the command line for themselves.
 
 
-> ### {% icon comment %} Under the hood:
+> ### {% icon tip %} Under the hood:
 >
 >  - It uses galaxyxml to generate the tool XML from ToolFactory form settings.
 >  - It uses Planemo to generate the test outputs
 >  - Then again to test newly generated code
-{: .comment}
+{: .tip}
 
 
-> ### {% icon comment %} Note!
-> - *The ToolFactory does not do any of the hard work needed to prepare and debug a script to run correctly on the command line.*
-> - *Galaxy is far too clumsy as an IDE to be used for that purpose.*
-> - Without a working script and test data that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is unlikely to help.
-{: .comment}
+> ### {% icon warning %} Note on scope
+> - The ToolFactory in Galaxy is much slower and more clumsy than the u command line when preparing and debugging a script to run correctly.
+> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy IDE for debugging scripts. More than a minute per cycle. `planemo test` is run twice, building and tearing down a Galaxy each time.
+> - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
+> - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
+{: .warning}
 
 
 It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files. Scripts are easier than some
@@ -300,7 +312,7 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 - Depending on your preferences, install your own ToolFactory from one of the options described below.
 - The sections after this can **only be completed with a working ToolFactory**.
 - `persistence` is used in describing each option. It indicates whether the history recording all your ToolFactory work will still be there, next time you start working.
-- Some options are not persistent. They are recommended only for testing or teaching.
+- Some options are not persistent. They are **recommended only for testing or teaching**.
 
 >#### Active Tutorial content follows
 >
@@ -322,16 +334,16 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 #### 1. Install into an existing local non-docker development Galaxy
 
-- Highly recommended if you already have or want to start a local disposable Galaxy server for development.
+- Highly recommended if you already have, or want to start, a local disposable Galaxy server for development.
 - Quick and easy.
-- Your work will be persistent like any other jobs on that Galaxy.
-- Only local administrative users can successfully execute it
-- It will fail with an explanation for non-administrative users.
+- ToolFactory work will be persistent like any other jobs on that Galaxy.
+    - Only local administrative users can successfully execute it
+    - It will fail with an explanation for non-administrative users.
 - If you have a private toolshed, you can configure the ToolFactory to upload new tools and then install them back to the host Galaxy.
 - Provide the URL and API key for the toolshed and the Galaxy and choose the install after test option toward the end of the form.
-- This is good for seeing exactly what a user is going to work with.
-- It is quite feasible to rebuild the tool after edits to fix warts observed during testing.
-- The Galaxy GUI is an odd choice for an IDE, but it works surprisingly well in practice for the tool develop, test, edit... cycle.
+    - This is good for seeing exactly what a user is going to work with.
+    - It is quite feasible to rebuild the tool after edits to fix warts observed during testing.
+- The Galaxy GUI is an odd choice for an IDE, but it works surprisingly well in practice for refining tools.
 
 > ### {% icon warning %} The normal ToolFactory will not run as a Galaxy tool in Docker!
 > - The normal ToolFactory tool fails mysteriously when run as a tool in Galaxy under docker.
