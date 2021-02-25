@@ -177,33 +177,36 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
 >    E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
 >    E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
->    ```
->    - Click `Build` and proceed to the rule builder.
->    ![screenshot](../../images/rules/rules_example_5_1_inputs.png)
->
-> 2. Instead of manually creating the rules this time, we will import an existing set of rules from some JSON. Copy the following text into your clipboard. These are the same rules as used in the [Building URLs from Accession Information](#building-urls-from-accession-information) tutorial.
->
->    ```json
->    {"rules":[{"type":"add_filter_count","count":"1","which":"first","invert":false},{"type":"remove_columns","target_columns":[1,2,4,5,6]},{"type":"sort","target_column":0,"numeric":false},{"type":"add_column_regex","target_column":0,"expression":".*","replacement":"http://www.uniprot.org/uniprot/\\0.fasta"}],"mapping":[{"type":"info","columns":[1]},{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[2]}],"extension":"csfasta"}
->    ```
->
 > 3. In the ruler builder interface, select the **wrench icon** next to the word `Rules`
 >    - Paste the rules into the textbox
 >    - Click `Apply`
 >
 >    ![screenshot](../../images/rules/rules_example_5_2_source.png)
+>    ```
+>    - Click `Build` and proceed to the rule builder.
+>    ![screenshot](../../images/rules/rules_example_5_1_inputs.png)
+>
+> 2. Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the **history icon** (the clock with the arrow around it). Clicking this will drop down a list of the 10 most recent rule sets you've used. Select the most recent one to reuse the rules from the last exercise.  
 >
 >    You should now see the rules you created in the last example.
 >    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
 >
->   > ### {% icon comment %} Saved Rules Selector
+>   > ### {% icon comment %} JSON Editor
 >    >
->    > Another way to do this is to click the **history icon** to the right of the wrench icon.  This will drop down a list of the last 10 rule sets you built. Simply select the most recent one (or whichever one fits your needs) and the saved rules will be loaded in. 
->    > {: .comment}
+>    > Another way to do this is to click the **wrench icon** to the right of the word 'Rules' and to the left of the **history icon**. This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error. 
+> {: .comment}
+
+If you don't see the rule set we used in the last exercise anymore, here is the JSON that you can paste directly into the JSON Editor:
+
+> ```json
+> {"rules":[{"type":"add_filter_count","count":"1","which":"first","invert":false},{"type":"remove_columns","target_columns":[1,2,4,5,6]},{"type":"sort","target_column":0,"numeric":false},{"type":"add_column_regex","target_column":0,"expression":".*","replacement":"http://www.uniprot.org/uniprot/\\0.fasta"}],"mapping":[{"type":"info","columns":[1]},{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[2]}],"extension":"csfasta"}
+> ```
+
+>    
 >
 >    This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
 >
-> 4. From **Column** menu, select  `Fixed Value`
+> 3. From **Column** menu, select  `Fixed Value`
 >     - *"Value"*: `fasta`
 >     - Click `Apply`
 >    This value will eventually be used for the datatype of the file.
