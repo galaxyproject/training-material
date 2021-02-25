@@ -83,7 +83,7 @@ This data is available at Zenodo using the following [link](https://doi.org/10.5
 >     https://zenodo.org/record/582600/files/wildtype.gff
 >     ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 {: .hands_on}
 

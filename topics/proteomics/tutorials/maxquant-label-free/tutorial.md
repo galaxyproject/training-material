@@ -56,7 +56,7 @@ The serum proteomic samples and the fasta file for this training were deposited 
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the fasta and raw files from [Zenodo](https://zenodo.org/record/3774452)
 >
@@ -65,13 +65,13 @@ The serum proteomic samples and the fasta file for this training were deposited 
 >    https://zenodo.org/record/4274987/files/Sample1.raw
 >    https://zenodo.org/record/4274987/files/Sample2.raw
 >    ```
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 3. Once the files are green, rename the raw datasets into 'sample1' and 'sample2' and the fasta file into 'protein database'
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 > 4. Set the data type to thermo.raw for 'sample1' and 'sample2'
 >
->    {% include snippets/change_datatype.md datatype="thermo.raw" %}
+>    {% snippet snippets/change_datatype.md datatype="thermo.raw" %}
 >
 {: .hands_on}
 

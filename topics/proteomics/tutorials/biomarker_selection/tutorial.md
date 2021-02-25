@@ -66,7 +66,7 @@ Criteria candidate biomarkers have to fulfill through this pipeline are:
 ![Overview of the pipeline described in this tutorial](../../images/pipeline.png "Pipeline of the tutorial, from Nguyen et al., as of in 2019.")
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet snippets/warning_results_may_vary.md %}
 
 # Selection of tissue-specific proteins
 
@@ -77,7 +77,7 @@ We will start by selecting proteins associated with heart muscle tissue based on
 > ### {% icon hands_on %} Hands-on: Build tissue-specific expression dataset based on ImmunoHistoChemistry
 >
 > 1. **Create a new history** and give it a name.
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. **Build tissue-specific expression dataset** {% icon tool %} with the following parameters:
 >    - *"Experimental data source (antibody- or RNAseq-based)"*: `Expression profiles based on immunohistochemistry`
@@ -194,7 +194,7 @@ rest of our pipeline.
 >
 > 3. Let's rename the 931 IDs dataset in "heart931" for simplification.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
@@ -251,7 +251,7 @@ Let's use **Filter by keywords and/or numerical value** {% icon tool %} to selec
 >
 > 2. Let's rename the filtered dataset **heart115**
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 {: .hands_on}
 

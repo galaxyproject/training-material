@@ -105,30 +105,30 @@ In that particular case, we would suggest to use the Galaxy CLM-FATES Galaxy too
 > ## {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial. If you are not inspired, you can name it *fates-jupyterlab*.
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 > 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.4108341) or from the shared data library
 >
 >    ```
 >    https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Check the datatype is **tar**
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 > 4. Rename Datasets
 >
 >    As "https://zenodo.org/record/4108341/files/inputdata_version2.0.0_ALP1.tar" is not a beautiful name and can give errors for some tools,
 >    it is a good practice to change the dataset name by something more meaningfull. For example by removing `https://zenodo.org/record/4108341/files/` to obtain `inputdata_version2.0.0_ALP1.tar`, respectively.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 5. Add a tag to the dataset corresponding to `fates-jupyterlab`
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet snippets/add_tag.md %}
 >
 {: .hands_on}
 
