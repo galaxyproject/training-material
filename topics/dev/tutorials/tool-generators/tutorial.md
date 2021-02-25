@@ -36,9 +36,6 @@ requirements:
     tutorials:
       - galaxy-intro-short
       - galaxy-intro-101-everyone
-
-requirements:
-  - type: "internal"
     topic_name: dev
     tutorials:
       - tool-integration
@@ -550,9 +547,19 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 {: .hands_on}
 
 
+The ToolFactory form collects all the information needed for a new Galaxy tool. It is a little complex as a result, because a tool can have
+- dependencies,
+- input files to be selected from the user's history then passed on the command line as parameters to the script.
+- output files to be written to the user's history, paths determined at tool execution passed as parameters to the script
+- additional command line parameters that the user can control on the new tool form and are passed as parameters to the
+- a script.
 
-Probably the best way is to take a look at each sample tool. Think about how the options have been configured and what kinds of scripts this can be used for.
-Try extending each sample. Use the form as the basis for a new tool. Press `execute` to rerun the job and generate a new toolshed archive and report.
+The form collects these, many as Galaxy form repeats such as inputs, outputs and user parameters. That means the
+Toolfactory could potentially generate very complicated tools given sufficient patience. It is better for simple tools.
+
+Probably the best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool. See how the
+options have been configured and what kinds of scripts this could be used for in your work. You can easily add new parameters to extend the toy examples
+and create tools of use to your users. Give the edited form a new tool name, press `execute` and rerun the job to generate a new toolshed archive and report.
 
 Consider the trivial `Hello` tool example. It is easily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter. For example,
 the planemo `lint` and `test` tool examples (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
@@ -573,7 +580,7 @@ In practice, it's a flexible basis for generating many simple tools.
 
 ---
 
-## Advanced features.
+## ToolFactory tips and tricks illustrated by some of the examples.
 
 #### STDIN and STDOUT
 
@@ -648,7 +655,17 @@ for those rare situations where that's all you need. No i/o or other parameters 
 - The user's history shows only one new item after it runs.
 - That is a collection. When selected, objects linked to each plot will be listed for viewing.
 
-> ### {% icon details %} `plotter` collection output demonstration tool generated XML
+> ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
+> >
+> >Collections are a special kind of new history output. The ToolFactory can only generate list collections - not structured collections. They can hide an
+> > unlimited number of different kinds of script output files, such as images or reports, in a single history item to save clutter. Typically these are not used as
+> > inputs to downstream analyses and belong together from the user's perspective. The ToolFactory form for the plotter example tool
+> > is configured as shown below, from "rerunning" the plotter job from the sample history.
+> >
+> >![](../../images/toolfactory_plotter_demo_form.png)
+> >
+> > The Rscript is contained in a configfile so`#` is escaped - this is automatic.
+> >
 > >```xml
 > ><tool name="plotter" id="plotter" version="0.01">
 > >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
@@ -750,7 +767,8 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > >  </citations>
 > ></tool>
 >>```
->> Here's what the collection looks like with 25 pairs of plots from the sample tool, with one of them displayed using the "eye" icon.
+>> After requesting 25 pairs of plots from the sample tool, a collection appears in the history and is shown below.
+>> One of them is displayed by clicking the "eye" icon.
 >> Collections are ideal for messy analysis reporting outputs such as images, pdfs and other material that is not useful as an input to a downstream tool.
 >> It is material that the user will want kept together, so a single history item is ideal to avoid unnecessary clutter.
 >> As shown above, the script only has to write the files to a directory.
@@ -769,6 +787,14 @@ for those rare situations where that's all you need. No i/o or other parameters 
 - Galaxyxml generates appropriate select parameters on the generated tool as shown in the select demonstration tool.
 
 > ### {% icon details %} `select_test` select field demonstration tool generated XML
+>>
+>>The ToolFactory form section for user configurable command line settings is
+>> configured as shown here for the select demonstration
+>>
+>>![](../../images/toolfactory_select_demo_form.png)
+> >
+>>The generated XML is shown below.
+> >
 > >```xml
 > ><tool name="select_test" id="select_test" version="0.01">
 > >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
@@ -825,10 +851,9 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > >  </citations>
 > ></tool>
 > >```
->>
->> The generated tool form from the select demonstration shows the three options and returns the one selected.
->>
->>![](../../images/toolfactory_select_test_tool.png)
+> > The generated tool form from the select demonstration shows the three options and returns the one selected.
+> >
+> >![](../../images/toolfactory_select_test_tool.png)
 {: .details}
 
 ---
@@ -887,7 +912,7 @@ planemo tool_factory.
 
 # Advanced content: Some ToolFactory features and suggested work-arounds
 
-## Not just scripts - *some* Conda packages are easy too.
+## If you can write a script, *some* Conda packages can be run in a simple script and so wrapped.
 
 - There are two demonstration tools that use Planemo as a Conda dependency
 - One runs `planemo test...` and the other `planemo lint....` on toolshed archives in a history
@@ -903,7 +928,6 @@ planemo lint $TOOLNAME >> $2
 
 - The ToolFactory makes exposing these Planemo functions as Galaxy tools fairly easy.
 - Similarly tractable Conda dependencies are also potential candidates for being quickly wrapped as tools
-- This is not emphasised in the introduction in order to manage expectations.
 
 > ### {% icon details %} `planemo lint` demonstration tool generated XML
 > >```xml
@@ -968,20 +992,20 @@ planemo lint $TOOLNAME >> $2
 {: .details}
 
 
-## Limits and ways to overcome them
+## Limits and workarounds
 
 - The ToolFactory is an automated code generator.
 - No generator can replace manual editing by a skilled developer other than in constrained, simple cases.
 - These are common enough in the daily work of most data intensive scientific fields to make a tool generator potentially worth keeping handy.
 - For simple scripts and appropriate Conda packages, it's potentially very useful.
-- Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations.
 - It is not hard to imagine using a Python wrapper to finesse more complex tools just as bash was used in the `planemo lint` example.
 - The ToolFactory, if in a persistent form, is a slightly clumsy but useable way to create and maintain Galaxy tools.
+- Tools can have command-override and test-override pasted in as in one of the BWA samples. This can solve some of the limitations. However, if the package requires that kind of complexity, it might be better to prepare the wrapper manually.
 
 ---
 
 # Please help improve this community resource
-- tell Ross what went well and what could be improved for the benefit of future students
+- tell Ross (ross.lazarus@gmail.com) what went well and what could be improved for the benefit of future students
 - This tutorial has had almost no testing yet.
 - It is in pre-review.
 - A PR will soon appear once we get the showstoppers sorted.
