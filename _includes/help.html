@@ -3,19 +3,41 @@
         {% icon help %} Help
     </a>
     <div class="dropdown-menu dropdown-menu-right">
+        <!-- disable Tess for now
         <form method="get" action="https://tess.elixir-europe.org/materials">
             <input type="text" id="search" name="q" value="" style="margin-left: 0.5em;/*! border-radius: 0px; */">
             <input type="hidden" value="Galaxy Training" name="content_provider">
             <input type="submit" value="Search on TeSS" style="width: 92%;border-radius: 0px;margin: 0.5em;background: #f47d20;border: 0px;padding: 0.25em;" class="">
         </form>
+        -->
 
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="{{ site.baseurl }}/faq" title="Check our FAQ">
-            FAQ
+           {% icon question %} FAQ
         </a>
         <a class="dropdown-item" href="{{ site.help_url }}" title="Discuss on Galaxy Help">
-            Discuss on Galaxy Help
+            {% icon feedback %} Galaxy Help Forum
         </a>
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page={{site.baseurl}}{{ page.url }}" title="Show view statistics of this page">
+            {% icon galaxy-barchart %} Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                {% icon language %} Translate this page
+            </div>
+
+            <div id="lang-selector">
+                {% for lang in site.other_languages %}
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
+                {{lang[1]}}
+                </a>
+                {% endfor %}
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                And more!
+                </a>
+            </div>
+        </div>
 
         <div class="dropdown-item">
             <div>

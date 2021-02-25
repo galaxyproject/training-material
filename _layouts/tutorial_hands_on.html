@@ -59,10 +59,11 @@ layout: base
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="{{ site.baseurl }}/topics/{{ topic.name }}" title="Go back to list of tutorials">
-                            {% icon topic %} {{ topic.title }}
+                            {% icon topic %} Back to Topic
                         </a>
                     </li>
 
+                    <!-- language selector moved to help menu
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Language Selector">
                             {% icon language %} Language
@@ -78,6 +79,7 @@ layout: base
                             </a>
                         </div>
                     </li>
+                    -->
 
                     {% include _includes/help.html %}
 
@@ -86,6 +88,20 @@ layout: base
                             {% icon github %} Edit
                         </a>
                     </li>
+
+                     <!-- Search bar-->
+                    <li class="nav-item">
+                      <div id="navbarSupportedContent">
+                        <!-- Search form -->
+                        <form class="form-inline mr-auto" method="GET" action="{{site.baseurl}}/search">
+                          <i class="fas fa-search nav-link" aria-hidden="true"></i>
+                          <div class="md-form mb-2">
+                            <input name="query" class="form-control nicer" type="text" placeholder="Search Tutorials" aria-label="Search">
+                          </div>
+                        </form>
+                      </div>
+                    </li>
+
                 </ul>
             </div>
         </div>
