@@ -167,7 +167,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >     >
 > >     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
 > >     >
-> >     > Now you need to login once again in your account.
+> >     > You might need to login to Galaxy again.
 > >     {: .comment}
 > >
 > > 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
