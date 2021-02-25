@@ -58,7 +58,7 @@ Our objective is to automatically count the number of cells contained in this im
 >
 > 1. If you are logged in, create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the following dataset from [Zenodo](https://zenodo.org/record/3362976) or from the data library (ask your instructor).
 >    - **Important:** Choose the type of data as `zip`.
@@ -67,8 +67,8 @@ Our objective is to automatically count the number of cells contained in this im
 >    https://zenodo.org/record/3362976/files/B2.zip
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. **Unzip file** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"input_file"*: `Zipped ` input file
@@ -77,7 +77,7 @@ Our objective is to automatically count the number of cells contained in this im
 >
 > 4. Rename {% icon galaxy-pencil %} the dataset to `input.tif`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 {: .hands_on}
 
 

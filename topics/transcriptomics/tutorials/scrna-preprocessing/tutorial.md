@@ -130,7 +130,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq single batch tutorial)
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 1. Import the subset FASTQ paired data from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
@@ -139,7 +139,7 @@ The size of scRNA files (.fastq) are typically in the gigabyte range and are som
 >    https://zenodo.org/record/3253142/files/SRR5683689_2.subset.fastq
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
+>    {% snippet snippets/import_via_link.md collection=true collection_type="Paired" collection_name_convention="`<name>_<plate>_<batch>` to preserve the sample names, sequencing plate number and batch number." collection_name="Here we will write `C57_P1_B1`" genome="GRCm38/mm10" pairswaptext="`SRR5683689_1` and `SRR5683689_2`" %}
 >
 > 3. Import the Gene Annotations and Barcodes from [`Zenodo`](https://zenodo.org/record/3253142) or from the data library (ask your instructor)
 >
@@ -555,8 +555,8 @@ Once again, file naming is important, and so we will rename our matrix files app
 >    https://zenodo.org/record/3253142/files/celseq_barcodes.192.tabular
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 1. Rename a matrix
 >    - Click on {% icon galaxy-pencil %} of the *`P1_B1.tsv`* file
@@ -602,7 +602,7 @@ Let us now merge our matrices from different batches. In order to ensure that ou
 > ### {% icon hands_on %} Hands-on: Table Merge
 >
 > 1. **Create a Dataset List**
->    {% include snippets/build_list_collection.md %}
+>    {% snippet snippets/build_list_collection.md %}
 >
 > 1. **Column Join on Collections** {% icon tool %} with the following parameters:
 >   - *"Tabular Files"*: (Select the Dataset Collection icon {% icon param-collection %}, and select the Collection from the previous step each of the matrices that you wish to join)

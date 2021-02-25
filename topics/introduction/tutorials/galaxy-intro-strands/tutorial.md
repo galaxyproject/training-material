@@ -111,7 +111,7 @@ The Galaxy interface consists of three main parts. The available tools are liste
 >
 > - At the start of the tutorial you should ensure that you are working in a new history, i.e. one without any datasets
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 {: .hands_on}
 
