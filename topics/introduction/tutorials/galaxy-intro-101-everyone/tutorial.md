@@ -581,8 +581,8 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 3. **Hiding intermediate outputs**
 >    - We can tell Galaxy which outputs of a workflow are important and should be shown in our history when we run it, and which can be hidden.
 >    - By default, all outputs will be shown
->    - Click the **asterisk** for outputs to mark them as important:
->        - `out_file` in  **Unique** {% icon tool %}
+>    - Click the **checkbox** next to the outputs to mark them as important:
+>        - `outfile` in  **Unique** {% icon tool %}
 >        - `out_file1` in **Group** {% icon tool%} step
 >            - This should be the Group tool where we performed the counting, you can check which one that is by clicking on it and looking at the parameter settings in the **Details** box on the right.
 >        - `png` in both **Scatterplot w ggplot2** {% icon tool %} steps
@@ -594,8 +594,8 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 > 4. **Renaming output datasets**
 >    - When we performed the analysis manually, we often renamed output datasets to something more meaningful
 >    - We can do the same in a workflow (see the tip box below)
->    - Let's rename the outputs we marked with an asterisk (and thus do not hide) to more meaningful names:
->        - **Unique** {% icon tool%}, output `out_file`: rename to `categories` tool
+>    - Let's rename the outputs we marked as important with the checkbox (and thus do not hide) to more meaningful names:
+>        - **Unique** {% icon tool%}, output `outfile`: rename to `categories` tool
 >        - **Group** {% icon tool %}, output `out_file1`: rename to `samples per category`
 >        - Rename the scatterplot outputs as well, remember to choose a generic name, since we can now also run this on data other than iris plants.
 >
