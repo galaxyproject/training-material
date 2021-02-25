@@ -563,7 +563,8 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >
-> 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.  - Select `Expand to full workflow form`
+> 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+>    - Select `Expand to full workflow form`
 >    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
 >    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
 >
