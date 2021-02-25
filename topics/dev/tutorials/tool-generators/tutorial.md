@@ -547,23 +547,35 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 {: .hands_on}
 
 
-The ToolFactory form collects all the information needed for a new Galaxy tool. It is a little complex as a result, because a tool can have
-- dependencies,
-- input files to be selected from the user's history then passed on the command line as parameters to the script.
-- output files to be written to the user's history, paths determined at tool execution passed as parameters to the script
-- additional command line parameters that the user can control on the new tool form and are passed as parameters to the
-- a script.
+The ToolFactory form collects all the information needed for a new Galaxy tool. It is a little complex as a result. Much of what is collected is used to
+construct a command line for the script when the generated tool runs. Other information such as the name and dependencies are needed to construct the
+relevant sections of the generated XML file in the toolshed archive.
 
-The form collects these, many as Galaxy form repeats such as inputs, outputs and user parameters. That means the
-Toolfactory could potentially generate very complicated tools given sufficient patience. It is better for simple tools.
+Aside from a name, a tool can have:
+
+> - dependencies,
+> - different ways of constructing the command line for the script
+> - input files to be selected from the user's history then passed on the command line as parameters to the script.
+> - output files to be written to the user's history, paths determined at tool execution then passed as parameters to the script
+> - additional command line parameters that the user can control on the new tool form, then pass as parameters to the script
+> - a script.
+
+If the generated tool user must select an input from their history, the ToolFactory must collect a number of text strings for form labels and help, plus some internal settings.
+This is also true of outputs and additional parameters, citations and so on.
+
+The form collects these, many as Galaxy form repeats such as inputs, outputs and user parameters. As more repeats are added, the Galaxy UI becomes unwieldy. In theory,
+the Toolfactory could potentially generate very complicated tools. Great patience would be required and manual methods likely more productive. It works best for simple tools.
 
 Probably the best way to explore the kinds of tasks that can be achieved with simple scripts is to take a look at each sample tool. See how the
-options have been configured and what kinds of scripts this could be used for in your work. You can easily add new parameters to extend the toy examples
-and create tools of use to your users. Give the edited form a new tool name, press `execute` and rerun the job to generate a new toolshed archive and report.
+options have been configured and what kinds of scripts this could be used for in your work. You can easily replace the script with one of yours known to work and add
+new parameters for it, to extend the toy examples and create tools of use to your users. Give the edited form a new tool name, press `execute` and rerun the job to generate a
+new toolshed archive and test report collection.
 
-Consider the trivial `Hello` tool example. It is easily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter. For example,
+Consider the trivial `Hello` tool example. It is readily extended to suit many situations where a tool is needed quickly for a workflow. Try adding another parameter. For example,
 the planemo `lint` and `test` tool examples (described below) can be derived by adding a history toolshed archive as input, plus a few more lines of bash script.
 In practice, it's a flexible basis for generating many simple tools.
+
+The diagram below shows how Galaxy itself can be used as a tool development environment for administrative users who can write scripts.
 
 > ### {% icon details %} Diagram of the ToolFactory development cycle process
 >
@@ -573,7 +585,7 @@ In practice, it's a flexible basis for generating many simple tools.
 > - Use the Redo button on the toolshed archive history item to recreate the ToolFactory form that generated the last version
 > - Make changes and generate an updated version
 > - Rinse, repeat...
-> - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not satisfying in Galaxy. Use the command line for that.
+> - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
 >
 >> ![](../../images/ToolFactory_big_picture.png)
 {: .details}
