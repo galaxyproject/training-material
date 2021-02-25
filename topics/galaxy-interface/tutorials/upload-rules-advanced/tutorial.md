@@ -196,6 +196,11 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    You should now see the rules you created in the last example.
 >    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
 >
+>   > ### {% icon comment %} Saved Rules Selector
+>    >
+>    > Another way to do this is to click the **history icon** to the right of the wrench icon.  This will drop down a list of the last 10 rule sets you built. Simply select the most recent one (or whichever one fits your needs) and the saved rules will be loaded in. 
+>    > {: .comment}
+>
 >    This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
 >
 > 4. From **Column** menu, select  `Fixed Value`
