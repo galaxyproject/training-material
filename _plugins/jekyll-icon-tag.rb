@@ -6,10 +6,7 @@ module Jekyll
       @text = text.strip
     end
 
-    def render(context)
-      cfg = get_config(context)
-      icon = cfg[@text] || ''
-
+    def render_for_text(icon)
       if icon.empty?
         raise SyntaxError.new(
           "No icon defined for: '#{@text}'. " +
@@ -24,12 +21,30 @@ module Jekyll
       end
     end
 
-    private
+    def render(context)
+      cfg = get_config(context)
+      icon = cfg[@text] || ''
+      render_for_text(icon)
+    end
 
     def get_config(context)
       context.registers[:site].config['icon-tag']
     end
   end
+
+  class IconTagVar < IconTag
+    def initialize(tag_name, text, tokens)
+      super
+      @text = text.strip
+    end
+
+    def render(context)
+      cfg = get_config(context)
+      icon = cfg[context[@text]] || ''
+      render_for_text(icon)
+    end
+  end
 end
 
+Liquid::Template.register_tag('icon_var', Jekyll::IconTagVar)
 Liquid::Template.register_tag('icon', Jekyll::IconTag)
