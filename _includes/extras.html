@@ -1,0 +1,61 @@
+<li class="nav-item dropdown">
+    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Extras">
+        {% icon help %} Extras
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+
+        {% assign thispage = page.url | replace: '.html', '.md' %}
+        <a class="dropdown-item" href="{{ site.github_repository }}{% unless thispage == '/' %}/edit/{{ site.github_repository_branch }}{{ thispage }}{% endunless %}" title="Edit on GitHub">
+          {% icon github %} Edit on GitHub
+        </a>
+
+        <a class="dropdown-item" href="https://plausible.galaxyproject.eu/training.galaxyproject.org?period=12mo&page={{site.baseurl}}{{ page.url }}" title="Show view statistics of this page">
+            {% icon galaxy-barchart %} Page Metrics
+        </a>
+
+        <div class="dropdown-item">
+            <div>
+                {% icon language %} Translate this page
+            </div>
+
+            <div id="lang-selector">
+                {% for lang in site.other_languages %}
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl={{lang[0]}}&u=https%3A%2F%2Ftraining.galaxyproject.org{{page.url}}&edit-text=&act=url">
+                {{lang[1]}}
+                </a>
+                {% endfor %}
+                <a class="btn btn-info" href="https://translate.google.com/translate?hl=jp&sl=en&tl=&u=https%3A%2F%2Ftraining.galaxyproject.org%2Ftopics%2F{{ topic.name }}%2Ftutorials%2F{{ page.tutorial_name }}%2Ftutorial.html&edit-text=&act=url" title="{{ inst[0] }}">
+                And more!
+                </a>
+            </div>
+        </div>
+
+        <div class="dropdown-item">
+            <div>
+                Theme
+            </div>
+
+            <div id="theme-selector" data-toggle="buttons">
+                <label data-value="default" class="btn btn-secondary">
+                    <input type="radio" name="options" id="default" autocomplete="off"> Default
+                </label>
+                <label data-value="night" class="btn btn-secondary">
+                    <input type="radio" name="options" id="night" autocomplete="off"> Night
+                </label>
+                <label data-value="midnight" class="btn btn-secondary">
+                    <input type="radio" name="options" id="midnight" autocomplete="off"> Midnight
+                </label>
+                <label data-value="rainbow" class="btn btn-secondary">
+                    <input type="radio" name="options" id="rainbow" autocomplete="off"> Rainbow
+                </label>
+                <label data-value="halloween" class="btn btn-secondary">
+                    <input type="radio" name="options" id="halloween" autocomplete="off"> 🎃
+                </label>
+                <label data-value="straya" class="btn btn-secondary">
+                    <input type="radio" name="options" id="downunder" autocomplete="off"> 🇦🇺
+                </label>
+            </div>
+
+        </div>
+    </div>
+</li>
