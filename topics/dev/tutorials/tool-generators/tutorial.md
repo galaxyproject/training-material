@@ -8,7 +8,7 @@ key_points:
   - The ToolFactory is a Galaxy tool for programmers and informaticians.
   - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
   - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI
-  - Designed for informaticians who enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time.
+  - Enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time? Try the TooLFactory (once you have a working command line version)
   - A script defines how parameters are read from the command line, allowing some of the ToolFactory's limited flexibility to be overcome.
   - The ToolFactory code generator is limited to relatively simple requirements but these are very common in small scale Galaxy analyses, particularly in new fields where few tools are already available.
   - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly taking considerable experience to master.
@@ -31,20 +31,19 @@ questions:
 time_estimation: 1H
 
 requirements:
- -
-    type: "internal"
+  - type: "internal"
     topic_name: introduction
     tutorials:
       - galaxy-intro-short
       - galaxy-intro-101-everyone
 
-follow_up_training:
- -
-    type: "internal"
+requirements:
+  - type: "internal"
     topic_name: dev
     tutorials:
       - tool-integration
       - interactive-environments
+
 contributors:
   - fubar2
 
@@ -532,7 +531,7 @@ can with a local venv described above - but a little slower and isolated in a co
 - You will see a large number of pairs of history items and 4 data files used for testing.
 - Each pair comprises a toolshed ready archive containing a generated tool and a test, and a collection including a Planemo test report, the tool XML and a job log.
 - The archive history object has a circular "redo" button. Click that button and the ToolFactory form that generated the sample tool will appear. You can see how the tool was
-built using the ToolFactory's limited capacities. Most of them are trivial of course. They are meant to be models rather than real examples.
+built using the ToolFactory's limited capacities. Most of them are trivial of course. They are meant to be models rather than useful examples.
 
 ---
 
@@ -567,7 +566,7 @@ In practice, it's a flexible basis for generating many simple tools.
 > - Use the Redo button on the toolshed archive history item to recreate the ToolFactory form that generated the last version
 > - Make changes and generate an updated version
 > - Rinse, repeat...
-> - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying.
+> - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not satisfying in Galaxy. Use the command line for that.
 >
 >> ![](../../images/ToolFactory_big_picture.png)
 {: .details}
@@ -581,7 +580,9 @@ In practice, it's a flexible basis for generating many simple tools.
 - Demonstration tools often capture output from a bash script using the special STDOUT designation for output files
 - This can save sending the output path as a parameter to the script or executable
 - STDIN is also available as a special designation for history inputs if the script takes input from STDIN when it runs.
-- The option `Tool reads selected input file from STDIN and writes STDOUT with no parameters` in the parameter passing model selection list will generate a simple filter tool, executing a script or Conda dependency with input on STDIN and output on STDOUT for those rare situations where that's all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.
+- The option `Tool reads selected input file from STDIN and writes STDOUT with no parameters` in the parameter passing model
+selection list will generate a simple filter tool, executing a script or Conda dependency with input on STDIN and output on STDOUT
+for those rare situations where that's all you need. No i/o or other parameters for the user to set. Used in the tacrev demonstration tool.
 
 #### Repeats in the ToolFactory form permit any number of parameters.
 
