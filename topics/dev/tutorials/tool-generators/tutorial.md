@@ -214,8 +214,8 @@ back into the Galaxy server specified.
 > <version_command><![CDATA[echo "0.01"]]></version_command>
 > <command><![CDATA[bash
 > $runme
-> ">$sayhelloto"
-> $Hello_output]]></command>
+> "$sayhelloto" > $Hello_output]]>
+> </command>
 >  <configfiles>
 >    <configfile name="runme"><![CDATA[
 > echo "Hello $1"
@@ -282,8 +282,7 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 
 
 > ### {% icon warning %} Note on scope
-> - The ToolFactory in Galaxy is much slower and more clumsy than the u command line when preparing and debugging a script to run correctly.
-> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy IDE for debugging scripts. More than a minute per cycle. `planemo test` is run twice, building and tearing down a Galaxy each time.
+> - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
 > - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 > - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
 {: .warning}
