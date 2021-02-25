@@ -259,7 +259,7 @@ Its input can include not only the alignments of raw reads used by other transcr
 > ### {% icon hands_on %} Hands-on: Transcript assembly with StringTie
 >
 > 1. **StringTie** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input mapped reads"*: `FASTQ_ProB_22LIST.BAM`
+>    - {% icon param-file %} *"Input mapped reads"*: `HISAT_Output.BAM`
 >    - {% icon param-select %} *"Specify strand information"*: `Unstranded`
 >    - {% icon param-select %} *"Use a reference file to guide assembly?"*: `Use Reference GTF/GFF3`
 >      - {% icon param-select %} *"Reference file"*: `Use file from History`
@@ -432,7 +432,7 @@ along with the UniProt and cRAP databases.
 >      - {% icon param-text %} *"Replacement"*: `.\1`
 >    - {% icon param-repeat %} **Insert Check**
 >      - {% icon param-text %} *"Find Regex"*: `^(ENS[^ |]*)\s*`
->      - {% icon param-text %} *"Replacement"*: `generic\1`
+>      - {% icon param-text %} *"Replacement"*: `generic|\1`
 >
 > 2. **Tabular-to-FASTA** {% icon tool %} with the following parameters:
 >    - *"Title column"*: `1`
@@ -609,7 +609,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
 >     - {% icon param-text %} *"enter column number to replace"*: `1`
 >     - {% icon param-text %} *"regex pattern"*: `^([^ |]+).*$`
->     - {% icon param-text %} *"replacement expression"*: `1`
+>     - {% icon param-text %} *"replacement expression"*: `\1`
 >
 > 3. **FASTA-to-Tabular** {% icon tool %}: with the default parameters
 >    - {% icon param-file %} *"Convert these sequences"*: `Trimmed_ref_5000_uniprot_cRAP.fasta (fasta)`
@@ -621,7 +621,7 @@ Generate a list of Reference Proteins. Identify peptides that are contained in t
 >   - {% icon param-text %} *"Filter by"*: `regex replace value in column`
 >     - {% icon param-text %} *"enter column number to replace"*: `1`
 >     - {% icon param-text %} *"regex pattern"*: `^[^|]+[|]([^| ]+).*$`
->     - {% icon param-text %} *"replacement expression"*: `1`
+>     - {% icon param-text %} *"replacement expression"*: `\1`
 >
 > 5. **Concatenate multiple datasets** {% icon tool %} with the following parameters:
 >   - {% icon param-files %} *"Concatenate Datasets"*: Select the output from the previous 2 "Filter Tabular" outputs.
