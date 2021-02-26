@@ -93,13 +93,13 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.
 
 > ### {% icon hands_on %} Hands-on: Upload SNPs and Exons
-> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
+> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
 >
 >    ![upload button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
->    ![filebox](../../images/upload-box.png){:width="500px"}
+>    ![filebox](../../images/upload-box.png)
 >
 > 2. Click **Paste/Fetch data** and paste in the following URLs in the box that appears.
 >
@@ -119,6 +119,11 @@ First we need to get some data into our history. You can upload files from your 
 For this tutorial, we made the input datasets available on Zenodo for you. However, these datasets can also obtained directly from UCSC, without leaving Galaxy.
 Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.
 
+> ### {% icon comment %} Comments
+> In order to get the datasets from the UCSC server, you need to have an account in the [useGalaxy.org](https://usegalaxy.org/) instance.
+{: .comment}
+
+    
 > ### {% icon tip %} Optional: Obtaining the Data directly from UCSC
 >
 > This tool works a bit differently than most Galaxy tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:
@@ -161,6 +166,8 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 > >     >
 > >     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
+> >     >
+> >     > You might need to login to Galaxy again.
 > >     {: .comment}
 > >
 > > 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
@@ -191,7 +198,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >
 > >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
 > >
-> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 153, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 > >
 > > 2. Click on the **get output** button to find a form similar to this:
 > >
@@ -261,13 +268,13 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
 > > ### {% icon solution %} Solution
-> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common dbSNPs(153)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
 > >
 > > Gene | Occurences
 > > ---- | ----------
-> > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 24
-> > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 24
-> > `ENST00000343518.10_cds_0_0_chr22_15690078_f` | 40
+> > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 2
+> > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 2
+> > `ENST00000343518.11_cds_0_0_chr22_15690078_f` | 4
 > {: .solution}
 {: .question}
 
@@ -299,7 +306,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 > > ### {% icon solution %} Solution
-> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4.242 lines, which is equal to the number of exons.
 > >
 > {: .solution }
 {: .question}
@@ -333,7 +340,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 > Which exon has the highest number of SNPs in your file?
 >
 > > ### {% icon solution %} Solution
-> > When this tutorial was last updated, `ENST00000343518.10_cds_0_0_chr22_15690078_f` had 40 SNPs.
+> > When this tutorial was last updated, `ENST00000253255.7_cds_0_0_chr22_46256561_r` had 27 SNPs.
 > > Keep in mind this may depend on your settings when getting the data from UCSC.
 > {: .solution}
 {: .question}
@@ -353,7 +360,6 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 > 3. Examine the output file, this should contain only the first 5 lines of the previous dataset.
 >
->    ![Contents of the `Select first` output dataset](../../images/101_first_5.png)
 {: .hands_on}
 
 ## Recovering exon info
@@ -367,7 +373,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 >    - *"Compare"*: `Exons`
 >    - *"Using column"*: `Column: 4`
 >    - *"against"*: the output from **Select first** {% icon tool %}
->    - *"Using column"*: `Column: 1`
+>    - *"and column"*: `Column: 1`
 >    - *"to find"*: `Matching rows of 1st dataset`
 >
 > 2. Click **Execute**
@@ -436,9 +442,9 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of interactions`.
->
->    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find those interactions as well.
+> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of features`.
+> 
+> While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
 >
 >    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
@@ -516,7 +522,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 3. Click **Analyze Data** at the top to return to the main analysis window
 >
-> 4. {% tool [Upload](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
+> 4. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >
 >    ```
 >    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
@@ -558,6 +564,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >    The central panel will change to allow you to configure and launch the workflow.
 >
 > 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+>    - Select `Expand to full workflow form`
 >    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
 >    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
 >
