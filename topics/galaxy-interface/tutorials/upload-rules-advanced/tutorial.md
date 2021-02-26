@@ -187,12 +187,12 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >   >
 >   > Another way to do this is to open the JSON Editor, by clicking the wrench icon {% icon tool %} to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error. 
 > {: .comment}
-
+>
 > If you don't see the rule set we used in the last  exercise anymore, here is the JSON that you can paste directly into the JSON Editor:
 > ```json
 > {"rules":[{"type":"add_filter_count","count":"1","which":"first","invert":false},{"type":"remove_columns","target_columns":[1,2,4,5,6]},{"type":"sort","target_column":0,"numeric":false},{"type":"add_column_regex","target_column":0,"expression":".*","replacement":"http://www.uniprot.org/uniprot/\\0.fasta"}],"mapping":[{"type":"info","columns":[1]},{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[2]}],"extension":"csfasta"}
 > ```
-
+>
 >
 >    This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
 >
