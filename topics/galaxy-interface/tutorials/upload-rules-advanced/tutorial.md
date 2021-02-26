@@ -178,14 +178,14 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
 >    E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
 >
-> 2. Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the **history icon** (the clock with the arrow around it). Clicking this will drop down a list of the 10 most recent rule sets you've used. Select the most recent one to reuse the rules from the last exercise.  
+> 2. Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the history icon {% icon galaxy-rulebuilder-history %}. Clicking this will drop down a list of the 10 most recent rule sets you've used. Select the most recent one to reuse the rules from the last exercise.  
 >
 >    You should now see the rules you created in the last example.
 >    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
 >
 >   > ### {% icon comment %} JSON Editor
 >   >
->   > Another way to do this is to click the **wrench icon** to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error. 
+>   > Another way to do this is to open the JSON Editor, by clicking the wrench icon {% icon tool %} to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error. 
 > {: .comment}
 
 > If you don't see the rule set we used in the last  exercise anymore, here is the JSON that you can paste directly into the JSON Editor:
