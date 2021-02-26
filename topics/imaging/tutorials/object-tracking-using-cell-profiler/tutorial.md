@@ -13,7 +13,7 @@ objectives:
 - They are single sentences describing what a learner should be able to do once they
   have completed the tutorial
 - You can use Bloom's Taxonomy to write effective learning objectives
-time_estimation: 3H
+time_estimation: 1H
 key_points:
 - The take-home messages
 - They will appear at the end of the tutorial
@@ -52,6 +52,15 @@ tutorial.
 **Please follow our
 [tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
 
+
+***TODO***: Explain the biology
+
+***TODO***: Explain object tracking
+
+***TODO***: Explain the dataset (Drosophila embryos) from [CellProfiler examples](https://cellprofiler.org/examples). We can insert here a few of the images so that the 'movement' is shown.
+
+
+
 > ### Agenda
 >
 > In this tutorial, we will cover:
@@ -61,11 +70,13 @@ tutorial.
 >
 {: .agenda}
 
-# Title for your first section
+# CellProfiler in Galaxy
 
 Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
 so make sure to explain all the relevant concepts.
+
+***TODO***: Maybe here we can say that CP in Galaxy has some minor changes compared to the UI. Or maybe not, not sure about this section.
 
 ## Title for a subsection
 Section and subsection titles will be displayed in the tutorial index on the left side of
@@ -76,11 +87,6 @@ Below are a series of hand-on boxes, one for each tool in your workflow file.
 Often you may wish to combine several boxes into one or make other adjustments such
 as breaking the tutorial into sections, we encourage you to make such changes as you
 see fit, this is just a starting point :)
-
-Anywhere you find the word "***TODO***", there is something that needs to be changed
-depending on the specifics of your tutorial.
-
-have fun!
 
 ## Get data
 
@@ -94,25 +100,18 @@ have fun!
 >    ```
 >    https://zenodo.org/api/files/e5d1bd5c-60a0-42e4-8f0d-a2ebc863c5d9/drosophila_sample.zip
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
 {: .hands_on}
 
-# Title of the section usually corresponding to a big step in the analysis
+
+***TODO***: We have a zip in zenodo, need to use the tool unzip to get all the images into a collection. 
+
+
+
+# Option 1: Create your CellProfiler pipeline in Galaxy
 
 It comes first a description of the step: some background and some theory.
 Some image can be added there to support the theory explanation:
@@ -524,8 +523,6 @@ A big step can have several subsections or sub steps:
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
 > ### {% icon question %} Questions
 >
 > 1. Question1?
@@ -541,12 +538,42 @@ A big step can have several subsections or sub steps:
 {: .question}
 
 
-## Re-arrange
+# Option 2: Upload your CellProfiler pipeline and run it in Galaxy
+
+## Sub-step 1
+
+***TODO***: How to upload a pipeline file (take the snippet upload data sas example) and call it `uploaded_pipeline`.
+
+## Sub-step with **CellProfiler**
+
+> ### {% icon hands_on %} Hands-on: Task description
+>
+> 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9) %} with the following parameters:
+>    - {% icon param-file %} *"Pipeline file"*: `uploaded_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
+>    - *"Are the input images packed into a tar archive?"*: `No`
+>        - {% icon param-collection %} *"Images"*: `output` (Input dataset collection)
+>    - *"Detailed logging file?"*: `Yes`
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
+
+
+# Re-arrange
 
 To create the template, each step of the workflow had its own subsection.
 
 ***TODO***: *Re-arrange the generated subsections into sections or other subsections.
 Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+
+
 
 # Conclusion
 {:.no_toc}
