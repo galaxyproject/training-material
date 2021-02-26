@@ -97,7 +97,7 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >
 > 1. Create a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the files from the Zenodo link provided.
 >
@@ -105,13 +105,13 @@ The 7CEL [PDB](https://files.rcsb.org/download/7CEL.pdb) does not include a comp
 >    https://zenodo.org/record/2600690
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets.
 > 4. Check that the datatype is correct. The file should have the PDB datatype.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

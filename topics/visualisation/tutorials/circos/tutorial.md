@@ -2,7 +2,7 @@
 layout: tutorial_hands_on
 
 title: "Visualisation with Circos"
-zenodo_link: "https://zenodo.org/record/3603221"
+zenodo_link: "https://zenodo.org/record/4494146"
 questions:
   - "What can the Circos Galaxy tool be used for?"
   - "How can I visualise common genomic datasets using Circos?"
@@ -16,6 +16,7 @@ key_points:
 contributors:
   - shiltemann
   - hexylena
+  - gallardoalba
 ---
 
 # Introduction
@@ -248,22 +249,21 @@ In this section we will reproduce this Circos plot step by step.
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. {% tool [Import Data](upload1) %}
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3603221/files/VCaP_Copy-Number.tsv
->    https://zenodo.org/record/3603221/files/VCaP_B-allele-Frequency.tsv
->    https://zenodo.org/record/3603221/files/VCaP-highConfidenceJunctions.tsv
->    https://zenodo.org/record/3603221/files/hg18_karyotype_bands.tsv
->    https://zenodo.org/record/3603221/files/hg18_karyotype.txt
+>    https://zenodo.org/record/4494146/files/VCaP_Copy-Number.tsv
+>    https://zenodo.org/record/4494146/files/VCaP_B-allele-Frequency.tsv
+>    https://zenodo.org/record/4494146/files/VCaP-highConfidenceJunctions.tsv
+>    https://zenodo.org/record/4494146/files/hg18_karyotype_withbands.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -272,30 +272,25 @@ In this section we will reproduce this Circos plot step by step.
 
 As the first step to this Circos plot, let's configure the ideogram (set of chromosomes to draw). You can use one of the built-in genomes, or you can supply your own karyotype file.
 
-
-
-
-
 > ### {% icon hands_on %} Hands-on: Set ideogram configuration
 >
-> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a ciruclar layout with the following parameters:
+> 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} visualizes data in a circular layout with the following parameters:
 >    - In *"Karyotype"*:
->        - *"Reference Genome"*: `Karyotype`
->            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype.tsv`
+>        - *"Reference Genome Source"*: `Custom Karyotype`
+>            - {% icon param-file %} *"Karyotype Configuration"*: `hg18_karyotype_withbands.txt`
 >    - In *"Ideogram"*:
+         - *"Spacing Spacing Between Ideograms (in chromosome units)"*: `50`
 >        - *"Radius"*: `0.85`
 >        - *"Thickness"*: `45`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `64`
 >        - In *"Cytogenic Bands"*:
->            - {% icon param-file %} *"Cytogenic Bands"*: `hg18_karyotype_bands.tsv`
->            - *"Convert bands from BED format to circos karyotype band format"*: `No`
->            - *"Fill Bands"*: `2`
+>            - *"Bands transparency"*: `2`
 >            - *"Band Stroke Thickness"*: `1`
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot ideogram`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md name="Circos Plot ideogram" %}
 >
 {: .hands_on}
 
@@ -420,6 +415,12 @@ So in order to convert this to Circos format, we need to
 - Remove header lines (lines starting with `#`)
 - Select the columns containing the chromosomes and positions of the breaks (junctions)
 
+
+> ### {% icon warning %} Beware of **Cut**s
+> The Hands-on section below uses **Cut** tool. There are two **cut** tools in Galaxy due to historical reasons. This example uses tool with the full name **Cut columns from a table** (without `(cut)`). The difference is that this version allows cutting columns in any order and with repetitions. 
+{: .warning}
+
+
 > ### {% icon hands_on %} Hands-on: Prepare input data
 >
 > 1. {% tool [Select](Grep1) %} lines that match an expression with the following parameters:
@@ -427,7 +428,7 @@ So in order to convert this to Circos format, we need to
 >    - *"that"*: `NOT Matching`
 >    - *"the pattern"*: `^[#><]`
 >
-> 2. **Cut** columns from a table {% icon tool %} with the following parameters:
+> 2. {% tool [Cut](Cut1) %} columns from a table with the following parameters:
 >    - *"Cut columns"*: `c2,c3,c3,c6,c7,c7`
 >    - {% icon param-file %} *"From"*: output of **Select** {% icon tool %}
 >
@@ -460,8 +461,8 @@ Given that Circos is a very complex with dozens of parameters to set, we re-run 
 >                                   - *"Condition"*: `Interchromosomal`
 >                           - In *"Actions to Apply"*:
 >                               - {% icon param-repeat %} *"Insert Actions to Apply"*
->                                   - *"Action"*: `Change Link Colour`
->                                   - *"Link Color"*: {% color_picker #ff0000 %} (red)
+>                                   - *"Action"*: `Change Fill Colour`
+>                                   - *"Change fill Color"*: {% color_picker #ff0000 %} (red)
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot SVs`
 >
@@ -497,6 +498,7 @@ We see from this image that chromosome 5 has an unusually large number of SVs, l
 > 2. **Change** the following tool parameters:
 >    - In *"Ideogram"*:
 >       - *"Limit/Filter Chromosomes"*: `chr5`
+>       - *"Spacing Between Ideograms (in chromosome units)"*: `0.5`
 >
 {: .hands_on}
 
@@ -640,7 +642,7 @@ Now that our file is prepared, we can add a track to our Circos image. We will c
 >                - *"Scatter Plot Data Source"*: `cnv-circos.txt`
 >                - In *"Plot Format Specific Options"*:
 >                    - *"Glyph Size"*: `4`
->                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                    - *"Fill Color"*: {% color_picker #7f7f7f %} (gray)
 >                    - *"Stroke Thickness"*: `0`
 >            - *"Minimum / maximum options"*: `Supply min/max values`
 >                - *"Minimum value"*: `-1.0`
@@ -693,7 +695,7 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >        - {% icon param-repeat %} *"Insert Rule"*
 >            - In *"Conditions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                    - *"Condition"*: `Apply based on point value`
+>                    - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
 >                        - *"Points above this value"*: `0.15`
 >            - In *"Actions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Actions to Apply"*
@@ -702,7 +704,7 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >        - {% icon param-repeat %} *"Insert Rule"*
 >            - In *"Conditions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                    - *"Condition"*: `Apply based on point value`
+>                    - *"Condition"*: `Based on value (ONLY for scatter/histogram/heatmap/line)`
 >                       - *"Points below this value"*: `-0.15`
 >            - In *"Actions to Apply"*:
 >                - {% icon param-repeat %} *"Insert Actions to Apply"*
@@ -710,6 +712,10 @@ Now that we are happy with the placement of our track, let's tweak it a bit more
 >                        - *"Fill Color"*: {% color_picker #ff0000 %} (red)
 >
 {: .hands_on}
+
+You should now see a plot like this:
+
+![Circos plot with SNV track with rules defined](../../images/circos/cancer-cnv-full.png){: width="75%"}
 
 Sometimes it can also be nice to see the axes of the plot, to more accurately judge the values of the different data points.
 We can do this as follows:
@@ -722,19 +728,18 @@ We can do this as follows:
 >    - In *"Axes"*:
 >        - In *"Axis"*:
 >            - {% icon param-repeat %} *"Insert Axis"*
->                - *"Inside Radius"*: `-1`
->                - *"Outside Radius"*: `1`
->                - *"Color"*: {% color_picker #7f7f7f %} (gray)
 >                - *"Spacing"*: `0.25`
->
+>                - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                - *"y0"*: -1
+>                - *"y1"*: 1
 > 3. **Rename** {% icon galaxy-pencil%} the output `Circos Plot CopyNumber`
 >
 {: .hands_on}
 
 
-You should now see a plot like this:
+You should now see a plot with axes:
 
-![Circos plot with SNV track with rules and axes defined](../../images/circos/cancer-cnv-full.png){: width="75%"}
+![Circos plot with SNV track with rules and axes defined](../../images/circos/cancer-cnv-full-axes.png){: width="75%"}
 
 <!-- TODO: update image when axes are fixed (should be able to go to -1) -->
 
@@ -790,11 +795,11 @@ We will make another scatterplot, so our data should be in the same format as th
 >
 > 1. {% tool [Remove beginning](Remove+beginning1) %} with the following parameters:
 >    - *"Remove first"*: `1`
->    - {% icon param-file %} *"from"*: `B-allele frequence.tsv`
+>    - {% icon param-file %} *"from"*: `VCaP_B-allele frequence.tsv`
 >
 > 2. {% tool [Select random lines](random_lines1) %} with the following parameters:
 >    - *"Randomly select"*: `25000`
->    - {% icon param-file %} *"from"*: output of **Select** {% icon tool %}
+>    - {% icon param-file %} *"from"*: output of **Remove** {% icon tool %}
 >    - *"Set a random seed"*: `Don't set seed`
 >
 > 3. **Rename** {% icon galaxy-pencil %} this file to `baf-circos.tsv`
@@ -816,7 +821,7 @@ Now are data is ready to be plotted in Circos. We will plot this track directly 
 >                - {% icon param-file %} *"Scatter Plot Data Source"*: `baf-circos.tsv` (output of **Select random lines** {% icon tool %})
 >                - In *"Plot Format Specific Options"*:
 >                    - *"Glyph Size"*: `4`
->                    - *"Color"*: {% color_picker #7f7f7f %} (gray)
+>                    - *"Fill Color"*: {% color_picker #7f7f7f %} (gray)
 >                    - *"Stroke Thickness"*: `0`
 >            - *"Minimum / maximum options"*: `Supply min/max values`
 >                - *"Minimum value"*: `0.0`
@@ -871,7 +876,7 @@ There is a parameter of the link track type called *Bezier*, which controls how 
 
 > ### {% icon hands_on %} Hands-on: Change Bezier radius
 >
-> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot CopyNumber`)
+> 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot BAF`)
 >
 > 2. Change the Bezier parameter of the SV track:
 >    - In *"Link Tracks"*:
@@ -981,20 +986,20 @@ First, let's get the data we need for this plot:
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. **Import Data.**
 >    - Import the sample data files to your history, either from a shared data library (if available), or from Zenodo using the following URLs:
 >
 >    ```
->    https://zenodo.org/record/3603221/files/debate_karyotype.txt
->    https://zenodo.org/record/3603221/files/debate_links.tab
->    https://zenodo.org/record/3603221/files/debate_slices.tab
+>    https://zenodo.org/record/4494146/files/debate_karyotype.txt
+>    https://zenodo.org/record/4494146/files/debate_links.tab
+>    https://zenodo.org/record/4494146/files/debate_slices.tab
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -1024,15 +1029,17 @@ Let's start by creating the ideogram for our plot:
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
 >    - In *"Karyotype"*:
->        - *"Reference Genome"*: `Karyotype`
+>        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `debate_karyotype.tab`
 >    - In *"Ideogram"*:
+         - *"Chromosome units"*: `bases`
+         - *"Spacing Between Ideograms (in chromosome units)"*: `20`
 >        - In *"Labels"*:
 >            - *"Label Font Size"*: `40`
 >
 > 2. **Rename** {% icon galaxy-pencil%} the output `Circos Plot karyotype`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
@@ -1067,22 +1074,24 @@ Now, let's use this file to create our highlights track
 > 1. Hit **Rerun** {% icon galaxy-refresh %} on the previous Circos {% icon tool %} run (`Circos Plot karyotype`)
 >
 > 2. Add highlights to the ideogram:
->    - In "Highlights":
->        - {% icon param-repeat %} Insert Highlight:
+>    - In "2D Data Tracks":
+>        - In "2D Data Plots":
 >            - *"Outside Radius"*: `1`
 >            - *"Inside Radius"*: `0.9`
+>            - *"Plot Type"*: `Highlight`
 >            - {% icon param-file %} *"Highlight Data Source"*: `debate_slices.tab`
->            - *"Fill Color"*: {% color_picker #d99696 %} (light red)
->            - In "Rules":
->                - {% icon param-repeat %} Insert Rule
->                    - In *"Conditions to Apply"*:
->                        - {% icon param-repeat %} *"Insert Conditions to Apply"*
->                            - *"Condition"*: `Check for presence/absence per chromosome`
->                            - *"Contig IDs"*: `obama|richardson|clinton`
->                    - In *"Actions to Apply"*:
->                        - {% icon param-repeat %} *"Insert Actions to Apply"*
->                            - *"Action"*: `Change Fill Color for all points`
->                            - *"Fill Color"*: {% color_picker #548dd4 %} (light blue)
+>            - In "Plot Format Specific Options":
+>                - *"Fill Color"*: {% color_picker #d99696 %} (light red)
+>        - In "Rules":
+>            - {% icon param-repeat %} Insert Rule
+>                - In *"Conditions to Apply"*:
+>                    - {% icon param-repeat %} *"Insert Conditions to Apply"*
+>                        - *"Condition"*: `Check for presence/absence per chromosome`
+>                        - *"Contig IDs"*: `obama|richardson|clinton`
+>                - In *"Actions to Apply"*:
+>                    - {% icon param-repeat %} *"Insert Actions to Apply"*
+>                        - *"Action"*: `Change Fill Color for all points`
+>                        - *"Fill Color"*: {% color_picker #548dd4 %} (light blue)
 >
 > 3. **Rename** {% icon galaxy-pencil%} the output `Circos Plot highlights`
 >
@@ -1182,18 +1191,18 @@ The Circos Galaxy tool mostly accepts `tabular` files. These always have at leas
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the files from Zenodo or from the shared data library
 >
 >    ```
->    https://zenodo.org/record/3603221/files/chrom.tab
->    https://zenodo.org/record/3603221/files/highlights.tab
+>    https://zenodo.org/record/4494146/files/chrom.tab
+>    https://zenodo.org/record/4494146/files/highlights.tab
 >    ```
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype is `tabular` for both files
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -1210,26 +1219,28 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 >
 > 1. {% tool [Circos](toolshed.g2.bx.psu.edu/repos/iuc/circos/circos/0.69.8+galaxy7) %} with the following parameters:
 >    - In *"Karyotype"*:
->        - *"Reference Genome"*: `Karyotype`
+>        - *"Reference Genome Source"*: `Custom Karyotype`
 >            - {% icon param-file %} *"Karyotype Configuration"*: `chrom.tab`
->    - In *"General"*:
->        - *"Plot Background"*: `Solid Color`
->            - *"Background Color"*: {% color_picker #000000 %}
 >    - In *"Ideogram"*:
 >        - *"Thickness"*: `0.0`
 >        - In *"Labels"*:
 >            - *"Show Label"*: `Yes`
->    - In *"Highlights"*:
->        - In *"Highlight"*:
->            - Click on *"Insert Highlight"*:
->            - In *"1: Highlight"*:
+>    - In *"General"*:
+>        - *"Plot Background"*: `Solid Color`
+>            - *"Background Color"*: {% color_picker #000000 %}
+>    - In *"2D Tracks"*:
+>        - In *"2D Data Plot"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - In *"1: 2D Data Plot
 >                - *"Outside Radius"*: `0.99`
 >                - *"Inside Radius"*: `0.9`
+>                - *"Plot Type"*: `Highlight`
 >                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
->            - Click on *"Insert Highlight"*:
->            - In *"2: Highlight"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - In *"2: 2D Data Plot
 >                - *"Outside Radius"*: `0.89`
 >                - *"Inside Radius"*: `0.8`
+>                - *"Plot Type"*: `Highlight`
 >                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:
@@ -1259,10 +1270,11 @@ We will now create the plot all at once. Normally, this would be a more iterativ
 >                                    - *"Action"*: `Change Fill Color for all points`
 >                                        - *"Fill Color"*: {% color_picker #ffff00 %} (yellow)
 >                            - *"Continue flow"*: `Yes`
->            - Click on *"Insert Highlight"*:
->            - In *"3: Highlight"*:
+>            - {% icon param-repeat %} *"Insert 2D Data Plot"*
+>            - In *"3: 2D Data Plot
 >                - *"Outside Radius"*: `0.79`
 >                - *"Inside Radius"*: `0.7`
+>                - *"Plot Type"*: `Highlight`
 >                - {% icon param-file %} *"Highlight Data Source"*: `highlights.tab`
 >                - In *"Rules"*:
 >                    - In *"Rule"*:

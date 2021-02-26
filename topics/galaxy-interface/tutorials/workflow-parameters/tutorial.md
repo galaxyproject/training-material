@@ -13,7 +13,7 @@ questions:
 - How can I read Parameters from Datasets
 objectives:
 - Learn how to use Workflow Parameters to improve your Workflows
-time_estimation: "10m"
+time_estimation: "30m"
 key_points:
 - Use Workflow Parameters to make your Workflows more versatile
 contributors:
@@ -73,7 +73,7 @@ that allows the user to set this parameter when running the workflow.
 >
 > 1. Open the **workflow editor**
 >
->    {% include snippets/edit_workflow.md %}
+>    {% snippet snippets/edit_workflow.md %}
 >
 > 2. Click the **Select first** {% icon tool %} tool in your workflow
 > 3. Find the **Number of lines** parameter in the right hand panel.
@@ -92,7 +92,7 @@ that allows the user to set this parameter when running the workflow.
 >
 > 10. Run your workflow
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 >    Notice the new input that can be changed before the workflow is run
 {: .hands_on }
@@ -117,19 +117,19 @@ compose this text parameter using the `Compose text parameter value` tool.
 > ### {% icon hands_on %} Hands-on: Compose a text parameter
 > 1. Create a new workflow
 >
->    {% include snippets/create_new_workflow.md %}
+>    {% snippet snippets/create_new_workflow.md %}
 >
 > 1. Add an Inputs → **Input Dataset** to the workflow
 > 2. Add an Inputs → **Simple inputs used for workflow logic** to the workflow
 >    - {% icon param-select %} *"Parameter type"*: `Text`
 > 3. Add **Compose text parameter value** {% icon tool %} to the workflow
->     - Add two more repeats, you will need three "Repeat" blocks in total.
->     - In the first repeat:
+>     - Add two more "Components" using the "Insert components" button in the workflow editor tool form on the right of the screen. You will need three "Component" blocks in total.
+>     - In the first component:
 >       - *"Enter text that should be part of the computed value"*: `/(`
->     - In the second repeat:
+>     - In the second component:
 >       - *"Enter text that should be part of the computed value"*: Leave empty and click "Add connection to module" {% icon galaxy-wf-connection %}
 >       - Connect the output of the **Input parameter** {% icon tool %} to this new input
->     - In the third repeat:
+>     - In the third component:
 >       - *"Enter text that should be part of the computed value"*: `)/`
 >
 > 4. Add the **Regex Find And Replace** {% icon tool %} to the workflow
@@ -154,7 +154,7 @@ You've now built a workflow with a parameterised input! It's time to test it out
 >
 >      This is the value that will be looked for in your input dataset.
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > 3. Examine the outputs
 {: .hands_on }
@@ -215,7 +215,7 @@ With this you're ready to run the workflow!
 >
 >    - *"Input dataset"*: the table you have just uploaded
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > 3. Examine the outputs
 {: .hands_on }

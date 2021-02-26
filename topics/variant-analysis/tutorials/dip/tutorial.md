@@ -160,7 +160,7 @@ Yet for a quick tutorial these datasets are way too big, so we created a [downsa
 >
 > 1. Create a new history for this variant calling exercise
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the files named `GIAB-Ashkenazim-Trio.txt` (tabular format) and `GIAB-Ashkenazim-Trio-hg19` (BAM format) from [Zenodo](https://doi.org/10.5281/zenodo.60520) or a data library:
 > 3. Specify the used genome for mapping:

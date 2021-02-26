@@ -65,7 +65,7 @@ The second method works at any step during the analysis.
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Open the Galaxy Upload Manager ({% icon galaxy-upload %} on the top-right of the tool panel)
 > 3. Click on **Rule-based** on the top
@@ -104,7 +104,7 @@ The second method works at any step during the analysis.
 >      - *"Group Tags"*: Columns C and D
 >    - Click **Apply**
 >    - Enter a name for the new collection
->    - Click **Build**
+>    - Click **Upload**
 >
 > 8. Expand the generated collection and the files in it and check their names and tags
 >
@@ -130,7 +130,7 @@ We now want to add group tags using the "Tag elements from file" tool.
 >    https://zenodo.org/record/1185122/files/GSM461182_untreat_single.counts
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 3. Click on the {% icon galaxy-selector %} icon (**Operations on multiple datasets**)
 > 4. Check all new datasets
@@ -156,7 +156,7 @@ We will do the latter.
 >
 > 3. Change the datatype to `tabular`
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet snippets/change_datatype.md datatype="tabular" %}
 >
 > 4. **Tag elements from file** {% icon tool %}
 >      - {% icon param-collection %} *"Input Collection"*: created collection

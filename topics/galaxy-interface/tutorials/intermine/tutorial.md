@@ -77,12 +77,12 @@ You have now exported your query results from InterMine to Galaxy.
 >    https://zenodo.org/record/3407174/files/GenesLocatedOnChromosome4.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 2. Rename the dataset to `GenesLocatedOnChromosome4`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 3. Inspect the data
 >
