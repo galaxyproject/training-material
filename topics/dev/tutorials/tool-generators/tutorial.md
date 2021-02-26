@@ -139,16 +139,17 @@ quickly *inside* Galaxy using a Galaxy tool.
 ## A working example: Generating and exploring a basic `Hello World!` tool generated using the ToolFactory
 {: .no_toc}
 
-- The ToolFactory can easily generate the ubiquitous `Hello World!` as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
-the tool can write the combined string to a new history item. Trivial, but surprisingly useful as a model for more complex Galaxy tools so worth studying in detail.
-- It is implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line.
-- Surprisingly useful as a model for many Galaxy tools with an extra parameter or two, as discussed below.
-- Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
-    - Apologies for the poor quality - will try to make a shorter one.
-- The ToolFactory form collects all the information needed for a new Galaxy tool. It is long and complex as a result.
-- Much of what is collected is used to construct a command line for the script when the generated tool runs.
-- Other information such as the name and dependencies are needed to construct the relevant sections of the generated XML file in the toolshed archive.
-- The ToolFactory form configured to generate the `Hello` example can be viewed here.
+The ToolFactory can easily generate the ubiquitous `Hello World!` as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
+the tool can write the combined string to a new history item. Trivial, but surprisingly useful as a model for more complex Galaxy tools so worth studying in detail. It is
+implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line. This is surprisingly
+useful as a model for many Galaxy tools with an extra parameter or two, as discussed below.
+
+Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
+(Apologies for the poor quality - will try to make a shorter one.)
+
+The form collects all the information needed for a new Galaxy tool. It is long and complex as a result. Much of what is collected is used to construct
+a command line for the script when the generated tool runs. Other information such as the name and dependencies are needed to construct the relevant
+sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
 > ### {% icon details %} ToolFactory form sections from the `Hello World!` demonstration with annotation here
 >>>![](../../images/ToolFactory_hello1form.png)
@@ -260,11 +261,11 @@ back into the Galaxy server specified.
 > When executed, it will be echoed to a new history file called `Hello_output`
 >
 > ![](../../images/toolfactory_hello_demo_form.png)
-{: .details }
+{: .details}
 
-- The form is long and complicated because a new tool requires a lot of information.
+The form is long and complicated because a new tool requires a lot of information as outlined in the expandable box below.
 
-> ### {% icon details %} What information does the ToolFactory need to generate a tool ?
+> ### {% icon comment %} What information does the ToolFactory need to generate a tool ?
 >> In addition to an ID and name, a tool can have:
 >>> - Multiple dependencies - only Conda is currently supported. System utilities can be used assuming the target server exposes them to tools or they can be named as Conda dependencies to ensure they will always be available
 >>> - Argparse (named) or positional (ordered) style parameter passing at tool execution time.
@@ -281,7 +282,7 @@ back into the Galaxy server specified.
 >> - In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters. Great patience would be required.
 >> - That is why manual methods are likely more productive for complicated situations. The ToolFactory works best for simple tools.
 >>
-{: .details }
+{: .comment}
 
 ---
 
@@ -1033,5 +1034,6 @@ planemo tool_factory.
 - If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
 
 
-
+# Acknowledgements
+- Thanks to Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the design and construction of this tutorial.
 
