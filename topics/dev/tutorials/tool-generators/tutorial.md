@@ -136,7 +136,7 @@ quickly *inside* Galaxy using a Galaxy tool.
 
 ---
 
-## A working example: Generating and exploring a basic `Hello World!` tool generated using the ToolFactory
+## A dissected demonstration:`Hello World!` generated using the ToolFactory
 {: .no_toc}
 
 The ToolFactory can easily generate the ubiquitous `Hello World!` as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
@@ -151,7 +151,7 @@ The form collects all the information needed for a new Galaxy tool. It is long a
 a command line for the script when the generated tool runs. Other information such as the name and dependencies are needed to construct the relevant
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
-> ### {% icon details %} ToolFactory form sections from the `Hello World!` demonstration with annotation here
+> ### {% icon details %} ToolFactory form sections with annotation
 >>>![](../../images/ToolFactory_hello1form.png)
 >
 > - **The first part of the form collects the new tool name and dependencies to be installed.**
@@ -190,9 +190,7 @@ back into the Galaxy server specified.
 >
 {: .details }
 
-- The special string `STDOUT` is used as the output file's "position" on the form
-- The new tool will write a new history object with the "Hello ...." string collected from bash's `STDOUT` when the generated tool is run.
-- After running, two new items are created in the history
+Two new items are created in the history when the ToolFactory is executed - the new tool in an archive and a collection with log, XML and a planemo test report.
 
 >### {% icon details %} History items created after a successful run
 >> ![](../../images/toolfactory_outputs_hello.png)
@@ -202,9 +200,13 @@ back into the Galaxy server specified.
 {: .details }
 
 
-- The generated tool XML can be viewed below, with a user view of the generated form, showing how text from the ToolFactory form is included.
+The generated tool XML (found in the collection and also in the archive) and the new tool form are well
+worth some study. Text on the form is all in the XML and it all comes from the ToolFactory form.
 
->### {% icon details %} See generated XML from the `Hello Galaxy Training Network` sample here
+>### {% icon details %} Generated XML
+>
+> ##### Note how text from the form appears in the generated tool XML
+>
 >```xml
 ><tool name="hello_toolshed" id="hello_toolshed" version="0.01">
 >  <!--Source in git at: https://github.com/fubar2/toolfactory-->
@@ -263,26 +265,38 @@ back into the Galaxy server specified.
 > ![](../../images/toolfactory_hello_demo_form.png)
 {: .details}
 
-The form is long and complicated because a new tool requires a lot of information as outlined in the expandable box below.
 
-> ### {% icon comment %} What information does the ToolFactory need to generate a tool ?
->> In addition to an ID and name, a tool can have:
->>> - Multiple dependencies - only Conda is currently supported. System utilities can be used assuming the target server exposes them to tools or they can be named as Conda dependencies to ensure they will always be available
->>> - Argparse (named) or positional (ordered) style parameter passing at tool execution time.
->>> - Unlimited individual input data files to be selected from the user's history. These must be passed on the command line as parameters to the script.
->>> - Unlimited individual output files to be written to the user's history, paths determined at tool execution. These must be passed on the command line as parameters to the script.
->>> - Unlimited additional command line parameters that the user can control on the new tool form. These must be passed on the command line as parameters to the script.
->>> - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
+>### {% icon details %} This seems very confusing. Can't it be simplified?
+>
+> If you are not yet familiar with the basics of Galaxy tools covered in the tool tutorial, this must seem very confusing.
+> It's a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
+> the user must supply valid inputs for the code to be useful.
+>
+> #### What information is needed to generate a tool ?
+>
+>
+>> In addition to an ID and name, a tool may have any combination of elements, and the generator must be assembled the appropriate command line to call the script or executable and collect all the outputs.
+>> Tools can have:
 >>
->>- In order to support the generated tool user in selecting appropriate input datasets from their history, the ToolFactory must collect metadata and text strings for form labels from the ToolFactory user.
->> - These will appear on the generated tool form where the input is to be selected. The same is also true of output files, additional user modifiable parameters and tool citations.
->>
->> - On the ToolFactory form Galaxy form repeats are used to collect as many of some categories as are needed, including inputs, outputs and user parameters.
->> - As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
->> - In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters. Great patience would be required.
->> - That is why manual methods are likely more productive for complicated situations. The ToolFactory works best for simple tools.
->>
-{: .comment}
+>> - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
+>> - Argparse (named) or positional (ordered) style parameter passing at tool execution time.
+>> - Unlimited individual input data files to be selected from the user's history.
+>> - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
+>> - Unlimited additional command line parameters that the user can control on the new tool form.
+>> - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
+>> - Many of these need to appear on the generated tool form, so metadata about command line formatting together with text strings for the form seen by the user are needed.
+>> - Many of these need to appear on the command line for the script being wrapped. Galaxy file paths for the script are only determined at generated tool execution. The generated tool XML contains templating to ensure that these are correct.
+>
+> #### That form still seems too complex
+>
+> The ToolFactory works best for simple tools but even then, the form becomes complicated because tools can have unlimited numbers of some items,
+> including input files, output files, citations and user parameters. Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
+> As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
+> In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
+> Great patience would be required. That is why manual methods are likely more productive for complicated requirements.
+>
+>
+{: .details}
 
 ---
 
@@ -935,11 +949,11 @@ planemo lint $TOOLNAME >> $2
 > >
 > >*What it Does**
 > >
-> >lanemo lint
+> >planemo lint
 > >
 > >-----
 > >
-> >cript::
+> >Script::
 > >
 > >  cp $1 foo.tar
 > >  tar -xvf foo.tar
