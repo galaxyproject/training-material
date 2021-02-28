@@ -79,7 +79,7 @@ This is a Galaxy tutorial based on material from the [COMBINE R RNAseq workshop]
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet snippets/warning_results_may_vary.md %}
 
 # Preparing the reads
 
@@ -136,8 +136,8 @@ In order to get these files into Galaxy, we will want to do a few things:
 >
 > 1. Create a new history for this tutorial e.g. `RNA-seq reads to counts`
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Import the files from Zenodo using Galaxy's Rule-based Uploader.
 >    - Open the Galaxy Upload Manager
@@ -229,7 +229,7 @@ Sequence quality control is therefore an essential first step in your analysis. 
 >    - {% icon param-collection %} *"Short read data from your current history"*: `fastqs` (Input dataset collection)
 > 2. Inspect the `Webpage` output of **FastQC** {% icon tool %} for the `MCL1-DL` sample by clicking on the {% icon galaxy-eye %} (eye) icon
 >
-> {% include snippets/select_collection.md %}
+> {% snippet snippets/select_collection.md %}
 >
 {: .hands_on}
 
@@ -263,7 +263,7 @@ The FastQC report contains a lot of information and we can look at the report fo
 >           - {% icon param-collection %} *"FastQC output"*: `RawData` files (output of **FastQC** {% icon tool %} on trimmed reads)
 > 2. Add a tag `#fastqc-raw` to the `Webpage` output from MultiQC and inspect the webpage
 >
-> {% include snippets/add_tag.md type="name" %}
+> {% snippet snippets/add_tag.md type="name" %}
 >
 {: .hands_on}
 
@@ -487,20 +487,20 @@ We'll use a prepared workflow to run the first few of the QCs below. This will a
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/qc_report.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Import this file as type BED file:
 >    ```
 >    https://sourceforge.net/projects/rseqc/files/BED/Mouse_Mus_musculus/mm10_RefSeq.bed.gz/download
 >    ```
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 3. Run **Workflow QC Report** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Reference genes"*: the imported RefSeq BED file
 >    - {% icon param-collection %} *"2: BAM files"*: `aligned reads (BAM)` (output of **HISAT2** {% icon tool %})
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 > 4. Inspect the `Webpage` output from MultiQC
 {: .hands_on}
 

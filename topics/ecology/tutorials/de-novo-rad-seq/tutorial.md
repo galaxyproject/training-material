@@ -49,7 +49,7 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a **new history** for this RAD-seq exercise. If you are not inspired, you can name it *STACKS RAD: population genomics without reference genome* for example...
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. **EBI SRA** {% icon tool %} with the following parameters:
 >    - Select the Run from the results of the search for `SRR034310` (which will present you 1 Experiment (SRX015877) and 1 Run (SRR034310)).
@@ -62,11 +62,11 @@ We will look at the first run SRR034310 out of seven which includes 16 samples f
 >    https://zenodo.org/record/1134547/files/Details_Barcode_Population_SRR034310.txt
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 4. Make sure your fasta files are of datatype `fastqsanger`
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet snippets/change_datatype.md datatype="fastqsanger" %}
 >
 {: .hands_on}
 
@@ -210,7 +210,7 @@ Run `Stacks: De novo map` Galaxy tool. This program will run ustacks, cstacks, a
 >    sample_GGTT	2
 >    sample_GGCC	2
 >    ```
->    {% include snippets/create_new_file.md %}
+>    {% snippet snippets/create_new_file.md %}
 >
 > 2. **Stacks: De novo map** {% icon tool %}: with the following parameters:
 >    - *"Select your usage"*: `Population`

@@ -94,8 +94,8 @@ First, let's setup our history and initial dataset.
 >
 > 1. Create a new history for this tutorial and name it "RaceID on scRNA"
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Import the file from [Zenodo](https://zenodo.org/record/1511582) or from the shared data library
 >
@@ -103,13 +103,13 @@ First, let's setup our history and initial dataset.
 >    https://zenodo.org/record/1511582/files/intestinalData.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Rename the dataset to *"intestinal"*
 > 4. Check that the datatype is a tab-separated file
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -770,7 +770,7 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 >
 > Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?
 >
-> {% include snippets/use_scratchbook.md %}
+> {% snippet snippets/use_scratchbook.md %}
 >
 >
 > > ### {% icon solution %} Solution

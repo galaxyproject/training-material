@@ -80,7 +80,7 @@ This tool will:
 >
 > 1. Create a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the files from the Zenodo link provided.
 >    ```
@@ -88,16 +88,16 @@ This tool will:
 >    https://zenodo.org/record/3234841/files/cbh1test.psf
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 4. Check that the datatype is correct. The crd file should have the CRD datatype and the psf file the PSF datatype.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

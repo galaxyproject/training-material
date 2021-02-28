@@ -62,7 +62,7 @@ To annotate a genome using Maker, you need the following files:
 >
 > 1. Create and name a new history for this tutorial.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the following files from [Zenodo](https://doi.org/10.5281/zenodo.4406623) or from the shared data library
 >
@@ -85,13 +85,13 @@ To annotate a genome using Maker, you need the following files:
 >    ```
 >    {% endif %}
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
 > 4. Check that the datatype for {% unless include.short %}`augustus_training_1.tar.gz` and{% endunless %} `augustus_training_2.tar.gz` is set to `augustus`
 >
->    {% include snippets/change_datatype.md datatype="augustus" %}
+>    {% snippet snippets/change_datatype.md datatype="augustus" %}
 >
 {: .hands_on}
 
@@ -111,7 +111,7 @@ You have the following main datasets:
 >
 > 2. Rename the file you will use to `genome.fasta`. E.g. if you are using `S_pombe_chrIII.fasta`, rename it to `genome.fa`
 >
->    {% include snippets/rename_dataset.md name="genome.fa" %}
+>    {% snippet snippets/rename_dataset.md name="genome.fa" %}
 >
 {: .hands_on}
 {% endunless %}

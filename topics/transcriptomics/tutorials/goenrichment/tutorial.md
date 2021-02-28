@@ -77,7 +77,7 @@ For this first exercise we will use data from [Trapnell et al. 2014](https://www
 >
 > 1. **Create a new history**
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. **Upload to the Galaxy** the following files:
 >    - go.obo

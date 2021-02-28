@@ -68,7 +68,7 @@ As a first step, we create a new Galaxy history and then we download a crystal s
 > 3. Rename the dataset to 'Hsp90 structure'
 > 4. Check that the datatype is correct (PDB file).
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 

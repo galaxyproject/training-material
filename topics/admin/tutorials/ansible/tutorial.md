@@ -37,7 +37,7 @@ This will be a very practical training with emphasis on looking at examples from
 >
 {: .agenda}
 
-{% include snippets/admin-testing.md %}
+{% snippet snippets/admin-testing.md %}
 
 # What is Ansible?
 

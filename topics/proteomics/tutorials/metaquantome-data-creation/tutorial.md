@@ -78,8 +78,8 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >
 > 1. Create a new history for this tutorial and give it a meaningful name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Import the files: 6 MZML files, a Protein FASTA file, and an Experimental Design file from [Zenodo]({{ page.zenodo_link }})
 >    or from the shared data library (`GTN - Material` -> `{{ page.topic_name }}` -> `{{ page.title }}`)
@@ -92,21 +92,21 @@ The first step in a tutorial is to get the data from the zenodo link provided an
 >    https://zenodo.org/record/4037137/files/T7A_1.mzml
 >    https://zenodo.org/record/4037137/files/T7B_1.mzml
 >    ```
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 >
 > 3. Rename the datasets (If needed)
 > 4. Check that the datatype ( Make sure they are in the correct formats).
 > 6 MZML files (format=`mzml`, a Protein FASTA file (format=`fasta`), and an Experimental Design file (format=`tabular`)
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 > 5. Add to each database a tag corresponding to the name of the input data (optional).
 > 6. Build a **Dataset list** for the four mzml files.
 >    - Click the **Operations on multiple datasets** check box at the top of the history panel
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet snippets/build_list_collection.md %}
 >
 > 7. Rename the dataset collection as `MZML dataset collection`.
 >
@@ -269,7 +269,7 @@ our tutorial on [Peptide and Protein ID]({{site.baseurl}}/topics/proteomics/tuto
 >
 > 2. Rename {% icon galaxy-pencil %} to output file to `PSM_Report_no_contaminants`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 {: .hands_on}
 
 > ### {% icon hands_on %} Hands-on: Removing contaminants from Peptide report
