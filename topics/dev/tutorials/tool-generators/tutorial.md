@@ -279,8 +279,14 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 >
 > #### What information is needed to generate a tool ?
 >
-> In addition to an ID and name, a tool may have any combination of elements, and the appropriate command line template to correctly call the script or executable must be generated.
-> Tools can have:
+> The code generator requires enough detail to be able to create the appropriate command line
+> template to call the script or executable and pass the required file paths and other settings correctly.
+> Small input samples and default settings are used to construct a test for the newly generated tool. These should be known to work with the script, having been used to debug
+> the script on the command line. Upload the samples to the current history before
+> starting a new tool in the ToolFactory. No tool will be generated without sample inputs. This test becomes part of the XML and of the toolshed archive.
+> The outputs from running the script during the first planemo run become sample outputs to be compared with test outputs in the archive.
+>
+> In addition to an ID and name, a tool may have any combination of:
 >
 > - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
 > - Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.
@@ -288,13 +294,14 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 > - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
 > - Unlimited additional command line parameters that the user can control on the new tool form.
 > - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
-> - Many of these appear as parameter input boxes and history data selects on the generated tool form. Metadata about command line formatting together with text strings for the form seen by the user are needed.
-> - Many of these appear on the generated command line template in the XML of the script being wrapped. Galaxy file paths for the script are only determined at generated tool execution. The generated template ensures that these are correct.
-> - Input samples and defaults are used to construct a test. The outputs from running the script during the first planemo run become sample outputs to be compared with test outputs. This test becomes part of the XML and of the toolshed archive.
 >
-> #### The Galaxy UI imposes some limits
+> Many of these generate parameter input boxes and history data selects on the new tool form. Metadata about command line formatting together with text strings for the form seen by the user are needed.
 >
-> The ToolFactory works best for simple tools but even then, the form becomes complicated as more parameters are added. Tools can have unlimited numbers of some items,
+> Many of these are components of the generated command line template. This can be seen in the new tool XML. Galaxy file paths for the script are only determined at generated tool execution. The generated template ensures that these are correct.
+>
+> #### The Galaxy UI imposes additional limits
+>
+> The ToolFactory has limited flexibility and works best for simple tools. Even then, the form becomes complicated as more parameters are added. Tools can have unlimited numbers of some items,
 > including input files, output files, citations and user parameters. Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
 > As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
 > In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
@@ -605,6 +612,7 @@ The diagram below shows how Galaxy can be used as a tool development environment
 
 > ### {% icon details %} Diagram of the ToolFactory development cycle process
 >
+> - Upload all the sample inputs needed for your script. These *must be in the history* where you are working when you start the Toolfactory or you will not be able to add them as inputs to the form - they are required so make sure they are available before you start.
 > - Create a tool by providing the information categories (bottom of the slide) represented on the ToolFactory form - dependencies, history i/o, help, additional parameters...
 > - Execute the generator - fix errors and repeat if necessary
 > - Examine the new tool and decide on edits or changes - see below for hints on installing new tools depending on how the ToolFactory has been deployed
@@ -619,6 +627,11 @@ The diagram below shows how Galaxy can be used as a tool development environment
 ---
 
 ## ToolFactory tips and tricks illustrated by some of the examples.
+
+#### Before you begin a new tool
+
+- Make sure it can be called on a command line with your sample inputs and default parameter settings. That is how the test will be generated.
+- You cannot specify any inputs without providing samples and those samples must run correctly, with the supplied defaults.
 
 #### STDIN and STDOUT
 
