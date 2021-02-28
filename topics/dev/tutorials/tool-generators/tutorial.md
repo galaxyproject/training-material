@@ -2,7 +2,7 @@
 
 layout: tutorial_hands_on
 logo: "GTN"
-title: "Tools from simple scripts using a Galaxy tool - the ToolFactory"
+title: "Tool generation from simple scripts in Galaxy: the ToolFactory"
 type: tutorial_hands_on
 key_points:
   - The ToolFactory is a Galaxy tool for programmers and informaticians.
