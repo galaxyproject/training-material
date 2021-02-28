@@ -7,13 +7,13 @@ type: tutorial_hands_on
 key_points:
   - The ToolFactory is a Galaxy tool for programmers and informaticians.
   - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
-  - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI
+  - It automatically generates simple, complete Galaxy tools from information provided by filling in a normal Galaxy form in the familiar UI.
   - Enjoy developing scripts in Galaxy using IEs but struggle to wrap even simple scripts at first because there is so much to learn and so little time? Try the TooLFactory (once you have a working command line version)
   - A script defines how parameters are read from the command line, allowing some of the ToolFactory's limited flexibility to be overcome.
   - The ToolFactory code generator is limited to relatively simple requirements but these are very common in small scale Galaxy analyses, particularly in new fields where few tools are already available.
-  - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly taking considerable experience to master.
-  - Those other tools are needed to deal with the entire spectrum of Conda dependency tool generation requirements.
-  - Please do not upload trivial tools to the main toolshed!!
+  - Dedicated Galaxy tool developers use more powerful tools without limits but correspondingly more experience to master.
+  - Those are needed to deal with many complicated Conda dependency requirements.
+  - Please do not upload trivial tools to the main toolshed. Run your own local toolshed for trivial tools please.
 
 objectives:
  - Learn why you might want to use the ToolFactory
@@ -203,7 +203,7 @@ Two new items are created in the history when the ToolFactory is executed - the 
 The generated tool XML (found in the collection and also in the archive) and the new tool form are well
 worth some study. Text on the form is all in the XML and it all comes from the ToolFactory form.
 
->### {% icon details %} Generated XML
+>### {% icon details %} Generated XML and tool form
 >
 > ##### Note how text from the form appears in the generated tool XML
 >
@@ -266,30 +266,35 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 {: .details}
 
 
->### {% icon details %} This seems very confusing. Can't it be simplified?
+> ### {% icon tip %} If this is confusing...
 >
-> If you are not yet familiar with the basics of Galaxy tools covered in the tool tutorial, this must seem very confusing.
+> If you are not yet familiar with the basics of Galaxy tools covered in the tool tutorial, the example may seem confusing. You may gain more by reviewing that tutorial and then coming back here?
 > It's a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
 > the user must supply valid inputs for the code to be useful.
 >
+{: .tip}
+
+
+> ### {% icon details %} Summary: details needed and how they are used
+>
 > #### What information is needed to generate a tool ?
 >
+> In addition to an ID and name, a tool may have any combination of elements, and the appropriate command line template to correctly call the script or executable must be generated.
+> Tools can have:
 >
->> In addition to an ID and name, a tool may have any combination of elements, and the generator must be assembled the appropriate command line to call the script or executable and collect all the outputs.
->> Tools can have:
->>
->> - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
->> - Argparse (named) or positional (ordered) style parameter passing at tool execution time.
->> - Unlimited individual input data files to be selected from the user's history.
->> - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
->> - Unlimited additional command line parameters that the user can control on the new tool form.
->> - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
->> - Many of these need to appear on the generated tool form, so metadata about command line formatting together with text strings for the form seen by the user are needed.
->> - Many of these need to appear on the command line for the script being wrapped. Galaxy file paths for the script are only determined at generated tool execution. The generated tool XML contains templating to ensure that these are correct.
+> - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
+> - Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.
+> - Unlimited individual input data files to be selected from the user's history.
+> - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
+> - Unlimited additional command line parameters that the user can control on the new tool form.
+> - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
+> - Many of these appear as parameter input boxes and history data selects on the generated tool form. Metadata about command line formatting together with text strings for the form seen by the user are needed.
+> - Many of these appear on the generated command line template in the XML of the script being wrapped. Galaxy file paths for the script are only determined at generated tool execution. The generated template ensures that these are correct.
+> - Input samples and defaults are used to construct a test. The outputs from running the script during the first planemo run become sample outputs to be compared with test outputs. This test becomes part of the XML and of the toolshed archive.
 >
-> #### That form still seems too complex
+> #### The Galaxy UI imposes some limits
 >
-> The ToolFactory works best for simple tools but even then, the form becomes complicated because tools can have unlimited numbers of some items,
+> The ToolFactory works best for simple tools but even then, the form becomes complicated as more parameters are added. Tools can have unlimited numbers of some items,
 > including input files, output files, citations and user parameters. Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
 > As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
 > In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
@@ -317,11 +322,11 @@ handy for developers new to Galaxy, and for Galaxy users who are capable of corr
 {: .tip}
 
 
-> ### {% icon warning %} Note on scope
+> ### {% icon tip %} Note on scope
 > - Compared to the more usual shell and a text editor, The ToolFactory in Galaxy is a slow and clumsy way to debugging scripts. More than a minute per cycle because`planemo test` is run twice, building and tearing down a Galaxy each time.
 > - **Starting a new ToolFactory tool with a know good command line and data** is strongly recommended. You will know exactly what to expect from the tool test for a first sanity check.
 > - Corrolary: Unless there is a working script that needs to be wrapped into a toolshed-ready Galaxy tool, the ToolFactory is of little use.
-{: .warning}
+{: .tip}
 
 
 It works best wrapping simple R/Bash/Python and other interpreted scripts with a few user supplied parameters and a few i/o history files. Scripts are easier than some
