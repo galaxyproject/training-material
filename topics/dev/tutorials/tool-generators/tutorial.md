@@ -151,7 +151,7 @@ a command line for the script when the generated tool runs. Other information su
 sections of the generated XML file in the toolshed archive. The ToolFactory form configured to generate the `Hello` example can be viewed below.
 
 > ### {% icon details %} ToolFactory form sections with annotation
->>>![](../../images/ToolFactory_hello1form.png)
+>>>![First part of the form](../../images/ToolFactory_hello1form.png)
 >
 > - **The first part of the form collects the new tool name and dependencies to be installed.**
 > - In this case, no Conda dependency is used .
@@ -163,7 +163,7 @@ command line. Reproducibility is not an issue for this trivial example. When it 
 >
 > ---
 >
->>> ![](../../images/ToolFactory_hello2form.png)
+>>> ![Second part of the form](../../images/ToolFactory_hello2form.png)
 > - **The second section shows the new generated history output.**
 > - It uses the special name `STDOUT` so the tool will take whatever the bash script writes and create a new text file called `Hello_output`
 > - When the test is generated, the pass criterion is that the default value `Galaxy Training Network` should appear as the message in `hello_output`
@@ -173,7 +173,7 @@ with no difference. Other criteria including `sim_size` are available for the te
 >
 > ---
 >
->>> ![](../../images/ToolFactory_hello3form.png)
+>>> ![Third part of the form](../../images/ToolFactory_hello3form.png)
 > - **The third section shows the user supplied parameter to be passed in to the bash script on the command line**
 > - It will be the first positional parameter because the ordinal position is 1. Argparse parameters are shown in other samples.
 > - The help and label text for each input file and user defined parameter will appear on the generated tool form for the user so make them informative
@@ -181,7 +181,7 @@ with no difference. Other criteria including `sim_size` are available for the te
 >
 > ---
 >
->>> ![](../../images/ToolFactory_hello4form.png)
+>>> ![Fourth part of the form](../../images/ToolFactory_hello4form.png)
 > - **The fourth section controls ToolFactory actions and optional outputs**
 > - If you supply appropriate API keys, the ToolFactory can upload the newly generated tool to a toolshed. Optionally it can be installed
 back into the Galaxy server specified.
@@ -192,10 +192,10 @@ back into the Galaxy server specified.
 Two new items are created in the history when the ToolFactory is executed - the new tool in an archive and a collection with log, XML and a planemo test report.
 
 >### {% icon details %} History items created after a successful run
->> ![](../../images/toolfactory_outputs_hello.png)
+>> ![History outputs created after executing the generated tool](../../images/toolfactory_outputs_hello.png)
 >> - The first item is a downloadable toolshed archive containing the tool and test ready to upload or install (see below on installing newly generated tools)
 >> - The second item is a collection containing a test result, expanded in this image, the generated XML and log.
->> ![](../../images/toolfactory_hello_collection.png)
+>> ![Collection contents including the generated XML and planemo test](../../images/toolfactory_hello_collection.png)
 {: .details }
 
 
@@ -263,7 +263,7 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 > The user sees a text box to enter any string
 > When executed, it will be echoed to a new history file called `Hello_output`
 >
-> ![](../../images/toolfactory_hello_demo_form.png)
+> ![Generated form seen by the new tool user](../../images/toolfactory_hello_demo_form.png)
 {: .details}
 
 
@@ -624,7 +624,7 @@ Galaxy can be used as a tool development environment for users who can write the
 > - Rinse, repeat...
 > - Galaxy can be used as an Integrated Development Environment for tools - clunky but oddly satisfying. Note this is distinct from debugging the script - that is not at all satisfying in Galaxy unless you like waiting for jobs to finish. A shell is much better for that.
 >
->> ![](../../images/ToolFactory_big_picture.png)
+>> ![Galaxy as an IDE for tools with the ToolFactory](../../images/ToolFactory_big_picture.png)
 {: .details}
 
 ---
@@ -718,7 +718,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > > inputs to downstream analyses and belong together from the user's perspective. The ToolFactory form for the plotter example tool
 > > is configured as shown below, from "rerunning" the plotter job from the sample history.
 > >
-> >![](../../images/toolfactory_plotter_demo_form.png)
+> >![ToolFactory form configuration of the output collection in the plotter example](../../images/toolfactory_plotter_demo_form.png)
 > >
 > > The Rscript is contained in a configfile so`#` is escaped - this is automatic.
 > >
@@ -831,7 +831,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 >> Note that the test is over-ridden in the ToolFactory form to generate this tool because I could not get it to test correctly otherwise.
 >>
 >>
->>![](../../images/toolfactory_plotter_sample_output.png)
+>>![Plotter collection opens to show all the plots as separate items to be viewed or downloaded](../../images/toolfactory_plotter_sample_output.png)
 {: .details}
 
 #### Selects as user supplied parameters
@@ -847,7 +847,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 >>The ToolFactory form section for user configurable command line settings is
 >> configured as shown here for the select demonstration
 >>
->>![](../../images/toolfactory_select_demo_form.png)
+>>![Form to configure an additional parameter as a select](../../images/toolfactory_select_demo_form.png)
 > >
 >>The generated XML is shown below.
 > >
@@ -909,7 +909,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 > >```
 > > The generated tool form from the select demonstration shows the three options and returns the one selected.
 > >
-> >![](../../images/toolfactory_select_test_tool.png)
+> >![Generated form seen by users of the select demonstration tool](../../images/toolfactory_select_test_tool.png)
 {: .details}
 
 
