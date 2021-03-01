@@ -506,7 +506,7 @@
 
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 24, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 1, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -699,7 +699,9 @@ regular <span class="notranslate">expression</span> (the accession ID) in the re
       <ul>
         <li><em>“Upload data as”</em>: <code class="language-plaintext highlighter-rouge">Collection(s)</code></li>
         <li><em>“Load tabular data from”</em>: <code class="language-plaintext highlighter-rouge">Pasted Table</code></li>
-        <li>Paste the table from the previous exercise:
+        <li>
+          <p>Paste the table from the previous exercise:</p>
+
           <div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Entry	Entry name	Status	Protein names	Gene names	Organism	Length
 E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
 E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
@@ -710,51 +712,57 @@ E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus cabal
 E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
 </code></pre></div>          </div>
         </li>
-        <li>Click <code class="language-plaintext highlighter-rouge">Build</code> and proceed to the rule builder.
-<img src="../../images/rules/rules_example_5_1_inputs.png" alt="screenshot" /></li>
       </ul>
     </li>
     <li>
-      <p>Instead of manually creating the rules this time, we will import an existing set of rules from some JSON. Copy the following text into your clipboard. These are the same rules as used in the <a href="#building-urls-from-accession-information">Building URLs from Accession Information</a> tutorial.</p>
-
-      <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"rules"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_filter_count"</span><span class="p">,</span><span class="nl">"count"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="nl">"which"</span><span class="p">:</span><span class="s2">"first"</span><span class="p">,</span><span class="nl">"invert"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nl">"target_columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"sort"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"numeric"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_regex"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"<span class="notranslate">expression</span>"</span><span class="p">:</span><span class="s2">".*"</span><span class="p">,</span><span class="nl">"replacement"</span><span class="p">:</span><span class="s2">"http://www.uniprot.org/uniprot/</span><span class="se">\\</span><span class="s2">0.fasta"</span><span class="p">}],</span><span class="nl">"<span class="notranslate">mapping</span>"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"info"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"list_identifiers"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="nl">"editing"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"url"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">2</span><span class="p">]}],</span><span class="nl">"extension"</span><span class="p">:</span><span class="s2">"csfasta"</span><span class="p">}</span><span class="w">
-</span></code></pre></div>      </div>
-    </li>
-    <li>In the ruler builder interface, select the <strong>wrench icon</strong> next to the word <code class="language-plaintext highlighter-rouge">Rules</code>
-      <ul>
-        <li>Paste the rules into the textbox</li>
-        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
-      </ul>
-
-      <p><img src="../../images/rules/rules_example_5_2_source.png" alt="screenshot" /></p>
+      <p>Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the history icon <i class="fas fa-history" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-rulebuilder-history</span>. Clicking this will drop down a list of the 10 most recent rule sets you’ve used. Select the most recent one to reuse the rules from the last exercise.</p>
 
       <p>You should now see the rules you created in the last example.
 <img src="../../images/rules/rules_example_5_3_initial_rules.png" alt="screenshot" /></p>
 
+      <blockquote class="comment">
+        <h3 id="comment-json-editor"><i class="far fa-comment-dots" aria-hidden="true"></i><span class="visually-hidden">comment</span> JSON Editor</h3>
+
+        <p>Another way to do this is to open the JSON Editor, by clicking the wrench icon <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you’re working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error.</p>
+      </blockquote>
+
+      <p>If you don’t see the rule set we used in the last  exercise anymore, here is the JSON that you can paste directly into the JSON Editor:</p>
+
+      <div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="nl">"rules"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_filter_count"</span><span class="p">,</span><span class="nl">"count"</span><span class="p">:</span><span class="s2">"1"</span><span class="p">,</span><span class="nl">"which"</span><span class="p">:</span><span class="s2">"first"</span><span class="p">,</span><span class="nl">"invert"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"remove_columns"</span><span class="p">,</span><span class="nl">"target_columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"sort"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"numeric"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"add_column_regex"</span><span class="p">,</span><span class="nl">"target_column"</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span><span class="nl">"<span class="notranslate">expression</span>"</span><span class="p">:</span><span class="s2">".*"</span><span class="p">,</span><span class="nl">"replacement"</span><span class="p">:</span><span class="s2">"http://www.uniprot.org/uniprot/</span><span class="se">\\</span><span class="s2">0.fasta"</span><span class="p">}],</span><span class="nl">"<span class="notranslate">mapping</span>"</span><span class="p">:[{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"info"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">1</span><span class="p">]},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"list_identifiers"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">0</span><span class="p">],</span><span class="nl">"editing"</span><span class="p">:</span><span class="kc">false</span><span class="p">},{</span><span class="nl">"type"</span><span class="p">:</span><span class="s2">"url"</span><span class="p">,</span><span class="nl">"columns"</span><span class="p">:[</span><span class="mi">2</span><span class="p">]}],</span><span class="nl">"extension"</span><span class="p">:</span><span class="s2">"csfasta"</span><span class="p">}</span><span class="w">
+</span></code></pre></div>      </div>
+
       <p>This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.</p>
     </li>
-    <li>From <strong>Column</strong> menu, select  <code class="language-plaintext highlighter-rouge">Fixed Value</code>
+    <li>
+      <p>From <strong>Column</strong> menu, select  <code class="language-plaintext highlighter-rouge">Fixed Value</code></p>
+
       <ul>
         <li><em>“Value”</em>: <code class="language-plaintext highlighter-rouge">fasta</code></li>
-        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code>
-This value will eventually be used for the datatype of the file.</li>
+        <li>Click <code class="language-plaintext highlighter-rouge">Apply</code></li>
       </ul>
+
+      <p>This value will eventually be used for the datatype of the file.</p>
     </li>
-    <li><strong>Repeat</strong> this process with:
+    <li>
+      <p><strong>Repeat</strong> this process with:</p>
+
       <ul>
         <li><em>“Value”</em>:<code class="language-plaintext highlighter-rouge">UP000052092 FASTA</code></li>
       </ul>
 
       <p>Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.</p>
     </li>
-    <li>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code>
+    <li>
+      <p>From <strong>Column</strong>, select <code class="language-plaintext highlighter-rouge">Using a Regular <span class="notranslate">Expression</span></code></p>
+
       <ul>
         <li><em>“From Column”</em>: <code class="language-plaintext highlighter-rouge">A</code></li>
         <li>Select <code class="language-plaintext highlighter-rouge">Create column from <span class="notranslate">expression</span> replacement</code></li>
         <li><em>“Regular <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">.*</code></li>
-        <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/\0.gff</code>.
- <img src="../../images/rules/rules_example_5_5_url.png" alt="screenshot" /></li>
+        <li><em>“Replacement <span class="notranslate">Expression</span>”</em>: <code class="language-plaintext highlighter-rouge">https://www.uniprot.org/uniprot/\0.gff</code>.</li>
       </ul>
+
+      <p><img src="../../images/rules/rules_example_5_5_url.png" alt="screenshot" /></p>
 
       <p>Next we will add two more columns</p>
     </li>
@@ -1211,7 +1219,6 @@ filter elements out of the collection.</p>
 </blockquote>
 
 
-
                     
 
                     
@@ -1272,8 +1279,8 @@ filter elements out of the collection.</p>
     author = "John Chilton and Helena Rasche",
     title = "Rule Based Uploader: Advanced (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "24"
+    month = "03",
+    day = "01"
     url = "\url{/training-material/topics/galaxy-interface/tutorials/upload-rules-advanced/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
