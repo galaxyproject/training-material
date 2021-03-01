@@ -75,7 +75,7 @@ generated tools run. No explicit instruction about scripting is offered.
 
 
 
-> ### {% icon tip %} Brief note on tutorial design from the author.
+> ### {% icon tip %} Brief note on tutorial design.
 >
 - This tutorial is suitable for Galaxy users who write code as part of their routine work.
 - It is in 3 parts
