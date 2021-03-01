@@ -206,7 +206,9 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 
 >### {% icon details %} Generated XML and tool form
 >
-> ##### Note how text from the form appears in the generated tool XML
+> [Galaxy XML documentation is here](https://docs.galaxyproject.org/en/latest/dev/schema.html)
+>
+> - Note how text from the form appears in the generated tool XML
 >
 >```xml
 ><tool name="hello_toolshed" id="hello_toolshed" version="0.01">
@@ -706,7 +708,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 #### ToolFactory collection outputs are handy for hiding dozens of tool outputs in a single history item
 
 - The plotter example uses an Rscript.
-- It generates as many random plots as you want.
+- It generates as many pairs of random plots as you want.
 - The script sends them into the the collection that appears in the history after the job runs.
 - The user's history shows only one new item after it runs.
 - That is a collection. When selected, objects linked to each plot will be listed for viewing.
