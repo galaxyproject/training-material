@@ -78,13 +78,14 @@ generated tools run. No explicit instruction about scripting is offered.
 > ### {% icon tip %} Brief note on tutorial design.
 >
 - This tutorial is suitable for Galaxy users who write code as part of their routine work.
-- It is in 3 parts
+- It is in 3 parts.
 - The first part is all reading, with an optional demonstration video and a dissected `Hello World!` example
 - It should help readers understand what the ToolFactory does so they can decide whether the training is relevant to their needs. A *sorting hat*.
 - After that it's all hands on.
 - The second part involves choosing how they would prefer to run the ToolFactory, installing it and importing the demonstrations in a sample history.
-- The sample tools are the core documentation.
-- The third part offers some tips and suggestions for exploring the demonstration tools and introduces some advanced features.
+- The third part offers some tips and suggestions for exploring the demonstration tools and introduces some useful features.
+- The sample tools are the core documentation. Hosting the ToolFactory on a public server is ill-advised, so an interactive tutorial is not possible.
+- This is for developers and when they see the examples, they will be able to figure it out if they want to use it.
 {: .tip}
 
 # 1. Tools, tool wrappers and the ToolFactory in Galaxy.
@@ -94,13 +95,13 @@ generated tools run. No explicit instruction about scripting is offered.
 ## Tools make Galaxy useful and attractive to scientists.
 {: .no_toc}
 Tools are the fundamental building blocks for analyses in Galaxy. Thousands are available in the project tool library. Tool execution is tightly constrained in that
-user supplied parameters exposed on the tool form are the only things that can be changed before execution. Everything else is fixed. The project supports
+user supplied parameters and data inputs exposed on the tool form are the only things that can be changed before execution. Everything else is fixed. The project supports
 extensive software infrastructure for manually creating new tools including Planemo and the new Galaxy language server. These are complex and powerful.
 New developers need time to come up to speed, but can then use them to generate new tools.
 
 In stark contrast, Galaxy Interactive Environments allow unconstrained scripting in a Galaxy environment. They are popular and useful for skilled researchers
 and developers, because they can write and run code inside Galaxy that is not available in any existing tool. Notebooks can be shared and reused but cannot run in
-workflows and lack the formal reproducibility provided by dependency management built in to real tools.
+workflows and lack the formal reproducibility provided by dependency management built-in to real tools.
 
 Working code developed in IE's can be converted into a command line script and tested using suitable small input data sets. Scripts for Galaxy tools can also be developed as
 command line scripts from scratch. Once there is a working script and sample data, it may be possible to use them to create a new Galaxy tool in a few minutes, using a
@@ -108,7 +109,7 @@ special Galaxy tool that generates tools from scripts.
 
 ##### *The ToolFactory provides a quick route to a real Galaxy tool once a script is working correctly with test data on the command line.*
 
-## The ToolFactory generates new, normal Galaxy tools.
+## The ToolFactory generates new Galaxy tools.
 {: .no_toc}
 
 The ToolFactory is an automated, form driven code generator. It runs in Galaxy as a typical Galaxy tool, except that it will only run for an administrative
@@ -268,7 +269,7 @@ worth some study. Text on the form is all in the XML and it all comes from the T
 
 > ### {% icon tip %} If this is confusing...
 >
-> If you are not yet familiar with the basics of Galaxy tools covered in the tool tutorial, the example may seem confusing. You may gain more by reviewing that tutorial and then coming back here?
+> If you are not yet familiar with the basics of Galaxy tools covered in the `tool integration` tutorial, the example may seem confusing. You may gain more by reviewing that tutorial and then coming back here?
 > It's a lot to learn and it is complicated. While a form driven code generator can hide much of the complexity of generating the code,
 > the user must supply valid inputs for the code to be useful.
 >
@@ -609,10 +610,11 @@ In practice, it's a flexible basis for generating many simple tools.
 {: .details}
 
 
-The diagram below shows how Galaxy can be used as a tool development environment for users who can write their own scripts.
+Galaxy can be used as a tool development environment for users who can write their own scripts as shown in this process overview slide
 
-> ### {% icon details %} Diagram of the ToolFactory development cycle process
+> ### {% icon details %} Overview of the ToolFactory development cycle process
 >
+> - Start by confirming that your script correctly processes the sample inputs on the command line using the default parameters you will supply.
 > - Upload all the sample inputs needed for your script. These *must be in the history* where you are working when you start the Toolfactory or you will not be able to add them as inputs to the form - they are required so make sure they are available before you start.
 > - Create a tool by providing the information categories (bottom of the slide) represented on the ToolFactory form - dependencies, history i/o, help, additional parameters...
 > - Execute the generator - fix errors and repeat if necessary
@@ -633,7 +635,8 @@ The diagram below shows how Galaxy can be used as a tool development environment
 
 - Make sure it runs correctly on a command line with your sample inputs and default parameter settings. That is how the test will be generated.
 - You cannot specify any inputs on the form without providing samples, and those samples must run correctly, with the supplied defaults.
-- Easiest to make sure those samples are in the history before you begin. Be well prepared. The ToolFactory cannot do that part for  you.
+- Easiest to make sure those samples are in the history before you begin.
+- Be well prepared. The ToolFactory cannot do that preparation for  you.
 
 #### STDIN and STDOUT
 
