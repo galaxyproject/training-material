@@ -46,9 +46,9 @@ contributors:
 
 ---
 
-> ### {% icon warning %} Warning - Beta release. In need of pre-review sanity testing.
-> - This is a beta release.
-> - An as yet unreviewed new tutorial
+> ### {% icon warning %} In need of pre-review sanity testing.
+> - This is a beta tutorial release.
+> - As yet unreviewed
 > - Thank you for caring enough to take a look.
 > - Sanity checking, testing and feedback are all needed. Please.
 > - Fork is at https://github.com/fubar2/training-material
@@ -75,7 +75,7 @@ generated tools run. No explicit instruction about scripting is offered.
 
 
 
-> ### {% icon tip %} Brief note on tutorial design from the authors.
+> ### {% icon tip %} Brief note on tutorial design from the author.
 >
 - This tutorial is suitable for Galaxy users who write code as part of their routine work.
 - It is in 3 parts
