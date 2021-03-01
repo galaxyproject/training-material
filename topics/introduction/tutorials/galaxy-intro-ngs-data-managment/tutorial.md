@@ -500,7 +500,7 @@ The remaining portion of this tutorial can also be viewed as a video:
 > 1. Run {% tool [Faster Download and Extract Reads in FASTQ](toolshed.g2.bx.psu.edu/repos/iuc/sra_tools/fasterq_dump/2.10.9+galaxy0) %} with the following parameters:
 >    - *"select input type"*: `List of SRA accession, one per line`
 >        - The parameter {% icon param-file %} *"sra accession list"* should point the output of the {% icon tool %} "**Cut**" from the previous step.
->    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to do get coffee.
+>    - **Click** the `Execute` button. This will run the tool, which retrieves the sequence read datasets for the runs that were listed in the `SRA` dataset. It may take some time. So this may be a good time to take a break.
 >
 > 2. Several entries are created in your history panel when you submit this job:
 >    - **`Pair-end data (fasterq-dump)`**: Contains Paired-end datasets (if available)
@@ -509,7 +509,7 @@ The remaining portion of this tutorial can also be viewed as a video:
 >    - **`fasterq-dump log`** Contains Information about the tool execution
 {: .hands_on}
 
-The first three items are actually *collections* of datasets.  *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis.  In this case the tool creates a separate collection each for paired-end reads, single reads, and *other*. See the [Collections tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
+The first three items are actually *collections* of datasets. *Collections* in Galaxy are logical groupings of datasets that reflect the semantic relationships between them in the experiment / analysis. In this case the tool creates separate collections for paired-end reads, single reads, and *other*. See the [Collections tutorial](https://training.galaxyproject.org/training-material/topics/galaxy-interface/tutorials/collections/tutorial.html) and watch [videos](https://youtube.com/playlist?list=PLNFLKDpdM3B9UaxWEXgziHXO3k-003FzE) (with names beginning with "Dataset Collections") for more information.
 
 Explore the collections by first **clicking** on the collection name in the history panel. This takes you inside the collection and shows you the datasets in it.  You can then navigate back to the outer level of your history.
 
@@ -880,4 +880,3 @@ We can also import data directly into Google Colab:
 {:.no_toc}
 
 Congratulations, you now know how to import sequence data from the SRA and how to run an example analysis on these datasets.
-
