@@ -168,50 +168,57 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    - *"Upload data as"*: `Collection(s)`
 >    - *"Load tabular data from"*: `Pasted Table`
 >    - Paste the table from the previous exercise:
->    ```
->    Entry	Entry name	Status	Protein names	Gene names	Organism	Length
->    E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
->    E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
->    E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
->    E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
->    E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
->    E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
->    E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
 >
-> 2. Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the history icon {% icon galaxy-rulebuilder-history %}. Clicking this will drop down a list of the 10 most recent rule sets you've used. Select the most recent one to reuse the rules from the last exercise.  
+>      ```
+>      Entry	Entry name	Status	Protein names	Gene names	Organism	Length
+>      E7C0H6	E7C0H6_9PAPI	unreviewed	Major capsid protein L1	L1	Equus caballus papillomavirus 3	498
+>      E7C0H0	E7C0H0_9PAPI	unreviewed	Protein E6	E6	Equus caballus papillomavirus 3	150
+>      E7C0H5	E7C0H5_9PAPI	unreviewed	Minor capsid protein L2	L2	Equus caballus papillomavirus 3	498
+>      E7C0H1	E7C0H1_9PAPI	unreviewed	Protein E7		Equus caballus papillomavirus 3	93
+>      E7C0H3	E7C0H3_9PAPI	unreviewed	Regulatory protein E2	E2	Equus caballus papillomavirus 3	421
+>      E7C0H4	E7C0H4_9PAPI	unreviewed	Putative E4 early protein (Fragment)		Equus caballus papillomavirus 3	175
+>      E7C0H2	E7C0H2_9PAPI	unreviewed	Replication protein E1 (EC 3.6.4.12) (ATP-dependent helicase E1)	E1	Equus caballus papillomavirus 3	621
+>      ```
+>
+> 2. Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the history icon {% icon galaxy-rulebuilder-history %}. Clicking this will drop down a list of the 10 most recent rule sets you've used. Select the most recent one to reuse the rules from the last exercise.
 >
 >    You should now see the rules you created in the last example.
 >    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
 >
->   > ### {% icon comment %} JSON Editor
->   >
->   > Another way to do this is to open the JSON Editor, by clicking the wrench icon {% icon tool %} to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error. 
-> {: .comment}
+>    > ### {% icon comment %} JSON Editor
+>    >
+>    > Another way to do this is to open the JSON Editor, by clicking the wrench icon {% icon tool %} to the left of the history icon.  This will open up the JSON that gets created as you modify rules.  You can copy and paste JSON here or modify it directly. When you're working in this way, be sure to write good JSON (closing brackets, fields that make sense, etc.), otherwise you will get an error.
+>    {: .comment}
 >
-> If you don't see the rule set we used in the last  exercise anymore, here is the JSON that you can paste directly into the JSON Editor:
-> ```json
-> {"rules":[{"type":"add_filter_count","count":"1","which":"first","invert":false},{"type":"remove_columns","target_columns":[1,2,4,5,6]},{"type":"sort","target_column":0,"numeric":false},{"type":"add_column_regex","target_column":0,"expression":".*","replacement":"http://www.uniprot.org/uniprot/\\0.fasta"}],"mapping":[{"type":"info","columns":[1]},{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[2]}],"extension":"csfasta"}
-> ```
+>    If you don't see the rule set we used in the last  exercise anymore, here is the JSON that you can paste directly into the JSON Editor:
 >
+>    ```json
+>    {"rules":[{"type":"add_filter_count","count":"1","which":"first","invert":false},{"type":"remove_columns","target_columns":[1,2,4,5,6]},{"type":"sort","target_column":0,"numeric":false},{"type":"add_column_regex","target_column":0,"expression":".*","replacement":"http://www.uniprot.org/uniprot/\\0.fasta"}],"mapping":[{"type":"info","columns":[1]},{"type":"list_identifiers","columns":[0],"editing":false},{"type":"url","columns":[2]}],"extension":"csfasta"}
+>    ```
 >
 >    This next part may seem a bit silly at first but we are going to add some columns with fixed values into the builder. When we split up the columns at a later step this will make sense.
 >
 > 3. From **Column** menu, select  `Fixed Value`
->     - *"Value"*: `fasta`
->     - Click `Apply`
+>
+>    - *"Value"*: `fasta`
+>    - Click `Apply`
+>
 >    This value will eventually be used for the datatype of the file.
 >
 > 4. **Repeat** this process with:
->      - *"Value"*:`UP000052092 FASTA`
+>
+>    - *"Value"*:`UP000052092 FASTA`
 >
 >    Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.
 >
 > 5. From **Column**, select `Using a Regular Expression`
->     - *"From Column"*: `A`
->     - Select `Create column from expression replacement`
->     - *"Regular Expression"*: `.*`
->     - *"Replacement Expression"*: `https://www.uniprot.org/uniprot/\0.gff`.
->     ![screenshot](../../images/rules/rules_example_5_5_url.png)
+>
+>    - *"From Column"*: `A`
+>    - Select `Create column from expression replacement`
+>    - *"Regular Expression"*: `.*`
+>    - *"Replacement Expression"*: `https://www.uniprot.org/uniprot/\0.gff`.
+>
+>    ![screenshot](../../images/rules/rules_example_5_5_url.png)
 >
 >    Next we will add two more columns
 > 6. From **Column** menu, select  `Fixed Value`
