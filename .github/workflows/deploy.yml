@@ -15,10 +15,9 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: ruby/setup-ruby@v1
+      - uses: actions/setup-ruby@v1
         with:
           ruby-version: ${{ matrix.ruby }}
-          bundler-cache: true
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -34,13 +33,11 @@ jobs:
       - name: Build Site
         run: |
           gem install bundler
-          bundle exec rake
           python -m pip install --upgrade pip
           pip install requests ephemeris
           export PATH=/home/runner/.local/bin:$PATH
           make annotate ACTIVATE_ENV=pwd
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
-
         env:
           GTN_FORK: ${{ github.repository_owner }}
 
