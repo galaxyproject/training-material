@@ -1,9 +1,7 @@
 ---
 
 layout: tutorial_hands_on
-logo: "GTN"
 title: "Tool generation from simple scripts in Galaxy: the ToolFactory"
-type: tutorial_hands_on
 key_points:
   - The ToolFactory is a Galaxy tool for programmers and informaticians.
   - It can turn a working command line script into a proper Galaxy tool with a test in a few minutes.
