@@ -40,8 +40,8 @@ RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-es
 && sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
 && apt-get clean && apt-get purge \
 &&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-ADD topics/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
-ADD topics/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
+ADD topics/tool-generators/docker/welcome_html.txt $TARGDIR/static/welcome.html.sample
+ADD topics/tool-generators/docker/welcome_html.txt $TARGDIR/static/welcome.html
 
 
 ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
