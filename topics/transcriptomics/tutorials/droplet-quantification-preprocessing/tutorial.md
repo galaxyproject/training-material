@@ -275,7 +275,7 @@ This is our own formulation of the barcode plot based on a [discussion](https://
 
 In that plot, you can see the clearer 'knee' bend, showing the cut-off between empty droplets and cell-containing droplets.
 
-The right hand plots are density plots from the first one, and the thresholds are generated either using [dropletUtils](https://bioconductor.org/packages/release/bioc/html/DropletUtils.html) or by the method described in that discussion. We could use any of these thresholds to select cells, assuming that anything with fewer counts is not a valid cell. By default, Alevin does something similar, and we can learn something about that by plotting just the barcodes Alevin retains.
+The right hand plots are density plots from the first one, and the thresholds are generated either using [dropletUtils](https://bioconductor.org/packages/release/bioc/html/DropletUtils.html) or by the method described in the discussion mentioned above. We could use any of these thresholds to select cells, assuming that anything with fewer counts is not a valid cell. By default, Alevin does something similar, and we can learn something about that by plotting just the barcodes Alevin retains.
 
 > ### {% icon hands_on %} Hands-on: Generate Alevin's barcode QC plot
 >
