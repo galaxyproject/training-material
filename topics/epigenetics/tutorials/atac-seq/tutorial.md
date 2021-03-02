@@ -47,7 +47,7 @@ When you use your own data we suggest you to use [this workflow](https://usegala
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet snippets/warning_results_may_vary.md %}
 
 # Preprocessing
 
@@ -60,7 +60,7 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the files from [Zenodo](https://doi.org/10.5281/zenodo.3862792) or from the shared data library
 >
@@ -70,16 +70,16 @@ We first need to download the sequenced reads (FASTQs) as well as other annotati
 >    https://zenodo.org/record/3862793/files/SRR891268_chr22_enriched_R2.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Add a tag called `#SRR891268_R1` to the R1 file and a tag called `#SRR891268_R2` to the R2 file.
 >
->    {% include snippets/add_tag.md %}
+>    {% snippet snippets/add_tag.md %}
 >
 > 4. Check that the datatype of the 2 FASTQ files is `fastqsanger.gz` and the peak file (ENCFF933NTR.bed.gz) is `encodepeak`. If they are not then change the datatype as described below.
 >
->    {% include snippets/change_datatype.md datatype="datatypes" %}
+>    {% snippet snippets/change_datatype.md datatype="datatypes" %}
 >
 {: .hands_on}
 
@@ -149,11 +149,11 @@ We will visualise regions later in the analysis and obtain the gene information 
 >
 > 6. **Rename** {% icon galaxy-pencil %} the dataset as `chr22 genes`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 7. **Change** {% icon galaxy-pencil %} its datatype to BED
 >
->    {% include snippets/change_datatype.md datatype="bed" %}
+>    {% snippet snippets/change_datatype.md datatype="bed" %}
 >
 {: .hands_on}
 

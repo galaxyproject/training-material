@@ -117,7 +117,7 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the 12 `mzXML` files into a collection named `mzML`
 >    - Option 1: from a shared data library (ask your instructor)
@@ -139,13 +139,13 @@ having to launch jobs manually for each sample. You can start using the dataset 
 >    https://zenodo.org/record/3757956/files/QC1_014.mzML
 >    ```
 >
->    {% include snippets/import_via_link.md collection=true format="mzml" collection_name="mzML" renaming=false %}
->    {% include snippets/import_from_data_library.md astype="as a Collection" %}
+>    {% snippet snippets/import_via_link.md collection=true format="mzml" collection_name="mzML" renaming=false %}
+>    {% snippet snippets/import_from_data_library.md astype="as a Collection" %}
 >
 > 3. Make sure your data is in a **collection**. Make sure it is named `mzML`
 >    - If you forgot to select the collection option during import, you can create the collection now:
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet snippets/build_list_collection.md %}
 >
 > > ### {% icon tip %} Comment to W4M users
 > >
@@ -174,7 +174,7 @@ This first step is only meant to read your `mzXML` file and generate an object u
 > Run **MSnbase readMSData** {% icon tool %} with the following parameters:
 >   - *"File(s) from your history containing your chromatograms"*: the `mzML` dataset collection
 >
->   {% include snippets/select_collection.md %}
+>   {% snippet snippets/select_collection.md %}
 >
 >  > ### {% icon tip %} Comment to W4M users
 >  >
@@ -344,13 +344,13 @@ be uploaded into Galaxy.
 >    https://zenodo.org/record/3757956/files/sampleMetadata_12samp_completed.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 2. Check the data type of your imported files.
 >   - The datatype should be `tabular`, if this is not the case, please change the datatype now.
 >
->     {% include snippets/change_datatype.md %}
+>     {% snippet snippets/change_datatype.md %}
 >
 >     > ### {% icon comment %} Comment
 >     >
@@ -363,7 +363,7 @@ right away if you appear to get one of these obvious issues.
 >
 > 3. Rename your sampleMetadata file with a shorter name 'sampleMetadata_completed.tsv'
 >
->     {% include snippets/rename_dataset.md %}
+>     {% snippet snippets/rename_dataset.md %}
 >
 > > ### {% icon tip %} Comment to W4M users
 > >

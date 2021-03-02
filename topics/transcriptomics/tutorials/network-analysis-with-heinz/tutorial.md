@@ -48,7 +48,7 @@ parameters to speed up the analysis for the purposes of this tutorial.
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet snippets/warning_results_may_vary.md %}
 
 
 In this tutorial, we will run the Heinz workflow step by step to understand how each step works. To get an overview of what this workflow does
@@ -97,8 +97,8 @@ After knowing what our input data are like, let's get them into Galaxy history:
 >
 > 1. Make sure we have an empty Galaxy history. Give it a sensible name.
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. **Upload Disease Dataset**
 >    - Open the file upload menu
@@ -458,7 +458,7 @@ Let's assume that these are the operations we always need for different datasets
 >
 > 1. Extract the workflow from your history
 >
->    {% include snippets/extract_workflow.md %}
+>    {% snippet snippets/extract_workflow.md %}
 >
 > 2. Run the workflow on the dataset in this tutorial
 >

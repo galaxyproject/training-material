@@ -36,7 +36,7 @@ contributors:
 
 This practical aims to familiarize you with the Galaxy user interface. It will teach you how to perform basic tasks such as importing data, running tools, working with histories, creating workflows, and sharing your work.
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet snippets/warning_results_may_vary.md %}
 
 > ### Agenda
 >
@@ -80,7 +80,7 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 >
 > 1. Make sure you start from an empty analysis history.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. **Rename your history** to be meaningful and easy to find. You can do this by clicking on the title of the history (which by default is *Unnamed history*) and typing **Galaxy 101** as the name. Do  not forget to hit the <kbd>Enter</kbd> key on your keyboard to save it.
 >
@@ -93,13 +93,13 @@ Browse to your favourite [Galaxy instance](https://galaxyproject.org/use/) and l
 First we need to get some data into our history. You can upload files from your computer, or Galaxy can also fetch data directly from external sources. We know UCSC has exon locations for humans and we can use Galaxy to import the data for chromosome 22, directly from the UCSC table browser.
 
 > ### {% icon hands_on %} Hands-on: Upload SNPs and Exons
-> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload**
+> 1. At the top of the **Tools** panel (on the left), click {% icon galaxy-upload %} **Upload Data**
 >
 >    ![upload button](../../images/upload-data.png)
 >
 >    This brings up a box:
 >
->    ![filebox](../../images/upload-box.png){:width="500px"}
+>    ![filebox](../../images/upload-box.png)
 >
 > 2. Click **Paste/Fetch data** and paste in the following URLs in the box that appears.
 >
@@ -112,13 +112,18 @@ First we need to get some data into our history. You can upload files from your 
 >
 > 4. When they're ready, **rename** {% icon galaxy-pencil %} the datasets to `Exons` and `SNPs`, respectively.
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 {: .hands_on}
 
 For this tutorial, we made the input datasets available on Zenodo for you. However, these datasets can also obtained directly from UCSC, without leaving Galaxy.
 Below we describe how you can do this, but it is not necessary for this tutorial. Note that since the data in UCSC is updated frequently, you might get slightly different results in the rest of this tutorial if you use these files.
 
+> ### {% icon comment %} Comments
+> In order to get the datasets from the UCSC server, you need to have an account in the [useGalaxy.org](https://usegalaxy.org/) instance.
+{: .comment}
+
+    
 > ### {% icon tip %} Optional: Obtaining the Data directly from UCSC
 >
 > This tool works a bit differently than most Galaxy tools, but if you wish to obtain the newest data from UCSC, you can do that as follows:
@@ -161,6 +166,8 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >     > the gray (preparing/queued) and yellow (running) states to become green (success):
 > >     >
 > >     > ![`UCSC Main on Human: knownGene` dataset is green](../../images/101_04.png)
+> >     >
+> >     > You might need to login to Galaxy again.
 > >     {: .comment}
 > >
 > > 3. When the dataset is green, click on the {% icon galaxy-eye %} (eye) icon to **view the contents** of the file. It should look something like this:
@@ -191,7 +198,7 @@ Below we describe how you can do this, but it is not necessary for this tutorial
 > >
 > >    ![`UCSC table browser` tool, first screen for SNPs](../../images/101_06.png)
 > >
-> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 150, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
+> >    The *"track"* setting shows the version of the SNP database to get. In this example it is version 153, but you may select the latest one. Your results may vary slightly from the ones in this tutorial when you select a different version, but in general it is a good idea to select the latest version, as this will contain the most up-to-date SNP information.
 > >
 > > 2. Click on the **get output** button to find a form similar to this:
 > >
@@ -261,13 +268,13 @@ Let's take a look at this dataset. The first six columns correspond to the exons
 > For the first 3 exons in your file, what is the number of SNPs that fall into that exon?
 >
 > > ### {% icon solution %} Solution
-> > At the time of writing, for hg38/GENCODE v29, joined with "Common SNPs(151)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
+> > At the time of writing, for hg38/GENCODE v29, joined with "Common dbSNPs(153)", using <kbd>ctrl-f</kbd> (<kbd>cmd-f</kbd> on Mac OS) to look for how many times each is used:
 > >
 > > Gene | Occurences
 > > ---- | ----------
-> > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 24
-> > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 24
-> > `ENST00000343518.10_cds_0_0_chr22_15690078_f` | 40
+> > `ENST00000252835.5_cds_0_0_chr22_15528159_f` | 2
+> > `ENST00000643195.1_cds_0_0_chr22_15528192_f` | 2
+> > `ENST00000343518.11_cds_0_0_chr22_15690078_f` | 4
 > {: .solution}
 {: .question}
 
@@ -299,7 +306,7 @@ This file contains only two columns. The first contains the exon IDs, and the se
 > How many exons are there in total in your file?
 >
 > > ### {% icon solution %} Solution
-> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC.
+> > Each line now represents a different exon, so you can see the answer to this when you expand the history item, as in the image above. The exact number you see for your dataset may be slightly different due to the updates to the exon and SNPs information in UCSC. In our case the dataset contains 4.242 lines, which is equal to the number of exons.
 > >
 > {: .solution }
 {: .question}
@@ -333,7 +340,7 @@ Now that we have a list of all exons, and the number of SNPs they contain, we wo
 > Which exon has the highest number of SNPs in your file?
 >
 > > ### {% icon solution %} Solution
-> > When this tutorial was last updated, `ENST00000343518.10_cds_0_0_chr22_15690078_f` had 40 SNPs.
+> > When this tutorial was last updated, `ENST00000253255.7_cds_0_0_chr22_46256561_r` had 27 SNPs.
 > > Keep in mind this may depend on your settings when getting the data from UCSC.
 > {: .solution}
 {: .question}
@@ -353,7 +360,6 @@ Let's say we want a list with just the top-5 exons with highest number of SNPs.
 >
 > 3. Examine the output file, this should contain only the first 5 lines of the previous dataset.
 >
->    ![Contents of the `Select first` output dataset](../../images/101_first_5.png)
 {: .hands_on}
 
 ## Recovering exon info
@@ -367,7 +373,7 @@ Congratulations! You have now determined which exons on chromosome 22 have the h
 >    - *"Compare"*: `Exons`
 >    - *"Using column"*: `Column: 4`
 >    - *"against"*: the output from **Select first** {% icon tool %}
->    - *"Using column"*: `Column: 1`
+>    - *"and column"*: `Column: 1`
 >    - *"to find"*: `Matching rows of 1st dataset`
 >
 > 2. Click **Execute**
@@ -384,11 +390,11 @@ A good way to learn about these exons is to look at their genomic surrounding. T
 >
 > 1. First, check that the **database** of your latest history dataset is `hg38`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Database/Build:** field to `Human Dec. 2013 (GRCh38/hg38) (hg38)`.
 >
->    {% include snippets/change_dbkey.md dbkey="hg38" %}
+>    {% snippet snippets/change_dbkey.md dbkey="hg38" %}
 >
 > 2. Second, check that the **format** of your latest history dataset is `bed`. If not, click on the {% icon galaxy-pencil %} pencil icon and modify the **Datatype** field to `bed`.
 >
->    {% include snippets/change_datatype.md datatype="bed" %}
+>    {% snippet snippets/change_datatype.md datatype="bed" %}
 >
 > 3. To **visualize the data in UCSC genome browser**, click on `display at UCSC main` option visible when you expand the history item.
 >
@@ -436,9 +442,9 @@ Galaxy makes this very easy with the `Extract workflow` option. This means any t
 >
 >    ![Selection of steps for `Extract Workflow` from history](../../images/101_25.png)
 >
-> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of interactions`.
->
->    While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find those interactions as well.
+> 3. **Rename** the workflow to something descriptive, for example `Find exons with the highest number of features`.
+> 
+> While we created this workflow initially to analyse SNPs, if we had similarly formatted datasets we could use this workflow to find different features.
 >
 >    If there are any steps that shouldn't be included in the workflow, you can **uncheck** them.
 >
@@ -467,7 +473,7 @@ We can examine the workflow in Galaxy's workflow editor. Here you can view/chang
 >
 >    When you click on a workflow step, you will get a view of all the parameter settings for that tool on the right-hand side of your screen.
 >
->    {% include snippets/workflow_hide_intermediate_steps.md %}
+>    {% snippet snippets/workflow_hide_intermediate_steps.md %}
 >
 > 3. Re-arrange the boxes so you can clearly see the data flow. The default automatic layout hides some of the connections due to overlapping and box placement.
 >
@@ -508,7 +514,7 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 1. Create a **new history** and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. We will need the list of exons again. We don't have to get this from UCSC again, we can just **copy** it from our previous history. The easiest way to do this is to go to the {% icon galaxy-columns %} history overview. Here you can just drag and drop datasets from one history to another.
 >
@@ -516,13 +522,13 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 > 3. Click **Analyze Data** at the top to return to the main analysis window
 >
-> 4. {% tool [Upload](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
+> 4. {% tool [Upload Data](upload1) %} the Repeats file from [Zenodo](https://doi.org/10.5281/zenodo.4104428)
 >
 >    ```
 >    https://zenodo.org/record/4104428/files/UCSC-hg38-chr22-Repeats.bed
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 >    > ### {% icon tip %} Obtaining the Data from UCSC
 >    >
@@ -553,11 +559,12 @@ Now that we have built our workflow, let's use it on some different data. For ex
 >
 >    ![`Run` option in the workflow menu](../../images/101_37.png)
 >
->     {% include snippets/run_workflow.md %}
+>     {% snippet snippets/run_workflow.md %}
 >
 >    The central panel will change to allow you to configure and launch the workflow.
 >
 > 7. Select appropriate datasets for the inputs as shown below, then scroll down and click `Run workflow`.
+>    - Select `Expand to full workflow form`
 >    - {% icon param-file %} *"Exons"*: the `Exons` file you copied from our previous history
 >    - {% icon param-file %} *"Features"*: the `Repeats` file we downloaded from UCSC
 >

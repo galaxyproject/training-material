@@ -81,8 +81,8 @@ A graphical representation of the ASaiM workflow which we will be using today is
 >
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Import `T1A_forward` and `T1A_reverse` from [Zenodo](https://zenodo.org/record/3362849) or from the data library (ask your instructor)
 >
@@ -91,18 +91,18 @@ A graphical representation of the ASaiM workflow which we will be using today is
 >    {{ page.zenodo_link }}/files/T1A_reverse.fastqsanger
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 >    As default, Galaxy takes the link as name, so rename them.
 >
 > 3. **Rename** {% icon galaxy-pencil %} the files to `T1A_forward` and `T1A_reverse`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 4. Check that the datatype is `fastqsanger` (e.g. **not** `fastq`). If it is not, please change the datatype to `fastqsanger`.
 >
->    {% include snippets/change_datatype.md datatype="fastqsanger" %}
+>    {% snippet snippets/change_datatype.md datatype="fastqsanger" %}
 >
 {: .hands_on}
 
@@ -127,14 +127,14 @@ We will run all these steps using a single workflow, then discuss each step and 
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_preprocessing.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 1: Preprocessing** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Forward FastQ file"*: `T1A_forward`
 >    - {% icon param-file %} *"2: Reverse FastQ file"*: `T1A_reverse`
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 {: .hands_on}
 
@@ -163,7 +163,7 @@ In this tutorial we use similar tools as described in the tutorial ["Quality con
 > 1. **FastQC** {% icon tool %} with the following parameters:
 >       - {% icon param-files %} *"Short read data from your current history"*: both `T1A_forward` and `T1A_reverse` datasets selected with **Multiple datasets**
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet snippets/select_multiple_datasets.md %}
 >
 > 2. Inspect the webpage output of **FastQC** {% icon tool %} for the `T1A_forward` dataset
 >
@@ -407,11 +407,11 @@ We use **FASTQ interlacer** {% icon tool %} on the outputs of **Cutadapt** {% ic
 >
 > 2. **Rename** {% icon galaxy-pencil %} the pair output to `Interlaced QC controlled reads`
 >
->    {% include snippets/rename_dataset.md %}
+>    {% snippet snippets/rename_dataset.md %}
 >
 > 3. **Change the datatype** {% icon galaxy-pencil %} to `fastq`
 >
->    {% include snippets/change_datatype.md datatype="fastq" %}
+>    {% snippet snippets/change_datatype.md datatype="fastq" %}
 >
 > 4. **FASTQ interlacer** {% icon tool %} with the following parameters:
 >   - *"Type of paired-end datasets”*: `2 separate datasets`
@@ -449,13 +449,13 @@ In this tutorial, we follow second approach using **MetaPhlAn2** ({% cite truong
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_community_profile.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 2: Community Profile** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Interlaced QC controlled reads"*: `Interlaced QC controlled reads` output from the first workflow
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 {: .hands_on}
 
@@ -652,14 +652,14 @@ To identify the functions made by the community, we do not need the rRNA sequenc
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_functional_information.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 3: Functional Information** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Interlaced non-rRNA reads"*: `Interlaced non-rRNA reads` output from the first workflow
 >    - {% icon param-file %} *"2: Community Profile"*: `MetaPhlAn2 Community Profile` output from the second workflow
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > > ### {% icon tip %} Tip: Running low on time? Use this faster approach
 > >

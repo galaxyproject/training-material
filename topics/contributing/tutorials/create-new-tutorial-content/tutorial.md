@@ -789,6 +789,23 @@ Rendered:
 > ```
 {: .code-out}
 
+## Icons
+
+To use these icons, take the name of the icon, 'details' in this example, and write something like this in your tutorial:
+
+```markdown
+{% raw %}{% icon details %}{% endraw %}
+```
+
+<div class="row">
+{% for icon in site["icon-tag"] %}
+	<div class="col-md-2 col-sm-3" style="text-align: center">
+		<div style="font-size: 400%">{% icon_var icon[0] %}</div>
+		<div>{{ icon[0] }}</div>
+	</div>
+{% endfor %}
+</div>
+
 # Citations
 If you would like to cite any articles, books or websites in your tutorial, you can do so by adding a file called `tutorial.bib` next to your `tutorial.md` file. In this file you may enter [bibtex](http://www.bibtex.org/Using/) formatted citations. An example is given below:
 

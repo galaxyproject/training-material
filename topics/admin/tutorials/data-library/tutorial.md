@@ -190,7 +190,7 @@ We've included this file in the example data libraries repository we cloned at t
 
 Let's try setting that up in our Galaxy!
 
-{% include snippets/finding_your_admin_api_key.md %}
+{% snippet snippets/finding_your_admin_api_key.md %}
 
 > ### {% icon hands_on %} hands-on: importing data library yaml.
 >
