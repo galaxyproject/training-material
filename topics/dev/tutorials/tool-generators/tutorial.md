@@ -139,9 +139,9 @@ quickly *inside* Galaxy using a Galaxy tool.
 {: .no_toc}
 
 The ToolFactory can easily generate the ubiquitous `Hello World!` as a Galaxy tool. A parameter is added so the user can supply the text after "Hello..." and
-the tool can write the combined string to a new history item. Trivial, but surprisingly useful as a model for more complex Galaxy tools so worth studying in detail. It is
-implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line. This is surprisingly
-useful as a model for many Galaxy tools with an extra parameter or two, as discussed below.
+the tool can write the combined string to a new history item. Trivial, but an excellent model worth studying in detail. It is
+implemented as a tool that wraps a bash script of one line - `echo "Hello $1!"` to echo the first parameter passed on the command line. This is a
+generic model for many Galaxy tools with the addition of a file or a parameter or two, as discussed below.
 
 Watch a 6 minute [`Hello world` demonstration video](https://drive.google.com/file/d/1xpkcVGQ0jRdG78Kt-qLwqeFpE3RnSRsK/view?usp=sharing)
 (Apologies for the poor quality - will try to make a shorter one.)
@@ -155,9 +155,8 @@ sections of the generated XML file in the toolshed archive. The ToolFactory form
 >
 > - **The first part of the form collects the new tool name and dependencies to be installed.**
 > - In this case, no Conda dependency is used .
-> - bash can be specified as a conda dependency, but it is not very version dependent and usually available on the
-command line. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them.
-> - The script pasted into the text box will emit a string including the first command line parameter - such as "Hello Galaxy Training Network"
+> - bash can be specified as a conda dependency, but it is not very version dependent and usually available. Reproducibility is not an issue for this trivial example. When it is, specify the dependencies and their versions here and the generated tool will always use them.
+> - If run in a shell, the bash script in the text box will emit a string that includes the first command line parameter - such as "Hello Galaxy Training Network"
 > - This will be collected from STDOUT (configured below) into a new history output file (named and configured below)
 > - Positional parameters are chosen so the first parameter on the command line will be emitted when the script runs.
 >
