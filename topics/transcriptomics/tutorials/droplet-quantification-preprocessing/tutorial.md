@@ -5,7 +5,7 @@ title: Generating a cell matrix using Alevin
 subtopic: single-cell
 priority: 9
 
-zenodo_link: ''
+zenodo_link: 'https://zenodo.org/record/4574153#.YD56YS-l2uU'
 questions:
 - I have some single cell fastq files I want to analyse. Where do I start?
 objectives:
@@ -74,32 +74,24 @@ We've provided you with some example data to play with, a small subset of the re
 Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin). How did I downsample these fastq files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!  
 Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl [here](https://www.ensembl.org/info/data/ftp/index.html). Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload - Part 1
 >
 > 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the Experimental Design table, sequencing reads 1 & 2, the GTF and fasta files from [Zenodo]({{ page.zenodo_link }})
 >
 >    ```
->
+>    {{ page.zenodo_link }}/files/Experimental_Design.tabular
+>    {{ page.zenodo_link }}/files/Mus_musculus.GRCm38.100.gtf.gff
+>    {{ page.zenodo_link }}/files/Mus_musculus.GRCm38.cdna.all.fa.fasta
+>    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_1.fq-400k.fastq
+>    {{ page.zenodo_link }}/files/SLX-7632.TAAGGCGA.N701.s_1.r_2.fq-400k.fastq
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
->
->    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
->
 {: .hands_on}
-
 
 > ### {% icon question %} Questions
 >
@@ -506,17 +498,21 @@ This sample was originally one of seven. So to run the other [12 downsampled fas
 
 ## Data
 
-> ### {% icon hands_on %} Hands-on: Data upload
+> ### {% icon hands_on %} Hands-on: Data upload - Combining files
 >
 > 1. Create a new history for this tutorial (if you're not importing the history above)
-> 2. Import the files from [Zenodo]() or from the shared data library
+> 2. Import the different AnnData files and the experimental design table from [Zenodo](https://zenodo.org/record/4574153#.YD56YS-l2uU)
 >
 >    ```
->
+>    {{ page.zenodo_link }}/files/Experimental_Design.tabular
+>    {{ page.zenodo_link }}/files/N701-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N702-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N703-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N704-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N705-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N706-400k-AnnData-h5ad
+>    {{ page.zenodo_link }}/files/N707-400k-AnnData-h5ad
 >    ```
->    ***TODO***: *Add the files by the ones on Zenodo here (if not added)*
->
->    ***TODO***: *Remove the useless files (if added)*
 >
 >    {% include snippets/import_via_link.md %}
 >    {% include snippets/import_from_data_library.md %}
@@ -525,10 +521,6 @@ This sample was originally one of seven. So to run the other [12 downsampled fas
 > 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
->
-> 5. Add to each database a tag corresponding to ...
->
->    {% include snippets/add_tag.md %}
 >
 {: .hands_on}
 
