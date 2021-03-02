@@ -69,9 +69,9 @@ We're going to use Alevin for demonstration purposes, but we do not endorse one 
 
 ## 1.1 Get Data
 
-We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples.
+We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it's real, it's messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.
 
-Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this EXAMPLE INPUT HISTORY. How did I downsample these fastq files? Check out this history to find out! FIXME
+Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin). How did I downsample these fastq files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!  
 Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl [here](https://www.ensembl.org/info/data/ftp/index.html). Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!
 
 > ### {% icon hands_on %} Hands-on: Data upload
@@ -465,8 +465,8 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 
 Let's go back and tweak parameters, re-running the tool with a looser threshold minimum.
 
-> ### {% icon details %} Decision-time - UMI count lower bound
-> If you are working in a group, you can now divvy up a decision here with one control and the rest varied numbers so that you can compare results throughout the tutorials.
+> ### {% icon details %} Working in a group? Decision-time!
+> If you are working in a group, you can now divvy up a decision here with one *control* and the rest varied numbers so that you can compare results throughout the tutorials.
 > - Variable: **UMI count lower bound**
 > - Control:  `5`
 > - Everyone else: Consider the droplet barcode rank plots and choose (different) appropriate lower bounds.
@@ -501,10 +501,11 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 
 # 4: Combining fastq files
 
-This sample was originally one of seven. So to run the other 12 fastq files, I strongly suggest you use the workflow (LINK!) to run each of the other pairs! It's going to take a while, so go and have a cup of tea... Or, for ease, I have downsampled the other 6 pairs of fastq files associated with this data, ran them myself (history here), and plopped them in a new clean history for you to import alongside the result you have already created above. You can access it here or get data with zenodo.
+This sample was originally one of seven. So to run the other [12 downsampled fastq files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
 
 
 ## 4.1 Data
+
 > ### {% icon hands_on %} Hands-on: Data upload
 >
 > 1. Create a new history for this tutorial (if you're not importing the history above)
@@ -521,7 +522,7 @@ This sample was originally one of seven. So to run the other 12 fastq files, I s
 >    {% include snippets/import_from_data_library.md %}
 >
 > 3. Rename the datasets
-> 4. Check that the datatype
+> 4. Check that the datatype is `h5ad`, otherwise you will need to change each file to `h5ad`!
 >
 >    {% include snippets/change_datatype.md datatype="datatypes" %}
 >
@@ -531,33 +532,32 @@ This sample was originally one of seven. So to run the other 12 fastq files, I s
 >
 {: .hands_on}
 
-Inspect the {% icon galaxy-eye %} 'Experimental Design' text file. This shows you how each N70X corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the gene_name and mito metadata above!
+Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata above!
 
 ## 4.2 Concatenating Objects
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
-> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.6.22.post1+galaxy4){% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: 'FIXME'
+> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k-AnnData`
 >    - *"Function to manipulate the object"*: 'Concatenate along the observations axis'
->    - {% icon param-file %} *"Annotated data matrix to add"*: 'Select all the other matrix files FIXME'
->    - *"Join method"*: 'Intersection of variables'
->    - *"Key to add the batch annovation to obs"*: `batch'
->    - *"Separator to join the existing index names with the batch category"*: '-'
-> 2. Rename the object 'Combined AnnData object'
+>    - {% icon param-file %} *"Annotated data matrix to add"*: 'Select all the other matrix files from bottom to top'
+>    - *"Join method"*: `Intersection of variables`
+>    - *"Key to add the batch annotation to obs"*: `batch`
+>    - *"Separator to join the existing index names with the batch category"*: `-`
 {: .hands_on}
 
 Now let's look at what we've done! Unfortunately, AnnData objects are quite complicated, so the {% icon galaxy-eye %} won't help us too much here. Instead, we're going to use a tool to look into our object from now on.
 
 > ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
 >
-> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.6.22.post1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined AnnData object'
+> 1. {% tool [Inspect AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `General information about the object`
-> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.6.22.post1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined AnnData object'
+> 2. {% tool [Inspect AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.6.22.post1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined AnnData object'
+> 3. {% tool [Inspect AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 {: .hands_on}
 
@@ -566,50 +566,68 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 > ### {% icon question %} Question
 >
 > 1. How many cells do you have now?
-> 2. Where is 'batch' information stored?
+> 2. Where is `batch` information stored?
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. FIXME
-> > 2. Under 'Key-indexed observations annotation (obs)'. Batch refers to the order in which the matrices were added.
-> > FIXME show image of how they are added
+> > 1. If you look at the **General information** {% icon tool %} output, you can see there are now `4079 cells`, as the matrix is now 4079 cells x 35734 genes. You can see this as well in the **obs** {% icon tool %} (cells) and **var** {% icon tool %} (genes) file sizes.
+> > 2. Under **Key-indexed observations annotation (obs)**. Different version of the Manipulate tool will put the `batch` columns in different locations. The tool version in this course has the `9th` column at the farthest right is `batch`. Batch refers to the order in which the matrices were added. The files are added from the bottom of the history upwards, so be careful how you set up your histories when running this!
 > {: .solution}
 >
 {: .question}
 
-# 5: Adding metadata
+# 5: Adding batch metadata
 
-Importantly, the batch numbers provided here are not necessarily in the same order as your samples N701,2,3,4 etc. Rather, the first input you had will be considered 'batch 0', and then the lowest object you added in the 'Annotated data matrix to add' will be 'batch 1', etc. I've set this up to run so it's in order (to save my brain some processing time!), so for how I ran it, it looks like this:
+I set up the example history with the earliest indices at the bottom.
 
- FIXME
+![Ordered history](../../images/wab-history-files-ascending.png "Note how N701 is lowest, ordered ascending to N707")
 
-If you ran yours in a different order, update the batching parameters below to suit!
+Therefore, when it is all concatenated together, the `batch` appears as follows:
+
+| Index | Batch | Genotype | Sex |
+|------ |--------------------|
+| N701 | 0    | wildtype    | male    |
+| N702 | 1    | knockout   | male    |
+| N703 | 2    | knockout   | female    |
+| N704 | 3    | wildtype    | male    |
+| N705 | 4    | wildtype    | male    |
+| N706 | 5    | wildtype    | male    |
+| N707 | 6    | knockout    | male    |
+
+If you used Zenodo to import files, they may not have imported in order (i.e. N701 to N707, ascending). In that case, you will need to tweak the parameters of the next tools appropriately to label your batches correctly!
+
 The two critical pieces of metadata in this experiment are **sex** and **genotype**. I will later want to color my cell plots by these parameters, so I want to add them in now!
 
 > ### {% icon hands_on %} Hands-on: Labelling sex
 >
 > 1. {% tool [Replace Text in a specific column](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Key-indexed observations annotation (obs) (output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
 >    - *"1. Replacement"*
->          - *"in column"*: 'Column: 3'
->          - *"Find pattern"*: 'FIXME'
->          - *"Replace with"*: 'male'
->    - Select **Insert Replacement**
+>
+>         - *"in column"*: `Column: 9` - or whichever column `batch` is in
+>         - *"Find pattern"*: `0|1|3|4|5|6`
+>         - *"Replace with"*: `male`
+>    - **+ Insert Replacement**
 >    - *"2. Replacement"*
->          - *"in column"*: 'Column: 3'
->          - *"Find pattern"*: 'FIXME'
->          - *"Replace with"*: 'female'
->    - Select **Insert Replacement**
+>
+>         - *"in column"*: `Column: 9`
+>         - *"Find pattern"*: `2`
+>         - *"Replace with"*: `female`
+>    - **+ Insert Replacement**
 >    - *"3. Replacement"*
->          - *"in column"*: 'Column: 3'
->          - *"Find pattern"*: 'batch'
->          - *"Replace with"*: 'sex'
+>
+>         - *"in column"*: `Column: 9`
+>         - *"Find pattern"*: `batch`
+>         - *"Replace with"*: `sex`
+>
 > Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
+>
 > 2. {% tool [Cut columns from a table](https://humancellatlas.usegalaxy.eu/root?tool_id=Cut1) %} with the following parameters:
->    - *"Cut columns"*: 'c3'
->    - *"Delimited by"*: 'Tab'
->    - % icon param-file %} *"From"*: (output of **Replace text** {% icon tool %})
-> 3. Rename output 'Sex metadata'
+>    - *"Cut columns"*: `c9`
+>    - *"Delimited by"*: `Tab`
+>    - % icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
+>
+> 3. Rename {% icon galaxy-pencil %} output `Sex metadata`
 {: .hands_on}
 
 That was so fun, let's do it all again but for genotype!
@@ -617,27 +635,33 @@ That was so fun, let's do it all again but for genotype!
 > ### {% icon hands_on %} Hands-on: Labelling genotype
 >
 > 1. {% tool [Replace Text in a specific column](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
->    - {% icon param-file %} *"File to process"*: `Key-indexed observations annotation (obs) (output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
+>    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %}
 >    - *"1. Replacement"*
->          - *"in column"*: 'Column: 3'
->          - *"Find pattern"*: 'FIXME'
->          - *"Replace with"*: 'wildtype'
->    - Select **Insert Replacement**
+>
+>         - *"in column"*: `Column: 9`
+>         - *"Find pattern"*: `0|3|4|5`
+>         - *"Replace with"*: `wildtype`
+>    - **+ Insert Replacement**
 >    - *"2. Replacement"*
->          - *"in column"*: 'Column: 3'
->          - *"Find pattern"*: 'FIXME'
->          - *"Replace with"*: 'knockout'
->    - Select **Insert Replacement**
+>
+>         - *"in column"*: `Column: 9`
+>         - *"Find pattern"*: `1|2|6`
+>         - *"Replace with"*: `knockout`
+>    - **+ Insert Replacement**
 >    - *"3. Replacement"*
->          - *"in column"*: 'Column: 3'
->          - *"Find pattern"*: 'batch'
->          - *"Replace with"*: 'genotype'
+>
+>         - *"in column"*: `Column: 9`
+>         - *"Find pattern"*: `batch`
+>         - *"Replace with"*: `genotype`
+>
 > Now we want only the column containing the genotype information - we will ultimately add this into the cell annotation in the AnnData object.
+>
 > 2. {% tool [Cut columns from a table](https://humancellatlas.usegalaxy.eu/root?tool_id=Cut1) %} with the following parameters:
->    - *"Cut columns"*: 'c3'
->    - *"Delimited by"*: 'Tab'
->    - % icon param-file %} *"From"*: (output of **Replace text** {% icon tool %})
-> 3. Rename output 'Genotype metadata'
+>    - *"Cut columns"*: `c9`
+>    - *"Delimited by"*: `Tab`
+>    - {% icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
+>
+> 3. Rename {% icon galaxy-pencil %} output `Genotype metadata`
 {: .hands_on}
 
 You might want to do this with all sorts of different metadata - which labs handled the samples, which days they were run, etc. Once you've added created all your metadata columns, we can add them together before plugging them into the AnnData object itself.
@@ -645,61 +669,99 @@ You might want to do this with all sorts of different metadata - which labs hand
 > ### {% icon hands_on %} Hands-on: Combining metadata columns
 >
 > 1. {% tool [Paste two files side by side](https://humancellatlas.usegalaxy.eu/root?tool_id=Paste1) %} with the following parameters:
->    - {% icon param-file %} *"Paste"*: `Genotype metadata'
->    - {% icon param-file %} *"and"*: 'Sex metadata'
->    - *"Delimit by"*: 'Tab'
-> 2. Rename - 'Cell Metadata'
+>    - {% icon param-file %} *"Paste"*: `Genotype metadata`
+>    - {% icon param-file %} *"and"*: `Sex metadata`
+>    - *"Delimit by"*: `Tab`
+> 2. Rename {% icon galaxy-pencil %} output `Cell Metadata`
 {: .hands_on}
 
 Let's add it to the AnnData object!
 
 > ### {% icon hands_on %} Hands-on: Adding metadata to AnnData object
 >
-> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.6.22.post1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: `Combined AnnData object'
+> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: output of previous **Manipulate AnnData** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
->    - *"What to annotate?"*: 'Observations (obs)'
->    - {% icon param-file %} *"Table with new annotations"*: 'Cell Metadata'
+>    - *"What to annotate?"*: `Observations (obs)``
+>    - {% icon param-file %} *"Table with new annotations"*: `Cell Metadata`
 {: .hands_on}
 
 Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want to clean up this AnnData object just a bit more first. It would be a lot nicer if 'batch' meant something, rather than 'the order in which the Manipulate AnnData tool added my datasets'.
 
 > ### {% icon hands_on %} Hands-on: Labelling batches
 >
-> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.6.22.post1+galaxy4) %} with the following parameters:
->    - {% icon param-file %} *"Annotated data matrix"*: (output of **Manipulate AnnData - Add new annotations** {% icon tool %})
+> 1. {% tool [Manipulate AnnData](hhttps://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+>    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
->    - *"Key for observations or variables annotation"*: 'batch'
->    - *"Comma-separated list of new categories"*: FIXME 'N701,N707,N706,N705,N704,N703,N702'
-> 2. Rename the output 'Batched Object'
+>    - *"Key for observations or variables annotation"*: `batch`
+>    - *"Comma-separated list of new categories"*: `N701,N702,N703,N704,N705,N706,N707`
 {: .hands_on}
 
-Huzzah! We are JUST about there. However, while we've been focussing on our cell metadata (sample, batch, genotype, etc.) to relabel the 'obs' in our object.. remember when I mentioned mitochondria ages ago? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells.
+
+Huzzah! We are JUST about there. However, while we've been focussing on our cell metadata (sample, batch, genotype, etc.) to relabel the 'observations' in our object...
+
+# 6: Mitochondrial reads
+
+Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined fastq files or are analysing just one (and thus skipping sections 4 & 5).
+
 > ### {% icon hands_on %} Hands-on: Calculating mitochondrial RNA in cells
 >
 > 1. {% tool [AnnData Operations](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: 'Batched object'
->    - *"Function of output object"*: `AnnData format`
->    - *"Copy AnnData to .raw"*: 'No'
->    - *"Gene symbols field in AnnData"*: 'NA.'
->    - *"Flag genes that start with these names"*: 'Insert Flag genes that start with these names'
->    - *"Starts with"*: 'True'
->    - *"Var name"*: 'mito'
->    - *"Number of top genes"*: '50'
-> 2. Rename output 'Pre-processed object'
+>    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: output of **Manipulate AnnData - Rename categories** {% icon tool %}
+>    - *"Format of output object"*: `AnnData format`
+>    - *"Copy AnnData to .raw"*: `No`
+>    - *"Gene symbols field in AnnData"*: `NA.`
+>    - *"Flag genes that start with these names"*: `Insert Flag genes that start with these names`
+>    - *"Starts with"*: `True`
+>    - *"Var name"*: `mito`
+>    - *"Number of top genes"*: `50`
 {: .hands_on}
 
-Well done!  I strongly suggest have a play with the **Inspect AnnData** {% icon tool %} on your final 'Pre-processed object' to see the wealth of information that has been added. You are now ready to move along to the next tutorial FIXME
+{% icon congratulations %}Well done!  I strongly suggest have a play with the **Inspect AnnData** {% icon tool %} on your final `Pre-processed object` to see the wealth of information that has been added. You are now ready to move along to further filtering! There is a cheat that may save you time in the future though...
 
-## Re-arrange
+# 7: Pulling single cell data from public resources
 
-To create the template, each step of the workflow had its own subsection.
+If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool which rather skips forward all these steps in one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
 
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
+> ### {% icon hands_on %} Hands-on: Retrieving data from Single Cell Expression Atlas
+>
+> 1. {% tool [EBI SCXA Data Retrieval](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
+>    - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
+>    - *"Choose the type of matrix to download"*: `Raw filtered counts`
+>
+> Now we need to transform this into an AnnData objects
+>
+> 2. {% tool [Scanpy Read10x](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0) %} with the following parameters:
+>    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
+>    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
+>    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
+>    - *"Cell metadata table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 exp_design.tsv`
+{: .hands_on}
 
-# Conclusion
+It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to this tutorial, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations).
+
+# 7. References
+
+ - Moreno P, Huang N, Manning J, et al. User-friendly, scalable tools and workflows for single-cell analysis. bioRxiv; 2020. DOI: 10.1101/2020.04.08.032698.
+ - Lun ATL, Riesenfeld S, Andrews T, et al. EmptyDrops: distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data. Genome Biol. 2019;20(1):63.
+ - Melsted P, Ntranos V, Pachter L. The Barcode, UMI, Set format and BUStools. Bioinformatics. 2019;
+ - Srivastava A, Malik L, Smith T, Sudbery I, Patro R. Alevin efficiently estimates accurate gene abundances from dscRNA-seq data. Genome Biol. 2019;20(1):65.
+ - Zheng GX, Terry JM, Belgrader P, et al. Massively parallel digital transcriptional profiling of single cells. Nat Commun. 2017;8:14049.
+
+# 8. Conclusion
 {:.no_toc}
 
-Sum up the tutorial and the key takeaways here. We encourage adding an overview image of the
-pipeline used.
+![Workflow Part 1](../../images/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
+
+![Workflow Part 2](../../images/wab-alevin-part2workflow.png "Workflow  - Steps 4-6")
+
+You've reached the end of this session!
+You may be interested in seeing an [example history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---answer-key-1) and [Part 2 workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-2). Note that the workflow will require changing of the `column` containing the batch metadata depending on how you are running it. The final object containing all the reads can be found in [here](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---total-anndata-example).
+
+We have:
+
+ * Taken raw read data and annotations and necessary input files for quantification.
+ * Run Alevin in two different parameterisations, both allowing Alevin to make its own calls on what constitutes empty droplets, and applying emptyDrops instead.
+ * Deployed barcode rank plots as a way of quickly assessing the signal present in droplet datasets.
+ * Applied the necessary conversion to pass these data to downstream processes.  
+ * Retrieved partially analysed data from the Single Cell Expression Atlas
