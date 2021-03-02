@@ -12,4 +12,3 @@ gem 'awesome_bot'
 gem 'html-proofer'
 gem 'pkg-config'
 gem 'kwalify'
-
