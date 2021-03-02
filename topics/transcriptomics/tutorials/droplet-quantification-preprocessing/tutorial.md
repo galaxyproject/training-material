@@ -179,9 +179,9 @@ We now have:
 
 We can now run Alevin. In some public instances, Alevin won't show up if you search for it. Instead, you have to click the Single Cell tab at the left and scroll down to the Alevin tool. Tip: If you click the tools from the tutorial option within Galaxy, you'll always have the correct version of the tool! In this case, it is: (Galaxy Version 0.14.1.2+galaxy1) - it should be default. If not, click 'Versions' and choose that version.   
 
-![Clicking the tool](../../images/wab-tutorial-in-galaxy.png "Tutorial option at the top right in Galaxy")
+![Tutorial option in Galaxy](../../images/wab-tutorial-in-galaxy.png "Tutorial option at the top right in Galaxy")
 
-![Accessing tutorial option within Galaxy](../../images/wab-tutorial-option-filler.png "Click the tool in the tutorial with Galaxy")
+![Accessing tools in the tutorial option within Galaxy](../../images/wab-tutorial-option-filler.png "Click the tool in the tutorial with Galaxy")
 
 > ### {% icon hands_on %} Hands-on: Running Alevin
 >
@@ -217,7 +217,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > ### {% icon comment %} What if I'm running a 10x sample?
 >
-> The main parameter that needs changing for a 10X Chromium sample is the 'Protocol' parameter of Alevin. Just select the correct 10x Chemistry there instead. Additionally, under 'Optional Commands', you can input a 'whitelist file'. This is the file of all the cell barcodes there are in 10x beads. You can get this file here 'https://zenodo.org/record/3457880/files/3M-february-2018.txt.gz' although you ought to check for any changes in chemistry or updates in the whitelist file directly with 10x themselves.
+> The main parameter that needs changing for a 10X Chromium sample is the 'Protocol' parameter of Alevin. Just select the correct 10x Chemistry there instead.
 {: .comment}
 
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:
