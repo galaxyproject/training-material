@@ -49,7 +49,7 @@ This tutorial will take you from raw fastq files to a cell x gene data matrix in
 >
 {: .agenda}
 
-# 1: Generating a matrix
+# Generating a matrix
 
 In this section, we will show you the principles of the initial phase of single-cell RNA-seq analysis: generating expression measures in a matrix. We'll concentrate on droplet-based (rather than plate-based) methodology, since this is the process with most differences with respect to conventional approaches developed for bulk RNA-seq.
 
@@ -65,9 +65,9 @@ This used to be a complex process involving multiple algorithms, or was performe
  * [Kallisto/ bustools](https://www.kallistobus.tools/) - developed by the originators of the transcriptome quantification method, Kallisto.
  * [Alevin](https://salmon.readthedocs.io/en/latest/alevin.html) - another transcriptome method developed by the authors of the Salmon tool.
 
-We're going to use Alevin for demonstration purposes, but we do not endorse one method over another.
+We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, but we do not endorse one method over another.
 
-## 1.1 Get Data
+## Get Data
 
 We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it's real, it's messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.
 
@@ -117,7 +117,7 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 {: .question}
 
 
-## 1.2 Generate a transcript to gene map
+## Generate a transcript to gene map
 
 Gene-level, rather than transcript-level, quantification is standard in scRNA-seq, which means that that the expression level of alternatively spliced RNA molecules are combined to create gene-level values. Droplet-based scRNA-seq techniques only sample one end each transcript, so lack the full-molecule coverage that would be required to accurately quantify different transcript isoforms.  
 
@@ -160,7 +160,7 @@ It's now time to parse the GTF file using the [rtracklayer](https://bioconductor
 > 3. Rename {% icon galaxy-pencil %} the uncompressed filtered FASTA file to `Filtered FASTA`
 {: .hands_on}
 
-## 1.3 Generate a transcriptome index & quantify!
+## Generate a transcriptome index & quantify!
 
 Alevin collapses the steps involved in dealing with dscRNA-seq into a single process. Such tools need to compare the sequences in your sample to a reference containing all the likely transcript sequences (a 'transcriptome'). This will contain the biological transcript sequences known for a given species, and perhaps also technical sequences such as 'spike ins' if you have those.
 
@@ -249,7 +249,7 @@ This is the matrix market (MTX) format.
 
 {% icon congratulations %} Congratulations - you've made an expression matrix! We could almost stop here. But it's sensible to do some basic QC, and one of the things we can do is look at a barcode rank plot.
 
-# 2: Basic QC
+# Basic QC
 
 The question we're looking to answer here, is: "do we have mostly a have a single cell per droplet"? That's what experimenters are normally aiming for, but it's not entirely straightforward to get exactly one cell per droplet. Sometimes almost no cells make it into droplets, other times we have too many cells in each droplet. At a minimum, we should easily be able to distinguish droplets with cells from those without.   
 
@@ -306,7 +306,7 @@ In experiments with relatively simple characteristics, this 'knee detection' met
 
 To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it from applying it's own thresholds. Click the re-run icon {% icon galaxy-refresh %} on any Alevin output in your history, because almost every parameter is the same as before, except you need to change the following:
 
-## 2.1 Generate an unprocessed matrix in a usable format
+## Generate an unprocessed matrix in a usable format
 
 > ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
 > 1. {% tool [Alevin](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
@@ -347,7 +347,7 @@ Alevin outputs MTX format, which we can pass to the dropletUtils package and run
 
 The output is a matrix in the correct orientation for the rest of our tools. However, our matrix is looking a bit sparse - for instance, click on `Gene table`. I don't know about you, but I'd struggle to have a good biological discussion using only Ensembl gene_ids! What I'd really like is the more understandable 'GAPDH' or other gene acronym, as well as information on mitochondrial genes so that I can assess if my cells were stressed out or not. In order to prepare our data for emptyDrops, we're going to combine this information into an object, and it's easiest to add in that information now.
 
-## 2.2 Adding in Gene metadata
+## Adding in Gene metadata
 
 > ### {% icon question %} Question
 >
@@ -417,9 +417,9 @@ Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. No
 
 Inspect {% icon galaxy-eye %} your `Annotated Gene Table`. That's more like it! You now have `gene_id`, `gene_name`, and `mito`. Now let's get back to your journey to emptyDrops and sophisticated thresholding of empty droplets!
 
-# 3: emptyDrops
+# emptyDrops
 
-emptyDrops works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:
+emptyDrops {% cite article-emptyDrops %} works with a specific form of R object called a SingleCellExperiment. We need to convert our transformed MTX files into that form, using the DropletUtils Read10x tool:
 
 > ### {% icon hands_on %} Hands-on: Converting to SingleCellExperiment format
 >
@@ -499,12 +499,12 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 
 {% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 fastq files...
 
-# 4: Combining fastq files
+# Combining fastq files
 
 This sample was originally one of seven. So to run the other [12 downsampled fastq files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
 
 
-## 4.1 Data
+## Data
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -534,7 +534,7 @@ This sample was originally one of seven. So to run the other [12 downsampled fas
 
 Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows you how each `N70X` corresponds to a sample, and whether that sample was from a male or female. This will be important metadata to add to our sample, which we will add very similarly to how you added the `gene_name` and `mito` metadata above!
 
-## 4.2 Concatenating Objects
+## Concatenating Objects
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
 > 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
@@ -576,7 +576,7 @@ Now have a look at the three {% icon tool %} **Inspect AnnData** outputs.
 >
 {: .question}
 
-# 5: Adding batch metadata
+# Adding batch metadata
 
 I set up the example history with the earliest indices at the bottom.
 
@@ -700,7 +700,7 @@ Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want
 
 Huzzah! We are JUST about there. However, while we've been focussing on our cell metadata (sample, batch, genotype, etc.) to relabel the 'observations' in our object...
 
-# 6: Mitochondrial reads
+# Mitochondrial reads
 
 Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined fastq files or are analysing just one (and thus skipping sections 4 & 5).
 
@@ -719,9 +719,9 @@ Do you remember when we mentioned mitochondria early on in this tutorial? And ho
 
 {% icon congratulations %}Well done!  I strongly suggest have a play with the **Inspect AnnData** {% icon tool %} on your final `Pre-processed object` to see the wealth of information that has been added. You are now ready to move along to further filtering! There is a cheat that may save you time in the future though...
 
-# 7: Pulling single cell data from public resources
+# Pulling single cell data from public resources
 
-If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool which rather skips forward all these steps in one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
+If you happen to be interested in analysing publicly available data, particularly from the [Single Cell Expression Atlas](https://www.ebi.ac.uk/gxa/sc/home), you may be interested in the following tool {% cite Moreno2020.04.08.032698 %} which rather skips forward all these steps in one! For this tutorial, the dataset can be seen [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/downloads) with experiment id of `E-MTAB-6945`.
 
 > ### {% icon hands_on %} Hands-on: Retrieving data from Single Cell Expression Atlas
 >
@@ -740,15 +740,7 @@ If you happen to be interested in analysing publicly available data, particularl
 
 It's important to note that this matrix is processed somewhat through the SCXA pipeline, which is quite similar to this tutorial, and it contains any and all metadata provided by their pipeline as well as the authors (for instance, more cell or gene annotations).
 
-# 7. References
-
- - Moreno P, Huang N, Manning J, et al. User-friendly, scalable tools and workflows for single-cell analysis. bioRxiv; 2020. DOI: 10.1101/2020.04.08.032698.
- - Lun ATL, Riesenfeld S, Andrews T, et al. EmptyDrops: distinguishing cells from empty droplets in droplet-based single-cell RNA sequencing data. Genome Biol. 2019;20(1):63.
- - Melsted P, Ntranos V, Pachter L. The Barcode, UMI, Set format and BUStools. Bioinformatics. 2019;
- - Srivastava A, Malik L, Smith T, Sudbery I, Patro R. Alevin efficiently estimates accurate gene abundances from dscRNA-seq data. Genome Biol. 2019;20(1):65.
- - Zheng GX, Terry JM, Belgrader P, et al. Massively parallel digital transcriptional profiling of single cells. Nat Commun. 2017;8:14049.
-
-# 8. Conclusion
+# Conclusion
 {:.no_toc}
 
 ![Workflow Part 1](../../images/wab-alevin-part1workflow.png "Workflow  - Steps 1-3")
