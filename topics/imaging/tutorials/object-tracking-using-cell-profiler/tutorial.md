@@ -4,19 +4,13 @@ layout: tutorial_hands_on
 title: Object tracking using CellProfiler
 zenodo_link: http://doi.org/10.5281/zenodo.4567084
 questions:
-- Which biological questions are addressed by the tutorial?
-- Which bioinformatics techniques are important to know for this type of data?
+- How to segment and track objects in fluorescence time-lapse microscopy images?
 objectives:
-- The learning objectives are the goals of the tutorial
-- They will be informed by your audience and will communicate to them and to yourself
-  what you should focus on during the course
-- They are single sentences describing what a learner should be able to do once they
-  have completed the tutorial
-- You can use Bloom's Taxonomy to write effective learning objectives
+- How to segment fluorescent objects using CellProfiler in Galaxy
+- How to track objects over multiple frames using CellProfiler in Galaxy
 time_estimation: 1H
 key_points:
-- The take-home messages
-- They will appear at the end of the tutorial
+- CellProfiler in Galaxy can be used to track objects in time-lapse microscopy images
 contributors:
 - sunyi000
 - beatrizserrano
@@ -30,34 +24,9 @@ contributors:
 
 <!-- This is a comment. -->
 
-General introduction about the topic and then an introduction of the
-tutorial (the questions and the objectives). It is nice also to have a
-scheme to sum up the pipeline used during the tutorial. The idea is to
-give to trainees insight into the content of the tutorial and the (theoretical
-and technical) key concepts they will learn.
-
-You may want to cite some publications; this can be done by adding citations to the
-bibliography file (`tutorial.bib` file next to your `tutorial.md` file). These citations
-must be in bibtex format. If you have the DOI for the paper you wish to cite, you can
-get the corresponding bibtex entry using [doi2bib.org](https://doi2bib.org).
-
-With the example you will find in the `tutorial.bib` file, you can add a citation to
-this article here in your tutorial like this:
-{% raw %} `{% cite Batut2018 %}`{% endraw %}.
-This will be rendered like this: {% cite Batut2018 %}, and links to a
-[bibliography section](#bibliography) which will automatically be created at the end of the
-tutorial.
-
-
-**Please follow our
-[tutorial to learn how to fill the Markdown]({{ site.baseurl }}/topics/contributing/tutorials/create-new-tutorial-content/tutorial.html)**
-
-
-***TODO***: Explain the biology
-
-***TODO***: Explain object tracking
-
-***TODO***: Explain the dataset (Drosophila embryos) from [CellProfiler examples](https://cellprofiler.org/examples). We can insert here a few of the images so that the 'movement' is shown.
+Most biological processes are dynamic and observing them over time can provide valuable insights. Combining fluorescent markers with time-lapse imaging is a common approach to collect data on dynamic cellular processes such as cell division (e.g. {% cite Neumann2010 %}, {% cite Heriche2014%}). However, automated time-lapse imaging can produce large amount of data that can be challenging to process. One of these challenges is the tracking of individual objects as it is often impossible to manually follow a large number of objects over many time points. 
+To demonstrate how automatic tracking can be applied in such situations, this tutorial will track dividing nuclei in a short time lapse recording of one mitosis of a syncytial blastoderm stage Drosophila embryo expressing a GFP-histone gene that labels chromatin.
+Tracking is done by first segmenting objects then linking objects between consecutive frames. Linking is done by matching objects and several criteria or matching rules are available. Here we will link objects if they significantly overlap between the current and previous frames.
 
 
 
