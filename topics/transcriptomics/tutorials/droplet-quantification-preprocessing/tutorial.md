@@ -99,7 +99,8 @@ Additionally, to map your reads, you will need a transcriptome to align against 
 >
 >    {% snippet snippets/import_from_data_library.md %}
 >
-> 3. Rename the datasets
+> 3. Rename {% icon galaxy-pencil %} the datasets
+>
 {: .hands_on}
 
 > ### {% icon question %} Questions
@@ -188,32 +189,32 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 >
 > 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
 >
->   > ### {% icon question %} Questions
->   >
->   > Try to fill in the parameters of Alevin using what you know!
->   >
->   >   > ### {% icon tip %} Tip: Strandedness?
->   >   >
->   >   > The Salmon documentation on 'Fragment Library Types' and running the Alevin command (https://salmon.readthedocs.io/en/latest/library_type.html and https://salmon.readthedocs.io/en/latest/alevin.html) will help here, although keep in mind the image there is drawn with the RNA 5' on top, whereas in this scRNA-seq protocol, the polyA is captured by its 3' tail and thus effectively the bottom or reverse strand...)
->   >   {: .tip}
->   >
->   >   > ### {% icon solution %} Solution
->   >   >    - *"Select a reference transcriptome from your history or use a built-in index?"*: `Use one from the history`
->   >   >       - You are going to generate the binary index using your filtered FASTA!
->   >   >    - {% icon param-file %} *"Transcripts FASTA file"*: `Filtered FASTA`
->   >   >    - *"Single or paired-end reads?"*: `Paired-end`
->   >   >    - {% icon param-file %} *"file1"*: `N701-Read1`
->   >   >    - {% icon param-file %} *"file2"*: `N701-Read2`
->   >   >    - *"Relative orientation of reads within a pair"*: `Mates are oriented towards each other (IR)`
->   >   >    - *"Specify the strandedness of the reads"*: `read comes from the reverse strand (SR)`
->   >   >    - *"Protocol"*: `DropSeq Single Cell protocol`
->   >   >    - {% icon param-file %} *"Transcript to gene map file"*: `Map`
->   >   >    - *"Retrieve all output files"*: `Yes`
->    - In *"Optional commands"*:
->        - *"dumpFeatures"*: `Yes`
->        - *"dumpMTX"*: `Yes`
->   >   {: .solution}
->   {: .question}
+>     > ### {% icon question %} Questions
+>     >
+>     > Try to fill in the parameters of Alevin using what you know!
+>     >
+>     >   > ### {% icon tip %} Tip: Strandedness?
+>     >   >
+>     >   > The Salmon documentation on 'Fragment Library Types' and running the Alevin command ([salmon.readthedocs.io/en/latest/library_type.html](https://salmon.readthedocs.io/en/latest/library_type.html]) and [salmon.readthedocs.io/en/latest/alevin.html](https://salmon.readthedocs.io/en/latest/alevin.html)) will help here, although keep in mind the image there is drawn with the RNA 5' on top, whereas in this scRNA-seq protocol, the polyA is captured by its 3' tail and thus effectively the bottom or reverse strand...)
+>     >   {: .tip}
+>     >
+>     >   > ### {% icon solution %} Solution
+>     >   >    - *"Select a reference transcriptome from your history or use a built-in index?"*: `Use one from the history`
+>     >   >       - You are going to generate the binary index using your filtered FASTA!
+>     >   >    - {% icon param-file %} *"Transcripts FASTA file"*: `Filtered FASTA`
+>     >   >    - *"Single or paired-end reads?"*: `Paired-end`
+>     >   >    - {% icon param-file %} *"file1"*: `N701-Read1`
+>     >   >    - {% icon param-file %} *"file2"*: `N701-Read2`
+>     >   >    - *"Relative orientation of reads within a pair"*: `Mates are oriented towards each other (IR)`
+>     >   >    - *"Specify the strandedness of the reads"*: `read comes from the reverse strand (SR)`
+>     >   >    - *"Protocol"*: `DropSeq Single Cell protocol`
+>     >   >    - {% icon param-file %} *"Transcript to gene map file"*: `Map`
+>     >   >    - *"Retrieve all output files"*: `Yes`
+>      - In *"Optional commands"*:
+>          - *"dumpFeatures"*: `Yes`
+>          - *"dumpMTX"*: `Yes`
+>     >   {: .solution}
+>     {: .question}
 {: .hands_on}
 
 > ### {% icon comment %} What if I'm running a 10x sample?
@@ -223,9 +224,9 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 This tool will take a while to run. Alevin produces many file outputs, not all of which we'll use. You can refer to the [Alevin documentation](https://salmon.readthedocs.io/en/latest/alevin.html) if you're curious what they all are, but we're most interested in is:
 
-    * the matrix itself (quants_mat.mtx.gz - the count by gene and cell)
-    * the row (cell/ barcode) identifiers (quants_mat_rows.txt) and
-    * the column (gene) labels (quants_mat_cols.txt).
+* the matrix itself (quants_mat.mtx.gz - the count by gene and cell)
+* the row (cell/ barcode) identifiers (quants_mat_rows.txt) and
+* the column (gene) labels (quants_mat_cols.txt).
 
 This is the matrix market (MTX) format.
 
