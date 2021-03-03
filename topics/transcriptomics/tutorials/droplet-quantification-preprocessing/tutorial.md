@@ -622,7 +622,7 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `sex`
 >
-> Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
+>    Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c9`
@@ -656,7 +656,7 @@ That was so fun, let's do it all again but for genotype!
 >         - *"Find pattern"*: `batch`
 >         - *"Replace with"*: `genotype`
 >
-> Now we want only the column containing the genotype information - we will ultimately add this into the cell annotation in the AnnData object.
+>    Now we want only the column containing the genotype information - we will ultimately add this into the cell annotation in the AnnData object.
 >
 > 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c9`
@@ -728,10 +728,10 @@ If you happen to be interested in analysing publicly available data, particularl
 > ### {% icon hands_on %} Hands-on: Retrieving data from Single Cell Expression Atlas
 >
 > 1. {% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
->    - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
->    - *"Choose the type of matrix to download"*: `Raw filtered counts`
+>      - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
+>      - *"Choose the type of matrix to download"*: `Raw filtered counts`
 >
-> Now we need to transform this into an AnnData objects
+>    Now we need to transform this into an AnnData objects
 >
 > 2. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0) %} with the following parameters:
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
