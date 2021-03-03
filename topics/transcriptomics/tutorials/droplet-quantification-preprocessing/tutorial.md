@@ -137,7 +137,7 @@ It's now time to parse the GTF file using the [rtracklayer](https://bioconductor
 
 > ### {% icon hands_on %} Hands-on: Generate a filtered FASTA and transcript-gene map
 >
-> 1. {% tool [GTF2GeneList](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:
+> 1. {% tool [GTF2GeneList](toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:
 >    - {% icon param-file %} *"Ensembl GTF file"*: `GTF file in the history` {% icon galaxy-history %}
 >    - *"Feature type for which to derive annotation"*: `transcript` (Your sequences are transcript sequencing, so this is your starting point)
 >    - *"Field to place first in output table"*: `transcript_id` (This is accessing the column you identified above!)
@@ -178,7 +178,7 @@ We can now run Alevin. In some public instances, Alevin won't show up if you sea
 
 > ### {% icon hands_on %} Hands-on: Running Alevin
 >
-> 1. {% tool [Alevin](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
 >
 >   > ### {% icon question %} Questions
 >   >
@@ -248,7 +248,7 @@ The question we're looking to answer here, is: "do we have mostly a have a singl
 
 > ### {% icon hands_on %} Hands-on: Generate a raw barcode QC plot
 >
-> 1. {% tool [Droplet barcode rank plot](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
+> 1. {% tool [Droplet barcode rank plot](toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
 >    - *"Input MTX-format matrix?"*: `No`
 >    - {% icon param-file %} *"A two-column tab-delimited file, with barcodes in the first column and frequencies in the second"*: `raw_cb_frequencies.txt`
 >    - *"Label to place in plot title"*: `Barcode rank plot (raw barcode frequencies)`
@@ -272,7 +272,7 @@ The right hand plots are density plots from the first one, and the thresholds ar
 
 > ### {% icon hands_on %} Hands-on: Generate Alevin's barcode QC plot
 >
-> 1. {% tool [Droplet barcode rank plot](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
+> 1. {% tool [Droplet barcode rank plot](toolshed.g2.bx.psu.edu/repos/ebi-gxa/droplet_barcode_plot/_dropletBarcodePlot/1.6.1+galaxy2) %} with the following parameters:
 >    - *"Input MTX-format matrix?"*: `Yes`
 >    - *"Matrix-market format matrix file, with cells by column (overrides --barcode-frequencies if supplied)"*: `quants_mat.mtx`
 >    - *"For use with --mtx-matrix: force interpretation of matrix to assume cells are by row, rather than by column (default)"*: `Yes`
@@ -302,7 +302,7 @@ To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it
 ## Generate an unprocessed matrix in a usable format
 
 > ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
-> 1. {% tool [Alevin](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
 >   - *"Optional commands"*
 >   - *"keepCBFraction"*: '1' - i.e. keep them all!
 >   - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
@@ -328,7 +328,7 @@ Alevin outputs MTX format, which we can pass to the dropletUtils package and run
 
 > ### {% icon hands_on %} Hands-on: Transform matrix
 >
-> 1. {% tool [salmonKallistoMtxTo10x](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5) %} with the following parameters:
+> 1. {% tool [salmonKallistoMtxTo10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/salmon_kallisto_mtx_to_10x/_salmon_kallisto_mtx_to_10x/0.0.1+galaxy5) %} with the following parameters:
 >    - {% icon param-file %} *".mtx-format matrix"*: `quants_mat.mtx.gz` (output of **Alevin** {% icon tool %})
 >    - {% icon param-file %} *"Tab-delimited genes file"*: `quants_mat_cols.txt` (output of **Alevin** {% icon tool %})
 >    - {% icon param-file %} *"Tab-delimited barcodes file"*: `quants_mat_rows.txt` (output of **Alevin** {% icon tool %})
@@ -370,7 +370,7 @@ We're now going to re-run {% icon galaxy-refresh %} the tool that extracts infor
 
 > ### {% icon hands_on %} Hands-on: Generate gene information
 >
-> 1. {% tool [GTF2GeneList](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:
+> 1. {% tool [GTF2GeneList](toolshed.g2.bx.psu.edu/repos/ebi-gxa/gtf2gene_list/_ensembl_gtf2gene_list/1.42.1+galaxy6) %} with the following parameters:
 >    - *"Feature type for which to derive annotation"*: `gene`
 >    - *"Field to place first in output table"*: `gene_id`
 >    - *"Suppress header line in output?"*: `Yes`
@@ -386,7 +386,7 @@ Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. No
 
 > ### {% icon hands_on %} Hands-on: Combine MTX Gene Table with Gene Information
 >
-> 1. {% tool [Join two Datasets](https://humancellatlas.usegalaxy.eu/root?tool_id=join1) %} with the following parameters:
+> 1. {% tool [Join two Datasets](join1) %} with the following parameters:
 >    - *"Join"*: `Gene Table`
 >    - *"Using column"*: `Column: 1`
 >    - *"with"*: `Gene Information`
@@ -400,7 +400,7 @@ Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. No
 > If you inspect {% icon galaxy-eye %} the object, you'll see we have joined these tables and now have quite a few gene_id repeats. Let's take those out, while keeping the order of the original 'Gene Table'.
 >
 >
-> 2.  {% tool [Cut columns from a table](https://humancellatlas.usegalaxy.eu/root?tool_id=Cut1) %} with the following parameters:
+> 2.  {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c1,c4,c5`
 >    - *"Delimited by"*: `Tab`
 >    - *"From"*: output of **Join two Datasets** {% icon tool %}
@@ -416,7 +416,7 @@ emptyDrops {% cite article-emptyDrops %} works with a specific form of R object 
 
 > ### {% icon hands_on %} Hands-on: Converting to SingleCellExperiment format
 >
-> 1. {% tool [DropletUtils Read10x](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2){% icon tool %} with the following parameters:
+> 1. {% tool [DropletUtils Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_read_10x/dropletutils_read_10x/1.0.3+galaxy2){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Expression matrix in sparse matrix format (.mtx)"*: `Matrix table`
 >    - {% icon param-file %} *"Gene Table"*: `Annotated Gene Table`
 >    - {% icon param-file %} *"Barcode/cell table"*: `Barcode table`
@@ -429,7 +429,7 @@ Fantastic! Now that our matrix is combined into an object, specifically the Sing
 
 > ### {% icon hands_on %} Hands-on: Emptydrops
 >
-> 1. {% tool [DropletUtils emptyDrops](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} with the following parameters:
+> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
 >    - *"Should barcodes estimated to have no cells be removed from the output object?"*: `Yes`
 >
@@ -467,7 +467,7 @@ Let's go back and tweak parameters, re-running the tool with a looser threshold 
 
 > ### {% icon hands_on %} Hands-on: emptyDrops - do-over!
 >
-> 1. {% tool [DropletUtils emptyDrops](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} with the following parameters:
+> 1. {% tool [DropletUtils emptyDrops](toolshed.g2.bx.psu.edu/repos/ebi-gxa/dropletutils_empty_drops/dropletutils_empty_drops/1.0.3+galaxy1){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"SingleCellExperiment rdata object"*: `SCE Object`
 >    - *"UMI count lower bound"*: `5` - you can input different numbers here and see what happens!
 >    - *"Should barcodes estimated to have no cells be removed from the output object?"*: `Yes`
@@ -481,7 +481,7 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 
 > ### {% icon hands_on %} Hands-on: Converting to AnnData format
 >
-> 1. {% tool [SCEasy convert](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1){% icon tool %} with the following parameters:
+> 1. {% tool [SCEasy convert](toolshed.g2.bx.psu.edu/repos/ebi-gxa/sceasy_convert/sceasy_convert/0.0.5+galaxy1){% icon tool %} with the following parameters:
 >    - *"Direction of conversion"*: `SingleCellExperiment to AnnData`
 >    - {% icon param-file %} *"Input object in SingleCellExperiment RDS format"*: `<yournumberhere>UMI-Object`
 >    - *"Name of the assay to be transferred as main layer"*: `counts`
@@ -530,7 +530,7 @@ Inspect the {% icon galaxy-eye %} `Experimental Design` text file. This shows yo
 ## Concatenating Objects
 > ### {% icon hands_on %} Hands-on: Concatenating AnnData objects
 >
-> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0){% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: `N701-400k-AnnData`
 >    - *"Function to manipulate the object"*: 'Concatenate along the observations axis'
 >    - {% icon param-file %} *"Annotated data matrix to add"*: 'Select all the other matrix files from bottom to top'
@@ -543,13 +543,13 @@ Now let's look at what we've done! Unfortunately, AnnData objects are quite comp
 
 > ### {% icon hands_on %} Hands-on: Inspecting AnnData Objects
 >
-> 1. {% tool [Inspect AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `General information about the object`
-> 2. {% tool [Inspect AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 2. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed observations annotation (obs)`
-> 3. {% tool [Inspect AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
+> 3. {% tool [Inspect AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_inspect/anndata_inspect/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData** {% icon tool %}
 >    - *"What to inspect?"*: `Key-indexed annotation of variables/features (var)`
 {: .hands_on}
@@ -593,7 +593,7 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 
 > ### {% icon hands_on %} Hands-on: Labelling sex
 >
-> 1. {% tool [Replace Text in a specific column](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %})
 >    - *"1. Replacement"*
 >
@@ -615,7 +615,7 @@ The two critical pieces of metadata in this experiment are **sex** and **genotyp
 >
 > Now we want only the column containing the sex information - we will ultimately add this into the cell annotation in the AnnData object.
 >
-> 2. {% tool [Cut columns from a table](https://humancellatlas.usegalaxy.eu/root?tool_id=Cut1) %} with the following parameters:
+> 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c9`
 >    - *"Delimited by"*: `Tab`
 >    - % icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
@@ -627,7 +627,7 @@ That was so fun, let's do it all again but for genotype!
 
 > ### {% icon hands_on %} Hands-on: Labelling genotype
 >
-> 1. {% tool [Replace Text in a specific column](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
+> 1. {% tool [Replace Text in a specific column](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_replace_in_column/1.1.3) %} with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Inspect AnnData: Key-indexed observations annotation (obs)** {% icon tool %}
 >    - *"1. Replacement"*
 >
@@ -649,7 +649,7 @@ That was so fun, let's do it all again but for genotype!
 >
 > Now we want only the column containing the genotype information - we will ultimately add this into the cell annotation in the AnnData object.
 >
-> 2. {% tool [Cut columns from a table](https://humancellatlas.usegalaxy.eu/root?tool_id=Cut1) %} with the following parameters:
+> 2. {% tool [Cut columns from a table](Cut1) %} with the following parameters:
 >    - *"Cut columns"*: `c9`
 >    - *"Delimited by"*: `Tab`
 >    - {% icon param-file %} *"From"*: output of **Replace text** {% icon tool %}
@@ -661,7 +661,7 @@ You might want to do this with all sorts of different metadata - which labs hand
 
 > ### {% icon hands_on %} Hands-on: Combining metadata columns
 >
-> 1. {% tool [Paste two files side by side](https://humancellatlas.usegalaxy.eu/root?tool_id=Paste1) %} with the following parameters:
+> 1. {% tool [Paste two files side by side](Paste1) %} with the following parameters:
 >    - {% icon param-file %} *"Paste"*: `Genotype metadata`
 >    - {% icon param-file %} *"and"*: `Sex metadata`
 >    - *"Delimit by"*: `Tab`
@@ -672,7 +672,7 @@ Let's add it to the AnnData object!
 
 > ### {% icon hands_on %} Hands-on: Adding metadata to AnnData object
 >
-> 1. {% tool [Manipulate AnnData](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of previous **Manipulate AnnData** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Add new annotation(s) for observations or variables`
 >    - *"What to annotate?"*: `Observations (obs)``
@@ -683,7 +683,7 @@ Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want
 
 > ### {% icon hands_on %} Hands-on: Labelling batches
 >
-> 1. {% tool [Manipulate AnnData](hhttps://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](htoolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
@@ -699,7 +699,7 @@ Do you remember when we mentioned mitochondria early on in this tutorial? And ho
 
 > ### {% icon hands_on %} Hands-on: Calculating mitochondrial RNA in cells
 >
-> 1. {% tool [AnnData Operations](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1) %} with the following parameters:
+> 1. {% tool [AnnData Operations](toolshed.g2.bx.psu.edu/repos/ebi-gxa/anndata_ops/anndata_ops/0.0.3+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Input object in hdf5 AnnData format"*: output of **Manipulate AnnData - Rename categories** {% icon tool %}
 >    - *"Format of output object"*: `AnnData format`
 >    - *"Copy AnnData to .raw"*: `No`
@@ -718,13 +718,13 @@ If you happen to be interested in analysing publicly available data, particularl
 
 > ### {% icon hands_on %} Hands-on: Retrieving data from Single Cell Expression Atlas
 >
-> 1. {% tool [EBI SCXA Data Retrieval](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
+> 1. {% tool [EBI SCXA Data Retrieval](toolshed.g2.bx.psu.edu/repos/ebi-gxa/retrieve_scxa/retrieve_scxa/v0.0.2+galaxy2) %} with the following parameters:
 >    - *"SC-Atlas experiment accession"*: `E-MTAB-6945`
 >    - *"Choose the type of matrix to download"*: `Raw filtered counts`
 >
 > Now we need to transform this into an AnnData objects
 >
-> 2. {% tool [Scanpy Read10x](https://humancellatlas.usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0) %} with the following parameters:
+> 2. {% tool [Scanpy Read10x](toolshed.g2.bx.psu.edu/repos/ebi-gxa/scanpy_read_10x/scanpy_read_10x/1.6.0+galaxy0) %} with the following parameters:
 >    - *"Expression matrix in sparse matrix format (.mtx)"*: `EBI SCXA Data Retrieval on E-MTAB-6945 matrix.mtx (Raw filtered counts)`
 >    - *"Gene table"*:  `EBI SCXA Data Retrieval on E-MTAB-6945 genes.tsv (Raw filtered counts)`
 >    - *"Barcode/cell table"*: `EBI SCXA Data Retrieval on E-MTAB-6945 barcodes.tsv (Raw filtered counts)`
