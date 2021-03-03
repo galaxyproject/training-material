@@ -308,13 +308,16 @@ In experiments with relatively simple characteristics, this 'knee detection' met
 
 To use emptyDrops effectively, we need to go back and re-run Alevin, stopping it from applying it's own thresholds. Click the re-run icon {% icon galaxy-refresh %} on any Alevin output in your history, because almost every parameter is the same as before, except you need to change the following:
 
+
 ## Generate an unprocessed matrix in a usable format
 
 > ### {% icon hands_on %} Hands-on: Stopping Alevin from thresholding
-> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %}
+> 1. {% tool [Alevin](toolshed.g2.bx.psu.edu/repos/bgruening/alevin/alevin/1.3.0+galaxy2) %} (Click re-run on the last Alevin output)
 >   - *"Optional commands"*
 >   - *"keepCBFraction"*: '1' - i.e. keep them all!
 >   - *"freqThreshold"*: '3' - This will only remove cell barcodes with a frequency of less than 3, a low bar to pass but useful way of avoiding processing a bunch of almost certainly empty barcodes
+>
+>   {% snippet snippets/rerun_tool.md %}
 {: .hands_on}
 
 > ### {% icon question %} Question
