@@ -1,35 +1,43 @@
 ---
 layout: tutorial_hands_on
 
-title: Generating a cell matrix using Alevin
+title: "Generating a cell matrix using Alevin"
 subtopic: single-cell
 priority: 9
 
-zenodo_link: 'https://zenodo.org/record/4574153#.YD56YS-l2uU'
+zenodo_link: 'https://zenodo.org/record/4574153'
+
 questions:
-- I have some single cell fastq files I want to analyse. Where do I start?
+  - I have some single cell FASTQ files I want to analyse. Where do I start?
+
 objectives:
-- Repeat matrix generation for any droplet-based single cell sequencing data
-- Apply data combination and metadata editing for particular experimental designs
-- Interpret quality control (QC) plots to make informed decisions on cell thresholds
-- Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
+  - Repeat matrix generation for any droplet-based single cell sequencing data
+  - Apply data combination and metadata editing for particular experimental designs
+  - Interpret quality control (QC) plots to make informed decisions on cell thresholds
+  - Find relevant information in GTF files for the particulars of their study, and include this in data matrix metadata
+
 time_estimation: 3H
+
 key_points:
-- Create a scanpy-accessible AnnData object from fastq files, including relevant cell and gene metadata
-- Combine multiple samples and label according to study design
+  - Create a scanpy-accessible AnnData object from FASTQ files, including relevant cell and gene metadata
+  - Combine multiple samples and label according to study design
+
+tags:
+  - single-cell
+  - 10x
+
+contributors:
+  - nomadscientist
+  - pinin4fjords
+
 requirements:
--
-    type: "internal"
+  - type: "internal"
     topic_name: transcriptomics
     tutorials:
         - scrna-intro
         - scrna-umis
-tags:
-- single-cell
-- 10x
-contributors:
-- nomadscientist
-- pinin4fjords
+
+gitter: Galaxy-Training-Network/galaxy-single-cell
 
 ---
 
@@ -38,7 +46,7 @@ contributors:
 
 <!-- This is a comment. -->
 
-This tutorial will take you from raw fastq files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of ATGGGCTT etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. In the second part of this tutorial, we will also look at combining fastq files and adding in metadata (for instance, SEX or GENOTYPE) for analysis later on. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each 4 lines of text. Later on in analysis this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the fastq files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
+This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. In the second part of this tutorial, we will also look at combining fastq files and adding in metadata (for instance, SEX or GENOTYPE) for analysis later on. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each 4 lines of text. Later on in analysis this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the fastq files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
 
 > ### Agenda
 >
@@ -683,7 +691,7 @@ Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want
 
 > ### {% icon hands_on %} Hands-on: Labelling batches
 >
-> 1. {% tool [Manipulate AnnData](htoolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
