@@ -409,7 +409,7 @@ Inspect {% icon galaxy-eye %} the **Gene Information** object in the history. No
 >    - *"Keep the header lines"*: `No`
 >
 >
-> If you inspect {% icon galaxy-eye %} the object, you'll see we have joined these tables and now have quite a few gene_id repeats. Let's take those out, while keeping the order of the original 'Gene Table'.
+>    If you inspect {% icon galaxy-eye %} the object, you'll see we have joined these tables and now have quite a few gene_id repeats. Let's take those out, while keeping the order of the original 'Gene Table'.
 >
 >
 > 2.  {% tool [Cut columns from a table](Cut1) %} with the following parameters:
