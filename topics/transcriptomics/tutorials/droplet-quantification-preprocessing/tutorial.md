@@ -691,7 +691,7 @@ Woohoo! We're there! You can run an **Inspect AnnData** to check now, but I want
 
 > ### {% icon hands_on %} Hands-on: Labelling batches
 >
-> 1. {% tool [Manipulate AnnData](htoolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
+> 1. {% tool [Manipulate AnnData](toolshed.g2.bx.psu.edu/repos/iuc/anndata_manipulate/anndata_manipulate/0.7.5+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Annotated data matrix"*: output of **Manipulate AnnData - Add new annotations** {% icon tool %}
 >    - *"Function to manipulate the object"*: `Rename categories of annotation`
 >    - *"Key for observations or variables annotation"*: `batch`
