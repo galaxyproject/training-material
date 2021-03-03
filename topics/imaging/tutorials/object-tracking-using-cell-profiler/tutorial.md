@@ -100,7 +100,7 @@ The idea is to keep the theory description before quite simple to focus more on 
 A big step can have several subsections or sub steps:
 
 
-## Sub-step with **ColorToGray**
+## Change the images to gray color
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -137,7 +137,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **IdentifyPrimaryObjects**
+## Segmentation
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -186,7 +186,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **MeasureObjectSizeShape**
+## Measure nuclei size and shape
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -224,7 +224,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **MeasureObjectIntensity**
+## Measure the nuclei intensity
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -264,7 +264,7 @@ A big step can have several subsections or sub steps:
 >
 {: .question}
 
-## Sub-step with **TrackObjects**
+## Track nuclei
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
