@@ -46,7 +46,7 @@ gitter: Galaxy-Training-Network/galaxy-single-cell
 
 <!-- This is a comment. -->
 
-This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. In the second part of this tutorial, we will also look at combining fastq files and adding in metadata (for instance, SEX or GENOTYPE) for analysis later on. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each 4 lines of text. Later on in analysis this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the fastq files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
+This tutorial will take you from raw FASTQ files to a cell x gene data matrix in AnnData format. What's a data matrix, and what's AnnData format? Well you'll find out! Importantly, this is the first step in processing single cell data in order to start analysing it. Currently you have a bunch of strings of `ATGGGCTT` etc. in your sequencing files, and what you need to know is how many cells you have and what genes appear in those cells. In the second part of this tutorial, we will also look at combining FASTQ files and adding in metadata (for instance, SEX or GENOTYPE) for analysis later on. These steps are the most computationally heavy in the single cell world, as you're starting with 100s of millions of reads, each 4 lines of text. Later on in analysis this data becomes simple gene counts such as 'Cell A has 4 GAPDHs', which is a lot easier to store! Because of this data overload, we have downsampled the FASTQ files to speed up the analysis a bit. Saying that, you're still having to map loads of reads to the massive murine genome, so get yourself a cup of coffee and prepare to analyse!
 
 > ### Agenda
 >
@@ -79,7 +79,7 @@ We're going to use Alevin {% cite article-Alevin %} for demonstration purposes, 
 
 We've provided you with some example data to play with, a small subset of the reads in a mouse dataset of fetal growth restriction (see the study in Single Cell Expression Atlas [here](https://www.ebi.ac.uk/gxa/sc/experiments/E-MTAB-6945/results/tsne) and the project submission [here](https://www.ebi.ac.uk/arrayexpress/experiments/E-MTAB-6945/)). This is a study using the Drop-seq chemistry, however this tutorial is almost identical to a 10x chemistry. We will point out the one tool parameter change you will need to run 10x samples. This data is not carefully curated, standard tutorial data - it's real, it's messy, it desperately needs filtering, it has background RNA running around, and most of all it will give you a chance to practice your analysis as if this data were yours.
 
-Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin). How did I downsample these fastq files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
+Down-sampled reads and some associated annotation can be downloaded from Zenodo below, or you can import this [example input history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/input---pre-processing-with-alevin). How did I downsample these FASTQ files? Check out [this history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-1---how-to-downsample) to find out!
 Additionally, to map your reads, you will need a transcriptome to align against (a FASTA) as well as the gene information for each transcript (a gtf) file. You can download these for your species of interest from Ensembl [here](https://www.ensembl.org/info/data/ftp/index.html). Additionally, these files are available in the above history as well as the Zenodo links below. Keep in mind, these are big files, so they may take a bit to import!
 
 > ### {% icon hands_on %} Hands-on: Data upload - Part 1
@@ -238,7 +238,7 @@ This is the matrix market (MTX) format.
 >
 > > ### {% icon solution %} Solution
 > >
-> > 1. Inspect {% icon galaxy-eye %} the file {% icon param-file %} meta_info.json. You can see the mapping rate is a paltry `24.75%`. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the fastq file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!
+> > 1. Inspect {% icon galaxy-eye %} the file {% icon param-file %} meta_info.json. You can see the mapping rate is a paltry `24.75%`. This is a terrible mapping rate. Why might this be? Remember this was downsampled, and specifically by taking only the last 400,000 reads of the FASTQ file. The overall mapping rate of the file is more like 50%, which is still quite poor, but for early Drop-Seq samples and single-cell data in general, you might expect a slightly poorer mapping rate. 10x samples are much better these days! This is real data, not test data, after all!
 > > 2. Inspect {% icon galaxy-eye %} the file {% icon param-file %} 'quants_mat_rows.txt', and you can see it has `2163` lines. The rows refer to the cells in the cell x gene matrix. According to this (rough) estimate, your sample has 2163 cells in it!
 > >
 > {: .solution}
@@ -499,11 +499,11 @@ You should now have `111` barcodes! You now have an annotated expression matrix 
 >
 {: .hands_on}
 
-{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 fastq files...
+{% icon congratulations %} Congrats! Your object is ready to for the scanpy pipeline! However, it may be that you want to combine this object with others like it, for instance, maybe you ran 5 samples, and you are starting with 10 FASTQ files...
 
-# Combining fastq files
+# Combining FASTQ files
 
-This sample was originally one of seven. So to run the other [12 downsampled fastq files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
+This sample was originally one of seven. So to run the other [12 downsampled FASTQ files](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/alevin-tutorial---all-samples---400k), you can use a [workflow](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/w/pre-processing-with-alevin---part-1-imported-from-uploaded-file)! Note - the N705 subsample is unluckily largely junk reads, so emptyDrops doesn't work. Instead, I processed it with Alevin. The total sample runs fine on emptyDrops of course. All these samples are going to take a while, so go and have several cups of tea... Or, better yet, I have [run them myself](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input-generation), and plopped them in a [new clean history](https://humancellatlas.usegalaxy.eu/u/wendi.bacon.training/h/pre-processing-with-alevin---part-2---input) for you to import as a fresh history. Alternatively, you can get data with zenodo.
 
 
 ## Data
@@ -704,7 +704,7 @@ Huzzah! We are JUST about there. However, while we've been focussing on our cell
 
 # Mitochondrial reads
 
-Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined fastq files or are analysing just one (and thus skipping sections 4 & 5).
+Do you remember when we mentioned mitochondria early on in this tutorial? And how often in single cell samples, mitochondrial RNA is often an indicator of stress during dissociation? We should probably do something with our column of true/false in the gene annotation that tells us information about the cells. You will need to do this whether you have combined FASTQ files or are analysing just one (and thus skipping sections 4 & 5).
 
 > ### {% icon hands_on %} Hands-on: Calculating mitochondrial RNA in cells
 >
