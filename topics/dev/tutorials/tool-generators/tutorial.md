@@ -945,14 +945,14 @@ planemo tool_factory.
 Many thanks are due to:
 
 - Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the design and construction of this tutorial.
-- Helena Rasch for encouragement, review and assistance to validate, rationalise and revise the material.
+- Helena Rasch for review and assistance in validating, rationalising and revising the tutorial.
 
 ---
 
 # Appendix: Alternative methods for running the ToolFactory.
 
 > ### {% icon warning %} ToolFactory suddenly won't run in planemo - ignore this material please until I figure out what's broken
->TF passes planemo test but won't run planemo - see PR for details
+> TF passes planemo test but won't run planemo - see PR for details
 >
 {: .warning}
 
