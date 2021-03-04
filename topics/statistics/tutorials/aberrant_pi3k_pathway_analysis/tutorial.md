@@ -63,7 +63,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 > 6. Instructions to get datasets from shared library is given in Hands-on: Data upload.
 {: .hands_on}
 
-# **Get data for analysis from classifier to pharmacological correlations**
+# Get data for analysis from classifier to pharmacological correlations
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
@@ -140,7 +140,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 -    **GSE94937_kras_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession: [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937).
 {:.details}
 
-# **PanCancer aberrant pathway activity analysis (PAPAA)**
+# PanCancer aberrant pathway activity analysis (PAPAA)
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) algorithms  learn from various features in datasets and generate predictive models. Extracting transcriptional patterns and learning insights of tumor physiology from gene expression data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer ({% cite Men2017 }). Hyperactive oncogenic pathway  signatures can be useful in predicting sensitivity to therapeutic agents ({% cite Bild2005 %}). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the PanCancer data ({% cite Way2018 %}). This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from [PanCanAtlas](https://gdc.cancer.gov/about-data/publications/pancanatlas).
 
@@ -171,7 +171,7 @@ Each feature (gene) is given a rank and score (negative or positive) depending o
 
 In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that may be helpful for treatment of various cancers. Here, we generate models using [ERBB2](https://www.genecards.org/cgi-bin/carddisp.pl?gene=ERBB2), [KRAS](https://www.genecards.org/cgi-bin/carddisp.pl?gene=KRAS), [PIK3CA](https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3CA), and [AKT1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=AKT1) oncogenes from the ERK/RAS/PI3K signaling axis pathway.  **Have fun!**
 
-## **PAPAA: PanCancer classifier**
+## PAPAA: PanCancer classifier
 This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene expression information (pancan_rnaseq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv & copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.
 
 ![Prediction metrics for PI3K_OG model](../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png "Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.")
@@ -246,7 +246,7 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 >    - Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alternative genes and cancer types: *alt_gene_alt_disease_summary.tsv ; alt_summary_counts.csv ; alt_gene_alt_disease_aupr_bar.pdf ; alt_gene_alt_disease_auroc_bar.pdf* Examine these files to analyze our PI3K_OG model on other alternate diseases.
 {: .comment}
 
-## **PanCancer within disease analysis**
+## PanCancer within disease analysis
 This step is designed to generate individual pan-within models for each individual disease. It takes the same inputs as first step and generates similar output for each individual disease.
 
 > ### {% icon hands_on %} Hands-on: Generating models for individual diseases listed for ERBB2,PIK3CA,KRAS,AKT1
@@ -295,7 +295,7 @@ This step is designed to generate individual pan-within models for each individu
 >    - Disease classifier figures: list of 2 files [disease_pr disease_roc] for each disease
 {: .comment}
 
-## **PanCancer compare within models**
+## PanCancer compare within models
 we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model and individual models.
 ![Compare Pan model with with-in disease model](../../images/aberrant_pi3k_pathway_analysis/within.png "Cross-validation performance characteristic metric AUROC for the pan-cancer model compared to individual models trained on each cancer type")
 
@@ -319,7 +319,7 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 >    - Comparison plots for altgene, alt_within, Pan_alt models ("alt_gene_auroc_comparison.pdf" and "alt_gene_aupr_comparison.pdf")
 {: .comment}
 
-## **PanCancer apply weights**
+## PanCancer apply weights
 In this step we would like to predict 'y' status (mutational status) using 'x' matrix (gene expression). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the expression and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions.
 
 > ### {% icon hands_on %} Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model
@@ -354,7 +354,7 @@ In this step we would like to predict 'y' status (mutational status) using 'x' m
 >    - Log file for script run and additional information
 {: .comment}
 
-## **PanCancer visualize decisions**
+## PanCancer visualize decisions
 In this step we generate visualization plots using classifier decision function for samples in each individual disease, total decisions for all samples in all diseases, and hypermutated samples in all diseases.
 ![PI3K_OG_total_decisions_plot](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_total_decisions.png "Probability density plot for total decisions for all samples with the given classifier decision function")
 
@@ -377,7 +377,7 @@ In this step we generate visualization plots using classifier decision function 
 >    - Visualize decision function for hyper mutated tumors ("hyper_mutated.pdf")
 {: .comment}
 
-## **PanCancer map mutation class**
+## PanCancer map mutation class
 In this step we combined variant level information for each mutation combining with classifier predictions.
 
 > ### {% icon hands_on %} Hands-on: map mutation class for ERBB2_PIK3CA_KRAS_AKT1 model
@@ -404,7 +404,7 @@ In this step we combined variant level information for each mutation combining w
 >    - Log file for script run and additional information
 {: .comment}
 
-## **PanCancer alternative genes pathwaymapper**
+## PanCancer alternative genes pathwaymapper
 In this step we combine classifier weights, copy number information, recalculate metrics for positive samples, visualize distribution for AUROC and AUPR for all genes and metrics for each gene.
 
 > ### {% icon hands_on %} Hands-on: alternative genes pathway mapper for ERBB2_PIK3CA_KRAS_AKT1 model
@@ -437,7 +437,7 @@ In this step we combine classifier weights, copy number information, recalculate
 >    - Log file for script run and additional information
 {: .comment}
 
-## **PanCancer pathway count heatmaps**
+## PanCancer pathway count heatmaps
 This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway.
 ![PI3K_OG_combined_heatmap](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png "Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type")
 
@@ -479,7 +479,7 @@ This step generates combined heatmap from mutation and copy number information a
 >    - Summarizes mutation, copy, and total counts per sample by targene pathway and generates "path_events_per_sample.tsv" file
 {: .comment}
 
-## **PanCancer targene summary figures**
+## PanCancer targene summary figures
 This step generates plots summarizing various analysis, including heatmaps for distribution of aberrant events across tumors, distribution of predictions at variant levels.
 
 > ### {% icon hands_on %} Hands-on: Summary figures for ERBB2_PIK3CA_KRAS_AKT1 model
@@ -513,7 +513,7 @@ This step generates plots summarizing various analysis, including heatmaps for d
 >    - Extracting sample classifier scores for amino-acid level alterations in each sample and generate "amino_acid_mutation_scores.tsv" file
 {: .comment}
 
-## **PanCancer targene cell line predictions**
+## PanCancer targene cell line predictions
 In this step we use our classifier information and predict mutational status for various cell lines in CCLE and GDSC data sources.
 ![CCLE_targene_celline_classification](../../images/aberrant_pi3k_pathway_analysis/ccle_classification.png "PI3K_OG classifiers applied to CCLE cell lines. Cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots.")
 ![GDSC_targene_celline_classification](../../images/aberrant_pi3k_pathway_analysis/gdsc_classification.png "PI3K_OG classifiers applied to CCLE 390 standard cell lines between CCLE and GDSC cell lines that harbor mutations in ERBB2, KRAS, PIK3CA, AKT1 are indicated by yellow boxes with red dots and wild types with the green boxes and blue dots. ")
@@ -564,7 +564,7 @@ In this step we use our classifier information and predict mutational status for
 >    - Apply CCLE classifier scores to evaluate GDSC2 pharmacological data response (gdsc2_ccle_targene_pharmacology_predictions.tsv)
 {: .comment}
 
-## **PanCancer external sample status prediction**
+## PanCancer external sample status prediction
 In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822), where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.
 ![GSE69822_samples_classification](../../images/aberrant_pi3k_pathway_analysis/external.png "PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).")
 
@@ -588,7 +588,9 @@ In this step we use our classifier information and predict mutational status fro
 >    - Log file for script run and additional information
 {: .comment}
 
-## **PanCancer targene pharmacology**
+
+
+## PanCancer targene pharmacology
 In this step we use the classifier derived cell line predictions and use them to evaluate pharmacological response of these cell lines. We plot log IC50 with classifier scores for each cell line and draw a correlation for drug response in absence or presence of targene mutations.
 
 ![Afatinib_pharmacological_response](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_gdsc1_ccle_drug.png "Natural log fitted IC50 (Ln-IC50) values of Afatinib pharmacological response compared against PI3K_OG classifier scores of various cell lines. Cell lines with mutant (orange) or wild-type (blue) for ERBB2, KRAS, PIK3CA, AKT1 are indicated. The trend lines and p values are shown separately for wild-type or mutant cell lines. Cell lines treated with Afatinib, a known EGFR inhibitor.")
@@ -631,7 +633,7 @@ In this step we use the classifier derived cell line predictions and use them to
 >
 {: .question}
 
-# **Conclusions**
+# Conclusions
 {:.no_toc}
 
 - In our tutorial, we used machine learning based PI3K oncogene classifier in galaxy to distinguish tumor samples using PI3K activity. The classifier shows high accuracy ~80-86% in detecting aberrant PI3K activity in TCGA samples.
