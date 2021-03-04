@@ -49,8 +49,8 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 > 1. Create a new history for this RNA-seq exercise
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Open the data upload manager (Get Data -> Upload file)
 > 3. Copy and paste the links for the reads and annotation file
@@ -78,7 +78,7 @@ Due to the large size of this dataset, we have downsampled it to only include re
 >
 >    You will need to fetch the link to the annotation file yourself ;)
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 {: .hands_on}
 

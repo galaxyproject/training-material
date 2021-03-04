@@ -266,11 +266,11 @@ Let's create a new history.
 > ### {% icon hands_on %} Hands-on: New history
 > 1. Create a new history
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Rename your history, *e.g.* "Next-analysis"
 >
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 {: .hands_on}
 

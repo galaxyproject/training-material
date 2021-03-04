@@ -9,7 +9,6 @@ zenodo_link: "https://zenodo.org/record/3457880"
 tags:
   - single-cell
   - 10x
-zenodo_link: "https://zenodo.org/record/3457880"
 questions:
   - What is 10X?
   - What is STARsolo and what is Cell Ranger?
@@ -150,11 +149,11 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >
 > 1. Create a new history and rename it (e.g. scRNA-seq 10X dataset tutorial)
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 1. Import the sub-sampled FASTQ data from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 >    ```
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L001_R1_001.fastq.gz
@@ -163,7 +162,7 @@ The barcodes in the R1 FASTQ data are checked against these known cell barcodes 
 >    https://zenodo.org/record/3457880/files/subset_pbmc_1k_v3_S1_L002_R2_001.fastq.gz
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 > 3. Import the Gene Annotations and Cell Barcodes from [`Zenodo`](https://zenodo.org/record/3457880) or from the data library (ask your instructor)
 >
@@ -248,13 +247,17 @@ To perform the demultiplexing, we need to tell **RNA STARsolo** where to look in
 
 We will now proceed to demultiplex, map, and quantify both sets of reads using the correct chemistry discovered in the previous sub-section.
 
+> ### {% icon comment %} Comment
+>
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %} consumes a large amount of memory. During the Smörgåsbord training please use `Human (Homo Sapiens): hg19 chrX` as the reference genome if you follow this tutorial on [usegalaxy.org](https://usegalaxy.org). This performs the mapping only against chromosome X. The full output dataset is available at [zenodo](https://zenodo.org/record/3581213/files/matrix.mtx) and will be the starting point for the next tutorial.
+{: .comment}
 
 > ### {% icon hands_on %} Hands-on
-> 
-> **RNA STARsolo** {% icon tool %} with the following parameters:
+>
+> {% tool [RNA STARsolo](toolshed.g2.bx.psu.edu/repos/iuc/rna_starsolo/rna_starsolo/2.7.7a) %}  with the following parameters:
 >    - *"Custom or built-in reference genome"*: `Use a built-in index`
 >        - *"Reference genome with or without an annotation"*: `use genome reference without builtin gene-model`
->            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full`
+>            - *"Select reference genome"*: `Human (Homo Sapiens): hg19 Full` or `Human (Homo Sapiens): hg19 chrX`
 >            - *"Gene model (gff3,gtf) file for splice junctions"*: `Homo_sapiens.GRCh37.75.gtf`
 >            - *"Length of genomic sequence around annotated junctions"*: `100`
 >    - *"Type of single-cell RNA-seq"*: `Drop-seq or 10X Chromium`
@@ -410,7 +413,7 @@ To get a high quality count matrix we must apply the **DropletUtils** tool, whic
 
 > ### {% icon hands_on %} Hands-on: Default Method
 >
-> **DropletUtils** {% icon tool %} with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -469,7 +472,7 @@ A useful diagnostic for droplet-based data is the barcode rank plot, which shows
 
 > ### {% icon hands_on %} Hands-on: Rank Barcodes
 >
-> **DropletUtils** {% icon tool %} with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})
@@ -500,7 +503,7 @@ On large 10x datasets we can use these thresholds as metrics to utilise in our o
 
 > ### {% icon hands_on %} Hands-on: Custom Filtering
 >
-> **DropletUtils** {% icon tool %} with the following parameters:
+> {% tool [DropletUtils](toolshed.g2.bx.psu.edu/repos/iuc/dropletutils/dropletutils/1.10.0+galaxy1) %}  with the following parameters:
 >    - *"Format for the input matrix"*: `Bundled (barcodes.tsv, genes.tsv, matrix.mtx)`
 >        - {% icon param-file %} *"Count Data"*: `Matrix Gene Counts` (output of **RNA STARsolo** {% icon tool %})
 >        - {% icon param-file %} *"Genes List"*: `Genes` (output of **RNA STARsolo** {% icon tool %})

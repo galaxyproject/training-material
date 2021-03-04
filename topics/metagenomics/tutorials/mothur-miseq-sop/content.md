@@ -41,7 +41,7 @@ In this tutorial we will perform an analysis based on the
 {: .agenda}
 
 
-{% include snippets/warning_results_may_vary.md %}
+{% snippet snippets/warning_results_may_vary.md %}
 
 # Obtaining and preparing data
 
@@ -108,7 +108,7 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >
 > 1. Make sure you have an empty analysis history. Give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. **Import Sample Data.**
 >       - Import the sample FASTQ files to your history, either from a shared data library (if available), or from Zenodo
@@ -159,9 +159,9 @@ All data required for this tutorial has been made available from Zenodo [![DOI](
 >       > ```
 >       {: .solution }
 >
->       {% include snippets/import_via_link.md %}
+>       {% snippet snippets/import_via_link.md %}
 >
->       {% include snippets/import_from_data_library.md %}
+>       {% snippet snippets/import_from_data_library.md %}
 >
 > 3. **Import Reference Data**
 >    - Import the following reference datasets
@@ -301,14 +301,14 @@ Next, we want to improve the quality of our data. To this end we will run a work
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow1_quality_control.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 1: Quality Control** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Contigs"*: the `trim.contigs.fasta` output from **Make.contigs** {% icon tool %}
 >    - {% icon param-file %} *"2: Groups"*: the `group file` from **Make.contigs** {% icon tool%}
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > > ### {% icon question %} Questions
 > >
@@ -696,14 +696,14 @@ this chimera removal using the `VSEARCH` algorithm {% cite Rognes2016 %} that is
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow2_data_cleaning.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 2: Data Cleaning and Chimera Removal** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Aligned Sequences"*: the `align` output from **Align.seqs** {% icon tool %}
 >    - {% icon param-file %} *"2: Count Table"*: the `count table` from **Count.seqs** {% icon tool%}
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > > ### {% icon question %} Question
 > >
@@ -800,7 +800,7 @@ and want to remove them from our dataset.
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow3_classification.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 3: Classification** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -809,7 +809,7 @@ and want to remove them from our dataset.
 >    - {% icon param-file %} *"3: Training set Taxonomy"*: `trainset9_032012.pds.tax` file you imported from Zenodo
 >    - {% icon param-file %} *"4: Training set FASTA"*: `trainset9_032012.pds.fasta` file from Zenodo
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > > ### {% icon question %} Questions
 > >
@@ -993,14 +993,14 @@ and comparing the results with the expected outcome.
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow4_mock_otu_clustering.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 4: Mock OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Mock Count Table"*: the `count table` output from **Get.groups** {% icon tool %}
 >    - {% icon param-file %} *"2: Mock Sequences"*: the `fasta` output from **Get.groups** {% icon tool%}
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > {% else %}
 >
@@ -1135,7 +1135,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow5_otu_clustering.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 5: OTU Clustering** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
@@ -1143,7 +1143,7 @@ We'll now use the **Cluster** tool, with `taxlevel` set to `4`, requesting that 
 >    - {% icon param-file %} *"2: Count table"*: the `count table` output from **Remove.lineage** {% icon tool%}
 >    - {% icon param-file %} *"3: Taxonomy"*: the `taxonomy` output from **Remove.lineage** {% icon tool%}
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 > {% else %}
 >
@@ -1325,13 +1325,13 @@ We will use a plotting tool to visualize the rarefaction curves, and use **Summa
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow6_alpha_diversity.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 6: Alpha Diversity** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Shared File"*: the `Shared file` output from **Make.shared** {% icon tool %}
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 {: .hands_on}
 
@@ -1467,14 +1467,14 @@ In the following workflow we will:
 >    - Copy the URL (e.g. via right-click) of [this workflow]({{ site.baseurl }}{{ page.dir }}workflows/workflow7_beta_diversity.ga) or download it to your computer.
 >    - Import the workflow into Galaxy
 >
->    {% include snippets/import_workflow.md %}
+>    {% snippet snippets/import_workflow.md %}
 >
 > 2. Run **Workflow 7: Beta Diversity** {% icon workflow %} using the following parameters:
 >    - *"Send results to a new history"*: `No`
 >    - {% icon param-file %} *"1: Shared File"*: the `Shared file` output from **Make.shared** {% icon tool %}
 >    - {% icon param-collection %} *"2: Subsample shared"*: the `shared` output from **Sub.sample** {% icon tool %}
 >
->    {% include snippets/run_workflow.md %}
+>    {% snippet snippets/run_workflow.md %}
 >
 {: .hands_on}
 

@@ -65,7 +65,7 @@ The data for this tutorial comes from MALDI-TOF imaging of peptides in a mouse k
 >
 > 1. **Create a new history** and give it a name.
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Upload the data from [Zenodo](https://zenodo.org/record/1560646) via the **composite** option
 >
@@ -132,11 +132,11 @@ The mouse kidney dataset contains internal calibrants that were sprayed together
 >    1570.68    Fibrinopeptide_B
 >    2465.19    ACTH_18-39
 >    ```
->    {% include snippets/create_new_file.md convertspaces=true %}
+>    {% snippet snippets/create_new_file.md convertspaces=true %}
 >
 > 2. **Rename dataset** to `Calibrants`
 >
->    {% include snippets/rename_dataset.md name="Calibrants" %}
+>    {% snippet snippets/rename_dataset.md name="Calibrants" %}
 >
 > 3. Run the **MSI Qualitycontrol** {% icon tool %} with the following parameters:
 >    - {% icon param-file %} *"MSI data"*: `mouse_kidney_cut imzML` will be automatically recognized as input file

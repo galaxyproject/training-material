@@ -94,8 +94,8 @@ First, let's setup our history and initial dataset.
 >
 > 1. Create a new history for this tutorial and name it "RaceID on scRNA"
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Import the file from [Zenodo](https://zenodo.org/record/1511582) or from the shared data library
 >
@@ -103,13 +103,13 @@ First, let's setup our history and initial dataset.
 >    https://zenodo.org/record/1511582/files/intestinalData.tsv
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 > 3. Rename the dataset to *"intestinal"*
 > 4. Check that the datatype is a tab-separated file
 >
->    {% include snippets/change_datatype.md datatype="tabular" %}
+>    {% snippet snippets/change_datatype.md datatype="tabular" %}
 >
 {: .hands_on}
 
@@ -142,12 +142,12 @@ Is each batch equally populated? We can investigate this ourselves by extracting
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Select first** {% icon tool %} with the following parameters:
+> 1. {% tool [Select first](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_head_tool/1.1.0) %}  with the following parameters:
 >    - {% icon param-file %} *"File to select"*: imported tabular file
 >    - *"Operation"*: `Keep first lines`
 >    - *"Number of lines"*: `1`
 >
-> 2. **Transpose** {% icon tool %}
+> 2. {% tool [Transpose](toolshed.g2.bx.psu.edu/repos/iuc/datamash_transpose/datamash_transpose/1.1.0) %}
 >    - {% icon param-file %} *"Input tabular dataset"*: output of **Select first**
 >
 >    > ### {% icon question %} Questions
@@ -159,7 +159,7 @@ Is each batch equally populated? We can investigate this ourselves by extracting
 >    > {: .solution}
 >    {: .question}
 >
-> 1. **Text transformation** {% icon tool %} with the following parameters:
+> 1. {% tool [Text transformation](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %}  with the following parameters:
 >    - {% icon param-file %} *"File to process"*: output of **Transpose**
 >    - *"SED Program"*: `s/_[0-9]+//`
 >
@@ -175,7 +175,7 @@ Is each batch equally populated? We can investigate this ourselves by extracting
 >    > {: .solution}
 >    {: .question}
 >
-> 1. **Datamash** {% icon tool %} with the following parameters:
+> 1. {% tool [Datamash](toolshed.g2.bx.psu.edu/repos/iuc/datamash_ops/datamash_ops/1.1.0) %}  with the following parameters:
 >    - {% icon param-file %} *"Input tabular dataset"*: output of **Text transformation**
 >    - *"Group by fields"*: `1`
 >    - *"Input file has a header line"* : `Yes`
@@ -216,7 +216,7 @@ We can refine filtering thresholds by examining how much a histogram of our plot
 
 > ### {% icon hands_on %} Hands-on: Unique Cell Types
 >
-> 1. **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Initial processing using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_filtnormconf/raceid_filtnormconf/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Count Matrix"*: `intestinal` (Input dataset)
 >    - In *"Filtering"*:
 >        - *"Min Transcripts"*: `3000`
@@ -304,7 +304,7 @@ Four histograms are generated with the top line giving the raw expression data f
 >
 > > ### {% icon solution %} Solution
 > >
-> > The answer to the first two questions can be seen in log file generated **Filtering, Normalisation, and Confounder Removal using RaceID**
+> > The answer to the first two questions can be seen in log file generated **Initial processing using RaceID**
 > >
 > > 1. 287 cells remain (66%)
 > > 2. 2089 genes remain (10%)
@@ -363,8 +363,8 @@ Here we assume that there is no unwanted technical or biological variability in 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Clustering using RaceID** {% icon tool %} with the following parameters:
->    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Filtering, Normalisation, and Confounder Removal using RaceID** {% icon tool %})
+> 1. {% tool [Clustering using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_clustering/raceid_clustering/3.1) %}  with the following parameters:
+>    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Initial processing using RaceID** {% icon tool %})
 >    - In *"Clustering"*:
 >        - *"Use Defaults?"*: `Yes`
 >    - In *"Outliers"*:
@@ -592,7 +592,7 @@ The previous section produced plots that spoke about the quality of the clusteri
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `Yes`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -700,7 +700,7 @@ Here we will compare how the cells in cluster 1 are differentially expressed com
 
 > ### {% icon hands_on %} Hands-on: MA plot
 >
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -747,7 +747,7 @@ Here we will look at the combined expression of *Gstm3*, *St3gal4*, and *Gna11* 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. **Cluster Inspection using RaceID** {% icon tool %} with the following parameters:
+> 1. {% tool [Cluster Inspection using RaceID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspectclusters/raceid_inspectclusters/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RaceID RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - *"Plot All Clusters?"*: `No`
 >    - *"Perform Subset Analysis?"*: `No`
@@ -770,7 +770,7 @@ The above figure shows where the combined expression of *Gstm3*, *St3gal4*, and 
 >
 > Are these genes (the top 3 DE genes from cluster 1) expressed where we expect them to be?
 >
-> {% include snippets/use_scratchbook.md %}
+> {% snippet snippets/use_scratchbook.md %}
 >
 >
 > > ### {% icon solution %} Solution
@@ -794,7 +794,7 @@ It was [mentioned previously](#details-details-continuous-phenotypes-vs-discrete
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **Lineage computation using StemID** {% icon tool %} with the following parameters:
+> 1. {% tool [Lineage computation using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_trajectory/raceid_trajectory/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Clustering using RaceID** {% icon tool %})
 >    - In *"Compute transcriptome entropy of each cell"*:
 >        - *"Use Defaults?"*: `Yes`
@@ -926,7 +926,7 @@ Here we will explore one branching point of interest; `c3` giving rise to `c1` a
 
 > ### {% icon hands_on %} Hands-on: Comparing trajectory paths 3 to 1, and 3 to 5
 >
-> 1. **Lineage Branch Analysis using StemID** {% icon tool %} with the following parameters:
+> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `Yes`
@@ -996,7 +996,7 @@ Here we will see if we can see any pseudo-time dynamics taking place between the
 
 > ### {% icon hands_on %} Hands-on
 >
-> 1. **Lineage Branch Analysis using StemID** {% icon tool %} with the following parameters:
+> 1. {% tool [Lineage Branch Analysis using StemID](toolshed.g2.bx.psu.edu/repos/iuc/raceid_inspecttrajectory/raceid_inspecttrajectory/3.1) %}  with the following parameters:
 >    - {% icon param-file %} *"Input RDS"*: `outrdat` (output of **Lineage computation using StemID** {% icon tool %})
 >    - In *"StemID Branch Link Examine"*:
 >        - *"Perform StemID?"*: `No`

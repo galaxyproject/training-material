@@ -49,8 +49,8 @@ The data for today is a sample of *M. tuberculosis* [collected](https://www.ncbi
 >https://zenodo.org/record/3960260/files/Mycobacterium_tuberculosis_h37rv.ASM19595v2.45.chromosome.Chromosome.gff3
 >```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
 {: .hands_on}
 
@@ -75,7 +75,7 @@ tutorial on ["Quality control"]({% link topics/sequence-analysis/tutorials/quali
 >
 >       - {% icon param-files %} *"Short read data from your current history"*: select both FASTQ datasets.
 >
->    {% include snippets/select_multiple_datasets.md %}
+>    {% snippet snippets/select_multiple_datasets.md %}
 >
 >    The **FastQC** {% icon tool %} input form looks like this. You only need to pay attention to the top part
 >    where *Short read data from your current history* is selected. Leave all the other parameters at their default
@@ -151,9 +151,9 @@ As these reads look like they need a bit of trimming, we can turn to the **Trimm
 
 *Note:* We would normally examine our trimmed reads with **FastQC** and **MultiQC** again to see if the quality trimming has been successful, but in this tutorial we will move straight on to save time.
 
-# Look for contamination with Kraken2
+# Look for contamination with Kraken2 (optional)
 
-We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our snp analysis. **Kraken 2** is an effective way of looking and which species is represented in our reads and so we can easily spot possible contamination of our sample.
+We should also look for contamination in our reads. Sometimes, other sources of DNA accidentally or inadvertantly get mixed in with our sample. Any reads from non-sample sources will confound our snp analysis. **Kraken 2** is an effective way of looking and which species is represented in our reads and so we can easily spot possible contamination of our sample. Unfortunately **kraken2** uses a lot of RAM (typically 50GB when used with the *Standard* database), so you might want to skip this step if your environment doesn't have enough computing nodes able to process such jobs. For an example of a probably-contaminated sample that does not use **kraken2** as part of its analysis, see the optional section on analysing *SRR12416842* at the end of this tutorial.
 
 > ### {% icon hands_on %} Hands-on: Run Kraken2
 >
@@ -200,7 +200,7 @@ gene annotation from the [H37Rv strain](https://www.ncbi.nlm.nih.gov/nuccore/NC_
 >   - *"Use the following dataset as the reference sequence"*: `Mycobacterium_tuberculosis_ancestral_reference.gbk`
 >   - *"Single or Paired-end reads"*: `Paired`
 >       - *"Select first set of reads"*: `Trimmomatic on X (R1 paired)`
->       - *"Select second set of reads"*: `Trimmomatic on X (R1 paired)`
+>       - *"Select second set of reads"*: `Trimmomatic on X (R2 paired)`
 >
 >   - Under *"Advanced parameters"*
 >       - *"Minimum proportion for variant evidence"*: `0.1` (This is so we can see possible rare variants in our sample)
@@ -273,8 +273,13 @@ Finally, TB Variant Report use the COMBAT-TB [eXplorer](https://explorer.sanbi.a
 >
 >       **TB Profiler** produces 3 output files, it's own VCF file, a report about the sample including it's likely lineages and any AMR found. There is also a `.json` formatted results file.
 >
+> 2. When *snippy* is run with Genbank format input it prepends `GENE_` to gene names in the VCF annotation. This causes a problem for *TB Variant report*, so we need to edit the output with sed.
 >
-> 2. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0) %}: {% icon tool %} with the following parameters
+>     {% tool [Text transformation with sed](toolshed.g2.bx.psu.edu/repos/bgruening/text_processing/tp_sed_tool/1.1.1) %}: {% icon tool %} with the following parameters:
+>
+>       - *"SED Program"*: `s/GENE_//g`
+> 
+> 3. {% tool [TB Variant Report](toolshed.g2.bx.psu.edu/repos/iuc/tbvcfreport/tbvcfreport/0.1.7+galaxy0) %}: {% icon tool %} with the following parameters
 >   - *"Input SnpEff annotated M.tuberculosis VCF(s)"*: `TB-Profiler Profile VCF on data XX`
 >   - *"TBProfiler Drug Resistance Report (Optional)"*: `TB-Profiler Profile on data XX: Results.json`
 >
@@ -344,7 +349,7 @@ A new dataset will be created in your history, containing the JBrowse interactiv
 
 You can now click on the names of the tracks to add them in, try the vcf file and gff file. You can see where the variants are located and which genes they are in. If you click on the BAM file you can zoom right in to see the read alignments for each variant if you wish.
 
-# A different sample with a different story
+# Different samples, different stories (optional)
 
 In [Zenodo](https://doi.org/10.5281/zenodo.3960260) we have included sample *18-1* from the same study (aka. [ERR1750907](https://www.ebi.ac.uk/ena/browser/view/ERR1750907)). This is also a southern African
 *M. tuberculosis* sample, but in some ways quite different from the sample we have analysed in the tutorial thus
@@ -358,9 +363,9 @@ far.
 >https://zenodo.org/record/3960260/files/018-1_2.fastq.gz
 >```
 >
-> 2. Examine the sequence quality with FastQC {% icon tool %}.
+> 2. Examine the sequence quality with {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} {% icon tool %}.
 >
-> 3. Examine the sample composition with kraken2 {% icon tool %}.
+> 3. Examine the sample composition with {% tool [Kraken2](toolshed.g2.bx.psu.edu/repos/iuc/kraken2/kraken2/2.0.8_beta+galaxy0) %} {% icon tool %}.
 >
 >    > ### {% icon question %} Questions
 >    >
@@ -379,5 +384,64 @@ far.
 {: .hands_on}
 
 As you can see, quality of sequence data strongly determines how useful it is for subsequent analysis. This is why quality control is always a first step before trying to call and interpret variants. What we do with a sample like this will depend on what resources we have available. Can we discard it and use other data for our analysis? Can we re-sequence? Can we clean it up, remove the adapters (using **Trimmomatic**, **fastp** or **cutadapt**) and perhaps use the Kraken2 output to decide which reads to keep? These are all possible strategies and there is no one answer for which is the correct one to pursue.
+
+The next example is *SRR12416842* from an Indonesia [study](https://www.microbiologyresearch.org/content/journal/jmm/10.1099/jmm.0.001221) of multi-drug resistant (MDR) tuberculosis.
+
+> ### {% icon hands_on %} Hands-on: Take a closer look at sample SRR12416842
+>
+> 1. Fetch the data from EBI European Nucleotide Archive
+>```
+>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_1.fastq.gz
+>ftp://ftp.sra.ebi.ac.uk/vol1/fastq/SRR124/042/SRR12416842/SRR12416842_2.fastq.gz
+>```
+>
+> 2. Examine the sequence quality with {% tool [FastQC](toolshed.g2.bx.psu.edu/repos/devteam/fastqc/fastqc/0.72+galaxy1) %} {% icon tool %}.
+>
+> 3. Perform quality trimming with {% tool [Trimmomatic](toolshed.g2.bx.psu.edu/repos/pjbriggs/trimmomatic/trimmomatic/0.36.5) %} {% icon tool %}
+>
+> 4. Map the samples to the *M. tuberculosis* reference genome with {% tool [Snippy](toolshed.g2.bx.psu.edu/repos/iuc/snippy/snippy/4.5.0) %} {% icon tool %}
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. Was the sequence quality good?
+>    >
+>    > 2. How many variants were discovered by snippy?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. The **FastQC** result shows that while there is some dropoff in sequence quality (especially towards the end of the reads from the second dataset), the sequences are of good enough quality to analyse.
+>    > >
+>    > > 2. **snippy* discovered more than 15,000 variants. This is unusual for a *M. tuberculosis* sample where we expect at most a few thousand variants across the length of the genome.
+>    > {: .solution}
+>    {: .question}
+>
+> 5. Run {% tool [samtools stats](toolshed.g2.bx.psu.edu/repos/devteam/samtools_stats/samtools_stats/2.0.2+galaxy2) %} {% icon tool %} on the *snippy on data XX, data XX, and data XX mapped reads (bam)* file. In the output, pay attention to the *sequences*, *reads mapped* and *reads unmapped* results.
+>
+> 6. Run the {% tool [BAM Coverage Plotter](toolshed.g2.bx.psu.edu/repos/iuc/jvarkit_wgscoverageplotter/jvarkit_wgscoverageplotter/20201223+galaxy0)} %} {% icon tool %} on the mapped reads BAM file that you got from **snippy**.
+>
+>    > ### {% icon question %} Questions
+>    >
+>    > 1. What percentage of reads mapped to the reference genome?
+>    >
+>    > 2. If you could run the **BAM Coverage Plotter** tool, was the coverage even across the genome?
+>    >
+>    > > ### {% icon solution %} Solution
+>    > >
+>    > > 1. Only 107351 out of 7297618, that is 1.5%, of the reads mapped to the reference genome.
+>    > >
+>    > > 2. The image from the **BAM Coverage Plotter** tool shows just a few vertical bars, suggestion that almost no reads mapped to the reference genome.
+>    > >
+>    > > ![BAM Coverage Plot of SRR12416842 showing few reads mapped](../../images/mtb_poor_mapping.png)
+>    > >
+>    > > By contrast, reads from the `004-02` map evenly across the *M. tuberculosis* genome, with an average depth of over 100 reads, as shown in this output from **BAM Coverage Plotter**:
+>    > >
+>    > > ![BAM Coverage Plot of 004-02 showing reads mapped evenly](../../images/mtb_good_mapping.png)
+>    > >
+>    > > If you wish to investigate further, analyse the SRR12416842 sample with **kraken2**.
+>    > {: .solution}
+>    {: .question}
+{: .hands_on}
+
+There is something clearly wrong with sample SRR12416842, perhaps indicating sample contamination. This example of a sample that doesn't map to the reference genome illustrates that even when sequence quality is good, sequence data problems can become apparent in later steps of analysis and it is important to always have a sense of what results to expect. You can develop a better sense of what quality control results to expect by first practicing techniques with known data before analysing new samples.
 
 We hope you enjoyed this tutorial!

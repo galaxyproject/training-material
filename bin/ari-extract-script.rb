@@ -14,7 +14,7 @@ WORD_MAP = {}
 YAML.load_file(ARI_MAP).each_pair do |k,v|
  WORD_MAP.merge!({k.downcase => v})
 end
-PUNCTUATION = ['-', '--', '@']
+PUNCTUATION = ['-', '--', '@', '%', '‘', '’', ',', '!', '(', ')', '.', "'", '"', '[', ']', ';', ':']
 
 # Do we have these slides? Yes or no.
 m_qs = metadata.fetch('questions', [])
@@ -91,13 +91,26 @@ end
 blocks.push(["Thank you for watching!"])
 
 def translate(word)
-  m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
+  if /^\s+$/.match(word)
+    return word
+  end
+
+  if PUNCTUATION.find_index(word) then
+    return word
+  end
 
   if WORD_MAP.key?(word) then
     return WORD_MAP[word]
-  elsif PUNCTUATION.find_index(word) then
+  end
+
+  m = /([^A-Za-z0-9]*)([A-Za-z0-9]+)([^A-Za-z0-9]*)(.*)/.match(word)
+
+  if ! m then
+    puts "Error: #{word}"
     return word
-  elsif m[2] then
+  end
+
+  if m[2] then
     fixed = WORD_MAP.fetch(m[2].downcase, m[2])
   else
     fixed = m[2]
@@ -135,9 +148,15 @@ blocks = blocks.map{ |block|
 blocks2 = blocks.map { |block|
   # Translate specific words as needed
   s = block.map{ |line|
+    # First we try and catch the things we can directly replace (esp usegalaxy.*)
     line = line.strip.split(' ').map{ |w|
       translate(w)
     }.join(' ')
+
+    # Now we do more fancy replacements
+    line = line.strip.split(/([ ‘’,'".:;!`()])/).reject(&:empty?).compact.map{ |w|
+      translate(w)
+    }.join('')
     line
   }
   s

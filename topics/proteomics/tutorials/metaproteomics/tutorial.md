@@ -61,12 +61,12 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 1. Create a new history and name it something meaningful (e.g. *Metaproteomics tutorial*)
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. Import the three MGF MS/MS files and the FASTA sequence file from Zenodo.
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 >
 >    As default, Galaxy takes the link as name.
 >
@@ -76,7 +76,7 @@ In this tutorial, we will get the data from Zenodo: [![DOI](https://zenodo.org/b
 >
 > 3. Build a **Dataset list** for the three MGF files
 >
->    {% include snippets/build_list_collection.md %}
+>    {% snippet snippets/build_list_collection.md %}
 >
 {: .hands_on}
 
@@ -120,7 +120,7 @@ The created dataset collection of the three *MGF files* in the history is used a
 >    Section **Precursor Options**:
 >
 >    - **Fragment Tolerance Units**: `Daltons`
->    - **Fragment Tolerance**: `0.02`- this is high resolution MS/MS data
+>    - **Fragment Tolerance**: `0.2`- this is high resolution MS/MS data
 >    - **Maximum Charge**: `6`
 >
 >    Section **Protein Modification Options**:
@@ -229,7 +229,7 @@ proteins and provides a fast matching algorithm for peptides.
 > ### {% icon comment %} Unipept
 >
 > Users can access UniPept via a [web page](https://unipept.ugent.be) and paste peptide
-> sequences into the search form to retrieve protein information. But we`ll use the Galaxy
+> sequences into the search form to retrieve protein information. But we'll use the Galaxy
 > *Unipept* tool to automate the process. The *Unipept* tool sends the peptide list to the
 > UniPept REST API service, then transforms the results into datasets that can be further analyzed
 > or operated on within Galaxy.
@@ -330,6 +330,7 @@ Therefore we can search the database for the peptides and count the occurrence w
 >          GROUP BY sequence
 >
 >          ORDER BY sequence
+> 
 >
 > 2. Click **Execute**. The resulting file should have two columns, one with the distinct peptides, the other with the count number of PSMs.
 >
@@ -597,7 +598,7 @@ As a final step we will use **Query Tabular** in a more sophisticated way to com
 >
 >    - **Filter Tabular Input Lines**: Click on `+ Insert Filter Tabular Input Lines`:
 >    - **Filter By**: Select `skip leading lines`
->        - **Skip lines**: leave blank
+>        - **Skip lines**: `1`
 >    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
 >    - **Filter By**: Select `prepend a line number column`
 >    - Add another Filter: Click on `+ Insert Filter Tabular Input Lines`:
@@ -702,8 +703,6 @@ With these three output files the functional analysis of this tutorial is finish
 > - [Metaproteomics community effort](https://z.umn.edu/gcc2017mporal)
 >
 > - [Unipept](https://www.ncbi.nlm.nih.gov/pubmed/28552653)
->
-> - [Galaxy-P Metaproteomics instance](http://z.umn.edu/metaproteomicsgateway)
 >
 > - [Metaproteomics video](http://z.umn.edu/mpvideo2018)
 {: .comment}

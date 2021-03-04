@@ -139,10 +139,6 @@ check-tool-links: ## lint tool links
 	@bash ./bin/check-broken-tool-links.sh
 .PHONY: check-tool-links
 
-check-snippets: ## lint snippets
-	./bin/check-for-trailing-newline
-.PHONY: check-snippets
-
 check-framework:
 	$(ACTIVATE_ENV) && \
 		ruby _plugins/jekyll-notranslate.rb
@@ -155,7 +151,7 @@ check-broken-boxes: build ## List tutorials containing broken boxes
 check: check-html-internal check-html check-broken-boxes check-slides ## run checks which require compiled HTML
 .PHONY: check
 
-lint: check-frontmatter check-workflows check-snippets check-tool-links ## run linting checks which do not require a built site
+lint: check-frontmatter check-workflows check-tool-links ## run linting checks which do not require a built site
 .PHONY: lint
 
 check-links-gh-pages:  ## validate HTML on gh-pages branch (for daily cron job)
@@ -192,6 +188,17 @@ _site/%/tutorial.pdf: _site/%/tutorial.html
 		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
 		wkhtmltopdf \
 		    --enable-javascript --javascript-delay 1000 \
+			- $@; \
+	fi
+
+_site/%/introduction.pdf: _site/%/introduction.html
+	if ! grep 'http-equiv="refresh"' $< --quiet; then \
+		$(ACTIVATE_ENV) && \
+		sed "s|/training-material/|$(shell pwd)/_site/training-material/|g" $< | \
+		sed "s|<head>|<head><base href=\"file://$(shell pwd)/$(<:_site/training/material%=%)\">|" | \
+		wkhtmltopdf \
+		    --enable-javascript --javascript-delay 3000 --page-width 700px --page-height 530px -B 5px -L 5px -R 5px -T 5px \
+			--user-style-sheet bin/slides-fix.css \
 			- $@; \
 	fi
 

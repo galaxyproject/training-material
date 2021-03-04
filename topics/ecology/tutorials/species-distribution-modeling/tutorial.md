@@ -45,8 +45,8 @@ In this study the datasets are all imported from the [GBIF](https://www.gbif.org
 > ### {% icon hands_on %} Hands-on: Import the data
 > 1. Create a new history for this tutorial and give it a proper name
 >
->    {% include snippets/create_new_history.md %}
->    {% include snippets/rename_history.md %}
+>    {% snippet snippets/create_new_history.md %}
+>    {% snippet snippets/rename_history.md %}
 >
 > 2. **Get species occurrences data** {% icon tool %} with the following parameters
 >    - *"Scientific name"*: `chrysemys picta`

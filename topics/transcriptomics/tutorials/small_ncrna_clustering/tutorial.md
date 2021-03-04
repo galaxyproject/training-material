@@ -54,7 +54,7 @@ In the first step, we convert the BAM file into BED file. This is not a plain fi
 >
 > 1. Create a new history for this tutorial
 >
->    {% include snippets/create_new_history.md %}
+>    {% snippet snippets/create_new_history.md %}
 >
 > 2. Import the files from [Zenodo](https://zenodo.org/record/2172221/files/GSM769512.bam)
 >
@@ -62,7 +62,7 @@ In the first step, we convert the BAM file into BED file. This is not a plain fi
 >    https://zenodo.org/record/2172221/files/GSM769512.bam
 >    ```
 >
->    {% include snippets/import_via_link.md %}
+>    {% snippet snippets/import_via_link.md %}
 {: .hands_on}
 
 > ### {% icon question %} Questions

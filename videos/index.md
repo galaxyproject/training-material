@@ -31,7 +31,9 @@ The GTN now generates videos for selected slide decks. Click on a topic below to
  </thead>
  <tbody>
   {% for topic in sorted_topics %} {% unless topic[0] == 'contributors' %}
+  {% if topic[1].name %}
   <tr><td><a href="{{ site.baseurl }}/topics/{{ topic[1].name }}/videos/">{{ topic[1].title }}</a></td></tr>
+  {% endif %}
   {% endunless %}{% endfor %}
  </tbody>
 </table>
