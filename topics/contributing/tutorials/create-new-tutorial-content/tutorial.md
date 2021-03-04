@@ -253,11 +253,16 @@ We can also cross-reference images inside our Markdown with an anchor. For examp
 > illustrative.**
 >
 > [*via thoughtbot.com*](https://thoughtbot.com/blog/alt-vs-figcaption)
-{: .blockquote}
+{: .quote}
 
 As an example for this image:
 
-![Image being used as an example, caption described below. Not relevant to content.](../../images/plasmid-metagenomics-nanopore/sequence_method.jpg
+![alt text]({{site.baseurl}}/topics/metagenomics/images/plasmid-metagenomics-nanopore/sequence_method.jpg "Example of an image with a caption ")
+
+
+```markdown
+![Alt text (shown when image cannot be displayed)](path/to/image.png "Example of an image with a caption")
+```
 
 Field          | Appropriate Contents
 ----           | -----
