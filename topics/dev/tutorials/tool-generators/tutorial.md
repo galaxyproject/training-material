@@ -346,7 +346,6 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 #### 1. Install into an existing local non-docker development Galaxy
 
-- Highly recommended if you already have, or want to start, a local disposable Galaxy server for development.
 - Quick and easy.
 - ToolFactory work will be persistent like any other jobs on that Galaxy.
     - Only local administrative users can successfully execute it
@@ -379,135 +378,6 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 
 ---
 
-#### 2. Install in a virtual environment using the ToolFactory inside Planemo
-
-- This method is recommended for testing the ToolFactory if :
-    - you do not already run a development Galaxy
-    - you do not wish to risk the health of your existing development Galaxy instance.
-    - you have Python3, python3-venv, curl and git already installed. The script will complain until they are installed.
-- Make a new (potentially throw away) directory for the Planemo installation - e.g. `mkdir tftute` and `cd tftute`
-- Expose and copy the script below. Paste it into a file in the new directory and run it with `sh`.
-- It will create a new Python virtual environment, download a fork of planemo and install a local copy of galaxy-dev.
-- Edit the location of the galaxy directory `$GALDIR` and remove the code to download galaxy-dev if you already have a cloned Galaxy repository and wish to save time and space.
-- It will take some time - so watch the Hello World demonstration while you wait.
-- Your work is not persistent!
-- The instance will be torn down when you exit Planemo
-- Be sure to save your history - either as a history or exported as a workflow - before shutting down.
-- After shutting down with `ctrl+C` only the last line of the script needs to be rerun to restart Planemo if the directory contents remain untouched.
-- Newly generated tools can be tested in this setup as described below.
-- It involves a restart of planemo and loss of all your unsaved work! Saving the new tool archive does not save the ToolFactory form settings.
-- Saving the history or an extracted workflow for the new tool is necessary
-- It is a good way to get a taste without much typing.
-
-> ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
-> > ### {% icon code-in %} Input: topics/dev/tutorials/tool-builders/docker/maketf.sh
-> > ```bash
-> > # GALDIR could be an existing dev directory, and the curl line could be commented out to save time
-> > GALDIR="galaxy-central"
-> > PDIR="planemo"
-> > CDIR=`pwd`
-> > git clone --recursive https://github.com/fubar2/planemo.git $PDIR
-> > rm -rf $PDIR/docs
-> > mkdir -p $GALDIR
-> > curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $GALDIR
-> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
-> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
-> > mkdir -p $PDIR/mytools
-> > cd $PDIR
-> > python3 -m venv .venv
-> > . .venv/bin/activate
-> > python3 setup.py build
-> > python3 setup.py install
-> > cd $CDIR
-> > planemo conda_init --conda_prefix $PDIR/con
-> > planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
-> > ```
-> {: .code-in}
-{: .details}
-
----
-
-#### 3. Build a simple Docker container using the tutorial supplied Dockerfile
-
-- This option may be attractive if you are comfortable with docker and do not have a handy development Galaxy
-- Your work is not persistent so this is only useful for testing. Serious development needs persistence through a different method.
-- The instance will be torn down when you stop the container.
-- It might be possible to use a volume mount and persist Galaxy's data that way.
-- Otherwise, when restarted, your previous work will all be gone.
-- Be sure to save your history before shutting down or you will lose your work.
-- The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers.
-- It does not include this tutorial.
-- It runs planemo tool_factory for you and exposes it on `localhost:9090` so you can do all the same things as you
-can with a local venv described above - but a little slower and isolated in a container.
-
-> ### {% icon details %} Sample Dockerfile to build a simple version of the ToolFactory in Planemo
->
->  *See comments for build and run recipes*
->
-> > ### {% icon code-in %} Input: topics/dev/tutorials/tool-generators/docker/Dockerfile
-> > ```docker
-> ># Galaxy - Using Galaxy tools to generate new Galaxy tools
-> >#
-> ># To build the docker image, go to root of the training repo and
-> >#    docker build -t tool-generators -f topics/tool-generators/docker/Dockerfile .
-> ># Take a break. Takes a while!
-> ># To run image, make a mytools directory under where you want to run it regularly and then
-> >#    docker run -p "9090:9090" -v mytools:/planemo/mytools/  -t tool-generators
-> ># ToolFactory planemo will be available on localhost:9090
-> ># Toolshed archives you generate can be unpacked under your mytools directory.
-> ># They will be loaded by planemo into the Galaxy it runs and be available in the tool menu
-> ># This allows you to load newly generated tools for testing and refinement.
-> ># WARNING: Save your history as a history or lose your ToolFactory forms when you stop the container.
-> ># `planemo --toolfactory` always starts with an empty history.
-> ># A downloaded history can be imported into the new Planemo and the form regenerated by rerunning the job.
-> ># Training material is not yet installed - not sure how to do that in Planemo ?
-> >
-> >FROM ubuntu:latest
-> >
-> >MAINTAINER Ross Lazarus
-> >ENV TARGDIR "/galaxy-central"
-> >ENV PDIR "/planemo"
-> >RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano curl wget git python3-setuptools gnupg curl mercurial \
-> >&& python3 -m pip install --upgrade pip \
-> >&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
-> >&& apt upgrade -y \
-> >&& mkdir -p $TARGDIR \
-> >&& curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $TARGDIR \
-> >&& git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
-> >&& cd $PDIR \
-> >&& mkdir mytools \
-> >&& rm -rf $PDIR/doc \
-> >&& python3 setup.py build \
-> >&& python3 setup.py install \
-> >&& planemo conda_init --conda_prefix $PDIR/con \
-> >&& hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev  /planemo/tacrev \
-> >&& planemo test --galaxy_root $TARGDIR /planemo/tacrev \
-> >&& cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
-> >&& sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
-> >&& sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
-> >&& apt-get clean && apt-get purge \
-> >&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-> >ADD topics/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
-> >ADD topics/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
-> >
-> >
-> >ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
-> >EXPOSE 9090
-> >ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools"]
-```
-> {: .code-in}
-{: .details}
-
----
-
-#### 4. Install the ToolFactory docker container with integrated toolshed
-
-- There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
-- Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
-- It provides an inbuilt toolshed and allows tools to be installed and used in the Galaxy used to run the ToolFactory.
-- Like installation in a local Galaxy server, the docker container can be persisted as shown in the documentation for docker-galaxy-stable upon which it is based.
-
----
 
 ## Import ToolFactory functional documentation - the demonstration tools.
 
@@ -1070,6 +940,147 @@ planemo tool_factory.
 - If you find bugs, please tell me by raising an issue at https://github.com/fubar2/toolfactory, or better, a pull request with the fix :)
 
 
-# Acknowledgements
-- Thanks to Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the design and construction of this tutorial.
+# Acknowledgements.
 
+Many thanks are due to:
+
+- Marius van den Beek for thoughtful comments on the role of the ToolFactory that helped motivate the design and construction of this tutorial.
+- Helena Rasch for encouragement, review and assistance to validate, rationalise and revise the material.
+
+---
+
+# Appendix: Alternative methods for running the ToolFactory.
+
+> ### {% icon warning %} ToolFactory suddenly won't run in planemo - ignore this material please until I figure out what's broken
+>TF passes planemo test but won't run planemo - see PR for details
+>
+{: .warning}
+
+#### 2. Install in a virtual environment using the ToolFactory inside Planemo
+
+- This method is recommended for testing the ToolFactory if :
+    - you do not already run a development Galaxy
+    - you do not wish to risk the health of your existing development Galaxy instance.
+    - you have Python3, python3-venv, curl and git already installed. The script will complain until they are installed.
+- Make a new (potentially throw away) directory for the Planemo installation - e.g. `mkdir tftute` and `cd tftute`
+- Expose and copy the script below. Paste it into a file in the new directory and run it with `sh`.
+- It will create a new Python virtual environment, download a fork of planemo and install a local copy of galaxy-dev.
+- Edit the location of the galaxy directory `$GALDIR` and remove the code to download galaxy-dev if you already have a cloned Galaxy repository and wish to save time and space.
+- It will take some time - so watch the Hello World demonstration while you wait.
+- Your work is not persistent!
+- The instance will be torn down when you exit Planemo
+- Be sure to save your history - either as a history or exported as a workflow - before shutting down.
+- After shutting down with `ctrl+C` only the last line of the script needs to be rerun to restart Planemo if the directory contents remain untouched.
+- Newly generated tools can be tested in this setup as described below.
+- It involves a restart of planemo and loss of all your unsaved work! Saving the new tool archive does not save the ToolFactory form settings.
+- Saving the history or an extracted workflow for the new tool is necessary
+- It is a good way to get a taste without much typing.
+
+> ### {% icon details %} Sample script to install a local disposable ToolFactory in a planemo virtual environment
+> > ### {% icon code-in %} Input: topics/dev/tutorials/tool-builders/docker/maketf.sh
+> > ```bash
+> > # GALDIR could be an existing dev directory, and the curl line could be commented out to save time
+> > GALDIR="galaxy-central"
+> > PDIR="planemo"
+> > CDIR=`pwd`
+> > git clone --recursive https://github.com/fubar2/planemo.git $PDIR
+> > rm -rf $PDIR/docs
+> > mkdir -p $GALDIR
+> > curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $GALDIR
+> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
+> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
+> > mkdir -p $PDIR/mytools
+> > cd $PDIR
+> > python3 -m venv .venv
+> > . .venv/bin/activate
+> > python3 setup.py build
+> > python3 setup.py install
+> > cd $CDIR
+> > planemo conda_init --conda_prefix $PDIR/con
+> > planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
+> > ```
+> {: .code-in}
+{: .details}
+
+
+---
+
+#### 3. Build a simple Docker container using the tutorial supplied Dockerfile
+
+- This option may be attractive if you are comfortable with docker and do not have a handy development Galaxy
+- Your work is not persistent so this is only useful for testing. Serious development needs persistence through a different method.
+- The instance will be torn down when you stop the container.
+- It might be possible to use a volume mount and persist Galaxy's data that way.
+- Otherwise, when restarted, your previous work will all be gone.
+- Be sure to save your history before shutting down or you will lose your work.
+- The Docker script provided with this topic builds a different Galaxy from most GTN Docker containers.
+- It does not include this tutorial.
+- It runs planemo tool_factory for you and exposes it on `localhost:9090` so you can do all the same things as you
+can with a local venv described above - but a little slower and isolated in a container.
+
+> ### {% icon details %} Sample Dockerfile to build a simple version of the ToolFactory in Planemo
+>
+>  *See comments for build and run recipes*
+>
+> > ### {% icon code-in %} Input: topics/dev/tutorials/tool-generators/docker/Dockerfile
+> > ```docker
+> ># Galaxy - Using Galaxy tools to generate new Galaxy tools
+> >#
+> ># To build the docker image, go to root of the training repo and
+> >#    docker build -t tool-generators -f topics/tool-generators/docker/Dockerfile .
+> ># Take a break. Takes a while!
+> ># To run image, make a mytools directory under where you want to run it regularly and then
+> >#    docker run -p "9090:9090" -v mytools:/planemo/mytools/  -t tool-generators
+> ># ToolFactory planemo will be available on localhost:9090
+> ># Toolshed archives you generate can be unpacked under your mytools directory.
+> ># They will be loaded by planemo into the Galaxy it runs and be available in the tool menu
+> ># This allows you to load newly generated tools for testing and refinement.
+> ># WARNING: Save your history as a history or lose your ToolFactory forms when you stop the container.
+> ># `planemo --toolfactory` always starts with an empty history.
+> ># A downloaded history can be imported into the new Planemo and the form regenerated by rerunning the job.
+> ># Training material is not yet installed - not sure how to do that in Planemo ?
+> >
+> >FROM ubuntu:latest
+> >
+> >MAINTAINER Ross Lazarus
+> >ENV TARGDIR "/galaxy-central"
+> >ENV PDIR "/planemo"
+> >RUN apt update -y -qq && apt install -y -qq python3-dev gcc python3-pip build-essential python3-venv python3-wheel nano curl wget git python3-setuptools gnupg curl mercurial \
+> >&& python3 -m pip install --upgrade pip \
+> >&& curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add - \
+> >&& apt upgrade -y \
+> >&& mkdir -p $TARGDIR \
+> >&& curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $TARGDIR \
+> >&& git clone --recursive https://github.com/fubar2/planemo.git $PDIR \
+> >&& cd $PDIR \
+> >&& mkdir mytools \
+> >&& rm -rf $PDIR/doc \
+> >&& python3 setup.py build \
+> >&& python3 setup.py install \
+> >&& planemo conda_init --conda_prefix $PDIR/con \
+> >&& hg clone https://fubar@toolshed.g2.bx.psu.edu/repos/fubar/tacrev  /planemo/tacrev \
+> >&& planemo test --galaxy_root $TARGDIR /planemo/tacrev \
+> >&& cp $TARGDIR/config/datatypes_conf.xml.sample $TARGDIR/config/datatypes_conf.xml \
+> >&& sed -i 's/<\/registration>/<datatype extension="tgz" type="galaxy.datatypes.binary:Binary" subclass="true" mimetype="multipart\/x-gzip" display_in_upload="true"\/> <\/registration>/' $TARGDIR/config/datatypes_conf.xml \
+> >&& sed -i 's/<datatype extension="html"/<datatype extension="html" display_in_upload="true"/' $TARGDIR/config/datatypes_conf.xml \
+> >&& apt-get clean && apt-get purge \
+> >&&  rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+> >ADD topics/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html.sample
+> >ADD topics/tool-generators/docker/welcome.html $TARGDIR/static/welcome.html
+> >
+> >
+> >ENV GALAXY_CONFIG_BRAND "ToolFactory in Planemo"
+> >EXPOSE 9090
+> >ENTRYPOINT ["/usr/local/bin/planemo" ,"tool_factory", "--galaxy_root" ,"/galaxy-central", "--port", "9090", "--host", "0.0.0.0", "--conda_prefix", "/planemo/con", "--extra_tools", "/planemo/mytools"]
+```
+> {: .code-in}
+{: .details}
+
+---
+
+#### 4. Install the ToolFactory docker container with integrated toolshed
+
+- There is a more complex but integrated solution using the [ToolFactory docker container](https://github.com/fubar2/toolfactory-galaxy-docker).
+- Installation is documented in the respository and bash scripts to build and run the Docker image are provided. They will probably need to be adjusted as described there.
+- It provides an inbuilt toolshed and allows tools to be installed and used in the Galaxy used to run the ToolFactory.
+- Like installation in a local Galaxy server, the docker container can be persisted as shown in the documentation for docker-galaxy-stable upon which it is based.
