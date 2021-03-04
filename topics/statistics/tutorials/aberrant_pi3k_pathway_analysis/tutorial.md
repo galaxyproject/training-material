@@ -12,7 +12,7 @@ objectives:
 - Apply logistic regression based machine learning algorithms on TCGA data.
 time_estimation: 1H30M
 key_points:
-- Machine learning based Aberrant pathway activity analysis can distinguish normal and tumor samples. Also can identify transcriptomic signature of tumors associated with oncogene or tumor suppressor gene mutations. 
+- Machine learning based Aberrant pathway activity analysis can distinguish normal and tumor samples. Also can identify transcriptomic signature of tumors associated with oncogene or tumor suppressor gene mutations.
 - Correlations from classifier predictions and pharmacological responses determine drug sensitivity among cancer cell lines and can be useful in improving personalized medicine approaches.
 - Classifier models generated from the suite-papaa can identify potential biomarkers with in the transcriptomic signature of tumors.
 contributors:
@@ -20,8 +20,8 @@ contributors:
 - blankenberg
 tags:
 - Machine learning
-- Pan-cancer 
-- cancer biomarkers 
+- Pan-cancer
+- cancer biomarkers
 - oncogenes and tumor suppressor genes
 
 ---
@@ -29,7 +29,7 @@ tags:
 # Introduction
 {:.no_toc}
 
-Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways 
+Signaling pathways are among the most commonly altered across different tumor types. Many tumors possess at least one driver alteration and nearly half of such alterations are potentially targeted by currently available drugs. A recent study in TCGA tumors has identified patterns of somatic variations and mechanisms in 10 canonical pathways
 ({% cite SanchezVega2018 %}). One-third of these tumors possess multiple alterations and have potentially complex phenotypes. Identifying a transcriptomic signature in these tumors would enable personalized therapeutic design strategies. A plethora of evidence suggests complex diseases, like cancer, can be the result of multiple genetic aberrations in biological networks or pathways rather than variation in a single gene. Often starter mutations occur in a key component network that ultimately leads to multi-gene dysregulation causing hallmark cancer phenotypes ({% cite Hanahan2000 %}). Many of these phenotypes are the result of disrupted transcriptional programs that affect the clinical progression and therapeutic responsiveness. Recent progress in exploring these transcriptomic changes in cancer pathogenesis provided useful clues in precision medicine ({% cite Bradner2017 %}).
 
 The RTK/RAS/PI3K molecular genetic axis controls critical cellular functions and is commonly altered in various cancers ({% cite Fruman2014 %}). Perturbations across this axis can lead to deficiencies in cell-cycle, survival, metabolism, motility and genome stability, triggering hallmark phenotypes of cancer. The constitutive activation and presence of phosphatidylinositol-3,4,5-trisphosphate (PIP3) trigger membrane-bound onco-signalosomes. This presents significant challenges for treatment, as PI3K cascade can be activated in several ways ({% cite Zhao2006 %}).
@@ -53,7 +53,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 > An efficient way to install and run the tutorial using papaa tools is available on docker based galaxy instance that has pre-installed papaa tool-suite as **papaa** under tools section. Additionally this local galaxy instance comes with datasets and workflow for generating PI3K_OG classifier. Instructions to run the docker image is below.
 
 > ### {% icon hands_on %} Hands-on: Tutorial for galaxy docker container installation and running the workflow:
-> 1. Pulling the docker image from docker hub: Open a terminal and type the following command: 
+> 1. Pulling the docker image from docker hub: Open a terminal and type the following command:
 >       ```docker pull nvk747/galaxy_papaa:0.1.9```
 > 2. For running the docker container use the following command :
 >       ```docker run -p 8888:80 --detach nvk747/galaxy_papaa:0.1.9```
@@ -98,7 +98,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 > 1. These files are provided to optionally enable you to perform an additional analysis, using the same methodology
 >    described here, but are not required for the main tutorial.
 > 2. Import the files from [PAPAA-Zenodo](https://zenodo.org/record/4306639#.X9FJF-lKgZE) or from the docker galaxy `Shared Data -> Data Libraries -> (GTN - Material -> {{ page.topic_name }} -> {{ page.title }} )`
-
+>
 >    ```
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_kras_sign.txt
 >    https://zenodo.org/api/files/9c1a32d0-dba1-4481-ad9f-1aac03c83e61/GSE94937_rpkm_kras.csv
@@ -123,7 +123,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 -    **CCLE_DepMap_18Q1_maf_20180207.txt:** Publicly available Mutational data for CCLE cell lines from Broad Institute Cancer Cell Line Encyclopedia [CCLE](https://portals.broadinstitute.org/ccle)/[DepMap Portal](https://depmap.org/portal/). Variant classification along with nucleotide and protein level changes are provided in the columns for genes(rows).
 -    **ccle_rnaseq_genes_rpkm_20180929_mod.tsv:** Publicly available Expression data for 1,019 cell lines (RPKM) from Broad Institute Cancer Cell Line Encyclopedia (CCLE) / DepMap Portal. This file has gene-expression data for genes(rows) in various cell lines (columns).
 -    **CCLE_MUT_CNA_AMP_DEL_binary_Revealer.tsv:** Publicly available merged Mutational and copy number alterations that include gene amplifications and deletions for the CCLE cell lines. This file has mutational/copy number variation data for all cancer genes (rows) as binary valued (0/1) in all CCLE cell lines (columns).
--    **GDSC_cell_lines_EXP_CCLE_names.tsv:** Publicly available RMA normalized expression data for Genomics of Drug Sensitivity in Cancer [GDSC](https://www.cancerrxgene.org/) cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-expression data for genes(rows) in various cell lines (columns). 
+-    **GDSC_cell_lines_EXP_CCLE_names.tsv:** Publicly available RMA normalized expression data for Genomics of Drug Sensitivity in Cancer [GDSC](https://www.cancerrxgene.org/) cell-lines. This data was subset to 382 cell lines that are common among CCLE and GDSC. This file has gene-expression data for genes(rows) in various cell lines (columns).
 -    **GDSC_CCLE_common_mut_cnv_binary.tsv:** A subset of merged Mutational and copy number alterations that include gene amplifications and deletions for common cell lines between GDSC and CCLE.
 -    **gdsc1_ccle_pharm_fitted_dose_data.txt:** Pharmacological data for GDSC-1 cell lines. This data was subset to 379 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 304 tested compounds in various cell-lines(rows).
 -    **gdsc2_ccle_pharm_fitted_dose_data.txt:** Pharmacological data for GDSC-2 cell lines. This data was subset to 347 cell lines that are common among CCLE and GDSC. This file has pharmacological data like IC50, Z-scores, drug information, concentrations used, AUC(columns) of 170 tested compounds in various cell-lines(rows).
@@ -140,7 +140,7 @@ In this tutorial we plan to measure aberrant PI3K pathway activity in TCGA datas
 -    **GSE94937_kras_sign.txt:** File with values assigned for tumor [1] or normal [-1] for external data samples deposited in Gene Expression Omnibus database accession: [GSE94937](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE94937).
 {:.details}
 
-# **PanCancer aberrant pathway activity analysis (PAPAA)** 
+# **PanCancer aberrant pathway activity analysis (PAPAA)**
 
 [Machine Learning](https://en.wikipedia.org/wiki/Machine_learning) algorithms  learn from various features in datasets and generate predictive models. Extracting transcriptional patterns and learning insights of tumor physiology from gene expression data is a developing research area. Transcriptional profiling was used to identify differentially expressed genes and pathways associated with drug resistance in breast cancer ({% cite Men2017 }). Hyperactive oncogenic pathway  signatures can be useful in predicting sensitivity to therapeutic agents ({% cite Bild2005 %}). Machine learning-based modeling provides a systematic manner to leverage these multi-omic data to predict phenotype or stratify tumors based on gene expression and pathway variations. We extended a previously developed elastic net penalized logistic regression classification modeling approach to derive transcription signature or pathway alterations to measure aberrant PI3K activity in the PanCancer data ({% cite Way2018 %}). This method integrates bulk RNA Sequencing (RNA-Seq), copy number and mutation data from [PanCanAtlas](https://gdc.cancer.gov/about-data/publications/pancanatlas).
 
@@ -151,7 +151,7 @@ Logistic regression is a kind of machine learning approach where statistical ana
 
 ![Equations for probability measurement ](../../images/aberrant_pi3k_pathway_analysis/equation.png "Equation for prediction of mutational status(Yi) from expression data X(i) for each sample. Mutational status can be estimated by Multiplying Xi with gene specific weights (W). The negative log likelihood (L) is used for calculating minimum weights for each sample")
 
-Where *alpha* and *l* are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn [girdsearchCV](https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html) approach. 
+Where *alpha* and *l* are regularization and elastic net mixing hyperparameters respectively. Their optimal values are found during 5 fold cross validation by using scikit-learn [girdsearchCV](https://scikit-learn.org/0.17/modules/generated/sklearn.grid_search.GridSearchCV.html) approach.
 
 ***Sample Processing step:***
 
@@ -165,16 +165,16 @@ We then randomly held out 10% of the samples to create a test set and rest 90% f
 
 Predicting probabilities of an observation belonging to each class in a classification problem is more flexible rather than predicting classes directly. This method has an added advantage to trade-off errors made by the model as it depends on interpretation of probabilities using different thresholds. Two diagnostic tools that help in the interpretation of probabilistic forecast for binary (two-class) classification predictive modeling problems are Receiver Operating Characteristic (ROC) Curves and Precision-Recall curves. Each model generated is evaluated and performance metrics are measured using Area Under the Receiver Operating Characteristic (AUROC) and Area Under the Precision-Recall (AUPR).
 
-As elastic net penalty with stochastic decent gradient approach induces sparsity in the number of features used in classification, and the best/top features (genes) are likely to represent transcriptional signature of given disease or aberrant activity of the mutated genes in a pathway. 
+As elastic net penalty with stochastic decent gradient approach induces sparsity in the number of features used in classification, and the best/top features (genes) are likely to represent transcriptional signature of given disease or aberrant activity of the mutated genes in a pathway.
 
-Each feature (gene) is given a rank and score (negative or positive) depending on its contribution to classification. The positive scored genes are likely to be up-regulated in activated pathway samples and negatively scored genes are likely to be downstream targets of altered pathways. 
+Each feature (gene) is given a rank and score (negative or positive) depending on its contribution to classification. The positive scored genes are likely to be up-regulated in activated pathway samples and negatively scored genes are likely to be downstream targets of altered pathways.
 
 In this tutorial, we made series of steps to generate classification models and used those models for predicting pharmacological response or identifying potential biomarkers that may be helpful for treatment of various cancers. Here, we generate models using [ERBB2](https://www.genecards.org/cgi-bin/carddisp.pl?gene=ERBB2), [KRAS](https://www.genecards.org/cgi-bin/carddisp.pl?gene=KRAS), [PIK3CA](https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3CA), and [AKT1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=AKT1) oncogenes from the ERK/RAS/PI3K signaling axis pathway.  **Have fun!**
 
 ## **PAPAA: PanCancer classifier**
-This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene expression information (pancan_rnaseq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv & copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance. 
+This first step is designed to generate model with ERK/RAS/PI3K signaling axis pathway genes (path_genes): ERBB2, KRAS, PIK3CA ,AKT11 genes and various the Cancer Genome Atlas (TCGA) cancer types/diseases: BLCA, BRCA, CESC, COAD, ESCA, LUAD, LUSC, OV, PRAD, READ, STAD, UCEC, and UCS (ref: tcga_dictionary.tsv). This step takes gene expression information (pancan_rnaseq_freeze.tsv), mutational information (pancan_mutation_freeze.tsv), load of mutations in each samples (mutation_burden_freeze.tsv), threshold passed sample information (sample_freeze.tsv) and copy number information (copy_number_loss_status.tsv & copy_number_gain_status.tsv) and generates PI3K_OG model. AUROC and AUPR metrics are calculated for training,test,CV and random shuffled sets. As an additional option, the generated model was used to evaluate alternative genes (PTEN, PIK3R1, and STK11) and alternative diseases (BRCA, COAD, ESCA, HNSC, LGG, LUAD, LUSC, PRAD, READ, GBM, UCEC, and UCS) performance.
 
-![Prediction metrics for PI3K_OG model](../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png "Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.") 
+![Prediction metrics for PI3K_OG model](../../images/aberrant_pi3k_pathway_analysis/pi3k_OG_auroc_aupr.png "Prediction metrics of the PI3K_OG classifier- AUROC and AUPR curve for training, test, CV, and random shuffled sets.")
 ![PI3K_OG Classifier Coefficients](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_classifier_coef.png "PI3K_OG classifier coefficients represent the genes that impact the classification")
 
 > ### {% icon hands_on %} Hands-on: Generating model from ERBB2,PIK3CA,KRAS,AKT1 genes with specific disease types
@@ -184,31 +184,31 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 >    - {% icon param-file %} *"Filename mutations"*: `pancan_mutation_freeze.tsv` (Input dataset).
 >    - {% icon param-file %} *"Filename of mutation burden"*: `mutation_burden_freeze.tsv` (Input dataset).
 >    - {% icon param-file %} *"Filename of sample"*: `sample_freeze.tsv` (Input dataset) Input TCGA processed sample information data. See dataset descriptions for details.
->    - {% icon param-text %} *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1` 
->    - {% icon param-text %} *"Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in --filter_count and --filter_prop."*: `BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS` 
->    - *"option to set seed"*: `1234`  
->    - *"Number of cross validation folds to perform"*: `5` 
->    - *"Decision to drop input genes from X matrix"*: `Yes` 
->    - {% icon param-select %} *"Supplement Y matrix with copy number events"*: `Yes` 
->    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset) 
->    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset) 
->    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset) 
->    - *"Min number of mutations in diseases to include"*: `15` 
->    - *"Min proportion of positives to include disease"*: `0.05` 
->    - *"Number of MAD genes to include in classifier"*: `8000` 
->    - *"the alphas for parameter sweep"*: `0.1,0.13,0.15,0.18,0.2,0.3,0.4,0.6,0.7` 
->    - *"the l1 ratios for parameter sweep"*: `0.1,0.125,0.15,0.2,0.25,0.3,0.35` 
->    - {% icon param-text %} *"alternative genes to test performance"*: `PTEN,PIK3R1,STK11` 
->    - {% icon param-text %} *"The alternative diseases to test performance"*: `BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS` 
->    - *"Min number of mutations in disease to include in alternate"*: `15` 
->    - *"Min proportion of positives to include disease in alternate"*: `0.05` 
->    - *"Remove hypermutated samples"*: `Yes` 
->    - *"Keep intermediate ROC values for plotting"*: `Yes` 
->    - *"Shuffle the input gene exprs matrix alongside"*: `Yes` 
->    - *"Shuffle the gene exprs matrix before training"*: `No` 
->    - *"Remove mutation data from y matrix"*: `No` 
->    - *"Decision to drop gene expression values from X"*: `No` 
->    - *"Decision to drop covariate information from X"*: `No` 
+>    - {% icon param-text %} *"Comma separated string of HUGO gene symbols"*: `ERBB2,PIK3CA,KRAS,AKT1`
+>    - {% icon param-text %} *"Comma sep string of TCGA disease acronyms. If no arguments are passed, filtering will default to options given in --filter_count and --filter_prop."*: `BLCA,BRCA,CESC,COAD,ESCA,LUAD,LUSC,OV,PRAD,READ,STAD,UCEC,UCS`
+>    - *"option to set seed"*: `1234`
+>    - *"Number of cross validation folds to perform"*: `5`
+>    - *"Decision to drop input genes from X matrix"*: `Yes`
+>    - {% icon param-select %} *"Supplement Y matrix with copy number events"*: `Yes`
+>    - {% icon param-file %} *"File with Copy number loss"*: `copy_number_loss_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with Copy number gain"*: `copy_number_gain_status.tsv` (Input dataset)
+>    - {% icon param-file %} *"File with cancer gene classification table"*: `cosmic_cancer_classification.tsv` (Input dataset)
+>    - *"Min number of mutations in diseases to include"*: `15`
+>    - *"Min proportion of positives to include disease"*: `0.05`
+>    - *"Number of MAD genes to include in classifier"*: `8000`
+>    - *"the alphas for parameter sweep"*: `0.1,0.13,0.15,0.18,0.2,0.3,0.4,0.6,0.7`
+>    - *"the l1 ratios for parameter sweep"*: `0.1,0.125,0.15,0.2,0.25,0.3,0.35`
+>    - {% icon param-text %} *"alternative genes to test performance"*: `PTEN,PIK3R1,STK11`
+>    - {% icon param-text %} *"The alternative diseases to test performance"*: `BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM,UCEC,UCS`
+>    - *"Min number of mutations in disease to include in alternate"*: `15`
+>    - *"Min proportion of positives to include disease in alternate"*: `0.05`
+>    - *"Remove hypermutated samples"*: `Yes`
+>    - *"Keep intermediate ROC values for plotting"*: `Yes`
+>    - *"Shuffle the input gene exprs matrix alongside"*: `Yes`
+>    - *"Shuffle the gene exprs matrix before training"*: `No`
+>    - *"Remove mutation data from y matrix"*: `No`
+>    - *"Decision to drop gene expression values from X"*: `No`
+>    - *"Decision to drop covariate information from X"*: `No`
 {: .hands_on}
 
 > ### {% icon details %} PanCancer Aberrant Pathway Activity Analysis `pancancer_classifier.py` inputs
@@ -236,14 +236,14 @@ This first step is designed to generate model with ERK/RAS/PI3K signaling axis p
 
 > ### {% icon comment %} Outputs
 >    - Log file for script run and additional information
->    - A combined disease model (Pan-model) and individual disease models are generated. 
+>    - A combined disease model (Pan-model) and individual disease models are generated.
 >    - An overall model statistics are provided in the form of classifier summary: classifier_summary.txt
->    - Logistic regression with elastic net penalization outputs sparse classifiers with 150-250 genes whose scores or weights are important for classification tasks: classifier_coefficients.tsv . *Lets examine this file for the top scored genes. These genes are potential predictive biomarkers and can be helpful for precision medicine approaches*. 
+>    - Logistic regression with elastic net penalization outputs sparse classifiers with 150-250 genes whose scores or weights are important for classification tasks: classifier_coefficients.tsv . *Lets examine this file for the top scored genes. These genes are potential predictive biomarkers and can be helpful for precision medicine approaches*.
 >    - A tabular output that includes each gene mutation and copy number counts per each targene and proportions in various diseases is listed: *summary_counts.csv*
->    - Heatmap for all the AUROC values at different alphas and L1 rations: cv_heatmap.pdf 
+>    - Heatmap for all the AUROC values at different alphas and L1 rations: cv_heatmap.pdf
 >    - Disease classifier figures: list of 2 files [disease_pr and disease_auroc]
 >    - This tool computes predictions, accuracy measurements and measures AUROC and AUPR curves for the combined disease model (Pan-model): *all_disease_pr.pdf ; pancan_roc_results.tsv ; all_disease_roc.pdf ; disease_aupr.pdf ; disease_auroc.pdf*
->    - Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alternative genes and cancer types: *alt_gene_alt_disease_summary.tsv ; alt_summary_counts.csv ; alt_gene_alt_disease_aupr_bar.pdf ; alt_gene_alt_disease_auroc_bar.pdf* Examine these files to analyze our PI3K_OG model on other alternate diseases. 
+>    - Additionally, the output also includes above performance and prediction metrics when the pan-model applied to alternative genes and cancer types: *alt_gene_alt_disease_summary.tsv ; alt_summary_counts.csv ; alt_gene_alt_disease_aupr_bar.pdf ; alt_gene_alt_disease_auroc_bar.pdf* Examine these files to analyze our PI3K_OG model on other alternate diseases.
 {: .comment}
 
 ## **PanCancer within disease analysis**
@@ -303,7 +303,7 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 >
 > 1. {% tool [PAPAA: PanCancer compare within models](toolshed.g2.bx.psu.edu/repos/vijay/pancancer_compare_within_models/pancancer_compare_within_models/0.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"pancancer classifier summary"*: `classifier_summary.txt` (output of **PAPAA: PanCancer classifier** {% icon tool %})
->    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: Pancancer classifier** {% icon tool %}) 
+>    - {% icon param-file %} *"pancancer classifier coefficients"*: `classifier_coefficients.tsv` (output of **PAPAA: Pancancer classifier** {% icon tool %})
 >    - {% icon param-file %} *"pan_within classifier summary"*: `classifier_summary` (output of **PAPAA: PanCancer within disease analysis** {% icon tool %})(Note: Select all pan-within classifier summaries as dataset collection instead of multiple datasets)
 >    - {% icon param-file %} *"pan_within classifier coefficients"*: `classifier_coefficients` (output of **PAPAA: Pancancer within disease analysis** {% icon tool %}) (Note: Select all pan-within classifier coefficients as dataset collection instead of multiple datasets)
 >    - *"Would you want to compare given model with alt gene model?"*: `do not do alt gene`
@@ -320,7 +320,7 @@ we next do a performance comparison between the ERBB2,PIK3CA,KRAS,AKT1 pan model
 {: .comment}
 
 ## **PanCancer apply weights**
-In this step we would like to predict 'y' status (mutational status) using 'x' matrix (gene expression). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the expression and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions. 
+In this step we would like to predict 'y' status (mutational status) using 'x' matrix (gene expression). We subset the x matrix to top variable genes (determined by Median Absolute Deviation), scaling the expression and adding covariate information. A logit transformation will be applied to output probabilities and classifier decisions.
 
 > ### {% icon hands_on %} Hands-on: Apply weights for ERBB2_PIK3CA_KRAS_AKT1 model
 >
@@ -350,8 +350,8 @@ In this step we would like to predict 'y' status (mutational status) using 'x' m
 {: .details}
 
 > ### {% icon comment %} Outputs
->    - Apply a logit transform on expression values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates "classifier_decisions.tsv" file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification. 
->    - Log file for script run and additional information 
+>    - Apply a logit transform on expression values (y = 1/(1+e^(-wX))) to output mutational probabilities. Generates "classifier_decisions.tsv" file which has scores/probabilities and other covariate information.  The scores/probabilities will be used for gene ranking and variant specific classification.
+>    - Log file for script run and additional information
 {: .comment}
 
 ## **PanCancer visualize decisions**
@@ -438,7 +438,7 @@ In this step we combine classifier weights, copy number information, recalculate
 {: .comment}
 
 ## **PanCancer pathway count heatmaps**
-This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway. 
+This step generates combined heatmap from mutation and copy number information and summarizes mutation, copy and total counts per sample for all the genes in target pathway.
 ![PI3K_OG_combined_heatmap](../../images/aberrant_pi3k_pathway_analysis/PI3K_OG_combined_heatmap.png "Combined count heatmap (mutation and copynumber) for all genes in the target pathway with in each cancer type")
 
 > ### {% icon hands_on %} Hands-on: Heatmaps for ERBB2_PIK3CA_KRAS_AKT1 model
@@ -565,7 +565,7 @@ In this step we use our classifier information and predict mutational status for
 {: .comment}
 
 ## **PanCancer external sample status prediction**
-In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822), where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.  
+In this step we use our classifier information and predict mutational status from external gene expression data. Gene expression data from [GSE69822](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE69822), where MCF10a cell lines are either having PI3KCA/PTENKO mutation or WT/WT+A66 treated samples. Note WT+A66 is wild-type MCF10a cell line treated with A66 a potent PI3K inhibitor. A distribution plot is generated to see how many samples match to prediction. Samples with scores below 0.5 are considered WT and above 0.5 are considered mutant.
 ![GSE69822_samples_classification](../../images/aberrant_pi3k_pathway_analysis/external.png "PI3K_OG classifiers applied to MCF10a cell lines dataset (GEO: GSE69822). The samples were either WT/WT+A66 (blue circles) or having a PIK3CA-H1074R/PTENKO mutation (orange circles).")
 
 > ### {% icon hands_on %} Hands-on: external sample evaluation with ERBB2_PIK3CA_KRAS_AKT1 model
@@ -584,7 +584,7 @@ In this step we use our classifier information and predict mutational status fro
 {: .details}
 
 > ### {% icon comment %} Outputs
->    - Model based classification scores distribution Plots for external normal and tumor samples ("targene_external_sample_predictions.pdf and targene_external_sample_predictions_1.pdf") 
+>    - Model based classification scores distribution Plots for external normal and tumor samples ("targene_external_sample_predictions.pdf and targene_external_sample_predictions_1.pdf")
 >    - Log file for script run and additional information
 {: .comment}
 
@@ -625,7 +625,7 @@ In this step we use the classifier derived cell line predictions and use them to
 > > ### {% icon solution %} Solution
 > >
 > > 1. Try building PI3K_TSG model using ([PTEN](https://www.genecards.org/cgi-bin/carddisp.pl?gene=PTEN),[PIK3R1](https://www.genecards.org/cgi-bin/carddisp.pl?gene=PIK3R1),[STK11](https://www.genecards.org/cgi-bin/carddisp.pl?gene=STK11) genes and BRCA,COAD,ESCA,HNSC,LGG,LUAD,LUSC,PRAD,READ,GBM, UCEC,UCS cancer-types). The PI3K_TSG model should show a very different transcriptomic signature compared to PI3K_OG model. We should see unique predictive biomarkers associated with tumors with TSG mutations. e.g. GYS1,CABC1,GLUD1,GRB7. This suggests that tumors with TSG mutations have different molecular paths although they have similar phenotypes compared to tumors with OG mutations.
-> > 2. Check the AUROC and AUPR values. The PI3K_TSG model should show AUROC >82% and AUPR >68% accuracy during cross validations. 
+> > 2. Check the AUROC and AUPR values. The PI3K_TSG model should show AUROC >82% and AUPR >68% accuracy during cross validations.
 > >
 > {: .solution}
 >
@@ -634,10 +634,10 @@ In this step we use the classifier derived cell line predictions and use them to
 # **Conclusions**
 {:.no_toc}
 
-- In our tutorial, we used machine learning based PI3K oncogene classifier in galaxy to distinguish tumor samples using PI3K activity. The classifier shows high accuracy ~80-86% in detecting aberrant PI3K activity in TCGA samples. 
-- The model output include top weighted genes that represent transcriptional signature of the tumors with selected gene mutations.  The pan model (all disease gene model) when compared to individual disease models have equal or higher performance for most of individual diseases. 
-- We also learned how to work with multi-omic datasets, and perform 5 fold cross-validation to output probability scores for each samples belonging to each disease/cancer type. 
-- Further, we can apply the trained models to make predictions on a external expression dataset provided and predict their mutational status. 
-- In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals. 
+- In our tutorial, we used machine learning based PI3K oncogene classifier in galaxy to distinguish tumor samples using PI3K activity. The classifier shows high accuracy ~80-86% in detecting aberrant PI3K activity in TCGA samples.
+- The model output include top weighted genes that represent transcriptional signature of the tumors with selected gene mutations.  The pan model (all disease gene model) when compared to individual disease models have equal or higher performance for most of individual diseases.
+- We also learned how to work with multi-omic datasets, and perform 5 fold cross-validation to output probability scores for each samples belonging to each disease/cancer type.
+- Further, we can apply the trained models to make predictions on a external expression dataset provided and predict their mutational status.
+- In addition we used our models to evaluated cell-lines pharmacological response against various compounds. This information will be helpful to improve personalized medicine approaches to various individuals.
 
 ![tutorial_summary](../../images/aberrant_pi3k_pathway_analysis/project_summary.png "Galaxy based Machine Learning approach for Pan-cancer Aberrant Pathway Activity Analysis(PAPAA) using TCGA multi-omic data. ")
