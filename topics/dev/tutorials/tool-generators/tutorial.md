@@ -346,7 +346,7 @@ cost of this convenience is that ToolFactory is limited to automated generation 
 
 #### 1. Install into an existing local non-docker development Galaxy
 
-- Quick and easy if you already have a throw-away Galaxy running.
+- Quick and easy if you already have a throw-away Galaxy available.
 - ToolFactory work will be persistent like any other jobs on that Galaxy.
     - Only local administrative users can successfully execute it
     - It will fail with an explanation for non-administrative users.
