@@ -551,6 +551,10 @@ built using the ToolFactory's limited capacities. Most of them are trivial of co
 
 # 3. Hands-on: Learning to use the ToolFactory
 
+> ### {% icon comment %}First time use involves a long pause in some installations
+> - The first job takes longer in some installation scenarios because the ToolFactory dependencies are installed before the tool can run.
+{: .comment}
+
 
 > ### {% icon hands_on %} Exploring the sample tools by regenerating their original ToolFactory forms
 >

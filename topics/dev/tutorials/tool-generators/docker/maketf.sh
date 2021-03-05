@@ -13,6 +13,8 @@ mkdir -p $GALDIR
 curl -L -s $GALURL | tar xzf - --strip-components=1 -C $GALDIR
 cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
 cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
+sed -i '/-l|-list|--list)/i --dev-wheels|-dev-wheels)\n          shift\n          ;;\n' $GALDIR/run_tests.sh
+# planemo will not run as a tool successfully without this - something fishy with recent changes to run_tests.sh
 mkdir -p $PDIR/mytools
 cd $PDIR
 python3 -m venv .venv
@@ -30,3 +32,8 @@ planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_pr
 
 #google-api-core 1.25.0 requires google-auth<2.0dev,>=1.21.1, but you have google-auth 1.18.0 which is incompatible
 # using above in a fresh venv
+# (.venv) 1 ross@rosspn50:/tmp/foo$ diff  ../zot/galaxy-central/run_tests.sh galaxy-central/run_tests.sh
+# 354a355,357
+# >       --dev-wheels|-dev-wheels)
+# >           shift
+# >           ;;
