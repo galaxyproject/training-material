@@ -127,7 +127,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [ColorToGray](toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9) %} with the following parameters:
+> 1. {% tool [ColorToGray](toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Starting Modules** {% icon tool %})
 >    - *"Enter the name of the input image"*: `OrigColor`
 >    - *"Conversion method"*: `Combine`
@@ -164,7 +164,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9) %} with the following parameters:
+> 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ColorToGray** {% icon tool %})
 >    - *"Use advanced settings?"*: `Yes, use advanced settings`
 >        - *"Enter the name of the input image (from NamesAndTypes)"*: `OrigGray`
@@ -213,7 +213,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9) %} with the following parameters:
+> 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
@@ -251,7 +251,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9) %} with the following parameters:
+> 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectSizeShape** {% icon tool %})
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
@@ -291,7 +291,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9) %} with the following parameters:
+> 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectIntensity** {% icon tool %})
 >    - *"Enter the name of the objects to track"*: `Embryos`
 >    - *"Choose a tracking method"*: `Overlap`
@@ -330,7 +330,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9) %} with the following parameters:
+> 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **TrackObjects** {% icon tool %})
 >    - *"Display outlines on a blank image?"*: `No`
 >        - *"Enter the name of image on which to display outlines"*: `OrigGray`
@@ -372,7 +372,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [Tile](toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9) %} with the following parameters:
+> 1. {% tool [Tile](toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **OverlayOutlines** {% icon tool %})
 >    - *"Enter the name of an input image"*: `OrigColor`
 >    - *"Name the output image"*: `AdjacentImage`
@@ -418,7 +418,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9) %} with the following parameters:
+> 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Tile** {% icon tool %})
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `png`
@@ -458,7 +458,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [ExportToSpreadsheet](toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9) %} with the following parameters:
+> 1. {% tool [ExportToSpreadsheet](toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
 >    - *"Select the column delimiter"*: ``
 >    - *"Add a prefix to file names?"*: `Do not add prefix to the file name`
@@ -498,7 +498,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
-> 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9) %} with the following parameters:
+> 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `output_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
 >    - *"Are the input images packed into a tar archive?"*: `No`
 >        - {% icon param-collection %} *"Images"*: `output` (Input dataset collection)
