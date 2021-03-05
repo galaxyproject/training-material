@@ -139,7 +139,6 @@ layout: base
                  <p> Video created by Beatriz Serrano-Solano</p>
             </div>
 
-
             <div class="col-md-6">
                 <h2>Contributor Hall of Fame</h2>
                 <p>
@@ -149,18 +148,26 @@ layout: base
 
                 <div class="container-fluid contributors">
                     <div id="contributors-carousel" class="carousel slide" data-ride="carousel" data-interval="3000">
+
+                        {% assign ckeys = "" | split: ',' %}
+                        {% for x in contributors %}
+                             {% assign ckeys = ckeys | push: x[0] %}
+                        {% endfor %}
+                        {% assign ckeysN = ckeys | size %}
+                        {% assign shuffled_contributors = ckeys | sample: ckeysN %}
+
                         <div class="carousel-inner" role="listbox">
                             {% assign counter = 0 %}
-                            {% for contributor in contributors %}
-                              {% unless contributor[1].halloffame == "no" %}
+                            {% for username in shuffled_contributors %}
+                              {% assign contributor = contributors[username] %}
+                              {% unless contributor.halloffame == "no" %}
                                 {% capture modulo %}{{ counter | modulo:10 }}{% endcapture %}
                                   {% if modulo == '0' or counter == 0 %}
                                   {% if counter != 0 %}</div>{% endif %}
 
                                   <div class="carousel-item {% if counter == 0 %}active{% endif %}">
                                 {% endif %}
-                                  {% assign username = contributor[0] %}
-                                  {% assign fullname = contributor[1].name %}
+                                  {% assign fullname = contributor.name %}
                                   <div class="hall-of-fame-hero">
                                       <a class="thumbnail" href="{{ site.baseurl }}/hall-of-fame/{{ username }}/">
                                         <img class="img-fluid" src="https://avatars.githubusercontent.com/{{ username }}" alt="{{ username }}">
@@ -200,7 +207,7 @@ layout: base
             </div>
         </div>
 
-         <h2>Acknowledgment and Funding</h2>
+        <h2 id="acknowledgment-and-funding">Acknowledgment and Funding</h2>
         <p>
             More information about this project can be found in our <a href="https://doi.org/10.1016/j.cels.2018.05.012">publication in Cell Systems</a>.
             We would like to thank all <a href="{{ site.baseurl }}/hall-of-fame">contributors</a> to our Galaxy
