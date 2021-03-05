@@ -6,8 +6,8 @@ zenodo_link: http://doi.org/10.5281/zenodo.4567084
 questions:
 - How to segment and track objects in fluorescence time-lapse microscopy images?
 objectives:
-- How to segment fluorescent objects using CellProfiler in Galaxy
-- How to track objects over multiple frames using CellProfiler in Galaxy
+- Segment fluorescent objects using CellProfiler in Galaxy
+- Track objects over multiple frames using CellProfiler in Galaxy
 time_estimation: 1H
 key_points:
 - CellProfiler in Galaxy can be used to track objects in time-lapse microscopy images
@@ -45,60 +45,83 @@ Give some background about what the trainees will be doing in the section.
 Remember that many people reading your materials will likely be novices,
 so make sure to explain all the relevant concepts.
 
-***TODO***: Maybe here we can say that CP in Galaxy has some minor changes compared to the UI. Or maybe not, not sure about this section.
+# Get data
 
-## Title for a subsection
-Section and subsection titles will be displayed in the tutorial index on the left side of
-the page, so try to make them informative and concise!
-
-# Hands-on Sections
-Below are a series of hand-on boxes, one for each tool in your workflow file.
-Often you may wish to combine several boxes into one or make other adjustments such
-as breaking the tutorial into sections, we encourage you to make such changes as you
-see fit, this is just a starting point :)
-
-## Get data
+This tutorial will use a time-lapse recording of nuclei progressing through mitotic anaphase during early Drosophila embryogenesis. The nuclei are labelled on chromatin with a GFP-histone marker and have been imaged every 7 seconds using a laser scanning confocal microscope with a 40X objective.
+The images are saved as a zip archive on Zenodo and need to be uploaded to the Galaxy server before they can be used.
 
 > ### {% icon hands_on %} Hands-on: Data upload
 >
-> 1. Create a new history for this tutorial
-> 2. Import the files from [Zenodo]({{ page.zenodo_link }}) or from
->    the shared data library (`GTN - Material` -> `{{ page.topic_name }}`
->     -> `{{ page.title }}`):
+> 1. Create a new history for this tutorial.  
+>    When you log in for the first time, an empty, unnamed history is created by default. You can simply rename it.
+>    {% snippet snippets/create_new_history.md %}
+>
+> 2. Import {% icon galaxy-upload %} the files from [Zenodo]({{ page.zenodo_link }}) or from
+>    the shared data library.
+>    - **Important:** If setting the type to 'Auto-detect', make sure that after upload, the datatype is set to zip.
 >
 >    ```
 >    https://zenodo.org/api/files/e5d1bd5c-60a0-42e4-8f0d-a2ebc863c5d9/drosophila_sample.zip
 >    ```
 >
->    {% include snippets/import_via_link.md %}
->    {% include snippets/import_from_data_library.md %}
+>    {% snippet snippets/import_via_link.md %}
+>    {% snippet snippets/import_from_data_library.md %}
 >
+> 3. Rename {% icon galaxy-pencil %} the file to drosophila_sample.zip
+>
+> 4. Unzip the file with the **Unzip file** {% icon tool %} tool with the following parameters:
+>    - {% icon param-file %} *"input_file"*: `drosophila_sample.zip`
+>
+> 5. Rename {% icon galaxy-pencil %} the resulting collection to `anaphase nuclei`. You may need to refresh the history for the new name to appear.
+>    {% snippet snippets/rename_collection.md %}
 {: .hands_on}
 
 
-***TODO***: We have a zip in zenodo, need to use the tool unzip to get all the images into a collection. 
+
+# Option 1: Create a CellProfiler pipeline in Galaxy
+
+In this section, we will build a CellProfiler pipeline from scratch in Galaxy.
+We need to:  
+  - Read the images and the metadata  
+  - Convert the colour images to grayscale  
+  - Segment the nuclei  
+  - Extract features from the segmented nuclei  
+  - Perform tracking  
+  - Produce some useful output files  
+
+A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the 'Starting modules'{% icon tool %} tool and end with the 'CellProfiler'{% icon tool %} tool.
+
+![Image of the pipeline](../../images/image_name "The pipeline")
 
 
-
-# Option 1: Create your CellProfiler pipeline in Galaxy
-
-It comes first a description of the step: some background and some theory.
-Some image can be added there to support the theory explanation:
-
-![Alternative text](../../images/image_name "Legend of the image")
-
-The idea is to keep the theory description before quite simple to focus more on the practical part.
-
-***TODO***: *Consider adding a detail box to expand the theory*
-
-> ### {% icon details %} More details about the theory
->
-> But to describe more details, it is possible to use the detail boxes which are expandable
+> ### {% icon details %} More details about the pipeline steps
+>    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
+>    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.  
+>    - Segmentation means identifying the nuclei in each image. In CellProfiler this is done by thresholding the intensity level in each image.  
+>    - We often perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object.
+>    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series 
+> 
 >
 {: .details}
 
-A big step can have several subsections or sub steps:
 
+## Read the images and their metadata
+
+> ### {% icon hands_on %} Hands-on: Reading images
+>
+> 1. {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
+>    
+>
+>    ***TODO***: *Check parameter descriptions*
+>
+>    ***TODO***: *Consider adding a comment or tip box*
+>
+>    > ### {% icon comment %} Comment
+>    >
+>    > A comment about the tool or something else. This box can also be in the main text
+>    {: .comment}
+>
+{: .hands_on}
 
 ## Change the images to gray color
 
@@ -507,17 +530,16 @@ A big step can have several subsections or sub steps:
 {: .question}
 
 
-# Option 2: Upload your CellProfiler pipeline and run it in Galaxy
+# Option 2: Upload a CellProfiler pipeline and run it in Galaxy
 
-## Sub-step 1
-
-***TODO***: How to upload a pipeline file (take the snippet upload data sas example) and call it `uploaded_pipeline`.
-
-## Sub-step with **CellProfiler**
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Pipeline upload
 >
-> 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9) %} with the following parameters:
+> 1. Import {% icon galaxy-upload %} the cppipe file from your local computer.
+>    > ### {% icon comment %} Comment
+>    > Make sure the pipeline version is compatible with the CellProfiler version.
+>    {: .comment}
+>
+> 2. Run {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9) %} with the following parameters:
 >    - {% icon param-file %} *"Pipeline file"*: `uploaded_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
 >    - *"Are the input images packed into a tar archive?"*: `No`
 >        - {% icon param-collection %} *"Images"*: `output` (Input dataset collection)
