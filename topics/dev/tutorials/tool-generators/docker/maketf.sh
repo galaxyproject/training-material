@@ -15,6 +15,8 @@ cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
 cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
 sed -i '/-l|-list|--list)/i --dev-wheels|-dev-wheels)\n          shift\n          ;;\n' $GALDIR/run_tests.sh
 # planemo will not run as a tool successfully without this - something fishy with recent changes to run_tests.sh
+sed 's/#sanitize_all_html\: true/sanitize_all_html\: false/g' $GALDIR/config/galaxy.yml.sample > $GALDIR/config/galaxy.yml
+# need this to see planemo html reports
 mkdir -p $PDIR/mytools
 cd $PDIR
 python3 -m venv .venv
@@ -24,6 +26,9 @@ python3 setup.py install
 cd $CDIR
 planemo conda_init --conda_prefix $PDIR/con
 planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
+# use planemo tool_factory --galaxy_root galaxy-central --port 9090 --host 0.0.0.0 --conda_prefix planemo/con
+# after activating the venv as above to restart planemo next time without all the downloading
+# ALL YOUR WORK WILL BE GONE unless you explicitly exported your ToolFactory jobs as histories or as workflows.
 
 
 #git clone --recursive https://github.com/fubar2/planemo.git

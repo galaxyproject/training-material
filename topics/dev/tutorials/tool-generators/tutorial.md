@@ -409,6 +409,11 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 > > rm -rf $PDIR/docs
 > > mkdir -p $GALDIR
 > > curl -L -s https://github.com/galaxyproject/galaxy/archive/dev.tar.gz | tar xzf - --strip-components=1 -C $GALDIR
+> > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
+> > sed -i '/-l|-list|--list)/i \t--dev-wheels|-dev-wheels)\n\t\tshift\n\t\t;;\n' $GALDIR/run_tests.sh
+> > # planemo will not run as a tool successfully without this - something fishy with recent changes to run_tests.sh
+> > sed 's/#sanitize_all_html\: true/sanitize_all_html\: false/g' $GALDIR/config/galaxy.yml.sample > $GALDIR/config/galaxy.yml
+> > # need this to see planemo html reports
 > > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html
 > > cp $PDIR/planemo_ext/welcome.html $GALDIR/static/welcome.html.sample
 > > mkdir -p $PDIR/mytools
@@ -420,6 +425,9 @@ See [the tutorial on installing tools from the toolshed](https://galaxyproject.o
 > > cd $CDIR
 > > planemo conda_init --conda_prefix $PDIR/con
 > > planemo tool_factory --galaxy_root $GALDIR --port 9090 --host 0.0.0.0 --conda_prefix $PDIR/con
+> > # use planemo tool_factory --galaxy_root galaxy-central --port 9090 --host 0.0.0.0 --conda_prefix planemo/con
+> > # after activating the venv as above to restart planemo next time without all the downloading
+> > # ALL YOUR WORK WILL BE GONE unless you explicitly exported your ToolFactory jobs as histories or as workflows.
 > > ```
 > {: .code-in}
 {: .details}
@@ -581,33 +589,40 @@ In practice, it's a flexible basis for generating many simple tools.
 >
 > #### What information is needed to generate a tool ?
 >
-> The code generator requires enough detail to be able to create the appropriate command line
+> - The code generator requires enough detail to be able to create the appropriate command line
 > template to call the script or executable and pass the required file paths and other settings correctly.
-> Small input samples and default settings are used to construct a test for the newly generated tool. These should be known to work with the script, having been used to debug
-> the script on the command line. Upload the samples to the current history before
+> - Small input samples and default settings are used to construct a test for the newly generated tool. These should be known to work with the script, having been used to debug
+> the script on the command line.
+> - Upload the samples to the current history before
 > starting a new tool in the ToolFactory. No tool will be generated without sample inputs. This test becomes part of the XML and of the toolshed archive.
-> The outputs from running the script during the first planemo run become sample outputs to be compared with test outputs in the archive.
+> - The outputs from running the script during the first planemo run become sample outputs to be compared with test outputs in the archive.
 >
-> In addition to an ID and name, a tool may have any combination of:
+> - In addition to an ID and name, a tool may have any combination of:
 >
-> - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
-> - Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.
-> - Unlimited individual input data files to be selected from the user's history.
-> - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
-> - Unlimited additional command line parameters that the user can control on the new tool form.
-> - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
+>     - Multiple dependencies. Conda is currently supported. System utilities can be used assuming the target server exposes them to tools, or they can be provided as Conda dependencies to ensure they will always be available
+>     - Argparse (named) or positional (ordered) style parameter passing at tool execution time depending on the script requirements. Positional works well for bash scripts with only a handful of parameters. Argparse is preferred for clarity.
+>     - Unlimited individual input data files to be selected from the user's history.
+>     - Unlimited individual output files to be written to the user's history, paths determined at tool execution.
+>     - Unlimited additional command line parameters that the user can control on the new tool form.
+>     - an (optional) script to execute. Running a script to call an executable using parameters passed from the user can be useful to overcome some limitations of the ToolFactory for more complex tools.
 >
-> Many of these generate parameter input boxes and history data selects on the new tool form. Metadata about command line formatting together with text strings for the form seen by the user are needed.
+> - Many of these generate parameter input boxes and history data selects on the new tool form.
+> - Metadata about command line formatting together with text strings for the form seen by the user are needed.
 >
-> Many of these are components of the generated command line template. This can be seen in the new tool XML. Galaxy file paths for the script are only determined at generated tool execution. The generated template ensures that these are correct.
+> - Many of these are components of the generated command line template.
+> - This can be seen in the new tool XML. Galaxy file paths for the script are only determined at generated tool execution. The generated template ensures that these are correct.
 >
 > #### The Galaxy UI imposes additional limits
 >
-> The ToolFactory has limited flexibility and works best for simple tools. Even then, the form becomes complicated as more parameters are added. Tools can have unlimited numbers of some items,
-> including input files, output files, citations and user parameters. Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
-> As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
-> In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
-> Great patience would be required. That is why manual methods are likely more productive for complicated requirements.
+> - The ToolFactory has limited flexibility and works best for simple tools.
+> - Even then, the form becomes complicated as more parameters are added.
+> - Tools can have unlimited numbers of some items,
+> including input files, output files, citations and user parameters.
+> - Each one has half a dozen metadata or text details. Galaxy form repeats are used for those.
+> - As more repeats are added, the Galaxy UI becomes increasingly unwieldy.
+> - In theory, the Toolfactory can potentially generate very complicated tools with large numbers if inputs, outputs and user modifiable parameters.
+> - Great patience would be required.
+> - That is why manual methods are likely more productive for complicated requirements.
 >
 >
 {: .details}
@@ -656,58 +671,14 @@ for those rare situations where that's all you need. No i/o or other parameters 
 - Repeats are unlimited in number for any given tool from a technical perspective
 - The limit is having the patience to create them in the relatively clumsy Galaxy UI.
 - A handful is manageable but there are no technical limits to the actual total number
-- Repeats *on the generated tool form* are not (at present) supported in the ToolFactory but should be doable if galaxyxml supports them.
+- Repeats *on the generated tool form* are supported for input and output parameters. Other user parameter repeats will be possible with changes to Galaxyxml.
 
 
-#### Command over-ride and test over-ride
+#### ToolFactory collection outputs are handy for hiding dozens of miscellaneous tool outputs in a single history item
 
-- There are two simple BWA wrappers based on a Planemo documentation advanced example
-- One uses a command over-ride pasted into the appropriate text box on the ToolFactory form
-- This was based on the one shown in the example it is copied from.
-- It allows templating - `$foo` is interpreted by mako.
-- The pasted over-ride completely replaces the galaxyxml generated ones.
-
-> ### {% icon details %} `bwa_test_command_override` sample - the command override
->> ToolFactory command over-ride section adapted from the Planemo BWA example.
->>
->>```
->> ## Build reference
->>#set $reference_fasta_filename = "localref.fa"
->>ln -s "${ref_file}" "${reference_fasta_filename}" ;
->>bwa index -a is "${reference_fasta_filename}" ;
->>bwa mem -t "\${GALAXY_SLOTS:-4}" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
->>samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
->>```
-{: .details}
-
-- There is another sample bwa_test tool that achieves the same results using a bash script.
-- It does not need a command over-ride but is more typing because three positional parameters are named for readability.
-- Bash is probably more familiar to many ToolFactory users than mako templating.
-- The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
-
-> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
->> ToolFactory form bash script to replace above command over-ride section:
->>
->>```
->>REFFILE=$1
->>FASTQ=$2
->>BAMOUT=$3
->>rm -f "refalias"
->>ln -s "$REFFILE" "refalias"
->>bwa index -a is "refalias"
->>bwa mem -t "2"  -v 1 "refalias" "$FASTQ"  > tempsam
->>samtools view -Sb tempsam > temporary_bam_file.bam
->>samtools sort -o "$BAMOUT" temporary_bam_file.bam
->>```
-{: .details}
-
-
-- Most users may never need to use the command over-ride option to access templating for wrapping their own scripts where they control the command line interpretation.
-- Where the generated test is not sufficient, a hand written one can be substituted. Not needed for the simple BWA example.
-- Test or command over-rides are likely to be edge cases more suited to the alternate, more powerful tools.
-
-#### ToolFactory collection outputs are handy for hiding dozens of tool outputs in a single history item
-
+- If the script writes a large number of different output file types (images, reports..) that are not in themselves useful for downstream analyses,
+a Collection can be used to hide them in an organised list as a single new history item.
+- Collections are special kinds of outputs. They present a directory full of files as a single new history item that can be expanded to view them.
 - The plotter example uses an Rscript.
 - It generates as many pairs of random plots as you want.
 - The script sends them into the the collection that appears in the history after the job runs.
@@ -716,9 +687,7 @@ for those rare situations where that's all you need. No i/o or other parameters 
 
 > ### {% icon details %} `plotter` collection output demonstration tool form, generated XML and outputs
 > >
-> >Collections are a special kind of new history output. The ToolFactory can only generate list collections - not structured collections. They can hide an
-> > unlimited number of different kinds of script output files, such as images or reports, in a single history item to save clutter. Typically these are not used as
-> > inputs to downstream analyses and belong together from the user's perspective. The ToolFactory form for the plotter example tool
+> > - The ToolFactory form for the plotter example tool
 > > is configured as shown below, from "rerunning" the plotter job from the sample history.
 > >
 > >![ToolFactory form configuration of the output collection in the plotter example](../../images/toolfactory_plotter_demo_form.png)
@@ -995,6 +964,54 @@ planemo lint $TOOLNAME >> $2
 >>
 >>```
 {: .details}
+
+#### Command over-ride and test over-ride
+
+- There are two simple BWA wrappers based on a Planemo documentation advanced example
+- One uses a command over-ride pasted into the appropriate text box on the ToolFactory form
+- This was based on the one shown in the example it is copied from.
+- It allows templating - `$foo` is interpreted by mako.
+- The pasted over-ride completely replaces the galaxyxml generated ones.
+
+> ### {% icon details %} `bwa_test_command_override` sample - the command override
+>> ToolFactory command over-ride section adapted from the Planemo BWA example.
+>>
+>>```
+>> ## Build reference
+>>#set $reference_fasta_filename = "localref.fa"
+>>ln -s "${ref_file}" "${reference_fasta_filename}" ;
+>>bwa index -a is "${reference_fasta_filename}" ;
+>>bwa mem -t "\${GALAXY_SLOTS:-4}" -v 1 "${reference_fasta_filename}" "${fastq_input1}"  | samtools view -Sb - > temporary_bam_file.bam ;
+>>samtools sort -o "${bwa_test_commover_bam_output}" temporary_bam_file.bam
+>>```
+{: .details}
+
+- There is another sample bwa_test tool that achieves the same results using a bash script.
+- It does not need a command over-ride but is more typing because three positional parameters are named for readability.
+- Bash is probably more familiar to many ToolFactory users than mako templating.
+- The effects of templating the command line can usually be achieved using bash or Python at the expense of needing to script the handling of parameters.
+
+> ### {% icon details %} `bwa_test_toolfactory_positional_bash` sample alternative.
+>> ToolFactory form bash script to replace above command over-ride section:
+>>
+>>```
+>>REFFILE=$1
+>>FASTQ=$2
+>>BAMOUT=$3
+>>rm -f "refalias"
+>>ln -s "$REFFILE" "refalias"
+>>bwa index -a is "refalias"
+>>bwa mem -t "2"  -v 1 "refalias" "$FASTQ"  > tempsam
+>>samtools view -Sb tempsam > temporary_bam_file.bam
+>>samtools sort -o "$BAMOUT" temporary_bam_file.bam
+>>```
+{: .details}
+
+
+- Most users may never need to use the command over-ride option to access templating for wrapping their own scripts where they control the command line interpretation.
+- Where the generated test is not sufficient, a hand written one can be substituted. Not needed for the simple BWA example.
+- Test or command over-rides are likely to be edge cases more suited to the alternate, more powerful tools.
+
 
 ---
 
