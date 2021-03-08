@@ -41,9 +41,15 @@ Tracking is done by first segmenting objects then linking objects between consec
 
 # CellProfiler in Galaxy
 
-Give some background about what the trainees will be doing in the section.
-Remember that many people reading your materials will likely be novices,
-so make sure to explain all the relevant concepts.
+The Galaxy CellProfiler tool takes two inputs: a pipeline and an image collection.  
+
+ >### {% icon details %} **Important information:**  
+ > Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
+>  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.  
+>  * Modules used by the pipeline aren't available in Galaxy.  
+>
+> It is recommended to build a CellProfiler pipeline using the Galaxy interface if the pipeline is to be run by Galaxy.
+{: .details}
 
 # Get data
 
@@ -78,7 +84,7 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 
 
 
-# Option 1: Create a CellProfiler pipeline in Galaxy
+# Create a CellProfiler pipeline in Galaxy
 
 In this section, we will build a CellProfiler pipeline from scratch in Galaxy.
 We need to:  
@@ -98,7 +104,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
 >    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.  
 >    - Segmentation means identifying the nuclei in each image. In CellProfiler this is done by thresholding the intensity level in each image.  
->    - We often perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object.
+>    - We usually perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the object (e.g. a shape measurement). Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object. 
 >    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series 
 > 
 >
@@ -110,7 +116,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 > ### {% icon hands_on %} Hands-on: Reading images
 >
 > 1. {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
->    
+>    4 cp modules into 1 tool
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -209,7 +215,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Measure nuclei size and shape
+## Measure nuclei size and shape (group into feature extraction)
 
 > ### {% icon hands_on %} Hands-on: Task description
 >
@@ -529,40 +535,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-
-# Option 2: Upload a CellProfiler pipeline and run it in Galaxy
-
-> ### {% icon hands_on %} Hands-on: Pipeline upload
->
-> 1. Import {% icon galaxy-upload %} the cppipe file from your local computer.
->    > ### {% icon comment %} Comment
->    > Make sure the pipeline version is compatible with the CellProfiler version.
->    {: .comment}
->
-> 2. Run {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9) %} with the following parameters:
->    - {% icon param-file %} *"Pipeline file"*: `uploaded_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
->    - *"Are the input images packed into a tar archive?"*: `No`
->        - {% icon param-collection %} *"Images"*: `output` (Input dataset collection)
->    - *"Detailed logging file?"*: `Yes`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
-{: .hands_on}
-
-
-# Re-arrange
-
-To create the template, each step of the workflow had its own subsection.
-
-***TODO***: *Re-arrange the generated subsections into sections or other subsections.
-Consider merging some hands-on boxes to have a meaningful flow of the analyses*
 
 
 
