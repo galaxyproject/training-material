@@ -760,6 +760,8 @@
         
     
         
+    
+        
         <a class="dropdown-item" href="https://singlecell.usegalaxy.eu/" title="Single Cell Omics workbench">
             Single Cell Omics workbench
         </a>
@@ -822,7 +824,7 @@
             </ul>
             
 
-            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Feb 25, 2021 </p>
+            <p><strong> <i class="far fa-calendar" aria-hidden="true"></i><span class="visually-hidden">last_modification</span> Last modification:</strong> Mar 8, 2021 </p>
         </blockquote>
 
         <div class="container">
@@ -2048,8 +2050,7 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
           <ul>
             <li><em>“GFF feature type filter”</em>: <code class="language-plaintext highlighter-rouge">exon</code></li>
             <li><em>“GFF gene identifier”</em>: <code class="language-plaintext highlighter-rouge">gene_id</code></li>
-            <li><em>“Allow read to contribute to multiple features”</em>: <code class="language-plaintext highlighter-rouge">No</code></li>
-            <li><em>“Count multi-<span class="notranslate">mapping</span> <span class="notranslate">reads</span>/fragments”</em>: <code class="language-plaintext highlighter-rouge">Disabled; multi-<span class="notranslate">mapping</span> <span class="notranslate">reads</span> are excluded (default)</code></li>
+            <li><em>“Allow <span class="notranslate">reads</span> to map to multiple features”</em>: <code class="language-plaintext highlighter-rouge">Disabled; <span class="notranslate">reads</span> that align to multiple features or overlapping features are excluded</code></li>
             <li><em>“Minimum <span class="notranslate">mapping</span> quality per read”</em>: <code class="language-plaintext highlighter-rouge">10</code></li>
           </ul>
         </li>
@@ -2177,7 +2178,7 @@ Fraction of <span class="notranslate">reads</span> explained by "1+-,1-+,2++,2--
 <blockquote class="notranslate hands_on">
   <h3 id="hands_on-optional-hands-on-re-run-on-the-other-datasets"><i class="fas fa-pencil-alt" aria-hidden="true"></i><span class="visually-hidden">hands_on</span> (Optional) Hands-on: Re-run on the other datasets</h3>
 
-  <p>You can do the same process on the other sequence files available on <a href="https://zenodo.org/record/4541751">Zenodo</a> and on the data library</p>
+  <p>You can do the same process on the other sequence files available on <a href="https://zenodo.org/record/4541751">Zenodo</a> and on the data library.</p>
 
   <ul>
     <li>Paired-end data
@@ -3018,7 +3019,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
 
 </blockquote>
 
-<p>DESeq2 runs also the Differential Gene <span class="notranslate">Expression</span> (DGE) analysis, whose two basic tasks are:</p>
+<p>DESeq2 also runs the Differential Gene <span class="notranslate">Expression</span> (DGE) analysis, whose two basic tasks are:</p>
 
 <ul>
   <li>Estimate the biological variance using the replicates for each condition</li>
@@ -3037,7 +3038,7 @@ https://zenodo.org/record/4541751/files/GSM461182_untreat_single.counts
   <p>We recommend to combine the count tables for different technical replicates (but not for biological replicates) before a differential <span class="notranslate">expression</span> analysis (see <a href="http://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html#collapsing-technical-replicates">DESeq2 documentation</a>)</p>
 </blockquote>
 
-<p>Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with several levels representing the conditions for one factor. After normalization we can compare the response of the <span class="notranslate">expression</span> of any gene to the presence of different levels of a factor in a statistically reliable way.</p>
+<p>Multiple factors with several levels can then be incorporated in the analysis describing known sources of variation (e.g. treatment, tissue type, gender, batches), with two or more levels representing the conditions for each factor. After normalization we can compare the response of the <span class="notranslate">expression</span> of any gene to the presence of different levels of a factor in a statistically reliable way.</p>
 
 <p>In our example, we have samples with two varying factors that can contribute to differences in gene <span class="notranslate">expression</span>:</p>
 
@@ -3183,7 +3184,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
 
           <blockquote class="solution">
             <h3 id="solution-solution-20"><i class="far fa-eye" aria-hidden="true"></i><span class="visually-hidden">solution</span> Solution</h3>
-            <p>They are first grouped by the treatment (the first factor) and secondly by the library type (the second factor), as in the PCA plot.</p>
+            <p>They are first grouped by the treatment (the first factor) and secondly by the sequencing type (the second factor), as in the PCA plot.</p>
 
           </blockquote>
         </blockquote>
@@ -3239,8 +3240,7 @@ may be a lot of work. In these situations, <strong>group tags</strong> can make 
     <ol>
       <li>FBgn0003360 is differentially expressed because of the treatment: it has a significant adjusted p-value (\(4.0 \cdot 10^{-178} &lt;&lt; 0.05\)). It is less expressed (<code class="language-plaintext highlighter-rouge">-</code> in the log2FC column) in treated samples compared to untreated samples, by a factor ~8 (\(2^{log2FC} = 2^{2.99977727873544}\)).</li>
       <li>DESeq2 in <span class="notranslate">Galaxy</span> returns the comparison between the different levels for the 1st factor, after
-correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare both sequencing types, we should run again DESeq2 by switching
-both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.</li>
+correction for the variability due to the 2nd factor. In our current case, treated against untreated for any sequencing type. To compare sequencing types, we should run DESeq2 again switching factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) becomes factor 1.</li>
       <li>To add the interaction between two factors (e.g. treated for paired-end data vs untreated for single-end), we should run DESeq2 another time but with only one factor with the following 4 levels:
         <ul>
           <li>treated-PE</li>
@@ -3395,7 +3395,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     </li>
     <li><strong>Concatenate datasets</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> to add this header line to the <strong>Annotate</strong> output:
       <ul>
-        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: <code class="language-plaintext highlighter-rouge">Pasted entry</code> dataset</li>
+        <li><i class="far fa-file" aria-hidden="true"></i><span class="visually-hidden">param-file</span> <em>“Concatenate Dataset”</em>: the <code class="language-plaintext highlighter-rouge">Pasted entry</code> dataset</li>
         <li><em>“Dataset”</em>
           <ul>
             <li>Click on <i class="far fa-plus-square" aria-hidden="true"></i><span class="visually-hidden">param-repeat</span> <em>“Insert Dataset”</em>
@@ -3639,7 +3639,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
 
 <p><a href="http://www.geneontology.org/">Gene Ontology (GO)</a> analysis is widely used to reduce complexity and highlight biological processes in genome-wide <span class="notranslate">expression</span> studies. However, standard methods give biased results on <span class="notranslate">RNA</span>-Seq data due to over-detection of differential <span class="notranslate">expression</span> for long and highly-expressed transcripts.</p>
 
-<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf"><strong>goseq</strong></a> (<a class="citation" href="#young2010gene">Young <i>et al.</i> 2010</a>) provides methods for performing GO analysis of <span class="notranslate">RNA</span>-Seq data while taking length bias into account. <strong>goseq</strong> could also be applied to other category based tests of <span class="notranslate">RNA</span>-Seq data, such as KEGG pathway analysis, as discussed in a further section.</p>
+<p><a href="https://bioconductor.org/packages/release/bioc/vignettes/goseq/inst/doc/goseq.pdf"><strong>goseq</strong></a> (<a class="citation" href="#young2010gene">Young <i>et al.</i> 2010</a>) provides methods for performing GO analysis of <span class="notranslate">RNA</span>-Seq data while taking length bias into account. <strong>goseq</strong> could also be applied to other category-based tests of <span class="notranslate">RNA</span>-Seq data, such as KEGG pathway analysis, as discussed in a further section.</p>
 
 <p><strong>goseq</strong> needs 2 files as inputs:</p>
 
@@ -3684,7 +3684,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
       <p>We just generated the first input for <strong>goseq</strong>. As second input for <strong>goseq</strong> we need the gene lengths. We can use here the gene lengths generated by <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> and format the gene IDs.</p>
     </li>
     <li>
-      <p>Drag and drop one of the gene length file generated by <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> into this history using the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>
+      <p>Drag and drop one of the feature length datasets generated by <strong>featureCounts</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> into this history using the <i class="fas fa-columns" aria-hidden="true"></i><span class="visually-hidden"><span class="notranslate">galaxy</span>-columns</span> <strong>View all histories</strong></p>
     </li>
     <li><strong>Change Case</strong> <i class="fas fa-wrench" aria-hidden="true"></i><span class="visually-hidden">tool</span> with
       <ul>
@@ -3742,7 +3742,7 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
       <li><code class="language-plaintext highlighter-rouge">term</code>: detail of the term</li>
       <li><code class="language-plaintext highlighter-rouge">ontology</code>: MF (Molecular Function - molecular activities of gene products), CC (Cellular Component - where gene products are active), BP (Biological Process - pathways and larger processes made up of the activities of multiple gene products)</li>
       <li><code class="language-plaintext highlighter-rouge">p.adjust.over_represented</code>: <em>p</em>-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
-      <li><code class="language-plaintext highlighter-rouge">p.adjust.under_represented</code>: <em>p</em>-value for over-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
+      <li><code class="language-plaintext highlighter-rouge">p.adjust.under_represented</code>: <em>p</em>-value for under-representation of the term in the differentially expressed genes, adjusted for multiple testing with the Benjamini-Hochberg procedure</li>
     </ol>
 
     <p>To identify categories significantly enriched/unenriched below some p-value cutoff, it is necessary to use the adjusted <em>p</em>-value.</p>
@@ -4240,8 +4240,8 @@ both factors: factor 1 (treatment) becomes factor 2 and factor 2 (sequencing) be
     author = "Bérénice Batut and Mallory Freeberg and Mo Heydarian and Anika Erxleben and Pavankumar Videm and Clemens Blank and Maria Doyle and Nicola Soranzo and Peter van Heusden",
     title = "Reference-based RNA-Seq data analysis (Galaxy Training Materials)",
     year = "2021",
-    month = "02",
-    day = "25"
+    month = "03",
+    day = "08"
     url = "\url{/training-material/topics/transcriptomics/tutorials/ref-based/tutorial.html}",
     note = "[Online; accessed TODAY]"
 }
