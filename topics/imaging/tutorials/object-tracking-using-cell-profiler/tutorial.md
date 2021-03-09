@@ -41,15 +41,19 @@ Tracking is done by first segmenting objects then linking objects between consec
 
 # CellProfiler in Galaxy
 
-The Galaxy CellProfiler tool takes two inputs: a pipeline and an image collection.  
+The Galaxy CellProfiler tool takes two inputs: a CellProfiler pipeline and an image collection.  
 
- >### {% icon details %} **Important information:**  
- > Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
+> ### {% icon warning %} **Important information:**  
+> Some pipelines created with stand-alone CellProfiler may not work with the Galaxy CellProfiler tool. Some reasons are:  
 >  * The pipeline was built with a different version of CellProfiler. The Galaxy tool currently uses CellProfiler 3.9.  
 >  * Modules used by the pipeline aren't available in Galaxy.  
+>  * Parameters for some CellProfiler modules are limited/constrained compared to the stand-alone version, most notably:  
+>    - Parameters require manual input from the user whereas in the stand-alone version, some modules can inherit parameter values from other modules.
+>    - Input and output file locations are set by Galaxy and can't be set by the user.
+>    - Metadata extraction from file names is limited to a set of fixed patterns 
 >
 > It is recommended to build a CellProfiler pipeline using the Galaxy interface if the pipeline is to be run by Galaxy.
-{: .details}
+{: .warning}
 
 # Get data
 
@@ -73,15 +77,9 @@ The images are saved as a zip archive on Zenodo and need to be uploaded to the G
 >    {% snippet snippets/import_via_link.md %}
 >    {% snippet snippets/import_from_data_library.md %}
 >
-> 3. Rename {% icon galaxy-pencil %} the file to drosophila_sample.zip
+> 3. Rename {% icon galaxy-pencil %} the file to drosophila_embryo.zip
 >
-> 4. Unzip the file with the **Unzip file** {% icon tool %} tool with the following parameters:
->    - {% icon param-file %} *"input_file"*: `drosophila_sample.zip`
->
-> 5. Rename {% icon galaxy-pencil %} the resulting collection to `anaphase nuclei`. You may need to refresh the history for the new name to appear.
->    {% snippet snippets/rename_collection.md %}
 {: .hands_on}
-
 
 
 # Create a CellProfiler pipeline in Galaxy
@@ -95,58 +93,131 @@ We need to:
   - Perform tracking  
   - Produce some useful output files  
 
-A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the 'Starting modules'{% icon tool %} tool and end with the 'CellProfiler'{% icon tool %} tool.
+A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the 'Starting modules'{% icon tool %} tool and end with the 'CellProfiler'{% icon tool %} tool.  
 
-![Image of the pipeline](../../images/image_name "The pipeline")
+
+![Image of the pipeline](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "The pipeline")
 
 
 > ### {% icon details %} More details about the pipeline steps
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
 >    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.  
 >    - Segmentation means identifying the nuclei in each image. In CellProfiler this is done by thresholding the intensity level in each image.  
->    - We usually perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the object (e.g. a shape measurement). Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object. 
+>    - We usually perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object. 
 >    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series 
 > 
 >
 {: .details}
 
+## Create a new workflow
+> 1. Create a new workflow
+>
+>    {% snippet snippets/create_new_workflow.md %}
+>
+> The next steps will add new tools using the workflow editor.
 
-## Read the images and their metadata
+## Read the images
 
 > ### {% icon hands_on %} Hands-on: Reading images
 >
-> 1. {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
->    4 cp modules into 1 tool
+> 1. Add Inputs → **Input Dataset** to the workflow
 >
->    ***TODO***: *Check parameter descriptions*
+> 2. Add {% icon tool %} **Unzip** with the following parameter:
+>   - {% icon param-select %} *"Extract single file"*: `All files`
 >
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-## Change the images to gray color
+## Build the CellProfiler pipeline
 
-> ### {% icon hands_on %} Hands-on: Task description
+### Get the metadata
+
+> ### {% icon comment %} Comment
+>
+> The Starting modules tool combines four CellProfiler modules that are always used together at the start of a pipeline. These modules are:  
+>  * Images
+>  * Metadata
+>  * NamesAndTypes
+>  * Groups
+{: .comment}
+
+> ### {% icon hands_on %} Hands-on: Getting metadata
+>
+> 1. {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} with the following parameters:
+>
+>     - Images
+>        - *"Do you want to filter only the images?"*: `Select the images only`
+>
+>     - Metadata
+>        - *"Do you want to extract the metadata?"*: `Yes, specify metadata`
+>
+>          - {% icon param-repeat %} Insert new metadata
+>            - *"Metadata extraction method"*: `Extract from file/folder names`
+>            - *"Metadata source"*: `File name`
+>            - *"Select the pattern to extract metadata from the file name"*: `field1_field2_field3`
+>            - *"Extract metadata from"*: `Images matching a rule`
+>
+>              - *"Match the following rules"*: `All`
+>              - {% icon param-repeat %} Insert filtering rules:
+>                - *"Select the filtering criteria"*: `File`
+>                - *""operator*: `Does`
+>                - *"contain"*: `Contain regular expression`
+>                - *"match_value"*: `GFPHistone`
+>
+>     - NamesAndTypes
+>       - *"Process 3D"*: `No, do not process 3D data` 
+>       - *"Assign a name to"*: `Give images one of several names depending on the metadata`
+>         - {% icon param-repeat %} Insert another image:
+>           - *"Match the following rules"*: `All`
+>           - {% icon param-repeat %} Insert rule:
+>
+>             - *"Select rule criteria"*: `File`
+>
+>               - *"operator"*: `Does`
+>               - *"contain"*: `Contain regular expression`
+>               - *"match_value"*: `GFPHistone`
+>
+>           - *"Select the image type"*: `Color image`
+>           - *"Name to assign these images"*: `OrigColor` 
+>           - *"Set intensity range from"*: `Image metadata` 
+>
+>       - *"Image matching method"*: `Metadata`
+>
+>     - Groups
+>       - *"Do you want to group your images?"*: `Yes, group the images` 
+>       - *"Metadata category"*: `field1` 
+> 
+>
+{: .hands_on}
+
+> ### {% icon question %} Questions
+>
+> 1. How are we capturing metadata and what type of metadata are we getting?
+> 2. How will CellProfiler form a temporal sequence?
+>
+> > ### {% icon solution %} Solution
+> >
+> > 1. Metadata is obtained from the filenames by extracting three text fields separated by an underscore. The metadata we get is "DrosophilaEmbryo", "GFPHistone" and numbers with leading zeros. These three fields represent respectively the sample identifier, the marker visualized in the image and the index in the time series.
+> > 2. Images will be grouped based on field1 which here is the sample identifier and ordered alpha-numerically (by default) which will order them by field3 (the time series index) since fields 1 and 2 are constant.
+> >
+> {: .solution}
+>
+{: .question}
+
+### Convert the images to grayscale
+
+> ### {% icon hands_on %} Hands-on: Colour to grayscale conversion
 >
 > 1. {% tool [ColorToGray](toolshed.g2.bx.psu.edu/repos/bgruening/cp_color_to_gray/cp_color_to_gray/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Starting Modules** {% icon tool %})
+>    - *"Select the input CellProfiler pipeline"*: Connect output of **Starting Modules** {% icon tool %} to input of {% tool ColorToGray %} 
 >    - *"Enter the name of the input image"*: `OrigColor`
 >    - *"Conversion method"*: `Combine`
+>        - *"Name the output image"*: `OrigGray`
 >        - *"Image type"*: `RGB`
+>          - *"Relative weight of the red channel"*: `1`
+>          - *"Relative weight of the green channel"*: `1`
+>          - *"Relative weight of the blue channel"*: `1`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -166,37 +237,35 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Segmentation
+### Segmentation
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Nuclei segmentation
 >
 > 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **ColorToGray** {% icon tool %})
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **ColorToGray** {% icon tool %}
 >    - *"Use advanced settings?"*: `Yes, use advanced settings`
 >        - *"Enter the name of the input image (from NamesAndTypes)"*: `OrigGray`
->        - *"Enter the name of the primary objects to be identified"*: `Embryos`
+>        - *"Enter the name of the primary objects to be identified"*: `Nuclei`
 >        - *"Typical minimum diameter of objects, in pixel units (Min)"*: `30`
 >        - *"Typical maximum diameter of objects, in pixel units (Max)"*: `9999`
+>        - *"Discard objects outside diameter range?"*: `Yes`
+>        - *"Discard objects touching the border of the image?"*: `Yes`
 >        - *"Threshold strategy"*: `Global`
 >            - *"Thresholding method"*: `Otsu`
 >                - *"Two-class or three-class thresholding?"*: `Three classes`
 >                    - *"Assign pixels in the middle intensity class to the foreground or the background?"*: `Background`
->                - *"Lower bound on threshold"*: `0.01`
+>                - *Threshold smoothing scale"*: `1.3488`
+>                - *Threshold correction factor"*: `1`
+>                - *Lower bound on threshold"*: `0.01`
+>                - *Upper bound on threshold"*: `1`
 >        - *"Method to distinguish clumped objects"*: `Intensity`
 >            - *"Method to draw dividing lines between clumped objects"*: `Intensity`
 >                - *"Automatically calculate size of smoothing filter for declumping?"*: `Yes`
 >                - *"Automatically calculate minimum allowed distance between local maxima?"*: `Yes`
+>                - *"Speed up by using lower-resolution mage to find local maxima?"*: `Yes`
+>        - *"Fill holes in identified objects"*: `After both thresholding and declumping`
 >        - *"Handling of objects if excessive number of objects identified"*: `Continue`
 >
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
->
 {: .hands_on}
 
 ***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
@@ -215,47 +284,20 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Measure nuclei size and shape (group into feature extraction)
+### Feature extraction
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Shape features
 >
 > 1. {% tool [MeasureObjectSizeShape](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_size_shape/cp_measure_object_size_shape/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **IdentifyPrimaryObjects** {% icon tool %})
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **IdentifyPrimaryObjects** {% icon tool %}
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
->            - *"Enter the name of the object to measure"*: `Embryos`
+>            - *"Enter the name of the object to measure"*: `Nuclei`
 >    - *"Calculate the Zernike features?"*: `No`
->
->    ***TODO***: *Check parameter descriptions*
->
->    ***TODO***: *Consider adding a comment or tip box*
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
-***TODO***: *Consider adding a question to test the learners understanding of the previous exercise*
-
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Measure the nuclei intensity
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Intensity features
 >
 > 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectSizeShape** {% icon tool %})
@@ -264,7 +306,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >            - *"Enter the name of an image to measure"*: `OrigGray`
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
->            - *"Enter the name of the objects to measure"*: `Embryos`
+>            - *"Enter the name of the objects to measure"*: `Nuclei`
 >
 >    ***TODO***: *Check parameter descriptions*
 >
@@ -293,9 +335,9 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Track nuclei
+### Track nuclei
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Object tracking
 >
 > 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
 >    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectIntensity** {% icon tool %})
