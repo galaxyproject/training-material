@@ -1,22 +1,25 @@
-name: Publish tagged release to AWS S3
+name: Monthly GTN Release
 
 on:
-  release:
-    types: [created]
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '0 4 1 * *'
 
 jobs:
-  deploy:
+  setup:
+    if: github.repository_owner == 'galaxyproject'
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ruby: [2.5]
     steps:
       - uses: actions/checkout@v2
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+          architecture: 'x64'
       - uses: actions/setup-ruby@v1
         with:
-          ruby-version: ${{ matrix.ruby }}
+          ruby-version: "2.5"
       - uses: actions/cache@v2
         with:
           path: vendor/bundle
@@ -29,6 +32,25 @@ jobs:
           bundle config path vendor/bundle
           bundle install --jobs 4 --retry 3
 
+      - name: Release Name
+        id: release_name
+        run: |
+          echo "::set-output name=title::$(LC_ALL=C date '+%Y %B')"
+          echo "::set-output name=tag::$(LC_ALL=C date -I)"
+
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.release_name.outputs.tag }}
+          commitish: master
+          release_name: Release ${{ steps.release_name.outputs.title }}
+          body: "Monthly release of the GTN materials"
+          draft: false
+          prerelease: false
+
       - name: Configure AWS credentials from GTN account
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -36,19 +58,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Obtain tag name
-        id: branch_name
-        run: |
-          echo ::set-output name=SOURCE_TAG::${GITHUB_REF#refs/tags/}
-
       - name: Build Site
         run: |
+          git tag -l
+          git checkout ${SOURCE_TAG}
           gem install bundler
           sed -i s"|^baseurl: .*|baseurl: '/archive/${SOURCE_TAG}'|g" _config.yml
           sed -i s"|^github_repository_branch: .*|github_repository_branch: '${SOURCE_TAG}'|g" _config.yml
           JEKYLL_ENV=production bundle exec jekyll build --strict_front_matter -d _site/training-material
         env:
-          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+          SOURCE_TAG: ${{ steps.release_name.outputs.tag }}
           GTN_FORK: ${{ github.repository_owner }}
 
       - name: Deploy 🚀
@@ -56,4 +75,4 @@ jobs:
           pip install awscli
           ./bin/publish-archive
         env:
-          SOURCE_TAG: ${{ steps.branch_name.outputs.SOURCE_TAG }}
+          SOURCE_TAG: ${{ steps.release_name.outputs.tag }}
