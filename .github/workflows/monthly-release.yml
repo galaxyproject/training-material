@@ -4,6 +4,7 @@ on:
   schedule:
     # * is a special character in YAML so you have to quote this string
     - cron:  '0 4 1 * *'
+  workflow_dispatch:
 
 jobs:
   setup:
@@ -35,7 +36,7 @@ jobs:
       - name: Release Name
         id: release_name
         run: |
-          echo "::set-output name=title::$(LC_ALL=C date '+%Y %B')"
+          echo "::set-output name=title::$(LC_ALL=C date '+%Y %B %d')"
           echo "::set-output name=tag::$(LC_ALL=C date -I)"
 
       - name: Create Release
