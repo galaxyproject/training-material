@@ -183,7 +183,7 @@ For this example we will re-use the metadata from the [previous example](#exampl
 > 2. Instead of manually creating the rules this time, we will import an existing set of rules. The easiest way to do this is to click the history icon {% icon galaxy-rulebuilder-history %}. Clicking this will drop down a list of the 10 most recent rule sets you've used. Select the most recent one to reuse the rules from the last exercise.
 >
 >    You should now see the rules you created in the last example.
->    ![screenshot](../../images/rules/rules_example_5_3_initial_rules.png)
+>    ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_3_initial_rules.png)
 >
 >    > ### {% icon comment %} JSON Editor
 >    >
