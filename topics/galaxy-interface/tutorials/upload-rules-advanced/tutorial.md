@@ -212,11 +212,13 @@ For this example we will re-use the metadata from the [previous example](#exampl
 >    Next we will repeat the process of adding URL, name, and datatype columns but for GFF files.
 >
 > 5. From **Column**, select `Using a Regular Expression`
->     - *"From Column"*: `A`
->     - Select `Create column from expression replacement`
->     - *"Regular Expression"*: `.*`
->     - *"Replacement Expression"*: `https://www.uniprot.org/uniprot/\0.gff`.
->     ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_5_url.png)
+>
+>    - *"From Column"*: `A`
+>    - Select `Create column from expression replacement`
+>    - *"Regular Expression"*: `.*`
+>    - *"Replacement Expression"*: `https://www.uniprot.org/uniprot/\0.gff`.
+>
+> ![screenshot](https://galaxy-tests.s3.amazonaws.com/galaxy-gtn-screenshots/local/rules_example_5_5_url.png)
 >
 >    Next we will add two more columns
 > 6. From **Column** menu, select  `Fixed Value`
