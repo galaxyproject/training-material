@@ -90,15 +90,15 @@ We need to:
 A pipeline is built by chaining together Galaxy tools representing CellProfiler modules and must start with the {% tool [Starting modules](https://usegalaxy.eu/root?tool_id=toolshed.g2.bx.psu.edu/repos/bgruening/cp_common/cp_common/3.1.9+galaxy1) %} tool and end with the {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} tool.  
 
 
-![Image of the workflow](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "The workflow")
+![Image of the workflow](../../images/object-tracking-using-cell-profiler/CP_object_tracking_pipeline.png "Overview of the CellProfiler pipeline using Galaxy tools.")
 
 
 > ### {% icon details %} More details about the pipeline steps
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
 >    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.  
->    - Segmentation means identifying the nuclei in each image. In CellProfiler this is done by thresholding the intensity level in each image.  
->    - When we perform tracking we're usually interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object. 
->    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series 
+>    - Segmentation means identifying the nuclei in each image. In CellProfiler, this is done by thresholding the intensity level in each image.  
+>    - When we perform tracking we're usually interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore, for each segmented object, we compute some features, i.e. numerical descriptors of some properties of the object. 
+>    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series. 
 > 
 >
 {: .details}
@@ -239,6 +239,8 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 ## Segmentation
 
+The first step to track nuclei starts with the identification of those objects on the images.
+
 > ### {% icon hands_on %} Hands-on: Nuclei segmentation
 >
 > 1. {% tool [IdentifyPrimaryObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_identify_primary_objects/cp_identify_primary_objects/3.1.9+galaxy1) %} with the following parameters:
@@ -355,7 +357,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-### Visualize results
+## Visualize results
 
 > ### {% icon hands_on %} Hands-on: Visualize segmentation outcome
 >
@@ -408,6 +410,7 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
+## Save the images and features
 > ### {% icon hands_on %} Hands-on: Save the images
 >
 > 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
@@ -425,7 +428,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .hands_on}
 
-
 > ### {% icon question %} Questions
 >
 > 1. Question1?
@@ -440,7 +442,6 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Save the features
 
 > ### {% icon hands_on %} Hands-on: Export tabular data to character-delimited text files
 >
