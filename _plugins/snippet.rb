@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+require 'yaml'
 
 module Jekyll
   module Tags
@@ -9,6 +9,18 @@ module Jekyll
           Jekyll::Converters::Markdown
         ).convert(text.to_s)
       end
+
+      def get_icon(icon)
+         if icon.start_with?("fa")
+          %Q(<i class="#{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+         elsif icon.start_with?("ai")
+          %Q(<i class="ai #{icon}" aria-hidden="true"></i><span class="visually-hidden">#{@text}</span>)
+         end
+      end
+
+       def get_config(context)
+           context.registers[:site].config['icon-tag']
+       end
 
       def render(context)
 
@@ -24,9 +36,39 @@ module Jekyll
 
         context.stack do
           context["include"] = parse_params(context) if @params
-          x = inclusion.render(context)
-          x.gsub!(/\A---(.|\n)*?---/, '')
-          markdownify(x).gsub(/\r/, '').gsub(/\n/, '')
+          x = "#{inclusion.render(context)}"
+          box_start=""
+          box_end=""
+          if x.slice(0, 3) == '---'
+            metadata = YAML.load(x)
+
+            #puts metadata
+            box_type = metadata['box_type']
+
+            icons = get_config(context)
+            if box_type == 'tip'
+                icon_text = icons['tip']
+                box_start = '> ### '+get_icon(icon_text)+' Tip: ' + metadata['title']
+                box_end   = "\n{: .tip}"
+            end
+            if box_type == 'hands_on'
+                icon_text = icons['hands_on']
+                box_start = '> ### '+get_icon(icon_text)+' Hands-on: ' + metadata['title']
+                box_end   = "\n{: .hands_on}"
+            end
+            if box_type == 'comment'
+                icon_text = icons['comment']
+                box_start = '> ### '+get_icon(icon_text)+' ' + metadata['title']
+                box_end   = "\n{: .comment}"
+            end
+          end
+          y = x.gsub(/\A---(.|\n)*?---/, '')
+          if box_start != ""
+             y = y.gsub(/\R+/,"\n> ")
+             #puts box_start+y+box_end
+          end
+
+          markdownify(box_start+y+box_end).gsub(/\R+/, '')
         end
       end
 

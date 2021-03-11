@@ -589,7 +589,7 @@ For this tutorial, we will configure Galaxy to run the BWA and BWA-MEM tools on 
 >
 > 2. Install the BWA and BWA-MEM tools, if needed.
 >
->    {% snippet snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
+>    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
 > 3. We now need to tell Galaxy to send BWA and BWA-MEM jobs to the `pulsar` destination. We specify this in the `<tools>` section of the `job_conf.xml` file.
 >

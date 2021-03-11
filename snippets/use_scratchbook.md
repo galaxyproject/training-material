@@ -1,3 +1,10 @@
+---
+title: Using the Scratchbook
+area: features
+box_type: tip
+layout: faq
+---
+
 > ### {% icon tip %} Tip : Using the Scratchbook
 >
 > Multiple plots can be compared side-by-side by enabling the *Scratchbook*

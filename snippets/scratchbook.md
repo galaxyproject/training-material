@@ -1,3 +1,10 @@
+---
+title: Using the Scratchbook to view multiple datasets
+area: features
+box_type: tip
+layout: faq
+---
+
 > ### {% icon tip %} Tip: Using the Scratchbook to view multiple datasets at once
 > If you would like to view two or more datasets at once, you can use the **Scratchbook** feature in Galaxy:
 >  1. **Click** on the *Scratchbook* icon {% icon galaxy-scratchbook%} on the top menu bar.

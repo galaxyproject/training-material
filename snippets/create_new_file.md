@@ -1,3 +1,11 @@
+---
+title: Creating a new file
+description: Galaxy allows you to create new files from the upload menu. You can supply the contents of the file.
+area: datasets
+
+
+---
+
 > ### {% icon tip %} Tip: Creating a new file
 >
 > * Open the Galaxy Upload Manager

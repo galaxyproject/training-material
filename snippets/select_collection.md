@@ -1,3 +1,10 @@
+---
+title: Selecting a datast collection as input
+area: tools
+box_type: tip
+layout: faq
+---
+
 > ### {% icon tip %} Tip: Selecting a dataset collection as input
 >
 > 1. Click on {% icon param-collection %} **Dataset collection** in

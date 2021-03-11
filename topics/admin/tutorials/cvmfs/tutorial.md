@@ -70,7 +70,7 @@ Luckily for us, the Galaxy Project has a lot of experience with using and config
 
 If the terms "Ansible", "role" and "playbook" mean nothing to you, please checkout [the Ansible introduction slides]({% link topics/admin/tutorials/ansible/slides.html %}) and [the Ansible introduction tutorial]({% link topics/admin/tutorials/ansible/tutorial.md %})
 
-{% snippet snippets/ansible_local.md %}
+{% snippet topics/admin/faqs/ansible_local.md %}
 
 > ### {% icon hands_on %} Hands-on: Installing CVMFS with Ansible
 >
@@ -215,7 +215,7 @@ Now all we need to do is tell Galaxy how to find it! This tutorial assumes that 
 >
 > 3. Install the BWA-MEM tool, if needed.
 >
->    {% snippet snippets/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
+>    {% snippet topics/admin/faqs/install_tool.md query="bwa" name="Map with BWA-MEM" section="Mapping" %}
 >
 > 4. In your Galaxy server, open the **Map with BWA-MEM** {% icon tool %} tool. Now check that there are a lot more reference genomes available for use!
 >

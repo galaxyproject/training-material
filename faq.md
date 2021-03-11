@@ -1,6 +1,8 @@
 ---
-layout: faq
+layout: page
 ---
+
+# Frequently Asked Questions
 
 1. TOC
 {:toc}
