@@ -3,6 +3,13 @@ layout: base
 ---
 
 {% assign contributors = site.data['contributors'] %}
+{% assign ckeys = "" | split: ',' %}
+{% for x in contributors %}
+	 {% assign ckeys = ckeys | push: x[0] %}
+{% endfor %}
+{% assign ckeysN = ckeys | size %}
+{% assign shuffled_contributors = ckeys | sample: ckeysN %}
+
 {% assign stories = site.pages | where:"layout", "training_philosophy" %}
 
 {% include _includes/default-header.html %}
@@ -17,8 +24,7 @@ layout: base
         </p>
 
         <div class="hall-of-fame">
-            {% for contributor in contributors %}
-                {% assign username = contributor[0] %}
+            {% for username in shuffled_contributors %}
                 {% unless contributors[username].halloffame == "no" %}
                 <div class="hall-of-fame-hero" id="{{ username }}">
 
