@@ -95,10 +95,10 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 > ### {% icon details %} More details about the pipeline steps
 >    - Metadata is needed to tell CellProfiler what a temporal sequence of images is and what the order of images is in the sequence.
->    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour imagess to grayscale type.  
->    - Segmentation means identifying the nuclei in each image. In CellProfiler, this is done by thresholding the intensity level in each image.  
->    - We usually perform tracking because we're interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore, for each segmented object, we compute some features, i.e. numerical descriptors of some properties of the object. 
->    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series. 
+>    - CellProfiler is designed to work primarily with grayscale images. Since we don't need the colour information, we convert colour images to grayscale type.  
+>    - Segmentation means identifying the nuclei in each image. In CellProfiler this is done by thresholding the intensity level in each image.  
+>    - When we perform tracking we're usually interested in quantifying how some properties of the objects evolve over time. Also, sometimes we may want to do tracking by matching objects based on some property of the objects (e.g. a shape measurement). Therefore for each segmented object we compute some features, i.e. numerical descriptors of some properties of the object. 
+>    - Tracking will provide the information required to allow downstream data analysis tools to link the features into a multidimensional time series 
 > 
 >
 {: .details}
@@ -299,19 +299,13 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 > ### {% icon hands_on %} Hands-on: Intensity features
 >
 > 1. {% tool [MeasureObjectIntensity](toolshed.g2.bx.psu.edu/repos/bgruening/cp_measure_object_intensity/cp_measure_object_intensity/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectSizeShape** {% icon tool %})
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectSizeShape** {% icon tool %}
 >    - In *"new image"*:
 >        - {% icon param-repeat %} *"Insert new image"*
 >            - *"Enter the name of an image to measure"*: `OrigGray`
 >    - In *"new object"*:
 >        - {% icon param-repeat %} *"Insert new object"*
 >            - *"Enter the name of the objects to measure"*: `Nuclei`
->
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -335,17 +329,14 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 > ### {% icon hands_on %} Hands-on: Object tracking
 >
 > 1. {% tool [TrackObjects](toolshed.g2.bx.psu.edu/repos/bgruening/cp_track_objects/cp_track_objects/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **MeasureObjectIntensity** {% icon tool %})
->    - *"Enter the name of the objects to track"*: `Embryos`
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **MeasureObjectIntensity** {% icon tool %}
+>    - *"Enter the name of the objects to track"*: `Nuclei`
 >    - *"Choose a tracking method"*: `Overlap`
+>        - *"Maximum pixel distance to consider matches"*: `50`
 >        - *"Filter objects by lifetime?"*: `No`
+>        - *"Select display option?"*: `Color and Number`
 >        - *"Save color-coded image?"*: `Yes`
->            - *"Name the output image"*: `TrackedCells`
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>            - *"Name the output image"*: `TrackedNuclei`
 >
 {: .hands_on}
 
@@ -364,66 +355,42 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Overlay detected outlines
+### Visualize results
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Visualize segmentation outcome
 >
 > 1. {% tool [OverlayOutlines](toolshed.g2.bx.psu.edu/repos/bgruening/cp_overlay_outlines/cp_overlay_outlines/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **TrackObjects** {% icon tool %})
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **TrackObjects** {% icon tool %}
 >    - *"Display outlines on a blank image?"*: `No`
 >        - *"Enter the name of image on which to display outlines"*: `OrigGray`
 >        - *"Outline display mode"*: `Color`
 >            - In *"Outline"*:
 >                - {% icon param-repeat %} *"Insert Outline"*
->                    - *"Enter the name of the objects to display"*: `Embryos`
+>                    - *"Enter the name of the objects to display"*: `Nuclei`
 >                    - *"Select outline color"*: `#ff0000`
 >    - *"Name the output image"*: `OutlineImage`
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>    - *"How to outline"*: `Inner`
 >
 {: .hands_on}
 
-> ### {% icon question %} Questions
->
-> 1. Question1?
-> 2. Question2?
->
-> > ### {% icon solution %} Solution
-> >
-> > 1. Answer for question1
-> > 2. Answer for question2
-> >
-> {: .solution}
->
-{: .question}
-
-## Create tile with original and processed images
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Tiling images
 >
 > 1. {% tool [Tile](toolshed.g2.bx.psu.edu/repos/bgruening/cp_tile/cp_tile/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **OverlayOutlines** {% icon tool %})
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **OverlayOutlines** {% icon tool %}
 >    - *"Enter the name of an input image"*: `OrigColor`
->    - *"Name the output image"*: `AdjacentImage`
+>    - *"Name the output image"*: `TiledImages`
 >    - *"Tile assembly method"*: `Within cycles`
 >        - *"Automatically calculate number of rows?"*: `No`
 >            - *"Final number of rows"*: `1`
 >        - *"Automatically calculate number of columns?"*: `Yes`
+>        - *"Image corner to begin tiling"*: `top left`
+>        - *"Direction to begin tiling"*: `row`
 >        - *"Use meander mode?"*: `No`
 >        - In *"Another image"*:
 >            - {% icon param-repeat %} *"Insert Another image"*
 >                - *"Enter the name of an additional image to tile"*: `OutlineImage`
 >            - {% icon param-repeat %} *"Insert Another image"*
->                - *"Enter the name of an additional image to tile"*: `TrackedCells`
->
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
+>                - *"Enter the name of an additional image to tile"*: `TrackedNuclei`
 >
 {: .hands_on}
 
@@ -441,24 +408,20 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Save the output images
-
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Save the images
 >
 > 1. {% tool [SaveImages](toolshed.g2.bx.psu.edu/repos/bgruening/cp_save_images/cp_save_images/3.1.9+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **Tile** {% icon tool %})
+>    - {% icon param-file %} *"Select the input Ce01_638i100_UVi50_Boosti150mW_x20_2C-A647-CF680_1_sml_3Dvolume_1llProfiler pipeline"*: output of **Tile** {% icon tool %}
 >    - *"Select the type of image to save"*: `Image`
 >        - *"Saved the format to save the image(s)"*: `png`
->    - *"Enter the name of the image to save"*: `AdjacentImage`
->    - *"Select method for constructing file names"*: `Single name`
->        - *"Enter single file name"*: `Specimen-FrameNumber`
+>    - *"Enter the name of the image to save"*: `TiledImages`
+>    - *"Select method for constructing file names"*: `From image filename`
+>        - *"Enter the image name (from NamesAndTypes) to be used as prefix"*: `OrigColor`
+>        - *"Append a suffix to the image file name?"*: `No`
 >    - *"Overwrite existing files without warning?"*: `Yes`
+>    - *"When to save"*: `Every cycle`
+>    - *"Record the file and path information to the saved image?"*: `No`
 >
->
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
@@ -479,21 +442,24 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 
 ## Save the features
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Export tabular data to character-delimited text files
 >
 > 1. {% tool [ExportToSpreadsheet](toolshed.g2.bx.psu.edu/repos/bgruening/cp_export_to_spreadsheet/cp_export_to_spreadsheet/3.1.9+galaxy1) %} with the following parameters:
->    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: `output_pipeline` (output of **SaveImages** {% icon tool %})
->    - *"Select the column delimiter"*: ``
+>    - {% icon param-file %} *"Select the input CellProfiler pipeline"*: output of **SaveImages** {% icon tool %}
+>    - *"Select the column delimiter"*: `Comma (",")`
 >    - *"Add a prefix to file names?"*: `Do not add prefix to the file name`
->    - *"Calculate the per-image median values for object measurements?"*: `No`
->    - *"Calculate the per-image standard deviation values for object measurements?"*: `No`
+>    - *"Overwrite existing files without warning"*: `Yes`
+>    - *"Add image metadata columns to your object data file"*: `Yes`
+>    - *"Representation of Nan/Inf"*: `NaN`
+>    - *"Calculate the per-image mean values for object measurements?"*: `Yes`
+>    - *"Calculate the per-image median values for object measurements?"*: `Yes`
+>    - *"Calculate the per-image standard deviation values for object measurements?"*: `Yes`
 >    - *"Create a GenePattern GCT file?"*: `No`
->    - *"Export all measurement types?"*: `Yes`
->
 >
 >    > ### {% icon comment %} Comment
 >    >
->    > A comment about the tool or something else. This box can also be in the main text
+>    > By default all measurement types are exported.
+>    > This is in contrast to the stand-alone version of CellProfiler which allows choosing which measurement types to save.
 >    {: .comment}
 >
 {: .hands_on}
@@ -512,20 +478,16 @@ A pipeline is built by chaining together Galaxy tools representing CellProfiler 
 >
 {: .question}
 
-## Run the CellProfiler pipeline
+### Run the pipeline with **CellProfiler**
 
-> ### {% icon hands_on %} Hands-on: Task description
+> ### {% icon hands_on %} Hands-on: Running the pipeline with CellProfiler
 >
 > 1. {% tool [CellProfiler](toolshed.g2.bx.psu.edu/repos/bgruening/cp_cellprofiler/cp_cellprofiler/3.1.9+galaxy0) %} with the following parameters:
->    - {% icon param-file %} *"Pipeline file"*: `output_pipeline` (output of **ExportToSpreadsheet** {% icon tool %})
+>    - {% icon param-file %} *"Pipeline file"*: `output of **ExportToSpreadsheet** {% icon tool %}
 >    - *"Are the input images packed into a tar archive?"*: `No`
->        - {% icon param-collection %} *"Images"*: `output` (Input dataset collection)
+>        - {% icon param-collection %} *"Images"*: output of **Unzip** {% icon tool %}
 >    - *"Detailed logging file?"*: `Yes`
 >
->    > ### {% icon comment %} Comment
->    >
->    > A comment about the tool or something else. This box can also be in the main text
->    {: .comment}
 >
 {: .hands_on}
 
